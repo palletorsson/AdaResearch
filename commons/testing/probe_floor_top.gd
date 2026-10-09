@@ -23,13 +23,13 @@ func _run() -> void:
 		await process_frame
 
 	# Raycast down at the decal's world XZ (3, 6) from y=10.
-	var space := catalog.get_world_3d().direct_space_state
+	var space: PhysicsDirectSpaceState3D = catalog.get_world_3d().direct_space_state   # catalog is untyped: 4.6 cannot infer
 	var from := Vector3(3.0, 10.0, 6.0)
 	var to := Vector3(3.0, -10.0, 6.0)
 	var q := PhysicsRayQueryParameters3D.create(from, to)
 	q.collide_with_areas = false
 	q.collide_with_bodies = true
-	var hit := space.intersect_ray(q)
+	var hit: Dictionary = space.intersect_ray(q)
 	if hit.is_empty():
 		print("[top] no floor collider hit at (3,*,6) — decal cell may be VOID/hidden")
 	else:

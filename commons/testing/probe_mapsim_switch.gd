@@ -71,7 +71,7 @@ func _run() -> void:
 		await process_frame
 	var b := _census(catalog, "after B (Point_Lines staged)")
 
-	var leak := b["grids"] > 1 or b["hosts"] > 1
+	var leak: bool = b["grids"] > 1 or b["hosts"] > 1   # a Variant comparison: 4.6 cannot infer
 	_say("VERDICT: %s (grids=%d hosts=%d)" %
 			["LEAK" if leak else "clean", b["grids"], b["hosts"]])
 	_done(1 if leak else 0)
