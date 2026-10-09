@@ -25,6 +25,8 @@ var next_state: Array = []
 var texture: Texture3D
 var image_data: Array[Image] = []
 var timer: float = 0.0
+var slice_preview:MeshInstance3D
+var slice_texture:ImageTexture
 
 func _ready() -> void:
 	_initialize_grid()
@@ -48,6 +50,13 @@ func _initialize_grid() -> void:
 		current_state[i] = 1 if randf() < 0.4 else 0
 
 func _setup_fog() -> void:
+	if RenderingServer.get_current_rendering_method()=="gl_compatibility":
+		var img:=Image.create(grid_size.x,grid_size.y,false,Image.FORMAT_RGBA8);img.fill(Color.BLACK)
+		slice_texture=ImageTexture.create_from_image(img)
+		slice_preview=MeshInstance3D.new();var quad:=QuadMesh.new();quad.size=Vector2(8,8);slice_preview.mesh=quad
+		var mat:=StandardMaterial3D.new();mat.albedo_texture=slice_texture;mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;mat.cull_mode=BaseMaterial3D.CULL_DISABLED;mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST;slice_preview.material_override=mat;add_child(slice_preview)
+		var note:=Label3D.new();note.text="FOG FIELD / CENTRAL Z SLICE\nVolume rendering needs Forward+";note.font_size=42;note.pixel_size=0.008;note.position.y=4.6;note.billboard=BaseMaterial3D.BILLBOARD_ENABLED;add_child(note)
+		_update_texture();return
 	if not fog_volume:
 		fog_volume = FogVolume.new()
 		fog_volume.size = Vector3(10, 10, 10)
@@ -117,6 +126,12 @@ func _count_neighbors(x, y, z) -> int:
 	return count
 
 func _update_texture() -> void:
+	if slice_preview!=null:
+		var img:=Image.create(grid_size.x,grid_size.y,false,Image.FORMAT_RGBA8)
+		var z:int=grid_size.z/2
+		for y in range(grid_size.y):
+			for x in range(grid_size.x):img.set_pixel(x,y,Color("c5dfde") if current_state[x+y*grid_size.x+z*grid_size.x*grid_size.y]>0 else Color("213641"))
+		slice_texture.update(img);return
 	# Update images
 	var sx = grid_size.x
 	var sy = grid_size.y
@@ -140,4 +155,5 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("preview_grid"):
+		var n:int=clampi(int(config.preview_grid),4,32);grid_size=Vector3i(n,n,n)

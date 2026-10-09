@@ -44,8 +44,20 @@ const MEASURES: PackedStringArray = ["strain", "collision", "volume", "none"]
 ## Which quantity the deformation is read as. `strain` is what the specimen has always
 ## started in (`var _mode: int = Mode.STRAIN`), so the default forwards nothing at all.
 @export_enum("strain", "collision", "volume", "none") var measure: String = "strain"
+@export var lesson: bool = false
+@export var volume_feedback: bool = false
 
 var _specimen: Node = null
+
+
+func _enter_tree() -> void:
+	# Place the lesson bench before the child creates its solver and captures
+	# reference positions. Other uses retain the original elevated harness.
+	lesson = str(get_meta("config_lesson", lesson)).to_lower() in ["true", "1"]
+	if lesson:
+		var specimen := get_node_or_null("RoundedSoftBody")
+		if specimen != null:
+			specimen.position.y = specimen.bench_drop
 
 
 func _ready() -> void:
@@ -59,6 +71,9 @@ func _ready() -> void:
 	# existing placements run one call lighter than a rebuild — they run none.
 	if measure != "strain":
 		_forward({"measure": measure})
+	volume_feedback = str(get_meta("config_volume_feedback", volume_feedback)).to_lower() in ["true", "1"]
+	if volume_feedback:
+		_forward({"volume_feedback": true})
 
 
 ## Every key rounded_softbody.gd's own apply_grid_config reads. Nothing outside this
@@ -67,7 +82,7 @@ func _ready() -> void:
 ## maximum a frame after spawn.
 const SPECIMEN_KEYS: PackedStringArray = [
 	"measure", "mode", "stiffness", "pressure", "damping", "mass",
-	"squeeze_strength", "volume_correction", "size",
+	"squeeze_strength", "volume_correction", "volume_feedback", "size",
 ]
 
 ## Grid hook. There was none before, so every key a map could carry was silently
@@ -85,8 +100,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			merged[k] = config_data[k]
 	if merged.is_empty():
 		return
-	merged["measure"] = measure
 	_forward(merged)
+	if is_instance_valid(_specimen):
+		measure = _specimen.measure
+		volume_feedback = _specimen.volume_feedback
 
 
 func _forward(config_data: Dictionary) -> void:

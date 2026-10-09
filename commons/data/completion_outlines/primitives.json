@@ -1,0 +1,406 @@
+{
+  "_meta": {
+    "sequence": "primitives",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Source-reconciled ontology and experiment outlines for the current ten-room primitives roster, refreshed after installation of the ten final.md chapters and their primary encounter groups. Candidate artifacts list exactly the placed primary tokens in installed encounter order; secondary comparisons are identified in the prose. Further variations remain authored proposals and missing builds remain explicit. Recorded engine probes verify their stated mechanisms with supplied inputs, not whole-room reachability, controller ergonomics, solo learning, teacher-led use or baseline acceptance.",
+    "evidence": [
+      {
+        "path": "doc/book/iterations/2026-09-08-primitives/snap_and_pen.json",
+        "result": "76 checks passed",
+        "scope": "Actual scene scripts with manually moved grab nodes, including pen/snap readouts and retained-tip behavior. No human room or headset acceptance."
+      },
+      {
+        "path": "doc/book/iterations/2026-09-08-primitives/trace_speed.json",
+        "result": "Four supplied-body 1 m/s cases passed",
+        "scope": "Elapsed-time speed under time gate, distance gate, clear and every-frame baseline; active-rig selection and actual walking remain unverified."
+      },
+      {
+        "path": "doc/book/iterations/2026-09-08-primitives/triangle_fan.json",
+        "result": "Same six-corner L with two first vertices and actual restart-button events passed",
+        "scope": "Timed placement, retained completed faces and emitted triangle meshes with supplied positions. No human gesture or headset trial; area sums include overlap, not union area."
+      }
+    ]
+  },
+  "rooms": {
+    "Point_One": {
+      "inherited": "No prior mathematical room is required. Begin with the visitor's ability to distinguish here from there and to move a held object. The frame counter establishes that the museum was operating before this first lesson began. The counter and Folding Past also make a selective beginning visible: the lesson depends on running code it leaves unexamined, and finite time shapes which question comes next.",
+      "question": "How can we locate a point that is never drawn, and what becomes accessible through its relations and source?",
+      "ontology": "A mathematical point specifies a location without extension. Coordinates express a location relative to a frame; the origin is the point designated zero in that frame. The invisible-point exhibit supplies a case, arrows, crossing lines and a local address around an unseen position. These references have geometry; the point itself receives no visible marker. Elsewhere in the room, separate movable points acquire spheres, labels and pickable bodies. Those additions let a visitor handle a representation of position.",
+      "experiment": "Follow the running counter and the folding entrance view. Locate the unseen position addressed by the case's arrows and crossing lines. Move your viewpoint, then compare those relations with the local address and source on the code screen. Handle the separate dark point and notice what its body adds. Then put it down and take the coloured frame's own movable point for the WORLD-card and local-guide comparison. Approach the red target with that point, leave and return by another route; try letting repeated arrivals become a rhythm. Step into and out of the wireframe ring as a separate change of view.",
+      "observe": "The opening introduces _process(delta): a local _count adds one per call, while the installed counter reads the engine total since startup. A callback count is not elapsed time. The corrected invisible-point encounter locates an unseen position through arrows, crossing lines and a static address local to the case; it has no separate point marker or visibility cycle. The code screen displays short source excerpts without executing them; complete examples remain in the source. CoordinateSystem3M follows its own FloatingPoint in this placement; the first dark point is a separate object. WORLD text rounds to two decimals while guides use frame-local coordinates. The target checks proximity rather than route or intention. Earlier runtime evidence covers the former timed marker; the corrected invisible-point scene still needs its own runtime check. The human encounter remains to be tried.",
+      "limit": "An unseen position, its visible references, a coordinate report, a mesh view and source code each offer a different access to the system. The references have extent without giving the point a body of its own. A rounded report cannot prove two positions identical. No one view records the visitor's whole gesture or determines what makes the object compelling. Choosing a first principle defers other dependencies; unexamined code keeps shaping the encounter. Who decides which questions can wait?",
+      "variation": "Use repeated target arrivals to compose a rhythm, then consider what recording the route would add or ask the visitor to disclose. As a proposed source variation, remove one arrow or one crossing line while retaining FOCUS and compare how the remaining references locate it. Keep the point itself unseen. Changing the references or the museum's running counter requires an authored source change; neither is an installed visitor control.",
+      "handoff": "Carry two distinguishable positions into Point_Lines. The next question is what a relation between them retains that either position alone cannot.",
+      "candidate_artifacts": [
+        "frame_counter_display",
+        "folding_past",
+        "the_invisible_point",
+        "code_evolution_screen",
+        "interactive_point_origin_force",
+        "origin",
+        "coordinate_readout",
+        "CoordinateSystem3M",
+        "drag_point_target",
+        "wireframe_threshold",
+        "fontana_puncture",
+        "floating_sphere_field"
+      ],
+      "sources": [
+        "commons/maps/Point_One/map_data.json",
+        "commons/maps/Point_One/brief.md",
+        "commons/maps/Point_One/final.md",
+        "commons/primitives/point/interactive_point_origin.gd",
+        "commons/primitives/point/interactive_point_origin_force.gd",
+        "commons/primitives/point/coordinate_readout.gd",
+        "commons/artifacts/drag_point_target/drag_point_target.gd",
+        "commons/data/artifact_roles.json",
+        "commons/artifacts/the_invisible_point/the_invisible_point.gd",
+        "commons/artifacts/code_evolution_screen/code_evolution_screen.gd",
+        "commons/maps/Point_One/evolution.json",
+        "commons/artifacts/wireframe_threshold/wireframe_threshold.gd",
+        "algorithms/vectors/00_coordinates/CoordinateSystem3M.gd",
+        "commons/scenes/endless_museum.gd",
+        "commons/visualaid/frame_counter/frame_counter_display.gd"
+      ],
+      "open_questions": [
+        "Can the reader locate the unseen position through the arrows, crossing lines and local address, and distinguish those visible references from the point before reading the explanation?",
+        "Can the visitor follow the handover from the dark point to the coordinate frame's separate point, and compare the WORLD card with its local guides?",
+        "Do code-screen reading distance, the wireframe change and the repeated target response support the chapter in a headset? Record the reader's discoveries and assumptions before revising the next hall."
+      ]
+    },
+    "Point_Lines": {
+      "inherited": "Point_One established a position, its reference frame, and the difference between the value and its visible marker. Keep two positions in one frame.",
+      "question": "What changes when two points become connected, and when does a drawn connection start telling a body what to do?",
+      "ontology": "Two distinct Euclidean points determine a unique straight line; restricting the parameter to the interval between them gives a segment. A stored neighbor relation is different again: it can persist while endpoint positions change. A route marking or barrier adds a use and possibly an enforcement mechanism to that geometry.",
+      "experiment": "Notice the barrier before bringing the two line_demo points near one another and releasing to form a connection. Observe both the segment and the barrier explosion; keep moving the endpoints afterward. Cross the former barrier position, then compare the painted WALK THIS LINE instruction by walking along, beside and backwards along it.",
+      "observe": "The snap demonstration delegates connections to a manager that records adjacency. Moving an endpoint can change length and direction without necessarily changing which points are neighbors. The floor-marking comparison asks the visitor to notice their own compliance as well as the program's response; it does not infer enforcement from a sign alone. In Point_Lines, the first successful connection also triggers the nearest barrier explosion in the same loaded hall. Its collider is removed, fragments disperse and expire, and reconnecting the endpoints does not repeat the reward. Thirteen packed-scene checks pass using supplied positions and the real drop callback; headset attention and walking remain unverified.",
+      "limit": "Endpoint data cannot recover the route by which a connection was made. Euclidean straightness does not itself prescribe the best route or an obedient walk. Those interpretations enter through the room's task and the visitor's reading of it. Connecting the successful line to the destruction of a barrier is an authored event rule, not a geometric necessity. Ask what the same success would mean if it erected the barrier instead.",
+      "variation": "Proposed: use one fixed pair of endpoints for both a direct connection and an intentionally wandering route. Let the visitor judge the routes by something they choose, such as visiting another object or avoiding a boundary. This gives Point_Trace a concrete history that the segment omits.",
+      "handoff": "Point_Trace can now ask how to retain the making of a line, rather than only its endpoints or its current relation.",
+      "candidate_artifacts": [
+        "line_demo",
+        "line",
+        "walk_this_line_marking",
+        "do_not_cross_barrier",
+        "grabbable_line",
+        "two_point_ruler",
+        "two_points_line",
+        "laser_measure",
+        "laser_exploding_sphere",
+        "parallel_lines"
+      ],
+      "sources": [
+        "commons/maps/Point_Lines/map_data.json",
+        "commons/maps/Point_Lines/intent.md",
+        "commons/maps/Point_Lines/final.md",
+        "commons/primitives/snappoint/demos/line_demo.gd",
+        "commons/primitives/snappoint/snap_connection_manager.gd",
+        "commons/artifacts/two_point_ruler/two_point_ruler.gd",
+        "commons/primitives/laser_measure/laser_measure.gd",
+        "commons/data/artifact_roles.json",
+        "commons/artifacts/do_not_cross_barrier/do_not_cross_barrier.gd",
+        "commons/testing/probe_line_opens_barrier.gd"
+      ],
+      "open_questions": [
+        "In the headset, does the visitor notice the nearby explosion while looking at the two points, and can they cross its former position? Try making the line first and reaching the laser first; distinguish observed consequences from explanations.",
+        "two_point_ruler remains an optional build gap: its fixed span is visible, but the proposed measurement-to-second-block action has no hand/proximity wiring. Keep that extension distinct from the completed connection instructions.",
+        "For the laser comparison, can visitors distinguish the measuring beam's sustained burn from the controller pointer's separate sphere response? Verify the current held interaction and its legibility."
+      ]
+    },
+    "Point_Trace": {
+      "inherited": "A segment retains endpoints and a connection; it does not store the journey that produced them. Point_Lines supplies the reason to ask for a record of movement.",
+      "question": "Can a line remember how it was made, and which movements survive the recorder?",
+      "ontology": "A trace here is an ordered, bounded sequence of sampled positions rendered with connecting segments. Sampling, spatial rounding, duplicate suppression, and retention are distinct operations. This representation preserves more of a journey than one endpoint pair, but it is not the movement itself or a complete account of elapsed time.",
+      "experiment": "In free space, use the four draw_dot placements to repeat a short loop, pause, and return toward the start. Predict whether the pause will add a point before inspecting the Retained count. Compare the default pen with the 10, 40 and 80 mm grid variants: first a small gesture near one coarse lattice position, then a larger gesture across several. Explain the displayed movement gate, grid and retained capacity only after those comparisons. draw_stick supplies a tip-offset comparison; whiteboard supplies separate surface-writing pens and an eraser; hand_telemetry_diptych and automatic_writing_desk compare other recording channels. Release the pen to read its retained world-coordinate table with your hand resting. Use the coarse pen to hold a stored address while your hand moves around it, then find the boundary that changes it. Compare lifting a board pen with moving a drawing dot through free air: the board leaves a gap, while the dot continues its position record.",
+      "observe": "The shipped pens use a 5 mm straight-line displacement gate from the last sampled raw tip position and retain at most 4096 accepted points. Quantized variants also suppress consecutive samples in the same lattice position. The table exposes retained count/capacity, movement threshold and grid spacing, and refreshes after eviction and while paused. A pause adds no fresh position and does not age out the default non-fading trace. The actual-scene snap/pen probe passed 76 checks in its combined scope; human pen handling and display legibility remain unverified. The revised table retains millimetre-scale distinctions and remains readable after release. The new component probe verifies both dot and stick displays, stationary pauses, coarse duplicates and clear behavior; the 76-check combined pen regression still passes. The revised cased readout places the retained-point count beside a ten-row excerpt. Draw beyond twelve points, inspect the first visible row number, and compare the excerpt with the beginning of the line before explaining the difference. The panel and casing resize together and remain anchored through capacity eviction.",
+      "limit": "A cap on accepted points does not define a fixed number of remembered seconds, and position samples do not preserve a hesitation as a complete event. Even the finer reference is sampled. A recording of hand or head motion is a particular channel, not a measurement of attention, intention or the whole person; demo data must remain distinguishable from tracked data.",
+      "variation": "Proposed: ask visitors to preserve a deliberate hesitation, then let them choose a second channel, such as timestamps, pause marks, or pressure, when position samples fail to show it. The purpose is to make the recorder answer to a gesture the visitor values, rather than treating its current schema as a complete biography.",
+      "handoff": "Point_Line_Grid expands the pen's rounding into a room-scale addressing rule and compares a sampled walk with its quantized record.",
+      "candidate_artifacts": [
+        "draw_dot",
+        "draw_stick",
+        "whiteboard",
+        "hand_telemetry_diptych",
+        "automatic_writing_desk"
+      ],
+      "sources": [
+        "commons/maps/Point_Trace/map_data.json",
+        "commons/maps/Point_Trace/intent.md",
+        "commons/maps/Point_Trace/final.md",
+        "commons/primitives/point/draw_dot.gd",
+        "commons/primitives/point/draw_dot.tscn",
+        "commons/primitives/point/draw_stick.tscn",
+        "commons/primitives/hand_telemetry_diptych/hand_telemetry_diptych.gd",
+        "commons/primitives/automatic_writing_desk/automatic_writing_desk.gd",
+        "doc/book/iterations/2026-09-08-primitives/snap_and_pen.json",
+        "commons/data/artifact_roles.json",
+        "doc/book/iterations/2026-09-08-trace-grid/discovery.json",
+        "commons/testing/probe_trace_board_pens.gd",
+        "commons/ui/instrument_panel_case.gd",
+        "commons/testing/probe_trace_data_panel.gd",
+        "commons/artifacts/whiteboard/whiteboard_drawing.gd",
+        "commons/artifacts/whiteboard/whiteboard_pen.gd",
+        "commons/context/drawingboard/paper_draw_surface.gd"
+      ],
+      "open_questions": [
+        "Can a visitor read the released table at its actual location, distinguish nearby retained coordinates, and deliberately use the 80 mm grid to hold or change a stored address?",
+        "The first comparison now explicitly happens in free space. Verify the secondary whiteboard projection separately; a change of frame is not evidence of permanent archival storage.",
+        "Separate retention:trace's prepared illustration from a live visitor record, and verify TRACKING versus DEMO FEED states in the secondary telemetry comparison. The timer-driven pen descendant elsewhere has a different contract and is not evidence for these four movement-gated pens."
+      ]
+    },
+    "Point_Line_Grid": {
+      "inherited": "Point_Trace distinguished where a sample may land from when it is recorded and how long it is retained. Begin with the same distinction at hand scale, then let the visitor's traversal supply the positions.",
+      "question": "How far can you move while the grid continues to report the same place?",
+      "ontology": "A lattice supplies discrete reference positions. Quantization maps many input positions to one lattice position and is idempotent for a fixed lattice. A quantized path still has order and a retention policy; it is not automatically a set of visited cells or a permanent archive.",
+      "experiment": "First carry grab_sphere_point_snap through small movements and release it. Compare the visible tip with the ground table's retained metres and signed lattice indices at 0.05 m spacing. Next walk a small loop and a larger diagonal beside player_trace, comparing the finer ghost with the kept path under seam_grid:1.0 and show_discarded:1. Use grid_lines to distinguish available addresses from visited positions. Predict which difference each scale will retain before explaining quantization. In VR, compare a small lean with planted feet against a step. Observe which changes reach the fine reference and which cross a coarse boundary before reading the tracking-source explanation. At grid_lines, recognise a dot trace released in the preceding room. Compare the source count and length with its recentered, enlarged pink replay and green display-space rounding. Read the cased instrument beside the right rim without standing in front of the replay.",
+      "observe": "The sphere snaps all three world axes to a 5 cm lattice; on release the visible sampled tip aligns with its retained position and the ground table stays visible. player_trace instead rounds local X and Z to a one-metre lattice, retains height with its offset, suppresses consecutive duplicate positions and keeps up to 1024 accepted positions with times and speeds. Its ghost is also sampled, and connecting segments need not make axis-only steps. A supplied-body probe now measures 1 m/s correctly across time and distance gates and after clear; a subsequent component probe now also exercises camera-based selection and source switching with supplied transforms. VR samples use headset-camera world X/Z and rig-origin Y; desktop samples use the active-camera museum walker. Physical movement inside a fixed XR rig now enters the record. Camera source changes clear the old path and quantization statistics. Actual drop-signal testing confirms transfer through the session TraceData store, independent copied arrays, recentering, a scale capped to a five-metre extent, and green snapping at 1/6 metre in display space. The panel reports source world coordinates and the transform separately. The museum map declares a one-metre basin with walkable glass; line geometry supplies no floor collider.",
+      "limit": "A record compares movements only along the dimensions it retains. The finer ghost is a sampled reference rather than the complete walk; the coarse record is an ordered bounded path rather than a permanent visited-cell dictionary. The hand and walking recorders use different frames and spacings, so their numbers need interpretation before comparison. A deliberate representational choice is not automatically a claim about every social use of quantization. The VR floor path is a horizontal headset projection at rig-floor height, not a record of footsteps. Leaning may count as travel; vertical head movement alone is omitted. The release store has no pen-colour or timestamp provenance and no disk save. The archive panel summarises its latest ten releases while older replay geometry can remain. Neither the walking recorder nor the whiteboard publishes to this store.",
+      "variation": "Proposed: after making two different walks with the same coarse record, give the visitor control of spacing and origin so a difference they choose can count. The current chapter supplies the gesture comparison; visitor-selectable recorder settings and a shifted-origin comparison still need an interface and a walk. The purpose is to let the record answer to a chosen movement rather than make the movement comply with the record.",
+      "handoff": "The visitor can distinguish an address from its occupant and a recording rule from the movement. Point_Triangle_Context now connects three positions to make a boundary and asks what extra operation supplies a face.",
+      "candidate_artifacts": [
+        "grab_sphere_point_snap",
+        "player_trace",
+        "grid_lines",
+        "floating_sphere_field",
+        "room_grammar"
+      ],
+      "sources": [
+        "commons/maps/Point_Line_Grid/map_data.json",
+        "commons/maps/Point_Line_Grid/intent.md",
+        "commons/maps/Point_Line_Grid/final.md",
+        "commons/primitives/point/player_trace.gd",
+        "commons/primitives/point/grab_sphere_point_snap.gd",
+        "commons/primitives/point/grab_sphere_point_snap.tscn",
+        "commons/primitives/point/player_trace.tscn",
+        "doc/book/iterations/2026-09-08-primitives/snap_and_pen.json",
+        "doc/book/iterations/2026-09-08-primitives/trace_speed.json",
+        "commons/data/artifact_roles.json",
+        "doc/book/iterations/2026-09-08-trace-grid/discovery.json",
+        "commons/primitives/line/grid_lines.gd",
+        "commons/primitives/line/grid_lines.tscn",
+        "commons/globals/trace_data.gd",
+        "commons/testing/probe_grid_lines_discovery.gd",
+        "doc/book/iterations/2026-09-08-trace-grid/grid-replay.json"
+      ],
+      "open_questions": [
+        "The component test selects desktop and XR sources and handles switches. Now verify actual headset tracking and desktop walking in the museum: can the visitor see the fine and coarse paths and distinguish a lean from a step?",
+        "Check the 5 cm ground table after release at both snap consumers, then check whether the hand-before-walk encounter makes the separate 5 cm and 1 m scales legible.",
+        "Do the ghost, lattice and retained path remain visually distinguishable without requiring the visitor to leave the comparison area? Any control for changing spacing or origin remains a proposed extension.",
+        "In the full museum/headset, can the side-mounted panel be read comfortably from the right perimeter while the replay remains visible through the basin glass? Try a trace released in Trace before entering Grid."
+      ]
+    },
+    "Point_Triangle_Context": {
+      "inherited": "Points can be addressed, connected, and recorded. The current sequence has no separate Point_Triangle room, so this room must establish the first triangle before relying on triangle applications.",
+      "question": "When do three connected points enclose a region, and what must the machine add to make that region visible?",
+      "ontology": "Three non-collinear Euclidean points determine a unique plane and a non-degenerate triangle. Its boundary consists of three segments; a rendered face additionally requires an ordered vertex list and a fill operation. Fixed edge lengths constrain a triangle's shape, but an editor that changes those lengths can deform it. Four arbitrary points need not share a plane.",
+      "experiment": "Close triangle_line_puzzle with its three edges, then press SHOW / HIDE FILL to compare boundary and face as separate constructions. Draw one triangle with draw_triangle_faces; read numbered corners, START, loop and triangle counts. Release to rest. NEW OUTLINE retains faces and permits another start. Then compare the same planar six-corner L from A and B as described in final.md.",
+      "observe": "Moving the interactive handles changes lengths and can collapse area toward zero; it is not fixed-rod rigidity. The drawing tool uses a 0.1 m grid and one-second held placement cadence, then fills a closed loop with a fan from its first point. In the actual-scene button-event probe, the same six L corners produce four triangles from either start: start A respects the region, while start B puts two triangle centroids in the missing notch. NEW OUTLINE preserves completed faces and permits deliberate restart. This verifies the mechanism with supplied positions, not the ease of making the gesture by hand. Side panels are installed with discovery:1. Closure does not reveal the puzzle fill until a pointer/hand button press; hiding preserves its edges. The drawing tool labels numbered corners and its active first point, counts n-2 geometric fan triangles per completed loop, and preserves closed boundaries when fills are hidden. Real dropped signals end held sampling. Editable corner creation and release use global coordinates so translated/rotated museum placement does not displace them.",
+      "limit": "A fixed simple planar polygon has the same interior regardless of the chosen first vertex. This fan can overspill a concave boundary; the different fill is a failure to preserve that intended region, not another equally valid interior. Some concave polygons work from suitable fan centres, so concavity alone is not the failure test. Non-collinearity and the distinction between movable lengths and rigid rods must survive the explanation.",
+      "variation": "Proposed: preserve the same visitor-chosen outline and compare the present fan with another triangulation method that respects it, making the algorithm selectable and showing the actual resulting triangles. The first-vertex L comparison already has a working restart mechanism; the alternative method remains a build. The visitor can keep their intended shape and change the rule instead of being required to want a convenient polygon.",
+      "handoff": "Primitives_Polythedra can now join faces at shared edges and vertices, compare an open corner with a closed surface, and ask what enclosure adds.",
+      "candidate_artifacts": [
+        "triangle_line_puzzle",
+        "draw_triangle_faces"
+      ],
+      "sources": [
+        "commons/maps/sequences/primitives.json",
+        "commons/maps/Point_Triangle_Context/map_data.json",
+        "commons/maps/Point_Triangle_Context/intent.md",
+        "commons/maps/Point_Triangle_Context/final.md",
+        "commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+        "commons/primitives/point/draw_triangle_faces.gd",
+        "commons/primitives/interactivetriangle/interactivetriangle.gd",
+        "commons/primitives/point/draw_triangle_faces.tscn",
+        "doc/book/iterations/2026-09-08-primitives/triangle_fan.json",
+        "commons/artifacts/fetish_portal/fetish_portal.gd",
+        "commons/data/artifact_roles.json",
+        "commons/ui/triangle_experiment_panel.gd",
+        "commons/testing/probe_triangle_primary.gd",
+        "doc/book/iterations/2026-09-08-trace-grid/triangle-primary.json"
+      ],
+      "open_questions": [
+        "Can a human reach NEW OUTLINE, release/press/reacquire and place the intended L corners using the one-second cadence and ten-centimetre grid? A discoverable guide or corner markers may still be needed.",
+        "Can both completed fills be compared clearly after restart? Verify current desktop and VR viewpoints and distinguish failure of the fill from a poorly closed gesture.",
+        "The map was rearranged concurrently and includes a faceted fetish_portal as a secondary application. Required primary artifacts remain placed; verify their actual walking order and reach before accepting the room. No teleport behavior is inferred from the portal's name.",
+        "Headset pass: can a visitor close three edges, use the side fill button, and distinguish a numbered START point before repeating the L from its next corner? Check reading distance and hand reach in the actual museum."
+      ]
+    },
+    "Primitives_Polythedra": {
+      "inherited": "A triangle is a planar face determined by three non-collinear positions, and mesh faces are connected through shared vertices. One face does not enclose a volume.",
+      "question": "What closes a surface, what blocks a body, and what turns that boundary into a route?",
+      "ontology": "An open trihedral corner joins three faces around an apex. Adding the missing base yields a tetrahedral boundary. For a connected closed polyhedral surface with sphere topology, V-E+F=2; closure alone does not guarantee that value. The collision body is another representation with its own construction.",
+      "experiment": "Turn the open trihedron and closed tetrahedron; count and compare, then change the pyramid handles. Follow a bare prism into the wedge comparison. Approach the striped concrete enclosure and compare what STOP asks with what collision enforces. Read ahead, left, right and both-way arrows from their front and from the side.",
+      "observe": "grab_trihedron creates exactly three triangular faces but constructs its collision shape from the convex hull of all four vertices. Thus the displayed opening and the collision enclosure can disagree. pyramid_edit has five handles, including four base corners, and rebuilds its faces as they move; it is not a three-face trihedron editor. The concrete enclosure has opt-in convex hull colliders. Street signs have no collision body; their geometric arrows offer orientation without verifying passage. Existing utility wedges use the museum walkable prism scene.",
+      "limit": "A visible opening does not guarantee a matching collision opening, and a convex-hull collider is not the mathematical definition of the displayed corner. Euler's value 2 and the convex sphere-like polyhedron's total angular defect of 720 degrees do not generalize to every closed surface; the later torus supplies a different topology. The critical question is which representation decides what can pass and whether that decision serves the chosen use.",
+      "variation": "Propose turning one arrow, moving a barrier or preserving a pause, and specify whose movement would change. These fixtures are not currently grabbable. A future paired-collider corner experiment remains a separate possible extension.",
+      "handoff": "Point_Animatedcube can build a second closed surface, distinguish geometric faces from rendering triangles, and vary vertex positions while keeping the connectivity list.",
+      "candidate_artifacts": [
+        "grab_trihedron",
+        "grab_tetrahedron",
+        "pyramid_edit",
+        "cube_scene",
+        "prism_block",
+        "concrete_barrier",
+        "street_sign",
+        "diamonds",
+        "rock_spawner",
+        "rock_scanner"
+      ],
+      "sources": [
+        "commons/maps/Primitives_Polythedra/map_data.json",
+        "commons/maps/Primitives_Polythedra/intent.md",
+        "commons/maps/Primitives_Polythedra/final.md",
+        "commons/primitives/trihedron/grab_trihedron.gd",
+        "commons/primitives/trihedron/grab_trihedron.tscn",
+        "commons/primitives/tetrahedron/grab_tetrahedron.tscn",
+        "commons/primitives/pyramid/pyramid_edit.gd",
+        "commons/primitives/prismes/prism_block.tscn",
+        "commons/data/artifact_roles.json",
+        "commons/artifacts/concrete_barrier/concrete_barrier.gd",
+        "commons/artifacts/street_sign/street_sign.gd",
+        "commons/scenes/endless_museum.gd",
+        "commons/testing/probe_polyhedra_flow.gd"
+      ],
+      "open_questions": [
+        "Can the trihedron's opening be seen and its collision mismatch encountered at the current scale? Source construction alone does not establish what a tracked hand or another physical object can pass through.",
+        "Full-room/headset pass: check approach to the preserved wedges, floor continuity, sign orientation and readability, and clearance around the concrete enclosure. Isolated component movement passes; it does not establish these room-scale results.",
+        "A live angular-defect instrument is not established by the primary scripts. Keep its number explanatory or build a readout before making numerical variation an observation task. The absent older snap_tetrahedron_puzzle is not part of this baseline."
+      ]
+    },
+    "Point_Animatedcube": {
+      "inherited": "The visitor can distinguish vertices, edges, faces, closure, and collision, and has counted a tetrahedral boundary. A cube provides another use of those relations.",
+      "question": "When the eight points move, what is still the same object, and what stops being a cube?",
+      "ontology": "A geometric cube has six square faces, twelve edges, and eight vertices. This builder represents its surface using twelve triangles and retains a fixed connection list while handles move. A deformation may preserve that combinatorial structure while losing equal lengths, right angles, planar quads, or even a valid enclosure. A net is a cut-and-unfold representation, not another kind of material.",
+      "experiment": "Trace cube_lines and predict the net's face neighbours before it folds. Replay the builder and pause a recognisable layer; resume until handles become available. Keep one builder unchanged and move v6 on the other. Find a crease before revealing its diagonal. Compare replay, which retains deformation, with restoration, which resets the eight initial coordinates.",
+      "observe": "Both builder placements have the opt-in side instrument and numbered handles. Actual visible layers and the greatest initial-to-current local corner displacement are displayed. Six diagonals are derived from the triangle list. Hidden surfaces also update during deformation, so replay cannot revive stale geometry. Fixed connectivity does not guarantee a cube or valid enclosure. The net remains a looping hinge animation; it is not paused by the builder controls.",
+      "limit": "Visible enclosure is not evidence that the mesh is a filled volume or that every deformation remains non-intersecting. The current room title names an initial form and an algorithm, not a validator of everything the visitor can make. Calling six groups of triangles quads requires noting when each group is planar.",
+      "variation": "Replay a deformed form and compare it with the unchanged second builder. Choose a silhouette or possible use before deciding whether to restore. Saving named deformations and testing them as physical architecture remain proposed extensions.",
+      "handoff": "Primitives_Ignorance can now question a primitive's familiar name by examining the parameters and rendering choices that produce it.",
+      "candidate_artifacts": [
+        "cube_lines",
+        "polyhedron_nets_cube",
+        "animatedcubebuilder"
+      ],
+      "sources": [
+        "commons/maps/Point_Animatedcube/map_data.json",
+        "commons/maps/Point_Animatedcube/intent.md",
+        "commons/maps/Point_Animatedcube/final.md",
+        "commons/primitives/animatedcubebuilder/animatedcubebuilder.gd",
+        "commons/primitives/animatedcubebuilder/README.md",
+        "commons/infoboards_3d/visualizations/polyhedron_nets_cube.tscn",
+        "commons/infoboards_3d/visualizations/polyhedron_nets.gd",
+        "commons/data/artifact_roles.json",
+        "commons/ui/cube_experiment_panel.gd",
+        "commons/testing/probe_cube_primary.gd"
+      ],
+      "open_questions": [
+        "The side controls pass pointer-event and geometry probes, including actual map stamping. Test comfortable reading and hand reach in the full museum/headset.",
+        "The net's loop_fold setting is supported by the script; verify its actual viewing distance, timing and visibility rather than treating source support as a readable demonstration.",
+        "Can visitors reach both builder placements and maintain a clear unchanged control beside their deformation? Check whether changes remain visible without implying that every result is a valid enclosure."
+      ]
+    },
+    "Primitives_Ignorance": {
+      "inherited": "A mesh can retain its connections while changing shape, and a familiar primitive name can conceal its construction. The cube's twelve triangles made that distinction concrete.",
+      "question": "How much geometry does the room spend to make something look round, and when is that spending useful to you?",
+      "ontology": "A mathematical sphere is a surface at fixed distance from a center. The placed sphere meshes approximate that surface with finite tessellation and shading. Segment and ring counts change the mesh; viewing conditions affect which differences are visible. Regular polyhedra form a separate constrained family, not a list containing every usable solid.",
+      "experiment": "Compare each marked/plain sphere pair from near and far. At the counter, choose a sphere for a stated use before revealing counts; expose edges separately and inspect a pole. Explain why a triangle-entry count can differ from an area-bearing count. Reconsider the choice without treating either count as a performance or value score.",
+      "observe": "Actual Godot 4.6 mesh buffers yield 24/80/288/4224 triangle entries and 16/64/256/4096 area-bearing triangles for the four counter spheres. Two collapsed triangles per radial segment account for the differences in these examples. The room's low/mid/high pairs have identical positions and indices within each pair; overlays trace those indices without rebuilding surface geometry.",
+      "limit": "A tessellated sphere is not generally a prism, and lowering its resolution does not make that claim true. Nor does more geometry automatically improve a visitor's experience. Critical interpretation can ask whose viewing distance, task, and hardware set the threshold for acceptable approximation.",
+      "variation": "Independent count and edge controls are implemented. Choosing a fixed budget and distributing it among saved visitor-designed forms remains a proposal; the current counter offers fixed rotating exhibits, not editable or grabbable spheres.",
+      "handoff": "Primitives_Portals extends this finite comparison into an ordered approach toward circularity, then separates mathematical convergence from a finite staged animation.",
+      "candidate_artifacts": [
+        "sphere_low",
+        "sphere_mid",
+        "sphere_high",
+        "sphere",
+        "budget_of_smoothness"
+      ],
+      "sources": [
+        "commons/maps/Primitives_Ignorance/map_data.json",
+        "commons/maps/Primitives_Ignorance/intent.md",
+        "commons/maps/Primitives_Ignorance/final.md",
+        "commons/artifacts/budget_of_smoothness/budget_of_smoothness.gd",
+        "commons/artifacts/registry/primitives.json",
+        "commons/primitives/godotmeshes/sphere_low.gd",
+        "commons/primitives/godotmeshes/sphere_mid.gd",
+        "commons/primitives/godotmeshes/sphere_high.gd",
+        "commons/data/artifact_roles.json",
+        "commons/primitives/shared/mesh_inspection.gd",
+        "commons/testing/probe_ignorance_primary.gd"
+      ],
+      "open_questions": [
+        "The generated mesh counts and independent controls pass component checks. Walk the full room to verify the relocated counter's approach and label/control legibility in a headset.",
+        "Can visitors compare paired spheres at useful common distances and distinguish silhouette changes from the optional overlays? Current pair geometry equality is checked; perception requires a visitor.",
+        "For the secondary regularity and half-turn comparisons, verify the chosen object and viewpoint; a regular solid does not look identical from every view, and a deliberately faceted form may be the visitor's preferred result."
+      ]
+    },
+    "Primitives_Portals": {
+      "inherited": "Finite tessellation can approximate a smooth surface, with an explicit cost and a perceptual threshold. Increasing resolution is a chosen process, not an automatic guarantee of a better encounter.",
+      "question": "What does getting closer mean when every object you can stand beside still has a finite count?",
+      "ontology": "A sequence of polygonal approximations can converge to a circle although no finite member is that circle. The halving sequence approaches a finite limit even though infinitely many increments are named. A torus has a different closed-surface topology from a sphere; its hole is independent of how finely the surface is tessellated.",
+      "experiment": "Select and locate a gold ring, compare its counts with a later member and reverse the refinement order before explaining what changed. Read the separately labelled unit-polygon perimeter gap. Predict the next Achilles target, step directly, then restart and pause autoplay mid-motion to compare current and target gaps. Inspect the held tenth stage.",
+      "observe": "The twenty torus origins retain nineteen 4.5 m intervals; reverse preserves positions and reverses the same subdivision family. The polygon calculation uses selected rings as n but does not measure the portal rim. Achilles discovery starts held; manual steps place targets directly, autoplay eases them, and stage ten remains available with 6/1024 m from Achilles to the limit. Local panel colliders do not classify the entire ladder footprint as blocked.",
+      "limit": "Every placed example and every displayed stage is finite. A convergent infinite sum can describe finite duration without making motion impossible. The ten-stage display does not run a floating-point saturation experiment. The decorative torus ladder supplies neither teleportation nor velocity transfer, and its topology does not establish physical passage through a collider.",
+      "variation": "Reversing linear/inverted refinement and controlling halving stages are implemented. Fixed/doubling refinement remain configuration options. A separate floating-point saturation experiment remains proposed; the ten stages do not measure that threshold.",
+      "handoff": "Primitives_Melencolia gathers the chapter's tools and asks the visitor to choose a purpose whose success cannot be settled solely by refinement, a shape name, or a counter.",
+      "candidate_artifacts": [
+        "combine_portals",
+        "achilles_tortoise"
+      ],
+      "sources": [
+        "commons/maps/Primitives_Portals/map_data.json",
+        "commons/maps/Primitives_Portals/intent.md",
+        "commons/maps/Primitives_Portals/final.md",
+        "commons/primitives/combines/combine_portals.gd",
+        "commons/primitives/combines/achilles_tortoise.gd",
+        "commons/primitives/combines/combine_portals.tscn",
+        "commons/primitives/combines/achilles_tortoise.tscn",
+        "commons/data/artifact_roles.json",
+        "commons/ui/limit_experiment_panel.gd",
+        "commons/scenes/endless_museum.gd",
+        "commons/testing/probe_portals_primary.gd"
+      ],
+      "open_questions": [
+        "Verify the entire extended ladder route in the museum/headset: 85.5 m between first and last origins, about 87.1 m live mesh depth. Local instruments no longer mark the whole footprint as obstructed, but stamping is not proof of full-corridor accessibility.",
+        "Keep floating-point saturation as an explicitly optional explanatory or proposed instrument until a visible calculation and chosen numeric type support it.",
+        "Check control reach, distant gold-ring selection and the halving markers from useful viewpoints. The paused live gap and target readout are tested numerically; legibility and comparison still require a visitor."
+      ]
+    },
+    "Primitives_Melencolia": {
+      "inherited": "The visitor has constructed relations and faces, compared open and closed forms, altered meshes, and distinguished a finite representation from its mathematical target. They can now choose what to do with that vocabulary.",
+      "question": "When the detector says your construction is complete, what has it actually recognized, and what would make the construction useful to you?",
+      "ontology": "A geometric definition, a software recognition rule, and a chosen purpose answer different questions. A square pyramid requires a square base and an apex outside its plane; a connectivity detector may accept a broader family. A framed composition can invite an interpretation without turning that interpretation into a theorem about geometry or a historical figure's intention.",
+      "experiment": "Predict the connections snap_pyramid_puzzle will accept, build them and compare its success response with the shape made. Approach the raised square court: compare its four equal pyramid corners with pyramidlong in the centre. Use the side ramp to compare floor and court views; the four secondary cube_scene placements make a cross around the centre. Use prism_block to ask what support or obstruction would mean for a purpose you choose. Follow the raised connection and upper ramp to durer_scene on its separate higher deck, then compare the tableau with a view from the surrounding floor. Finish at bigframe by comparing the framed view with what lies beyond it. State a chosen use that the connection detector did not evaluate.",
+      "observe": "The manager's pyramid detector recognises a four-cycle plus a fifth point connected to all four; it performs no square, planar-base or apex-height checks. The puzzle responds to square_pyramid_formed, locks and later hides its pieces. Its placed scene does not enable spawning. The raised court and Durer deck are authored architecture already present before completion, restored from the July grid composition. The court is 1 m above the surrounding floor; the connected Durer deck is 2 m above it. Both have ramps. The chapter compares a recognition rule, geometric properties and what built surfaces let a body do.",
+      "limit": "A success signal is evidence of the implemented detector, not proof of every geometric property suggested by its name or of a meaningful finished work. The Durer tableau's relation to mastery, exhaustion, or desire is an authored interpretation. It should remain open to the visitor rather than being stated as the figure's known motive.",
+      "variation": "Proposed: make a square-versus-rhombic or non-planar comparison legible beside the accepted connection graph, then let visitors choose whether their purpose needs a square pyramid or another shape. Use the existing court to compare repeated corners, a cross and a centre from different positions. A construction judged by support, passage or composition can change who sets success while keeping the geometry and detector explicit; declining that purpose also remains possible. A puzzle-triggered construction remains an optional new experiment, not a requirement for restoring this historical room.",
+      "handoff": "The transformation sequence can begin from a concrete distinction: moving, turning, or scaling an object changes some measurements while preserving others. The visitor should be able to predict an invariant and choose whether it matters for their next construction.",
+      "candidate_artifacts": [
+        "snap_pyramid_puzzle",
+        "pyramid",
+        "pyramidlong",
+        "durer_scene"
+      ],
+      "sources": [
+        "commons/maps/Primitives_Melencolia/map_data.json",
+        "commons/maps/Primitives_Melencolia/intent.md",
+        "commons/maps/Primitives_Melencolia/final.md",
+        "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.gd",
+        "commons/primitives/snappoint/snap_connection_manager.gd",
+        "commons/scenes/demos/durer/DurerScene.tscn",
+        "commons/maps/curriculum_spine.json",
+        "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn",
+        "commons/primitives/snappoint/puzzles/snap_point_puzzle_base.gd",
+        "commons/data/artifact_roles.json",
+        "doc/book/iterations/2026-09-08-melencolia-restoration/README.md"
+      ],
+      "open_questions": [
+        "Do the floor approach, court ramp and separate higher Durer deck make the restored composition legible to a visitor? Check both a solo and teacher-led walk after the engine checks.",
+        "The detector's lack of geometry checks is source-established. Can visitors deliberately construct and compare accepted non-square or non-planar examples before completion locks and hides the puzzle? Test the reveal/reset needs of that encounter.",
+        "Verify bigframe passage, the tableau's viewing conditions and the outgoing route with the visitor's actual controls. The native tableau contains a polyhedron extending below its origin while its sphere rests on it; that pre-existing artifact composition remains a separate refinement.",
+        "Can the departing visitor name an invariant and a chosen purpose rather than simply repeat the detector's success word? This learning check still requires a real solo and teacher-led walk."
+      ]
+    }
+  }
+}

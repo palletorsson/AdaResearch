@@ -19,11 +19,11 @@ var _last_display_text: String = ""
 var _value_labels: Array = []     # when set, the slider is a discrete chooser showing names
 
 # Desktop pointer drag state
-var _pointer_dragging: bool = false
-var _pointer_drag_start_world: Vector3 = Vector3.ZERO
-var _pointer_drag_start_pos: float = 0.0
+var _interaction: Node3D
 
 func _ready() -> void:
+	if not Engine.is_editor_hint() and _slider is XRToolsInteractableSlider:
+		_interaction = preload("res://commons/interactables/scalar_pointer.gd").attach(self, _slider)
 	# Enforce usage of interactable slider
 	if _slider:
 		# Ensure 0 rotation for horizontal sliding (X-axis)
@@ -31,18 +31,6 @@ func _ready() -> void:
 		
 	_connect_slider_signal()
 	_update_label(_current_slider_value())
-
-func _process(_delta: float) -> void:
-	# Keep the handle constrained to track (prevent lifting out of slot)
-	var handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	if handle:
-		if handle.is_picked_up():
-			# While grabbed, constrain Y and Z to stay on track
-			handle.transform.origin.y = 0.0
-			handle.transform.origin.z = 0.0
-		else:
-			# Reset position when released
-			handle.transform.origin = Vector3.ZERO
 
 func _connect_slider_signal() -> void:
 	if not _slider:
@@ -76,9 +64,9 @@ func set_normalized_value(val: float):
 	var s_max = _slider.get("slider_limit_max")
 	if s_min == null: s_min = 0.0
 	if s_max == null: s_max = 1.0
-	var pos = remap(val, 0.0, 1.0, s_min, s_max)
+	var pos = remap(clampf(val, 0.0, 1.0), 0.0, 1.0, s_min, s_max)
 	_slider.set("slider_position", pos)
-	_update_label(pos)
+	_update_label(_current_slider_value())
 
 func _current_slider_value():
 	if not _slider:
@@ -104,7 +92,7 @@ func _update_label(value) -> void:
 		var s_max = _slider.get("slider_limit_max")
 		if s_min == null: s_min = 0.0
 		if s_max == null: s_max = 1.0
-		norm = remap(scalar_value, s_min, s_max, 0.0, 1.0)
+		norm = 0.0 if is_equal_approx(s_min, s_max) else remap(scalar_value, s_min, s_max, 0.0, 1.0)
 
 	# the displayed text: a choice NAME if this is a chooser, else the numeric value
 	var text: String
@@ -132,6 +120,8 @@ func set_choices(names: Array) -> void:
 		if s_min == null: s_min = 0.0
 		if s_max == null: s_max = 1.0
 		_slider.set("slider_steps", (float(s_max) - float(s_min)) / float(names.size() - 1))
+	elif _slider:
+		_slider.set("slider_steps", 0.0)
 	_update_label(_current_slider_value())
 
 func _ensure_label() -> bool:
@@ -164,28 +154,5 @@ func _format_vector_value(value: Vector2) -> String:
 	return "Y: %s Z: %s" % [y_text, z_text]
 
 
-# ── Desktop pointer interaction ──────────────────────────────────────────────
-
 func pointer_event(event: XRToolsPointerEvent) -> void:
-	if not _slider:
-		return
-	match event.event_type:
-		XRToolsPointerEvent.Type.PRESSED:
-			_pointer_dragging = true
-			_pointer_drag_start_world = event.position
-			_pointer_drag_start_pos = _slider.slider_position
-		XRToolsPointerEvent.Type.MOVED:
-			if _pointer_dragging:
-				_handle_pointer_drag(event)
-		XRToolsPointerEvent.Type.RELEASED, XRToolsPointerEvent.Type.EXITED:
-			_pointer_dragging = false
-
-
-func _handle_pointer_drag(event: XRToolsPointerEvent) -> void:
-	var slider_origin := get_node_or_null("SliderOrigin") as Node3D
-	if not slider_origin or not _slider:
-		return
-	var slider_axis_world := slider_origin.global_transform.basis.x.normalized()
-	var delta_world := event.position - _pointer_drag_start_world
-	var projected_offset := delta_world.dot(slider_axis_world)
-	_slider.move_slider(_pointer_drag_start_pos + projected_offset)
+	if is_instance_valid(_interaction): _interaction.pointer_event(event)

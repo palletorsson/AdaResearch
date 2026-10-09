@@ -22,6 +22,8 @@ const CUBE_SCENE = preload("res://commons/primitives/cubes/cube_scene.tscn")
 @export var subdivision_interval: float = 1.0  # Time between subdivisions in seconds
 @export var max_iterations: int = 2  # 2-stage Menger sponge (derived from `tick`)
 @export var auto_start: bool = true  # Start subdividing automatically
+@export var flight_box: bool = false  # Opt-in room fixture, not a subdivision axis.
+var lesson_enabled := false
 
 # ─────────────────────────────────────────────────────────────────────
 #  STAGE-2 DNA — promoted 2026-08-05 (hand promotion; the runner refused
@@ -139,10 +141,12 @@ func _rebuild() -> void:
 		is_subdividing = true
 		print("MengerSponge: Auto-subdivision enabled")
 	_built = true
+	_sync_flight_box()
 
 # Free everything this script generated, leaving the .tscn's camera and lights.
 func _clear_built() -> void:
 	for child in get_children():
+		if child.name in ["FlightBox", "MengerLesson"]: continue
 		if child is Camera3D or child is Light3D:
 			continue
 		remove_child(child)
@@ -317,6 +321,7 @@ func _spawn_removed(parent: Node, world_position: Vector3, cell: float) -> void:
 		return
 	var mesh_instance: MeshInstance3D = MeshInstance3D.new()
 	mesh_instance.name = "RemovedCube"
+	mesh_instance.set_meta("menger_removed", true)
 	var box: BoxMesh = BoxMesh.new()
 	var thin: float = cell if removal == "ghost" else cell * 0.22
 	box.size = Vector3(thin, thin, thin)
@@ -365,6 +370,15 @@ func step() -> void:
 func apply_grid_config(config: Dictionary) -> void:
 	if config.is_empty():
 		return
+	if str(config.get("lesson", "false")).to_lower() == "true":
+		lesson_enabled = true
+		auto_start = false
+		is_subdividing = false
+		_install_lesson.call_deferred()
+
+	if config.has("flight_box"):
+		flight_box = str(config["flight_box"]).to_lower() in ["true", "1", "yes"]
+		if _built: _sync_flight_box()
 
 	var changed: bool = false
 
@@ -393,3 +407,21 @@ func apply_grid_config(config: Dictionary) -> void:
 	if not _built:
 		return
 	_rebuild()
+
+## Remains a child fixture across generation rebuilds; the cube scanner cannot
+## mistake its BoxMeshes for generated cube_scene instances.
+func _sync_flight_box() -> void:
+	var enclosure := get_node_or_null("FlightBox")
+	if flight_box and enclosure == null:
+		enclosure = load("res://commons/movement/museum_flight_box.gd").new()
+		enclosure.name = "FlightBox"
+		add_child(enclosure)
+	elif not flight_box and enclosure != null:
+		remove_child(enclosure)
+		enclosure.queue_free()
+
+func _install_lesson() -> void:
+	if has_node("MengerLesson"): return
+	var desk = load("res://commons/artifacts/menger_lesson/menger_lesson.gd").new()
+	desk.name = "MengerLesson"
+	add_child(desk)

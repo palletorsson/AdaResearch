@@ -34,6 +34,8 @@ enum ColorScheme { COOL_WARM, ICE, NEON, PINK }
 @export var color_scheme: ColorScheme = ColorScheme.COOL_WARM
 
 # Animation state
+var lesson_enabled := false
+var peak_side := 1.0
 var _current_depth: int = 0
 var _growth_timer: float = 0.0
 var _growth_speed: float = 1.2  # Seconds per depth level
@@ -120,6 +122,8 @@ func _koch_subdivide(start: Vector3, end: Vector3, depth: int) -> Array[Dictiona
 	# Equilateral triangle peak
 	var mid_point := (b + d) / 2.0
 	var perpendicular := Vector3(-dir.y, dir.x, 0)
+	if lesson_enabled:
+		perpendicular *= peak_side * (-1.0 if snowflake_mode else 1.0)
 	var height := (len / 3.0) * sqrt(3.0) / 2.0
 	var c := mid_point + perpendicular * height
 
@@ -142,6 +146,7 @@ func _setup_mesh() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.vertex_color_use_as_albedo = true
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	_mesh_instance.material_override = mat
 
 	add_child(_mesh_instance)
@@ -151,15 +156,22 @@ func _draw_depth(depth: int) -> void:
 		return
 
 	_immediate_mesh.clear_surfaces()
-	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	_immediate_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES if lesson_enabled else Mesh.PRIMITIVE_LINES)
 
 	var segments: Array = _lines_by_depth[depth]
 	for seg in segments:
 		var col := _color_for_depth(seg.depth, depth)
-		_immediate_mesh.surface_set_color(col)
-		_immediate_mesh.surface_add_vertex(seg.start)
-		_immediate_mesh.surface_set_color(col)
-		_immediate_mesh.surface_add_vertex(seg.end)
+		if lesson_enabled:
+			var v: Vector3 = (seg.end-seg.start).normalized()
+			var normal := Vector3(-v.y,v.x,0)*line_thickness*0.5
+			for point in [seg.start-normal,seg.end-normal,seg.end+normal,seg.start-normal,seg.end+normal,seg.start+normal]:
+				_immediate_mesh.surface_set_color(col)
+				_immediate_mesh.surface_add_vertex(point)
+		else:
+			_immediate_mesh.surface_set_color(col)
+			_immediate_mesh.surface_add_vertex(seg.start)
+			_immediate_mesh.surface_set_color(col)
+			_immediate_mesh.surface_add_vertex(seg.end)
 
 	_immediate_mesh.surface_end()
 
@@ -251,6 +263,11 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("lesson","false")).to_lower() == "true":
+		lesson_enabled=true
+		animate_growth=false
+		_install_lesson.call_deferred()
+		return
 	if config.has("depth"):
 		max_depth = clampi(int(config.depth), 1, 6)
 	if config.has("line_thickness"):
@@ -278,3 +295,10 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	if _depth_controller:
 		_depth_controller.set_value(float(max_depth))
+
+func _install_lesson() -> void:
+	if has_node("FractalLesson"): return
+	var fixture = load("res://commons/artifacts/koch_sierpinski_lesson/koch_sierpinski_lesson.gd").new()
+	fixture.name="FractalLesson"
+	fixture.kind="koch"
+	add_child(fixture)

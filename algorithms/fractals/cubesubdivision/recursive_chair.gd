@@ -379,6 +379,9 @@ func _exit_tree() -> void:
 ## exactly as before. Before _ready the value is only recorded, which is also the path the
 ## capture harness takes when it sets the export directly.
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("lesson", "false")).to_lower() in ["true", "1"] and not has_meta("recursion_lesson"):
+		set_meta("recursion_lesson", true)
+		_install_recursion_lesson.call_deferred()
 	var changed: bool = false
 	if config.has("removal"):
 		var r: String = str(config["removal"]).strip_edges().to_lower()
@@ -392,3 +395,10 @@ func apply_grid_config(config: Dictionary) -> void:
 			changed = true
 	if changed and _built:
 		reset()
+
+
+func _install_recursion_lesson() -> void:
+	var desk = load("res://commons/artifacts/recursion_lesson/recursion_lesson.gd").new()
+	desk.name = "RecursionLesson"
+	desk.kind = "cut"
+	add_child(desk)

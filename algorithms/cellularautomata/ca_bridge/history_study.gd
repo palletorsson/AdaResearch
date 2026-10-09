@@ -23,9 +23,12 @@ var deck_cursor: MeshInstance3D
 var screen_cursor: MeshInstance3D
 var record_cursor: MeshInstance3D
 var last_step_usec: int = 0
+var walk_follow: bool = false
+var walking_row: bool = false
 
 func _ready() -> void:
 	work = get_parent()
+	walk_follow = str(work.get_meta("config_follow", "")) == "walk"
 	work.width = WIDTH
 	work.length = ROWS
 	work.rule = 30
@@ -105,6 +108,30 @@ func _process(delta: float) -> void:
 		elapsed = 0.0
 		_advance()
 
+## Walking selects an existing row. It never rewinds the automaton or edits support.
+## Body roots, rather than cameras, work with both desktop and XR locomotion.
+func _physics_process(_delta: float) -> void:
+	if not walk_follow or history.is_empty(): return
+	var row: int = -1
+	var visitors: Array = get_tree().get_nodes_in_group("em_walker")
+	visitors.append_array(get_tree().get_nodes_in_group("player_body"))
+	for visitor in visitors:
+		if not visitor is CharacterBody3D: continue
+		var p: Vector3 = to_local(visitor.global_position)
+		# Only this record and its margin; ignore the desk, future rows and other halls.
+		if p.x < -4.6 or p.x > 4.6 or p.y < -0.85 or p.y > 0.5: continue
+		if p.z < -CELL*0.5 or p.z >= (history.size()-0.5)*CELL: continue
+		row = clampi(floori(p.z/CELL+0.5),0,history.size()-1)
+		break
+	var inside: bool = row >= 0
+	var changed: bool = inside != walking_row
+	walking_row = inside
+	if inside and selected != row:
+		selected = row
+		_refresh_cursor()
+		changed = true
+	if changed: _refresh_readout()
+
 func cell_position(x: int, generation: int) -> Vector3:
 	return Vector3((x - 7) * CELL, -0.11, generation * CELL)
 
@@ -146,7 +173,7 @@ func readback() -> Dictionary:
 	return {"generation":history.size()-1,"selected":selected,"running":running,
 		"seed_mode":seed_mode,"flipped":flipped,"rule":work.rule,
 		"occupied":deck.multimesh.visible_instance_count,"history":history.duplicate(true),
-		"step_usec":last_step_usec}
+		"step_usec":last_step_usec,"walk_follow":walk_follow,"walking_row":walking_row}
 
 func _build_space() -> void:
 	# A shallow collecting floor under the holes; the museum path runs alongside.
@@ -175,6 +202,12 @@ func _build_space() -> void:
 	for y: float in [0.22,3.22]:
 		box("LatticeRail", Vector3(0.12,0.09,9.85), Vector3(3.45,y,4.6), Color("b08c66"), true)
 	deck_cursor = box("FollowDeck", Vector3(6.1,0.018,0.022), Vector3(0,0.02,0), Color("ffcc72"))
+	if walk_follow:
+		(deck_cursor.mesh as BoxMesh).size.x = 8.8
+		var walk_label := _label("WalkTheRecord", "WALK THE RECORD / GOLD FOLLOWS YOUR ROW", 30)
+		walk_label.position = Vector3(-4.05,0.025,-0.72)
+		walk_label.rotation_degrees.x = -90
+		add_child(walk_label)
 	screen_cursor = box("FollowLattice", Vector3(0.09,2.75,0.025), Vector3(3.45,1.69,0), Color("ffcc72"))
 	var heading := _label("LatticeHeading", "THE SAME HISTORY / WORN BY A WALL", 32)
 	heading.position = Vector3(3.35,3.45,4.6)

@@ -1,0 +1,245 @@
+{
+  "_meta": {
+    "sequence": "qfeplaboratory",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "QFEP_Introduction": {
+      "inherited": "From Crisis_Synthesis: The crisis was never the problem. The crisis is the engine.",
+      "question": "Can two different settings produce the same result?",
+      "ontology": "QFEP is the project’s exploratory organising model: QFE=F−λE+φΔE. In this console the four terms are adjustable numbers, not independently measured physicalquantities.",
+      "experiment": "Move onlyF and watch theresult. Restore it, moveE, and then try compensating withF until the numericalresult is close to whereitstarted.",
+      "observe": "The readout and four-axis polygon change. Differentpolygon shapes can give the sameQFE; colour/category can shift as the setting approaches a different authoredsignature.",
+      "limit": "A single aggregate number loses distinctions between its inputs. These labels are theproject’s vocabulary for exploring tension, not a calibrated biological or thermodynamiclaw.",
+      "variation": "Existing: find two unlike knobconfigurations with a similarQFE. Proposed: let thevisitor change the definition ofΔE and record why.",
+      "handoff": "The next room starts with a smaller, computable question: what makes an outcome easy or difficult to predict?",
+      "candidate_artifacts": [
+        "qfep_balance_workbench"
+      ],
+      "sources": [
+        "commons/maps/QFEP_Introduction/final.md",
+        "commons/maps/QFEP_Introduction/map_data.json",
+        "commons/maps/QFEP_Introduction/intent.md",
+        "commons/maps/QFEP_Introduction/tutorial.md",
+        "commons/maps/QFEP_Introduction/technical.md",
+        "commons/maps/QFEP_Introduction/critical.md",
+        "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+        "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_F_Term": {
+      "inherited": "From QFEP_Introduction: The next room starts with a smaller, computable question: what makes an outcome easy or difficult to predict?",
+      "question": "What makes the next mark easy to predict?",
+      "ontology": "Binaryentropy measures average uncertainty for a Bernoulli source. The room uses predictability as a concrete entry to its idea oforder; that does notidentify Shannonentropy with the project’sFterm.",
+      "experiment": "Move thep slider nearzero, through onehalf and nearone. Predict the nexttilecolour at eachsetting; compare the curve’smarker with thesamplegrid.",
+      "observe": "Near eitherendpoint onecolour dominates andH islow. Atp=.5 the theoreticalcurve reaches1bit perdraw, while any finitesample can stilldepart from equalcounts.",
+      "limit": "Entropy describes a specifiedsource distribution. It is not the compressibility of everyparticular256bit picture, nor a measurement of beauty, value orfreeenergy.",
+      "variation": "Existing: compare p=.1 withp=.9: oppositecolours but equal theoreticaluncertainty. Proposed: preserve localcorrelations while holding colourfrequency fixed to expose what a Bernoullimodel omits.",
+      "handoff": "The entropy room next counts alternatives explicitly, asking which possibilities the model has allowed into its world.",
+      "candidate_artifacts": [
+        "shannon_workbench"
+      ],
+      "sources": [
+        "commons/maps/QFEP_F_Term/final.md",
+        "commons/maps/QFEP_F_Term/map_data.json",
+        "commons/maps/QFEP_F_Term/intent.md",
+        "commons/maps/QFEP_F_Term/tutorial.md",
+        "commons/maps/QFEP_F_Term/technical.md",
+        "commons/maps/QFEP_F_Term/critical.md",
+        "commons/artifacts/shannon_workbench/shannon_workbench.tscn",
+        "commons/artifacts/shannon_workbench/shannon_workbench.gd"
+      ],
+      "open_questions": [
+        "The workbench measures source entropy H, not model mismatch or F. Add a visible predictor and its errors while holding the source fixed.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "F/freeenergy is not directlymeasured. Avoid universal finite-file compressionbound implied by legacycaption. snap_cube_puzzle registryactually resolves to octahedronpuzzle; not selectedcore.",
+        "Central concept gap: selected workbench computes Shannon entropy H(p), not F. Draft gives a predictor comparison as a thought experiment and proposes an actual expectation/error readout; do not treat H, prediction error and variational free energy as identical.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_E_Term": {
+      "inherited": "From QFEP_F_Term: The entropy room next counts alternatives explicitly, asking which possibilities the model has allowed into its world.",
+      "question": "How many endings remain possible before one is chosen?",
+      "ontology": "A possibilitycount W describes the allowedoutcomes of a chosenmodel. For equallyweighted possibilities, logW measures their multiplicity; unequalprobabilities need a weightedentropy.",
+      "experiment": "Watch the fan narrow to asinglepath and open into branches. Count the firstforks, predict theleafcount, then compare with the FUTURESreadout.",
+      "observe": "The default9secondcycle changes branching between1,2and3 across4levels, giving1,16or81leaves. The displayedS follows the naturallogarithm of actualleafcount.",
+      "limit": "Branches depict permittedfutures, not their likelihood orsocialaccessibility. An unbuiltbranch and an activelyclosedbranch require differentrecords even if they leave the samecount.",
+      "variation": "Existing: attend to a singleend while the fanexpands. Proposed: expose the existing prunedconfiguration, which caps branches and leaves visible stumps, as a visitor-controlledcomparison.",
+      "handoff": "Lambda’s hall will turn a balance between repetition and variation into a spatial invitation. Ask what its preferred route leaves to either side.",
+      "candidate_artifacts": [
+        "entropy_fan"
+      ],
+      "sources": [
+        "commons/maps/QFEP_E_Term/final.md",
+        "commons/maps/QFEP_E_Term/map_data.json",
+        "commons/maps/QFEP_E_Term/intent.md",
+        "commons/maps/QFEP_E_Term/tutorial.md",
+        "commons/maps/QFEP_E_Term/technical.md",
+        "commons/maps/QFEP_E_Term/critical.md",
+        "commons/artifacts/entropy_fan/entropy_fan.tscn",
+        "commons/artifacts/entropy_fan/entropy_fan.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_Lambda_Spectrum": {
+      "inherited": "From QFEP_E_Term: Lambda’s hall will turn a balance between repetition and variation into a spatial invitation. Ask what its preferred route leaves to either side.",
+      "question": "Where does this corridor tell you to stand between stillness and motion?",
+      "ontology": "Lambda is a weightingparameter in theprojectmodel. The hall maps lateralposition to a continuum between two authoredforms oforder anddispersal.",
+      "experiment": "Look left toward the regularwall and right toward the displacedmoving forms. Locate the litwalkway and compare the rows between theextremes.",
+      "observe": "The westwall repeats a lattice, the eastwall breaks it into animatedforms, and sixrows interpolate between them. The litband is placed at the authoredlambda=.35.",
+      "limit": "The litroute makes one choice inviting. That choice is a spatialargument by theproject; the displayed.35 is not a universalcriticalpoint or an empiricaldefinition oflife.",
+      "variation": "Existing: inspect the regularside as shelter or the dispersedside as room forvariation instead of accepting the paintedmiddle asbest. Proposed: move thelitband and compare the invitation.",
+      "handoff": "Phi introduces time. A system’s present arrangement and its response to change will no longer be the same question.",
+      "candidate_artifacts": [
+        "lambda_hall"
+      ],
+      "sources": [
+        "commons/maps/QFEP_Lambda_Spectrum/final.md",
+        "commons/maps/QFEP_Lambda_Spectrum/map_data.json",
+        "commons/maps/QFEP_Lambda_Spectrum/intent.md",
+        "commons/maps/QFEP_Lambda_Spectrum/tutorial.md",
+        "commons/maps/QFEP_Lambda_Spectrum/technical.md",
+        "commons/maps/QFEP_Lambda_Spectrum/critical.md",
+        "commons/artifacts/lambda_hall/lambda_hall.tscn",
+        "commons/artifacts/lambda_hall/lambda_hall.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do notpromise walkway reach untilmuseumwalk;14×7m artifact mayneedfit. No lifeatlambda.35claim.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_Phi_Term": {
+      "inherited": "From QFEP_Lambda_Spectrum: Phi introduces time. A system’s present arrangement and its response to change will no longer be the same question.",
+      "question": "Can change have a direction without one direction being intrinsically better?",
+      "ontology": "Phi weights thechange term in theprojectformula. Its signedscale is a modelchoice; the neighbouringpattern is an independent illustration of distributedchange.",
+      "experiment": "Move thePHI handle throughzero and compare its own particlefeedback andcolour. Then watch two differentcells in the transformingpattern and compare theirphases.",
+      "observe": "Negativephi directs the slider’s particlesdown; positivephi directs themup. Thegold gridcontinues its wave-drivenmotion independently of theslider.",
+      "limit": "Upwardgold and downwardpurple colour the valuejudgement before anyargument. Welcomingchange may matter, but preservation can also protect what dominantdefinitions erase.",
+      "variation": "Existing: dwell at neutral ornegativephi and name a kindofchange worthresisting. Proposed: connectphi to a measurabletemporal response and compare with a preservedpattern.",
+      "handoff": "The next room provides a control connected to a changing pattern. We will keep the parameter, the observed response and the interpretation distinct while comparing them.",
+      "candidate_artifacts": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "sources": [
+        "commons/maps/QFEP_Phi_Term/final.md",
+        "commons/maps/QFEP_Phi_Term/map_data.json",
+        "commons/maps/QFEP_Phi_Term/intent.md",
+        "commons/maps/QFEP_Phi_Term/tutorial.md",
+        "commons/maps/QFEP_Phi_Term/technical.md",
+        "commons/maps/QFEP_Phi_Term/critical.md",
+        "commons/interfaces/qfep/phi_slider.tscn",
+        "commons/interfaces/qfep/phi_slider.gd",
+        "commons/interfaces/qfep/transforming_pattern.tscn",
+        "commons/interfaces/qfep/transforming_pattern.gd"
+      ],
+      "open_questions": [
+        "PHI and the transforming grid run independently. Name one receiving calculation and show the value it actually uses before teaching their causal connection.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_Edge_Of_Chaos": {
+      "inherited": "From QFEP_Phi_Term: The next room provides a control connected to a changing pattern. We will keep the parameter, the observed response and the interpretation distinct while comparing them.",
+      "question": "Which changes belong to the pattern, and which to the way we drive it?",
+      "ontology": "This artifact is a two-concentration reaction-diffusion model. Lambda jointly changes feed,kill anddiffusion constants along one authoredpath through itsparameters.",
+      "experiment": "Move LAMBDA slowly, wait for the patternresponse, and use RESEED tocompare a newstart. Keep SIM SPEEDfixed while comparing lambda.",
+      "observe": "A colouredconcentration image changes as reactions andneighbourdiffusion evolve. ChangingLAMBDA affects severalcoefficients atonce; SIM SPEED changes the numberofupdates perframe.",
+      "limit": "A patternlabel is not evidence ofuniversalcriticality. Numericaltimestep, initialconditions and thechosenparameterpath all affectthepicture; apparentactivity can be discretisationartifact.",
+      "variation": "Existing: compare persistence beforeandafterRESEED at the samesliderposition. Proposed: a fixed-timestepcomparison and a measuredpatternstatistic acrosslambda.",
+      "handoff": "The sandbox extends the question of control across several objects. First we must establish which objects actually receive each change.",
+      "candidate_artifacts": [
+        "edge_of_chaos_unlocked"
+      ],
+      "sources": [
+        "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+        "commons/maps/QFEP_Edge_Of_Chaos/map_data.json",
+        "commons/maps/QFEP_Edge_Of_Chaos/intent.md",
+        "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md",
+        "commons/maps/QFEP_Edge_Of_Chaos/technical.md",
+        "commons/maps/QFEP_Edge_Of_Chaos/critical.md",
+        "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+        "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd"
+      ],
+      "open_questions": [
+        "The unlocked field still uses the legacy numerical update. Compare controlled smaller timesteps from the same initial field before claiming stable regimes or criticality.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Numericalstability gap: defaultunlocked stilluses legacydt1 integrator; do notclaim empiricallyestablished edge/chaosregimes fromdefaultpicture.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_Sandbox": {
+      "inherited": "From QFEP_Edge_Of_Chaos: The sandbox extends the question of control across several objects. First we must establish which objects actually receive each change.",
+      "question": "How do we tell a control that changes a number from one that changes a system?",
+      "ontology": "A control, parameter and response form a causalchain only when the receiving system uses the newvalue. Shared vocabulary and proximity do not establish thatconnection.",
+      "experiment": "Move onehandle at atime, record its own printedvalue/colour, and compare the localfeedback ofLAMBDA with PHI. Keep the otherhandle fixed.",
+      "observe": "LAMBDA reads0–1 and changes itslocalcolour/feedback; PHI reads−1–1 and reverses itslocalparticle direction acrosszero. The nearbyreactor/particlefield are not proven totrack eithercontrol.",
+      "limit": "The intended coupled sandbox has a wiringgap. A correctprinted setting alone cannotdemonstrate a change in a distantartifact or let thisroom certify theformula.",
+      "variation": "Proposed nextbuild: explicitlywire bothcontrols to one scopedreceiver, expose receivedvalues and compare oneparameter at atime. Presentcontrolobservations are a startingpoint, not fulfilment ofthatexperiment.",
+      "handoff": "The synthesis specimen supplies a smaller completed connection: its own two controls alter the mechanics of one body.",
+      "candidate_artifacts": [
+        "lambda_slider",
+        "phi_slider"
+      ],
+      "sources": [
+        "commons/maps/QFEP_Sandbox/final.md",
+        "commons/maps/QFEP_Sandbox/map_data.json",
+        "commons/maps/QFEP_Sandbox/intent.md",
+        "commons/maps/QFEP_Sandbox/tutorial.md",
+        "commons/maps/QFEP_Sandbox/technical.md",
+        "commons/maps/QFEP_Sandbox/critical.md",
+        "commons/interfaces/qfep/lambda_slider.tscn",
+        "commons/interfaces/qfep/lambda_slider.gd",
+        "commons/interfaces/qfep/phi_slider.tscn",
+        "commons/interfaces/qfep/phi_slider.gd",
+        "commons/interfaces/qfep/qfep_reactor.gd",
+        "commons/interfaces/qfep/reactive_particle_field.gd"
+      ],
+      "open_questions": [
+        "The controls and receivers search different groups. Wire one room-scoped receiver, display its actual inputs and repeat one change at a time.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Centralencountergap: wire room-scopedcoupling; do not turnbug into intendedphilosophicalargument. Book should plainly mark intendednext experiment rather than assert success.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "QFEP_Synthesis": {
+      "inherited": "From QFEP_Sandbox: The synthesis specimen supplies a smaller completed connection: its own two controls alter the mechanics of one body.",
+      "question": "Which kind of stability are you asking this body to keep?",
+      "ontology": "The specimen interprets two projectparameters through softbodyproperties: lambdaaffects stiffness/pressure; phiaffects damping/drag. These are authoredmappings between vocabulary andmechanics.",
+      "experiment": "Use the specimen’s own LAMBDA andPHI sliders. Holdone fixed while movingtheother; compare how shape,motion andreadoutrespond.",
+      "observe": "Lambda shifts stiffness andcolour whilephi shifts thedampinganddrag of thespecimen. Namedstates onthelabel are assignedfrom parameterbands.",
+      "limit": "A visiblebodyresponding to mechanics is not an assay ofqueerness or alivingstate. The sameword phi had a differentscale on the firstconsole; consistentmeaning requires naming eachmapping.",
+      "variation": "Existing: combine highstiffness with lowdamping, or lowstiffness with highdamping, instead ofchoosing only namedpresets. Proposed: keep one measurabledeformation trace as acomparison.",
+      "handoff": "Post-crisis begins with representation itself. After learning to name a model’s choices, ask whose distinctions those choices make clear and whose they compress.",
+      "candidate_artifacts": [
+        "queer_morphology_specimen"
+      ],
+      "sources": [
+        "commons/maps/QFEP_Synthesis/final.md",
+        "commons/maps/QFEP_Synthesis/map_data.json",
+        "commons/maps/QFEP_Synthesis/intent.md",
+        "commons/maps/QFEP_Synthesis/tutorial.md",
+        "commons/maps/QFEP_Synthesis/technical.md",
+        "commons/maps/QFEP_Synthesis/critical.md",
+        "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+        "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd"
+      ],
+      "open_questions": [
+        "Check the specimen's quarter-scale controls for legibility and reach before treating the written slider comparison as available to every visitor.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Presetbutton lambda callback takes anargument; signalarity notruntimeverified. Focus prose onsliders. Actualscaledcontrols reach/readabilityneedswalk.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

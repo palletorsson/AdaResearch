@@ -70,6 +70,13 @@ var _field_origins: PackedVector3Array = PackedVector3Array()
 var _field_count: int = 0
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "field_receivers":
+		var room = preload("res://algorithms/vectors/10_vector_field_flow/field_receivers.gd").new()
+		room.name = "FieldReceivers"
+		add_child(room)
+		set_process(false)
+		set_process_input(false)
+		return
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)

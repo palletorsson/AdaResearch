@@ -22,6 +22,8 @@ var trail_mesh2: ImmediateMesh
 @export var time_speed: float = 2.0 # Speed of the "conveyor belt" (Y-axis)
 @export var max_trail_length: int = 400
 @export var trail_size: float = 8.0
+## Optional local drop limit for a mounted exhibit; zero keeps the original trail.
+@export var max_trail_drop: float = 0.0
 
 var time: float = 0.0
 var trail_points1: Array[Vector3] = []
@@ -84,6 +86,9 @@ func _update_trail(ball: Node3D, points: Array[Vector3], mesh: ImmediateMesh, de
 	# Limit trail
 	if points.size() > max_trail_length:
 		points.pop_back()
+	if max_trail_drop > 0.0:
+		while not points.is_empty() and points.back().y < -max_trail_drop:
+			points.pop_back()
 	
 	# Render
 	mesh.clear_surfaces()

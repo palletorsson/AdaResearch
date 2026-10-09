@@ -4,241 +4,65 @@
  "speak_by": "",
  "pearls": [
   {
-   "pearl": "pattern foundry",
-   "map": "Pattern_Foundry",
-   "lines": [
-    {
-     "token": "pattern_machine_d",
-     "text": "a print is a rule pressed into a surface. The matrix is the type, the",
-     "by": "draft",
-     "note": "the press stamps its own carpet but not its own law: the symmetry group is engraved into the forme before a single cell is painted, so the machine prints seventeen universes and cannot ask for an eighteenth.",
-     "note_src": {
-      "file": "commons/artifacts/pattern_machine_d/pattern_machine_d.gd",
-      "quote": "the symmetry group is the forme, and the carpet is the impression"
-     }
-    },
-    {
-     "token": "pattern_machine_b",
-     "text": "a pattern is a program plus a fragment. Hand someone the fragment and the",
-     "by": "draft"
-    },
-    {
-     "token": "pattern_machine_a",
-     "text": "the Jacquard loom was the first programmable machine. The pattern was",
-     "by": "draft"
-    },
-    {
-     "token": "pattern_machine_c",
-     "text": "a wallpaper group is not a label — it is a finite set of mirrors. Feed the mirrors",
-     "by": "draft"
-    }
-   ],
-   "hero": "pattern_machine_d"
-  },
-  {
    "pearl": "context placed",
    "map": "Color_Context_Placed",
    "lines": [
     {
-     "token": "crackpropagation_ca",
-     "text": "A crack does not choose where to go — it reads the stress the material already carries",
-     "by": "draft"
+     "token": "chroma_stack",
+     "text": "Primitives, transformations and arrays give us something to hold and vary as colour becomes the question.",
+     "by": "astra"
     },
     {
-     "token": "csg_architecture_cavity",
-     "text": "Every architectural cavity is a difference. A room is a wall that has been subtracted …",
-     "by": "draft",
-     "note": "a placed colour cannot supply its own neighbour, and the gallery cannot hang the neighbour without also hanging a distortion: mis-place the contrast stack and the swatch reads as another colour, and nothing in the hall reports it.",
-     "note_src": {
-      "file": "commons/maps/Color_Context_Placed/intent.md",
-      "quote": "nothing here means anything by itself"
-     }
-    },
-    {
-     "token": "dna_color_stacks_stack_triadic_primary",
-     "text": "Promoted from /dna color-stacks-gallery entry 'stack_triadic_primary'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_stacks_stack_monochrome_blue",
-     "text": "Promoted from /dna color-stacks-gallery entry 'stack_monochrome_blue'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_stacks_stack_value_steps_warm",
-     "text": "Promoted from /dna color-stacks-gallery entry 'stack_value_steps_warm'",
-     "by": "draft"
-    },
-    {
-     "token": "mill_memphis_p3",
-     "text": "Pattern mill milling a Memphis-palette p3 tiling — 3-fold triangular rotors",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_furniture_furniture_becker_utensilo_bauhaus",
-     "text": "Promoted from /dna color-furniture-gallery entry 'furniture_becker_utensilo_bauhaus'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_furniture_furniture_vignelli_metafora_primary",
-     "text": "Promoted from /dna color-furniture-gallery entry 'furniture_vignelli_metafora_primary'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_stacks_stack_simultaneous_contrast",
-     "text": "Promoted from /dna color-stacks-gallery entry 'stack_simultaneous_contrast'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_stacks_stack_complementary_red_green",
-     "text": "Promoted from /dna color-stacks-gallery entry 'stack_complementary_red_green'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_modern_art_albers_homage_warm",
-     "text": "Promoted from /dna modern-art-gallery entry 'albers_homage_warm'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_furniture_furniture_coco_pendant_warm",
-     "text": "Promoted from /dna color-furniture-gallery entry 'furniture_coco_pendant_warm'",
-     "by": "draft"
-    },
-    {
-     "token": "primitive_assembler",
-     "text": "assemblage is a verb. A stack is not an object you find — it is an",
-     "by": "draft"
-    },
-    {
-     "token": "primitive_combo_puzzle",
-     "text": "you cannot button your way to a tower. Composition you have to balance",
-     "by": "draft"
-    },
-    {
-     "token": "loom_drum_bauhaus_p4m",
-     "text": "Rotary print-drum press feeding a Bauhaus p4m carpet",
-     "by": "draft"
-    },
-    {
-     "token": "dna_color_furniture_furniture_lamp_warm_glow",
-     "text": "Promoted from /dna color-furniture-gallery entry 'furniture_lamp_warm_glow'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_modern_art_kandinsky_bauhaus_triad",
-     "text": "Promoted from /dna modern-art-gallery entry 'kandinsky_bauhaus_triad'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_modern_art_rothko_chromatic_field",
-     "text": "Promoted from /dna modern-art-gallery entry 'rothko_chromatic_field'",
-     "by": "draft"
-    },
-    {
-     "token": "dna_primitive_stack_ps01_bauhaus_totem_green",
-     "text": "Promoted from /dna primitive-stack-gallery entry 'ps01_bauhaus_totem_green'",
-     "by": "draft"
-    },
-    {
-     "token": "loom_fountain_pastel_p4",
-     "text": "Radial fountain spinning out a round pastel p4 rug",
-     "by": "draft"
-    },
-    {
-     "token": "dress_selector",
-     "text": "The outfit is not decoration — it is the last parameter of a body that was never given",
-     "by": "draft"
-    },
-    {
-     "token": "dna_modern_art_mondrian_de_stijl",
-     "text": "Promoted from /dna modern-art-gallery entry 'mondrian_de_stijl'",
-     "by": "draft"
-    },
-    {
-     "token": "constraint_sculptor",
-     "text": "Sculpt within randomized constraints",
-     "by": "draft"
+     "token": "color_dna_stack",
+     "text": "A repeated palette meets art, memory and the body: precise construction leaves associations open.",
+     "by": "astra"
     }
    ],
-   "hero": "csg_architecture_cavity"
+   "hero": "chroma_stack"
+  },
+  {
+   "pearl": "flashlight",
+   "map": "Color_Flashlight",
+   "lines": [
+    {
+     "token": "flashlight_demo",
+     "text": "flashlight demo",
+     "by": "astra"
+    }
+   ],
+   "drop": true,
+   "edge": "the beam can only say what the surface lets it, and the room ships a white board that returns every wavelength offered — so the demo's lesson, red light on blue reads black, is the one thing it cannot show.",
+   "edge_src": {
+    "file": "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+    "quote": "a white surface returns every wavelength it is offered, so nothing this artifact says can ever be false on it"
+   },
+   "hero": "flashlight_demo"
   },
   {
    "pearl": "nails",
    "map": "Color_Nails",
    "lines": [
     {
-     "token": "colorballs",
-     "text": "a color only becomes real when it has mass — palette theory means nothing until you can throw …",
-     "by": "draft"
-    },
-    {
-     "token": "hand_model",
-     "text": "Static hand-model reference for VR scale and positioning",
-     "by": "draft"
-    },
-    {
-     "token": "brick_wall_factory",
-     "text": "a brick wall is a color sequence made solid — the mortar is the silence between notes",
-     "by": "draft",
-     "note": "a brick wall is a colour sequence made solid, but the factory does not choose the sequence — it reads one of twenty named palettes, so the room that sells colour as self-authorship hands you a vocabulary already written.",
-     "note_src": {
-      "file": "algorithms/color/brick_wall_factory/brick_wall_factory.gd",
-      "quote": "critical_parameter: palette — selects from 20 named palettes"
-     }
-    },
-    {
      "token": "nail_color_controller",
-     "text": "choosing your nail color is the first act of digital self-authorship",
-     "by": "draft"
+     "text": "nail color controller",
+     "by": "astra"
     },
     {
      "token": "hand_color_controller",
-     "text": "Uses a 3D value mapper to live-adjust VR hand nail materials with a preview cube",
-     "by": "draft"
+     "text": "hand color controller",
+     "by": "astra"
     }
    ],
-   "hero": "brick_wall_factory"
-  },
-  {
-   "pearl": "grid pallet",
-   "map": "Color_Grid_Pallet",
-   "lines": [
-    {
-     "token": "gridcolorizer",
-     "text": "the name moved, the behaviour didn't",
-     "by": "draft"
-    },
-    {
-     "token": "spectrum_forest",
-     "text": "the spectrum is continuous but we discretize it into lines",
-     "by": "draft",
-     "note": "the forest is a spectrum only while its gaps stay too fine to see: continuity is rented from line_count, and lowering the density does not blur the colour, it shows there was never anything between the lines.",
-     "note_src": {
-      "file": "algorithms/color/spectrumforest/spectrum_forest.gd",
-      "quote": "the spectrum is continuous but we discretize it into lines — the gaps between lines are the same lie as RGB"
-     }
-    }
-   ],
-   "hero": "spectrum_forest"
+   "hero": "nail_color_controller"
   },
   {
    "pearl": "rainbow",
    "map": "Color_Rainbow",
    "lines": [
     {
-     "token": "mario_cube",
-     "text": "joy is not the presence of color — it is the moment darkness becomes color",
-     "by": "draft"
-    },
-    {
      "token": "rainbow",
-     "text": "a rainbow has no location — it exists only in the geometry between sun, water, and eye",
-     "by": "draft",
-     "note": "a rainbow has no location, but a map must place it — the arc is a mesh at a fixed radius, so the corridor can show a rainbow only by making it what a rainbow is not: a thing standing somewhere.",
-     "note_src": {
-      "file": "algorithms/primitives/rainbow/rainbow.gd",
-      "quote": "a rainbow has no location — it exists only in the geometry between sun, water, and eye"
-     }
+     "text": "rainbow",
+     "by": "astra"
     }
    ],
    "hero": "rainbow"
@@ -248,126 +72,86 @@
    "map": "Color_Pillar",
    "lines": [
     {
-     "token": "visual_color_mixing",
-     "text": "additive and subtractive are not two facts about colour. They are two claims about",
-     "by": "draft"
-    },
-    {
-     "token": "grab_rainbow_stick",
-     "text": "grab_rainbow_stick",
-     "by": "draft"
-    },
-    {
-     "token": "loom_drum_persian_p6",
-     "text": "Rotary print-drum press feeding a Persian p6 carpet",
-     "by": "draft"
-    },
-    {
      "token": "pillarcolorcollection",
-     "text": "a column of color has gravity that a flat swatch does not",
-     "by": "draft"
+     "text": "pillarcolorcollection",
+     "by": "astra"
     },
     {
      "token": "color_sets_overview",
-     "text": "naming a color does not capture it — but it makes the gap between name and experience …",
-     "by": "draft",
-     "note": "to be carried a colour must be named, and the rig can only name the nearest one — every sticker you pick up is labelled with a web colour it is not, so portability is paid for in a rounding.",
-     "note_src": {
-      "file": "algorithms/color/grabcolor/color_sets_overview.gd",
-      "quote": "closest_web_color_name bridges digital hex to human language"
-     }
-    },
-    {
-     "token": "SpectrumVisualizer",
-     "text": "the color wheel is a lie the brain tells to make the spectrum feel complete",
-     "by": "draft"
+     "text": "color sets overview",
+     "by": "astra"
     }
    ],
-   "hero": "color_sets_overview"
+   "hero": "pillarcolorcollection"
   },
   {
-   "pearl": "color",
-   "map": "Chamber_Color",
-   "lines": [],
-   "drop": true,
-   "edge": "the chamber promises colour as a thing you build with, but the bracelet it hands you is shared infrastructure and places blocks in the default catalyst material — the chapter's verb arrives untinted, which is why the room is dropped.",
-   "edge_src": {
-    "file": "commons/maps/Chamber_Color/intent.md",
-    "quote": "chamber needs sequence-specific color tinting in the bracelet's placed blocks — currently uses default catalyst material"
-   }
+   "pearl": "grid pallet",
+   "map": "Color_Grid_Pallet",
+   "lines": [
+    {
+     "token": "gridcolorizer",
+     "text": "gridcolorizer",
+     "by": "astra"
+    }
+   ],
+   "hero": "gridcolorizer"
   },
   {
    "pearl": "paint",
    "map": "Color_Paint",
    "lines": [
     {
-     "token": "pattern_mill",
-     "text": "the fold order is not a setting on this machine. Cycle the group and the mirror rotors are rebuilt to match it, so the symmetry can be counted in the hardware before it appears in the cloth",
-     "by": "draft",
-     "note": "where two splats land on each other the room must decide whether paint is pigment or light — an action-painting studio running on a display inherits a mixing rule from neither, and ships one nobody in the room can check.",
-     "note_src": {
-      "file": "commons/maps/Color_Paint/critical.md",
-      "quote": "It simulates paint (physical, subtractive) using digital systems (light-emitting, additive)."
-     }
+     "token": "ball_painting_demo",
+     "text": "ball painting demo",
+     "by": "astra"
     },
     {
      "token": "albers_wall_gallery",
-     "text": "a square inside a square is not decoration — it is an experiment in how context changes the perception of every color it …",
-     "by": "draft"
-    },
-    {
-     "token": "ball_painting_demo",
-     "text": "ball_painting_demo",
-     "by": "draft"
+     "text": "albers wall gallery",
+     "by": "astra"
     }
    ],
-   "hero": "pattern_mill"
+   "hero": "ball_painting_demo"
   },
   {
    "pearl": "walls",
    "map": "Color_Walls",
    "lines": [
     {
-     "token": "rainbow_hallway"
+     "token": "color_constellation_office",
+     "text": "color constellation office",
+     "by": "astra"
     },
     {
      "token": "color_space_navigator",
-     "text": "a color is a position — color_space_navigator proves this by placing every achievable hue at its exact coordinate in a cube you can …",
-     "by": "draft",
-     "note": "colour becomes a place you can walk only if it has walls: the cube holds every hue three channels can reach and has no coordinate for the rest, so what the gamut clipped cannot even be pointed at from inside.",
-     "note_src": {
-      "file": "commons/artifacts/color_space_navigator/color_space_navigator.gd",
-      "quote": "placing every achievable hue at its exact coordinate in a cube you can inhabit"
-     }
-    },
-    {
-     "token": "color_constellation_office",
-     "text": "color mixing is not a formula — it is what happens when light from different sources arrives at the same place at the same …",
-     "by": "draft"
-    },
-    {
-     "token": "subpixel_display",
-     "text": "Every pixel on every screen is three tiny lights pretending to be one color",
-     "by": "draft"
+     "text": "color space navigator",
+     "by": "astra"
     },
     {
      "token": "gradient_interpolator",
-     "text": "Interpolation is not neutral — the space you choose shapes every color you pass through",
-     "by": "draft"
+     "text": "gradient interpolator",
+     "by": "astra"
     }
    ],
-   "hero": "color_space_navigator"
+   "hero": "color_constellation_office"
   },
   {
-   "pearl": "flashlight",
-   "map": "Color_Flashlight",
-   "lines": [],
+   "pearl": "color",
+   "map": "Chamber_Color",
+   "lines": [
+    {
+     "token": "becoming_catalyst",
+     "text": "becoming catalyst",
+     "by": "astra"
+    }
+   ],
    "drop": true,
-   "edge": "the beam can only say what the surface lets it, and the room ships a white board that returns every wavelength offered — so the demo's lesson, red light on blue reads black, is the one thing it cannot show.",
+   "edge": "the chamber promises colour as a thing you build with, but the bracelet it hands you is shared infrastructure and places blocks in the default catalyst material — the chapter's verb arrives untinted, which is why the room is dropped.",
    "edge_src": {
-    "file": "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
-    "quote": "a white surface returns every wavelength it is offered, so nothing this artifact says can ever be false on it"
-   }
+    "file": "commons/maps/Chamber_Color/intent.md",
+    "quote": "chamber needs sequence-specific color tinting in the bracelet's placed blocks — currently uses default catalyst material"
+   },
+   "hero": "becoming_catalyst"
   }
  ]
 }

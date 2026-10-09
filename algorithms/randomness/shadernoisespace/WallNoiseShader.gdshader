@@ -128,7 +128,7 @@ float cloud_noise(vec2 pos, float t) {
     // Multiple octaves for cloud-like appearance. The bound is a uniform now: each term is
     // half the amplitude and twice the frequency of the one before it, so the first carries
     // 0.5 of the weight, the first two 0.75, the first four 0.9375 and all six 0.984375 —
-    // which is why a one-layer patch is darker than a six-layer one and NOT otherwise different.
+    // the actual brightness also depends on sampled values and the display encoding.
     for (int i = 0; i < layers; i++) {
         vec2 animated_pos = pos * frequency;
         animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
@@ -165,74 +165,68 @@ void vertex() {
 
 void fragment() {
     vec2 uv = world_uv;
-
-    // Create flowing cloud patterns
-    float cloud_base = cloud_noise(uv * cloud_scale, time * time_scale);
-    float cloud_detail = turbulence(uv * cloud_scale * 2.0, time * time_scale * 0.7);
-
-    // Combine noise patterns for realistic clouds
-    float cloud_pattern = (cloud_base + cloud_detail * 0.4) * cloud_density;
-    cloud_pattern = smoothstep(0.2, 0.8, cloud_pattern);
-
-    // Create corner darkening effect
-    vec2 corner_dist = abs(uv - 0.5) * 2.0; // Distance from center
-    float corner_factor = max(corner_dist.x, corner_dist.y);
-    corner_factor = pow(corner_factor, 1.5); // Sharper falloff
-    float darkness = mix(1.0, corner_darkness, corner_factor);
-
-    // Generate pink cloud colors with variation
-    vec3 cloud_color = mix(base_pink.rgb, deep_pink.rgb, cloud_pattern);
-
-    // Add subtle color shifting over time
-    float color_shift = sin(time * 0.3 + uv.x * 2.0 + uv.y * 3.0) * 0.1;
-    cloud_color.r += color_shift;
-    cloud_color.b -= color_shift * 0.5;
-
-    // Apply pink intensity
-    cloud_color *= pink_intensity;
-
-    // Apply corner darkening
-    cloud_color = mix(dark_corner.rgb, cloud_color, darkness);
-
-    // Add subtle edge highlighting
-    float edge_highlight = 1.0 - smoothstep(0.4, 0.6, cloud_pattern);
-    cloud_color += edge_highlight * 0.2 * vec3(1.0, 0.8, 0.9);
-
-    // Final cloud density modulation
-    float final_pattern = smoothstep(0.1, 0.9, cloud_pattern);
-    vec3 final_color = mix(cloud_color * 0.3, cloud_color, final_pattern);
-
-    // Add atmospheric depth
-    float atmospheric = 1.0 - cloud_pattern * 0.2;
-    final_color *= atmospheric;
-
-    ALBEDO = final_color;
-    EMISSION = final_color * 0.1 * pink_intensity;
-    METALLIC = 0.0;
-    ROUGHNESS = 0.7 + cloud_pattern * 0.3;
-
-    // Add subtle normal mapping effect for depth
-    vec2 normal_offset = vec2(
-        cloud_noise(uv * cloud_scale + vec2(0.01, 0.0), time * time_scale) -
-        cloud_noise(uv * cloud_scale - vec2(0.01, 0.0), time * time_scale),
-        cloud_noise(uv * cloud_scale + vec2(0.0, 0.01), time * time_scale) -
-        cloud_noise(uv * cloud_scale - vec2(0.0, 0.01), time * time_scale)
-    ) * 0.1;
-
-    NORMAL_MAP = vec3(normal_offset, 1.0);
-
-    // THE SUM ALONE. Astra's card asks that one layer and six differ only by declared
-    // contributions, so the comparison surface shows the accumulation and nothing else:
-    // no turbulence, no colour, no corner darkening.
     if (show_term == 1) {
-        // The sum, shown as LIGHT rather than as a lit surface: a comparison patch in a dark
-        // interior photographs black otherwise. `term_gain` is the same on every patch, so
-        // the relative difference between one layer and six is untouched — and the plate
-        // says what the gain is, because a display gain nobody declares is a lie about a
-        // measurement.
+        // The comparison skips the finish's extra field evaluations and lighting.
         float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
-        ALBEDO = vec3(bare);
-        EMISSION = vec3(bare) * 0.9;
-        ALPHA = 1.0;
+        ALBEDO = vec3(0.0);
+        EMISSION = vec3(bare);
+        SPECULAR = 0.0;
+        ROUGHNESS = 1.0;
+        NORMAL_MAP = vec3(0.5, 0.5, 1.0);
+    } else {
+        // Create flowing cloud patterns
+        float cloud_base = cloud_noise(uv * cloud_scale, time * time_scale);
+        float cloud_detail = turbulence(uv * cloud_scale * 2.0, time * time_scale * 0.7);
+
+        // Combine noise patterns for realistic clouds
+        float cloud_pattern = (cloud_base + cloud_detail * 0.4) * cloud_density;
+        cloud_pattern = smoothstep(0.2, 0.8, cloud_pattern);
+
+        // Create corner darkening effect
+        vec2 corner_dist = abs(uv - 0.5) * 2.0; // Distance from center
+        float corner_factor = max(corner_dist.x, corner_dist.y);
+        corner_factor = pow(corner_factor, 1.5); // Sharper falloff
+        float darkness = mix(1.0, corner_darkness, corner_factor);
+
+        // Generate pink cloud colors with variation
+        vec3 cloud_color = mix(base_pink.rgb, deep_pink.rgb, cloud_pattern);
+
+        // Add subtle color shifting over time
+        float color_shift = sin(time * 0.3 + uv.x * 2.0 + uv.y * 3.0) * 0.1;
+        cloud_color.r += color_shift;
+        cloud_color.b -= color_shift * 0.5;
+
+        // Apply pink intensity
+        cloud_color *= pink_intensity;
+
+        // Apply corner darkening
+        cloud_color = mix(dark_corner.rgb, cloud_color, darkness);
+
+        // Add subtle edge highlighting
+        float edge_highlight = 1.0 - smoothstep(0.4, 0.6, cloud_pattern);
+        cloud_color += edge_highlight * 0.2 * vec3(1.0, 0.8, 0.9);
+
+        // Final cloud density modulation
+        float final_pattern = smoothstep(0.1, 0.9, cloud_pattern);
+        vec3 final_color = mix(cloud_color * 0.3, cloud_color, final_pattern);
+
+        // Add atmospheric depth
+        float atmospheric = 1.0 - cloud_pattern * 0.2;
+        final_color *= atmospheric;
+
+        ALBEDO = final_color;
+        EMISSION = final_color * 0.1 * pink_intensity;
+        METALLIC = 0.0;
+        ROUGHNESS = 0.7 + cloud_pattern * 0.3;
+
+        // Add subtle normal mapping effect for depth
+        vec2 normal_offset = vec2(
+            cloud_noise(uv * cloud_scale + vec2(0.01, 0.0), time * time_scale) -
+            cloud_noise(uv * cloud_scale - vec2(0.01, 0.0), time * time_scale),
+            cloud_noise(uv * cloud_scale + vec2(0.0, 0.01), time * time_scale) -
+            cloud_noise(uv * cloud_scale - vec2(0.0, 0.01), time * time_scale)
+        ) * 0.1;
+
+        NORMAL_MAP = vec3(normal_offset * 0.5 + 0.5, 1.0);
     }
 }

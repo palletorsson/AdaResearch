@@ -62,6 +62,7 @@ var _title_label: Label3D
 var _left_controller: Node3D
 var _right_controller: Node3D
 var _carpet_material: StandardMaterial3D
+var symmetry_lesson: Node3D
 
 
 func _ready() -> void:
@@ -292,6 +293,7 @@ func _find_node_recursive(node: Node, name_contains: String) -> Node:
 # --- VR Button Handling ---
 
 func _on_button_pressed(button: String, controller_name: String) -> void:
+	if symmetry_lesson: return
 	if _puzzle and _puzzle.has_method("handle_vr_button"):
 		_puzzle.handle_vr_button(button, controller_name)
 	# Always refresh after button press (symmetry_mode has no signal)
@@ -318,6 +320,7 @@ func _on_group_changed(_group: int) -> void:
 # --- Desktop Keyboard Fallback ---
 
 func _unhandled_input(event: InputEvent) -> void:
+	if symmetry_lesson: return
 	if not _puzzle:
 		return
 	if event is InputEventKey and event.pressed:
@@ -399,6 +402,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# Refresh
 	_update_carpet_texture()
 	_update_mode_label()
+	if config_data.get("lesson", "") == "symmetry_compare" and symmetry_lesson == null:
+		symmetry_lesson = load("res://commons/primitives/arrays/symmetry_compare_lesson.gd").new()
+		symmetry_lesson.name = "SymmetryCompareLesson"
+		add_child(symmetry_lesson)
 
 
 # ═══════════════════════════════════════════════════════════════════

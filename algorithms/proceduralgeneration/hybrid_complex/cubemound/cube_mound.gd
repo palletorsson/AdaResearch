@@ -69,9 +69,15 @@ var state: String = "idle"  # idle, dropping, settling, generating, done
 var timer: float = 0.0
 var generated_mesh: MeshInstance3D = null
 
-@onready var ground = $Ground
+# Support belongs to the containing scene (the museum supplies it in the lesson).
 
 func _ready() -> void:
+	if has_meta("config_lesson"):
+		generate_on_start = false
+		num_cubes = 12
+		spawn_height = 4.0
+		spawn_radius = 2.0
+		voxel_size = 0.5
 	if generate_on_start:
 		start_generation()
 
@@ -205,7 +211,7 @@ func generate_mesh_from_cubes() -> void:
 	for cube in cubes:
 		if cube is RigidBody3D:
 			# Store global position for accurate positioning
-			positions.append(cube.global_position)
+			positions.append(to_local(cube.global_position))
 	
 	if positions.is_empty():
 		print("No cubes to generate mesh from!")
@@ -386,6 +392,10 @@ func clear_cubes() -> void:
 	cubes.clear()
 
 func clear_generated_mesh() -> void:
+	for child in get_children():
+		if child.name.begins_with("MoundCollider"):
+			remove_child(child)
+			child.queue_free()
 	if generated_mesh and is_instance_valid(generated_mesh):
 		generated_mesh.queue_free()
 	generated_mesh = null

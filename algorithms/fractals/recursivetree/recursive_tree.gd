@@ -1,19 +1,8 @@
 extends Node3D
 
-# Beautiful 3D Recursive Tree
-# Grows upward in Y with natural branching patterns
-# Features: randomized angles, tapering branches, natural colors, and smooth growth animation
-
-# @identity
-# essence: branch(pos, dir, len, depth) = cylinder(tapered) + branch_count * branch(end, rotated_dir, len * 0.7, depth+1)
-# desire: To grow before your eyes — trunk first, then branches unfurl in real-time, leaf clusters blooming at the tips
-# critical_parameter: randomness_amount (0.15) — the variance injected into every angle and length, making each tree unique
-# triggers: growth_interval tick → pop next branch from queue → create tapered cylinder → enqueue children
-# emerges: Natural-looking asymmetry from uniform random perturbation — no two trees are alike, yet all are recognizably trees
-# needs: VR growth speed slider [missing], prune-by-grab [missing]
-# relationships: Deterministic sibling to fractal_stochastic_tree; feeds into inverted_tree_cloud (same algorithm, flipped)
-# truth: A tree is not designed — it is a recursive function that ran until it ran out of energy.
-
+## A queue evaluates a recursive branching rule one tip at a time.
+## Angles are degrees, lengths are metres. Growth is prescribed, not biological.
+## A local RNG and reset preserve replay without reseeding neighbouring works.
 # Tree settings
 @export var growth_interval: float = 0.3  # Time between growth steps
 @export var max_depth: int = 10  # Maximum recursion depth
@@ -30,6 +19,14 @@ extends Node3D
 @export var randomness_amount: float = 0.15  # How much random variation (0-1)
 
 # Internal state
+const MAX_SEGMENTS := 512
+var generated: Node3D
+var rng := RandomNumberGenerator.new()
+var seed_value := 31415
+var segment_count := 0
+var leaf_count := 0
+var lesson_enabled := false
+var geometry_revision := 0
 var current_depth: int = 0
 var growth_timer: float = 0.0
 var is_growing: bool = false
@@ -40,6 +37,10 @@ var bark_material: StandardMaterial3D
 var leaf_material: StandardMaterial3D
 
 func _ready() -> void:
+	rng.seed = seed_value
+	generated = Node3D.new()
+	generated.name = "GeneratedTree"
+	add_child(generated)
 	print("RecursiveTree: Ready")
 	print("RecursiveTree: Will grow to depth %d with %d branches per node" % [max_depth, branch_count])
 
@@ -81,7 +82,7 @@ func create_materials() -> void:
 	leaf_material.metallic = 0.0
 	leaf_material.emission_enabled = true
 	leaf_material.emission = Color(0.1, 0.3, 0.05)
-	leaf_material.emission_energy = 0.3
+	leaf_material.emission_energy_multiplier = 0.3
 
 # Create the initial trunk
 func create_trunk() -> void:
@@ -101,8 +102,8 @@ func create_trunk() -> void:
 	branches_to_grow.append({
 		"position": end_position,
 		"direction": Vector3.UP,
-		"length": initial_branch_length * length_reduction,
-		"thickness": initial_branch_thickness * thickness_reduction,
+		"length": initial_branch_length,
+		"thickness": initial_branch_thickness,
 		"depth": 1,
 		"parent_node": trunk
 	})
@@ -125,7 +126,7 @@ func perform_growth_step() -> void:
 		print("RecursiveTree: Growing depth %d" % current_depth)
 
 	# Check if we've reached max depth
-	if branch_data.depth >= max_depth:
+	if branch_data.depth > max_depth:
 		# Add a leaf cluster instead of more branches
 		add_leaf_cluster(branch_data)
 		return
@@ -136,6 +137,7 @@ func perform_growth_step() -> void:
 
 # Create a branching node with multiple branches
 func create_branching_node(parent_data: Dictionary, branch_index: int) -> void:
+	if segment_count >= MAX_SEGMENTS: return
 	var depth = parent_data.depth
 	var parent_pos = parent_data.position
 	var parent_dir = parent_data.direction
@@ -143,16 +145,16 @@ func create_branching_node(parent_data: Dictionary, branch_index: int) -> void:
 
 	# Calculate branch angle
 	var angle_range = branch_angle_max - branch_angle_min
-	var base_angle = branch_angle_min + randf() * angle_range if add_randomness else (branch_angle_min + branch_angle_max) * 0.5
+	var base_angle = branch_angle_min + rng.randf() * angle_range if add_randomness else (branch_angle_min + branch_angle_max) * 0.5
 
 	# Add randomness to angle
 	if add_randomness:
-		base_angle += (randf() - 0.5) * randomness_amount * 30.0
+		base_angle += (rng.randf() - 0.5) * randomness_amount * 30.0
 
 	# Calculate rotation around parent direction (Y-axis when going up)
 	var rotation_offset = (rotation_variation / branch_count) * branch_index
 	if add_randomness:
-		rotation_offset += (randf() - 0.5) * randomness_amount * 60.0
+		rotation_offset += (rng.randf() - 0.5) * randomness_amount * 60.0
 
 	# Create rotation basis
 	# First, rotate around the parent direction (twist)
@@ -176,7 +178,7 @@ func create_branching_node(parent_data: Dictionary, branch_index: int) -> void:
 
 	# Add slight randomness to length
 	if add_randomness:
-		new_length *= 1.0 + (randf() - 0.5) * randomness_amount
+		new_length *= 1.0 + (rng.randf() - 0.5) * randomness_amount
 
 	# Create branch
 	var branch_data = {
@@ -213,23 +215,21 @@ func create_branch(data: Dictionary) -> Node3D:
 
 	# Apply bark material with depth-based color variation
 	var branch_material = bark_material.duplicate()
-	var depth_factor = float(data.depth) / max_depth
+	var depth_factor = float(data.depth) / maxi(1, max_depth)
 	branch_material.albedo_color = bark_material.albedo_color.lightened(depth_factor * 0.2)
 	mesh_instance.material_override = branch_material
 
 	# Orient the cylinder along the branch direction
 	# Cylinder is created along Y-axis, need to rotate to match direction
-	var up = Vector3.UP
-	var rotation_axis = up.cross(data.direction)
-	if rotation_axis.length() > 0.001:
-		var angle = acos(up.dot(data.direction))
-		mesh_instance.rotate(rotation_axis.normalized(), angle)
+	mesh_instance.basis = Basis(Quaternion(Vector3.UP, data.direction.normalized()))
 
-	# Offset mesh so it grows from base
-	mesh_instance.position = data.direction * (data.length * 0.5)
+	# The mesh vertices already run from y=0 to y=length. No half-length offset.
+	# Endpoints are tree-local, so segments share one transform space.
+	branch_node.set_meta("branch_data", data.duplicate())
+	segment_count += 1
 
 	branch_node.add_child(mesh_instance)
-	data.parent_node.add_child(branch_node)
+	generated.add_child(branch_node)
 
 	return branch_node
 
@@ -302,7 +302,8 @@ func add_leaf_cluster(data: Dictionary) -> void:
 	mesh_instance.material_override = leaf_material
 
 	leaf_node.add_child(mesh_instance)
-	data.parent_node.add_child(leaf_node)
+	generated.add_child(leaf_node)
+	leaf_count += 1
 
 # Manual control functions
 func start_growth() -> void:
@@ -315,9 +316,13 @@ func stop_growth() -> void:
 	print("RecursiveTree: Stopped manually")
 
 func reset() -> void:
-	# Clear all children
-	for child in get_children():
-		child.queue_free()
+	# Keep the scene and its lesson desk. Replace generated geometry only.
+	for child in generated.get_children():
+		generated.remove_child(child)
+		child.free()
+	rng.seed = seed_value
+	segment_count = 0
+	leaf_count = 0
 
 	current_depth = 0
 	growth_timer = 0.0
@@ -339,4 +344,56 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("lesson", "false")).to_lower() == "true":
+		lesson_enabled = true
+		auto_start = false
+		is_growing = false
+		_install_lesson.call_deferred()
+
+func _install_lesson() -> void:
+	if has_node("TreeLesson"): return
+	var fixture = load("res://commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd").new()
+	fixture.name = "TreeLesson"
+	add_child(fixture)
+
+func grow_generation() -> void:
+	# A whole breadth-first generation, without advancing the museum clock.
+	if branches_to_grow.is_empty(): return
+	var level: int = int(branches_to_grow[0].depth)
+	while not branches_to_grow.is_empty() and int(branches_to_grow[0].depth) == level:
+		perform_growth_step()
+
+func rebuild_to(level: int) -> void:
+	reset()
+	for i in range(clampi(level, 0, max_depth)):
+		grow_generation()
+
+func steer_branch(branch: Node3D, direction: Vector3) -> bool:
+	# Rotate one existing subtree about its attachment. Lengths, count and its
+	# sibling are unchanged; pending tips travel with their parents as well.
+	if not is_instance_valid(branch) or branch.get_parent() != generated: return false
+	if not branch.has_meta("branch_data") or not direction.is_finite() or direction.length() < 0.001: return false
+	var selected: Dictionary = branch.get_meta("branch_data")
+	var next := direction.normalized()
+	if selected.direction.is_equal_approx(next): return false
+	var turn := Basis(Quaternion(selected.direction, next))
+	var pivot: Vector3 = selected.position
+	var affected: Array[Node] = [branch]
+	# Generated children are in parent-before-child order, even though their
+	# transforms share the tree-local coordinate system.
+	for node in generated.get_children():
+		if not node.has_meta("branch_data"): continue
+		var data: Dictionary = node.get_meta("branch_data")
+		if node != branch and data.parent_node not in affected: continue
+		if node != branch: affected.append(node)
+		data.position = pivot + turn * (data.position - pivot)
+		data.direction = (turn * data.direction).normalized()
+		node.position = data.position
+		node.get_child(0).basis = Basis(Quaternion(Vector3.UP, data.direction))
+		node.set_meta("branch_data", data)
+	for tip in branches_to_grow:
+		if tip.parent_node not in affected: continue
+		tip.position = pivot + turn * (tip.position - pivot)
+		tip.direction = (turn * tip.direction).normalized()
+	geometry_revision += 1
+	return true

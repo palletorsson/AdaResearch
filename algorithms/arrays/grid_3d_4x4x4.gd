@@ -13,8 +13,13 @@ extends Node3D
 # 4x4x4 3D grid of cubes arranged in X, Y, and Z directions
 # Each cube is spaced 1 units apart
 
+var _pending_config: Dictionary = {}
+
 func _ready() -> void:
 	create_grid_3d()
+	if not _pending_config.is_empty():
+		apply_grid_config.call_deferred(_pending_config.duplicate(true))
+		_pending_config.clear()
 
 func create_grid_3d() -> void:
 	# Load the pickup cube scene
@@ -54,6 +59,10 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	# Configuration can arrive before tree entry and before _ready builds defaults.
+	if not is_node_ready():
+		_pending_config.merge(config, true)
+		return
 	if config.is_empty():
 		return
 	var size_x = int(config["size_x"]) if config.has("size_x") else 4
@@ -63,17 +72,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	var label_size = int(config["label_size"]) if config.has("label_size") else 28
 	var label_color = Color.from_string(config["label_color"], Color.WHITE) if config.has("label_color") else Color.WHITE
 
-	# Rebuild
+	# Detach synchronously: overlapping deferred configurations must not build
+	# two lattices while both wait for the same frame.
 	for child in get_children():
 		if not child.owner:
+			remove_child(child)
 			child.queue_free()
-	# The config can arrive while this node is OUT of the tree: the grid defers
-	# apply_grid_config, and composers (curation_station) configure what they build.
-	# get_tree() is null there. Wait for a tree; a node never added never resumes.
-	if not is_inside_tree():
-		await tree_entered
-	await get_tree().process_frame
-
 	var pickup_cube_scene = preload("res://commons/scenes/mapobjects/pick_up_cube.tscn")
 	for x in range(size_x):
 		for y in range(size_y):
@@ -95,3 +99,8 @@ func apply_grid_config(config: Dictionary) -> void:
 				cube_instance.add_child(label)
 
 				add_child(cube_instance)
+
+	if config.get("lesson", "") == "layer_pattern":
+		var lesson = load("res://algorithms/arrays/layer_pattern_lesson.gd").new()
+		lesson.name = "LayerPatternLesson"
+		add_child(lesson)

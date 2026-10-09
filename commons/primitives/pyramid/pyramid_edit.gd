@@ -45,6 +45,8 @@ const HANDLE_ORDER := [
 ## stays on the centre axis. apex_only = base frozen. base_only = apex frozen.
 @export_enum("free", "symmetric", "apex_only", "base_only") var constraint: String = "free"
 
+@export var workbench: bool = false
+
 var base_color: Color = Color(1.0, 0.8, 0.2)
 var pyramid_height: float = 0.8
 var base_size: float = 0.6
@@ -53,10 +55,12 @@ var mesh_instance: MeshInstance3D
 var handle_nodes: Dictionary = {}
 var last_handle_positions: Dictionary = {}
 var _home_positions: Dictionary = {}
+var _workbench_saved: Dictionary = {}
 
 func _ready():
 	_create_handles()
 	_rebuild_pyramid()
+	_setup_workbench()
 	set_process(true)
 
 func _process(_delta: float) -> void:
@@ -287,6 +291,9 @@ func _restore_home(hname: String) -> void:
 ## handles already exist (i.e. _ready has built once) — an unguarded rebuild here
 ## breaks shipped placements.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("workbench"):
+		workbench = str(config_data["workbench"]).to_lower() in ["1", "true"]
+		if is_node_ready(): _setup_workbench()
 	if not config_data.has("constraint"):
 		return
 	var wanted: String = str(config_data["constraint"])
@@ -302,3 +309,49 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func _sync_handle_positions() -> void:
 	for name in handle_nodes.keys():
 		last_handle_positions[name] = handle_nodes[name].position
+
+## Recover the authored vertex positions without snatching a held handle.
+func any_handle_held() -> bool:
+	for handle in handle_nodes.values():
+		if handle.is_picked_up(): return true
+	return false
+
+func reset_shape() -> bool:
+	if any_handle_held(): return false
+	for key in HANDLE_ORDER:
+		var handle: RigidBody3D = handle_nodes[key]
+		handle.position = _home_positions[key]
+		handle.linear_velocity = Vector3.ZERO
+		handle.angular_velocity = Vector3.ZERO
+	_rebuild_pyramid()
+	return true
+
+func _setup_workbench() -> void:
+	if not workbench:
+		var previous := get_node_or_null("RecoveryPanel")
+		if previous:
+			remove_child(previous)
+			previous.queue_free()
+		for key in _workbench_saved:
+			var handle: Node3D = handle_nodes[key]
+			handle.get_node("MeshInstance3D/Sphere").set_radius(_workbench_saved[key].radius)
+			handle.get_node("MeshInstance3D").material_override = _workbench_saved[key].material
+		_workbench_saved.clear()
+		return
+	if has_node("RecoveryPanel"): return
+	for key in HANDLE_ORDER:
+		var handle: Node3D = handle_nodes[key]
+		_workbench_saved[key] = {"radius":handle.get_node("MeshInstance3D/Sphere").radius, "material":handle.get_node("MeshInstance3D").material_override}
+		# Enlarge the visible grip inside its existing 4.55 cm grab collider.
+		handle.get_node("MeshInstance3D/Sphere").set_radius(.028)
+		var material := StandardMaterial3D.new()
+		material.albedo_color = Color(1,.72,.25) if key == "apex" else Color(.3,.85,.95)
+		material.emission_enabled = true
+		material.emission = material.albedo_color
+		material.emission_energy_multiplier = .18
+		handle.get_node("MeshInstance3D").material_override = material
+	var panel := preload("res://commons/ui/vertex_recovery_panel.gd").new()
+	panel.name = "RecoveryPanel"
+	panel.position = Vector3(.55,.36,.34)
+	panel.rotation_degrees.x = -30
+	add_child(panel)

@@ -29,7 +29,7 @@ const TRACK_COLOR := Color(0.05, 0.05, 0.05)
 const PLATE_W := 0.52
 const PLATE_H := 0.50
 const PLATE_Y := 1.0
-const CARPET_Y := -0.99
+const CARPET_Y := 0.01
 const CARPET_Z := -1.0
 const GRID_SIZE := 4
 const CELL_SIZE := 0.032
@@ -57,7 +57,7 @@ const PALETTE_NAMES: Array[String] = [
 
 # ── Wallpaper group names ────────────────────────────────────────────
 const GROUPS: Array[String] = [
-	"P1","P2","PM","PG","PMM","PMG","PGG","CM","CMM",
+	"P1","P2","PM","PG","CM","PMM","PMG","PGG","CMM",
 	"P4","P4M","P4G","P3","P3M1","P31M","P6","P6M"
 ]
 
@@ -147,25 +147,17 @@ signal cell_changed(x: int, y: int, color_index: int)
 signal group_changed(group_name: String)
 
 
+var studio_ui: Node3D
+
 func _ready() -> void:
 	_initialize_grid_data()
-	_load_motif(0)  # Load checkerboard as default
-
-	# Plate container at eye height
-	var plate_container := Node3D.new()
-	plate_container.name = "PlateMount"
-	plate_container.transform.origin = Vector3(0, PLATE_Y, 0)
-	plate_container.rotation_degrees = Vector3(-15, 0, 0)
-	add_child(plate_container)
-	_plate_parent = plate_container
-
-	_build_plate()
-	_build_paint_grid()
-	_build_palette()
-	_build_sliders()
-	_build_controls()
-	_build_carpet()
-	_update_carpet()
+	_load_motif(0)
+	studio_ui = load("res://commons/primitives/arrays/pattern_studio_console.gd").new()
+	studio_ui.name = "StudioConsole"
+	add_child(studio_ui)
+	# Pointer/touch controls own edits; walking keyboard shortcuts must not paint.
+	set_process_input(false)
+	set_meta("em_visibility_bounds", AABB(Vector3(-1.55,-1.0,-2.1),Vector3(3.1,2.9,3.0)))
 
 
 # ══════════════════════════════════════════════════════════════════════
@@ -185,6 +177,8 @@ func _initialize_grid_data() -> void:
 func set_cell(x: int, y: int, color_idx: int) -> void:
 	if x < 0 or x >= _current_grid_size or y < 0 or y >= _current_grid_size:
 		return
+	if studio_ui:
+		studio_ui.remember()
 	_grid_data[y][x] = clampi(color_idx, 0, palette.size() - 1)
 	var idx: int = y * _current_grid_size + x
 	if idx < _grid_cells.size() and _grid_cells[idx]:
@@ -264,6 +258,9 @@ func _build_plate() -> void:
 # ══════════════════════════════════════════════════════════════════════
 
 func _build_paint_grid() -> void:
+	if studio_ui:
+		studio_ui.rebuild_grid()
+		return
 	var grid_root := Node3D.new()
 	grid_root.name = "PaintGrid"
 	# Top-left quadrant of the plate
@@ -738,6 +735,9 @@ func _build_carpet() -> void:
 # ══════════════════════════════════════════════════════════════════════
 
 func _update_carpet() -> void:
+	if studio_ui:
+		studio_ui.refresh()
+		return
 	if _grid_data.is_empty() or not _carpet_mesh:
 		return
 
@@ -867,7 +867,10 @@ func _load_motif(idx: int) -> void:
 	var data: Array = motif["data"]
 	var group_name: String = motif["group"]
 
-	# Pad/crop motif data to current grid size
+	_current_motif = idx
+	_current_grid_size = domain_size
+	_current_size_idx = SIZES.find(domain_size)
+	# Load every authored cell at its native resolution.
 	_grid_data.clear()
 	for y in _current_grid_size:
 		var row: Array = []
@@ -882,6 +885,9 @@ func _load_motif(idx: int) -> void:
 					val = data[sy][sx]
 			row.append(val)
 		_grid_data.append(row)
+
+	if studio_ui:
+		studio_ui.rebuild_grid()
 
 	# Update grid cells visual
 	for i in _grid_cells.size():
@@ -907,6 +913,7 @@ func _load_motif(idx: int) -> void:
 func _apply_period_palette(idx: int) -> void:
 	if idx < 0 or idx >= PERIODS.size():
 		return
+	_current_period = idx
 	var period: Dictionary = PERIODS[idx]
 	var colors: Array = period["colors"]
 	for i in palette.size():
@@ -940,6 +947,7 @@ func _change_grid_size(new_size: int) -> void:
 	var old_grid: Array = _grid_data.duplicate(true)
 	var old_size: int = _current_grid_size
 	_current_grid_size = new_size
+	_current_size_idx = SIZES.find(new_size)
 	_grid_data.clear()
 	for y in new_size:
 		var row: Array = []
@@ -950,14 +958,17 @@ func _change_grid_size(new_size: int) -> void:
 			row.append(val)
 		_grid_data.append(row)
 
-	# Rebuild the grid visually (remove old, build new)
-	var grid_root: Node = _plate_parent.find_child("PaintGrid", true, false)
-	if grid_root:
-		grid_root.queue_free()
-	_grid_cells.clear()
-	# Defer rebuild so the old node is freed first
-	call_deferred("_rebuild_paint_grid")
+	if studio_ui:
+		studio_ui.rebuild_grid()
+	else:
+		var grid_root: Node = _plate_parent.find_child("PaintGrid", true, false)
+		if grid_root:
+			_plate_parent.remove_child(grid_root)
+			grid_root.queue_free()
+		_grid_cells.clear()
+		call_deferred("_rebuild_paint_grid")
 	_update_carpet()
+
 
 
 func _rebuild_paint_grid() -> void:
@@ -979,14 +990,12 @@ func _clear_grid() -> void:
 
 
 func _mirror_grid() -> void:
-	# Mirror horizontally
-	var gs: int = _current_grid_size
-	for y in gs:
-		for x in gs / 2:
-			var mirror_x: int = gs - 1 - x
-			_grid_data[y][mirror_x] = _grid_data[y][x]
+	# Reflect the complete domain, rather than overwriting half its cells.
+	for row: Array in _grid_data:
+		row.reverse()
 	_refresh_grid_visuals()
 	_update_carpet()
+
 
 
 func _rotate_grid() -> void:
@@ -1023,6 +1032,8 @@ func _refresh_grid_visuals() -> void:
 
 func _select_color(idx: int) -> void:
 	selected_color = clampi(idx, 0, palette.size() - 1)
+	if studio_ui:
+		studio_ui.refresh_palette()
 	for i in _palette_indicators.size():
 		var ind: MeshInstance3D = _palette_indicators[i]
 		if ind and ind.material_override:
@@ -1106,6 +1117,9 @@ func _get_material(color_idx: int) -> StandardMaterial3D:
 # ══════════════════════════════════════════════════════════════════════
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.get("room","")=="curved" and studio_ui:
+		studio_ui.surface_controls.room_requested=true
+		studio_ui.surface_controls.ensure_room()
 	if config_data.has("wallpaper_group"):
 		var g: String = str(config_data["wallpaper_group"]).to_upper()
 		var gidx: int = GROUPS.find(g)

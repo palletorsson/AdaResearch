@@ -113,6 +113,3 @@ grow_horizontal = 2
 text = "Painting saved successfully!"
 label_settings = SubResource("LabelSettings_jtxh8")
 horizontal_alignment = 1
-
-[connection signal="pressed" from="CanvasLayer/ButtonPanel/HBoxContainer/RegenerateButton" to="." method="_on_regenerate_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ButtonPanel/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]

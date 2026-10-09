@@ -59,7 +59,9 @@ extends Node3D
 @export var housed: bool = true
 
 const SAMPLERS: PackedStringArray = ["fine", "coarse", "strobe"]
-const FRAME_HALF_WIDTH := 1.7
+var frame_half_width := 1.7
+var gallery_open := false
+var _floor_projection: Node3D
 const MARK_RADIUS := 0.02
 const TRAIL_COLOR := Color(0.0, 0.52, 0.72)   # deep teal: pale cyan washed out over the bright floor (12 September)
 
@@ -81,6 +83,13 @@ var _panel: Node3D
 var _frame_root: Node3D
 
 func _ready() -> void:
+	# Opt-in museum staging; all earlier placements keep their dimensions.
+	gallery_open = str(get_meta("config_gallery", "")) == "open"
+	if gallery_open:
+		length = 2.8
+		pivot_height = 3.9
+		frame_half_width = 2.5
+		bob.scale = Vector3.ONE * 1.6
 	if has_meta("config_sampler"):
 		var s: String = str(get_meta("config_sampler")).strip_edges().to_lower()
 		sampler = s if SAMPLERS.has(s) else sampler
@@ -92,6 +101,10 @@ func _ready() -> void:
 		_build_frame()
 		_build_readout()
 		_build_panel()
+	if str(get_meta("config_projection", "")) == "floor":
+		_floor_projection = load("res://algorithms/wavefunctions/oscillation_driver/pendulum_floor_record.gd").new()
+		_floor_projection.source = self
+		add_child(_floor_projection)
 	_apply_sampler()
 	reset_experiment()
 
@@ -134,6 +147,7 @@ func _setup_visuals() -> void:
 	# the pivot, rod and bob
 	pivot.position = Vector3(0.0, pivot_height, 0.0)
 	rod.position.y = -length / 2.0
+	rod.mesh = rod.mesh.duplicate()
 	rod.mesh.height = length
 	bob.position.y = -length
 	var rod_mat := StandardMaterial3D.new()
@@ -163,7 +177,7 @@ func _build_frame() -> void:
 		cyl.height = top
 		post.mesh = cyl
 		post.material_override = mat
-		post.position = Vector3(side * FRAME_HALF_WIDTH, top * 0.5, 0.0)
+		post.position = Vector3(side * frame_half_width, top * 0.5, 0.0)
 		_frame_root.add_child(post)
 		var foot := MeshInstance3D.new()
 		foot.name = "Foot" + ("L" if side < 0.0 else "R")
@@ -173,14 +187,14 @@ func _build_frame() -> void:
 		disc.height = 0.04
 		foot.mesh = disc
 		foot.material_override = mat
-		foot.position = Vector3(side * FRAME_HALF_WIDTH, 0.02, 0.0)
+		foot.position = Vector3(side * frame_half_width, 0.02, 0.0)
 		_frame_root.add_child(foot)
 	var beam := MeshInstance3D.new()
 	beam.name = "Beam"
 	var bcyl := CylinderMesh.new()
 	bcyl.top_radius = 0.03
 	bcyl.bottom_radius = 0.03
-	bcyl.height = FRAME_HALF_WIDTH * 2.0
+	bcyl.height = frame_half_width * 2.0
 	beam.mesh = bcyl
 	beam.material_override = mat
 	beam.position = Vector3(0.0, top, 0.0)
@@ -206,17 +220,20 @@ func _build_readout() -> void:
 	var runner := MeshInstance3D.new()
 	runner.name = "Runner"
 	var rbox := BoxMesh.new()
-	rbox.size = Vector3(1.9, 0.012, 4.8)
+	rbox.size = Vector3(4.6, 0.012, 6.4) if gallery_open else Vector3(1.9, 0.012, 4.8)
 	runner.mesh = rbox
 	var rmat := StandardMaterial3D.new()
 	rmat.albedo_color = Color(0.17, 0.17, 0.18)
 	rmat.roughness = 0.95
 	runner.material_override = rmat
-	runner.position = Vector3(0.0, 0.006, -2.8)
+	runner.position = Vector3(0.0, 0.006, -3.0 if gallery_open else -2.8)
 	add_child(runner)
 	var housing := Node3D.new()
 	housing.name = "ReadoutCase"
-	housing.position = Vector3(-FRAME_HALF_WIDTH, 0.0, -3.0)
+	housing.position = Vector3(-frame_half_width, 0.0, -3.0)
+	if gallery_open:
+		housing.position.x -= 0.6
+		housing.rotation.y = -PI / 2.0
 	add_child(housing)
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(0.13, 0.13, 0.14)
@@ -234,7 +251,7 @@ func _build_readout() -> void:
 	var plate := MeshInstance3D.new()
 	plate.name = "Plate"
 	var box := BoxMesh.new()
-	box.size = Vector3(0.66, 0.26, 0.02)
+	box.size = Vector3(1.1, 0.4, 0.03) if gallery_open else Vector3(0.66, 0.26, 0.02)
 	plate.mesh = box
 	plate.material_override = mat
 	plate.position = Vector3(0.0, 1.45, 0.0)
@@ -242,11 +259,11 @@ func _build_readout() -> void:
 	_readout = Label3D.new()
 	_readout.name = "Readout"
 	_readout.pixel_size = 0.0016
-	_readout.font_size = 20
+	_readout.font_size = 26 if gallery_open else 20
 	_readout.outline_size = 0
 	_readout.modulate = Color(0.85, 0.95, 1.0)
 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_readout.position = Vector3(-0.3, 1.45, 0.012)
+	_readout.position = Vector3(-0.51 if gallery_open else -0.3, 1.45, 0.022 if gallery_open else 0.012)
 	housing.add_child(_readout)
 
 ## Four buttons on the walk-side post at hand height: the two fixed intervals, the
@@ -267,7 +284,7 @@ func _build_panel() -> void:
 	# token turns the whole installation 180°, so this is the east walkway), where a
 	# standing visitor sees the bob, the trail and the buttons in one frame — it had faced
 	# the arrival and showed the walkway its back (Astra's visual review, 12 September)
-	_panel.position = Vector3(-FRAME_HALF_WIDTH - 0.12, 1.15, 0.0)
+	_panel.position = Vector3(-frame_half_width - 0.12, 1.15, 0.0)
 	_panel.rotation_degrees = Vector3(0.0, -90.0, 0.0)
 	add_child(_panel)
 	var actions := {"Btn_0": func(): set_sampler("fine"), "Btn_1": func(): set_sampler("coarse"),
@@ -332,6 +349,8 @@ func _update_pendulum_visuals() -> void:
 ## behind the bob. The oldest retained sample is the farthest mark.
 func _draw_trail() -> void:
 	trail_mesh.clear_surfaces()
+	if is_instance_valid(_floor_projection):
+		_floor_projection.draw_record()
 	var mm: MultiMesh = _marks.multimesh
 	mm.visible_instance_count = trail_points.size()
 	if trail_points.is_empty():

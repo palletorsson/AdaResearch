@@ -116,6 +116,10 @@ def main() -> int:
     ap.add_argument("--set", action="append", default=[], metavar="KEY=V1,V2")
     ap.add_argument("--scene", default="")
     ap.add_argument("--max", type=int, default=40)
+    ap.add_argument("--grace", type=int, default=45,
+                    help="seconds the watchdog waits for the FIRST frame; raise it for "
+                         "families whose bodies are expensive to build (a marched "
+                         "isosurface runs ~1.7s each, so 45s never reaches frame one)")
     args = ap.parse_args()
 
     if not args.set:
@@ -264,14 +268,22 @@ def main() -> int:
         if (SWEEP_OUT / marker).exists():
             (SWEEP_OUT / marker).unlink()
 
-    print(f"· sweeping {sweep_name}: {len(variants)} variants, one boot …")
+    grace: int = max(45, int(args.grace))
+    print(f"· sweeping {sweep_name}: {len(variants)} variants, one boot (grace {grace}s) …")
     done = SWEEP_OUT / "_done.txt"
     SWEEP_OUT.mkdir(parents=True, exist_ok=True)
     # Watch the sweep DIR, not the final _done.txt: each variant's PNG counts
     # as progress, so a long batch (32 variants ~46s) doesn't trip the 45s
     # boot-grace before the last shot lands.
+    # A MARCHED BODY OUTLIVES THE DEFAULT BOOT GRACE. The watchdog's 45s window
+    # assumes the first frame lands shortly after boot, which holds for a sweep of
+    # primitives — fetish_idol spends 1.7s per body meshing an isosurface, so with
+    # Vulkan init and the autoloads ahead of it the first PNG arrives past 45s and
+    # the run is killed having done nothing wrong. --grace says so out loud rather
+    # than raising the default for every sweep, because the default is what catches
+    # the real hangs (boid_flocking never yields headless).
     cmd = [sys.executable, str(REPO / "tools" / "godot_watchdog.py"),
-           f"--expect={SWEEP_OUT}", "--",
+           f"--expect={SWEEP_OUT}", f"--grace={grace}", "--",
            GODOT, "--path", str(REPO), "--xr-mode", "off", "--no-window",
            "--script", "res://commons/testing/capture_config_sweep.gd",
            "--", f"--spec={SPEC}"]

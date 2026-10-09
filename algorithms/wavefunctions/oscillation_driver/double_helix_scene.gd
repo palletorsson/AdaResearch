@@ -50,6 +50,8 @@ class_name DoubleHelixScene
 ## and no subtree is hidden — and leave the CollisionShape3D alone at every value, because
 ## the collider is what a player stands on and that is gameplay, not staging.
 @export_enum("monument", "bench", "vitrine", "terrace") var support: String = "monument"
+## Bound a mounted trail above its footing; other placements keep the original trail.
+@export var trail_drop: float = 0.0
 const SUPPORTS: PackedStringArray = ["monument", "bench", "vitrine", "terrace"]
 
 const HOST := "HelixFooting"
@@ -61,6 +63,7 @@ var _dimmed: bool = false
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 
 func _ready() -> void:
+	$DoubleHelix.max_trail_drop = trail_drop
 	var _s: String = str(support).strip_edges().to_lower()
 	support = _s if SUPPORTS.has(_s) else "monument"
 	_build_support()
@@ -70,6 +73,9 @@ func _ready() -> void:
 ## other, because composers hand this dictionary round wholesale. An unknown word keeps the
 ## standing value; a dictionary without "support" does nothing at all.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("trail_drop"):
+		trail_drop = maxf(0.0, float(config_data["trail_drop"]))
+		$DoubleHelix.max_trail_drop = trail_drop
 	if not config_data.has("support"):
 		return
 	var want: String = str(config_data["support"]).strip_edges().to_lower()

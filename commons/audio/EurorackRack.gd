@@ -85,7 +85,11 @@ func load_preset(preset_name: String, uvac: Node3D) -> void:
 			push_warning("EurorackRack: Unknown module '%s'" % mod_key)
 			continue
 
-		var mod_def: Dictionary = module_defs[mod_key]
+		var mod_def: Dictionary = module_defs[mod_key].duplicate(true)
+		mod_def["controls"] = mod_def.get("controls", []).filter(func(c): return c.id not in entry.get("omit_controls", []))
+		mod_def["jacks"] = mod_def.get("jacks", []).filter(func(j): return j.id not in entry.get("omit_jacks", []))
+		for control in mod_def.get("controls", []):
+			control.merge(entry.get("controls", {}).get(control.id, {}), true)
 		var mod: Node3D = EurorackModuleScript.new()
 		mod.build_from_definition(mod_def, uvac)
 
@@ -209,12 +213,6 @@ func _add_side_panel(x: float, center_y: float, total_height: float) -> void:
 
 
 func _setup_cable_system() -> void:
-	# Skip entire cable system on desktop (avoids RigidBody errors)
-	var xr_active: bool = XRServer.primary_interface != null and XRServer.primary_interface.is_initialized()
-	if not xr_active:
-		print("EurorackRack: Desktop mode — cable system skipped")
-		return
-
 	# Create cable manager
 	cable_manager = SynthCableManager.new()
 	cable_manager.name = "CableManager"
@@ -233,7 +231,7 @@ func _setup_cable_system() -> void:
 	_build_cable_tray()
 
 	# Spawn cable pool
-	if true:  # Only reached when XR is active (early return above for desktop)
+	if true:  # Both desktop and XR use the same movable plugs
 		var rack_width: float = get_rack_width()
 		var tray_y: float = -(row_count - 1) * (ROW_HEIGHT + ROW_GAP + RAIL_HEIGHT * 2) - ROW_HEIGHT * 0.5 - RAIL_HEIGHT - CABLE_TRAY_HEIGHT - 0.03
 		for i in CABLE_POOL_SIZE:

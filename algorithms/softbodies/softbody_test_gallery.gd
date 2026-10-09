@@ -1,5 +1,8 @@
 extends Node3D
 
+var lesson_variation := true
+
+
 # ONE SCRIPT, FOUR REGISTRY NAMES. softbody_gallery_part1, softbody_gallery_part2,
 # softbody_gallery_part3 and softbodytest are the same 36-cell rack sliced by
 # `gallery_part`. They are a family whether or not anyone declared them one, so the axis
@@ -58,6 +61,12 @@ var _seeded: bool = false
 var _built: bool = false
 
 func _ready() -> void:
+	if has_meta("config_lesson"):
+		lesson_variation=false
+		grid_width=3
+		grid_spacing=Vector2(4,4)
+		seed_value=1337
+		respawn=false
 	_seed_rng()
 	create_gallery()
 	_built = true
@@ -96,7 +105,7 @@ func _process(delta: float) -> void:
 			# We need to know a valid point index. 0 is usually safe.
 			pos = PhysicsServer3D.soft_body_get_point_global_position(rid, 0)
 			
-			label.position = pos + item["offset"]
+			label.position = to_local(pos) + item["offset"]
 			
 			# Handle dynamic deflation
 			if item.has("deflate_rate") and item["deflate_rate"] != 0.0:
@@ -544,12 +553,12 @@ func spawn_soft_body(parent: Node, config: Dictionary) -> void:
 	
 	# Random variation. Routed through _sb_randf so seed_value can pin it; on the default
 	# (-1) these call the same globals in the same order as they always did.
-	if _sb_randf() > 0.5:
+	if lesson_variation and _sb_randf() > 0.5:
 		var stiffness_var = _sb_randf_range(-0.2, 0.2)
 		sb.linear_stiffness = clamp(sb.linear_stiffness + stiffness_var, 0.1, 1.0)
 		variations.append("Stiff: %.2f" % sb.linear_stiffness)
 
-	if _sb_randf() > 0.5:
+	if lesson_variation and _sb_randf() > 0.5:
 		var pressure_var = _sb_randf_range(-0.5, 0.5)
 		sb.pressure_coefficient += pressure_var
 		variations.append("Press: %.2f" % sb.pressure_coefficient)

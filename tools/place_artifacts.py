@@ -134,12 +134,27 @@ def artifact_from_registry(lookup_name: str) -> Optional[Artifact]:
 # Pick room dimensions from existing map; locate spawn/teleporter
 # ─────────────────────────────────────────────────────────────────────
 
+def grid_dims_from_map(map_data: dict) -> tuple[int, int]:
+    """Resolve (width, depth) honestly. The structure grid is the truth:
+    declared dimensions drift (audited 2026-08-29: 269 of 2789 maps declare a
+    depth != len(structure), 159 a width != the widest row, and the
+    map-builder saves {width, height} with no depth key at all — the old
+    .get("depth", 6) turned those into a 6-deep room and placements landed on
+    real border walls / phantom rows). Placements are written INTO the
+    structure grid, so the grid wins; declared depth — or height, the
+    map-builder's word for the same axis — is trusted only when there is no
+    structure to read."""
+    info = map_data.get("map_info", {}) or {}
+    dims = info.get("dimensions", {}) or {}
+    structure = (map_data.get("layers", {}) or {}).get("structure") or []
+    depth = len(structure) or int(dims.get("depth") or dims.get("height") or 6)
+    width = max((len(r) for r in structure), default=0) or int(dims.get("width") or 10)
+    return width, depth
+
+
 def room_from_map(map_data: dict) -> tuple[Room, str, str]:
     """Build a Room and find spawn+teleporter token names from utilities layer."""
-    info = map_data["map_info"]
-    dims = info.get("dimensions", {})
-    width = dims.get("width", 10)
-    depth = dims.get("depth", 6)
+    width, depth = grid_dims_from_map(map_data)
     util_layer = map_data["layers"]["utilities"]
     sp_r = sp_c = -1
     te_r = te_c = -1
@@ -158,6 +173,9 @@ def room_from_map(map_data: dict) -> tuple[Room, str, str]:
         sp_r, sp_c = depth - 1, width // 2
     if te_r < 0:
         te_r, te_c = 0, width // 2
+    # Utilities grids on stale maps can outrun the structure; keep anchors inside.
+    sp_r = max(0, min(depth - 1, sp_r)); sp_c = max(0, min(width - 1, sp_c))
+    te_r = max(0, min(depth - 1, te_r)); te_c = max(0, min(width - 1, te_c))
     return Room(width=width, depth=depth, spawn_row=sp_r, spawn_col=sp_c,
                 teleporter_row=te_r, teleporter_col=te_c), sp_token, te_token
 

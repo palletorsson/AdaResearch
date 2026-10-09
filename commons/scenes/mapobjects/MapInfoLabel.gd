@@ -85,13 +85,27 @@ func _connect_to_grid_system():
 	# out-of-tree guard: get_tree() is null once a map is torn down
 	if not is_inside_tree():
 		return
-	var grid_system = _find_grid_system(get_tree().root)
+	var root := get_tree().root
+	var grid_system = _find_grid_system(root)
 
 	if grid_system:
 		if grid_system.has_signal("map_generation_complete"):
 			if not grid_system.map_generation_complete.is_connected(_on_map_loaded):
 				grid_system.map_generation_complete.connect(_on_map_loaded)
 				print("MapInfoLabel: Connected to GridSystem")
+		return
+	# The Endless Museum has no GridSystem by design. It publishes its own
+	# readiness signal after the loading cell has finished its job; without this
+	# branch the camera-attached "Loading..." label remained visible forever in
+	# VR because the old retry could only ever discover grid maps.
+	var museum := _find_museum_loader(root)
+	if museum:
+		var ready_callback := Callable(self, "_on_map_loaded")
+		if museum.has_signal("museum_ready") and not museum.is_connected("museum_ready", ready_callback):
+			museum.connect("museum_ready", ready_callback)
+			print("MapInfoLabel: Connected to Endless Museum readiness")
+		if bool(museum.get("_museum_ready")):
+			_on_map_loaded()
 	else:
 		# Retry after a delay
 		# out-of-tree guard: get_tree() is null once a map is torn down
@@ -99,6 +113,16 @@ func _connect_to_grid_system():
 			await tree_entered
 		await get_tree().create_timer(1.0).timeout
 		_connect_to_grid_system()
+
+
+func _find_museum_loader(node: Node) -> Node:
+	if node.has_signal("museum_ready") and node.has_method("is_map_ready"):
+		return node
+	for child in node.get_children():
+		var result := _find_museum_loader(child)
+		if result:
+			return result
+	return null
 
 func _find_grid_system(node: Node) -> Node:
 	if node.get_script():

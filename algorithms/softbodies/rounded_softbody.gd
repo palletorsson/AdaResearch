@@ -13,7 +13,7 @@ extends Node3D
 # desire: to let you squeeze a soft body with your VR hand and see the stress field bloom red under your grip — making internal forces visible and tangible
 # critical_parameter: _stiffness — governs the spring constant k in the strain equation; low stiffness means large deformation for small force, high stiffness means the body barely yields
 # triggers: VR grip_click activates hand squeeze mode, pushing vertices away from hand center; mode button cycles through STRAIN, COLLISION, and VOLUME visualization
-# emerges: in VOLUME mode, the pressure_coefficient auto-adjusts to preserve volume — squeeze one side and the other side bulges out, revealing conservation of volume as an emergent constraint
+# emerges: optional FEEDBACK adjusts pressure toward a recorded bounding-box volume; the display mode alone never enables that intervention
 # needs: slider_horizontal [has] (stiffness, pressure, squeeze); push_button [has] (mode cycle); Label3D [has]
 # relationships: deepens jelly_cube's deformation intro with quantitative strain visualization; three modes correspond to three aspects of continuum mechanics
 # truth: strain is not damage — it is the body's memory of every force that has touched it, written in the displacement of every vertex from its rest position
@@ -31,7 +31,7 @@ extends Node3D
 # specimen deforming with no instrument on it at all.
 enum Mode { STRAIN, COLLISION, VOLUME, NONE }
 
-const MODE_NAMES := ["Strain Energy", "Collision Forces", "Volume Preservation", "No Readout"]
+const MODE_NAMES := ["Strain Energy", "Collision Forces", "Envelope Volume", "No Readout"]
 
 ## Allow-list. A typo in a map token keeps the shipped strain heatmap rather than
 ## rendering a bare untouched body.
@@ -41,6 +41,10 @@ const MEASURES: PackedStringArray = ["strain", "collision", "volume", "none"]
 ## the forces at contact, the volume it is failing to conserve — or nothing.
 ## `strain` is `var _mode: int = Mode.STRAIN`, the shipped mode.
 @export_enum("strain", "collision", "volume", "none") var measure: String = "strain"
+
+## Deliberate pressure feedback, independent of which quantity is displayed.
+## The measured volume is a world-axis bounding-box proxy, not enclosed volume.
+@export var volume_feedback: bool = false
 
 # ── Cabinet grammar (HORIZONTAL dialect) ─────────────────────────────
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
@@ -110,6 +114,7 @@ var _rest_positions: PackedVector3Array   # vertex positions at rest
 var _prev_positions: PackedVector3Array   # previous frame for velocity
 var _vertex_count := 0
 var _rest_volume := 0.0
+var _current_center := Vector3.ZERO
 var _current_volume := 0.0
 var _volume_history: Array[float] = []
 const VOLUME_HISTORY_SIZE := 120
@@ -214,10 +219,11 @@ func _create_soft_body() -> void:
 	# few seconds. A tiny 0.02 m gap settles in a frame or two.
 	var _rest_y: float = deck_height + 0.013 + _size * 0.5 + 0.02 if show_cabinet else 0.5
 	_soft_body.position = Vector3(0, _rest_y, 0)
+	# The mesh must exist when SoftBody3D enters the world: that notification
+	# registers both the solver mesh and its render-update connection in Godot 4.6.
+	_build_rounded_cube_mesh()
 	add_child(_soft_body)
 	_sb_rid = _soft_body.get_physics_rid()
-
-	_build_rounded_cube_mesh()
 	_capture_rest_state()
 
 
@@ -255,7 +261,7 @@ func _build_rounded_cube_mesh() -> void:
 				vgrid[Vector3i(xi, yi, zi)] = vi
 				vi += 1
 
-	var add_quad := func(i: int, j: int, get_coords: Callable) -> void:
+	var add_quad := func(i: int, j: int, get_coords: Callable, reverse: bool = true) -> void:
 		var c0: Variant = get_coords.call(i, j)
 		var c1: Variant = get_coords.call(i + 1, j)
 		var c2: Variant = get_coords.call(i + 1, j + 1)
@@ -265,27 +271,29 @@ func _build_rounded_cube_mesh() -> void:
 			var v1: int = vgrid[c1]
 			var v2: int = vgrid[c2]
 			var v3: int = vgrid[c3]
-			st.add_index(v0); st.add_index(v1); st.add_index(v2)
-			st.add_index(v0); st.add_index(v2); st.add_index(v3)
+			# All six faces need consistent outward winding for pressure.
+			if reverse:
+				st.add_index(v0); st.add_index(v2); st.add_index(v1)
+				st.add_index(v0); st.add_index(v3); st.add_index(v2)
+			else:
+				st.add_index(v0); st.add_index(v1); st.add_index(v2)
+				st.add_index(v0); st.add_index(v2); st.add_index(v3)
 
 	var n := divs * 2
 	for i in range(n):
 		for j in range(n):
 			add_quad.call(i, j, func(u, v): return Vector3i(u, v, gs - 1))          # +Z
 			add_quad.call(i, j, func(u, v): return Vector3i(gs - 1 - u, v, 0))      # -Z
-			add_quad.call(i, j, func(u, v): return Vector3i(u, gs - 1, v))           # +Y
-			add_quad.call(i, j, func(u, v): return Vector3i(u, 0, gs - 1 - v))      # -Y
+			add_quad.call(i, j, func(u, v): return Vector3i(u, gs - 1, v), false)           # +Y
+			add_quad.call(i, j, func(u, v): return Vector3i(u, 0, gs - 1 - v), false)      # -Y
 			add_quad.call(i, j, func(u, v): return Vector3i(gs - 1, v, gs - 1 - u)) # +X
 			add_quad.call(i, j, func(u, v): return Vector3i(0, v, u))                # -X
 
 	st.index()   # dedup verts -> physics point count == vertex count
 	st.generate_normals()
 	var new_mesh := st.commit()
-	# Assigning .mesh rebuilds the SoftBody3D's own physics representation, so
-	# the rendered mesh and the simulated points stay unified. A redundant
-	# PhysicsServer3D.soft_body_set_mesh(rid, ...) here SPLIT them — the node
-	# rendered the mesh at its transform while the server simulated a second
-	# body that fell, so the strain/ghost overlays drew a cloud below the bench.
+	# Initial creation calls this BEFORE entering the tree. Later rebuilds use
+	# the already-connected SoftBody3D render update; keep ownership in that node.
 	_soft_body.mesh = new_mesh
 
 	# Unshaded vertex-color material for strain visualization
@@ -407,6 +415,11 @@ func _create_mesh_instances() -> void:
 	mat_g.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_ghost_mi.material_override = mat_g
 	add_child(_ghost_mi)
+	# Solver points are world coordinates. These three overlays must share
+	# that frame; the strip chart deliberately remains in the bench's frame.
+	for overlay: MeshInstance3D in [_strain_mi, _force_mi, _ghost_mi]:
+		overlay.top_level = true
+		overlay.global_transform = Transform3D.IDENTITY
 
 
 func _create_hand_visual() -> void:
@@ -478,6 +491,7 @@ func _create_controls() -> void:
 		],
 		[
 			{"type": "button", "label": "MODE"},
+			{"type": "button", "label": "FEEDBACK"},
 		],
 	], show_cabinet)
 	# Bare placement — hanging off the front-left corner BELOW the origin.
@@ -513,6 +527,11 @@ func _create_controls() -> void:
 		var btn_area = _mode_button.get_node_or_null("InteractableAreaButton")
 		if btn_area:
 			btn_area.button_pressed.connect(func(_b): _cycle_mode())
+	var feedback_button = _rack_panel.find_child("Btn_1", true, false)
+	if feedback_button:
+		var feedback_area = feedback_button.get_node_or_null("InteractableAreaButton")
+		if feedback_area:
+			feedback_area.button_pressed.connect(func(_b): set_volume_feedback(not volume_feedback))
 
 
 ## GridInteractablesComponent sets `config_*` metadata on the ROOT before add_child,
@@ -520,6 +539,8 @@ func _create_controls() -> void:
 ## keeps the default. `measure` = "strain" resolves to Mode.STRAIN, which is what
 ## `var _mode: int = Mode.STRAIN` already was.
 func _read_dna_meta() -> void:
+	if has_meta("config_volume_feedback"):
+		volume_feedback = str(get_meta("config_volume_feedback")).to_lower() in ["true", "1"]
 	if has_meta("config_measure"):
 		var m_in: String = str(get_meta("config_measure")).strip_edges().to_lower()
 		if MEASURES.has(m_in):
@@ -566,6 +587,15 @@ func _on_squeeze_changed(_name: String, value: float) -> void:
 	_squeeze_strength = remap(value, 0.0, 1.0, 0.0, 5.0)
 
 
+func set_volume_feedback(enabled: bool) -> void:
+	volume_feedback = enabled
+	if not enabled and is_instance_valid(_soft_body):
+		# Restore the selected pressure, not an earlier shape or vertex state.
+		_soft_body.pressure_coefficient = _pressure
+	_readout_last = ""
+	_readout_accum = 99.0
+
+
 # ── Mode initialization ─────────────────────────────────────────────
 
 func _init_mode() -> void:
@@ -578,7 +608,7 @@ func _init_mode() -> void:
 		Mode.COLLISION:
 			_mode_header = "COLLISION FORCES"
 		Mode.VOLUME:
-			_mode_header = "VOLUME PRESERVATION"
+			_mode_header = "ENVELOPE VOLUME"
 			_volume_history.clear()
 		Mode.NONE:
 			_mode_header = "NO READOUT"
@@ -606,8 +636,8 @@ func _process(delta: float) -> void:
 	_detect_collisions(delta)
 	_compute_current_volume()
 
-	if _mode == Mode.VOLUME:
-		_apply_volume_correction()
+	if volume_feedback:
+		_apply_volume_correction(delta)
 
 	_draw_all()
 	_refresh_readout(delta)
@@ -631,7 +661,9 @@ func _update_vr_hand(_delta: float) -> void:
 		_hand_active = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 		if _hand_active:
 			var orbit_r := 0.3
-			_hand_pos = _soft_body.global_position + Vector3(
+			# SoftBody3D resets its node transform to the world origin once live.
+			# Follow the simulated vertices, not that node transform.
+			_hand_pos = _current_center + Vector3(
 				cos(_time * 0.8) * orbit_r,
 				sin(_time * 1.2) * 0.15,
 				sin(_time * 0.8) * orbit_r
@@ -737,6 +769,7 @@ func _compute_volume() -> float:
 		mx = mx.max(p)
 
 	var extents: Vector3 = mx - mn
+	_current_center = (mn + mx) * 0.5
 	return extents.x * extents.y * extents.z
 
 
@@ -747,8 +780,8 @@ func _compute_current_volume() -> void:
 		_volume_history.remove_at(0)
 
 
-func _apply_volume_correction() -> void:
-	if _rest_volume <= 0.0001:
+func _apply_volume_correction(delta: float) -> void:
+	if not volume_feedback or _rest_volume <= 0.0001:
 		return
 
 	var ratio := _current_volume / maxf(_rest_volume, 0.0001)
@@ -757,7 +790,9 @@ func _apply_volume_correction() -> void:
 
 	# Adjust pressure to compensate
 	var error := _volume_target_ratio - ratio
-	_soft_body.pressure_coefficient += error * _volume_correction_strength * 0.016
+	_soft_body.pressure_coefficient = clampf(
+		_soft_body.pressure_coefficient + error * _volume_correction_strength * delta,
+		-1.0, 2.0)
 
 
 # ── Drawing ──────────────────────────────────────────────────────────
@@ -976,11 +1011,11 @@ func _refresh_readout(delta: float) -> void:
 				lines.append("SQUEEZING")
 		Mode.COLLISION:
 			lines.append("EVENTS %d" % _collision_forces.size())
-			lines.append("K %.2f   P %.2f" % [_stiffness, _pressure])
+			lines.append("K %.2f   P %.2f" % [_stiffness, _soft_body.pressure_coefficient])
 			lines.append("VERTS %d" % _vertex_count)
 		Mode.VOLUME:
 			var ratio: float = _current_volume / maxf(_rest_volume, 0.0001)
-			lines.append("VOL  %.1f%%" % (ratio * 100.0))
+			lines.append("BOX  %.1f%%" % (ratio * 100.0))
 			lines.append("TGT  %.0f%%" % (_volume_target_ratio * 100.0))
 			lines.append("CORR %.2f  P %.2f" % [
 				_volume_correction_strength, _soft_body.pressure_coefficient])
@@ -988,6 +1023,7 @@ func _refresh_readout(delta: float) -> void:
 			# One line, not zero: HangarKit.readout() is never handed an empty body.
 			lines.append("VERTS %d" % _vertex_count)
 
+	lines.append("FEEDBACK " + ("ON" if volume_feedback else "OFF"))
 	var joined: String = _mode_header
 	for l in lines:
 		joined += "\n" + str(l)
@@ -1017,14 +1053,15 @@ func _update_labels() -> void:
 				_label_detail.text += "  [SQUEEZING]"
 		Mode.COLLISION:
 			_label_info.text = "Active collisions: %d" % _collision_forces.size()
-			_label_detail.text = "Stiffness: %.2f  Pressure: %.2f" % [_stiffness, _pressure]
+			_label_detail.text = "Stiffness: %.2f  Pressure: %.2f" % [_stiffness, _soft_body.pressure_coefficient]
 		Mode.VOLUME:
 			var ratio := _current_volume / maxf(_rest_volume, 0.0001)
-			_label_info.text = "Volume: %.1f%%  Target: %.0f%%" % [ratio * 100.0, _volume_target_ratio * 100.0]
+			_label_info.text = "Box volume: %.1f%%  Target: %.0f%%" % [ratio * 100.0, _volume_target_ratio * 100.0]
 			_label_detail.text = "Correction: %.2f  Pressure: %.2f" % [_volume_correction_strength, _soft_body.pressure_coefficient]
 		Mode.NONE:
 			_label_info.text = "No readout"
 			_label_detail.text = "Verts: %d" % _vertex_count
+	_label_detail.text += " | Feedback " + ("ON" if volume_feedback else "OFF")
 
 
 # ── ImmediateMesh helpers ────────────────────────────────────────────
@@ -1235,15 +1272,14 @@ func _create_bench() -> void:
 	# where near-black is allowed, and it gives the strain diamonds a ground.
 	_bench.add_child(HangarKit.box(Vector3(0.0, deck_height + 0.006, 0.0),
 		Vector3(platen_s, 0.014, platen_s), dark))
-	# This is the whole argument for the horizontal dialect, made structural:
-	# _soft_body spawns at y = 0.5 and FALLS. It used to fall past the artifact
-	# onto the map floor; now it lands on the platen at hand height.
+	# Carry collision through the visible deck and apron. The old 6 cm shell
+	# let the initial pressure expansion push soft vertices through the platen.
 	_bench.add_child(HangarKit.box_collider(
-		Vector3(platen_s, 0.060, platen_s),
-		Vector3(0.0, deck_height + 0.013 - 0.030, 0.0)))
+		Vector3(platen_s, 0.20, platen_s),
+		Vector3(0.0, deck_height + 0.013 - 0.10, 0.0)))
 	_bench.add_child(HangarKit.box_collider(
-		Vector3(outer_w, 0.060, ring_d),
-		Vector3(0.0, deck_height - 0.030, ring_cz)))
+		Vector3(outer_w, 0.19, ring_d),
+		Vector3(0.0, deck_height - 0.095, ring_cz)))
 
 	# ── the volume strip chart, ROUTED FLAT INTO THE DECK ──
 	# It used to be a 2D graph hanging in mid-air off the +X side — the largest
@@ -1435,6 +1471,8 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	if config.has("volume_correction"):
 		_volume_correction_strength = clampf(float(config["volume_correction"]), 0.0, 1.0)
+	if config.has("volume_feedback"):
+		set_volume_feedback(str(config["volume_feedback"]).to_lower() in ["true", "1"])
 
 	if config.has("size"):
 		_size = clampf(float(config["size"]), 0.2, 2.0)

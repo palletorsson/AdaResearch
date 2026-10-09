@@ -1,0 +1,55 @@
+{
+  "id": "map-token-resolution",
+  "title": "Is the map asking for something that does not exist?",
+  "description": "A map cell names an artifact; the artifact must resolve to a scene on disk. When a pipeline stage regresses with no commit to blame, or a sequence's artifact stage reads 9x% for no visible reason, this is the first thing to check -- and it is invisible to the pathfinder, to git status and to git log -S.",
+  "triggers": [
+    "pipeline global_avg dropped and no commit explains it",
+    "a sequence's stage 3 reads 97-99% instead of OK",
+    "a map places an artifact that does not appear in game",
+    "after any tool writes generated content back into a hand-authored map"
+  ],
+  "confidence": "extracted",
+  "earned_from": "breath 2026-08-23T09:04",
+  "steps": [
+    {
+      "step": 1,
+      "do": "python tools/check_map_tokens.py",
+      "why": "spine scope, the same denominator the pipeline scorer uses. Exit code = unresolved placements."
+    },
+    {
+      "step": 2,
+      "do": "python tools/check_map_tokens.py --all",
+      "why": "whole corpus. Read the note line about non-standard empty cells -- the scorer counts those as placements even though this gate does not."
+    },
+    {
+      "step": 3,
+      "do": "grep the token across commons/artifacts/registry/*.json",
+      "why": "absent = renamed or superseded; present without a scene = a delegate_to chain that does not terminate."
+    },
+    {
+      "step": 4,
+      "do": "git log --oneline -S\"<token>\" -- commons/maps/<Map>/map_data.json",
+      "why": "names the commit that introduced it. If empty, the cell is uncommitted -- a class both concurrency instruments miss."
+    },
+    {
+      "step": 5,
+      "do": "grep the token in commons/data/museum/em_plan.json and the generators",
+      "why": "a spine map that is also a museum hall has TWO authors. floor_anchor entered Point_Lines this way; the plan is derived FROM the map, so fixing the map is sufficient."
+    },
+    {
+      "step": 6,
+      "do": "read the registry description of the nearest surviving name",
+      "why": "supersession is usually stated in prose. calder_mobile's description names calder_mobile_primaries as the thing it replaced."
+    },
+    {
+      "step": 7,
+      "do": "Edit the cell (never Set-Content -- PS 5.1 writes a BOM), then re-run steps 1 and the pipeline scorer",
+      "why": "the delta is the proof. Do not carry a remembered global_avg; take it."
+    }
+  ],
+  "gotchas": [
+    "A gate that scanned zero maps prints identically to a clean corpus. Check the denominator in the header line before believing OK.",
+    "GridInteractablesComponent dispatches mc:, gridagent:, criticalinfo: and cluster: BEFORE the registry. They are not lookup names and must not be demanded to resolve as such.",
+    "Removing a dead cell is behaviour-preserving (it rendered nothing). Substituting a live artifact is a content decision that belongs to the map's author."
+  ]
+}

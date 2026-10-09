@@ -220,6 +220,7 @@ var component_lines: Array = []
 var structure_parts: Array = []
 var data_container: Node3D
 var ui_display: CanvasLayer
+var _show_desktop_ui: bool = true
 
 # Statistical measures
 var total_variance: float = 0.0
@@ -272,16 +273,19 @@ func _build_all() -> void:
 func setup_ui() -> void:
 	"""Create comprehensive UI for PCA visualization"""
 	ui_display = CanvasLayer.new()
+	ui_display.visible = _show_desktop_ui
 	add_child(ui_display)
 	_owned.append(ui_display)
 
 	var panel = Panel.new()
+	panel.name = "Panel"
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	panel.size = Vector2(450, 800)
 	panel.position = Vector2(10, 10)
 	ui_display.add_child(panel)
 	
 	var vbox = VBoxContainer.new()
+	vbox.name = "VBoxContainer"
 	panel.add_child(vbox)
 	
 	# Create labels for PCA information
@@ -1367,6 +1371,10 @@ func _exit_tree() -> void:
 ##                        when a key is accepted above an early return and applied
 ##                        only inside the rebuild that the early return skips.
 func apply_grid_config(config_data: Dictionary) -> void:
+	# Museum placements use the existing 3D labels, not a screen-sized overlay.
+	if config_data.has("desktop_ui"):
+		_show_desktop_ui = _as_bool(config_data["desktop_ui"], _show_desktop_ui)
+		if is_instance_valid(ui_display): ui_display.visible = _show_desktop_ui
 	var before_bearing: String = bearing
 
 	if config_data.has("bearing"):

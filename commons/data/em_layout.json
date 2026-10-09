@@ -40,6 +40,8 @@
 		"snap_m": 0.2
 	},
 	"lobby": {
+		"drop_m": 17.0,
+		"_drop_m": "2026-09-30, Palle: \"drop the player more far up in the cylinder so we experience more drop and falling.\" Metres above the floor at which the lobby branch of _drop_point places the visitor: Point Zero only, inside its arrival shaft (mouth 2.5 m, top 19.3 m), so the eye starts under the rim. Read ONLY by the lobby, no-roof branch; every other chapter start keeps arrival.drop_m. Clamped 0..30. A lobby.drop_m in the hall's own map outranks this. Delete the key to go back to the 4 m arrival.",
 		"_readme": "the FIRST vestibule, dressed as the museum's lobby (Palle, 2026-08-18): no wall works; a large window in the back wall looking backward at Folding Past; a frame counter on the wall; a fire extinguisher; a wooden pallet (pyramid) in the corner blocking a lift door; and MOA on the threshold door's header. Segment-local metres: the lobby floor is x 1..16, z 1..4, the back wall at z 0..1, the entry wall at z 4..5.",
 		"_view_depth_m": "metres behind the view piece's own origin, handed to Folding Past's z_base_offset. Its shipped value is -8.0 and its nested frames run out to about -12.5 from there, which is what actually put the past out of sight — not the room, which has always been 4 deep. -3.0 brings the nest close behind the glass.",
 		"_view_cell": "ENTER-ROOM cells, the frame the editor rules in: z runs -4..-1, so -4 is the vestibule's first row, hard against the back wall. Palle, 2026-08-26: 'folding_past should be at 8, -4'. A map cannot name a negative row, which is exactly why the past lives here and not in Point_One.",

@@ -1,6 +1,6 @@
 # @identity
 # essence: wardrobe = a VIEW of MapProgressionManager, worn on the body
-# desire: to hold no state of its own, so the costume can never disagree with the walk
+# desire: derive earned adornments from the walk; save the wearer's outfit choice separately
 # critical_parameter: which sequences are completed — everything else is derived from that
 # triggers: sequence_completed; and a catch-up sweep on every launch
 # emerges: put the headset on after a month away and the garment is already what you earned
@@ -14,7 +14,8 @@ class_name CostumeWardrobe
 ## THE ACCRETION (2026-08-27, Palle: "attach beautiful thing to it as we go
 ## along the sequences").
 ##
-## IT SAVES NOTHING. The obvious build is a second save file listing what you
+## PROGRESSION IS NOT COPIED. Outfit preference is now saved separately; it
+## neither grants nor removes a completed sequence. A second file listing what you
 ## have been given — and a second save file is a second version of the truth,
 ## which drifts the first time a sequence is completed while it is not loaded.
 ## MapProgressionManager already knows which sequences are finished and already
@@ -27,14 +28,18 @@ class_name CostumeWardrobe
 ## nth completed sequence is the nth tier of the shift, whichever order they
 ## happened to be finished in.
 
-## the twenty-two, in spine order (curriculum_spine.json § spine.sequences)
-const SPINE := [
-	"primitives", "transformation", "color", "change", "forces", "formfinding",
-	"wavefunctions", "randomness", "noise", "cellularautomata", "fractals",
-	"lsystems", "proceduralgeneration", "softbodies", "isosurfaces",
-	"boolean_surfaces", "swarmintelligence", "machinelearning", "graphtheory",
-	"foundationscrisis", "qfeplaboratory", "postfoundationscrisis",
-]
+## Read the same spine as the museum, including Arrays and Tiling.
+const SPINE_PATH := "res://commons/maps/curriculum_spine.json"
+
+static func spine_sequences() -> Array[String]:
+	var result: Array[String] = []
+	var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(SPINE_PATH))
+	if data is Dictionary:
+		for row in data.get("spine", {}).get("sequences", []):
+			var key := String(row.get("name", ""))
+			if not key.is_empty() and not result.has(key):
+				result.append(key)
+	return result
 
 ## PRELOAD, NOT class_name. A global class resolves only once the editor has
 ## written the script-class cache, so a headless boot on a fresh checkout — which
@@ -61,9 +66,28 @@ signal costume_grew(sequence: String, stage: int)
 var costume: Node3D = null
 var _given: Dictionary = {}          # sequence -> true, so a re-emit cannot double-pin
 var _mount: Node3D = null
+signal outfit_changed(outfit: String)
+var skirt_fabric: Dictionary = {}
+@export var appearance_save_path: String = "user://super_drag_outfit.cfg"
+
+func choose_outfit(id: String, persist: bool = true) -> bool:
+	if not is_instance_valid(costume) or not bool(costume.call("wear_outfit", id)):
+		return false
+	if is_instance_valid(costume.drag_outfit):costume.drag_outfit.apply_skirt_fabric(skirt_fabric)
+	if persist and not appearance_save_path.is_empty():
+		var save := ConfigFile.new()
+		save.load(appearance_save_path)
+		save.set_value("appearance", "skirt_fabric", skirt_fabric)
+		save.set_value("appearance", "outfit", id)
+		var error := save.save(appearance_save_path)
+		if error != OK:
+			push_warning("Outfit worn, but could not save: %s" % error_string(error))
+	outfit_changed.emit(id)
+	return true
 
 
 func _ready() -> void:
+	add_to_group("costume_wardrobes")
 	if not enabled:
 		return
 	call_deferred("_start")
@@ -79,6 +103,7 @@ func _start() -> void:
 
 	costume = Costume.new() as Node3D
 	costume.name = "QueerCostume"
+	costume.max_stage = maxi(1, spine_sequences().size())
 	_mount.add_child(costume)
 	var head: Node3D = get_node_or_null(head_path) as Node3D if not head_path.is_empty() else null
 	if head != null:
@@ -88,7 +113,7 @@ func _start() -> void:
 
 	# THE SIGNAL FIRST, THEN THE CATCH-UP. The other order drops any completion
 	# that lands during the sweep, which is a real window: the sweep touches
-	# twenty-two sequences and the manager can emit inside it.
+	# spine sequences and the manager can emit inside it.
 	var mgr: Node = _manager()
 	if mgr != null and mgr.has_signal("sequence_completed"):
 		if not mgr.is_connected("sequence_completed", Callable(self, "give")):
@@ -96,6 +121,12 @@ func _start() -> void:
 	else:
 		push_warning("wardrobe: MapProgressionManager is not there — the costume cannot grow")
 	catch_up()
+	if not appearance_save_path.is_empty():
+		var saved := ConfigFile.new()
+		if saved.load(appearance_save_path) == OK:
+			var recipe = saved.get_value("appearance", "skirt_fabric", {})
+			if recipe is Dictionary and (recipe.is_empty() or preload("res://commons/artifacts/fabric_shader_studio/fabric_recipe.gd").valid(recipe)):skirt_fabric=recipe
+			choose_outfit(String(saved.get_value("appearance", "outfit", "")), false)
 
 
 func _find_origin() -> Node3D:
@@ -120,13 +151,13 @@ func _manager() -> Node:
 
 
 ## Everything already finished, in spine order, silently — this is a restore,
-## not twenty-two celebrations.
+## not a succession of celebrations.
 func catch_up() -> int:
 	var mgr: Node = _manager()
 	if mgr == null or not mgr.has_method("is_sequence_completed"):
 		return 0
 	var n := 0
-	for seq in SPINE:
+	for seq in spine_sequences():
 		if bool(mgr.call("is_sequence_completed", seq)):
 			if give(seq, true):
 				n += 1
@@ -138,11 +169,11 @@ func catch_up() -> int:
 func give(sequence: String, quiet: bool = false) -> bool:
 	if costume == null or not is_instance_valid(costume):
 		return false
-	if _given.has(sequence):
+	if _given.has(sequence) or not spine_sequences().has(sequence):
 		return false
 	_given[sequence] = true
 
-	costume.call("grow")
+	costume.call("grow", -1, not quiet)
 
 	var trophy: Node3D = Trophies.make(sequence)
 	if trophy != null:
@@ -156,5 +187,22 @@ func give(sequence: String, quiet: bool = false) -> bool:
 	return true
 
 
+## Match the active visitor rather than the first wardrobe in a staged scene.
+func wears_head(head: Node3D) -> bool:
+	return is_instance_valid(costume) and costume.get("_head") == head
+
+
 func worn() -> Array:
 	return _given.keys()
+
+func set_skirt_fabric(recipe: Dictionary, persist: bool = true) -> bool:
+	if not recipe.is_empty() and not preload("res://commons/artifacts/fabric_shader_studio/fabric_recipe.gd").valid(recipe):return false
+	if not is_instance_valid(costume):return false
+	skirt_fabric=recipe.duplicate(true)
+	if is_instance_valid(costume.drag_outfit):costume.drag_outfit.apply_skirt_fabric(skirt_fabric)
+	if persist and not appearance_save_path.is_empty():
+		var config=ConfigFile.new();config.load(appearance_save_path)
+		config.set_value("appearance","skirt_fabric",skirt_fabric)
+		config.set_value("appearance","outfit",costume.outfit_id)
+		return config.save(appearance_save_path)==OK
+	return true

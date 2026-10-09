@@ -164,16 +164,19 @@ func _process(delta: float) -> void:
 	if record_only_when_grabbed and _grab_point and _grab_point.has_method("is_picked_up"):
 		if not _grab_point.is_picked_up():
 			_last_global_position = current_global
-			# Hide data table when not grabbed
+			# A retained record stays available for inspection after release.
 			if _data_table_label:
-				_data_table_label.visible = false
+				_data_table_label.visible = not _trail_points.is_empty()
 			return
 
 	# Snap current position to grid for tracing
 	var snapped_global = snap_position_to_grid(current_global)
 
+	_data_table_timer += delta
+
 	# Minimum distance check (using snapped positions to ensure distinct grid points)
 	if snapped_global.distance_to(_last_global_position) < min_segment_distance:
+		_refresh_data_table_if_due()
 		return
 	
 	# If strict grid tracing is desired, we ensure we only add points that are exactly on grid nodes
@@ -191,11 +194,8 @@ func _process(delta: float) -> void:
 
 	_rebuild_trail()
 
-	# Update data table (throttled)
-	_data_table_timer += delta
-	if _data_table_timer >= data_table_update_interval:
-		_data_table_timer = 0.0
-		_update_data_table()
+	# Read the retained buffer after capacity enforcement.
+	_refresh_data_table_if_due()
 
 	# Optional: visually snap the draw sphere if we want the object to look like it's on grid?
 	# _draw_sphere.global_position = snapped_global # This might jitter against hand smoothness
@@ -225,19 +225,26 @@ func _on_grab_point_dropped(_pickable) -> void:
 		clear_trail()
 
 	# Snap to grid on drop
-	if snap_on_drop and _grab_point:
-		var snapped_pos = snap_position_to_grid(_grab_point.global_position)
-		_grab_point.global_position = snapped_pos
-		print("GrabSpherePointSnap: Snapped to grid at %s" % snapped_pos)
+	if snap_on_drop and _grab_point and _draw_sphere:
+		# The visible tip is what tracing samples. Move its handle by the same
+		# world-space correction, preserving the tip's local offset and rotation.
+		var tip_position: Vector3 = _draw_sphere.global_position
+		var snapped_pos: Vector3 = snap_position_to_grid(tip_position)
+		_grab_point.global_position += snapped_pos - tip_position
+		print("GrabSpherePointSnap: Snapped tip to grid at %s" % snapped_pos)
 
-		# Add snapped position to trail
+		# Record that same tip, within the trail's existing capacity.
 		_trail_points.append(snapped_pos)
+		if _trail_points.size() > trail_max_points:
+			_trail_points.pop_front()
+		_last_global_position = snapped_pos
 		_rebuild_trail()
+		_update_data_table()
 
 func _on_grab_point_picked_up(_pickable) -> void:
 	# Record starting position when picked up
-	if _grab_point:
-		_last_global_position = _grab_point.global_position
+	if _draw_sphere:
+		_last_global_position = _draw_sphere.global_position
 
 func clear_trail() -> void:
 	_trail_points.clear()
@@ -284,35 +291,50 @@ func _setup_data_table() -> void:
 
 	add_child(_data_table_label)
 
+func _refresh_data_table_if_due() -> void:
+	if _data_table_timer >= data_table_update_interval:
+		_data_table_timer = 0.0
+		_update_data_table()
+
+
+func _grid_decimal_places() -> int:
+	# Show the effective pitch, including fractional centimetres, without
+	# printing the float noise in an otherwise short coordinate table.
+	var scaled_step: float = absf(grid_size)
+	var places: int = 0
+	while places < 8 and (scaled_step < 1.0 or not is_equal_approx(scaled_step, roundf(scaled_step))):
+		scaled_step *= 10.0
+		places += 1
+	return places
+
+
 func _update_data_table() -> void:
 	if not _data_table_label or _trail_points.is_empty():
 		return
 
-	var current_pos = _draw_sphere.global_position if _draw_sphere else Vector3.ZERO
-	var snapped_pos = snap_position_to_grid(current_pos)
-	var point_count = _trail_points.size()
+	var precision: int = _grid_decimal_places()
+	var value_format: String = "%." + str(precision) + "f"
+	var table_text: String = "GRID TRACE DATA\n"
+	table_text += "Retained: %d / %d  Length: %.2f m\n" % [_trail_points.size(), trail_max_points, _total_trail_length]
+	table_text += "Spacing: " + (value_format % grid_size) + " m\n" if snap_to_grid else "Snapping off\n"
+	table_text += "RETAINED (m)  |  LATTICE INDEX\n" if snap_to_grid else "RETAINED (m)\n"
 
-	# Build table text with two columns: Point (raw) | Snap (grid)
-	var table_text = "GRID TRACE DATA\n"
-	table_text += "Points: %d  Length: %.2f m\n" % [point_count, _total_trail_length]
-	table_text += "─────────────────────────────────\n"
-	table_text += "  POINT (raw)      │  SNAP (grid)\n"
-	table_text += "─────────────────────────────────\n"
-
-	# Show last 10 points with both raw and snapped values
-	var start_idx = max(0, _trail_points.size() - 10)
+	# The buffer contains retained positions, not the hand's unsnapped input.
+	var start_idx: int = maxi(0, _trail_points.size() - 10)
 	for i in range(start_idx, _trail_points.size()):
-		var pt = _trail_points[i]
-		var snapped = snap_position_to_grid(pt)
-		var grid = snapped / grid_size
-		table_text += "(%.1f,%.1f,%.1f) │ (%d,%d,%d)\n" % [pt.x, pt.y, pt.z, int(grid.x), int(grid.y), int(grid.z)]
+		var pt: Vector3 = _trail_points[i]
+		var coordinates: Array[String] = []
+		for value in [pt.x, pt.y, pt.z]:
+			coordinates.append(value_format % (0.0 if value == 0.0 else value))
+		table_text += "(" + ",".join(PackedStringArray(coordinates)) + ")"
+		if snap_to_grid and grid_size != 0.0:
+			var grid: Vector3 = pt / grid_size
+			table_text += " | (%d,%d,%d)" % [roundi(grid.x), roundi(grid.y), roundi(grid.z)]
+		table_text += "\n"
 
 	_data_table_label.text = table_text
 	_data_table_label.visible = true
-
-	# Position near trail start, offset to the side and forward
-	var start_pos = _trail_points[0]
-	_data_table_label.global_position = start_pos + Vector3(0.15, data_table_height_offset - 0.1, 0.2)
+	_data_table_label.global_position = _trail_points[0] + Vector3(0.15, data_table_height_offset - 0.1, 0.2)
 
 
 # ── RETENTION ────────────────────────────────────────────────────────────────

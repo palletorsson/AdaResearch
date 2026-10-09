@@ -65,7 +65,7 @@ const STENCIL_MODES := {
 @export var pattern_seed: int = -1
 
 ## Path to the automaton inside the SubViewport, as the scene names it.
-const AUTOMATON_PATH := "SubViewport/MirroredCellularAutomata"
+const AUTOMATON_PATH := "MirroredCellularAutomata"
 
 
 ## _enter_tree, NOT _ready. Godot notifies ENTER_TREE top-down over the whole subtree before it

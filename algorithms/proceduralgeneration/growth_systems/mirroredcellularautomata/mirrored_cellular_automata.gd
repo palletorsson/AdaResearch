@@ -97,6 +97,12 @@ func _process(delta: float) -> void:
 
 func _rebuild_mesh() -> void:
 	var im = ImmediateMesh.new()
+	var alive := false
+	for row in grid:
+		if 1 in row: alive = true; break
+	if not alive:
+		mesh_instance.mesh = null
+		return
 	im.surface_begin(Mesh.PRIMITIVE_TRIANGLES, cell_material)
 
 	var half_display = display_size * 0.5

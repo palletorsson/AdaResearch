@@ -84,6 +84,7 @@ extends Node3D
 const EXCISIONS: PackedStringArray = ["absence", "ghost", "rubble", "cast", "negative"]
 
 # Internal state
+var lesson_enabled := false
 var current_iteration: int = 0
 var subdivision_timer: float = 0.0
 var is_subdividing: bool = false
@@ -251,6 +252,8 @@ func create_triangle_mesh(triangle: Dictionary) -> void:
 	var mesh_instance = MeshInstance3D.new()
 	var mesh = create_extruded_triangle_mesh(triangle)
 	mesh_instance.mesh = mesh
+	mesh_instance.set_meta("triangle_depth",int(triangle.depth))
+	mesh_instance.set_meta("triangle_kind","kept")
 
 	# Create material with color based on depth
 	var material = StandardMaterial3D.new()
@@ -273,7 +276,7 @@ func create_triangle_mesh(triangle: Dictionary) -> void:
 	if triangle.depth > 0:
 		material.emission_enabled = true
 		material.emission = material.albedo_color * 0.2
-		material.emission_energy = 0.3
+		material.emission_energy_multiplier = 0.3
 
 	mesh_instance.material_override = material
 
@@ -408,6 +411,7 @@ func reset() -> void:
 	# Clear all meshes
 	for child in get_children():
 		if child is MeshInstance3D:
+			remove_child(child)
 			child.queue_free()
 
 	current_iteration = 0
@@ -430,7 +434,21 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("lesson","false")).to_lower() == "true":
+		lesson_enabled=true
+		auto_start=false
+		is_subdividing=false
+		_install_lesson.call_deferred()
+
+func _install_lesson() -> void:
+	if has_node("FractalLesson"): return
+	var fixture = load("res://commons/artifacts/koch_sierpinski_lesson/koch_sierpinski_lesson.gd").new()
+	fixture.name="FractalLesson"
+	fixture.kind="sierpinski"
+	# Separate the sculpture's plane from the physical control desk.
+	rotation.x=0
+	rotation.z=0
+	add_child(fixture)
 
 
 # ── DNA: THE EXCISION ────────────────────────────────────────────────────────
@@ -461,6 +479,8 @@ func _depth_hue(depth: int) -> Color:
 func _excise_mesh(triangle: Dictionary, y: float, tint: Color, alpha: float) -> void:
 	var mesh_instance := MeshInstance3D.new()
 	mesh_instance.mesh = create_extruded_triangle_mesh(triangle)
+	mesh_instance.set_meta("triangle_depth",int(triangle.depth))
+	mesh_instance.set_meta("triangle_kind","removed")
 
 	var material := StandardMaterial3D.new()
 	material.albedo_color = Color(tint.r, tint.g, tint.b, alpha)

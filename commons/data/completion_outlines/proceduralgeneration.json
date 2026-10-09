@@ -1,0 +1,207 @@
+{
+  "_meta": {
+    "sequence": "proceduralgeneration",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "PG_Genetic_Evolution": {
+      "inherited": "From Assemblage_Same_Desire: The next sequence begins with selection of another kind: generated forms are compared using a numerical score. Keep the distinction between a procedure's choices and the purposes a viewer finds in their result.",
+      "question": "What would you choose to keep, and what does the scoring rule choose?",
+      "ontology": "A search population contains candidate descriptions; a fitness function ranks them according to an authored criterion.",
+      "experiment": "Compare two generated forms and state a reason to prefer one; compare your reason with the displayed fitness if legible.",
+      "observe": "The initial population contains different primitive compositions; a high score means closeness to the selected target rather than general excellence.",
+      "limit": "Overlapping volumes are counted separately and an author sets the target. The current static population cannot by itself demonstrate improvement over generations.",
+      "variation": "Proposed extension: Expose one generation step and preserve a rejected candidate chosen by a visitor for a different reason.",
+      "handoff": "A useful extension would preserve one rejected candidate nominated by a visitor, alongside the numerical winner. Give the nomination a reason the score ignores. Then expose one generation step and inspect what selection retains or loses. The next room replaces a single score with many spatial targets, letting local growth respond to their distribution.",
+      "candidate_artifacts": [
+        "GeneticProgramming"
+      ],
+      "sources": [
+        "commons/maps/PG_Genetic_Evolution/final.md",
+        "commons/maps/PG_Genetic_Evolution/map_data.json",
+        "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
+        "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd",
+        "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticUI.gd",
+        "commons/maps/PG_Genetic_Evolution/intent.md",
+        "commons/maps/PG_Genetic_Evolution/blurb.md",
+        "commons/maps/PG_Genetic_Evolution/critical.md",
+        "commons/maps/PG_Genetic_Evolution/technical.md"
+      ],
+      "open_questions": [
+        "Evolution starts paused and the old screen controls may not survive the museum conversion. Expose a reachable generation step and its selected parents, offspring and fitness values.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. CanvasLayer UI creates a3D panel but survival in museum not verified; do not promise EVOLVE controls without runtime. Small repair candidate set nested auto_evolve=true or preserve functional control adapter.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "PG_Space_Colonization": {
+      "inherited": "From PG_Genetic_Evolution: A useful extension would preserve one rejected candidate nominated by a visitor, alongside the numerical winner. Give the nomination a reason the score ignores. Then expose one generation step and inspect what selection retains or loses. The next room replaces a single score with many spatial targets, letting local growth respond to their distribution.",
+      "question": "Can a branch find a shape that is described only by points it has not reached?",
+      "ontology": "Attraction points specify targets; a local growth process converts their influence into new branch segments.",
+      "experiment": "Trace a branch tip toward nearby attraction points and compare it with a tip that has no nearby targets.",
+      "observe": "A finished branching structure grows toward its target distribution, with unreached points marking what the construction has not occupied.",
+      "limit": "A completed form conceals the sequence of decisions. The targets are authored before growth; the tree is not discovering an independently given natural destination.",
+      "variation": "Proposed extension: Show the same target field with a different starting point, or preserve reached points instead of deleting their evidence.",
+      "handoff": "The next room turns from growing towards points to finding a connected route among occupied sites. A crowded field will not necessarily be a connected one.",
+      "candidate_artifacts": [
+        "space_colonization_algorithm"
+      ],
+      "sources": [
+        "commons/maps/PG_Space_Colonization/final.md",
+        "commons/maps/PG_Space_Colonization/map_data.json",
+        "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
+        "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.gd",
+        "algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationUI.gd",
+        "commons/maps/PG_Space_Colonization/intent.md",
+        "commons/maps/PG_Space_Colonization/blurb.md",
+        "commons/maps/PG_Space_Colonization/critical.md",
+        "commons/maps/PG_Space_Colonization/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. show_growth_animation=false: finished on arrival. No claimed moving-points interaction; UI survival unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "PG_Percolation_Network": {
+      "inherited": "From PG_Space_Colonization: The next room turns from growing towards points to finding a connected route among occupied sites. A crowded field will not necessarily be a connected one.",
+      "question": "When does local contact become a route across a whole field?",
+      "ontology": "Connectivity is a relation among occupied sites; a spanning path requires a connected chain rather than merely many occupied cells.",
+      "experiment": "Follow the changing flow colours from their source and look for an occupied cluster that remains disconnected.",
+      "observe": "Flow spreads through face-adjacent occupied sites; isolated sites can remain unreached.",
+      "limit": "One random sample does not measure a percolation threshold. The chosen boundary source and six-neighbour relation decide what counts as connected.",
+      "variation": "Proposed extension: Place matched sparse and dense fields with visible source boundaries, repeating seeds before making a threshold claim.",
+      "handoff": "Next, a branch will again seek a target. Compare that choice with both the shared influences of space colonisation and the strict adjacency that controls flow here.",
+      "candidate_artifacts": [
+        "percolationnetwork_ca"
+      ],
+      "sources": [
+        "commons/maps/PG_Percolation_Network/final.md",
+        "commons/maps/PG_Percolation_Network/map_data.json",
+        "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn",
+        "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
+        "commons/maps/PG_Percolation_Network/intent.md",
+        "commons/maps/PG_Percolation_Network/blurb.md",
+        "commons/maps/PG_Percolation_Network/critical.md",
+        "commons/maps/PG_Percolation_Network/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor probability slider. Pink flow cells intentionally lack collision; do not identify a drawn path with a walking route.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "PG_Branching_Growth": {
+      "inherited": "From PG_Percolation_Network: Next, a branch will again seek a target. Compare that choice with both the shared influences of space colonisation and the strict adjacency that controls flow here.",
+      "question": "How does a branch decide which direction to try next?",
+      "ontology": "A growth tip extends by a local direction rule constrained by target distance and stopping conditions.",
+      "experiment": "Watch an active tip extend and compare its direction with the nearest visible attractor; look for a tip that stops.",
+      "observe": "Tips bend toward targets with jitter, while reached targets and out-of-range tips stop contributing.",
+      "limit": "This implementation follows a nearest target, unlike the earlier space-colonisation sum of influences. Neither rule gives the branch intention, and the branch cap is a rendering budget rather than exhaustion.",
+      "variation": "Proposed extension: Compare nearest-target and averaged-target growth using the same points and origin, making ignored targets visible.",
+      "handoff": "For an extension, place nearest-target and averaged-target versions over the same points and starting position. Preserve ignored targets visibly so that the comparison can explain a choice, not just display two silhouettes. The next room lets a moving process leave its record by removing material instead of adding branches.",
+      "candidate_artifacts": [
+        "branching_growth_algorithm"
+      ],
+      "sources": [
+        "commons/maps/PG_Branching_Growth/final.md",
+        "commons/maps/PG_Branching_Growth/map_data.json",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd",
+        "algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingUI.gd",
+        "commons/maps/PG_Branching_Growth/intent.md",
+        "commons/maps/PG_Branching_Growth/blurb.md",
+        "commons/maps/PG_Branching_Growth/critical.md",
+        "commons/maps/PG_Branching_Growth/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "PG_Caves_Mazes": {
+      "inherited": "From PG_Branching_Growth: For an extension, place nearest-target and averaged-target versions over the same points and starting position. Preserve ignored targets visibly so that the comparison can explain a choice, not just display two silhouettes. The next room lets a moving process leave its record by removing material instead of adding branches.",
+      "question": "Can removing space leave a memory of the route that removed it?",
+      "ontology": "A carving walk marks visited cells as air in an initially solid grid; its history becomes the shape of a passage.",
+      "experiment": "Inspect an opening and follow its changes of direction with your eye; find where a passage widens or joins another.",
+      "observe": "The voxel cave contains passages cut from several starting sides toward a centre and upward through levels.",
+      "limit": "This is a biased authored walk,not an unbiased natural cave model. Empty-cell connectivity and headroom settings do not by themselves establish museum-scale accessibility.",
+      "variation": "Proposed extension: Preserve one walker trace beside the final cave and compare a centre-seeking walk with a walk that refuses that destination.",
+      "handoff": "The next room also turns an event into geometry, but takes its starting arrangement from falling physical bodies rather than a deliberately carved path.",
+      "candidate_artifacts": [
+        "caverandomwalk"
+      ],
+      "sources": [
+        "commons/maps/PG_Caves_Mazes/final.md",
+        "commons/maps/PG_Caves_Mazes/map_data.json",
+        "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn",
+        "algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd",
+        "algorithms/proceduralgeneration/growth_systems/caverandomwalk/CaveUI.gd",
+        "commons/maps/PG_Caves_Mazes/intent.md",
+        "commons/maps/PG_Caves_Mazes/blurb.md",
+        "commons/maps/PG_Caves_Mazes/critical.md",
+        "commons/maps/PG_Caves_Mazes/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not require entering the current scaled cave; inspect from museum floor. Controls live under CanvasLayer and need verification.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "PG_Sculpted_Forms": {
+      "inherited": "From PG_Caves_Mazes: The next room also turns an event into geometry, but takes its starting arrangement from falling physical bodies rather than a deliberately carved path.",
+      "question": "When does a pile of separate bodies become one surface?",
+      "ontology": "A hybrid generator can use a physical arrangement as input to a later geometric approximation.",
+      "experiment": "Watch cubes settle if the release is still underway; compare recognisable blocks with the surface surrounding their final positions.",
+      "observe": "A falling pile is followed by a generated voxel surface derived from cube centres.",
+      "limit": "The mesh records a chosen approximation and moment; it does not preserve every rotated cube face or prove all cubes were fully settled when captured.",
+      "variation": "Proposed extension: Retain the original cubes and surface as selectable readings of the same event, then vary the capture time rather than the release.",
+      "handoff": "The next room asks a related question about copying: which parts of a patterned field are newly computed, and which come from repeating an earlier fragment?",
+      "candidate_artifacts": [
+        "cube_mound_scene"
+      ],
+      "sources": [
+        "commons/maps/PG_Sculpted_Forms/final.md",
+        "commons/maps/PG_Sculpted_Forms/map_data.json",
+        "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn",
+        "algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound.gd",
+        "commons/maps/PG_Sculpted_Forms/intent.md",
+        "commons/maps/PG_Sculpted_Forms/blurb.md",
+        "commons/maps/PG_Sculpted_Forms/critical.md",
+        "commons/maps/PG_Sculpted_Forms/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Scene generate_on_start runs once; no guaranteed visible release for late arrivals. Do not call resulting mesh a physically exact union.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "PG_Mirrored_Patterns": {
+      "inherited": "From PG_Sculpted_Forms: The next room asks a related question about copying: which parts of a patterned field are newly computed, and which come from repeating an earlier fragment?",
+      "question": "Which parts of a symmetrical pattern were computed, and which were copied?",
+      "ontology": "A generative rule and a symmetry operation can be separate stages: compute a fragment,then repeat or reflect it.",
+      "experiment": "Find a small motif on the floor plate and look for its repeats; compare the motif boundary with the whole frame.",
+      "observe": "The default motif repeats across the field,while subsequent evolution changes the displayed cells.",
+      "limit": "A regular pattern is not evidence that local evolution spontaneously discovered global symmetry. The presentation includes an explicit copier.",
+      "variation": "Proposed extension: Hold the random seed fixed and compare motif,quadrant,octant andnone; let visitors decide whether repetition is a constraint or a material for composition.",
+      "handoff": "The next sequence moves into soft bodies. There the form will continue to change after it is generated, as its internal constraints and its encounters with the surrounding space act on it.",
+      "candidate_artifacts": [
+        "mirror_cellular_texture_for_3d"
+      ],
+      "sources": [
+        "commons/maps/PG_Mirrored_Patterns/final.md",
+        "commons/maps/PG_Mirrored_Patterns/map_data.json",
+        "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
+        "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
+        "algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn",
+        "commons/maps/PG_Mirrored_Patterns/intent.md",
+        "commons/maps/PG_Mirrored_Patterns/blurb.md",
+        "commons/maps/PG_Mirrored_Patterns/critical.md",
+        "commons/maps/PG_Mirrored_Patterns/technical.md",
+        "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd"
+      ],
+      "open_questions": [
+        "The nested scene retains a script path that no longer exists. Check UID resolution in the museum and point the scene to the inspected moved script if needed.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor stencil selector in this primary.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

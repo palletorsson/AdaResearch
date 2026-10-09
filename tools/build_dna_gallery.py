@@ -58,6 +58,12 @@ SWEEP_OUT = REPO / "ada_run" / "sweep"
 # the same cure: one implementation, in the module that already got it right.
 
 
+# Boot-to-first-frame grace handed to each sweep, raised with --grace=N for
+# families whose bodies are expensive to build (a marched isosurface runs 1.7s
+# each, so 45s is not enough to reach the first PNG).
+GRACE: int = 45
+
+
 def sweep(token: str, axes: dict, cap: int, coverage: dict = None) -> list[dict]:
     """One Godot boot; returns [{file, params}] for the frames it produced.
 
@@ -84,7 +90,8 @@ def sweep(token: str, axes: dict, cap: int, coverage: dict = None) -> list[dict]
     for old in SWEEP_OUT.glob(f"{token}__*.png"):
         old.unlink()
 
-    args = [sys.executable, str(REPO / "tools" / "cabinet_sweep.py"), token, f"--max={cap}"]
+    args = [sys.executable, str(REPO / "tools" / "cabinet_sweep.py"), token, f"--max={cap}",
+            f"--grace={GRACE}"]
     picked: list[tuple[str, list]] = []
     total = 1
     for name, vals in axes.items():
@@ -152,6 +159,8 @@ def main() -> int:
             slug = a.split("=", 1)[1]
         elif a.startswith("--tokens="):
             tokens = [t.strip() for t in a.split("=", 1)[1].split(",") if t.strip()]
+        elif a.startswith("--grace="):
+            globals()["GRACE"] = max(45, int(a.split("=", 1)[1]))
         elif a.startswith("--only="):
             only = {t.strip() for t in a.split("=", 1)[1].split(",") if t.strip()}
         elif a.startswith("--singletons="):

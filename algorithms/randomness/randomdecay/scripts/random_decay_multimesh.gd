@@ -1,19 +1,19 @@
 # @identity
 # essence: d(decay)/dt = growth_rate · (0.2 + decay · 0.8) — autocatalytic decay
-# desire: watch two pristine stacks slowly crumble — drift, darken, sink — and feel entropy win
+# desire: watch two arranged stacks drift, darken and sink under different configured rates
 # critical_parameter: decay_growth_rate — controls how fast decay accelerates once seeded
 # triggers: injection_accumulator randomly seeds decay into instances; decay_start_delay gates the onset
-# emerges: each instance decays at its own rate — the grid becomes a ruin uniquely every time
+# emerges: bounded stochastic perturbations accumulate; the fixed sizes and unequal rates constrain the comparison
 # needs: VR push buttons for TOGGLE/RESET [has]; Grid.gdshader for wireframe overlay [has]
 # relationships: contrasts with Random_Rotate_Random_XYZ (rotation without destruction); feeds hardware_entropy_decay
-# truth: Decay is not failure — it is matter remembering that arrangement is improbable.
+# truth: This authored decay process is not a measurement of thermodynamic entropy.
 
 extends Node3D
 
 # Random decay demo built with MultiMesh-only stacks.
 # Two standing 2D stacks are generated:
 # - 1m cubes with small gutter spacing
-# - 1dm prisms with smaller spacing
+# - prisms with smaller spacing; force_uniform_item_size makes these 1m too
 # Instances drift, rotate, sink, and darken over time.
 
 @export_category("Simulation")
@@ -63,6 +63,7 @@ extends Node3D
 var _rng := RandomNumberGenerator.new()
 var _layers: Array[Dictionary] = []
 var _decay_elapsed: float = 0.0
+var _stack_fit: float = 0.0
 
 
 func _ready() -> void:
@@ -88,9 +89,11 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_home"):
 		_reset_layers()
 	elif event.is_action_pressed("ui_accept"):
-		decay_active = not decay_active
-		if decay_active:
-			_decay_elapsed = 0.0
+		_toggle_decay()
+
+# Pause preserves the accumulated startup/ramp time; only RESET starts it over.
+func _toggle_decay() -> void:
+	decay_active = not decay_active
 
 func _create_vr_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -98,8 +101,12 @@ func _create_vr_controls() -> void:
 		[{"type": "button", "label": "TOGGLE"}, {"type": "button", "label": "RESET"}],
 	])
 	var mid_x := (cube_origin.x + prism_origin.x) / 2.0
-	panel.position = Vector3(mid_x, 0.85, 1.2)
+	panel.name = "DecayControls"
+	panel.position = Vector3(0.0 if _stack_fit > 0.0 else mid_x, 0.85, 1.2)
 	panel.rotation_degrees = Vector3(-25, 0, 0)
+	if _stack_fit > 0.0:
+		panel.position.z = -1.2
+		panel.rotation.y = PI
 	add_child(panel)
 
 	var toggle_btn: Node = panel.find_child("Btn_0", true, false)
@@ -107,9 +114,7 @@ func _create_vr_controls() -> void:
 		var area: Node = toggle_btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(func(_b):
-				decay_active = not decay_active
-				if decay_active:
-					_decay_elapsed = 0.0
+				_toggle_decay()
 			)
 
 	var reset_btn: Node = panel.find_child("Btn_1", true, false)
@@ -124,6 +129,42 @@ func _create_layers() -> void:
 	_clear_layers()
 	_layers.append(_create_cube_layer())
 	_layers.append(_create_prism_layer())
+	_fit_stacks()
+
+# Museum-only opt-in: fit the two complete displays, retaining a common unit
+# size and a clear gap. Instance simulation coordinates and controls stay intact.
+func _fit_stacks() -> void:
+	if _layers.size() != 2:
+		return
+	var nodes: Array[MultiMeshInstance3D] = []
+	var boxes: Array[AABB] = []
+	for child in get_children():
+		if child is MultiMeshInstance3D and String(child.name).begins_with("DecayLayer_"):
+			nodes.append(child)
+	for i in range(_layers.size()):
+		var layer: Dictionary = _layers[i]
+		var mesh_bounds: AABB = layer.multimesh.mesh.get_aabb()
+		var bounds: AABB
+		for j in range(layer.base_positions.size()):
+			var box := AABB(mesh_bounds.position + layer.base_positions[j], mesh_bounds.size)
+			bounds = box if j == 0 else bounds.merge(box)
+		boxes.append(bounds)
+		if _stack_fit <= 0.0:
+			nodes[i].transform = Transform3D.IDENTITY
+	if _stack_fit <= 0.0:
+		return
+	var gap := 0.6
+	var unit_scale := (_stack_fit - gap) / (boxes[0].size.x + boxes[1].size.x)
+	var left := -_stack_fit * 0.5
+	for i in range(nodes.size()):
+		nodes[i].scale = Vector3.ONE * unit_scale
+		nodes[i].position = Vector3(left - boxes[i].position.x * unit_scale, -boxes[i].position.y * unit_scale, 0.0)
+		left += boxes[i].size.x * unit_scale + gap
+	var panel := get_node_or_null("DecayControls")
+	if panel:
+		panel.position.x = 0.0
+		panel.position.z = -1.2
+		panel.rotation.y = PI
 
 func _clear_layers() -> void:
 	for child in get_children():
@@ -476,4 +517,56 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("stack_fit"):
+		_stack_fit = clampf(float(config.stack_fit), 2.0, 30.0)
+		if is_node_ready():
+			_fit_stacks()
+	if config.has("study"):
+		# the museum's bench stamp hands over only the first #key:value of a token,
+		# with the rest of the string still attached to the value: keep the word
+		_apply_study(str(config.get("study", "")).split("#")[0].strip_edges().to_lower())
+
+
+# ── THE ROTATION STUDY (2026-09-24, Random_Rotate_Random_XYZ) ────────────────
+# The shipped stacks cannot compare shapes: the cubes run at speed 0.3 and the
+# prisms at 0.1, so any difference between them is mostly the configured rate.
+# `#study:rotation` makes the comparison the hall's chapter used to propose:
+#   - both stacks run at the cube's rate, so per piece the rule is the same
+#     (each stack's kicks scale with its piece count, so every piece expects
+#     the same share);
+#   - drift, sinking and darkening are switched off, so only orientation changes;
+#   - the prisms are laid on their regular grid (the shipped snap rounds half-
+#     step positions and doubles one column when the count is even).
+# The random stream is untouched: the drift draws are still taken, only scaled
+# by zero, so a seeded run turns every piece exactly as the matched run would.
+# No seed is added. RESET still restores the arrangement, not the future.
+# The study is written for the museum's 10 m display: with no stack_fit of its
+# own it fits the stacks to 10 m, as the hall's placement did. The fit stays
+# implicit because a second key cannot be relied on: the grid lane reads
+# `#stack_fit:N` as the tutorial/rotation shorthand (it is not in
+# GridInteractablesComponent.CONFIG_PARAM_NAMES), and the museum's bench stamp
+# hands over only a token's first key.
+# A placement without the key is byte-identical to the shipped behaviour.
+func _apply_study(word: String) -> void:
+	if word != "rotation":
+		return
+	drift_strength = 0.0
+	sink_distance = 0.0
+	cube_color_decay_mix = 0.0
+	prism_color_decay_mix = 0.0
+	prism_decay_speed_scale = cube_decay_speed_scale
+	snap_to_grid_on_spawn = false
+	if _stack_fit <= 0.0:
+		_stack_fit = 10.0
+	if is_node_ready():
+		# configured after _ready (the grid lane defers the call): rebuild the
+		# stacks with the study's settings and start over from the arrangement.
+		# The old layers leave the tree NOW, not at frame end, because
+		# _fit_stacks finds its layers by name among the children.
+		for child in get_children():
+			if child is MultiMeshInstance3D and String(child.name).begins_with("DecayLayer_"):
+				remove_child(child)
+				child.queue_free()
+		_layers.clear()
+		_create_layers()
+		_decay_elapsed = 0.0

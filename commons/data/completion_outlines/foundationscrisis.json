@@ -1,0 +1,41 @@
+{
+  "_meta": {
+    "sequence": "foundationscrisis",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Godel_Incompleteness": {
+      "inherited": "From Russell_Paradox: Every formal system draws a boundary — and the boundary is where the system meets what it cannot hold.",
+      "question": "Does a machine failing to find a proof show that no proof exists?",
+      "ontology": "A formal theory has axioms and inference rules; provability is relative to those rules. Truth in the intended natural numbers is a different relation. The nested-set diagram assumes soundness.",
+      "experiment": "Follow the machine’s loop through one attempt and its displayed verdict. Then follow a token outside the sorter’s inner PROVABLE ring and ask what evidence would justify that placement.",
+      "observe": "A timed arm attempts, jams and displays TRUE BUT UNPROVABLE. The sorter places predetermined tokens in nested TRUE/PROVABLE regions; it does not test formulas.",
+      "limit": "Incompleteness concerns sufficiently expressive, effectively axiomatized formal arithmetic under appropriate consistency assumptions. For the room’s semantic true/provable picture, state the stronger soundness assumption explicitly. Finite search failure proves no impossibility; arbitrary opinions are not thereby mathematical truths.",
+      "variation": "Existing: compare what the label asserts with what the moving mechanism actually establishes. Proposed: expose a small proof checker and distinguish an unchecked claim, an unsuccessful search and a metatheorem.",
+      "handoff": "Escher next changes the medium. Follow locally convincing connections and ask whether they can belong to one consistent spatial whole.",
+      "candidate_artifacts": [
+        "godel_sentence_machine",
+        "provability_sorter"
+      ],
+      "sources": [
+        "commons/maps/Godel_Incompleteness/final.md",
+        "commons/maps/Godel_Incompleteness/map_data.json",
+        "commons/maps/Godel_Incompleteness/intent.md",
+        "commons/maps/Godel_Incompleteness/tutorial.md",
+        "commons/maps/Godel_Incompleteness/technical.md",
+        "commons/maps/Godel_Incompleteness/critical.md",
+        "commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn",
+        "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+        "commons/artifacts/provability_sorter/provability_sorter.tscn",
+        "commons/artifacts/provability_sorter/provability_sorter.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not repeat any system able to count, nor no system can prove consistency without formal qualifications. The diagram presupposes soundness, stronger than consistency. Gold-token percentage is not a measure of unprovable truths.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

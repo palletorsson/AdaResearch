@@ -38,9 +38,9 @@ class_name CarouselCake
 ##             stated as an object about to fall over.
 ##
 ## The heights are NOT touched by this — only the radii — so every layer stays at the same
-## elevation and the eight speed ratios are unchanged. Neither are the COLLIDERS: those
-## keep following layer_radii, so what the player can stand on is identical for all five
-## values. This axis is appearance only.
+## elevation and the eight speed ratios are unchanged. By default, colliders keep
+## following layer_radii, so changing profile affects appearance only. With gallery:clean,
+## colliders use _vis_radii and follow the displayed profile, changing the space for a body.
 @export_enum("cake", "ziggurat", "column", "spindle", "flare") var profile: String = "cake"
 const PROFILES: PackedStringArray = ["cake", "ziggurat", "column", "spindle", "flare"]
 
@@ -49,6 +49,7 @@ const PROFILES: PackedStringArray = ["cake", "ziggurat", "column", "spindle", "f
 var _vis_radii: Array[float] = []
 var _baked_retargeted: bool = false
 var _stack_anchor: MeshInstance3D = null
+var _gallery_clean := false
 @export var base_radial_segments: int = 32
 @export var segments_increment: int = 2
 @export var base_rotation_speed: float = 0.5
@@ -91,6 +92,13 @@ func _set_regenerate(value: bool) -> void:
 
 func generate_carousel() -> void:
 	_read_dna()
+	# The gallery compares the actual rotating stacks. Its opt-in removes the
+	# scene's saved duplicate and makes collision follow the displayed profile.
+	if _gallery_clean:
+		for child in get_children():
+			if (child is MultiMeshInstance3D and child != mm_inst) or (child is StaticBody3D and not _collider_bodies.has(child)):
+				remove_child(child)
+				child.queue_free()
 	# Same freed-reference story from the other end: rebuild after a teardown and
 	# mm_inst is a ghost, so get_parent() below would throw instead of returning
 	# null. Build a new one rather than dereference the old.
@@ -179,14 +187,26 @@ func generate_carousel() -> void:
 		# Update cumulative height for next layer
 		cumulative_y += current_height
 
-	# Generate colliders if enabled. These read layer_radii, NOT _vis_radii: the profile
-	# axis is appearance only and never changes what the player can stand on.
+	# Generate colliders if enabled: layer_radii by default, or _vis_radii in
+	# gallery:clean so collision follows the displayed profile.
 	if enable_colliders:
 		_generate_colliders()
 
 	# Appended LAST, so nothing above shifts. Both are no-ops on the default "cake".
 	_retarget_baked_stack()
 	_add_stack_anchor()
+	if _gallery_clean:
+		var label := get_node_or_null("GalleryProfile") as Label3D
+		if label == null:
+			label=Label3D.new()
+			label.name="GalleryProfile"
+			label.position=Vector3(0,1.1,-5.6)
+			label.rotation_degrees.y=180
+			label.font_size=32
+			label.pixel_size=0.01
+			label.outline_size=8
+			add_child(label)
+		label.text=profile.to_upper()+"\nSAME EIGHT LAYERS / SAME SPEED RULE"
 
 func update_carousel_rotation() -> void:
 	# mm_inst is built in code and added as an OWNERLESS child, which is exactly what
@@ -230,7 +250,7 @@ func _generate_colliders() -> void:
 	var cumulative_y: float = 0.0
 
 	for i in range(min(layer_radii.size(), layer_heights.size())):
-		var current_radius: float = layer_radii[i]
+		var current_radius: float = _vis_radii[i] if _gallery_clean else layer_radii[i]
 		var current_height: float = layer_heights[i]
 
 		# Create StaticBody3D
@@ -292,8 +312,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	for k in config.keys():
 		set_meta("config_%s" % str(k), config[k])
 	var was_profile: String = profile
+	var was_clean := _gallery_clean
 	_read_dna()
-	if profile != was_profile:
+	if profile != was_profile or was_clean != _gallery_clean:
 		generate_carousel()
 
 
@@ -301,6 +322,7 @@ func apply_grid_config(config: Dictionary) -> void:
 # Read from the map's config_<key> metadata and normalised, so an unknown word keeps the
 # default rather than silently rendering as one.
 func _read_dna() -> void:
+	_gallery_clean = str(get_meta("config_gallery", "")) == "clean"
 	if has_meta("config_profile"):
 		var p: String = str(get_meta("config_profile")).strip_edges().to_lower()
 		profile = p if PROFILES.has(p) else profile

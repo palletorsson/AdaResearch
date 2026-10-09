@@ -1,12 +1,12 @@
 # @identity
-# essence: quadruped_gait(t) = diagonal_pairs(FL+BR, FR+BL) -- legs pair diagonally into trot and gallop
-# desire: four legs discovering diagonal pairing -- opposite corners move together
-# critical_parameter: diagonal pair timing -- FL+BR alternate with FR+BL; speed determines gait type
-# triggers: patrol_timer drives movement; gait alternates diagonal pairs; speed modulates walk/trot/gallop
-# emerges: diagonal pairing discovered not designed -- four legs naturally fall into this pattern
-# needs: MeshInstance3D [has]; quad IK chains [has]; diagonal gait [has]; patrol [has]; VR interaction [missing]
-# relationships: fourth in progression; introduces diagonal symmetry; dominant vertebrate pattern
-# truth: four legs pair diagonals because geometry demands it -- trot and gallop are necessities, not choices.
+# essence: a commanded mesh body with four planted foot targets; one stretched foot steps at a time
+# desire: make planting and swinging visible while exposing the difference between an animated gait and physical support
+# critical_parameter: step_threshold selects when a planted foot is too far from home; step_duration and step_height shape its swing
+# triggers: patrol moves the body; when no foot is stepping, the furthest foot beyond the threshold is selected
+# emerges: planted intervals alternate with a smooth swing because the stepping branch explicitly schedules them
+# needs: MeshInstance3D [has]; four IK chains [has]; sequential stepping [has]; patrol [has]; physical support solver [missing]
+# relationships: fourth in the walker row; compare its commanded movement with the support_polygon_lab's rigid plate
+# truth: four legs do not dictate this gait; the controller selects one foot at a time without asking a support hull whether the body can stand.
 
 # four_leg_critter.gd
 # Four-legged critter with STEPPING GAIT.
@@ -128,7 +128,7 @@ func _update_gait(delta: float) -> void:
 				_leg_planted[i] = _leg_step_to[i]
 
 	# Check if any planted leg needs to step (too far from home)
-	# Only one leg steps at a time — the other stays planted
+	# Only one leg steps at a time — the other three stay planted
 	var any_stepping: bool = false
 	for i in range(LEG_COUNT):
 		if _leg_stepping[i]:

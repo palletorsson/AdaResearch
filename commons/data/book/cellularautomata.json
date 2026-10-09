@@ -1,224 +1,214 @@
 {
- "chapter": "cellularautomata",
- "speak": "",
- "speak_by": "",
- "pearls": [
-  {
-   "pearl": "ca introduction",
-   "map": "CA_Introduction",
-   "lines": [
+  "chapter": "cellularautomata",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
     {
-     "token": "grid_substrate_runner",
-     "text": "an integrated substrate edits the floor that's already there",
-     "by": "draft",
-     "note": "the floor is the automaton, and a floor must be crossable: a BFS refills whatever the pattern killed between spawn and teleporter, so the first rule the learner meets has already been overruled by the need to carry them.",
-     "note_src": {
-      "file": "commons/grid/mutators/grid_substrate_runner.gd",
-      "quote": "it BFS-fills the cheapest cubes needed so the player can walk from spawn to teleporter regardless of which pattern is active"
-     }
+      "pearl": "ca introduction",
+      "map": "CA_Introduction",
+      "lines": [
+        {
+          "token": "ca_rule_explorer",
+          "text": "Read three neighbouring states, predict their answer, and advance one generation. Change the seed while retaining the rule.",
+          "by": "astra-ca-intro-2026-09-13"
+        },
+        {
+          "token": "persian_rug",
+          "text": "The rug combines local updates, distinct frame and interior rules, and a mirror imposed after every step.",
+          "by": "astra-ca-intro-2026-09-13"
+        },
+        {
+          "token": "line_network_ca",
+          "text": "Growing occupancy and drawing ancestry are different operations; a chosen neighbour becomes the visible connection.",
+          "by": "astra-ca-intro-2026-09-13"
+        }
+      ],
+      "hero": "ca_rule_explorer"
     },
     {
-     "token": "line_network_ca",
-     "text": "Connect each new cell to a neighbor and a network appears — ancestry creates structure",
-     "by": "draft"
+      "pearl": "A cell with a past",
+      "map": "CA_ElementaryRules",
+      "lines": [
+        {
+          "token": "structure_growth",
+          "text": "Follow a cell from active to fading to empty; compare its participation with what the surface lets us see.",
+          "by": "astra-ca-elementary-2026-09-13"
+        }
+      ],
+      "hero": "structure_growth"
     },
     {
-     "token": "persian_rug",
-     "text": "Symmetry imposed on local rules transforms noise into ornament — the rug designs itself",
-     "by": "draft"
+      "pearl": "A history you can inhabit",
+      "map": "CA_GameOfLife",
+      "lines": [
+        {
+          "token": "ca_columns",
+          "text": "Stack time as space and a flat automaton becomes architecture",
+          "by": "draft"
+        },
+        {
+          "token": "mirrored_cellular_automata",
+          "text": "the mandala is not emergent. A fragment is computed and the rest is copied — and this",
+          "by": "draft"
+        },
+        {
+          "token": "ca_bridge",
+          "text": "One recorded history becomes a desk, stepping tiles and a luminous lattice. Follow a row and change one beginning.",
+          "by": "astra-ca-history-2026-09-13"
+        }
+      ],
+      "hero": "ca_bridge"
+    },
+    {
+      "pearl": "A pattern visits an address",
+      "map": "CA_BeyondBinary",
+      "lines": [
+        {
+          "token": "ca_growth_network",
+          "text": "Growth toward a goal, with noise, is enough to produce every vascular pattern in nature",
+          "by": "draft",
+          "note": "the vascular claim needs somewhere to grow toward: eight attractors are placed before the first tip moves, so the growth stays local only because the global information was smuggled in ahead of it as goals nobody grew.",
+          "note_src": {
+            "file": "algorithms/cellularautomata/ca_growth_network/ca_growth_network.gd",
+            "quote": "@export var attractor_count: int = 8  # Number of attractor points"
+          }
+        },
+        {
+          "token": "mold_network",
+          "text": "Slime mold network generation",
+          "by": "draft"
+        },
+        {
+          "token": "game_of_life_petri",
+          "text": "A pattern passes; its addresses stay. Three museum lamps read the occupancy of three fixed cells.",
+          "by": "astra-ca-life-2026-09-13"
+        },
+        {
+          "token": "hexagon_ca_vr",
+          "text": "Six neighbors instead of eight — the shape of the neighborhood reshapes the world",
+          "by": "draft"
+        }
+      ],
+      "hero": "game_of_life_petri"
+    },
+    {
+      "pearl": "ca expandingspace",
+      "map": "CA_ExpandingSpace",
+      "lines": [
+        {
+          "token": "cellular_automata_3d_tree",
+          "text": "A tree is what remains when you remove everything that isn't tree",
+          "by": "draft"
+        },
+        {
+          "token": "crossway_ca",
+          "text": "When every row speaks a different rule language",
+          "by": "draft"
+        },
+        {
+          "token": "decaying_bridge",
+          "text": "Approach, wait, withdraw. A graded surface receives your position; the same health dresses a wall and decides whether a tile supports you.",
+          "by": "astra-proximity-2026-09-13",
+          "note": "The witness names its input and thresholds. SYNC reads one previous state; SCAN lets earlier answers affect later cells. A responding surface is a specified coupling, not proof of life.",
+          "note_src": {
+            "file": "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+            "quote": "var read_states:Dictionary=previous if snapshot_reads else next"
+          }
+        }
+      ],
+      "hero": "decaying_bridge"
+    },
+    {
+      "pearl": "ca softrules",
+      "map": "CA_SoftRules",
+      "lines": [
+        {
+          "token": "ca_sphere",
+          "text": "The same rules on a sphere produce forms no flat grid ever could",
+          "by": "draft",
+          "note": "\"the same rules\" needs the same neighbourhood everywhere, and a sphere has none to give: this one is a 64-by-32 lat-long mesh, crowded at the poles and thin at the equator, so the automaton's world is the mesher's.",
+          "note_src": {
+            "file": "algorithms/cellularautomata/CA_sphere/CA_sphere.gd",
+            "quote": "sphere_mesh.radial_segments = int(pow(2, sphere_subdivisions)) * 8"
+          }
+        },
+        {
+          "token": "rule_30_110_gravity",
+          "text": "Rule 30/110 with gravity effects",
+          "by": "draft"
+        },
+        {
+          "token": "rd_artifact",
+          "text": "Two concentrations, one held beginning. Switch neighbour exchange in B; follow the same field from a table onto a curved wall.",
+          "by": "astra-ca-soft-rules-2026-09-14"
+        },
+        {
+          "token": "the_clockmaker_of_rules",
+          "text": "Read trays, stencils and diagrams. A fractional-looking patch does not by itself establish an evolving continuous automaton.",
+          "by": "astra-ca-soft-rules-2026-09-14"
+        }
+      ],
+      "hero": "rd_artifact"
+    },
+    {
+      "pearl": "ca agentscircuits",
+      "map": "CA_AgentsCircuits",
+      "lines": [
+        {
+          "token": "sierpinski_pyramid",
+          "text": "Six placements repeat at half the spacing. The cubes keep their size; neighbouring copies overlap.",
+          "by": "codex-ca-comparison-2026-10-08",
+          "note": "This installed configuration uses six recursive calls, including an extra crown. Spacing halves; leaf cube size stays fixed. It is a finite collection with overlapping instances.",
+          "note_src": {
+            "file": "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd",
+            "quote": "_recursive_build(pos + Vector3(0, half_size, 0), half_size, current_depth - 1)"
+          }
+        },
+        {
+          "token": "ca_rule_explorer",
+          "text": "Change the seed. Follow the same row history from the desk onto the floor; the pyramid stays fixed.",
+          "by": "codex-ca-comparison-2026-10-08"
+        }
+      ],
+      "hero": "sierpinski_pyramid"
+    },
+    {
+      "pearl": "ca",
+      "map": "Chamber_CA",
+      "lines": [],
+      "drop": true,
+      "edge": "two rule systems meet and neither can say who won: Conway keeps no score, so the chamber imports one — a perturbation that outlives a few ticks counts as a contribution, and the clock does the judging.",
+      "edge_src": {
+        "file": "commons/maps/Chamber_CA/critical.md",
+        "quote": "A second panel tracks which perturbations have survived more than a few ticks"
+      }
+    },
+    {
+      "pearl": "ca edgeofchaos",
+      "map": "CA_EdgeOfChaos",
+      "lines": [
+        {
+          "token": "ca_screen",
+          "text": "Screen display that renders live cellular-automata patterns",
+          "by": "draft"
+        },
+        {
+          "token": "self_organization_ca",
+          "text": "Change one address. Follow its difference through matched 3D updates, then change the way a value is stored.",
+          "by": "astra-ca-edge-2026-09-14"
+        },
+        {
+          "token": "disease_spread_ca",
+          "text": "A simplified three-state local transmission and recovery model; its assumptions are part of the exhibit.",
+          "by": "draft"
+        },
+        {
+          "token": "volumetric_fog_ca",
+          "text": "Binary local density rules mapped to fog, with a labelled central-slice preview in the compatibility renderer.",
+          "by": "draft"
+        }
+      ],
+      "hero": "self_organization_ca"
     }
-   ],
-   "hero": "grid_substrate_runner"
-  },
-  {
-   "pearl": "ca elementaryrules",
-   "map": "CA_ElementaryRules",
-   "lines": [
-    {
-     "token": "structure_growth",
-     "text": "3D structure growth simulation",
-     "by": "draft",
-     "note": "the argument is that 256 is small enough to walk: eight bits enumerate every rule, and a room cannot hold 256 walls, so one 26-neighbour 3D automaton stands where the enumeration should be and completeness stays a claim.",
-     "note_src": {
-      "file": "commons/maps/CA_ElementaryRules/intent.md",
-      "quote": "Needs a rule-comparison wall — a side-by-side display of all 256 elementary rules"
-     }
-    }
-   ],
-   "hero": "structure_growth"
-  },
-  {
-   "pearl": "ca gameoflife",
-   "map": "CA_GameOfLife",
-   "lines": [
-    {
-     "token": "ca_columns",
-     "text": "Stack time as space and a flat automaton becomes architecture",
-     "by": "draft"
-    },
-    {
-     "token": "mirrored_cellular_automata",
-     "text": "the mandala is not emergent. A fragment is computed and the rest is copied — and this",
-     "by": "draft"
-    },
-    {
-     "token": "ca_bridge",
-     "text": "A bridge built by a rule — you walk on computation",
-     "by": "draft",
-     "note": "you walk on computation, and no three-cell rule knows it owes you a floor: rule 110 computes and fills 49.7% of the deck, rule 250 fills 87.5% and computes nothing — the crossing costs the argument.",
-     "note_src": {
-      "file": "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
-      "quote": "87.5% full  class 1/2, near-solid — the control, a ramp that computes nothing"
-     }
-    }
-   ],
-   "hero": "ca_bridge"
-  },
-  {
-   "pearl": "ca beyondbinary",
-   "map": "CA_BeyondBinary",
-   "lines": [
-    {
-     "token": "ca_growth_network",
-     "text": "Growth toward a goal, with noise, is enough to produce every vascular pattern in nature",
-     "by": "draft",
-     "note": "the vascular claim needs somewhere to grow toward: eight attractors are placed before the first tip moves, so the growth stays local only because the global information was smuggled in ahead of it as goals nobody grew.",
-     "note_src": {
-      "file": "algorithms/cellularautomata/ca_growth_network/ca_growth_network.gd",
-      "quote": "@export var attractor_count: int = 8  # Number of attractor points"
-     }
-    },
-    {
-     "token": "mold_network",
-     "text": "Slime mold network generation",
-     "by": "draft"
-    },
-    {
-     "token": "game_of_life_petri",
-     "text": "Simple rules, applied everywhere simultaneously, produce complexity no one designed",
-     "by": "draft"
-    },
-    {
-     "token": "hexagon_ca_vr",
-     "text": "Six neighbors instead of eight — the shape of the neighborhood reshapes the world",
-     "by": "draft"
-    }
-   ],
-   "hero": "ca_growth_network"
-  },
-  {
-   "pearl": "ca expandingspace",
-   "map": "CA_ExpandingSpace",
-   "lines": [
-    {
-     "token": "cellular_automata_3d_tree",
-     "text": "A tree is what remains when you remove everything that isn't tree",
-     "by": "draft"
-    },
-    {
-     "token": "crossway_ca",
-     "text": "When every row speaks a different rule language",
-     "by": "draft"
-    },
-    {
-     "token": "decaying_bridge",
-     "text": "Architecture that reacts to presence is architecture that is alive",
-     "by": "draft",
-     "note": "reacting to presence is not a local rule: every tick the bridge asks the whole scene tree for a node in group \"player\" and decays within two cells of the answer — the reach that matters is a lookup, not a neighbourhood.",
-     "note_src": {
-      "file": "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
-      "quote": "var player = get_tree().get_first_node_in_group(\"player\")"
-     }
-    }
-   ],
-   "hero": "decaying_bridge"
-  },
-  {
-   "pearl": "ca softrules",
-   "map": "CA_SoftRules",
-   "lines": [
-    {
-     "token": "ca_sphere",
-     "text": "The same rules on a sphere produce forms no flat grid ever could",
-     "by": "draft",
-     "note": "\"the same rules\" needs the same neighbourhood everywhere, and a sphere has none to give: this one is a 64-by-32 lat-long mesh, crowded at the poles and thin at the equator, so the automaton's world is the mesher's.",
-     "note_src": {
-      "file": "algorithms/cellularautomata/CA_sphere/CA_sphere.gd",
-      "quote": "sphere_mesh.radial_segments = int(pow(2, sphere_subdivisions)) * 8"
-     }
-    },
-    {
-     "token": "rule_30_110_gravity",
-     "text": "Rule 30/110 with gravity effects",
-     "by": "draft"
-    }
-   ],
-   "hero": "ca_sphere"
-  },
-  {
-   "pearl": "ca agentscircuits",
-   "map": "CA_AgentsCircuits",
-   "lines": [
-    {
-     "token": "sierpinski_pyramid",
-     "text": "Five copies of yourself, arranged just so, and you contain yourself forever",
-     "by": "draft",
-     "note": "authorship over the rule is the payoff and no procedure comes with it: nothing runs from a wanted behaviour back to a rule number, so writing a rule here is searching 256 of them and looking.",
-     "note_src": {
-      "file": "commons/maps/CA_AgentsCircuits/critical.md",
-      "quote": "The 256-rule space is navigable but not designable."
-     }
-    },
-    {
-     "token": "ca_rule_explorer",
-     "text": "An 8-bit number is a universe — Rule 110 proves that three neighbors and one bit can compute …",
-     "by": "draft"
-    }
-   ],
-   "hero": "sierpinski_pyramid"
-  },
-  {
-   "pearl": "ca",
-   "map": "Chamber_CA",
-   "lines": [],
-   "drop": true,
-   "edge": "two rule systems meet and neither can say who won: Conway keeps no score, so the chamber imports one — a perturbation that outlives a few ticks counts as a contribution, and the clock does the judging.",
-   "edge_src": {
-    "file": "commons/maps/Chamber_CA/critical.md",
-    "quote": "A second panel tracks which perturbations have survived more than a few ticks"
-   }
-  },
-  {
-   "pearl": "ca edgeofchaos",
-   "map": "CA_EdgeOfChaos",
-   "lines": [
-    {
-     "token": "ca_screen",
-     "text": "Screen display that renders live cellular-automata patterns",
-     "by": "draft"
-    },
-    {
-     "token": "self_organization_ca",
-     "text": "There are two ways to die — freeze into one thing",
-     "by": "draft",
-     "note": "narrowness can only be shown by leaving the band, and nothing here can leave: lambda is a constant 0.5 with no slider in the map, so the edge of chaos is walked from inside it and the two deaths stay named, not met.",
-     "note_src": {
-      "file": "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
-      "quote": "needs: VR lambda slider [missing — see set_lambda()]"
-     }
-    },
-    {
-     "token": "disease_spread_ca",
-     "text": "Two probabilities and a grid of neighbors — this is how pandemics actually work",
-     "by": "draft"
-    },
-    {
-     "token": "volumetric_fog_ca",
-     "text": "Fog is a cellular automaton — local density rules produce clouds no one shaped",
-     "by": "draft"
-    }
-   ],
-   "hero": "self_organization_ca"
-  }
- ]
+  ]
 }

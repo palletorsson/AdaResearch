@@ -120,7 +120,7 @@ const RIG_Y: float = 0.7
 const LATTICE: int = 48
 
 const PLATE_W: float = 0.9
-const PLATE_H: float = 0.22
+const PLATE_H: float = 0.34
 const PLATE_Y: float = 0.25
 ## Clear of the solid's swept silhouette: the box's rotated corner radius is
 ## 0.4·√2 = 0.566, so a plate at 0.62 is never pierced as the rig turns.

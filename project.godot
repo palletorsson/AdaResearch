@@ -42,6 +42,7 @@ CatalystCapabilityManager="*res://commons/managers/CatalystCapabilityManager.gd"
 SceneManager="*res://commons/managers/AdaSceneManager.gd"
 SoundBank="*res://commons/audio/SoundBankSingleton.gd"
 TraceData="*res://commons/globals/trace_data.gd"
+LeakData="*res://commons/globals/leak_data.gd"
 SceneNarrator="*res://commons/managers/SceneNarrator.gd"
 EquipmentRegistry="*res://commons/globals/equipment_registry.gd"
 Subtitles="*res://commons/ui/subtitles/SubtitleManager.gd"
@@ -165,7 +166,7 @@ toggle_artifact_catalog={
 
 [physics]
 
-3d/physics_engine="GodotPhysics3D"
+3d/physics_engine="Jolt Physics"
 3d/solver/contact_max_allowed_penetration=0.001
 
 [rendering]

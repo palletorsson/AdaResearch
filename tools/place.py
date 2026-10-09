@@ -58,6 +58,7 @@ from placement_research import (    # type: ignore
 )
 from place_artifacts import (
     existing_placements, room_from_map, parse_lookup_name, artifact_from_registry,
+    grid_dims_from_map,
 )
 from walk_evaluator import walk_placement
 
@@ -133,9 +134,8 @@ def auto_select_engine(map_name: str, map_data: dict, n_artifacts: int,
     is_lab = "Lab" in name or name.startswith("MANN_")
     in_spine = sequence_info is not None and sequence_info.get("in_spine", False)
 
-    dims = map_data["map_info"].get("dimensions", {})
-    width = int(dims.get("width", 10) or 10)
-    depth = int(dims.get("depth", 6) or 6)
+    # Same honest reading room_from_map uses — declared dims drift on ~10% of maps.
+    width, depth = grid_dims_from_map(map_data)
     area = width * depth
     # Aspect ratio: depth/width. >= 1.8 = corridor (Palle's signature shape).
     aspect = depth / max(1, width)

@@ -44,12 +44,46 @@ var _color_a_swatch: MeshInstance3D
 var _color_b_swatch: MeshInstance3D
 var _color_a_mat: StandardMaterial3D
 var _color_b_mat: StandardMaterial3D
+var comparison_controls: Array[Node3D] = []
 
 
 func _ready() -> void:
+	if str(get_meta("config_mount", "")) == "comparison":
+		cube_size = 0.045
+		cube_gap = 0.009
+		var support := MeshInstance3D.new()
+		support.name = "ComparisonPlinth"
+		var box := BoxMesh.new()
+		box.size = Vector3(1.1,0.95,0.9)
+		support.mesh = box
+		support.position = Vector3(0,-0.475,0.1)
+		var finish := StandardMaterial3D.new()
+		finish.albedo_color = Color("cdc5ba")
+		support.material_override = finish
+		add_child(support)
+		support.create_convex_collision()
 	_build_gradient_row()
 	_build_swatches()
 	_build_mode_label()
+	if str(get_meta("config_mount", "")) == "comparison":
+		# Lift the values above the control plate so the input never hides its result.
+		for cube in _cubes: cube.position.y = 0.60
+		_color_a_swatch.position.y = 0.60
+		_color_b_swatch.position.y = 0.60
+		_mode_label.position.y = 0.72
+		var shelf := MeshInstance3D.new()
+		var shelf_mesh := BoxMesh.new()
+		shelf_mesh.size = Vector3(1.1,0.03,0.16)
+		shelf.mesh = shelf_mesh
+		shelf.position = Vector3(0,0.56,0)
+		add_child(shelf)
+		for side in [-1,1]:
+			var stem := MeshInstance3D.new()
+			var stem_mesh := BoxMesh.new()
+			stem_mesh.size = Vector3(0.025,0.56,0.05)
+			stem.mesh = stem_mesh
+			stem.position = Vector3(side*0.5,0.28,-0.04)
+			add_child(stem)
 	_build_panel()
 	_recalculate()
 
@@ -133,6 +167,24 @@ func _build_mode_label() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _build_panel() -> void:
+	if str(get_meta("config_mount", "")) == "comparison":
+		var panel: Node3D = load("res://commons/ui/control_panel.gd").new()
+		panel.name = "ComparisonControls"
+		panel.title = "SAME ENDS / ANOTHER PATH"
+		panel.position = Vector3(0,0.22,0.3)
+		add_child(panel)
+		for label in ["COLOUR A", "COLOUR B", "RGB / HSV"]:
+			comparison_controls.append(panel.add_button(label))
+		comparison_controls[0].pressed.connect(func():
+			_color_a_idx = (_color_a_idx + 1) % COLOR_PRESETS.size()
+			_color_a_mat.albedo_color = COLOR_PRESETS[_color_a_idx]
+			_recalculate())
+		comparison_controls[1].pressed.connect(func():
+			_color_b_idx = (_color_b_idx + 1) % COLOR_PRESETS.size()
+			_color_b_mat.albedo_color = COLOR_PRESETS[_color_b_idx]
+			_recalculate())
+		comparison_controls[2].pressed.connect(_toggle_mode)
+		return
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 	var panel: Node3D = RackTpl.create_panel("GRADIENT", [
 		[

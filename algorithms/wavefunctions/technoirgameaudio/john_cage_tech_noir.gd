@@ -9,8 +9,8 @@ extends Node3D
 # essence: ambient(t) = drone(t) + sum(random_effect_i(t)) with stochastic scheduling
 # desire: Stand in a space where algorithmic composition endlessly generates cyberpunk ambience
 # critical_parameter: num_effect_players — determines the density of the random sound event texture
-# triggers: stochastic timers trigger random effect generation; drone layer provides continuous foundation
-# emerges: endless non-repeating ambient music from a small vocabulary of synthesis rules
+# triggers: a per-frame random threshold schedules prepared effect clips; drone and city ambience provide continuous layers
+# emerges: varied arrangements of a finite synthesized vocabulary; recurrence remains possible
 # needs: VR presence [has], 3D loading bar visualization [has]
 # relationships: depends on threaded audio generation; contrasts with SoundscapeRadioRack (generative vs preset ambience); unlocks algorithmic composition
 # truth: Silence is not the absence of sound — it is the space between algorithmically chosen events.
@@ -466,11 +466,13 @@ func _on_progress_updated(progress: float) -> void:
 
 func _on_generation_complete() -> void:
 	
-	# Hide loading bar with fade effect
+	# A Node3D has no CanvasItem modulate property. Remove the completed display.
 	if loading_bar_container:
-		var tween = create_tween()
-		tween.tween_property(loading_bar_container, "modulate:a", 0.0, 1.0)
-		tween.tween_callback(loading_bar_container.queue_free)
+		loading_bar_container.queue_free()
+		loading_bar_container = null
+		loading_bar_fill = null
+		loading_text = null
+		progress_text = null
 	
 	# Start ambient sounds
 	if not playback_started:
@@ -1383,7 +1385,8 @@ func shutdown_audio() -> void:
 	stop_requested = true
 	playback_started = false
 	is_generating = false
-	if generation_thread and generation_thread.is_alive():
+	# A finished thread still needs joining before its handle is released.
+	if generation_thread and generation_thread.is_started():
 		generation_thread.wait_to_finish()
 	generation_thread = null
 	if drone_player:

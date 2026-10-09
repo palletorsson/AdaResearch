@@ -4,8 +4,8 @@ extends Node3D
 # essence: min_G max_D V(D,G) = E[log D(x)] + E[log(1 - D(G(z)))] — adversarial minimax game
 # desire: stand between two competing neural networks, throw noise into the generator, judge fake vs real
 # critical_parameter: competition_level — the balance between generator and discriminator drives quality
-# triggers: training_progress drives both losses; generator_loss falling means fakes improving; competition pillar grows with quality
-# emerges: Nash equilibrium where generated data becomes indistinguishable from real — creation from adversarial pressure
+# triggers: a clock drives illustrative losses, particle travel and pillar height; no model is trained
+# emerges: a spatial diagram of two learning roles, not evidence of improvement or equilibrium
 # needs: throwable noise particles [has], central competition arena [has], feedback loop particles [has]
 # relationships: contrasts neural_networks_vr (discriminative vs generative); depends on gradient_descent_visualization (both networks optimize)
 # truth: creation can emerge from opposition — the generator learns to create precisely because the discriminator learns to destroy
@@ -50,6 +50,7 @@ var feedback_particles: Array = []
 var generator_zone: Node3D
 var discriminator_zone: Node3D
 var competition_arena: Node3D
+var _metrics_label: Label3D
 
 func _ready() -> void:
 	_create_generator_zone()
@@ -76,6 +77,7 @@ func _process(delta: float) -> void:
 	_animate_competition(delta)
 	_animate_data_flow(delta)
 	_animate_feedback_loop(delta)
+	_update_metrics_label()
 
 func _create_generator_zone() -> void:
 	"""Create the Generator zone (left side)"""
@@ -196,16 +198,18 @@ func _create_fake_data_spawn() -> void:
 	add_child(spawn_zone)
 
 	# Create fake data particles (purple)
-	for i in range(particle_count, 2):
+	for i in range(0, particle_count, 2):
 		var fake = _create_data_particle(
-			Vector3(0, 0, 0),
+			Vector3((i % 6 - 2) * 0.25, 0, floori(i / 6.0) * 0.35),
 			Color(0.9, 0.3, 0.9),
 			"FAKE"
 		)
 		spawn_zone.add_child(fake)
 		fake_data_particles.append({
 			"node": fake,
-			"spawn_zone": spawn_zone
+			"spawn_zone": spawn_zone,
+			"start": fake.position,
+			"progress": float(i) / maxf(particle_count, 1)
 		})
 
 func _create_discriminator_zone() -> void:
@@ -276,7 +280,7 @@ func _create_real_data_area() -> void:
 	real_zone.add_child(platform)
 
 	# Create real data particles (green)
-	for i in range(particle_count, 2):
+	for i in range(0, particle_count, 2):
 		var real = _create_data_particle(
 			Vector3(
 				randf_range(-0.8, 0.8),
@@ -426,7 +430,8 @@ func _create_training_controls() -> void:
 	"""Create VR-accessible control panel"""
 	var controls = Node3D.new()
 	controls.name = "TrainingControls"
-	controls.position = Vector3(0, 2.5, -arena_size - 2.0)
+	controls.position = Vector3(0, 2.0, -arena_size - 2.0)
+	controls.rotation.y = PI
 	add_child(controls)
 
 	# Control panel
@@ -445,8 +450,8 @@ func _create_training_controls() -> void:
 
 	# Title
 	var title = Label3D.new()
-	title.text = "GAN TRAINING ARENA"
-	title.font_size = 72
+	title.text = "GAN ROLES / ANIMATED DIAGRAM"
+	title.font_size = 36
 	title.outline_size = 14
 	title.position = Vector3(0, 0.7, 0.1)
 	controls.add_child(title)
@@ -454,11 +459,16 @@ func _create_training_controls() -> void:
 	# Metrics
 	var metrics = Label3D.new()
 	metrics.name = "MetricsLabel"
-	metrics.text = "Gen Loss: 1.00\nDisc Loss: 1.00"
-	metrics.font_size = 48
+	_metrics_label = metrics
+	metrics.font_size = 30
 	metrics.outline_size = 10
 	metrics.position = Vector3(0, -0.3, 0.1)
 	controls.add_child(metrics)
+	_update_metrics_label()
+
+func _update_metrics_label() -> void:
+	if is_instance_valid(_metrics_label):
+		_metrics_label.text = "Scripted loss: G %.2f / D %.2f\nNo models trained" % [generator_loss, discriminator_loss]
 
 func _create_info_panels() -> void:
 	"""Create educational info panels"""
@@ -479,7 +489,7 @@ func _create_info_panels() -> void:
 	# Arena explanation
 	_create_info_panel(
 		Vector3(0, 5.0, 0),
-		"Both networks compete\nand improve together\nthrough adversarial training",
+		"Two roles, changing feedback\nThis animation illustrates the exchange\nImprovement requires a learning experiment",
 		Color(0.9, 0.5, 0.2)
 	)
 
@@ -528,9 +538,11 @@ func _animate_data_flow(delta) -> void:
 	"""Animate fake data flowing from generator to discriminator"""
 	for fake_data in fake_data_particles:
 		var node = fake_data.node
-		# Move toward discriminator
-		var target_pos = Vector3(room_separation * 0.5, 2.0, 0)
-		node.position = node.position.lerp(target_pos, delta * 0.3 * generation_quality)
+		# Use the spawn parent's coordinates; museum translation/scale must not
+		# change the exchange. A loop keeps the diagram readable after arrival.
+		fake_data.progress = fposmod(fake_data.progress + delta * 0.1, 1.0)
+		var target_pos: Vector3 = fake_data.spawn_zone.to_local(to_global(Vector3(room_separation, 2.0, 0)))
+		node.position = fake_data.start.lerp(target_pos, fake_data.progress)
 
 func _animate_feedback_loop(delta) -> void:
 	"""Animate feedback particles circling the system via MultiMesh"""
@@ -564,6 +576,10 @@ func reset_training() -> void:
 	discriminator_loss = 1.0
 	competition_level = 0.0
 	time = 0.0
+	generation_quality = 0.0
+	for i in range(fake_data_particles.size()):
+		fake_data_particles[i].progress = float(i) / maxf(fake_data_particles.size(), 1)
+	_update_metrics_label()
 
 func get_metrics() -> Dictionary:
 	return {

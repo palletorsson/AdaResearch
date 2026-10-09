@@ -102,10 +102,56 @@ def artifacts_in(map_name: str) -> list[str]:
         if not isinstance(row, list):
             continue
         for cell in row:
-            tok = str(cell).split("#")[0].split(":")[0].strip()
-            if tok:
+            if not isinstance(cell, str):
+                continue
+            tok = cell.split("#")[0].split(":")[0].strip()
+            if tok and tok != "-":
                 out.append(tok)
+    # An explicitly arranged grid utility can carry a book encounter too.
+    # Keep unruled floor, spawn and other infrastructure out of the manifest.
+    rulings = ROLES.get("roles", {}).get(map_name, {})
+    for row in d.get("layers", {}).get("utilities", []):
+        for cell in row:
+            token = str(cell).split("#", 1)[0].split(":", 1)[0].strip()
+            if token and token in rulings:
+                out.append(token)
     return out
+
+
+def read_ruling(value) -> tuple[str, str]:
+    """Role strings and {role, group} records share one output grammar.
+
+    Preserve this manifest's existing unruled default; an implicit default is
+    not a deliberate primary assignment.
+    """
+    role = value.get("role", "") if isinstance(value, dict) else value
+    group = value.get("group", "") if isinstance(value, dict) else ""
+    return (role if role in ("primary", "secondary", "decoration") else "unruled",
+            group if isinstance(group, str) else "")
+
+
+def ruled_tokens(placed: list[str], roles: dict, order: dict) -> list[str]:
+    """Expand a ruled @group without moving untouched works ahead of the floor.
+
+    The parent column places the group. Its role|group bucket orders current
+    members; unlisted members follow in placement order. Group references and
+    removed placements never become artifacts in the manifest.
+    """
+    in_room = set(placed)
+    out: list[str] = []
+    for role in ("primary", "secondary", "decoration"):
+        for item in order.get(role, []) or []:
+            if not isinstance(item, str):
+                continue
+            if item.startswith("@"):
+                group = item[1:]
+                members = [token for token in placed if read_ruling(roles.get(token)) == (role, group)]
+                ordered = order.get(role + "|" + group, []) or []
+                out.extend(token for token in ordered if isinstance(token, str) and token in members)
+                out.extend(members)
+            elif item in in_room:
+                out.append(item)
+    return list(dict.fromkeys(out))
 
 
 def thread(map_name: str) -> list[tuple[str, str, str]]:
@@ -119,8 +165,7 @@ def thread(map_name: str) -> list[tuple[str, str, str]]:
     in_room = set(placed)
     roles = (ROLES.get("roles") or {}).get(map_name) or {}
     ruled_by_role = (ROLES.get("order") or {}).get(map_name) or {}
-    ruled = [t for r in ("primary", "secondary", "decoration")
-             for t in (ruled_by_role.get(r) or [])]       # source 1
+    ruled = ruled_tokens(placed, roles, ruled_by_role)    # source 1
     try:
         floor = floor_order.read_room(map_name, "all").get("floor") or []   # source 2
     except Exception:
@@ -132,7 +177,7 @@ def thread(map_name: str) -> list[tuple[str, str, str]]:
         for t in tokens:
             if t in in_room and t not in seen:
                 seen.add(t)
-                out.append((t, roles.get(t, "unruled"), src))
+                out.append((t, read_ruling(roles.get(t))[0], src))
     return out
 
 

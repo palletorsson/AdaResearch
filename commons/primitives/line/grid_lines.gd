@@ -1,5 +1,8 @@
 extends Node3D
 
+const DataInstrumentSurface = preload("res://commons/ui/data_instrument_surface.gd")
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 
 # Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md.
 # grid_lines reads as "a lattice floating in void" — the cells around it
@@ -23,7 +26,7 @@ func spine_hints() -> Dictionary:
 # critical_parameter: grid_size — how many cells appear; determines resolution of spatial reference
 # triggers: TraceData global signal — saved player traces appear as scaled rotating meshes on grid intersections
 # emerges: the grid as a display medium, not just reference — traces replay as spatial memory
-# needs: [has Label3D [has], missing VR controls — purely informational]
+# needs: [flat data readout, physical page controls in the museum placement]
 # relationships: subscribes to player_trace data; uses line as its primitive unit
 # truth: a coordinate grid does not exist in space — it is a social agreement we project onto space
 
@@ -56,10 +59,15 @@ func apply_grid_config(config: Dictionary) -> void:
 		trace_height = clampf(float(str(config["trace_height"])), 0.0, 3.0)
 
 
+var _data_panel: Node3D
+var _cased_readout: bool = false
+
 var _rotating_instances: Array[Node3D] = []
-var _data_table_label: Label3D
+var _data_table_label: Label
 var _trace_data_list: Array[Dictionary] = []  # Store info about each trace
 var _data_table_page: int = 0  # Current page of points to display
+var _archive_auto := false
+var _page_buttons: Array[Node3D] = []
 var _data_table_timer: float = 0.0  # Timer for page cycling
 
 func _process(delta: float) -> void:
@@ -71,7 +79,7 @@ func _process(delta: float) -> void:
 			_rotating_instances.remove_at(i)
 
 	# Cycle through data table pages
-	if _data_table_label and _data_table_label.visible:
+	if _archive_auto and _data_table_label and _data_table_label.visible:
 		_data_table_timer += delta
 		if _data_table_timer >= data_table_page_duration:
 			_data_table_timer = 0.0
@@ -80,6 +88,7 @@ func _process(delta: float) -> void:
 
 func _ready():
 	print("GridLines: _ready called")
+	_cased_readout = str(get_meta("config_panel", "0")) in ["1", "true"]
 	setup_grid()
 	_setup_data_table()
 
@@ -97,28 +106,32 @@ func _ready():
 func _on_trace_added(points: Array) -> void:
 	_create_trace_mesh(points)
 	_add_trace_to_data(points)
+	_data_table_page = 0
+	_data_table_timer = 0.0
 	_update_data_table()
+
+func _display_frame(points: Array) -> Dictionary:
+	var lo: Vector3 = points[0]
+	var hi: Vector3 = points[0]
+	for p: Vector3 in points:
+		lo = lo.min(p)
+		hi = hi.max(p)
+	var span := hi - lo
+	var extent := maxf(span.x, maxf(span.y, span.z))
+	var factor := trace_scale
+	if extent * factor > 5.0 and extent > 0.001:
+		factor = 5.0 / extent
+	return {"center": (lo + hi) * 0.5, "size": span, "scale": factor}
 
 func _create_trace_mesh(points: Array) -> void:
 	if points.is_empty():
 		return
 		
-	# Calculate Center & Size
-	var min_p = points[0]
-	var max_p = points[0]
-	for p in points:
-		min_p = min_p.min(p)
-		max_p = max_p.max(p)
-	var center = (min_p + max_p) / 2.0
-	var size = max_p - min_p
-	var max_dim = max(size.x, max(size.y, size.z))
+	var frame := _display_frame(points)
+	var center: Vector3 = frame.center
+	var size: Vector3 = frame.size
+	var final_scale: float = frame.scale
 	
-	# Calculate scale with clamping
-	var final_scale = trace_scale
-	if max_dim * trace_scale > 5.0:
-		if max_dim > 0.001:
-			final_scale = 5.0 / max_dim
-			
 	print("GridLines: Creating trace mesh with %d points. Centered at: %s. Size: %s. Final Scale: %.2f" % [points.size(), center, size, final_scale])
 	
 	_create_shadow_trace(points, center, final_scale)
@@ -210,7 +223,7 @@ func setup_grid():
 				Vector3(half_size, 0, z_pos)
 			)
 			# Highlight center lines
-			if i == grid_size / 2:
+			if is_zero_approx(z_pos):
 				line_node.set_line_properties(0.01, Color(1.0, 0.3, 0.3, 1.0))  # Red for X axis
 			else:
 				line_node.set_line_properties(0.006, Color(0.6, 0.6, 0.6, 0.8))
@@ -225,37 +238,93 @@ func setup_grid():
 				Vector3(x_pos, 0, half_size)
 			)
 			# Highlight center lines
-			if i == grid_size / 2:
+			if is_zero_approx(x_pos):
 				line_node.set_line_properties(0.01, Color(0.3, 0.3, 1.0, 1.0))  # Blue for Z axis
 			else:
 				line_node.set_line_properties(0.006, Color(0.6, 0.6, 0.6, 0.8))
 
 func _setup_data_table() -> void:
-	if not show_data_table:
-		return
+	if not show_data_table: return
+	_data_panel = DataInstrumentSurface.new()
+	_data_panel.name = "ArchivePanel"
+	_data_panel.size_m = Vector2(.92, .78)
+	_data_panel.body_color = data_table_color
+	_data_panel.preferred_font_size = maxi(26, data_table_font_size)
+	# The basin is one metre below the museum deck. Front-right placement
+	# keeps the complete case outside the lattice and the controls before it.
+	_data_panel.position = Vector3(3.10, 2.2, 3.15) if _cased_readout else data_table_position
+	_data_panel.rotation_degrees.x = -35
+	add_child(_data_panel)
+	_data_panel.heading.text = "RELEASED TRACES"
+	_data_table_label = _data_panel.table
+	if _cased_readout:
+		_build_archive_controls()
+	else:
+		# Existing unconfigured placements retain automatic paging.
+		_archive_auto = true
+	_update_data_table()
 
-	_data_table_label = Label3D.new()
-	_data_table_label.name = "TraceDataTable"
-	_data_table_label.font_size = data_table_font_size
-	_data_table_label.pixel_size = 0.001  # Sharper text
-	_data_table_label.modulate = data_table_color
-	_data_table_label.outline_size = 2
-	_data_table_label.outline_modulate = Color(0.1, 0.1, 0.2, 0.9)
+func _fit_data_panel() -> void:
+	if is_instance_valid(_data_panel): _data_panel.refresh()
 
-	# Billboard Y only - rotate to face camera but stay upright
-	_data_table_label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
-	_data_table_label.fixed_size = false
+func _build_archive_controls() -> void:
+	# Keep the support upright when the reading plane tilts. This placement
+	# belongs to the museum's one-metre-deep basin and stands on its rim.
+	for part in [
+		["ArchiveFoot",Vector3(.42,.04,.40),Vector3(3.10,1.02,3.08)],
+		["ArchiveStem",Vector3(.14,.94,.14),Vector3(3.10,1.47,3.08)],
+		["ArchiveBracket",Vector3(.22,.06,.30),Vector3(3.10,1.96,3.21)]]:
+		var support := MeshInstance3D.new()
+		support.name = part[0]
+		support.mesh = BoxMesh.new()
+		support.mesh.size = part[1]
+		support.position = part[2]
+		var finish := StandardMaterial3D.new()
+		finish.albedo_color = Color(.14,.17,.19)
+		finish.metallic = .45
+		finish.roughness = .5
+		support.material_override = finish
+		add_child(support)
+	var strip := MeshInstance3D.new()
+	strip.name = "PagingBackplate"
+	strip.mesh = BoxMesh.new()
+	strip.mesh.size = Vector3(.58, .19, .045)
+	strip.position = Vector3(0, -.50, -.025)
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(.18, .21, .23)
+	material.roughness = .65
+	strip.material_override = material
+	_data_panel.add_child(strip)
+	for index in 3:
+		var button: Node3D = load("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = ["PreviousPage", "AutoPages", "NextPage"][index]
+		button.position = Vector3((index-1)*.18, -.475, .002)
+		button.released_color = Color(.25, .30, .32)
+		button.selected_color = Color(.35, .80, .66)
+		button.released_emission_energy = .05
+		_data_panel.add_child(button)
+		_page_buttons.append(button)
+		var caption := BakedText.make_label_mesh(["PREVIOUS", "AUTO", "NEXT"][index], Color(.92,.95,1), Vector2(.15,.028), 2200, true)
+		caption.position = Vector3(button.position.x, -.55, .001)
+		_data_panel.add_child(caption)
+	_page_buttons[0].pressed.connect(func(): step_archive_page(-1))
+	_page_buttons[1].pressed.connect(func(): set_archive_auto(not _archive_auto))
+	_page_buttons[2].pressed.connect(func(): step_archive_page(1))
 
-	# Horizontal alignment
-	_data_table_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+func set_archive_auto(enabled: bool) -> void:
+	_archive_auto = enabled
+	_data_table_timer = 0.0
+	if not _page_buttons.is_empty(): _page_buttons[1].set_selected(enabled)
+	if is_instance_valid(_data_panel):
+		_data_panel.heading.text = "RELEASED TRACES / AUTO" if enabled else "RELEASED TRACES"
+		_data_panel.refresh()
 
-	# Scale bigger
-	_data_table_label.scale = Vector3(2.0, 2.0, 2.0)
-
-	_data_table_label.position = data_table_position
-	_data_table_label.visible = false
-
-	add_child(_data_table_label)
+func step_archive_page(direction: int) -> void:
+	set_archive_auto(false)
+	if _trace_data_list.is_empty(): return
+	var pages := maxi(1, ceili(float(_trace_data_list[-1].raw_points.size()) / 10.0))
+	_data_table_page = posmod(_data_table_page + direction, pages)
+	_update_data_table()
 
 func _add_trace_to_data(points: Array) -> void:
 	if points.is_empty():
@@ -287,7 +356,12 @@ func _add_trace_to_data(points: Array) -> void:
 		_trace_data_list.pop_front()
 
 func _update_data_table() -> void:
-	if not _data_table_label or _trace_data_list.is_empty():
+	if not _data_table_label: return
+	if _trace_data_list.is_empty():
+		_data_table_label.text = "RELEASED TRACES / THIS SESSION\n\nNo released trace yet.\nDraw with a dot in Trace, then let go.\nThe walking path is a separate recorder."
+		_data_table_label.visible = _cased_readout
+		_data_panel.visible = _cased_readout
+		call_deferred("_fit_data_panel")
 		return
 
 	var total_points = 0
@@ -307,19 +381,24 @@ func _update_data_table() -> void:
 		_data_table_page = 0
 
 	# Build full table with raw data points
-	var table_text = "GRID TRACE ARCHIVE\n"
-	table_text += "─────────────────────────────────\n"
-	table_text += "Traces: %d  Points: %d  Length: %.2f m\n" % [_trace_data_list.size(), total_points, total_length]
-	table_text += "─────────────────────────────────\n"
-	table_text += "RAW DATA POINTS (Page %d/%d)\n" % [_data_table_page + 1, total_pages]
-	table_text += "─────────────────────────────────\n"
+	var frame := _display_frame(raw_pts)
+	var table_text = "THIS SESSION\n"
+	table_text += "Summary: last %d traces / %d points\n" % [_trace_data_list.size(), total_points]
+	table_text += "Latest: %d points / %.3f m source length\n" % [raw_pts.size(), latest_trace.length]
+	table_text += "Display: centred, x%.3f / pink source shape\n" % frame.scale
+	table_text += "Green: %.4f m snap in DISPLAY space\n" % (cell_spacing / max(1,shadow_snap_subdivisions))
+	table_text += "Ruling: %.2f m / separate from walking grid\n" % cell_spacing
+	table_text += "SOURCE WORLD POSITIONS (m) / %d of %d\n" % [_data_table_page + 1,total_pages]
 
 	# Show 10 points for current page
 	var start_idx = _data_table_page * pts_per_page
 	var end_idx = min(start_idx + pts_per_page, raw_pts.size())
 	for i in range(start_idx, end_idx):
 		var pt = raw_pts[i]
-		table_text += "%3d: (%.2f, %.2f, %.2f)\n" % [i + 1, pt.x, pt.y, pt.z]
+		table_text += "%3d: (%.3f, %.3f, %.3f)\n" % [i + 1, pt.x, pt.y, pt.z]
 
 	_data_table_label.text = table_text
 	_data_table_label.visible = true
+	_data_panel.visible = true
+	call_deferred("_fit_data_panel")
+

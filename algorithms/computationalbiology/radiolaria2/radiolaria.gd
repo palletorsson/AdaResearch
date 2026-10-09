@@ -1,9 +1,23 @@
 extends Node3D
 
+var _form_rng := RandomNumberGenerator.new()
+
+
 # Radiolaria and Pollen Form Generator
 # Creates a variety of symmetric geometric biological forms inspired by Ernst Haeckel illustrations
 
 @export_category("Generation Settings")
+## THE DICE, MADE NAMEABLE. 84 rand* call sites decide where every spine,
+## pore and ring goes, and until now `_form_rng.randomize()` reseeded them from the
+## clock on every _ready — so two placements of this token were two different
+## organisms and no sweep over it could mean anything. 0 keeps the old
+## behaviour (a fresh roll each time); any other value pins the specimen.
+##
+## Named `generation_seed` for two reasons: GDScript already has a global
+## `seed()`, and generation_seed is one of the 302 keys in
+## GridInteractablesComponent.CONFIG_PARAM_NAMES — an unlisted key with a
+## numeric value is read as the positional shorthand and sets the yaw.
+@export var generation_seed: int = 0
 @export var number_of_forms: int = 9
 @export var grid_size: int = 3
 @export var spacing: float = 2.5
@@ -36,7 +50,12 @@ var info_label = null
 var form_buttons = []
 
 func _ready() -> void:
-	randomize()
+	# one call governs all 84 sites: seed() sets the global RNG that every
+	# randf/randi below draws from
+	if generation_seed != 0:
+		_form_rng.seed = generation_seed
+	else:
+		_form_rng.randomize()
 	
 	# Set up enhanced visual environment
 	setup_visual_environment()
@@ -164,7 +183,9 @@ func create_noise_texture() -> NoiseTexture2D:
 	var noise = FastNoiseLite.new()
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.frequency = 8.0
-	noise.seed = randi()
+	# the noise carries its own seed, so it has to be told separately or the
+	# shell texture re-rolls under a pinned specimen
+	noise.seed = generation_seed if generation_seed != 0 else _form_rng.randi()
 	
 	var noise_texture = NoiseTexture2D.new()
 	noise_texture.noise = noise
@@ -356,7 +377,7 @@ func generate_grid() -> void:
 			var position = start_pos + Vector3(x * spacing, 0, z * spacing)
 			
 			# Choose a random form type
-			var form_type = randi() % 6  # 6 different form types
+			var form_type = _form_rng.randi() % 6  # 6 different form types
 			
 			match form_type:
 				0: create_basic_radiolaria(forms_container, position)
@@ -379,7 +400,7 @@ func create_basic_radiolaria(parent, position):
 	core.radius = 0.5
 	core.radial_segments = 16
 	core.rings = 8
-	core.material = base_materials[randi() % base_materials.size()]
+	core.material = base_materials[_form_rng.randi() % base_materials.size()]
 	form.add_child(core)
 	
 	# Add subtle surface texture if enabled
@@ -387,16 +408,16 @@ func create_basic_radiolaria(parent, position):
 		add_surface_texture_to_core(core)
 	
 	# Add some random bumps
-	var num_bumps = randi() % 15 + 5
+	var num_bumps = _form_rng.randi() % 15 + 5
 	
 	for i in range(num_bumps):
 		var bump = CSGSphere3D.new()
 		bump.name = "Bump_" + str(i)
-		bump.radius = randf_range(0.05, 0.2)
+		bump.radius = _form_rng.randf_range(0.05, 0.2)
 		
 		# Position on sphere surface
-		var phi = randf() * PI * 2
-		var theta = randf() * PI
+		var phi = _form_rng.randf() * PI * 2
+		var theta = _form_rng.randf() * PI
 		var r = 0.5 - bump.radius * 0.5  # Slightly embedded in the core
 		
 		var x = r * sin(theta) * cos(phi)
@@ -406,8 +427,8 @@ func create_basic_radiolaria(parent, position):
 		bump.position = Vector3(x, y, z)
 		bump.operation = CSGShape3D.OPERATION_UNION
 		
-		if randf() < 0.3:  # 30% chance of different color
-			bump.material = spike_materials[randi() % spike_materials.size()]
+		if _form_rng.randf() < 0.3:  # 30% chance of different color
+			bump.material = spike_materials[_form_rng.randi() % spike_materials.size()]
 		
 		core.add_child(bump)
 	
@@ -423,14 +444,14 @@ func create_spiky_radiolaria(parent, position):
 	var core = CSGSphere3D.new()
 	core.name = "Core"
 	core.radius = 0.4
-	core.material = base_materials[randi() % base_materials.size()]
+	core.material = base_materials[_form_rng.randi() % base_materials.size()]
 	form.add_child(core)
 	
 	# Choose a spike material
-	var spike_material = spike_materials[randi() % spike_materials.size()]
+	var spike_material = spike_materials[_form_rng.randi() % spike_materials.size()]
 	
 	# Determine spike pattern - regular or random
-	var regular_pattern = randf() < 0.5
+	var regular_pattern = _form_rng.randf() < 0.5
 	var num_spikes = 0
 	
 	if regular_pattern:
@@ -442,11 +463,11 @@ func create_spiky_radiolaria(parent, position):
 			add_spike(core, vertices[i], spike_material)
 	else:
 		# Random pattern
-		num_spikes = randi() % 40 + 20
+		num_spikes = _form_rng.randi() % 40 + 20
 		
 		for i in range(num_spikes):
-			var phi = randf() * PI * 2
-			var theta = randf() * PI
+			var phi = _form_rng.randf() * PI * 2
+			var theta = _form_rng.randf() * PI
 			var r = 0.4  # Core radius
 			
 			var direction = Vector3(
@@ -463,8 +484,8 @@ func create_spiky_radiolaria(parent, position):
 func add_spike(parent, direction, material) -> void:
 	var spike = CSGCylinder3D.new()
 	spike.name = "Spike"
-	spike.radius = randf_range(0.03, 0.08)  # Use radius instead of radius_bottom
-	spike.height = randf_range(0.2, max_spike_length)
+	spike.radius = _form_rng.randf_range(0.03, 0.08)  # Use radius instead of radius_bottom
+	spike.height = _form_rng.randf_range(0.2, max_spike_length)
 	spike.sides = 8
 	
 	# Position and orient
@@ -484,20 +505,20 @@ func add_spike(parent, direction, material) -> void:
 	parent.add_child(spike)
 	
 	# Add subtle glow effect to spikes if enabled
-	if show_glow_effects and randf() < 0.3:  # 30% chance
+	if show_glow_effects and _form_rng.randf() < 0.3:  # 30% chance
 		add_spike_glow(spike, direction)
 
 func add_surface_texture_to_core(core: CSGSphere3D) -> void:
 	# Add small surface irregularities for biological realism
-	var num_textures = randi() % 8 + 4
+	var num_textures = _form_rng.randi() % 8 + 4
 	for i in range(num_textures):
 		var texture_bump = CSGSphere3D.new()
 		texture_bump.name = "SurfaceTexture_" + str(i)
-		texture_bump.radius = randf_range(0.02, 0.05)
+		texture_bump.radius = _form_rng.randf_range(0.02, 0.05)
 		
 		# Position on sphere surface
-		var phi = randf() * PI * 2
-		var theta = randf() * PI
+		var phi = _form_rng.randf() * PI * 2
+		var theta = _form_rng.randf() * PI
 		var r = core.radius - texture_bump.radius * 0.3
 		
 		var x = r * sin(theta) * cos(phi)
@@ -508,7 +529,7 @@ func add_surface_texture_to_core(core: CSGSphere3D) -> void:
 		texture_bump.operation = CSGShape3D.OPERATION_UNION
 		
 		# Use slightly different material
-		var texture_material = base_materials[randi() % base_materials.size()].duplicate()
+		var texture_material = base_materials[_form_rng.randi() % base_materials.size()].duplicate()
 		texture_material.albedo_color = texture_material.albedo_color * 1.1  # Slightly brighter
 		texture_bump.material = texture_material
 		
@@ -527,7 +548,7 @@ func add_spike_glow(spike: CSGCylinder3D, direction: Vector3) -> void:
 	glow.operation = CSGShape3D.OPERATION_UNION
 	
 	# Use glow material
-	var glow_material = glow_materials[randi() % glow_materials.size()]
+	var glow_material = glow_materials[_form_rng.randi() % glow_materials.size()]
 	glow.material = glow_material
 	
 	spike.get_parent().add_child(glow)
@@ -538,10 +559,10 @@ func create_polyhedral_form(parent, position):
 	form.position = position
 	
 	# Choose a polyhedron type
-	var poly_type = randi() % 3  # 0 = icosahedron, 1 = dodecahedron approximation, 2 = custom
-	var complexity = randf_range(0.3, 1.0)  # Affects number of faces/details
+	var poly_type = _form_rng.randi() % 3  # 0 = icosahedron, 1 = dodecahedron approximation, 2 = custom
+	var complexity = _form_rng.randf_range(0.3, 1.0)  # Affects number of faces/details
 	
-	var base_material = base_materials[randi() % base_materials.size()]
+	var base_material = base_materials[_form_rng.randi() % base_materials.size()]
 	
 	match poly_type:
 		0: # Icosahedron-based
@@ -550,17 +571,17 @@ func create_polyhedral_form(parent, position):
 			form.add_child(core)
 			
 			# Add ornaments at vertices
-			if randf() < 0.6:  # 60% chance
+			if _form_rng.randf() < 0.6:  # 60% chance
 				var vertices = generate_icosahedron_vertices(0.5)
 				for vertex in vertices:
-					if randf() < 0.7:  # Not all vertices
+					if _form_rng.randf() < 0.7:  # Not all vertices
 						var ornament = CSGSphere3D.new()
-						ornament.radius = randf_range(0.05, 0.1)
+						ornament.radius = _form_rng.randf_range(0.05, 0.1)
 						ornament.position = vertex
 						ornament.operation = CSGShape3D.OPERATION_UNION
 						
-						if randf() < 0.5:  # 50% chance of different color
-							ornament.material = spike_materials[randi() % spike_materials.size()]
+						if _form_rng.randf() < 0.5:  # 50% chance of different color
+							ornament.material = spike_materials[_form_rng.randi() % spike_materials.size()]
 							
 						core.add_child(ornament)
 		
@@ -589,16 +610,16 @@ func create_polyhedral_form(parent, position):
 			# Create random facets
 			var num_facets = int(10 * complexity) + 5
 			for i in range(num_facets):
-				var phi = randf() * PI * 2
-				var theta = randf() * PI
+				var phi = _form_rng.randf() * PI * 2
+				var theta = _form_rng.randf() * PI
 				var direction = Vector3(
 					sin(theta) * cos(phi),
 					sin(theta) * sin(phi),
 					cos(theta)
 				).normalized()
 				
-				var distance = randf_range(0.3, 0.5)
-				var size = randf_range(0.2, 0.4)
+				var distance = _form_rng.randf_range(0.3, 0.5)
+				var size = _form_rng.randf_range(0.2, 0.4)
 				
 				var cutter = CSGBox3D.new()
 				cutter.size = Vector3(size, size, size)
@@ -608,13 +629,13 @@ func create_polyhedral_form(parent, position):
 				core.add_child(cutter)
 	
 	# Add spikes if needed
-	if randf() < spikiness_probability:
-		var spike_count = int(randi() % 12 + 6)
-		var spike_material = spike_materials[randi() % spike_materials.size()]
+	if _form_rng.randf() < spikiness_probability:
+		var spike_count = int(_form_rng.randi() % 12 + 6)
+		var spike_material = spike_materials[_form_rng.randi() % spike_materials.size()]
 		
 		for i in range(spike_count):
-			var phi = randf() * PI * 2
-			var theta = randf() * PI
+			var phi = _form_rng.randf() * PI * 2
+			var theta = _form_rng.randf() * PI
 			var direction = Vector3(
 				sin(theta) * cos(phi),
 				sin(theta) * sin(phi),
@@ -632,8 +653,8 @@ func create_lattice_sphere(parent, position):
 	form.position = position
 	
 	# Create the structure using a series of rings
-	var base_material = base_materials[randi() % base_materials.size()]
-	var num_rings = randi() % 8 + 3
+	var base_material = base_materials[_form_rng.randi() % base_materials.size()]
+	var num_rings = _form_rng.randi() % 8 + 3
 	var radius = 0.5
 	
 	# Create rings around different axes
@@ -671,11 +692,11 @@ func create_lattice_sphere(parent, position):
 			form.add_child(ring)
 	
 	# Add intersection points/nodes
-	if randf() < 0.7:  # 70% chance
-		var num_nodes = randi() % 20 + 10
+	if _form_rng.randf() < 0.7:  # 70% chance
+		var num_nodes = _form_rng.randi() % 20 + 10
 		for i in range(num_nodes):
-			var phi = randf() * PI * 2
-			var theta = randf() * PI
+			var phi = _form_rng.randf() * PI * 2
+			var theta = _form_rng.randf() * PI
 			var r = radius * 0.95  # Slightly inside the outer surface
 			
 			var x = r * sin(theta) * cos(phi)
@@ -684,11 +705,11 @@ func create_lattice_sphere(parent, position):
 			
 			var node_sphere = CSGSphere3D.new()
 			node_sphere.name = "Node_" + str(i)
-			node_sphere.radius = randf_range(0.02, 0.05)
+			node_sphere.radius = _form_rng.randf_range(0.02, 0.05)
 			node_sphere.position = Vector3(x, y, z)
 			
-			if randf() < 0.3:  # 30% different color
-				node_sphere.material = spike_materials[randi() % spike_materials.size()]
+			if _form_rng.randf() < 0.3:  # 30% different color
+				node_sphere.material = spike_materials[_form_rng.randi() % spike_materials.size()]
 			else:
 				node_sphere.material = base_material
 				
@@ -706,20 +727,20 @@ func create_ringed_form(parent, position):
 	var core = CSGSphere3D.new()
 	core.name = "Core"
 	core.radius = 0.3
-	core.material = base_materials[randi() % base_materials.size()]
+	core.material = base_materials[_form_rng.randi() % base_materials.size()]
 	form.add_child(core)
 	
 	# Create concentric rings
-	var num_rings = randi() % 3 + 1
-	var ring_material = base_materials[randi() % base_materials.size()]
+	var num_rings = _form_rng.randi() % 3 + 1
+	var ring_material = base_materials[_form_rng.randi() % base_materials.size()]
 	
 	# If we want different ring material
-	if randf() < 0.5:
-		ring_material = spike_materials[randi() % spike_materials.size()]
+	if _form_rng.randf() < 0.5:
+		ring_material = spike_materials[_form_rng.randi() % spike_materials.size()]
 	
 	for i in range(num_rings):
 		var ring_radius = 0.4 + i * 0.15
-		var thickness = randf_range(0.02, 0.05)
+		var thickness = _form_rng.randf_range(0.02, 0.05)
 		
 		var ring = CSGTorus3D.new()
 		ring.name = "Ring_" + str(i)
@@ -729,16 +750,16 @@ func create_ringed_form(parent, position):
 		
 		# Random rotation for the ring
 		ring.rotation = Vector3(
-			randf() * PI,
-			randf() * PI,
-			randf() * PI
+			_form_rng.randf() * PI,
+			_form_rng.randf() * PI,
+			_form_rng.randf() * PI
 		)
 		
 		form.add_child(ring)
 	
 	# Add spokes connecting core to rings
-	if randf() < 0.7 and num_rings > 0:  # 70% chance if has rings
-		var num_spokes = randi() % 8 + 4
+	if _form_rng.randf() < 0.7 and num_rings > 0:  # 70% chance if has rings
+		var num_spokes = _form_rng.randi() % 8 + 4
 		var spoke_material = ring_material
 		
 		for i in range(num_spokes):
@@ -784,29 +805,29 @@ func create_pollen_form(parent, form_position):
 	core.name = "Core"
 	core.radius = 0.4
 	
-	var base_material = base_materials[randi() % base_materials.size()]
+	var base_material = base_materials[_form_rng.randi() % base_materials.size()]
 	core.material = base_material
 	form.add_child(core)
 	
 	# Choose pattern type
-	var pattern_type = randi() % 3  # 0 = bumps, 1 = short spikes, 2 = mixed
+	var pattern_type = _form_rng.randi() % 3  # 0 = bumps, 1 = short spikes, 2 = mixed
 	var pattern_material = base_material
 	
 	# Sometimes use a different material for the pattern
-	if randf() < 0.6:
-		pattern_material = spike_materials[randi() % spike_materials.size()]
+	if _form_rng.randf() < 0.6:
+		pattern_material = spike_materials[_form_rng.randi() % spike_materials.size()]
 	
 	match pattern_type:
 		0:  # Bumps pattern
-			var num_bumps = randi() % 50 + 30
+			var num_bumps = _form_rng.randi() % 50 + 30
 			
 			for i in range(num_bumps):
 				var bump = CSGSphere3D.new()
 				bump.name = "Bump_" + str(i)
-				bump.radius = randf_range(0.05, 0.1)
+				bump.radius = _form_rng.randf_range(0.05, 0.1)
 				
-				var phi = randf() * PI * 2
-				var theta = randf() * PI
+				var phi = _form_rng.randf() * PI * 2
+				var theta = _form_rng.randf() * PI
 				var r = core.radius - bump.radius * 0.5
 				
 				var x = r * sin(theta) * cos(phi)
@@ -820,11 +841,11 @@ func create_pollen_form(parent, form_position):
 				core.add_child(bump)
 		
 		1:  # Short spikes pattern
-			var num_spikes = randi() % 40 + 20
+			var num_spikes = _form_rng.randi() % 40 + 20
 			
 			for i in range(num_spikes):
-				var phi = randf() * PI * 2
-				var theta = randf() * PI
+				var phi = _form_rng.randf() * PI * 2
+				var theta = _form_rng.randf() * PI
 				var direction = Vector3(
 					sin(theta) * cos(phi),
 					sin(theta) * sin(phi),
@@ -833,8 +854,8 @@ func create_pollen_form(parent, form_position):
 				
 				var spike = CSGCylinder3D.new()
 				spike.name = "Spike_" + str(i)
-				spike.radius = randf_range(0.03, 0.06)  # Use radius instead of radius_bottom
-				spike.height = randf_range(0.1, 0.25)
+				spike.radius = _form_rng.randf_range(0.03, 0.06)  # Use radius instead of radius_bottom
+				spike.height = _form_rng.randf_range(0.1, 0.25)
 				spike.material = pattern_material
 				
 				# Position at surface
@@ -853,11 +874,11 @@ func create_pollen_form(parent, form_position):
 				core.add_child(spike)
 		
 		2:  # Mixed pattern (bumps and holes)
-			var num_features = randi() % 40 + 20
+			var num_features = _form_rng.randi() % 40 + 20
 			
 			for i in range(num_features):
-				var phi = randf() * PI * 2
-				var theta = randf() * PI
+				var phi = _form_rng.randf() * PI * 2
+				var theta = _form_rng.randf() * PI
 				var r = core.radius
 				
 				var x = r * sin(theta) * cos(phi)
@@ -865,10 +886,10 @@ func create_pollen_form(parent, form_position):
 				var z = r * cos(theta)
 				var position = Vector3(x, y, z)
 				
-				if randf() < 0.7:  # 70% bumps, 30% indentations
+				if _form_rng.randf() < 0.7:  # 70% bumps, 30% indentations
 					var bump = CSGSphere3D.new()
 					bump.name = "Bump_" + str(i)
-					bump.radius = randf_range(0.04, 0.08)
+					bump.radius = _form_rng.randf_range(0.04, 0.08)
 					bump.position = position
 					bump.operation = CSGShape3D.OPERATION_UNION
 					bump.material = pattern_material
@@ -876,14 +897,14 @@ func create_pollen_form(parent, form_position):
 				else:
 					var indent = CSGSphere3D.new()
 					indent.name = "Indent_" + str(i)
-					indent.radius = randf_range(0.05, 0.09)
+					indent.radius = _form_rng.randf_range(0.05, 0.09)
 					indent.position = position
 					indent.operation = CSGShape3D.OPERATION_SUBTRACTION
 					core.add_child(indent)
 	
 	# Add germ pores (openings) for some pollen types
-	if randf() < 0.4:  # 40% chance
-		var num_pores = randi() % 3 + 1
+	if _form_rng.randf() < 0.4:  # 40% chance
+		var num_pores = _form_rng.randi() % 3 + 1
 		var pore_angles = []
 		
 		# Generate evenly spaced angles
@@ -893,7 +914,7 @@ func create_pollen_form(parent, form_position):
 		for angle in pore_angles:
 			var pore = CSGSphere3D.new()
 			pore.name = "Pore"
-			pore.radius = randf_range(0.12, 0.18)
+			pore.radius = _form_rng.randf_range(0.12, 0.18)
 			
 			# Position on equator
 			var pore_pos = Vector3(
@@ -1094,7 +1115,7 @@ func highlight_form(form: Node3D) -> void:
 		var glow = CSGSphere3D.new()
 		glow.name = "HighlightGlow"
 		glow.radius = 1.2
-		glow.material = glow_materials[randi() % glow_materials.size()]
+		glow.material = glow_materials[_form_rng.randi() % glow_materials.size()]
 		glow.operation = CSGShape3D.OPERATION_UNION
 		form.add_child(glow)
 
@@ -1143,11 +1164,12 @@ func _on_toggle_color_mode_pressed() -> void:
 	regenerate_forms()
 
 func regenerate_forms() -> void:
+	if generation_seed != 0: _form_rng.seed = generation_seed
 	# Clear existing forms
 	var forms_container = get_node_or_null("BiologicalForms")
 	if forms_container:
-		for child in forms_container.get_children():
-			child.queue_free()
+		remove_child(forms_container)
+		forms_container.queue_free()
 	
 	# Clear particle systems
 	for particles in particle_systems:
@@ -1178,5 +1200,46 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Called by the grid system to apply per-cell configuration. Keys honoured:
+##   "generation_seed"  int   — pin the specimen; 0 re-rolls (the shipped default)
+##   "grid_size"        int   — 3 is the 3x3 census; 1 is a single specimen
+##   "number_of_forms"  int   — how many of the grid's cells are filled
+##   "spacing"          float — metres between specimens
+##   "detail_level"     int   — segments per primitive
+##   "spikiness_probability" / "max_spike_length"
+##   "rotation" (bool word)   — `enable_rotation`, off for a still
+##
+## This was a bare `pass` until 2026-09-07, which meant every one of these was
+## unreachable from a map token: the bench could sweep them through holder.set()
+## and the building could not ask for any of them. A family that exists only on
+## the bench is the failure csg_compose_workbench is already convicted of in this
+## same chapter.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("generation_seed"):
+		generation_seed = int(config["generation_seed"])
+	if config.has("grid_size"):
+		grid_size = maxi(1, int(config["grid_size"]))
+	if config.has("number_of_forms"):
+		number_of_forms = maxi(1, int(config["number_of_forms"]))
+	if config.has("spacing"):
+		spacing = float(config["spacing"])
+	if config.has("detail_level"):
+		detail_level = clampi(int(config["detail_level"]), 5, 50)
+	if config.has("spikiness_probability"):
+		spikiness_probability = clampf(float(config["spikiness_probability"]), 0.0, 1.0)
+	if config.has("max_spike_length"):
+		max_spike_length = float(config["max_spike_length"])
+	if config.has("rotation"):
+		enable_rotation = _flag(config["rotation"])
+	if config.has("particles"):
+		show_particle_effects = _flag(config["particles"])
+	if config.has("glow"):
+		show_glow_effects = _flag(config["glow"])
+
+
+## `#rotation:0` arrives as the STRING "0", and bool("0") is true in GDScript.
+## The same helper do_not_cross_barrier carries, for the same reason.
+func _flag(v) -> bool:
+	if typeof(v) == TYPE_BOOL:
+		return bool(v)
+	return str(v).strip_edges().to_lower() in ["true", "1", "yes", "on"]

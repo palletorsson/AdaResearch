@@ -345,11 +345,14 @@ func _update_pickable_collision(obj: Node3D) -> void:
 	if not mesh:
 		return
 	var aabb = mesh.get_aabb()
-	var max_dim = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
-	var radius = max_dim * 0.6
-	var sphere = SphereShape3D.new()
-	sphere.radius = max(0.05, radius)
-	collision.shape = sphere
+	# Deferred meshes can have their entire surface above the object's origin.
+	# A sphere left at that origin fell below the table after _snap_to_floor.
+	# Give the wrapped visual its own bounded shape in the same local frame.
+	var box = BoxShape3D.new()
+	box.size = aabb.size.max(Vector3.ONE * 0.001)
+	collision.shape = box
+	collision.transform = obj.global_transform.affine_inverse() * mesh.global_transform
+	collision.position += collision.basis * aabb.get_center()
 
 func _strip_editor_nodes(node: Node) -> void:
 	for child in node.get_children():

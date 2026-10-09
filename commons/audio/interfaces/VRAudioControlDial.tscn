@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cx6m7xj7q8xv7"]
 
 [ext_resource type="Script" path="res://commons/audio/interfaces/VRAudioControlDial.gd" id="1_v4m4"]
-[ext_resource type="Script" uid="uid://ccvkvky7vqx7x" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2_v4m4"]
-[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="3_v4m4"]
+[ext_resource type="Script" path="res://commons/interactables/angular_driver.gd" id="2_v4m4"]
+[ext_resource type="Script" path="res://commons/interactables/angular_handle.gd" id="3_v4m4"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="4_v4m4"]
 [ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
 [ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatKnobBase"]
@@ -59,6 +59,7 @@ outline_size = 0
 uppercase = true
 
 [node name="DialOrigin" type="Node3D" parent="."]
+rotation = Vector3(0, -1.5707963, 0)
 
 [node name="InteractableHinge" type="Node3D" parent="DialOrigin"]
 script = ExtResource("2_v4m4")
@@ -66,7 +67,7 @@ hinge_limit_min = -150.0
 hinge_limit_max = 150.0
 
 [node name="KnobMesh" type="MeshInstance3D" parent="DialOrigin/InteractableHinge"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.012)
+transform = Transform3D(0, 1, 0, -1, 0, 0, 0, 0, 1, 0.026, 0, 0)
 mesh = SubResource("CylinderMesh_knob")
 surface_material_override/0 = ExtResource("MatKnobBase")
 
@@ -76,6 +77,7 @@ mesh = SubResource("BoxMesh_indicator")
 surface_material_override/0 = ExtResource("MatIndicator")
 
 [node name="Handles" type="Node3D" parent="DialOrigin/InteractableHinge"]
+position = Vector3(0.024, 0, 0)
 
 [node name="Handle1" type="Node3D" parent="DialOrigin/InteractableHinge/Handles"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)

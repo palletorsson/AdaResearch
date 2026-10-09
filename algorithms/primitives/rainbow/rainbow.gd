@@ -2,13 +2,13 @@ extends Node3D
 
 # @identity
 # essence: ROYGBIV arc(inner_radius + i*thickness) — concentric half-circle bands from ArrayMesh, primary + fainter secondary
-# desire: to stand beneath a double rainbow and feel the scale of spectral order arching overhead
+# desire: to stand beneath a double rainbow and compare authored colour partitions overhead
 # critical_parameter: SECONDARY_FADE — controls how visible the second rainbow is, teaching that double rainbows exist with reversed color order
-# triggers: atmospheric particles drift with sin(time); no interaction triggers — the rainbow simply is
-# emerges: the reversed color order of the secondary rainbow is physically accurate and usually surprises people
+# triggers: default atmospheric particles drift with sin(time); stage:celebration adds RE-DIVIDE and CELEBRATE controls
+# emerges: the secondary arc reverses the authored list; the mesh does not calculate an optical rainbow
 # needs: atmospheric particles [has]; VR scale [has]; interactive angle control [missing]; Label3D [missing]
 # relationships: echoes mario_cube (reveals rainbow); contrasts with dark_side_prism (arc vs linear); precedes rainbow_hallway (static vs immersive)
-# truth: a rainbow has no location — it exists only in the geometry between sun, water, and eye
+# truth: an optical rainbow depends on sun, water and viewer; this authored mesh occupies a fixed position instead
 
 # Local debug flag to gate prints (default off)
 @export var debug: bool = false
@@ -16,15 +16,15 @@ extends Node3D
 # ═══════════════════════════════════════════
 #  DNA (stage 2 — variation)
 # ═══════════════════════════════════════════
-# banding: how many colours the spectrum is cut into. Newton cut it into seven
-#   to make it rhyme with the diatonic scale; the light itself has no seams.
+# banding: how many discrete mesh colours the authored arch contains.
+#   These choices compare partitions; they do not simulate a physical spectrum.
 #   The arc keeps the SAME total width under every setting — only the
 #   quantisation changes, so the knob argues about naming, not size.
 #   "roygbiv" = the pre-promotion seven bands.
 # substance: what the rainbow is made of. "light" = the pre-promotion
-#   material — unshaded, transparent, an optical event with no location.
-#   "glass"/"solid" reify it into a thing that could hold a shadow, which
-#   contradicts the truth line above. That contradiction is the point.
+#   material — unshaded and transparent, still a mesh at a fixed location.
+#   "glass"/"solid" change the material, not the geometry or collision.
+#   An opaque-looking band is still a display rather than a climbing surface.
 @export_enum("roygbiv", "six", "continuous", "two") var banding: String = "roygbiv"
 @export_enum("light", "glass", "solid") var substance: String = "light"
 
@@ -51,8 +51,13 @@ var rainbow_colors = [
 
 var _arc_roots: Array[Node3D] = []
 var _built: bool = false
+var _celebration: Node3D
 
 func _ready() -> void:
+	if str(get_meta("config_stage", "")) == "celebration":
+		_celebration = load("res://algorithms/primitives/rainbow/rainbow_celebration.gd").new()
+		add_child(_celebration)
+		return
 	_build_arcs()
 
 	# Add some atmospheric effects
@@ -71,8 +76,7 @@ func _build_arcs() -> void:
 func _band_colors(mode: String) -> Array:
 	match mode:
 		"six":
-			# The modern convention: indigo dropped. Newton's seventh band was
-			# fitted to the octave, not to the eye.
+			# This authored six-colour list omits the seven-band preset's indigo.
 			return [
 				Color(1.0, 0.0, 0.0, 1.0),
 				Color(1.0, 0.5, 0.0, 1.0),
@@ -82,15 +86,14 @@ func _band_colors(mode: String) -> Array:
 				Color(0.5, 0.0, 1.0, 1.0),
 			]
 		"two":
-			# Many languages cut the spectrum into a warm half and a cool half
-			# and stop there. Fewer names, same light.
+			# An authored warm/cool pair, keeping the same total mesh width.
 			return [
 				Color(1.0, 0.3, 0.0, 1.0),
 				Color(0.15, 0.15, 0.9, 1.0),
 			]
 		"continuous":
-			# No seams at all — the spectrum as it physically is, cut only by
-			# the resolution of the mesh.
+			# Forty-eight discrete HSV samples converted to RGB mesh colours.
+			# "Continuous" names the preset; the bands and their seams remain.
 			var out: Array = []
 			var count: int = 48
 			for i in range(count):
@@ -254,6 +257,8 @@ func create_atmosphere() -> void:
 
 
 func _process(_delta):
+	if _celebration != null:
+		return
 	# Add some color cycling for extra effect
 	var time = Time.get_time_dict_from_system()
 	var time_factor = (time.second + time.minute * 60) * 0.01

@@ -82,6 +82,10 @@ func _ready() -> void:
 	_cache_vector_nodes(component_vectors["z"], _cached_component_nodes["z"])
 
 	_apply_reading()
+	if str(get_meta("config_lesson", "")) == "room_reading":
+		var lesson = preload("res://algorithms/vectors/01_vector_basics/room_reading.gd").new()
+		lesson.name = "RoomReading"
+		add_child(lesson)
 
 func _process(_delta):
 	var vec = _get_vector_fast(vector_a, _cached_vector_a_nodes)

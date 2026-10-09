@@ -35,6 +35,8 @@ extends Node3D
 @export var outline_color := Color(0.1, 0.1, 0.1)
 
 # Constants
+var lesson_enabled := false
+
 var PHI := (1.0 + sqrt(5.0)) / 2.0  # Golden ratio ≈ 1.618
 var fibonacci := [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
 
@@ -315,15 +317,15 @@ func _add_number_label(rect: Dictionary, height: float) -> void:
 	var number = fibonacci[fib_index]
 
 	var label = Label3D.new()
-	label.text = str(number)
-	label.font_size = max(32, int(rect.width * 20))
+	label.text = ("cut %d\nside %.3f m" % [rect.level,rect.width]) if lesson_enabled else str(number)
+	label.font_size = 32 if lesson_enabled else max(32, int(rect.width * 20))
 	label.position = Vector3(
 		rect.x + rect.width / 2.0,
 		height + extrusion_height + 0.1,
 		rect.y + rect.height / 2.0
 	)
 	label.rotation_degrees = Vector3(-90, 0, 0)  # Face up
-	label.pixel_size = 0.01
+	label.pixel_size = minf(0.0028,rect.width/100.0) if lesson_enabled else 0.01
 	label.modulate = Color(0.1, 0.1, 0.1)
 	label.outline_size = 8
 	label.outline_modulate = Color(1, 1, 1, 0.5)
@@ -332,10 +334,12 @@ func _add_number_label(rect: Dictionary, height: float) -> void:
 
 func _update_spiral() -> void:
 	"""Update the golden spiral visualization"""
-	if spiral_mesh:
+	if is_instance_valid(spiral_mesh):
+		remove_child(spiral_mesh)
 		spiral_mesh.queue_free()
+		spiral_mesh = null
 
-	if rectangles.size() < 2:
+	if rectangles.size() < 2 or current_subdivision*20*spiral_progress < 2:
 		return
 
 	var surface_tool = SurfaceTool.new()
@@ -369,26 +373,26 @@ func _update_spiral() -> void:
 				cy = rect.y + rect.height
 				start_angle = PI
 			1:  # Square on bottom, arc from top-right
-				cx = rect.x + rect.width
-				cy = rect.y
-				start_angle = PI * 0.5
+				cx = rect.x
+				cy = rect.y + rect.height
+				start_angle = PI * 1.5
 			2:  # Square on right, arc from top-left
 				cx = rect.x
 				cy = rect.y
 				start_angle = 0
 			3:  # Square on top, arc from bottom-left
-				cx = rect.x
-				cy = rect.y + rect.height
-				start_angle = PI * 1.5
+				cx = rect.x + rect.width
+				cy = rect.y
+				start_angle = PI * 0.5
 
 		# Generate arc points
 		var points_for_this_square = min(points_per_square, total_points - square_index * points_per_square)
-		for j in range(points_for_this_square):
+		for j in range(points_for_this_square + 1):
 			var t = float(j) / points_per_square
 			var angle = start_angle + t * PI * 0.5  # Quarter circle
 			var x = cx + cos(angle) * radius
 			var y = cy + sin(angle) * radius
-			var h = rect.level * extrusion_height * 0.5 + extrusion_height + 0.05
+			var h = current_subdivision * extrusion_height * 0.5 + extrusion_height + 0.05
 
 			surface_tool.add_vertex(Vector3(x, h, y))
 
@@ -417,8 +421,10 @@ func regenerate() -> void:
 	"""Clear and regenerate"""
 	# Clear visuals
 	for child in rectangles_parent.get_children():
+		rectangles_parent.remove_child(child)
 		child.queue_free()
 	for child in labels_parent.get_children():
+		labels_parent.remove_child(child)
 		child.queue_free()
 	if spiral_mesh:
 		spiral_mesh.queue_free()
@@ -523,4 +529,11 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("lesson","false")) != "true": return
+	lesson_enabled=true;animate=false;is_animating=false;show_spiral=false;show_numbers=false
+	_install_lesson.call_deferred()
+
+func _install_lesson() -> void:
+	if has_node("GoldenLesson"): return
+	var desk=load("res://commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd").new()
+	desk.name="GoldenLesson";desk.kind="rectangle";add_child(desk)

@@ -1,0 +1,152 @@
+{
+  "schema": "encounter-route/1",
+  "map": "Point_Lines",
+  "status": "proposed",
+  "note": "The line workshop is now four live monitor studies. Its animated 3D sources are isolated in a private filming world, absent from the hall and unavailable to grab. The book follows what can be learned from projected images, camera movement and source code. Placement and the rest of the hall are unchanged in this pass.",
+  "stops": [
+    {
+      "id": "connect",
+      "title": "Connect two points",
+      "action": "Bring the two points together. Watch the line appear and the barrier fly apart.",
+      "question": "What did connecting two positions allow you to do?",
+      "stage": "opening applied to book",
+      "members": [
+        "line_demo",
+        "do_not_cross_barrier"
+      ],
+      "visits": [
+        {
+          "lookup": "line_demo"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "measure",
+      "title": "Give a span a measure",
+      "action": "Move the measuring line's endpoints. Compare the changing distance with one metre.",
+      "question": "What does a unit let us compare?",
+      "stage": "opening applied to book",
+      "members": [
+        "line",
+        "scale_lines"
+      ],
+      "visits": [
+        {
+          "lookup": "line",
+          "at": [
+            16,
+            2
+          ]
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "red-line",
+      "title": "Cross a red line",
+      "action": "Approach the red line, then cross it and look back.",
+      "question": "What does this division change, and what do we bring to it?",
+      "stage": "opening applied to book",
+      "members": [
+        "redline"
+      ],
+      "visits": [
+        {
+          "lookup": "redline"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "walk",
+      "title": "Walk this line; read your trace",
+      "action": "Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.",
+      "question": "What kind of line does your movement leave?",
+      "stage": "existing encounter",
+      "members": [
+        "walk_this_line_marking",
+        "player_trace"
+      ],
+      "visits": [
+        {
+          "lookup": "walk_this_line_marking"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "combine",
+      "title": "Two lines, three, four, more",
+      "action": "Watch two, three, four and more segments change on four live monitors. Follow the fold through the orbiting camera. Move beside the monitor and distinguish your view of the screen from the camera view of its object.",
+      "question": "When does a flat image suggest a body, and what can this view not establish?",
+      "stage": "screen-only live studies and book aligned; headset review pending",
+      "members": [
+        "line_space_workshop",
+        "axis_line"
+      ],
+      "visits": [
+        {
+          "lookup": "line_space_workshop",
+          "at": [
+            16,
+            16
+          ]
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "depth",
+      "title": "Carry a fixed span",
+      "action": "Carry and turn the original grabbable line elsewhere in the hall. Compare bodily access to this fixed span with the filmed arrangements in the workshop.",
+      "question": "What changes when the arrangement no longer shares one plane?",
+      "stage": "existing extension",
+      "members": [
+        "grabbable_line",
+        "line_collection"
+      ],
+      "visits": [
+        {
+          "lookup": "grabbable_line"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "viewpoint",
+      "title": "Compare viewpoints",
+      "action": "Walk around the existing perspective arrangements and parallel lines. Compare their views with the rails and drawing in the workshop.",
+      "question": "What appears joined from here, and separates when you move?",
+      "stage": "existing extension",
+      "members": [
+        "perspective_lines",
+        "parallel_lines"
+      ],
+      "visits": [
+        {
+          "lookup": "perspective_lines",
+          "at": [
+            5,
+            14
+          ]
+        }
+      ],
+      "draft": ""
+    }
+  ],
+  "basedOn": [
+    {
+      "path": "commons/maps/Point_Lines/map_data.json",
+      "sha256": "ef765d5470d90f6eab528834fc2f1583237e23d487efcb002172287a02c2cb37"
+    },
+    {
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256": "23de8754a660b654f3c2b87d9848d87315dc7fe415bb595be7cb8c3f9f993b27"
+    },
+    {
+      "path": "commons/data/artifact_roles.json",
+      "sha256": "eb2c6e178bcd3d18ad5a71752cb5dd1fc9006ed58472d837a33a627ba914bbc5"
+    }
+  ]
+}

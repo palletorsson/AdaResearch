@@ -51,6 +51,8 @@ func _exited(body:Node3D) -> void:
 	if body.get_instance_id()==last_body:last_body=0;last_band=-1
 
 func _physics_process(_delta:float) -> void:
+	var hand=study.get_node_or_null("SliceHand")
+	if hand!=null and hand.point!=null and hand.point.held():return
 	for id in visitors.keys():
 		var body: Node3D = visitors[id].get_ref()
 		if not is_instance_valid(body):visitors.erase(id);continue

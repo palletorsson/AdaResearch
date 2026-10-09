@@ -251,6 +251,10 @@ func _ready() -> void:
 	# catalyst records which sequence was running when it spawned. Knowledge
 	# only — no mode is armed unless a map opts in via `sequence:` config.
 	call_deferred("_resolve_home_sequence_passive")
+	if str(get_meta("config_lesson", "")) == "chromatic":
+		var bench: Node3D = load("res://commons/hazards/becoming_catalyst/chromatic_study.gd").new()
+		bench.name = "ChromaticStudy"
+		add_child(bench)
 
 
 func _physics_process(delta: float) -> void:

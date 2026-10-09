@@ -243,7 +243,16 @@ func _ensure_desktop_overlay() -> void:
 
 	_canvas_layer.add_child(_color_rect)
 	add_child(_canvas_layer)
+	_resize_desktop_overlay()
+	if not get_viewport().size_changed.is_connected(_resize_desktop_overlay):
+		get_viewport().size_changed.connect(_resize_desktop_overlay)
 	print("[MushroomEffect] Desktop overlay created (CanvasLayer + ColorRect)")
+
+func _resize_desktop_overlay() -> void:
+	# A CanvasLayer has no Control parent to supply the rectangle's dimensions.
+	if is_instance_valid(_color_rect):
+		_color_rect.position = Vector2.ZERO
+		_color_rect.size = get_viewport().get_visible_rect().size
 
 func _ensure_vr_overlay() -> void:
 	if _vr_quad and is_instance_valid(_vr_quad):

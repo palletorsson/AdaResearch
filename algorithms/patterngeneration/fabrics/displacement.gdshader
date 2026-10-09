@@ -21,6 +21,10 @@ uniform vec3 color_r : source_color = vec3(1.0, 0.2, 0.2);
 uniform vec3 color_g : source_color = vec3(0.2, 1.0, 0.2);
 uniform vec3 color_b : source_color = vec3(0.2, 0.2, 1.0);
 
+// Optional artifact-owned clock; existing consumers retain engine TIME.
+uniform bool use_local_time = false;
+uniform float local_time = 0.0;
+
 uniform bool animate  = true;
 uniform bool use_vertex_displacement   = true;
 uniform bool use_full_color  = false;
@@ -48,7 +52,7 @@ float cellular(vec2 p) {
 
             // Animate the cellular pattern
             if (animate) {
-                point = 0.5 + 0.5 * sin(6.2831 * point + TIME * animation_speed);
+                point = 0.5 + 0.5 * sin(6.2831 * point + (use_local_time ? local_time : TIME) * animation_speed);
             } else {
                 point = 0.5 + 0.5 * sin(6.2831 * point);
             }
@@ -67,7 +71,7 @@ float cellular(vec2 p) {
 void vertex() {
     if (use_vertex_displacement) {
         vec2 st = UV * cell_scale;
-        float time_offset = animate ? TIME * time_scale : 0.0;
+        float time_offset = animate ? (use_local_time ? local_time : TIME) * time_scale : 0.0;
 
         // Use cellular noise for vertex displacement
         float displacement = cellular(st + time_offset);
@@ -79,7 +83,7 @@ void fragment() {
     vec2 st = UV * cell_scale;
 
     // Calculate time offset for displacement
-    float time_offset = animate ? TIME * time_scale : 0.0;
+    float time_offset = animate ? (use_local_time ? local_time : TIME) * time_scale : 0.0;
 
     // Calculate cellular noise values
     float r = cellular(st);

@@ -1,5 +1,6 @@
 # Catenoid - A minimal surface (soap film between two rings)
-# The shape that minimizes surface area for its boundary
+# An analytic minimal surface; a given bounded patch need not be area minimizing.
+# Sampled once as a mesh here, with no soap-film dynamics or stability test.
 # Parametric form: rotation of a catenary curve (cosh)
 # Connects to: energy minimization, equilibrium, natural forms
 

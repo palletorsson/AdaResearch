@@ -10,10 +10,10 @@ extends Node3D
 # desire: Strike metal bars and hear pentatonic tones ring while seeing combined wave visualization
 # critical_parameter: decay_time — controls how long each bar resonates after being struck
 # triggers: striking a bar initiates a decaying sinusoidal vibration at that frequency
-# emerges: music from physics — the pentatonic scale emerges from choosing bar lengths
+# emerges: chosen note frequencies become synthesized tones and determine visible bar lengths
 # needs: VR strike interaction [has], wave visualizer [has]
-# relationships: depends on ResonatingBar physics; contrasts with chladni_plate (discrete strikes vs continuous vibration); unlocks resonance and timbre
-# truth: Every object has frequencies at which it wants to vibrate — striking reveals its voice.
+# relationships: depends on ResonatingBar strike detection and synthesized audio; contrasts with chladni_plate (discrete strikes vs continuous vibration); unlocks resonance and timbre
+# truth: This instrument chooses its notes first; a strike restarts the chosen decaying sine voice.
 
 ## --- DNA (stage 2, promoted 2026-08-05) ---
 ##
@@ -287,6 +287,10 @@ func _create_visualizer() -> void:
 		# the sum and its readout above the row, below a standing eye: wave at 1.35 m
 		visualizer.position.y = 0.40
 		visualizer.set("display_height", 0.95)
+		visualizer.set("sample_audio", true)
+		visualizer.set("window_seconds", 0.012)
+		visualizer.set("num_points", 512)
+		visualizer.set("wave_height_scale", 0.15)
 
 	add_child(visualizer)
 
@@ -530,21 +534,21 @@ func _house_readout() -> void:
 	var plate := MeshInstance3D.new()
 	plate.name = "ReadoutPlate"
 	var pb := BoxMesh.new()
-	pb.size = Vector3(1.10, 0.14, 0.02)
+	pb.size = Vector3(1.10, 0.22, 0.02)
 	plate.mesh = pb
 	plate.material_override = mat
-	plate.position = Vector3(0.0, 0.40 + 0.95 + 0.26, -0.02)
+	plate.position = Vector3(0.0, 0.40 + 0.95 + 0.30, -0.02)
 	_staging_root.add_child(plate)
 	var lbl: Label3D = visualizer.get("_status_label")
 	if lbl != null:
 		lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 		lbl.scale = Vector3.ONE
 		lbl.pixel_size = 0.0016
-		lbl.font_size = 22
+		lbl.font_size = 20
 		lbl.outline_size = 0
 		lbl.modulate = Color(0.85, 0.95, 1.0)
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.position = Vector3(0.0, 0.95 + 0.26, 0.0)   # in the visualiser's frame: on the plate
+		lbl.position = Vector3(0.0, 0.95 + 0.30, 0.0)   # in the visualiser's frame: on the plate
 
 ## The shared striker is also a position-reading rod elsewhere: a floating X/Y/Z display, a
 ## text node and a cloth trail come with it. On the table they are clutter across the

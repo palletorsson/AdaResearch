@@ -90,8 +90,10 @@ var palette_keys: Array = []
 ## before there is anything to rebuild — and must not rebuild at all when the
 ## resource was missing and _ready bailed out.
 var _built: bool = false
+var wall_mount := false
 
 func _ready() -> void:
+	wall_mount = str(get_meta("config_mount", "")) == "wall"
 	_ensure_palette_resource()
 	palette_keys = _collect_palette_keys()
 	structure = _normalised_structure(structure)
@@ -135,6 +137,9 @@ func _get_palette_colors(palette_name: String) -> Array:
 	return result
 
 func create_overview() -> void:
+	if wall_mount:
+		_create_wall_overview()
+		return
 	# Clear existing children. remove_child before queue_free, so a rebuild does
 	# not leave the old grids in the tree for the rest of the frame — they would
 	# both collide with the new names and inflate the capture AABB.
@@ -267,6 +272,9 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("mount", "")) == "wall" and not wall_mount:
+		wall_mount = true
+		if _built: create_overview()
 	# Only the declared axis is read; every other key in a map token is ignored.
 	# GUARDED on both sides: nothing rebuilds unless the word actually changed,
 	# and nothing rebuilds before _ready has built once. A map that places this
@@ -279,6 +287,39 @@ func apply_grid_config(config: Dictionary) -> void:
 	structure = want
 	if _built:
 		create_overview()
+
+func _wall_box(parent: Node3D, title: String, pos: Vector3, size: Vector3, color: Color) -> void:
+	var mi := MeshInstance3D.new(); mi.name = title
+	var mesh := BoxMesh.new(); mesh.size = size; mi.mesh = mesh
+	var mat := StandardMaterial3D.new(); mat.albedo_color = color; mat.roughness = 0.65
+	mi.material_override = mat; parent.add_child(mi); mi.position = pos
+	var body := StaticBody3D.new(); mi.add_child(body)
+	var col := CollisionShape3D.new(); var shape := BoxShape3D.new(); shape.size = size; col.shape = shape; body.add_child(col)
+
+func _create_wall_overview() -> void:
+	for child in get_children():
+		if child.name.begins_with("PaletteSet_") or child.name == "AtlasWall":
+			remove_child(child); child.queue_free()
+	var wall := Node3D.new(); wall.name = "AtlasWall"; add_child(wall)
+	_wall_box(wall,"Plaster",Vector3(0,1.6,-0.12),Vector3(6.3,3.2,0.18),Color("e8e1d5"))
+	var timber := Color("473c37")
+	for x in [-3.18,3.18]: _wall_box(wall,"Upright",Vector3(x,1.6,0),Vector3(0.08,3.25,0.2),timber)
+	for y in [0.05,3.15]: _wall_box(wall,"Cornice",Vector3(0,y,0),Vector3(6.4,0.08,0.22),timber)
+	_wall_box(wall,"Foot",Vector3(0,0.05,-0.1),Vector3(6.4,0.1,0.6),timber)
+	var heading := Label3D.new(); heading.text = "COLOUR / COLLECTIONS"; heading.font_size = 42; heading.pixel_size = 0.006
+	heading.modulate = Color("413934"); heading.outline_size = 0; heading.position = Vector3(0,2.88,0.015); wall.add_child(heading)
+	for i in range(mini(12,palette_keys.size())):
+		var group := Node3D.new(); group.name = "PaletteSet_%d" % i
+		group.position = Vector3(-2.82+(i%6)*1.0,0.72+floori(i/6.0)*1.03,0.045); add_child(group)
+		var key: String = str(palette_keys[i])
+		var colors := _structured_colors(_get_palette_colors(key))
+		var title := Label3D.new(); title.text = str(_get_palette_entry(key).get("title",key)).replace("_"," ")
+		title.font_size = 26; title.pixel_size = 0.003; title.width = 270; title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		title.position = Vector3(0.33,0.77,0); title.modulate = Color("413934"); title.outline_size = 0; group.add_child(title)
+		for j in range(mini(colors_per_set,colors.size())):
+			var sticker := _create_color_sticker(colors[j]); sticker.name = "Sticker_%d" % j
+			sticker.position = Vector3((j%4)*0.215,floori(j/4.0)*0.225,0)
+			group.add_child(sticker)
 
 
 # ═══════════════════════════════════════════════════════════════════

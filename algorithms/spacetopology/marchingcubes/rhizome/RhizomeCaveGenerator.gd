@@ -90,6 +90,9 @@ func generate_mesh_from_chunk_async(chunk: RhizomeVoxelChunk, max_time_ms: float
 					var current_time = Time.get_ticks_msec()
 					if current_time - start_time > max_time_ms:
 						start_time = Time.get_ticks_msec()
+						# out-of-tree guard: get_tree() is null once a map is torn down
+						if not is_inside_tree():
+							await tree_entered
 						await get_tree().process_frame
 				
 				# Get the 8 corner values for this voxel
@@ -420,6 +423,9 @@ func generate_cave_async() -> void:
 	generation_progress.emit(30.0)
 
 	if not synchronous:
+		# out-of-tree guard: get_tree() is null once a map is torn down
+		if not is_inside_tree():
+			await tree_entered
 		await get_tree().process_frame
 
 	# Create voxel chunk

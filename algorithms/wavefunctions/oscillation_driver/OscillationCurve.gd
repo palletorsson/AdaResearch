@@ -27,6 +27,8 @@ extends Node3D
 @export var amplitude: float = 1.5
 @export var speed: float = 2.0 # Speed of movement along X axis
 @export var max_points: int = 200
+# Optional gallery width in local metres; zero retains the original sample-count limit.
+@export var history_width: float = 0.0
 
 var time: float = 0.0
 var points: Array[Vector3] = []
@@ -75,6 +77,9 @@ func _process(delta: float) -> void:
 	# Limit trail length
 	if points.size() > max_points:
 		points.pop_back()
+	if history_width > 0.0:
+		while not points.is_empty() and points.back().x > history_width:
+			points.pop_back()
 	
 	# Render Curve
 	_draw_trail()
@@ -91,4 +96,5 @@ func _draw_trail() -> void:
 	trail_mesh.surface_end()
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("history_width"):
+		history_width = maxf(0.0, float(config["history_width"]))

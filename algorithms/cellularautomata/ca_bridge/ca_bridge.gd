@@ -82,12 +82,34 @@ var box_shape: BoxShape3D
 
 ## True once _ready has built the bridge. apply_grid_config must not regenerate before it.
 var _built: bool = false
+var _history_requested: bool = false
 
 func _ready() -> void:
 	_setup_collision()
-	if auto_generate:
-		start_generation()
 	_built = true
+	if _history_requested or str(get_meta("config_study", "")) == "history":
+		_mount_history_study()
+	elif auto_generate:
+		start_generation()
+
+## The museum's bounded history study reuses _calculate_next_row. Other placements
+## retain the original bridge, dimensions, clock and rendering.
+func _mount_history_study() -> void:
+	if Engine.is_editor_hint() or not _built or has_node("HistoryStudy"):
+		return
+	_clear_bridge()
+	set_process(false)
+	for child in get_children():
+		if child is Camera3D:
+			child.current = false
+		elif child is DirectionalLight3D:
+			child.visible = false
+		elif child is WorldEnvironment:
+			remove_child(child)
+			child.queue_free()
+	var study: Node3D = load("res://algorithms/cellularautomata/ca_bridge/history_study.gd").new()
+	study.name = "HistoryStudy"
+	add_child(study)
 
 func _process(delta: float) -> void:
 	if is_generating:
@@ -225,6 +247,9 @@ func _exit_tree() -> void:
 func apply_grid_config(config: Dictionary) -> void:
 	if config.is_empty():
 		return
+	if str(config.get("study", "")) == "history":
+		_history_requested = true
+		_mount_history_study()
 	var field_changed: bool = false
 
 	if config.has("rule"):
@@ -240,5 +265,7 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	if not _built:
 		return
-	if field_changed and auto_generate:
+	if field_changed and has_node("HistoryStudy"):
+		get_node("HistoryStudy").replay()
+	elif field_changed and auto_generate:
 		start_generation()

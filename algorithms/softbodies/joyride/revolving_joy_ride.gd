@@ -73,13 +73,13 @@ func create_shader_material(shader: Shader, params: Dictionary = {}) -> ShaderMa
 func setup_camera() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 2.5, 6.25)
-	cam.look_at(Vector3(0, 1.25, 0))
+	cam.basis = Basis.looking_at(Vector3(0, 1.25, 0) - cam.position, Vector3.UP)
 	add_child(cam)
 
 func setup_lighting() -> void:
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(2.5, 5, 2.5)
-	light.look_at(Vector3.ZERO)
+	light.basis = Basis.looking_at(Vector3.ZERO - light.position, Vector3.UP)
 	light.shadow_enabled = true
 	add_child(light)
 	

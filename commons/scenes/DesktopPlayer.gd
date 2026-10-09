@@ -1,4 +1,4 @@
-﻿extends CharacterBody3D
+extends CharacterBody3D
 class_name DesktopPlayer
 
 # Movement settings
@@ -127,6 +127,12 @@ func _physics_process(delta: float) -> void:
 	if typing:
 		input_dir = Vector2.ZERO
 	var speed = sprint_speed if Input.is_key_pressed(KEY_SHIFT) else walk_speed
+
+	var flight_zone = preload("res://commons/movement/museum_flight_box.gd").at_point(get_tree(), global_position)
+	if flight_zone != null:
+		velocity = Vector3.ZERO if typing else flight_zone.desktop_velocity(camera.global_basis)
+		move_and_slide()
+		return
 
 	if fly_mode:
 		# Fly toward where you LOOK: forward/back follow the camera's full 3D

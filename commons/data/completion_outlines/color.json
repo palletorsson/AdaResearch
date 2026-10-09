@@ -1,0 +1,117 @@
+{
+  "_meta": {
+    "sequence": "color",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Color_Context_Placed": {
+      "inherited": "From Tutorial_Disco: The colour rooms continue with another arrangement whose parts change how their neighbours are experienced. Carry the distinction between a stored value and the relation through which you encounter it.",
+      "question": "How much of a colour belongs to what surrounds it?",
+      "ontology": "A composition puts coloured regions into relations: adjacency, enclosure, proportion and contrast. A stored colour and its appearance in a particular arrangement are not interchangeable descriptions.",
+      "experiment": "Choose one nested-square canvas. Alternate looking at its centre and its surrounding bands; move back to take in the whole canvas, then compare a neighbouring canvas. Report a visible difference before trying to name a colour rule.",
+      "observe": "The same nested-square construction supports many different colour relationships. Smaller fields are seen through the frames supplied by larger ones; attention and viewing distance change which relationship dominates.",
+      "limit": "Different canvases have different palette values, so they do not establish a controlled same-colour/different-background experiment. A visitor’s report describes perception here, not a universal response shared by every eye or display.",
+      "variation": "Use your hand or change your viewing angle to reduce the surrounding bands you can see, then look at the full canvas again. A paired identical-centre comparison would be a proposed future variant.",
+      "handoff": "The next room brings colour onto the surfaces of a represented body. Carry this distinction with you: choosing channel values is one action; discovering how those values appear on a particular surface is another.",
+      "candidate_artifacts": [
+        "albers_wall_gallery"
+      ],
+      "sources": [
+        "commons/maps/Color_Context_Placed/final.md",
+        "commons/maps/Color_Context_Placed/map_data.json",
+        "commons/artifacts/registry/algorithms_misc.json",
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn",
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Color_Nails": {
+      "inherited": "From Color_Context_Placed: The next room brings colour onto the surfaces of a represented body. Carry this distinction with you: choosing channel values is one action; discovering how those values appear on a particular surface is another.",
+      "question": "What changes when a colour becomes part of the body you act through?",
+      "ontology": "An RGB triple is three independent channel values mapped from a position in a bounded coordinate space. The material receiving those values determines another part of the visible result.",
+      "experiment": "Move the grabbable point inside the controller’s RGB box along one axis at a time. Watch the Preview swatch. With XR hands available, compare the colour on nails and skin using the two stations.",
+      "observe": "One axis changes one channel. The swatch changes immediately; the nail and skin controllers target different hand surfaces and use different material treatments. Colours are saved through GameManager.",
+      "limit": "The preview is available even when the expected XR hand nodes cannot be found. A chosen RGB value does not guarantee identical appearance on a glossy nail, matte skin, a screen, or someone else’s display. The editable channels do not exhaust bodily identity.",
+      "variation": "Choose a colour for an unexpected body surface, then compare its appearance with the swatch without demanding a naturalistic match. A future palette-history tool could preserve several choices; no such interface is claimed here.",
+      "handoff": "From here, colour expands from a body surface into a spatial composition. The next room asks how coloured objects become readable through their positions, overlaps and scale.",
+      "candidate_artifacts": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "sources": [
+        "commons/maps/Color_Nails/final.md",
+        "commons/maps/Color_Nails/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/interfaces/nail_color_controller.tscn",
+        "commons/interfaces/nail_color_controller.gd",
+        "commons/interfaces/hand_color_controller.tscn",
+        "commons/interfaces/value_mapper_3d.gd"
+      ],
+      "open_questions": [
+        "Describe point movement rather than three separate sliders. XR material binding is conditional; desktop visitors may only see the preview. Runtime validation outstanding.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Color_Pillar": {
+      "inherited": "From Color_Nails: From here, colour expands from a body surface into a spatial composition. The next room asks how coloured objects become readable through their positions, overlaps and scale.",
+      "question": "Can a small arrangement help you see a large composition?",
+      "ontology": "A palette is an ordered collection of colours, while composition relates coloured bodies through positions, intervals and scale. The room makes both relations spatial.",
+      "experiment": "First look along and across the coloured pillars to compare overlapping sight lines. At the twins table, move one small primitive and watch its larger counterpart in the basin respond; change a second position while keeping the first as a reference.",
+      "observe": "A colonnade reads differently from different viewpoints even though its palette stays fixed. A small displacement at the table becomes a larger displacement in the paired composition, while colour and shape help identify the pair.",
+      "limit": "The large composition is constrained to a control bed; the follower cannot be arranged independently. This is a designed similarity, not proof that every effect of scale, material and viewpoint is preserved. Pillar palette cycling exists as a method but has no authored visitor selector.",
+      "variation": "Arrange an awkward alignment or intentional occlusion instead of a balanced composition. View the large result from two positions and ask who each arrangement makes room for. Independent twin movement would require an interface change.",
+      "handoff": "The following room moves from relationships in space to paths through colour coordinates. Keep the question of what a transformation preserves, and what a changed way of encountering it adds.",
+      "candidate_artifacts": [
+        "pillarcolorcollection",
+        "composition_twins"
+      ],
+      "sources": [
+        "commons/maps/Color_Pillar/final.md",
+        "commons/maps/Color_Pillar/map_data.json",
+        "commons/artifacts/registry/color.json",
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+        "commons/artifacts/registry/composition_twins.json",
+        "commons/artifacts/composition_twins/composition_twins.tscn",
+        "commons/artifacts/composition_twins/composition_twins.gd"
+      ],
+      "open_questions": [
+        "Current source supports the two chosen encounters. Do not promise absent flashlight_demo. visual_color_mixing legacy bench has additive settings on the supposed subtractive side; it needs a separate review before anchoring prose to that comparison.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Color_Walls": {
+      "inherited": "From Color_Pillar: The following room moves from relationships in space to paths through colour coordinates. Keep the question of what a transformation preserves, and what a changed way of encountering it adds.",
+      "question": "If two paths begin and end at the same colours, must the colours between them agree?",
+      "ontology": "A colour space provides coordinates; interpolation supplies a rule for travelling between two coordinate values. The path is part of the result.",
+      "experiment": "At GRADIENT choose the two endpoint colours using COLOR A and COLOR B, then press MODE to compare RGB and HSV. Keep the endpoints fixed for the first comparison. Look at the RGB cube and cylindrical companion to connect the path difference to different coordinate systems.",
+      "observe": "The endpoints remain while intermediate cubes change. The default red-to-blue pair takes different middle colours under direct channel interpolation and hue interpolation. The navigator is a passive model you examine from outside; its points have no selection or grab control.",
+      "limit": "A straight coordinate path is not a guarantee of equal perceptual steps. The navigator’s companion is labelled HSL but uses Color.from_hsv internally, so do not teach it as a verified HSL model. Neither display contains every possible colour.",
+      "variation": "Find endpoints for which the choice of route strongly changes the middle, then choose nearby endpoints and see whether the difference becomes less obvious. A long-way-round hue route would be a proposed extension, because the current code always chooses the shorter arc.",
+      "handoff": "The next sequence repeats forms across surfaces. Carry the distinction between the parts you begin with and the rule that determines their relationships.",
+      "candidate_artifacts": [
+        "gradient_interpolator",
+        "color_space_navigator"
+      ],
+      "sources": [
+        "commons/maps/Color_Walls/final.md",
+        "commons/maps/Color_Walls/map_data.json",
+        "commons/artifacts/registry/color.json",
+        "algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
+        "algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+        "commons/artifacts/color_space_navigator/color_space_navigator.tscn",
+        "commons/artifacts/color_space_navigator/color_space_navigator.gd"
+      ],
+      "open_questions": [
+        "The cylindrical colour model is labelled HSL but computes HSV. Correct the label or supply a real HSL comparison, then compare the same samples.",
+        "Navigator defaults to a 0.7m cube; do not instruct visitors to stand inside it. HSL naming/math mismatch should remain an improvement item rather than be repeated as truth.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

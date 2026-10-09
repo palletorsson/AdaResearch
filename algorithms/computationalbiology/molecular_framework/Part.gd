@@ -78,7 +78,8 @@ func _float_idle(delta: float) -> void:
 		sin(t * s * 0.8 + 0.9) * cos(t * s * 1.1)
 	) * float_noise_scale
 
-	translate(offset)
+	# Preserve the former 60 Hz drift speed while accounting for elapsed time.
+	translate(offset * delta * 60.0)
 
 	# Gentle rotation
 	rotate_y(delta * 0.2)

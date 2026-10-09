@@ -19,6 +19,28 @@ extends Node3D
 @export_enum("cycle", "plane", "cylinder", "sphere", "torus", "mobius") var manifold: String = "cycle"
 @export_enum("product", "sum", "radial", "single") var crossing: String = "product"
 
+# --- The walkable floor (opt-in, 2026-09-13) ------------------------------------
+# floor_mode: "spheres" is the shipped field above — no collider, a body walks through it.
+#   "walk" stands the walkable sine floor instead: commons/context/walkgrids/sine_space.tscn,
+#   the height field h = 0.7 sin(1.2x) cos(1.2z) with a trimesh collider made from the drawn
+#   mesh. That is the scene this token loaded in WaveFunctions_Sine_Space from 2025-08-20
+#   until 2026-02-21, when a new registry file re-bound `sine_space` to this sphere field;
+#   the pit in that map was dug for it. Its wave settings are kept as they were. Only the
+#   footprint is fitted: walk_width x walk_depth metres, rounded to whole half-waves, with
+#   the phases chosen so the whole rim lies at height 0 and meets the floor around it flush.
+#   walk_offset moves the floor's centre off the node, in metres (a pit of an even number of
+#   cells is centred on a cell corner). Map keys: #floor:walk #width #depth #pos_x #pos_z.
+#   #fit:exact scales the drawn surface and collider to close an authored basin rim.
+const WALK_FLOOR_SCENE := "res://commons/context/walkgrids/sine_space.tscn"
+@export_enum("spheres", "walk") var floor_mode: String = "spheres"
+@export var walk_width: float = 11.0
+@export var walk_depth: float = 20.0
+@export var walk_offset: Vector2 = Vector2.ZERO
+## Opt-in museum fit: keep complete half-waves, stretch their footprint to the
+## authored basin. This slightly changes metres per cycle independently on X/Z.
+@export var walk_fit_exact: bool = false
+var walk_floor: Node3D = null
+
 var time = 0.0
 var grid_size = 25
 var instance_count: int
@@ -44,11 +66,75 @@ enum TopologyMode {
 var current_topology = TopologyMode.FLAT_SINE
 
 func _ready() -> void:
+	if floor_mode == "walk":
+		_build_walk_floor()
+		return
 	instance_count = grid_size * grid_size
 	create_multimesh_surface()
 	setup_materials()
 	_create_capture_anchor()
 	_apply_manifold()
+
+# The walkable floor replaces the field, its four controls and the per-frame update: the
+# walkgrid scene was a still surface, and a MultiMesh bobbing through a collider would show
+# spheres rising out of the ground a body is standing on.
+func _build_walk_floor() -> void:
+	set_process(false)
+	multi_mesh_instance = null
+	multi_mesh = null
+	for n in ["SineSurface", "TopologyIndicators", "FrequencyControl", "AmplitudeControl", "PhaseControl", "TopologyMode", "WalkFloor", "CaptureAnchor"]:
+		var c := get_node_or_null(n)
+		if c != null:
+			remove_child(c)
+			c.queue_free()
+	var packed: PackedScene = load(WALK_FLOOR_SCENE)
+	if packed == null:
+		push_error("SineSpace: the walkable floor scene is missing: " + WALK_FLOOR_SCENE)
+		return
+	var ws: Node3D = packed.instantiate()
+	# the walkgrid scene carries a stray editor camera; a placed floor has no view of its own
+	var cam := ws.get_node_or_null("Camera3D")
+	if cam != null:
+		ws.remove_child(cam)
+		cam.free()
+	var f: float = float(ws.get("wave_frequency"))
+	var fit := walk_floor_fit(walk_width, walk_depth, f)
+	ws.set("space_size", fit["size"])
+	ws.set("phase_x", fit["phase_x"])
+	ws.set("phase_z", fit["phase_z"])
+	ws.position = Vector3(walk_offset.x, 0.0, walk_offset.y)
+	if walk_fit_exact:
+		ws.scale = Vector3(walk_width / fit["size"].x, 1.0, walk_depth / fit["size"].y)
+	ws.name = "WalkFloor"
+	add_child(ws)
+	walk_floor = ws
+	# a measuring camera and the museum's ledger read MeshInstance3D bounds: the anchor is the
+	# floor's own box (footprint x relief), never drawn
+	var amp: float = absf(float(ws.get("wave_amplitude")) * float(ws.get("height_scale")))
+	var anchor := MeshInstance3D.new()
+	anchor.name = "CaptureAnchor"
+	var bm := BoxMesh.new()
+	var sz: Vector2 = fit["size"]
+	if walk_fit_exact:
+		sz = Vector2(walk_width, walk_depth)
+	bm.size = Vector3(sz.x, maxf(2.0 * amp, 0.05), sz.y)
+	anchor.mesh = bm
+	anchor.position = ws.position
+	anchor.layers = 0
+	add_child(anchor)
+
+# Whole half-waves in each direction, so sin(f x + phase_x) is 0 on both x edges and
+# cos(f z + phase_z) is 0 on both z edges: n odd -> sin needs phase pi/2, cos needs 0;
+# n even -> sin needs 0, cos needs pi/2.
+static func walk_floor_fit(width: float, depth: float, f: float) -> Dictionary:
+	var nx: int = maxi(1, roundi(width * f / PI))
+	var nz: int = maxi(1, roundi(depth * f / PI))
+	return {
+		"size": Vector2(nx * PI / f, nz * PI / f),
+		"phase_x": PI * 0.5 if nx % 2 == 1 else 0.0,
+		"phase_z": 0.0 if nz % 2 == 1 else PI * 0.5,
+		"half_waves": Vector2i(nx, nz),
+	}
 
 # The surface is a MultiMeshInstance3D and the four controls are CSG nodes, so this
 # artifact owns not one MeshInstance3D — a measuring camera reads it as a 1 m box and
@@ -396,3 +482,26 @@ func apply_grid_config(config: Dictionary) -> void:
 		var c: String = str(config["crossing"])
 		if c != "" and c != crossing:
 			crossing = c
+	# The walkable floor is chosen once, before the tree: the museum and the grid both hand
+	# config over before _ready, which is where the floor (or the field) is built.
+	if config.has("floor"):
+		var fm: String = str(config["floor"])
+		if fm == "spheres" or fm == "walk":
+			floor_mode = fm
+	if config.has("fit"):
+		walk_fit_exact = str(config["fit"]) == "exact"
+	if config.has("width"):
+		walk_width = float(config["width"])
+	if config.has("depth"):
+		walk_depth = float(config["depth"])
+	if config.has("pos_x"):
+		walk_offset.x = float(config["pos_x"])
+	if config.has("pos_z"):
+		walk_offset.y = float(config["pos_z"])
+	# a config that arrives after the tree (a lane that adds first and configures second)
+	# still gets its floor, built once more at the size it names
+	if is_node_ready() and floor_mode == "walk":
+		for k in ["floor", "width", "depth", "pos_x", "pos_z", "fit"]:
+			if config.has(k):
+				_build_walk_floor()
+				break

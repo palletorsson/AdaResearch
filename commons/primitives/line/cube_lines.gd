@@ -47,6 +47,16 @@ const DISCLOSURES: PackedStringArray = ["frame", "visible", "silhouette", "plan"
 @export var coding: String = "uniform"
 const CODINGS: PackedStringArray = ["uniform", "axes", "depth", "horizon"]
 
+## Whether each edge captions its own length. Twelve edges of a 1x1x1 cube
+## produce twelve identical "Length: 1.00m" — true, and unreadable. Default
+## true so nothing already shipped changes.
+@export var edge_labels: bool = true
+
+## One colour for every drawn edge, overriding CODING. Alpha 0 = off, which
+## is the default, so the five coding values keep their say. A parent that
+## wants the cube to read as ITS colour sets this and calls setup_cube().
+@export var tint_override: Color = Color(0, 0, 0, 0)
+
 const EDGE_THICKNESS: float = 0.008
 const LEGACY_TINT: Color = Color(0.4, 0.8, 1.0, 1.0)
 const NEAR_CORNER: Vector3 = Vector3(0.5, 0.5, 0.5)
@@ -117,7 +127,11 @@ func setup_cube():
 			line_node.set_positions(start, end)
 
 			# Set line properties
-			line_node.set_line_properties(EDGE_THICKNESS, _edge_tint(start, end))
+			var tint: Color = tint_override if tint_override.a > 0.0 \
+				else _edge_tint(start, end)
+			line_node.set_line_properties(EDGE_THICKNESS, tint)
+			if line_node.has_method("set_length_label_visible"):
+				line_node.set_length_label_visible(edge_labels)
 
 
 # ── DISCLOSURE ───────────────────────────────────────────────────────────────

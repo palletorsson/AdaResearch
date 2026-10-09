@@ -95,6 +95,9 @@ const TRACE_HOT := Color(1.0, 0.25, 0.72, 0.55)
 const LONGHAND_FILL := Color(1.0, 0.62, 0.18, 0.5)
 
 ## Set by trace / longhand / axiom: the exhibit stands still.
+var lesson_enabled := false
+var fit_indices: Array[int] = []
+var measured_slope := 0.0
 var _static_evidence := false
 ## Grids built by `trace`, and the filled cover built by `longhand`.
 var _evidence_parts: Array[MeshInstance3D] = []
@@ -249,6 +252,7 @@ func _setup_labels() -> void:
 
 
 func _rebuild_scale_tag(text: String) -> void:
+	if lesson_enabled: return
 	if _scale_tag and is_instance_valid(_scale_tag):
 		_scale_tag.queue_free()
 		_scale_tag = null
@@ -261,6 +265,7 @@ func _rebuild_scale_tag(text: String) -> void:
 
 
 func _rebuild_dimension_tag(text: String) -> void:
+	if lesson_enabled: return
 	if _dimension_tag and is_instance_valid(_dimension_tag):
 		_dimension_tag.queue_free()
 		_dimension_tag = null
@@ -358,14 +363,19 @@ func _update_plot() -> void:
 	var sum_y := 0.0
 	var sum_xy := 0.0
 	var sum_xx := 0.0
-	var n := float(log_points.size())
-	for pt in log_points:
+	var fit: Array[Vector2] = []
+	for i in log_points.size():
+		if fit_indices.is_empty() or fit_indices.has(i): fit.append(log_points[i])
+	if fit.size()<2: return
+	var n := float(fit.size())
+	for pt in fit:
 		sum_x += pt.x
 		sum_y += pt.y
 		sum_xy += pt.x * pt.y
 		sum_xx += pt.x * pt.x
 	var slope := (n * sum_xy - sum_x * sum_y) / maxf(n * sum_xx - sum_x * sum_x, 0.001)
-	_rebuild_dimension_tag("D = %.3f" % slope)
+	measured_slope=slope
+	_rebuild_dimension_tag("finite-scale fit = %.3f" % slope)
 
 	# Draw axes
 	var axis_mat := StandardMaterial3D.new()
@@ -427,6 +437,11 @@ func _update_plot() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("lesson","false")).to_lower() == "true":
+		lesson_enabled=true
+		_static_evidence=true
+		_install_lesson.call_deferred()
+		return
 	for k in config.keys():
 		set_meta("config_%s" % str(k), config[k])
 	var was: String = evidence
@@ -528,8 +543,8 @@ func _build_trace_stack() -> void:
 ## N(e) as an area instead of an integer: every cell the gasket actually touches
 ## at 16 divisions, filled in. Two triangles per occupied cell, laid at y = 0.02
 ## so they sit over the 0.01 grid lines without fighting them for the depth test.
-func _build_longhand_cover() -> void:
-	var divisions: int = GRID_SCALES[LONGHAND_SCALE_IDX]
+func _build_longhand_cover(scale_idx: int = LONGHAND_SCALE_IDX) -> void:
+	var divisions: int = GRID_SCALES[scale_idx]
 	var box_size := SHAPE_SIZE / float(divisions)
 	var half := SHAPE_SIZE * 0.5
 
@@ -621,3 +636,23 @@ func _add_capture_anchor() -> void:
 	anchor.position = Vector3((x_min + x_max) * 0.5, (y_min + y_max) * 0.5, 0.0)
 	anchor.layers = 0
 	add_child(anchor)
+
+func _install_lesson() -> void:
+	if has_node("FractalLesson"): return
+	var fixture = load("res://commons/artifacts/koch_sierpinski_lesson/koch_sierpinski_lesson.gd").new()
+	fixture.name="FractalLesson"
+	fixture.kind="measure"
+	add_child(fixture)
+
+func replay_sample(seed_value: int) -> void:
+	# Seed applies after instancing too. Reuse the same cloud renderer.
+	shape_seed=seed_value
+	_rng=RandomNumberGenerator.new()
+	_rng.seed=seed_value
+	_fractal_points.clear()
+	_counts.clear()
+	_generate_sierpinski_points()
+	var mm: MultiMesh=_point_cloud.multimesh
+	for i in _fractal_points.size():
+		mm.set_instance_transform(i,Transform3D(Basis.IDENTITY,_fractal_points[i]))
+	for divisions in GRID_SCALES: _counts.append(_count_boxes(divisions))

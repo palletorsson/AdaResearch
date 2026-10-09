@@ -220,7 +220,7 @@ func _setup_audio_analysis() -> void:
 		spectrum_analyzer.tap_back_pos = 0.0
 
 		AudioServer.add_bus_effect(bus_index, spectrum_analyzer)
-		spectrum_instance = AudioServer.get_bus_effect_instance(bus_index, 0) as AudioEffectSpectrumAnalyzerInstance
+		spectrum_instance = AudioServer.get_bus_effect_instance(bus_index, AudioServer.get_bus_effect_count(bus_index)-1) as AudioEffectSpectrumAnalyzerInstance
 
 		if target_audio_player:
 			target_audio_player.bus = bus_name
@@ -602,6 +602,8 @@ func apply_grid_config(config: Dictionary) -> void:
 	pass
 
 func _exit_tree() -> void:
+	preload("res://commons/audio/systems/spectrum_analyzer_lease.gd").remove_owned_effect(spectrum_analyzer)
+	spectrum_instance=null
 	if _mesh_instance and is_instance_valid(_mesh_instance):
 		_mesh_instance.queue_free()
 	for lbl in _freq_labels:

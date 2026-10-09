@@ -158,6 +158,7 @@ enum CycleState {
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _state: int = CycleState.IDLE
 var _loop_ticket: int = 0
+var _motion_tween: Tween
 var _base_position: Vector3 = Vector3.ZERO
 
 var _cube_mesh: MeshInstance3D = null
@@ -379,6 +380,18 @@ func _begin_cycle_loop() -> void:
 	_run_cycle_loop(ticket)
 
 func _restart_cycle_loop() -> void:
+	# Invalidate suspended timers before returning to the caller. A seed alone
+	# cannot replay a crossing whose previous tween still owns position.y.
+	_loop_ticket += 1
+	if _motion_tween != null and _motion_tween.is_valid():
+		_motion_tween.kill()
+	position.y = _base_position.y
+	if _crossing != null:
+		_crossing.position.y = _crossing_base_y
+	_set_collision_enabled(true)
+	_set_state(CycleState.IDLE)
+	_step_kind = ""
+	_step_until_ms = 0
 	call_deferred("_begin_cycle_loop")
 
 func _run_cycle_loop(ticket: int) -> void:
@@ -422,6 +435,7 @@ func _run_cycle_loop(ticket: int) -> void:
 
 func _animate_vertical(target_y: float, duration_seconds: float) -> void:
 	var tween: Tween = create_tween()
+	_motion_tween = tween
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "position:y", target_y, max(0.01, duration_seconds))
@@ -433,6 +447,8 @@ func _set_collision_enabled(enabled: bool) -> void:
 
 func _set_state(next_state: int) -> void:
 	_state = next_state
+	if _crown != null and _state != CycleState.IDLE:
+		_crown.visible = false
 	match _state:
 		CycleState.IDLE:
 			_set_cube_visual(idle_color, 1.0)
@@ -504,6 +520,7 @@ func _note_step(kind: String, wait_seconds: float) -> void:
 func step_state() -> Dictionary:
 	var left: float = max(0.0, float(_step_until_ms - Time.get_ticks_msec()) / 1000.0)
 	return {
+		"state": ["STANDS", "LEAVES", "GONE", "RETURNS"][_state],
 		"step": _step_kind,
 		"wait": snappedf(_step_wait, 0.01),
 		"left": snappedf(left, 0.01),
@@ -798,9 +815,16 @@ func _build_crossing() -> void:
 	# a worn threshold at each lip, so the step up onto the row is a slope and not a
 	# wall for any body the engine will not lift
 	for s in [-1.0, 1.0]:
-		_crossing.add_child(_ramp(Vector3(0.0, CH_FLOOR, s * (pit.y + 0.34)),
-				Vector3(0.0, CH_FLOOR + CH_PROUD, s * (pit.y - 0.04)), 1.0, stone_mat,
+		_crossing.add_child(_ramp(Vector3(0.0, CH_FLOOR, s * (pit.y + 1.00)),
+				Vector3(0.0, CH_FLOOR + CH_PROUD, s * (pit.y + 0.45)), 1.0, stone_mat,
 				"Threshold_%s" % ("near" if s < 0.0 else "far")))
+		# Reach full height before the capsule touches the stone's vertical face.
+		# The short landing joins the lip; it does not span the pit.
+		var landing_at := Vector3(0, CH_FLOOR + CH_PROUD - 0.04, s * (pit.y + 0.19))
+		var landing_size := Vector3(1.0, 0.08, 0.52)
+		# Keep the visual a few millimetres below the overlapping stone top.
+		_crossing.add_child(HangarKit.box(landing_at - Vector3(0, 0.004, 0), landing_size, stone_mat))
+		_crossing.add_child(HangarKit.box_collider(landing_size, landing_at))
 
 	# kerbs on both lips, broken for the width of the row: a gate, not a fence
 	for s in [-1.0, 1.0]:
@@ -1020,7 +1044,7 @@ func _spawn_stones() -> void:
 		stone.name = "Stone_%d" % (i + half)
 		_adopt_crossing_timing(stone)
 		stone.set("cycle_seed", _crossing_rng.randi_range(1, 1 << 30))
-		stone.set("warning", "none")
+		stone.set("warning", "beacon")
 		stone.position = Vector3(0.0, 0.0, CH_PITCH * float(i))
 		_crossing.add_child(stone)
 		_stones.append(stone)
@@ -1065,7 +1089,7 @@ func _build_crown() -> void:
 func _process(_delta: float) -> void:
 	if _crown != null and is_instance_valid(_crown):
 		var left: float = float(_step_until_ms - Time.get_ticks_msec()) / 1000.0
-		_crown.visible = advance_seconds > 0.0 and _step_kind == "stands" and left <= advance_seconds and left > -0.05
+		_crown.visible = advance_seconds > 0.0 and _state == CycleState.IDLE and _step_kind == "stands" and left <= advance_seconds and left > 0.0
 	if _crossing == null or not is_instance_valid(_crossing):
 		return
 	_crossing.position.y = _crossing_base_y - (position.y - _base_position.y)
@@ -1092,7 +1116,7 @@ func _update_tablet() -> void:
 			bars = int(round(8.0 * clampf(float(s["left"]) / float(s["wait"]), 0.0, 1.0)))
 		var mark: String = "|".repeat(bars) + ".".repeat(8 - bars)
 		lines.append("%d  %-6s drawn %4.1f s  left %4.1f  %s%s" % [
-			i + 1, ("STANDS" if str(s["step"]) == "stands" else "GONE"),
+			i + 1, str(s["state"]),
 			float(s["wait"]), float(s["left"]), mark,
 			"  <" if bool(s["crown"]) else "",
 		])
@@ -1127,7 +1151,9 @@ func new_crossing() -> void:
 		return
 	var namer := RandomNumberGenerator.new()
 	namer.randomize()
-	crossing_seed = namer.randi_range(10000, 99999)
+	var previous: int = crossing_seed
+	while crossing_seed == previous:
+		crossing_seed = namer.randi_range(10000, 99999)
 	replay_crossing()
 
 

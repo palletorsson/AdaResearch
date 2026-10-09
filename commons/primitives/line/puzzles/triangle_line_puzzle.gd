@@ -1,5 +1,6 @@
 extends LineSnapPuzzleBase
 class_name TriangleLinePuzzle
+const MUSEUM_STYLE = preload("res://commons/primitives/line/museum_line_style.gd")
 
 # @identity
 # essence: triangle = 3 edges connecting 3 vertices — the minimal closed polygon
@@ -30,20 +31,21 @@ class_name TriangleLinePuzzle
 ## How the three unformed lines are presented before assembly.
 ## "racked" is the shipped stock — three identical parallel lines stacked off to the side, parts
 ## issued from a rack. "strewn" drops them at unrelated angles, so the triangle is a recognition
-## you impose on debris. "ringed" parks each line just outside the edge it belongs to, so nothing
-## needs finding and the whole puzzle is closure.
+## you impose on debris. "ringed" shortens each line along its triangle edge, so the gaps
+## invite you to connect the ends.
 @export_enum("racked", "strewn", "ringed") var stock: String = "racked"
 
-# Canonical triangle in plane coordinates (u across, v up): equilateral, ~40 cm sides, apex up.
+# Canonical triangle in plane coordinates (u across, v up): ~96 cm sides, apex up.
 const TRI_UV: Array = [
-	Vector2(-0.2, -0.173),  # Bottom-left vertex
-	Vector2(0.2, -0.173),   # Bottom-right vertex
-	Vector2(0.0, 0.173),    # Top apex
+	Vector2(-0.48, -0.25),
+	Vector2(0.48, -0.25),
+	Vector2(0.0, 0.58),
 ]
+var discovery_face: MeshInstance3D
+
 const TILT_DEG: float = 45.0
-const GROUND_Y: float = -0.173  # lay the flat triangle at the height of the upright one's base
+const GROUND_Y: float = -0.25
 const STOCK_HALF: float = 0.15  # half-length of an unformed line, as shipped
-const RING_OFFSET: float = 0.14 # how far outside its edge a "ringed" line waits
 
 
 func _init() -> void:
@@ -71,24 +73,76 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	stock=str(get_meta("config_stock",stock))
+	line_color=MUSEUM_STYLE.PINK;line_locked_color=MUSEUM_STYLE.PINK
+	completion_color=MUSEUM_STYLE.PINK
 	_apply_dna()
 	super._ready()
+	MUSEUM_STYLE.plinth(self,Vector3(0,-0.85,0),Vector3(0.9,1.1,1.5))
+	var display=get_node_or_null("TriangleLogicDisplay")
+	if display:display.visible=false
+	if str(get_meta("config_discovery", "0")) == "1":
+		var panel = preload("res://commons/ui/triangle_workbench.gd").new()
+		panel.name = "ExperimentPanel"
+		panel.position = Vector3(.64,-.31,0)
+		panel.rotation_degrees = Vector3(-65,90,0)
+		add_child(panel)
 	print("TriangleLinePuzzle: 3 lines, 3 vertices, plane=%s stock=%s, constraints: CONNECTED + CLOSED_LOOP" % [target_plane, stock])
 
 
 func _complete_puzzle() -> void:
-	# Hide logic display if needed
-	var display = get_node_or_null("TriangleLogicDisplay")
-	if display:
-		display.visible = false
+	if is_completed:return
+	is_completed=true
+	_play_completion_sound()
+	var shown_corners: Array[Vector3]=[]
+	for line in snap_lines:
+		line.lock_line()
+		line.endpoint_a.enabled=false;line.endpoint_b.enabled=false
+		# Either end can reach either target. Keep one skin at each shared corner.
+		for endpoint in [line.endpoint_a,line.endpoint_b]:
+			var already_shown:=false
+			for corner in shown_corners:
+				if endpoint.global_position.distance_to(corner)<0.001:already_shown=true;break
+			endpoint.get_node("MeshInstance3D").visible=not already_shown
+			if not already_shown:shown_corners.append(endpoint.global_position)
+	for marker in target_markers:marker.visible=false
+	all_lines_aligned.emit();puzzle_completed.emit()
+	if trigger_tag!="":TagSystem.trigger_tag_action(trigger_tag,trigger_action if trigger_action!="" else "shrink_and_remove")
 
-	super._complete_puzzle()
+func _setup_lines() -> void:
+	await super._setup_lines()
+	for line in snap_lines:
+		line.line_width=0.014;line.radial_segments=16;line.snap_tolerance=0.10
+		line.material=MUSEUM_STYLE.pink();line.line_mesh.material_override=line.material
+		for endpoint in [line.endpoint_a,line.endpoint_b]:
+			MUSEUM_STYLE.point(endpoint,0.045)
+			endpoint.snap_distance=0.0;endpoint.show_snap_preview=false
+			endpoint.release_mode=XRToolsPickable.ReleaseMode.FROZEN;endpoint.freeze=true
+		line._update_line_geometry()
+
+func _validate_puzzle() -> void:
+	# Near a corner is a preview. Closure belongs to the release that snaps it.
+	for line in snap_lines:
+		for endpoint in [line.endpoint_a,line.endpoint_b]:
+			if endpoint.is_picked_up():return
+			var exact:=false
+			for target in line.shared_targets:
+				if endpoint.global_position.distance_to(target)<0.001:exact=true;break
+			if not exact:return
+	super._validate_puzzle()
+
+func _create_alyx_marker(_index: int) -> Node3D:
+	var marker:=Node3D.new();marker.name="CornerTarget"
+	var mesh:=MeshInstance3D.new();var ring:=TorusMesh.new()
+	ring.inner_radius=0.052;ring.outer_radius=0.058;ring.rings=24;ring.ring_segments=8
+	mesh.mesh=ring;mesh.rotation.z=PI*0.5;mesh.material_override=MUSEUM_STYLE.white()
+	marker.add_child(mesh)
+	return marker
 
 
 # --- DNA layout ---
 
-## Recompute both hard-coded tables from the two axes. At the defaults this reproduces the shipped
-## literals exactly (see _to_local and _racked_lines).
+## Recompute targets and starting segments from the selected plane and stock.
 func _apply_dna() -> void:
 	target_positions = _dna_targets()
 	line_start_positions = _dna_stock()
@@ -147,20 +201,16 @@ func _strewn_lines() -> Array[Array]:
 	return out
 
 
-## Each line parked just outside the triangle edge it belongs to, parallel to it. Follows
-## target_plane, so the ring lies in whatever plane the triangle closes in.
+## Short segments on the triangle's edge axes. Follows target_plane.
 func _ringed_lines() -> Array[Array]:
-	var centroid: Vector2 = (TRI_UV[0] + TRI_UV[1] + TRI_UV[2]) / 3.0
-
 	var out: Array[Array] = []
 	for i in TRI_UV.size():
 		var a: Vector2 = TRI_UV[i]
 		var b: Vector2 = TRI_UV[(i + 1) % TRI_UV.size()]
-		var mid: Vector2 = (a + b) * 0.5
-		var along: Vector2 = (b - a).normalized() * STOCK_HALF
-		var outward: Vector2 = (mid - centroid).normalized() * RING_OFFSET
-		var p0: Vector2 = mid + outward - along
-		var p1: Vector2 = mid + outward + along
+		# Already on the edge's axis, but 16% short at each end. The gaps invite
+		# the visitor to bring endpoints to their common corner, not find a rack.
+		var p0: Vector2 = a.lerp(b,0.16)
+		var p1: Vector2 = b.lerp(a,0.16)
 		out.append([_to_local(p0.x, p0.y), _to_local(p1.x, p1.y)])
 	return out
 
@@ -216,3 +266,28 @@ func _reseat() -> void:
 			line.endpoint_a.global_position = global_transform * line_start_positions[i][0]
 			line.endpoint_b.global_position = global_transform * line_start_positions[i][1]
 			line._update_line_geometry()
+
+func toggle_discovery_face() -> void:
+	if not is_completed: return
+	if discovery_face == null:
+		discovery_face = MeshInstance3D.new()
+		discovery_face.name = "DiscoveredFace"
+		var mesh := ImmediateMesh.new()
+		mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		for p: Vector3 in target_positions: mesh.surface_add_vertex(p)
+		mesh.surface_end()
+		discovery_face.mesh = mesh
+		discovery_face.material_override = MUSEUM_STYLE.face()
+		add_child(discovery_face)
+	else:
+		discovery_face.visible = not discovery_face.visible
+
+func reset_puzzle() -> void:
+	if is_instance_valid(discovery_face):
+		discovery_face.queue_free()
+		discovery_face = null
+	super.reset_puzzle()
+	for line in snap_lines:
+		for endpoint in [line.endpoint_a,line.endpoint_b]:
+			endpoint.enabled=true;endpoint.freeze=true
+			endpoint.get_node("MeshInstance3D").visible=true

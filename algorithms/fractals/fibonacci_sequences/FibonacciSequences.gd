@@ -13,6 +13,8 @@ extends Node3D
 # relationships: Mathematical foundation for golden_rectangle, fibonacci_terrain, romanesco, and fibonacci_pagoda; the sequence they all implement
 # truth: The Fibonacci sequence is not about numbers — it is about the fact that growth, when it remembers its last two steps, spirals.
 
+var lesson_enabled := false
+
 var time := 0.0
 var sequence_timer := 0.0
 var current_index := 0
@@ -23,6 +25,7 @@ func _ready() -> void:
 	generate_fibonacci_sequence(20)
 
 func _process(delta: float) -> void:
+	if lesson_enabled: return
 	time += delta
 	sequence_timer += delta
 	
@@ -86,7 +89,7 @@ func create_addition_visualization(container: Node3D, index: int) -> void:
 	
 	var conn_material = StandardMaterial3D.new()
 	conn_material.albedo_color = Color(0.8, 0.8, 0.2, 0.7)
-	conn_material.flags_transparent = true
+	conn_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	connection1.material_override = conn_material
 	
 	container.add_child(connection1)
@@ -151,7 +154,7 @@ func create_golden_spiral() -> void:
 		
 		var conn_material = StandardMaterial3D.new()
 		conn_material.albedo_color = Color(0.8, 0.8, 0.8, 0.6)
-		conn_material.flags_transparent = true
+		conn_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		connection.material_override = conn_material
 		
 		container.add_child(connection)
@@ -237,7 +240,7 @@ func create_nautilus_pattern(container: Node3D, center: Vector3) -> void:
 		
 		var material = StandardMaterial3D.new()
 		material.albedo_color = Color(0.9, 0.7, 0.9, 0.7)
-		material.flags_transparent = true
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		material.emission_enabled = true
 		material.emission = Color(0.9, 0.7, 0.9) * 0.2
 		chamber_sphere.material_override = material
@@ -311,4 +314,11 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("lesson","false")) != "true": return
+	lesson_enabled=true
+	_install_lesson.call_deferred()
+
+func _install_lesson() -> void:
+	if has_node("GoldenLesson"): return
+	var desk=load("res://commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd").new()
+	desk.name="GoldenLesson";desk.kind="numbers";add_child(desk)

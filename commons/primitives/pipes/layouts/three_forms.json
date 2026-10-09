@@ -1,0 +1,10 @@
+{
+  "settings": {"pipe_type": "pipe", "show_anchors": true},
+  "anchors": {"Left": [-2, 3, 0], "Right": [2, 3, 0], "Foot": [-2, 1, 0], "Free": [1, 1, 1]},
+  "paths": [
+    {"id": "rail", "from": "Left", "to": "Right", "kind": "pipe", "pipe_radius": 0.12, "colour": "eeeae0", "sides": 24},
+    {"id": "upright", "from": "Foot", "to": "Left", "kind": "pipe", "pipe_radius": 0.12, "colour": "eeeae0"},
+    {"id": "cable", "from": "Left", "to": "Right", "kind": "cable", "pipe_radius": 0.035, "sag": 0.8, "colour": "29272e"},
+    {"id": "gesture", "from": "Left", "to": "Free", "kind": "tube", "pipe_radius": 0.07, "colour": "d877a2", "points": [[-2,3,0],[-1,2.8,0.3],[0,2.4,1],[1,1,1]]}
+  ]
+}

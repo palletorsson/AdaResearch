@@ -1,30 +1,83 @@
-﻿extends Node3D
+extends "res://addons/godot-xr-tools/objects/pickable.gd"
 class_name SynthCablePlug
-
-## Grabbable plug end of a synth cable
-## Can be inserted into SynthJack sockets
-
+## The grip, plug and physics body move together on desktop and in XR.
 signal snapped_to_jack(jack: SynthJack)
 signal unsnapped_from_jack(jack: SynthJack)
+@export var plug_color := Color(0.8,0.2,0.2)
+@export var plug_radius := 0.01
+@export var plug_length := 0.025
+@export var tip_color := Color(0.15,0.15,0.15)
+var current_jack: SynthJack
+var is_snapped := false
+var _being_held := false
 
-@export var plug_color: Color = Color(0.8, 0.2, 0.2)
-@export var plug_radius: float = 0.01
-@export var plug_length: float = 0.025
-@export var tip_color: Color = Color(0.15, 0.15, 0.15)
+func _init() -> void:
+	collision_layer = 4; collision_mask = 0; gravity_scale = 0.0
+	freeze = true; release_mode = ReleaseMode.FROZEN
 
-var current_jack: SynthJack = null
-var is_snapped: bool = false
-var _being_held: bool = false
-
-# XR Pickable components
-var rigid_body: RigidBody3D
-var pickup_component: Node  # XRToolsPickable
-
-
-func _ready():
+func _ready() -> void:
+	add_to_group("no_gravity_gun")
 	_create_plug_mesh()
-	_setup_grabbable()
+	var shape := SphereShape3D.new(); shape.radius = 0.023
+	var col := CollisionShape3D.new(); col.shape = shape; col.position.z = plug_length * 0.5
+	add_child(col)
+	super()
+	picked_up.connect(_on_picked_up); dropped.connect(_on_dropped)
 
+func _on_picked_up(_object) -> void:
+	_being_held = true; _unsnap()
+func _on_dropped(_object) -> void:
+	_being_held = false; freeze = true
+	linear_velocity = Vector3.ZERO; angular_velocity = Vector3.ZERO
+	_check_nearby_jacks()
+func on_desktop_grab(pointer: Node) -> void: _on_picked_up(pointer)
+func on_desktop_drop(pointer: Node) -> void: _on_dropped(pointer)
+func is_being_held() -> bool: return _being_held or is_picked_up()
+func is_synth_plug() -> bool: return true
+func get_plug_type(): return null
+
+func can_snap(jack: SynthJack) -> bool:
+	if not is_instance_valid(jack) or jack.is_connected: return false
+	var cable = get_parent()
+	if jack.manager != cable.get_parent(): return false
+	var other = cable.plug_b if cable.plug_a == self else cable.plug_a
+	return other.current_jack == null or (other.current_jack != jack and other.current_jack.jack_type != jack.jack_type and other.current_jack.signal_kind == jack.signal_kind)
+
+func snap_to_jack(jack: SynthJack) -> bool:
+	if current_jack == jack: return true
+	if not can_snap(jack): return false
+	_unsnap()
+	current_jack = jack; is_snapped = true; freeze = true
+	global_transform = Transform3D(jack.global_basis, jack.get_socket_position())
+	jack.connected_plug = self; jack.is_connected = true
+	jack._set_connected_visual(true)
+	snapped_to_jack.emit(jack)
+	jack.cable_connected.emit(get_parent(), self)
+	return true
+
+func _snap_to_jack(jack: SynthJack): return snap_to_jack(jack)
+func _unsnap() -> void:
+	if not is_snapped: return
+	var previous := current_jack
+	current_jack = null; is_snapped = false
+	if is_instance_valid(previous):
+		previous.connected_plug = null; previous.is_connected = false
+		previous._set_connected_visual(false)
+	unsnapped_from_jack.emit(previous)
+	if is_instance_valid(previous): previous.cable_disconnected.emit(get_parent(), self)
+
+func _check_nearby_jacks() -> void:
+	var manager = get_parent().get_parent()
+	if not manager is SynthCableManager: return
+	var closest: SynthJack
+	var distance := 0.055
+	for jack in manager._all_jacks:
+		var d: float = global_position.distance_to(jack.get_socket_position())
+		if d < distance and can_snap(jack): closest = jack; distance = d
+	if closest: snap_to_jack(closest)
+
+func get_cable_attachment_point() -> Vector3:
+	return to_global(Vector3(0,0,plug_length))
 
 func _create_plug_mesh():
 	# Main plug body
@@ -86,158 +139,6 @@ func _create_plug_mesh():
 	ring_mat.roughness = 0.8
 	ring_mesh.material_override = ring_mat
 	add_child(ring_mesh)
-
-
-func _setup_grabbable():
-	# Create RigidBody3D for physics interaction
-	rigid_body = RigidBody3D.new()
-	rigid_body.name = "PlugRigidBody"
-	rigid_body.gravity_scale = 0.0  # Cable handles physics
-	rigid_body.freeze = true  # Start frozen, unfreeze when grabbed
-	
-	# Collision shape
-	var collision = CollisionShape3D.new()
-	var capsule = CapsuleShape3D.new()
-	capsule.radius = plug_radius * 1.5
-	capsule.height = plug_length * 1.5
-	collision.shape = capsule
-	collision.rotation_degrees.x = 90
-	collision.position.z = plug_length / 2
-	rigid_body.add_child(collision)
-	
-	add_child(rigid_body)
-	
-	# Try to add XRToolsPickable if available
-	_try_add_xr_pickable()
-	
-	# Detection area for jacks
-	var detect_area = Area3D.new()
-	detect_area.name = "JackDetector"
-	var detect_shape = CollisionShape3D.new()
-	var detect_sphere = SphereShape3D.new()
-	detect_sphere.radius = plug_radius * 3
-	detect_shape.shape = detect_sphere
-	detect_shape.position.z = -plug_length * 0.3  # At tip
-	detect_area.add_child(detect_shape)
-	add_child(detect_area)
-	
-	detect_area.area_entered.connect(_on_area_entered)
-	detect_area.area_exited.connect(_on_area_exited)
-
-
-func _try_add_xr_pickable():
-	# Check if XRToolsPickable exists
-	var pickable_script_path = "res://addons/godot-xr-tools/interactables/interactable_handle.gd"
-	if ResourceLoader.exists(pickable_script_path):
-		var script = load(pickable_script_path)
-		if script:
-			# XRToolsInteractableHandle extends RigidBody3D, so it must live on the
-			# plug rigid body itself rather than on a child Node.
-			rigid_body.set_script(script)
-			pickup_component = rigid_body
-			
-			# Connect signals if available
-			if pickup_component.has_signal("picked_up"):
-				pickup_component.picked_up.connect(_on_picked_up)
-			if pickup_component.has_signal("dropped"):
-				pickup_component.dropped.connect(_on_dropped)
-
-
-func _on_picked_up(_pickable):
-	_being_held = true
-	rigid_body.freeze = false
-	
-	# Unsnap from jack if connected
-	if is_snapped and current_jack:
-		_unsnap()
-
-
-func _on_dropped(_pickable):
-	_being_held = false
-	rigid_body.freeze = true
-	
-	# Check if near a jack to snap
-	_check_nearby_jacks()
-
-
-func _on_area_entered(area: Area3D):
-	if _being_held:
-		return  # Don't snap while being held
-	
-	var parent = area.get_parent()
-	if parent is SynthJack and not is_snapped:
-		_snap_to_jack(parent)
-
-
-func _on_area_exited(_area: Area3D):
-	pass  # Disconnection handled by jack or grab
-
-
-func _snap_to_jack(jack: SynthJack):
-	if is_snapped:
-		return
-	
-	current_jack = jack
-	is_snapped = true
-	
-	# Move to jack position
-	var target_pos = jack.get_socket_position()
-	global_position = target_pos
-	
-	# Align rotation with jack
-	global_transform.basis = jack.global_transform.basis
-	
-	# Lock in place
-	rigid_body.freeze = true
-	
-	snapped_to_jack.emit(jack)
-
-
-func _unsnap():
-	if not is_snapped:
-		return
-	
-	var old_jack = current_jack
-	current_jack = null
-	is_snapped = false
-	
-	unsnapped_from_jack.emit(old_jack)
-
-
-func _check_nearby_jacks():
-	# Use overlapping areas to find nearby jacks
-	var detect_area = get_node_or_null("JackDetector") as Area3D
-	if not detect_area:
-		return
-	
-	for area in detect_area.get_overlapping_areas():
-		var parent = area.get_parent()
-		if parent is SynthJack and not parent.is_connected:
-			_snap_to_jack(parent)
-			return
-
-
-## API
-func is_synth_plug() -> bool:
-	return true
-
-
-func is_being_held() -> bool:
-	return _being_held
-
-
-func get_plug_type():
-	# Plugs are neutral - can go in either jack type
-	return null
-
-
-func snap_to_jack(jack: SynthJack):
-	_snap_to_jack(jack)
-
-
-func get_cable_attachment_point() -> Vector3:
-	# Point where cable attaches (back of plug)
-	return global_position + global_transform.basis.z * plug_length
 
 
 func set_plug_color(color: Color):

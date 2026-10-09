@@ -122,6 +122,15 @@ var surface_noise: FastNoiseLite
 var _built: bool = false
 
 func _ready() -> void:
+	if has_meta("config_lesson"):
+		maze_size = Vector3(12, 6, 12)
+		vertical_layers = 2
+		growth_iterations = 0
+		branch_probability = 1.0
+		bench_stage = "bare"
+		layout_draw = "pinned"
+		generation_seed = 1337
+		topology = "tree"
 	if bench_stage == "bare":
 		_strip_bench_stage()
 	if layout_draw == "pinned":

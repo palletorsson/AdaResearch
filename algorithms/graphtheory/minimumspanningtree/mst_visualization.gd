@@ -4,7 +4,7 @@ extends Node3D
 # @identity
 # essence: Kruskal's (sort edges by weight, Union-Find to reject cycles) or Prim's (grow tree from starting vertex, always add cheapest crossing edge) — both find the minimum-weight spanning tree
 # desire: to watch the cheapest skeleton of a network assemble edge by edge — green edges accepted, red edges rejected for creating cycles, the MST growing like a nervous system
-# critical_parameter: algorithm_type ("kruskal" vs "prim") — Kruskal processes edges globally by weight (greedy on edges), Prim grows locally from a root (greedy on vertices) — same result, different experience
+# critical_parameter: algorithm_type ("kruskal" vs "prim") — Kruskal processes edges globally by weight (greedy on edges), Prim grows locally from a root (greedy on vertices) — same minimum total weight, possibly different edges when weights tie
 # triggers: step-by-step timer advances one edge decision per tick; Union-Find path compression tracks connected components; edge_density controls how many redundant edges exist to reject
 # emerges: watching Kruskal reject edges reveals the cycle structure of the graph — every rejected edge would have closed a loop, and the set of rejected edges defines the graph's cycle space
 # needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (vertex labels, edge weight labels)
@@ -125,6 +125,7 @@ var edge_meshes: Array = []
 var mst_edge_meshes: Array = []
 var edge_labels: Array = []
 var ui_display: CanvasLayer
+var _desktop_ui: bool = true
 var computation_timer: Timer
 
 # The single framed caption. Tracked so a rebuild frees exactly it.
@@ -146,6 +147,7 @@ func _init() -> void:
 func _ready() -> void:
 	_build_all()
 	_built = true
+	_apply_desktop_presentation()
 
 	# Only `picked` animates. The other three values ARE the solved answer already
 	# standing in the room; re-running Kruskal would draw the backbone back on top of a
@@ -170,15 +172,18 @@ func _build_all() -> void:
 func setup_ui() -> void:
 	"""Create comprehensive UI for MST visualization"""
 	ui_display = CanvasLayer.new()
+	ui_display.visible = _desktop_ui
 	add_child(ui_display)
 	
 	var panel = Panel.new()
+	panel.name = "Panel"
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	panel.size = Vector2(500, 900)
 	panel.position = Vector2(10, 10)
 	ui_display.add_child(panel)
 	
 	var vbox = VBoxContainer.new()
+	vbox.name = "VBoxContainer"
 	panel.add_child(vbox)
 	
 	# Create labels for MST information
@@ -699,9 +704,9 @@ func start_mst_computation() -> void:
 	if is_computing:
 		return
 	
+	reset_algorithm_state()
 	is_computing = true
 	computation_complete = false
-	reset_algorithm_state()
 	
 	match algorithm_type:
 		"kruskal":
@@ -958,7 +963,7 @@ func finalize_computation() -> void:
 
 func update_ui() -> void:
 	"""Update UI with current algorithm state"""
-	if not ui_display:
+	if not ui_display or parent.size() != graph_size:
 		return
 	
 	var labels = []
@@ -1151,6 +1156,9 @@ func _exit_tree() -> void:
 ## deferred queue. Was an empty `pass`, so the only artifact in the sequence whose thesis
 ## is "efficiency feels like subtraction" always rendered the addition.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("desktop_ui"):
+		_desktop_ui = str(config_data["desktop_ui"]).to_lower() in ["on", "true", "1"]
+		_apply_desktop_presentation()
 	var before_backbone: String = backbone
 
 	if config_data.has("backbone"):
@@ -1230,3 +1238,10 @@ func _rebuild_now() -> void:
 	_caption = null
 
 	_build_all()
+
+
+func _apply_desktop_presentation() -> void:
+	if is_instance_valid(ui_display): ui_display.visible = _desktop_ui
+	for path in ["Environment/BasePlane", "Environment/CoordinateAxes"]:
+		var node := get_node_or_null(path) as Node3D
+		if node: node.visible = _desktop_ui

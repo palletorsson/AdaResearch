@@ -132,7 +132,13 @@ float getBlobsSDF(vec3 p) {
 	
 	for (int i = 0; i < count; i++) {
 		vec4 blob = blobs.data[i].pos_rad;
-		float d = sdSphere(p - blob.xyz, blob.w);
+		float d = sdSphere(p - blob.xyz, abs(blob.w));
+		if (blob.w < 0.0) {
+			// Subtract in the field's selected-level convention. At level zero
+			// this is max(dist, -d); later positive strokes can fill the cut.
+			dist = max(dist, 2.0 * params.isoLevel - d);
+			continue;
+		}
 		
 		if (i == 0) {
 			dist = d;

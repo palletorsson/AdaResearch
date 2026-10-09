@@ -59,6 +59,7 @@ var dot_colors: PackedColorArray = []
 var dots_mesh_instance: MultiMeshInstance3D
 
 # Labels
+var label_in_space: bool = false
 var explanation_label: Label3D
 
 # Animation variables
@@ -850,8 +851,8 @@ func _update_labels(text: String) -> void:
 	if not explanation_label:
 		explanation_label = Label3D.new()
 		explanation_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		explanation_label.no_depth_test = true
-		explanation_label.fixed_size = true
+		explanation_label.no_depth_test = not label_in_space
+		explanation_label.fixed_size = not label_in_space
 		explanation_label.font_size = 32
 		explanation_label.outline_render_priority = 10
 		explanation_label.position = Vector3(0, geometry_scale * 1.5, 0)
@@ -866,4 +867,8 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("label_in_space"):
+		label_in_space = str(config.label_in_space).to_lower() in ["true", "1"]
+		if is_instance_valid(explanation_label):
+			explanation_label.no_depth_test = not label_in_space
+			explanation_label.fixed_size = not label_in_space

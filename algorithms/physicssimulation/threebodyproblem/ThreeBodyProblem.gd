@@ -136,6 +136,16 @@ var queer_colors = [
 ]
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "gravity_relations":
+		for child in get_children():
+			remove_child(child)
+			child.queue_free()
+		var chamber = preload("res://commons/artifacts/orbital_mechanics_demo/gravity_relations.gd").new()
+		chamber.name = "GravityRelations"
+		chamber.mutual = true
+		add_child(chamber)
+		set_physics_process(false)
+		return
 	# Scale for VR reachability
 	scale = Vector3(0.8, 0.8, 0.8)
 
@@ -548,6 +558,7 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(get_meta("config_lesson", "")) == "gravity_relations": return
 	# Each axis is guarded on its own key AND on the value actually changing.
 	# Reacting unconditionally here would restart the simulation of every existing
 	# placement the moment any unrelated config key arrived.

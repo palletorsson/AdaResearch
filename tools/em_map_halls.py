@@ -96,6 +96,7 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
         for fc in mus_decl["floor_cells"]:
             if isinstance(fc, list) and len(fc) >= 2:
                 floor_cells.add((int(fc[0]), int(fc[1])))
+    max_h = int(float(md.get("map_info", {}).get("dimensions", {}).get("max_height", 6)))
     inter = md["layers"].get("interactables", [])
     # ORIGIN-PINNED (the ruling drift lesson: tile cells ARE map cells,
     # forever). Cropping to the content bbox moved (0,0) whenever the map's
@@ -148,6 +149,8 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # own the entrance; an added wall row stood exactly where the gate's
     # sliding door slides. The hall stays the pure map tile — the gate
     # centres a normal-width door on an open edge by itself now.
+    legacy_plinths = bool(md.get("map_info", {}).get("museum", {})
+                          .get("plinths", True))
     arts = []
     for r, row in enumerate(inter):
         for c, v in enumerate(row):
@@ -157,7 +160,6 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             base = tok.split("#")[0]
             parts = base.split(":")
             name = parts[0]
-            rot = int(float(parts[1])) if len(parts) > 1 and parts[1] else 0
             # THE TOKEN CARRIES THREE FIELDS, NOT ONE (2026-09-06). The grid reads
             # <name>:<rotation>:<y_offset>:<scale>; this lane read the rotation
             # alone, so a scaled or lifted copy arrived in the museum identical to
@@ -168,6 +170,9 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                     return float(parts[i])
                 except (IndexError, ValueError):
                     return None
+            # Match _derive_map_row's is_valid_float guard: legacy variants
+            # such as gridagent:copy are not numeric rotations.
+            rot = int(_f(1) or 0)
             y_off = _f(2) or 0.0
             uni = _f(3)
             uni = max(0.05, uni) if uni is not None else 1.0
@@ -189,6 +194,9 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
             plat_h = 0.0
             if raw_under == "p" or raw_under.startswith("p:"):
                 plat_h = float(under)
+            elif 1 < under < wall_h:
+                # Raised floors use the live museum's deck, not a 0.95m plinth.
+                plat_h = float(max(1, min(under, max_h)) - 1)
 
             # THE PLINTH IS A TAG ON THE ARTIFACT, NOT A HEIGHT UNDER IT.
             #
@@ -222,11 +230,7 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                     tag_h = float(head)
                 except ValueError:
                     tag_h = 0.95          # `#plinth:micropod` etc — on, default
-                if tag_h > 0.0 and tag_h < 0.25:
-                    # em_plinths: the deck is max(top_height, 0.25) EXACTLY, so
-                    # asking for less silently gets 0.25 and the artifact then
-                    # sits higher than the plan says. Ask for what will be given.
-                    tag_h = 0.25
+                # Museum blocks honor explicitly requested low decks.
             tc = [c - c0, r - r0]
             arts.append({
                 "token": name, "cell": list(tc), "tile_cell": list(tc),
@@ -234,7 +238,8 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
                 "mode": "freestanding", "venue": "interior",
                 "support_height_m": (tag_h if tag_h is not None
                                      else (plat_h if plat_h > 0.0
-                                           else (0.95 if under >= 2 else 0.0))),
+                                           else (0.95 if (under >= 2 and legacy_plinths)
+                                                 else 0.0))),
                 # hand stays FALSE: the curator's rulings may rebind by
                 # nearest when the plan re-derives (hand:true blocks rebind —
                 # that is bake_rulings' contract, not the map's)
@@ -247,6 +252,20 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # host the long portal corridor" / "open roof, the Durer example"): a map
     # declares map_info.museum.open_roof and the museum skips that hall's
     # ceiling (dress_segment's "ceiling" flag, the one roof feed).
+    # THE LEGACY PLINTH RULE, NOW REFUSABLE PER MAP (2026-09-07, Palle: "the
+    # pick_up_cube in Trans_Pre should not have plinths" — it was the mario_cubes).
+    #
+    # Rule 3 reads "structure >= 2 under the anchor" as a plinth. That was true
+    # when a lone height-2 cell WAS the plinth. It is false in a map whose 2s and
+    # 3s are TERRACES you walk up onto: Trans_Pre has a height-2 floor across rows
+    # 7-14 and a height-3 floor across 15-17, and the museum's heights layer
+    # already lifts those cells to (v-1) m. Adding 0.95 on top double-counts, and
+    # every cube on a terrace ends up on a plinth on a floor.
+    #
+    # Gated by NEW DATA and defaulting to the old behaviour, because 269 maps rely
+    # on rule 3: `map_info.museum.plinths: false` opts one map out. Tags
+    # (`#plinth:H`) and `p` platforms are untouched — this only silences the
+    # inference.
     open_roof = bool(md.get("map_info", {}).get("museum", {}).get("open_roof", False))
     # map_info.museum.piers: false — the hall refuses the templates' pier colonnade
     # (normalize_row stamps it into every bare hall). Absent or true: as before.
@@ -268,14 +287,19 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     passage = md.get("map_info", {}).get("museum", {}).get("passage")
     # museum.gate = false: this hall wants no sliding door
     gate = md.get("map_info", {}).get("museum", {}).get("gate")
+    gate_depth = mus_decl.get("gate_depth_rows")
     return {
         "museum": museum_key,
         **({"open_roof": True} if (open_roof or isinstance(simulation, dict)) else {}),
         **({"piers": False} if piers_ok is False else {}),
         **({"basin": basin} if isinstance(basin, dict) else {}),
         **({"simulation": simulation} if isinstance(simulation, dict) else {}),
+        **({"weathering_wall": mus_decl["weathering_wall"]} if isinstance(mus_decl.get("weathering_wall"), dict) else {}),
+        **({"turning_wall": mus_decl["turning_wall"]} if isinstance(mus_decl.get("turning_wall"), dict) else {}),
+        **({"simplex_corners": mus_decl["simplex_corners"]} if isinstance(mus_decl.get("simplex_corners"), list) else {}),
         **({"passage": passage} if isinstance(passage, dict) else {}),
         **({"gate": bool(gate)} if gate is not None else {}),
+        **({"gate_depth_rows": int(gate_depth)} if gate_depth is not None else {}),
         "tile": tile, "h": len(tile),
         "rooms": 0, "artifacts": arts, "rejected": [],
         "room": {"w": len(tile[0]) if tile else 0, "h": len(tile)}, "apron": 0,

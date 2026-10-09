@@ -100,6 +100,8 @@ const ISO_LEVELS: Dictionary = {
 ## own default, so this changes nothing; it exists so that "Creating fallback
 ## mesh" in a capture log is unambiguously a device failure and never an opt-in.
 @export var use_fallback: bool = false
+## Opt-in museum comparison: a verified empty GPU result remains empty.
+@export var preserve_empty_result: bool = false
 
 ## The generators' sampling window, hoisted from the literal it was on the old
 ## line 26 so the capture anchor can be derived from the same number.
@@ -143,14 +145,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _config_signature() -> String:
-	return "%s|%s|%.4f|%.4f|%s|%s" % [
-		repertoire, likeness, spacing, shape_scale, capture_anchor, str(use_fallback)]
+	return "%s|%s|%.4f|%.4f|%s|%s|%s" % [
+		repertoire, likeness, spacing, shape_scale, capture_anchor, str(use_fallback), str(preserve_empty_result)]
 
 
 ## capture_anchor and use_fallback are deliberately absent here: both are capture
 ## instruments, and a map token that could reach them would be able to move a
 ## placement (the anchor) or replace the artifact with six spheres (the fallback).
 func _read_metadata_overrides() -> void:
+	if has_meta("config_preserve_empty_result"):
+		preserve_empty_result = str(get_meta("config_preserve_empty_result")).to_lower() in ["true", "1"]
 	if has_meta("config_repertoire"):
 		var r: String = str(get_meta("config_repertoire")).strip_edges().to_lower()
 		if ROSTERS.has(r):
@@ -232,6 +236,7 @@ func _build() -> void:
 		generator.center_position = Vector3(0, 0, 0)
 		generator.invert_faces = true  # View from outside
 		generator.use_fallback = use_fallback
+		generator.preserve_empty_result = preserve_empty_result
 
 		# Non-reflective material. The hue is the SLOT, not the shape — see the
 		# declined list in the header.

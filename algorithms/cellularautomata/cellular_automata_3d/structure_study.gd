@@ -10,6 +10,7 @@ var active: int = 0
 var fading: int = 0
 var state_colours: bool = true
 var budget: int = 20
+var neighbour_room: Node3D
 
 func _ready() -> void:
 	work = get_parent()
@@ -38,6 +39,14 @@ func _ready() -> void:
 	work.use_gradient = false
 	_build_console()
 	replay()
+	if str(work.get_meta("config_room", "")) == "neighbours":
+		neighbour_room = load("res://algorithms/cellularautomata/cellular_automata_3d/neighbour_room.gd").new()
+		add_child(neighbour_room)
+		neighbour_room.build(self)
+		var hand := Node3D.new()
+		hand.set_script(load("res://algorithms/cellularautomata/cellular_automata_3d/state_hand.gd"))
+		hand.name = "StateHand"
+		add_child(hand)
 
 func replay() -> void:
 	running = false
@@ -123,6 +132,7 @@ func readback() -> Dictionary:
 		"running": running, "state_colours": state_colours, "seed": work.growth_seed}
 
 func refresh() -> void:
+	if is_instance_valid(neighbour_room): neighbour_room.refresh()
 	var status: String = "RUN" if running else "HELD"
 	if work.generation >= budget:
 		status = "LIMIT / +20"

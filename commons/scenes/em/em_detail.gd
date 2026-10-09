@@ -134,6 +134,7 @@ extends RefCounted
 # endless_museum.gd from here would be a preload cycle) ──────────────────────
 const VESTIBULE_H := 4
 const LOBBY_W := 17
+const MUSEUM_IDENTITY := preload("res://commons/scenes/em/em_identity.gd")
 # THE wall height — the ONE owner. endless_museum.gd and em_lighting.gd read
 # this constant by preload (this file imports neither, so no cycle). Raised
 # 3.0 -> 4.5 on Palle's walk verdict (2026-08-14): "the wall-work is the
@@ -445,6 +446,7 @@ static func dress_segment(seg: Node3D, tile: Array, w: int, h: int, mats, prev_w
 	# the dressed-face list is the single source every wall family agrees on;
 	# derived once here instead of four times inside the four consumers.
 	var faces: Array = _dressed_faces(walls, floors)
+	MUSEUM_IDENTITY.install(seg, faces, _skip_rects + _void_rects)
 
 	_add_wall_faces(faces, skirt_x, trim_x)
 	_add_arris_beads(walls, floors, trim_x)

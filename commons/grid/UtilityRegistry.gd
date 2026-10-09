@@ -817,6 +817,9 @@ static func apply_params(node: Node3D, code: String, parameters: Array, ctx: Dic
 					dist, dir, " (AUTO-START)" if bool(t["auto"]) else "", comp]
 			return t
 		"rc":
+			var rc_config: Dictionary = ctx.get("config", {})
+			if str(rc_config.get("profile", "")) == "bridge" and "profile" in node:
+				node.set("profile", "bridge")
 			var r: Dictionary = rotation_params(parameters)
 			if bool(r["applied"]):
 				if String(r["mode"]) == "continuous":
@@ -890,6 +893,35 @@ static func apply_params(node: Node3D, code: String, parameters: Array, ctx: Dic
 					int(j["target_x"]), int(j["target_z"]), float(j["arc_height"])]
 			return j
 	return {}
+
+
+## Seat from physical geometry before _ready stores motion origins.
+## Existing hand-authored offsets remain additive; opt-in sc/rc maps use zero
+## for an ordinary flush crossing. Area3D detection volumes never set the height.
+static func seat_crossing_before_ready(node: Node3D, code: String, deck_y: float) -> void:
+	var top_offset := 0.0
+	if code == "sc":
+		top_offset = float(node.get("max_scale"))*0.5 + (node.get("center_offset") as Vector3).y
+	elif code == "rc" and node.has_method("body_size"):
+		top_offset = (node.call("body_size") as Vector3).y*0.5
+	elif code == "tc":
+		var found := false
+		for body in node.find_children("*", "PhysicsBody3D", true, false):
+			for shape in body.find_children("*", "CollisionShape3D", true, false):
+				if shape.shape == null or shape.disabled: continue
+				var local := Transform3D.IDENTITY
+				var part: Node = shape
+				while part != node and part != null:
+					if part is Node3D: local = part.transform * local
+					part = part.get_parent()
+				var box: AABB = local * shape.shape.get_debug_mesh().get_aabb()
+				top_offset = maxf(top_offset, box.end.y) if found else box.end.y
+				found = true
+		if not found: return
+	else:
+		return
+	node.position.y = deck_y - top_offset
+	node.set_meta("crossing_deck_y", deck_y)
 
 
 ## THE RIDE IS A SPAN (moved out of the museum's utility door, 2026-09-05, so the

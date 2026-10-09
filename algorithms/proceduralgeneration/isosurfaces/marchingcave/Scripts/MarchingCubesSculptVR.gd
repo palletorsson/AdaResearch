@@ -64,9 +64,9 @@ extends Node3D
 #   field merges — and re-arguing a claim the sequence has already made is worse
 #   than leaving a knob plain.
 #
-# FLAGGED, NOT PROPOSED. erase_mode is BROKEN, not merely unpromotable: line ~382
-#   negates the radius to erase and the very next call passes abs() of it, so the
-#   sign is discarded and erase ADDS material. volume_resolution (line 18) is
+# HISTORICAL AUDIT (repaired 2026-09-15): erase_mode was BROKEN: line ~382
+#   negated the radius, then abs() discarded the sign. The repaired path preserves
+#   the sign and the shader performs sequential subtraction. volume_resolution (line 18) is
 #   declared and read by nothing — the sampling is TerrainGeneratorBase's
 #   num_voxels_per_axis, a const 64.
 #
@@ -597,12 +597,12 @@ func _paint_at_position(local_pos: Vector3):
 	var scale_factor = terrain_generator.chunk_scale / volume_size
 	var gen_pos = local_pos * scale_factor
 
-	# Add blob (positive radius adds material, negative could remove - but shader may not support)
+	# Signed stroke: the shader smooth-unions positive radii and subtracts negative ones.
 	var effective_radius = brush_radius * scale_factor
 	if erase_mode:
-		effective_radius = -effective_radius  # Negative radius for erasing (if shader supports)
+		effective_radius = -effective_radius  # Negative radius selects subtraction in the sculpt shader.
 
-	terrain_generator.add_blob(gen_pos, abs(effective_radius))
+	terrain_generator.add_blob(gen_pos, effective_radius)
 	blobs_painted += 1
 	_update_status_label()
 

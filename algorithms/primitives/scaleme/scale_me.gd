@@ -2,16 +2,16 @@ extends "res://commons/primitives/point/grab_sphere.gd"
 class_name ScaleMe
 
 # @identity
-# essence: world.scale *= scale_amount on pickup — the player's reference frame grows, making everything feel tiny
+# essence: two scale encounters — the default grab sphere tweens a selected world node; encounter=drink_me builds a furnished room with an instant fourfold cut and visitor relocation
 # desire: learner experiences scale change as embodied perspective shift — not a number, a felt transformation
-# critical_parameter: scale_amount — at 100× the world becomes monumental; lower values are subtle
-# triggers: picking up the grab sphere — world scales up immediately; timer fires after scale_duration to revert
+# critical_parameter: default scale_amount=100 with scale_up_time/scale_down_time; drink_me uses FACTOR=4 in drink_me_room.gd instead
+# triggers: default sphere pickup starts a tween, then a scale_duration timer when auto_revert is true; drink_me bottle pickup scales Room instantly and relocates the visitor to its enlarged top plate
 # emerges: the phenomenological difference between knowing a scale ratio and experiencing it as body-relative space
-# needs: [has grabbable sphere [has], missing preview label showing current scale_amount before pickup]
-# relationships: used in Trans_Scale map; demonstrates non-uniform vs uniform scale at the player-body level
-# truth: scale is relational — 100× larger means nothing without a reference body to measure against
+# needs: default requires a selected world node; drink_me supplies its own bottle, room, descent and fixed witness doorway, with no timed reversal while loaded
+# relationships: Trans_Scale configures encounter=drink_me; its body and museum stay outside Room's uniform scaling hierarchy
+# truth: scale is relational — the configured encounter changes the surroundings while the reference body keeps its size
 
-## Scale parameters
+## Legacy default-mode parameters; encounter=drink_me bypasses this timer/tween path.
 @export var scale_amount: float = 100.0
 @export var scale_duration: float = 20.0  # seconds
 @export var scale_up_time: float = 5.0  # seconds to scale up
@@ -25,8 +25,14 @@ var _is_scaled: bool = false
 var _scale_timer: Timer
 var _world_node: Node3D
 var _xr_origin: XROrigin3D
+var _drink_me := false
+var _encounter: Node3D
 
 func _ready() -> void:
+	_drink_me = _drink_me or str(get_meta("config_encounter", "")) == "drink_me"
+	if _drink_me:
+		_build_drink_me()
+		return
 	super._ready()
 
 	# Setup timer for auto-scaling back
@@ -330,4 +336,22 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("encounter", "")) == "drink_me":
+		_drink_me = true
+		if is_node_ready():
+			_build_drink_me()
+
+func _build_drink_me() -> void:
+	if is_instance_valid(_encounter):
+		return
+	# This configured instance is the fixed room anchor, not the held bottle.
+	freeze = true
+	enabled = false
+	collision_layer = 0
+	collision_mask = 0
+	for child in get_children():
+		remove_child(child)
+		child.queue_free()
+	_encounter = load("res://algorithms/primitives/scaleme/drink_me_room.gd").new()
+	_encounter.name = "DrinkMeEncounter"
+	add_child(_encounter)

@@ -6,6 +6,8 @@ extends Node3D
 @export var target_size: float = 1.0
 
 var time: float = 0.0
+var lesson_mode: String = ""
+var lesson: Node3D
 var _bg_left: MeshInstance3D
 var _bg_right: MeshInstance3D
 var _target_left: MeshInstance3D
@@ -14,6 +16,7 @@ var _connector: MeshInstance3D
 
 func _ready() -> void:
 	_create_geometry()
+	if not lesson_mode.is_empty():_activate_lesson()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -120,6 +123,10 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.get("lesson", "") in ["context", "carrier"]:
+		lesson_mode = str(config.lesson)
+		if is_node_ready():_activate_lesson()
+		return
 	if config.is_empty():
 		return
 	if config.has("cycle_duration"):
@@ -129,3 +136,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("target_size"):
 		target_size = float(config["target_size"])
 	_create_geometry()
+
+func _activate_lesson() -> void:
+	if is_instance_valid(lesson):return
+	set_process(false)
+	for child in get_children():
+		remove_child(child);child.queue_free()
+	lesson=load("res://algorithms/color/carrier_comparison.gd").new()
+	lesson.name="CarrierComparison" if lesson_mode=="carrier" else "ContextComparison"
+	lesson.mode=lesson_mode;add_child(lesson)

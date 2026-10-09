@@ -206,7 +206,9 @@ static var _tex_cache: Dictionary = {}
 static func floor_stone(tint: Color = Color.WHITE, soil: float = 0.0) -> StandardMaterial3D:
 	return get_material(&"floor_stone", tint, soil)
 
-## Poured terrazzo with flat aggregate chips at 11 mm.
+## Poured terrazzo with flat aggregate chips at 11 mm. The Endless Museum uses
+## this as its quiet, warm-grey circulation floor: light enough to belong to the
+## white cube, but still darker than the art walls.
 static func floor_terrazzo(tint: Color = Color.WHITE, soil: float = 0.0) -> StandardMaterial3D:
 	return get_material(&"terrazzo", tint, soil)
 
@@ -308,6 +310,20 @@ static func warm_up() -> void:
 	accent_brass()
 	ceiling_plaster()
 	glass_vitrine()
+
+## Warm only the material families the Endless Museum actually resolves. The
+## generic catalogue warm-up also generated granite, travertine, concrete, and
+## glass textures before the first frame even though the museum no longer uses
+## those roles. Keeping this focused avoids that startup work and cache memory;
+## it does not change any material returned later on demand.
+static func warm_up_museum() -> void:
+	floor_terrazzo()
+	wall_plaster()
+	gallery_white()
+	podium_marble()
+	trim_oak()
+	accent_brass()
+	ceiling_plaster()
 
 ## name -> material, for a lighting/lookdev test wall.
 static func catalogue() -> Dictionary:
@@ -490,7 +506,10 @@ static func _make_floor_stone(tint: Color, soil: float) -> StandardMaterial3D:
 ##      a chip-to-matrix delta of 0.303, near the maximum a diffuse surface can
 ##      hold. High contrast is what turns a merged cluster into a SHAPE.
 ##
-## THE FIX, addressing all three.
+## THE FIX, addressing all three. The final gallery pass also raised the matrix
+## into the warm mid-grey range and changed the seal from polished to honed: the
+## floor now supports the room instead of becoming a black mirror under every
+## track light. Neither change adds a texture sample or a material pass.
 ##   chips     43 mm -> 11 mm. tile 1.8 m, 1152 px, f = 1.8/(0.011*1152) = 0.142,
 ##             which is 7.0 px per cell — the floor of what a hard-edged pattern
 ##             can occupy before it becomes aliasing, and the reason this is the
@@ -523,33 +542,33 @@ static func _make_terrazzo(tint: Color, soil: float) -> StandardMaterial3D:
 
 	# ABSOLUTE sRGB, not multipliers: albedo_color carries only the tint, so the
 	# numbers below are the numbers the surface has and a reviewer can read them
-	# straight off. Six stops, all inside 0.355-0.525.
+	# straight off. Six stops, all inside 0.480-0.660.
 	var chips: Gradient = _ramp(
 		PackedFloat32Array([0.0, 0.19, 0.36, 0.52, 0.70, 0.86]),
 		PackedColorArray([
-			Color(0.355, 0.350, 0.345, 1.0),   # dark basalt chip
-			Color(0.525, 0.518, 0.505, 1.0),   # pale marble chip
-			Color(0.440, 0.437, 0.430, 1.0),   # MID chip — the third stop
-			Color(0.412, 0.406, 0.392, 1.0),   # cement matrix
-			Color(0.424, 0.418, 0.404, 1.0),   # cement matrix, second pass
-			Color(0.482, 0.470, 0.448, 1.0),   # warm quartz chip
+			Color(0.480, 0.475, 0.468, 1.0),   # charcoal aggregate, never near-black
+			Color(0.660, 0.650, 0.632, 1.0),   # pale marble chip
+			Color(0.570, 0.565, 0.552, 1.0),   # MID chip — the third stop
+			Color(0.540, 0.532, 0.514, 1.0),   # warm cement matrix
+			Color(0.552, 0.544, 0.526, 1.0),   # cement matrix, second pass
+			Color(0.620, 0.604, 0.575, 1.0),   # warm quartz chip
 		]))
 	chips.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT
 
 	var alb: NoiseTexture2D = _tex("terr_alb", field, px, chips, false, 1.0, 0.08)
 	# aggregate takes a different polish than the cement, and cell value is flat
 	# WITHIN a cell, so a linear ramp still yields one flat gloss per chip
-	var rgh: NoiseTexture2D = _tex("terr_rgh", field, px, _grey_ramp(0.30, 0.13), false, 1.0, 0.08)
+	var rgh: NoiseTexture2D = _tex("terr_rgh", field, px, _grey_ramp(0.78, 0.50), false, 1.0, 0.08)
 	var nrm: NoiseTexture2D = _tex("terr_nrm", field, px, null, true, 0.6, 0.08)
-	var m: StandardMaterial3D = _base(_mineral(tint), 0.20, 0.0, _uv(tile_m), 5.0)
+	var m: StandardMaterial3D = _base(_mineral(tint), 0.58, 0.0, _uv(tile_m), 5.0)
 	m.albedo_texture = alb
-	_rough(m, 0.20, rgh, 0.30, 0.13)
+	_rough(m, 0.58, rgh, 0.78, 0.50)
 	m.normal_enabled = true
 	m.normal_texture = nrm
 	m.normal_scale = 0.22
 	m.clearcoat_enabled = true
-	m.clearcoat = 0.20
-	m.clearcoat_roughness = 0.10
+	m.clearcoat = 0.06
+	m.clearcoat_roughness = 0.32
 	_apply_grain(m, "terr", 1304, 2.4, 0.30, 1.8, 0.95, false)
 	_apply_soil(m, soil)
 	return m

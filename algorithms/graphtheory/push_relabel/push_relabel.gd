@@ -3,16 +3,16 @@ extends Node3D
 
 # @identity
 # essence: preflow-push with height labels — initialize by saturating source edges, then repeatedly: push excess flow along admissible edges (height[u] > height[v]), or relabel (raise height) if no push is possible
-# desire: to see water pile up at nodes and overflow downhill — excess flow accumulates, height labels rise, and the algorithm finds max flow by managing local floods rather than finding global paths
+# desire: to see excess accumulate and labels rise, then notice where a forward-only allocation gets stuck
 # critical_parameter: height[source] = |V| — the source starts at maximum height, creating initial pressure; excess flow at the sink accumulates into max_flow
 # triggers: step-by-step animation with delay between operations; push operations highlighted in orange; active nodes (with excess) glow yellow; height and excess labels update per node
 # emerges: the relabel operations create a "waterfall" effect where height labels propagate backward from sink to source, establishing the pressure gradient that drives flow forward
 # needs: slider_horizontal [missing]; push_button [missing]; Label3D [has] (info, flow, operation labels; per-node height/excess labels)
-# relationships: appears in GT_Flow; solves the same max-flow problem as networkflow3d's Edmonds-Karp but through local operations instead of global augmenting paths
-# truth: push-relabel proves that maximum flow can be found without ever finding a complete path — local excess management is sufficient if you get the heights right
+# relationships: appears in GT_Flow; introduces local preflow operations, with reverse residual adjustment left for a further comparison
+# truth: this forward-only study makes excess and local pushes visible; without reverse residual arcs its sink receipt is not a certificate of maximum flow
 
-# Push-Relabel Algorithm: Maximum Flow
-# Visualizes the preflow-based approach to finding maximum flow in networks
+# Forward-only push/relabel study
+# Visualizes preflow and local operations; reverse residual adjustments are not implemented
 # Explores the concepts of excess flow, height labels, and push/relabel operations
 
 @export_category("Push-Relabel Configuration")
@@ -831,14 +831,14 @@ func create_info_labels() -> void:
 	var top: float = _body_top()
 
 	info_label = Label3D.new()
-	info_label.text = "Push-Relabel Algorithm: Maximum Flow"
+	info_label.text = "Forward-only push / relabel study"
 	info_label.font_size = 20
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	info_label.position = Vector3(0.0, top + CAP_GAP_INFO, 0.0)
 	_own(info_label)
 
 	flow_label = Label3D.new()
-	flow_label.text = "Max Flow: 0"
+	flow_label.text = "Received at sink: 0"
 	flow_label.font_size = 16
 	flow_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	flow_label.position = Vector3(0.0, top + CAP_GAP_FLOW, 0.0)
@@ -872,6 +872,13 @@ func start_algorithm() -> void:
 	call_deferred("push_relabel_loop", _run_gen)
 
 func initialize_preflow() -> void:
+	# Each restart begins with an empty preflow; do not add to the previous run.
+	active_nodes.clear()
+	for node in nodes:
+		height[node] = 0
+		excess[node] = 0
+	for row in flow_matrix:
+		row.fill(0)
 	# Set source height to number of nodes
 	height[source] = len(nodes)
 
@@ -893,11 +900,13 @@ func push_relabel_loop(gen: int = -1) -> void:
 	var my_gen: int = gen if gen >= 0 else _run_gen
 	if my_gen != _run_gen:
 		return  # superseded by a rebuild — leave the current run alone
-	if not algorithm_running or active_nodes.is_empty():
+	if not algorithm_running:
+		return
+	if active_nodes.is_empty():
 		algorithm_running = false
 		max_flow = excess[sink]
 		update_flow_display()
-		update_operation_text("Algorithm completed! Max flow: " + str(max_flow))
+		update_operation_text("Forward scan ended; maximum not established")
 		return
 
 	# Select active node (first in list)
@@ -940,6 +949,15 @@ func push_relabel_loop(gen: int = -1) -> void:
 		if min_height != INF:
 			height[u] = min_height + 1
 			update_operation_text("Relabel: " + u + " height = " + str(height[u]))
+		else:
+			# There are no reverse residual arcs in this study. Hold the obstruction
+			# visible instead of endlessly revisiting the same junction.
+			algorithm_running = false
+			max_flow = excess[sink]
+			update_visuals()
+			update_flow_display()
+			update_operation_text("BLOCKED at %s / excess %d / no forward capacity" % [u, excess[u]])
+			return
 
 	# Remove from active nodes if no excess
 	if excess[u] <= 0:
@@ -1024,7 +1042,7 @@ func update_visuals() -> void:
 
 func update_flow_display() -> void:
 	if is_instance_valid(flow_label):
-		flow_label.text = "Max Flow: " + str(max_flow)
+		flow_label.text = "Received at sink: " + str(excess.get(sink, 0))
 
 func update_operation_text(text: String) -> void:
 	if is_instance_valid(operation_label):
@@ -1052,10 +1070,9 @@ func reset_algorithm() -> void:
 
 func get_algorithm_info() -> Dictionary:
 	return {
-		"name": "Push-Relabel Algorithm",
-		"description": "Preflow-based algorithm for finding maximum flow",
-		"time_complexity": "O(V²E)",
-		"space_complexity": "O(V + E)",
+		"name": "Forward-only push / relabel study",
+		"description": "Illustrates preflow, excess, push and relabel without reverse residual arcs",
+		"maximum_certified": false,
 		"max_flow": max_flow,
 		"current_step": algorithm_step,
 		"active_nodes": active_nodes.size(),

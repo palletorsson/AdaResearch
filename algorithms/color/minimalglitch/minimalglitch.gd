@@ -8,7 +8,8 @@ var demo_cubes := []
 var materials := []
 
 func _ready() -> void:
-	setup_basic_scene()
+	if not (str(get_meta("config_embedded", false)).to_lower() in ["true", "1"]):
+		setup_basic_scene()
 	create_glitch_cubes()
 
 func setup_basic_scene() -> void:
@@ -188,7 +189,7 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	if config.is_empty():
+	if not (config.has("grid_cols") or config.has("grid_rows") or config.has("cube_spacing")):
 		return
 	var cols := int(config["grid_cols"]) if config.has("grid_cols") else 5
 	var rows := int(config["grid_rows"]) if config.has("grid_rows") else 3

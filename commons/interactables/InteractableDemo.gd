@@ -107,6 +107,18 @@ const DEFAULT_COMPOUNDS = [
 ]
 
 @export var auto_build: bool = true
+## Focused working console; the complete control sampler remains the default.
+@export var reference_console: bool = false
+## Focused 2D-in-3D input comparison, using the shared rack controls.
+@export var release_reference: bool = false
+## Physical XY: continuous, detented and returning.
+@export var joystick_reference: bool = false
+## Two physical XY settings and their vector-sum receiver.
+@export var xy_reference: bool = false
+## Angular position versus a returning angular-velocity command.
+@export var angular_reference: bool = false
+@export var radio_reference: bool = false
+@export var lever_reference: bool = false
 
 var controls: Array = []
 var extra_buttons: Array = []
@@ -169,6 +181,41 @@ func _restore_defaults() -> void:
 func _ready():
 	if not auto_build:
 		return
+	if lever_reference:
+		var reference:=preload("res://commons/ui/interface_lever_reference.gd").new()
+		reference.name="LeverReference"
+		add_child(reference)
+		return
+	if radio_reference:
+		var reference:=preload("res://commons/ui/interface_radio_reference.gd").new()
+		reference.name="RadioReference"
+		add_child(reference)
+		return
+	if angular_reference:
+		var reference:=preload("res://commons/ui/interface_angular_reference.gd").new()
+		reference.name="AngularReference"
+		add_child(reference)
+		return
+	if xy_reference:
+		var reference:Node3D=load("res://commons/artifacts/vector_op_console/vector_op_console.tscn").instantiate()
+		reference.name="XYReference"
+		add_child(reference)
+		return
+	if joystick_reference:
+		var reference := preload("res://commons/ui/interface_joystick_reference.gd").new()
+		reference.name = "JoystickReference"
+		add_child(reference)
+		return
+	if release_reference:
+		var reference := preload("res://commons/ui/interface_release_reference.gd").new()
+		reference.name = "ReleaseReference"
+		add_child(reference)
+		return
+	if reference_console:
+		var reference := preload("res://commons/ui/interface_reference_console.gd").new()
+		reference.name = "ReferenceConsole"
+		add_child(reference)
+		return
 	_build_back_panel()
 	_spawn_controls()
 	_spawn_passive_elements()
@@ -179,6 +226,8 @@ func _ready():
 
 func load_demo_config_from_dict(data: Dictionary) -> void:
 	_restore_defaults()
+	reference_console = bool(data.get("reference_console", false))
+	release_reference = bool(data.get("release_reference", false))
 	if data.has("demo_info") and data["demo_info"] is Dictionary:
 		demo_info = data["demo_info"]
 	if data.has("controls") and data["controls"] is Array:
@@ -338,15 +387,15 @@ func _get_control_frame_size(scene_path: String) -> Vector2:
 	if "slider_horizontal" in scene_path:
 		return Vector2(0.25, 0.10)
 	if "slider_plane" in scene_path:
-		return Vector2(0.18, 0.18)
+		return Vector2(0.22, 0.29)
 	if "push_button" in scene_path:
 		return Vector2(0.10, 0.10)
-	if "dial_smooth" in scene_path or "wheel_smooth" in scene_path:
+	if "wheel_smooth" in scene_path or "/lever_" in scene_path:
+		return Vector2(.18,.25)
+	if "dial_smooth" in scene_path:
 		return Vector2(0.12, 0.12)
-	if "lever_smooth" in scene_path:
-		return Vector2(0.10, 0.18)
 	if "joystick" in scene_path:
-		return Vector2(0.12, 0.14)
+		return Vector2(0.20, 0.26)
 	if "slider_" in scene_path:
 		return Vector2(0.10, 0.24)
 	return Vector2(0.12, 0.12)

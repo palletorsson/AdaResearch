@@ -821,6 +821,14 @@ func _build_trio() -> void:
 		plinth.name = "Plinth_%d" % slot
 		_stand_root.add_child(plinth)
 		var data: Dictionary = create_spiral_column(Color(0.86, 0.84, 0.80), slot)
+		# The accessories have their own vertex shader. Give it the same local
+		# clock so FREEZE reaches the rendered body as well as the CPU shaft.
+		for part in ["base", "capital"]:
+			var part_mesh: MeshInstance3D = data[part]
+			var part_material := part_mesh.material_override as ShaderMaterial
+			if part_material != null:
+				part_material.set_shader_parameter("use_local_time", true)
+				part_material.set_shader_parameter("local_time", 0.0)
 		var node: Node3D = data["node"]
 		node.name = "Column_%d" % slot
 		node.position = Vector3(x, 0.22, 0.0)
@@ -848,25 +856,26 @@ func _build_trio() -> void:
 		_trio.append(data)
 		_rebuild_column(data, data["phase"])
 
-	# the instrument: what both drivers are doing right now, and in what range
+	# Keep the instrument between silhouettes. Reveal explanations after looking.
 	var plate_case := Node3D.new()
 	plate_case.name = "Readout"
 	plate_case.set_meta("em_local_instrument", true)
-	plate_case.position = Vector3(-0.55, 1.02, 1.60)
-	plate_case.rotation_degrees = Vector3(-16, 0, 0)
+	plate_case.position = Vector3(-1.10, 1.00, 1.60)
+	plate_case.rotation_degrees = Vector3(-28, 0, 0)
 	_stand_root.add_child(plate_case)
-	plate_case.add_child(HangarKit.box(Vector3.ZERO, Vector3(1.18, 0.26, 0.014), dark))
+	plate_case.add_child(HangarKit.box(Vector3.ZERO, Vector3(0.92, 0.32, 0.05), dark))
+	_stand_root.add_child(HangarKit.box(Vector3(-1.10, 0.49, 1.55), Vector3(0.24, 0.98, 0.10), dark))
 	_readout = Label3D.new()
 	_readout.name = "Text"
-	_readout.pixel_size = 0.00092
-	_readout.font_size = 17
-	_readout.line_spacing = 0.5
+	_readout.pixel_size = 0.0015
+	_readout.font_size = 26
+	_readout.line_spacing = 1.0
 	_readout.modulate = Color(0.88, 0.94, 1.0)
 	_readout.outline_size = 3
 	_readout.outline_modulate = Color(0, 0, 0, 1)
 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_readout.position = Vector3(-0.565, 0.118, 0.010)
+	_readout.position = Vector3(-0.425, 0.137, 0.029)
 	plate_case.add_child(_readout)
 
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -877,10 +886,11 @@ func _build_trio() -> void:
 		], true)
 		panel.name = "Panel"
 		panel.set_meta("em_local_instrument", true)
-		panel.position = Vector3(0.92, 1.06, 1.62)
+		panel.position = Vector3(1.10, 1.06, 1.62)
 		panel.rotation_degrees = Vector3(-26, 0, 0)
 		panel.scale = Vector3(1.4, 1.4, 1.4)
 		_stand_root.add_child(panel)
+		_stand_root.add_child(HangarKit.box(Vector3(1.10, 0.48, 1.70), Vector3(0.26, 0.96, 0.24), dark))
 		var actions := {"Btn_0": func(): toggle_freeze(), "Btn_1": func(): reveal_drivers(), "Btn_2": func(): toggle_spin(), "Btn_3": func(): toggle_marble()}
 		for btn_name in actions.keys():
 			var btn: Node = panel.find_child(btn_name, true, false)
@@ -894,8 +904,8 @@ func _build_trio() -> void:
 	_update_trio_readout()
 
 
-## One column's mesh, rebuilt at a phase, with the cost kept. This is the only
-## place the trio spends anything, and the readout prints what it spent.
+## Rebuild one shaft at a phase. Runtime state retains the measured rebuild
+## cost; the visitor readout follows the phase used by the displayed mesh.
 func _rebuild_column(data: Dictionary, phase: float) -> void:
 	var shaft: MeshInstance3D = data.get("shaft")
 	if shaft == null or not is_instance_valid(shaft):
@@ -913,9 +923,15 @@ func _trio_process(delta: float) -> void:
 	if not _frozen:
 		time += delta
 	for data in _trio:
+		var local_clock: float = 0.0 if str(data.get("driver")) == "baseline" else time
 		var mat = data.get("material")
 		if mat is ShaderMaterial and (mat as ShaderMaterial).shader == marble_shader:
-			(mat as ShaderMaterial).set_shader_parameter("u_time", time)
+			(mat as ShaderMaterial).set_shader_parameter("u_time", local_clock)
+		for part in ["base", "capital"]:
+			var part_mesh: MeshInstance3D = data[part]
+			var part_material := part_mesh.material_override as ShaderMaterial
+			if part_material != null:
+				part_material.set_shader_parameter("local_time", local_clock)
 	if _spin_on:
 		for data in _trio:
 			var node: Node3D = data.get("node")
@@ -943,17 +959,23 @@ func _trio_process(delta: float) -> void:
 func _update_trio_readout() -> void:
 	if _readout == null or not is_instance_valid(_readout):
 		return
-	var p: float = driver_phase("periodic", time)
-	var fld: float = driver_phase("field", time)
+	var p: float = 0.0
+	var fld: float = 0.0
+	for data in _trio:
+		if str(data.get("driver")) == "periodic": p = float(data["phase"])
+		if str(data.get("driver")) == "field": fld = float(data["phase"])
 	var lines: PackedStringArray = PackedStringArray()
-	lines.append("t %6.2f s%s · seed %d · same mesh %d×%d · same range 0.00–%.2f m" % [
-		time, ("  FROZEN" if _frozen else ""), _named_seed, vertical_segments, radial_segments, mapped_drop(1.0)])
-	lines.append("periodic  phase %.3f → drop %.2f m" % [p, mapped_drop(p)])
-	lines.append("field     phase %.3f → drop %.2f m" % [fld, mapped_drop(fld)])
-	lines.append("rebuild %.1f ms · at most %d/s · marble %s · spin %s" % [
-		_rebuild_ms, int(TRIO_HZ), ("on" if _marble_on else "off"), ("on" if _spin_on else "off")])
-	if not _revealed:
-		lines.append("which column is which: press REVEAL — after you have looked")
+	lines.append("LOCAL t %.2f s%s" % [time, (" · HELD" if _frozen else "")])
+	if _revealed:
+		lines.append("PERIODIC %.3f → −%.2f m" % [p, mapped_drop(p)])
+		lines.append("FIELD    %.3f → −%.2f m" % [fld, mapped_drop(fld)])
+		lines.append("TOP DROP 0–%.2f m · ≤%d/s" % [mapped_drop(1.0), int(TRIO_HZ)])
+		lines.append("seed %d · veins %s · spin %s" % [_named_seed, ("on" if _marble_on else "off"), ("on" if _spin_on else "off")])
+	else:
+		lines.append("Watch a shape return.")
+		lines.append("FREEZE holds this clock.")
+		lines.append("SPIN turns. MARBLE changes the skin.")
+		lines.append("REVEAL names the three drivers.")
 	_readout.text = "\n".join(lines)
 
 

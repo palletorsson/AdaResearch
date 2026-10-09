@@ -2,68 +2,31 @@ extends Node3D
 class_name FlashlightDemo
 
 # @identity
-# essence: four flashlights (red, green, blue, white) aimed across a dark room at one surface — what the beam falls on is what the beam can say
-# desire: walk between the lamps and the wall and watch a colour appear or fail to appear depending on what is standing there to receive it
-# critical_parameter: ground — the surface the four beams land on, which decides whether coloured light reads as colour, as shape, as a reflection, or as nothing
-# triggers: _ready reads ground and stages the receiving surface once; no runtime changes
-# emerges: red light on a blue panel is black — the demo's own stated lesson, which the shipped white wall makes impossible to see
-# needs: SpotLight3D per lamp [has]; dark environment [has]; a surface with a colour of its own [was missing, now `ground`]
-# relationships: synthesis artifact for Color_Flashlight; the lamps' own colours come from flashlight_color.gd on each instance
-# truth: a flashlight does not add colour to the world — it reveals what was always there by choosing which wavelengths to offer, and it can only reveal what is standing in front of it
+# essence: four pickable RGB/white lamps illuminate a receiving surface
+# desire: move a light and compare an appearance while keeping a material fixed
+# critical_parameter: ground — authored receiving geometry/material
+# triggers: _ready stages mount and ground; apply_grid_config can restage ground
+# emerges: overlap and shadows depend on the lamp/surface arrangement
+# needs: SpotLight3D [has]; XRTools pickup [has]; visitor hue/on-off controls [absent]
+# relationships: Color_Flashlight uses white ground and standing mount
+# truth: this is RGB rendering, not a calculation of wavelength spectra
 
-# ─── DNA · hand promotion 2026-08-04 ─────────────────────────────────────────
-# Refused by the runner for NO TURNABLE KNOBS. Correctly: the .tscn root carried
-# NO SCRIPT AT ALL. flashlight_color.gd sits on four ColorSetter CHILDREN, so
-# even its two exports were unreachable from a map token — GridInteractables-
-# Component stamps config metadata and calls apply_grid_config on the ROOT.
-# (That child script's apply_grid_config is a bare `pass`, so every token a map
-# ever wrote for this artifact was parsed, logged and discarded.) The registry
-# description is the string "flashlight_demog", so the scene is the only source
-# of truth about what this thing is.
-#
-# WHAT IT IS. Four pickable flashlights in a row at z=3 — red, green, blue and
-# white — throwing 25-degree cones five metres across a nearly black room at one
-# 6 x 4 white board. The cones are 2.3 m wide by the time they land and overlap
-# heavily, so the additive result is already on the wall.
-#
-# THE HARD-CODED CONSTANT THAT CARRIES THE ARGUMENT is the board. It is white
-# (0.95 grey, roughness 0.9), and a white surface returns every wavelength it is
-# offered, so nothing this artifact says can ever be false on it. The file's own
-# @identity promises "red light on a blue wall = black" and the scene makes that
-# impossible to witness. The axis is therefore not the lamps but what they are
-# given to fall on.
-#
-#   ground   white   (DEFAULT, the lineage) the shipped board, untouched.
-#            swatch  the same board divided into red, green, blue and white
-#                    quarters. Sixteen beam-on-surface pairs at once, and the
-#                    demo's own promised lesson finally in the room: the red
-#                    beam dies on the blue quarter.
-#            relief  the white board kept, with seven standing ribs in front of
-#                    it. shadow_enabled is already true on every lamp, so the
-#                    beams now disclose SHAPE instead of hue, and the shadows
-#                    come out coloured because each one is missing exactly one
-#                    lamp.
-#            mirror  the same board, specular and dark. A mirror discloses the
-#                    SOURCE and not the beam: the pools vanish and four lamp
-#                    reflections remain.
-#            none    no board. Light with nothing to land on is not visible; the
-#                    room stays dark and only the lamp bodies are in the frame.
-#
-# WHAT WAS DECLINED, and why it is not a fifth value: VOLUMETRIC FOG. Every lamp
-# ships light_volumetric_fog_energy = 2.0 and the scene's WorldEnvironment never
-# enables volumetric fog, so that setting is dead in every room — turning it on
-# would make the beams visible in the AIR, which is a striking picture and a
-# genuinely different claim (the medium, not the ground). One word cannot honestly
-# cover both, and this artifact's own truth line is about the surface. Recorded
-# here as the next promotion rather than smuggled in as a value.
-#
-# ALSO DECLINED: the four lamp COLOURS. Swapping red/green/blue for cyan/magenta/
-# yellow photographs as a palette change, and this artifact is not about which
-# hues are chosen but about whether choosing a hue reveals anything.
-# ─────────────────────────────────────────────────────────────────────────────
+# Ground variants are authoring choices, not visitor controls. Swatches change
+# albedo, relief adds ribs, mirror changes roughness/metallic, none hides the
+# board. The mirror option does not install a reflection camera. Ambient light
+# and other geometry can still contribute: none does not guarantee darkness.
+# Volumetric-fog energy on the lights does not itself enable volumetric fog.
 
 ## THE AXIS. white is the legacy lineage — the shipped board, not touched.
 @export_enum("white", "swatch", "relief", "mirror", "none") var ground: String = "white"
+
+## Optional floor-level installation; legacy placements retain their authored heights.
+@export_enum("legacy", "standing") var mount: String = "legacy"
+
+## Optional coarse receiver for the standing lesson. These are divisions around
+## the equator, not a total face count. Zero preserves other installations.
+@export var receiver_sides: int = 0
+var _receiver_root: Node3D
 
 ## CAPTURE FIXTURE, not an axis, and OFF in every room. The lamp bodies are the
 ## only MeshInstance3D in this scene — the board is a CSGBox3D, which the
@@ -98,6 +61,9 @@ var _staged: Array[Node] = []
 
 func _ready() -> void:
 	_read_ground()
+	receiver_sides = _normalise_receiver(get_meta("config_receiver_sides", receiver_sides))
+	if str(get_meta("config_mount", mount)) == "standing":
+		_mount_standing()
 	var canvas: CSGBox3D = get_node_or_null("Canvas") as CSGBox3D
 	if canvas != null:
 		_shipped_material = canvas.material
@@ -105,6 +71,85 @@ func _ready() -> void:
 	if _is_true(capture_anchor):
 		_build_capture_anchor()
 	_built = true
+
+
+func _mount_standing() -> void:
+	# The map places the root at floor level. Keep the entire board above it.
+	mount = "standing"
+	var canvas: CSGBox3D = get_node("Canvas")
+	canvas.position.y = canvas.size.y * 0.5
+	canvas.use_collision = true
+	# A second receiver lets the visitor carry the same light from a flat
+	# board onto edges and faces, while keeping the near-white albedo fixed.
+	var receiver := CSGBox3D.new()
+	receiver.name = "ReceiverCube"
+	receiver.size = Vector3.ONE
+	receiver.position = Vector3(4.1, 0.5, -1.65)
+	receiver.material = canvas.material
+	receiver.use_collision = true
+	add_child(receiver)
+	for lamp_name in ["RedFlashlight", "GreenFlashlight", "BlueFlashlight", "WhiteFlashlight"]:
+		var lamp: Node3D = get_node(lamp_name)
+		lamp.position.y = 1.1
+		lamp.get_node("SpotLight3D").light_energy = 2.5
+	# White starts aimed aside so it does not wash out the first RGB comparison.
+	get_node("WhiteFlashlight").rotation_degrees.y = -60.0
+	_build_faceted_receiver()
+
+
+func _normalise_receiver(value: Variant) -> int:
+	var sides := int(str(value))
+	return sides if sides in [5, 7] else 0
+
+
+func _build_faceted_receiver() -> void:
+	if is_instance_valid(_receiver_root):
+		remove_child(_receiver_root)
+		_receiver_root.queue_free()
+		_receiver_root = null
+	if mount != "standing" or receiver_sides == 0:
+		return
+	_receiver_root = Node3D.new()
+	_receiver_root.name = "FacetedReceiver"
+	_receiver_root.position = Vector3(-5.6, 0, -1.0)
+	add_child(_receiver_root)
+
+	# Reuse Godot's sphere construction, but keep one normal per triangle.
+	# The ordinary primitive's emissive grid shader would mask the light lesson.
+	var sphere := SphereMesh.new()
+	sphere.radius = 0.85
+	sphere.height = 1.7
+	sphere.radial_segments = receiver_sides
+	sphere.rings = 3
+	var vertices := sphere.get_faces()
+	var surface := SurfaceTool.new()
+	surface.begin(Mesh.PRIMITIVE_TRIANGLES)
+	surface.set_smooth_group(-1)
+	for i in range(0, vertices.size(), 3):
+		# SphereMesh repeats pole vertices; omit zero-area cap triangles.
+		var area := (vertices[i+1]-vertices[i]).cross(vertices[i+2]-vertices[i])
+		if area.length_squared() < 0.00000001:
+			continue
+		for j in 3:
+			surface.add_vertex(vertices[i+j])
+	surface.generate_normals()
+	var body := MeshInstance3D.new()
+	body.name = "Sphere"
+	body.mesh = surface.commit()
+	body.material_override = get_node("Canvas").material
+	body.position.y = 1.5
+	_receiver_root.add_child(body)
+	body.create_trimesh_collision()
+
+	var pedestal := CSGCylinder3D.new()
+	pedestal.name = "Pedestal"
+	pedestal.radius = 0.44
+	pedestal.height = 0.65
+	pedestal.sides = receiver_sides
+	pedestal.position.y = pedestal.height * 0.5
+	pedestal.material = _matte(Color(0.14, 0.15, 0.17, 1))
+	pedestal.use_collision = true
+	_receiver_root.add_child(pedestal)
 
 
 ## A map token reaches here as metadata the grid stamps before add_child; the
@@ -139,6 +184,12 @@ func _is_true(value) -> bool:
 ## Flashlight and a curation_station collection in Curation_Bay_color_4 — carry
 ## no `ground` key, so this returns on its first line for them.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("receiver_sides"):
+		var sides := _normalise_receiver(config_data["receiver_sides"])
+		if sides != receiver_sides:
+			receiver_sides = sides
+			if _built:
+				_build_faceted_receiver()
 	if not config_data.has("ground"):
 		return
 	var want: String = _normalise_ground(str(config_data["ground"]))

@@ -391,6 +391,32 @@ func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Ar
 		# Apply definition properties
 		_apply_utility_definition(utility_object, utility_type, definition)
 
+		# A ferry's standing surface belongs on the deck; its scene origin is at
+		# the cube centre. Do this before _ready caches the transport endpoints.
+		# Scale/rotation crossings opt in because old maps carry manual y offsets.
+		if utility_type == "tc" or (utility_type in ["sc", "rc"] and str(cell_config.get("seat", "")) == "deck"):
+			var deck_height := y
+			if deck_height <= 0:
+				# An arena utility can be anchored over a void. The nearest bank's
+				# lowest positive column supplies the deck, avoiding adjacent walls.
+				for radius in range(1, 9):
+					var nearest := 999999
+					for dz in range(-radius, radius+1):
+						for dx in range(-radius, radius+1):
+							if maxi(absi(dx),absi(dz)) != radius: continue
+							var h: int = structure_component.find_highest_y_at(x+dx,z+dz)
+							if h > 0: nearest=mini(nearest,h)
+					if nearest != 999999:
+						deck_height=nearest
+						break
+			# With no nearby bank, keep the grid's ordinary ground deck as reference.
+			var deck_y := GridCommon.surface_world_y(maxi(1,deck_height),total_size)
+			# A lift socket can have a low and high bank beside the same empty
+			# cell. Its map may state the starting deck in units above ground.
+			if utility_type == "tc" and cell_config.has("deck"):
+				deck_y = (float(cell_config["deck"]) + 0.5) * total_size
+			UtilityRegistry.seat_crossing_before_ready(utility_object,utility_type,deck_y)
+
 		# Connect signals if utility has them
 		_connect_utility_signals(utility_object, utility_type)
 

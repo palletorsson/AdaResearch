@@ -222,6 +222,18 @@ func _ready() -> void:
 	if capture_anchor:
 		_add_capture_anchor()
 	_dna_built = true
+	_mount_structure_study({"study": get_meta("config_study", "")})
+
+## Opt-in room furniture; the mould's DNA bands and other placements are untouched.
+func _mount_structure_study(config: Dictionary) -> void:
+	if Engine.is_editor_hint() or not _dna_built:
+		return
+	if str(config.get("study", "")) != "states" or has_node("StructureStudy"):
+		return
+	var study_script: GDScript = load("res://algorithms/cellularautomata/cellular_automata_3d/structure_study.gd")
+	var study: Node3D = study_script.new()
+	study.name = "StructureStudy"
+	add_child(study)
 
 func _calculate_strides() -> void:
 	stride_y = grid_size.x
@@ -473,6 +485,7 @@ func _exit_tree() -> void:
 ## GridInteractablesComponent calls this deferred, so an unguarded rebuild here would
 ## restart the automaton in all 27 existing rooms.
 func apply_grid_config(config: Dictionary) -> void:
+	_mount_structure_study(config)
 	var changed: bool = false
 	if config.has("rule"):
 		var r: String = _pick_axis(String(config["rule"]), RULE_KEYS, rule)

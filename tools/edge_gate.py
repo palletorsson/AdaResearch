@@ -67,17 +67,40 @@ SPINE = ["primitives", "transformation", "symmetry", "array_tutorial", "color", 
          "qfeplaboratory", "postfoundationscrisis"]
 
 
+# A quote is written by a model reading a file, and a model reading "T = 2π√(L/g)"
+# writes "T = 2pi*sqrt(L/g)". Measured across the 269 anchors on 2026-08-30: the
+# quote side holds four non-ASCII characters in total, while the files they point at
+# hold pi, theta, lambda, phi, Delta, partial, minus, times, middot, squared, approx
+# and arrows in their thousands. That mismatch is an ALPHABET, not drift, and it cost
+# a real verdict — forces/Vectors_Act4b_Oscillation read LOST while its sentence sat
+# on line 5 of the intent.md it names, differing only in π√θ versus pi sqrt theta.
+#
+# Only characters actually present in the anchored corpus are mapped, and each maps to
+# the spelling a model reaches for. No two distinct symbols collapse onto one token, so
+# the table cannot make a wrong quote look right.
+_MATH_ASCII = {
+    "π": "pi", "θ": "theta", "λ": "lambda", "φ": "phi", "Δ": "delta",
+    "∂": "d", "√": "sqrt", "∫": "integral",
+    "−": "-", "×": "x", "·": "*", "²": "2", "³": "3",
+    "≈": "~", "±": "+-", "∝": "prop", "°": "deg",
+    "→": "->", "↔": "<->", "∈": "in", "∉": "not in", "∪": "u", "∩": "n",
+}
+
+
 def norm(s: str) -> str:
     """A quote and a file, compared on sense rather than on typography.
 
     Smart quotes and dashes come back from a model in their plain forms; a
     comment continued on a second line carries its own marker into the middle of
     the sentence; markdown emphasis is invisible when read aloud and absent when
-    quoted. None of those are drift, so none of them may register as drift."""
+    quoted; and mathematics comes back spelled out in the Latin alphabet. None of
+    those are drift, so none of them may register as drift."""
     s = (s.replace("—", "-").replace("–", "-")
          .replace("‘", "'").replace("’", "'")
          .replace("“", '"').replace("”", '"')
          .replace(" ", " "))
+    for uni, ascii_form in _MATH_ASCII.items():
+        s = s.replace(uni, ascii_form)
     s = re.sub(r"^[ \t]*(?:##?#?|//|--)[ \t]?", " ", s, flags=re.M)
     s = re.sub(r"[*_`>]", "", s)
     return re.sub(r"\s+", " ", s).strip().lower()
@@ -143,6 +166,18 @@ def verdict(e: dict) -> tuple[str, str]:
     body = body_of(rel)
     if body is None:
         return "LOST", f"{rel} is not in the repo"
+    # A quote written as "seed_value = 1 ... enable_animation = false" is TWO
+    # readings joined by an ellipsis, not one span — the author is saying "this
+    # line, and later that one". Matched whole it can never be found, and
+    # randomness/Random_Space read LOST for years of gate-time with both of its
+    # halves sitting on lines 13 and 18 of the file it names. Each fragment is
+    # required, which is a stricter reading than the single span it replaces:
+    # all of them must be present, not merely most.
+    fragments = [norm(f) for f in re.split(r"\s*(?:\.\.\.|…)\s*", quote)]
+    fragments = [f for f in fragments if f]
+    if len(fragments) > 1:
+        if all(f in body for f in fragments):
+            return "HELD", rel
     q = norm(quote)
     if q and q in body:
         return "HELD", rel

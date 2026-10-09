@@ -41,9 +41,12 @@ const LOD_LEAF_SKIP := [4, 2, 1, 1]          # Only place every Nth leaf
 
 ## Build a complete tree under `parent` from `dna`.
 ## Returns the root Node3D containing all tree geometry.
-static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMapper, lod: int = 2) -> Node3D:
+static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMapper, lod: int = 2, render_seed: int = -1) -> Node3D:
 	var tree_root := Node3D.new()
 	tree_root.name = "Tree"
+	# Optional stable appearance for controlled comparisons. Other callers keep
+	# their existing per-instance variation. This does not alter the grammar.
+	if render_seed >= 0: tree_root.set_meta("render_seed", render_seed)
 	parent.add_child(tree_root)
 
 	lod = clampi(lod, 0, 3)
@@ -241,7 +244,7 @@ static func _interpret_turtle(sentence: String, dna: CritterDNA, params: Diction
 	var leaf_counter: int = 0
 	var depth: int = 0          # Current recursion depth for taper
 
-	var base_seed: int = root.get_instance_id()
+	var base_seed: int = int(root.get_meta("render_seed", root.get_instance_id()))
 
 	# Leaf collection for MultiMesh batching
 	var leaf_placements: Array[Dictionary] = []
@@ -713,7 +716,7 @@ static func _add_tip_cluster(dna: CritterDNA, root: Node3D, mapper: CritterTrait
 ## Build visible root structures emerging from the trunk base.
 ## root_type: 0=none/fibrous 0.3=surface roots 0.6=buttress 1.0=aerial/deep
 static func _build_roots(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapper, lod: int) -> void:
-	var base_seed: int = root.get_instance_id() + 50000
+	var base_seed: int = int(root.get_meta("render_seed", root.get_instance_id())) + 50000
 	var root_count: int = clampi(roundi(dna.symmetry + 1), 3, 8)
 	var root_length: float = dna.part_length * dna.scale * 0.4
 	var root_radius: float = dna.part_width * dna.scale * 0.04

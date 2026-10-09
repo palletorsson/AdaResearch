@@ -36,7 +36,15 @@ var event_timers: Array[Timer] = []
 
 # State
 var is_playing: bool = false
-var volume_adjustment: float = 0.0
+var volume_adjustment: float = 0.0:
+	set(value):
+		var change := value - volume_adjustment
+		volume_adjustment = value
+		# Preserve each layer's own mix while changing the radio's overall gain.
+		for player in continuous_players:
+			if is_instance_valid(player): player.volume_db += change
+		for player in effect_players:
+			if is_instance_valid(player): player.volume_db += change
 
 # Threading for non-blocking generation
 var generation_thread: Thread
@@ -46,6 +54,8 @@ var generation_complete_flag: bool = false
 var stop_requested: bool = false
 var layers_to_generate: Array = []
 var layers_generated: int = 0
+var _sound_bank: Node
+var unavailable_sounds: PackedStringArray = []
 
 # Generator references (static classes)
 const TechnoNoirGenerator = preload("res://commons/audio/generators/TechnoNoirGenerator.gd")
@@ -64,6 +74,7 @@ var rng = RandomNumberGenerator.new()
 @export_file("*.json") var config_path: String = ""
 
 func _ready():
+	_sound_bank = get_node_or_null("/root/SoundBank")
 	rng.randomize()
 	mutex = Mutex.new()
 	generation_thread = Thread.new()
@@ -193,6 +204,7 @@ func _start_threaded_generation():
 	generation_complete_flag = false
 	stop_requested = false
 	layers_generated = 0
+	unavailable_sounds.clear()
 	layers_to_generate.clear()
 	precreated_streams.clear()
 	
@@ -205,6 +217,12 @@ func _start_threaded_generation():
 				"config": soundscape_config["continuous_layers"][i]
 			})
 	
+	var event_ids: Array[String] = []
+	for event in soundscape_config.get("random_events", []):
+		for sound_id in event.get("sound_pool", []):
+			if str(sound_id) not in event_ids:
+				event_ids.append(str(sound_id))
+				layers_to_generate.append({"type":"event", "index":str(sound_id), "config":{"sound_id":str(sound_id)}})
 	generation_started.emit()
 	
 	# Start generation thread
@@ -222,19 +240,20 @@ func _thread_generate_sounds():
 		var config = layer_data["config"]
 		var generator_name = config.get("generator", "TechnoNoirGenerator")
 		var method_name = config.get("method", "create_endless_drone")
-		var params = config.get("params", {})
 		
 		# Generate stream (this is the blocking part, now in thread)
-		var stream = _call_generator(generator_name, method_name, params)
+		var stream = _generate_layer_stream(config)
 		
 		if stop_requested:
 			return
 		
 		# Store result thread-safely
 		mutex.lock()
-		var key = "layer_%d" % layer_data["index"]
+		if stream == null: unavailable_sounds.append(str(config.get("sound_id", generator_name + "." + method_name)))
+		var key = "layer_%d" % layer_data["index"] if layer_data["type"] == "continuous" else "event_" + str(layer_data["index"])
 		precreated_streams[key] = {
 			"stream": stream,
+			"type": layer_data["type"],
 			"config": config
 		}
 		layers_generated += 1
@@ -242,7 +261,7 @@ func _thread_generate_sounds():
 		mutex.unlock()
 		
 		# Emit progress on main thread
-		call_deferred("_emit_generation_progress", progress, "%s.%s" % [generator_name, method_name])
+		call_deferred("_emit_generation_progress", progress, str(config.get("sound_id", "%s.%s" % [generator_name, method_name])))
 		
 		# Small delay to prevent CPU spike
 		OS.delay_msec(50)
@@ -282,6 +301,7 @@ func _create_players_from_precreated():
 	"""Create audio players from pre-generated streams"""
 	for key in precreated_streams.keys():
 		var data = precreated_streams[key]
+		if data.get("type", "continuous") != "continuous": continue
 		var stream = data["stream"]
 		var config = data["config"]
 		
@@ -302,7 +322,7 @@ func _create_players_from_precreated():
 		if stream is AudioStreamWAV:
 			stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
 			stream.loop_begin = 0
-			stream.loop_end = stream.data.size() / 4  # 16-bit stereo
+			stream.loop_end = maxi(1, roundi(stream.get_length() * stream.mix_rate))  # Frames, including mono bank sounds.
 		
 		add_child(player)
 		player.play()
@@ -342,7 +362,13 @@ func _on_event_timeout(config: Dictionary):
 	var method_name = config.get("method", "create_static_burst")
 	var params = config.get("params", {})
 	
-	var stream = _call_generator(generator_name, method_name, params)
+	var stream: AudioStream
+	var pool: Array = config.get("sound_pool", [])
+	if not pool.is_empty():
+		var sound_id: String = str(pool[rng.randi_range(0, pool.size()-1)])
+		stream = precreated_streams.get("event_" + sound_id, {}).get("stream")
+	else:
+		stream = _call_generator(generator_name, method_name, params)
 	if stream:
 		var volume_range = config.get("volume_range", [-20, -10])
 		player.stream = stream
@@ -375,6 +401,22 @@ func _get_available_effect_player() -> AudioStreamPlayer3D:
 	return null
 
 # ===== INTERNAL: GENERATOR DISPATCH =====
+
+
+func _generate_layer_stream(config: Dictionary) -> AudioStream:
+	# Shipped presets use sound_id; older direct generator configs remain valid.
+	if config.has("sound_id"):
+		if not is_instance_valid(_sound_bank): return null
+		var sound_id := str(config["sound_id"])
+		var parameters: Dictionary = config.get("parameters", {})
+		if not parameters.is_empty():
+			if sound_id.begins_with("techno_noir.") and _sound_bank.has_method("_generate_techno_noir_sound"):
+				return _sound_bank._generate_techno_noir_sound(sound_id.trim_prefix("techno_noir."), parameters)
+			if sound_id.begins_with("trap_beats.") and _sound_bank.has_method("_generate_trap_beats_sound"):
+				return _sound_bank._generate_trap_beats_sound(sound_id.trim_prefix("trap_beats."), parameters)
+		return _sound_bank._generate_sound(sound_id)
+	return _call_generator(config.get("generator", "TechnoNoirGenerator"),
+		config.get("method", "create_endless_drone"), config.get("params", {}))
 
 func _call_generator(generator_name: String, method_name: String, params: Dictionary) -> AudioStream:
 	"""Call a static generator method and return the AudioStream"""

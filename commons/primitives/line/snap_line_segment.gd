@@ -6,6 +6,7 @@ class_name SnapLineSegment
 
 ## Line appearance - Alyx style holographic
 @export var line_width: float = 0.006  # Thinner, sleeker
+@export var radial_segments: int = 8
 @export var line_color: Color = Color(0.1, 0.75, 0.95, 0.9)  # Cyan hologram
 @export var locked_color: Color = Color(0.3, 1.0, 0.7, 1.0)  # Green success
 @export var snap_tolerance: float = 0.06  # 6cm snap distance
@@ -112,7 +113,7 @@ func _update_line_geometry() -> void:
 	cylinder.top_radius = line_width
 	cylinder.bottom_radius = line_width
 	cylinder.height = line_length
-	cylinder.radial_segments = 8
+	cylinder.radial_segments = radial_segments
 	cylinder.rings = 1
 	
 	line_mesh.mesh = cylinder

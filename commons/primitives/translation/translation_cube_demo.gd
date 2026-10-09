@@ -74,6 +74,9 @@ const GUIDES: PackedStringArray = ["arrows", "none", "slot", "rail", "ghost"]
 ## The gap between the two door panels. Was a local in three functions that had to agree.
 const DOOR_GAP: float = 0.02
 
+## Optional live record of accepted handle motion; no new control panel.
+@export var trace_motion := false
+
 var _left_door: Node3D
 var _right_door: Node3D
 var _container: Node3D
@@ -98,6 +101,8 @@ func _ready() -> void:
 ## so this runs before anything is built. An unknown word keeps the default rather than
 ## silently rendering as one.
 func _read_dna() -> void:
+	if has_meta("config_trace"):
+		trace_motion = str(get_meta("config_trace")).to_lower() in ["on", "true", "1"]
 	if has_meta("config_course"):
 		var c: String = str(get_meta("config_course")).strip_edges().to_lower()
 		if COURSES.has(c):
@@ -116,6 +121,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.is_empty():
 		return
 	var changed: bool = false
+	if config_data.has("trace"):
+		var enabled: bool = str(config_data["trace"]).to_lower() in ["on", "true", "1"]
+		if enabled != trace_motion:
+			trace_motion = enabled
+			changed = true
 
 	if config_data.has("course"):
 		var c: String = str(config_data["course"]).strip_edges().to_lower()
@@ -284,6 +294,7 @@ func _create_constrained_door(
 	door.door_color = color
 	door.knob_height = knob_height
 	door.mirror_knob = knob_mirrored
+	door.trace_motion = trace_motion
 
 	# The plan drives the constraint. The sign of the sideways run lives in the DIRECTION
 	# here, where the shipped code put it in the signed span; the projection is the same

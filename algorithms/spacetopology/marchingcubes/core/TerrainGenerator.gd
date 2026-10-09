@@ -459,6 +459,14 @@ func generate_walkable_collision() -> void:
 				else:
 					print("TerrainGenerator: No walkable triangles found for %s, skipping" % mesh_name)
 	
+	# Only collision_bodies are transferred by add_terrain_to_scene(). The
+	# temporary navigation tiles have never been attached to the world. Keep the
+	# transferable bodies alive, then release that unused off-tree container and
+	# its markers; otherwise every generation leaks Areas, shapes and materials.
+	for body in walkable_bodies:
+		if is_instance_valid(body) and body.get_parent() == temp_parent:
+			temp_parent.remove_child(body)
+	temp_parent.free()
 	print("Generated %d collision bodies for terrain" % collision_bodies.size())
 
 func clear_previous_terrain() -> void:

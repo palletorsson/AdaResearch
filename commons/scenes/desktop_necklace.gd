@@ -56,8 +56,9 @@ extends Node3D
 ##            · U (or Ctrl+Z) take the last edit back — it pops the trailing op
 ##              from the hand file, so the file agrees with the screen
 ##            ALL FIVE REFUSE ON THE MUSEUM STRING, each with the reason.
-##   LOOK     L live body on the focus bead (off by default: cold, it costs ~98 ms
-##            and one of the fifteen GPU tokens costs a great deal more)
+##   LOOK     L swaps the WHOLE STRING between LIVE BODIES (the default) and the
+##            capture tiles. The help line names which mode is live, because a
+##            bead mid-build looks exactly like a bead that refused.
 ##            · C push the camera in · R what this string is, verbatim from its
 ##            own _report · H help · F10 back to the menu
 ##
@@ -85,22 +86,70 @@ extends Node3D
 ## is that failure — insert one artifact upstream and the op is about a different
 ## neighbour, with nothing visible until someone walks it.
 ##
-## A BEAD IS A CAPTURE TILE, AND ONLY THE FOCUS CAN BE A LIVE BODY.
+## EVERY BEAD IS A LIVE BODY. 2026-08-27, Palle: "we want to load the actual
+## scenes and no fog what actually is in the maps from x to z".
 ##
-## Measured over the 810: 798 (98.5%) already have a capture on disk, so a tile
-## is the artifact's own likeness and not a gauge of it. Ten LIVE bodies was
-## refused on numbers, not taste:
-##   · the fifteen GPU/marching-cubes tokens sit at order indices 656-673, so ONE
-##     ten-wide window holds NINE of them, built and freed on every scroll notch —
-##     the documented queue_free-mid-generation segfault class;
-##   · 143 of 810 declare dna.fixture, meaning _ready() is gated and builds
-##     nothing standalone: one bead in six would be an empty slot;
-##   · registry max_dimension_m runs 0.00 m to 300.00 m, a 175x spread, and
-##   · ~98 ms per interactable (1281 ms for thirteen, GridInteractablesComponent.gd:133)
-##     is a full second of frozen scroll for a window of ten.
-## So: ten tiles, one optional live body at the focus, normalised into a fixed
-## bead volume so a 12 m artifact and a 0.2 m one both read on the line, with the
-## real metres on the label where the size information belongs.
+## THE THREE NUMBERS THAT REFUSED THIS WERE ALL WRONG, and probe_necklace_bodies.gd
+## measured every correction over six headless runs (ada_run/necklace_bodies.json):
+##
+##   · "~98 ms per interactable, a full second of frozen scroll for ten" — 98 ms
+##     is GridInteractablesComponent.gd:133, thirteen interactables inside a MAP
+##     BUILD. A ten-bead window measures 309 ms COLD and 56 ms WARM in the same
+##     process, because 95% of a cold touch is ResourceLoader's first read: the
+##     museum head's ten scenes reloaded in 5.0 ms against 474.1 ms cold, a 95x.
+##     So the scene holds a PackedScene cache and the second pass over a
+##     neighbourhood is nearly free.
+##   · "143 of 810 declare dna.fixture, so one bead in six is an empty slot" —
+##     146 declare it, and the inference is false in BOTH directions: 4 of 5
+##     sampled declarers built a real body. dna.fixture is about the sweep's
+##     camera rig, not about whether _ready() builds geometry. The measured empty
+##     rate is 3 of 50 (6%), and only one of those three declares it. So emptiness
+##     is decided by the MEASURED BOX after two settles, never by the declaration.
+##   · "the fifteen GPU/marching-cubes tokens sit at 656-673" — the path
+##     predicate matches TWENTY-FIVE on the spine, in a CONTIGUOUS RUN OF 20
+##     (654-673, voxel_noise_demo..mc_base). The worst ten-wide window there holds
+##     TEN of ten, not nine. Worse than the note claimed, and it is why those 25
+##     stay tiles: building and freeing a compute dispatch on a scroll is the
+##     documented segfault class, and headless has no RenderingDevice, so nobody
+##     has ever measured what they really cost.
+##
+## WHAT IS ACTUALLY EXPENSIVE IS _ready(), NOT load(). Median _ready 4.3 ms, p90
+## 186 ms, max 530.6 ms (grid_3d_4x4x4); the whole of set 110-119 spends 1,415 of
+## its 1,774 ms inside _ready. Threaded loading buys 20% and cannot fix it,
+## because instantiate() and add_child() cannot leave the main thread. The only
+## defence is to SPREAD the window across frames: LIVE_BUDGET_MS per frame, at
+## most LIVE_MAX_PER_FRAME beads, focus outward, and nothing at all while the
+## string is moving — at scroll speed a body is unreadable anyway.
+##
+## AND "NO FOG" WAS LITERAL. There IS fog on this string, and it is not this
+## file's. commons/managers/NatureRenderer.gd is an AUTOLOAD — the ecology system —
+## which at boot does `_recursive_find(get_tree().root, "WorldEnvironment")`, takes
+## the FIRST one anywhere in the tree, keeps its Environment RESOURCE, and then
+## tweens fog_enabled / fog_density / fog_light_color / ambient_light_color /
+## ambient_light_energy into it once a second forever. Read back off the live
+## scene by probe_necklace_air.gd, the Environment _build_stage had just written
+## as fog-free was holding fog_enabled true, density 0.0300 and fog_light_color
+## (0.562, 0.589, 0.594) — the grey-green wash, mid-tween, over a tool that is not
+## a biome. A necklace of artifacts was being weathered like one.
+##   The earlier survey had measured `Environment.new()`, found fog_enabled false,
+## and concluded "there is no fog in the scene at all". That is a true fact about a
+## fresh resource and a false one about the picture. Palle looked at the picture.
+##   So this scene has NO WorldEnvironment node: give that search nothing to find,
+## and the camera Environment (which is what overrides the 56 artifact skies
+## anyway) is left alone. MEASURED AFTER, off the frames in ada_run: fog_enabled
+## false and unmutated, backdrop and sky both sRGB (14,15,18), and mean luminance
+## below the HUD band 87.2 -> 36.4 on the spine and 114.0 -> 36.5 on the museum,
+## with mean chroma 11.3 -> 4.6 (the field is now dark and near-neutral instead of
+## a mid grey-green). _hold_the_air() has never once had to fire, so the absence
+## of the node is doing the whole job and the guard is only a tripwire.
+##
+## SO: ten live bodies, built progressively, pooled and reused rather than freed
+## and rebuilt on every notch, each normalised into the same 1.30 m bead volume
+## (the corpus spans 0.40 m to 220.00 m — 550x) with the measured metres and the
+## shrink ratio on the label. Anything that cannot be mounted — the 25 GPU
+## tokens, the 3 non-3D roots, the 14 dead rows, the ~6% that build nothing —
+## falls back to its capture tile and says why, so the necklace never has a hole
+## in it. L swaps the whole string between bodies and tiles.
 
 # ── the store ───────────────────────────────────────────────────────────────
 const EFFECTIVE_DEFAULT := "res://commons/data/spine_order_effective.json"
@@ -184,17 +233,57 @@ const SLACK_FREE := 7
 
 const SCROLL_LERP := 12.0
 
-# ── the live body ───────────────────────────────────────────────────────────
+# ── the live bodies (ten of them) ───────────────────────────────────────────
 ## probe_aabb_hogs.gd:55 — two process frames photographs a half-built artifact.
 const LIVE_SETTLE := 0.35
-## Never build during an active scroll gesture.
+## Never START A DEAR BODY during an active scroll gesture; also the stillness a
+## string must hold before the scene prefetches ahead of the band.
 const LIVE_DEBOUNCE := 0.30
 ## Never free a body younger than this. queue_free() is not what segfaults a
 ## marching-cubes artifact; freeing it inside its own generation window is.
 const LIVE_MIN_DWELL := 0.60
 ## A 4 cm token blown to 1.3 m is a lie about the corpus. Cap the up-scale and
-## let the label carry the truth.
+## let the label carry the truth. The cap can only bind below 0.1625 m, and
+## 0.1625 x 8 = 1.30, so a body can never grow past the bead volume and never
+## reaches a neighbour: the pitch is 2.25 m, leaving 0.95 m of air.
 const MAX_UPSCALE := 8.0
+## Bodies built BEYOND the visible ten, in the direction of travel, and the
+## hysteresis before one outside the band is released. LIVE_KEEP + LIVE_AHEAD ==
+## SLACK_BUILD on purpose: a body can only be built into a BEAD's mount, so the
+## body band must never reach past the band of beads that exist.
+const LIVE_AHEAD := 2
+const LIVE_KEEP := 1
+## THE FRAME BUDGET, AND IT IS THE WHOLE DESIGN. _ready() is what costs (median
+## 4.3 ms, p90 186 ms, max 530.6 ms), it cannot be moved off the main thread, and
+## a scroll that blocks for a second is what this scene was built to avoid. So
+## the window ARRIVES over several frames instead of appearing in one.
+const LIVE_BUDGET_MS := 6.0
+const LIVE_MAX_PER_FRAME := 3
+## A token already measured dearer than this waits for a genuinely still string
+## rather than landing in the middle of a gesture.
+const LIVE_HEAVY_MS := 120.0
+## Two frames of stillness. Below this nothing is built at all — during a fast
+## scroll the necklace shows its tiles, which is right, because at speed a body
+## is unreadable anyway.
+const LIVE_STILL_CHEAP := 0.12
+## 96 MB of live bodies. Measured: the worst three beads in the corpus sum to
+## 121 MB (rhizomatic_maze_space 63 + facade_grammar_demo 37 + pulsar_visualizer
+## 35), so this cap WILL bite — and that is the point. It bites as a tile, not
+## as a stall or an out-of-memory.
+const LIVE_MEM_CAP_KB := 98304
+## PackedScenes held. A PackedScene is cheap to hold and an instance is not, so
+## this is the cache that turns 309 ms cold into 56 ms warm. 1,302 distinct
+## museum tokens is more than there is any reason to hold.
+const SCENE_CACHE_CAP := 120
+## The SECOND settle a zero-AABB body gets after its params are handed in again.
+const FIT_RETRY_S := 0.70
+
+## What _build_body answers. LATER IS NOT REFUSED: it is a bead whose scene is
+## still arriving, or whose anchor has not been built yet, and badging it on the
+## string would be a lie about the corpus.
+const BUILD_MADE := 0
+const BUILD_REFUSED := 1
+const BUILD_LATER := 2
 
 const PALETTE_CAP := 150    ## WHPalette has no cap; 1,875 Buttons in one frame is a stall
 
@@ -257,20 +346,42 @@ var _ops_broken_why: String = ""
 ## itself appended.
 var _undo: Array = []
 
-var _live_on: bool = false
-var _live_node: Node3D = null
+## BODIES BY DEFAULT — "we want to load the actual scenes". L falls the whole
+## string back to its capture tiles when a body is slow or ugly.
+var _live_on: bool = true
+## order index -> {node, born_ms, fitted, rescued, settle, token, mem_kb, ms,
+## scale, max_m}. The set that replaced the two scalars.
+var _bodies: Dictionary = {}
+## scene path -> PackedScene, LRU-capped. The measured 5.5x.
+var _scene_cache: Dictionary = {}
+var _scene_lru: Array = []
+## token -> {ms, mem_kb, max_m, empty, refused}. In-memory, per session, seeded
+## empty. It is what lets the budget price a body it has already met, and what
+## PINS a generative token's bead size: rhizomatic_maze_space measured 144.2 m on
+## one run and 160.2 m on the next (unseeded randf), and without the pin its bead
+## breathes every time the curator scrolls back to it.
+var _body_cost: Dictionary = {}
+var _live_mem_kb: int = 0
+## scene path -> true while a threaded request is in flight.
+var _prefetch: Dictionary = {}
+## THE FOCUS BODY, and only that. Kept because live_mounted() / live_scale() /
+## live_note() are the shape probe_necklace_live.gd, probe_necklace.gd and
+## probe_necklace_audit.gd already read.
 var _live_index: int = -1
-var _live_born: float = 0.0
-var _live_want_index: int = -1
 var _live_still: float = 0.0
 var _live_note: String = ""
-var _live_fitted: bool = false
+## The census signature, so the HUD is rewritten when the count moves and not on
+## every frame.
+var _live_sig: int = -1
 var _chapter_in_spine_cache: Dictionary = {}
 var _last_focus: int = -1
 var _registry_params: Dictionary = {}   # token -> merged config, scanned on demand
 var _registry_scanned: bool = false
 
 var _cam: Camera3D
+## The one Environment, held so the guard below can re-assert it.
+var _env: Environment = null
+var _air_reasserts: int = 0
 var _cam_near: bool = false
 var _string_segs: Array = []
 var _hud: Label
@@ -318,6 +429,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_hold_the_air()
 	if _fatal != "":
 		return
 	var moved := absf(_want - _pos) > 0.0005
@@ -470,9 +582,7 @@ func set_source_index(which: int) -> void:
 	_stash_slot()
 	# every bead and any live body belongs to the OUTGOING order; nothing about
 	# them survives the swap
-	_free_live()
-	_live_index = -1
-	_live_want_index = -1
+	_release_all_bodies()
 	for k in _beads.keys():
 		var node: Node3D = _node_or_null((_beads[k] as Dictionary).get("anchor"))
 		if node != null:
@@ -628,10 +738,19 @@ func _station_at(p: float) -> float:
 
 # ─────────────────────────────────────────────────────────────────── the stage
 func _build_stage() -> void:
-	# floor and backdrop, flat museum tones — the pearl-lab end of the house
-	# palette (0.10,0.10,0.12), so a photographic tile reads against it.
-	_slab(Vector3(0, -0.06, 0), Vector3(140, 0.12, 26), Color(0.115, 0.12, 0.145))
-	_slab(Vector3(0, 4.2, -7.0), Vector3(140, 12.0, 0.4), Color(0.085, 0.09, 0.11))
+	## THE BACKDROP MUST STOP BEING A LIT WALL. Measured off ada_run/necklace_head.png:
+	## the top of the frame was sRGB (136,144,153) and 59.6% of the whole image sat
+	## inside luminance 25-95 — a near-achromatic mid-grey field. The slab's albedo
+	## is only 0.085-0.11, and it was being lit to ~0.28 linear by 1.4 units of
+	## directional light plus a 0.7 ambient flood: a 3x wash on the surface that
+	## fills most of the frame. UNSHADED pins it to the background colour so no
+	## light can touch it, and matching Environment.background_color makes the seam
+	## between wall and sky invisible.
+	##   THE FLOOR STAYS SHADED, and that is not an oversight: it is what catches
+	## the key light's shadow, and a body needs ground under it to read as an
+	## object rather than a cut-out.
+	_slab(Vector3(0, -0.06, 0), Vector3(140, 0.12, 26), Color(0.085, 0.088, 0.105))
+	_slab(Vector3(0, 4.2, -7.0), Vector3(140, 12.0, 0.4), Color(0.055, 0.058, 0.070), true)
 
 	_cam = Camera3D.new()
 	# KEEP_WIDTH so `fov` is HORIZONTAL: the ten beads must stay ten beads when
@@ -653,30 +772,127 @@ func _build_stage() -> void:
 	_apply_camera()
 	_cam.make_current()
 
-	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-52, 34, 0)
-	sun.light_energy = 1.05
-	add_child(sun)
+	## THREE LIGHTS, NOT TWO, AND ONE OF THEM CASTS. Two flat directionals plus an
+	## ambient flood is a lighting rig for PHOTOGRAPHS — which is what the beads
+	## used to be. A real body needs a direction, a shadow to sit in and a rim to
+	## come off a dark ground, or it reads as a silhouette.
+	var key := DirectionalLight3D.new()
+	key.rotation_degrees = Vector3(-38, 28, 0)
+	key.light_energy = 1.6
+	key.light_color = Color(1.00, 0.97, 0.92)
+	key.shadow_enabled = true
+	key.directional_shadow_mode = DirectionalLight3D.SHADOW_PARALLEL_2_SPLITS
+	## 30 m covers the visible ten and nothing beyond: the widest bead centre the
+	## frustum allows is 13.04 m out, so the string spans at most ~26 m.
+	key.directional_shadow_max_distance = 30.0
+	key.shadow_bias = 0.03
+	key.shadow_normal_bias = 1.5
+	add_child(key)
 	var fill := DirectionalLight3D.new()
-	fill.rotation_degrees = Vector3(-14, -128, 0)
-	fill.light_energy = 0.35
+	fill.rotation_degrees = Vector3(-12, -120, 0)
+	fill.light_energy = 0.30
+	fill.light_color = Color(0.72, 0.80, 0.95)
 	add_child(fill)
+	var rim := DirectionalLight3D.new()
+	rim.rotation_degrees = Vector3(8, 170, 0)
+	rim.light_energy = 0.45
+	rim.light_color = Color(0.85, 0.88, 1.00)
+	add_child(rim)
 
 	var e := Environment.new()
 	e.background_mode = Environment.BG_COLOR
-	e.background_color = Color(0.075, 0.08, 0.10)
+	e.background_color = Color(0.055, 0.058, 0.070)
+	## NO FOG, SAID OUT LOUD RATHER THAN INHERITED. Measured on a fresh
+	## Environment in 4.6: fog_enabled false, volumetric_fog_enabled false,
+	## tonemap_mode 0. THERE NEVER WAS ANY FOG. But the default fog_light_color is
+	## (0.518, 0.553, 0.608) — the same blue-grey the ambient flood below was
+	## painting over the whole frame — which is exactly why the render LOOKED
+	## fogged and why Palle said "no fog". Setting both explicitly means no later
+	## edit can bring it back by accident, and it names the thing that was wrong.
+	e.fog_enabled = false
+	e.volumetric_fog_enabled = false
+	e.ssao_enabled = false
+	e.ssil_enabled = false
+	e.sdfgi_enabled = false
+	e.glow_enabled = false
+	## THE FLOOD GOES, AND IT NEVER DID THE JOB IT WAS ADDED FOR — BUT IT WAS NOT
+	## THE VEIL, and saying so was the wrong answer that cost this pass two renders.
+	## 0.7 at (0.66,0.68,0.74) was added so flat capture tiles would be evenly lit,
+	## except a Sprite3D with shaded = false receives NO light and NO ambient, so it
+	## never touched the one thing it existed for; all it ever lit was the floor,
+	## the backdrop, the bail, the plate and the status edge. It goes because it is
+	## pointless and because 0.10 leaves a body its own light and its own shadow.
+	## The grey-green wash over 59.6% of the frame was FOG, put there by an
+	## autoload — see the note below where the WorldEnvironment used to be. Removing
+	## the flood alone made the frame BRIGHTER, measured: mean luminance 92.7 ->
+	## 115.5. A change that moves the number the wrong way is a wrong diagnosis, and
+	## the next repair here should read that as such rather than tuning harder.
 	e.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	e.ambient_light_color = Color(0.66, 0.68, 0.74)
-	e.ambient_light_energy = 0.7
-	var we := WorldEnvironment.new()
-	we.environment = e
-	add_child(we)
-	# AND on the camera. 61 of the 810 carry their own WorldEnvironment; a
-	# camera-level Environment overrides every one of them for this view
-	# (room_line_sketcher.gd:127), which a WorldEnvironment node cannot.
+	e.ambient_light_color = Color(0.34, 0.38, 0.46)
+	e.ambient_light_energy = 0.10
+	## LINEAR, AND THE FILMIC EXPERIMENT IS WRITTEN DOWN BECAUSE IT FAILED.
+	## TONE_MAPPER_FILMIC at white 6.0 was tried first, for the highlight roll-off a
+	## lit surface wants. Measured off the rendered frame it did the OPPOSITE of
+	## what was wanted: mean luminance rose from 92.7 to 117.6, the backdrop went
+	## from sRGB (89,93,99) to (125,130,124) — a 1.42x LIFT of exactly the mid-dark
+	## field the veil complaint was about — while min and max barely moved (5->7,
+	## 226->223). A curve that pins both ends and lifts the middle is a veil, which
+	## is the thing being removed. Palle said no fog; a tonemapper that fogs the
+	## mids is the same answer in a different hat.
+	e.tonemap_mode = Environment.TONE_MAPPER_LINEAR
+	e.tonemap_white = 1.0
+	## THERE IS NO WorldEnvironment NODE, AND ITS ABSENCE IS THE WHOLE FIX FOR
+	## "no fog". THIS IS THE FOG. Read back off the LIVE scene by
+	## probe_necklace_air.gd, the Environment this function had just built was
+	## holding:
+	##     fog_enabled       true          (set here: false)
+	##     fog_density       0.0300
+	##     fog_light_color   (0.562, 0.589, 0.594)   <- the grey-green
+	##     ambient_color     (0.425, 0.468, 0.466)   (set here: 0.34,0.38,0.46)
+	##     ambient_energy    0.244                   (set here: 0.10)
+	## Every one of those is mid-tween toward a target in
+	## commons/managers/NatureRenderer.gd — an AUTOLOAD, the ecology system, which
+	## at _deferred_init does `_recursive_find(get_tree().root, "WorldEnvironment")`,
+	## takes the FIRST one it meets anywhere in the tree, keeps the Environment
+	## RESOURCE, and thereafter tweens fog_enabled / fog_density / fog_light_color /
+	## ambient_light_color / ambient_light_energy into it once a second forever
+	## (:133-172). Fog thins as vegetation grows; at density 0 it is thickest. A
+	## necklace of artifacts is not a biome, and it was being weathered like one.
+	##   So the veil was never the 0.7 ambient flood, and it was never absent
+	## either: the earlier survey measured `Environment.new()` and found
+	## fog_enabled false, which is a fact about a fresh resource and not about the
+	## one on screen. Palle looked at the picture and said "no fog", and the picture
+	## was right.
+	##   The cure is to give that search NOTHING TO FIND. NatureRenderer binds ONCE,
+	## in a deferred call at boot, and if no WorldEnvironment exists in the tree at
+	## that moment it warns and never touches an Environment again. A body mounted
+	## later cannot re-arm it.
+	##   Nothing is lost by dropping the node. A camera-level Environment is what
+	## actually governs this view — and it is the ONLY thing that overrides the 56
+	## spine / 62 museum distinct scenes that carry a WorldEnvironment of their own
+	## (room_line_sketcher.gd:127), which a WorldEnvironment node cannot do.
 	_cam.environment = e
+	_env = e
 
 	_build_string()
+
+
+## THE SECOND BELT ON THE FOG, and it is here because the first belt is an
+## ABSENCE and an absence is not greppable. Dropping the WorldEnvironment node
+## stops NatureRenderer binding to us — but only because it binds once, at boot,
+## and any future change to that policy would put the veil back with nothing in
+## this file objecting. This notices and undoes it, and counts, so a probe can
+## prove which belt did the work. It costs four float compares a frame.
+func _hold_the_air() -> void:
+	if _env == null:
+		return
+	if not _env.fog_enabled and not _env.volumetric_fog_enabled 			and _env.ambient_light_energy <= 0.11:
+		return
+	_env.fog_enabled = false
+	_env.volumetric_fog_enabled = false
+	_env.ambient_light_color = Color(0.34, 0.38, 0.46)
+	_env.ambient_light_energy = 0.10
+	_air_reasserts += 1
 
 
 func _build_string() -> void:
@@ -750,6 +966,12 @@ func _refresh_window(force: bool) -> void:
 	for k in _beads.keys():
 		var idx: int = int(k)
 		if idx < flo or idx > fhi:
+			## A LIVE BODY IS A CHILD OF THE BEAD'S MOUNT, SO FREEING THE ANCHOR
+			## TAKES THE BODY WITH IT — and skips the release() walk entirely. This
+			## is the single most likely way to reintroduce the segfault class, and
+			## it is HERE rather than in _tick_live, which is where anyone would
+			## look for it.
+			_release_body(idx)
 			var b: Dictionary = _beads[idx]
 			var node: Node3D = _node_or_null(b.get("anchor"))
 			if node != null:
@@ -983,6 +1205,14 @@ func _style_bead(i: int) -> void:
 		# plate as a standing body, two thirds of the string would be a claim
 		# dressed as a fact.
 		base = base.darkened(0.55).lerp(Color(0.16, 0.17, 0.21), 0.45)
+	## THE PLATE IS THE LOCKET'S BACK, NOT THE EXHIBIT. Behind a photograph it was
+	## never seen; behind a live body standing 0.64 m in front of it, a mid-lavender
+	## card under a 1.6 key light is the loudest thing on the bead. Measured off the
+	## first clean render: ten real artifacts on the string and the eye finds ten
+	## blank cards. So when a body actually stands, the plate drops to a third of
+	## its light and keeps only enough chapter colour to be read as a chapter.
+	if _bodies.has(i) and bool((_bodies[i] as Dictionary).get("fitted", false)):
+		base = base.darkened(0.66)
 	var pmat: StandardMaterial3D = b["pmat"]
 	pmat.albedo_color = base.lightened(0.10 if focus else 0.0)
 	pmat.emission_enabled = focus and stands
@@ -1016,7 +1246,11 @@ func _style_bead(i: int) -> void:
 	# difference the eye reads first, before any word.
 	var tile: Sprite3D = b["tile"] as Sprite3D
 	var noimg: Label3D = b["noimg"] as Label3D
-	var ghost: Color = Color(1, 1, 1) if stands else Color(0.40, 0.44, 0.54)
+	## AND THE TILE HAS TO BE DIMMED BY HAND, because unshaded means the new
+	## lighting cannot reach it. Mean frame luminance drops from a measured 93 to
+	## roughly 35 with the flood gone, so a full-brightness tile would pop out of
+	## the frame and sit brighter than the live bodies beside it.
+	var ghost: Color = Color(0.78, 0.78, 0.82) if stands else Color(0.33, 0.36, 0.44)
 	if tile != null:
 		tile.modulate = ghost
 	if noimg != null:
@@ -1034,7 +1268,7 @@ func _style_bead(i: int) -> void:
 	mark.visible = _is_museum
 	place.visible = _is_museum
 	if _is_museum:
-		_style_museum_bead(row, b, focus, stands, state)
+		_style_museum_bead(i, row, b, focus, stands, state)
 		return
 
 	var marks: Array = []
@@ -1046,9 +1280,15 @@ func _style_bead(i: int) -> void:
 		marks.append(origin.to_upper())
 	if row.has("delegate_to"):
 		marks.append("via " + str(row.get("delegate_to", "")))
+	## THE REGISTRY IS THE FALLBACK, NOT THE ANSWER. While a body actually stands
+	## on this bead the bead quotes the box it MEASURED, because size_m is null on
+	## 38 of the 810 and wrong by up to 167x where it is present.
 	var size_txt := "size ?"
 	if row.get("size_m") != null:
 		size_txt = "%.2f m" % float(row.get("size_m"))
+	var live_size := _body_size_text(i)
+	if live_size != "":
+		size_txt = live_size
 	var sub: Label3D = b["sub"]
 	sub.text = "%s %d/%d  ·  fp %d  ·  %s%s" % [
 		str(row.get("sequence", "")), int(row.get("seq_i", 0)) + 1, int(row.get("seq_n", 0)),
@@ -1079,7 +1319,7 @@ static func _state_color(state: String) -> Color:
 ## mark and the hall in place of the index and "first met in", the state, where
 ## the body actually stands when it is not on the cell the map named, the
 ## nth-of-N when a token repeats, and whether the curriculum has ever heard of it.
-func _style_museum_bead(row: Dictionary, b: Dictionary, focus: bool,
+func _style_museum_bead(i: int, row: Dictionary, b: Dictionary, focus: bool,
 		stands: bool, state: String) -> void:
 	var mark: Label3D = b["mark"]
 	var place: Label3D = b["place"]
@@ -1151,6 +1391,10 @@ func _style_museum_bead(row: Dictionary, b: Dictionary, focus: bool,
 		parts.append("off-curriculum")
 	if not bool(row.get("alive", true)):
 		parts.append("DEAD: " + str(row.get("dead", "not dealt")))
+	## and what the body standing on this bead right now actually measures
+	var live_size := _body_size_text(i)
+	if live_size != "":
+		parts.append(live_size)
 	sub.text = "  ·  ".join(PackedStringArray(parts))
 	sub.font_size = 34 if focus else 30
 	sub.modulate = col.lightened(0.22) if stands else col.lightened(0.34)
@@ -1293,49 +1537,219 @@ func _capture_texture(token: String) -> ImageTexture:
 	return tex
 
 
-# ────────────────────────────────────────────────────────────── the live body
-func _tick_live(delta: float) -> void:
+# ───────────────────────────────────────────────────── the live bodies, ten wide
+## THE PACKED-SCENE CACHE IS THE WHOLE PERFORMANCE STORY. Measured: the spine's
+## first ten cost 309 ms and the SAME ten cost 56 ms seconds later in the same
+## process — 5.5x, entirely ResourceLoader's cache. The museum head proves it
+## cleanly, because its ten scenes had already been read by the spine head set:
+## ten loads for 5.0 ms against 474.1 ms cold, a 95x, with the second and third
+## interactive_point_origin_force returning in 0.0 ms. A PackedScene is cheap to
+## hold; only the INSTANCE costs memory. So hold the scenes and pool the bodies.
+func _packed(path: String) -> PackedScene:
+	if _scene_cache.has(path):
+		_scene_lru.erase(path)
+		_scene_lru.append(path)
+		return _scene_cache[path]
+	if _prefetch.has(path):
+		var st: int = ResourceLoader.load_threaded_get_status(path)
+		_prefetch.erase(path)
+		if st == ResourceLoader.THREAD_LOAD_LOADED:
+			var got: PackedScene = ResourceLoader.load_threaded_get(path) as PackedScene
+			if got != null:
+				_cache_packed(path, got)
+				return got
+	if not ResourceLoader.exists(path):
+		return null
+	var ps: PackedScene = load(path) as PackedScene
+	if ps == null:
+		return null
+	_cache_packed(path, ps)
+	return ps
+
+
+func _cache_packed(path: String, ps: PackedScene) -> void:
+	_scene_cache[path] = ps
+	_scene_lru.erase(path)
+	_scene_lru.append(path)
+	while _scene_lru.size() > SCENE_CACHE_CAP:
+		var old: String = str(_scene_lru.pop_front())
+		if old != path:
+			_scene_cache.erase(old)
+
+
+## THE RECONCILER. Not "build the focus, free the last one" but "make the set of
+## standing bodies agree with the band", in three passes and under a budget:
+##   (a) release everything outside the band, never inside its own dwell
+##   (b) fit anything that has settled
+##   (c) build, focus outward, LIVE_BUDGET_MS and LIVE_MAX_PER_FRAME per frame
+## Nothing is built while the string is moving. _live_still is already maintained
+## by _process and zeroed on any movement, so the gesture gate is free and was
+## already there.
+func _tick_live(_delta: float) -> void:
 	if not _live_on or _fatal != "":
+		if not _bodies.is_empty():
+			_release_all_bodies()
 		return
-	var focus_i: int = _focus_i()
-	if focus_i != _live_index and _live_still >= LIVE_DEBOUNCE:
-		if _live_node != null and (Time.get_ticks_msec() - _live_born) < int(LIVE_MIN_DWELL * 1000.0):
-			return   # never free a body younger than its dwell
-		_free_live()
-		_spawn_live(focus_i)
-	elif _live_node != null and not _live_fitted \
-			and (Time.get_ticks_msec() - _live_born) >= int(LIVE_SETTLE * 1000.0):
-		_fit_live()
+	if _order.is_empty():
+		return
+	var wf: int = _win_first()
+	## The direction of travel, read off the animated position against the wanted
+	## one. The margin is built AHEAD of the scroll only: building behind it is
+	## paying for beads the curator is walking away from.
+	var dir: int = 1 if _want >= _pos else -1
+	var lo: int = maxi(0, wf - LIVE_KEEP - (LIVE_AHEAD if dir < 0 else 0))
+	var hi: int = mini(_order.size() - 1,
+		wf + WINDOW - 1 + LIVE_KEEP + (LIVE_AHEAD if dir > 0 else 0))
+	var now: int = Time.get_ticks_msec()
+
+	# ── (a) release what has left the band
+	for k in _bodies.keys():
+		var idx: int = int(k)
+		if idx >= lo and idx <= hi:
+			continue
+		var b: Dictionary = _bodies[idx]
+		## THE SECOND BELT ON THE SEGFAULT CLASS. A GPU body is never built at all
+		## (the refusal catches it before the load), so this cannot fire for one
+		## today — it is here for the day someone lifts that refusal, and for any
+		## artifact that spawns a thread of its own in _ready().
+		if (now - int(b.get("born_ms", 0))) < int(LIVE_MIN_DWELL * 1000.0):
+			continue
+		_release_body(idx)
+
+	# ── (b) fit what has settled
+	for k2 in _bodies.keys():
+		var idx2: int = int(k2)
+		var b2: Dictionary = _bodies[idx2]
+		if bool(b2.get("fitted", false)):
+			continue
+		if (now - int(b2.get("born_ms", 0))) >= int(float(b2.get("settle", LIVE_SETTLE)) * 1000.0):
+			_fit_body(idx2)
+
+	# ── (c) build, under the budget
+	if _live_still < LIVE_STILL_CHEAP:
+		_sync_focus_body()
+		return
+	var spent: float = 0.0
+	var made: int = 0
+	for slot in _build_order(wf, lo, hi):
+		if made >= LIVE_MAX_PER_FRAME or spent >= LIVE_BUDGET_MS:
+			break
+		var idx3: int = int(slot)
+		if _bodies.has(idx3):
+			continue
+		var token := str((_order[idx3] as Dictionary).get("lookup", ""))
+		var led: Dictionary = _body_cost.get(token, {}) as Dictionary
+		var known: float = float(led.get("ms", -1.0))
+		## A TOKEN ALREADY MEASURED DEAR WAITS FOR A STILL STRING. grid_3d_4x4x4
+		## spends 530 ms in _ready() and no budget can subdivide one _ready().
+		if known > LIVE_HEAVY_MS and _live_still < LIVE_DEBOUNCE:
+			continue
+		## and a known-dear body starts on a FRESH frame rather than blowing a
+		## frame that has already spent most of its budget
+		if known > 0.0 and made > 0 and spent + known > LIVE_BUDGET_MS:
+			break
+		if _live_mem_kb + int(led.get("mem_kb", 0)) > LIVE_MEM_CAP_KB:
+			continue
+		var t0: int = Time.get_ticks_usec()
+		var res: int = _build_body(idx3)
+		spent += float(Time.get_ticks_usec() - t0) / 1000.0
+		if res == BUILD_MADE:
+			made += 1
+	## PREFETCH ONLY ON AN IDLE FRAME. Measured, threaded loading is worth ~20% of
+	## main-thread cost and not the 5.5x, because instantiate() and add_child()
+	## cannot leave the main thread. It is worth doing because it is free here, and
+	## because it turns a cold 268 ms load (interactive_point_origin_force) into a
+	## warm 0 ms one before the bead ever arrives. Do not build the design on it.
+	if made == 0 and _live_still >= LIVE_DEBOUNCE:
+		_prefetch_ahead(hi if dir > 0 else lo, dir)
+	_sync_focus_body()
+	## THE CENSUS GOES STALE OTHERWISE, and a stale census is worse than none: the
+	## first render of this pass showed a HUD reading "1 of 10 standing · 6
+	## settling" over a frame with nine bodies on it, because _update_hud only ever
+	## ran when the FOCUS bead changed or the FOCUS body fitted. Refresh on the
+	## count, which changes a handful of times a second and never per frame.
+	var sig: int = _bodies.size() * 1000 + live_fitted_in_window() * 10 + (1 if _live_on else 0)
+	if sig != _live_sig:
+		_live_sig = sig
+		_update_hud()
 
 
-func _spawn_live(i: int) -> void:
+## THE ORDER THE WINDOW ARRIVES IN: the visible ten first, nearest the focus
+## outward, then the margin. So the bead the eye is already on is the first real
+## body to appear, and the ends of the string fill in behind it.
+func _build_order(wf: int, lo: int, hi: int) -> Array:
+	var f: int = clampi(_focus_i(), wf, wf + WINDOW - 1)
+	var vhi: int = mini(_order.size() - 1, wf + WINDOW - 1)
+	var out: Array = []
+	var span: int = WINDOW + LIVE_KEEP + LIVE_AHEAD + 2
+	for d in span:
+		for side in [f - d, f + d]:
+			var i: int = int(side)
+			if i >= wf and i <= vhi and not out.has(i):
+				out.append(i)
+	for d2 in span:
+		for side2 in [f - d2, f + d2]:
+			var j: int = int(side2)
+			if j >= lo and j <= hi and j >= 0 and j < _order.size() and not out.has(j):
+				out.append(j)
+	return out
+
+
+## ONE BODY, AND EVERY STEP OF IT IS THE PATH THE SINGLE-FOCUS VERSION ALREADY
+## WALKED — same refusal, same meta stamp before add_child, same params, same
+## suppressor, same inerting, same tile hand-off, in the same order. Only the
+## bookkeeping changed, plus ONE new line: _cam.make_current().
+func _build_body(i: int) -> int:
 	if i < 0 or i >= _order.size():
-		return
-	_live_index = i
-	_live_fitted = false
+		return BUILD_REFUSED
 	var row: Dictionary = _order[i]
 	var token := str(row.get("lookup", ""))
 	var why := _live_refusal(row)
 	if why != "":
-		_live_note = "%s: no live body — %s" % [token, why]
+		_remember_refusal(token, why)
 		_set_tile_hidden(i, false)
-		return
+		## AND SAY IT ON THE FOCUS LINE. Without this the note kept naming the last
+		## bead that DID build: the GPU window at 664 refuses ten of ten and the HUD
+		## read "diamondtoruscollection: live · 4.30 x 1.35 x 4.40 m", which is a
+		## true sentence about a bead nine notches back and a false one about
+		## everything on screen.
+		if i == _focus_i():
+			_live_note = "%s: no live body — %s" % [token, why]
+		return BUILD_REFUSED
+	var led0: Dictionary = _body_cost.get(token, {}) as Dictionary
+	## MEASURED, NOT DECLARED. ~6% of tokens build nothing standalone, and
+	## dna.fixture does not predict which (4 of 5 sampled declarers built a real
+	## body). So the memo is written by _fit_body off the box it actually measured,
+	## and it is what stops a body that builds nothing being rebuilt every frame.
+	if bool(led0.get("empty", false)):
+		return BUILD_REFUSED
 	var scene := str(row.get("scene", ""))
-	if not ResourceLoader.exists(scene):
-		_live_note = "%s: scene not on disk" % token
-		return
-	var ps: PackedScene = load(scene) as PackedScene
+	if _prefetch.has(scene) \
+			and ResourceLoader.load_threaded_get_status(scene) == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+		return BUILD_LATER          # it arrives on a later frame; the tile stands
+	var mount: Node3D = _mount_for(i)
+	if mount == null:
+		# the bead itself has not been built yet — not a refusal, and it must not
+		# be badged as one
+		return BUILD_LATER
+
+	var t0: int = Time.get_ticks_usec()
+	var mem0: int = int(Performance.get_monitor(Performance.MEMORY_STATIC))
+	var ps: PackedScene = _packed(scene)
 	if ps == null:
-		_live_note = "%s: not a PackedScene" % token
-		return
+		_remember_refusal(token, "scene is not on disk, or is not a PackedScene")
+		_set_tile_hidden(i, false)
+		return BUILD_REFUSED
 	var n: Node = ps.instantiate()
 	# `instantiate() as Node3D` returns NULL for a Control/Node/Node2D root and
 	# is not an error. Three of the 810 do this, all map_ready true.
 	if not (n is Node3D):
 		if n != null:
 			n.free()
-		_live_note = "%s: root is %s, not a 3D node" % [token, str(row.get("root", "?"))]
-		return
+		_remember_refusal(token,
+			"root is %s, not a 3D node" % str(row.get("root", "?")))
+		_set_tile_hidden(i, false)
+		return BUILD_REFUSED
 	var n3: Node3D = n as Node3D
 
 	# THE STAMP, AND IT MUST PRECEDE add_child. GridInteractablesComponent sets
@@ -1350,20 +1764,48 @@ func _spawn_live(i: int) -> void:
 	if n3.has_method("apply_grid_config"):
 		n3.call("apply_grid_config", params)
 
-	var mount: Node3D = _mount_for(i)
-	if mount == null:
-		n3.free()
-		return
+	## HIDDEN UNTIL IT IS SCALED, AND THE TILE HOLDS THE BEAD MEANWHILE. A body is
+	## built at its own scale and only normalised into the 1.30 m bead volume
+	## LIVE_SETTLE later, and the corpus spans 0.40 m to 220.00 m: shown on arrival,
+	## a noiselayers is a 220 m wall across the whole frame for a third of a second,
+	## ten times over. So the tile stays up until _fit_body has measured the box,
+	## which also means the string never has a hole in it while a body settles.
+	## visible = false is right here and layers = 0 is not — hiding the WHOLE
+	## subtree is precisely what is wanted.
+	n3.visible = false
 	mount.add_child(n3)          # _ready() fires HERE, into a settled tree
 	_suppress_chrome(n3)
 	_make_inert(n3)
 	# The grid calls the suppressor immediately AND deferred (:1295-1296),
 	# because artifacts that build their CanvasLayer late escape a single call.
 	call_deferred("_suppress_chrome", n3)
-	_live_node = n3
-	_live_born = Time.get_ticks_msec()
-	_live_note = "%s: live" % token
-	_set_tile_hidden(i, true)
+	## THE CAMERA STEAL — THE ONE GENUINELY NEW FAILURE MODE TEN-AT-A-TIME BRINGS,
+	## and it looks like the scene crashed. Counted over the actual .tscn files:
+	## 234 of the spine's 760 distinct scenes carry a Camera3D (31%) and 309 of the
+	## museum's 1,200 (26%). _suppress_chrome sets current = false on each, but a
+	## viewport left with no current camera picks SOME camera, not necessarily
+	## ours. With one body a steal was a one-in-three chance; with ten arriving per
+	## window it is a certainty. One line.
+	if _cam != null:
+		_cam.make_current()
+
+	var ms: float = float(Time.get_ticks_usec() - t0) / 1000.0
+	var mem_kb: int = maxi(0,
+		int(Performance.get_monitor(Performance.MEMORY_STATIC)) - mem0) / 1024
+	_bodies[i] = {
+		"node": n3, "born_ms": Time.get_ticks_msec(), "fitted": false,
+		"rescued": false, "settle": LIVE_SETTLE, "token": token,
+		"mem_kb": mem_kb, "ms": ms, "scale": 0.0, "max_m": 0.0,
+	}
+	_live_mem_kb += mem_kb
+	var led: Dictionary = _body_cost.get(token, {}) as Dictionary
+	led["ms"] = ms
+	led["mem_kb"] = mem_kb
+	led.erase("refused")
+	_body_cost[token] = led
+	if i == _focus_i():
+		_live_note = "%s: building, %.0f ms so far" % [token, ms]
+	return BUILD_MADE
 
 
 ## The refusal list, and why each entry is on it.
@@ -1373,13 +1815,24 @@ func _live_refusal(row: Dictionary) -> String:
 	if not bool(row.get("alive", true)):
 		return str(row.get("dead", "the museum will not deal it"))
 	var scene := str(row.get("scene", "")).to_lower()
-	# The fifteen GPU/compute tokens. DERIVED from the path rather than
-	# transcribed as a token list: all fifteen live under
-	# algorithms/proceduralgeneration/isosurfaces/, and TerrainGeneratorBase
-	# submits a compute dispatch that only syncs ~12 frames later. Its release()
-	# is self-hooked on NOTIFICATION_PREDELETE, so a free is survivable — but it
-	# BLOCKS on thread.wait_to_finish() and rendering_device.sync(), and nine of
-	# them sit inside one ten-wide window at order index 656.
+	## THE GPU/COMPUTE TOKENS, AND THERE ARE TWENTY-FIVE, NOT FIFTEEN. Measured
+	## by running this same path predicate over the order: 25 matches on the spine,
+	## and 20 of them are CONTIGUOUS at indices 654-673 (voxel_noise_demo..mc_base)
+	## with five more at 675-678 and 805. So the worst ten-wide window there holds
+	## TEN of ten, not nine — the refusal is more load-bearing than the note it
+	## replaces claimed, not less.
+	##   DERIVED from the path rather than transcribed as a token list: all of them
+	## live under algorithms/proceduralgeneration/isosurfaces/, and
+	## TerrainGeneratorBase submits a compute dispatch that only syncs ~12 frames
+	## later. Its release() is self-hooked on NOTIFICATION_PREDELETE, so a free is
+	## survivable — but it BLOCKS on thread.wait_to_finish() and
+	## rendering_device.sync().
+	##   AND NOBODY HAS MEASURED WHAT THEY REALLY COST. Headless Godot has no
+	## RenderingDevice at all (measured: get_rendering_device() == null, adapter
+	## ""), so mc_cave "returned _ready in 32.9 ms" having dispatched nothing. That
+	## number is a floor, not a cost. Lifting this refusal needs a run with a real
+	## Vulkan window, and a contiguous run of 20 means the window there is
+	## all-or-nothing.
 	if scene.contains("isosurfaces") or scene.contains("marchingcube") or scene.contains("marchingcave"):
 		return "GPU compute (marching cubes) — building and freeing it on a scroll is the documented segfault class"
 	# boid_flocking is the documented headless-hang artifact; it is also a
@@ -1390,57 +1843,216 @@ func _live_refusal(row: Dictionary) -> String:
 	return ""
 
 
-func _fit_live() -> void:
-	_live_fitted = true
-	var n3: Node3D = _node_or_null(_live_node)
-	if n3 == null:
+## Written once per token, not once per frame, and read by the HUD census and by
+## the detail panel. A refusal is a fact about the artifact, so it is keyed by
+## token and survives the curator scrolling away and back.
+func _remember_refusal(token: String, why: String) -> void:
+	var led: Dictionary = _body_cost.get(token, {}) as Dictionary
+	led["refused"] = why
+	_body_cost[token] = led
+
+
+## NORMALISE INTO THE BEAD VOLUME, ON THE MEASURED BOX AND NEVER ON THE REGISTRY.
+## Measured over 50 tokens: size_m is null on 38 of the 810 spine rows and 45 of
+## the museum's, and where it is present it disagrees with the merged AABB by up
+## to 167x in BOTH directions — interactive_point_origin_force declares 0.06 m and
+## measures 10.00 m; three_body_problem declares 258.55 m and measures 15.62 m.
+## _local_aabb is the instrument, and it is already root-inclusive.
+func _fit_body(i: int) -> void:
+	if not _bodies.has(i):
 		return
+	var b: Dictionary = _bodies[i]
+	b["fitted"] = true
+	_bodies[i] = b
+	var n3: Node3D = _node_or_null(b.get("node"))
+	if n3 == null:
+		_bodies.erase(i)
+		_live_mem_kb = maxi(0, _live_mem_kb - int(b.get("mem_kb", 0)))
+		_set_tile_hidden(i, false)
+		return
+	var token := str(b.get("token", ""))
 	var box: AABB = _local_aabb(n3)
 	if box.size.length() < 0.001:
-		# 143 of the 810 declare dna.fixture: _ready() is gated and builds
-		# nothing standalone. The sweep's rescue (capture_config_sweep.gd:404) is
-		# to hand the params in again and settle once more.
-		if n3.has_method("apply_grid_config"):
-			n3.call("apply_grid_config", _params_for(str(_order[_live_index].get("lookup", ""))))
-			_live_fitted = false
-			_live_born = Time.get_ticks_msec()
+		## THE SWEEP'S RESCUE (capture_config_sweep.gd:404): hand the params in
+		## again and settle once more, this time for FIT_RETRY_S. Note what drives
+		## it — the measured box, not dna.fixture. The old code only tried the
+		## rescue on artifacts that declare a fixture, and 146 declare one while
+		## only 3 of 50 actually build nothing.
+		if n3.has_method("apply_grid_config") and not bool(b.get("rescued", false)):
+			n3.call("apply_grid_config", _params_for(token))
+			b["rescued"] = true
+			b["fitted"] = false
+			b["born_ms"] = Time.get_ticks_msec()
+			b["settle"] = FIT_RETRY_S
+			_bodies[i] = b
 			return
-		_live_note += " — builds nothing standalone (dna.fixture)"
-		_set_tile_hidden(_live_index, false)
+		var dead: Dictionary = _body_cost.get(token, {}) as Dictionary
+		dead["empty"] = true
+		dead["refused"] = "builds nothing standalone — measured an empty box twice"
+		_body_cost[token] = dead
+		_release_body(i)
+		if i == _focus_i():
+			_live_note = "%s: builds nothing standalone — the capture tile stands" % token
+			_update_hud()
 		return
+
 	var m: float = maxf(box.size.x, maxf(box.size.y, box.size.z))
-	# NORMALISE INTO THE BEAD VOLUME. registry max_dimension_m runs 0.00 to
-	# 300.00 m across the corpus — a 175x spread — so the beads cannot share one
-	# scale. Cap the UP-scale: a 4 cm token blown to 1.3 m is a lie, and the real
-	# metres are on the label where the size information belongs.
+	## PIN THE SIZE PER TOKEN, because two generative tokens measure a different
+	## box on every build: rhizomatic_maze_space 144.2 m then 160.2 m,
+	## random_transformations_stochastic 17.5 / 18.5 / 20.3 m — unseeded randf.
+	## Without the pin their bead changes size every time the curator scrolls back
+	## to it, and a necklace that breathes reads as a bug. The CENTRING still uses
+	## the box actually measured, so the body is never off its own bead.
+	var led: Dictionary = _body_cost.get(token, {}) as Dictionary
+	if led.has("max_m") and float(led["max_m"]) > 0.0:
+		m = float(led["max_m"])
+	else:
+		led["max_m"] = m
+		_body_cost[token] = led
+	## The UP-scale is capped and the DOWN-scale is not. A 220 m noiselayers lands
+	## at s = 0.0059; clamping that would push it through both neighbours.
 	var s: float = minf(BEAD_M / maxf(m, 0.001), MAX_UPSCALE)
 	n3.scale = Vector3.ONE * s
-	n3.position = Vector3(-box.position.x * s - box.size.x * 0.5 * s, -box.position.y * s, 0.0)
-	_live_note = "%s: live · %.2f x %.2f x %.2f m · shown at %.2fx" % [
-		str(_order[_live_index].get("lookup", "")), box.size.x, box.size.y, box.size.z, s]
-	_update_hud()
+	## CENTRED IN Z AS WELL AS X. With one body on the string this was invisible;
+	## with ten, a body whose origin sits at the back of its own box stands in
+	## front of its neighbours' captions.
+	n3.position = Vector3(
+		-box.position.x * s - box.size.x * 0.5 * s,
+		-box.position.y * s,
+		-box.position.z * s - box.size.z * 0.5 * s)
+	b["scale"] = s
+	b["max_m"] = m
+	_bodies[i] = b
+	## NOW it may be seen, and only now does the photograph stand down.
+	n3.visible = true
+	_set_tile_hidden(i, true)
+	_style_bead(i)
+	if i == _focus_i():
+		_live_note = "%s: live · %.2f x %.2f x %.2f m · shown at %.3fx · %.0f ms" % [
+			token, box.size.x, box.size.y, box.size.z, s, float(b.get("ms", 0.0))]
+		_update_hud()
 
 
-func _free_live() -> void:
-	var n3: Node3D = _node_or_null(_live_node)
-	_live_node = null
-	if _live_index >= 0:
-		_set_tile_hidden(_live_index, false)
-	if n3 == null:
+## ONE BODY DOWN, AND THE SUBTREE WALK IS THE ONLY CORRECT ONE IN THE REPO.
+## release() IS NOT ON THE ROOT: in 13 of 13 GPU tokens the TerrainGenerator*
+## script sits on a child (`Terrain`, `GyroidShape`), so the repo's own guard —
+## probe_artifact_elements.gd:224, `if artifact.has_method("release")` on the root
+## — is false in every case it exists to cover. Measured cost of the walk:
+## 0.005-1.56 ms, and it finds the hit on exactly the tokens that have one. Flush
+## on a frame we control, rather than inside the engine's teardown.
+func _release_body(i: int) -> void:
+	if not _bodies.has(i):
 		return
-	# release() IS NOT ON THE ROOT. In 13 of 13 GPU tokens the TerrainGenerator*
-	# script sits on a child (`Terrain`, `GyroidShape`), so the repo's own guard —
-	# probe_artifact_elements.gd:224, `if artifact.has_method("release")` on the
-	# root — is false in every case it exists to cover. Walk the subtree and
-	# flush on a frame we control, rather than inside the engine's teardown.
-	var stack: Array = [n3]
-	while not stack.is_empty():
-		var c: Node = stack.pop_back()
-		for g in c.get_children():
-			stack.append(g)
-		if c.has_method("release"):
-			c.call("release")
-	n3.queue_free()
+	var b: Dictionary = _bodies[i]
+	_bodies.erase(i)
+	_live_mem_kb = maxi(0, _live_mem_kb - int(b.get("mem_kb", 0)))
+	_set_tile_hidden(i, false)
+	if _live_index == i:
+		_live_index = -1
+	var n3: Node3D = _node_or_null(b.get("node"))
+	if n3 != null:
+		var stack: Array = [n3]
+		while not stack.is_empty():
+			var c: Node = stack.pop_back()
+			for g in c.get_children():
+				stack.append(g)
+			if c.has_method("release"):
+				c.call("release")
+		n3.queue_free()
+	if _beads.has(i):
+		_style_bead(i)
+
+
+func _release_all_bodies() -> void:
+	for k in _bodies.keys():
+		_release_body(int(k))
+	_bodies.clear()
+	_live_mem_kb = 0
+	_live_index = -1
+
+
+## _live_index means THE FOCUS BODY and nothing else. live_mounted(),
+## live_scale() and live_note() are the shape three probes already read, and
+## turning two scalars into a set must not change what they answer.
+func _sync_focus_body() -> void:
+	var f: int = _focus_i()
+	_live_index = f if _bodies.has(f) else -1
+
+
+## Two scenes past the band, in the direction of travel, on an idle frame only.
+func _prefetch_ahead(edge: int, dir: int) -> void:
+	var asked: int = 0
+	var steps: int = 0
+	var i: int = edge + dir
+	while asked < 2 and steps < 24 and i >= 0 and i < _order.size():
+		var row: Dictionary = _order[i]
+		i += dir
+		steps += 1
+		if _live_refusal(row) != "":
+			continue
+		var path := str(row.get("scene", ""))
+		if path == "" or _scene_cache.has(path) or _prefetch.has(path):
+			continue
+		if not ResourceLoader.exists(path):
+			continue
+		if ResourceLoader.load_threaded_request(path) == OK:
+			_prefetch[path] = true
+			asked += 1
+
+
+## THE LABEL CARRIES THE TRUTH, AND THE TRUTH IS THE MEASURED BOX. When a body
+## actually stands on a bead, the bead stops quoting the registry (null on 38
+## spine rows, wrong by up to 167x where present) and says what it measured. When
+## the body had to be shrunk to fit the 1.30 m volume it says by how much: a 220 m
+## noiselayers reading "220.0 m · 1:169" is the honest thing to say about a 1.3 m
+## smudge. Nothing above 220 m is reachable — all four 280-300 m rows are mc_* and
+## GPU-refused.
+func _body_size_text(i: int) -> String:
+	if not _bodies.has(i):
+		return ""
+	var b: Dictionary = _bodies[i]
+	if not bool(b.get("fitted", false)):
+		return ""
+	var m: float = float(b.get("max_m", 0.0))
+	var s: float = float(b.get("scale", 0.0))
+	if m <= 0.0 or s <= 0.0:
+		return ""
+	if s < 0.10:
+		return "%.1f m · 1:%d" % [m, roundi(1.0 / maxf(s, 0.0001))]
+	return "%.2f m live" % m
+
+
+## WHAT THE STRING IS DOING, IN ONE LINE, so a DEFERRAL can be told from a
+## REFUSAL. Without it a bead showing its tile is ambiguous: it may be a GPU token
+## that will never mount, or a heavy _ready() that lands in 200 ms, and the
+## curator has no way to tell which.
+func _live_census_line() -> String:
+	if not _live_on:
+		return "TILES — every bead is its capture photograph.   L  live bodies"
+	var wf: int = _win_first()
+	var whi: int = mini(_order.size(), wf + WINDOW)
+	var standing: int = 0
+	var settling: int = 0
+	var refused: int = 0
+	for j in range(wf, whi):
+		var row: Dictionary = _order[j]
+		var token := str(row.get("lookup", ""))
+		var led: Dictionary = _body_cost.get(token, {}) as Dictionary
+		if _bodies.has(j):
+			if bool((_bodies[j] as Dictionary).get("fitted", false)):
+				standing += 1
+			else:
+				settling += 1
+		elif _live_refusal(row) != "" or bool(led.get("empty", false)):
+			refused += 1
+	var n: int = maxi(1, whi - wf)
+	var waiting: int = maxi(0, n - standing - settling - refused)
+	return ("BODIES  %d of %d standing · %d settling · %d waiting · %d tile (refused)"
+		+ "  ·  %.1f MB live  ·  %d scenes held    L  tiles") % [
+		standing, n, settling, waiting, refused,
+		float(_live_mem_kb) / 1024.0, _scene_cache.size()]
+
+
 
 
 func _set_tile_hidden(i: int, hidden: bool) -> void:
@@ -1759,14 +2371,16 @@ func move_focus(step: int) -> bool:
 
 func _after_edit(focus_i: int) -> void:
 	_reindex()
+	## THE BODIES GO FIRST. They were freed AFTER their bead anchors here, which
+	## orphaned every one of them past its release() walk — the same fault
+	## _refresh_window carried. An edit reindexes the whole order, so every body
+	## on the string is now about a different artifact anyway.
+	_release_all_bodies()
 	for k in _beads.keys():
 		var node: Node3D = _node_or_null((_beads[k] as Dictionary).get("anchor"))
 		if node != null:
 			node.queue_free()
 	_beads.clear()
-	if _live_node != null:
-		_free_live()
-	_live_index = -1
 	_want = float(clampi(focus_i, 0, maxi(0, _order.size() - 1)))
 	_pos = _want
 	_refresh_window(true)
@@ -2136,9 +2750,15 @@ func _build_ui() -> void:
 func _update_help() -> void:
 	if _help == null:
 		return
+	## THE MODE IS NAMED, NOT IMPLIED. A toggle whose help line says only "L live
+	## body" leaves the curator to work out which of the two states they are in by
+	## staring at a bead, and a bead mid-build looks exactly like a bead that
+	## refused.
+	var mode := ("BODIES are live — press L to fall back to the capture tiles"
+		if _live_on else "TILES are showing — press L for the actual scenes")
 	var common := ("wheel / LEFT RIGHT  scroll        PgUp PgDn  ten        Home End  the ends\n"
-		+ "click a bead to focus it        L  live body on the focus        C  camera in"
-		+ "        H  help        F10  menu\n")
+		+ "click a bead to focus it        C  camera in        H  help        F10  menu\n"
+		+ "L  " + mode + "\n")
 	if _is_museum:
 		# the full reason lives in R and in every refusal notice; repeating the
 		# whole sentence here was three wrapped lines of standing text
@@ -2396,6 +3016,10 @@ func _update_hud() -> void:
 		if _pending > 0 or (_ops_rev_file >= 0 and _ops_rev_file != _ops_rev_derived):
 			lines.append("SAVED — run `%s` to derive it" % APPLY_CMD)
 			lines.append(str(_meta.get("plan_note", "")))
+	## THE CENSUS BEFORE THE NOTE. A bead showing its tile is ambiguous without
+	## it: the curator cannot tell a GPU token that will NEVER mount from a heavy
+	## _ready() that lands in 200 ms.
+	lines.append(_live_census_line())
 	if _live_note != "":
 		lines.append(_live_note)
 	_hud.text = "\n".join(PackedStringArray(lines))
@@ -2861,15 +3485,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		KEY_PERIOD: move_focus(1)
 		KEY_U: undo_last()
 		KEY_L:
-			_live_on = not _live_on
-			if not _live_on:
-				_free_live()
-				_live_index = -1
-				_live_note = "live body off"
-			else:
-				_live_note = "live body on — building at the focus"
-				_live_still = LIVE_DEBOUNCE
-			_update_hud()
+			# the same function the probe calls, so there is one path and not two
+			set_live(not _live_on)
+			_update_help()
 		KEY_C:
 			_cam_near = not _cam_near
 			_apply_camera()
@@ -3038,7 +3656,10 @@ static func _chapter_color(seq: String) -> Color:
 	return Color.from_hsv(float(h % 360) / 360.0, 0.34, 0.56)
 
 
-func _slab(pos: Vector3, size: Vector3, color: Color) -> void:
+## `unshaded` pins a surface to its own albedo so no light in the scene can wash
+## it. The backdrop needs it; the floor must NOT have it, because the floor is
+## where the key light's shadow lands.
+func _slab(pos: Vector3, size: Vector3, color: Color, unshaded: bool = false) -> void:
 	var m := MeshInstance3D.new()
 	var bm := BoxMesh.new()
 	bm.size = size
@@ -3047,6 +3668,8 @@ func _slab(pos: Vector3, size: Vector3, color: Color) -> void:
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = color
 	mat.roughness = 0.9
+	if unshaded:
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	m.material_override = mat
 	add_child(m)
 
@@ -3243,14 +3866,19 @@ func index_of(lookup: String) -> int:
 	return -1
 
 
+## THE WHOLE STRING, not the focus bead. Off means every bead falls back to its
+## capture photograph, which is the escape hatch: if a body is slow or ugly, one
+## key gets the old necklace back.
 func set_live(on: bool) -> void:
 	_live_on = on
 	if not on:
-		_free_live()
-		_live_index = -1
+		_release_all_bodies()
+		_live_note = "tiles — every bead is its capture photograph"
 	else:
 		_live_still = LIVE_DEBOUNCE     # build at the next tick, not in three frames
+		_live_note = "bodies — building the window"
 	_update_hud()
+	_update_help()
 
 
 func live_refusal_at(i: int) -> String:
@@ -3262,13 +3890,108 @@ func live_refusal_at(i: int) -> String:
 	return _live_refusal(_order[i])
 
 
+## THE FOCUS BODY. Unchanged in shape on purpose: probe_necklace_live.gd,
+## probe_necklace.gd and probe_necklace_audit.gd all poll these three, and turning
+## two scalars into a set must not change what they answer.
 func live_mounted() -> bool:
-	return _node_or_null(_live_node) != null
+	return _live_index >= 0 and _bodies.has(_live_index) \
+		and _node_or_null((_bodies[_live_index] as Dictionary).get("node")) != null
 
 
 func live_scale() -> float:
-	var n3: Node3D = _node_or_null(_live_node)
+	if not live_mounted():
+		return 0.0
+	var n3: Node3D = _node_or_null((_bodies[_live_index] as Dictionary).get("node"))
 	return 0.0 if n3 == null else n3.scale.x
+
+
+## THE WHOLE SET, which is what "ten at a time" actually needs checking. A probe
+## that only ever asks about the focus cannot tell one body from ten.
+func live_body_count() -> int:
+	return _bodies.size()
+
+
+## Standing bodies among the VISIBLE ten, which is the number on screen.
+func live_bodies_in_window() -> int:
+	var wf: int = _win_first()
+	var n: int = 0
+	for k in _bodies.keys():
+		var i: int = int(k)
+		if i >= wf and i < wf + WINDOW:
+			n += 1
+	return n
+
+
+func live_fitted_in_window() -> int:
+	var wf: int = _win_first()
+	var n: int = 0
+	for k in _bodies.keys():
+		var i: int = int(k)
+		if i >= wf and i < wf + WINDOW and bool((_bodies[i] as Dictionary).get("fitted", false)):
+			n += 1
+	return n
+
+
+## [index, token, scale, max_m, ms, mem_kb] per standing body, window-ordered.
+func live_body_rows() -> Array:
+	var keys: Array = _bodies.keys()
+	keys.sort()
+	var out: Array = []
+	for k in keys:
+		var b: Dictionary = _bodies[int(k)]
+		out.append({
+			"i": int(k), "token": str(b.get("token", "")),
+			"scale": float(b.get("scale", 0.0)), "max_m": float(b.get("max_m", 0.0)),
+			"ms": float(b.get("ms", 0.0)), "mem_kb": int(b.get("mem_kb", 0)),
+			"fitted": bool(b.get("fitted", false)),
+		})
+	return out
+
+
+## BEADS IN THE WINDOW THAT ARE NEITHER STANDING NOR PERMANENTLY REFUSED — the
+## number a probe must wait on, and the reason the first version of the shot probe
+## photographed empty strings. A frame count is the wrong instrument: with vsync
+## off a frame is 1.5 ms, so seventy of them is 0.1 s and LIVE_SETTLE alone is
+## 0.35 s. ZERO here means the window is DONE, whatever mix of bodies and tiles it
+## settled into.
+func live_pending_in_window() -> int:
+	if not _live_on:
+		return 0
+	var wf: int = _win_first()
+	var whi: int = mini(_order.size(), wf + WINDOW)
+	var pending: int = 0
+	for j in range(wf, whi):
+		var row: Dictionary = _order[j]
+		var led: Dictionary = _body_cost.get(str(row.get("lookup", "")), {}) as Dictionary
+		if _bodies.has(j):
+			if not bool((_bodies[j] as Dictionary).get("fitted", false)):
+				pending += 1
+		elif _live_refusal(row) == "" and not bool(led.get("empty", false)):
+			pending += 1
+	return pending
+
+
+## How many times something else in the engine put the weather back. Zero means
+## the absent WorldEnvironment did the job on its own; anything above zero means
+## the belt is load-bearing and the comment in _build_stage needs revisiting.
+func air_reasserts() -> int:
+	return _air_reasserts
+
+
+func live_is_on() -> bool:
+	return _live_on
+
+
+func live_mem_kb() -> int:
+	return _live_mem_kb
+
+
+func scene_cache_size() -> int:
+	return _scene_cache.size()
+
+
+func live_census() -> String:
+	return _live_census_line()
 
 
 func live_note() -> String:

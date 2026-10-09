@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/endless_museum.tscn" id="1"]
+[ext_resource type="Script" path="res://commons/scenes/force_trials_museum.gd" id="2"]
+
+[node name="EndlessMuseum" instance=ExtResource("1")]
+script = ExtResource("2")
+start_chapter = "forces_review"
+start_map = "Force_Review_01_Mass"
+plan_file = "res://commons/artifacts/force_trials/review_plan.json"

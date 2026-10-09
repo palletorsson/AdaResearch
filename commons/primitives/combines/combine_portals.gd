@@ -91,10 +91,15 @@ const REFINE_CAP: int = 96
 ## last row, and keeps the lattice wider than it is tall so it reads as a chart.
 const TAX_COLS := 5
 
+@export var discovery: bool = false
+var selected_portal: int = 0
+var _portals: Array[MeshInstance3D] = []
 var _base_portal: MeshInstance3D
 var _base_mesh: TorusMesh
 
 func _ready() -> void:
+	if has_meta("config_discovery"):
+		discovery = str(get_meta("config_discovery")) in ["1","true"]
 	var t: String = str(taxonomy).strip_edges().to_lower()
 	taxonomy = t if TAXONOMIES.has(t) else "ladder"
 	var r: String = str(refinement).strip_edges().to_lower()
@@ -147,12 +152,18 @@ func spawn_portals() -> void:
 		if owner:
 			portal_instance.owner = owner
 		add_child(portal_instance)
+		_portals.append(portal_instance)
+	if discovery:
+		_setup_discovery()
+		_update_selection()
 
 func _clear_existing_portals() -> void:
+	_portals.clear()
 	for child in get_children():
 		if child == _base_portal:
 			continue
 		if child.name.begins_with("Portal_"):
+			remove_child(child)
 			child.queue_free()
 
 
@@ -162,6 +173,17 @@ func _clear_existing_portals() -> void:
 ## map is the first configuration it has ever been able to hear.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var dirty: bool = false
+	# Map-local spacing fits the complete sequence without changing its meshes.
+	if config_data.has("portal_spacing"):
+		var wanted := clampf(float(config_data["portal_spacing"]), 1.1, 10.0)
+		if not is_equal_approx(wanted, portal_spacing):
+			portal_spacing = wanted
+			dirty = true
+	if config_data.has("discovery"):
+		discovery = str(config_data["discovery"]) in ["1","true"]
+		if discovery and not _portals.is_empty():
+			_setup_discovery()
+			_update_selection()
 
 	if config_data.has("taxonomy"):
 		var want: String = str(config_data["taxonomy"]).strip_edges().to_lower()
@@ -255,3 +277,44 @@ func _refined_wires(index: int, count: int, start_rings: int, start_segments: in
 func _index_hash(n: int) -> float:
 	var s: float = sin(float(n) * 12.9898 + 78.233) * 43758.5453
 	return s - floor(s)
+
+func _setup_discovery() -> void:
+	if has_node("ExperimentPanel"): return
+	var panel := Node3D.new()
+	panel.name = "ExperimentPanel"
+	panel.set_script(preload("res://commons/ui/limit_experiment_panel.gd"))
+	panel.position = Vector3(2.1,1.2,-1.0)
+	panel.rotation.y = PI
+	add_child(panel)
+
+func select_previous() -> void:
+	selected_portal = maxi(0,selected_portal-1)
+	_update_selection()
+
+func select_next() -> void:
+	selected_portal = mini(_portals.size()-1,selected_portal+1)
+	_update_selection()
+
+func reverse_discovery_order() -> void:
+	refinement = "linear" if refinement == "inverted" else "inverted"
+	spawn_portals()
+
+func _update_selection() -> void:
+	selected_portal = clampi(selected_portal,0,maxi(0,_portals.size()-1))
+	for i in _portals.size():
+		var material := _base_portal.material_override.duplicate() as StandardMaterial3D
+		if i == selected_portal:
+			material.albedo_color = Color(1.0,0.68,0.15,0.95)
+			material.emission = Color(0.45,0.22,0.04)
+		_portals[i].material_override = material
+	if has_node("ExperimentPanel"):
+		get_node("ExperimentPanel").update_readout()
+
+func discovery_snapshot() -> Dictionary:
+	if _portals.is_empty(): return {}
+	var mesh := _portals[selected_portal].mesh as TorusMesh
+	var arrays := mesh.surface_get_arrays(0)
+	var perimeter: float = 2.0*mesh.rings*sin(PI/mesh.rings)
+	return {"index":selected_portal+1,"count":_portals.size(),"rings":mesh.rings,
+		"segments":mesh.ring_segments,"triangles":arrays[Mesh.ARRAY_INDEX].size()/3,
+		"perimeter":perimeter,"gap":TAU-perimeter,"rule":refinement}

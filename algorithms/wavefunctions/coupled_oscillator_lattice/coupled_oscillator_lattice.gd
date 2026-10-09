@@ -1,10 +1,10 @@
 ﻿# @identity
 # essence: a 2D grid of mass-spring oscillators where each cell nudges its neighbors via configurable coupling — independent at coupling=0, lattice-locked at high values, with central excitation driving the spectrum
 # desire: to make the player feel that "wave" is not a thing but a relationship — when one oscillator moves, the lattice answers, and standing modes are simply patterns of agreement
-# critical_parameter: coupling_strength — at 0 the grid is independent oscillators; at high values it locks into collective Chladni-like modes; the entire wave spectrum lives on this slider
-# triggers: _physics_process() integrates each cell with its neighbors using natural_frequency and damping_coefficient; excitation_amplitude × excitation_frequency drives the central pulse outward through coupling_range
+# critical_parameter: coupling_strength — at 0 the oscillators are independent; a positive value lets displacement differences between neighbours contribute force
+# triggers: _process() integrates a driven, damped lattice; the optional comparison uses fixed 1/120-second steps and resets the same state for each selected drive and coupling condition
 # emerges: standing waves on a grid — synchronization fronts, breathing modes, traveling pulses; the lattice becomes a tunable resonance instrument the player can walk into
-# needs: VR walking through the lattice [has]; live coupling-strength slider [missing]; mode-visualization toggle [missing]; apply_grid_config [missing]
+# needs: optional COUPLING / DRIVE / RESET push buttons [has]; fabric variants [has]; no claim that the default 2 Hz drive produces a large response at every cell
 # relationships: pairs with wave_interference, sine_space, and seismograph in wavefunctions as the medium that the others measure or excite; reappears in advancedlaboratory's Systems Theory Laboratory as the keystone artifact
 # truth: a wave is not a particle traveling — it is a pattern of agreement across coupled cells; the lattice IS the medium
 
@@ -68,6 +68,19 @@ extends Node3D
 ## displacement colouring. Every value reads the SAME oscillators[] array the physics
 ## writes; they disagree only about what a medium looks like.
 @export var fabric: String = "nodes"
+## Local lesson opt-in; other placements retain their original animation and fabric.
+@export var comparison: bool = false
+const COMPARISON_STEP := 1.0 / 120.0
+const COMPARISON_BUTTON = preload("res://commons/interactables/push_button.tscn")
+var buttons: Dictionary = {}
+var _comparison_labels: Dictionary = {}
+var _comparison_readout: Label3D
+var _comparison_panel: Node3D
+var _comparison_accumulator := 0.0
+var _comparison_strength := 1.5
+var _coupled := true
+var _neighbor_peak := 0.0
+var simulation_steps := 0
 const FABRICS: PackedStringArray = ["nodes", "bonds", "sheet", "boundary"]
 const BOND_THICKNESS := 0.035
 
@@ -92,9 +105,24 @@ func _ready() -> void:
 	# FABRIC, applied LAST so every Oscillator_N above keeps its index and its name.
 	# "nodes" falls through and adds nothing at all.
 	_apply_fabric()
+	if has_meta("config_comparison"):
+		comparison = str(get_meta("config_comparison")).to_lower() in ["true", "1"]
+	_comparison_strength = coupling_strength if coupling_strength > 0.0 else 1.5
+	_coupled = coupling_strength > 0.0
+	if comparison and not Engine.is_editor_hint():
+		_build_comparison()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
+		return
+	if comparison:
+		# Bound catch-up work after a stall; the readout reports simulated time.
+		_comparison_accumulator += minf(delta, 0.1)
+		while _comparison_accumulator >= COMPARISON_STEP:
+			comparison_step(COMPARISON_STEP)
+			_comparison_accumulator -= COMPARISON_STEP
+		_update_visualization()
+		_refresh_comparison()
 		return
 
 	time += delta
@@ -217,7 +245,7 @@ func _update_oscillators(delta: float) -> void:
 
 		forces[i] = total_force
 
-	# Integrate using velocity Verlet or simple Euler
+	# Symplectic Euler: update velocity, then position using that new velocity.
 	for i in range(oscillators.size()):
 		var osc = oscillators[i]
 		var force = forces[i]
@@ -307,7 +335,97 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("comparison"):
+		comparison = str(config.comparison).to_lower() in ["true", "1"]
+	# Tokens may arrive before tree entry: store them, then build once in _ready.
+	if is_node_ready() and comparison and not Engine.is_editor_hint():
+		_build_comparison()
+
+
+func _build_comparison() -> void:
+	if is_instance_valid(_comparison_panel):
+		return
+	_comparison_panel = Node3D.new()
+	_comparison_panel.name = "Comparison"
+	_comparison_panel.set_meta("em_local_instrument", true)
+	# The east edge stays outside the adjacent moving tile field in this hall.
+	_comparison_panel.position = Vector3(2.9, 0.0, 1.2)
+	_comparison_panel.rotation_degrees.y = 90
+	add_child(_comparison_panel)
+	_comparison_box(Vector3(0, .84, .15), Vector3(1.48, .12, .5))
+	for x in [-.64, .64]:
+		_comparison_box(Vector3(x, .40, .15), Vector3(.05, .8, .05))
+	_comparison_box(Vector3(0, 1.18, -.08), Vector3(1.48, .43, .035))
+	for i in 3:
+		var id: String = ["COUPLING", "DRIVE", "RESET"][i]
+		var button = COMPARISON_BUTTON.instantiate()
+		button.name = id
+		button.position = Vector3((i - 1) * .48, .915, .17)
+		button.rotation_degrees.x = 35
+		button.scale = Vector3.ONE * .8
+		button.play_press_sound = false
+		_comparison_panel.add_child(button)
+		button.pressed.connect(act.bind(id))
+		buttons[id] = button
+		var label := _comparison_label(id, Vector3((i - 1) * .48, .94, .34), 24)
+		label.rotation_degrees.x = -50
+		_comparison_labels[id] = label
+	_comparison_readout = _comparison_label("", Vector3(0, 1.18, -.055), 27)
+	_comparison_label("Change one relation. Follow one sphere.", Vector3(0, .80, .407), 25)
+	_refresh_comparison()
+
+
+func _comparison_box(at: Vector3, size: Vector3) -> void:
+	var mesh := MeshInstance3D.new()
+	var box := BoxMesh.new(); box.size = size; mesh.mesh = box
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color(.035, .05, .075); material.roughness = .7
+	mesh.material_override = material; mesh.position = at
+	_comparison_panel.add_child(mesh)
+
+
+func _comparison_label(text: String, at: Vector3, font: int) -> Label3D:
+	var label := Label3D.new()
+	label.text = text; label.position = at; label.font_size = font
+	label.pixel_size = .0012; label.outline_size = 2
+	label.modulate = Color(.75, .9, 1.0)
+	label.no_depth_test = false
+	_comparison_panel.add_child(label)
+	return label
+
+
+func act(id: String) -> void:
+	if not comparison or id not in ["COUPLING", "DRIVE", "RESET"]:
+		return
+	if id == "COUPLING":
+		_coupled = not _coupled
+		coupling_strength = _comparison_strength if _coupled else 0.0
+	elif id == "DRIVE":
+		excitation_mode = "Pulse" if excitation_mode == "Sine" else "Sine"
+	time = 0.0; pulse_triggered = false; simulation_steps = 0
+	_comparison_accumulator = 0.0; _neighbor_peak = 0.0
+	for osc in oscillators:
+		osc.displacement = 0.0; osc.velocity = 0.0; osc.acceleration = 0.0
+	_update_visualization()
+	_refresh_comparison()
+
+
+func comparison_step(delta: float) -> void:
+	time += delta
+	if excite_center: _apply_excitation(delta)
+	_update_oscillators(delta)
+	simulation_steps += 1
+	var cx := lattice_size.x / 2
+	var cy := lattice_size.y / 2
+	_neighbor_peak = maxf(_neighbor_peak, absf(get_displacement_at(cx, mini(cy + 1, lattice_size.y - 1))))
+
+
+func _refresh_comparison() -> void:
+	if not is_instance_valid(_comparison_readout): return
+	var mode := "COUPLED" if _coupled else "INDEPENDENT"
+	_comparison_labels.COUPLING.text = mode
+	_comparison_labels.DRIVE.text = excitation_mode.to_upper()
+	_comparison_readout.text = "%s / %s\nNeighbour peak %.1f mm | t %.2f s\nEach button restarts the same still lattice." % [mode, excitation_mode.to_upper(), _neighbor_peak * 1000.0, time]
 
 
 # ── FABRIC ───────────────────────────────────────────────────────────────────
@@ -356,19 +474,14 @@ func _veil_oscillators(keep_edge: bool) -> void:
 				(child as VisualInstance3D).layers = 0
 
 
-## BONDS — one rod per nearest-neighbour pair, in a single MultiMesh so 264 of them cost
-## one draw call. The pair list is the same adjacency the coupling force uses, restricted
-## to the four-neighbour cross; _get_neighbors() also returns diagonals at coupling_range
-## 1, and drawing those would claim a lattice the springs do not have.
+## BONDS — one rod per unique pair used by the force rule, in one MultiMesh.
+## At range 1 the force includes diagonal neighbours, so the drawing includes them too.
 func _build_bonds() -> void:
 	_bond_pairs.clear()
-	for x in range(lattice_size.x):
-		for y in range(lattice_size.y):
-			var idx: int = x * lattice_size.y + y
-			if x + 1 < lattice_size.x:
-				_bond_pairs.append(Vector2i(idx, (x + 1) * lattice_size.y + y))
-			if y + 1 < lattice_size.y:
-				_bond_pairs.append(Vector2i(idx, idx + 1))
+	for i in range(oscillators.size()):
+		for j in _get_neighbors(oscillators[i].grid_pos):
+			if j > i:
+				_bond_pairs.append(Vector2i(i, j))
 	if _bond_pairs.is_empty():
 		return
 
@@ -403,6 +516,7 @@ func _build_bonds() -> void:
 func _update_bonds() -> void:
 	if _bond_mm == null:
 		return
+	_bond_mm.visible = coupling_strength > 0.0
 	var mm: MultiMesh = _bond_mm.multimesh
 	if mm == null:
 		return

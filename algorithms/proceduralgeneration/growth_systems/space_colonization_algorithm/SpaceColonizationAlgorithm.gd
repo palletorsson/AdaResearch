@@ -2,14 +2,14 @@
 extends Node3D
 
 # @identity
-# essence: for each leaf_node: find closest attractor, grow segment_length toward it, kill attractor when reached — space colonization
-# desire: to watch a vascular network bloom from a single root as branches compete for scattered attractor points in 3D
+# essence: assign each target to its nearest eligible site, sum unit directions, add a segment; tips or persistent-site policy
+# desire: compare a strand with a branching tree by changing which sites can respond again
 # critical_parameter: kill_distance — the radius at which an attractor is consumed; too small and branches overshoot, too large and the tree is sparse
 # triggers: regenerate rebuilds entirely; step_growth advances one iteration; toggle_animation switches between instant and animated growth
-# emerges: natural branch tapering from thickness_decay creates tree-like hierarchy without any explicit tree data structure
+# emerges: parent/child records define a tree; NETWORK can fork at older sites, TIPS replaces each influenced leaf with one successor
 # needs: attraction point display [has]; cube guide [has]; step/animate toggle [has]; VR attractor placement [missing]
-# relationships: follows GeneticProgramming (evolution vs growth); contrasts with branching_growth_algorithm (attractor-driven vs free branching)
-# truth: a tree does not know its shape — it only knows which direction has light, and how far to reach before stopping
+# relationships: follows GeneticProgramming (criterion vs spatial requests); contrasts with branching_growth_algorithm (summed directions vs nearest target)
+# truth: the target field, eligible sites and stopping rules participate in the generated form
 
 @export_group("Target Shape")
 @export var cube_size: Vector3 = Vector3(4, 4, 4)
@@ -283,7 +283,79 @@ func create_root_nodes() -> void:
 					leaf_nodes.append(root)
 					all_nodes.append(root)
 
+@export_enum("tips", "network") var growth_policy: String = "tips"
+@export var node_budget: int = 0 # Zero preserves the ordinary artifact's iteration-only limit.
+var last_decision: Dictionary = {}
+var stop_reason := ""
+
 func grow_iteration() -> bool:
+	if current_iteration >= max_iterations or (node_budget > 0 and all_nodes.size() >= node_budget):
+		stop_reason = "budget"
+		return false
+	last_decision = decision_snapshot()
+	if growth_policy == "network":
+		return _grow_network_iteration()
+	var grew: bool = _grow_tips_iteration()
+	stop_reason = "" if grew else ("targets reached" if active_attraction_points.is_empty() else "no eligible direction")
+	return grew
+
+func decision_snapshot() -> Dictionary:
+	var sites: Array = all_nodes if growth_policy == "network" else leaf_nodes
+	var result := {"sites": [], "assignments": [], "remove": []}
+	for node in sites:
+		result.sites.append({"index": all_nodes.find(node), "position": node.position, "sum": Vector3.ZERO, "count": 0})
+	for i in active_attraction_points.size():
+		var point: Vector3 = active_attraction_points[i]
+		var nearest := -1
+		var distance := influence_distance
+		for j in sites.size():
+			var d: float = point.distance_to(sites[j].position)
+			if d < distance:
+				distance = d
+				nearest = j
+		if nearest < 0: continue
+		if distance <= kill_distance:
+			result.remove.append(i)
+		else:
+			var direction: Vector3 = (point - sites[nearest].position).normalized()
+			result.sites[nearest].sum += direction
+			result.sites[nearest].count += 1
+			result.assignments.append({"point": point, "site": sites[nearest].position, "direction": direction, "index": all_nodes.find(sites[nearest])})
+	return result
+
+func _grow_network_iteration() -> bool:
+	# Read all assignments from one unchanged generation. Earlier sites remain eligible.
+	for i in range(last_decision.remove.size() - 1, -1, -1):
+		active_attraction_points.remove_at(last_decision.remove[i])
+	var additions: Array[GrowthNode] = []
+	for choice in last_decision.sites:
+		if choice.count == 0 or choice.sum.length_squared() < 0.00000001: continue
+		var node: GrowthNode = all_nodes[choice.index]
+		var direction: Vector3 = choice.sum.normalized()
+		var next_position := node.position + direction * segment_length
+		var duplicate := false
+		for existing in all_nodes:
+			if existing.position.distance_squared_to(next_position) < 0.00000001:
+				duplicate = true
+		for existing in additions:
+			if existing.position.distance_squared_to(next_position) < 0.00000001:
+				duplicate = true
+		if duplicate: continue
+		if node_budget > 0 and all_nodes.size() + additions.size() >= node_budget: break
+		var child := GrowthNode.new(next_position, node, node.thickness * thickness_decay)
+		child.depth = node.depth + 1
+		node.children.append(child)
+		additions.append(child)
+	all_nodes.append_array(additions)
+	leaf_nodes.clear()
+	for node in all_nodes:
+		if node.children.is_empty(): leaf_nodes.append(node)
+	current_iteration += 1
+	stop_reason = "" if not additions.is_empty() else ("targets reached" if active_attraction_points.is_empty() else "no new direction")
+	if show_growth_animation: visualize_structure()
+	return not additions.is_empty()
+
+func _grow_tips_iteration() -> bool:
 	if active_attraction_points.size() == 0:
 		return false
 	
@@ -529,6 +601,10 @@ func create_cylinder_between(start: Vector3, end: Vector3, start_radius: float, 
 	return surface_tool.commit()
 
 func clear_structure() -> void:
+	last_decision.clear();stop_reason = ""
+	# Break the parent/child reference cycle before discarding a generation.
+	for node in all_nodes:
+		node.children.clear();node.parent = null
 	attraction_points.clear()
 	active_attraction_points.clear()
 	root_nodes.clear()
@@ -541,6 +617,8 @@ func clear_visualization() -> void:
 		child.queue_free()
 
 func _exit_tree() -> void:
+	for node in all_nodes:
+		node.children.clear();node.parent = null
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()

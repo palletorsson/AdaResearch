@@ -9,18 +9,18 @@
 #
 # @identity
 # essence: tree.dbh += nutrients * season * strategy * health; nutrients diffuse and deplete — competitive growth on shared soil
-# desire: To grow a forest where trees compete — watch aggressive species starve neighbors, conservative ones endure winters
-# critical_parameter: nutrient_supply vs competition_radius — together they determine whether the forest is cooperative or cutthroat
+# desire: Follow a growth instruction through consumption, a seasonal gate and a shared update schedule
+# critical_parameter: nutrient_supply, competition_radius and attempt order — compare their effects separately
 # triggers: Spring → growth burst; Winter → dormancy; aggressive strategy → fast growth but resource depletion; crown overlap → health decline
 # emerges: Ecosystem dynamics from individual L-system trees sharing a diffusing nutrient grid — ecology from grammar
 # needs: VR diffusion/nutrients/speed/trees controllers [has], Label3D [has], health graph [has]
 # relationships: Central to LSystems_Competition. Extends lsystem_tree (single tree → competing forest). Uses allometric power laws.
-# truth: Competition emerges when grammars share resources — ecology is grammar plus scarcity.
+# truth: A shared resource field and a schedule condition these grammars; the scene is a toy model, not evidence of ecological equilibrium.
 
 extends Node3D
 
 ## Forest Competition Ecosystem
-## L-System organisms competing for soil nutrients with realistic scaling
+## L-System organisms sharing a scalar nutrient field and authored allometry
 ## Chapter: L-Systems (Ecosystem & Interaction)
 
 @export var num_trees: int = 5
@@ -31,6 +31,11 @@ extends Node3D
 @export var nutrient_supply: float = 0.6
 @export var season_speed: float = 0.3
 @export var competition_radius: float = 1.2
+@export var lesson: bool = false
+var simulation_model := false
+var lesson_node: Node3D
+var last_growth_event: Dictionary = {}
+var _visual_timer := 0.0
 
 # --- Constants ---
 const GRID_RES := 20          # nutrient grid cells per axis
@@ -110,6 +115,9 @@ const SEASON_COLORS: Array = [
 
 # ===== READY =====
 func _ready() -> void:
+	if simulation_model:
+		set_process(false)
+		return
 	_init_nutrient_grid()
 	_init_rendering()
 	_init_labels()
@@ -119,6 +127,33 @@ func _ready() -> void:
 	_rebuild_soil()
 	_rebuild_trees()
 	_update_labels()
+	_activate_lesson.call_deferred()
+
+func _activate_lesson() -> void:
+	if not lesson or lesson_node != null or not is_node_ready(): return
+	lesson_node = load("res://commons/artifacts/competition_lesson/competition_lesson.gd").new()
+	lesson_node.name = "CompetitionLesson"
+	add_child(lesson_node)
+
+func reset_lesson_pair(first: int, winter: bool) -> void:
+	# Both specimens share one authored F rule and initial values. This explicit
+	# comparison setup is separate from the original five strategies.
+	nutrient_supply = 0.6; diffusion_rate = 0.15; tree_generations = 3
+	_init_nutrient_grid()
+	_trees.clear(); _health_history.clear()
+	for i in 2:
+		var tree := EcoTree.new()
+		tree.position = Vector3(-0.175 if i == 0 else 0.175, 0, 0)
+		tree.strategy = Strategy.WIDE_DENSE
+		tree.color = _strategy_color(tree.strategy)
+		tree.dbh = 0.02; tree.growth_rate_mult = 1.0
+		_update_allometry(tree)
+		tree.lsystem = _create_lsystem(tree.strategy, load("res://utils/lsystem.gd"))
+		_interpret_tree(tree)
+		_trees.append(tree); _health_history.append([])
+	_current_grow_idx = first
+	_current_season = Season.WINTER if winter else Season.SPRING
+	_growing = true; last_growth_event.clear()
 
 # ===== NUTRIENT GRID =====
 func _init_nutrient_grid() -> void:
@@ -369,19 +404,25 @@ func _apply_competition() -> void:
 
 # ===== GROWTH STEP =====
 func _grow_step() -> void:
+	if _trees.is_empty(): return
 	if _current_grow_idx >= _trees.size():
 		_current_grow_idx = 0
 
 	var tree := _trees[_current_grow_idx] as EcoTree
+	last_growth_event = {"tree": _current_grow_idx, "uptake": 0.0, "generation_before": tree.generation, "reason": "generation limit" if tree.generation >= tree_generations else "health gate"}
 	if tree.generation < tree_generations and tree.health > 0.1:
 		# Consume nutrients
 		var nutrients := _consume_nutrients(tree)
+		last_growth_event.uptake = nutrients
 		_grow_dbh(tree, nutrients)
 
 		# Only produce new L-system generation if enough nutrients and right season
 		if nutrients > 0.05 and _current_season != Season.WINTER:
 			tree.lsystem.generate()
 			tree.generation += 1
+			last_growth_event.reason = "rewrite allowed"
+		else:
+			last_growth_event.reason = "winter: rewrite waits" if _current_season == Season.WINTER else "uptake too small"
 
 		_apply_competition()
 		_interpret_tree(tree)
@@ -394,6 +435,7 @@ func _grow_step() -> void:
 			hist.pop_front()
 
 	_current_grow_idx += 1
+	last_growth_event["generation_after"] = tree.generation
 
 	# Check if all done
 	var any_can_grow := false
@@ -409,6 +451,7 @@ func _process(delta: float) -> void:
 	_advance_season(delta)
 	_diffuse_nutrients(delta)
 	_replenish_nutrients(delta)
+	_visual_timer += delta
 
 	if _growing:
 		_step_timer += delta
@@ -418,8 +461,12 @@ func _process(delta: float) -> void:
 			_rebuild_trees()
 			_update_labels()
 
-	_rebuild_soil()
-	_rebuild_graph()
+	# State still advances each frame; the field's presentation refreshes at 10 Hz.
+	if _visual_timer >= 0.1:
+		_visual_timer = 0.0
+		_rebuild_soil()
+		_rebuild_graph()
+		_update_labels()
 
 # ===== RENDERING: INIT =====
 func _init_rendering() -> void:
@@ -487,6 +534,10 @@ func _rebuild_soil() -> void:
 # ===== RENDERING: TREES =====
 func _rebuild_trees() -> void:
 	_tree_im.clear_surfaces()
+	var has_segments := false
+	for tree in _trees:
+		if not tree.segments.is_empty(): has_segments = true; break
+	if not has_segments: return
 	_tree_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 	for tree in _trees:
 		var t: EcoTree = tree as EcoTree
@@ -623,7 +674,7 @@ func _update_labels() -> void:
 			avg_dbh += t.dbh
 		if _trees.size() > 0:
 			avg_dbh /= _trees.size()
-		var status := "Growing..." if _growing else "Stable"
+		var status := "Taking turns" if _growing else "Growth stopped; soil still changes"
 		_stats_label.text = "Status: %s | Avg Health: %.0f%% | Avg DBH: %.1f cm" % [
 			status, avg_h * 100.0, avg_dbh * 100.0
 		]
@@ -717,6 +768,8 @@ func _strategy_name(strategy: int) -> String:
 
 # ===== GRID CONFIG =====
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("lesson"):
+		lesson = str(config["lesson"]).to_lower() in ["true", "1", "yes"]
 	if config.has("num_trees"):
 		num_trees = clampi(int(config["num_trees"]), 2, 10)
 	if config.has("tree_generations"):
@@ -740,7 +793,9 @@ func apply_grid_config(config: Dictionary) -> void:
 		_speed_ctrl.set_value(season_speed)
 	if _trees_ctrl:
 		_trees_ctrl.set_value(float(num_trees))
-	_restart()
+	if is_node_ready() and not simulation_model:
+		_restart()
+		_activate_lesson()
 
 # ===== CLEANUP =====
 func _exit_tree() -> void:

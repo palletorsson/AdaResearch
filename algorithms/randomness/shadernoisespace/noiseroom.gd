@@ -67,9 +67,10 @@ const PANEL_PATCH: float = 0.42
 const PANEL_GAP: float = 0.06
 const PANEL_GAIN: float = 2.0     # the same display gain on all four patches, declared on the plate
 
-@export_enum("none", "panel") var stand: String = "none"
+@export_enum("none", "panel", "room") var stand: String = "none"
 @export var layers: int = 6
 
+var dressed: bool = true
 var _panel_root: Node3D = null
 var _patches: Array = []
 var _panel_readout: Label3D = null
@@ -109,6 +110,15 @@ func _ready() -> void:
 	if stand == "panel":
 		_strip_enclosure_for_panel()
 		_build_sample_panel()
+	elif stand == "room":
+		_build_museum_room()
+	set_layers(layers)
+	if stand in ["panel", "room"]:
+		for m in [room_material,wall_material]:
+			m.set_shader_parameter("cloud_scale",2.0)
+			m.set_shader_parameter("time",0.0)
+			m.set_shader_parameter("time_scale",0.2)
+		if stand=="panel":_broadcast_layers.call_deferred()
 	_setup_ui()
 
 
@@ -178,7 +188,7 @@ func _setup_ui() -> void:
 
 func _process(delta: float) -> void:
 	"""Main animation loop"""
-	if not animation_enabled:
+	if stand == "room" or not animation_enabled:
 		return
 	
 	base_time += delta * animation_speed
@@ -187,6 +197,14 @@ func _process(delta: float) -> void:
 	
 	_update_room_animation()
 	_update_wall_animation()
+	if stand == "panel":
+		# One explicit phase for the comparison; holding it never resets a speed.
+		for m in [room_material,wall_material]:
+			m.set_shader_parameter("time",base_time)
+			m.set_shader_parameter("time_scale",0.2)
+		for patch in _patches:
+			patch.mat.set_shader_parameter("time",base_time)
+		_broadcast_layers()
 
 func _update_room_animation() -> void:
 	"""Update the main room sphere animation"""
@@ -307,6 +325,7 @@ func _animate_wall_colors() -> void:
 
 func _input(event: InputEvent) -> void:
 	"""Handle input for animation controls"""
+	if stand in ["panel","room"]:return # Hall controls have local scope.
 	if event.is_action_pressed("ui_accept"):  # Space key
 		animation_enabled = !animation_enabled
 	
@@ -358,7 +377,7 @@ func get_animation_info() -> Dictionary:
 func apply_grid_config(config: Dictionary) -> void:
 	if config.has("stand"):
 		var sv: String = str(config["stand"]).strip_edges().to_lower()
-		stand = "panel" if sv in ["panel", "samples", "entrance", "compare"] else "none"
+		stand = "room" if sv == "room" else ("panel" if sv in ["panel", "samples", "entrance", "compare"] else "none")
 	if config.has("layers"):
 		set_layers(int(config["layers"]))
 	if not config.has("generator"):
@@ -388,16 +407,18 @@ func set_layers(n: int) -> void:
 func set_frozen(frozen: bool) -> void:
 	animation = "frozen" if frozen else "live"
 	animation_enabled = not frozen
-	color_cycling = not frozen
-	cloud_density_animation = not frozen
-	for m in [room_material, wall_material]:
-		if m != null:
-			m.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
-	for p in _patches:
-		var mat: ShaderMaterial = (p as Dictionary)["mat"]
-		if mat != null:
-			mat.set_shader_parameter("time_scale", 0.0 if frozen else 0.2)
-	_last_touched = "FREEZE"
+	# Stop updates, keeping the actual clock, colours, density and rate intact.
+	_last_touched = "FREEZE" if frozen else "RESUME"
+	_broadcast_layers()
+	_update_panel_readout()
+
+
+func toggle_dress() -> void:
+	dressed = not dressed
+	for m in [room_material,wall_material]:
+		if m != null:m.set_shader_parameter("show_term",0 if dressed else 1)
+	_last_touched = "DRESS" if dressed else "SUM"
+	_broadcast_layers()
 	_update_panel_readout()
 
 
@@ -439,7 +460,12 @@ func _build_sample_panel() -> void:
 	var board: MeshInstance3D = HangarKit.box(Vector3(0, 1.30, 0.0), Vector3(width + 0.16, PANEL_PATCH + 0.44, 0.06), frame)
 	board.name = "Board"
 	_panel_root.add_child(board)
-	var head: MeshInstance3D = HangarKit.stencil("ONE FIELD · ONE SEED · ONE CLOCK · MORE TERMS", Vector2(width, 0.044), Color(0.12, 0.13, 0.15))
+	_panel_root.add_child(HangarKit.box_collider(Vector3(width+0.16,PANEL_PATCH+0.44,0.06),Vector3(0,1.30,0)))
+	for x in [-0.72,0.72]:
+		_panel_root.add_child(HangarKit.box(Vector3(x,0.35,-0.03),Vector3(0.10,0.70,0.14),frame))
+		_panel_root.add_child(HangarKit.box(Vector3(x,0.025,-0.03),Vector3(0.30,0.05,0.32),dark))
+		_panel_root.add_child(HangarKit.box_collider(Vector3(0.10,0.70,0.14),Vector3(x,0.35,-0.03)))
+	var head: MeshInstance3D = HangarKit.stencil("ONE FIELD · SHARED COORDINATES · MORE TERMS", Vector2(width, 0.044), Color(0.12, 0.13, 0.15))
 	if head:
 		head.position = Vector3(0, 1.30 + PANEL_PATCH * 0.5 + 0.13, 0.035)
 		_panel_root.add_child(head)
@@ -482,33 +508,33 @@ func _build_sample_panel() -> void:
 	case_root.position = Vector3(0.0, 0.86, 0.10)
 	case_root.rotation_degrees = Vector3(-24, 0, 0)
 	_panel_root.add_child(case_root)
-	case_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(width + 0.16, 0.26, 0.014), dark))
+	case_root.add_child(HangarKit.box(Vector3.ZERO, Vector3(width + 0.16, 0.40, 0.025), dark))
 	_panel_readout = Label3D.new()
 	_panel_readout.name = "Text"
-	_panel_readout.pixel_size = 0.00088
-	_panel_readout.font_size = 17
+	_panel_readout.pixel_size = 0.00225
+	_panel_readout.font_size = 22
 	_panel_readout.line_spacing = 0.5
 	_panel_readout.modulate = Color(0.88, 0.94, 1.0)
 	_panel_readout.outline_size = 3
 	_panel_readout.outline_modulate = Color(0, 0, 0, 1)
 	_panel_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_panel_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_panel_readout.position = Vector3(-(width + 0.10) * 0.5, 0.118, 0.010)
+	_panel_readout.position = Vector3(-(width + 0.10) * 0.5, 0.18, 0.020)
 	case_root.add_child(_panel_readout)
 
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 	if RackTpl != null:
 		var panel: Node3D = RackTpl.create_panel("", [
 			[{"type": "button", "label": "LAYERS"}, {"type": "button", "label": "BASIS"}],
-			[{"type": "button", "label": "FREEZE"}],
+			[{"type": "button", "label": "FREEZE"}, {"type": "button", "label": "DRESS"}],
 		], true)
 		panel.name = "Panel"
 		panel.set_meta("em_local_instrument", true)
 		panel.position = Vector3((width + 0.16) * 0.5 + 0.22, 1.02, 0.12)
-		panel.rotation_degrees = Vector3(-24, 0, 0)
-		panel.scale = Vector3(1.35, 1.35, 1.35)
+		panel.rotation_degrees = Vector3(-45, 0, 0)
+		panel.scale = Vector3(1.8, 1.8, 1.8)
 		_panel_root.add_child(panel)
-		var actions := {"Btn_0": func(): next_layers(), "Btn_1": func(): next_basis(), "Btn_2": func(): set_frozen(not is_frozen())}
+		var actions := {"Btn_0": func(): next_layers(), "Btn_1": func(): next_basis(), "Btn_2": func(): set_frozen(not is_frozen()), "Btn_3": func(): toggle_dress()}
 		for btn_name in actions.keys():
 			var btn: Node = panel.find_child(btn_name, true, false)
 			if btn == null:
@@ -553,20 +579,26 @@ func next_basis() -> void:
 ## Tell the other rooms of THIS hall, and no others. The nearest ancestor that
 ## owns a hall is the boundary; with none, only this body changes.
 func _broadcast_layers() -> void:
-	if not is_inside_tree():
-		return
+	if not is_inside_tree() or stand != "panel":return
 	var hall: Node = _hall_ancestor()
-	var reached: Array = []
-	for r in get_tree().get_nodes_in_group("noise_rooms"):
-		if r == self:
-			continue
-		if hall != null and not hall.is_ancestor_of(r):
-			continue
-		if r.has_method("set_layers"):
-			r.call("set_layers", layers)
-			reached.append(str((r as Node).name))
-	_last_broadcast = {"hall": str(hall.name) if hall != null else "(none)", "reached": reached,
-		"rooms_in_tree": get_tree().get_nodes_in_group("noise_rooms").size()}
+	var reached: Array=[]
+	if hall != null:
+		for receiver in get_tree().get_nodes_in_group("noise_rooms"):
+			if receiver==self or not hall.is_ancestor_of(receiver):continue
+			if receiver.has_method("_receive_panel"):
+				receiver.call("_receive_panel",self)
+				reached.append(str(receiver.name))
+	_last_broadcast={"hall":str(hall.name) if hall!=null else "(none)","reached":reached}
+
+
+func _receive_panel(source: Node) -> void:
+	if stand != "room":return
+	layers=source.layers;generator=source.generator;dressed=source.dressed
+	animation=source.animation;base_time=source.base_time;animation_enabled=source.animation_enabled
+	for pair in [[room_material,source.room_material],[wall_material,source.wall_material]]:
+		var dst: ShaderMaterial=pair[0];var src: ShaderMaterial=pair[1]
+		for parameter in ["time","time_scale","layers","noise_basis","cloud_scale","cloud_density","pink_intensity","base_pink","deep_pink","dark_corner","corner_darkness","show_term","term_gain"]:
+			dst.set_shader_parameter(parameter,src.get_shader_parameter(parameter))
 
 
 func _hall_ancestor() -> Node:
@@ -581,14 +613,12 @@ func _hall_ancestor() -> Node:
 func _update_panel_readout() -> void:
 	if _panel_readout == null or not is_instance_valid(_panel_readout):
 		return
-	var lines: PackedStringArray = PackedStringArray()
-	lines.append("the same field in all four: one seed, one coordinate frame, one contrast, one clock%s" % ("  FROZEN" if is_frozen() else ""))
-	lines.append("layers   1        2        4        6      · each term half the amplitude, twice the frequency")
-	lines.append("weight   %.3f    %.3f    %.4f   %.4f  · which is the whole of why the left patch is darker" % [
-		float(PANEL_WEIGHTS[0]), float(PANEL_WEIGHTS[1]), float(PANEL_WEIGHTS[2]), float(PANEL_WEIGHTS[3])])
-	lines.append("shown at a display gain of %.1f, the same on all four · the walls are at %d · basis %s" % [PANEL_GAIN, layers, generator])
-	lines.append("last touched: %s" % _last_touched)
-	_panel_readout.text = "\n".join(lines)
+	_panel_readout.text = "CLOUD TERMS %d | %s | %s\n" % [layers,generator.to_upper(),"HELD" if is_frozen() else "LIVE"]
+	_panel_readout.text += "patch sums: 1 / 2 / 4 / 6 | gain 2, fixed UV\n"
+	_panel_readout.text += "weights: .500 / .750 / .9375 / .9844\n"
+	_panel_readout.text += "room: %s\n" % ("PINK + DETAIL + SHADING" if dressed else "CLOUD SUM, GREYSCALE")
+	_panel_readout.text += "DRESS changes finish; LAYERS changes cloud sum"
+
 
 
 ## The panel as the room can read it.
@@ -618,3 +648,39 @@ func panel_state() -> Dictionary:
 		"animation": animation, "animation_enabled": animation_enabled,
 		"color_cycling": color_cycling, "cloud_density_animation": cloud_density_animation,
 	}
+
+
+## A five-metre interior over the existing central opening, entered from either side.
+func _build_museum_room() -> void:
+	var old_sphere: Node3D=get_node("RoomContainer/MainRoomBody")
+	old_sphere.position=Vector3(0,1.35,0.8)
+	# A CSG child's GeometryInstance override does not dress the combined root.
+	old_sphere.material_override=room_material
+	for name_ in ["WallsContainer","LightingContainer","Camera3D"]:
+		var old=get_node_or_null(name_)
+		if old!=null:remove_child(old);old.queue_free()
+	var shell:=Node3D.new();shell.name="MuseumRoom";add_child(shell)
+	# The floor bridges the retained pit; its top meets the surrounding deck.
+	_room_face(shell,"Floor",Vector2(5.0,5.0),Vector3(0,0.03,0),Vector3(-90,0,0))
+	_room_face(shell,"Ceiling",Vector2(4.8,4.8),Vector3(0,2.8,0),Vector3(90,0,0))
+	_room_face(shell,"North",Vector2(4.8,2.8),Vector3(0,1.4,-2.4),Vector3.ZERO)
+	_room_face(shell,"South",Vector2(4.8,2.8),Vector3(0,1.4,2.4),Vector3(0,180,0))
+	for side in [-1,1]:
+		for end in [-1,1]:
+			_room_face(shell,"Side_%d_%d" % [side,end],Vector2(1.6,2.8),Vector3(side*2.4,1.4,end*1.6),Vector3(0,-side*90,0))
+		_room_face(shell,"Lintel_%d" % side,Vector2(1.6,0.5),Vector3(side*2.4,2.55,0),Vector3(0,-side*90,0))
+	var kit:=load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var dark:=StandardMaterial3D.new();dark.albedo_color=Color(0.08,0.10,0.14)
+	for side in [-1,1]:
+		for z in [-0.86,0.86]:shell.add_child(kit.box(Vector3(side*2.4,1.15,z),Vector3(0.16,2.3,0.10),dark))
+		shell.add_child(kit.box(Vector3(side*2.4,2.34,0),Vector3(0.16,0.10,1.82),dark))
+	for z in [-2.4,2.4]:shell.add_child(kit.box(Vector3(0,2.85,z),Vector3(4.96,0.10,0.16),dark))
+
+
+func _room_face(parent: Node3D, label: String, size: Vector2, at: Vector3, turn: Vector3) -> void:
+	var face:=MeshInstance3D.new();face.name=label
+	var quad:=QuadMesh.new();quad.size=size;face.mesh=quad;face.material_override=wall_material
+	face.position=at;face.rotation_degrees=turn;parent.add_child(face)
+	var body:=StaticBody3D.new();body.name=label+"Body";face.add_child(body)
+	var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(size.x,size.y,0.06)
+	shape.shape=box;body.add_child(shape)

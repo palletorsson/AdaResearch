@@ -20,6 +20,9 @@ extends Node3D
 @export var amplitude: float = 1.8  # Bigger wave displacement
 @export var wave_speed: float = 0.6
 @export var wave_damping: float = 0.06  # Slightly less damping for larger visible area
+@export var museum_environment: bool = false
+## Walk-in pool: quiet rim, narrower joints, physics-clock tile movement.
+@export var pool_access: bool = false
 
 # ═══════════════════════════════════════════════════════════════════════════
 # DNA
@@ -90,12 +93,31 @@ var peak_tile_color := Color(1.0, 0.9, 0.3, 1.0)  # Brighter yellow peak
 
 func _ready() -> void:
 	_read_grid_config_meta()
+	if has_meta("config_museum"):
+		museum_environment = str(get_meta("config_museum")).to_lower() in ["true", "1"]
+	if has_meta("config_pool"):
+		pool_access = str(get_meta("config_pool")).to_lower() in ["true", "1"]
+	if pool_access:
+		tile_size = 0.63
+		tile_gutter = 0.02
+	if museum_environment:
+		_use_museum_environment()
 	create_wave_surface()
 	create_wave_rings() # Enable rings for the soundscape
 	setup_materials()
 	setup_soundscape()
 	_normalize_falloff()
 	_apply_source()
+	if pool_access:
+		animate_controls()
+		animate_3d_wave_propagation()
+
+func _use_museum_environment() -> void:
+	# This placement shares the museum's lighting and player camera.
+	for child in get_children():
+		if child is Camera3D or child is Light3D:
+			remove_child(child)
+			child.queue_free()
 
 func setup_soundscape() -> void:
 	var WaveSoundscape = load("res://algorithms/wavefunctions/wave_propagation_3d/WaveSoundscapeComponent.gd")
@@ -181,6 +203,15 @@ func setup_materials() -> void:
 	$AmplitudeControl.material_override = amp_material
 
 func _process(delta: float) -> void:
+	if pool_access:
+		return
+	advance_wave(delta)
+
+func _physics_process(delta: float) -> void:
+	if pool_access:
+		advance_wave(delta)
+
+func advance_wave(delta: float) -> void:
 	time += delta
 	animate_3d_wave_propagation()
 	animate_wave_rings()
@@ -208,6 +239,12 @@ func animate_3d_wave_propagation() -> void:
 			displacement += amplitude * sin(wave_phase) * attenuation
 			carrier += sin(wave_phase)
 		carrier /= source_count
+		if pool_access:
+			# Hold the outer row at the ramp landing. Preserve the original rule
+			# in the interior, easing its amplitude over the last 1.6 metres.
+			var half_span: float = float(grid_size - 1) * (tile_size + tile_gutter) * 0.5
+			var rim: float = minf(half_span - absf(pos2.x), half_span - absf(pos2.y))
+			displacement *= smoothstep(0.0, 1.6, rim)
 		var wave_phase_intensity: float = carrier
 		var origin = Vector3(pos2.x, tile_half_height + displacement, pos2.y)
 		var transform = Transform3D(Basis.IDENTITY, origin)
@@ -271,7 +308,9 @@ func _create_tile_collision_bodies(surface_parent: Node3D) -> void:
 			var origin = Vector3(pos2.x, tile_height * 0.5, pos2.y)
 			
 			# Create StaticBody3D for collision
-			var collision_body = StaticBody3D.new()
+			var collision_body: StaticBody3D = AnimatableBody3D.new() if pool_access else StaticBody3D.new()
+			if collision_body is AnimatableBody3D:
+				collision_body.sync_to_physics = false
 			collision_body.name = "TileCollision_%d_%d" % [x, z]
 			collision_body.position = origin
 			
@@ -329,6 +368,23 @@ func _read_grid_config_meta() -> void:
 ## both of those would tear down and re-raise geometry for nothing. `falloff` never
 ## rebuilds anything at all — it is read per frame.
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("pool"):
+		var wanted: bool = str(config.pool).to_lower() in ["true", "1"]
+		if wanted != pool_access:
+			pool_access = wanted
+			if is_node_ready():
+				# Rebuild only this opt-in placement, preserving source/clock state.
+				for child in $WaveSurface.get_children():
+					$WaveSurface.remove_child(child)
+					child.queue_free()
+				tile_size = 0.63 if pool_access else 0.55
+				tile_gutter = 0.02 if pool_access else 0.08
+				create_wave_surface()
+				setup_materials()
+	if config.has("museum"):
+		museum_environment = str(config.museum).to_lower() in ["true", "1"]
+		if is_inside_tree() and museum_environment:
+			_use_museum_environment()
 	var was_falloff: String = falloff
 	var was_source: String = source
 

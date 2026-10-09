@@ -74,6 +74,9 @@
 extends Node3D
 
 const BiomeGridTokensScript = preload("res://commons/grid/BiomeGridTokens.gd")
+# preload, not class_name: a class_name reference is unavailable in --script mode,
+# which is where every headless probe and gate in this subsystem runs.
+const CoverMeshes = preload("res://commons/grid/biome_cover_meshes.gd")
 
 const KINGDOM_COLORS: Dictionary = {
 	"flora": Color(0.35, 0.75, 0.35),
@@ -682,8 +685,25 @@ func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
 		return
 	_routed += 1
 	var step: float = _cube_size + _gutter
+	# BREAK THE LATTICE. Every seed organism used to stand at the exact centre of
+	# its cell, floating a flat 2 cm — so a field of them formed a perfect grid,
+	# which is the single clearest "a machine placed this" signal a nature scene
+	# can give. Nothing in a wood grows on a survey mark.
+	#
+	# The offset is DETERMINISTIC per cell (hashed from col,row — the same pattern
+	# the halo and specimen builders already use), so a map grows the identical
+	# garden every load; it is jitter, not randomness. Kept inside ~35% of a cell
+	# so an organism never wanders into its neighbour's square or off a ledge.
+	#
+	# It also SINKS slightly instead of floating: a thing standing in soil is
+	# bedded into it. 2 cm of float is what reads as a sticker laid on the floor.
+	var jrng: RandomNumberGenerator = RandomNumberGenerator.new()
+	jrng.seed = hash("seat:%d,%d" % [col, row])
+	var jx: float = jrng.randf_range(-0.35, 0.35) * step
+	var jz: float = jrng.randf_range(-0.35, 0.35) * step
+	var sink: float = -0.012 * step
 	var local: Vector3 = Vector3(
-		col * step, _surface_y(col, row) + 0.02, row * step)
+		col * step + jx, _surface_y(col, row) + sink, row * step + jz)
 	var deposit: Dictionary = {
 		"x": col, "z": row, "kingdom": kid,
 		# tier (1..5) IS the painted intensity ladder; strength = intensity/5
@@ -817,7 +837,7 @@ func _spawn_edge(col: int, row: int, cell: Dictionary) -> void:
 			_batch_add("edge:%s:%s" % [kingdom, String(recipe["name"])], recipe["mesh"], {
 				"albedo": recipe["color"], "cull_off": true,
 				"emission": (recipe["color"] as Color) * float(recipe.get("emission_mul", 0.2)),
-			}, xf)
+			}, xf, _cover_tint(rng, t_in))
 			added += 1
 		_edge_instances += added
 
@@ -886,22 +906,62 @@ func _spawn_halo_band(col: int, row: int, cell: Dictionary, dir: Vector3,
 				pos = Vector3(center.x + along, surf_y, center.z + dir.z * outward)
 			var xf: Transform3D = Transform3D.IDENTITY
 			xf = xf.rotated(Vector3.UP, rng.randf_range(0.0, TAU))
-			var sc: float = rng.randf_range(0.7, 1.4)  # wider spread = varied heights
-			xf = xf.scaled(Vector3(sc, sc, sc))
+			# NON-UNIFORM scale: a uniform multiplier makes every blade the same blade
+			# at a different size. Squat and lanky individuals inside one species cost
+			# nothing and read as a population instead of a stamp.
+			var sc: float = rng.randf_range(0.7, 1.4)
+			var sc_y: float = sc * rng.randf_range(0.75, 1.35)
+			var sc_xz: float = sc * rng.randf_range(0.85, 1.15)
+			xf = xf.scaled(Vector3(sc_xz, sc_y, sc_xz))
 			# base sits ON the ground: lift by the recipe's own half-height
-			xf.origin = pos + Vector3(0.0, float(recipe.get("y_off", 0.0)) * sc, 0.0)
+			xf.origin = pos + Vector3(0.0, float(recipe.get("y_off", 0.0)) * sc_y, 0.0)
 			_batch_add("cover:%s:%s" % [kingdom, String(recipe["name"])], recipe["mesh"], {
 				"albedo": recipe["color"], "cull_off": true,
 				"emission": (recipe["color"] as Color) * float(recipe.get("emission_mul", 0.25)),
-			}, xf)
+			}, xf, _cover_tint(rng, t_out))
 			added += 1
 		_halo_instances += added
+
+
+# Per-instance tint for batched ground cover.
+#
+# Every one of the ~230 halo cells' cover shared ONE flat albedo, so the most-seen
+# surface in the whole biome was also its least varied — a rim read as a row of
+# identical stamped objects. This is the cheapest possible fix: a colour in the
+# instance buffer. No extra node, no extra draw call, no change to the batch key
+# (putting colour in the key would fragment ~12 nodes into hundreds).
+#
+# Three things vary, all the way a real stand does:
+#   VALUE BY DISTANCE — cover further out sits deeper in its own shade, so the
+#   band gains depth instead of reading poster-flat.
+#   VALUE PER PLANT — a wide spread, because in any stand some individuals are in
+#   full light and some are in the shadow of their neighbours.
+#   HUE ALONG ONE AXIS — warm/yellowing to cool/blue-green, which is how real
+#   foliage actually varies (age, water, sun). Independent per-channel jitter
+#   would wander off that axis into pinks and greys and read as noise, not life.
+#
+# The FIRST version of this shipped a ±6-12% jitter, and measured +22% distinct
+# colours — real, but under the project's own bite threshold, i.e. decoration.
+# A full-random control tint measured +260% and proved the plumbing was fine, so
+# the range was the only thing at fault. Widened here on that evidence.
+func _cover_tint(rng: RandomNumberGenerator, t_out: float) -> Color:
+	var shade: float = 1.0 - 0.30 * clampf(t_out, 0.0, 1.0)
+	var v: float = shade * rng.randf_range(0.55, 1.30)
+	# −1 = cool/blue-green, +1 = warm/yellowing. One draw, so the two ends of the
+	# axis stay anti-correlated instead of drifting apart into grey.
+	var warm: float = rng.randf_range(-1.0, 1.0)
+	return Color(
+		clampf(v * (1.0 + 0.26 * warm), 0.0, 1.5),
+		clampf(v * (1.0 + 0.06 * absf(warm)), 0.0, 1.5),
+		clampf(v * (1.0 - 0.24 * warm), 0.0, 1.5))
 
 
 # Ground-cover recipes per grammar kingdom — the halo's own look (grammar-
 # native), sized to the ring's old VR budget (low-poly primitives).
 # Cached per kingdom (biome-6): every cell of a kingdom shares ONE mesh per
 # recipe, so the map-wide batches carry a single mesh each.
+
+
 func _halo_recipes(kingdom: String) -> Array:
 	if _recipe_cache.has(kingdom):
 		return _recipe_cache[kingdom]
@@ -914,91 +974,64 @@ func _build_halo_recipes(kingdom: String) -> Array:
 	# Each recipe is ONE self-contained mesh (batched scatter can't assemble
 	# multi-part objects); y_off lifts its base onto the ground; emission_mul
 	# overrides glow. Meshes stand at varied heights, not a uniform carpet.
+	#
+	# The meshes come from BiomeCoverMeshes, which replaced the Godot primitives
+	# these recipes used to declare inline. That was not a style change: cover is
+	# the biome's biggest visible surface (241 halo cells corpus-wide against 116
+	# seeds) and it was the only part never designed — one primitive per kingdom,
+	# so fungus read as traffic cones and mineral as packing foam. The primitives
+	# were also the expensive option, because their segment defaults are chosen
+	# for a showcase sphere: a CylinderMesh lily pad cost 768 triangles.
+	#
+	# EVERY kingdom now offers a vertical form AND a horizontal one. A band built
+	# only from uprights reads as a hairbrush from any distance; the low, wide
+	# member is what makes a patch read as ground. probe_biome_cover.gd gates the
+	# triangle bill.
 	match kingdom:
 		"flora":
-			# a tapered blade (tall triangle) + a bright bloom on a point
-			var blade: PrismMesh = PrismMesh.new()
-			blade.size = Vector3(0.07, 0.45, 0.02)
-			var bloom: SphereMesh = SphereMesh.new()
-			bloom.radius = 0.055
-			bloom.height = 0.11
-			bloom.radial_segments = 6
-			bloom.rings = 3
 			return [
-				{"name": "blade", "mesh": blade, "color": Color(0.3, 0.55, 0.2), "fraction": 0.75, "y_off": 0.225},
-				{"name": "bloom", "mesh": bloom, "color": Color(0.95, 0.6, 0.5), "fraction": 0.25, "y_off": 0.16, "emission_mul": 0.45},
+				{"name": "blade", "mesh": CoverMeshes.blade(), "color": Color(0.3, 0.55, 0.2), "fraction": 0.5, "y_off": 0.0},
+				{"name": "frond", "mesh": CoverMeshes.frond(), "color": Color(0.26, 0.44, 0.19), "fraction": 0.3, "y_off": 0.0},
+				{"name": "bloom", "mesh": CoverMeshes.bloom(), "color": Color(0.95, 0.6, 0.5), "fraction": 0.2, "y_off": 0.04, "emission_mul": 0.4},
 			]
 		"fungus":
-			# a low dome cap + a taller toadstool cone, both grounded
-			var dome: SphereMesh = SphereMesh.new()
-			dome.radius = 0.11
-			dome.height = 0.14
-			dome.radial_segments = 8
-			dome.rings = 4
-			var stalk: CylinderMesh = CylinderMesh.new()
-			stalk.top_radius = 0.13
-			stalk.bottom_radius = 0.02
-			stalk.height = 0.24
-			stalk.radial_segments = 7
 			return [
-				{"name": "cap", "mesh": dome, "color": Color(0.55, 0.38, 0.62), "fraction": 0.6, "y_off": 0.03, "emission_mul": 0.35},
-				{"name": "toadstool", "mesh": stalk, "color": Color(0.7, 0.32, 0.42), "fraction": 0.4, "y_off": 0.12, "emission_mul": 0.3},
+				{"name": "cap", "mesh": CoverMeshes.mushroom(), "color": Color(0.55, 0.38, 0.62), "fraction": 0.45, "y_off": 0.0, "emission_mul": 0.3},
+				{"name": "toadstool", "mesh": CoverMeshes.toadstool(), "color": Color(0.7, 0.32, 0.42), "fraction": 0.3, "y_off": 0.0, "emission_mul": 0.28},
+				{"name": "bracket", "mesh": CoverMeshes.bracket(), "color": Color(0.62, 0.45, 0.36), "fraction": 0.25, "y_off": 0.0},
 			]
 		"fauna":
-			# earthy burrow mounds + track-pebbles + a pale creature-sign (an egg).
-			# Was dark-brown-on-dark and vanished into the strip; now warmer, lighter
-			# earth for tonal contrast plus a pale emissive egg so the rim reads as
-			# "a creature passed here" instead of a flat brown smear.
-			var mound: SphereMesh = SphereMesh.new()
-			mound.radius = 0.11
-			mound.height = 0.1
-			mound.radial_segments = 8
-			mound.rings = 3
-			var pebble: BoxMesh = BoxMesh.new()
-			pebble.size = Vector3(0.06, 0.03, 0.09)
-			var egg: SphereMesh = SphereMesh.new()
-			egg.radius = 0.05
-			egg.height = 0.13
-			egg.radial_segments = 8
-			egg.rings = 4
+			# a burrow with a hole in it, prints pressed into the ground, a clutch.
+			# The old set was a lump, a floating pebble and a sphere: brown on brown.
+			# The hole is what says something LIVES here rather than passed through.
 			return [
-				{"name": "mound", "mesh": mound, "color": Color(0.47, 0.35, 0.23), "fraction": 0.45, "y_off": 0.0},
-				{"name": "track", "mesh": pebble, "color": Color(0.4, 0.35, 0.29), "fraction": 0.35, "y_off": 0.015},
-				{"name": "egg", "mesh": egg, "color": Color(0.79, 0.72, 0.55), "fraction": 0.2, "y_off": 0.06, "emission_mul": 0.25},
+				{"name": "burrow", "mesh": CoverMeshes.burrow(), "color": Color(0.47, 0.35, 0.23), "fraction": 0.4, "y_off": 0.0},
+				{"name": "track", "mesh": CoverMeshes.track(), "color": Color(0.36, 0.31, 0.26), "fraction": 0.35, "y_off": 0.002},
+				{"name": "egg", "mesh": CoverMeshes.egg(), "color": Color(0.79, 0.72, 0.55), "fraction": 0.25, "y_off": 0.0, "emission_mul": 0.22},
 			]
 		"mineral":
-			# angular shards fanning up — faceted, not a rounded box
-			var shard: PrismMesh = PrismMesh.new()
-			shard.size = Vector3(0.1, 0.26, 0.1)
-			return [{"name": "shard", "mesh": shard, "color": Color(0.6, 0.66, 0.82), "fraction": 1.0, "y_off": 0.13, "emission_mul": 0.4}]
-		"water":
-			# slender reeds + flat lily discs on the surface
-			var reed: CylinderMesh = CylinderMesh.new()
-			reed.top_radius = 0.007
-			reed.bottom_radius = 0.014
-			reed.height = 0.6
-			reed.radial_segments = 4
-			var lily: CylinderMesh = CylinderMesh.new()
-			lily.top_radius = 0.09
-			lily.bottom_radius = 0.09
-			lily.height = 0.015
 			return [
-				{"name": "reed", "mesh": reed, "color": Color(0.32, 0.5, 0.42), "fraction": 0.6, "y_off": 0.3},
-				{"name": "lily", "mesh": lily, "color": Color(0.24, 0.42, 0.32), "fraction": 0.4, "y_off": 0.01},
+				{"name": "shard", "mesh": CoverMeshes.crystal(), "color": Color(0.6, 0.66, 0.82), "fraction": 0.65, "y_off": 0.0, "emission_mul": 0.35},
+				{"name": "chip", "mesh": CoverMeshes.chip(), "color": Color(0.5, 0.55, 0.68), "fraction": 0.35, "y_off": 0.0},
+			]
+		"water":
+			return [
+				{"name": "reed", "mesh": CoverMeshes.reed(), "color": Color(0.32, 0.5, 0.42), "fraction": 0.45, "y_off": 0.0},
+				{"name": "lily", "mesh": CoverMeshes.lily(), "color": Color(0.24, 0.42, 0.32), "fraction": 0.4, "y_off": 0.0},
+				{"name": "sedge", "mesh": CoverMeshes.blade(0.22, 0.03, 0.1), "color": Color(0.28, 0.46, 0.4), "fraction": 0.15, "y_off": 0.0},
 			]
 		"meta":
-			# floating emissive motes — small glowing points hovering in the ring
-			var mote: SphereMesh = SphereMesh.new()
-			mote.radius = 0.05
-			mote.height = 0.1
-			mote.radial_segments = 8
-			mote.rings = 4
-			return [{"name": "mote", "mesh": mote, "color": Color(0.7, 0.9, 1.0), "fraction": 1.0, "y_off": 0.3, "emission_mul": 2.2}]
+			# EMISSION CLAMPED, 2.2 -> 0.7. At 2.2 the mote measured 3.13% of frame
+			# at pure 255,255,255 while every other kingdom clipped 0.000%: its form
+			# was not bright, it was ABSENT — a white disc with no facets, no
+			# silhouette, no depth. A glow that erases the thing glowing is not a
+			# glow. 0.7 keeps it clearly luminous with the facets still separable.
+			return [
+				{"name": "mote", "mesh": CoverMeshes.mote(), "color": Color(0.7, 0.9, 1.0), "fraction": 0.7, "y_off": 0.3, "emission_mul": 0.7},
+				{"name": "stroke", "mesh": CoverMeshes.stroke(), "color": Color(0.62, 0.84, 1.0), "fraction": 0.3, "y_off": 0.42, "emission_mul": 0.55},
+			]
 		_:
-			var tuft: QuadMesh = QuadMesh.new()
-			tuft.size = Vector2(0.12, 0.3)
-			tuft.center_offset = Vector3(0, 0.15, 0)
-			return [{"name": "tuft", "mesh": tuft, "color": Color(0.35, 0.35, 0.3), "fraction": 1.0}]
+			return [{"name": "tuft", "mesh": CoverMeshes.tuft(), "color": Color(0.35, 0.35, 0.3), "fraction": 1.0}]
 
 
 # ── pilot rendering: one small kingdom-tinted marker per active cell.
@@ -1013,14 +1046,20 @@ func _build_halo_recipes(kingdom: String) -> Array:
 func _spawn_specimen(col: int, row: int, cell: Dictionary, kingdom: String) -> void:
 	var step: float = _cube_size + _gutter
 	var surf_y: float = _surface_y(col, row)
-	var base: Vector3 = Vector3(col * step, surf_y, row * step)
 	var tier: int = BiomeGridTokensScript.tier_of(cell)
 	var scale: float = 0.5 + 0.12 * float(tier)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = hash("specimen:%s:%d,%d" % [kingdom, col, row])
+	# same lattice break as the dispatched seeds: a crystal, a pool and a glyph
+	# standing on exact cell centres read as a survey grid. Deterministic per cell.
+	var base: Vector3 = Vector3(
+		col * step + rng.randf_range(-0.3, 0.3) * step,
+		surf_y,
+		row * step + rng.randf_range(-0.3, 0.3) * step)
 	var holder: Node3D = Node3D.new()
 	holder.name = "BiomeSpecimen_%s_%d_%d" % [kingdom, col, row]
 	holder.position = base
+	holder.rotation.y = rng.randf_range(0.0, TAU)   # no two face the same way
 	add_child(holder)
 	match kingdom:
 		"mineral":
@@ -1326,10 +1365,16 @@ func _unit_box() -> BoxMesh:
 	return _unit_box_mesh
 
 
-func _batch_add(key: String, mesh: Mesh, mat_spec: Dictionary, xf: Transform3D) -> void:
+# `tint` is PER INSTANCE and costs one colour in the instance buffer (16 bytes),
+# no extra node and no extra draw call — the batch key deliberately does NOT
+# include it. Putting colour in the key would fragment ~12 nodes into hundreds,
+# which is the single most destructive change possible in this file.
+func _batch_add(key: String, mesh: Mesh, mat_spec: Dictionary, xf: Transform3D,
+		tint: Color = Color.WHITE) -> void:
 	if not _batches.has(key):
-		_batches[key] = {"mesh": mesh, "mat": mat_spec, "transforms": []}
+		_batches[key] = {"mesh": mesh, "mat": mat_spec, "transforms": [], "tints": []}
 	(_batches[key]["transforms"] as Array).append(xf)
+	(_batches[key]["tints"] as Array).append(tint)
 
 
 func _flush_batches() -> void:
@@ -1350,18 +1395,25 @@ func _flush_batches() -> void:
 		var keep_n: int = transforms.size()
 		if keep_ratio < 1.0:
 			keep_n = maxi(1, int(floor(float(transforms.size()) * keep_ratio)))
+		var tints: Array = batch.get("tints", [])
 		var mm: MultiMesh = MultiMesh.new()
 		mm.transform_format = MultiMesh.TRANSFORM_3D
+		# PER-INSTANCE COLOUR. Without this every one of the ~230 halo cells'
+		# cover shared one flat albedo, so a rim read as a stamped-out row of
+		# identical objects. Colour is the cheapest variation there is: one
+		# buffer entry per instance, zero extra nodes, zero extra draw calls.
+		mm.use_colors = true
 		mm.mesh = batch["mesh"]
 		mm.instance_count = keep_n
-		if keep_n == transforms.size():
-			for i in keep_n:
-				mm.set_instance_transform(i, transforms[i])
-		else:
-			# even-stride decimation — spatially uniform, deterministic
-			var stride: float = float(transforms.size()) / float(keep_n)
-			for i in keep_n:
-				mm.set_instance_transform(i, transforms[int(floor(float(i) * stride))])
+		# ONE source index per instance, used for BOTH transform and tint — the
+		# decimation below drops instances by even stride, and computing the
+		# index twice (or keeping colours in an unstrided array) desyncs colour
+		# from position the moment a map goes over budget.
+		var stride: float = 1.0 if keep_n == transforms.size() else float(transforms.size()) / float(keep_n)
+		for i in keep_n:
+			var src: int = i if keep_n == transforms.size() else int(floor(float(i) * stride))
+			mm.set_instance_transform(i, transforms[src])
+			mm.set_instance_color(i, tints[src] if src < tints.size() else Color.WHITE)
 		kept_total += keep_n
 		var mmi: MultiMeshInstance3D = MultiMeshInstance3D.new()
 		mmi.name = "BiomeBatch_" + key.replace(":", "_")
@@ -1369,6 +1421,7 @@ func _flush_batches() -> void:
 		var spec: Dictionary = batch["mat"]
 		var mat: StandardMaterial3D = StandardMaterial3D.new()
 		mat.albedo_color = spec["albedo"]
+		mat.vertex_color_use_as_albedo = true   # consume the per-instance tint above
 		if spec.has("roughness"):
 			mat.roughness = float(spec["roughness"])
 		if spec.get("cull_off", false):

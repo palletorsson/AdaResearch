@@ -4,9 +4,9 @@ extends Node3D
 # essence: the grab point's position as ONE black-and-white wall frame — x, y, z on a white card in a thin dark frame, like the museum's text works
 # desire: the coordinate stops floating over the frame and hangs in the hall like a caption — reading a position becomes reading the room
 # critical_parameter: axis — "xyz" shows all three lines; "x"|"y"|"z" makes it a single-value frame
-# triggers: CoordinateSystem3M broadcasts the grab point's frame-local position to the ada_coordinate_readout group every frame it exists
+# triggers: CoordinateSystem3M supplies world or frame-local coordinates to matching-channel cards; each card can pin its reference space
 # emerges: the separation of the measure from the measured — the frame shows WHERE (markers on the axes), the wall says HOW MUCH, in the same voice as the wall's sentences
-# needs: [a CoordinateSystem3M with #floating_point:1 somewhere in the hall; shows em-dashes until the point speaks]
+# needs: [a CoordinateSystem3M tracking its own or a named external point; matching readout_channel; shows em-dashes before the first feed]
 # relationships: the words CoordinateSystem3M gave up (#labels:0 #panel:0); styled after the museum's black-and-white text frames; the draw_dot->whiteboard group pattern
 # truth: a readout is a promise that someone is measuring — a blank display is an instrument with no experiment
 
@@ -31,17 +31,30 @@ extends Node3D
 ## local ... can we show the local and the global point in two different displays").
 ##
 ## They are not rival answers. They are two true addresses for one point, and the
-## DIFFERENCE between them is the frame's own position: move the frame and the
-## local reading holds still while the world reading slides; move the point and
-## both change. One card each makes that a thing you can watch instead of a flag
-## somebody set.
+## relation between them includes the frame's position, orientation and scale.
+## Hold an external point still and move the frame: WORLD stays fixed while
+## LOCAL changes. Move the point with its frame instead and LOCAL can stay fixed.
+## One card each makes the reference visible alongside the reported position.
 ##
 ## `frame` follows whatever the CoordinateSystem3M is set to, which is what every
 ## existing placement gets. `world` and `local` pin this card to one of them and
 ## caption it, so two cards side by side cannot be confused for each other.
 @export_enum("frame", "world", "local") var space: String = "frame"
+## Empty retains the shared feed; named channels belong to one instrument.
+@export var readout_channel: String = "":
+	set(value):
+		readout_channel = value.strip_edges()
+		set_meta("readout_channel", readout_channel)
+## THE CAPTION IN THE DEFAULT CASE (2026-09-04, from the Point_One final's
+## artifact proposals). A card left on `frame` printed no caption at all, so the
+## shipped placement showed three world numbers with nothing saying so, while the
+## artifact's own identity line still talks about the frame-local position. The
+## caption is now built for every card; a pinned card prints its pin, and a
+## `frame` card prints whichever space the feed names when it arrives, so a
+## number is never on the wall without the space it is true in.
 
 var _label: Label3D = null
+var _caption: Label3D = null
 
 
 func _ready() -> void:
@@ -86,16 +99,17 @@ func _build() -> void:
 	_label.no_depth_test = false
 	_label.position = Vector3(0, 0, 0.022 * ds)
 	add_child(_label)
-	if space != "frame":
-		var cap := Label3D.new()
-		cap.name = "SpaceCaption"
-		cap.text = space.to_upper()
-		cap.font_size = 30
-		cap.pixel_size = 0.0016 * ds
-		cap.modulate = Color(0.42, 0.44, 0.48)
-		cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		cap.position = Vector3(0, (frame_height * 0.5 - 0.085) * ds, 0.022 * ds)
-		add_child(cap)
+	# the space the numbers are true in — pinned cards say so at once, a `frame`
+	# card says so as soon as the feed names it
+	_caption = Label3D.new()
+	_caption.name = "SpaceCaption"
+	_caption.text = space.to_upper() if space != "frame" else ""
+	_caption.font_size = 30
+	_caption.pixel_size = 0.0016 * ds
+	_caption.modulate = Color(0.42, 0.44, 0.48)
+	_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_caption.position = Vector3(0, (frame_height * 0.5 - 0.085) * ds, 0.022 * ds)
+	add_child(_caption)
 	_reset_text()
 
 
@@ -108,10 +122,16 @@ func _reset_text() -> void:
 		_label.text = "%s = —" % axis
 
 
-## Group feed from CoordinateSystem3M: the grab point's frame-local position.
-func show_coordinates(p: Vector3) -> void:
+## Group feed from CoordinateSystem3M: the grab point's position, and optionally
+## the space it is measured in ("world" | "local"). A card pinned to a space keeps
+## its own caption; a `frame` card takes the feed's word for it.
+func show_coordinates(p: Vector3, feed_space: String = "") -> void:
 	if _label == null:
 		return
+	if space == "frame" and _caption != null and feed_space in ["world", "local"]:
+		var cap_text: String = feed_space.to_upper()
+		if _caption.text != cap_text:
+			_caption.text = cap_text
 	var t := ""
 	if axis == "xyz":
 		t = "x = %.2f\ny = %.2f\nz = %.2f" % [p.x, p.y, p.z]
@@ -127,22 +147,31 @@ func show_coordinates(p: Vector3) -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	var rebuild: bool = false
+	if config.has("readout_channel"):
+		readout_channel = str(config["readout_channel"])
 	if config.has("display_scale"):
 		display_scale = maxf(0.05, float(config["display_scale"]))
-		for c in get_children():
-			c.queue_free()
-		_label = null
-		_build()
+		rebuild = true
 	if config.has("space"):
 		var sp := str(config["space"]).strip_edges().to_lower()
 		if sp in ["frame", "world", "local"]:
 			space = sp
-			for c in get_children():
-				c.queue_free()
-			_label = null
-			_build()
+			rebuild = true
 	if config.has("axis"):
 		var a := str(config["axis"]).strip_edges().to_lower()
 		if a in ["xyz", "x", "y", "z"]:
 			axis = a
-			_reset_text()
+	# Loaders may configure before adding to the tree. In that case _ready()
+	# builds once with the final parameters, rather than adding a second card.
+	if not is_node_ready():
+		return
+	if rebuild:
+		for child in get_children():
+			remove_child(child)
+			child.queue_free()
+		_label = null
+		_caption = null
+		_build()
+	elif config.has("axis"):
+		_reset_text()

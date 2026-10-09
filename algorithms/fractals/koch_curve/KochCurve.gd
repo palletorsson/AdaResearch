@@ -369,7 +369,9 @@ func apply_grid_config(config: Dictionary) -> void:
 	# alone, exactly as before.
 	if config.has("evidence"):
 		evidence = str(config["evidence"])
-		_apply_evidence()
+		# The museum configures a scene before adding it to the tree. _ready()
+		# applies the selected evidence after creating the mesh instances.
+		if is_instance_valid(koch_mesh_instance): _apply_evidence()
 
 
 # ═══════════════════════════════════════════════════════════════════

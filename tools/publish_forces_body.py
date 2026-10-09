@@ -1,0 +1,40 @@
+"""Publish real museum captures of the hall controls and wearable vector display."""
+from pathlib import Path
+import json, hashlib
+
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'doc/book/iterations/2026-10-07-forces-teleport-and-body'
+
+def main():
+    reports=[]
+    for name in ['visor','travel','layout','court-regression']:
+        data=json.loads((OUT/name/'report.json').read_text(encoding='utf8'))
+        assert data['passed'],(name,data['failures'])
+        assert 'SCRIPT ERROR' not in (OUT/name/'engine.log').read_text(encoding='utf8',errors='replace')
+        reports.append({'name':name,'checks':len(data['checks']),'scope':data['scope'],'path':f'{name}/report.json'})
+    count=sum(r['checks'] for r in reports)
+    (OUT/'verification.json').write_text(json.dumps({'passed':True,'checks':count,'reports':reports,'limits':'Supplied inputs and XRTools rig; no physical headset or Quest performance verification.'},indent=2),encoding='utf8')
+    page='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your body is the point — Endless Museum</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f2efe8;color:#25252b;font:17px/1.6 system-ui,sans-serif}main{max-width:1280px;margin:auto;padding:36px 5vw}h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.1}h1{font-size:clamp(36px,5vw,66px);margin:12px 0 20px}h2{font-size:36px}a{color:#984c70}.eyebrow{font-size:12px;letter-spacing:.13em;color:#984c70;text-transform:uppercase}.lead{font:23px/1.5 Georgia,serif;max-width:950px}.links{display:flex;gap:24px;flex-wrap:wrap}figure{margin:28px 0}img{width:100%;display:block;aspect-ratio:3/2;object-fit:contain;background:#252832}figcaption{font-size:13px;color:#625c61;padding:8px 0}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}section{border-top:1px solid #d2cbc3;padding:24px 0}table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:12px;text-align:left;border-bottom:1px solid #d2cbc3;vertical-align:top}code{font-size:13px;overflow-wrap:anywhere}.note{max-width:920px}strong{font-weight:600}@media(max-width:760px){.pair{grid-template-columns:1fr}main{padding:25px 18px}}
+</style><main><div class="eyebrow">Endless Museum / Forces / 7 October 2026</div>
+<h1>Your body is the point.</h1><p class="lead">Hold the two black spheres. Aim down, press the triggers and rise. A visor makes the difference between looking, moving and accelerating visible in front of you.</p>
+<div class="links"><a href="#travel">Teleport between halls</a><a href="#read">Read the visor</a><a href="#visit">Try it in the museum</a><a href="../2026-10-07-forces-curated-progression/index.html">The thirteen-hall arrangement</a></div>
+<figure id="flight"><a href="visor/body-visor-flight.png"><img src="visor/body-visor-flight.png" alt="Actual Godot XR body rises in the museum with velocity, thrust and gravity displayed on its head-worn visor"></a><figcaption>Actual museum capture with the supplied XRTools rig: two held points produce 22 m/s² of thrust. The displayed velocity comes from the moving body.</figcaption></figure>
+<section id="read"><h2>One body, different directions.</h2><p class="note">The small LOOK marker follows the head. The arrows represent world directions; their numerical components stay in world X, Y and Z. Turning your head changes how you see a vector, not the vector itself. Release the triggers: thrust becomes zero while velocity continues and gravity changes it.</p>
+<table><thead><tr><th>Reading</th><th>What the instrument knows</th></tr></thead><tbody><tr><td>Velocity / m/s</td><td>The actual player-body velocity after movement and contacts.</td></tr><tr><td>Thrust F/m / m/s²</td><td>The same acceleration supplied by the held spheres to the movement provider. This player model has no declared physical mass, so the visor does not invent a force in Newtons.</td></tr><tr><td>Gravity / m/s²</td><td>The court's constant downward acceleration, 9.8 m/s². A floor can support you while this input remains present.</td></tr><tr><td>Launch notice</td><td>The pad sets an initial velocity. It is distinguished from continuous thrust.</td></tr></tbody></table>
+<p class="note">This is a selective instrument. Contact forces, walking control and every part of lived movement are not measured here. Arrow lengths are bounded to fit the visor; the numbers retain the magnitude. The overlay reads the movement system without changing it.</p>
+<figure><a href="visor/visor-dock.png"><img src="visor/visor-dock.png" loading="lazy" alt="The wearable vector visor and its WEAR REMOVE control in the capability court"></a><figcaption>The visor dock is beside the thrust-point station. Press WEAR / REMOVE; on desktop use F8.</figcaption></figure></section>
+<section id="travel"><h2>A deliberate step between spaces.</h2><p class="note">All thirteen Forces entrance lecterns now have PREVIOUS and NEXT teleport controls. Press with a hand or the existing pointer. The ordinary doorways still work. Transfers use the museum's existing loading cell and supported arrivals, preserving the tracked head offset and clearing travel velocity.</p>
+<figure><a href="visor/teleport-console.png"><img src="visor/teleport-console.png" loading="lazy" alt="Previous and next teleport buttons on the Forces hall entrance lectern"></a><figcaption>The controls belong to the actual hall. PREVIOUS has no destination on a fresh first-hall visit; NEXT continues the museum route.</figcaption></figure></section>
+<section id="visit"><h2>Try the body as the experiment.</h2><ol><li>Run <code>commons/scenes/force_capability_museum.tscn</code> to reach the final Forces hall directly. Walk through the earlier field crossing into the court.</li><li>Press WEAR / REMOVE at the visor dock. On desktop, F8 works inside the court.</li><li>Grip the spheres, aim down/back and hold the triggers. Compare the three readings. Release, turn your head, then try the jump pad.</li><li>Press WEAR / REMOVE again to clear the view. Leaving the court hides the display; changing halls removes it.</li></ol>
+<p class="note">The tutorial still follows one object: the learned point gains a thrust action and the visitor becomes its receiver. The visor helps inspect that connection. The mortar, springs, hinge and moving platform remain supporting experiments.</p>
+<p class="note"><b>CHECK_COUNT checks pass</b>: all thirteen button-controlled hall visits, a real XR-body round trip, held-point thrust and release, world/eye vector readings, overlay cleanup, the court's walking route, and the existing mechanisms. A platform test was changed to observe motion across its intentional dwell rather than rely on one short endpoint comparison. Physical headset comfort, reach and Quest performance still need a visit.</p>
+<div class="links"><a href="verification.json">Test record</a><a href="lesson.md">Updated teaching brief</a><a href="source-hashes.json">Source snapshot</a></div></section><p class="eyebrow">always another room</p></main></html>'''.replace('CHECK_COUNT',str(count))
+    (OUT/'index.html').write_text(page,encoding='utf8')
+    (OUT/'lesson.md').write_text((ROOT/'commons/maps/Vectors_Act5_ForceAsPlace/FORCES_LESSON.md').read_text(encoding='utf8'),encoding='utf8')
+    sources=['commons/artifacts/force_halls/hall_display.gd','commons/artifacts/force_capability_lab/force_capability_lab.gd','commons/artifacts/force_capability_lab/body_visor.gd','tools/probes/forces_body_visor.gd','tools/probes/forces_teleport_buttons.gd','tools/probes/force_capability_lab.gd','tools/probes/forces_layout.gd','tools/publish_forces_body.py']
+    (OUT/'source-hashes.json').write_text(json.dumps({p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in sources},indent=2),encoding='utf8')
+    print(f'Published body visor and teleport report: {count} passing checks.')
+
+if __name__=='__main__':main()

@@ -1,4 +1,4 @@
-﻿extends MeshInstance3D
+extends MeshInstance3D
 
 @export var texture_size: Vector2i = Vector2i(1440, 1000)  # Resolution of the drawing texture
 @export var default_brush_size: int = 12  # Default size of the brush stroke
@@ -6,6 +6,7 @@
 @export var default_snap_grid_size: int = 8  # Default snap grid size
 @export var random_dot_colors: Array = [Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW]  # Colors for the random dots
 
+## Historical priming design note (reset now runs in the feedback shader).
 ## STAGE-2 DNA — AXIS: WHAT COLOUR "NOTHING" IS.
 ##
 ## This script owns the entire visible body of two artifacts. `ball_painting_demo` is a
@@ -67,6 +68,9 @@ const WET_PAINT_SCENE = preload("res://commons/context/drawingboard/wet_paint_ca
 var viewport: SubViewport
 var brush_layer: Node2D
 var simulation_rect: ColorRect
+var spray_mode := false
+var _clear_frames := 0
+var aerosol := preload("res://commons/context/drawingboard/spray_reservoir.gd").new()
 
 # Active pen settings
 var active_pen_properties = {
@@ -84,7 +88,15 @@ func _ready():
 	# all, so this leaves `priming` at "white" and reset_canvas() splats the same white it
 	# always did.
 	_settle_priming()
+	var ancestor: Node = self
+	while ancestor:
+		if ancestor.has_meta("config_tools"):
+			spray_mode = str(ancestor.get_meta("config_tools")) == "spray"
+			break
+		ancestor = ancestor.get_parent()
+	aerosol.configure(self)
 	_setup_gpu_painting()
+	RenderingServer.frame_post_draw.connect(_after_canvas_frame)
 
 	# Initialize active properties from exports
 	active_pen_properties["brush_size"] = default_brush_size
@@ -104,6 +116,7 @@ func _setup_gpu_painting():
 	brush_layer = canvas.get_node("BrushLayer")
 	var sim_pass = canvas.get_node("SimulationPass")
 	simulation_rect = sim_pass.get_node("SimulationRect")
+	simulation_rect.material = simulation_rect.material.duplicate()
 	
 	# Resize viewport to match texture size
 	viewport.size = texture_size
@@ -130,7 +143,10 @@ func _update_paint_params():
 	if simulation_rect and simulation_rect.material:
 		# If wet paint is off, set flow to 0
 		var speed = flow_speed if wet_paint else 0.0
-		simulation_rect.material.set_shader_parameter("flow_speed", speed)
+		simulation_rect.material.set_shader_parameter("flow_speed", speed * (0.08 if spray_mode else 1.0))
+		simulation_rect.material.set_shader_parameter("spray_mode", spray_mode)
+		simulation_rect.material.set_shader_parameter("ground_color", _priming_color())
+		simulation_rect.material.set_shader_parameter("dissipation", 0.9992 if spray_mode else 0.995)
 
 # Draw random dots around the pen tip
 func draw_random_dots(uv_position: Vector2):
@@ -147,19 +163,24 @@ func draw_random_dots(uv_position: Vector2):
 
 # Function to reset the canvas
 func reset_canvas():
-	# To reset a feedback loop viewport, we need to clear it.
-	# The easiest way for a "Fade/Clear" is to draw a giant rect on the BrushLayer
-	#
-	# THE GROUND IS LAID HERE, and only here — one splat, the same call, the same
-	# geometry. At priming = "white" the colour looked up is Color(1, 1, 1, 1), the
-	# literal that used to be written on this line, so the shipped path is unchanged
-	# down to the argument. A reset by the player relays the ground rather than
-	# whitewashing it, which is what a reset to a primed canvas means.
+	# Lay the ground in the feedback pass itself. A transient draw command can
+	# be cleared before the first viewport copy when the museum becomes visible.
+	_clear_frames = 2
+	aerosol.reset()
+	if simulation_rect:
+		simulation_rect.material.set_shader_parameter("clear_surface", true)
+		simulation_rect.material.set_shader_parameter("ground_color", _priming_color())
 	if brush_layer:
-		brush_layer.add_splat(Vector2(texture_size.x/2, texture_size.y/2), max(texture_size.x, texture_size.y), _priming_color())
+		brush_layer.strokes.clear()
+		brush_layer.sprays.clear()
+		brush_layer.runs.clear()
+	if debug_label: debug_label.text = "Drawing reset."
 
-	if debug_label:
-		debug_label.text = "Drawing reset."
+func _after_canvas_frame() -> void:
+	if _clear_frames > 0:
+		_clear_frames -= 1
+		if _clear_frames == 0 and simulation_rect:
+			simulation_rect.material.set_shader_parameter("clear_surface", false)
 
 # Snap a UV position to the nearest grid point
 func snap_to_grid(uv_position: Vector2, snap_size: int = -1) -> Vector2:
@@ -278,9 +299,30 @@ func draw_at_world_position(world_pos: Vector3, color: Color = Color.BLACK):
 	if uv.x >= 0.0 and uv.x <= 1.0 and uv.y >= 0.0 and uv.y <= 1.0:
 		draw_point(uv, color)
 
-func _process(_delta):
-	# GPU simulation runs automatically in the shader/viewport
-	pass
+func _process(delta):
+	if spray_mode and simulation_rect:
+		aerosol.advance(delta)
+		simulation_rect.material.set_shader_parameter("frame_delta", delta)
+		simulation_rect.material.set_shader_parameter("frame_seed", float(Engine.get_frames_drawn() % 4096))
+
+## Project a circular spray cone onto this rectangular, possibly transformed surface.
+func draw_spray(world_hit: Vector3, direction: Vector3, radius_m: float, color: Color, opacity: float, seed: float = 0.0) -> void:
+	if not brush_layer: return
+	var normal := global_basis.y.normalized()
+	var incidence := -normal.dot(direction.normalized())
+	if incidence < 0.22: return
+	var minor := direction.cross(normal)
+	if minor.length_squared() < 0.0001: minor = global_basis.x
+	minor = minor.normalized() * radius_m
+	var major := normal.cross(minor.normalized()) * radius_m / incidence
+	var uv := get_uv_from_world_pos(world_hit)
+	var px := Vector2(texture_size)
+	var axis_x := (get_uv_from_world_pos(world_hit + minor) - uv) * px
+	var axis_y := (get_uv_from_world_pos(world_hit + major) - uv) * px
+	# An oblique footprint covers more area with the same pigment budget.
+	var coverage := 1.0 - pow(1.0 - clampf(opacity, 0.0, 0.9999), incidence)
+	if brush_layer.add_spray(uv * px, axis_x, axis_y, color, coverage, seed) and spray_mode:
+		aerosol.deposit(uv, axis_x / px, axis_y / px, color, coverage)
 
 
 # ── PRIMING ──────────────────────────────────────────────────────────────────────────

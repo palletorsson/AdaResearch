@@ -3,6 +3,7 @@ extends Node3D
 const Kit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const SAMPLES: Array[Vector2] = [Vector2(-1,0.5),Vector2(1,-1),Vector2(-1,-1),Vector2.ZERO,Vector2(0.5,1)]
 var pair: Array[Node3D] = []
+var arches: Array[Node3D] = []
 var markers: Array[MeshInstance3D] = []
 var sample_index: int = 0
 var plate: bool = false
@@ -45,6 +46,11 @@ func build(first: Node3D) -> void:
 		terrain.add_child(Kit.box_collider(Vector3(1.2,0.5,1.2),Vector3(0,-0.75,0)))
 		var caption:=Label3D.new();caption.text="A 3D FIELD / ANOTHER SLICE\n0.5 seconds per step";caption.font_size=22;caption.pixel_size=0.0015
 		caption.position=Vector3(0,-0.65,-0.61);caption.rotation_degrees.y=180;terrain.add_child(caption)
+	# Opt-in belongs to this map; other pair studies keep their existing footprint.
+	if str(first.get_meta("config_enclosure","none")) == "arches":
+		for i in range(pair.size()):
+			var arch:Node3D=load("res://algorithms/randomness/simplexnoise/noise_arch.gd").new()
+			pair[i].add_child(arch);arch.build(pair[i],"OPEN SIMPLEX 2" if i==0 else "PERLIN");arches.append(arch)
 	refresh()
 
 func _process(delta: float) -> void:
@@ -57,7 +63,12 @@ func next_sample() -> void:
 
 func toggle_view() -> void:
 	plate=not plate
-	for work in pair:work.apply_grid_config({"readout":"plate" if plate else "relief"})
+	# VIEW changes the current samples' expression, without restoring a placement seed.
+	for work in pair:
+		work.readout = "plate" if plate else "relief"
+		work.noise_field.readout = work.readout
+		work.noise_field.update_noise_field()
+		work._refresh_readout()
 	refresh()
 
 func match_pair() -> void:
@@ -78,6 +89,7 @@ func refresh() -> void:
 		var work: Node3D=pair[i]
 		markers[i].position=Vector3(p.x,(0.0 if plate else rec.values[i]*work.noise_field.amplitude)+0.36,p.y)
 		work._refresh_witness()
+	for arch in arches:arch.refresh(plate,p)
 	label.text="SAMPLE %d/5 · x %.1f z %.1f · %s\n"%[sample_index+1,p.x,p.y,rec.view.to_upper()]
 	label.text+="simplex %+.4f | perlin %+.4f\n"%[rec.values[0],rec.values[1]]
 	label.text+="perlin - simplex = %+.4f"%rec.difference

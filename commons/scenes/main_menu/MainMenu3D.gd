@@ -127,10 +127,10 @@ func _update_load_button():
 # lead to the same building; what differs is only WHERE IN IT the walk opens.
 const MUSEUM_SCENE := "res://commons/scenes/endless_museum_staged.tscn"
 const MUSEUM_FALLBACK_SCENE := "res://commons/scenes/endless_museum.tscn"
-## Point One's own chapter. It is the sequence field of its row in the plan, not
+## Point Zero's opening chapter. It is the sequence field of its row in the plan, not
 ## a display name — endless_museum matches _first_chapter against exactly that.
 const FIRST_CHAPTER := "primitives"
-const FIRST_MAP := "Point_One"
+const FIRST_MAP := "Point_Zero"
 
 
 ## Open the museum at a chapter. `map` empty means that chapter's first pearl.

@@ -48,48 +48,48 @@ void fragment() {
 	// When intensity is zero, passthrough — no effect at all
 	if (i < 0.001) {
 		COLOR = texture(SCREEN_TEXTURE, uv);
-		return;
+	} else {
+
+		// ── Wave distortion ──────────────────────────────────────────────
+		vec2 wave_uv = uv;
+		wave_uv.x += sin(uv.y * wave_frequency + t * wave_speed) * wave_amplitude * i;
+		wave_uv.y += cos(uv.x * wave_frequency * 0.8 + t * wave_speed * 1.3) * wave_amplitude * i * 0.7;
+
+		// Secondary slower wave (breathing feel)
+		wave_uv.x += sin(uv.y * 2.0 + t * 0.4) * wave_amplitude * i * 0.5;
+		wave_uv.y += sin(uv.x * 2.5 + t * 0.3) * wave_amplitude * i * 0.4;
+
+		// ── Chromatic aberration ─────────────────────────────────────────
+		float ca = chromatic_amount * i;
+		vec2 dir = wave_uv - vec2(0.5);
+		float r = texture(SCREEN_TEXTURE, wave_uv + dir * ca).r;
+		float g = texture(SCREEN_TEXTURE, wave_uv).g;
+		float b = texture(SCREEN_TEXTURE, wave_uv - dir * ca).b;
+		vec3 color = vec3(r, g, b);
+
+		// ── Hue shift ────────────────────────────────────────────────────
+		vec3 hsv = rgb_to_hsv(color);
+		hsv.x = fract(hsv.x + hue_shift_speed * t * i);
+		hsv.y = min(hsv.y + saturation_boost * i, 1.0);
+		color = hsv_to_rgb(hsv);
+
+		// ── Color pulsing (warm <-> cool tint) ───────────────────────────
+		float pulse = sin(t * 0.7) * 0.5 + 0.5;
+		vec3 warm = vec3(1.05, 0.95, 0.85);
+		vec3 cool = vec3(0.85, 0.95, 1.05);
+		vec3 tint = mix(warm, cool, pulse);
+		color *= mix(vec3(1.0), tint, i * 0.4);
+
+		// ── Breathing vignette ───────────────────────────────────────────
+		float vig_pulse = sin(t * vignette_pulse_speed) * 0.5 + 0.5;
+		float dist = length(uv - vec2(0.5)) * 2.0;
+		float vignette = 1.0 - smoothstep(0.3, 1.2, dist) * vignette_strength * i * (0.6 + 0.4 * vig_pulse);
+		color *= vignette;
+
+		// ── Subtle brightness breathing ──────────────────────────────────
+		float brightness = 1.0 + sin(t * 0.9) * 0.08 * i;
+		color *= brightness;
+
+		COLOR = vec4(color, 1.0);
 	}
-
-	// ── Wave distortion ──────────────────────────────────────────────
-	vec2 wave_uv = uv;
-	wave_uv.x += sin(uv.y * wave_frequency + t * wave_speed) * wave_amplitude * i;
-	wave_uv.y += cos(uv.x * wave_frequency * 0.8 + t * wave_speed * 1.3) * wave_amplitude * i * 0.7;
-
-	// Secondary slower wave (breathing feel)
-	wave_uv.x += sin(uv.y * 2.0 + t * 0.4) * wave_amplitude * i * 0.5;
-	wave_uv.y += sin(uv.x * 2.5 + t * 0.3) * wave_amplitude * i * 0.4;
-
-	// ── Chromatic aberration ─────────────────────────────────────────
-	float ca = chromatic_amount * i;
-	vec2 dir = wave_uv - vec2(0.5);
-	float r = texture(SCREEN_TEXTURE, wave_uv + dir * ca).r;
-	float g = texture(SCREEN_TEXTURE, wave_uv).g;
-	float b = texture(SCREEN_TEXTURE, wave_uv - dir * ca).b;
-	vec3 color = vec3(r, g, b);
-
-	// ── Hue shift ────────────────────────────────────────────────────
-	vec3 hsv = rgb_to_hsv(color);
-	hsv.x = fract(hsv.x + hue_shift_speed * t * i);
-	hsv.y = min(hsv.y + saturation_boost * i, 1.0);
-	color = hsv_to_rgb(hsv);
-
-	// ── Color pulsing (warm <-> cool tint) ───────────────────────────
-	float pulse = sin(t * 0.7) * 0.5 + 0.5;
-	vec3 warm = vec3(1.05, 0.95, 0.85);
-	vec3 cool = vec3(0.85, 0.95, 1.05);
-	vec3 tint = mix(warm, cool, pulse);
-	color *= mix(vec3(1.0), tint, i * 0.4);
-
-	// ── Breathing vignette ───────────────────────────────────────────
-	float vig_pulse = sin(t * vignette_pulse_speed) * 0.5 + 0.5;
-	float dist = length(uv - vec2(0.5)) * 2.0;
-	float vignette = 1.0 - smoothstep(0.3, 1.2, dist) * vignette_strength * i * (0.6 + 0.4 * vig_pulse);
-	color *= vignette;
-
-	// ── Subtle brightness breathing ──────────────────────────────────
-	float brightness = 1.0 + sin(t * 0.9) * 0.08 * i;
-	color *= brightness;
-
-	COLOR = vec4(color, 1.0);
 }

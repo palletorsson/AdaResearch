@@ -41,6 +41,8 @@ func _ready():
 
 func _setup_projectile():
 	"""Initialize the projectile"""
+	if hit_sound != null and hit_sound.stream != null and hit_sound.stream.get_class() == "AudioStream":
+		hit_sound.stream = null
 	# Set physics properties
 	mass = 1.0
 	gravity_scale = 0.1  # Slight gravity for natural arc
@@ -111,7 +113,8 @@ func _setup_visuals():
 	var material = StandardMaterial3D.new()
 	material.albedo_color = Color(1.0, 0.2, 0.0)  # Bright red
 	material.emission = Color(1.0, 0.5, 0.0)
-	material.emission_energy = 1.5
+	material.emission_enabled = true
+	material.emission_energy_multiplier = 1.5
 	material.metallic = 0.3
 	material.roughness = 0.7
 	mesh_instance.material_override = material
@@ -220,7 +223,7 @@ func _hit_player(player_body: Node3D):
 		GameManager.add_points(-damage)  # Negative points for getting hit
 	
 	# Play hit sound
-	if hit_sound:
+	if hit_sound and hit_sound.stream:
 		hit_sound.play()
 	
 	# Emit signals

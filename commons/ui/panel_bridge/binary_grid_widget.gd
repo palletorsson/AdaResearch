@@ -47,7 +47,7 @@ var _hover_cell := Vector2i(-1, -1)
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	if data_store:
+	if data_store and not data_store.cell_changed.is_connected(_on_cell_changed):
 		data_store.cell_changed.connect(_on_cell_changed)
 
 

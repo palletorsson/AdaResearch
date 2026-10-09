@@ -15,6 +15,8 @@ var audio_bus_index: int = -1
 var spectrum_analyzer: AudioEffectSpectrumAnalyzer
 var spectrum_instance: AudioEffectSpectrumAnalyzerInstance
 var _audio_setup_done: bool = false
+const AnalysisLease=preload("res://commons/audio/systems/spectrum_analyzer_lease.gd")
+var _analysis_lease:Dictionary={}
 
 # Animation
 var phase_offset: float = 0.0
@@ -41,28 +43,18 @@ func _ready():
 		_setup_audio()
 
 func _setup_audio():
-	audio_bus_index = AudioServer.get_bus_index(source_bus)
+	AnalysisLease.release(_analysis_lease)
+	_analysis_lease=AnalysisLease.acquire(source_bus)
+	audio_bus_index=AudioServer.get_bus_index(_analysis_lease.key)
+	spectrum_analyzer=_analysis_lease.effect
+	spectrum_instance=_analysis_lease.instance
+	_audio_setup_done=true
 
-	if audio_bus_index == -1:
-		print("SimpleWaveformDisplay: Bus '%s' not found, using Master" % source_bus)
-		audio_bus_index = AudioServer.get_bus_index("Master")
-
-
-	# Find or create spectrum analyzer
-	for i in range(AudioServer.get_bus_effect_count(audio_bus_index)):
-		var effect = AudioServer.get_bus_effect(audio_bus_index, i)
-		if effect is AudioEffectSpectrumAnalyzer:
-			spectrum_instance = AudioServer.get_bus_effect_instance(audio_bus_index, i)
-			return
-
-	# Create new analyzer
-	spectrum_analyzer = AudioEffectSpectrumAnalyzer.new()
-	spectrum_analyzer.buffer_length = 0.1
-	spectrum_analyzer.fft_size = AudioEffectSpectrumAnalyzer.FFT_SIZE_512
-	AudioServer.add_bus_effect(audio_bus_index, spectrum_analyzer)
-
-	var effect_idx = AudioServer.get_bus_effect_count(audio_bus_index) - 1
-	spectrum_instance = AudioServer.get_bus_effect_instance(audio_bus_index, effect_idx)
+func _exit_tree()->void:
+	AnalysisLease.release(_analysis_lease)
+	_analysis_lease={}
+	spectrum_instance=null
+	_audio_setup_done=false
 
 func set_source_bus(bus_name: String):
 	source_bus = bus_name

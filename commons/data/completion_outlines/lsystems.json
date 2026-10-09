@@ -1,0 +1,197 @@
+{
+  "_meta": {
+    "sequence": "lsystems",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "LSystems_Grammar_Lab": {
+      "inherited": "From Fractal_CrossSequence: You can now carry a precise question into the grammar laboratory. If the drawn line is the result of a symbolic sentence, which changes come from rewriting the sentence, and which come from teaching its interpreter a different meaning for a symbol?",
+      "question": "Can the same instructions draw a different plant?",
+      "ontology": "An L-system rewrites symbols; a turtle interpreter assigns movements and turns to the resulting string.",
+      "experiment": "Keep PRESET and GEN fixed while moving ANGLE; then hold ANGLE fixed and increase GEN once.",
+      "observe": "Angle changes branch directions; generation count changes the rewritten string and its number of segments. The drawing is fitted back into its display.",
+      "limit": "A smaller drawn tree need not contain fewer instructions because the display normalises its bounds. The editor exposes presets, not arbitrary visitor rule-text editing.",
+      "variation": "Proposed extension: Let the visitor compare the unchanged string under two interpreters, then author one replacement rule.",
+      "handoff": "In the next room, the travelling state carries more than position and heading. Branch length will change as the interpreter enters and leaves nested branches.",
+      "candidate_artifacts": [
+        "lsystem_editor"
+      ],
+      "sources": [
+        "commons/maps/LSystems_Grammar_Lab/final.md",
+        "commons/maps/LSystems_Grammar_Lab/map_data.json",
+        "commons/artifacts/lsystem_editor/lsystem_editor.tscn",
+        "commons/artifacts/lsystem_editor/lsystem_editor.gd",
+        "commons/maps/LSystems_Grammar_Lab/intent.md",
+        "commons/maps/LSystems_Grammar_Lab/blurb.md",
+        "commons/maps/LSystems_Grammar_Lab/critical.md",
+        "commons/maps/LSystems_Grammar_Lab/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "LSystems_Growth": {
+      "inherited": "From LSystems_Grammar_Lab: In the next room, the travelling state carries more than position and heading. Branch length will change as the interpreter enters and leaves nested branches.",
+      "question": "How can descendants inherit a direction while becoming shorter?",
+      "ontology": "A branching interpreter can carry numerical state such as step length, orientation and depth alongside its position.",
+      "experiment": "Trace a branch from its base to its tips; compare an early fork with a deeper one.",
+      "observe": "Branch lengths decrease with nesting depth and turns vary within a controlled range.",
+      "limit": "This displayed tree is generated from numerical rules, not grown by consuming resources or seeking light. A parametric interpreter is not by itself context-sensitive rewriting.",
+      "variation": "Proposed extension: Show two trees with identical grammar and random seed but different length_decay, retaining their unnormalised lengths.",
+      "handoff": "For an extension, compare two copies with identical grammar and seed but different length decay, keeping their scales comparable. Ask where the difference first appears and how it accumulates towards the tips. The next room will go further by letting an interpreter give an ordinary movement symbol an unfamiliar meaning.",
+      "candidate_artifacts": [
+        "parametric_lsystem"
+      ],
+      "sources": [
+        "commons/maps/LSystems_Growth/final.md",
+        "commons/maps/LSystems_Growth/map_data.json",
+        "commons/artifacts/parametric_lsystem/parametric_lsystem.tscn",
+        "commons/artifacts/parametric_lsystem/parametric_lsystem.gd",
+        "commons/maps/LSystems_Growth/intent.md",
+        "commons/maps/LSystems_Growth/blurb.md",
+        "commons/maps/LSystems_Growth/critical.md",
+        "commons/maps/LSystems_Growth/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor sliders; use observation. Intended contextual-growth comparison can be developed with placed ContextSensitiveTree later.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "LSystems_Grammars_And_Curves": {
+      "inherited": "From LSystems_Growth: For an extension, compare two copies with identical grammar and seed but different length decay, keeping their scales comparable. Ask where the difference first appears and how it accumulates towards the tips. The next room will go further by letting an interpreter give an ordinary movement symbol an unfamiliar meaning.",
+      "question": "Does an instruction contain its own meaning?",
+      "ontology": "The same symbolic sentence can be interpreted with different movement conventions.",
+      "experiment": "Compare the three labelled turtle drawings:25 degrees,45 degrees,and F means sidle. Find a branch correspondence across them.",
+      "observe": "The same expanded sentence yields different directions and shapes; the sideways reader reinterprets forward movement.",
+      "limit": "Similar labels do not make a perfectly controlled size comparison: step lengths differ and rendering stops after260 segments. The exhibit changes how a word is acted upon, not the string itself.",
+      "variation": "Proposed extension: Invite the visitor to give F a fourth meaning, such as leaving a sound at a position, and compare what remains recognisable.",
+      "handoff": "Next, the same separation between sentence and interpreter turns branches into rooms and corridors. The question becomes what an architectural reading adds to a grammatical one.",
+      "candidate_artifacts": [
+        "the_believing_turtle"
+      ],
+      "sources": [
+        "commons/maps/LSystems_Grammars_And_Curves/final.md",
+        "commons/maps/LSystems_Grammars_And_Curves/map_data.json",
+        "commons/artifacts/the_believing_turtle/the_believing_turtle.tscn",
+        "commons/artifacts/the_believing_turtle/the_believing_turtle.gd",
+        "commons/maps/LSystems_Grammars_And_Curves/intent.md",
+        "commons/maps/LSystems_Grammars_And_Curves/blurb.md",
+        "commons/maps/LSystems_Grammars_And_Curves/critical.md",
+        "commons/maps/LSystems_Grammars_And_Curves/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Static constructed comparison, no operable turtle controls promised.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "LSystems_Architecture": {
+      "inherited": "From LSystems_Grammars_And_Curves: Next, the same separation between sentence and interpreter turns branches into rooms and corridors. The question becomes what an architectural reading adds to a grammatical one.",
+      "question": "What changes when a grammar makes corridors instead of branches?",
+      "ontology": "A grammar can generate spatial relations without specifying a biological subject; an interpreter can map symbols to corridors and rooms.",
+      "experiment": "Follow a corridor in the tabletop dungeon until it branches; compare a branch with a room and identify where a saved route resumes.",
+      "observe": "A repeated grammar produces a network of small corridors, room slabs and walls.",
+      "limit": "A diagram with corridor shapes has not been tested for inhabitation, accessibility or useful destinations. Counting rooms does not establish a good place to live.",
+      "variation": "Proposed extension: Keep the grammar but reinterpret a dead end as a gathering place, then evaluate the resulting route from the visitor’s needs.",
+      "handoff": "The next room adds conditions that interrupt generation itself. A tree will need access to a resource before its next grammatical instruction can become growth.",
+      "candidate_artifacts": [
+        "lsystem_dungeon"
+      ],
+      "sources": [
+        "commons/maps/LSystems_Architecture/final.md",
+        "commons/maps/LSystems_Architecture/map_data.json",
+        "commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
+        "commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd",
+        "commons/maps/LSystems_Architecture/intent.md",
+        "commons/maps/LSystems_Architecture/blurb.md",
+        "commons/maps/LSystems_Architecture/critical.md",
+        "commons/maps/LSystems_Architecture/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "LSystems_Competition": {
+      "inherited": "From LSystems_Architecture: The next room adds conditions that interrupt generation itself. A tree will need access to a resource before its next grammatical instruction can become growth.",
+      "question": "Can identical kinds of growth meet different futures because they share a resource?",
+      "ontology": "A growth rule is only part of a system; resource fields, timing and neighbours can constrain when it runs.",
+      "experiment": "Watch neighbouring trees and the soil display over several growth steps; compare their branch development and recorded health.",
+      "observe": "Trees grow in turn, draw on shared nutrients, and can stop at different stages.",
+      "limit": "The model chooses what counts as a resource and competition. Its round-robin schedule is also a condition, and finite maximum generations must not be mistaken for ecological maturity.",
+      "variation": "Proposed extension: Compare competition and shared-resource cooperation under the same initial field and measure a chosen collective outcome.",
+      "handoff": "Next, you will meet a tool that puts the tree's parameters directly into your hands. Ask which forms become easy to request and which have no control at all.",
+      "candidate_artifacts": [
+        "ForestCompetition"
+      ],
+      "sources": [
+        "commons/maps/LSystems_Competition/final.md",
+        "commons/maps/LSystems_Competition/map_data.json",
+        "algorithms/lsystems/Ecosystem/ForestCompetition.tscn",
+        "algorithms/lsystems/Ecosystem/ForestCompetition.gd",
+        "commons/maps/LSystems_Competition/intent.md",
+        "commons/maps/LSystems_Competition/blurb.md",
+        "commons/maps/LSystems_Competition/critical.md",
+        "commons/maps/LSystems_Competition/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor ecosystem slider verified. Do not present simulated health as biological measurement.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "LSystems_Living": {
+      "inherited": "From LSystems_Competition: Next, you will meet a tool that puts the tree's parameters directly into your hands. Ask which forms become easy to request and which have no control at all.",
+      "question": "When you change a tree, which choices are yours and which were built into the tool?",
+      "ontology": "A parameterised phenotype is a form generated from a finite set of numerical traits; choosing traits differs from changing the rules that interpret them.",
+      "experiment": "Move one branch-angle or branching-depth slider and watch the preview; change one trait at a time before trying RANDOM.",
+      "observe": "Each slider edits a named gene-like parameter and rebuilds the preview after a short delay; RANDOM replaces the parameter set.",
+      "limit": "The sliders bound what variation can become visible. Calling parameters genes does not make the tool a genetic evolutionary process; pressure defaults none.",
+      "variation": "Proposed extension: Offer two different trait-to-form mappings for the same parameter values and let visitors choose a value the existing fitness functions do not reward.",
+      "handoff": "The next room strips generation down to two marks and a repeated choice. Watch what your eye contributes when the available alphabet becomes that small.",
+      "candidate_artifacts": [
+        "genetic_tree_sculptor"
+      ],
+      "sources": [
+        "commons/maps/LSystems_Living/final.md",
+        "commons/maps/LSystems_Living/map_data.json",
+        "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
+        "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd",
+        "commons/maps/LSystems_Living/intent.md",
+        "commons/maps/LSystems_Living/blurb.md",
+        "commons/maps/LSystems_Living/critical.md",
+        "commons/maps/LSystems_Living/technical.md",
+        "algorithms/nature_system/morphology/tree_morphology.gd"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. PLANT downstream catalyst pickup is unverified; avoid promising automatic planting.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Assemblage_Same_Desire": {
+      "inherited": "From LSystems_Living: The next room strips generation down to two marks and a repeated choice. Watch what your eye contributes when the available alphabet becomes that small.",
+      "question": "How much of a pattern belongs to the rule, and how much to the marks it chooses?",
+      "ontology": "An alphabet is the set of visible marks through which a selection rule is expressed.",
+      "experiment": "Watch a new row of the textile appear, then trace a diagonal path made by neighbouring marks. Identify where your eye connects marks the program selected separately.",
+      "observe": "Rows of two diagonal orientations accumulate into a maze-like cloth and scroll downward.",
+      "limit": "The visual path is not a solved maze or an L-system rewriting history. Two chosen marks can generate relations that no individual choice explicitly planned.",
+      "variation": "Proposed extension: Keep the same seeded choices but replace diagonals with orthogonals or blocks; ask what new uses and readings the same choices allow.",
+      "handoff": "The next sequence begins with selection of another kind: generated forms are compared using a numerical score. Keep the distinction between a procedure's choices and the purposes a viewer finds in their result.",
+      "candidate_artifacts": [
+        "ten_print_textile"
+      ],
+      "sources": [
+        "commons/maps/Assemblage_Same_Desire/final.md",
+        "commons/maps/Assemblage_Same_Desire/map_data.json",
+        "commons/artifacts/ten_print_textile/ten_print_textile.tscn",
+        "commons/artifacts/ten_print_textile/ten_print_textile.gd",
+        "commons/maps/Assemblage_Same_Desire/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. One physical loom artifact carries the assemblage question; no mandatory explanation of every gallery object.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

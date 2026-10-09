@@ -154,6 +154,7 @@ var data_points: Array = []
 var boundary_mesh: MeshInstance3D
 var margin_meshes: Array = []
 var ui_display: CanvasLayer
+var _show_desktop_ui: bool = true
 
 # 3D in-scene labels
 var _title_label_3d: Label3D
@@ -239,15 +240,18 @@ func setup_ui() -> void:
 		update_ui()
 		return
 	ui_display = CanvasLayer.new()
+	ui_display.visible = _show_desktop_ui
 	add_child(ui_display)
 
 	var panel = Panel.new()
+	panel.name = "Panel"
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	panel.size = Vector2(400, 600)
 	panel.position = Vector2(10, 10)
 	ui_display.add_child(panel)
 	
 	var vbox = VBoxContainer.new()
+	vbox.name = "VBoxContainer"
 	panel.add_child(vbox)
 	
 	# Create labels for SVM information
@@ -922,6 +926,10 @@ func _exit_tree() -> void:
 # quietly relying on a rebuild that no longer happens.
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	# Museum placements use the existing 3D labels, not a screen-sized overlay.
+	if config_data.has("desktop_ui"):
+		_show_desktop_ui = _as_bool(config_data["desktop_ui"], _show_desktop_ui)
+		if is_instance_valid(ui_display): ui_display.visible = _show_desktop_ui
 	var before_cohort: String = cohort
 
 	if config_data.has("cohort"):

@@ -10,9 +10,9 @@ class_name MolecularDesigner
 # critical_parameter: assembly_name — switches between VRBody, Chair, entirely different topologies
 # triggers: auto_cycle timer alternates float/assemble; JSON hot-reload rebuilds catalog live
 # emerges: the moment of recognition when disordered parts coalesce into a legible form
-# needs: VR grab on parts [missing], keyboard controls [has], auto-cycle [has]
+# needs: automatic catalogue display [has]; opt-in body_workshop with VR/desktop joints [has]
 # relationships: unlocks post-reductionist design thinking; depends on Part.tscn/assemblies.json; contrasts snap_cube_puzzle (fixed vs fluid assembly)
-# truth: form is not imposed on matter — it is a conversation between catalog and constraint
+# truth: target positions and part types are authored; their approach is simulated.
 
 @export_group("Configuration")
 @export var json_path: String = "res://algorithms/computationalbiology/molecular_framework/assemblies.json"
@@ -25,6 +25,10 @@ class_name MolecularDesigner
 
 @export_group("Assembly Settings")
 @export var assemble_height: float = 0.0
+@export var body_study: bool = false
+@export var body_workshop: bool = false
+@export var body_ragdoll: bool = false
+@export var body_furniture: bool = false
 @export var bond_radius: float = 0.02
 @export var bond_color: Color = Color(0.9, 0.9, 1.0, 1.0)
 
@@ -61,12 +65,17 @@ var reload_check_accum: float = 0.0
 var auto_cycle_timer: float = 0.0
 var current_cycle_assembly_index: int = 0
 var available_assembly_names: Array[String] = []
+var _witness: MeshInstance3D
 
 func _ready() -> void:
 	_load_part_scene()
 	_load_json()
 	_spawn_inventory()
 	_setup_auto_cycle()
+	if body_study: _mark_witness()
+	if body_workshop: call_deferred("_ensure_body_workshop")
+	if body_ragdoll: call_deferred("_ensure_body_ragdoll")
+	if body_furniture: call_deferred("_ensure_body_furniture")
 	_log_info("Molecular Designer Ready")
 	if enable_auto_cycle:
 		_log_info("Auto-cycle enabled: %ds float, %ds assemble" % [float_duration, assemble_duration])
@@ -81,6 +90,7 @@ func _process(delta: float) -> void:
 		_auto_cycle_tick(delta)
 
 	if assembled:
+		if body_study: _park_surplus(delta)
 		_update_bonds()
 
 func _input(event: InputEvent) -> void:
@@ -167,7 +177,8 @@ func _spawn_inventory() -> void:
 			randf_range(0.1, inventory_box.y),
 			randf_range(-half.z, half.z)
 		)
-		part.global_position = inventory_center + rnd
+		part.position = inventory_center + rnd
+		part.set_part_info("inventory_%02d" % i,key)
 		part.clear_target()
 
 	_log_info("Spawned %d parts" % inventory_count)
@@ -179,6 +190,7 @@ func _set_float_mode() -> void:
 	for p in parts:
 		if is_instance_valid(p):
 			p.clear_target()
+			p.set_process(true)
 
 	_clear_bonds()
 	_log_info("Float mode activated")
@@ -191,6 +203,10 @@ func _assemble(assembly_name: String) -> void:
 
 	current_assembly = assembly_name
 	assembled = true
+	# Shorter assemblies release surplus instances from their previous targets.
+	for part in parts:
+		part.clear_target()
+		part.set_process(true)
 
 	var asm: Dictionary = assemblies[assembly_name]
 	var nodes: Array = asm.get("nodes", [])
@@ -204,7 +220,7 @@ func _assemble(assembly_name: String) -> void:
 		_apply_mesh_from_catalog(part, "SphereSmall")
 
 	# Set up assembly base position
-	var base = global_position + Vector3(0, assemble_height, 0)
+	var base = to_global(Vector3(0, assemble_height, 0))
 
 	# Assign parts to nodes
 	for i in range(nodes.size()):
@@ -214,18 +230,33 @@ func _assemble(assembly_name: String) -> void:
 		var node_pos_array = node.get("pos", [0, 0, 0])
 		var node_pos = Vector3(node_pos_array[0], node_pos_array[1], node_pos_array[2])
 
-		var target_pos = base + (node_pos * scale_factor)
+		var target_pos = to_global(Vector3(0,assemble_height,0) + node_pos*scale_factor)
 
 		# Get part and configure
 		var part: MolecularPart = parts[i]
 		part.set_part_info(node_id, node_part_type)
 		_apply_mesh_from_catalog(part, node_part_type)
 		part.set_target(target_pos)
+	if body_study:
+		for i in range(nodes.size(), parts.size()):
+			parts[i].set_process(false)
 
 	# Build bonds
 	_build_bonds_for(asm, base, scale_factor)
 
 	_log_info("Assembled: " + assembly_name + " (%d nodes, %d bonds)" % [nodes.size(), bonds.size()])
+
+func _park_surplus(delta: float) -> void:
+	# Two visible side racks keep unused carriers available without obscuring the body.
+	var used: int = assemblies[current_assembly].get("nodes", []).size()
+	for i in range(used, parts.size()):
+		var slot: int = i - used
+		var side: float = -1.0 if slot % 2 == 0 else 1.0
+		var target := Vector3(side * 1.6, 0.3 + floor(slot / 12.0) * 0.45, -1.3 + (slot / 2 % 6) * 0.52)
+		if body_workshop:
+			# Keep the comparison aisle and the visitor's body clear of spare panels.
+			target = Vector3(-.8, .3 + floor(slot / 8.0) * .4, -1.75 + (slot % 8) * .5)
+		parts[i].position = parts[i].position.lerp(target, 1.0 - exp(-2.0 * delta))
 
 func _build_bonds_for(asm: Dictionary, base: Vector3, scale: float) -> void:
 	"""Create bond cylinders between connected nodes"""
@@ -499,4 +530,70 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("body_study"): body_study = str(config.body_study).to_lower() in ["true","1"]
+	if config.has("body_furniture"): body_furniture = str(config.body_furniture).to_lower() in ["true","1"]
+	if config.has("body_ragdoll"): body_ragdoll = str(config.body_ragdoll).to_lower() in ["true","1"]
+	if config.has("body_workshop"): body_workshop = str(config.body_workshop).to_lower() in ["true","1"]
+	if config.has("float_duration"): float_duration = clampf(float(config.float_duration),2,60)
+	if config.has("assemble_duration"): assemble_duration = clampf(float(config.assemble_duration),2,60)
+	if is_node_ready() and body_study: _mark_witness()
+	if is_node_ready() and body_workshop: call_deferred("_ensure_body_workshop")
+	if is_node_ready() and body_ragdoll: call_deferred("_ensure_body_ragdoll")
+	if is_node_ready() and body_furniture: call_deferred("_ensure_body_furniture")
+
+func _ensure_body_workshop() -> void:
+	if not body_workshop or has_node("BodyWorkshop"): return
+	var study := Node3D.new()
+	study.set_script(load("res://algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd"))
+	study.name = "BodyWorkshop"
+	study.top_level = true
+	add_child(study)
+	study.global_transform = Transform3D(global_basis.orthonormalized(),to_global(Vector3(2.6,0,.6)))
+	study.build(catalog, assemblies["VRBody"])
+
+func _mark_witness() -> void:
+	if parts.is_empty(): return
+	if not is_instance_valid(_witness):
+		_witness = MeshInstance3D.new()
+		_witness.name = "SameInstanceWitness"
+		var ring := TorusMesh.new()
+		ring.inner_radius = .19
+		ring.outer_radius = .22
+		_witness.mesh = ring
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(1,.65,.12)
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		_witness.material_override = mat
+		parts[0].add_child(_witness)
+		_witness.rotation_degrees.x = 90
+	var caption := get_node_or_null("InstructionsLabel") as Label3D
+	if caption:
+		caption.text = "FOLLOW THE AMBER RING\nOne instance. Another role.\nWalk around the assembly."
+		caption.position = Vector3(1.6,.8,.8)
+		caption.font_size = 24
+
+func _ensure_body_ragdoll() -> void:
+	if not body_ragdoll or has_node("BodyRagdoll") or not assemblies.has("VRBody"): return
+	var study := Node3D.new()
+	study.set_script(load("res://algorithms/computationalbiology/molecular_framework/AssemblyRagdoll.gd"))
+	study.name="BodyRagdoll"
+	study.top_level=true
+	add_child(study)
+	study.global_transform=Transform3D(global_basis.orthonormalized()*Basis(Vector3.UP,PI/2),to_global(Vector3(0,0,1.85)))
+	study.build(assemblies["VRBody"])
+
+func _ensure_body_furniture() -> void:
+	if not body_furniture: return
+	var placements := {
+		"Chair":[Vector3(-.25,0,-1.6),PI/2],
+		"Table":[Vector3(2.6,0,-1.6),-PI/2],
+		"Lamp":[Vector3(2.85,0,2.15),-PI/2]
+	}
+	for kind in placements:
+		if has_node("Furniture_"+kind) or not assemblies.has(kind): continue
+		var study := Node3D.new()
+		study.set_script(load("res://algorithms/computationalbiology/molecular_framework/AssemblyFurnitureStudy.gd"))
+		study.name="Furniture_"+kind;study.assembly_kind=kind;study.catalog=catalog
+		study.top_level=true;add_child(study)
+		study.global_transform=Transform3D(global_basis.orthonormalized()*Basis(Vector3.UP,placements[kind][1]),to_global(placements[kind][0]))
+		study.build(assemblies[kind])

@@ -23,6 +23,9 @@ class_name AchillesTortoise
 @export var step_count: int = 10
 @export var step_interval: float = 2.0
 
+@export var discovery: bool = false
+var _manual: bool = false
+var _motion: Tween
 var _achilles: Node3D
 var _tortoise: Node3D
 var _markers: Array[MeshInstance3D] = []
@@ -34,14 +37,22 @@ var _loop_timer: float = 0.0
 
 
 func _ready() -> void:
+	if has_meta("config_discovery"):
+		discovery = str(get_meta("config_discovery")) in ["1","true"]
 	_build_track()
 	_build_achilles()
 	_build_tortoise()
 	_build_step_markers()
 	_reset()
+	if discovery:
+		_setup_discovery()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("discovery"):
+		discovery = str(config_data["discovery"]) in ["1","true"]
+		if discovery and is_instance_valid(_achilles):
+			_setup_discovery()
 	if config_data.has("length"):
 		track_length = float(config_data["length"])
 	if config_data.has("steps"):
@@ -187,6 +198,12 @@ func _build_step_markers() -> void:
 # ── animation loop ───────────────────────────────────────────────────────────
 
 func _process(delta: float) -> void:
+	if discovery:
+		if _manual: return
+		if _current_step >= step_count:
+			if not is_instance_valid(_motion) or not _motion.is_running():
+				_manual = true
+			return
 	if _paused:
 		_loop_timer -= delta
 		if _loop_timer <= 0.0:
@@ -203,7 +220,9 @@ func _process(delta: float) -> void:
 		_loop_timer = 4.0
 
 
-func _advance() -> void:
+func _advance(animate: bool = true) -> void:
+	if _current_step >= step_count: return
+	if is_instance_valid(_motion): _motion.kill()
 	var n := _current_step + 1
 
 	# Achilles goes to where Tortoise was: A_n = L*(1 - 1/2^n)
@@ -212,12 +231,14 @@ func _advance() -> void:
 	# Tortoise moves forward: T_n = L*(1 - 1/2^(n+1))
 	var t_z := -track_length * (1.0 - 1.0 / pow(2.0, float(n + 1)))
 
-	var tw := create_tween()
-	tw.set_parallel(true)
-	tw.tween_property(_achilles, "position:z", a_z, step_interval * 0.5)\
-		.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tw.tween_property(_tortoise, "position:z", t_z, step_interval * 0.5)\
-		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	if animate:
+		_motion = create_tween()
+		_motion.set_parallel(true)
+		_motion.tween_property(_achilles,"position:z",a_z,step_interval*0.5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+		_motion.tween_property(_tortoise,"position:z",t_z,step_interval*0.5).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	else:
+		_achilles.position.z = a_z
+		_tortoise.position.z = t_z
 
 	# Reveal marker and label
 	if _current_step < _markers.size():
@@ -229,6 +250,9 @@ func _advance() -> void:
 
 
 func _reset() -> void:
+	if is_instance_valid(_motion): _motion.kill()
+	_paused = false
+	_loop_timer = 0.0
 	if _achilles:
 		_achilles.position = Vector3(0.0, 0.0, 0.0)
 	if _tortoise:
@@ -275,3 +299,40 @@ func _label_3d(text: String, color: Color, pos: Vector3) -> Label3D:
 	lbl.position = pos
 	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	return lbl
+
+func _setup_discovery() -> void:
+	if has_node("ExperimentPanel"): return
+	_manual = true
+	if is_instance_valid(_motion): _motion.pause()
+	var panel := Node3D.new()
+	panel.name = "ExperimentPanel"
+	panel.set_script(preload("res://commons/ui/limit_experiment_panel.gd"))
+	panel.position = Vector3(1.05,0.3,-0.5)
+	add_child(panel)
+
+func next_discovery_step() -> void:
+	_manual = true
+	_step_timer = 0.0
+	if _current_step >= step_count:
+		if is_instance_valid(_motion): _motion.kill()
+		_achilles.position.z = -track_length*(1.0-1.0/pow(2.0,float(_current_step)))
+		_tortoise.position.z = -track_length*(1.0-1.0/pow(2.0,float(_current_step+1)))
+		return
+	_advance(false)
+
+func toggle_discovery_play() -> void:
+	if _current_step >= step_count and (not is_instance_valid(_motion) or not _motion.is_valid()): return
+	_manual = not _manual
+	if is_instance_valid(_motion) and _motion.is_valid():
+		if _manual: _motion.pause()
+		else: _motion.play()
+
+func restart_discovery() -> void:
+	_manual = true
+	_reset()
+
+func discovery_snapshot() -> Dictionary:
+	return {"step":_current_step,"count":step_count,"manual":_manual,
+		"remaining":track_length+_achilles.position.z,
+		"gap":_achilles.position.z-_tortoise.position.z,
+		"target_remaining":track_length/pow(2.0,float(_current_step))}

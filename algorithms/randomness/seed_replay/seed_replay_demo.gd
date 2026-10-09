@@ -1,17 +1,17 @@
 # seed_replay_demo.gd
 # Seed Replay Demo — demonstrates seed reproducibility
 # An 8x8 grid of colored cubes generated from a seed.
-# Same seed always produces the exact same pattern.
+# Replay repeats a pattern when the generator, seed and draw procedure are held fixed.
 #
 # @identity
-# essence: deterministic chaos — identical seeds yield identical worlds
+# essence: a seeded pseudorandom stream, replayed with or without one discarded draw
 # desire: slide the seed, watch the grid repaint; hit Replay, see it unchanged
 # critical_parameter: comparison — whether the claim gets a second panel to be checked against; then the RNG seed, one integer controlling 64 colors
 # triggers: slider_moved updates seed live; Replay regenerates same pattern; Random picks new seed; apply_grid_config({comparison, seed, contrast_seed}) rebuilds the columns
-# emerges: the grid looks random but is perfectly repeatable — chaos and order coexist
+# emerges: the same seed can dress the grid differently when draw consumption changes
 # needs: RackTemplates panel [has]; BoxMesh cubes [has]; Label3D seed display [has]
 # relationships: feeds into monte_carlo (seed control for reproducible sampling); sibling to coin_toss (both explore RNG)
-# truth: Pseudorandomness is determinism wearing a mask — the seed is the face underneath.
+# truth: Nothing in a draw says that it is red; the program assigns that role by where the draw falls.
 
 extends Node3D
 
@@ -467,10 +467,11 @@ func _build_panel() -> void:
 			area.button_pressed.connect(func(_b): toggle_extra_draw())
 
 
+# Compact museum staging reparents Panel beneath ReachConsole; locate its live slider.
 func _on_seed_slider(_value: float) -> void:
 	if _syncing_seed_slider:
 		return
-	var slider: Node = get_node_or_null("Panel/Param_0")
+	var slider: Node = find_child("Param_0", true, false)
 	if slider and slider.has_method("get_normalized_value"):
 		var norm: float = clampf(slider.get_normalized_value(), 0.0, 1.0)
 		_current_seed = roundi(norm * 999.0)
@@ -480,7 +481,7 @@ func _on_seed_slider(_value: float) -> void:
 
 ## Keep a programmatic seed update from being mistaken for a visitor's gesture.
 func _sync_seed_slider() -> void:
-	var slider: Node = get_node_or_null("Panel/Param_0")
+	var slider: Node = find_child("Param_0", true, false)
 	if slider and slider.has_method("set_normalized_value"):
 		_syncing_seed_slider = true
 		slider.set_normalized_value(clampf(float(_current_seed) / 999.0, 0.0, 1.0))

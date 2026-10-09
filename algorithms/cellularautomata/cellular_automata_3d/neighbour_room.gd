@@ -96,6 +96,8 @@ func refresh() -> void:
 		var basis:=Basis.IDENTITY if state>0 else Basis.IDENTITY.scaled(Vector3.ZERO)
 		cells.set_instance_transform(i,Transform3D(basis,Vector3(offsets[i])*SPACING))
 		cells.set_instance_color(i,colour)
+	var words := ["EMPTY", "ACTIVE", "FADING"]
+	caption.text="CELL (26, 22, 24) / GEN %d\nCENTRE: %s / %d ACTIVE NEIGHBOURS" % [work.generation, words[states[13]], active_neighbours]
 
 func readback() -> Dictionary:
 	return {"address":[ADDRESS.x,ADDRESS.y,ADDRESS.z],"generation":work.generation,

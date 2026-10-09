@@ -1,0 +1,84 @@
+{
+  "_meta": {
+    "sequence": "forces",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "VFM_05_Launch": {
+      "inherited": "From Vectors_Act2_VectorArithmetic: Before these operations spread into fields, the next room uses them to separate a launch velocity into components and compare the resulting arcs.",
+      "question": "Does aiming higher always send a launch farther?",
+      "ontology": "A launch velocity has horizontal and vertical components. Gravity changes the vertical component over time, so the initial direction and the resulting curved path are different things.",
+      "experiment": "Move the ANGLE slider and compare the traced arc, its apex and landing marker. Find a low and a high angle with similar range while the launch power stays fixed.",
+      "observe": "A steeper direction increases the upward share but reduces the horizontal share. Range grows and then shrinks; complementary directions can land at the same horizontal distance by different paths.",
+      "limit": "The range relationship assumes fixed gravity, no air resistance and landing at launch height. The displayed trace does not demonstrate collision, wind or steering during flight.",
+      "variation": "Choose a high route and a low route to the same landing and compare which would clear an imagined obstacle. An actual obstacle test would require a separate launch simulation.",
+      "handoff": "In the next room, motion continues to accumulate under forces that can change its course or prevent it from beginning. Keep the distinction between the initial condition and what acts afterwards.",
+      "candidate_artifacts": [
+        "launch_arc"
+      ],
+      "sources": [
+        "commons/maps/VFM_05_Launch/final.md",
+        "commons/maps/VFM_05_Launch/map_data.json",
+        "commons/artifacts/registry/vectors_demos.json",
+        "commons/artifacts/launch_arc/launch_arc.tscn",
+        "commons/artifacts/launch_arc/launch_arc.gd",
+        "commons/artifacts/_toy_console/toy_console.gd"
+      ],
+      "open_questions": [
+        "Do not follow the identity header’s claim that this specific toy throws the visitor. Power is a configuration value; only ANGLE is a visitor slider.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "VFM_03_Motion": {
+      "inherited": "From VFM_05_Launch: In the next room, motion continues to accumulate under forces that can change its course or prevent it from beginning. Keep the distinction between the initial condition and what acts afterwards.",
+      "question": "How can a continuous adjustment produce a sudden start?",
+      "ontology": "A force balance can hold a body still until a threshold is crossed. The component of gravity along a slope competes with a friction bound set by the normal component.",
+      "experiment": "Keep the ramp angle fixed and move μ until the block changes between STATIC and SLIDING. Then hold μ fixed and vary ANGLE. Use RESET to compare fresh runs.",
+      "observe": "The labels and force arrows change as the block begins to move. Below the threshold the model holds the block; above it the displayed velocity accumulates and the block accelerates down the ramp.",
+      "limit": "The model uses one coefficient and a simplified state switch, whereas real contacts may distinguish static and kinetic friction and have more complex material behavior. No movement is not evidence of no forces.",
+      "variation": "Approach the threshold from each side and compare the displayed decision. A separate static/kinetic coefficient pair would be a proposed extension capable of demonstrating hysteresis.",
+      "handoff": "Vectors, fields and motion follow. Carry forward this habit: identify what is changing, what is accumulating, and which influences the model includes.",
+      "candidate_artifacts": [
+        "friction_ramp"
+      ],
+      "sources": [
+        "commons/maps/VFM_03_Motion/final.md",
+        "commons/maps/VFM_03_Motion/map_data.json",
+        "commons/artifacts/registry/physics_simulation.json",
+        "commons/artifacts/friction_ramp/friction_ramp.tscn",
+        "commons/artifacts/friction_ramp/friction_ramp.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "VFM_08_Arena": {
+      "inherited": "From VFM_09_Legs: One teleport on, in the Arena, a small black crab on four long jointed legs is walking the only true plant-and-step gait in this museum, at a tenth of this size, and it is looking for you.",
+      "question": "If two collisions conserve the same kind of quantity, must their outcomes look alike?",
+      "ontology": "Momentum combines mass with signed velocity. Conservation constrains the sum, while the distribution of velocity between bodies can change.",
+      "experiment": "Move MASS RATIO on the collision-carts console. Compare the upper before lane with the lower after lane: track the striker’s arrow as it reverses, disappears near equal masses, and points forward for a heavier striker.",
+      "observe": "Changing the mass ratio changes both outgoing arrows. A light striker rebounds, equal masses transfer the incoming motion in this model, and a heavy striker continues forward while the other cart leaves faster.",
+      "limit": "This is an ideal elastic, isolated, one-dimensional comparison, not a live collision arena. Arrow lengths include a visual minimum, so their lengths are not an exact ruler for measuring momentum.",
+      "variation": "Predict the sign of the striker’s outgoing velocity before moving through equal masses. A sticky collision would conserve momentum with a different energy result, but no restitution control is available on this console.",
+      "handoff": "The next room considers force as a place. Bring the habit of looking at the whole relationship before judging an outcome from one body's motion.",
+      "candidate_artifacts": [
+        "collision_carts"
+      ],
+      "sources": [
+        "commons/maps/VFM_08_Arena/final.md",
+        "commons/maps/VFM_08_Arena/map_data.json",
+        "commons/artifacts/registry/vectors_demos.json",
+        "commons/artifacts/collision_carts/collision_carts.tscn",
+        "commons/artifacts/collision_carts/collision_carts.gd",
+        "commons/artifacts/_toy_console/toy_console.gd"
+      ],
+      "open_questions": [
+        "There are many broader active arena encounters in this developed room. This is a focused initial book route only; retain them as secondary and record later expansion rather than remove them.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

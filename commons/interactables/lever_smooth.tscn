@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://cs6dxfu5owcgo"]
+[gd_scene load_steps=20 format=3 uid="uid://cs6dxfu5owcgo"]
 
-[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_hinge.gd" id="2"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
+[ext_resource type="Script" path="res://commons/interactables/angular_driver.gd" id="2"]
+[ext_resource type="Script" path="res://commons/interactables/angular_handle.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://c25yxb0vt53vc" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_hand_left.tscn" id="4_psbg5"]
 [ext_resource type="Animation" uid="uid://db62hs5s4n2b3" path="res://addons/godot-xr-tools/hands/animations/left/Grip 4.res" id="5_ha7r4"]
 [ext_resource type="Script" path="res://addons/godot-xr-tools/hands/poses/hand_pose_settings.gd" id="6_gg8v3"]
@@ -12,11 +12,14 @@
 [ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
 [ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
 
+[ext_resource type="Script" path="res://commons/interactables/physical_angular_control.gd" id="Root"]
+[ext_resource type="Script" path="res://commons/interactables/joystick_pointer_body.gd" id="Pointer"]
+
 [sub_resource type="BoxShape3D" id="1"]
-size = Vector3(0.08, 0.15, 0.02)
+size = Vector3(0.18, 0.25, 0.02)
 
 [sub_resource type="BoxMesh" id="BoxMesh_Base"]
-size = Vector3(0.08, 0.15, 0.02)
+size = Vector3(0.18, 0.25, 0.02)
 
 [sub_resource type="BoxShape3D" id="3"]
 size = Vector3(0.015, 0.015, 0.1)
@@ -45,8 +48,12 @@ height = 0.04
 radius = 0.02
 
 [node name="LeverSmooth" type="Node3D"]
+script = ExtResource("Root")
+hinge_path = NodePath("LeverOrigin/InteractableLever")
+kind = "lever"
 
 [node name="Frame" type="StaticBody3D" parent="."]
+script = ExtResource("Pointer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Frame"]
 shape = SubResource("1")
@@ -63,6 +70,8 @@ hinge_limit_min = -45.0
 hinge_limit_max = 45.0
 
 [node name="HingeBody" type="StaticBody3D" parent="LeverOrigin/InteractableLever"]
+script = ExtResource("Pointer")
+control_path = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
 
 [node name="BarCollision" type="CollisionShape3D" parent="LeverOrigin/InteractableLever/HingeBody"]
@@ -92,7 +101,3 @@ picked_up_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("7")
-
-[node name="GrabPointRedirectLeft" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("10_2yftn")]
-
-[node name="GrabPointRedirectRight" parent="LeverOrigin/InteractableLever/HandleOrigin/InteractableHandle" node_paths=PackedStringArray("target") instance=ExtResource("10_2yftn")]

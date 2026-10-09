@@ -4,6 +4,7 @@ class_name TerrainGeneratorSculpt extends TerrainGeneratorBase
 # Allows adding blobs (spheres) to a buffer which are then smooth-blended by the shader.
 
 var blobs_array : Array[Vector4] = [] # x,y,z,radius
+var edit_revision := 0
 var blob_buffer : RID
 const blob_bind_index : int = 4
 
@@ -29,6 +30,7 @@ func get_compute_shader_path() -> String:
 	return "res://algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesSculpt.glsl"
 
 func add_blob(pos: Vector3, radius: float) -> void:
+	edit_revision += 1
 	blobs_array.append(Vector4(pos.x, pos.y, pos.z, radius))
 	# Note: We don't update buffer instantly here, we do it in run_compute()
 	# or we can force a run.
@@ -39,7 +41,23 @@ func add_blob(pos: Vector3, radius: float) -> void:
 		blobs_array.pop_front() # Remove oldest
 	
 func clear_blobs() -> void:
+	edit_revision += 1
 	blobs_array.clear()
+
+func create_mesh() -> void:
+	if thread and thread.is_started():
+		thread.wait_to_finish()
+		thread = null
+	# Empty edits must clear the previous geometry and collision. Check the raw
+	# counter so the base's safety-aborted oversized output cannot look like erasure.
+	if rendering_device != null and counter_data_bytes != null and counter_data_bytes.size() >= 4 and counter_data_bytes.decode_s32(0) == 0:
+		array_mesh.clear_surfaces()
+		mesh = array_mesh
+		for child in get_children():
+			if child is StaticBody3D: child.queue_free()
+		waiting_for_meshthread = false
+		return
+	super.create_mesh()
 
 func get_params_array():
 	var params = super.get_params_array()

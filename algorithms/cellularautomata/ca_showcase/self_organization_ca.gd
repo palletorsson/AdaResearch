@@ -1,22 +1,26 @@
-﻿# SelfOrganizationCA.gd
-# The edge of chaos — Langton's lambda, the between-state where complexity lives
-#
-# @identity
-# essence: cell(t+1) = cell(t)*(1-k) + avg(neighbors)*k + noise, where LAMBDA slides k and noise between two deaths — frozen order and pure chaos — and complexity emerges only in the narrow band between them.
-# desire: To live at the edge. Not to freeze into one uniform consensus (order's death), not to dissolve into static (chaos's death), but to hover in the critical band where domains form, drift, break, and reform — never settling, never scattering.
-# critical_parameter: LAMBDA (0.5) — Langton's λ, the queer between-state. Low λ → strong consensus pull, no noise → the grid freezes solid (order dies still). High λ → no pull, all noise → the grid boils into static (chaos dies loud). The interesting things happen only in the middle.
-# triggers: Slide λ toward 0 and watch domains lock into a single frozen field; slide toward 1 and watch structure boil away into noise; hold λ in the CRITICAL_BAND (0.35–0.65) and structure persists AND changes at once.
-# emerges: Order and chaos are the two deaths; the edge is the living zone. Maximal pattern diversity, longest-lived boundaries, and the most complex behaviour all peak in the critical band — computation lives where neither order nor chaos wins.
-# needs: VR lambda slider [missing — see set_lambda()], diversity readout [has via get_pattern_diversity], critical-band indicator [has via is_at_edge_of_chaos].
-# relationships: The CA analogue of the phase transition — between solid and gas, between the frozen and the random, between the closeted-fixed and the noise-erased. Feeds into CA_EdgeOfChaos; the self-organization it demonstrates is precisely what only survives at the edge.
-# truth: There are two ways to die — freeze into one thing, or dissolve into everything. Langton's lambda names the narrow band between them, and that band is where organization, memory, and computation live. The edge of chaos is not a compromise between order and noise; it is the only place complexity is possible.
-
+# Local averaging, disturbance and integer storage.
+# The legacy lambda interpolates two coefficients; its regime names are authored labels,
+# not Langton rule-table measurements or established criticality.
+# CA_EdgeOfChaos now configures the paired DifferenceStudy below.
 extends BaseCA
 
-# LAMBDA is Langton's λ — the position between the two deaths.
-#   0.0 → frozen order (consensus pull maxed, noise off): the grid locks solid.
-#   1.0 → pure chaos (no pull, noise maxed): the grid boils into static.
-#   The living zone is the narrow CRITICAL_BAND around the middle.
+var difference_study:bool=false
+var walk_slice:bool=false
+
+func _ready() -> void:
+	if difference_study:
+		_mount_difference()
+	else:
+		super._ready()
+
+func _mount_difference() -> void:
+	is_running=false
+	if has_node("DifferenceStudy"):return
+	var study:Node3D=Node3D.new()
+	study.set_script(load("res://algorithms/cellularautomata/ca_showcase/difference_study.gd"))
+	study.name="DifferenceStudy";study.walk_slice=walk_slice;add_child(study)
+
+# Legacy coupled-control presets, retained for existing standalone uses.
 const LAMBDA = 0.5
 const CRITICAL_BAND_LOW = 0.35
 const CRITICAL_BAND_HIGH = 0.65
@@ -67,7 +71,7 @@ func update_simulation(_delta) -> void:
 func evolve_self_organization() -> void:
 	var new_grid = duplicate_3d_grid(grid)
 
-	# Derive the two competing pressures from Langton's lambda once per step.
+	# Derive two coefficients from the legacy coupled control.
 	# Toward order: strong consensus pull, no noise. Toward chaos: no pull, loud noise.
 	var interaction := _interaction_strength()
 	var randomness := _randomness()
@@ -161,16 +165,14 @@ func reset_simulation() -> void:
 
 # --- Edge of chaos controls ---
 
-# Move the system along Langton's lambda axis. 0 = frozen order, 1 = pure chaos,
-# ~0.5 = the living edge. Clamped so the reading stays honest at the extremes.
+# Legacy coupled parameter: lower values strengthen averaging and reduce drive.
 func set_lambda(value: float) -> void:
 	lambda_value = clamp(value, 0.0, 1.0)
 
 func get_lambda() -> float:
 	return lambda_value
 
-# True while lambda sits in the critical band — the narrow zone where structure
-# both persists and changes, and complexity is maximal.
+# Legacy preset-band membership only; this does not measure criticality.
 func is_at_edge_of_chaos() -> bool:
 	return lambda_value >= CRITICAL_BAND_LOW and lambda_value <= CRITICAL_BAND_HIGH
 
@@ -183,6 +185,13 @@ func get_regime() -> String:
 	return "edge"
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("study",""))=="difference":
+		difference_study=true
+		walk_slice=str(config.get("slice", ""))=="walk"
+		if is_node_ready():
+			_mount_difference()
+			if walk_slice: get_node("DifferenceStudy").enable_walking_slice()
+		return
 	# Optional lambda override from map config, so a map can seat this artifact
 	# anywhere on the order↔chaos axis. Additive: absent keys leave the default edge.
 	if config.has("lambda"):

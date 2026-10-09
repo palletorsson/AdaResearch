@@ -11,30 +11,30 @@ signal slider_moved(value)
 @export var default_on_release: bool = false
 
 # Auto-drive configuration
-@export var auto_drive: bool = false
+@export var auto_drive: bool = false:
+	set(value):
+		auto_drive = value
+		if is_inside_tree(): set_process(auto_drive or not grabbed_handles.is_empty())
 @export var auto_drive_speed: float = 1.0
 var _time_accumulator: float = 0.0
 
 func _ready() -> void:
 	super()
 	_apply_transform(slider_value)
+	set_process(auto_drive)
 	if released.connect(_on_slider_released):
 		push_error("Cannot connect slider released signal")
 
 func _process(delta: float) -> void:
 	# If grabbed, handle manual interaction
 	if not grabbed_handles.is_empty():
+		var held: Array[Vector3] = []
 		var offset_sum := 0.0
-		for item in grabbed_handles:
-			var handle := item as XRToolsInteractableHandle
-			if handle:
-				# Calculate offset in local Y axis
-				var diff = handle.global_transform.origin - handle.handle_origin.global_transform.origin
-				# Project onto local Y axis
-				offset_sum += diff.dot(global_transform.basis.y)
-
-		var offset_val := offset_sum / grabbed_handles.size()
-		move_slider(slider_value + offset_val)
+		for handle: XRToolsInteractableHandle in grabbed_handles:
+			held.append(handle.global_position)
+			offset_sum += to_local(handle.global_position).y - to_local(handle.handle_origin.global_position).y
+		move_slider(slider_value + offset_sum / grabbed_handles.size())
+		for i in grabbed_handles.size(): grabbed_handles[i].global_position = held[i]
 		return
 
 	# If not grabbed and auto-drive is on, oscillate
@@ -83,3 +83,7 @@ func _apply_limits(value: float) -> float:
 func _on_slider_released(_interactable) -> void:
 	if default_on_release:
 		move_slider(default_value)
+
+func _on_handle_dropped(handle: XRToolsInteractableHandle) -> void:
+	super(handle)
+	set_process(auto_drive or not grabbed_handles.is_empty())

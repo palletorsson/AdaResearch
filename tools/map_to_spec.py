@@ -89,8 +89,8 @@ def grid_dims(grid: List[List[str]]) -> Tuple[int, int]:
     return (len(grid[0]), len(grid))  # W, D
 
 
-def cell_is_empty(cell: str) -> bool:
-    s = cell.strip()
+def cell_is_empty(cell) -> bool:
+    s = str(cell).strip()
     return s == "" or s == " "
 
 
@@ -131,7 +131,7 @@ INTERACTABLE_RE = re.compile(r"^([A-Za-z0-9_]+)(?::([^:]*))?(?::([^:]*))?$")
 def interactable_tokens(grid: List[List[str]]) -> List[Tuple[int, int, str]]:
     out = []
     for x, z, cell in iter_cells(grid):
-        s = cell.strip()
+        s = str(cell).strip()
         if not s or s == " ":
             continue
         m = INTERACTABLE_RE.match(s)
@@ -157,12 +157,13 @@ def flood_fill_empty(structure: List[List[str]], interactables: List[List[str]],
             continue
         # A cell counts as "empty" if structure is walkable floor (non-zero, non-void)
         # AND the interactable layer is empty/space.
+        # str() first: a map may hold a numeric cell (gate O), and int has no .strip
         try:
-            s = structure[z][x].strip()
+            s = str(structure[z][x]).strip()
         except IndexError:
             continue
         try:
-            i = interactables[z][x].strip()
+            i = str(interactables[z][x]).strip()
         except IndexError:
             i = ""
         if s in ("", "0") or i not in ("", " "):
@@ -235,7 +236,7 @@ def _parse_annotation(parts: List[str]) -> Dict[str, Any]:
 def detect_annotations(utilities: List[List[str]]) -> List[Dict]:
     found = []
     for x, z, cell in iter_cells(utilities):
-        s = cell.strip()
+        s = str(cell).strip()
         if s.startswith("@"):
             parts = s.split(":")
             code = parts[0]
@@ -331,7 +332,7 @@ def build_spec(map_name: str) -> Optional[dict]:
     W, D = grid_dims(structure)
 
     tokens = interactable_tokens(interactables)
-    walkable = sum(1 for _, _, c in iter_cells(structure) if c.strip() not in ("", "0"))
+    walkable = sum(1 for _, _, c in iter_cells(structure) if str(c).strip() not in ("", "0"))
     density = (len(tokens) / walkable) if walkable else 0.0
 
     home_seq = sequence_of_map(map_name) or ""

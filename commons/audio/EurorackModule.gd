@@ -122,10 +122,9 @@ func build_from_definition(def: Dictionary, uvac: Node3D) -> void:
 	# --- Mounting screws (4 corners) ---
 	_add_screws(panel_w, panel_h)
 
-	# --- No 3D controls ---
-	# ModuleFaceTexture handles ALL visuals AND interaction (both desktop + VR)
-	# via SubViewport + StaticBody3D pointer collision + _gui_input()
-	# This avoids XRTools RigidBody3D script compilation errors entirely.
+	# Keep panel controls in the viewport; sockets are physical patch endpoints.
+	for jack_def in def.get("jacks", []):
+		_spawn_jack(jack_def, panel_w, panel_h)
 
 
 func _add_screws(panel_w: float, panel_h: float) -> void:

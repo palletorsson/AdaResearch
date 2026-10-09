@@ -9,6 +9,10 @@ const CALM_RADIUS := 2.0
 const CALM_DURATION := 3.0
 const CALM_DAMP_ADD := 3.0
 
+func _ready() -> void:
+	super()
+	collision_mask |= 4 # The carried point and museum force prefabs.
+
 func _build_visual() -> void:
 	_mesh_instance = MeshInstance3D.new()
 	var sphere := SphereMesh.new()
@@ -108,12 +112,12 @@ func _create_calming_field() -> void:
 	sphere.radius = CALM_RADIUS
 	query.shape = sphere
 	query.transform = global_transform
-	query.collision_mask = 1 | 2 | 16
+	query.collision_mask = 1 | 2 | 4 | 16 # Include the museum's PointBody / loose bodies.
 
 	var results := space.intersect_shape(query)
 	for result in results:
 		var collider = result["collider"]
-		if collider is RigidBody3D and collider != self:
+		if collider is RigidBody3D and collider != self and not collider.freeze:
 			_apply_calming(collider)
 
 	# Cleanup ring particles
@@ -126,18 +130,25 @@ func _create_calming_field() -> void:
 
 func _apply_calming(body: RigidBody3D) -> void:
 	# Slow it down — increase damping temporarily
-	var original_linear_damp: float = body.linear_damp
-	var original_angular_damp: float = body.angular_damp
-
-	body.linear_damp += CALM_DAMP_ADD
-	body.angular_damp += CALM_DAMP_ADD * 0.7
-
-	# Also reduce current velocity
+	# Refresh one effect per body. Repeated shots must not stack damping or
+	# restore a stale temporary value after another projectile has landed.
+	var state: Dictionary = body.get_meta("forces_calm_state", {})
+	if state.is_empty():
+		state = {"linear":body.linear_damp,"angular":body.angular_damp}
+	# A unique token also invalidates a pre-reset timer if the body is shot again.
+	var token=RefCounted.new()
+	state.token=token
+	body.set_meta("forces_calm_state",state)
+	body.linear_damp = state.linear + CALM_DAMP_ADD
+	body.angular_damp = state.angular + CALM_DAMP_ADD * 0.7
 	body.linear_velocity *= 0.3
 	body.angular_velocity *= 0.2
-
-	# Restore after duration
-	var tween := body.create_tween()
-	tween.tween_interval(CALM_DURATION)
-	tween.tween_property(body, "linear_damp", original_linear_damp, 1.0)
-	tween.tween_property(body, "angular_damp", original_angular_damp, 1.0)
+	# The body owns the timer: the projectile may already have disappeared.
+	var receiver=weakref(body)
+	body.get_tree().create_timer(CALM_DURATION).timeout.connect(func():
+		var target: RigidBody3D=receiver.get_ref()
+		if not is_instance_valid(target):return
+		var current: Dictionary=target.get_meta("forces_calm_state",{})
+		if current.get("token")!=token:return
+		target.linear_damp=current.linear;target.angular_damp=current.angular
+		target.remove_meta("forces_calm_state"))

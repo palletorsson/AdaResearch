@@ -212,6 +212,10 @@ extends RefCounted
 # height, because "height" and "the surface a thing stands on" are different
 # numbers on three of the five candidates:
 #
+#   2026-09-27: museum presentation decks at max(top_height, 0.02), with one
+#   matte block and matching collision. Automatic MIN_LIFT stays 0.25; explicit
+#   lower supports are honored. The following measurements describe the
+#   retained industrial presentation:
 #   station_plinth / _wide / _micropod   deck == max(top_height, 0.25) EXACTLY.
 #       station_plinth.gd:199 `var th: float = maxf(top_height, 0.25)` and :239
 #       "Cap — top sits exactly at top_height", the cap box centred at
@@ -263,9 +267,8 @@ const TARGET_CENTRE := 1.15
 const BAND_LOW := 1.05
 const BAND_HIGH := 1.30
 
-## Below this the lift is not worth furniture — and it is also
-## station_plinth.gd's own `maxf(top_height, 0.25)`, so a smaller request would
-## be quietly overridden by the plinth itself.
+## Below this an automatic lift is not worth furniture. Explicit museum supports
+## can now be lower: the matte block honors heights down to 0.02 m.
 const MIN_LIFT := 0.25
 ## exhibit_furniture's plinth "s" decks at 1.19 m — the tallest pedestal the
 ## corpus ships. A guard, not a shaper: it binds on nothing in the spine.
@@ -635,13 +638,13 @@ static func _decide(token: String, cell: Dictionary, h: float, b: float,
 		var sw: float = minf(b + 0.12, float(cells) - FOOT_MARGIN)
 		return {
 			"needs": true,
-			"plinth": "hangar_step_base",
+			"plinth": "station_plinth",
 			"plinth_height": lift,
 			"artifact_y": lift,
 			"why": "%.2f m across and %.2f m tall — a low broad thing wants a %.2f m STEP, which reads as ground; a pedestal that size reads as a table with an accident on it" % [b, h, lift],
-			"scene": SCENE_STEP,
-			"config": {"step_height": lift, "width": sw, "depth": sw,
-				"top_style": "solid", "edge_rail": false, "ramp": false},
+			"scene": SCENE_PLINTH,
+			"config": {"top_height": lift, "cap_meters": sw, "width_cells": cells,
+				"depth_cells": cells, "presentation": "museum"},
 			"footprint_cells": cells,
 			"foot_m": sw,
 			"centre": lift + h * 0.5,

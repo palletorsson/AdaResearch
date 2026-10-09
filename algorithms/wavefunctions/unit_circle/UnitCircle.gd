@@ -4,17 +4,18 @@ extends Node3D
 
 # @identity
 # essence: point(t) = (cos(theta), sin(theta)), waves built stroke by stroke as angle sweeps
-# desire: Watch a point trace the unit circle while sine and cosine waves build incrementally
+# desire: Follow both coordinate projections of a turning point while the selected graph builds incrementally
 # critical_parameter: rotation_speed — controls how fast the circle is traced and waves extend
 # triggers: continuous angle increment builds the wave one sample at a time until complete
-# emerges: visual proof that sine and cosine are born from circular motion
+# emerges: sine and cosine as coordinate projections of uniform angular progression
 # needs: VR observation [has], speed control [missing]
 # relationships: depends on MultiMesh segment rendering; contrasts with UnitCircleTrig (buildup vs continuous trail); unlocks the circle-wave connection
 # truth: The unit circle is the Rosetta Stone of trigonometry — rotation on one side, oscillation on the other.
 
 # --- DNA ---------------------------------------------------------------------
 # correspondence: which relation between the angle and the pair of lengths is actually
-#   drawn and walked. "both" is the shipped figure — the vertical sine rod, the
+#   drawn. Collision boxes accompany the sampled bridge, but do not establish a traversable route.
+#   "both" is the shipped figure — the vertical sine rod, the
 #   horizontal cosine rod, and a bridge whose planks unroll sin(theta).
 # buildup / start_angle_deg are BENCH knobs, not axes. The bridge lays itself one plank
 #   at a time over ~16 seconds, so a still photographed at t=1s shows 6% of the figure
@@ -23,6 +24,8 @@ extends Node3D
 @export_enum("both", "cosine", "tangent", "helix") var correspondence: String = "both"
 @export_enum("progressive", "complete") var buildup: String = "progressive"
 @export var start_angle_deg: float = 0.0
+# Keep the finite graph; optionally continue its source and coordinate projections.
+@export var continue_after_build: bool = false
 
 @export var radius: float = 1.0
 @export var rotation_speed: float = 0.8
@@ -49,6 +52,9 @@ extends Node3D
 var angle: float = 0.0
 var built_index: int = -1
 var finished: bool = false
+var gallery_projection: bool = false
+var running: bool = true
+var gallery_controls: Node3D
 
 # --- Nodes ---
 var circle_outline: MultiMeshInstance3D
@@ -79,9 +85,16 @@ func _ready() -> void:
 		_update_rotator_and_indicators()
 	if buildup == "complete":
 		_build_all_steps()
+	if gallery_projection:
+		_install_gallery()
 
 func _process(delta: float) -> void:
+	if gallery_projection and not running:
+		return
 	if finished:
+		if continue_after_build:
+			angle = fposmod(angle + rotation_speed * delta, TAU)
+			_update_rotator_and_indicators()
 		return
 
 	angle += rotation_speed * delta
@@ -93,12 +106,13 @@ func _process(delta: float) -> void:
 
 	# build progress (0 → 1 over total_angle)
 	var t_norm: float = clamp(angle / total_angle, 0.0, 1.0)
-	var target_index: int = int(floor(t_norm * samples_per_cycle * num_cycles))
+	var count := samples_per_cycle * num_cycles
+	var target_index: int = int(floor(t_norm * (count - 1 if gallery_projection else count)))
 	target_index = clamp(target_index, 0, samples_per_cycle * num_cycles - 1)
 
 	while built_index < target_index:
 		built_index += 1
-		var step_angle: float = float(built_index) / float(samples_per_cycle - 1) * TAU
+		var step_angle: float = _sample_turns(built_index) * TAU
 		_create_bridge_step(step_angle, built_index)
 
 	if built_index >= samples_per_cycle * num_cycles - 1:
@@ -174,6 +188,8 @@ func _update_rotator_and_indicators() -> void:
 	_update_line_node(cosine_line, Vector3(0, y, 0), p, line_thickness)  # horizontal
 	_update_line_node(_sine_cap, Vector3(x, 0, 0), p, 0.01)
 	_update_line_node(_cos_cap,  Vector3(0, y, 0), p, 0.01)
+	if gallery_controls != null:
+		gallery_controls.refresh()
 
 	# The tangent segment: from the point on the circle to where the tangent line meets
 	# the x-axis at sec(theta). Its length IS tan(theta), which is why it has to be held
@@ -225,13 +241,14 @@ func _build_all_steps() -> void:
 	var total: int = samples_per_cycle * num_cycles
 	while built_index < total - 1:
 		built_index += 1
-		var step_angle: float = float(built_index) / float(samples_per_cycle - 1) * TAU
+		var step_angle: float = _sample_turns(built_index) * TAU
 		_create_bridge_step(step_angle, built_index)
 	finished = true
 
 func _rebuild_bridge() -> void:
 	for child in get_children():
 		if String(child.name).begins_with("Platform_"):
+			remove_child(child)
 			child.queue_free()
 	built_index = -1
 	finished = false
@@ -275,12 +292,14 @@ func _update_line_node(node: Node3D, from: Vector3, to: Vector3, thickness: floa
 	node.position = mid
 	if length > 0.001:
 		var direction = (to - from).normalized()
-		# Check if direction is parallel to UP vector (vertical line)
+		# Endpoints and midpoint belong to this artifact's local frame. A global
+		# look_at_from_position would move the rod away when the hall places us.
+		# Keep both position and orientation local; also works before tree entry.
 		if abs(direction.dot(Vector3.UP)) > 0.999:
 			# For vertical lines, use FORWARD as up to avoid colinear warning
-			node.look_at_from_position(mid, to, Vector3.FORWARD)
+			node.basis = Basis.looking_at(direction, Vector3.FORWARD)
 		else:
-			node.look_at_from_position(mid, to, Vector3.UP)
+			node.basis = Basis.looking_at(direction, Vector3.UP)
 	rod.scale = Vector3(thickness, thickness, max(length, 0.0001))
 
 func _get_shared_box() -> BoxMesh:
@@ -302,7 +321,7 @@ func _add_axes() -> void:
 # Bridge construction (single pass, 100 steps)
 # ============================================================================
 func _create_bridge_step(step_angle: float, idx: int) -> void:
-	var t: float = float(idx) / float(max(samples_per_cycle - 1, 1))
+	var t: float = _sample_turns(idx)
 	var x: float = start_x + t * wave_length
 	var y: float = _wave_value(step_angle) * radius
 	var z: float = 0.0
@@ -358,6 +377,20 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.get("gallery", "") == "projection" and not gallery_projection:
+		gallery_projection = true
+		samples_per_cycle = 64
+		num_cycles = 2
+		start_x = 1.8
+		wave_length = 6.0
+		platform_size = Vector3(0.10, 0.08, 0.6)
+		enable_collision = false
+		if is_node_ready():
+			_rebuild_bridge()
+			_install_gallery()
+	# A motion toggle does not change or rebuild the retained bridge.
+	if config.has("continue_after_build"):
+		continue_after_build = str(config["continue_after_build"]).to_lower() == "true"
 	# Guarded twice over: nothing happens unless the key arrived, the value differs, and
 	# _ready has already built once. A map that says nothing about correspondence never
 	# reaches _rebuild_bridge() at all.
@@ -380,3 +413,32 @@ func apply_grid_config(config: Dictionary) -> void:
 			changed = true
 	if changed and is_node_ready():
 		_rebuild_bridge()
+
+func _sample_turns(index: int) -> float:
+	if gallery_projection:
+		return float(index) * num_cycles / float(samples_per_cycle * num_cycles - 1)
+	return float(index) / float(max(samples_per_cycle - 1, 1))
+
+func _install_gallery() -> void:
+	if gallery_controls != null:
+		return
+	# The museum supplies the world and its light. Keep the standalone scene defaults elsewhere.
+	for child in get_children():
+		if child is Camera3D or child is DirectionalLight3D:
+			remove_child(child)
+			child.queue_free()
+	gallery_controls = load("res://algorithms/wavefunctions/unit_circle/unit_circle_gallery.gd").new()
+	add_child(gallery_controls)
+	_update_rotator_and_indicators()
+
+func scrub_angle(theta: float) -> void:
+	running = false
+	_build_all_steps()
+	angle = clampf(theta, 0.0, TAU)
+	_update_rotator_and_indicators()
+
+func replay_graph() -> void:
+	angle = 0.0
+	buildup = "progressive"
+	_rebuild_bridge()
+	running = true

@@ -937,7 +937,7 @@ func _create_vr_controls() -> void:
 	# pressed DOWNWARD, so the pad lies almost flat instead of facing the player.
 	_control_panel = RackTpl.create_panel("", [
 		[
-			{"type": "slider_h", "label": "TEMP", "default": initial_temperature / 200.0},
+			{"type": "slider_h", "label": "START T", "default": initial_temperature / 200.0},
 			{"type": "slider_h", "label": "COOL", "default": (cooling_rate - 0.8) / 0.19},
 		],
 		[

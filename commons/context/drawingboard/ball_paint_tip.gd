@@ -11,6 +11,8 @@ var debug_label: Label3D
 @export var snap_grid_size: int = 16
 @export var brush_color: Color = Color.BLACK
 @export var is_experimental: bool = false
+@export var require_pickup: bool = false
+var painted_samples := 0
 
 # Experimental Pen Settings
 @export var available_colors: Array = [Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW]
@@ -54,6 +56,10 @@ func _ready():
 		paper_surface.call("update_pen", brush_size, brush_color, snap_grid_size, use_random_dots)
 
 func _process(_delta):
+	if require_pickup and not get_parent().is_picked_up():
+		is_painting = false
+		reset_positions()
+		return
 	if not raycast or not raycast.is_colliding():
 		if is_painting:
 			is_painting = false
@@ -63,25 +69,22 @@ func _process(_delta):
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if collider and collider.is_in_group("drawing_area"):
-			# The drawing surface can be freed on map reload — re-acquire or bail
-			# so we never call into a previously freed instance.
-			if not is_instance_valid(paper_surface):
-				paper_surface = get_tree().get_first_node_in_group("drawing_surface")
-				if not is_instance_valid(paper_surface):
-					return
+			# The hit area owns the receiver, even when several canvases coexist.
+			var hit_surface := collider.get_node_or_null("PaperDrawSurface") as MeshInstance3D
+			if not is_instance_valid(hit_surface): return
+			if paper_surface != hit_surface:
+				paper_surface = hit_surface
+				reset_positions()
 
 			if not is_painting:
 				is_painting = true
 				reset_positions()
 
 			var hit_position = raycast.get_collision_point()
-			var local_hit_position = paper_surface.to_local(hit_position)
-
-			# Convert to UV coordinates
-			var uv = Vector2(
-				(local_hit_position.x + paper_width / 2) / paper_width,
-				(local_hit_position.z + paper_height / 2) / paper_height
-			)
+			var uv: Vector2 = paper_surface.get_uv_from_world_pos(hit_position)
+			if uv.x < 0 or uv.x > 1 or uv.y < 0 or uv.y > 1:
+				reset_positions()
+				return
 
 			# Smooth the position for better drawing quality
 			if smoothed_uv_position != Vector2(-1, -1):
@@ -100,6 +103,7 @@ func _process(_delta):
 				draw_random_dots(smoothed_uv_position)
 
 			last_uv_position = smoothed_uv_position
+			painted_samples += 1
 		else:
 			if is_painting:
 				is_painting = false

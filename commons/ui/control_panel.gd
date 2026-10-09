@@ -34,6 +34,16 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
 @export var title: String = "": set = _set_title
 @export var spacing: float = 0.30: set = _set_spacing       # metres between slots
+## Opt-in wrapping. Zero retains the original single-row layout.
+@export_range(0, 16, 1) var layout_columns: int = 0: set = _set_layout_columns
+## Optional row width in panel metres. Oversized controls keep their size and
+## receive their own row. A zero width disables this limit.
+@export var layout_max_width: float = 0.0: set = _set_layout_max_width
+## Clear space between a row's labels and the next row's controls.
+@export var row_gap: float = 0.035: set = _set_row_gap
+## A compact instrument face: grouped control wells, stronger printed labels.
+## Opt in at construction through InterfacePresets' instrument layout.
+@export var instrument_face: bool = false
 @export var tilt_degrees: float = -20.0: set = _set_tilt     # recline toward the player
 @export var panel_height: float = 0.42
 
@@ -44,12 +54,12 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var title_color: Color = Color(0.17, 0.17, 0.18)   # near-black charcoal
 @export var label_color: Color = Color(0.26, 0.26, 0.27)   # dark grey
 @export var accent_color: Color = Color(0.88, 0.42, 0.12)  # Braun orange — the one accent
-## Render the static labels + title as real black TextMesh geometry (engraved
-## look, exports to glTF as geometry) instead of baked-texture quads. Cheap —
-## a few short labels tessellated once. The live readout stays 2D-in-3D.
+## Legacy compatibility: label_mesh now selects the old ink colour only.
+## All labels are 2D textures on surfaces in 3D; depth is retained for old
+## saved configurations but has no rendering effect.
 @export var label_mesh: bool = false
 @export var label_mesh_color: Color = Color(0.07, 0.07, 0.08)   # near-black
-@export var label_mesh_depth: float = 0.004                     # slight relief
+@export var label_mesh_depth: float = 0.004                     # ignored; saved-scene compatibility
 
 const CONTROL_Z := 0.02       # forward from the back panel
 const PLATE_Z := -0.001       # the plate's front face (BackPanel at -0.007, 0.012 thick)
@@ -76,6 +86,7 @@ var _chrome: Node3D           # backing + frame + title (rebuilt on relayout)
 var _readout_disp: Node3D     # persistent dark display at the top (if add_readout)
 var _readout_label: Label     # the live number — a 2D Label inside a SubViewport
 var _relayout_pending: bool = false   # set when _relayout is skipped pre-tree; flushed by _ready on tree entry
+var _settle_pending := false
 
 
 func _ready() -> void:
@@ -104,15 +115,17 @@ func add_slider(label: String, param_name: String = "") -> Node3D:
 	var s: Node3D = load(SLIDER_PATH).instantiate()
 	# slider_smooth is a vertical fader — lay it HORIZONTAL on the board (the
 	# XRT slider's grab math is local-space, so root rotation is safe), and
-	# counter-rotate the value label so the number stays upright. +90 (not -90)
-	# so the fader's slide axis maps to +X: dragging RIGHT increases.
-	s.rotation_degrees.z = 90.0
+	# counter-rotate the value label so the number stays upright. The scene's
+	# live slide axis is +Y; -90 maps it to panel +X, so RIGHT increases.
+	s.rotation_degrees.z = -90.0
 	var vl := s.get_node_or_null("Frame/Label3DValue") as Label3D
 	if vl:
-		vl.rotation_degrees.z = -90.0
+		vl.rotation_degrees.z = 90.0
 	if s.has_method("set_param_name"):
 		s.set_param_name(param_name if param_name != "" else label)
 	_row.add_child(s)
+	if _uses_rows() and s.has_method("use_panel_value_surface"):
+		s.use_panel_value_surface()
 	# wide: the unscaled fader needs ~1.4 slots (physics controls are never
 	# shrunk to fit — see _fit_items_to_cells).
 	_items.append({"node": s, "label": label, "wide": true})
@@ -142,6 +155,8 @@ func add_dial(label: String, param_name: String = "") -> Node3D:
 	if d.has_method("set_param_name"):
 		d.set_param_name(param_name if param_name != "" else label)
 	_row.add_child(d)
+	if _uses_rows() and d.has_method("use_panel_value_surface"):
+		d.use_panel_value_surface()
 	_items.append({"node": d, "label": label})
 	call_deferred("_strip_internal_label", d)
 	_relayout()
@@ -160,7 +175,7 @@ func add_button(label: String) -> Node3D:
 
 
 ## Add a numeric readout DISPLAY at the TOP of the plate (Braun calculator
-## layout: dark screen on top, controls below). Returns the Label3D — update its
+## layout: dark screen on top, controls below). Returns the 2D Label — update its
 ## text per frame. The display persists across relayouts (built once here).
 func add_readout(text: String = "") -> Label:
 	_ensure_roots()
@@ -204,7 +219,7 @@ func add_node(node: Node3D, label: String = "") -> Node3D:
 
 # ── Layout ────────────────────────────────────────────────────────────────
 
-func _relayout() -> void:
+func _relayout(settle: bool = true) -> void:
 	# Internal layout reads child global_transforms (see _min_z_in_tilt), which error
 	# if the panel isn't in the tree yet — e.g. sliders added during an artifact's
 	# _ready, before the panel is mounted. Defer; _ready re-runs us on tree entry.
@@ -221,6 +236,14 @@ func _relayout() -> void:
 	# board (no controls) still gets a full plate (was: early-return on n==0,
 	# which left readout-only boards plateless).
 	if not has_controls and not has_readout and title == "":
+		return
+	if _uses_rows():
+		_layout_rows()
+		# Controls may build their visuals in deferred ready callbacks. Measure
+		# again once, after those callbacks; never run a per-frame layout loop.
+		if settle and not _settle_pending:
+			_settle_pending = true
+			call_deferred("_settle_rows")
 		return
 	# Each item occupies `slots` of horizontal width — wide items (screens) get more.
 	var slot_w: Array = []
@@ -272,8 +295,111 @@ func _relayout() -> void:
 	call_deferred("_fit_items_to_cells")
 
 
-## Scale each item uniformly so it fits within one grid cell — cell width
-## (spacing) and the control-zone height (CTRL_H). Contain, never stretch.
+func _uses_rows() -> bool:
+	return layout_columns > 0 or layout_max_width > 0.0
+
+
+func _settle_rows() -> void:
+	_settle_pending = false
+	if is_inside_tree() and _uses_rows(): _relayout(false)
+
+
+## Bounds in the row's axes, including input shapes. Keep authored scale and
+## rotation; a wide slider or custom hit area must get space, not be shrunk.
+func _control_bounds(node: Node3D) -> AABB:
+	var inverse := _row.global_transform.affine_inverse()
+	var result := AABB()
+	var first := true
+	var stack: Array[Node] = [node]
+	while not stack.is_empty():
+		var child: Node = stack.pop_back()
+		var bounds := AABB()
+		var include := false
+		if child is VisualInstance3D and child.is_visible_in_tree() and not String(child.name).to_lower().contains("shadow"):
+			bounds = child.get_aabb()
+			include = true
+		elif child is CollisionShape3D and child.shape != null and not child.disabled:
+			bounds = child.shape.get_debug_mesh().get_aabb()
+			include = true
+		if include:
+			var transform_in_row: Transform3D = inverse * child.global_transform
+			for corner in 8:
+				var point: Vector3 = transform_in_row * bounds.get_endpoint(corner) - node.position
+				if first:
+					result = AABB(point, Vector3.ZERO)
+					first = false
+				else: result = result.expand(point)
+		for child_node in child.get_children(): stack.append(child_node)
+	return result
+
+
+func _layout_rows() -> void:
+	for child in _row.get_children():
+		if String(child.name).begins_with("Label_") or String(child.name).begins_with("Well_"):
+			_row.remove_child(child)
+			child.free()
+	var rows: Array[Dictionary] = []
+	var minimum_height := 0.10 if instrument_face else CTRL_H
+	var row := {"items": [], "width": 0.0, "height": minimum_height, "labels": false}
+	for index in _items.size():
+		var item: Dictionary = _items[index]
+		var node: Node3D = item.node
+		if not is_instance_valid(node): continue
+		var bounds := _control_bounds(node)
+		var width := maxf(spacing * (1.4 if item.get("wide", false) else 1.0), bounds.size.x + GAP * 2.0)
+		var full: bool = layout_columns > 0 and row.items.size() >= layout_columns
+		var too_wide: bool = layout_max_width > 0.0 and float(row.width) + width > layout_max_width + 0.00001
+		if not row.items.is_empty() and (full or too_wide):
+			rows.append(row)
+			row = {"items": [], "width": 0.0, "height": minimum_height, "labels": false}
+		row.items.append({"index": index, "width": width, "bounds": bounds})
+		row.width += width
+		row.height = maxf(row.height, bounds.size.y)
+		row.labels = row.labels or not String(item.label).is_empty()
+	if not row.items.is_empty(): rows.append(row)
+	var total_width := spacing * 2.0 if rows.is_empty() else 0.0
+	var total_height := 0.0
+	for band in rows:
+		total_width = maxf(total_width, band.width)
+		total_height += float(band.height) + (0.010 + LBL_H if band.labels else 0.0)
+	total_height += row_gap * maxi(0, rows.size() - 1)
+	var top := total_height * 0.5
+	var y := top
+	for band in rows:
+		var cy: float = y - float(band.height) * 0.5
+		var label_y: float = y - float(band.height) - 0.010 - LBL_H * 0.5
+		var cursor: float = -float(band.width) * 0.5
+		for cell in band.items:
+			var item: Dictionary = _items[cell.index]
+			var node: Node3D = item.node
+			var cx: float = cursor + float(cell.width) * 0.5
+			var centre: Vector3 = cell.bounds.get_center()
+			node.position = Vector3(cx - centre.x, cy - centre.y, CONTROL_Z)
+			if instrument_face:
+				var cell_height: float = float(band.height) + (0.010 + LBL_H if band.labels else 0.0)
+				var well := MeshInstance3D.new()
+				well.name = "Well_%d" % int(cell.index)
+				var face := QuadMesh.new()
+				face.size = Vector2(float(cell.width) - 0.012, cell_height + 0.012)
+				well.mesh = face
+				well.position = Vector3(cx, y - cell_height * 0.5, PLATE_Z + 0.0003)
+				well.material_override = _mat(panel_color.lerp(frame_color, 0.20), 0.95, 0.0)
+				well.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+				_row.add_child(well)
+			if not String(item.label).is_empty():
+				var label_width := maxf(spacing * 0.74, float(cell.width) - PAD * 2.0)
+				var label := _label_node(item.label, label_color, Vector2(label_width, LBL_H))
+				label.name = "Label_%d" % int(cell.index)
+				label.position = Vector3(cx, label_y, PLATE_Z + 0.001)
+				_row.add_child(label)
+			cursor += float(cell.width)
+		y -= float(band.height) + (0.010 + LBL_H if band.labels else 0.0) + row_gap
+	_build_chrome(_compute_box(total_width, false, not rows.is_empty(), top, -top))
+	_fit_items_to_cells()
+
+
+## Legacy rows contain non-physics visuals; wrapped rows preserve every control's
+## authored dimensions. Both paths seat the control's back on the shared plate.
 func _fit_items_to_cells() -> void:
 	if _row == null:
 		return
@@ -283,7 +409,7 @@ func _fit_items_to_cells() -> void:
 		var node = item["node"]
 		if not is_instance_valid(node):
 			continue
-		node.scale = Vector3.ONE
+		if not _uses_rows(): node.scale = Vector3.ONE
 		var ab := _local_aabb(node)
 		if ab.size.x <= 0.0001 or ab.size.y <= 0.0001:
 			continue
@@ -291,7 +417,7 @@ func _fit_items_to_cells() -> void:
 		# Godot physics does not support scaled bodies; a scaled grab eats part
 		# of every hand movement → the jumpy/sticky VR drag). They keep scale 1
 		# and get room via their item's slot span instead.
-		if not _has_rigid_body(node):
+		if not _uses_rows() and not _has_rigid_body(node):
 			# Contain only — shrink items that overflow the cell, never enlarge a
 			# small control (keep natural size, don't balloon to fill the cell).
 			var s: float = minf(cell_w / ab.size.x, CTRL_H / ab.size.y)
@@ -379,7 +505,7 @@ func _local_aabb(node: Node3D) -> AABB:
 
 ## The box model: stack zones around the controls (at y=0) and return every
 ## zone's y plus the content-sized plate dimensions. Compact — no fixed height.
-func _compute_box(total_w: float, has_labels: bool, has_controls: bool = true) -> Dictionary:
+func _compute_box(total_w: float, has_labels: bool, has_controls: bool = true, row_top: float = NAN, row_bottom: float = NAN) -> Dictionary:
 	var has_title := title != ""
 	var has_readout := _readout_disp != null
 	var has_header := has_title or has_readout
@@ -387,6 +513,8 @@ func _compute_box(total_w: float, has_labels: bool, has_controls: bool = true) -
 	# the plate is compact around the header instead of leaving a hollow middle.
 	var ctrl_top := (CTRL_H * 0.5) if has_controls else 0.0
 	var ctrl_bot := (-CTRL_H * 0.5) if has_controls else 0.0
+	if not is_nan(row_top): ctrl_top = row_top
+	if not is_nan(row_bottom): ctrl_bot = row_bottom
 	# Below the controls: the baked labels, then padding.
 	var label_y := ctrl_bot - 0.010 - LBL_H * 0.5
 	var bottom := (label_y - LBL_H * 0.5 if has_labels else ctrl_bot) - PAD
@@ -468,6 +596,21 @@ func _build_chrome(box: Dictionary) -> void:
 		accent.material_override = _mat(accent_color, 0.5, 0.0)
 		accent.position = Vector3(0, box["accent_y"], 0.004)
 		_chrome.add_child(accent)
+	if instrument_face:
+		# Four flush fasteners give the plate a readable attachment to its case.
+		for x in [-1.0, 1.0]:
+			for y in [-1.0, 1.0]:
+				var screw := MeshInstance3D.new()
+				var disc := CylinderMesh.new()
+				disc.top_radius = 0.0035
+				disc.bottom_radius = 0.0035
+				disc.height = 0.001
+				disc.radial_segments = 12
+				screw.mesh = disc
+				screw.rotation_degrees.x = 90
+				screw.position = Vector3(x * (w * 0.5 - 0.010), bcy + y * (bh * 0.5 - 0.010), 0.0)
+				screw.material_override = _mat(frame_color.darkened(0.35), 0.6, 0.0)
+				_chrome.add_child(screw)
 
 
 func _mat(c: Color, rough: float, emission: float) -> StandardMaterial3D:
@@ -482,35 +625,11 @@ func _mat(c: Color, rough: float, emission: float) -> StandardMaterial3D:
 	return m
 
 
-## A label node — either a baked-texture quad (default) or real black TextMesh
-## geometry (label_mesh). Both are centred and fit-to-box; caller sets position.
+## Text is always drawn in 2D and carried on a flat surface in 3D.
+## Preserve the legacy ink choice without constructing extruded glyphs.
 func _label_node(text: String, baked_color: Color, box_size: Vector2) -> Node3D:
-	if not label_mesh:
-		return BakedText.make_label_mesh(text, baked_color, box_size, 1400, false)
-	var tm := TextMesh.new()
-	tm.text = text
-	tm.font_size = 64
-	tm.pixel_size = 0.001
-	tm.depth = label_mesh_depth
-	tm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var mi := MeshInstance3D.new()
-	mi.mesh = tm
-	var m := StandardMaterial3D.new()
-	m.albedo_color = label_mesh_color
-	m.roughness = 0.6
-	mi.material_override = m
-	# Contain within box_size and centre on the holder origin.
-	var holder := Node3D.new()
-	holder.add_child(mi)
-	var ab: AABB = tm.get_aabb()
-	if ab.size.x > 0.0 and ab.size.y > 0.0:
-		var sc: float = minf(box_size.x / ab.size.x, box_size.y / ab.size.y)
-		mi.scale = Vector3(sc, sc, sc)
-		var c: Vector3 = ab.get_center()
-		# Centre in x/y; back-flush in z so the letters REST on the plate (holder
-		# origin = back face) and the relief extrudes forward.
-		mi.position = Vector3(-c.x * sc, -c.y * sc, -ab.position.z * sc)
-	return holder
+	var ink: Color = label_mesh_color if label_mesh else baked_color
+	return BakedText.make_label_mesh(text, ink, box_size, 1400, false, "medium" if instrument_face else "regular")
 
 
 func _set_title(v: String) -> void:
@@ -519,6 +638,18 @@ func _set_title(v: String) -> void:
 
 func _set_spacing(v: float) -> void:
 	spacing = maxf(0.12, v)
+	if is_inside_tree(): _relayout()
+
+func _set_layout_columns(v: int) -> void:
+	layout_columns = maxi(0, v)
+	if is_inside_tree(): _relayout()
+
+func _set_layout_max_width(v: float) -> void:
+	layout_max_width = maxf(0.0, v)
+	if is_inside_tree(): _relayout()
+
+func _set_row_gap(v: float) -> void:
+	row_gap = maxf(GAP, v)
 	if is_inside_tree(): _relayout()
 
 func _set_tilt(v: float) -> void:

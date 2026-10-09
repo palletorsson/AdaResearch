@@ -1,8 +1,8 @@
 # @identity
 # essence: a corridor whose two walls are layered sine waves — walk between standing waveforms
-# desire: feel the body inside the wave — left and right walls phasing against each other across 24m
+# desire: compare moving and frozen folds in a passage; the shipped scene is 7 m long with wall collision off
 # critical_parameter: phase_offset_between_walls — how much the right wall lags the left, gating the beat-pattern between them
-# triggers: _ready() rebuilds wall meshes on parameter change; animate_at_runtime tweens the phase across animation_speed
+# triggers: controls rebuild wall meshes; animate_at_runtime advances phase by animation_speed * delta and rebuilds the walls
 # emerges: a 200-column waveform corridor with three superposed wave_layers, plush shader gradient bottom→mid→top, optional wall collision
 # needs: phase offset slider [has, 2026-09-10]; amplitude slider [has, 2026-09-10]; frequency multiplier dial [missing]; layer count picker [missing]
 # relationships: cousin of OscillatingWave (single wave) and HarmonicBuilder (sum of sines); contrast to SineSpace (floor as wave, this is walls as wave)

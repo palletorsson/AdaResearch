@@ -269,6 +269,7 @@ func _connect_ui_signals() -> void:
 	_sequencer_ui.bpm_changed.connect(_on_bpm_changed)
 	_sequencer_ui.preset_changed.connect(_on_preset_changed)
 	_sequencer_ui.pattern_preset_changed.connect(_on_pattern_preset_changed)
+	_sync_sound_ui()
 
 
 func _on_cell_toggled(track: int, step: int, active: bool) -> void:
@@ -325,6 +326,19 @@ func _load_sound_preset(preset_name: String) -> void:
 	# Pad if needed
 	while _track_sounds.size() < num_tracks:
 		_track_sounds.append(_track_sounds[0] if _track_sounds.size() > 0 else _resolve_sound_type("BASIC_SINE_WAVE"))
+	_sync_sound_ui()
+
+
+func _sync_sound_ui() -> void:
+	if not _sequencer_ui:
+		return
+	_sequencer_ui.set_sound_preset(sound_preset)
+	var names: Array[String] = []
+	# Read the resolved sounds, so preset fallback and padded tracks stay honest.
+	for track in range(num_tracks):
+		var display_name := AudioSynthesizer.get_sound_type_name(_track_sounds[track])
+		names.append("" if display_name == "Unknown Sound" else display_name)
+	_sequencer_ui.set_track_names(names)
 
 
 func _create_audio_players() -> void:
@@ -343,8 +357,10 @@ func _update_step_interval() -> void:
 
 
 func _advance_playhead() -> void:
-	# Trigger sounds for current step
+	# Show the column being read, including silent columns. _playhead_position
+	# advances afterwards and holds the NEXT step between ticks.
 	if _sequencer_ui:
+		_sequencer_ui.set_playhead(_playhead_position)
 		var active_tracks = _sequencer_ui.get_active_tracks(_playhead_position)
 		for track in active_tracks:
 			_play_sound(track)
@@ -352,10 +368,6 @@ func _advance_playhead() -> void:
 
 	# Move playhead
 	_playhead_position = (_playhead_position + 1) % num_steps
-
-	# Update UI
-	if _sequencer_ui:
-		_sequencer_ui.set_playhead(_playhead_position)
 
 
 func _play_sound(track: int) -> void:

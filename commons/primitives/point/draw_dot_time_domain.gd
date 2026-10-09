@@ -19,7 +19,26 @@ var _sample_timer: float = 0.0
 var _time_origin: Vector3 = Vector3.ZERO
 var _origin_set: bool = false
 
+## This recorder admits stationary samples on a clock and puts time on Z;
+## the inherited movement threshold and free-space grid do not gate its samples.
+func _sampling_contract_text() -> String:
+	var gate: String = ">= " + String.num(sample_interval, 3) + " s" if sample_interval > 0.0 else "every frame"
+	var fading: String = String.num(fade_duration, 3) + " s" if fade_trail else "off"
+	return "Sample gate: " + gate + " | Z drift: " + String.num(time_axis_speed, 3) + " m/s\nFade: " + fading
+
+
 func _ready() -> void:
+	if str(get_meta("config_gallery", "")) == "open":
+		fade_duration = 10.0
+		data_table_mount = "plinth"
+		get_node("GrabPoint").position = Vector3(-0.45,0.15,-0.35)
+		var title := Label3D.new()
+		title.text = "YOUR HAND / TIME\nGrab the point. Move across the record."
+		title.font_size = 26
+		title.pixel_size = 0.0018
+		title.position = Vector3(0,1.15,0)
+		title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		add_child(title)
 	super._ready()
 	if lock_origin_on_ready and is_instance_valid(_draw_sphere):
 		_set_time_origin(_draw_sphere.global_position)
@@ -48,8 +67,7 @@ func _process(delta: float) -> void:
 				_rebuild_trail()
 			if _progress_indicator:
 				_progress_indicator.visible = false
-			if _data_table_label:
-				_data_table_label.visible = false
+			_hide_data_table()
 			return
 
 	if not _origin_set:
@@ -72,12 +90,6 @@ func _process(delta: float) -> void:
 		_check_unlock_progress()
 		_update_progress_indicator_position()
 
-	# Update data table (throttled)
-	_data_table_timer += delta
-	if _data_table_timer >= data_table_update_interval:
-		_data_table_timer = 0.0
-		_update_data_table()
-
 	if _trail_points.size() > trail_max_points:
 		var remove_count = _trail_points.size() - trail_max_points
 		for i in range(remove_count):
@@ -89,3 +101,6 @@ func _process(delta: float) -> void:
 		_cleanup_old_points()
 
 	_rebuild_trail()
+	# The inherited count describes the retained buffer after cap and fade.
+	_data_table_timer += delta
+	_refresh_data_table_if_due()

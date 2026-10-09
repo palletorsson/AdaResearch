@@ -5,6 +5,8 @@ extends Node3D
 @export var wave_amplitude: float = 0.5
 
 var time: float = 0.0
+var lesson_mode: String = ""
+var lesson: Node3D
 
 var _left_source: MeshInstance3D # Pure Yellow
 var _right_source: MeshInstance3D # Red + Green Mixed
@@ -15,6 +17,7 @@ var _right_result: MeshInstance3D
 
 func _ready() -> void:
 	_create_lab()
+	if not lesson_mode.is_empty():_activate_lesson()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -121,6 +124,10 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.get("lesson", "") in ["context", "carrier"]:
+		lesson_mode = str(config.lesson)
+		if is_node_ready():_activate_lesson()
+		return
 	if config.is_empty():
 		return
 	if config.has("wave_speed"):
@@ -128,3 +135,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("wave_amplitude"):
 		wave_amplitude = float(config["wave_amplitude"])
 	_create_lab()
+
+func _activate_lesson() -> void:
+	if is_instance_valid(lesson):return
+	set_process(false)
+	for child in get_children():
+		remove_child(child);child.queue_free()
+	lesson=load("res://algorithms/color/carrier_comparison.gd").new()
+	lesson.name="CarrierComparison" if lesson_mode=="carrier" else "ContextComparison"
+	lesson.mode=lesson_mode;add_child(lesson)

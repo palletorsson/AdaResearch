@@ -14,7 +14,10 @@ static var _artifact_registry_cache_by_key: Dictionary = {}
 # Known config parameter names (NOT to be treated as tutorial shorthand)
 # These are artifact configuration keys that can have numeric values
 const CONFIG_PARAM_NAMES = [
+	"discovery", # numeric encounter opt-in, not tutorial yaw shorthand
+	"hits", # target hit threshold; never a tutorial rotation shorthand
 	"radial", "rings", "inner", "outer", "config", "height", "radius",
+	"receiver_sides", # flashlight receiver divisions, never a tutorial rotation
 	"width", "depth", "segments", "sides", "rows", "cols", "count",
 	# DNA axes whose values are numbers (2026-10-01). Unlisted, `#key:8` is read as tutorial
 	# shorthand: the artifact is handed `true` and turned 8 degrees, while the museum keeps the
@@ -35,6 +38,8 @@ const CONFIG_PARAM_NAMES = [
 	# Rotation studies and gallery staging use numeric values, not tutorial yaw.
 	"band_spacing", "row_angle_step", "num_segments", "rotation_per_segment",
 	"segment_vertical_offset", "plinth",
+	# Workbench pair number must not override the artifact yaw as tutorial shorthand.
+	"initial_pair",
 	"dest", "dest_x", "dest_y", "dest_z", "dest_map", "map", "spawn",
 	"label", "color1", "color2", "energy", "frame", "active", "cooldown", "mode", "sky",
 	# Path-and-block game params
@@ -1119,6 +1124,10 @@ func _dress_spin(node: Node3D, dps: float) -> void:
 
 func _suppress_embedded_chrome(node: Node) -> void:
 	if not is_instance_valid(node):
+		return
+	# A monitor's private viewport needs its camera and captions. They cannot
+	# steal the player's camera or draw a HUD into the containing viewport.
+	if node is SubViewport:
 		return
 	for child in node.get_children():
 		if child is CanvasLayer:

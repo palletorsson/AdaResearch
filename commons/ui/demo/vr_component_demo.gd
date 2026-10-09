@@ -1,19 +1,8 @@
 @tool
 extends Node3D
-
-## VR Component Demo — spawns all interactable and display components
-## on a white backdrop panel for visual review.
-##
-## Usage:
-##   1. Open vr_component_demo.tscn
-##   2. In editor: components appear via @tool
-##   3. In VR: grab and interact with everything
-##
-## Press R in-game to rebuild the layout.
-
-const _P = preload("res://commons/ui/ada_palette.gd")
-
-# ── Component scenes ──
+## One active family at operating height. Physical paging replaces the tall wall.
+const BakedText=preload("res://commons/utils/baked_text_albedo.gd")
+const ValueSurface=preload("res://commons/ui/control_value_surface.gd")
 const SLIDER_V     = preload("res://commons/interactables/slider_smooth.tscn")
 const SLIDER_H     = preload("res://commons/interactables/slider_horizontal.tscn")
 const SLIDER_SNAP  = preload("res://commons/interactables/slider_snap.tscn")
@@ -42,203 +31,122 @@ const VR_DIAL      = preload("res://commons/audio/interfaces/VRAudioControlDial.
 const VR_SLIDER    = preload("res://commons/audio/interfaces/VRAudioControlSlider.tscn")
 const VR_SLIDER_V  = preload("res://commons/audio/interfaces/VRAudioControlSliderVertical.tscn")
 
-# Layout constants
-const COL_GAP := 0.04       # Horizontal gap between components
-const ROW_GAP := 0.06       # Extra vertical gap between rows
-const LABEL_Z := 0.015      # Z offset for labels (in front of backdrop)
-const COMP_Z := 0.02        # Z offset for flat components
-const STICK_Z := 0.03       # Z offset for stick-type (joystick, lever)
 
-@onready var components_root: Node3D = $Components
+var pages:Array=[]
+var page_index:=0
+var controls:Array[Node3D]=[]
+var station:Node3D
+var active_page:Node3D
+var _heading:Dictionary={}
+var _mirrors:Array=[]
+var _refresh_time:=0.0
+var _changing:=false
 
-func _ready():
-	if not components_root:
-		components_root = Node3D.new()
-		components_root.name = "Components"
-		add_child(components_root)
-	_build_layout()
+func _ready()->void:
+	# The library is also an artifact. Preview cameras and lights must not take over a hall.
+	if not Engine.is_editor_hint() and get_tree().current_scene!=self:
+		for name in ["WorldEnvironment","DirectionalLight3D","FillLight","Camera3D"]:
+			var preview:=get_node_or_null(name)
+			if preview:remove_child(preview);preview.queue_free()
+	var obsolete:=get_node_or_null("Backdrop")
+	if obsolete:remove_child(obsolete);obsolete.queue_free()
+	var container:=get_node_or_null("Components")
+	if not container:container=Node3D.new();container.name="Components";add_child(container)
+	container.transform=Transform3D.IDENTITY
+	station=Node3D.new();station.name="Station";station.position.y=1.0;station.rotation_degrees.x=-35;container.add_child(station)
+	_box(station,"Deck",Vector3(1.10,.54,.04),Vector3(0,0,-.025),Color(.12,.17,.18))
+	_box(container,"Stem",Vector3(.15,.88,.16),Vector3(0,.44,-.04),Color(.12,.17,.18))
+	_box(station,"UndersideMount",Vector3(.20,.15,.08),Vector3(0,-.055,-.085),Color(.12,.17,.18))
+	_box(container,"Foot",Vector3(.76,.04,.48),Vector3(0,.02,0),Color(.12,.17,.18))
+	_box(container,"Header",Vector3(1.10,.29,.035),Vector3(0,1.58,-.25),Color(.09,.13,.14))
+	_heading=ValueSurface.build(container,Vector2(1.05,.14),Vector3(0,1.53,-.229))
+	_heading.viewport.size=Vector2i(1200,160);_heading.viewport.get_child(0).size=Vector2(1200,160)
+	_heading.label.size=Vector2(1200,160);_heading.label.add_theme_font_size_override("font_size",32)
+	_print(container,"ADA COMPONENT LIBRARY",Vector2(1.04,.040),Vector3(0,1.69,-.229))
+	_box(container,"HeaderPost",Vector3(.05,1.52,.05),Vector3(0,.76,-.27),Color(.12,.17,.18))
+	_add_pager("Prev","PREVIOUS",-.18,-1)
+	_add_pager("Next","NEXT",.18,1)
+	pages=[
+		{"title":"VERTICAL SLIDERS","items":[[SLIDER_V,"SMOOTH"],[SLIDER_AXIS,"AUTO / HAND"],[SLIDER_SNAP,"STEPPED"],[SLIDER_ZERO,"RETURN TO CENTRE"]],"gap":.24},
+		{"title":"HORIZONTAL / TIME","items":[[SLIDER_H,"HORIZONTAL"],[SLIDER_TIME,"TIME"]],"gap":.38},
+		{"title":"DIALS / WHEEL","items":[[DIAL,"DIAL"],[DIAL,"DIAL 2"],[WHEEL,"WHEEL"]],"gap":.28},
+		{"title":"PUSH BUTTONS","items":[[BUTTON,"BUTTON"],[BUTTON_2D3D,"2D / 3D BUTTON"],[BUTTON,"BUTTON 2"]],"gap":.28},
+		{"title":"JOYSTICKS","items":[[JOYSTICK,"CONTINUOUS"],[JOYSTICK_SNAP,"STEPPED"],[JOYSTICK_ZERO,"RETURNING"]],"gap":.28},
+		{"title":"LEVERS","items":[[LEVER,"CONTINUOUS"],[LEVER_SNAP,"STEP 5 DEGREES"],[LEVER_ZERO,"RETURN TO ZERO"]],"gap":.24},
+		{"title":"TWO AXES","items":[[XY_PAD,"XY PAD"]],"gap":.28},
+		{"title":"AUDIO DIALS","items":[[VR_DIAL,"AUDIO DIAL"],[VR_DIAL,"AUDIO DIAL 2"]],"gap":.30},
+		{"title":"AUDIO FADERS","items":[[VR_SLIDER,"FADER"],[VR_SLIDER_V,"VERTICAL FADER"]],"gap":.38},
+		{"title":"WAVE / SPECTRUM","items":[[WAVEFORM,"WAVEFORM"],[SPECTRUM,"SPECTRUM"],[SIMPLE_WAVE,"SIMPLE WAVE"]],"gap":.34},
+		{"title":"SIGNAL MONITORS","items":[[LISSAJOUS,"LISSAJOUS"],[MONITOR,"MONITOR"]],"gap":.38}
+	]
+	show_page(0)
+	var camera:=get_node_or_null("Camera3D") as Camera3D
+	if camera and not Engine.is_editor_hint():camera.position=Vector3(1.4,1.9,2.6);camera.look_at(Vector3(0,1.05,0))
 
-func _input(event):
-	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
-		_rebuild()
-
-func _rebuild():
-	for child in components_root.get_children():
-		child.queue_free()
-	await get_tree().process_frame
-	_build_layout()
-
-func _build_layout():
-	# Usable width ≈ 1.1m (Components root at x=-0.5, backdrop extends to ~x=1.1)
-	# Keep all content within x = 0.0 .. 1.05
-	var x := 0.0
-	var y := 0.0
-
-	# ── Title ──
-	_add_label("ADA COMPONENT LIBRARY", Vector3(0.25, y + 0.16, LABEL_Z), 36)
-	y -= 0.18
-
-	# ═══════════════════════════════════════
-	#  SECTION 1: SLIDERS
-	# ═══════════════════════════════════════
-	_add_section_label("SLIDERS", Vector3(-0.02, y, LABEL_Z))
-	y -= 0.06
-
-	# Row 1a: Vertical sliders (compact, ~8cm wide each)
-	x = 0.0
-	x = _place_labeled(SLIDER_V,    Vector3(x, y, COMP_Z), "Smooth");   x += 0.14
-	x = _place_labeled(SLIDER_AXIS, Vector3(x, y, COMP_Z), "Axis");     x += 0.14
-	x = _place_labeled(SLIDER_SNAP, Vector3(x, y, COMP_Z), "Snap");     x += 0.14
-	x = _place_labeled(SLIDER_ZERO, Vector3(x, y, COMP_Z), "Bipolar");  x += 0.14
-
-	y -= 0.30 + ROW_GAP
-
-	# Row 1b: Horizontal + Time sliders (wider, own row)
-	x = 0.0
-	x = _place_labeled(SLIDER_H,    Vector3(x, y, COMP_Z), "Horizontal"); x += 0.28
-	x = _place_labeled(SLIDER_TIME, Vector3(x, y, COMP_Z), "Time");       x += 0.28
-
-	y -= 0.30 + ROW_GAP
-
-	# ═══════════════════════════════════════
-	#  SECTION 2: ROTARY & BUTTONS
-	# ═══════════════════════════════════════
-	_add_section_label("ROTARY & BUTTONS", Vector3(-0.02, y, LABEL_Z))
-	y -= 0.06
-
-	x = 0.0
-	x = _place_labeled(DIAL,   Vector3(x, y, COMP_Z), "Dial");        x += 0.14
-	x = _place_labeled(DIAL,   Vector3(x, y, COMP_Z), "Dial 2");      x += 0.14
-	x = _place_labeled(WHEEL,  Vector3(x, y, COMP_Z), "Wheel");       x += 0.20
-	x = _place_labeled(BUTTON, Vector3(x, y + 0.04, STICK_Z), "Btn", Vector3(90, 0, 0)); x += 0.12
-	x = _place_labeled(BUTTON_2D3D, Vector3(x, y + 0.02, COMP_Z), "2D/3D Btn", Vector3(90, 0, 0)); x += 0.14
-	x = _place_labeled(BUTTON, Vector3(x, y + 0.04, STICK_Z), "Btn 2", Vector3(90, 0, 0)); x += 0.12
-	x = _place_labeled(XY_PAD, Vector3(x, y, COMP_Z), "XY Pad");     x += 0.18
-
-	y -= 0.24 + ROW_GAP
-
-	# ═══════════════════════════════════════
-	#  SECTION 3: JOYSTICKS
-	# ═══════════════════════════════════════
-	_add_section_label("JOYSTICKS", Vector3(-0.02, y, LABEL_Z))
-	y -= 0.06
-
-	x = 0.0
-	x = _place_labeled(JOYSTICK,      Vector3(x, y, STICK_Z), "Smooth"); x += 0.24
-	x = _place_labeled(JOYSTICK_SNAP, Vector3(x, y, STICK_Z), "Snap");   x += 0.28
-	x = _place_labeled(JOYSTICK_ZERO, Vector3(x, y, STICK_Z), "Zero");   x += 0.28
-
-	y -= 0.28 + ROW_GAP
-
-	# ═══════════════════════════════════════
-	#  SECTION 4: LEVERS
-	# ═══════════════════════════════════════
-	_add_section_label("LEVERS", Vector3(-0.02, y, LABEL_Z))
-	y -= 0.06
-
-	x = 0.0
-	x = _place_labeled(LEVER,      Vector3(x, y, STICK_Z), "Smooth"); x += 0.16
-	x = _place_labeled(LEVER_SNAP, Vector3(x, y, STICK_Z), "Snap");   x += 0.28
-	x = _place_labeled(LEVER_ZERO, Vector3(x, y, STICK_Z), "Zero");   x += 0.28
-
-	y -= 0.36 + ROW_GAP
-
-	# ═══════════════════════════════════════
-	#  SECTION 5: VR AUDIO CONTROLS
-	# ═══════════════════════════════════════
-	_add_section_label("VR AUDIO CONTROLS", Vector3(-0.02, y, LABEL_Z))
-	y -= 0.06
-
-	x = 0.0
-	x = _place_labeled(VR_DIAL,     Vector3(x, y, COMP_Z), "Knob");     x += 0.14
-	x = _place_labeled(VR_DIAL,     Vector3(x, y, COMP_Z), "Knob 2");   x += 0.14
-	x = _place_labeled(VR_SLIDER,   Vector3(x, y, COMP_Z), "Fader");    x += 0.28
-	x = _place_labeled(VR_SLIDER_V, Vector3(x, y, COMP_Z), "Vertical"); x += 0.14
-
-	y -= 0.28 + ROW_GAP
-
-	# ═══════════════════════════════════════
-	#  SECTION 6: DISPLAYS & MONITORS
-	# ═══════════════════════════════════════
-	_add_section_label("DISPLAYS & MONITORS", Vector3(-0.02, y, LABEL_Z))
-	y -= 0.06
-
-	# Row 6a: Three displays
-	x = 0.0
-	x = _place_labeled(WAVEFORM,    Vector3(x, y, COMP_Z), "Waveform");    x += 0.32
-	x = _place_labeled(SPECTRUM,    Vector3(x, y, COMP_Z), "Spectrum");    x += 0.32
-	x = _place_labeled(SIMPLE_WAVE, Vector3(x, y, COMP_Z), "Simple Wave"); x += 0.32
-
-	y -= 0.28 + ROW_GAP
-
-	# Row 6b: Two more displays
-	x = 0.0
-	x = _place_labeled(LISSAJOUS, Vector3(x, y, COMP_Z), "Lissajous"); x += 0.34
-	x = _place_labeled(MONITOR,   Vector3(x, y, COMP_Z), "Monitor");   x += 0.34
-
-
-# ═══════════════════════════════════════════
-#  HELPERS
-# ═══════════════════════════════════════════
-
-## Place a component and add a billboard label underneath it
-func _place_labeled(scene: PackedScene, pos: Vector3, label_text: String, rotation_deg: Vector3 = Vector3.ZERO) -> float:
-	var inst = scene.instantiate()
-	inst.position = pos
-	if inst is Node3D:
-		(inst as Node3D).rotation_degrees = rotation_deg
-	components_root.add_child(inst)
-
-	# Try to set the built-in param name (only at runtime, not in editor)
-	if not Engine.is_editor_hint() and inst.has_method("set_param_name"):
-		inst.set_param_name(label_text)
-
-	# Add a billboard label below the component
-	var lbl := Label3D.new()
-	lbl.text = label_text
-	lbl.font_size = 32
-	lbl.pixel_size = 0.0005
-	lbl.modulate = _P.TEXT_SECONDARY
-	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	lbl.no_depth_test = true
-	lbl.position = pos + Vector3(0, -0.12, 0.02)
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	lbl.outline_size = 4
-	lbl.outline_modulate = Color(1, 1, 1, 0.6)
-	components_root.add_child(lbl)
-
-	return pos.x
-
-## Section header — larger, accented, flush left
-func _add_section_label(text: String, pos: Vector3) -> void:
-	# Accent bar
-	var bar := MeshInstance3D.new()
-	var bar_mesh := BoxMesh.new()
-	bar_mesh.size = Vector3(0.005, 0.025, 0.002)
-	bar.mesh = bar_mesh
-	bar.material_override = _P.accent_material(_P.ACCENT_ORANGE)
-	bar.position = pos + Vector3(-0.015, -0.012, 0)
-	components_root.add_child(bar)
-
-	# Label
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.font_size = 28
-	lbl.pixel_size = 0.0006
-	lbl.modulate = _P.TEXT_PRIMARY
-	lbl.position = pos
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	lbl.outline_size = 0
-	components_root.add_child(lbl)
-
-## Simple label (for title etc.)
-func _add_label(text: String, pos: Vector3, font_size: int = 24, color: Color = _P.TEXT_PRIMARY):
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.font_size = font_size
-	lbl.pixel_size = 0.0006
-	lbl.modulate = color
-	lbl.outline_size = 0
-	lbl.position = pos
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	components_root.add_child(lbl)
+func _input(event:InputEvent)->void:
+	if event is InputEventKey and event.pressed and not event.echo and event.keycode==KEY_R:_rebuild()
+func _rebuild()->void:show_page(page_index)
+func _add_pager(name:String,caption:String,x:float,step:int)->void:
+	var button:Node3D=BUTTON.instantiate();button.name=name
+	# The button scene already orients its local press axis toward +Z.
+	button.position=Vector3(x,-.195,.004);station.add_child(button)
+	button.pressed.connect(func():show_page(posmod(page_index+step,pages.size())))
+	_print(station,caption,Vector2(.18,.025),Vector3(x,-.251,.003))
+func _has_held_control()->bool:
+	if not is_instance_valid(active_page):return false
+	for node in active_page.find_children("*","Node3D",true,false):
+		if node is XRToolsPickable and node.is_picked_up():return true
+		if is_instance_valid(node.get("_pointer")) or node.get("_pointer_dragging")==true:return true
+	return false
+func show_page(index:int)->bool:
+	if _changing or pages.is_empty() or _has_held_control():return false
+	_changing=true
+	if is_instance_valid(active_page):station.remove_child(active_page);active_page.queue_free()
+	controls.clear();_mirrors.clear()
+	page_index=posmod(index,pages.size())
+	active_page=Node3D.new();active_page.name="ActivePage";station.add_child(active_page)
+	var page:Dictionary=pages[page_index]
+	for i in page.items.size():
+		var entry:Array=page.items[i]
+		var control:Node3D=entry[0].instantiate()
+		control.position=Vector3((i-(page.items.size()-1)*.5)*page.gap,.025,.004)
+		active_page.add_child(control);controls.append(control)
+		_print(active_page,entry[1],Vector2(minf(page.gap-.025,.29),.026),Vector3(control.position.x,.216,.003))
+		if not Engine.is_editor_hint() and control.has_method("set_param_name"):control.set_param_name("")
+		_flatten_labels(control)
+	_heading.label.text="%02d / %02d  %s\nPages load fresh controls. R: reset page." % [page_index+1,pages.size(),page.title]
+	_heading.viewport.render_target_update_mode=SubViewport.UPDATE_ONCE
+	_changing=false
+	return true
+func _flatten_labels(control:Node3D)->void:
+	# Keep legacy source nodes for scripts with typed Label3D references, but expose
+	# their current words on a backed flat card. No camera-facing glyphs remain visible.
+	var sources:Array[Label3D]=[]
+	for label in control.find_children("*","Label3D",true,false):
+		if label.visible and not label.text.strip_edges().is_empty():sources.append(label)
+		label.hide()
+	if sources.is_empty():return
+	var card:=ValueSurface.build(active_page,Vector2(.19,.036),Vector3(control.position.x,-.126,.004))
+	card.label.add_theme_font_size_override("font_size",28)
+	_mirrors.append({"control":control,"sources":sources,"card":card})
+	_refresh_labels()
+func _process(delta:float)->void:
+	_refresh_time+=delta
+	if _refresh_time<.1:return
+	_refresh_time=0
+	_refresh_labels()
+func _refresh_labels()->void:
+	for entry in _mirrors:
+		var texts:PackedStringArray=[]
+		for source in entry.sources:
+			if is_instance_valid(source):texts.append(source.text)
+		var words: String=" / ".join(texts)
+		if entry.card.label.text!=words:
+			entry.card.label.text=words
+			entry.card.viewport.render_target_update_mode=SubViewport.UPDATE_ONCE
+func _print(parent:Node3D,words:String,size:Vector2,at:Vector3)->void:
+	var mesh:=BakedText.make_label_mesh(words,Color(.84,.92,.87),size,2200,true)
+	mesh.position=at;parent.add_child(mesh)
+func _box(parent:Node3D,label:String,size:Vector3,at:Vector3,color:Color)->void:
+	var mesh:=MeshInstance3D.new();mesh.name=label;mesh.mesh=BoxMesh.new();mesh.mesh.size=size;mesh.position=at
+	var mat:=StandardMaterial3D.new();mat.albedo_color=color;mat.roughness=.75;mesh.material_override=mat;parent.add_child(mesh)

@@ -293,8 +293,10 @@ static func create_cap(params: Dictionary, glass_mat: Material, _liquid_mat: Mat
 	stub.position.z = -tube_radius
 	group.add_child(stub)
 	
-	# Terminal segment - only has input port
-	GlassSegmentPorts.apply_terminal_port(group, tube_radius)
+	# The inlet is at the free end of the stub, not inside the cap.
+	GlassSegmentPorts.apply_ports(group, {
+		"in": GlassSegmentPorts.create_port(Vector3(0,0,-2.0*tube_radius),Vector3.FORWARD,tube_radius)
+	},true)
 	
 	return group
 
@@ -474,8 +476,8 @@ static func create_condenser(params: Dictionary, glass_mat: Material, liquid_mat
 	GlassSegmentPorts.apply_ports(group, {
 		"in": GlassSegmentPorts.create_port(Vector3.ZERO, Vector3.BACK, inner_radius),
 		"out": GlassSegmentPorts.create_port(Vector3(0, 0, length), Vector3.FORWARD, inner_radius),
-		"coolant_in": GlassSegmentPorts.create_port(port_positions[0], Vector3.UP, inner_radius),
-		"coolant_out": GlassSegmentPorts.create_port(port_positions[1], Vector3.DOWN, inner_radius)
+		"coolant_in": GlassSegmentPorts.create_port(port_positions[0]+Vector3.UP*jacket_radius*0.25, Vector3.UP, inner_radius),
+		"coolant_out": GlassSegmentPorts.create_port(port_positions[1]+Vector3.DOWN*jacket_radius*0.25, Vector3.DOWN, inner_radius)
 	})
 	
 	return group

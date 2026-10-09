@@ -38,6 +38,11 @@ extends Node3D
 @export var beta_weight: float = 2.0    # Distance importance
 @export var ant_speed: float = 3.0
 @export var food_source_count: int = 4
+@export var lesson_seed: int = 20260920
+@export var lesson_display: bool = false
+const SIMULATION_STEP: float = 1.0 / 60.0
+var _step_remainder: float = 0.0
+var _rng := RandomNumberGenerator.new()
 
 # --- Mode ---
 enum Mode { COLONY, COMMUNICATION, MULTI_SOURCE }
@@ -82,6 +87,7 @@ var _stats_label: Label3D
 
 # VR controls
 var _control_panel: Node3D
+var _lesson_stage: Node3D
 
 # Colors
 const COL_NEST := Color(0.6, 0.4, 0.2)
@@ -119,10 +125,10 @@ class AntState:
 	var is_tandem_follower: bool = false
 	var recruit_cooldown: float = 0.0
 
-	func _init(start: Vector2) -> void:
+	func _init(start: Vector2, rng: RandomNumberGenerator) -> void:
 		pos = start
-		vel = Vector2(randf() - 0.5, randf() - 0.5).normalized() * 0.5
-		wander_angle = randf() * TAU
+		vel = Vector2(rng.randf() - 0.5, rng.randf() - 0.5).normalized() * 0.5
+		wander_angle = rng.randf() * TAU
 
 
 func _ready() -> void:
@@ -130,9 +136,36 @@ func _ready() -> void:
 	_create_mesh_instances()
 	_create_labels()
 	_create_vr_controls()
-	_init_pheromone_grid()
-	_spawn_food_sources()
-	_spawn_ants()
+	_reset_colony()
+	if lesson_display:
+		_arrange_lesson_display()
+	_sync_control_values()
+
+
+func _arrange_lesson_display() -> void:
+	if is_instance_valid(_lesson_stage):
+		return
+	_lesson_stage = Node3D.new()
+	_lesson_stage.name = "LessonDisplay"
+	add_child(_lesson_stage)
+	for visual in [_heatmap_mi, _trails_mi, _food_mi, _nest_mi, _ants_mi, _signals_mi,
+			_title_label, _mode_label, _info_label, _stats_label]:
+		visual.reparent(_lesson_stage, false)
+	_lesson_stage.scale = Vector3.ONE * 0.4
+	_lesson_stage.position.y = 2.0
+	# The simulation stays in its original units; only its display is resized.
+	_control_panel.position = Vector3(0, 1.15, -0.8)
+	_control_panel.rotation.y = PI
+	_control_panel.scale = Vector3.ONE * 3.0
+
+
+func _sync_control_values() -> void:
+	if not is_instance_valid(_control_panel):
+		return
+	for setting in [["Param_0", evaporation_rate / 0.1], ["Param_1", float(ant_count) / 80.0]]:
+		var slider := _control_panel.find_child(setting[0], true, false)
+		if slider and slider.has_method("set_normalized_value"):
+			slider.set_normalized_value(setting[1])
 
 
 # =========================================================================
@@ -344,8 +377,9 @@ func _deposit_pheromone(pos: Vector2, amount: float) -> void:
 				_pheromone_grid[nx][ny] += spread / 8.0
 
 
-func _evaporate_pheromones() -> void:
-	var decay := 1.0 - evaporation_rate
+func _evaporate_pheromones(delta: float) -> void:
+	# Retain the authored 60 Hz rate while expressing decay in elapsed time.
+	var decay := pow(clampf(1.0 - evaporation_rate, 0.0, 1.0), delta * 60.0)
 	for x in range(grid_resolution):
 		for y in range(grid_resolution):
 			_pheromone_grid[x][y] *= decay
@@ -360,8 +394,8 @@ func _spawn_food_sources() -> void:
 	var half := field_size * 0.4
 	for i in range(food_source_count):
 		var angle := (float(i) / food_source_count) * TAU + 0.3
-		var dist := half * (0.5 + randf() * 0.5)
-		var quality := 0.3 + randf() * 0.7  # quality 0.3 to 1.0
+		var dist := half * (0.5 + _rng.randf() * 0.5)
+		var quality := 0.3 + _rng.randf() * 0.7  # quality 0.3 to 1.0
 		_food_sources.append({
 			"pos": Vector2(cos(angle) * dist, sin(angle) * dist),
 			"quality": quality,
@@ -378,12 +412,15 @@ func _spawn_ants() -> void:
 	_ants.clear()
 	_tandem_pairs.clear()
 	for i in range(ant_count):
-		var a := AntState.new(_nest_pos)
-		a.wander_angle = randf() * TAU
+		var a := AntState.new(_nest_pos, _rng)
+		a.wander_angle = _rng.randf() * TAU
 		_ants.append(a)
 
 
 func _reset_colony() -> void:
+	_rng.seed = lesson_seed
+	_step_remainder = 0.0
+	_stats_active_foragers = 0
 	_init_pheromone_grid()
 	_spawn_food_sources()
 	_spawn_ants()
@@ -398,14 +435,26 @@ func _reset_colony() -> void:
 # =========================================================================
 
 func _process(delta: float) -> void:
+	# Fixed simulation steps keep random draws, deposits and decay comparable
+	# across normal display rates. Long stalls slow the model instead of
+	# demanding an unbounded catch-up on a headset.
+	_step_remainder += minf(delta, 0.25)
+	var steps := 0
+	while _step_remainder + 0.00000001 >= SIMULATION_STEP and steps < 15:
+		_step_remainder = maxf(0.0, _step_remainder - SIMULATION_STEP)
+		_simulate_step(SIMULATION_STEP)
+		steps += 1
+	_update_labels()
+	_draw_all()
+
+
+func _simulate_step(delta: float) -> void:
 	_time += delta
-	_evaporate_pheromones()
+	_evaporate_pheromones(delta)
 	_update_ants(delta)
 	_update_recruitment_signals(delta)
 	if _mode == Mode.COMMUNICATION:
 		_update_tandem_pairs(delta)
-	_update_labels()
-	_draw_all()
 
 
 # =========================================================================
@@ -458,7 +507,7 @@ func _update_ants(delta: float) -> void:
 			# Forage: follow pheromone gradient + random wander
 			var best_dir := _sense_pheromone(ant)
 			# Random wander component
-			ant.wander_angle += (randf() - 0.5) * 2.0 * delta
+			ant.wander_angle += (_rng.randf() - 0.5) * 2.0 * delta
 			var wander_dir := Vector2(cos(ant.wander_angle), sin(ant.wander_angle))
 			# Blend pheromone attraction with wander
 			var pheromone_strength := _get_pheromone(ant.pos)
@@ -515,7 +564,7 @@ func _sense_pheromone(ant: AntState) -> Vector2:
 
 func _bias_toward_quality(ant: AntState) -> void:
 	# In multi-source mode, occasionally nudge ants toward known high-quality sources
-	if randf() > 0.02:
+	if _rng.randf() > 0.02:
 		return
 	var best_idx := -1
 	var best_score := 0.0
@@ -562,7 +611,7 @@ func _update_tandem_pairs(delta: float) -> void:
 			var ant: AntState = _ants[i]
 			if ant.has_food or ant.is_tandem_leader or ant.is_tandem_follower:
 				continue
-			if ant.pos.distance_to(sig["pos"]) < sig["radius"] and randf() < 0.01:
+			if ant.pos.distance_to(sig["pos"]) < sig["radius"] and _rng.randf() < 0.01:
 				# Find a leader (ant that knows the food location)
 				for j in range(_ants.size()):
 					var leader: AntState = _ants[j]
@@ -621,10 +670,12 @@ func _draw_heatmap() -> void:
 	_heatmap_im.clear_surfaces()
 
 	# Find max pheromone for normalization
-	var max_pher := 0.01
+	var max_pher := 0.0
 	for x in range(grid_resolution):
 		for y in range(grid_resolution):
 			max_pher = maxf(max_pher, _pheromone_grid[x][y])
+	if max_pher < 0.01:
+		return
 
 	var cell_w := field_size / float(grid_resolution)
 	var half := field_size * 0.5
@@ -871,6 +922,12 @@ func _update_labels() -> void:
 # =========================================================================
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("lesson_seed"):
+		lesson_seed = int(config["lesson_seed"])
+	if config.has("lesson_display"):
+		lesson_display = str(config["lesson_display"]).to_lower() in ["true", "on", "1"]
+		if lesson_display and is_instance_valid(_control_panel):
+			_arrange_lesson_display()
 	if config.has("ant_count"):
 		ant_count = int(config["ant_count"])
 	if config.has("evaporation_rate"):
@@ -898,3 +955,4 @@ func apply_grid_config(config: Dictionary) -> void:
 
 	# Re-initialize with new params
 	_reset_colony()
+	_sync_control_values()

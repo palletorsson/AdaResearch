@@ -3,14 +3,14 @@
 # Only generates caves automatically
 #
 # @identity
-# essence: a cave system grown live by the rhizome generator — chambers connected without a trunk, any passage reachable from any other, marched into walkable rock at load
-# desire: to let the player stand inside Deleuze and Guattari's figure instead of reading it; the network room needs a space whose topology is the argument
-# critical_parameter: the connectivity of the generated graph — no chamber is root, no passage is main; delete any tunnel and the rest still connects, which is the rhizome's whole claim
+# essence: a cave grown by branching and merging, or an opt-in authored passage study at body scale
+# desire: explore relations through passages, crossings and returns; let the theory challenge the construction
+# critical_parameter: how connections become traversable volumes; a merged graph does not guarantee a walkable cave or survival after every cut
 # triggers: _ready() defers generate_cave_async so the marching-cubes pass builds the cave without blocking entry; progress and completion arrive by signal
-# emerges: navigation without hierarchy — you cannot ask which way is forward, only which opening is next, and orientation becomes relational rather than rooted
+# emerges: a network can offer alternative routes; the museum passage study explicitly composes and tests those routes
 # needs: RhizomeCaveGenerator [algorithms/spacetopology/marchingcubes]; async generation [the cave must not gate the map load]; the surrounding 3t labels stating the principles the space enacts
-# relationships: the teaching centre of Rhizome_Network — rhizome_grower beside it shows the same figure growing at hand scale while this one is inhabited at body scale
-# truth: a rhizome cannot be toured, only entered somewhere. Any point connects to any other, so the map of this cave and the cave itself never agree — and the disagreement is the lesson.
+# relationships: rhizome_grower is a companion with a different generator, not a live diagram of this cave
+# truth: the graph, extracted surface and moving body each establish different conditions of access
 
 extends Node3D
 
@@ -151,6 +151,10 @@ const BORES: PackedStringArray = ["thread", "tunnel", "hall", "hollow"]
 ## Capture only. Builds the whole cave inside _ready() with the frame yields removed.
 ## Left false everywhere a player goes, because a 13k-voxel march must not gate map load.
 @export var build_synchronously: bool = false
+## Museum encounter: authored walkable circuits, using the same surface extractor.
+## Opt-in keeps all existing stochastic cave placements and DNA sweeps unchanged.
+@export var passage_study: bool = false
+var _passages: Node3D
 
 # Cave generator
 @onready var cave_generator_node = $CaveGenerator
@@ -161,12 +165,26 @@ var cave_generator: RhizomeCaveGenerator
 ## to rebuild.
 var _built_signature: String = ""
 
+func _enter_tree() -> void:
+	# Prevent the standalone demo environment from replacing the museum environment
+	# even for one frame. The parent enters before these children do.
+	if passage_study or _as_bool(get_meta("config_passage_study",false)):
+		for path in ["Environment","Camera3D"]:
+			var standalone := get_node_or_null(path)
+			if standalone != null:
+				remove_child(standalone)
+				standalone.queue_free()
+
 func _ready() -> void:
 	# Config is stamped as metadata BEFORE the node enters the tree
 	# (GridInteractablesComponent._apply_artifact_config runs at :1195, add_child at
 	# :1220), so reading it here means the first build already has the right values and
 	# the deferred apply_grid_config that follows finds nothing to do.
 	_read_metadata_overrides()
+	if passage_study:
+		_start_passages()
+		_built_signature = _config_signature()
+		return
 	setup_cave_generator()
 
 	if build_synchronously:
@@ -271,15 +289,17 @@ func _bore_scale() -> float:
 ## Everything the build reads. Stringified from the same accessors the build calls, so
 ## the signature cannot drift out of step with what actually reaches the generator.
 func _config_signature() -> String:
-	return "%.6f|%.6f|%d|%d|%.6f|%.6f|%s" % [
+	return "%.6f|%.6f|%d|%d|%.6f|%.6f|%s|%s" % [
 		_merge_distance(), _bore_scale(), cave_seed, chunk_extent,
-		min_branch_length, max_branch_length, str(build_synchronously)
+		min_branch_length, max_branch_length, str(build_synchronously), str(passage_study)
 	]
 
 
 ## The grid's channel. capture_config_sweep sets the exports straight onto the property
 ## before add_child instead, which is why both routes have to end at the same values.
 func _read_metadata_overrides() -> void:
+	if has_meta("config_passage_study"):
+		passage_study = _as_bool(get_meta("config_passage_study"))
 	if has_meta("config_anastomosis"):
 		var a: String = str(get_meta("config_anastomosis")).strip_edges().to_lower()
 		if ANASTOMOSES.has(a):
@@ -334,14 +354,38 @@ func apply_grid_config(config: Dictionary) -> void:
 
 ## Free only what the generator created (its _owned list), then run the same build again.
 func _rebuild() -> void:
-	if cave_generator == null:
+	if is_instance_valid(_passages):
+		remove_child(_passages)
+		_passages.queue_free()
+		_passages = null
+	if passage_study:
+		if cave_generator != null:
+			cave_generator.clear_generated()
+		_start_passages()
+		_built_signature = _config_signature()
 		return
+	if cave_generator == null:
+		setup_cave_generator()
+	if has_node("Environment"):
+		$Environment.show()
 	cave_generator.clear_generated()
 	if build_synchronously:
 		await _build_now()
 	else:
 		await generate_cave_async()
 	_built_signature = _config_signature()
+
+func _start_passages() -> void:
+	# Museum lighting and the visitor camera belong to the hall.
+	if has_node("Environment"):
+		$Environment.hide()
+		$Environment/WorldEnvironment.environment = null
+	if has_node("Camera3D"):
+		$Camera3D.current = false
+	_passages = load("res://algorithms/spacetopology/marchingcubes/rhizome/RhizomePassages.gd").new()
+	_passages.name = "InhabitableRhizome"
+	_passages.synchronous = build_synchronously
+	add_child(_passages)
 
 
 func _on_generation_progress(percentage: float) -> void:

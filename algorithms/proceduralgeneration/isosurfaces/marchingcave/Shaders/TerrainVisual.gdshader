@@ -53,9 +53,9 @@ void fragment() {
 
 	// Ramp lookup: a band index built from the surface normal's Y (so slope reads
 	// as a colour change) plus height, wrapped with mod() into a repeating strip.
-	float slope = fma(NORMAL.y, 0.5, 0.5);
+	float slope = (NORMAL.y * 0.5 + 0.5);
 	float height = var_PosTest.y / 100.0;
-	float band = mod(fma(2.2, slope, height) / 5.0, 1.0);
+	float band = mod((2.2 * slope + height) / 5.0, 1.0);
 	vec4 ramp = textureLod(terrain_ramp, vec2(band, 0.5), 0.0);
 
 	ALBEDO = vec3(fade) * ramp.rgb;

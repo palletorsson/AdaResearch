@@ -59,6 +59,7 @@ const REC_BAND := Color(0.86, 0.45, 0.06)
 const REC_MARK := Color(0.80, 0.10, 0.10)
 
 var _rec_root: Node3D = null
+var _museum_panels_installed := false
 
 
 func _ready() -> void:
@@ -68,6 +69,9 @@ func _ready() -> void:
 ## A map may set the rung with `#record:archive`. Only the record layer is rebuilt; the two
 ## instanced panes and the caption are never touched.
 func apply_grid_config(config_data: Dictionary) -> void:
+	# Opt in to mount the legacy viewport's existing 3D renderers on the museum panels.
+	if str(config_data.get("museum_panels", "false")).to_lower() == "true":
+		_mount_museum_panels.call_deferred()
 	var raw: String = ""
 	if config_data.has("record"):
 		raw = str(config_data["record"])
@@ -86,6 +90,55 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		_rec_root.queue_free()
 		_rec_root = null
 	_build_record()
+
+
+func _mount_museum_panels() -> void:
+	if _museum_panels_installed:
+		return
+	_museum_panels_installed = true
+	var spectrum := get_node("SpectrumDisplay")
+	var meter := get_node("SpectrumDisplay/AudioDisplay/GameSoundMeter")
+	var pane := Node3D.new()
+	pane.name = "MuseumSpectrum"
+	spectrum.add_child(pane)
+	pane.position = Vector3(-1, 1.6, 0.06)
+	pane.scale = Vector3.ONE * 4.0
+	for child in meter.get_children():
+		if child is Node3D:
+			child.reparent(pane, false)
+			if child is Label3D:
+				child.pixel_size = 0.00025
+	var waveform := get_node("SpectralSineWave/WaveformViewport/WaveformDisplay")
+	var wave_pane := Node3D.new()
+	wave_pane.name = "MuseumWaveform"
+	get_node("SpectralSineWave").add_child(wave_pane)
+	wave_pane.position = Vector3(-1, 1.5, 0.06)
+	wave_pane.scale = Vector3.ONE * 5.0
+	# Keep the script host in its tree: reparenting it runs its cleanup callback.
+	for child in waveform.get_children():
+		if child is Node3D:
+			child.reparent(wave_pane, false)
+			if child is Label3D:
+				child.pixel_size = 0.00025
+	for renderer in [meter, waveform]:
+		var title: Label3D = renderer.get("_title_label")
+		var info: Label3D = renderer.get("_info_label")
+		title.position.y = 0.065
+		info.position.y = 0.025
+		info.pixel_size = 0.00013
+	for path in ["SpectrumDisplay/SpectrumDisplayMaterial", "SpectrumDisplay/Label3D", "SpectralSineWave/WaveformDisplayMaterial"]:
+		get_node(path).hide()
+	for parent in [spectrum, get_node("SpectralSineWave")]:
+		var mesh := MeshInstance3D.new()
+		mesh.name = "MuseumPanelBacking"
+		var box := BoxMesh.new()
+		box.size = Vector3(2.2, 1.35, 0.08)
+		mesh.mesh = box
+		mesh.position = Vector3(0, 1.0, 0)
+		var finish := StandardMaterial3D.new()
+		finish.albedo_color = Color(0.05, 0.055, 0.06)
+		mesh.material_override = finish
+		parent.add_child(mesh)
 
 
 func _build_record() -> void:

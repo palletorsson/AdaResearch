@@ -19,10 +19,23 @@ const CoordinateLineScript = preload("res://commons/primitives/line/coordinate_l
 
 @export var axis_length: float = 3.0
 @export var axis_thickness: float = 0.02 # Thinner lines
+## Hall-specific appearance; the conventional translucent RGB frame remains default.
+@export_enum("rgb", "pink_grey_black") var axis_palette: String = "rgb"
+@export_range(0.0, 1.0) var axis_opacity: float = 0.5
+@export var axis_unshaded: bool = true
 ## Spacing for tick marks along each axis, in axis-length units. Default 0.5
 ## gives ticks every 0.5 m along a 3 m axis — six ticks per axis, marking the
 ## scale clearly. Set to 0.0 to suppress ticks.
 @export var tick_step: float = 0.5
+## WHAT A TICK COUNTS (2026-09-04, from the Point_One final's artifact proposals).
+## The frame is scaled by display_scale in _ready(), so with the defaults the arms
+## are 4.5 m and a 0.5 tick lands every 0.75 m of floor while the declaration
+## still talks in threes and halves. `axis` keeps that: ticks count the frame's
+## own units. `world` divides the spacing by display_scale, so a 0.5 setting marks
+## every half metre of the room you are standing in and the ruler measures the
+## hall rather than the gadget. Default axis, so no placement shifts.
+## Map: `#tick_space:world`.
+@export_enum("axis", "world") var tick_space: String = "axis"
 ## Uniform scale applied in _ready(). 0.5 = half-size exhibition default
 ## (was the hardcoded value). 1.5 = 3× exhibition size, useful inside
 ## taller rooms where the coordinate frame should fill the space.
@@ -63,6 +76,11 @@ const FloatingPointScene := "res://commons/primitives/point/interactive_point_or
 ## than left at the scene's shelf defaults.
 @export var point_scale: float = 1.45
 @export var point_energy: float = 3.4
+## Passed through to the floating point's own `finish`. `glow` is the shipped
+## near-white bead; `dark` is dark_sphere's dark-glass body. Default matches the
+## point's own default so the 47 frames placed elsewhere are untouched.
+## `zero` is the origin artifact's own black sphere, shared from Origin.
+@export_enum("glow", "dark", "zero") var point_finish: String = "zero"
 ## WHERE THE POINT STARTS, AND IN WHOSE UNITS (2026-08-31, Palle: "move point to
 ## x: 8 y: same z:10"). Asking for a world position and getting axis units is the
 ## same confusion the readout had, so `floating_point_at` can now be read in
@@ -70,6 +88,16 @@ const FloatingPointScene := "res://commons/primitives/point/interactive_point_or
 ## and says so if the target was out of reach — a frame three units long standing
 ## at x=4 cannot put its point at x=40, and should not pretend it did.
 @export_enum("local", "world") var floating_point_space: String = "local"
+
+## THE SIGN over this frame's origin, hung from above.
+@export var origin_sign: bool = true
+@export var origin_sign_text: String = "point zero"
+## Height above the frame's origin, in metres — roughly eye level and up.
+@export var origin_sign_height: float = 2.35
+@export var origin_sign_width: float = 0.62
+## How far the cables run up out of the top of the board. They do not have to
+## reach the real ceiling to read as hanging from it; they have to LEAVE.
+@export var origin_sign_drop: float = 1.1
 ## ADOPT A POINT PLACED SEPARATELY (2026-08-31, Palle: "it seems hard to place these
 ## objects as one object. Can we place them individually ... and then have the
 ## coordinate system indicate it wherever the point is").
@@ -78,6 +106,11 @@ const FloatingPointScene := "res://commons/primitives/point/interactive_point_or
 ## in the group `ada_coordinate_point` and measures THAT. The two become two map
 ## tokens: the point goes wherever it belongs in the hall, the frame indicates it.
 @export var adopt_external_point: bool = true
+
+## Empty preserves nearest adoption; a named target waits for that exact point.
+@export var external_point_id: String = ""
+## Isolate this instrument from readouts in other streamed halls.
+@export var readout_channel: String = ""
 ## CONFINE, now OFF by default. The clamp was added the same day to stop a drifting
 ## point sitting outside its own axes — and immediately became the thing in the way:
 ## "now we can not move the point beyond its local z 0, the blue line." A point that
@@ -119,19 +152,94 @@ func _ready() -> void:
 
 	# Clear existing children to avoid duplication if running in tool mode updates
 	for child in get_children():
+		remove_child(child)
 		child.queue_free()
 
-	create_axis(Vector3.RIGHT, Color.RED, "X")
-	create_axis(Vector3.UP, Color.GREEN, "Y")
-	create_axis(Vector3.BACK, Color.BLUE, "Z")
+	var colours := _axis_colours()
+	create_axis(Vector3.RIGHT, colours[0], "X")
+	create_axis(Vector3.UP, colours[1], "Y")
+	create_axis(Vector3.BACK, colours[2], "Z")
 
 	# Info frame and gadget only at runtime (not in editor tool mode)
 	if not Engine.is_editor_hint():
 		if show_panel:
 			_add_info_frame()
 		_add_gyroscope()
+		_add_origin_sign()
 		if floating_point:
 			_add_floating_point()
+
+
+## A SIGN OVER THE ZERO, HUNG FROM ABOVE. Palle, 2026-09-04. The origin used to
+## name itself with a billboard caption that cycled thirteen aliases; that came
+## off when the marker went black. This is the one thing left that says what the
+## place is, and it says it once, from the ceiling, like a sign in a hall.
+func _add_origin_sign() -> void:
+	if not origin_sign or origin_sign_text == "" or get_node_or_null("OriginSign") != null:
+		return
+	var root := Node3D.new()
+	root.name = "OriginSign"
+	# THE SIGN IS A BODY, NOT PART OF THE DIAGRAM. _ready scales this whole node
+	# by display_scale (1.5 by default), so a child inherits it and "2.35 m above
+	# the origin" silently became 3.53 m on a 0.93 m board. The floating point
+	# already divides it back out; a hanging sign has the same claim to real
+	# metres, so the export means what it says.
+	var inv: float = 1.0 / maxf(0.01, display_scale)
+	root.position = Vector3(0, origin_sign_height * inv, 0)
+	root.scale = Vector3(inv, inv, inv)
+	add_child(root)
+
+	# the board
+	var board := MeshInstance3D.new()
+	board.name = "Board"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(origin_sign_width, origin_sign_width * 0.34, 0.012)
+	board.mesh = bm
+	var bmat := StandardMaterial3D.new()
+	bmat.albedo_color = Color(0.06, 0.055, 0.065)
+	bmat.roughness = 0.85
+	bmat.metallic = 0.0
+	board.material_override = bmat
+	root.add_child(board)
+
+	# the text, on both faces — a sign you can only read from one side is a
+	# sign that is wrong half the time you walk past it
+	for side in [0.0, 180.0]:
+		var t := Label3D.new()
+		t.name = "Face%d" % int(side)
+		t.text = origin_sign_text
+		t.font_size = 96
+		# board height is width*0.34; the text wants a bit under half of that, so
+		# font_size * pixel_size must land near 0.095 m and not the 0.025 m the
+		# first pass gave — a sign nobody can read is a blank board
+		t.pixel_size = origin_sign_width * 0.0016
+		t.modulate = Origin.DEFAULT_GLOW
+		t.outline_size = 10
+		t.outline_modulate = Color(0, 0, 0, 0.85)
+		t.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		t.double_sided = false
+		t.rotation_degrees = Vector3(0, side, 0)
+		t.position = Vector3(0, 0, 0.009 if side == 0.0 else -0.009)
+		root.add_child(t)
+
+	# two cables up to wherever the ceiling is. They are what makes it HANG
+	# rather than float, which is the whole difference between a sign and a label.
+	for sx in [-1.0, 1.0]:
+		var cable := MeshInstance3D.new()
+		cable.name = "Cable%s" % ("L" if sx < 0.0 else "R")
+		var cyl := CylinderMesh.new()
+		cyl.top_radius = 0.004
+		cyl.bottom_radius = 0.004
+		cyl.height = origin_sign_drop
+		cyl.radial_segments = 6
+		cable.mesh = cyl
+		var cmat := StandardMaterial3D.new()
+		cmat.albedo_color = Color(0.10, 0.10, 0.11)
+		cmat.roughness = 0.7
+		cable.material_override = cmat
+		cable.position = Vector3(sx * origin_sign_width * 0.40,
+				origin_sign_width * 0.17 + origin_sign_drop * 0.5, 0)
+		root.add_child(cable)
 
 
 func _add_floating_point() -> void:
@@ -146,6 +254,26 @@ func _add_floating_point() -> void:
 	# BEFORE add_child: the point builds its material in _ready, and add_child runs
 	# _ready immediately — setting the energy afterwards paints nothing.
 	pt.set("glow_emission_energy", point_energy)
+	# THE FINISH HAS TO BE READ FROM METADATA, NOT FROM THE EXPORT.
+	#
+	# GridInteractablesComponent calls apply_grid_config with call_deferred, so a
+	# map token's `point_finish` arrives AFTER _ready has already built the point —
+	# and _add_floating_point returns early when one exists, so the second call
+	# does nothing. Set through the export alone, the dark finish looked applied in
+	# the log and painted nothing.
+	#
+	# The component does set `config_<key>` metadata SYNCHRONOUSLY, before the node
+	# enters the tree, so that is available here. Additive and gated by the new key:
+	# a map that does not name point_finish reads exactly as before.
+	var fin: String = point_finish
+	if has_meta("config_point_finish"):
+		var mf: String = str(get_meta("config_point_finish")).to_lower().strip_edges()
+		if mf in ["glow", "dark", "zero"]:
+			fin = mf
+	# same reason as glow_emission_energy above — the point builds its material in
+	# _ready, and add_child runs _ready immediately, so a finish set afterwards
+	# paints nothing
+	pt.set("finish", fin)
 	add_child(pt)
 	_place(pt, _start_local())
 	# a world target is re-resolved once the frame has its final transform
@@ -305,6 +433,11 @@ func _add_gyroscope() -> void:
 	gyroscope.position = Vector3(-1.5, 0.5, 0)
 	add_child(gyroscope)
 
+func _axis_colours() -> Array[Color]:
+	if axis_palette == "pink_grey_black":
+		return [Color("d76c9f"), Color("96969d"), Color("202127")]
+	return [Color.RED, Color.GREEN, Color.BLUE]
+
 func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
 	# Build a CoordinateLine instance for the shaft + arrow + ticks. Its internal
 	# geometry is along +X; we rotate the whole node to point at `direction`.
@@ -312,16 +445,22 @@ func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
 	# here. The migration ensures tick marks propagate to every consumer
 	# (xyz_slider_plate, etc.) without changes there.
 	var axis_node: Node3D = Node3D.new()
+	axis_node.name = "Axis" + label_text
 	axis_node.script = CoordinateLineScript
 	axis_node.length = axis_length
 	axis_node.thickness = axis_thickness
 	axis_node.color = color
 	axis_node.arrow_size = axis_thickness * 4.0       # match the old cone proportions
 	axis_node.from_origin = true                       # axis starts at origin, extends +length
-	axis_node.unshaded = true                          # match the old unshaded look
-	axis_node.alpha = 0.5                              # match the old 50% transparent look
-	axis_node.show_ticks = tick_step > 0.0
-	axis_node.tick_step = tick_step
+	axis_node.unshaded = axis_unshaded
+	axis_node.alpha = axis_opacity
+	# tick_space=world: the spacing is asked for in floor metres, and the whole
+	# node is scaled by display_scale, so divide it back out in axis units
+	var step: float = tick_step
+	if tick_space == "world" and display_scale > 0.0:
+		step = tick_step / display_scale
+	axis_node.show_ticks = step > 0.0
+	axis_node.tick_step = step
 	axis_node.tick_size = axis_thickness * 2.5         # tick crosses are a bit wider than the shaft
 	axis_node.tick_thickness = axis_thickness * 0.6    # tick bars thinner than the shaft
 
@@ -333,7 +472,7 @@ func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
 	elif direction == Vector3.UP:
 		axis_node.rotate(Vector3.FORWARD, deg_to_rad(-90.0))   # +X → +Y
 	elif direction == Vector3.BACK:
-		axis_node.rotate(Vector3.UP, deg_to_rad(90.0))         # +X → +Z (Godot Vector3.BACK = +Z)
+		axis_node.rotate(Vector3.UP, deg_to_rad(90.0))         # Existing arm runs toward -Z, along the basin.
 	else:
 		var from := Vector3.RIGHT
 		var d := direction.normalized()
@@ -350,11 +489,15 @@ func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
 	if not show_labels:
 		return
 	var label = Label3D.new()
-	label.text = label_text
+	# Name the actual arm, including its sign; the basin's Z arm points -Z.
+	var drawn_direction: Vector3 = axis_node.basis.x.normalized()
+	label.text = ("−" if drawn_direction.dot(direction) < 0.0 else "") + label_text
+	label.name = "AxisLabel" + label_text
 	label.modulate = color
 	label.font_size = 64
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = direction * (axis_length + 0.2)
+	label.position = drawn_direction * (axis_length + axis_node.arrow_size + 0.16)
+	if label_text != "Y": label.position.y += 0.25
 	add_child(label)
 
 func _exit_tree() -> void:
@@ -384,9 +527,9 @@ func _forget_projection() -> void:
 ## INDICATED on the frame; the WORDS go to the hall's coordinate_readout
 ## displays (group "ada_coordinate_readout"), not to floating labels.
 func _find_point() -> Node3D:
-	if _fp_ref != null and is_instance_valid(_fp_ref):
+	if is_instance_valid(_fp_ref) and _fp_ref.is_inside_tree() and not _fp_ref.is_queued_for_deletion():
 		return _fp_ref
-	_fp_ref = get_node_or_null("FloatingPoint") as Node3D
+	_fp_ref = get_node_or_null("FloatingPoint") as Node3D if floating_point else null
 	if _fp_ref == null and adopt_external_point and is_inside_tree():
 		# nearest wins: a hall may hold several points, and the one this frame is
 		# about is the one standing in it.
@@ -395,6 +538,10 @@ func _find_point() -> Node3D:
 		for n in get_tree().get_nodes_in_group("ada_coordinate_point"):
 			var n3: Node3D = n as Node3D
 			if n3 == null or not n3.is_inside_tree():
+				continue
+			if n3.is_queued_for_deletion():
+				continue
+			if external_point_id != "" and str(n3.get_meta("coordinate_id", "")) != external_point_id:
 				continue
 			var d: float = global_position.distance_squared_to(n3.global_position)
 			if d < best_d:
@@ -429,7 +576,7 @@ func _ensure_projection() -> void:
 	if live and is_instance_valid(_proj_lines):
 		return
 	_forget_projection()
-	var cols: Array = [Color.RED, Color.GREEN, Color.BLUE]
+	var cols := _axis_colours()
 	for i in range(3):
 		var m := MeshInstance3D.new()
 		var sm := SphereMesh.new()
@@ -437,10 +584,11 @@ func _ensure_projection() -> void:
 		sm.height = sm.radius * 2.0
 		m.mesh = sm
 		var mat := StandardMaterial3D.new()
-		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if axis_unshaded else BaseMaterial3D.SHADING_MODE_PER_PIXEL
 		mat.albedo_color = cols[i]
-		mat.emission_enabled = true
+		mat.emission_enabled = axis_unshaded
 		mat.emission = cols[i]
+		mat.roughness = 0.4
 		m.material_override = mat
 		m.name = "AxisMarker%d" % i
 		add_child(m)
@@ -538,18 +686,30 @@ func _process(_delta: float) -> void:
 		for rd in get_tree().get_nodes_in_group("ada_coordinate_readout"):
 			if not rd.has_method("show_coordinates"):
 				continue
+			if str(rd.get_meta("readout_channel", "")) != readout_channel:
+				continue
 			# a card that names its own space wins; one that does not follows the
 			# frame, which is every placement that existed before today
 			var sp: Variant = rd.get("space")
 			var want: Vector3 = reported
+			var want_space: String = readout_space
 			if typeof(sp) == TYPE_STRING and String(sp) == "world":
 				want = world_p
+				want_space = "world"
 			elif typeof(sp) == TYPE_STRING and String(sp) == "local":
 				want = lp
-			rd.show_coordinates(want)
+				want_space = "local"
+			# the card is told which space the number is true in, so a `frame` card
+			# can caption itself (2026-09-04)
+			rd.show_coordinates(want, want_space)
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("external_point_id"):
+		external_point_id = str(config["external_point_id"]).strip_edges()
+		_fp_ref = null
+	if config.has("readout_channel"):
+		readout_channel = str(config["readout_channel"]).strip_edges()
 	# map_data tokens: CoordinateSystem3M:0:0#display_scale:1.5#tick_step:0.0
 	#                  #readout_space:local  #point_scale:1.8  #point_energy:5.0
 	if config.has("readout_space"):
@@ -560,6 +720,16 @@ func apply_grid_config(config: Dictionary) -> void:
 		point_scale = maxf(0.05, float(config["point_scale"]))
 	if config.has("point_energy"):
 		point_energy = maxf(0.0, float(config["point_energy"]))
+	if config.has("origin_sign"):
+		origin_sign = bool(config["origin_sign"])
+	if config.has("origin_sign_text"):
+		origin_sign_text = str(config["origin_sign_text"])
+	if config.has("origin_sign_height"):
+		origin_sign_height = float(config["origin_sign_height"])
+	if config.has("point_finish"):
+		var pf: String = str(config["point_finish"]).to_lower().strip_edges()
+		if pf in ["glow", "dark"]:
+			point_finish = pf
 	if config.has("display_scale"):
 		display_scale = float(config["display_scale"])
 		scale = Vector3(display_scale, display_scale, display_scale)
@@ -594,6 +764,7 @@ func apply_grid_config(config: Dictionary) -> void:
 					0.0 if parts[1].strip_edges().to_lower() == "same" else 1.0,
 					0.0 if parts[2].strip_edges().to_lower() == "same" else 1.0)
 	if config.has("floating_point"):
+		_fp_ref = null
 		var fv: String = str(config["floating_point"])
 		floating_point = (float(fv) != 0.0) if fv.is_valid_float() else (fv.to_lower() in ["true", "yes", "on"])
 		# apply_grid_config may arrive BEFORE _ready (the museum's handoff): then
@@ -607,12 +778,26 @@ func apply_grid_config(config: Dictionary) -> void:
 	# nothing (the old bug: tick_step:0.0 was ignored, ticks stayed). Track
 	# whether any axis-shaping value changed and rebuild the axes if so.
 	var rebuild_axes := false
+	if config.has("axis_palette") and str(config["axis_palette"]) in ["rgb", "pink_grey_black"]:
+		axis_palette = str(config["axis_palette"]); rebuild_axes = true
+	if config.has("axis_opacity"):
+		axis_opacity = clampf(float(config["axis_opacity"]), 0.0, 1.0); rebuild_axes = true
+	if config.has("axis_unshaded"):
+		axis_unshaded = str(config["axis_unshaded"]).to_lower() not in ["0", "false", "no", "off"]
+		rebuild_axes = true
 	if config.has("axis_length"):
 		axis_length = float(config["axis_length"]); rebuild_axes = true
 	if config.has("axis_thickness"):
 		axis_thickness = float(config["axis_thickness"]); rebuild_axes = true
 	if config.has("tick_step"):
 		tick_step = float(config["tick_step"]); rebuild_axes = true
+	if config.has("tick_space"):
+		var ts: String = str(config["tick_space"]).to_lower().strip_edges()
+		if ts in ["axis", "world"]:
+			tick_space = ts; rebuild_axes = true
+	# world ticks are laid in floor metres, so a new display_scale moves them too
+	if config.has("display_scale") and tick_space == "world":
+		rebuild_axes = true
 	# the BARE FRAME keys (2026-08-24): #labels:0 drops the axis letters,
 	# #panel:0 drops the info panel — the words move to the wall works
 	if config.has("labels"):
@@ -636,11 +821,22 @@ func _rebuild_axes() -> void:
 	for child in get_children():
 		# Axis nodes carry the CoordinateLine script; their labels are Label3D
 		# with single-letter text. Remove both; keep panel + gyroscope.
-		if child is Label3D and child.text in ["X", "Y", "Z"]:
+		if child is Label3D and child.text in ["X", "Y", "Z", "−Z"]:
+			remove_child(child)
 			child.queue_free()
 		elif child.get_script() != null and \
 				str(child.get_script().resource_path).ends_with("coordinate_line.gd"):
+			remove_child(child)
 			child.queue_free()
-	create_axis(Vector3.RIGHT, Color.RED, "X")
-	create_axis(Vector3.UP, Color.GREEN, "Y")
-	create_axis(Vector3.BACK, Color.BLUE, "Z")
+	var colours := _axis_colours()
+	create_axis(Vector3.RIGHT, colours[0], "X")
+	create_axis(Vector3.UP, colours[1], "Y")
+	create_axis(Vector3.BACK, colours[2], "Z")
+	for i in range(_axis_markers.size()):
+		var marker = _axis_markers[i]
+		if not is_instance_valid(marker): continue
+		var material: StandardMaterial3D = marker.material_override
+		material.albedo_color = colours[i]
+		material.emission = colours[i]
+		material.emission_enabled = axis_unshaded
+		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if axis_unshaded else BaseMaterial3D.SHADING_MODE_PER_PIXEL

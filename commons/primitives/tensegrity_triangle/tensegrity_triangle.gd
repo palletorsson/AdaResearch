@@ -2,19 +2,20 @@ extends Node3D
 class_name TensegrityTriangle
 
 # @identity
-# essence: a triangle made of three struts and three joints, holding its shape under a load that would fold any other polygon flat. Buckminster Fuller's lesson in one object: the triangle is the only polygon that is rigid — push a square and it racks into a diamond; push a triangle and it simply holds, because its angles are locked by its sides. Three chunky struts, three bright corner nodes, and a slow pulse of compression that the triangle shrugs off. This is the shape that lets domes stand, bridges span, and "doing more with less" become structure.
-# desire: it wants the player to feel rigidity as a property you can SEE — to watch a force arrive and be refused. It wants to move the triangle out of the register of image (a drawn shape) into the register of structure (a thing that bears weight), and to make Fuller's ethic legible: that the most stable form is also the most economical, three members doing the work that no four-sided frame can.
-# critical_parameter: strut thickness + the load pulse amplitude. Collapse here is conceptual inversion — a four-bar frame (not built, but implied) that would deform; the triangle's whole meaning is that it does NOT. The φ-move is the locked angle: difference (three different struts, three directions) held in a relation that cannot be racked out of true. Rigidity as the structural form of integrity.
-# triggers: _ready builds three struts and three joints into a triangle; _process applies a gentle rhythmic compression that the frame absorbs and springs back from — visibly rigid; apply_grid_config rebuilds on DNA change.
-# emerges: alone it reads as a truss; tiled it becomes a geodesic dome, a space-frame, a Vierendeel refused. Beside `three_points_triangle` (the triangle as image) and `pink_triangle` (the triangle as symbol) it is the triangle as STRUCTURE — the same three points asked to bear load instead of render or mean. Together: a triangle can be seen, can stand, or can speak.
-# needs: three struts [present]; three joints locking their angles [present]; a load to refuse [compression pulse, present]; the visible springing-back that proves rigidity [present]
-# relationships: structural sibling of `three_points_triangle` and `pink_triangle`; descendant of `two_points_line` (each strut is a line under compression); ancestor of geodesic domes, space frames, tensegrity masts and every truss in the world-architecture downstream; kin to Fuller, to the spring/soft-body sequence (which is what happens when the joints are NOT locked).
-# truth: a point is position; a line is relation; a triangle is the relation made rigid — the first structure that holds itself up. Fuller built a career on the fact that nature stabilises with triangles because nothing else stays true under load. To install it in the lab as a thing that visibly refuses a force is to teach that some relations, locked at the right angle, simply do not collapse — and that this stubbornness is the cheapest strength there is.
+# essence: three rendered struts and joints in a triangular arrangement.
+# desire: compare the appearance of rigidity with a tested structural constraint.
+# critical_parameter: load_amplitude controls a prescribed scale pulse, not an applied load.
+# triggers: _ready constructs meshes; _process writes a sine-driven root scale.
+# emerges: a visual squeeze and return without a member-force, hinge or load solver.
+# needs: a triangle/square comparison under shared constraints and loads [not implemented].
+# relationships: follows three_points_triangle; a possible bridge to truss and spring models.
+# truth: the legacy tensegrity name does not make this a tensegrity. The struts touch
+# at their joints and there are no tension cables. The pulse cannot prove rigidity.
 
-## Tensegrity / rigid triangle — the triangle as structure (Buckminster Fuller).
+## Triangular frame diagram — a visual question about structure.
 ##
 ## Built procedurally. Origin at the centroid; triangle in the local XY
-## plane. Struts + joints; a compression pulse the frame springs back from.
+## plane. The entire arrangement scales periodically; no load response is simulated.
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
@@ -142,9 +143,8 @@ func _add_strut(a: Vector3, b: Vector3, mat: StandardMaterial3D) -> void:
 func _process(delta: float) -> void:
 	if not _built:
 		return
-	# Rhythmic compression from above that the rigid triangle absorbs
-	# and springs back from — squash slightly in Y, hold X. A real
-	# frame would rack; the triangle just breathes and stays true.
+	# Prescribed visual pulse: squash in Y and widen slightly in X.
+	# This bypasses mechanics; it is not evidence that a frame resists a load.
 	_phase += delta * load_speed
 	var load: float = maxf(0.0, sin(_phase)) * load_amplitude
 	scale = Vector3(1.0 + load * 0.4, 1.0 - load, 1.0)

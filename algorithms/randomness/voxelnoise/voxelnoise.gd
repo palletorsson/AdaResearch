@@ -31,6 +31,15 @@ extends Node3D
 @export var linked_frequency_max: float = 0.18
 @export var linked_iso_bias: float = 0.0
 
+var _contract_scale: float = 4.0
+var _contract_grid: int = 24
+var _occupied_cells: Dictionary = {}
+var _rebuild_ms: float = 0.0
+@export_enum("none", "volume") var stand: String = "none"
+@export var flight_box: bool = false
+var _selected_cell: Vector3i = Vector3i(12, 12, 12)
+var _slice_frame: Node3D
+var _cell_frame: Node3D
 var _contract: bool = false     # true once a staged bench has handed over the contract
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -91,10 +100,12 @@ func _ready() -> void:
 	_read_meta_overrides()
 	add_to_group("voxelnoise_receivers")
 	_ensure_generated_root()
+	_refresh_volume_staging()
 	_queue_rebuild()
 
 
 func _generate_chunk(chunk_pos: Vector3i) -> void:
+	_occupied_cells.clear()
 	var mesh = ArrayMesh.new()
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -127,9 +138,17 @@ func _generate_chunk(chunk_pos: Vector3i) -> void:
 					occupied = val > iso
 
 				if occupied:
-					_add_cube(st, p * voxel_scale)
+					_occupied_cells[Vector3i(x,y-1,z)] = true
+					if stand != "volume":
+						_add_cube(st, p * voxel_scale)
 
-	st.generate_normals()
+	# A fully empty threshold is a valid state, with neither surface nor collider.
+	if _occupied_cells.is_empty(): return
+
+	if stand == "volume":
+		_add_volume_boundary(st)
+	else:
+		st.generate_normals()
 	mesh = st.commit()
 
 	# MeshInstance for rendering
@@ -187,7 +206,7 @@ func _generate_chunk(chunk_pos: Vector3i) -> void:
 		var col = StaticBody3D.new()
 		var shape = CollisionShape3D.new()
 		var concave = ConcavePolygonShape3D.new()
-		concave.data = mesh.surface_get_arrays(0)[Mesh.ARRAY_VERTEX]
+		concave.data = mesh.get_faces()
 		shape.shape = concave
 		col.add_child(shape)
 		_generated_root.add_child(col)
@@ -210,10 +229,18 @@ func apply_perlin_terrain_controls(payload: Dictionary) -> void:
 	# which this receiver samples its own coordinates with its own iso level.
 	_contract = bool(payload.get("contract", false))
 	if _contract:
+		_contract_scale = float(payload.get("noise_scale", 4.0))
+		_contract_grid = int(payload.get("grid_size", 24))
+		if stand == "volume":
+			chunk_size = clampi(_contract_grid, 4, 32)
+			world_height = chunk_size
 		iso_level = clampf(threshold_value, -1.0, 1.0)   # no bias: the contract owns the line
 		noise = PerlinTerrainSculptor.contract_noise(noise_seed, payload.get("noise_scale", noise_scale), noise_octaves)
 
-
+	var selected: Array = payload.get("selected_cell", [_selected_cell.x, _selected_cell.y, _selected_cell.z])
+	if selected.size() == 3:
+		_selected_cell = Vector3i(int(selected[0]), int(selected[1]), int(selected[2]))
+	_update_selection_markers()
 	_queue_rebuild()
 
 func _ensure_generated_root() -> void:
@@ -227,6 +254,9 @@ func _ensure_generated_root() -> void:
 		add_child(_generated_root)
 
 func _configure_noise() -> void:
+	if _contract:
+		noise = PerlinTerrainSculptor.contract_noise(noise_seed, _contract_scale, noise_octaves)
+		return
 	if noise == null:
 		noise = FastNoiseLite.new()
 
@@ -243,6 +273,7 @@ func _clear_generated() -> void:
 		return
 
 	for child in _generated_root.get_children():
+		_generated_root.remove_child(child)
 		child.queue_free()
 
 func _queue_rebuild() -> void:
@@ -256,7 +287,9 @@ func _rebuild_now() -> void:
 	_ensure_generated_root()
 	_configure_noise()
 	_clear_generated()
+	var started: int = Time.get_ticks_usec()
 	_generate_chunk(Vector3i.ZERO)
+	_rebuild_ms = float(Time.get_ticks_usec()-started)/1000.0
 
 
 func _add_cube(st: SurfaceTool, pos: Vector3) -> void:
@@ -277,6 +310,20 @@ func _add_cube(st: SurfaceTool, pos: Vector3) -> void:
 	]
 	for i in idx:
 		st.add_vertex(pos + verts[i])
+
+
+## Keep the same occupied cells; shared interior faces need neither drawing nor collision.
+func _add_volume_boundary(st: SurfaceTool) -> void:
+	var s: float=voxel_scale*0.5
+	var verts: Array=[Vector3(-s,-s,-s),Vector3(s,-s,-s),Vector3(s,s,-s),Vector3(-s,s,-s),Vector3(-s,-s,s),Vector3(s,-s,s),Vector3(s,s,s),Vector3(-s,s,s)]
+	var faces: Array=[[0,1,2,2,3,0],[1,5,6,6,2,1],[5,4,7,7,6,5],[4,0,3,3,7,4],[3,2,6,6,7,3],[4,5,1,1,0,4]]
+	var directions: Array=[Vector3i(0,0,-1),Vector3i(1,0,0),Vector3i(0,0,1),Vector3i(-1,0,0),Vector3i(0,1,0),Vector3i(0,-1,0)]
+	for cell: Vector3i in _occupied_cells:
+		var centre: Vector3=Vector3(cell.x-(chunk_size-1)*0.5,cell.y+0.5,cell.z-(chunk_size-1)*0.5)*voxel_scale
+		for face_index in range(6):
+			if _occupied_cells.has(cell+directions[face_index]):continue
+			st.set_normal(Vector3(directions[face_index]))
+			for index in faces[face_index]:st.add_vertex(centre+verts[index])
 
 func _exit_tree() -> void:
 	for child in get_children():
@@ -305,6 +352,11 @@ func _effective_iso() -> float:
 
 
 func _read_meta_overrides() -> void:
+	if str(get_meta("config_stand", "")) == "volume":
+		stand = "volume"
+		chunk_size = 24;world_height = 24;voxel_scale = clampf(float(str(get_meta("config_cell_size", "0.2"))), 0.05, 2.0)
+	if has_meta("config_flight_box"):
+		flight_box = str(get_meta("config_flight_box")).to_lower() in ["true", "1", "yes"]
 	if has_meta("config_threshold"):
 		var v: String = str(get_meta("config_threshold")).strip_edges().to_lower()
 		if THRESHOLDS.has(v):
@@ -325,10 +377,99 @@ func apply_grid_config(config: Dictionary) -> void:
 	var before_threshold: String = threshold
 	var before_iso: float = iso_level
 	var before_seed: int = noise_seed
+	var before_staging: Array = [stand, voxel_scale, flight_box]
 	for k in config.keys():
 		set_meta("config_%s" % str(k), config[k])
 	_read_meta_overrides()
-	if threshold == before_threshold and is_equal_approx(iso_level, before_iso) \
+	var staging_changed: bool = before_staging != [stand, voxel_scale, flight_box]
+	if staging_changed and is_inside_tree(): _refresh_volume_staging()
+	if not staging_changed and threshold == before_threshold and is_equal_approx(iso_level, before_iso) \
 			and noise_seed == before_seed:
 		return
 	_queue_rebuild()
+
+## Only explicit size/staging changes rebuild the enclosure. Field and CELL updates
+## keep the flight zone and its locomotion registration alive.
+func _refresh_volume_staging() -> void:
+	for node_name in ["VolumeStage", "SelectedSlice", "SelectedCell", "FlightBox"]:
+		var old := get_node_or_null(node_name)
+		if old != null: remove_child(old); old.queue_free()
+	_slice_frame = null; _cell_frame = null
+	if stand != "volume": return
+	_build_volume_stage()
+	if flight_box:
+		var zone := preload("res://commons/movement/museum_flight_box.gd").new()
+		zone.name = "FlightBox"
+		zone.edge_length = maxf(chunk_size, world_height) * voxel_scale + 4.0
+		zone.instruction_title = "FLY THROUGH THE EMPTY CELLS"
+		add_child(zone)
+
+## Fixed museum framing; the generated body can become entirely absent within it.
+func _build_volume_stage() -> void:
+	var kit := load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var mat := StandardMaterial3D.new();mat.albedo_color=Color(0.08,0.12,0.16)
+	var width: float = chunk_size * voxel_scale + 0.4
+	var stage_ := Node3D.new();stage_.name="VolumeStage";add_child(stage_)
+	stage_.add_child(kit.box(Vector3(0,-0.06,0),Vector3(width,0.12,width),mat))
+	for x in [-width * 0.5 + 0.05, width * 0.5 - 0.05]:
+		stage_.add_child(kit.box(Vector3(x,0.12,0),Vector3(0.06,0.24,width),mat))
+	var label_ := Label3D.new()
+	label_.text = "%s m CELLS | %d x %d x %d ADDRESSES\nSame field as the bench | %s times the spacing" % [voxel_scale, chunk_size, world_height, chunk_size, voxel_scale / 0.04]
+	label_.font_size=25;label_.pixel_size=0.002;label_.position=Vector3(0,0.15,-width*0.5-0.03);label_.rotation.y=PI
+	label_.set_meta("em_local_instrument",true);stage_.add_child(label_)
+	# Readable from both approaches when the volume shares the model's orientation.
+	var reverse_label := label_.duplicate() as Label3D
+	reverse_label.position.z = width * 0.5 + 0.03; reverse_label.rotation.y = 0.0
+	stage_.add_child(reverse_label)
+	_build_selection_markers()
+
+
+## CELL marks the screen's horizontal section in the room. These lines have no
+## collider or depth override; solid cells can hide the selected address.
+func _build_selection_markers() -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(1.0, 0.82, 0.16)
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_slice_frame = Node3D.new(); _slice_frame.name = "SelectedSlice"; add_child(_slice_frame)
+	_cell_frame = Node3D.new(); _cell_frame.name = "SelectedCell"; add_child(_cell_frame)
+	for i in range(4): _selection_bar(_slice_frame, mat)
+	for i in range(12): _selection_bar(_cell_frame, mat)
+	_update_selection_markers()
+
+func _selection_bar(parent: Node3D, mat: Material) -> void:
+	var bar := MeshInstance3D.new()
+	bar.mesh = BoxMesh.new(); bar.material_override = mat
+	bar.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(bar)
+
+func apply_perlin_cell_selection(cell: Vector3i) -> void:
+	if not link_to_perlin_sculptor or stand != "volume" or not _contract: return
+	_selected_cell = cell
+	_update_selection_markers()
+
+func _update_selection_markers() -> void:
+	if not is_instance_valid(_slice_frame): return
+	var valid: bool = _contract and _selected_cell.x >= 0 and _selected_cell.x < chunk_size \
+		and _selected_cell.y >= 0 and _selected_cell.y < world_height \
+		and _selected_cell.z >= 0 and _selected_cell.z < chunk_size
+	_slice_frame.visible = valid; _cell_frame.visible = valid
+	if not valid: return
+	var width: float = chunk_size * voxel_scale + 0.10
+	var stroke: float = 0.012 * maxf(1.0, voxel_scale / 0.2)
+	_slice_frame.position.y = (_selected_cell.y + 0.5) * voxel_scale
+	for i in range(4):
+		var bar: MeshInstance3D = _slice_frame.get_child(i)
+		var side: float = -1.0 if i % 2 == 0 else 1.0
+		bar.position = Vector3(side * width * 0.5, 0, 0) if i < 2 else Vector3(0, 0, side * width * 0.5)
+		(bar.mesh as BoxMesh).size = Vector3(stroke, stroke, width) if i < 2 else Vector3(width, stroke, stroke)
+	_cell_frame.position = Vector3(_selected_cell.x - (chunk_size - 1) * 0.5, _selected_cell.y + 0.5, _selected_cell.z - (chunk_size - 1) * 0.5) * voxel_scale
+	var size: float = voxel_scale * 1.06
+	var index: int = 0
+	for axis in range(3):
+		for a in [-1.0, 1.0]:
+			for b in [-1.0, 1.0]:
+				var bar: MeshInstance3D = _cell_frame.get_child(index)
+				var at := Vector3.ZERO; at[(axis + 1) % 3] = a * size * 0.5; at[(axis + 2) % 3] = b * size * 0.5
+				var dimensions := Vector3.ONE * (stroke * 0.75); dimensions[axis] = size
+				bar.position = at; (bar.mesh as BoxMesh).size = dimensions
+				index += 1

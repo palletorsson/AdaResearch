@@ -430,6 +430,18 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.is_empty():
 		return
 	var field_changed: bool = false
+	var material_changed: bool = false
+	# Per-placement staging. Colour does not redraw the field or its collision.
+	if config.has("surface_color"):
+		var tint := Color.from_string(str(config["surface_color"]), surface_color)
+		if not tint.is_equal_approx(surface_color):
+			surface_color = tint
+			material_changed = true
+	if config.has("emission_strength"):
+		var strength := clampf(float(config["emission_strength"]), 0.0, 4.0)
+		if not is_equal_approx(strength, emission_strength):
+			emission_strength = strength
+			material_changed = true
 
 	if config.has("law"):
 		var want: String = str(config["law"]).strip_edges().to_lower()
@@ -456,3 +468,5 @@ func apply_grid_config(config: Dictionary) -> void:
 			rng = RandomNumberGenerator.new()
 		rng.seed = seed_value
 		generate_space()
+	elif material_changed:
+		_setup_material()

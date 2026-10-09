@@ -1,10 +1,10 @@
-extends Node2D
+extends Node3D
 
 # @identity
-# essence: population(t+1) = reproduce(survive(eat(move(population(t))))) with DNA crossover and mutation at each birth — evolution in a closed box
+# essence: local movement, feeding and reproduction alongside population-level replenishment and predator pressure
 # desire: to watch a predator-prey cycle spike and crash and recover — to feel the ecosystem breathe and realize no agent understands the cycle, only you can see it
-# critical_parameter: mutation_rate — at 0 the ecosystem either freezes in its starting configuration or collapses; at 0.1 adaptation keeps prey one step ahead of predators indefinitely
-# triggers: balance_ecosystem() acts as a hidden stabilizer that respawns prey below 10 and weakens predators when they outnumber prey by 2:1 — remove it and the system collapses in minutes
+# critical_parameter: population support — which recoveries came from organisms, and which came from replenishment? The optional care record distinguishes these sources.
+# triggers: balance_ecosystem() replenishes small populations and reduces predator health above its population threshold; show_care_log exposes these interventions without disabling them
 # emerges: prey develop faster flee_weight and higher perception_radius over generations without explicit selection pressure — predation IS the selection pressure
 # needs: [partial] no VR controls at all; the quota axis now exposes the three population allotments as an @export, but mutation_rate and the stabiliser's own thresholds are still hardcoded
 # relationships: synthesis artifact for the swarmintelligence sequence; combines local movement rules from boids with genetic memory from neuroevolution; previews machinelearning sequence's evolutionary algorithms
@@ -31,6 +31,13 @@ extends Node2D
 ## The registry declaration is generated from the @export_enum line below; the
 ## spelling and order there are the contract.
 @export_enum("tended", "barren", "hunted", "fallow") var quota: String = "tended"
+@export var show_care_log: bool = false
+
+signal care_intervention(kind: String, amount: int)
+var care_counts: Dictionary = {"prey_added": 0, "predators_added": 0, "pressure_steps": 0, "food_added": 0}
+var _care_label: Label3D
+var _care_last: String = "No intervention yet"
+var _pressure_active: bool = false
 
 const QUOTAS: PackedStringArray = ["tended", "barren", "hunted", "fallow"]
 
@@ -127,12 +134,17 @@ func _ready() -> void:
 ## known headless hang class and a capture that never returns stalls the pipeline.
 func _build_all() -> void:
 	_apply_quota()
+	care_counts = {"prey_added": 0, "predators_added": 0, "pressure_steps": 0, "food_added": 0}
+	_care_last = "No intervention yet"
+	_pressure_active = false
 	# Assigning `seed` resets the stream. Do NOT also assign `state` — that would
 	# overwrite the seeded state and make BUILD_SEED decorative.
 	_rng.seed = BUILD_SEED
 
 	_setup_multimeshes()
 	_setup_label()
+	if show_care_log:
+		_setup_care_label()
 
 	# Prey first, then predators, then food — one stream, one order. tended,
 	# barren and hunted therefore share the same 50 prey and the same first 5
@@ -162,6 +174,7 @@ func _process(delta: float) -> void:
 	# Periodically spawn food
 	if _rng.randf() < 0.01:
 		spawn_food(1)
+		_record_care("food_added", 1)
 
 	balance_ecosystem()
 	_sync_multimeshes()
@@ -268,6 +281,31 @@ func _update_label() -> void:
 		return
 	info_label.text = LABEL_FORMAT % [
 		prey_list.size(), predator_list.size(), food_list.size()]
+	if is_instance_valid(_care_label):
+		_care_label.text = "POPULATION SUPPORT\nAdded prey %d   predators %d\nFood supplied %d\nPredator pressure: %s\n%s" % [
+			care_counts.prey_added, care_counts.predators_added, care_counts.food_added,
+			"active" if _pressure_active else "idle", _care_last]
+
+
+func _setup_care_label() -> void:
+	_care_label = Label3D.new()
+	_care_label.name = "CareRecord"
+	_care_label.position = Vector3(0.98, 0.32, 0.0)
+	_care_label.font_size = 24
+	_care_label.pixel_size = 0.001
+	_care_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	add_child(_care_label)
+	_owned.append(_care_label)
+
+
+func _record_care(kind: String, amount: int) -> void:
+	care_counts[kind] += amount
+	match kind:
+		"prey_added": _care_last = "Low prey: supplied five"
+		"predators_added": _care_last = "Low predators: supplied two"
+		"food_added": _care_last = "Food supplied from outside"
+		"pressure_steps": _care_last = "Predator health reduced"
+	care_intervention.emit(kind, amount)
 
 # Simulation ───────────────────────────────────────────
 
@@ -417,10 +455,13 @@ func balance_ecosystem() -> void:
 	if prey_list.size() < 10:
 		for i in range(5):
 			spawn_prey(_random_pos(), _make_dna())
+		_record_care("prey_added", 5)
 
-	if predator_list.size() > prey_list.size() * 0.5:
+	_pressure_active = predator_list.size() > prey_list.size() * 0.5
+	if _pressure_active:
 		for predator in predator_list:
 			predator.health -= 0.05
+		_record_care("pressure_steps", 1)
 
 	# fallow allots nobody a predator place, so the stabiliser has no predator
 	# quota to top up. Without this guard it spawns two predators on the very
@@ -428,6 +469,7 @@ func balance_ecosystem() -> void:
 	if _restock_predators and predator_list.size() < 2 and prey_list.size() > 20:
 		for i in range(2):
 			spawn_predator(_random_pos(), _make_dna())
+		_record_care("predators_added", 2)
 
 # Helpers ──────────────────────────────────────────────
 
@@ -486,23 +528,21 @@ func _as_bool(raw, fallback: bool) -> bool:
 	return fallback
 
 ## emissive is applied IN PLACE — no rebuild, so it still bites after the
-## early-return. Default false means no material_override at all, which is the
-## shipped look byte for byte: the meshes carry no material today.
+## early-return. Both finishes read instance colours: without that flag prey,
+## predators and food all render grey, hiding the distinction the lesson asks for.
 func _apply_emissive() -> void:
 	var targets: Array = [prey_mm_instance, predator_mm_instance, food_mm_instance]
 	for i in range(targets.size()):
 		var mmi: MultiMeshInstance3D = targets[i]
 		if mmi == null:
 			continue
+		var mat: StandardMaterial3D = StandardMaterial3D.new()
+		mat.vertex_color_use_as_albedo = true
 		if _emissive:
-			var mat: StandardMaterial3D = StandardMaterial3D.new()
-			mat.vertex_color_use_as_albedo = true
 			mat.emission_enabled = true
 			mat.emission = Color(1.0, 1.0, 1.0)
 			mat.emission_energy_multiplier = 0.6
-			mmi.material_override = mat
-		else:
-			mmi.material_override = null
+		mmi.material_override = mat
 
 # Grid config ──────────────────────────────────────────
 
@@ -511,6 +551,12 @@ func _apply_emissive() -> void:
 ## after framing its labels — no axis key, so that call must change nothing.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_quota: String = quota
+	if config_data.has("show_care_log"):
+		show_care_log = _as_bool(config_data["show_care_log"], show_care_log)
+		if _built and show_care_log and not is_instance_valid(_care_label):
+			_setup_care_label()
+		if is_instance_valid(_care_label):
+			_care_label.visible = show_care_log
 
 	if config_data.has("quota"):
 		quota = _pick_axis(str(config_data["quota"]), QUOTAS, quota)
@@ -543,5 +589,6 @@ func _rebuild_now() -> void:
 	predator_mm_instance = null
 	food_mm_instance = null
 	info_label = null
+	_care_label = null
 
 	_build_all()

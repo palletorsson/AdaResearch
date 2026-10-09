@@ -1,5 +1,5 @@
 ﻿# VRAnimatedCubeBuilder.gd - Clean VR cube construction animation
-# No UI - just the educational animation for VR environments
+# Optional front instrument for replaying and examining the construction.
 extends Node3D
 
 # @identity
@@ -41,6 +41,14 @@ const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.
 @export var order: String = "ascend"
 ## DNA axis: what remains visible once the build completes.
 @export var closure: String = "strata"
+## Opt-in room instrument; existing placements keep their presentation.
+@export var discovery: bool = false
+var discovery_paused: bool = false
+var discovery_diagonals: bool = false
+var discovery_message: String = ""
+var _initial_vertices: Array = []
+var _diagonal_pairs: Array = []
+var _diagonal_lines: Array = []
 
 # Animation states
 enum BuildState {
@@ -132,20 +140,22 @@ signal animation_step_completed(step_name: String)
 signal animation_completed()
 
 func _ready():
+	_initial_vertices = vertices.duplicate()
+	if has_meta("config_discovery"):
+		discovery = str(get_meta("config_discovery")) in ["1", "true"]
 	setup_scene()
-	# Start after a brief delay to allow VR user to focus
-	await get_tree().create_timer(initial_delay).timeout
-	start_animation()
 	_built = true
+	if discovery:
+		_setup_discovery()
+	await get_tree().create_timer(initial_delay).timeout
+	# A visitor may already have requested replay during the initial delay.
+	if current_state == BuildState.WAITING:
+		start_animation()
 
 func setup_scene():
-	# Pre-create all visual elements (invisible initially)
 	create_vertex_spheres()
 	create_edge_lines()
-	# add a wait here for 3 sec  
-	await get_tree().create_timer(3.0).timeout
 	create_triangle_meshes()
-	#create_final_mesh()
 
 func create_vertex_spheres():
 	# Initialize last_handle_positions array
@@ -332,6 +342,8 @@ func create_final_mesh():
 	add_child(final_cube_mesh)
 
 func start_animation():
+	if discovery:
+		_set_handles_enabled(false)
 	_phases = _phase_order()
 	_phase_index = 0
 	animation_step = 0
@@ -395,6 +407,10 @@ func _advance_phase() -> void:
 
 ## DNA axis closure — what the finished build leaves standing.
 func _finish() -> void:
+	if discovery:
+		_set_handles_enabled(true)
+		_update_discovery_diagonals()
+	animation_completed.emit()
 	match closure:
 		"scaffold":
 			# The diagram without its surface: corners and edges only.
@@ -422,11 +438,15 @@ func _finish() -> void:
 			pass
 
 func _process(delta):
+	if discovery and discovery_paused and current_state != BuildState.COMPLETE:
+		return
 	current_step_time += delta
 	vertex_blink_timer += delta
 
 	# Check if handles moved and update geometry (but throttle updates)
-	if _handles_changed() and current_state == BuildState.COMPLETE:
+	if current_state == BuildState.COMPLETE and _handles_changed():
+		if discovery:
+			discovery_message = "Positions change; connections stay."
 		call_deferred("_update_geometry_from_handles")
 
 	match current_state:
@@ -501,6 +521,15 @@ func animate_complete_rotation(delta):
 
 # Public methods for external control (if needed by your VR system)
 func restart_animation():
+	if discovery and _any_handle_held():
+		discovery_message = "Release the corner before replay."
+		return
+	if current_state == BuildState.COMPLETE:
+		_update_geometry_from_handles()
+	discovery_paused = false
+	discovery_message = "Replay keeps your vertex positions."
+	for diagonal in _diagonal_lines:
+		diagonal.visible = false
 	# Hide everything and restart
 	for sphere in vertex_spheres:
 		if is_instance_valid(sphere):
@@ -613,21 +642,20 @@ func _update_geometry_from_handles() -> void:
 	for i in range(edge_lines.size()):
 		if not is_instance_valid(edge_lines[i]):
 			continue
-		if edge_lines[i].visible:
-			var edge = edges[i]
-			_update_edge_line(i, vertices[edge[0]] * cube_size, vertices[edge[1]] * cube_size)
+		var edge = edges[i]
+		_update_edge_line(i, vertices[edge[0]] * cube_size, vertices[edge[1]] * cube_size)
 
 	# Rebuild triangle meshes
 	for i in range(triangle_meshes.size()):
 		if not is_instance_valid(triangle_meshes[i]):
 			continue
-		if triangle_meshes[i].visible:
-			_update_triangle_mesh(i)
+		_update_triangle_mesh(i)
 
 	# Rebuild final mesh if visible
-	if is_instance_valid(final_cube_mesh) and final_cube_mesh.visible:
+	if is_instance_valid(final_cube_mesh):
 		_rebuild_final_mesh()
 
+	_update_discovery_diagonals()
 	is_updating_geometry = false
 
 func _update_edge_line(index: int, start: Vector3, end: Vector3) -> void:
@@ -730,6 +758,10 @@ func _rebuild_final_mesh() -> void:
 ## has already run. Restarting unconditionally here would reset the animation of
 ## every shipped placement each time the grid hands it a config.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("discovery"):
+		discovery = str(config_data["discovery"]) in ["1", "true"]
+		if discovery and _built and is_inside_tree():
+			_setup_discovery()
 	var changed: bool = false
 	if config_data.has("order"):
 		var o: String = str(config_data["order"]).to_lower()
@@ -743,3 +775,100 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			changed = true
 	if changed and _built and is_inside_tree():
 		restart_animation()
+
+
+func _any_handle_held() -> bool:
+	for handle in handle_nodes:
+		if handle.is_picked_up():
+			return true
+	return false
+
+func _set_handles_enabled(value: bool) -> void:
+	for handle in handle_nodes:
+		handle.enabled = value
+
+func _setup_discovery() -> void:
+	if has_node("ExperimentPanel"):
+		return
+	for i in handle_nodes.size():
+		# A visible grip inside the unchanged native grab collider.
+		handle_nodes[i].get_node("MeshInstance3D/Sphere").set_radius(.028)
+		var label := Label3D.new()
+		label.name = "VertexNumber"
+		label.text = "v%d" % i
+		label.position.y = 0.09
+		label.font_size = 28
+		label.pixel_size = 0.001
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		handle_nodes[i].add_child(label)
+	_set_handles_enabled(current_state == BuildState.COMPLETE)
+	# Derive the six face diagonals from the triangle list, excluding cube edges.
+	var known := {}
+	for edge in edges:
+		known[Vector2i(mini(edge[0],edge[1]),maxi(edge[0],edge[1]))] = true
+	for triangle in triangles:
+		for i in 3:
+			var a: int = triangle[i]
+			var b: int = triangle[(i+1)%3]
+			var key := Vector2i(mini(a,b),maxi(a,b))
+			if known.has(key): continue
+			known[key] = true
+			_diagonal_pairs.append(key)
+			var line := create_line_mesh(vertices[a]*cube_size,vertices[b]*cube_size)
+			line.name = "FaceDiagonal%d" % _diagonal_lines.size()
+			line.material_override = line.material_override.duplicate()
+			line.material_override.albedo_color = Color(1.0,0.78,0.15)
+			line.mesh.top_radius = 0.006
+			line.mesh.bottom_radius = 0.006
+			line.visible = false
+			add_child(line)
+			_diagonal_lines.append(line)
+	var panel := Node3D.new()
+	panel.name = "ExperimentPanel"
+	panel.set_script(preload("res://commons/ui/cube_experiment_panel.gd"))
+	panel.position = Vector3(0,-.48,1.35)
+	panel.rotation_degrees.x = -24.0
+	add_child(panel)
+
+func toggle_discovery_pause() -> void:
+	if current_state == BuildState.COMPLETE:
+		discovery_message = "Replay first to pause assembly."
+		return
+	discovery_paused = not discovery_paused
+	discovery_message = "Only this assembly pauses."
+
+func restore_discovery_cube() -> void:
+	if _any_handle_held():
+		discovery_message = "Release the corner before restoring."
+		return
+	discovery_paused = false
+	for i in handle_nodes.size():
+		handle_nodes[i].position = _initial_vertices[i] * cube_size
+		handle_nodes[i].linear_velocity = Vector3.ZERO
+		handle_nodes[i].angular_velocity = Vector3.ZERO
+		last_handle_positions[i] = handle_nodes[i].position
+	current_state = BuildState.COMPLETE
+	for sphere in vertex_spheres: sphere.visible = true
+	for line in edge_lines: line.visible = true
+	for triangle in triangle_meshes: triangle.visible = true
+	_update_geometry_from_handles()
+	_finish()
+	discovery_message = "Initial corners restored."
+
+func toggle_discovery_diagonals() -> void:
+	discovery_diagonals = not discovery_diagonals
+	_update_discovery_diagonals()
+
+func _update_discovery_diagonals() -> void:
+	for i in _diagonal_lines.size():
+		var pair: Vector2i = _diagonal_pairs[i]
+		var a: Vector3 = vertices[pair.x] * cube_size
+		var b: Vector3 = vertices[pair.y] * cube_size
+		var line: MeshInstance3D = _diagonal_lines[i]
+		var offset: Vector3 = b-a
+		var length: float = offset.length()
+		line.visible = discovery_diagonals and current_state == BuildState.COMPLETE and length > 0.0001
+		line.mesh.height = maxf(length,0.0001)
+		line.position = (a+b)*0.5
+		if length > 0.0001:
+			line.quaternion = Quaternion(Vector3.UP,offset/length)

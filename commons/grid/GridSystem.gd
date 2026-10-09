@@ -355,6 +355,9 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	# Pass animation settings if present
 	if settings.has("grid_animation"):
 		component_settings["grid_animation"] = settings["grid_animation"]
+	# The structure component owns the grid material; forward the authored finish.
+	if settings.has("color_overrides"):
+		component_settings["color_overrides"] = settings["color_overrides"]
 
 	# Computation budget for dense generated maps (mission halls/rooms emit
 	# settings.proximity_lod) — forwarded so the interactables component can

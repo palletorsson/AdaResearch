@@ -7,6 +7,10 @@ const EDGE := 12.0
 const SPEED := 2.4
 const DOOR_WIDTH := 3.0
 const DOOR_HEIGHT := 2.6
+## Set before entering the scene tree; existing enclosures retain the 12 m default.
+@export_range(6.0, 64.0, 0.5) var edge_length: float = EDGE
+@export var monochrome: bool = false
+@export var instruction_title: String = "FLY THROUGH THE HOLES"
 
 func _ready() -> void:
 	add_to_group(GROUP)
@@ -16,8 +20,8 @@ func _ready() -> void:
 
 func contains_point(world_position: Vector3) -> bool:
 	var p := to_local(world_position)
-	return absf(p.x) < EDGE * 0.5 and absf(p.z) < EDGE * 0.5 \
-		and p.y >= -0.03 and p.y < EDGE
+	return absf(p.x) < edge_length * 0.5 and absf(p.z) < edge_length * 0.5 \
+		and p.y >= -0.03 and p.y < edge_length
 
 static func at_point(tree: SceneTree, world_position: Vector3) -> Node3D:
 	for zone in tree.get_nodes_in_group(GROUP):
@@ -51,6 +55,9 @@ func _install_xr_adapter() -> void:
 		body._movement_providers.sort_custom(body.sort_by_order)
 
 func _material(colour: Color, luminous: bool = false) -> StandardMaterial3D:
+	if monochrome:
+		var grey := colour.get_luminance()
+		colour = Color(grey, grey, grey, colour.a)
 	var m := StandardMaterial3D.new()
 	m.albedo_color = colour
 	m.roughness = 0.3
@@ -97,10 +104,11 @@ func _sign(at: Vector3, yaw: float) -> void:
 	mount.add_child(backing)
 	var label_ := Label3D.new()
 	label_.name = "FlightInstructions"
-	label_.text = "FLY THROUGH THE HOLES\nFlight begins inside the frame\nDesktop: look + WASD / Space up / Ctrl down\nVR: tilt the left controller + left stick\nRelease to hover. Descend to either door to leave."
+	label_.text = instruction_title + "\nFlight begins inside the frame\nDesktop: look + WASD / Space up / Ctrl down\nVR: tilt the left controller + left stick\nRelease to hover. Descend to either door to leave."
 	label_.font_size = 40
 	label_.pixel_size = 0.002
 	label_.modulate = Color(0.65, 0.95, 1.0)
+	if monochrome: label_.modulate = Color.WHITE
 	label_.outline_size = 8
 	label_.no_depth_test = false
 	label_.double_sided = false
@@ -111,19 +119,19 @@ func _build_enclosure() -> void:
 	var glass := _material(Color(0.3, 0.7, 0.85, 0.065))
 	var frame := _material(Color(0.14, 0.8, 0.94), true)
 	var landing := _material(Color(0.18, 0.31, 0.37))
-	var h := EDGE * 0.5
+	var h := edge_length * 0.5
 	var t := 0.06
-	# Floor top at zero; roof underside at EDGE. Side faces have real collisions.
-	_box("Floor", Vector3(0,-t*0.5,0), Vector3(EDGE,t,EDGE),glass,true)
+	# Floor top at zero; roof underside at edge_length. Side faces have real collisions.
+	_box("Floor", Vector3(0,-t*0.5,0), Vector3(edge_length,t,edge_length),glass,true)
 	# The museum camera is 15 cm above its capsule. A 24 cm roof keeps the eye
 	# inside the visible envelope when that capsule reaches the ceiling.
-	_box("Roof", Vector3(0,EDGE-0.06,0), Vector3(EDGE,0.24,EDGE),glass,true)
+	_box("Roof", Vector3(0,edge_length-0.06,0), Vector3(edge_length,0.24,edge_length),glass,true)
 	for s in [-1.0,1.0]:
-		_box("Side", Vector3(s*(h+t*0.5),h,0), Vector3(t,EDGE,EDGE),glass,true)
-		var wing := (EDGE-DOOR_WIDTH)*0.5
+		_box("Side", Vector3(s*(h+t*0.5),h,0), Vector3(t,edge_length,edge_length),glass,true)
+		var wing := (edge_length-DOOR_WIDTH)*0.5
 		for side in [-1.0,1.0]:
-			_box("DoorWing", Vector3(side*(DOOR_WIDTH+wing)*0.5,h,s*(h+t*0.5)),Vector3(wing,EDGE,t),glass,true)
-		_box("DoorLintel",Vector3(0,(EDGE+DOOR_HEIGHT)*0.5,s*(h+t*0.5)),Vector3(DOOR_WIDTH,EDGE-DOOR_HEIGHT,t),glass,true)
+			_box("DoorWing", Vector3(side*(DOOR_WIDTH+wing)*0.5,h,s*(h+t*0.5)),Vector3(wing,edge_length,t),glass,true)
+		_box("DoorLintel",Vector3(0,(edge_length+DOOR_HEIGHT)*0.5,s*(h+t*0.5)),Vector3(DOOR_WIDTH,edge_length-DOOR_HEIGHT,t),glass,true)
 		_box("Landing",Vector3(0,-0.025,s*h),Vector3(DOOR_WIDTH,0.05,1.0),landing,true)
 		for side in [-1.0,1.0]:
 			_box("DoorFrame",Vector3(side*(DOOR_WIDTH*0.5+0.04),DOOR_HEIGHT*0.5,s*h),Vector3(0.08,DOOR_HEIGHT,0.08),frame,false)
@@ -131,11 +139,11 @@ func _build_enclosure() -> void:
 		# The floor edge stops at the door: no hidden sill to catch the feet.
 		for side in [-1.0,1.0]:
 			_box("FloorEdge",Vector3(side*(DOOR_WIDTH+wing)*0.5,0.035,s*h),Vector3(wing,0.04,0.04),frame,false)
-		_box("TopEdgeX",Vector3(0,EDGE,s*h),Vector3(EDGE,0.06,0.06),frame,false)
-		for y in [0.035,EDGE]:
-			_box("EdgeZ",Vector3(s*h,y,0),Vector3(0.06,0.06,EDGE),frame,false)
+		_box("TopEdgeX",Vector3(0,edge_length,s*h),Vector3(edge_length,0.06,0.06),frame,false)
+		for y in [0.035,edge_length]:
+			_box("EdgeZ",Vector3(s*h,y,0),Vector3(0.06,0.06,edge_length),frame,false)
 		for side in [-1.0,1.0]:
-			_box("Upright",Vector3(s*h,h,side*h),Vector3(0.08,EDGE,0.08),frame,false)
+			_box("Upright",Vector3(s*h,h,side*h),Vector3(0.08,edge_length,0.08),frame,false)
 	# Outside and inside, on both ground doors, so return controls remain visible.
 	for s in [-1.0,1.0]:
 		_sign(Vector3(0,3.25,s*(h+0.08)), PI if s < 0 else 0.0)

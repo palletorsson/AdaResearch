@@ -6,6 +6,8 @@
 extends Node3D
 class_name VRRackControl
 
+const PointerSurface = preload("res://commons/audio/rack_controls/vr_wrappers/rack_pointer_surface.gd")
+
 ## Which RackControlBase scene to embed
 @export var control_scene_path: String = ""
 
@@ -14,6 +16,9 @@ class_name VRRackControl
 
 ## Physical size in meters (auto-calculated from tokens if zero)
 @export var physical_size: Vector2 = Vector2.ZERO
+
+## Pointer input, not a physical grab handle. Passive displays never get a hit box.
+@export var pointer_enabled: bool = true
 
 ## Bezel depth
 const BEZEL_DEPTH := 0.02
@@ -31,6 +36,10 @@ var _screen_mesh: MeshInstance3D
 var _control_instance: Control
 var _pending_style_variant: String = ""
 var _pending_step_count: int = 0
+var _pending_label: String = ""
+var _pending_value: float = .5
+var _has_pending_value := false
+var _pointer_surface: StaticBody3D
 
 
 func _ready() -> void:
@@ -83,12 +92,10 @@ func _build() -> void:
 	_viewport.size = viewport_resolution
 	_viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 
-	# 2D control inside viewport (fills it)
-	_control_instance.anchors_preset = Control.PRESET_FULL_RECT
-	_control_instance.anchor_right = 1.0
-	_control_instance.anchor_bottom = 1.0
-	_control_instance.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_control_instance.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	# Keep canonical layout units and scale the entire drawing to the viewport.
+	# Stretching the Control's rectangle alone shrinks its text relative to the case.
+	_control_instance.size = px_size
+	_control_instance.scale = Vector2(viewport_resolution) / px_size
 	_viewport.add_child(_control_instance)
 	add_child(_viewport)
 
@@ -106,6 +113,17 @@ func _build() -> void:
 	_screen_mesh.material_override = screen_mat
 	_screen_mesh.position.z = SCREEN_OFFSET
 	add_child(_screen_mesh)
+	var passive: bool = _control_instance.get("_control_type") in ["meter", "mtr", "label", "lbl", "divider", "div", "group", "grp"]
+	if pointer_enabled and not passive:
+		_pointer_surface = PointerSurface.new()
+		_pointer_surface.name = "PointerSurface"
+		_screen_mesh.add_child(_pointer_surface)
+		_pointer_surface.configure(_viewport, quad.size)
+
+
+func pointer_event(event) -> void:
+	if is_instance_valid(_pointer_surface):
+		_pointer_surface.pointer_event(event)
 
 
 ## Access the inner 2D control for property changes
@@ -115,6 +133,7 @@ func get_control() -> Control:
 
 ## Convenience: set label on the inner control
 func set_param_name(text: String) -> void:
+	_pending_label = text
 	if _control_instance and _control_instance.has_method("set_control_label"):
 		_control_instance.set("control_label", text)
 	elif _control_instance and "control_label" in _control_instance:
@@ -123,6 +142,8 @@ func set_param_name(text: String) -> void:
 
 ## Convenience: set normalized value
 func set_normalized_value(val: float) -> void:
+	_pending_value = val
+	_has_pending_value = true
 	if _control_instance and "normalized_value" in _control_instance:
 		_control_instance.normalized_value = val
 
@@ -176,6 +197,7 @@ func set_group_title(text: String) -> void:
 func _apply_pending_properties() -> void:
 	if not _control_instance:
 		return
+	set_param_name(_pending_label)
 	if not _pending_style_variant.is_empty() and "style_variant" in _control_instance:
 		_control_instance.style_variant = _pending_style_variant
 	if _pending_step_count > 0:
@@ -183,3 +205,6 @@ func _apply_pending_properties() -> void:
 			_control_instance.step_count = _pending_step_count
 		elif "steps" in _control_instance:
 			_control_instance.steps = _pending_step_count
+	# Quantize against the final step count, not the scene's default count first.
+	if _has_pending_value:
+		set_normalized_value(_pending_value)

@@ -1,189 +1,129 @@
 {
- "chapter": "postfoundationscrisis",
- "speak": "",
- "speak_by": "",
- "pearls": [
-  {
-   "pearl": "criticalalgorithms algorithmic bias visualization",
-   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
-   "lines": [
+  "chapter": "postfoundationscrisis",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
     {
-     "token": "bias_visualizer",
-     "text": "classification systems do not describe the world",
-     "by": "draft",
-     "note": "there is no corpus behind the cloud — twenty words at hand-typed coordinates, man at -0.4 and woman at +0.4 — so the learned bias is authored, and the room needs you to already know it is real.",
-     "note_src": {
-      "file": "commons/artifacts/bias_visualizer/bias_visualizer.gd",
-      "quote": "\"man\": {\"pos\": Vector3(-0.4, 0.0, 0.0), \"category\": \"gender_m\"}"
-     }
+      "pearl": "criticalalgorithms algorithmic bias visualization",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "lines": [
+        {
+          "token": "bias_from_inside",
+          "text": "The words remain. How much room do their differences have?",
+          "by": "hand"
+        }
+      ],
+      "hero": "bias_from_inside"
     },
     {
-     "token": "bias_from_inside",
-     "text": "the embedding space is not a fact — it is a map drawn by the powerful",
-     "by": "draft"
-    }
-   ],
-   "hero": "bias_visualizer"
-  },
-  {
-   "pearl": "criticalalgorithms applied ethics",
-   "map": "CriticalAlgorithms_Applied_Ethics",
-   "lines": [
-    {
-     "token": "room_shape_demonstrator",
-     "text": "room shape is not neutral. Who can speak first is encoded in the floor plan",
-     "by": "draft",
-     "note": "who speaks first is a fact about occupants, and the model has none — so the two plans are ranked for you in advance by colour, red for the head of the table, green for the circle.",
-     "note_src": {
-      "file": "algorithms/postfoundationscrisis/room_shape_demonstrator.gd",
-      "quote": "which makes the moral argument for the viewer before they have looked at anything"
-     }
+      "pearl": "criticalalgorithms applied ethics",
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "lines": [
+        {
+          "token": "room_shape_demonstrator",
+          "text": "Before the first person speaks, where have you put the speaker?",
+          "by": "hand"
+        }
+      ],
+      "hero": "room_shape_demonstrator"
     },
     {
-     "token": "excluded_class_visualizer",
-     "text": "bias is not a bug in the model. Bias is the shape of the model's outside",
-     "by": "draft"
-    }
-   ],
-   "hero": "room_shape_demonstrator"
-  },
-  {
-   "pearl": "speculativecomputation paraconsistent engineering",
-   "map": "SpeculativeComputation_Paraconsistent_Engineering",
-   "lines": [
-    {
-     "token": "merge_conflict_visualizer",
-     "text": "a merge conflict is paraconsistency with a deadline",
-     "by": "draft",
-     "note": "holding both branches costs nothing until something downstream must act — this room has no downstream, so the two posts can stand apart for ever, and the deadline is the load the junction never carries.",
-     "note_src": {
-      "file": "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd",
-      "quote": "a merge conflict is paraconsistency with a deadline"
-     }
+      "pearl": "speculativecomputation paraconsistent engineering",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "lines": [
+        {
+          "token": "merge_conflict_visualizer",
+          "text": "Before pressing RESOLVED, choose what you would keep.",
+          "by": "book"
+        }
+      ],
+      "hero": "merge_conflict_visualizer"
     },
     {
-     "token": "cap_theorem_walk",
-     "text": "CAP is incompleteness for distributed systems",
-     "by": "draft"
-    }
-   ],
-   "hero": "merge_conflict_visualizer"
-  },
-  {
-   "pearl": "speculativecomputation situated computation",
-   "map": "SpeculativeComputation_Situated_Computation",
-   "lines": [
-    {
-     "token": "situated_readout",
-     "text": "objectivity is not a view from nowhere — it is always from somewhere",
-     "by": "draft",
-     "note": "the coordinate is supposed to be the classification, but all four panels are pinned by hand with #verdict — the disagreement has to be authored from outside the room, which is the view from nowhere the map denies.",
-     "note_src": {
-      "file": "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json",
-      "quote": "situated_readout:0:0.3#verdict:NW"
-     }
-    }
-   ],
-   "hero": "situated_readout"
-  },
-  {
-   "pearl": "speculativecomputation collective knowledge",
-   "map": "SpeculativeComputation_Collective_Knowledge",
-   "lines": [
-    {
-     "token": "peer_production_tool",
-     "text": "Contributions streaming from many peers accreting into a shared artifact - the many over the …",
-     "by": "draft"
+      "pearl": "speculativecomputation situated computation",
+      "map": "SpeculativeComputation_Situated_Computation",
+      "lines": [
+        {
+          "token": "situated_readout",
+          "text": "Cover the address. What has the claim lost?",
+          "by": "book"
+        }
+      ],
+      "hero": "situated_readout"
     },
     {
-     "token": "wiki_fragment",
-     "text": "what one panel cannot hold, the ledger can — a wiki is not consistent",
-     "by": "draft",
-     "note": "a fragment is built to be incomplete and to hand you on — the room places one, NORTH, whose footer cites an EAST panel that was never placed, so the commons ships as a pointer with no peer.",
-     "note_src": {
-      "file": "commons/maps/SpeculativeComputation_Collective_Knowledge/map_data.json",
-      "quote": "wiki_fragment:0:0.3#fragment:NORTH"
-     }
-    }
-   ],
-   "hero": "wiki_fragment"
-  },
-  {
-   "pearl": "speculativecomputation rhizome network",
-   "map": "SpeculativeComputation_Rhizome_Network",
-   "lines": [
-    {
-     "token": "rhizome_cave_demo",
-     "text": "Rhizomatic cave — Deleuze-inspired branching cave generation using growth patterns + marching …",
-     "by": "draft",
-     "note": "a cave with no root is grown from parent and children arrays — the anti-hierarchy is produced by a hierarchy, and the marching-cubes surface only hides which node came first.",
-     "note_src": {
-      "file": "commons/maps/SpeculativeComputation_Rhizome_Network/critical.md",
-      "quote": "the language of trees wearing rhizomatic clothing"
-     }
+      "pearl": "speculativecomputation collective knowledge",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "lines": [
+        {
+          "token": "peer_production_tool",
+          "text": "Change one piece. Who decided that the dispute was over?",
+          "by": "book"
+        },
+        {
+          "token": "the_commons_table",
+          "text": "The table has no head. The classification still has an author.",
+          "by": "hand"
+        }
+      ],
+      "hero": "peer_production_tool"
     },
     {
-     "token": "rhizome_grower",
-     "text": "A device growing a rhizome live - new nodes link to many",
-     "by": "draft"
-    }
-   ],
-   "hero": "rhizome_cave_demo"
-  },
-  {
-   "pearl": "postfoundations",
-   "map": "Chamber_PostFoundations",
-   "lines": [],
-   "drop": true,
-   "edge": "laying a first block needs something that stays where you put it — the chamber's one body is a practice target that explodes and respawns, so the founding gesture is a shot the room undoes and forgets.",
-   "edge_src": {
-    "file": "commons/hazards/becoming_catalyst/catalyst_target.gd",
-    "quote": "explode on hit and respawn after a delay"
-   }
-  },
-  {
-   "pearl": "advancedlaboratory lab equipment simulation",
-   "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
-   "lines": [
-    {
-     "token": "MolecularDesigner",
-     "text": "form is not imposed on matter — it is a conversation between catalog and constraint",
-     "by": "draft",
-     "note": "the conversation between catalog and constraint reaches exactly twelve endings — VRBody, Chair, Lamp, Shelf — because assemblies.json lists the bonds and positions in advance; the lab supplies the snapping, never the form.",
-     "note_src": {
-      "file": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd",
-      "quote": "form is not imposed on matter — it is a conversation between catalog and constraint"
-     }
-    }
-   ],
-   "hero": "MolecularDesigner"
-  },
-  {
-   "pearl": "postcrisis synthesis",
-   "map": "PostCrisis_Synthesis",
-   "lines": [
-    {
-     "token": "accountability_ledger",
-     "text": "A running ledger logging each design choice and who it excludes - stay answerable for what you leave …",
-     "by": "draft",
-     "note": "the arc closes on a ledger of who you left out that draws from a fixed ten-name array of the left-out — the one exclusion it cannot stamp is the one nobody thought to type.",
-     "note_src": {
-      "file": "commons/artifacts/accountability_ledger/accountability_ledger.gd",
-      "quote": "Stay answerable for what you leave out."
-     }
+      "pearl": "speculativecomputation rhizome network",
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "lines": [
+        {
+          "token": "rhizome_cave_demo",
+          "text": "Return by another passage. Where would you make a new opening?",
+          "by": "hand"
+        },
+        {
+          "token": "rhizome_grower",
+          "text": "Keep the places; change their connections.",
+          "by": "hand"
+        }
+      ],
+      "hero": "rhizome_cave_demo"
     },
     {
-     "token": "edge_ground_synthesis",
-     "text": "The trilogy synthesis: incompleteness, bias, contradiction",
-     "by": "draft"
+      "pearl": "postfoundations",
+      "map": "Chamber_PostFoundations",
+      "lines": [],
+      "drop": true,
+      "edge": "laying a first block needs something that stays where you put it — the chamber's one body is a practice target that explodes and respawns, so the founding gesture is a shot the room undoes and forgets.",
+      "edge_src": {
+        "file": "commons/hazards/becoming_catalyst/catalyst_target.gd",
+        "quote": "explode on hit and respawn after a delay"
+      }
     },
     {
-     "token": "the_fourth_limit",
-     "text": "Four gates in one rank. Three are honest limits - a proof you cannot cross, a question you cannot ask, a gap that halves forever. The fourth is glass, and you can see the lamp burning behind it.",
-     "by": "claude"
+      "pearl": "advancedlaboratory lab equipment simulation",
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "lines": [
+        {
+          "token": "MolecularDesigner",
+          "text": "Take a hand, move it, let it stay. Which relations still decide the body?",
+          "by": "hand"
+        }
+      ],
+      "hero": "MolecularDesigner"
+    },
+    {
+      "pearl": "postcrisis synthesis",
+      "map": "PostCrisis_Synthesis",
+      "lines": [
+        {
+          "token": "assembly_return",
+          "text": "Look for the hand you moved. What survived the journey?",
+          "by": "hand"
+        },
+        {
+          "token": "accountability_ledger",
+          "text": "The pose is kept. What would you want the record to remember next?",
+          "by": "hand"
+        }
+      ],
+      "hero": "assembly_return"
     }
-   ],
-   "hero": "accountability_ledger"
-  }
- ]
+  ]
 }

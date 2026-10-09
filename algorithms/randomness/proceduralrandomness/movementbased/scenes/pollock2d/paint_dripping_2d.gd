@@ -1,7 +1,7 @@
 extends Node2D
 
-# Pollock Action Painting — 3D VR Version
-# Paints to an Image texture applied to a wall-mounted QuadMesh canvas.
+# Paint into the TextureRect in the host's SubViewport. The host presents that
+# viewport on its framed Sprite3D and animates the brush from our stroke signal.
 
 signal stroke_path_generated(path: PackedVector2Array, stroke_color: Color, stroke_width: float, duration: float)
 
@@ -41,31 +41,10 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var painting_timer: Timer
 var _paint_elapsed_time: float = 0.0
 
-var _mesh_instance: MeshInstance3D
-var _material: StandardMaterial3D
-var _label: Label3D
+@onready var _canvas_display: TextureRect = $CanvasLayer/TextureRect
 
 func _ready() -> void:
 	rng.randomize()
-
-	# Create wall-mounted canvas
-	_mesh_instance = MeshInstance3D.new()
-	var quad := QuadMesh.new()
-	quad.size = Vector2(0.8, 0.53)
-	_mesh_instance.mesh = quad
-	_mesh_instance.position = Vector3(0, 0.3, 0)
-
-	_material = StandardMaterial3D.new()
-	_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	_mesh_instance.material_override = _material
-	add_child(_mesh_instance)
-
-	_label = Label3D.new()
-	_label.text = "Pollock Action Painting"
-	_label.font_size = 28
-	_label.position = Vector3(0, -0.02, 0)
-	_label.modulate = Color(1, 1, 1, 0.8)
-	add_child(_label)
 
 	# Create canvas image
 	canvas = Image.create(int(canvas_size.x), int(canvas_size.y), false, Image.FORMAT_RGBA8)
@@ -82,8 +61,11 @@ func _ready() -> void:
 	painting_timer.start()
 
 func _update_texture() -> void:
-	texture = ImageTexture.create_from_image(canvas)
-	_material.albedo_texture = texture
+	if texture == null:
+		texture = ImageTexture.create_from_image(canvas)
+	else:
+		texture.update(canvas)
+	_canvas_display.texture = texture
 
 func _create_initial_painting() -> void:
 	_paint_elapsed_time = 0.0

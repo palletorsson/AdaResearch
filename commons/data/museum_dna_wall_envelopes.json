@@ -1,0 +1,3076 @@
+{
+ "schema": "adaresearch.museum_dna_wall_envelopes.v1",
+ "generated": "2026-08-16T08:32:49+00:00",
+ "method": "Godot 4.6; config before _ready; immediate merged MeshInstance3D + CollisionShape3D AABB; [width,depth,height] m",
+ "run_id": "31edd36398918dab",
+ "families": {
+  "ForceMagnitudeDemo|body": {
+   "anchor": "ForceMagnitudeDemo",
+   "axis": "body",
+   "scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+   "values": {
+    "light": [
+     0.893,
+     0.347,
+     0.347
+    ],
+    "standard": [
+     0.893,
+     0.347,
+     0.347
+    ],
+    "heavy": [
+     0.893,
+     0.347,
+     0.347
+    ],
+    "immovable": [
+     0.893,
+     0.347,
+     0.347
+    ]
+   },
+   "envelope_wdh": [
+    0.893,
+    0.347,
+    0.347
+   ],
+   "complete": true
+  },
+  "GlassRack|admission": {
+   "anchor": "GlassRack",
+   "axis": "admission",
+   "scene": "res://commons/glass_rack/GlassRack.tscn",
+   "values": {
+    "none": [
+     0.416,
+     0.318,
+     0.811
+    ],
+    "bench": [
+     0.436,
+     0.328,
+     0.811
+    ],
+    "residue": [
+     0.416,
+     0.318,
+     0.811
+    ],
+    "exhibit": [
+     0.416,
+     0.328,
+     0.811
+    ]
+   },
+   "envelope_wdh": [
+    0.436,
+    0.328,
+    0.811
+   ],
+   "complete": true
+  },
+  "VRAudioMonitor|chassis": {
+   "anchor": "VRAudioMonitor",
+   "axis": "chassis",
+   "scene": "res://commons/audio/interfaces/VRAudioMonitor.tscn",
+   "values": {
+    "cased": [
+     0.34,
+     0.12,
+     0.26
+    ],
+    "anonymous": [
+     0.34,
+     0.12,
+     0.26
+    ],
+    "bare": [
+     0.34,
+     0.12,
+     0.26
+    ]
+   },
+   "envelope_wdh": [
+    0.34,
+    0.12,
+    0.26
+   ],
+   "complete": true
+  },
+  "agreement_gauge|opening": {
+   "anchor": "agreement_gauge",
+   "axis": "opening",
+   "scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn",
+   "values": {
+    "agreeing": [
+     0.449,
+     0.336,
+     0.714
+    ],
+    "strangers": [
+     0.449,
+     0.336,
+     0.714
+    ],
+    "opposing": [
+     0.449,
+     0.336,
+     0.714
+    ],
+    "parallel": [
+     0.449,
+     0.336,
+     0.714
+    ]
+   },
+   "envelope_wdh": [
+    0.449,
+    0.336,
+    0.714
+   ],
+   "complete": true
+  },
+  "angle_sum_triangle|opening": {
+   "anchor": "angle_sum_triangle",
+   "axis": "opening",
+   "scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
+   "values": {
+    "flat": [
+     0.32,
+     0.0,
+     0.32
+    ],
+    "hyperbolic": [
+     0.32,
+     0.0,
+     0.32
+    ],
+    "elliptic": [
+     0.32,
+     0.0,
+     0.339
+    ]
+   },
+   "envelope_wdh": [
+    0.32,
+    0.0,
+    0.339
+   ],
+   "complete": true
+  },
+  "balance_puzzle|tell": {
+   "anchor": "balance_puzzle",
+   "axis": "tell",
+   "scene": "res://commons/primitives/balance/balance_puzzle.tscn",
+   "values": {
+    "mark": [
+     0.5,
+     0.5,
+     0.05
+    ],
+    "none": [
+     0.5,
+     0.5,
+     0.05
+    ],
+    "ghost": [
+     0.5,
+     0.5,
+     0.657
+    ],
+    "exemplar": [
+     0.748,
+     0.5,
+     0.794
+    ]
+   },
+   "envelope_wdh": [
+    0.748,
+    0.5,
+    0.794
+   ],
+   "complete": true
+  },
+  "bar_array|algorithm": {
+   "anchor": "bar_array",
+   "axis": "algorithm",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "values": {},
+   "envelope_wdh": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "complete": false,
+   "invalid": [
+    "BUBBLE_SORT",
+    "INSERTION_SORT",
+    "SELECTION_SORT",
+    "MERGE_SORT",
+    "QUICKSORT",
+    "HEAP_SORT"
+   ]
+  },
+  "branching_coral|growth_form": {
+   "anchor": "branching_coral",
+   "axis": "growth_form",
+   "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
+   "values": {
+    "staghorn": [
+     0.35,
+     0.28,
+     0.53
+    ],
+    "fan": [
+     0.35,
+     0.28,
+     0.53
+    ],
+    "table": [
+     0.35,
+     0.49,
+     0.131
+    ],
+    "whip": [
+     0.35,
+     0.28,
+     0.53
+    ],
+    "brain": [
+     0.49,
+     0.379,
+     0.317
+    ]
+   },
+   "envelope_wdh": [
+    0.49,
+    0.49,
+    0.53
+   ],
+   "complete": true
+  },
+  "cable_builder|slack": {
+   "anchor": "cable_builder",
+   "axis": "slack",
+   "scene": "res://algorithms/wavefunctions/line_builder_3d/cable_builder.tscn",
+   "values": {
+    "catenary": [
+     4.091,
+     0.091,
+     0.315
+    ],
+    "chord": [
+     4.091,
+     0.091,
+     0.091
+    ],
+    "spline": [
+     4.091,
+     0.091,
+     0.515
+    ],
+    "festoon": [
+     4.091,
+     0.091,
+     0.865
+    ],
+    "truss": [
+     4.091,
+     0.091,
+     0.762
+    ]
+   },
+   "envelope_wdh": [
+    4.091,
+    0.091,
+    0.865
+   ],
+   "complete": true
+  },
+  "calder_object_mobile|evidence": {
+   "anchor": "calder_object_mobile",
+   "axis": "evidence",
+   "scene": "res://commons/artifacts/calder_mobile/calder_object_mobile.tscn",
+   "values": {
+    "result": [
+     3.802,
+     0.5,
+     3.397
+    ],
+    "trace": [
+     3.802,
+     0.5,
+     3.397
+    ],
+    "longhand": [
+     3.802,
+     0.5,
+     3.397
+    ]
+   },
+   "envelope_wdh": [
+    3.802,
+    0.5,
+    3.397
+   ],
+   "complete": true
+  },
+  "capsule|facture": {
+   "anchor": "capsule",
+   "axis": "facture",
+   "scene": "res://commons/primitives/capsule/capsule.tscn",
+   "values": {
+    "cast": [
+     0.476,
+     0.452,
+     1.0
+    ],
+    "facet": [
+     0.476,
+     0.452,
+     1.0
+    ],
+    "armature": [
+     0.489,
+     0.468,
+     1.014
+    ],
+    "section": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "wear": [
+     0.466,
+     0.441,
+     0.97
+    ]
+   },
+   "envelope_wdh": [
+    0.5,
+    0.5,
+    1.014
+   ],
+   "complete": true
+  },
+  "catalyst_pickup|offer": {
+   "anchor": "catalyst_pickup",
+   "axis": "offer",
+   "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
+   "values": {
+    "plinth": [
+     0.396,
+     0.396,
+     0.9
+    ],
+    "vitrine": [
+     0.471,
+     0.477,
+     1.014
+    ],
+    "clamp": [
+     0.446,
+     0.446,
+     0.9
+    ],
+    "shrine": [
+     0.936,
+     0.936,
+     1.052
+    ],
+    "chute": [
+     0.477,
+     0.479,
+     0.9
+    ]
+   },
+   "envelope_wdh": [
+    0.936,
+    0.936,
+    1.052
+   ],
+   "complete": true
+  },
+  "catalyst_target|mark": {
+   "anchor": "catalyst_target",
+   "axis": "mark",
+   "scene": "res://commons/hazards/becoming_catalyst/catalyst_target.tscn",
+   "values": {
+    "none": [
+     0.4,
+     0.4,
+     0.4
+    ],
+    "bullseye": [
+     1.61,
+     1.61,
+     0.4
+    ],
+    "grid": [
+     1.44,
+     1.44,
+     0.4
+    ],
+    "nimbus": [
+     1.58,
+     1.58,
+     0.4
+    ]
+   },
+   "envelope_wdh": [
+    1.61,
+    1.61,
+    0.4
+   ],
+   "complete": true
+  },
+  "combined_forces_demo|composition": {
+   "anchor": "combined_forces_demo",
+   "axis": "composition",
+   "scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
+   "values": {
+    "orthogonal": [
+     0.728,
+     0.347,
+     0.728
+    ],
+    "compounding": [
+     0.728,
+     0.347,
+     0.441
+    ],
+    "opposing": [
+     1.11,
+     0.347,
+     0.347
+    ]
+   },
+   "envelope_wdh": [
+    1.11,
+    0.347,
+    0.728
+   ],
+   "complete": true
+  },
+  "complexity_pattern|rule": {
+   "anchor": "complexity_pattern",
+   "axis": "rule",
+   "scene": "res://commons/interfaces/qfep/complexity_pattern.tscn",
+   "values": {
+    "life": [
+     0.636,
+     0.636,
+     0.03
+    ],
+    "highlife": [
+     0.636,
+     0.636,
+     0.03
+    ],
+    "seeds": [
+     0.636,
+     0.636,
+     0.03
+    ],
+    "replicator": [
+     0.636,
+     0.636,
+     0.03
+    ],
+    "maze": [
+     0.636,
+     0.636,
+     0.03
+    ],
+    "coral": [
+     0.636,
+     0.636,
+     0.03
+    ]
+   },
+   "envelope_wdh": [
+    0.636,
+    0.636,
+    0.03
+   ],
+   "complete": true
+  },
+  "control_pendulum|regime": {
+   "anchor": "control_pendulum",
+   "axis": "regime",
+   "scene": "res://commons/artifacts/control_pendulum/control_pendulum.tscn",
+   "values": {
+    "free": [
+     0.258,
+     0.121,
+     0.654
+    ],
+    "underdamped": [
+     0.258,
+     0.121,
+     0.654
+    ],
+    "critical": [
+     0.258,
+     0.121,
+     0.654
+    ],
+    "overdamped": [
+     0.258,
+     0.121,
+     0.654
+    ],
+    "resonance": [
+     0.258,
+     0.121,
+     0.654
+    ]
+   },
+   "envelope_wdh": [
+    0.258,
+    0.121,
+    0.654
+   ],
+   "complete": true
+  },
+  "crystal_cluster|facet": {
+   "anchor": "crystal_cluster",
+   "axis": "facet",
+   "scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+   "values": {
+    "taper": [
+     0.726,
+     0.7,
+     0.684
+    ],
+    "point": [
+     0.828,
+     0.717,
+     0.691
+    ],
+    "column": [
+     0.778,
+     0.754,
+     0.721
+    ],
+    "blade": [
+     0.56,
+     0.426,
+     0.389
+    ]
+   },
+   "envelope_wdh": [
+    0.828,
+    0.754,
+    0.721
+   ],
+   "complete": true
+  },
+  "cube_staircase|step_count": {
+   "anchor": "cube_staircase",
+   "axis": "step_count",
+   "scene": "res://algorithms/fractals/cubesubdivision/cube_staircase.tscn",
+   "values": {},
+   "envelope_wdh": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "complete": false,
+   "invalid": [
+    "1",
+    "3",
+    "6",
+    "12",
+    "24"
+   ]
+  },
+  "curvature_slider|opening": {
+   "anchor": "curvature_slider",
+   "axis": "opening",
+   "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
+   "values": {
+    "flat": [
+     0.178,
+     0.059,
+     0.201
+    ],
+    "hyperbolic": [
+     0.178,
+     0.059,
+     0.201
+    ],
+    "elliptic": [
+     0.178,
+     0.059,
+     0.201
+    ]
+   },
+   "envelope_wdh": [
+    0.178,
+    0.059,
+    0.201
+   ],
+   "complete": true
+  },
+  "derivative_pair|curve": {
+   "anchor": "derivative_pair",
+   "axis": "curve",
+   "scene": "res://algorithms/change/derivative_pair.tscn",
+   "values": {
+    "wave": [
+     3.4,
+     0.14,
+     1.5
+    ],
+    "hump": [
+     3.4,
+     0.14,
+     1.5
+    ],
+    "ramp": [
+     3.4,
+     0.14,
+     1.5
+    ],
+    "spike": [
+     3.4,
+     0.14,
+     1.5
+    ],
+    "step": [
+     3.4,
+     0.14,
+     1.5
+    ]
+   },
+   "envelope_wdh": [
+    3.4,
+    0.14,
+    1.5
+   ],
+   "complete": true
+  },
+  "draw_dot|retention": {
+   "anchor": "draw_dot",
+   "axis": "retention",
+   "scene": "res://commons/primitives/point/draw_dot.tscn",
+   "values": {},
+   "envelope_wdh": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "complete": false,
+   "invalid": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+   ]
+  },
+  "draw_triangle_faces|retention": {
+   "anchor": "draw_triangle_faces",
+   "axis": "retention",
+   "scene": "res://commons/primitives/point/draw_triangle_faces.tscn",
+   "values": {},
+   "envelope_wdh": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "complete": false,
+   "invalid": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+   ]
+  },
+  "edge_of_chaos_unlocked|tenure": {
+   "anchor": "edge_of_chaos_unlocked",
+   "axis": "tenure",
+   "scene": "res://commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+   "values": {
+    "unlocked": [
+     2.218,
+     0.388,
+     1.624
+    ],
+    "clamped": [
+     2.218,
+     0.388,
+     1.624
+    ],
+    "withheld": [
+     2.218,
+     0.388,
+     1.624
+    ],
+    "frozen": [
+     2.218,
+     0.388,
+     1.624
+    ],
+    "chaos": [
+     2.218,
+     0.388,
+     1.624
+    ]
+   },
+   "envelope_wdh": [
+    2.218,
+    0.388,
+    1.624
+   ],
+   "complete": true
+  },
+  "energy_landscape_bench|assay": {
+   "anchor": "energy_landscape_bench",
+   "axis": "assay",
+   "scene": "res://commons/artifacts/energy_landscape_bench/energy_landscape_bench.tscn",
+   "values": {
+    "none": [
+     1.1,
+     0.7,
+     0.7
+    ],
+    "gauge": [
+     1.1,
+     0.7,
+     1.44
+    ],
+    "control": [
+     1.12,
+     0.7,
+     1.126
+    ],
+    "chart": [
+     1.1,
+     0.705,
+     1.46
+    ],
+    "vitrine": [
+     1.1,
+     0.79,
+     1.461
+    ]
+   },
+   "envelope_wdh": [
+    1.12,
+    0.79,
+    1.461
+   ],
+   "complete": true
+  },
+  "entropy_jar|found_state": {
+   "anchor": "entropy_jar",
+   "axis": "found_state",
+   "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+   "values": {
+    "sorted": [
+     0.388,
+     0.446,
+     1.181
+    ],
+    "stirred": [
+     0.388,
+     0.446,
+     1.181
+    ],
+    "mixed": [
+     0.388,
+     0.446,
+     1.181
+    ],
+    "shelled": [
+     0.388,
+     0.446,
+     1.181
+    ]
+   },
+   "envelope_wdh": [
+    0.388,
+    0.446,
+    1.181
+   ],
+   "complete": true
+  },
+  "example_1_9_motion_101_velocity_and_random_acceleration_vr|evidence": {
+   "anchor": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+   "axis": "evidence",
+   "scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
+   "values": {
+    "result": [
+     0.06,
+     0.06,
+     0.06
+    ],
+    "trace": [
+     0.84,
+     0.84,
+     0.95
+    ],
+    "longhand": [
+     1.2,
+     0.904,
+     1.2
+    ],
+    "axiom": [
+     0.74,
+     0.599,
+     0.81
+    ]
+   },
+   "envelope_wdh": [
+    1.2,
+    0.904,
+    1.2
+   ],
+   "complete": true
+  },
+  "exercise_1_5_solution_accelerate_and_decelerate_vr|evidence": {
+   "anchor": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+   "axis": "evidence",
+   "scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
+   "values": {
+    "result": [
+     0.39,
+     0.1,
+     0.59
+    ],
+    "trace": [
+     0.651,
+     0.62,
+     0.59
+    ],
+    "longhand": [
+     0.756,
+     1.0,
+     0.7
+    ],
+    "axiom": [
+     0.8,
+     0.489,
+     0.92
+    ]
+   },
+   "envelope_wdh": [
+    0.8,
+    1.0,
+    0.92
+   ],
+   "complete": true
+  },
+  "exercise_5_9_angle_between|figure": {
+   "anchor": "exercise_5_9_angle_between",
+   "axis": "figure",
+   "scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
+   "values": {
+    "arc": [
+     0.819,
+     0.36,
+     0.512
+    ],
+    "wedge": [
+     0.819,
+     0.36,
+     0.512
+    ],
+    "chord": [
+     0.819,
+     0.36,
+     0.512
+    ],
+    "none": [
+     0.819,
+     0.36,
+     0.512
+    ]
+   },
+   "envelope_wdh": [
+    0.819,
+    0.36,
+    0.512
+   ],
+   "complete": true
+  },
+  "firework_launcher|shell": {
+   "anchor": "firework_launcher",
+   "axis": "shell",
+   "scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
+   "values": {
+    "sphere": [
+     0.314,
+     0.507,
+     0.272
+    ],
+    "ring": [
+     0.314,
+     0.507,
+     0.272
+    ],
+    "spokes": [
+     0.314,
+     0.507,
+     0.272
+    ],
+    "willow": [
+     0.314,
+     0.507,
+     0.272
+    ]
+   },
+   "envelope_wdh": [
+    0.314,
+    0.507,
+    0.272
+   ],
+   "complete": true
+  },
+  "fontana_puncture|breach": {
+   "anchor": "fontana_puncture",
+   "axis": "breach",
+   "scene": "res://commons/primitives/fontana_puncture/fontana_puncture.tscn",
+   "values": {
+    "pierced": [
+     0.06,
+     0.06,
+     0.06
+    ],
+    "opened": [
+     0.06,
+     0.06,
+     0.06
+    ],
+    "severed": [
+     0.06,
+     0.06,
+     0.06
+    ],
+    "husk": [
+     0.06,
+     0.06,
+     0.06
+    ]
+   },
+   "envelope_wdh": [
+    0.06,
+    0.06,
+    0.06
+   ],
+   "complete": true
+  },
+  "force_cube|decomposition": {
+   "anchor": "force_cube",
+   "axis": "decomposition",
+   "scene": "res://commons/artifacts/force_cube/force_cube.tscn",
+   "values": {
+    "both": [
+     1.295,
+     0.493,
+     0.93
+    ],
+    "chain": [
+     1.295,
+     0.493,
+     0.93
+    ],
+    "box": [
+     1.295,
+     0.493,
+     0.93
+    ],
+    "none": [
+     1.295,
+     0.493,
+     0.93
+    ]
+   },
+   "envelope_wdh": [
+    1.295,
+    0.493,
+    0.93
+   ],
+   "complete": true
+  },
+  "fractal_recursion_2|depth": {
+   "anchor": "fractal_recursion_2",
+   "axis": "depth",
+   "scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn",
+   "values": {
+    "1": [
+     1.06,
+     0.03,
+     1.06
+    ],
+    "2": [
+     1.06,
+     0.03,
+     1.06
+    ],
+    "4": [
+     1.06,
+     0.03,
+     1.06
+    ],
+    "6": [
+     1.06,
+     0.033,
+     1.06
+    ],
+    "7": [
+     1.06,
+     0.036,
+     1.06
+    ]
+   },
+   "envelope_wdh": [
+    1.06,
+    0.036,
+    1.06
+   ],
+   "complete": true
+  },
+  "frame_counter_display|reading": {
+   "anchor": "frame_counter_display",
+   "axis": "reading",
+   "scene": "res://commons/visualaid/frame_counter/frame_counter_display.tscn",
+   "values": {
+    "count": [
+     1.0,
+     0.1,
+     0.2
+    ],
+    "rate": [
+     1.0,
+     0.1,
+     0.2
+    ],
+    "delta": [
+     1.0,
+     0.1,
+     0.2
+    ],
+    "budget": [
+     1.0,
+     0.1,
+     0.2
+    ]
+   },
+   "envelope_wdh": [
+    1.0,
+    0.1,
+    0.2
+   ],
+   "complete": true
+  },
+  "friction_ramp|grip": {
+   "anchor": "friction_ramp",
+   "axis": "grip",
+   "scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn",
+   "values": {
+    "ice": [
+     0.33,
+     0.717,
+     0.385
+    ],
+    "polished": [
+     0.33,
+     0.717,
+     0.385
+    ],
+    "grit": [
+     0.33,
+     0.717,
+     0.385
+    ],
+    "rubber": [
+     0.33,
+     0.717,
+     0.385
+    ],
+    "pitch": [
+     0.33,
+     0.717,
+     0.385
+    ]
+   },
+   "envelope_wdh": [
+    0.33,
+    0.717,
+    0.385
+   ],
+   "complete": true
+  },
+  "gallery_marker_soft-body|mode": {
+   "anchor": "gallery_marker_soft-body",
+   "axis": "mode",
+   "scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
+   "values": {
+    "plate": [
+     0.36,
+     0.014,
+     0.24
+    ],
+    "stake": [
+     0.4,
+     0.4,
+     0.98
+    ],
+    "decal": [
+     0.62,
+     0.62,
+     0.019
+    ]
+   },
+   "envelope_wdh": [
+    0.62,
+    0.62,
+    0.98
+   ],
+   "complete": false,
+   "invalid": [
+    "float"
+   ]
+  },
+  "grab_long_stick|office": {
+   "anchor": "grab_long_stick",
+   "axis": "office",
+   "scene": "res://commons/primitives/cubes/grab_long_stick.tscn",
+   "values": {
+    "reach": [
+     1.77,
+     0.147,
+     0.146
+    ],
+    "rule": [
+     1.77,
+     0.147,
+     0.146
+    ],
+    "lever": [
+     1.77,
+     0.16,
+     0.193
+    ],
+    "pointer": [
+     1.77,
+     0.147,
+     0.146
+    ],
+    "baton": [
+     1.77,
+     0.147,
+     0.146
+    ]
+   },
+   "envelope_wdh": [
+    1.77,
+    0.16,
+    0.193
+   ],
+   "complete": true
+  },
+  "grab_rainbow_stick|office": {
+   "anchor": "grab_rainbow_stick",
+   "axis": "office",
+   "scene": "res://commons/primitives/cubes/grab_rainbow_stick.tscn",
+   "values": {
+    "reach": [
+     1.77,
+     0.147,
+     0.146
+    ],
+    "rule": [
+     1.77,
+     0.147,
+     0.146
+    ],
+    "lever": [
+     1.77,
+     0.16,
+     0.193
+    ],
+    "pointer": [
+     1.77,
+     0.147,
+     0.146
+    ],
+    "baton": [
+     1.77,
+     0.147,
+     0.146
+    ]
+   },
+   "envelope_wdh": [
+    1.77,
+    0.16,
+    0.193
+   ],
+   "complete": true
+  },
+  "grab_sphere_E|grasp": {
+   "anchor": "grab_sphere_E",
+   "axis": "grasp",
+   "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+   "values": {
+    "atom": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "socket": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "chorus": [
+     0.119,
+     0.044,
+     0.058
+    ],
+    "hollow": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "swarm": [
+     0.045,
+     0.045,
+     0.045
+    ]
+   },
+   "envelope_wdh": [
+    0.119,
+    0.045,
+    0.058
+   ],
+   "complete": true
+  },
+  "grab_sphere_F|grasp": {
+   "anchor": "grab_sphere_F",
+   "axis": "grasp",
+   "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+   "values": {
+    "atom": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "socket": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "chorus": [
+     0.13,
+     0.044,
+     0.058
+    ],
+    "hollow": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "swarm": [
+     0.045,
+     0.045,
+     0.045
+    ]
+   },
+   "envelope_wdh": [
+    0.13,
+    0.045,
+    0.058
+   ],
+   "complete": true
+  },
+  "grab_sphere_lambda|grasp": {
+   "anchor": "grab_sphere_lambda",
+   "axis": "grasp",
+   "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+   "values": {
+    "atom": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "socket": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "chorus": [
+     0.119,
+     0.044,
+     0.058
+    ],
+    "hollow": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "swarm": [
+     0.045,
+     0.045,
+     0.045
+    ]
+   },
+   "envelope_wdh": [
+    0.119,
+    0.045,
+    0.058
+   ],
+   "complete": true
+  },
+  "grab_sphere_phi|grasp": {
+   "anchor": "grab_sphere_phi",
+   "axis": "grasp",
+   "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+   "values": {
+    "atom": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "socket": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "chorus": [
+     0.13,
+     0.044,
+     0.058
+    ],
+    "hollow": [
+     0.044,
+     0.044,
+     0.044
+    ],
+    "swarm": [
+     0.045,
+     0.045,
+     0.045
+    ]
+   },
+   "envelope_wdh": [
+    0.13,
+    0.045,
+    0.058
+   ],
+   "complete": true
+  },
+  "grab_sphere_point_snap|retention": {
+   "anchor": "grab_sphere_point_snap",
+   "axis": "retention",
+   "scene": "res://commons/primitives/point/grab_sphere_point_snap.tscn",
+   "values": {},
+   "envelope_wdh": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "complete": false,
+   "invalid": [
+    "none",
+    "trace",
+    "lattice",
+    "archive",
+    "wax"
+   ]
+  },
+  "grabbable_line|grain": {
+   "anchor": "grabbable_line",
+   "axis": "grain",
+   "scene": "res://commons/primitives/line/grabbable_line.tscn",
+   "values": {
+    "solid": [
+     0.29,
+     0.05,
+     0.05
+    ],
+    "split": [
+     0.29,
+     0.05,
+     0.05
+    ],
+    "quartered": [
+     0.29,
+     0.05,
+     0.05
+    ],
+    "lattice": [
+     0.29,
+     0.05,
+     0.05
+    ],
+    "shell": [
+     0.29,
+     0.05,
+     0.05
+    ]
+   },
+   "envelope_wdh": [
+    0.29,
+    0.05,
+    0.05
+   ],
+   "complete": true
+  },
+  "homogeneous_coordinates|mount": {
+   "anchor": "homogeneous_coordinates",
+   "axis": "mount",
+   "scene": "res://commons/artifacts/homogeneous_coordinates/homogeneous_coordinates.tscn",
+   "values": {
+    "panel": [
+     1.1,
+     0.101,
+     0.85
+    ],
+    "glass": [
+     1.1,
+     0.101,
+     0.85
+    ],
+    "hologram": [
+     0.89,
+     0.101,
+     0.409
+    ]
+   },
+   "envelope_wdh": [
+    1.1,
+    0.101,
+    0.85
+   ],
+   "complete": true
+  },
+  "interactive_point_origin_force|retention": {
+   "anchor": "interactive_point_origin_force",
+   "axis": "retention",
+   "scene": "res://commons/primitives/point/interactive_point_origin_force.tscn",
+   "values": {
+    "none": [
+     0.1,
+     0.1,
+     0.1
+    ],
+    "trace": [
+     0.252,
+     0.122,
+     0.192
+    ],
+    "lattice": [
+     0.248,
+     0.124,
+     0.186
+    ],
+    "archive": [
+     0.252,
+     0.122,
+     0.192
+    ],
+    "wax": [
+     0.31,
+     0.31,
+     0.171
+    ]
+   },
+   "envelope_wdh": [
+    0.31,
+    0.31,
+    0.192
+   ],
+   "complete": true
+  },
+  "invariants_demo|pose": {
+   "anchor": "invariants_demo",
+   "axis": "pose",
+   "scene": "res://algorithms/transforms/invariants/invariants_demo.tscn",
+   "values": {
+    "none": [
+     0.613,
+     0.223,
+     0.848
+    ],
+    "translate": [
+     0.676,
+     0.223,
+     0.848
+    ],
+    "rotate": [
+     0.613,
+     0.223,
+     0.848
+    ],
+    "scale": [
+     0.689,
+     0.223,
+     0.857
+    ],
+    "shear": [
+     0.613,
+     0.223,
+     0.848
+    ],
+    "project": [
+     1.054,
+     0.223,
+     0.848
+    ]
+   },
+   "envelope_wdh": [
+    1.054,
+    0.223,
+    0.857
+   ],
+   "complete": true
+  },
+  "jelly_cube|assay": {
+   "anchor": "jelly_cube",
+   "axis": "assay",
+   "scene": "res://commons/artifacts/jelly_cube/jelly_cube.tscn",
+   "values": {
+    "none": [
+     0.482,
+     0.651,
+     0.4
+    ],
+    "gauge": [
+     0.622,
+     0.651,
+     0.4
+    ],
+    "control": [
+     0.816,
+     0.746,
+     0.4
+    ],
+    "chart": [
+     0.594,
+     0.763,
+     0.41
+    ],
+    "vitrine": [
+     0.544,
+     0.713,
+     0.479
+    ]
+   },
+   "envelope_wdh": [
+    0.816,
+    0.763,
+    0.479
+   ],
+   "complete": true
+  },
+  "karger_algorithm|bottleneck": {
+   "anchor": "karger_algorithm",
+   "axis": "bottleneck",
+   "scene": "res://algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+   "values": {
+    "mixed": [
+     1.44,
+     0.373,
+     0.67
+    ],
+    "throat": [
+     1.44,
+     0.373,
+     0.67
+    ],
+    "braid": [
+     1.44,
+     0.373,
+     0.67
+    ],
+    "severed": [
+     1.44,
+     0.373,
+     0.67
+    ]
+   },
+   "envelope_wdh": [
+    1.44,
+    0.373,
+    0.67
+   ],
+   "complete": true
+  },
+  "laser_exploding_sphere|moment": {
+   "anchor": "laser_exploding_sphere",
+   "axis": "moment",
+   "scene": "res://commons/primitives/spheres/laser_exploding_sphere.tscn",
+   "values": {
+    "intact": [
+     0.2,
+     0.2,
+     0.2
+    ],
+    "fissured": [
+     0.204,
+     0.204,
+     0.204
+    ],
+    "burst": [
+     0.576,
+     0.578,
+     0.586
+    ],
+    "scattered": [
+     0.745,
+     0.762,
+     0.2
+    ]
+   },
+   "envelope_wdh": [
+    0.745,
+    0.762,
+    0.586
+   ],
+   "complete": true
+  },
+  "laser_sword|repose": {
+   "anchor": "laser_sword",
+   "axis": "repose",
+   "scene": "res://commons/primitives/line/laser_sword.tscn",
+   "values": {
+    "dark": [
+     0.08,
+     0.08,
+     0.966
+    ],
+    "pilot": [
+     0.08,
+     0.08,
+     0.286
+    ],
+    "ghost": [
+     0.08,
+     0.08,
+     0.966
+    ],
+    "lit": [
+     0.08,
+     0.08,
+     0.966
+    ]
+   },
+   "envelope_wdh": [
+    0.08,
+    0.08,
+    0.966
+   ],
+   "complete": true
+  },
+  "line|readout": {
+   "anchor": "line",
+   "axis": "readout",
+   "scene": "res://commons/primitives/line/line.tscn",
+   "values": {
+    "numeral": [
+     0.36,
+     0.12,
+     0.12
+    ],
+    "none": [
+     0.36,
+     0.12,
+     0.12
+    ],
+    "gradation": [
+     1.162,
+     0.12,
+     0.12
+    ],
+    "lattice": [
+     1.182,
+     0.12,
+     0.141
+    ]
+   },
+   "envelope_wdh": [
+    1.182,
+    0.12,
+    0.141
+   ],
+   "complete": true
+  },
+  "loss_function_comparator|tail": {
+   "anchor": "loss_function_comparator",
+   "axis": "tail",
+   "scene": "res://algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+   "values": {
+    "few": [
+     1.7,
+     0.726,
+     0.484
+    ],
+    "none": [
+     1.7,
+     0.726,
+     0.484
+    ],
+    "heavy": [
+     1.7,
+     0.726,
+     0.484
+    ],
+    "sole": [
+     1.7,
+     0.726,
+     0.484
+    ],
+    "split": [
+     1.7,
+     0.726,
+     0.484
+    ]
+   },
+   "envelope_wdh": [
+    1.7,
+    0.726,
+    0.484
+   ],
+   "complete": true
+  },
+  "lsystem_tree|evidence": {
+   "anchor": "lsystem_tree",
+   "axis": "evidence",
+   "scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
+   "values": {
+    "result": [
+     0.48,
+     0.48,
+     0.48
+    ],
+    "trace": [
+     0.48,
+     0.48,
+     0.48
+    ],
+    "longhand": [
+     0.48,
+     0.48,
+     0.48
+    ],
+    "axiom": [
+     0.48,
+     0.48,
+     0.48
+    ]
+   },
+   "envelope_wdh": [
+    0.48,
+    0.48,
+    0.48
+   ],
+   "complete": true
+  },
+  "matrix_4x4_viewer|pose": {
+   "anchor": "matrix_4x4_viewer",
+   "axis": "pose",
+   "scene": "res://algorithms/transforms/matrix_viewer/matrix_4x4_viewer.tscn",
+   "values": {
+    "none": [
+     1.056,
+     0.678,
+     1.54
+    ],
+    "translate": [
+     1.056,
+     0.678,
+     1.54
+    ],
+    "rotate": [
+     1.056,
+     0.678,
+     1.54
+    ],
+    "scale": [
+     1.056,
+     0.678,
+     1.54
+    ],
+    "shear": [
+     1.056,
+     0.678,
+     1.54
+    ],
+    "project": [
+     1.056,
+     0.678,
+     1.54
+    ]
+   },
+   "envelope_wdh": [
+    1.056,
+    0.678,
+    1.54
+   ],
+   "complete": true
+  },
+  "merge_conflict_visualizer|merge": {
+   "anchor": "merge_conflict_visualizer",
+   "axis": "merge",
+   "scene": "res://algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn",
+   "values": {
+    "junction": [
+     1.0,
+     0.499,
+     1.8
+    ],
+    "overlap": [
+     0.994,
+     0.699,
+     1.824
+    ],
+    "resolved": [
+     0.6,
+     0.2,
+     1.8
+    ],
+    "fork": [
+     2.103,
+     0.499,
+     1.843
+    ]
+   },
+   "envelope_wdh": [
+    2.103,
+    0.699,
+    1.843
+   ],
+   "complete": true
+  },
+  "multimeter|record": {
+   "anchor": "multimeter",
+   "axis": "record",
+   "scene": "res://commons/lab/multimeter/multimeter.tscn",
+   "values": {
+    "instant": [
+     0.12,
+     0.041,
+     0.18
+    ],
+    "window": [
+     0.12,
+     0.041,
+     0.398
+    ],
+    "archive": [
+     0.175,
+     0.048,
+     0.398
+    ],
+    "margin": [
+     0.175,
+     0.048,
+     0.401
+    ]
+   },
+   "envelope_wdh": [
+    0.175,
+    0.048,
+    0.401
+   ],
+   "complete": true
+  },
+  "newtons_laws|evidence": {
+   "anchor": "newtons_laws",
+   "axis": "evidence",
+   "scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
+   "values": {
+    "result": [
+     0.12,
+     0.12,
+     1.15
+    ],
+    "trace": [
+     0.12,
+     0.12,
+     1.15
+    ],
+    "longhand": [
+     0.12,
+     0.12,
+     1.15
+    ],
+    "axiom": [
+     0.12,
+     0.12,
+     1.15
+    ]
+   },
+   "envelope_wdh": [
+    0.12,
+    0.12,
+    1.15
+   ],
+   "complete": true
+  },
+  "oscillation_controlled_cube|retention": {
+   "anchor": "oscillation_controlled_cube",
+   "axis": "retention",
+   "scene": "res://commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.tscn",
+   "values": {
+    "none": [
+     0.435,
+     0.36,
+     0.865
+    ],
+    "trace": [
+     0.435,
+     0.36,
+     0.865
+    ],
+    "lattice": [
+     0.705,
+     0.36,
+     0.865
+    ],
+    "archive": [
+     0.435,
+     0.36,
+     0.865
+    ],
+    "wax": [
+     0.435,
+     0.36,
+     0.865
+    ]
+   },
+   "envelope_wdh": [
+    0.705,
+    0.36,
+    0.865
+   ],
+   "complete": true
+  },
+  "panel_bridge_loom|threading_draw": {
+   "anchor": "panel_bridge_loom",
+   "axis": "threading_draw",
+   "scene": "res://commons/ui/panel_bridge/test_panel_bridge.tscn",
+   "values": {
+    "straight": [
+     1.44,
+     0.02,
+     0.65
+    ],
+    "point": [
+     1.44,
+     0.02,
+     0.65
+    ],
+    "block": [
+     1.44,
+     0.02,
+     0.65
+    ],
+    "broken": [
+     1.44,
+     0.02,
+     0.65
+    ]
+   },
+   "envelope_wdh": [
+    1.44,
+    0.02,
+    0.65
+   ],
+   "complete": true
+  },
+  "parasol_triangle|convention": {
+   "anchor": "parasol_triangle",
+   "axis": "convention",
+   "scene": "res://commons/primitives/triangle/parasol_triangle.tscn",
+   "values": {
+    "none": [
+     0.4,
+     0.08,
+     1.841
+    ],
+    "normal": [
+     0.4,
+     0.36,
+     1.841
+    ],
+    "winding": [
+     0.4,
+     0.09,
+     1.841
+    ],
+    "both": [
+     0.4,
+     0.36,
+     1.841
+    ]
+   },
+   "envelope_wdh": [
+    0.4,
+    0.36,
+    1.841
+   ],
+   "complete": true
+  },
+  "pattern_tile_cube|craft": {
+   "anchor": "pattern_tile_cube",
+   "axis": "craft",
+   "scene": "res://commons/primitives/arrays/pattern_tile_cube.tscn",
+   "values": {
+    "pixel": [
+     0.04,
+     0.04,
+     0.04
+    ],
+    "tessera": [
+     0.049,
+     0.049,
+     0.04
+    ],
+    "bead": [
+     0.044,
+     0.044,
+     0.04
+    ],
+    "bobbin": [
+     0.044,
+     0.044,
+     0.04
+    ],
+    "stud": [
+     0.04,
+     0.04,
+     0.04
+    ]
+   },
+   "envelope_wdh": [
+    0.049,
+    0.049,
+    0.04
+   ],
+   "complete": true
+  },
+  "pick_up_cube|stock": {
+   "anchor": "pick_up_cube",
+   "axis": "stock",
+   "scene": "res://commons/scenes/mapobjects/pick_up_cube.tscn",
+   "values": {
+    "wire": [
+     0.52,
+     0.52,
+     0.52
+    ],
+    "foam": [
+     0.52,
+     0.52,
+     0.52
+    ],
+    "crate": [
+     0.552,
+     0.552,
+     0.552
+    ],
+    "steel": [
+     0.534,
+     0.534,
+     0.534
+    ],
+    "clay": [
+     0.566,
+     0.57,
+     0.57
+    ]
+   },
+   "envelope_wdh": [
+    0.566,
+    0.57,
+    0.57
+   ],
+   "complete": true
+  },
+  "pickup_cube_static|travel": {
+   "anchor": "pickup_cube_static",
+   "axis": "travel",
+   "scene": "res://commons/primitives/cubes/pickups/pickup_cube_static.tscn",
+   "values": {
+    "none": [
+     0.52,
+     0.52,
+     0.52
+    ],
+    "seat": [
+     0.75,
+     0.75,
+     0.67
+    ],
+    "spindle": [
+     0.87,
+     0.87,
+     0.812
+    ],
+    "rail": [
+     0.777,
+     0.52,
+     0.875
+    ],
+    "gimbal": [
+     1.125,
+     0.908,
+     0.93
+    ],
+    "armature": [
+     0.91,
+     0.52,
+     0.821
+    ]
+   },
+   "envelope_wdh": [
+    1.125,
+    0.908,
+    0.93
+   ],
+   "complete": true
+  },
+  "pickup_cube_transforming|travel": {
+   "anchor": "pickup_cube_transforming",
+   "axis": "travel",
+   "scene": "res://commons/primitives/cubes/pickups/pickup_cube_transforming.tscn",
+   "values": {
+    "none": [
+     0.52,
+     0.52,
+     0.766
+    ],
+    "seat": [
+     0.75,
+     0.75,
+     0.876
+    ],
+    "spindle": [
+     0.87,
+     0.87,
+     0.986
+    ],
+    "rail": [
+     0.777,
+     0.52,
+     0.954
+    ],
+    "gimbal": [
+     1.125,
+     0.908,
+     0.981
+    ],
+    "armature": [
+     0.91,
+     0.52,
+     1.031
+    ]
+   },
+   "envelope_wdh": [
+    1.125,
+    0.908,
+    1.031
+   ],
+   "complete": true
+  },
+  "plus|symmetry": {
+   "anchor": "plus",
+   "axis": "symmetry",
+   "scene": "res://commons/primitives/plus/plus.tscn",
+   "values": {
+    "c4": [
+     0.9,
+     0.125,
+     0.9
+    ],
+    "c2": [
+     0.5,
+     0.125,
+     0.9
+    ],
+    "latin": [
+     0.7,
+     0.125,
+     0.9
+    ],
+    "tau": [
+     0.9,
+     0.125,
+     0.525
+    ]
+   },
+   "envelope_wdh": [
+    0.9,
+    0.125,
+    0.9
+   ],
+   "complete": true
+  },
+  "preserved_pattern|motif": {
+   "anchor": "preserved_pattern",
+   "axis": "motif",
+   "scene": "res://commons/interfaces/qfep/preserved_pattern.tscn",
+   "values": {
+    "blank": [
+     0.354,
+     0.354,
+     0.018
+    ],
+    "checker": [
+     0.354,
+     0.354,
+     0.027
+    ],
+    "cross": [
+     0.354,
+     0.354,
+     0.027
+    ],
+    "twill": [
+     0.354,
+     0.354,
+     0.027
+    ],
+    "houndstooth": [
+     0.354,
+     0.354,
+     0.027
+    ]
+   },
+   "envelope_wdh": [
+    0.354,
+    0.354,
+    0.027
+   ],
+   "complete": true
+  },
+  "pyramid_edit|constraint": {
+   "anchor": "pyramid_edit",
+   "axis": "constraint",
+   "scene": "res://commons/primitives/pyramid/pyramid_edit.tscn",
+   "values": {
+    "free": [
+     0.691,
+     0.691,
+     0.891
+    ],
+    "symmetric": [
+     0.691,
+     0.691,
+     0.891
+    ],
+    "apex_only": [
+     0.691,
+     0.691,
+     0.891
+    ],
+    "base_only": [
+     0.691,
+     0.691,
+     0.891
+    ]
+   },
+   "envelope_wdh": [
+    0.691,
+    0.691,
+    0.891
+   ],
+   "complete": true
+  },
+  "qfep_reactor|readout": {
+   "anchor": "qfep_reactor",
+   "axis": "readout",
+   "scene": "res://commons/interfaces/qfep/qfep_reactor.tscn",
+   "values": {
+    "none": [
+     0.597,
+     0.597,
+     0.6
+    ],
+    "numeral": [
+     0.597,
+     0.597,
+     0.6
+    ],
+    "gradation": [
+     0.908,
+     0.834,
+     0.6
+    ],
+    "lattice": [
+     0.94,
+     0.837,
+     0.6
+    ]
+   },
+   "envelope_wdh": [
+    0.94,
+    0.837,
+    0.6
+   ],
+   "complete": true
+  },
+  "queer_morphology_specimen|becoming": {
+   "anchor": "queer_morphology_specimen",
+   "axis": "becoming",
+   "scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+   "values": {
+    "jarred": [
+     0.45,
+     0.653,
+     0.846
+    ],
+    "cracked": [
+     0.45,
+     0.653,
+     0.846
+    ],
+    "escaped": [
+     0.45,
+     0.653,
+     0.846
+    ],
+    "clouded": [
+     0.45,
+     0.653,
+     0.846
+    ]
+   },
+   "envelope_wdh": [
+    0.45,
+    0.653,
+    0.846
+   ],
+   "complete": true
+  },
+  "reaction_diffusion|inoculation": {
+   "anchor": "reaction_diffusion",
+   "axis": "inoculation",
+   "scene": "res://algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn",
+   "values": {},
+   "envelope_wdh": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "complete": false,
+   "invalid": [
+    "blot",
+    "lattice",
+    "point",
+    "rim",
+    "seam",
+    "dust"
+   ]
+  },
+  "rigid_sculpture|formation": {
+   "anchor": "rigid_sculpture",
+   "axis": "formation",
+   "scene": "res://commons/interfaces/qfep/rigid_sculpture.tscn",
+   "values": {
+    "lattice": [
+     0.54,
+     0.54,
+     0.56
+    ],
+    "shell": [
+     0.591,
+     0.584,
+     0.594
+    ],
+    "ring": [
+     0.54,
+     0.54,
+     0.56
+    ],
+    "column": [
+     0.4,
+     0.4,
+     0.96
+    ],
+    "drift": [
+     0.637,
+     0.637,
+     0.56
+    ]
+   },
+   "envelope_wdh": [
+    0.637,
+    0.637,
+    0.96
+   ],
+   "complete": true
+  },
+  "rotating_cube_demo|retention": {
+   "anchor": "rotating_cube_demo",
+   "axis": "retention",
+   "scene": "res://commons/artifacts/rotating_cube_demo/rotating_cube_demo.tscn",
+   "values": {
+    "none": [
+     0.3,
+     0.3,
+     0.3
+    ],
+    "trace": [
+     0.42,
+     0.42,
+     0.3
+    ],
+    "lattice": [
+     0.624,
+     0.624,
+     0.3
+    ],
+    "archive": [
+     0.42,
+     0.42,
+     0.3
+    ],
+    "wax": [
+     0.42,
+     0.42,
+     0.3
+    ]
+   },
+   "envelope_wdh": [
+    0.624,
+    0.624,
+    0.3
+   ],
+   "complete": true
+  },
+  "rotation_gimbal|regime": {
+   "anchor": "rotation_gimbal",
+   "axis": "regime",
+   "scene": "res://commons/artifacts/rotation_gimbal/rotation_gimbal.tscn",
+   "values": {
+    "free": [
+     1.493,
+     0.719,
+     1.02
+    ],
+    "approaching": [
+     1.493,
+     0.685,
+     1.02
+    ],
+    "locked": [
+     1.576,
+     0.685,
+     1.02
+    ],
+    "past": [
+     1.493,
+     0.685,
+     1.02
+    ]
+   },
+   "envelope_wdh": [
+    1.576,
+    0.719,
+    1.02
+   ],
+   "complete": true
+  },
+  "samplevialrack|admission": {
+   "anchor": "samplevialrack",
+   "axis": "admission",
+   "scene": "res://commons/lab/samplevialrack/samplevialrack.tscn",
+   "values": {
+    "none": [
+     0.152,
+     0.052,
+     0.078
+    ],
+    "bench": [
+     0.152,
+     0.054,
+     0.078
+    ],
+    "residue": [
+     0.152,
+     0.052,
+     0.078
+    ],
+    "exhibit": [
+     0.191,
+     0.058,
+     0.078
+    ]
+   },
+   "envelope_wdh": [
+    0.191,
+    0.058,
+    0.078
+   ],
+   "complete": true
+  },
+  "seed_replay_demo|comparison": {
+   "anchor": "seed_replay_demo",
+   "axis": "comparison",
+   "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+   "values": {
+    "single": [
+     0.275,
+     0.149,
+     0.586
+    ],
+    "replicas": [
+     0.59,
+     0.149,
+     0.586
+    ],
+    "seeds": [
+     0.59,
+     0.149,
+     0.586
+    ],
+    "ladder": [
+     0.905,
+     0.149,
+     0.586
+    ]
+   },
+   "envelope_wdh": [
+    0.905,
+    0.149,
+    0.586
+   ],
+   "complete": true
+  },
+  "self_membership_set|descent": {
+   "anchor": "self_membership_set",
+   "axis": "descent",
+   "scene": "res://commons/artifacts/self_membership_set/self_membership_set.tscn",
+   "values": {
+    "nested": [
+     0.904,
+     0.62,
+     0.934
+    ],
+    "stratified": [
+     0.904,
+     0.62,
+     1.589
+    ],
+    "barred": [
+     0.9,
+     0.62,
+     0.93
+    ],
+    "swallowed": [
+     0.62,
+     0.62,
+     0.896
+    ]
+   },
+   "envelope_wdh": [
+    0.904,
+    0.62,
+    1.589
+   ],
+   "complete": true
+  },
+  "situated_readout|address": {
+   "anchor": "situated_readout",
+   "axis": "address",
+   "scene": "res://commons/artifacts/situated_readout/situated_readout.tscn",
+   "values": {
+    "footnote": [
+     1.2,
+     0.04,
+     0.9
+    ],
+    "erasure": [
+     1.242,
+     0.066,
+     0.9
+    ],
+    "witness": [
+     1.2,
+     0.365,
+     1.575
+    ],
+    "parallax": [
+     1.2,
+     0.06,
+     0.9
+    ],
+    "survey": [
+     1.2,
+     0.064,
+     0.9
+    ]
+   },
+   "envelope_wdh": [
+    1.242,
+    0.365,
+    1.575
+   ],
+   "complete": true
+  },
+  "slope_tangent_demo|evidence": {
+   "anchor": "slope_tangent_demo",
+   "axis": "evidence",
+   "scene": "res://algorithms/change/slope_tangent_demo.tscn",
+   "values": {
+    "result": [
+     3.8,
+     0.12,
+     1.4
+    ],
+    "trace": [
+     3.8,
+     0.12,
+     1.4
+    ],
+    "longhand": [
+     3.8,
+     0.12,
+     1.4
+    ],
+    "axiom": [
+     3.8,
+     0.12,
+     1.4
+    ]
+   },
+   "envelope_wdh": [
+    3.8,
+    0.12,
+    1.4
+   ],
+   "complete": true
+  },
+  "slot_machine|disclosure": {
+   "anchor": "slot_machine",
+   "axis": "disclosure",
+   "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+   "values": {
+    "oracle": [
+     0.56,
+     0.471,
+     1.429
+    ],
+    "tally": [
+     0.56,
+     0.471,
+     1.429
+    ],
+    "ledger": [
+     0.56,
+     0.471,
+     1.429
+    ],
+    "works": [
+     0.56,
+     0.471,
+     1.429
+    ],
+    "origin": [
+     0.56,
+     0.471,
+     1.429
+    ]
+   },
+   "envelope_wdh": [
+    0.56,
+    0.471,
+    1.429
+   ],
+   "complete": true
+  },
+  "snap_tetra_puzzle|solid": {
+   "anchor": "snap_tetra_puzzle",
+   "axis": "solid",
+   "scene": "res://commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
+   "values": {
+    "loose": [
+     1.0,
+     0.29,
+     1.375
+    ],
+    "closed": [
+     1.0,
+     0.362,
+     0.652
+    ],
+    "scattered": [
+     1.0,
+     0.46,
+     0.675
+    ],
+    "short": [
+     1.0,
+     0.362,
+     0.652
+    ]
+   },
+   "envelope_wdh": [
+    1.0,
+    0.46,
+    1.375
+   ],
+   "complete": true
+  },
+  "spring_demo|regime": {
+   "anchor": "spring_demo",
+   "axis": "regime",
+   "scene": "res://commons/artifacts/spring_demo/spring_demo.tscn",
+   "values": {
+    "ringing": [
+     0.84,
+     0.535,
+     0.64
+    ],
+    "underdamped": [
+     0.84,
+     0.535,
+     0.64
+    ],
+    "critical": [
+     0.84,
+     0.535,
+     0.64
+    ],
+    "overdamped": [
+     0.84,
+     0.535,
+     0.64
+    ]
+   },
+   "envelope_wdh": [
+    0.84,
+    0.535,
+    0.64
+   ],
+   "complete": true
+  },
+  "ten_print_textile|odds": {
+   "anchor": "ten_print_textile",
+   "axis": "odds",
+   "scene": "res://commons/artifacts/ten_print_textile/ten_print_textile.tscn",
+   "values": {
+    "0.0": [
+     1.16,
+     0.1,
+     1.8
+    ],
+    "0.25": [
+     1.16,
+     0.1,
+     1.8
+    ],
+    "0.5": [
+     1.16,
+     0.1,
+     1.8
+    ],
+    "0.75": [
+     1.16,
+     0.1,
+     1.8
+    ],
+    "1.0": [
+     1.16,
+     0.1,
+     1.8
+    ]
+   },
+   "envelope_wdh": [
+    1.16,
+    0.1,
+    1.8
+   ],
+   "complete": true
+  },
+  "torque_demo|handedness": {
+   "anchor": "torque_demo",
+   "axis": "handedness",
+   "scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn",
+   "values": {
+    "right": [
+     0.347,
+     0.347,
+     0.893
+    ],
+    "left": [
+     0.347,
+     0.347,
+     0.893
+    ],
+    "both": [
+     0.347,
+     0.347,
+     0.893
+    ]
+   },
+   "envelope_wdh": [
+    0.347,
+    0.347,
+    0.893
+   ],
+   "complete": true
+  },
+  "transform_composition|pair": {
+   "anchor": "transform_composition",
+   "axis": "pair",
+   "scene": "res://commons/artifacts/transform_composition/transform_composition.tscn",
+   "values": {
+    "rotate_translate": [
+     1.0,
+     0.47,
+     0.863
+    ],
+    "rotate_scale": [
+     1.0,
+     0.483,
+     0.863
+    ],
+    "translate_scale": [
+     1.0,
+     0.428,
+     0.863
+    ],
+    "rotate_rotate": [
+     1.0,
+     0.47,
+     0.863
+    ]
+   },
+   "envelope_wdh": [
+    1.0,
+    0.483,
+    0.863
+   ],
+   "complete": true
+  },
+  "transforming_pattern|concert": {
+   "anchor": "transforming_pattern",
+   "axis": "concert",
+   "scene": "res://commons/interfaces/qfep/transforming_pattern.tscn",
+   "values": {
+    "superposition": [
+     0.354,
+     0.354,
+     0.018
+    ],
+    "unison": [
+     0.354,
+     0.354,
+     0.018
+    ],
+    "front": [
+     0.354,
+     0.354,
+     0.018
+    ],
+    "ripple": [
+     0.354,
+     0.354,
+     0.018
+    ],
+    "solitary": [
+     0.354,
+     0.354,
+     0.018
+    ]
+   },
+   "envelope_wdh": [
+    0.354,
+    0.354,
+    0.018
+   ],
+   "complete": true
+  },
+  "truncatedtetrahedron|truncation": {
+   "anchor": "truncatedtetrahedron",
+   "axis": "truncation",
+   "scene": "res://commons/primitives/truncatedtetrahedron/truncatedtetrahedron.tscn",
+   "values": {
+    "0.1": [
+     0.4,
+     0.4,
+     0.4
+    ],
+    "0.25": [
+     0.4,
+     0.4,
+     0.4
+    ],
+    "0.5": [
+     0.4,
+     0.4,
+     0.4
+    ],
+    "0.75": [
+     0.4,
+     0.4,
+     0.4
+    ],
+    "1.0": [
+     0.4,
+     0.4,
+     0.4
+    ]
+   },
+   "envelope_wdh": [
+    0.4,
+    0.4,
+    0.4
+   ],
+   "complete": true
+  },
+  "tt|support": {
+   "anchor": "tt",
+   "axis": "support",
+   "scene": "res://commons/context/clipboard/codeDisplay.tscn",
+   "values": {
+    "none": [
+     1.0,
+     0.207,
+     1.2
+    ],
+    "stand": [
+     1.0,
+     0.42,
+     2.34
+    ],
+    "frame": [
+     1.12,
+     0.207,
+     1.32
+    ],
+    "pylon": [
+     1.3,
+     0.433,
+     2.65
+    ]
+   },
+   "envelope_wdh": [
+    1.3,
+    0.433,
+    2.65
+   ],
+   "complete": true
+  },
+  "vector_magnitude_demo|decomposition": {
+   "anchor": "vector_magnitude_demo",
+   "axis": "decomposition",
+   "scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+   "values": {
+    "star": [
+     0.808,
+     0.719,
+     0.732
+    ],
+    "chain": [
+     0.808,
+     0.719,
+     0.732
+    ],
+    "none": [
+     0.808,
+     0.719,
+     0.732
+    ]
+   },
+   "envelope_wdh": [
+    0.808,
+    0.719,
+    0.732
+   ],
+   "complete": true
+  },
+  "y_oscillation_cube|retention": {
+   "anchor": "y_oscillation_cube",
+   "axis": "retention",
+   "scene": "res://commons/artifacts/y_oscillation_cube/y_oscillation_cube.tscn",
+   "values": {
+    "none": [
+     0.2,
+     0.15,
+     0.55
+    ],
+    "trace": [
+     0.2,
+     0.15,
+     0.55
+    ],
+    "lattice": [
+     0.357,
+     0.15,
+     0.55
+    ],
+    "archive": [
+     0.2,
+     0.15,
+     0.55
+    ],
+    "wax": [
+     0.2,
+     0.15,
+     0.55
+    ]
+   },
+   "envelope_wdh": [
+    0.357,
+    0.15,
+    0.55
+   ],
+   "complete": true
+  },
+  "y_translation_cube|account": {
+   "anchor": "y_translation_cube",
+   "axis": "account",
+   "scene": "res://commons/artifacts/axis_translation_cube/y_translation_cube.tscn",
+   "values": {
+    "ghost": [
+     0.289,
+     0.636,
+     0.956
+    ],
+    "sweep": [
+     0.239,
+     0.636,
+     0.956
+    ],
+    "terminus": [
+     0.239,
+     0.636,
+     0.956
+    ],
+    "formula": [
+     0.239,
+     0.636,
+     0.956
+    ],
+    "none": [
+     0.239,
+     0.636,
+     0.956
+    ]
+   },
+   "envelope_wdh": [
+    0.289,
+    0.636,
+    0.956
+   ],
+   "complete": true
+  }
+ },
+ "summary": {
+  "families": 90,
+  "complete": 83,
+  "variants": 370,
+  "skipped_or_invalid": 33,
+  "wall_depth_ok": 68
+ }
+}

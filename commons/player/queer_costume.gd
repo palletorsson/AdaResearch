@@ -99,7 +99,7 @@ const Tartan = preload("res://commons/body/tartan.gd")
 ## 0 is a bare rig. Every finished sequence raises it by one and nothing lowers
 ## it: the garment is a record, and a record that can shrink is not one.
 @export var stage: int = 0
-@export var max_stage: int = 22
+@export var max_stage: int = 24
 
 var _origin: Node3D = null
 var _head: Node3D = null
@@ -112,6 +112,42 @@ var _garment: Node3D = null
 var _slots: Dictionary = {}     # slot name -> Node3D
 var _pins: Dictionary = {}      # slot name -> what is hanging there
 var _built := false
+var _garment_tween: Tween
+const DragOutfit := preload("res://commons/player/super_drag_outfit.gd")
+var drag_outfit: Node3D
+var outfit_id: String = ""
+var _head_layer_was_visible: bool = true
+var _head_layer_overridden: bool = false
+
+## Choice of dress is independent of earned tiers and trophies.
+func wear_outfit(id: String) -> bool:
+	if id != "" and not DragOutfit.LOOKS.has(id):
+		return false
+	outfit_id = id
+	if not _built:
+		_build()
+	if _garment != null:
+		_garment.visible = id == ""
+	if id == "":
+		if is_instance_valid(drag_outfit):
+			drag_outfit.visible = false
+		if _head is Camera3D and _head_layer_overridden:
+			(_head as Camera3D).set_cull_mask_value(19, _head_layer_was_visible)
+			_head_layer_overridden = false
+		return true
+	if not is_instance_valid(drag_outfit):
+		drag_outfit = DragOutfit.new()
+		drag_outfit.name = "SuperDragOutfit"
+		_torso.add_child(drag_outfit)
+	drag_outfit.visible = true
+	drag_outfit.call("dress", id)
+	drag_outfit.call("set_growth", stage, max_stage, false)
+	if _head is Camera3D:
+		if not _head_layer_overridden:
+			_head_layer_was_visible = (_head as Camera3D).get_cull_mask_value(19)
+			_head_layer_overridden = true
+		(_head as Camera3D).set_cull_mask_value(19, false)
+	return true
 
 
 func _ready() -> void:
@@ -410,13 +446,22 @@ func _draw(L: Dictionary, holder: Node3D) -> void:
 # ── the garment, which only ever grows ──────────────────────────────────────
 
 ## Raise the stage. Never lowers: a garment that can shrink is not a record.
-func grow(to_stage: int = -1) -> void:
+func grow(to_stage: int = -1, animate: bool = false) -> void:
 	var want: int = (stage + 1) if to_stage < 0 else to_stage
 	want = clampi(want, stage, max_stage)
 	if want == stage:
 		return
+	var previous := stage
 	stage = want
 	_dress(stage)
+	if animate and is_inside_tree():
+		var old_span := lerpf(0.16, 0.73, float(previous) / max_stage)
+		var new_span := lerpf(0.16, 0.73, float(stage) / max_stage)
+		_garment_extension(old_span / new_span)
+		_garment_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		_garment_tween.tween_method(_garment_extension, old_span / new_span, 1.0, 1.4)
+	if is_instance_valid(drag_outfit):
+		drag_outfit.call("set_growth", stage, max_stage, animate)
 	emit_signal("stage_changed", stage)
 
 
@@ -427,10 +472,19 @@ func grow(to_stage: int = -1) -> void:
 ## tiers — and the photograph showed a lampshade. So the hem descends toward a
 ## LIMIT and the tiers divide whatever length it has reached: more sequences
 ## make the garment longer, fuller and finer, never taller than a person.
+func _garment_extension(factor: float) -> void:
+	_garment.scale.y = factor
+	_garment.position.y = -0.42 * (1.0 - factor)
+
+
 func _dress(n: int) -> void:
 	if _garment == null:
 		return
+	if _garment_tween and _garment_tween.is_valid():
+		_garment_tween.kill()
+	_garment_extension(1.0)
 	for c in _garment.get_children():
+		_garment.remove_child(c)
 		c.queue_free()
 	if n <= 0:
 		return
@@ -653,3 +707,5 @@ func _process(delta: float) -> void:
 		return
 	_compose_torso(delta)
 	_drive_limbs(delta)
+	if is_instance_valid(drag_outfit) and drag_outfit.visible:
+		drag_outfit.call("follow", _head, _hand_l, _hand_r)

@@ -1,23 +1,10 @@
-# Merge Conflict Visualizer — paraconsistent engineering as visible architecture
-#
-# Two intersecting pillars come together at a glowing junction. One pillar is labeled
-# "branch A" with a blue tint; the other "branch B" with orange. At their meeting, two
-# overlapping geometries occupy the same volume — the artifact does NOT pick one. The
-# conflict is held, not resolved.
-#
-# This is paraconsistent logic in three dimensions: hold contradiction without collapse.
-# The system continues to function while the two truths coexist.
-#
+# Merge Conflict Visualizer — four authored pictures of a disagreement.
+# Keeping two versions visible is not an implementation of paraconsistent inference.
 # @identity
-# essence: branch A in blue and branch B in orange meet at a glowing junction where both geometries occupy the same volume — and the artifact declines to resolve them
-# desire: to give paraconsistent logic a load-bearing body; the engineering room needs contradiction shown as something a system can stand on, not a failure state
-# critical_parameter: the junction — the one region where two truths overlap; conflict_color marks it without erasing either branch, and pillar_height keeps both claims equally tall
-# triggers: _ready() raises both pillars and the shared junction; _process breathes the conflict glow so held contradiction reads as live, not frozen
-# emerges: the felt difference between resolving a conflict and holding one — the structure functions while both truths coexist, which is what production systems quietly do every day
-# needs: two CylinderMesh pillars and a junction mesh [Godot built-ins]; emissive conflict material; labels naming the branches so the metaphor stays concrete
-# relationships: the applied rung of the paraconsistency ladder — florensky_sphere states both/and as theology, schrodinger_box as physics, this as version control
-# truth: a merge conflict is paraconsistency with a deadline. Every system that keeps running while holding two incompatible truths has already abandoned the law of excluded middle — engineering just never says so.
-# @qfep_term: Edge — both/and, not either/or.
+# essence: compare separate, overlapping, shortened and diverging branches
+# desire: let the visitor inspect what a decision keeps and what it suppresses
+# truth: the maker chose the resolution; the visitor can return to what preceded it
+# @qfep_term: Edge — investigate the conditions under which a difference survives.
 
 extends Node3D
 class_name MergeConflictVisualizer
@@ -27,26 +14,17 @@ class_name MergeConflictVisualizer
 @export var conflict_color: Color = Color(1.0, 0.85, 0.3, 1.0)
 @export var pillar_height: float = 1.8
 
-## What the two branches actually DO to each other where they meet.
-##
-## Worth varying because for its whole life this artifact has contradicted its own
-## header: the comment above promises "two overlapping geometries occupy the same
-## volume", and the code built two posts standing 0.6 m apart that never touch. That
-## is a picture of a GAP with a ball hanging in it, not a picture of a conflict.
-##
-##   junction  the legacy look — two separate uprights, the conflict floating between
-##             them, untouched so every shipped placement renders as before
-##   overlap   the header made real — the posts lean into each other and their upper
-##             halves share one volume, blue inside orange, nothing arbitrated
-##   resolved  what merging normally means — branch A takes the centre at full height,
-##             branch B survives as a stump. The artifact can now stand next to the
-##             thing it refuses.
-##   fork      the other failure — both branches lean away, the contradiction falls to
-##             the floor between their feet and is stepped over instead of held
-##
-## The lean angles below move the pillar tops by nearly a metre. A polite few
-## centimetres would have been invisible at walking distance and therefore worthless.
+## Author configurations remain available to passive placements. The interactive
+## hall exposes all four, without treating any one arrangement as a logical proof.
 @export_enum("junction", "overlap", "resolved", "fork") var merge: String = "junction"
+
+@export var interactive: bool = false
+@export var marker_visible: bool = true
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+var _console: Node3D
+var _panel: Node3D
+var _status: MeshInstance3D
 
 const MERGES: PackedStringArray = ["junction", "overlap", "resolved", "fork"]
 
@@ -90,25 +68,25 @@ var _built: bool = false
 func _ready() -> void:
 	_build_all()
 	_built = true
+	_sync_console()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_merge: String = merge
-
-	# Stage-2 DNA axis — #merge:overlap
+	var before_interactive: bool = interactive
 	if config_data.has("merge"):
 		merge = _pick_axis(str(config_data["merge"]), MERGES, merge)
-
+	if config_data.has("interactive"):
+		interactive = str(config_data["interactive"]).to_lower() in ["true", "1"]
+	if config_data.has("marker_visible"):
+		marker_visible = str(config_data["marker_visible"]).to_lower() in ["true", "1"]
 	if not _built:
-		# _ready has not run yet; it will build with the values just resolved.
 		return
-	if merge == before_merge:
-		# Nothing geometric changed. curation_station passes {"emissive": false} to an
-		# already-framed instance — rebuilding here would throw away the dark, un-
-		# billboarded labels it just applied and never re-apply them.
-		return
-
-	_rebuild_now()
+	if merge != before_merge or interactive != before_interactive:
+		_rebuild_now()
+	if is_instance_valid(_conflict_glow):
+		_conflict_glow.visible = marker_visible
+	_sync_console()
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a map
@@ -164,7 +142,7 @@ func _build_junction() -> void:
 	_build_conflict_junction(0.25, Vector3(0, pillar_height * 0.6, 0))
 
 
-## The header's claim, built: both pillars leaned inward so their upper halves occupy
+## An authored shared volume: both pillars leaned inward so their upper halves occupy
 ## one volume at x 0, blue and orange interpenetrating with neither cut away.
 func _build_overlap() -> void:
 	var size: Vector3 = Vector3(0.2, pillar_height, 0.2)
@@ -180,7 +158,7 @@ func _build_overlap() -> void:
 	_build_conflict_junction(OVERLAP_SPHERE_R, Vector3(0, sphere_y, 0))
 
 
-## The ordinary merge: one branch wins the centre at full height, the other is left as
+## This authored resolution: branch A wins the centre at full height, the other is left as
 ## a stump with its name greyed out. No conflict sphere — there is nothing being held.
 func _build_resolved() -> void:
 	_build_pillar(branch_a_color, Vector3(0, 0, 0),
@@ -226,7 +204,23 @@ func _build_pillar(color: Color, base_pos: Vector3, size: Vector3, label_text: S
 	pillar.rotation.z = lean_rad
 	add_child(pillar)
 	_spawned.append(pillar)
+	pillar.set_meta("merge_branch", label_text)
+	if interactive:
+		var body := StaticBody3D.new()
+		var shape := CollisionShape3D.new()
+		var box_shape := BoxShape3D.new()
+		box_shape.size = size
+		shape.shape = box_shape
+		body.add_child(shape)
+		pillar.add_child(body)
 
+	if interactive:
+		var plate := BakedText.make_panel_mesh(label_text, Color(.07,.08,.1), Color(.9,.92,.95), Vector2(.3,.065), 800, true)
+		plate.position = base_pos + axis * h + Vector3(signf(base_pos.x)*.3,.16,0)
+		plate.material_override.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+		add_child(plate)
+		_spawned.append(plate)
+		return
 	var label := Label3D.new()
 	label.text = label_text
 	label.font_size = 22
@@ -256,11 +250,14 @@ func _build_conflict_junction(radius: float, pos: Vector3) -> void:
 	mat.albedo_color.a = 0.7
 	_conflict_glow.material_override = mat
 	_conflict_glow.position = pos
+	_conflict_glow.visible = marker_visible
 	add_child(_conflict_glow)
 	_spawned.append(_conflict_glow)
 
 
 func _build_label() -> void:
+	if interactive:
+		return
 	var label := Label3D.new()
 	label.text = "hold contradiction, keep running"
 	label.font_size = 26
@@ -270,3 +267,57 @@ func _build_label() -> void:
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	add_child(label)
 	_spawned.append(label)
+
+
+func _sync_console() -> void:
+	if not interactive:
+		if is_instance_valid(_console):
+			remove_child(_console)
+			_console.queue_free()
+		_console = null
+		_status = null
+		_panel = null
+		return
+	if not is_instance_valid(_console):
+		_console = Node3D.new()
+		_console.name = "MergeConsole"
+		add_child(_console)
+		var rack: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+		_panel = rack.create_panel("MERGE", [
+			[{"type":"button", "label":"JUNCTION"}, {"type":"button", "label":"OVERLAP"}],
+			[{"type":"button", "label":"RESOLVED"}, {"type":"button", "label":"FORK"}],
+			[{"type":"button", "label":"MARKER"}]
+		])
+		_panel.position = Vector3(0,1.02,.95)
+		_panel.rotation_degrees.x = -20
+		_panel.scale = Vector3.ONE * 1.5
+		_console.add_child(_panel)
+		for i in range(MERGES.size()):
+			_panel.find_child("Btn_%d" % i,true,false).get_node("InteractableAreaButton").button_pressed.connect(_choose_merge.bind(MERGES[i]))
+		_panel.find_child("Btn_4",true,false).get_node("InteractableAreaButton").button_pressed.connect(_toggle_marker)
+		var stand := MeshInstance3D.new()
+		var mesh := CylinderMesh.new()
+		mesh.height = .9
+		mesh.top_radius = .06
+		mesh.bottom_radius = .15
+		stand.mesh = mesh
+		stand.position = Vector3(0,.45,.86)
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = Color(.2,.22,.25)
+		stand.material_override = mat
+		_console.add_child(stand)
+	if is_instance_valid(_status):
+		_console.remove_child(_status)
+		_status.queue_free()
+	var marker_text: String = "NO MARKER" if merge == "resolved" else ("MARKER ON" if marker_visible else "MARKER OFF")
+	_status = BakedText.make_panel_mesh(merge.to_upper()+" · "+marker_text, Color(.07,.08,.1), Color(.9,.92,.95), Vector2(.62,.055), 900, true)
+	_status.position = Vector3(0,1.38,.95)
+	_console.add_child(_status)
+
+
+func _choose_merge(_body: Variant, choice: String) -> void:
+	apply_grid_config({"merge":choice})
+
+
+func _toggle_marker(_body: Variant) -> void:
+	apply_grid_config({"marker_visible":not marker_visible})

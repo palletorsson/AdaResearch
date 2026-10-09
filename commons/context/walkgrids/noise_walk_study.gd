@@ -3,6 +3,8 @@ extends Node3D
 const Kit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const HEIGHTS := [0.0, 0.25, 0.65, 0.9]
 var ground: Node3D
+var walked_trail: Node3D
+var scale_portals: Node3D
 var height_index: int = 1
 var route_index: int = 0
 var sample_index: int = 0
@@ -49,8 +51,15 @@ func build(owner_ground: Node3D) -> void:
 		var action: Callable = actions[i]
 		controls.find_child("Btn_%d"%i,true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_button):action.call())
 	refresh_profile()
+	walked_trail = load("res://commons/context/walkgrids/noise_walk_trace.gd").new()
+	add_child(walked_trail)
+	walked_trail.build(ground)
+	scale_portals = load("res://commons/context/walkgrids/noise_scale_portals.gd").new()
+	add_child(scale_portals)
+	scale_portals.build(ground)
 
 func can_rebuild() -> bool:
+	if scale_portals != null and scale_portals.active: return false
 	var bodies: Array = get_tree().get_nodes_in_group("player_body")
 	bodies.append_array(get_tree().get_nodes_in_group("em_walker"))
 	for body in bodies:
@@ -63,9 +72,11 @@ func set_height(index: int) -> bool:
 	blocked = not can_rebuild()
 	if blocked:
 		update_witness();return false
+	if walked_trail != null: walked_trail.clear()
 	height_index = clampi(index,0,HEIGHTS.size()-1)
 	ground.height_scale = HEIGHTS[height_index]
 	ground.generate_space()
+	if scale_portals != null: scale_portals.refresh()
 	refresh_profile()
 	return true
 

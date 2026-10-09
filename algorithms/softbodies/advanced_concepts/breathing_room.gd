@@ -25,7 +25,7 @@ func _ready() -> void:
 func setup_scene() -> void:
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 2, room_size.z/2.0 + 2)
-	cam.look_at(Vector3(0, 2, 0))
+	cam.basis = Basis.looking_at(Vector3(0, 2, 0) - cam.position, Vector3.UP)
 	add_child(cam)
 	
 	var light = OmniLight3D.new()

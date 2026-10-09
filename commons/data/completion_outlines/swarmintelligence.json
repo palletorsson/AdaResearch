@@ -1,0 +1,209 @@
+{
+  "_meta": {
+    "sequence": "swarmintelligence",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "SwarmIntelligence_PhysarumColony": {
+      "inherited": "From Boolean_Works: Which leaves the honest version of what these three halls demonstrate, and it is not the one the labels promise. A solid is a lie told by its skin, and so is its hole. The grammar that carves has no word for *partly*, no word for *becoming*, and nothing to put inside the thing it cuts. Every absence in this chapter is performed rather than found — by inversion, by omission, by parity, by a caption. What you can walk through, you were always going to walk through.",
+      "question": "Can a path remember which way to grow when no individual holds the whole network?",
+      "ontology": "An agent is a moving state; a field stores numbers over cells. Here deposited trail changes what later agents sense: environmental memory.",
+      "experiment": "Watch a bright connection and keep it in view when the anchor arrangement changes automatically; wait at least one 20-second transition.",
+      "observe": "The caption cycles triad, ring, pair, scattered; trail concentrations change and fade rather than being one pre-drawn network.",
+      "limit": "A simulated trail is not proof of a shortest route or a biological nervous system. Chosen anchors and boundary conditions determine which networks can appear.",
+      "variation": "Existing passive variation: compare two automatic anchor layouts. Proposed: visitor-grabbable anchors or a pause control; neither is currently exposed.",
+      "handoff": "The next room supplies directions from outside the population. Similar collective motion will have a different source.",
+      "candidate_artifacts": [
+        "PhysarumColony"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+        "commons/maps/SwarmIntelligence_PhysarumColony/map_data.json",
+        "commons/maps/SwarmIntelligence_PhysarumColony/intent.md",
+        "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md",
+        "commons/maps/SwarmIntelligence_PhysarumColony/technical.md",
+        "commons/maps/SwarmIntelligence_PhysarumColony/critical.md",
+        "algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+        "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+        "algorithms/swarmintelligence/physarum/PhysarumAgent.gd",
+        "algorithms/swarmintelligence/physarum/PhysarumGrid.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not repeat intent claims about Steiner optimality or Tokyo networks as what this artifact proves.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SwarmIntelligence_FlowFields": {
+      "inherited": "From SwarmIntelligence_PhysarumColony: The next room supplies directions from outside the population. Similar collective motion will have a different source.",
+      "question": "If many agents turn together, must they be watching one another?",
+      "ontology": "A vector field assigns a direction to a position; an integration field records costs to a target. An agent can navigate by reading its local direction.",
+      "experiment": "Follow one arrow and one agent through the automatic tour: open field, block, U-wall, zigzag, wind, noise.",
+      "observe": "Obstacles reorganize the arrow pattern; wind has a direction without a destination. The tour advances every10s and remains in noise at the end.",
+      "limit": "Common motion can come from shared infrastructure rather than agreement. Cost maps choose what counts as a traversable route.",
+      "variation": "Existing comparison: observe the tour. Proposed: hide arrows while holding a scenario fixed using curator scenario/field_display configuration; visitor VR wall placement is not implemented.",
+      "handoff": "Boids will remove that supplied direction and let nearby agents become one another’s moving reference.",
+      "candidate_artifacts": [
+        "FlowFieldMain"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_FlowFields/final.md",
+        "commons/maps/SwarmIntelligence_FlowFields/map_data.json",
+        "commons/maps/SwarmIntelligence_FlowFields/intent.md",
+        "commons/maps/SwarmIntelligence_FlowFields/tutorial.md",
+        "commons/maps/SwarmIntelligence_FlowFields/technical.md",
+        "commons/maps/SwarmIntelligence_FlowFields/critical.md",
+        "algorithms/pathfinding/flow_field/FlowFieldMain.tscn",
+        "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+        "algorithms/pathfinding/flow_field/FieldVisualizer.gd",
+        "algorithms/pathfinding/flow_field/FlowGrid.gd",
+        "algorithms/pathfinding/flow_field/FlowAgent.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Desktop mouse ray uses embedded camera; right-click only sets a wall and does not recompute until another target click. Do not promise museum or VR clicking.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SwarmIntelligence_Boids_Algorithm": {
+      "inherited": "From SwarmIntelligence_FlowFields: Boids will remove that supplied direction and let nearby agents become one another’s moving reference.",
+      "question": "Which local relationship is making this flock hold together?",
+      "ontology": "Separation, alignment and cohesion are distinct steering contributions; weights determine their relative influence on an agent velocity.",
+      "experiment": "Follow the highlighted boid and its coloured force arrows. Change one SEP, ALIGN or COH slider while leaving the other settings alone.",
+      "observe": "The highlighted agent exposes red separation, blue alignment and green cohesion; population motion changes as one contribution gains weight.",
+      "limit": "A flock pattern cannot establish consent or a universal ideal balance. The boundary wraps and the neighbour radius already decide who is in relation.",
+      "variation": "Existing: alter perception RADIUS, then see whether the same rule weights still make the same group. Proposed: asymmetric perception to test whose movements become visible.",
+      "handoff": "The next room broadens the model: an agent can have an internal state, and the environment can remember what it did.",
+      "candidate_artifacts": [
+        "flocking_controls"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/intent.md",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/tutorial.md",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/technical.md",
+        "commons/maps/SwarmIntelligence_Boids_Algorithm/critical.md",
+        "commons/artifacts/flocking_controls/flocking_controls.tscn",
+        "commons/artifacts/flocking_controls/flocking_controls.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SwarmIntelligence_Agent_Based_Modeling_ABM": {
+      "inherited": "From SwarmIntelligence_Boids_Algorithm: The next room broadens the model: an agent can have an internal state, and the environment can remember what it did.",
+      "question": "How much of a collective result changes when one rule changes?",
+      "ontology": "An agent-based model stores individual states and update rules; population outcomes are produced by repeated interaction with shared state.",
+      "experiment": "Watch the colony, raise EVAPORATE, and compare trail persistence; use RESET before a second comparison. MODE cycles the displayed behavioural mode.",
+      "observe": "The trail heatmap loses or retains marks at different rates. ANTS changes population between5and80 and respawns the agents.",
+      "limit": "An aggregate picture does not validate the agents as models of people. What agents can sense and what the shared grid remembers are design choices.",
+      "variation": "Existing: compare many short-lived traces with fewer lasting traces using ANTS and EVAPORATE separately. Proposed: agents with differing sensor capacities.",
+      "handoff": "The next colony makes one relation particularly clear: information about home and food travels in different channels.",
+      "candidate_artifacts": [
+        "ant_colony_optimization"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/intent.md",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/tutorial.md",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/technical.md",
+        "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/critical.md",
+        "algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
+        "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Other placed catalyst hazards may disturb observation; no safe/quiet museum encounter verified. Old intent describes physical platforms constraining agents, not confirmed by selected internal2Dmodel.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SwarmIntelligence_Ant_Colony_Optimization": {
+      "inherited": "From SwarmIntelligence_Agent_Based_Modeling_ABM: The next colony makes one relation particularly clear: information about home and food travels in different channels.",
+      "question": "How can an ant leave useful directions without carrying a map?",
+      "ontology": "Stigmergy coordinates activity through a shared medium. This colony uses two numerical trail channels: home and food.",
+      "experiment": "Observe ants leaving the centre and returning from either food anchor. Compare fresh bright trails with areas no longer visited.",
+      "observe": "Ants change direction/state on reaching food or home, with trail information persisting in the ground between visits.",
+      "limit": "This scene is a spatial foraging model, not a demonstrated travelling-salesman solver. Efficient-looking trails alone do not prove global optimality.",
+      "variation": "Existing: compare the two fixed food directions. Proposed: curator anchorage ring/triad/scattered variants or movablefood; there is no visitor food-layout control in this scene.",
+      "handoff": "Particle swarms next move memory into each agent’s best position and a best position shared by the population.",
+      "candidate_artifacts": [
+        "AntColonyV2"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/map_data.json",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/intent.md",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/tutorial.md",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/technical.md",
+        "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/critical.md",
+        "algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+        "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+        "algorithms/swarmintelligence/ants_v2/SimpleAnt.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SwarmIntelligence_Particle_Swarm_Optimization": {
+      "inherited": "From SwarmIntelligence_Ant_Colony_Optimization: Particle swarms next move memory into each agent’s best position and a best position shared by the population.",
+      "question": "When a swarm improves, who decided what better means?",
+      "ontology": "A particle keeps its own best position and follows a swarm best; fitness is the scoring rule that names these positions best.",
+      "experiment": "Watch CONVERGE, then press SPREAD, then NOVELTY. Keep INERTIA fixed during the comparison.",
+      "observe": "The same kind of moving population collects toward the centre, favours distance from it, or seeks distance from archived positions according to the chosen score.",
+      "limit": "Optimization inherits its purpose from the objective; a high score cannot establish that a social outcome is desirable. Novelty also depends on what the archive remembers.",
+      "variation": "Existing: choose novelty as the primary aim instead of treating dispersal as failure; then vary INERTIA. Proposed: compare two explicit conflicting objectives simultaneously.",
+      "handoff": "The capstone turns from declared objectives to quieter rules that keep an apparently self-organising system alive.",
+      "candidate_artifacts": [
+        "fitness_landscape_politics"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/intent.md",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/tutorial.md",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/technical.md",
+        "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/critical.md",
+        "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn",
+        "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms": {
+      "inherited": "From SwarmIntelligence_Particle_Swarm_Optimization: The capstone turns from declared objectives to quieter rules that keep an apparently self-organising system alive.",
+      "question": "If this small ecosystem persists, which rules are helping it persist?",
+      "ontology": "A population is coupled to resources, predation and reproduction. A simulation may include a separate stabilizer as well as individual agent rules.",
+      "experiment": "Read the Prey, Pred and Food counts, then track a food loss or population change before returning to the counts.",
+      "observe": "Population and food counts change; prey seek food/flee predators and predators seek prey. The simulation also restocks agents under explicit thresholds.",
+      "limit": "Persistence is not evidence of self-regulation alone: a coded referee assists it. This room contains one ecosystem artifact, not the multi-algorithm showcase imagined in old intent.",
+      "variation": "Existing: distinguish agent events from count changes plausibly due to restocking. Proposed: compare curator quota fallow/barren/hunted configurations or expose restocking as a visitor control.",
+      "handoff": "Machine learning begins by asking what changes across generations. Carry this distinction with you: inherited traits, environmental rewards and the rules that keep an experiment running all shape what can survive.",
+      "candidate_artifacts": [
+        "ecosystem_simulation"
+      ],
+      "sources": [
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/map_data.json",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/intent.md",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/tutorial.md",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/technical.md",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/critical.md",
+        "algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
+        "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not claim no referee, natural equilibrium or implemented swarm-algorithm switcher.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

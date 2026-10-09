@@ -41,6 +41,13 @@ import json
 import os
 import sys
 
+# The console here is cp1252 and artifact descriptions are not. Without this the
+# tool dies mid-listing on the first em-dash it prints — which it did, after
+# showing three of five wishes, so the two the user most needed to see were the
+# ones it never reached. Every other tool in this repo already does this.
+if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAPS = os.path.join(ROOT, "commons", "maps")
 REGISTRY = os.path.join(ROOT, "commons", "artifacts", "registry")

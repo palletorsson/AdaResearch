@@ -10,12 +10,20 @@ signal cable_disconnected(cable: Node3D, plug: Node3D)
 enum JackType { OUTPUT, INPUT }
 
 @export var jack_type: JackType = JackType.OUTPUT
+@export var signal_kind := "audio"
 @export var parameter_name: String = ""  ## e.g., "frequency", "amplitude"
 @export var jack_color: Color = Color(0.2, 0.2, 0.25)
 @export var ring_color: Color = Color(0.8, 0.8, 0.8)
 @export var connected_color: Color = Color(0.2, 1.0, 0.4)  ## Glow when connected
 @export var socket_radius: float = 0.012
 @export var socket_depth: float = 0.015
+
+var manager: SynthCableManager
+
+class SocketPointer extends StaticBody3D:
+	var jack: SynthJack
+	func pointer_event(event) -> void:
+		if event.event_type == 2 and jack.manager: jack.manager.select_jack(jack)
 
 var connected_plug: Node3D = null
 var is_connected: bool = false
@@ -91,105 +99,17 @@ func _setup_visuals():
 
 
 func _setup_detection():
-	# Create detection area for cable plugs
-	if not socket_area:
-		socket_area = Area3D.new()
-		socket_area.name = "SocketArea"
-		add_child(socket_area)
-		
-		var collision = CollisionShape3D.new()
-		var sphere = SphereShape3D.new()
-		sphere.radius = socket_radius * 2.5  # Detection range
-		collision.shape = sphere
-		socket_area.add_child(collision)
-	
-	socket_area.body_entered.connect(_on_body_entered)
-	socket_area.body_exited.connect(_on_body_exited)
-	socket_area.area_entered.connect(_on_area_entered)
-	socket_area.area_exited.connect(_on_area_exited)
-
-
-func _on_body_entered(body: Node3D):
-	_try_connect(body)
-
-
-func _on_area_entered(area: Area3D):
-	var parent = area.get_parent()
-	if parent:
-		_try_connect(parent)
-
-
-func _on_body_exited(body: Node3D):
-	_try_disconnect(body)
-
-
-func _on_area_exited(area: Area3D):
-	var parent = area.get_parent()
-	if parent:
-		_try_disconnect(parent)
-
-
-func _try_connect(node: Node3D):
-	if is_connected:
-		return
-	
-	# Check if this is a cable plug
-	if node.has_method("is_synth_plug") and node.is_synth_plug():
-		var plug = node
-		var plug_type = plug.get_plug_type() if plug.has_method("get_plug_type") else null
-		
-		# Only connect if types match (output jack → input plug, input jack → output plug)
-		# Or if plug is neutral
-		if plug_type != null and plug_type != _opposite_type():
-			return
-		
-		# Check if plug is being held (only connect when released)
-		if plug.has_method("is_being_held") and plug.is_being_held():
-			return
-		
-		_connect_plug(plug)
-
-
-func _try_disconnect(node: Node3D):
-	if not is_connected:
-		return
-	
-	if node == connected_plug:
-		# Only disconnect if plug is being grabbed
-		if node.has_method("is_being_held") and node.is_being_held():
-			_disconnect_plug()
-
+	var pointer := SocketPointer.new(); pointer.jack = self
+	pointer.collision_layer = (1 << 20) | (1 << 22); pointer.collision_mask = 0
+	var col := CollisionShape3D.new(); var sphere := SphereShape3D.new()
+	sphere.radius = socket_radius * 1.7; col.shape = sphere
+	pointer.add_child(col); add_child(pointer)
 
 func _connect_plug(plug: Node3D):
-	connected_plug = plug
-	is_connected = true
-	
-	# Snap plug to socket position
-	if plug.has_method("snap_to_jack"):
-		plug.snap_to_jack(self)
-	
-	# Update visuals
-	_set_connected_visual(true)
-	
-	# Get cable reference
-	var cable = plug.get_parent() if plug.get_parent().has_method("is_synth_cable") else plug
-	cable_connected.emit(cable, plug)
-	
-
+	return plug.snap_to_jack(self)
 
 func _disconnect_plug():
-	var old_plug = connected_plug
-	var cable = old_plug.get_parent() if old_plug.get_parent().has_method("is_synth_cable") else old_plug
-	
-	connected_plug = null
-	is_connected = false
-	
-	# Update visuals
-	_set_connected_visual(false)
-	
-	cable_disconnected.emit(cable, old_plug)
-	
-
+	if is_instance_valid(connected_plug): connected_plug._unsnap()
 
 func _set_connected_visual(connected: bool):
 	if ring_mesh and ring_mesh.material_override:

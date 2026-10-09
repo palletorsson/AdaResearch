@@ -1,9 +1,8 @@
 # phi_slider.gd
 # QFEP Phi (φ) Parameter Controller
-# Controls rate of entropy change sensitivity
-# φ < 0: System resists change (conservative)
-# φ = 0: Neutral to change
-# φ > 0: System embraces change (queer signature)
+# Signed weight with local particle feedback. The legacy resist/embrace reading
+# is an authored interpretation, not a consequence of the sign of phi * delta_E.
+# sign_study separates the operation from that interpretation in the Phi hall.
 
 extends Node3D
 
@@ -36,14 +35,14 @@ class_name PhiSlider
 # ─────────────────────────────────────────────────────────────────────────────
 
 # @identity
-# essence: slider_position -> phi in [-1,1]; color_gradient(purple->gray->gold)
-# desire: grab the becoming dial and choose: resist change or embrace it
-# critical_parameter: phi — rate sensitivity that determines whether the system fights or welcomes transformation
-# triggers: XR grab moves handle; phi_changed signal propagates globally; particles shift direction with sign
-# emerges: the asymmetry of the scale — negative phi feels heavy (downward particles), positive phi feels liberating (upward)
-# needs: VR XR slider grab [has], visual gradient rail [has], particle feedback [has], global broadcast [has]
-# relationships: controls queer_morphology_specimen, fluid_form, rigid_sculpture; paired with lambda_slider; the queer signature of QFEP
-# truth: phi is the queer parameter — positive phi means the system does not merely tolerate change but seeks it as generative
+# essence: slider position -> signed phi in [-1,1]; local particle feedback
+# desire: compare direction and magnitude, then ask what a label decides
+# critical_parameter: sign_study separates the operation from the earlier resist/embrace interpretation
+# triggers: XR grab moves handle; optional button reveals earlier labels without changing phi
+# emerges: the nearby wave pattern can keep moving while this weight is zero
+# needs: tracked-hand operation and learner interpretation still need headset review
+# relationships: sign_study remains outside global PHI aggregation; transforming_pattern is independent
+# truth: a signed weight is not a measured change or a moral classification
 
 ## Signal emitted when phi value changes
 signal phi_changed(value: float)
@@ -110,6 +109,15 @@ const CALIB_PLATE_H := 0.13
 ## Connect to global QFEP system
 @export var broadcast_globally: bool = true
 
+## Hall-specific encounter: signed marks first; earlier labels on request.
+## Other placements keep the legacy appearance and global registration.
+@export var sign_study: bool = false
+var _scale_labels: Array[Label3D] = []
+var _study: Node3D
+var _interpretation: Label3D
+var _reading_button: Node3D
+var _labels_revealed: bool = false
+
 # Internal references
 var _slider: XRToolsInteractableSlider
 var _handle: XRToolsInteractableHandle
@@ -138,10 +146,12 @@ const COLOR_EMBRACE = Color(1.0, 0.8, 0.2, 1.0)   # Gold - embraces change (φ>0
 func _ready() -> void:
 	_build_slider()
 	_build_visuals()
+	if sign_study:
+		_build_sign_study()
 	_update_visuals()
 	
 	# Register globally
-	if broadcast_globally:
+	if broadcast_globally and not sign_study:
 		add_to_group("qfep_phi_controllers")
 	
 
@@ -250,6 +260,13 @@ func _build_visuals() -> void:
 ## nothing else; the only addition on that path is _own(), which appends to an array
 ## and changes no geometry.
 func _build_rail_and_scale() -> void:
+	if sign_study:
+		_calib_box(Vector3(rail_length / 2.0, 0, 0),
+			Vector3(rail_length, rail_height, rail_depth),
+			_calib_mat(CALIB_NEUTRAL, 0.0, 1.0))
+		for i in range(11):
+			_calib_post(float(i) / 10.0, rail_height * 1.8, CALIB_NEUTRAL)
+		return
 	if calibration == "gap":
 		# the rail stops where the recommendation begins — the scale cannot hold
 		# the region it recommends
@@ -414,14 +431,33 @@ func _calib_mat(color: Color, emissive_energy: float, alpha: float) -> StandardM
 ## recorded. A config key we do not own, or a word outside the shared allow-list,
 ## changes nothing at all.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if not config_data.has("calibration"):
-		return
 	var before: String = calibration
-	calibration = CalibrationAxis.normalise_calibration(
-		str(config_data["calibration"]), calibration)
-	if calibration == before or not _built:
+	var was_study: bool = sign_study
+	if config_data.has("calibration"):
+		calibration = CalibrationAxis.normalise_calibration(str(config_data["calibration"]), calibration)
+	if config_data.has("sign_study"):
+		sign_study = str(config_data["sign_study"]).to_lower() in ["on", "true", "1"]
+	if config_data.has("phi"):
+		phi = float(str(config_data["phi"]))
+	if not _built:
 		return
-	_rebuild_calibration()
+	if was_study != sign_study:
+		if sign_study:
+			remove_from_group("qfep_phi_controllers")
+			_build_sign_study()
+		else:
+			if broadcast_globally: add_to_group("qfep_phi_controllers")
+			if is_instance_valid(_study):
+				remove_child(_study)
+				_study.queue_free()
+			_study = null
+			_interpretation = null
+			_reading_button = null
+		_labels_revealed = false
+	if calibration != before or was_study != sign_study:
+		_rebuild_calibration()
+	_update_scale_labels()
+	_update_visuals()
 
 func _rebuild_calibration() -> void:
 	for n in _calib_nodes:
@@ -459,6 +495,73 @@ func _build_scale_labels() -> void:
 	label_embrace.position = Vector3(rail_length, -rail_height - 0.03, 0)
 	label_embrace.modulate = COLOR_EMBRACE
 	add_child(label_embrace)
+	_scale_labels = [label_resist, label_neutral, label_embrace]
+	_update_scale_labels()
+
+func _update_scale_labels() -> void:
+	var words: Array = ["NEGATIVE", "ZERO", "POSITIVE"] if sign_study else ["RESIST", "NEUTRAL", "EMBRACE"]
+	for i in range(_scale_labels.size()):
+		_scale_labels[i].text = words[i]
+		_scale_labels[i].modulate = _get_phi_color(float(i) - 1.0)
+		_scale_labels[i].position = Vector3(rail_length * float(i) / 2.0, 0.008, 0.095) if sign_study else Vector3(rail_length * float(i) / 2.0, -rail_height - 0.03, 0)
+		_scale_labels[i].rotation_degrees.x = -35 if sign_study else 0
+		_scale_labels[i].font_size = 30 if sign_study else 24
+
+func _build_sign_study() -> void:
+	if is_instance_valid(_study): return
+	_study = Node3D.new()
+	_study.name = "SignStudy"
+	add_child(_study)
+	# Root sits at 1.1m in this hall; the plinth supports the existing XR rail.
+	_study_box(Vector3(rail_length / 2.0, -0.11, 0.08), Vector3(1.1, 0.12, 0.8))
+	_study_box(Vector3(rail_length / 2.0, -0.635, 0.08), Vector3(0.38, 0.93, 0.38))
+	_study_box(Vector3(rail_length / 2.0, 0.40, -0.24), Vector3(1.16, 0.43, 0.025))
+	_interpretation = Label3D.new()
+	_interpretation.position = Vector3(rail_length / 2.0, 0.40, -0.22)
+	_interpretation.font_size = 30
+	_interpretation.pixel_size = 0.001
+	_study.add_child(_interpretation)
+	_reading_button = load("res://commons/interactables/push_button.tscn").instantiate()
+	_reading_button.position = Vector3(rail_length / 2.0, -0.015, 0.31)
+	_reading_button.rotation_degrees.x = -70
+	_study.add_child(_reading_button)
+	_reading_button.get_node("InteractableAreaButton").button_pressed.connect(_toggle_reading)
+	var caption := Label3D.new()
+	caption.text = "EARLIER LABELS / HIDE"
+	caption.position = Vector3(rail_length / 2.0, -0.035, 0.44)
+	caption.rotation_degrees.x = -50
+	caption.font_size = 24
+	caption.pixel_size = 0.001
+	_study.add_child(caption)
+	_update_reading()
+
+func _study_box(at: Vector3, dimensions: Vector3) -> void:
+	var body := StaticBody3D.new()
+	body.position = at
+	_study.add_child(body)
+	var mesh := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = dimensions
+	mesh.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.065, 0.085, 0.105)
+	mat.metallic = 0.25
+	mat.roughness = 0.65
+	mesh.material_override = mat
+	body.add_child(mesh)
+	var collider := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = dimensions
+	collider.shape = shape
+	body.add_child(collider)
+
+func _toggle_reading(_body = null) -> void:
+	_labels_revealed = not _labels_revealed
+	_update_reading()
+
+func _update_reading() -> void:
+	if not is_instance_valid(_interpretation): return
+	_interpretation.text = "EARLIER PROJECT READING\nnegative: RESIST / positive: EMBRACE\nWhat has the label decided for you?" if _labels_revealed else "CROSS ZERO\nCompare equal distances on either side.\nWhat changes? What keeps going?"
 
 func _build_particles() -> void:
 	_particles = GPUParticles3D.new()
@@ -542,8 +645,28 @@ func _update_visuals() -> void:
 		
 		# More active at extremes
 		_particles.amount = int(lerp(20.0, 50.0, abs(phi)))
+		if sign_study:
+			# Equal magnitudes get equal speeds. No gravity favouring one sign.
+			# Keep the full downward trail above the plinth, so both directions
+			# remain visible for the same lifetime at the largest magnitude.
+			_particles.position.y = 0.5
+			particle_mat.gravity = Vector3.ZERO
+			particle_mat.direction = Vector3.UP * signf(phi)
+			particle_mat.initial_velocity_min = absf(phi) * 0.20
+			particle_mat.initial_velocity_max = absf(phi) * 0.20
+			particle_mat.color = color
+			_particles.emitting = not is_zero_approx(phi)
+		else:
+			_particles.position.y = rail_height + 0.1
+			particle_mat.gravity = Vector3(0, -0.1, 0)
+			particle_mat.initial_velocity_min = 0.05
+			particle_mat.color = Color.WHITE
+			_particles.emitting = true
 
 func _get_phi_color(value: float) -> Color:
+	if sign_study:
+		var end := Color(0.2, 0.65, 0.9) if value < 0 else Color(0.95, 0.45, 0.7)
+		return COLOR_NEUTRAL.lerp(end, absf(value))
 	# Gradient: Purple (resist) → Gray (neutral) → Gold (embrace)
 	if value < 0:
 		# Resist to Neutral
@@ -571,6 +694,8 @@ func move_to(value: float) -> void:
 
 ## Get description of current phi state
 func get_state_description() -> String:
+	if sign_study:
+		return "ZERO" if is_zero_approx(phi) else ("NEGATIVE" if phi < 0 else "POSITIVE")
 	if phi < -0.5:
 		return "Strongly Conservative"
 	elif phi < -0.1:

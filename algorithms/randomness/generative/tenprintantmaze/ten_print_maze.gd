@@ -5,8 +5,8 @@ extends Node3D
 #
 # @identity
 # essence: cell = RND(1) < 0.5 ? CHR$(205) : CHR$(206) — one random bit per cell of a
-#   grid, drawn as one of two diagonals, and nothing else. Four bytes of entropy per cell,
-#   repeated until the screen fills.
+#   grid, drawn as one of two diagonals. One unbiased binary choice has one bit
+#   of Shannon entropy; that is distinct from its storage representation.
 # desire: to see that a structure nobody designed can fall out of a coin flip repeated in
 #   a grid — and to notice how quickly we start calling it a maze
 # critical_parameter: impression — what the one random bit is drawn AS (stroke | character
@@ -27,8 +27,8 @@ extends Node3D
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-08-02).
 #
-# 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 is the most famous four bytes of
-# generative art, and its whole claim lives in ONE decision: what a single
+# 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 makes generative art from one
+# repeated decision: what a single
 # random bit is PRINTED AS. On a C64 it was a character — a glyph fetched from
 # the character ROM and stamped into a cell of a 40×25 text screen. Everything
 # people have since read into it (a maze, a labyrinth, a textile, a lattice) is
@@ -209,18 +209,17 @@ func build_navigation_grid() -> void:
 		for x in range(grid_width):
 			var cell_type = maze[z][x]
 			
-			if cell_type == 0:  # / diagonal
-				# Add wall for / line
-				for i in range(nav_grid_scale):
-					var nx = x * nav_grid_scale + i
-					var nz = z * nav_grid_scale + (nav_grid_scale - 1 - i)
-					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
-						nav_grid[nz][nx] = 1  # 1 = wall
-			else:  # \ diagonal
-				# Add wall for \ line
+			if cell_type == 0:  # Rising diagonal in the rendered local ZY plane.
+				# Local +Y is upward; unlike a screen row index, it is not downward.
 				for i in range(nav_grid_scale):
 					var nx = x * nav_grid_scale + i
 					var nz = z * nav_grid_scale + i
+					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
+						nav_grid[nz][nx] = 1  # 1 = wall
+			else:  # Falling diagonal in the same local frame.
+				for i in range(nav_grid_scale):
+					var nx = x * nav_grid_scale + i
+					var nz = z * nav_grid_scale + (nav_grid_scale - 1 - i)
 					if nx < grid_width * nav_grid_scale and nz < grid_depth * nav_grid_scale:
 						nav_grid[nz][nx] = 1  # 1 = wall
 
@@ -494,7 +493,8 @@ func _on_wall_timer_timeout() -> void:
 		return
 
 	# Pick a random wall
-	var random_wall = wall_nodes[randi() % wall_nodes.size()]
+	var wall_index := randi() % wall_nodes.size()
+	var random_wall = wall_nodes[wall_index]
 
 	# Get the wall's mesh instance
 	var wall_instance = random_wall.get_child(0) as MeshInstance3D
@@ -503,6 +503,17 @@ func _on_wall_timer_timeout() -> void:
 
 	# Rotate the wall by 90 degrees around X axis (switching between / and \ in ZY plane)
 	wall_instance.rotate_x(PI/2)
+	# Geometry and the ant's discrete map must describe the same replacement.
+	var cell_x := wall_index % grid_width
+	var cell_z := wall_index / grid_width
+	maze[cell_z][cell_x] = 1 - maze[cell_z][cell_x]
+	build_navigation_grid()
+	# A cell rejected by the old search may now be open. Start a new search from
+	# the current ant position; do not carry obsolete exclusions or teleport it.
+	visited.clear()
+	visited[ant_nav_pos] = true
+	ant_path.clear()
+	ant_path.append(ant_nav_pos)
 
 func _exit_tree() -> void:
 	for child in get_children():

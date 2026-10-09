@@ -33,6 +33,12 @@ var _active_surface_index_r: int = 0
 func _ready() -> void:
 	# Create color preview cube
 	_create_color_preview_cube()
+	if str(get_meta("config_mount", "")) == "salon":
+		# The manicure table supplies the furniture; keep the RGB box human-sized.
+		$MeshInstance3D.hide()
+		$SpotLight3D.hide()
+		color_preview_cube.mesh.size = Vector3(0.18, 0.18, 0.04)
+		color_preview_cube.position = Vector3(0.5, -0.12, 0.15)
 
 	# Wait a frame to ensure VR scene is loaded
 	await get_tree().process_frame

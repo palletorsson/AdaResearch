@@ -59,6 +59,14 @@ def placed_tokens(map_name: str) -> set[str]:
     return out
 
 
+def _words(p: Path) -> int:
+    """Word count of a room document, 0 if it does not exist."""
+    try:
+        return len(p.read_text(encoding="utf-8").split())
+    except OSError:
+        return 0
+
+
 def resurvey(m: dict) -> None:
     """Refresh what the disk says about one room: written?, how long, tags placed?"""
     fin = MAPS / m["map"] / "final.md"
@@ -75,7 +83,14 @@ def resurvey(m: dict) -> None:
     m["final_tags_placed"] = sum(1 for t in tags if t in placed)
 
 
-def build(out: Path) -> dict:
+def fold() -> dict:
+    """The whole fold — triage + rulings + a live re-survey of the maps on disk.
+
+    Returns the data the page renders. Kept separate from build() so the
+    encyclopedia can serve the SAME fold over HTTP (`--json`) instead of
+    re-deriving it in TypeScript. Two implementations of one rule drift; this
+    project has already paid for that once with the long museum's geometry.
+    """
     if not TRIAGE.exists():
         sys.exit("no %s — run the triage first" % TRIAGE)
     data = json.loads(TRIAGE.read_text(encoding="utf-8"))
@@ -99,6 +114,30 @@ def build(out: Path) -> dict:
                 live[seq_id] = set(seq.get("maps", []))
     folded = [m["map"] for m in data["maps"] if m["seq"] in live and m["map"] not in live[m["seq"]]]
     data["maps"] = [m for m in data["maps"] if not (m["seq"] in live and m["map"] not in live[m["seq"]])]
+
+    # AND A ROOM CAN ARRIVE. Dropping departed rooms without adding arrived ones is
+    # how a progress page comes to lie: boolean_surfaces went 5 -> 3 on 2026-09-03 and
+    # all three new halls were invisible here, including the ones already written.
+    # A room the triage never read has no verdict to inherit, so it gets NEW — which
+    # resurvey() upgrades to WRITTEN the moment a final.md exists.
+    covered = {s["seq"] for s in data["sequences"]}
+    seen = {m["map"] for m in data["maps"]}
+    arrived: list[str] = []
+    for seq_id in sorted(covered):
+        for name in live.get(seq_id, []):
+            if name in seen:
+                continue
+            arrived.append(name)
+            data["maps"].append({
+                "seq": seq_id, "map": name, "verdict": "NEW", "thread": "UNREAD",
+                "argument": "", "evidence": "", "keep": "",
+                "tokens_read": 0, "tokens_not_in_map": [],
+                "artifacts": _words(MAPS / name / "artifacts.md"),
+                "tutorial": _words(MAPS / name / "tutorial.md"),
+                "blurb": _words(MAPS / name / "blurb.md"),
+                "intent": _words(MAPS / name / "intent.md"),
+                "final": 0, "hinge": False, "final_tags": 0, "final_tags_placed": 0,
+            })
     # and the strip walks the LIVE order, not the order the triage happened to read
     order: dict[str, list[str]] = {}
     for sp in (ROOT / "commons" / "maps" / "sequences").glob("*.json"):
@@ -143,8 +182,15 @@ def build(out: Path) -> dict:
         split_decided=decided,
         stale_tags=stale,
         folded=folded,
+        arrived=arrived,
         generated=date.today().isoformat(),
     )
+    return data
+
+
+def build(out: Path) -> dict:
+    data = fold()
+    meta = data["meta"]
 
     html = TEMPLATE.read_text(encoding="utf-8")
     payload = json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
@@ -157,8 +203,16 @@ def build(out: Path) -> dict:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="regenerate the Red Thread page")
-    ap.add_argument("--out", required=True, help="where to write the .html (publish this path)")
+    ap.add_argument("--out", help="where to write the .html (publish this path)")
+    ap.add_argument("--json", action="store_true",
+                    help="print the folded data instead — what /api/red-thread serves")
     args = ap.parse_args()
+    if args.json:
+        sys.stdout.reconfigure(encoding="utf-8")
+        print(json.dumps(fold(), ensure_ascii=False))
+        return 0
+    if not args.out:
+        ap.error("--out is required unless --json")
     meta = build(Path(args.out))
     print("red thread: %d rooms, %d written, %d SPLIT decided, %d stale tag(s) -> %s"
           % (meta["maps"], meta["written"], meta["split_decided"], meta["stale_tags"], args.out))

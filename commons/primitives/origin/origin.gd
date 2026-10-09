@@ -2,36 +2,51 @@ extends Node3D
 class_name Origin
 
 # @identity
-# essence: (0, 0, 0) — the reference from which all coordinates are measured, made visible as a slowly-rotating cyan octahedron with cycling alias labels
+# essence: (0, 0, 0) — the reference from which all coordinates are measured, made visible as a black sphere glowing pink at the centre of a wireframe cube
 # desire: learner viscerally locates themselves relative to the world's fixed anchor — understanding that "zero" is a name we agreed on
-# critical_parameter: spinning octahedron at origin, cycling alias labels (origin / home / zero / (0,0,0) / Vector3.ZERO and 8 more)
-# triggers: proximity — labels cycle on a timer to reinforce multiple names for the same concept; the octahedron rotates so the point reads as a *thing* and not just an idea
+# critical_parameter: marker_size (how much of the cube the zero claims) and glow_color — the sphere is BLACK and the light around it is the only thing that is not
+# triggers: none — the origin does not perform. It is the one object in the room that is simply THERE, and the glow is what makes a black thing visible at all
 # emerges: understanding that "zero" is a choice, not a given — every coordinate system has an origin and they could have agreed on a different one
-# needs: octahedron + alias cycle [present]; class_name Origin [present, 2026-05-19]; apply_grid_config [present, 2026-05-19]; VR controls [missing — atmospheric/reference object only]
+# needs: black sphere + pink glow [present, 2026-09-04]; the wireframe cube from cube_lines, captions off [present, 2026-09-04]; class_name Origin [present, 2026-05-19]; apply_grid_config [present, 2026-05-19]; VR controls [missing — atmospheric/reference object only]
 # relationships: prerequisite for all spatial reasoning; the start-point of every CoordinateLine axis; the shared zero that CoordinateSystem3M assumes; visually distinct from point.gd (origin = THE origin, point = a movable position); paired with origin_test.tscn for the multi-origin demo
-# truth: the origin is a convention, not a place — but every space must agree on one. The rotating octahedron makes the convention legible: a chosen object at a chosen zero.
+# truth: the origin is a convention, not a place — but every space must agree on one. A black sphere is the least a thing can look like and still be somewhere; the cube around it is the agreement, and it no longer needs to say its own length twelve times to be believed.
 
 ## AXIOM 0: The origin (0, 0, 0) is the reference point
 ## from which all positions are measured.
 
-const ORIGIN_ALIASES := [
-	"(0,0,0)",
-	"Vector3(0, 0, 0)",
-	"origin",
-	"*",
-	"Vector3.ZERO",
-	"Zero Vector",
-	"World origin",
-	"Coordinate zero",
-	"The center of the coordinate system",
-	"The birth of space",
-	"The coordinate of silence",
-	"The root of all vectors"
+## The body and the light, shared with CoordinateSystem3M's floating point.
+const DEFAULT_BODY := Color(0.035, 0.03, 0.04)
+const DEFAULT_GLOW := Color(1.0, 0.22, 0.62)
+const GLOW_STEPS: Array[Dictionary] = [
+	{"r": 1.22, "a": 0.20},
+	{"r": 1.55, "a": 0.11},
+	{"r": 1.95, "a": 0.055},
+	{"r": 2.45, "a": 0.025},
 ]
 
-@export var octahedron_size: float = 0.05
-@export var rotation_speed: float = 0.5  # Rotations per second
-@export var octahedron_color: Color = Color(0.0, 1.0, 1.0)  # Cyan
+## The zero used to cycle thirteen names for itself. The names were the
+## argument — that "zero" is a word we agreed on — but thirteen captions
+## on a 5 cm marker inside a captioned cube made the room shout. The
+## unnamed black sphere makes the same point by refusing to be labelled.
+const ALIAS_NOTE := "origin / home / zero / (0,0,0) / Vector3.ZERO"
+
+## Radius of the marker sphere, in metres. The cube around it is 1 m, so this
+## is how much of that volume the zero claims.
+@export var marker_size: float = 0.07
+## The body. Near-black rather than pure black so the sphere still takes a
+## highlight and reads as a solid and not a hole.
+@export var marker_color: Color = DEFAULT_BODY
+## The light around it, and the tint of the cube and the beam. Everything
+## luminous in this artifact is this one colour.
+@export var glow_color: Color = DEFAULT_GLOW
+## How loud the glow is. Scales the halo and the lamp together; 0 leaves a
+## plain black sphere in a pink cube.
+@export var glow_strength: float = 1.0
+## Twelve edges captioned "Length: 1.00m" is one sentence twelve times.
+@export var edge_labels: bool = false
+## Kept because 47 maps and their #rotation_speed configs still name it. A
+## sphere cannot show rotation, so nothing turns any more.
+@export var rotation_speed: float = 0.5
 
 ## Vertical beam rising from the origin (metres). 0 = no beam (default, so
 ## other maps are unaffected). In Point One the origin sits below the lab
@@ -44,53 +59,106 @@ const ORIGIN_ALIASES := [
 
 # The origin - the center of our 3D universe
 var origin = Vector3(0, 0, 0)
-var _origin_label: Label3D
-var _alias_index := 0
-var _alias_timer: Timer
-var _octahedron: MeshInstance3D
+var _marker: MeshInstance3D
+var _halo: MeshInstance3D
+
+## THE ZERO'S LOOK, PUBLISHED. CoordinateSystem3M's floating point wears the same
+## one (Palle, 2026-09-04: "make the point the same black fetch sphere"), so it
+## lives here once instead of being copied there and drifting the first time
+## either is tuned.
+##
+## Two calls, because the body and the light are separate problems: emission on a
+## near-black albedo repaints the sphere its own emission colour, and the black is
+## the point. The light is made of things that make light.
+static func zero_body_material(body: Color = DEFAULT_BODY) -> StandardMaterial3D:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = body
+	mat.metallic = 0.10
+	mat.roughness = 0.25
+	return mat
+
+
+## Concentric additive shells, drawn from the INSIDE so they never cover the core.
+## One shell is a disc; the falloff is what reads as light. Alpha carries the
+## brightness and nothing emits — on an unshaded surface emission is added after
+## alpha and flattens the whole stack back into a disc.
+static func add_glow_shells(host: Node3D, radius: float,
+		glow: Color = DEFAULT_GLOW, strength: float = 1.0,
+		with_lamp: bool = true) -> void:
+	if host == null or strength <= 0.0:
+		return
+	for idx in range(GLOW_STEPS.size()):
+		var step: Dictionary = GLOW_STEPS[idx]
+		var shell_node := MeshInstance3D.new()
+		shell_node.name = "ZeroGlow%d" % (idx + 1)
+		var shell := SphereMesh.new()
+		shell.radius = radius * float(step["r"])
+		shell.height = radius * float(step["r"]) * 2.0
+		shell.radial_segments = 24
+		shell.rings = 12
+		shell_node.mesh = shell
+		var hmat := StandardMaterial3D.new()
+		hmat.albedo_color = Color(glow.r, glow.g, glow.b,
+				float(step["a"]) * strength)
+		hmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		hmat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+		hmat.cull_mode = BaseMaterial3D.CULL_FRONT
+		hmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		hmat.disable_receive_shadows = true
+		shell_node.material_override = hmat
+		shell_node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		host.add_child(shell_node)
+	if not with_lamp:
+		return
+	var lamp := OmniLight3D.new()
+	lamp.name = "ZeroLamp"
+	lamp.light_color = glow
+	lamp.light_energy = 1.1 * strength
+	lamp.omni_range = maxf(0.6, radius * 16.0)
+	lamp.shadow_enabled = false
+	host.add_child(lamp)
+
 
 func _ready():
-	print("The center of our 3D universe: ", origin)
-
-	# Create a visual representation of the origin
 	create_origin_marker()
-	_start_origin_alias_cycle()
+	_dress_cube()
 
-func _process(delta: float):
-	# Rotate the octahedron
-	if _octahedron:
-		_octahedron.rotate_y(delta * rotation_speed * TAU)
-		_octahedron.rotate_x(delta * rotation_speed * TAU * 0.3)
+
+## The wireframe cube is a child scene (cube_lines), and its twelve edges are
+## line_static instances that caption themselves. A child's _ready runs first,
+## so this is an override after the fact, not configuration before it.
+func _dress_cube() -> void:
+	var cube := get_node_or_null("CubeLines")
+	if cube == null:
+		return
+	if "edge_labels" in cube:
+		cube.edge_labels = edge_labels
+	if "tint_override" in cube:
+		cube.tint_override = glow_color
+	if cube.has_method("setup_cube"):
+		cube.setup_cube()
+
 
 func create_origin_marker():
-	"""Create a small rotating octahedron to mark the origin point"""
-	_octahedron = MeshInstance3D.new()
-	_octahedron.name = "OriginOctahedron"
-	_octahedron.mesh = _create_octahedron_mesh(octahedron_size)
-	_octahedron.position = origin
+	"""A black sphere at (0,0,0) with a pink halo around it. Black so it is the
+	least a thing can look like and still be somewhere; the halo so it is
+	findable across a room, which a black sphere on its own is not."""
+	_marker = MeshInstance3D.new()
+	_marker.name = "OriginSphere"
+	var sphere := SphereMesh.new()
+	sphere.radius = marker_size
+	sphere.height = marker_size * 2.0
+	sphere.radial_segments = 32
+	sphere.rings = 16
+	_marker.mesh = sphere
+	_marker.position = origin
 
-	# Create emissive material
-	var material = StandardMaterial3D.new()
-	material.albedo_color = octahedron_color
-	material.emission_enabled = true
-	material.emission = octahedron_color
-	material.emission_energy_multiplier = 2.0
-	_octahedron.material_override = material
+	_marker.material_override = zero_body_material(marker_color)
+	add_child(_marker)
 
-	add_child(_octahedron)
-
-	# Add a label (fixed in space, does not rotate to face camera)
-	var label = Label3D.new()
-	label.text = ORIGIN_ALIASES[_alias_index]
-	label.position = Vector3(0, 0.15, 0) # Slightly above
-	label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y  # Rotates to face camera on Y axis only
-	# Small 3D text
-	label.pixel_size = 0.001 # Even smaller
-	label.font_size = 64 # High res texture
-	label.outline_size = 8
-	label.modulate = Color(1.0, 0.5, 0.8) # Pinkish
-	add_child(label)
-	_origin_label = label
+	# the halo and the lamp, from the same pair the floating point uses
+	add_glow_shells(self, marker_size, glow_color, glow_strength)
+	_halo = get_node_or_null("ZeroGlow1")
 
 	# Optional vertical beam rising from the origin (e.g. up through the lab
 	# floor window into the room). Built here so apply_grid_config's rebuild
@@ -110,9 +178,9 @@ func _build_beam() -> void:
 	cyl.radial_segments = 12
 	beam.mesh = cyl
 	var bmat := StandardMaterial3D.new()
-	bmat.albedo_color = octahedron_color
+	bmat.albedo_color = glow_color
 	bmat.emission_enabled = true
-	bmat.emission = octahedron_color
+	bmat.emission = glow_color
 	bmat.emission_energy_multiplier = 1.6
 	bmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	bmat.albedo_color.a = 0.7
@@ -131,87 +199,34 @@ func _build_beam() -> void:
 		top_label.pixel_size = 0.0015
 		top_label.font_size = 64
 		top_label.outline_size = 8
-		top_label.modulate = octahedron_color
+		top_label.modulate = glow_color
 		top_label.outline_modulate = Color(0, 0, 0, 0.8)
 		top_label.no_depth_test = true
 		add_child(top_label)
 
-func _create_octahedron_mesh(size: float) -> ArrayMesh:
-	"""Create an octahedron mesh with 6 vertices and 8 triangular faces"""
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-
-	# 6 vertices of octahedron (along each axis)
-	var top = Vector3(0, size, 0)
-	var bottom = Vector3(0, -size, 0)
-	var front = Vector3(0, 0, size)
-	var back = Vector3(0, 0, -size)
-	var right = Vector3(size, 0, 0)
-	var left = Vector3(-size, 0, 0)
-
-	# 8 triangular faces (4 top, 4 bottom)
-	# Top faces (CCW when viewed from outside)
-	_add_triangle(st, top, front, right)
-	_add_triangle(st, top, right, back)
-	_add_triangle(st, top, back, left)
-	_add_triangle(st, top, left, front)
-
-	# Bottom faces
-	_add_triangle(st, bottom, right, front)
-	_add_triangle(st, bottom, back, right)
-	_add_triangle(st, bottom, left, back)
-	_add_triangle(st, bottom, front, left)
-
-	return st.commit()
-
-func _add_triangle(st: SurfaceTool, v0: Vector3, v1: Vector3, v2: Vector3):
-	var normal = (v1 - v0).cross(v2 - v0).normalized()
-	st.set_normal(normal)
-	st.add_vertex(v0)
-	st.set_normal(normal)
-	st.add_vertex(v1)
-	st.set_normal(normal)
-	st.add_vertex(v2)
-
-
-func _start_origin_alias_cycle():
-	if ORIGIN_ALIASES.is_empty() or _origin_label == null:
-		return
-
-	if _alias_timer:
-		return
-
-	_alias_timer = Timer.new()
-	_alias_timer.wait_time = 1.5
-	_alias_timer.autostart = true
-	_alias_timer.timeout.connect(_on_origin_alias_timeout)
-	add_child(_alias_timer)
-
-
-func _on_origin_alias_timeout():
-	if not _origin_label:
-		return
-
-	_alias_index = (_alias_index + 1) % ORIGIN_ALIASES.size()
-	_origin_label.text = ORIGIN_ALIASES[_alias_index]
-
-
 ## Called by the grid system to apply per-cell configuration. Keys honoured:
-##   "size" / "octahedron_size" — float, half-edge of the marker
-##   "color"                    — Color or [r,g,b] array
-##   "rotation_speed"           — float, rotations per second
-## Unknown keys are ignored.
+##   "size" / "octahedron_size" / "marker_size" — float, sphere radius
+##   "color" / "marker_color"    — Color or [r,g,b], the sphere's body
+##   "glow" / "glow_color"       — Color or [r,g,b], halo, cube and beam
+##   "glow_strength"             — float, how loud the halo and lamp are
+##   "edge_labels"               — bool, put the cube's twelve captions back
+##   "beam_height" / "beam_radius" / "beam_label"
+## The old key names still work: 47 maps place this artifact and some of them
+## configure it, so "size" and "color" cannot simply be renamed away.
 func apply_grid_config(config_data: Dictionary) -> void:
-	if config_data.has("size"):
-		octahedron_size = float(config_data["size"])
-	if config_data.has("octahedron_size"):
-		octahedron_size = float(config_data["octahedron_size"])
-	if config_data.has("color"):
-		var c = config_data["color"]
-		if c is Color:
-			octahedron_color = c
-		elif c is Array and c.size() >= 3:
-			octahedron_color = Color(float(c[0]), float(c[1]), float(c[2]))
+	for k in ["size", "octahedron_size", "marker_size"]:
+		if config_data.has(k):
+			marker_size = float(config_data[k])
+	for k in ["color", "marker_color"]:
+		if config_data.has(k):
+			marker_color = _as_color(config_data[k], marker_color)
+	for k in ["glow", "glow_color"]:
+		if config_data.has(k):
+			glow_color = _as_color(config_data[k], glow_color)
+	if config_data.has("glow_strength"):
+		glow_strength = float(config_data["glow_strength"])
+	if config_data.has("edge_labels"):
+		edge_labels = bool(config_data["edge_labels"])
 	if config_data.has("rotation_speed"):
 		rotation_speed = float(config_data["rotation_speed"])
 	if config_data.has("beam_height"):
@@ -221,12 +236,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("beam_label"):
 		beam_label = str(config_data["beam_label"])
 	# Rebuild if already constructed
-	if _octahedron:
-		# Clean and rebuild
+	if _marker:
 		for c in get_children():
-			if c is Timer:
+			if c is Timer or c.name == "CubeLines" or c.name == "CubeCollider":
+				# everything else — sphere, shells, lamp, beam — is rebuilt below
 				continue
 			c.queue_free()
-		_octahedron = null
-		_origin_label = null
+		_marker = null
+		_halo = null
 		create_origin_marker()
+		_dress_cube()
+
+
+func _as_color(v, fallback: Color) -> Color:
+	if v is Color:
+		return v
+	if v is Array and v.size() >= 3:
+		return Color(float(v[0]), float(v[1]), float(v[2]))
+	if v is String and str(v) != "":
+		return Color(str(v))
+	return fallback

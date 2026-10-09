@@ -41,6 +41,7 @@ var camera_distance: float = 40.0
 var camera_target: Vector3 = Vector3(10, 12, 10)
 
 func _ready() -> void:
+	if str(get_meta("config_host_lighting", "")) == "1": _use_host_lighting()
 	_xr_active = XRServer.primary_interface != null
 	# Embedded as an artifact inside a map (not run standalone): suppress the demo's
 	# screen-space UI panel and standalone camera so they don't leak into the host scene.
@@ -54,6 +55,12 @@ func _ready() -> void:
 		setup_camera()
 	setup_ui()
 	reset_simulation()
+
+func _use_host_lighting() -> void:
+	for child in get_children():
+		if child is DirectionalLight3D: child.visible = false
+		elif child is WorldEnvironment: child.environment = null
+		elif child is Camera3D: child.current = false
 
 func setup_camera() -> void:
 	camera.position = camera_target + Vector3(0, 20, -30)
@@ -176,4 +183,4 @@ func _on_speed_changed(value: float) -> void:
 	step_interval = 1.0 / value
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("host_lighting", "")) == "1": _use_host_lighting()

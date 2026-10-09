@@ -166,8 +166,13 @@ func _ready() -> void:
 	else:
 		push_warning("Could not find MultiMeshInstance3D - path: %s" % multimesh_path)
 
+## The fallback search accepts a GRID FLOOR only (GridStructureComponent names it
+## GridMultiMesh). In the endless museum a hall has no grid floor, and the first
+## MultiMeshInstance3D this walk met there was the lobby's picture frames
+## (Lobby_view/FrameMultiMesh, measured 2026-09-24): the artifact tumbled the
+## museum's own furniture. With no grid floor in reach it now turns nothing.
 func _find_multimesh_instance(node: Node) -> MultiMeshInstance3D:
-	if node is MultiMeshInstance3D:
+	if node is MultiMeshInstance3D and String(node.name) == "GridMultiMesh":
 		return node
 	for child in node.get_children():
 		var result = _find_multimesh_instance(child)

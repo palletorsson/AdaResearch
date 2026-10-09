@@ -1,12 +1,12 @@
 # @identity
-# essence: P(x,z) = noise(x,z) > threshold → spawn — noise-driven spatial Poisson process
-# desire: wander through a procedural mushroom meadow where fairy rings and clusters emerge from noise
-# critical_parameter: mushroom_density — controls expected count per unit area; interacts with FastNoiseLite clearing threshold
-# triggers: generate_mushroom_positions() uses noise to create natural clearings; create_mushroom_patterns() adds fairy rings and clusters
-# emerges: fairy rings form perfect circles of identical species — order self-organizing within the random field
-# needs: random ground height grid [has]; 5 mushroom templates + glowing variant [has]; VR controls [missing]
-# relationships: feeds Random_Mushrooms map alongside random_number_book_page_collection; contrasts with pheromone_terrain (static vs dynamic growth)
-# truth: A mushroom meadow is randomness that has found a niche — noise filtered through ecology.
+# essence: candidate positions filtered by noise, template copies, explicit rings and clusters
+# desire: inspect a pleasurable population by changing one rule while the seed holds
+# critical_parameter: size_variation — keep scale draws but optionally use scale 1
+# triggers: SHOW, KIND, SIZE, REGROW and NEW SEED at the opt-in specimen table
+# emerges: resemblance can hide distinct construction rules; the ring is specified explicitly
+# needs: seeded population and ground [has]; six specimen slots [has]; bounded glow lights [has]
+# relationships: follows distribution_sampler; edible_mushroom can alter the observer's view
+# truth: Which differences can this recipe make, and which require another recipe?
 
 extends Node3D
 
@@ -127,6 +127,14 @@ func _ready() -> void:
 ## What the stand needs before the first build: a NAMED seed a visitor can read and repeat
 ## (from a private generator, never the global stream), a cap on the lights, the bed lifted.
 func _prepare_stand() -> void:
+	# Standalone preview furniture is not part of the specimen population.
+	# Remove it only for this opt-in staging; leave the authored scene intact.
+	for node_name in ["Camera3D", "FillLight", "MeshInstance3D"]:
+		var demo := get_node_or_null(node_name)
+		if demo != null:
+			remove_child(demo)
+			demo.queue_free()
+	set_meta("specimen_scene_cleaned", true)
 	if population_seed < 0:
 		var r := RandomNumberGenerator.new()
 		r.randomize()
@@ -801,7 +809,7 @@ func create_mushroom_cluster() -> void:
 		mushroom.position = Vector3(pos_x, ground_height, pos_z)
 		mushroom.rotation_degrees.y = _rf() * 360
 		
-		# Varied scale - smaller ones more common in clusters
+		# Uniform scale within the cluster range; it has a lower minimum than the other kinds
 		var scale_factor = _size(0.5 + _rf() * 0.7)
 		mushroom.scale = Vector3(scale_factor, scale_factor, scale_factor)
 		mushroom.set_meta("template", type_index)
@@ -1370,19 +1378,19 @@ func _build_table() -> void:
 	var dark := StandardMaterial3D.new()
 	dark.albedo_color = Color(0.11, 0.115, 0.13)
 	dark.roughness = 0.8
-	var plate: MeshInstance3D = HangarKit.box(Vector3.ZERO, Vector3(0.78, 0.15, 0.014), dark)
+	var plate: MeshInstance3D = HangarKit.box(Vector3.ZERO, Vector3(0.78, 0.19, 0.014), dark)
 	plate.name = "Plate"
 	plate_root.add_child(plate)
 	_readout = Label3D.new()
 	_readout.name = "Text"
 	_readout.pixel_size = 0.00095
-	_readout.font_size = 15
+	_readout.font_size = 23
 	_readout.outline_size = 0
 	_readout.line_spacing = 0.5
 	_readout.modulate = Color(0.86, 0.94, 1.0)
 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_readout.position = Vector3(-0.37, 0.066, 0.010)
+	_readout.position = Vector3(-0.37, 0.084, 0.010)
 	plate_root.add_child(_readout)
 	# the panel: SHOW · KIND · SIZE / REGROW · NEW SEED, on the front face beside the plate
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -1572,7 +1580,7 @@ func readout_lines() -> Array[String]:
 			show_line = "KIND clusters · %d members ringed" % cluster_placed
 		_:
 			show_line = "KIND rejected · %d candidates marked" % _rejected.size()
-	var size_line: String = "size 0.7–1.3 · ring 0.8–1.2 · cluster 0.5–1.2" if size_variation else "SIZE off · every mushroom at 1 · same seed"
+	var size_line: String = "size 0.7–1.3 · ring 0.8–1.2 · cluster 0.5–1.2" if size_variation else "SIZE off · scale 1 · template sizes kept"
 	return [seed_line,
 		"candidates %d · accepted %d · rejected %d" % [_candidates_requested, scattered, _rejected.size()],
 		"rings %d (%d) · clusters %d (%d) · templates %d" % [_rings.size(), ring_placed, _clusters.size(), cluster_placed, mushroom_types.size()],

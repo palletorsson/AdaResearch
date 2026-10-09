@@ -119,7 +119,11 @@ def scan():
         for p in (ROOT / SCOPE).rglob("*")
         if p.is_file() and p.suffix in CODE_SUFFIXES
     }
-    tracked = {r for r in git(["ls-files"]) if in_scope(r)}
+    # ls-tree, not ls-files: the index can hold a path HEAD does not. A tool that
+    # was only `git add`ed read "in the repository" here and the gate passed while
+    # no commit had it (em_shots.py, 2026-10-01). Gates L and M already ask HEAD.
+    tracked = {r for r in git(["ls-tree", "-r", "HEAD", "--name-only"])
+               if in_scope(r)}
     ignored = {r for r in git(["ls-files", "--others", "--ignored",
                                "--exclude-standard"]) if in_scope(r)}
     mtimes = {rel: (ROOT / rel).stat().st_mtime for rel in disk}

@@ -17,9 +17,12 @@ var volumes:Array[MultiMeshInstance3D]=[]
 var floor_view:MeshInstance3D
 var actions:int=0
 var step_usec:int=0
+var walk_slice:bool=false
+var slice_walker:Node3D
 
 func _ready() -> void:
 	_build();_controls();paint()
+	if walk_slice:enable_walking_slice()
 
 func operate(i:int) -> void:
 	actions+=1;target=0
@@ -74,6 +77,24 @@ func paint() -> void:
 		for i in range(Model.COUNT):volumes[side].multimesh.set_instance_color(i,tint(data[i]))
 	reading.text="%s / UPDATE %d OF %d\nNEIGHBOUR PULL %.2f / DISTURBANCE %.1f\n%s / %s / B %s\nDIFFERENT %d / %d (above 0.000001)\nMAX DIFFERENCE %.6f / MEAN %.6f\nDIFFERENCE DISPLAY GAIN x%.1f"%["RUN TO %d"%target if target>model.tick else "HELD",model.tick,Model.LIMIT,model.coupling,model.disturbance,"INTEGER" if model.integer_storage else "FRACTIONAL","SCATTERED" if model.scattered else "UNIFORM 4","+1 CELL" if model.changed else "MATCHED",rep.different,Model.COUNT,rep.max_difference,rep.mean_difference,view_gain]
 	slice_label.text="SPATIAL SLICE Z=%d / TIME IS UPDATE %d\nA                       B                       |A-B| x%.1f"%[slice_z,model.tick,view_gain]
+
+	if is_instance_valid(slice_walker):slice_walker.refresh()
+
+func enable_walking_slice() -> void:
+	walk_slice=true
+	if is_instance_valid(slice_walker):return
+	slice_walker=load("res://algorithms/cellularautomata/ca_showcase/walking_slice.gd").new()
+	slice_walker.name="WalkingSlice"
+	add_child(slice_walker)
+	var hand=load("res://algorithms/cellularautomata/ca_showcase/difference_hand.gd").new()
+	hand.name="SliceHand";add_child(hand)
+
+## A receiver change must not invoke operate(), which cancels a scheduled run.
+func select_spatial_slice(value:int) -> void:
+	var selected:int=clampi(value,0,Model.N-1)
+	if selected==slice_z:return
+	slice_z=selected
+	paint()
 
 func readback() -> Dictionary:
 	var r:Dictionary=model.report();r.merge({"slice":slice_z,"coating":coating,"target":target,"actions":actions,"gain":view_gain,"step_usec":step_usec});return r

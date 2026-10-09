@@ -100,29 +100,26 @@ var current_demo: int = 0
 var demo_time: float = 0.0
 var labels = []
 
+## Optional gallery boundary in local metres. Zero retains the original scenes.
+@export var gallery_radius: float = 0.0
+
 # Text for explanations
 var demo_titles = [
-	"Pure Randomness - Chaos and Beauty",
-	"Perlin Noise - Natural Randomness",
+	"Random Kicks - Movement with Memory",
+	"Trigonometric Flow - A Smooth Field",
 	"Procedural Patterns - Order from Chaos",
 	"Emergent Behavior - Simple Rules, Complex Results",
 	"Evolutionary Algorithms - Creative Randomness"
 ]
 
 var demo_descriptions = [
-	"""Pure randomness creates unpredictable beauty.
-	
-	Each particle follows completely random movements, yet patterns emerge to our eyes.
-	This is similar to how we see shapes in clouds or stars.
-	
-	Random systems are essential in nature, art, music, and even security systems.""",
-	
-	"""Perlin noise creates structured randomness that mimics nature.
-	
-	Invented by Ken Perlin for the movie Tron, this algorithm creates natural-looking 
-	random textures with smooth transitions.
-	
-	It's used for terrain generation, clouds, fire, and other organic elements in games.""",
+	"""Each particle receives a new random push.
+	Its velocity carries earlier pushes forward and is damped each frame.
+	The boundary turns particles back. Watch how a random draw becomes a path.""",
+
+	"""The direction comes from products of sine and cosine at position and time.
+	Nearby samples can change smoothly together.
+	This is a trigonometric flow sketch, not a Perlin noise implementation.""",
 	
 	"""Procedural patterns combine randomness with mathematical rules.
 	
@@ -138,12 +135,9 @@ var demo_descriptions = [
 	
 	This is how birds flock, fish school, and complex social systems form.""",
 	
-	"""Evolutionary algorithms use random mutations guided by selection.
-	
-	Like natural evolution, randomness explores possibilities while selection preserves
-	what works. This combination can solve problems in ways humans wouldn't imagine.
-	
-	This approach produces novel art, music, designs, and engineering solutions."""
+	"""Particles are ranked by distance from a moving target.
+	The leading tenth guide the others, with random changes to their movement.
+	The same particles remain: this sketch selects influences, not parents or offspring."""
 ]
 
 # Initialize
@@ -256,6 +250,18 @@ func _process(delta: float) -> void:
 		2: update_procedural_patterns(delta)
 		3: update_emergent_behavior(delta)
 		4: update_evolutionary_algorithms(delta)
+	_confine_gallery()
+
+func _confine_gallery() -> void:
+	if gallery_radius <= 0.0: return
+	for particle in particles:
+		var limit: float = maxf(0.1, gallery_radius-float(particle.radius))
+		if particle.position.length() <= limit: continue
+		var normal: Vector3 = particle.position.normalized()
+		particle.position = normal*limit
+		var velocity: Vector3 = particle.get_meta("velocity", Vector3.ZERO)
+		if velocity.dot(normal)>0.0:
+			particle.set_meta("velocity", velocity.bounce(normal))
 
 # Start a new demonstration
 func start_demo(demo_index) -> void:
@@ -294,6 +300,7 @@ func start_demo(demo_index) -> void:
 		
 		# Reset size
 		particle.radius = 0.05
+	_confine_gallery()
 
 # Update functions for different randomness demonstrations
 
@@ -324,9 +331,9 @@ func update_pure_random(delta) -> void:
 		var material = particle.material as StandardMaterial3D
 		var speed = velocity.length()
 		material.emission = Color(speed * 0.2, speed * 0.1, speed * 0.3)
-		material.emission_energy = speed * 0.5
+		material.emission_energy_multiplier = speed * 0.5
 
-# Demo 2: Perlin noise
+# Demo 2: Smooth trigonometric field (legacy method name retained)
 func update_perlin_noise(delta) -> void:
 	var time = Time.get_ticks_msec() / 1000.0
 	
@@ -535,7 +542,7 @@ func _evolve_toward(pop: Array, target: Vector3, delta) -> void:
 			var material = particle.material as StandardMaterial3D
 			material.albedo_color = Color(1.0, 0.8, 0.2)
 			material.emission = Color(1.0, 0.8, 0.2)
-			material.emission_energy = 0.5
+			material.emission_energy_multiplier = 0.5
 			
 			# Winners are slightly bigger
 			particle.radius = 0.08
@@ -561,7 +568,7 @@ func _evolve_toward(pop: Array, target: Vector3, delta) -> void:
 				0.2 + 0.6 * (1.0 - rank_ratio),
 				0.5
 			)
-			material.emission_energy = 0
+			material.emission_energy_multiplier = 0
 			
 			# Size based on rank
 			particle.radius = 0.05 - 0.02 * rank_ratio
@@ -576,8 +583,7 @@ func _evolve_toward(pop: Array, target: Vector3, delta) -> void:
 	# In a real implementation, you would create a visible target object
 	pass
 
-# Utility function to simulate 3D Perlin noise
-# (Godot 4 has built-in noise functions, but this is provided as an example)
+# Smooth bounded trigonometric field; the legacy name is not a Perlin algorithm.
 func noise3(x, y, z):
 	return sin(x * 7 + z * 3) * cos(y * 5 + x * 2) * sin(z * 11 + y * 7)
 
@@ -612,6 +618,8 @@ func _chapter_demo_index() -> int:
 func _read_grid_config_meta() -> void:
 	var node: Node = self
 	while node != null:
+		if node.has_meta("config_gallery_radius"):
+			gallery_radius = clampf(float(node.get_meta("config_gallery_radius")), 0.0, 50.0)
 		if node.has_meta("config_chapter"):
 			chapter = str(node.get_meta("config_chapter"))
 		if node.has_meta("config_scatter_seed"):
@@ -639,6 +647,9 @@ func _apply_selection(want_raw: String) -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	if config.has("gallery_radius"):
+		gallery_radius = clampf(float(config["gallery_radius"]), 0.0, 50.0)
+		_confine_gallery()
 	if config.has("scatter_seed"):
 		scatter_seed = int(config["scatter_seed"])
 	if config.has("selection"):

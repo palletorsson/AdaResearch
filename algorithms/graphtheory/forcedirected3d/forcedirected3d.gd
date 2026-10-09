@@ -192,6 +192,9 @@ var spatial_hash: Dictionary = {}
 var hash_cell_size: float = 10.0
 
 func _ready() -> void:
+	if str(get_meta("config_presentation", "")) == "museum":
+		for child in get_children():
+			if child is Camera3D:child.current=false
 	_open_rng()
 	setup_environment()
 	setup_containers()
@@ -210,6 +213,8 @@ func _process(delta: float) -> void:
 		check_convergence()
 
 func setup_environment() -> void:
+	if str(get_meta("config_presentation", "")) == "museum":
+		return
 	"""Setup lighting and environment for 3D visualization"""
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
@@ -253,6 +258,8 @@ func setup_containers() -> void:
 	add_child(forces_container)
 
 func setup_ui() -> void:
+	if str(get_meta("config_presentation", "")) == "museum":
+		return
 	"""Create UI overlay for statistics and controls"""
 	ui_container = CanvasLayer.new()
 	ui_container.name = "UIContainer"

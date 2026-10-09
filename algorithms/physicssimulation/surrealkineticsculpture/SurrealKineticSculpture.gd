@@ -42,6 +42,8 @@ func _ready() -> void:
 	create_niki_extensions()
 	setup_kinetic_lighting()
 	start_kinetic_animation()
+	if str(get_meta("config_presentation", "")) == "museum":
+		_embed_in_museum()
 
 func setup_sculpture_base() -> void:
 	"""Create the main sculpture container and base platform"""
@@ -202,4 +204,14 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("presentation", "")) == "museum":
+		_embed_in_museum()
+
+func _embed_in_museum() -> void:
+	# The standalone scene owns lights, cameras and screen controls. An exhibit
+	# uses its host room's lighting and viewpoint, keeping its moving sculpture.
+	for node in find_children("*", "Node", true, false):
+		if node is Light3D or node is Control or node is CanvasLayer:
+			node.visible = false
+		elif node is Camera3D:
+			node.current = false

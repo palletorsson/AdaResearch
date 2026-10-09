@@ -1,13 +1,7 @@
-// QueerNoiseShader.gdshader
-// The room sphere's material. NOTE: this file and WallNoiseShader.gdshader are the SAME
-// shader — they were byte-identical before this line was written, header comment included,
-// which is why this one carried the other's name. The "two independent noise loops" the
-// artifact's @identity claims are one shader run twice with different uniform values and a
-// 0.7x phase offset on time. Kept as two files because the .tscn's two materials point at
-// them separately; both carry the noise_basis dispatch so the room and its walls change
-// basis together.
+// Sphere and enclosure share the implemented layer controls and field construction.
 shader_type spatial;
 render_mode blend_mix, depth_draw_always, cull_disabled, diffuse_burley, specular_schlick_ggx;
+
 
 uniform float time : hint_range(0.0, 100.0) = 0.0;
 uniform float cloud_scale : hint_range(0.5, 5.0) = 2.0;
@@ -22,8 +16,17 @@ uniform vec4 dark_corner : source_color = vec4(0.2, 0.1, 0.2, 1.0);
 // WHICH BASIS FILLS THE FIELD. 0 simplex, 1 perlin, 2 value, 3 cellular — the same four the
 // noise sequence's bench artifacts compare (perlin_noise, simplex_noise, noise_terrain),
 // asked here at room scale, where the field is the architecture rather than a tabletop.
-// 1 is the default because 1 is what this shader has always computed.
+// 1 is the default because 1 is what this shader has always computed. Kept identical to
+// QueerNoiseShader.gdshader, which is the same shader on the room sphere.
 uniform int noise_basis : hint_range(0, 3) = 1;
+
+// 2026-09-12 (Noise_6_Wall, N5): the room is named for six scales and nobody could take one
+// away. `layers` is that loop's real bound and `show_term` opens the accumulation on its own,
+// without the turbulence and the colour the room paints over it. Both default to the shipped
+// picture: six layers, full mix.
+uniform int layers : hint_range(1, 6) = 6;
+uniform int show_term : hint_range(0, 1) = 0;   // 0 = the room's picture, 1 = the sum alone
+uniform float term_gain : hint_range(0.5, 4.0) = 2.0;   // the same on every comparison patch
 
 varying vec2 world_uv;
 varying vec3 world_position;
@@ -121,8 +124,11 @@ float cloud_noise(vec2 pos, float t) {
     float amplitude = 0.5;
     float frequency = 1.0;
 
-    // Multiple octaves for cloud-like appearance
-    for (int i = 0; i < 6; i++) {
+    // Multiple octaves for cloud-like appearance. The bound is a uniform now: each term is
+    // half the amplitude and twice the frequency of the one before it, so the first carries
+    // 0.5 of the weight, the first two 0.75, the first four 0.9375 and all six 0.984375 —
+    // the actual brightness also depends on sampled values and the display encoding.
+    for (int i = 0; i < layers; i++) {
         vec2 animated_pos = pos * frequency;
         animated_pos.x += sin(t * 0.3 + pos.y * 0.5) * 0.3;
         animated_pos.y += cos(t * 0.2 + pos.x * 0.3) * 0.2;
@@ -158,59 +164,68 @@ void vertex() {
 
 void fragment() {
     vec2 uv = world_uv;
+    if (show_term == 1) {
+        // The comparison skips the finish's extra field evaluations and lighting.
+        float bare = clamp(cloud_noise(uv * cloud_scale, time * time_scale) * term_gain, 0.0, 1.0);
+        ALBEDO = vec3(0.0);
+        EMISSION = vec3(bare);
+        SPECULAR = 0.0;
+        ROUGHNESS = 1.0;
+        NORMAL_MAP = vec3(0.5, 0.5, 1.0);
+    } else {
+        // Create flowing cloud patterns
+        float cloud_base = cloud_noise(uv * cloud_scale, time * time_scale);
+        float cloud_detail = turbulence(uv * cloud_scale * 2.0, time * time_scale * 0.7);
 
-    // Create flowing cloud patterns
-    float cloud_base = cloud_noise(uv * cloud_scale, time * time_scale);
-    float cloud_detail = turbulence(uv * cloud_scale * 2.0, time * time_scale * 0.7);
+        // Combine noise patterns for realistic clouds
+        float cloud_pattern = (cloud_base + cloud_detail * 0.4) * cloud_density;
+        cloud_pattern = smoothstep(0.2, 0.8, cloud_pattern);
 
-    // Combine noise patterns for realistic clouds
-    float cloud_pattern = (cloud_base + cloud_detail * 0.4) * cloud_density;
-    cloud_pattern = smoothstep(0.2, 0.8, cloud_pattern);
+        // Create corner darkening effect
+        vec2 corner_dist = abs(uv - 0.5) * 2.0; // Distance from center
+        float corner_factor = max(corner_dist.x, corner_dist.y);
+        corner_factor = pow(corner_factor, 1.5); // Sharper falloff
+        float darkness = mix(1.0, corner_darkness, corner_factor);
 
-    // Create corner darkening effect
-    vec2 corner_dist = abs(uv - 0.5) * 2.0; // Distance from center
-    float corner_factor = max(corner_dist.x, corner_dist.y);
-    corner_factor = pow(corner_factor, 1.5); // Sharper falloff
-    float darkness = mix(1.0, corner_darkness, corner_factor);
+        // Generate pink cloud colors with variation
+        vec3 cloud_color = mix(base_pink.rgb, deep_pink.rgb, cloud_pattern);
 
-    // Generate pink cloud colors with variation
-    vec3 cloud_color = mix(base_pink.rgb, deep_pink.rgb, cloud_pattern);
+        // Add subtle color shifting over time
+        float color_shift = sin(time * 0.3 + uv.x * 2.0 + uv.y * 3.0) * 0.1;
+        cloud_color.r += color_shift;
+        cloud_color.b -= color_shift * 0.5;
 
-    // Add subtle color shifting over time
-    float color_shift = sin(time * 0.3 + uv.x * 2.0 + uv.y * 3.0) * 0.1;
-    cloud_color.r += color_shift;
-    cloud_color.b -= color_shift * 0.5;
+        // Apply pink intensity
+        cloud_color *= pink_intensity;
 
-    // Apply pink intensity
-    cloud_color *= pink_intensity;
+        // Apply corner darkening
+        cloud_color = mix(dark_corner.rgb, cloud_color, darkness);
 
-    // Apply corner darkening
-    cloud_color = mix(dark_corner.rgb, cloud_color, darkness);
+        // Add subtle edge highlighting
+        float edge_highlight = 1.0 - smoothstep(0.4, 0.6, cloud_pattern);
+        cloud_color += edge_highlight * 0.2 * vec3(1.0, 0.8, 0.9);
 
-    // Add subtle edge highlighting
-    float edge_highlight = 1.0 - smoothstep(0.4, 0.6, cloud_pattern);
-    cloud_color += edge_highlight * 0.2 * vec3(1.0, 0.8, 0.9);
+        // Final cloud density modulation
+        float final_pattern = smoothstep(0.1, 0.9, cloud_pattern);
+        vec3 final_color = mix(cloud_color * 0.3, cloud_color, final_pattern);
 
-    // Final cloud density modulation
-    float final_pattern = smoothstep(0.1, 0.9, cloud_pattern);
-    vec3 final_color = mix(cloud_color * 0.3, cloud_color, final_pattern);
+        // Add atmospheric depth
+        float atmospheric = 1.0 - cloud_pattern * 0.2;
+        final_color *= atmospheric;
 
-    // Add atmospheric depth
-    float atmospheric = 1.0 - cloud_pattern * 0.2;
-    final_color *= atmospheric;
+        ALBEDO = final_color;
+        EMISSION = final_color * 0.1 * pink_intensity;
+        METALLIC = 0.0;
+        ROUGHNESS = 0.7 + cloud_pattern * 0.3;
 
-    ALBEDO = final_color;
-    EMISSION = final_color * 0.1 * pink_intensity;
-    METALLIC = 0.0;
-    ROUGHNESS = 0.7 + cloud_pattern * 0.3;
+        // Add subtle normal mapping effect for depth
+        vec2 normal_offset = vec2(
+            cloud_noise(uv * cloud_scale + vec2(0.01, 0.0), time * time_scale) -
+            cloud_noise(uv * cloud_scale - vec2(0.01, 0.0), time * time_scale),
+            cloud_noise(uv * cloud_scale + vec2(0.0, 0.01), time * time_scale) -
+            cloud_noise(uv * cloud_scale - vec2(0.0, 0.01), time * time_scale)
+        ) * 0.1;
 
-    // Add subtle normal mapping effect for depth
-    vec2 normal_offset = vec2(
-        cloud_noise(uv * cloud_scale + vec2(0.01, 0.0), time * time_scale) -
-        cloud_noise(uv * cloud_scale - vec2(0.01, 0.0), time * time_scale),
-        cloud_noise(uv * cloud_scale + vec2(0.0, 0.01), time * time_scale) -
-        cloud_noise(uv * cloud_scale - vec2(0.0, 0.01), time * time_scale)
-    ) * 0.1;
-
-    NORMAL_MAP = vec3(normal_offset, 1.0);
+        NORMAL_MAP = vec3(normal_offset * 0.5 + 0.5, 1.0);
+    }
 }

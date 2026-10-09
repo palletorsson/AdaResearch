@@ -1,14 +1,10 @@
-# @identity
-# essence: Procedural binary tree — a trunk forks into branches, each branch forks again, recursion depth 3. Box meshes with emission materials create a geometric canopy. Self-similar at every level.
-# desire: To grow by halving — generate_branches calls itself with decremented depth, producing sub-branches from each endpoint. The tree is its own blueprint.
-# critical_parameter: num_main_branches / max_sub_branches — control branching factor; random_seed — deterministic chaos, same seed same tree
-# triggers: _ready → seed + material creation + full tree generation; rebuild_tree → clear all children, regenerate from parameters
-# emerges: A geometric sculpture where every subtree is a complete tree — hierarchy from constraint, not command. Each node knows only its children yet the whole structure self-organizes.
-# needs: VR branch manipulation [missing], growth animation [missing], parameter sliders [missing]
-# relationships: Appears in DataStructures_Trees (binary recursion) and RecursiveEmergence_Tail_Recursion_Memoization (call stack visualization). The tree that teaches both data structure and recursion.
-# truth: A tree is a list that learned to decide — left or right, less or greater. Hierarchy emerges not from authority but from the constraint of binary choice repeated.
+## Fixed-seed geometric branching with variable descendant counts.
+## Three recursive levels after the trunk; no energy, light or competition model.
+## Opt-in museum controls restyle the same geometry.
 
 extends Node3D
+
+var rng := RandomNumberGenerator.new()
 
 # Parameters for tree generation
 @export_category("Tree Structure")
@@ -83,7 +79,7 @@ var _original_mats: Dictionary = {}
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
 	# Set the random seed
-	seed(random_seed)
+	rng.seed = random_seed
 	
 	# Create materials
 	create_materials()
@@ -91,7 +87,7 @@ func _ready() -> void:
 	# Generate the tree
 	generate_tree()
 
-	# APPENDED LAST, after every randf()/randi() in generate_tree(). Reads the
+	# APPENDED LAST, after every rng.randf()/rng.randi() in generate_tree(). Reads the
 	# finished scene graph and draws nothing of its own at the default.
 	_apply_aftermath()
 
@@ -156,23 +152,23 @@ func create_trunk():
 	trunk_node.add_child(trunk_instance)
 	
 	# Maybe add some smaller blocks to the trunk for detail
-	var num_details = randi() % 4 + 1
+	var num_details = rng.randi() % 4 + 1
 	for i in range(num_details):
 		var detail = MeshInstance3D.new()
 		var detail_mesh = BoxMesh.new()
 		
 		var detail_size = Vector3(
-			trunk_width * randf_range(0.3, 0.6),
-			trunk_width * randf_range(0.3, 0.6),
-			trunk_width * randf_range(0.3, 0.6)
+			trunk_width * rng.randf_range(0.3, 0.6),
+			trunk_width * rng.randf_range(0.3, 0.6),
+			trunk_width * rng.randf_range(0.3, 0.6)
 		)
 		detail_mesh.size = detail_size
 		
 		detail.mesh = detail_mesh
 		
 		# Position somewhere on the trunk
-		var height_pos = randf_range(trunk_width, trunk_height - trunk_width)
-		var angle = randf_range(0, TAU)
+		var height_pos = rng.randf_range(trunk_width, trunk_height - trunk_width)
+		var angle = rng.randf_range(0, TAU)
 		var radius = trunk_width/2 * 0.9
 		
 		detail.position = Vector3(
@@ -182,7 +178,7 @@ func create_trunk():
 		)
 		
 		# Randomly choose material
-		detail.material_override = primary_material if randf() > 0.3 else secondary_material
+		detail.material_override = primary_material if rng.randf() > 0.3 else secondary_material
 		
 		trunk_node.add_child(detail)
 	
@@ -200,9 +196,9 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		parent.add_child(branch)
 		
 		# Determine branch size
-		var branch_width = randf_range(branch_width_min, branch_width_max) * (1.0 - current_depth * 0.2)
-		var branch_height = randf_range(branch_height_min, branch_height_max) * (1.0 - current_depth * 0.2)
-		var branch_length = randf_range(branch_length_min, branch_length_max) * (1.0 - current_depth * 0.15)
+		var branch_width = rng.randf_range(branch_width_min, branch_width_max) * (1.0 - current_depth * 0.2)
+		var branch_height = rng.randf_range(branch_height_min, branch_height_max) * (1.0 - current_depth * 0.2)
+		var branch_length = rng.randf_range(branch_length_min, branch_length_max) * (1.0 - current_depth * 0.15)
 		
 		# Create branch mesh
 		var branch_mesh = BoxMesh.new()
@@ -212,19 +208,19 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		branch_instance.mesh = branch_mesh
 		
 		# Choose material
-		branch_instance.material_override = primary_material if randf() > 0.3 else secondary_material
+		branch_instance.material_override = primary_material if rng.randf() > 0.3 else secondary_material
 		
 		# Set direction, position, and rotation
 		var angle
 		if num_branches <= 2:
 			# For binary branches, space them apart
-			angle = TAU * (i / float(num_branches)) + randf_range(-0.3, 0.3)
+			angle = TAU * (i / float(num_branches)) + rng.randf_range(-0.3, 0.3)
 		else:
 			# Random angle for more branches
-			angle = randf_range(0, TAU)
+			angle = rng.randf_range(0, TAU)
 		
 		# Adjust angle for more natural spreading
-		var vertical_tilt = randf_range(0.2, 0.5) # Tilt upward
+		var vertical_tilt = rng.randf_range(0.2, 0.5) # Tilt upward
 		
 		# Calculate direction with vertical component
 		var direction = Vector3(
@@ -244,29 +240,29 @@ func generate_branches(parent, origin_point, num_branches, current_depth, max_de
 		branch.add_child(branch_instance)
 		
 		# Maybe add some detail blocks to the branch
-		if randf() > 0.4:
+		if rng.randf() > 0.4:
 			add_detail_blocks(branch, branch_instance, branch_mesh.size)
 		
 		# Calculate the end point for sub-branches
 		var end_point = position + direction * (branch_length / 2)
 		
 		# Generate sub-branches
-		var num_sub = randi() % (max_sub_branches - current_depth) + 1
+		var num_sub = rng.randi() % (max_sub_branches - current_depth) + 1
 		if current_depth < 2:  # More branches at lower depths
-			num_sub = randi() % max_sub_branches + 2
+			num_sub = rng.randi() % max_sub_branches + 2
 		
 		generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
 
 # Adds small detail blocks to a branch
 func add_detail_blocks(parent_node, branch_instance, branch_size) -> void:
-	var num_details = randi() % 3 + 1
+	var num_details = rng.randi() % 3 + 1
 	
 	for i in range(num_details):
 		var detail = MeshInstance3D.new()
 		var detail_mesh = BoxMesh.new()
 		
 		# Smaller blocks for details
-		var scale_factor = randf_range(0.2, 0.5)
+		var scale_factor = rng.randf_range(0.2, 0.5)
 		var detail_size = Vector3(
 			branch_size.x * scale_factor,
 			branch_size.y * scale_factor,
@@ -277,34 +273,33 @@ func add_detail_blocks(parent_node, branch_instance, branch_size) -> void:
 		detail.mesh = detail_mesh
 		
 		# Position on the surface of the branch
-		var axis = randi() % 3  # Which axis to project along (x, y, or z)
-		var sign_factor = 1 if randf() > 0.5 else -1
+		var axis = rng.randi() % 3  # Which axis to project along (x, y, or z)
+		var sign_factor = 1 if rng.randf() > 0.5 else -1
 		
 		var relative_position = Vector3.ZERO
 		
 		match axis:
 			0:  # X-axis
 				relative_position.x = sign_factor * (branch_size.x / 2 + detail_size.x / 2 * 0.8)
-				relative_position.y = randf_range(-0.4, 0.4) * branch_size.y
-				relative_position.z = randf_range(-0.4, 0.4) * branch_size.z
+				relative_position.y = rng.randf_range(-0.4, 0.4) * branch_size.y
+				relative_position.z = rng.randf_range(-0.4, 0.4) * branch_size.z
 			1:  # Y-axis
-				relative_position.x = randf_range(-0.4, 0.4) * branch_size.x
+				relative_position.x = rng.randf_range(-0.4, 0.4) * branch_size.x
 				relative_position.y = sign_factor * (branch_size.y / 2 + detail_size.y / 2 * 0.8)
-				relative_position.z = randf_range(-0.4, 0.4) * branch_size.z
+				relative_position.z = rng.randf_range(-0.4, 0.4) * branch_size.z
 			2:  # Z-axis
-				relative_position.x = randf_range(-0.4, 0.4) * branch_size.x
-				relative_position.y = randf_range(-0.4, 0.4) * branch_size.y
+				relative_position.x = rng.randf_range(-0.4, 0.4) * branch_size.x
+				relative_position.y = rng.randf_range(-0.4, 0.4) * branch_size.y
 				relative_position.z = sign_factor * (branch_size.z / 2 + detail_size.z / 2 * 0.8)
 		
 		# Apply rotation of parent branch to the relative position
-		var global_transform = branch_instance.global_transform
-		detail.position = branch_instance.to_local(global_position + global_transform.basis * relative_position)
+		detail.position = branch_instance.position + branch_instance.basis * relative_position
 		
 		# Match parent rotation
 		detail.rotation = branch_instance.rotation
 		
 		# Choose material, favor secondary material for details
-		detail.material_override = secondary_material if randf() > 0.4 else primary_material
+		detail.material_override = secondary_material if rng.randf() > 0.4 else primary_material
 		
 		parent_node.add_child(detail)
 
@@ -373,11 +368,11 @@ func create_main_blocks(parent, origin_point) -> void:
 		parent.add_child(block_node)
 		
 		# Create a cluster of connected blocks
-		var num_sub_blocks = randi() % 4 + 2
+		var num_sub_blocks = rng.randi() % 4 + 2
 		var main_position = Vector3(
-			randf_range(-3, 3),
-			randf_range(1, 5),
-			randf_range(-3, 3)
+			rng.randf_range(-3, 3),
+			rng.randf_range(1, 5),
+			rng.randf_range(-3, 3)
 		) + origin_point
 		
 		for j in range(num_sub_blocks):
@@ -386,9 +381,9 @@ func create_main_blocks(parent, origin_point) -> void:
 			
 			# Larger sizes for main blocks
 			var block_size = Vector3(
-				randf_range(2.0, 4.0),
-				randf_range(2.0, 4.0),
-				randf_range(2.0, 4.0)
+				rng.randf_range(2.0, 4.0),
+				rng.randf_range(2.0, 4.0),
+				rng.randf_range(2.0, 4.0)
 			)
 			block_mesh.size = block_size
 			
@@ -396,9 +391,9 @@ func create_main_blocks(parent, origin_point) -> void:
 			
 			# Position blocks adjacent to each other
 			var offset = Vector3(
-				randf_range(-1.5, 1.5),
-				randf_range(-1.5, 1.5),
-				randf_range(-1.5, 1.5)
+				rng.randf_range(-1.5, 1.5),
+				rng.randf_range(-1.5, 1.5),
+				rng.randf_range(-1.5, 1.5)
 			)
 			
 			if j == 0:
@@ -414,38 +409,38 @@ func create_main_blocks(parent, origin_point) -> void:
 # Creates connecting structures between main blocks
 func create_connecting_structures(parent, origin_point) -> void:
 	# Create a few connector pieces
-	var num_connectors = randi() % 5 + 3
+	var num_connectors = rng.randi() % 5 + 3
 	
 	for i in range(num_connectors):
 		var connector = MeshInstance3D.new()
 		connector.name = "Connector_" + str(i)
 		
 		var connector_mesh
-		var type = randi() % 3
+		var type = rng.randi() % 3
 		
 		match type:
 			0:  # Thin box
 				connector_mesh = BoxMesh.new()
 				connector_mesh.size = Vector3(
-					randf_range(0.5, 1.0),
-					randf_range(0.5, 1.0),
-					randf_range(3.0, 6.0)
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(3.0, 6.0)
 				)
 			1:  # L-shaped (approximated with two boxes)
 				connector_mesh = BoxMesh.new()
 				connector_mesh.size = Vector3(
-					randf_range(0.5, 1.0),
-					randf_range(0.5, 1.0),
-					randf_range(2.0, 4.0)
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(2.0, 4.0)
 				)
 				
 				# Create a second part for the L
 				var part2 = MeshInstance3D.new()
 				var part2_mesh = BoxMesh.new()
 				part2_mesh.size = Vector3(
-					randf_range(0.5, 1.0),
-					randf_range(0.5, 1.0),
-					randf_range(2.0, 3.0)
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(2.0, 3.0)
 				)
 				
 				part2.mesh = part2_mesh
@@ -457,22 +452,22 @@ func create_connecting_structures(parent, origin_point) -> void:
 			2:  # Thin vertical column
 				connector_mesh = BoxMesh.new()
 				connector_mesh.size = Vector3(
-					randf_range(0.5, 1.0),
-					randf_range(3.0, 6.0),
-					randf_range(0.5, 1.0)
+					rng.randf_range(0.5, 1.0),
+					rng.randf_range(3.0, 6.0),
+					rng.randf_range(0.5, 1.0)
 				)
 		
 		connector.mesh = connector_mesh
 		
 		# Position somewhere in the structure
 		connector.position = origin_point + Vector3(
-			randf_range(-4, 4),
-			randf_range(0, 4),
-			randf_range(-4, 4)
+			rng.randf_range(-4, 4),
+			rng.randf_range(0, 4),
+			rng.randf_range(-4, 4)
 		)
 		
 		# Random rotation
-		connector.rotation_degrees.y = randf_range(0, 360)
+		connector.rotation_degrees.y = rng.randf_range(0, 360)
 		
 		# Use secondary material for contrast
 		connector.material_override = secondary_material
@@ -481,7 +476,7 @@ func create_connecting_structures(parent, origin_point) -> void:
 
 # Adds small detail blocks to the cluster
 func add_cluster_details(parent, origin_point) -> void:
-	var num_details = randi() % 10 + 5
+	var num_details = rng.randi() % 10 + 5
 	
 	for i in range(num_details):
 		var detail = MeshInstance3D.new()
@@ -489,37 +484,40 @@ func add_cluster_details(parent, origin_point) -> void:
 		
 		var detail_mesh = BoxMesh.new()
 		detail_mesh.size = Vector3(
-			randf_range(0.3, 0.8),
-			randf_range(0.3, 0.8),
-			randf_range(0.3, 0.8)
+			rng.randf_range(0.3, 0.8),
+			rng.randf_range(0.3, 0.8),
+			rng.randf_range(0.3, 0.8)
 		)
 		
 		detail.mesh = detail_mesh
 		
 		# Position details around the structure
 		detail.position = origin_point + Vector3(
-			randf_range(-5, 5),
-			randf_range(0, 6),
-			randf_range(-5, 5)
+			rng.randf_range(-5, 5),
+			rng.randf_range(0, 6),
+			rng.randf_range(-5, 5)
 		)
 		
 		# Random rotation
 		detail.rotation_degrees = Vector3(
-			randf_range(0, 30),
-			randf_range(0, 360),
-			randf_range(0, 30)
+			rng.randf_range(0, 30),
+			rng.randf_range(0, 360),
+			rng.randf_range(0, 30)
 		)
 		
 		# Choose material, with higher chance of secondary
-		detail.material_override = secondary_material if randf() > 0.3 else primary_material
+		detail.material_override = secondary_material if rng.randf() > 0.3 else primary_material
 		
 		parent.add_child(detail)
 
 # Can be called to rebuild the tree with new parameters
 func rebuild_tree() -> void:
-	# Remove existing tree
+	rng.seed = random_seed
 	for child in get_children():
-		child.queue_free()
+		if child.name == "TreeLesson" or child is CanvasLayer: continue
+		remove_child(child)
+		child.free()
+	_original_mats.clear()
 	
 	# Generate new tree
 	generate_tree()
@@ -606,6 +604,8 @@ func _growth_rings(boxes: Array, deepest: int) -> Array:
 ## -1: the trunk is what the recursion started from, not a generation of it.
 func _collect_boxes(node: Node, depth: int, xf: Transform3D, out: Array) -> void:
 	for child in node.get_children():
+		# The desk reads the sculpture; it is not part of the measured tree.
+		if String(child.name) == "TreeLesson": continue
 		var cd: int = depth
 		var nm: String = String(child.name)
 		if nm.begins_with("Branch_"):
@@ -653,7 +653,7 @@ func _paint_strata(boxes: Array, deepest: int) -> void:
 		var idx: int = clampi(int(b["depth"]) + 1, 0, bands.size() - 1)
 		var mi: MeshInstance3D = b["mi"]
 		# Remember what `form` looked like. Which boxes drew primary and which
-		# drew secondary was decided by a randf() at build time and cannot be
+		# drew secondary was decided by a rng.randf() at build time and cannot be
 		# re-derived, so switching back has to be a restore, not a rebuild.
 		if not _original_mats.has(mi.get_instance_id()):
 			_original_mats[mi.get_instance_id()] = mi.material_override
@@ -740,7 +740,7 @@ func _draw_wire(cages: Array, marks: Array) -> void:
 
 ## Puts the tree back to `form` — wire removed, materials restored — so the axis
 ## can be changed on a standing tree without regrowing it. rebuild_tree() would
-## reshuffle every randf() and hand the caller a different tree than the one it
+## reshuffle every rng.randf() and hand the caller a different tree than the one it
 ## asked to restyle, which is a change of subject, not a change of staging.
 func _restyle() -> void:
 	# begins_with, not ==: Godot renames a second child sharing a name, so the
@@ -757,6 +757,8 @@ func _restyle() -> void:
 	_apply_aftermath()
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("lesson", "false")).to_lower() == "true":
+		_install_lesson.call_deferred()
 	# Additive: a config without these keys leaves the artifact exactly as it was.
 	if config.has("aftermath"):
 		var key: String = str(config["aftermath"]).strip_edges().to_lower()
@@ -766,3 +768,14 @@ func apply_grid_config(config: Dictionary) -> void:
 				_restyle()
 	if config.has("random_seed"):
 		random_seed = int(config["random_seed"])
+
+func _install_lesson() -> void:
+	if has_node("TreeLesson"): return
+	# Standalone desktop overlay belongs to the original scene; the museum uses
+	# physical controls so its screen does not cover every neighbouring object.
+	for child in find_children("*", "CanvasLayer", true, false): child.hide()
+	for child in find_children("*", "Control", true, false): child.hide()
+	var fixture = load("res://commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd").new()
+	fixture.name = "TreeLesson"
+	fixture.kind = "blocks"
+	add_child(fixture)

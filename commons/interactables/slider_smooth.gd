@@ -1,8 +1,7 @@
 @tool
 extends Node3D
 
-# Dedicated script for Audio Control Sliders (Horizontal and Vertical)
-# Handles constraint enforcement to keep handles locked to track
+# Range and readout adapter. The joint constrains geometry; the held hand stays free.
 
 @export var slider_node: NodePath = NodePath("SliderOrigin/InteractableSlider")
 @export var label_node: NodePath = NodePath("Frame/Label3DValue")
@@ -23,81 +22,17 @@ signal slider_moved(value)
 @onready var _slider: Node = get_node_or_null(slider_node)
 @onready var _label: Label3D = get_node_or_null(label_node)
 var _last_display_text: String = ""
+var _surface_value: Label
+var _surface_viewport: SubViewport
 
-# Desktop pointer drag state
-var _pointer_dragging: bool = false
-var _pointer_drag_start_world: Vector3 = Vector3.ZERO
-var _pointer_drag_start_pos: float = 0.0
-
-# Track the handle for constraint enforcement
-var _handle: RigidBody3D = null
-var _handle_origin: Node3D = null
-var _is_snapping_back: bool = false
+var _interaction: Node3D
 
 func _ready() -> void:
+	if not Engine.is_editor_hint() and _slider is XRToolsInteractableSlider:
+		_interaction = preload("res://commons/interactables/scalar_pointer.gd").attach(self, _slider)
 	_connect_slider_signal()
 	_update_label(_current_slider_value())
 	
-	# Cache handle references
-	_handle = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle")
-	_handle_origin = get_node_or_null("SliderOrigin/InteractableSlider/HandleOrigin")
-
-func _process(delta: float) -> void:
-	if not _slider:
-		return
-	
-	var s_min = _slider.get("slider_limit_min")
-	var s_max = _slider.get("slider_limit_max")
-	if s_min == null: s_min = 0.0
-	if s_max == null: s_max = 0.14
-	
-	# Get slider axis (horizontal uses X, vertical uses Y)
-	var slider_axis_raw = _slider.get("slider_axis")
-	var slider_axis: Vector3 = slider_axis_raw if slider_axis_raw != null else Vector3(1, 0, 0)
-	
-	var is_vertical = slider_axis.y != 0.0
-	
-	# Clamp the slider's transform position directly
-	if is_vertical:
-		var slider_y = _slider.transform.origin.y
-		var clamped_y = clamp(slider_y, s_min, s_max)
-		if slider_y != clamped_y:
-			_slider.transform.origin.y = clamped_y
-			_slider.slider_position = clamped_y
-	else:
-		var slider_x = _slider.transform.origin.x
-		var clamped_x = clamp(slider_x, s_min, s_max)
-		if slider_x != clamped_x:
-			_slider.transform.origin.x = clamped_x
-			_slider.slider_position = clamped_x
-	
-	# Enforce handle constraints to keep it locked to track
-	_enforce_handle_constraints(delta, is_vertical)
-
-func _enforce_handle_constraints(_delta: float, _is_vertical: bool) -> void:
-	if not _handle or not _handle_origin:
-		return
-
-	var s_min = _slider.get("slider_limit_min") if _slider else 0.0
-	var s_max = _slider.get("slider_limit_max") if _slider else 0.14
-	if s_min == null: s_min = 0.0
-	if s_max == null: s_max = 0.14
-
-	# Handle always moves along X in slider-local space (SliderOrigin rotation
-	# converts this to Y in world space for vertical sliders).
-	# The handle's local x is an OFFSET from the slider's current position, so
-	# its legal range is [s_min - pos, s_max - pos] — clamping to [s_min, s_max]
-	# (always ≥ 0) made dragging toward smaller values impossible (one-way bug).
-	var cur_pos: float = 0.0
-	var cur_raw = _slider.get("slider_position")
-	if cur_raw is float or cur_raw is int:        # scalar sliders only; 2D slider_plane (Vector2) drives its own constraints
-		cur_pos = float(cur_raw)
-	var handle_local_pos = _handle.transform.origin
-	var clamped_x = clamp(handle_local_pos.x, s_min - cur_pos, s_max - cur_pos)
-	_handle.transform.origin = Vector3(clamped_x, 0.0, 0.0)
-
-	# Lock rotation
-	_handle.transform.basis = Basis.IDENTITY
 
 func _connect_slider_signal() -> void:
 	if not _slider:
@@ -131,9 +66,9 @@ func set_normalized_value(val: float):
 	var s_max = _slider.get("slider_limit_max")
 	if s_min == null: s_min = 0.0
 	if s_max == null: s_max = 1.0
-	var pos = remap(val, 0.0, 1.0, s_min, s_max)
+	var pos = remap(clampf(val, 0.0, 1.0), 0.0, 1.0, s_min, s_max)
 	_slider.set("slider_position", pos)
-	_update_label(pos)
+	_update_label(_current_slider_value())
 
 func _current_slider_value():
 	if not _slider:
@@ -158,7 +93,7 @@ func _update_label(value) -> void:
 		var s_max = _slider.get("slider_limit_max")
 		if s_min == null: s_min = 0.0
 		if s_max == null: s_max = 1.0
-		norm = remap(scalar_value, s_min, s_max, 0.0, 1.0)
+		norm = 0.0 if is_equal_approx(s_min, s_max) else remap(scalar_value, s_min, s_max, 0.0, 1.0)
 
 	# Map to logical range
 	var logical_value = lerp(range_min, range_max, norm)
@@ -168,6 +103,27 @@ func _update_label(value) -> void:
 		return
 	_last_display_text = text
 	_label.text = text
+	if is_instance_valid(_surface_value):
+		_surface_value.text = text
+		_surface_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+## Optional live 2D value screen seated on the horizontal panel fader. The
+## original label remains an internal compatibility sink but is never drawn.
+## Rendering happens only when the formatted value changes.
+func use_panel_value_surface() -> void:
+	if is_instance_valid(_surface_value): return
+	if not _ensure_label(): return
+	_label.hide()
+	# The handle is 35 mm tall. Keep the value window above its swept area,
+	# including at the left endpoint, with a backing that covers the whole screen.
+	var frame_mesh := get_node("Frame/PanelMesh") as MeshInstance3D
+	frame_mesh.mesh = frame_mesh.mesh.duplicate()
+	frame_mesh.mesh.size.x = 0.106
+	var display := preload("res://commons/ui/control_value_surface.gd").build(
+		get_node("Frame"), Vector2(0.078, 0.026), Vector3(-0.035, -0.061, 0.0085), 90.0)
+	_surface_viewport = display.viewport
+	_surface_value = display.label
+	_surface_value.text = _last_display_text
 
 func set_param_name(text: String):
 	var name_label = get_node_or_null("Frame/LabelName")
@@ -204,29 +160,5 @@ func _format_vector_value(value: Vector2) -> String:
 	return "Y: %s Z: %s" % [y_text, z_text]
 
 
-# ── Desktop pointer interaction ──────────────────────────────────────────────
-
 func pointer_event(event: XRToolsPointerEvent) -> void:
-	if not _slider:
-		return
-	match event.event_type:
-		XRToolsPointerEvent.Type.PRESSED:
-			_pointer_dragging = true
-			_pointer_drag_start_world = event.position
-			_pointer_drag_start_pos = _slider.slider_position
-		XRToolsPointerEvent.Type.MOVED:
-			if _pointer_dragging:
-				_handle_pointer_drag(event)
-		XRToolsPointerEvent.Type.RELEASED, XRToolsPointerEvent.Type.EXITED:
-			_pointer_dragging = false
-
-
-func _handle_pointer_drag(event: XRToolsPointerEvent) -> void:
-	var slider_origin := get_node_or_null("SliderOrigin") as Node3D
-	if not slider_origin or not _slider:
-		return
-	# SliderOrigin's local X axis is the slider's movement direction in world space
-	var slider_axis_world := slider_origin.global_transform.basis.x.normalized()
-	var delta_world := event.position - _pointer_drag_start_world
-	var projected_offset := delta_world.dot(slider_axis_world)
-	_slider.move_slider(_pointer_drag_start_pos + projected_offset)
+	if is_instance_valid(_interaction): _interaction.pointer_event(event)

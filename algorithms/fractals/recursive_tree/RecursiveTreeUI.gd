@@ -1,6 +1,6 @@
 ﻿extends Control
 
-@onready var tree_node = $"../../RecursiveTree"
+@onready var tree_node = get_parent().get_parent()
 @onready var branch_slider = $Panel/VBoxContainer/BranchSlider
 @onready var sub_branch_slider = $Panel/VBoxContainer/SubBranchSlider
 @onready var seed_spin = $Panel/VBoxContainer/SeedSpinBox

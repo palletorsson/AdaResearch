@@ -4,6 +4,9 @@ signal pressed
 
 @export var pressed_color: Color = Color(0.2, 0.8, 1.0, 1.0)
 @export var released_color: Color = Color(1.0, 0.0, 0.0, 1.0)
+## Optional latched choice feedback. The owner decides selection; pressing a
+## momentary button does not automatically toggle it or change its signals.
+@export var selected_color: Color = Color(0.25, 0.95, 1.0, 1.0)
 @export var pressed_emission_energy: float = 1.1
 @export var released_emission_energy: float = 0.35
 @export_group("Press Sound")
@@ -19,6 +22,7 @@ signal pressed
 var _button_material: StandardMaterial3D
 var _press_audio_player: AudioStreamPlayer3D
 var _is_pressed_visual := false
+var _selected := false
 
 var _colors_initialized: bool = false
 
@@ -33,8 +37,9 @@ func _ready() -> void:
 		await tree_entered
 	await get_tree().process_frame
 	if not _colors_initialized:
-		_sync_color_to_state()
-		_colors_initialized = true
+		# Even an unpressed cap needs its configured colour on first draw.
+		# The ordinary state-difference guard would otherwise skip that update.
+		update_colors()
 
 func _process(_delta: float) -> void:
 	if _colors_initialized:
@@ -55,7 +60,16 @@ func _set_visual_state(pressed: bool, force: bool = false) -> void:
 	if not force and _is_pressed_visual == pressed:
 		return
 	_is_pressed_visual = pressed
-	_apply_color(pressed_color if pressed else released_color, pressed)
+	_apply_color(pressed_color if pressed else (selected_color if _selected else released_color), pressed)
+
+## Show an owner-selected choice, including after the hand releases the cap.
+func set_selected(value: bool) -> void:
+	if _selected == value: return
+	_selected = value
+	if is_node_ready(): update_colors()
+
+func is_selected() -> bool:
+	return _selected
 
 func update_colors():
 	"""Call this after changing pressed_color or released_color externally"""

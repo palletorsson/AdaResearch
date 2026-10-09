@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "id": "trace-ball-ramp",
+      "static": "test_trace_ball_ramp.TraceBallRampContracts",
+      "scene": "tests/museum/trace_ball_ramp_check.tscn",
+      "minimum_checks": 34,
+      "manual": ["Release successive balls with real VR controllers; confirm the replacement is easy to reach on the stand.", "Check the accumulating balls and traces in the full hall, including performance during a long session."]
+    },
+    {
+      "id": "point-one",
+      "static": "test_contracts.PointOneContracts",
+      "scene": "ada_run/shared_point_check.tscn",
+      "minimum_checks": 19,
+      "manual": ["Walk through the widened partition in the full museum.", "Check that the held point, frame and paired WORLD/LOCAL cards can be seen and read together.", "Verify pickup and release using real VR controllers."]
+    },
+    {
+      "id": "point-lines",
+      "static": "test_contracts.PointLinesContracts",
+      "scene": "ada_run/point_lines_basin_trace_check.tscn",
+      "minimum_checks": 18,
+      "manual": ["Verify the basin glass has continuous collision support in the full hall.", "Check the black marking's actual height and legibility against the basin.", "Walk between halls and check trace visibility and lifetime.", "Check comfort and legibility in a headset."]
+    },
+    {
+      "id": "snap-point-release",
+      "static": "test_contracts.PointLinesContracts",
+      "scene": "tests/museum/snap_release_check.tscn",
+      "minimum_checks": 26,
+      "manual": ["With real desktop and VR controls, release a line-demo point after entering and leaving its snap range.", "Verify a successful connection still triggers the Point Lines barrier encounter.", "Check pickup, release feedback and puzzle isolation in the full museum."]
+    },
+    {
+      "id": "triangle-shift-start",
+      "static": "test_contracts.TriangleContracts",
+      "scene": "tests/museum/triangle_shift_check.tscn",
+      "minimum_checks": 60,
+      "manual": ["Draw and close the L with real controllers, release the pen and compare adjacent starts.", "Check all three controls are reachable and START/DRAW START are legible in the authored museum placement.", "Confirm an unassisted learner can distinguish unchanged boundary, changed fill and unchanged triangle count."]
+    }
+  ]
+}

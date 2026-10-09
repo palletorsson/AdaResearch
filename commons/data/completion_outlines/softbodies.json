@@ -1,0 +1,148 @@
+{
+  "_meta": {
+    "sequence": "softbodies",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "SoftBodies_Obsticals_Part2": {
+      "inherited": "From SoftBodies_Obsticals: Next: softness meets a different surface.",
+      "question": "Does softness belong only to the falling body?",
+      "ontology": "A deformation encounter depends on body shape,material parameters,contact geometry and the conditions of release.",
+      "experiment": "Compare the labelled Bouncy Collider and Slippery Collider stations,then a torus or corner-strike specimen. Look for what the setup changes before explaining the resulting pose.",
+      "observe": "Different contact arrangements produce different motions and settled shapes; labels identify the intended comparison.",
+      "limit": "This is not a controlled single-variable series: some neighbours change several properties. A label describes configuration,not a measured result.",
+      "variation": "Proposed extension: Select two stations with the same body and release,changing only collider friction,then preserve their starting pose as a reference.",
+      "handoff": "A useful extension would pair identical bodies with the same release and vary only collider friction. Preserve a small witness of the starting pose so visitors can check the comparison. The next room asks about another condition that changes the result: the moment at which an experiment is stopped, and what stopping actually does.",
+      "candidate_artifacts": [
+        "softbody_gallery_part2"
+      ],
+      "sources": [
+        "commons/maps/SoftBodies_Obsticals_Part2/final.md",
+        "commons/maps/SoftBodies_Obsticals_Part2/map_data.json",
+        "algorithms/softbodies/softbody_gallery_part2.tscn",
+        "algorithms/softbodies/softbody_test_gallery.gd",
+        "commons/maps/SoftBodies_Obsticals_Part2/intent.md",
+        "commons/maps/SoftBodies_Obsticals_Part2/blurb.md",
+        "commons/maps/SoftBodies_Obsticals_Part2/critical.md",
+        "commons/maps/SoftBodies_Obsticals_Part2/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Observe existing specimens; do not require unsupported grab controls. Label tracking uses physics vertex0 rather than centre.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SoftBodies_Cloth_Physics": {
+      "inherited": "From SoftBodies_Obsticals_Part2: A useful extension would pair identical bodies with the same release and vary only collider friction. Preserve a small witness of the starting pose so visitors can check the comparison. The next room asks about another condition that changes the result: the moment at which an experiment is stopped, and what stopping actually does.",
+      "question": "If a body stops changing, has it reached equilibrium or has somebody stopped the experiment?",
+      "ontology": "A simulation state and the decision to halt or heavily damp its updates are distinct.",
+      "experiment": "Compare the four soft bodies and their remaining motion; look for differences between forms arrested at different times.",
+      "observe": "Four bodies are released in a2×2 arrangement and receive stopping interventions on separate timers.",
+      "limit": "This is not a pinned cloth sheet,despite the room title. Heavy damping and changed stiffness do not constitute an exact snapshot or evidence of natural rest.",
+      "variation": "Proposed extension: Restore a real pinned cloth comparison here,or add a clock and start-pose witness to distinguish stopping a simulation from material relaxation.",
+      "handoff": "For now, keep your explanation close to the four bodies you can inspect. The next room adds diagnostic colours and controls, asking how a measurement can help you distinguish changes that a silhouette alone leaves ambiguous.",
+      "candidate_artifacts": [
+        "softstopscene"
+      ],
+      "sources": [
+        "commons/maps/SoftBodies_Cloth_Physics/final.md",
+        "commons/maps/SoftBodies_Cloth_Physics/map_data.json",
+        "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn",
+        "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd",
+        "commons/maps/SoftBodies_Cloth_Physics/intent.md",
+        "commons/maps/SoftBodies_Cloth_Physics/blurb.md",
+        "commons/maps/SoftBodies_Cloth_Physics/critical.md",
+        "commons/maps/SoftBodies_Cloth_Physics/technical.md"
+      ],
+      "open_questions": [
+        "The room contains timed soft-body stopping rather than pinned cloth. Inspect history for the intended sheet, then restore it or build a sheet with visible supports and a controlled release.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Intended cloth lesson remains core_gap. No cloth present and no verified VR stop controls; do not promote mismatch as a proof about cloth.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "SoftBodies_Playground_of_Joy": {
+      "inherited": "From SoftBodies_Cloth_Physics: For now, keep your explanation close to the four bodies you can inspect. The next room adds diagnostic colours and controls, asking how a measurement can help you distinguish changes that a silhouette alone leaves ambiguous.",
+      "question": "When the shape yields, what does its colour tell you?",
+      "ontology": "A measurement overlay expresses a chosen quantity about deformation; the same body can support several readings.",
+      "experiment": "Compare the resting outline with the changing heatmap; use MODE to compare strain,collision andvolume readings,then vary STIFFNESS while leaving other controls alone.",
+      "observe": "The specimen deforms while overlays and labels emphasise different aspects of its state.",
+      "limit": "Colour is a selected diagnostic,not pain or permanent damage. Changing stiffness also changes the numerical scale used in the energy-like display,so redness is not a fair cross-setting absolute measure.",
+      "variation": "Proposed extension: Keep a common colour scale across stiffness settings,or let the visitor choose a new observation such as recovery time.",
+      "handoff": "The following room turns towards the language of being affected. Carry this precision with you: the measured displacement is available to inspect, while the meaning assigned to it needs its own argument.",
+      "candidate_artifacts": [
+        "rounded_softbody_test"
+      ],
+      "sources": [
+        "commons/maps/SoftBodies_Playground_of_Joy/final.md",
+        "commons/maps/SoftBodies_Playground_of_Joy/map_data.json",
+        "algorithms/softbodies/rounded_softbody_test.tscn",
+        "algorithms/softbodies/rounded_softbody_test.gd",
+        "algorithms/softbodies/rounded_softbody.gd",
+        "commons/maps/SoftBodies_Playground_of_Joy/intent.md",
+        "commons/maps/SoftBodies_Playground_of_Joy/blurb.md",
+        "commons/maps/SoftBodies_Playground_of_Joy/critical.md",
+        "commons/maps/SoftBodies_Playground_of_Joy/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Controller squeeze routing andmuseum controls unverified; avoid instructing hand force as guaranteed. Old scene overrides on harness child are inert.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ProceduralGeneration_Reaction_Diffusion_Systems": {
+      "inherited": "From SoftBodies_Affect_Theory_Visualization: Next: pattern that needs no blueprint at all.",
+      "question": "Can a pattern form without anybody drawing its outline?",
+      "ontology": "A reaction-diffusion system stores concentrations,local reactions and spatial exchange; a visible image reads one field.",
+      "experiment": "Select a preset,watch patches develop,then move FEED slightly while keeping KILL fixed. Use RESET to begin a new run.",
+      "observe": "Spots,stripes or connected regions change as the concentration field evolves; the image need not follow the hand directly.",
+      "limit": "Preset names describe a tendency,not a guaranteed biological form. Reset seeding and elapsed evolution also affect the picture.",
+      "variation": "Proposed extension: Keep a seed and initial field fixed across paired feed settings; let one visitor disturb a region and another decide what counts as the same pattern.",
+      "handoff": "Next, a field will become a surface with openings. Keep the distinction between the values being calculated and the visible form chosen to represent them.",
+      "candidate_artifacts": [
+        "turing_pattern_generator"
+      ],
+      "sources": [
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/map_data.json",
+        "commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn",
+        "commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/intent.md",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/blurb.md",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/critical.md",
+        "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Topology_Entropy_Morphogenesis": {
+      "inherited": "From ProceduralGeneration_Reaction_Diffusion_Systems: Next, a field will become a surface with openings. Keep the distinction between the values being calculated and the visible form chosen to represent them.",
+      "question": "Which openings connect inside a surface that seems to fold through itself?",
+      "ontology": "An implicit surface is selected from a scalar field by a threshold; its geometry can change when field parameters change.",
+      "experiment": "Follow an opening with your eye,then move to another viewpoint to test whether two apparent passages connect.",
+      "observe": "The current specimen is a gyroid-like porous structure with noise perturbation.",
+      "limit": "S is an authored morphing control,not measured thermodynamic entropy. One frozen specimen cannot show the effect of changing three coupled parameters.",
+      "variation": "Proposed extension: Compare fixed-seed specimens varying only threshold,then onlyfrequency,before offering a combined morphing axis.",
+      "handoff": "The next sequence begins with that separation. A scalar field supplies values, a chosen level supplies a question, and an extraction procedure supplies the surface you can see. Your first task will be to locate the boundary before learning how its small pieces are made.",
+      "candidate_artifacts": [
+        "entropy_morphogenesis"
+      ],
+      "sources": [
+        "commons/maps/Topology_Entropy_Morphogenesis/final.md",
+        "commons/maps/Topology_Entropy_Morphogenesis/map_data.json",
+        "algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
+        "algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd",
+        "algorithms/spacetopology/gyroid_cheese/GyroidFieldGenerator.gd",
+        "commons/maps/Topology_Entropy_Morphogenesis/intent.md",
+        "commons/maps/Topology_Entropy_Morphogenesis/blurb.md",
+        "commons/maps/Topology_Entropy_Morphogenesis/critical.md",
+        "commons/maps/Topology_Entropy_Morphogenesis/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitorS slider; static source-supported encounter prepares isosurfaces without presenting entropy metaphor as physics.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

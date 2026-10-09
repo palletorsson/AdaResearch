@@ -17,6 +17,13 @@ signal connection_changed(output_jack: SynthJack, input_jack: SynthJack)
 var plug_a: SynthCablePlug
 var plug_b: SynthCablePlug
 var cable_mesh: MeshInstance3D
+var flow := 0.0
+var pulse_phase := 0.0
+var pulse: MeshInstance3D
+var path := PackedVector3Array()
+var last_start := Vector3.INF
+var last_end := Vector3.INF
+var mesh_rebuilds := 0
 var curve: Curve3D
 
 # Connection state
@@ -31,8 +38,16 @@ func _ready():
 	_update_cable()
 
 
-func _process(_delta):
+func _process(delta):
 	_update_cable()
+	pulse.visible = flow > 0.001 and is_fully_connected() and path.size() > 1
+	if pulse.visible:
+		pulse_phase = fposmod(pulse_phase + delta * 0.65,1.0)
+		var t := pulse_phase if connected_jack_a.is_output() else 1.0-pulse_phase
+		var offset := t * (path.size()-1)
+		var index := mini(int(offset),path.size()-2)
+		pulse.position = path[index].lerp(path[index+1],offset-index)
+
 
 
 func _create_plugs():
@@ -72,6 +87,12 @@ func _create_cable_mesh():
 	mat.emission = cable_color
 	mat.emission_energy_multiplier = 0.1
 	cable_mesh.material_override = mat
+	pulse = MeshInstance3D.new()
+	var bead := SphereMesh.new(); bead.radius = 0.014; bead.height = 0.028; bead.radial_segments = 8; bead.rings = 4
+	pulse.mesh = bead
+	var light := StandardMaterial3D.new(); light.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	light.albedo_color = Color("fff5ce"); pulse.material_override = light
+	add_child(pulse); pulse.hide()
 
 
 func _update_cable():
@@ -85,70 +106,22 @@ func _update_cable():
 	start_pos = to_local(start_pos)
 	end_pos = to_local(end_pos)
 	
-	# Generate cable mesh
+	if start_pos.is_equal_approx(last_start) and end_pos.is_equal_approx(last_end): return
+	last_start = start_pos; last_end = end_pos
 	_generate_cable_mesh(start_pos, end_pos)
 
 
 func _generate_cable_mesh(start: Vector3, end: Vector3):
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
-	# Generate curve points with catenary sag
-	var positions: Array[Vector3] = []
-	var distance = start.distance_to(end)
-	var sag = gravity_sag * distance
-	
-	for i in range(curve_segments + 1):
-		var t = float(i) / float(curve_segments)
-		var pos = start.lerp(end, t)
-		
-		# Add catenary sag
-		var sag_amount = sin(t * PI) * sag
-		pos.y -= sag_amount
-		
-		# Slight sideways variation for organic look
-		pos.x += sin(t * PI * 2.0) * 0.002
-		pos.z += cos(t * PI * 3.0) * 0.002
-		
-		positions.append(pos)
-	
-	# Build tube mesh
-	for i in range(positions.size() - 1):
-		var p1 = positions[i]
-		var p2 = positions[i + 1]
-		var segment_dir = (p2 - p1).normalized()
-		
-		if segment_dir.length_squared() < 0.0001:
-			continue
-		
-		# Find perpendicular vectors
-		var up = Vector3.UP
-		if abs(segment_dir.dot(up)) > 0.9:
-			up = Vector3.RIGHT
-		var right = segment_dir.cross(up).normalized()
-		var forward = right.cross(segment_dir).normalized()
-		
-		# Create tube segment
-		for side in range(tube_sides):
-			var angle1 = (float(side) / tube_sides) * TAU
-			var angle2 = (float(side + 1) / tube_sides) * TAU
-			
-			var offset1 = (right * cos(angle1) + forward * sin(angle1)) * cable_thickness
-			var offset2 = (right * cos(angle2) + forward * sin(angle2)) * cable_thickness
-			
-			# Triangle 1
-			st.add_vertex(p1 + offset1)
-			st.add_vertex(p2 + offset1)
-			st.add_vertex(p2 + offset2)
-			
-			# Triangle 2
-			st.add_vertex(p1 + offset1)
-			st.add_vertex(p2 + offset2)
-			st.add_vertex(p1 + offset2)
-	
-	st.generate_normals()
-	cable_mesh.mesh = st.commit()
-
+	path.clear()
+	for i in range(curve_segments+1):
+		var t := float(i)/curve_segments
+		var point := start.lerp(end,t)
+		point.y -= sin(t*PI)*maxf(0.05,gravity_sag*start.distance_to(end))
+		point.z += sin(t*PI)*0.045
+		path.append(point)
+	var result := preload("res://commons/primitives/pipes/swept_tube.gd").build(path,cable_thickness,tube_sides)
+	if not result.is_empty(): cable_mesh.mesh = result.mesh
+	mesh_rebuilds += 1
 
 func _on_plug_a_snapped(jack: SynthJack):
 	connected_jack_a = jack

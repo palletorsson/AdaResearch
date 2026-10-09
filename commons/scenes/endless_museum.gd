@@ -117,6 +117,10 @@ func _validate_property(property: Dictionary) -> void:
 #   Proof: ... -- --em-shot=user://em_proof.png --em-segments=3 (build, shoot, quit)
 #          --em-shot-at=<z> moves the shot camera (negative z stands before the
 #          first threshold and tilts up at its banner)
+#          --em-shot-view=top|iso|fpv frames the hall FROM the hall: top and iso
+#          are true orthographic (a plan through a frustum has its far walls
+#          leaning in), fpv is a visitor's eye. No height is ever passed; a
+#          sidecar .json lands beside the .png naming the camera that took it.
 #   Walkthrough gate: ... -- --em-autopilot=3  (BFS-plan over the stamped cells,
 #          execute with move_and_slide, verdict + heartbeat in
 #          ada_run/em_autopilot.json; exit 1 on stall — plan/physics disagreement)
@@ -298,6 +302,25 @@ var _shot_x_set: bool = false
 ## show a footprint, which means standing above it and looking down.
 var _shot_pitch: float = -0.25
 var _shot_y: float = 0.0
+## --em-shot-view=top|iso|fpv: THE THREE VERIFICATION VIEWS (2026-09-19, Palle:
+## "can you optimize for you to take screen shot to verify, top down, iso,
+## fpv?"). Until now a plan view meant hand-picking --em-shot-y per hall against
+## a 70-degree lens that covers 0.93 * height across — a different number for
+## every hall, and a wrong one is a cropped or an empty frame. These three take
+## their framing from the hall the museum JUST BUILT, so no caller passes a
+## height again. Unset, every flag above behaves exactly as it did.
+var _shot_view: String = ""
+## What the shot camera was actually aimed at, for the sidecar. NAN until a
+## branch names a target; then the sidecar reports the aim rather than a guess.
+var _shot_look_at: Vector3 = Vector3(NAN, NAN, NAN)
+## The hall box the camera was FRAMED from, and the frame this run asked the
+## window for. Both are kept so the sidecar can convict itself: a body that
+## finished building after the framing makes the box at capture taller than the
+## box the lens was fitted to, and a window that refused to resize makes the PNG
+## a different shape from the one the fit assumed. Neither fault is visible in
+## the picture, and both make the framing a lie about what is in the frame.
+var _shot_box_framed: Dictionary = {}
+var _shot_frame_asked: Vector2i = Vector2i.ZERO
 var _test_collision: bool = false
 var _test_frames: int = 0
 # autopilot: walk through N museums end-to-end under real physics. The plan
@@ -1237,6 +1260,34 @@ var _costume_on: bool = true
 # Neither touches a map or a plan; both are for a proof shot.
 var _no_sim: bool = false
 var _wall_h_run: float = -1.0
+# THE ISO CUTAWAY (2026-09-19, Palle: "can you fix the iso view so it's
+# useful?"). It is not a bad angle and no corner fixes it: a 35.264-degree ray
+# clears a wall of h metres 1.41 x h metres past its foot, so an axonometric of
+# a hall of full-height partitions photographs its roofs. Hiding only the
+# camera-facing walls was measured and does NOT work either — 15% -> 26% visible
+# floor, at the cost of 632 of 758 wall cells — because this hall is interior
+# partitions, not one room with four sides. So --em-shot-view=iso cuts the walls
+# to a stub through the --em-wall-h lever that already exists, the wall works
+# stay at their true height above them (the point of the view is where every
+# work hangs and every body stands, all at once), and the sidecar SAYS the wall
+# heights in that frame are not the museum's.
+#
+# WHAT THE CUT ACTUALLY BUYS, measured on primitives|point one rather than
+# predicted: bodies held 26 of 65 -> 60 of 65, floor cells visible at head
+# height 45 of 394 -> 367 of 394 (93%), floor cells visible AT THE FLOOR
+# 45 -> 234 (59%).
+#
+# AND THE 0.9 IS NOT A CLIFF — that was an inherited claim and it is wrong. A
+# run at 0.6 m was shot for comparison and returned the same 234 floor cells to
+# the byte, because the binding obstruction is not a distant wall but the cell's
+# own DIAGONAL NEIGHBOUR: the ray is only 0.1 + 0.707 * 0.707 = 0.6 m up when it
+# crosses that corner, so a 0.6 m stub grazes exactly where a 0.9 m one blocks,
+# and both hide the strip of floor hugging every wall. The engine's own blocker
+# table says so — 106 of the 160 hidden cells are stopped at the stub's top.
+# A cut of 0.5 m or lower would show that strip and stop reading as a wall; 0.9
+# is chosen because at head height, where the bodies are, it already shows 93%.
+const ISO_CUT_M := 0.9
+var _wall_cut_for_shot: float = -1.0
 var _wardrobe: Node = null
 var _costume_hall: String = ""
 var _yaw: float = 0.0
@@ -1770,6 +1821,11 @@ func _parse_args() -> void:
 		elif a.begins_with("--em-shot-x="):
 			_shot_x = float(a.substr(12))
 			_shot_x_set = true
+		elif a.begins_with("--em-shot-view="):
+			# NOT _shot_yaw_set: this flag composes its own aim from the hall, and
+			# setting the hand flag would hand the frame to the by-hand branch,
+			# which stands at a caller-supplied height — the thing this replaces.
+			_shot_view = a.substr(15).strip_edges().to_lower()
 		elif a.begins_with("--em-shot-at="):
 			_shot_z = float(a.substr(13))
 			_shot_z_set = true
@@ -1833,6 +1889,16 @@ func _parse_args() -> void:
 			_white_cube = true
 		elif a == "--em-wall-runs":
 			_wall_runs = true
+	# AFTER THE LOOP, BECAUSE THE FLAGS ARRIVE IN ANY ORDER. --em-shot-view=iso
+	# is a CUTAWAY (see ISO_CUT_M): it lowers the tile's own walls to a stub so
+	# the axonometric can see the floor it is supposed to survey. A hand-given
+	# --em-wall-h outranks it, whichever side of the command line it was written
+	# on, and nothing happens at all unless a shot is actually being taken —
+	# this must never change what a walked museum is.
+	if _shot_view == "iso" and _shot_path != "" and _wall_h_run < 0.0:
+		_wall_h_run = ISO_CUT_M
+		_wall_cut_for_shot = ISO_CUT_M
+		print("[em-shot] view=iso is a CUTAWAY: every wall this hall draws is built %.2f m high for this frame instead of %.2f m, and the wall works stay at their true height above them. The sidecar says so." % [ISO_CUT_M, WALL_H])
 
 ## ── MODULE LOADING ───────────────────────────────────────────────────────────
 ## Six render modules, six independent failure domains. Anything that does not
@@ -2356,8 +2422,11 @@ func _build_surfaces() -> void:
 	# bounce surface. It is resolved once and used by every hall; templates still
 	# vary room form and curatorial density without repainting the institution.
 	_surf["wall_white"] = _mat_of("gallery_white", [])
-	_surf["podium"] = _mat_of("podium_marble", [])
-	_surf["plinth"] = _mat_of("trim_oak", [])
+	var museum_support := StandardMaterial3D.new()
+	museum_support.albedo_color = Color(0.88, 0.865, 0.82)
+	museum_support.roughness = 0.88
+	_surf["podium"] = museum_support
+	_surf["plinth"] = museum_support
 	_surf["ceiling"] = _mat_of("ceiling_plaster", [])
 	# MoMA-like restraint: cornices, door linings, arris beads, and corner caps
 	# are painted architecture, not a second decorative material. Travertine's
@@ -4380,6 +4449,27 @@ func _add_col(body: StaticBody3D, pos: Vector3, size: Vector3) -> void:
 ## is only recorded, and _stamp_wall_runs emits one box per straight run.
 func _wall_at(seg: Node3D, solid: StaticBody3D, cells: Dictionary, x: int, z: int,
 		col: Color, mat: Material, runs_on: bool, h: float = -1.0) -> void:
+	# An opted-in wall owns both its visible stones and collision. Skip the
+	# normal inner wall AND outer skin, before either can join a merged batch.
+	if (seg.get_meta("em_weathering_cells", {}) as Dictionary).has(Vector2i(x,z)):
+		return
+	if (seg.get_meta("em_turning_wall_cells", {}) as Dictionary).has(Vector2i(x,z)):
+		return
+	# THE ISO CUTAWAY CUTS EVERY WALL THIS FUNCTION DRAWS (2026-09-19). Cutting
+	# the tile's own partitions was measured first and was not enough: with every
+	# partition down, 177 of point one's 394 floor cells were still behind
+	# something, because the outer SKIN is 4.5 m of wall standing between the
+	# camera and the near half of the room and a 35.26-degree ray needs 6.4 m of
+	# floor to clear it. This function is the single author of every wall box a
+	# hall builds — tile, skin, corner returns, vestibule, annex, side rooms — so
+	# the cut belongs here rather than at one of its eleven call sites. It is
+	# shot-only: _wall_cut_for_shot is set for --em-shot-view=iso with a shot
+	# path and for nothing else, and the sidecar says the walls were cut.
+	if _wall_cut_for_shot > 0.0:
+		var ch: float = _wall_cut_for_shot
+		_box(seg, Vector3(x + 0.5, ch / 2.0, z + 0.5), Vector3(1, ch, 1), col, mat)
+		_add_col(solid, Vector3(x + 0.5, ch / 2.0, z + 0.5), Vector3(1, ch, 1))
+		return
 	if runs_on:
 		cells[Vector2i(x, z)] = true
 		return
@@ -8006,6 +8096,9 @@ func _build_segment() -> void:
 			# or sink its void
 			var mm: Dictionary = derived.get("museum", {}) if derived.get("museum") is Dictionary else {}
 			peek["open_roof"] = bool(mm.get("open_roof", peek.get("open_roof", false)))
+			peek["weathering_wall"] = mm.get("weathering_wall", {})
+			peek["turning_wall"] = mm.get("turning_wall", {})
+			peek["simplex_corners"] = mm.get("simplex_corners", [])
 			if mm.has("gate"):
 				peek["gate"] = bool(mm["gate"])
 			if mm.has("gate_depth_rows"):
@@ -8265,11 +8358,19 @@ func _build_segment() -> void:
 	seg.set_meta("em_props_deny", peek.get("props_deny", []))
 	seg.set_meta("em_pearl", cur_pearl)
 	seg.set_meta("em_chapter", next_seq)
+	# Transformation studies form and movement in grayscale. Scope the display
+	# to this streamed hall, so shared artifacts keep their colour elsewhere.
+	if next_seq == "transformation":
+		var grayscale := preload("res://commons/rendering/museum_grayscale.gd").new()
+		grayscale.name = "TransformationGrayscale"
+		seg.add_child(grayscale)
 	seg.set_meta("em_map", String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else "")
 	if peek.has("simulation_stage"):
 		seg.set_meta("em_simulation_stage", peek["simulation_stage"])
 	seg.set_meta("em_passage_start", passage_start)
 	seg.set_meta("em_passage_decl", passage_decl)
+	_install_weathering_wall(seg, peek.get("weathering_wall", {}), tile)
+	_prepare_turning_wall(seg, peek, tile)
 	# one static body per segment carries every collision box — walls, podiums,
 	# hero plinths — so the whole museum frees with its segment node
 	var solid := StaticBody3D.new()
@@ -9037,6 +9138,16 @@ func _build_segment() -> void:
 	# threshold slots, where _seal_cells silently refuses them and spends the
 	# cell anyway. That was the whole of Chichu 3 -> 2, and it is why the
 	# Uffizi hero ended up holding a guest.
+	# Authored, solid corner cuts; the map owns their placement and reach.
+	var corners: Array = peek.get("simplex_corners", []) if peek.get("simplex_corners") is Array else []
+	if not corners.is_empty():
+		var corner_builder = load("res://commons/scenes/em/em_simplex_corners.gd")
+		var corner_cells: Array = corner_builder.install(seg, corners, tile, m_corner, WALL_H, VESTIBULE_H)
+		for cell: Vector2i in corner_cells:
+			var world_cell := Vector2i(cell.x, cell.y + zbase + VESTIBULE_H)
+			_walk_cells.erase(world_cell)
+			_walk_erased[world_cell] = "architecture:simplex_corner"
+		slots = slots.filter(func(slot): return not corner_cells.has(Vector2i(int(slot["x"]), int(slot["y"]) - VESTIBULE_H)))
 	slots.sort_custom(func(a, b):
 		if int(a["y"]) != int(b["y"]):
 			return int(a["y"]) < int(b["y"])
@@ -9173,6 +9284,8 @@ func _build_segment() -> void:
 	# in it; in a SIMULATION hall it stops a metre lower still, under the
 	# grid's own cubes (tops flush with the deck, bottoms at -1.0) — a hall
 	# filled to the brim would swallow the simulation it exists to show
+	if peek.get("basin") is Dictionary and peek.basin.get("ramps") is Array:
+		load("res://commons/scenes/em/basin_access.gd").build(seg, peek.basin.ramps, float(VESTIBULE_H))
 	if basin_burns:
 		# Staged arenas keep fire at the basin's base, well below their rides.
 		var fire_top: float = -basin_depth + 0.6 if peek.has("simulation_stage") else (-1.25 if bool(peek.get("sim_grid", false)) else -0.25)
@@ -9190,7 +9303,15 @@ func _build_segment() -> void:
 			dress_tile.append(drow)
 	var dress_seg_no: int = _seg_index
 	var dress_pass := func() -> void:
-		if _mod_has(_mod_detail, "dress_segment") and _bodies_on and _wall_h_run < 0.0:
+		# THE CUTAWAY KEEPS ITS DRESS (2026-09-19). --em-wall-h turns the wall
+		# dressing off because its cornices sit at 4.5 m and a hand asking for low
+		# walls is asking to see the building without them. The iso cutaway is the
+		# opposite request: it lowers the walls precisely so the WORKS ON THEM can
+		# be seen, and em_detail hangs every showing and every card from its own
+		# WALL_H, which the cut does not touch — so they stay where the museum
+		# hangs them and the sidecar records that the walls beneath them were cut.
+		if _mod_has(_mod_detail, "dress_segment") and _bodies_on \
+				and (_wall_h_run < 0.0 or _wall_cut_for_shot > 0.0):
 			# THE SEVENTH ARGUMENT IS THE WALL FURNITURE WIRE. em_budget has always
 			# licensed hung showings per building (Soane 80, a bare-wall building 0)
 			# and dress_segment had no parameter to receive the licence, so 60-70% of
@@ -11010,12 +11131,15 @@ func _transplant_from_map(seg: Node3D, zbase: int, key: String, w: int, h: int, 
 			# nothing but the sight of them arriving. 8 ms is the museum's own
 			# stamp budget, near enough a frame at 90 Hz.
 			gs.set("interactable_place_budget_ms", 8.0)
-			gs.position = Vector3(0.0, -gdepth, float(VESTIBULE_H))
+			# Grid cubes are centred on integers; museum cells span [n, n + 1].
+			# Align EVERY embedded grid, not only staged ones. Without this half-cell
+			# offset the last cube ends 0.5 m before the exit passage, exposing the
+			# basin below (seen at every Colour hall exit). Internal grid coordinates
+			# and artifact placements stay unchanged; the whole grid moves together.
+			gs.position = Vector3(0.5, -gdepth, float(VESTIBULE_H) + 0.5)
 			if seg.has_meta("em_simulation_stage"):
 				var stage: Dictionary = seg.get_meta("em_simulation_stage")
-				# Grid cube centres are integers; museum floor cells start at integers.
-				# Half a cell aligns their outer edges without changing any grid-local coordinate.
-				gs.position += Vector3(float(stage.pad) + 0.5, 0, float(stage.pad) + 0.5)
+				gs.position += Vector3(float(stage.pad), 0, float(stage.pad))
 				gs.set_meta("em_source_map", map_name)
 			seg.add_child(gs)
 			# Authored performance floors must stay clear of automatically dealt
@@ -11359,6 +11483,7 @@ func _sim_grid_ready(gs: Node3D, zbase: int, completed: bool = false) -> void:
 		return
 	if completed:
 		gs.set_meta("stage_grid_ready", true)
+		preload("res://commons/scenes/em/em_colour_gallery.gd").install(gs)
 	_sim_grid_disarm(gs)
 	_sim_grid_carry(gs, zbase)
 
@@ -13261,9 +13386,24 @@ func _stamp_inner(seg: Node3D, scene_path: String, lookup: String, cell: Diction
 	# cap to `min(base + 0.10, cells - 0.06)` so the pedestal claims no cell the
 	# artifact's own AABB did not already claim — but that is the module's own
 	# arithmetic, and this line is the museum checking rather than believing it.
-	if lookup == "force_field_zone" and str(plan_config.get("lesson", "")) == "force_as_place":
+	if lookup in ["geometry_courtyard", "sphere_resolution_atlas", "primitive_mesh_library", "durer_scene"]:
+		# These installations contain visitor aisles. Their bounding boxes are not solid.
+		# Individual pillar, plinth and specimen colliders govern the actual walk.
+		_last_seal_cells = []
+	elif lookup == "force_field_zone" and str(plan_config.get("lesson", "")) == "force_as_place":
 		# This opt-in volume has no solid body. Its visual box must not seal
 		# the retained plank or make reach repair move it away from the pit.
+		_last_seal_cells = []
+	elif lookup == "scale_me" and str(plan_config.get("encounter", "")) == "drink_me":
+		# The room owns an interior route, a size change and a separate relocation.
+		# Sealing its whole AABB (including the distant witness doorway) treats
+		# that interior as solid, then reach repair slides it away from its entrance.
+		# Keep the authored anchor. Actual colliders still govern passage; this
+		# coarse walk graph is NOT evidence that either doorway admits the body.
+		_last_seal_cells = []
+	elif lookup == "wall_exception" and seg.has_meta("em_turning_wall_cells"):
+		# This body IS a boundary and an occupiable landing. Its whole AABB is
+		# not solid; reach repair must not slide the hinge away from its opening.
 		_last_seal_cells = []
 	elif bk.has("seal"):
 		# the baked seal: exactly these cells, no measurement, no reach probe
@@ -14284,6 +14424,17 @@ func _seal_cells(node: Node3D, cell: Dictionary, zbase: int, fp: int,
 ## (0, 0, z0) and cells are unit metres, so a world position maps straight onto
 ## a _walk_cells key with no conversion.
 func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
+	# Walk-in architecture may report its actual partitions, leaving the interior open.
+	if node.has_method("get_museum_occupied_cells"):
+		var occupied: Array = []
+		for key in node.call("get_museum_occupied_cells"):
+			if key is Vector2i and _walk_cells.has(key): occupied.append(key)
+		return occupied
+	# An approach-opening threshold is a traversable route, like the lobby gate.
+	# Its own moving colliders still govern when the body can cross. Only opt-in
+	# doors with jambs inside existing walls declare this; fixed objects still seal.
+	if bool(node.get_meta("em_opens_on_approach", false)):
+		return []
 	var cx: int = int(cell.get("x", 0))
 	var cz: int = zbase + int(cell.get("y", 0))
 	var out: Array = []
@@ -15449,6 +15600,15 @@ func _dress_props(seg: Node3D, tile: Array, w: int, h: int, zbase: int,
 		if seg.has_meta("em_props_deny") and (seg.get_meta("em_props_deny") as Array).has(tok):
 			print("[em-props] %s refused by the map's props_deny" % tok)
 			continue
+		var mount: Variant = r.get("pos", null)
+		var in_corner := false
+		if mount is Vector3 and (mount as Vector3).y < WALL_H:
+			for rect: Rect2 in seg.get_meta("em_simplex_keep_out", []):
+				if rect.grow(0.25).has_point(Vector2(mount.x, mount.z)):
+					in_corner = true
+					break
+		if in_corner:
+			continue  # A flat-wall fitting cannot project through a filled corner.
 		var lv: Variant = _live.get(tok, null)
 		if not (lv is Dictionary):
 			continue
@@ -15593,13 +15753,28 @@ func _wear_the_costume() -> void:
 	print("[em-costume] the walker is dressed — halls will hang their own trophies")
 
 
-## Which chapter the walker is standing in, by the segment spans the museum
+## Which chapter the active desktop or VR visitor is standing in, by the spans the museum
 ## already keeps. Cheap: a handful of float compares, and only on a change does
 ## anything happen.
 func _costume_walk() -> void:
-	if _wardrobe == null or not is_instance_valid(_wardrobe) or _player == null:
+	if not _costume_on or _studio or _bake_mode:
 		return
-	var z: float = _player.global_position.z
+	if _vr:
+		var head: Camera3D = _vr_eye()
+		if head == null:
+			return
+		if not is_instance_valid(_wardrobe) or not _wardrobe.call("wears_head", head):
+			_wardrobe = null
+			_costume_hall = ""
+			for candidate in get_tree().get_nodes_in_group("costume_wardrobes"):
+				if candidate.has_method("wears_head") and candidate.call("wears_head", head):
+					_wardrobe = candidate
+					break
+	elif not is_instance_valid(_player):
+		return
+	if not is_instance_valid(_wardrobe) or not is_instance_valid(_wardrobe.get("costume")):
+		return
+	var z: float = _eye_pos().z
 	var here: String = ""
 	for sv in _segments:
 		var sd: Dictionary = sv
@@ -16677,6 +16852,7 @@ func _physics_process(_delta: float) -> void:
 		if _player.is_on_floor(): _last_ground = _player.position
 		return
 	# walk — as a body: move_and_slide lets the walls and podiums push back
+	var body_scale: float = float(_player.get_meta("ada_body_scale", 1.0))
 	var carry_incoming := _player.velocity
 	var dir := Vector3.ZERO
 	if Input.is_key_pressed(KEY_W):
@@ -16698,7 +16874,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			_player.velocity = Vector3.ZERO
 	elif dir.length() > 0.01:
-		var speed := WALK_SPEED * (2.5 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
+		var speed := WALK_SPEED * body_scale * (2.5 if Input.is_key_pressed(KEY_SHIFT) else 1.0)
 		_player.velocity = dir.normalized() * speed
 	else:
 		_player.velocity = Vector3.ZERO
@@ -16712,11 +16888,11 @@ func _physics_process(_delta: float) -> void:
 		_jumps_left = 2
 	# jump: SPACE from the ground, and once more in the air (double jump)
 	if _jump_pressed and _jumps_left > 0:
-		_vy = JUMP_V if _jumps_left == 2 else DOUBLE_JUMP_V
+		_vy = (JUMP_V if _jumps_left == 2 else DOUBLE_JUMP_V) * body_scale
 		_jumps_left -= 1
 	_jump_pressed = false
 	if not on_floor:
-		_vy -= JUMP_GRAVITY * _delta
+		_vy -= JUMP_GRAVITY * body_scale * _delta
 	_player.velocity.y = _vy
 	# Only explicitly enabled kinetic media affect ordinary desktop locomotion.
 	# The medium supplies a speed adapter, not an overwrite racing the controller.
@@ -20139,6 +20315,23 @@ func _take_proof_shot() -> void:
 	# object 10 m down the room is 20 px or 60.
 	_cam.keep_aspect = Camera3D.KEEP_WIDTH
 	_cam.fov = 70.0
+	# THE THREE VERIFICATION VIEWS, AND FIRST. --em-shot-view composes its own
+	# standpoint, aim and projection out of the hall that was just built, so it
+	# has to run before every branch below — each of those aims by hand or by
+	# search and none of them can be orthographic. It returns, because a branch
+	# that does not return is not an override (the lesson two comments down).
+	if _shot_view != "":
+		# SETTLE BEFORE MEASURING. These three frame themselves off the built
+		# bodies' own extent, and a procedural body keeps building for frames
+		# past _ready — probe_aabb_hogs needed 0.35 s before its mesh count
+		# stopped changing, and a re-seat timer fires at 0.45 s. Measured at
+		# _ready the box is a photograph of a half-built hall, and the crop that
+		# follows from it is invisible in the picture.
+		await get_tree().create_timer(0.7).timeout
+		if _compose_view_shot():
+			_shoot_deferred()
+			return
+		push_warning("endless_museum: --em-shot-view=%s is not top|iso|fpv — composing the usual shot" % _shot_view)
 	if _look_token != "":
 		var look: Dictionary = _compose_look(_look_token)
 		if look.is_empty():
@@ -20446,6 +20639,1270 @@ func _compose_look(token: String) -> Dictionary:
 	var pitch: float = atan2(to.y, Vector2(to.x, to.z).length())
 	return {"stand": best, "yaw": yaw, "pitch": pitch, "at": at}
 
+## ── THE HALL'S OWN BOX ───────────────────────────────────────────────────────
+## The world extent of the hall that was just built, read off the museum's own
+## records and never re-derived. tools/long_museum.py re-derived this same
+## geometry in Python and reported a strip 16 per cent longer than the museum
+## with its own check green; a camera framed from a second implementation of the
+## rule would be wrong in exactly that way and the picture would look fine.
+##
+## z comes from _segments[0] — z0/z1 are the segment's own span, already in
+## world metres, already including the vestibule, porch and court.
+## x comes from the walk cells inside that span, padded one cell for the wall
+## skin, unioned with [-1, w+1] so a hall whose floor is narrower than its shell
+## still shows its shell. cell_x0 is -1 in every hall on record, which is where
+## the -1 comes from.
+func _shot_hall_box() -> Dictionary:
+	var spec: Dictionary = _first_spec if not _first_spec.is_empty() else (_museums[0] if not _museums.is_empty() else {})
+	var w: int = int(spec.get("w", 15))
+	var h: int = int(spec.get("h", 8))
+	var z0: float = -float(VESTIBULE_H)
+	var z1: float = z0 + float(h + VESTIBULE_H)
+	var chapter := _first_chapter
+	var pearl := ""
+	var map_name := ""
+	if not _segments.is_empty():
+		var rec: Dictionary = _segments[0]
+		w = int(rec.get("w", w))
+		z0 = float(rec.get("z0", z0))
+		z1 = float(rec.get("z1", z1))
+		pearl = String(rec.get("pearl", ""))
+		map_name = String(rec.get("map", ""))
+		var nv: Variant = rec.get("node")
+		if nv != null and is_instance_valid(nv) and (nv as Node).has_meta("em_chapter"):
+			chapter = String((nv as Node).get_meta("em_chapter"))
+	# h is the MAP's own depth, which the segment record does not carry; the
+	# layout ledger's row for this hall does, and it was written a moment ago by
+	# _layout_note at the end of this very build.
+	var row: Dictionary = _layout_walk.get("%s|%s" % [chapter, pearl], {})
+	if row.has("h"):
+		h = int(row["h"])
+	# THE BASIN IS NOT THE ROOM (2026-09-19). This loop took x0 = -3 in point one,
+	# and the only thing out there was WATER: the origin basin's twelve pool cells
+	# reach x -2..1, west of the room, and a pool cell is walkable (you stand on
+	# its glass lid), so the extent followed it. Every camera framed off this box
+	# was then off-centre by the basin — two metres of dead annex on one side of
+	# every plan and every axonometric, in a hall whose own left edge is -1.
+	# The pool is recorded by the builder as `em_pool_cells`; it is subtracted
+	# here rather than guessed at, and the count is carried so a reader can see
+	# what the box refused.
+	# AND THE LOBBY ANNEX IS NOT THE ROOM EITHER. Excluding the pool alone left
+	# x0 at -3 on point one — measured, not assumed: the sidecar counted 16 pool
+	# cells removed and the box did not move. What is still out there is the
+	# ORIGIN ANNEX, the walkway the lobby lays around the well at x -3..1, which
+	# belongs to the museum's front door and not to this hall. The hall's own
+	# left edge is `cell_x0`, which the museum writes into its own layout row
+	# (_layout_built) — so this reads a record rather than a constant, and it
+	# COUNTS what it refuses and how far west it reached, because a box that
+	# quietly clips is the same fault as a box that quietly swallows.
+	# The annex is told from a west side-room by WHERE it lies, not by a flag:
+	# it is the lobby's porch around the origin well and it lives in the
+	# vestibule band, the rows before the hall tile begins. A room the hall
+	# itself opens to the west lies in the hall's own rows and still widens the
+	# box. Excluding the pool alone was not enough — measured, not assumed: the
+	# first pass removed 16 pool cells and the box did not move off -3.
+	var room_x0: float = float(row.get("cell_x0", -1))
+	var vest_z1: float = z0 + float(VESTIBULE_H)
+	var pool: Dictionary = _shot_pool_cells()
+	var x0: float = room_x0
+	var x1: float = float(w) + 1.0
+	var pool_seen: int = 0
+	var annex_seen: int = 0
+	var annex_reach: float = room_x0
+	# WHAT WAS ACTUALLY BUILT, beside what was declared. x1 is unioned with
+	# w + 1 so a hall narrower than its shell still shows its shell — but on
+	# point one the declared w is 20 while no floor cell passes x 18, so the box
+	# carries two metres of shell the plan photographs as empty and the hall
+	# sits half a metre off the frame's centre. That is a fact about the map's
+	# declared width, not about the basin, and it is recorded rather than
+	# quietly trimmed: trimming it would crop a real east wall out of a hall
+	# whose floor genuinely stops short of its shell.
+	var cx0: float = 1e9
+	var cx1: float = -1e9
+	for k in _walk_cells:
+		var c: Vector2i = k
+		if float(c.y) >= z0 and float(c.y) < z1:
+			if pool.has(c):
+				pool_seen += 1
+				continue
+			if float(c.y) < vest_z1 and float(c.x) <= room_x0:
+				# the enter room's own porch: it does not widen the hall, and the
+				# skin pad below would push the box a further metre past it
+				annex_seen += 1
+				annex_reach = minf(annex_reach, float(c.x))
+				continue
+			if float(c.x) < room_x0:
+				annex_seen += 1
+				annex_reach = minf(annex_reach, float(c.x))
+				continue
+			cx0 = minf(cx0, float(c.x))
+			cx1 = maxf(cx1, float(c.x) + 1.0)
+			x0 = minf(x0, float(c.x) - 1.0)
+			x1 = maxf(x1, float(c.x) + 2.0)
+	# AND THE HEIGHT IS MEASURED, NOT ASSUMED. y1 was the constant WALL_H (4.5),
+	# so anything taller than a wall was clipped out of the top of an axonometric
+	# without a word — and the corpus holds an artifact 27 m tall. WALL_H is still
+	# the answer when nothing exceeds it, but now because it was the largest
+	# number found, not because it was the only one looked at. y0 the same way:
+	# a basin sinks below the deck and the shell has to hold it.
+	var y0: float = 0.0
+	var y1: float = WALL_H
+	var tall := ""
+	var deep := ""
+	for b_v in _shot_bodies():
+		var bd: Dictionary = b_v
+		var ab: AABB = bd["aabb"]
+		if ab.end.y > y1:
+			y1 = ab.end.y
+			tall = String(bd["token"])
+		if ab.position.y < y0:
+			y0 = ab.position.y
+			deep = String(bd["token"])
+	return {"chapter": chapter, "pearl": pearl, "map": map_name,
+		"w": w, "h": h, "span": int(round(z1 - z0)),
+		"x0": x0, "x1": x1, "z0": z0, "z1": z1, "y0": y0, "y1": y1,
+		"pool_cells_excluded": pool_seen,
+		"annex_cells_excluded": annex_seen,
+		"annex_reached_x": annex_reach,
+		"room_x0": room_x0,
+		"content_x0": cx0 if cx0 < 1e8 else room_x0,
+		"content_x1": cx1 if cx1 > -1e8 else float(w),
+		"y1_from": tall if tall != "" else "WALL_H (no body reaches it)",
+		"y0_from": deep if deep != "" else "the deck"}
+
+
+## The segment the shot is about: the first one, which is the hall the run was
+## asked to open at. Everything below reads the museum's own records off it.
+func _shot_seg() -> Node3D:
+	if _segments.is_empty():
+		return null
+	return _node_or_null((_segments[0] as Dictionary).get("node"))
+
+
+## The pool, in WORLD cells. The builder records it seg-local (`em_pool_cells`,
+## x and z + VESTIBULE_H); the segment's own z0 is the zbase it was built from,
+## which is the one line where local and world meet.
+func _shot_pool_cells() -> Dictionary:
+	var out: Dictionary = {}
+	var segn: Node3D = _shot_seg()
+	if segn == null or not segn.has_meta("em_pool_cells"):
+		return out
+	var zb: int = int(round(float((_segments[0] as Dictionary).get("z0", 0.0))))
+	for c_v in (segn.get_meta("em_pool_cells", []) as Array):
+		var c: Vector2i = c_v
+		out[Vector2i(c.x, zb + c.y)] = true
+	return out
+
+
+## Every body the museum STAMPED in the hall being shot, with the world extent
+## each actually occupies. The same list _write_built records — read off
+## _edit_records and filtered by ancestry, so it is the museum's own count and
+## not an estimate — minus the plinths, because a plinth is a body's dress and
+## counting it would report a work as present twice.
+##
+## The AABB, not the origin. A body's origin is where it STANDS, which for a
+## statue on a plinth is its base: asked "is this in the frame?" of the origin
+## alone, a 3 m body whose head fills the picture answers no.
+func _shot_bodies() -> Array:
+	var out: Array = []
+	var segn: Node3D = _shot_seg()
+	if segn == null:
+		return out
+	for r in _edit_records:
+		var rd: Dictionary = r
+		var n: Node3D = _node_or_null(rd.get("node"))
+		if n == null or not segn.is_ancestor_of(n):
+			continue
+		var kind := String(rd.get("kind", "artifact"))
+		if kind == "plinth":
+			continue
+		var ab: AABB = _extent_of(n)
+		if ab.size == Vector3.ZERO:
+			# no mesh and no collider under it: it still stands somewhere, and a
+			# coverage report that silently drops it is the fault this block exists
+			# to stop. Half a metre at its origin, and the kind says what it is.
+			ab = AABB(n.global_position - Vector3(0.25, 0.25, 0.25), Vector3(0.5, 0.5, 0.5))
+		out.append({"token": String(rd.get("token", "")), "kind": kind,
+			"inv": String(rd.get("inv", "")), "aabb": ab})
+	return out
+
+
+## The camera's own half-extents of a box, in metres, along its right and up
+## axes. Exact for an orthographic camera at any angle, which is what makes one
+## routine serve both the plan and the axonometric.
+func _ortho_half_extents(basis: Basis, box: Dictionary) -> Vector2:
+	var right: Vector3 = basis.x
+	var up: Vector3 = basis.y
+	var cx: float = (float(box["x0"]) + float(box["x1"])) * 0.5
+	var cy: float = (float(box["y0"]) + float(box["y1"])) * 0.5
+	var cz: float = (float(box["z0"]) + float(box["z1"])) * 0.5
+	var hr: float = 0.0
+	var hu: float = 0.0
+	for ix in [float(box["x0"]), float(box["x1"])]:
+		for iy in [float(box["y0"]), float(box["y1"])]:
+			for iz in [float(box["z0"]), float(box["z1"])]:
+				var d: Vector3 = Vector3(ix - cx, iy - cy, iz - cz)
+				hr = maxf(hr, absf(d.dot(right)))
+				hu = maxf(hu, absf(d.dot(up)))
+	return Vector2(hr, hu)
+
+
+## THE FRAME TAKES THE HALL'S SHAPE (2026-09-19). Measured on the plan it
+## replaces: the hall filled 94.3 per cent of the frame's HEIGHT and 26-46 per
+## cent of its width, because a hall 21 m across and 33 m deep is portrait and
+## the window is 3:2 landscape — half to three quarters of every plan PNG was
+## star field, and the hall was rendered at half the resolution the same file
+## size could have given it.
+##
+## The pixel budget is unchanged (1800 x 1200 = 2.16 Mpx); only its shape
+## follows the box. The asked-for size is kept in _shot_frame_asked so the
+## sidecar can say whether the window actually took it — a window that refuses
+## leaves the fit assuming one aspect while the PNG carries another, and the
+## hall comes out cropped with nothing in the picture to say so.
+const SHOT_PIXELS := 2_160_000
+
+func _shot_fit_frame(aspect: float) -> Vector2i:
+	var a: float = clampf(aspect, 0.32, 3.20)
+	var w: int = clampi(int(round(sqrt(float(SHOT_PIXELS) * a))), 640, 2800)
+	var h: int = clampi(int(round(float(w) / a)), 640, 2800)
+	w -= w % 2
+	h -= h % 2
+	_shot_frame_asked = Vector2i(w, h)
+	var win: Window = get_window()
+	if win != null:
+		win.size = _shot_frame_asked
+	return _shot_frame_asked
+
+
+## The orthographic WIDTH that makes a box fit a frame, given the camera's basis.
+## size is the frame's WIDTH because the camera keeps KEEP_WIDTH, so the frame's
+## height is size / aspect.
+func _fit_ortho_size(basis: Basis, box: Dictionary, aspect: float, margin: float) -> Vector2:
+	var half: Vector2 = _ortho_half_extents(basis, box)
+	var need_w: float = half.x * 2.0 * margin
+	var need_h: float = half.y * 2.0 * margin
+	# the frame must hold both: width directly, height through the aspect
+	return Vector2(maxf(need_w, need_h * aspect), need_h)
+
+
+## ── top | iso | fpv ──────────────────────────────────────────────────────────
+## YAW 180 FACES +z, INTO THE MUSEUM. That convention costs a day every time it
+## is rediscovered (yaw 0 looks back out of the door and every caption reads
+## mirrored), so all three views are built from it rather than from 0.
+##
+##   top  yaw 180, pitch -90, orthographic. With Godot's YXZ order that basis is
+##        right = -X, up = +Z, forward = -Y: the top of the frame is +z, deeper
+##        into the museum, and +x is on the LEFT — the same reading as the
+##        hand-aimed plan view this replaces, so a reader's eye does not have to
+##        relearn the page.
+##   iso  yaw 225, pitch -35.264, orthographic. forward = (1, -1, 1)/sqrt(3):
+##        equal steps in x, y and z, the classic axonometric, and it keeps
+##        +x on the left like the plan.
+##   fpv  perspective, eye at 1.62, yaw 180, pitched 2 degrees down so the
+##        horizon sits off the half-line. --em-shot-x and --em-shot-at still
+##        choose where it stands; unset it stands on the hall's axis a few
+##        metres in from the vestibule, where a visitor arrives.
+##
+## Returns false for an unknown word, so the caller can fall through to the
+## composed shot rather than photograph the inside of a wall.
+func _compose_view_shot() -> bool:
+	if not ["top", "iso", "fpv"].has(_shot_view):
+		return false
+	var box: Dictionary = _shot_hall_box()
+	_shot_box_framed = box
+	var vp: Vector2 = get_viewport().get_visible_rect().size
+	var aspect: float = (vp.x / vp.y) if vp.y > 0.0 else 1.5
+	var centre := Vector3((float(box["x0"]) + float(box["x1"])) * 0.5,
+		(float(box["y0"]) + float(box["y1"])) * 0.5,
+		(float(box["z0"]) + float(box["z1"])) * 0.5)
+	var diag: float = Vector3(float(box["x1"]) - float(box["x0"]),
+		float(box["y1"]) - float(box["y0"]),
+		float(box["z1"]) - float(box["z0"])).length()
+	if _shot_view == "fpv":
+		_cam.projection = Camera3D.PROJECTION_PERSPECTIVE
+		_cam.fov = 70.0
+		_cam.near = 0.05
+		_cam.far = maxf(400.0, diag * 4.0)
+		_pitch = deg_to_rad(FPV_PITCH_DEG)
+		# WHERE IT CAN SEE, not where it was told. The first fpv stood a flat 2.5 m
+		# past the vestibule on the hall's axis; a skeptic then counted what that
+		# frame held and found 9 of the hall's 16 bodies outside the frustum, 5 of
+		# them BEHIND the eye — including `origin` at (0,0,0), the namesake of a
+		# hall called point one. 23 per cent of the span was behind the camera.
+		# The standpoint is searched now, the way _compose_auto_shot searches: see
+		# _fpv_stand. --em-shot-x / --em-shot-at still override, unchanged.
+		var stand: Vector3
+		var found: Dictionary = {}
+		if _shot_x_set or _shot_z_set:
+			stand = _stand_near(_shot_x if _shot_x_set else centre.x,
+				_shot_z if _shot_z_set else float(box["z0"]) + float(VESTIBULE_H) + 2.5)
+		else:
+			found = _fpv_stand(box, aspect)
+			stand = found["stand"] if not found.is_empty() \
+				else _stand_near(centre.x, float(box["z0"]) + float(VESTIBULE_H) + 2.5)
+		_player.position = Vector3(stand.x, 0.0, stand.z)
+		_cam.position = Vector3(0.0, EYE_FPV, 0.0)
+		_yaw = PI
+		_player.rotation = Vector3(0.0, _yaw, 0.0)
+		_cam.rotation = Vector3(_pitch, 0.0, 0.0)
+		if _feel != null and is_instance_valid(_feel) and _feel.has_method("resync_view"):
+			_feel.call("resync_view", _yaw, _pitch)
+		_shot_look_at = Vector3(stand.x, EYE_FPV + tan(_pitch) * 12.0, stand.z + 12.0)
+		print("[em-shot] view=fpv: standing %.1f,%.2f,%.1f, yaw 180 pitch %.0f, fov 70 — %s — hall %s|%s %dx%d span %d" % [
+			stand.x, EYE_FPV, stand.z, FPV_PITCH_DEG,
+			String(found.get("why", "standpoint given by hand")),
+			box["chapter"], box["pearl"], int(box["w"]), int(box["h"]), int(box["span"])])
+		return true
+	var yaw_deg: float = 180.0 if _shot_view == "top" else 225.0
+	var pitch_deg: float = -90.0 if _shot_view == "top" else -35.264389682754654
+	var yaw: float = deg_to_rad(yaw_deg)
+	var pitch: float = deg_to_rad(pitch_deg)
+	var basis: Basis = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, pitch)
+	# the frame first, then the fit into it: the box decides the PNG's shape and
+	# the fit is computed against the shape the window was actually asked for
+	var half: Vector2 = _ortho_half_extents(basis, box)
+	var framed: Vector2i = _shot_fit_frame(half.x / maxf(half.y, 0.001))
+	aspect = float(framed.x) / float(framed.y)
+	var fit: Vector2 = _fit_ortho_size(basis, box, aspect, 1.06)
+	var forward: Vector3 = -basis.z
+	# stand the ortho camera clear of the box so nothing is clipped by `near`,
+	# then let `far` reach past its far corner
+	var back: float = diag + 24.0
+	var eye: Vector3 = centre - forward * back
+	_cam.projection = Camera3D.PROJECTION_ORTHOGONAL
+	_cam.size = fit.x
+	_cam.near = 0.05
+	_cam.far = back * 2.0 + diag + 50.0
+	# the camera hangs on the player's own Y axis, so a yaw on the player never
+	# moves it: the player carries x/z, the camera carries height. That is how
+	# every other shot in this file is placed, and it survives _stand_near being
+	# skipped — the shot lane returns out of _physics_process, so nothing walks,
+	# falls or depenetrates this standpoint.
+	_player.position = Vector3(eye.x, 0.0, eye.z)
+	_cam.position = Vector3(0.0, eye.y, 0.0)
+	_yaw = yaw
+	_pitch = pitch
+	_player.rotation = Vector3(0.0, yaw, 0.0)
+	_cam.rotation = Vector3(pitch, 0.0, 0.0)
+	if _feel != null and is_instance_valid(_feel) and _feel.has_method("resync_view"):
+		_feel.call("resync_view", yaw, pitch)
+	_shot_look_at = centre
+	print("[em-shot] view=%s: frame %dx%d px for a box %.1f x %.1f m in the lens's own axes, ortho size %.1f m across (%.1f m down), eye %.1f,%.1f,%.1f looking at %.1f,%.1f,%.1f — hall %s|%s %dx%d span %d, box x %.0f..%.0f z %.0f..%.0f y %.2f..%.2f (%s)" % [
+		_shot_view, framed.x, framed.y, half.x * 2.0, half.y * 2.0,
+		fit.x, fit.x / aspect, eye.x, eye.y, eye.z, centre.x, centre.y, centre.z,
+		box["chapter"], box["pearl"], int(box["w"]), int(box["h"]), int(box["span"]),
+		box["x0"], box["x1"], box["z0"], box["z1"], box["y0"], box["y1"], box["y1_from"]])
+	return true
+
+
+## ── WHERE AN FPV CAN HONESTLY STAND ──────────────────────────────────────────
+## A standpoint is a MEASUREMENT, not a coordinate. Among the cells a walker
+## could actually stand on within two metres of the hall's own axis, this takes
+## the one whose frame holds the most of what the museum placed — bodies first,
+## because the picture is evidence about works, floor cells second, because they
+## say how much of the room you are being shown.
+##
+## SIGHT LINES ARE PHYSICS RAYS, NOT THE WALK MAP. The first version of this
+## scored on _clear_line, the corridor's own grid walk, and it chose a WORSE
+## standpoint than the flat guess it replaced: 7 bodies in frame against the old
+## 9, with 28 behind the camera. The reason is that a body SEALS the cells it
+## stands on, so those cells leave the walk map — and a grid walk then reports
+## every line that passes near a work as blocked. The walk map answers "can a
+## visitor get there", which is not the question "can a visitor see it", and
+## reading one as the other is what threw the search. A ray over the real
+## colliders answers the question actually asked.
+##
+## The frame test below is an approximation (the 2-degree pitch is folded into
+## the centre line rather than into the axis, an error of 6 parts in 10,000).
+## The COVERAGE BLOCK in the sidecar does not use it — that reads the placed
+## camera's real frustum planes. The approximation chooses; the report measures.
+const EYE_FPV := 1.62
+const FPV_PITCH_DEG := -2.0
+const FPV_HALF_H := 0.70021   # tan(35 deg) — half of the 70-degree KEEP_WIDTH lens
+
+func _fpv_in_frame(p: Vector3, eye: Vector3, aspect: float) -> bool:
+	var dz: float = p.z - eye.z
+	if dz <= 0.05:
+		return false
+	if absf(p.x - eye.x) > FPV_HALF_H * dz:
+		return false
+	var centre_y: float = eye.y + tan(deg_to_rad(FPV_PITCH_DEG)) * dz
+	return absf(p.y - centre_y) <= (FPV_HALF_H / maxf(aspect, 0.01)) * dz
+
+
+func _fpv_stand(box: Dictionary, aspect: float) -> Dictionary:
+	if _walk_cells.is_empty() or _segments.is_empty():
+		return {}
+	var z0: float = float(box["z0"])
+	var z1: float = float(box["z1"])
+	var axis: float = float(box["w"]) / 2.0
+	var pool: Dictionary = _shot_pool_cells()
+	var floor_cells: Array = []
+	for k in _walk_cells:
+		var c: Vector2i = k
+		if float(c.y) >= z0 and float(c.y) < z1 and not pool.has(c):
+			floor_cells.append(c)
+	if floor_cells.is_empty():
+		return {}
+	var bodies: Array = _shot_bodies()
+	var space: PhysicsDirectSpaceState3D = null
+	var w3: World3D = get_world_3d()
+	if w3 != null:
+		space = w3.direct_space_state
+	var excl: Array = []
+	if _player != null and is_instance_valid(_player):
+		excl = [_player.get_rid()]
+	var best: Dictionary = {}
+	var best_score: float = -1.0
+	var tried: int = 0
+	var z_lo: float = 1e9
+	var z_hi: float = -1e9
+	for k2 in _walk_cells:
+		var c: Vector2i = k2
+		if float(c.y) < z0 or float(c.y) >= z1:
+			continue
+		if pool.has(c):
+			continue                      # you stand on a glass lid over two metres of water
+		if absf(float(c.x) + 0.5 - axis) > 2.5:
+			continue                      # "on the hall's own axis", within two strides of it
+		tried += 1
+		z_lo = minf(z_lo, float(c.y) + 0.5)
+		z_hi = maxf(z_hi, float(c.y) + 0.5)
+		var eye := Vector3(float(c.x) + 0.5, EYE_FPV, float(c.y) + 0.5)
+		var seen_b: int = 0
+		for b_v in bodies:
+			var bd: Dictionary = b_v
+			var ab: AABB = bd["aabb"]
+			# THE WHOLE BODY, not its origin: a body's origin is its feet, and a
+			# work whose head fills the picture answers "no" when only its base
+			# is asked about. Any of the nine points is enough to be in frame.
+			var lit: bool = _fpv_in_frame(ab.get_center(), eye, aspect)
+			if not lit:
+				for ix in [0.0, 1.0]:
+					for iy in [0.0, 1.0]:
+						for iz in [0.0, 1.0]:
+							if not lit and _fpv_in_frame(ab.position + Vector3(ab.size.x * ix,
+									ab.size.y * iy, ab.size.z * iz), eye, aspect):
+								lit = true
+			if lit and _shot_ray_clear(space, ab.get_center(), eye, Vector3.FORWARD, 0.0, excl, ab):
+				seen_b += 1
+		var seen_c: int = 0
+		for t_v in floor_cells:
+			var t: Vector2i = t_v
+			if _fpv_in_frame(Vector3(float(t.x) + 0.5, 0.0, float(t.y) + 0.5), eye, aspect):
+				seen_c += 1
+		# OFF a wall, not only off the axis: a standpoint jammed against a pier
+		# gives most of the frame to one unmodulated plane, the defect that cost
+		# the composed shot a re-shoot. How much of the 3x3 ring a walker could
+		# step into separates a room from a recess.
+		var open8: int = 0
+		for dz2 in range(-1, 2):
+			for dx2 in range(-1, 2):
+				if dx2 != 0 or dz2 != 0:
+					if _walk_cells.has(Vector2i(c.x + dx2, c.y + dz2)):
+						open8 += 1
+		var score: float = float(seen_b) * 10.0 + float(seen_c) * 0.25 + float(open8) * 0.5
+		# ties go to the eye standing FURTHER BACK: the same picture taken from
+		# deeper in holds less of the room behind it, and what is behind the eye
+		# is the thing this search exists to stop losing.
+		if score < best_score or (is_equal_approx(score, best_score) \
+				and not best.is_empty() and float(c.y) >= (best["stand"] as Vector3).z - 0.5):
+			continue
+		best_score = score
+		best = {"stand": Vector3(eye.x, 0.0, eye.z), "bodies": seen_b, "cells": seen_c}
+	if best.is_empty():
+		return {}
+	# THE TOTALS, AFTER THE LOOP. Written inside it, this sentence reported the
+	# counters as they stood when the winner happened to be found — "searched 21
+	# standpoints, z -2.5..3.5" of a search that in fact tried 98 and reached
+	# z 26.5. A diagnostic that quietly describes an early iteration is the same
+	# class of fault as a picture that quietly omits half its subject.
+	best["why"] = ("searched %d standpoints on the hall's axis (z %.1f..%.1f of a span %.1f..%.1f); "
+		+ "this one holds %d of %d bodies unoccluded and %d of %d floor cells in the cone") % [
+		tried, z_lo, z_hi, z0, z1, int(best["bodies"]), bodies.size(),
+		int(best["cells"]), floor_cells.size()]
+	return best
+
+
+## ── WHAT THE FRAME CANNOT SEE ────────────────────────────────────────────────
+## A picture whose blind spots are undeclared is worse than no picture, because
+## it reads as complete. Three skeptics tried to refute the three views on
+## 2026-09-19 and two of them succeeded, both on the same fault: the reader
+## checks "is the work there?", sees nothing, and concludes absence — when the
+## measurement was that roughly half the hall is behind a wall from an
+## isometric corner (49, 54 and 58 per cent from the other three corners: there
+## is no magic angle, it is inherent to standing outside a building made of
+## rooms) and that 9 of 16 bodies were outside an fpv's frustum, 5 of them
+## behind the eye.
+##
+## So every sidecar now carries what the frame HOLDS of what the museum PLACED.
+## Counted, not estimated: the bodies come from _edit_records, the museum's own
+## stamp list, and the floor cells from _walk_cells, the map the corridor plans
+## on. In-frame is the placed camera's real frustum planes, not arithmetic.
+##
+## The occlusion measure is a physics ray, and it has one blind spot of its own,
+## declared in the block: a mesh with no collider does not stop a ray, and by
+## contract the museum's wall works have none — so a work hung flat on a wall is
+## never reported as hiding anything, which is right, and a work hung flat on a
+## wall can itself be reported visible when a collider-less pier is in front of
+## it, which is not. `method` says this in the file so a reader is not left to
+## discover it.
+const SHOT_CELL_EYE := 0.9     # the height at which "is there a work on this cell?" is answered
+
+## Is `p` reached by the camera's own ray? For a perspective camera that ray
+## starts at the eye. For an ORTHOGRAPHIC one it arrives parallel to forward
+## from `back` metres away, because an orthographic camera has no single
+## viewpoint: a ray cast from its origin measures a perspective picture nobody
+## took, and it is the plan and the axonometric that this is mostly used on.
+func _shot_ray_clear(space: PhysicsDirectSpaceState3D, p: Vector3, eye: Vector3,
+		fwd: Vector3, back: float, excl: Array, stop: AABB) -> bool:
+	if space == null:
+		return true
+	var from: Vector3 = (p - fwd * back) if back > 0.0 else eye
+	var q := PhysicsRayQueryParameters3D.create(from, p)
+	q.exclude = excl
+	var hit: Dictionary = space.intersect_ray(q)
+	if hit.is_empty():
+		return true
+	if stop.size != Vector3.ZERO and stop.grow(0.12).has_point(hit["position"] as Vector3):
+		return true              # the first thing the ray met was the body itself
+	return false
+
+
+## WHAT THE RAY MET, not only that it met something (2026-09-19). A count of
+## hidden cells is a complaint; the NAME and the HEIGHT of the thing in the way
+## is a lead. Measured on the iso cutaway: cutting the walls from 0.90 m to
+## 0.60 m moved the hidden-cell count by exactly zero, which no arithmetic about
+## wall heights could explain — and the only way to find out what was really in
+## the way was to ask the ray instead of the model.
+func _shot_ray_hit(space: PhysicsDirectSpaceState3D, p: Vector3, eye: Vector3,
+		fwd: Vector3, back: float, excl: Array) -> Dictionary:
+	if space == null:
+		return {}
+	var from: Vector3 = (p - fwd * back) if back > 0.0 else eye
+	var q := PhysicsRayQueryParameters3D.create(from, p)
+	q.exclude = excl
+	return space.intersect_ray(q)
+
+
+## The name a reader can act on: the artifact the collider belongs to when it
+## belongs to one, and the node's own name when it does not. The museum's
+## architecture all shares one StaticBody3D called Collision, so architecture
+## comes back under that one name and is told apart by the HEIGHT the ray was
+## stopped at — a hit at 4.4 m is an overpanel or a glazed pane, one at 0.6 m
+## is a podium, one at 0.9 m is a cut wall.
+func _shot_blocker_name(hit: Dictionary) -> String:
+	var cv: Variant = hit.get("collider")
+	if not (cv is Node):
+		return "unnamed collider"
+	var cur: Node = cv
+	while cur != null:
+		if cur.has_meta("artifact_lookup_name"):
+			return String(cur.get_meta("artifact_lookup_name"))
+		cur = cur.get_parent()
+	return String((cv as Node).name)
+
+
+## ── THE HALL'S OWN FLOOR, AND WHY NOT THE WALK MAP (2026-09-19) ─────────────
+## The floor coverage used to be counted over `_walk_cells`, and a skeptic took
+## the whole claim apart in one line: a body SEALS the cells it stands on, and a
+## sealed cell is REMOVED from the walk map — the built grid prints those as "s",
+## legend "sealed by a body". So "x% of this hall's floor is under something from
+## directly above" was measured over a set from which everything under something
+## had already been subtracted. The question answered itself, and it answered
+## with the smallest number available.
+##
+## The floor is therefore read from the museum's own TILE: every cell that is
+## not void ("0") and not wall ("4…") stands on floor, plinth and podium cells
+## included. Unioned with the deck the museum laid OUTSIDE the tile — vestibule,
+## porch, court — where `_walk_cells` is a record rather than a filter, and with
+## `_walk_erased`, the museum's own note of every cell it took back out of the
+## walk map and why. Pool cells go the way the box sends them (you stand on a
+## glass lid over two metres of water, and the box does not frame it), and so
+## does anything outside the box, because a cell the frame was never cut to hold
+## cannot be counted against the frame.
+##
+## The VALUE is the provenance, so a reader can see what each cell was.
+const SHOT_FLOOR_EYE := 0.1    # the height at which "can you see this FLOOR?" is answered
+
+func _shot_floor_cells(box: Dictionary) -> Dictionary:
+	var out: Dictionary = {}
+	var z0: float = float(box["z0"])
+	var z1: float = float(box["z1"])
+	var x0: float = float(box["x0"])
+	var x1: float = float(box["x1"])
+	var segn: Node3D = _shot_seg()
+	if segn != null and segn.has_meta("em_tile") and not _segments.is_empty():
+		var zb: int = int(round(float((_segments[0] as Dictionary).get("z0", 0.0))))
+		var tile: Array = segn.get_meta("em_tile", [])
+		for y in range(tile.size()):
+			if not (tile[y] is Array):
+				continue
+			var row: Array = tile[y]
+			for x in range(row.size()):
+				var c := String(row[x])
+				if c == "" or c == "0" or c.begins_with("4"):
+					continue    # void, or a wall: neither is floor
+				out[Vector2i(x, zb + VESTIBULE_H + y)] = "tile:%s" % c
+	for k_v in _walk_cells:
+		var c1: Vector2i = k_v
+		if not out.has(c1):
+			out[c1] = "laid"
+	for k2_v in _walk_erased:
+		var c2: Vector2i = k2_v
+		if not out.has(c2):
+			out[c2] = String(_walk_erased[c2])
+	var pool: Dictionary = _shot_pool_cells()
+	for pk_v in pool:
+		out.erase(pk_v)
+	for ok_v in out.keys():
+		var c3: Vector2i = ok_v
+		if float(c3.y) < z0 or float(c3.y) >= z1 \
+				or float(c3.x) + 1.0 <= x0 or float(c3.x) >= x1:
+			out.erase(c3)
+	return out
+
+
+## What `_shot_bodies()` leaves out, by kind and by token. Two inventories that
+## agree on a TOTAL can still be two different sets — the engine counts 65 with
+## the plinths dropped and the pre-run ledger row counts 65 with them in — and a
+## guard that compares totals can never see it. So the block carries the SET.
+func _shot_bodies_skipped() -> Dictionary:
+	var out: Dictionary = {}
+	var segn: Node3D = _shot_seg()
+	if segn == null:
+		return out
+	for r in _edit_records:
+		var rd: Dictionary = r
+		var n: Node3D = _node_or_null(rd.get("node"))
+		if n == null or not segn.is_ancestor_of(n):
+			continue
+		var kind := String(rd.get("kind", "artifact"))
+		if kind != "plinth":
+			continue
+		if not out.has(kind):
+			out[kind] = []
+		(out[kind] as Array).append(String(rd.get("token", "")))
+	return out
+
+
+## The height the tile's own walls were BUILT at this run — WALL_H unless
+## --em-wall-h (or the iso cutaway, which goes through the same lever) lowered
+## them. Everything that reports a wall height reads this, so the report and the
+## building cannot disagree about it.
+func _shot_wall_h() -> float:
+	return _wall_h_run if _wall_h_run > 0.0 else WALL_H
+
+
+func _shot_cross2(a: Vector2, b: Vector2, c: Vector2) -> float:
+	return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)
+
+
+## Monotone-chain convex hull of up to eight projected points. Returns fewer
+## than three points for a degenerate (edge-on) projection, which the caller
+## reads as "no area to rasterise" rather than as a failure.
+func _shot_hull(src: Array) -> Array:
+	var p: Array = src.duplicate()
+	p.sort_custom(func(a, b):
+		if absf(a.x - b.x) > 0.0001:
+			return a.x < b.x
+		return a.y < b.y)
+	if p.size() < 3:
+		return p
+	var lower: Array = []
+	for v_v in p:
+		var v: Vector2 = v_v
+		while lower.size() >= 2 and _shot_cross2(lower[lower.size() - 2], lower[lower.size() - 1], v) <= 0.0:
+			lower.pop_back()
+		lower.append(v)
+	var upper: Array = []
+	for i in range(p.size() - 1, -1, -1):
+		var v2: Vector2 = p[i]
+		while upper.size() >= 2 and _shot_cross2(upper[upper.size() - 2], upper[upper.size() - 1], v2) <= 0.0:
+			upper.pop_back()
+		upper.append(v2)
+	lower.pop_back()
+	upper.pop_back()
+	var out: Array = []
+	for a_v in lower:
+		out.append(a_v)
+	for b_v in upper:
+		out.append(b_v)
+	return out
+
+
+## Mark every bin a world-space box covers. False means the box could not be
+## projected at all — one of its corners is behind the camera, which
+## unproject_position has no answer for — and the caller counts those, because
+## a silhouette missing pieces is a LOWER BOUND and has to say so.
+func _shot_fill_add(cov: PackedByteArray, bx: int, by: int, vp: Vector2, wb: AABB) -> bool:
+	var pts: Array = []
+	for ix in [0.0, 1.0]:
+		for iy in [0.0, 1.0]:
+			for iz in [0.0, 1.0]:
+				var p: Vector3 = wb.position + Vector3(wb.size.x * ix, wb.size.y * iy, wb.size.z * iz)
+				if _cam.is_position_behind(p):
+					return false
+				pts.append(_cam.unproject_position(p))
+	var hull: Array = _shot_hull(pts)
+	if hull.size() < 3:
+		return true                    # edge-on: no area, and nothing was lost
+	var area: float = 0.0
+	for i in range(hull.size()):
+		var a: Vector2 = hull[i]
+		var b: Vector2 = hull[(i + 1) % hull.size()]
+		area += a.x * b.y - b.x * a.y
+	if area < 0.0:
+		hull.reverse()                 # one sign test then serves every edge
+	var lo := Vector2(1e9, 1e9)
+	var hi := Vector2(-1e9, -1e9)
+	for h_v in hull:
+		lo = lo.min(h_v)
+		hi = hi.max(h_v)
+	var i0: int = clampi(int(floor(lo.x / vp.x * float(bx))), 0, bx - 1)
+	var i1: int = clampi(int(ceil(hi.x / vp.x * float(bx))), 0, bx - 1)
+	var j0: int = clampi(int(floor(lo.y / vp.y * float(by))), 0, by - 1)
+	var j1: int = clampi(int(ceil(hi.y / vp.y * float(by))), 0, by - 1)
+	for j in range(j0, j1 + 1):
+		var py: float = (float(j) + 0.5) / float(by) * vp.y
+		for i in range(i0, i1 + 1):
+			var idx: int = j * bx + i
+			if cov[idx] != 0:
+				continue
+			var pt := Vector2((float(i) + 0.5) / float(bx) * vp.x, py)
+			var inside := true
+			for e in range(hull.size()):
+				if _shot_cross2(hull[e], hull[(e + 1) % hull.size()], pt) < 0.0:
+					inside = false
+					break
+			if inside:
+				cov[idx] = 1
+	return true
+
+
+## ── HOW MUCH OF THE FRAME THE HALL ACTUALLY IS ───────────────────────────────
+## `hall_fills` in the sidecar is the BOX against the frame, and on the hall this
+## was measured on it says 94.3 per cent across and down while a skeptic who
+## rasterised the hall's own silhouette over the PNG got 50.7. Both are honest
+## arithmetic about different things: a box is a cuboid and a hall is a plan with
+## corners cut off it, and the difference is the star field the box claims.
+##
+## So this rasterises the hall ITSELF — every mesh in the segment's own subtree,
+## instanced meshes included, projected through the LIVE camera with
+## unproject_position and filled into a bin grid over the frame. It is the
+## picture's own geometry rather than a second derivation of it, and it works for
+## the perspective view as well as the two orthographic ones.
+##
+## It is a LOWER BOUND and says so three ways: a mesh with a corner behind the
+## camera cannot be unprojected and is counted under `unprojectable`, an AABB
+## is bigger than the mesh inside it (which pushes the other way), and only this
+## hall's subtree is walked — a neighbouring segment standing in the frame is
+## not the hall and is not counted as it.
+const SHOT_FILL_BINS := 300
+const SHOT_FILL_MESH_CAP := 40000
+
+func _shot_frame_fill() -> Dictionary:
+	var segn: Node3D = _shot_seg()
+	if segn == null or _cam == null:
+		return {}
+	var vp: Vector2 = get_viewport().get_visible_rect().size
+	if vp.x < 4.0 or vp.y < 4.0:
+		return {}
+	var bx: int = SHOT_FILL_BINS
+	var by: int = clampi(int(round(float(SHOT_FILL_BINS) * vp.y / vp.x)), 8, 900)
+	var cov := PackedByteArray()
+	cov.resize(bx * by)
+	cov.fill(0)
+	var drawn: int = 0
+	var clipped: int = 0
+	var capped: bool = false
+	var stack: Array = [segn]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		for c in n.get_children():
+			stack.append(c)
+		if not (n is VisualInstance3D):
+			continue
+		var vi := n as VisualInstance3D
+		if not vi.is_visible_in_tree():
+			continue
+		if n is MultiMeshInstance3D:
+			var mm: MultiMesh = (n as MultiMeshInstance3D).multimesh
+			if mm == null or mm.mesh == null:
+				continue
+			var base: AABB = mm.mesh.get_aabb()
+			for i in range(mm.instance_count):
+				if drawn + clipped >= SHOT_FILL_MESH_CAP:
+					capped = true
+					break
+				var t: Transform3D = vi.global_transform * mm.get_instance_transform(i)
+				if _shot_fill_add(cov, bx, by, vp, t * base):
+					drawn += 1
+				else:
+					clipped += 1
+		elif n is MeshInstance3D:
+			var mi := n as MeshInstance3D
+			if mi.mesh == null:
+				continue
+			if drawn + clipped >= SHOT_FILL_MESH_CAP:
+				capped = true
+				continue
+			if _shot_fill_add(cov, bx, by, vp, mi.global_transform * mi.get_aabb()):
+				drawn += 1
+			else:
+				clipped += 1
+	var lit: int = 0
+	for i2 in range(cov.size()):
+		if cov[i2] != 0:
+			lit += 1
+	return {"hall_pct": snappedf(float(lit) / float(maxi(1, bx * by)) * 100.0, 0.1),
+		"bins": [bx, by], "meshes": drawn, "unprojectable": clipped,
+		"capped": capped,
+		"method": ("the segment's OWN meshes (MultiMesh instances included), each box projected "
+			+ "through the live camera with unproject_position, convex-hulled and rasterised into "
+			+ "a %d x %d bin grid over the frame. A LOWER BOUND: a mesh with a corner behind the "
+			+ "camera is unprojectable and counted rather than drawn, and only this hall's subtree "
+			+ "is walked. Compare with `hall_fills` at the top of this file, which measures the "
+			+ "BOX against the frame and is the larger number for that reason.") % [bx, by]}
+
+
+## ── THE SENTENCE IS GENERATED FROM THE ARRAYS, NOT COMPOSED BESIDE THEM ──────
+## (2026-09-19.) The fault this replaces, in one file: `missing` carried 39 rows
+## naming bodies the frame does not hold, and the prose beside it said the frame
+## held all sixteen of the hall's artifacts. Both were arithmetic; they were
+## arithmetic over two different tallies, kept in two different places, and the
+## prose is the half a human reads.
+##
+## So every count is tallied HERE, off `held` and `missing` themselves — held is
+## literally placed minus missing, and each reason is counted off the `why` the
+## classifying loop wrote — and the sentence is composed from this one
+## dictionary. However either array changes, the sentence changes with it: there
+## is no second count left to drift.
+const WHY_BEHIND := "behind the camera"
+const WHY_OUTSIDE := "outside the frustum"
+const WHY_HIDDEN := "in the frustum, behind something solid"
+
+func _shot_tally(bodies: Array, held: Array, missing: Array) -> Dictionary:
+	var by_kind: Dictionary = {}
+	var bump := func(k: String, field: String) -> void:
+		if not by_kind.has(k):
+			by_kind[k] = {"placed": 0, "held": 0, "missing": 0}
+		var row: Dictionary = by_kind[k]
+		row[field] = int(row[field]) + 1
+	for b_v in bodies:
+		bump.call(String((b_v as Dictionary).get("kind", "")), "placed")
+	var why: Dictionary = {}
+	for m_v in missing:
+		var md: Dictionary = m_v
+		bump.call(String(md.get("kind", "")), "missing")
+		var w := String(md.get("why", ""))
+		why[w] = int(why.get(w, 0)) + 1
+	# HELD IS SUBTRACTION, NOT A SECOND COUNT. Every kind's held is its placed
+	# minus its missing, so no number quoted anywhere can exceed what the
+	# `missing` list leaves room for. `held` the ARRAY is still counted, beside
+	# it, for one reason: if the two ever differ the loop that built them is
+	# broken, and `held_rows_disagree` says so in the file rather than letting
+	# the prose pick a winner.
+	for k_v in by_kind:
+		var row2: Dictionary = by_kind[k_v]
+		row2["held"] = int(row2["placed"]) - int(row2["missing"])
+	var out := {"placed": bodies.size(), "held": bodies.size() - missing.size(),
+		"missing": missing.size(),
+		"behind_camera": int(why.get(WHY_BEHIND, 0)),
+		"outside_frustum": int(why.get(WHY_OUTSIDE, 0)),
+		"hidden_behind_geometry": int(why.get(WHY_HIDDEN, 0)),
+		"by_kind": by_kind, "by_reason": why}
+	if held.size() != int(out["held"]):
+		out["held_rows_disagree"] = ("the held list has %d rows where placed minus missing is %d — "
+			+ "the classifying loop is broken; trust neither number") % [held.size(), int(out["held"])]
+	var reasons: int = int(out["behind_camera"]) + int(out["outside_frustum"]) \
+		+ int(out["hidden_behind_geometry"])
+	if reasons != missing.size():
+		out["reasons_disagree"] = ("%d rows under `missing` carry a reason this tally does not "
+			+ "know, out of %d") % [missing.size() - reasons, missing.size()]
+	return out
+
+
+## The blind sentence, from the tally and nothing else. Any number that appears
+## here is one the block reports; there is no arithmetic in this function that
+## is not a lookup.
+func _shot_blind(view: String, tal: Dictionary, cells: Dictionary, fill: Dictionary,
+		box: Dictionary) -> String:
+	var parts := PackedStringArray()
+	var cut: float = _wall_cut_for_shot
+	for guard in ["held_rows_disagree", "reasons_disagree"]:
+		if tal.has(guard):
+			parts.append("SELF-CHECK FAILED — %s. Quote nothing in this block." % String(tal[guard]))
+	match view:
+		"top":
+			parts.append("A plan shows where things stand and nothing of how tall they are, and a "
+				+ "body hides whatever shares its footprint.")
+		"iso":
+			if cut > 0.0:
+				parts.append(("THIS IS A CUTAWAY, NOT A PHOTOGRAPH OF THE ROOM: every wall in this "
+					+ "hall was built %.2f m high for this frame instead of the museum's %.2f m, and "
+					+ "the wall works were LEFT HANGING AT THEIR TRUE HEIGHT above them. Nothing in "
+					+ "this picture says how tall a wall is, and the bands floating over the stubs "
+					+ "are the dressing, which was not cut. The reason for cutting: a 35.26-degree "
+					+ "ray clears a wall of h metres only 1.41 x h metres past its foot, so an "
+					+ "axonometric of a hall of full-height partitions photographs its roofs, and no "
+					+ "corner fixes that — it is the projection, not the angle.") % [cut, WALL_H])
+			else:
+				parts.append("ABSENCE IS NOT EVIDENCE OF ABSENCE HERE: this is an axonometric of a "
+					+ "building made of rooms, taken from outside it, and a 35.26-degree ray clears a "
+					+ "wall of h metres only 1.41 x h metres past its foot. Most of what a hall of "
+					+ "full-height partitions contains is behind one from any corner.")
+		"fpv":
+			parts.append(("One standpoint cannot hold a %d m enfilade: this is evidence of what is "
+				+ "IN it and of nothing else.") % int(box.get("span", 0)))
+		_:
+			parts.append("This standpoint was composed to see what was dealt, not to survey the hall.")
+	parts.append(("Of the %d bodies the museum stamped in this hall — plinths are not among them, "
+		+ "see `inventory` — this frame holds %d and misses %d: %d behind the camera, %d outside the "
+		+ "frame, %d in the frame but behind something solid, every one of them named under "
+		+ "`missing`.") % [int(tal["placed"]), int(tal["held"]), int(tal["missing"]),
+		int(tal["behind_camera"]), int(tal["outside_frustum"]), int(tal["hidden_behind_geometry"])])
+	var arts: Dictionary = (tal["by_kind"] as Dictionary).get("artifact", {})
+	if int(arts.get("placed", 0)) > 0:
+		parts.append("Of the %d of those the museum calls artifacts, this frame holds %d."
+			% [int(arts["placed"]), int(arts.get("held", 0))])
+	var total: int = int(cells.get("hall_floor", 0))
+	if total > 0:
+		parts.append(("%d of the hall's %d floor cells can be seen AT THE FLOOR from here (%.0f%%): "
+			+ "%d are in the frame but under something, %d are outside the frame. At %.2f m, the "
+			+ "height a body stands on rather than the floor it stands on, it is %d of %d — the two "
+			+ "differ because anything knee-high shadows the floor beside it, and "
+			+ "`cells.hidden_by` names what stopped each ray and at what height. Measured over the "
+			+ "hall's OWN floor, the cells a body seals included, because the walk map has those "
+			+ "subtracted already and cannot be asked what is on top of them.")
+			% [int(cells.get("visible", 0)), total, float(cells.get("hall_seen", 0.0)) * 100.0,
+			int(cells.get("under_something", 0)), int(cells.get("outside_frame", 0)),
+			float(cells.get("sample_y_head", 0.9)), int(cells.get("visible_at_head_height", 0)),
+			total])
+	if fill.has("hall_pct"):
+		parts.append(("The hall itself covers %.0f%% of this frame, rasterised from its own meshes; "
+			+ "any larger figure quoted elsewhere is the bounding BOX, which is not the hall.")
+			% float(fill["hall_pct"]))
+	parts.append("Every number in this sentence is counted off the `held` and `missing` lists beside "
+		+ "it — held is placed minus missing — so the prose cannot drift from the data it describes.")
+	return " ".join(parts)
+
+
+func _shot_coverage(box: Dictionary) -> Dictionary:
+	var ortho: bool = _cam.projection == Camera3D.PROJECTION_ORTHOGONAL
+	var eye: Vector3 = _cam.global_position
+	var fwd: Vector3 = -_cam.global_transform.basis.z
+	var diag: float = Vector3(float(box["x1"]) - float(box["x0"]),
+		float(box["y1"]) - float(box["y0"]),
+		float(box["z1"]) - float(box["z0"])).length()
+	var back: float = (diag + 32.0) if ortho else 0.0
+	var space: PhysicsDirectSpaceState3D = null
+	var w3: World3D = get_world_3d()
+	if w3 != null:
+		space = w3.direct_space_state
+	var excl: Array = []
+	if _player != null and is_instance_valid(_player):
+		excl = [_player.get_rid()]
+	# ── the bodies the museum stamped here ──
+	# ONE PASS, TWO LISTS, NO COUNTERS. Every body leaves this loop in exactly
+	# one of `held` or `missing`; nothing downstream counts anything a second
+	# time, which is what makes the sentence below unable to disagree with them.
+	var bodies: Array = _shot_bodies()
+	var held: Array = []
+	var missing: Array = []
+	for b_v in bodies:
+		var bd: Dictionary = b_v
+		var ab: AABB = bd["aabb"]
+		var pts: Array = [ab.get_center()]
+		for ix in [0.0, 1.0]:
+			for iy in [0.0, 1.0]:
+				for iz in [0.0, 1.0]:
+					pts.append(ab.position + Vector3(ab.size.x * ix, ab.size.y * iy, ab.size.z * iz))
+		var visible: bool = false
+		var all_behind: bool = true
+		for p_v in pts:
+			var p: Vector3 = p_v
+			if _cam.is_position_in_frustum(p):
+				visible = true
+			if not _cam.is_position_behind(p):
+				all_behind = false
+		var why := ""
+		if not visible:
+			why = WHY_BEHIND if all_behind else WHY_OUTSIDE
+		elif not _shot_ray_clear(space, ab.get_center(), eye, fwd, back, excl, ab):
+			why = WHY_HIDDEN
+		var ctr: Vector3 = ab.get_center()
+		var row: Dictionary = {"token": bd["token"], "kind": bd["kind"], "inv": bd["inv"],
+			"world": [snappedf(ctr.x, 0.01), snappedf(ctr.y, 0.01), snappedf(ctr.z, 0.01)]}
+		if why == "":
+			held.append(row)
+		else:
+			row["why"] = why
+			missing.append(row)
+	var tal: Dictionary = _shot_tally(bodies, held, missing)
+	# ── the hall's own floor ──
+	var floor_cells: Dictionary = _shot_floor_cells(box)
+	# TWO SAMPLE HEIGHTS, BECAUSE THEY ANSWER TWO QUESTIONS. At 0.9 m the ray
+	# asks "can the camera see what STANDS on this cell"; at 0.1 m it asks "can
+	# it see this patch of FLOOR", which is the question the wall-height
+	# arithmetic is about — a 35.26-degree ray clears a wall of h metres
+	# 1.41 x h metres past its foot, and that is a fact about the floor, not
+	# about head height. The looser number flatters a cutaway, so both are here.
+	var c_total: int = floor_cells.size()
+	var c_frame: int = 0
+	var c_seen: int = 0
+	var c_head: int = 0
+	var c_walk: int = 0
+	var blockers: Dictionary = {}
+	for k in floor_cells:
+		var c: Vector2i = k
+		if _walk_cells.has(c):
+			c_walk += 1
+		var cp := Vector3(float(c.x) + 0.5, SHOT_FLOOR_EYE, float(c.y) + 0.5)
+		if not _cam.is_position_in_frustum(cp):
+			continue
+		c_frame += 1
+		var hit: Dictionary = _shot_ray_hit(space, cp, eye, fwd, back, excl)
+		if hit.is_empty():
+			c_seen += 1
+		else:
+			var hp: Vector3 = hit["position"]
+			var bkey := "%s, stopped at %.1f m" % [_shot_blocker_name(hit), snappedf(hp.y, 0.5)]
+			blockers[bkey] = int(blockers.get(bkey, 0)) + 1
+		if _shot_ray_clear(space, Vector3(cp.x, SHOT_CELL_EYE, cp.z), eye, fwd, back, excl, AABB()):
+			c_head += 1
+	# the ten things most in the way, named and counted — a hidden cell is a
+	# complaint until it says what hid it
+	var bk_order: Array = blockers.keys()
+	bk_order.sort_custom(func(a, b): return int(blockers[a]) > int(blockers[b]))
+	var hidden_by: Dictionary = {}
+	for bi in range(mini(10, bk_order.size())):
+		hidden_by[String(bk_order[bi])] = int(blockers[bk_order[bi]])
+	var occ: float = 0.0 if c_total == 0 else float(c_frame - c_seen) / float(c_total)
+	var hall_seen: float = 0.0 if c_total == 0 else float(c_seen) / float(c_total)
+	var cells := {"hall_floor": c_total, "in_frame": c_frame, "visible": c_seen,
+		"under_something": c_frame - c_seen, "outside_frame": c_total - c_frame,
+		"visible_at_head_height": c_head, "walkable_now": c_walk,
+		"sealed_or_taken": c_total - c_walk, "hidden_by": hidden_by,
+		"hall_seen": snappedf(hall_seen, 0.001), "sample_y": SHOT_FLOOR_EYE,
+		"sample_y_head": SHOT_CELL_EYE,
+		"source": ("the segment's own tile (every cell that is not void \"0\" and not wall \"4…\"), "
+			+ "unioned with the deck laid outside it (_walk_cells) and with every cell the museum "
+			+ "took back out of the walk map (_walk_erased, which is how a cell a body SEALS stays "
+			+ "in the denominator). Pool cells (%d, the box refuses them too) and cells outside the "
+			+ "framed box are subtracted. `visible` is the ray to the FLOOR at %.2f m; "
+			+ "`visible_at_head_height` is the same ray to %.2f m, which a cutaway flatters.")
+			% [int(box.get("pool_cells_excluded", 0)), SHOT_FLOOR_EYE, SHOT_CELL_EYE],
+		"pool_excluded": int(box.get("pool_cells_excluded", 0))}
+	var fill: Dictionary = _shot_frame_fill()
+	var view := _shot_view if _shot_view != "" else "composed"
+	var skipped: Dictionary = _shot_bodies_skipped()
+	var kinds: Dictionary = {}
+	var tokens: Array = []
+	for b2_v in bodies:
+		var b2: Dictionary = b2_v
+		tokens.append("%s:%s" % [String(b2.get("kind", "")), String(b2.get("token", ""))])
+		kinds[String(b2.get("kind", ""))] = int(kinds.get(String(b2.get("kind", "")), 0)) + 1
+	tokens.sort()
+	var n_skipped: int = 0
+	for sk_v in skipped:
+		n_skipped += (skipped[sk_v] as Array).size()
+	var out := {
+		"bodies_placed": int(tal["placed"]),
+		"in_frame": int(tal["held"]),
+		"behind_camera": int(tal["behind_camera"]),
+		"outside_frustum": int(tal["outside_frustum"]),
+		"hidden_behind_geometry": int(tal["hidden_behind_geometry"]),
+		# ONE ALIAS, AND DELIBERATELY NOT TWO. tools/em_shots.py was written the
+		# same day by a hand that could not see this one, to accept any of a list
+		# of plausible key names; `bodies_placed` is not on that list, so without
+		# `total` the tool would read a block that was right there and report the
+		# engine silent. `occluded` is deliberately NOT spelled here even though
+		# the tool looks for it: the tool computes held = in_frame - occluded,
+		# and `in_frame` above is ALREADY net of occlusion, so offering both made
+		# it subtract the same bodies twice and print "holds 0 of 65 works" of a
+		# frame that holds 26. The number is in hidden_behind_geometry and in the
+		# blind sentence; a consumer must not subtract it from in_frame again.
+		"total": int(tal["placed"]),
+		"occluded_estimate": snappedf(occ, 0.001),
+		"by_kind": tal["by_kind"],
+		"by_reason": tal["by_reason"],
+		"cells": cells,
+		"frame_fill": fill,
+		# THE SET, NOT THE TOTAL (2026-09-19). The engine's inventory and the
+		# pre-run ledger row both said 65 on the hall this was found on, and they
+		# were two different sets of 65: this one drops plinths, because a plinth
+		# is a body's dress and counting it would report a work as present twice.
+		# A guard that compares totals cannot see that. These lists can be diffed.
+		"inventory": {
+			"counted": "every body in _edit_records under this segment, by kind",
+			"kinds": kinds,
+			"tokens": tokens,
+			"not_counted": skipped,
+			"not_counted_n": n_skipped,
+			"why": ("plinths are excluded from every number in this block — a plinth is the dress "
+				+ "of the body standing on it, and counting both reports one work twice. An "
+				+ "inventory that includes them will agree with this one on nothing but luck, so "
+				+ "compare `tokens` with `tokens`, never total with total.")},
+		"walls": {"built_at_m": snappedf(_shot_wall_h(), 0.01), "museum_m": WALL_H,
+			"cut_for_this_shot": _wall_cut_for_shot > 0.0,
+			"works_left_at_true_height": _wall_cut_for_shot > 0.0},
+		"method": ("bodies and floor cells are the museum's OWN records (_edit_records, the segment "
+			+ "tile, _walk_cells and _walk_erased), not an estimate; in-frame is the placed camera's "
+			+ "frustum planes; occlusion is a physics ray (parallel to forward for an orthographic "
+			+ "camera, which has no single viewpoint). in_frame is ALREADY net of occlusion — do not "
+			+ "subtract hidden_behind_geometry from it, and every count here is tallied from `held` "
+			+ "and `missing` in one place so the prose and the lists cannot disagree. "
+			+ "The ray's own blind spot: a mesh with no collider cannot occlude it, and museum wall "
+			+ "works and every piece of em_detail's dressing have none by contract — so a work flat "
+			+ "on a wall never hides anything here, can itself be called visible behind a "
+			+ "collider-less pier, and a cornice standing above a cut wall costs this measure "
+			+ "nothing while still being in the picture. Look at the PNG before quoting it."),
+		"held": held,
+		"missing": missing,
+		"blind": _shot_blind(view, tal, cells, fill, box),
+	}
+	# THE SELF-CHECK TRAVELS WITH THE BLOCK. It was written into the tally first
+	# and left there — a sabotage run (one body appended to `held` whatever the
+	# ray said) proved the tally caught it and the sidecar never mentioned it,
+	# which is the very fault this pass exists to remove: a check nobody can
+	# read is not a check. It rides in the file now, and in the sentence.
+	for guard in ["held_rows_disagree", "reasons_disagree"]:
+		if tal.has(guard):
+			out[guard] = tal[guard]
+	return out
+
+
+## THE SIDECAR. A picture nobody can reproduce is not evidence: every proof PNG
+## now lands beside a JSON naming what the camera actually WAS — read off the
+## live camera at the moment of capture, never off the numbers that were asked
+## for, so a branch that was overridden downstream cannot lie about the frame.
+func _write_shot_sidecar() -> void:
+	if _shot_path == "":
+		return
+	var path: String = _shot_path.get_basename() + ".json"
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f == null:
+		push_warning("endless_museum: could not write the shot sidecar at %s" % path)
+		return
+	var box: Dictionary = _shot_hall_box()
+	var t: Transform3D = _cam.global_transform
+	var pos: Vector3 = t.origin
+	var fwd: Vector3 = -t.basis.z
+	var at: Vector3 = _shot_look_at
+	if is_nan(at.x):
+		at = pos + fwd * 10.0
+	var vp: Vector2 = get_viewport().get_visible_rect().size
+	var ortho: bool = _cam.projection == Camera3D.PROJECTION_ORTHOGONAL
+	var out := {
+		"view": _shot_view if _shot_view != "" else "composed",
+		"projection": "orthographic" if ortho else "perspective",
+		"position": [snappedf(pos.x, 0.001), snappedf(pos.y, 0.001), snappedf(pos.z, 0.001)],
+		"looks_at": [snappedf(at.x, 0.001), snappedf(at.y, 0.001), snappedf(at.z, 0.001)],
+		"hall": {"chapter": box["chapter"], "pearl": box["pearl"], "map": box["map"],
+			"w": int(box["w"]), "h": int(box["h"]), "span": int(box["span"])},
+		# the rest is what a reader needs to redraw the frame by hand
+		"yaw_deg": snappedf(rad_to_deg(_player.rotation.y if _player != null else 0.0), 0.001),
+		"pitch_deg": snappedf(rad_to_deg(_cam.rotation.x), 0.001),
+		"keep_aspect": "width",
+		"viewport": [int(vp.x), int(vp.y)],
+		"hall_box": {"x": [snappedf(float(box["x0"]), 0.01), snappedf(float(box["x1"]), 0.01)],
+			"z": [snappedf(float(box["z0"]), 0.01), snappedf(float(box["z1"]), 0.01)],
+			"y": [snappedf(float(box["y0"]), 0.01), snappedf(float(box["y1"]), 0.01)],
+			# a constant would have been silent here: y1 was WALL_H until 2026-09-19
+			# and anything taller was clipped out of the top of the frame unremarked
+			"y1_from": box.get("y1_from", ""), "y0_from": box.get("y0_from", ""),
+			"pool_cells_excluded": int(box.get("pool_cells_excluded", 0)),
+			"annex_cells_excluded": int(box.get("annex_cells_excluded", 0)),
+			"annex_reached_x": snappedf(float(box.get("annex_reached_x", 0.0)), 0.01),
+			"room_x0": snappedf(float(box.get("room_x0", -1.0)), 0.01),
+			# the floor the museum actually laid, beside the shell the map declared:
+			# where these disagree the box carries empty shell and the hall sits
+			# off the frame's centre by half the difference
+			"content_x": [snappedf(float(box.get("content_x0", 0.0)), 0.01),
+				snappedf(float(box.get("content_x1", 0.0)), 0.01)]},
+		"png": _shot_path,
+	}
+	# THE FRAME, AND WHETHER IT IS THE ONE THE LENS WAS FITTED TO. The plan and
+	# the axonometric reshape the window to the hall's own aspect; if the window
+	# refused, the fit assumed one shape and the PNG carries another, and nothing
+	# in the picture says so. Both numbers, so the disagreement convicts itself.
+	if _shot_frame_asked != Vector2i.ZERO:
+		out["frame_asked"] = [_shot_frame_asked.x, _shot_frame_asked.y]
+		out["frame_ok"] = int(vp.x) == _shot_frame_asked.x and int(vp.y) == _shot_frame_asked.y
+	if ortho:
+		out["ortho_size"] = snappedf(_cam.size, 0.001)
+		# what the frame covers in metres: KEEP_WIDTH makes size the width
+		var frame_w: float = _cam.size
+		var frame_h: float = _cam.size / ((vp.x / vp.y) if vp.y > 0.0 else 1.5)
+		out["frame_m"] = [snappedf(frame_w, 0.01), snappedf(frame_h, 0.01)]
+		# and how much of it the hall is — the number the plan view was spending
+		# on star field: 94.3% of the height and 26-46% of the width, before this
+		var half: Vector2 = _ortho_half_extents(_cam.global_transform.basis, box)
+		out["hall_fills"] = [snappedf(half.x * 2.0 / maxf(frame_w, 0.001), 0.001),
+			snappedf(half.y * 2.0 / maxf(frame_h, 0.001), 0.001)]
+		# ...AND IT IS THE BOX, NOT THE HALL (2026-09-19). A skeptic rasterised the
+		# hall's own silhouette over the PNG and got 50.7% where this said 94.3:
+		# both are honest arithmetic about different things, because a box is a
+		# cuboid and a hall is a plan with the corners cut off it. The number that
+		# describes the PICTURE is coverage.frame_fill, measured from the hall's
+		# own meshes through this same camera. This one stays because the fit is
+		# computed from it and a reader redrawing the frame needs it.
+		out["hall_fills_is"] = ("the bounding BOX against the frame, which is what the lens was "
+			+ "fitted to — NOT how much of the frame the hall covers. For that see "
+			+ "coverage.frame_fill, which rasterises the hall's own meshes.")
+	else:
+		out["fov"] = snappedf(_cam.fov, 0.001)
+	# THE BOX THE LENS WAS FITTED TO, when it is not the box measured now. A body
+	# that finished building after the framing makes the hall taller than the
+	# frame that was cut for it, and the crop is invisible in the picture.
+	if not _shot_box_framed.is_empty() \
+			and (absf(float(_shot_box_framed["y1"]) - float(box["y1"])) > 0.05
+				or absf(float(_shot_box_framed["x0"]) - float(box["x0"])) > 0.05
+				or absf(float(_shot_box_framed["x1"]) - float(box["x1"])) > 0.05):
+		out["framed_from_a_different_box"] = {
+			"x": [snappedf(float(_shot_box_framed["x0"]), 0.01), snappedf(float(_shot_box_framed["x1"]), 0.01)],
+			"y": [snappedf(float(_shot_box_framed["y0"]), 0.01), snappedf(float(_shot_box_framed["y1"]), 0.01)],
+			"note": "the hall grew between the framing and the shutter — this frame is cut for the smaller one"}
+	# THE CUTAWAY DECLARES ITSELF AT THE TOP OF THE FILE, not only inside the
+	# coverage block: a reader who takes the wall heights in an iso frame for the
+	# museum's own has been misled by the picture, and the one place that can
+	# stop that is the file the picture ships with.
+	out["walls_built_at"] = snappedf(_shot_wall_h(), 0.01)
+	if _wall_cut_for_shot > 0.0:
+		out["cutaway"] = {
+			"walls_cut_to": snappedf(_wall_cut_for_shot, 0.01),
+			"museum_wall_height": WALL_H,
+			"works_left_at_true_height": true,
+			"applies_to": ("every wall box this hall draws through _wall_at — the tile's partitions, "
+				+ "the outer skin, the corner returns, the vestibule, the annex and the side rooms. "
+				+ "What is NOT cut: em_detail's dressing (cornices, door linings, the overpanels "
+				+ "above every doorway) and the gallery glazing, which stand at their built height "
+				+ "and are visible in the frame as bands floating over the cut walls"),
+			"why": ("a 35.264-degree ray clears a wall of h metres 1.41 x h metres past its foot, "
+				+ "so an axonometric of a hall of full-height partitions photographs its roofs. "
+				+ "Measured on primitives|point one, uncut against cut: bodies held 26 of 65 -> 60 "
+				+ "of 65, floor cells visible at head height 45 of 394 -> 367, at the floor itself "
+				+ "45 -> 234."),
+			"what_the_cut_does_not_buy": ("the strip of floor hugging every wall. A run at 0.60 m "
+				+ "returned the same 234 floor cells to the byte: the binding obstruction is the "
+				+ "cell's own DIAGONAL NEIGHBOUR, where the ray is only 0.6 m up, so a 0.6 m stub "
+				+ "grazes exactly where a 0.9 m one blocks. See coverage.cells.hidden_by, which "
+				+ "names the stub tops as the majority of the hidden cells. Only a cut below 0.5 m "
+				+ "shows that strip, and it stops reading as a wall."),
+			"so": "the wall heights in this picture are NOT the museum's; everything else is"}
+	var cov: Dictionary = _shot_coverage(box)
+	out["coverage"] = cov
+	print("[em-shot] coverage: %d placed, %d in frame, %d behind the camera, %d outside it, %d hidden; %d of %d floor cells seen (%.0f%%) — %s" % [
+		int(cov["bodies_placed"]), int(cov["in_frame"]), int(cov["behind_camera"]),
+		int(cov["outside_frustum"]), int(cov["hidden_behind_geometry"]),
+		int((cov["cells"] as Dictionary)["visible"]), int((cov["cells"] as Dictionary)["hall_floor"]),
+		float((cov["cells"] as Dictionary)["hall_seen"]) * 100.0, String(cov["blind"])])
+	f.store_string(JSON.stringify(out, " ") + "\n")
+	f.close()
+	print("[endless_museum] shot sidecar -> %s" % path)
+
+
 func _shoot_deferred() -> void:
 	var frames := 90
 	var t := get_tree()
@@ -20458,6 +21915,7 @@ func _shoot_deferred() -> void:
 			var img := get_viewport().get_texture().get_image()
 			img.save_png(_shot_path)
 			print("[endless_museum] proof shot -> %s" % _shot_path)
+			_write_shot_sidecar()
 			t.quit()
 	t.process_frame.connect(cb)
 
@@ -23473,6 +24931,13 @@ func _drop_point() -> Vector3:
 	# walked against, and this map no longer takes that branch.
 	if _L("lobby", "roof", 1.0) <= 0.5:
 		var g := _arrival_at(hx + 0.5, _L("lobby", "drop_z", 1.0) + 0.5)
+		# THE LOBBY'S OWN DROP (2026-09-30, Palle: "drop the player more far up in
+		# the cylinder so we experience more drop and falling"). lobby.drop_m, from
+		# the hall's map or em_layout's lobby section, replaces the global arrival
+		# drop in this branch only: every other chapter start keeps arrival.drop_m
+		# (4 m, capped at 12). Its own cap is 30 m because Point Zero's arrival shaft
+		# is 19.3 m tall and the fall is meant to begin inside it. No key, no change.
+		g.y = _arrival_floor_y(g.x, g.z) + clampf(_L("lobby", "drop_m", _arrival_drop()), 0.0, 30.0)
 		print("[em-roof] no roof — the visitor arrives over the drop cell at (%.1f, %.1f, %.1f), map cell (%d, %d), and falls %.1f m" % [
 			g.x, g.y, g.z, int(hx), int(hz) - VESTIBULE_H, g.y])
 		return g
@@ -23611,6 +25076,11 @@ func _dress_keep_out(segn: Node3D) -> Array:
 	var out: Array = []
 	if segn == null:
 		return out
+	if segn.has_meta("em_weathering_keep_out"):
+		out.append(segn.get_meta("em_weathering_keep_out"))
+	if segn.has_meta("em_turning_wall_keep_out"):
+		out.append(segn.get_meta("em_turning_wall_keep_out"))
+	out.append_array(segn.get_meta("em_simplex_keep_out", []))
 	for c_v in (segn.get_meta("em_pool_cells", []) as Array):
 		var c: Vector2i = c_v
 		# inset a hair: Rect2.intersects counts a shared edge, so a flush rect
@@ -23623,6 +25093,51 @@ func _dress_keep_out(segn: Node3D) -> Array:
 	var vw: float = float(segn.get_meta("em_vest_w", 17))
 	out.append(Rect2(-2.0, 0.02, vw + 4.0, float(VESTIBULE_H) - 0.04))
 	return out
+
+
+func _prepare_turning_wall(seg: Node3D, spec: Dictionary, tile: Array) -> void:
+	# An opt-in east opening owned by a placed wall_exception, including its floor,
+	# moving collider and landing. Empty declarations leave all older halls intact.
+	var d: Dictionary = spec.get("turning_wall", {}) if spec.get("turning_wall") is Dictionary else {}
+	if d.is_empty() or String(d.get("side", "")) != "east": return
+	var start: int = int(d.get("start_z", -1))
+	if start < 1 or start+2 >= tile.size(): return
+	var w: int = (tile[start] as Array).size()
+	if w < 2: return
+	for z in range(start,start+2):
+		if (tile[z] as Array).size() != w or String(tile[z][w-1]) != "1": return
+	var has_owner := false
+	for a in spec.get("artifacts", []):
+		var cell: Array = a.get("cell", [])
+		if a.get("token", "") == "wall_exception" and cell.size() == 2 and int(cell[0]) == w-1 and int(cell[1]) == start:
+			has_owner = true
+	if not has_owner: return
+	var replaced: Dictionary = {}
+	for z in range(start,start+2):
+		for x in [w-1,w]: replaced[Vector2i(x,z+VESTIBULE_H)] = true
+	seg.set_meta("em_turning_wall_cells",replaced)
+	seg.set_meta("em_turning_wall_keep_out",Rect2(w-1.1,start+VESTIBULE_H-0.04,2.2,2.08))
+
+
+func _install_weathering_wall(seg: Node3D, declaration: Dictionary, tile: Array) -> void:
+	# First supported application: a straight west wall. Reject a declaration
+	# crossing a door or missing wall instead of erasing unrelated architecture.
+	if declaration.is_empty() or String(declaration.get("side", "west")) != "west": return
+	var start: int = int(declaration.get("start_z", -1))
+	var length: int = clampi(int(declaration.get("length", 6)), 4, 12)
+	if start < 1 or start+length >= tile.size(): return
+	for z in range(start, start+length):
+		if (tile[z] as Array).is_empty() or String(tile[z][0]) != "4": return
+	var replaced: Dictionary = {}
+	for z in range(start, start+length):
+		for x in [-1,0]: replaced[Vector2i(x,z+VESTIBULE_H)] = true
+	seg.set_meta("em_weathering_cells", replaced)
+	seg.set_meta("em_weathering_keep_out", Rect2(-1.05,start+VESTIBULE_H-0.05,4.1,length+0.1))
+	var wall = load("res://commons/scenes/em/em_weathering_wall.gd").new()
+	wall.length_m=length; wall.height_m=WALL_H; wall.wall_seed=int(declaration.get("seed",79))
+	wall.position=Vector3(0.5,0,start+VESTIBULE_H+length/2.0)
+	wall.rotation.y=PI/2.0
+	seg.add_child(wall)
 
 
 ## The threshold ember: a lit strip laid across the floor where the enter room

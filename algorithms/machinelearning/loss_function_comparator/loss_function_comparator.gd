@@ -223,6 +223,7 @@ func _apply_emissive() -> void:
 # The ONLY place the #tail: axis acts. Twenty x positions are fixed; what varies
 # is which of the twenty y values are allowed to be strays, and what kind.
 func _generate_dataset() -> void:
+	_rng.seed = DATA_SEED
 	_data_x.clear()
 	_data_y.clear()
 	var n: int = 20
@@ -242,15 +243,16 @@ func _generate_dataset() -> void:
 			_tail_few()
 
 
-# `few` — VERBATIM the shipped composition, including the draw ORDER, so the
-# default renders the pre-promotion look exactly: a clean +/-0.2 draw per sample,
-# an outlier_fraction coin flip, and on a hit a two-signed |noise| 1.5-3.0.
+# Every sample has a fixed baseline, selection rank and alternate value.
+# Increasing the slider includes more of those alternatives without redrawing
+# the observations already present. Returning to a value repeats its dataset.
 func _tail_few() -> void:
+	_clean_baseline()
 	for i in range(_data_x.size()):
-		var noise: float = _rng.randf_range(-0.2, 0.2)
-		if _rng.randf() < outlier_fraction:
-			noise = _rng.randf_range(1.5, 3.0) * (1.0 if _rng.randf() > 0.5 else -1.0)
-		_data_y.append(0.5 * _data_x[i] + noise)
+		var rank: float = _rng.randf()
+		var alternate: float = _rng.randf_range(1.5, 3.0) * (1.0 if _rng.randf() > 0.5 else -1.0)
+		if rank < outlier_fraction:
+			_data_y[i] = 0.5 * _data_x[i] + alternate
 
 
 # The tail-free dataset, and the shared substrate of the three composed tails
@@ -642,9 +644,7 @@ func _create_controls() -> void:
 		var btn: Node = btn_scene.instantiate()
 		btn.position = Vector3(0.2, 0.02, terrain_size * 0.5 + 0.15)
 		_controls.add_child(btn)
-		var area = btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(_on_reset_pressed)
+		btn.pressed.connect(_on_reset_pressed)
 
 
 ## The stray fraction each tail actually contains, so the slider reflects it.
@@ -675,6 +675,7 @@ func _on_reset_pressed() -> void:
 
 
 func _regenerate() -> void:
+	_step_timer = 0.0
 	_generate_dataset()
 	# Rebuild terrain meshes
 	for t in range(3):

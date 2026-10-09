@@ -299,4 +299,8 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("host_lighting", "0")) == "1":
+		for light in find_children("*", "Light3D", true, false):
+			light.hide()
+		for camera in find_children("*", "Camera3D", true, false):
+			camera.clear_current()

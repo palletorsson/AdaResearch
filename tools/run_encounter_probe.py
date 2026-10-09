@@ -22,6 +22,7 @@ def main():
     parser.add_argument('room')
     parser.add_argument('--sequence', default='array_tutorial')
     parser.add_argument('--render', action='store_true')
+    parser.add_argument('--rendering-method', choices=['gl_compatibility', 'mobile', 'forward_plus'], default='gl_compatibility')
     parser.add_argument('--spec', type=Path)
     parser.add_argument('--probe', type=Path, default=ROOT / 'tools/probes/museum_encounter.gd')
     args = parser.parse_args()
@@ -96,7 +97,7 @@ def main():
     engine = os.environ.get('GODOT_EXE', 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe')
     command = [engine, '--path', str(ROOT), '--xr-mode', 'off', '--log-file', str(run / 'engine.log'),
                '--script', 'res://' + probe.relative_to(ROOT).as_posix()]
-    command += ['--no-window', '--rendering-method', 'gl_compatibility'] if args.render else ['--headless']
+    command += ['--no-window', '--rendering-method', args.rendering_method] if args.render else ['--headless']
     command += ['--', prefix + 'spec.json']
     with (run / 'stdout.log').open('w', encoding='utf-8') as log:
         process = subprocess.Popen(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT,

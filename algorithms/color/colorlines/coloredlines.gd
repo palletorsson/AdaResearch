@@ -83,8 +83,17 @@ void fragment() {
 """
 
 func _ready() -> void:
-	setup_scene()
+	if not (str(get_meta("config_embedded", false)).to_lower() in ["true", "1"]):
+		setup_scene()
 	generate_line_paths()
+	# Fit all original paths together; allow room for shader expansion and sway.
+	if (str(get_meta("config_embedded", false)).to_lower() in ["true", "1"]):
+		var radius := 0.0
+		for path in line_paths:
+			for point in path: radius = maxf(radius, point.length())
+		if radius > 3.0:
+			for path in line_paths:
+				for i in path.size(): path[i] *= 3.0 / radius
 	create_line_meshes()
 	start_line_animations()
 

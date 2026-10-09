@@ -1,13 +1,5 @@
 # florensky_sphere.gd
-# Pavel Florensky's paraconsistent logic visualized
-# "A and not-A" — truth that holds contradiction without collapse
-#
-# Florensky (mathematician-priest, 1882-1937) argued that
-# mystical/mathematical truth can be paradoxical:
-# The infinite cannot be described positively, only by what it is NOT.
-#
-# This sphere simultaneously IS and IS NOT
-# It holds both states without resolution — the queer signature
+# Florensky-inspired antinomy: a visual study, not a formal logic.
 
 extends Node3D
 
@@ -16,14 +8,14 @@ class_name FlorenskySphere
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
-# essence: A ∧ ¬A held on one surface without collapse — Pavel Florensky's PARACONSISTENCY made a body. A double-faced sphere whose skin reads from both sides at once (blue assertion A oscillating into red negation ¬A), the limit turned from a wall you hit into a habitat you can stand inside. Origin at the sphere's centre; the boundary is the whole point — it is livable both ways.
-# desire: to be looked at until the looker stops needing the contradiction resolved. To oscillate as BOTH, to be observed and collapse to a single face for a breath, and to return — teaching that the settled answer is the temporary state and the held tension is home.
-# critical_parameter: current_state — BOTH (A ∧ ¬A) is the resting state, not the exception; observation collapses it to A or ¬A only briefly; NEITHER is the apophatic limit ¬(A ∨ ¬A), the infinite described only by what it is not. seam — WHERE the contradiction is put: nowhere marked (none), on one great circle (hairline), in an open void the skin will not close (gap), in structure built across that void (scaffold), or in every joint at once so no joint can be pointed at (field).
-# triggers: left-click / VR interact collapses the superposition to a random single face; a 2-second timer returns it to BOTH; right-click cycles all four logical states; hover brightens the glow.
-# emerges: the felt experience that contradiction is not destruction but a MODE OF BEING — the crisis-chapter voltage where classical logic's blow-up (from A ∧ ¬A everything follows) refuses to fire, and the boundary becomes a place to think from instead of a place thinking ends.
-# needs: a double-faced transparent skin whose inner and outer surfaces both catch light (culling disabled) [present]; an inner emissive core that pulses under the skin [present]; a VR / mouse pickable area [present]; a state label carrying the logical symbols [present].
-# relationships: contrasts schrodinger_box (quantum indeterminacy vs LOGICAL paraconsistency); contrasts russell_set_box (contradiction as fatal paradox vs contradiction as inhabited truth); the theological hinge of the foundations-crisis chapters — Florensky the mathematician-priest reading the antinomy as revelation, not error; unlocks qfep_formula_3d (the QFEP oscillation IS this logic).
-# truth: A and not-A can both be true. This is not a failure of logic but a description of reality that classical logic cannot contain. Florensky held the limit as a boundary that reads from both sides — and made the contradiction somewhere to live.
+# essence: Florensky-inspired antinomy staged on a double-sided sphere. A visual metaphor, not a logical calculus or quantum simulation.
+# desire: stay with two readings before asking for a verdict.
+# critical_parameter: hold_both keeps A AND not-A visible without observation/cycling collapse. current_state is the legacy four-state visual selector. seam chooses none, hairline, gap, scaffold or field geometry.
+# triggers: in hold_both mode, no state-changing input; otherwise legacy desktop observation and cycling. No tracked-hand state control is wired here.
+# emerges: a comparison between sustained interpretation and the demand for a settled answer; the visual does not prove a true contradiction.
+# needs: double-sided material, inner core, readable state label; optional seam geometries.
+# relationships: compare with both_true_gate's report store; distinguish both from the quantum visual toys. Florensky's religious antinomies have multiple contested interpretations.
+# truth: rendering both sides of a mesh stages two readings. It does not establish that a proposition and its negation are true.
 
 signal state_observed(is_A: bool, is_not_A: bool)
 signal superposition_entered()
@@ -48,6 +40,8 @@ enum LogicState { A, NOT_A, BOTH, NEITHER }
 
 ## Enable observation (collapses superposition temporarily)
 @export var allow_observation: bool = true
+## Hall study: hold the two readings without borrowing quantum collapse.
+@export var hold_both: bool = false
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-07-31) — ONE AXIS, TWO FILES.
@@ -336,7 +330,7 @@ func _create_labels() -> void:
 
 	# Explanation
 	var explanation = BakedText.make_tag(
-		"Paraconsistent Logic — Truth that holds contradiction",
+		"Florensky-inspired antinomy — a visual study, not a proof",
 		Color(0.7, 0.7, 0.7), 0.04, Color(0.08, 0.09, 0.11), true)
 	if explanation:
 		explanation.position = Vector3(0, -radius - 0.2, 0)
@@ -393,6 +387,9 @@ func _on_hover_end() -> void:
 
 func _process(delta: float) -> void:
 	_animation_time += delta
+	if hold_both:
+		current_state = LogicState.BOTH
+		_is_observed = false
 	
 	# Handle observation collapse timer
 	if _is_observed:
@@ -430,7 +427,9 @@ func _animate_superposition() -> void:
 		inner_mat.emission_energy_multiplier = 0.3 + pulse * 0.7
 	
 	# State label flickers between symbols (rebuilds the baked board on change)
-	if fmod(_animation_time, 0.5) < 0.25:
+	if hold_both:
+		_set_state_label("A AND not-A", color_both)
+	elif fmod(_animation_time, 0.5) < 0.25:
 		_set_state_label("A ∧ ¬A", color_both)
 	else:
 		_set_state_label("¬(A ∨ ¬A)", color_both)
@@ -458,12 +457,12 @@ func _update_visual_state() -> void:
 		LogicState.NOT_A:
 			_set_state_label("¬A", color_not_A)
 		LogicState.BOTH:
-			_set_state_label("A ∧ ¬A", color_both)
+			_set_state_label("A AND not-A" if hold_both else "A ∧ ¬A", color_both)
 		LogicState.NEITHER:
 			_set_state_label("¬A ∧ ¬(¬A)", Color(0.5, 0.5, 0.5))
 
 func observe() -> void:
-	if not allow_observation:
+	if hold_both or not allow_observation:
 		return
 	
 	if current_state == LogicState.BOTH:
@@ -480,6 +479,7 @@ func observe() -> void:
 		
 
 func cycle_state() -> void:
+	if hold_both: return
 	match current_state:
 		LogicState.A:
 			current_state = LogicState.NOT_A
@@ -494,7 +494,7 @@ func cycle_state() -> void:
 	_update_visual_state()
 
 func set_state(state: LogicState) -> void:
-	current_state = state
+	current_state = LogicState.BOTH if hold_both else state
 	_is_observed = false
 	_update_visual_state()
 
@@ -516,6 +516,12 @@ static func normalise_seam(raw: String, fallback: String = "none") -> String:
 ## that names the seam already in force rebuilds nothing. An unguarded rebuild here
 ## is the failure that has broken shipped placements in this corpus before.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("hold_both"):
+		hold_both = str(config_data.hold_both).to_lower() in ["on", "true", "1"]
+		if hold_both:
+			current_state = LogicState.BOTH
+			_is_observed = false
+			if _built: _update_visual_state()
 	if not config_data.has("seam"):
 		return
 	var before: String = seam

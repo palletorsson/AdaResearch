@@ -32,6 +32,7 @@ const TRACK_COLORS: Array[Color] = [
 ## Background color - Light theme
 const BG_COLOR: Color = Color(0.85, 0.85, 0.88)  # Light gray
 const HEADER_BG_COLOR: Color = Color(0.9, 0.9, 0.92)  # Slightly lighter
+const TRACK_LABEL_WIDTH: float = 210.0
 
 const SOUND_PRESETS: Array[String] = [
 	"808_kit", "trap_beats", "synth_kit", "tech_noir", "retro", "90s_house", "juno_pads",
@@ -59,6 +60,7 @@ var _preset_button: OptionButton
 var _pattern_button: OptionButton
 var _step_label: Label
 var _playhead_indicators: Array[Panel] = []
+var _track_labels: Array[Label] = []
 
 
 func _ready() -> void:
@@ -198,7 +200,8 @@ func _create_ui() -> void:
 
 	# Spacer for track labels
 	var spacer = Control.new()
-	spacer.custom_minimum_size = Vector2(60, 10)
+	# GridHBox has 4 px separation; this row adds its own 2 px separation.
+	spacer.custom_minimum_size = Vector2(TRACK_LABEL_WIDTH + 2.0, 10)
 	playhead_row.add_child(spacer)
 
 	# Playhead indicators - Light theme
@@ -226,16 +229,16 @@ func _create_ui() -> void:
 	labels_vbox.add_theme_constant_override("separation", 2)
 	grid_hbox.add_child(labels_vbox)
 
-	var track_names = ["Kick", "Snare", "HiHat", "Bass"]
 	for track in range(num_tracks):
 		var label = Label.new()
-		label.text = track_names[track] if track < track_names.size() else "T%d" % track
-		label.custom_minimum_size = Vector2(60, 30)
+		label.text = "Track %d" % (track + 1)
+		label.custom_minimum_size = Vector2(TRACK_LABEL_WIDTH, 30)
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		# Use track color for labels
 		label.add_theme_color_override("font_color", TRACK_COLORS[track % TRACK_COLORS.size()].darkened(0.2))
 		label.add_theme_font_size_override("font_size", 14)
 		labels_vbox.add_child(label)
+		_track_labels.append(label)
 
 	# Button grid
 	_grid_container = GridContainer.new()
@@ -351,6 +354,20 @@ func _on_bpm_changed(value: float) -> void:
 	bpm = value
 	_bpm_label.text = "BPM: %d" % int(bpm)
 	bpm_changed.emit(bpm)
+
+
+## Labels come from the sounds the parent actually loaded, without preview audio.
+func set_track_names(names: Array[String]) -> void:
+	for track in range(_track_labels.size()):
+		var known_name := names[track] if track < names.size() else ""
+		_track_labels[track].text = known_name if not known_name.is_empty() else "Track %d" % (track + 1)
+
+
+func set_sound_preset(preset_name: String) -> void:
+	## Reflect model/config state without emitting a visitor selection event.
+	sound_preset = preset_name
+	if _preset_button:
+		_preset_button.select(SOUND_PRESETS.find(preset_name))
 
 
 func _on_preset_selected(index: int) -> void:

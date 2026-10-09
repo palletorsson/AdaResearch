@@ -1,0 +1,178 @@
+{
+  "_meta": {
+    "sequence": "fractals",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Fractal_RecursiveTrees": {
+      "inherited": "From Fractal_Recursion: Next: follow a branch into its descendants and test which relationships repeat as their sizes and directions change.",
+      "question": "How far can one branching instruction carry a structure?",
+      "ontology": "Recursion calls a construction on smaller or later parts, with a stopping condition; a tree stores parent-child relations.",
+      "experiment": "Follow one thick branch into its smaller descendants, then find a second branch that repeats the relationship without matching every dimension.",
+      "observe": "Box-like limbs differ in widths and orientations while inheriting a repeated branching structure.",
+      "limit": "Finite depth and random variation make this an approximation with family resemblance, not an infinite exact self-copy. A branching shape is not evidence of biological growth.",
+      "variation": "Proposed extension: Reveal one generation at a time and preserve the random seed so only recursion depth changes.",
+      "handoff": "A useful extension would place two specimens with the same seed beside one another and change only the depth limit. You could locate exactly where the added calls begin. In the next room, recursion will make its structure visible through removal: the descendants will be the intervals left after a repeated cut.",
+      "candidate_artifacts": [
+        "recursive_tree"
+      ],
+      "sources": [
+        "commons/maps/Fractal_RecursiveTrees/final.md",
+        "commons/maps/Fractal_RecursiveTrees/map_data.json",
+        "algorithms/fractals/recursive_tree/recursive_tree.tscn",
+        "algorithms/fractals/recursive_tree/recursive_tree.gd",
+        "algorithms/fractals/recursive_tree/RecursiveTreeUI.gd",
+        "commons/maps/Fractal_RecursiveTrees/intent.md",
+        "commons/maps/Fractal_RecursiveTrees/blurb.md",
+        "commons/maps/Fractal_RecursiveTrees/critical.md",
+        "commons/maps/Fractal_RecursiveTrees/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. UI sliders are2D; no promised VR branch dragging.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Fractal_CantorSet": {
+      "inherited": "From Fractal_RecursiveTrees: A useful extension would place two specimens with the same seed beside one another and change only the depth limit. You could locate exactly where the added calls begin. In the next room, recursion will make its structure visible through removal: the descendants will be the intervals left after a repeated cut.",
+      "question": "Can repeated removal produce more pieces while leaving less material?",
+      "ontology": "The middle-third construction replaces each interval with its two outer thirds. Count and total length move in different directions.",
+      "experiment": "Watch one subdivision and count the descendants of a bar; compare the gap with either surviving third.",
+      "observe": "Each retained segment produces two shorter ones, while the deleted middle separates them.",
+      "limit": "A finite set of thick bars is not the infinite Cantor set. Falling or displaced bodies are consequences of this exhibit and must be distinguished from the mathematical interval.",
+      "variation": "Proposed extension: Retain deleted middles as ghost or scar readouts so visitors can compare what the rule removes with what it keeps.",
+      "handoff": "The next room compares removal with replacement. Keep track of which quantity changes when a segment is replaced by several smaller segments rather than simply cut away.",
+      "candidate_artifacts": [
+        "cantor_set"
+      ],
+      "sources": [
+        "commons/maps/Fractal_CantorSet/final.md",
+        "commons/maps/Fractal_CantorSet/map_data.json",
+        "algorithms/fractals/cantorset/cantor_set.tscn",
+        "algorithms/fractals/cantorset/cantor_set.gd",
+        "commons/maps/Fractal_CantorSet/intent.md",
+        "commons/maps/Fractal_CantorSet/blurb.md",
+        "commons/maps/Fractal_CantorSet/critical.md",
+        "commons/maps/Fractal_CantorSet/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Fractal_MengerSponge": {
+      "inherited": "From Fractal_KochSierpinski: Next: removal enters a volume, where openings repeat through the faces of a cube.",
+      "question": "Can a repeated cut increase visible intricacy while reducing volume?",
+      "ontology": "Subdivision divides a cube into27 equal parts; the Menger rule retains20 by removing the centre and face-centred parts.",
+      "experiment": "Inspect an opening through the sponge, then look for the same pattern of openings at a smaller scale.",
+      "observe": "Repeated square tunnels and smaller retained cubes occupy the original envelope.",
+      "limit": "The displayed finite stages retain positive volume and finite detail. Mathematical limit claims need reasoning beyond what a headset can resolve.",
+      "variation": "Proposed extension: Keep the removed seven parts beside one retained block for one stage, and let visitors reconstruct the cut.",
+      "handoff": "Next, repetition takes a numerical form. Instead of retaining twenty copies, we will generate each new quantity from the preceding two and inspect how its visual representation changes what we can compare.",
+      "candidate_artifacts": [
+        "menger_sponge"
+      ],
+      "sources": [
+        "commons/maps/Fractal_MengerSponge/final.md",
+        "commons/maps/Fractal_MengerSponge/map_data.json",
+        "algorithms/fractals/mengersponge/menger_sponge.tscn",
+        "algorithms/fractals/mengersponge/menger_sponge.gd",
+        "commons/maps/Fractal_MengerSponge/intent.md",
+        "commons/maps/Fractal_MengerSponge/blurb.md",
+        "commons/maps/Fractal_MengerSponge/critical.md",
+        "commons/maps/Fractal_MengerSponge/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No claim of user-operated subdivision or traversable tunnels; small scene scale matters.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Fractal_GoldenSpiral": {
+      "inherited": "From Fractal_MengerSponge: Next, repetition takes a numerical form. Instead of retaining twenty copies, we will generate each new quantity from the preceding two and inspect how its visual representation changes what we can compare.",
+      "question": "Which part of a growing pattern comes from addition, and which part comes from its drawing?",
+      "ontology": "A recurrence constructs each number from earlier values; an encoding determines how those numbers occupy space.",
+      "experiment": "Read three consecutive labelled values and check whether the last equals the earlier two; compare that arithmetic with the tower heights.",
+      "observe": "The numbers follow1,1,2,3,5…; tower heights grow more slowly than the numbers.",
+      "limit": "Tower proportions are logarithmic, so height ratios cannot be read as Fibonacci ratios. A recurrence does not prove all natural growth follows the golden ratio.",
+      "variation": "Proposed extension: Place linear and logarithmic encodings beside the same numbered sequence, then invent a different starting pair.",
+      "handoff": "A useful extension would place linear and logarithmic versions of the same towers side by side. Ask which version makes addition easier to verify and which keeps more terms visible. The next room also begins with a recurrence, but asks what happens when it is repeatedly applied to each starting point in a plane.",
+      "candidate_artifacts": [
+        "fibonacci_sequences"
+      ],
+      "sources": [
+        "commons/maps/Fractal_GoldenSpiral/final.md",
+        "commons/maps/Fractal_GoldenSpiral/map_data.json",
+        "algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn",
+        "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibonacciSequences.gd",
+        "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibUI.gd",
+        "commons/maps/Fractal_GoldenSpiral/intent.md",
+        "commons/maps/Fractal_GoldenSpiral/blurb.md",
+        "commons/maps/Fractal_GoldenSpiral/critical.md",
+        "commons/maps/Fractal_GoldenSpiral/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Fractal_Synthesis": {
+      "inherited": "From Fractal_MandelbrotSet: Next: compare two recursive constructions and explain exactly what each repeats.",
+      "question": "What makes two very different objects examples of recursion?",
+      "ontology": "A recursive explanation names what is repeated, how a child relates to its parent, and why the construction stops.",
+      "experiment": "Choose a Cantor segment and a tree branch. Explain one next step for each before looking at their smaller descendants.",
+      "observe": "The interval construction deletes a middle third; the tree adds branches, yet each repeats a relation at another level.",
+      "limit": "Recursion alone does not guarantee exact self-similarity or the same dimension. Sharing a programming technique does not erase the different meanings of removal and branching.",
+      "variation": "Proposed extension: Exchange a rule between the pair: design a branching interval or a tree that withholds its central branch, and predict what the exchange changes.",
+      "handoff": "In the next room, instructions become a path. We will ask how a finite sequence of turns can organise a line across an area, preparing the move from recursion into grammars.",
+      "candidate_artifacts": [
+        "cantor_set",
+        "recursive_tree"
+      ],
+      "sources": [
+        "commons/maps/Fractal_Synthesis/final.md",
+        "commons/maps/Fractal_Synthesis/map_data.json",
+        "algorithms/fractals/cantorset/cantor_set.tscn",
+        "algorithms/fractals/cantorset/cantor_set.gd",
+        "algorithms/fractals/recursive_tree/recursive_tree.tscn",
+        "algorithms/fractals/recursive_tree/recursive_tree.gd",
+        "algorithms/fractals/recursive_tree/RecursiveTreeUI.gd",
+        "commons/maps/Fractal_Synthesis/intent.md",
+        "commons/maps/Fractal_Synthesis/blurb.md",
+        "commons/maps/Fractal_Synthesis/critical.md",
+        "commons/maps/Fractal_Synthesis/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Uses two earlier artifacts in a new comparative role; remaining synthesis displays stay available without all becoming primary.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Fractal_CrossSequence": {
+      "inherited": "From Fractal_Synthesis: In the next room, instructions become a path. We will ask how a finite sequence of turns can organise a line across an area, preparing the move from recursion into grammars.",
+      "question": "How can a line visit a region without becoming a sheet?",
+      "ontology": "A finite curve is an ordered path; recursive rules can make progressively finer paths visit a grid more densely.",
+      "experiment": "Follow a stretch on one panel, then compare the way another panel turns and returns through its area.",
+      "observe": "Three differently organised traces share a framed region but distribute their turns differently.",
+      "limit": "Finite images have gaps and pixel thickness. A space-filling limit is not proved by a dense drawing, and these panels are not physical paths to walk.",
+      "variation": "Proposed extension: Compare multiple depths of one grammar with equal framing and line width before comparing separate grammars.",
+      "handoff": "You can now carry a precise question into the grammar laboratory. If the drawn line is the result of a symbolic sentence, which changes come from rewriting the sentence, and which come from teaching its interpreter a different meaning for a symbol?",
+      "candidate_artifacts": [
+        "space_filling_curve_gallery"
+      ],
+      "sources": [
+        "commons/maps/Fractal_CrossSequence/final.md",
+        "commons/maps/Fractal_CrossSequence/map_data.json",
+        "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn",
+        "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+        "commons/maps/Fractal_CrossSequence/intent.md",
+        "commons/maps/Fractal_CrossSequence/blurb.md",
+        "commons/maps/Fractal_CrossSequence/critical.md",
+        "commons/maps/Fractal_CrossSequence/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Bridge to next L-system grammar chapter: separate rewriting symbols from interpreting them as movements.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

@@ -2,20 +2,17 @@ extends Node3D
 class_name AutomaticWritingDesk
 
 # @identity
-# essence: a small desk with a sheet of paper on it, and an invisible pen that writes by itself — driven by the movement of your HEAD. The headset is the hand. A nib travels left to right across the page laying down an ink line; when it reaches the right margin it returns to the left and drops to the next row, the way a typewriter or a hand fills a page. What it writes is asemic — wordless script, the look of handwriting with no language in it — and its shape is your head's motion: hold still and the row comes out a calm flat line; turn, lean, look around, and the row breaks into jagged loops. Row by row the page fills with a transcription of how your head moved while you stood there. Surrealist automatic writing and the spiritualist planchette, with the headset as the medium.
-# desire: it wants to write you without your consent and without your words — to take the one input you cannot hold still (the head, always microscopically moving, always turning toward what catches the eye) and render it as a script you didn't choose to produce. It wants the page to look like a confession in a language no one can read: legibly handwriting, illegibly meaning. It puts automatic writing in drag as biometric transcription — the headset that knows where you looked, writing it down in asemic cursive, row after row.
-# critical_parameter: head_speed_scale × letters_freq. A small head_speed_scale makes the pen leap into jagged script at the faintest head motion (the page is loud, every glance inscribed); a large one keeps the rows calm unless you move sharply (the page is discreet). letters_freq sets how many "letters" per row — coarse scrawl or fine hand. Between them: how much of your attention the page is allowed to write down, and how finely.
-# triggers: _ready builds the desk + paper + faint ruled lines and pre-seeds several written rows; _process finds the XRCamera3D (the head), measures its speed, and advances the pen left-to-right / row-by-row, laying ink dots whose vertical wander scales with head speed; at the bottom of the page it starts a fresh sheet; with no headset it runs a demo head-drift so the page writes itself in capture.
-# emerges: on the lab table beside the cold hand-telemetry diptych, it is the warm, involuntary member of the trace set — not your hands logged as numbers but your head transcribed as script. Where `mystic_writing_pad` keeps what you draw and the diptych logs where your hands are, this writes what your attention does, in a hand that is yours and unreadable.
-# needs: a desk + a page to write on [present]; an instrument that advances row by row like writing [the pen, present]; a driver that is involuntary and always moving [the head / XRCamera3D, with a demo fallback]; ink that reads as asemic handwriting [dot script whose amplitude is head speed, present]; ruled lines so the page reads as paper [present]
-# relationships: warm head-driven counterpart to `hand_telemetry_diptych` (cold, hand-driven) in the lab trace set; shares the dot-trace motif with `mystic_writing_pad`, `living_paper`, and `draw_dot`; descendant of Surrealist automatic writing (Breton), asemic writing (Michaux, Dermisache), and the seismograph drum; the head-as-pen sibling to the hand-as-pen of `draw_dot`.
-# truth: a point is position without extension — and a head, sampled as it turns toward whatever it cannot help looking at, is a confession written in a hand you can't read. The desk transcribes the one thing you never agreed to author: your attention, row by row, in asemic cursive, kept on the page after you walk away.
+# essence: a desk writes across a page; the selected recording mode determines its source.
+# desire: compare a mark's appearance with the process that made it.
+# critical_parameter: recording — generated asemic script or measured head height against time.
+# triggers: in head_height, enter the reading position and let measured height write; in asemic, head speed modulates a generated waveform with an optional demo fallback.
+# emerges: a constant height can leave a horizontal timed record while a movement-gated spatial trace waits.
+# needs: a current measured headset or labelled desktop walking view for head_height; no fabricated samples when unavailable.
+# relationships: draw_dot omits stationary duration; head_trace_projection compares spatial coordinates with their floor projection; this page gives elapsed time an axis.
+# truth: the line records a chosen measurement; it cannot establish where someone looked, their attention, or what their movement meant.
 
-## Automatic writing desk — the headset's motion writes asemic script on a
-## sheet of paper, row by row. The pen sweeps left→right, drops a row at the
-## margin, fills the page top→bottom; the vertical wander of each row scales
-## with head speed (still = flat line, moving = jagged script). Driven by the
-## XRCamera3D; demo head-drift fallback so it writes in capture / desktop.
+## The default asemic mode keeps the original generated handwriting.
+## Opt-in head_height uses the measured mode below, with no seeded marks or sine.
 
 # ── DNA ───────────────────────────────────────────────────────────────
 
@@ -36,6 +33,8 @@ class_name AutomaticWritingDesk
 ## Head speed (m/s) that maps to maximum row amplitude.
 @export var head_speed_scale: float = 1.4
 @export var run_demo: bool = true
+@export_enum("asemic", "head_height") var recording: String = "asemic"
+var _measured_writer: Node
 
 # ── State ─────────────────────────────────────────────────────────────
 
@@ -85,6 +84,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_recording"):
+		var mode := str(get_meta("config_recording"))
+		if mode in ["asemic", "head_height"]: recording = mode
 	if has_meta("config_rows"):
 		rows = maxi(3, int(str(get_meta("config_rows"))))
 	if has_meta("config_letters_freq"):
@@ -206,10 +208,15 @@ func _build() -> void:
 	_nib.add_child(barrel)
 	_paper.add_child(_nib)
 
-	_seed_rows()
-	_rebuild_ink()
-	_pen_u = 0.1
-	_update_nib()
+	if recording == "head_height":
+		_measured_writer = load("res://commons/primitives/automatic_writing_desk/measured_height_writer.gd").new()
+		_measured_writer.host = self
+		add_child(_measured_writer)
+	else:
+		_seed_rows()
+		_rebuild_ink()
+		_pen_u = 0.1
+		_update_nib()
 
 
 func _build_desk() -> void:
@@ -243,6 +250,9 @@ func _build_desk() -> void:
 
 func _process(delta: float) -> void:
 	if not _built:
+		return
+	if recording == "head_height":
+		_measured_writer.advance(delta)
 		return
 	_t += delta
 

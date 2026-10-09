@@ -33,9 +33,11 @@ var _timer: float = 0.0
 var _generation: int = 0
 var _status_label: Label3D
 var _static_body: StaticBody3D
+var _controller_root: Node3D
 
 func _ready() -> void:
 	_setup_environment()
+	if str(get_meta("config_display", "")) == "table": _table_display()
 	_initialize_grid()
 	set_process(true)
 
@@ -57,6 +59,7 @@ func _setup_environment() -> void:
 	_sim_root.add_child(_status_label)
 
 	var controller_root := Node3D.new()
+	_controller_root = controller_root
 	controller_root.position = Vector3(0, 2.0, 0)
 	add_child(controller_root)
 
@@ -234,4 +237,24 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("display", "")) == "table" and is_instance_valid(_sim_root):
+		_table_display()
+
+## Museum-only staging: keep all cells, generations, rules and colliders in one
+## uniformly scaled specimen. The control and status remain human-sized.
+func _table_display() -> void:
+	if has_node("MuseumTable"): return
+	_sim_root.scale = Vector3.ONE * 0.12
+	_sim_root.position.y = 1.0 + layer_height * 0.06
+	_status_label.scale = Vector3.ONE / 0.12
+	_controller_root.position = Vector3(.65,1.4,-2.25)
+	var table := Node3D.new();table.name = "MuseumTable";add_child(table)
+	var kit: GDScript = load("res://commons/artifacts/_hangar/hangar_kit.gd")
+	var material: StandardMaterial3D = kit.painted_metal(Color("394b50"),0.05)
+	# Outside bounds are 4.5 x 4 m, surrounding the scene's retained radius-20 field.
+	var top: MeshInstance3D = kit.box(Vector3(0,.94,0),Vector3(4.5,.12,4.0),material)
+	table.add_child(top)
+	var body := StaticBody3D.new();var collision := CollisionShape3D.new();var shape := BoxShape3D.new()
+	shape.size=Vector3(4.5,.12,4.0);collision.shape=shape;body.add_child(collision);top.add_child(body)
+	for x in [-1.85,1.85]:
+		for z in [-1.6,1.6]:table.add_child(kit.box(Vector3(x,.44,z),Vector3(.10,.88,.10),material))

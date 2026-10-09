@@ -115,13 +115,13 @@ func setup_scene() -> void:
 	# Camera
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 2, 6)
-	cam.look_at(Vector3(0, 1.5, 0))
+	cam.basis = Basis.looking_at(Vector3(0, 1.5, 0) - cam.position, Vector3.UP)
 	add_child(cam)
 
 	# Light
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(5, 10, 5)
-	light.look_at(Vector3.ZERO)
+	light.basis = Basis.looking_at(Vector3.ZERO - light.position, Vector3.UP)
 	light.shadow_enabled = true
 	add_child(light)
 
@@ -299,6 +299,9 @@ func _rod(frame: StaticBody3D, a: Vector3, b: Vector3, thick: float,
 	mi.basis = Basis(xa, up, za)
 
 func setup_straps() -> void:
+	if has_meta("config_lesson"):
+		_setup_lesson_straps()
+		return
 	var template = $SoftBodyStrip
 	if not template:
 		print("SoftBodyStrip template not found!")
@@ -335,6 +338,36 @@ func setup_straps() -> void:
 		new_strap.collision_mask = 1 | 524288
 
 		add_child(new_strap)
+
+func _setup_lesson_straps() -> void:
+	# Reconstruct from rest geometry, never from a template whose mesh has
+	# already been changed by soft-body physics. Dimensions replace scaling.
+	var template: SoftBody3D = $SoftBodyStrip
+	template.hide()
+	template.collision_layer=0
+	template.collision_mask=0
+	for i in template.mesh.surface_get_array_len(0):template.set_point_pinned(i,true)
+	for i in strap_count:
+		var surface:=PlaneMesh.new()
+		surface.orientation=PlaneMesh.FACE_Z
+		surface.size=Vector2(strap_width,strap_height)
+		surface.subdivide_width=6;surface.subdivide_depth=12
+		var rest: PackedVector3Array=surface.get_mesh_arrays()[Mesh.ARRAY_VERTEX]
+		var sb:=SoftBody3D.new()
+		sb.name="LessonStrip"+str(i)
+		sb.mesh=surface
+		sb.position=Vector3((i-(strap_count-1)*0.5)*(strap_width-strap_overlap),strap_height*0.5+0.15,0)
+		sb.linear_stiffness=0.34;sb.damping_coefficient=0.05;sb.simulation_precision=5
+		sb.collision_layer=1;sb.collision_mask=1|524288
+		var mat:=StandardMaterial3D.new()
+		mat.albedo_color=Color.from_hsv(0.82+i*0.018,0.7,0.95)
+		mat.metallic=0.35;mat.roughness=0.3;mat.cull_mode=BaseMaterial3D.CULL_DISABLED
+		sb.material_override=mat
+		# Save material coordinates: the solver may update the render mesh.
+		sb.set_meta("lesson_rest",rest)
+		add_child(sb)
+		for index in rest.size():
+			if absf(rest[index].y-strap_height*0.5)<0.001:sb.set_point_pinned(index,true)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):

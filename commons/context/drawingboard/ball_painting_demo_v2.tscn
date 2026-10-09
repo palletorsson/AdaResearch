@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpk8q4n7rx5wn"]
+[gd_scene load_steps=13 format=3 uid="uid://dpk8q4n7rx5wn"]
 
 [ext_resource type="Script" uid="uid://fcj7gexxscxa" path="res://commons/context/drawingboard/paper_draw_surface.gd" id="1_v2"]
 [ext_resource type="Script" uid="uid://12e4cmpldmpb" path="res://commons/context/drawingboard/ball_spawner.gd" id="5_spawner"]
+[ext_resource type="Script" path="res://commons/context/drawingboard/ball_painting_automation.gd" id="6_automation"]
 
 [sub_resource type="Environment" id="Environment_lights"]
 background_mode = 1
@@ -44,6 +45,7 @@ roughness = 0.95
 size = Vector3(4.0, 2.5, 0.08)
 
 [node name="BallPaintingDemoV2" type="Node3D"]
+script = ExtResource("6_automation")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lights")

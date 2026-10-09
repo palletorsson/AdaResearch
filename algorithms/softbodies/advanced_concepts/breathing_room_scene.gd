@@ -1,4 +1,17 @@
 extends Node3D
+
+# The museum lesson drives the existing authored walls. Other placements keep
+# their static pressure, aperture and material behaviour.
+@export var breath_speed: float = 1.0
+@export var breath_amplitude: float = 0.5
+var _time: float = 0.0
+
+func _process(delta: float) -> void:
+	if not has_meta("config_lesson"):return
+	_time += delta * breath_speed
+	var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
+	for sb in _walls:sb.pressure_coefficient=p
+
 # ─────────────────────────────────────────────────────────────────────────────
 # breathing_room — STAGE-2 DNA (promoted 2026-08-04). axes: substance, aperture
 #

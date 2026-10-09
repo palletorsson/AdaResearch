@@ -7,13 +7,13 @@
 #
 # @identity
 # essence: f_beat = |f_a - f_b| — difference becomes rhythm
-# desire: drag two frequencies close together and hear/see the slow pulse emerge from their interference
+# desire: drag two frequencies close together and see the slow pulse emerge from their interference
 # critical_parameter: freq_a and freq_b sliders — the smaller the gap, the slower the beat
 # triggers: slider_moved on either frequency recalculates the wave animation
 # emerges: the beat envelope — a slow amplitude modulation born from two fast oscillations
 # needs: RackTemplates panel with two sliders [has]; 3 rows of spheres [has]; Label3D [has]
 # relationships: builds on sine_oscillation; connects to fourier_transform, standing_waves, resonance
-# truth: When two nearly identical things interfere, their tiny difference becomes the loudest signal.
+# truth: The frequency difference appears as a slow visual envelope; this artifact produces no audio.
 
 extends Node3D
 
@@ -163,7 +163,7 @@ func _create_row_labels() -> void:
 	add_child(lb)
 
 	var ls := Label3D.new()
-	ls.text = "A+B"
+	ls.text = "(A+B)/2"
 	ls.pixel_size = 0.0012
 	ls.font_size = 14
 	ls.modulate = color_sum
@@ -221,16 +221,18 @@ func _create_controls() -> void:
 	# Freq A slider (Param_0): maps [0,1] -> [1,10] Hz
 	var slider_a: Node = panel.find_child("Param_0", true, false)
 	if slider_a and slider_a.has_signal("slider_moved"):
-		slider_a.slider_moved.connect(func(_name: String, val: float):
-			_freq_a = lerpf(1.0, 10.0, val)
+		slider_a.set_normalized_value((_freq_a - 1.0) / 9.0)
+		slider_a.slider_moved.connect(func(_position: Variant):
+			_freq_a = lerpf(1.0, 10.0, slider_a.get_normalized_value())
 			_update_beat_label()
 		)
 
 	# Freq B slider (Param_1): maps [0,1] -> [1,10] Hz
 	var slider_b: Node = panel.find_child("Param_1", true, false)
 	if slider_b and slider_b.has_signal("slider_moved"):
-		slider_b.slider_moved.connect(func(_name: String, val: float):
-			_freq_b = lerpf(1.0, 10.0, val)
+		slider_b.set_normalized_value((_freq_b - 1.0) / 9.0)
+		slider_b.slider_moved.connect(func(_position: Variant):
+			_freq_b = lerpf(1.0, 10.0, slider_b.get_normalized_value())
 			_update_beat_label()
 		)
 

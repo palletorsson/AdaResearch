@@ -36,8 +36,10 @@ var _is_dragging: bool = false
 
 func _ready() -> void:
 	_load_colors()
-	custom_minimum_size = _get_canonical_size()
-	size = custom_minimum_size
+	# Factories may reserve a larger cell before tree entry. Keep that layout;
+	# resetting it here also moves the input target away from its planned centre.
+	custom_minimum_size = custom_minimum_size.max(_get_canonical_size())
+	size = size.max(custom_minimum_size)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	queue_redraw()
 

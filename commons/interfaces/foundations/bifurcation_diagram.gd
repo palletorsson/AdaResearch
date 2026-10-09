@@ -3,8 +3,8 @@
 # x(n+1) = r * x(n) * (1 - x(n))
 #
 # As r increases: stable → period doubling → chaos → windows of order
-# This IS the edge of chaos visualized
-# The λ parameter in QFEP maps directly to r here
+# Numerical study of a recurrence with an independent r parameter.
+# No QFEP lambda-to-r mapping is applied by this artifact.
 #
 # Walk through the phase transition from order to chaos
 
@@ -13,14 +13,14 @@ extends Node3D
 class_name BifurcationDiagram
 
 # @identity
-# essence: x(n+1) = r·x(n)·(1 - x(n)); period doubling cascade → chaos at r ≈ 3.57
-# desire: walk through the phase transition from order to chaos as r sweeps right
-# critical_parameter: r (mapped to current_r) — the ONE number that controls the entire regime
-# triggers: r crossing 3.0 → bifurcation; r crossing 3.57 → chaos onset; r ≈ 3.83 → window of order inside chaos
-# emerges: Feigenbaum universality — the same constants appear in ALL period-doubling systems
-# needs: VR slider for r [missing] — highlight plane tracks current_r but no physical controller
-# relationships: unlocks lambda_slider (r IS the QFEP lambda); contrasts florensky_sphere (holding contradiction vs cascading into it)
-# truth: the edge of chaos is not a metaphor — it is a precise mathematical boundary where computation is maximized
+# essence: Numerical samples of x(n+1) = r*x(n)*(1-x(n)).
+# desire: Compare repetition, branching and periodic windows by moving r.
+# critical_parameter: current_r; initial condition, sampling and precision also matter.
+# triggers: visitor_control:on adds an r rail and a highlighted finite orbit sample.
+# emerges: Different periods and irregular samples under the same recurrence.
+# needs: Headset checks; finite numerical samples cannot certify chaos.
+# relationships: Compare with lambda_slider without identifying their parameters.
+# truth: Period-doubling universality holds for specified classes of maps, not all systems.
 
 signal r_changed(r_value: float)
 signal regime_changed(regime: String)
@@ -59,6 +59,16 @@ signal regime_changed(regime: String)
 		current_r = clamp(v, r_min, r_max)
 		_update_highlight()
 		emit_signal("r_changed", current_r)
+
+## Opt-in independent r control. It is not a QFEP lambda controller.
+@export var visitor_control: bool = false
+var _r_control: Node3D
+var _control_slider: Node3D
+var _sample_label: Label3D
+var _selected_points: MultiMeshInstance3D
+var selected_samples: PackedFloat64Array = []
+const SAMPLE_SKIP: int = 512
+const SAMPLE_COUNT: int = 128
 
 # Internal
 var _points_multimesh: MultiMeshInstance3D
@@ -102,9 +112,14 @@ func _ready() -> void:
 	_create_highlight()
 	_create_labels()
 	_built = true
+	_sync_visitor_control()
+	_update_highlight()
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	var changed: bool = false
+	if config_data.has("visitor_control"):
+		visitor_control = str(config_data.visitor_control).to_lower() in ["on","true","1"]
+		if _built: _sync_visitor_control()
 	if config_data.has("regime"):
 		var want_regime: String = str(config_data["regime"])
 		if REGIMES.has(want_regime) and want_regime != regime:
@@ -277,8 +292,8 @@ func _create_labels() -> void:
 	
 	# Regime label
 	_regime_label = Label3D.new()
-	_regime_label.font_size = 20
-	_regime_label.position.y = height / 2 + 0.35
+	_regime_label.font_size = 14
+	_regime_label.position.y = height / 2 + 0.43
 	_regime_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	_regime_label.modulate = Color(0.8, 0.8, 0.8)
 	_regime_label.outline_size = 3
@@ -304,7 +319,7 @@ func _create_labels() -> void:
 	var title = Label3D.new()
 	title.text = "Bifurcation Diagram\nLogistic Map: x → rx(1-x)"
 	title.font_size = 28
-	title.position = Vector3(0, height/2 + 0.55, 0)
+	title.position = Vector3(0, height/2 + 0.88, 0)
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	title.modulate = Color.WHITE
 	title.outline_size = 5
@@ -367,7 +382,7 @@ func _update_highlight() -> void:
 	
 	# Update labels
 	if _r_label:
-		_r_label.text = "r = %.3f (λ ≈ %.2f)" % [current_r, (current_r - r_min) / (r_max - r_min)]
+		_r_label.text = "r = %.3f" % current_r
 		_r_label.position.x = x_pos
 	
 	if _regime_label:
@@ -375,6 +390,9 @@ func _update_highlight() -> void:
 		_regime_label.position.x = x_pos
 		_regime_label.modulate = _get_color_for_r(current_r)
 		emit_signal("regime_changed", _regime_label.text)
+	if is_instance_valid(_control_slider):
+		_control_slider.set_normalized_value((current_r-r_min)/maxf(r_max-r_min,0.0001))
+		_update_selected_orbit()
 
 func _get_regime_name(r: float) -> String:
 	if r < R_STABLE:
@@ -385,10 +403,8 @@ func _get_regime_name(r: float) -> String:
 		return "PERIOD-4"
 	elif r < R_CHAOS_START:
 		return "PERIOD-DOUBLING CASCADE"
-	elif r >= R_WINDOW_START and r <= R_WINDOW_END:
-		return "WINDOW OF ORDER (period-3)"
 	else:
-		return "CHAOS"
+		return "CHAOTIC REGION / periodic windows occur"
 
 func _process(_delta: float) -> void:
 	# Could add interactive r adjustment here
@@ -404,3 +420,65 @@ func get_regime() -> String:
 func animate_r(from_r: float, to_r: float, duration: float) -> void:
 	var tween = create_tween()
 	tween.tween_property(self, "current_r", to_r, duration).from(from_r)
+
+
+func _sync_visitor_control() -> void:
+	if not visitor_control:
+		if is_instance_valid(_r_control):
+			remove_child(_r_control); _r_control.queue_free()
+			_r_control = null; _control_slider = null; _sample_label = null
+		if is_instance_valid(_selected_points):
+			remove_child(_selected_points); _selected_points.queue_free(); _selected_points = null
+		return
+	if is_instance_valid(_r_control): return
+	_r_control = Node3D.new(); _r_control.name = "RControl"
+	_r_control.position = Vector3(width/2+0.65,-0.55,0.35)
+	add_child(_r_control)
+	var mat := StandardMaterial3D.new(); mat.albedo_color = Color(0.08,0.10,0.14)
+	for row in [[Vector3(0,-0.5,0),Vector3(0.9,1.0,0.4)],[Vector3(0,0.4,-0.12),Vector3(1.1,0.42,0.04)]]:
+		var mesh := MeshInstance3D.new(); var box := BoxMesh.new(); box.size = row[1]
+		mesh.mesh = box; mesh.material_override = mat; mesh.position = row[0]; _r_control.add_child(mesh)
+	_control_slider = preload("res://commons/interactables/slider_horizontal.tscn").instantiate()
+	_control_slider.name = "RSlider"; _control_slider.scale = Vector3.ONE * 2.2
+	_control_slider.position = Vector3(0,0.05,0.12)
+	_r_control.add_child(_control_slider)
+	_control_slider.set_range(r_min,r_max)
+	_control_slider.slider_moved.connect(_on_control_moved)
+	_sample_label = Label3D.new(); _sample_label.font_size = 20; _sample_label.pixel_size = 0.0015
+	_sample_label.position = Vector3(0,0.4,-0.09); _r_control.add_child(_sample_label)
+	var mm := MultiMesh.new(); mm.transform_format = MultiMesh.TRANSFORM_3D; mm.instance_count = SAMPLE_COUNT
+	var dot := SphereMesh.new(); dot.radius = 0.022; dot.height = 0.044; dot.radial_segments = 8; dot.rings = 4; mm.mesh = dot
+	_selected_points = MultiMeshInstance3D.new(); _selected_points.name = "SelectedOrbit"; _selected_points.multimesh = mm
+	var bright := StandardMaterial3D.new(); bright.albedo_color = Color(1,0.95,0.3); bright.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_selected_points.material_override = bright; add_child(_selected_points)
+	_update_highlight()
+
+func _on_control_moved(_value: float) -> void:
+	set_r_value(lerpf(r_min,r_max,_control_slider.get_normalized_value()))
+
+func sample_orbit(r: float) -> PackedFloat64Array:
+	var x: float = 0.5
+	var values := PackedFloat64Array()
+	for i in SAMPLE_SKIP+SAMPLE_COUNT:
+		x = r*x*(1.0-x)
+		if i >= SAMPLE_SKIP: values.append(x)
+	return values
+
+func sampled_period(values: PackedFloat64Array) -> int:
+	for period in range(1,17):
+		var repeats := true
+		for i in range(values.size()-32,values.size()):
+			if absf(values[i]-values[i-period]) > 0.000001:
+				repeats = false; break
+		if repeats: return period
+	return 0
+
+func _update_selected_orbit() -> void:
+	if not is_instance_valid(_selected_points): return
+	selected_samples = sample_orbit(current_r)
+	var x_pos: float = (current_r-r_min)/maxf(r_max-r_min,0.0001)*width-width/2
+	for i in selected_samples.size():
+		_selected_points.multimesh.set_instance_transform(i,Transform3D(Basis(),Vector3(x_pos,selected_samples[i]*height-height/2,0.075)))
+	var period := sampled_period(selected_samples)
+	var reading := "sample repeats every %d" % period if period > 0 else "no short repeat detected"
+	_sample_label.text = "r = %.3f / independent control\n%s\nx0 = 0.5; 512 skipped, 128 sampled\nFinite sample, not a proof of chaos" % [current_r,reading]

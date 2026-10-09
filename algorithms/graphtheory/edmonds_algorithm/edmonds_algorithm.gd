@@ -2,8 +2,8 @@ class_name EdmondsAlgorithm
 extends Node3D
 
 # @identity
-# essence: greedy maximum matching — iterate edges in order; if both endpoints are unmatched, add the edge to the matching; matched vertices turn green, matching edges turn red
-# desire: to watch pairs form across a graph — each matched edge is a partnership, and the unmatched vertices that remain are the ones the graph's structure could not pair
+# essence: greedy maximal matching — iterate edges in order; if both endpoints are unmatched, add the edge to the matching; matched vertices turn green, matching edges turn red
+# desire: to watch pairs form across a graph — each matched edge is a partnership, and ask whether an unmatched vertex was stranded by the graph or by an earlier choice
 # critical_parameter: coupling — what the graph's structure permits of pairing; partial leaves a few over, perfect pairs everyone, stranded pairs almost no one, blossom builds the odd cycle greed cannot solve
 # triggers: step-by-step animation highlights each edge in yellow before accepting (green) or skipping it; matching_size counter tracks progress; ui_accept toggles start/stop
 # emerges: the greedy order matters — different edge orderings produce different matchings, and the greedy result is not always maximum; the gap between greedy and optimal reveals augmenting path opportunities
@@ -11,7 +11,7 @@ extends Node3D
 # relationships: synthesis artifact in GT_Matching; contrasts with flow-based matching approaches; the symmetry of the room layout mirrors the pairing theme
 # truth: matching is the mathematics of pairing — who connects with whom, who remains alone, and whether the graph's structure permits everyone to find a partner
 
-# Edmonds' Algorithm: Maximum Matching (Simplified Greedy Version)
+# Greedy matching study; the legacy resource name is retained.
 # For demonstration purposes, using a greedy matching approach
 
 @export_category("Edmonds Configuration")
@@ -25,7 +25,7 @@ extends Node3D
 # ═══════════════════════════════════════════════════════════════════
 #
 # This artifact is not the flow/cut member of the family its filename suggests. It is
-# MAXIMUM MATCHING, and its question is who can be paired and who is stranded. The axis
+# a GREEDY MATCHING STUDY, and its question is who can be paired and who is stranded. The axis
 # therefore varies the EDGE SET (and, for `blossom`, the STAGING) — never the animation.
 # The greedy pass steps at animation_speed and a still photographs the opening frames,
 # so a star, five disjoint diameters and a pentagon-inside-a-ring have to be three
@@ -101,6 +101,11 @@ var matching_label: Label3D
 ## camera) is built once and deliberately kept out of this list.
 var _created: Array[Node] = []
 var _built: bool = false
+var _lesson_mode: bool = false
+var _spokes_first: bool = false
+var _scan_edges: Array = []
+var _lesson_controls: Node3D
+var _lesson_status: Label3D
 
 
 func _ready() -> void:
@@ -108,7 +113,7 @@ func _ready() -> void:
 	_build_all()
 	_built = true
 
-	if auto_start:
+	if auto_start and not _lesson_mode:
 		start_algorithm()
 
 func setup_environment() -> void:
@@ -138,6 +143,10 @@ func setup_environment() -> void:
 func _build_all() -> void:
 	initialize_graph()
 	create_visual_elements()
+	_set_scan_order()
+	if _lesson_mode:
+		_create_lesson_controls()
+		_lesson_reset()
 
 func initialize_graph() -> void:
 	vertices.clear()
@@ -334,7 +343,7 @@ func create_visual_elements() -> void:
 	var body_top: float = _measure_body_top()
 
 	info_label = Label3D.new()
-	info_label.text = "Maximum Matching - Press Space to Start"
+	info_label.text = "GREEDY MATCHING"
 	info_label.font_size = 24
 	info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	info_label.position = Vector3(0, body_top + 0.60, 0)
@@ -453,7 +462,7 @@ func start_algorithm() -> void:
 	for edge_key in edge_lines.keys():
 		update_edge_color_direct(edge_key, edge_color)
 
-	update_info_text("Finding maximum matching...")
+	update_info_text("Greedy scan: checking free endpoints")
 	update_matching_display()
 
 func _process(delta: float) -> void:
@@ -468,13 +477,14 @@ func _process(delta: float) -> void:
 	process_matching_step()
 
 func process_matching_step() -> void:
-	if current_edge_index >= edges.size():
+	if current_edge_index >= _scan_edges.size():
 		# Algorithm complete
 		algorithm_running = false
-		update_info_text("Complete! Maximum matching found.")
+		update_info_text("Scan complete / %d pairs / %d unpaired" % [matching_size, vertices.size() - 2 * matching_size])
+		_update_lesson_status()
 		return
 
-	var edge = edges[current_edge_index]
+	var edge = _scan_edges[current_edge_index]
 	var u = edge.from
 	var v = edge.to
 
@@ -500,6 +510,7 @@ func process_matching_step() -> void:
 		update_edge_color_direct(edge_key, edge_color)
 
 	current_edge_index += 1
+	_update_lesson_status()
 
 func get_edge_key(u: String, v: String) -> String:
 	var key1 = u + "_" + v
@@ -532,6 +543,7 @@ func update_matching_display() -> void:
 		matching_label.text = "Matching Size: " + str(matching_size)
 
 func _input(event: InputEvent) -> void:
+	if _lesson_mode: return
 	if event.is_action_pressed("ui_accept"):
 		if algorithm_running:
 			stop_algorithm()
@@ -558,6 +570,11 @@ func _exit_tree() -> void:
 # ═══════════════════════════════════════════════════════════════════
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("lesson_controls"):
+		_lesson_mode = str(config_data["lesson_controls"]).to_lower() in ["on", "true", "1"]
+		if _built and _lesson_mode:
+			_create_lesson_controls()
+			_lesson_reset()
 	var before_coupling: String = coupling
 	var before_size: int = graph_size
 	var before_density: float = edge_density
@@ -647,5 +664,76 @@ func _rebuild_now() -> void:
 
 	_build_all()
 
-	if auto_start:
+	if auto_start and not _lesson_mode:
 		start_algorithm()
+
+
+func _set_scan_order() -> void:
+	_scan_edges = edges.duplicate()
+	if coupling == "blossom" and _spokes_first:
+		var cycle: int = vertices.size() / 2
+		_scan_edges = edges.slice(cycle) + edges.slice(0, cycle)
+
+func _lesson_reset() -> void:
+	_set_scan_order()
+	algorithm_running = false
+	start_algorithm()
+	algorithm_running = false
+	update_info_text("Choose an outer vertex. Will it find a partner?")
+	_update_lesson_status()
+
+func _lesson_order() -> void:
+	_spokes_first = not _spokes_first
+	algorithm_running = false
+	_lesson_reset()
+
+func _lesson_step() -> void:
+	algorithm_running = false
+	process_matching_step()
+
+func _lesson_run() -> void:
+	if current_edge_index >= _scan_edges.size(): _lesson_reset()
+	algorithm_running = not algorithm_running
+	_update_lesson_status()
+
+func _update_lesson_status() -> void:
+	if is_instance_valid(_lesson_status):
+		_lesson_status.text = "%s FIRST / %s\n%d pairs / %d unpaired" % ["SPOKES" if _spokes_first else "CYCLE", "RUNNING" if algorithm_running else "PAUSED", matching_size, vertices.size() - 2 * matching_size]
+
+func _create_lesson_controls() -> void:
+	if is_instance_valid(_lesson_controls): return
+	_lesson_controls = Node3D.new()
+	_lesson_controls.name = "LessonControls"
+	_lesson_controls.position = Vector3(0, 0, -4.0)
+	_lesson_controls.rotation.y = PI
+	_lesson_controls.scale = Vector3.ONE * 2.5
+	add_child(_lesson_controls)
+	var backing := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(0.78, 0.38, 0.05)
+	backing.mesh = box
+	backing.position = Vector3(0, -0.07, -0.055)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.07, 0.10, 0.13)
+	backing.material_override = mat
+	_lesson_controls.add_child(backing)
+	var names: Array[String] = ["ORDER", "RESET", "RUN / PAUSE", "STEP"]
+	var actions: Array[Callable] = [_lesson_order, _lesson_reset, _lesson_run, _lesson_step]
+	for i in 4:
+		var button := preload("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = names[i].replace(" / ", "_")
+		button.position = Vector3((i % 2 - 0.5) * 0.38, -floori(i / 2.0) * 0.18, 0)
+		_lesson_controls.add_child(button)
+		button.pressed.connect(actions[i])
+		var label := Label3D.new()
+		label.text = names[i]
+		label.font_size = 24
+		label.pixel_size = 0.001
+		label.position = button.position + Vector3(0, 0.07, 0.02)
+		_lesson_controls.add_child(label)
+	_lesson_status = Label3D.new()
+	_lesson_status.font_size = 25
+	_lesson_status.pixel_size = 0.001
+	_lesson_status.position = Vector3(0, 0.24, 0)
+	_lesson_controls.add_child(_lesson_status)
+	_update_lesson_status()

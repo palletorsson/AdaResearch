@@ -160,8 +160,10 @@ func _create_binary_table() -> void:
 	table.rotation_degrees = Vector3(0, 90, 0)  # Face toward the grid
 
 	# Configure table - BIGGER for visibility
-	table.rows = rows
-	table.cols = cols
+	# grid_data[x][z]: the table's first index is X, its second is Z.
+	# A square grid hid the swapped dimensions; rectangular grids lost cells.
+	table.rows = cols
+	table.cols = rows
 	table.title = ""  # No title
 	table.cell_size = 0.22  # Increased from 0.12
 	table.font_size = 56    # Increased from 32

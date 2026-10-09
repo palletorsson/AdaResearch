@@ -2,7 +2,10 @@
 	"_readme": "Hand mounting heights over em_props' code conventions, written by the prop reference wall (prop_reference_wall.tscn). A token here mounts at h everywhere the museum dresses a wall; a token absent keeps its code height. Delete the file to restore every code convention. V1: one height per token — an exit_sign rule moves both the door and the portal sign.",
 	"rules": {
 		"electrical_panel": {
-			"h": 1.55
+			"h": 2.1
+		},
+		"emergency_button": {
+			"h": 2.4
 		},
 		"fire_extinguisher": {
 			"h": 0.3
@@ -18,6 +21,9 @@
 		},
 		"palm_scanner": {
 			"h": 1.45
+		},
+		"whiteboard": {
+			"h": 0.9
 		}
 	},
 	"schema": "adaresearch.prop_wall_rules.v1"

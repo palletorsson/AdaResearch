@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/endless_museum.tscn" id="1"]
+
+[node name="EndlessMuseum" instance=ExtResource("1")]
+start_chapter = "forces"
+start_map = "Vectors_Act1_WhatAVectorIs"

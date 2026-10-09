@@ -116,13 +116,13 @@ func setup_scene() -> void:
 	# Camera
 	var cam = Camera3D.new()
 	cam.position = Vector3(0, 5, 15)
-	cam.look_at(Vector3(0, 0, 0))
+	cam.basis = Basis.looking_at(Vector3(0, 0, 0) - cam.position, Vector3.UP)
 	add_child(cam)
 	
 	# Light
 	var light = DirectionalLight3D.new()
 	light.position = Vector3(10, 20, 10)
-	light.look_at(Vector3.ZERO)
+	light.basis = Basis.looking_at(Vector3.ZERO - light.position, Vector3.UP)
 	light.shadow_enabled = true
 	add_child(light)
 	

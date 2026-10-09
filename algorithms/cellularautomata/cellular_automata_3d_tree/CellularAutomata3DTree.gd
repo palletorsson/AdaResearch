@@ -31,6 +31,7 @@ var is_growing = false
 var multi_mesh_instance: MultiMeshInstance3D
 
 func _ready() -> void:
+	if str(get_meta("config_host_lighting", "")) == "1": _use_host_lighting()
 	# Try to get existing MultiMeshInstance3D node, or create one
 	if has_node("MultiMeshInstance3D"):
 		multi_mesh_instance = get_node("MultiMeshInstance3D")
@@ -220,4 +221,11 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("host_lighting", "")) == "1": _use_host_lighting()
+
+func _use_host_lighting() -> void:
+	# The museum owns the lighting of this configured placement.
+	for child in get_children():
+		if child is DirectionalLight3D: child.visible = false
+		elif child is WorldEnvironment: child.environment = null
+		elif child is Camera3D: child.current = false

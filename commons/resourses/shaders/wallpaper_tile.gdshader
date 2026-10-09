@@ -18,6 +18,8 @@ uniform sampler2D domain_texture : source_color, filter_linear, repeat_disable;
 uniform int wallpaper_group : hint_range(0, 16, 1) = 0;
 
 // How many times the tile repeats across the UV space
+// Default retains normalized web/studio UVs. Room receivers supply physical extents.
+uniform vec2 surface_metres = vec2(1.0);
 uniform float tile_scale : hint_range(1.0, 32.0, 1.0) = 4.0;
 
 // Grout / gap between tiles
@@ -529,7 +531,7 @@ vec4 tumbling_blocks_color(vec2 uv, sampler2D dom_tex) {
 }
 
 void fragment() {
-	vec2 uv = UV;
+	vec2 uv = UV * surface_metres;
 
 	// Optional noise distortion for organic feel
 	if (noise_distort > 0.001) {

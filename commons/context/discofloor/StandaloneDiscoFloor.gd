@@ -27,6 +27,7 @@ class_name StandaloneDiscoFloor
 
 ## Animation
 @export var auto_start: bool = true
+@export var monochrome: bool = false
 @export var pattern_speed: float = 0.08
 @export var pattern_duration: float = 8.0  # Seconds per pattern
 
@@ -299,10 +300,16 @@ func _set_tile(x: int, z: int, color: Color) -> void:
 	if x < 0 or x >= grid_width or z < 0 or z >= grid_depth:
 		return
 	var idx = z * grid_width + x
+	if monochrome:
+		var grey := color.get_luminance()
+		color = Color(grey,grey,grey,color.a)
 	multimesh.set_instance_color(idx, color)
 	tile_colors[idx] = color
 
 func _fill_all(color: Color) -> void:
+	if monochrome:
+		var grey := color.get_luminance()
+		color = Color(grey,grey,grey,color.a)
 	for i in range(multimesh.instance_count):
 		multimesh.set_instance_color(i, color)
 		tile_colors[i] = color

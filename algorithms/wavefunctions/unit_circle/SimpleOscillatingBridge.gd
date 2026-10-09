@@ -38,11 +38,13 @@ extends Node3D
 # Internal
 var platforms: Array[Node3D] = []
 var time: float = 0.0
+var museum_environment: bool = false
 
 func _ready() -> void:
 	generate_platforms()
-	setup_camera()
-	create_environment()
+	if not museum_environment:
+		setup_camera()
+		create_environment()
 
 func _process(delta: float) -> void:
 	time += delta * oscillation_speed
@@ -190,4 +192,10 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("museum"):
+		museum_environment = str(config["museum"]).to_lower() == "true"
+		if museum_environment and is_node_ready():
+			for child in get_children():
+				if child is Camera3D or child is DirectionalLight3D:
+					remove_child(child)
+					child.queue_free()

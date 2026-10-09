@@ -262,7 +262,7 @@ func _explode() -> void:
 
 	# Disable collision
 	if _col_shape:
-		_col_shape.disabled = true
+		_col_shape.set_deferred("disabled", true)
 
 
 func _respawn() -> void:

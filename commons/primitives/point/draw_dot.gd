@@ -1,6 +1,8 @@
 extends Node3D
 
-const InstrumentPanelCase = preload("res://commons/ui/instrument_panel_case.gd")
+const DataInstrumentSurface = preload("res://commons/ui/data_instrument_surface.gd")
+const DrawingPen = preload("res://commons/primitives/point/drawing_pen.gd")
+@export var simple_pen: bool = false
 
 # @identity
 # essence: sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space
@@ -8,7 +10,7 @@ const InstrumentPanelCase = preload("res://commons/ui/instrument_panel_case.gd")
 # critical_parameter: trail_length — how many hand positions are stored before the oldest disappears
 # triggers: moving the grabbed sphere — total_distance accumulates and triggers unlock tags
 # emerges: the understanding that a continuous curve is just many sampled points
-# needs: [has Label3D [has], grabbable sphere [has], missing speed/density slider]
+# needs: [flat count and coordinate readout, grabbable sphere; resolution is authored per pen]
 # relationships: contrasts with static_point (fixed vs dynamic); pairs with player_trace
 # truth: a curve has no intrinsic form — it is just the limit of increasingly dense point samples
 
@@ -216,58 +218,23 @@ func _update_progress_indicator_position() -> void:
 func _setup_data_table() -> void:
 	if not show_data_table:
 		return
-	_data_panel = Node3D.new()
+	_data_panel = DataInstrumentSurface.new()
 	_data_panel.name = "TraceDataPanel"
+	_data_panel.ink = trail_color
+	_data_panel.body_color = data_table_color
+	_data_panel.preferred_font_size = data_table_font_size
 	_data_panel.set_as_top_level(true)
 	_data_panel.visible = false
 	add_child(_data_panel)
-	var surface := MeshInstance3D.new()
-	surface.name = "PanelSurface"
-	var quad := QuadMesh.new()
-	quad.size = Vector2(0.92, 0.66)
-	surface.mesh = quad
-	var material := StandardMaterial3D.new()
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.albedo_color = Color(0.025, 0.035, 0.055)
-	surface.material_override = material
-	_data_panel.add_child(surface)
-	var casing := InstrumentPanelCase.new()
-	casing.name = "Casing"
-	_data_panel.add_child(casing)
-	casing.fit_rect(Vector2.ZERO, quad.size, trail_color)
-	_data_count_label = Label3D.new()
-	_data_count_label.name = "PointCount"
-	_data_count_label.font_size = 40
-	_data_count_label.pixel_size = 0.001
-	_data_count_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_data_count_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_data_count_label.position = Vector3(-0.415, 0.29, 0.003)
-	_data_count_label.modulate = trail_color
-	_data_count_label.outline_size = 0
-	_data_panel.add_child(_data_count_label)
-	_data_table_label = Label3D.new()
-	_data_table_label.name = "DataTable"
-	_data_table_label.font_size = data_table_font_size
-	_data_table_label.pixel_size = 0.001  # Sharper text
-	_data_table_label.modulate = data_table_color
-	_data_table_label.outline_size = 0
-	_data_table_label.outline_modulate = Color(0.1, 0.1, 0.2, 0.9)
-
-	# NOT billboard - fixed orientation
-	_data_table_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_data_table_label.fixed_size = false
-
-	# World-space positioning
+	_data_count_label = _data_panel.heading
+	_data_table_label = _data_panel.table
 	_data_table_label.visible = false
-
-	# Horizontal alignment
-	_data_table_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_data_table_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_data_table_label.position = Vector3(-0.415, 0.22, 0.003)
-	_data_panel.add_child(_data_table_label)
 
 
 func _hide_data_table() -> void:
+	if data_table_mount == "plinth":
+		_update_data_table() # A mounted instrument stays on, including at zero.
+		return
 	if _data_table_label:
 		_data_table_label.visible = false
 	if _data_panel:
@@ -275,27 +242,8 @@ func _hide_data_table() -> void:
 
 
 func _fit_data_panel() -> void:
-	# Label3D rebuilds its glyph mesh deferred. Fit after that rebuild, including
-	# larger coordinates, font overrides, and the time recorder's extra row.
-	if not is_instance_valid(_data_panel):
-		return
-	var left := -0.46
-	var right := 0.46
-	var top := 0.33
-	var bottom := -0.33
-	for label: Label3D in [_data_count_label, _data_table_label]:
-		var bounds := label.get_aabb()
-		var lo := bounds.position + label.position
-		var hi := bounds.end + label.position
-		left = minf(left, lo.x - 0.045)
-		right = maxf(right, hi.x + 0.045)
-		top = maxf(top, hi.y + 0.035)
-		bottom = minf(bottom, lo.y - 0.045)
-	var surface: MeshInstance3D = _data_panel.get_node("PanelSurface")
-	(surface.mesh as QuadMesh).size = Vector2(right - left, top - bottom)
-	surface.position = Vector3((left + right) * 0.5, (top + bottom) * 0.5, 0)
-	_data_panel.get_node("Casing").fit_rect(Vector2(surface.position.x, surface.position.y),
-		(surface.mesh as QuadMesh).size, trail_color)
+	if is_instance_valid(_data_panel):
+		_data_panel.refresh()
 
 ## A recorder with a different sampling mechanism must describe its own gate.
 ## draw_stick uses this movement gate; draw_dot_time_domain overrides it.
@@ -316,7 +264,9 @@ func _position_decimal_places() -> int:
 
 
 func _update_data_table() -> void:
-	if not _data_table_label or _trail_points.is_empty():
+	if not _data_table_label:
+		return
+	if _trail_points.is_empty() and data_table_mount != "plinth":
 		_hide_data_table()
 		return
 
@@ -340,18 +290,55 @@ func _update_data_table() -> void:
 		table_text += row_format % [idx, pt.x, pt.y, pt.z]
 
 	_data_count_label.text = "%d POINT%s" % [point_count, "" if point_count == 1 else "S"]
-	_data_count_label.modulate = trail_color
+	_data_count_label.add_theme_color_override("font_color", trail_color)
 	_data_table_label.text = table_text
 	call_deferred("_fit_data_panel")
 	_data_table_label.visible = true
 	_data_panel.visible = true
+	if data_table_mount == "plinth":
+		_data_panel.visible = _data_mount_ready
+		return
 	# Capture the reading surface once; capacity eviction must not drag it along.
 	if not _data_panel_anchored:
 		var facing := Basis(Vector3.UP, global_rotation.y)
 		_data_panel.global_transform = Transform3D(
-			facing * Basis(Vector3.RIGHT, deg_to_rad(-35.0)),
+			_data_readout_basis(),
 			_trail_points[0] + facing * Vector3(0.55, data_table_height_offset, 0.45))
 		_data_panel_anchored = true
+
+func _data_readout_basis() -> Basis:
+	# Turn only the reading face; its anchor and the drawn positions stay put.
+	var facing := Basis(Vector3.UP, global_rotation.y + deg_to_rad(data_table_yaw))
+	return (facing * Basis(Vector3.RIGHT, deg_to_rad(-data_table_tilt))).scaled(Vector3.ONE * data_table_scale)
+
+func _physics_process(_delta: float) -> void:
+	if data_table_mount != "plinth" or _data_mount_ready or not is_instance_valid(_data_panel):
+		return
+	# Plinths are built after the artifact. Wait for the actual support instead
+	# of guessing from the first drawn point or placing a screen on the floor.
+	var at := global_position + Basis(Vector3.UP, global_rotation.y) * Vector3(0, 0, 0.12)
+	var query := PhysicsRayQueryParameters3D.create(at + Vector3.UP * 0.3, at - Vector3.UP * 2.0, 1)
+	var excluded: Array[RID] = []
+	for body in find_children("*", "CollisionObject3D", true, false):
+		excluded.append(body.get_rid())
+	query.exclude = excluded
+	var hit := get_world_3d().direct_space_state.intersect_ray(query)
+	if hit.is_empty() or hit.normal.y < 0.9 or absf(global_position.y - hit.position.y) > 0.8:
+		return
+	_data_mount_surface = hit.position
+	_data_mount_ready = true
+	_seat_data_panel()
+	if simple_pen and is_instance_valid(_grab_point) and not _grab_point.is_picked_up():
+		_grab_point.global_position.y = _data_mount_surface.y + 0.07
+		_last_global_position = _draw_sphere.global_position
+	_update_data_table()
+
+func _seat_data_panel() -> void:
+	var basis := _data_readout_basis()
+	var shell: MeshInstance3D = _data_panel.get_node("Casing/Shell")
+	var local_shell := _data_panel.global_transform.affine_inverse() * shell.global_transform
+	var bounds := Transform3D(basis, Vector3.ZERO) * local_shell * shell.get_aabb()
+	_data_panel.global_transform = Transform3D(basis, _data_mount_surface - Vector3.UP * bounds.position.y)
 
 @export var fade_trail: bool = false
 @export var fade_duration: float = 2.0
@@ -364,11 +351,17 @@ func _update_data_table() -> void:
 @export var data_table_color: Color = Color(0.9, 0.95, 1.0, 1.0)
 @export var data_table_font_size: int = 26
 @export var data_table_update_interval: float = 0.15  # Seconds between updates
+@export_range(0.4, 1.5) var data_table_scale: float = 1.0
+@export var data_table_yaw: float = 0.0 # Additional heading in degrees, relative to the pen.
+@export_range(0.0, 75.0) var data_table_tilt: float = 35.0
+@export_enum("trace", "plinth") var data_table_mount: String = "trace"
 
 var _data_panel: Node3D
-var _data_count_label: Label3D
+var _data_count_label: Label
 var _data_panel_anchored: bool = false
-var _data_table_label: Label3D
+var _data_mount_ready: bool = false
+var _data_mount_surface := Vector3.ZERO
+var _data_table_label: Label
 var _data_table_timer: float = 0.0
 
 
@@ -401,6 +394,10 @@ func _ready() -> void:
 	# INK / GRAIN before _setup_trail — the trail material bakes trail_color in,
 	# so the colour must be settled before the material exists.
 	_ink_read_config()
+	if has_meta("config_pen_style"):
+		simple_pen = str(get_meta("config_pen_style")) == "simple"
+	if simple_pen:
+		_setup_simple_pen()
 
 	# Setup progress indicator as world-space (not child of grab point)
 	_setup_progress_indicator()
@@ -439,7 +436,8 @@ func _process(delta: float) -> void:
 	var current_global = _draw_sphere.global_position
 
 	if record_only_when_grabbed and is_instance_valid(_grab_point) and _grab_point.has_method("is_picked_up"):
-		if not _grab_point.is_picked_up():
+		var drawing_ready: bool = _grab_point.is_drawing_ready() if _grab_point.has_method("is_drawing_ready") else _grab_point.is_picked_up()
+		if not drawing_ready:
 			_last_global_position = current_global
 			# If we are not recording, we should still process fading if enabled
 			if fade_trail:
@@ -790,12 +788,58 @@ func _apply_ink() -> void:
 		if m:
 			m.albedo_color = trail_color
 			m.emission = trail_color
+	if simple_pen and is_instance_valid(_grab_point):
+		var barrel := _grab_point.get_node_or_null("Barrel") as MeshInstance3D
+		if barrel:
+			barrel.material_override.albedo_color = trail_color
+
+
+func _setup_simple_pen() -> void:
+	if not is_instance_valid(_grab_point) or _grab_point.get_script() == DrawingPen:
+		return
+	var old := _grab_point
+	var pen := DrawingPen.new()
+	pen.name = old.name
+	pen.pen_color = trail_color
+	pen.freeze = true
+	pen.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+	pen.collision_layer = 4
+	pen.collision_mask = 0
+	pen.mass = 0.08
+	pen.position = old.position + Vector3(0.34, -0.17, 0.0)
+	pen.rotation.x = PI / 2.0
+	remove_child(old)
+	old.queue_free()
+	add_child(pen)
+	_grab_point = pen
+	_draw_sphere = pen.get_node("WritingTip")
+	_last_global_position = _draw_sphere.global_position
+	pen.dropped.connect(_on_grab_point_dropped)
 
 
 ## Gated per key: a map that says nothing about a key leaves its path untouched, so a
 ## config carrying only other keys cannot disturb the legacy lineage.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var dirty: bool = false
+	if str(config_data.get("pen_style", "")) == "simple":
+		simple_pen = true
+		_setup_simple_pen()
+	if config_data.has("data_table_scale"):
+		data_table_scale = clampf(float(config_data["data_table_scale"]), 0.4, 1.5)
+	if config_data.has("data_table_yaw"):
+		data_table_yaw = float(config_data["data_table_yaw"])
+	if config_data.has("data_table_tilt"):
+		data_table_tilt = clampf(float(config_data["data_table_tilt"]), 0.0, 75.0)
+	if config_data.has("data_table_mount"):
+		var mount := str(config_data["data_table_mount"])
+		if mount in ["trace", "plinth"] and mount != data_table_mount:
+			data_table_mount = mount
+			_data_mount_ready = false
+			_data_panel_anchored = false
+	if _data_mount_ready and is_instance_valid(_data_panel):
+		_seat_data_panel()
+	elif _data_panel_anchored and is_instance_valid(_data_panel):
+		_data_panel.global_basis = _data_readout_basis()
 	if config_data.has("ink"):
 		var v: String = str(config_data["ink"]).strip_edges().to_lower()
 		var ic: Color = _ink_color(v)

@@ -1,4 +1,4 @@
-﻿# maze_generator_vr.gd
+# maze_generator_vr.gd
 # VR-optimized Maze Generation - Human-scale walkable maze
 extends Node3D
 
@@ -109,6 +109,12 @@ var floor_material: StandardMaterial3D
 var path_material: StandardMaterial3D
 
 func _ready() -> void:
+	if has_meta("config_lesson"):
+		maze_width = 9
+		maze_height = 9
+		cell_size = 1.5
+		show_generation = true
+		generation_speed = 100000.0
 	# DNA first: a map token or a sweep fixture must be in hand before anything
 	# draws or builds. Both reads are no-ops when nothing was passed.
 	_read_dna_meta()

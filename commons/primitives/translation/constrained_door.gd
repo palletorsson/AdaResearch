@@ -39,6 +39,9 @@ signal goal_reached
 ## the same destination. The negative case the shipped door exists to argue against.
 @export var unconstrained: bool = false
 
+@export var trace_motion := false
+var motion_trace: MeshInstance3D
+
 var _knob: RigidBody3D  # Small grab cube as doorknob
 var _door_mesh: MeshInstance3D  # Visual door
 var _current_phase: int = 1
@@ -49,6 +52,10 @@ var _locked_rotation: Basis = Basis.IDENTITY
 func _ready() -> void:
 	_create_door_mesh()
 	_create_knob()
+	if trace_motion:
+		motion_trace = preload("res://commons/primitives/translation/accepted_motion_trace.gd").new()
+		add_child(motion_trace)
+		motion_trace.reset(_knob_start())
 
 func _create_door_mesh() -> void:
 	# Create the visual door panel
@@ -174,6 +181,8 @@ func _physics_process(_delta: float) -> void:
 
 	# Apply constrained position to knob
 	_knob.position = knob_pos
+	if motion_trace != null and _is_grabbed:
+		motion_trace.record(knob_pos)
 
 	# Move door mesh to follow knob movement
 	var knob_offset: Vector3 = knob_pos - start
@@ -194,6 +203,8 @@ func is_goal_reached() -> bool:
 func reset() -> void:
 	_current_phase = 1
 	_goal_reached = false
+	if motion_trace != null:
+		motion_trace.reset(_knob_start())
 	if _knob:
 		_knob.position = _knob_start()
 	if _door_mesh:

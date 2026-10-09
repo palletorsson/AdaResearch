@@ -33,6 +33,8 @@
 [ext_resource type="Script" uid="uid://cb6ip8nxoqb78" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
 [ext_resource type="Script" uid="uid://bd3rk0iph2m2k" path="res://commons/managers/MovementCapabilityGate.gd" id="33_move_cap_gate"]
 [ext_resource type="Script" path="res://commons/player/hand_inventory.gd" id="34_hand_inventory"]
+[ext_resource type="AnimationNodeBlendTree" path="res://addons/godot-xr-tools/hands/animations/left/hand_blend_tree.tres" id="35_left_hand_blend"]
+[ext_resource type="Resource" uid="uid://dertgu7k8alls" path="res://addons/godot-xr-tools/hands/poses/pose_default_left.tres" id="36_left_hand_pose"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
 size = Vector3(0.096401334, 0.121734604, 0.16770938)
@@ -87,6 +89,8 @@ collide_with_areas = true
 suppress_radius = 0.05
 
 [node name="LeftHand" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="3" unique_id=114405825 instance=ExtResource("6_f3jjl")]
+hand_blend_tree = ExtResource("35_left_hand_blend")
+default_pose = ExtResource("36_left_hand_pose")
 
 [node name="GhostHand" parent="XROrigin3D/LeftHand" index="1" unique_id=468448832 instance=ExtResource("5_liliu")]
 visible = false

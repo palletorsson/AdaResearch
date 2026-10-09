@@ -193,6 +193,12 @@ var control_panel: VBoxContainer
 var is_paused: bool = false
 var manual_step: bool = false
 
+# Spatial lesson controls are opt-in; standalone desktop UI stays available.
+var _lesson_controls: Node3D
+var _lesson_label: Label3D
+var _lesson_mode: bool = false
+const LESSON_COHORTS: Array[String] = ["blobs", "rings", "block"]
+
 # Enhanced cluster colors with better contrast
 var cluster_colors: Array = [
 	Color(1.0, 0.3, 0.3),  # Bright Red
@@ -255,6 +261,13 @@ func _build_all() -> void:
 
 	if animate_clustering and not step_by_step_mode:
 		start_clustering()
+	if _lesson_mode:
+		for child in get_children():
+			if child is CanvasLayer: child.hide()
+		var ground := get_node_or_null("Ground")
+		if ground is MeshInstance3D: ground.hide()
+		is_paused = true
+		_update_lesson_label()
 
 ## Seed from the cohort so the five values do not share a draw sequence, and from
 ## the restart counter so ESC still reshuffles.
@@ -273,6 +286,7 @@ func _process(delta: float) -> void:
 	
 	update_ui()
 	handle_input()
+	_update_lesson_label()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):  # Space key
@@ -1465,6 +1479,12 @@ func _exit_tree() -> void:
 ## that is accepted and then dropped by a return is worse than a key refused.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_cohort: String = cohort
+	var before_count: int = natural_cluster_count
+	if config_data.has("natural_cluster_count"):
+		natural_cluster_count = int(config_data["natural_cluster_count"])
+	if str(config_data.get("lesson_controls", "off")).to_lower() in ["on", "true", "1"]:
+		_lesson_mode = true
+		_create_lesson_controls()
 
 	if config_data.has("cohort"):
 		cohort = _pick_axis(str(config_data["cohort"]), COHORTS, cohort)
@@ -1481,10 +1501,68 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if not _built:
 		return
-	if cohort == before_cohort:
+	if cohort == before_cohort and natural_cluster_count == before_count:
 		return
 
 	_rebuild_now()
+
+func _create_lesson_controls() -> void:
+	if is_instance_valid(_lesson_controls):
+		return
+	if is_instance_valid(ui_container):
+		ui_container.hide()
+	for child in get_children():
+		if child is CanvasLayer: child.hide()
+	_lesson_controls = Node3D.new()
+	_lesson_controls.name = "LessonControls"
+	# Map scale is 0.2: controls are at 1.15 m including the 0.15 m display lift.
+	_lesson_controls.position = Vector3(0, 5, -13)
+	_lesson_controls.scale = Vector3.ONE * 10.0
+	_lesson_controls.rotation.y = PI
+	add_child(_lesson_controls)
+	var actions: Array[Callable] = [_lesson_next_dataset, _lesson_reset, _lesson_pause, _lesson_step]
+	var names: Array[String] = ["DATASET", "RESET", "PAUSE / RUN", "STEP"]
+	for i in range(names.size()):
+		var button := preload("res://commons/interactables/push_button.tscn").instantiate()
+		button.name = names[i].replace(" / ", "_")
+		button.position = Vector3((i % 2 - 0.5) * 0.28, -floori(i / 2.0) * 0.16, 0)
+		_lesson_controls.add_child(button)
+		button.pressed.connect(actions[i])
+		var label := Label3D.new()
+		label.text = names[i]
+		label.font_size = 20
+		label.pixel_size = 0.001
+		label.position = button.position + Vector3(0, 0.06, 0.02)
+		_lesson_controls.add_child(label)
+	_lesson_label = Label3D.new()
+	_lesson_label.font_size = 22
+	_lesson_label.pixel_size = 0.001
+	_lesson_label.position = Vector3(0, 0.18, 0)
+	_lesson_controls.add_child(_lesson_label)
+	_update_lesson_label()
+
+func _lesson_next_dataset() -> void:
+	var index := LESSON_COHORTS.find(cohort)
+	cohort = LESSON_COHORTS[(index + 1) % LESSON_COHORTS.size()]
+	_lesson_reset()
+
+func _lesson_reset() -> void:
+	_rebuild_now()
+	is_paused = true
+	_update_lesson_label()
+
+func _lesson_pause() -> void:
+	is_paused = not is_paused
+	_update_lesson_label()
+
+func _lesson_step() -> void:
+	is_paused = true
+	perform_clustering_step()
+	_update_lesson_label()
+
+func _update_lesson_label() -> void:
+	if is_instance_valid(_lesson_label):
+		_lesson_label.text = "%s  /  K = %d\n%s  /  step %d\nTotal distance: %.1f" % [cohort.to_upper(), cluster_count, "PAUSED" if is_paused else "RUNNING", iteration, total_distance]
 
 ## Accept an axis value only if it names something we actually build. A typo has
 ## to land on the shipped look rather than on an empty 25 m room.

@@ -1,0 +1,235 @@
+{
+  "_meta": {
+    "sequence": "machinelearning",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "ML_Evolution": {
+      "inherited": "From SwarmIntelligence_Swarm_Intelligence_Algorithms: Machine learning begins by asking what changes across generations. Carry this distinction with you: inherited traits, environmental rewards and the rules that keep an experiment running all shape what can survive.",
+      "question": "Can a population change without a single specimen being named the best?",
+      "ontology": "Variation and reproduction can change a population without an explicit ranked fitness score. Survival still depends on implemented resources and constraints.",
+      "experiment": "Follow a few different bodies in the small field, then compare the population, birth and death counts over time.",
+      "observe": "Bodies wander, expend energy, gain energy in previously unvisited cells, reproduce above an energy threshold, and die at zeroenergy.",
+      "limit": "No ranked objective does not mean no selection pressure. Energy for novelty, decay and populationcaps favour some behaviour over others.",
+      "variation": "Existing: watch persistence without choosing a champion. Proposed: expose the exploration reward and compare which bodies persist; curator uniform/culled modes are illustrations, not evolved results.",
+      "handoff": "The gradient landscape next puts an objective in full view. Instead of inheriting a reward through survival, a moving point will be told exactly how its position is scored.",
+      "candidate_artifacts": [
+        "non_teleological_evolution"
+      ],
+      "sources": [
+        "commons/maps/ML_Evolution/final.md",
+        "commons/maps/ML_Evolution/map_data.json",
+        "commons/maps/ML_Evolution/intent.md",
+        "commons/maps/ML_Evolution/tutorial.md",
+        "commons/maps/ML_Evolution/technical.md",
+        "commons/maps/ML_Evolution/critical.md",
+        "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+        "algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Gradient_Landscape": {
+      "inherited": "From ML_Evolution: The gradient landscape next puts an objective in full view. Instead of inheriting a reward through survival, a moving point will be told exactly how its position is scored.",
+      "question": "Will the same observations lead to the same best fit when error is measured differently?",
+      "ontology": "A loss assigns a number to modelparameters. Here each terrain is a function of slope w and intercept b for the same small dataset.",
+      "experiment": "Watch the three balls descend their labelled terrains. Change Outliers, then watch where each path travels; use the reset button for another run.",
+      "observe": "MSE, Huber and the third oscillating loss produce different surfaces and paths. The Outliers knob regenerates the data and restarts balls at the same parameterpair.",
+      "limit": "A minimum is relative to the chosen penalty and model. The artifact label adversarial names a custom wavyloss, not GAN training or adversarial robustness.",
+      "variation": "Existing: add outliers and ask which deviations each loss discounts or magnifies. Proposed: mark whose observations become outliers instead of treating that designation as selfevident.",
+      "handoff": "The classification room will exchange a fitted line for groups. The same question remains: which differences does the chosen measure treat as important?",
+      "candidate_artifacts": [
+        "loss_function_comparator"
+      ],
+      "sources": [
+        "commons/maps/ML_Gradient_Landscape/final.md",
+        "commons/maps/ML_Gradient_Landscape/map_data.json",
+        "commons/maps/ML_Gradient_Landscape/intent.md",
+        "commons/maps/ML_Gradient_Landscape/tutorial.md",
+        "commons/maps/ML_Gradient_Landscape/technical.md",
+        "commons/maps/ML_Gradient_Landscape/critical.md",
+        "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+        "algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Classification": {
+      "inherited": "From ML_Gradient_Landscape: The classification room will exchange a fitted line for groups. The same question remains: which differences does the chosen measure treat as important?",
+      "question": "When points share a colour, has a group been discovered or assigned?",
+      "ontology": "K-means alternates nearest-centroid assignment with moving each centroid to its assigned points mean; k is chosen in advance.",
+      "experiment": "Choose one point near the boundary between colours. Watch its assignment and the neighbouring centroid move through automatic iterations.",
+      "observe": "Centroids move and point colours can change. Motion stops when totalcentroid movement falls below the threshold or50iterations are reached.",
+      "limit": "This is unsupervisedclustering, not supervisedclassification. Colours do not name natural or ethical categories. The displayed totaldistance sums ordinary distances although textbook k-means minimizes squared distances.",
+      "variation": "Existing: compare a peripheralpoint to a centralpoint. Proposed: expose k or curate ring/braid cohorts to ask whether the mean-and-distance rule preserves the grouping the visitor sees.",
+      "handoff": "The neural-network room introduces learned connections between layers. It will still need an account of what its training examples and error measure ask it to preserve.",
+      "candidate_artifacts": [
+        "enhanced_kmeans"
+      ],
+      "sources": [
+        "commons/maps/ML_Classification/final.md",
+        "commons/maps/ML_Classification/map_data.json",
+        "commons/maps/ML_Classification/intent.md",
+        "commons/maps/ML_Classification/tutorial.md",
+        "commons/maps/ML_Classification/technical.md",
+        "commons/maps/ML_Classification/critical.md",
+        "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+        "algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Scene/map use0.6scale; no hand-driven pointedit or museum UI usability verified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Neural_Networks": {
+      "inherited": "From ML_Classification: The neural-network room introduces learned connections between layers. It will still need an account of what its training examples and error measure ask it to preserve.",
+      "question": "What changes in a network when its answers become closer to the examples?",
+      "ontology": "A neuron computes an activation from weightedinputs plusbias. Backpropagation distributes outputerror into parameterupdates across layers.",
+      "experiment": "Follow one connection while watching the epoch/error display during automatic training. Compare its appearance early and later; also inspect the direction from inputs tooutputs.",
+      "observe": "Weighted links and activations change as actual batches update weights/biases; the error history records the batcherror, which need not decrease on every step.",
+      "limit": "Fitting four examples cannot establish generalintelligence or out-of-distribution reliability. A visible network diagram omits the choice of examples and targetlabels.",
+      "variation": "Existing: track a connection that changes sign or strength. Proposed: compare heldout inputs or a curator topology change while retaining the same examples.",
+      "handoff": "Perception next asks what enters such a model. Before a network can learn from an image, some distinctions must already be made available as input.",
+      "candidate_artifacts": [
+        "neural_network_visualization"
+      ],
+      "sources": [
+        "commons/maps/ML_Neural_Networks/final.md",
+        "commons/maps/ML_Neural_Networks/map_data.json",
+        "commons/maps/ML_Neural_Networks/intent.md",
+        "commons/maps/ML_Neural_Networks/tutorial.md",
+        "commons/maps/ML_Neural_Networks/technical.md",
+        "commons/maps/ML_Neural_Networks/critical.md",
+        "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+        "algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not confuse with placed NeuralNetworks_VR whose loss is timed animation. Desktop R/T/space handled but not a verified sharedmuseum interaction.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Perception": {
+      "inherited": "From ML_Neural_Networks: Perception next asks what enters such a model. Before a network can learn from an image, some distinctions must already be made available as input.",
+      "question": "Which parts of this display were computed from pixels, and which were supplied as names?",
+      "ontology": "A local filter combines pixelvalues to produce a featuremap. Objectclassification is a separate inference from that numericaloperation.",
+      "experiment": "Compare the input cross/circle to its edgeimage. Follow the moving3×3window, then inspect the objectboxes and percentages.",
+      "observe": "Broad bright interiors give way to edge responses at changes. The window tours locations; the named detectionboxes are also visible, but their percentages are fixed labels.",
+      "limit": "A confidentcaption is not a measurement. A real localedge computation does not automatically justify the objectnames next toit.",
+      "variation": "Existing: point out an imagefeature that contributes to anedge yet has no namedbox. Proposed: visitor pixelpainting wired to the existing setter, or curator invented boxes on unchangeddata.",
+      "handoff": "The sequence-memory room adds another source of evidence: what happened before the current input arrived.",
+      "candidate_artifacts": [
+        "computer_vision_vr"
+      ],
+      "sources": [
+        "commons/maps/ML_Perception/final.md",
+        "commons/maps/ML_Perception/map_data.json",
+        "commons/maps/ML_Perception/intent.md",
+        "commons/maps/ML_Perception/tutorial.md",
+        "commons/maps/ML_Perception/technical.md",
+        "commons/maps/ML_Perception/critical.md",
+        "algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+        "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd"
+      ],
+      "open_questions": [
+        "Sobel filtering is computed, but object names and confidence values are supplied in advance. Connect a recogniser to changing input and show evidence for its decisions.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Labels invite painting but handevents are not wired in inspectedscript. Filter API always appliesSobel; do not promise alternatefilters or classification accuracy.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Sequence_Memory": {
+      "inherited": "From ML_Perception: The sequence-memory room adds another source of evidence: what happened before the current input arrived.",
+      "question": "What would a memory need to keep, admit and reveal separately?",
+      "ontology": "An LSTM distinguishes persistent cellstate, newinput and output; gates weight retention, writing and reading. This room provides a spatialdiagram of those roles.",
+      "experiment": "Locate FORGET, INPUT and OUTPUT spheres and follow the particlepath through thecell. Compare the roles before reading their names as a memoryalgorithm.",
+      "observe": "A stream crosses thecell and gateobjects change visualintensity with activation. The current stream continues independently of the gateactivations.",
+      "limit": "A moving memorymetaphor does not demonstrate retaining a sequence. Gateobjects are RigidBody3D with collisionlayers; successful museum grabbing has not beenestablished.",
+      "variation": "Proposed nextbuild: expose a shorttoken sequence, a numericcellstate and gatecontrols that causally alter it; compare preserving an inconvenient input with forgetting it.",
+      "handoff": "Generative learning next changes the task again: a model produces candidates, while another source of feedback judges them.",
+      "candidate_artifacts": [
+        "lstms_vr"
+      ],
+      "sources": [
+        "commons/maps/ML_Sequence_Memory/final.md",
+        "commons/maps/ML_Sequence_Memory/map_data.json",
+        "commons/maps/ML_Sequence_Memory/intent.md",
+        "commons/maps/ML_Sequence_Memory/tutorial.md",
+        "commons/maps/ML_Sequence_Memory/technical.md",
+        "commons/maps/ML_Sequence_Memory/critical.md",
+        "algorithms/machinelearning/LSTMs/LSTMs_VR.tscn",
+        "algorithms/machinelearning/LSTMs/LSTMs_VR.gd"
+      ],
+      "open_questions": [
+        "The gates do not yet control a computed recurrent state. Add a short input sequence, a visible cell state and a two-sequence retention comparison.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Only claim observationaldiagram. The promised retentionexperiment remains a buildgap; do not make grabbing prerequisite for reading.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Generative": {
+      "inherited": "From ML_Sequence_Memory: Generative learning next changes the task again: a model produces candidates, while another source of feedback judges them.",
+      "question": "Who judges a generated example, and how could that judgement change its maker?",
+      "ontology": "A generator proposes samples and a discriminator judges samples relative to trainingdata. Their coupled objectives make a feedbackloop; this artifact diagrams itsroles.",
+      "experiment": "Move your viewpoint between generator and discriminator, then trace the labelled feedbackroute and compare the two displayedlosses.",
+      "observe": "Separatezones, samplemarks, a feedbackloop and a competitionpillar animate. Generatorloss falls and discriminatorloss oscillates in thedisplay.",
+      "limit": "The diagram can locate the roles but cannot establish that samples improve, that judging works or that the system reached equilibrium. Similarappearance is not evidence of training.",
+      "variation": "Proposed: a small realdataset, generatedsample and discriminator score linked by anactual update; allow visitor disagreement with the selected examples ofrealness.",
+      "handoff": "The synthesis room looks directly at that outside: how does a model decide that an observation is an anomaly?",
+      "candidate_artifacts": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "sources": [
+        "commons/maps/ML_Generative/final.md",
+        "commons/maps/ML_Generative/map_data.json",
+        "commons/maps/ML_Generative/intent.md",
+        "commons/maps/ML_Generative/tutorial.md",
+        "commons/maps/ML_Generative/technical.md",
+        "commons/maps/ML_Generative/critical.md",
+        "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn",
+        "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd"
+      ],
+      "open_questions": [
+        "The displayed losses are timed curves. Add a small actual generator/discriminator update with visible samples before using falling losses as evidence of learning.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not claim visitor judging/noisethrowing trains aGAN. Thismap needs a causalexperiment beyond diagram coverage.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ML_Synthesis": {
+      "inherited": "From ML_Generative: The synthesis room looks directly at that outside: how does a model decide that an observation is an anomaly?",
+      "question": "Is a point unusual by itself, or unusual under a particular measuringrule?",
+      "ontology": "An anomaly score measures departure from a reference; a threshold turns that score into a decision.",
+      "experiment": "Find one raised highlightedpoint and one unraisedpoint. Compare their positions to the maincloud and read the displayed mode/threshold.",
+      "observe": "Points meeting the active threshold rise.25units and scale1.35; the summary counts flaggedpoints. Default mode is Z-score and threshold2.4.",
+      "limit": "Flagging is a relation to thisdataset and chosenrule, not proof that an event or person iswrong. Other named modes are heuristics; autoencoder_error is a handwritten sinusoidalresidual, not a trainedautoencoder.",
+      "variation": "Proposed: wire existing mode/threshold APIs into visitorcontrols and retain the samepoint while its designation changes. Untilthen compare the visiblepoint positions in the defaultmode.",
+      "handoff": "Graph theory will give us another representation of relations. Instead of asking how far points lie from a centre, we will ask which points are connected and what those connections permit.",
+      "candidate_artifacts": [
+        "anomaly_detection"
+      ],
+      "sources": [
+        "commons/maps/ML_Synthesis/final.md",
+        "commons/maps/ML_Synthesis/map_data.json",
+        "commons/maps/ML_Synthesis/intent.md",
+        "commons/maps/ML_Synthesis/tutorial.md",
+        "commons/maps/ML_Synthesis/technical.md",
+        "commons/maps/ML_Synthesis/critical.md",
+        "algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+        "algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "No VRcontrol is wired for mode/threshold; do not instruct knob use.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

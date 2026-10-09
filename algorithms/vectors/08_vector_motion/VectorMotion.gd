@@ -82,6 +82,9 @@ var _time_since_last_text_update: float = 0.0
 const TEXT_UPDATE_INTERVAL: float = 0.1
 
 func _ready() -> void:
+	if str(get_meta("config_lesson",""))=="motion_chamber":
+		var room=preload("res://algorithms/vectors/08_vector_motion/motion_chamber.gd").new()
+		room.name="MotionChamber";add_child(room);set_physics_process(false);return
 	super._ready()
 	# Match the compact exhibition presentation used by other advanced vector scenes.
 	scale = Vector3(0.5, 0.5, 0.5)

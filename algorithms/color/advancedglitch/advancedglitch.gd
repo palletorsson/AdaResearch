@@ -29,7 +29,8 @@ signal glitch_event_triggered(effect_name: String)
 func _ready() -> void:
 	setup_demo_scene()
 	initialize_glitch_systems()
-	create_ui_controls()
+	if not (str(get_meta("config_embedded", false)).to_lower() in ["true", "1"]):
+		create_ui_controls()
 	print("ðŸŽ¨ Advanced Glitch System Initialized!")
 
 func _process(delta: float) -> void:

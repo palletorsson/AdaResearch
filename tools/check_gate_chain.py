@@ -86,8 +86,11 @@ GD_REF = re.compile(r"res://(commons/[A-Za-z0-9_/]+\.gd)")
 
 
 def tracked_files():
+    # ls-tree, not ls-files: the index can hold a path HEAD does not, and the
+    # question is about the clone. Same rule as gates L, M and N.
     out = subprocess.run(
-        ["git", "ls-files"], cwd=ROOT, capture_output=True, text=True
+        ["git", "ls-tree", "-r", "HEAD", "--name-only"],
+        cwd=ROOT, capture_output=True, text=True
     )
     return {line.strip().replace("\\", "/") for line in out.stdout.splitlines()
             if line.strip()}

@@ -1,7 +1,7 @@
 {
   "id": "pathfinder-validation",
   "title": "Map Pathfinder Validation",
-  "description": "Validate map reachability rules. Every map must have reachable spawn, reachable teleporter, reachable artifacts.",
+  "description": "Validate map reachability rules. THE VERDICT ONLY COVERS RULE 1: map_pathfinder has one ERROR rule (no walkable floor); rules 2-6 are WARN, are excluded from the issue count, and do not touch the exit code. Read the printed lines, not the OK.",
   "triggers": [
     "validate map",
     "pathfinder check",
@@ -11,8 +11,8 @@
   "granularity": "micro",
   "model_version": "opus-4.6",
   "created": "2026-04-08",
-  "updated": "2026-04-08",
-  "earned_from": "doc/MAP_EDITING_PIPELINE.md, map_pathfinder.py",
+  "updated": "2026-08-31",
+  "earned_from": "doc/MAP_EDITING_PIPELINE.md, map_pathfinder.py; corrected by breath 2026-08-31T18:56 (measured)",
   "nodes": [
     {
       "id": "run",
@@ -22,8 +22,9 @@
     },
     {
       "id": "pass",
-      "type": "decision",
-      "label": "All rules pass?"
+      "type": "action",
+      "label": "Read the WARN lines — do not read the verdict",
+      "detail": "map_pathfinder.py:1079 counts ERRORs only (total_issues += len(errors)); :1120 prints that count as '(N issues)'; :1122 exits 0 unless an ERROR fired. Measured 2026-08-31 at HEAD 5d7bb58a5: `check --all --verbose` = 989 maps, '989 OK, 0 FAIL (0 issues)', exit 0, over 683 WARN lines in 300 maps. Of the 231 spine maps, 109 print a WARN and 77 have their EXIT teleport flagged (Rule 2 no catch row / Rule 3 not walkable from spawn). Tutorial_Single prints both and is called OK. Grep the output for '[WARN]' and judge each line yourself: some are benign (flight/transport maps skip Rule 3/5 by design), and the tool cannot tell you which — that is prop-046."
     },
     {
       "id": "diagnose",
@@ -58,6 +59,12 @@
       "id": "done",
       "type": "end",
       "label": "Map valid"
+    },
+    {
+      "id": "judge",
+      "type": "decision",
+      "label": "Is this WARN benign for THIS map?",
+      "detail": "Benign: Rule 3/5 on a map traversed by flight or transport cube. NOT benign: the only exit unreachable on foot, or an artifact the lesson needs on an island. Nothing in the tool records which maps are allowed to skip a rule, so the judgement is yours and is not persisted."
     }
   ],
   "edges": [
@@ -66,14 +73,9 @@
       "to": "pass"
     },
     {
-      "from": "pass",
-      "to": "done",
-      "label": "yes"
-    },
-    {
-      "from": "pass",
+      "from": "judge",
       "to": "diagnose",
-      "label": "no"
+      "label": "not benign"
     },
     {
       "from": "diagnose",
@@ -104,12 +106,37 @@
     },
     {
       "from": "rerun",
+      "to": "run"
+    },
+    {
+      "from": "pass",
+      "to": "judge"
+    },
+    {
+      "from": "judge",
+      "to": "done",
+      "label": "benign / none"
+    },
+    {
+      "from": "rerun",
       "to": "pass"
     }
   ],
   "confidence": "verified",
-  "summary": "Run pathfinder check. Fails? Common: no spawn, unreachable artifact, teleporter not on void. Fix, re-run.",
+  "summary": "Run pathfinder, then READ THE WARN LINES — the OK verdict and exit 0 cover Rule 1 only. 989/989 maps pass while printing 683 warnings; 77 spine maps have a flagged exit.",
   "links_to": [
     "map-editing-pipeline"
-  ]
+  ],
+  "measured": {
+    "at": "2026-08-31T18:56+02:00",
+    "head": "5d7bb58a5",
+    "maps_checked": 989,
+    "warn_lines": 683,
+    "maps_with_warn": 300,
+    "spine_maps": 231,
+    "spine_with_warn": 109,
+    "spine_exit_flagged": 77,
+    "verdict_printed": "989 OK, 0 FAIL (0 issues)",
+    "exit_code": 0
+  }
 }

@@ -228,22 +228,17 @@ func animate_wave_rings(_delta) -> void:
 
 func animate_interference_field(_delta) -> void:
 	# Animate field points based on wave interference
-	var source1_pos = Vector3(-3, 0, -3)
-	var source2_pos = Vector3(3, 0, -3)
-	
 	for i in range(field_points.size()):
 		var point = field_points[i]
 		if point:
-			# Calculate distance to each source
-			var dist1 = point.global_position.distance_to(source1_pos)
-			var dist2 = point.global_position.distance_to(source2_pos)
-			
-			# Calculate wave values at this point
-			var wave1 = sin(time * frequency1 * PI * 2 - dist1 * wave_speed) * amplitude
-			var wave2 = sin(time * frequency2 * PI * 2 - dist2 * wave_speed) * amplitude
+			# Sources and samples share the artifact's local reference plane.
+			# Museum translation/rotation must not change the interference, and
+			# the displayed height is an output, not next frame's sample position.
+			var sample := Vector3(point.position.x, 0, point.position.z)
+			var terms := _wave_terms(sample)
 			
 			# Calculate interference
-			var interference = wave1 + wave2
+			var interference = terms.x + terms.y
 			
 			# Update point position and appearance
 			point.position.y = interference * 0.5
@@ -438,10 +433,8 @@ func _ev_box(center: Vector3, size: Vector3, mat: Material) -> void:
 	_ev_add(mi)
 
 
-## The same two addends animate_interference_field() computes and throws away, read at
-## an arbitrary LOCAL point. Local on purpose: the field animation reads
-## point.global_position against local source constants (the latent placement bug noted
-## in the promotion report), and the apparatus should show the local-frame truth.
+## Shared by the animated field and the explanatory apparatus. All inputs are
+## local to the artifact; the field samples its fixed y=0 reference plane.
 func _wave_terms(pos: Vector3) -> Vector2:
 	var d1: float = pos.distance_to(Vector3(-3, 0, -3))
 	var d2: float = pos.distance_to(Vector3(3, 0, -3))

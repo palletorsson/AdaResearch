@@ -6,15 +6,15 @@ extends Node3D
 class_name QFEPFormula3D
 
 # @identity
-# essence: the THESIS ARTIFACT — the whole book compressed to one line of floating TextMesh, QFE = F − λE(S) + φΔE(S,t), each term glowing in its own colour and breathing on its own pulse. It is the book's method turned into a room: every sequence the reader has walked resolves here into one assembled equation.
-# desire: to be read, not solved — to hang in space so that a reader can walk up to any single term, watch it brighten, and feel the whole sentence tilt around that emphasis, the way a lens tilts to bring one plane into focus.
-# critical_parameter: highlighted_term — which term pulses brightest. The book-role privileges φΔE(S,t): it is the queer generative term, the OPEN one, the part of the equation that is never closed off. Highlighting it is highlighting the dark spot the formula deliberately leaves un-sealed.
-# triggers: highlight_term() intensifies one symbol; on_lambda_changed/on_phi_changed shift term colours to match live system state — the formula re-reads itself as the sliders move, order↔edge↔chaos and resist↔embrace.
-# emerges: the formula reads differently depending on which term is lit — the whole changes meaning with focus. Under φΔE it stops being a static balance sheet (F minus its entropy cost) and becomes a becoming: entropy as a function of time, the rate of change welcomed rather than penalised.
-# needs: VR term touch selection [missing], slider connections [missing], apply_grid_config so a map can choose the emphasis and the posture [has]
-# relationships: the assembled centrepiece of [[qfeplaboratory]] ("the formula assembled") and the closing figure of [[postfoundationscrisis]] ("the closing") — load-bearing across three book chapters; depends on [[lambda_slider]], [[phi_slider]]; gathers every QFEP term the curriculum has taught into one place.
-# book_role: thesis artifact. QFE = F − λE(S) + φΔE(S,t) is the book's own argument made walkable — F is the order the reader has been building, λE(S) is what that order costs in foreclosed possibility, and φΔE(S,t) is the term that refuses to close: the generative dark spot, the queer surplus, entropy still in motion.
-# truth: the formula is not an equation to solve but a lens to see every system through — and it stays deliberately open. φΔE(S,t) is the dark spot left un-sealed on purpose: the place where change is not a cost to minimise but a generativity to keep. A closed formula would foreclose; this one is written to stay breathing.
+# essence: A spatial reading of Ada's QFEP research proposal, not a calculated QFE value.
+# desire: Let a visitor question prediction, variation and change before accepting a formula.
+# critical_parameter: highlighted_term; posture and emphasis control the reading.
+# triggers: reading_study:on adds three term buttons and connects only this hall's lambda/phi rails.
+# emerges: The colours and questions follow the controls. No entropy or player force is computed.
+# needs: Tracked-hand and headset reading checks; a specified state space and objective for any numerical model.
+# relationships: lambda_slider, phi_slider; compare with the independently controlled bifurcation_diagram.
+# book_role: A proposal that the preceding mathematical encounters teach us to question.
+# truth: A positive coefficient does not inherently welcome change; consequences depend on the model and objective.
 
 # Term colors
 const COLOR_QFE := Color(1.0, 1.0, 1.0)       # White - result
@@ -26,7 +26,7 @@ const COLOR_OPERATOR := Color(0.7, 0.7, 0.7)  # Gray - operators
 
 # The generative "dark spot" term φΔE(S,t) — the open part of the formula.
 # These term ids idle a touch brighter so the equation reads as un-sealed even
-# when nothing is highlighted: change welcomed, not penalised.
+# when nothing is highlighted: an authored emphasis, not an objective calculation.
 const GENERATIVE_TERMS := ["phi", "delta", "E_rate"]
 const GENERATIVE_IDLE_BONUS := 0.25
 
@@ -55,6 +55,9 @@ const EMPHASES: Array = ["none", "QFE", "F", "lambda", "E", "phi", "delta", "E_r
 # Font settings
 @export var font_size := 0.15
 @export var depth := 0.02
+## Opt-in local controls and term-reading panel for the synthesis hall.
+@export var reading_study: bool = false
+var _reading_study: Node3D
 
 # Term references
 var term_nodes: Dictionary = {}
@@ -82,6 +85,7 @@ func _ready():
 	# Add to interactable group
 	add_to_group("interactable")
 	add_to_group("qfep_display")
+	_sync_reading_study()
 
 func _create_formula():
 	# Create the formula: QFE = F − λE(S) + φΔE(S,t)
@@ -131,7 +135,7 @@ func _create_formula():
 
 
 ## The posture axis. `line` runs the original centring loop verbatim, so every
-## existing placement of this artifact reads exactly as it did before promotion.
+## term geometry uses measured glyph widths to keep the equation readable.
 func _arrange(total_width: float) -> void:
 	match posture:
 		"stack":
@@ -186,6 +190,7 @@ func _add_term(term_id: String, text: String, x_pos: float, color: Color) -> flo
 	text_mesh.font_size = int(font_size * 1000)  # TextMesh uses integer font size
 	text_mesh.depth = depth
 	text_mesh.pixel_size = 0.001  # Scale factor
+	text_mesh.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	
 	mesh_instance.mesh = text_mesh
 	mesh_instance.position = Vector3(x_pos, 0, 0)
@@ -202,10 +207,9 @@ func _add_term(term_id: String, text: String, x_pos: float, color: Color) -> flo
 	term_nodes[term_id] = mesh_instance
 	materials[term_id] = material
 
-	# Calculate width for next term position
-	# Approximate width based on text length
-	var char_width: float = font_size * 0.6
-	var term_width: float = text.length() * char_width
+	# Measure the rendered glyphs; centred meshes plus guessed character widths
+	# made lambda/E and phi/delta overlap in the line arrangement.
+	var term_width: float = text_mesh.get_aabb().size.x + font_size * 0.12
 
 	_term_order.append(term_id)
 	_term_start[term_id] = x_pos
@@ -248,6 +252,9 @@ func _process(_delta):
 ## free the terms out from under every shipped placement.
 func apply_grid_config(config_data: Dictionary) -> void:
 	var before_posture: String = posture
+	if config_data.has("reading_study"):
+		reading_study = str(config_data.reading_study).to_lower() in ["on", "true", "1"]
+		if _built: _sync_reading_study()
 
 	if config_data.has("posture"):
 		posture = _pick_axis(str(config_data["posture"]), POSTURES, posture)
@@ -294,6 +301,18 @@ func _rebuild_now() -> void:
 	_create_formula()
 	_setup_materials()
 	_apply_emphasis()
+	if is_instance_valid(_reading_study): _reading_study.refresh()
+
+
+func _sync_reading_study() -> void:
+	if reading_study and not is_instance_valid(_reading_study):
+		_reading_study = preload("res://commons/interfaces/qfep/formula_display/synthesis_reading_study.gd").new()
+		_reading_study.name = "ReadingStudy"
+		add_child(_reading_study)
+	elif not reading_study and is_instance_valid(_reading_study):
+		remove_child(_reading_study)
+		_reading_study.queue_free()
+		_reading_study = null
 
 
 # Highlight a specific term
@@ -311,37 +330,37 @@ func get_term_info(term_name: String) -> Dictionary:
 		"QFE":
 			return {
 				"name": "Queer Free Energy",
-				"description": "The unified measure of system state"
+				"description": "Ada's research proposal; this display does not compute a value."
 			}
 		"F":
 			return {
 				"name": "Free Energy",
-				"description": "Prediction error. Systems minimize this to find patterns."
+				"description": "A model-relative free-energy cost; requires a specified probabilistic model."
 			}
 		"lambda":
 			return {
 				"name": "Lambda (λ)",
-				"description": "Entropy drive. 0=order, 0.4=edge, 1=chaos"
+				"description": "Weight on E(S). The rail colours are authored interpretations."
 			}
 		"E":
 			return {
 				"name": "Entropy E(S)",
-				"description": "Possibility space. High entropy = freedom."
+				"description": "Entropy of specified states and probabilities; not a direct measure of freedom."
 			}
 		"phi":
 			return {
 				"name": "Phi (φ)",
-				"description": "Rate sensitivity. Positive = embrace change."
+				"description": "Weight on entropy change; its effect depends on the objective."
 			}
 		"delta":
 			return {
 				"name": "Delta (Δ)",
-				"description": "Rate of change in entropy over time."
+				"description": "Change over an interval; a rate also needs elapsed time."
 			}
 		"E_rate":
 			return {
 				"name": "E(S,t)",
-				"description": "Entropy as function of time. The becoming."
+				"description": "Entropy considered over time; the display does not measure it."
 			}
 		_:
 			return {}

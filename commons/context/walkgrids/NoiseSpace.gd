@@ -68,11 +68,32 @@ var noise: FastNoiseLite
 
 ## True once _ready has built the terrain. apply_grid_config must not regenerate before it.
 var _built: bool = false
+@export_enum("none", "walk") var stand: String = "none"
+var walk_heights: Array = []
+var walk_study: Node3D
 
 func _ready():
+	if has_meta("config_stand"):
+		stand = "walk" if str(get_meta("config_stand")) == "walk" else "none"
 	_build_noise()
+	if stand == "walk":
+		# This local encounter declares the baseline explicitly; legacy stays above.
+		noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
+		noise.seed = 0
+		noise.fractal_type = FastNoiseLite.FRACTAL_FBM
+		noise.fractal_gain = 0.5
+		noise.fractal_lacunarity = 2.0
+		noise.fractal_octaves = 4
+		space_size = Vector2(8, 8)
+		resolution = 80
+		height_scale = 0.25
+		position_offset = Vector3(0, 1, 0)
 	super._ready()
 	_built = true
+	if stand == "walk":
+		walk_study = load("res://commons/context/walkgrids/noise_walk_study.gd").new()
+		add_child(walk_study)
+		walk_study.build(self)
 
 func _valid(value: String, allowed: PackedStringArray, fallback: String) -> String:
 	return value if allowed.has(value) else fallback
@@ -108,11 +129,12 @@ func generate_space():
 
 			# Fractal noise - spaces of resistance
 			var height = noise.get_noise_2d(world_x * noise_scale, world_z * noise_scale)
-			heights.append(height * height_scale)
+			heights.append(height * height_scale * edge_weight(Vector2(world_x, world_z)) if stand == "walk" else height * height_scale)
 
 	var mesh = create_mesh_from_heights(heights)
 	mesh_instance.mesh = mesh
 	create_collision_from_mesh(mesh)
+	if stand == "walk": walk_heights = heights
 
 	# Rough material for disruption aesthetic
 	var material = StandardMaterial3D.new()
@@ -120,6 +142,31 @@ func generate_space():
 	material.roughness = 0.9
 	material.metallic = 0.1
 	mesh_instance.material_override = material
+	if stand == "walk":
+		apply_height_shader(Color(0.08,0.18,0.15),Color(0.25,0.56,0.39),Color(0.93,0.78,0.46),0.1,1.9,true,0.1)
+
+func edge_weight(p: Vector2) -> float:
+	var distance_to_edge: float = minf(4.0 - absf(p.x), 4.0 - absf(p.y))
+	return smoothstep(0.0, 0.75, distance_to_edge)
+
+func ground_at(p: Vector2) -> float:
+	var value: float = noise.get_noise_2d(p.x * noise_scale, p.y * noise_scale)
+	return 1.0 + height_scale * edge_weight(p) * value
+
+## Height on the actual mesh triangles, including between sampled vertices.
+## This deliberately does not use TopologySpace's nearest-vertex helper.
+func walk_height_at(p: Vector2) -> float:
+	var g: Vector2 = (p + Vector2.ONE * 4.0) * 10.0
+	var x: int = clampi(int(floor(g.x)), 0, resolution - 1)
+	var z: int = clampi(int(floor(g.y)), 0, resolution - 1)
+	var u: float = clampf(g.x - x, 0, 1)
+	var v: float = clampf(g.y - z, 0, 1)
+	var i: int = z * (resolution + 1) + x
+	var a: float = walk_heights[i]
+	var b: float = walk_heights[i + 1]
+	var c: float = walk_heights[i + resolution + 1]
+	var d: float = walk_heights[i + resolution + 2]
+	return 1.0 + (a + (b-a)*u + (c-a)*v if u+v <= 1 else d + (c-d)*(1-u) + (b-d)*(1-v))
 
 
 ## GUARDED. Config can arrive before _ready (the grid stamps it on the node it is about to
@@ -128,6 +175,7 @@ func generate_space():
 ## regenerate and a fresh trimesh collider. None of the 11 mentions of this token in map_data
 ## passes any of these keys, so none of them rebuilds anything.
 func apply_grid_config(config: Dictionary) -> void:
+	if stand == "walk": return # the local instrument owns this encounter's state
 	if config.is_empty():
 		return
 	var field_changed: bool = false

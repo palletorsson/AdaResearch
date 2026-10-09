@@ -138,6 +138,8 @@ func _ready() -> void:
 	# so the plate is built once both displays exist.
 	if witness == "show":
 		_build_witness_plate.call_deferred()
+	if str(get_meta("config_study", "none")) == "compare":
+		_build_pair_study.call_deferred()
 
 ## Push the declared seed, ramp and size down to the field. The field built
 ## itself in ITS _ready, before this root's, with randi(); a declared seed
@@ -326,10 +328,12 @@ func apply_grid_config(config: Dictionary) -> void:
 			if witness == "show" and _built:
 				_build_witness_plate.call_deferred()
 	var changed: bool = false
+	var contract_changed: bool = false
 	for key in ["frequency", "amplitude", "persistence", "octaves"]:
 		if config.has(key):
 			_placement_params[key] = config[key]
 			changed = true
+			contract_changed = true
 	if config.has("frequency"):
 		_frequency = clampf(float(config["frequency"]), FREQ_MIN, FREQ_MAX)
 	if config.has("amplitude"):
@@ -351,16 +355,19 @@ func apply_grid_config(config: Dictionary) -> void:
 		if s != seed_value:
 			seed_value = s
 			changed = true
+			contract_changed = true
 	if config.has("ramp"):
 		var m: String = str(config["ramp"]).to_lower()
 		if m != ramp:
 			ramp = m
 			changed = true
+			contract_changed = true
 	if config.has("size"):
 		var n: int = int(config["size"])
 		if n != size:
 			size = n
 			changed = true
+			contract_changed = true
 	if config.has("panel"):
 		var p: String = str(config["panel"]).to_lower()
 		if p != panel:
@@ -368,7 +375,9 @@ func apply_grid_config(config: Dictionary) -> void:
 			if _built and _panel_node == null:
 				_build_panel()
 	if changed and noise_field != null:
-		_apply_contract()
+		# Changing the display must not restore a seed chosen before REGEN.
+		if contract_changed:
+			_apply_contract()
 		_update_noise_parameters()
 # ── the measurement contract, read off the generator ─────────────────────────
 ## `contract()` above reports THIS SCRIPT'S variables. These are the FastNoiseLite's
@@ -483,7 +492,12 @@ func _witness_lines() -> PackedStringArray:
 	out.append("sample offset     %-10.3f %-10.3f" % [float(mine["sample_offset"]), float(theirs["sample_offset"])])
 	out.append("")
 	out.append("noise_type        %-10d %-10d" % [int(mine["noise_type"]), int(theirs["noise_type"])])
-	out.append("the one term that differs. the rest is the control.")
+	var changed: Array[String] = []
+	for key in WITNESS_KEYS:
+		if typeof(mine[key]) == TYPE_FLOAT:
+			if not is_equal_approx(float(mine[key]), float(theirs[key])): changed.append(str(key))
+		elif mine[key] != theirs[key]: changed.append(str(key))
+	out.append("only the basis differs" if changed.is_empty() else "also differs: " + ", ".join(changed))
 	return out
 
 
@@ -536,3 +550,10 @@ func _refresh_witness() -> void:
 	if _witness_label == null:
 		return
 	_witness_label.text = "\n".join(_witness_lines())
+
+
+func _build_pair_study() -> void:
+	if has_node("PairStudy"): return
+	var study: Node3D = load("res://algorithms/randomness/simplexnoise/pair_study.gd").new()
+	add_child(study)
+	study.build(self)

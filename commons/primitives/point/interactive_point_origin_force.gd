@@ -570,6 +570,8 @@ func _fire_spawn_position(dir: Vector3) -> Vector3:
 #   interactive_point_origin_force:0:1#mode:forces
 #   interactive_point_origin_force:0:1#mode:branching#ball_speed:8.0
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("coordinate_id"):
+		coordinate_id = str(config_data["coordinate_id"])
 	if config_data.has("attraction_radius"):
 		attraction_radius = float(config_data["attraction_radius"])
 	if config_data.has("attraction_strength"):

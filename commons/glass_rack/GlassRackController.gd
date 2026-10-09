@@ -78,7 +78,7 @@ func _setup_materials() -> void:
 	glass_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	glass_material.metallic = 0.05
 	glass_material.roughness = max(glass_roughness, 0.02)
-	glass_material.specular = 0.8
+	glass_material.metallic_specular = 0.8
 	glass_material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	glass_material.rim_enabled = true
 	glass_material.rim = 0.3

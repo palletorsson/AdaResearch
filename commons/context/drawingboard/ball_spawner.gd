@@ -13,11 +13,16 @@ const PAINT_TIP_SCRIPT_PATH = "res://commons/context/drawingboard/ball_paint_tip
 @export var max_scale: float = 1.2
 
 func _ready() -> void:
+	if str(get_parent().get_meta("config_automated", "false")) in ["true", "1", "yes"]:
+		position.y = 0.55
 	# Clean up existing balls if running in tool mode to avoid duplicates if re-run
 	# But generally we just spawn once on ready in game
 	spawn_balls()
 
 func spawn_balls() -> void:
+	if str(get_parent().get_meta("config_tools", "")) == "spray":
+		spawn_spray_cans()
+		return
 	var ball_scene = load(BALL_SCENE_PATH)
 	var ball_script = load(BALL_SCRIPT_PATH)
 	var tip_script = load(PAINT_TIP_SCRIPT_PATH)
@@ -47,12 +52,18 @@ func spawn_balls() -> void:
 		ball.snap_match_rotation = false
 		ball.snap_falloff_distance = 1.0
 		ball.sync_with_paint_tip = true
+		var studio: bool = str(get_parent().get_meta("config_automated", "false")) in ["true", "1", "yes"]
+		if studio:
+			ball.snap_to_shelf = false
+			ball.set_meta("paint_dock", true)
 		
 		# Random position layout
 		# Arrange in a rough grid or random cloud
 		var x = rng.randf_range(-spawn_area_size.x/2, spawn_area_size.x/2)
 		var z = rng.randf_range(-spawn_area_size.y/2, spawn_area_size.y/2)
 		ball.transform.origin = Vector3(x, base_height, z)
+		if studio:
+			ball.position = Vector3((i % 15 - 7) * 0.18, base_height, (i / 15) * 0.25)
 		
 		# Random scale
 		var s = rng.randf_range(min_scale, max_scale)
@@ -62,6 +73,7 @@ func spawn_balls() -> void:
 		var tip = Node3D.new()
 		tip.name = "BallPaintTip"
 		tip.set_script(tip_script)
+		tip.set("require_pickup", studio)
 		
 		# Random Color (HSV for nice colors)
 		var hue = float(i) / float(ball_count) # Spectrum
@@ -87,3 +99,14 @@ func spawn_balls() -> void:
 		ball.add_child(tip)
 		
 		add_child(ball)
+
+func spawn_spray_cans() -> void:
+	var can_script = load("res://commons/context/drawingboard/spray_can.gd")
+	for i in range(ball_count):
+		var can = can_script.new()
+		can.name = "SprayCan_%02d" % (i + 1)
+		can.ink = Color.from_hsv(float(i) / float(maxi(ball_count - 2, 1)), 0.9, 0.95)
+		if i == ball_count - 2: can.ink = Color("16191e")
+		if i == ball_count - 1: can.ink = Color("f4f1e9")
+		can.position = Vector3((i % 15 - 7) * 0.18, 0.21, (i / 15) * 0.25)
+		add_child(can)

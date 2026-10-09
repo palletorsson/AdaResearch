@@ -1,13 +1,10 @@
 # settling_tremble.gd — SETTLED MEANS TIRED, NOT STILL.
 #
-# The form-finding seam. A hanging chain finds a true equilibrium — the catenary,
-# an exact curve where every link balances. A solver cannot reach it; it relaxes
-# the form step by step and stops when the largest move falls below a tolerance,
-# epsilon. So the "settled" shape is never at rest: it trembles inside a band of
-# width epsilon, and someone chose that width. Amber: the true catenary. Blue:
-# the relaxed nodes, each a hair off the ideal. The inset magnifies the seam —
-# zoom the settled form and it still shivers. Equilibrium is a limit the machine
-# approaches and then declares reached, because it ran out of patience.
+# A static diagram asking when a small remainder counts as settled.
+# Amber samples an analytic catenary. Blue adds seeded vertical offsets within
+# +/- epsilon; the inset magnifies those offsets eight times. No relaxation
+# solver or animation runs here. The title is a provocation to investigate with
+# the live workbench, not a measurement of a solver's residual error or motion.
 extends Node3D
 class_name SettlingTremble
 
@@ -42,11 +39,11 @@ func _ready() -> void:
 			_seg(bprev, p2, Color(color_node.r, color_node.g, color_node.b, 0.7), 0.003)
 		_dot(p2, color_node, 0.006)
 		bprev = p2
-	_tag("the catenary — true equilibrium", Vector2(0.0, -0.30), color_true, 26)
+	_tag("analytic catenary / fixed offsets", Vector2(0.0, -0.30), color_true, 26)
 	# inset: magnify the middle nodes so the tremble is visible
 	_inset(jitters)
 	_plate("FORM-FINDING",
-		"a hanging chain finds an exact curve — the catenary\nthe solver relaxes and stops when the step drops below epsilon\nzoom the 'settled' form: it still trembles — settled means tired, not still",
+		"blue: seeded offsets within +/- epsilon, not solver output\nfixed points / magnified differences / no motion\nwhen does a small remainder count as settled?",
 		Vector3(0.0, 0.34, 0.0), color_node)
 
 
@@ -84,7 +81,7 @@ func _inset(jitters: Array[float]) -> void:
 			_seg(bprev, p, Color(color_node.r, color_node.g, color_node.b, 0.8), 0.003)
 		_dot(p, color_node, 0.007)
 		bprev = p
-	_tag("×8 — still trembling", Vector2(ox + 0.09, oy - 0.13), color_node, 22)
+	_tag("×8 — fixed differences", Vector2(ox + 0.09, oy - 0.13), color_node, 22)
 
 
 func _backing() -> void:

@@ -51,10 +51,10 @@ const CONTROL_SIZES = {
 	"slh": Vector2(0.22, 0.08),
 	"slv": Vector2(0.08, 0.22),
 	"knob": Vector2(0.10, 0.10),
-	"wheel": Vector2(0.12, 0.12),
-	"xy": Vector2(0.16, 0.16),
+	"wheel": Vector2(0.18, 0.25),
+	"xy": Vector2(0.22, 0.29),
 	"btn": Vector2(0.08, 0.08),
-	"lv": Vector2(0.08, 0.15),
+	"lv": Vector2(0.18, 0.25),
 	"monitor": Vector2(0.30, 0.22),
 	"spectrum": Vector2(0.32, 0.24),
 	"waveform": Vector2(0.32, 0.24),
@@ -98,6 +98,11 @@ var active_controls: Dictionary = {}
 var active_buttons: Dictionary = {}
 var rack_config: Dictionary = {}
 var use_json_config: bool = true
+## A grid config handed over before _ready (the museum's map-authored lane calls
+## apply_grid_config while the root is still outside the tree; the grid component
+## defers it until after). Kept here; _ready applies it once ParameterGrid, the
+## dedicated bus and the control scenes exist. (2026-09-10, Astra's runtime brief.)
+var _pending_grid_config: Dictionary = {}
 
 # Dedicated audio bus for this rack's output (allows waveform display to show only rack audio)
 var dedicated_bus_name: String = ""
@@ -120,8 +125,13 @@ func _ready():
 	# Setup auto-save timer for parameter syncing
 	_setup_auto_save_timer()
 
+	# A config that arrived before this node was ready: apply it now, over the exports
+	if not _pending_grid_config.is_empty():
+		var pending: Dictionary = _pending_grid_config
+		_pending_grid_config = {}
+		apply_grid_config(pending)
 	# Eurorack preset takes priority over JSON config
-	if eurorack_preset_name != "":
+	elif eurorack_preset_name != "":
 		# Preset mode: ModuleFaceTexture handles everything, no 3D control scenes needed
 		load_eurorack_preset(eurorack_preset_name)
 	elif rack_config_path != "" and FileAccess.file_exists(rack_config_path):
@@ -251,6 +261,16 @@ func _setup_rack_spectrum_analyzer():
 #
 # Example: AudioContr#config:synth_rack#sound:pickup_mario#autoplay:true
 func apply_grid_config(config_data: Dictionary):
+	# Before _ready the ParameterGrid, the bus and the control scenes do not exist:
+	# keep the config, _ready applies it.
+	if not is_node_ready() or parameter_container == null:
+		_pending_grid_config = config_data.duplicate(true)
+		print("UniversalVRAudioController: grid config kept until ready: %s" % str(config_data))
+		return
+	# A JSON rack spawns control scenes; make sure they are loaded whichever path
+	# brought us here (only the rack_config_path branch of _ready used to load them).
+	if SLIDER_SCENE == null and (config_data.has("config") or config_data.has("grid")):
+		_load_control_scenes()
 	print("UniversalVRAudioController: Applying grid config: %s" % str(config_data))
 
 	# If this is a full rack config (has grid + control_definitions), load directly
@@ -457,6 +477,11 @@ func load_eurorack_preset(preset_name: String) -> void:
 				current_sound_key = presets[preset_name].get("sound_type", current_sound_key)
 		file.close()
 
+	if preset_name == "patch_and_motion":
+		live_patch = preload("res://commons/audio/cables/live_patch.gd").new()
+		rack.add_child(live_patch)
+		live_patch.setup(self, rack.cable_manager)
+
 	print("UniversalVRAudioController: Loaded Eurorack preset '%s'" % preset_name)
 
 
@@ -476,15 +501,18 @@ func attach_face_plate(control: Node3D, control_type: String):
 
 ## --- Eurorack Cable Routing ---
 
+var live_patch: Node
 var _eurorack_cable_manager: SynthCableManager = null
 
 
 func _on_cable_routed(from_param: String, to_param: String) -> void:
+	if is_instance_valid(live_patch): return
 	print("UVAC Cable: Routed %s → %s" % [from_param, to_param])
 	play_current_sound()
 
 
 func _on_cable_unrouted(from_param: String, to_param: String) -> void:
+	if is_instance_valid(live_patch): return
 	print("UVAC Cable: Unrouted %s → %s" % [from_param, to_param])
 	play_current_sound()
 
@@ -1042,6 +1070,7 @@ func _strip_interactable_visuals(control: Node3D, control_type: String) -> void:
 				"Frame/PanelMesh", "Frame/TrackGroove",
 				"Frame/Label3DValue", "Frame/LabelName",
 				"SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle/HandleMesh",
+				"SliderOrigin/InteractableSlider/HandleOrigin/HandleMesh",
 			]
 		"slh", "slider_horizontal":
 			hide_paths = [
@@ -1436,6 +1465,9 @@ func _on_button_pressed(control_id: String):
 		"play":
 			play_current_sound()
 		"stop":
+			if is_instance_valid(live_patch):
+				live_patch.powered = false
+				return
 			if preview_player:
 				preview_player.stop()
 		"toggle":
@@ -1457,6 +1489,7 @@ func _trigger_sound_update():
 	play_current_sound()
 
 func _on_parameter_changed_json(_value, _control_id: String):
+	if is_instance_valid(live_patch): return
 	# Update any waveform displays that are bound to this parameter
 	_update_waveform_displays()
 
@@ -1510,6 +1543,9 @@ func load_sound(sound_key: String):
 	print("UniversalVRAudioController: Switched sound to %s" % current_sound_key)
 
 func _clear_controls():
+	if is_instance_valid(live_patch):
+		live_patch.queue_free()
+		live_patch = null
 	for child in parameter_container.get_children():
 		child.queue_free()
 	active_controls.clear()
@@ -1642,6 +1678,9 @@ func _on_parameter_changed(_value, _p_name: String):
 
 
 func play_current_sound():
+	if is_instance_valid(live_patch):
+		live_patch.powered = true
+		return
 	var values = _get_current_values()
 	var sound_type = _resolve_sound_type(current_sound_key)
 

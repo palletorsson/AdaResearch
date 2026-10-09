@@ -17,6 +17,42 @@ const INFECTION_RATE = 0.2
 const RECOVERY_RATE = 0.1
 const INITIAL_INFECTED = 5
 
+# Optional museum scheduling: retain the full 64³ state and synchronous rule,
+# but compute four x/y rows per frame before publishing the next generation.
+var museum_budget:bool=false
+var budget_next:Array=[]
+var budget_row:int=0
+var budget_commits:int=0
+
+func _ready() -> void:
+	if not museum_budget:
+		super._ready();return
+	setup_common_materials();initialize_grid()
+	sphere_mesh=SphereMesh.new();sphere_mesh.radius=CUBE_SIZE*VISUALIZATION_STEP*0.4;sphere_mesh.height=sphere_mesh.radius*2
+	sphere_mesh.radial_segments=8;sphere_mesh.rings=4
+	configure_multimesh(sphere_mesh,16*16*16)
+	var mat:=StandardMaterial3D.new();mat.vertex_color_use_as_albedo=true;multi_mesh_instance.material_override=mat
+	budget_next=duplicate_3d_grid(grid);update_visualization();is_running=true
+	var note:=Label3D.new();note.text="LOCAL TRANSMISSION / S - I - R\n64 cubed / one update over 1024 display frames\n4-cell display stride / simplified local model";note.font_size=36;note.pixel_size=0.025;note.billboard=BaseMaterial3D.BILLBOARD_ENABLED;note.position.y=14;add_child(note)
+
+func _process(delta:float) -> void:
+	if not museum_budget:
+		super._process(delta);return
+	if not is_running:return
+	for _row in range(4):
+		var x:int=budget_row/GRID_SIZE;var y:int=budget_row%GRID_SIZE
+		for z in range(GRID_SIZE):
+			var state:int=grid[x][y][z];var value:int=state
+			if state==0 and count_infected_neighbors(Vector3i(x,y,z))>0:
+				if randf()<INFECTION_RATE:value=1
+			elif state==1:
+				if randf()<RECOVERY_RATE:value=2
+			budget_next[x][y][z]=value
+		budget_row+=1
+		if budget_row==GRID_SIZE*GRID_SIZE:
+			grid=budget_next;budget_next=duplicate_3d_grid(grid);budget_row=0;budget_commits+=1;iteration_count+=1;update_visualization()
+
+
 func initialize_grid() -> void:
 	# Configure PulsingCA settings
 	pulse_speed = 3.0
@@ -132,4 +168,4 @@ func reset_simulation() -> void:
 	iteration_count = 0
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("museum_budget"):museum_budget=str(config.museum_budget).to_lower() in ["true","1"]

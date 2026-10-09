@@ -1,0 +1,233 @@
+{
+  "_meta": {
+    "sequence": "cellularautomata",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "CA_Introduction": {
+      "inherited": "From Lab_Path: The cellular-automata rooms move from a field sampled at positions to states updated through local neighbourhoods. Bring the question of where a value comes from. A point can receive a function's answer, or it can change because of what its neighbours were doing in the previous step.",
+      "question": "How much of the next row can you predict from three cells?",
+      "ontology": "A cellular automaton is a set of states, a neighbourhood, a local update rule and an update schedule.",
+      "experiment": "Select30 or90, lower SPEED, and use RST to restart; predict one next cell from its left,centre,right neighbourhood.",
+      "observe": "The same restart recreates a single central seed; different rule presets produce different histories.",
+      "limit": "A rule number is a compact truth table, not a ranking from simple to advanced. Changing the display speed changes viewing time rather than the update relation.",
+      "variation": "Proposed extension: Expose the eight neighbourhood cases as visitor-editable switches, preserving the starting row.",
+      "handoff": "Carry one distinction forward: the state of a cell, its neighbourhood and its update rule are separate choices. The next room changes the state space and the neighbourhood of that arrangement.",
+      "candidate_artifacts": [
+        "ca_rule_explorer"
+      ],
+      "sources": [
+        "commons/maps/CA_Introduction/final.md",
+        "commons/maps/CA_Introduction/map_data.json",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+        "commons/maps/CA_Introduction/intent.md",
+        "commons/maps/CA_Introduction/blurb.md",
+        "commons/maps/CA_Introduction/critical.md",
+        "commons/maps/CA_Introduction/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_ElementaryRules": {
+      "inherited": "From CA_Introduction: Carry one distinction forward: the state of a cell, its neighbourhood and its update rule are separate choices. The next room changes the state space and the neighbourhood of that arrangement.",
+      "question": "What changes when a cell can have neighbours around it in three dimensions?",
+      "ontology": "A local rule depends on its neighbourhood and available states; an elementary1D rule is only one possible family.",
+      "experiment": "Observe the growing volume from two sides, identifying occupied clusters and the edges between them.",
+      "observe": "A three-dimensional set evolves and stops after20 generations; it carries active and dying-state colours.",
+      "limit": "Despite this room name, this is a3D multi-state Generations automaton, not a row of elementary Wolfram cases. A stopped display may be its generation cap rather than a stable state.",
+      "variation": "Proposed extension: Place a1D truth-table strip beside one explicit3D neighbourhood to compare what each rule can read.",
+      "handoff": "Next, we will separate space from recorded time by reading successive generations as a structure you can inspect from the side.",
+      "candidate_artifacts": [
+        "structure_growth"
+      ],
+      "sources": [
+        "commons/maps/CA_ElementaryRules/final.md",
+        "commons/maps/CA_ElementaryRules/map_data.json",
+        "algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn",
+        "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd",
+        "commons/maps/CA_ElementaryRules/intent.md",
+        "commons/maps/CA_ElementaryRules/blurb.md",
+        "commons/maps/CA_ElementaryRules/critical.md",
+        "commons/maps/CA_ElementaryRules/technical.md"
+      ],
+      "open_questions": [
+        "The placed growth specimen uses a three-dimensional multistate rule. Decide whether to restore a one-dimensional elementary-rule comparison or give this room a deliberate new place in the progression.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor rule editor in this placed scene.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_GameOfLife": {
+      "inherited": "From CA_ElementaryRules: Next, we will separate space from recorded time by reading successive generations as a structure you can inspect from the side.",
+      "question": "What happens when the record of time becomes a structure in space?",
+      "ontology": "A space-time diagram keeps each successive generation as another row; rendered cells may also become physical supports.",
+      "experiment": "Read from the starting row toward later rows of the bridge, comparing a repeated neighbourhood with the cell it produces.",
+      "observe": "Occupied cells become cubes with colliders; absent cells leave gaps in the sequence of rows.",
+      "limit": "The bridge currently implements an elementary rule(default30), not Conway B3/S23. A pattern called a bridge does not guarantee a traversable route.",
+      "variation": "Proposed extension: Add a matching B3/S23 dish and explicitly contrast evolving a plane with laying out a row history.",
+      "handoff": "A useful variation would place the same Rule 30 history flat on a wall beside this bridge. Neither record would be more mathematically correct, but each would make different relations easier to notice. Then reverse the displayed order of generations and ask what evidence would reveal the reversal. The rule creates time's ordering; the museum gives that ordering a spatial reading.",
+      "candidate_artifacts": [
+        "ca_bridge"
+      ],
+      "sources": [
+        "commons/maps/CA_GameOfLife/final.md",
+        "commons/maps/CA_GameOfLife/map_data.json",
+        "algorithms/cellularautomata/ca_bridge/ca_bridge.tscn",
+        "algorithms/cellularautomata/ca_bridge/ca_bridge.gd",
+        "commons/maps/CA_GameOfLife/intent.md",
+        "commons/maps/CA_GameOfLife/blurb.md",
+        "commons/maps/CA_GameOfLife/critical.md",
+        "commons/maps/CA_GameOfLife/technical.md"
+      ],
+      "open_questions": [
+        "The bridge records Rule 30. The following room contains the working Game of Life board. Reconcile these room identities and prerequisites while retaining both useful encounters.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not promise crossing; actual museum gaps/scale untested. Room title and placed mechanism differ.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_BeyondBinary": {
+      "inherited": "From CA_GameOfLife: A useful variation would place the same Rule 30 history flat on a wall beside this bridge. Neither record would be more mathematically correct, but each would make different relations easier to notice. Then reverse the displayed order of generations and ask what evidence would reveal the reversal. The rule creates time's ordering; the museum gives that ordering a spatial reading.",
+      "question": "Can one rule support both something that repeats and something that travels?",
+      "ontology": "A pattern is a relation among cell states over time, not an extra moving body.",
+      "experiment": "Use the pattern buttons to compare a glider and pulsar; reduce SPEED and watch several generations.",
+      "observe": "The glider changes cells while shifting location; the pulsar cycles through shapes near its starting region.",
+      "limit": "The primary remains binary despite the room title. Calling a pattern alive does not give its cells metabolism or intention. Pattern buttons insert and may interact with existing cells.",
+      "variation": "Proposed extension: Compare the binary dish with an explicit third resting state, keeping initial geometry and clock visible.",
+      "handoff": "An improved comparison would run the same inserted pattern on an empty board and on an inhabited one. That would reveal which behaviour belongs to the isolated pattern and which arises from an encounter. The next room makes your own proximity part of such an encounter.",
+      "candidate_artifacts": [
+        "game_of_life_petri"
+      ],
+      "sources": [
+        "commons/maps/CA_BeyondBinary/final.md",
+        "commons/maps/CA_BeyondBinary/map_data.json",
+        "commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
+        "commons/artifacts/game_of_life_petri/game_of_life_petri.gd",
+        "commons/maps/CA_BeyondBinary/intent.md",
+        "commons/maps/CA_BeyondBinary/blurb.md",
+        "commons/maps/CA_BeyondBinary/critical.md",
+        "commons/maps/CA_BeyondBinary/technical.md"
+      ],
+      "open_questions": [
+        "The selected Game of Life board is binary. Add an actual multistate comparison before claiming the room teaches graded states.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_ExpandingSpace": {
+      "inherited": "From CA_BeyondBinary: An improved comparison would run the same inserted pattern on an empty board and on an inhabited one. That would reveal which behaviour belongs to the isolated pattern and which arises from an encounter. The next room makes your own proximity part of such an encounter.",
+      "question": "Does a route remain the same route after somebody occupies it?",
+      "ontology": "Here each bridge cell carries a continuous health value; proximity and neighbouring cells update that value.",
+      "experiment": "Approach the bridge from its side, pause near an edge, then withdraw and watch that region.",
+      "observe": "Nearby cells lose health and change appearance; away from the visitor they can recover when adjacent cells remain healthy.",
+      "limit": "The rule sees proximity to a player-group position, not footsteps, pressure or care. Regrowth requires healthy neighbours; removing all support need not recover.",
+      "variation": "Proposed extension: Compare lingering, quickly passing and returning; record whose presence the player selector uses in a group.",
+      "handoff": "A useful extension would show a faint outline wherever collision has been disabled, then compare this with the existing appearance alone. Visitors could ask what information they need before deciding to proceed. That question leads towards the next room: which parts of a rule are available to inspect, and which remain hidden behind its presentation?",
+      "candidate_artifacts": [
+        "decaying_bridge"
+      ],
+      "sources": [
+        "commons/maps/CA_ExpandingSpace/final.md",
+        "commons/maps/CA_ExpandingSpace/map_data.json",
+        "algorithms/cellularautomata/living_architecture/decaying_bridge.tscn",
+        "algorithms/cellularautomata/living_architecture/decaying_bridge.gd",
+        "commons/maps/CA_ExpandingSpace/intent.md",
+        "commons/maps/CA_ExpandingSpace/blurb.md",
+        "commons/maps/CA_ExpandingSpace/critical.md",
+        "commons/maps/CA_ExpandingSpace/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Player group and museum access unverified. Observe from stable museum floor before claiming a safe crossing.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_SoftRules": {
+      "inherited": "From CA_ExpandingSpace: A useful extension would show a faint outline wherever collision has been disabled, then compare this with the existing appearance alone. Visitors could ask what information they need before deciding to proceed. That question leads towards the next room: which parts of a rule are available to inspect, and which remain hidden behind its presentation?",
+      "question": "What must remain separate for all cells to share the same present?",
+      "ontology": "Double buffering stores an old state and a next state separately so one update cannot read a neighbour already changed during that same step.",
+      "experiment": "Compare the two trays, then trace two neighbouring outputs on the rule90 display back to the preceding row.",
+      "observe": "The bench shows separate read/write trays and computed elementary histories alongside other rule-family representations.",
+      "limit": "A mechanical-looking crank is not necessarily an operable control. The bench represents the update mechanism; it does not prove every depicted rule-family claim by a live experiment.",
+      "variation": "Proposed extension: Make the crank operable and offer one intentionally sequential update beside synchronous update, keeping the seed identical.",
+      "handoff": "Take the bench's invitation seriously enough to test it. In the next room, two visibly related patterns will ask whether sharing a shape also means sharing a procedure.",
+      "candidate_artifacts": [
+        "the_clockmaker_of_rules"
+      ],
+      "sources": [
+        "commons/maps/CA_SoftRules/final.md",
+        "commons/maps/CA_SoftRules/map_data.json",
+        "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.tscn",
+        "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd",
+        "commons/maps/CA_SoftRules/intent.md",
+        "commons/maps/CA_SoftRules/blurb.md",
+        "commons/maps/CA_SoftRules/critical.md",
+        "commons/maps/CA_SoftRules/technical.md"
+      ],
+      "open_questions": [
+        "The reaction-diffusion placement has no configuration and builds no visible field; the clockmaker supplies static illustrations. Restore or build a continuous field with one observable update.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not claim grab/crank interaction. rd_artifact is bare with empty config_path and builds nothing; leave it outside the core.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_AgentsCircuits": {
+      "inherited": "From CA_SoftRules: Take the bench's invitation seriously enough to test it. In the next room, two visibly related patterns will ask whether sharing a shape also means sharing a procedure.",
+      "question": "Can similar patterns come from different ways of building them?",
+      "ontology": "A resemblance between shapes does not imply the same computation: local temporal updates and recursive spatial copying can share structure.",
+      "experiment": "Select90 on the rule explorer and compare its repeated triangular gaps with the pyramid; inspect a smaller part of each.",
+      "observe": "Rule90 grows a patterned row history; the pyramid repeats smaller corner forms in three-dimensional space.",
+      "limit": "The pyramid is built by recursion, not agents exchanging messages, and the visible likeness does not establish a working circuit or universal computer.",
+      "variation": "Proposed extension: Expose one construction step on each artifact so visitors can match a local update with a recursive level.",
+      "handoff": "Next, the sequence asks what happens when a local update admits graded states and disturbance. Keep asking whether a name describes an observed relation or simply encourages you to see one.",
+      "candidate_artifacts": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "sources": [
+        "commons/maps/CA_AgentsCircuits/final.md",
+        "commons/maps/CA_AgentsCircuits/map_data.json",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
+        "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd",
+        "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
+        "algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.gd",
+        "commons/maps/CA_AgentsCircuits/intent.md",
+        "commons/maps/CA_AgentsCircuits/blurb.md",
+        "commons/maps/CA_AgentsCircuits/critical.md",
+        "commons/maps/CA_AgentsCircuits/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "CA_EdgeOfChaos": {
+      "inherited": "From CA_AgentsCircuits: Next, the sequence asks what happens when a local update admits graded states and disturbance. Keep asking whether a name describes an observed relation or simply encourages you to see one.",
+      "question": "What evidence would distinguish persistent organisation from a changing picture?",
+      "ontology": "A local state can be updated by neighbour averaging plus perturbation; a regime label is a hypothesis about its resulting behaviour.",
+      "experiment": "Watch a region over several updates and describe what persists, what changes and what disappears from view.",
+      "observe": "Coloured state clusters evolve under averaging and random perturbation; the visualiser samples every third cell.",
+      "limit": "This parameter is not a measurement of Langton rule-table lambda or proof that life exists only in a numerical interval. Display subsampling can hide state changes.",
+      "variation": "Proposed extension: Add matched-seed low/mid/high parameter fields and measure a defined persistence statistic before naming a critical regime.",
+      "handoff": "You have now met repeated local updates that create structures larger than their neighbourhoods. The next sequence approaches repetition from another direction: a construction that explicitly calls for smaller instances of itself. Carry the difference between an emerging resemblance and an instruction to repeat.",
+      "candidate_artifacts": [
+        "self_organization_ca"
+      ],
+      "sources": [
+        "commons/maps/CA_EdgeOfChaos/final.md",
+        "commons/maps/CA_EdgeOfChaos/map_data.json",
+        "algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
+        "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd",
+        "commons/maps/CA_EdgeOfChaos/intent.md",
+        "commons/maps/CA_EdgeOfChaos/blurb.md",
+        "commons/maps/CA_EdgeOfChaos/critical.md",
+        "commons/maps/CA_EdgeOfChaos/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor lambda slider; do not turn speculative identity comments into empirical claims.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

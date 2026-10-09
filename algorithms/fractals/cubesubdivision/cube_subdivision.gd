@@ -430,6 +430,9 @@ func _rebuild() -> void:
 # this function was a bare `pass` before this pass, so the 10 existing placements —
 # which name no keys — reach no assignment and never rebuild.
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("lesson", "false")).to_lower() in ["true", "1"] and not has_meta("recursion_lesson"):
+		set_meta("recursion_lesson", true)
+		_install_recursion_lesson.call_deferred()
 	var dirty: bool = false
 	if config.has("tick"):
 		var t: String = str(config["tick"]).to_lower()
@@ -454,3 +457,10 @@ func apply_grid_config(config: Dictionary) -> void:
 	if not _built or not dirty:
 		return
 	_rebuild()
+
+
+func _install_recursion_lesson() -> void:
+	var desk = load("res://commons/artifacts/recursion_lesson/recursion_lesson.gd").new()
+	desk.name = "RecursionLesson"
+	desk.kind = "spend"
+	add_child(desk)

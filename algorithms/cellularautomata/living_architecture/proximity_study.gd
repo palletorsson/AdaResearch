@@ -6,7 +6,7 @@ var work:Node3D
 var running:bool=false
 var elapsed:float=0.0
 var ticks:int=0
-var source_mode:int=0 # VISITOR, PROBE, NONE
+var source_mode:int=0 # VISITOR, PROBE, NONE, HAND
 var probe_near:bool=true
 var beginning:String="FULL"
 var reading:Label3D
@@ -21,6 +21,8 @@ var last_neighbors:int=0
 func _ready() -> void:
 	work=get_parent()
 	_build_space();_build_desk();reset()
+	var hand:Node3D=load("res://algorithms/cellularautomata/living_architecture/proximity_hand.gd").new()
+	hand.name="ProximityHand";add_child(hand)
 
 func reset() -> void:
 	running=false;elapsed=0.0;ticks=0
@@ -43,7 +45,7 @@ func toggle_reverse() -> void:
 	work.reverse_scan=not work.reverse_scan;reset()
 
 func next_source() -> void:
-	source_mode=(source_mode+1)%3;_refresh()
+	source_mode=(source_mode+1)%4;_refresh()
 
 func move_probe() -> void:
 	probe_near=not probe_near;source_mode=1;_refresh()
@@ -56,11 +58,16 @@ func _sample_source() -> void:
 	work.has_visitor=is_instance_valid(visitor) if source_mode==0 else source_mode==1
 	if source_mode==0 and work.has_visitor:work.player_position=visitor.global_position
 	elif source_mode==1:work.player_position=work.to_global(probe_position())
+	elif source_mode==3:
+		var hand:Node3D=get_node_or_null("ProximityHand")
+		work.has_visitor=hand!=null and hand.point.held()
+		if work.has_visitor:work.player_position=hand.point.global_position
 	last_distance=work.cell_position(WITNESS).distance_to(work.to_local(work.player_position)) if work.has_visitor else -1.0
 	last_neighbors=work.healthy_neighbors(WITNESS,work.grid)
 	probe.position=probe_position()+Vector3(0,0.3,0)
 	probe.visible=source_mode==1
-	source_label.text=["VISITOR / body origin","PROBE / nominated position","NONE / recovery only"][source_mode]
+	source_label.text=["VISITOR / body origin","PROBE / nominated position","NONE / recovery only","HAND / held point centre"][source_mode]
+	if source_mode==3 and not work.has_visitor:source_label.text="HAND RELEASED / recovery only"
 	if source_mode==1:source_label.text="PROBE / " + ("NEAR" if probe_near else "FAR")
 	if source_mode==0 and not work.has_visitor:source_label.text="NO VISITOR FOUND / recovery only"
 
@@ -100,19 +107,33 @@ func readback() -> Dictionary:
 
 func _build_space() -> void:
 	box("CollectingBasin",Vector3(5,0.12,10),Vector3(0,-0.66,4.5),Color("354650"),true)
+	# Close the shallow collecting basin at floor height. Without these faces,
+	# the museum's zero cells reveal the sky through the sides of the floor.
+	for side:float in [-2.52,2.52]:
+		box("BasinSideLeft" if side<0 else "BasinSideRight",Vector3(0.04,0.6,10.08),Vector3(side,-0.3,4.5),Color("354650"),true)
+	for end_:float in [-0.52,9.52]:
+		box("BasinEndEntry" if end_<0 else "BasinEndExit",Vector3(5,0.6,0.04),Vector3(0,-0.3,end_),Color("354650"),true)
 	_ramp("EntryRecovery",0.9,-0.5)
 	_ramp("ExitRecovery",8.1,9.5)
 	for x:float in [-2.55,2.55]:box("Rim",Vector3(0.08,0.07,10),Vector3(x,-0.035,4.5),Color("bf9469"))
 	# A thin fixed grid under the transparent cells lets absence remain locatable.
 	for z in range(17):box("BasinLine",Vector3(3,0.01,0.015),Vector3(0,-0.587,z*0.6-0.3),Color("98745b"))
 	for x in range(6):box("BasinLine",Vector3(0.015,0.01,9.6),Vector3(x*0.6-1.5,-0.587,4.5),Color("98745b"))
-	# The frieze wears the same graded state, with no collision mapping.
-	box("FriezeBack",Vector3(0.08,1.95,9.6),Vector3(3.1,1.45,4.5),Color("20373a"))
+	# The panels share the bridge state; the fixed backing is solid at every health.
+	box("FriezeBack",Vector3(0.08,1.95,9.6),Vector3(3.1,1.45,4.5),Color("20373a"),true)
 	for z in range(16):
 		for x in range(5):
 			var cell:=Vector2i(x,z)
 			var panel:MeshInstance3D=box("HealthPanel_%d_%d"%[x,z],Vector3(0.1,0.29,0.53),Vector3(3.04,0.8+x*0.32,z*0.6),Color.WHITE)
 			panel.material_override=work.materials[cell]
+	# The same fixed address can be found at foot level and eye level.
+	# This border adds no state, receiver, controls or bridge collision.
+	var wall_w:=Vector3(2.978,0.8+WITNESS.x*0.32,WITNESS.y*0.6)
+	for sign_ in [-1,1]:
+		box("FriezeWitnessHorizontal",Vector3(0.015,0.018,0.56),wall_w+Vector3(0,sign_*0.158,0),Color("ffd484"))
+		box("FriezeWitnessVertical",Vector3(0.015,0.32,0.018),wall_w+Vector3(0,0,sign_*0.28),Color("ffd484"))
+	var wall_tag:=label("FriezeWitnessTag","W (2,6)",40)
+	wall_tag.position=wall_w+Vector3(-0.01,0.47,0);wall_tag.rotation_degrees.y=-90;add_child(wall_tag)
 	for z:float in [-0.3,9.3]:box("FriezePost",Vector3(0.1,2.5,0.1),Vector3(3.1,1.25,z),Color("bf9469"),true)
 	var caption:=label("FriezeCaption","THE SAME HEALTH / A WALL CAN WEAR IT",30)
 	caption.position=Vector3(3.0,2.65,4.5);caption.rotation_degrees.y=-90;add_child(caption)
@@ -120,15 +141,16 @@ func _build_space() -> void:
 	for sign_ in [-1,1]:
 		box("WitnessEdge",Vector3(0.61,0.015,0.018),at+Vector3(0,0,sign_*0.305),Color("ffd484"))
 		box("WitnessEdge",Vector3(0.018,0.015,0.61),at+Vector3(sign_*0.305,0,0),Color("ffd484"))
-	var tag:=label("WitnessTag","W (2,6)",32);tag.position=at+Vector3(-0.85,0.01,0);tag.rotation_degrees=Vector3(-90,0,0);add_child(tag)
+	var tag:=label("WitnessTag","W (2,6)",40);tag.position=at+Vector3(-0.85,0.01,0);tag.rotation_degrees=Vector3(-90,180,0);tag.modulate=Color("273941");add_child(tag)
 	box("SupportPost",Vector3(0.06,1.5,0.06),Vector3(-2.9,0.75,3.6),Color("bf9469"),true)
 	witness_lamp=OmniLight3D.new();witness_lamp.position=Vector3(-2.9,1.5,3.6);witness_lamp.light_color=Color("ffd484");witness_lamp.omni_range=2;add_child(witness_lamp)
 	var lamp:=MeshInstance3D.new();var sphere:=SphereMesh.new();sphere.radius=0.13;sphere.height=0.26;lamp.mesh=sphere;lamp.position=witness_lamp.position;add_child(lamp)
 	var lm:=StandardMaterial3D.new();lm.albedo_color=Color("ffd484");lamp.material_override=lm
 	probe=MeshInstance3D.new();var ball:=SphereMesh.new();ball.radius=0.16;ball.height=0.32;probe.mesh=ball
 	var pm:=StandardMaterial3D.new();pm.albedo_color=Color("e6a0d3");pm.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED;probe.material_override=pm;add_child(probe)
-	var warning:=label("BasinNote","FIXED BASIN 0.60 m BELOW / RECOVERY RAMPS ON LEFT",27)
-	warning.position=Vector3(0,0.025,-0.95);warning.rotation_degrees=Vector3(-90,0,0);add_child(warning)
+	var warning:=label("BasinNote","BASIN 0.60 m BELOW\nRAMPS ON RIGHT / DESK SIDE",40)
+	warning.pixel_size=0.002;warning.modulate=Color("273941")
+	warning.position=Vector3(0,0.025,-0.95);warning.rotation_degrees=Vector3(-90,180,0);add_child(warning)
 
 func _build_desk() -> void:
 	box("DeskFoot",Vector3(1.8,0.1,0.7),Vector3(-2.7,0.05,-1.6),Color("745b54"),true)

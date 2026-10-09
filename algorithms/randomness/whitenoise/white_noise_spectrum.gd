@@ -32,6 +32,7 @@ var _rng = RandomNumberGenerator.new()
 var _audio_rng = RandomNumberGenerator.new()
 var _multi_mesh_instance: MultiMeshInstance3D
 
+var _gallery_stand: bool = false
 var _control_panel: Node3D
 var _status_label: Label3D
 var _audio_player: AudioStreamPlayer3D
@@ -61,6 +62,7 @@ func _ready() -> void:
         return
     _setup_audio_player()
     _create_vr_controls()
+    _stage_gallery.call_deferred()
 
 func _process(_delta):
     if Engine.is_editor_hint():
@@ -194,6 +196,10 @@ func _create_vr_controls() -> void:
 func _play_noise_preview(type: NoiseType) -> void:
     if not _audio_player:
         return
+    if _audio_player.playing:
+        _audio_player.stop()
+    if seed_value != 0:
+        _audio_rng.seed = seed_value + 13579
     _current_audio_noise = type
     _reset_audio_filter_state()
     _audio_playing = true
@@ -292,6 +298,9 @@ func _update_status_label(forced_text: String = "") -> void:
     else:
         _status_label.text = "Audio: stopped"
 
+    if _gallery_stand:
+        _status_label.text += "\nIMAGE: independent bar heights\nSOUND: separate filtered draws"
+
 func _notification(what: int) -> void:
     if what == NOTIFICATION_EXIT_TREE:
         _stop_audio_preview()
@@ -303,4 +312,17 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-    pass
+    if config.has("stand"):
+        _gallery_stand = str(config["stand"]) == "gallery"
+    if config.has("seed"):
+        seed_value = int(config["seed"])
+    if is_node_ready():
+        _stage_gallery.call_deferred()
+
+
+func _stage_gallery() -> void:
+    if not _gallery_stand or _control_panel == null or _status_label == null:
+        return
+    var console := load("res://algorithms/randomness/whitenoise/noise_gallery_console.gd")
+    console.stage(self, _control_panel, _status_label, "field")
+    _update_status_label()

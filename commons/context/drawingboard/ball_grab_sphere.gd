@@ -1,6 +1,8 @@
 @tool
 extends "res://commons/primitives/cubes/grab_cube.gd"
 
+var _paint_home := Transform3D.IDENTITY
+
 # This script extends GrabCube (used by GrabSphere) and adds 
 # automatic color syncing with the child BallPaintTip.
 
@@ -13,9 +15,21 @@ extends "res://commons/primitives/cubes/grab_cube.gd"
 func _ready() -> void:
 	# Call the parent _ready from grab_cube.gd
 	super._ready()
+	_paint_home = global_transform
 	
 	if sync_with_paint_tip:
 		_sync_colors()
+
+func _on_dropped(pickable) -> void:
+	super._on_dropped(pickable)
+	if get_meta("paint_dock", false): _return_to_paint_dock.call_deferred()
+
+func _return_to_paint_dock() -> void:
+	if is_picked_up(): return
+	freeze = true
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
+	global_transform = _paint_home
 
 func _sync_colors():
 	# Find the BallPaintTip node

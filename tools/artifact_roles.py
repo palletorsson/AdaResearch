@@ -147,7 +147,12 @@ def spine() -> tuple[list[str], dict[str, str]]:
     d = json.loads(SPINE.read_text(encoding="utf-8"))
     order: list[str] = []
     seq_of: dict[str, str] = {}
-    for r in d.get("order", []):
+    # Artifact first appearances cannot enumerate rooms that reuse existing
+    # works. The portable museum plan owns room order; retain any legacy rooms
+    # outside it afterward so this read-side repair does not hide collections.
+    museum = ROOT / "commons" / "data" / "museum" / "em_plan.json"
+    rows = json.loads(museum.read_text(encoding="utf-8")).get("plans", []) if museum.exists() else []
+    for r in [*rows, *d.get("order", [])]:
         m = r.get("map")
         if m and m not in seq_of:
             seq_of[m] = r.get("sequence", "")
@@ -193,6 +198,57 @@ def shot_src(token: str) -> str:
     if (CATALOG / (token + ".png")).is_file():
         return "catalog"
     return ""
+
+
+def arrangement_cards(map_name: str) -> list[dict]:
+    """Grid works plus verified configured museum fittings, with provenance.
+
+    Keep placements() grid-only: a generated entrance has no editable grid cell.
+    Use the same resolver as museum-progress so the book/necklace can name it.
+    """
+    cards = placements(map_name)
+    map_source = "commons/maps/%s/map_data.json" % map_name
+    try:
+        data = json.loads((ROOT / map_source).read_text(encoding="utf-8-sig"))
+    except (OSError, ValueError):
+        return cards
+    # Utilities can carry the book too. Only explicitly ruled utilities become
+    # cards; their cells are kept separate from editable interactable positions.
+    rulings = load_roles().get("roles", {}).get(map_name, {})
+    utility_cards = {}
+    for row, cells in enumerate(data.get("layers", {}).get("utilities", [])):
+        for col, cell in enumerate(cells):
+            token = str(cell).split("#", 1)[0].split(":", 1)[0]
+            if token not in rulings:
+                continue
+            if token not in utility_cards:
+                src = shot_src(token)
+                utility_cards[token] = {"token": token, "row": -1, "col": -1,
+                    "count": 0, "shot": bool(src), "shot_src": src,
+                    "placement_source": "grid utility", "runtime_token": token,
+                    "utility_cells": []}
+            utility_cards[token]["count"] += 1
+            utility_cards[token]["utility_cells"].append({"row": row, "col": col, "value": cell})
+    cards.extend(c for token, c in utility_cards.items() if token not in {v["token"] for v in cards})
+    try:
+        from .museum_progress import configured_generated_artifacts
+    except ImportError:
+        from museum_progress import configured_generated_artifacts
+    order, _ = spine()
+    generated = configured_generated_artifacts(ROOT, data, map_source,
+                                               bool(order and map_name == order[0]))
+    seen = {c["token"] for c in cards}
+    for item in generated:
+        token = item["token"]
+        if token in seen:
+            continue
+        src = shot_src(token)
+        cards.append({"token": token, "row": -1, "col": -1, "count": 1,
+                      "shot": bool(src), "shot_src": src,
+                      "placement_source": "museum entrance",
+                      "runtime_token": item["runtime_token"]})
+        seen.add(token)
+    return cards
 
 
 def registry_index() -> dict[str, dict]:
@@ -301,7 +357,7 @@ def candidates(map_name: str, q: str = "", limit: int = 80) -> dict:
     if not (MAPS / map_name / "map_data.json").exists():
         return {"ok": False, "error": "no such map: %s" % map_name}
     reg = registry_index()
-    here = {c["token"] for c in placements(map_name)}
+    here = {c["token"] for c in arrangement_cards(map_name)}
     dirs = {reg[t]["dir"] for t in here if t in reg and reg[t]["dir"]}
     cats = {reg[t]["category"] for t in here if t in reg}
     words = [w for w in re.split(r"[^a-z0-9]+", q.lower()) if w]
@@ -356,7 +412,7 @@ def board(only_seq: str = "") -> dict:
         s = seq_of.get(m, "")
         if only_seq and s != only_seq:
             continue
-        cards = placements(m)
+        cards = arrangement_cards(m)
         if not cards:
             continue
         mr = ruled.get(m, {})
@@ -457,7 +513,7 @@ def overview() -> dict:
     agg: dict[str, dict] = {}
     for m in order:
         s = seq_of.get(m, "")
-        cards = placements(m)
+        cards = arrangement_cards(m)
         if not cards:
             continue
         a = agg.setdefault(s, {"seq": s, "maps": 0, "placements": 0, "ruled": 0,
@@ -490,7 +546,7 @@ def set_order(map_name: str, role: str, group: str, tokens: list[str]) -> dict:
                  for g in doc.get("groups", {}).get(map_name, []))
         if not ok:
             return {"ok": False, "error": "no group %s in %s/%s" % (group, map_name, role)}
-    live = {c["token"] for c in placements(map_name)}
+    live = {c["token"] for c in arrangement_cards(map_name)}
     # A COLUMN'S SEQUENCE CAN NAME A BOX. "@<group-id>" is the box's place in the
     # run, so a group sits between loose cards instead of always on top — which
     # is what "the group should also be in the order" asks for. Inside a box the
@@ -805,7 +861,7 @@ def set_role(map_name: str, token: str, role: str, group: str | None = None) -> 
         return {"ok": False, "error": "role must be one of %s" % ROLE_NAMES}
     if not (MAPS / map_name / "map_data.json").exists():
         return {"ok": False, "error": "no such map: %s" % map_name}
-    toks = {c["token"] for c in placements(map_name)}
+    toks = {c["token"] for c in arrangement_cards(map_name)}
     if token not in toks:
         return {"ok": False, "error": "%s is not placed in %s" % (token, map_name)}
 

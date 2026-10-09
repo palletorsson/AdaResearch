@@ -87,6 +87,39 @@ const GRAB_SPHERE_SCENE = preload("res://commons/primitives/point/grab_sphere_po
 @export var retention: String = "none"
 const RETENTIONS: PackedStringArray = ["none", "trace", "lattice", "archive", "wax"]
 
+## CARRY - the outline this tool OPENS WITH (2026-09-23).
+##
+## The chapter already has exactly one cross-hall consequence: release a draw_dot in
+## Point_Trace and TraceData carries the trace to [[grid_lines]] in Point_Line_Grid,
+## where it returns in pink, rescaled. One hop in ten rooms. This key extends that same
+## bus one hop further, so the fan whose start you shift is a fan over a shape YOU drew
+## rather than an L the prose told you to lay out corner by corner.
+##
+##   none    the legacy lineage, byte for byte - an empty tool, every corner by hand
+##   trace   the most recent carried trace, reduced to carry_corners and laid out as an
+##           UNCLOSED path. You still close it, and closing it is still the gesture that
+##           makes a face. With no trace on the bus this value does nothing and the tool
+##           opens empty, which is also what a first-time visitor gets.
+##
+## A word, not a number, so the token reads `#carry:trace` and never has to be listed in
+## CONFIG_PARAM_NAMES (a `#key:number` is read as rotation shorthand).
+@export_enum("none", "trace") var carry: String = "none"
+const CARRIES: PackedStringArray = ["none", "trace"]
+
+## How many corners the carried trace is reduced to. A draw_dot trail holds up to 4096
+## positions; nobody can shift the start of a 4096-corner fan and read what changed.
+## Corners are taken at even intervals along the stored order, so the shape survives and
+## the density does not.
+@export var carry_corners: int = 6
+
+## Metres across. The trace arrives in the WORLD coordinates of another map, which is
+## nowhere near this plinth. It is re-centred on the pen and scaled to this span so it is
+## reachable, and FLATTENED to one horizontal plane - the question the fan asks about an
+## interior is a planar question, and a bend drawn in the air is not planar. That
+## flattening is a decision the carry makes for the visitor, and the room says so aloud.
+@export var carry_span: float = 1.2
+
+
 var _grab_point: Node3D
 var _draw_sphere: Node3D
 var _is_grabbed: bool = false
@@ -105,6 +138,7 @@ var active_line_instance: MeshInstance3D
 # Triangle tracking
 var completed_triangles: Array[Dictionary] = []  # {points: Array[int], mesh: MeshInstance3D}
 var triangle_color_index: int = 0
+var fills_visible: bool = true
 
 # Snap indicator
 var snap_indicator: MeshInstance3D
@@ -114,11 +148,20 @@ var _ring_pulse_time: float = 0.0
 var _previous_snap_target: int = -1
 var _hold_timer: float = 0.0            # seconds held since the last auto point
 var _auto_placed: int = 0               # how many this grab laid without a release
+var _new_outline_pending: bool = false
+# Closing a loop keeps one anchor for continuous drawing. That anchor alone is
+# not an unfinished outline; a newly placed first point is.
+var _closed_loop_anchor: bool = false
+var _editing_points: Dictionary = {}
+var museum_style := false
+const MUSEUM_STYLE = preload("res://commons/primitives/line/museum_line_style.gd")
+const MUSEUM_PEN_HOME := Vector3(0.55,-0.19,0.10)
 
 func _ready() -> void:
 	_grab_point = get_node_or_null(grab_point_path)
 	_draw_sphere = get_node_or_null(draw_sphere_path)
 	_draw_ring = get_node_or_null("GrabPoint/DrawRing")
+	museum_style=str(get_meta("config_style",""))=="line"
 
 	if not _grab_point:
 		push_warning("DrawTriangleFaces: Missing grab point in scene.")
@@ -127,6 +170,19 @@ func _ready() -> void:
 
 	if not _draw_sphere:
 		_draw_sphere = _grab_point
+	if museum_style:
+		# Continue the point from Lines; the drawing position is its centre.
+		_draw_sphere.visible=false
+		_draw_sphere=_grab_point
+		_draw_ring.visible=false
+		MUSEUM_STYLE.point(_grab_point,0.06)
+		_grab_point.position=MUSEUM_PEN_HOME
+		point_indicator_size=0.045;point_snap_distance=0.09;carry_span=0.8
+		hold_place_seconds=0;grid_size=0.05
+		line_color=MUSEUM_STYLE.PINK;active_line_color=MUSEUM_STYLE.PINK;point_color=MUSEUM_STYLE.WHITE
+		triangle_colors.assign([Color(MUSEUM_STYLE.PINK,0.32)])
+		_grab_point.action_pressed.connect(func(_who):place_current_corner())
+		MUSEUM_STYLE.plinth(self,Vector3(0,-0.775,0),Vector3(1.4,1.05,0.85))
 
 	_setup_line_visualization()
 	_setup_snap_indicator()
@@ -144,6 +200,57 @@ func _ready() -> void:
 	# lineage and adds nothing at all.
 	_ret_read_config()
 	_ret_build()
+	if museum_style:
+		var controls:=preload("res://commons/ui/triangle_workbench.gd").new()
+		# Stand directly at the triangle; reach the separate console from its side.
+		controls.name="MuseumWorkbench";controls.position=Vector3(1.45,-0.28,0.08)
+		controls.rotation.x=deg_to_rad(-65);add_child(controls)
+		var stand:=MUSEUM_STYLE.plinth(self,Vector3(1.45,-0.9,0.08),Vector3(0.5,0.8,0.4))
+		stand.name="WorkbenchStand"
+	else:_setup_outline_control()
+	if not museum_style and str(get_meta("config_discovery", "0")) == "1":
+		var panel = preload("res://commons/ui/triangle_experiment_panel.gd").new()
+		panel.name = "ExperimentPanel"
+		panel.position = Vector3(.65,-.30,.65)
+		panel.rotation_degrees.x = -30
+		add_child(panel)
+
+	# CARRY last of all: it places points through the ordinary _create_new_point path,
+	# so the outline it opens with is an outline like any other - grabbable, shiftable,
+	# and closed by the visitor's own hand.
+	_carry_read_config()
+	_carry_seed()
+
+func _setup_outline_control() -> void:
+	# Use the museum's existing hand-poke and ray-pointer button.
+	var button: Node3D = preload("res://commons/interactables/push_button.tscn").instantiate()
+	button.name = "NewOutlineButton"
+	button.position = _grab_point.position + Vector3(0.22, 0.1, 0.05)
+	button.pressed.connect(begin_new_outline)
+	add_child(button)
+	if str(get_meta("config_discovery","0")) == "1": return
+	var label := Label3D.new()
+	label.name = "NewOutlineLabel"
+	label.text = "NEW OUTLINE\nKeep the faces; choose a new first corner.\nRelease pen, press, then pick up."
+	label.font_size = 24
+	label.pixel_size = 0.001
+	label.outline_size = 5
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.position = button.position + Vector3(0, 0.13, 0)
+	add_child(label)
+
+func begin_new_outline() -> void:
+	# Preserve earlier faces for comparison; only end the current path.
+	current_path.clear()
+	active_line_mesh.clear_surfaces()
+	snap_indicator.visible = false
+	snap_target_index = -1
+	_previous_snap_target = -1
+	_hold_timer = 0.0
+	_auto_placed = 0
+	_is_grabbed = museum_style and _grab_point.is_picked_up()
+	_new_outline_pending = true
+	_closed_loop_anchor = false
 
 func _setup_line_visualization() -> void:
 	# Completed lines
@@ -288,7 +395,7 @@ func _on_grab_point_picked_up(_pickable) -> void:
 	_auto_placed = 0
 
 	# If path is empty but we have points, allow starting from any existing point
-	if current_path.is_empty() and not placed_points.is_empty():
+	if current_path.is_empty() and not placed_points.is_empty() and not _new_outline_pending:
 		# Find nearest point to start from
 		var nearest_idx = _find_nearby_point(_draw_sphere.global_position)
 		if nearest_idx >= 0:
@@ -302,7 +409,11 @@ func _on_grab_point_picked_up(_pickable) -> void:
 ## Lay a point here, or close onto the one already here. The single path both a
 ## RELEASE and the hold timer go through, so the two cannot drift apart.
 func _place_or_snap(snapped_pos: Vector3) -> void:
+	_new_outline_pending = false
 	var nearby_index := _find_nearby_point(snapped_pos)
+	# A release at the just-closed anchor must keep it eligible for SHIFT START.
+	if nearby_index < 0 or nearby_index != _get_last_point_in_path():
+		_closed_loop_anchor = false
 	if nearby_index >= 0:
 		_handle_snap_to_point(nearby_index)
 	else:
@@ -316,19 +427,15 @@ func _on_grab_point_dropped(_pickable) -> void:
 		return
 
 	var drop_pos = _draw_sphere.global_position
-	_place_or_snap(snap_position_to_grid(drop_pos))
+	if not museum_style:_place_or_snap(snap_position_to_grid(drop_pos))
 
-	# In continuous mode, keep drawing active
-	if continuous_drawing:
-		# Stay in grabbed state - drawing continues
-		# Just clear the snap indicator, keep active line showing
-		snap_indicator.visible = false
-		print("DrawTriangleFaces: point placed (%d laid by holding this grab), continue drawing..." % _auto_placed)
-	else:
-		# Standard mode - stop drawing until next pickup
-		_is_grabbed = false
-		active_line_mesh.clear_surfaces()
-		snap_indicator.visible = false
+	# A released pickable is no longer a source of held-time samples. Keep the
+	# outline for the next pickup, but stop the timer and live preview now.
+	_is_grabbed = false
+	_hold_timer = 0.0
+	active_line_mesh.clear_surfaces()
+	snap_indicator.visible = false
+
 
 func _handle_snap_to_point(point_index: int) -> void:
 	var last_point = _get_last_point_in_path()
@@ -354,11 +461,13 @@ func _handle_snap_to_point(point_index: int) -> void:
 		_play_triangle_sound()
 
 		# Create triangles from the closed loop
+		var previous_loop_count: int = completed_triangles.size()
 		_create_triangles_from_path()
 
 		# Start new path from this point
 		current_path.clear()
 		current_path.append(point_index)
+		_closed_loop_anchor = completed_triangles.size() > previous_loop_count
 
 	print("DrawTriangleFaces: Snapped to point %d" % point_index)
 
@@ -378,7 +487,7 @@ func _create_editable_point(point_index: int, position: Vector3) -> void:
 	# Create grab sphere point (same as animatedcubebuilder)
 	var handle = GRAB_SPHERE_SCENE.instantiate()
 	handle.name = "Point_%d" % point_index
-	handle.position = position
+	handle.set_as_top_level(true)
 	handle.alter_freeze = false
 	handle.freeze = true
 	handle.set_meta("point_index", point_index)
@@ -389,6 +498,7 @@ func _create_editable_point(point_index: int, position: Vector3) -> void:
 
 	# Add to tree
 	add_child(handle)
+	handle.global_position = position
 	if owner:
 		handle.owner = owner
 
@@ -399,6 +509,37 @@ func _create_editable_point(point_index: int, position: Vector3) -> void:
 		handle.dropped.connect(_on_edit_point_dropped.bind(point_index))
 
 	point_indicators.append(handle)
+	if museum_style:MUSEUM_STYLE.point(handle,point_indicator_size)
+
+func place_current_corner() -> bool:
+	if not _is_grabbed or not _editing_points.is_empty():return false
+	var p:=snap_position_to_grid(_draw_sphere.global_position)
+	if not current_path.is_empty() and p.distance_to(placed_points[current_path[-1]])<0.01:return false
+	_place_or_snap(p)
+	return true
+
+func close_current_face() -> bool:
+	if current_path.size()<3 or not _editing_points.is_empty():return false
+	var unique:Dictionary={}
+	for index in current_path:unique[index]=true
+	if unique.size()<3:return false
+	var origin:Vector3=placed_points[current_path[0]]
+	var area:=0.0
+	for i in range(1,current_path.size()-1):
+		area+=(placed_points[current_path[i]]-origin).cross(placed_points[current_path[i+1]]-origin).length()
+	if area<0.00001:return false
+	_handle_snap_to_point(current_path[0]);_rebuild_lines()
+	return true
+
+func undo_outline_step() -> bool:
+	if current_path.is_empty() or _closed_loop_anchor or not _editing_points.is_empty():return false
+	var removed:int=current_path.pop_back()
+	var used:=current_path.has(removed)
+	for face in completed_triangles:used=used or face.points.has(removed)
+	if not used and removed==placed_points.size()-1:
+		placed_points.pop_back();point_indicators.pop_back().queue_free()
+	_rebuild_lines()
+	return true
 
 func _create_static_point(point_index: int, position: Vector3) -> void:
 	# Create non-editable visual indicator
@@ -426,14 +567,16 @@ func _create_static_point(point_index: int, position: Vector3) -> void:
 	point_indicators.append(indicator)
 
 func _on_edit_point_picked_up(_pickable, point_index: int) -> void:
+	_editing_points[point_index] = true
 	print("DrawTriangleFaces: Editing point %d" % point_index)
 
 func _on_edit_point_dropped(_pickable, point_index: int) -> void:
+	_editing_points.erase(point_index)
 	# Update the point position in our array
-	var new_pos = point_indicators[point_index].position
+	var new_pos = point_indicators[point_index].global_position
 	if snap_to_grid:
 		new_pos = snap_position_to_grid(new_pos)
-		point_indicators[point_index].position = new_pos
+		point_indicators[point_index].global_position = new_pos
 
 	placed_points[point_index] = new_pos
 	print("DrawTriangleFaces: Point %d moved to %v" % [point_index, new_pos])
@@ -570,6 +713,8 @@ func _create_triangles_from_path() -> void:
 	material.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mesh_instance.material_override = material
 	
+	mesh_instance.visible = fills_visible
+
 	# Store completed triangle
 	completed_triangles.append({
 		"points": loop_points.duplicate(),
@@ -578,76 +723,123 @@ func _create_triangles_from_path() -> void:
 	
 	print("DrawTriangleFaces: Created %d triangles from loop" % (loop_points.size() - 2))
 
+func toggle_fill_visibility() -> void:
+	fills_visible = not fills_visible
+	for face in completed_triangles:
+		face.mesh.visible = fills_visible
+
+## Move the latest closed loop's fan anchor to its next stored corner.
+## This replaces that loop's fill; the boundary, points and other loops stay put.
+func shift_start() -> bool:
+	if not _shift_start_block_reason().is_empty():
+		return false
+	var selected: Dictionary = completed_triangles[-1]
+	var loop: Array = selected.points
+	loop.append(loop.pop_front())
+	_rebuild_triangle(selected)
+	_rebuild_lines()
+	return true
+
+func _shift_start_block_reason() -> String:
+	var pen_held: bool = _is_grabbed
+	if is_instance_valid(_grab_point) and _grab_point.has_method("is_picked_up"):
+		pen_held = pen_held or bool(_grab_point.is_picked_up())
+	if pen_held:
+		return "Release the pen to shift START."
+	if not _editing_points.is_empty():
+		return "Release the corner to shift START."
+	if not current_path.is_empty() and not (_closed_loop_anchor and current_path.size() == 1):
+		return "Close this outline or press NEW OUTLINE."
+	if completed_triangles.is_empty():
+		return "Draw and close an outline first."
+	return ""
+
+## Read-only state for the side panel and encounter verification.
+## Stored indices are zero-based; displayed corner and loop numbers are one-based.
+func get_experiment_state() -> Dictionary:
+	var selected_loop_index: int = completed_triangles.size() - 1
+	var selected_points: Array = []
+	if selected_loop_index >= 0:
+		selected_points = completed_triangles[selected_loop_index].points.duplicate()
+	var start_index: int = int(selected_points[0]) if not selected_points.is_empty() else -1
+	var triangles: int = 0
+	for face in completed_triangles:
+		triangles += maxi(0, face.points.size() - 2)
+	var reason: String = _shift_start_block_reason()
+	return {
+		"selected_loop_index": selected_loop_index,
+		"selected_loop_number": selected_loop_index + 1,
+		"selected_loop_points": selected_points,
+		"selected_start_index": start_index,
+		"selected_start_number": start_index + 1,
+		"shift_start_ready": reason.is_empty(),
+		"shift_start_reason": reason,
+		"filled_loops": completed_triangles.size(),
+		"logical_triangles": triangles,
+		"points": placed_points.size(),
+		"path_entries": current_path.size(),
+		"path_first_index": int(current_path[0]) if not current_path.is_empty() else -1,
+		"partial_outline": not current_path.is_empty() and not (_closed_loop_anchor and current_path.size() == 1),
+		"fills_visible": fills_visible,
+	}
+
 func _rebuild_lines() -> void:
 	line_mesh.clear_surfaces()
-
-	if current_path.size() < 2:
-		return
-
+	if current_path.size() < 2 and completed_triangles.is_empty(): return
 	line_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
-
-	for i in range(current_path.size() - 1):
-		var p0 = placed_points[current_path[i]]
-		var p1 = placed_points[current_path[i + 1]]
-		line_mesh.surface_add_vertex(p0)
-		line_mesh.surface_add_vertex(p1)
-
+	# Closed boundaries remain visible when their filled meshes are hidden.
+	for face in completed_triangles:
+		var loop: Array = face.points
+		for i in loop.size():
+			line_mesh.surface_add_vertex(placed_points[loop[i]])
+			line_mesh.surface_add_vertex(placed_points[loop[(i+1)%loop.size()]])
+	for i in range(current_path.size()-1):
+		line_mesh.surface_add_vertex(placed_points[current_path[i]])
+		line_mesh.surface_add_vertex(placed_points[current_path[i+1]])
 	line_mesh.surface_end()
 
 func _rebuild_all_triangles() -> void:
 	# Rebuild all triangle meshes with updated point positions
 	for tri_data in completed_triangles:
-		var loop_points: Array = tri_data.points
-		var mesh_instance: MeshInstance3D = tri_data.mesh
+		_rebuild_triangle(tri_data)
 
-		if loop_points.size() < 3:
-			continue
+func _rebuild_triangle(tri_data: Dictionary) -> void:
+	var loop_points: Array = tri_data.points
+	var mesh_instance: MeshInstance3D = tri_data.mesh
+	if loop_points.size() < 3:
+		return
 
-		# Rebuild the mesh
-		var st = SurfaceTool.new()
-		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-		# Get the existing material color
-		var tri_color = Color.WHITE
-		if mesh_instance.material_override:
-			tri_color = mesh_instance.material_override.albedo_color
+	var tri_color := Color.WHITE
+	if mesh_instance.material_override:
+		tri_color = mesh_instance.material_override.albedo_color
 
-		# Fan triangulation from first point
-		var first_point = placed_points[loop_points[0]]
+	var first_point: Vector3 = placed_points[loop_points[0]]
+	for i in range(1, loop_points.size() - 1):
+		var v0: Vector3 = first_point
+		var v1: Vector3 = placed_points[loop_points[i]]
+		var v2: Vector3 = placed_points[loop_points[i + 1]]
+		var normal: Vector3 = (v1 - v0).cross(v2 - v0).normalized()
 
-		for i in range(1, loop_points.size() - 1):
-			var v0 = first_point
-			var v1 = placed_points[loop_points[i]]
-			var v2 = placed_points[loop_points[i + 1]]
-
-			# Calculate normal
-			var edge1 = v1 - v0
-			var edge2 = v2 - v0
-			var normal = edge1.cross(edge2).normalized()
-
-			# Front face
-			st.set_normal(normal)
-			st.set_color(tri_color)
-			st.add_vertex(v0)
-			st.set_normal(normal)
-			st.set_color(tri_color)
-			st.add_vertex(v1)
-			st.set_normal(normal)
-			st.set_color(tri_color)
-			st.add_vertex(v2)
-
-			# Back face
-			st.set_normal(-normal)
-			st.set_color(tri_color)
-			st.add_vertex(v0)
-			st.set_normal(-normal)
-			st.set_color(tri_color)
-			st.add_vertex(v2)
-			st.set_normal(-normal)
-			st.set_color(tri_color)
-			st.add_vertex(v1)
-
-		mesh_instance.mesh = st.commit()
+		# Match the original fan's vertex order and UVs on both sides.
+		st.set_normal(normal)
+		st.set_color(tri_color)
+		st.set_uv(Vector2(0, 0))
+		st.add_vertex(v0)
+		st.set_uv(Vector2(1, 0))
+		st.add_vertex(v1)
+		st.set_uv(Vector2(0.5, 1))
+		st.add_vertex(v2)
+		st.set_normal(-normal)
+		st.set_uv(Vector2(0, 0))
+		st.add_vertex(v0)
+		st.set_uv(Vector2(0.5, 1))
+		st.add_vertex(v2)
+		st.set_uv(Vector2(1, 0))
+		st.add_vertex(v1)
+	mesh_instance.mesh = st.commit()
 
 func snap_position_to_grid(pos: Vector3) -> Vector3:
 	if not snap_to_grid:
@@ -665,6 +857,8 @@ func clear_all() -> void:
 	point_indicators.clear()
 	placed_points.clear()
 	current_path.clear()
+	_closed_loop_anchor = false
+	_editing_points.clear()
 	
 	# Clear triangles
 	for tri_data in completed_triangles:
@@ -762,6 +956,78 @@ const RET_RING_N := 5
 var _ret_node: Node3D = null
 
 
+func _carry_read_config() -> void:
+	if has_meta("config_carry"):
+		var c: String = str(get_meta("config_carry")).strip_edges().to_lower()
+		carry = c if CARRIES.has(c) else carry
+
+
+## Lay the carried trace out as an unclosed path. Silent and harmless in every case
+## that is not "a trace is on the bus and the map asked for it".
+func _carry_seed() -> void:
+	if carry != "trace":
+		return
+	var bus: Node = get_node_or_null("/root/TraceData")
+	if bus == null or not bus.has_method("get_all_traces"):
+		return
+	var traces: Array = bus.get_all_traces()
+	if traces.is_empty():
+		print("DrawTriangleFaces: carry:trace asked for, nothing on the bus - opening empty.")
+		return
+	var src: Array = traces[traces.size() - 1]
+	if src.size() < 3:
+		return
+	var pts: Array = _carry_flatten(_carry_reduce(src, maxi(3, carry_corners)))
+	var laid: int = 0
+	for p: Vector3 in pts:
+		var g: Vector3 = snap_position_to_grid(p)
+		# Two reduced corners can round into one cell. A repeated corner makes a
+		# zero-area triangle in the fan: a bug wearing the shape of the lesson.
+		if not placed_points.is_empty() and placed_points[placed_points.size() - 1].is_equal_approx(g):
+			continue
+		_create_new_point(g)
+		laid += 1
+	if laid < 3:
+		clear_all()
+		print("DrawTriangleFaces: carried trace collapsed to %d corners - opening empty." % laid)
+		return
+	_rebuild_lines()
+	print("DrawTriangleFaces: carried %d trace positions in as %d corners." % [src.size(), laid])
+
+
+## Even intervals along the stored order - not curvature-aware, and deliberately not:
+## a corner detector would choose the shape for the visitor, which is the whole thing
+## this room is trying to hand back to them.
+func _carry_reduce(src: Array, n: int) -> Array:
+	if src.size() <= n:
+		return src.duplicate()
+	var out: Array = []
+	var last: int = src.size() - 1
+	for i in range(n):
+		out.append(src[int(round(float(i) * float(last) / float(n - 1)))])
+	return out
+
+
+## Re-centre on the pen, scale the wider of X/Z to carry_span, drop Y.
+func _carry_flatten(pts: Array) -> Array:
+	if pts.is_empty():
+		return pts
+	var lo: Vector3 = pts[0]
+	var hi: Vector3 = pts[0]
+	for p: Vector3 in pts:
+		lo = Vector3(minf(lo.x, p.x), minf(lo.y, p.y), minf(lo.z, p.z))
+		hi = Vector3(maxf(hi.x, p.x), maxf(hi.y, p.y), maxf(hi.z, p.z))
+	var widest: float = maxf(maxf(hi.x - lo.x, hi.z - lo.z), 0.001)
+	var sc: float = carry_span / widest
+	var mid: Vector3 = (lo + hi) * 0.5
+	var base: Vector3 = _grab_point.position if _grab_point else Vector3.ZERO
+	var out: Array = []
+	for p: Vector3 in pts:
+		# Drawing vertices are world positions, even when this plinth is moved or rotated.
+		out.append(to_global(Vector3(base.x + (p.x - mid.x) * sc, base.y, base.z + (p.z - mid.z) * sc)))
+	return out
+
+
 func _ret_read_config() -> void:
 	if has_meta("config_retention"):
 		var r: String = str(get_meta("config_retention")).strip_edges().to_lower()
@@ -770,6 +1036,14 @@ func _ret_read_config() -> void:
 
 ## Gated on the key: a config that says nothing about retention gets no work at all.
 func apply_grid_config(config_data: Dictionary) -> void:
+	# CARRY first and on its own key, so a map that says only `#carry:trace` is served
+	# and a map that says neither key still gets no work at all.
+	if config_data.has("carry"):
+		var c: String = str(config_data["carry"]).strip_edges().to_lower()
+		if CARRIES.has(c) and c != carry:
+			carry = c
+			if is_inside_tree() and placed_points.is_empty():
+				_carry_seed()
 	if not config_data.has("retention"):
 		return
 	var r: String = str(config_data["retention"]).strip_edges().to_lower()

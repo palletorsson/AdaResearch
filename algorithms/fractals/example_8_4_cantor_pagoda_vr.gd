@@ -108,6 +108,7 @@ func _create_block(x_start: float, width: float, y_pos: float, depth: int) -> vo
 	# Create StaticBody3D for collision
 	var static_body = StaticBody3D.new()
 	static_body.position = Vector3(x_start + width / 2.0, y_pos + block_height / 2.0, 0)
+	static_body.set_meta("cantor_level", depth)
 
 	# Create mesh
 	var mesh_instance = MeshInstance3D.new()
@@ -118,7 +119,7 @@ func _create_block(x_start: float, width: float, y_pos: float, depth: int) -> vo
 	# Create material with depth-based coloring (brighter)
 	var material = StandardMaterial3D.new()
 	# Invert depth_factor so higher blocks (larger) are brighter
-	var depth_factor = 1.0 - (float(depth) / float(max_depth))
+	var depth_factor = 1.0 - (float(depth) / float(maxi(max_depth, 1)))
 
 	# Gradient from medium purple at bottom to very bright pink at top
 	var base_color = Color(0.5, 0.2, 0.5, 1.0)  # Medium purple (brighter)
@@ -151,23 +152,29 @@ func get_block_count() -> int:
 
 func get_level_info(level: int) -> Dictionary:
 	"""Get information about a specific level"""
-	if level > max_depth:
+	if level < 0 or level > max_depth:
 		return {}
 
 	var segments = _get_cantor_segments(level)
+	var total := 0.0
+	for segment in segments: total += float(segment.width)
 	return {
 		"level": level,
 		"block_count": segments.size(),
-		"total_width": base_width / pow(3, level),
-		"y_position": level * (block_height + vertical_offset)
+		"total_width": total,
+		"interval_width": base_width / pow(3, level),
+		"y_position": (max_depth - level) * (block_height + vertical_offset)
 	}
 
 func reset_pagoda() -> void:
 	"""Clear and rebuild the pagoda"""
 	for block in _blocks:
+		_sim_root.remove_child(block)
 		block.queue_free()
 	_blocks.clear()
 	_build_pagoda()
+	_status_label.text = "Cantor Pagoda | Depth: %d" % max_depth
+	_status_label.position.y = (max_depth + 1) * (block_height + vertical_offset) + 1.0
 
 func _exit_tree() -> void:
 	for child in get_children():
@@ -176,4 +183,14 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("lesson", "false")).to_lower() == "true":
+		_install_lesson.call_deferred()
+
+func _install_lesson() -> void:
+	if has_node("CantorLesson"): return
+	var fixture = load("res://commons/artifacts/cantor_lesson/cantor_lesson.gd").new()
+	fixture.name = "CantorLesson"
+	fixture.kind = "passage"
+	# The pagoda stands on the retained 1 m deck; its desk stands before it.
+	fixture.position = Vector3(0,-1,5)
+	add_child(fixture)

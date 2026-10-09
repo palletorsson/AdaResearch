@@ -1,0 +1,350 @@
+{
+  "_meta": {
+    "sequence": "isosurfaces",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "ISO_Introduction": {
+      "inherited": "From Topology_Entropy_Morphogenesis: The next sequence begins with that separation. A scalar field supplies values, a chosen level supplies a question, and an extraction procedure supplies the surface you can see. Your first task will be to locate the boundary before learning how its small pieces are made.",
+      "question": "Where does the surface come from if nobody drew its outline?",
+      "ontology": "A scalar field assigns values throughout a volume; an isosurface approximates one chosen level.",
+      "experiment": "Circle the glass and wireframe specimen; follow a visible boundary across several triangles before reading its construction.",
+      "observe": "An irregular continuous-looking boundary is assembled from small polygon patches.",
+      "limit": "The surface reveals one threshold and one sampling resolution; an empty-looking region still has field values.",
+      "variation": "Proposed extension: Display the same field beside two other thresholds, with seed and sample grid fixed.",
+      "handoff": "The next room opens the local construction. Eight corner samples will select a case, and that case will tell the extractor which edges to join.",
+      "candidate_artifacts": [
+        "voxel_noise_demo"
+      ],
+      "sources": [
+        "commons/maps/ISO_Introduction/final.md",
+        "commons/maps/ISO_Introduction/map_data.json",
+        "algorithms/spacetopology/marchingcubes/voxel_noise_demo.tscn",
+        "algorithms/spacetopology/marchingcubes/VoxelNoiseMarchingCubes.gd",
+        "commons/maps/ISO_Introduction/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_LookupTable": {
+      "inherited": "From ISO_Introduction: The next room opens the local construction. Eight corner samples will select a case, and that case will tell the extractor which edges to join.",
+      "question": "What can eight corner samples tell you about the space between them?",
+      "ontology": "Corner signs choose a local case; magnitudes locate crossings along edges.",
+      "experiment": "Compare two tiles with different illuminated corners and follow the corresponding triangle edges.",
+      "observe": "Fifteen representative cases relate corner samples to local surface patches.",
+      "limit": "Signs do not fully determine geometry between samples. The displayed chunk also includes surrounding cells, and ambiguous cases need conventions beyond a fifteen-picture slogan.",
+      "variation": "Proposed extension: Hold corner signs fixed while changing their distance from threshold, then compare where the edge crossings move.",
+      "handoff": "Next, the field will describe familiar objects. The triangle-making procedure can remain the same even when the description supplied to it changes from a chair to a cup.",
+      "candidate_artifacts": [
+        "fifteen_cases_demo"
+      ],
+      "sources": [
+        "commons/maps/ISO_LookupTable/final.md",
+        "commons/maps/ISO_LookupTable/map_data.json",
+        "algorithms/spacetopology/marchingcubes/scenes/fifteen_cases_demo.tscn",
+        "algorithms/spacetopology/marchingcubes/scenes/FifteenCasesController.gd",
+        "commons/maps/ISO_LookupTable/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Desktop W/M/L/A controls only; no visitor VR switches verified. Avoid asserting all displayed geometry is exactly one unit cube.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_ShapesGallery": {
+      "inherited": "From ISO_LookupTable: Next, the field will describe familiar objects. The triangle-making procedure can remain the same even when the description supplied to it changes from a chair to a cup.",
+      "question": "Can the same surface-making procedure describe a chair and a cup?",
+      "ontology": "Field composition separates the description of a shape from its extraction into triangles.",
+      "experiment": "Compare the labelled Chair and Cup specimens; find a junction in one and a hollow in the other.",
+      "observe": "Different familiar forms share the same polygon-making apparatus.",
+      "limit": "A named silhouette does not supply usability, structural strength or human variety. Sampling can erase a thin handle or wall.",
+      "variation": "Proposed extension: Keep the extractor fixed and change one description: thicken the cup wall or remove a chair leg; compare shape and implied use.",
+      "handoff": "The next room leaves the household repertoire and examines a surface whose repetition extends through three directions without being assembled from separate repeating objects.",
+      "candidate_artifacts": [
+        "mc_shapes_gallery"
+      ],
+      "sources": [
+        "commons/maps/ISO_ShapesGallery/final.md",
+        "commons/maps/ISO_ShapesGallery/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingShapesGallery.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorShapes.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesShapes.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_ShapesGallery/blurb.md"
+      ],
+      "open_questions": [
+        "Verify that the museum uses the intended household fields. The compute fallback substitutes spheres, so labels alone do not establish that the chair and cup comparison is present.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. GPU computation unverified; fallback substitutes spheres, so verify named silhouettes before treating prose as runtime evidence.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_TorusGyroid": {
+      "inherited": "From ISO_ShapesGallery: The next room leaves the household repertoire and examines a surface whose repetition extends through three directions without being assembled from separate repeating objects.",
+      "question": "Does a repeating surface have to be a pile of repeating objects?",
+      "ontology": "A periodic scalar expression can generate connected surfaces without separate pieces.",
+      "experiment": "Follow an opening into a neighbouring fold and change viewpoint when a crossing hides the connection.",
+      "observe": "The gyroid-like specimen repeats and bends through three spatial directions.",
+      "limit": "The placed specimen is a perturbed gyroid-like surface, not an exact minimal surface. Repetition does not guarantee a traversable passage.",
+      "variation": "Proposed extension: Set intrusion to pure before comparing period settings, then restore warp separately.",
+      "handoff": "The next room introduces a more direct gesture. Instead of changing a repeating expression, your hand will add local contributions and watch the extracted surface join them together.",
+      "candidate_artifacts": [
+        "GyroidDemo"
+      ],
+      "sources": [
+        "commons/maps/ISO_TorusGyroid/final.md",
+        "commons/maps/ISO_TorusGyroid/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/GyroidDemo.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorGyroid.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingGyroid.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_TorusGyroid/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No verified visitor period/intrusion controls; compute versus fallback must be checked.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_Sculpting": {
+      "inherited": "From ISO_TorusGyroid: The next room introduces a more direct gesture. Instead of changing a repeating expression, your hand will add local contributions and watch the extracted surface join them together.",
+      "question": "When two deposits meet, where is their seam?",
+      "ontology": "Editing a field changes a surface that will be extracted again; a stroke can be stored as a spatial contribution.",
+      "experiment": "Hold the trigger with the brush inside the sculpting volume to add one short deposit near an existing form; release and inspect the join.",
+      "observe": "New rounded material joins the seeded sculpture through a blended boundary.",
+      "limit": "Sampling and blend settings determine which joins remain distinct. Erase mode currently loses its negative sign through abs, so subtraction is unsupported.",
+      "variation": "Proposed extension: Add a clear additive-stroke comparison at two separations before implementing andtesting signed subtraction.",
+      "handoff": "The next room scales the same field-making idea towards terrain. Ask what additional relations a volume can describe beyond the single upper height of a conventional landscape.",
+      "candidate_artifacts": [
+        "mc_sculpt_vr"
+      ],
+      "sources": [
+        "commons/maps/ISO_Sculpting/final.md",
+        "commons/maps/ISO_Sculpting/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingCubesSculptVR.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesSculpt.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_Sculpting/blurb.md"
+      ],
+      "open_questions": [
+        "ERASE currently reaches the generator as a positive radius. Repair signed subtraction, then test a short addition and an equally local removal at the same place.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Actual VR routing andcompute unverified. Do not instruct erasing or imply mouse picks the visible surface.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_FlatTerrain": {
+      "inherited": "From ISO_Sculpting: The next room scales the same field-making idea towards terrain. Ask what additional relations a volume can describe beyond the single upper height of a conventional landscape.",
+      "question": "Can a landscape have two surfaces above the same place?",
+      "ontology": "A heightfield stores one height per horizontal position; a volume field can also describe interior voids.",
+      "experiment": "Read the top profile, then examine its sides for openings or undercuts. Compare what a top view conceals.",
+      "observe": "A terrain-like upper surface belongs to a sampled volume whose default field also includes cave variation.",
+      "limit": "A surface view cannot establish a cave network or a safe route; a thin feature may disappear at coarse sampling.",
+      "variation": "Proposed extension: Compare the same specimen with interior=none andcaverned, preserving threshold andseed.",
+      "handoff": "The next room adds more field terms. A ledge, an arch and an outcrop will become clues to how a compound landscape is described before any triangles are built.",
+      "candidate_artifacts": [
+        "mc_flat_landscape"
+      ],
+      "sources": [
+        "commons/maps/ISO_FlatTerrain/final.md",
+        "commons/maps/ISO_FlatTerrain/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_flat_landscape.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorFlat.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesFlat.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_FlatTerrain/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Static author settings; no verified visitor cave slider.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_PortalLandscape": {
+      "inherited": "From ISO_FlatTerrain: The next room adds more field terms. A ledge, an arch and an outcrop will become clues to how a compound landscape is described before any triangles are built.",
+      "question": "How can an opening appear without drawing a doorway?",
+      "ontology": "A composed density field can add or subtract spatial tendencies before surface extraction.",
+      "experiment": "Compare a projecting ledge with a recess; use another viewpoint to distinguish a hole from a dark patch.",
+      "observe": "The compound terrain combines upper ground, overhangs, caves, arches andoutcrops.",
+      "limit": "A term named arch is not a guarantee of a doorway. Geometry does not teleport, andfield overlap can close as well as open routes.",
+      "variation": "Proposed extension: Show cumulative hillside,overhung,quarried,arched,compound specimens with common field settings.",
+      "handoff": "Next, the same kind of boundary will be read as enclosure. The question moves from how an opening looks to what the space on its other side permits.",
+      "candidate_artifacts": [
+        "marchingcubes_portal_landscape"
+      ],
+      "sources": [
+        "commons/maps/ISO_PortalLandscape/final.md",
+        "commons/maps/ISO_PortalLandscape/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_overhang_landscape.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorOverhang.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesOverhangTerrain.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_PortalLandscape/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Token name says portal; there is no portal interaction in the selected scene.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_Caves": {
+      "inherited": "From ISO_PortalLandscape: Next, the same kind of boundary will be read as enclosure. The question moves from how an opening looks to what the space on its other side permits.",
+      "question": "What changes when a surface surrounds your viewpoint?",
+      "ontology": "Inside/outside is a classification; its embodied consequence depends on orientation, clearance andaccess.",
+      "experiment": "From the available approach, compare the enclosing side of the cave with a view through an opening; follow a boundary visually before attempting a route.",
+      "observe": "An irregular cavity makes the surface readable as enclosure rather than a freestanding object.",
+      "limit": "Connected empty samples do not guarantee adequate headroom or collision clearance. The threshold was authored rather than negotiated with each visitor.",
+      "variation": "Proposed extension: Measure a narrow passage against different visitor clearances, andexhibit paired thresholds with common field.",
+      "handoff": "The next room compares another cave from the same generating family. Resist explaining every difference with the word random; several authored parameters have changed and need to be distinguished.",
+      "candidate_artifacts": [
+        "mc_inside_cave"
+      ],
+      "sources": [
+        "commons/maps/ISO_Caves/final.md",
+        "commons/maps/ISO_Caves/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubes.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_Caves/blurb.md"
+      ],
+      "open_questions": [
+        "Check the cave's compute path and actual approach. Its CPU fallback is a different, hand-shaped tunnel, which cannot establish the intended noise-threshold comparison.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. GPU path andphysical interior access unverified. CPU fallback is a handmade sinusoidal tunnel, not the same noise threshold.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_CaveGeneration": {
+      "inherited": "From ISO_Caves: The next room compares another cave from the same generating family. Resist explaining every difference with the word random; several authored parameters have changed and need to be distinguished.",
+      "question": "Who designed a corridor when nobody placed its walls one by one?",
+      "ontology": "Procedural authors choose field families,scales,biases andthresholds that constrain possible spaces.",
+      "experiment": "Compare the specimen with the previous cave: look for sizes of passages andfrequency of surface changes, without attributing differences to one parameter alone.",
+      "observe": "A second cave arrangement is generated from the same family at different scale/threshold settings.",
+      "limit": "Two differing settings do not isolate a cause; randomness does not remove authorship, anda generated void may be inaccessible.",
+      "variation": "Proposed extension: Hold seed,threshold andsampling fixed while changing noise scale, then compare thresholds separately.",
+      "handoff": "Next, the field's sampling position will change over time. Ask whether the resulting movement belongs to persistent objects or to successive reconstructions of a changing description.",
+      "candidate_artifacts": [
+        "marchingcubes_cave"
+      ],
+      "sources": [
+        "commons/maps/ISO_CaveGeneration/final.md",
+        "commons/maps/ISO_CaveGeneration/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubes.glsl",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd",
+        "commons/maps/ISO_CaveGeneration/blurb.md"
+      ],
+      "open_questions": [
+        "Compare this cave's effective generator with the preceding specimen before attributing differences to their parameters; both can substitute a different CPU fallback.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Both cave scenes require compute; fallback differs from intended field. No real-time generation controls verified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_AnimatedNoise": {
+      "inherited": "From ISO_CaveGeneration: Next, the field's sampling position will change over time. Ask whether the resulting movement belongs to persistent objects or to successive reconstructions of a changing description.",
+      "question": "Are these blocks moving, or are different blocks being drawn?",
+      "ontology": "Changing a sampling offset and rebuilding a representation differs from moving persistent objects.",
+      "experiment": "Watch a small boundary region through several updates; choose a block-sized position andnotice when it appears ordisappears.",
+      "observe": "A coarse block arrangement changes as the sampled field offset advances.",
+      "limit": "This default view marks boundary-containing cells; it is not an interpolated marching-cubes surface. Rebuilding makes visual motion without preserving a particle identity.",
+      "variation": "Proposed extension: Freeze offset andcompare cells with crossings orfaces at the same resolution.",
+      "handoff": "Next, several local influences will contribute to one boundary. A connecting neck will make another apparently simple event, two bodies joining, available to read as a change in field values.",
+      "candidate_artifacts": [
+        "animated_noise_explorer"
+      ],
+      "sources": [
+        "commons/maps/ISO_AnimatedNoise/final.md",
+        "commons/maps/ISO_AnimatedNoise/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/animated_noise_explorer.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/AnimatedNoiseExplorer.gd",
+        "commons/maps/ISO_AnimatedNoise/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Actual VR freeze control absent; desktop ui_accept toggles. Do not claim a true4D independent noise function orfluid simulation.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_Metaballs": {
+      "inherited": "From ISO_AnimatedNoise: Next, several local influences will contribute to one boundary. A connecting neck will make another apparently simple event, two bodies joining, available to read as a change in field values.",
+      "question": "Can two sources make one body?",
+      "ontology": "Local influence fields can add to exceed a shared threshold between their centres.",
+      "experiment": "Look for a neck joining rounded regions andcompare its shape with an outer lobe; initial motion may alreadyhave finished.",
+      "observe": "Several contributing sources can produce a fused extracted surface.",
+      "limit": "The boundary has no inherent ownership byone source; numerical fields are not material forces. Finite influence culling andsampling shape the result.",
+      "variation": "Proposed extension: Stage two sources at increasing fixed separations with commonthreshold to locate loss of connection.",
+      "handoff": "The next room presents another blended surface but changes how the image is produced. A smooth appearance does not require the visible boundary to have been extracted into triangles first.",
+      "candidate_artifacts": [
+        "metaball_world"
+      ],
+      "sources": [
+        "commons/maps/ISO_Metaballs/final.md",
+        "commons/maps/ISO_Metaballs/map_data.json",
+        "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballworld.tscn",
+        "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballscene.gd",
+        "algorithms/proceduralgeneration/hybrid_complex/metaballgenerator/metaballgenerator.gd",
+        "commons/resourses/shaders/PinkTeleport.gdshader",
+        "commons/maps/ISO_Metaballs/blurb.md",
+        "commons/maps/ISO_Metaballs/critical.md",
+        "commons/maps/ISO_Metaballs/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not promise endless merging animation orvisitor source dragging.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_ImplicitModeling": {
+      "inherited": "From ISO_Metaballs: The next room presents another blended surface but changes how the image is produced. A smooth appearance does not require the visible boundary to have been extracted into triangles first.",
+      "question": "Must a visible surface already exist as a triangle mesh?",
+      "ontology": "A field can be queried along viewing rays as well as sampled into a polygon boundary.",
+      "experiment": "Change viewpoint around the moving rounded surface andcompare smooth joins with the prior metaball specimen.",
+      "observe": "Blended lobes are shaded as a continuous moving body.",
+      "limit": "The visible boundary is not automatically collision geometry. Smooth minimum is a different composition from the prior sumofinfluences, so similar appearances can conceal different models.",
+      "variation": "Proposed extension: Place the same distance field beside a marching-cubes extraction at two resolutions andcompare silhouette/collision.",
+      "handoff": "The next room turns a description into a building-like body. Its graph will specify intended connections, while its extracted shell must make those connections into passages a visitor can actually use.",
+      "candidate_artifacts": [
+        "implicit_surface_modeling"
+      ],
+      "sources": [
+        "commons/maps/ISO_ImplicitModeling/final.md",
+        "commons/maps/ISO_ImplicitModeling/map_data.json",
+        "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+        "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.gd",
+        "algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaball.gdshader",
+        "commons/maps/ISO_ImplicitModeling/blurb.md",
+        "commons/maps/ISO_ImplicitModeling/critical.md",
+        "commons/maps/ISO_ImplicitModeling/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. World/local coordinate placement andshader runtime unverified; no touching/collisionclaims.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "ISO_RhizomeBody": {
+      "inherited": "From ISO_ImplicitModeling: The next room turns a description into a building-like body. Its graph will specify intended connections, while its extracted shell must make those connections into passages a visitor can actually use.",
+      "question": "Can you return by a route different from the one you arrived along?",
+      "ontology": "A graph describes intended connections; an implicit shell gives those connections spatial thickness.",
+      "experiment": "Identify an entrance andtrace a possible loop through visible chambers; where passages are accessible, compare a return route with the approach.",
+      "observe": "Rounded chambers are linked by passages, with deliberate additional cycles beyond a connecting tree.",
+      "limit": "Graph connectivity alone does not certify embodied access. Blending, clearance andcollisions canchange which intended connections are usable.",
+      "variation": "Proposed extension: Compare graph route andwalkedroute, then change one passage width while holding graph fixed.",
+      "handoff": "This closes the sequence with a task that needs both description and experience. The next room names operations such as union, intersection and difference. You have already met their consequences in joined chambers, wall shells and cut entrances; now those operations can become explicit tools for composing space.",
+      "candidate_artifacts": [
+        "rhizome_inside"
+      ],
+      "sources": [
+        "commons/maps/ISO_RhizomeBody/final.md",
+        "commons/maps/ISO_RhizomeBody/map_data.json",
+        "commons/artifacts/radial_inside/rhizome_inside.tscn",
+        "commons/artifacts/radial_inside/rhizome_inside.gd",
+        "commons/artifacts/dream_bodies/dream_iso.gd",
+        "commons/maps/ISO_RhizomeBody/blurb.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Actual museum size,reachedentrances andcycletraversal unverified; no guaranteedaccessible route.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

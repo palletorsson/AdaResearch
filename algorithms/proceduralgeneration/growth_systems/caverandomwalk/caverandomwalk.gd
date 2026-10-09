@@ -28,9 +28,12 @@ const CARVE_RADIUS := 1      # 1-voxel radius for walkable width
 const CENTER_RADIUS := 2     # "close enough" to center in xz
 
 func _ready() -> void:
+	if get_parent().has_meta("config_lesson"):
+		grid_size = Vector3i(10,10,10)
 	regenerate()
 
 func regenerate() -> void:
+	carve_history.clear()
 	# Clear existing meshes
 	for child in get_children():
 		child.queue_free()
@@ -66,7 +69,10 @@ func _is_solid(p: Vector3i) -> bool:
 		return false
 	return _solid[_idx(p)] == 1
 
+var carve_history: Array[Vector3i] = []
+
 func _carve_ball(center: Vector3i, radius: int = CARVE_RADIUS, headroom: int = HEADROOM) -> void:
+	carve_history.append(center)
 	# Carve a small sphere/cylinder + headroom vertically.
 	for dy in headroom:
 		var y := center.y + dy

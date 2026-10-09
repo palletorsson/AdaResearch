@@ -28,8 +28,39 @@ func spine_hints() -> Dictionary:
 
 
 # Visual feedback
+## Optional identity for an instrument to follow this exact point.
+@export var coordinate_id: String = "":
+	set(value):
+		coordinate_id = value.strip_edges()
+		set_meta("coordinate_id", coordinate_id)
+
 @export var glow_color: Color = Color(1.0, 0.6, 1.0)
 @export var glow_emission_energy: float = 2.0
+
+## Named POINT_PBR, not PBR: interactive_point_origin_force.gd extends this file
+## and already declares `const PBR` of its own (line 27). GDScript forbids a child
+## shadowing a parent member, so adding the obvious name here broke that subclass
+## outright — "The member PBR already exists in parent class" — and took the force
+## point out of every map that places it.
+const POINT_PBR := preload("res://commons/render/pbr_kit.gd")
+
+## THE BODY'S FINISH — and it defaults to the shipped look on purpose.
+##
+## Palle, 2026-09-04: "make the point sphere dark and glossy like in line in the
+## point line map." That is dark_sphere's body, and it is a better object than
+## the near-white bead: a sphere is the hardest surface there is, with no edge to
+## catch a highlight, and one albedo over one roughness reads as a disc.
+##
+## But this scene is placed directly in 44 maps and reached by CoordinateSystem3M
+## in 47 more, so a material is not a local decision. `glow` stays the default and
+## nothing outside a map that asks for `dark` changes. Point_One asks.
+## `zero` is the ORIGIN's body, shared from Origin so the two cannot drift:
+## a near-black sphere that emits nothing, inside additive shells that do the
+## glowing. Palle, 2026-09-04: "make the point the same black fetch sphere".
+@export_enum("glow", "dark", "zero") var finish: String = "glow"
+## Only read when finish is `dark`. Very dark, and never black: the darkness is
+## the albedo's job, the readability is the surface's.
+@export var dark_albedo: Color = Color(0.085, 0.075, 0.115)
 @export var pickup_sound_volume_db: float = -6.0
 
 # Line to origin settings
@@ -122,6 +153,8 @@ const MARKS: PackedStringArray = ["bead", "crosshair", "cage", "halo"]
 const MARK_SPAN: float = 0.12
 const MARK_BAR: float = 0.006
 const MARK_CELL: float = 0.10
+## The scene's sphere is radius 0.05; the shells are sized off it.
+const ZERO_RADIUS: float = 0.05
 
 # Internal references
 var _original_material: Material
@@ -161,6 +194,16 @@ func _ready() -> void:
 		_glow_material = _build_glow_material(_original_material)
 		mesh_instance.material_override = _glow_material
 		_is_glowing = true
+		if finish == "zero":
+			# the shells go on the MESH, not on the RigidBody: this node's transform
+			# belongs to the physics server, and the mesh is what the eye follows.
+			# The scene already carries an OmniLight3D here, so no second lamp —
+			# it is recoloured below instead.
+			Origin.add_glow_shells(mesh_instance, ZERO_RADIUS,
+					Origin.DEFAULT_GLOW, 1.0, false)
+			var lamp := mesh_instance.get_node_or_null("OmniLight3D") as OmniLight3D
+			if lamp:
+				lamp.light_color = Origin.DEFAULT_GLOW
 
 	# Setup audio
 	_setup_pickup_audio()
@@ -202,6 +245,8 @@ func _normalise_mark(raw: String) -> String:
 ## built once. An unguarded rebuild here would tear the body off every shipped
 ## placement to end up exactly where it started.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("coordinate_id"):
+		coordinate_id = str(config_data["coordinate_id"])
 	if not config_data.has("mark"):
 		return
 	var want: String = _normalise_mark(str(config_data["mark"]))
@@ -393,7 +438,37 @@ func _update_position_label() -> void:
 		3:
 			_position_label.visible = false
 
+## DARK AND GLOSSY — dark_sphere's body, and the reasoning is worth carrying over
+## rather than copying the numbers blind. The sheen does not come from a metallic
+## knob turned to the middle of its range; nothing is 0.6 metallic. It comes from
+## a DIELECTRIC WITH A FILM OVER IT: a broad specular lobe from the surface, a
+## tighter one from the coat, and Fresnel at the limb. Two lobes of different
+## width is most of what makes a sphere read as a sphere and not as a circle —
+## and F0 = 0 would take the limb away entirely and leave a hole in the room.
+func _build_dark_material() -> StandardMaterial3D:
+	var m: StandardMaterial3D = POINT_PBR.hard_plastic(dark_albedo, 0.62, 0.05)
+	m.metallic = 0.0
+	m.metallic_specular = 0.50          # the ordinary dielectric value — obsidian's, glass's
+	m.clearcoat_enabled = true
+	m.clearcoat = 0.24
+	m.clearcoat_roughness = 0.18        # far enough from the base to read as a second lobe
+	m.backlight_enabled = true          # lifts the terminator a shade instead of a cliff
+	m.backlight = Color(0.030, 0.024, 0.046)
+	POINT_PBR.edge_light(m, 0.26, 0.35)
+	# A bead you can lose in a dark room is a bead you cannot drag, so it keeps a
+	# trace of its own light — an eighth of the glow finish, well under the albedo
+	# so it cannot become a lamp.
+	m.emission_enabled = true
+	m.emission = glow_color
+	m.emission_energy_multiplier = maxf(0.0, glow_emission_energy) * 0.12
+	return m
+
+
 func _build_glow_material(source: Material) -> Material:
+	if finish == "zero":
+		return Origin.zero_body_material()
+	if finish == "dark":
+		return _build_dark_material()
 	var material := source
 	if material:
 		material = material.duplicate()

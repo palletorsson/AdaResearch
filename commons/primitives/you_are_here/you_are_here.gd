@@ -70,6 +70,26 @@ const DEIXIS_VALUES: Array[String] = ["words_and_mark", "words_only", "mark_only
 const DEIXIS_HAS_WORDS: Array[String] = ["words_and_mark", "words_only", "arrow", "plan_fragment"]
 const DEIXIS_HAS_RING: Array[String] = ["words_and_mark", "mark_only", "plan_fragment"]
 
+## PEEL - whether the STRUCK WORD can be taken off the floor (2026-09-23, for
+## Point_One's first minute).
+##
+## The decal already says the thing: the first word is crossed out and the location
+## stays legible without it. Loose, that sentence stops being a claim the prose makes
+## and becomes a gesture the visitor makes - lift the cancelled self away and read what
+## is still there. It is the indexical argument done with a hand, at the point in the
+## hall where there is otherwise nothing to hold.
+##
+##   fixed   the shipped decal, byte for byte. One TextMesh, flat, nothing grabbable
+##   loose   the first word rides a pickable body; the remainder stays printed on the
+##           floor. Needs strike_first_word and a text with a space in it, or there is
+##           no first word to separate, and the value falls back to fixed
+##
+## A word, not a number, so a token reads `#peel:loose` and never needs listing in
+## CONFIG_PARAM_NAMES. NOT a dna.axis: what changes is whether a thing can be held,
+## and a still photographed from the canonical camera cannot see that.
+@export_enum("fixed", "loose") var peel: String = "fixed"
+const PEEL_VALUES: Array[String] = ["fixed", "loose"]
+
 # ── State ─────────────────────────────────────────────────────────────
 
 var _built: bool = false
@@ -90,13 +110,13 @@ func _ready() -> void:
 ## tearing the floor text down and putting an identical one back is a rebuild
 ## nobody asked for, on 31 placements.
 func apply_grid_config(config_data: Dictionary) -> void:
-	var before: String = "%s|%s|%d|%s|%s|%s" % [
-		text, text_color, font_size, str(show_ring), str(pride_gradient), deixis]
+	var before: String = "%s|%s|%d|%s|%s|%s|%s" % [
+		text, text_color, font_size, str(show_ring), str(pride_gradient), deixis, peel]
 	for k in config_data.keys():
 		set_meta("config_%s" % str(k), config_data[k])
 	_read_metadata_overrides()
-	var after: String = "%s|%s|%d|%s|%s|%s" % [
-		text, text_color, font_size, str(show_ring), str(pride_gradient), deixis]
+	var after: String = "%s|%s|%d|%s|%s|%s|%s" % [
+		text, text_color, font_size, str(show_ring), str(pride_gradient), deixis, peel]
 	if not _built:
 		return   # _ready has not run yet; it will build with these values.
 	if after == before:
@@ -126,6 +146,8 @@ func _read_metadata_overrides() -> void:
 		pride_gradient = s2 == "true" or s2 == "1" or s2 == "yes"
 	if has_meta("config_deixis"):
 		deixis = _pick_axis(str(get_meta("config_deixis")), DEIXIS_VALUES, deixis)
+	if has_meta("config_peel"):
+		peel = _pick_axis(str(get_meta("config_peel")), PEEL_VALUES, peel)
 
 
 ## Accept an axis value only if it names a claim we actually build.
@@ -163,6 +185,11 @@ func _build() -> void:
 ## The sentence — TextMesh laid flat on the floor. Unchanged from the shipped
 ## build, node name and transform included.
 func _build_words() -> void:
+	# PEEL asks for a different construction, not a different decoration, so it forks
+	# here and leaves every line below untouched for the 36 placements that never ask.
+	if peel == "loose" and strike_first_word and " " in text:
+		_build_words_peeled()
+		return
 	# The text itself — TextMesh laid flat on the floor.
 	var label := MeshInstance3D.new()
 	label.name = "FloorText"
@@ -208,6 +235,92 @@ func _build_words() -> void:
 
 ## The mark's material — one instance shared by the ring and the floorplan bars
 ## so `pride_gradient` still tints every printed line the same way.
+## The sentence, built in two pieces: the struck first word on a pickable body, the
+## remainder printed on the floor where it always was. The two are laid out from the
+## measured width of the WHOLE sentence, so the line reads unbroken until it is lifted.
+func _build_words_peeled() -> void:
+	var probe := TextMesh.new()
+	probe.font_size = font_size
+	var font: Font = probe.font if probe.font != null else ThemeDB.fallback_font
+	var first: String = text.split(" ")[0]
+	var rest: String = text.substr(first.length() + 1)
+	var w_all: float = _text_width(font, text)
+	var w_first: float = _text_width(font, first)
+	var w_rest: float = _text_width(font, rest)
+	var left: float = -w_all * 0.5
+
+	_text_mat = StandardMaterial3D.new()
+	_text_mat.albedo_color = text_color
+	_text_mat.emission_enabled = true
+	_text_mat.emission = text_color
+	_text_mat.emission_energy_multiplier = 1.4
+	_text_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_text_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	# The remainder: still printed, still flat, still the thing that stays legible.
+	var tail_label := _word_mesh(rest, "FloorTextRest")
+	tail_label.position = Vector3(left + w_all - w_rest * 0.5, 0.012, 0.0)
+	add_child(tail_label)
+
+	# The struck word, on a body a hand can take.
+	var body: Node3D = preload("res://addons/godot-xr-tools/objects/pickable.tscn").instantiate()
+	body.name = "StruckWord"
+	body.position = Vector3(left + w_first * 0.5, 0.012, 0.0)
+	# Frozen so the decal lies on the floor instead of falling through it; XR Tools
+	# thaws a pickable on grab and the artifact never has to manage that itself.
+	if "freeze" in body:
+		body.freeze = true
+	add_child(body)
+
+	var word := _word_mesh(first, "Word")
+	body.add_child(word)
+
+	var bar := MeshInstance3D.new()
+	bar.name = "Strike"
+	var bm := BoxMesh.new()
+	var thick: float = maxf(font_size * text_scale * 0.11, 0.01)
+	bm.size = Vector3(w_first, 0.004, thick)
+	bar.mesh = bm
+	bar.material_override = _text_mat
+	bar.position = Vector3(0.0, 0.004, 0.0)
+	body.add_child(bar)
+
+	# Size the collider the body already carries rather than adding a second one.
+	var shape: CollisionShape3D = null
+	for c in body.get_children():
+		if c is CollisionShape3D:
+			shape = c
+			break
+	if shape == null:
+		shape = CollisionShape3D.new()
+		body.add_child(shape)
+	var box := BoxShape3D.new()
+	# Deep enough in Y to be reachable by a hand that is not exactly at floor height.
+	box.size = Vector3(maxf(w_first, 0.08), 0.12, maxf(thick * 2.2, 0.12))
+	shape.shape = box
+	shape.position = Vector3(0.0, 0.05, 0.0)
+
+
+## One word, laid flat on the floor plane, in the shared decal material.
+func _word_mesh(body_text: String, node_name: String) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.name = node_name
+	var tm := TextMesh.new()
+	tm.text = body_text
+	tm.font_size = font_size
+	tm.pixel_size = text_scale
+	tm.depth = 0.0
+	tm.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	mi.mesh = tm
+	mi.material_override = _text_mat
+	mi.rotation = Vector3(-PI * 0.5, 0, 0)
+	return mi
+
+
+func _text_width(font: Font, body_text: String) -> float:
+	return font.get_string_size(body_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x * text_scale
+
+
 func _mark_material() -> StandardMaterial3D:
 	if _ring_mat == null:
 		_ring_mat = StandardMaterial3D.new()

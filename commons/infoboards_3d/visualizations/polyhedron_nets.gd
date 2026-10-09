@@ -66,6 +66,12 @@ extends Node3D
 @export var fold_duration: float = 2.0
 @export var fold_hold: float = 0.8
 @export var loop_fold: bool = false
+## Optional museum sequence: rigid faces fold, then the closed cube drops.
+## Other placements retain their existing fold-only animation.
+@export var fall_cycle: bool = false
+@export var think_hold: float = 2.2
+@export_range(0.15,0.8) var drop_scale: float = 0.45
+@export_range(1,48) var max_dropped_cubes: int = 24
 
 ## Where the fold has got to. Only `animated` runs a tween; the other three are
 ## static poses, which is the only way one still frame can carry the answer.
@@ -121,6 +127,8 @@ var _cube_hinges: Dictionary = {}
 var _generic_hinges: Array = []
 var _fold_progress: float = 0.0
 var _built: bool = false
+var _fold_tween: Tween
+var _fall_controller: Node3D
 
 func _ready():
 	match net_type:
@@ -138,6 +146,12 @@ func _ready():
 ## At the default this is `if auto_fold: _play_fold_animation()` — character for
 ## character the line it replaced.
 func _apply_fold_mode() -> void:
+	_stop_presentation()
+	if fall_cycle and fold == "animated" and auto_fold and is_instance_valid(_cube_root):
+		_fall_controller = preload("res://commons/infoboards_3d/visualizations/cube_net_cycle.gd").new()
+		_fall_controller.name = "FoldFallThink"
+		add_child(_fall_controller)
+		return
 	match fold:
 		"flat":
 			fold_progress = 0.0
@@ -446,7 +460,8 @@ func _apply_fold_generic() -> void:
 
 func _play_fold_animation():
 	fold_progress = 0.0
-	var tween = create_tween()
+	_fold_tween = create_tween()
+	var tween := _fold_tween
 	tween.tween_interval(fold_delay)
 	tween.tween_property(self, "fold_progress", 1.0, fold_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	if loop_fold:
@@ -454,7 +469,15 @@ func _play_fold_animation():
 		tween.tween_property(self, "fold_progress", 0.0, fold_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 		tween.set_loops()
 
+func _stop_presentation() -> void:
+	if _fold_tween: _fold_tween.kill(); _fold_tween = null
+	if is_instance_valid(_fall_controller):
+		_fall_controller.dispose()
+		remove_child(_fall_controller); _fall_controller.queue_free()
+	_fall_controller = null
+
 func apply_grid_config(config_data: Dictionary) -> void:
+	if _built: _stop_presentation()
 	# Allow map strings to control folding behavior (e.g., #fold_duration:6)
 	if config_data.has("fold_duration"):
 		fold_duration = float(config_data.fold_duration)
@@ -468,6 +491,17 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		auto_fold = _parse_bool(config_data.auto_fold)
 	if config_data.has("loop_fold"):
 		loop_fold = _parse_bool(config_data.loop_fold)
+	if config_data.has("fall_cycle"):
+		fall_cycle = _parse_bool(config_data.fall_cycle)
+	if config_data.has("think_hold"):
+		think_hold = clampf(float(config_data.think_hold),0.5,8.0)
+	if config_data.has("drop_scale"):
+		drop_scale = clampf(float(config_data.drop_scale),0.15,0.8)
+	if config_data.has("max_dropped_cubes"):
+		max_dropped_cubes = clampi(int(config_data.max_dropped_cubes),1,48)
+	var old_length := edge_length
+	if config_data.has("edge_length"):
+		edge_length = clampf(float(config_data.edge_length),0.15,1.0)
 
 	# The two DNA axes. `net` is the only one that costs a rebuild, so it is the
 	# only one guarded on having actually changed — and on _ready having built
@@ -480,11 +514,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	var net_changed: bool = want_net != net
 	net = want_net
-	if net_changed and _built and net_type == "cube":
+	if (net_changed or not is_equal_approx(old_length,edge_length)) and _built and net_type == "cube":
 		_rebuild_cube_net()
 
 	# Re-run animation when requested
-	if net_type == "cube":
+	if net_type == "cube" and _built:
 		_apply_fold_mode()
 
 ## An unrecognised string keeps the current value rather than silently becoming

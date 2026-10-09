@@ -1,0 +1,269 @@
+{
+  "_meta": {
+    "sequence": "noise",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Random_Noise_Types": {
+      "inherited": "From Random_Game: Noise Types follows. Carry the distinction between a procedure's fixed structure and its variable choices: neither irregular timing nor an irregular surface means that every aspect of the process is unspecified.",
+      "question": "Can random positions still refuse to be neighbours?",
+      "ontology": "A sample distribution specifies how positions are selected; an exclusion radius constrains relations among accepted samples.",
+      "experiment": "Observe the point cloud from two sides; find the closest visible pair before moving any pickable point.",
+      "observe": "The original cloud avoids pairs closer than 0.25 local units. Moving a point later need not preserve the generation rule.",
+      "limit": "A constrained sample is not proof that all randomness is evenly spaced. Perspective conceals depth and later manipulation changes the sample.",
+      "variation": "Proposed extension: Place matched uniform and blue-noise samples with the same requested count and volume, and reveal rejected candidates.",
+      "handoff": "The next room looks irregular while being driven by repeating deformations. Carry a question about provenance: what rule made the variation you can see, and what evidence distinguishes it from another rule?",
+      "candidate_artifacts": [
+        "randompoints"
+      ],
+      "sources": [
+        "commons/maps/Random_Noise_Types/final.md",
+        "commons/maps/Random_Noise_Types/map_data.json",
+        "algorithms/randomness/randompoints/randompoints.tscn",
+        "algorithms/randomness/randompoints/randompoints.gd",
+        "commons/maps/Random_Noise_Types/intent.md",
+        "commons/maps/Random_Noise_Types/blurb.md",
+        "commons/maps/Random_Noise_Types/critical.md",
+        "commons/maps/Random_Noise_Types/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor distribution selector; apply_grid_config is pass; selecting a distribution is currently author-side. Dark sphere is not placed here.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_Columns": {
+      "inherited": "From Random_Noise_Types: The next room looks irregular while being driven by repeating deformations. Carry a question about provenance: what rule made the variation you can see, and what evidence distinguishes it from another rule?",
+      "question": "What remains recognisable while a column changes shape?",
+      "ontology": "A surface can retain its construction and repeated profile while vertex positions and material values vary over time.",
+      "experiment": "Watch one column through a cycle, then compare it with a neighbouring column at the same moment.",
+      "observe": "Shafts bend and droop while rotation rates and melt phases differ across columns.",
+      "limit": "This is programmed deformation, not a simulation of stone losing strength or an available noise-amplitude experiment. Periodic change does not establish physical erosion.",
+      "variation": "Proposed extension: Add an intact reference column and a freeze/phase control so the visitor can separate deformation from rotation.",
+      "handoff": "The following ring uses a sampled field to alter a surface. Carry the distinction between the geometry that supports a change and the rule that supplies its changing values.",
+      "candidate_artifacts": [
+        "MeltingBerniniScene"
+      ],
+      "sources": [
+        "commons/maps/Noise_Columns/final.md",
+        "commons/maps/Noise_Columns/map_data.json",
+        "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn",
+        "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd",
+        "commons/maps/Noise_Columns/intent.md",
+        "commons/maps/Noise_Columns/blurb.md",
+        "commons/maps/Noise_Columns/critical.md",
+        "commons/maps/Noise_Columns/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No entrance slider exists; do not repeat brief claims of reversible Perlin erosion. Scene show_platform=false.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_One": {
+      "inherited": "From Noise_Columns: The following ring uses a sampled field to alter a surface. Carry the distinction between the geometry that supports a change and the rule that supplies its changing values.",
+      "question": "Is a restless surface changing its underlying shape or only how that shape is expressed?",
+      "ontology": "A field assigns a scalar to a coordinate; a readout turns that scalar into displacement or colour on an existing mesh.",
+      "experiment": "Watch a section of the ring, then move to see its opening and silhouette.",
+      "observe": "The ring remains the support for changing displacement and hue, although large displacement can obscure its torus form.",
+      "limit": "Spatial correlation does not mean the field remembers a visitor or keeps a neighbour list. A changing view also changes what the visitor can judge.",
+      "variation": "Proposed extension: Make relief and colour-only plate versions share a frozen field so the same values support different readings.",
+      "handoff": "The next room makes a sharper cut. A threshold will use sampled values to decide whether a small volume is present at all. Carry forward the distinction between the field and the rule that turns it into something visible.",
+      "candidate_artifacts": [
+        "noisetorus"
+      ],
+      "sources": [
+        "commons/maps/Noise_One/final.md",
+        "commons/maps/Noise_One/map_data.json",
+        "algorithms/randomness/noisetorus/noisetorus.tscn",
+        "commons/resourses/shaders/noisePlanet2.gdshader",
+        "commons/resourses/shaders/noiseTorus.gdshader",
+        "algorithms/randomness/noisetorus/noisetorus.gd",
+        "commons/maps/Noise_One/intent.md",
+        "commons/maps/Noise_One/blurb.md",
+        "commons/maps/Noise_One/critical.md",
+        "commons/maps/Noise_One/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor readout control; noiselayers remains secondary and is not required for this core.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_Voxel": {
+      "inherited": "From Noise_One: The next room makes a sharper cut. A threshold will use sampled values to decide whether a small volume is present at all. Carry forward the distinction between the field and the rule that turns it into something visible.",
+      "question": "Can you remove matter without changing the field that decides where it could appear?",
+      "ontology": "A voxel is a discrete volume sample. A threshold classifies a sampled scalar as occupied or empty.",
+      "experiment": "Move THRESH slowly while leaving SCALE and SEED alone; compare the small volume and linked voxel exhibit, then return THRESH to its earlier position.",
+      "observe": "Higher thresholds retain fewer samples; the connected display also rebuilds. Returning the threshold with the seed fixed restores the same classification.",
+      "limit": "The cut classifies a field chosen by the author. Occupied cubes are an encoding, not evidence that matter itself is binary. Linked images are not identical field copies.",
+      "variation": "Proposed extension: Let visitors compare fixed threshold and changing seed, then fixed seed and changing threshold; preserve both results side by side.",
+      "handoff": "The following room spreads variation across enclosing surfaces. Carry the distinction among the field, its samples and the visible decision made from them.",
+      "candidate_artifacts": [
+        "perlin_terrain_sculptor",
+        "voxelnoise"
+      ],
+      "sources": [
+        "commons/maps/Noise_Voxel/final.md",
+        "commons/maps/Noise_Voxel/map_data.json",
+        "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
+        "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+        "algorithms/randomness/voxelnoise/voxelnoise.tscn",
+        "algorithms/randomness/voxelnoise/voxelnoise.gd",
+        "commons/maps/Noise_Voxel/intent.md",
+        "commons/maps/Noise_Voxel/blurb.md",
+        "commons/maps/Noise_Voxel/critical.md",
+        "commons/maps/Noise_Voxel/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No octaves VR slider despite header comment. Group broadcast may reach receivers beyond this room in museum; runtime pairing must be checked.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_6_Wall": {
+      "inherited": "From Noise_Voxel: The following room spreads variation across enclosing surfaces. Carry the distinction among the field, its samples and the visible decision made from them.",
+      "question": "What changes when the field surrounds you instead of sitting on a bench?",
+      "ontology": "A shader evaluates a rule across a surface; several spatial frequencies can be summed before they become colour.",
+      "experiment": "Pause at a visible wall, trace a broad patch and a smaller detail within it, then compare another face.",
+      "observe": "Large cloudy regions carry smaller variation; the material changes with time, and differently timed surfaces need not match.",
+      "limit": "Six superimposed scales are not six separate visible teaching strips. Motion and colour are coupled, so watching alone cannot isolate each parameter.",
+      "variation": "Proposed extension: Offer a freeze control and single-octave comparison with equal framing and brightness.",
+      "handoff": "Next, a curved support changes how the field is met. Keep separate the shape receiving the values and the coordinates at which those values are sampled.",
+      "candidate_artifacts": [
+        "shader_noise_space"
+      ],
+      "sources": [
+        "commons/maps/Noise_6_Wall/final.md",
+        "commons/maps/Noise_6_Wall/map_data.json",
+        "algorithms/randomness/shadernoisespace/noiseroom.tscn",
+        "algorithms/randomness/shadernoisespace/noiseroom.gd",
+        "algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader",
+        "algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader",
+        "commons/maps/Noise_6_Wall/intent.md",
+        "commons/maps/Noise_6_Wall/blurb.md",
+        "commons/maps/Noise_6_Wall/critical.md",
+        "commons/maps/Noise_6_Wall/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Desktop ui_accept exists; do not promise a VR freeze control or that room-scale access has been checked.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_Inside_Noise": {
+      "inherited": "From Noise_6_Wall: Next, a curved support changes how the field is met. Keep separate the shape receiving the values and the coordinates at which those values are sampled.",
+      "question": "Does placing noise on a sphere mean one noise is being fed into another?",
+      "ontology": "A sampling domain is the coordinates at which a function is evaluated; the supporting mesh and the sampled function are different things.",
+      "experiment": "Compare the sphere silhouette with the ring you encountered earlier; follow a patch across the curved surface.",
+      "observe": "The same shader family deforms a different support, with finer spatial frequency and a larger enclosing form.",
+      "limit": "The placed sphere does not implement domain warping. Curved noisy geometry alone cannot demonstrate noise used to displace sampling coordinates.",
+      "variation": "Proposed extension: Add paired direct-sample and warped-sample surfaces with the same seed and visible coordinate displacement.",
+      "handoff": "The next terrain makes the relationship between coordinates and visible height particularly direct. Carry the question of what a representation permits at each position.",
+      "candidate_artifacts": [
+        "noisesphere"
+      ],
+      "sources": [
+        "commons/maps/Noise_Inside_Noise/final.md",
+        "commons/maps/Noise_Inside_Noise/map_data.json",
+        "algorithms/randomness/noisesphere/noisesphere.tscn",
+        "commons/resourses/shaders/noisePlanet2.gdshader",
+        "algorithms/randomness/noisesphere/noisesphere.gd",
+        "commons/maps/Noise_Inside_Noise/intent.md",
+        "commons/maps/Noise_Inside_Noise/blurb.md",
+        "commons/maps/Noise_Inside_Noise/critical.md",
+        "commons/maps/Noise_Inside_Noise/technical.md"
+      ],
+      "open_questions": [
+        "The sphere is directly sampled, so the promised domain-warp comparison is missing. Add a paired view that holds the field fixed while exposing the displaced sampling coordinates.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Map description promises domain warping that this primary does not perform. Record as a future experiment, not a solved teaching claim.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_Space_10": {
+      "inherited": "From Noise_Inside_Noise: The next terrain makes the relationship between coordinates and visible height particularly direct. Carry the question of what a representation permits at each position.",
+      "question": "When a field becomes ground, which variations become a route?",
+      "ontology": "A heightfield assigns one height to each planar position and turns samples into a mesh and collision surface.",
+      "experiment": "Inspect the green terrain from its edge; follow a ridge with your eye and compare a gentle route with a steeper one.",
+      "observe": "Neighbouring heights form a continuous-looking terrain with broad and small features, fixed after construction.",
+      "limit": "A heightfield cannot give two ground heights to the same XZ location; caves and overhangs need another representation. Ten-dimensional parameter-space controls are absent.",
+      "variation": "Proposed extension: Author two adjacent terrain patches differing only in octave count, then let the visitor choose and explain a route.",
+      "handoff": "The following room asks what makes two generated surfaces a fair comparison. Bring the distinction between a changed appearance and evidence for a changed algorithm.",
+      "candidate_artifacts": [
+        "noise_space"
+      ],
+      "sources": [
+        "commons/maps/Noise_Space_10/final.md",
+        "commons/maps/Noise_Space_10/map_data.json",
+        "commons/context/walkgrids/noise_space.tscn",
+        "commons/context/walkgrids/NoiseSpace.gd",
+        "commons/resourses/shaders/Grid.gdshader",
+        "commons/maps/Noise_Space_10/intent.md",
+        "commons/maps/Noise_Space_10/blurb.md",
+        "commons/maps/Noise_Space_10/critical.md",
+        "commons/maps/Noise_Space_10/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No live10-slider bench. Do not promise terrain traversal until museum collision and entry are checked.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Noise_Perlin_Simplex": {
+      "inherited": "From Noise_Space_10: The following room asks what makes two generated surfaces a fair comparison. Bring the distinction between a changed appearance and evidence for a changed algorithm.",
+      "question": "What would make two noise surfaces a fair comparison?",
+      "ontology": "A noise basis, seed, sampling frequency and visible encoding jointly determine a displayed field.",
+      "experiment": "Compare neighbouring sample heights and colour changes in the two cube fields; identify what the display lets you see and what it leaves unnamed.",
+      "observe": "Both surfaces are sampled cube fields. Different appearances alone do not establish different algorithms.",
+      "limit": "This room currently cannot support its titled Perlin-versus-Simplex conclusion: both defaults use simplex-family noise, with independent seeds and different sampling paths.",
+      "variation": "Proposed extension: Set generator=perlin explicitly on one placement and fix matched seeds, dimensions and readout before asking visitors to attribute differences to the basis.",
+      "handoff": "The next room gives you space to retain that distinction in your own account of the sequence.",
+      "candidate_artifacts": [
+        "simplex_noise",
+        "perlin_noise"
+      ],
+      "sources": [
+        "commons/maps/Noise_Perlin_Simplex/final.md",
+        "commons/maps/Noise_Perlin_Simplex/map_data.json",
+        "algorithms/randomness/simplexnoise/simplexnoise.tscn",
+        "algorithms/randomness/simplexnoise/SimplexNoise.gd",
+        "algorithms/randomness/simplexnoise/SimplexVisualizer.gd",
+        "algorithms/randomness/perlinnoise/perlinnoise.tscn",
+        "algorithms/randomness/perlinnoise/PerlinNoise.gd",
+        "algorithms/randomness/perlinnoise/NoiseVisualizer.gd",
+        "commons/maps/Noise_Perlin_Simplex/intent.md",
+        "commons/maps/Noise_Perlin_Simplex/blurb.md",
+        "commons/maps/Noise_Perlin_Simplex/critical.md",
+        "commons/maps/Noise_Perlin_Simplex/technical.md"
+      ],
+      "open_questions": [
+        "Both named displays currently select simplex. Set one explicitly to Perlin and control sampling, scale and colour before teaching a basis comparison.",
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Do not claim a successful basis comparison or museum-safe 2D sliders. Existing critical/brief grid reachability claims are not museum runtime tests.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Lab_Path": {
+      "inherited": "From Noise_Perlin_Simplex: The next room gives you space to retain that distinction in your own account of the sequence.",
+      "question": "What can you carry out of a sequence when the busy demonstrations are gone?",
+      "ontology": "A reference object supports recall and comparison; the explanation now has to be supplied by the visitor.",
+      "experiment": "Pause beside the dark sphere and describe one earlier encounter in terms of field, sample and readout; then name a different outcome from changing the threshold rather than the seed.",
+      "observe": "The sphere pulses and slowly rotates; it does not display a new noise field or a correctness verdict.",
+      "limit": "A familiar marker cannot verify understanding. A remembered image may omit the parameter and representation that produced it.",
+      "variation": "Proposed extension: Let visitors leave two competing explanations or route memories here, each naming an observation that would distinguish them.",
+      "handoff": "The cellular-automata rooms move from a field sampled at positions to states updated through local neighbourhoods. Bring the question of where a value comes from. A point can receive a function's answer, or it can change because of what its neighbours were doing in the previous step.",
+      "candidate_artifacts": [
+        "dark_sphere"
+      ],
+      "sources": [
+        "commons/maps/Lab_Path/final.md",
+        "commons/maps/Lab_Path/map_data.json",
+        "commons/artifacts/dark_sphere/dark_sphere.tscn",
+        "commons/artifacts/dark_sphere/dark_sphere.gd",
+        "commons/maps/Lab_Path/intent.md",
+        "commons/maps/Lab_Path/blurb.md",
+        "commons/maps/Lab_Path/critical.md",
+        "commons/maps/Lab_Path/technical.md"
+      ],
+      "open_questions": [
+        "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. This is a reflective transition with one real artifact, not a new noise simulator; catalyst behavior deliberately outside this lesson.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

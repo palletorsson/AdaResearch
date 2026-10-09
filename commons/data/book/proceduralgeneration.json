@@ -1,162 +1,117 @@
 {
- "chapter": "proceduralgeneration",
- "speak": "",
- "speak_by": "",
- "pearls": [
-  {
-   "pearl": "pg genetic evolution",
-   "map": "PG_Genetic_Evolution",
-   "lines": [
+  "chapter": "proceduralgeneration",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
     {
-     "token": "GeneticProgramming",
-     "text": "evolution does not design — it accumulates accidents that happen to survive",
-     "by": "draft",
-     "note": "evolution without a designer still needs a fitness function it cannot evolve: the author moves from the geometry to the gradient, and the ninety percent culled each generation vanish without a name.",
-     "note_src": {
-      "file": "commons/maps/PG_Genetic_Evolution/critical.md",
-      "quote": "The author did not leave. The author moved from the geometry to the gradient."
-     }
-    }
-   ],
-   "hero": "GeneticProgramming"
-  },
-  {
-   "pearl": "pg space colonization",
-   "map": "PG_Space_Colonization",
-   "lines": [
-    {
-     "token": "space_colonization_algorithm",
-     "text": "a tree does not know its shape — it only knows which direction has light",
-     "by": "draft",
-     "note": "a tree that only knows which direction has light cannot supply the light: the attractor cloud poses the shape from outside and dies on contact, so the branch is a record of what it consumed.",
-     "note_src": {
-      "file": "commons/maps/PG_Space_Colonization/critical.md",
-      "quote": "The tree grows by devouring what drew it forward."
-     }
-    }
-   ],
-   "hero": "space_colonization_algorithm"
-  },
-  {
-   "pearl": "pg percolation network",
-   "map": "PG_Percolation_Network",
-   "lines": [
-    {
-     "token": "percolationnetwork_ca",
-     "text": "connectivity is not gradual — below the threshold nothing connects",
-     "by": "draft",
-     "note": "the lattice cannot set its own density: p is a const at 0.4, comfortably past p_c, so the map built to show a system deciding has only ever shown it deciding one way.",
-     "note_src": {
-      "file": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd",
-      "quote": "every player who ever met this lattice met a lattice that was always going to connect"
-     }
-    }
-   ],
-   "hero": "percolationnetwork_ca"
-  },
-  {
-   "pearl": "pg branching growth",
-   "map": "PG_Branching_Growth",
-   "lines": [
-    {
-     "token": "organic_space",
-     "text": "an organic space is not designed from outside",
-     "by": "draft"
+      "pearl": "pg genetic evolution",
+      "map": "PG_Genetic_Evolution",
+      "lines": [
+        {
+          "token": "GeneticProgramming",
+          "text": "Hold a body. Change the target. Add a ring the score does not notice.",
+          "by": "final.md"
+        }
+      ],
+      "hero": "GeneticProgramming"
     },
     {
-     "token": "branching_growth_algorithm",
-     "text": "Interactive visualization of branching growth patterns and algorithmic plant generation",
-     "by": "draft",
-     "note": "the comparison needs rules and noise to be one spectrum, and the map can only build two wings: the tree readable fork by fork, the terrain with no genealogy, the hybrid a missing ontology rather than a missing artifact.",
-     "note_src": {
-      "file": "commons/maps/PG_Branching_Growth/critical.md",
-      "quote": "The hybrid that the intent.md identifies as a gap is not just a missing artifact — it is a missing ontology."
-     }
-    }
-   ],
-   "hero": "branching_growth_algorithm"
-  },
-  {
-   "pearl": "procgen",
-   "map": "Chamber_ProcGen",
-   "lines": [],
-   "drop": true,
-   "edge": "the bricoleur cannot supply its own material: every rebuild is made of what your strikes knocked loose, so its morphology is a function of your attention and the loop has no termination condition.",
-   "edge_src": {
-    "file": "commons/maps/Chamber_ProcGen/critical.md",
-    "quote": "A learner who keeps striking the golem's legs produces a golem that rebuilds more legs"
-   }
-  },
-  {
-   "pearl": "pg caves mazes",
-   "map": "PG_Caves_Mazes",
-   "lines": [
-    {
-     "token": "maze_generation",
-     "text": "VR-scale walkable maze with recursive backtracking generation",
-     "by": "draft",
-     "note": "the contrast needs a dividing wall neither algorithm carved — the one frankly authored thing in the room — and from inside either side the difference it exists to show is gone: the body cannot tell rule from accident.",
-     "note_src": {
-      "file": "commons/maps/PG_Caves_Mazes/critical.md",
-      "quote": "the dividing wall is pure intention: a curatorial gesture that organizes two algorithms into an exhibit"
-     }
+      "pearl": "pg space colonization",
+      "map": "PG_Space_Colonization",
+      "lines": [
+        {
+          "token": "space_colonization_algorithm",
+          "text": "Hold a strand. Let earlier sites respond again. Find the first fork.",
+          "by": "final.md"
+        }
+      ],
+      "hero": "space_colonization_algorithm"
     },
     {
-     "token": "caverandomwalk",
-     "text": "a cave is not empty space — it is the record of everything that was removed",
-     "by": "draft"
-    }
-   ],
-   "hero": "maze_generation"
-  },
-  {
-   "pearl": "pg sculpted forms",
-   "map": "PG_Sculpted_Forms",
-   "lines": [
-    {
-     "token": "layered_membrane",
-     "text": "a membrane is a boundary that is also a surface",
-     "by": "draft",
-     "note": "accumulation gives the shape and cannot give the milieu: the mound is no landform, the dome a surface and not a shelter, the membrane's fifty shells have never borne load — architecture with the architecture removed.",
-     "note_src": {
-      "file": "commons/maps/PG_Sculpted_Forms/critical.md",
-      "quote": "architecture with the architecture removed — geometry that resembles built form but has never borne load, shed rain, or sheltered a body"
-     }
+      "pearl": "pg branching growth",
+      "map": "PG_Branching_Growth",
+      "lines": [
+        {
+          "token": "branching_growth_algorithm",
+          "text": "Eight points wait. You have met their arrangement in Space Colonization. There, several requests could contribute to a direction. Before pressing STEP here, find the nearest point to the root. Does the branch listen to the others?",
+          "by": "final.md"
+        }
+      ],
+      "hero": "branching_growth_algorithm"
     },
     {
-     "token": "cube_mound_scene",
-     "text": "Procedural mound built from stacked cubes — layered cellular logic deposits cubes where conditions permit",
-     "by": "draft"
+      "pearl": "pg percolation network",
+      "map": "PG_Percolation_Network",
+      "lines": [
+        {
+          "token": "percolationnetwork_ca",
+          "text": "Two cubes stand near the floor of a much larger possible lattice. One is pink, the source. The other is white. Look at their contact before pressing STEP. Where could something pass between them?",
+          "by": "final.md"
+        }
+      ],
+      "hero": "percolationnetwork_ca"
     },
     {
-     "token": "dome",
-     "text": "a boolean shelter is the interference pattern of solids that are no longer present",
-     "by": "draft"
-    }
-   ],
-   "hero": "layered_membrane"
-  },
-  {
-   "pearl": "pg mirrored patterns",
-   "map": "PG_Mirrored_Patterns",
-   "lines": [
-    {
-     "token": "mirror_cellular_texture_for_3d",
-     "text": "the mandala is not emergent. A fragment is computed and the rest is copied — and this",
-     "by": "draft",
-     "note": "the mandala needs a stencil it did not compute: twenty-five cells drawn and tiled four hundred times, so each reflection axis subtracts entropy and the intricacy is borrowed from the viewer, not earned by the rule.",
-     "note_src": {
-      "file": "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd",
-      "quote": "A stencil is cut, and the rest is repetition."
-     }
+      "pearl": "pg caves mazes",
+      "map": "PG_Caves_Mazes",
+      "lines": [
+        {
+          "token": "caverandomwalk",
+          "text": "A connected line has no width. Your shoulders do. Stand at the cave opening and look for the space that would have to remain empty if you entered. Then turn on TRACE. Small gold dots mark positions where the carving operation was applied. Some positions were visited more than once.",
+          "by": "final.md"
+        },
+        {
+          "token": "maze_generation",
+          "text": "Across the court, another grid offers another way to make room. Press MAZE STEP. The program moves to an unvisited cell and removes the wall between it and the previous cell. It also keeps the previous position on a stack.",
+          "by": "final.md"
+        }
+      ],
+      "hero": "caverandomwalk"
     },
     {
-     "token": "rhizomatic_maze_space",
-     "text": "a rhizome has no beginning and no end — it is always in the middle",
-     "by": "draft"
+      "pearl": "pg sculpted forms",
+      "map": "PG_Sculpted_Forms",
+      "lines": [
+        {
+          "token": "cube_mound_scene",
+          "text": "Press DROP and watch twelve cubes fall. They turn, strike the ground and meet one another. Do not press the next button immediately. Choose the moment you want the next construction to inherit.",
+          "by": "final.md"
+        },
+        {
+          "token": "dome",
+          "text": "Turn to the dome. Here the empty region has not come from a wandering point or a fallen cube. A geometric operand has cut it from a stock volume.",
+          "by": "final.md"
+        }
+      ],
+      "hero": "cube_mound_scene"
+    },
+    {
+      "pearl": "pg mirrored patterns",
+      "map": "PG_Mirrored_Patterns",
+      "lines": [
+        {
+          "token": "mirror_cellular_texture_for_3d",
+          "text": "An uneven cellular field lies before you. The opening is an authored arithmetic arrangement, held still so that we can inspect a comparison without chasing a changing picture. Press STENCIL. Much of what you see now comes from copying part of that same held field.",
+          "by": "final.md"
+        },
+        {
+          "token": "rhizomatic_maze_space",
+          "text": "Now move your attention from the surface to the network beside it. NETWORK changes the connection policy over six fixed starting positions. The opening is a tree. Its unique connections give one connected component and no cycle. The next policy admits more nearby connections; the third severs connections across a central gap and separates the remaining pieces.",
+          "by": "final.md"
+        }
+      ],
+      "hero": "mirror_cellular_texture_for_3d"
+    },
+    {
+      "pearl": "procgen",
+      "map": "Chamber_ProcGen",
+      "lines": [],
+      "drop": true,
+      "edge": "the bricoleur cannot supply its own material: every rebuild is made of what your strikes knocked loose, so its morphology is a function of your attention and the loop has no termination condition.",
+      "edge_src": {
+        "file": "commons/maps/Chamber_ProcGen/critical.md",
+        "quote": "A learner who keeps striking the golem's legs produces a golem that rebuilds more legs"
+      }
     }
-   ],
-   "hero": "mirror_cellular_texture_for_3d"
-  }
- ]
+  ]
 }

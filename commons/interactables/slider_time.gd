@@ -9,14 +9,16 @@ extends Node3D
 @export var label_prefix: String = " "
 @export var label_suffix: String = ""
 
+var _interaction: Node3D
 var _slider: Node
 var _label: Label3D
 var _last_text := ""
 
 func _ready() -> void:
-	set_process(true)
 	_cache_nodes()
 	_connect_slider_signal()
+	if not Engine.is_editor_hint():
+		_interaction = preload("res://commons/interactables/scalar_pointer.gd").attach(self, _slider)
 	_update_label_from_slider()
 
  
@@ -73,3 +75,6 @@ func _get_slider_limits() -> Vector2:
 func _format_time_value(value: float) -> String:
 	var decimals = clamp(decimal_places, 0, 6)
 	return "%s%s%s" % [label_prefix, String.num(value, decimals), label_suffix]
+
+func pointer_event(event: XRToolsPointerEvent) -> void:
+	if is_instance_valid(_interaction): _interaction.pointer_event(event)

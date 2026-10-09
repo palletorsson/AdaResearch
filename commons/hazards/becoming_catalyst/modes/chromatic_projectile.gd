@@ -54,8 +54,7 @@ func _update_trajectory(_delta: float) -> void:
 
 func _on_hit(body: Node3D) -> void:
 	projectile_hit.emit(body, global_position)
-	if body.has_method("hit_by_projectile"):
-		body.hit_by_projectile(color_primary)
+	# The base projectile already dispatched this hit exactly once.
 	# Paint grid cubes via MultiMesh
 	_paint_grid_cubes(global_position)
 
@@ -77,15 +76,14 @@ func _paint_grid_cubes(hit_pos: Vector3) -> void:
 		if positions.is_empty():
 			continue
 		var cs: float = struct.get("cube_size")
-		var gt: float = struct.get("gutter")
-		var total_size: float = cs + gt
-		# Grid node's global transform offsets cube world positions
-		var grid_origin: Vector3 = grid.global_position if grid is Node3D else Vector3.ZERO
+		# Use the rendered instance centre, including its museum transform.
+		var rendered_grid := grid.get_node_or_null("GridMultiMesh") as Node3D
+		if rendered_grid == null:
+			continue
 
 		var scene_root := get_tree().current_scene
 		for i in positions.size():
-			var gp: Vector3i = positions[i]
-			var world_pos := grid_origin + Vector3(gp.x, gp.y, gp.z) * total_size
+			var world_pos := rendered_grid.to_global(mm.get_instance_transform(i).origin)
 			var dist := world_pos.distance_to(hit_pos)
 			if dist < COLOR_RADIUS:
 				var hue_shift := dist * 0.15
@@ -138,8 +136,8 @@ func _spawn_fractal_cubes(origin: Vector3, base_color: Color, cube_size: float, 
 		var dir := Vector3(
 			randf_range(-1, 1), randf_range(0.2, 1), randf_range(-1, 1)
 		).normalized()
-		mi.global_position = origin
 		scene_root.add_child(mi)
+		mi.global_position = origin
 
 		# Tween: fly out, shrink, then vanish
 		var end_pos := origin + dir * FRACTAL_OFFSET

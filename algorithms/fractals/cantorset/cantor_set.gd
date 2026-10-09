@@ -5,15 +5,9 @@ extends Node3D
 # removes the middle third, and stacks them using RigidBody3D physics
 # Bars fall and stack on top of each other
 
-# @identity
-# essence: cantor(bar) = [bar.left_third, bar.right_third], remove middle third, repeat. Measure → 0.
-# desire: To watch something disappear — each iteration removes a third, and the bars physically fall into place with RigidBody3D
-# critical_parameter: max_iterations — at 5 iterations, each bar is 1/243 of the original, yet the set is still uncountably infinite
-# triggers: iteration_interval tick → split all current bars → new bars fall with physics → hue shifts per generation
-# emerges: The physical stacking of bars — gravity gives the abstract Cantor set a visceral presence as bars clatter into position
-# needs: VR iteration trigger [missing], physics interaction [missing]
-# relationships: Foundation for sierpinski_triangle (2D Cantor) and menger_sponge (3D Cantor); demonstrates measure-zero sets
-# truth: The Cantor set removes everything and keeps everything — zero length, uncountable points, the paradox made physical.
+# Each finite generation keeps 2^n intervals of length L/3^n.
+# Their total length is L*(2/3)^n, positive at every implemented stage.
+# The limiting Cantor set is not the finite, thick, collidable drawing.
 
 # Cantor set settings
 @export var iteration_interval: float = 2.0  # Time between iterations in seconds
@@ -61,6 +55,7 @@ var iteration_timer: float = 0.0
 var is_generating: bool = false
 var current_bars: Array = []  # Track bars from current iteration
 var _built: bool = false
+var lesson_enabled := false
 
 func _ready() -> void:
 	print("CantorSet: Ready")
@@ -77,6 +72,7 @@ func _levels() -> int:
 func _rebuild() -> void:
 	for child in get_children():
 		if child is RigidBody3D or child is MeshInstance3D:
+			remove_child(child)
 			child.queue_free()
 	current_iteration = 0
 	iteration_timer = 0.0
@@ -119,7 +115,9 @@ func create_bar(position: Vector3, length: float, level: int = -1, frozen: bool 
 	# Create RigidBody3D
 	var rigid_body = RigidBody3D.new()
 	rigid_body.position = position
-	rigid_body.freeze = frozen
+	rigid_body.freeze = frozen or lesson_enabled
+	rigid_body.set_meta("cantor_level", current_iteration if level < 0 else level)
+	if lesson_enabled: rigid_body.position.y += 0.35
 
 	# Prevent gravity gun from picking up these objects
 	rigid_body.add_to_group("no_gravity_gun")
@@ -242,7 +240,7 @@ func _spawn_row(segs: Array[Vector2], level: int) -> void:
 
 # The middles the rule threw away. `gone` draws nothing at all, which is what
 # this artifact has always done; `ghost` restores them as pale full-thickness
-# volumes so each row reads as the whole interval with its holes marked; `scar`
+# volumes marking the NEW removals at this generation; earlier holes stay empty. `scar`
 # leaves a thin dark rod where the bar used to be, so the row reads as a comb.
 func _spawn_removed(removed: Array[Vector2], level: int) -> void:
 	if removal == "gone" or removed.is_empty():
@@ -266,7 +264,8 @@ func _spawn_removed(removed: Array[Vector2], level: int) -> void:
 			material.roughness = 1.0
 		mesh_instance.material_override = material
 
-		mesh_instance.position = Vector3(seg.x, y, 0.0)
+		mesh_instance.set_meta("cantor_level", level)
+		mesh_instance.position = Vector3(seg.x, y + (0.35 if lesson_enabled else 0.0), 0.0)
 		add_child(mesh_instance)
 
 
@@ -313,6 +312,11 @@ func _exit_tree() -> void:
 ## passes none of these keys — which is all five of them today — never reaches
 ## _rebuild() and is byte-identical to before this promotion.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(config_data.get("lesson", "false")).to_lower() == "true":
+		lesson_enabled = true
+		auto_start = false
+		is_generating = false
+		_install_lesson.call_deferred()
 	if config_data == null or config_data.is_empty():
 		return
 
@@ -343,3 +347,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if not _built:
 		return
 	_rebuild()
+
+func _install_lesson() -> void:
+	if has_node("CantorLesson"): return
+	var fixture = load("res://commons/artifacts/cantor_lesson/cantor_lesson.gd").new()
+	fixture.name = "CantorLesson"
+	add_child(fixture)

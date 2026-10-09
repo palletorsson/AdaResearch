@@ -32,6 +32,14 @@ var _info_label:   Label3D
 # Trail ring buffer
 var _trail_pts: Array[Vector3] = []
 var _wheel_rest_y: float = 1.6   # initial wheel Y — used to compute displacement
+var _museum_coil: Array=[]
+
+func _setup_environment() -> void:
+	# The museum owns camera and lighting. Retain the standalone demo elsewhere.
+	if str(get_meta("config_lesson",""))!="museum_spring":super();return
+	for child in get_children():
+		if child is Camera3D or child is WorldEnvironment:
+			remove_child(child);child.queue_free()
 
 # -------------------------------------------------------------------------
 # Material factory
@@ -97,6 +105,16 @@ func _build_demo() -> void:
 	_add_info_label()
 
 	add_label("Damped Spring Suspension", Vector3(0.0, 4.2, 2.5))
+	if str(get_meta("config_lesson",""))=="museum_spring":
+		set_meta("em_keep_scale",true)
+		var grip=preload("res://commons/artifacts/force_play/constraint_grip.gd").new()
+		grip.target=wheel;grip.offset=Vector3(0,0.35,0);add_child(grip)
+		grip.add_collision_exception_with(wheel);wheel.add_collision_exception_with(grip)
+		add_label("PULL THE ROSE POINT / RELEASE\nA real 6DOF joint limits travel",Vector3(0,0.65,1.1))
+		var m=StandardMaterial3D.new();m.albedo_color=Color("b8bdc5");m.metallic=0.5;m.roughness=0.25
+		for i in range(64):
+			var part=preload("res://commons/artifacts/force_halls/vector_arrow.gd").new();add_child(part)
+			part.build(m,0.025,false);_museum_coil.append(part)
 
 # -------------------------------------------------------------------------
 # Visual helpers
@@ -156,6 +174,13 @@ func _add_info_label() -> void:
 # Per-frame updates
 # -------------------------------------------------------------------------
 func _process(delta: float) -> void:
+	if not _museum_coil.is_empty():
+		var top=Vector3(0,2.8,0);var bottom=wheel.position+Vector3.UP*0.65
+		var previous=top
+		for i in _museum_coil.size():
+			var t=float(i+1)/_museum_coil.size()
+			var p=top.lerp(bottom,t)+Vector3(cos(t*TAU*8),0,sin(t*TAU*8))*sin(t*PI)*0.15
+			_museum_coil[i].set_ends(previous,p);previous=p
 	# Physics impulse trigger (unchanged)
 	if Input.is_action_just_pressed("ui_accept"):
 		wheel.apply_impulse(Vector3(0.0, 6.0, 0.0))

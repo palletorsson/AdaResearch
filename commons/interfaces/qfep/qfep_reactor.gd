@@ -1,19 +1,23 @@
 # qfep_reactor.gd
-# Central QFEP visualization orb - responds to lambda and phi in real-time
-# The heart of the QFEP laboratory
+# Authored QFEP visualization orb: lambda and phi select visual responses.
+# The optional Sandbox study exposes one local connection to these inputs.
 
 extends Node3D
 class_name QFEPReactor
 
 # @identity
 # essence: QFE = (1-lambda) - lambda*0.8 + phi*0.2; visualized as pulsing orb with color(lambda) and jitter(chaos)
-# desire: stand before the reactor and watch theory become light — adjust sliders and see the formula respond
-# critical_parameter: lambda — shifts reactor from crystalline blue through living green to chaotic red with position jitter
+# desire: compare a moving handle with a receiver that may or may not hear it
+# critical_parameter: lambda — selects blue/green/red colour, pulse, particle speed and jitter
 # triggers: set_lambda/set_phi from connected sliders; pulse_speed triples at edge of chaos; jitter activates above 0.6
-# emerges: the reactor appears to think at the edge — fast pulsing, maximum particles, bright green glow
-# needs: VR slider connections via group system [has], label display [has], particle system [has]
-# relationships: central to QFEP_Sandbox; depends on lambda_slider and phi_slider; connects to reactive_particles; computes QFE in real-time
-# truth: the reactor is the QFEP formula made tangible — not a metaphor for the equation but the equation itself, running
+# emerges: a cut connection holds the last received values while animation continues
+# needs: same-hall lambda/phi handles when wiring_study is on; label and particle system
+# relationships: QFEP_Sandbox explicitly connects its two handles; nearby reactive_particles remains independent
+# truth: colour, pulse and lightness are authored mappings; the toy QFE is not measured entropy or evidence of life
+
+# 2026-09-20: wiring_study adds local CONNECT / CUT and REPEAT. The dated DNA
+# account below records the formerly disconnected driver; default placements
+# retain that behaviour. Study placements use the explicit local route instead.
 
 # ─── DNA · hand promotion 2026-08-04 ─────────────────────────────────────────
 # Refused by the runner for NO TURNABLE KNOBS: this file had zero @export and no
@@ -87,6 +91,10 @@ class_name QFEPReactor
 ## stations are photographed at one instant instead of at three.
 @export var freeze_time = -1.0
 
+## Optional Sandbox experiment. Only same-parent lambda/phi rails can drive it.
+@export var wiring_study: bool = false
+var _wiring_study: Node3D
+
 ## The allow-lists a map token is checked against.
 const STATIONS: PackedStringArray = ["edge", "order", "chaos"]
 const READOUTS: PackedStringArray = ["none", "numeral", "gradation", "lattice"]
@@ -144,6 +152,8 @@ var _rng := RandomNumberGenerator.new()
 signal state_changed(lambda: float, phi: float, qfe: float)
 
 func _ready():
+	if has_meta("config_wiring_study"):
+		wiring_study = str(get_meta("config_wiring_study")).to_lower() in ["on", "true", "1"]
 	_read_axis_words()
 	current_lambda = _station_lambda()
 	_rng.seed = JITTER_SEED
@@ -162,6 +172,7 @@ func _ready():
 
 	# Connect to global lambda/phi if available
 	_connect_to_sliders()
+	if wiring_study: _install_wiring_study()
 
 ## A map token reaches here as metadata the grid stamps before add_child; the
 ## sweep sets the export directly, so the export is the fallback.
@@ -394,8 +405,8 @@ func _update_visuals():
 	# Update label
 	var label = get_node_or_null("StateLabel") as Label3D
 	if label:
-		label.text = "λ=%.2f  φ=%.2f" % [current_lambda, current_phi]
-		label.modulate = color
+		label.text = "lambda: colour / speed\nphi: lightness" if wiring_study else "λ=%.2f  φ=%.2f" % [current_lambda, current_phi]
+		label.modulate = Color.WHITE if wiring_study else color
 
 	# Rungs 2 and 3: the marker follows the state along the drawn scale.
 	if is_instance_valid(_lambda_marker):
@@ -426,7 +437,7 @@ func _connect_to_sliders():
 	await get_tree().process_frame
 
 	# out-of-tree guard: get_tree() is null once a map is torn down
-	if not is_inside_tree():
+	if not is_inside_tree() or wiring_study:
 		return
 	var sliders = get_tree().get_nodes_in_group("qfep_slider")
 	for slider in sliders:
@@ -554,6 +565,18 @@ func _build_readout() -> void:
 ## arriving before _ready has built once tears nothing down. Every existing
 ## placement is a bare token carrying neither key, so nothing rebuilds for them.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("wiring_study"):
+		var enabled := str(config_data.wiring_study).to_lower() in ["on", "true", "1"]
+		if enabled != wiring_study:
+			wiring_study = enabled
+			if _built:
+				if enabled:
+					_install_wiring_study()
+				elif is_instance_valid(_wiring_study):
+					remove_child(_wiring_study)
+					_wiring_study.queue_free()
+					_wiring_study = null
+					add_to_group("qfep_reactive")
 	if config_data.has("station"):
 		var want: String = _normalise_station(str(config_data["station"]))
 		if want != station:
@@ -591,3 +614,16 @@ func _rebuild_readout() -> void:
 	_plane_marker = null
 	_create_label()
 	_build_readout()
+
+func _install_wiring_study() -> void:
+	if is_instance_valid(_wiring_study): return
+	# Do not turn a hall-local experiment into a broadcast receiver.
+	remove_from_group("qfep_reactive")
+	for slider in get_tree().get_nodes_in_group("qfep_slider"):
+		if slider.has_signal("lambda_changed") and slider.lambda_changed.is_connected(set_lambda):
+			slider.lambda_changed.disconnect(set_lambda)
+		if slider.has_signal("phi_changed") and slider.phi_changed.is_connected(set_phi):
+			slider.phi_changed.disconnect(set_phi)
+	_wiring_study = load("res://commons/interfaces/qfep/sandbox_wiring_study.gd").new()
+	_wiring_study.name = "WiringStudy"
+	add_child(_wiring_study)

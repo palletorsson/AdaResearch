@@ -21,20 +21,29 @@ func _ready() -> void:
 	print("DiscoSequencerBridge: Wired sequencer → disco floor")
 
 func _find_references() -> void:
-	# Check parent chain first
+	# A museum can keep several halls loaded. Never borrow another hall's
+	# sequencer when this hall has none; their clocks are independent encounters.
+	var search_root: Node = null
 	var node := get_parent()
 	while node:
 		if node is StandaloneDiscoFloor:
 			disco_floor = node
 		if node is StepSequencer:
 			step_sequencer = node
+		if node.has_meta("em_map"):
+			search_root = node
+			break
 		node = node.get_parent() if node.get_parent() != node else null
 
-	# Search scene tree for missing refs
+	# Standalone scenes retain their existing scene-wide pairing.
+	if search_root == null:
+		search_root = get_tree().current_scene
+	if search_root == null:
+		return
 	if not disco_floor:
-		disco_floor = _find_type(get_tree().current_scene, "StandaloneDiscoFloor") as StandaloneDiscoFloor
+		disco_floor = _find_type(search_root, "StandaloneDiscoFloor") as StandaloneDiscoFloor
 	if not step_sequencer:
-		step_sequencer = _find_type(get_tree().current_scene, "StepSequencer") as StepSequencer
+		step_sequencer = _find_type(search_root, "StepSequencer") as StepSequencer
 
 func _find_type(root: Node, class_str: String) -> Node:
 	if root.get_class() == class_str or root.script and root.get_script().get_global_name() == class_str:

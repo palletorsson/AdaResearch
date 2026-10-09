@@ -116,7 +116,19 @@ for n in nodes:
         parentorder=next(s['order'] for s in sequences if s['id']==p['sequence'])
         if parentorder>order:proposals.append(dict(node=n['id'],requires=req))
 assert not proposals,proposals
+application_path=ROOT/'doc/book/recent-studies.json'
+applications=json.loads(read(application_path))['studies'] if application_path.exists() else []
+if applications: record(application_path)
+for application in applications:
+    assert application['map'] in hallids,application['id']
+    assert all(req in ids for req in application['requires']),application['id']
+    hall=next(h for h in halls if h['id']==application['map'])
+    assert all(lookup[req]['sequence']=='preparation' or next(s['order'] for s in sequences if s['id']==lookup[req]['sequence'])<=hall['sequence_order'] for req in application['requires']),application['id']
+    hall.setdefault('applications',[]).append(application)
+    for req in application['requires']: lookup[req].setdefault('applications',[]).append(application)
 state=dict(title=config['title'],generated_at=datetime.now(timezone.utc).isoformat(),scope=config['scope'],nodes=nodes,sequences=sequences,halls=halls,issues=issues,extensions=extensions,studies=studies,counts=dict(capabilities=len(nodes),sequences=len(sequences),halls=len(halls),missing_tutorials=len(missing),additional_requirements=sum(max(0,len(n['requires'])-1) for n in nodes)),sources_sha256=sources)
+state['applications']=applications
+state['counts']['installed_applications']=len(applications)
 plan=['# What the student can carry','',config['scope'],'','Proposed learning targets, not an assertion that every lesson is delivered. The active walking order is preserved. Each dependency must be taught earlier or supplied explicitly.','']
 for seq in [dict(id='preparation',label='Preparation')]+sequences:
     plan+=['## '+seq['label'],'',seq.get('question','Establish a working place and a prepared receiver.'),'']

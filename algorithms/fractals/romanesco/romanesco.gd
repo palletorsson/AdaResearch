@@ -4,15 +4,9 @@ extends Node3D
 # Creates a simplified approximation of Romanesco broccoli using self-similar spiral cone patterns
 # Uses Fibonacci spirals and recursive cone placement to mimic the natural fractal
 
-# @identity
-# essence: romanesco(cone, depth) = 13 * romanesco(cone * 0.382, depth+1) placed at 137.508 degree golden angle intervals
-# desire: To be stared at — each bud is a smaller copy of the whole, spiraling at the golden angle, nature's most perfect fractal
-# critical_parameter: GOLDEN_ANGLE (137.508 degrees) — the irrational rotation that prevents any two buds from aligning, maximizing packing
-# triggers: growth_interval tick → find all cones at current depth → add 13 spiral buds to each → tilt outward for dome shape
-# emerges: Visible Fibonacci spiral arms from golden-angle placement — 8 and 13 spirals appear in opposite directions, never planned
-# needs: VR growth speed control [missing], cross-section view [missing]
-# relationships: The natural-world proof of fibonacci_sequences; contrasts with golden_rectangle (geometric) and fibonacci_pagoda (architectural)
-# truth: Romanesco broccoli is not shaped like a fractal — it is a fractal, grown by cells that only know the golden angle.
+# Constructed botanical resemblance: thirteen child cones per retained cone,
+# a fixed 137.508-degree turn, square-root radial placement and 0.382 scale.
+# These authored choices are not a biological model or proof of optimal packing.
 
 # Settings
 @export var growth_interval: float = 0.5  # Time between growth iterations
@@ -20,7 +14,7 @@ extends Node3D
 @export var auto_start: bool = true  # Start growing automatically
 @export var fibonacci_spiral_count: int = 13  # Number of spirals (Fibonacci number)
 @export var base_cone_size: float = 1.0  # Size of the main cone
-@export var scale_factor: float = 0.382  # Golden ratio reduction (1/phi)
+@export var scale_factor: float = 0.382  # Approximation to 1/phi²
 
 # Internal state
 var current_depth: int = 0
@@ -131,7 +125,7 @@ func add_spiral_buds(parent_cone: Node3D, depth: int) -> void:
 		bud.rotation.x = tilt_angle * cos(angle)
 		bud.rotation.z = tilt_angle * sin(angle)
 
-		parent_cone.add_child(bud)
+		bud.reparent(parent_cone, false)
 
 # Create a single cone
 func create_cone(position: Vector3, size: float, depth: int) -> Node3D:

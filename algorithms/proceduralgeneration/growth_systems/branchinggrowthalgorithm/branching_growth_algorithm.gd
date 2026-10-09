@@ -143,6 +143,9 @@ class Attractor:
 		attractor_hue = randf()
 
 func _ready() -> void:
+	if has_meta("config_lesson"):
+		max_branches = 192
+		attractor_count = 8
 	# FIRST statement in the function, ahead of every Branch.new()/Attractor.new()
 	# that calls randf(). At the default -1 no seed() runs and the stream is bit
 	# for bit the pre-DNA one; at >= 0 the cloud and every jitter draw repeat.
@@ -328,6 +331,9 @@ func grow_step() -> bool:
 	
 	# Add new QUEER branches! 🌈
 	for branch_data in new_branches:
+		if branches.size() >= max_branches:
+			is_growing = false
+			break
 		add_branch(
 			branch_data.position,
 			branch_data.direction,
@@ -346,6 +352,9 @@ func update_mesh_immediate() -> void:
 	_aft = _aftermath_key()   # normalised once, not 500 times inside the loop
 	_sync_field_shell()
 	immediate_mesh.clear_surfaces()
+	if branches.size() < 2:
+		_draw_aftermath()
+		return
 	immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	# Draw all branches with FABULOUS QUEER COLORS! 🌈✨

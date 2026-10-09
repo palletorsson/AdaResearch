@@ -120,6 +120,12 @@ const RIG_Y := WALL_H - 0.22
 # said importing would cycle — it does not; em_detail imports nothing of ours)
 const CEILING_SOFFIT := _Detail.CEIL_SOFFIT
 const CEILING_TOP := _Detail.CEIL_TOP
+const BAY := _Detail.BAY
+const SLOT_W := _Detail.SLOT_W
+## Open slot centre in the 3 m ceiling module. Daylight fixtures use this
+## datum; gallery track fixtures use the bay centre below it.
+const DAYLIGHT_SLOT_ORIGIN := BAY - SLOT_W * 0.5
+const TRACK_BAY_ORIGIN := BAY * 0.5
 # Top-light plane — a skylight sits ABOVE the roof, not under the ceiling. At
 # CEILING_TOP + 0.22 the daylight family is genuinely outside the building and
 # reaches the floor only through em_detail's 550 mm slots, which is what finally
@@ -249,6 +255,7 @@ static func rig_segment(seg: Node3D, w: int, h: int, accent: Color, slots: Array
 
 	seg.set_meta("em_lights", int(budget["lights"]))
 	seg.set_meta("em_shadow_casters", int(budget["shadows"]))
+	seg.set_meta("em_lighting_module", BAY)
 
 
 ## THE MUSEUM'S COLOUR, TRANSLATED. Every light colour in the rig comes out of
@@ -403,7 +410,10 @@ static func _daylight(seg: Node3D, w: int, h: int, pal: Dictionary, budget: Dict
 		s.light_size = 0.6
 		s.light_bake_mode = Light3D.BAKE_DYNAMIC
 		_shadow(s, budget, 1.2, 0.03)
-		_aim(s, Vector3(cx, SKY_Y, float(VESTIBULE_H) - 2.2), Vector3(cx, 0.0, float(VESTIBULE_H) + 1.2))
+		var threshold_mount_z := _snap_module(float(VESTIBULE_H) - 2.2,
+			DAYLIGHT_SLOT_ORIGIN, 0.25, float(VESTIBULE_H + h) - 0.25)
+		_aim(s, Vector3(cx, SKY_Y, threshold_mount_z),
+			Vector3(cx, 0.0, float(VESTIBULE_H) + 1.2))
 		_fade(s, 55.0, 16.0, 24.0)
 		seg.add_child(s)
 		_spend(budget, s.shadow_enabled)
@@ -432,7 +442,9 @@ static func _daylight(seg: Node3D, w: int, h: int, pal: Dictionary, budget: Dict
 			_shadow(s2, budget, 1.4, 0.03)
 		else:
 			s2.shadow_enabled = false
-		var z: float = float(VESTIBULE_H) + float(h) * (float(i) + 0.5) / float(n)
+		var wanted_z: float = float(VESTIBULE_H) + float(h) * (float(i) + 0.5) / float(n)
+		var z := _snap_module(wanted_z, DAYLIGHT_SLOT_ORIGIN,
+			float(VESTIBULE_H) + 0.25, float(VESTIBULE_H + h) - 0.25)
 		_aim(s2, Vector3(cx, SKY_Y, z), Vector3(cx, 0.0, z))
 		_fade(s2, 50.0, 16.0, 26.0)
 		seg.add_child(s2)
@@ -446,14 +458,15 @@ static func _daylight(seg: Node3D, w: int, h: int, pal: Dictionary, budget: Dict
 # shadow under a plinth is most of what sells the object as sitting in the room
 # rather than hovering in it.
 #
-# THE 30-DEGREE RULE. Gallery track lighting is aimed 30 deg off vertical: any
+# THE 30-DEGREE RULE. Gallery track lighting is aimed about 30 deg off vertical: any
 # steeper and the piece shadows its own face, any shallower and the beam reaches
 # the viewer's eye as glare and the wall behind as a hot spot. A fixture at
 # RIG_Y + 0.02 = 2.80, offset 0.85 m, aiming at a hero's top + 0.45 (= 1.25) is
 # 61.3 deg from horizontal — 28.7 deg off vertical. That is where the offsets
-# below come from; they are not eyeballed. The podium fixture drops to 2.55 with
-# a 1.05 m offset onto a 0.65 m target, which is 61.1 deg: the same band, reached
-# with a lower fixture because a podium piece is smaller and closer to the eye.
+# below come from; they are not eyeballed. Mounts then snap to the nearest 1 m
+# planning-grid centre (normally a 1.0 m throw), so a row of keys reads as one
+# track system instead of arbitrary decimal positions. The podium fixture drops
+# to 2.55 to keep a similar angle on its lower target.
 static func _keys(seg: Node3D, slots: Array, pal: Dictionary, budget: Dictionary, scale: float) -> void:
 	var heroes := 0
 	var podiums := 0
@@ -504,7 +517,8 @@ static func _keys(seg: Node3D, slots: Array, pal: Dictionary, budget: Dictionary
 			k.light_size = 0.35
 			k.light_bake_mode = Light3D.BAKE_DYNAMIC
 			_shadow(k, budget, 1.1, 0.025)
-			_aim(k, Vector3(px, RIG_Y + 0.02, pz - 0.85), Vector3(px, top + 0.45, pz))
+			var key_mount_z := _snap_cell_center(pz - 0.85)
+			_aim(k, Vector3(px, RIG_Y + 0.02, key_mount_z), Vector3(px, top + 0.45, pz))
 			_fade(k, 45.0, 12.0, 26.0)
 			seg.add_child(k)
 			_spend(budget, k.shadow_enabled)
@@ -524,7 +538,8 @@ static func _keys(seg: Node3D, slots: Array, pal: Dictionary, budget: Dictionary
 				r.spot_attenuation = 1.6
 				r.shadow_enabled = false
 				r.light_bake_mode = Light3D.BAKE_DISABLED
-				_aim(r, Vector3(px, 2.35, pz + 1.15), Vector3(px, top + 0.55, pz))
+				_aim(r, Vector3(px, 2.35, _snap_cell_center(pz + 1.15)),
+					Vector3(px, top + 0.55, pz))
 				_fade(r, 30.0, 10.0, 0.0)
 				seg.add_child(r)
 				_spend(budget, false)
@@ -550,7 +565,8 @@ static func _keys(seg: Node3D, slots: Array, pal: Dictionary, budget: Dictionary
 			else:
 				p.shadow_enabled = false
 			# 2.55 / 1.05 offset / 0.65 target = 61.1 deg, the 30-degree rule
-			_aim(p, Vector3(px, 2.55, pz - 1.05), Vector3(px, top + 0.25, pz))
+			_aim(p, Vector3(px, 2.55, _snap_cell_center(pz - 1.05)),
+				Vector3(px, top + 0.25, pz))
 			_fade(p, 38.0, 12.0, 22.0)
 			seg.add_child(p)
 			_spend(budget, p.shadow_enabled)
@@ -579,8 +595,9 @@ static func _threshold(seg: Node3D, w: int, pal: Dictionary, budget: Dictionary,
 		c.omni_attenuation = 1.2
 		c.shadow_enabled = false
 		c.light_bake_mode = Light3D.BAKE_DYNAMIC
-		var x: float = 2.0 if i == 0 else float(LOBBY_W) - 2.0
-		c.position = Vector3(x, 2.55, 1.6)
+		var wanted_x: float = 2.0 if i == 0 else float(LOBBY_W) - 2.0
+		var x := _snap_module(wanted_x, 0.0, 1.0, float(LOBBY_W) - 1.0)
+		c.position = Vector3(x, 2.55, TRACK_BAY_ORIGIN)
 		_fade(c, 34.0, 12.0, 0.0)
 		seg.add_child(c)
 		_spend(budget, false)
@@ -606,7 +623,8 @@ static func _threshold(seg: Node3D, w: int, pal: Dictionary, budget: Dictionary,
 		# rides the ember strip (y 0.02, z VESTIBULE_H - 0.15), spread across the
 		# opening and lifted clear of it
 		var t: float = (float(gi) + 0.5) / 3.0
-		g.position = Vector3(1.0 + (float(w) - 2.0) * t, 0.75, float(VESTIBULE_H) - 0.30)
+		g.position = Vector3(_snap_cell_center(1.0 + (float(w) - 2.0) * t),
+			0.75, float(VESTIBULE_H) - 0.30)
 		_fade(g, 26.0, 8.0, 0.0)
 		seg.add_child(g)
 		_spend(budget, false)
@@ -646,6 +664,9 @@ static func _wall_wash(seg: Node3D, w: int, h: int, tile: Array, pal: Dictionary
 			var z: float = zc
 			if n > 1:
 				z = zc + (float(i) - 0.5) * float(run_len) * 0.42
+			var run_half := float(run_len) * 0.5
+			z = _snap_module(z, TRACK_BAY_ORIGIN,
+				zc - run_half + 0.5, zc + run_half - 0.5)
 			var s := SpotLight3D.new()
 			s.name = "WallWash%d" % placed
 			s.light_color = col
@@ -738,6 +759,21 @@ static func _cell(tile: Array, x: int, y: int) -> String:
 	if x < 0 or x >= row.size():
 		return ""
 	return str(row[x])
+
+
+## Snap an architectural mount to a repeated datum while respecting the span
+## that owns it. Used for ceiling apertures and track-light bay centres.
+static func _snap_module(value: float, origin: float, low: float, high: float) -> float:
+	var lo := minf(low, high)
+	var hi := maxf(low, high)
+	var snapped := origin + roundf((value - origin) / BAY) * BAY
+	return clampf(snapped, lo, hi)
+
+
+## Artifact keys still follow their work, but their ceiling mounts land on the
+## 1 m planning grid rather than at arbitrary decimal offsets.
+static func _snap_cell_center(value: float) -> float:
+	return roundf(value - 0.5) + 0.5
 
 
 static func _open_side(tile: Array, x: int, y: int, w: int, rows: int) -> int:

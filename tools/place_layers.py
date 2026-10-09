@@ -86,9 +86,10 @@ def draft_to_map_data(layers: dict) -> dict:
     depth = len(structure)
     width = len(structure[0]) if depth else 0
     return {
-        # room_from_map reads dimensions.DEPTH; the builder and most maps say
-        # "height". Emit both, or a 34-row draft becomes a 6-deep room and the
-        # strategies place onto what they believe is interior (measured: a wall).
+        # room_from_map now reads the structure grid itself (2026-08-29 fix) and
+        # only falls back to declared dims; both keys stay emitted so the draft
+        # is honest either way (the 2026-08-27 incident: a 34-row draft became a
+        # 6-deep room and a strategy placed onto a real wall).
         "map_info": {"name": "_draft", "dimensions": {"width": width, "height": depth, "depth": depth}},
         "layers": {
             "structure": structure,

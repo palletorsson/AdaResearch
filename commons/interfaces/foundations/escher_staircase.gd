@@ -1,28 +1,28 @@
 # escher_staircase.gd
 # An "impossible staircase" inspired by Escher/Penrose
-# Locally coherent, globally impossible
-# Visual demonstration of Gödel's incompleteness:
-# Each local step is valid, but the global structure is paradoxical
-#
-# You can walk "up" forever and end where you started
-# Or walk "down" forever and also end where you started
+# A finite construction through which to inspect an impossible claim.
+# A model of how a claimed perpetual climb is represented in ordinary 3D space.
+# The marker can return; the actual height changes disclose the descent.
 
 extends Node3D
 
 class_name EscherStaircase
 
 # @identity
-# essence: each step locally valid; global loop returns to start — the Penrose stairs
-# desire: climb "up" forever and arrive where you started — feel the paradox in your legs
-# critical_parameter: steps_per_side — more steps make the impossibility more convincing. seam — WHERE the impossibility is put: smoothed into one quiet descending side and never named (none), gathered into a single closing riser you can point at (hairline), refused, so the loop is left open with two cut ends facing each other (gap), that same open interval rigged with a tower and a landing (scaffold), or spread evenly into all sixteen joints so the ring comes out level and no joint can be blamed (field).
-# triggers: climb_step() advances the highlight; completing a full loop fires paradox_completed
-# emerges: the visceral understanding that local consistency does not guarantee global consistency
-# needs: VR step-climbing interaction [missing] — has climb_step() API but no physical trigger
-# relationships: visualizes godel_statement_plaque (local proof steps valid, global conclusion impossible); contrasts russell_set_box (self-reference vs spatial paradox)
-# truth: locally coherent does not mean globally possible — this is Godel's incompleteness made architectural
+# essence: a finite stair model compares a descending return, a closing drop, an open run, an incomplete scaffold and a ring of tilted treads.
+# desire: follow the marker, measure its changes of height, and find what the drawing leaves out.
+# critical_parameter: seam selects five different constructions; lesson_controls exposes them at a reachable study console.
+# triggers: physical STEP/BACK advance the marker; FORM rebuilds the model; RESET clears the measured journey.
+# truth: on a closed sequence of tread centres, signed height differences sum to zero. This is a geometric bookkeeping identity, not Godel's incompleteness theorem. The model has no walkable tread collision and does not move the player.
+# relationships: paired with penrose_triangle as a separate investigation of viewpoint and connection.
 
 signal step_taken(step_index: int, direction: String)
 signal paradox_completed()
+
+@export var lesson_controls: bool = false
+var _study: Node3D
+var _study_model: Node3D
+var _owned_visuals: Array[Node] = []
 
 ## Staircase parameters
 @export var steps_per_side: int = 4
@@ -42,6 +42,9 @@ signal paradox_completed()
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-07-31) — ONE AXIS, TWO FILES.
+# HISTORICAL DESIGN NOTES: the Gödel analogies below record the earlier reading.
+# They are not mathematical claims made by the current study. The measured model
+# descends, stops or tilts; it does not construct a contradictory spatial object.
 # florensky_sphere.gd carries the same `seam` token with the same five values, and
 # this file preloads it for the word list. The pair is one argument in two bodies:
 # paraconsistency, where the contradiction is everywhere and survives, beside
@@ -201,6 +204,8 @@ func _ready() -> void:
 	_create_labels()
 	_create_highlight()
 	_built = true
+	_owned_visuals.assign(get_children())
+	if lesson_controls: _mount_study()
 
 func _create_staircase() -> void:
 	# Create 4 sides of stairs that form an impossible loop
@@ -304,7 +309,7 @@ func _create_step(side: int, index: int) -> MeshInstance3D:
 func _create_labels() -> void:
 	# Title
 	var title = Label3D.new()
-	title.text = "Escher Staircase"
+	title.text = "Escher Staircase Study"
 	title.font_size = 32
 	title.position = Vector3(0, 2.5, 0)
 	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -315,7 +320,7 @@ func _create_labels() -> void:
 	
 	# Paradox explanation
 	_paradox_label = Label3D.new()
-	_paradox_label.text = "Locally coherent\nGlobally impossible"
+	_paradox_label.text = "Follow the marker.\nWhere does the rise return?"
 	_paradox_label.font_size = 20
 	_paradox_label.position = Vector3(0, 2.1, 0)
 	_paradox_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -328,7 +333,7 @@ func _create_labels() -> void:
 	# Step counter
 	var counter = Label3D.new()
 	counter.name = "StepCounter"
-	counter.text = "Steps climbed: 0"
+	counter.text = "Marker moves: 0"
 	counter.font_size = 18
 	counter.position = Vector3(0, -0.5, 0)
 	counter.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -339,7 +344,7 @@ func _create_labels() -> void:
 	
 	# Gödel connection
 	var godel_note = Label3D.new()
-	godel_note.text = "Like Gödel's theorem:\nEvery local step is valid.\nThe global conclusion is impossible."
+	godel_note.text = "A geometric study.\nThe model returns by descending.\nIt is not a proof of incompleteness."
 	godel_note.font_size = 14
 	godel_note.position = Vector3(0, -1.0, 0)
 	godel_note.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -374,7 +379,7 @@ func _seam_sentence() -> String:
 	var n: int = steps_per_side * 4
 	match seam:
 		"hairline":
-			return "%d honest risers.\nOne joint takes back all %d." % [n, n]
+			return "%d rising transitions.\nThe closing move drops back.\nThe extra tread marks the unclosed rise." % (n-1)
 		"gap":
 			return "The fourth side is not built.\nThe cut ends stand %d risers apart." % _cut_end_risers()
 		"scaffold":
@@ -404,6 +409,8 @@ func _create_highlight() -> void:
 
 func _update_highlight() -> void:
 	var highlight = get_node_or_null("StepHighlight")
+	if highlight == null and is_instance_valid(_study_model):
+		highlight = _study_model.get_node_or_null("StepHighlight")
 	if highlight and _current_step < _steps.size():
 		highlight.position = _steps[_current_step].position + Vector3(0, step_height, 0)
 
@@ -444,12 +451,12 @@ func climb_step() -> void:
 	_update_highlight()
 	_update_counter()
 	
-	emit_signal("step_taken", _current_step, "up")
+	emit_signal("step_taken", _current_step, "forward")
 	
 	# Check for paradox completion (full loop)
 	if _current_step == 0 and _steps_climbed > 0:
 		emit_signal("paradox_completed")
-		_paradox_label.text = "PARADOX COMPLETE\nClimbed %d steps up\nReturned to start" % _steps_climbed
+		_paradox_label.text = "MARKER AT START\n%d moves around the model\nCheck the height changes" % _steps_climbed
 
 func descend_step() -> void:
 	if _current_step < _steps.size():
@@ -469,15 +476,17 @@ func descend_step() -> void:
 	_update_highlight()
 	_update_counter()
 	
-	emit_signal("step_taken", _current_step, "down")
+	emit_signal("step_taken", _current_step, "back")
 	
 	if _current_step == 0 and _steps_climbed > 0:
 		emit_signal("paradox_completed")
 
 func _update_counter() -> void:
 	var counter = get_node_or_null("StepCounter")
+	if counter == null and is_instance_valid(_study_model):
+		counter = _study_model.get_node_or_null("StepCounter")
 	if counter:
-		counter.text = "Steps climbed: %d" % _steps_climbed
+		counter.text = "Marker moves: %d" % _steps_climbed
 
 func reset() -> void:
 	_current_step = 0
@@ -485,7 +494,7 @@ func reset() -> void:
 	_open_run_declared = false
 	_update_highlight()
 	_update_counter()
-	_paradox_label.text = "Locally coherent\nGlobally impossible"
+	_paradox_label.text = "Follow the marker.\nWhere does the rise return?"
 
 ## gap and scaffold. The walk advances while treads exist and holds at the cut end,
 ## which is not a failure to implement a loop — it is the loop refusing. The signal
@@ -500,7 +509,7 @@ func _walk_open_run(dir: int) -> void:
 		_steps_climbed += 1
 		_update_highlight()
 		_update_counter()
-		emit_signal("step_taken", _current_step, "up" if dir > 0 else "down")
+		emit_signal("step_taken", _current_step, "forward" if dir > 0 else "back")
 		return
 
 	_update_highlight()
@@ -523,6 +532,9 @@ func _walk_open_run(dir: int) -> void:
 ## the seam already in force rebuilds nothing. An unguarded rebuild here is the
 ## failure that has broken shipped placements in this corpus before.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("lesson_controls"):
+		lesson_controls = str(config_data.lesson_controls).to_lower() in ["on","true","1"]
+		if _built and lesson_controls and not is_instance_valid(_study): _mount_study()
 	if not config_data.has("seam"):
 		return
 	var before: String = seam
@@ -541,14 +553,24 @@ func _rebuild_seam() -> void:
 	_steps_climbed = 0
 	_open_run_declared = false
 	_paradox_label = null
-	for c in get_children():
-		remove_child(c)
-		c.queue_free()
+	for c in _owned_visuals:
+		if is_instance_valid(c):
+			c.get_parent().remove_child(c)
+			c.queue_free()
+	_owned_visuals.clear()
+	if is_instance_valid(_study_model):
+		remove_child(_study_model)
+		_study_model.queue_free()
+		_study_model = null
+	var retained := get_children()
 	_total_steps = steps_per_side * 4
 	_create_staircase()
 	_create_seam()
 	_create_labels()
 	_create_highlight()
+	for c in get_children():
+		if c not in retained: _owned_visuals.append(c)
+	if lesson_controls: _mount_study()
 
 ## THE ONE QUANTITY. A ring of steps_per_side * 4 treads, each rising step_height,
 ## comes back to its start steps_per_side * 4 * step_height too high. That number is
@@ -883,3 +905,22 @@ func _seam_light(col: Color) -> StandardMaterial3D:
 	mat.metallic = 0.0
 	mat.roughness = 0.35
 	return mat
+
+
+func _mount_study() -> void:
+	rotate_view = false
+	if not is_instance_valid(_study_model):
+		_study_model = Node3D.new()
+		_study_model.name = "StudyModel"
+		add_child(_study_model)
+		# A tabletop model: controls retain metre scale while geometry is smaller.
+		for visual in _owned_visuals:
+			visual.reparent(_study_model, false)
+			if visual is Label3D: visual.hide()
+		_study_model.position = Vector3(0,0.82,-0.40)
+		_study_model.scale = Vector3.ONE * 0.48
+	if not is_instance_valid(_study):
+		_study = preload("res://commons/interfaces/foundations/escher_staircase_study.gd").new()
+		add_child(_study)
+		_study.setup(self)
+	_study.reset_measurements()

@@ -1,0 +1,38 @@
+{
+  "_meta": {
+    "sequence": "transformation",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "One source-grounded transfer from the primitives iteration. Other transformation rooms still need their own authored outlines and walks."
+  },
+  "rooms": {
+    "Trans_Translation": {
+      "inherited": "Primitives distinguished a current position from a bounded record of movement and distinguished shape, connectivity and recognition. Trans_Pre and Trans_Introduction introduced changes of position, orientation and size.",
+      "question": "What does a translation preserve, and what does the record of your crossing leave out?",
+      "ontology": "A translation adds one displacement vector to every point and preserves pairwise differences. A bodily route through the room supplies intermediate positions as well as endpoints. player_trace stores bounded arrays of sampled positions, times and mean speeds; that recording contract is distinct from the translation operation. This room also contains explicitly rotating and scaling rides, so invariance claims apply to the plain translation ride, not every utility indiscriminately.",
+      "experiment": "Use the plain tc:4:z ride as the main displacement encounter: predict its destination, ride it and compare the shape and orientation of the platform before and after. On a safe stretch of solid floor, repeat a short walking segment at two paces, then repeat it with a pause. Compare the trace geometry with its speed tint before returning to the room's crossings.",
+      "observe": "On the plain ride the platform translates along Z. The trace can represent the same endpoints with different retained paths and speed colours. Its scene uses a 0.01 m movement threshold and a 1024-position cap; pauses append no stationary position. With the engine-tested elapsed-time correction, a recorded speed is the mean over the measured interval since the preceding accepted position, including any pause. The inspected map keeps the default unrestricted sample gate and no spatial snapping.",
+      "limit": "Neither the translation vector nor a bounded polyline recovers a complete journey. Hue compresses speed into a limited scale, and the record omits stationary samples. The next retained speed may include a pause, so a green segment is not direct evidence that every instant of that movement was slow. The implementation's three arrays preserve more than position without preserving every distinction a visitor may care about.",
+      "variation": "Use the same start and destination for two walks with different pauses and ask the visitor what should count as a different journey. A later optional version could label dwell time explicitly; the current room does not expose that extra channel. Changing the purpose of the record can change which distinctions deserve to be kept.",
+      "handoff": "Trans_AxisDecomposition can separate the displacement into X, Y and Z components. Carry both questions forward: which component changed, and which account of the change is the instrument actually keeping?",
+      "candidate_artifacts": [
+        "player_trace",
+        "z_translation_cube"
+      ],
+      "sources": [
+        "commons/maps/Trans_Translation/map_data.json",
+        "commons/maps/Trans_Translation/final.md",
+        "commons/maps/Trans_Translation/field_notes.md",
+        "commons/primitives/point/player_trace.gd",
+        "commons/primitives/point/player_trace.tscn",
+        "commons/maps/sequences/transformation.json",
+        "commons/data/artifact_roles.json"
+      ],
+      "open_questions": [
+        "The isolated elapsed-time probe passes for timed, distance-gated and every-frame samples. Compare real slow, fast and paused walking in desktop and VR before accepting the learning encounter.",
+        "Verify the active rig and sightlines for the floor trace from a safe walking area. Keep transport utilities as this room's primary encounter; the recorder remains a secondary comparison.",
+        "The existing field_notes.md contains older five-cube claims while current map/final.md contain seven placements. Reconcile the rest of that room in its own sequence pass; this transfer changes only the trace passage."
+      ]
+    }
+  }
+}

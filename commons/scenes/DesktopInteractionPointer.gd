@@ -501,6 +501,7 @@ func _find_grabbable() -> Node3D:
 		return null
 	var n: Node = hit.get("collider")
 	while n:
+		if n.get_meta("force_constraint_body",false):return null
 		if n.has_method("pick_up") or n is RigidBody3D:
 			return n as Node3D
 		n = n.get_parent()
@@ -508,6 +509,7 @@ func _find_grabbable() -> Node3D:
 
 
 func _grab_held(p: Node3D) -> void:
+	if p.get_meta("force_constraint_body",false):return
 	_held = p
 	if p is RigidBody3D:
 		_held_freeze = (p as RigidBody3D).freeze

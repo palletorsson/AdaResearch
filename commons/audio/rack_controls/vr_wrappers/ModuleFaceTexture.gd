@@ -185,6 +185,8 @@ func build(module_def: Dictionary, uvac: Node = null, module_prefix: String = ""
 			if max_val != min_val:
 				norm = clampf((default_val - min_val) / (max_val - min_val), 0.0, 1.0)
 			ctrl_node.normalized_value = norm
+		if "return_to_center" in ctrl_node:
+			ctrl_node.return_to_center = bool(ctrl_def.get("return_to_center", true))
 		if "normalized_value_y" in ctrl_node:
 			var default_val_y: float = float(ctrl_def.get("default_y", ctrl_def.get("default", 0.5)))
 			var min_val_y: float = float(ctrl_def.get("min_y", ctrl_def.get("min", 0.0)))
@@ -296,6 +298,9 @@ func _on_dual_axis_y_changed(value: float, control_id: String) -> void:
 func _on_button_value_changed(value: float, control_id: String) -> void:
 	if _uvac and "active_controls" in _uvac and _uvac.active_controls.has(control_id):
 		_uvac.active_controls[control_id]["toggle_state"] = value >= 0.5
+		if value >= 0.5 and _uvac.active_controls[control_id].config.get("action", "") in ["play", "stop"]:
+			_uvac._on_button_pressed(control_id)
+			return
 	_trigger_uvac_update(control_id)
 
 
@@ -330,95 +335,27 @@ func _trigger_uvac_update(control_id: String) -> void:
 
 
 var _collision_body: StaticBody3D
-var _is_pointer_pressed: bool = false
 
 
-## Create a StaticBody3D with collision shape matching the panel quad.
-## The body has pointer_event() method so XRToolsPointerEvent.report() finds it.
+## Same input bridge as the individually cased rack controls.
 func _setup_pointer_collision() -> void:
-	_collision_body = StaticBody3D.new()
+	_collision_body = preload("res://commons/audio/rack_controls/vr_wrappers/rack_pointer_surface.gd").new()
 	_collision_body.name = "PanelCollision"
-	# Pointable layer (21) + UI layer (23) — matches XR pointer DEFAULT_MASK
-	_collision_body.collision_layer = (1 << 20) | (1 << 22)
-	_collision_body.collision_mask = 0
-
-	var shape := CollisionShape3D.new()
-	var box := BoxShape3D.new()
-	box.size = Vector3(_physical_w, _physical_h, 0.005)
-	shape.shape = box
-	_collision_body.add_child(shape)
-
-	# Attach a tiny script that forwards pointer_event to us
-	var script := GDScript.new()
-	script.source_code = """extends StaticBody3D
-
-var _face_texture: Node3D
-
-func pointer_event(event) -> void:
-	if _face_texture and _face_texture.has_method("_on_pointer_event"):
-		_face_texture._on_pointer_event(event)
-"""
-	script.reload()
-	_collision_body.set_script(script)
-	_collision_body.set("_face_texture", self)
-
 	add_child(_collision_body)
+	_collision_body.configure(_viewport, Vector2(_physical_w, _physical_h))
 
 
-## Handle XR pointer events — convert 3D hit position to 2D viewport coordinates.
 func pointer_event(event) -> void:
 	_on_pointer_event(event)
 
 
 func _on_pointer_event(event) -> void:
-	if not _viewport or not is_instance_valid(_viewport):
-		return
-
-	var pos_2d := _global_to_viewport(event.position)
-
-	match event.event_type:
-		0:  # ENTERED
-			pass
-		1:  # EXITED
-			if _is_pointer_pressed:
-				_push_mouse_button(pos_2d, false)
-				_is_pointer_pressed = false
-		2:  # PRESSED
-			_is_pointer_pressed = true
-			_push_mouse_button(pos_2d, true)
-		3:  # RELEASED
-			_push_mouse_button(pos_2d, false)
-			_is_pointer_pressed = false
-		4:  # MOVED
-			_push_mouse_motion(pos_2d)
+	if is_instance_valid(_collision_body):
+		_collision_body.pointer_event(event)
 
 
-## Convert a 3D world position to 2D viewport coordinates.
 func _global_to_viewport(world_pos: Vector3) -> Vector2:
-	var local_pos := global_transform.affine_inverse() * world_pos
-	# Map from local 3D (-w/2..w/2, -h/2..h/2) to viewport pixels (0..vp_w, 0..vp_h)
-	var vp_size := Vector2(_viewport.size)
-	var x := (local_pos.x / _physical_w + 0.5) * vp_size.x
-	var y := (0.5 - local_pos.y / _physical_h) * vp_size.y  # Y flipped
-	return Vector2(clampf(x, 0, vp_size.x), clampf(y, 0, vp_size.y))
-
-
-func _push_mouse_button(pos: Vector2, pressed: bool) -> void:
-	var ev := InputEventMouseButton.new()
-	ev.button_index = MOUSE_BUTTON_LEFT
-	ev.pressed = pressed
-	ev.position = pos
-	ev.global_position = pos
-	_viewport.push_input(ev)
-
-
-func _push_mouse_motion(pos: Vector2) -> void:
-	var ev := InputEventMouseMotion.new()
-	ev.position = pos
-	ev.global_position = pos
-	if _is_pointer_pressed:
-		ev.button_mask = MOUSE_BUTTON_MASK_LEFT
-	_viewport.push_input(ev)
+	return _collision_body.pixel_at(world_pos)
 
 
 func _apply_button_color(ctrl_node: Control, color: Color) -> void:

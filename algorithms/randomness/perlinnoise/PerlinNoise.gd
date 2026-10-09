@@ -475,7 +475,12 @@ func _witness_lines() -> PackedStringArray:
 	out.append("sample offset     %-10.3f %-10.3f" % [float(mine["sample_offset"]), float(theirs["sample_offset"])])
 	out.append("")
 	out.append("noise_type        %-10d %-10d" % [int(mine["noise_type"]), int(theirs["noise_type"])])
-	out.append("the one term that differs. the rest is the control.")
+	var changed: Array[String] = []
+	for key in WITNESS_KEYS:
+		if typeof(mine[key]) == TYPE_FLOAT:
+			if not is_equal_approx(float(mine[key]), float(theirs[key])): changed.append(str(key))
+		elif mine[key] != theirs[key]: changed.append(str(key))
+	out.append("only the basis differs" if changed.is_empty() else "also differs: " + ", ".join(changed))
 	return out
 
 

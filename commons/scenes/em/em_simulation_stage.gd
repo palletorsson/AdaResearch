@@ -18,6 +18,10 @@ static func plan(doc: Dictionary) -> Dictionary:
 	var pad := margin + moat + apron
 	var w := sw + pad * 2
 	var d := sd + pad * 2
+	# A portal on the bridge needs clearance for its frame as well as the
+	# visitor. Stay within the original floor opening; never cut grid walls.
+	var portal_exit: Dictionary = info.get("museum", {}).get("portal_exit", {})
+	var exit_width := 2.4 if float(portal_exit.get("outset", 0.0)) > 0.0 else 2.0
 	var tile: Array = []
 	for z in range(d):
 		var row: Array = []
@@ -28,9 +32,9 @@ static func plan(doc: Dictionary) -> Dictionary:
 		"w": w, "d": d, "pad": pad, "margin": margin, "moat": moat,
 		"depth": clampf(float(sim.get("depth", 2.5)), 1.5, 8.0),
 		"glass_height": maxf(3.0, float(info.get("dimensions", {}).get("max_height", 2)) + 0.5),
-		"entry": _opening(rows[0], sw), "exit": _opening(rows[-1], sw), "tile": tile}
+		"entry": _opening(rows[0], sw), "exit": _opening(rows[-1], sw, exit_width), "tile": tile}
 
-static func _opening(row: Array, width: int) -> Dictionary:
+static func _opening(row: Array, width: int, maximum_width := 2.0) -> Dictionary:
 	# Use an existing floor opening. Never cut the copied map's walls.
 	var runs: Array = []
 	var start := -1
@@ -47,7 +51,7 @@ static func _opening(row: Array, width: int) -> Dictionary:
 			best = run
 	if best.x < 0:
 		return {"x": width / 2.0, "width": 0.0}
-	return {"x": best.x + best.y * 0.5, "width": minf(2.0, best.y)}
+	return {"x": best.x + best.y * 0.5, "width": minf(maximum_width, best.y)}
 
 static func build(parent: Node3D, p: Dictionary, z_offset: float) -> Dictionary:
 	var frame := Node3D.new()

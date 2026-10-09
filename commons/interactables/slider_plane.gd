@@ -23,15 +23,15 @@ func _process(_delta: float) -> void:
 	if grabbed_handles.is_empty():
 		return
 
-	var offset_sum := Vector3.ZERO
-	for item in grabbed_handles:
-		var handle := item as XRToolsInteractableHandle
-		if handle:
-			offset_sum += handle.global_transform.origin - handle.handle_origin.global_transform.origin
-
-	offset_sum = offset_sum * global_transform.basis
-	var offset_vec := Vector2(offset_sum.y, offset_sum.z) / grabbed_handles.size()
-	move_slider(slider_position + offset_vec)
+	var held_positions: Array[Vector3] = []
+	var target := Vector2.ZERO
+	for handle: XRToolsInteractableHandle in grabbed_handles:
+		held_positions.append(handle.global_position)
+		var local: Vector3 = get_parent().to_local(handle.global_position) - handle.handle_origin.position
+		target += Vector2(local.y,local.z)
+	move_slider(target / grabbed_handles.size())
+	# Moving the constrained ancestor must not move a stationary hand again.
+	for i in grabbed_handles.size(): grabbed_handles[i].global_position=held_positions[i]
 
 func move_slider(position: Vector2) -> void:
 	var new_position := _do_move_slider(position)

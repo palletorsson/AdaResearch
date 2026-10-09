@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ceq6wf46c7gv3"]
 
-[ext_resource type="Script" uid="uid://te7hxreku4db" path="res://algorithms/l_systems/Hilbert3D.gd" id="1"]
+[ext_resource type="Script" path="res://algorithms/lsystems/Hilbert3D.gd" id="1"]
 
 [node name="Hilbert3D" type="Node3D"]
 script = ExtResource("1")

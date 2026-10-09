@@ -1,0 +1,106 @@
+{
+  "_meta": {
+    "sequence": "change",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Change_Intro": {
+      "inherited": "From Symmetry_Seventeen: The next sequence studies change itself. Carry the habit of asking which quantities a rule relates and what must be held fixed before its answer can be interpreted.",
+      "question": "Where can a high curve be changing very little?",
+      "ontology": "A function gives a value at a position; its derivative gives the local rate at which that value changes. Height and slope answer different questions.",
+      "experiment": "Move the x sample-position slider slowly along the curve. Stop near a high point, then on a steep section. Compare the tangent direction and the f(x), f′(x) readouts before predicting the next section.",
+      "observe": "A high point can have a nearly horizontal tangent. A lower point may have a larger positive or negative slope. The derivative subplot follows the slope value rather than the height.",
+      "limit": "The line is a local approximation, not a substitute for the whole curve. Near-zero slope need not mean the process never changes, nor does it by itself classify every possible stationary point.",
+      "variation": "Find two places of similar height with opposite slopes and ask which distinction a height-only report would lose. A noisy or cornered function would require a new curve option; the current one is smooth.",
+      "handoff": "The next room accumulates many small contributions. Carry the distinction between the value of a function and the way that value changes, because the two will meet again from the other direction.",
+      "candidate_artifacts": [
+        "tangent_slope_workbench"
+      ],
+      "sources": [
+        "commons/maps/Change_Intro/final.md",
+        "commons/maps/Change_Intro/map_data.json",
+        "commons/artifacts/registry/change.json",
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+        "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Accumulation_Riemann": {
+      "inherited": "From Change_Intro: The next room accumulates many small contributions. Carry the distinction between the value of a function and the way that value changes, because the two will meet again from the other direction.",
+      "question": "How much changes when an estimate uses more, thinner pieces?",
+      "ontology": "A midpoint sum estimates accumulated area by adding each rectangle’s sampled height multiplied by its width. Refinement changes the approximation while leaving the underlying curve fixed.",
+      "experiment": "Move the rectangle-count slider through 4,8,16,32,64,128. Watch where rectangles miss the curve and compare the sum and error readout at each stop.",
+      "observe": "Increasing the count makes rectangles thinner and the estimate approach the reference value for this smooth curve. The curve itself does not become more accurate when the rectangles change.",
+      "limit": "A display that looks smooth is still a finite approximation. This experiment does not establish exact equality at N=128, a monotonic improvement for every function, or an exact analytic reference value.",
+      "variation": "Choose the coarsest estimate you would accept for a stated tolerance, then compare another visitor’s choice. A narrow spike between samples would challenge the method, but changing the curve is a proposed extension.",
+      "handoff": "The next room also accumulates small steps, but its result is a moving path. Keep track of which information is sampled locally and which larger pattern becomes visible only after those samples have been used together.",
+      "candidate_artifacts": [
+        "riemann_sum_workbench"
+      ],
+      "sources": [
+        "commons/maps/Accumulation_Riemann/final.md",
+        "commons/maps/Accumulation_Riemann/map_data.json",
+        "commons/artifacts/registry/change.json",
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+        "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Flow_Field": {
+      "inherited": "From Accumulation_Riemann: The next room also accumulates small steps, but its result is a moving path. Keep track of which information is sampled locally and which larger pattern becomes visible only after those samples have been used together.",
+      "question": "Can local directions explain a pattern nobody drew as a whole?",
+      "ontology": "A vector field assigns a direction at a position. Advection repeatedly reads that local direction to move a particle; its trail records the accumulated path.",
+      "experiment": "Follow one trail before taking in the full canvas. Adjust SCALE with SPEED held fixed, then adjust SPEED while leaving SCALE alone. Use RESET for a fresh particle distribution or SEED for a different noise field.",
+      "observe": "Changing SCALE changes the spatial organization of directions; SPEED changes travel per unit time. Many short local steps accumulate into visible streams, and particles crossing an edge return at the opposite edge.",
+      "limit": "The image cannot tell you every force acting on a real fluid: there are no pressure, mass or particle-particle interactions here. Wrapped boundaries join opposite edges, a particular world topology rather than an open canvas.",
+      "variation": "Track a particle approaching an edge and predict its re-entry, then consider how an absorbing or reflecting edge would change the picture. Those boundary alternatives would require code changes.",
+      "handoff": "The next room distinguishes everything that happened along a path from the difference left between its endpoints. Bring one trail whose journey would be poorly described by its final position alone.",
+      "candidate_artifacts": [
+        "flow_field_painter"
+      ],
+      "sources": [
+        "commons/maps/Flow_Field/final.md",
+        "commons/maps/Flow_Field/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/flow_field_painter/flow_field_painter.tscn",
+        "commons/artifacts/flow_field_painter/flow_field_painter.gd"
+      ],
+      "open_questions": [
+        "Header incorrectly calls the field a gradient. SCALE affects both sampling coordinates and noise frequency after adjustment; do not promise a simple linear scale law. Controls/rendering require runtime verification.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Change_Reconciliation": {
+      "inherited": "From Flow_Field: The next room distinguishes everything that happened along a path from the difference left between its endpoints. Bring one trail whose journey would be poorly described by its final position alone.",
+      "question": "Can a process return to its starting value after changing all the way?",
+      "ontology": "Net change compares endpoint values. Accumulating the signed local rate recovers that difference under the calculus conditions; distance travelled is another quantity.",
+      "experiment": "Watch the pulse move up and over the bridge arch. Compare its height at the two ends, and separate what happened during the crossing from the difference remaining at the end.",
+      "observe": "The default arch rises and falls but its endpoints are level. The final height difference is zero even though the pulse moved through many different heights.",
+      "limit": "The default bridge illustrates cancellation; it does not visibly compute the signed rate integral or prove the theorem. Its model is not confirmed as a walkable bridge, so ask visitors to observe the marker rather than climb the deck.",
+      "variation": "Name a journey with zero net change and nonzero total movement. A proposed map variant sets curve=ramp and evidence=longhand to compare a nonzero endpoint difference; the current room has not enabled that variant.",
+      "handoff": "The forces sequence puts rates into motion: position can change through velocity, and velocity through acceleration. Carry forward the habit of naming what is changing, with respect to what, before interpreting a number or a path.",
+      "candidate_artifacts": [
+        "ftc_bridge"
+      ],
+      "sources": [
+        "commons/maps/Change_Reconciliation/final.md",
+        "commons/maps/Change_Reconciliation/map_data.json",
+        "commons/artifacts/registry/change.json",
+        "algorithms/change/ftc_bridge.tscn",
+        "algorithms/change/ftc_bridge.gd"
+      ],
+      "open_questions": [
+        "Do not falsely align adjacent derivative_pair(wave) and integral_area(hump) as the same function. The bridge hump is parabolic while sibling hump uses its own shape. Shared vocabulary alone does not establish matched data.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

@@ -1,14 +1,11 @@
 extends Node3D
 
 # @identity
-# essence: blue_noise = dart_throwing — place points rejecting any candidate closer than min_dist to existing points, so emptiness is forbidden
-# desire: to feel the difference between fairness and freedom — blue noise is crowded rooms with social distancing, white noise is a mosh pit
-# critical_parameter: blue_noise_min_dist — the exclusion radius that turns white noise into structured randomness
-# triggers: switching DistributionType between UNIFORM/GAUSSIAN/BLUE_NOISE reveals three fundamentally different relationships with space
-# emerges: the packing limit — blue noise runs out of room before placing all requested points, which becomes visible as a teaching moment about density
-# needs: DistributionType selector [missing]; num_points slider [missing]; area_size control [missing]; all selection is export-only, no VR interaction
-# relationships: contrasts with randompoint (single white noise); prepares for perlin noise (structured randomness with continuity); connects to blue_noise sequence artifact
-# truth: structured randomness is not less random — it is randomness with a constraint, the way jazz improvisation is constrained by harmony
+# essence: candidates are either kept, clustered around a centre, or filtered by pair distance
+# question: does a constraint act once, or keep acting after a visitor intervenes?
+# boundary: finite rejection search is not a proof of maximal packing
+# interaction: compare stand supplies REDRAW, NEW SEED, RULE, RESTORE and LOAD x1/x4
+# relationship: the single randompoint continually clips coordinates; these shells only report
 
 enum DistributionType {
 	UNIFORM,
@@ -22,37 +19,10 @@ enum DistributionType {
 @export var gaussian_std_fraction: float = 0.25
 @export var blue_noise_min_dist: float = 0.25 # Minimum distance for Blue Noise
 
-# ── THE SAMPLING BENCH (stand:compare) — N1, 12 September 2026 ──────────────
-#
-# WHAT WAS MISSING. Every draw came off the global stream after randomize(), so
-# no cloud could be seen twice; apply_grid_config was `pass`, so no map token
-# could reach any of it; and the dart thrower dropped the points it could not
-# place without saying so — the packing limit was real and invisible. The room
-# it stands in asks CAN RANDOMLY PROPOSED POINTS STILL KEEP THEIR DISTANCE, and
-# a visitor could see neither what was proposed nor what was refused.
-#
-# So: one named five-digit seed for every draw, a written record of what the
-# rule cost (attempts, refusals, the shortfall, the closest surviving pair), and
-# an opt-in bench that puts the two rules side by side in MATCHED volumes.
-#
-#   stand:none     SHIPPED. Builds nothing of this. Points are spawned as this
-#                  node's own children exactly as before, and with no seed the
-#                  draws go to the global stream through the same calls.
-#   stand:compare  A bench with two equal volumes: AS PROPOSED on the left,
-#                  every candidate kept; AS ADMITTED on the right, the same
-#                  seed under the minimum-distance rule, with each accepted
-#                  point wearing its excluded neighbourhood as a shell and each
-#                  refused candidate left where it fell as a ghost. A cased
-#                  readout of both columns, REDRAW · NEW SEED · RULE · RESTORE,
-#                  and — because a point here is an XR Tools pickable — a
-#                  visitor can carry one into another's shell. The shells turn
-#                  red and the readout counts it. Nothing re-arranges itself:
-#                  the rule was applied at birth and is not enforced after.
-#
-# THE SHELL IS HALF THE DISTANCE, and that is the whole geometry: if no two
-# centres are closer than d, then spheres of radius d/2 around them can touch
-# but never overlap. So overlapping shells in the left volume are not a fault —
-# they are what having no rule looks like.
+# Opt-in sampling bench. A seed initializes one stream; the left consumes its
+# first uniform draws, then the right continues it. They do not share candidates.
+# Shells have radius d/2. The first 220 refusals are drawn, all refusals are counted.
+# At stand:none the original unstaged point cloud remains available.
 @export_enum("none", "compare") var stand: String = "none"
 @export var sampling_seed: int = -1      # -1: the global stream, as shipped; >= 0 pins every draw
 
@@ -62,7 +32,7 @@ const BENCH_D: float = 0.96
 const VOL: float = 0.90                  # each sampled volume: a square of this side...
 const VOL_T: float = 0.12                # ...and this thin, so a cloud reads as a plate
 const VOL_GAP: float = 0.34
-const GHOST_CAP: int = 220               # refusals kept for the record and drawn as ghosts
+const GHOST_CAP: int = 220               # display budget; the total refusal count is independent
 
 var _rng: RandomNumberGenerator = null
 var _stats: Dictionary = {}
@@ -77,6 +47,7 @@ var _rule: String = "spaced"             # what the right volume is under: space
 var _moved: int = 0
 var _touching: int = 0
 var _dist_asked: bool = false    # did the map name the rule's distance, or is it derived?
+var _base_count: int = 24
 
 var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point_color_with_text.tscn")
 
@@ -179,15 +150,13 @@ func _generate_blue_noise(count: int, extents: Vector3) -> Array:
 				pts.append(candidate)
 				placed = true
 				break
-			# ...and say what that cost: every refusal is a candidate that fell
-			# inside somebody's excluded neighbourhood, and it is kept.
+			# Retain a bounded visual sample; _attempts counts every candidate.
 			if _rejected.size() < GHOST_CAP:
 				_rejected.append(candidate)
 		
 		if not placed:
-			# Relax constraint slightly if we fail? 
-			# For now, just don't place the point (returns fewer points than requested)
-			# This is characteristic of Blue Noise (packing limit)
+			# This slot exhausted 100 attempts. Later slots still get their own
+			# attempts; failure here proves neither saturation nor optimal packing.
 			pass
 			
 	return pts
@@ -244,7 +213,7 @@ func apply_grid_config(config: Dictionary) -> void:
 	for key in ["radius", "dist"]:
 		if config.has(key):
 			var d: float = float(config[key])
-			if d > 0.0 and not is_equal_approx(d, blue_noise_min_dist):
+			if d > 0.0:
 				blue_noise_min_dist = d
 				_dist_asked = true
 				restage = true
@@ -280,6 +249,7 @@ func apply_grid_config(config: Dictionary) -> void:
 ## A five-digit name for the draws, so a visitor can say the number out loud and
 ## get the same two clouds back. Called before anything is generated.
 func _prepare_bench() -> void:
+	_base_count = num_points
 	if sampling_seed < 0:
 		var namer := RandomNumberGenerator.new()
 		namer.randomize()
@@ -287,14 +257,8 @@ func _prepare_bench() -> void:
 	_named_seed = sampling_seed
 	_rng = RandomNumberGenerator.new()
 	_rng.seed = sampling_seed
-	# The rule's distance, unless a map named one: eight tenths of the mean spacing the
-	# requested population implies in this volume. Fixing it against the density rather
-	# than in metres is what keeps the packing limit in view at any count — the whole
-	# point of the right-hand volume is that the rule sometimes runs out of room.
-	# The sampled volume is a slab standing upright, facing the visitor. The shipped
-	# default is a cube and stays one; this is the bench's own framing, and it is why
-	# the two clouds can be read against each other at all — forty translucent shells
-	# deep in a cube photograph as fog (measured, first run).
+	# Derive a default once for this configuration; LOAD keeps that distance fixed.
+	# A thin standing slab lets the visitor distinguish individual neighbours.
 	area_size = Vector3(area_size.x, area_size.x, VOL_T)
 	if not _dist_asked:
 		var mean_gap: float = pow(max(0.001, area_size.x * area_size.y * area_size.z) / float(max(1, num_points)), 1.0 / 3.0)
@@ -391,23 +355,23 @@ func _build_bench() -> void:
 	var plate_root := Node3D.new()
 	plate_root.name = "Readout"
 	plate_root.set_meta("em_local_instrument", true)
-	plate_root.position = Vector3(-0.58, BENCH_TOP - 0.17, face + 0.012)
+	plate_root.position = Vector3(-0.40, BENCH_TOP - 0.08, face + 0.06)
 	plate_root.rotation_degrees = Vector3(-14, 0, 0)
 	_bench.add_child(plate_root)
-	var plate: MeshInstance3D = HangarKit.box(Vector3.ZERO, Vector3(1.12, 0.22, 0.014), dark)
+	var plate: MeshInstance3D = HangarKit.box(Vector3.ZERO, Vector3(1.65, 0.46, 0.024), dark)
 	plate.name = "Plate"
 	plate_root.add_child(plate)
 	_readout = Label3D.new()
 	_readout.name = "Text"
-	_readout.pixel_size = 0.00092
-	_readout.font_size = 17
+	_readout.pixel_size = 0.0016
+	_readout.font_size = 20
 	_readout.line_spacing = 0.5
 	_readout.modulate = Color(0.88, 0.94, 1.0)
 	_readout.outline_size = 3
 	_readout.outline_modulate = Color(0, 0, 0, 1)
 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	_readout.position = Vector3(-0.535, 0.098, 0.010)
+	_readout.position = Vector3(-0.785, 0.205, 0.018)
 	plate_root.add_child(_readout)
 
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -415,6 +379,7 @@ func _build_bench() -> void:
 		var panel: Node3D = RackTpl.create_panel("", [
 			[{"type": "button", "label": "REDRAW"}, {"type": "button", "label": "NEW SEED"}],
 			[{"type": "button", "label": "RULE"}, {"type": "button", "label": "RESTORE"}],
+			[{"type": "button", "label": "LOAD x1 / x4"}],
 		], true)
 		panel.name = "Panel"
 		panel.set_meta("em_local_instrument", true)
@@ -422,7 +387,7 @@ func _build_bench() -> void:
 		panel.rotation_degrees = Vector3(-26, 0, 0)
 		panel.scale = Vector3(1.4, 1.4, 1.4)
 		_bench.add_child(panel)
-		var actions := {"Btn_0": func(): redraw(), "Btn_1": func(): new_seed(), "Btn_2": func(): cycle_rule(), "Btn_3": func(): restore()}
+		var actions := {"Btn_0": func(): redraw(), "Btn_1": func(): new_seed(), "Btn_2": func(): cycle_rule(), "Btn_3": func(): restore(), "Btn_4": func(): cycle_load()}
 		for btn_name in actions.keys():
 			var btn: Node = panel.find_child(btn_name, true, false)
 			if btn == null:
@@ -451,6 +416,7 @@ func _fill_volumes() -> void:
 	var admitted: Array = []
 	if _rule == "clustered":
 		admitted = _generate_gaussian(num_points, extents)
+		_attempts = admitted.size()
 	else:
 		admitted = _generate_blue_noise(num_points, extents)
 	_stats = {
@@ -461,7 +427,8 @@ func _fill_volumes() -> void:
 		"min_dist": snappedf(blue_noise_min_dist, 0.001),
 		"proposed": {"accepted": proposed.size(), "closest": _closest_pair(proposed)},
 		"admitted": {"accepted": admitted.size(), "closest": _closest_pair(admitted),
-			"refused": _rejected.size(), "attempts": _attempts,
+			"refused": _attempts - admitted.size(), "attempts": _attempts,
+			"ghosts_shown": _rejected.size(),
 			"short": max(0, num_points - admitted.size())},
 	}
 	for entry in [["proposed", proposed], ["admitted", admitted]]:
@@ -485,6 +452,7 @@ func _fill_volumes() -> void:
 			made.append(p)
 		_points[key] = made
 	_draw_ghosts()
+	_watch_neighbours()
 
 
 ## The refused candidates, drawn small and grey where they fell: the excluded
@@ -550,6 +518,7 @@ func _watch_neighbours() -> void:
 		return
 	var bad: Dictionary = {}
 	var moved: int = 0
+	var touching: int = 0
 	for i in range(list.size()):
 		var a: Node3D = list[i]
 		if not is_instance_valid(a):
@@ -560,7 +529,8 @@ func _watch_neighbours() -> void:
 			var b: Node3D = list[j]
 			if not is_instance_valid(b):
 				continue
-			if a.global_position.distance_to(b.global_position) < blue_noise_min_dist - 0.001:
+			if a.position.distance_to(b.position) < blue_noise_min_dist - 0.001:
+				touching += 1
 				bad[i] = true
 				bad[j] = true
 	for i in range(list.size()):
@@ -572,7 +542,6 @@ func _watch_neighbours() -> void:
 			continue
 		var m: StandardMaterial3D = sh.material_override
 		m.albedo_color = Color(1.0, 0.22, 0.22, 0.30) if bad.has(i) else Color(0.35, 0.85, 1.0, 0.16)
-	var touching: int = int(ceil(float(bad.size()) * 0.5))
 	if moved != _moved or touching != _touching:
 		_moved = moved
 		_touching = touching
@@ -595,6 +564,7 @@ func restore() -> void:
 			(p as Node3D).position = (p as Node3D).get_meta("home")
 	_moved = 0
 	_touching = 0
+	_watch_neighbours()
 	_update_readout()
 
 
@@ -624,6 +594,16 @@ func new_seed() -> void:
 	var namer := RandomNumberGenerator.new()
 	namer.randomize()
 	sampling_seed = namer.randi_range(10000, 99999)
+	while sampling_seed == _named_seed:
+		sampling_seed = namer.randi_range(10000, 99999)
+	redraw()
+
+
+## Increase the request without shrinking the spacing to accommodate it.
+func cycle_load() -> void:
+	if stand != "compare":
+		return
+	num_points = _base_count * 4 if num_points == _base_count else _base_count
 	redraw()
 
 
@@ -662,7 +642,7 @@ func _closest_pair(pts: Array) -> float:
 			var d: float = (pts[i] as Vector3).distance_to(pts[j])
 			if d < best:
 				best = d
-	return snappedf(best, 0.001) if best < INF else -1.0
+	return best if best < INF else -1.0
 
 
 func _update_readout() -> void:
@@ -671,18 +651,22 @@ func _update_readout() -> void:
 	var pr: Dictionary = _stats.get("proposed", {})
 	var ad: Dictionary = _stats.get("admitted", {})
 	var lines: PackedStringArray = PackedStringArray()
-	lines.append("seed %d · %d requested in a %.2f m cube · rule %s %.2f m" % [
-		int(_stats.get("seed", 0)), int(_stats.get("requested", 0)), float(_stats.get("volume", 0.0)),
-		("min distance" if _rule == "spaced" else "gaussian"), blue_noise_min_dist])
-	lines.append("proposed  kept %d of %d · closest pair %.3f m" % [
-		int(pr.get("accepted", 0)), int(_stats.get("requested", 0)), float(pr.get("closest", -1.0))])
-	lines.append("admitted  kept %d of %d · refused %d in %d draws · closest %.3f m" % [
-		int(ad.get("accepted", 0)), int(_stats.get("requested", 0)), int(ad.get("refused", 0)),
-		int(ad.get("attempts", 0)), float(ad.get("closest", -1.0))])
+	lines.append("SEED %d · REQUEST %d · %.2f x %.2f x %.2f m" % [
+		int(_stats.get("seed", 0)), num_points, area_size.x, area_size.y, area_size.z])
+	lines.append("LEFT  kept %d · closest %.3f m" % [int(pr.get("accepted", 0)), float(pr.get("closest", -1.0))])
+	lines.append("RIGHT %s · kept %d · closest %.3f m" % [
+		_rule, int(ad.get("accepted", 0)), float(ad.get("closest", -1.0))])
+	lines.append("%d candidates = %d kept + %d refused" % [
+		int(ad.get("attempts", 0)), int(ad.get("accepted", 0)), int(ad.get("refused", 0))])
+	lines.append("Ghosts: first %d of %d refusals · spacing %.3f m" % [
+		int(ad.get("ghosts_shown", 0)), int(ad.get("refused", 0)), blue_noise_min_dist])
 	if int(ad.get("short", 0)) > 0:
-		lines.append("%d could not be placed at all: the volume ran out of room" % int(ad.get("short", 0)))
-	if _moved > 0 or _touching > 0:
-		lines.append("moved %d · under the distance %d — the rule was applied at birth, not since" % [_moved, _touching])
+		lines.append("%d unfilled: attempt budget exhausted (100 / slot)" % int(ad.get("short", 0)))
+	if _rule == "clustered":
+		lines.append("moved %d · %d pairs < d - 1 mm; spacing not applied" % [_moved, _touching])
+	else:
+		lines.append("moved %d · %d pairs < d - 1 mm" % [_moved, _touching])
+		lines.append("Spacing applied at birth, not since")
 	_readout.text = "\n".join(lines)
 
 
@@ -694,11 +678,19 @@ func sampling_state() -> Dictionary:
 	out["under_distance"] = _touching
 	out["rule_now"] = _rule
 	out["shells"] = blue_noise_min_dist * 0.5
+	out["dimensions"] = [area_size.x, area_size.y, area_size.z]
+	out["candidate_budget_per_slot"] = 100
+	out["ghost_positions"] = _rejected.map(func(v): return [v.x, v.y, v.z])
 	out["points"] = {}
+	out["homes"] = {}
 	for k in _points.keys():
 		var ps: Array = []
+		var homes: Array = []
 		for p in _points[k]:
 			if is_instance_valid(p):
-				ps.append([snappedf((p as Node3D).position.x, 0.001), snappedf((p as Node3D).position.y, 0.001), snappedf((p as Node3D).position.z, 0.001)])
+				ps.append([(p as Node3D).position.x, (p as Node3D).position.y, (p as Node3D).position.z])
+				var home: Vector3 = (p as Node3D).get_meta("home")
+				homes.append([home.x, home.y, home.z])
 		out["points"][k] = ps
+		out["homes"][k] = homes
 	return out

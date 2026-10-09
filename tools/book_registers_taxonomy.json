@@ -1,0 +1,54 @@
+{
+  "version": "ada-registers-1",
+  "description": "Overlapping editorial functions in a paragraph, not topics, truth tests or quality scores. No target balance and no forced primary label.",
+  "labels": [
+    {
+      "id": "technical",
+      "label": "Technical",
+      "color": "#70c9e9",
+      "definition": "Explains a formal definition, algorithm, implementation, measurable constraint or how a mechanism produces an effect. A code name alone is not enough."
+    },
+    {
+      "id": "embodied",
+      "label": "Embodied / instructional",
+      "color": "#e8b56d",
+      "definition": "Invites or directs a concrete bodily, sensory or interface action, including looking, moving, pressing, drawing or making an actionable comparison. Second-person address alone is not enough."
+    },
+    {
+      "id": "inquiry",
+      "label": "Inquiry / discovery",
+      "color": "#a6cf80",
+      "definition": "Stages a genuine question, unresolved puzzle, tentative hypothesis, discrepancy or experiment for the reader to investigate. Not every declarative explanation or rhetorical question qualifies."
+    },
+    {
+      "id": "critical",
+      "label": "Critical",
+      "color": "#e7879a",
+      "definition": "Examines assumptions, norms, authority, exclusions, interests or the stakes of choices built into a representation, algorithm or institution. A technical limit or surprising behavior alone is insufficient unless its assumptions or consequences are questioned."
+    },
+    {
+      "id": "poetic",
+      "label": "Poetic",
+      "color": "#c6a1ec",
+      "definition": "Makes meaning through evocative imagery, metaphor, personification, rhythm, compression or deliberate resonance. Merely mentioning art or using a technical metaphor does not suffice. This is a mode of language, not a quality judgment."
+    },
+    {
+      "id": "contextual",
+      "label": "Contextual / scholarly",
+      "color": "#b8b0a0",
+      "definition": "Locates the encounter in an artistic, historical, philosophical or documentary source; explains attribution, a relation to that source, or the limits of the comparison. Earlier hall callbacks alone are connective instead."
+    },
+    {
+      "id": "connective",
+      "label": "Connective",
+      "color": "#8b9fdd",
+      "definition": "Substantively recaps earlier learning, bridges halls or concepts, negotiates scope or pace, or prepares the next encounter. Mere conjunctions or local sentence flow are insufficient."
+    },
+    {
+      "id": "interpretive",
+      "label": "Interpretive",
+      "color": "#d6ad8c",
+      "definition": "Offers or weighs a possible aesthetic, symbolic or philosophical reading of an encounter. A technical explanation, source attribution or evocative word alone is insufficient. Can overlap critical or poetic without being identical to either."
+    }
+  ]
+}

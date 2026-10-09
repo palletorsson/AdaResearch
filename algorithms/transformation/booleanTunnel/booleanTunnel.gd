@@ -18,6 +18,7 @@ var teleport_scene: PackedScene = preload("res://commons/scenes/mapobjects/telep
 @export var rotation_per_segment: float = 10.0  # degrees
 @export var cube_height: float = 4.0  # height of the cube for pivot compensation
 @export var cube_base_rotation_z: float = 0.0  # base rotation for each cube (degrees)
+@export var segment_vertical_offset: float = 0.0 # gallery seating of the hollow, independently of its root
 
 @export_group("Cone Taper")
 @export var cone_mode: bool = false  # taper from start to end
@@ -99,6 +100,8 @@ func apply_grid_config(config: Dictionary) -> void:
 		cube_height = float(config["cube_height"])
 	if config.has("cube_base_rotation_z"):
 		cube_base_rotation_z = float(config["cube_base_rotation_z"])
+	if config.has("segment_vertical_offset"):
+		segment_vertical_offset = float(config["segment_vertical_offset"])
 	
 	# Tunnel orientation
 	if config.has("tunnel_rotation_x"):
@@ -218,7 +221,7 @@ func generate_tunnel() -> void:
 		transform_3d = transform_3d.rotated(Vector3(0, 0, 1), angle_rad)
 
 		# Apply position with compensation
-		transform_3d.origin = Vector3(x_offset, y_offset, z_pos)
+		transform_3d.origin = Vector3(x_offset, y_offset + segment_vertical_offset, z_pos)
 
 		cube_instance.transform = transform_3d
 		cube_instance.name = "Cube" + str(i)

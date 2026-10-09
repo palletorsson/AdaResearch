@@ -58,12 +58,20 @@ var ball_scene: PackedScene
 var multimesh_instance: MultiMeshInstance3D
 var multimesh: MultiMesh
 var _sync_accumulator: float = 0.0
+var _ball_radius: float = 0.1
+var _sine_rain: bool = false
+var _rain_clock: float = 0.0
+var _rain_next: int = 0
 
 func _log(message: String) -> void:
 	if debug_logs:
 		print(message)
 
 func _ready() -> void:
+	if str(get_meta("config_case", "")) == "salon":
+		_build_salon_case()
+	elif str(get_meta("config_case", "")) == "sine_rain":
+		_configure_sine_rain()
 	# Add to group so turret can find us
 	add_to_group("colorballs")
 	
@@ -75,10 +83,91 @@ func _ready() -> void:
 
 	var name_hash = name.hash()
 	current_palette_index = abs(name_hash) % palette_keys.size()
+	if _sine_rain and palette_keys.has("dance_energy"):
+		current_palette_index = palette_keys.find("dance_energy")
 	
 	create_ball_scene()
 	_setup_multimesh_renderer()
 	spawn_balls()
+
+func _configure_sine_rain() -> void:
+	# Reuse the colour artifact as a bounded rain over the museum's wave floor.
+	_sine_rain = true
+	ball_count = 48
+	_ball_radius = 0.22
+	ball_mass = 0.08
+	ball_bounce = 0.68
+	ball_friction = 0.18
+	spawn_area_size = Vector3(12.0, 1.0, 15.0)
+	spawn_height = 3.6
+	initial_velocity_range = 0.25
+	emission_strength = 0.04
+	roughness_factor = 0.24
+	respawn_on_fall = false
+	# The museum supplies its camera and lighting; keyboard controls must not
+	# silently grow this pool while the visitor uses the rest of the room.
+	set_process_input(false)
+	for child in get_children():
+		if child is Camera3D or child is Light3D:
+			remove_child(child)
+			child.queue_free()
+
+func _physics_process(delta: float) -> void:
+	if not _sine_rain or ball_bodies.size() != ball_count:
+		return
+	_rain_clock += delta
+	if _rain_clock >= 0.4:
+		_rain_clock = fmod(_rain_clock, 0.4)
+		_recycle_rain_ball(_rain_next % ball_bodies.size())
+		_rain_next += 1
+	# Keep escaped balls inside this hall even when its world origin is offset.
+	for i in range(ball_bodies.size()):
+		var body := ball_bodies[i] as RigidBody3D
+		if not is_instance_valid(body):
+			continue
+		var p := to_local(body.global_position)
+		if p.y < -2.0 or absf(p.x) > 7.5 or absf(p.z) > 10.0:
+			_recycle_rain_ball(i)
+
+func _recycle_rain_ball(index: int) -> void:
+	var body := ball_bodies[index] as RigidBody3D
+	if not is_instance_valid(body):
+		return
+	var drop := Vector3(randf_range(-spawn_area_size.x*0.5, spawn_area_size.x*0.5),
+		spawn_height+randf_range(0.0,0.5), randf_range(-spawn_area_size.z*0.5, spawn_area_size.z*0.5))
+	body.global_transform = Transform3D(Basis.IDENTITY, to_global(drop))
+	body.linear_velocity = Vector3.ZERO
+	body.angular_velocity = Vector3.ZERO
+	body.sleeping = false
+
+func _build_salon_case() -> void:
+	# Build collision before spawning balls, not later in a neighbouring artifact.
+	spawn_area_size = Vector3(2.0, 1.0, 2.0)
+	spawn_height = 1.3
+	initial_velocity_range = 0.5
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = Color(0.86, 0.93, 1.0, 0.12)
+	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass.roughness = 0.2
+	var base := StandardMaterial3D.new()
+	base.albedo_color = Color("f3ded0")
+	var pieces := [
+		[Vector3(0,0.04,0),Vector3(2.5,0.08,2.5)],
+		[Vector3(-1.2,1.1,0),Vector3(0.045,2.2,2.45)],
+		[Vector3(1.2,1.1,0),Vector3(0.045,2.2,2.45)],
+		[Vector3(0,1.1,-1.2),Vector3(2.45,2.2,0.045)],
+		[Vector3(0,1.1,1.2),Vector3(2.45,2.2,0.045)],
+		[Vector3(0,2.2,0),Vector3(2.45,0.045,2.45)]]
+	for i in range(pieces.size()):
+		var panel := MeshInstance3D.new()
+		panel.name = "SalonCase_%d" % i
+		var mesh := BoxMesh.new()
+		mesh.size = pieces[i][1]
+		panel.mesh = mesh
+		panel.material_override = base if i == 0 else glass
+		panel.position = pieces[i][0]
+		add_child(panel)
+		panel.create_convex_collision()
 
 func _ensure_palette_resource() -> void:
 	if color_palette_resource != null:
@@ -135,7 +224,7 @@ func create_ball_directly(name: String) -> Node3D:
 	var collision_shape = CollisionShape3D.new()
 	collision_shape.name = "CollisionShape3D"
 	var sphere_shape = SphereShape3D.new()
-	sphere_shape.radius = 0.1
+	sphere_shape.radius = _ball_radius
 	collision_shape.shape = sphere_shape
 	
 	# Create physics material
@@ -152,8 +241,8 @@ func create_ball_directly(name: String) -> Node3D:
 		var mesh_instance = MeshInstance3D.new()
 		mesh_instance.name = "MeshInstance3D"
 		var sphere_mesh = SphereMesh.new()
-		sphere_mesh.radius = 0.1
-		sphere_mesh.height = 0.2
+		sphere_mesh.radius = _ball_radius
+		sphere_mesh.height = _ball_radius * 2.0
 		sphere_mesh.radial_segments = 48
 		sphere_mesh.rings = 24
 		mesh_instance.mesh = sphere_mesh
@@ -180,8 +269,8 @@ func _setup_multimesh_renderer() -> void:
 	multimesh.instance_count = 0
 
 	var sphere_mesh := SphereMesh.new()
-	sphere_mesh.radius = 0.1
-	sphere_mesh.height = 0.2
+	sphere_mesh.radius = _ball_radius
+	sphere_mesh.height = _ball_radius * 2.0
 	sphere_mesh.radial_segments = 24
 	sphere_mesh.rings = 12
 	multimesh.mesh = sphere_mesh

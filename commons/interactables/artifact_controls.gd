@@ -4,6 +4,8 @@ class_name ArtifactControls
 ## Helper for adding VR controls to artifacts using the rack control system.
 ## Uses the canonical rack 2D controls (RackSliderH, RackKnob, etc.) wrapped
 ## in VRRackControl for pixel-perfect web↔VR parity.
+## For physical interaction, add_physical_stepped_slider supplies a grabbable
+## handle with printed labels. Keep its enclosing physics assembly at unit scale.
 ##
 ## Usage:
 ##   var controls := ArtifactControls.new()
@@ -73,11 +75,29 @@ func add_stepped_slider(
 	param_name: String,
 	initial_value: float,
 	on_change: Callable,
+	step_count: int = 5,
 ) -> Node:
 	if _use_rack:
-		return _add_rack_control(RACK_SLIDER_STEPPED, param_name, initial_value, on_change)
+		var ctrl := _add_rack_control(RACK_SLIDER_STEPPED, param_name, initial_value, on_change)
+		ctrl.set_step_count(step_count)
+		return ctrl
 	else:
 		return _add_legacy_slider(param_name, initial_value, on_change)
+
+
+## Physical selector with flat printed labels; use a unit-scale parent.
+func add_physical_stepped_slider(param_name: String, initial_value: float, on_change: Callable, step_count: int = 6) -> Node3D:
+	var ctrl: Node3D = load("res://commons/interactables/physical_stepped_slider.gd").new()
+	ctrl.name = "Physical_%s" % param_name.replace(" ", "_")
+	ctrl.param_name = param_name
+	ctrl.step_count = step_count
+	ctrl.set_normalized_value(initial_value)
+	ctrl.position = _next_slot_position()
+	add_child(ctrl)
+	ctrl.value_changed.connect(on_change)
+	_controls[param_name] = ctrl
+	_slot_index += 1
+	return ctrl
 
 
 ## Add a push button.
@@ -102,16 +122,25 @@ func add_meter(param_name: String, initial_level: float = 0.0) -> Node:
 		return add_label(param_name, "0.0")
 
 
-## Add a text label.
-func add_label(label_id: String, initial_text: String = "", font_size: int = 14) -> Label3D:
-	var label := Label3D.new()
+## Add a backed 2D status screen. Update through update_label(), as before.
+func add_label(label_id: String, initial_text: String = "", font_size: int = 14) -> Node3D:
+	var label := Node3D.new()
 	label.name = "Label_%s" % label_id
-	label.text = initial_text
-	label.font_size = font_size
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = _next_slot_position() + Vector3(0, 0, 0.02)
-	label.modulate = Color(1, 1, 1, 0.8)
+	label.position = _next_slot_position()
 	add_child(label)
+	var casing := MeshInstance3D.new()
+	var box := BoxMesh.new()
+	box.size = Vector3(.20, .052, .02)
+	casing.mesh = box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(.12, .14, .16)
+	casing.material_override = mat
+	label.add_child(casing)
+	var surface: Dictionary = preload("res://commons/ui/control_value_surface.gd").build(label, Vector2(.184, .042), Vector3(0, 0, .011))
+	var value: Label = surface.label
+	value.add_theme_font_size_override("font_size", clampi(font_size * 3, 24, 64))
+	value.text = initial_text
+	label.set_meta("status_surface", surface)
 	_controls[label_id] = label
 	_slot_index += 1
 	return label
@@ -127,8 +156,11 @@ func update_meter(param_name: String, level: float) -> void:
 ## Update a label's text.
 func update_label(label_id: String, text: String) -> void:
 	var ctrl = _controls.get(label_id)
-	if ctrl is Label3D:
-		ctrl.text = text
+	if ctrl and ctrl.has_meta("status_surface"):
+		var surface: Dictionary = ctrl.get_meta("status_surface")
+		if surface.label.text != text:
+			surface.label.text = text
+			surface.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 	elif ctrl and ctrl.has_method("set_text"):
 		ctrl.set_text(text)
 
@@ -148,8 +180,7 @@ func _make_vr_rack_control(scene_path: String, param_name: String) -> Node:
 	var ctrl := VRRackControl.new()
 	ctrl.control_scene_path = scene_path
 	ctrl.name = "Rack_%s" % param_name.replace(" ", "_")
-	# VRRackControl._build() runs in _ready, set label after add_child
-	ctrl.set_deferred("_set_label_deferred", param_name)
+	ctrl.set_param_name(param_name)
 	return ctrl
 
 
@@ -205,8 +236,12 @@ func _configure_rack_button(ctrl: Node, label_text: String, on_press: Callable) 
 		return
 	ctrl.set_param_name(label_text)
 	var inner: Control = ctrl.get_control()
-	if inner and inner.has_signal("pressed"):
-		inner.pressed.connect(func(): on_press.call())
+	if inner and inner.has_signal("value_changed"):
+		# RackButton emits normalized state, not a `pressed` signal.
+		# Only its rising edge invokes an action; release and exit don't repeat it.
+		inner.value_changed.connect(func(value: float):
+			if value >= .5: on_press.call()
+		)
 
 
 # ── Internal: Legacy fallback ──────────────────────────────────

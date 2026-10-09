@@ -39,13 +39,15 @@ const LOD_GILL_COUNT := [0, 4, 8, 16]        # Under-cap gill meshes
 
 ## Build a complete fungus under `parent` from `dna`.
 ## Returns the root Node3D containing all fungus geometry.
-static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMapper, lod: int = 2) -> Node3D:
+static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMapper, lod: int = 2, organism_seed: int = -1) -> Node3D:
 	var fungus_root := Node3D.new()
 	fungus_root.name = "Fungus"
 	parent.add_child(fungus_root)
 
 	lod = clampi(lod, 0, 3)
-	var base_seed: int = fungus_root.get_instance_id()
+	# An explicit seed makes catalogue residents replay across builds/locations.
+	# Existing callers retain their original instance-based variation.
+	var base_seed: int = organism_seed if organism_seed >= 0 else fungus_root.get_instance_id()
 
 	# Colony or single?
 	if dna.sociality > 0.5 and dna.inflorescence > 0.2:
@@ -640,5 +642,3 @@ static func _build_colony(dna: CritterDNA, root: Node3D, mapper: CritterTraitMap
 
 			var sub_scale: float = rng.randf_range(0.3, 1.0)
 			_build_single_mushroom(dna, sub_root, mapper, base_seed + i * 100, sub_scale, maxi(lod - 1, 0))
-
-

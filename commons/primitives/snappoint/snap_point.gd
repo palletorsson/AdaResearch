@@ -325,7 +325,9 @@ func _on_picked_up(_pickable) -> void:
 
 # Called when this object is dropped
 func _on_dropped(_pickable) -> void:
-	# Check for snap if we have a nearby point
+	# Sample the release position: drop-only mode skips detection while held,
+	# and even preview mode may receive a drop before the next process frame.
+	_detect_nearby_snap_points()
 	if _closest_snap_point and _closest_snap_point not in connected_points:
 		_attempt_snap(_closest_snap_point)
 	

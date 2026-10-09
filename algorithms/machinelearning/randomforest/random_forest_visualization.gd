@@ -160,6 +160,7 @@ var tree_visualizations: Array = []
 var data_points: Array = []
 var forest_root: Node3D
 var ui_display: CanvasLayer
+var _show_desktop_ui: bool = true
 
 # 3D in-scene labels
 var _title_label_3d: Label3D
@@ -424,15 +425,18 @@ func _own(n: Node) -> void:
 func setup_ui() -> void:
 	"""Create comprehensive UI for Random Forest visualization"""
 	ui_display = CanvasLayer.new()
+	ui_display.visible = _show_desktop_ui
 	_own(ui_display)
 
 	var panel = Panel.new()
+	panel.name = "Panel"
 	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	panel.size = Vector2(400, 700)
 	panel.position = Vector2(10, 10)
 	ui_display.add_child(panel)
 	
 	var vbox = VBoxContainer.new()
+	vbox.name = "VBoxContainer"
 	panel.add_child(vbox)
 	
 	# Create labels for Random Forest information
@@ -1180,6 +1184,10 @@ func _exit_tree() -> void:
 # GridInteractablesComponent calls this via call_deferred, AFTER _ready() and
 # first in the deferred queue, so _build_all() has already run and _built is true.
 func apply_grid_config(config_data: Dictionary) -> void:
+	# Museum placements use the existing 3D labels, not a screen-sized overlay.
+	if config_data.has("desktop_ui"):
+		_show_desktop_ui = _as_bool(config_data["desktop_ui"], _show_desktop_ui)
+		if is_instance_valid(ui_display): ui_display.visible = _show_desktop_ui
 	var before_cohort: String = cohort
 
 	if config_data.has("cohort"):

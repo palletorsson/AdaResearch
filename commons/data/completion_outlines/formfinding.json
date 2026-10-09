@@ -1,0 +1,40 @@
+{
+  "_meta": {
+    "sequence": "formfinding",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "FormFinding_Forge": {
+      "inherited": "From FormFinding_Annealing: Next: build a form and inspect the rule that decides whether it has settled well enough.",
+      "question": "Who decides when a shape has settled well enough?",
+      "ontology": "A physical arrangement and a numerical optimizer each evolve under constraints, but a stopping rule supplies an additional judgment about what counts as success.",
+      "experiment": "Arrange the balance pieces into a raised stack and let go. Watch height and stability progress, then try another arrangement. At the optimizer watch the moving point, its trail and energy readout as it repeatedly takes local downhill steps.",
+      "observe": "A low fallen heap can be still without passing the balance task: the height condition also matters. The optimizer’s point follows a path down its authored surface; when its gradient becomes small it eventually restarts from another position.",
+      "limit": "A detector’s successful stack is not the only useful or beautiful stable arrangement. A small gradient does not establish that a point is the best possible minimum. The two demonstrations share constrained settling but they are not identical physical processes.",
+      "variation": "Build a low arrangement that feels stable and useful yet fails the height criterion, then say precisely which value the detector refuses to recognize. A configurable goal could compare different notions of success; this would be a proposed interface change.",
+      "handoff": "The next sequence begins with oscillation. A form can persist through returning motion as well as through rest; settling is only one way for a system to continue.",
+      "candidate_artifacts": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "sources": [
+        "commons/maps/FormFinding_Forge/final.md",
+        "commons/maps/FormFinding_Forge/map_data.json",
+        "commons/artifacts/registry/furniture.json",
+        "commons/primitives/balance/balance_puzzle.tscn",
+        "commons/primitives/balance/balance_puzzle.gd",
+        "commons/artifacts/registry/soft_bodies.json",
+        "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.tscn",
+        "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd",
+        "commons/artifacts/self_shaping_forge/self_shaping_forge.gd"
+      ],
+      "open_questions": [
+        "The selected balance and descent examples work in source, but the forge's advertised QFEP progress is an animation. Give the forge a computed quantity and expose how its controls affect it before expanding the core.",
+        "Central development gap: self_shaping_forge interpolates a random cloud toward a pre-authored head/torso/limb target using sinusoidal q; its MAX Q meter is animation progress, not measured optimization. Keep that object secondary until it computes what it claims. Balance height bounds ignore some scale/rotation effects, so do not promise a metrically exact height measurement.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

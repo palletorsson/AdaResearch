@@ -11,7 +11,7 @@ signal resonance_updated(current_amplitude: float)
 
 # Sound properties
 @export var frequency: float = 440.0  # Frequency in Hz (musical note)
-@export var decay_time: float = 3.0  # How long the sound lasts in seconds
+@export var decay_time: float = 3.0  # Exponential time constant; stored duration is 2.5 times this
 @export var max_amplitude: float = 0.5  # Maximum volume when hit hard
 
 # Visual properties
@@ -33,7 +33,8 @@ var hit_velocity: float = 0.0
 # Audio
 var audio_player: AudioStreamPlayer3D
 const SAMPLE_RATE = 44100
-const SOUND_DURATION = 5.0  # Generate 5 seconds of sound
+const SOUND_DURATION = 5.0  # Legacy constant; current buffer duration comes from _sound_seconds()
+const FADE_S = 0.1          # the last tenth of a second eases out: no click at the buffer's end
 
 func _ready() -> void:
 	_setup_visual()
@@ -41,6 +42,24 @@ func _ready() -> void:
 
 	# Connect to collision signal
 	body_entered.connect(_on_body_hit)
+	# THE STRIKE ZONE (2026-09-11). The rigid contact above reported nothing for a striker
+	# held in a hand: XR Tools freezes the held pickable (kinematic) and moves it by its
+	# transform, and no contact pair reached this body's monitor in the museum probes even
+	# with the pick-up layer in the mask. An Area3D over the bar sees any body that enters
+	# it, whatever its type or motion, and hands it to the same handler. The rigid path
+	# stays for a thrown or dropped striker.
+	var zone := Area3D.new()
+	zone.name = "StrikeZone"
+	zone.collision_layer = 0
+	zone.collision_mask = 0x7FFFFFFF
+	zone.monitoring = true
+	var zs := CollisionShape3D.new()
+	var zb := BoxShape3D.new()
+	zb.size = bar_size + Vector3(0.0, 0.06, 0.0)   # no wider than the bar: one tip, one bar
+	zs.shape = zb
+	zone.add_child(zs)
+	add_child(zone)
+	zone.body_entered.connect(_on_zone_body_entered)
 
 	print("ResonatingBar: Ready at %.0f Hz" % frequency)
 
@@ -92,18 +111,27 @@ func _setup_audio() -> void:
 	# Pre-generate the resonating sound
 	_generate_resonance_sound()
 
+## THE NOTE ENDS WITH THE SOUND (2026-09-11). The shipped buffer was 5 s under a decay of
+## 3 s: the sound was cut at 19 % of its level — a click — while the glow and the "resonating"
+## state ran on to 0.1 % of level, eighteen seconds after the strike. The buffer is now
+## 2.5 decays long (8 % of level), eased out over its last tenth of a second, and _process
+## ends the resonance when the player stops, so what is seen fades with what is heard.
+func _sound_seconds() -> float:
+	return maxf(1.0, decay_time * 2.5)
+
 func _generate_resonance_sound() -> void:
 	"""Generate a long resonating sine wave with decay"""
-	var sample_count = int(SAMPLE_RATE * SOUND_DURATION)
+	var seconds: float = _sound_seconds()
+	var sample_count = int(SAMPLE_RATE * seconds)
 	var data = PackedByteArray()
 
 	for i in range(sample_count):
 		var t = float(i) / SAMPLE_RATE
-		var progress = t / SOUND_DURATION
 
-		# Exponential decay envelope
-		var decay_factor = decay_time / SOUND_DURATION
-		var envelope = exp(-progress / decay_factor)
+		# Exponential decay envelope: exp(-t / decay_time), as before
+		var envelope = exp(-t / decay_time)
+		if t > seconds - FADE_S:
+			envelope *= (seconds - t) / FADE_S
 
 		# Pure sine wave at the resonant frequency
 		var wave = sin(2.0 * PI * frequency * t)
@@ -125,9 +153,29 @@ func _generate_resonance_sound() -> void:
 
 	audio_player.stream = stream
 
+## A strike seen by the zone goes to the same handler.
+func _on_zone_body_entered(body: Node) -> void:
+	_on_body_hit(body)
+
+## One strike, one note: the zone and the rigid contact can both report the same instant,
+## and no hand strikes twice inside 60 ms.
+var _last_hit_msec: int = -100000
 func _on_body_hit(body: Node) -> void:
-	# Check if hit by the stick or player hand
-	var is_stick = body.name.contains("Stick") or body.name.contains("stick") or body.is_in_group("stick")
+	var now_msec: int = Time.get_ticks_msec()
+	if now_msec - _last_hit_msec < 60:
+		return
+	_last_hit_msec = now_msec
+	# THE STRIKING TIP IS NOT THE STICK (2026-09-11). grab_long_stick.tscn's root collider
+	# is a 17 cm handle box 0.61 m from its origin — the part in the hand — and the part that
+	# meets a bar is a StaticBody3D under Blade/Top/TrackBall, named "StaticBody3D": this
+	# handler rejected it by name, so a held strike never rang a bar in any placement. A
+	# body counts as the striker if it or any ancestor is in the "stick" group.
+	var striker: Node = body
+	while striker != null and not striker.is_in_group("stick"):
+		striker = striker.get_parent()
+	if striker != null and bool(striker.get_meta("returning", false)):
+		return   # the striker on its way back to its cradle is not a strike
+	var is_stick = striker != null or body.name.contains("Stick") or body.name.contains("stick")
 	var is_hand = body.name.contains("Hand") or body.is_in_group("player_hand")
 
 	if is_stick or is_hand:
@@ -139,6 +187,12 @@ func _on_body_hit(body: Node) -> void:
 			velocity_magnitude = max(velocity_magnitude, body.linear_velocity.length())
 		elif body.has_method("get_linear_velocity"):
 			velocity_magnitude = max(velocity_magnitude, body.get_linear_velocity().length())
+		# a held (frozen) striker has no linear_velocity; its owner measures its speed per
+		# physics frame and hands it over as meta on the striker's root
+		# (ResonatingMetallophone._physics_process)
+		var speed_carrier: Node = striker if striker != null else body
+		if speed_carrier.has_meta("speed"):
+			velocity_magnitude = max(velocity_magnitude, float(speed_carrier.get_meta("speed")))
 
 		hit_velocity = clamp(velocity_magnitude * 2.0, 0.1, 1.0)
 
@@ -181,8 +235,8 @@ func _process(delta: float) -> void:
 		# Emit update signal
 		resonance_updated.emit(current_amplitude)
 
-		# Stop resonating when amplitude is very low
-		if current_amplitude < 0.001:
+		# Stop resonating when amplitude is very low — or when the sound has ended
+		if current_amplitude < 0.001 or (audio_player != null and not audio_player.playing):
 			is_resonating = false
 			current_amplitude = 0.0
 			if material:
@@ -195,6 +249,28 @@ func get_current_wave_contribution(time: float) -> float:
 
 	# Sine wave at frequency with current amplitude
 	return sin(2.0 * PI * frequency * time) * current_amplitude
+
+## A window of the generated mono PCM near this bar's own playback position.
+## Includes the player's gain and the buffer's final fade, before spatial/bus/device
+## processing. This is source evidence, not a microphone measurement at the ear.
+func get_audio_window(seconds: float, points: int) -> Dictionary:
+	var count: int = clampi(points, 2, 1024)
+	var samples := PackedFloat32Array()
+	samples.resize(count)
+	var age: float = 0.0
+	var gain: float = 0.0
+	if is_resonating and audio_player != null and audio_player.playing:
+		age = maxf(0.0, audio_player.get_playback_position())
+		gain = db_to_linear(audio_player.volume_db)
+		var stream := audio_player.stream as AudioStreamWAV
+		if stream != null:
+			var pcm: PackedByteArray = stream.data
+			for i in count:
+				var t: float = age + float(i) * seconds / float(count - 1)
+				var frame: int = int(t * SAMPLE_RATE)
+				if frame >= 0 and frame * 2 + 1 < pcm.size():
+					samples[i] = float(pcm.decode_s16(frame * 2)) / 32768.0 * gain
+	return {"frequency": frequency, "age": age, "gain": gain, "samples": samples}
 
 # Public API
 func force_stop() -> void:

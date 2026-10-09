@@ -28,7 +28,7 @@ script = ExtResource("1_oqxi0")
 [node name="DetectionArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.496961, 0)
 collision_layer = 0
-collision_mask = 524288
+collision_mask = 524289
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00012207, 0.990516, -0.00292969)

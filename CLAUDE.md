@@ -262,6 +262,11 @@ The Ada Encyclopedia (`ada_encyclopedia/`) is a Next.js web app providing visual
 - `POST /api/game/simulate` — AI pathfinding simulation
 - `GET /api/maps?name=<Name>` — Map data retrieval
 - `GET /api/artifacts` — Artifact registry
+- `GET /api/spine-roles?format=markdown` — **The arrangement.** What each artifact is to its map
+  (primary / secondary / decoration), the named boxes, the order Palle put them in, and the free-prose
+  relation notes between them. `?seq=<id>` for one arc, `?map=<Name>` for one hall, `&role=primary`
+  to narrow. Drop `format` for JSON. This is the half a writer cannot read off the floor — open it
+  before writing a room's final.md. CLI twin: `python tools/artifact_roles.py --brief [--map X]`.
 - `GET /api/find?q=<query>&format=markdown` — **Agent search**: one call over every page/API URL (Slash Map) + full-text content (algorithms/artifacts/sequences/maps/shaders). The server-side twin of the nav search bar. `kind=all|routes|pages|api|content`, `limit=N`. Curl this to locate anything fast.
 
 ## Desktop ↔ AI Feedback Bridge

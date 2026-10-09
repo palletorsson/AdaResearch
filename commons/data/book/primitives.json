@@ -1,1637 +1,1629 @@
 {
- "chapter": "primitives",
- "speak": "a taxonomy that opens what it cannot hold: the trace, the endlessness of pi. on one side ignorance, on the other melancholia — underfitting, overfitting. queer melancholia: not an endless mutation, entropy forbids it; a drift, an edge drift. this is the endless museum.",
- "speak_by": "hand",
- "pearls": [
-  {
-   "pearl": "point",
-   "map": "Point_One",
-   "lines": [
+  "chapter": "primitives",
+  "speak": "a taxonomy that opens what it cannot hold: the trace, the endlessness of pi. on one side ignorance, on the other melancholia — underfitting, overfitting. queer melancholia: not an endless mutation, entropy forbids it; a drift, an edge drift. this is the endless museum.",
+  "speak_by": "hand",
+  "pearls": [
     {
-     "token": "folding_past",
-     "text": "You arrive late.\nThe prerequisites are in, stacked away behind you, and the fold keeps running whether or not you accepted the challenge. Everything here arrived late.\nYou are here now.",
-     "by": "hand",
-     "place": "foyer",
-     "lock": [
-      2,
-      0
-     ],
-     "rotation": 1,
-     "placed_by": "grid"
+      "pearl": "point zero",
+      "map": "Point_Zero",
+      "lines": [
+        {
+          "token": "folding_past",
+          "text": "You arrive late.\nThe prerequisites are in, stacked away behind you, and the fold keeps running whether or not you accepted the challenge. Everything here arrived late.\nYou are here now.",
+          "by": "hand",
+          "place": "foyer",
+          "lock": [
+            2,
+            0
+          ],
+          "rotation": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "frame_counter_display",
+          "text": "The internal clock is running, The frame counter updates with the cycle.",
+          "by": "hand",
+          "place": "foyer",
+          "lock": [
+            7,
+            4
+          ],
+          "rotation": 90
+        },
+        {
+          "token": "origin",
+          "text": "Point zero.\nA chosen place to count from.",
+          "by": "hand",
+          "place": "foyer",
+          "lock": [
+            0,
+            0
+          ],
+          "placed_by": "grid",
+          "claimed": true,
+          "note": "A corner, not a cell. Four cells meet here and none of them contains it, which is why nothing could be centred on the origin until the basin was made even: an odd one has a middle cell, and a corner is not a cell. Three of its four quadrants lie in coordinates no map row can name — the building can stand there, the language cannot. So it was not placed but excavated, two metres down under glass, and became visible by subtraction. While it was being dug, five systems walked into it: a bench, a column, a cornice, a joint, a lit strip. To each of them this was cell (0,0), ordinary floor. It is only the origin because someone says so.",
+          "note_by": "claude",
+          "note_on": "2026-08-28"
+        },
+        {
+          "token": "you_are_here",
+          "text": "You are here",
+          "by": "hand",
+          "lock": [
+            5,
+            6
+          ],
+          "rotation": 180
+        }
+      ],
+      "ordered": true,
+      "hero": "frame_counter_display"
     },
     {
-     "token": "frame_counter_display",
-     "text": "The internal clock is running, The frame counter updates with the cycle.",
-     "by": "hand",
-     "place": "foyer",
-     "lock": [
-      1,
-      14
-     ],
-     "rotation": 90
+      "pearl": "point",
+      "map": "Point_One",
+      "lines": [
+        {
+          "token": "point_absent",
+          "text": "Point one.",
+          "by": "hand",
+          "placed_by": "grid"
+        },
+        {
+          "token": "point_visible",
+          "text": "Point one.",
+          "by": "hand",
+          "placed_by": "grid"
+        },
+        {
+          "token": "point_solid",
+          "text": "Point one.",
+          "by": "hand",
+          "placed_by": "grid"
+        },
+        {
+          "token": "point_sun_switch",
+          "text": "First there was light. Turn the switch.",
+          "by": "author-directed",
+          "placed_by": "grid"
+        },
+        {
+          "token": "point_pedestal",
+          "text": "Point one.",
+          "by": "hand",
+          "placed_by": "grid"
+        }
+      ],
+      "rooms": 2,
+      "ordered": true,
+      "hero": "point_solid"
     },
     {
-     "token": "origin",
-     "text": "Mark the origin.\nIt is a convention, not a point: the reference every other point is measured from. Zero is already surrounded, so you have somewhere to stand.\nNo turning back.\n\nvar origin := Vector3.ZERO",
-     "by": "hand",
-     "place": "foyer",
-     "lock": [
-      0,
-      0
-     ],
-     "placed_by": "grid",
-     "claimed": true,
-     "note": "A corner, not a cell. Four cells meet here and none of them contains it, which is why nothing could be centred on the origin until the basin was made even: an odd one has a middle cell, and a corner is not a cell. Three of its four quadrants lie in coordinates no map row can name — the building can stand there, the language cannot. So it was not placed but excavated, two metres down under glass, and became visible by subtraction. While it was being dug, five systems walked into it: a bench, a column, a cornice, a joint, a lit strip. To each of them this was cell (0,0), ordinary floor. It is only the origin because someone says so.",
-     "note_by": "claude",
-     "note_on": "2026-08-28"
+      "pearl": "coordinates",
+      "map": "Point_Coordinates",
+      "lines": [
+        {
+          "token": "point_held",
+          "text": "Point one.",
+          "by": "hand",
+          "placed_by": "grid"
+        },
+        {
+          "token": "interactive_point_origin",
+          "text": "Point one.",
+          "by": "hand",
+          "support_m": 0.95,
+          "note": "Three floats. One position. No extent."
+        },
+        {
+          "token": "science_screen",
+          "text": "the map is not the territory — move the point, watch its shadow",
+          "by": "claude",
+          "config": {
+            "support": "stand",
+            "scan_radius": 8
+          }
+        },
+        {
+          "token": "CoordinateSystem3M",
+          "text": "Declare the three axes.\nRed, green, blue. They are unit vectors — they name directions, not places.\nNothing is here yet, and you are already in it.\n\nconst AXIS_X := Vector3(1, 0, 0)",
+          "by": "hand",
+          "config": {
+            "adopt_external_point": 1,
+            "external_point_id": "point_one_main",
+            "floating_point": 0
+          },
+          "scale": 0.8,
+          "note": "A point is that which has no part; its place is entirely borrowed from a coordinate system that is not itself a point. For later in color we must give ths more queer colors.",
+          "note_src": {
+            "file": "commons/maps/Point_Coordinates/final.md",
+            "quote": "A coordinate needs its reference."
+          }
+        },
+        {
+          "token": "fontana_puncture",
+          "text": "the one point, pierced",
+          "by": "claude"
+        },
+        {
+          "token": "floating_sphere_field",
+          "gap": 1,
+          "text": "floating spheres all around me",
+          "by": "hand",
+          "placed_by": "grid"
+        },
+        {
+          "token": "grab_sphere_point_snap",
+          "text": "A point you can take; it snaps.",
+          "by": "claude"
+        },
+        {
+          "token": "interactive_point_origin_force",
+          "text": "Grab the ball.\n“Show me what you can do with those hands” — but the hands are no different from the ball. Both are code. What sits between them is you.\nOne step at a time was the promise. We are already Alice.\n\npickable.picked_up.connect(_on_picked_up)",
+          "by": "hand",
+          "config": {
+            "mode": "transformation"
+          },
+          "count": 3,
+          "spread": "square",
+          "gap_cells": 1,
+          "placed_by": "grid",
+          "note": "The coordinates change as the point moves. The point's identity does not."
+        },
+        {
+          "token": "lab_room",
+          "by": "grid",
+          "config": {
+            "mounted_lab_json": "res://commons/labs/point_one.lab.json"
+          }
+        },
+        {
+          "text": "queer melancholia, rythm and melancolia",
+          "by": "hand"
+        }
+      ],
+      "rooms": 2,
+      "ordered": true,
+      "hero": "CoordinateSystem3M"
     },
     {
-     "token": "you_are_here",
-     "text": "You are here",
-     "by": "hand",
-     "lock": [
-      7,
-      4
-     ],
-     "rotation": 180
+      "pearl": "lines",
+      "map": "Point_Lines",
+      "lines": [
+        {
+          "token": "do_not_cross_barrier",
+          "text": "Do not cross this line ...",
+          "by": "hand",
+          "lock": [
+            7,
+            11
+          ],
+          "rotation": 90
+        },
+        {
+          "token": "klee_walking_point",
+          "text": "A line is a point that went for a walk.",
+          "by": "claude",
+          "lock": [
+            2,
+            24
+          ],
+          "placed_by": "grid",
+          "note": "A line cannot be drawn without two points it did not make, and the instant it measures them it becomes the instrument that makes space addressable.",
+          "note_src": {
+            "file": "commons/maps/Point_Lines/critical.md",
+            "quote": "The grid transforms space from lived experience into **administrative territory**."
+          }
+        },
+        {
+          "token": "dgrid",
+          "text": "grid lines",
+          "by": "hand",
+          "lock": [
+            6,
+            26
+          ],
+          "rotation": 90,
+          "config": {
+            "config": "5:5"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "walk_this_line_marking",
+          "text": "Walk this line.",
+          "by": "claude",
+          "lock": [
+            3,
+            6
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "line",
+          "text": "two points is a line — it measures",
+          "by": "hand",
+          "lock": [
+            7,
+            16
+          ]
+        },
+        {
+          "token": "perspective_lines",
+          "text": "perspective line",
+          "by": "hand",
+          "lock": [
+            1,
+            23
+          ],
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 4,
+          "placed_by": "grid"
+        },
+        {
+          "token": "parallel_line_puzzle",
+          "text": "parallel line",
+          "by": "hand",
+          "lock": [
+            4,
+            10
+          ],
+          "config": {
+            "fillhole": "remove"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "laser_sword",
+          "text": "laser,",
+          "by": "hand",
+          "footprint": [
+            1,
+            1
+          ],
+          "reach": {
+            "axis": "z",
+            "length": 6
+          },
+          "lock": [
+            6,
+            20
+          ]
+        },
+        {
+          "token": "laser_measure",
+          "text": "laser,",
+          "by": "hand",
+          "footprint": [
+            1,
+            1
+          ],
+          "reach": {
+            "axis": "z",
+            "length": 9
+          },
+          "count": 3,
+          "spread": "row",
+          "gap_cells": 3,
+          "lock": [
+            1,
+            19
+          ],
+          "offset": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "token": "laser_exploding_sphere",
+          "text": "laser.",
+          "by": "hand",
+          "footprint": [
+            1,
+            1
+          ],
+          "count": 3,
+          "spread": "row",
+          "gap_cells": 3,
+          "lock": [
+            1,
+            25
+          ]
+        },
+        {
+          "token": "grabbable_line",
+          "text": "VR hands — the line in the hand",
+          "by": "claude",
+          "lock": [
+            2,
+            15
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "line_builder_3d",
+          "text": "here it forms a vector in 3d space",
+          "by": "claude",
+          "lock": [
+            5,
+            4
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "lightrod",
+          "text": "A row of light rods is a punctuation mark for space",
+          "by": "draft",
+          "lock": [
+            1,
+            19
+          ],
+          "rotation": 90,
+          "config": {
+            "config": "4"
+          },
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 4,
+          "placed_by": "grid"
+        },
+        {
+          "token": "scale_lines",
+          "text": "every measurement is relative — scale only makes sense from a chosen reference",
+          "by": "draft",
+          "footprint": [
+            1,
+            1
+          ],
+          "reach": {
+            "axis": "z",
+            "length": 24
+          },
+          "lock": [
+            3,
+            23
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "science_screen",
+          "text": "the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside",
+          "by": "draft",
+          "lock": [
+            5,
+            24
+          ],
+          "config": {
+            "support": "stand",
+            "scan_radius": 8
+          }
+        },
+        {
+          "token": "cube_scene",
+          "text": "a unit that has never been divided is not proven indivisible",
+          "by": "draft",
+          "lock": [
+            2,
+            11
+          ],
+          "config": {
+            "group": "plusfillhole"
+          },
+          "count": 5,
+          "spread": "square",
+          "gap_cells": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "dark_sphere",
+          "text": "some things in a space exist not to be used but to be sensed",
+          "by": "draft",
+          "lock": [
+            0,
+            0
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "plus_line_puzzle",
+          "text": "perpendicularity is defined by the dot product equaling zero",
+          "by": "draft",
+          "lock": [
+            2,
+            10
+          ],
+          "config": {
+            "plusfillhole": "remove"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "modulor_man_demo",
+          "text": "a standard human is not a fact about humans. It is a decision about which ones the building will …",
+          "by": "draft",
+          "lock": [
+            1,
+            4
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "lab_room",
+          "by": "grid",
+          "lock": [
+            1,
+            0
+          ],
+          "config": {
+            "mounted_lab_json": "res://commons/labs/point_line.lab.json"
+          }
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            3,
+            13
+          ],
+          "config": {
+            "bounds": "4,3,14"
+          }
+        },
+        {
+          "token": "fontana_puncture",
+          "by": "grid",
+          "lock": [
+            1,
+            21
+          ]
+        },
+        {
+          "token": "synthesis_stand",
+          "by": "grid",
+          "lock": [
+            4,
+            23
+          ],
+          "config": {
+            "subject": "dark_sphere#mode:hero"
+          }
+        },
+        {
+          "token": "line_relations_gallery",
+          "text": "A body for the line. Four views, then follow the line into the wall.",
+          "by": "author-directed",
+          "role": "primary"
+        }
+      ],
+      "rooms": 6,
+      "join": true,
+      "ordered": true,
+      "hero": "klee_walking_point"
     },
     {
-     "token": "interactive_point_origin",
-     "text": "Point zero, now an object in the exhibition.\nThe sphere is rendering help. The point is the Vector3 that was passed in.\n\npoint.mesh = SphereMesh.new()",
-     "by": "hand",
-     "support_m": 0.95,
-     "lock": [
-      7,
-      6
-     ],
-     "note": "Three floats. One position. No extent."
+      "pearl": "trace",
+      "map": "Point_Trace",
+      "lines": [
+        {
+          "token": "mystic_writing_pad",
+          "text": "there is no origin of a trace",
+          "by": "hand",
+          "lock": [
+            4,
+            5
+          ],
+          "rotation": 180,
+          "placed_by": "grid",
+          "note": "The trace is everything the line throws away — duration, hesitation, texture — and it is jagged because a resolution is always already there; it has no origin, only a sampling rate.",
+          "note_src": {
+            "file": "commons/maps/Point_Trace/critical.md",
+            "quote": "the **entire lived experience of movement** - is discarded as irrelevant"
+          }
+        },
+        {
+          "token": "draw_dot",
+          "text": "all life is encoded — that is enough",
+          "by": "hand",
+          "lock": [
+            3,
+            8
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "lab_room",
+          "by": "grid",
+          "lock": [
+            0,
+            0
+          ],
+          "config": {
+            "mounted_lab_json": "res://commons/labs/trace.lab.json"
+          }
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            3,
+            7
+          ],
+          "config": {
+            "bounds": "4,3,10"
+          }
+        },
+        {
+          "token": "science_screen",
+          "by": "grid",
+          "lock": [
+            2,
+            12
+          ],
+          "rotation": 180
+        }
+      ],
+      "hero": "mystic_writing_pad",
+      "ordered": true,
+      "join": true
     },
     {
-     "token": "science_screen",
-     "text": "the map is not the territory — move the point, watch its shadow",
-     "by": "claude",
-     "lock": [
-      9,
-      6
-     ],
-     "config": {
-      "support": "stand",
-      "scan_radius": 8
-     }
+      "pearl": "line grid",
+      "map": "Point_Line_Grid",
+      "lines": [
+        {
+          "token": "room_grammar",
+          "text": "space filling",
+          "by": "hand",
+          "lock": [
+            7,
+            13
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "player_trace",
+          "text": "the trace, gridded",
+          "by": "claude",
+          "lock": [
+            0,
+            0
+          ],
+          "placed_by": "grid",
+          "note": "The grid arrives promising neutrality and already owning the ground: every cell is an address, and an address is a claim.",
+          "note_src": {
+            "file": "commons/maps/Point_Line_Grid/critical.md",
+            "quote": "**Cadastre**: From Latin *capitastrum* - a register for the poll tax."
+          }
+        },
+        {
+          "token": "grid_lines",
+          "text": "grid beauty — slave to the rhythm",
+          "by": "hand",
+          "lock": [
+            4,
+            3
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            4,
+            7
+          ],
+          "config": {
+            "bounds": "5,3,8"
+          }
+        },
+        {
+          "token": "grab_sphere_point_snap",
+          "by": "grid",
+          "lock": [
+            2,
+            8
+          ],
+          "support_m": 1
+        },
+        {
+          "token": "ConeTwistBag",
+          "by": "grid",
+          "lock": [
+            0,
+            9
+          ]
+        },
+        {
+          "token": "ConnectedTriangles",
+          "by": "grid",
+          "lock": [
+            6,
+            10
+          ]
+        }
+      ],
+      "hero": "player_trace"
     },
     {
-     "token": "CoordinateSystem3M",
-     "text": "Declare the three axes.\nRed, green, blue. They are unit vectors — they name directions, not places.\nNothing is here yet, and you are already in it.\n\nconst AXIS_X := Vector3(1, 0, 0)",
-     "by": "hand",
-     "config": {
-      "floating_point": 1
-     },
-     "lock": [
-      3,
-      3
-     ],
-     "scale": 0.8,
-     "note": "A point is that which has no part; its place is entirely borrowed from a coordinate system that is not itself a point.",
-     "note_src": {
-      "file": "commons/maps/Point_One/critical.md",
-      "quote": "Euclid's definition: \"A point is that which has no part.\""
-     }
+      "pearl": "triangle context",
+      "map": "Point_Triangle_Context",
+      "lines": [
+        {
+          "token": "catalyst_pedestal",
+          "text": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
+          "by": "hand",
+          "note": "The triangle is the smallest figure that cannot be deformed without breaking, so everything is built from it and nothing built from it can bend.",
+          "note_src": {
+            "file": "commons/maps/Point_Triangle_Context/critical.md",
+            "quote": "The triangle's rigidity is not just geometric - it's **political**."
+          }
+        },
+        {
+          "token": "parasol_triangle",
+          "text": "everything is made of triangles",
+          "by": "claude",
+          "lock": [
+            5,
+            6
+          ],
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "triangle_line_puzzle",
+          "text": "three lines, one triangle",
+          "by": "claude",
+          "lock": [
+            3,
+            7
+          ],
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "catalyst_vent",
+          "text": "the vent is not malicious -- it is the biome leaking",
+          "by": "draft",
+          "lock": [
+            0,
+            8
+          ],
+          "config": {
+            "emit_interval_s": "2.5#wave_size:3#start_delay_s:5.0#sequence:auto"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "triangleprofiles",
+          "text": "triangles, profiled",
+          "by": "claude",
+          "lock": [
+            2,
+            10
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "folded_strip",
+          "text": "the fold",
+          "by": "hand",
+          "lock": [
+            5,
+            12
+          ],
+          "rotation": 270,
+          "placed_by": "grid"
+        },
+        {
+          "token": "draw_triangle_faces",
+          "text": "faces are triangles",
+          "by": "claude",
+          "lock": [
+            1,
+            13
+          ],
+          "support_m": 1,
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "triangle",
+          "text": "everything is made of triangles",
+          "by": "hand",
+          "lock": [
+            2,
+            14
+          ],
+          "support_m": 1,
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "pythagorean_triangle_angles",
+          "text": "the triangle measures",
+          "by": "claude",
+          "lock": [
+            4,
+            14
+          ],
+          "support_m": 1,
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "quad",
+          "text": "the quad — the simplest mesh",
+          "by": "hand",
+          "lock": [
+            6,
+            15
+          ],
+          "support_m": 1,
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "interactivetriangle",
+          "text": "the triangle, in the hand",
+          "by": "claude",
+          "lock": [
+            0,
+            16
+          ],
+          "support_m": 1,
+          "rotation": 180,
+          "placed_by": "grid"
+        },
+        {
+          "token": "quad_line_puzzle",
+          "text": "four lines, one quad",
+          "by": "claude",
+          "lock": [
+            3,
+            17
+          ],
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "lab_room",
+          "by": "grid",
+          "lock": [
+            0,
+            0
+          ],
+          "config": {
+            "mounted_lab_json": "res://commons/labs/trace.lab.json"
+          }
+        },
+        {
+          "token": "catalyst_prompter_box",
+          "by": "grid",
+          "lock": [
+            2,
+            1
+          ],
+          "config": {
+            "emergence": "hatch#sequence:auto#lease_s:45"
+          }
+        },
+        {
+          "token": "dark_sphere",
+          "by": "grid",
+          "lock": [
+            0,
+            10
+          ]
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            3,
+            11
+          ],
+          "config": {
+            "bounds": "4,3,12"
+          }
+        },
+        {
+          "token": "science_screen",
+          "by": "grid",
+          "lock": [
+            0,
+            14
+          ],
+          "support_m": 1,
+          "rotation": 90
+        }
+      ],
+      "rooms": 8,
+      "hero": "catalyst_pedestal",
+      "stages": [
+        {
+          "rect": [
+            2,
+            6,
+            6,
+            4
+          ],
+          "height": 0.4,
+          "ramp": "north"
+        }
+      ],
+      "ordered": true,
+      "ramps": [
+        {
+          "cell": [
+            1,
+            7
+          ],
+          "facing": "east",
+          "rise": 0.4
+        },
+        {
+          "cell": [
+            1,
+            8
+          ],
+          "facing": "east",
+          "rise": 0.4
+        }
+      ],
+      "join": true
     },
     {
-     "token": "fontana_puncture",
-     "text": "the one point, pierced",
-     "by": "claude",
-     "lock": [
-      7,
-      8
-     ]
+      "pearl": "polythedra",
+      "map": "Primitives_Polythedra",
+      "lines": [
+        {
+          "token": "grab_trihedron",
+          "text": "three faces in the hand",
+          "by": "claude",
+          "lock": [
+            2,
+            0
+          ],
+          "rotation": 90,
+          "placed_by": "grid",
+          "note": "Five solids and the taxonomy closes; the Platonic set is complete, which is precisely why it cannot hold anything that arrives after it.",
+          "note_src": {
+            "file": "commons/maps/Primitives_Polythedra/critical.md",
+            "quote": "This is geometry without remainder."
+          }
+        },
+        {
+          "token": "path_game_controller",
+          "text": "a game is two truths and a verdict — can you still cross",
+          "by": "draft",
+          "lock": [
+            4,
+            0
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "path_watchdog",
+          "text": "a level is solvable until someone proves it isn't",
+          "by": "draft",
+          "lock": [
+            4,
+            1
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "becoming_catalyst",
+          "text": "interactive cubes — becoming",
+          "by": "claude",
+          "lock": [
+            3,
+            8
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "pyramid_edit",
+          "text": "the pyramid mesh",
+          "by": "hand",
+          "lock": [
+            2,
+            9
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "tentacle_placer",
+          "text": "the tentacle is the lab's gesture that primitives are FETCHED",
+          "by": "draft",
+          "lock": [
+            3,
+            9
+          ],
+          "config": {
+            "place_positions": "-1.5,0,0;0,0,0;1.5,0,0#sky_height:7.0#travel_speed:0.6#dwell_seconds:1.5#pyramid_size:1.0#pyramid_height:-0.5#debug_log:true"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "lab_room",
+          "by": "grid",
+          "lock": [
+            0,
+            2
+          ],
+          "config": {
+            "mounted_lab_json": "res://commons/labs/trace.lab.json"
+          }
+        },
+        {
+          "token": "cube_scene",
+          "by": "grid",
+          "lock": [
+            2,
+            8
+          ],
+          "config": {
+            "group": "fillhole"
+          }
+        },
+        {
+          "token": "interactive_point_origin_force",
+          "by": "grid",
+          "lock": [
+            4,
+            8
+          ],
+          "config": {
+            "mode": "transformation"
+          }
+        }
+      ],
+      "hero": "grab_trihedron"
     },
     {
-     "token": "floating_sphere_field",
-     "gap": 1,
-     "text": "floating spheres all around me",
-     "by": "hand",
-     "lock": [
-      5,
-      12
-     ],
-     "placed_by": "grid"
+      "pearl": "animatedcube",
+      "map": "Point_Animatedcube",
+      "lines": [
+        {
+          "token": "animatedcubebuilder",
+          "text": "the cube world, built",
+          "by": "claude",
+          "count": 4,
+          "spread": "square",
+          "note": "The cube is the first form that fills space rather than describing it, so it eats the world it was meant to measure — and until it is folded it is only a flat net.",
+          "note_src": {
+            "file": "commons/maps/Point_Animatedcube/critical.md",
+            "quote": "The cube is the first geometry that occupies volume."
+          }
+        },
+        {
+          "token": "polyhedron_nets_cube",
+          "text": "the fold — a cube is a net",
+          "by": "claude",
+          "lock": [
+            3,
+            10
+          ],
+          "support_m": 1,
+          "config": {
+            "loop_fold": "true"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "dark_sphere",
+          "by": "grid",
+          "lock": [
+            0,
+            0
+          ]
+        },
+        {
+          "token": "science_screen",
+          "by": "grid",
+          "lock": [
+            5,
+            6
+          ],
+          "rotation": 180,
+          "config": {
+            "mode": "net"
+          }
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            3,
+            7
+          ],
+          "config": {
+            "bounds": "4,3,8"
+          }
+        }
+      ],
+      "hero": "animatedcubebuilder",
+      "ordered": true,
+      "join": true
     },
     {
-     "token": "grab_sphere_point_snap",
-     "text": "A point you can take; it snaps.",
-     "by": "claude"
+      "pearl": "primitives",
+      "map": "Chamber_Primitives",
+      "lines": [
+        {
+          "token": "catalyst_target",
+          "text": "primitives — and so on",
+          "by": "claude",
+          "lock": [
+            1,
+            2
+          ],
+          "placed_by": "grid",
+          "note": "The chamber is where the taxonomy stops being looked at and starts looking back, and the boundary between the one who counts and the thing counted is the first primitive to dissolve.",
+          "note_src": {
+            "file": "commons/maps/Chamber_Primitives/intent.md",
+            "quote": "The chamber is where mathematics becomes relationship."
+          }
+        },
+        {
+          "token": "catalyst_vent",
+          "by": "grid",
+          "lock": [
+            9,
+            1
+          ],
+          "config": {
+            "emit_interval_s": "3.0#wave_size:3#start_delay_s:5.0#initial_state:foe"
+          }
+        },
+        {
+          "token": "becoming_catalyst",
+          "by": "grid",
+          "lock": [
+            7,
+            3
+          ],
+          "config": {
+            "start_mode": "primitives"
+          }
+        },
+        {
+          "token": "science_screen",
+          "by": "grid",
+          "lock": [
+            3,
+            5
+          ],
+          "rotation": 180,
+          "config": {
+            "mode": "point"
+          }
+        }
+      ],
+      "hero": "catalyst_target",
+      "join": true
     },
     {
-     "token": "interactive_point_origin_force",
-     "text": "Grab the ball.\n“Show me what you can do with those hands” — but the hands are no different from the ball. Both are code. What sits between them is you.\nOne step at a time was the promise. We are already Alice.\n\narea.add_to_group(\"grabbable\")",
-     "by": "hand",
-     "lock": [
-      1,
-      11
-     ],
-     "config": {
-      "mode": "transformation"
-     },
-     "count": 3,
-     "spread": "square",
-     "gap_cells": 1,
-     "placed_by": "grid",
-     "note": "The coordinates change as the point moves. The point's identity does not."
+      "pearl": "ignorance",
+      "map": "Primitives_Ignorance",
+      "lines": [
+        {
+          "token": "sphere",
+          "text": "the point, grown in every direction — and still not pi",
+          "by": "claude",
+          "lock": [
+            2,
+            0
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "library_rack",
+          "text": "a library is not the objects — it is the act of organizing them so they can be found",
+          "by": "draft",
+          "lock": [
+            8,
+            22
+          ],
+          "config": {
+            "collection": "primitives#layout:rack_torus.json"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "diamonds",
+          "text": "complex regular patterns emerge from simple repeated rules",
+          "by": "draft",
+          "lock": [
+            4,
+            25
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "platonic_grabbables",
+          "text": "five solids, and the taxonomy ends. the rest is ignorance",
+          "by": "claude",
+          "lock": [
+            3,
+            4
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "plus",
+          "text": "symmetry is a property of the transformation group that leaves a shape invariant",
+          "by": "draft",
+          "lock": [
+            1,
+            25
+          ],
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 6,
+          "placed_by": "grid"
+        },
+        {
+          "token": "grab_octahedron",
+          "text": "the octahedron has more symmetry than it first appears",
+          "by": "draft",
+          "lock": [
+            2,
+            17
+          ],
+          "support_m": 1,
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 4,
+          "placed_by": "grid"
+        },
+        {
+          "token": "sphere_mid",
+          "text": "resolution is a budget decision — there is no correct polygon count",
+          "by": "draft",
+          "lock": [
+            3,
+            13
+          ],
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 2,
+          "placed_by": "grid"
+        },
+        {
+          "token": "star_primitive",
+          "text": "a star is not drawn — it is a specific list of vertices and the faces that connect them",
+          "by": "draft",
+          "lock": [
+            7,
+            11
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "lshape",
+          "text": "non-convex shapes require explicit geometry at re-entrant corners",
+          "by": "draft",
+          "lock": [
+            3,
+            20
+          ],
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 2,
+          "placed_by": "grid"
+        },
+        {
+          "token": "hole_with_cones",
+          "text": "a hole is not a thing — it is held by what is around it",
+          "by": "claude",
+          "lock": [
+            1,
+            11
+          ],
+          "rotation": 30,
+          "placed_by": "grid"
+        },
+        {
+          "token": "truncatedtetrahedron",
+          "text": "a solid cut: what the taxonomy does to what it cannot hold",
+          "by": "claude",
+          "lock": [
+            7,
+            13
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "sphere_high",
+          "text": "there is no smooth sphere in real-time 3D — only denser approximations approaching one",
+          "by": "draft",
+          "lock": [
+            3,
+            11
+          ],
+          "support_m": 1,
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 2,
+          "placed_by": "grid"
+        },
+        {
+          "token": "righttriangle",
+          "text": "the right angle is the basis of all rectangular coordinate systems",
+          "by": "draft",
+          "lock": [
+            1,
+            13
+          ],
+          "support_m": 1,
+          "placed_by": "grid",
+          "note": "The sphere is the question the triangle cannot answer — how many faces — and the answer is a budget, so ignorance here is not missing knowledge but a resolution someone chose.",
+          "note_src": {
+            "file": "commons/maps/Primitives_Ignorance/critical.md",
+            "quote": "'Primitive' here names not a lowest form but a stage of unknowing."
+          }
+        },
+        {
+          "token": "sphere_low",
+          "text": "the low-poly sphere is more honest than the high-poly one",
+          "by": "draft",
+          "lock": [
+            3,
+            15
+          ],
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 2,
+          "placed_by": "grid"
+        },
+        {
+          "token": "capsule",
+          "text": "a capsule is a cylinder that had to be capped so nothing would be sharp",
+          "by": "draft",
+          "lock": [
+            7,
+            15
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "torus_radials_rings",
+          "text": "the torus is topologically distinct from the sphere",
+          "by": "draft",
+          "lock": [
+            0,
+            23
+          ],
+          "config": {
+            "config": "8:4"
+          },
+          "count": 2,
+          "spread": "x",
+          "gap_cells": 8,
+          "placed_by": "grid"
+        },
+        {
+          "token": "roughrock",
+          "text": "nature's irregularity is not random — it is deterministic noise that we lack the seed to …",
+          "by": "draft",
+          "lock": [
+            1,
+            15
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "snap_octahedron_puzzle",
+          "text": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
+          "by": "draft",
+          "lock": [
+            12,
+            25
+          ]
+        },
+        {
+          "token": "capsule_radials_rings",
+          "text": "the capsule is the physicist's preferred solid",
+          "by": "draft",
+          "lock": [
+            10,
+            25
+          ]
+        },
+        {
+          "token": "prism_block",
+          "text": "subdividing a triangle is not the same operation as subdividing a square. The",
+          "by": "draft",
+          "lock": [
+            11,
+            25
+          ]
+        },
+        {
+          "token": "dark_sphere",
+          "by": "grid",
+          "lock": [
+            0,
+            0
+          ]
+        },
+        {
+          "token": "cube_scene",
+          "by": "grid",
+          "lock": [
+            1,
+            0
+          ]
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            4,
+            13
+          ],
+          "config": {
+            "bounds": "5,3,14"
+          }
+        }
+      ],
+      "hero": "righttriangle",
+      "ordered": true
     },
     {
-     "token": "lab_room",
-     "by": "grid",
-     "lock": [
-      1,
-      0
-     ],
-     "config": {
-      "mounted_lab_json": "res://commons/labs/point_one.lab.json"
-     }
+      "pearl": "primitives godot",
+      "map": "Primitives_Godot",
+      "lines": [
+        {
+          "token": "primitive_mesh_library",
+          "text": "A mesh supplies a surface. A scene can bring its material, collision and behaviour along. Choosing a shape and choosing what it can do are different decisions.",
+          "by": "codex",
+          "lock": [
+            9,
+            8
+          ],
+          "placed_by": "grid"
+        }
+      ],
+      "hero": "primitive_mesh_library",
+      "ordered": true
     },
     {
-     "text": "queer melancholia, rythm and melancolia",
-     "by": "hand"
+      "pearl": "primitives columns",
+      "map": "Primitives_Columns",
+      "lines": [
+        {
+          "token": "resolution_colonnade_museum",
+          "text": "Five columns hold their outline and height still while their sides change. Beyond them, the family varies. A sharper count does not decide which body we want.",
+          "by": "codex",
+          "lock": [
+            13,
+            17
+          ],
+          "placed_by": "grid"
+        }
+      ],
+      "hero": "resolution_colonnade_museum",
+      "ordered": true
+    },
+    {
+      "pearl": "primitives profiles",
+      "map": "Primitives_Profiles",
+      "lines": [
+        {
+          "token": "glyph_profile_gallery",
+          "text": "A letter was made to be read. Its outline can become a body, but the hole still has its own edges. An opening is not yet a doorway.",
+          "by": "codex",
+          "lock": [
+            14,
+            18
+          ],
+          "placed_by": "grid"
+        }
+      ],
+      "hero": "glyph_profile_gallery",
+      "ordered": true
+    },
+    {
+      "pearl": "portals",
+      "map": "Primitives_Portals",
+      "lines": [
+        {
+          "token": "achilles_tortoise",
+          "text": "Achilles and the tortoise: the endlessness of pi in a footrace",
+          "by": "claude",
+          "lock": [
+            5,
+            5
+          ],
+          "placed_by": "grid",
+          "note": "The portal is the edge made walkable: you step through it and arrive at another approach, because pi does not finish and neither does the corridor.",
+          "note_src": {
+            "file": "commons/maps/Primitives_Portals/critical.md",
+            "quote": "staging continuity as asymptotic relation rather than arrival"
+          }
+        },
+        {
+          "token": "combine_portals",
+          "text": "a portal: the edge, walked through",
+          "by": "claude",
+          "lock": [
+            3,
+            4
+          ],
+          "placed_by": "grid"
+        },
+        {
+          "token": "dark_sphere",
+          "by": "grid",
+          "lock": [
+            0,
+            0
+          ]
+        },
+        {
+          "token": "capsule",
+          "by": "grid",
+          "lock": [
+            5,
+            2
+          ]
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            3,
+            17
+          ],
+          "config": {
+            "bounds": "4,3,18"
+          }
+        }
+      ],
+      "hero": "achilles_tortoise"
+    },
+    {
+      "pearl": "melencolia",
+      "map": "Primitives_Melencolia",
+      "lines": [
+        {
+          "token": "durer_scene",
+          "text": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
+          "by": "claude",
+          "lock": [
+            3,
+            0
+          ],
+          "rotation": 180,
+          "placed_by": "grid",
+          "note": "Every instrument is present and the set is finished, and still nothing is answered — melancholia is the correct response to a taxonomy that is complete and insufficient at once.",
+          "note_src": {
+            "file": "commons/maps/Primitives_Melencolia/critical.md",
+            "quote": "**technically complete** and **existentially insufficient**"
+          }
+        },
+        {
+          "token": "snap_pyramid_puzzle",
+          "text": "the pyramid, snapped — held by the grid",
+          "by": "claude",
+          "lock": [
+            2,
+            1
+          ],
+          "support_m": 1,
+          "rotation": 180,
+          "placed_by": "grid"
+        },
+        {
+          "token": "code_display",
+          "text": "A tutorial is a placement-of-words. The library holds the words",
+          "by": "draft",
+          "lock": [
+            2,
+            2
+          ],
+          "support_m": 1,
+          "rotation": 180,
+          "config": {
+            "tutorial": "melencolia_axioms"
+          },
+          "placed_by": "grid"
+        },
+        {
+          "token": "pyramid",
+          "text": "the pyramid: the triangle stood up, the first solid held",
+          "by": "claude",
+          "lock": [
+            3,
+            3
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "bigframe",
+          "text": "the frame: where the picture stops, and the trace does not",
+          "by": "claude",
+          "lock": [
+            4,
+            3
+          ],
+          "support_m": 1,
+          "rotation": 90,
+          "placed_by": "grid"
+        },
+        {
+          "token": "diamondtoruscollection",
+          "text": "a torus is a circle of circles — its symmetry group allows equal radial distribution of any …",
+          "by": "draft",
+          "lock": [
+            2,
+            4
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "pyramidlong",
+          "text": "proportion is a dimension of meaning — the same topology at different aspect ratios tells different …",
+          "by": "draft",
+          "lock": [
+            3,
+            7
+          ],
+          "support_m": 1,
+          "placed_by": "grid"
+        },
+        {
+          "token": "prism_block",
+          "by": "grid",
+          "lock": [
+            2,
+            0
+          ],
+          "rotation": 90
+        },
+        {
+          "token": "dark_sphere",
+          "by": "grid",
+          "lock": [
+            2,
+            3
+          ],
+          "support_m": 1
+        },
+        {
+          "token": "floating_sphere_field",
+          "by": "grid",
+          "lock": [
+            2,
+            7
+          ],
+          "config": {
+            "bounds": "4,3,8"
+          }
+        },
+        {
+          "token": "cube_scene",
+          "by": "grid",
+          "lock": [
+            4,
+            7
+          ]
+        }
+      ],
+      "hero": "durer_scene",
+      "join": true
     }
-   ],
-   "rooms": 5,
-   "ordered": true,
-   "hero": "CoordinateSystem3M",
-   "cells": [
-    {
-     "cell": [
-      6,
-      2
-     ],
-     "kind": "4"
-    },
-    {
-     "cell": [
-      7,
-      2
-     ],
-     "kind": "3s"
-    },
-    {
-     "cell": [
-      2,
-      14
-     ],
-     "kind": "2"
-    },
-    {
-     "cell": [
-      6,
-      18
-     ],
-     "kind": "4"
-    },
-    {
-     "cell": [
-      7,
-      18
-     ],
-     "kind": "4"
-    },
-    {
-     "cell": [
-      8,
-      18
-     ],
-     "kind": "4"
-    }
-   ],
-   "label": [
-    {
-     "token": "interactive_point_origin_force",
-     "mode": "measured"
-    },
-    {
-     "token": "origin",
-     "mode": "measured"
-    }
-   ],
-   "adopt": [
-    {
-     "page": 15,
-     "token": "origin"
-    }
-   ],
-   "hang": [
-    {
-     "page": 0,
-     "cell": [
-      7,
-      7
-     ],
-     "dir": [
-      0,
-      -1
-     ]
-    },
-    {
-     "page": 15,
-     "cell": [
-      1,
-      5
-     ],
-     "dir": [
-      0,
-      -1
-     ]
-    },
-    {
-     "page": 31,
-     "cell": [
-      1,
-      8
-     ],
-     "dir": [
-      1,
-      0
-     ]
-    }
-   ]
-  },
-  {
-   "pearl": "lines",
-   "map": "Point_Lines",
-   "lines": [
-    {
-     "token": "do_not_cross_barrier",
-     "text": "Do not cross this line ...",
-     "by": "hand",
-     "lock": [
-      7,
-      11
-     ],
-     "rotation": 90
-    },
-    {
-     "token": "klee_walking_point",
-     "text": "A line is a point that went for a walk.",
-     "by": "claude",
-     "lock": [
-      2,
-      24
-     ],
-     "placed_by": "grid",
-     "note": "A line cannot be drawn without two points it did not make, and the instant it measures them it becomes the instrument that makes space addressable.",
-     "note_src": {
-      "file": "commons/maps/Point_Lines/critical.md",
-      "quote": "The grid transforms space from lived experience into **administrative territory**."
-     }
-    },
-    {
-     "token": "dgrid",
-     "text": "grid lines",
-     "by": "hand",
-     "lock": [
-      6,
-      26
-     ],
-     "rotation": 90,
-     "config": {
-      "config": "5:5"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "walk_this_line_marking",
-     "text": "Walk this line.",
-     "by": "claude",
-     "lock": [
-      3,
-      6
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "line",
-     "text": "two points is a line — it measures",
-     "by": "hand",
-     "lock": [
-      7,
-      16
-     ]
-    },
-    {
-     "token": "perspective_lines",
-     "text": "perspective line",
-     "by": "hand",
-     "lock": [
-      1,
-      23
-     ],
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 4,
-     "placed_by": "grid"
-    },
-    {
-     "token": "parallel_line_puzzle",
-     "text": "parallel line",
-     "by": "hand",
-     "lock": [
-      4,
-      10
-     ],
-     "config": {
-      "fillhole": "remove"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "laser_sword",
-     "text": "laser,",
-     "by": "hand",
-     "footprint": [
-      1,
-      1
-     ],
-     "reach": {
-      "axis": "z",
-      "length": 6
-     },
-     "lock": [
-      6,
-      20
-     ]
-    },
-    {
-     "token": "laser_measure",
-     "text": "laser,",
-     "by": "hand",
-     "footprint": [
-      1,
-      1
-     ],
-     "reach": {
-      "axis": "z",
-      "length": 9
-     },
-     "count": 3,
-     "spread": "row",
-     "gap_cells": 3,
-     "lock": [
-      1,
-      19
-     ],
-     "offset": [
-      0,
-      1,
-      0
-     ]
-    },
-    {
-     "token": "laser_exploding_sphere",
-     "text": "laser.",
-     "by": "hand",
-     "footprint": [
-      1,
-      1
-     ],
-     "count": 3,
-     "spread": "row",
-     "gap_cells": 3,
-     "lock": [
-      1,
-      25
-     ]
-    },
-    {
-     "token": "grabbable_line",
-     "text": "VR hands — the line in the hand",
-     "by": "claude",
-     "lock": [
-      2,
-      15
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "line_builder_3d",
-     "text": "here it forms a vector in 3d space",
-     "by": "claude",
-     "lock": [
-      5,
-      4
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "lightrod",
-     "text": "A row of light rods is a punctuation mark for space",
-     "by": "draft",
-     "lock": [
-      1,
-      19
-     ],
-     "rotation": 90,
-     "config": {
-      "config": "4"
-     },
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 4,
-     "placed_by": "grid"
-    },
-    {
-     "token": "scale_lines",
-     "text": "every measurement is relative — scale only makes sense from a chosen reference",
-     "by": "draft",
-     "footprint": [
-      1,
-      1
-     ],
-     "reach": {
-      "axis": "z",
-      "length": 24
-     },
-     "lock": [
-      3,
-      23
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "science_screen",
-     "text": "the map is not the territory — science_screen shows a flattened version of the algorithm you are already inside",
-     "by": "draft",
-     "lock": [
-      5,
-      24
-     ],
-     "config": {
-      "support": "stand",
-      "scan_radius": 8
-     }
-    },
-    {
-     "token": "cube_scene",
-     "text": "a unit that has never been divided is not proven indivisible",
-     "by": "draft",
-     "lock": [
-      2,
-      11
-     ],
-     "config": {
-      "group": "plusfillhole"
-     },
-     "count": 5,
-     "spread": "square",
-     "gap_cells": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "dark_sphere",
-     "text": "some things in a space exist not to be used but to be sensed",
-     "by": "draft",
-     "lock": [
-      0,
-      0
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "plus_line_puzzle",
-     "text": "perpendicularity is defined by the dot product equaling zero",
-     "by": "draft",
-     "lock": [
-      2,
-      10
-     ],
-     "config": {
-      "plusfillhole": "remove"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "modulor_man_demo",
-     "text": "a standard human is not a fact about humans. It is a decision about which ones the building will …",
-     "by": "draft",
-     "lock": [
-      1,
-      4
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "lab_room",
-     "by": "grid",
-     "lock": [
-      1,
-      0
-     ],
-     "config": {
-      "mounted_lab_json": "res://commons/labs/point_line.lab.json"
-     }
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      3,
-      13
-     ],
-     "config": {
-      "bounds": "4,3,14"
-     }
-    },
-    {
-     "token": "fontana_puncture",
-     "by": "grid",
-     "lock": [
-      1,
-      21
-     ]
-    },
-    {
-     "token": "synthesis_stand",
-     "by": "grid",
-     "lock": [
-      4,
-      23
-     ],
-     "config": {
-      "subject": "dark_sphere#mode:hero"
-     }
-    }
-   ],
-   "rooms": 6,
-   "join": true,
-   "ordered": true,
-   "hero": "klee_walking_point"
-  },
-  {
-   "pearl": "trace",
-   "map": "Point_Trace",
-   "lines": [
-    {
-     "token": "mystic_writing_pad",
-     "text": "there is no origin of a trace",
-     "by": "hand",
-     "lock": [
-      4,
-      5
-     ],
-     "rotation": 180,
-     "placed_by": "grid",
-     "note": "The trace is everything the line throws away — duration, hesitation, texture — and it is jagged because a resolution is always already there; it has no origin, only a sampling rate.",
-     "note_src": {
-      "file": "commons/maps/Point_Trace/critical.md",
-      "quote": "the **entire lived experience of movement** - is discarded as irrelevant"
-     }
-    },
-    {
-     "token": "draw_dot",
-     "text": "all life is encoded — that is enough",
-     "by": "hand",
-     "lock": [
-      3,
-      8
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "lab_room",
-     "by": "grid",
-     "lock": [
-      0,
-      0
-     ],
-     "config": {
-      "mounted_lab_json": "res://commons/labs/trace.lab.json"
-     }
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      3,
-      7
-     ],
-     "config": {
-      "bounds": "4,3,10"
-     }
-    },
-    {
-     "token": "science_screen",
-     "by": "grid",
-     "lock": [
-      2,
-      12
-     ],
-     "rotation": 180
-    }
-   ],
-   "hero": "mystic_writing_pad",
-   "ordered": true,
-   "join": true
-  },
-  {
-   "pearl": "line grid",
-   "map": "Point_Line_Grid",
-   "lines": [
-    {
-     "token": "room_grammar",
-     "text": "space filling",
-     "by": "hand",
-     "lock": [
-      7,
-      13
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "player_trace",
-     "text": "the trace, gridded",
-     "by": "claude",
-     "lock": [
-      0,
-      0
-     ],
-     "placed_by": "grid",
-     "note": "The grid arrives promising neutrality and already owning the ground: every cell is an address, and an address is a claim.",
-     "note_src": {
-      "file": "commons/maps/Point_Line_Grid/critical.md",
-      "quote": "**Cadastre**: From Latin *capitastrum* - a register for the poll tax."
-     }
-    },
-    {
-     "token": "grid_lines",
-     "text": "grid beauty — slave to the rhythm",
-     "by": "hand",
-     "lock": [
-      4,
-      3
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      4,
-      7
-     ],
-     "config": {
-      "bounds": "5,3,8"
-     }
-    },
-    {
-     "token": "grab_sphere_point_snap",
-     "by": "grid",
-     "lock": [
-      2,
-      8
-     ],
-     "support_m": 1
-    },
-    {
-     "token": "ConeTwistBag",
-     "by": "grid",
-     "lock": [
-      0,
-      9
-     ]
-    },
-    {
-     "token": "ConnectedTriangles",
-     "by": "grid",
-     "lock": [
-      6,
-      10
-     ]
-    }
-   ],
-   "hero": "player_trace"
-  },
-  {
-   "pearl": "triangle context",
-   "map": "Point_Triangle_Context",
-   "lines": [
-    {
-     "token": "catalyst_pedestal",
-     "text": "the triangle. everything is made of triangles. the quad, the simplest mesh. the pyramid mesh.",
-     "by": "hand",
-     "note": "The triangle is the smallest figure that cannot be deformed without breaking, so everything is built from it and nothing built from it can bend.",
-     "note_src": {
-      "file": "commons/maps/Point_Triangle_Context/critical.md",
-      "quote": "The triangle's rigidity is not just geometric - it's **political**."
-     }
-    },
-    {
-     "token": "parasol_triangle",
-     "text": "everything is made of triangles",
-     "by": "claude",
-     "lock": [
-      5,
-      6
-     ],
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "triangle_line_puzzle",
-     "text": "three lines, one triangle",
-     "by": "claude",
-     "lock": [
-      3,
-      7
-     ],
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "catalyst_vent",
-     "text": "the vent is not malicious -- it is the biome leaking",
-     "by": "draft",
-     "lock": [
-      0,
-      8
-     ],
-     "config": {
-      "emit_interval_s": "2.5#wave_size:3#start_delay_s:5.0#sequence:auto"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "triangleprofiles",
-     "text": "triangles, profiled",
-     "by": "claude",
-     "lock": [
-      2,
-      10
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "folded_strip",
-     "text": "the fold",
-     "by": "hand",
-     "lock": [
-      5,
-      12
-     ],
-     "rotation": 270,
-     "placed_by": "grid"
-    },
-    {
-     "token": "draw_triangle_faces",
-     "text": "faces are triangles",
-     "by": "claude",
-     "lock": [
-      1,
-      13
-     ],
-     "support_m": 1,
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "triangle",
-     "text": "everything is made of triangles",
-     "by": "hand",
-     "lock": [
-      2,
-      14
-     ],
-     "support_m": 1,
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "pythagorean_triangle_angles",
-     "text": "the triangle measures",
-     "by": "claude",
-     "lock": [
-      4,
-      14
-     ],
-     "support_m": 1,
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "quad",
-     "text": "the quad — the simplest mesh",
-     "by": "hand",
-     "lock": [
-      6,
-      15
-     ],
-     "support_m": 1,
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "interactivetriangle",
-     "text": "the triangle, in the hand",
-     "by": "claude",
-     "lock": [
-      0,
-      16
-     ],
-     "support_m": 1,
-     "rotation": 180,
-     "placed_by": "grid"
-    },
-    {
-     "token": "quad_line_puzzle",
-     "text": "four lines, one quad",
-     "by": "claude",
-     "lock": [
-      3,
-      17
-     ],
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "lab_room",
-     "by": "grid",
-     "lock": [
-      0,
-      0
-     ],
-     "config": {
-      "mounted_lab_json": "res://commons/labs/trace.lab.json"
-     }
-    },
-    {
-     "token": "catalyst_prompter_box",
-     "by": "grid",
-     "lock": [
-      2,
-      1
-     ],
-     "config": {
-      "emergence": "hatch#sequence:auto#lease_s:45"
-     }
-    },
-    {
-     "token": "dark_sphere",
-     "by": "grid",
-     "lock": [
-      0,
-      10
-     ]
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      3,
-      11
-     ],
-     "config": {
-      "bounds": "4,3,12"
-     }
-    },
-    {
-     "token": "science_screen",
-     "by": "grid",
-     "lock": [
-      0,
-      14
-     ],
-     "support_m": 1,
-     "rotation": 90
-    }
-   ],
-   "rooms": 8,
-   "hero": "catalyst_pedestal",
-   "stages": [
-    {
-     "rect": [
-      2,
-      6,
-      6,
-      4
-     ],
-     "height": 0.4,
-     "ramp": "north"
-    }
-   ],
-   "ordered": true,
-   "ramps": [
-    {
-     "cell": [
-      1,
-      7
-     ],
-     "facing": "east",
-     "rise": 0.4
-    },
-    {
-     "cell": [
-      1,
-      8
-     ],
-     "facing": "east",
-     "rise": 0.4
-    }
-   ],
-   "join": true
-  },
-  {
-   "pearl": "polythedra",
-   "map": "Primitives_Polythedra",
-   "lines": [
-    {
-     "token": "grab_trihedron",
-     "text": "three faces in the hand",
-     "by": "claude",
-     "lock": [
-      2,
-      0
-     ],
-     "rotation": 90,
-     "placed_by": "grid",
-     "note": "Five solids and the taxonomy closes; the Platonic set is complete, which is precisely why it cannot hold anything that arrives after it.",
-     "note_src": {
-      "file": "commons/maps/Primitives_Polythedra/critical.md",
-      "quote": "This is geometry without remainder."
-     }
-    },
-    {
-     "token": "path_game_controller",
-     "text": "a game is two truths and a verdict — can you still cross",
-     "by": "draft",
-     "lock": [
-      4,
-      0
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "path_watchdog",
-     "text": "a level is solvable until someone proves it isn't",
-     "by": "draft",
-     "lock": [
-      4,
-      1
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "becoming_catalyst",
-     "text": "interactive cubes — becoming",
-     "by": "claude",
-     "lock": [
-      3,
-      8
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "pyramid_edit",
-     "text": "the pyramid mesh",
-     "by": "hand",
-     "lock": [
-      2,
-      9
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "tentacle_placer",
-     "text": "the tentacle is the lab's gesture that primitives are FETCHED",
-     "by": "draft",
-     "lock": [
-      3,
-      9
-     ],
-     "config": {
-      "place_positions": "-1.5,0,0;0,0,0;1.5,0,0#sky_height:7.0#travel_speed:0.6#dwell_seconds:1.5#pyramid_size:1.0#pyramid_height:-0.5#debug_log:true"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "lab_room",
-     "by": "grid",
-     "lock": [
-      0,
-      2
-     ],
-     "config": {
-      "mounted_lab_json": "res://commons/labs/trace.lab.json"
-     }
-    },
-    {
-     "token": "cube_scene",
-     "by": "grid",
-     "lock": [
-      2,
-      8
-     ],
-     "config": {
-      "group": "fillhole"
-     }
-    },
-    {
-     "token": "interactive_point_origin_force",
-     "by": "grid",
-     "lock": [
-      4,
-      8
-     ],
-     "config": {
-      "mode": "transformation"
-     }
-    }
-   ],
-   "hero": "grab_trihedron"
-  },
-  {
-   "pearl": "animatedcube",
-   "map": "Point_Animatedcube",
-   "lines": [
-    {
-     "token": "animatedcubebuilder",
-     "text": "the cube world, built",
-     "by": "claude",
-     "count": 4,
-     "spread": "square",
-     "note": "The cube is the first form that fills space rather than describing it, so it eats the world it was meant to measure — and until it is folded it is only a flat net.",
-     "note_src": {
-      "file": "commons/maps/Point_Animatedcube/critical.md",
-      "quote": "The cube is the first geometry that occupies volume."
-     }
-    },
-    {
-     "token": "polyhedron_nets_cube",
-     "text": "the fold — a cube is a net",
-     "by": "claude",
-     "lock": [
-      3,
-      10
-     ],
-     "support_m": 1,
-     "config": {
-      "loop_fold": "true"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "dark_sphere",
-     "by": "grid",
-     "lock": [
-      0,
-      0
-     ]
-    },
-    {
-     "token": "science_screen",
-     "by": "grid",
-     "lock": [
-      5,
-      6
-     ],
-     "rotation": 180,
-     "config": {
-      "mode": "net"
-     }
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      3,
-      7
-     ],
-     "config": {
-      "bounds": "4,3,8"
-     }
-    }
-   ],
-   "hero": "animatedcubebuilder",
-   "ordered": true,
-   "join": true
-  },
-  {
-   "pearl": "primitives",
-   "map": "Chamber_Primitives",
-   "lines": [
-    {
-     "token": "catalyst_target",
-     "text": "primitives — and so on",
-     "by": "claude",
-     "lock": [
-      1,
-      2
-     ],
-     "placed_by": "grid",
-     "note": "The chamber is where the taxonomy stops being looked at and starts looking back, and the boundary between the one who counts and the thing counted is the first primitive to dissolve.",
-     "note_src": {
-      "file": "commons/maps/Chamber_Primitives/intent.md",
-      "quote": "The chamber is where mathematics becomes relationship."
-     }
-    },
-    {
-     "token": "catalyst_vent",
-     "by": "grid",
-     "lock": [
-      9,
-      1
-     ],
-     "config": {
-      "emit_interval_s": "3.0#wave_size:3#start_delay_s:5.0#initial_state:foe"
-     }
-    },
-    {
-     "token": "becoming_catalyst",
-     "by": "grid",
-     "lock": [
-      7,
-      3
-     ],
-     "config": {
-      "start_mode": "primitives"
-     }
-    },
-    {
-     "token": "science_screen",
-     "by": "grid",
-     "lock": [
-      3,
-      5
-     ],
-     "rotation": 180,
-     "config": {
-      "mode": "point"
-     }
-    }
-   ],
-   "hero": "catalyst_target",
-   "join": true
-  },
-  {
-   "pearl": "ignorance",
-   "map": "Primitives_Ignorance",
-   "lines": [
-    {
-     "token": "sphere",
-     "text": "the point, grown in every direction — and still not pi",
-     "by": "claude",
-     "lock": [
-      2,
-      0
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "library_rack",
-     "text": "a library is not the objects — it is the act of organizing them so they can be found",
-     "by": "draft",
-     "lock": [
-      8,
-      22
-     ],
-     "config": {
-      "collection": "primitives#layout:rack_torus.json"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "diamonds",
-     "text": "complex regular patterns emerge from simple repeated rules",
-     "by": "draft",
-     "lock": [
-      4,
-      25
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "platonic_grabbables",
-     "text": "five solids, and the taxonomy ends. the rest is ignorance",
-     "by": "claude",
-     "lock": [
-      3,
-      4
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "plus",
-     "text": "symmetry is a property of the transformation group that leaves a shape invariant",
-     "by": "draft",
-     "lock": [
-      1,
-      25
-     ],
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 6,
-     "placed_by": "grid"
-    },
-    {
-     "token": "grab_octahedron",
-     "text": "the octahedron has more symmetry than it first appears",
-     "by": "draft",
-     "lock": [
-      2,
-      17
-     ],
-     "support_m": 1,
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 4,
-     "placed_by": "grid"
-    },
-    {
-     "token": "sphere_mid",
-     "text": "resolution is a budget decision — there is no correct polygon count",
-     "by": "draft",
-     "lock": [
-      3,
-      13
-     ],
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 2,
-     "placed_by": "grid"
-    },
-    {
-     "token": "star_primitive",
-     "text": "a star is not drawn — it is a specific list of vertices and the faces that connect them",
-     "by": "draft",
-     "lock": [
-      7,
-      11
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "lshape",
-     "text": "non-convex shapes require explicit geometry at re-entrant corners",
-     "by": "draft",
-     "lock": [
-      3,
-      20
-     ],
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 2,
-     "placed_by": "grid"
-    },
-    {
-     "token": "hole_with_cones",
-     "text": "a hole is not a thing — it is held by what is around it",
-     "by": "claude",
-     "lock": [
-      1,
-      11
-     ],
-     "rotation": 30,
-     "placed_by": "grid"
-    },
-    {
-     "token": "truncatedtetrahedron",
-     "text": "a solid cut: what the taxonomy does to what it cannot hold",
-     "by": "claude",
-     "lock": [
-      7,
-      13
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "sphere_high",
-     "text": "there is no smooth sphere in real-time 3D — only denser approximations approaching one",
-     "by": "draft",
-     "lock": [
-      3,
-      11
-     ],
-     "support_m": 1,
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 2,
-     "placed_by": "grid"
-    },
-    {
-     "token": "righttriangle",
-     "text": "the right angle is the basis of all rectangular coordinate systems",
-     "by": "draft",
-     "lock": [
-      1,
-      13
-     ],
-     "support_m": 1,
-     "placed_by": "grid",
-     "note": "The sphere is the question the triangle cannot answer — how many faces — and the answer is a budget, so ignorance here is not missing knowledge but a resolution someone chose.",
-     "note_src": {
-      "file": "commons/maps/Primitives_Ignorance/critical.md",
-      "quote": "'Primitive' here names not a lowest form but a stage of unknowing."
-     }
-    },
-    {
-     "token": "sphere_low",
-     "text": "the low-poly sphere is more honest than the high-poly one",
-     "by": "draft",
-     "lock": [
-      3,
-      15
-     ],
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 2,
-     "placed_by": "grid"
-    },
-    {
-     "token": "capsule",
-     "text": "a capsule is a cylinder that had to be capped so nothing would be sharp",
-     "by": "draft",
-     "lock": [
-      7,
-      15
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "torus_radials_rings",
-     "text": "the torus is topologically distinct from the sphere",
-     "by": "draft",
-     "lock": [
-      0,
-      23
-     ],
-     "config": {
-      "config": "8:4"
-     },
-     "count": 2,
-     "spread": "x",
-     "gap_cells": 8,
-     "placed_by": "grid"
-    },
-    {
-     "token": "roughrock",
-     "text": "nature's irregularity is not random — it is deterministic noise that we lack the seed to …",
-     "by": "draft",
-     "lock": [
-      1,
-      15
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "snap_octahedron_puzzle",
-     "text": "the octahedron is the cube's dual — swap faces and vertices and you get the other",
-     "by": "draft",
-     "lock": [
-      12,
-      25
-     ]
-    },
-    {
-     "token": "capsule_radials_rings",
-     "text": "the capsule is the physicist's preferred solid",
-     "by": "draft",
-     "lock": [
-      10,
-      25
-     ]
-    },
-    {
-     "token": "prism_block",
-     "text": "subdividing a triangle is not the same operation as subdividing a square. The",
-     "by": "draft",
-     "lock": [
-      11,
-      25
-     ]
-    },
-    {
-     "token": "dark_sphere",
-     "by": "grid",
-     "lock": [
-      0,
-      0
-     ]
-    },
-    {
-     "token": "cube_scene",
-     "by": "grid",
-     "lock": [
-      1,
-      0
-     ]
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      4,
-      13
-     ],
-     "config": {
-      "bounds": "5,3,14"
-     }
-    }
-   ],
-   "hero": "righttriangle",
-   "ordered": true
-  },
-  {
-   "pearl": "portals",
-   "map": "Primitives_Portals",
-   "lines": [
-    {
-     "token": "achilles_tortoise",
-     "text": "Achilles and the tortoise: the endlessness of pi in a footrace",
-     "by": "claude",
-     "lock": [
-      5,
-      5
-     ],
-     "placed_by": "grid",
-     "note": "The portal is the edge made walkable: you step through it and arrive at another approach, because pi does not finish and neither does the corridor.",
-     "note_src": {
-      "file": "commons/maps/Primitives_Portals/critical.md",
-      "quote": "staging continuity as asymptotic relation rather than arrival"
-     }
-    },
-    {
-     "token": "combine_portals",
-     "text": "a portal: the edge, walked through",
-     "by": "claude",
-     "lock": [
-      3,
-      4
-     ],
-     "placed_by": "grid"
-    },
-    {
-     "token": "dark_sphere",
-     "by": "grid",
-     "lock": [
-      0,
-      0
-     ]
-    },
-    {
-     "token": "capsule",
-     "by": "grid",
-     "lock": [
-      5,
-      2
-     ]
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      3,
-      17
-     ],
-     "config": {
-      "bounds": "4,3,18"
-     }
-    }
-   ],
-   "hero": "achilles_tortoise"
-  },
-  {
-   "pearl": "melencolia",
-   "map": "Primitives_Melencolia",
-   "lines": [
-    {
-     "token": "durer_scene",
-     "text": "Dürer's polyhedron — the solid no taxonomy names, and the angel who keeps it",
-     "by": "claude",
-     "lock": [
-      3,
-      0
-     ],
-     "rotation": 180,
-     "placed_by": "grid",
-     "note": "Every instrument is present and the set is finished, and still nothing is answered — melancholia is the correct response to a taxonomy that is complete and insufficient at once.",
-     "note_src": {
-      "file": "commons/maps/Primitives_Melencolia/critical.md",
-      "quote": "**technically complete** and **existentially insufficient**"
-     }
-    },
-    {
-     "token": "snap_pyramid_puzzle",
-     "text": "the pyramid, snapped — held by the grid",
-     "by": "claude",
-     "lock": [
-      2,
-      1
-     ],
-     "support_m": 1,
-     "rotation": 180,
-     "placed_by": "grid"
-    },
-    {
-     "token": "code_display",
-     "text": "A tutorial is a placement-of-words. The library holds the words",
-     "by": "draft",
-     "lock": [
-      2,
-      2
-     ],
-     "support_m": 1,
-     "rotation": 180,
-     "config": {
-      "tutorial": "melencolia_axioms"
-     },
-     "placed_by": "grid"
-    },
-    {
-     "token": "pyramid",
-     "text": "the pyramid: the triangle stood up, the first solid held",
-     "by": "claude",
-     "lock": [
-      3,
-      3
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "bigframe",
-     "text": "the frame: where the picture stops, and the trace does not",
-     "by": "claude",
-     "lock": [
-      4,
-      3
-     ],
-     "support_m": 1,
-     "rotation": 90,
-     "placed_by": "grid"
-    },
-    {
-     "token": "diamondtoruscollection",
-     "text": "a torus is a circle of circles — its symmetry group allows equal radial distribution of any …",
-     "by": "draft",
-     "lock": [
-      2,
-      4
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "pyramidlong",
-     "text": "proportion is a dimension of meaning — the same topology at different aspect ratios tells different …",
-     "by": "draft",
-     "lock": [
-      3,
-      7
-     ],
-     "support_m": 1,
-     "placed_by": "grid"
-    },
-    {
-     "token": "prism_block",
-     "by": "grid",
-     "lock": [
-      2,
-      0
-     ],
-     "rotation": 90
-    },
-    {
-     "token": "dark_sphere",
-     "by": "grid",
-     "lock": [
-      2,
-      3
-     ],
-     "support_m": 1
-    },
-    {
-     "token": "floating_sphere_field",
-     "by": "grid",
-     "lock": [
-      2,
-      7
-     ],
-     "config": {
-      "bounds": "4,3,8"
-     }
-    },
-    {
-     "token": "cube_scene",
-     "by": "grid",
-     "lock": [
-      4,
-      7
-     ]
-    }
-   ],
-   "hero": "durer_scene",
-   "join": true
-  }
- ]
+  ]
 }

@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "sequence": "array_tutorial",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Array": {
+      "inherited": "From Trans_Pit: That is the end of the chapter, and it is the chapter turned round. Three ways of closing a gap, seen from the gap. The teleporter is at the far end, past the last block. The next rooms introduce arrays: positions that can keep their addresses while their occupants change.",
+      "question": "What does an address identify when the object at that address disappears?",
+      "ontology": "An array is an ordered set of slots; an index names a slot, and occupancy is a value. A second index selects a row and column rather than making an object intrinsically different.",
+      "experiment": "Predict and collect one row cube, then one off-diagonal grid cube. Compare the table updates and the two empty places.",
+      "observe": "The row label leaves with its cube. A grid plate remains at the empty slot. Exactly one occupancy value changes in each test.",
+      "limit": "A stable address retains where, but a zero does not distinguish absence, reservation or a rest, and does not preserve the history.",
+      "variation": "Give an empty slot another meaning, identify the extra record it would need, then compare an inactive sequencer cell in Disco.",
+      "handoff": "Carry forward two separate questions: where is the slot, and what happened to its occupant? The next room slows one collection down so the event behind the changed entry can be inspected.",
+      "candidate_artifacts": [
+        "row_3_x",
+        "grid_2d_4x4"
+      ],
+      "sources": [
+        "commons/maps/Array/final.md",
+        "commons/maps/Array/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "algorithms/arrays/row_3_x.tscn",
+        "algorithms/arrays/row_3_x.gd",
+        "algorithms/arrays/grid_2d_4x4.tscn",
+        "algorithms/arrays/grid_2d_4x4.gd",
+        "commons/scenes/mapobjects/pick_up_cube.gd",
+        "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+      ],
+      "open_questions": [
+        "Read the Array opening with one visitor. Let them predict a row collection, then collect one off-diagonal grid cube. Before explaining, ask them to identify each empty slot and say what the zero does and does not record. Repeat the address/value distinction by switching one sequencer cell off in Disco.",
+        "Runtime evidence is recorded in the encounter pilot; headset, complete-route and learner acceptance remain open."
+      ]
+    },
+    "Tutorial_Single": {
+      "inherited": "From Array: Carry forward two separate questions: where is the slot, and what happened to its occupant? The next room slows one collection down so the event behind the changed entry can be inspected.",
+      "question": "What is the smallest action this world can recognise?",
+      "ontology": "An encounter has an object, a detection boundary, an event, and a resulting state. The visible cube and the invisible rule recognising contact are different things.",
+      "experiment": "Watch the lone pickup bob and turn, then approach until your body enters its detection volume. Observe its collection animation and disappearance. This is an approach-and-contact task, not an instruction to grab and carry it.",
+      "observe": "Before contact, the cube persists and animates. After collection it becomes unavailable. The same object cannot be collected again in that instance.",
+      "limit": "The detector accepts an overlap; it cannot establish curiosity, understanding or consent. Successful collection is evidence that an event occurred, not evidence that the visitor has learned a concept.",
+      "variation": "Pause just outside the object and describe what counts as an action before entering. A future two-condition version could contrast inspection with collection, but that alternate success rule is a proposal.",
+      "handoff": "The next room separates the event from your arrival. A sequencer stores places where sounds should occur, then revisits those places in time. One recognised contact becomes the starting point for thinking about a repeatable pattern.",
+      "candidate_artifacts": [
+        "pick_up_cube"
+      ],
+      "sources": [
+        "commons/maps/Tutorial_Single/final.md",
+        "commons/maps/Tutorial_Single/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/scenes/mapobjects/pick_up_cube.tscn",
+        "commons/scenes/mapobjects/pick_up_cube.gd",
+        "commons/maps/Tutorial_Single/technical.md",
+        "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+      ],
+      "open_questions": [
+        "Pause outside the pickup, predict the effect of approaching, make contact and describe the difference between its idle animation, the collection event and the resulting absence. Record whether the visitor can see the response and return to the route.",
+        "Runtime evidence is recorded in the encounter pilot; headset, complete-route and learner acceptance remain open."
+      ]
+    },
+    "Tutorial_Disco": {
+      "inherited": "From Tutorial_Single: The next room separates the event from your arrival. A sequencer stores places where sounds should occur, then revisits those places in time. One recognised contact becomes the starting point for thinking about a repeatable pattern.",
+      "question": "How does a stored arrangement become an event that repeats in time?",
+      "ontology": "The sequencer is a matrix of active steps: tracks are rows, time positions are columns, and a moving playhead reads them in order.",
+      "experiment": "Clear the pattern, activate one cell, predict its returning note, then switch the cell off and wait for its next reading. Compare tempo without changing addresses.",
+      "observe": "The sounding and highlighted column agree; an inactive cell remains identifiable and adds no event. The floor also animates independently.",
+      "limit": "The floor folds sixteen sequencer steps onto twelve columns, so it cannot uniquely identify every temporal address. Its own animation adds another source of visible changes.",
+      "variation": "Put a beat where it interrupts the expected repetition; compare steps zero and twelve on the second track and identify what the floor loses.",
+      "handoff": "The colour rooms continue with another arrangement whose parts change how their neighbours are experienced. Carry the distinction between a stored value and the relation through which you encounter it.",
+      "candidate_artifacts": [
+        "step_sequencer",
+        "standalone_disco"
+      ],
+      "sources": [
+        "commons/maps/Tutorial_Disco/final.md",
+        "commons/maps/Tutorial_Disco/map_data.json",
+        "commons/artifacts/registry/arrays.json",
+        "commons/audio/sequencer/step_sequencer.tscn",
+        "commons/audio/sequencer/step_sequencer.gd",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/context/discofloor/standalone_disco_floor.tscn",
+        "commons/context/discofloor/StandaloneDiscoFloor.gd",
+        "commons/context/discofloor/DiscoSequencerBridge.gd",
+        "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+      ],
+      "open_questions": [
+        "Start with an empty pattern, activate one cell and predict its returning note. Switch that cell off, wait for its next reading, then change tempo. Compare the first and thirteenth steps on the second track with the twelve-column floor.",
+        "Runtime evidence is recorded in the encounter pilot; headset, complete-route and learner acceptance remain open."
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+extends SceneTree
+var checks: Array=[]
+var failures: Array=[]
+func _initialize() -> void: run.call_deferred()
+func check(title: String, ok: bool) -> void:
+	checks.append({"name":title,"passed":ok});print("MENGER ",title," ",ok)
+	if not ok:failures.append(title)
+func frames(n: int) -> void:
+	for i in n:await physics_frame
+func bounds(centres: Array, edge: float) -> AABB:
+	var box := AABB(centres[0]-Vector3.ONE*edge*0.5,Vector3.ONE*edge)
+	for p in centres:box=box.merge(AABB(p-Vector3.ONE*edge*0.5,Vector3.ONE*edge))
+	return box
+func run() -> void:
+	var world := Node3D.new();root.add_child(world);current_scene=world
+	var study = load("res://ada_run/menger_student/menger.gd").new();world.add_child(study)
+	var variant = load("res://ada_run/menger_student/corners.gd").new();variant.position.x=20;world.add_child(variant)
+	var source = load("res://algorithms/fractals/mengersponge/menger_sponge.tscn").instantiate()
+	source.auto_start=false;source.position=Vector3(-20,0,0);world.add_child(source)
+	source.apply_grid_config({"lesson":"true","flight_box":"true"});await frames(5)
+	var desk=source.get_node("MengerLesson");var reader=desk.cell_reader
+	check("Printed example creates a cube, readout and carried point",study.drawing.get_child_count()==1 and study.point!=null and not study.readout.text.is_empty())
+	var addressed := []
+	for i in 27:
+		var offset := Vector3i(i%3-1,(i/3)%3-1,i/9-1)
+		if study.keep_cell(offset):addressed.append(i)
+	check("Boolean predicate exactly matches all 27 production addresses",addressed==source.keep_positions)
+	check("Centre and every face centre are removed",not study.keep_cell(Vector3i.ZERO) and not study.keep_cell(Vector3i(0,1,0)) and not study.keep_cell(Vector3i(0,-1,0)) and not study.keep_cell(Vector3i(1,0,0)) and not study.keep_cell(Vector3i(-1,0,0)) and not study.keep_cell(Vector3i(0,0,1)) and not study.keep_cell(Vector3i(0,0,-1)))
+	var original: Array=study.current.duplicate();var replacement: Array=study.replace_cells(study.current,study.edge)
+	check("Replacement leaves its input array intact",study.current==original and not is_same(replacement,study.current) and replacement.size()==20)
+	for n in 3:
+		if n>0:study.advance()
+		desk.set_stage(n);await frames(2)
+		var count:=int(pow(20,n));var edge:=9.0/pow(3,n)
+		check("Printed stage %d: count, edge and retained volume"%n,study.current.size()==count and study.edge==edge and absf(study.retained_volume()-729*pow(20.0/27.0,n))<0.0001)
+		check("Printed stage %d: unchanged nine-metre outer bounds"%n,bounds(study.current,study.edge).is_equal_approx(AABB(Vector3.ONE*-4.5,Vector3.ONE*9)))
+		var data: Array=[]
+		for cube in source.find_all_cube_scenes():data.append(source.to_local(cube.global_position)-Vector3.UP*4.5)
+		var same: bool=data.size()==study.current.size()
+		for p in study.current:same=same and data.any(func(q):return q.distance_to(p)<0.0001)
+		check("Printed/production retained positions agree at stage %d"%n,same and absf(desk.kept_volume()-study.retained_volume())<0.0001)
+		check("Miniature reads production cubes at stage %d"%n,reader.miniature.get_child_count()==count and reader.miniature.get_child(0).mesh.size.is_equal_approx(Vector3.ONE*edge*reader.FACTOR))
+	check("Drawing has no cube colliders",study.drawing.find_children("*","CollisionObject3D",true,false).is_empty())
+	var held: Array=study.current.duplicate();study.advance()
+	check("Third action respects two-cut budget",study.generation==2 and study.current==held)
+	variant.advance();variant.advance()
+	check("Executed corner-only variation gives 64 one-metre cubes",variant.current.size()==64 and variant.edge==1 and variant.retained_volume()==64)
+	check("Corner-only variation retains bounds but loses edge-middle positions",bounds(variant.current,variant.edge).is_equal_approx(bounds(study.current,study.edge)) and not variant.keep_cell(Vector3i(0,1,1)))
+	check("Production complement is bounded and initially hidden",reader.ghosts.get_child_count()==147 and not reader.ghosts.visible)
+	var ids: Array=source.find_all_cube_scenes().map(func(c):return c.get_instance_id())
+	desk.act("GHOST");desk.act("FRAME")
+	check("View controls preserve solids and reveal same complement",reader.ghosts.visible and desk.frame.visible and ids==source.find_all_cube_scenes().map(func(c):return c.get_instance_id()))
+	check("Reader adds no collision to the large cube",reader.large_frame.find_children("*","CollisionObject3D",true,false).is_empty() and reader.miniature.find_children("*","CollisionObject3D",true,false).is_empty())
+	# Actual XRTools pickup with supplied poses, after rotating the whole completed object.
+	source.rotation.y=0.7;study.rotation.y=-0.6;study.position=Vector3(4,0,2)
+	var origin:=XROrigin3D.new();world.add_child(origin)
+	var controller:=XRController3D.new();origin.add_child(controller)
+	var hand=load("res://addons/godot-xr-tools/functions/function_pickup.tscn").instantiate();controller.add_child(hand)
+	controller.global_position=reader.grip.global_position;reader.grip.pick_up(hand);await frames(4)
+	controller.global_position=reader.to_global(reader.model_position(Vector3(3,7.5,3)));await frames(6)
+	check("Held point selects a kept corner through rotated frames",reader.selected==Vector3i(2,2,2) and reader.kept)
+	check("Large frame marks same selected source cell",source.to_local(reader.large_frame.global_position).is_equal_approx(Vector3(3,7.5,3)))
+	controller.global_position=reader.to_global(reader.model_position(Vector3(0,4.5,-3)));await frames(6)
+	check("Held point selects a removed face centre",reader.selected==Vector3i(1,1,0) and not reader.kept)
+	reader.grip.let_go(hand,Vector3.ZERO,Vector3.ZERO);await frames(3)
+	check("Released tool returns within reach without resetting reading",reader.to_local(reader.grip.global_position).is_equal_approx(Vector3(0,1.35,0.56)) and reader.selected==Vector3i(1,1,0))
+	# Occupant guard applies equally to the point's action and nearby controls.
+	desk.act("RESET")
+	var visitor:=Node3D.new();world.add_child(visitor);visitor.add_to_group("player_body")
+	visitor.global_position=source.to_global(Vector3(0,0.1,-5))
+	reader.grip.action();await frames(2)
+	check("Point action cannot rebuild around a visitor",source.current_iteration==0 and not desk.notice.is_empty())
+	visitor.global_position=Vector3(0,-100,0);await frames(2)
+	check("Leaving does not execute a deferred cut",source.current_iteration==0)
+	reader.grip.action();await frames(2)
+	check("Fresh point action works after the visitor leaves",source.current_iteration==1)
+	check("Flight enclosure and reader survive solid rebuilds",source.get_node("MengerLesson").cell_reader==reader and source.get_node_or_null("FlightBox")!=null)
+	controller.global_position=study.point.global_position;study.point.pick_up(hand);await frames(4)
+	controller.global_position=study.to_global(study.VIEW_CENTER+Vector3(0,0,3)*study.VIEW_SCALE);await frames(6)
+	check("Printed reader locates first face centre after two cuts",study.selected==Vector3i(0,0,1) and not study.keep_cell(study.selected))
+	study.point.let_go(hand,Vector3.ZERO,Vector3.ZERO);await frames(3)
+	check("Printed release returns tool to near edge",study.to_local(study.point.global_position).is_equal_approx(Vector3(0,1.35,0.56)))
+	study.point.on_desktop_grab(world);study.point.global_position=study.to_global(study.VIEW_CENTER+Vector3(-3,-3,3)*study.VIEW_SCALE);await frames(3)
+	check("Printed desktop reader reuses pickup hook",study.selected==Vector3i(-1,-1,1) and study.keep_cell(study.selected))
+	study.point.on_desktop_drop(world)
+	var fresh=load("res://ada_run/menger_student/menger.gd").new();fresh.position.x=40;world.add_child(fresh)
+	Input.action_press("ui_accept");await process_frame;await process_frame;Input.action_release("ui_accept");await frames(2)
+	check("Printed named desktop input replaces exactly once",fresh.generation==1 and fresh.current.size()==20)
+	FileAccess.open("res://ada_run/menger_hand_tests.json",FileAccess.WRITE).store_string(JSON.stringify({"passed":failures.is_empty(),"checks":checks,"failures":failures,"scope":"Exact printed scripts, executed corner variation, production geometry and XRTools supplied poses. No physical headset claim."},"  "))
+	quit(0 if failures.is_empty() else 1)

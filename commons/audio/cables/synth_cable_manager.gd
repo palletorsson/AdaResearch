@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 class_name SynthCableManager
 
 ## Manages all synth cables and routes audio/parameter connections
@@ -17,6 +17,7 @@ var input_jacks: Dictionary = {}   # parameter_name -> Array[SynthJack] (multipl
 var cables: Array[SynthCable] = []
 
 # Parameter routing: output -> inputs
+var cable_routes: Dictionary = {}  # Snapshot survives an unplugged endpoint.
 var routes: Dictionary = {}  # output_param -> Array[input_param]
 
 # Cable color palette (for auto-assigning colors)
@@ -56,6 +57,8 @@ func _process(delta: float) -> void:
 
 ## Register a jack with the manager
 func register_jack(jack: SynthJack):
+	if jack in _all_jacks: return
+	jack.manager = self
 	var param = jack.parameter_name
 	
 	if jack.is_output():
@@ -79,6 +82,9 @@ func register_jack(jack: SynthJack):
 
 ## Unregister a jack
 func unregister_jack(jack: SynthJack):
+	jack.force_disconnect()
+	_all_jacks.erase(jack)
+	jack.manager = null
 	var param = jack.parameter_name
 	
 	if jack.is_output():
@@ -113,6 +119,9 @@ func spawn_cable(spawn_position: Vector3 = Vector3.ZERO) -> SynthCable:
 
 ## Remove a cable
 func remove_cable(cable: SynthCable):
+	cable.plug_a._unsnap()
+	cable.plug_b._unsnap()
+	_remove_cable_route(cable)
 	cables.erase(cable)
 	cable.queue_free()
 
@@ -129,58 +138,29 @@ func _on_jack_disconnected(cable: Node3D, plug: Node3D, jack: SynthJack):
 
 
 func _on_cable_connection_changed(output_jack: SynthJack, input_jack: SynthJack, cable: SynthCable):
-	if output_jack and input_jack:
-		# New connection made
-		var out_param = output_jack.parameter_name
-		var in_param = input_jack.parameter_name
-		
-		# Add route
-		if not routes.has(out_param):
-			routes[out_param] = []
-		if in_param not in routes[out_param]:
-			routes[out_param].append(in_param)
-			parameter_routed.emit(out_param, in_param)
-			connection_made.emit(cable, output_jack, input_jack)
-	else:
-		# Connection broken - find and remove the route
-		_remove_cable_route(cable)
-
+	var next: Array = [output_jack.parameter_name, input_jack.parameter_name] if output_jack and input_jack else []
+	if cable_routes.get(cable, []) == next: return
+	_remove_cable_route(cable)
+	if next.is_empty(): return
+	cable_routes[cable] = next
+	if not routes.has(next[0]): routes[next[0]] = []
+	if not next[1] in routes[next[0]]:
+		routes[next[0]].append(next[1])
+		parameter_routed.emit(next[0], next[1])
+	connection_made.emit(cable, output_jack, input_jack)
 
 func _evaluate_cable_connection(cable: SynthCable):
-	var output_jack = cable.get_output_jack()
-	var input_jack = cable.get_input_jack()
-	
-	if output_jack and input_jack:
-		# Still connected
-		return
-	
-	# Remove any routes this cable had
-	_remove_cable_route(cable)
-
+	_on_cable_connection_changed(cable.get_output_jack(), cable.get_input_jack(), cable)
 
 func _remove_cable_route(cable: SynthCable):
-	# Find what this cable was routing
-	# Since cable might be partially disconnected, we need to check all routes
-	for out_param in routes.keys():
-		var in_params = routes[out_param]
-		for in_param in in_params:
-			# Check if this cable was the one providing this route
-			if _cable_was_routing(cable, out_param, in_param):
-				routes[out_param].erase(in_param)
-				parameter_unrouted.emit(out_param, in_param)
-				connection_broken.emit(cable)
-
-
-func _cable_was_routing(cable: SynthCable, out_param: String, in_param: String) -> bool:
-	# Check if this cable's jacks match the parameters
-	var out_jack = cable.get_output_jack()
-	var in_jack = cable.get_input_jack()
-	
-	if out_jack and out_jack.parameter_name == out_param:
-		if in_jack and in_jack.parameter_name == in_param:
-			return true
-	return false
-
+	if not cable_routes.has(cable): return
+	var previous: Array = cable_routes[cable]
+	cable_routes.erase(cable)
+	# Another cable with the same route still owns that connection.
+	if previous not in cable_routes.values():
+		if routes.has(previous[0]): routes[previous[0]].erase(previous[1])
+		parameter_unrouted.emit(previous[0], previous[1])
+	connection_broken.emit(cable)
 
 func _get_next_color() -> Color:
 	var color = CABLE_COLORS[_next_color_index % CABLE_COLORS.size()]
@@ -270,6 +250,7 @@ func get_cable_count() -> int:
 
 ## Clear all cables
 func clear_all_cables():
+	_clear_pending_jack()
 	for cable in cables.duplicate():
 		remove_cable(cable)
 	routes.clear()
@@ -309,6 +290,9 @@ func _on_touch_body_entered(body: Node3D, jack: SynthJack) -> void:
 	if not _is_xr_hand(body):
 		return
 
+	select_jack(jack)
+
+func select_jack(jack: SynthJack) -> void:
 	# If this jack is already connected and we're not in pending state, disconnect it
 	if jack.is_connected and not _pending_jack:
 		_touch_disconnect(jack)
@@ -386,9 +370,19 @@ func _touch_connect(jack_a: SynthJack, jack_b: SynthJack) -> void:
 		_clear_pending_jack()
 		return
 
-	# Spawn cable and connect both plugs
+	if jack_a.is_connected or jack_b.is_connected or jack_a.signal_kind != jack_b.signal_kind:
+		_clear_pending_jack()
+		return
+	# Reuse a free tray cable before allocating another.
 	var midpoint: Vector3 = (out_jack.global_position + in_jack.global_position) * 0.5
-	var cable := spawn_cable(midpoint)
+	var cable: SynthCable
+	for candidate in cables:
+		if candidate.connected_jack_a == null and candidate.connected_jack_b == null and not candidate.plug_a.is_being_held() and not candidate.plug_b.is_being_held():
+			cable = candidate; break
+	if not cable:
+		if cables.size() >= 16:
+			_clear_pending_jack(); return
+		cable = spawn_cable(to_local(midpoint))
 	cable.plug_a.snap_to_jack(out_jack)
 	cable.plug_b.snap_to_jack(in_jack)
 

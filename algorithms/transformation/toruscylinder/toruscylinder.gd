@@ -3,7 +3,7 @@ class_name TorusCylinder
 
 # @identity
 # essence: torus.rotation_y += dt*speed; cylinder.position.y = sin(t*freq)*amplitude — rotation vs oscillation
-# desire: learner sees two fundamental animated transformations side by side: continuous rotation and periodic translation
+# desire: learner sees two fundamental animated transformations sharing one axis: continuous rotation and periodic translation
 # critical_parameter: cylinder_osc_speed — the frequency of the sine wave; doubles the frequency, doubles the loops
 # triggers: _process(delta) — runs every frame; the ImmediateMesh trail grows continuously tracing the sine path
 # emerges: the sine wave as the path of a constrained oscillator — the trail makes the mathematical curve physical
@@ -85,8 +85,22 @@ func _build_cylinder() -> void:
 	mat.metallic = 0.3
 	_cylinder.material_override = mat
 
-	# Position cylinder offset from torus center
-	_cylinder.position.x = torus_radius * 2.0
+	# ON THE AXIS, NOT BESIDE IT (2026-09-09, Palle: "the cylinder should be
+	# centered over and down torus not on the side").
+	#
+	# This used to sit at x = torus_radius * 2.0, a full two radii out, so the two
+	# transformations happened in separate places and the pairing was an assertion
+	# rather than something you could see. Centred, the oscillation carries the
+	# cylinder DOWN THROUGH the hole and back out the top, and the rotating ring
+	# is the thing it passes through. The rotation and the translation now share
+	# an axis, which is the actual relation the room is teaching.
+	#
+	# It clears the ring because TorusMesh lies in the XZ plane with its hole on
+	# Y, and the hole is inner_radius = torus_radius * 0.6 against a cylinder of
+	# cylinder_radius. At the defaults that is 0.6 against 0.3. A map that raised
+	# cylinder_radius past the inner radius would now clip the ring where before
+	# it would merely have looked fat; no placement does, all ten run defaults.
+	_cylinder.position = Vector3.ZERO
 	add_child(_cylinder)
 
 

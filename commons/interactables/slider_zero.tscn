@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=3 uid="uid://hv8nnbkuccxi"]
 
-[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_slider.gd" id="2"]
+[ext_resource type="Script" path="res://commons/interactables/linear_driver.gd" id="2"]
 [ext_resource type="Script" path="res://commons/interactables/slider_smooth.gd" id="1_wrapper"]
-[ext_resource type="Script" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="4"]
+[ext_resource type="Script" path="res://commons/interactables/angular_handle.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="10_jjlwa"]
-[ext_resource type="Material" uid="uid://d3z4x5c6v7b8n" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/panel_white.tres" id="MatPanel"]
 [ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
 [ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
 [ext_resource type="Material" path="res://commons/ui/materials/track_groove.tres" id="MatTrackGroove"]
@@ -62,7 +62,8 @@ font_color = Color(0.0, 0.0, 0.0, 1)
 outline_size = 0
 
 [node name="SliderOrigin" type="Node3D" parent="."]
-transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, -0.07, 0.012)
+position = Vector3(0, -0.07, 0.012)
+rotation = Vector3(0, 0, 1.5707963)
 
 [node name="InteractableSlider" type="Node3D" parent="SliderOrigin"]
 script = ExtResource("2")
@@ -82,7 +83,7 @@ surface_material_override/0 = ExtResource("MatMetal")
 
 [node name="AccentMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody"]
 visible = false
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.014)
 mesh = SubResource("BoxMesh_Handle")
 surface_material_override/0 = ExtResource("MatAccent")
 
@@ -98,4 +99,3 @@ picked_up_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle"]
 shape = SubResource("7")
 
-[node name="GrabPointRedirect" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" instance=ExtResource("10_jjlwa")]

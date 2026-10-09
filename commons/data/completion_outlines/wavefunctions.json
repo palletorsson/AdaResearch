@@ -1,0 +1,302 @@
+{
+  "_meta": {
+    "sequence": "wavefunctions",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "WaveFunctions_Intro": {
+      "inherited": "From FormFinding_Forge: The next sequence begins with oscillation. A form can persist through returning motion as well as through rest; settling is only one way for a system to continue.",
+      "question": "What makes a return become a rhythm?",
+      "ontology": "An oscillator moves around an equilibrium under a restoring influence. Position, direction of motion and phase distinguish states that can occupy the same place at different moments.",
+      "experiment": "Grasp the pendulum bob, move it away from its resting position, and release it. Watch several crossings of the centre. Repeat from the other side and compare the direction at the same position.",
+      "observe": "The bob turns back at the ends and passes through the centre in alternating directions. A larger displacement changes the swing; it does not simply define a new arbitrary tempo.",
+      "limit": "Equal positions can belong to opposite directions of travel, so a still picture misses part of the state. The familiar length-only period rule is a small-angle approximation; larger swings and damping matter.",
+      "variation": "Release from a small displacement and then a larger one, counting crossings rather than demanding a perfect metronome. A changed damping regime exists as configuration, not as a visitor control here.",
+      "handoff": "The next room gives the returning movement somewhere to leave its history. Keep your centre crossing in mind: a single recurring position will become a series of distinct marks when time is given its own axis.",
+      "candidate_artifacts": [
+        "control_pendulum"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_Intro/final.md",
+        "commons/maps/WaveFunctions_Intro/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/control_pendulum/control_pendulum.tscn",
+        "commons/artifacts/control_pendulum/control_pendulum.gd",
+        "commons/artifacts/oscillation_controlled_cube/oscillation_controlled_cube.gd"
+      ],
+      "open_questions": [
+        "The cube searches only an explicit path or sibling ControlPendulum and has fallback animation. Do not claim the room’s separate placements are causally linked until runtime parentage is checked.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_Pendulum": {
+      "inherited": "From WaveFunctions_Intro: The next room gives the returning movement somewhere to leave its history. Keep your centre crossing in mind: a single recurring position will become a series of distinct marks when time is given its own axis.",
+      "question": "How can a motion that keeps returning leave a line that keeps extending?",
+      "ontology": "A time trace assigns a separate spatial axis to elapsed history. The bob’s physical path and the record of that path are different constructions.",
+      "experiment": "Watch the pendulum and then follow its cyan trail away from the bob. Compare two successive swings in the receding record without trying to grab this particular demonstration.",
+      "observe": "The bob returns through familiar positions while older samples move away along the trail axis. The drawing retains a limited recent history, so its far end eventually disappears.",
+      "limit": "The depth of the trace is a visual encoding of time, not evidence that the pendulum travelled through that depth. The sample-count limit makes the retained duration depend on frame rate.",
+      "variation": "Choose one crossing and locate the next crossing in the trace. Ask how the reading would change if depth encoded speed instead of time; that remapping is a proposed variation, not an existing control.",
+      "handoff": "The sine-space room brings repeated change into the shape of the surroundings. Here depth has carried the past; there, position through a surface will reveal another use of the same cyclic vocabulary.",
+      "candidate_artifacts": [
+        "PendulumWave"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_Pendulum/final.md",
+        "commons/maps/WaveFunctions_Pendulum/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.tscn",
+        "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd"
+      ],
+      "open_questions": [
+        "No grab/length sliders exist in this scene; its header’s analytic damped cosine claim is not the actual nonlinear integration.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_Sine_Space": {
+      "inherited": "From WaveFunctions_Pendulum: The sine-space room brings repeated change into the shape of the surroundings. Here depth has carried the past; there, position through a surface will reveal another use of the same cyclic vocabulary.",
+      "question": "What can your position reveal about a repeated change?",
+      "ontology": "A wave can be sampled over space as well as time. Phase shifts where the cycle is encountered, while amplitude and frequency shape the extent and repetition of the surface.",
+      "experiment": "Look along the two wave walls and compare near and distant crests. Move to another viewpoint and watch the slow animation while using a fixed feature as a reference.",
+      "observe": "The facing surfaces change their relationship along the corridor and over time. Their profiles contain several superposed sine contributions rather than one repeated rectangular unit.",
+      "limit": "A visible wall is not automatically a physical boundary. The continuous-looking surface is built from finite samples; its animation demonstrates a spatial mapping rather than a simulated material transferring forces.",
+      "variation": "Trace a crest with your eyes, then stay still and see whether the same feature comes to you. A phase-control dial or visible sample lattice would be a proposed room development.",
+      "handoff": "At the unit circle, the next room will make the relation between rotation and rising-and-falling coordinates explicit. Bring the question of what an axis is being used to represent.",
+      "candidate_artifacts": [
+        "sine_wall_corridor"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_Sine_Space/final.md",
+        "commons/maps/WaveFunctions_Sine_Space/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/sine_wall/sine_wall_corridor.tscn",
+        "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd"
+      ],
+      "open_questions": [
+        "Do not call the walls collidable or promise a walk route between them until museum placement is measured. No live phase/frequency sliders.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_Unit_Circle": {
+      "inherited": "From WaveFunctions_Sine_Space: At the unit circle, the next room will make the relation between rotation and rising-and-falling coordinates explicit. Bring the question of what an axis is being used to represent.",
+      "question": "How can going round a circle make a line that rises and falls?",
+      "ontology": "The sine and cosine of an angle are coordinate projections of a point moving round a unit circle. Unrolling angle along another axis makes a graph of those changing coordinates.",
+      "experiment": "Watch the rotating point and its projection rods as the adjacent wave is built. Compare the point at the top, side and bottom of the circle with the corresponding height of the emerging graph.",
+      "observe": "The vertical coordinate rises and falls while the point keeps circling. The horizontal and vertical projections reach their extremes at different angles.",
+      "limit": "The graph’s horizontal axis represents angle progression, not the circular point’s horizontal location. A finite sequence of planks approximates a continuous curve, and a visible bridge is not evidence that it is safe or accessible to walk.",
+      "variation": "Find a height occurring on both the rising and falling part of the cycle and identify what extra information separates those positions. A hand-scrubbed angle control would be a proposed extension.",
+      "handoff": "Next, a lattice of oscillators asks what happens when neighbouring cycles influence one another. You have followed one point and its projections; now look for relationships between many moving points.",
+      "candidate_artifacts": [
+        "unit_circle_advanced"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_Unit_Circle/final.md",
+        "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/unit_circle/unit_circle.tscn",
+        "algorithms/wavefunctions/unit_circle/UnitCircle.gd"
+      ],
+      "open_questions": [
+        "Passive finite build may already be complete on arrival. Do not promise an angle slider or full path traversal.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_3D_Wave_Propagation": {
+      "inherited": "From WaveFunctions_Unit_Circle: Next, a lattice of oscillators asks what happens when neighbouring cycles influence one another. You have followed one point and its projections; now look for relationships between many moving points.",
+      "question": "How can a disturbance travel while its parts stay near their places?",
+      "ontology": "A coupled medium consists of local states linked by forces depending on differences between neighbours. Propagation belongs to their relationship, not to a single ball crossing the grid.",
+      "experiment": "Choose one sphere near the centre and follow only its up-and-down motion. Then widen your attention to nearby spheres and compare when their displacements agree or oppose one another.",
+      "observe": "Each sphere remains at its grid position in the horizontal plane while vertical disturbances spread through coupled motion. The centre is continually driven in the default sine mode.",
+      "limit": "The medium is a finite discrete lattice with simplified springs and damping. It does not show matter travelling with the wave, and source code provides no live coupling-strength slider.",
+      "variation": "Follow an edge sphere and an interior sphere: the boundary has fewer neighbours. A disconnected or differently linked lattice would be a proposed configuration experiment, not a hand control.",
+      "handoff": "Changing the coupling or disconnecting selected neighbours would extend this investigation; those are proposed variations rather than controls available here. The next room turns to sound, where one oscillation can modify another and a relationship between simple sources can change what you hear.",
+      "candidate_artifacts": [
+        "coupled_oscillator_lattice"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+        "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.tscn",
+        "algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_Effect_Sound": {
+      "inherited": "From WaveFunctions_3D_Wave_Propagation: Changing the coupling or disconnecting selected neighbours would extend this investigation; those are proposed variations rather than controls available here. The next room turns to sound, where one oscillation can modify another and a relationship between simple sources can change what you hear.",
+      "question": "Can one oscillation change the character of another?",
+      "ontology": "A carrier supplies a base oscillation; a modulator changes its phase. Frequency ratio, modulation depth and time envelopes shape the resulting sound.",
+      "experiment": "Move the carrier ball slightly to hear a triggered tone. Hold its frequency roughly fixed and move the modulator ball along the Mod Index axis, then compare a low and a high setting. Change one axis at a time.",
+      "observe": "The sound can change from relatively plain to more complex without needing a new recorded instrument. Modulator decay changes how that complexity changes during the note.",
+      "limit": "This is one synthesis method, not an explanation of all timbre. The visual colour cube encodes selected parameter values and is not a waveform. The default evidence mode shows no scope.",
+      "variation": "Try a setting that sounds unstable or metallic rather than imitating a named instrument. A scope comparing carrier, modulator and output exists as an authoring option, but is not necessarily enabled here.",
+      "handoff": "This is one method of synthesis, with particular ranges and envelopes; it is not a universal account of timbre. The next room turns cyclic functions into twisting columns. The same vocabulary of phase and repetition can organise a form in space as well as a sound in time.",
+      "candidate_artifacts": [
+        "DualBallFMController"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_Effect_Sound/final.md",
+        "commons/maps/WaveFunctions_Effect_Sound/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.tscn",
+        "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd",
+        "commons/interfaces/value_mapper_3d.gd"
+      ],
+      "open_questions": [
+        "Preset methods are not wired to visible buttons in this scene. Do not promise preset controls or a continuous drone from one held position.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Wavefunctions_Bernini": {
+      "inherited": "From WaveFunctions_Effect_Sound: This is one method of synthesis, with particular ranges and envelopes; it is not a universal account of timbre. The next room turns cyclic functions into twisting columns. The same vocabulary of phase and repetition can organise a form in space as well as a sound in time.",
+      "question": "Can a shape keep the rhythm of a movement without travelling along it?",
+      "ontology": "A helix combines circular coordinates with height. A periodic function can define a shape over space instead of commanding movement over time.",
+      "experiment": "Look up one twisting shaft and follow a ridge through a turn. Move around the column and compare the ridge’s relation to its vertical axis; then compare the repeated columns as an arrangement.",
+      "observe": "The shaft changes direction around its axis as height increases. The columns also rotate slowly, letting you distinguish an already-twisted shape from the separate motion of that shape.",
+      "limit": "A procedural spiral is not a full account of a historical building, its materials or meanings. The emitted sound accompanies the form; the visitor is not directly playing the column by touching it.",
+      "variation": "Compare the rotation you can watch with the twist you can trace when focusing on a single instant. A two-column threshold or ring arrangement exists as a map configuration choice, not a visitor switch.",
+      "handoff": "Try reading the shaft once as a solid and once as a sequence of changing cross-sections. The next room leaves more of its temporal composition to chance. A rule can preserve a recognisable form while allowing individual events to arrive differently.",
+      "candidate_artifacts": [
+        "bernini_columns"
+      ],
+      "sources": [
+        "commons/maps/Wavefunctions_Bernini/final.md",
+        "commons/maps/Wavefunctions_Bernini/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/berninicolumns/BerniniScene.tscn",
+        "algorithms/wavefunctions/berninicolumns/BerniniColumns.gd"
+      ],
+      "open_questions": [
+        "Do not state a historical attribution or cultural conclusion beyond the scene’s inspired-by framing. Actual museum scale and clearances unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_John_Cage": {
+      "inherited": "From Wavefunctions_Bernini: Try reading the shaft once as a solid and once as a sequence of changing cross-sections. The next room leaves more of its temporal composition to chance. A rule can preserve a recognisable form while allowing individual events to arrive differently.",
+      "question": "What remains composed when the next event is left to chance?",
+      "ontology": "A generative soundscape combines a chosen vocabulary with rules selecting and scheduling events. Random choice operates inside authored limits.",
+      "experiment": "Listen long enough to distinguish the continuous drone from intermittent effects. Count a few entrances without expecting a repeating beat, then attend to the intervals between them.",
+      "observe": "A continuous background persists while different effects appear at varying times and levels. Variation occurs within a recognizable collection of kinds of sound.",
+      "limit": "The title does not make this a performance of a particular John Cage score. Chance does not choose its own vocabulary: the program’s effect list and scheduling ranges determine what can occur. No runtime composition control is offered.",
+      "variation": "Listen once for recognizable events and once for their gaps. A score that admits sounds outside this vocabulary would be a proposed extension, not something the generator already records from the room.",
+      "handoff": "The room's title offers a reference, not a claim to perform a particular John Cage score. Its concrete question is about authorship inside a chance procedure. In Air Music, a strike will supply a more direct beginning: you will choose when an oscillation starts and hear what continues after your contact ends.",
+      "candidate_artifacts": [
+        "john_cage_tech_noir"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_John_Cage/final.md",
+        "commons/maps/WaveFunctions_John_Cage/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.tscn",
+        "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd"
+      ],
+      "open_questions": [
+        "Audio players are AudioStreamPlayer rather than spatial3D emitters; do not promise moving around changes the mix by source proximity. Loading is asynchronous; hearing depends on completion/audio access.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_AirMusic": {
+      "inherited": "From WaveFunctions_John_Cage: The room's title offers a reference, not a claim to perform a particular John Cage score. Its concrete question is about authorship inside a chance procedure. In Air Music, a strike will supply a more direct beginning: you will choose when an oscillation starts and hear what continues after your contact ends.",
+      "question": "What does a strike set in motion, and what decides the note you hear?",
+      "ontology": "An excitation starts a decaying oscillation. This instrument associates each bar with a selected frequency and makes the tuning visible through bar length.",
+      "experiment": "Take the supplied striking stick and hit one bar; listen as the sound fades. Strike a longer and a shorter bar, then let two notes overlap and compare the combined visual trace.",
+      "observe": "Different bars sound at different pitches; one strike produces a tone that continues and decays after contact. Overlapping strikes coexist rather than waiting for each other.",
+      "limit": "The frequency is assigned by the tuning table; it is not discovered by a full material simulation. The current pentatonic selection is one musical choice, not a law saying every combination is harmonious for every listener.",
+      "variation": "Repeat one note against another instead of moving neatly up the scale. A different tuning can be authored through configuration, but no live tuning selector is promised.",
+      "handoff": "The stairs ahead return the cycle to architecture. A sequence of samples can become a visible route, but supporting a walker asks for more than choosing the positions of its steps.",
+      "candidate_artifacts": [
+        "resonating_metallophone"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_AirMusic/final.md",
+        "commons/maps/WaveFunctions_AirMusic/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/resonance/resonating_metallophone.tscn",
+        "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd",
+        "algorithms/wavefunctions/resonance/ResonatingBar.gd"
+      ],
+      "open_questions": [
+        "ResonatingBar body_entered delegates to _on_body_hit and _trigger_resonance; live physics contact and audio require runtime validation.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Wavefunctions_Sky_Stairs": {
+      "inherited": "From WaveFunctions_AirMusic: The stairs ahead return the cycle to architecture. A sequence of samples can become a visible route, but supporting a walker asks for more than choosing the positions of its steps.",
+      "question": "When does a sampled curve become a route a body can use?",
+      "ontology": "A parametric path supplies ordered positions; a staircase adds tread surfaces and connections that make those positions potentially traversable. Mathematical continuity and bodily access are different requirements.",
+      "experiment": "Follow the sequence of treads with your eyes from its lower end, comparing one step to the next. Where an accessible tread is available, compare its direction with the next rise; do not assume the entire spiral has a verified route.",
+      "observe": "The stair combines repeated angular change with increasing height and an oscillating radius. Its steps are separate pieces; the default membrane provision adds surfaces between facing tread edges.",
+      "limit": "A smooth formula does not guarantee comfortable steps, headroom or a reachable entrance. Finite treads and their connecting geometry determine what the walker actually experiences.",
+      "variation": "Identify a gap or turn that would matter to someone using a different stride or mobility aid. A rail/post/no-membrane configuration changes how the route presents support; these are authoring choices awaiting a walk test.",
+      "handoff": "A handrail, supporting posts or a different connection between treads could each change this encounter; they are choices to test, not qualities the equation supplies automatically. The following room returns to interacting cycles. Keep the distinction between a mathematical relation and the particular object that makes it available to perception.",
+      "candidate_artifacts": [
+        "sine_cylinder_staircase"
+      ],
+      "sources": [
+        "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+        "commons/maps/Wavefunctions_Sky_Stairs/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn",
+        "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd"
+      ],
+      "open_questions": [
+        "Walk the actual staircase approach, tread joins and landings before requiring traversal in the prose. Record the first inaccessible or unsupported transition.",
+        "Full climb unverified; do not promise a traversable climb as completed evidence. Header’s formula is simplified; read actual _compute_samples for final mechanism wording.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_TrigWalkingPath": {
+      "inherited": "From Wavefunctions_Sky_Stairs: A handrail, supporting posts or a different connection between treads could each change this encounter; they are choices to test, not qualities the equation supplies automatically. The following room returns to interacting cycles. Keep the distinction between a mathematical relation and the particular object that makes it available to perception.",
+      "question": "How can two quick repetitions produce one slow pulse?",
+      "ontology": "Superposition adds oscillations point by point. When their frequencies are close, their changing phase relationship produces a slowly varying envelope.",
+      "experiment": "Use the two frequency sliders to bring A and B close together. Watch the A+B row grow and shrink, then reduce the frequency difference further while keeping both waves moving.",
+      "observe": "The individual rows keep oscillating quickly while their combination changes strength more slowly. Equal frequencies remove the slow beating in this initially aligned model.",
+      "limit": "The slow envelope is not a third independent oscillator. The display rescales the sum, and finite samples can make fast movement hard to read. It does not establish that every difference between two things behaves as a beat.",
+      "variation": "Try a slightly unequal pair before an equal one and compare what disappears. A phase-offset control would reveal more cases at equal frequency, but the current panel only controls the two frequencies.",
+      "handoff": "This is a visual experiment; it does not generate an audible beat. Adding sound or an independent phase control would extend the comparison. At the synthesis lab, you will change the contributions of several harmonics and ask how their sum can acquire a shape that no single component has.",
+      "candidate_artifacts": [
+        "beat_frequency_demo"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+        "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json",
+        "commons/artifacts/registry/wavefunctions.json",
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.tscn",
+        "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd"
+      ],
+      "open_questions": [
+        "Despite identity text saying hear/see, this scene is visual only. Other spatial routes in the room remain secondary for this first chapter.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "WaveFunctions_Synthesis_Lab": {
+      "inherited": "From WaveFunctions_TrigWalkingPath: This is a visual experiment; it does not generate an audible beat. Adding sound or an independent phase control would extend the comparison. At the synthesis lab, you will change the contributions of several harmonics and ask how their sum can acquire a shape that no single component has.",
+      "question": "How much complexity can you make from five simple contributions?",
+      "ontology": "Additive synthesis forms a waveform by summing components. Each harmonic has an integer multiple of a fundamental frequency and an independently chosen amplitude.",
+      "experiment": "The room opens with a sawtooth approximation already assembled. Lower the higher-harmonic sliders to leave the first harmonic alone, then raise one again. Watch its component line and the combined curve. Add another, then reduce the first contribution and compare what remains.",
+      "observe": "One slider changes one component, but the total shape changes throughout its cycle. The displayed formula records the amplitudes making the current sum.",
+      "limit": "Five harmonics approximate only a limited set of shapes. A sharp-looking square or sawtooth approximation still has smooth transitions and truncation effects; the apparatus does not claim every arbitrary signal is exactly represented by these five controls.",
+      "variation": "Build an unnamed waveform rather than matching a preset. Remove a component you thought was minor and see where its absence becomes visible. More harmonics or independent phases would be proposed extensions.",
+      "handoff": "The next sequence begins with randomness. Keep this room's lesson about construction: a complex-looking result can arise from a small, definite procedure. Appearance alone will not tell you whether the next pattern can be reproduced.",
+      "candidate_artifacts": [
+        "additive_wave_demo"
+      ],
+      "sources": [
+        "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+        "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.tscn",
+        "commons/artifacts/additive_wave_demo/additive_wave_demo.gd"
+      ],
+      "open_questions": [
+        "The model is visual and does not generate audio. Fundamental slider controls first-harmonic amplitude, not base_frequency; write it accordingly.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

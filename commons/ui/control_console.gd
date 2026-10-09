@@ -52,6 +52,9 @@ const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 ## A floor-standing console: a solid body rises to `body_height`, then the slant
 ## begins; the (smaller) board is mounted on the slanted top.
 @export var board_width: float = 0.62                      # the control board on the slant — smaller than the body
+## Fit the cabinet around controls at their authored size. Opt in before adding
+## controls; board_width becomes a minimum, rather than a scale applied to them.
+@export var fit_controls: bool = false
 @export var body_height: float = 1.0                       # solid body up to here; the slant starts at this height
 @export var body_depth: float = 0.4                        # base footprint depth (~0.3–0.5 m)
 ## DNA gene: how the console meets the room. "kiosk" is the shipped floor cabinet —
@@ -179,6 +182,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("body_height"): body_height = float(config_data["body_height"])
 	if config_data.has("body_depth"): body_depth = float(config_data["body_depth"])
 	if config_data.has("board_width"): board_width = float(config_data["board_width"])
+	if config_data.has("fit_controls"): fit_controls = str(config_data["fit_controls"]).to_lower() in ["true", "on", "1"]
 	if config_data.has("board_drop"): board_drop = float(config_data["board_drop"])
 	if config_data.has("board_out"): board_out = float(config_data["board_out"])
 	if config_data.has("board_slide"): board_slide = float(config_data["board_slide"])
@@ -213,7 +217,9 @@ func _ensure_panel() -> Node3D:
 		_panel = ControlPanelScript.new()
 		_panel.name = "Panel"
 		_panel.tilt_degrees = 0.0   # the CONSOLE provides the reading tilt
-		_panel.label_mesh = true    # black TextMesh labels (engraved look, exports as geometry)
+		# Flat printed text on the console surface, including the title.
+		_panel.label_color = Color(0.07, 0.07, 0.08)
+		_panel.title_color = Color(0.07, 0.07, 0.08)
 		add_child(_panel)
 	return _panel
 
@@ -226,6 +232,26 @@ func add_joystick(label: String, param := "") -> Node3D: _content_added = true; 
 func add_readout(text := "") -> Label: _content_added = true; return _ensure_panel().add_readout(text)
 func set_title(t: String) -> void: _ensure_panel().title = t
 func panel() -> Node3D: return _ensure_panel()
+
+var _housing_refit_pending := false
+
+## Refit after an owner adds controls to an already assembled console. Only the
+## cabinet is replaced; controls, live readouts and apparatus keep their state.
+## Coalesced and explicit, so value changes never rebuild the housing.
+func refit_housing() -> void:
+	if _housing_refit_pending or get_node_or_null("Body") == null: return
+	_housing_refit_pending = true
+	_refit_housing.call_deferred()
+
+func _refit_housing() -> void:
+	for node_name in ["Body", "ConsolePlinth"]:
+		var previous := get_node_or_null(node_name)
+		if previous != null:
+			remove_child(previous)
+			previous.queue_free()
+	_built = false
+	await _build_body()
+	_housing_refit_pending = false
 
 
 # ══════════════════════════════════════════════════════════════════════════
@@ -314,7 +340,9 @@ func add_monitor(size: Vector2 = Vector2(0.9, 0.55), stack: Vector3 = Vector3.ZE
 	if stack == Vector3.ZERO:
 		# TOTEM — the monitor stands on its own floor column in front of the
 		# console (cables ride the bridge duct, then hidden inside the column).
-		_support_column(host, 0.0, -0.03, -size.y * 0.5 + 0.10, viz_floor - host.position.y, 0.10, 0.08)
+		# Attach behind the bezel. At -0.03 its front face crossed the screen
+		# and hid the bottom-centre cells of a monitor's content.
+		_support_column(host, 0.0, -0.075, -size.y * 0.5 + 0.10, viz_floor - host.position.y, 0.10, 0.08)
 		_apparatus_base(host, 0.5, 0.42, viz_floor - host.position.y)
 	else:
 		# LINK — a column tying the stacked monitor to the apparatus below. Runs
@@ -448,19 +476,20 @@ func _build_body() -> void:
 		await tree_entered
 	await get_tree().process_frame
 
-	# Measure the plate, then scale it DOWN to the (smaller) board that sits on
-	# the slant. Absolute metres now — no whole-console rescale.
+	# Legacy placements retain their configured width. Natural-size layouts fit
+	# the housing around the panel so handles and travel stay in authored metres.
 	var box := _local_aabb(_panel)
 	var pw: float = maxf(0.001, box.size.x)
 	var ph: float = maxf(0.001, box.size.y)
-	var s: float = board_width / pw
+	var s: float = 1.0 if fit_controls else board_width / pw
+	var fitted_width: float = maxf(board_width, pw) if fit_controls else board_width
 	_panel.scale = Vector3.ONE * s
 	var board_h: float = ph * s
 
 	var t := deg_to_rad(tilt_deg)
 	var face_n := Vector3(0.0, sin(t), cos(t))           # board face normal (reclined, faces up-forward)
 
-	var head_w := board_width + bezel * 2.0
+	var head_w := fitted_width + bezel * 2.0
 	# Extra length so the faceplate extends above the (downward-slid) board.
 	var head_l := board_h + bezel * 2.0 + board_face_drop * 2.0   # length up the slant
 	var head_t := 0.06
@@ -580,6 +609,11 @@ func _build_body() -> void:
 	#    shows metal above it (nestled into the body, not perched on top). ──────
 	_panel.rotation_degrees = Vector3(-tilt_deg, 0.0, 0.0)
 	_panel.position = head_c + face_n * (head_t * 0.5 + 0.012) - u_up * board_face_drop
+	if fit_controls:
+		# The header makes panel bounds asymmetric about its origin. Centre the
+		# measured face in the housing, keeping the full backing inside the bezel.
+		var centre := box.get_center()
+		_panel.position -= _panel.basis * Vector3(centre.x, centre.y, 0.0)
 
 	# DESKTOP form: shift the whole console down so the reading FACE sits at the
 	# node origin. Then an artifact can place it at table height (like the old

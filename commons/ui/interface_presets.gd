@@ -136,7 +136,12 @@ const _DEF_DARK := Color(0.12, 0.13, 0.15)
 
 ## Build the configured housing for `type`, in the named `skin`. `plate_height`
 ## = the world Y the board sits at. Returns ControlConsole / InterfaceHousing.
-static func build(type: String, title: String, plate_height: float = 1.0, skin: String = "braun") -> Node3D:
+## `compact` keeps controls at their authored size and wraps at three columns.
+## `instrument` adds a slimmer bezel, grouped wells and stronger printed labels.
+## These layout profiles apply to console housings; custom housing forms retain
+## their own spatial contract. Set the column count before adding controls.
+## Adopt per encounter: it can need a larger casing than a scaled-down legacy one.
+static func build(type: String, title: String, plate_height: float = 1.0, skin: String = "braun", layout: String = "legacy") -> Node3D:
 	var cfg: Dictionary = config_for(type)
 	var housing: String = cfg.get("housing", "console")
 	var sc: Dictionary = SKINS[skin] if SKINS.has(skin) else SKINS["braun"]
@@ -163,6 +168,15 @@ static func build(type: String, title: String, plate_height: float = 1.0, skin: 
 	console.set("trim_color", sc["trim"])
 	console.call("set_title", title)
 	_style_panel(console.call("panel"), sc)
+	if layout in ["compact", "instrument"]:
+		console.set("fit_controls", true)
+		console.call("panel").set("spacing", 0.22)
+		console.call("panel").set("layout_columns", 3)
+	if layout == "instrument":
+		console.set("bezel", 0.018)
+		console.set("board_face_drop", 0.0)
+		console.call("panel").set("instrument_face", true)
+		console.call("panel").set("row_gap", 0.025)
 	return console
 
 

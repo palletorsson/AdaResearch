@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://b48aivfdv6q8h"]
+[gd_scene format=4 uid="uid://b48aivfdv6q8h"]
 
 [ext_resource type="Script" uid="uid://battxgjyk77m4" path="res://commons/body/hands/right_hand_nails.gd" id="1_nk3d8"]
 [ext_resource type="PackedScene" uid="uid://bxipj7hyjwy6f" path="res://addons/godot-xr-tools/hands/animations/right/AnimationPlayer.tscn" id="4_kshdp"]
@@ -163,22 +163,22 @@ bind/25/name = &"Palm_R"
 bind/25/bone = -1
 bind/25/pose = Transform3D(1, 3.11691e-06, -3.20968e-06, -3.11685e-06, 1, 2.00266e-05, 3.20974e-06, -2.01836e-05, 1, 0.0307808, 0.0419728, 0.0399498)
 
-[node name="RightHand" type="Node3D"]
+[node name="RightHand" type="Node3D" unique_id=151949684]
 script = ExtResource("1_nk3d8")
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=568985743]
 root_node = NodePath("../Hand_R_Nails")
 tree_root = SubResource("AnimationNodeBlendTree_u6dbn")
 anim_player = NodePath("../Hand_R_Nails/AnimationPlayer")
 parameters/Grip/blend_amount = 0.0
 parameters/Trigger/blend_amount = 0.0
 
-[node name="Hand_R_Nails" type="Node3D" parent="."]
+[node name="Hand_R_Nails" type="Node3D" parent="." unique_id=1074864696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03, -0.05, 0.15)
 
-[node name="Armature" type="Node3D" parent="Hand_R_Nails"]
+[node name="Armature" type="Node3D" parent="Hand_R_Nails" unique_id=143399473]
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Hand_R_Nails/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Hand_R_Nails/Armature" unique_id=1414127418]
 bones/0/name = "Wrist_R"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 1.83077e-05, -1.52657e-08, -1.52668e-08, 0.00166774, 0.999999, 1.83077e-05, -0.999999, 0.00166774, -3.86426e-08, -1.86975e-05, 0.0271756)
@@ -362,11 +362,11 @@ bones/25/position = Vector3(-0.0307819, 0.0670555, -0.0420653)
 bones/25/rotation = Quaternion(0.706524, 6.5075e-06, 8.70944e-06, 0.707689)
 bones/25/scale = Vector3(1, 1, 1)
 
-[node name="mesh_Hand_Nails_R" type="MeshInstance3D" parent="Hand_R_Nails/Armature/Skeleton3D"]
+[node name="mesh_Hand_Nails_R" type="MeshInstance3D" parent="Hand_R_Nails/Armature/Skeleton3D" unique_id=1559511734]
 mesh = SubResource("ArrayMesh_au8oq")
 skin = SubResource("Skin_p3s4v")
 
-[node name="AnimationPlayer" parent="Hand_R_Nails" instance=ExtResource("4_kshdp")]
+[node name="AnimationPlayer" parent="Hand_R_Nails" unique_id=1847593694 instance=ExtResource("4_kshdp")]
 
-[node name="PresistNailColor" type="Node3D" parent="."]
+[node name="PresistNailColor" type="Node3D" parent="." unique_id=1515837059]
 script = ExtResource("1_nk3d8")

@@ -95,6 +95,17 @@
                     "min": 0,
                     "max": 1,
                     "default": 0.3
+                },
+                {
+                    "id": "enabled",
+                    "type": "lever",
+                    "label": "FILTER",
+                    "parameter": "filter_on",
+                    "x_hp": 6,
+                    "y_frac": 0.65,
+                    "min": 0,
+                    "max": 1,
+                    "default": 1
                 }
             ],
             "jacks": [
@@ -801,6 +812,48 @@
                     "module": "touch_grid",
                     "row": 1,
                     "slot": 3
+                }
+            ]
+        },
+        "patch_and_motion": {
+            "name": "Patch and motion",
+            "rows": 1,
+            "sound_type": "synth_wave",
+            "modules": [
+                {
+                    "module": "vco",
+                    "row": 0,
+                    "slot": 0,
+                    "controls": {
+                        "wave_sel": {
+                            "max": 3,
+                            "label": "WAVE 0–3"
+                        },
+                        "freq": {
+                            "default": 220
+                        }
+                    },
+                    "omit_controls": [
+                        "out_disp"
+                    ]
+                },
+                {
+                    "module": "vcf",
+                    "row": 0,
+                    "slot": 1
+                },
+                {
+                    "module": "vca",
+                    "row": 0,
+                    "slot": 2,
+                    "controls": {
+                        "amp": {
+                            "default": 0.6
+                        }
+                    },
+                    "omit_jacks": [
+                        "cv_in"
+                    ]
                 }
             ]
         }

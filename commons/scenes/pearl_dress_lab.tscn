@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bek7e70w3i3qn"]
 
-[ext_resource type="Script" path="res://commons/scenes/pearl_dress_lab.gd" id="1_lab"]
+[ext_resource type="Script" uid="uid://d2t33fcdxsgx2" path="res://commons/scenes/pearl_dress_lab.gd" id="1_lab"]
 
-[node name="PearlDressLab" type="Node3D"]
+[node name="PearlDressLab" type="Node3D" unique_id=17511624]
 script = ExtResource("1_lab")

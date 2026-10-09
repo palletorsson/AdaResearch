@@ -7,9 +7,6 @@ script = ExtResource("1")
 num_trees = 5
 tree_generations = 4
 forest_radius = 3.0
-growth_speed = 2.0
-show_growth_animation = true
-competition_enabled = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 3.5, 4.0, 5.0)
@@ -21,10 +18,3 @@ light_energy = 1.2
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-
-[node name="Ground" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
-
-[node name="GroundMesh" type="PlaneMesh" parent="Ground"]
-
-[node name="GroundMaterial" type="StandardMaterial3D" parent="Ground"]

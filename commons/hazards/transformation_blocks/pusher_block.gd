@@ -100,10 +100,6 @@ func _build_body() -> void:
 	arrow_mesh.size = Vector3(block_size * 0.3, block_size * 0.15, block_size * 0.3)
 	arrow.mesh = arrow_mesh
 	arrow.position = push_axis.normalized() * block_size * 0.55
-	# Rotate arrow to point in push direction
-	if push_axis.normalized() != Vector3.UP and push_axis.normalized() != Vector3.DOWN:
-		arrow.look_at(arrow.position + push_axis.normalized(), Vector3.UP)
-		arrow.rotation.x += PI * 0.5
 	var arrow_mat := StandardMaterial3D.new()
 	arrow_mat.albedo_color = Color(1.0, 0.5, 0.3)
 	arrow_mat.emission_enabled = true
@@ -111,9 +107,21 @@ func _build_body() -> void:
 	arrow_mat.emission_energy_multiplier = 1.5
 	arrow.material_override = arrow_mat
 	_body.add_child(arrow)
+	_update_direction_arrow()
+
+
+func _update_direction_arrow() -> void:
+	var arrow: Node3D = _body.get_node_or_null("DirectionArrow")
+	if arrow == null: return
+	var direction := push_axis.normalized()
+	arrow.position = direction * block_size * 0.55
+	if absf(direction.dot(Vector3.UP)) < 0.999:
+		arrow.basis = Basis.looking_at(direction, Vector3.UP) * Basis(Vector3.RIGHT, PI * 0.5)
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	var previous_axis := push_axis
+	var previous_distance := push_distance
 	if config_data.has("axis"):
 		match str(config_data["axis"]):
 			"x": push_axis = Vector3.RIGHT
@@ -126,3 +134,13 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		push_speed = float(config_data["speed"])
 	if config_data.has("pause"):
 		pause_time = float(config_data["pause"])
+	# Grid configuration can arrive after _ready. Update the path it already
+	# cached, otherwise a Z token keeps travelling along the default X axis.
+	if is_instance_valid(_body) and (push_axis != previous_axis or push_distance != previous_distance):
+		_end_pos = _start_pos + push_axis.normalized() * push_distance
+		_t = 0.0
+		_direction = 1.0
+		_paused = false
+		_pause_timer = 0.0
+		_body.global_position = _start_pos
+		_update_direction_arrow()

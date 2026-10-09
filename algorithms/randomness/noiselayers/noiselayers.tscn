@@ -1,6 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://hhp3sd1t024n"]
+[gd_scene load_steps=15 format=3 uid="uid://hhp3sd1t024n"]
 
 [ext_resource type="Script" uid="uid://kfo5rwna6ru5" path="res://algorithms/randomness/noiselayers/noiselayers.gd" id="1_u8d4v"]
+
+[ext_resource type="Script" path="res://algorithms/randomness/noiselayers/noiselayers_stage.gd" id="2_stage"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u8d4v"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -54,6 +56,7 @@ size = Vector2(200, 200)
 size = Vector2(220, 60)
 
 [node name="Noiselayers" type="Node3D"]
+script = ExtResource("2_stage")
 transform = Transform3D(1, 0, 0, 0, 0.992206, -0.124606, 0, 0.124606, 0.992206, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]

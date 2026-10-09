@@ -498,6 +498,10 @@ def account_for_hall(hall, prow, ledger_row):
         counts["placed"] += 1
         if rings:
             counts["ringed"] += 1
+            if not why:
+                # Older ledgers recorded the search distance without its first
+                # refusal. Preserve that evidence without inventing a cause.
+                why = "Ring search recorded; reason not recorded in placement ledger"
         # BACK INTO THE MAP'S FRAME. `final` is segment space and a segment opens
         # with its vestibule, so the map-frame row is final.z - vest. Kept only
         # when it differs from the cell the bead is built on: the presence of the

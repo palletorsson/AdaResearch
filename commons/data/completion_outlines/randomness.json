@@ -1,0 +1,349 @@
+{
+  "_meta": {
+    "sequence": "randomness",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "Random_Definition": {
+      "inherited": "From WaveFunctions_Synthesis_Lab: The next sequence begins with randomness. Keep this room's lesson about construction: a complex-looking result can arise from a small, definite procedure. Appearance alone will not tell you whether the next pattern can be reproduced.",
+      "question": "Can a pattern look unpredictable and still return exactly?",
+      "ontology": "A pseudorandom sequence is determined by generator state and the order of draws. A seed supplies a repeatable starting state; visual irregularity does not distinguish determinism from nondeterminism.",
+      "experiment": "Pick a recognisable part of the coloured grid, press REPLAY and compare. Use RANDOM to choose another seed, then replay that pattern too. The SEED slider offers deliberate selection of a seed.",
+      "observe": "REPLAY reconstructs the same pattern at the current seed; a new seed generally reorganises all the colours. Nearby seed numbers need not produce nearby-looking patterns.",
+      "limit": "The seed reproduces this procedure with these parameters and draw order. It does not name a universal world independent of the generator or program version, and irregular colour alone cannot establish a physical entropy source.",
+      "variation": "Ask another visitor to choose a pattern they call random, then reproduce it. A paired replica view exists as an authoring option; it is not necessarily the current presentation.",
+      "handoff": "The entropy gauge next asks what a numerical description can retain from a sequence. Keep appearance, construction and measurement separate: a number about the output will not automatically tell you everything about how it was made.",
+      "candidate_artifacts": [
+        "seed_replay_demo"
+      ],
+      "sources": [
+        "commons/maps/Random_Definition/final.md",
+        "commons/maps/Random_Definition/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+        "algorithms/randomness/seed_replay/seed_replay_demo.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Entropy": {
+      "inherited": "From Random_Definition: The entropy gauge next asks what a numerical description can retain from a sequence. Keep appearance, construction and measurement separate: a number about the output will not automatically tell you everything about how it was made.",
+      "question": "What can one number tell you about the uncertainty in a sequence?",
+      "ontology": "Symbol-frequency entropy measures uncertainty under a distribution of symbol counts. It is a property of a chosen representation and sample, not a general score for disorder or meaning.",
+      "experiment": "Inspect the displayed symbol strip and histogram. Identify a common and a less common symbol, then compare the reported entropy with the marked maximum. This meter presents a completed sample; there is no distribution slider to operate.",
+      "observe": "The bars show uneven sample counts even though the source selects uniformly among ten symbols. Its estimated entropy is near but generally below log2(10), the maximum for ten equally likely symbols.",
+      "limit": "Reordering a sequence leaves its one-symbol histogram and this entropy unchanged. A repetitive-looking ordering and a shuffled ordering can receive the same reading; this meter does not measure dependencies or semantic significance.",
+      "variation": "Imagine rearranging the displayed symbols into sorted groups without changing any counts. Predict what the number would miss. An ordering-sensitive comparison would require another measure or display.",
+      "handoff": "The gauge presents a completed sample rather than a distribution you can edit here. A future ordering comparison could make its omission visible side by side. In the next room, the eligible set becomes spatial: before anything is removed at random, a rule has already decided what can be chosen.",
+      "candidate_artifacts": [
+        "shannon_entropy_meter"
+      ],
+      "sources": [
+        "commons/maps/Random_Entropy/final.md",
+        "commons/maps/Random_Entropy/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+        "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+      ],
+      "open_questions": [
+        "Legacy identity says continuous resampling and randomness IS evenness; both are misleading. The symbol strip shows only the first forty of200 draws, not the complete data.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Remove": {
+      "inherited": "From Random_Entropy: The gauge presents a completed sample rather than a distribution you can edit here. A future ordering comparison could make its omission visible side by side. In the next room, the eligible set becomes spatial: before anything is removed at random, a rule has already decided what can be chosen.",
+      "question": "What does a removal rule choose before chance chooses an object?",
+      "ontology": "Random selection takes place over an eligible set. Deletion changes that set and the resulting space; the range defining eligibility is an authored condition.",
+      "experiment": "Choose RANGE, count its sixteen amber candidates, remove one, then compare ROW, COLUMN and ALL. Reset before each comparison.",
+      "observe": "Each removal selects one remaining eligible member. Exhaustion leaves excluded cubes intact; reset restores the current mode.",
+      "limit": "Chance acts inside a supplied boundary. The final empty region does not retain removal order; the readout keeps only the latest event.",
+      "variation": "Use removal as drawing and choose when to stop. Identify the extra decision made by the visitor.",
+      "handoff": "The following room keeps every cell and gives each one a binary choice of mark. Instead of subtracting from an arrangement, it asks how much structure can appear when a very small decision is repeated across it.",
+      "candidate_artifacts": [
+        "remove_random"
+      ],
+      "sources": [
+        "commons/maps/Random_Remove/final.md",
+        "commons/maps/Random_Remove/map_data.json",
+        "algorithms/randomness/RemoveRandom.gd",
+        "algorithms/randomness/remove_random_fixture.gd",
+        "doc/book/iterations/2026-09-08-encounter-pilot/random-remove.md"
+      ],
+      "open_questions": [
+        "Choose RANGE, name the sixteen candidates and one excluded cube, then remove one member. Empty the set and press again to check the grey border survives. Reset, then deliberately use the gaps as a drawing and describe how your stopping choice changes the process.",
+        "Verify headset control access and whether a visitor can name the candidate set before the draw."
+      ]
+    },
+    "Randomness_10_PRINT_Algorithm": {
+      "inherited": "From Random_Remove: The following room keeps every cell and gives each one a binary choice of mark. Instead of subtracting from an arrangement, it asks how much structure can appear when a very small decision is repeated across it.",
+      "question": "When do independent marks begin to look like a maze?",
+      "ontology": "One binary choice per grid cell can become a larger visual structure through adjacency and a chosen way of drawing each outcome.",
+      "experiment": "Choose a small group of cells and distinguish its two diagonal orientations. Follow a contour across several cell corners, then watch a diagonal change and see which apparent connections change with it.",
+      "observe": "A repeated two-choice rule creates long-looking lines and enclosures without designing them individually. The animated version changes selected wall orientations over time; a separate ant attempts navigation through that changing layout.",
+      "limit": "A pattern that resembles a maze does not guarantee a connected route between its endpoints. The ant and pathfinder are additional procedures, not consequences contained in the original binary choice.",
+      "variation": "Read the result once as a texture and once as a route, naming what extra promises the second reading makes. A frozen copy would help compare one change at a time; freezing is an authoring option, not a visitor button here.",
+      "handoff": "Next, the die offers six visible outcomes instead of two marks. You will compare individual results with a growing record, and ask what repeated observations can establish that one throw cannot.",
+      "candidate_artifacts": [
+        "ten_print_maze_3d"
+      ],
+      "sources": [
+        "commons/maps/Randomness_10_PRINT_Algorithm/final.md",
+        "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+        "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Cubes": {
+      "inherited": "From Randomness_10_PRINT_Algorithm: Next, the die offers six visible outcomes instead of two marks. You will compare individual results with a growing record, and ask what repeated observations can establish that one throw cannot.",
+      "question": "How much can one throw tell you about a die?",
+      "ontology": "A discrete outcome is one result; a distribution describes probabilities across possible results. Empirical counts and a theoretical fairness assumption are different kinds of evidence.",
+      "experiment": "Take and throw the die. Wait for it to settle and compare its upward face with the reported result. Repeat several times, watching the histogram and running mean rather than judging from the most spectacular roll.",
+      "observe": "Each settled throw adds to one face count. Ball rain scales with the result. The running mean changes with every roll and need not equal3.5 in a small sample.",
+      "limit": "The simulated die does not prove equiprobability merely by being a cube. Throw technique, geometry and physics can affect results. More reward balls measure the reward rule, not evidence that a rare or high result is more deserved.",
+      "variation": "Compare a gentle and a vigorous style of throw while keeping a record of which style produced which result. Pooling both records too early would erase the intervention you are trying to investigate.",
+      "handoff": "The next room shifts attention from a single outcome to changes accumulating in an arrangement. Carry forward the habit of naming what is allowed to vary before calling the whole result random.",
+      "candidate_artifacts": [
+        "dice_throw"
+      ],
+      "sources": [
+        "commons/maps/Random_Cubes/final.md",
+        "commons/maps/Random_Cubes/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/dice_throw/dice_throw.tscn",
+        "algorithms/randomness/dice_throw/dice_throw.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Rotate_Random_XYZ": {
+      "inherited": "From Random_Cubes: The next room shifts attention from a single outcome to changes accumulating in an arrangement. Carry forward the habit of naming what is allowed to vary before calling the whole result random.",
+      "question": "Which part of an arrangement can change while its pieces remain?",
+      "ontology": "A displayed state includes position, orientation, colour and scale. Random perturbations can affect selected components without deleting the objects themselves.",
+      "experiment": "Watch the two stacks long enough for changes to begin. Compare a cube’s orientation and position with its original neighbours, then use TOGGLE to pause and RESET to recover the initial arrangement.",
+      "observe": "The stacks drift, rotate and darken at different configured rates. Their item sizes remain fixed in this scene, so disorder of placement does not have to mean shrinkage or disappearance.",
+      "limit": "This is an authored perturbation model, not a measurement of thermodynamic entropy or a physical explanation of material decay. The two stacks have different rates, so their difference cannot be attributed only to shape.",
+      "variation": "Pause and describe what changed using separate position/orientation/colour terms. A rotation-only comparison at matched rates would be a useful future map variant.",
+      "handoff": "A rotation-only version at matched rates would be a useful next experiment. The random-walk room takes one accumulated quantity, position, and gives it a clearer history. There you can separate the next-step rule from the trail the display keeps of earlier steps.",
+      "candidate_artifacts": [
+        "random_decay_multimesh"
+      ],
+      "sources": [
+        "commons/maps/Random_Rotate_Random_XYZ/final.md",
+        "commons/maps/Random_Rotate_Random_XYZ/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn",
+        "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd"
+      ],
+      "open_questions": [
+        "The namesake rotation script also relies on a host grid. The chapter currently uses its self-contained changing stacks. Inspect the historical host before promoting the rotation-only comparison.",
+        "The room’s namesake Random_Rotate_Random_XYZ is a host-mutating script with no owned grid. It needs explicit museum host binding before promotion; this selected self-contained stack supports the present chapter.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Walk": {
+      "inherited": "From Random_Rotate_Random_XYZ: A rotation-only version at matched rates would be a useful next experiment. The random-walk room takes one accumulated quantity, position, and gives it a clearer history. There you can separate the next-step rule from the trail the display keeps of earlier steps.",
+      "question": "What can a path remember that its next step does not use?",
+      "ontology": "A random walk accumulates sampled increments. Its trail is a record kept by the display, while its next-step rule need not consult that history.",
+      "experiment": "Watch one walker, then switch between2D,3D and LEVY using the labelled buttons. Compare the shapes of the trails and use RESET for a new run.",
+      "observe": "The2D walk stays on a plane; the3D walk explores volume. The LEVY option includes occasional longer jumps. Walls reflect positions and keep the finite trajectories in the enclosure.",
+      "limit": "A reflected finite enclosure cannot establish the long-time unbounded diffusion law printed in some descriptions. Its mean-square displacement eventually depends on the boundary; its capped LEVY mode is a limited approximation.",
+      "variation": "Find a tangled trail and predict whether its next step must avoid it. Then watch for crossings. A self-avoiding or trail-attracted walker would use a different decision rule.",
+      "handoff": "A walker that avoided its trail or followed a deposited trace would be making a different decision. In the next room, distributions become the primary comparison. Instead of asking where accumulated steps go, you will inspect how a law shapes the frequencies of many sampled values.",
+      "candidate_artifacts": [
+        "random_walk_terrarium"
+      ],
+      "sources": [
+        "commons/maps/Random_Walk/final.md",
+        "commons/maps/Random_Walk/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
+        "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Gaussian": {
+      "inherited": "From Random_Walk: A walker that avoided its trail or followed a deposited trace would be making a different decision. In the next room, distributions become the primary comparison. Instead of asking where accumulated steps go, you will inspect how a law shapes the frequencies of many sampled values.",
+      "question": "What changes when randomness follows a different law?",
+      "ontology": "A probability distribution specifies how outcomes are weighted. A histogram records finite samples from that law; its bars are evidence, not the law itself.",
+      "experiment": "Select GAUSS and watch samples accumulate. Use CLEAR and watch the early uneven bars form again. Compare UNIFORM while keeping attention on the whole histogram rather than the next individual sample.",
+      "observe": "The Gaussian setting tends to concentrate near its mean, while uniform sampling spreads across the interval. Early runs fluctuate; more samples reveal a more stable overall shape.",
+      "limit": "The bounded display clips tails, so it is not an unlimited Gaussian. A bell shape is a model of a measured quantity, not evidence that a person near the middle is more normal or valuable. Sample count and binning shape the picture.",
+      "variation": "Choose a sparse early histogram and describe what you cannot yet conclude. Compare a second run instead of treating the first striking cluster as the distribution.",
+      "handoff": "The mushroom meadow next combines placement rules and recognisable forms. Carry the same caution into it: an overall appearance does not tell you which generating procedure supplied each feature.",
+      "candidate_artifacts": [
+        "distribution_sampler"
+      ],
+      "sources": [
+        "commons/maps/Random_Gaussian/final.md",
+        "commons/maps/Random_Gaussian/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/artifacts/distribution_sampler/distribution_sampler.tscn",
+        "commons/artifacts/distribution_sampler/distribution_sampler.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Mushrooms": {
+      "inherited": "From Random_Gaussian: The mushroom meadow next combines placement rules and recognisable forms. Carry the same caution into it: an overall appearance does not tell you which generating procedure supplied each feature.",
+      "question": "Which parts of a seemingly natural arrangement were explicitly designed?",
+      "ontology": "Procedural placement combines random candidates, acceptance rules, templates and authored pattern routines. Irregularity and repeated structure can come from different parts of the same generator.",
+      "experiment": "Compare a scattered patch with a ring or cluster. Follow the spacing and species within each, then look at the neighbouring clearings. This meadow is generated at entry; it does not grow in response to your movement.",
+      "observe": "Scattered candidates leave noise-filtered gaps, while separate routines arrange additional rings and clusters. The repeated forms use a small collection of mushroom templates with variation.",
+      "limit": "A ring that looks emergent may have been placed by a ring-making routine. The result does not demonstrate nutrient flow, reproduction or ecological competition just because it resembles a meadow.",
+      "variation": "Choose a feature and propose two ways it could have been generated. Distinguishing them would require comparing histories or controlled variants, not simply deciding which looks more natural.",
+      "handoff": "Try describing one patch without the words natural or artificial. Name the relationships you can actually inspect: spacing, repetition, variation and enclosure. The next room places independent and coherent height fields beside each other, making one such relationship, what neighbours share, available for a more controlled comparison.",
+      "candidate_artifacts": [
+        "mushrooms"
+      ],
+      "sources": [
+        "commons/maps/Random_Mushrooms/final.md",
+        "commons/maps/Random_Mushrooms/map_data.json",
+        "commons/artifacts/registry/procgen_extra.json",
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.tscn",
+        "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Space_Geometry": {
+      "inherited": "From Random_Mushrooms: Try describing one patch without the words natural or artificial. Name the relationships you can actually inspect: spacing, repetition, variation and enclosure. The next room places independent and coherent height fields beside each other, making one such relationship, what neighbours share, available for a more controlled comparison.",
+      "question": "What makes neighbouring random heights belong together?",
+      "ontology": "Independent samples and spatially correlated noise can occupy comparable numeric ranges while producing different relationships between nearby positions.",
+      "experiment": "Compare neighbouring columns in the WHITE NOISE and PERLIN NOISE grids. Adjust FREQUENCY without changing SEED, then choose another seed or RESAMPLE and compare again.",
+      "observe": "The white-noise heights jump independently; the coherent-noise grid forms broader related features. Changing frequency reorganises the spatial scale while a fixed seed makes the comparison repeatable.",
+      "limit": "The terrain-like result is a heightfield model, not simulated geology. The OCTAVES slider writes fractal_octaves but fractal_type is never enabled, so do not promise that this slider adds visible octave detail.",
+      "variation": "Look for a landscape in the independent grid and a discontinuity in the coherent one. Your interpretation and the correlation rule are separate; neither picture proves how a real landscape formed.",
+      "handoff": "One productive misuse is to withhold the landscape reading and describe only local differences. A future shared scale or alternative palette could make that comparison easier. The next room uses random samples for estimation: their placement will matter because a numerical answer depends on how the sampling rule covers a region.",
+      "candidate_artifacts": [
+        "perlin_noise_bridge"
+      ],
+      "sources": [
+        "commons/maps/Random_Space_Geometry/final.md",
+        "commons/maps/Random_Space_Geometry/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn",
+        "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd"
+      ],
+      "open_questions": [
+        "Check whether OCTAVES changes the field: the Perlin source appears to retain the no-fractal default. Either enable the intended layered calculation or remove the inactive control.",
+        "OCTAVES control likely inert under FastNoiseLite default FRACTAL_NONE; log as development issue. Avoid asserting exact matching distributions between normalized Perlin and uniform samples.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Randomness_Examples_of_Randomness": {
+      "inherited": "From Random_Space_Geometry: One productive misuse is to withhold the landscape reading and describe only local differences. A future shared scale or alternative palette could make that comparison easier. The next room uses random samples for estimation: their placement will matter because a numerical answer depends on how the sampling rule covers a region.",
+      "question": "How can random points estimate a shape’s area?",
+      "ontology": "Monte Carlo estimation converts a sampling fraction into a geometric ratio under a specified sampling law.",
+      "experiment": "Press THROW to add a sampled point, compare whether it lies inside the circle, and follow the counters. Switch AUTO on for more samples, then RESET to compare a second run.",
+      "observe": "Each point changes the fraction inside the inscribed circle. Four times that fraction gives the displayed estimate of pi; its fluctuations tend to become less dramatic as the sample grows, without improving on every step.",
+      "limit": "The ratio estimates area because the sampling law covers the square uniformly. Aiming near the centre would bias the method; sample count cannot repair a systematically biased generator.",
+      "variation": "Predict how deliberately favouring the centre would change the answer. A biased-sampler mode would make that failure testable, but it is a proposed extension.",
+      "handoff": "Imagine changing the sampler so it favours one region. Predict the direction of the error before asking for such a variation to be built. In the pheromone room, repeated visits really will favour places already visited. The process there changes the evidence its later decisions read.",
+      "candidate_artifacts": [
+        "monte_carlo_dartboard"
+      ],
+      "sources": [
+        "commons/maps/Randomness_Examples_of_Randomness/final.md",
+        "commons/maps/Randomness_Examples_of_Randomness/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+        "algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Pheromone": {
+      "inherited": "From Randomness_Examples_of_Randomness: Imagine changing the sampler so it favours one region. Predict the direction of the error before asking for such a variation to be built. In the pheromone room, repeated visits really will favour places already visited. The process there changes the evidence its later decisions read.",
+      "question": "What changes when a walker helps make the evidence its next decision will read?",
+      "ontology": "Stigmergy couples local movement to a shared environmental trace: walkers deposit a signal, then later movements can follow that signal.",
+      "experiment": "Watch a small patch of terrain and follow more than one visit. Compare a repeatedly used path with a quieter area and notice the terrain accumulating where walkers return.",
+      "observe": "Visits leave pheromone and raise the terrain. The scent decays, while subsequent choices can favour stronger scent; paths can reinforce themselves without any walker planning the entire network.",
+      "limit": "The popular route is partly popular because it was already used. That feedback does not establish that it is globally shortest or best. A scent trace and a persistent raised surface keep different histories.",
+      "variation": "Predict whether an early accidental path could become established through repeated use. An avoid-trail configuration exists, but comparing it in this room would be a proposed authored variant, not a live visitor switch.",
+      "handoff": "A walker that avoided the strongest trace would make a different world from the same act of leaving marks. That comparison is an available direction for development rather than a control offered here. Next, the noise mixer returns to field construction: several contributions at different scales will combine without depending on a history of visits.",
+      "candidate_artifacts": [
+        "pheromone_terrain"
+      ],
+      "sources": [
+        "commons/maps/Random_Pheromone/final.md",
+        "commons/maps/Random_Pheromone/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn",
+        "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd"
+      ],
+      "open_questions": [
+        "No live rule/attraction controls. Source models local synthetic walkers, not the full biology of ants or slime mould.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Space": {
+      "inherited": "From Random_Pheromone: A walker that avoided the strongest trace would make a different world from the same act of leaving marks. That comparison is an available direction for development rather than a control offered here. Next, the noise mixer returns to field construction: several contributions at different scales will combine without depending on a history of visits.",
+      "question": "How much of a landscape can be made by repeating a rule at different scales?",
+      "ontology": "A layered field adds scaled copies of a base function. Octave count, frequency ratio and amplitude ratio determine how coarse and fine contributions coexist.",
+      "experiment": "Reduce OCT to one, then add layers while holding LAC and PER fixed. Compare large forms with fine detail. Adjust PER next to change how strongly later layers contribute; use SEED for another arrangement.",
+      "observe": "More layers add different scales of detail. LAC changes the frequency multiplier between layers and PER their amplitude multiplier. The palette makes the resulting values resemble water, vegetation or stone.",
+      "limit": "The colours assign a landscape reading to a scalar field. They are not evidence of water flow or geological process, and normalization can make small absolute differences look as dramatic as large ones.",
+      "variation": "Describe the same picture as high/low values before using terrain names. A neutral palette or shared fixed height scale would expose a different part of the model; those are proposed variants.",
+      "handoff": "A neutral palette or fixed shared scale would expose another part of this construction and make a useful later comparison. The cycling platform in the next room puts uncertainty into timing instead of texture. You will know the order of its states while remaining uncertain about when it moves between them.",
+      "candidate_artifacts": [
+        "noise_mixer"
+      ],
+      "sources": [
+        "commons/maps/Random_Space/final.md",
+        "commons/maps/Random_Space/map_data.json",
+        "commons/artifacts/registry/randomness.json",
+        "commons/artifacts/noise_mixer/noise_mixer.tscn",
+        "commons/artifacts/noise_mixer/noise_mixer.gd"
+      ],
+      "open_questions": [
+        "Runtime access and controls require a museum walk; source-read only.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "Random_Game": {
+      "inherited": "From Random_Space: A neutral palette or fixed shared scale would expose another part of this construction and make a useful later comparison. The cycling platform in the next room puts uncertainty into timing instead of texture. You will know the order of its states while remaining uncertain about when it moves between them.",
+      "question": "What can you know about a platform without knowing when it will move?",
+      "ontology": "A state machine can have a fixed sequence of states and randomly timed transitions. Uncertain timing does not imply that every aspect of its behaviour is uncertain.",
+      "experiment": "Watch a cycling cube from the surrounding floor. Follow its colour and indicator through departure, absence and return. Compare several waiting intervals before deciding what the warning actually tells you.",
+      "observe": "The cube sinks and returns in the same state order, but the waits vary. Colour and the indicator disclose movement states; the cube’s own collider is disabled while it is hidden and re-enabled as it returns.",
+      "limit": "The cue announces a state rather than predicting an exact future time. Museum floor beneath the cube may remain, so disappearance of its collider alone does not establish a hole or a fall.",
+      "variation": "Predict the next state while refusing to guess its exact start time. A countdown or a longer advance warning would change what a visitor can plan; those are proposed access improvements.",
+      "handoff": "Noise Types follows. Carry the distinction between a procedure's fixed structure and its variable choices: neither irregular timing nor an irregular surface means that every aspect of the process is unspecified.",
+      "candidate_artifacts": [
+        "r_c"
+      ],
+      "sources": [
+        "commons/maps/Random_Game/final.md",
+        "commons/maps/Random_Game/map_data.json",
+        "commons/artifacts/registry/random_cubes.json",
+        "commons/primitives/cubes/random_cycle_cube.tscn",
+        "commons/primitives/cubes/random_cycle_cube.gd"
+      ],
+      "open_questions": [
+        "Check collision support beneath the cycling cube in the museum before writing a crossing or falling challenge. The present text asks for observation from the surrounding floor.",
+        "Selected r_c instead of old MonteCarloVR standalone rig (private XR origin, obsolete material property). Verify support beneath the cube before any instruction to step onto it or expect a fall.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

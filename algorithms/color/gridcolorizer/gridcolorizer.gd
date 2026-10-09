@@ -22,3 +22,15 @@
 
 class_name GridColorizer
 extends "res://commons/grid/mutators/grid_color_mutator.gd"
+
+var address_lesson: Node3D
+
+func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "addresses":
+		auto_cycle_enabled = false
+		$UI.hide()
+		address_lesson = load("res://algorithms/color/gridcolorizer/address_lesson.gd").new()
+		address_lesson.colorizer = self
+		add_child(address_lesson)
+		return
+	await super._ready()

@@ -40,9 +40,13 @@ const GridMatFactory = preload("res://commons/primitives/shared/grid_material_fa
 @export_enum("coarse", "mid", "fine", "ultra") var resolution: String = "mid"
 @export_enum("even", "latitude", "longitude") var budget_bias: String = "even"
 
+@export var inspection: bool = false
+@export var inspection_edges: bool = true
+const Inspection = preload("res://commons/primitives/shared/mesh_inspection.gd")
 var _built: bool = false
 
 func _ready():
+	_read_inspection_metadata()
 	_build()
 
 func _build() -> void:
@@ -70,12 +74,24 @@ func _build() -> void:
 	# Apply grid material — unchanged; the wireframe is what makes the budget visible.
 	material_override = GridMatFactory.make(BASE_COLOR, {})
 	_built = true
+	if inspection:
+		Inspection.apply(self, BASE_COLOR, inspection_edges)
+	elif has_node("MeshInspectionEdges"):
+		var old := get_node("MeshInspectionEdges")
+		remove_child(old)
+		old.queue_free()
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	# Guarded: rebuild only when a declared value actually changed and _ready has
 	# already built once. A placement that passes no resolution/budget_bias token
 	# is left exactly as it shipped.
 	var changed: bool = false
+	for key in ["inspection", "inspection_edges"]:
+		if config_data.has(key):
+			var value: bool = str(config_data[key]) in ["1", "true"]
+			if get(key) != value:
+				set(key,value)
+				changed = true
 
 	if config_data.has("resolution"):
 		var want: String = str(config_data["resolution"]).strip_edges().to_lower()
@@ -91,3 +107,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if changed and _built:
 		_build()
+
+func _read_inspection_metadata() -> void:
+	for key in ["inspection", "inspection_edges"]:
+		if has_meta("config_"+key):
+			set(key,str(get_meta("config_"+key)) in ["1", "true"])

@@ -45,9 +45,13 @@ const GridMatFactory = preload("res://commons/primitives/shared/grid_material_fa
 @export_enum("meridian", "parallel", "even") var grain: String = "meridian"
 @export_enum("shown", "hidden", "only") var facets: String = "shown"
 
+@export var inspection: bool = false
+@export var inspection_edges: bool = true
+const Inspection = preload("res://commons/primitives/shared/mesh_inspection.gd")
 var _built: bool = false
 
 func _ready() -> void:
+	_read_inspection_metadata()
 	_build()
 
 func _build() -> void:
@@ -64,6 +68,12 @@ func _build() -> void:
 	mesh = sphere_mesh
 	material_override = _build_material()
 	_built = true
+	if inspection:
+		Inspection.apply(self, BASE_COLOR, inspection_edges)
+	elif has_node("MeshInspectionEdges"):
+		var old := get_node("MeshInspectionEdges")
+		remove_child(old)
+		old.queue_free()
 
 func _build_material() -> Material:
 	if facets == "hidden":
@@ -83,6 +93,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# has already built once. A placement that passes no grain/facets token is
 	# left exactly as it shipped.
 	var changed: bool = false
+	for key in ["inspection", "inspection_edges"]:
+		if config_data.has(key):
+			var value: bool = str(config_data[key]) in ["1", "true"]
+			if get(key) != value:
+				set(key,value)
+				changed = true
 
 	if config_data.has("grain"):
 		var want: String = str(config_data["grain"]).strip_edges().to_lower()
@@ -98,3 +114,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if changed and _built:
 		_build()
+
+func _read_inspection_metadata() -> void:
+	for key in ["inspection", "inspection_edges"]:
+		if has_meta("config_"+key):
+			set(key,str(get_meta("config_"+key)) in ["1", "true"])

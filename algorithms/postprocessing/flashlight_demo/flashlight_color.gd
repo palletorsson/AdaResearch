@@ -5,10 +5,10 @@ extends Node3D
 # desire: to hold a colored flashlight in VR and paint the world with tinted light, seeing how surfaces respond to non-white illumination
 # critical_parameter: light_color — the single color that defines everything: beam hue, lens tint, and emission glow
 # triggers: _ready applies color once; no runtime changes — the flashlight's color is its identity
-# emerges: colored light on colored surfaces creates unexpected results (red light on blue wall = black) teaching subtractive interaction
-# needs: SpotLight3D [has]; lens mesh tinting [has]; VR grab [missing]; color picker [missing]
-# relationships: synthesis artifact for Color_Flashlight map; combines with MultiMesh color cycling; contrasts with color_constellation_office (ambient vs directed color)
-# truth: a flashlight does not add color to the world — it reveals what was always there by choosing which wavelengths to offer
+# emerges: moving and overlapping beams changes rendered appearance without repainting the receiving material
+# needs: SpotLight3D [has]; lens mesh tinting [has]; XRTools grab in parent scene [has]; color picker [absent]
+# relationships: Color_Flashlight compares illumination with a fixed receiving material
+# truth: light_color supplies RGB channels to the renderer; it does not simulate wavelength spectra
 
 ## Sets the SpotLight3D color on the parent flashlight instance.
 ## Attach to the flashlight instance and set light_color in the inspector.

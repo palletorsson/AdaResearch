@@ -1,136 +1,82 @@
 @tool
 extends MeshInstance3D
-
-## Albrecht Dürer's Polyhedron (Melencolia I, 1514)
-## A truncated rhombohedron - cube stretched along body diagonal, then truncated.
-## 
-## The solid has 8 faces: 6 irregular pentagons + 2 equilateral triangles.
-## It appears in the famous engraving representing melancholy and geometry.
-#
-# @identity
-# essence: Dürer's truncated rhombohedron from Melencolia I (1514) — a cube stretched along its body diagonal and cut at two corners
-# desire: learner meets geometry as a mood — the same vertex tables that make a cube can make an object that reads as melancholy
-# critical_parameter: size and the golden-ratio proportions (h, w) — the elongation that turns an ordinary cube into Dürer's brooding solid
-# triggers: builds the 8-face solid (6 pentagons + 2 triangles) via SurfaceTool in _generate_durer_solid on ready
-# emerges: the recognition that a primitive carries cultural weight — a shape can be a symbol, not only a form
-# needs: [procedural mesh from canonical proportions [has], missing the exact irregular-pentagon net of the historical engraving]
-# relationships: the melancholy sibling of the platonic solids; anchors the Primitives_Melencolia map
-# truth: geometry is never only geometry — Dürer's solid proves a polyhedron can hold five centuries of meaning
-
+## A closed truncated rhombohedron: six planar pentagons, two equilateral caps.
+## 72-degree rhombus faces and this truncation depth are an interpretive choice.
+## The engraving does not uniquely determine its three-dimensional proportions.
 @export var size: float = 1.0 : set = set_size
 @export var material: Material : set = set_material
 @export var rotate_slowly: bool = false
 @export var rotation_speed: float = 0.1
+var face_polygons: Array = []
+var _time := 0.0
 
-var _time: float = 0.0
-
-func set_size(val: float):
-	size = val
-	if is_inside_tree():
-		mesh = _generate_durer_solid()
-
-func set_material(val: Material):
-	material = val
-	if val:
-		material_override = val
-
-func _ready():
-	mesh = _generate_durer_solid()
-	if material:
-		material_override = material
-
-func _process(delta: float):
-	if rotate_slowly and not Engine.is_editor_hint():
-		_time += delta
-		rotation.y = _time * rotation_speed
-
+func set_size(value: float) -> void:
+ size = maxf(value,0.001)
+ if is_inside_tree():mesh = _generate_durer_solid()
+func set_material(value: Material) -> void:
+ material = value
+ material_override = value
+func _ready() -> void:
+ mesh = _generate_durer_solid()
+ if material:material_override = material
+func _process(delta: float) -> void:
+ if rotate_slowly and not Engine.is_editor_hint():
+  _time += delta
+  rotation.y = _time * rotation_speed
+func _clip(poly: Array, limit: float, sign_y: float, cap: Array) -> Array:
+ var result: Array = []
+ for i in range(poly.size()):
+  var a: Vector3 = poly[i]
+  var b: Vector3 = poly[(i+1)%poly.size()]
+  var inside_a := a.y*sign_y <= limit+0.00001
+  var inside_b := b.y*sign_y <= limit+0.00001
+  if inside_a:result.append(a)
+  if inside_a != inside_b:
+   var v := a.lerp(b,(limit*sign_y-a.y)/(b.y-a.y))
+   result.append(v)
+   var found := false
+   for old: Vector3 in cap:
+    if old.distance_to(v)<0.00001:found=true
+   if not found:cap.append(v)
+ return result
 func _generate_durer_solid() -> ArrayMesh:
-	var arr_mesh = ArrayMesh.new()
-	var st = SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	
-	# Dürer's solid: truncated rhombohedron
-	# Mathematically: rhombohedron with 72° face angles, truncated at 2 vertices
-	# This creates 6 pentagonal faces and 2 triangular faces
-	
-	var s = size
-	
-	# Vertices based on the canonical Dürer solid proportions
-	# The solid is elongated along the Y axis
-	var phi = 1.618033988749895  # Golden ratio
-	var h = 1.5 * s  # Height multiplier
-	var w = 1.0 * s  # Width
-	
-	# Top triangular face (3 vertices)
-	var t0 = Vector3(0, h * 1.1, -w * 0.4)
-	var t1 = Vector3(w * 0.7, h * 0.95, w * 0.35)
-	var t2 = Vector3(-w * 0.7, h * 0.95, w * 0.35)
-	
-	# Upper middle ring (3 vertices)
-	var u0 = Vector3(w * 1.1, h * 0.35, -w * 0.65)
-	var u1 = Vector3(w * 1.15, h * 0.1, w * 0.75)
-	var u2 = Vector3(0, h * 0.0, w * 1.2)
-	
-	# Lower middle ring (3 vertices)  
-	var l0 = Vector3(-w * 1.15, h * -0.1, w * 0.75)
-	var l1 = Vector3(-w * 1.1, h * -0.35, -w * 0.65)
-	var l2 = Vector3(0, h * -0.0, -w * 1.2)
-	
-	# Bottom triangular face (3 vertices)
-	var b0 = Vector3(0, h * -1.1, w * 0.4)
-	var b1 = Vector3(-w * 0.7, h * -0.95, -w * 0.35)
-	var b2 = Vector3(w * 0.7, h * -0.95, -w * 0.35)
-	
-	# === Build faces ===
-	
-	# Top triangle (CCW when viewed from above/outside)
-	_add_triangle(st, t0, t2, t1)
-	
-	# Bottom triangle
-	_add_triangle(st, b0, b2, b1)
-	
-	# Pentagon faces (6 total) - each connects top/bottom triangles through middle ring
-	# These need to be triangulated as 3 triangles each
-	
-	# Pentagon 1: t0 -> u0 -> l2 -> l1 -> t2 (back-left region)
-	_add_pentagon(st, [t0, t2, l1, l2, u0])
-	
-	# Pentagon 2: t0 -> t1 -> u1 -> u0 (top-right)
-	_add_quad(st, t0, u0, u1, t1)
-	
-	# Pentagon 3: t1 -> t2 -> l0 -> u2 -> u1 (top-front)
-	_add_pentagon(st, [t1, u1, u2, l0, t2])
-	
-	# Pentagon 4: b0 -> l0 -> l1 -> b1 (bottom-left)
-	_add_quad(st, b0, b1, l1, l0)
-	
-	# Pentagon 5: b0 -> b2 -> u0 -> u1 -> u2 (connects to bottom)
-	_add_pentagon(st, [b0, l0, u2, u1, b2])
-	
-	# Pentagon 6: b1 -> b2 -> u0 -> l2 -> l1
-	_add_pentagon(st, [b1, l1, l2, u0, b2])
-	
-	# Fill remaining gaps with additional faces
-	# Connect u2 to l0
-	_add_triangle(st, u2, l0, t2)
-	_add_triangle(st, b2, u1, u0)
-	
-	st.generate_normals()
-	return st.commit()
-
-func _add_triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3):
-	st.add_vertex(a)
-	st.add_vertex(b)
-	st.add_vertex(c)
-
-func _add_quad(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3, d: Vector3):
-	# Two triangles: a-b-c and a-c-d
-	_add_triangle(st, a, b, c)
-	_add_triangle(st, a, c, d)
-
-func _add_pentagon(st: SurfaceTool, verts: Array):
-	# Fan triangulation from first vertex
-	if verts.size() < 3:
-		return
-	for i in range(1, verts.size() - 1):
-		_add_triangle(st, verts[0], verts[i], verts[i + 1])
+ var diagonal := Vector3.ONE.normalized()
+ var cosine := cos(deg_to_rad(72.0))
+ var stretch := sqrt((1.0+2.0*cosine)/(1.0-cosine))
+ var align := Quaternion(diagonal,Vector3.UP)
+ var vertices: Array[Vector3] = []
+ for x in [-1,1]:
+  for y in [-1,1]:
+   for z in [-1,1]:
+    var v := Vector3(x,y,z)
+    vertices.append(align*(v+diagonal*(stretch-1.0)*v.dot(diagonal)))
+ var height := stretch*sqrt(3.0)
+ var cut := height-0.38*(2.0*stretch/sqrt(3.0))
+ var top: Array = []
+ var bottom: Array = []
+ face_polygons.clear()
+ for indices in [[0,1,3,2],[4,6,7,5],[0,4,5,1],[2,3,7,6],[0,2,6,4],[1,5,7,3]]:
+  var poly: Array = []
+  for index in indices:poly.append(vertices[index])
+  poly = _clip(poly,cut,1.0,top)
+  poly = _clip(poly,cut,-1.0,bottom)
+  face_polygons.append(poly)
+ for cap in [top,bottom]:
+  cap.sort_custom(func(a:Vector3,b:Vector3)->bool:return atan2(a.z,a.x)<atan2(b.z,b.x))
+  face_polygons.append(cap)
+ var st := SurfaceTool.new()
+ st.begin(Mesh.PRIMITIVE_TRIANGLES)
+ for poly: Array in face_polygons:
+  for i in range(poly.size()):poly[i] *= (3.0*size/(2.0*cut))
+  var centre := Vector3.ZERO
+  for p: Vector3 in poly:centre+=p
+  centre/=poly.size()
+  var normal: Vector3 = (poly[1]-poly[0]).cross(poly[2]-poly[0]).normalized()
+  if normal.dot(centre)<0:
+   poly.reverse()
+   normal=-normal
+  for i in range(1,poly.size()-1):
+   for v: Vector3 in [poly[0],poly[i+1],poly[i]]:
+    st.set_normal(normal)
+    st.add_vertex(v)
+ return st.commit()

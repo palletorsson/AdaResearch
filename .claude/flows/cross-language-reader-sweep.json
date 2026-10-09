@@ -1,0 +1,87 @@
+{
+  "id": "cross-language-reader-sweep",
+  "title": "Prove a Data Defect Bites — in Every Language That Reads It",
+  "description": "A type defect in shared data (a map cell, a registry value, a ledger field) is fixed twice: in the data, and in the reader that crashed. The second half is always done per-language and per-session, so the sibling readers stay armed. Before calling a normalisation cosmetic, find the reader that actually throws — in each language that opens the file.",
+  "triggers": [
+    "cells are strings",
+    "gate O",
+    "is this defect cosmetic",
+    "does this actually break anything",
+    "int object has no attribute strip",
+    "Invalid call String constructor",
+    "trim is not a function",
+    "normalise the corpus",
+    "this data loads fine"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-5",
+  "created": "2026-09-18",
+  "updated": "2026-09-18",
+  "earned_from": "breath 2026-09-18T07:30 — gate O convicted five COMMITTED biome maps of 2202 integer structure cells. Godot parses them (GridSystem._parse_structure_height matches TYPE_INT explicitly) and the pathfinder walks them (252/252), so the repair looked cosmetic. The same class had already crashed GDScript (2026-08-24) and TypeScript (2026-09-10) and both readers were swept afterwards — which is exactly why the python one was not: tools/map_to_spec.py:161 raises AttributeError on the committed blob, inside a try that catches only IndexError, with no per-map guard in --all.",
+  "nodes": [
+    {
+      "id": "inventory",
+      "type": "action",
+      "label": "List every language that opens this file, not every caller",
+      "detail": "Shared data in this repo is read by at least four hands: GDScript (commons/, algorithms/), Python (tools/), TypeScript (ada_encyclopedia/), and the gates themselves. The bug class lives in the DATA, so the population to sweep is readers-per-language, not call sites. A fix landing in one repo cannot reach the others — ada_encyclopedia is a separate checkout with its own history."
+    },
+    {
+      "id": "idiom",
+      "type": "action",
+      "label": "Grep for the language's unsafe coercion idiom, not for the value",
+      "detail": "Each language has one shape that works on strings and throws on numbers:\n\n  GDScript   String(cell)          -> use str(cell)\n  Python     cell.strip()          -> use str(cell).strip()\n  TypeScript (v ?? '').trim()      -> use String(v ?? '').trim()\n\n`??` catches null and undefined only; a JSON number goes straight through it. Godot's JSON.parse_string hands numbers back as FLOAT and Godot 4's String() constructor refuses numbers. Grep the idiom near cell/row/layer/structure names."
+    },
+    {
+      "id": "reproduce",
+      "type": "action",
+      "label": "Run the suspect function against the REAL blob, in process",
+      "detail": "Do not reason about whether it throws. Import the module, pull the offending data straight from git, and call the function:\n\n  sys.path.insert(0,'tools'); import map_to_spec as M\n  blob = subprocess.run(['git','show','HEAD:'+rel],capture_output=True,text=True).stdout\n  L = json.loads(blob)['layers']\n  M.flood_fill_empty(L['structure'], L['interactables'], 1, 1, set())\n\nThe blob, not a hand-built fixture: a fixture you wrote holds the types you believe are there."
+    },
+    {
+      "id": "guard",
+      "type": "decision",
+      "label": "Does anything catch it — and does the batch mode survive one bad file?",
+      "detail": "A throw that is swallowed is a silent skip; a throw that is not is an abort. Read the except clause (IndexError does not catch AttributeError) and the batch loop (`for n in names: process(n)` with no try aborts the whole run at the first offender, in sorted order). CORROBORATE from the output corpus: doc/specs/maps held 752 specs and none for any of the five maps — the absence is the fingerprint of the abort."
+    },
+    {
+      "id": "bothhalves",
+      "type": "action",
+      "label": "Fix the data AND the reader, in the same change",
+      "detail": "Data: surgical and textual — only the lines that are a whole row, no json.dumps round trip, and verify by parsing before and after and comparing the documents with the repaired layer blanked. Reader: the language's safe idiom at EVERY cell read in that file, not just the one that threw."
+    },
+    {
+      "id": "prove",
+      "type": "action",
+      "label": "Re-run the hardened reader against the OLD blob",
+      "detail": "The repaired data cannot prove the reader was hardened — it would pass either way. Call the hardened functions on the pre-fix blob and show the throw is gone. Two artefacts, two proofs: the gate flips on the data, the blob test passes on the code."
+    },
+    {
+      "id": "handoff",
+      "type": "action",
+      "label": "Name the languages you did NOT sweep",
+      "detail": "The TypeScript half lives in another repo and another session's hands. Say in the forum which readers were checked and which were not, so the next crash is not re-diagnosed from scratch. The cell type is gated nowhere except the gate itself: any new reader in any language inherits the trap."
+    },
+    {
+      "id": "done",
+      "type": "end",
+      "label": "Data repaired, the reader that actually broke is hardened, the unswept languages are named"
+    }
+  ],
+  "edges": [
+    { "from": "inventory", "to": "idiom" },
+    { "from": "idiom", "to": "reproduce" },
+    { "from": "reproduce", "to": "guard", "label": "it throws" },
+    { "from": "reproduce", "to": "handoff", "label": "nothing throws — say so, and repair the data anyway for the next reader" },
+    { "from": "guard", "to": "bothhalves" },
+    { "from": "bothhalves", "to": "prove" },
+    { "from": "prove", "to": "handoff" },
+    { "from": "handoff", "to": "done" }
+  ],
+  "confidence": "extracted",
+  "summary": "A defect that two languages were patched for is still live in the third. List the languages, grep each one's unsafe coercion idiom, reproduce against the real git blob in process, then fix the data AND the reader and prove the hardened reader survives the old blob.",
+  "links_to": [
+    "gate-row-attribution",
+    "breathe-cycle",
+    "map-editing-pipeline"
+  ]
+}

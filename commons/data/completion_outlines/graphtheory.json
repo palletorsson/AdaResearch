@@ -1,0 +1,232 @@
+{
+  "_meta": {
+    "sequence": "graphtheory",
+    "status": "authored_proposal",
+    "date": "2026-09-08",
+    "note": "Focused first manuscripts grounded in selected placed scenes/scripts. Source inspection is not runtime or learner acceptance."
+  },
+  "rooms": {
+    "GT_Foundations": {
+      "inherited": "From ML_Synthesis: Graph theory will give us another representation of relations. Instead of asking how far points lie from a centre, we will ask which points are connected and what those connections permit.",
+      "question": "Does a graph already contain the order in which we should visit it?",
+      "ontology": "A graph separates vertices from their connections. A traversal adds an order ofvisiting to that relation.",
+      "experiment": "Choose one of the15lamps. Watch the blue tide and then the amber diver reach it; predict which neighbouringlamp lights next.",
+      "observe": "The tide lights successivelevels; the diver follows a branch before returning to another. The same lamps and edges remainthroughout.",
+      "limit": "A drawnheight is not inherent importance, and traversalorder is not the graph itself. A tree also lacks the cycleambiguities of generalgraphs.",
+      "variation": "Existing: follow a deep lamp rather than the root, making its delay the comparison. Proposed: let thevisitor choose the startingvertex or add a cycle.",
+      "handoff": "The next room lets the drawing itself move. Keep the graph’s connections separate from the positions used to display them.",
+      "candidate_artifacts": [
+        "two_travelers"
+      ],
+      "sources": [
+        "commons/maps/GT_Foundations/final.md",
+        "commons/maps/GT_Foundations/map_data.json",
+        "commons/maps/GT_Foundations/intent.md",
+        "commons/maps/GT_Foundations/tutorial.md",
+        "commons/maps/GT_Foundations/technical.md",
+        "commons/maps/GT_Foundations/critical.md",
+        "commons/artifacts/two_travelers/two_travelers.tscn",
+        "commons/artifacts/two_travelers/two_travelers.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Layout": {
+      "inherited": "From GT_Foundations: The next room lets the drawing itself move. Keep the graph’s connections separate from the positions used to display them.",
+      "question": "Can the picture change while the graph stays the same?",
+      "ontology": "A layout assigns spatialpositions to vertices. Adjacency says whichvertices are joined and can remain unchanged throughout that movement.",
+      "experiment": "Track one movingvertex and count its links before and after the drawing settles.",
+      "observe": "Eightvertices move while the same12connections stretch and turn; the defaultgraph is the cubegraph drawn in aplane.",
+      "limit": "Closeness on the page is a layoutresult, not necessarily a directconnection. A neatdrawing does not prove its arrangement uniquely represents the graph.",
+      "variation": "Existing: compare what you thought was central before/afterrelaxation. Proposed: expose alternate initialpositions with fixedadjacency, then try a ring or star as anexplicit differentgraph.",
+      "handoff": "Pathfinding will change a connection’s availability while a traveller is already moving. This time the route really may need to change.",
+      "candidate_artifacts": [
+        "force_directed_layout"
+      ],
+      "sources": [
+        "commons/maps/GT_Layout/final.md",
+        "commons/maps/GT_Layout/map_data.json",
+        "commons/maps/GT_Layout/intent.md",
+        "commons/maps/GT_Layout/tutorial.md",
+        "commons/maps/GT_Layout/technical.md",
+        "commons/maps/GT_Layout/critical.md",
+        "algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+        "algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Pathfinding": {
+      "inherited": "From GT_Layout: Pathfinding will change a connection’s availability while a traveller is already moving. This time the route really may need to change.",
+      "question": "What happens to the shortest route when a stone disappears?",
+      "ontology": "A route is a sequence ofconnected vertices. Shortest refers to summed edgecost on the currentgraph, not the traveller remembering a line.",
+      "experiment": "Follow the spark between riverbanks, press thebutton to sink a stone, and compare the next computedroute. Repeat to see an oldstone return after the queue exceeds3.",
+      "observe": "A route stone lowers and becomes unavailable; the spark is replanned immediately. Some removals can yield a NO ROUTE message instead of a detour.",
+      "limit": "The spark queries agraph, not actualhuman jumpingability. A drawn stone is not a verified walkablesurface or a promise that every removal has analternatepath.",
+      "variation": "Existing: intentionally interrupt the route and treat waiting or disconnection as an outcome. Proposed: permit a slower accessible route objective alongside Euclideandistance.",
+      "handoff": "Network analysis asks what the arrangement as a whole makes possible: which vertices connect many others, and which only look important in the drawing?",
+      "candidate_artifacts": [
+        "impatient_river"
+      ],
+      "sources": [
+        "commons/maps/GT_Pathfinding/final.md",
+        "commons/maps/GT_Pathfinding/map_data.json",
+        "commons/maps/GT_Pathfinding/intent.md",
+        "commons/maps/GT_Pathfinding/tutorial.md",
+        "commons/maps/GT_Pathfinding/technical.md",
+        "commons/maps/GT_Pathfinding/critical.md",
+        "commons/artifacts/impatient_river/impatient_river.tscn",
+        "commons/artifacts/impatient_river/impatient_river.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Network_Analysis": {
+      "inherited": "From GT_Pathfinding: Network analysis asks what the arrangement as a whole makes possible: which vertices connect many others, and which only look important in the drawing?",
+      "question": "Is the biggest node the one whose connections matter most?",
+      "ontology": "Degree counts immediateconnections; othercentrality measures answer different questions about routes or influence. Drawing a hub is distinct from measuring one.",
+      "experiment": "Choose one largenode and one smallnode. Count their visibleconnections and trace at least one route through each before trusting its visualrank.",
+      "observe": "The scene stages5central,8middle and12peripheral nodes, connecting and animating them with deliberately different sizes andcolours.",
+      "limit": "This is a networkdiagram, not a validatedcentrality calculator. Sizeandcolour may guide a hypothesis but cannot serve as evidence that its assignedtier isimportant.",
+      "variation": "Existing: begin from a peripheralnode and identify what its routespermit. Proposed: compute and show actual degree orbetweenness, then compare with the originalvisual hierarchy.",
+      "handoff": "Connectivity next gives us one exact question to test: where can a directed traveller go and still return?",
+      "candidate_artifacts": [
+        "network_analysis"
+      ],
+      "sources": [
+        "commons/maps/GT_Network_Analysis/final.md",
+        "commons/maps/GT_Network_Analysis/map_data.json",
+        "commons/maps/GT_Network_Analysis/intent.md",
+        "commons/maps/GT_Network_Analysis/tutorial.md",
+        "commons/maps/GT_Network_Analysis/technical.md",
+        "commons/maps/GT_Network_Analysis/critical.md",
+        "algorithms/graphtheory/network_analysis/network_analysis.tscn",
+        "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd"
+      ],
+      "open_questions": [
+        "Centrality values and summary animation are not calculated from the displayed edges. Compute one named measure and let the visitor check its supporting connections.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Central concept gap: calculatecentrality from adjacency before treating visualhierarchy asalgorithmic result.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Connectivity": {
+      "inherited": "From GT_Network_Analysis: Connectivity next gives us one exact question to test: where can a directed traveller go and still return?",
+      "question": "If you can reach another node, can you get back?",
+      "ontology": "A strongly connectedcomponent is a maximal set whosevertices can reach eachother along directedpaths. One-way contact is insufficient.",
+      "experiment": "Pick two vertices joined by anarrow, then trace a returnroute. Watch the automaticsearch assign componentcolours and compare its grouping with your prediction.",
+      "observe": "Current, visited, backedge andcomponent colours expose a depth-firstsearch; the status announces each discoveredcomponent.",
+      "limit": "Mutualreachability is a precise relation in this directedgraph, not mutualtrust, equality or universalaccess. A one-way bridge can connect a drawing without merging its strongcomponents.",
+      "variation": "Existing: search for a route that leaves acomponent and cannot return. Proposed: expose a reversiblearrow and observe whichcomponents merge.",
+      "handoff": "Spanning trees will ask how many connections can be removed while everyone remains connected. The useful return route you just found may look like an expendable cycle under a different objective.",
+      "candidate_artifacts": [
+        "tarjan_algorithm"
+      ],
+      "sources": [
+        "commons/maps/GT_Connectivity/final.md",
+        "commons/maps/GT_Connectivity/map_data.json",
+        "commons/maps/GT_Connectivity/intent.md",
+        "commons/maps/GT_Connectivity/tutorial.md",
+        "commons/maps/GT_Connectivity/technical.md",
+        "commons/maps/GT_Connectivity/critical.md",
+        "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+        "algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Spanning_Trees": {
+      "inherited": "From GT_Connectivity: Spanning trees will ask how many connections can be removed while everyone remains connected. The useful return route you just found may look like an expendable cycle under a different objective.",
+      "question": "Which connections can be removed while keeping everyone connected?",
+      "ontology": "A spanningtree connects everyvertex withoutcycles. A minimumspanningtree minimizes totaledgeweight among suchtrees for a connectedweighted undirectedgraph.",
+      "experiment": "Watch candidateedges receive attention and greenedges join thebackbone. Before eachdecision, predict whether accepting theedge would close acycle.",
+      "observe": "Acceptededges accumulate until the backboneconnects allvertices; some edges are skipped even when short because their ends already belong to thesamecomponent.",
+      "limit": "Lowesttotalcost does not provide redundantconnections. Every treeedge is a singlepoint of disconnection if removed; reliability may justify an extraedge.",
+      "variation": "Existing: mentally remove an acceptededge and identify the two resultinggroups. Proposed: compare the cheapesttree with a deliberately redundantnetwork and name the extracost.",
+      "handoff": "Flow adds another constraint. A route may exist and still be unable to carry everything trying to pass through it.",
+      "candidate_artifacts": [
+        "mst_visualization"
+      ],
+      "sources": [
+        "commons/maps/GT_Spanning_Trees/final.md",
+        "commons/maps/GT_Spanning_Trees/map_data.json",
+        "commons/maps/GT_Spanning_Trees/intent.md",
+        "commons/maps/GT_Spanning_Trees/tutorial.md",
+        "commons/maps/GT_Spanning_Trees/technical.md",
+        "commons/maps/GT_Spanning_Trees/critical.md",
+        "algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+        "algorithms/graphtheory/minimumspanningtree/mst_visualization.gd"
+      ],
+      "open_questions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Flow": {
+      "inherited": "From GT_Spanning_Trees: Flow adds another constraint. A route may exist and still be unable to carry everything trying to pass through it.",
+      "question": "When a junction receives more than it can send onward, where does the excess go?",
+      "ontology": "Capacity limits anedge; flow is the currentallocation; excess is netmaterial held temporarily at anintermediatevertex. Height is analgorithmiclabel used to routeupdates.",
+      "experiment": "Follow the sourceoutflow, then watch a junction with excess and read its PUSH orRELABEL status.",
+      "observe": "Sourceedges fill first; a vertex may pass availableflow to a lowerheight neighbour or change itsheight when itcannotpush. Pervertexheight/excess and overallflow labels are drawn.",
+      "limit": "A full maximumflow solver needs residualreverse edges so earlierallocations can be undone. This implementation does not maintain them and cannot support its blanket maximumclaim.",
+      "variation": "Proposed nextbuild: draw reversible residualcapacity and let visitors inspect a rerouting case; meanwhile compare a localpush to the sinktotal without assuming everylocaldecision isfinal.",
+      "handoff": "Matching will impose a different limit: each vertex may have only one selected partner. Once again, an early acceptable choice may need to be undone.",
+      "candidate_artifacts": [
+        "push_relabel_algorithm"
+      ],
+      "sources": [
+        "commons/maps/GT_Flow/final.md",
+        "commons/maps/GT_Flow/map_data.json",
+        "commons/maps/GT_Flow/intent.md",
+        "commons/maps/GT_Flow/tutorial.md",
+        "commons/maps/GT_Flow/technical.md",
+        "commons/maps/GT_Flow/critical.md",
+        "algorithms/graphtheory/push_relabel/push_relabel.tscn",
+        "algorithms/graphtheory/push_relabel/push_relabel.gd"
+      ],
+      "open_questions": [
+        "The current flow procedure lacks reverse residual adjustments. Add a case requiring rerouting and implement the complete algorithm before claiming maximum flow.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Centralalgorithm gap: do not assert maximumflow, standardpush-relabel invariants or completion on everygraph. No visitoralgorithm controlsverified.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    },
+    "GT_Matching": {
+      "inherited": "From GT_Flow: Matching will impose a different limit: each vertex may have only one selected partner. Once again, an early acceptable choice may need to be undone.",
+      "question": "Can an early pairing prevent a larger set of pairings later?",
+      "ontology": "A matching is a set ofedges with no sharedendpoint. A maximalmatching cannot add anotheredge; a maximummatching has the largestpossible number ofedges. These are differentclaims.",
+      "experiment": "Watch the next highlightededge. Predict acceptance by checking whether bothendpoints are still unmatched; track onevertex leftwithout a partner.",
+      "observe": "Edgesare scanned in their storedorder. When bothendpoints are free they become a pair, and neither is reconsideredlater.",
+      "limit": "A completegreedy scan gives a maximalmatching, not necessarilymaximum. On a fourvertexpath, choosing the middleedge first leavesone pair where choosing bothouteredges would giv two.",
+      "variation": "Proposed: expose edgeorder or a4vertexpath counterexample, then add augmentingpath updates. Existing: identify which earlierpair blocks a latercandidate.",
+      "handoff": "The foundations sequence will question what a formal system can establish. Carry one distinction forward: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion.",
+      "candidate_artifacts": [
+        "edmonds_algorithm"
+      ],
+      "sources": [
+        "commons/maps/GT_Matching/final.md",
+        "commons/maps/GT_Matching/map_data.json",
+        "commons/maps/GT_Matching/intent.md",
+        "commons/maps/GT_Matching/tutorial.md",
+        "commons/maps/GT_Matching/technical.md",
+        "commons/maps/GT_Matching/critical.md",
+        "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+        "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd"
+      ],
+      "open_questions": [
+        "The Edmonds-labelled display performs a greedy scan. Add augmenting-path behaviour and the four-vertex path counterexample before claiming a maximum matching.",
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Centralalgorithm gap: this is not Edmonds blossomalgorithm. Preserve teachingintent inrepairqueue; do not presentgreedy as correctmaximumsolver.",
+        "Try the written encounter in the actual museum, alone and with a group. Check visibility, reach, the stated response and the handoff before accepting a room baseline."
+      ]
+    }
+  }
+}

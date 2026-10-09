@@ -7,8 +7,8 @@ extends Node3D
 
 
 # @identity
-# essence: FM synthesis — carrier(t) * sin(mod_ratio * carrier * mod_index)
-# desire: Grab two balls in VR to sculpt sound through frequency modulation
+# essence: phase modulation — sin(2π * carrier_freq * t + modulator(t)), under amplitude envelopes
+# desire: Grab two balls in VR to hear one oscillator changing another oscillator's phase
 # critical_parameter: evidence — how much of the FM arithmetic the rig puts on the table.
 #   One ordered ladder, monotone in disclosure: result (the colour cube alone, the legacy
 #   default) < trace (the output waveform on a scope) < sources (the two operand oscillators,
@@ -23,7 +23,7 @@ extends Node3D
 #   basic waveforms); unlocks timbre_sculptor. Carries the `evidence` ladder of
 #   [[wave_interference_tank]] and [[sine_wave_controller]] and parses a token through that
 #   family's one reader rather than keeping a second table.
-# truth: All timbral complexity is phase modulation of simple oscillators.
+# truth: This instrument changes timbre by modulating a carrier's phase; it is one synthesis method, not a claim about all sound.
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-08-03). This artifact had ZERO exports and a
@@ -408,14 +408,15 @@ func _create_preview_cube() -> void:
 func _create_title_label() -> void:
 	title_label = Label3D.new()
 	title_label.name = "TitleLabel"
-	title_label.text = "FM Synth"
+	title_label.text = "Phase modulation\nFM-style synth"
 	title_label.position = Vector3(0.25, SHELF_H + 0.42, 0.25) if stand == "desks" else Vector3(0, -1.0, 0)
 	title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	title_label.font_size = 32
 	title_label.modulate = Color(0.9, 0.9, 1.0)
 	title_label.outline_size = 4
 	title_label.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
-	title_label.scale = Vector3.ONE * 0.08
+	title_label.pixel_size = 0.0015
+	title_label.scale = Vector3.ONE
 	add_child(title_label)
 
 func _update_preview_cube() -> void:
