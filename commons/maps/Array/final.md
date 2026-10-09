@@ -1,6 +1,8 @@
 # The same cube, counted
 
-This is the cube we met at the beginning of Transformation. There, one body acquired movement, orientation and scale. Here it has company: four copies, a metre apart, with a number above each one.
+What remains at an address after its occupant has gone?
+
+This is the cube we met at the beginning of Transformation. There, one body acquired movement, orientation and scale. Here it has company: four copies, a metre apart, with a number above each one. What can we do with many that we could not do with one?
 
 <!-- @row_3_x -->
 

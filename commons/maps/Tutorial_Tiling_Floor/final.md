@@ -32,7 +32,7 @@ Here `cx` and `cy` count columns and rows in the tile image. They name direction
 
 The `%` sign gives the remainder after division. As these non-negative counts increase, `%4` returns 0, 1, 2, 3, then 0 again. You met that return at the flight console: after index three, the selection came back to zero. Here the remainder chooses a quarter-turn. No tile has to remember the whole field. Its local address and the rule are enough to decide its turn. Keep this way of returning in mind when repetition begins to sound.
 
-Now look at ONE EXCEPTION. Initially it repeats the translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. From a distance it might look like a direction, an error, an opening. Come closer. The same square is still here, turned once more than its neighbours.
+Now look at ONE EXCEPTION. Initially it repeats the translation field. Press EXCEPTION. One cell turns an extra quarter turn; the other five fields stay as they were. From a distance it might look like a direction, an error, an opening. Come closer. The same square is still here, turned once more than its neighbours. The code supplies a difference without deciding what it should mean to you.
 
 ![Six black and white fields generated from one diagonal tile: translation, alternation, quarter turns, reflection, shifted rows and one exception.](/book-images/iterations/2026-09-23-tiling-underfoot/one-motif-six-relations.png)
 

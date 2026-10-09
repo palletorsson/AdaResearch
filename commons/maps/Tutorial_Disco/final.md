@@ -40,9 +40,9 @@ The sequencer starts with an empty pattern. Turn on one cell. It sounds immediat
 
 Now give that note company. Add a second cell in the same track. Listen to the interval between them. Move the second event by turning its old cell off and another on. The instrument stays the same; its place in the pattern changes when it sounds.
 
-Switch one cell off again. On the next pass its address is still there, but that visit asks for no new note. The grid keeps your choices; the playhead keeps returning to read them.
+Switch one cell off again. On the next pass its address is still there, but that visit asks for no new note. This is the array room's question in another material: the slot remains available when its value changes. The grid keeps your choices; the playhead keeps returning to read them.
 
-Change the tempo without moving either address. The time between visits changes. Stay with the rhythm for a few loops.
+Change the tempo without moving either address. The time between visits changes. A pattern's arrangement and its rate of playback are separate choices. Stay with the rhythm for a few loops.
 
 <!-- @standalone_disco -->
 
@@ -52,7 +52,7 @@ Restart the sequencer, then HOLD the floor's pattern. The music continues. Watch
 
 Keep the floor held for a few beats. A flash appears against the settled pattern. Release HOLD, and fresh arrangements can overtake it.
 
-There are sixteen steps but twelve floor columns. The bridge uses `step % disco_floor.grid_width`, taking the remainder by this floor’s width: step indices zero and twelve, the first and thirteenth steps, brighten the same column. Try them separately in the second track. The flash returns to the same place underfoot, at another place in the count. The sequencer tells the addresses apart; that flash alone cannot.
+There are sixteen steps but twelve floor columns. The bridge uses `step % disco_floor.grid_width`, taking the remainder by this floor’s width: step indices zero and twelve, the first and thirteenth steps, brighten the same column. Try them separately in the second track. The flash returns to the same place underfoot, at another place in the count. The sequencer tells the addresses apart; that flash alone cannot. A representation can preserve an event while folding together some of the information about where it came from.
 
 Walk with a pulse, then keep your own rhythm across it. Distinguish the score, the floor's independent animation and your movement. Sounding steps can reach the floor, but your footsteps are not written back into the score. Sharing a space with a rhythm is different from being measured by it.
 
@@ -60,6 +60,6 @@ Walk with a pulse, then keep your own rhythm across it. Distinguish the score, t
 
 Put a beat somewhere that interrupts the repetition you expected. Does it become a mistake, an accent, or the part you wait for? Keep it for a few loops before deciding. A position that first sounded wrong may become the reason to return.
 
-Let it run while you cross the floor. Your next step need not wait for the next note.
+Let it run while you cross the floor. Your next step need not wait for the next note. A gesture falling between steps would need another representation if its timing were to be retained. Precision and pleasure need not ask the same question.
 
-Next, our familiar forms gather in coloured stacks. A stored value can assign a colour to a surface. What happens when that colour meets its neighbours?
+Carry the distinction between a stored value and the relation through which you encounter it. Next, our familiar forms gather in coloured stacks. A stored value can assign a colour to a surface. What happens when that colour meets its neighbours?

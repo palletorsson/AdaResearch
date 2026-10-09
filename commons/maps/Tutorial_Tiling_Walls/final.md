@@ -52,4 +52,4 @@ Return inside before turning the wall back. The wall will not turn through a bod
 
 The image gives the wall a rhythm; the wall gives that rhythm a place in your walk.
 
-The next floor will add a clock. Its tiles will keep their places while their black and white values change.
+The next floor will add a clock. Its tiles will keep their places while their black and white values change. Keep watching the distinction between a value, an address and the act of reading it.
