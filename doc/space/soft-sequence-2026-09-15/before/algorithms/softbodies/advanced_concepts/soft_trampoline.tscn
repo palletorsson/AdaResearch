@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://f8arey8teuhg"]
+
+[ext_resource type="Script" uid="uid://brfoksp23m4jl" path="res://algorithms/softbodies/advanced_concepts/soft_trampoline.gd" id="1_tramp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hmyon"]
+size = Vector2(20, 20)
+subdivide_width = 50
+subdivide_depth = 60
+
+[node name="SoftTrampoline" type="Node3D"]
+script = ExtResource("1_tramp")
+
+[node name="SoftBody3D" type="SoftBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.3450427, 0)
+mesh = SubResource("PlaneMesh_hmyon")
+pinned_points = [0, 3172, 50, 51, 103, 3171, 3223, 3222, 3173, 3120]
+attachments/0/point_index = 0
+attachments/0/spatial_attachment_path = NodePath("")
+attachments/0/offset = Vector3(0, 0, 0)
+attachments/1/point_index = 3172
+attachments/1/spatial_attachment_path = NodePath("")
+attachments/1/offset = Vector3(0, 0, 0)
+attachments/2/point_index = 50
+attachments/2/spatial_attachment_path = NodePath("")
+attachments/2/offset = Vector3(0, 0, 0)
+attachments/3/point_index = 51
+attachments/3/spatial_attachment_path = NodePath("")
+attachments/3/offset = Vector3(0, 0, 0)
+attachments/4/point_index = 103
+attachments/4/spatial_attachment_path = NodePath("")
+attachments/4/offset = Vector3(0, 0, 0)
+attachments/5/point_index = 3171
+attachments/5/spatial_attachment_path = NodePath("")
+attachments/5/offset = Vector3(0, 0, 0)
+attachments/6/point_index = 3223
+attachments/6/spatial_attachment_path = NodePath("")
+attachments/6/offset = Vector3(0, 0, 0)
+attachments/7/point_index = 3222
+attachments/7/spatial_attachment_path = NodePath("")
+attachments/7/offset = Vector3(0, 0, 0)
+attachments/8/point_index = 3173
+attachments/8/spatial_attachment_path = NodePath("")
+attachments/8/offset = Vector3(0, 0, 0)
+attachments/9/point_index = 3120
+attachments/9/spatial_attachment_path = NodePath("")
+attachments/9/offset = Vector3(0, 0, 0)

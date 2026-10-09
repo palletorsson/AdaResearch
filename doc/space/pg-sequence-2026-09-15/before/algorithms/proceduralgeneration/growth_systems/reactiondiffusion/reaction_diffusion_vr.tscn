@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0yvr1kpmh8qw"]
+
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/reactiondiffusion/reaction_diffusion_vr.gd" id="1_vr_rd"]
+
+[node name="ReactionDiffusionVR" type="Node3D"]
+script = ExtResource("1_vr_rd")
+feed_rate = 0.037
+kill_rate = 0.06
+resolution = 256

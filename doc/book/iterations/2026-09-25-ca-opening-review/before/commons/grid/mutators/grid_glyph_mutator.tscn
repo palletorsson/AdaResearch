@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/grid/mutators/grid_glyph_mutator.gd" id="1_glyph"]
+
+[node name="GridGlyphMutator" type="Node"]
+script = ExtResource("1_glyph")

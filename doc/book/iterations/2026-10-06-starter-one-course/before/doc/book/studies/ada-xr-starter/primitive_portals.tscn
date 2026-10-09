@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Room"]
+[ext_resource type="Script" path="res://studies/primitive_portals/perimeter.gd" id="Study"]
+
+[sub_resource type="StandardMaterial3D" id="BackdropMaterial"]
+albedo_color = Color(0.17, 0.15, 0.2, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BackdropMesh"]
+size = Vector3(4.7, 3.1, 0.1)
+
+[node name="AdaRoom" instance=ExtResource("Room")]
+setup_check = false
+
+[node name="Study" type="Node3D" parent="."]
+position = Vector3(0, 1.85, -1.2)
+script = ExtResource("Study")
+
+[node name="Backdrop" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.55, -1.65)
+mesh = SubResource("BackdropMesh")
+material_override = SubResource("BackdropMaterial")
+
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0, 3.0, -1.2)
+pixel_size = 0.003
+font_size = 30
+outline_size = 0
+modulate = Color(0.91, 0.67, 0.77, 1)
+text = "HOW CLOSE IS USEFUL?"
+
+[node name="Legend" type="Label3D" parent="."]
+position = Vector3(0, 0.17, -1.2)
+pixel_size = 0.0025
+font_size = 24
+outline_size = 0
+text = "Pink: measured segments / Grey: 256-segment guide\nThe length follows the centreline, not the stroke's thickness"

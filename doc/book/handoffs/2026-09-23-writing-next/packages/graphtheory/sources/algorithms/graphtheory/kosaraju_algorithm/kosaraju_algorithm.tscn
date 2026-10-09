@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://c9x8y7z6a5b4c"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.gd" id="1_kosaraju"]
+
+[node name="KosarajuAlgorithm" type="Node3D"]
+script = ExtResource("1_kosaraju")
+graph_size = 10
+edge_density = 0.4
+auto_start = true
+step_by_step = true
+animation_delay = 1.0
+show_finish_times = true
+show_transpose_graph = true
+highlight_current_vertex = true
+show_scc_colors = true
+animate_dfs_traversal = true
+show_stack_order = true
+enable_graph_editing = true
+allow_edge_editing = true
+real_time_scc_update = true
+show_algorithm_state = true
+vertex_color = Color(0.4, 0.6, 0.9, 1)
+visited_color = Color(0.9, 0.6, 0.2, 1)
+current_color = Color(0.9, 0.9, 0.2, 1)
+scc_color_1 = Color(0.9, 0.2, 0.2, 1)
+scc_color_2 = Color(0.2, 0.9, 0.2, 1)
+scc_color_3 = Color(0.2, 0.2, 0.9, 1)
+scc_color_4 = Color(0.9, 0.2, 0.9, 1)
+scc_color_5 = Color(0.2, 0.9, 0.9, 1)
+edge_color = Color(0.6, 0.6, 0.6, 0.8)
+transpose_edge_color = Color(0.9, 0.5, 0.2, 0.8)
+finished_color = Color(0.5, 0.5, 0.5, 1)

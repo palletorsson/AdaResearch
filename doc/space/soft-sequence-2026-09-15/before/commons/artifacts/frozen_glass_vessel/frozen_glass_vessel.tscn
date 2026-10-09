@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd" id="1"]
+
+[node name="FrozenGlassVessel" type="Node3D"]
+script = ExtResource("1")

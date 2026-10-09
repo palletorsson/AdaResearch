@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2g01b4l2hvas"]
+
+[ext_resource type="Script" uid="uid://d18f32co5w017" path="res://algorithms/spacetopology/marchingcubes/gputest.gd" id="1_uf777"]
+
+[node name="Gputest" type="Node3D"]
+script = ExtResource("1_uf777")

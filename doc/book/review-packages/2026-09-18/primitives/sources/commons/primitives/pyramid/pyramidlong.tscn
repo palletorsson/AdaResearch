@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu7lp5tac83s4"]
+
+[ext_resource type="Script" uid="uid://dukh4j4cwgfa2" path="res://commons/primitives/pyramid/pyramidlong.gd" id="1_lwsue"]
+
+[node name="pyramidlongpink" type="Node3D"]
+script = ExtResource("1_lwsue")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.01387)

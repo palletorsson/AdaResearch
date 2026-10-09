@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://p10gc2gtduud"]
+
+[ext_resource type="Script" uid="uid://d3oukdhcflss2" path="res://commons/interactables/slider_axis.gd" id="1"]
+[ext_resource type="Script" uid="uid://dlojnwxo25bky" path="res://addons/godot-xr-tools/interactables/interactable_handle.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://ca3daqmpo0tua" path="res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn" id="3"]
+[ext_resource type="Material" path="res://commons/ui/materials/handle_glow.tres" id="MatAccent"]
+[ext_resource type="Material" path="res://commons/ui/materials/metal_dark.tres" id="MatMetal"]
+[ext_resource type="Material" uid="uid://d304x5c6v7b8n" path="res://commons/interactables/materials/rack_panel.tres" id="MatPanel"]
+[ext_resource type="Material" path="res://commons/ui/materials/track_groove.tres" id="MatTrackGroove"]
+
+[sub_resource type="BoxShape3D" id="1"]
+size = Vector3(0.08, 0.22, 0.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Panel"]
+size = Vector3(0.08, 0.22, 0.01)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Track"]
+size = Vector3(0.01, 0.16, 0.001)
+
+[sub_resource type="BoxShape3D" id="2"]
+size = Vector3(0.01, 0.16, 0.01)
+
+[sub_resource type="BoxShape3D" id="3"]
+size = Vector3(0.04, 0.01, 0.03)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Rod"]
+size = Vector3(0.005, 0.16, 0.005)
+
+[sub_resource type="BoxMesh" id="BoxMesh_Handle"]
+size = Vector3(0.012, 0.035, 0.02)
+
+[sub_resource type="BoxShape3D" id="6"]
+size = Vector3(0.04, 0.02, 0.04)
+
+[node name="SliderAxis" type="Node3D" unique_id=895044707]
+
+[node name="Frame" type="StaticBody3D" parent="." unique_id=1359251114]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame" unique_id=467085458]
+shape = SubResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame" unique_id=511249315]
+mesh = SubResource("BoxMesh_Panel")
+surface_material_override/0 = ExtResource("MatPanel")
+
+[node name="TrackMesh" type="MeshInstance3D" parent="Frame" unique_id=72050137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.006)
+mesh = SubResource("BoxMesh_Track")
+surface_material_override/0 = ExtResource("MatTrackGroove")
+
+[node name="Label3DValue" type="Label3D" parent="Frame" unique_id=915180084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.01)
+pixel_size = 0.001
+text = "0.00"
+font_size = 12
+font_color = Color(0.0, 0.0, 0.0, 1)
+outline_size = 0
+
+[node name="SliderOrigin" type="Node3D" parent="." unique_id=2045202291]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07, 0.01)
+
+[node name="InteractableSlider" type="Node3D" parent="SliderOrigin" unique_id=946222051]
+script = ExtResource("1")
+default_on_release = true
+auto_drive = true
+
+[node name="SliderBody" type="StaticBody3D" parent="SliderOrigin/InteractableSlider" unique_id=1973857164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+
+[node name="RodCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody" unique_id=1871070327]
+visible = false
+shape = SubResource("2")
+
+[node name="HandleCollision" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/SliderBody" unique_id=2073318768]
+shape = SubResource("3")
+
+[node name="RodMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody" unique_id=1543584032]
+visible = false
+mesh = SubResource("BoxMesh_Rod")
+
+[node name="HandleMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody" unique_id=364940663]
+visible = false
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatMetal")
+
+[node name="AccentMesh" type="MeshInstance3D" parent="SliderOrigin/InteractableSlider/SliderBody" unique_id=1968835535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.002)
+mesh = SubResource("BoxMesh_Handle")
+surface_material_override/0 = ExtResource("MatAccent")
+
+[node name="HandleOrigin" type="Node3D" parent="SliderOrigin/InteractableSlider" unique_id=659773226]
+
+[node name="InteractableHandle" type="RigidBody3D" parent="SliderOrigin/InteractableSlider/HandleOrigin" unique_id=568528504]
+collision_layer = 262144
+collision_mask = 0
+freeze = true
+script = ExtResource("2")
+picked_up_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" unique_id=985094685]
+shape = SubResource("6")
+
+[node name="GrabPointRedirect" parent="SliderOrigin/InteractableSlider/HandleOrigin/InteractableHandle" unique_id=620168948 instance=ExtResource("3")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_cnns_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.gd" id="1_cnns_vr"]
+
+[node name="ConvolutionalNeuralNetworksCNNs_VR" type="Node3D"]
+script = ExtResource("1_cnns_vr")
+layer_spacing = 8.0
+feature_map_size = 3.0
+kernel_size = 0.4
+input_size = 28
+num_conv_layers = 3
+num_filters_per_layer = Array[int]([16, 32, 64])
+kernel_dimensions = 3
+num_dense_layers = 2
+auto_train = true
+training_speed = 0.1
+show_activations = true
+show_backprop = true
+enable_kernel_editing = true
+enable_feature_inspection = true
+show_receptive_fields = true
+animate_forward_pass = true

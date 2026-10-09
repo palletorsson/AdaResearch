@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/point-cube/point-cube.gd" id="Guest"]
+
+[node name="PointCube" type="Node3D"]
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.25, 0)
+script = ExtResource("Guest")
+
+[node name="Body" type="StaticBody3D" parent="Cube"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/Body"]

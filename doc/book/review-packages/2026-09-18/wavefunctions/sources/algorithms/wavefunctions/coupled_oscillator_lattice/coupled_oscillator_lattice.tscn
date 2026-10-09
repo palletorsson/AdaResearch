@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://e8jl0f1m4n6o8"]
+
+[ext_resource type="Script" path="res://algorithms/wavefunctions/coupled_oscillator_lattice/coupled_oscillator_lattice.gd" id="1_coupled"]
+
+[node name="CoupledOscillatorLattice" type="Node3D"]
+script = ExtResource("1_coupled")
+lattice_size = Vector2i(12, 12)
+oscillator_spacing = 0.4
+base_height = 1.0
+natural_frequency = 2.0
+mass = 1.0
+damping_coefficient = 0.02
+coupling_strength = 1.5
+coupling_range = 1
+excite_center = true
+excitation_amplitude = 0.5
+excitation_frequency = 2.0
+excitation_mode = "Sine"
+oscillator_radius = 0.06
+color_by_displacement = true
+show_connections = false
+max_displacement_color = 0.8

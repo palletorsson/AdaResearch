@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bflel2yrpl4jf"]
+
+[ext_resource type="Script" uid="uid://bkmp45kkbshow" path="res://algorithms/cellularautomata/ca_showcase/self_organization_ca.gd" id="1_self_org"]
+
+
+[node name="SelfOrganizationCA" type="Node3D"]
+script = ExtResource("1_self_org")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)

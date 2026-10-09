@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://ptqav8cu4wdp"]
+
+[ext_resource type="Script" uid="uid://qj7f106oxgny" path="res://algorithms/swarmintelligence/physarum/PhysarumColony.gd" id="1_colony"]
+[ext_resource type="PackedScene" path="res://algorithms/swarmintelligence/physarum/PhysarumAgent.tscn" id="2_agent_scene"]
+[ext_resource type="Shader" uid="uid://d05g4b6r0e5es" path="res://algorithms/swarmintelligence/physarum/physarum_veins.gdshader" id="3_shader"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_terrain"]
+size = Vector2(50, 50)
+subdivide_width = 255
+subdivide_depth = 255
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_veins"]
+render_priority = 0
+shader = ExtResource("3_shader")
+
+[node name="PhysarumColony" type="Node3D"]
+script = ExtResource("1_colony")
+num_agents = 300
+agent_scene = ExtResource("2_agent_scene")
+
+[node name="ResultMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_terrain")
+surface_material_override/0 = SubResource("ShaderMaterial_veins")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.173648, 0.984808, 0, -0.984808, 0.173648, 0, 40, 10)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 10, 10)

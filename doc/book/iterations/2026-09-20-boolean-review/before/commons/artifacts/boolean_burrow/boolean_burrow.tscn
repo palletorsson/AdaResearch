@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq4mv7xk2bn8w"]
+
+[ext_resource type="Script" path="res://commons/artifacts/boolean_burrow/boolean_burrow.gd" id="1_burrow"]
+
+; Stock, Spoil, the section cut and the roof pass are all built in _ready() from
+; a seeded walk. The script goes on the ROOT: GridInteractablesComponent sets
+; config_* metadata and calls apply_grid_config there, so logic on a child makes
+; every map token silently unreachable.
+
+[node name="BooleanBurrow" type="Node3D"]
+script = ExtResource("1_burrow")

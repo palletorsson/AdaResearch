@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd8ax6l86dvvm"]
+
+[ext_resource type="Script" uid="uid://by0bus0lm7u5t" path="res://algorithms/graphtheory/graphspace/graphspace.gd" id="1_7k351"]
+[ext_resource type="PackedScene" uid="uid://pukdnpvjavwf" path="res://algorithms/graphtheory/graphspace/room.tscn" id="2_gdugv"]
+[ext_resource type="PackedScene" uid="uid://tluyu160ehv2" path="res://algorithms/graphtheory/graphspace/portal.tscn" id="3_6cey7"]
+
+[node name="Graphspace" type="Node3D"]
+script = ExtResource("1_7k351")
+room_scene = ExtResource("2_gdugv")
+portal_scene = ExtResource("3_6cey7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.903784, 0.427989, 0, -0.427989, 0.903784, 0, 0.905386, 2.52615)

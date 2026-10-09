@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_xai_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.gd" id="1_xai_vr"]
+
+[node name="ExplainableAIXAI_VR" type="Node3D"]
+script = ExtResource("1_xai_vr")
+feature_spacing = 1.5
+importance_scale = 2.0
+zone_spacing = 10.0
+num_features = 10
+num_perturbations = 20
+num_attention_points = 16
+show_shap = true
+show_lime = true
+show_grad_cam = true
+enable_counterfactuals = true
+enable_feature_manipulation = true
+show_confidence = true
+show_decision_boundary = true
+animate_explanations = true

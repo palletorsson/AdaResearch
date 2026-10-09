@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8j2x5k1n4q2"]
+
+[ext_resource type="Script" uid="uid://gb71nu5y72cr" path="res://algorithms/color/simultaneous_contrast/SimultaneousContrast.gd" id="1_x8j2a"]
+
+[node name="SimultaneousContrast" type="Node3D"]
+script = ExtResource("1_x8j2a")

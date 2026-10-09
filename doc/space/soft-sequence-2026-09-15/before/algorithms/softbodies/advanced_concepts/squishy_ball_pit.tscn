@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ballpit456"]
+
+[ext_resource type="Script" uid="uid://dv4smfkifsxwx" path="res://algorithms/softbodies/advanced_concepts/squishy_ball_pit.gd" id="1_pit"]
+
+[node name="SquishyBallPit" type="Node3D"]
+script = ExtResource("1_pit")

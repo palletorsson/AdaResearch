@@ -1,0 +1,164 @@
+[gd_scene load_steps=14 format=3 uid="uid://cflnu0r1frky4"]
+
+[ext_resource type="PackedScene" uid="uid://dolpebrk85mkq" path="res://algorithms/physicssimulation/softbodies/softmill/rotatingarm.tscn" id="1_rotating_arm"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_base"]
+top_radius = 1.2
+bottom_radius = 1.5
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+metallic = 0.8
+roughness = 0.3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_base"]
+height = 0.4
+
+[sub_resource type="SphereMesh" id="SphereMesh_joint"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_joints"]
+albedo_color = Color(0.6, 0.5, 0.2, 1)
+metallic = 1.0
+roughness = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_shoulder"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_segments"]
+albedo_color = Color(0.8, 0.85, 0.9, 1)
+metallic = 0.9
+roughness = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_shoulder"]
+height = 1.2
+radius = 0.115723
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_upper_arm"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_upper_arm"]
+height = 0.8
+radius = 0.0961914
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_forearm"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 0.6
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_forearm"]
+height = 0.6
+radius = 0.136719
+
+[node name="RobotArmWithStand" type="Node3D"]
+
+[node name="RobotBase" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="BaseMesh" type="MeshInstance3D" parent="RobotBase"]
+transform = Transform3D(0.73, 0, 0, 0, 0.73, 0, 0, 0, 0.73, 0, 0.2, 0)
+mesh = SubResource("CylinderMesh_base")
+surface_material_override/0 = SubResource("StandardMaterial3D_base")
+
+[node name="BaseCollision" type="CollisionShape3D" parent="RobotBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_base")
+
+[node name="BaseJoint" type="StaticBody3D" parent="RobotBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="BaseJointSphere" type="MeshInstance3D" parent="RobotBase/BaseJoint"]
+mesh = SubResource("SphereMesh_joint")
+surface_material_override/0 = SubResource("StandardMaterial3D_joints")
+
+[node name="ShoulderSegment" type="StaticBody3D" parent="RobotBase/BaseJoint"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 0, 0.6, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="ShoulderMesh" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderSegment"]
+mesh = SubResource("CylinderMesh_shoulder")
+surface_material_override/0 = SubResource("StandardMaterial3D_segments")
+
+[node name="ShoulderCollision" type="CollisionShape3D" parent="RobotBase/BaseJoint/ShoulderSegment"]
+shape = SubResource("CylinderShape3D_shoulder")
+
+[node name="ShoulderJoint" type="StaticBody3D" parent="RobotBase/BaseJoint/ShoulderSegment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.036664, 1.2, 0.270452)
+collision_layer = 4
+collision_mask = 0
+
+[node name="ShoulderJointSphere" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint"]
+transform = Transform3D(1, -2.98023e-08, 1.19209e-07, 0, 1, 0, 0, -2.98023e-08, 1, -0.0475585, -0.540909, -0.277302)
+mesh = SubResource("SphereMesh_joint")
+surface_material_override/0 = SubResource("StandardMaterial3D_joints")
+
+[node name="UpperArmSegment" type="StaticBody3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint"]
+transform = Transform3D(0.953194, 0.291288, 0.0810708, -0.291288, 0.812775, 0.504526, 0.0810705, -0.504526, 0.859581, 0.0785561, -0.148268, -0.503359)
+collision_layer = 4
+collision_mask = 0
+
+[node name="UpperArmMesh" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment"]
+mesh = SubResource("CylinderMesh_upper_arm")
+surface_material_override/0 = SubResource("StandardMaterial3D_segments")
+
+[node name="UpperArmCollision" type="CollisionShape3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment"]
+transform = Transform3D(1, -9.08971e-07, 2.08616e-07, 0, 1, 8.9407e-08, 4.26173e-06, -5.06639e-07, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_upper_arm")
+
+[node name="ElbowJoint" type="StaticBody3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment"]
+transform = Transform3D(0.978057, -0.188026, 0.0897286, 0.158395, 0.391323, -0.90652, 0.135336, 0.90084, 0.412519, -0.0224015, 0.439089, -0.00988507)
+collision_layer = 4
+collision_mask = 0
+
+[node name="ElbowJointSphere" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment/ElbowJoint"]
+transform = Transform3D(1, -1.49012e-08, -2.98023e-08, 0, 1, -2.98023e-08, -2.98023e-08, 0, 1, 0.0184533, 0.00580192, 0.00572884)
+mesh = SubResource("SphereMesh_joint")
+surface_material_override/0 = SubResource("StandardMaterial3D_joints")
+
+[node name="ForearmSegment" type="StaticBody3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment/ElbowJoint"]
+transform = Transform3D(0.673447, 0.606153, 0.42314, -0.313374, -0.284335, 0.906063, 0.669526, -0.742786, -0.0015321, 0.212008, -0.0736377, -0.280046)
+collision_layer = 4
+collision_mask = 0
+
+[node name="ForearmMesh" type="MeshInstance3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment/ElbowJoint/ForearmSegment"]
+transform = Transform3D(0.997465, -0.0586906, -0.0402244, 0.0673536, 0.961091, 0.267895, 0.0229362, -0.269925, 0.962608, -0.0123745, -0.0318012, -0.108221)
+mesh = SubResource("CylinderMesh_forearm")
+surface_material_override/0 = SubResource("StandardMaterial3D_segments")
+
+[node name="ForearmCollision" type="CollisionShape3D" parent="RobotBase/BaseJoint/ShoulderSegment/ShoulderJoint/UpperArmSegment/ElbowJoint/ForearmSegment"]
+transform = Transform3D(1, -7.45058e-09, -2.38419e-07, 0, 1, -4.76837e-07, 0, 1.49012e-08, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_forearm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 8, 0)
+light_energy = 1.4
+shadow_enabled = true
+shadow_bias = 0.03
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5, -0.612372, 0.612372, 0, 0.707107, 0.707107, -0.866025, 0.353553, -0.353553, 0, 6, 0)
+light_color = Color(0.8, 0.9, 1, 1)
+light_energy = 0.5
+
+[node name="AccentLight" type="SpotLight3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0.5, 0.433013, -0.75, 0, 0.866025, 0.5, 3, 4, 3)
+light_color = Color(1, 0.9, 0.7, 1)
+light_energy = 2.0
+spot_range = 8.0
+spot_angle = 30.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.408248, 0.57735, 0, 0.816497, 0.57735, -0.707107, -0.408248, 0.57735, 6, 4, 6)
+
+[node name="Rotatingarm" parent="." instance=ExtResource("1_rotating_arm")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.0556628, 2.37823, -1.67038)

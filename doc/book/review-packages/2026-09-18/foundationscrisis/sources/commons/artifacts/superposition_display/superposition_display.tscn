@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://superposition_d1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/superposition_display/superposition_display.gd" id="1_script"]
+
+[node name="SuperpositionDisplay" type="Node3D"]
+script = ExtResource("1_script")

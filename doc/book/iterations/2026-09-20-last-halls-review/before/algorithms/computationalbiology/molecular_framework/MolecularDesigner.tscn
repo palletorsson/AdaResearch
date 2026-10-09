@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://molecular_designer_main"]
+
+[ext_resource type="Script" path="res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd" id="1_designer_script"]
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.1, 0.12, 0.15, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.6, 0.7, 0.8, 1)
+ambient_light_energy = 0.5
+
+[node name="MolecularDesigner" type="Node3D"]
+script = ExtResource("1_designer_script")
+json_path = "res://algorithms/computationalbiology/molecular_framework/assemblies.json"
+part_scene_path = "res://algorithms/computationalbiology/molecular_framework/Part.tscn"
+inventory_count = 40
+inventory_box = Vector3(3, 2, 3)
+inventory_center = Vector3(0, 1, 0)
+assemble_height = 0.0
+bond_radius = 0.02
+bond_color = Color(0.9, 0.9, 1, 1)
+enable_hot_reload = true
+reload_check_interval = 1.0
+enable_auto_cycle = true
+float_duration = 10.0
+assemble_duration = 10.0
+cycle_assemblies = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 5, 3)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 1.5, 5)
+fov = 75.0
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+visible = true
+
+[node name="InstructionsLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -2)
+pixel_size = 0.001
+billboard = 1
+modulate = Color(0.8, 0.9, 1, 1)
+text = "MOLECULAR DESIGNER
+
+AUTO-CYCLE MODE
+Watch forms crystallize from floating parts!
+
+11 Assemblies:
+• VRBody, Chair, Table, Lamp, Shelf
+• DNAHelix, Insect, Spider, Octopus
+• AlienTree, CrystalTree, Molecule
+
+Cycles every 10 seconds"
+font_size = 32
+outline_size = 8
+outline_modulate = Color(0, 0, 0, 1)

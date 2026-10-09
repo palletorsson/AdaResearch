@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Room"]
+[ext_resource type="Script" path="res://studies/point_one/position.gd" id="Position"]
+[ext_resource type="Script" path="res://studies/point_one/visible.gd" id="Visible"]
+[ext_resource type="Script" path="res://studies/point_one/solid.gd" id="Solid"]
+
+[node name="AdaRoom" instance=ExtResource("Room")]
+setup_check = false
+
+[node name="Position" type="Node3D" parent="."]
+position = Vector3(-2, 0, -0.4)
+script = ExtResource("Position")
+
+[node name="Visible" type="Node3D" parent="."]
+position = Vector3(0, 0, -0.4)
+script = ExtResource("Visible")
+
+[node name="Solid" type="Node3D" parent="."]
+position = Vector3(2, 0, -0.4)
+script = ExtResource("Solid")
+
+[node name="PositionLabel" type="Label3D" parent="."]
+position = Vector3(-2, 0.68, -0.23)
+pixel_size = 0.002
+font_size = 48
+outline_size = 0
+text = "Point one"
+
+[node name="VisibleLabel" type="Label3D" parent="."]
+position = Vector3(0, 0.68, -0.23)
+pixel_size = 0.002
+font_size = 48
+outline_size = 0
+text = "Point one"
+
+[node name="SolidLabel" type="Label3D" parent="."]
+position = Vector3(2, 0.68, -0.23)
+pixel_size = 0.002
+font_size = 48
+outline_size = 0
+text = "Point one"
+
+[node name="PositionCaption" type="Label3D" parent="."]
+position = Vector3(-2, 0.43, -0.23)
+pixel_size = 0.002
+font_size = 23
+outline_size = 0
+modulate = Color(0.91, 0.67, 0.77, 1)
+text = "01 / POSITION"
+
+[node name="VisibleCaption" type="Label3D" parent="."]
+position = Vector3(0, 0.43, -0.23)
+pixel_size = 0.002
+font_size = 23
+outline_size = 0
+modulate = Color(0.91, 0.67, 0.77, 1)
+text = "02 / SURFACE"
+
+[node name="SolidCaption" type="Label3D" parent="."]
+position = Vector3(2, 0.43, -0.23)
+pixel_size = 0.002
+font_size = 23
+outline_size = 0
+modulate = Color(0.91, 0.67, 0.77, 1)
+text = "03 / BOUNDARY"

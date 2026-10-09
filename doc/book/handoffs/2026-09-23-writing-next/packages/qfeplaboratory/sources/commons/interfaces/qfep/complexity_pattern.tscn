@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_complexity_pattern"]
+
+[ext_resource type="Script" uid="uid://qfep_complexity_pattern_script" path="res://commons/interfaces/qfep/complexity_pattern.gd" id="1_pattern"]
+
+[node name="ComplexityPattern" type="Node3D"]
+script = ExtResource("1_pattern")

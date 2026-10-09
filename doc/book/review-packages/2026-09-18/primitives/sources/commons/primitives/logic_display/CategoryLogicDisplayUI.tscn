@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8y4k2v0n7m8j"]
+
+[ext_resource type="Script" path="res://commons/primitives/logic_display/category_logic_display_ui.gd" id="1_script"]
+
+[node name="CategoryLogicDisplayUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)

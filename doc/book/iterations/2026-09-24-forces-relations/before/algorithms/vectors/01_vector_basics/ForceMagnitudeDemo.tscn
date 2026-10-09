@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://force_magnitude_demo_001"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.gd" id="1"]
+
+[node name="ForceMagnitudeDemo" type="Node3D"]
+script = ExtResource("1")

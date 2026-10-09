@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://nqthov2jdhgy"]
+
+[ext_resource type="Script" uid="uid://b3m6ye2r57ibe" path="res://commons/primitives/translation/translation_cube_demo.gd" id="1_cube_demo"]
+
+[node name="TranslationCubeDemo" type="Node3D"]
+script = ExtResource("1_cube_demo")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+visible = false
+pixel_size = 0.004
+billboard = 1
+text = "X-Axis Translation"

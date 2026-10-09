@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/regularity/disco_controls.gd" id="1"]
+
+[node name="disco_controls" type="Node3D"]
+script = ExtResource("1")

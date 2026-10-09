@@ -1,0 +1,338 @@
+{
+  "sequences": {
+	"randomness": {
+	  "name": "Randomness: What Can Chance Change?",
+	  "description": "A draw enters a world that has already made choices: its possible values, their distribution, the eligible bodies, the clock, the memory and the consequences. Begin by recovering a picture, then discover how the same draw can become a colour, an absence, a step, a garment or a lost foothold. Learning those rules also makes it possible to ask which other bodies and relations they could admit.",
+	  "qfep_term": "E(S)",
+	  "qfep_connection": "The sequence investigates the project’s connection between uncertainty, possibility and freedom through specific encounters. Empirical categorical Shannon entropy measures symbol shares in a retained sample; it is not a direct measure of spatial disorder, thermodynamic entropy or freedom. The critical question remains open: which differences may occur within a rule, and what changes when we alter the rule itself?",
+	  "layer": "E_entropy",
+	  "difficulty": "intermediate",
+	  "estimated_time": "25-30 minutes",
+	  "learning_objectives": [
+		"Separate a generator seed from the procedure that consumes and assigns its draws",
+		"Compare sample order, symbol shares and categorical Shannon entropy without equating them",
+		"Inspect eligibility before selection, then distinguish hiding geometry from withdrawing collision support",
+		"Relate local binary marks to larger contours and a separately implemented navigation graph",
+		"Compare a physical-looking die outcome with a retained record and the conditions of its throws",
+		"Separate accumulated changes in position, orientation and appearance",
+		"Distinguish direction sets, bounded step-length laws, boundary handling and retained history",
+		"Compare sampling procedures, clipping and rebinning of the same stored values",
+		"Distinguish variation within a wardrobe from changing the construction that makes forms possible",
+		"Compare independent spatial variation with correlated neighbours and finite layered fields",
+		"Identify the different jobs of chance in mark generation, numerical estimation, path growth and particle updates",
+		"Compare a recorded trail with a signal that influences later choices",
+        "Distinguish an already sampled deadline from an undrawn wait, and a cue from the event it reveals"
+	  ],
+	  "content": [
+		"Random_Definition: A seed needs a procedure before it becomes a picture",
+		"Random_Entropy: Sorting changes order while symbol shares and their gauge stay",
+		"Random_Remove: Filter, draw, delete — and decide what support disappears",
+		"Randomness_10_PRINT_Algorithm: Local choices become marks, contours and separately computed passages",
+		"Random_Cubes: A single throw becomes an empirical record",
+		"Random_Rotate_Random_XYZ: Decompose the impression of disorder into changing variables",
+		"Random_Walk: Steps accumulate; a retained trail need not guide the next step",
+		"Random_Gaussian: Sampling, clipping and binning give a record its shape",
+		"Random_Mushrooms: Visit a specimen bed, an arrival wardrobe and a different garment construction",
+		"Random_Space_Geometry: Compare independent heights with correlated neighbours",
+		"Randomness_Examples_of_Randomness: Give chance different jobs in a gallery of procedures",
+		"Random_Pheromone: A mark enters the next decision",
+		"Random_Space: Combine finite contributions at different scales",
+        "Random_Game: What is already decided, and what must your body still discover?"
+	  ],
+	  "maps": [
+		"Random_Definition",
+		"Random_Entropy",
+		"Random_Remove",
+		"Randomness_10_PRINT_Algorithm",
+		"Random_Cubes",
+		"Random_Rotate_Random_XYZ",
+		"Random_Walk",
+		"Random_Gaussian",
+		"Random_Mushrooms",
+		"Random_Space_Geometry",
+		"Randomness_Examples_of_Randomness",
+		"Random_Pheromone",
+		"Random_Space",
+        "Random_Game"
+	  ],
+	  "deferred_maps": [
+        "Chamber_Random"
+	  ],
+	  "deferred_reason": {
+		"Chamber_Random": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+	  },
+	  "audio": {
+		"ambient_preset": "white_noise_drift",
+		"interactive_sounds": {
+		  "teleport": "AudioSynthesizer.NOISE_BURST"
+		},
+		"volume": -12.0
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_random",
+	  "unlock_requirements": [
+        "color"
+	  ],
+	  "completion_rewards": [
+		"entropy_badge",
+		"chaos_explorer_badge",
+        "computational_wilderness_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "Random_Definition",
+		  "position": "intro",
+		  "artifacts": [
+			"seed_replay_demo",
+			"prng_crank_machine",
+			"slot_machine",
+			"trng_vs_prng",
+			"random_number_book_page_1955",
+            "catalyst_pickup"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Recover a seeded picture, then compare how other devices produce or retain a draw.",
+		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Random_Remove",
+		  "position": "intro",
+		  "artifacts": [
+			"remove_random",
+			"sampling_hoppers",
+            "random_removal_arena"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "The board defines eligibility; paired cases compare returning and withholding a member; the floor connects removal to bodily support.",
+		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Randomness_10_PRINT_Algorithm",
+		  "position": "foundation",
+		  "artifacts": [
+			"ten_print",
+			"composition_stochastique",
+			"ten_print_structure",
+			"remove_random",
+			"ten_print_maze_3d",
+			"pickup_cube_placer",
+			"clipboard#ten_print_axioms",
+			"dark_sphere",
+            "nature_system_demo"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Take one line of BASIC apart at its coin (205.5) and its semicolon, see the same stream laid on the floor, then walk into twelve of its characters stood up as solid walls to find whether they left a way through.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Random_Cubes",
+		  "position": "foundation",
+		  "artifacts": [
+			"dice_throw",
+			"paired_dice_column",
+			"continuing_die",
+			"coin_toss",
+			"random_object_spawner",
+			"random_edge_profile",
+            "dark_sphere"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "One die rewards a face; paired dice compose a height; the continuing die turns six into permission for another throw. Coin, changing heap and bounded field retain different consequences.",
+		  "grammar": "metropolitan"
+		},
+		{
+		  "map": "Random_Rotate_Random_XYZ",
+		  "position": "foundation",
+		  "artifacts": [
+			"Random_Rotate_Random_XYZ",
+			"dark_sphere",
+			"random_decay_multimesh",
+            "hardware_entropy_decay"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Random transformations on geometric objects; introduces entropy decay concept",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Random_Walk",
+		  "position": "exploration",
+		  "artifacts": [
+			"random_walk_terrarium",
+			"random_position_rails",
+			"random_draw_dot",
+			"random_walk_128",
+			"random_walk_collection",
+			"random_walk_leash",
+            "pixel_cloud"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Follow steps in the terrarium; compare fresh positions and accumulated steps on paired rails; carry a walking tip by hand, then enter a terrain that retains visits.",
+		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Random_Gaussian",
+		  "position": "exploration",
+		  "artifacts": [
+			"distribution_sampler",
+			"galton_board",
+			"distribution_comparator",
+            "GaussianPaintSplatter"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Compare retained samples at the central cabinet; falling beads, three sampling laws and paint marks extend that comparison.",
+		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Random_Mushrooms",
+		  "position": "exploration",
+		  "artifacts": [
+			"mushrooms",
+			"silhouette_arrivals",
+			"couture_comparison",
+            "bubbles_random"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Follow three existing encounters: sampled specimens, an arrival wardrobe and altered garment constructions. The bubble dish remains a supporting population.",
+		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Random_Space_Geometry",
+		  "position": "integration",
+		  "artifacts": [
+			"random_transformations_geometric",
+			"dark_sphere",
+			"env_one",
+            "sculpt_one"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Random geometric transformations at structural level; environment-scale sculpting",
+		  "grammar": "vatican"
+		},
+		{
+		  "map": "Randomness_Examples_of_Randomness",
+		  "position": "integration",
+		  "artifacts": [
+			"pollock_painting_in_3d",
+			"pipe_dream",
+			"dark_sphere",
+			"monte_carlo_dartboard",
+            "extreme_randomness"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Gallery of artistic randomness applications: Pollock, Monte Carlo, pipe systems",
+		  "grammar": "metropolitan"
+		},
+		{
+		  "map": "Random_Pheromone",
+		  "position": "integration",
+		  "artifacts": [
+			"dark_sphere",
+			"pheromone_terrain",
+			"clipboard#pheromone_axioms",
+            "clipboard#queer_energy"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Stigmergy and pheromone trails: randomness leaving traces becomes emergent behavior",
+		  "grammar": "venice"
+		},
+		{
+		  "map": "Random_Space",
+		  "position": "synthesis",
+		  "artifacts": [
+			"noise_mixer",
+			"worley_noise",
+			"random_space",
+			"dark_sphere",
+            "shannon_entropy_meter"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Compare a finite sine-based field mixer with retained cellular, spatial and statistical representations. No claim that the mixer simulates geology.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Random_Game",
+		  "position": "synthesis",
+		  "artifacts": [
+			"r_c",
+			"random_removal_arena",
+			"random_doors",
+			"door_timing_trials",
+            "cube_projectile_spawner"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Sampled waits, removal, concealed assignment and matched decision/disclosure trials give uncertainty distinct bodily consequences before the regular falling field.",
+		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Random_Entropy",
+		  "position": "exploration",
+		  "size_budget": "mixed",
+		  "artifacts": [
+			"shannon_entropy_meter",
+			"entropy_jar",
+			"hardware_entropy_decay",
+			"entropy_axiom",
+			"random_butterflies",
+            "signal_room"
+		  ],
+		  "rationale": "Measure symbol shares at the central ledger; compare the measurement with visible disorder in the side exhibits.",
+		  "grammar": "central_hero",
+		  "application_studies": {
+			"signal_room": "Shuffle the retained values; compare unchanged counts with changed neighbours."
+		  }
+		}
+	  ],
+	  "museum_interludes": [
+		{
+		  "map": "Biome_Cage",
+		  "after": "Random_Mushrooms",
+		  "purpose": "Retained museum application: an authored repertoire is staged as a seeded composition. No additional final.md chapter is implied."
+		},
+		{
+		  "map": "Biome_Ladder_Randomness",
+		  "after": "Random_Game",
+		  "purpose": "Retained closing application: the sequence’s vocabulary accumulates in successive seeded biome compositions."
+		}
+	  ],
+	  "local_review_history": [
+		{
+		  "date": "2026-09-19",
+		  "reason": "Restore fourteen chapters and retain two authored biome interludes; distinguish different jobs of chance.",
+		  "previous": {
+			"name": "Randomness: Freedom from Pattern",
+			"description": "Entropy is not decayâ€”entropy is freedom. High-dimensional possibility space too vast to map, too free to control. Where the algorithm cannot predict, where indices fail, where normalization is refused. Randomness is computational wilderness: the vital space from which patterns emerge without blueprint.",
+			"qfep_connection": "Randomness IS entropy â€” the E(S) term in its purest form. This sequence explores what happens when prediction fails, when patterns dissolve, when the F-model encounters irreducible uncertainty.",
+			"learning_objectives": [
+			  "Entropy as possibility space, not destruction",
+			  "PRNG vs TRNG: deterministic sequences vs physical randomness",
+			  "Distributions: uniform, Gaussian, and the shapes of chance",
+			  "Random walk: non-teleological movement, queer navigation",
+			  "Emergence: Turing morphogenesis, patterns from noise",
+              "Shannon entropy: H = -Σ p log p. Logarithm measures disorder. Factorials count arrangements. The integral named at change (seq 4.5) reappears here as expectation — sum over a distribution becomes integral in the continuous limit."
+			],
+			"content": [
+			  "Random_Definition: Entropy as Wilderness",
+			  "Random_Entropy: The Harvest Room",
+			  "Random_Remove: Subtraction as Authorship",
+			  "Randomness_10_PRINT_Algorithm: One Line Infinite Maze",
+			  "Random_Cubes: Probability Primitives",
+			  "Random_Rotate_Random_XYZ: Three Axes of Chaos",
+			  "Random_Walk: Brownian Motion Paths",
+			  "Random_Gaussian: Bell Curve Emergence",
+			  "Chamber_Random: Entropy Becomes Encounter",
+			  "Random_Mushrooms: Spores and Random Tables",
+			  "Random_Space_Geometry: Geometry Meets Entropy",
+			  "Randomness_Examples_of_Randomness: Gallery of Creative Chaos",
+			  "Random_Pheromone: Stigmergy and Trails",
+			  "Random_Space: Randomness Fills Space",
+              "Random_Game: Survive the Algorithm"
+			],
+			"museum_interludes": null
+		  }
+		}
+	  ]
+	}
+  },
+  "world_phase": "transition",
+  "artifact_groups": []
+}

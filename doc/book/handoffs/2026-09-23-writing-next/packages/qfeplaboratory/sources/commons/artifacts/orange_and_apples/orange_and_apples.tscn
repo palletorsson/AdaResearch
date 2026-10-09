@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/orange_and_apples/orange_and_apples.gd" id="1_oaa"]
+
+; Everything is built in _ready(): the bench, the hood, the bed of identical dark
+; knobs with three RigidBody3D apples hidden among the static decoys, the rack of
+; XRToolsPickable oranges, and the constant-area rectangle on the panel above.
+;
+; THE SCRIPT IS ON THE ROOT and that is not tidiness. GridInteractablesComponent
+; writes config_* metadata and calls apply_grid_config on the ROOT node, so the
+; same logic sitting on a child would leave every #mode / #cols / #rows / #count
+; in every map token silently unreachable, with the token still looking correct.
+;
+; The scene is a single empty Node3D on purpose: the oranges are instances of
+; addons/godot-xr-tools/objects/pickable.tscn, made in code because how many of
+; them there are is a map's decision (#count) — and a fixed row of them in the
+; .tscn could not answer it.
+
+[node name="OrangeAndApples" type="Node3D"]
+script = ExtResource("1_oaa")

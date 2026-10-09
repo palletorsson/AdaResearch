@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://magritte_pipe"]
+
+[ext_resource type="Script" path="res://commons/interfaces/foundations/magritte_pipe.gd" id="1_script"]
+
+[node name="MagrittePipe" type="Node3D"]
+script = ExtResource("1_script")

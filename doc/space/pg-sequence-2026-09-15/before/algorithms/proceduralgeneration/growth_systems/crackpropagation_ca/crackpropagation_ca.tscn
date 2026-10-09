@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgm4823axdjel"]
+
+[ext_resource type="Script" uid="uid://8uhmablj0763" path="res://algorithms/proceduralgeneration/crackpropagation_ca/crackpropagation_ca.gd" id="1_8cci1"]
+
+[node name="CrackpropagationCa" type="Node3D"]
+script = ExtResource("1_8cci1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.867835, 0.496853, 0, -0.496853, 0.867835, 0, 0.813684, 1.78687)

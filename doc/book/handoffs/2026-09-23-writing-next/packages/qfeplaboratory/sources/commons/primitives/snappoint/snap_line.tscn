@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7yqn5r3m8wvp"]
+
+[ext_resource type="Script" uid="uid://kvolpy83xfjy" path="res://commons/primitives/snappoint/snap_line.gd" id="1_line"]
+
+[node name="SnapLine" type="Node3D"]
+script = ExtResource("1_line")

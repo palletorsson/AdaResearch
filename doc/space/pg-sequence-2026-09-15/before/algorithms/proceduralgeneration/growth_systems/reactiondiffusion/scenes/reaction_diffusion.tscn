@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dajtqdmha6b1p"]
+
+[ext_resource type="Script" uid="uid://d3wtvokblpagg" path="res://algorithms/proceduralgeneration/reactiondiffusion/scripts/reaction_diffusion.gd" id="1_eimef"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_016qo"]
+size = Vector2(0.5, 0.5)
+
+[node name="ReactionDiffusion" type="Node3D"]
+script = ExtResource("1_eimef")
+label_text = "hej"
+
+[node name="ReactionDiffusionPlanMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_016qo")
+
+[node name="id_info_Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+text = "Reaction-Diffusion"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.429975, 0.902841, 0, -0.902841, 0.429975, 0, 0.402174, 0.262501)

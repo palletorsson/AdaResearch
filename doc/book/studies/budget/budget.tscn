@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://budget.gd" id="Budget"]
+[ext_resource type="Script" path="res://guests/budget/neck.gd" id="Neck"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[sub_resource type="TorusMesh" id="RingMesh"]
+inner_radius = 0.62
+outer_radius = 0.8
+rings = 3
+ring_segments = 12
+
+[node name="Budget" instance=ExtResource("Base")]
+script = ExtResource("Budget")
+
+[node name="Neck" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.9, -0.4)
+rotation = Vector3(1.5707964, 0, 0)
+script = ExtResource("Neck")
+size = 1.0
+
+[node name="Ring" type="MeshInstance3D" parent="."]
+position = Vector3(2.75, 0.85, -1.4)
+rotation = Vector3(1.5707964, 0, 0)
+mesh = SubResource("RingMesh")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(0, 0, 2.3)
+
+[node name="Readout" type="Label3D" parent="."]
+position = Vector3(0, 3.15, -1.7)
+pixel_size = 0.004
+font_size = 30

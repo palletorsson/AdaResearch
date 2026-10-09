@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://doc/book/iterations/2026-10-08-ca-a-pattern-visits/museum/museum_snapshot.gd" id="1"]
+
+[node name="EndlessMuseum" type="Node3D" unique_id=1933487236]
+script = ExtResource("1")
+start_chapter = "forces"
+start_map = "Vectors_Act1_WhatAVectorIs"

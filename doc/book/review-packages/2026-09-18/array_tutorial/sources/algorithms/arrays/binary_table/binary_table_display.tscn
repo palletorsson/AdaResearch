@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbin_table_001"]
+
+[ext_resource type="Script" path="res://algorithms/arrays/binary_table/binary_table_display.gd" id="1_display"]
+
+[node name="BinaryTableDisplay" type="Node3D"]
+script = ExtResource("1_display")
+rows = 4
+cols = 4
+cell_size = 0.08
+font_size = 24
+show_indices = true
+title = ""

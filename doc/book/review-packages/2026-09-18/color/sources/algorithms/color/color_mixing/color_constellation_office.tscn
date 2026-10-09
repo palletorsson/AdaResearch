@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dg5qo5a5d587c"]
+
+[ext_resource type="Script" uid="uid://bsbksd061f0bx" path="res://algorithms/color/color_mixing/color_constellation_office.gd" id="1"]
+
+[node name="ColorConstellationOffice" type="Node3D" unique_id=106900939]
+script = ExtResource("1")

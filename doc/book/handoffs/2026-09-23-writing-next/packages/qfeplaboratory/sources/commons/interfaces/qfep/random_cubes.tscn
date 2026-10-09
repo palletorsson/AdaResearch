@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_random_cubes"]
+
+[ext_resource type="Script" uid="uid://qfep_random_cubes_script" path="res://commons/interfaces/qfep/random_cubes.gd" id="1_random"]
+
+[node name="RandomCubes" type="Node3D"]
+script = ExtResource("1_random")

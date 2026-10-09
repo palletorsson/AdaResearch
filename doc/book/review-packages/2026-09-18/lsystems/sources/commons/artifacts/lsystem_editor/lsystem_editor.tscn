@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://lsystem_editor_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/lsystem_editor/lsystem_editor.gd" id="1_script"]
+
+[node name="LSystemEditor" type="Node3D"]
+script = ExtResource("1_script")
+display_size = 1.0
+line_color = Color(0.3, 0.8, 0.3, 1)
+max_line_length = 0.02
+axiom = "X"
+angle_degrees = 25.0
+generations = 5
+preset = 3

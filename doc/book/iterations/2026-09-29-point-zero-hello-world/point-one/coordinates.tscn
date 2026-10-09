@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Base"]
+[ext_resource type="Script" path="res://points.gd" id="Points"]
+
+[sub_resource type="StandardMaterial3D" id="White"]
+albedo_color = Color(0.92, 0.92, 0.89, 1)
+roughness = 0.85
+
+[sub_resource type="SphereMesh" id="Marker"]
+material = SubResource("White")
+radius = 0.14
+height = 0.28
+
+
+[sub_resource type="StandardMaterial3D" id="XMaterial"]
+albedo_color = Color(0.85, 0.29, 0.27, 1)
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="YMaterial"]
+albedo_color = Color(0.3, 0.72, 0.44, 1)
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="ZMaterial"]
+albedo_color = Color(0.3, 0.55, 0.94, 1)
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="XGuide"]
+material = SubResource("XMaterial")
+size = Vector3(3.6, 0.018, 0.018)
+
+[sub_resource type="BoxMesh" id="YGuide"]
+material = SubResource("YMaterial")
+size = Vector3(0.018, 2.1, 0.018)
+
+[sub_resource type="BoxMesh" id="ZGuide"]
+material = SubResource("ZMaterial")
+size = Vector3(0.018, 0.018, 3.2)
+
+[node name="CoordinateStudy" instance=ExtResource("Base")]
+script = ExtResource("Points")
+
+[node name="Welcome" parent="." index="0"]
+visible = false
+
+[node name="A" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("Marker")
+
+[node name="B" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("Marker")
+
+[node name="Guides" type="Node3D" parent="."]
+
+[node name="X" type="MeshInstance3D" parent="Guides"]
+position = Vector3(0, 0, 0)
+mesh = SubResource("XGuide")
+
+[node name="Y" type="MeshInstance3D" parent="Guides"]
+position = Vector3(0, 1.05, 0)
+mesh = SubResource("YGuide")
+
+[node name="Z" type="MeshInstance3D" parent="Guides"]
+position = Vector3(0, 0, 0)
+mesh = SubResource("ZGuide")
+
+[node name="Origin" type="Label3D" parent="Guides"]
+position = Vector3(0.15, 0.13, 0)
+pixel_size = 0.002
+font_size = 42
+outline_size = 0
+text = "0"
+
+[node name="XLabel" type="Label3D" parent="Guides"]
+position = Vector3(1.95, 0.14, 0)
+pixel_size = 0.002
+font_size = 42
+outline_size = 0
+text = "+X"
+
+[node name="YLabel" type="Label3D" parent="Guides"]
+position = Vector3(0, 2.26, 0)
+pixel_size = 0.002
+font_size = 42
+outline_size = 0
+text = "+Y"
+
+[node name="ZLabel" type="Label3D" parent="Guides"]
+position = Vector3(0, 0.16, 1.75)
+pixel_size = 0.002
+font_size = 42
+outline_size = 0
+text = "+Z"

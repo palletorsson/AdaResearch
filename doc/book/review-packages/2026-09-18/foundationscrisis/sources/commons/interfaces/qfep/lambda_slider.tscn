@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djemclycw2kgk"]
+
+[ext_resource type="Script" uid="uid://d0onlwbqk2pho" path="res://commons/interfaces/qfep/lambda_slider.gd" id="1_lambda"]
+
+[node name="LambdaSlider" type="Node3D"]
+script = ExtResource("1_lambda")

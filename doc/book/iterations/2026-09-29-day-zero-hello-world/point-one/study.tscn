@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Base"]
+[ext_resource type="Script" path="res://position.gd" id="1"]
+[ext_resource type="Script" path="res://visible.gd" id="2"]
+[ext_resource type="Script" path="res://solid.gd" id="3"]
+
+[node name="PointStudy" instance=ExtResource("Base")]
+
+[node name="Welcome" parent="." index="0"]
+visible = false
+
+[node name="Position" type="Node3D" parent="."]
+position = Vector3(-1.25, 0, 0)
+script = ExtResource("1")
+
+[node name="Visible" type="Node3D" parent="."]
+script = ExtResource("2")
+
+[node name="Solid" type="Node3D" parent="."]
+position = Vector3(1.25, 0, 0)
+script = ExtResource("3")
+
+[node name="LabelPosition" type="Label3D" parent="."]
+position = Vector3(-1.25, 0.72, 0)
+pixel_size = 0.002
+font_size = 40
+text = "Point one"
+outline_size = 0
+
+[node name="LabelVisible" type="Label3D" parent="."]
+position = Vector3(0, 0.72, 0)
+pixel_size = 0.002
+font_size = 40
+text = "Point one"
+outline_size = 0
+
+[node name="LabelSolid" type="Label3D" parent="."]
+position = Vector3(1.25, 0.72, 0)
+pixel_size = 0.002
+font_size = 40
+text = "Point one"
+outline_size = 0
+

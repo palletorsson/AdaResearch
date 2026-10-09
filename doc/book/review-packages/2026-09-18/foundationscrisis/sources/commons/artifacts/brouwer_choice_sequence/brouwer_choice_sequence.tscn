@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://brouwer_choice1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.gd" id="1_script"]
+
+[node name="BrouwerChoiceSequence" type="Node3D"]
+script = ExtResource("1_script")

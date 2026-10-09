@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxvhxqxqxqxs"]
+
+[ext_resource type="Script" uid="uid://e4h6irqfj14b" path="res://algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd" id="1_0xqxs"]
+[ext_resource type="Script" uid="uid://bgajkg3bnqisf" path="res://algorithms/physicssimulation/threebodyproblem/CelestialBody.gd" id="2_0xqxs"]
+
+[node name="ThreeBodyProblem" type="Node3D"]
+script = ExtResource("1_0xqxs")
+
+[node name="StarField" type="Node3D" parent="."]
+
+[node name="CelestialBodies" type="Node3D" parent="."]
+
+[node name="Body1" type="Node3D" parent="CelestialBodies"]
+script = ExtResource("2_0xqxs")
+body_name = "Alpha"
+body_color = Color(1, 0.5, 0, 1)
+initial_position = Vector3(-5, 0, 0)
+initial_velocity = Vector3(0, 0, 3)
+
+[node name="Body2" type="Node3D" parent="CelestialBodies"]
+script = ExtResource("2_0xqxs")
+body_name = "Beta"
+body_color = Color(0, 0.5, 1, 1)
+initial_position = Vector3(5, 0, 0)
+initial_velocity = Vector3(0, 0, -3)
+
+[node name="Body3" type="Node3D" parent="CelestialBodies"]
+script = ExtResource("2_0xqxs")
+body_name = "Gamma"
+body_color = Color(0.5, 0, 1, 1)
+initial_position = Vector3(0, 0, 5)
+initial_velocity = Vector3(-3, 0, 0)
+
+[node name="Trails" type="Node3D" parent="."]
+
+[node name="CaptureCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.342, 0.9397, 0, -0.9397, 0.342, 0, 20, 6)
+fov = 75.0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://supplied/base.tscn" id="Base"]
+[ext_resource type="Script" path="res://table.gd" id="Table"]
+[ext_resource type="Script" path="res://counter.gd" id="Counter"]
+[ext_resource type="PackedScene" path="res://supplied/walker.tscn" id="Walker"]
+
+[node name="Balance" instance=ExtResource("Base")]
+
+[node name="Table" type="Node3D" parent="."]
+script = ExtResource("Table")
+
+[node name="Counter" type="Node3D" parent="."]
+position = Vector3(0, 1.5, 0)
+script = ExtResource("Counter")
+
+[node name="Walker" parent="." instance=ExtResource("Walker")]
+position = Vector3(-1.6, 0, 0)
+rotation = Vector3(0, -1.5708, 0)

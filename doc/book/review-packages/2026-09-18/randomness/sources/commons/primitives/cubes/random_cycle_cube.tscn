@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/primitives/cubes/random_cycle_cube.gd" id="1_script"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_main"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_main"]
+size = Vector3(1, 1, 1)
+
+[node name="RandomCycleCube" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="CubeMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_main")
+
+[node name="ColliderBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ColliderBody"]
+shape = SubResource("BoxShape3D_main")
+
+[node name="StateIndicator" type="MeshInstance3D" parent="."]
+visible = false
+position = Vector3(0, 0.72, 0)

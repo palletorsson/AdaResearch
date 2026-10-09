@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_ordered_grid"]
+
+[ext_resource type="Script" uid="uid://qfep_ordered_grid_script" path="res://commons/interfaces/qfep/ordered_grid.gd" id="1_grid"]
+
+[node name="OrderedGrid" type="Node3D"]
+script = ExtResource("1_grid")

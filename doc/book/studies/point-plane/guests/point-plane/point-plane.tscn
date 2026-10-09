@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://guests/point-plane/point-plane.gd" id="Guest"]
+
+[node name="PointPlane" type="Node3D"]
+script = ExtResource("Guest")
+
+[node name="Face" type="MeshInstance3D" parent="."]
+
+[node name="FaceBody" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FaceBody"]

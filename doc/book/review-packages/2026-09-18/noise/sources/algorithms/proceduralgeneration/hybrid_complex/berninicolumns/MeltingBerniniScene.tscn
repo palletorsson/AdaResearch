@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7g4dxk5n8yw6"]
+
+[ext_resource type="Script" uid="uid://v6alv7t3xuf2" path="res://algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd" id="1_jvgsx"]
+
+; 2026-09-12: the script moved from the BerniniColumns child to the ROOT, and the scene's own
+; Camera3D (current = true, so it took the view in every hall that placed this) was removed.
+; The grid sets config_* metadata and calls apply_grid_config on the ROOT, so a scriptless root
+; made every map token unreachable. The child sat at identity and its exports are carried over
+; verbatim, so the twelve existing placements build exactly what they built.
+[node name="BerniniScene" type="Node3D"]
+script = ExtResource("1_jvgsx")
+column_count = 13
+layout_radius = 4.8
+show_platform = false
+column_height = 8.0
+spiral_density = 3.0
+sine_amplitude = 0.15
+cosine_amplitude = 0.15
+vertical_segments = 40
+radial_segments = 16
+twist_factor = 0.8
+material_color = Color(0.8, 0.7, 0.5, 1)
+rotation_speed = 0.2

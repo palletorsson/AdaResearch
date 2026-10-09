@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwm3grammar"]
+
+[ext_resource type="Script" path="res://commons/mesh_grammar/mesh_grammar_node.gd" id="1_grammar"]
+
+[node name="MeshGrammarNode" type="Node3D"]
+script = ExtResource("1_grammar")

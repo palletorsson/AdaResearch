@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3vx8mh2nwqpk"]
+
+[ext_resource type="Script" uid="uid://cl7cwgaxyh6ue" path="res://algorithms/fractals/recursivetree/recursive_tree.gd" id="1_tree"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_horizon_color = Color(0.646, 0.656, 0.67, 1)
+ground_bottom_color = Color(0.102, 0.145, 0.188, 1)
+ground_horizon_color = Color(0.646, 0.656, 0.67, 1)
+
+[sub_resource type="Sky" id="Sky_env"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_env")
+ambient_light_source = 3
+ambient_light_color = Color(0.7, 0.75, 0.8, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.3
+glow_strength = 0.8
+glow_bloom = 0.2
+fog_enabled = true
+fog_light_color = Color(0.7, 0.75, 0.8, 1)
+fog_density = 0.001
+fog_height_density = 0.5
+
+[node name="RecursiveTree" type="Node3D"]
+script = ExtResource("1_tree")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")

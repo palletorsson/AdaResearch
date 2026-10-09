@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd" id="1"]
+
+[node name="GeneticTreeSculptor" type="Node3D"]
+script = ExtResource("1")

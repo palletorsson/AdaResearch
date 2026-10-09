@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/curl_noise_particles/curl_noise_particles.gd" id="1_script"]
+
+[node name="CurlNoiseParticles" type="Node3D"]
+script = ExtResource("1_script")

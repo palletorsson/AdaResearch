@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://23dm0kaarmqy"]
+
+[ext_resource type="Shader" uid="uid://4hursyjcj1tb" path="res://commons/resourses/shaders/Grid.gdshader" id="1_grid"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_grid"]
+render_priority = 0
+shader = ExtResource("1_grid")
+shader_parameter/modelColor = Color(0.0687982, 0.0687983, 0.0687982, 1)
+shader_parameter/wireframeColor = Color(1, 0, 1, 1)
+shader_parameter/emissionColor = Color(0.981557, 0.761247, 0.912913, 1)
+shader_parameter/width = 3.713
+shader_parameter/blur = 0.581
+shader_parameter/emission_strength = 0.458
+shader_parameter/show_interior = true
+
+[node name="exempelbool" type="Node3D" unique_id=768928109]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2025527008]
+material = SubResource("ShaderMaterial_grid")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D" unique_id=57195012]
+transform = Transform3D(1, 0, 0, 0, 0.8191522, -0.5735765, 0, 0.5735765, 0.8191522, 0.04433185, 0.6626303, 0.32660887)
+operation = 2
+size = Vector3(1.4273682, 1, 1.8259583)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D/CSGBox3D" unique_id=481718620]
+transform = Transform3D(1, 0, 0, 0, 0.9999229, -0.012426257, 0, 0.012426257, 0.9999229, -0.041658908, -0.17622763, 0.07963662)
+size = Vector3(0.89890134, 0.8, 0.8643066)

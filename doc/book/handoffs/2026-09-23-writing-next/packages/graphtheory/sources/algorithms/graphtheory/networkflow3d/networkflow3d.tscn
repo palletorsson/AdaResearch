@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2vmhpqv4r1b1"]
+
+[ext_resource type="Script" uid="uid://bgh8vwjqcbry" path="res://algorithms/graphtheory/networkflow3d/networkflow3d.gd" id="1_4n8x3"]
+
+[node name="NetworkFlow3D" type="Node3D"]
+script = ExtResource("1_4n8x3")
+network_size = 10
+connectivity_density = 0.35
+elevation_levels = 3
+spatial_bounds = Vector3(30, 15, 30)
+max_capacity = 40.0
+particles_per_unit_flow = 6
+particle_speed = 1.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.35, 0.35, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 20, 15, 20)
+fov = 70.0

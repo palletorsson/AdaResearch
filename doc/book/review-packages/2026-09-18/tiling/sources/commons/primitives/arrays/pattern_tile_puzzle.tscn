@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://btl4p6m2xwf8k"]
+
+[ext_resource type="Script" uid="uid://byde5n587tno1" path="res://commons/primitives/arrays/pattern_tile_puzzle.gd" id="1_pattern"]
+
+[node name="PatternTilePuzzle" type="Node3D"]
+script = ExtResource("1_pattern")

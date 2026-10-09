@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlqmxu08jas1p"]
+
+[ext_resource type="Script" uid="uid://dwpcv0jf7j0t1" path="res://algorithms/randomness/random_transformations/RandomTransformations.gd" id="1"]
+
+[node name="GeometricTransformsExample" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 12, 18)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 8, 0)
+shadow_enabled = true
+
+[node name="GeometricTransforms" type="Node3D" parent="."]

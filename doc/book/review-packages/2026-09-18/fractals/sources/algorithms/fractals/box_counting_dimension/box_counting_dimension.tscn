@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://algorithms/fractals/box_counting_dimension/box_counting_dimension.gd" id="1"]
+
+[node name="BoxCountingDimension" type="Node3D"]
+script = ExtResource("1")

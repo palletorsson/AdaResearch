@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://turing_pattern_generator_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd" id="1_script"]
+
+[node name="TuringPatternGenerator" type="Node3D"]
+script = ExtResource("1_script")
+display_size = 1.0
+resolution = 64
+pattern_type = 0
+steps_per_frame = 4
+auto_run = true
+Du = 0.16
+Dv = 0.08
+feed = 0.055
+kill = 0.062

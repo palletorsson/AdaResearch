@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://f04k4l7r0gb2"]
+
+[ext_resource type="Script" uid="uid://cj383sgq8j7b0" path="res://commons/primitives/point/draw_dot.gd" id="1_j5b6m"]
+[ext_resource type="PackedScene" uid="uid://cu0qtodekjr5r" path="res://commons/primitives/point/grab_sphere_point.tscn" id="2_m1q2d"]
+
+[node name="DrawDot" type="Node3D"]
+script = ExtResource("1_j5b6m")
+draw_sphere_path = NodePath("GrabPoint")
+trail_max_points = 4096
+min_segment_distance = 0.005
+
+[node name="GrabPoint" parent="." instance=ExtResource("2_m1q2d")]
+xp_on_pickup = 1

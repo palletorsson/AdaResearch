@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_edge_core"]
+
+[ext_resource type="Script" uid="uid://qfep_edge_core_script" path="res://commons/interfaces/qfep/edge_core.gd" id="1_core"]
+
+[node name="EdgeCore" type="Node3D"]
+script = ExtResource("1_core")

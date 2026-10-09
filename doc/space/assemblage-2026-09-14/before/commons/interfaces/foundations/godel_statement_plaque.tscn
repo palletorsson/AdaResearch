@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://godel_statement_plaque"]
+
+[ext_resource type="Script" path="res://commons/interfaces/foundations/godel_statement_plaque.gd" id="1_script"]
+
+[node name="GodelStatementPlaque" type="Node3D"]
+script = ExtResource("1_script")

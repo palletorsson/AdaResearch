@@ -1,0 +1,197 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random Definition — facing pages</title><style>*{box-sizing:border-box}body{margin:0;background:#f5f1e9;color:#25252c;font:19px/1.7 Georgia,serif}main{max-width:1000px;margin:auto;padding:50px 35px}h1{font-size:clamp(35px,6vw,62px);line-height:1.08}h2{margin-top:2em}h3{margin-top:2em;border-top:1px solid #c8c0b9;padding-top:24px}a{color:#7c365b}nav{font:14px/1.6 system-ui;display:flex;gap:18px;flex-wrap:wrap}img{width:100%;height:auto}p,li{max-width:800px}pre{overflow:auto;background:#e7e4df;padding:20px;font:14px/1.5 monospace}code{font-size:.88em}table{border-collapse:collapse;font:14px/1.6 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #aaa;text-align:left}summary{cursor:pointer;font-family:system-ui}@media print{nav{display:none}body{background:white;font-size:11pt}h1{font-size:30pt}}main{max-width:1650px}.spread{display:grid;grid-template-columns:1fr 1fr;gap:50px}.spread article{min-width:0}.spread h1{font-size:36px}.track{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#7c365b}@media(max-width:900px){.spread{grid-template-columns:1fr}}</style><main><nav><a href="index.html">Report</a><a href="parallel.html">Facing pages</a><a href="changes.html">Changes</a><a href="../index.html">Sequence plan</a><a href="tutorial.md">Tutorial source</a><a href="final.md">Reflection source</a></nav><h1>Random Definition</h1><p>The left page makes the operation reconstructable. The right follows the encounter.</p><div class="spread"><article><p class="track">Tutorial · left</p><h1>A seed needs a procedure</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Local random generator</li>
+<li>Seed and generator state</li>
+<li>Draw order</li>
+<li>Assigning sampled values to colour</li>
+<li>Reconstructing a result versus retaining its data</li>
+</ul>
+<p>At the paired colour grids, choose a patch you would keep. Press REPLAY. Then press +1 DRAW: only the right grid changes. The seed stays. Find out what else a repeated picture needs.</p>
+<h2>What you bring</h2>
+<p>Use the cube from Transformation, the grid and list from Arrays, and a separate material for each cube from Colour. Keep the held <code>PointBody</code> from the earlier studies. Its role here is a control: the trigger requests an action; the ball's position chooses which action.</p>
+<p>In Cage we sampled a score once and replayed the stored events. Here we reconstruct a picture by resetting a generator and repeating its requests. Synthesis kept the amounts in a recipe; this recipe also needs the order in which values are requested and used.</p>
+<p><strong>Build:</strong> two four-by-four grids coloured by one local generator, reset before each grid.</p>
+<p><strong>Investigate:</strong> keep the seed and discard one draw before colouring the right grid. Predict where its first red, green and blue values will come from.</p>
+<h2>Work inside the museum</h2>
+<p>Use an upright <code>PointStudy</code> Node3D at unit scale in Random Definition. A tested working bay is hall-local <code>(10.5, 0, 18.5)</code> metres, beyond the textile panels, with Y rotation −90 degrees. The museum supplies floor, camera, lighting, player and XR Tools. The study's front is its local +Z side; this placement faces it into the room with the east wall behind it. This is a small reconstruction beside existing work; it does not replace the installed table or the room.</p>
+<p>Save <code>01_seed_picture.gd</code> beside the unchanged <code>point_body.gd</code> carried from Wavefunctions. Attach the first file to the study. Both files are printed below. No named mesh child, <code>$Display</code>, prefab grid or separate scene is required.</p>
+<p>In VR, hold the black point above REPLAY, +1 DRAW or NEXT SEED and press its action trigger. The existing desktop pickup/action controls can operate the same point. The choice uses the point's X coordinate relative to the study, as in Cage. Merely moving the point does not draw a number. NEXT SEED adds one to the integer; it is deliberately simpler than the installed table's RANDOM button.</p>
+<h2>Complete code — 01_seed_picture.gd</h2>
+<p>Read <code>colour_grid</code> and <code>replay</code> first. The construction in <code>_ready</code> reuses the cube/material/grid pattern. The final function reuses the held-point action.</p>
+<!-- student-code:01_seed_picture.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+@export var side := 4
+@export var seed_value := 42
+var discard_first := false
+var rng := RandomNumberGenerator.new()
+var grids: Array = []
+var samples: Array = []
+var point: RigidBody3D
+var label := Label3D.new()
+
+func text_at(words: String, at: Vector3) -&gt; Label3D:
+    var text := Label3D.new()
+    text.text = words
+    text.position = at
+    text.font_size = 28
+    text.pixel_size = 0.0025
+    add_child(text)
+    return text
+
+func _ready() -&gt; void:
+    assert(side &gt; 0 and side &lt;= 8)
+    for panel in range(2):
+        var cubes: Array[MeshInstance3D] = []
+        for row in range(side):
+            for column in range(side):
+                var cube := MeshInstance3D.new()
+                var box := BoxMesh.new()
+                box.size = Vector3.ONE * (0.9 / side)
+                cube.mesh = box
+                cube.material_override = StandardMaterial3D.new()
+                cube.position = Vector3(
+                    (panel - 0.5) * 1.35 + (column + 0.5) / side - 0.5,
+                    1.1 + (row + 0.5) / side, 0)
+                add_child(cube)
+                cubes.append(cube)
+        grids.append(cubes)
+    point = PointBody.new()
+    point.position = Vector3(-0.8, 0.95, 0.7)
+    add_child(point)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.04, 0.04, 0.045)
+    ink.roughness = 0.2
+    point.get_child(0).material_override = ink
+    point.action_pressed.connect(activate)
+    text_at(&quot;REPLAY&quot;, Vector3(-0.8, 0.65, 0.7))
+    text_at(&quot;+1 DRAW&quot;, Vector3(0, 0.65, 0.7))
+    text_at(&quot;NEXT SEED&quot;, Vector3(0.8, 0.65, 0.7))
+    text_at(&quot;Hold the point above a label; press trigger&quot;, Vector3(0, 0.4, 0.7))
+    label.position = Vector3(0, 2.35, 0)
+    label.font_size = 30
+    label.pixel_size = 0.0025
+    add_child(label)
+    replay()
+
+func colour_grid(cubes: Array, skip: bool) -&gt; Array[Color]:
+    rng.seed = seed_value
+    if skip:
+        rng.randf()
+    var colours: Array[Color] = []
+    for cube in cubes:
+        var a := rng.randf()
+        var b := rng.randf()
+        var c := rng.randf()
+        var colour := Color(a, b, c)
+        cube.material_override.albedo_color = colour
+        colours.append(colour)
+    return colours
+
+func replay() -&gt; void:
+    samples = [colour_grid(grids[0], false), colour_grid(grids[1], discard_first)]
+    var draws := side * side * 3
+    label.text = &quot;Seed %d | LEFT %d draws | RIGHT %d draws\n%s&quot; % [
+        seed_value, draws, draws + int(discard_first),
+        &quot;right discards its first draw&quot; if discard_first else &quot;same procedure twice&quot;]
+
+func activate(_body: Variant = null) -&gt; void:
+    if point.position.x &gt; 0.4:
+        seed_value += 1
+    elif point.position.x &gt;= -0.4:
+        discard_first = not discard_first
+    replay()
+</code></pre>
+<h2>Follow the requests</h2>
+<p><code>RandomNumberGenerator.new()</code> gives this study its own generator. Asking it for a value advances its state. The museum's other artifacts can keep running without spending this generator's next draw.</p>
+<p><code>rng.seed = seed_value</code> puts it back at the beginning associated with that seed. We do this once before each grid, not once before each cube. Then <code>randf()</code> requests values from zero to one. Three successive requests become the red, green and blue channels of one material. Each cube owns its material, so changing one does not repaint them all.</p>
+<p>There are sixteen cubes per grid. Each needs three draws: forty-eight in all. The loops store row zero first, left to right, then the next row. Row zero is the bottom row in this vertical display. The seed can only reproduce the assignment while that order and the use of the values remain the same.</p>
+<p><code>skip</code> requests one value without using it. It happens before the colour loop. The shifted grid still displays forty-eight channel values, but consumes forty-nine draws. Think of the first six values as <code>a, b, c, d, e, f</code>: the unshifted first two cubes use <code>(a, b, c)</code> and <code>(d, e, f)</code>. Predict the shifted first cube before you press the trigger.</p>
+<p>The two calls to <code>colour_grid</code> return colour lists. <code>samples[0]</code> and <code>samples[1]</code> keep the values assigned to the left and right grids. The record and the picture can now be inspected separately. These lists live in this study's memory; this lesson does not save them to disk or automatically carry them through a portal.</p>
+<h2>Three short investigations</h2>
+<p>First leave +1 DRAW off. Find corresponding cubes in the two panels. Press REPLAY twice and wait between presses. The lists and colours repeat: this study has no frame callback that requests random values while you wait.</p>
+<p>Next switch +1 DRAW on. Compare the first right-hand cube with the first two left-hand cubes. The right red comes from the left green, its green from the left blue, and its blue from the next left red: <code>(b, c, d)</code>. Press REPLAY. The mismatch repeats. Switch +1 DRAW off and the match returns. The control toggles one discarded value, rather than accumulating a longer skip on every press.</p>
+<p>Finally choose NEXT SEED. Predict what stays fixed before looking at the colours: cube count, positions, sizes and the RGB assignment rule. Replaying this new seed repeats its result. A different seed does not guarantee a different visible result, nor does a neighbouring seed promise a similar palette. Keep the Godot version with a saved seed recipe; do not assume the generator's implementation will remain identical across versions.</p>
+<h2>Make another use of the same values</h2>
+<p>Change the one colour assignment to <code>Color(a, a, a)</code>. Keep all three <code>randf()</code> calls. Predict the difference, then run it: every cube is grey, but later cubes still begin at the same positions in the random stream. You have changed the use of the draws, not their number.</p>
+<p>Now swap red and blue with <code>Color(c, b, a)</code>. Check one cube against its previous stored colour. Its green stays the same. Can you produce a different palette without changing the seed or the number of requests?</p>
+<p>These are actual code edits, not another control to memorize. Keep one changed version and explain which part of the procedure it alters.</p>
+<h2>The inherited point — point_body.gd</h2>
+<p>This is the same frozen pickable sphere used in Wavefunctions. Its parent class comes from the XR Tools already installed on Day Zero. <code>_init</code> creates its mesh and collision; the parent supplies pickup and <code>action_pressed</code>. We are using that behaviour here, not teaching it again. Keep this file unchanged beside the new script.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2>Compare with the installed work</h2>
+<p>The hall's <code>seed_replay_demo</code> has two eight-by-eight grids, a seed slider, RANDOM and draw strips. It uses the same three-requests-per-colour operation: 192 draws per grid, or 193 when the extra request is enabled. Our four-by-four study keeps the operation and reduces the amount to inspect. The black point is our familiar input; the installed instrument uses its own panel.</p>
+<p>In the small study, generator state and the picture's recipe are different things. <code>seed_value</code> says where to begin. After colouring, <code>rng.state</code> is already further along. REPLAY resets the generator before making each list. Cage instead replayed an already retained list without asking the generator again. Both can repeat a result, by different procedures.</p>
+<p>The reflection stays with what the seed's apparent name leaves out, and with the other instruments in the room. Not every artifact needs to become another construction exercise.</p>
+<h2>What travels onward</h2>
+<p>Keep the local generator, the repeated procedure and the practice of retaining sampled values. In Random Entropy we will give draws explicit symbol IDs and a small palette so we can count them. Sorting a copy will change neighbours while leaving the counts intact. We will declare that new categorical representation; this RGB record does not silently become a list of ten symbols.</p></article><article><p class="track">Reflection · right</p><h1>A pattern that returns</h1>
+<p>In Synthesis Lab, five amounts could bring a familiar curve back. Cage had kept a score so that it could be heard again. Here, a number seems to offer another way back.</p>
+<!-- @seed_replay_demo -->
+
+<p>Here, two grids of coloured cubes stand above the controls. Choose a small patch you would not have thought to put together. Find it in the other grid.</p>
+<p>Press REPLAY.</p>
+<p>The colours stay where they were.</p>
+<p>The program has coloured every cube again. The seed sets this generator's starting state; start it there again and make the same requests, and the same values return. Press RANDOM, find something in the arrangement it gives you, and replay that one. RANDOM can choose an earlier seed, including the one already here. A result can surprise us and still know the way back to itself.</p>
+<p>The seed readout offers a tempting name for the picture. Remember it. Then press +1 DRAW.</p>
+<p>The right-hand grid changes while the left keeps its arrangement. The seed has not changed. Look at the cube positions too: nothing has moved sideways to make this difference.</p>
+<p>Above the grids, two strips turn the first twenty-four draws into bar heights. Switch the extra draw off, then on. The right strip now starts with the second bar on the left. Find the next two matches.</p>
+<p>With the extra draw enabled, the right-hand grid requests one value before colouring its first cube, then leaves that value unused.</p>
+<p>Each call requests a number between zero and one. A cube takes three: red, green, blue. One unused draw shifts where that grouping begins:</p>
+<pre><code class="language-text">Draws:       a  b  c  d  e  f  g ...
+Left grid:  (a, b, c)  (d, e, f)
+Right grid: (b, c, d)  (e, f, g)
+</code></pre>
+<p>Nothing in a draw says that it is red. Red is the use made of its place in these three calls.</p>
+<p>Look back at your patch. Perhaps the misplaced beginning gives you a relation you want. There is no need to prefer the matched pair. The line that interrupts a demonstration of sameness can also be used to make another palette.</p>
+<p>Press +1 DRAW again. The match returns. The button toggles one discarded draw; it does not keep adding more. REPLAY repeats whichever procedure is selected. We needed more than the seed's number: which generator, which calls, and which use of their results. The picture's name had left out part of its making.</p>
+<p>Choose another seed, then wait. The room continues around you. Press REPLAY. The same patch returns; waiting has not spent another draw from this generator. Difficulty guessing from a picture and the ability to repeat its construction are different things we can encounter here.</p>
+<p>Move the seed slider slowly. The handle travels smoothly; the readout chooses whole numbers. A neighbouring seed can give you a very different palette. The controls offer a thousand seeds, yet every result still arrives as sixty-four cubes with three varying colour channels. Another seed cannot add a cube or let one leave its cell. Those would be other changes to the program. Here, randomness varies what the program has made variable.</p>
+<!-- @textile_comparison -->
+
+<p>The three textile panels offer another comparison. Each begins with seed 41. Diagonals, upright and horizontal marks, then blocks: three pairs of signs receive the same draws. Follow one cell across the panels, then step back to see the larger figures those marks make. NEXT SEED changes the draws in all three; RESET returns to 41. These bolts are held still so their marks can be compared. Chance has not chosen what a mark means. The program supplied that vocabulary before drawing.</p>
+<!-- @random_number_book_page_1955 -->
+
+<p>Near the far end of the room, a page of five-digit numbers takes its look from a book of random digits published in 1955, a table anyone could open at the same line and read the same digits again.<sup id="fnref:rand-1955"><a class="footnote-ref" href="#fn:rand-1955">1</a></sup> This page keeps the look and not the return. About once a second each column takes a new number at the top and lets its lowest one fall away. The page draws from the game's shared generator and keeps no record of a number once it has gone.</p>
+<!-- @prng_crank_machine -->
+
+<p>On your way back towards the entrance, stop at the crank. One press of its CRANK button, one state. It gives each request a gesture. We could follow every request at the colour grids too, but one picture has already asked for 192 of them. What can we leave unexamined and still recognise how it was made?</p>
+<!-- @ -->
+
+<p>The next room gathers a sequence into a histogram and an entropy reading. Carry one small patch with you. We are about to ask what a number can retain of an arrangement that was worth looking at.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:rand-1955">
+<p><em>A Million Random Digits with 100,000 Normal Deviates</em> (RAND Corporation, 1955). RAND's <a href="https://www.rand.org/pubs/monograph_reports/MR1418.html">introduction</a> describes a basic table generated by an electronic roulette wheel in 1947, tested and transformed before publication. Choosing a starting place in a fixed table can help us imagine a repeatable beginning. The table retrieves stored digits; a seeded generator calculates its sequence. Repeatability in this room depends on the generator and procedure being kept with the seed.&#160;<a class="footnote-backref" href="#fnref:rand-1955" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></main></html>

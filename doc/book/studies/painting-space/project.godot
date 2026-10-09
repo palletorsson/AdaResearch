@@ -1,0 +1,16 @@
+config_version=5
+
+[application]
+config/name="Ada — painting space"
+run/main_scene="res://study.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+
+[display]
+window/size/viewport_width=1600
+window/size/viewport_height=1000
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="forward_plus"
+anti_aliasing/quality/msaa_3d=2
+

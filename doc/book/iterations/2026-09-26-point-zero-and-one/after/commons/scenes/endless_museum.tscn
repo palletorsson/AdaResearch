@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dx1b51xvutg1w"]
+
+[ext_resource type="Script" uid="uid://cw3owxmdq31kf" path="res://commons/scenes/endless_museum.gd" id="1"]
+
+[node name="EndlessMuseum" type="Node3D" unique_id=1933487236]
+script = ExtResource("1")
+start_chapter = "primitives"
+start_map = "Point_Zero"

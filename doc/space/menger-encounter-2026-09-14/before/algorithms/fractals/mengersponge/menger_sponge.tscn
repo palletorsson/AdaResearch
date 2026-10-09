@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8h3m5rkdpq7w"]
+
+[ext_resource type="Script" uid="uid://dgsx8r7yxrnad" path="res://algorithms/fractals/mengersponge/menger_sponge.gd" id="1_menger"]
+[ext_resource type="PackedScene" uid="uid://4bsb3cpkg8k0" path="res://commons/primitives/cubes/cube_scene.tscn" id="2_cube"]
+
+[node name="MengerSponge" type="Node3D"]
+script = ExtResource("1_menger")
+
+[node name="InitialCube" parent="." instance=ExtResource("2_cube")]
+transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0, 4.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 5, 4, 7)
+current = true
+fov = 60.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 3, 6, 2)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, -0.25, 0, 0.5, -0.866025, 0.5, -0.75, -0.433013, -3, 4, -2)
+light_energy = 0.4

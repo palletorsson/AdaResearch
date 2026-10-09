@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://ada_run/curves-review-2026-09-14/probe_ca_edge_live.gd" id="1"]
+[node name="PairReview" type="Node"]
+script = ExtResource("1")

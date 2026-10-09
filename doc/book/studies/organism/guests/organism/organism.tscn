@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://guests/organism/organism.gd" id="Guest"]
+[ext_resource type="Script" path="res://guests/organism/bar.gd" id="Bar"]
+
+[sub_resource type="CylinderMesh" id="Pin"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 0.22
+radial_segments = 16
+
+[sub_resource type="SphereMesh" id="Point"]
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereMesh" id="Socket"]
+radius = 0.06
+height = 0.12
+
+[node name="Organism" type="Node3D"]
+script = ExtResource("Guest")
+
+[node name="Hip" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.11, 0)
+mesh = SubResource("Socket")
+
+[node name="Upper" type="MeshInstance3D" parent="Hip"]
+mesh = SubResource("Pin")
+
+[node name="Bar" type="MeshInstance3D" parent="Hip/Upper"]
+position = Vector3(0, 0, 0.12)
+scale = Vector3(0.16, 0.16, 0.48)
+script = ExtResource("Bar")
+
+[node name="Body" type="StaticBody3D" parent="Hip/Upper/Bar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hip/Upper/Bar/Body"]
+
+[node name="Lower" type="MeshInstance3D" parent="Hip/Upper"]
+position = Vector3(0, 0, 0.24)
+mesh = SubResource("Pin")
+
+[node name="Bar" type="MeshInstance3D" parent="Hip/Upper/Lower"]
+position = Vector3(0, 0, 0.12)
+scale = Vector3(0.16, 0.16, 0.48)
+script = ExtResource("Bar")
+
+[node name="Body" type="StaticBody3D" parent="Hip/Upper/Lower/Bar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hip/Upper/Lower/Bar/Body"]
+
+[node name="Foot" type="MeshInstance3D" parent="Hip/Upper/Lower"]
+position = Vector3(0, 0, 0.24)
+mesh = SubResource("Pin")
+
+[node name="Bar" type="MeshInstance3D" parent="Hip/Upper/Lower/Foot"]
+position = Vector3(0, 0, 0.12)
+scale = Vector3(0.16, 0.16, 0.48)
+script = ExtResource("Bar")
+
+[node name="Body" type="StaticBody3D" parent="Hip/Upper/Lower/Foot/Bar"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hip/Upper/Lower/Foot/Bar/Body"]
+
+[node name="Toe" type="MeshInstance3D" parent="Hip/Upper/Lower/Foot"]
+position = Vector3(0, 0, 0.24)
+mesh = SubResource("Point")

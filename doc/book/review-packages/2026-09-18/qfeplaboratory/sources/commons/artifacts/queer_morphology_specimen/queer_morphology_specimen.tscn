@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqm3spec1men0"]
+
+[ext_resource type="Script" uid="uid://cqm3spec1men1" path="res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd" id="1_script"]
+
+[node name="QueerMorphologySpecimen" type="Node3D"]
+script = ExtResource("1_script")

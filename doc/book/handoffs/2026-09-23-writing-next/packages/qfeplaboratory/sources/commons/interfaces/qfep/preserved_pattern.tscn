@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_preserved_pattern"]
+
+[ext_resource type="Script" uid="uid://qfep_preserved_pattern_script" path="res://commons/interfaces/qfep/preserved_pattern.gd" id="1_preserved"]
+
+[node name="PreservedPattern" type="Node3D"]
+script = ExtResource("1_preserved")

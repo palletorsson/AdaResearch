@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://randompointxy123"]
+
+[ext_resource type="PackedScene" path="res://commons/primitives/line/coordinate_axes_xy.tscn" id="1_axes"]
+[ext_resource type="Script" path="res://algorithms/randomness/randompoint/randompoint.gd" id="2_script"]
+
+[node name="RandomPointXY" type="Node3D"]
+script = ExtResource("2_script")
+
+[node name="Axes" parent="." instance=ExtResource("1_axes")]
+
+

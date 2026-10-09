@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://hgbhr48651so"]
+
+[ext_resource type="Script" uid="uid://bwqa3tqdb1ylu" path="res://algorithms/swarmintelligence/ants_v2/AntColonyV2.gd" id="1_colony"]
+[ext_resource type="PackedScene" path="res://algorithms/swarmintelligence/ants_v2/SimpleAnt.tscn" id="2_ant_scene"]
+[ext_resource type="Shader" uid="uid://5vrd8nhaxgh6" path="res://algorithms/swarmintelligence/ants_v2/ant_valley.gdshader" id="3_shader"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_terrain"]
+size = Vector2(50, 50)
+subdivide_width = 255
+subdivide_depth = 255
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_valley"]
+render_priority = 0
+shader = ExtResource("3_shader")
+shader_parameter/valley_depth = 1.0
+shader_parameter/ground_color = Color(0.8, 0.7, 0.5, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_home"]
+height = 1.0
+radius = 3.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_home"]
+radius = 2.0
+height = 2.0
+
+[node name="AntColonyV2" type="Node3D"]
+script = ExtResource("1_colony")
+ant_scene = ExtResource("2_ant_scene")
+
+[node name="ResultMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_terrain")
+surface_material_override/0 = SubResource("ShaderMaterial_valley")
+
+[node name="HomeArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HomeArea"]
+shape = SubResource("CylinderShape3D_home")
+
+[node name="HomeVisual" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_home")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 30, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 10, 10, 10)
+shadow_enabled = true
+
+[connection signal="body_entered" from="HomeArea" to="." method="_on_home_area_entered"]

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsa5v6u1g0wi"]
+
+[ext_resource type="Script" path="res://commons/primitives/parametric/helicoid.gd" id="1_script"]
+
+[node name="Helicoid" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_script")

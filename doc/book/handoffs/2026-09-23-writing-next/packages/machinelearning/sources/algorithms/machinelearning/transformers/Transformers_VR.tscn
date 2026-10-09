@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvr_transformers_001"]
+
+[ext_resource type="Script" path="res://algorithms/machinelearning/transformers/Transformers_VR.gd" id="1_transformers_vr"]
+
+[node name="Transformers_VR" type="Node3D"]
+script = ExtResource("1_transformers_vr")
+token_spacing = 1.2
+token_size = 0.3
+encoder_decoder_gap = 8.0
+attention_beam_thickness = 0.03
+sequence_length = 8
+num_attention_heads = 4
+num_encoder_layers = 3
+num_decoder_layers = 3
+auto_train = true
+training_speed = 0.15
+show_attention_beams = true
+show_positional_encoding = true
+enable_token_grabbing = true
+enable_head_switching = true
+enable_query_manipulation = true
+animate_attention_flow = true

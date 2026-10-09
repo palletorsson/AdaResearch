@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cn3s0pq4b086c"]
+
+[ext_resource type="Script" uid="uid://bhnul8r75lwqb" path="res://commons/primitives/prismes/rotation.gd" id="1_f0bor"]
+[ext_resource type="Script" path="res://commons/primitives/capsule/capsule.gd" id="2_facture"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_matvd"]
+albedo_color = Color(0.5176471, 0.5254902, 0.47843137, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f0bor"]
+radius = 0.25
+height = 1.0
+radial_segments = 5
+rings = 5
+
+[node name="capsule" type="Node3D"]
+script = ExtResource("2_facture")
+
+[node name="capsule" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_matvd")
+mesh = SubResource("CapsuleMesh_f0bor")
+script = ExtResource("1_f0bor")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.41578877, 0.9094612, 0, -0.9094612, 0.41578877, -0.0048003197, 0.9050103, 1.0740644)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.46140802, 0.8871881, 0, -0.8871881, -0.46140802, -0.0048003197, 0.9050103, -0.83644754)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4633157)

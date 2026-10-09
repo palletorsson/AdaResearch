@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/ten_print_structure/ten_print_structure.gd" id="1_tpstruct"]
+
+; ten_print_structure — 10 PRINT at the scale of a room. Slabs, anchor, next-cell marker,
+; plate and (with solid on) the colliders are all built in ten_print_structure.gd.
+; The ROOT carries the script, so map tokens reach apply_grid_config: form, solid, channel
+; (words) and cols, rows, size, seed, count (listed values). Origin: the outer corner of the
+; home cell (col 0, row 0); the field extends toward +X and +Z, base at y = 0.
+
+[node name="TenPrintStructure" type="Node3D"]
+script = ExtResource("1_tpstruct")

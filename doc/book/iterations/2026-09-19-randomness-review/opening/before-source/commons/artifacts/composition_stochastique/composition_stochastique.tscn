@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/composition_stochastique/composition_stochastique.gd" id="1_compstoch"]
+
+; Board, grids, captions, plate and the RESEED panel are all built in _ready().
+; Nothing is authored here: the hundred strokes of each grid are dealt from the
+; seed, and a hand-placed stroke would be a stroke the count does not know about.
+;
+; The script goes on the ROOT. GridInteractablesComponent sets config_* metadata
+; and calls apply_grid_config THERE, so logic on a child would make every map
+; token (#turned:five, #seed:7) silently unreachable.
+
+[node name="CompositionStochastique" type="Node3D"]
+script = ExtResource("1_compstoch")

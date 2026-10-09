@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://e1x0y9z8a7b6c"]
+
+[ext_resource type="Script" path="res://algorithms/graphtheory/push_relabel/push_relabel.gd" id="1_pushrelabel"]
+
+[node name="PushRelabel" type="Node3D"]
+script = ExtResource("1_pushrelabel")
+graph_size = 6
+edge_density = 0.5
+auto_start = true
+step_by_step = true
+animation_delay = 1.2
+show_excess_flow = true
+show_height_labels = true
+show_flow_values = true
+show_capacity_labels = true
+highlight_active_nodes = true
+animate_push_operations = true
+show_residual_graph = true
+enable_graph_editing = true
+allow_capacity_editing = true
+real_time_flow_update = true
+show_algorithm_state = true
+node_color = Color(0.3, 0.5, 0.8, 1)
+source_color = Color(0.2, 0.8, 0.2, 1)
+sink_color = Color(0.8, 0.2, 0.2, 1)
+active_color = Color(0.9, 0.9, 0.2, 1)
+edge_color = Color(0.6, 0.6, 0.6, 0.8)
+flow_color = Color(0.9, 0.3, 0.3, 1)
+residual_color = Color(0.3, 0.9, 0.3, 0.8)
+push_highlight_color = Color(0.9, 0.5, 0.2, 1)

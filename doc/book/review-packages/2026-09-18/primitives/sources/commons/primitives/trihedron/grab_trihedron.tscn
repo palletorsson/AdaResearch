@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbp11dfeoeb1e"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_pickable"]
+[ext_resource type="Script" uid="uid://cqkwneb7c8pnt" path="res://commons/primitives/trihedron/grab_trihedron.gd" id="2_grab_trihedron"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6jvwa"]
+points = PackedVector3Array(0, 0.6, 0, -0.6, -0.6, -0.6, 0.6, -0.6, -0.6, 0, -0.6, 0.6)
+
+[node name="GrabTrihedron" instance=ExtResource("1_pickable")]
+script = ExtResource("2_grab_trihedron")
+alternate_material = null
+snap_to_shelf = true
+snap_max_distance = 0.08
+snap_match_rotation = false
+snap_falloff_distance = 1.0
+base_color = Color(0.2, 0.8, 1, 1)
+trihedron_size = 0.6
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("ConvexPolygonShape3D_6jvwa")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="1"]
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]

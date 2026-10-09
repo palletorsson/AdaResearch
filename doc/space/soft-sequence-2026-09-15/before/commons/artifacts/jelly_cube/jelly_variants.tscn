@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=3 uid="uid://jelly_variants_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/jelly_cube/jelly_cube.gd" id="1_script"]
+
+[node name="JellyVariants" type="Node3D"]
+
+[node name="JellyCube" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, 0)
+script = ExtResource("1_script")
+cube_size = 0.25
+subdivisions = 4
+jelly_color = Color(0.2, 0.9, 0.5, 0.8)
+stiffness = 0.5
+damping = 0.01
+pressure = 1.0
+mass = 1.0
+emission_strength = 0.2
+
+[node name="Label" type="Label3D" parent="JellyCube"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0.2)
+pixel_size = 0.0015
+text = "JELLY
+soft, bouncy"
+font_size = 20
+horizontal_alignment = 1
+
+[node name="BouncyBall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0, 0)
+script = ExtResource("1_script")
+cube_size = 0.2
+subdivisions = 5
+jelly_color = Color(1.0, 0.3, 0.1, 0.9)
+stiffness = 0.8
+damping = 0.005
+pressure = 2.5
+mass = 0.5
+emission_strength = 0.3
+
+[node name="Label" type="Label3D" parent="BouncyBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0.18)
+pixel_size = 0.0015
+text = "BOUNCY
+high pressure"
+font_size = 20
+horizontal_alignment = 1
+
+[node name="WaterBalloon" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_script")
+cube_size = 0.22
+subdivisions = 5
+jelly_color = Color(0.3, 0.5, 1.0, 0.6)
+stiffness = 0.2
+damping = 0.02
+pressure = 1.8
+mass = 1.5
+emission_strength = 0.15
+
+[node name="Label" type="Label3D" parent="WaterBalloon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0.18)
+pixel_size = 0.0015
+text = "WATER
+low stiffness"
+font_size = 20
+horizontal_alignment = 1
+
+[node name="SlimePuddle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+script = ExtResource("1_script")
+cube_size = 0.28
+subdivisions = 4
+jelly_color = Color(0.6, 0.1, 0.8, 0.7)
+stiffness = 0.15
+damping = 0.08
+pressure = 0.3
+mass = 2.0
+emission_strength = 0.25
+
+[node name="Label" type="Label3D" parent="SlimePuddle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0.2)
+pixel_size = 0.0015
+text = "SLIME
+high damping"
+font_size = 20
+horizontal_alignment = 1
+
+[node name="QueerMorph" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0)
+script = ExtResource("1_script")
+cube_size = 0.25
+subdivisions = 6
+jelly_color = Color(1.0, 0.4, 0.7, 0.75)
+stiffness = 0.35
+damping = 0.015
+pressure = 1.2
+mass = 1.0
+emission_strength = 0.4
+
+[node name="Label" type="Label3D" parent="QueerMorph"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, 0.2)
+pixel_size = 0.0015
+text = "QUEER
+φ > 0"
+font_size = 20
+horizontal_alignment = 1

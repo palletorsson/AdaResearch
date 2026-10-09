@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Room"]
+[ext_resource type="Script" path="res://studies/primitive_column/column.gd" id="Column"]
+
+[node name="AdaRoom" instance=ExtResource("Room")]
+setup_check = false
+
+[node name="Column" type="Node3D" parent="."]
+position = Vector3(0, 0, -0.7)
+script = ExtResource("Column")
+
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0, 2.85, -1.3)
+font_size = 34
+pixel_size = 0.002
+outline_size = 0
+modulate = Color(0.28, 0.19, 0.24, 1)
+text = "ONE OUTLINE / A RING OF POSITIONS"
+
+[node name="Note" type="Label3D" parent="."]
+position = Vector3(0, 0.24, 0.1)
+font_size = 22
+pixel_size = 0.002
+outline_size = 0
+text = "Change the profile / keep the height and sides"

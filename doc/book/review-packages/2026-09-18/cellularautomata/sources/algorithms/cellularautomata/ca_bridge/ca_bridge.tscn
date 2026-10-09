@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpi3uj27nnpyl"]
+
+[ext_resource type="Script" uid="uid://d1l8si7yki6g8" path="res://algorithms/cellularautomata/ca_bridge/ca_bridge.gd" id="1_script"]
+
+[sub_resource type="Environment" id="Environment_sky"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="CABridge" type="Node3D"]
+script = ExtResource("1_script")
+width = 31
+length = 120
+generation_speed = 0.05
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 10, 20)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_sky")

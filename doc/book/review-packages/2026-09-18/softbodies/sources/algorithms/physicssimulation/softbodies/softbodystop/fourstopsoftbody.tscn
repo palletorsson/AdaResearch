@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgugu66k6n77h"]
+
+[ext_resource type="Script" uid="uid://cf4xfrh0d1qnn" path="res://algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd" id="1_n6pjx"]
+
+[node name="Fourstopsoftbody" type="Node3D"]
+script = ExtResource("1_n6pjx")
+
+[node name="Camera3D" type="Camera3D" parent="."]

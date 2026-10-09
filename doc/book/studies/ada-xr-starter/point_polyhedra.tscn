@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Room"]
+[ext_resource type="Script" path="res://lessons/Primitives_Polythedra/lesson.gd" id="Lesson"]
+
+[sub_resource type="StandardMaterial3D" id="BackdropFinish"]
+albedo_color = Color(0.24, 0.23, 0.25, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BackdropShape"]
+size = Vector3(7.2, 3.0, 0.06)
+
+[node name="AdaRoom" instance=ExtResource("Room")]
+setup_check = false
+
+[node name="PointStudy" type="Node3D" parent="."]
+position = Vector3(0, 0.0, -0.7)
+script = ExtResource("Lesson")
+
+[node name="Backdrop" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.5, -3.0)
+mesh = SubResource("BackdropShape")
+material_override = SubResource("BackdropFinish")
+
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0, 3.1, -2.8)
+pixel_size = 0.002
+font_size = 36
+outline_size = 0
+text = "Four positions enclose a body"

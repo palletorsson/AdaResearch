@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/chroma_stack/chroma_stack.gd" id="1_chroma_stack"]
+
+; Everything is built in _ready(): the five stacked primitives of the chosen
+; alphabet, their colours from the chosen rule, the text plate and the body.
+; Nothing is authored here, so there is nothing here to drift out of step with
+; the script.
+;
+; THE SCRIPT IS ON THE ROOT. GridInteractablesComponent sets config_* metadata and
+; calls apply_grid_config on the ROOT node; a scriptless root with the logic on a
+; child makes every map token silently unreachable.
+;
+; The root is a plain Node3D with its origin at the base: the bottom element's
+; underside is y = 0. The collider is a StaticBody3D child built at run time with
+; one box per element and one for the plate, all sized from the same numbers as
+; the meshes.
+
+[node name="ChromaStack" type="Node3D"]
+script = ExtResource("1_chroma_stack")

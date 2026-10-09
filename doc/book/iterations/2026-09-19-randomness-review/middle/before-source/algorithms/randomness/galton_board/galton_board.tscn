@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/randomness/galton_board/galton_board.gd" id="1_main"]
+
+[node name="GaltonBoard" type="Node3D"]
+script = ExtResource("1_main")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy4w5nx8m1pqr"]
+
+[ext_resource type="Script" path="res://commons/primitives/snappoint/snap_tetrahedron.gd" id="1_tetra"]
+
+[node name="SnapTetrahedron" type="Node3D"]
+script = ExtResource("1_tetra")
+tetrahedron_color = Color(0.3, 0.7, 0.9, 0.7)
+wireframe_color = Color(1, 1, 1, 1)
+

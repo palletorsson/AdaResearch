@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rd_artifact_root"]
+
+[ext_resource type="Script" path="res://commons/artifacts/rd_artifact/rd_artifact.gd" id="1_rda"]
+
+[node name="RDArtifact" type="Node3D"]
+script = ExtResource("1_rda")

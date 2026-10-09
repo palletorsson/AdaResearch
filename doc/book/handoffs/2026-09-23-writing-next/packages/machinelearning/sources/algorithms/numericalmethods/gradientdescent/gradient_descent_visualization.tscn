@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqak7m4x2q8n"]
+
+[ext_resource type="Script" uid="uid://vc7xaaje86h7" path="res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.gd" id="1"]
+
+[node name="GradientDescentVisualization" type="Node3D"]
+script = ExtResource("1")
+iteration_speed = 1.2
+surface_resolution = 80
+z_scale = 1.5

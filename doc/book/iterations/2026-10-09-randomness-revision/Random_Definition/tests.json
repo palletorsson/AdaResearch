@@ -1,0 +1,56 @@
+{
+  "results": [
+    {
+      "version": "printed",
+      "expected_pass": true,
+      "exit": 0,
+      "checks": 22,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "version": "grayscale",
+      "expected_pass": true,
+      "exit": 0,
+      "checks": 23,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "version": "swapped",
+      "expected_pass": true,
+      "exit": 0,
+      "checks": 23,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "version": "reset-each-cube",
+      "expected_pass": false,
+      "exit": 1,
+      "checks": 22,
+      "passed": false,
+      "failures": [
+        "all unshifted cells match the independently grouped stream",
+        "all shifted cells match the independently grouped stream",
+        "shifted procedure consumes exactly 49 draws",
+        "unprinted two-by-two variation uses 13 shifted draws"
+      ]
+    },
+    {
+      "version": "discard-after",
+      "expected_pass": false,
+      "exit": 1,
+      "checks": 22,
+      "passed": false,
+      "failures": [
+        "all shifted cells match the independently grouped stream"
+      ]
+    }
+  ],
+  "files": {
+    "01_seed_picture.gd": "a415a74e8c5ab3cf406440ff3a44cbbccb6575a455b918639ac90c6ff7ead234",
+    "point_body.gd": "968676c54b9fa9b222c26a791f4d150413dcd8865592f61c72df7adc5f8b9037"
+  },
+  "scope": "Author-informed reconstruction; assertion counts are not learner outcomes."
+}

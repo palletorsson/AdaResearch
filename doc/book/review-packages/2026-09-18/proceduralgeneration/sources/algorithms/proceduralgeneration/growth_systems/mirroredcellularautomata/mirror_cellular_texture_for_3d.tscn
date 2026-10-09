@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd" id="1"]
+[ext_resource type="Script" path="res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd" id="2"]
+[node name="MirroredCellularAutomata2" type="Node3D"]
+script = ExtResource("1")
+[node name="MirroredCellularAutomata" type="Node3D" parent="."]
+script = ExtResource("2")
+grid_size = 31
+update_interval = 5.0
+symmetry_type = 2

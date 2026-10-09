@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjg4m5xrhqp2n"]
+
+[ext_resource type="Script" uid="uid://cgb2k8pfah7nf" path="res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.gd" id="1_sierpinski"]
+
+[node name="SierpinskiTriangle" type="Node3D"]
+script = ExtResource("1_sierpinski")

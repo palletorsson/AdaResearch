@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxm5qh8r3vy2k"]
+
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://y3cst61qj6oa" path="res://commons/primitives/point/interactive_point_origin.gd" id="2_script"]
+[ext_resource type="PackedScene" uid="uid://da2qgxxwwitl6" path="res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn" id="3_highlight"]
+[ext_resource type="Script" uid="uid://7ndr65x3j6iv" path="res://commons/primitives/point/point_mesh.gd" id="4_mesh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_point"]
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_base"]
+albedo_color = Color(0.95, 0.95, 0.92, 1)
+emission_enabled = true
+emission = Color(0.25, 0.25, 0.23, 1)
+emission_energy_multiplier = 0.6
+
+[node name="InteractivePointOrigin" instance=ExtResource("1_base")]
+freeze = true
+script = ExtResource("2_script")
+glow_color = Color(1, 1, 1, 1)
+glow_emission_energy = 2.5
+pickup_sound_volume_db = -6.0
+line_color = Color(0.3, 0.8, 1, 0.7)
+line_width = 0.003
+origin_point = Vector3(0, 0, 0)
+haptic_pickup_intensity = 0.5
+haptic_pickup_duration = 0.1
+haptic_drop_intensity = 0.3
+haptic_drop_duration = 0.05
+ranged_grab_method = 0
+second_hand_grab = 2
+
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_point")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_base")
+
+[node name="Label3D" type="Label3D" parent="MeshInstance3D" index="0"]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0.08, 0)
+visible = false
+billboard = 1
+no_depth_test = true
+render_priority = 10
+text = "(0.0, 0.0, 0.0)"
+outline_size = 8
+
+[node name="Sphere" type="Node3D" parent="MeshInstance3D" index="1"]
+script = ExtResource("4_mesh")
+radius = 0.03
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D" index="2"]
+light_energy = 0.3
+
+[node name="HighlightRing" parent="." index="2" instance=ExtResource("3_highlight")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfep_transforming_pattern"]
+
+[ext_resource type="Script" uid="uid://qfep_transforming_pattern_script" path="res://commons/interfaces/qfep/transforming_pattern.gd" id="1_transform"]
+
+[node name="TransformingPattern" type="Node3D"]
+script = ExtResource("1_transform")

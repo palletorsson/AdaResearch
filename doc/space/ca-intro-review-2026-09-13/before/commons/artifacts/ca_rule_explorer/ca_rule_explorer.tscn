@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca_rule_explorer_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd" id="1_script"]
+
+[node name="CARuleExplorer" type="Node3D"]
+script = ExtResource("1_script")
+board_size = 1.0
+cells_x = 64
+rows_visible = 50
+rule = 110
+generations_per_second = 10.0
+auto_run = true
+alive_color = Color(0.2, 0.9, 0.4, 1)
+dead_color = Color(0.05, 0.08, 0.05, 1)
+board_color = Color(0.1, 0.12, 0.1, 1)

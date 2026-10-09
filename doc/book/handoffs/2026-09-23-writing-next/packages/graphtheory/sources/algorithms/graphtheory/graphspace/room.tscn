@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://pukdnpvjavwf"]
+
+[node name="Room" type="Node3D"]
+
+[node name="Shell" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+use_collision = true
+size = Vector3(9, 5, 8)
+
+[node name="Hollow" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0323241, 0.549073, 0)
+operation = 2
+size = Vector3(7.53535, 2.89038, 7.6)
+
+[node name="DoorCut" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0691895, 1.01886, -3.62301)
+operation = 2
+size = Vector3(4.66162, 3.96228, 1.15398)
+
+[node name="WindowCut" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 1.15396, 0.261109)
+operation = 2
+size = Vector3(1.6, 4.18799, 3.23364)
+
+[node name="WindowCut2" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.414966, 1.19909, 3.59232)
+operation = 2
+size = Vector3(5, 4.38874, 1.50488)
+
+[node name="WindowCut3" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05488, 1.19934, 0.61084)
+operation = 2
+size = Vector3(1.6, 4.34821, 4.70117)
+
+[node name="WindowCut4" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66855, 0.183276, 4.4437)
+operation = 2
+size = Vector3(2.37266, 2.32448, 2.69031)
+
+[node name="WindowCut5" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.39259, 0.134081, -3.40849)
+operation = 2
+size = Vector3(2.37266, 2.23634, 2.69031)
+
+[node name="WindowCut6" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.51857, 0.169069, 3.36709)
+operation = 2
+size = Vector3(2.37266, 2.31605, 2.69031)
+
+[node name="WindowCut7" type="CSGBox3D" parent="Shell"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59408, 0.134462, -3.08044)
+operation = 2
+size = Vector3(2.37266, 2.19508, 2.69031)
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+light_energy = 3.0
+
+[node name="AudioStream" type="AudioStreamPlayer3D" parent="."]

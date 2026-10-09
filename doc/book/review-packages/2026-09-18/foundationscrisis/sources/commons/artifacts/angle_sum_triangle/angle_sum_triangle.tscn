@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://angle_sum_tri1"]
+
+[ext_resource type="Script" path="res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd" id="1_script"]
+
+[node name="AngleSumTriangle" type="Node3D"]
+script = ExtResource("1_script")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djdthxnj1rrfs"]
+
+[ext_resource type="Script" uid="uid://lv6i67f84sw3" path="res://commons/hazards/gridagent/grid_agent_base.gd" id="1_base"]
+
+[node name="GridAgent" type="CharacterBody3D"]
+script = ExtResource("1_base")

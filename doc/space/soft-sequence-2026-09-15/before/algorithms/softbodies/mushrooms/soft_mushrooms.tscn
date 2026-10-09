@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e0cv78nifr75"]
+
+[ext_resource type="Script" uid="uid://d252f1r0gug10" path="res://algorithms/softbodies/mushrooms/soft_mushrooms.gd" id="1_mush"]
+
+[node name="SoftMushrooms" type="Node3D"]
+script = ExtResource("1_mush")

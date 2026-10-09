@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://polyhedron_nets_cube"]
+
+[ext_resource type="Script" path="res://commons/infoboards_3d/visualizations/polyhedron_nets.gd" id="1_nets"]
+
+[node name="PolyhedronNets" type="Node3D"]
+script = ExtResource("1_nets")
+net_type = "cube"
+edge_length = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 2, 2)

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://catvent00001"]
+
+[ext_resource type="Script" path="res://commons/hazards/catalyst_foe/catalyst_vent.gd" id="1_vent"]
+
+[node name="CatalystVent" type="Node3D"]
+script = ExtResource("1_vent")

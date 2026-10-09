@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvn8w7j3qk2m5"]
+
+[ext_resource type="Script" path="res://algorithms/vectors/08_vector_throwing/destructibles/segmented_sphere.gd" id="1_segmented"]
+
+[node name="SegmentedSphere" type="Node3D"]
+script = ExtResource("1_segmented")
+sphere_radius = 0.3
+sphere_color = Color(0.9, 0.4, 0.6, 1)
+latitude_segments = 6
+longitude_segments = 8
+segment_gap = 0.01
+enable_physics_on_hit = true
+explosion_strength = 2.0
+segment_health = 1

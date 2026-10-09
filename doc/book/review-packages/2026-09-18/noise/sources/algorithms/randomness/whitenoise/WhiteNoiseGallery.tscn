@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd804tqupb08v"]
+
+[ext_resource type="Script" uid="uid://chuiooolq0lyb" path="res://algorithms/randomness/whitenoise/white_noise_spectrum.gd" id="1_spectrum"]
+
+[sub_resource type="Gradient" id="Gradient_spectrum"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0.2, 1, 0.2, 0.5, 0.8, 1, 0.8, 0.9, 1, 1)
+
+[sub_resource type="Environment" id="Environment_1"]
+background_mode = 1
+background_color = Color(0.05, 0.05, 0.05, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+
+[node name="WhiteNoiseSpectrum" type="Node3D"]
+script = ExtResource("1_spectrum")
+grid_size = Vector2i(100, 100)
+max_height = 3.0
+color_gradient = SubResource("Gradient_spectrum")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 15, 12, 15)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+text = "White Noise Spectrum"
+font_size = 64

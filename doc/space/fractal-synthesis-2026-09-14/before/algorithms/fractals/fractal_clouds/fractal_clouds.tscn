@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cisl64jut7yh1"]
+
+[ext_resource type="Script" uid="uid://dyt578o16irx0" path="res://algorithms/fractals/fractal_clouds/fractal_clouds.gd" id="1_clouds"]
+
+[node name="FractalClouds" type="Node3D"]
+script = ExtResource("1_clouds")

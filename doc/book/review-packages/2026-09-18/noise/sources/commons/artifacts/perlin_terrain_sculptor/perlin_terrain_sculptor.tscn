@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://perlin_terrain_sculptor_artifact"]
+
+[ext_resource type="Script" path="res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd" id="1_script"]
+
+[node name="PerlinTerrainSculptor" type="Node3D"]
+script = ExtResource("1_script")
+grid_size = 24
+voxel_size = 0.04
+noise_scale = 4.0
+noise_octaves = 3
+threshold = 0.0
+brush_radius = 3
+auto_sculpt = false
+sculpt_speed = 2.0
+voxel_color = Color(0.3, 0.7, 0.4, 1)
+height_gradient = true

@@ -1,0 +1,133 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc2nqm3g5twf1"]
+
+[ext_resource type="Script" uid="uid://ds7xu3kf4j5cl" path="res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.gd" id="1_53gy3"]
+[ext_resource type="Script" uid="uid://cvvnhhv00ojiy" path="res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/CaveUI.gd" id="2_ui"]
+
+[node name="Caverandomwalk" type="Node3D"]
+
+[node name="Caverandomwalk" type="Node3D" parent="."]
+script = ExtResource("1_53gy3")
+grid_size = Vector3i(20, 10, 20)
+steps_per_level = 6
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 15, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
+light_color = Color(1, 0.9, 0.8, 1)
+light_energy = 3.0
+spot_range = 30.0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ui")
+
+[node name="Panel" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Control/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Cave Generator"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="WidthLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Grid Width: 20"
+
+[node name="WidthSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 10.0
+max_value = 50.0
+step = 2.0
+value = 20.0
+
+[node name="HeightLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Grid Height: 10"
+
+[node name="HeightSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 5.0
+max_value = 30.0
+value = 10.0
+
+[node name="WalkersLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Walkers: 4"
+
+[node name="WalkersSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 4.0
+
+[node name="StepsLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Steps/Level: 6"
+
+[node name="StepsSlider" type="HSlider" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 15.0
+value = 6.0
+
+[node name="HSeparator2" type="HSeparator" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="SeedLabel" type="Label" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Seed"
+
+[node name="SeedSpinBox" type="SpinBox" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+max_value = 9999990.0
+value = 1337.0
+
+[node name="RandomizeButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Randomize Seed"
+
+[node name="RegenerateButton" type="Button" parent="UI/Control/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate"
+
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/WidthSlider" to="UI/Control" method="_on_width_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/HeightSlider" to="UI/Control" method="_on_height_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/WalkersSlider" to="UI/Control" method="_on_walkers_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/StepsSlider" to="UI/Control" method="_on_steps_changed"]
+[connection signal="value_changed" from="UI/Control/Panel/VBoxContainer/SeedSpinBox" to="UI/Control" method="_on_seed_changed"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/RandomizeButton" to="UI/Control" method="_on_randomize_pressed"]
+[connection signal="pressed" from="UI/Control/Panel/VBoxContainer/RegenerateButton" to="UI/Control" method="_on_regenerate_pressed"]

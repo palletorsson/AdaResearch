@@ -1,0 +1,11 @@
+config_version=5
+[application]
+config/name="Isolated growing dress"
+config/use_custom_user_dir=true
+config/custom_user_dir="AdaResearchGrowingDressProbe20260921"
+[display]
+window/size/viewport_width=1100
+window/size/viewport_height=1000
+[rendering]
+renderer/rendering_method="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false

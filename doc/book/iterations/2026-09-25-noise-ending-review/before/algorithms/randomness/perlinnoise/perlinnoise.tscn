@@ -1,0 +1,82 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtxdoc0aarsqg"]
+
+[ext_resource type="Script" uid="uid://fksjid3ik5gn" path="res://algorithms/randomness/perlinnoise/PerlinNoise.gd" id="1_perlin"]
+[ext_resource type="Script" uid="uid://cbalquo2406ud" path="res://algorithms/randomness/perlinnoise/NoiseVisualizer.gd" id="2_visual"]
+
+[node name="PerlinNoise" type="Node3D"]
+script = ExtResource("1_perlin")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 15, 15)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_energy = 1.5
+
+[node name="NoiseField" type="Node3D" parent="."]
+script = ExtResource("2_visual")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Perlin Noise Visualization
+- 3D noise field generation
+- Adjustable frequency and amplitude
+- Real-time parameter changes
+- Smooth interpolation between values"
+horizontal_alignment = 1
+
+[node name="FrequencySlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 1.1
+
+[node name="FrequencyLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Frequency: 1.0"
+
+[node name="AmplitudeSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 0.1
+max_value = 3.0
+step = 0.1
+value = 1.1
+
+[node name="AmplitudeLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Amplitude: 1.0"
+
+[node name="OctavesSlider" type="HSlider" parent="UI/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="OctavesLabel" type="Label" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Octaves: 4"
+
+[node name="RegenerateButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Regenerate Noise"
+
+[node name="AnimationButton" type="Button" parent="UI/VBoxContainer"]
+layout_mode = 2
+text = "Animate Noise"

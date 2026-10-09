@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://sphere_mid_poly"]
+
+[ext_resource type="Script" path="res://commons/primitives/godotmeshes/sphere_mid.gd" id="1_script"]
+
+[node name="SphereMid" type="MeshInstance3D"]
+script = ExtResource("1_script")

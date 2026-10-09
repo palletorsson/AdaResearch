@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://dt3etdebb4l2w"]
+
+[ext_resource type="Script" uid="uid://cel6cpsjxa1n" path="res://algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd" id="1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="1"]
+sky_top_color = Color(0.1, 0.1, 0.2, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.6, 1)
+ground_bottom_color = Color(0.1, 0.1, 0.1, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.6, 1)
+
+[sub_resource type="Sky" id="2"]
+sky_material = SubResource("1")
+
+[sub_resource type="Environment" id="3"]
+background_mode = 2
+sky = SubResource("2")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+
+[node name="TrigWalkingPath" type="Node3D"]
+script = ExtResource("1")
+path_length = 40
+step_distance = 0.6
+step_width = 1.8
+step_depth = 0.6
+escalator_mode = true
+escalator_speed = 0.6
+
+[node name="SinePath" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="SinePath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, 0)
+billboard = 1
+modulate = Color(1, 0.3, 0.3, 1)
+text = "Sine Path"
+
+[node name="CosinePath" type="Node3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="CosinePath"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 0)
+billboard = 1
+modulate = Color(0.3, 0.5, 1, 1)
+text = "Cosine Path"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 5, 8)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 10, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("3")
+
+[node name="FloorReference" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -40)
+size = Vector3(10, 0.1, 100)

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://v53dh5g0ljetc"]
+
+[ext_resource type="Script" path="res://commons/primitives/sphere/sphere.gd" id="1_script"]
+
+; sphere.tscn — configurable sphere primitive backed by sphere.gd.
+; Replaces a previously-hardcoded scene (shader sub-resource + SphereMesh
+; sub-resource) with a script-driven version that exposes radius / colour /
+; wireframe_color / segment exports + apply_grid_config. UID preserved
+; so existing registry / map references keep working.
+
+[node name="sphere" type="Node3D"]
+script = ExtResource("1_script")

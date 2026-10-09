@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dijypoo8gd232"]
+
+[ext_resource type="Script" uid="uid://b58tx1qldwsis" path="res://algorithms/randomness/random_object_spawner.gd" id="1_cn00w"]
+[ext_resource type="PackedScene" uid="uid://c36f75dc0chgs" path="res://commons/primitives/cubes/grab_cube_wood.tscn" id="2_crtyv"]
+
+[node name="RandomObjectSpawner" type="Node3D"]
+script = ExtResource("1_cn00w")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.877166)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+
+[node name="woodCube" parent="." instance=ExtResource("2_crtyv")]

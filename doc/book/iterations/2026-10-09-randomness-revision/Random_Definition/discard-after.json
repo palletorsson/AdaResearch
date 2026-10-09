@@ -1,0 +1,110 @@
+{
+  "checks": [
+    {
+      "name": "two grids create sixteen cube meshes each",
+      "passed": true
+    },
+    {
+      "name": "readout initialized in ready",
+      "passed": true
+    },
+    {
+      "name": "inherited point keeps pickup and frozen release",
+      "passed": true
+    },
+    {
+      "name": "point retains its original radius",
+      "passed": true
+    },
+    {
+      "name": "colour does not alter the cube's mesh construction",
+      "passed": true
+    },
+    {
+      "name": "each cube owns its material",
+      "passed": true
+    },
+    {
+      "name": "same procedure makes equal panels",
+      "passed": true
+    },
+    {
+      "name": "replay retains every stored colour",
+      "passed": true
+    },
+    {
+      "name": "waiting spends no draws",
+      "passed": true
+    },
+    {
+      "name": "point action enables exactly one discarded draw",
+      "passed": true
+    },
+    {
+      "name": "discard leaves the left panel intact",
+      "passed": true
+    },
+    {
+      "name": "all unshifted cells match the independently grouped stream",
+      "passed": true
+    },
+    {
+      "name": "all shifted cells match the independently grouped stream",
+      "passed": false
+    },
+    {
+      "name": "shifted procedure consumes exactly 49 draws",
+      "passed": true
+    },
+    {
+      "name": "left trigger repeats the selected mismatch in a rotated host",
+      "passed": true
+    },
+    {
+      "name": "second middle trigger restores the match",
+      "passed": true
+    },
+    {
+      "name": "right trigger increments seed rather than drawing one",
+      "passed": true
+    },
+    {
+      "name": "next seed also repeats",
+      "passed": true
+    },
+    {
+      "name": "actions retain every cube position",
+      "passed": true
+    },
+    {
+      "name": "retained values are the actual material colours",
+      "passed": true
+    },
+    {
+      "name": "unprinted two-by-two variation uses 13 shifted draws",
+      "passed": true
+    },
+    {
+      "name": "instances own separate generators and records",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "failures": [
+    "all shifted cells match the independently grouped stream"
+  ],
+  "mode": "rgb",
+  "passed": false,
+  "scope": "Printed files reconstructed; actual inherited action method; prescribed point positions. No headset or independent learner claim.",
+  "source": "res://doc/book/iterations/2026-10-09-randomness-revision/Random_Definition/extracted/discard-after.gd"
+}

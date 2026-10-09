@@ -1,0 +1,30 @@
+{
+  "room": "Random_Definition",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Definition/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Definition/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Definition/em_live_footprints.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Definition/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Definition/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Definition/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Definition/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Definition/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Definition/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Definition/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "10f4f3d9673a8acdc67db9a0cff3cba1b673f9d06a0c94a442db8ccf9b31fe5b",
+    "commons/maps/Random_Definition/map_data.json": "9111b5c0143c67c09e79d0fdd049534e96cc1e488bd99ea12d35b7c608e503bc",
+    "tools/probes/randomness_revision_museum.gd": "0f5653f60475abc00d52364feef6b28e0d0069267691ff9e4c9545dcb257ff6f",
+    "tools/run_encounter_probe.py": "c7d69211109284384c2930b502968cce12667ca08e178dafa5bf70fc4b16733e",
+    "commons/data/museum/em_plan.json": "e54163c93bfab0ad230a6e654ee995c41f64ea24d2c1ba25f47cafc33478d698",
+    "ada_run/encounter_pilot/Random_Definition/control.json": "7f8b01db729843369ed518890b980923eaa641ac86693811454435d23257b574",
+    "ada_run/encounter_pilot/Random_Definition/necklace_hand.json": "8f4f2490240e96efccda9c1474e2e91218c268c7651f032b87d65343958f2345",
+    "ada_run/encounter_pilot/Random_Definition/em_overrides.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "ada_run/encounter_pilot/Random_Definition/em_bake.json": "3e21ee417d76fdd304099d7152ccd56ca62942bada8688c6fc171f55c31cb1cf",
+    "commons/artifacts/registry/randomness.json": "cff57c36474ccd1d35716dd6063e942e4d697eee1b7a6764258f464419268e4d",
+    "algorithms/randomness/seed_replay/seed_replay_demo.tscn": "10ea4bea4d4391659706c3ab0486db53340f249a78be81a730f87d1423e1e3e2",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd": "7fb517d58b17e64da2bab225b019aad1149bc8e64d45dd9a9c80b6dfcc82b16a"
+  }
+}

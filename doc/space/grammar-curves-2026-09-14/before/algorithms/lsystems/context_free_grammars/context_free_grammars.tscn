@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dopk6wtax45gm"]
+
+[ext_resource type="Script" uid="uid://cidbdsbh0xfsf" path="res://algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd" id="1"]
+
+[node name="ContextFreeGrammars" type="Node3D"]
+script = ExtResource("1")

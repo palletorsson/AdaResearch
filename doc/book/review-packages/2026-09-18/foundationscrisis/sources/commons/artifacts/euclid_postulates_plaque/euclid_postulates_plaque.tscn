@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3uclid_postulates"]
+
+[ext_resource type="Script" path="res://commons/artifacts/euclid_postulates_plaque/euclid_postulates_plaque.gd" id="1_script"]
+
+[node name="EuclidPostulatesPlaque" type="Node3D"]
+script = ExtResource("1_script")

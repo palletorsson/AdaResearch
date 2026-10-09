@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://base.tscn" id="Room"]
+[ext_resource type="Script" path="res://studies/point_polyhedra/polyhedra.gd" id="Study"]
+
+[sub_resource type="StandardMaterial3D" id="BackdropMaterial"]
+albedo_color = Color(0.32, 0.29, 0.34, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BackdropMesh"]
+size = Vector3(5, 2.8, 0.1)
+
+[node name="AdaRoom" instance=ExtResource("Room")]
+setup_check = false
+
+[node name="Study" type="Node3D" parent="."]
+position = Vector3(0, 0, -0.7)
+script = ExtResource("Study")
+
+[node name="Backdrop" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.4, -2.7)
+mesh = SubResource("BackdropMesh")
+material_override = SubResource("BackdropMaterial")
+
+[node name="Title" type="Label3D" parent="."]
+position = Vector3(0, 3.1, -1.3)
+pixel_size = 0.002
+font_size = 34
+outline_size = 0
+modulate = Color(0.91, 0.67, 0.77, 1)
+text = "FOUR POSITIONS / WHICH FACES?"
+
+[node name="Help" type="Label3D" parent="."]
+position = Vector3(0, 0.17, -0.7)
+pixel_size = 0.002
+font_size = 25
+outline_size = 0
+text = "Hold a numbered corner: aim + E / near grip in VR\nAdd [1, 3, 2] to faces in polyhedra.gd to close the opening"

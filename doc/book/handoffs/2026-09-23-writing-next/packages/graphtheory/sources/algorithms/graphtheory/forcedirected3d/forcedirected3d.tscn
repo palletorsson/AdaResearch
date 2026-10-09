@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://2j1uiuigjvau"]
+
+[ext_resource type="Script" uid="uid://dk58yu2a5mg11" path="res://algorithms/graphtheory/forcedirected3d/forcedirected3d.gd" id="1_1j2kv"]
+
+[node name="ForceDirected3D" type="Node3D"]
+script = ExtResource("1_1j2kv")
+node_count = 16
+edge_probability = 0.18
+layout_bounds = Vector3(40, 25, 40)
+initial_distribution = "sphere"
+repulsion_strength = 150.0
+spring_constant = 0.1
+rest_length = 6.0
+damping_factor = 0.88
+gravity_strength = 0.02
+max_force = 30.0
+max_iterations = 1500
+convergence_threshold = 0.03
+time_step = 0.02
+temperature_cooling = 0.998
+force_visualization_scale = 0.15
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.3, 0.4, 0, 0.8, 0.6, -0.5, -0.519615, 0.692821, 20, 15, 25)
+fov = 70.0

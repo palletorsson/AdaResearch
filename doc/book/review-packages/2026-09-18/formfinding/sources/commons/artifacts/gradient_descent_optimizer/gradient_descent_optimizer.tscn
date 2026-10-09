@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd" id="1"]
+
+[node name="GradientDescentOptimizer" type="Node3D"]
+script = ExtResource("1")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://wetpaint123"]
+
+[ext_resource type="Shader" path="res://algorithms/color/drawing/wet_paint_simulation.gdshader" id="1_shader"]
+[ext_resource type="Script" path="res://commons/context/drawingboard/brush_layer.gd" id="2_brush"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sim"]
+shader = ExtResource("1_shader")
+shader_parameter/flow_speed = 0.001
+shader_parameter/dissipation = 0.995
+
+[node name="WetPaintViewport" type="SubViewport"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1440, 1000)
+render_target_clear_mode = 1
+render_target_update_mode = 3
+
+[node name="SimulationPass" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="SimulationRect" type="ColorRect" parent="SimulationPass"]
+material = SubResource("ShaderMaterial_sim")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BrushLayer" type="Node2D" parent="."]
+script = ExtResource("2_brush")
