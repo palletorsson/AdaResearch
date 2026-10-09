@@ -1,0 +1,443 @@
+{
+  "Color_Flashlight": {
+    "date": "2026-09-10",
+    "summary": "40 desktop museum checks pass: mounting, floor, pickup/movement/release, RGB overlap, aim-away/return and unchanged receiving material. Supplied grabber; tracked hands and headset comfort remain untested.",
+    "report": "flashlight-check.json",
+    "capture": "flashlight-arrival.png",
+    "source_sha256": {
+      "commons/maps/Color_Flashlight/map_data.json": "031d60bdd81aae8d574c6bae4dfcc6b3ce88d5a3269069ba1f1c39d47880839e",
+      "commons/maps/Color_Flashlight/final.md": "7f35e144f23879bf0306016ac02f6afd33d786fb9f6cfe87f92179adb2e4bbe3",
+      "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd": "d3745680e2b29e3c83ddce78ac28a374dae7929ace19ad52fc1ab98ed283bbad",
+      "algorithms/postprocessing/flashlight_demo/flashlight_color.gd": "617325a3ac396c1dff6f9f74c482c5a4c30bfe2b0ad50498f5ca95dc715f0e97",
+      "algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn": "d78761c0223608dd41d4d2d2fc5294b51e95ee2032e4652342a3c962447c6ade",
+      "algorithms/postprocessing/flashlight_demo/flashlight.tscn": "79af388a18fdd53a14eba94031aaf4e9136b2ed62edbb17b07329fbd9ec3a26e",
+      "commons/testing/probe_flashlight_lesson.gd": "45c25b27faf93a6222ff710790ac4ad206f8cf419b54029c11f2aebac62d74fc"
+    }
+  },
+  "Color_Nails": {
+    "date": "2026-09-10",
+    "summary": "35 desktop museum checks pass: separate open plinths, standing RGB reach, supplied pickup motion, separate nail/skin changes, both side routes and contained palette balls. Tracked hands and headset comfort untested.",
+    "report": "nail-salon-check.json",
+    "capture": "nail-salon-museum.png",
+    "source_sha256": {
+      "commons/maps/Color_Nails/map_data.json": "2a9c9a35e4a6bd3aec26d33fed10f3bb1d7a4a2d437461dfd9923c738806bfd7",
+      "commons/maps/Color_Nails/final.md": "214546e32247a68a09e1c3530e493e7fe9d1513ff163ca5a9899b225f4b36f64",
+      "commons/artifacts/nail_salon/nail_salon.gd": "c8b1a300f2a3901450f4b8800838b7ef73754b3c44dd9dceaca821f4ae3bd9d3",
+      "commons/artifacts/nail_salon/nail_salon.tscn": "d0b2b9c6e5eed61049377b960557bf4f1f073702ebb53d1bd7a391450e4f9d84",
+      "commons/interfaces/nail_color_controller.gd": "81c242d6b7110d8993ade215b7592e52b5fe4b7ae427f4bef07e67545f3e1879",
+      "commons/testing/probe_nail_salon.gd": "e383f613f59bbf3ec355e739216c194eb082c640e8c9d70766ac6ae5c5010d18",
+      "algorithms/color/colorballs/colorballs.gd": "2d3a0f816c77a0f4eb8dbab84b4e237e56db8a99fa5d689d3aac9962fcefe3eb",
+      "algorithms/color/colorballs/colorballs.tscn": "cfb6e488a6549364c36e0912d537455621f0154fb87e863b634c68601c453b65"
+    }
+  },
+  "Color_Rainbow": {
+    "date": "2026-09-10",
+    "summary": "93 desktop museum checks pass: actual button signals, 6/7/48/2 bands at fixed width, unchanged tile geometry, arrival physics overlap, repeatable bounded confetti and a clear level route. Headset untested.",
+    "report": "rainbow-celebration-check.json",
+    "capture": "rainbow-celebration-museum.png",
+    "source_sha256": {
+      "commons/maps/Color_Rainbow/map_data.json": "90913fa9214a4a85e3ce045e0b04b3bb42a411a7a9a72e6188223b9452210076",
+      "commons/maps/Color_Rainbow/final.md": "89624ea7e30ebd62d994ffe573fc1440a1bf7110b75449a5c0e6069facbe1646",
+      "algorithms/primitives/rainbow/rainbow.gd": "8cc0519b974354b1b54a333d2d37ce364bb36e2f27417e6988badcddf0d4e9d6",
+      "algorithms/primitives/rainbow/rainbow.tscn": "0711aa7a2ffe00ba2b65026726e29539ba8804889975b73fcdff754a0300d6f2",
+      "algorithms/primitives/rainbow/rainbow_celebration.gd": "070506647e8bf8ffc59f4a3adc9ea9c07a5107e16000340cce716a2033dfd3e0",
+      "commons/testing/probe_rainbow_celebration.gd": "3ae6d7c2846ad75f21ed15b6b5c9cdaa7f6c79bf59e176ae5caf2026cf9812e0"
+    }
+  },
+  "Color_Grid_Pallet": {
+    "date": "2026-09-10",
+    "summary": "30 desktop museum checks pass: real console button signals, initial coordinate rule, one-instance edits, return to an address, rule replacement, palette evaluation, unchanged cube transforms, standing reach and body-sized approach. Tracked-controller pressing and headset comfort untested.",
+    "report": "grid-address-check.json",
+    "capture": "grid-address-museum.png",
+    "source_sha256": {
+      "commons/maps/Color_Grid_Pallet/map_data.json": "1cc8add37dccd6714906a64b10c0ce0ea30c1a0ba5f3092363515cef61fecd27",
+      "commons/maps/Color_Grid_Pallet/final.md": "8ba544dda4c4625245ad7661d98f5ee83a31885e54b750984138b6e0e1c3070d",
+      "algorithms/color/gridcolorizer/gridcolorizer.gd": "6b25821ce9df17436b9805412ddfa6fe6fdf23dbddd12288e243b79c2f2a950c",
+      "algorithms/color/gridcolorizer/gridcolorizer.tscn": "277b9aacc76cbf76c5139d0c0cf1ce9b4469db5a706172a6f522928c85ce72f9",
+      "algorithms/color/gridcolorizer/address_lesson.gd": "4669b301b83240170a4193a38ab9b5231f9f168dbb066100feb1c773e8527e4d",
+      "commons/grid/mutators/grid_color_mutator.gd": "3b11687cb50f8a6015e05ac32c04fe661a8d91f8860d7a1c496de62868c6d5bf",
+      "commons/grid/mutators/grid_mutator_base.gd": "e2ad6640c2bc216ef2a56acf04e7e1c96924142b1c9f16d8b7595a331316b622",
+      "commons/testing/probe_grid_address_lesson.gd": "062a3ca3fc3eed01e953cf6a6efb3fde5c955c324685e5facf435bc2f0fb1490",
+      "algorithms/color/color_palettes.tres": "2dd294673623a8daa659262348743b5cf8290d67c337d6b294074a5c08901b66"
+    }
+  },
+  "Color_Paint": {
+    "date": "2026-09-10",
+    "summary": "27 desktop museum checks pass: supplied pickup and real ray hits, correct receiver and rectangular UV mapping, automatic continuation, rendered pigment after release, return to tray, canvas sightline and body-sized approach. Tracked hands untested.",
+    "report": "paint-encounter-check.json",
+    "capture": "paint-encounter-museum.png",
+    "source_sha256": {
+      "commons/maps/Color_Paint/map_data.json": "f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16",
+      "commons/maps/Color_Paint/final.md": "a941b43cad8ee1ef202142d4e4c9ab79104e5883dcd1013b4f10e0f77241cf3e",
+      "commons/context/drawingboard/ball_painting_automation.gd": "c4011a0d7cce02875657bca4d32bad558f631960b86a6fb39d16ea055a67d30c",
+      "commons/context/drawingboard/ball_painting_demo_v2.tscn": "b852188f67512c68f359f5ea891224d5c78090509bf8eafe8496bc0aafcb363b",
+      "commons/context/drawingboard/ball_paint_tip.gd": "dee479b55abf24a382902c2a034096aee76a122294c1ec316c379d7797e40530",
+      "commons/context/drawingboard/ball_spawner.gd": "04e4493c3f4c9349f242c5cb1c7e5cbefd9bbc474897f0744f114004817be039",
+      "commons/context/drawingboard/ball_grab_sphere.gd": "7d9c65bf9ec60daa239bbcf1cfef3c419f64891c0c5f9c046caba2a39a80f8b1",
+      "commons/context/drawingboard/paper_draw_surface.gd": "a5628881258668a66126b27adf4fee9bd7d263e6418afff75150716a113c0ae2",
+      "commons/context/drawingboard/brush_layer.gd": "3de188d11595a9bbb6f34cde589a52c286f7327c197cd89dc21d8b364780268d",
+      "algorithms/color/drawing/wet_paint_simulation.gdshader": "abd9688c50922ea768c71e13415eaf86899ee32c9f5d59da3c6a8ebdab9dcecc",
+      "commons/testing/probe_paint_encounter.gd": "e099738acfea6197d316d693ab47583d060c4feb9faf6d99eaa00b65c3461ae7"
+    }
+  },
+  "Color_Walls": {
+    "date": "2026-09-10",
+    "summary": "52 desktop museum checks pass: both opacity states, clear aisle and eight entrances, pane blocking, unchanged collision bodies, real button signals, standing controls, visible gradient height, preserved endpoints and sampled colour coordinates. Tracked hands and headset comfort untested.",
+    "report": "walls-encounter-check.json",
+    "capture": "walls-glass-museum.png",
+    "comparisons": [
+      {
+        "file": "walls-opaque-museum.png",
+        "caption": "Same viewing position, opaque panes. The doors and collision bodies have not moved."
+      },
+      {
+        "file": "walls-coordinates-museum.png",
+        "caption": "The standing RGB and HSV sample models. V marks value."
+      },
+      {
+        "file": "walls-gradient-museum.png",
+        "caption": "The interpolation bench after changing endpoints and switching to HSV. Values remain visible above the controls."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Color_Walls/map_data.json": "b9a6578d15fae1b998fb1a9f5cf2371bbc72e49045b313566b95e1a393a1f027",
+      "commons/maps/Color_Walls/final.md": "ff6d93047447d8d18c7e3978f1b8e50fe84d84a8109eb1d38be739ce890a0385",
+      "algorithms/color/color_mixing/color_constellation_office.gd": "1dcc420c1d2fe710caa054f2496742b53d428dc41cf8bcdacb62acf1074308b3",
+      "algorithms/color/gradient_interpolator/gradient_interpolator.gd": "8638a8b0c91475d13a54f794081a303188dc0a1c94de50852c0f6f1d28029ea4",
+      "commons/artifacts/color_space_navigator/color_space_navigator.gd": "4f2412e416018e945824dd0b315e73de4da6fe146a8a676b78d91a6f4660cfde",
+      "commons/testing/probe_walls_encounter.gd": "69ace72bdcfa483b397faff24bacba2101a715363fa5f88d6c1dc6340d2a8701"
+    }
+  },
+  "Chamber_Color": {
+    "date": "2026-09-10",
+    "summary": "32 desktop museum checks pass: supplied pointer press/release, physical projectile contacts, one hit per contact, cooldown, target tint, two changed grid samples, unchanged floor collision transforms, three-hit disappearance and return, live controls and a clear side approach. Tracked hands and headset comfort untested.",
+    "report": "chamber-colour-check.json",
+    "capture": "chamber-colour-after.png",
+    "comparisons": [
+      {
+        "file": "chamber-colour-before.png",
+        "caption": "The same mounted encounter before the shot: aim is fixed, the hue will be chosen at launch."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Chamber_Color/map_data.json": "829b52138e3f558099a96dab614853e0ce6b55ef8ba9a816e65766459b832cef",
+      "commons/maps/Chamber_Color/final.md": "2101807fbf562dca07c2f5ec37b91f8f770fc478f86aa792ab009059526a9af7",
+      "commons/hazards/becoming_catalyst/chromatic_study.gd": "10121761a9ffc5d1c4ed0497a0fc635a6d44ac7f970b17753f591692ee35c15d",
+      "commons/hazards/becoming_catalyst/becoming_catalyst.gd": "bffab3989672fe3c6600010140c976246b888809a396a308d9087543f841f4aa",
+      "commons/hazards/becoming_catalyst/modes/mode_chromatic.gd": "ef644de4e123496f81e42913cab95e28939a50a613e012b098ed37bab5cb4a9a",
+      "commons/hazards/becoming_catalyst/modes/chromatic_projectile.gd": "6db98a8f971c98f9b45ecf9a695f284fa4e2ac7b0648483742aa3833407bbd8d",
+      "commons/hazards/becoming_catalyst/catalyst_projectile.gd": "db657e2bab0b0164b87cae25c6060a84ffcd364b579c5f044f0e2f323b7ca1a7",
+      "commons/hazards/becoming_catalyst/catalyst_target.gd": "f58fc787da107b9b941248958fc6a77f3ad053bf9a741ea46f8102a6762e9c2f",
+      "commons/grid/GridInteractablesComponent.gd": "01f707717183d1737cde7e69418a2604aaabb0ac9dc57716a2e6a02e0429b7f2",
+      "commons/scenes/endless_museum.gd": "633110f24c3beb4c3e3f846902c5067956273c6f39122299ce99ea0a22bd3d05",
+      "commons/testing/probe_chamber_colour.gd": "d39a33938fa4937b9b9eaf9ded48ae17a9be88360a635dbddef8ae32ae0fe859"
+    }
+  },
+  "Pattern_Foundry": {
+    "date": "2026-09-10",
+    "summary": "99 Foundry regression checks and 86 studio/room checks pass in the desktop museum. The studio now stands inside an eight-metre curved room, with independent wall and floor receivers. Source ownership, hold, shared undo, arc-length mapping, entrance collision and the aisle route are checked. Headset untested; outfit hidden only for inspection photos.",
+    "report": "pattern-recipe-check.json",
+    "capture": "pattern-recipe-museum.png",
+    "source_sha256": {
+      "commons/maps/Pattern_Foundry/map_data.json": "49bc12787b56946ad4b7d9aea567cc2fe260c483efc7c1eceae47764880a7c12",
+      "commons/maps/Pattern_Foundry/final.md": "50d46ac7e91191a1288e5b26cab91e723bb879d4b7b6df7a2bfb41f14fdee7f2",
+      "commons/artifacts/pattern_machine_a/pattern_machine_a.gd": "74685f88879af5044bf069db9c44dddb001bbca8d9c390bda8e20ea36b753fd1",
+      "commons/artifacts/pattern_machine_a/loom_recipe.gd": "43f08cafad70405e62d48e3ffa7fd90dc89ba67e0861d562514eb1aaab87ea31",
+      "commons/artifacts/pattern_machine_a/recipe_study.gd": "8b2042753d5e3807a7b4f67501c6a23beeb36f7d4f3ddf601fda6aceaecd38d6",
+      "commons/testing/probe_pattern_recipe.gd": "9898e2d3229de6db3018c4c32e804252d9e1242af714e3475064d4029526f056",
+      "commons/primitives/arrays/pattern_studio_plate.gd": "f5d3cac99c4adf95ded6fd97addffce860be8e95eccdf6705a8734bc6a6fcdda",
+      "commons/primitives/arrays/pattern_studio_console.gd": "26ab3b9906bc0d6919e1daf85f26b44ac1a04be736da8c0a011e85636348e263",
+      "commons/testing/probe_pattern_studio.gd": "828e5ddc8a3f11c677e827c21d854b45d10d4ba71698e5a2d816c68826d56665",
+      "commons/patterns/pattern_loader.gd": "b2d81270cf4487337555f52d88e901e6a2ed1d7b0a06bcc312a37884001ae7f2",
+      "commons/resourses/shaders/wallpaper_tile.gdshader": "9b78ce7f46258e0c9c1d16e1c186259fe24b2d90b40341d11deab967d4d6241a",
+      "commons/primitives/arrays/studio_surface_controls.gd": "3701c6a90b5e63b2bd91d988322c04823b4729eb17136013f9e1b718a9b1ac77",
+      "commons/primitives/arrays/curved_pattern_room.gd": "6cc5aa93505550f654b8fc6b7c1daa4611cac4b7791fd758913a870b34be6c74"
+    },
+    "comparisons": [
+      {
+        "file": "pattern-wall-museum.png",
+        "caption": "The original wall follows the source at 30 cm repeat and U05 offset."
+      },
+      {
+        "file": "pattern-architecture-museum.png",
+        "caption": "NORTH follows at 30 cm repeat and U05 on an existing inner wall. Inspection view; player outfit hidden for the probe camera."
+      },
+      {
+        "file": "pattern-east-museum.png",
+        "caption": "EAST retains 15 cm repeat and U00 while linked surfaces follow at 30 cm and U05. Its standing approach is reserved from automatic sculptures."
+      },
+      {
+        "file": "pattern-studio-console.png",
+        "caption": "The studio edits a source inside the room. ROOM selects its curved wall and planar floor together; 86 checks in pattern-studio-check.json."
+      },
+      {
+        "file": "pattern-studio-room.png",
+        "caption": "The source editor and surface selector inside the curved studio bay. Pattern edits preserve the wall geometry and entrance."
+      },
+      {
+        "file": "curved-room-inside.png",
+        "caption": "Inside the room: a small editable source surrounds the body. Wall and floor can follow it live or retain different moments."
+      },
+      {
+        "file": "curved-room-entrance.png",
+        "caption": "The eight-metre curved bay, broad entrance and roof opening, seen from its approach. Actual Godot capture; Guilloche motif with Renaissance palette."
+      }
+    ]
+  },
+  "Tutorial_Pattern": {
+    "date": "2026-09-10",
+    "summary": "41 desktop museum checks pass: pointer painting, source/rule separation, fixed P1/PM reference panels, equal tile spacing, reversible edits, reachable controls and bay approach. Headset and gestures deferred. Desktop captures inspected.",
+    "report": "fixed-motif-check.json",
+    "capture": "fixed-motif-bay.png",
+    "comparisons": [
+      {
+        "file": "fixed-motif-console.png",
+        "caption": "Sixteen source addresses, eight paints, two floor rules and reversible source operations. The book follows these implemented controls."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Tutorial_Pattern/map_data.json": "32e3411d53d55732d5cf1bf8cf16bfd58c603bf4ed1353383f84c759273c4d13",
+      "commons/maps/Tutorial_Pattern/final.md": "897d88c50dff322e9a9d6dedf0a88e65985c8bfef7b196119a42917cbc5a2373",
+      "commons/maps/Tutorial_Pattern/technical.md": "3a483f6cc93a75a5ed850be595af9392ae7c69bbd73edc44115cf3c83d9142bc",
+      "commons/artifacts/pattern_maker_station/pattern_maker_station.gd": "37e2d364c298460b0ba3e1e11479fa4b02d2d95c52e3ab3dbeb2312101eabbed",
+      "commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd": "8b2243202358b25b9867abb42078e519427d23a049a6a4c85925c4be852635b8",
+      "commons/testing/probe_fixed_motif.gd": "e7b31ef64fbaf5e4ed04f025b6837ed492b9929ee28413a0541bddc21e57766f",
+      "commons/resourses/shaders/wallpaper_tile.gdshader": "9b78ce7f46258e0c9c1d16e1c186259fe24b2d90b40341d11deab967d4d6241a"
+    }
+  },
+  "Array_Patterns": {
+    "date": "2026-09-10",
+    "summary": "50 desktop checks pass: address controls and UV agreement, one-metre platform, physical wp ascent/descent, blocked side bypasses, flat exit landing and reachable lower console. Headset deferred.",
+    "report": "tunnel-address-check.json",
+    "capture": "tunnel-address-bay.png",
+    "comparisons": [
+      {
+        "file": "tunnel-address-console.png",
+        "caption": "A fixed source array with surface and source addresses, cell pitch, face and grid visibility."
+      },
+      {
+        "file": "tunnel-address-inside.png",
+        "caption": "Four independently mapped surfaces enclose a traversable six-metre passage. Printed joints and physical collision are separate."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Array_Patterns/map_data.json": "0ab371f60d5dfda9e751bed7380a4b34b28621ffa3c84e585ac3cb29756d3bb1",
+      "commons/maps/Array_Patterns/final.md": "67cfa28ed8b81221a14c2ce061ace7930b806d57eef920a076f70e818ec2f032",
+      "commons/maps/Array_Patterns/technical.md": "12481c71376d64dafceb21100d0aa8fe808dd337cc5883903fa632ed94ffad0c",
+      "commons/artifacts/pattern_tunnel/pattern_tunnel_machine.gd": "d007cf240ccc629f781cd372e3e3a8bc3ecc6e9358979271f59f199614f57808",
+      "commons/artifacts/pattern_tunnel/pattern_tunnel.gd": "e43c4fe7bdc1792ba31ae5381c5132ea334e00708e991f4ce3896e917f7850e4",
+      "commons/artifacts/pattern_tunnel/pattern_tunnel.gdshader": "24103a2b2cd81f32a52164401273c6eb5d103e05b95bb1be628685ccb86a39ae",
+      "commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd": "6eb503be0fa6df5fa4de4ce6fe0cee1bf21571d9807ad98b6308a08e2ef53aee",
+      "commons/testing/probe_tunnel_addresses.gd": "df01b0d6d05e098b74b3ae5d9793db97a5455fb98ccd65649e0f41f306d095ad"
+    }
+  },
+  "Symmetry_Seventeen": {
+    "date": "2026-09-10",
+    "summary": "40 desktop checks pass: actual pointer controls, three source lookup rules, independently held pixels, undo, physical approach and unchanged legacy editor. Headset deferred.",
+    "report": "symmetry-compare-check.json",
+    "capture": "symmetry-compare-bay.png",
+    "comparisons": [
+      {
+        "file": "symmetry-compare-console.png",
+        "caption": "One source, three rules; a held image makes the next change comparable."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Symmetry_Seventeen/map_data.json": "cc9353c1a549d07bad9d3eb84b16694951ff1841776fea9235659a6be1e41377",
+      "commons/maps/Symmetry_Seventeen/final.md": "ed35f6d3e880e8a5e6af2353cf71860e49e66a7c0a396574800ad25e52d1c798",
+      "commons/maps/Symmetry_Seventeen/tutorial.md": "a65fa4f95c20b54d3e22e9dafd23af32be54d44ebb21a7117385826248e35d8a",
+      "commons/maps/Symmetry_Seventeen/intent.md": "394ceb84bfa3ab3d37b54fc86b3b3d4e3042fb148275e73a3b15a756522b2464",
+      "commons/maps/Symmetry_Seventeen/blurb.md": "165e19e09219328f8aaec79b038464cbdbe577a4f8f8b772a72e46f84d606b6d",
+      "commons/primitives/arrays/vr_tile_editor.gd": "179bd31103a8452c62eeada26ba0f58b883ce4419dad21878bf697f40b875f9d",
+      "commons/primitives/arrays/symmetry_compare_lesson.gd": "55908f7bb4084adade667df732c63ffdc74370615973d7019b7aac9d3c2228fc",
+      "commons/primitives/arrays/wallpaper_groups.gd": "5ddc7d3bb0a4ac5bf5e5ddea6405f060d2e37a86f08ca0ac7e3840c9c829c6a3",
+      "commons/primitives/arrays/pattern_tile_puzzle.gd": "a5268e47d81331dc8542806a58f098ef29daed3134c60eadedccdd4166d361d3",
+      "commons/testing/probe_symmetry_compare.gd": "c057d50f9b6725616ca6cb43088e67a6326e3a2fe50b192cac8d218c0ad9fb47"
+    }
+  },
+  "Ribbon_Patterns_01": {
+    "date": "2026-09-10",
+    "summary": "22 primary interaction checks and 13 layout checks pass after compaction. All artifacts retained, primaries full scale, central aisle clear. Headset and supporting control review deferred.",
+    "report": "layer-pattern-check.json",
+    "capture": "compact_Ribbon_Patterns_01.png",
+    "comparisons": [
+      {
+        "file": "compact_entry_Ribbon_Patterns_01.png",
+        "caption": "Standing view through the compact gallery and its framed walls."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Ribbon_Patterns_01/map_data.json": "db587570b0f260889c87664c6cc664ee5efa5e8e0fd0593e9bf4e1c4fc9362cf",
+      "commons/maps/Ribbon_Patterns_01/final.md": "494882d0579203c1678cbfea061bd57a40cb4b90430061c1cf92dd64640e1cc2",
+      "commons/maps/Ribbon_Patterns_01/technical.md": "4692ff96c1b4f769ea0eb538508ef66fe9c61596f18f682d1c486ce44c9ab11b",
+      "commons/maps/Ribbon_Patterns_01/critical.md": "247330b4a5855d62aa4263482f6cef3bffe19036c55ad79ab2bcb3603a2b10d6",
+      "commons/maps/Ribbon_Patterns_01/summary.md": "32a9ae6b8f9e67196505d8e154a9905030b7189b512fbdcd27166497dd1ffc69",
+      "commons/maps/Ribbon_Patterns_01/blurb.md": "455500b55d99d5088c5418277459e7ac3b3b22e275eed1f78ad893b2d8a16351",
+      "algorithms/arrays/grid_2d_4x4.gd": "9318036545bbbebbf1518400a9535ed9a2f96f98293f84bf9892c3c9be9ef856",
+      "algorithms/arrays/grid_3d_4x4x4.gd": "4116e474f84ede18fc62e7f80609875a9ed0fac98107cbe2acb7856ba40aa72a",
+      "algorithms/arrays/layer_pattern_lesson.gd": "e5b55774f2c544a3152c972c5fa6cf75847135397845d902bd5aec24ddc56a02",
+      "commons/testing/probe_layer_pattern.gd": "3ecd01237f7a65d5d5f4c19ad940f190dd1e5ce979f763f54cc5b80c2acff938",
+      "commons/testing/probe_ribbon_compact.gd": "731fe91fc7d0bcc4a70f1c9827b30212283a105d29485ace1051ffcdc998fb1b",
+      "commons/substrates/grid3d/grid3d_node.gdshader": "a247d009219ac7ad60d5c80946a716ab5a107a199400eb1f37b7369124c45d64",
+      "commons/substrates/bar_array/bar_array_cell.gdshader": "20486d4d6886abb0bdc9a862a84120773e433c199fffdf45a9f4c546e6b2b01e"
+    }
+  },
+  "Ribbon_Patterns_02": {
+    "date": "2026-09-10",
+    "summary": "23 primary interaction checks and 14 layout checks pass after compaction. All artifacts retained, primaries full scale, central aisle clear. Headset and supporting control review deferred.",
+    "report": "carrier-check.json",
+    "capture": "compact_Ribbon_Patterns_02.png",
+    "comparisons": [
+      {
+        "file": "compact_entry_Ribbon_Patterns_02.png",
+        "caption": "Standing view through the compact gallery and its framed walls."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Ribbon_Patterns_02/map_data.json": "1e803ac63f9f8ff1eb66bdb9b8bed069cfcc3be7e2a311c9dc0a08a07446dda9",
+      "commons/maps/Ribbon_Patterns_02/final.md": "738c850adf0b894d24386b5030ebde05df99e79b8d64f51d875042c115cb5040",
+      "commons/maps/Ribbon_Patterns_02/technical.md": "db721da4e7db50e25ddc62b4ee6eb263da9a51682a117d8945506e655bf45cdc",
+      "commons/maps/Ribbon_Patterns_02/critical.md": "3a45dfcc4cc00fd24d7f7b0bb2e844587e1a25f649c83472a0d98c057d1f948b",
+      "commons/maps/Ribbon_Patterns_02/summary.md": "0e3773154d03d0d5e3c5cbef9cd69c1f71c71e04b57565e479700c436618aa4d",
+      "commons/maps/Ribbon_Patterns_02/blurb.md": "0dfdd6523e628f4cbf1406a904857b5be2efa6bbd15c8e5a0d52e2f63eb161b6",
+      "algorithms/color/carrier_comparison.gd": "e713b9191c18dd0ac046c6d0efa34375a6ec041833a4f7a5bda387944d3f5710",
+      "algorithms/color/carrier_comparison.gdshader": "f671627834a2750ae9adfdf14f2b3332858d69229d4b82d5cbc86f7adcaf2c23",
+      "algorithms/color/simultaneous_contrast/SimultaneousContrast.gd": "ca2b3f215a48875cb94d1da13788e24001a32513c39dda2189b2198d82392cd1",
+      "algorithms/color/metamerism_lab/MetamerismLab.gd": "c463997c8efb653eec964e925474dd539da5aff1c24c1cbed6d3bdc68cffc596",
+      "algorithms/color/spherecolors/spherecolors.gd": "b8e799b5d47bf12f70ac33e04cc460385039b5d1de43d4152bb464ab169f54a8",
+      "commons/testing/probe_carrier_comparison.gd": "bc29223102de7793b6922fb0f0c0431299b49a3e225ee7685f6b499baff6dac3",
+      "commons/testing/probe_ribbon_compact.gd": "731fe91fc7d0bcc4a70f1c9827b30212283a105d29485ace1051ffcdc998fb1b"
+    }
+  },
+  "Ribbon_Patterns_03": {
+    "date": "2026-09-10",
+    "summary": "39 primary interaction checks and 19 layout checks pass after compaction. All artifacts retained, primaries full scale, central aisle clear. Headset and supporting control review deferred.",
+    "report": "fabric-studio-check.json",
+    "capture": "compact_Ribbon_Patterns_03.png",
+    "comparisons": [
+      {
+        "file": "compact_entry_Ribbon_Patterns_03.png",
+        "caption": "Standing view through the compact gallery and its framed walls."
+      }
+    ],
+    "source_sha256": {
+      "commons/maps/Ribbon_Patterns_03/blurb.md": "575868837919c7dc16b2971fb088a4fe1b64dc3af2c96fd57b36ccf665db06eb",
+      "commons/maps/Ribbon_Patterns_03/critical.md": "c4448c0e26666226a7c3c86e4b7079ea95290d8b58b4f5d7198e6255f171a616",
+      "commons/maps/Ribbon_Patterns_03/final.md": "d37e668f05961bc71d47bdef8b6cb3c6a97195cbb5ec4be69407c950e077d0d8",
+      "commons/maps/Ribbon_Patterns_03/map_data.json": "769ed2dfd6ee3f2cd5d91e23183af272941a8114de85fbdf0678e30ca7753d01",
+      "commons/maps/Ribbon_Patterns_03/summary.md": "5dffe994b38478be377b3bf557aca105631b9447c0a87481fa667969e4ff0320",
+      "commons/maps/Ribbon_Patterns_03/technical.md": "75213ed5f248aa6b0badb75c87f93aa2b0df89342f485d655c01f1477702d938",
+      "commons/artifacts/registry/fabric_shader_studio.json": "ef5eaf408686b6fd2cc16a11a5be5b1af82f1b3bd0690af4988c9b070768a0ec",
+      "commons/artifacts/fabric_shader_studio/fabric_shader_studio.tscn": "b59f47ef6854a7758b7423433fa7e815022855703738e15d9a4050c6ea7253ad",
+      "commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd": "2bcf724239b1e6178fb4e0b4f87aaf98ba38327cba1dfaa3d0fde83da1c05e18",
+      "commons/artifacts/fabric_shader_studio/fabric_recipe.gd": "21d87aeb495047a3eb93bc523686a317e7c645a102b28e9548922a6c5c8f844f",
+      "commons/artifacts/fabric_shader_studio/fabric.gdshader": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35",
+      "commons/player/super_drag_outfit.gd": "4e96fc4a6b3eeff9d67b2d2fb126b8f53a25c9255a831c41213c10db02ac89e4",
+      "commons/player/costume_wardrobe.gd": "ed7dcd00ea8456f4fe241bd342e026d419acacc3c741efa870ace791f5303094",
+      "commons/testing/probe_fabric_studio.gd": "e115e12c3411a6f33c8b6e1fdd1c7696ab9414e1d8a661eddea7624cd254b7b1",
+      "commons/artifacts/super_drag_mirror/super_drag_mirror.gd": "da5abaf7bdd7ac941fc316f14e4605375f095e8404fda718d3d24cc3e73bfc12",
+      "commons/artifacts/drag_catwalk/drag_catwalk.gd": "348fa9ebdeb256b7f047d7d7d0a3c25b760a070673a1fe75c1d1dac0b0d8c85d",
+      "commons/artifacts/drag_catwalk/runway_agent.gd": "3a1e42bbec51bafac3be54f9859d5792e77c984cf79e60274363396035b4500f",
+      "algorithms/color/advancedglitch/advancedglitch.gd": "747af7702c237db2b8b1e4c011e5362b09ba17d7fc034d3a4bf04f933a990bee",
+      "algorithms/color/minimalglitch/minimalglitch.gd": "8ea6d3b256bb5a280a22b4d63a38dfdea8d5911c60bfae305e171f8d365e25f5",
+      "algorithms/color/colorlines/coloredlines.gd": "af16306ba40f554ea4b788b346e09a04493d51baab2a2269e2cad3d8ceb564c5",
+      "commons/testing/probe_ribbon_compact.gd": "731fe91fc7d0bcc4a70f1c9827b30212283a105d29485ace1051ffcdc998fb1b"
+    }
+  },
+  "Change_Intro": {
+    "date": "2026-09-11",
+    "summary": "22 hall checks pass; 21 rate and 26 accumulation checks also pass. Headset and secondary interaction review pending.",
+    "report": "change-two-halls-check.json",
+    "capture": "change_two_Change_Intro.png",
+    "comparisons": [],
+    "source_sha256": {
+      "commons/maps/Change_Intro/artifacts.md": "94495d5e41728515d4c14e8143b0b2fff37f0a1036ab45bad61ca820f9c826f8",
+      "commons/maps/Change_Intro/blurb.md": "b728178eb7f3477f9e170f360d2a8b52ef3b0d903bc2abd4bcc90bd1d1eed14a",
+      "commons/maps/Change_Intro/critical.md": "6db73f5ca8b55868e32a9b53f28fff8a6bdfc9d1fa3145efddd83a2c130b1be5",
+      "commons/maps/Change_Intro/eye_shot.md": "69a10ff11e12dbf08c2ceef5b6cea4c044b364ec7380098017e04e30e3a5df33",
+      "commons/maps/Change_Intro/final.md": "3f0dda74ccd813d4b648a6928b125becabfd5f8945e46110d210cd9c3239d327",
+      "commons/maps/Change_Intro/intent.md": "8d90def47d833a919c016401397258652a2d4132d7ed7306be1ae51fa88bd337",
+      "commons/maps/Change_Intro/tutorial.md": "d7b6c92803b8246e2c5e27f706d152487d206c6a4d1bee1b19f27184c2a6fbfc",
+      "commons/maps/Change_Intro/walked.md": "65c6c41020dac5642f333ba206313888e074391961be2213b1ad108c14027e7e",
+      "commons/maps/Change_Intro/map_data.json": "161c0c111cc9b333aae61dd21fe88a6351869d7e24476ee08277f0df3d9dcfbc",
+      "commons/testing/probe_change_two_halls.gd": "38f4468ec2a9ee1752298987f9b8fccb4c95fa84b27628cf3a54f126c8a3f57c",
+      "commons/artifacts/tangent_slope_workbench/rate_comparison.gd": "f9c0e715cf8b39193fb78d51c100f9c73667beba6304a9433cda427937e24717",
+      "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc",
+      "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd": "8db1918813ba9550664577af72d52c7dd4bcb3d5b52f37e11c704594e47d4454",
+      "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd": "e916e13795dabb3ff3dfb836e8eb8f052cc5033918b10da16e8e921c91ff571f",
+      "algorithms/change/ftc_bridge.gd": "9915fdab225c8c8f6ec40d3fcc5179c43ce48a292cb888deaacd81da903f6632",
+      "commons/testing/probe_change_intro.gd": "03746efab41d465c646db481eb0df69a96d4ea4a378cf848f4249a698cd76b34",
+      "commons/testing/probe_accumulation.gd": "7d8357e98f38bfccca70df39c5bf1d3fd5cf2683130c1f328c754ae9ea617cb9"
+    }
+  },
+  "Flow_Field": {
+    "date": "2026-09-11",
+    "summary": "18 hall checks pass; arrows and particles use the same sampler. Headset and secondary interaction review pending.",
+    "report": "change-two-halls-check.json",
+    "capture": "change_two_Flow_Field.png",
+    "comparisons": [],
+    "source_sha256": {
+      "commons/maps/Flow_Field/artifacts.md": "18b6c6ea07d4ba2a2bd657dbc6cb7fc45558eacadbc05c03b9fbcbdd9ee73521",
+      "commons/maps/Flow_Field/blurb.md": "16f8bfeba9616cc1d8ac384e20601cd15d654f13bbf724bf44d965b8c8265ff9",
+      "commons/maps/Flow_Field/critical.md": "c3e70fb84aa63769cacb295ded2c4c3730d350f70428b014d8f270bf8ad045ac",
+      "commons/maps/Flow_Field/eye_shot.md": "217d9567fb52273ff98a4942ff7719ccb027fcecb1b64dc356ee7111f0adb583",
+      "commons/maps/Flow_Field/final.md": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+      "commons/maps/Flow_Field/intent.md": "69cc81b768457a2a86000f13dca39c1a347cee426f98d6b0c9b4a3ac1180bc50",
+      "commons/maps/Flow_Field/tutorial.md": "58b78f70ec765677ee72912d2ca95e8269927f9602526368df3f964802ed79b5",
+      "commons/maps/Flow_Field/walked.md": "169d518b8c774df95f3adf42640c8e62bca2ef3ed2d22dce05ea99d61afb195a",
+      "commons/maps/Flow_Field/map_data.json": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+      "commons/testing/probe_change_two_halls.gd": "38f4468ec2a9ee1752298987f9b8fccb4c95fa84b27628cf3a54f126c8a3f57c",
+      "commons/artifacts/flow_field_painter/flow_field_painter.gd": "6b4f3b828c7812781549672bcfbd952518b7a1dab0e1a0cd94f1a9b8affc7938",
+      "commons/artifacts/flow_field_painter/shared_field_lesson.gd": "6ea6797eda63fb25d80d87ab2d1f77a860335cce7c7e6a82f908e106da526518"
+    }
+  },
+  "Change_Choreography": {
+    "date": "2026-09-11",
+    "summary": "7 new desktop checks pass: four named non-solid idea markers and an unobstructed central lane. Previous 24 timing-machine checks remain separate evidence for unchanged machine scripts.",
+    "report": "vector-forces-start-check.json",
+    "capture": "vector_start_Change_Choreography.png",
+    "comparisons": [],
+    "source_sha256": {
+      "commons/artifacts/timing_machines/conveyor_backlog.gd": "e33e3872187de5ad96bbda93c940867e3ffe848eba41036434ece5ec2d1f08bf",
+      "commons/artifacts/timing_machines/machine_stage.gd": "8b9a126debfbed74b6d9734ddef6d3595778e71d142a757c2d3ce1f5e6097925",
+      "commons/artifacts/timing_machines/phase_rod_array.gd": "42d24d0484003c285ceaf4a0e8bafb16f56b517ab9cb6d7c47d23cd7b309a66c",
+      "commons/artifacts/timing_machines/conveyor_backlog.tscn": "f0725c5e1b985d00a53a399d0207487488c808d9662ce399d909caa548f8c5fd",
+      "commons/artifacts/timing_machines/phase_rod_array.tscn": "ca65716ac3b190c18db015b09e17d5d1c3636228655addc64a0fc91f21254b1f",
+      "commons/maps/Change_Choreography/artifacts.md": "d0ce7c3a5b34949569eee8cf4bbe73ed21d4b6616ac4815b0aa38d8f59dcc2d9",
+      "commons/maps/Change_Choreography/blurb.md": "3e3b20bda5549173a47813bbe4b142c5fd6fefed761d779e21eb5863a5ac9fd1",
+      "commons/maps/Change_Choreography/critical.md": "19832f0b771d60acceb468cc50a458d63e35d2ffef77c511735d6b2054ea4f90",
+      "commons/maps/Change_Choreography/final.md": "3880bc0f41e1893357a482995b5477eddf08e3f74d7fc8bdf1d6560684cf9fd6",
+      "commons/maps/Change_Choreography/intent.md": "eaae4f9978426d66110c5873d72103b06ad641486faaf716e505615b87000667",
+      "commons/maps/Change_Choreography/summary.md": "b23df8ca3344508aa897e02279fe11dc093ca855cfe5fc7ceadf0d56570df498",
+      "commons/maps/Change_Choreography/technical.md": "839b9a299bb9f5e1ddaac845081d0a292a4d7af254a2dcb3467f6c94a0a4b9e8",
+      "commons/maps/Change_Choreography/tutorial.md": "839b9a299bb9f5e1ddaac845081d0a292a4d7af254a2dcb3467f6c94a0a4b9e8",
+      "commons/maps/Change_Choreography/map_data.json": "9c6210a78ae4e1220299895b29435781dcb4f130c8a8d4aa1322f69bf299f69d",
+      "commons/testing/probe_timing_machines.gd": "715830654c1dca76e233df9cbaf86489bfaca9a1ed568cd65f0f0b64092ac1e4",
+      "commons/artifacts/conveyor_belt/conveyor_belt.gd": "193b4140bc349d996659c7e674b0bec824da19f2d0fec1668f74b3d7ab9fdf54",
+      "commons/testing/probe_vector_forces_start.gd": "7a97ef6e7214eea54e3532e237305d44e838a35b2dca7821bb32e778bab3f17d",
+      "commons/artifacts/if_not_exist_create/if_not_exist_create.gd": "10ca67b63095498147fd153aa0be430db7a309b2c4d7182a94e1c0051aff09ce"
+    }
+  },
+  "Vectors_Act1_WhatAVectorIs": {
+    "date": "2026-09-11",
+    "summary": "17 desktop checks pass: world displacement under common translation, magnitude presets, components, clipping, zero recovery, normalization readout and console approach. Headset deferred.",
+    "report": "vector-forces-start-check.json",
+    "capture": "vector_start_Vectors_Act1_WhatAVectorIs.png",
+    "comparisons": [],
+    "source_sha256": {
+      "commons/maps/Vectors_Act1_WhatAVectorIs/artifacts.md": "3c2ba05b8f0a742f929ea15b11cce3e970038f31da4f155e183da6160739f8e4",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/blurb.md": "4e16172ecca506b4c45ca1553e84a2be18ad7204b2b4b16d6bd4f652ef2f3962",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/critical.md": "126d5e0d0c3afb8d73455b58b8dfa384e06ba9542359c0a8dac8d0bd86c74e4b",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/field_notes.md": "4054f92b7c3ef14978e947e3567228496125392474afa055d267d30cc99a5ade",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/final.md": "e270dec4f34a0a1894a148093a442442e33c12b2fbaa47b5b13392c3261c6606",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/intent.md": "5c12c530cdc138accaaec59a1c3d3d5f965fe3a9e2d597d36ad0f925fc1c5141",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md": "73310c41047410594c4aadf5bcbebfa8f378573d45db131a1cfaa0d9f8b93003",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/map_data.json": "04d80db61a70e28945a021154a53591a2170e694d26402e0b88a59d99fb5a1e4",
+      "algorithms/vectors/01_vector_basics/VectorBasics.gd": "a308e1baf1df9420d42b365666ecd2bb11b85105809f4df31f8e6fb1ea780006",
+      "algorithms/vectors/01_vector_basics/room_reading.gd": "bcaf25144d84ee905cf050be321db633e0c5e9588e8bef3460506103faa32488",
+      "commons/artifacts/timing_machines/machine_stage.gd": "8b9a126debfbed74b6d9734ddef6d3595778e71d142a757c2d3ce1f5e6097925",
+      "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd": "1bebf6c519e6a85df4b621078378fc522caa07f93da3437f77acc5d54dc00054",
+      "commons/testing/probe_vector_forces_start.gd": "7a97ef6e7214eea54e3532e237305d44e838a35b2dca7821bb32e778bab3f17d"
+    }
+  }
+}

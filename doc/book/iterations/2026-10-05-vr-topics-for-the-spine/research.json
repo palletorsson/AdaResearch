@@ -1,0 +1,596 @@
+{
+  "date": "2026-10-05",
+  "title": "VR topics through the Ada spine",
+  "status": "Research candidates — not accepted tutorial changes",
+  "basis": "Official Godot / Godot XR Tools documentation, Unity Learn, W3C accessibility user needs and one primary embodiment study. Placement and exercises are Ada proposals. Existing museum runtime has not been audited for all candidates.",
+  "sources": {
+    "origin": [
+      "Godot: room scale in XR",
+      "https://docs.godotengine.org/en/stable/tutorials/xr/xr_room_scale.html"
+    ],
+    "setup": [
+      "Godot: setting up XR",
+      "https://docs.godotengine.org/en/stable/tutorials/xr/setting_up_xr.html"
+    ],
+    "access": [
+      "W3C: XR Accessibility User Requirements",
+      "https://www.w3.org/TR/xaur/"
+    ],
+    "teleport": [
+      "XR Tools: teleport",
+      "https://godotvr.github.io/godot-xr-tools/docs/teleport/"
+    ],
+    "turn": [
+      "XR Tools: turning",
+      "https://godotvr.github.io/godot-xr-tools/docs/turn/"
+    ],
+    "pick": [
+      "XR Tools: pickable objects",
+      "https://godotvr.github.io/godot-xr-tools/docs/pickable/"
+    ],
+    "grip": [
+      "XR Tools: grab points",
+      "https://godotvr.github.io/godot-xr-tools/docs/grab_point/"
+    ],
+    "actions": [
+      "Godot: XR action map",
+      "https://docs.godotengine.org/en/stable/tutorials/xr/xr_action_map.html"
+    ],
+    "pointer": [
+      "XR Tools: pointer",
+      "https://godotvr.github.io/godot-xr-tools/docs/pointer/"
+    ],
+    "ray": [
+      "Godot: ray casting",
+      "https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html"
+    ],
+    "painting": [
+      "Unity Learn: 3D painting challenge",
+      "https://learn.unity.com/pathway/vr-development/unit/events-and-interactions/tutorial/challenge-2-3d-painting-2"
+    ],
+    "snap": [
+      "XR Tools: snap zones",
+      "https://godotvr.github.io/godot-xr-tools/docs/snap_zone/"
+    ],
+    "layers": [
+      "XR Tools: physics layers",
+      "https://godotvr.github.io/godot-xr-tools/docs/physics_layers/"
+    ],
+    "pickup": [
+      "XR Tools: pickup function",
+      "https://godotvr.github.io/godot-xr-tools/docs/pickup/"
+    ],
+    "haptic": [
+      "Godot 4.6: XRController3D",
+      "https://docs.godotengine.org/en/4.6/classes/class_xrcontroller3d.html"
+    ],
+    "audio": [
+      "Godot: AudioStreamPlayer3D",
+      "https://docs.godotengine.org/en/stable/classes/class_audiostreamplayer3d.html"
+    ],
+    "poke": [
+      "XR Tools: poke",
+      "https://godotvr.github.io/godot-xr-tools/docs/poke/"
+    ],
+    "effects": [
+      "Godot 4.6: XR full-screen effects",
+      "https://docs.godotengine.org/en/4.6/tutorials/xr/xr_full_screen_effects.html"
+    ],
+    "vrs": [
+      "Godot 4.6: variable rate shading",
+      "https://docs.godotengine.org/en/4.6/tutorials/3d/variable_rate_shading.html"
+    ],
+    "soft": [
+      "Godot 4.6: soft bodies",
+      "https://docs.godotengine.org/en/4.6/tutorials/physics/soft_body.html"
+    ],
+    "hands": [
+      "Godot 4.6: hand tracking",
+      "https://docs.godotengine.org/en/4.6/tutorials/xr/openxr_hand_tracking.html"
+    ],
+    "tracked": [
+      "Godot 4.6: XRNode3D",
+      "https://docs.godotengine.org/en/4.6/classes/class_xrnode3d.html"
+    ],
+    "passthrough": [
+      "Godot 4.6: AR / passthrough",
+      "https://docs.godotengine.org/en/4.6/tutorials/xr/ar_passthrough.html"
+    ],
+    "anchors": [
+      "Godot 4.6: spatial entities",
+      "https://docs.godotengine.org/en/4.6/tutorials/xr/openxr_spatial_entities.html"
+    ],
+    "save": [
+      "Godot 4.6: saving games",
+      "https://docs.godotengine.org/en/4.6/tutorials/io/saving_games.html"
+    ],
+    "network": [
+      "Godot 4.6: high-level multiplayer",
+      "https://docs.godotengine.org/en/4.6/tutorials/networking/high_level_multiplayer.html"
+    ],
+    "body": [
+      "Slater et al. (2010): First Person Experience of Body Transfer in Virtual Reality",
+      "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0010564"
+    ]
+  },
+  "topics": [
+    {
+      "id": "vr-01",
+      "title": "Tracking space and local/world frames",
+      "role": "Foundation",
+      "priority": false,
+      "maps": [
+        "Point_Coordinates",
+        "Trans_Translation"
+      ],
+      "prerequisites": "Vectors and parent/child transforms",
+      "evidence": "The XR origin locates tracking space; the tracked head can move away from it.",
+      "proposal": "Compare the carried sphere relative to its exhibit frame and to the world. Later distinguish physical walking from moving the origin.",
+      "boundary": "Keep distance calculation in Lines. The supplied player does not become a reconstruction exercise.",
+      "sources": [
+        "origin"
+      ]
+    },
+    {
+      "id": "vr-02",
+      "title": "Scale, reach and accessible placement",
+      "role": "Foundation",
+      "priority": false,
+      "maps": [
+        "Trans_Scale",
+        "Trans_Body"
+      ],
+      "prerequisites": "Position and scale",
+      "evidence": "XR guidance connects scale to the player; W3C identifies adjustable controls and alternatives to required physical movements.",
+      "proposal": "Change a pedestal height and keep the same operation reachable from a fixed seat. Offer an equivalent input when reaching is unsuitable.",
+      "boundary": "Usable access belongs in the host from Day Zero. Teaching the geometry of reach can wait for Transformation.",
+      "sources": [
+        "setup",
+        "access"
+      ]
+    },
+    {
+      "id": "vr-03",
+      "title": "Locomotion, teleportation and turning",
+      "role": "Foundation",
+      "priority": false,
+      "maps": [
+        "Trans_Translation",
+        "Trans_Rotation",
+        "Trans_Body"
+      ],
+      "prerequisites": "Vectors, angles and conditions",
+      "evidence": "XR Tools provides teleport target checks and smooth or stepped turning.",
+      "proposal": "Inspect one teleport acceptance rule or turn angle, then compare its effect on the route through a hall.",
+      "boundary": "Navigation is supplied on arrival. An optional return studies its rules without making lesson progress depend on smooth movement.",
+      "sources": [
+        "teleport",
+        "turn"
+      ]
+    },
+    {
+      "id": "vr-04",
+      "title": "Picking up and releasing",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Point_Coordinates"
+      ],
+      "prerequisites": "Named values; visible mesh versus collision",
+      "evidence": "XR Tools separates a pickable body's configuration from the controller's pickup function.",
+      "proposal": "Carry the existing black sphere; inspect what enables pickup and what release restores.",
+      "boundary": "Preserve the agreed Coordinates focus: pickable, 3D coordinates, local/world position.",
+      "sources": [
+        "pick",
+        "pickup"
+      ]
+    },
+    {
+      "id": "vr-05",
+      "title": "Grip points, orientation and handedness",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Point_Trace",
+        "Trans_Rotation"
+      ],
+      "prerequisites": "Pickup and local transforms",
+      "evidence": "Grab points define hand attachment and can distinguish left/right hands and hand poses.",
+      "proposal": "Inspect the existing pen's grip. Adjust one offset or angle so its tip remains useful in either hand.",
+      "boundary": "A small return to Coordinates supports drawing. Keep pose authoring support supplied until rotation is understood.",
+      "sources": [
+        "grip"
+      ]
+    },
+    {
+      "id": "vr-06",
+      "title": "Named actions and device bindings",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Trans_Introduction",
+        "Color_Paint"
+      ],
+      "prerequisites": "Functions and named values",
+      "evidence": "OpenXR actions give device inputs names and types; desktop input is a separate Godot input system.",
+      "proposal": "Have the prepared desktop and XR adapters call the same small artifact operation; inspect the action-to-function connection.",
+      "boundary": "Teach one binding. Do not imply one Godot InputMap automatically handles both systems or every controller.",
+      "sources": [
+        "actions"
+      ]
+    },
+    {
+      "id": "vr-07",
+      "title": "Press, hold, release and interaction state",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Trans_Introduction",
+        "Color_Paint"
+      ],
+      "prerequisites": "Boolean conditions; repeated updates",
+      "evidence": "XR actions can expose discrete buttons or analogue values; held-object activation is separate from pickup.",
+      "proposal": "Trace idle → held → active → held for a spray can; identify the condition that allows a mark and the event that stops it.",
+      "boundary": "Teach the small state transition before the whole spray system. Analogue pressure is a later return.",
+      "sources": [
+        "actions",
+        "pick"
+      ]
+    },
+    {
+      "id": "vr-08",
+      "title": "Near selection, distant pointing and ray hits",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Color_Paint",
+        "ISO_Sculpting"
+      ],
+      "prerequisites": "Two positions, direction and conditions",
+      "evidence": "XR Tools supports pointers; Godot ray queries return hit information and support filtering.",
+      "proposal": "Aim at two surfaces and show which one receives the operation. Move an occluder between tool and canvas.",
+      "boundary": "Lines supplies direction and distance; ray-query implementation earns its place when the learner must target something.",
+      "sources": [
+        "pointer",
+        "ray"
+      ]
+    },
+    {
+      "id": "vr-09",
+      "title": "Spatial drawing and sampling",
+      "role": "Core",
+      "priority": false,
+      "maps": [
+        "Point_Trace",
+        "Point_Line_Grid"
+      ],
+      "prerequisites": "A position, a condition, then a list and loop",
+      "evidence": "The Unity painting challenge distinguishes drawing activation and brush size; Ada supplies the trace/list learning opportunity.",
+      "proposal": "Record the learner's own path, vary sampling spacing, then reuse a derived grid version while keeping the original.",
+      "boundary": "Define units, frame, order and ownership before promising a cross-hall handoff. Add timestamps only when needed.",
+      "sources": [
+        "painting"
+      ]
+    },
+    {
+      "id": "vr-10",
+      "title": "Two-hand manipulation",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "Trans_Rotation",
+        "Trans_Scale"
+      ],
+      "prerequisites": "Two points, distance, pivot and local transforms",
+      "evidence": "XR Tools grab-point settings control how two hands contribute to position, angle and aim.",
+      "proposal": "Use two declared handles on one object; vary their separation or direction and compare the resulting scale or rotation.",
+      "boundary": "Optional exercise requiring an equivalent one-hand control. Do not add full two-hand mathematics to the first grab lesson.",
+      "sources": [
+        "grip",
+        "access"
+      ]
+    },
+    {
+      "id": "vr-11",
+      "title": "Snapping, docking and allowed fits",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Array",
+        "Tutorial_Tiling_Floor",
+        "Color_Grid_Pallet"
+      ],
+      "prerequisites": "Addresses, object references and conditions",
+      "evidence": "Snap zones can accept or reject object groups and define how objects enter a dock.",
+      "proposal": "Place one known piece in a grid address; show a valid placement and an excluded placement, then alter the acceptance rule.",
+      "boundary": "The array lesson leads with addressed storage. Snapping can make that decision tangible after the basics.",
+      "sources": [
+        "snap"
+      ]
+    },
+    {
+      "id": "vr-12",
+      "title": "Collision bodies, masks and contact",
+      "role": "Core",
+      "priority": false,
+      "maps": [
+        "Point_One",
+        "Vectors_Act4a_KineticForces",
+        "Boolean_Verbs"
+      ],
+      "prerequisites": "Visible form versus collision; conditions",
+      "evidence": "XR Tools uses layers and masks to distinguish physical contact, pickup, pointers and other interactions.",
+      "proposal": "Return to two similarly shaped bodies: change which pair can touch and observe the difference between visibility and contact.",
+      "boundary": "Point One observes collider/no collider. Detailed filters return after conditions; confirm Boolean visual and collision geometry agree.",
+      "sources": [
+        "layers"
+      ]
+    },
+    {
+      "id": "vr-13",
+      "title": "Throwing, release velocity and impulse",
+      "role": "Core",
+      "priority": false,
+      "maps": [
+        "Change_Intro",
+        "VFM_05_Launch",
+        "VFM_03_Motion"
+      ],
+      "prerequisites": "Position differences, elapsed time and vectors",
+      "evidence": "The pickup system exposes velocity sampling and a factor affecting throws.",
+      "proposal": "Release the same object with two motions; separate its starting velocity from the forces acting afterward.",
+      "boundary": "Pickup is already familiar. Forces explains its consequences; do not teach impulse and velocity as interchangeable quantities.",
+      "sources": [
+        "pickup"
+      ]
+    },
+    {
+      "id": "vr-14",
+      "title": "Feedback through sight, sound and touch",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Trans_Introduction",
+        "Color_Grid_Pallet",
+        "WaveFunctions_AirMusic"
+      ],
+      "prerequisites": "An event and its receiver",
+      "evidence": "Godot exposes haptic output; W3C describes visual, auditory and tactile output needs.",
+      "proposal": "Let one accepted action produce a label or outline plus a brief sound or optional vibration; allow channels to be disabled.",
+      "boundary": "One event can have several receivers. Vibration confirms an event; it does not reproduce the object's physical resistance.",
+      "sources": [
+        "haptic",
+        "access"
+      ]
+    },
+    {
+      "id": "vr-15",
+      "title": "Spatial audio and listening position",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "WaveFunctions_AirMusic",
+        "WaveFunctions_Effect_Sound"
+      ],
+      "prerequisites": "Signals, amplitude and distance",
+      "evidence": "AudioStreamPlayer3D supports positional sound, attenuation, directional emission and area-related audio effects.",
+      "proposal": "Walk around a sounding exhibit and alter one attenuation parameter while keeping the generated note unchanged.",
+      "boundary": "Separate making a waveform from placing its sound. Retain visual or textual feedback for important state changes.",
+      "sources": [
+        "audio"
+      ]
+    },
+    {
+      "id": "vr-16",
+      "title": "Painting: world hit to surface coordinates",
+      "role": "Core",
+      "priority": true,
+      "maps": [
+        "Color_Paint"
+      ],
+      "prerequisites": "Local/world conversion; a function receiving values",
+      "evidence": "Godot ray queries identify hits; Unity's VR painting exercise distinguishes activation, size and feedback.",
+      "proposal": "Follow the existing nozzle hit into canvas coordinates. Change one brush property and verify that the hit still maps to the intended mark.",
+      "boundary": "The manual spray should lead. The automatic painter can return as another caller of the same paint operation.",
+      "sources": [
+        "ray",
+        "painting"
+      ]
+    },
+    {
+      "id": "vr-17",
+      "title": "Spatial controls and exhibit metadata",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "Color_Grid_Pallet",
+        "Flow_Field",
+        "QFEP_Sandbox"
+      ],
+      "prerequisites": "Signals, functions and named data",
+      "evidence": "XR Tools offers pointer-driven 2D-in-3D interfaces and fingertip poke interaction.",
+      "proposal": "Connect one slider to an artifact parameter and expose the same value in an accessible label; identify the receiver.",
+      "boundary": "A control belongs beside the phenomenon it changes. Keep the immersive artifact central and introduce structured metadata only when needed.",
+      "sources": [
+        "pointer",
+        "poke",
+        "access"
+      ]
+    },
+    {
+      "id": "vr-18",
+      "title": "Frame budget and geometric resolution",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "Point_Zero",
+        "Primitives_Columns",
+        "Shader_12_PinkExtravaganza"
+      ],
+      "prerequisites": "Counters, resolution and controlled comparison",
+      "evidence": "XR rendering imposes timing constraints; variable rate shading trades shading density for work on supported hardware.",
+      "proposal": "Return from the opening counter to the columns: measure frame time as resolution changes, then compare one shader setting.",
+      "boundary": "Keep performance observations device- and renderer-specific. A screenshot is not evidence of headset frame pacing.",
+      "sources": [
+        "setup",
+        "vrs"
+      ]
+    },
+    {
+      "id": "vr-19",
+      "title": "Stereo rendering and view-dependent materials",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "Shader_01_Shaping",
+        "Shader_12_PinkExtravaganza"
+      ],
+      "prerequisites": "Coordinates, shaders and projection",
+      "evidence": "Godot's XR full-screen effects account for eye projections; screen-reading effects have rendering trade-offs.",
+      "proposal": "Check the same material in both eyes and under head movement; compare a world-anchored pattern with a view-dependent one.",
+      "boundary": "Later shader study. No promise that a desktop post effect works correctly or cheaply in stereo.",
+      "sources": [
+        "effects"
+      ]
+    },
+    {
+      "id": "vr-20",
+      "title": "Deformable contact and simulation detail",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "SoftBodies_Cloth_Physics",
+        "SoftBodies_Soft_Body_Deformation"
+      ],
+      "prerequisites": "Meshes, forces, constraints and physics ticks",
+      "evidence": "Godot soft-body documentation connects mesh detail and simulation precision to behavior and performance.",
+      "proposal": "Compare two resolutions of a pinned cloth; inspect contact, deformation and frame time while changing one parameter.",
+      "boundary": "Verify the museum's actual solver first; a custom cloth implementation is not automatically Godot SoftBody3D.",
+      "sources": [
+        "soft"
+      ]
+    },
+    {
+      "id": "vr-21",
+      "title": "Tracked hands and gesture input",
+      "role": "Optional",
+      "priority": false,
+      "maps": [
+        "ML_Perception",
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "prerequisites": "Transforms, joints and input state",
+      "evidence": "Godot hand tracking separates pose, skeleton data and tracking source; support differs across runtimes.",
+      "proposal": "Where supported, let a pinch call a known object operation and compare it with the controller equivalent.",
+      "boundary": "A tracking API estimate is not proof of intention. Keep this an optional branch, not a prerequisite for the spine.",
+      "sources": [
+        "hands"
+      ]
+    },
+    {
+      "id": "vr-22",
+      "title": "Tracking loss and recovery",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "ML_Perception",
+        "QFEP_Sandbox"
+      ],
+      "prerequisites": "Conditions, state transitions and retained data",
+      "evidence": "XRNode3D exposes tracking availability and a tracking-changed signal.",
+      "proposal": "Simulate losing a tool pose; pause its action, preserve the learner's work and require a deliberate continuation.",
+      "boundary": "Basic recovery belongs in the host. Its logic becomes a later lesson; missing data is different from a hand remaining still.",
+      "sources": [
+        "tracked"
+      ]
+    },
+    {
+      "id": "vr-23",
+      "title": "Passthrough and occlusion",
+      "role": "Optional",
+      "priority": false,
+      "maps": [
+        "Boolean_Works",
+        "Color_Walls"
+      ],
+      "prerequisites": "Alpha, depth, surfaces and capability checks",
+      "evidence": "Godot passthrough uses supported blend modes and platform configuration; passthrough alone is not a scene model.",
+      "proposal": "Place one virtual form beside a real surface and compare the view with and without a declared occluding proxy.",
+      "boundary": "A later mixed-reality extension. Check the actual headset/plugin combination before promising the encounter.",
+      "sources": [
+        "passthrough"
+      ]
+    },
+    {
+      "id": "vr-24",
+      "title": "Spatial anchors and place memory",
+      "role": "Optional",
+      "priority": false,
+      "maps": [
+        "PostCrisis_Synthesis",
+        "SpeculativeComputation_Situated_Computation"
+      ],
+      "prerequisites": "Transforms, events, saved data and asynchronous results",
+      "evidence": "Supported spatial anchors track places; persistent anchors use identifiers that must be associated with application data.",
+      "proposal": "Place one annotation, persist it if supported, then restore its content and position in a later session.",
+      "boundary": "Anchor tracking, persistence and content reconstruction are different responsibilities. Capability-check them separately.",
+      "sources": [
+        "anchors"
+      ]
+    },
+    {
+      "id": "vr-25",
+      "title": "Saving, restoring and undoing made work",
+      "role": "Return",
+      "priority": false,
+      "maps": [
+        "Point_Line_Grid",
+        "Assemblage_Same_Desire",
+        "PostCrisis_Synthesis"
+      ],
+      "prerequisites": "Lists, identifiers, serialization and state",
+      "evidence": "Godot's saving guide separates selecting persistent data, serialization and reconstruction.",
+      "proposal": "Carry the original trace through a supplied handoff early. Later save one authored arrangement, reopen it, and implement undo for one declared operation.",
+      "boundary": "General programming in a spatial setting. A saved image, an ordered stroke record and an editable object are different outputs.",
+      "sources": [
+        "save"
+      ]
+    },
+    {
+      "id": "vr-26",
+      "title": "Shared objects and network authority",
+      "role": "Optional",
+      "priority": false,
+      "maps": [
+        "GT_Connectivity",
+        "SpeculativeComputation_Collective_Knowledge"
+      ],
+      "prerequisites": "Object state, identifiers, serialization and messages",
+      "evidence": "Godot multiplayer distinguishes authority and delivery modes; its documented spatial-entities system does not provide anchor sharing.",
+      "proposal": "Have two visitors request a change to one sculpture and make conflict resolution visible.",
+      "boundary": "Optional capstone requiring new integration. Shared state and physical co-location are separate problems; remote avatars are not a complete shared world.",
+      "sources": [
+        "network",
+        "anchors"
+      ]
+    },
+    {
+      "id": "vr-27",
+      "title": "Avatar correspondence and body representation",
+      "role": "Optional",
+      "priority": false,
+      "maps": [
+        "Trans_Body",
+        "Color_Nails",
+        "ML_Perception"
+      ],
+      "prerequisites": "Transforms and correspondence; skeletons for implementation",
+      "evidence": "Slater and colleagues studied body ownership in VR and found first-person perspective influential in their experiment.",
+      "proposal": "Compare an aligned representation with an offset mannequin while preserving camera control; discuss how movement and appearance affect identification.",
+      "boundary": "Early reflection can precede a later technical exercise. Do not promise universal ownership effects or equate appearance changes with lived identity.",
+      "sources": [
+        "body"
+      ]
+    }
+  ]
+}

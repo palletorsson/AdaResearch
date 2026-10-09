@@ -25,7 +25,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 12→1
 14 of 14 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **draw_triangle_faces** — fan_triangulate(loop) → a colored surface: the moment a closed loop of points stops being an outline and becom
-- **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed
+- **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
 - **folded_strip** — triangle_strip(24) — a pleated ribbon of alternating heights, faces sharing edges down its length. The most ec
 
 ## The text vs the space

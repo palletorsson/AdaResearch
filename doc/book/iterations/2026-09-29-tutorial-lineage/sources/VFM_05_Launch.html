@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VFM_05_Launch · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=VFM_05_Launch">← Tutorial lineage</a></p><h1>VFM 05 Launch</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="VFM_05_Launch/final.md">Raw captured source</a></p><pre># Stand inside the curve
+
+&lt;!-- @launch_arc --&gt;
+
+The controls are in the middle. A launch lane runs in front of you; another waits behind. The grid under your feet continues beneath both. For once, the diagram is large enough to ask you to turn around.
+
+Press **FIRE**. An amber marker leaves its pad, rises, falls, and stops at the landing height. There was a straight arrow at the start. The marker took a curve.
+
+Raise the launch angle and try again, keeping the speed fixed. At first, the flight reaches farther across the floor. Keep raising it. The higher flight begins to give back horizontal distance. There is more room above the lane, and less progress along it.
+
+**PAIR** adds another flight behind you. Its angle completes the first to ninety degrees: at the opening setting, thirty in one lane and sixty in the other. Both begin at ten metres per second.
+
+Fire and follow them in turn. One is already down while the other is still in the air.
+
+They have travelled the same horizontal distance, about 8.66 metres. One flight takes a second; the other about 1.73. A shared range has left two different uses of space and time.
+
+This equality depends on the world the chamber gives them: constant downward acceleration, no air resistance, and landing at the height of departure. The lanes are separated so we can stand between them. Their markers reach the same distance along the floor, not the same world address.
+
+## Room above the route
+
+**PATH** leaves the predictions hanging in the room. Walk beside the low curve and look across at the taller one. An archway and a low wall would ask different things of these routes. Equal range would no longer settle which flight could get through.
+
+Those obstructions are not part of this calculation. Neither are we: the marker can pass through the place where we stand without touching us. We have been given room to examine a flight from within it. The diagram makes that possible by leaving out the collision.
+
+**SLOW** gives us longer to look. Only the local flight clock slows; the museum keeps running around it. The path is unchanged.
+
+With **PARTS**, the velocity separates into horizontal and vertical arrows. On the way up, the vertical one points upward. At the highest point it reaches zero, then points down. The horizontal one keeps its length.
+
+The downward acceleration arrow remains at the top. For that instant, the marker has stopped rising. It has not stopped being accelerated downward.
+
+Behind **RULE**, two contributions locate it. The initial velocity contributes:
+
+```gdscript
+launch_velocity(index) * t
+```
+
+Gravity contributes:
+
+```gdscript
+Vector3.DOWN * 0.5 * gravity * t * t
+```
+
+Add these to the starting position. One contribution grows with elapsed time; the other with time squared. Their different growth gives the straight launch arrow its curved consequence.
+
+Velocity is measured in metres per second: multiplied by seconds, it supplies a displacement. Acceleration is metres per second squared; multiplied by time squared, it supplies another. The floor gives us metre squares, while the arrows have their own stated display scales. Their lengths picture quantities with different jobs.
+
+## Another beginning
+
+Increase **GRAVITY**, keep the launch velocity, and fire again. The stronger downward acceleration shortens both the time aloft and the range. Change **SPEED** instead and the initial condition changes. Gravity continues acting after departure; the launch velocity was given at the beginning.
+
+These controls belong to the marker&#x27;s model. They do not change gravity for our own body. We occupy the same hall under different arrangements.
+
+A parameter change resets the flight. The apparatus can put the marker back at its beginning while the person comparing it carries the previous run forward. We can try another way of leaving, with a memory of where the first one went.
+
+At landing, the marker freezes at the launch height. Its last velocity arrow shows the incoming flight, before any impact response. Will it bounce, break, roll or stay? This model stops before answering.
+
+The other launch instruments remain beyond the chamber; some address objects or the player. Setting their velocity and applying a continuing force are different interventions. Next, in Motion, the body will keep a velocity from one update to the next. A new push will meet what is already moving.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="VFM_05_Launch/tutorial.md">Raw captured source</a></p><pre># Control a flight from inside its diagram
+
+Primary launch_arc uses lesson:launch_chamber at source cell (17,7), yaw 180, floor placement without a plinth. All 17 artifact identities remain; the 16 supporting instruments keep their relative configuration shifted 14 rows behind the new arrival chamber. Footprint 34x38. gate_depth_rows=0 prevents an extra entrance partition from cutting through the flight lanes.
+
+The visitor stands between two control banks, with analytic flight lanes at local Z=-3 and +3. Launches start at X=-5, Y=.3; landing is the same centre height. Local positions use metre scale. No collider, rigid-body force or player-velocity command belongs to the flight markers.
+
+ANGLE-/ANGLE+ choose 15..75 degrees in five-degree steps. SPEED cycles 10→6→8→10 m/s. PAIR adds 90-angle at the same speed. GRAVITY toggles 10/15 m/s². These controls reset the current flight. FIRE restarts playback; SLOW toggles local elapsed-time speed 1/.25, and PATH/PARTS/RULE toggle representations without resetting flight.
+
+Position is origin+v0*t+Vector3.DOWN*.5*gravity*t*t. Each lane clamps its own t at 2*v0.y/gravity. Landing freezes the pre-impact state, without collision resolution. Uniform gravity, equal endpoint heights and absent drag are explicit assumptions. Velocity arrows use 0.2 display m per m/s; acceleration arrows 0.1 display m per m/s². PATH draws 64 equal-time straight segments per trajectory; live markers are evaluated analytically at render time. Dynamic arrows reuse at most eight rigs during playback.
+
+Discovery: launch before showing the prediction; compare complementary angles; observe different landing times; inspect zero vertical velocity at apex with continuing acceleration; vary one parameter at a time. Keep computed diagrams distinct from the other room&#x27;s force pads and player-launch mechanisms.
+
+Next on the unchanged route: VFM_03_Motion.
+
+## Reading and retained detail
+
+The canonical [chapter](final.md) follows the encounter. Exact control steps, arrow scales, timing, bounded histories and reset rules remain here. The complete [pre-pass chapter](../../../doc/book/iterations/2026-09-24-launch-and-motion/before/commons/maps/VFM_05_Launch/final.md) is retained for comparison. This reading pass does not claim a new runtime or headset test.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="VFM_05_Launch/intent.md">Raw captured source</a></p><pre># Stand inside a calculated flight
+
+Place the visitor between two complementary-angle flight lanes with central controls, full-scale positions and explicitly scaled vector arrows. Ask about range and landing time before revealing the predicted curves, components and equation. Distinguish a known analytic model from collisions, force integration or player launch.
+
+launch_arc remains the sole primary. All 16 supporting launch instruments remain beyond the chamber. Next on the unchanged route is VFM_03_Motion: persistent velocity and updating state over time. Headset review is deferred.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="VFM_05_Launch/critical.md">Raw captured source</a></p><pre># What the flight has already assumed
+
+The visitor occupies the middle of a full-scale representation. Looking between two lanes makes attention part of the comparison: equal horizontal range does not imply equal elapsed time or one world landing address. The paired paths are separated for visibility, and the text states that difference.
+
+The marker is analytically positioned under constant downward acceleration. No drag, collision response, mass or measured applied force enters that calculation. Landing freezes an incoming impact state. A physical simulation would have to answer further questions. The projection of flight into a known formula is useful precisely because its assumptions make repeatable comparisons possible.
+
+The local playback clock can slow while the museum clock continues. Predicted paths use 64 segments; live markers use render-time evaluations. These are distinct encodings of a shared mathematical curve. Their finite resolutions are inspectable without claiming that higher resolution is always the better representation.
+
+A body could use a high route to clear one obstruction and a low route to pass below another. Those capabilities depend on conditions not currently simulated by this primary. Keeping the absent conditions explicit allows the next room to introduce dynamics rather than passing a diagram off as a complete world.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="VFM_05_Launch/artifacts.md">Raw captured source</a></p><pre># Primary
+
+launch_arc:180:0:1#lesson:launch_chamber#pin:1#plinth:0 at source cell (17,7). The opt-in scene has two metre-scale flight lanes around central control banks. Enter around either side of the banks and stand between them. The room has no extra deep entrance partition.
+
+The original 16 supporting artifact identities and relative placements are retained 14 source rows later. See doc/space/launch-chamber-2026-09-11/placements.json. The ordinary tabletop launch_arc retains its original controls in other placements.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="VFM_05_Launch/blurb.md">Raw captured source</a></p><pre>Ballistics: every way to throw something — including yourself.
+</pre></section></body></html>

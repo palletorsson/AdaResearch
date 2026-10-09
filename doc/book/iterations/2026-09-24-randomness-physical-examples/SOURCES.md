@@ -1,0 +1,9 @@
+# Sources and limits
+
+- Video: The Game Overanalyser, *Uncertainty in Games | Randomness, Information and Luck in Game Design*. https://www.youtube.com/watch?v=Srgva9gEJDw&t=550s . Retrieved 24 September 2026 from public English automatic captions (video length 1213 seconds). Full captions were read; no transcript is redistributed in this review. Timestamp references are approximate. The video is a research prompt, not validation of all its scientific or historical statements.
+- Geoff Engelstein, GDC 2018, *White, Brown, and Pink: The Flavors of Tabletop Game Randomness*. https://www.gdcvault.com/play/1024920/Board-Game-Design-Day-White . Primary presentation slides: https://media.gdcvault.com/gdc2018/presentations/Engelstein_Geoffrey_White_Brown_Pink.pdf . Consulted for game decision timing, correlation and dice rules.
+- Julius O. Smith, *Spectral Audio Signal Processing*, “Example: Synthesis of 1/F Noise (Pink Noise)”. https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html . Consulted for the signal-processing meaning of pink noise, so the museum does not confuse an outcome distribution with a temporal spectrum.
+- MathWorks, dsp.ColoredNoise documentation. https://www.mathworks.com/help/dsp/ref/dsp.colorednoise-system-object.html . Confirms the spectral exponents for white, pink and brown noise.
+- Local implementation paths and reading-time hashes: source-manifest.json. Source/placement inspection only in this pass; no fresh Godot or headset run. Geometry sketches below are proposals, not museum screenshots.
+
+The exact 36-pair worksheet assumes fair independent dice. The source-driven die and coin in this repository instead read physical simulation outcomes. The theoretical worksheet cannot establish fairness of those outcomes or validate interaction reach, performance, learner understanding or museum collision geometry.

@@ -1,0 +1,1 @@
+Follow an edge as it turns. A panel swings flat, another lowers forward, a third lowers sideways. Each can reach another bank, but each needs its own mounting. Beyond the landing, five cubes turn in place while a second row turns as one. Where does the axis pass, and what belongs to the thing being turned?

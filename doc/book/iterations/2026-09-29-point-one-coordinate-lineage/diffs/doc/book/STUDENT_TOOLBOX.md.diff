@@ -1,0 +1,41 @@
+--- before/doc/book/STUDENT_TOOLBOX.md
++++ doc/book/STUDENT_TOOLBOX.md
+@@ -24,8 +24,9 @@
+ 
+ | Hall | Main work here | What can enter the student's toolbox |
+ | --- | --- | --- |
+-| Day Zero (preface) | Establish a working environment and recognise inherited infrastructure | Open, change, save, run and stop the supplied base; establish the separate headset route before its use. |\n| Point_Zero | Arrival in something already underway; choosing somewhere to count from | Permission to begin with inherited work. The counter is available to inspect; building its whole system is not an entrance requirement. |
+-| Point_One | Distinguish a position, visible shape, collision and pickup; locate the same body in two references | A supplied starting scene in which the student can place and vary a point, then compare visible-only, solid and borrowed pickable versions. |
++| Day Zero (preface) | Establish a working environment and recognise inherited infrastructure | Open, change, save, run and stop the supplied base; establish the separate headset route before its use. |
++| Point_Zero | Arrival in something already underway; choosing somewhere to count from | Permission to begin with inherited work. The counter is available to inspect; building its whole system is not an entrance requirement. |
++| Point_One | Encounter position, appearance, resistance, holding and reference | Keep two positions in one frame; place supplied markers and vary X, Y and Z. Collider/pickup construction is not a first-lesson prerequisite. |
+ | Point_Lines | Put two known positions into relation | A reusable way to connect and measure between positions, using the points already made. |
+ | Point_Trace | Let successive positions remain | A small introduced list of positions and a supplied or taught way to display it. Do not silently assume the later Array sequence has already been read. |
+ | Point_Line_Grid | Compare movement with selected addresses | A way to snap a position and compare the result with the unsnapped position or trace. |
+@@ -37,9 +38,9 @@
+ 
+ A first work could arrange three points carrying the same name, while their positions, sizes and permissions differ. Which can be passed through? Which must be walked around? Which can leave its place in a hand? The student chooses the arrangement and what it makes another body encounter.
+ 
+-Teach position, visible dimensions and a separate physical boundary through that comparison. Lend the working camera, lighting and movement setup. Supply the pickup component rather than requiring a beginner to implement XR interaction. Reading WORLD and LOCAL can extend the same point into another reference without teaching all of transform mathematics at once.
++The hall carries the fuller comparison. The first tutorial selects position and coordinates: place a supplied marker, change one coordinate and arrange a second position. The axes, distance arrow and labels help the comparison; constructing them would introduce a different subject. Physics and pickup remain encounters whose machinery can be borrowed or inspected later.
+ 
+-Point One now has a first construction study at doc/book/studies/point-one and an aligned tutorial.md: complete scripts build from position to visible sphere to fixed collision, with a supplied camera, floor and lighting. The main chapter keeps one position line and explains the operations through their consequences. The cumulative construction is read separately in the making passage. This covers an arrangement of visible and solid points; the study has a fixed camera. Movement and a portable configured pickup component remain a further teaching step. Do not claim the complete making target, or a beginner learner trial, from this first study.
++Point One now starts with coordinates.tscn and points.gd in doc/book/studies/point-one. The previous mesh/collision construction remains available as study.tscn and CONSTRUCTION.md. This fixed-camera kit does not supply portable walking or XR pickup. Native execution and a beginner's ability to work independently are separate checks.
+ 
+ ## Keep the reason for Ada in the operation
+ 
+@@ -62,3 +63,14 @@
+ Day Zero (doc/book/day-zero.md) carries environment setup as a practical chapter of the preface. Later making passages assume the student can open the supplied project, select the intended scene, edit, save, run and stop. The initial editor, scene and device setup does not recur inside each artifact explanation.
+ 
+ doc/book/studies/day-zero supplies project.godot and a self-contained base.tscn for desktop testing. Point One inherits an identical copy of this base. The player, XR Tools and Quest deployment are named as a separate borrowed system and preparation route; they are not silently implied by the desktop base. No headset acceptance claim follows from a desktop test.
++
++
++## One agreement, three selections
++
++For each hall, use intent.md to record: what we arrive with; what we investigate here; which encounters carry the inquiry and how; what the first tutorial lets us make; what leaves for the next hall. The hall, main text and tutorial are overlapping selections, not matching inventories.
++
++Each attachment has a purpose and a cost in attention. Technical helpers can be supplied; critical comparisons can remain experiences without becoming coding exercises; atmosphere and pleasure can justify space. Repetition earns a place when it changes a relation. Reconsider an unrelated object through its placement before assuming more explanation will make it belong.
++
++Follow the construction lineage from position to connection to retained positions to edges and faces, with the grid's choice of addresses where the actual sequence places it. The critical lineage asks what these operations make visible, possible or excluded. Let the encountered differences produce the writing; do not require every hall to restate an identical philosophical formula.
++
++Finish a hall's agreement, encounter selection, main prose and small usable tutorial together, then inspect the next handover. Point One's first pass now supplies two positions. Point Lines' existing grid tutorial is a recorded gap for the next pass, not an already fulfilled continuation.

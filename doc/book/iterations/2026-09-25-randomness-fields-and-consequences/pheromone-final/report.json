@@ -1,0 +1,30 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "pheromone field present",
+      "passed": true
+    },
+    {
+      "name": "placed field has four walkers and forty percent guidance",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pheromone-visits",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "guidance": {
+      "probability": 0.4,
+      "walkers": 4
+    }
+  },
+  "passed": true,
+  "room": "Random_Pheromone",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

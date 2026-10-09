@@ -1,0 +1,43 @@
+--- before/commons/maps/sequences/lsystems.json
++++ after/commons/maps/sequences/lsystems.json
+@@ -33,7 +33,7 @@
+         "LSystems_Architecture: One fixed plan acquires width, room footprints and collision; a body tests its routes",
+         "LSystems_Competition: Equal grammars, shared soil, different turns; winter can stop rewriting after consumption",
+         "LSystems_Living: Raw genes, integer grammar, held witness and stable planted snapshot",
+-        "LSystems_Shape_Grammars: Restore the deferred hall; one triangulated cube becomes a family through inset, extrusion, repetition and changed face selection",
++        "LSystems_Shape_Grammars: Cube family, face operations and selected tips; add curved strips and walk beneath the same generated surface at four times scale",
+         "Assemblage_Same_Desire: Fixed samples, different decisions and marks; perceived paths and a supporting floor"
+       ],
+       "maps": [
+@@ -165,10 +165,11 @@
+           "map": "LSystems_Shape_Grammars",
+           "position": "synthesis",
+           "artifacts": [
+-            "form_grammar_family"
+-          ],
+-          "size_budget": "environment",
+-          "rationale": "Six retained bodies expose the mesh-grammar substrate behind form families; links Colour composition to later scored selection."
++            "form_grammar_family",
++            "form_grammar_canopy"
++          ],
++          "size_budget": "environment",
++          "rationale": "Keep the six cube constructions, then introduce an existing curved-strip operation. Same generated geometry at two scales makes the change of bodily relation concrete."
+         }
+       ]
+     }
+@@ -258,10 +259,11 @@
+       "map": "LSystems_Shape_Grammars",
+       "position": "synthesis",
+       "artifacts": [
+-        "form_grammar_family"
+-      ],
+-      "size_budget": "environment",
+-      "rationale": "Six retained bodies expose the mesh-grammar substrate behind form families; links Colour composition to later scored selection."
++        "form_grammar_family",
++        "form_grammar_canopy"
++      ],
++      "size_budget": "environment",
++      "rationale": "Keep the six cube constructions, then introduce an existing curved-strip operation. Same generated geometry at two scales makes the change of bodily relation concrete."
+     }
+   ],
+   "world_phase": "organic"

@@ -1,0 +1,56 @@
+from pathlib import Path
+import difflib,hashlib,json,re,shutil
+import markdown
+from PIL import Image
+ROOT=Path(__file__).resolve().parents[4];HERE=Path(__file__).resolve().parent
+URL='http://localhost:3003/book-review/doc/book/iterations/'+HERE.name+'/index.html'
+read=lambda p:p.read_text(encoding='utf-8-sig')
+sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+render=lambda s:markdown.markdown(s,extensions=['fenced_code','footnotes','tables'])
+rel=Path('commons/maps/Tutorial_Tiling_Floor/final.md')
+old=read(HERE/'before'/rel);new=read(ROOT/rel)
+checks=[]
+def check(name,ok):
+ checks.append({'name':name,'passed':bool(ok)})
+ assert ok,name
+changed={rel.as_posix(),'commons/data/museum_core_encounters.json'}
+for name,digest in json.loads(read(HERE/'baseline.json')).items():
+ if name not in changed:check('Preserved '+name,sha(ROOT/name)==digest)
+check('Encounter markers preserved',re.findall(r'<!--.*?-->',old)==re.findall(r'<!--.*?-->',new))
+check('Remainder-code excerpt preserved',re.findall(r'```gdscript.*?```',old,re.S)==re.findall(r'```gdscript.*?```',new,re.S) and new.count('```gdscript')==1)
+for prefix in ('At ALTERNATE,', 'The % sign', 'The `%` sign', 'These are flat images', 'Black and white already'):
+ paragraphs=[p for p in old.split('\n\n') if p.startswith(prefix)]
+ for paragraph in paragraphs:check('Preserved '+prefix,paragraph in new)
+images=lambda s:re.findall(r'!\[[^\]]*\]\(([^)]+)\)',s)
+check('Museum figure reference retained',images(old)==images(new) and len(images(new))==1)
+for url in images(new):
+ with Image.open(ROOT/url.removeprefix('/book-review/')) as im:im.verify()
+ check('Readable '+url.rsplit('/',1)[-1],True)
+with Image.open(ROOT/'doc/book/iterations/2026-09-23-tiling-underfoot/floor-eye.png') as im:im.verify()
+check('Readable native hall view',True)
+core=json.loads(read(ROOT/'commons/data/museum_core_encounters.json'))
+before=json.loads(read(HERE/'before/commons/data/museum_core_encounters.json'))
+entry=core['rooms']['Tutorial_Tiling_Floor']
+check('Text hash current',entry['text_sha256']==sha(ROOT/rel))
+check('Review points here',entry['local_review']==URL+'#reading')
+for key in ('text_sha256','local_review'):before['rooms']['Tutorial_Tiling_Floor'][key]=entry[key]
+check('Rest of catalogue unchanged',before==core)
+manifest=json.loads(read(ROOT/'doc/book/captures/array_tutorial/array_tutorial-book.manifest.json'))
+check('All five capture sources current',len(manifest['maps'])==5 and all(sha(ROOT/r['path'])==r['sha256'] for r in manifest['maps']))
+check('Capture output current',sha(ROOT/'doc/book/captures/array_tutorial/array_tutorial-book.md')==manifest['output_sha256'])
+for name in ('array_tutorial-book.md','array_tutorial-book.manifest.json'):shutil.copy2(ROOT/'doc/book/captures/array_tutorial'/name,HERE/name)
+(HERE/'Tutorial_Tiling_Floor.current.md').write_text(new,encoding='utf-8')
+(HERE/'Tutorial_Tiling_Floor.diff').write_text(''.join(difflib.unified_diff(old.splitlines(True),new.splitlines(True),fromfile='before/Tutorial_Tiling_Floor/final.md',tofile='current/Tutorial_Tiling_Floor/final.md')),encoding='utf-8')
+table=difflib.HtmlDiff(wrapcolumn=62).make_table(old.splitlines(),new.splitlines(),'Before this pass','Current final.md',context=True,numlines=3)
+css=re.search(r'<style>(.*?)</style>',read(ROOT/'doc/book/iterations/2026-09-27-rotation-follow-a-turn/index.html'),re.S).group(1)
+page=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One turn among the others</title><style>{css}</style></head><body><main>
+<header><p class="eyebrow">TUTORIAL_TILING_FLOOR · 27 SEPTEMBER 2026 · ARRAYS</p><h1>One turn among the others.</h1><p>Choose a resemblance, turn the source, return to it. One local difference can draw another reading from the same repeated square.</p><nav><a href="#reading">Read the chapter</a><a href="#museum">Inside the hall</a><a href="#changes">Before / after</a><a href="#decisions">Decisions</a><a href="array_tutorial-book.md">Full Arrays capture</a></nav></header>
+<article class="reading" id="reading"><p class="eyebrow">CURRENT FINAL.MD · <a href="/compose/sources?map=Tutorial_Tiling_Floor&amp;doc=final">READ AND COMMENT</a></p>{render(new)}</article>
+<section class="reading" id="museum"><h2>Inside the hall</h2><img src="/book-review/doc/book/iterations/2026-09-23-tiling-underfoot/floor-eye.png" alt="An eye-height view along the black-and-white floor studies in the museum."><p><em>Existing native museum view, 23 September. The picture lies on the floor; its apparent folds do not change the supporting surface. The historical desktop overlay is retained.</em></p></section>
+<section id="changes"><h2>Before and after</h2><p>{len(old.split()):,} → {len(new.split()):,} words, including code and captions. The six rules, code excerpt and image/support distinction remain. <a href="Tutorial_Tiling_Floor.diff">Plain text diff</a> · <a href="Tutorial_Tiling_Floor.current.md">Current Markdown</a></p><div class="diff-scroll">{table}</div></section>
+<section class="decisions" id="decisions">{render(read(HERE/'DECISIONS.md'))}</section>
+<footer><p>The book comparison uses the exact textures from the working artifact, arranged face-on. The separate hall view is a native museum photograph. Both date from 23 September. <a href="/book-review/doc/book/iterations/2026-09-23-tiling-underfoot/index.html">Earlier texture, control and walking evidence</a>.</p><p><a href="checks.json">Publication checks</a> · <a href="http-checks.json">Served-file checks</a> · <a href="array_tutorial-book.manifest.json">Capture source manifest</a></p><p>Next: <a href="/compose/sources?map=Tutorial_Tiling_Walls&amp;doc=final">The same rule stands up</a>.</p></footer>
+</main></body></html>'''
+(HERE/'index.html').write_text(page,encoding='utf-8')
+(HERE/'checks.json').write_text(json.dumps({'passed':True,'checks':checks,'words':{'before':len(old.split()),'after':len(new.split())},'scope':'Prose revision, unchanged map and artifact sources, existing artifact texture illustration and native museum photograph, current five-hall capture. No new runtime or headset test.'},indent=2)+'\n',encoding='utf-8')
+print(json.dumps({'url':URL+'#reading','checks':len(checks),'words':{'before':len(old.split()),'after':len(new.split())}},indent=2))

@@ -1,0 +1,74 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored symmetry lesson present in loaded museum",
+      "passed": true
+    },
+    {
+      "name": "held comparison begins as P1",
+      "passed": true
+    },
+    {
+      "name": "actual PG button selects glide",
+      "passed": true
+    },
+    {
+      "name": "changing rule preserves source cells",
+      "passed": true
+    },
+    {
+      "name": "held P1 pixels remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "live glide pixels differ from held translation",
+      "passed": true
+    },
+    {
+      "name": "caption explains the two-row shift",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: symmetry-p1-pg",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: symmetry-side-bay",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: symmetry-gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "atlas_credit_mode": "named",
+    "atlas_present": true,
+    "gallery_present": true,
+    "gallery_rendered_group_values": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "lesson_world": [
+      20.0,
+      0.0,
+      10.0
+    ]
+  },
+  "passed": true,
+  "room": "Symmetry_Seventeen",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

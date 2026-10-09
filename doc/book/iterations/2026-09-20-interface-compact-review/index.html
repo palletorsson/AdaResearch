@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same experiment, closer controls · Ada Research</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f2eb;color:#242a29;font:17px/1.65 system-ui,sans-serif}
+main,header,footer{max-width:1400px;margin:auto;padding:32px 5vw}header{padding-top:58px;padding-bottom:0}
+h1{font:500 clamp(36px,5vw,65px)/1.1 Georgia,serif;max-width:900px;margin:20px 0}
+h2{font:500 30px/1.25 Georgia,serif}p{max-width:900px}a{color:#255d52;text-underline-offset:4px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#4f6b62}
+.lead{font-size:21px}.metrics{display:flex;flex-wrap:wrap;gap:18px;margin:30px 0}
+.metric{background:#e5ece5;padding:17px 24px;border-left:3px solid #3a7162}
+.metric strong{display:block;font:32px Georgia,serif}.metric span{font-size:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:0}img{width:100%;height:auto;display:block;border-radius:5px}
+figcaption{font-size:14px;line-height:1.5;color:#58635e;margin:12px 0 24px}section{border-top:1px solid #c8d0c7;margin-top:30px;padding-top:20px}
+code{font-size:14px;overflow-wrap:anywhere}pre{white-space:pre-wrap;background:#e8ede6;padding:20px}
+.note{font-size:14px;color:#58635e}li{margin:8px 0}table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #c8d0c7}
+@media(max-width:760px){.pair{grid-template-columns:1fr}header,main,footer{padding-left:20px;padding-right:20px}table{font-size:13px}th,td{padding:8px}}
+</style></head><body><header><div class="eyebrow">Ada Research · interface pilot · 20 September 2026</div>
+<h1>Same experiment,<br>closer controls.</h1>
+<p class="lead">Pattern Foundry keeps its eight actions. The shared panel now puts them in two rows, with full-size buttons and printed labels on a common backing.</p>
+<p><a href="/blog/2026-09-20-a-place-for-the-hand">The interface plan</a> · <a href="../2026-09-19-review-comparison/index.html#tiling">The encounter review</a> · <a href="/book?map=Pattern_Foundry&amp;section=final">The chapter</a></p>
+<div class="metrics"><div class="metric"><strong>2.10 → 0.90 m</strong><span>Outer button-centre span</span></div>
+<div class="metric"><strong>8 → 8</strong><span>Same actions and bindings</span></div>
+<div class="metric"><strong>1 row → 2 rows</strong><span>Same button sizes</span></div></div></header>
+<main><div class="pair"><figure><a href="before-approach.png"><img src="before-approach.png" alt="Before: eight controls extend across a long stand below the two pattern samples." width="1800" height="1200"></a><figcaption><strong>Before.</strong> The original 2.60 m stand and single row. The comparison specimens remain behind the controls.</figcaption></figure>
+<figure><a href="after-approach.png"><img src="after-approach.png" alt="After: the eight controls occupy two rows on a narrower, lower stand in the same museum." width="1800" height="1200"></a><figcaption><strong>After.</strong> Four controls per row on a 1.35 m stand. The panel and stand were lowered to keep more of the samples visible; printed labels use darker ink.</figcaption></figure></div>
+<p class="note">Actual Godot museum captures at the same loom-relative eye position and field of view. These show a layout change, not a headset comfort test. Click a picture for full resolution.</p>
+<section><h2>What the encounter needs to keep</h2><p>The existing review asks us to preserve the differences between a shared source, a saved recipe and a receiver that holds an earlier image. MARK, SAVE, RESTORE, LINK / HOLD, TARGET, UNDO LINK, REPEAT SIZE and OFFSET +5CM all remain. The manuscript and map configuration were not edited.</p>
+<p>The new layout brings those experiments closer together. The receiver selection, saved-state semantics, held images and undo behaviour remain attached to the same buttons.</p>
+<div class="pair"><figure><a href="before-controls.png"><img src="before-controls.png" alt="At the closer camera position, the ends of the original control row extend outside the frame." width="1800" height="1200" loading="lazy"></a><figcaption>Before, closer view: the row extends beyond both sides of the frame.</figcaption></figure>
+<figure><a href="after-controls.png"><img src="after-controls.png" alt="The same closer view includes all eight buttons and their surface labels in the revised layout." width="1800" height="1200" loading="lazy"></a><figcaption>After, same closer view: all eight buttons remain full size and visible.</figcaption></figure></div></section>
+<section><h2>A change other panels can use</h2><p><code>ControlPanel</code> now supports an optional column count, maximum row width and gap between rows. It measures both visible geometry and collision shapes. Oversized controls receive more space; wrapped layouts preserve their authored scale and rotation.</p>
+<pre><code># Set before adding controls. Existing callers retain the single row.
+panel.layout_columns = 4
+# Optional: wrap sooner for the available space, in panel-local metres.
+panel.layout_max_width = 1.2</code></pre>
+<p>This first adoption is in <code>pattern_machine_a/recipe_study.gd</code>. Other halls retain their current arrangement. The separate <code>ControlConsole</code> still scales its inner panel to its cabinet width; that enclosing scale needs its own repair before wider console adoption.</p></section>
+<section><h2>Evidence, and what remains to test</h2><ul>
+<li><a href="layout-checks.json">70 layout and input-handler checks pass</a>: full-size buttons, correct callbacks, flat labels, backing, persistent readout state, repeated layout and rotated oversized controls.</li>
+<li><a href="recipe-regression.json">101 existing Foundry regression checks pass</a>: recipe restoration, held receivers, relink/undo, sampling and selected collision approaches.</li>
+<li><a href="before-capture.json">Before</a> and <a href="after-capture.json">after</a> capture records retain actual control centres and 24 hall/setup checks each.</li>
+<li><a href="changes.diff">Exact source changes</a> and <a href="source-hashes.json">source hashes</a> connect these images to the implementation.</li></ul>
+<p class="note">Direct pointer-handler calls and selected museum inputs are desktop evidence. Tracked hands, seated reach, headset legibility and Quest performance remain untested. Existing UID/certificate and unrelated museum warnings remain in the logs. Generated panel labels are 2D on surfaces; older loom and receiver labels still await migration.</p></section>
+<section><h2>Next improvements, with their context</h2><table><thead><tr><th>Encounter</th><th>Finding</th><th>Next action</th></tr></thead><tbody>
+<tr><td>Shared consoles</td><td>The enclosure can shrink the whole control panel.</td><td>Fit the cabinet to full-size controls, then verify a compact console consumer.</td></tr>
+<tr><td>Slider and dial values</td><td>Some child controls still carry Label3D text.</td><td>Move values onto 2D surfaces while retaining their live bindings and units.</td></tr>
+<tr><td><a href="../2026-09-19-review-comparison/index.html#qfeplaboratory">QFEP Sandbox</a></td><td>A neighbouring display occupies much of the control view.</td><td>Inspect the mounting and operating pose; preserve the distinction between offered and received values.</td></tr>
+<tr><td>QFEP Synthesis</td><td>The readout visually dominates the specimen.</td><td>Compare a smaller, closer display while keeping pressure and bodily response distinct.</td></tr>
+</tbody></table><p class="note">The QFEP entries are visual findings from the ongoing review, not changes made by this pilot. Each next task follows image → artifact → component → affected placements → verification.</p></section></main>
+<footer><p><a href="../2026-09-20-interface-console-review/index.html">Continue to the second pilot: a casing for the controls.</a></p>One placement adopted. Shared implementation available. Headset verification pending.</footer></body></html>

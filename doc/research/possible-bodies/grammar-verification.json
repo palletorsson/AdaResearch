@@ -1,0 +1,51 @@
+{
+  "started": "2026-09-14T15:36:24+02:00",
+  "finished": "2026-09-14T15:36:59+02:00",
+  "pid": 12360,
+  "exit": 0,
+  "checks": 57,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/grammar_probe_base.gd": "1a09fa40008fc1bc7be3fa0543d85ff69bedbec820b00a588fdd46b0ad47d96c",
+    "ada_run/grammar_acceptance.gd": "0232ad816ad29e10aa85cae32207554576f25e884eb954c923984cfccbb0aa15",
+    "commons/maps/LSystems_Grammar_Lab/map_data.json": "a984f62e2d472fa510546a858244ac5f69413085a15d371168e92876ec359ff7",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/grammar-review-2026-09-14/review-plan.json": "ec78afff8bdbf01848cdec4688dcaf5688f00d00cfb9112b3c7f523c0596784e",
+    "commons/artifacts/lsystem_editor/lsystem_editor.tscn": "0f5cb1e9b9d4ebacbe421528c239ff9be8afa95b8b3ca48cb5a9881a3118ba6f",
+    "commons/artifacts/lsystem_editor/lsystem_editor.gd": "4f2c7af4baf3b917cdabf9d361a0327573c6f9cc83401232ada2eeb5ceb7b5db",
+    "commons/artifacts/grammar_provenance/grammar_provenance.tscn": "609a9160ac409ff2de26c5de9c2857f88c24715716361f98dbb06e3e008d296a",
+    "commons/artifacts/grammar_provenance/grammar_provenance.gd": "8079f22781893035b557ef1d31cb50a317a84bc27df8bdc2d906687a86ab9e14",
+    "commons/artifacts/lsystem_tree/lsystem_tree.tscn": "53b0b1f60c176c5f90742ea1d471fad469952ba3d927ad193133a7724edafd0d",
+    "commons/artifacts/lsystem_tree/lsystem_tree.gd": "202254d9f15c70139c871bc0a60206fc67faa54352981ae8a295bd415d1dd11e",
+    "commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn": "74697caa52eef0db5a325b3b7fa7b527b1fa6d788b70cb0cf6987ae851d3df2e",
+    "commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.gd": "8df7cc3b22969253b031db9f1e39d698a1e51673232ac73dab6800fc74e27490",
+    "commons/artifacts/city_bench/city_bench.tscn": "1c3dfc50351cf88566343eca5d826960fd08950facc0cb1ea98f5a3494759398",
+    "commons/artifacts/city_bench/city_bench.gd": "dab7bd035a1e9c8e4b6f34acc8538343c1d1827204ef223483726f44212eae86",
+    "commons/artifacts/dark_sphere/dark_sphere.tscn": "5067087d62c6e58ad557aac86ad437ee2f59840ec10389780f0492de9dc219d9",
+    "commons/artifacts/dark_sphere/dark_sphere.gd": "a485accc2efdd83069ee7cb69bb8e7a005867efa7c9f57bafab08235e5faa839",
+    "commons/mesh_grammar/mesh_grammar_node.tscn": "2a3820aa7335a595a1dfca047a1ce534ec045b9528ce49c2aa2cef26a4626882",
+    "commons/mesh_grammar/mesh_grammar_node.gd": "e1170a3931707e44a3fde3eb5225c155f47a74531e87af81029da8975db0279e",
+    "commons/artifacts/science_screen/science_screen.tscn": "3c67ce5e09a8a433d75343bc5feb16fb7d3f1ecea208d749477a4e73ac190f96",
+    "commons/artifacts/science_screen/science_screen.gd": "0c0eb95ce190de4b90cc839eac96d59ee77c849039b26c2169db42e3610a24ae",
+    "commons/data/artifact_roles.json": "fab01016c4bbc5151a056582cb6de78ae569da4c3cd47f6d223768484a826915",
+    "commons/data/book/lsystems.json": "ba9335a2734cb3dd6e47617347b1757f4c7c1beb10d463ee3990e18d7726e298",
+    "commons/data/trunk_branches.json": "a728a95e6fb115e13eb04fa951645997bafa6a66e7e9e3ee53fe9005390dd4dd",
+    "commons/maps/LSystems_Grammar_Lab/final.md": "47dfbd8be11bd4803e0bc2abe51eb3399ff742565e8639a1f664487747b73a73",
+    "commons/artifacts/grammar_lesson/grammar_lesson.gd": "8c62b0eeeff4677b20201f73ebac0da9ba22b2e29ac22ae8fb70944cd06a3ff1"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

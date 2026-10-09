@@ -1,0 +1,1103 @@
+{
+  "goal_id": "book_cellularautomata",
+  "goal_title": "Book: Cellular Automata: Local Rules, Global Patterns — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in cellularautomata became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "cellularautomata",
+    "order": 12,
+    "phase": "lambda_edge",
+    "title": "Cellular Automata: Local Rules, Global Patterns",
+    "chapters": [
+      "CA_Introduction",
+      "CA_ElementaryRules",
+      "CA_GameOfLife",
+      "CA_BeyondBinary",
+      "CA_ExpandingSpace",
+      "CA_SoftRules",
+      "CA_AgentsCircuits",
+      "CA_EdgeOfChaos"
+    ],
+    "words": 6384,
+    "read_at": "2026-09-24",
+    "source": "one reader + one skeptic (Claude workflow)",
+    "chapters_read": [
+      "CA_Introduction",
+      "CA_ElementaryRules",
+      "CA_GameOfLife",
+      "CA_BeyondBinary",
+      "CA_ExpandingSpace",
+      "CA_SoftRules",
+      "CA_AgentsCircuits",
+      "CA_EdgeOfChaos",
+      "Lab_Path (last of noise)",
+      "Fractal_Recursion (first of fractals)"
+    ],
+    "reading": {
+      "arc": "The sequence takes the reader out of Lab_Path's pause and through eight halls that each add one distinction to a question CA_Introduction names at its close: what a cell can hold, which neighbours it consults, and when its answer becomes available to others. A 32-cell ring rewritten row by row and a mirrored rug open it; a 3D volume adds a fading state that is present but no longer counted; a Rule 30 history is laid out as desk, stepping tiles and lattice so that depth does the work of time; a Life dish wires three fixed addresses to lamps so a travelling pattern can be told apart from the cells it visits; a graded bridge takes the visitor's own body as input and exposes the update schedule (SYNC versus SCAN); a two-concentration field shows that exchange, not a threshold, carries the difference; Rule 90 is set beside a recursive pyramid to test resemblance against procedure; and a matched pair of volumes follows one changed value under integer versus fractional storage. Every hall refuses the 'it is alive' reading and replaces it with an inspectable relation, and every local study holds at a budget while the museum's clock continues. It hands Fractals the distinction between resembling a neighbour, inheriting a state, and being told to repeat.",
+      "holds": [
+        "The three carried choices (what a cell can hold / which neighbours / when the answer becomes available), stated at the end of CA_Introduction; each later hall alters exactly one of them.",
+        "The two-buffer refrain: 'All the questions go to the old row' (Introduction) → 'the arrays exchange places' (ElementaryRules) → the dish's two buffers (BeyondBinary) → SYNC/SCAN and 'previous if snapshot_reads else next' (ExpandingSpace) → 'separate next arrays' (SoftRules) → 'Every cell reads the previous volume' (EdgeOfChaos).",
+        "Local clock versus museum clock: every study HOLDS at a budget (24 rows, 20 steps, 48 generations, 30 simulated seconds, 2,400 updates, 100 updates) 'while the museum continues'; the phrase recurs almost verbatim in six halls.",
+        "One followed witness per hall: the pink/gold marks on the explorer, the gold line on the bridge, squares A/B/C on the Life floor, W on the decaying bridge, W on the two field tables, the lit difference in the paired volumes.",
+        "The refusal of the living reading, restated once per hall in the same key ('We need not turn that pleasure into proof of a living creature'; 'without deciding that a responsive surface must be alive').",
+        "The dark orb carried in from Lab_Path: placed in halls 1-5 (dark_sphere in CA_Introduction, CA_ElementaryRules, CA_GameOfLife, CA_BeyondBinary, CA_ExpandingSpace) but named only in the first two."
+      ],
+      "hall_notes": [
+        {
+          "hall": "CA_Introduction",
+          "words": 1262,
+          "note": "Three works (rule explorer, Persian rug, line network) plus a closing tour of the rest; nearly twice the length of any other hall. It carries the sequence's strongest sentences and its first full lesson (the two-row update, the index byte, the mirror, growth versus drawing), but the first button is pressed only after a noise recap and a riddle about which work 'has left you time to answer'."
+        },
+        {
+          "hall": "CA_ElementaryRules",
+          "words": 750,
+          "note": "One work, one thread: the fading state that is present but not counted, the shell renderer that hides enclosed cells, the no-wrap edge. Reads cleanly; the VIEW and CHANGED passages turn readouts into questions rather than instructions."
+        },
+        {
+          "hall": "CA_GameOfLife",
+          "words": 574,
+          "note": "The Rule 30 history worn three ways (desk bars, support tiles over a basin, lattice). The opening two sentences are the best entry in the sequence. It re-teaches the index weighting from hall 1, and stops at the bridge although the hall runs on for sixteen more cells of unnamed works, including a lab whose signage claims Turing completeness."
+        },
+        {
+          "hall": "CA_BeyondBinary",
+          "words": 672,
+          "note": "Life in a dish, a floor-sized present, three opal lamps on fixed addresses. The address/pattern distinction lands, and LINK/MEET is the sequence's best small experiment (one-way traffic between simulation and room). One number is loose: the MEET field empties at generation six, not 'by 24'."
+        },
+        {
+          "hall": "CA_ExpandingSpace",
+          "words": 716,
+          "note": "The visitor's body becomes an input. The three-threshold passage (0.5 to help, 0.3 to carry, 0.2 to collide) and the CHAIN/SYNC/SCAN/REVERSE comparison are exact against the code and read as the sequence's pivot from watching to being counted."
+        },
+        {
+          "hall": "CA_SoftRules",
+          "words": 874,
+          "note": "Two 32x32 fields, one with exchange and one without, mounted on tables and again on curved walls; the exchange lesson and the reviser's added sentence (the seeded square fades without exchange) both hold. The clockmaker coda is short and honest about a still diagram. Two bare names (Gray–Scott, Lenia) and one misdirection about where W is."
+        },
+        {
+          "hall": "CA_AgentsCircuits",
+          "words": 537,
+          "note": "The explorer again, set beside the Sierpinski pyramid; a brief comparison chapter that names where the analogy stops (the cubes do not shrink with the spacing). The footnote refutes claims the chapter never made, though the explorer's own plate prints 'Turing Complete' when 110 is pressed."
+        },
+        {
+          "hall": "CA_EdgeOfChaos",
+          "words": 715,
+          "note": "A matched pair of 11-cubed volumes, one address changed, integer versus fractional storage. The fork line and the 27-address/0.75 arithmetic are the clearest code-to-consequence passage in the sequence. The closing names a hall name the visitor is never shown and the next hall by its map identifier."
+        }
+      ],
+      "stumbles": [
+        "CA_Introduction: 1,262 words against 537-874 elsewhere; the reader arrives holding Lab_Path's 'unfinished question' and waits through a noise recap and 'Begin with the one that has left you time to answer' before touching the board.",
+        "CA_Introduction and CA_AgentsCircuits: 'Begin with Rule 90', 'Choose Rule 30', 'Set the rule explorer to Rule 90' — the rules are numeral buttons (30, 90, 110, 184, RST) on a second panel with two sliders, while STEP/RUN/SEED/CELL live on the study panel; the prose never says there are two panels.",
+        "CA_GameOfLife: after the bridge the visitor crosses sixteen unnarrated cells holding the columns, the orb, an 8 x 7 m 'TURING MACHINE LAB' whose signage reads 'Rule 110 → universal computation' and 'Game of Life is Turing complete', and a mirrored automaton — the loudest text in the hall asserts what the sequence's own footnote declines.",
+        "CA_BeyondBinary: 'by generation 24 the field is empty' — it is empty from generation six; and lamp A is lit before the first step because the block sits on A, which the prose leaves for the reader to discover as a surprise rather than a prediction.",
+        "CA_SoftRules: 'At the side desk, find W' sends the reader to the console for a gold cross that is on the two tables; only its readings are on the desk.",
+        "CA_SoftRules: 'Lenia' arrives as a bare name; 'Gray–Scott' is named without attribution or the source of feed .037 / kill .060.",
+        "CA_AgentsCircuits: the footnote argues against 'an agent, a circuit or a general-purpose computer' — nobody in the chapter said so; the words the visitor actually meets are the plate's 'RULE 110 / Turing Complete' and 'RULE 90 / Sierpiński'.",
+        "CA_EdgeOfChaos: 'The hall is called Edge of Chaos' — the museum prints no hall names (the threshold plaque was retired as 'no labels in space'), and the chapter's own title is 'How far does one difference go?'; then 'The next hall, Fractal_Recursion' is a file identifier in reader prose.",
+        "Sequence-wide: 'Rule 30/90/110' is used throughout with no mention of Wolfram or of how the 256 are numbered beyond the byte in the excerpt.",
+        "CA_GameOfLife: the 4/2/1 index weighting and the `100` versus `001` comparison repeat what CA_Introduction taught two halls earlier with `100` versus `010`."
+      ],
+      "keep": [
+        {
+          "hall": "CA_Introduction",
+          "quote": "A neighbourhood is already a decision about what information may matter."
+        },
+        {
+          "hall": "CA_Introduction",
+          "quote": "Once again, the visible past is smaller than the past that brought us here."
+        },
+        {
+          "hall": "CA_ElementaryRules",
+          "quote": "Being present and being counted have parted company."
+        },
+        {
+          "hall": "CA_GameOfLife",
+          "quote": "A gap in the screen lets you see through. The same gap in the floor asks something else of your body."
+        },
+        {
+          "hall": "CA_BeyondBinary",
+          "quote": "A zero does not contain an instruction to make a hole."
+        },
+        {
+          "hall": "CA_ExpandingSpace",
+          "quote": "The rule includes a schedule, even when the picture conceals it."
+        },
+        {
+          "hall": "CA_EdgeOfChaos",
+          "quote": "More places carry it. Less of it remains at any one place."
+        },
+        {
+          "hall": "CA_EdgeOfChaos",
+          "quote": "We have measured some consequences of those choices. We have not located the one permissible region where life, computation or queerness can exist."
+        }
+      ],
+      "handover_in": "Clean. Lab_Path closes with 'That previous step has to be kept while the next one is written' and 'Bring one of your unfinished questions with you'; CA_Introduction answers both literally ('Bring an unfinished question with it'; 'All the questions go to the old row'), and its noise recap ('across a sheet, into a volume, around the body and under a foot') is the noise halls in walking order. The dark orb that Lab_Path centres on reappears on the rug's edge. The only cost is that the recap delays the first instruction (see the CA_Introduction structure task).",
+      "handover_out": "The distinction CA_EdgeOfChaos hands over — 'a form can resemble its neighbour, inherit an earlier state, or be told to repeat' — is exactly what Fractal_Recursion opens on ('Here is the self-call'; 'Seeing a square inside another square does not tell us which program made it'), so the join works. Two soft spots: the closing names the next hall by its map identifier (Fractal_Recursion), and Fractal_Recursion's 'We already met this gap at the trace' leans on CA_EdgeOfChaos's single use of 'trace' (a difference leaving the counter before the stored values), which a reader may not connect. CA_AgentsCircuits' promise to 'return to the pyramid's way of making in Fractals' is kept by a later fractal hall (the pyramid's identity names Fractal_KochSierpinski), not by the first, which is acceptable since it names the sequence.",
+      "reading_errors": [
+        "CA_ExpandingSpace hall note: 'The three-threshold passage (0.5 to help, 0.3 to carry, 0.2 to collide) … exact against the code' — the code has TWO thresholds: a neighbour counts toward recovery only above 0.5 (decaying_bridge.gd:100) and below 0.2 the collider is disabled and the tile goes translucent (decaying_bridge.gd:130-135); carrying and colliding are the same 0.2 threshold (proximity_study.gd:93, supported = h >= 0.2). 0.3 is an illustrative value in the chapter, which itself says 'One changing value meets two different thresholds' (final.md:28).",
+        "Holds, local clock: 'every study HOLDS at a budget (24 rows, 20 steps, 48 generations, 30 simulated seconds, 2,400 updates, 100 updates)' — the 100 is difference_model.gd:7 (LIMIT = 100) and is never stated in the CA_EdgeOfChaos chapter, which says only 'a larger one whose clock continues'; five of the six numbers are in the chapters, not six.",
+        "Holds, refusal of the living reading 'restated once per hall in the same key' — CA_AgentsCircuits has no living-reading sentence; its refusal (final.md:27) is of agent/circuit/computer claims, and CA_Introduction's nearest line is 'Their resemblance to living things can invite us closer' (:75). Six halls, not eight.",
+        "Arc: 'takes the reader out of Lab_Path's pause' holds in book/sequence order (Lab_Path is the last map of the noise sequence, noise.json maps[49]) but not in the museum: Lab_Path is not a dealt hall — em_plan.json names it only as an inactive teleporter ('Lab Path - not connected') in Noise_Perlin_Simplex's row — so the museum walker enters CA_Introduction from Noise_Perlin_Simplex.",
+        "Minor: the hall-note word counts differ from a recount (code, anchors and comments excluded) by up to five words (Introduction 1,260 not 1,262; ElementaryRules 745 not 750; SoftRules 871 not 874) — tokenisation noise, not an error, but the figures should not be quoted as exact."
+      ]
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_cellularautomata.001",
+      "title": "Rear lab signage asserts the claim the sequence declines",
+      "spec": "[encounter] CA_GameOfLife\nQuote: “Keep the distinction between a recorded body and the procedure that continues it.”\nWhy: The chapter ends at the bridge, but the hall continues for sixteen cells (z19-z35) into an 8 x 7 m lab whose signs read 'TURING MACHINE LAB', 'Rule 110 → universal computation' and 'Game of Life is Turing complete' — the loudest text a visitor reads in this hall, and precisely the claim CA_AgentsCircuits' footnote says needs 'an account of states, operations and the results they can produce'.\nDo: Edit the lab_room token's signage_top / signage_sub / annotation_top in the map to what the sequence can back (e.g. 'RULE 110 / a claim to test' and drop 'Game of Life is Turing complete'), or remove the two annotation keys; alternatively give the lab one sentence in the chapter that names the claim as the room's, not the book's.\nEvidence: commons/maps/CA_GameOfLife/map_data.json:1740 (lab_room#...#signage_top:TURING MACHINE LAB#signage_sub:Rule 110 → universal computation#annotation_top:... Game of Life is Turing complete); structure layer rows z19-z35 are a second room reached through the z19 opening; commons/maps/CA_AgentsCircuits/final.md:27 (footnote ca-resemblance); the museum prints no labels of its own (commons/scenes/endless_museum.gd:9946-9947) so this signage is the only text in the room.\nFile: commons/maps/CA_GameOfLife/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_GameOfLife"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_GameOfLife",
+      "quote": "Keep the distinction between a recorded body and the procedure that continues it.",
+      "why": "The chapter ends at the bridge, but the hall continues for sixteen cells (z19-z35) into an 8 x 7 m lab whose signs read 'TURING MACHINE LAB', 'Rule 110 → universal computation' and 'Game of Life is Turing complete' — the loudest text a visitor reads in this hall, and precisely the claim CA_AgentsCircuits' footnote says needs 'an account of states, operations and the results they can produce'.",
+      "proposal": "Edit the lab_room token's signage_top / signage_sub / annotation_top in the map to what the sequence can back (e.g. 'RULE 110 / a claim to test' and drop 'Game of Life is Turing complete'), or remove the two annotation keys; alternatively give the lab one sentence in the chapter that names the claim as the room's, not the book's.",
+      "evidence": "commons/maps/CA_GameOfLife/map_data.json:1740 (lab_room#...#signage_top:TURING MACHINE LAB#signage_sub:Rule 110 → universal computation#annotation_top:... Game of Life is Turing complete); structure layer rows z19-z35 are a second room reached through the z19 opening; commons/maps/CA_AgentsCircuits/final.md:27 (footnote ca-resemblance); the museum prints no labels of its own (commons/scenes/endless_museum.gd:9946-9947) so this signage is the only text in the room.",
+      "review": "kept: Quote exact at commons/maps/CA_GameOfLife/final.md:38. Signage confirmed at map_data.json:1740 (signage_top:TURING MACHINE LAB / signage_sub:Rule 110 → universal computation / annotation_top:'M = (Q, Σ, Γ, δ, q0, F) — Game of Life is Turing complete'); lab_room.gd:686-693 reads config_signage_top/_sub/annotation_top and renders them at :3746 (SignageTop, font 72, white), :3757 (sub) and :3784 (east-wall annotation). Structure layer: row z19 opens at x5-7; rows z20-z35 are the 16-row rear room; the exit teleporter sits at z35 x6, so the rear room is on the way OUT, not a side gallery. A VR visitor does meet it: commons/data/map_authored.json lists all eight CA maps, em_plan.json row 88 is authored:'map' with the 37x15 map tile, and the bake row cellularautomata|ca gameoflife stands lab_room at [6,26] (map (6,22) + 4 apron rows). _speak_plaque retired at endless_museum.gd:9946-9947, so this signage is the only text in the room. Footnote at CA_AgentsCircuits/final.md:27 as cited. Note the annotation also prints the Turing 7-tuple; the proposal's 'drop the annotation keys' covers it. Overlaps index 9 (same sentence, same hall) — do them together.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.002",
+      "title": "MEET empties at generation six, not 'by 24'",
+      "spec": "[code-claim] CA_BeyondBinary\nQuote: “In this particular meeting, by generation 24 the field is empty.”\nWhy: Simulating the study's exact beginning (glider centred at (7,7), block at (10,10)-(11,11), 24 x 24 wrapped, B3/S23) gives populations 9, 9, 9, 11, 6, 3, 0 at generations 0-6; a reader stepping toward 24 finds the dish already empty and loses the beat, and the prediction asked for ('Predict which lamps will light') has an answer the prose could hold: A is lit before the first step because the block sits on it, and B and C never light.\nDo: 'In this particular meeting the field is empty within six generations. Only A ever lights, and it was lit before the first step: the block already sat on its address.'\nEvidence: commons/artifacts/game_of_life_petri/address_study.gd:44-50 (replay: glider at (7,7), MEET block at x,y in [10,11]); commons/artifacts/game_of_life_petri/game_of_life_petri.gd:391-401 (wrap) and 403-424 (B3/S23 advance); Python replay of those lines: gen 4 pop 6 (A off), gen 5 pop 3 (A on), gen 6-48 pop 0; first occupancy of (13,13) and (16,16) never occurs in MEET.\nFile: commons/maps/CA_BeyondBinary/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_BeyondBinary"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "CA_BeyondBinary",
+      "quote": "In this particular meeting, by generation 24 the field is empty.",
+      "why": "Simulating the study's exact beginning (glider centred at (7,7), block at (10,10)-(11,11), 24 x 24 wrapped, B3/S23) gives populations 9, 9, 9, 11, 6, 3, 0 at generations 0-6; a reader stepping toward 24 finds the dish already empty and loses the beat, and the prediction asked for ('Predict which lamps will light') has an answer the prose could hold: A is lit before the first step because the block sits on it, and B and C never light.",
+      "proposal": "'In this particular meeting the field is empty within six generations. Only A ever lights, and it was lit before the first step: the block already sat on its address.'",
+      "evidence": "commons/artifacts/game_of_life_petri/address_study.gd:44-50 (replay: glider at (7,7), MEET block at x,y in [10,11]); commons/artifacts/game_of_life_petri/game_of_life_petri.gd:391-401 (wrap) and 403-424 (B3/S23 advance); Python replay of those lines: gen 4 pop 6 (A off), gen 5 pop 3 (A on), gen 6-48 pop 0; first occupancy of (13,13) and (16,16) never occurs in MEET.",
+      "review": "kept: Quote exact at commons/maps/CA_BeyondBinary/final.md:37. I replayed the study's exact beginning in Python from the cited lines — address_study.gd:44-50 (glider at (7,7), MEET block x,y in [10,11]), game_of_life_petri.gd:376-389 (spawn offset cx - pw/2), :391-401 (wrap), :403-424 (B3/S23), grid_size 24 at :146, SITES (10,10)/(13,13)/(16,16) at address_study.gd:5 — and got populations 9, 9, 9, 11, 6, 3, 0 at generations 0-6, empty through 48. A (10,10) is occupied at generation 0 because the block covers (10,10)-(11,11) and replay() calls _refresh(false) so its lamp is lit before the first step; B and C are never occupied in MEET. 'By generation 24' is therefore loose by eighteen generations and the proposal's two facts are both true. (For comparison, GLIDER alone lights A at gen 8, B at 20, C at 32.)",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.003",
+      "title": "Name the next hall as a place, not a map identifier",
+      "spec": "[handover] CA_EdgeOfChaos\nQuote: “The next hall, Fractal_Recursion, changes the instruction.”\nWhy: An underscore identifier is a file name; the visitor never sees map names in the museum (the threshold plaque is retired), and the sequence's own convention is 'in Fractals' (CA_AgentsCircuits) or 'the next hall'.\nDo: 'The next hall, the first of Fractals, changes the instruction.'\nEvidence: commons/maps/CA_EdgeOfChaos/final.md:44; commons/maps/CA_AgentsCircuits/final.md:25 ('in Fractals'); commons/scenes/endless_museum.gd:9946-9947 (_speak_plaque: 'retired 2026-08-19: no labels in space').\nFile: commons/maps/CA_EdgeOfChaos/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "The next hall, Fractal_Recursion, changes the instruction.",
+      "why": "An underscore identifier is a file name; the visitor never sees map names in the museum (the threshold plaque is retired), and the sequence's own convention is 'in Fractals' (CA_AgentsCircuits) or 'the next hall'.",
+      "proposal": "'The next hall, the first of Fractals, changes the instruction.'",
+      "evidence": "commons/maps/CA_EdgeOfChaos/final.md:44; commons/maps/CA_AgentsCircuits/final.md:25 ('in Fractals'); commons/scenes/endless_museum.gd:9946-9947 (_speak_plaque: 'retired 2026-08-19: no labels in space').",
+      "review": "kept: Quote exact at commons/maps/CA_EdgeOfChaos/final.md:44. The fact is right — curriculum_spine.json spine.sequences puts fractals after cellularautomata, em_plan.json row 94 is fractals | fractal recursion | Fractal_Recursion, and fractals.json maps[0] is Fractal_Recursion — but the visitor never sees a map id: _speak_plaque is retired (endless_museum.gd:9946-9947), the standing number plaque too (:10070-10073), and the wall carries one book line per body. CA_AgentsCircuits/final.md:25 already uses 'in Fractals'. Clear prose defect, S fix.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.004",
+      "title": "Say where the rule buttons are and what they are called",
+      "spec": "[prose] CA_Introduction\nQuote: “Choose Rule 30 and keep the single seed.”\nWhy: The rules are numeral buttons (30, 90, 110, 184, RST) with two sliders on a second panel titled CA RULES, mounted between the study buttons and the board, while STEP, RUN, SEED and CELL sit on the nearer study panel titled NEXT GENERATION; a headset visitor looking for a button that says 'Rule 30' will not find one, and nothing in the chapter says there are two panels. The same applies to 'Begin with Rule 90' (line 13) and to CA_AgentsCircuits line 7.\nDo: At the first rule change (line 13): 'Two panels face you: the study buttons, and behind them, nearer the board, a smaller CA RULES panel. Press 90 there — its sliders can stay where they are — and keep the single seed.' Then at line 27: 'Press 30 on the rule panel and keep the single seed.' In CA_AgentsCircuits line 7: 'Press 90 on the explorer's CA RULES panel and RST to return to the central seed.'\nEvidence: commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:117 (unconditional _create_vr_controls), :249-261 (panel 'CA RULES': sliders RULE, SPEED; buttons '30','90','110','184','RST'), :283 (panel z 0.95), :335-339 (preset → rule setter, RST → _reset); commons/artifacts/ca_rule_explorer/neighbour_study.gd:30-34 (panel 'NEXT GENERATION' STEP/RUN/SEED/CELL at z 1.22); CA_Introduction/final.md:13, :27; CA_AgentsCircuits/final.md:7.\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "CA_Introduction",
+      "quote": "Choose Rule 30 and keep the single seed.",
+      "why": "The rules are numeral buttons (30, 90, 110, 184, RST) with two sliders on a second panel titled CA RULES, mounted between the study buttons and the board, while STEP, RUN, SEED and CELL sit on the nearer study panel titled NEXT GENERATION; a headset visitor looking for a button that says 'Rule 30' will not find one, and nothing in the chapter says there are two panels. The same applies to 'Begin with Rule 90' (line 13) and to CA_AgentsCircuits line 7.",
+      "proposal": "At the first rule change (line 13): 'Two panels face you: the study buttons, and behind them, nearer the board, a smaller CA RULES panel. Press 90 there — its sliders can stay where they are — and keep the single seed.' Then at line 27: 'Press 30 on the rule panel and keep the single seed.' In CA_AgentsCircuits line 7: 'Press 90 on the explorer's CA RULES panel and RST to return to the central seed.'",
+      "evidence": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:117 (unconditional _create_vr_controls), :249-261 (panel 'CA RULES': sliders RULE, SPEED; buttons '30','90','110','184','RST'), :283 (panel z 0.95), :335-339 (preset → rule setter, RST → _reset); commons/artifacts/ca_rule_explorer/neighbour_study.gd:30-34 (panel 'NEXT GENERATION' STEP/RUN/SEED/CELL at z 1.22); CA_Introduction/final.md:13, :27; CA_AgentsCircuits/final.md:7.",
+      "review": "amended: Quote exact at commons/maps/CA_Introduction/final.md:27 (also :13 and CA_AgentsCircuits/final.md:7). Confirmed: ca_rule_explorer.gd:249-261 builds the 'CA RULES' panel (RULE and SPEED sliders; buttons labelled 30, 90, 110, 184, RST), and _create_vr_controls() is called unconditionally at :117 so it exists in the neighbour-study configuration; neighbour_study.gd:30-32 builds 'NEXT GENERATION' (STEP RUN SEED CELL). Geometry: the CA RULES panel sits at z = board_size/2 + 0.15 = 0.95 (:283) and the study panel at z 1.22 (neighbour_study.gd:34), so the rule panel is BETWEEN the study buttons and the board, not simply beside them — the proposal should say so. Pressing 30 runs the rule setter's _reset() (:35-41, :352-364), which keeps seed_pair, so 'keep the single seed' stays true.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.005",
+      "title": "Anchor the resemblance footnote to the plate's own caption",
+      "spec": "[footnote] CA_AgentsCircuits\nQuote: “An organised appearance alone does not demonstrate an agent, a circuit or a general-purpose computer.”\nWhy: As written the footnote argues with nobody: the chapter never raised agents or circuits. But the explorer's plate prints 'RULE 110 / Turing Complete' when 110 is pressed and 'RULE 90 / Sierpiński' under the very rule the chapter is running, so there is a caption the reader has read that the note could answer instead of a claim they have not met.\nDo: Rewrite the footnote to name its target: 'The explorer's plate captions Rule 90 \"Sierpiński\" and Rule 110 \"Turing Complete\". This comparison earns the first word only as a question about resemblance; the second needs an account of states, operations and results, and the Rule 110 display in the first hall is where to begin asking for it.'\nEvidence: commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:92-99 (FAMOUS_RULES: 90 'Sierpiński', 110 'Turing Complete') and 342-349 (_update_rule_display writes 'RULE %d\\n%s' to the plate); rule110_computer placed in CA_Introduction at (10,16); CA_AgentsCircuits/final.md:27.\nFile: commons/maps/CA_AgentsCircuits/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_AgentsCircuits"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "CA_AgentsCircuits",
+      "quote": "An organised appearance alone does not demonstrate an agent, a circuit or a general-purpose computer.",
+      "why": "As written the footnote argues with nobody: the chapter never raised agents or circuits. But the explorer's plate prints 'RULE 110 / Turing Complete' when 110 is pressed and 'RULE 90 / Sierpiński' under the very rule the chapter is running, so there is a caption the reader has read that the note could answer instead of a claim they have not met.",
+      "proposal": "Rewrite the footnote to name its target: 'The explorer's plate captions Rule 90 \"Sierpiński\" and Rule 110 \"Turing Complete\". This comparison earns the first word only as a question about resemblance; the second needs an account of states, operations and results, and the Rule 110 display in the first hall is where to begin asking for it.'",
+      "evidence": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:92-99 (FAMOUS_RULES: 90 'Sierpiński', 110 'Turing Complete') and 342-349 (_update_rule_display writes 'RULE %d\\n%s' to the plate); rule110_computer placed in CA_Introduction at (10,16); CA_AgentsCircuits/final.md:27.",
+      "review": "kept: Quote exact at commons/maps/CA_AgentsCircuits/final.md:27. Confirmed: FAMOUS_RULES at ca_rule_explorer.gd:92-99 (90 'Sierpiński', 110 'Turing Complete'); _update_rule_display at :342-349 writes 'RULE %d\\n%s' to the plate; the plate is built unconditionally (_create_rule_display at :116, label at :229-239), and the CA_AgentsCircuits map places the explorer with #rule:90, so the plate reads 'RULE 90 / Sierpiński' on arrival and 'RULE 110 / Turing Complete' after the 110 button (:257). rule110_computer stands in CA_Introduction at (10,16). The footnote does argue with a claim the chapter never raised, while the plate makes that claim in front of the reader; anchoring it is an improvement, not a taste.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.006",
+      "title": "The visitor is never shown the hall's name",
+      "spec": "[prose] CA_EdgeOfChaos\nQuote: “The hall is called Edge of Chaos. Let the name remain a question.”\nWhy: The museum prints no hall names (the threshold plaque was retired as 'no labels in space'), the chapter's title is 'How far does one difference go?', and 'Edge of Chaos' exists only as the map id; the sentence tells the reader a name as if they had read it on a sign. The deflation of the Langton claim that follows is worth keeping.\nDo: 'This hall was built under the name Edge of Chaos; let the name remain a question.'\nEvidence: commons/scenes/endless_museum.gd:9946-9947 (_speak_plaque retired, 'no labels in space'); commons/maps/CA_EdgeOfChaos/final.md:1 (H1) and :38; algorithms/cellularautomata/ca_showcase/difference_model.gd:2-3 ('No measured critical point, Lyapunov exponent or rule-table lambda').\nFile: commons/maps/CA_EdgeOfChaos/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "The hall is called Edge of Chaos. Let the name remain a question.",
+      "why": "The museum prints no hall names (the threshold plaque was retired as 'no labels in space'), the chapter's title is 'How far does one difference go?', and 'Edge of Chaos' exists only as the map id; the sentence tells the reader a name as if they had read it on a sign. The deflation of the Langton claim that follows is worth keeping.",
+      "proposal": "'This hall was built under the name Edge of Chaos; let the name remain a question.'",
+      "evidence": "commons/scenes/endless_museum.gd:9946-9947 (_speak_plaque retired, 'no labels in space'); commons/maps/CA_EdgeOfChaos/final.md:1 (H1) and :38; algorithms/cellularautomata/ca_showcase/difference_model.gd:2-3 ('No measured critical point, Lyapunov exponent or rule-table lambda').",
+      "review": "kept: Quote exact at commons/maps/CA_EdgeOfChaos/final.md:38. Confirmed the museum prints no hall name: _speak_plaque retired (endless_museum.gd:9946-9947), the standing number plaque retired (:10070-10073), and what a showing card carries is 'cellularautomata:00NN' (:10054) — the chapter id and a number. Wall text is one book line per body via _speak_lines (:9957) from commons/data/book/cellularautomata.json (self_organization_ca: 'Change one address…'), which contains no 'Edge of Chaos'. The map's own title is the H1 'How far does one difference go?' (map_info.title), so even a grid-mode 'an' board (GridUtilitiesComponent.gd:680) would not print 'Edge of Chaos'; the phrase exists only in the map id and desktop dev overlays (:17626 spine picker). difference_model.gd:2-3 as cited. The proposal keeps the deflation and stops asserting a sign the reader never saw.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.007",
+      "title": "Let the board's instruction arrive before the noise recap",
+      "spec": "[structure] CA_Introduction\nQuote: “We have carried noise a long way: across a sheet, into a volume, around the body and under a foot.”\nWhy: At 1,262 words this hall is nearly twice any other, and the reader — who has just been handed an 'unfinished question' by Lab_Path — waits through a second paragraph of recap and the riddle 'Begin with the one that has left you time to answer' before the first 'Press STEP'. The recap is true, but Lab_Path already made the pause.\nDo: Cut the second paragraph to its last two sentences ('Keep the pleasure of the blob. Bring an unfinished question with it.') and attach them to the first, so 'The board waits in the left-hand corridor near the entrance' is the fourth sentence; if the recap is wanted, move it to the closing region beside 'carry three choices'.\nEvidence: Word counts (prose, code and anchors excluded): CA_Introduction 1,262; the other seven 537-874; commons/maps/Lab_Path/final.md:21-23 already carries the previous-step framing and 'Bring one of your unfinished questions with you'; CA_Introduction/final.md:3-5.\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "CA_Introduction",
+      "quote": "We have carried noise a long way: across a sheet, into a volume, around the body and under a foot.",
+      "why": "At 1,262 words this hall is nearly twice any other, and the reader — who has just been handed an 'unfinished question' by Lab_Path — waits through a second paragraph of recap and the riddle 'Begin with the one that has left you time to answer' before the first 'Press STEP'. The recap is true, but Lab_Path already made the pause.",
+      "proposal": "Cut the second paragraph to its last two sentences ('Keep the pleasure of the blob. Bring an unfinished question with it.') and attach them to the first, so 'The board waits in the left-hand corridor near the entrance' is the fourth sentence; if the recap is wanted, move it to the closing region beside 'carry three choices'.",
+      "evidence": "Word counts (prose, code and anchors excluded): CA_Introduction 1,262; the other seven 537-874; commons/maps/Lab_Path/final.md:21-23 already carries the previous-step framing and 'Bring one of your unfinished questions with you'; CA_Introduction/final.md:3-5.",
+      "review": "kept: Quote exact at commons/maps/CA_Introduction/final.md:5. My own count (code blocks, anchors and comments excluded) gives 1,260 for CA_Introduction against 537-871 for the other seven — the same picture as the task's 1,262 / 537-874. Lab_Path/final.md:21-23 does carry the framing ('a cell's next state will depend on what its neighbours were doing in the previous step') and 'Bring one of your unfinished questions with you', so the second paragraph's recap is a second pause. One qualification: Lab_Path is the last map of the noise sequence (noise.json maps[49]) and precedes CA_Introduction in the book, but it is not a dealt museum hall (em_plan.json mentions it only as an inactive teleporter 'Lab Path - not connected' in Noise_Perlin_Simplex's row), so the museum walker arrives from Noise_Perlin_Simplex — which if anything strengthens the case for reaching the board sooner. A pacing judgment, but a defensible one at M.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.008",
+      "title": "W is on the tables, not at the desk",
+      "spec": "[prose] CA_SoftRules\nQuote: “At the side desk, find W. It lies just outside the seeded square.”\nWhy: The gold cross W is built on each table field (just outside the seeded 13-18 square); the side desk only prints its readings. The sentence sends the reader to the console to look for a mark that is two metres away on the tables.\nDo: 'Find the small gold cross W on either table, just outside the seeded square; the side desk reads its values. In both fields V is zero there.'\nEvidence: commons/artifacts/rd_artifact/exchange_study.gd:126-130 (WitnessX/WitnessZ boxes at the table coordinates of (12,15)), :88 (desk readout 'W (12,15) U V'), :139-141 (console at x -4.5); commons/artifacts/rd_artifact/live_field.gd:21-23 (seeded square x,y in 13..18).\nFile: commons/maps/CA_SoftRules/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_SoftRules"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "CA_SoftRules",
+      "quote": "At the side desk, find W. It lies just outside the seeded square.",
+      "why": "The gold cross W is built on each table field (just outside the seeded 13-18 square); the side desk only prints its readings. The sentence sends the reader to the console to look for a mark that is two metres away on the tables.",
+      "proposal": "'Find the small gold cross W on either table, just outside the seeded square; the side desk reads its values. In both fields V is zero there.'",
+      "evidence": "commons/artifacts/rd_artifact/exchange_study.gd:126-130 (WitnessX/WitnessZ boxes at the table coordinates of (12,15)), :88 (desk readout 'W (12,15) U V'), :139-141 (console at x -4.5); commons/artifacts/rd_artifact/live_field.gd:21-23 (seeded square x,y in 13..18).",
+      "review": "kept: Quote exact at commons/maps/CA_SoftRules/final.md:7. Confirmed: exchange_study.gd:126-130 builds the gold WitnessX/WitnessZ cross ON each table at the table coordinates of (12,15) (wx from 12.5/32, wz from 15.5/32, centred on cx = ±2.45); WITNESS = 15*32+12 at :5 is that address; :88 prints 'W (12,15)  U  V' on the desk readout; :139-141 puts the console at x -4.5, z -1.7 — about 2.9 m from B's cross and 7.1 m from A's. live_field.gd:21-23 seeds x,y in 13..18, so (12,15) is the first unseeded cell beside the square with V = 0 in both fields; one step with exchange gives lap_v = 0.25 → v = 0.02 ('a little arrives'), zero without. The sentence sends the reader to the console for a mark that is on the tables; the proposal fixes it.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.009",
+      "title": "Name Wolfram's numbering once",
+      "spec": "[footnote] CA_Introduction\nQuote: “Begin with Rule 90 and the single seed.”\nWhy: 'Rule 30', 'Rule 90' and 'Rule 110' are used throughout the sequence and never attributed; the excerpt shows the byte but the reader has no name to look the 256 up under, and the explorer's RULE slider in fact carries all of them.\nDo: A footnote at the first 'Rule 90': these are Wolfram's elementary rules — 256 of them, each numbered by its eight answers read as one byte (Wolfram 1983; A New Kind of Science, 2002); the RULE slider on the rule panel runs through all 256.\nEvidence: grep -i wolfram over commons/maps/CA_*/final.md returns nothing; commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:18 ('Wolfram's elementary 1D cellular automaton (rules 0–255)'), :35 (rule 0-255), :251 (RULE slider).\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "CA_Introduction",
+      "quote": "Begin with Rule 90 and the single seed.",
+      "why": "'Rule 30', 'Rule 90' and 'Rule 110' are used throughout the sequence and never attributed; the excerpt shows the byte but the reader has no name to look the 256 up under, and the explorer's RULE slider in fact carries all of them.",
+      "proposal": "A footnote at the first 'Rule 90': these are Wolfram's elementary rules — 256 of them, each numbered by its eight answers read as one byte (Wolfram 1983; A New Kind of Science, 2002); the RULE slider on the rule panel runs through all 256.",
+      "evidence": "grep -i wolfram over commons/maps/CA_*/final.md returns nothing; commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:18 ('Wolfram's elementary 1D cellular automaton (rules 0–255)'), :35 (rule 0-255), :251 (RULE slider).",
+      "review": "kept: Quote exact at commons/maps/CA_Introduction/final.md:13. grep -i wolfram over commons/maps/CA_*/final.md returns nothing. ca_rule_explorer.gd:18 ('Implements Wolfram's elementary 1D cellular automaton (rules 0–255)'), :35 (rule 0-255), :251 (RULE slider), and the slider is built in the study configuration (unconditional :117) and maps 0-255 (:323-328). The attributions in the proposal are right (Wolfram 1983; A New Kind of Science 2002). One footnote, S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.010",
+      "title": "Acknowledge the rear half of the hall",
+      "spec": "[structure] CA_GameOfLife\nQuote: “Keep the distinction between a recorded body and the procedure that continues it.”\nWhy: The chapter's closing anchor is empty and the hall continues past the bridge through a second room (columns, the dark orb, the lab, a mirrored automaton); CA_Introduction and CA_EdgeOfChaos both close by naming their unexplained works so the visitor is not left walking in silence.\nDo: One sentence before the handover, in the sequence's own form: 'Beyond the basin the hall goes on — a stack of columns, the orb again, a lab, a mirrored automaton — further encounters this history does not need to explain.'\nEvidence: commons/maps/CA_GameOfLife/map_data.json interactables: ca_columns (5,26), dark_sphere (5,25), lab_room (6,22), mirrored_cellular_automata (6,32); structure rows z19-z35; CA_GameOfLife/final.md:40 (empty '<!-- @ -->' region); CA_Introduction/final.md:79 and CA_EdgeOfChaos/final.md:40 for the convention.\nFile: commons/maps/CA_GameOfLife/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_GameOfLife"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "CA_GameOfLife",
+      "quote": "Keep the distinction between a recorded body and the procedure that continues it.",
+      "why": "The chapter's closing anchor is empty and the hall continues past the bridge through a second room (columns, the dark orb, the lab, a mirrored automaton); CA_Introduction and CA_EdgeOfChaos both close by naming their unexplained works so the visitor is not left walking in silence.",
+      "proposal": "One sentence before the handover, in the sequence's own form: 'Beyond the basin the hall goes on — a stack of columns, the orb again, a lab, a mirrored automaton — further encounters this history does not need to explain.'",
+      "evidence": "commons/maps/CA_GameOfLife/map_data.json interactables: ca_columns (5,26), dark_sphere (5,25), lab_room (6,22), mirrored_cellular_automata (6,32); structure rows z19-z35; CA_GameOfLife/final.md:40 (empty '<!-- @ -->' region); CA_Introduction/final.md:79 and CA_EdgeOfChaos/final.md:40 for the convention.",
+      "review": "kept: Quote exact at commons/maps/CA_GameOfLife/final.md:38 and the closing anchor at :40 is empty. Map interactables confirmed: lab_room (6,22), dark_sphere (5,25), ca_columns (5,26), mirrored_cellular_automata (6,32); structure row z19 opens at x5-7 and rows z20-z35 form the rear room; the exit teleporter is at z35 x6, so the visitor walks the length of it to leave. The map's own description says 'The existing lab, columns, mirrored work and orb remain in the rear gallery.' Convention confirmed at CA_Introduction/final.md:79 and CA_EdgeOfChaos/final.md:40. The museum builds this hall from the map (map_authored.json; em_plan row 88 authored:'map'; bake stands the four rear works). Do together with index 0 — one sentence can name the lab and own its claim.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.011",
+      "title": "Say that SOURCE must be pressed once before the probe run",
+      "spec": "[vr] CA_ExpandingSpace\nQuote: “SOURCE can nominate the pink probe in your place. With PROBE / NEAR showing, press RUN.”\nWhy: The study starts in VISITOR mode; a reader who takes 'With PROBE / NEAR showing' as a description rather than a step presses RUN from the desk, 2.2 m from the nearest cell and outside the 1.35 m radius, and 'The number falls' does not happen.\nDo: 'Press SOURCE once, until the readout shows PROBE / NEAR, then press RUN.'\nEvidence: algorithms/cellularautomata/living_architecture/proximity_study.gd:9 (source_mode = 0, VISITOR), :45-46 (next_source cycles VISITOR→PROBE→NONE), :63-65 (readout text), :134-136 (desk at x -2.7, z -1.6); decaying_bridge.gd:41 (decay_radius 1.35), :77 (cell (0,0) at x -1.2, z 0).\nFile: commons/maps/CA_ExpandingSpace/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_ExpandingSpace"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "CA_ExpandingSpace",
+      "quote": "SOURCE can nominate the pink probe in your place. With PROBE / NEAR showing, press RUN.",
+      "why": "The study starts in VISITOR mode; a reader who takes 'With PROBE / NEAR showing' as a description rather than a step presses RUN from the desk, 2.2 m from the nearest cell and outside the 1.35 m radius, and 'The number falls' does not happen.",
+      "proposal": "'Press SOURCE once, until the readout shows PROBE / NEAR, then press RUN.'",
+      "evidence": "algorithms/cellularautomata/living_architecture/proximity_study.gd:9 (source_mode = 0, VISITOR), :45-46 (next_source cycles VISITOR→PROBE→NONE), :63-65 (readout text), :134-136 (desk at x -2.7, z -1.6); decaying_bridge.gd:41 (decay_radius 1.35), :77 (cell (0,0) at x -1.2, z 0).",
+      "review": "kept: Quote exact at commons/maps/CA_ExpandingSpace/final.md:7. Confirmed: proximity_study.gd:9 source_mode = 0 (VISITOR) and :10 probe_near = true, so ONE press of SOURCE (:45-46 cycles VISITOR→PROBE→NONE) yields 'PROBE / NEAR' (:63-64); desk at x -2.7, z -1.6 (:134-136); decaying_bridge.gd:41 decay_radius 1.35 and :77 puts cell (0,0) at x -1.2, z 0 — 2.19 m from the console, further from a body standing in front of it, so RUN from the desk in VISITOR mode decays nothing and 'The number falls' does not happen. In PROBE/NEAR the probe (0, 3.6) is 0.15 m from W (2,6) at (0, 3.6), so the witness does fall. A real VR trap, S fix.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.012",
+      "title": "Gloss Lenia and attribute Gray–Scott",
+      "spec": "[footnote] CA_SoftRules\nQuote: “Its graded appearance does not demonstrate a running Lenia field”\nWhy: Two names arrive bare in one chapter: 'Lenia' with no gloss of what a running one would be, and 'Gray–Scott' with neither authors nor the source of the .037/.060 pair the readout prints; the reader cannot follow either name out of the room.\nDo: One footnote at 'Lenia': a continuous-state automaton (Chan, 2019) whose cells hold fractions and read a ring-shaped neighbourhood — which is what the still ring pictures and does not run; and in the same note, the field is Gray & Scott's (1984) reaction–diffusion with feed and kill in the range Pearson (1993) mapped.\nEvidence: commons/maps/CA_SoftRules/final.md:21 (Gray–Scott, unattributed), :46 (Lenia, unglossed); commons/artifacts/rd_artifact/live_field.gd:5-6 (FEED 0.037, KILL 0.06); commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd:286-297 (static radial illustration, 'no Lenia update runs here').\nFile: commons/maps/CA_SoftRules/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_SoftRules"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "CA_SoftRules",
+      "quote": "Its graded appearance does not demonstrate a running Lenia field",
+      "why": "Two names arrive bare in one chapter: 'Lenia' with no gloss of what a running one would be, and 'Gray–Scott' with neither authors nor the source of the .037/.060 pair the readout prints; the reader cannot follow either name out of the room.",
+      "proposal": "One footnote at 'Lenia': a continuous-state automaton (Chan, 2019) whose cells hold fractions and read a ring-shaped neighbourhood — which is what the still ring pictures and does not run; and in the same note, the field is Gray & Scott's (1984) reaction–diffusion with feed and kill in the range Pearson (1993) mapped.",
+      "evidence": "commons/maps/CA_SoftRules/final.md:21 (Gray–Scott, unattributed), :46 (Lenia, unglossed); commons/artifacts/rd_artifact/live_field.gd:5-6 (FEED 0.037, KILL 0.06); commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd:286-297 (static radial illustration, 'no Lenia update runs here').",
+      "review": "kept: Both names are bare at commons/maps/CA_SoftRules/final.md:21 (Gray–Scott) and :46 (Lenia); live_field.gd:5-6 FEED 0.037 / KILL 0.06 and the readout prints them (exchange_study.gd:88); the_clockmaker_of_rules.gd:286-297 is a static radial illustration with 'no Lenia update runs here'. Attributions in the proposal check out (Gray & Scott 1984; Pearson 1993; Chan 2019). One footnote, S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.013",
+      "title": "Replace the repeated index lesson with a back-reference",
+      "spec": "[structure] CA_GameOfLife\nQuote: “The shifts give their positions different weights: four, two, one.”\nWhy: CA_Introduction already taught the eight arrangements and the `100` versus `010` comparison two halls earlier (lines 23-25); this hall's subject is the record, and re-teaching the weighting costs pace without adding a relation. Only the first two sentences of line 19 repeat, though — the bit-of-30 and new-row sentences belong here.\nDo: Keep line 13 and the `var index` excerpt. Replace the first two sentences of line 19 with a back-reference so the paragraph reads: 'Here `a`, `b` and `c` are the three states, read into one index as the board in the first hall did. The bridge's `_apply_rule` reads bit `index` from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.'\nEvidence: commons/maps/CA_GameOfLife/final.md:13-19; commons/maps/CA_Introduction/final.md:23-25 (same lesson, `100` vs `010`); algorithms/cellularautomata/ca_bridge/ca_bridge.gd:229-231 (_apply_rule, index).\nFile: commons/maps/CA_GameOfLife/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_GameOfLife"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "CA_GameOfLife",
+      "quote": "The shifts give their positions different weights: four, two, one.",
+      "why": "CA_Introduction already taught the eight arrangements and the `100` versus `010` comparison two halls earlier (lines 23-25); this hall's subject is the record, and re-teaching the weighting costs pace without adding a relation. Only the first two sentences of line 19 repeat, though — the bit-of-30 and new-row sentences belong here.",
+      "proposal": "Keep line 13 and the `var index` excerpt. Replace the first two sentences of line 19 with a back-reference so the paragraph reads: 'Here `a`, `b` and `c` are the three states, read into one index as the board in the first hall did. The bridge's `_apply_rule` reads bit `index` from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.'",
+      "evidence": "commons/maps/CA_GameOfLife/final.md:13-19; commons/maps/CA_Introduction/final.md:23-25 (same lesson, `100` vs `010`); algorithms/cellularautomata/ca_bridge/ca_bridge.gd:229-231 (_apply_rule, index).",
+      "review": "amended: Quote exact at commons/maps/CA_GameOfLife/final.md:19; the repeat against CA_Introduction/final.md:23-25 is real and ca_bridge.gd:229-231 is the cited _apply_rule. But the proposal cuts too wide: line 13 is only the lead-in to the excerpt, and of line 19 only the first two sentences repeat the lesson; the last two ('The bridge's _apply_rule reads bit index from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.') are this hall's own facts and should stay. Narrow the cut and the effort drops to S.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.014",
+      "title": "State the eight answers of Rule 90 once",
+      "spec": "[figure] CA_Introduction\nQuote: “For Rule 90, compare `100` with `010`. Each contains one occupied cell. The answers differ.”\nWhy: The reader is asked to hold all eight arrangements and compare two, but the VR plate shows one neighbourhood at a time and the chapter never lists the eight answers; a figure would help only the web page, since the museum shows no chapter images.\nDo: After the `_apply_rule` excerpt, one sentence: 'Rule 90 answers the eight arrangements 111, 110, 101, 100, 011, 010, 001, 000 with 0, 1, 0, 1, 1, 0, 1, 0 — the byte 01011010 read from its top bit down — so `100` becomes occupied and `010` does not.' Optionally (L, web only) the PNG as first proposed, in the block's folder referenced like the illustrated chapters.\nEvidence: commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:368-370 (index = L<<2|C<<1|R, bit of rule; 90 = 0b01011010); neighbour_study.gd:61 (plate shows one cell's LEFT SELF RIGHT and NEXT); commons/scenes/endless_museum.gd:9957-9990 (_speak_lines: one line per body from the book JSON, no images); grep '![' over commons/maps/*/final.md: 28 chapters, none CA.\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "10min",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "CA_Introduction",
+      "quote": "For Rule 90, compare `100` with `010`. Each contains one occupied cell. The answers differ.",
+      "why": "The reader is asked to hold all eight arrangements and compare two, but the VR plate shows one neighbourhood at a time and the chapter never lists the eight answers; a figure would help only the web page, since the museum shows no chapter images.",
+      "proposal": "After the `_apply_rule` excerpt, one sentence: 'Rule 90 answers the eight arrangements 111, 110, 101, 100, 011, 010, 001, 000 with 0, 1, 0, 1, 1, 0, 1, 0 — the byte 01011010 read from its top bit down — so `100` becomes occupied and `010` does not.' Optionally (L, web only) the PNG as first proposed, in the block's folder referenced like the illustrated chapters.",
+      "evidence": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:368-370 (index = L<<2|C<<1|R, bit of rule; 90 = 0b01011010); neighbour_study.gd:61 (plate shows one cell's LEFT SELF RIGHT and NEXT); commons/scenes/endless_museum.gd:9957-9990 (_speak_lines: one line per body from the book JSON, no images); grep '![' over commons/maps/*/final.md: 28 chapters, none CA.",
+      "review": "amended: Quote exact at commons/maps/CA_Introduction/final.md:25; grep confirms 28 chapters carry images and none of the eight CA chapters do; ca_rule_explorer.gd:368-370 and neighbour_study.gd:61 as cited. But a PNG never reaches the headset: the museum hangs one book line per body (endless_museum.gd:9957 _speak_lines from commons/data/book/cellularautomata.json) and neither endless_museum.gd nor tools/book.py handles images, so the figure is a web-page improvement only — and in the hall the plate plus CELL already walks the ring one neighbourhood at a time. The eight answers fit in one sentence that reaches every reader; the PNG can stay as an optional web extra rather than an L task.",
+      "notes": "",
+      "source": "one reader + one skeptic (Claude workflow)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.015",
+      "title": "Decide which text stands: the block's checked chapter or the 14:20 rewrite",
+      "spec": "[prose] CA_Introduction\nWhy: Rewritten at 14:20 on 24 Sept after three verifiers had checked the block's version; the map also gained #study:arrival on the line network.\nDo: Compare CA_Introduction/after.md with the live final.md and choose; keep #size:2.0 on the network token either way.\nEvidence: CA_Introduction/HASHES.txt LIVE lines; forum 260924-zgl38\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "CA_Introduction",
+      "quote": "",
+      "why": "Rewritten at 14:20 on 24 Sept after three verifiers had checked the block's version; the map also gained #study:arrival on the line network.",
+      "proposal": "Compare CA_Introduction/after.md with the live final.md and choose; keep #size:2.0 on the network token either way.",
+      "evidence": "CA_Introduction/HASHES.txt LIVE lines; forum 260924-zgl38",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.016",
+      "title": "Walk CA_Introduction in the headset: board, opening, network",
+      "spec": "[vr] CA_Introduction\nWhy: The rebuilt hall (explorer against the corridor wall, the two-cell opening into the rug's room, the 2.0 m tangle) is read back from a museum boot, not walked.\nDo: Enter, find the board on your left, go through the opening to the rug, come back past the swarm to the network.\nEvidence: museum_network_readback.txt; hall_ci_net_eye.png\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "CA_Introduction",
+      "quote": "",
+      "why": "The rebuilt hall (explorer against the corridor wall, the two-cell opening into the rug's room, the 2.0 m tangle) is read back from a museum boot, not walked.",
+      "proposal": "Enter, find the board on your left, go through the opening to the rug, come back past the swarm to the network.",
+      "evidence": "museum_network_readback.txt; hall_ci_net_eye.png",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.017",
+      "title": "grid_substrate_runner and synthesis_stand are not named",
+      "spec": "[prose] CA_Introduction\nQuote: “Other works remain in the hall.”\nWhy: The runner's behaviour in a museum-built hall is unverified (it looks for a GridMultiMesh the hall lacks); the stand is a DNA measurement stand; the chapter says nothing of either.\nDo: Decide whether either does work here; if the runner builds nothing, remove it.\nEvidence: CA_Introduction/DECISIONS.md Left alone\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "CA_Introduction",
+      "quote": "Other works remain in the hall.",
+      "why": "The runner's behaviour in a museum-built hall is unverified (it looks for a GridMultiMesh the hall lacks); the stand is a DNA measurement stand; the chapter says nothing of either.",
+      "proposal": "Decide whether either does work here; if the runner builds nothing, remove it.",
+      "evidence": "CA_Introduction/DECISIONS.md Left alone",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.018",
+      "title": "persian_rug costs 5-11 ms of script a frame",
+      "spec": "[encounter] CA_Introduction\nWhy: Its picture keeps changing, so it has no stop; the 90 Hz budget for everything is 11.1 ms and a Quest is slower than the desktop.\nDo: Profile in the headset; cheapen the update if it stutters.\nEvidence: _frame_cost/sc_ca_now.out.txt\nFile: commons/maps/CA_Introduction/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_Introduction",
+      "quote": "",
+      "why": "Its picture keeps changing, so it has no stop; the 90 Hz budget for everything is 11.1 ms and a Quest is slower than the desktop.",
+      "proposal": "Profile in the headset; cheapen the update if it stutters.",
+      "evidence": "_frame_cost/sc_ca_now.out.txt",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.019",
+      "title": "A colonnade pier encloses the changed address until the plan is re-run",
+      "spec": "[encounter] CA_EdgeOfChaos\nQuote: “Their colours almost agree.”\nWhy: One of 28 stamped piers stands inside volume B on the changed address, which damages the core encounter; piers:false is set in the map but the museum reads the plan row.\nDo: Re-run tools/em_map_halls.py --apply (Astra), then boot the hall.\nEvidence: CA_EdgeOfChaos/map.diff; em_plan.json 'piers: template colonnade x28'\nFile: commons/maps/CA_EdgeOfChaos/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "Their colours almost agree.",
+      "why": "One of 28 stamped piers stands inside volume B on the changed address, which damages the core encounter; piers:false is set in the map but the museum reads the plan row.",
+      "proposal": "Re-run tools/em_map_halls.py --apply (Astra), then boot the hall.",
+      "evidence": "CA_EdgeOfChaos/map.diff; em_plan.json 'piers: template colonnade x28'",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.020",
+      "title": "disease_spread_ca costs 7.9 ms of script a frame",
+      "spec": "[encounter] CA_EdgeOfChaos\nWhy: The heaviest work left in the CA halls after the two stops; its script carries another session's uncommitted budget edits.\nDo: Profile in the headset; bound the loop if it stutters.\nEvidence: _frame_cost/sc_ca_now.out.txt\nFile: commons/maps/CA_EdgeOfChaos/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "",
+      "why": "The heaviest work left in the CA halls after the two stops; its script carries another session's uncommitted budget edits.",
+      "proposal": "Profile in the headset; bound the loop if it stutters.",
+      "evidence": "_frame_cost/sc_ca_now.out.txt",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.021",
+      "title": "The floor label reads RECOVERY RAMPS ON LEFT and faces the wrong way",
+      "spec": "[encounter] CA_ExpandingSpace\nQuote: “recovery ramps rise at either end of its right-hand edge, on the desk's side”\nWhy: BasinNote contradicts the corrected prose and reads upright only to someone facing back toward the entry; the WitnessTag is upside down to an arriving visitor.\nDo: Re-text and re-orient both labels in proximity_study.gd.\nEvidence: proximity_study.gd:123-131\nFile: commons/maps/CA_ExpandingSpace/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_ExpandingSpace"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_ExpandingSpace",
+      "quote": "recovery ramps rise at either end of its right-hand edge, on the desk's side",
+      "why": "BasinNote contradicts the corrected prose and reads upright only to someone facing back toward the entry; the WitnessTag is upside down to an arriving visitor.",
+      "proposal": "Re-text and re-orient both labels in proximity_study.gd.",
+      "evidence": "proximity_study.gd:123-131",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.022",
+      "title": "The frieze board has no collider; only its posts do",
+      "spec": "[encounter] CA_ExpandingSpace\nQuote: “Its colours repeat in panels on a free-standing frieze”\nWhy: A body passes through the board. The chapter's 'no bridge collision' stays true; whether the board should block is a space decision.\nDo: Decide, and add a collider if it should block.\nEvidence: CA_ExpandingSpace/DECISIONS.md Limits\nFile: commons/maps/CA_ExpandingSpace/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_ExpandingSpace"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_ExpandingSpace",
+      "quote": "Its colours repeat in panels on a free-standing frieze",
+      "why": "A body passes through the board. The chapter's 'no bridge collision' stays true; whether the board should block is a space decision.",
+      "proposal": "Decide, and add a collider if it should block.",
+      "evidence": "CA_ExpandingSpace/DECISIONS.md Limits",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.023",
+      "title": "The reveal flow (labels hidden until EXCHANGE B) is unprobed since 19 Sept",
+      "spec": "[encounter] CA_SoftRules\nWhy: The last probe predates the change that hides the A/B labels until EXCHANGE B is pressed; the arithmetic did not change, the reveal has not been seen.\nDo: Press EXCHANGE B in the headset and read the labels.\nEvidence: CA_SoftRules/DECISIONS.md Limits\nFile: commons/maps/CA_SoftRules/final.md",
+      "effort": "10min",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_SoftRules"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_SoftRules",
+      "quote": "",
+      "why": "The last probe predates the change that hides the A/B labels until EXCHANGE B is pressed; the arithmetic did not change, the reveal has not been seen.",
+      "proposal": "Press EXCHANGE B in the headset and read the labels.",
+      "evidence": "CA_SoftRules/DECISIONS.md Limits",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.024",
+      "title": "crack_propagation_ca costs 4.8 ms of script a frame",
+      "spec": "[encounter] CA_SoftRules\nWhy: Not a stop case like the EdgeOfChaos plate; still a third of the 90 Hz budget.\nDo: Profile in the headset.\nEvidence: _frame_cost/sc_ca_now.out.txt\nFile: commons/maps/CA_SoftRules/final.md",
+      "effort": "1h",
+      "skill": "build",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_SoftRules"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "encounter",
+      "hall": "CA_SoftRules",
+      "quote": "",
+      "why": "Not a stop case like the EdgeOfChaos plate; still a third of the 90 Hz budget.",
+      "proposal": "Profile in the headset.",
+      "evidence": "_frame_cost/sc_ca_now.out.txt",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.025",
+      "title": "Companions and the registry still claim cellular automata 'literally compute'",
+      "spec": "[footnote] CA_AgentsCircuits\nWhy: blurb, intent, summary, technical, critical and artifacts still describe Wireworld and Langton's ant, neither placed, and overclaim; the ca_rule_explorer registry description overclaims too.\nDo: Rewrite the companions to the placed works; trim the registry description.\nEvidence: CA_AgentsCircuits/DECISIONS.md Limits\nFile: commons/maps/CA_AgentsCircuits/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_AgentsCircuits"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "CA_AgentsCircuits",
+      "quote": "",
+      "why": "blurb, intent, summary, technical, critical and artifacts still describe Wireworld and Langton's ant, neither placed, and overclaim; the ca_rule_explorer registry description overclaims too.",
+      "proposal": "Rewrite the companions to the placed works; trim the registry description.",
+      "evidence": "CA_AgentsCircuits/DECISIONS.md Limits",
+      "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
+      "notes": "",
+      "source": "the block handback of 24 Sept",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_cellularautomata.026",
+      "title": "Dial the four classes on the explorer (222, 190, 30, 110) and give Edge of Chaos its referent",
+      "spec": "NOC sorts the 256 rules into Wolfram's four classes - 222 uniform, 190 repeating, 30 random, 110 complex - and calls class 4 the bridge between CA and nature. Ada's explorer takes any rule 0-255 on its RULE slider with buttons 30/90/110/184 (ca_rule_explorer.gd:35,251-258; FAMOUS_RULES names 110 'Turing Complete'), yet the chapters visit only 90 and 30, and the closing hall never says what its name refers to (Wolfram 1984; Langton, 'Computation at the edge of chaos', 1990).\n\nProposal: A Search beat, in EdgeOfChaos or as the Introduction's last board exercise: dial 222, then 190, then 30, then 110; say what each does before the four classes are named; end on the edge - from the picture alone nobody can say where class 3 stops and class 4 begins, which is the hall's name as a question with a referent.",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "The hall is called Edge of Chaos. Let the name remain a question.",
+      "why": "NOC sorts the 256 rules into Wolfram's four classes - 222 uniform, 190 repeating, 30 random, 110 complex - and calls class 4 the bridge between CA and nature. Ada's explorer takes any rule 0-255 on its RULE slider with buttons 30/90/110/184 (ca_rule_explorer.gd:35,251-258; FAMOUS_RULES names 110 'Turing Complete'), yet the chapters visit only 90 and 30, and the closing hall never says what its name refers to (Wolfram 1984; Langton, 'Computation at the edge of chaos', 1990).",
+      "proposal": "A Search beat, in EdgeOfChaos or as the Introduction's last board exercise: dial 222, then 190, then 30, then 110; say what each does before the four classes are named; end on the edge - from the picture alone nobody can say where class 3 stops and class 4 begins, which is the hall's name as a question with a referent.",
+      "evidence": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:35,92-100,251-258,326; natureofcode.com/cellular-automata/ 'Wolfram Classification'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "threshold"
+    },
+    {
+      "id": "book_cellularautomata.027",
+      "title": "Name the makers, one footnote per hall (Ulam, von Neumann, Wolfram, Conway/Gardner, Gray-Scott, Langton, Kermack-McKendrick, Cook)",
+      "spec": "Eight chapters, one attribution ('Conway's Game of Life'). NOC dates the field: Ulam and von Neumann at Los Alamos in the 1940s (29-state self-replicators), Wolfram's numbering and A New Kind of Science (2002), Conway through Gardner's 1970 Scientific American column. Ada's halls also stand Gray-Scott (1984), Lenia (Chan 2019; task .012), Langton's ant (1986; langton_swarm), the SIR model (Kermack-McKendrick 1927; disease_spread_ca) and the explorer's 'Turing Complete' label, whose proof is Cook 2004 - which the AgentsCircuits footnote should cite: the resemblance is not the proof, and the proof exists elsewhere.\n\nProposal: Introduction: Ulam/von Neumann + Wolfram's numbering (folds task .009). BeyondBinary: Conway via Gardner 1970. SoftRules: Gray-Scott 1984, Lenia (folds .012). AgentsCircuits: Cook 2004 beside the resemblance footnote (touches .005/.025). EdgeOfChaos: Wolfram 1984 classes, Langton 1990; disease_spread_ca as Kermack-McKendrick.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "CA_Introduction (also CA_BeyondBinary, CA_SoftRules, CA_AgentsCircuits, CA_EdgeOfChaos)",
+      "quote": "",
+      "why": "Eight chapters, one attribution ('Conway's Game of Life'). NOC dates the field: Ulam and von Neumann at Los Alamos in the 1940s (29-state self-replicators), Wolfram's numbering and A New Kind of Science (2002), Conway through Gardner's 1970 Scientific American column. Ada's halls also stand Gray-Scott (1984), Lenia (Chan 2019; task .012), Langton's ant (1986; langton_swarm), the SIR model (Kermack-McKendrick 1927; disease_spread_ca) and the explorer's 'Turing Complete' label, whose proof is Cook 2004 - which the AgentsCircuits footnote should cite: the resemblance is not the proof, and the proof exists elsewhere.",
+      "proposal": "Introduction: Ulam/von Neumann + Wolfram's numbering (folds task .009). BeyondBinary: Conway via Gardner 1970. SoftRules: Gray-Scott 1984, Lenia (folds .012). AgentsCircuits: Cook 2004 beside the resemblance footnote (touches .005/.025). EdgeOfChaos: Wolfram 1984 classes, Langton 1990; disease_spread_ca as Kermack-McKendrick.",
+      "evidence": "natureofcode.com/cellular-automata/ 'What Is a Cellular Automaton?' and 'The Game of Life'; commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:92-100; algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd:5-12",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_cellularautomata.028",
+      "title": "Colour births and deaths on the dish, not only alive and dead (NOC Ex. 7.3)",
+      "spec": "NOC's object-oriented Life keeps each cell's previous state and colours a birth blue and a death red - 'what if each cell were colored based on whether its state has changed'. The dish draws alive_color and dead_color only (game_of_life_petri.gd:39-40); the chapter's sentence about missing the cells that cease to participate is exactly what the two extra colours cure. ElementaryRules already counts CHANGED.\n\nProposal: Code: keep the previous grid (the two buffers already exist) and tint a cell that just died for one generation and a cell just born for one generation; a TRACE button if it should be optional. Prose: after the quoted sentence, 'Press TRACE: the cells that just stopped are marked for one generation, and the figure you were following is seen to be leaving a wake.'",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_BeyondBinary"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "CA_BeyondBinary",
+      "quote": "Following the figure, we can miss the cells that cease to participate.",
+      "why": "NOC's object-oriented Life keeps each cell's previous state and colours a birth blue and a death red - 'what if each cell were colored based on whether its state has changed'. The dish draws alive_color and dead_color only (game_of_life_petri.gd:39-40); the chapter's sentence about missing the cells that cease to participate is exactly what the two extra colours cure. ElementaryRules already counts CHANGED.",
+      "proposal": "Code: keep the previous grid (the two buffers already exist) and tint a cell that just died for one generation and a cell just born for one generation; a TRACE button if it should be optional. Prose: after the quoted sentence, 'Press TRACE: the cells that just stopped are marked for one generation, and the figure you were following is seen to be leaving a wake.'",
+      "evidence": "commons/artifacts/game_of_life_petri/game_of_life_petri.gd:39-40; commons/artifacts/game_of_life_petri/address_study.gd; natureofcode.com/cellular-automata/ Example 7.3",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "trace"
+    },
+    {
+      "id": "book_cellularautomata.029",
+      "title": "Name still life, oscillator and spaceship once, after the block, the blinker and the glider have been watched",
+      "spec": "NOC names the three kinds of known pattern - still lifes, oscillators, spaceships. The dish has all three (the four-cell block in MEET, BLINKER, GLIDER) and the chapter has the observation without the names.\n\nProposal: After the quoted sentence: 'The names for these, now that you have watched them, are still life, oscillator and spaceship: the block that the glider meets is the first, the blinker the second, the glider the third.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_BeyondBinary"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "CA_BeyondBinary",
+      "quote": "Returning, travelling and staying can belong to different parts of the same small event.",
+      "why": "NOC names the three kinds of known pattern - still lifes, oscillators, spaceships. The dish has all three (the four-cell block in MEET, BLINKER, GLIDER) and the chapter has the observation without the names.",
+      "proposal": "After the quoted sentence: 'The names for these, now that you have watched them, are still life, oscillator and spaceship: the block that the glider meets is the first, the blinker the second, the glider the third.'",
+      "evidence": "commons/maps/CA_BeyondBinary/final.md; natureofcode.com/cellular-automata/ 'The Rules of the Game' (Figures 7.28-7.30)",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_cellularautomata.030",
+      "title": "Make the three choices four (add the schedule) and let every hall say which choice it changes - the unnamed variants become variations",
+      "spec": "NOC's Variations section (grid shape, probabilistic, continuous, historical, moving cells, nesting) is a frame Ada could use for what it already places and calls 'other works': hexagon_ca_vr (six neighbours, birth on two) in BeyondBinary, langton_swarm (turmites - cells that move) in Introduction, disease_spread_ca (probabilistic SIR) in EdgeOfChaos, rule110_computer, mold_network, ca_growth_network. Ada's own fourth choice - the update schedule - is the one NOC lacks.\n\nProposal: Introduction's close: four choices (hold / consult / when / and the grid's shape). Then one sentence per later hall naming its change: states and history (ElementaryRules), history as depth (GameOfLife), the 2D neighbourhood and, in the hexagon, its shape (BeyondBinary), continuous state, schedule and the body (ExpandingSpace), two fields (SoftRules), procedure vs resemblance (AgentsCircuits), storage precision (EdgeOfChaos); and the turmites and the SIR grid named as the moving and the probabilistic variations.",
+      "effort": "half-day",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_Introduction"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "CA_Introduction (sequence-wide)",
+      "quote": "For now, carry three choices: what a cell can hold, which neighbours it can consult, and when its answer becomes available to others.",
+      "why": "NOC's Variations section (grid shape, probabilistic, continuous, historical, moving cells, nesting) is a frame Ada could use for what it already places and calls 'other works': hexagon_ca_vr (six neighbours, birth on two) in BeyondBinary, langton_swarm (turmites - cells that move) in Introduction, disease_spread_ca (probabilistic SIR) in EdgeOfChaos, rule110_computer, mold_network, ca_growth_network. Ada's own fourth choice - the update schedule - is the one NOC lacks.",
+      "proposal": "Introduction's close: four choices (hold / consult / when / and the grid's shape). Then one sentence per later hall naming its change: states and history (ElementaryRules), history as depth (GameOfLife), the 2D neighbourhood and, in the hexagon, its shape (BeyondBinary), continuous state, schedule and the body (ExpandingSpace), two fields (SoftRules), procedure vs resemblance (AgentsCircuits), storage precision (EdgeOfChaos); and the turmites and the SIR grid named as the moving and the probabilistic variations.",
+      "evidence": "algorithms/cellularautomata/noc_ch07/7_8_hexagon_ca_vr.gd:4,11,153-155; commons/artifacts/langton_swarm/langton_swarm.gd:5-10; algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd:5,47-49,94; natureofcode.com/cellular-automata/ 'Variations on Traditional CA'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_cellularautomata.031",
+      "title": "Conway's three design goals as the hall's edge: a rule tuned to sit on the edge of its own behaviour; MEET is 'fading away completely'",
+      "spec": "Gardner's 1970 column gives Conway's conditions: no initial pattern for which there is a simple proof of unlimited growth; patterns that apparently do grow without limit; simple patterns that grow and change and then end by fading away, settling, or oscillating. NOC reads this as 'a Wolfram class 4 CA' in Conway's own words. MEET - a glider into a block, the field empty by generation 6 (task .002) - is the hall's instance of the first ending.\n\nProposal: After the MEET paragraph: 'Conway chose these rules so that no beginning could be proved to grow for ever while some seemed to, and so that small beginnings would grow, change, and end in one of three ways: fading, settling, or repeating. You have just watched the first. The rule was tuned to sit on the edge of what it can do, which is the name of the hall three rooms on.' Fix the generation count with .002.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_BeyondBinary"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "CA_BeyondBinary",
+      "quote": "In this particular meeting, by generation 24 the field is empty.",
+      "why": "Gardner's 1970 column gives Conway's conditions: no initial pattern for which there is a simple proof of unlimited growth; patterns that apparently do grow without limit; simple patterns that grow and change and then end by fading away, settling, or oscillating. NOC reads this as 'a Wolfram class 4 CA' in Conway's own words. MEET - a glider into a block, the field empty by generation 6 (task .002) - is the hall's instance of the first ending.",
+      "proposal": "After the MEET paragraph: 'Conway chose these rules so that no beginning could be proved to grow for ever while some seemed to, and so that small beginnings would grow, change, and end in one of three ways: fading, settling, or repeating. You have just watched the first. The rule was tuned to sit on the edge of what it can do, which is the name of the hall three rooms on.' Fix the generation count with .002.",
+      "evidence": "natureofcode.com/cellular-automata/ 'The Game of Life' (Gardner's three conditions); commons/maps/CA_BeyondBinary/final.md MEET paragraph; task book_cellularautomata.002",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_cellularautomata.032",
+      "title": "Say that the fractional pull is a blur - image processing is a cellular automaton",
+      "spec": "NOC: 'image processing works with CA-like rules' - a blurred pixel is the average of its neighbours. EdgeOfChaos's coupling step, a[i]*(1-coupling) + neighbour mean*coupling, is that kernel; naming it connects the hall to every texture the noise and colour sequences wear.\n\nProposal: One sentence after the quoted clause: 'that averaging is the same operation a blur performs on a picture, each pixel pulled toward its neighbours; an image filter is a cellular automaton run once.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "Here the fractional update averages nearby values and adds matched forcing;",
+      "why": "NOC: 'image processing works with CA-like rules' - a blurred pixel is the average of its neighbours. EdgeOfChaos's coupling step, a[i]*(1-coupling) + neighbour mean*coupling, is that kernel; naming it connects the hall to every texture the noise and colour sequences wear.",
+      "proposal": "One sentence after the quoted clause: 'that averaging is the same operation a blur performs on a picture, each pixel pulled toward its neighbours; an image filter is a cellular automaton run once.'",
+      "evidence": "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd (va = a[i]*(1-coupling)+sa/n*coupling); natureofcode.com/cellular-automata/ 'Image Processing'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_cellularautomata.033",
+      "title": "The hall names promise other rooms: ElementaryRules holds a 3D three-state CA, GameOfLife holds Rule 30, BeyondBinary holds binary Life",
+      "spec": "NOC's section names are literal. The visitor reads the pearl names on the wall ('ca elementaryrules', 'ca gameoflife', 'ca beyondbinary') and meets a 26-neighbour three-state volume, the Rule 30 history bridge, and Conway's binary dish, in that order; the contents were dealt after the names. Tasks .006 and .003 already note that the visitor is never shown or told a hall's name.\n\nProposal: A sequence decision for Palle/Astra, not prose: rename the three pearls to what stands in them (e.g. 'a cell with a past', 'a history you can inhabit', 'a pattern visits an address' - the chapters' own titles), or re-deal the contents to the names. Until then the chapters' titles carry the truth and the wall names carry the promise.",
+      "effort": "half-day",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_ElementaryRules"
+      ],
+      "sequence_refs": [
+        "cellularautomata"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "CA_ElementaryRules (also CA_GameOfLife, CA_BeyondBinary)",
+      "quote": "",
+      "why": "NOC's section names are literal. The visitor reads the pearl names on the wall ('ca elementaryrules', 'ca gameoflife', 'ca beyondbinary') and meets a 26-neighbour three-state volume, the Rule 30 history bridge, and Conway's binary dish, in that order; the contents were dealt after the names. Tasks .006 and .003 already note that the visitor is never shown or told a hall's name.",
+      "proposal": "A sequence decision for Palle/Astra, not prose: rename the three pearls to what stands in them (e.g. 'a cell with a past', 'a history you can inhabit', 'a pattern visits an address' - the chapters' own titles), or re-deal the contents to the names. Until then the chapters' titles carry the truth and the wall names carry the promise.",
+      "evidence": "commons/data/book/cellularautomata.json pearls; commons/maps/sequences/cellularautomata.json; the three final.md titles",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "",
+      "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    }
+  ]
+}

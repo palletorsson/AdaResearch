@@ -1,0 +1,189 @@
+--- before/commons/maps/CA_GameOfLife/final.md
++++ after/commons/maps/CA_GameOfLife/final.md
+@@ -27,7 +27,15 @@
+ 
+ These lines come from `history_study.gd`, which calls the original bridge's solver. The record holds fifteen sites across and at most twenty-four rows. At the edges, left and right wrap. At the end of the record, this instrument stops adding rows. The first boundary belongs to the neighbourhood; the second belongs to our viewing budget.
+ 
+-Follow the gold line onto the tiles. Depth is doing the work of time. In the earlier volume, neighbours surrounded a cell within one three-dimensional state. Here a nearby row is an earlier or later moment. A solid-looking arrangement can hide that difference. None of the four choices has changed in this hall: it is Rule 30 again, three cells in a row, one row at a time. What has changed is where the past is kept.
++Leave the desk and walk along the margin beside the basin. The gold line meets your row. It crosses the tiles and climbs the lattice; back on the desk, the same generation is marked. Walk farther, then turn back. An earlier row returns to the gold, but the later rows have not gone away. Your return has undone nothing.
++
++Depth is doing the work of time. In the earlier volume, neighbours surrounded a cell within one three-dimensional state. Here a nearby row is an earlier or later moment. A solid-looking arrangement can hide that difference. None of the four choices has changed in this hall: it is Rule 30 again, three cells in a row, one row at a time. What has changed is where the past is kept.
++
++Stop beside a gap. The line can pass through it; your foot would need support. Beyond the last recorded row, the marker stays behind. Walking cannot supply a generation the machine has not made. If RUN is on, the record can keep growing while you revisit an earlier part. Looking back and running backwards are different acts.
++
++![The walking visitor selects one generation across the floor tiles and wall lattice.](images/walking-history.png)
++
++*The gold line follows a place in the record. The same pattern meets us as an image and as possible support.*
+ 
+ The same record is dressed three ways. On the desk, a one becomes a coloured bar. In the basin, it becomes a tile with collision. In the lattice, it becomes coloured infill in a bronze frame. There is one stored history, but its uses have different consequences. The frame stands independently; the pattern does not calculate structural engineering. The basin has a lower collecting floor and end ramps, and the museum passage continues alongside it.
+ 
+--- before/commons/maps/CA_GameOfLife/intent.md
++++ after/commons/maps/CA_GameOfLife/intent.md
+@@ -7,3 +7,6 @@
+ Critical opening: The gap valued in a screen can frustrate a crossing. Which additional mappings and bodies make that difference? A shared substrate permits multiple uses; it does not erase their consequences.
+ 
+ Retained: the lab room with its mounted apparatus, ca_columns, mirrored_cellular_automata and dark_sphere. Their detailed secondary encounters remain further work, not grounds for removing them or claiming Life/circuit mechanics for the bridge.
++
++
++25 September encounter: `follow:walk` makes the existing gold witness follow the visitor's body along the recorded bay. Walking back selects an earlier retained generation without rewinding the automaton, recolouring the record or changing collision. The witness extends onto the museum margin. Outside the bay, ROW remains available at the desk; beyond the record, no future row is invented. RUN can continue while the visitor looks back. No new interface or artifact replaces the existing collection.
+--- before/commons/maps/CA_GameOfLife/summary.md
++++ after/commons/maps/CA_GameOfLife/summary.md
+@@ -7,3 +7,6 @@
+ The primary offers STEP, RUN, REPLAY, SEED, FLIP X9 and ROW. It arrives held at generation 11 and records at most generation 23. Each mapping reads the same history. The tutorial asks the visitor to distinguish a spatial neighbour from another generation and to compare an ornamental gap with a gap in physical support.
+ 
+ Book text and supporting documents now describe the installed experiment. The earlier Conway Life discussion and six-station claims are archived with the before state; the actual Life encounter is in CA_BeyondBinary. Runtime evidence and remaining review tasks are under doc/space/ca-history-review-2026-09-13.
++
++
++The current encounter also lets walking select a stored row. All three gold witnesses follow the visitor in the recorded bay; the data, tiles and collision stay unchanged. The floor witness reaches the margin so the visitor can compare without entering the generated crossing. Thirty-seven native desktop checks pass, including seven mouse-ray control events and forward/backward walking. A supplied body covers the XR player-group convention; tracked headset, Quest and whole-gallery acceptance remain pending. See encounter-notes.md and the 25 September walking-history review.
+--- before/commons/maps/CA_GameOfLife/tutorial.md
++++ after/commons/maps/CA_GameOfLife/tutorial.md
+@@ -2,10 +2,10 @@
+ 
+ 1. At the desk, find the gold row in the flat record, stepping tiles and lattice. ROW moves attention through the retained record without changing it.
+ 2. From the rim, REPLAY to the beginning. Predict the next row, then STEP. Compare ordered left/centre/right bits with the answer in Rule 30.
+-3. Follow the same new row through all three mappings. Name which direction carries site address and which carries generation.
++3. Walk along the basin margin: gold follows the nearest recorded row through all three mappings. Walk back and check that later rows remain. Name which direction carries site address and which carries generation. Beyond the record, walking cannot select an unmade row.
+ 4. RUN to a fuller record. It stops after twenty-four rows; this is the display budget. X wraps according to the neighbourhood rule.
+ 5. Use SEED or FLIP X9 and repeat. Explain why later rows are recalculated when the beginning changes.
+ 6. Compare a gap in ornament with a gap in support. Inspect from the side passage before entering the shallow basin; use the end ramps to return. Replay and seed controls alter support, so operate them from the desk on the museum floor.
+ 7. Continue into the retained rear collection, then the next hall's Life dish. The lab, columns and mirrored work are secondary comparisons, not evidence that this Rule 30 history implements Conway Life or a working universal circuit.
+ 
+-Primary: `ca_bridge:0:0#study:history#plinth:0`. Its three mappings belong to this one anchored encounter. Existing secondary roles and the orb remain.
++Primary: `ca_bridge:0:0#study:history#plinth:0#follow:walk`. Its three mappings belong to this one anchored encounter. Existing secondary roles and the orb remain.
+--- before/commons/maps/CA_GameOfLife/technical.md
++++ after/commons/maps/CA_GameOfLife/technical.md
+@@ -19,6 +19,14 @@
+ history.append(next_row)
+ ```
+ 
++## Walking through the record — 25 September
++
++The map opts into `#follow:walk`. `history_study.gd` reads CharacterBody3D roots from `em_walker` and `player_body`, in the study's local coordinates. Within the recorded bay and its margins, `floor(z / CELL + 0.5)` selects the nearest retained generation. The deck, screen and record witnesses move together. Their contents and support shapes do not change. No body measurement is written into the automaton.
++
++The selection region excludes the desk, neighbouring halls, future rows and bodies above the display. Leaving it retains the selected row; ROW at the desk remains available. Walking does not pause RUN. The floor witness extends to 8.8 m across the margin; it is a visual marker, not support. A ground inscription introduces this use without another control panel. Unconfigured history studies keep their 6.1 m witness and manual selection.
++
++Current native results and limitations: [encounter-notes.md](encounter-notes.md).
++
+ ## State and controls
+ 
+ The specimen arrives held with generations 0–11. REPLAY resets to generation 0. STEP appends one generation and holds; RUN appends at most one row per 0.5-second timer interval, stopping at generation 23. ROW selects an earlier recorded row without changing history. SEED cycles SINGLE, PAIR and a local RNG seeded with 23090 at density 0.45. FLIP X9 toggles only site nine of that beginning; both seed controls replay. The museum clock is unaffected.
+--- before/commons/maps/CA_GameOfLife/artifacts.md
++++ after/commons/maps/CA_GameOfLife/artifacts.md
+@@ -1,6 +1,6 @@
+ # A history you can inhabit — retained collection
+ 
+-The hall contains five artifacts. The primary `ca_bridge` is configured with `study:history`: its desk, stepping tiles and lattice are three views of one stored Rule 30 history, with six controls on the desk and an upright housed readout.
++The hall contains five artifacts. The primary `ca_bridge` is configured with `study:history`: its desk, stepping tiles and lattice are three views of one stored Rule 30 history, with six controls on the desk and an upright housed readout. The map also opts into `follow:walk`: the visitor selects a retained row by walking beside it, and the same gold witness moves across all three views without altering the history or support.
+ 
+ The rear gallery retains `lab_room` with its mounted `turing_apparatus`, `ca_columns:0:-0.5:0.2`, `mirrored_cellular_automata:0:-0.5` and the decorative `dark_sphere`. The first three remain secondary, the orb remains decoration. Their existing work is available for further comparisons and needs separate interaction review. Neither a mirrored image nor a machine-like enclosure establishes a particular automaton law by itself.
+ 
+--- before/commons/maps/CA_GameOfLife/field_notes.md
++++ after/commons/maps/CA_GameOfLife/field_notes.md
+@@ -11,3 +11,10 @@
+ Museum applications to develop through the chapter: stored CA history as screens, perforated cladding, railings and woven surfaces; moving Life patterns as agents that light neighbouring objects; proximity entering a surface's update in ExpandingSpace; coupled fields as changing wall or garment material in SoftRules after its live simulation exists. Each application must expose its actual mapping, inputs and physical consequences. A common appearance alone does not establish shared state or interaction.
+ 
+ Runtime evidence and remaining limits are recorded separately in doc/space/ca-history-review-2026-09-13. Headset comfort and performance remain unverified.
++
++
++## 25 September — returning does not undo
++
++The existing history encounter is mature enough to keep. The next addition connects its gold witness to the body: walking along the margin selects an existing row; turning back revisits it without erasing its descendants. The stored beginning, local law, update clock and three receivers are preserved. The chapter gains this encounter and one original Godot photograph; both code excerpts and the ornament/support argument remain.
++
++Thirty-seven native checks and seven actual desktop pointer events pass. A supplied CharacterBody follows rows 0, 3, 10 and back to 5. All stored states, colours and collision flags remain unchanged by walking. Existing six controls, record budget, ordinary unconfigured study and the XR player-group convention are covered. The latter is not a tracked headset trial. Full-gallery, Quest and learner acceptance remain open. Existing engine, renderer, UID, registry and generated-art material warnings are kept in the review log.
+--- before/commons/maps/CA_GameOfLife/encounter-notes.md
++++ after/commons/maps/CA_GameOfLife/encounter-notes.md
+@@ -0,0 +1,15 @@
++# Walking history — 25 September 2026
++
++The existing Rule 30 history study gains `follow:walk` only in this map. CharacterBody3D roots in `em_walker` or `player_body` select a recorded row by local z. The selection changes only the three gold witnesses and the readout. It does not change the history, colours, collision, update clock or seed.
++
++The floor witness is widened from 6.1 to 8.8 m to reach the independent museum margin. Its line supplies no collision. A ground inscription introduces walking; the six existing controls remain. The selected row stays on departure. The desk lies outside the selection region, so its ROW control remains manual. Beyond the most recent row there is no invented continuation. RUN may keep appending rows while the visitor reads an earlier one.
++
++## Native verification
++
++37 checks pass. Seven real desktop mouse-ray events exercise the six controls. A supplied museum body walks to rows 0, 3, 10 and back to 5; every witness agrees while all stored rows, colours, visible instance positions and support flags remain equal to the arrival snapshot. Unrecorded space and out-of-bay/above-display bodies are ignored. A supplied player_body fixture exercises the XR group convention, not a tracked headset. The original 24-row limit, replay, seed/one-bit edits and unconfigured study remain intact.
++
++All five authored artifacts and their placements remain. The actual native museum screenshots and exact diff are in `doc/book/iterations/2026-09-25-ca-walking-history/index.html`. Full native log and source snapshots are retained. The final process exits 0 without GDScript errors; existing UID, environment, registry, renderer and generated-art material/build warnings remain. This pass does not measure Quest performance, whole-gallery traversal, tracked-hand reach, headset comfort or learner acceptance. A generated tiled pattern is not certified as a continuous traversable crossing.
++
++## Writing decision
++
++Keep the mature chapter. Add the walk and its reversal as an encounter with a retained past, followed by the distinction between a marker crossing a gap and a foot needing support. Preserve both code excerpts, all original arguments and the secondary collection. The historical map ID stays; its title remains “A history you can inhabit.” The actual Conway Life encounter is next, in CA_BeyondBinary. The rear Turing lab remains a secondary encounter requiring separate review.
+--- before/commons/maps/CA_GameOfLife/map_data.json
++++ after/commons/maps/CA_GameOfLife/map_data.json
+@@ -1448,7 +1448,7 @@
+         "",
+         "",
+         "",
+-        "ca_bridge:0:0#study:history#plinth:0",
++        "ca_bridge:0:0#study:history#plinth:0#follow:walk",
+         "",
+         "",
+         "",
+--- before/algorithms/cellularautomata/ca_bridge/history_study.gd
++++ after/algorithms/cellularautomata/ca_bridge/history_study.gd
+@@ -23,9 +23,12 @@
+ var screen_cursor: MeshInstance3D
+ var record_cursor: MeshInstance3D
+ var last_step_usec: int = 0
++var walk_follow: bool = false
++var walking_row: bool = false
+ 
+ func _ready() -> void:
+ 	work = get_parent()
++	walk_follow = str(work.get_meta("config_follow", "")) == "walk"
+ 	work.width = WIDTH
+ 	work.length = ROWS
+ 	work.rule = 30
+@@ -104,6 +107,30 @@
+ 	if elapsed >= 0.5:
+ 		elapsed = 0.0
+ 		_advance()
++
++## Walking selects an existing row. It never rewinds the automaton or edits support.
++## Body roots, rather than cameras, work with both desktop and XR locomotion.
++func _physics_process(_delta: float) -> void:
++	if not walk_follow or history.is_empty(): return
++	var row: int = -1
++	var visitors: Array = get_tree().get_nodes_in_group("em_walker")
++	visitors.append_array(get_tree().get_nodes_in_group("player_body"))
++	for visitor in visitors:
++		if not visitor is CharacterBody3D: continue
++		var p: Vector3 = to_local(visitor.global_position)
++		# Only this record and its margin; ignore the desk, future rows and other halls.
++		if p.x < -4.6 or p.x > 4.6 or p.y < -0.85 or p.y > 0.5: continue
++		if p.z < -CELL*0.5 or p.z >= (history.size()-0.5)*CELL: continue
++		row = clampi(floori(p.z/CELL+0.5),0,history.size()-1)
++		break
++	var inside: bool = row >= 0
++	var changed: bool = inside != walking_row
++	walking_row = inside
++	if inside and selected != row:
++		selected = row
++		_refresh_cursor()
++		changed = true
++	if changed: _refresh_readout()
+ 
+ func cell_position(x: int, generation: int) -> Vector3:
+ 	return Vector3((x - 7) * CELL, -0.11, generation * CELL)
+@@ -146,7 +173,7 @@
+ 	return {"generation":history.size()-1,"selected":selected,"running":running,
+ 		"seed_mode":seed_mode,"flipped":flipped,"rule":work.rule,
+ 		"occupied":deck.multimesh.visible_instance_count,"history":history.duplicate(true),
+-		"step_usec":last_step_usec}
++		"step_usec":last_step_usec,"walk_follow":walk_follow,"walking_row":walking_row}
+ 
+ func _build_space() -> void:
+ 	# A shallow collecting floor under the holes; the museum path runs alongside.
+@@ -175,6 +202,12 @@
+ 	for y: float in [0.22,3.22]:
+ 		box("LatticeRail", Vector3(0.12,0.09,9.85), Vector3(3.45,y,4.6), Color("b08c66"), true)
+ 	deck_cursor = box("FollowDeck", Vector3(6.1,0.018,0.022), Vector3(0,0.02,0), Color("ffcc72"))
++	if walk_follow:
++		(deck_cursor.mesh as BoxMesh).size.x = 8.8
++		var walk_label := _label("WalkTheRecord", "WALK THE RECORD / GOLD FOLLOWS YOUR ROW", 30)
++		walk_label.position = Vector3(-4.05,0.025,-0.72)
++		walk_label.rotation_degrees.x = -90
++		add_child(walk_label)
+ 	screen_cursor = box("FollowLattice", Vector3(0.09,2.75,0.025), Vector3(3.45,1.69,0), Color("ffcc72"))
+ 	var heading := _label("LatticeHeading", "THE SAME HISTORY / WORN BY A WALL", 32)
+ 	heading.position = Vector3(3.35,3.45,4.6)

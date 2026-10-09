@@ -1,0 +1,819 @@
+{
+	"checks": [
+		{
+			"message": "grammar_provenance loads through the registry and furniture",
+			"passed": true
+		},
+		{
+			"message": "Explicit opt-out preserves the old mounting behaviour",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance loads through the registry and furniture",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: actual grab moves DEPTH",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / metre scale: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: actual grab moves DEPTH",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 0.6, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Repeated mount synchronization does not drift",
+			"passed": true
+		},
+		{
+			"message": "Mount adapter does not run an idle frame loop",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: actual grab moves DEPTH",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "grammar_provenance / scaled 1.4, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Repeated mount synchronization does not drift",
+			"passed": true
+		},
+		{
+			"message": "Mount adapter does not run an idle frame loop",
+			"passed": true
+		},
+		{
+			"message": "One mount adapter survives all changes",
+			"passed": true
+		},
+		{
+			"message": "Culling furniture hides its console too",
+			"passed": true
+		},
+		{
+			"message": "Unloading furniture frees its controls",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics loads through the registry and furniture",
+			"passed": true
+		},
+		{
+			"message": "Explicit opt-out preserves the old mounting behaviour",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics loads through the registry and furniture",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: actual grab moves INERTIA",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_1",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / metre scale: mounted button changes the scoring rule",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_0",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: actual grab moves INERTIA",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_1",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 0.6, rotated, elevated floor reference: mounted button changes the scoring rule",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_0",
+			"passed": true
+		},
+		{
+			"message": "Repeated mount synchronization does not drift",
+			"passed": true
+		},
+		{
+			"message": "Mount adapter does not run an idle frame loop",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: actual grab moves INERTIA",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_1",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / scaled 1.4, rotated, elevated floor reference: mounted button changes the scoring rule",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_0",
+			"passed": true
+		},
+		{
+			"message": "Repeated mount synchronization does not drift",
+			"passed": true
+		},
+		{
+			"message": "Mount adapter does not run an idle frame loop",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: actual grab moves INERTIA",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_1",
+			"passed": true
+		},
+		{
+			"message": "fitness_landscape_politics / after landscape rebuild: mounted button changes the scoring rule",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Choice_0",
+			"passed": true
+		},
+		{
+			"message": "One mount adapter survives all changes",
+			"passed": true
+		},
+		{
+			"message": "Culling furniture hides its console too",
+			"passed": true
+		},
+		{
+			"message": "Unloading furniture frees its controls",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked loads through the registry and furniture",
+			"passed": true
+		},
+		{
+			"message": "Explicit opt-out preserves the old mounting behaviour",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked loads through the registry and furniture",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: actual grab moves LAMBDA",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: actual grab moves SIM SPEED",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Action_0",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / metre scale: mounted restart button resets model time",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: actual grab moves LAMBDA",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: actual grab moves SIM SPEED",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Action_0",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 0.6, rotated, elevated floor reference: mounted restart button resets model time",
+			"passed": true
+		},
+		{
+			"message": "Repeated mount synchronization does not drift",
+			"passed": true
+		},
+		{
+			"message": "Mount adapter does not run an idle frame loop",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: actual grab moves LAMBDA",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: actual grab moves SIM SPEED",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Action_0",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / scaled 1.4, rotated, elevated floor reference: mounted restart button resets model time",
+			"passed": true
+		},
+		{
+			"message": "Repeated mount synchronization does not drift",
+			"passed": true
+		},
+		{
+			"message": "Mount adapter does not run an idle frame loop",
+			"passed": true
+		},
+		{
+			"message": "Mounted rebuild keeps the withheld handle absent",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: actual grab moves SIM SPEED",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Action_0",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after withheld paired rebuild: mounted restart button resets model time",
+			"passed": true
+		},
+		{
+			"message": "Mounted clamped rebuild retains the access restriction",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: specimen stays on the furniture surface",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: hardware and support keep metre scale",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: console keeps its authored working height above the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: stand returns to the floor reference",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: console casing and support clear the furniture lip",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: text remains flat on surfaces",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: actual grab moves LAMBDA",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: actual grab moves SIM SPEED",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: grab updates the artifact model",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: pointer reaches physical rail",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: pointer restores chosen value",
+			"passed": true
+		},
+		{
+			"message": "Pointer reaches mounted button Action_0",
+			"passed": true
+		},
+		{
+			"message": "edge_of_chaos_unlocked / after unlocked paired rebuild: mounted restart button resets model time",
+			"passed": true
+		},
+		{
+			"message": "One mount adapter survives all changes",
+			"passed": true
+		},
+		{
+			"message": "Culling furniture hides its console too",
+			"passed": true
+		},
+		{
+			"message": "Unloading furniture frees its controls",
+			"passed": true
+		},
+		{
+			"message": "Guarded display keeps authored enclosure instead of moving controls outside",
+			"passed": true
+		},
+		{
+			"message": "Token configuration supports an explicit false before tree entry",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"headset_tested": false,
+	"measurements": [
+		{
+			"artifact": "grammar_provenance",
+			"distance": 1.70000004768372,
+			"floor_controls": false,
+			"height": 0.910000026226044,
+			"scale": 1.0
+		},
+		{
+			"artifact": "grammar_provenance",
+			"distance": 2.03999996185303,
+			"floor_controls": true,
+			"height": 0.860000014305115,
+			"scale": 1.0
+		},
+		{
+			"artifact": "fitness_landscape_politics",
+			"distance": 1.8400000333786,
+			"floor_controls": false,
+			"height": 1.0699999332428,
+			"scale": 1.0
+		},
+		{
+			"artifact": "fitness_landscape_politics",
+			"distance": 1.8400000333786,
+			"floor_controls": true,
+			"height": 0.759999990463257,
+			"scale": 1.0
+		},
+		{
+			"artifact": "edge_of_chaos_unlocked",
+			"distance": 1.0,
+			"floor_controls": false,
+			"height": 1.19000005722046,
+			"scale": 1.0
+		},
+		{
+			"artifact": "edge_of_chaos_unlocked",
+			"distance": 1.63999998569489,
+			"floor_controls": true,
+			"height": 0.879999995231628,
+			"scale": 1.0
+		}
+	],
+	"scope": "Real furniture and artifact fixtures; synthetic scale/rotation/floor-reference stress cases. Not complete hall reach or Quest performance validation."
+}

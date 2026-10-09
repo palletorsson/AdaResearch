@@ -1,0 +1,288 @@
+# Trans_Translation — field notes
+
+> Field notes hold what the wall text cannot carry. `final.md` is for the
+> visitor. This is for us.
+
+## 23 September — the record follows the handle
+
+The current nineteen artifact placements and seven rides are listed in `artifacts.md`. Earlier notes below concern earlier arrangements; the five-pickup gate account is historical and does not describe today’s course.
+
+The new trace follows the accepted knob position after the door’s projection/clamp. A proposed diagonal can therefore leave a vertical record. This makes the earlier trace question particular: what body was sampled, and what had already been done to its movement? The book keeps the existing vector/projection excerpts and reduces runtime-plumbing language around pickup contact. The return journey is enough to disclose that a collected cube has not returned.
+
+Fifty-three focused native museum checks pass with supplied knob positions and pickup/drop signals; this does not substitute for a hand/controller trial. The existing seven-ride tests were not repeated because no carrier, landing, pickup or floor geometry changed. Native images inspected. The book’s three-panel figure uses the live trace on the same production artifact, in three separate trials.
+
+## Exactness decisions
+
+- **The gate counts the GameManager score, not this hall's cubes.**
+  `pickup_gate.gd` connects `score_updated` and opens when the running score
+  reaches `required_pickups` (7 here). Five `pick_up_cube` are placed
+  (points_value 1 each); the other two come from earlier halls. The first draft
+  said "seven cubes". The text now says the gate wants seven on the score you
+  carry.
+- **science_screen `mode:point`** is a real mode (`_set_explicit_mode`: point,
+  line, trace/draw, triangle, net/cube): it tracks a grabbed point. The text
+  says carry a cube in front of it.
+- **synthesis_stand `#subject:pick_up_cube#mode:hero`**: the verdict file
+  `commons/data/dna_synthesis.json` rules pick_up_cube a SERIES on axis `stock`
+  (wire, steel, clay, crate, foam); a hero of a series-verdict subject pins the
+  top evidence variant. The text names the five stocks.
+- **Axes in this hall**: transport cubes `tc:3:z`, `tc:1:y:auto`, `tc:3:y`,
+  `tc:2:y`, `tc:6:y`; the two axis cubes placed are z and y. "Nothing asks you
+  to go sideways" is from the utilities.
+- **transform_composition_workbench**: pair 2 (rotation × uniform scale)
+  commutes, per its description and probe item 6.
+
+## Continuity
+
+player_trace from Point_Trace (the line as positions); the void as invitation
+from the blurb.
+
+## Verified critique (2026-09-02) — APPLIED
+
+A ten-agent panel (seven room critics, an arc reader, an exactness sweep, one
+adversarial editor) judged this text against the primitives rooms and against the
+artifact scripts. **12 findings survived the editor, 7 of them factually wrong.**
+Twenty-two findings across the chapter were rejected as taste. Every finding below
+was applied in the whole-chapter rewrite of 2026-09-02; the quotes are what the
+text used to say.
+
+The chapter-wide error: **a `pick_up_cube` cannot be carried.** No pickable, no
+rigid body, no grab. An `Area3D` whose `body_entered` fires `collect()`, adds a
+point, chirps and frees the cube. Its own header: "collected by walking into it."
+
+The trap: **the `.tscn` overrides the `.gd` exports.** Reading `@export` defaults
+without opening the scene produced wrong numbers twice in this chapter.
+
+### [wrong] Cubes to carry, five of them, scattered on both sides of the void. Carrying is the smallest translation there
+
+**Problem.** You cannot carry a pick_up_cube; walking into it deletes it. And "nothing about the cube changes" is contradicted by the cube itself, which spins at 2 rad/s and bobs 0.2 m the whole time. One of the five also stands on a void cell, so "scattered on both sides" undersells what you see.
+
+**Fix.** Five cubes, each turning on its own axis and bobbing, four standing on floor and one hanging over the hole near the entrance. You cannot pick one up. Walk into it and it is gone with a rising chirp, and the score is one larger. The only thing translated here is you: the cube never moves at all, and the count is what your crossing leaves behind.
+
+**Evidence.** Verified: pick_up_cube.gd:142-152 (rotate_y 2.0, bob 0.2), :218-249, :258-261; the cube at interactables row 3 col 5 sits over structure row 3 col 5, which is "0".
+
+### [wrong] The transport cube does not cross the void; it is at one end, and then at the other, and the only thing the ma
+
+**Problem.** This describes the one-line snippet at the top of the page, not the artifact. The transport cube crosses continuously: on body_entered it waits a second, then move_toward at 2.0 m per second, and on every frame it adds its own movement delta to the carried player's global position, waits three seconds at the far end and drives back. It is the slowest thing in the hall, and riding it is the room's central bodily fact. The thing that does jump is the teleporter at the exit, which the text never names. This is the closing paragraph, so the room lands its argument on a false observation.
+
+**Fix.** The transport cube does cross the void, and slowly. Stand on it, wait a second, and it moves at two metres a second toward the far side, and on every frame it adds the distance it just moved to your position as well as to its own. You are not transported. You are added to, frame by frame, by a cube doing to you exactly what the first line of code did to the object.
+
+**Evidence.** Verified in commons/scenes/mapobjects/transport_cube.gd:8-13 (move_speed 2.0, return_delay 3.0, start_delay 1.0) and :169-219 (move_toward plus carried_player.global_position += movement_delta).
+
+### [wrong] The screen is set to track a point. Carry a cube in front of it and the screen draws where the cube goes, as c
+
+**Problem.** The screen tracks nothing here and cannot be made to. #mode:point locks the mode and runs one scan, which latches a sibling only if its lookup name or node name contains the substring "point" and it has a freeze property. Nothing in this map matches either test, so _tracking_point stays null and the tracker paints its dot dead at the origin with the readout at plus zero. Nothing can be carried in front of it either. What the screen genuinely does goes unmentioned: it loads this map's blurb.md into the bar along the bottom.
+
+**Fix.** The screen is set to track a point, and there is no point in this hall for it to track. It wants a neighbour with the word point in its name and a body it can hold, finds none, and draws the instrument anyway: POINT POSITION, P = (x, y), a grid, and a dot pinned at the origin reading plus zero with a trail of nothing. Along the bottom it recites this map's own blurb. A diagram of translation with the translation left out is the most honest object in the room.
+
+**Evidence.** Verified: science_screen.gd:405-453 (_set_explicit_mode, _mode_locked), :466-477 (locked modes skip the scan and only call _connect_tracking_for_mode), :1275-1303 (the "point" plus freeze test), :1905-1910 (pos = ZERO when null), :324-372 (blurb.md into the info bar).
+
+### [wrong] Nothing here turns and nothing grows.
+
+**Problem.** Three things turn and one grows, and the growing one is how you cross the widest hole. Every pick_up_cube runs rotate_y at 2 rad/s. The dark sphere turns at 0.15 rad/s. And the cell in the middle of the full-width chasm at row 17 is sc:3:-0.5:1:-1, a scale cube: it swells to a 3 m cube at 1 unit per second, holds four seconds with its collider walkable, then shrinks away and starts again. The sentence carries the room's purity claim, so it has to be true, and the honest version names the crossing the text otherwise omits entirely.
+
+**Fix.** Nothing here is reshaped by being moved, which is not the same as nothing turning: the cubes you collect spin on the spot, and the cube in the widest chasm swells to three metres, holds for four seconds while you walk across it, and shrinks away again.
+
+**Evidence.** Verified: map_data.json utilities row 17 carries sc:3:-0.5:1:-1 and structure rows 17 and 18 are entirely void; scale_cube.gd:9-14 (max 3.0, speed 1.0, pause_at_max 4.0) and :97-125 (is_walkable at 0.95 of max); GridUtilitiesComponent sc branch reads max, min, offset_x, y_offset in that order.
+
+### [wrong] The measurements ruled the family a series, and this plinth, told to show a hero, pins the one variant the mea
+
+**Problem.** Both claims are false. A forced hero of a series verdict does not pin the highest-ranked variant; _build_hero takes order[order.size() - 1], the far end of the measured ladder, which the export's own comment states. For pick_up_cube that order is wire, steel, clay, crate, foam, so the plinth carries foam. And there is no number: the plaque appends a percentage only when score is above zero, and the pick_up_cube verdict has no score key at all. The plaque reads "pick_up_cube  stock=foam" and stops.
+
+**Fix.** The measurements ruled the family a series, so there is no hero to pin. Told to show one anyway, the plinth takes the far end of the measured ladder and stands it up: foam. The plaque says pick_up_cube stock=foam and nothing else, because a series verdict carries no single number to print. Every cube in the room is the near end, wire, the shipped form nobody chose.
+
+**Evidence.** Verified: synthesis_stand.gd:105-132 (order[-1] at :107-111, score gate at :127-131) and :26; commons/data/dna_synthesis.json verdicts.pick_up_cube has verdict "series", order wire/steel/clay/crate/foam, span and evidence, and no score key.
+
+### [wrong] Every step you take writes another point, and the line behind you is translation and nothing else: a time-inde
+
+**Problem.** The line is not translation and nothing else. velocity_color defaults to true and the .tscn does not override it, so the rebuild sets a per-vertex colour from speed, lerping the green trail toward amber and reaching full amber at 2.0 m per second. The recorder keeps three parallel arrays: points, times and speeds. The room's opening thesis is that a path can be kept as nothing but positions, and the room's first artifact keeps the derivative too. That is not a flaw to hide; it is the best complication in the hall, and the exemplars do exactly this.
+
+**Fix.** Every step you take writes another point, and the line behind you is not only where you were. It is tinted by how fast you got there, green where you dawdled and amber where you ran, full amber at two metres a second. The recorder keeps three lists: positions, times, speeds. The first sentence of this room says a path can be kept as nothing but positions, and the first thing in it keeps more.
+
+**Evidence.** Verified: player_trace.gd:28-30, :390-399 (three arrays), :466-469 (_velocity_to_color), :505-521 (per-vertex colour); velocity_color does not appear in player_trace.tscn.
+
+### [wrong] Translation with anything is not that exception, and you will see why in the rotation halls.
+
+**Problem.** Two translations always commute, and this is the translation hall, so the sentence throws away the room's strongest available claim and states a falsehood to do it. The workbench never tests it either: its four pairs are rotate Y with translate X, rotate Z with uniform scale, translate X with scale, and two rotations. Translation composed with translation is not on the slider, and naming that absence is more interesting than the false generalisation.
+
+**Fix.** None of the four pairs is the one this hall is about. Two translations always commute, whatever their directions and however many, which is why nothing you do in this room has an order: take the cubes in any sequence and you reach the gate with the same count. Translation is the operation that does not care, and the rotation halls are where that stops being true.
+
+**Evidence.** Verified: transform_composition_workbench.gd:180-216 defines exactly those four pairs.
+
+### [weak] A dark sphere that stays still while you cross.
+
+**Problem.** It stays in its cell, but it is not still: _process turns it on Y at 0.15 rad/s, wobbles it on X, and pulses its emission between 0.05 and 0.35. In a hall whose second paragraph is being corrected because it claims nothing turns, singling this out as the still thing puts the room's one honest control in the wrong category. The precise fact is better: it is the only object here that never changes position, and it does everything else.
+
+**Fix.** A dark sphere that never leaves its cell while you cross. It is not still: it turns slowly, it wobbles, and its glow breathes between dim and dimmer. It is the room's control, and a strict one, because the only thing it refuses to do is the one thing everything else here does.
+
+**Evidence.** Verified: dark_sphere.gd:455-458 and :589-609. Keeping this consistent with the corrected "nothing here turns" sentence is the point.
+
+### [weak] <!-- @z_translation_cube -->
+
+**Problem.** The region opened for the z cube contains nothing. Both cubes are covered in the paragraph under the y tag, so anything reading a region as its artifact's text gets an empty string for z and a doubled paragraph for y, and the visitor never learns why this is the member the family is proudest of. Its rail runs into the picture, so the same displacement is read almost entirely as a change of size, which is precisely the confusion a translation room exists to clear up.
+
+**Fix.** Put a paragraph in the empty region: "A cube on a rail that runs away from you, sliding forty centimetres out and forty back, with four ghosts of itself shrinking behind it. Watch what your eye does. Depth is the one direction in which a pure displacement is read as a change of size, and nothing about the cube has changed at all."
+
+**Evidence.** Verified: final.md lines 18-21 leave the z region empty; axis_translation_cube.gd:29-43 gives travel 0.4 m, cube 0.15 m and four ghosts, and z_translation_cube.tscn sets the depth course. No exemplar leaves a tag region empty.
+
+### [weak] Walkways cross them, and transport cubes shuttle over gaps your feet cannot, rising and falling and sliding on
+
+**Problem.** There is one walkway, not walkways: a single walkable prism at row 8 column 2, and it does not span anything, because the cells either side of it are void and the cell behind it is a wall two high. It is a ramp. The plural comes from blurb.md, which is the map's own prose rather than its code. Meanwhile the crossing the sentence should be naming, the scale cube in the full-width chasm, is absent from the whole page.
+
+**Fix.** One ramp, five transport cubes that lift and slide on a single axis apiece, and in the widest chasm a cube that grows until you can stand on it. The whole room is displacement made into infrastructure.
+
+**Evidence.** Verified: one wp:0:0.5 at utilities row 8 col 2 with structure row 8 reading void at cols 1 and 3 and row 9 col 2 reading "2"; five tc cells (one z, four y); the sc cell at row 17.
+
+### [polish] It wants seven on the score you have been carrying since the first hall, and it is closed until the count gets
+
+**Problem.** True, and it leaves out the object standing beside the gate that makes the claim checkable. The two sp cells in this map are not spawn points, whatever the map's own utility_definitions block says: sp resolves to score_cube.tscn, a cube with a Label3D showing GameManager's running score. One stands a row from the gate. The gate and the cube are reading the same integer, which is the paragraph's whole argument made visible.
+
+**Fix.** It wants seven on the score you have been carrying since the first hall, the same number the cube beside it is displaying, and it is closed until the count gets there and open the moment it does.
+
+**Evidence.** Verified: UtilityRegistry.gd maps "sp" to score points, score_cube.tscn; the map's own utility_definitions calls it a spawn and nothing reads that. sp sits at row 20 col 3, the gate at row 21 col 5.
+
+### [polish] The same tetrahedron is shown twice, done in one order on the left and the other order on the right, and three
+
+**Problem.** Three tetrahedra stand on the workbench, not two. _build_stage builds a pale untransformed ghost in the centre between the two results, with a trajectory arrow from the ghost's centroid to each, blue to the left and pink to the right. The ghost is what makes the two results legible as two answers to one question, and there is a badge over the stage that reads commutes or non-commutative as you move the slider.
+
+**Fix.** The same tetrahedron is shown three times: pale and untransformed in the middle, then done in one order on the left and the other on the right, with an arrow from the ghost to each result. Three of the four pairs land in different places, and a badge over the stage says so.
+
+**Evidence.** Verified: transform_composition_workbench.gd:309-313 and :350-358 (ghost), :387-398 (arrows in color_left and color_right), :54-60 (badge).
+
+## The rethink (2026-09-05): the hole is the way
+
+Palle, after the three galleries: *"Do you understand the syntax and the
+principal of these maps? It is all about how transformation creates empty
+space. So the holes are the pathway up down to the side as a result of
+translation rotation and scale."* And when the first draft answered with walls
+that open and a cube that fills a pit: *"I mean not fill hole that is another
+question I mean just structure 0."* The ruling is in
+`commons/data/red_thread_rulings.json`; the rebuild is commit 0298271bd; the
+generator that made it (traces, banks and cell-sharing checked) is the session's
+`rethink2.py`. **Every `0` cell is the trace of one ride, and the ride is the
+only way through it.** A crossing hole is ringed by walls; a spectacle hole (a
+rolling cube, a growing cube) keeps floor round it. Mario cubes stand where the
+holes lead.
+
+**What the holes are now.** Three slots along z from row 5 (`tc:4:z` plain at
+x2, `#rot:90` at x5 in a 3-wide slot, `#scale:1.3` at x8; rows 6-8 void, walls
+between); a slot to the side at row 13 (`tc:7:x`, x2-7 void, walled at (1,14)
+and (8,12) so the ride is the way); three holes in the front of a 2-plateau at
+row 15 with lifts standing in them (`tc:1.5:y:auto` plain, `#rot:90` in a
+3-wide notch, `#scale:1.25`); one slot down through the plateau
+(`tc:2.24:0,-1,2` from (4,16) through (4,17) into (4,18)). Eight Mario cubes;
+two pick-ups added at (1,9) and (7,16) so the gate's seven exist in the hall.
+The ramp, the old lifts and the scale cube in the chasm are gone. The other
+session's rows (structure and interactables row 0, row 23) were not touched.
+
+**Templates learned, and what each cost.**
+
+- **The ferry distance is the void's depth plus one.** The cube ends EMBEDDED
+  in the far bank, flush with it (Trans_Introduction's `tc:4:z:auto` over rows
+  6-8). A ride that stops in the last void cell strands the rider a metre
+  short, which is what once stranded Palle between two chapters.
+- **A ride in a void cell stands half a metre down.** `GridCommon.surface_world_y(0)`
+  is 0, so the cube's top is at 0.5 against a floor top of 1.0. A hole in a
+  plateau's front is entered by dropping in, and `tc:1.5:y:auto` rises flush to
+  the plateau top at 2.0. Plateaus exist only in the embedded-grid halls
+  (Translation, AxisDecomposition, Rotation); the museum's door halls read
+  height 2 as wall.
+- **A straight ride needs a 1-wide slot; a turning one (`#rot`) needs 3**,
+  because a 1 m cube at 45 degrees is 1.41 m across and would pass through the
+  walls.
+- **The plank is a 2.2 m cube at y -0.6** at the centre of a 3x3 hole: its top
+  at 0.5, its corners 1.55 out at 45 degrees (touching the banks) and 1.1 at
+  rest (a 0.4 m gap). Crossing is a step over the gap and a half-metre step up
+  at the far bank, the template's own terms; `rc:90` pauses closed at both
+  ends and is open mid-sweep, `rc:45` pauses open. A continuous `rc` is a
+  StaticBody turned by script, no platform velocity: a rider is not carried,
+  so rolling cubes are spectacle and a turntable is crossed on foot.
+- **The scale cube goes at the LEFT column of its 3x3 hole** (`sc:3:0.5:1:0`,
+  offset_x 1 puts the centre in the middle). The galleries commit had it at
+  the centre column, overhanging the bank by a metre.
+- **The pathfinder read `int(distance)` and only the words x, y, z.** `tc:1.5`,
+  `tc:4.24:1,0,1` and `tc:2.24:0,-1,2` were dropped in silence and their far
+  sides reported unreachable. `tools/map_pathfinder.py` now reads floats,
+  signed axes and vectors, and a plank or turntable joins its banks two cells
+  out; a cube rolling about x or z joins nothing.
+- **The Mario cube took the first node named DarkSphere in the whole tree**,
+  which in the museum could be another hall's; it now takes the nearest
+  (`commons/artifacts/mario_cube/mario_cube.gd`). In this hall that is the
+  room's own sphere, so the first crossing removes the room's control, and the
+  wall text says so.
+- **Rides are utilities, artifacts are placements.** The museum reads a hall's
+  structure and utilities live, but a door hall's artifacts come from
+  `ada_run/em_plan.json`: the five transformation rows were re-derived from
+  the maps and re-baked on 2026-09-05. A full `em_map_halls.py --apply` would
+  have re-derived 23 rows other sessions were editing, so the patch was partial
+  and says so in the plan's `_map_halls` stamp.
+
+**Open.** Nobody has walked the rebuilt hall in VR. The rides' auto cycle is
+5.5 s (start delay 1, travel at 2 m/s, return delay 3); a rider who steps off
+mid-ride is put back to size. The `t` at (5,22) still stands on floor, which
+the pathfinder warns about as it always has.
+
+**Learned after the bake (2026-09-05, later).** The museum seals every body's
+cells in its walk map, a walk-into trigger included, and refuses a seal that
+would cut the route ("sealing would sever the walk route"), then SLIDES the
+body - into a wall cell, if that is the nearest cell whose seal cuts nothing.
+Trans_Scale's right hall is one loop (row 8, the x8 and x12 columns, rows
+12-13) with a branch to the sideways slot; a loop tolerates one sealed cell and
+a landing pocket none, so two of its three Mario cubes were slid into walls.
+They now stand at (12,8), the loop's one cut, and (11,17), off the loop. And
+the Mario cube measured seventeen cells because its hidden rainbow (seven arcs,
+three metres up) was built at `_ready`: the museum's extent counts every
+MeshInstance3D, hidden or not. It is built at the moment of the crossing now,
+so the cube seals its one cell; the registry's measured footprint (17) is stale
+by the same amount. The Spectacle's twelve stood exactly where placed, because
+its rows are thirteen wide.
+
+## 2026-09-06 - the seam into Trans_AxisDecomposition
+
+The museum's own flood, seeded in this hall, never entered
+Trans_AxisDecomposition (0 of 363 cells) while the ledger drew every crossing
+cell as floor. The door in the last row is at x4-5; the crossing's first row
+opened at x5-6, because the museum takes the open cell nearest its centre line
+(x7 of the tile padded to 15) and that is the door's far cell: a two-wide door
+met through one cell. The bench placer then stood a bench on that one shared
+cell, (5,24), and the walk was cut with no seal to name it. The museum's
+arrival test passed the hall anyway: the pool margin at x -2..-1 reaches the
+band's last row and stops dead at the next vestibule.
+
+Fixed in the museum, not in the map: the crossing slides into the door's run
+(4-5), a bench needs its 3x2 block open, the finish line lies inside the
+tile's columns. Flooded after: 395 of 461 cells here, Axis 308 of 358, and the
+chapter walks from Trans_Pre to Trans_Pit. The 66 cells unreached here are the
+east pool margin (x15-16 over 33 rows), laid beyond the five void columns the
+tile was padded with to meet the wider neighbour; nothing reaches them and
+nothing needs to. An embedded grid is a flat floor to the walk map: its walls
+and holes are unknown, which is why the count is a shape, not a route.
+
+# 2026-09-09: Translation and AxisDecomposition combined
+
+Author request: one longer, imaginative transport course across x, y and z, collecting pick_up_cubes during travel; no rotation yet. The current source maps and text were snapshotted before the merge.
+
+Seven tc rides, thirteen pickups, three axis markers. Carrier centres sit half a metre below their departure decks. The new optional #deck utility parameter declares a lift's start level explicitly, because a socket may neighbour both upper and lower banks. This parameter is applied before _ready caches the journey endpoints.
+
+Pickups use #motion:still#hold:collect. GridSystem reserves cells containing a utility at height one before stamping interactables; the two lift pickups account for this additional half-metre origin difference. Their actual positions and body contact are tested.
+
+Evidence: commons/testing/probe_translation_course.gd, ada_run/translation_course_checks.json, and ada_run/Trans_Translation_build_up.png. The probe uses the real transport update and Area3D contacts, then walks a capsule off each ferry onto its landing. This is runtime evidence, not a learner review.
+
+
+### 2026-09-09: Down and forward from (3,35)
+
+The former vertical descent now travels by (0,-3,2), from standing deck (3,3,35) to (3,0,37). The low platform begins at z=38 and leads to the next carrier at z=39. The earlier ground cells at rows 36 and 37 were cleared to make room for the sloping journey. The nearby pickup moved to (3,36), on the journey, with scene origin y=2.5. Other author edits to pickups and terrain were preserved.
+
+The carrier stays level: this is simultaneous y/z translation, without rotation. The focused actual-grid check passes all 12 checks, including rider detection, carried movement, pickup collection and stepping onto the new landing. Evidence: ada_run/translation_y_descent_checks.json and ada_run/translation_escalator.log. This run does not revalidate unrelated author edits elsewhere in the course.
+
+
+### 2026-09-09: Fire at the basin floor
+
+Enabled museum.simulation.fire for the combined hall. Fixed the staged museum path, which previously forced fire off regardless of the map declaration. Staged fire occupies only the bottom 0.6 m of the basin (y=-2.5 to -1.9 here), below the rides and decks. It uses the museum existing animated fire material and fall-contact reset behaviour. Other staged halls retain their own fire setting.
+
+Actual museum verification: ada_run/translation_fire_capture.log reports one packed fire/contact volume at the basin base; capture_build_up_museum.gd --map=Trans_Translation --expect-fire checks its presence and vertical bounds. Updated image: ada_run/Trans_Translation_build_up.png.
+
+
+### 2026-09-09: Pickups rise and fall
+
+All thirteen pickup placements in the combined hall now use #motion:slide#hold:collect: vertical bob only, no spin or scale pulse. Existing placement coordinates and transport routes were preserved. The book description and compiler recipe were updated to match. This supersedes the stationary-pickup choice recorded above.

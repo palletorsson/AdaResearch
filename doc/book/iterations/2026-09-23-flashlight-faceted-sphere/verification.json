@@ -1,0 +1,89 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "all earlier paragraphs remain verbatim",
+      "passed": true
+    },
+    {
+      "name": "code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "encounter anchors preserved",
+      "passed": true
+    },
+    {
+      "name": "reading snapshot matches canonical",
+      "passed": true
+    },
+    {
+      "name": "only placement configuration changed in map",
+      "passed": true
+    },
+    {
+      "name": "core text_sha256 current",
+      "passed": true
+    },
+    {
+      "name": "core map_sha256 current",
+      "passed": true
+    },
+    {
+      "name": "other core records unchanged",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithms/postprocessing/flashlight_demo/flashlight.tscn",
+      "passed": true
+    },
+    {
+      "name": "unchanged algorithms/postprocessing/flashlight_demo/flashlight_demo.tscn",
+      "passed": true
+    },
+    {
+      "name": "43 runtime checks pass",
+      "passed": true
+    },
+    {
+      "name": "no script errors in final run",
+      "passed": true
+    },
+    {
+      "name": "tested production inputs current",
+      "passed": true
+    },
+    {
+      "name": "served index.html",
+      "passed": true
+    },
+    {
+      "name": "served same-sphere-moving-light.png",
+      "passed": true
+    },
+    {
+      "name": "served arrival.png",
+      "passed": true
+    },
+    {
+      "name": "served two-colours.png",
+      "passed": true
+    },
+    {
+      "name": "served Color_Flashlight.diff",
+      "passed": true
+    },
+    {
+      "name": "served source-changes.diff",
+      "passed": true
+    },
+    {
+      "name": "served report.json",
+      "passed": true
+    },
+    {
+      "name": "served SUMMARY.md",
+      "passed": true
+    }
+  ]
+}

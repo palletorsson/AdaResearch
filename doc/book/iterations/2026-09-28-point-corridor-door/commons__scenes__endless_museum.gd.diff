@@ -1,0 +1,14 @@
+--- before/commons/scenes/endless_museum.gd
++++ after/commons/scenes/endless_museum.gd
+@@ -14359,6 +14359,11 @@
+ ## (0, 0, z0) and cells are unit metres, so a world position maps straight onto
+ ## a _walk_cells key with no conversion.
+ func _occupied_cells(node: Node3D, cell: Dictionary, zbase: int) -> Array:
++	# An approach-opening threshold is a traversable route, like the lobby gate.
++	# Its own moving colliders still govern when the body can cross. Only opt-in
++	# doors with jambs inside existing walls declare this; fixed objects still seal.
++	if bool(node.get_meta("em_opens_on_approach", false)):
++		return []
+ 	var cx: int = int(cell.get("x", 0))
+ 	var cz: int = zbase + int(cell.get("y", 0))
+ 	var out: Array = []

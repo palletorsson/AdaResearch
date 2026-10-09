@@ -1,0 +1,259 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "cube and its desk placed in the requested hall",
+      "passed": true
+    },
+    {
+      "name": "desk bound to cube with six controls",
+      "passed": true
+    },
+    {
+      "name": "cube uses five solver passes",
+      "passed": true
+    },
+    {
+      "name": "initial coefficients match manuscript",
+      "passed": true
+    },
+    {
+      "name": "this hall opts into a tray with nine matching collision pieces",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cube-pressure-one",
+      "passed": true
+    },
+    {
+      "name": "STIFFNESS changes stiffness alone",
+      "passed": true
+    },
+    {
+      "name": "DAMPING changes damping alone",
+      "passed": true
+    },
+    {
+      "name": "RESET restores coefficients in the same body",
+      "passed": true
+    },
+    {
+      "name": "first PRESSURE press sets zero",
+      "passed": true
+    },
+    {
+      "name": "cube retained on tray after zero pressure",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: cube-pressure-zero",
+      "passed": true
+    },
+    {
+      "name": "next PRESSURE press sets two",
+      "passed": true
+    },
+    {
+      "name": "cube retained on tray after pressure two",
+      "passed": false
+    },
+    {
+      "name": "capture camera retained: cube-pressure-two",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: deformation-hall",
+      "passed": true
+    },
+    {
+      "name": "MILL holds drive without disabling the soft bodies",
+      "passed": true
+    },
+    {
+      "name": "MILL releases the drive",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "cube retained on tray after zero pressure",
+    "cube retained on tray after pressure two"
+  ],
+  "observations": {
+    "collision_boxes": [
+      {
+        "disabled": false,
+        "pos": [
+          8.5,
+          0.970000028610229,
+          8.5
+        ],
+        "size": [
+          1.32000005245209,
+          0.0599999986588955,
+          1.32000005245209
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          9.13000011444092,
+          1.05999994277954,
+          8.5
+        ],
+        "size": [
+          0.0599999986588955,
+          0.119999997317791,
+          1.32000005245209
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          8.5,
+          1.05999994277954,
+          9.13000011444092
+        ],
+        "size": [
+          1.20000004768372,
+          0.119999997317791,
+          0.0599999986588955
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          7.86999988555908,
+          1.05999994277954,
+          8.5
+        ],
+        "size": [
+          0.0599999986588955,
+          0.119999997317791,
+          1.32000005245209
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          8.5,
+          1.05999994277954,
+          7.86999988555908
+        ],
+        "size": [
+          1.20000004768372,
+          0.119999997317791,
+          0.0599999986588955
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          8.97999954223633,
+          0.470000028610229,
+          8.97999954223633
+        ],
+        "size": [
+          0.0500000007450581,
+          0.939999997615814,
+          0.0500000007450581
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          8.97999954223633,
+          0.470000028610229,
+          8.02000045776367
+        ],
+        "size": [
+          0.0500000007450581,
+          0.939999997615814,
+          0.0500000007450581
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          8.02000045776367,
+          0.470000028610229,
+          8.97999954223633
+        ],
+        "size": [
+          0.0500000007450581,
+          0.939999997615814,
+          0.0500000007450581
+        ]
+      },
+      {
+        "disabled": false,
+        "pos": [
+          8.02000045776367,
+          0.470000028610229,
+          8.02000045776367
+        ],
+        "size": [
+          0.0500000007450581,
+          0.939999997615814,
+          0.0500000007450581
+        ]
+      }
+    ],
+    "cube_origin": [
+      8.5,
+      1.0,
+      8.5
+    ],
+    "initial_extent": [
+      [
+        8.28175449371338,
+        -0.00175702851265669,
+        8.34536075592041
+      ],
+      [
+        8.67050075531006,
+        0.37329226732254,
+        8.6923713684082
+      ]
+    ],
+    "pressure_two_after_3s_extent": [
+      [
+        8.01719951629639,
+        -0.0199812650680542,
+        7.91454076766968
+      ],
+      [
+        8.43563556671143,
+        0.399542212486267,
+        8.29256820678711
+      ]
+    ],
+    "soft_origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "support_ray": [
+      8.5,
+      1.0,
+      8.5
+    ],
+    "zero_pressure_after_3s_extent": [
+      [
+        8.28925323486328,
+        0.0371842049062252,
+        7.81455564498901
+      ],
+      [
+        8.77194023132324,
+        0.364511251449585,
+        8.27923965454102
+      ]
+    ]
+  },
+  "passed": false,
+  "room": "SoftBodies_Soft_Body_Deformation",
+  "scope": "Native museum with completed stamp queue; supplied pointer events, solver vertex bounds and original captures. No tracked hand, force feedback or headset acceptance."
+}

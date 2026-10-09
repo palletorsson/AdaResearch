@@ -1,0 +1,27 @@
+{
+  "captured_at": "2026-09-21T06:06:43.375850+00:00",
+  "base_commit": "158b23851faaef4e8b1c671c553ef4eec6ec2d55",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; footnote text and code preserved.",
+  "sequence": "boolean_surfaces",
+  "sequence_sha256": "b33618a3b066783bcdc67faba2fd614974bff7853851aec83c760b497c879cd0",
+  "maps": [
+    {
+      "map": "Boolean_Verbs",
+      "path": "commons/maps/Boolean_Verbs/final.md",
+      "sha256": "95aa4dac61126eb9f2397c18f468306c3a60a03c55a2623dc4bbf1c9d2e76150"
+    },
+    {
+      "map": "Boolean_Gallery",
+      "path": "commons/maps/Boolean_Gallery/final.md",
+      "sha256": "279e2881bb4af004aeb25453e925ce4e973ff93e3ac2e925bea63880cc8757d7"
+    },
+    {
+      "map": "Boolean_Works",
+      "path": "commons/maps/Boolean_Works/final.md",
+      "sha256": "24bca9c3449480a02e1386882bc4dc169bbd0394e665d8013e470c109141aa71"
+    }
+  ],
+  "output_sha256": "16ca1c64d6ddc1e4af80d61251b79fe8127df1bd2e9e74815cb42200dd4fbe28"
+}

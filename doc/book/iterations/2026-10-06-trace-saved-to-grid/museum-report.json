@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "trace": {
+    "checks": [
+      {
+        "name": "requested museum hall loaded",
+        "passed": true
+      },
+      {
+        "name": "study belongs to requested museum hall",
+        "passed": true
+      },
+      {
+        "name": "workplace has actual museum floor",
+        "passed": true
+      },
+      {
+        "name": "real grab driver holds the Trace point",
+        "passed": true
+      },
+      {
+        "name": "release saves nine positions and eight existing segments",
+        "passed": true
+      },
+      {
+        "name": "capture camera retained: museum-trace-saved",
+        "passed": true
+      },
+      {
+        "name": "capture camera retained: museum-trace-side",
+        "passed": true
+      }
+    ],
+    "failures": [],
+    "observations": {
+      "archive_sha256": "1a693548f2000b23b1e70682d74677c7577c016d9c3f79f091bebbe617b06b70",
+      "record_count": 9
+    },
+    "passed": true,
+    "room": "Point_Trace",
+    "scope": "Actual museum halls and exact learner programs, separate process runs. Synthetic controller draws and releases in Trace; Grid loads the saved sculpture. Temporary study placement, not a permanent museum map edit or physical headset test."
+  },
+  "grid": {
+    "checks": [
+      {
+        "name": "requested museum hall loaded",
+        "passed": true
+      },
+      {
+        "name": "study belongs to requested museum hall",
+        "passed": true
+      },
+      {
+        "name": "workplace has actual museum floor",
+        "passed": true
+      },
+      {
+        "name": "Grid receives the saved sculpture",
+        "passed": true
+      },
+      {
+        "name": "Grid has the nine saved positions and eight original segments",
+        "passed": true
+      },
+      {
+        "name": "Grid does not build a new point",
+        "passed": true
+      },
+      {
+        "name": "capture camera retained: museum-grid-sculpture",
+        "passed": true
+      },
+      {
+        "name": "capture camera retained: museum-grid-coarse",
+        "passed": true
+      },
+      {
+        "name": "Grid leaves saved drawing file untouched",
+        "passed": true
+      }
+    ],
+    "failures": [],
+    "observations": {
+      "archive_sha256": "1a693548f2000b23b1e70682d74677c7577c016d9c3f79f091bebbe617b06b70"
+    },
+    "passed": true,
+    "room": "Point_Line_Grid",
+    "scope": "Actual museum halls and exact learner programs, separate process runs. Synthetic controller draws and releases in Trace; Grid loads the saved sculpture. Temporary study placement, not a permanent museum map edit or physical headset test."
+  },
+  "same_saved_file": true,
+  "source_pins": {
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/museum_handoff.gd": "1b6350731614ccfdcb86a888155f99e6048208bc0adc7c93db7d32aae6c2c04e",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_museum.py": "f1163e9bd644268b9a5d21dc20e286276d41cd4db93c3a9d16b226aea67b3ad7",
+    "commons/scenes/endless_museum.gd": "21ef71df5cecce0c9df3a02e1a2e25b8b59c08b48e094d14c79fba2335b4b9e5",
+    "tools/probes/transformation_encounters.gd": "8b811e7b86f86512d989bc252db7128aeb5e1e9b9e17731b82faa3a9ef829d38",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "commons/maps/Point_Trace/map_data.json": "41521403fb5c21e0e16a31418b3c10ce85109c0bacf318aee7a86ef2e3f3e260",
+    "commons/maps/Point_Line_Grid/map_data.json": "5568329c677bed5f639023a25f4f65e12a82321e6c73d886cb386b6ca5216867"
+  },
+  "learner_inputs": {
+    "commons/maps/Point_Trace/tutorial.md": "bb212d97c71c84a4d972c84330c7166915fdc4f38dc870dd9dc37fb897faafd4",
+    "commons/maps/Point_Line_Grid/tutorial.md": "d074ea85500993b9d09a6c7d41873dfb355b603e083a58763d5fa05bb2261b8d",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/line.gd": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/lines/report-runtime.json": "f0d0bce8ede3643b727dac8d807aac8fe1875059c2d9817709a010f0d28ad9b7",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/build.py": "6e524d01208aa2d993fd8607c1cc890665e519e383c3e016c5e1237aeacac8b3",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid.gd": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/run_checks.py": "43806b65b1b1fabaa33f5b141778173480d08674b80b7de59b993938af46e1fa",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace_archive.gd": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_handoff.gd": "a41430040411ec98dced8541db82ec8ebb353f89ece3e6cc2c2261715a0e77a7",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/verify_trace.gd": "23783a0eb355decae792270c899c727d49309bc24b557ceb6ec0d544447249ff",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/assembled.gd": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/expected.gd": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/flat_y.gd": "f25e01338eb457bc2f8c941cc8a746f16a9548bb75b94866af28fe6db186a80e",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/grid.gd": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/incoming.gd": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/operations.json": "27df50fe9f2504ae185b11fa8448e5b7ad45a1d27f6e1fdf8cae4e01f3e2951c",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/trace_archive.gd": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/tutorial.md": "d074ea85500993b9d09a6c7d41873dfb355b603e083a58763d5fa05bb2261b8d",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/operations.json": "9b6499c90d5d019b0413d57561672c61914c5709e5002aad871b9d073fd4bd64",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/tutorial.md": "bb212d97c71c84a4d972c84330c7166915fdc4f38dc870dd9dc37fb897faafd4",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/omit_last_pair.gd": "c0c1145c549883454c8443bc307ef51051f5271cb09318099918d2d8ce5b5ae6",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/variants/threshold_020.gd": "483014df062bea610dde83c7ae67b603bcb7b2e104a3ba2a8d51b4c2a0a026e8",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/contract.json": "e747ff7f0b2993440beb47f358dfa8f84fd48dbb7b0611455ddae6402e47ce60",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/next-input.json": "4aaa0baf5ffec02c39024e2135d418e20726eb061faefdf2e6d97a4f6fbf3208",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/contract.json": "fed7eac82dbd201c4a046cf2659509a930a858db92c4dd44e282333a1a8ffcd0",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/grid/next-input.json": "84b67a86e2c26393a7782cc95426d50398f7e8d2e5b0354135277229aefeaacf"
+  },
+  "capture_pins": {
+    "museum-grid-coarse.png": "8d042ba8aca3a5920d64f3786488fb4a75f55130c35b0e7f52f7199d208d9f7c",
+    "museum-grid-sculpture.png": "ec7ad8fc129c7dfc5b8b7097624cbb75d36a21d6349bd97bcb339b7268a9b629",
+    "museum-trace-side.png": "ac80e3e4e3cb4d4ec0aeddf85137decc89565af6797e7f6d5769c93f7536ef50"
+  },
+  "scope": "Separate engine runs in actual museum halls, same saved file. Temporary unit-scale learner study at hall-local (8.5,0,8.5); synthetic controller, inspection camera. Prior user save restored afterwards. No permanent map edit or physical headset test.",
+  "diagnostics": "The full museum logs retain unrelated unresolved UID, legacy material and entrance-placement warnings. These bounded checks do not certify whole-project health."
+}

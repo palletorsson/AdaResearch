@@ -1,0 +1,102 @@
+--- commons/maps/Color_Nails/map_data.json (before)
++++ commons/maps/Color_Nails/map_data.json (after)
+@@ -1,7 +1,7 @@
+ {
+  "documentation": {
+   "summary": "One source hand at two scales, a manicure table and two working colour addresses.",
+-  "layout": "15 by 21 metre salon. Giant hand at (7,9), manicure table at z=12; separate open control plinths at (5,14) and (9,14), RGB boxes from y=0.9 to 1.4.",
++  "layout": "15 by 21 metre salon. The 180-degree salon places its giant hand at (7,9) and manicure table at z=6. Nail control at (9,4) and skin control at (5,4) sit on their labelled plinths; RGB boxes span y=0.9 to 1.4.",
+   "objective": "Change nail colour separately from skin; compare the same selected values on the giant and petite hands."
+  },
+  "layers": {
+@@ -80,11 +80,11 @@
+ 	"",
+ 	"",
+ 	"",
+-	"",
+-	"",
+-	"",
+-	"",
+-	"",
++	"hand_color_controller:180:1.2:1#plinth:0#mount:salon",
++	"",
++	"",
++	"",
++	"nail_color_controller:180:1.2:1#plinth:0#mount:salon",
+ 	"",
+ 	"",
+ 	"",
+@@ -250,11 +250,11 @@
+ 	"",
+ 	"",
+ 	"",
+-	"nail_color_controller:180:1.2:1#plinth:0#mount:salon",
+-	"",
+-	"",
+-	"",
+-	"hand_color_controller:180:1.2:1#plinth:0#mount:salon",
++	"",
++	"",
++	"",
++	"",
++	"",
+ 	"",
+ 	"",
+ 	"",
+
+--- algorithms/postprocessing/flashlight_demo/flashlight_demo.gd (before)
++++ algorithms/postprocessing/flashlight_demo/flashlight_demo.gd (after)
+@@ -73,6 +73,15 @@
+ 	var canvas: CSGBox3D = get_node("Canvas")
+ 	canvas.position.y = canvas.size.y * 0.5
+ 	canvas.use_collision = true
++	# A second receiver lets the visitor carry the same light from a flat
++	# board onto edges and faces, while keeping the near-white albedo fixed.
++	var receiver := CSGBox3D.new()
++	receiver.name = "ReceiverCube"
++	receiver.size = Vector3.ONE
++	receiver.position = Vector3(4.1, 0.5, -1.65)
++	receiver.material = canvas.material
++	receiver.use_collision = true
++	add_child(receiver)
+ 	for lamp_name in ["RedFlashlight", "GreenFlashlight", "BlueFlashlight", "WhiteFlashlight"]:
+ 		var lamp: Node3D = get_node(lamp_name)
+ 		lamp.position.y = 1.1
+
+--- commons/testing/probe_nail_salon.gd (before)
++++ commons/testing/probe_nail_salon.gd (after)
+@@ -47,11 +47,15 @@
+ 	var saved_skin: Color = gm.get_hand_color()
+ 	var grabber := SuppliedGrabber.new()
+ 	current_scene.add_child(grabber)
++	# Discovery order follows map cells; test the two channels in a stable order.
++	controls.sort_custom(func(a,b): return a.target_surface < b.target_surface)
+ 	for control in controls:
+ 		var mapper: Node3D = control.get_node("ValueMapper3D")
+ 		check(mapper.global_position.y >= 0.85 and mapper.global_position.y + 0.5 <= 1.5, "RGB box within standing reach")
+ 		check(not control.get_node("MeshInstance3D").visible, "salon replaces generic controller canopy")
+-		check(absf(control.global_position.x - salon.global_position.x) >= 1.9 and control.global_position.z - salon.global_position.z >= 4.9, "control stands clear of the table and stools")
++		var control_local: Vector3 = salon.to_local(control.global_position)
++		var expected_x: float = -2.0 if control.target_surface == 0 else 2.0
++		check(absf(control_local.x-expected_x)<0.05 and absf(control_local.z-5.0)<0.05, "correct surface controller sits on its labeled plinth in front of the table")
+ 		var colour := Color(0.86, 0.13, 0.46) if control.target_surface == 0 else Color(0.25, 0.64, 0.57)
+ 		var point: Node3D = mapper.point
+ 		grabber.global_transform = point.global_transform
+@@ -65,6 +69,8 @@
+ 		check(control.color_preview_cube.material_override.albedo_color.is_equal_approx(colour), "swatch and display material values agree")
+ 		if control.target_surface == 0:
+ 			check(salon.skin_materials.all(func(m): return m.albedo_color.is_equal_approx(saved_skin)), "nail edit leaves skin unchanged")
++		else:
++			check(salon.nail_materials.all(func(m): return m.albedo_color.is_equal_approx(Color(0.86, 0.13, 0.46))), "skin edit leaves the selected nails unchanged")
+ 		point.let_go(grabber, Vector3.ZERO, Vector3.ZERO)
+ 	player.global_position += salon.to_global(Vector3(0, 1.65, 10.2)) - head.global_position
+ 	head.look_at(salon.to_global(Vector3(0, 2.65, 0.9)))
+@@ -80,7 +86,7 @@
+ 	query.exclude = [player.get_rid()]
+ 	for side in [-1,1]:
+ 		query.transform.origin = salon.to_global(Vector3(side * 3.3, 0.85, 6))
+-		query.motion = Vector3(0, 0, -11)
++		query.motion = salon.global_basis * Vector3(0, 0, -11)
+ 		var fractions: PackedFloat32Array = current_scene.get_world_3d().direct_space_state.cast_motion(query)
+ 		check(fractions[0] > 0.99, "body can walk past salon on side %d" % side)
+ 		query.transform.origin += query.motion * minf(1.0, fractions[1] + 0.002)

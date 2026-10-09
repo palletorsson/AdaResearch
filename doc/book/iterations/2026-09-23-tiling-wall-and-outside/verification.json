@@ -1,0 +1,102 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "Published reading equals canonical chapter",
+      "passed": true
+    },
+    {
+      "name": "All code excerpts preserved",
+      "passed": true
+    },
+    {
+      "name": "Both artifact anchors and exit marker preserved",
+      "passed": true
+    },
+    {
+      "name": "Opening and clock handoff preserved",
+      "passed": true
+    },
+    {
+      "name": "Thin enclosure paragraph preserved",
+      "passed": true
+    },
+    {
+      "name": "Only the agreed sentence and illustration changed",
+      "passed": true
+    },
+    {
+      "name": "Preserved production input: commons/maps/Tutorial_Tiling_Walls/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "Preserved production input: commons/maps/sequences/array_tutorial.json",
+      "passed": true
+    },
+    {
+      "name": "Preserved production input: commons/artifacts/regularity/wall_exception.gd",
+      "passed": true
+    },
+    {
+      "name": "Preserved production input: commons/artifacts/regularity/tiling_principles.gd",
+      "passed": true
+    },
+    {
+      "name": "Preserved production input: commons/artifacts/regularity/room_tools.gd",
+      "passed": true
+    },
+    {
+      "name": "Preserved production input: commons/artifacts/registry/tiling_principles.json",
+      "passed": true
+    },
+    {
+      "name": "Core manuscript and map hashes current",
+      "passed": true
+    },
+    {
+      "name": "Both existing primary encounters preserved",
+      "passed": true
+    },
+    {
+      "name": "All other encounter records unchanged",
+      "passed": true
+    },
+    {
+      "name": "25 focused runtime checks pass",
+      "passed": true
+    },
+    {
+      "name": "Runtime artifact and controller inputs still current",
+      "passed": true
+    },
+    {
+      "name": "Captured map matches current placement",
+      "passed": true
+    },
+    {
+      "name": "No GDScript failure in capture log",
+      "passed": true
+    },
+    {
+      "name": "All native and composed images decode",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes: index.html",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes: two-turns.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP bytes: Tutorial_Tiling_Walls.diff",
+      "passed": true
+    },
+    {
+      "name": "Review has reading, changes and evidence",
+      "passed": true
+    }
+  ],
+  "scope": "Text preservation, current source and encounter metadata, image decoding, static review route. Native images and paired layout separately inspected."
+}

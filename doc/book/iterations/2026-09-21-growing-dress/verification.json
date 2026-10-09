@@ -1,0 +1,43 @@
+{
+  "runtime_checks": 44,
+  "failures": [],
+  "production_source_copies_match": 12,
+  "map_unchanged": true,
+  "encounter_order_unchanged": true,
+  "core_change": "Only Ribbon_Patterns_03 text hash",
+  "headset_tested": false,
+  "changed_files": [
+    {
+      "file": "commons/data/museum_core_encounters.json",
+      "diff": "commons__data__museum_core_encounters.json.diff"
+    },
+    {
+      "file": "commons/maps/Ribbon_Patterns_03/final.md",
+      "diff": "commons__maps__Ribbon_Patterns_03__final.md.diff"
+    },
+    {
+      "file": "commons/maps/Ribbon_Patterns_03/technical.md",
+      "diff": "commons__maps__Ribbon_Patterns_03__technical.md.diff"
+    },
+    {
+      "file": "commons/player/costume_trophies.gd",
+      "diff": "commons__player__costume_trophies.gd.diff"
+    },
+    {
+      "file": "commons/player/costume_wardrobe.gd",
+      "diff": "commons__player__costume_wardrobe.gd.diff"
+    },
+    {
+      "file": "commons/player/queer_costume.gd",
+      "diff": "commons__player__queer_costume.gd.diff"
+    },
+    {
+      "file": "commons/player/super_drag_outfit.gd",
+      "diff": "commons__player__super_drag_outfit.gd.diff"
+    },
+    {
+      "file": "commons/scenes/endless_museum.gd",
+      "diff": "commons__scenes__endless_museum.gd.diff"
+    }
+  ]
+}

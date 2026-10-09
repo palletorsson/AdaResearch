@@ -1,0 +1,114 @@
+--- Trans_Pre/before/tutorial.md
++++ Trans_Pre/tutorial.md
+@@ -1,51 +1,85 @@
+-# Trans_Pre — making the animated pickup
++# A body that changes
+ 
+-Start with the cube learned in Primitives. Add three operations to make the Mario-style pickup used in this room.
++In the last lesson, you placed three bodies. They stayed where you put them. Now keep one cube and change its position while the scene runs. Then add a turn and a change in size.
+ 
+-| Stage | What to watch | Name |
+-|---|---|---|
+-| 1 | A still cube | Starting form |
+-| 2 | The cube moves up and down | Translation: change position |
+-| 3 | It also turns | Rotation: change facing |
+-| 4 | It also grows and shrinks | Scale: change size |
++Open `trans_pre.tscn` in the [shared starter](../../../doc/book/studies/ada-xr-starter/README.md). Edit `studies/trans_pre/motion.gd`. The supplied `Cube` makes a 0.6-metre box with a dark mark on one face. The room and the small numerical display are also supplied. Every lesson object is created in code.
+ 
+-Each example keeps the movements introduced before it. Ask the learner to spot the new movement before naming it.
++## 1. Let the clock run
+ 
+-The room uses four instances of `commons/scenes/mapobjects/pick_up_cube.tscn`. The following excerpts come from its `pick_up_cube.gd` script.
+-
+-Translation changes the vertical position:
++The study starts with:
+ 
+ ```gdscript
+-global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
++var stage := 0
++var elapsed := 0.0
+ ```
+ 
+-`lerp(a, b, t)` chooses a value between `a` and `b`: zero gives the first endpoint, one the second, and 0.5 the midpoint. The endpoints here sit `bob_height` below and above the saved starting height.
++Run it. The cube stays still, but the elapsed time below it increases.
+ 
+-The script adds `delta` to `time_passed` each update, then repeats the journey with:
++Point Zero counted frames. Here `_process(delta)` receives the time since the previous frame, in seconds:
+ 
+ ```gdscript
+-var t: float = pingpong(time_passed / maxf(lerp_duration, 0.001) + 0.5, 1.0)
++    elapsed += delta
+ ```
+ 
+-`pingpong` moves the number back and forth between zero and one. Each leg takes `lerp_duration` seconds, set to 1.5 here. Adding 0.5 starts the cube halfway, at its authored height. `maxf` protects against a zero duration. This gives constant speed on each leg and a change of direction at each endpoint. Wave functions come later.
++Adding those intervals gives us a clock. The animation will use seconds, so rendering more frames does not make it run faster.
+ 
+-Rotation adds a turn around Y, the upright axis:
++## 2. Move between two heights
++
++Set `stage` to `1` and run again. The cube rises, reverses and returns. These variables determine its journey:
+ 
+ ```gdscript
+-rotate_y(rotation_speed * delta)
++var centre := Vector3(0, 1.3, 0)
++var travel := 0.25
++var leg_seconds := 1.5
+ ```
+ 
+-`rotation_speed` sets the rate. Multiplying by the update's time interval gives the turn to add now. This runs alongside the translation.
++The centre starts 1.3 metres above the floor. Its lower and upper limits are 1.05 and 1.55 metres. `travel` is the distance from the middle to either end.
+ 
+-Scale changes the visible cube's size:
++Inside `_process`, one value carries time into position:
+ 
+ ```gdscript
+-var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
+-_apply_pulse(size_factor)
++    var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)
++    if stage >= 1:
++        cube.position.y = lerp(centre.y - travel, centre.y + travel, t)
+ ```
+ 
+-With `pulse_scale = 0.3`, the factor travels between 0.7 and 1.3. `_apply_pulse` multiplies the saved mesh scale by that factor. A factor of one gives the starting size. All three directions use the same factor, keeping the cube's proportions.
++`pingpong` produces a value that travels from 0 to 1 and back at a steady rate. The added `0.5` starts it halfway up. `lerp` uses that value to choose a position between the two heights: 0 gives the lower end, 1 the upper end, and 0.5 their midpoint.
+ 
+-The demonstration settings are `motion:still`, `motion:slide`, `motion:idle` and `motion:all`; the first uses `hold:collect`, so walking into it collects it even while it is still. The other three use `hold:demo` so they remain available to inspect. All eight pickup cubes in this hall use `motion_curve:lerp`. The translation marker uses straight travel, the rotation marker uses continuous turning, and the scale marker also uses linear interpolation. They have their own clocks and do not control the pickups.
++`if stage >= 1` runs this indented line whenever the stage is at least 1. The later stages will keep this movement.
+ 
+-On the platform, four ordinary collectible instances use `motion:all`. Find the rise and fall, the turn and the change in size before collecting one. The task is to recognise how the simple movements combine into a familiar game animation.
++Set `travel` to `0.4`. The cube now reaches 0.9 and 1.7 metres. Restore `0.25`, then set `leg_seconds` to `3.0`. The distance stays fixed; the journey slows. This value is the time between the ends. A complete return takes twice as long. Because we start in the middle, the first arrival takes only half a leg.
++
++Restore `leg_seconds` to `1.5` before continuing.
++
++## 3. Add a turn
++
++Set `stage` to `2`. The same cube keeps rising and falling, and now turns:
++
++```gdscript
++    if stage >= 2:
++        cube.rotate_y(turn_speed * delta)
++```
++
++The dark mark lets you follow a particular face. The turn is around the cube's centre, about the vertical Y axis. Its centre still follows the same path.
++
++`turn_speed` is `TAU / 8.0` radians per second. `TAU` is one complete turn in radians, so this setting takes eight seconds per turn. Multiplying by `delta` gives the angle to add in this frame. Change the divisor to `4.0` for a four-second turn, then restore `8.0`.
++
++## 4. Change size as well
++
++Set `stage` to `3`:
++
++```gdscript
++    if stage >= 3:
++        var factor: float = lerp(1.0 - pulse, 1.0 + pulse, t)
++        cube.scale = Vector3.ONE * factor
++```
++
++With `pulse` at `0.3`, the factor travels between 0.7 and 1.3. `Vector3.ONE` is `(1, 1, 1)`: multiplying all three components by the same factor preserves the cube's proportions. Its mesh remains 0.6 metres wide; the displayed width ranges from 0.42 to 0.78 metres.
++
++The assignment writes a new scale each frame. It does not keep multiplying the previous scale. The same `t` drives height and size, so the cube is largest at the top. Turning has its own rate.
++
++Try `pulse` at `0.1`. Keep a version whose timing and extent you like. You can now change a body's position, orientation and size without rebuilding its mesh.
++
++For a short comparison, [replace steady travel with sine](tutorial-sine.md). The endpoints stay fixed; the way the cube arrives changes.
++
++The museum adds touch detection and collection to these operations. This reduced study animates a visible body. In the next hall, a moving surface will also have to support the visitor.

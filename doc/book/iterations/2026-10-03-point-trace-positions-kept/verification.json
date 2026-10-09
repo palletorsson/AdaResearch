@@ -1,0 +1,146 @@
+{
+	"checks": [
+		{
+			"check": "Point, drawing and readout constructed by the script",
+			"passed": true
+		},
+		{
+			"check": "Ordered list is typed Vector3",
+			"passed": true
+		},
+		{
+			"check": "Ready stores exactly one initial position",
+			"passed": true
+		},
+		{
+			"check": "No segment exists before a second position",
+			"passed": true
+		},
+		{
+			"check": "Frames passing while still do not add samples",
+			"passed": true
+		},
+		{
+			"check": "A three centimetre move stays below the threshold",
+			"passed": true
+		},
+		{
+			"check": "Six centimetres from the saved position stays below threshold",
+			"passed": true
+		},
+		{
+			"check": "Accumulated separation admits a second position",
+			"passed": true
+		},
+		{
+			"check": "Stored Vector3 does not follow its moved handle",
+			"passed": true
+		},
+		{
+			"check": "First saved pair is rendered exactly",
+			"passed": true
+		},
+		{
+			"check": "Four entries produce three ordered segments",
+			"passed": true
+		},
+		{
+			"check": "Counter reads retained entries",
+			"passed": true
+		},
+		{
+			"check": "Fine route retains multiple samples without hitting capacity",
+			"passed": true
+		},
+		{
+			"check": "Fine route rendering follows the saved list",
+			"passed": true
+		},
+		{
+			"check": "Capture fine.png",
+			"passed": true
+		},
+		{
+			"check": "Same route at wider spacing keeps fewer samples",
+			"passed": true
+		},
+		{
+			"check": "Coarse route joins samples rather than interpolating extra ones",
+			"passed": true
+		},
+		{
+			"check": "Capture coarse.png",
+			"passed": true
+		},
+		{
+			"check": "Waiting retains the exact record",
+			"passed": true
+		},
+		{
+			"check": "Waiting allocates no new rendering nodes",
+			"passed": true
+		},
+		{
+			"check": "Capacity removes oldest positions and retains order",
+			"passed": true
+		},
+		{
+			"check": "Renderer has bounded reusable segments",
+			"passed": true
+		},
+		{
+			"check": "Clearing display does not clear the stored list",
+			"passed": true
+		},
+		{
+			"check": "Next sample restores only retained connections",
+			"passed": true
+		},
+		{
+			"check": "Museum memory experiment reaches 32 retained positions",
+			"passed": true
+		},
+		{
+			"check": "Capture memory.png",
+			"passed": true
+		},
+		{
+			"check": "Capacity is not a timer; waiting removes nothing",
+			"passed": true
+		},
+		{
+			"check": "Desktop aim can hold the recording point",
+			"passed": true
+		},
+		{
+			"check": "Moving a held point adds saved positions",
+			"passed": true
+		},
+		{
+			"check": "Desktop release freezes the handle and retains the route",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR near grip holds the recording point",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR movement updates the trace in the same frame",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR release preserves the saved route",
+			"passed": true
+		},
+		{
+			"check": "Lesson runs on a bare Node3D without scene-authored objects",
+			"passed": true
+		}
+	],
+	"coarse_positions": 17,
+	"fine_positions": 47,
+	"passed": true,
+	"physical_headset_tested": false,
+	"screenshots": "Real Godot rendering of the same scripted route; not a headset recording",
+	"xr_input": "Synthetic grip tracker; no headset"
+}

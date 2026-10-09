@@ -1,0 +1,17 @@
+--- canonical/Trans_Scale/final.md
++++ review-draft/Trans_Scale/final.md
+@@ -22,13 +22,7 @@
+ 
+ `FACTOR` is four. The food and the figure belong to `room`, so the same multiplication reaches their positions as well as their dimensions. The figure is farther from the table now. Increasing only their dimensions would have left the distance between them unchanged.
+ 
+-The arrival on the plate is another operation. Scaling the room would not put you there. The program takes the top plate's local position and asks where it has arrived in the enlarged world:
+-
+-```gdscript
+-var feet := table.to_global(landings[0]) + Vector3.UP*0.08
+-```
+-
+-Then it places your feet there, eight centimetres above the porcelain. The room has changed size, and you have been given a new place from which to meet it.
++The arrival on the plate is another operation. Scaling the room would not put you there. The program finds the top plate in the enlarged world, then places your feet eight centimetres above it. The room has changed size, and you have been given a new place from which to meet it.
+ 
+ Follow the plates down. Their winding descent was already present when they were small. Nothing in their arrangement needed to be invented after you took the bottle. Yet the distance from one to the next now belongs to balance, gravity and the time spent falling. The program did not multiply your walking speed or the gravity with the room. Uniform scaling has left a very uneven experience.
+ 

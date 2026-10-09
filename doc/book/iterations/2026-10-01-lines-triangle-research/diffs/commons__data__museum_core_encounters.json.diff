@@ -1,0 +1,22 @@
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -86,14 +86,14 @@
+         "draw_triangle_faces",
+         "triangle_live_twin"
+       ],
+-      "reason": "Close a boundary and reveal its face; draw an L and shift the fan start to observe overspill without moving the boundary. The precise construction remains in the technical companion. A live 3.3x twin shares the creator vertices and fan; white faces and black edges make changes readable at both scales.",
++      "reason": "Close a boundary, add a face, then distinguish viewpoint, corner position and fill visibility through one shared drawing at two scales. Keep the fan overspill as a further investigation.",
+       "status": "encounter_extended",
+       "sequence": "primitives",
+       "text_path": "commons/maps/Point_Triangle_Context/final.md",
+-      "text_sha256": "87c446dcceb4c7c73fcf9b6cd88241f68ad74e9161a016aba841478c8a831422",
+-      "map_sha256": "1835ac12071f56c12aa0c17ca4c63ec6dd185f25c6e7cb93adc9d61b761ef6f2",
+-      "learner_verified": false,
+-      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-09-27-triangle-book-and-room/index.html#reading"
++      "text_sha256": "5275081b51096b44e1c2eccbd03f63459fea222ea5a440fce3aae7e19e5cc15a",
++      "map_sha256": "6010a94e1b51c95d08db119623e9cfe24a76e2c4342a39c818b56fef5ebb69b7",
++      "learner_verified": false,
++      "local_review": "http://localhost:3003/book-review/doc/book/iterations/2026-10-01-lines-triangle-research/index.html"
+     },
+     "Primitives_Polythedra": {
+       "primary_tokens": [

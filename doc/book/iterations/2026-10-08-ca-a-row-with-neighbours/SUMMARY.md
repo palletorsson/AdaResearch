@@ -1,0 +1,1 @@
+CA_Introduction: PointBody reads row; trigger→existing step. Explicit 8-answer Rule90; old→next; wrap32; copyhistory24. Two complete printed scripts. Check: two seeds, reversed traversal, boundary seed. Rug/network remain reflective encounters. No reorder. Next: 3D empty/active/fading in CA_ElementaryRules. Native 29+16 scoped checks; no fresh ghost/headset test.

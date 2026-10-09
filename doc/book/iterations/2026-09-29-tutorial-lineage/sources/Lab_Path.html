@@ -1,0 +1,319 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lab_Path · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Lab_Path">← Tutorial lineage</a></p><h1>Lab Path</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Lab_Path/final.md">Raw captured source</a></p><pre># What has followed you out of the room?
+
+*An optional return to the Noise rooms.*
+
+A dark patch that returned with REMAP. A connection that broke when the threshold moved. A ridge that caught your foot. Let one encounter come back before you try to explain the whole sequence.
+
+&lt;!-- @dark_sphere --&gt;
+
+The dark sphere keeps turning. For a moment, there is no new control to learn. Stay with the change you remember. What happened there, before you knew what to call it?
+
+You might begin with what you saw: the patch brightened, the gap widened, the column turned. Then give it another telling, following the operation you learned to recognise. Did a different value arrive, or did the same value find another use?
+
+The two tellings need each other. A name can help us return to what happened; it can also hurry us past something we have not understood. If you are unsure whether a surface changed or only its colour, keep both explanations for a moment. Which small alteration would let you tell them apart?
+
+Hold a seed. Change a threshold. Look at an edge after the veining is gone. One question can give you a reason to return to a room you thought you had finished.
+
+The sphere offers no verdict. Its pulse continues while you choose what to attend to. We have been learning how to make a difference visible, and how much must be held aside for that difference to become clear.
+
+Perhaps what stays with you is the small sheet&#x27;s swelling surface. You wanted to remain near it, or to make a body that could live in its folds. Knowing its operation gives you something to change. It need not settle what the encounter was worth to you.
+
+&lt;!-- @ --&gt;
+
+Bring one of your unfinished questions with you.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Lab_Path/tutorial.md">Raw captured source</a></p><pre># Lab Path
+
+The corridor back. Shared template across every sequence.
+
+Build the corridor.
+
+```gdscript
+class_name LabPath extends Node3D
+
+@export var source_sequence: String = &quot;&quot;
+@export var target_lab_state: String = &quot;&quot;
+
+func _ready() -&gt; void:
+    build_corridor_geometry()
+    place_ambient_sphere()
+    place_teleporter()
+    configure_lighting()
+```
+
+Four standard components. Every sequence&#x27;s exit uses the same recipe.
+
+Build corridor geometry.
+
+```gdscript
+func build_corridor_geometry() -&gt; void:
+    var floor := MeshInstance3D.new()
+    floor.mesh = BoxMesh.new()
+    floor.mesh.size = Vector3(5, 0.1, 5)
+    floor.position = Vector3(2.5, -0.05, 2.5)
+    add_child(floor)
+    var ceiling := MeshInstance3D.new()
+    ceiling.mesh = BoxMesh.new()
+    ceiling.mesh.size = Vector3(5, 0.1, 5)
+    ceiling.position = Vector3(2.5, 2.5, 2.5)
+    add_child(ceiling)
+```
+
+5x5 floor and ceiling. Low-key; nothing draws attention.
+
+Place the ambient sphere.
+
+```gdscript
+func place_ambient_sphere() -&gt; void:
+    var sphere := DARK_SPHERE_SCENE.instantiate()
+    sphere.position = Vector3(2.5, 1.5, 2.5)
+    add_child(sphere)
+```
+
+A slow-pulsing dark sphere at the centre. The only visual feature.
+
+Place the teleporter.
+
+```gdscript
+func place_teleporter() -&gt; void:
+    var teleporter := TELEPORTER_SCENE.instantiate()
+    teleporter.position = Vector3(2.5, 0, 4.5)
+    teleporter.target = &quot;res://commons/maps/Lab/map.tscn&quot;
+    teleporter.target_state = target_lab_state
+    add_child(teleporter)
+```
+
+At the far end of the corridor. Entering returns the learner to the Lab.
+
+Configure soft lighting.
+
+```gdscript
+func configure_lighting() -&gt; void:
+    var light := DirectionalLight3D.new()
+    light.light_energy = 0.3
+    light.rotation = Vector3(-0.5, 0.3, 0)
+    add_child(light)
+    var environment := WorldEnvironment.new()
+    environment.environment = preload(&quot;res://commons/environments/lab_path.tres&quot;)
+    add_child(environment)
+```
+
+Low-energy light, plus a shared environment resource. Consistent across every sequence&#x27;s corridor.
+
+Fade to black on exit.
+
+```gdscript
+func _on_teleporter_activated() -&gt; void:
+    var fade := ColorRect.new()
+    fade.color = Color(0, 0, 0, 0)
+    add_child(fade)
+    var tween := create_tween()
+    tween.tween_property(fade, &quot;color:a&quot;, 1.0, 0.3)
+    tween.tween_callback(func():
+        get_tree().change_scene_to_file(&quot;res://commons/maps/Lab/map.tscn&quot;)
+    )
+```
+
+Brief fade prevents cut-to-Lab. Eye-friendly transition.
+
+Pass state to the Lab.
+
+```gdscript
+func prepare_handoff() -&gt; void:
+    GameState.last_sequence_completed = source_sequence
+    GameState.lab_target_state = target_lab_state
+```
+
+The Lab reads the state to decide how to present itself. Different sequences complete differently.
+
+You can now build the shared corridor, ambient sphere, teleporter with target state, soft lighting, and fade-to-black transition. Chamber_Noise extends into the chamber for the Noise sequence.
+
+Clamp to valid range.
+
+```gdscript
+func clamp_noise(value: float, low: float = -1.0, high: float = 1.0) -&gt; float:
+    return clamp(value, low, high)
+```
+
+Guarantees output stays in the expected range. Useful before writing to textures.
+
+Log state each frame for later replay.
+
+```gdscript
+var state_log: Array = []
+
+func log_state() -&gt; void:
+    state_log.append(current_snapshot())
+    if state_log.size() &gt; 600:
+        state_log.pop_front()
+```
+
+Ring buffer of ten seconds at 60 Hz. Useful for replay or debugging.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Lab_Path/technical.md">Raw captured source</a></p><pre># Lab Path — Technical
+
+A shared corridor template used by every sequence to transition back to the Lab. A 5×5 grid, low ceiling, one ambient element, one teleporter.
+
+## Template Scene
+
+```gdscript
+class_name LabPath extends Node3D
+
+@export var source_sequence: String = &quot;&quot;
+@export var target_lab_state: String = &quot;&quot;
+
+func _ready() -&gt; void:
+    setup_lighting()
+    spawn_dark_sphere()
+    position_teleporter()
+
+func setup_lighting() -&gt; void:
+    var light := DirectionalLight3D.new()
+    light.light_energy = 0.3
+    light.rotation = Vector3(-0.5, 0.2, 0)
+    add_child(light)
+    var env := WorldEnvironment.new()
+    env.environment = preload(&quot;res://commons/environments/lab_path.tres&quot;)
+    add_child(env)
+
+func spawn_dark_sphere() -&gt; void:
+    var sphere := DARK_SPHERE_SCENE.instantiate()
+    sphere.position = Vector3(2.5, 1.5, 2.5)  # centre of the 5x5 grid at ~1.5m height
+    add_child(sphere)
+
+func position_teleporter() -&gt; void:
+    var teleporter := TELEPORTER_SCENE.instantiate()
+    teleporter.position = Vector3(2.5, 0.0, 4.5)  # end of the corridor
+    teleporter.target_scene = &quot;res://commons/maps/Lab/map.tscn&quot;
+    teleporter.target_state = target_lab_state
+    add_child(teleporter)
+```
+
+## Dark Sphere Ambient
+
+The dark_sphere artifact pulses slowly with purple emission.
+
+```gdscript
+class_name DarkSphere extends MeshInstance3D
+
+@export var pulse_period: float = 6.0
+@export var base_emission: Color = Color(0.15, 0.05, 0.35)
+
+func _process(_delta: float) -&gt; void:
+    var t: float = Time.get_ticks_msec() / 1000.0
+    var phase: float = sin(t / pulse_period * TAU)
+    var pulse_amount: float = (phase + 1.0) / 2.0
+    var mat: StandardMaterial3D = material_override
+    mat.emission_energy_multiplier = 0.5 + pulse_amount * 1.5
+    rotate_y(0.1 * _delta)  # slow rotation
+```
+
+## Transition State
+
+The lab_path passes a state token to the Lab that the Lab can read. The token records which sequence the learner just completed, so the Lab can reveal new artifacts or open new sequences accordingly.
+
+```gdscript
+# On teleport
+func transition_to_lab() -&gt; void:
+    GameState.current_lab_state = target_lab_state
+    get_tree().change_scene_to_file(&quot;res://commons/maps/Lab/map.tscn&quot;)
+```
+
+## Minimal Set of Assets
+
+The map uses only four scene files: the corridor mesh, the dark sphere, the teleporter, and the spawn point. This minimalism is deliberate — the corridor is supposed to feel emptier than the sequence&#x27;s active maps.
+
+## Load Time
+
+Because the scene is small, loading is fast. The learner does not wait at the transition; the scene change is perceptually instantaneous.
+
+## Variants
+
+Each sequence&#x27;s lab_path is nearly identical, differing only in the source_sequence and target_lab_state parameters. This is implemented by subclassing the shared template scene with minimal overrides.
+
+```gdscript
+class_name NoiseLabPath extends LabPath
+
+func _init() -&gt; void:
+    source_sequence = &quot;noise&quot;
+    target_lab_state = &quot;noise_complete&quot;
+```
+
+## Complexity
+
+The scene is O(1) in complexity. Per-frame cost is dominated by the dark sphere&#x27;s rendering with emission, which is still under a millisecond on modern hardware.
+
+## Within the Sequence
+
+Lab_Path is the sequence&#x27;s exit threshold. It teaches nothing and delivers nothing new, which is the point.
+
+## Save State Integration
+
+The chamber&#x27;s progress is tracked via the save manager. Befriending a creature, completing a configuration, or reaching a milestone is recorded in the learner&#x27;s profile and becomes available in subsequent sessions.
+
+```gdscript
+func on_befriend_event(creature_name: String) -&gt; void:
+    var save = get_tree().get_first_node_in_group(&quot;save_manager&quot;)
+    save.add_befriended_creature(creature_name)
+    save.mark_milestone(chamber_id + &quot;_befriended&quot;, Time.get_datetime_string_from_system())
+```
+
+## Performance Budget
+
+The chamber&#x27;s per-frame cost is dominated by creature animations and the science screen&#x27;s rendering. Both are modest: the creature uses a vertex-displacement shader or a prebuilt animation, and the science screen redraws scatter points incrementally rather than from scratch each frame.
+
+```gdscript
+func _process(_delta: float) -&gt; void:
+    if science_screen.needs_redraw():
+        science_screen.redraw_incremental()
+```
+
+## VR Comfort
+
+The chamber avoids fast camera moves and sudden lighting changes. Projectiles fire from the learner&#x27;s hand rather than from fixed spawners, so the learner controls the motion. The chamber&#x27;s lighting is stable across the encounter; any changes happen gradually through creature state transitions.
+
+## Accessibility
+
+The chamber supports seated play: all interactive elements are within arm&#x27;s reach, and the projectile direction is controllable from a single hand. The creature responds to either controller, so handedness is not a barrier.
+
+## Within the Curriculum
+
+This chamber is one of the curriculum&#x27;s catalyst chambers — small, self-contained rooms where the sequence&#x27;s accumulated vocabulary becomes relationship with a creature. The pattern is consistent across sequences: creature, catalyst (or its deliberate absence), science screen, return to Lab.
+
+## Transition Smoothing
+
+The teleporter uses a short fade-to-black before the scene change, giving the learner&#x27;s eyes time to adjust. The fade is 0.3 seconds — long enough to smooth the transition, short enough not to feel sluggish.</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Lab_Path/intent.md">Raw captured source</a></p><pre># Lab Path — an optional return
+
+Lab_Path remains a small grid-lane corridor and an optional reflection after Noise. It is listed in the sequence source and complete text capture, but its book pearl stays drop:true; the museum goes from Noise_Perlin_Simplex directly to Cellular Automata. It is not the shared endpoint of every sequence.
+
+Keep the question of two tellings: what happened in the encounter, and what the operation did. Their strongest invitation now also belongs to the main Perlin/Simplex ending, where every spine reader can meet it. The optional coda can invite a return without sending the reader into Cellular Automata a second time.
+
+The existing dark sphere gives the corridor a quiet continuing process. No new primary lesson or artifact is promoted here. Spatial correlation in a noise field is not stored memory of a previous state; the next main sequence introduces that different relation explicitly.
+
+Retain the grid, teleporter and existing scene. A future decision to build this pause into the museum would require spatial work, not simply changing its prose or clearing the drop flag.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Lab_Path/critical.md">Raw captured source</a></p><pre># The corridor is pedagogy — the unloading moment and the politics of a non-teaching
+
+Lab_Path is the corridor out of every sequence. It is deliberately under-decorated. Its template is shared across the whole curriculum: a small grid, a low ceiling, a single ambient element, a teleporter at the far end. It does not introduce a new artifact. It does not deliver a new lesson. It exists so that the learner has somewhere to pause between sequences, and the pause is the pedagogy.
+
+Shoshana Zuboff&#x27;s work on attention economies argues that the scarcity of cognitive downtime is a political condition. Curricula, media, and platforms fill every available moment with new content, and the filling makes integration impossible. Lab_Path is a refusal of this pattern. It gives the learner a few metres of empty corridor and a slowly pulsing dark sphere, and it does not apologise for the emptiness.
+
+The corridor is lit softly. The sphere rotates slowly at the midpoint, emitting a low purple glow. The learner walks the length, passes the sphere, and reaches the teleporter. Nothing else is asked of them. The space is short enough that the walk takes only a few seconds, long enough that the walk is a deliberate act rather than an incident.
+
+What makes this particular Lab_Path specific to Noise is the reading the learner carries through it. Nine maps earlier, randomness was memoryless — each sample independent, no relationship to its neighbours. After the Noise sequence, randomness has structure: Perlin gradients, octave stacks, domain warping, voxel thresholds. The walk back is the pause in which that shift can settle before the Lab re-admits the learner to the broader curriculum.
+
+Zuboff would note that the unloading moment is where the sequence&#x27;s work becomes durable. A learner who is immediately pushed into the next sequence carries a stack of unintegrated impressions. A learner who walks a corridor for twenty seconds has a chance to let the impressions find their places. The corridor&#x27;s refusal to teach is itself a pedagogical act, and the pedagogy is the trust that integration can happen if it is given time.
+
+The politics of non-teaching are in the resistance to the content-maximising default. A curriculum that never stops adding is a curriculum that treats the learner&#x27;s cognitive reserve as inexhaustible. Lab_Path treats the reserve as finite and worth protecting, and the protection takes the form of architectural emptiness. The design cost is small. The pedagogical payoff is the difference between retained and forgotten.
+
+Within the sequence, Lab_Path is the threshold. It teaches nothing and points at nothing. It hands the learner back to the Lab with the sequence&#x27;s work intact, and the intact-ness is the map&#x27;s whole contribution. The next sequence will begin a few seconds later, and the learner will arrive at it with the Noise sequence settled rather than buzzing.
+
+The corridor is what the sequence&#x27;s work deposits against — the short walk during which the technique becomes habit, and the habit is what persists after the sequence&#x27;s specific claims have faded.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Lab_Path/summary.md">Raw captured source</a></p><pre># Lab Path — Summary
+
+An optional reflection on the Noise encounters: a changed colour, a broken connection, a ridge that caught a foot. The text asks for two tellings of an encounter, one from perception and another from the operation, so an unfinished question can guide a return.
+
+The source map retains its 5 × 5 grid, teleporter and dark sphere. It remains available in the grid lane and in the complete sequence capture. The museum/book pearl is dropped; the main spine goes from Noise_Perlin_Simplex to Cellular Automata. The coda is not a second required handover or a shared endpoint for every sequence.
+
+The main chapter now carries the coda&#x27;s invitation to hold a seed, change a threshold and inspect an edge after its finish is removed. The corridor preserves room for a longer pause without adding a new algorithm to learn.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Lab_Path/blurb.md">Raw captured source</a></p><pre>A patch brightened. A connection broke. A ridge caught your foot. Which encounter has followed you out of the room?
+
+The sphere keeps turning while you give it two tellings: what you met, and the operation you began to recognise. Where the accounts do not quite meet, there may be a reason to go back.
+</pre></section></body></html>

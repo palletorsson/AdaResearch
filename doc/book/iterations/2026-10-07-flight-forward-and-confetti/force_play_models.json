@@ -1,0 +1,26 @@
+{
+  "checks": [
+    "flight: constructed with finite bodies and a reset",
+    "flight: two inherited thrust points and four gates",
+    "flight: boarding assigns the actual receiver",
+    "flight: unpowered rider still experiences gravity",
+    "flight: real grab connects thrust to this rider",
+    "flight: trigger overcomes gravity",
+    "flight: release removes thrust but retains upward motion",
+    "flight: reset refuses to steal a held point",
+    "flight: dropping point ends thrust",
+    "flight: a point carried from the earlier court also works",
+    "flight: finite motion",
+    "flight: reset restores original transforms",
+    "flight: reset survives the next physics frames"
+  ],
+  "failures": [],
+  "godot_version": "4.6-stable (official)",
+  "measurements": {
+
+  },
+  "passed": true,
+  "physics_engine": "Jolt Physics",
+  "physics_server": "PhysicsServer3D",
+  "scope": "Real Jolt Physics bodies, contact, joints and force integration. Simulated hand/receiver inputs; no headset claim."
+}

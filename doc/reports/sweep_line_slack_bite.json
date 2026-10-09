@@ -1,0 +1,1478 @@
+{
+ "sweep": "line_slack",
+ "peak_changed_pct": 10.574,
+ "subject_pct": 13.274,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "changed_px": 1911,
+   "changed_pct": 0.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "changed_px": 26613,
+   "changed_pct": 4.608
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 41190,
+   "changed_pct": 7.131
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 27891,
+   "changed_pct": 4.829
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 39270,
+   "changed_pct": 6.799
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 51325,
+   "changed_pct": 8.886
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 40732,
+   "changed_pct": 7.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 20318,
+   "changed_pct": 3.518
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 1911,
+   "changed_pct": 0.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "changed_px": 1911,
+   "changed_pct": 0.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "changed_px": 26613,
+   "changed_pct": 4.608
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 41190,
+   "changed_pct": 7.131
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 27891,
+   "changed_pct": 4.829
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 39270,
+   "changed_pct": 6.799
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 51325,
+   "changed_pct": 8.886
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 40732,
+   "changed_pct": 7.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 20318,
+   "changed_pct": 3.518
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 1911,
+   "changed_pct": 0.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "changed_px": 5430,
+   "changed_pct": 0.94
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "changed_px": 27891,
+   "changed_pct": 4.829
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 42468,
+   "changed_pct": 7.352
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 26641,
+   "changed_pct": 4.612
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 40732,
+   "changed_pct": 7.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 52787,
+   "changed_pct": 9.139
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 39278,
+   "changed_pct": 6.8
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 1911,
+   "changed_pct": 0.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 22025,
+   "changed_pct": 3.813
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "chord",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "changed_px": 2090,
+   "changed_pct": 0.362
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "changed_px": 26588,
+   "changed_pct": 4.603
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 41165,
+   "changed_pct": 7.127
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 28051,
+   "changed_pct": 4.856
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 39310,
+   "changed_pct": 6.806
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 51365,
+   "changed_pct": 8.893
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 40958,
+   "changed_pct": 7.091
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 25406,
+   "changed_pct": 4.399
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "changed_px": 2090,
+   "changed_pct": 0.362
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "changed_px": 26588,
+   "changed_pct": 4.603
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 41165,
+   "changed_pct": 7.127
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 28051,
+   "changed_pct": 4.856
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 39310,
+   "changed_pct": 6.806
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 51365,
+   "changed_pct": 8.893
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 40958,
+   "changed_pct": 7.091
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 5409,
+   "changed_pct": 0.936
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 25406,
+   "changed_pct": 4.399
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "changed_px": 28051,
+   "changed_pct": 4.856
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 42628,
+   "changed_pct": 7.38
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 26638,
+   "changed_pct": 4.612
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 40958,
+   "changed_pct": 7.091
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 53013,
+   "changed_pct": 9.178
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 39369,
+   "changed_pct": 6.816
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 7269,
+   "changed_pct": 1.258
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 27062,
+   "changed_pct": 4.685
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "spline",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 5430,
+   "changed_pct": 0.94
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "changed_px": 14959,
+   "changed_pct": 2.59
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 2437,
+   "changed_pct": 0.422
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 37614,
+   "changed_pct": 6.512
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 49669,
+   "changed_pct": 8.599
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 39992,
+   "changed_pct": 6.924
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 26613,
+   "changed_pct": 4.608
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 41370,
+   "changed_pct": 7.162
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 27891,
+   "changed_pct": 4.829
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "changed_px": 17396,
+   "changed_pct": 3.012
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 43863,
+   "changed_pct": 7.594
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 55309,
+   "changed_pct": 9.576
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 46241,
+   "changed_pct": 8.006
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 41190,
+   "changed_pct": 7.131
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 49277,
+   "changed_pct": 8.531
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 42468,
+   "changed_pct": 7.352
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "changed_px": 39991,
+   "changed_pct": 6.924
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 52046,
+   "changed_pct": 9.011
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 37615,
+   "changed_pct": 6.512
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 27891,
+   "changed_pct": 4.829
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 42594,
+   "changed_pct": 7.374
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "catenary",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 26641,
+   "changed_pct": 4.612
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "changed_px": 14081,
+   "changed_pct": 2.438
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 2648,
+   "changed_pct": 0.458
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 39270,
+   "changed_pct": 6.799
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 50301,
+   "changed_pct": 8.709
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 40732,
+   "changed_pct": 7.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "changed_px": 16729,
+   "changed_pct": 2.896
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 51325,
+   "changed_pct": 8.886
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 61075,
+   "changed_pct": 10.574
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 52787,
+   "changed_pct": 9.139
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "changed_px": 40732,
+   "changed_pct": 7.052
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 51763,
+   "changed_pct": 8.962
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "festoon",
+    "reading": "span"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 39278,
+   "changed_pct": 6.8
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "changed_px": 20318,
+   "changed_pct": 3.518
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "line"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 1911,
+   "changed_pct": 0.331
+  },
+  {
+   "a": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "load"
+   },
+   "b": {
+    "layout": "single",
+    "slack": "truss",
+    "reading": "span"
+   },
+   "changed_px": 22025,
+   "changed_pct": 3.813
+  }
+ ]
+}

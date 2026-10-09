@@ -1,0 +1,579 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Randomness_10_PRINT_Algorithm · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Randomness_10_PRINT_Algorithm">← Tutorial lineage</a></p><h1>Randomness 10 PRINT Algorithm</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Randomness_10_PRINT_Algorithm/final.md">Raw captured source</a></p><pre># A maze made of marks
+
+When do independent marks begin to look like a maze?
+
+Diagonals rise above the walls on three sides of the hall. Below them, a cluster of solid slabs leaves narrow openings between its edges. The same two marks recur on a screen at the far end. Something that fits inside one character has acquired room for a body.
+
+&lt;!-- @ten_print --&gt;
+
+The screen prints left to right, row under row. Beside it, the console carries one line of Commodore 64 BASIC:
+
+```basic
+10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+```
+
+One line, famous enough to have a book named after it.[^10print] Read it from the middle outward. `RND(1)` gives a number from zero up to, but not including, one. Added to 205.5, it lands between 205.5 and 206.5. `CHR$` keeps the whole part: character 205 or 206, one diagonal or the other. `GOTO 10` returns to the beginning.
+
+The constant 205.5 puts the two choices in balance. Each new mark can lean either way. Nothing in that choice asks whether a passage is needed beside it.
+
+Yet the field on this screen seems to breathe. Bands favour one diagonal, then the other. The small print admits why: “bias breathing.” A sine wave changes the odds while the line above still displays 205.5. What looks like a texture of chance also carries a rhythm someone chose. The familiar line does not account for everything this installation does.
+
+Press **BIAS +**. The breathing stops and the constant begins to change: 205.4, then 205.3. The next marks increasingly favour one direction. At 205, every mark is the same diagonal. The maze has become stripes. Use **BIAS −** to bring the constant back to 205.5; the odds are now fixed and even.
+
+There is another small decision in the line. Press **SEMICOLON** and the trailing `;` disappears. Every mark now begins a row of its own. The field becomes a single column.
+
+The semicolon tells `PRINT` to stay on the same line. Without it, each character is followed by a line break. This control starts the seeded stream again, so the column and the plane can receive the same choices. What differs is where a choice goes.
+
+Down the column, marks can still meet at corners and zigzag. They cannot close around a room. Four marks in a two-by-two block can: their diagonals make a diamond. The grid gives neighbouring marks shared endpoints; the line break decides whether they have neighbours in a second direction.
+
+Press **SEMICOLON** again. The plane returns. One tiny character has given the other characters another way to meet.
+
+Even those meetings have been interpreted. The red and blue bars slowly lengthen and shorten, touching at a corner and parting again. Nothing in the BASIC line asks them to do that. A display can loosen a connection the grid appeared to guarantee.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @composition_stochastique --&gt;
+
+Beside the printer, four square grids offer another use of the same diagonals. One direction fills each grid; the other occupies exactly one, five, thirty or fifty of its hundred cells. The plate names François and Vera Molnar, 1959.
+
+Step along them. Where does a field of parallel lines become something else? There is no example between five and thirty. Your eye has to cross that interval.
+
+**RESEED** changes the arrangement while keeping every count. The four grids come from one shuffled deal: the single turned cell in the first is turned in the other three too. Chance decides which cells turn. Their number was settled beforehand.
+
+The printer leaves that number open. Giving a diagonal a thirty-percent chance does not reserve exactly thirty of a hundred cells for it. A probability and a count are different instruments. Here they stand close enough to compare.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @ten_print_structure --&gt;
+
+Look down. The newest seven rows of the screen are also under your feet. Each cell is enlarged to half a metre, each diagonal laid down as a low ridge. A bright tile waits where the next mark will land. When a row fills, the ridges shift towards the far wall and the oldest row leaves the floor.
+
+**RUN** holds the printing; **STEP** adds one mark. The pause gives your eye time to follow a character from the screen to its place on the ground. Taking away the semicolon collapses this floor into a single file too. A change in the line reaches the room.
+
+These ridges offer no resistance. You can stand among them and pass through their edges. They give the eye a contour without giving the body a boundary.
+
+Now return to the taller slabs near the entrance.
+
+They retain the first twelve characters printed when the hall was built, before any adjustment of the odds. Here the characters are wrapped four to a row and stood two metres forty high. The console leaves this arrangement alone. Where two slabs run parallel, the gap is about seventy centimetres wide.
+
+Walk in. The mark you followed on the screen has become the face of a wall. Your route occupies the space beside it.
+
+Four slabs meet corner to corner around a small room with no entrance. Joining the marks has closed the passage. The same connection that completes a figure can keep a body outside it.
+
+Elsewhere the gaps lead back out. Some are shallow bays; one passage crosses the block. None forks. Between these diagonals, each small triangle of floor opens on two sides, so a corridor may turn but offers no branching choice. What looked like a maze from above becomes a different proposition at the width of your shoulders.
+
+The way through also depends on the crop. These twelve characters leave it when wrapped four to a row. Wrapped three to a row, they would leave neither a crossing nor a closed room. One more row of this stream would close the crossing too. The rule did not choose where the block ends. Whoever placed it did.
+
+Each cell was decided alone. Whether you can cross depends on their arrangement together. A body meets a consequence that no single draw contains.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @ten_print_maze_3d --&gt;
+
+Look up again at the three fields towering above the hall. Their lines can be crossed by your body, but they provide no surface to carry you upwards. Height in the image has not become a climb.
+
+A red ball stands for an ant in each field. It receives a different map: even parallel diagonals are treated as touching, so a channel you could walk between the slabs is closed to it. The ant stays around a corner until a cell turns and another move becomes possible. Every turn clears its record of where it has been.
+
+Watch a diagonal change near it. One replacement can join a long contour or break it apart. The slabs held still long enough for you to learn a passage. Here the ground of the ant&#x27;s small knowledge keeps changing.
+
+&lt;!-- @ --&gt;
+
+Two marks have supplied a printed field, a floor to stand among, walls that admit or refuse a body, and a changing world for an ant. The marks alone cannot tell us which world we have made. Their arrangement, their material and the body given to them all matter.
+
+The printed floor lets its oldest row go. In the next room a die&#x27;s record gathers outcomes instead, keeping how often each face appears while forgetting where it landed. After a passage made from independent choices, we meet a throw made by a hand.
+
+[^10print]: Nick Montfort, Patsy Baudoin, John Bell, Ian Bogost, Jeremy Douglass, Mark C. Marino, Michael Mateas, Casey Reas, Mark Sample and Noah Vawter, *10 PRINT CHR$(205.5+RND(1)); : GOTO 10* (MIT Press, 2012). The whole book is freely available at [10print.org](https://10print.org/) under a Creative Commons BY-NC-SA 3.0 licence. Its chapters are numbered like program lines — 10, 20, 30 — with remarks between them, and its long argument concerns the interplay of randomness and regularity that this room lets you pull apart.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Randomness_10_PRINT_Algorithm/tutorial.md">Raw captured source</a></p><pre># 10 PRINT Algorithm
+
+One coin flip per cell, infinite visual structure. Build the maze from the simplest random choice.
+
+Declare the maze grid.
+
+```gdscript
+class_name TenPrintMaze
+extends Node3D
+
+@export var rows: int = 20
+@export var cols: int = 20
+@export var cell_size: float = 0.4
+```
+
+Three numbers. Two for extent, one for cell size. The algorithm needs nothing else.
+
+Flip a cell.
+
+```gdscript
+func flip_cell() -&gt; String:
+    if randi() % 2 == 0:
+        return &quot;/&quot;
+    return &quot;\\&quot;
+```
+
+A single coin flip returns one of two slashes. The entire maze grammar is this function.
+
+Spawn the slash.
+
+```gdscript
+func spawn_slash(x: int, y: int, kind: String) -&gt; void:
+    var scene := preload(&quot;res://commons/artifacts/randomness/maze_slash.tscn&quot;)
+    var slash := scene.instantiate()
+    slash.position = Vector3(x * cell_size, 0.0, y * cell_size)
+    slash.rotation.y = deg_to_rad(45.0 if kind == &quot;/&quot; else -45.0)
+    add_child(slash)
+```
+
+Each cell gets a diagonal bar. The two rotations produce the two slashes. The mesh is one plank used twice.
+
+Build the full maze.
+
+```gdscript
+func build_maze() -&gt; void:
+    for x in cols:
+        for y in rows:
+            spawn_slash(x, y, flip_cell())
+```
+
+400 cells, 400 flips, 400 bars. The maze completes in one frame.
+
+Animate the build.
+
+```gdscript
+func animate_build() -&gt; void:
+    var i := 0
+    while i &lt; cols * rows:
+        var x := i % cols
+        var y := i / cols
+        spawn_slash(x, y, flip_cell())
+        i += 1
+        await get_tree().create_timer(0.01).timeout
+```
+
+A coroutine paces the build. The learner watches the maze emerge one cell at a time. Emergence is performed.
+
+Reseed to replay.
+
+```gdscript
+func reseed(new_seed: int) -&gt; void:
+    seed(new_seed)
+    _clear()
+    build_maze()
+```
+
+A new seed gives a new maze. The learner can compare two mazes drawn from two seeds.
+
+Measure path length.
+
+```gdscript
+func count_paths_hint() -&gt; int:
+    return cols * rows
+```
+
+The maze always has as many segments as cells. Path lengths and connections vary by seed. Counting is left as a small exercise.
+
+Overlay a grid for reference.
+
+```gdscript
+func draw_grid() -&gt; void:
+    for x in cols + 1:
+        grid_lines.add_line(Vector3(x * cell_size, 0, 0), Vector3(x * cell_size, 0, rows * cell_size))
+    for y in rows + 1:
+        grid_lines.add_line(Vector3(0, 0, y * cell_size), Vector3(cols * cell_size, 0, y * cell_size))
+```
+
+A faint grid underlies the slashes. The coin flip becomes visible as choice over structure.
+
+You have generated infinite pattern from one flip. The next map, Random Cubes, turns randomness onto objects.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Expose the flip bias.
+
+```gdscript
+func set_bias(p: float) -&gt; void:
+    bias = clamp(p, 0.0, 1.0)
+
+func flip_cell_biased() -&gt; String:
+    return &quot;/&quot; if randf() &lt; bias else &quot;\\&quot;
+```
+
+A bias slider tilts the coin. At 0.5 the maze is symmetric. At the extremes the maze degenerates into a single diagonal.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Randomness_10_PRINT_Algorithm/technical.md">Raw captured source</a></p><pre>&gt; Current encounter and verification (24 September 2026): [encounter notes](encounter-notes.md). The earlier account below is retained; the current note governs changed placement, controls and validation.
+
+# Randomness_10_PRINT_Algorithm - Technical Tutorial
+
+## The Original 10 PRINT
+
+The complete program in Commodore 64 BASIC:
+
+```basic
+10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+```
+
+### Decoding the Line
+
+- `10` - Line number (required in BASIC)
+- `PRINT` - Output to screen
+- `CHR$(205.5+RND(1))` - The magic:
+  - `RND(1)` returns random float 0.0-1.0
+  - Adding 205.5 gives range 205.5-206.5
+  - `CHR$()` converts to character: 205 = `/` diagonal, 206 = `\` diagonal
+  - Integer truncation means 50% chance of each
+- `;` - Suppress newline (continue on same line)
+- `: GOTO 10` - Loop forever
+
+### Godot Implementation
+
+```gdscript
+extends Node3D
+
+var maze_width = 40
+var maze_height = 30
+var cell_size = 1.0
+
+func _ready():
+    generate_maze()
+
+func generate_maze():
+    for y in range(maze_height):
+        for x in range(maze_width):
+            var slash_type = randi() % 2  # 0 or 1
+            spawn_slash(x, y, slash_type)
+
+func spawn_slash(x: int, y: int, type: int):
+    var mesh_instance = MeshInstance3D.new()
+    var box = BoxMesh.new()
+    box.size = Vector3(0.1, 0.1, cell_size * 1.4)  # Thin diagonal
+    mesh_instance.mesh = box
+
+    # Position at grid cell
+    mesh_instance.position = Vector3(x * cell_size, 0, y * cell_size)
+
+    # Rotate based on type
+    if type == 0:
+        mesh_instance.rotation.y = deg_to_rad(45)   # / slash
+    else:
+        mesh_instance.rotation.y = deg_to_rad(-45)  # \ slash
+
+    add_child(mesh_instance)
+```
+
+### 3D Extension
+
+The `ten_print_maze_3d` interactable extends the 2D concept:
+
+```gdscript
+# 3D 10 PRINT with vertical dimension
+func generate_3d_maze():
+    for z in range(depth):
+        for y in range(height):
+            for x in range(width):
+                # Binary choice in each dimension
+                var choice = randi() % 2
+                spawn_3d_element(x, y, z, choice)
+```
+
+### Probability and Pattern
+
+With exactly 50% probability:
+- Expected ratio: 1:1 slashes
+- Local clusters appear but dissolve
+- No long-range correlations
+- Apparent &quot;paths&quot; are illusory—pure coincidence
+
+```gdscript
+# Adjusting probability changes the texture
+func biased_10_print(bias: float = 0.5):
+    for y in range(height):
+        for x in range(width):
+            var slash = 0 if randf() &lt; bias else 1
+            spawn_slash(x, y, slash)
+
+# bias = 0.5: balanced maze
+# bias = 0.7: more / slashes, diagonal stripes emerge
+# bias = 0.9: almost all /, nearly horizontal lines
+# bias = 1.0: all /, perfect order (no randomness)
+```
+
+### The remove_random Interaction
+
+The `remove_random` elements demonstrate selective removal:
+
+```gdscript
+# Removing random elements reveals underlying structure
+func remove_random_elements(probability: float = 0.3):
+    for child in get_children():
+        if randf() &lt; probability:
+            child.queue_free()
+```
+
+## Implementation Notes
+
+### Multiple Instances
+The map contains three `ten_print_maze_3d` instances at different positions and rotations, demonstrating that:
+- Same algorithm + different seed = different pattern
+- Same algorithm + same seed = identical pattern
+- The &quot;randomness&quot; is deterministic but unpredictable
+
+### Shader Gallery
+The `Shader_Gallery` element shows visual processing of the maze patterns—how fragment shaders can transform procedural geometry.
+
+### Grid Configuration
+- `cube_size: 1.0`
+- `gutter: 0.0`
+- `show_grid: true`
+- Elevated structure (heights 1-3) creates viewing platforms
+
+## Key Takeaway
+10 PRINT is the canonical example of **emergence from simplicity**. A single binary choice, repeated infinitely, creates infinite variety. The algorithm has no memory, no state, no plan—yet produces patterns that look designed. This is entropy harnessed: maximum simplicity generating maximum complexity.
+
+## Axiom References
+- `commons/context/clipboard/tutorial_text/ten_print_axioms.md`
+
+## Within the Sequence
+
+Randomness_10_PRINT_Algorithm reproduces the famous Commodore 64 one-liner as a demonstration that a single random choice, applied uniformly across a grid, produces a characteristic emergent pattern.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map&#x27;s controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map&#x27;s concrete contribution to the curriculum.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Randomness_10_PRINT_Algorithm/intent.md">Raw captured source</a></p><pre># Intent
+
+A diagonal can join a figure while closing a passage. Let the reader take one printed rule apart, then feel what changes when its marks acquire walls and a crop. Preserve the difference between what the rule chooses and what the maker gives a body to enter.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Randomness_10_PRINT_Algorithm/critical.md">Raw captured source</a></p><pre># Randomness_10_PRINT_Algorithm - Critical Reflection
+
+## The Poetics of One Line
+
+10 PRINT is not just an algorithm—it&#x27;s a poem.
+
+In 38 characters, it encodes:
+- Infinite execution (GOTO 10)
+- Binary choice (205.5 + RND)
+- Visual output (CHR$)
+- Temporal unfolding (continuous printing)
+
+The MIT Press book &quot;10 PRINT CHR$(205.5+RND(1)); : GOTO 10&quot; (2012) argues this single line contains more than technique—it contains a **worldview**: that complexity need not be designed, that beauty can emerge from simplicity, that the universe might run on something like this.
+
+## Emergence Without Design
+
+The maze patterns have no architect. No one planned the paths. No one optimized the layout. The structure is **emergent**—arising from local rules without global coordination.
+
+This challenges our intuition about design:
+- We see patterns and assume intention
+- We see beauty and assume craft
+- We see complexity and assume planning
+
+10 PRINT inverts these assumptions. The patterns are accidental. The beauty is statistical. The complexity is simple, repeated.
+
+## The Illusion of Paths
+
+Players will see &quot;paths&quot; through the maze. They will follow what looks like a route. But these paths are illusions—random coincidences that our pattern-seeking minds interpret as structure.
+
+This is **apophenia**: the tendency to perceive meaningful connections between unrelated things.
+
+The maze has no paths. It has only local choices—/ or \—that sometimes align to look like corridors. The &quot;path&quot; exists only in perception, not in the algorithm.
+
+## What 10 PRINT Cannot Hold
+
+The algorithm cannot:
+- **Remember**: Each cell is independent, no memory of neighbors
+- **Plan**: No lookahead, no optimization, no goals
+- **Evolve**: No learning, no adaptation, no improvement
+- **Mean**: No semantics, no message, no intention
+
+Yet from these limitations, something emerges that **feels** meaningful. We project meaning onto randomness. We find significance in accident.
+
+## The Edge of Chaos, Precisely
+
+10 PRINT sits exactly at the edge of chaos:
+
+**Too ordered** (bias = 1.0): All slashes identical, no pattern, boring
+**Too chaotic** (each cell different size/color): No coherent texture, noise
+**Just right** (50/50 binary): Maximum complexity from minimum rules
+
+This is Langton&#x27;s λ parameter at 0.5—the critical point where complexity peaks. Change the probability even slightly and the visual texture shifts. 10 PRINT found the sweet spot.
+
+## Historical Materiality
+
+The algorithm is tied to specific hardware:
+- **Commodore 64 character set**: CHR$(205) and CHR$(206) are diagonal box-drawing characters
+- **Screen dimensions**: 40×25 characters shaped the visual experience
+- **Processing speed**: The maze appeared gradually, line by line
+- **Sound**: The continuous printing created a rhythmic clicking
+
+Modern implementations lose this materiality. The mazes appear instantly, silently, at any resolution. The **experience** of watching the maze emerge—the temporal unfolding—is lost.
+
+## Randomness as Democratic
+
+10 PRINT treats all positions equally. No cell is privileged. No location is special. The algorithm is **spatially democratic**—every point gets the same random treatment.
+
+This contrasts with designed systems where some positions matter more than others (the center, the edges, focal points). 10 PRINT refuses hierarchy. Every slash is equally arbitrary.
+
+## Questions That Remain
+
+1. **Why does it look like a maze?** The diagonal characters happen to suggest corridors. Different characters would suggest different structures. The &quot;mazeness&quot; is an artifact of the character set, not the algorithm.
+
+2. **What is the smallest complex algorithm?** 10 PRINT is a strong candidate—hard to imagine simpler code producing such rich output. But is there something even more minimal?
+
+3. **Can randomness be authored?** The programmer chose the probability (50%), the characters, the loop. These choices shape the output. Is the programmer the author of each maze, or just the author of the possibility space?
+
+4. **Where does the beauty come from?** Is it in the algorithm? In the output? In the perception? In the cultural context that primes us to see mazes as interesting?
+
+## The QFEP Reading
+
+In QFEP terms, 10 PRINT demonstrates:
+- **λ at critical point**: The probability is tuned to maximize complexity
+- **E(S) maximized locally**: Each cell has maximum entropy (50/50)
+- **F minimized globally**: The visual texture is coherent, not chaotic
+- **φΔE = 0**: The entropy is constant—no change over time
+
+This is a **static edge of chaos**: complexity without dynamics, emergence without evolution. The system doesn&#x27;t oscillate—it holds steady at the critical point.
+
+What would a dynamic 10 PRINT look like? One where the probability shifts over time, where local order emerges and dissolves, where the maze breathes between structure and noise?
+
+That question leads toward the rest of the randomness sequence—toward noise, distributions, and the full QFEP dynamics.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Randomness_10_PRINT_Algorithm/artifacts.md">Raw captured source</a></p><pre># Randomness 10 PRINT Algorithm — Artifacts
+*Randomness: Freedom from Pattern · E_entropy · 7 artifacts*
+
+&gt; One line of code. Two characters. Infinite complexity. The 10 PRINT maze emerges from the simplest possible random choice — flip a coin, draw a slash — and fills the world with labyrinthine possibility.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Random Destructor
+![Random Destructor](/scene-catalog/remove_random.png)
+
+A demolition algorithm that randomly removes cubes from the grid
+
+`remove_random`
+
+## ten_print_maze_3d
+![ten_print_maze_3d](/scene-catalog/ten_print_maze_3d.png)
+
+Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.
+
+`ten_print_maze_3d`
+
+## pickup_cube_placer
+![pickup_cube_placer](/scene-catalog/pickup_cube_placer.png)
+
+Finds the active grid system and populates pickup cubes using randomized or patterned placement modes.
+
+`pickup_cube_placer`
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## Clipboard
+![Clipboard](/scene-catalog/clipboard.png)
+
+NAVIGATE paged tutorial content as a stateful object in the world.
+
+`clipboard`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Nature System Demo
+![Nature System Demo](/scene-catalog/nature_system_demo.png)
+
+Visual test scene for the Q-FEP Nature System. Spawns critters from all 4 kingdoms (tree, creature, flower, fungus) in a grid. Keyboard controls: 1-4 spawn by kingdom, R randomize DNA, E evolve, L cycle LOD, H toggle hybrids, SPACE reset grid.
+
+`nature_system_demo`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Randomness_10_PRINT_Algorithm/summary.md">Raw captured source</a></p><pre># Randomness_10_PRINT_Algorithm - Map Summary
+
+## Overview
+This map showcases the legendary 10 PRINT algorithm—a single line of Commodore 64 BASIC that generates infinite maze patterns. The map demonstrates how **complexity emerges from simplicity**: one random binary choice (/ or \) repeated infinitely creates labyrinthine structures.
+
+## Spatial Layout
+- **Dimensions**: 13×14 grid
+- **Architecture**: Elevated northern wall (height 3), descending terraces, central arena
+- **Height**: Variable (1-3), creating amphitheater-like viewing positions
+
+## Key Elements
+
+### Interactables
+- **ten_print_maze_3d** (multiple instances) - 3D visualizations of the 10 PRINT algorithm running in real-time
+  - Position (1,2) height 1 - First maze instance
+  - Position (11,2) height 1 - Second maze instance
+  - Position (1,12) rotated 90° - Third maze instance
+- **clipboard#ten_print_axioms** (6,4) - The famous one-liner and its explanation
+- **remove_random** (1,1) and (7,1) - Interactive randomness removal demonstrations
+- **pickup_cube_placer** (2,2) - Interactive cube placement
+- **dark_sphere** (5,7) - Ambient darkness zone
+- **Shader_Gallery** (6,10) - Visual shader demonstrations
+
+### Utilities
+- **Teleporter** (6,7) - Exit to next map (Random_Noise_Types)
+
+## Atmosphere
+- **Background**: Deeper blue sky [0.3, 0.3, 0.7]
+- **Lighting**: Slightly higher energy (1.3) for dramatic effect
+- **Mood**: Generative, hypnotic, celebrating emergence
+
+## Learning Sequence
+1. Player enters elevated position—overview of the arena below
+2. Descends through terraced structure toward maze visualizations
+3. Encounters first 10 PRINT maze running in 3D
+4. Reads the axiom clipboard: `10 PRINT CHR$(205.5+RND(1)); : GOTO 10`
+5. Observes multiple maze instances—same algorithm, different random seeds
+6. Explores dark sphere zone—contemplation of infinite generation
+7. Discovers Shader Gallery—visual processing of randomness
+8. Exits via teleporter
+
+## Design Intent
+The elevated entry and descending terraces create a sense of **descent into emergence**. The player literally moves from overview (seeing the pattern) to immersion (being within the pattern). Multiple maze instances demonstrate that the same simple rule produces different results—randomness as variation within constraint.
+
+## Cultural and Historical Context
+
+### The One-Liner (Commodore 64, c. 1982)
+```basic
+10 PRINT CHR$(205.5+RND(1)); : GOTO 10
+```
+
+This program:
+- Prints either ╱ (CHR$205) or ╲ (CHR$206) based on RND result
+- Loops forever (GOTO 10)
+- Uses PETSCII diagonal characters specific to C64
+
+### From the MIT Press Book &quot;10 PRINT&quot; (2012)
+The book treats code as **cultural text**, analyzing:
+- Randomness and regularity in computing and art
+- The maze as cultural motif across civilizations
+- BASIC&#x27;s role in democratizing programming
+- Constraint enabling aesthetics (PETSCII character set)
+
+### Cultural Connections
+- **Minimalist art**: Repetition with variation
+- **Textile patterns**: Weaving as algorithmic process
+- **Demoscene**: Maximum output from minimum code
+- **Generative art**: Emergence from simple rules
+
+## The Algorithm&#x27;s Significance
+&quot;Back in the early eighties, to be able to generate such visually impressive and complex looking imagery with so little code, was quite an amazing thing.&quot; The program demonstrates that **complexity is cheap** when you have randomness—the maze emerges without being designed.
+
+## Connection to Sequence
+- **Position in randomness sequence**: 2/13
+- **Precedes**: Random_Noise_Types
+- **Follows**: Random_Definition
+- **Theme**: Complexity from simplicity—the minimal viable random algorithm
+- **Pedagogical role**: Bridge from theory (entropy) to practice (generative algorithm)
+
+## QFEP Connection
+10 PRINT operates at the **edge of chaos**: a rule so simple it&#x27;s almost order (only two choices), but random enough to generate infinite variety. This is the λ parameter in action—tuned precisely to the boundary between determinism and chaos.
+
+## Sources
+- [10 PRINT CHR$(205.5+RND(1)); : GOTO 10](https://10print.org/) - MIT Press (2012)
+- Commodore 64 PETSCII character set
+- Nature of Code - constrained randomness patterns
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Randomness_10_PRINT_Algorithm/blurb.md">Raw captured source</a></p><pre>One line of Commodore 64 BASIC — `10 PRINT CHR$(205.5+RND(1)); : GOTO 10` — prints one of two diagonals, over and over, and the diagonals meet at the corners of their cells until the screen reads as a maze.
+
+This hall takes the line apart. A screen prints it, with a console that shows the program and lets you move the famous 205.5, which is the coin&#x27;s fairness, and remove the semicolon, which is what lets one mark sit beside the next. The floor the printer stands on is the screen&#x27;s newest seven rows, laid down as low ridges. Four grids after François and Vera Molnar fix how many cells turn and leave chance only where. And a block of solid walls, printed from the same coin at the height of a body, can be walked into — to find out whether twelve coin flips left a way through.
+</pre></section></body></html>

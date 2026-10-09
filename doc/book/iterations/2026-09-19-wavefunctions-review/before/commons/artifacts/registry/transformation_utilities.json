@@ -1,0 +1,34 @@
+{
+  "artifacts": {
+    "tc": {
+      "lookup_name": "tc",
+      "name": "Transport cube",
+      "scene": "res://commons/scenes/mapobjects/transport_cube.tscn",
+      "description": "A grid utility that translates between endpoints and carries a detected rider by the same displacement. Its map cell owns the route and timing configuration.",
+      "category": "transforms",
+      "artifact_type": "utility",
+      "map_ready": false,
+      "include_in_map_data": false
+    },
+    "sc": {
+      "lookup_name": "sc",
+      "name": "Scale cube",
+      "scene": "res://commons/scenes/mapobjects/scale_cube.tscn",
+      "description": "A grid utility whose visible cube and collision grow together. Its map cell sets size limits, centre offset and optional deck seating.",
+      "category": "transforms",
+      "artifact_type": "utility",
+      "map_ready": false,
+      "include_in_map_data": false
+    },
+    "rc": {
+      "lookup_name": "rc",
+      "name": "Rotation cube / bridge",
+      "scene": "res://commons/scenes/mapobjects/rotation_cube.tscn",
+      "description": "A grid utility with a rotating collision body. The map selects angles, axis and timing; the bridge profile makes a thin plank instead of the default wall.",
+      "category": "transforms",
+      "artifact_type": "utility",
+      "map_ready": false,
+      "include_in_map_data": false
+    }
+  }
+}

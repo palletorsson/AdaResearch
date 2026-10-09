@@ -1,0 +1,17 @@
+--- before/commons/maps/WaveFunctions_Effect_Sound/final.md
++++ commons/maps/WaveFunctions_Effect_Sound/final.md
+@@ -18,7 +18,7 @@
+ var output = sin(2.0 * PI * carrier_freq * t + modulator) * carrier_env
+ ```
+ 
+-The modulator is inside the sine's argument. Adding it there advances or delays the carrier's phase; the envelope outside controls the note's rise and fading. The room calls this FM synthesis. This expression implements phase modulation, which also changes instantaneous frequency. The orange contribution is not mixed in as a second audible output. It changes how the other oscillation proceeds.
++The modulator is inside the sine's argument. Adding it there advances or delays the carrier's phase; the envelope outside controls the note's rise and fading. The instrument names this phase modulation: an FM-style synthesis method that also changes instantaneous frequency. The orange contribution is not mixed in as a second audible output. It changes how the other oscillation proceeds.
+ 
+ Now keep the height of the orange ball as steady as you can and change its depth along the desk. That direction changes the modulator's decay. Listen through the tail before moving again. Can the altered character persist while the note grows quiet?
+ 
+@@ -42,4 +42,4 @@
+ 
+ Look back at the scope. Once the orange contribution is above zero, raising its index need not make the orange trace taller: the display divides that lane by the index to fit it. The output changes while the apparent height of its cause can stay much the same. Even this small window has an arrangement to uncover. It shows two carrier periods near the attack, not the whole fading note. The coloured cube gives some of the settings another appearance. Neither can take over the listening.
+ 
+-In AirMusic, a strike starts a response that continues after contact. Carry this habit to the bar: give a sound time to change before deciding what sort of body has answered.
++In AirMusic, a strike will start a response that continues after contact. First, Bernini gives periodic change another direction: along the height of a column. Walk around it. What changes as you move, and what keeps moving when you stand still?

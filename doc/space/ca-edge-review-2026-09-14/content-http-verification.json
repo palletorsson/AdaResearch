@@ -1,0 +1,220 @@
+{
+  "checks": 34,
+  "failures": [],
+  "results": [
+    {
+      "name": "All five authored works remain exactly once",
+      "passed": true
+    },
+    {
+      "name": "Every map layer matches 19 by 30",
+      "passed": true
+    },
+    {
+      "name": "All roles and their order unchanged",
+      "passed": true
+    },
+    {
+      "name": "Book markers match the primary collection",
+      "passed": true
+    },
+    {
+      "name": "All other book pearls unchanged",
+      "passed": true
+    },
+    {
+      "name": "Book hero is the primary",
+      "passed": true
+    },
+    {
+      "name": "Other museum rows and active order unchanged: ada_run/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "Other museum rows and active order unchanged: commons/data/museum/em_plan.json",
+      "passed": true
+    },
+    {
+      "name": "Both museum rows match the complete map collection",
+      "passed": true
+    },
+    {
+      "name": "Only the primary registry description changed",
+      "passed": true
+    },
+    {
+      "name": "final.md code excerpts are real source lines",
+      "passed": true
+    },
+    {
+      "name": "technical.md code excerpts are real source lines",
+      "passed": true
+    },
+    {
+      "name": "Accepted Godot evidence matches current source and preserves the hand",
+      "passed": true
+    },
+    {
+      "name": "Learning ladder records the finished comparison and next hall",
+      "passed": true
+    },
+    {
+      "name": "Documented scattered centre value agrees with seed",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-entrance.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-slices.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-floor.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-readout.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-controls.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-retained-gallery.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-whole-hall.png",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-data.json",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-verification.json",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-review.js",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-final.md",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-technical.md",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-critical.md",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-field_notes.md",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/ca-edge-difference.html",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/learning-ladder.html",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/learning-ladder.md",
+      "passed": true
+    },
+    {
+      "name": "Published bytes match: possible-bodies/learning-ladder.json",
+      "passed": true
+    }
+  ],
+  "http": [
+    {
+      "path": "possible-bodies/ca-edge-entrance.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-slices.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-floor.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-readout.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-controls.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-retained-gallery.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-whole-hall.png",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-data.json",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-verification.json",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-review.js",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-final.md",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-technical.md",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-tutorial.md",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-critical.md",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-field_notes.md",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/ca-edge-difference.html",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/learning-ladder.html",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/learning-ladder.md",
+      "status": 200
+    },
+    {
+      "path": "possible-bodies/learning-ladder.json",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,1117 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "41"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				0.809483051300049,
+				-0.0851375460624695,
+				0.727167546749115
+			],
+			"bounds_size": [
+				6.54401254653931,
+				6.40607786178589,
+				7.48790311813354
+			],
+			"cell": [
+				3,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "BodyRagdoll/RackPanel/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.59567785263062,
+						1.10478532314301,
+						8.09999942779541
+					]
+				},
+				{
+					"disabled": false,
+					"path": "BodyRagdoll/RackPanel/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.59567785263062,
+						1.10478532314301,
+						8.09999942779541
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "MolecularDesigner",
+					"position": [
+						6.69999980926514,
+						1.60000002384186,
+						7.09999990463257
+					],
+					"text": "FOLLOW THE AMBER RING\nOne instance. Another role.\nWalk around the assembly."
+				},
+				{
+					"parent": "BodyWorkshop",
+					"position": [
+						8.69999980926514,
+						2.65000009536743,
+						5.39999961853027
+					],
+					"text": "LEAVE A BODY DIFFERENT\nTake a joint. Or move a connection."
+				},
+				{
+					"parent": "BodyWorkshop",
+					"position": [
+						7.44999980926514,
+						1.45000004768372,
+						7.29999971389771
+					],
+					"text": "GOLD: move a joint\nTURQUOISE: change either end\nRelease a ring at another joint."
+				},
+				{
+					"parent": "BodyRagdoll",
+					"position": [
+						3.25,
+						2.54999995231628,
+						9.19999980926514
+					],
+					"text": "A BODY WITH WEIGHT\r\nTake a coral ring. Let go."
+				},
+				{
+					"parent": "RackPanel",
+					"position": [
+						3.5380699634552,
+						1.18625128269196,
+						8.09999942779541
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				3.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"token": "MolecularDesigner"
+		},
+		{
+			"bounds_position": [
+				4.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:advancedlaboratory lab equipment simulation"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				10.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				13.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				13.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				13.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				12.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				10.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				10.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				5.77500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				9.11897563934326,
+				0.419999986886978,
+				10.1189756393433
+			],
+			"bounds_size": [
+				0.762048721313477,
+				1.65292751789093,
+				0.762048721313477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.419999986886978,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				183.452285766602,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"checks": [
+		{
+			"message": "MolecularDesigner loads in its actual museum hall",
+			"ok": true
+		},
+		{
+			"message": "Opt-in ragdoll built",
+			"ok": true
+		},
+		{
+			"message": "Ten physical parts joined by nine pin constraints",
+			"ok": true
+		},
+		{
+			"message": "Every source body point has a grabbable ring",
+			"ok": true
+		},
+		{
+			"message": "Ragdoll physics stays at metre scale under enlarged artifact",
+			"ok": true
+		},
+		{
+			"message": "Hanging support keeps head in reach",
+			"ok": true
+		},
+		{
+			"message": "Physical parts use mass and gravity, never frozen during play",
+			"ok": true
+		},
+		{
+			"message": "Desktop ray selects the hand ring",
+			"ok": true
+		},
+		{
+			"message": "Taking hand releases hanging support",
+			"ok": true
+		},
+		{
+			"message": "Pulling hand moves both hand and neighbouring elbow",
+			"ok": true
+		},
+		{
+			"message": "Grabbing target does not freeze or teleport the physical limb",
+			"ok": true
+		},
+		{
+			"message": "Joined limb anchors remain within solver tolerance during dragging",
+			"ok": true
+		},
+		{
+			"message": "Reset refuses to interrupt a held limb",
+			"ok": true
+		},
+		{
+			"message": "Desktop release stops pulling and restores pickable target",
+			"ok": true
+		},
+		{
+			"message": "Released body falls, stays above floor and settles low",
+			"ok": true
+		},
+		{
+			"message": "Constraints survive the fall",
+			"ok": true
+		},
+		{
+			"message": "Physical reset button hangs the body again",
+			"ok": true
+		},
+		{
+			"message": "Reset restores the head to hanging position",
+			"ok": true
+		},
+		{
+			"message": "Two XRTools pickups can hold different limbs together",
+			"ok": true
+		},
+		{
+			"message": "XRTools controller movement pulls the physical foot",
+			"ok": true
+		},
+		{
+			"message": "Joint constraints remain bounded with two held limbs",
+			"ok": true
+		},
+		{
+			"message": "Both VR releases stop their forces",
+			"ok": true
+		},
+		{
+			"message": "Physics play changes neither gold workshop nor saved return pose",
+			"ok": true
+		},
+		{
+			"message": "Other catalogue placements remain unchanged unless opted in",
+			"ok": true
+		}
+	],
+	"collections": [],
+	"desktop_hit": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/MolecularDesigner/BodyRagdoll/Grip_l_hand",
+	"drag": {
+		"constraint_gap": 0.0491859540343285,
+		"elbow_distance": 0.490390598773956,
+		"hand_distance": 0.743884265422821
+	},
+	"failures": [],
+	"grip_position": [
+		0.00602245330810547,
+		0.939244389533997,
+		0.275477409362793
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"ragdoll_position": [
+		3.5,
+		0.0,
+		9.19999980926514
+	],
+	"rays": [],
+	"released": {
+		"constraint_gap": 0.00221574190072715,
+		"highest_part_center": 0.225896507501602
+	},
+	"reset_head_error": 0.00232080603018403,
+	"room": "AdvancedLaboratory_Lab_Equipment_Simulation",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/AdvancedLaboratory_Lab_Equipment_Simulation/museum-hanging.png",
+		"res://ada_run/encounter_pilot/AdvancedLaboratory_Lab_Equipment_Simulation/museum-pulled.png",
+		"res://ada_run/encounter_pilot/AdvancedLaboratory_Lab_Equipment_Simulation/museum-released.png",
+		"res://ada_run/encounter_pilot/AdvancedLaboratory_Lab_Equipment_Simulation/museum-bodies.png"
+	],
+	"two_hand_gap": 0.0492484867572784,
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				6.29831027984619,
+				0.000842402572743595,
+				4.02703619003296
+			],
+			"passed": true,
+			"tag": "approach-0",
+			"target": [
+				6.3,
+				0.05,
+				4.0
+			]
+		},
+		{
+			"end": [
+				6.30000972747803,
+				0.000842402572743595,
+				8.8270320892334
+			],
+			"passed": true,
+			"tag": "approach-1",
+			"target": [
+				6.3,
+				0.05,
+				8.8
+			]
+		},
+		{
+			"end": [
+				5.3005895614624,
+				0.000842402572743595,
+				9.19977951049805
+			],
+			"passed": true,
+			"tag": "approach-2",
+			"target": [
+				5.3,
+				0.05,
+				9.2
+			]
+		},
+		{
+			"end": [
+				6.23392200469971,
+				0.000842402572743595,
+				9.19998550415039
+			],
+			"passed": true,
+			"tag": "approach-3",
+			"target": [
+				6.3,
+				0.05,
+				9.2
+			]
+		},
+		{
+			"end": [
+				6.50311040878296,
+				0.000840610824525356,
+				11.7150096893311
+			],
+			"passed": true,
+			"tag": "approach-4",
+			"target": [
+				6.5,
+				0.05,
+				11.7
+			]
+		}
+	]
+}

@@ -1,0 +1,315 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Classification · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Classification">← Tutorial lineage</a></p><h1>ML Classification</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Classification/final.md">Raw captured source</a></p><pre># A boundary that moves with its centre
+
+Why can a point change groups even though the point itself has not moved?
+
+&lt;!-- @enhanced_kmeans --&gt;
+
+Begin with BLOBS. Press STEP to give the points their first colours, then pick one near the boundary between two groups. Keep its position in view while watching the centres nearby. Predict which centre will claim it at the next step. PAUSE / RUN lets the updates continue; RESET returns this sample and its centres to their beginning.
+
+The points are repeatedly assigned to their nearest centre. Each centre then moves to the mean position of the points assigned to it. Moving a centre changes where the next boundary will fall, so a stationary point can acquire a different group membership. Assignment and centre movement take turns reshaping one another.
+
+Follow a centre during an update and identify the points that are pulling its mean towards one side. A single centre summarises the assigned positions without preserving their whole arrangement. Two differently shaped groups could share a mean, so the centre is already a compression of the data. When the next assignment uses that centre, it acts on the summary. This is one reason to keep watching the points rather than allowing the moving centres to become your only evidence.
+
+This is k-means clustering. The number of centres is chosen in advance; the procedure searches for an arrangement of those centres using distance. The default display starts with four centres, while the generated sample contains three broad blobs and some noise. It is a useful reason to look closely instead of assuming the chosen number reveals the data’s natural categories.
+
+The room is called Classification, but this encounter does not learn named classes from labelled examples. It groups observations by geometry. Calling a cluster a diagnosis, a personality or a social identity would add an interpretation that the distance calculation did not supply.
+
+Two works in this hall do learn from labelled examples. The one with the gold points draws a line between two classes as wide as the data allows, and the line depends only on the few points that touch it; the rest could be thrown away. The other grows a small forest of decision trees, each on a different sample of the same data, and lets them vote. Neither is the centres&#x27; geometry, and both were told the answers first.[^perceptron]
+
+Watch a point on the edge of a blob after most colours appear settled. A hard colour boundary reports one assignment and conceals how nearly the alternatives competed. The displayed total distance is also a particular readout; do not confuse it with a complete explanation of why every individual assignment is appropriate.
+
+Press DATASET to replace the blobs with RINGS. Four centres remain. Before stepping, follow a ring with your eye; then watch where its colour breaks. The grouping follows distance to a centre, which need not follow the form you were tracing.
+
+Press DATASET again for BLOCK, a sample with no planted clusters. The procedure still gives it four groups. Does the confidence of the colour change when there was no group for it to discover? Return to BLOBS and the earlier sample returns. We have changed what the procedure encounters while keeping its demand for four centres. The boundary belongs to that meeting.
+
+&lt;!-- @ --&gt;
+
+The neural-network room introduces learned connections between layers. It will still need an account of what its training examples and error measure ask it to preserve.
+
+[^perceptron]: Rosenblatt&#x27;s perceptron (1957) is the simplest of these, a line learned from labelled points; Minsky and Papert showed in 1969 that one line cannot separate an exclusive-or. A kernel is how a line becomes a curve, a hidden layer how a network does. The two works are svm_visualization and random_forest_visualization.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Classification/tutorial.md">Raw captured source</a></p><pre># ML Classification
+
+Separate classes in feature space. K-means, SVM, neural network.
+
+Label a dataset.
+
+```gdscript
+class_name LabeledDataset
+
+var points: Array = []   # Vector2
+var labels: Array = []   # int (class indices)
+
+func add_point(p: Vector2, label: int) -&gt; void:
+    points.append(p)
+    labels.append(label)
+```
+
+A labelled point cloud. Two classes for the simplest case.
+
+K-means clustering.
+
+```gdscript
+func kmeans(points: Array, k: int, max_iter: int = 50) -&gt; Array:
+    var centroids: Array = []
+    for _i in k:
+        centroids.append(points[randi() % points.size()])
+    for _iter in max_iter:
+        var clusters: Array = []
+        for _i in k: clusters.append([])
+        for p in points:
+            var best: int = 0
+            var best_dist: float = INF
+            for i in k:
+                var d: float = p.distance_to(centroids[i])
+                if d &lt; best_dist:
+                    best_dist = d; best = i
+            clusters[best].append(p)
+        var changed: bool = false
+        for i in k:
+            if clusters[i].is_empty(): continue
+            var mean := Vector2.ZERO
+            for p in clusters[i]: mean += p
+            mean /= clusters[i].size()
+            if not mean.is_equal_approx(centroids[i]):
+                centroids[i] = mean; changed = true
+        if not changed: break
+    return centroids
+```
+
+Iterate: assign points to nearest centroid, update centroid to cluster mean, repeat. Converges when assignments stabilise.
+
+Linear SVM decision boundary.
+
+```gdscript
+class_name SimpleSVM
+
+var weights: Vector2 = Vector2.ZERO
+var bias: float = 0.0
+
+func predict(p: Vector2) -&gt; int:
+    return 1 if weights.dot(p) + bias &gt; 0 else -1
+
+func train(dataset: LabeledDataset, lr: float = 0.01, epochs: int = 100) -&gt; void:
+    for _e in epochs:
+        for i in dataset.points.size():
+            var p: Vector2 = dataset.points[i]
+            var y: int = dataset.labels[i]
+            if y * (weights.dot(p) + bias) &lt; 1:
+                weights += lr * (y * p - 0.01 * weights)
+                bias += lr * y
+            else:
+                weights -= lr * 0.01 * weights
+```
+
+Hinge-loss SGD. Simple but effective for linearly separable data.
+
+Neural classifier forward pass.
+
+```gdscript
+class_name SimpleNN
+
+var W1: Array  # input-to-hidden
+var b1: Array
+var W2: Array  # hidden-to-output
+var b2: Array
+
+func forward(x: Vector2) -&gt; float:
+    var h1: Array = [
+        max(0.0, W1[0][0] * x.x + W1[0][1] * x.y + b1[0]),
+        max(0.0, W1[1][0] * x.x + W1[1][1] * x.y + b1[1]),
+        max(0.0, W1[2][0] * x.x + W1[2][1] * x.y + b1[2]),
+        max(0.0, W1[3][0] * x.x + W1[3][1] * x.y + b1[3]),
+    ]
+    return 1.0 / (1.0 + exp(-(W2[0] * h1[0] + W2[1] * h1[1] + W2[2] * h1[2] + W2[3] * h1[3] + b2)))
+```
+
+Two inputs, four hidden units with ReLU, one sigmoid output. A canonical small network.
+
+Render a decision boundary.
+
+```gdscript
+func render_boundary(predict_func: Callable, bounds: Rect2, resolution: int = 100) -&gt; ImageTexture:
+    var image := Image.create(resolution, resolution, false, Image.FORMAT_RGBA8)
+    for py in resolution:
+        for px in resolution:
+            var p := Vector2(px, py) / resolution * bounds.size + bounds.position
+            var label = predict_func.call(p)
+            image.set_pixel(px, py, Color.RED if label == 1 else Color.BLUE)
+    return ImageTexture.create_from_image(image)
+```
+
+Sample the classifier on a grid. Paint each sample according to the predicted label.
+
+Visualise the dataset.
+
+```gdscript
+func render_points(dataset: LabeledDataset) -&gt; void:
+    for i in dataset.points.size():
+        var marker := SphereMesh.new()
+        var mi := MeshInstance3D.new()
+        mi.mesh = marker
+        mi.position = Vector3(dataset.points[i].x, 0.1, dataset.points[i].y)
+        var mat := StandardMaterial3D.new()
+        mat.albedo_color = Color.RED if dataset.labels[i] == 1 else Color.BLUE
+        mi.material_override = mat
+        add_child(mi)
+```
+
+Each data point becomes a coloured sphere. The classifier&#x27;s boundary can be overlaid.
+
+You can now build a labelled dataset, cluster with k-means, train an SVM with hinge-loss SGD, forward-pass a small neural network, and render decision boundaries. ML_Neural_Networks extends into multi-layer architecture.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Classification/technical.md">Raw captured source</a></p><pre># ML Classification — Technical
+
+The map runs three classifiers on the same labelled dataset: k-means, SVM, and a small neural network. Each classifier draws a decision boundary, and the boundaries are displayed side by side.
+
+K-means is unsupervised. It drops k centroids, assigns each data point to the nearest centroid, then updates each centroid to the mean of its assigned points, and repeats until the assignments stop changing.
+
+```gdscript
+func kmeans(points: Array, k: int, max_iter: int = 50) -&gt; Array:
+    var centroids: Array = points.slice(0, k).duplicate()
+    for iter in range(max_iter):
+        var clusters: Array = []
+        for i in range(k):
+            clusters.append([])
+        for p in points:
+            var best: int = 0
+            var best_d: float = INF
+            for i in range(k):
+                var d = p.distance_to(centroids[i])
+                if d &lt; best_d:
+                    best_d = d; best = i
+            clusters[best].append(p)
+        var changed: bool = false
+        for i in range(k):
+            if clusters[i].is_empty(): continue
+            var mean: Vector2 = Vector2.ZERO
+            for q in clusters[i]:
+                mean += q
+            mean /= clusters[i].size()
+            if mean != centroids[i]:
+                centroids[i] = mean
+                changed = true
+        if not changed: break
+    return centroids
+```
+
+## SVM
+
+A linear SVM finds the separating hyperplane with the widest margin between classes. The primal formulation is a quadratic program; the dual formulation reveals that only support vectors — points on the margin boundary — affect the solution. For non-linearly-separable data, the kernel trick maps points into a higher-dimensional space where linear separation is possible, without computing the mapping explicitly.
+
+The SVM artifact uses a precomputed solution, since QP solvers are outside Godot&#x27;s built-in toolkit. The visualisation shows the decision boundary, the margin, and the support vectors — the handful of points that determine everything.
+
+## Neural Classifier
+
+The third station runs a small feedforward network: two hidden layers of eight units each with ReLU activation, trained by stochastic gradient descent. The network bends the decision boundary into a curve that follows the local density of the data.
+
+```gdscript
+func predict(x: Vector2) -&gt; float:
+    var h1: Array = layer_forward(x, W1, b1)
+    h1 = relu(h1)
+    var h2: Array = layer_forward(h1, W2, b2)
+    h2 = relu(h2)
+    var out: float = layer_forward(h2, W3, b3)[0]
+    return sigmoid(out)
+
+func relu(v: Array) -&gt; Array:
+    var r: Array = []
+    for x in v:
+        r.append(max(0.0, x))
+    return r
+```
+
+## Comparison
+
+The three boundaries on the same data: k-means gives a Voronoi partition, SVM gives a linear margin, the neural network gives a curved boundary that follows density. Each is a different hypothesis class, and the hypothesis class — not the training procedure — is what determines which patterns the classifier can express.
+
+Within the sequence, Classification makes optimisation output something visible. ML_Neural_Networks will next stack these decisions into layers.
+
+## The Kernel Trick
+
+SVMs can fit non-linear boundaries by mapping inputs into a higher-dimensional feature space where a linear separator exists. The kernel trick computes the inner product in that feature space without computing the mapping explicitly, using a kernel function K(x, y) that equals the inner product of the mapped points.
+
+```gdscript
+func kernel_rbf(x: Vector2, y: Vector2, gamma: float = 0.5) -&gt; float:
+    return exp(-gamma * x.distance_squared_to(y))
+
+func kernel_polynomial(x: Vector2, y: Vector2, degree: int = 3) -&gt; float:
+    var dot = x.x * y.x + x.y * y.y
+    return pow(dot + 1.0, degree)
+```
+
+The RBF kernel (radial basis function) is the default choice for non-linear SVM because it corresponds to an infinite-dimensional feature space where any data is separable. The polynomial kernel is cheaper but less expressive.
+
+## Regularisation
+
+Overfitting happens when the classifier memorises the training data and fails to generalise. L2 regularisation adds a penalty proportional to the squared magnitude of the weights, encouraging small weights. L1 regularisation adds a penalty proportional to absolute weight magnitude, encouraging sparse weights (many weights exactly zero). Dropout, used in neural networks, randomly zeros a fraction of the activations during training, which prevents co-adaptation of units.
+
+## Evaluation
+
+Training accuracy alone is not a reliable signal of classifier quality. The standard practice is to hold out a test set that the classifier never sees during training, and report accuracy on the test set. Cross-validation — training on K-1 folds and testing on the remaining fold, rotating through all K folds — gives a more robust estimate for small datasets.
+
+Class imbalance complicates evaluation. A 99%/1% class split admits a trivial classifier that always predicts the majority class and achieves 99% accuracy while being useless. Precision, recall, and F1 score give a better picture by separately tracking false positives and false negatives.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Classification/intent.md">Raw captured source</a></p><pre>Concept: Classification as geometric partitioning — drawing a boundary through feature space that separates one category from another. The decision boundary is the central artifact: a line, curve, or hyperplane that encodes what the model has learned.
+Sequence role: Third map in the Machine Learning sequence (15th spine sequence, integration phase). Takes the gradient descent machinery from ML_Gradient_Landscape and applies it to a concrete task: separating data into classes. The decision boundary concept carries forward into ML_Neural_Networks where deeper architectures bend boundaries into arbitrary shapes. Connects back to gradient optimization and forward to neural network composition.
+Technical angle: Linear classifiers (logistic regression) as the simplest boundary — a hyperplane defined by weights and bias. Support vector machines maximize margin. The kernel trick projects data into higher dimensions where linear separation becomes possible. Cross-entropy loss as the objective function for classification. Confusion matrices, precision, recall as evaluation geometry.
+Critical angle: Every classifier draws a line and declares two sides different. The boundary is a political act disguised as mathematics — who falls on which side depends on which features were measured and which were ignored. Classification is the computational form of categorization, and categorization is never innocent. The integration phase asks: what are we integrating, and at whose expense?
+Key artifacts: classification_demo provides interactive 2D classification with adjustable decision boundaries, data distributions, and real-time accuracy metrics.
+Gap: Needs a feature-selection artifact showing how the same data produces radically different boundaries depending on which two features are chosen as axes.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Classification/critical.md">Raw captured source</a></p><pre># ML_Classification — Critical Reflection
+
+Three zones at three heights, separated by wall ridges. Zone A holds k-means. Zone B holds SVM. Zone C holds random forest. The ridges between them are the decision boundaries made architectural — the places where one category ends and another begins. Walk the narrow passes. The map puts classification in your body before it puts it in your head: to cross from one zone to another, you must navigate a boundary that someone built.
+
+K-means drops centroids and iterates. Points migrate toward their nearest center. Clusters crystallize from unlabeled chaos, and the critical parameter is `K` — how many clusters to impose. The artifact lets you watch colored regions form, centroids drifting to their resting places, the algorithm converging on a partition. What it normalizes is the assumption that partition is the goal. K-means does not discover clusters; it imposes them. Set K=3 and there will be three clusters, whether the data contains three natural groupings or not. The number of categories precedes the analysis. Chun&#x27;s analysis of software as ideology finds its clearest expression here: the algorithm presents categorization as discovery while the most consequential decision — how many kinds of thing exist — was made before the first iteration.
+
+The SVM visualizer sits in the adjacent zone, separated by a wall ridge you must cross. Its identity is purity: `max margin: min ||w||^2 s.t. yi(w*xi + b) &gt;= 1`. The maximum-margin hyperplane crystallizes between classes, support vectors glowing gold at the boundary. The critical parameter is `C` — regularization. Low C allows misclassification for a wider margin. High C demands perfection.
+
+This is a trade-off between tolerance and precision, and the artifact frames it as a technical dial. But Chun would notice that the trade-off is also ethical: how many individuals on the wrong side of the boundary are acceptable? How much misclassification is the system willing to tolerate, and who decides? The margin is the space between the classes, and widening it requires accepting that some points will be sacrificed. The support vectors — the few points that define the boundary — bear the entire weight of the classification. Everyone else is irrelevant. A system where the boundary cases determine the rule and everyone else is noise is a particular political arrangement presented as geometric optimization.
+
+Random forest occupies the third zone, the furthest from spawn, reached through the most constrained passage. Its identity is democratic: `prediction = majority_vote(tree_1(x), tree_2(x), ..., tree_n(x))`, each tree trained on a bootstrap sample with random feature subsets. A forest of weak learners voting their way to strong predictions. Hayles would find the posthuman condition here — not in any single tree&#x27;s intelligence but in the aggregate. No individual tree is accurate. The collective is. Intelligence as a property of the ensemble rather than the component. The critical parameter is `num_trees`, and more trees reduce variance through the wisdom-of-crowds effect. The forest normalizes a form of knowledge production where error is not eliminated but averaged out, where the individual is wrong but the system is right. This is a statistical epistemology: truth as the central tendency of many biased observations.
+
+The three zones create a spatial argument. You begin in k-means territory (unsupervised, centroid-based), cross a ridge to SVM territory (supervised, margin-based), then cross another ridge to random forest territory (ensemble-based, vote-based). The progression suggests evolution — from simple to sophisticated, from geometry to democracy. But this progression is authored. The map places the artifacts in an order that tells a story about classification getting better, when what is actually happening is classification getting differently wrong. K-means misclassifies by assuming spherical clusters. SVM misclassifies by assuming linear separability (before the kernel trick). Random forest misclassifies by inheriting the biases of its training data across every tree. The forest does not escape the data&#x27;s politics; it distributes them across a hundred crooked copies.
+
+Hayles writes about how computational media produce the illusion of dematerialization — stripping away the body to leave pure information. Classification is this operation formalized. A data point has features. The classifier reads the features. The features are numbers. The numbers define a position in feature space. Everything about the data point that cannot be expressed as a feature coordinate vanishes. The map&#x27;s intent document notes the gap: &quot;Needs a feature-selection artifact showing how the same data produces radically different boundaries depending on which two features are chosen as axes.&quot; That absent artifact is the map&#x27;s blind spot made visible. The decision boundary depends entirely on which features are measured, and the choice of features is the act of deciding what matters about a thing before asking what kind of thing it is.
+
+The narrow passes between zones are the most honest part of the map. Decision boundaries are not walls you can see or ridges you can measure. They are thresholds in abstract space, defined by mathematics that has no width, no height, no friction. But you experience them as physical constraints — tight passages between tall walls — because the map insists that classification has a body. The boundary is where the algorithm is most uncertain and most consequential. The pass is where you are most constrained and most aware of the architecture. Every classifier draws a line and calls it knowledge. The question that lingers in the narrow passes is whose hand held the pen.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Classification/artifacts.md">Raw captured source</a></p><pre># ML Classification — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 3 artifacts*
+
+&gt; Three algorithms. Three ways to carve space into regions where things belong. K-means drops centroids and iterates — points migrate toward their nearest center until the system settles, variance minimized, clusters stable. SVM finds the widest gap between classes, a hyperplane balanced on the few points that matter most. Random forest grows a hundred crooked trees, each one wrong in its own way, and lets them vote.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Enhanced K-Means Clustering
+![Enhanced K-Means Clustering](/scene-catalog/enhanced_kmeans.png)
+
+Interactive K-means clustering visualization with adjustable k, colored cluster assignments, and centroid movement animation.
+
+`enhanced_kmeans`
+
+## Support Vector Machine Visualization
+![Support Vector Machine Visualization](/scene-catalog/svm_visualization.png)
+
+SVM hyperplane separator with support vectors highlighted. Shows maximum margin classification and kernel trick for non-linear boundaries.
+
+`svm_visualization`
+
+## Random Forest Visualization
+![Random Forest Visualization](/scene-catalog/random_forest_visualization.png)
+
+Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.
+
+`random_forest_visualization`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Classification/summary.md">Raw captured source</a></p><pre># ML Classification — Summary
+
+ML_Classification is the third map in the Machine Learning sequence. It stages classification as geometric partitioning — the task of drawing a boundary through feature space that separates one class from another. The map runs three different algorithms on the same small dataset and lets the learner compare the boundaries they produce.
+
+At the centre of the room, a scatter of labelled points sits in a two-dimensional feature space. Around it, three stations run k-means, a support vector machine, and a small neural network. K-means drops centroids and iterates; points migrate toward the nearest centroid until the assignment stops changing, and the resulting Voronoi partition is drawn across the floor. The SVM finds the widest linear margin between the two classes and draws a straight boundary. The neural network bends the boundary into a curve that follows the local density of the data.
+
+Each station has a controls bench exposing the relevant hyperparameters. A shared button re-seeds the dataset with fresh random points, so the learner can watch each algorithm redraw its boundary from scratch.
+
+Within the sequence, Classification makes the output of optimisation something you can see. The boundary is the artifact the model has learned. ML_Neural_Networks will next stack these decisions into layers.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Classification/blurb.md">Raw captured source</a></p><pre>Three algorithms. Three ways to carve space into regions where things belong. K-means drops centroids and iterates — points migrate toward their nearest center until the system settles, variance minimized, clusters stable. SVM finds the widest gap between classes, a hyperplane balanced on the few points that matter most. Random forest grows a hundred crooked trees, each one wrong in its own way, and lets them vote.
+
+Walk the ridges between zones. The narrow passes are decision boundaries — the places where one category ends and another begins. Every classifier draws lines. K-means draws circles. SVM draws margins. Random forest draws jagged territories through majority rule.
+
+The question is never whether to partition. The question is what violence the partition does to the points that live near the edge.</pre></section></body></html>

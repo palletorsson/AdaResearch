@@ -1,0 +1,296 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Existing editor present",
+      "passed": true
+    },
+    {
+      "name": "Eight authored works retained once",
+      "passed": false
+    },
+    {
+      "name": "Point and controls have a supported clear approach",
+      "passed": true
+    },
+    {
+      "name": "Hand point within reach from controls",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer NEXT",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer HOLD",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer TURN",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer PRESET",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer RESET",
+      "passed": true
+    },
+    {
+      "name": "Nearby button receives pointer RULE",
+      "passed": true
+    },
+    {
+      "name": "Hand changes only reading:120 vs held90",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: comparison",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand",
+      "passed": true
+    },
+    {
+      "name": "Held trigger rewrites exactly once keeping witness",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: next",
+      "passed": true
+    },
+    {
+      "name": "Release parks point without altering angle",
+      "passed": true
+    },
+    {
+      "name": "Eighth preset reaches Cantor and names it",
+      "passed": true
+    },
+    {
+      "name": "Installed Cantor has27 symbols8 intervals",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cantor",
+      "passed": true
+    },
+    {
+      "name": "Preset cycles from Cantor to Koch",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear",
+      "passed": true
+    },
+    {
+      "name": "Both primary bypasses and rear route have support and capsule clearance",
+      "passed": false
+    },
+    {
+      "name": "Entry and onward portals validate",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Printed reconstruction runs inside actual museum",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "Eight authored works retained once",
+    "Both primary bypasses and rear route have support and capsule clearance"
+  ],
+  "observations": {
+    "entry": {
+      "cage": false,
+      "cell": "(9, 1)",
+      "door": "(9.5, 0.05, 0.35)",
+      "landing": "(9.5, 0.05, 1.5)",
+      "marker": "(9.5, 0.05, 1.5)",
+      "source": "sp"
+    },
+    "exit": {
+      "cell": "(9, 25)",
+      "door": "(9.5, 0.05, 25.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(9.5, 0.05, 25.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "hits_(11.16957, 0.01, 7.956522)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(11.37826, 0.01, 7.826087)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(11.58696, 0.01, 7.695652)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(11.79565, 0.01, 7.565217)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(12.00435, 0.01, 7.434783)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(12.21304, 0.01, 7.304348)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(12.42174, 0.01, 7.173913)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(12.63043, 0.01, 7.043478)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@792"
+    ],
+    "hits_(13.84286, 0.01, -0.190476)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision",
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.07143, 0.01, -0.095238)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision",
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.3, 0.01, 0.0)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.3, 0.01, 0.25)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.3, 0.01, 0.5)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.3, 0.01, 0.75)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.3, 0.01, 1.0)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(14.3, 0.01, 1.25)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.7, 0.01, 0.0)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.7, 0.01, 0.25)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.7, 0.01, 0.5)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.7, 0.01, 0.75)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.7, 0.01, 1.0)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.7, 0.01, 1.25)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(4.928571, 0.01, -0.095238)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision",
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(5.157143, 0.01, -0.190476)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision",
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/Collision"
+    ],
+    "hits_(6.369565, 0.01, 7.043478)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(6.578261, 0.01, 7.173913)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(6.786956, 0.01, 7.304348)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(6.995652, 0.01, 7.434783)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(7.204348, 0.01, 7.565217)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(7.413043, 0.01, 7.695652)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(7.621739, 0.01, 7.826087)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "hits_(7.830435, 0.01, 7.956522)": [
+      "/root/EndlessMuseum/Seg0_grande-galerie-axial/LSystemEditor/GrammarLesson/@StaticBody3D@796"
+    ],
+    "route_samples": 188,
+    "scope": "Actual opening hall; supplied desktop rays, real XRTools with supplied poses, capsule route samples. No headset or independent student, no full sequence crossing.",
+    "works": [
+      "lobby:window",
+      "lobby:view",
+      "lobby:counter",
+      "lobby:extinguisher",
+      "lobby:elevator",
+      "lobby:pallet",
+      "lobby:point_zero",
+      "lsystem_editor",
+      "mesh_grammar_lsystem_tree",
+      "science_screen",
+      "grammar_provenance",
+      "lsystem_tree",
+      "fractal_lsystem_string",
+      "city_bench",
+      "dark_sphere",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "showing",
+      "exit_sign",
+      "exit_sign",
+      "wall_clock",
+      "whiteboard",
+      "electrical_panel",
+      "ceiling_vent",
+      "cable_tray",
+      "floor_grate"
+    ]
+  },
+  "passed": false,
+  "room": "LSystems_Grammar_Lab",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

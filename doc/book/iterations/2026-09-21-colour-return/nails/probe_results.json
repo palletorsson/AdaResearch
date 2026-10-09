@@ -1,0 +1,230 @@
+{
+  "actual_game_launched": false,
+  "checks": [
+    {
+      "label": "no XR rig: station has no direct hand references",
+      "pass": true
+    },
+    {
+      "label": "no XR rig: both station emissions update GameManager colour state",
+      "pass": true
+    },
+    {
+      "label": "no XR rig: swatch changes",
+      "pass": true
+    },
+    {
+      "label": "hand scene added after selection distinct named surfaces LeftHand",
+      "pass": true
+    },
+    {
+      "label": "hand scene added after selection nails LeftHand",
+      "pass": true
+    },
+    {
+      "label": "hand scene added after selection skin LeftHand",
+      "pass": true
+    },
+    {
+      "label": "hand scene added after selection distinct named surfaces RightHand",
+      "pass": true
+    },
+    {
+      "label": "hand scene added after selection nails RightHand",
+      "pass": true
+    },
+    {
+      "label": "hand scene added after selection skin RightHand",
+      "pass": true
+    },
+    {
+      "label": "late rig: station still has no direct hand references",
+      "pass": true
+    },
+    {
+      "label": "live nail signal leaves skin alone distinct named surfaces LeftHand",
+      "pass": true
+    },
+    {
+      "label": "live nail signal leaves skin alone nails LeftHand",
+      "pass": true
+    },
+    {
+      "label": "live nail signal leaves skin alone skin LeftHand",
+      "pass": true
+    },
+    {
+      "label": "live nail signal leaves skin alone distinct named surfaces RightHand",
+      "pass": true
+    },
+    {
+      "label": "live nail signal leaves skin alone nails RightHand",
+      "pass": true
+    },
+    {
+      "label": "live nail signal leaves skin alone skin RightHand",
+      "pass": true
+    },
+    {
+      "label": "live skin signal leaves nails alone distinct named surfaces LeftHand",
+      "pass": true
+    },
+    {
+      "label": "live skin signal leaves nails alone nails LeftHand",
+      "pass": true
+    },
+    {
+      "label": "live skin signal leaves nails alone skin LeftHand",
+      "pass": true
+    },
+    {
+      "label": "live skin signal leaves nails alone distinct named surfaces RightHand",
+      "pass": true
+    },
+    {
+      "label": "live skin signal leaves nails alone nails RightHand",
+      "pass": true
+    },
+    {
+      "label": "live skin signal leaves nails alone skin RightHand",
+      "pass": true
+    },
+    {
+      "label": "replacement hand scene hydrates stored colours distinct named surfaces LeftHand",
+      "pass": true
+    },
+    {
+      "label": "replacement hand scene hydrates stored colours nails LeftHand",
+      "pass": true
+    },
+    {
+      "label": "replacement hand scene hydrates stored colours skin LeftHand",
+      "pass": true
+    },
+    {
+      "label": "replacement hand scene hydrates stored colours distinct named surfaces RightHand",
+      "pass": true
+    },
+    {
+      "label": "replacement hand scene hydrates stored colours nails RightHand",
+      "pass": true
+    },
+    {
+      "label": "replacement hand scene hydrates stored colours skin RightHand",
+      "pass": true
+    },
+    {
+      "label": "with xr_origin group: direct discovery finds both production meshes",
+      "pass": true
+    },
+    {
+      "label": "direct station and receiver coexist distinct named surfaces LeftHand",
+      "pass": true
+    },
+    {
+      "label": "direct station and receiver coexist nails LeftHand",
+      "pass": true
+    },
+    {
+      "label": "direct station and receiver coexist skin LeftHand",
+      "pass": true
+    },
+    {
+      "label": "direct station and receiver coexist distinct named surfaces RightHand",
+      "pass": true
+    },
+    {
+      "label": "direct station and receiver coexist nails RightHand",
+      "pass": true
+    },
+    {
+      "label": "direct station and receiver coexist skin RightHand",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "observations": [
+    {
+      "hand": "LeftHand",
+      "nails_material": "(0.86, 0.13, 0.46, 1.0)",
+      "skin_material": "(0.25, 0.64, 0.57, 1.0)",
+      "stage": "hand scene added after selection",
+      "surface_nails": 0,
+      "surface_skin": 1
+    },
+    {
+      "hand": "RightHand",
+      "nails_material": "(0.86, 0.13, 0.46, 1.0)",
+      "skin_material": "(0.25, 0.64, 0.57, 1.0)",
+      "stage": "hand scene added after selection",
+      "surface_nails": 1,
+      "surface_skin": 0
+    },
+    {
+      "hand": "LeftHand",
+      "nails_material": "(0.12, 0.37, 0.92, 1.0)",
+      "skin_material": "(0.25, 0.64, 0.57, 1.0)",
+      "stage": "live nail signal leaves skin alone",
+      "surface_nails": 0,
+      "surface_skin": 1
+    },
+    {
+      "hand": "RightHand",
+      "nails_material": "(0.12, 0.37, 0.92, 1.0)",
+      "skin_material": "(0.25, 0.64, 0.57, 1.0)",
+      "stage": "live nail signal leaves skin alone",
+      "surface_nails": 1,
+      "surface_skin": 0
+    },
+    {
+      "hand": "LeftHand",
+      "nails_material": "(0.12, 0.37, 0.92, 1.0)",
+      "skin_material": "(0.74, 0.19, 0.61, 1.0)",
+      "stage": "live skin signal leaves nails alone",
+      "surface_nails": 0,
+      "surface_skin": 1
+    },
+    {
+      "hand": "RightHand",
+      "nails_material": "(0.12, 0.37, 0.92, 1.0)",
+      "skin_material": "(0.74, 0.19, 0.61, 1.0)",
+      "stage": "live skin signal leaves nails alone",
+      "surface_nails": 1,
+      "surface_skin": 0
+    },
+    {
+      "hand": "LeftHand",
+      "nails_material": "(0.12, 0.37, 0.92, 1.0)",
+      "skin_material": "(0.74, 0.19, 0.61, 1.0)",
+      "stage": "replacement hand scene hydrates stored colours",
+      "surface_nails": 0,
+      "surface_skin": 1
+    },
+    {
+      "hand": "RightHand",
+      "nails_material": "(0.12, 0.37, 0.92, 1.0)",
+      "skin_material": "(0.74, 0.19, 0.61, 1.0)",
+      "stage": "replacement hand scene hydrates stored colours",
+      "surface_nails": 1,
+      "surface_skin": 0
+    },
+    {
+      "hand": "LeftHand",
+      "nails_material": "(0.86, 0.13, 0.46, 1.0)",
+      "skin_material": "(0.25, 0.64, 0.57, 1.0)",
+      "stage": "direct station and receiver coexist",
+      "surface_nails": 0,
+      "surface_skin": 1
+    },
+    {
+      "hand": "RightHand",
+      "nails_material": "(0.86, 0.13, 0.46, 1.0)",
+      "skin_material": "(0.25, 0.64, 0.57, 1.0)",
+      "stage": "direct station and receiver coexist",
+      "surface_nails": 1,
+      "surface_skin": 0
+    }
+  ],
+  "scope": "Real hand embedded geometry, named surfaces, unchanged receiver and station scripts, literal GameManager colour methods. XR animations stripped in copied scenes and input mapper is a signal fixture. Proves material/signal wiring and whole-scene late readiness, not physical XR visibility, tracking or grabbing."
+}

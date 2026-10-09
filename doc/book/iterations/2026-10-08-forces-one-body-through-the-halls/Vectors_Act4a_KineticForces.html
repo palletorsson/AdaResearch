@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Let motion meet resistance</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>Let motion meet resistance</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Drag</li>
+<li>Speed-dependent resistance</li>
+<li>Entering a region</li>
+<li>Opposing velocity</li>
+</ul>
+<p>Drop a point into a coloured region. Watch it slow as it falls. Begin with DRAG ONLY; leave BUOYANCY for a later comparison. Use RESET before the next drop.</p>
+<h2>Make the small study</h2>
+<p>Keep the sphere and enable gravity. Add resistance while its centre lies between heights zero and two metres. The small study uses a height test; it does not build a liquid surface.</p>
+<p><strong>The hall adds:</strong> The hall makes three regions visible and lets you add buoyancy. The nearby ramps explore contact friction and rolling.</p>
+<p>Save <code>05_drag.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<h2>Complete code — 05_drag.gd</h2>
+<!-- student-code:05_drag.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+var point = Point.new()
+var coefficient := 0.6 # kg/m, chosen for this quadratic model
+var released := false
+
+func _ready() -&gt; void:
+    point.position = Vector3(0, 3, 0)
+    add_child(point)
+    point.freeze = true
+    point.gravity_scale = 1.0
+    caption(&quot;DROP · one point, one resistance coefficient&quot;)
+    button(&quot;DROP&quot;, Vector3(0, 1, -0.8), drop)
+
+func drop() -&gt; void:
+    point.freeze = false
+    point.sleeping = false
+    released = true
+
+func resistance(velocity: Vector3, mass_kg: float, delta: float) -&gt; Vector3:
+    var force := -coefficient * velocity.length() * velocity
+    return force.limit_length(mass_kg * velocity.length() / delta)
+
+func _physics_process(delta: float) -&gt; void:
+    if not released or point.is_picked_up():
+        return
+    if point.position.y &gt;= 0 and point.position.y &lt;= 2.0:
+        point.apply_central_force(resistance(point.linear_velocity, point.mass, delta))
+</code></pre>
+<h2>Read the change</h2>
+<p>The <code>if</code> asks whether the point is inside the height range. Outside it, this script adds no resistance. Inside it, the force opposes <code>linear_velocity</code>.</p>
+<p>Start with the minus sign in <code>resistance()</code>: it reverses the velocity’s direction. Multiplying by <code>velocity.length()</code> makes faster motion meet stronger resistance. Double the speed and the force becomes four times as large, before the limit is reached.</p>
+<p><code>coefficient</code> controls the strength of that resistance. Gravity continues to pull down while drag opposes the fall. DROP unfreezes the point so the engine can begin this exchange.</p>
+<h2>Change one thing</h2>
+<p>Increase <code>coefficient</code> from 0.6 to 3.0 and restart. At the same speed the drag is five times stronger, until capped. Compare the falling speeds over the available drop; the short fall may end before either reaches a steady speed.</p>
+<h2>Model notes</h2>
+<p>The coefficient has units kg/m in this quadratic model. <code>limit_length</code> caps drag so that this contribution alone cannot reverse velocity in one physics step. This is a force model, not a fluid simulation. Set the starting position before <code>add_child</code>, as shown: moving a frozen kinematic body afterward can introduce unintended velocity. The museum uses a separate movement rule for the player walking through a region.</p>
+<h2>Into the next room</h2>
+<p>Drag resists motion. A spring adds a reason to move back toward an attachment.</p>
+<p><a href="final.html#Vectors_Act4a_KineticForces">Reflective text</a>.</p></main></html>

@@ -1,0 +1,40 @@
+--- draw_dot-before.gd
++++ draw_dot-after.gd
+@@ -292,9 +292,14 @@
+ 	if not _data_panel_anchored:
+ 		var facing := Basis(Vector3.UP, global_rotation.y)
+ 		_data_panel.global_transform = Transform3D(
+-			facing * Basis(Vector3.RIGHT, deg_to_rad(-35.0)),
++			_data_readout_basis(),
+ 			_trail_points[0] + facing * Vector3(0.55, data_table_height_offset, 0.45))
+ 		_data_panel_anchored = true
++
++func _data_readout_basis() -> Basis:
++	# Turn only the reading face; its anchor and the drawn positions stay put.
++	var facing := Basis(Vector3.UP, global_rotation.y + deg_to_rad(data_table_yaw))
++	return (facing * Basis(Vector3.RIGHT, deg_to_rad(-35.0))).scaled(Vector3.ONE * data_table_scale)
+ 
+ @export var fade_trail: bool = false
+ @export var fade_duration: float = 2.0
+@@ -307,6 +312,8 @@
+ @export var data_table_color: Color = Color(0.9, 0.95, 1.0, 1.0)
+ @export var data_table_font_size: int = 26
+ @export var data_table_update_interval: float = 0.15  # Seconds between updates
++@export_range(0.4, 1.5) var data_table_scale: float = 1.0
++@export var data_table_yaw: float = 0.0 # Additional heading in degrees, relative to the pen.
+ 
+ var _data_panel: Node3D
+ var _data_count_label: Label
+@@ -739,6 +746,12 @@
+ ## config carrying only other keys cannot disturb the legacy lineage.
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	var dirty: bool = false
++	if config_data.has("data_table_scale"):
++		data_table_scale = clampf(float(config_data["data_table_scale"]), 0.4, 1.5)
++	if config_data.has("data_table_yaw"):
++		data_table_yaw = float(config_data["data_table_yaw"])
++	if _data_panel_anchored and is_instance_valid(_data_panel):
++		_data_panel.global_basis = _data_readout_basis()
+ 	if config_data.has("ink"):
+ 		var v: String = str(config_data["ink"]).strip_edges().to_lower()
+ 		var ic: Color = _ink_color(v)

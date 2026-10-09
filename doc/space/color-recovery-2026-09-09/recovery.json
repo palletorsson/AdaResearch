@@ -1,0 +1,383 @@
+{
+  "historical_commit": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+  "boundary": "Parent of first endless museum commit 62e08730f, 2026-07-31",
+  "color_maps": [
+    "Color_Context_Placed",
+    "Color_Nails",
+    "Color_Grid_Pallet",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Chamber_Color",
+    "Color_Paint",
+    "Color_Walls",
+    "Color_Flashlight"
+  ],
+  "pattern_sequence": "tiling",
+  "pattern_maps": [
+    "Pattern_Foundry",
+    "Tutorial_Pattern",
+    "Array_Patterns",
+    "Symmetry_Seventeen"
+  ],
+  "rooms": [
+    {
+      "map": "Color_Context_Placed",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        15,
+        35
+      ],
+      "museum_size": [
+        23,
+        43
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply.",
+      "modifier_offset": [
+        4,
+        4
+      ],
+      "brush_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "map": "Color_Nails",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        7,
+        13
+      ],
+      "museum_size": [
+        15,
+        21
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        11,
+        13
+      ],
+      "museum_size": [
+        19,
+        21
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Color_Rainbow",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        7,
+        18
+      ],
+      "museum_size": [
+        15,
+        26
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": []
+    },
+    {
+      "map": "Color_Pillar",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        12,
+        22
+      ],
+      "museum_size": [
+        41,
+        38
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [
+        {
+          "token": "pillarcolorcollection",
+          "from": [
+            9,
+            13
+          ],
+          "to": [
+            20,
+            8
+          ],
+          "change": "35 spatial samples in a 12.8 x 19.2 m gradient annex"
+        },
+        {
+          "token": "color_sets_overview",
+          "from": [
+            9,
+            16
+          ],
+          "to": [
+            26,
+            32
+          ],
+          "change": "framed 6.4 m palette wall beyond the field"
+        }
+      ],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Chamber_Color",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        10,
+        10
+      ],
+      "museum_size": [
+        18,
+        18
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Color_Paint",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        11,
+        17
+      ],
+      "museum_size": [
+        19,
+        25
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [
+        {
+          "token": "ball_painting_demo",
+          "from": [
+            12,
+            15
+          ],
+          "to": [
+            12,
+            15
+          ],
+          "change": "automatic painting"
+        }
+      ],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply.",
+      "modifier_offset": [
+        4,
+        4
+      ],
+      "brush_offset": [
+        4,
+        4
+      ]
+    },
+    {
+      "map": "Color_Walls",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        11,
+        31
+      ],
+      "museum_size": [
+        37,
+        39
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [
+        {
+          "token": "color_constellation_office",
+          "from": [
+            8,
+            20
+          ],
+          "to": [
+            23,
+            20
+          ],
+          "change": "eight full-size cubicles in the added east gallery"
+        }
+      ],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Color_Flashlight",
+      "source": "a36f33c996004abcdc67ea2a0ac3fce72eba42fd",
+      "original_size": [
+        11,
+        12
+      ],
+      "museum_size": [
+        19,
+        20
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [
+        {
+          "token": "flashlight_demo",
+          "from": null,
+          "to": [
+            9,
+            9
+          ],
+          "change": "historical map was empty; install its existing namesake demonstration"
+        }
+      ],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Pattern_Foundry",
+      "source": "current arrangement retained; already assigned to tiling",
+      "original_size": [
+        17,
+        30
+      ],
+      "museum_size": [
+        25,
+        38
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Tutorial_Pattern",
+      "source": "current arrangement retained; already assigned to tiling",
+      "original_size": [
+        10,
+        13
+      ],
+      "museum_size": [
+        18,
+        21
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Array_Patterns",
+      "source": "current arrangement retained; already assigned to tiling",
+      "original_size": [
+        11,
+        11
+      ],
+      "museum_size": [
+        19,
+        19
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "source": "current arrangement retained; already assigned to tiling",
+      "original_size": [
+        17,
+        22
+      ],
+      "museum_size": [
+        25,
+        30
+      ],
+      "offset": [
+        4,
+        4
+      ],
+      "changes": [],
+      "surface_finish": "Neutral matte grid surfaces; quiet edges, no emission. Historical authored colours still apply."
+    }
+  ],
+  "learner_verified": false,
+  "retired_plan_rows": {
+    "ada_run/em_plan.json": [
+      "Ribbon_Color_01",
+      "Ribbon_Color_02",
+      "Ribbon_Color_03",
+      "Ribbon_Color_04",
+      "Ribbon_Color_05",
+      "Ribbon_Color_06",
+      "Ribbon_Color_07"
+    ],
+    "commons/data/museum/em_plan.json": [
+      "Ribbon_Color_01",
+      "Ribbon_Color_02",
+      "Ribbon_Color_03",
+      "Ribbon_Color_04",
+      "Ribbon_Color_05",
+      "Ribbon_Color_06",
+      "Ribbon_Color_07"
+    ]
+  },
+  "current_workspace_additions": {
+    "Color_Context_Placed": [
+      {
+        "token": "serial_principle",
+        "at": [
+          5,
+          30
+        ],
+        "placement": "serial_principle:180",
+        "note": "Additional current-workspace placement observed during final audit; retained, not part of historical recovery."
+      }
+    ]
+  },
+  "verification": {
+    "museum_rooms_loaded": 13,
+    "runtime_checks": 234,
+    "runtime_failures": 0,
+    "recovery_invariants": 109,
+    "content_tests": 27,
+    "graphical_captures_inspected": [
+      "pillars",
+      "office",
+      "atlas",
+      "painting",
+      "Color_Walls"
+    ],
+    "headset_walkthrough": false
+  }
+}

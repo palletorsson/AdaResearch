@@ -1,14 +1,17 @@
 {
  "_run": {
   "runs": [
-   "wf_66c74fd8-0b8"
+   "wf_66c74fd8-0b8",
+   "wf_bc59966b-6af"
   ],
-  "written": "2026-10-01T22:12:40",
-  "still_running": [],
-  "note": "Built in two runs on 2026-10-01: the first stopped at about 17:05 on the account's usage limit, the second (17:58 to about 22:00, four agents at a time) finished the cut-off kits and stopped again when the usage credits ran out. Kits accepted by an independent second check so far: 19. Kits not built yet: 17. A kit whose builder was cut off may look finished from its files until someone finishes and reports it."
+  "written": "2026-10-01T22:25:13",
+  "still_running": [
+   "the build resumed 07:27"
+  ],
+  "note": "Built in runs on 2026-10-01 and 2026-10-02. 19 kits are accepted by an independent second check. The build resumed on 2 October at 07:27, six agents at a time: first the half-built budget, pattern and balance and the five short-track kits half converted to the one room, then the 14 kits not started. A kit whose builder was cut off may look finished from its files until someone finishes it."
  },
  "balance": {
-  "builder": "not started"
+  "builder": "cut off"
  },
  "body-of-parts": {
   "converted": "reported",
@@ -16,7 +19,7 @@
   "problems": 0
  },
  "budget": {
-  "builder": "not started"
+  "builder": "cut off"
  },
  "bullet": {
   "builder": "reported",
@@ -141,7 +144,7 @@
   "check": "not run"
  },
  "pattern": {
-  "builder": "not started"
+  "builder": "cut off"
  },
  "pendulum": {
   "builder": "not started"

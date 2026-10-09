@@ -1,0 +1,17 @@
+--- Point_Animatedcube.before.md
++++ Point_Animatedcube/final.md
+@@ -28,6 +28,14 @@
+ ```
+ 
+ Each number names a vertex. Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.
++
++<!-- @cube_diagonal_plate -->
++
++![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-review/doc/book/iterations/2026-09-23-cube-hidden-diagonal/figures/cube-hidden-diagonal.png)
++
++*The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.*
++
++<!-- @animatedcubebuilder -->
+ 
+ The builder reads a moved handle back into its position list:
+ 

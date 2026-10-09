@@ -1,0 +1,273 @@
+{
+  "checks": [
+    {
+      "name": "32 distinct on/off combinations",
+      "passed": true
+    },
+    {
+      "name": "one switch changes between successive states, including wrap",
+      "passed": true
+    },
+    {
+      "name": "square frames preserve sphere proportions in the comparison sheet",
+      "passed": true
+    },
+    {
+      "name": "sheet contains the captured first tile",
+      "passed": true
+    },
+    {
+      "name": "sphere, material, view and individual light energies fixed throughout",
+      "passed": true
+    },
+    {
+      "name": "every on/off setting changes the rendered image",
+      "passed": true
+    },
+    {
+      "name": "comparison exchanges light/material while preserving lamp selection",
+      "passed": true
+    },
+    {
+      "name": "comparison restores pale material and pink lamps",
+      "passed": true
+    }
+  ],
+  "engine": {
+    "build": "official",
+    "hash": "89cea143987d564363e15d207438530651d943ac",
+    "hex": 263680,
+    "major": 4,
+    "minor": 6,
+    "patch": 0,
+    "status": "stable",
+    "string": "4.6-stable (official)",
+    "timestamp": 0
+  },
+  "passed": true,
+  "scope": "Native standalone study; image differences are not a perceptual threshold or learner trial.",
+  "views": [
+    {
+      "file": "state-00.png",
+      "lights": "All five lamps off — faint fixed ambient remains",
+      "mask": 0,
+      "pink_material": false
+    },
+    {
+      "file": "state-01.png",
+      "lights": "Top",
+      "mask": 1,
+      "pink_material": false
+    },
+    {
+      "file": "state-02.png",
+      "lights": "Top + Left",
+      "mask": 3,
+      "pink_material": false
+    },
+    {
+      "file": "state-03.png",
+      "lights": "Left",
+      "mask": 2,
+      "pink_material": false
+    },
+    {
+      "file": "state-04.png",
+      "lights": "Left + Right",
+      "mask": 6,
+      "pink_material": false
+    },
+    {
+      "file": "state-05.png",
+      "lights": "Top + Left + Right",
+      "mask": 7,
+      "pink_material": false
+    },
+    {
+      "file": "state-06.png",
+      "lights": "Top + Right",
+      "mask": 5,
+      "pink_material": false
+    },
+    {
+      "file": "state-07.png",
+      "lights": "Right",
+      "mask": 4,
+      "pink_material": false
+    },
+    {
+      "file": "state-08.png",
+      "lights": "Right + Front",
+      "mask": 12,
+      "pink_material": false
+    },
+    {
+      "file": "state-09.png",
+      "lights": "Top + Right + Front",
+      "mask": 13,
+      "pink_material": false
+    },
+    {
+      "file": "state-10.png",
+      "lights": "Top + Left + Right + Front",
+      "mask": 15,
+      "pink_material": false
+    },
+    {
+      "file": "state-11.png",
+      "lights": "Left + Right + Front",
+      "mask": 14,
+      "pink_material": false
+    },
+    {
+      "file": "state-12.png",
+      "lights": "Left + Front",
+      "mask": 10,
+      "pink_material": false
+    },
+    {
+      "file": "state-13.png",
+      "lights": "Top + Left + Front",
+      "mask": 11,
+      "pink_material": false
+    },
+    {
+      "file": "state-14.png",
+      "lights": "Top + Front",
+      "mask": 9,
+      "pink_material": false
+    },
+    {
+      "file": "state-15.png",
+      "lights": "Front",
+      "mask": 8,
+      "pink_material": false
+    },
+    {
+      "file": "state-16.png",
+      "lights": "Front + Back",
+      "mask": 24,
+      "pink_material": false
+    },
+    {
+      "file": "state-17.png",
+      "lights": "Top + Front + Back",
+      "mask": 25,
+      "pink_material": false
+    },
+    {
+      "file": "state-18.png",
+      "lights": "Top + Left + Front + Back",
+      "mask": 27,
+      "pink_material": false
+    },
+    {
+      "file": "state-19.png",
+      "lights": "Left + Front + Back",
+      "mask": 26,
+      "pink_material": false
+    },
+    {
+      "file": "state-20.png",
+      "lights": "Left + Right + Front + Back",
+      "mask": 30,
+      "pink_material": false
+    },
+    {
+      "file": "state-21.png",
+      "lights": "Top + Left + Right + Front + Back",
+      "mask": 31,
+      "pink_material": false
+    },
+    {
+      "file": "state-22.png",
+      "lights": "Top + Right + Front + Back",
+      "mask": 29,
+      "pink_material": false
+    },
+    {
+      "file": "state-23.png",
+      "lights": "Right + Front + Back",
+      "mask": 28,
+      "pink_material": false
+    },
+    {
+      "file": "state-24.png",
+      "lights": "Right + Back",
+      "mask": 20,
+      "pink_material": false
+    },
+    {
+      "file": "state-25.png",
+      "lights": "Top + Right + Back",
+      "mask": 21,
+      "pink_material": false
+    },
+    {
+      "file": "state-26.png",
+      "lights": "Top + Left + Right + Back",
+      "mask": 23,
+      "pink_material": false
+    },
+    {
+      "file": "state-27.png",
+      "lights": "Left + Right + Back",
+      "mask": 22,
+      "pink_material": false
+    },
+    {
+      "file": "state-28.png",
+      "lights": "Left + Back",
+      "mask": 18,
+      "pink_material": false
+    },
+    {
+      "file": "state-29.png",
+      "lights": "Top + Left + Back",
+      "mask": 19,
+      "pink_material": false
+    },
+    {
+      "file": "state-30.png",
+      "lights": "Top + Back",
+      "mask": 17,
+      "pink_material": false
+    },
+    {
+      "file": "state-31.png",
+      "lights": "Back",
+      "mask": 16,
+      "pink_material": false
+    },
+    {
+      "file": "pink-light.png",
+      "lights": "Top + Left",
+      "mask": 3,
+      "pink_material": false
+    },
+    {
+      "file": "pink-material.png",
+      "lights": "Top + Left",
+      "mask": 3,
+      "pink_material": true
+    },
+    {
+      "file": "hero.png",
+      "lights": "Top",
+      "mask": 1,
+      "pink_material": false
+    },
+    {
+      "file": "all-lights.png",
+      "lights": "Top + Left + Right + Front + Back",
+      "mask": 31,
+      "pink_material": false
+    },
+    {
+      "file": "controls.png",
+      "lights": "Top + Left + Right + Front + Back",
+      "mask": 31,
+      "pink_material": false
+    }
+  ]
+}

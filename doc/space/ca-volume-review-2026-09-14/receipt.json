@@ -1,0 +1,36 @@
+{
+  "pid": 41204,
+  "started": "2026-09-14T07:40:18+02:00",
+  "exit": 0,
+  "checks": 95,
+  "failures": [],
+  "source_sha256": {
+    "commons/artifacts/ca_volume_lab/ca_volume_lab.gd": "bb21d7f381ff32372339033d50f8757adafdabe3eaf08748936145dd68fc4921",
+    "commons/artifacts/ca_volume_lab/ca_volume_lab.tscn": "024b438f02a4620f4a4089a1a922173ec120410255367b169cd9b1d42d881ca6",
+    "commons/artifacts/ca_volume_lab/volume_geometry.gd": "84214ec9d47d194cdcfa690518441555a68a96059364994b9937938b1ef00f12",
+    "commons/artifacts/ca_volume_lab/volume_model.gd": "a33836a1e3ef59712f4697bb6d41b346e05e323d5a256e0895094dde9efcd594",
+    "commons/artifacts/ca_volume_lab/workshop.gd": "2c94a442d622cea86d71676b54681a6061f5e84ce90a33a4a80290252956c0eb",
+    "commons/artifacts/ca_volume_lab/workshop.tscn": "13d3c1724e31864fdf0a57a25103252daf5e627eb09397006839e17c83fe1946",
+    "commons/artifacts/registry/ca_volume_lab.json": "a3900e2f4c4fe2780d991a78f8368aa91bd56ec1468e8886d624f7f0b32729c5",
+    "ada_run/probe_ca_volume.gd": "c75d6c24b645a8c26923c33b60f6178c1d539d5bdb266fbf9f47a33c75ace3a1",
+    "ada_run/ca_volume_oracle.py": "6569f0b6e8d07b2167128739510f4ca8b91df83f96cdf46d500e44364e7df007",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-volume-review-2026-09-14/oracle.json": "525ce103f35f30969397d25ea8ce380cf265cdb329c20bad217420ffdfb3f8ca"
+  },
+  "sources_unchanged": true,
+  "museum_and_hand_unchanged": true,
+  "museum_guard_sha256": {
+    "ada_run/em_plan.json": "da21551383f5a39f84c252f1ec3eeebfe650b8142e33e627032a1604118bffa4",
+    "commons/data/museum/em_plan.json": "da21551383f5a39f84c252f1ec3eeebfe650b8142e33e627032a1604118bffa4",
+    "ada_run/necklace_hand.json": "1120b33b4fc6c4837f937ec639267d7531bf036978b12d67505d9db066754d2e",
+    "commons/maps/CA_SoftRules/map_data.json": "6eeea6ca3ca1008ef23874351f126453ca7684fbd271d2ceab23fd2a809e575d",
+    "commons/maps/CA_SoftRules/final.md": "e1a93c05bc84db4fc5bfef8240ff0b5c369181c0cbf31170c15ff4e9ceb82dab"
+  },
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ],
+  "headset_verified": false
+}

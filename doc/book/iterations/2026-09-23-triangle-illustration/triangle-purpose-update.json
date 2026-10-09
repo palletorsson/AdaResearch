@@ -1,0 +1,1094 @@
+{
+  "source": {
+    "map": "Point_Triangle_Context",
+    "sequence": "primitives",
+    "sequence_order": 1,
+    "map_order": 4,
+    "in_spine": true,
+    "path": "commons/maps/Point_Triangle_Context/final.md",
+    "sha256": "5fd2520092e69a3082876422f99c9ef671e3b9f2e3d407e291b84e40a8df7d65",
+    "blocks": [
+      {
+        "id": "82af3e741f670d41-1",
+        "sha256": "82af3e741f670d41ecd40f38df87b6cab652ce68104df649cf36abcb6e4533f6",
+        "kind": "paragraph",
+        "start_line": 1,
+        "end_line": 1,
+        "text": "Three points can close a boundary. What must the machine add before there is a face to look at?",
+        "source_text": "Three points can close a boundary. What must the machine add before there is a face to look at?",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "437c53e36cf56368-1",
+        "sha256": "437c53e36cf56368fbd3765d8714a919ffefcd7349fd26d284871b9689c415e4",
+        "kind": "paragraph",
+        "start_line": 3,
+        "end_line": 3,
+        "text": "You have connected endpoints, recorded a path and given positions addresses you can return to. Now bring three edges together. Something can close without becoming a surface.",
+        "source_text": "You have connected endpoints, recorded a path and given positions addresses you can return to. Now bring three edges together. Something can close without becoming a surface.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "66b3296ef0b1686f-1",
+        "sha256": "66b3296ef0b1686f9126fadba80d398810d131cfffd2be930dfdc9cb2391c25a",
+        "kind": "paragraph",
+        "start_line": 7,
+        "end_line": 7,
+        "text": "Bring two edges into place. Look through the remaining opening before adding the third. What do you expect to arrive with the last connection?",
+        "source_text": "Bring two edges into place. Look through the remaining opening before adding the third. What do you expect to arrive with the last connection?",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "4eedddfade956b5b-1",
+        "sha256": "4eedddfade956b5bbbca7460218bf6845c1b3bc0825561345f9b3218b8473d8f",
+        "kind": "paragraph",
+        "start_line": 9,
+        "end_line": 9,
+        "text": "The boundary closes. You can still look through its centre into the room. Press **SHOW / HIDE FILL** on the small panel beside it. A translucent patch now hangs between the same three corners. Press again: the patch disappears and the edges stay.",
+        "source_text": "The boundary closes. You can still look through its centre into the room. Press **SHOW / HIDE FILL** on the small panel beside it. A translucent patch now hangs between the same three corners. Press again: the patch disappears and the edges stay.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "cfb76bf48ac3717e-1",
+        "sha256": "cfb76bf48ac3717eeaaedd0ce94fe17e914dac78239352c2b1f9e3a14706a254",
+        "kind": "paragraph",
+        "start_line": 11,
+        "end_line": 11,
+        "text": "We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second.",
+        "source_text": "We have made two things happen separately. Connecting the endpoints closes a loop. Adding a triangle mesh gives that loop a visible face. The first operation does not secretly contain the second.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "315fea7577cc99c0-1",
+        "sha256": "315fea7577cc99c006ee595649f4092fedd358cb8493f97be316fabb72db4182",
+        "kind": "paragraph",
+        "start_line": 13,
+        "end_line": 13,
+        "text": "The button waits for the completed boundary. Once it is closed, its mesh receives the three target positions:",
+        "source_text": "The button waits for the completed boundary. Once it is closed, its mesh receives the three target positions:",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "85cb7efc44c9bd1b-1",
+        "sha256": "85cb7efc44c9bd1b0c41f3d37721fb30184b1d57e9b8309bdc14cc6caeb4a4b4",
+        "kind": "code",
+        "start_line": 15,
+        "end_line": 19,
+        "text": "mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)\nfor p: Vector3 in target_positions: mesh.surface_add_vertex(p)\nmesh.surface_end()",
+        "source_text": "```gdscript\nmesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)\nfor p: Vector3 in target_positions: mesh.surface_add_vertex(p)\nmesh.surface_end()\n```",
+        "status": "structural",
+        "registers": null
+      },
+      {
+        "id": "58e622fd89b2f834-1",
+        "sha256": "58e622fd89b2f834896638158c1e3f3137769f6d720aceede78bdfc9d3a74fd3",
+        "kind": "paragraph",
+        "start_line": 21,
+        "end_line": 21,
+        "text": "The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.",
+        "source_text": "The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "f33fcf8449764ebc-1",
+        "sha256": "f33fcf8449764ebc931c90ad494de2b39c77c78ca902aac6c5d438be410e4782",
+        "kind": "paragraph",
+        "start_line": 23,
+        "end_line": 23,
+        "text": "![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png)",
+        "source_text": "![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png)",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "954b423182d2d7d2-1",
+        "sha256": "954b423182d2d7d2f27040cfd69754fd8275ae051ad7d553e20ac7fdc9a96612",
+        "kind": "paragraph",
+        "start_line": 25,
+        "end_line": 25,
+        "text": "*One set of positions. Connecting them closes a boundary; filling it adds a face.*",
+        "source_text": "*One set of positions. Connecting them closes a boundary; filling it adds a face.*",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "6a230f51d589c5f7-1",
+        "sha256": "6a230f51d589c5f7385decf0cd0590de5cbb9bfa429ccaf368fdf0cfdb10dae3",
+        "kind": "paragraph",
+        "start_line": 27,
+        "end_line": 27,
+        "text": "This fill is visible from both sides. Walk around it, looking for a view where the patch narrows almost to a line. Its three corners have not moved; you have. Move back and watch the face open again.[^point-triangle-winding]",
+        "source_text": "This fill is visible from both sides. Walk around it, looking for a view where the patch narrows almost to a line. Its three corners have not moved; you have. Move back and watch the face open again.[^point-triangle-winding]",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "94e8bc77c4ee0527-1",
+        "sha256": "94e8bc77c4ee05279455021a67b7294807b8c818ff196e2d3e0bcdff26186e27",
+        "kind": "paragraph",
+        "start_line": 29,
+        "end_line": 29,
+        "text": "Three distinct, non-collinear points determine a triangle and a unique plane. “Non-collinear” means that the third point is not on the line through the other two. Without that condition, the boundary can collapse into a line with no area.",
+        "source_text": "Three distinct, non-collinear points determine a triangle and a unique plane. “Non-collinear” means that the third point is not on the line through the other two. Without that condition, the boundary can collapse into a line with no area.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "c9713c81c7c9a28a-1",
+        "sha256": "c9713c81c7c9a28afbcd039e66380a484e260f632c9be3a363a0179a81a77dab",
+        "kind": "heading",
+        "start_line": 31,
+        "end_line": 31,
+        "text": "Close a loop, then inspect the fill",
+        "source_text": "## Close a loop, then inspect the fill",
+        "status": "structural",
+        "registers": null
+      },
+      {
+        "id": "d523e24f841038ae-1",
+        "sha256": "d523e24f841038ae5bd534778e1a1837f69b11f7b460bca3a89bd66f2f2412ae",
+        "kind": "paragraph",
+        "start_line": 35,
+        "end_line": 35,
+        "text": "Pick up the drawing point and make a small triangle in the air. Move to each intended corner and wait for its number to appear. The tool needs a second between recorded corners and enough movement away from the previous point. It rounds positions to a ten-centimetre grid, so the addresses we met in Grid now help corners meet. Return near your first point to close the loop.",
+        "source_text": "Pick up the drawing point and make a small triangle in the air. Move to each intended corner and wait for its number to appear. The tool needs a second between recorded corners and enough movement away from the previous point. It rounds positions to a ten-centimetre grid, so the addresses we met in Grid now help corners meet. Return near your first point to close the loop.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "563a233f1f78df59-1",
+        "sha256": "563a233f1f78df59e589393c1eb35c84e906acfe4bf1a3bb7b351a805e34f85c",
+        "kind": "paragraph",
+        "start_line": 37,
+        "end_line": 37,
+        "text": "Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**: one three-corner loop makes one triangle. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.",
+        "source_text": "Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**: one three-corner loop makes one triangle. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "de57d8abbf39b653-1",
+        "sha256": "de57d8abbf39b653263cee030d7b89a997b2824fceb6092669007dd7e94f0282",
+        "kind": "paragraph",
+        "start_line": 39,
+        "end_line": 39,
+        "text": "Release the tool where the triangle closed. Its corners remain grabbable: move one, then release it to rebuild the faces that use it. Press **NEW OUTLINE**. The triangle stays while you begin another boundary.",
+        "source_text": "Release the tool where the triangle closed. Its corners remain grabbable: move one, then release it to rebuild the faces that use it. Press **NEW OUTLINE**. The triangle stays while you begin another boundary.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "999a68a4a384eb9e-1",
+        "sha256": "999a68a4a384eb9ea4ff88b57fb029bb437d21f89d57162903367c9add6d2b48",
+        "kind": "paragraph",
+        "start_line": 41,
+        "end_line": 41,
+        "text": "Make a six-corner L in one horizontal plane: a 1.2-metre square with a 0.8-metre square missing from one corner. Begin where the two long outer edges meet. Follow one long edge, go around the notch and return to your beginning. Wait for each numbered corner before moving on.[^point-triangle-construction]",
+        "source_text": "Make a six-corner L in one horizontal plane: a 1.2-metre square with a 0.8-metre square missing from one corner. Begin where the two long outer edges meet. Follow one long edge, go around the notch and return to your beginning. Wait for each numbered corner before moving on.[^point-triangle-construction]",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "a0fcdfe758f6324d-1",
+        "sha256": "a0fcdfe758f6324d87a6487447cddc93d832db382cb55220eeb63aee09ab7eb9",
+        "kind": "paragraph",
+        "start_line": 43,
+        "end_line": 43,
+        "text": "Look at the fill, then release the tool at that first corner. Press **SHIFT START** once. The same six points now begin their order at the next corner. Should beginning elsewhere change what lies inside the L?",
+        "source_text": "Look at the fill, then release the tool at that first corner. Press **SHIFT START** once. The same six points now begin their order at the next corner. Should beginning elsewhere change what lies inside the L?",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "a6b84371c58a006a-1",
+        "sha256": "a6b84371c58a006a4e0f0079cae8893754d2693b55a2692a2b5b62ca8d4968a8",
+        "kind": "paragraph",
+        "start_line": 45,
+        "end_line": 45,
+        "text": "The boundary has not moved, but the added fill reaches into the missing notch. Something is covering a place you left open.",
+        "source_text": "The boundary has not moved, but the added fill reaches into the missing notch. Something is covering a place you left open.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "421a717f495fe815-1",
+        "sha256": "421a717f495fe815c5293743e36644991cae688c16cc794f0340e9e77765101d",
+        "kind": "paragraph",
+        "start_line": 47,
+        "end_line": 47,
+        "text": "Every triangle in this fill shares the first corner. The tool connects it to successive pairs around the loop: a fan of triangles. Call the original start A and the next corner B. Beginning at B, it submits these four triangles:",
+        "source_text": "Every triangle in this fill shares the first corner. The tool connects it to successive pairs around the loop: a fan of triangles. Call the original start A and the next corner B. Beginning at B, it submits these four triangles:",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "c616b8e384b1e9a8-1",
+        "sha256": "c616b8e384b1e9a87e675822a48552fbbebb7d1786a07aa716ee5e0427a318ea",
+        "kind": "code",
+        "start_line": 49,
+        "end_line": 54,
+        "text": "B C D\nB D E\nB E F\nB F A",
+        "source_text": "```text\nB C D\nB D E\nB E F\nB F A\n```",
+        "status": "structural",
+        "registers": null
+      },
+      {
+        "id": "75b05023ac2986df-1",
+        "sha256": "75b05023ac2986df766723f9ec630fe22bec673c863d3865e4c671d82f4714e0",
+        "kind": "paragraph",
+        "start_line": 56,
+        "end_line": 56,
+        "text": "Follow their edges across the notch. The code kept its rule; the rule failed to keep your boundary. Choosing another start changed the input order, not the polygon's interior.",
+        "source_text": "Follow their edges across the notch. The code kept its rule; the rule failed to keep your boundary. Choosing another start changed the input order, not the polygon's interior.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "2199da470baa9baa-1",
+        "sha256": "2199da470baa9baa71d9560f6a7b9eb10be2b6c531cf8d3d1150edcaae0a365a",
+        "kind": "paragraph",
+        "start_line": 58,
+        "end_line": 58,
+        "text": "Keep shifting the start around the six corners. The fill changes; the count remains four triangles for this L. When START returns to A, the original fill returns. The counter includes the triangles that overspill. It can count a construction without deciding whether it fills the intended region.",
+        "source_text": "Keep shifting the start around the six corners. The fill changes; the count remains four triangles for this L. When START returns to A, the original fill returns. The counter includes the triangles that overspill. It can count a construction without deciding whether it fills the intended region.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "72733eb7d99f8b15-1",
+        "sha256": "72733eb7d99f8b151449220c403246977bb4fe24d8ab521dcd1c32a2eccec099",
+        "kind": "paragraph",
+        "start_line": 60,
+        "end_line": 60,
+        "text": "The method works for a triangle and for a convex planar polygon. Some concave polygons also work from suitable starting vertices. Concavity by itself does not guarantee failure, which is why this comparison keeps the boundary fixed and changes the start deliberately.",
+        "source_text": "The method works for a triangle and for a convex planar polygon. Some concave polygons also work from suitable starting vertices. Concavity by itself does not guarantee failure, which is why this comparison keeps the boundary fixed and changes the start deliberately.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "54b56eaca237384e-1",
+        "sha256": "54b56eaca237384eb0014bc1a8c15662d54e7d5afb7c0b04871305decce5957e",
+        "kind": "paragraph",
+        "start_line": 62,
+        "end_line": 62,
+        "text": "You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.[^point-triangle-triangulation] You might also want that unwanted patch for another work: a wing, a pleat, something extending beyond its frame. Changing its use would give the result another purpose. It would not repair the original fill.",
+        "source_text": "You could choose a better starting vertex where one exists, redraw a shape the fan handles, or keep this outline and ask for another filling algorithm.[^point-triangle-triangulation] You might also want that unwanted patch for another work: a wing, a pleat, something extending beyond its frame. Changing its use would give the result another purpose. It would not repair the original fill.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "b9e2295e1734bcfe-1",
+        "sha256": "b9e2295e1734bcfe93343056d2f128318f431b7a5d5390c6c511a277a3d7d21e",
+        "kind": "paragraph",
+        "start_line": 64,
+        "end_line": 64,
+        "text": "Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate. A convenient method need not require everyone to want a convenient shape.",
+        "source_text": "Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate. A convenient method need not require everyone to want a convenient shape.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "402f645f268a0a6b-1",
+        "sha256": "402f645f268a0a6b5765cb12e0c67dcd7d5eecdd82d0345ade6796e1b8a5e72b",
+        "kind": "paragraph",
+        "start_line": 66,
+        "end_line": 66,
+        "text": "Next, faces meet at a corner. What must we add to enclose a volume?",
+        "source_text": "Next, faces meet at a corner. What must we add to enclose a volume?",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "b1d3e3ea6b80da49-1",
+        "sha256": "b1d3e3ea6b80da491ac032e36e8820183f66fb2a971cfd742660b6408ba2fd90",
+        "kind": "footnote",
+        "start_line": 68,
+        "end_line": 68,
+        "text": "For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.",
+        "source_text": "[^point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "4421925580f583ae-1",
+        "sha256": "4421925580f583aeb5cfd55a7886d3317429216fe8ee978a82e7710258299df6",
+        "kind": "footnote",
+        "start_line": 70,
+        "end_line": 70,
+        "text": "One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.",
+        "source_text": "[^point-triangle-triangulation]: One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.",
+        "status": "pending",
+        "registers": null
+      },
+      {
+        "id": "690cf06386308bb9-1",
+        "sha256": "690cf06386308bb955248d62c5585026be9ef855036fea488f8db451ea65d491",
+        "kind": "footnote",
+        "start_line": 72,
+        "end_line": 72,
+        "text": "The [technical companion](/book?map=Point_Triangle_Context&section=technical) gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners.",
+        "source_text": "[^point-triangle-construction]: The [technical companion](/book?map=Point_Triangle_Context&section=technical) gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners.",
+        "status": "pending",
+        "registers": null
+      }
+    ]
+  },
+  "hall": {
+    "map": "Point_Triangle_Context",
+    "source_sha256": "5fd2520092e69a3082876422f99c9ef671e3b9f2e3d407e291b84e40a8df7d65",
+    "core_question": "What did a filling method add to a boundary, and when should we keep or change its result?",
+    "arc": "Close and reveal; construct a loop; hold an L fixed while shifting its fan start; distinguish repair from reuse.",
+    "corpus_read": [
+      "commons/maps/Point_Triangle_Context/artifacts.md",
+      "commons/maps/Point_Triangle_Context/blurb.md",
+      "commons/maps/Point_Triangle_Context/critical.md",
+      "commons/maps/Point_Triangle_Context/detours.md",
+      "commons/maps/Point_Triangle_Context/encounter-reference.md",
+      "commons/maps/Point_Triangle_Context/eye_shot.md",
+      "commons/maps/Point_Triangle_Context/field_notes.md",
+      "commons/maps/Point_Triangle_Context/final.md",
+      "commons/maps/Point_Triangle_Context/intent.md",
+      "commons/maps/Point_Triangle_Context/summary.md",
+      "commons/maps/Point_Triangle_Context/technical.md",
+      "commons/maps/Point_Triangle_Context/tutorial.md",
+      "commons/maps/Point_Triangle_Context/walked.md"
+    ],
+    "evidence": [
+      {
+        "id": "placement",
+        "path": "commons/maps/Point_Triangle_Context/map_data.json",
+        "start_line": 96,
+        "end_line": 96,
+        "excerpt": "draw_triangle_faces:90:0#plinth:1.10#offset:0.00,0.30,0.00#discovery:1",
+        "kind": "placement",
+        "note": "Current map token; source placement is not measured museum reach."
+      },
+      {
+        "id": "plan",
+        "path": "ada_run/em_plan.json",
+        "start_line": 4633,
+        "end_line": 4633,
+        "excerpt": "\"pearl\": \"point triangle context\"",
+        "kind": "placement",
+        "note": "Default plan pearl has no matching chapter|pearl stamp in necklace_hand.json."
+      },
+      {
+        "id": "runtime-placement",
+        "path": "commons/scenes/endless_museum.gd",
+        "start_line": 11009,
+        "end_line": 11009,
+        "excerpt": "var hand_hall: Dictionary = {} if map_placements else _necklace_hand(chapter, String(entry.get(\"pearl\", \"\")))",
+        "kind": "placement",
+        "note": "Exact pearl lookup leaves old Grid/Polyhedra stamps dormant; live placement can clamp or relocate source cells."
+      },
+      {
+        "id": "roles",
+        "path": "commons/data/artifact_roles.json",
+        "start_line": 118,
+        "end_line": 118,
+        "excerpt": "\"Point_Triangle_Context\":",
+        "kind": "placement",
+        "note": "Read room-specific roles/order; old dormant role entries are not placed artifacts."
+      },
+      {
+        "id": "puzzle",
+        "path": "commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+        "start_line": 228,
+        "end_line": 228,
+        "excerpt": "func toggle_discovery_face() -> void:",
+        "kind": "artifact",
+        "note": "Registry primitives.json to matching scene/script; completion guard separates boundary and visible fill."
+      },
+      {
+        "id": "fan",
+        "path": "commons/primitives/point/draw_triangle_faces.gd",
+        "start_line": 563,
+        "end_line": 563,
+        "excerpt": "var first_point = placed_points[loop_points[0]]",
+        "kind": "artifact",
+        "note": "Registry to matching scene/script; first input vertex is the fan anchor."
+      },
+      {
+        "id": "shift",
+        "path": "commons/primitives/point/draw_triangle_faces.gd",
+        "start_line": 644,
+        "end_line": 644,
+        "excerpt": "loop.append(loop.pop_front())",
+        "kind": "artifact",
+        "note": "SHIFT START changes loop order and rebuilds existing mesh."
+      },
+      {
+        "id": "guard",
+        "path": "commons/primitives/point/draw_triangle_faces.gd",
+        "start_line": 656,
+        "end_line": 656,
+        "excerpt": "return \"Release the corner to shift START.\"",
+        "kind": "artifact",
+        "note": "Readiness guards require released pen/corners and no unfinished outline."
+      },
+      {
+        "id": "side",
+        "path": "commons/maps/Point_Triangle_Context/technical.md",
+        "start_line": 13,
+        "end_line": 13,
+        "excerpt": "The fill material is translucent, unshaded and double-sided.",
+        "kind": "corpus",
+        "note": "A narrow projection differs from area loss or backface culling."
+      },
+      {
+        "id": "sample",
+        "path": "commons/maps/Point_Triangle_Context/technical.md",
+        "start_line": 30,
+        "end_line": 30,
+        "excerpt": "a held sample needs one elapsed second and at least 0.15 metres",
+        "kind": "corpus",
+        "note": "Timed, snapped acceptance makes deliberate corners necessary."
+      },
+      {
+        "id": "edit",
+        "path": "commons/maps/Point_Triangle_Context/technical.md",
+        "start_line": 36,
+        "end_line": 36,
+        "excerpt": "The filled mesh does not continuously follow a held corner; its edit is committed on release.",
+        "kind": "corpus",
+        "note": "The revised final explicitly asks for release before the face rebuilds."
+      },
+      {
+        "id": "counts",
+        "path": "commons/maps/Point_Triangle_Context/technical.md",
+        "start_line": 48,
+        "end_line": 48,
+        "excerpt": "A practice triangle followed by one six-corner L gives two loops and five triangles",
+        "kind": "corpus",
+        "note": "Counters record constructions, not correct coverage."
+      },
+      {
+        "id": "L",
+        "path": "commons/maps/Point_Triangle_Context/technical.md",
+        "start_line": 83,
+        "end_line": 83,
+        "excerpt": "A (0.0, 0.0)     B (1.2, 0.0)     C (1.2, 0.4)",
+        "kind": "corpus",
+        "note": "Recipe fixes six coplanar corners, traversal direction and initial fan anchor."
+      },
+      {
+        "id": "limits",
+        "path": "commons/maps/Point_Triangle_Context/technical.md",
+        "start_line": 54,
+        "end_line": 54,
+        "excerpt": "Convex planar polygons work; suitable concave ones can work from particular starting vertices.",
+        "kind": "corpus",
+        "note": "Avoid universal claims about concavity."
+      },
+      {
+        "id": "reuse",
+        "path": "commons/maps/Point_Triangle_Context/critical.md",
+        "start_line": 21,
+        "end_line": 21,
+        "excerpt": "making a different work from the same result changes its use.",
+        "kind": "corpus",
+        "note": "Distinct from input reordering or replacing the algorithm."
+      },
+      {
+        "id": "authority",
+        "path": "commons/maps/Point_Triangle_Context/critical.md",
+        "start_line": 13,
+        "end_line": 13,
+        "excerpt": "A tutorial can quietly train us to want only its successful examples.",
+        "kind": "corpus",
+        "note": "Critical question follows a specific observed method limit."
+      },
+      {
+        "id": "reach",
+        "path": "commons/maps/Point_Triangle_Context/encounter-reference.md",
+        "start_line": 31,
+        "end_line": 31,
+        "excerpt": "let a learner close the initial triangle without explaining the fill in advance.",
+        "kind": "corpus",
+        "note": "Headset feasibility and pedagogical comprehension remain unobserved."
+      },
+      {
+        "id": "manual",
+        "path": "commons/maps/Point_Triangle_Context/tutorial.md",
+        "start_line": 41,
+        "end_line": 41,
+        "excerpt": "Release, start a new outline and reuse those six corners",
+        "kind": "corpus",
+        "note": "Tutorial still teaches manual two-fill route while final foregrounds SHIFT START."
+      },
+      {
+        "id": "intent",
+        "path": "commons/maps/Point_Triangle_Context/intent.md",
+        "start_line": 1,
+        "end_line": 1,
+        "excerpt": "Three connected edges can close a boundary; rendering a face is another operation.",
+        "kind": "corpus",
+        "note": "Declared inquiry separates closure and rendering."
+      },
+      {
+        "id": "fill-material",
+        "path": "commons/primitives/line/puzzles/triangle_line_puzzle.gd",
+        "start_line": 240,
+        "end_line": 242,
+        "excerpt": "\t\tmaterial.albedo_color = Color(1,0.3,0.6,0.45)\n\t\tmaterial.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA\n\t\tmaterial.cull_mode = BaseMaterial3D.CULL_DISABLED",
+        "kind": "artifact",
+        "note": "The puzzle face is translucent and visible from both sides."
+      },
+      {
+        "id": "corner-release",
+        "path": "commons/primitives/point/draw_triangle_faces.gd",
+        "start_line": 479,
+        "end_line": 492,
+        "excerpt": "func _on_edit_point_dropped(_pickable, point_index: int) -> void:\n\t_editing_points.erase(point_index)\n\t# Update the point position in our array\n\tvar new_pos = point_indicators[point_index].global_position\n\tif snap_to_grid:\n\t\tnew_pos = snap_position_to_grid(new_pos)\n\t\tpoint_indicators[point_index].global_position = new_pos\n\n\tplaced_points[point_index] = new_pos\n\tprint(\"DrawTriangleFaces: Point %d moved to %v\" % [point_index, new_pos])\n\n\t# Rebuild all visuals\n\t_rebuild_lines()\n\t_rebuild_all_triangles()",
+        "kind": "artifact",
+        "note": "Release stores the snapped corner position and rebuilds lines and faces."
+      },
+      {
+        "id": "plate-scene",
+        "path": "commons/artifacts/triangle_construction_plate/triangle_construction_plate.gd",
+        "start_line": 15,
+        "end_line": 15,
+        "excerpt": "const TRI_UV:",
+        "kind": "artifact",
+        "note": "Native scene repeats the same canonical coordinates at each stage; edges and fill are separate nodes."
+      },
+      {
+        "id": "plate-placement",
+        "path": "commons/maps/Point_Triangle_Context/map_data.json",
+        "start_line": 89,
+        "end_line": 89,
+        "excerpt": "triangle_construction_plate:0:0#offset:0.15,0,-0.30",
+        "kind": "placement",
+        "note": "Plate at source cell (9,5), inspected in a private actual-museum assembly."
+      }
+    ],
+    "paragraphs": [
+      {
+        "block_id": "82af3e741f670d41-1",
+        "block_sha256": "82af3e741f670d41ecd40f38df87b6cab652ce68104df649cf36abcb6e4533f6",
+        "purpose": "Pose a visible-face question that makes closure insufficient and gives the first puzzle a specific uncertainty to resolve.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "intent",
+          "puzzle"
+        ],
+        "reader_move": "Predict what must be added to three points.",
+        "why_here": "Begins exactly where Grid's exit question leaves off.",
+        "without": "The puzzle loses the distinction it should expose.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "437c53e36cf56368-1",
+        "block_sha256": "437c53e36cf56368fbd3765d8714a919ffefcd7349fd26d284871b9689c415e4",
+        "purpose": "Recall endpoints, paths and addresses as acquired operations while reserving surface creation for the new encounter.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "intent"
+        ],
+        "reader_move": "Bring earlier operations to a closed loop.",
+        "why_here": "Prevents prior connectivity from silently implying a face.",
+        "without": "Readers treat the triangle as merely another outline.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "66b3296ef0b1686f-1",
+        "block_sha256": "66b3296ef0b1686f9126fadba80d398810d131cfffd2be930dfdc9cb2391c25a",
+        "purpose": "Delay the last connection so readers make an expectation before the puzzle reveals what closure actually changes.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "puzzle",
+          "reach"
+        ],
+        "reader_move": "Look through the gap and predict the result.",
+        "why_here": "Places a small inquiry before the instrument's answer.",
+        "without": "The empty centre becomes an unexplained visual detail.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "4eedddfade956b5b-1",
+        "block_sha256": "4eedddfade956b5bbbca7460218bf6845c1b3bc0825561345f9b3218b8473d8f",
+        "purpose": "Hold the boundary fixed while showing and hiding a visible surface between its corners.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "puzzle",
+          "side",
+          "fill-material"
+        ],
+        "reader_move": "Close the loop, look through it, then show and hide the patch.",
+        "why_here": "The reader has just wondered what the final connection will do; the button supplies a second, separate event.",
+        "without": "Closure and visible fill remain a distinction described by the instrument rather than noticed in the room.",
+        "assessment": "grounded",
+        "opportunity": "",
+        "incitement": "Let the surface arrive as something to look at before describing the instrument that reports it."
+      },
+      {
+        "block_id": "cfb76bf48ac3717e-1",
+        "block_sha256": "cfb76bf48ac3717eeaaedd0ce94fe17e914dac78239352c2b1f9e3a14706a254",
+        "purpose": "Name closure and mesh submission as separate achievements after the visitor has seen their effects independently.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "puzzle",
+          "intent"
+        ],
+        "reader_move": "Explain what each operation changed in the scene.",
+        "why_here": "Consolidates the completed experiment before showing its implementation.",
+        "without": "The toggle remains a trick without a transferable concept.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "315fea7577cc99c0-1",
+        "block_sha256": "315fea7577cc99c006ee595649f4092fedd358cb8493f97be316fabb72db4182",
+        "purpose": "Locate the completion guard before the mesh excerpt, showing when the program permits the face to be created.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "puzzle"
+        ],
+        "reader_move": "Read the mesh operation after the completed-boundary condition.",
+        "why_here": "Makes the code answer the preceding interaction.",
+        "without": "Readers assume the button can fill an unfinished puzzle.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "58e622fd89b2f834-1",
+        "block_sha256": "58e622fd89b2f834896638158c1e3f3137769f6d720aceede78bdfc9d3a74fd3",
+        "purpose": "Explain how primitive type, vertex order and material contribute to visibility beyond the coordinate list alone.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "puzzle",
+          "side"
+        ],
+        "reader_move": "Identify what TRIANGLES asks the renderer to do.",
+        "why_here": "Interprets the short code without expanding into renderer history.",
+        "without": "The keyword appears as unexplained technical decoration.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "f33fcf8449764ebc-1",
+        "block_sha256": "f33fcf8449764ebc931c90ad494de2b39c77c78ca902aac6c5d438be410e4782",
+        "purpose": "Compare the same three positions under three constructions using the native illustration also encountered in the museum.",
+        "artifact_anchor": "Shared native points, boundary and face reference plate.",
+        "artifact_ids": [
+          "triangle_construction_plate",
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "plate-scene",
+          "plate-placement"
+        ],
+        "reader_move": "Compare which elements change while the three positions stay fixed.",
+        "why_here": "The short mesh explanation has just distinguished vertex data from a rendered face.",
+        "without": "The reader must hold all three constructions in memory without a common visual reference.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "954b423182d2d7d2-1",
+        "block_sha256": "954b423182d2d7d2f27040cfd69754fd8275ae051ad7d553e20ac7fdc9a96612",
+        "purpose": "Name the separate operations visible in the illustration without replacing the hands-on encounter.",
+        "artifact_anchor": "Shared native points, boundary and face reference plate.",
+        "artifact_ids": [
+          "triangle_construction_plate",
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "plate-scene",
+          "plate-placement"
+        ],
+        "reader_move": "Compare which elements change while the three positions stay fixed.",
+        "why_here": "The short mesh explanation has just distinguished vertex data from a rendered face.",
+        "without": "The reader must hold all three constructions in memory without a common visual reference.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "6a230f51d589c5f7-1",
+        "block_sha256": "6a230f51d589c5f7385decf0cd0590de5cbb9bfa429ccaf368fdf0cfdb10dae3",
+        "purpose": "Distinguish a change in view from a change in the triangle by moving the visitor while its corners stay fixed.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "side",
+          "fill-material"
+        ],
+        "reader_move": "Find the narrow view, then move back to see the patch widen.",
+        "why_here": "The face has appeared; now the reader can investigate how its appearance depends on where they stand.",
+        "without": "The distinction is delivered through projection terminology before it is encountered bodily.",
+        "assessment": "grounded",
+        "opportunity": "",
+        "incitement": "Make projection available through moving around the fixed face. Keep the rendering convention in its existing footnote."
+      },
+      {
+        "block_id": "94e8bc77c4ee0527-1",
+        "block_sha256": "94e8bc77c4ee05279455021a67b7294807b8c818ff196e2d3e0bcdff26186e27",
+        "purpose": "State the non-collinearity condition that makes the triangle's plane and area meaningful after the viewing experiment.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "side"
+        ],
+        "reader_move": "Distinguish moving the viewpoint from aligning the vertices.",
+        "why_here": "Bounds the geometric claim before free drawing begins.",
+        "without": "Three points are wrongly sufficient for nonzero area.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "d523e24f841038ae-1",
+        "block_sha256": "d523e24f841038ae5bd534778e1a1837f69b11f7b460bca3a89bd66f2f2412ae",
+        "purpose": "Teach deliberate corner placement through a small triangle, bringing Grid addresses into a new construction.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "sample",
+          "placement"
+        ],
+        "reader_move": "Move, wait for the corner number, then return to the first point.",
+        "why_here": "Practise the simplest loop before attempting the six-corner L.",
+        "without": "The first drawing instruction begins with sampling conditions before the visitor knows what to watch.",
+        "assessment": "grounded",
+        "opportunity": "",
+        "incitement": "Put the small action before its timing explanation, while retaining the interval, movement condition and grid spacing."
+      },
+      {
+        "block_id": "563a233f1f78df59-1",
+        "block_sha256": "563a233f1f78df59e589393c1eb35c84e906acfe4bf1a3bb7b351a805e34f85c",
+        "purpose": "Teach loop and triangle counts separately while using visibility control to preserve a boundary for comparison.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "counts"
+        ],
+        "reader_move": "Compare one loop, one triangle, and hidden fill.",
+        "why_here": "Adds instrument literacy before counts become misleading.",
+        "without": "The later four-triangle total looks like a correctness measure.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "de57d8abbf39b653-1",
+        "block_sha256": "de57d8abbf39b653263cee030d7b89a997b2824fceb6092669007dd7e94f0282",
+        "purpose": "Teach editing and releasing a stored corner before beginning an independent outline that preserves the first triangle.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "edit",
+          "corner-release"
+        ],
+        "reader_move": "Move and release one corner, then begin another outline.",
+        "why_here": "The reader has a completed face whose corners can now be revised.",
+        "without": "The sentence could promise a face that follows the held corner continuously.",
+        "assessment": "grounded",
+        "opportunity": "",
+        "incitement": "The source rebuilds after the corner is released. This matters to what the reader should expect while holding it."
+      },
+      {
+        "block_id": "999a68a4a384eb9e-1",
+        "block_sha256": "999a68a4a384eb9ea4ff88b57fb029bb437d21f89d57162903367c9add6d2b48",
+        "purpose": "Supply a controlled concave boundary whose geometry can stay fixed while only its fan start changes.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "L",
+          "sample",
+          "reach"
+        ],
+        "reader_move": "Draw six well-separated corners at one height.",
+        "why_here": "Creates the counterexample after a successful triangle.",
+        "without": "The overspill claim lacks a reproducible input.",
+        "assessment": "review",
+        "opportunity": "Observe whether learners can make the 1.2-metre planar L with the installed reach and timing."
+      },
+      {
+        "block_id": "a0fcdfe758f6324d-1",
+        "block_sha256": "a0fcdfe758f6324d87a6487447cddc93d832db382cb55220eeb63aee09ab7eb9",
+        "purpose": "Make input order the variable by using SHIFT START on the already completed L instead of demanding a second drawing.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "shift",
+          "guard"
+        ],
+        "reader_move": "Release the pen and shift the start once.",
+        "why_here": "Holds the boundary fixed immediately before inspecting the notch.",
+        "without": "Differences between drawings could explain the changed fill.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "a6b84371c58a006a-1",
+        "block_sha256": "a6b84371c58a006a4e0f0079cae8893754d2693b55a2692a2b5b62ca8d4968a8",
+        "purpose": "Direct attention to the exact unwanted coverage before explaining the fan that generated it from unchanged corners.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "fan",
+          "L"
+        ],
+        "reader_move": "Inspect the previously empty notch for added surface.",
+        "why_here": "Gives the algorithmic explanation a visible discrepancy.",
+        "without": "Readers learn the formula without locating its failure.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "421a717f495fe815-1",
+        "block_sha256": "421a717f495fe815c5293743e36644991cae688c16cc794f0340e9e77765101d",
+        "purpose": "Expose the first-corner choice through the shared vertex of each emitted triangle.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "fan"
+        ],
+        "reader_move": "Find B in each triple and follow the connections across the notch.",
+        "why_here": "The fill has crossed the intended boundary; the triangle list can now explain how.",
+        "without": "The word centre could obscure the boundary vertex that controls the construction.",
+        "assessment": "grounded",
+        "opportunity": "",
+        "incitement": "Give the reader the shared corner before naming the fan. Its anchor is one boundary vertex, not the geometric centre of the polygon."
+      },
+      {
+        "block_id": "75b05023ac2986df-1",
+        "block_sha256": "75b05023ac2986df766723f9ec630fe22bec673c863d3865e4c671d82f4714e0",
+        "purpose": "Distinguish correct execution of the fan from failure to fill the intended polygon, assigning the problem to the chosen method.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "fan",
+          "limits"
+        ],
+        "reader_move": "Trace an emitted edge through the missing notch.",
+        "why_here": "Interprets the code before exploring the full start cycle.",
+        "without": "Execution failure and representational mismatch become indistinguishable.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "2199da470baa9baa-1",
+        "block_sha256": "2199da470baa9baa71d9560f6a7b9eb10be2b6c531cf8d3d1150edcaae0a365a",
+        "purpose": "Use a complete start cycle to compare changing coverage with invariant triangle count and reversibility of the original fill.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "shift",
+          "counts"
+        ],
+        "reader_move": "Shift through six starts and watch count and START.",
+        "why_here": "Tests both the control and limits of its counter.",
+        "without": "Four triangles could be mistaken for four correct triangles.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "72733eb7d99f8b15-1",
+        "block_sha256": "72733eb7d99f8b151449220c403246977bb4fe24d8ab521dcd1c32a2eccec099",
+        "purpose": "Bound the fan's applicability so the chosen concave example does not become a false rule about all concavity.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "limits"
+        ],
+        "reader_move": "Compare a suitable fan start with an unsuitable one.",
+        "why_here": "Qualifies the counterexample before proposing responses.",
+        "without": "The lesson teaches a new geometric prejudice.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "54b56eaca237384e-1",
+        "block_sha256": "54b56eaca237384eb0014bc1a8c15662d54e7d5afb7c0b04871305decce5957e",
+        "purpose": "Offer distinct responses to overspill, preserving the outline, changing the method, or desiring the excess for another purpose.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "reuse",
+          "authority"
+        ],
+        "reader_move": "Choose between repairing the fill and reusing its excess.",
+        "why_here": "Opens agency after locating the algorithm's limited conditions.",
+        "without": "Criticism ends at failure without another available desire.",
+        "assessment": "interpretive",
+        "opportunity": ""
+      },
+      {
+        "block_id": "b9e2295e1734bcfe-1",
+        "block_sha256": "b9e2295e1734bcfe93343056d2f128318f431b7a5d5390c6c511a277a3d7d21e",
+        "purpose": "Carry closure, filling and appearance forward as separable choices while challenging the demand to want only convenient shapes.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "authority",
+          "intent"
+        ],
+        "reader_move": "Retain the distinction and question convenience as a requirement.",
+        "why_here": "Consolidates the technical experiment into a critical capacity.",
+        "without": "The method's limitation remains a narrow coding anecdote.",
+        "assessment": "interpretive",
+        "opportunity": ""
+      },
+      {
+        "block_id": "402f645f268a0a6b-1",
+        "block_sha256": "402f645f268a0a6b5765cb12e0c67dcd7d5eecdd82d0345ade6796e1b8a5e72b",
+        "purpose": "Move from a rendered face to the next question of how several faces can enclose a volume.",
+        "artifact_anchor": "Transition to enclosure; no direct artifact.",
+        "artifact_ids": [],
+        "evidence_ids": [
+          "intent"
+        ],
+        "reader_move": "Ask what a face junction still lacks.",
+        "why_here": "Prepares Polyhedra without declaring enclosure already solved.",
+        "without": "The next room repeats closure without distinguishing dimension.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "b1d3e3ea6b80da49-1",
+        "block_sha256": "b1d3e3ea6b80da491ac032e36e8820183f66fb2a971cfd742660b6408ba2fd90",
+        "purpose": "Clarify winding, culling and the absence of thickness or collision without burdening the main viewing experiment with renderer detail.",
+        "artifact_anchor": "Three-edge puzzle with completion-gated visible fill.",
+        "artifact_ids": [
+          "triangle_line_puzzle"
+        ],
+        "evidence_ids": [
+          "side"
+        ],
+        "reader_move": "Separate two-sided appearance from thickness and support.",
+        "why_here": "Supplies precision adjacent to the edge-on exercise.",
+        "without": "Visibility may be mistaken for a physical two-sided sheet.",
+        "assessment": "grounded",
+        "opportunity": ""
+      },
+      {
+        "block_id": "4421925580f583ae-1",
+        "block_sha256": "4421925580f583aeb5cfd55a7886d3317429216fe8ee978a82e7710258299df6",
+        "purpose": "Name a plausible alternative triangulation route while explicitly keeping it a development proposal rather than an installed switch.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "limits",
+          "reuse"
+        ],
+        "reader_move": "Identify the projection and indexing work another method needs.",
+        "why_here": "Makes asking for another algorithm a concrete possibility.",
+        "without": "The alternative sounds either magical or already available.",
+        "assessment": "interpretive",
+        "opportunity": ""
+      },
+      {
+        "block_id": "690cf06386308bb9-1",
+        "block_sha256": "690cf06386308bb955248d62c5585026be9ef855036fea488f8db451ea65d491",
+        "purpose": "Provide coordinates, control readiness and label conventions so readers can recover the demanding L comparison when necessary.",
+        "artifact_anchor": "Timed snapped outlines with first-vertex fan and SHIFT START instrument.",
+        "artifact_ids": [
+          "draw_triangle_faces"
+        ],
+        "evidence_ids": [
+          "L",
+          "guard",
+          "manual"
+        ],
+        "reader_move": "Consult the recipe and release all held handles.",
+        "why_here": "Keeps operational detail accessible outside the main walking rhythm.",
+        "without": "A blocked control could be mistaken for fan failure.",
+        "assessment": "grounded",
+        "opportunity": ""
+      }
+    ],
+    "actions": [
+      {
+        "title": "Lead the tutorial with the installed SHIFT START route",
+        "target": "corpus",
+        "reason": "Tutorial still teaches manual retracing first; current final and technical use in-place replacement with different totals.",
+        "evidence_ids": [
+          "manual",
+          "shift",
+          "counts"
+        ],
+        "block_ids": [
+          "a0fcdfe758f6324d-1",
+          "2199da470baa9baa-1",
+          "690cf06386308bb9-1"
+        ]
+      },
+      {
+        "title": "Observe L drawing and control reach in the complete hall",
+        "target": "review",
+        "reason": "Supplied-input checks do not establish that a learner can maintain height, reach six corners, and access the instrument.",
+        "evidence_ids": [
+          "L",
+          "reach",
+          "placement"
+        ],
+        "block_ids": [
+          "d523e24f841038ae-1",
+          "999a68a4a384eb9e-1",
+          "a0fcdfe758f6324d-1"
+        ]
+      }
+    ]
+  },
+  "note": "Triangle-only update. Shared purpose rebuild deferred because independent Polyhedra revisions are not yet reflected in its paragraph audit."
+}

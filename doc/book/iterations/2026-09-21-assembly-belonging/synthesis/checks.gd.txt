@@ -1,0 +1,20 @@
+
+	report["checks"]=[]
+	var ledger: Node3D=nodes.get("accountability_ledger")
+	var gallery: Node3D=nodes.get("assembly_return")
+	check(report,is_instance_valid(ledger) and is_instance_valid(gallery),"Both existing final-hall primaries instantiate")
+	if not is_instance_valid(ledger) or not is_instance_valid(gallery):quit(1);return
+	var fixture: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://doc/book/iterations/2026-09-21-assembly-belonging/museum-runtime.json"))
+	var record: Dictionary=fixture.kept_record
+	check(report,Store.keep(self,record)==OK,"Final hall accepts record produced through Assembly collar release")
+	gallery.refresh();ledger._refresh_record()
+	check(report,Store.changed(gallery.record)==0 and Store.changed_connections(gallery.record)==1,"Standing comparison carries changed relation with no moved points")
+	check(report,Store.components(gallery.record)==1 and gallery.record.edges[5]==["l_hand","head"],"Kept graph reconnects all joints through the new hand-to-head relation")
+	check(report,ledger._entries[3]=="12 connections; 1 rerouted","Actual placed ledger reports a changed relation")
+	var baseline: Dictionary=gallery.record.duplicate(true)
+	baseline.edges=baseline.start_edges
+	check(report,Store.components(baseline)==1,"Starting graph remains connected")
+	check(report,gallery.bodies.has_node("StartingPose") and gallery.bodies.has_node("KeptPose"),"Both life-size reconstructions remain present")
+	report["pose"]=gallery.record
+
+	check(report,gallery.status.text.contains("connected groups: 1") and gallery.status.text.contains("connections rerouted: 1"),"Caption clearly reports the reconnected graph")

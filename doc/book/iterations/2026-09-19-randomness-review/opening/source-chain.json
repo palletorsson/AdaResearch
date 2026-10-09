@@ -1,0 +1,1694 @@
+{
+  "Random_Definition": {
+    "order": {
+      "primary": [
+        "seed_replay_demo"
+      ],
+      "secondary": [
+        "prng_crank_machine",
+        "slot_machine",
+        "trng_vs_prng",
+        "random_number_book_page_1955",
+        "catalyst_pickup",
+        "textile_comparison"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "prng_crank_machine",
+        "token": "prng_crank_machine:180:0.62",
+        "cell": [
+          3,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+            "map_ready": true,
+            "description": "A physical pseudo-random number generator machine. Press CRANK to step the LCG formula: state = (state * 1664525 + 1013904223) mod 2^32. Each step animates multiply, add, mod phases. Shows deterministic sequence, normalized 0-1 output, and full history.",
+            "scripts": [
+              "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "slot_machine",
+        "token": "slot_machine:180",
+        "cell": [
+          10,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+            "map_ready": true,
+            "description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
+            "scripts": [
+              "res://algorithms/randomness/slot_machine/slot_machine.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "seed_replay_demo",
+        "token": "seed_replay_demo:180#display:wall#comparison:replicas#stand:table#controls:compact#control_front:1.0",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+            "map_ready": true,
+            "description": "Demonstrates seed reproducibility — an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
+            "scripts": [
+              "res://algorithms/randomness/seed_replay/seed_replay_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "catalyst_pickup",
+        "token": "catalyst_pickup:180#sequence_name:randomness#label_text:RANDOMNESS CATALYST#orb_color:0.95,0.55,0.20#accent_color:0.95,0.55,0.20",
+        "cell": [
+          10,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lab.json",
+            "scene": "res://commons/artifacts/catalyst_pickup/catalyst_pickup.tscn",
+            "map_ready": true,
+            "description": "Pedestal with a floating glowing orb. Grab it to complete a sequence — LabManager records completion and the bracelet's matching catalyst mode unlocks. The closing gesture that turns a lab chamber from museum to course.",
+            "scripts": [
+              "res://commons/artifacts/catalyst_pickup/catalyst_pickup.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "textile_comparison",
+        "token": "textile_comparison#controls:compact#control_front:-1.7#control_facing:-z",
+        "cell": [
+          6,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/textile_comparison.tscn",
+            "map_ready": true,
+            "description": null,
+            "scripts": [
+              "res://commons/artifacts/randomness_space/dna_comparison.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "trng_vs_prng",
+        "token": "trng_vs_prng:180:1.12:0.1",
+        "cell": [
+          3,
+          16
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/trng_vs_prng/trng_vs_prng.tscn",
+            "map_ready": true,
+            "description": "Interactive comparison between True Random Number Generators and Pseudo-Random Number Generators",
+            "scripts": [
+              "res://algorithms/randomness/trng_vs_prng/TrngVsPrng.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_number_book_page_1955",
+        "token": "random_number_book_page_1955:0:2.7:0.8",
+        "cell": [
+          9,
+          16
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+            "map_ready": true,
+            "description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
+            "scripts": [
+              "res://algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Entropy": {
+    "order": {
+      "primary": [
+        "shannon_entropy_meter",
+        "entropy_axiom",
+        "entropy_ruin"
+      ],
+      "secondary": [
+        "entropy_jar",
+        "hardware_entropy_decay",
+        "random_butterflies"
+      ],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "entropy_jar",
+        "token": "entropy_jar:180",
+        "cell": [
+          3,
+          5
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+            "map_ready": true,
+            "description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
+            "scripts": [
+              "res://algorithms/randomness/entropy_jar/entropy_jar.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "shannon_entropy_meter",
+        "token": "shannon_entropy_meter:180#stand:ledger#disclosure:ledger#controls:compact#control_front:1.7",
+        "cell": [
+          8,
+          5
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn",
+            "map_ready": true,
+            "description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+            "scripts": [
+              "res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_butterflies",
+        "token": "random_butterflies:180",
+        "cell": [
+          13,
+          7
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.tscn",
+            "map_ready": true,
+            "description": "Entropy-seeking butterfly swarm: wander randomly then land on entropy_axiom grid points, wings tinting blue-to-red along the order-chaos gradient. Grab and release to send to a new entropy point.",
+            "scripts": [
+              "res://algorithms/randomness/proceduralrandomness/movementbased/scenes/randombutterflies/butterflies.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "hardware_entropy_decay",
+        "token": "hardware_entropy_decay:180:0.45:0.6",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+            "map_ready": true,
+            "description": "Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.",
+            "scripts": [
+              "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "entropy_axiom",
+        "token": "entropy_axiom#square:true#glass_width:10#glass_depth:10#glass_height:4.5#glass_title:ORDER / DISPLACEMENT",
+        "cell": [
+          8,
+          15
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/algorithms_misc.json",
+            "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom.tscn",
+            "map_ready": true,
+            "description": "Shannon entropy as foundational axiom — information content measured by surprise. The mathematical bedrock of information theory: uncertainty is quantifiable.",
+            "scripts": [
+              "res://algorithms/randomness/entropy_axiom/entropy_axiom.gd"
+            ]
+          },
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.tscn",
+            "map_ready": true,
+            "description": "Visualizes the gradient from order to chaos using a 10x10x40 MultiMesh grid (4000 instances). Points transition from structured alignment to random displacement along the Z-axis.",
+            "scripts": [
+              "res://algorithms/randomness/entropy_axiom/entropy_axiom_multimesh.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "entropy_ruin",
+        "token": "entropy_ruin#controls:compact#control_front:-2.0#control_facing:-z",
+        "cell": [
+          8,
+          26
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/entropy_ruin.tscn",
+            "map_ready": true,
+            "description": "Four fluted stone columns and a masonry wall dismantle by seeded top-piece selection. All 116 stones remain as architecture or bounded rubble. Run/pause, one stone, restore.",
+            "scripts": [
+              "res://commons/artifacts/randomness_space/entropy_ruin.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Remove": {
+    "order": {
+      "primary": [
+        "remove_random",
+        "random_removal_arena"
+      ],
+      "secondary": [],
+      "decoration": []
+    },
+    "placements": [
+      {
+        "key": "remove_random",
+        "token": "remove_random:180#local_grid:true#controls:compact#control_front:1.15",
+        "cell": [
+          8,
+          5
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/remove_random.tscn",
+            "map_ready": true,
+            "description": "Random removal without replacement from an explicitly owned candidate grid. With #local_grid:true, a numbered 8x8 bench exposes Range, Row, Column, All, Remove One, Reset and New Seed; slot plates survive and reset replays the named seed.",
+            "scripts": [
+              "res://algorithms/randomness/RemoveRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_removal_arena",
+        "token": "random_removal_arena:0:3#columns:9#rows:11#glass_width:11#glass_depth:13#glass_height:4.5#glass_title:WALK / REMOVE#glass_grid:false#controls:compact#control_front:-7.0#control_facing:-z",
+        "cell": [
+          8,
+          17
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://commons/artifacts/randomness_space/removal_arena.tscn",
+            "map_ready": true,
+            "description": "Walk to remove; an owned simulation with reachable replay controls.",
+            "scripts": [
+              "res://commons/artifacts/randomness_space/removal_arena.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Randomness_10_PRINT_Algorithm": {
+    "order": {
+      "primary": [
+        "ten_print_maze_3d"
+      ],
+      "secondary": [
+        "remove_random",
+        "pickup_cube_placer",
+        "science_screen",
+        "clipboard",
+        "nature_system_demo"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "remove_random",
+        "token": "remove_random:90",
+        "cell": [
+          1,
+          1
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/remove_random.tscn",
+            "map_ready": true,
+            "description": "Random removal without replacement from an explicitly owned candidate grid. With #local_grid:true, a numbered 8x8 bench exposes Range, Row, Column, All, Remove One, Reset and New Seed; slot plates survive and reset replays the named seed.",
+            "scripts": [
+              "res://algorithms/randomness/RemoveRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_maze_3d",
+        "token": "ten_print_maze_3d:0:1",
+        "cell": [
+          1,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+            "map_ready": true,
+            "description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
+            "scripts": [
+              "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "pickup_cube_placer",
+        "token": "pickup_cube_placer:90",
+        "cell": [
+          2,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/pickup_cube_placer.tscn",
+            "map_ready": true,
+            "description": "Finds the active grid system and populates pickup cubes using randomized or patterned placement modes.",
+            "scripts": [
+              "res://algorithms/randomness/PickupCubePlacer.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_maze_3d",
+        "token": "ten_print_maze_3d:0:1",
+        "cell": [
+          11,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+            "map_ready": true,
+            "description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
+            "scripts": [
+              "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "science_screen",
+        "token": "science_screen:180:1.5#mode:grid",
+        "cell": [
+          11,
+          3
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/shaders.json",
+            "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+            "map_ready": true,
+            "description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+            "scripts": [
+              "res://commons/artifacts/science_screen/science_screen.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "clipboard",
+        "token": "clipboard#ten_print_axioms:194:1.0",
+        "cell": [
+          6,
+          4
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/context/clipboard/clipboard.tscn",
+            "map_ready": true,
+            "description": "A world-space document you have to hold in order to read. Pages, code snippets, and tutorial fragments stay coherent while the object flips between states, positions, and content sets. Because it is grabbable, reading becomes an embodied interaction rather than a detached overlay. It is the sequence's stable carrier for changing information.",
+            "scripts": [
+              "res://commons/context/clipboard/clipboard.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          5,
+          7
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "nature_system_demo",
+        "token": "nature_system_demo:90",
+        "cell": [
+          6,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/nature_system.json",
+            "scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+            "map_ready": false,
+            "description": "Visual test scene for the Q-FEP Nature System. Spawns critters from all 4 kingdoms (tree, creature, flower, fungus) in a grid. Keyboard controls: 1-4 spawn by kingdom, R randomize DNA, E evolve, L cycle LOD, H toggle hybrids, SPACE reset grid.",
+            "scripts": [
+              "res://algorithms/nature_system/demo/nature_system_demo.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print",
+        "token": "ten_print:180:1.5:0.1875#semicolon:on#when_full:scroll#seed:1982#count:400#own_light:off#controls:panel#channel:hall",
+        "cell": [
+          3,
+          11
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/ten_print/ten_print.tscn",
+            "map_ready": true,
+            "description": "The Commodore 64 one-liner 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 as a 20 x 20 field of diagonals, one coin flip per tick. #semicolon:off drops the trailing semicolon, so the same stream prints as a single column and no maze; #when_full:scroll lets the rows move up as the C64 screen does instead of wiping the field; #seed pins the coin, so two instances print one stream and differ only in layout; #count prints that many characters at build.",
+            "scripts": [
+              "res://algorithms/randomness/ten_print/TenPrint.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "composition_stochastique",
+        "token": "composition_stochastique:180",
+        "cell": [
+          6,
+          11
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/composition_stochastique.json",
+            "scene": "res://commons/artifacts/composition_stochastique/composition_stochastique.tscn",
+            "map_ready": true,
+            "description": "A free-standing board with four ten-by-ten grids of diagonal strokes on a light ground, after François and Vera Molnar's Composition Stochastique (1959), which the chapter describes as left and right diagonals at 1, 5, 30 and 50 percent, to show chaos intruding on order. On a hundred cells those percentages are exactly 1, 5, 30 and 50 cells, and that is what is drawn: in each grid every cell carries the same rising diagonal except EXACTLY k cells, which carry the falling one. The counts are exact because the cells are dealt, not rolled. A seeded shuffle of the hundred cell indices picks the first k. A chance per cell would only hit those numbers on average: a 30 percent chance per cell turns exactly thirty cells about one time in eleven (8.7%), and a 1 percent chance turns exactly one cell only 37% of the time. So the only thing chance decides here is WHERE. One shuffle serves all four grids, so the turned cells of each grid include those of the grid before it, and between neighbours only the count changes. A caption under each grid gives its count ('30 of 100'), and a plate asks where the grid stops reading as a grid. RESEED deals again: every position moves, every count holds. At the defaults (seed 1959, no presses) the four pictures are the same on every boot.",
+            "scripts": [
+              "res://commons/artifacts/composition_stochastique/composition_stochastique.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_maze_3d",
+        "token": "ten_print_maze_3d:90:1",
+        "cell": [
+          1,
+          12
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze_3d.tscn",
+            "map_ready": true,
+            "description": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through it.",
+            "scripts": [
+              "res://algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ten_print_structure",
+        "token": "ten_print_structure:180#form:floor#rows:7#channel:hall#plate:none",
+        "cell": [
+          11,
+          12
+        ],
+        "role": null,
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/ten_print_structure.json",
+            "scene": "res://commons/artifacts/ten_print_structure/ten_print_structure.tscn",
+            "map_ready": true,
+            "description": "The larger 10 PRINT. A ten_print screen with #controls:panel#channel:<word> is the interface: the program you can edit, the maze seen from above as its architect sees it (p. 84), a machine that executes the pattern so the novice is free to vary it (p. 78). This is the structure it prints: a field of cols x rows cells (20 x 20 at 0.5 m, 10 x 10 m) laid on the floor, each cell one diagonal slab, printed cell by cell from the same stream. Press STEP and one slab appears; press SEMICOLON and the room empties and refills as a single column, because without the semicolon the stream is not wrapped and there is no maze; press BIAS + and the room leans. A bright tile marks the cell where the screen's next character will land. The screen read from its front and the floor read from its near edge draw the same glyph in the same cell: the floor is the screen tipped away onto the ground. With no screen in the hall the field is printed standalone from seed and count with ten_print's own pinned rule, and the plate says so. form moves the maze relative to the body: floor ridges to read standing (0.25 m, or half a cell when the cells are smaller), walls to walk in, slabs overhead.",
+            "scripts": [
+              "res://commons/artifacts/ten_print_structure/ten_print_structure.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Random_Cubes": {
+    "order": {
+      "primary": [
+        "dice_throw"
+      ],
+      "secondary": [
+        "coin_toss",
+        "random_object_spawner",
+        "random_edge_profile"
+      ],
+      "decoration": [
+        "dark_sphere"
+      ]
+    },
+    "placements": [
+      {
+        "key": "dice_throw",
+        "token": "dice_throw",
+        "cell": [
+          3,
+          2
+        ],
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
+            "map_ready": true,
+            "description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+            "scripts": [
+              "res://algorithms/randomness/dice_throw/dice_throw.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "coin_toss",
+        "token": "coin_toss",
+        "cell": [
+          8,
+          2
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
+            "map_ready": true,
+            "description": "The simplest random experiment. Grab coins from a tray and toss them. A counter tracks the heads/tails ratio converging to 0.5 over many flips. Gold side = heads, silver side = tails.",
+            "scripts": [
+              "res://algorithms/randomness/coin_toss/coin_toss.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "token": "dark_sphere",
+        "cell": [
+          6,
+          4
+        ],
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/lsystems.json",
+            "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+            "map_ready": true,
+            "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+            "scripts": [
+              "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_object_spawner",
+        "token": "random_object_spawner",
+        "cell": [
+          5,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/random_object_spawner.tscn",
+            "map_ready": true,
+            "description": "A spawning algorithm that randomly generates and places objects in the environment",
+            "scripts": [
+              "res://algorithms/randomness/random_object_spawner.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_object_spawner",
+        "token": "random_object_spawner",
+        "cell": [
+          6,
+          6
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/cubes/random_object_spawner.tscn",
+            "map_ready": true,
+            "description": "A spawning algorithm that randomly generates and places objects in the environment",
+            "scripts": [
+              "res://algorithms/randomness/random_object_spawner.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          8
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          9
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          10
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          11
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          12
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          13
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          14
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          3,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          4,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          5,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          6,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          7,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      },
+      {
+        "key": "random_edge_profile",
+        "token": "random_edge_profile:0",
+        "cell": [
+          8,
+          15
+        ],
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/randomness.json",
+            "scene": "res://algorithms/randomness/profile_random.tscn",
+            "map_ready": true,
+            "description": "A planar surface that generates random edge profiles and patterns",
+            "scripts": [
+              "res://algorithms/randomness/ProfileRandom.gd"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "checks": [
+    {
+      "details": null,
+      "label": "both initial diagonal orientations match their navigation raster",
+      "passed": false
+    },
+    {
+      "details": 0,
+      "label": "one visual replacement updates exactly one stored orientation",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "navigation raster is rebuilt after replacement",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "replacement geometry and navigation agree",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "old search exclusions are released for the changed topology",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "new search begins at current ant rather than teleporting to entrance",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 0",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 1",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 2",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 3",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 4",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 5",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 6",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 7",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 8",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 9",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 10",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "raster remains aligned after repeated replacement 11",
+      "passed": false
+    },
+    {
+      "details": null,
+      "label": "Nature System standalone scene loads",
+      "passed": true
+    },
+    {
+      "details": null,
+      "label": "Nature System instantiated without starting its population",
+      "passed": true
+    },
+    {
+      "details": {
+        "auto_populate": true,
+        "columns": 4,
+        "rows": 3,
+        "spacing": 3.5
+      },
+      "label": "Nature System is a standalone48specimen layout",
+      "passed": true
+    }
+  ],
+  "failed": 18,
+  "source": "res://doc/book/iterations/2026-09-19-randomness-review/opening/before-source/algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd"
+}

@@ -1,0 +1,391 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_TrigWalkingPath · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_TrigWalkingPath">← Tutorial lineage</a></p><h1>WaveFunctions TrigWalkingPath</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_TrigWalkingPath/final.md">Raw captured source</a></p><pre># A slow pulse from fast motions
+
+How can two quick repetitions produce one slow pulse?
+
+&lt;!-- @beat_frequency_demo --&gt;
+
+Look at the rows labelled A, B and A+B. Use the two frequency controls to bring A and B close together. Follow one part of the lower row long enough to see its movement grow and shrink, then compare that slower change with the quicker movement above.
+
+Make the frequency difference smaller while keeping both sources moving. The envelope changes more slowly. At equal frequencies, this version&#x27;s initially aligned waves reinforce one another without the same slow pattern of beating.
+
+Keep A fixed and move B towards it from one side. Watch a single location on the lower row through a broadening and a narrowing of its motion. Now move B away again and compare how quickly that alternation returns. Avoid counting every small rise as a separate beat; you are following the larger change in how much motion is available. At a moment when the lower row is quiet, inspect A and B above it. Their contributions can remain substantial while opposing one another. A small sum therefore does not establish that both inputs have become small or that either source has stopped oscillating.
+
+The lower row combines the two values at each sampled position and moment. When the sources are near alignment, their contributions reinforce. As their phases drift apart, they increasingly cancel; later they approach alignment again. The slow pulse belongs to this changing relationship. It is not a third independent source secretly supplying a new rhythm.
+
+The beat readout gives the absolute difference between the two frequencies. This makes a small difference conspicuous in another form: two individually quick oscillations reveal their separation through a slow envelope. The lower row is drawn at half the raw sum&#x27;s height so it fits the display, so compare the pattern rather than measuring the amplitudes with a ruler.
+
+Try predicting how the envelope will change before moving one control. Then reverse which source has the higher frequency. The absolute difference can remain the same even though you have exchanged the roles of A and B.
+
+&lt;!-- @ --&gt;
+
+This display does not generate an audible beat. Elsewhere in the hall, the paired red and blue steps give sine and cosine another body. Their quarter-turn difference sets two rows at different heights; here the question of where a curve lies can become a question of where support will be.
+
+The glowing figure across the hall combines two oscillations the other way: one across, one up, instead of both on one row. A ratio of one to one draws the circle you followed in the unit-circle room, sine against cosine; three to two, a knot that closes; one to the golden ratio, a curve that never returns to its start however long you wait. The rows made a slow pulse from a pair; the same pair set at right angles makes a shape.
+
+At the synthesis lab, you will change the contributions of several harmonics and ask how their sum can acquire a shape that no single component has.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_TrigWalkingPath/tutorial.md">Raw captured source</a></p><pre># Current hall: a slow pulse from fast motions
+
+`beat_frequency_demo` is the primary. Its two controls set frequencies from 1 to 10 Hz. The three rows show A, B and half of their raw sum. Close frequencies give a slow envelope; equal frequencies remove the beating in this fixed-phase demonstration. The display is visual only. See [the chapter](final.md) for the encounter and `algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd` for the implementation.
+
+The secondary `TrigWalkingPath` remains in the room. Its shipped scene creates forty pairs of collidable steps once, adds end platforms, then circulates the two rows in opposite directions. Their heights combine a shared sloping base with sine or cosine. There is no visitor-triggered generation, cross-bridge or linked chart in that source. The other secondary works are `sine_oscillation`, `lissajous_curves` and `wave_interference`; `dark_sphere` remains the reference object. The next hall compares five fixed harmonic frequencies in the Synthesis Lab.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its endless generation, cross-bridge, entrance controls and linked chart are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. The current chapter and the source named above take precedence.
+
+---
+
+# Trig Walking Path
+
+Two lanes, 90 degrees out of phase. Build the path that generates itself under the learner&#x27;s feet.
+
+Declare the path generator.
+
+```gdscript
+class_name TrigPath
+extends Node3D
+
+@export var lane_spacing: float = 1.5
+@export var amplitude: float = 0.8
+@export var frequency: float = 0.5
+@export var ahead_distance: float = 8.0
+```
+
+Two lanes spaced apart. Amplitude is vertical. Ahead distance is how far the path pre-generates beyond the learner.
+
+Sample both lanes at a distance.
+
+```gdscript
+func sample_lanes(z: float) -&gt; Array:
+    var sin_y: float = amplitude * sin(TAU * frequency * z)
+    var cos_y: float = amplitude * cos(TAU * frequency * z)
+    return [
+        Vector3(-lane_spacing * 0.5, sin_y, z),
+        Vector3(lane_spacing * 0.5, cos_y, z),
+    ]
+```
+
+Sine on the left, cosine on the right. The 90-degree phase difference gives the visual rhythm of the dual path.
+
+Generate new steps ahead of the player.
+
+```gdscript
+func extend_path(player_z: float) -&gt; void:
+    while last_z &lt; player_z + ahead_distance:
+        last_z += 0.4
+        var points := sample_lanes(last_z)
+        spawn_step(points[0])
+        spawn_step(points[1])
+```
+
+As the learner walks forward, steps spawn ahead. The path never ends because it is always being drawn in front of them.
+
+Spawn each step.
+
+```gdscript
+func spawn_step(pos: Vector3) -&gt; void:
+    var step := preload(&quot;res://commons/artifacts/wavefunctions/trig_step.tscn&quot;).instantiate()
+    step.position = pos
+    add_child(step)
+    steps.append(step)
+```
+
+Each spawned step is tracked for despawn. The steps are small floating plates. The learner steps from one to the next.
+
+Despawn steps behind.
+
+```gdscript
+func cull_behind(player_z: float) -&gt; void:
+    steps = steps.filter(func(s):
+        if s.position.z &lt; player_z - 5.0:
+            s.queue_free()
+            return false
+        return true
+    )
+```
+
+Old steps free themselves. Memory stays low. The path is finite at any moment but infinite over time.
+
+Label each step with its angle.
+
+```gdscript
+func label_step(step: Node3D, z: float) -&gt; void:
+    var label: Label3D = step.get_node(&quot;Label3D&quot;)
+    label.text = &quot;θ = %.2f&quot; % (TAU * frequency * z)
+```
+
+Each step carries its angle. The learner can read their position in the waveform by looking down.
+
+Colour the lanes differently.
+
+```gdscript
+func tint_lanes() -&gt; void:
+    for step in steps:
+        var is_left: bool = step.position.x &lt; 0.0
+        var mat := step.get_node(&quot;MeshInstance3D&quot;).material_override as StandardMaterial3D
+        mat.albedo_color = Color(0.4, 0.7, 0.9) if is_left else Color(0.9, 0.6, 0.3)
+```
+
+Sine lane cool, cosine lane warm. The colour lets the learner cross-reference the phase without checking numbers.
+
+You have walked the two fundamentals. The next map, Synthesis Lab, stacks harmonics until any waveform appears.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_TrigWalkingPath/technical.md">Raw captured source</a></p><pre># Current hall: a slow pulse from fast motions
+
+`beat_frequency_demo` is the primary. Its two controls set frequencies from 1 to 10 Hz. The three rows show A, B and half of their raw sum. Close frequencies give a slow envelope; equal frequencies remove the beating in this fixed-phase demonstration. The display is visual only. See [the chapter](final.md) for the encounter and `algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd` for the implementation.
+
+The secondary `TrigWalkingPath` remains in the room. Its shipped scene creates forty pairs of collidable steps once, adds end platforms, then circulates the two rows in opposite directions. Their heights combine a shared sloping base with sine or cosine. There is no visitor-triggered generation, cross-bridge or linked chart in that source. The other secondary works are `sine_oscillation`, `lissajous_curves` and `wave_interference`; `dark_sphere` remains the reference object. The next hall compares five fixed harmonic frequencies in the Synthesis Lab.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its endless generation, cross-bridge, entrance controls and linked chart are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. The current chapter and the source named above take precedence.
+
+---
+
+# WaveFunctions TrigWalkingPath — Technical
+
+Two parallel walkways generate themselves a few steps ahead of the learner. The left lane follows sin; the right lane follows cos.
+
+```gdscript
+class_name TrigPath extends Node3D
+
+@export var function_type: String = &quot;sin&quot;
+@export var frequency: float = 0.2   # cycles per unit distance
+@export var amplitude: float = 0.5   # vertical amplitude
+@export var step_spacing: float = 0.4
+@export var lookahead: int = 10
+
+var steps: Array = []  # spawned step nodes
+
+func update_path(walker_position: Vector3) -&gt; void:
+    var walker_step_index: int = int(walker_position.x / step_spacing)
+    while steps.size() &lt; walker_step_index + lookahead:
+        spawn_step_at_index(steps.size())
+    # Clean up old steps behind walker
+    while not steps.is_empty() and steps[0].position.x &lt; walker_position.x - step_spacing * 3:
+        steps[0].queue_free()
+        steps.pop_front()
+
+func spawn_step_at_index(index: int) -&gt; void:
+    var x: float = index * step_spacing
+    var y: float = height_for(x)
+    var step := STEP_SCENE.instantiate()
+    step.position = Vector3(x, y, lane_z_offset())
+    add_child(step)
+    steps.append(step)
+
+func height_for(x: float) -&gt; float:
+    var angle: float = frequency * x * TAU
+    match function_type:
+        &quot;sin&quot;: return amplitude * sin(angle)
+        &quot;cos&quot;: return amplitude * cos(angle)
+    return 0.0
+```
+
+## Cross-Bridge
+
+The cross-bridge at the midpoint connects the two lanes. It is a single step whose height is the average of sin and cos at its position — a 45° phase midpoint.
+
+```gdscript
+class_name CrossBridge extends StaticBody3D
+
+@export var midpoint_x: float = 20.0
+@export var frequency: float = 0.2
+@export var amplitude: float = 0.5
+
+func _ready() -&gt; void:
+    var sin_y := amplitude * sin(frequency * midpoint_x * TAU)
+    var cos_y := amplitude * cos(frequency * midpoint_x * TAU)
+    var avg_y := (sin_y + cos_y) / 2.0
+    position.y = avg_y
+```
+
+## Reference Panel
+
+The panel shows both functions on a shared chart, with a marker indicating the walker&#x27;s current horizontal position.
+
+```gdscript
+class_name TrigChart extends Control
+
+func draw_chart(walker_x: float, frequency: float, amplitude: float) -&gt; void:
+    var w: float = size.x
+    var h: float = size.y
+    for px in range(int(w)):
+        var world_x: float = (px / w) * total_range
+        var sin_y: float = amplitude * sin(frequency * world_x * TAU)
+        var cos_y: float = amplitude * cos(frequency * world_x * TAU)
+        draw_line(Vector2(px, h / 2 - sin_y * h / 4), Vector2(px + 1, h / 2 - sin_y * h / 4), Color.BLUE)
+        draw_line(Vector2(px, h / 2 - cos_y * h / 4), Vector2(px + 1, h / 2 - cos_y * h / 4), Color.RED)
+    var marker_px: float = (walker_x / total_range) * w
+    draw_line(Vector2(marker_px, 0), Vector2(marker_px, h), Color.WHITE, 2)
+```
+
+## Complexity
+
+Path generation is O(lookahead) per frame. Cleanup removes steps behind the walker to keep memory bounded. The reference chart redraws once per frame at O(w) where w is the chart width in pixels.
+
+Within the sequence, TrigWalkingPath is the penultimate map. Synthesis Lab will next decompose everything into Fourier components.
+
+## Lane Separation
+
+The two lanes are separated by 2 units horizontally — close enough for the learner to step between them, far enough that the two functions&#x27; offset is visible as a spatial relationship rather than merely on a chart.
+
+## Dynamic Path Generation
+
+Generating the path procedurally as the learner approaches means the map has effectively infinite length. Old steps are removed when they fall behind the walker by a fixed distance, bounding memory use.
+
+```gdscript
+class_name PathGenerator extends Node3D
+
+@export var lookahead_distance: float = 8.0
+@export var behind_cleanup_distance: float = 4.0
+
+func _process(_delta: float) -&gt; void:
+    var walker_x: float = walker.global_position.x
+    ensure_steps_up_to(walker_x + lookahead_distance)
+    remove_steps_before(walker_x - behind_cleanup_distance)
+```
+
+## Phase Offset Demonstration
+
+At any horizontal position x, the vertical difference between the sin lane&#x27;s step height and the cos lane&#x27;s step height is |sin(x) - cos(x)|, which equals √2·|sin(x - π/4)|. This reaches its maximum of √2 at x = 3π/4 + kπ for integer k.
+
+```gdscript
+func maximum_offset_positions(frequency: float, total_range: float) -&gt; Array:
+    var positions: Array = []
+    var k: int = 0
+    while true:
+        var x: float = (3.0 * PI / 4.0 + k * PI) / (frequency * TAU)
+        if x &gt; total_range: break
+        positions.append(x)
+        k += 1
+    return positions
+```
+
+## Pitch Mapping
+
+A variant of the map maps lane height to pitch — the learner&#x27;s altitude determines the tone that plays as they walk. Climbing the sin lane produces a sine-like pitch profile; the cos lane produces the same profile offset by 90°.
+
+## Chart Rendering
+
+The reference panel redraws the chart once per frame. Drawing two sinusoids at panel resolution (say 300 pixels wide) is 600 line segments per frame — trivial on modern hardware.
+
+## Interactive Parameters
+
+The entrance sliders adjust frequency and amplitude for both lanes simultaneously. Independent adjustment would be possible but would break the &quot;sin and cos are the same function offset&quot; pedagogy the map is built around.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_TrigWalkingPath/intent.md">Raw captured source</a></p><pre># Current hall: a slow pulse from fast motions
+
+`beat_frequency_demo` is the primary. Its two controls set frequencies from 1 to 10 Hz. The three rows show A, B and half of their raw sum. Close frequencies give a slow envelope; equal frequencies remove the beating in this fixed-phase demonstration. The display is visual only. See [the chapter](final.md) for the encounter and `algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd` for the implementation.
+
+The secondary `TrigWalkingPath` remains in the room. Its shipped scene creates forty pairs of collidable steps once, adds end platforms, then circulates the two rows in opposite directions. Their heights combine a shared sloping base with sine or cosine. There is no visitor-triggered generation, cross-bridge or linked chart in that source. The other secondary works are `sine_oscillation`, `lissajous_curves` and `wave_interference`; `dark_sphere` remains the reference object. The next hall compares five fixed harmonic frequencies in the Synthesis Lab.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its endless generation, cross-bridge, entrance controls and linked chart are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. The current chapter and the source named above take precedence.
+
+---
+
+Concept: Sine and cosine as parallel walking paths — two lanes of steps rising and falling according to trigonometric functions, where each footfall lands on a computed position and the path generates itself ahead.
+Sequence role: Eleventh map in Wavefunctions; the penultimate map. After Sky_Stairs&#x27; vertical wave climbing, this map returns to horizontal traversal but with both sin and cos visible simultaneously. The dual-path design makes the phase relationship between sine and cosine (90° offset) physically walkable. Connects to the Synthesis Lab&#x27;s decomposition thesis by showing the two fundamental components side by side; follows Wavefunctions_Sky_Stairs; leads to WaveFunctions_Synthesis_Lab.
+Technical angle: TrigWalkingPath generates stepping surfaces at sin(x) and cos(x) positions along a walkable path. The 90° phase offset between the two lanes is visible as one lane peaking while the other crosses zero. Procedural path generation — the path extends as the learner walks, demonstrating that the function is infinite.
+Critical angle: Walking sin while seeing cos (or vice versa) makes the phase relationship between the two functions embodied knowledge. The body learns what the equation states: cos(x) = sin(x + π/2). The procedurally generated path — extending ahead, never ending — is the spatial metaphor for periodicity: the wave has no destination, only continuation.
+Key artifacts: TrigWalkingPath generates the dual sine/cosine walkable lanes; dark_sphere anchors the space.
+Gap: An overlay showing the unit circle rotating as the learner walks — connecting the path position to the angle on the circle — would unify this map with the Unit Circle map&#x27;s core lesson.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_TrigWalkingPath/critical.md">Raw captured source</a></p><pre># Current hall: a slow pulse from fast motions
+
+`beat_frequency_demo` is the primary. Its two controls set frequencies from 1 to 10 Hz. The three rows show A, B and half of their raw sum. Close frequencies give a slow envelope; equal frequencies remove the beating in this fixed-phase demonstration. The display is visual only. See [the chapter](final.md) for the encounter and `algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd` for the implementation.
+
+The secondary `TrigWalkingPath` remains in the room. Its shipped scene creates forty pairs of collidable steps once, adds end platforms, then circulates the two rows in opposite directions. Their heights combine a shared sloping base with sine or cosine. There is no visitor-triggered generation, cross-bridge or linked chart in that source. The other secondary works are `sine_oscillation`, `lissajous_curves` and `wave_interference`; `dark_sphere` remains the reference object. The next hall compares five fixed harmonic frequencies in the Synthesis Lab.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its endless generation, cross-bridge, entrance controls and linked chart are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. The current chapter and the source named above take precedence.
+
+---
+
+# Ninety degrees is a relation — sin and cos, parallelism, and the politics of offset
+
+Sin and cos are the same function displaced by ninety degrees. Every introductory trigonometry text says this; few make it feel physical. This map does. Two parallel walkways run side by side across the space. The left lane&#x27;s steps rise and fall according to sin; the right lane follows cos. The two lanes are close enough that the learner can step between them at any time.
+
+Luce Irigaray argues that the politics of identity lie in relation rather than in isolation. A subject defined alone, without reference, is an abstraction that erases the relational conditions of its definition. The sine function alone is similarly abstract; it gains its character from its relation to cos and to zero and to the other harmonics it can be composed with. The map stages the relation as a physical parallelism.
+
+Each step along the lanes is a computed block. The path generates itself a few steps ahead of the walker, so the learner always sees a short runway of coming terrain. A reference panel on one wall shows the two functions on a shared chart, with a marker indicating the walker&#x27;s current horizontal position. The marker moves as the learner walks, and the graph and the footing stay synchronised.
+
+At the midpoint of the walk, a cross-bridge connects the two lanes. Stepping onto the bridge and crossing to the other lane translates the learner by ninety degrees of phase. The learner&#x27;s elevation changes suddenly — the cos track is either a quarter-cycle ahead or behind the sin track at that point, depending on direction of travel. The move is a quiet demonstration: changing phase is easier on foot than in notation, because the notation writes the offset as an argument to the function while the walk writes it as a single step sideways.
+
+The slider bench at the entrance exposes frequency and amplitude. Raising the frequency compresses the period, shortening the distance between peaks. Raising the amplitude deepens the troughs and lifts the crests. Both sliders affect both lanes identically, because the parameters are shared. What the sliders cannot decouple is the phase relationship: the ninety-degree offset is structural, not parametric, and the map does not pretend otherwise.
+
+Irigaray&#x27;s insight is political as well as metaphysical. A relation that cannot be dissolved into independent parts is a relation that resists the reduction to separate selves. The sin-cos pair is such a relation. Any attempt to treat sine as primary and cosine as derivative is immediately undermined by the symmetric alternative. The map argues that both functions are equally fundamental, and that the fundamentality is a property of their displacement rather than of either one considered alone.
+
+Within the sequence, TrigWalkingPath is the penultimate map. It trains the body to read sin and cos as paired, displaced, and equivalent before the Synthesis Lab asks the learner to decompose everything into sine components. The pairing is the bridge to the final map&#x27;s Fourier argument: you cannot decompose into sines without knowing that sine and cosine are the same function staggered.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_TrigWalkingPath/artifacts.md">Raw captured source</a></p><pre># WaveFunctions TrigWalkingPath — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 6 artifacts*
+
+&gt; Primary: Beat Frequency Demo. Compare the two visual oscillations with their half-scaled sum, then change their frequency difference. The finite TrigWalkingPath and the other oscillation studies remain secondary comparisons.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Sine Oscillation
+![Sine Oscillation](/scene-catalog/sine_oscillation.png)
+
+Expressive 3D sine oscillation — rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.
+
+`sine_oscillation`
+
+## LissajousCurves
+![LissajousCurves](/scene-catalog/lissajous_curves.png)
+
+Parametric curves with particle tracer
+
+`lissajous_curves`
+
+## TrigWalkingPath
+![TrigWalkingPath](/scene-catalog/TrigWalkingPath.png)
+
+Secondary: two finite rows of collidable steps, with sine/cosine height modulation and opposite-direction escalator motion. Full traversal is not verified by this review.
+
+`TrigWalkingPath`
+
+## Wave Interference
+![Wave Interference](/scene-catalog/wave_interference.png)
+
+Superposition and interference patterns
+
+`wave_interference`
+
+## Beat Frequency Demo
+![Beat Frequency Demo](/scene-catalog/beat_frequency_demo.png)
+
+Visual beat frequency demonstration — two sine waves at adjustable frequencies and their sum, showing the characteristic pulsing envelope when frequencies are close. Three rows of 64 animated spheres (blue, green, orange) with sliders for each frequency.
+
+`beat_frequency_demo`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_TrigWalkingPath/summary.md">Raw captured source</a></p><pre># Current hall: a slow pulse from fast motions
+
+`beat_frequency_demo` is the primary. Its two controls set frequencies from 1 to 10 Hz. The three rows show A, B and half of their raw sum. Close frequencies give a slow envelope; equal frequencies remove the beating in this fixed-phase demonstration. The display is visual only. See [the chapter](final.md) for the encounter and `algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd` for the implementation.
+
+The secondary `TrigWalkingPath` remains in the room. Its shipped scene creates forty pairs of collidable steps once, adds end platforms, then circulates the two rows in opposite directions. Their heights combine a shared sloping base with sine or cosine. There is no visitor-triggered generation, cross-bridge or linked chart in that source. The other secondary works are `sine_oscillation`, `lissajous_curves` and `wave_interference`; `dark_sphere` remains the reference object. The next hall compares five fixed harmonic frequencies in the Synthesis Lab.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its endless generation, cross-bridge, entrance controls and linked chart are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. The current chapter and the source named above take precedence.
+
+---
+
+# WaveFunctions TrigWalkingPath — Summary
+
+Sine and cosine are the same function, offset by ninety degrees. This map makes that offset physical. Two parallel walkways run side by side across the space. The left lane&#x27;s steps rise and fall according to sin; the right lane follows cos. The learner can walk either lane or hop between them.
+
+Each step is a computed block; the path generates itself a few steps ahead of the walker. A reference panel on one wall shows the two functions on a shared chart, with a marker indicating the walker&#x27;s current horizontal position. The marker moves as you walk, so the graph and the footing stay synchronised.
+
+At the midpoint, a cross-bridge connects the two lanes so the ninety-degree offset is walkable in one move. Sliders at the entrance adjust frequency and amplitude; raising the frequency compresses the period, shortening the path between peaks. Raising the amplitude deepens the troughs and lifts the crests.
+
+Within the sequence, the walking path is the penultimate map. After Sky Stairs, the verticality returns to ground; after the sound and silence maps, the geometry returns to the foreground. The map trains the body to read sin and cos as paired, displaced, and equivalent before the Synthesis Lab asks you to decompose everything.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_TrigWalkingPath/blurb.md">Raw captured source</a></p><pre>Two fast motions make a slow pulse. Compare A, B and their half-scaled sum, then bring the two frequencies together. The beat display is visual only; the finite sine/cosine escalator remains nearby as a different way to place oscillation in space.
+</pre></section></body></html>

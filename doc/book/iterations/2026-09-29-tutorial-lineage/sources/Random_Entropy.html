@@ -1,0 +1,353 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Entropy · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Entropy">← Tutorial lineage</a></p><h1>Random Entropy</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Entropy/final.md">Raw captured source</a></p><pre># What the gauge forgets
+
+In the last room, one discarded draw changed which values became neighbours. Here, choose a pair of neighbouring colours before touching a button.
+
+A gauge hangs on a post just inside the entrance, its number glowing over a desk. On the desk, two hundred small coloured tiles stand in a row, and a pale bar lies before the first forty of them.
+
+&lt;!-- @shannon_entropy_meter --&gt;
+
+Look at the tiles and the ten bars before the large number. Each tile is one draw, in the order it was drawn, coloured by its symbol; the strip along the panel&#x27;s foot spells out the first forty, the ones behind the bar. Find a colour that comes often in the row and one that comes seldom, and compare their bars. The bars collect every occurrence wherever it fell; the row keeps where each one fell. Choose two neighbouring tiles and ask whether their closeness tells you anything about the height of their bars. Then find another tile of the same colour further along.
+
+The first forty also appear enlarged across the desk&#x27;s front, labelled “as drawn.” Keep one pair in that row in view.
+
+Now press SORT, on the console on its post in front of the desk. Watch the row and the bars together. The tiles glide into ten blocks, one per symbol; the bars hold their places. Look up at the number. It has stayed too. The pale bar before the first forty disappears: those particular draws no longer occupy the beginning of the sorted row. The plate on the desk&#x27;s front prints the sorted copy&#x27;s H beside the reading, the word *equal*, and how many of the two hundred tiles changed place. The enlarged excerpt stays as drawn while the two hundred tiles regroup above it. One part of the desk keeps the old neighbours available beside the new ones. Press SORT again and the upper row comes back as it was drawn.
+
+What the gauge counts is this:
+
+```gdscript
+	for s in sequence:
+		counts[s] += 1
+```
+
+one tally per symbol, and nothing about where in the sequence the symbol stood. The number is made from the tallies alone:
+
+```gdscript
+	for c in counts:
+		if c &gt; 0:
+			var p: float = float(c) / float(sequence_length)
+			entropy -= p * (log(p) / log(2.0))
+```
+
+Each symbol&#x27;s share of the two hundred, times the logarithm of that share, summed and negated. A symbol that never occurred is skipped rather than given a zero times an infinity, and the largest the sum can be is log₂ of the alphabet:
+
+```gdscript
+	var max_h: float = log(num_symbols) / log(2.0)
+```
+
+About 3.32 bits per symbol for ten equally frequent symbols, the ceiling marked at the end of the bar. The reading sits just under it, because this sample from an even source did not divide evenly; the bars record this particular sample rather than the ideal distribution as if it had already happened.
+
+Sorting changed the row without changing any tally, so the gauge had nothing to recount. The plate runs the sorted copy&#x27;s counts through a copy of the same loop, and gets the same H. Yet the row looks like another object. Keep it sorted for a moment: finding every occurrence of a colour has become easier. Return to the order drawn and a colour has its former neighbours again. Which arrangement would you want to work with? The gauge cannot choose between these uses for you.
+
+Press CONTRAST. A second sample takes the wall: the same ten symbols, the same two hundred draws, from a source that makes the first symbol about twice as likely as the second, the second twice as likely as the third, and so on. The probabilities are normalised across ten symbols; they do not promise fixed counts. In this sample the first symbol occurs 109 times. Its bar towers, and the number falls to about 1.82 bits. Nothing in the alphabet or the count changed; the shares did. The plate names the source and its seed, so you can tell the two samples apart by their provenance and not only by their look. Look closely at the smallest bars and compare them with the counts on the desk. Four symbols did not occur in this sample. They still have tiny marks. The display gives every bar at least two millimetres:
+
+```gdscript
+height = max(0.002, height)
+```
+
+A visible mark can stand for zero. The tallest bar also reaches the same height in both samples: the display divides by that sample&#x27;s largest count. Read the counts to compare how many occurrences there were. The ruler has changed with the thing it measures.
+
+Press CONTRAST again and the first sample returns, draw for draw.
+
+The first sample comes from a seeded local generator, giving each symbol the same chance on each call:
+
+```gdscript
+		sequence.append(_rng.randi_range(0, num_symbols - 1))
+```
+
+The seed lets the gauge recover this sample when it rebuilds. The contrast uses a second seed and a weighted draw; it too can be recovered.
+
+Press DISCLOSE and the formula appears under the title; press it again and the source is named on the panel with a pale bar behind each live one showing the count that source expects on average: one flat line for the even source, a descending staircase for the concentrated one, and the plate prints those expected counts beside its name. Keep pressing and the upper panel withholds its bars and strip, then brings them back. The reading stays. Look down: the desk still carries the tiles and its own account of the counts. Information absent from one display can remain within reach on another. How much would you know if you approached only the glowing number?
+
+Now ask what the unchanged number failed to notice. It did not notice the order, which the sorted view rearranged. It cannot notice a pattern between neighbours, a repeated pair, a rhythm, a message, because it never looked at two tiles at once. It does not know whether the row was worth reading. A high reading is not a certificate of meaninglessness and a low one is not a certificate of value; here it averages surprise using the shares counted in this sample, without consulting the neighbours of a draw.
+
+&lt;!-- @entropy_jar --&gt;
+
+In the desk&#x27;s row, a few steps to the side, a glass jar holds red beads below and blue ones above, and its label reads S = 0.00. It runs the same sum inside six layers of the jar, cut by height: red against blue in each layer, each layer weighted by the beads it holds. Lift it and shake it: as red and blue come to share its layers, S climbs toward one bit, while the forty red and forty blue, counted the gauge&#x27;s way, make one bit throughout. Its layers run by height only; beads sorted from the centre outward would read to it as mixed.
+
+&lt;!-- @entropy_axiom --&gt;
+
+Beyond the ledger, enter the square glass enclosure. Start at the blue end. The points sit in rows; toward the other end their positions stray further from those rows. Walk sideways as well as forward. The same field can look lined up from one direction and tangled from another.
+
+Here the random offset grows with a point&#x27;s position along z. The plan stays square; the rule still has a direction. This is a field of displaced points, not a spatial picture of the ledger&#x27;s number. The meter counted symbol shares. This work sets points off their lattice addresses, once, when it is built. Putting them in one hall gives us something to compare, and a reason to resist calling every visible irregularity the same entropy.
+
+&lt;!-- @entropy_ruin --&gt;
+
+Beyond the glass, four pale columns carry a lintel. A brick wall about half their height runs behind them. The ruin waits intact. Choose a joint, then press RUN / PAUSE on the console in front of it. For a moment the joint still holds. A piece drops out of the construction and comes to rest below. A capital loses its place; a shaft becomes a stump. The fallen stone is still here.
+
+![The four columns and their lintel wait intact, with the brick wall behind them and the controls in front.](/book-review/doc/book/figures/randomness/ruin-waiting-museum.png)
+
+Press RUN / PAUSE to hold the scene, or ONE STONE to place the next selected piece among the rubble. The counter keeps two accounts: 116 stones, and how many have moved. The first number stays. Does the building stay with it? Look through the gaps and move around the surviving columns. What was a boundary now lets you see across it.
+
+The program chooses among the exposed tops of the wall and columns. The bottom two courses remain. RESTORE puts the pieces back, resets the seed and waits for you to start it again. The same dismantling order can return; it was never centuries of weather compressed into a minute. The fall and the landing places were arranged too.
+
+Turn toward the museum wall beside the columns. This time the pale courses belong to the hall itself. Its small console offers the same three actions. Let the top stones come down. Through the thinning edge, the view continues beyond the room. The floor stays beneath your feet; a low course keeps the edge. The structure that contained the demonstration has become another arrangement under the rule.
+
+RESTORE closes those openings with the same stones and their collision. A wall is more than an image here: its written arrangement decides where a body can go. What else did we accept as background because it had not yet moved?
+
+The ledger at the entrance counted symbols without keeping their neighbours. These stones make that omission bodily: the same inventory can hold different views, gaps and forms. Nothing has calculated the thermodynamic entropy of this ruin. Before calling its broken outline a higher number, we would have to say what we are measuring. What does a count of stones tell us about what they can still hold?
+
+&lt;!-- @ --&gt;
+
+&lt;!-- study-spine:signal_room --&gt;
+
+&lt;!-- @signal_room --&gt;
+
+The count returns as a room. Black and white continue from the floor onto the far wall and overhead. Choose ROWS, then CELLS. The broad bands loosen into another distribution. Both counts stay at 2,048.
+
+The small four-by-four witness lets you inspect the same record at another scale. The entropy reading stays at one bit per symbol while the number of unlike neighbours changes. In this response to Ikeda, the immensity is made from a finite stored array. Its authority can be felt before its omissions are understood. You can leave along either side of the display; the dark pixels never remove the floor.
+
+&lt;!-- @ --&gt;
+
+The last room asked how an arrangement could return. This room asks what survives when we describe one. The histogram retains the counts; the entropy reading condenses those counts further. From that number alone you cannot recover even the bars, let alone the neighbours you chose. The ruin never drew among all 116 stones, only among the exposed tops. In the next room the eligible set is laid out where you can count it: before anything is removed at random, a rule has already decided what can be chosen.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Entropy/tutorial.md">Raw captured source</a></p><pre># Keep the counts, change the neighbours
+
+Random_Definition made repeatability depend on a seed and a procedure. Random_Entropy takes another seeded sequence and asks what its measurement retains. The primary is `shannon_entropy_meter:90#stand:ledger#disclosure:ledger` at (5,6). All excerpts below come from `commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd`.
+
+## Read two records of the same sample
+
+Find a pair among the 200 tiles on the desk. The first forty are marked there, spelled out on the upper panel, and shown enlarged on the front face. The enlarged excerpt stays in draw order even when SORT regroups the upper ribbon. It is an excerpt of the active sample, not another sample.
+
+The opening sequence is drawn once from a local seeded generator:
+
+```gdscript
+for i in range(sequence_length):
+    sequence.append(_rng.randi_range(0, num_symbols - 1))
+```
+
+The map uses ten symbols and 200 draws. The default seed is `hash(&quot;shannon_entropy&quot;)`, exposed in the source readout. These draws are independent of the previous hall&#x27;s RGB generator. The continuity between rooms is the question of procedure, not a transfer of that room&#x27;s colours into this meter.
+
+## Sort before explaining the invariant
+
+Press SORT and watch both the ribbon and the bars. The tiles move into symbol groups over 1.2 seconds. Their counts and entropy remain. SORT does not resample or overwrite the original sequence. It changes where the existing tile instances are drawn, using a stable order within each symbol group. Press again to restore their positions.
+
+The sorted copy used by the readout is constructed as follows:
+
+```gdscript
+func sorted_copy() -&gt; Array[int]:
+    var out: Array[int] = []
+    for sym in range(num_symbols):
+        for i in range(_sequence.size()):
+            if _sequence[i] == sym:
+                out.append(sym)
+    return out
+```
+
+The measurement visits one symbol at a time:
+
+```gdscript
+for s in sequence:
+    counts[s] += 1
+```
+
+Every permutation of this sample gives the same counts. The entropy loop receives those counts, without the positions:
+
+```gdscript
+for c in counts:
+    if c &gt; 0:
+        var p: float = float(c) / float(sequence_length)
+        entropy -= p * (log(p) / log(2.0))
+```
+
+Each observed share p weights its own information value, −log₂(p). The result is an average in bits per symbol under these empirical shares, not the total information in a 200-symbol message. Zero-count terms contribute zero and are skipped before the logarithm. An all-one-symbol sample gives zero. Twenty copies of each of ten symbols give log₂(10), about 3.321928. The arrival sample gives approximately 3.255647 because its counts differ from twenty each.
+
+SORT can make groups easier to find without changing this number. A repeating cycle of ten symbols can also have maximum marginal entropy. The loop does not condition a prediction on the previous symbol. It therefore cannot measure every kind of predictability, dependency, meaning or compressibility in the ordered sequence.
+
+## Change the source, keeping the alphabet and N
+
+CONTRAST selects a cached second sample with its own seed, the first seed plus one. Its source weights decrease by a factor of two:
+
+```gdscript
+for k in range(num_symbols):
+    weights.append(pow(2.0, -float(k)))
+```
+
+A local generator draws against their cumulative sum. The normalized source probabilities are approximately 0.50049, 0.25024, 0.12512, and so on. They imply expected counts; they do not impose those counts on a finite sample. The captured sample has counts [109,46,20,17,6,2,0,0,0,0] and H ≈ 1.817600. CONTRAST again restores the original 200 draws. The current sorting choice is retained.
+
+## Ask the display what its heights mean
+
+The upper bars use a height relative to the largest count in the active sample:
+
+```gdscript
+var height: float = (float(counts[i]) / float(max_count)) * FREQ_BAR_HEIGHT if max_count &gt; 0 else 0.0
+height = max(0.002, height)
+```
+
+The largest bar is 0.10 m tall whether its count is 31 or 109. Four zero counts in the concentrated sample still get 0.002 m marks. These choices make the marks visible and fit each histogram into the panel. They prevent direct comparison of absolute counts by height across samples. The desk prints the counts so the reader can check the scaling.
+
+## Disclose a model after observing its sample
+
+DISCLOSE moves through ledger → works → origin → oracle → tally → ledger. Works reveals the formula. Origin names the generator and seed and adds pale expected-count bars from the active source: 20 each for the uniform law; approximately [100.1,50.0,25.0,12.5,6.3,3.1,1.6,0.8,0.4,0.2] for the concentrated law. The ghosts share the sample&#x27;s vertical scale, are capped at its maximum display height, and have the same 2 mm minimum. Small positive expectations and zero observed counts may therefore have the same drawn height.
+
+Oracle withholds the upper panel&#x27;s supporting displays. It does not remove the desk&#x27;s tiles, excerpt or readout. The source is still available elsewhere in the installation. Repeated disclosure changes rebuild the upper panel once while keeping the desk, sorting state and the selected built-in sample consistent.
+
+The next hall, Random_Remove, makes selection spatial. Before a random choice removes a cell, another rule has already decided which cells are eligible.
+
+
+## Spatial staging — 16 September 2026
+
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+
+
+&lt;!-- study-spine:signal_room --&gt;
+
+## Return: Different neighbours
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.
+
+This application reuses array, random. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is `commons/artifacts/spine_studies/station.gd` (`signal`), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.
+
+[Earlier study and making notes](/book-review/doc/book/iterations/2026-10-01-signal-room/index.html). Geometry controls wait until the exhibit is clear. RESET returns the original comparison.
+
+
+&lt;!-- study-edit:signal_room --&gt;
+
+### One source change: Different neighbours
+
+Call this on the supplied signal_room component. Mode 2 permutes cells with a repeatable seed. Compare values.count(1) and the neighbour-change readout before and after; then try another seed.
+
+```gdscript
+set_pattern(2, 2026)
+```
+
+Source: `commons/artifacts/signal_room/signal_room.gd`. Use the prepared scene to run and compare.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Entropy/technical.md">Raw captured source</a></p><pre># Random Entropy — a sequence, its counts, one number
+
+This chapter builds on Random_Definition&#x27;s seeded procedure and prepares for Random_Remove&#x27;s eligible set. The primary is `shannon_entropy_meter:90#stand:ledger#disclosure:ledger` at (5,6), facing east into the corridor. Nine artifact placements remain declared in the 18 × 12 map. The runtime pack and any refusals are recorded separately in the review evidence.
+
+## Data and computation
+
+The local generator is seeded before `_run_measurement` constructs 200 integer symbols in 0–9. `_measure` stores the ordered sequence, tallies it into ten counts, and computes −Σ p log₂(p), p = count/200, skipping zero-count terms. The measured marginal entropy has units bits per symbol. It does not measure the full ordered sequence&#x27;s entropy rate, semantic value, thermodynamic heat or whether the source is physically random.
+
+The arrival seed is 1342042698, the current result of `hash(&quot;shannon_entropy&quot;)`. Its counts are [17,11,21,31,17,18,19,24,13,29], giving H ≈ 3.255647. A cached second sample uses seed+1 and normalized weights 2⁻ᵏ; its counts are [109,46,20,17,6,2,0,0,0,0], giving H ≈ 1.817600. These are samples, not exact source probabilities. Replay across different generator implementations or engine versions is not established by this review.
+
+The computation is visible in the actual loop:
+
+```gdscript
+for c in counts:
+    if c &gt; 0:
+        var p: float = float(c) / float(sequence_length)
+        entropy -= p * (log(p) / log(2.0))
+```
+
+## What moves and what remains
+
+SORT changes the positions of 200 MultiMesh instances over 1.2 seconds. The sample itself retains its order. A stable sorted-index table supplies each tile&#x27;s target; the readout computes entropy again from `sorted_copy()` and prints the equality. CONTRAST selects the other cached sample and updates tiles, counts, source and expected values. It retains the sorting choice.
+
+The upper panel&#x27;s disclosure ladder is oracle/tally/ledger/works/origin. The placed arrival is ledger. DISCLOSE rebuilds the upper panel, retaining the desk and chosen built-in sample. Origin ghost bars come from `active_probabilities()` and `expected_counts()`, not an unconditional uniform expectation. `_after_measure` lifts refreshed bars and boards back onto the post; the prior duplicate-build and bar-height regressions remain repaired.
+
+## Display scales and records
+
+The panel is 0.7 × 0.5 m, centred at 1.40 m. The solid desk is 2.30 × 0.45 m with its top at 0.92 m. A two-metre ribbon carries all 200 samples as 0.008 × 0.03 × 0.02 m tiles. Its marked first forty are also spelled out in two upper-panel rows. On the desk&#x27;s front face they appear as forty 0.026 × 0.08 m tiles, in the active sample&#x27;s original draw order even while SORT rearranges the top ribbon. The caption now says `first forty · as drawn`; it no longer claims a uniform ×4 scale.
+
+Histogram height is count/max_count × 0.10 m, with a 0.002 m minimum. The largest bar has the same height in both built-in samples. Zero-count marks are still visible. Expected ghosts use the same active-sample denominator, capped at 0.10 m and floored at 0.002 m. The numeric ledger is essential to interpreting these heights. The bar labels and large H have limited display precision; the calculation retains its unrounded value.
+
+The front excerpt&#x27;s lower edge is 0.832 m; the readout case&#x27;s top is 0.825 m. Its separation is 7 mm in the local frame, so standing captures are needed alongside geometry checks. The front controls are enlarged 1.4 times. Local dark backing, mid-grey button faces and pale textured tags are unshaded. The readout backing is also unshaded, while the caption uses 22 px type. The source palettes, measurement, sorting, sampling and museum geometry remain unchanged.
+
+## Review limits
+
+The independent review exercises real button signals and the desktop pointer, both source/disclosure orders, sorting, endpoint samples, expected bars, floor routes and hall unload/rebuild. It exports the two complete samples for independent counting and entropy calculation. The review compares the enlarged strip with its original symbols while allowing for the precision of the MultiMesh colour buffer; the measured precision is recorded in the report.
+
+Headset reach and close lettering still need a later visit. Nine placements remain declared; eight instantiate because secondary `replay_casino` has no living scene. The run records an unrecognized audio-bus UID, a root-certificate error, a logger failure and an ObjectDB warning at shutdown; passing assertions do not resolve these diagnostics. There are no script errors. The specific run result, placement ledger, images and remaining limitations are in `doc/space/entropy-review-2026-09-12/` and `/research/possible-bodies/random-entropy.html`.
+
+
+&lt;!-- study-spine:signal_room --&gt;
+
+## Installed application: Different neighbours
+
+`signal_room` occupies a new adjoining bay, after the existing encounters. Cell [12, 48], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/signal.tscn`. Original response to Ryoji Ikeda; no claim of exact reconstruction.
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Reuses array, random; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Entropy/intent.md">Raw captured source</a></p><pre>Concept: Marginal Shannon entropy has a definite measurement contract: it is computed from symbol counts, without positions or neighbouring pairs. Let the visitor alter the arrangement before seeing why its reading stays fixed.
+Sequence role: Random_Definition → Random_Entropy → Random_Remove. Repeatable procedure becomes measured sample; the next hall makes the eligible set spatial.
+Primary: shannon_entropy_meter:180#stand:ledger#disclosure:ledger at (6,6), facing −Z. The desk carries 200 tiles and a housed ledger; the first forty remain enlarged in original draw order while SORT regroups the top ribbon. CONTRAST selects a second cached, seeded sample over the same alphabet and N. DISCLOSE reveals formula, source and active-law ghost bars on the upper panel.
+Critical angle: Counts lose positions; entropy further compresses counts. A pair can matter to the visitor while its separation leaves H unchanged. Sorting can enable a use without changing this measurement. The bar scaling and minimum visible height are further, inspectable decisions about what a display shows.
+Preserved material: The existing desk, raised gauge and prior ghost/build/lift repairs. The 13×13 hall retains the jar, hardware decay study, point cloud and butterflies as four distinct supports. The repeated TRNG comparison stays in Definition; the unavailable replay_casino and generic screen are archived. The source sample is not transferred from Random_Definition; the argument is the continuity.
+Review: Local controller/readout contrast improved, button panel enlarged, excerpt caption corrected. Primary, final anchor and book hero already agree. Independent desktop controls, sample identities and measured values are recorded in doc/space/entropy-review-2026-09-12. Eight of nine declared artifacts instantiate: secondary replay_casino has no living scene. Headset work, startup/logger diagnostics and a museum-run shutdown warning remain open.
+
+
+&lt;!-- study-spine:signal_room --&gt;
+
+## Installed application: Different neighbours
+
+`signal_room` occupies a new adjoining bay, after the existing encounters. Cell [12, 48], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/signal.tscn`. Original response to Ryoji Ikeda; no claim of exact reconstruction.
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Reuses array, random; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Entropy/critical.md">Raw captured source</a></p><pre># The neighbours the number leaves behind
+
+Choose two tiles that look good together. Perhaps they clash. Press SORT and watch them leave each other. The number above the desk does not move. It has performed its calculation correctly, and something you chose has disappeared from the arrangement it measures.
+
+The enlarged first-forty strip keeps the earlier neighbours available beside the sorted row. This second record matters. The visitor can compare two uses of the same sample without having to hold its whole history in memory. Sorting helps us find every occurrence of a colour. The original order preserves who came before and after whom. Neither use is represented in the entropy reading.
+
+The exclusion happens at a definite line: `counts[s] += 1`. The accumulator knows the symbol and increments its tally. It does not retain that symbol&#x27;s position or ask which symbol preceded it. A later loop compresses those ten counts to one scalar. Two losses occur: positions disappear into counts; then the count vector disappears into a number from which it cannot generally be reconstructed. The code gives each omission a place we can inspect.
+
+This does not make the measurement useless. It gives it a contract. The sample shares determine the average information value reported here. Changing those shares changes the reading. Moving the symbols while keeping their counts does not. If our question concerns neighbours, rhythm, a message or a route through the row, we need another observation. Asking the number to answer that question would enlarge its authority without enlarging what it knows.
+
+There is queer potential in this precise mismatch. An arrangement can become more useful to one body and less useful to another while the gauge declares equality. We need not appoint disorder as liberation and sorted blocks as its opposite. A block of one colour may make a task accessible. An unexpected neighbour may make a relation desirable. The number cannot decide which of these possibilities matters to the visitor who encounters it.
+
+The common substrate is still here. Original and sorted are permutations of the same instances. No kind of tile has to become a different material before another arrangement becomes possible. Yet the instrument offers only these two layouts. It does not let the visitor regroup by a chosen pair, turn a colour into a sound, or build a passage from the tiles. Those are possible next experiments, not capabilities claimed for this desk. To investigate bodies in space, we would have to implement and test how those arrangements receive a body.
+
+The display adds its own decisions. CONTRAST makes four counts zero, but four small bars remain. A minimum height keeps their marks visible. Meanwhile the largest count in each sample fills the same ten centimetres of the panel. The scale shifts under comparison. These are practical accommodations to a small board, with consequences for what can be inferred by looking. The count ledger lets the visitor notice them instead of treating a visible mark as proof of an occurrence.
+
+DISCLOSE changes how much of the measurement appears on the upper panel. At oracle it shows the number without the bars. The desk&#x27;s records remain. Authority here depends partly on which surface we approach and how long we stay. A visitor can accept the glowing number, or step closer and follow the counts. The room makes that difference available as an action.
+
+For the later QFEP inquiry, this is groundwork: name the observable, its distribution and the operation that reduces it before asking an entropy term to describe a world. This marginal histogram entropy is not a measured amount of freedom, terrain difficulty or ontological possibility. The relation to those questions has to be constructed through further experiments. A simulation can help us think about theory by making the limits of that construction available to experience.
+
+We leave with one pair still remembered. The next hall will remove cells at random. Before the draw, a rule decides which cells may disappear. Once again the algorithm begins after a choice has already been made.
+
+
+&lt;!-- study-spine:signal_room --&gt;
+
+## Installed application: Different neighbours
+
+The small four-by-four witness lets you inspect the same record at another scale. The entropy reading stays at one bit per symbol while the number of unlike neighbours changes. In this response to Ikeda, the immensity is made from a finite stored array. Its authority can be felt before its omissions are understood. You can leave along either side of the display; the dark pixels never remove the floor.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Entropy/artifacts.md">Raw captured source</a></p><pre># Artifacts in Random_Entropy
+
+The instrument and the spatial encounter share a hall. Placements are source-grid metres; the entrance is at -Z.
+
+| Artifact | Role | Position (x, z) |
+|---|---|---|
+| `shannon_entropy_meter` | primary | (8, 5) |
+| `entropy_jar` | secondary | (3, 5) |
+| `hardware_entropy_decay` | secondary | (3, 9) |
+| `entropy_axiom` | primary | (8, 15) |
+| `random_butterflies` | secondary | (13, 7) |
+| `entropy_ruin` | primary | (8, 26) |
+
+The book markers match the primary roles. Glass boundaries are staging, with open entrances and exits. Controls marked `compact` retain their original callbacks on a common console.
+
+The hall is now 17 × 31 m. The ruin occupies a separate stone bed after the glass enclosure: four columns, a lintel and a six-course wall. Seeded top-piece selection redistributes 116 pieces into bounded rubble, leaving the bottom two courses. Its replay is staged erosion, not a thermal or structural solver. The museum floor and side bypasses remain intact.
+
+## Museum architecture
+
+The west wall at z23–28 is an opt-in weathering section, replacing both normal wall mesh and collision (including the outer skin). Its 144 blocks use the colonnade’s seeded top-course rule; 120 can fall, 24 remain above the footing. A compact RUN / PAUSE, ONE STONE, RESTORE console faces the aisle. Rubble stays inside a shallow apron. The rest of the walls, floor and route remain supported. This is authored deterioration, not a structural or thermodynamic solver.
+
+
+&lt;!-- study-spine:signal_room --&gt;
+
+## Installed application: Different neighbours
+
+`signal_room` occupies a new adjoining bay, after the existing encounters. Cell [12, 48], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/signal.tscn`. Original response to Ryoji Ikeda; no claim of exact reconstruction.
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Reuses array, random; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Entropy/summary.md">Raw captured source</a></p><pre># What the gauge forgets
+
+The nine-placement Random_Entropy hall follows Random_Definition. Its single primary, shannon_entropy_meter, stands on a desk at (5,6), facing east. Two hundred coloured tiles preserve one sample&#x27;s draw order; the first forty also appear enlarged on the desk&#x27;s front.
+
+SORT regroups the same tiles while counts and marginal entropy stay fixed. The enlarged excerpt remains as drawn. CONTRAST selects a second seeded sample over the same ten symbols and N=200, with concentrated source weights. DISCLOSE reveals the formula and then the source&#x27;s expected counts before returning through simpler upper-panel views. The desk stays available at every rung.
+
+The counts retain symbol frequencies while losing positions. The entropy number compresses the count vector further; it does not retain all the shares or tell us whether a particular arrangement is meaningful, useful or traversable. Relative bar scaling and a 2 mm minimum make the numeric ledger necessary when comparing samples.
+
+The current review improves local panel contrast and removes an inaccurate ×4 caption. All artifact placements and museum geometry remain. Random_Remove follows: what is eligible for a random choice?
+
+
+&lt;!-- study-spine:signal_room --&gt;
+
+## Installed application: Different neighbours
+
+`signal_room` occupies a new adjoining bay, after the existing encounters. Cell [12, 48], rotation 180°, museum adapter `res://commons/artifacts/spine_studies/signal.tscn`. Original response to Ryoji Ikeda; no claim of exact reconstruction.
+
+Shuffle the retained values; compare unchanged counts with changed neighbours. Reuses array, random; adds no prerequisite node. The display and main-player controls are supplied.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Entropy/blurb.md">Raw captured source</a></p><pre>Find two neighbouring colours you would keep together. Press SORT. They move apart; the histogram and entropy reading stay the same.
+
+The desk keeps the original excerpt beside the regrouped row. What became easier to find? What relation did the number never see?
+</pre></section></body></html>

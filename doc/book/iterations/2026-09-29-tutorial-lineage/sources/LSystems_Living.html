@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LSystems_Living · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=LSystems_Living">← Tutorial lineage</a></p><h1>LSystems Living</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="LSystems_Living/final.md">Raw captured source</a></p><pre># What counts as a change?
+
+&lt;!-- @genetic_tree_sculptor --&gt;
+
+The tree waits above a low plinth. Beside it is a place for another tree. Press HOLD. Now there are two: the design we can change and a witness that will stay where we left it.
+
+In Competition, the same grammar met different conditions. Here we reach further back, towards the numbers from which a grammar is made. The desk begins with Depth selected. Its value is 4.000. Press MORE once. The number changes. Look at the branches.
+
+Try again. And again. By 4.800, the number has moved four times, but the tree still agrees with its witness. Is the control doing anything?
+
+One more press reaches 5.000. Another generation of branching appears.
+
+The control has been changing a value called segments in the DNA resource. DNA here means a collection of parameters used to construct a body. It is a name for this data structure; the name does not establish that the specimen is alive. The tree generator reads that value through this line:
+
+```gdscript
+var generations: int = clampi(roundi(dna.segments * 0.5), 2, 5)
+```
+
+First halve the raw number. Then round it to a whole number. Finally keep the result between two and five. At 4.800, the intermediate value is 2.400; it rounds to two. At 5.000, it is 2.500; it rounds to three. The number we moved and the instruction the generator received are different records.
+
+Here a continuous control is translated into whole rewriting generations. Several distinct settings produce the same instruction. That is useful: a generation must be a count. It is also a place to look when a desired difference disappears.
+
+The tree still starts with F. At each rewrite, F becomes a short stem S followed by bracketed branches. The Forks gene supplies their count and Arrange supplies their turns. S, in turn, becomes FF. The turtle then reads the completed sentence, advancing, turning, saving a state at an opening bracket and returning at its closing partner. The earlier grammar lessons are inside this instrument.
+
+Use GENE to pass through Forks and reach Angle. A small increase now changes the directions of the branches without adding a rewriting generation. Two controls move smoothly under the hand, yet one crosses a counting threshold while the other changes geometry. A control&#x27;s appearance cannot tell us what kind of change it offers.
+
+Press PLANT. A copy appears on the floor pad beyond the two plinths. Change the editing tree again. The placed one keeps its form. HOLD keeps its own witness too. RESET restores the opening design and leaves these copies for comparison.
+
+This steadiness had to be written. The export used to point at the same editable DNA resource. Moving a slider could therefore change the data that a later consumer would receive. Now the export begins by making a copy:
+
+```gdscript
+var snapshot := _dna.duplicate(true) as CritterDNA
+Engine.set_meta(&quot;sculptor_tree_dna&quot;, snapshot)
+```
+
+The hall also copies the displayed geometry onto its planting pad. A later PLANT replaces that local specimen. The older branching catalyst has a different use for the exported DNA: it may mutate and rescale a copy when producing a temporary tree. Placing a specimen here does not recruit it into Competition&#x27;s soil or teach the floor to grow.
+
+The original eight sliders remain on the side rack, including RANDOM. They offer more ways into the same resource. Eight controls are still only a selection from the parameters and rules that make the body. They cannot ask for a new alphabet, a branch joined back to an earlier branch, or a different relation to the ground. Those changes require another part of the program.
+
+On the side rack, drag Depth and Forks towards their upper limits and read the command count on the desk. The sentence can request more branches than this preview will draw. At its current detail level, the interpreter stops after two hundred F or S drawing commands; very short segments may produce no mesh at all. The display names that budget. What looks like a finished crown may be the point where drawing was stopped.
+
+There is pleasure in finding a body among these variations. There is another kind of curiosity when the variation we want has no control. Stay with that desire long enough to name what is missing: another connection, another rule, another way of occupying the room. Then we have somewhere specific to continue writing.
+
+&lt;!-- @ --&gt;
+
+The older tree, coral and paper studies remain beyond the workbench, among the authored platforms. Each makes form through its own procedure. Next, a cube returns. We will open another part of the program: the operations that select its faces, draw them inward and extend them. The question of a desired change with no control will have a different body to work on.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="LSystems_Living/tutorial.md">Raw captured source</a></p><pre># Living — what counts as a change?
+
+Primary: genetic_tree_sculptor. Begin with RESET, then HOLD a witness. Depth starts at 4.000. Press MORE four times, watching both the value and the unchanged branch plan. The fifth press reaches 5.000 and three generations. Explain halving, rounding and clamping only after that comparison.
+
+GENE cycles Depth, Forks, Angle, Taper, Leaves, Tropism, Twist, Arrange. Use Angle to change direction without changing generation count. The original eight sliders and RANDOM remain on the side rack. The compact six-button desk reaches the same underlying gene mapping.
+
+PLANT puts one snapshot on the floor pad and exports independent DNA for the older catalyst consumer. Change the preview; the placed tree stays. HOLD replaces its witness; PLANT replaces its floor specimen; RESET restores only the editing design. Neither local tree collides with the visitor or alters the map floor.
+
+Read requested F/S commands against the 200-command drawing budget at high Depth/Forks. Ask which desired body can be reached by these controls and which needs a new rule. Continue to the retained tree, coral and three paper drawings, then the face-operation study in LSystems_Shape_Grammars before Assemblage_Same_Desire. Preserve that distinction between procedure and what we see in its result.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="LSystems_Living/technical.md">Raw captured source</a></p><pre># Living — genes, compilation and snapshots
+
+Primary: genetic_tree_sculptor, with lesson:true only in LSystems_Living. It retains its original eight-slider rack, RANDOM and PLANT. Other placements keep their ordinary scene behavior. TreeMorphology.build gains an optional fifth render_seed argument; the default -1 retains per-instance randomness. The lesson fixes this seed at 481 so rebuilds can compare geometry without unrelated leaf/material/root random draws changing the result.
+
+## Follow the data
+
+The lesson starts with raw segments 4, symmetry 2, branch_angle 30, branch_decay .7, leaf_density 0, part_curve 0, part_twist 0, phyllotaxis .5. Scale 2, part_length 2 and part_width .3 make the bare branches legible; root_type and inflorescence are zero. The remainder comes from CritterDNA.random_kingdom(0,481). This is a chosen study specimen, not a new default for every sculptor.
+
+GENE selects one of eight genes. LESS/MORE use a normalized .025 grid and the same set_gene_normalized method as the original slider input. Depth spans raw 2..10. Its first five increments are 4.2,4.4,4.6,4.8,5.0. The first four compile to two rewriting generations; the fifth compiles to three. Geometry is unchanged before this threshold. Edits debounce for .3 seconds; HOLD and PLANT flush a pending edit before taking a snapshot.
+
+TreeMorphology maps generations=clampi(roundi(segments*.5),2,5) and fork_count=clampi(roundi(symmetry),2,5). branch_angle supplies turtle turn degrees. branch_decay controls radius taper and length_taper=branch_decay*.9+.05. part_curve*.3 lowers segment endpoints; this is a downward displacement, not environmental tropism sensing. Arrange selects three authored rotation recipes. Their roll counts still use branch_angle, so the names spiral/opposite/whorled must not be read as guarantees of exact botanical angles.
+
+The axiom is F. F rewrites to S followed by fork_count bracketed rotated F branches. S rewrites to FF. F advances a full segment and tapers both radius and length; S advances .6 of the current length and reduces radius by .95. Brackets store/restore the turtle&#x27;s state. A requested segment shorter than .001 m emits no branch mesh. The lesson readout counts F+S in the whole sentence and separately states the LOD2 budget of 200 drawing commands. This is not a mesh count: the interpreter breaks on that command budget, and tiny requested segments can produce no geometry. The entire sentence is generated before the budget is applied.
+
+## Hold and place
+
+HOLD duplicates the built preview geometry and deep-copies its DNA into one comparison slot. PLANT deep-copies the DNA resource into Engine metadata sculptor_tree_dna, emits another independent snapshot and copies the currently built geometry onto the local floor pad. Later editing cannot mutate those snapshots. Repeated HOLD or PLANT replaces its respective slot; RESET changes only the editing specimen. Geometry copies share immutable mesh/material resources; this lesson never mutates those resources in place. Preview rebuilding constructs new resources.
+
+The local placed tree has visual branches without colliders. Plinths and the museum floor provide collision. It does not consume soil, reproduce or remodel the hall. The older branching_projectile consumer duplicates the exported DNA, mutates it, rescales it, builds at LOD1 and removes its tree after about thirty seconds. PLANT does not change catalyst mode or promise exact permanent copies anywhere in the museum.
+
+The exported resource remains available when its sculptor or hall unloads. A static callback on the application root&#x27;s tree_exiting signal removes the Engine metadata before script shutdown. Without that cleanup, the rendered review reproduced an engine crash on exit after export; explicit early release removed the crash. The fix belongs to the runtime, not a special test-only cleanup.
+
+The optional pressure setting remains: a seeded greedy search mutates exposed genes and compares a weighted score. That score reads genes, not measured crown height, light, soil or collision. pressure:none is used by this lesson. RANDOM samples DNA; it is not itself a selection experiment.
+
+## Space and retained studies
+
+The museum is 19×36 m. The old 13×12 terrain survives at offset (3,20), including raised cells and voids; the old teleporter void is filled and the retained coral has support over its previous void address. The sculptor moves to (9,8). The five secondary placements retain their relative map coordinates: lsystem_tree, branching_coral, living_paper_fern, living_paper_tree, living_paper_dragon. The map floor is authored JSON. No runtime connection makes it grow from the sculptor&#x27;s grammar.
+
+The living-paper fern is an L-system drawing, despite an older Barnsley label; do not call it the affine IFS. Those paper cartridges and the coral/tree kernels are retained unchanged. Their existing interactions need separate headset review.
+
+Runtime checks use the actual museum, DesktopPlayer pointer and collision capsule. Headset reach, readability, comfort and Quest performance remain unverified. Previous maps, sources and manuscripts are archived in doc/space/lsystems-living-2026-09-14/before.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="LSystems_Living/intent.md">Raw captured source</a></p><pre>Concept: Exposed genes are converted into bounded grammar parameters; some differences disappear in that conversion.
+Encounter: HOLD → small Depth changes → threshold → Angle → PLANT → edit again.
+Primary: genetic_tree_sculptor.
+Retain: lsystem_tree, branching_coral and three living-paper drawings, with the earlier raised terrain.
+Critical opening: Which desired changes have no address among these controls?
+Application: A stable placed specimen and independent DNA export.
+Limits: Two-to-five generations; two-to-five forks; 200 preview drawing commands; local specimens have no branch collision or soil relation.
+Next: LSystems_Shape_Grammars — a cube, face operations, saved parameters and the limits of a form family.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="LSystems_Living/critical.md">Raw captured source</a></p><pre># A change that has no address
+
+The Depth control makes a modest but exact argument. Four numerical edits leave the compiled instruction and resulting branch geometry unchanged. The fifth changes the generation count. The program groups distinct raw settings into one operative value. A category is being made inside the conversion.
+
+That grouping is useful. A rewrite runs a whole number of times, and a stable control is easier to learn than an arbitrary transformation at every tremor. Yet the grouping also establishes which differences count for this operation. The book can make that decision inspectable instead of attributing stillness to the player&#x27;s failure or the tree&#x27;s nature.
+
+The same caution applies to the apparent generosity of eight sliders. The controls allow many bodies, but they select the dimensions along which variation is available. Branching angle has an address; reconnecting a branch into a loop does not. This is a specific limit of the current grammar, not evidence that the desired body is impossible. The absence can become a proposal for another rule or representation.
+
+A queer reading can begin with pleasure in these bodies and continue when a desired relation does not fit the supplied variation. It need not label every irregular tree queer or demand endless novelty. Holding a form steady is also an available action. The witness and placed specimen allow refusal of the next edit, comparison and attachment without requiring a winner.
+
+The export repair makes this concrete. A live reference and a snapshot are different commitments. Previously an exported DNA reference could change when the source was edited. A deep copy now preserves a particular state. The local placed geometry remains with it. Neither behavior is intrinsically the more ethical one; each distributes continuity and authority differently, and an interface should make that consequence clear.
+
+At high settings the representation budget adds another boundary. The interpreter draws a prefix of the sentence and stops after its command allowance. A crown can look complete at a cutoff. Counting requested commands helps expose this without treating more computation as a measure of freedom or biological richness. The hall measures neither entropy nor ecological fitness.
+
+Finally, the raised terrain is authored map data. It can support or obstruct a visitor, but it is not a forest that emerged from these rules. Keeping that distinction lets us ask a future question honestly: what would need to connect a growing body to the space it changes? Soil exchange, collision, load, branching contact and persistence are different mechanisms to investigate, not effects supplied by calling the room Living.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="LSystems_Living/artifacts.md">Raw captured source</a></p><pre># Living — six retained works
+
+genetic_tree_sculptor is primary and the book anchor. Its opt-in LivingLesson supplies the compact comparison desk, held witness and local planted specimen. The original eight sliders remain.
+
+lsystem_tree, branching_coral, living_paper_fern, living_paper_tree and living_paper_dragon remain secondary. They are separate generators; none consumes Competition soil or generates this hall&#x27;s terrain. The coral now has support. Their placement relationships survive the translation of the original map to the rear of the hall.
+
+The book hero and Necklace primary both name genetic_tree_sculptor. Existing roles remain unchanged.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="LSystems_Living/summary.md">Raw captured source</a></p><pre># What counts as a change?
+
+A raw gene moves four times while the compiled generation count stays at two. The fifth change adds a generation. Hold a witness, compare Angle, then place a stable copy. The lesson distinguishes changing a number, changing an instruction and changing a body. Six original works remain; the raised map terrain is authored rather than grown by the tree.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="LSystems_Living/blurb.md">Raw captured source</a></p><pre># What counts as a change?
+
+The number moves. The tree does not. Hold a witness and find the threshold at which a control becomes another instruction. Then place a body that can stay while you change your mind.
+</pre></section></body></html>

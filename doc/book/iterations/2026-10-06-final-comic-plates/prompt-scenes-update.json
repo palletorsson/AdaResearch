@@ -1,0 +1,189 @@
+{
+  "plates": [
+    {
+      "slug": "trace",
+      "map": "Point_Trace",
+      "title": "DURATION AND RESIDUE",
+      "focus": "A trace keeps positions rather than all duration. Grain, contact, gravity and limited memory determine different residues.",
+      "summary": "The pen, ball and board keep different parts of movement. A pause can leave no new position; a continued drawing can erase its beginning. The retained bend can travel onward.",
+      "panels": [
+        [
+          "Your hand can rest while the line stays.",
+          "Student releases a simple red drawing pen onto a plinth; the red loop and tail remain suspended. A small instrument reads POINTS 12."
+        ],
+        [
+          "You spend time holding the line still; the position list does not say how long you waited.",
+          "Student holds the red pen still. Its line and count stay unchanged. A tiny separate frame-counter comparison reads Frame 120 and Frame 180. No fading caused by time."
+        ],
+        [
+          "Your wrist is negotiating with a spacing.",
+          "The blue pen makes a coarse polygonal drawing. A subtle dotted hand gesture and a separate finer red trace show which bends survived. Diagonal segments are allowed."
+        ],
+        [
+          "How much of the drawing did you make when you placed the ball?",
+          "A black ball rolls from a plinth down a sloped plank into a shallow tray. A thin black trace follows its centre, one radius above the plank. The student's empty hand has released it."
+        ],
+        [
+          "Your hand travelled across the gap. The picture leaves it white.",
+          "A pen is lifted between two red strokes on a wall-mounted whiteboard. The gap remains white. A faint dashed gesture path above the board is an explanatory overlay, not painted ink."
+        ],
+        [
+          "At first you make more line. Then you begin to unmake it.",
+          "The student carries a small amber point with a beaded cord. Continued movement extends the fresh end and removes the oldest end. A small comparison inset shows that loss; a card reads 32 positions. No timer or seconds."
+        ]
+      ],
+      "footer": "The copied positions can enter another program and be given another task.",
+      "source": "commons/maps/Point_Trace/final.md",
+      "prompt": "Use case: illustration-story. Create a polished companion BOOK COMIC PAGE using the supplied image ONLY as a style and fictional-character reference. Portrait page, exactly six panels in two columns and three rows, cream margins, thin black rules, condensed black serif title, elegant small serif subtitle, warm painterly photorealism. Same fictional adult student: short dark wavy hair, burgundy knit top, black trousers, black shoulder bag. Same grey-haired older companion in navy jacket, listening and looking, never lecturing from code cards. Warm off-white Endless Museum, light and shadow, polished floors, plain pale museum plinths. This page illustrates the final poetic-critical text, not a programming tutorial: foreground embodied encounters, unexpected consequences, looking and moving. The page should feel quiet, exact and slightly wondrous. No invented theory diagrams, equations, dashboards, unrelated props, new historical figures or author portraits. Keep caption text brief, readable, uncut, black serif in white boxes; no extra text except specified labels. No code snippets unless requested. Transparent explanatory overlays must be visually distinct from physical objects. Every caption is specified verbatim below. \nTitle exactly: \"DURATION AND RESIDUE\". Subtitle: \"Point Trace · final text\".\nPanel 1: Caption exactly \"Your hand can rest while the line stays.\". Scene: Student releases a simple red drawing pen onto a plinth; the red loop and tail remain suspended. A small instrument reads POINTS 12.\nPanel 2: Caption exactly \"You spend time holding the line still; the position list does not say how long you waited.\". Scene: Student holds the red pen still. Its line and count stay unchanged. A tiny separate frame-counter comparison reads Frame 120 and Frame 180. No fading caused by time.\nPanel 3: Caption exactly \"Your wrist is negotiating with a spacing.\". Scene: The blue pen makes a coarse polygonal drawing. A subtle dotted hand gesture and a separate finer red trace show which bends survived. Diagonal segments are allowed.\nPanel 4: Caption exactly \"How much of the drawing did you make when you placed the ball?\". Scene: A black ball rolls from a plinth down a sloped plank into a shallow tray. A thin black trace follows its centre, one radius above the plank. The student's empty hand has released it.\nPanel 5: Caption exactly \"Your hand travelled across the gap. The picture leaves it white.\". Scene: A pen is lifted between two red strokes on a wall-mounted whiteboard. The gap remains white. A faint dashed gesture path above the board is an explanatory overlay, not painted ink.\nPanel 6: Caption exactly \"At first you make more line. Then you begin to unmake it.\". Scene: The student carries a small amber point with a beaded cord. Continued movement extends the fresh end and removes the oldest end. A small comparison inset shows that loss; a card reads 32 positions. No timer or seconds.\nFooter exactly: \"The copied positions can enter another program and be given another task.\".",
+      "reference": "doc/book/iterations/2026-10-05-tutorial-comic-plates/trace.png"
+    },
+    {
+      "slug": "grid",
+      "map": "Point_Line_Grid",
+      "title": "A PLACE TO RETURN TO",
+      "focus": "Addresses support return and shared placement. Quantisation permits variation within an interval; an address cannot supply support or access.",
+      "summary": "A released bend grows into another scale. Snapping makes places repeatable and gives a movement intervals. A ruled plan offers addresses, while glass supplies the floor.",
+      "panels": [
+        [
+          "Look for your bend. It may have grown.",
+          "A large pink polygonal bend is presented above a ruled field. The student recognises it; a released black pen on a nearby plinth recalls its earlier scale. The student does not stand on the trace."
+        ],
+        [
+          "Your hand has room to vary while the point finds its place again.",
+          "The student holds a small snapping sphere near a lattice corner. Several faint gesture positions map to one pink retained address. These are explanatory marks, not force fields."
+        ],
+        [
+          "There is a rhythm in the jump, and room to move within the interval.",
+          "On walkable glass, the student steps within one cell, then across its edge. A fine pink trace and coarse green trace record the movement differently. Coarse segments can be diagonal."
+        ],
+        [
+          "A record can become a score, but it needs another decision about what following means.",
+          "A large pink drawing and a nearly overlapping green rounded copy share a display frame and varied heights. The student considers following a section with their body, but the traces themselves offer no physical support."
+        ],
+        [
+          "Lift the amber hand without moving it sideways: height still has room to vary.",
+          "Inside a five-by-five floor-plan vitrine, cyan pen left hand and amber pen right hand. The amber hand rises vertically above the SAME cell centre and its trace gains a vertical part. This plan snaps horizontal X/Z only, not height."
+        ],
+        [
+          "An address can tell a program where to put something. What lets a body reach it needs further work.",
+          "A low oblique cutaway shows continuous glass supporting the visitor above basin depth. Grid marks and floating traces are thin representations, not the surface carrying the body."
+        ]
+      ],
+      "footer": "The grid gives us a way to name a place and return to it together.",
+      "source": "commons/maps/Point_Line_Grid/final.md",
+      "prompt": "Use case: illustration-story. Create a polished companion BOOK COMIC PAGE using the supplied image ONLY as a style and fictional-character reference. Portrait page, exactly six panels in two columns and three rows, cream margins, thin black rules, condensed black serif title, elegant small serif subtitle, warm painterly photorealism. Same fictional adult student: short dark wavy hair, burgundy knit top, black trousers, black shoulder bag. Same grey-haired older companion in navy jacket, listening and looking, never lecturing from code cards. Warm off-white Endless Museum, light and shadow, polished floors, plain pale museum plinths. This page illustrates the final poetic-critical text, not a programming tutorial: foreground embodied encounters, unexpected consequences, looking and moving. The page should feel quiet, exact and slightly wondrous. No invented theory diagrams, equations, dashboards, unrelated props, new historical figures or author portraits. Keep caption text brief, readable, uncut, black serif in white boxes; no extra text except specified labels. No code snippets unless requested. Transparent explanatory overlays must be visually distinct from physical objects. Every caption is specified verbatim below. \nTitle exactly: \"A PLACE TO RETURN TO\". Subtitle: \"Point Line Grid · final text\".\nPanel 1: Caption exactly \"Look for your bend. It may have grown.\". Scene: A large pink polygonal bend is presented above a ruled field. The student recognises it; a released black pen on a nearby plinth recalls its earlier scale. The student does not stand on the trace.\nPanel 2: Caption exactly \"Your hand has room to vary while the point finds its place again.\". Scene: The student holds a small snapping sphere near a lattice corner. Several faint gesture positions map to one pink retained address. These are explanatory marks, not force fields.\nPanel 3: Caption exactly \"There is a rhythm in the jump, and room to move within the interval.\". Scene: On walkable glass, the student steps within one cell, then across its edge. A fine pink trace and coarse green trace record the movement differently. Coarse segments can be diagonal.\nPanel 4: Caption exactly \"A record can become a score, but it needs another decision about what following means.\". Scene: A large pink drawing and a nearly overlapping green rounded copy share a display frame and varied heights. The student considers following a section with their body, but the traces themselves offer no physical support.\nPanel 5: Caption exactly \"Lift the amber hand without moving it sideways: height still has room to vary.\". Scene: Inside a five-by-five floor-plan vitrine, cyan pen left hand and amber pen right hand. The amber hand rises vertically above the SAME cell centre and its trace gains a vertical part. This plan snaps horizontal X/Z only, not height.\nPanel 6: Caption exactly \"An address can tell a program where to put something. What lets a body reach it needs further work.\". Scene: A low oblique cutaway shows continuous glass supporting the visitor above basin depth. Grid marks and floating traces are thin representations, not the surface carrying the body.\nFooter exactly: \"The grid gives us a way to name a place and return to it together.\".",
+      "reference": "doc/book/iterations/2026-10-05-tutorial-comic-plates/trace.png"
+    },
+    {
+      "slug": "triangle",
+      "map": "Point_Triangle_Context",
+      "title": "WHAT DID WE ADD BETWEEN THE CORNERS?",
+      "focus": "Closure, fill and contact differ. The book and room produce each other; viewpoint loss differs from loss of area; a valid rule can miss an intended interior.",
+      "summary": "An empty loop gains a face. A small drawing answers in its large twin. A changed view and a collapsed figure can resemble one another, while a filling rule can cross an intended notch.",
+      "panels": [
+        [
+          "Three edges meet. You can still see the room between them.",
+          "Three black corners and three thin pale edges form a closed but empty triangle. The student fits the last edge. The room remains visible through the centre."
+        ],
+        [
+          "The positions do not contain that instruction. We added it.",
+          "The same corners now carry a translucent face. The student presses SHOW / HIDE FILL. No geometry changes and no implication of new collision."
+        ],
+        [
+          "A sentence can ask for something to try, and making it can change the sentence.",
+          "An open book and the museum wall plate show the SAME three-stage illustration: three points, a closed three-edge triangle, one filled triangle. Student and companion compare them. No code cards."
+        ],
+        [
+          "Your hand can reach the small figure; your body can walk around the other.",
+          "The student moves one black corner of a small off-white triangle. Its large central twin, 3.2 times the size, shows the corresponding change. Both have exactly three corresponding corners; the visitor can walk around the large copy."
+        ],
+        [
+          "In one, the face waits for another viewpoint. In the other, we must change what we made.",
+          "Clear paired schematic comparisons: one non-collinear triangle viewed front-on versus edge-on, labelled view changes; a separate set of three collinear points A,C,B has no area, labelled corners change. Do not confuse flattening a view with flattening a figure."
+        ],
+        [
+          "Its rule has kept working while failing to keep your intended interior.",
+          "A clean six-corner concave L outline carries a faint pink fan fill crossing the intended notch. The student considers the unexpected wing. SHIFT START control nearby. Exactly six black outline corners. No success badge."
+        ]
+      ],
+      "footer": "The mistake needs an explanation, but its explanation need not decide what we want from it.",
+      "source": "commons/maps/Point_Triangle_Context/final.md",
+      "prompt": "Use case: illustration-story. Create a polished companion BOOK COMIC PAGE using the supplied image ONLY as a style and fictional-character reference. Portrait page, exactly six panels in two columns and three rows, cream margins, thin black rules, condensed black serif title, elegant small serif subtitle, warm painterly photorealism. Same fictional adult student: short dark wavy hair, burgundy knit top, black trousers, black shoulder bag. Same grey-haired older companion in navy jacket, listening and looking, never lecturing from code cards. Warm off-white Endless Museum, light and shadow, polished floors, plain pale museum plinths. This page illustrates the final poetic-critical text, not a programming tutorial: foreground embodied encounters, unexpected consequences, looking and moving. The page should feel quiet, exact and slightly wondrous. No invented theory diagrams, equations, dashboards, unrelated props, new historical figures or author portraits. Keep caption text brief, readable, uncut, black serif in white boxes; no extra text except specified labels. No code snippets unless requested. Transparent explanatory overlays must be visually distinct from physical objects. Every caption is specified verbatim below. \nTitle exactly: \"WHAT DID WE ADD BETWEEN THE CORNERS?\". Subtitle: \"Point Triangle Context · final text\".\nPanel 1: Caption exactly \"Three edges meet. You can still see the room between them.\". Scene: Three black corners and three thin pale edges form a closed but empty triangle. The student fits the last edge. The room remains visible through the centre.\nPanel 2: Caption exactly \"The positions do not contain that instruction. We added it.\". Scene: The same corners now carry a translucent face. The student presses SHOW / HIDE FILL. No geometry changes and no implication of new collision.\nPanel 3: Caption exactly \"A sentence can ask for something to try, and making it can change the sentence.\". Scene: An open book and the museum wall plate show the SAME three-stage illustration: three points, a closed three-edge triangle, one filled triangle. Student and companion compare them. No code cards.\nPanel 4: Caption exactly \"Your hand can reach the small figure; your body can walk around the other.\". Scene: The student moves one black corner of a small off-white triangle. Its large central twin, 3.2 times the size, shows the corresponding change. Both have exactly three corresponding corners; the visitor can walk around the large copy.\nPanel 5: Caption exactly \"In one, the face waits for another viewpoint. In the other, we must change what we made.\". Scene: Clear paired schematic comparisons: one non-collinear triangle viewed front-on versus edge-on, labelled view changes; a separate set of three collinear points A,C,B has no area, labelled corners change. Do not confuse flattening a view with flattening a figure.\nPanel 6: Caption exactly \"Its rule has kept working while failing to keep your intended interior.\". Scene: A clean six-corner concave L outline carries a faint pink fan fill crossing the intended notch. The student considers the unexpected wing. SHIFT START control nearby. Exactly six black outline corners. No success badge.\nFooter exactly: \"The mistake needs an explanation, but its explanation need not decide what we want from it.\".",
+      "reference": "doc/book/iterations/2026-10-05-tutorial-comic-plates/trace.png"
+    },
+    {
+      "slug": "polyhedra",
+      "map": "Primitives_Polythedra",
+      "title": "AN INSIDE IS NOT YET AN ENTRANCE",
+      "focus": "Visible enclosure, convex collision and bodily passage are different decisions. Geometry can offer ascent or block a route.",
+      "summary": "An open trihedral corner has a closed convex collision hull. A tetrahedron encloses without offering a door. Wedges and barriers move the question from a held solid to the visitor’s route.",
+      "panels": [
+        [
+          "Something suggests an inside, although one side is missing.",
+          "Student holds an open trihedral corner with exactly four vertices and three triangular faces sharing one apex. Its missing triangular base faces the viewer."
+        ],
+        [
+          "Rendering leaves an opening; physics receives a closed shape.",
+          "A wall comparison uses the SAME four vertices: visible surface has three faces and an open base; collision hull has a clearly explanatory amber base closing that opening. Labels visible surface and collision hull. No demonstration that an XR hand must be stopped."
+        ],
+        [
+          "Enclosing a region has not supplied a way into it.",
+          "The student considers a small regular tetrahedron, exactly four triangular faces. A faint scaled-up outline suggests a little room without a door. No person trapped inside or invented entrance."
+        ],
+        [
+          "The room has gained a solid and lost a little space for your walk.",
+          "A large pink tetrahedral corner fills where two walls and floor meet: one old floor corner, two points farther along the walls at floor level, one point vertically above the corner. The exposed triangular face redirects the student's route."
+        ],
+        [
+          "A continuous-looking route still has to work as a route.",
+          "A pale ramp joins the floor to a raised platform. Student examines its low join; companion stands on the platform. A nearby upright block contrasts ascent and obstruction. Feet contact surfaces coherently."
+        ],
+        [
+          "Did you pause at the word or at the physical boundary?",
+          "A STOP sign stands beside a striped concrete barrier. Student looks between the word and physical obstruction; a blue direction arrow points beyond. The sign itself is not a collision wall."
+        ]
+      ],
+      "footer": "Enclosing a region, admitting a body and suggesting a direction require different decisions.",
+      "source": "commons/maps/Primitives_Polythedra/final.md",
+      "prompt": "Use case: illustration-story. Create a polished companion BOOK COMIC PAGE using the supplied image ONLY as a style and fictional-character reference. Portrait page, exactly six panels in two columns and three rows, cream margins, thin black rules, condensed black serif title, elegant small serif subtitle, warm painterly photorealism. Same fictional adult student: short dark wavy hair, burgundy knit top, black trousers, black shoulder bag. Same grey-haired older companion in navy jacket, listening and looking, never lecturing from code cards. Warm off-white Endless Museum, light and shadow, polished floors, plain pale museum plinths. This page illustrates the final poetic-critical text, not a programming tutorial: foreground embodied encounters, unexpected consequences, looking and moving. The page should feel quiet, exact and slightly wondrous. No invented theory diagrams, equations, dashboards, unrelated props, new historical figures or author portraits. Keep caption text brief, readable, uncut, black serif in white boxes; no extra text except specified labels. No code snippets unless requested. Transparent explanatory overlays must be visually distinct from physical objects. Every caption is specified verbatim below. \nTitle exactly: \"AN INSIDE IS NOT YET AN ENTRANCE\". Subtitle: \"Primitives Polythedra · final text\".\nPanel 1: Caption exactly \"Something suggests an inside, although one side is missing.\". Scene: Student holds an open trihedral corner with exactly four vertices and three triangular faces sharing one apex. Its missing triangular base faces the viewer.\nPanel 2: Caption exactly \"Rendering leaves an opening; physics receives a closed shape.\". Scene: A wall comparison uses the SAME four vertices: visible surface has three faces and an open base; collision hull has a clearly explanatory amber base closing that opening. Labels visible surface and collision hull. No demonstration that an XR hand must be stopped.\nPanel 3: Caption exactly \"Enclosing a region has not supplied a way into it.\". Scene: The student considers a small regular tetrahedron, exactly four triangular faces. A faint scaled-up outline suggests a little room without a door. No person trapped inside or invented entrance.\nPanel 4: Caption exactly \"The room has gained a solid and lost a little space for your walk.\". Scene: A large pink tetrahedral corner fills where two walls and floor meet: one old floor corner, two points farther along the walls at floor level, one point vertically above the corner. The exposed triangular face redirects the student's route.\nPanel 5: Caption exactly \"A continuous-looking route still has to work as a route.\". Scene: A pale ramp joins the floor to a raised platform. Student examines its low join; companion stands on the platform. A nearby upright block contrasts ascent and obstruction. Feet contact surfaces coherently.\nPanel 6: Caption exactly \"Did you pause at the word or at the physical boundary?\". Scene: A STOP sign stands beside a striped concrete barrier. Student looks between the word and physical obstruction; a blue direction arrow points beyond. The sign itself is not a collision wall.\nFooter exactly: \"Enclosing a region, admitting a body and suggesting a direction require different decisions.\".",
+      "reference": "doc/book/iterations/2026-10-05-tutorial-comic-plates/trace.png"
+    },
+    {
+      "slug": "cube",
+      "map": "Point_Animatedcube",
+      "title": "A WORLD WITHOUT COMPOSITION YET",
+      "focus": "Presentation controls revelation; a crease exposes construction. Reusable copies carry prior choices yet allow new arrangements; production can outpace attention.",
+      "summary": "The cube lets a hand expose its hidden seam. Nets fold and drop copies; a shelf and conveyor supply familiar boxes. The emerging arrangement records what was sorted and what was left.",
+      "panels": [
+        [
+          "What looks like construction is also an arrangement of when we are allowed to see.",
+          "Student presses PAUSE beside a partly revealed cube assembly: corners, edges and some triangular patches. A folding net continues elsewhere in the room. This pause concerns the presentation, not the entire world."
+        ],
+        [
+          "Your hand has made one of those divisions matter.",
+          "Cube front corners: 4 bottom-left, 5 bottom-right, 6 top-right, 7 top-left. Student pulls ONLY 6 toward the viewer. Off-white triangle 4-5-7 stays flat; pink 5-6-7 tilts. Amber crease runs 5 to 7."
+        ],
+        [
+          "Each return leaves something behind.",
+          "A six-square cube net folds above the floor and a finished cube falls beside earlier copies. Square faces remain rigid while hinges turn. No five-face or seven-face net."
+        ],
+        [
+          "The relation between its copies is yours to arrange.",
+          "A shelf holds cardboard boxes, wood crates and original printed cartons. Student puts two identical cream-and-red AGAIN cartons on a worktable with a deliberate gap. No commercial artwork, brands or artist portraits."
+        ],
+        [
+          "The lettering and stripes arrive together, carrying decisions someone has already made.",
+          "A conveyor passes beneath a printer, delivering cream/red AGAIN and mint/teal YET cartons. Student releases an AGAIN carton into the AGAIN basket; the YET basket is beside it. Labels are readable."
+        ],
+        [
+          "The arrangement records what you sorted and what you left.",
+          "A wide view holds small sorted copies in the baskets and an unsorted mixed pile at the belt's end, keeping different landing angles. Student and companion consider it. Original background cartons read A WORLD / WITHOUT / COMPOSITION, with YET separate."
+        ]
+      ],
+      "footer": "We have borrowed its parts, and made a relation between them.",
+      "source": "commons/maps/Point_Animatedcube/final.md",
+      "prompt": "Use case: illustration-story. Create a polished companion BOOK COMIC PAGE using the supplied image ONLY as a style and fictional-character reference. Portrait page, exactly six panels in two columns and three rows, cream margins, thin black rules, condensed black serif title, elegant small serif subtitle, warm painterly photorealism. Same fictional adult student: short dark wavy hair, burgundy knit top, black trousers, black shoulder bag. Same grey-haired older companion in navy jacket, listening and looking, never lecturing from code cards. Warm off-white Endless Museum, light and shadow, polished floors, plain pale museum plinths. This page illustrates the final poetic-critical text, not a programming tutorial: foreground embodied encounters, unexpected consequences, looking and moving. The page should feel quiet, exact and slightly wondrous. No invented theory diagrams, equations, dashboards, unrelated props, new historical figures or author portraits. Keep caption text brief, readable, uncut, black serif in white boxes; no extra text except specified labels. No code snippets unless requested. Transparent explanatory overlays must be visually distinct from physical objects. Every caption is specified verbatim below. \nTitle exactly: \"A WORLD WITHOUT COMPOSITION YET\". Subtitle: \"Point Animatedcube · final text\".\nPanel 1: Caption exactly \"What looks like construction is also an arrangement of when we are allowed to see.\". Scene: Student presses PAUSE beside a partly revealed cube assembly: corners, edges and some triangular patches. A folding net continues elsewhere in the room. This pause concerns the presentation, not the entire world.\nPanel 2: Caption exactly \"Your hand has made one of those divisions matter.\". Scene: Cube front corners: 4 bottom-left, 5 bottom-right, 6 top-right, 7 top-left. Student pulls ONLY 6 toward the viewer. Off-white triangle 4-5-7 stays flat; pink 5-6-7 tilts. Amber crease runs 5 to 7.\nPanel 3: Caption exactly \"Each return leaves something behind.\". Scene: A six-square cube net folds above the floor and a finished cube falls beside earlier copies. Square faces remain rigid while hinges turn. No five-face or seven-face net.\nPanel 4: Caption exactly \"The relation between its copies is yours to arrange.\". Scene: A shelf holds cardboard boxes, wood crates and original printed cartons. Student puts two identical cream-and-red AGAIN cartons on a worktable with a deliberate gap. No commercial artwork, brands or artist portraits.\nPanel 5: Caption exactly \"The lettering and stripes arrive together, carrying decisions someone has already made.\". Scene: A conveyor passes beneath a printer, delivering cream/red AGAIN and mint/teal YET cartons. Student releases an AGAIN carton into the AGAIN basket; the YET basket is beside it. Labels are readable.\nPanel 6: Caption exactly \"The arrangement records what you sorted and what you left.\". Scene: A wide view holds small sorted copies in the baskets and an unsorted mixed pile at the belt's end, keeping different landing angles. Student and companion consider it. Original background cartons read A WORLD / WITHOUT / COMPOSITION, with YET separate.\nFooter exactly: \"We have borrowed its parts, and made a relation between them.\".",
+      "reference": "doc/book/iterations/2026-10-05-tutorial-comic-plates/trace.png"
+    }
+  ]
+}

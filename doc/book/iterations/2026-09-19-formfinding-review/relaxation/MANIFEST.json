@@ -1,0 +1,39 @@
+{
+  "date": "2026-09-19",
+  "hall": "FormFinding_Relaxation",
+  "production_files": [
+    "commons/artifacts/verlet_workbench/verlet_workbench.gd",
+    "commons/maps/FormFinding_Relaxation/map_data.json"
+  ],
+  "accepted_images": [
+    "paired-before/workbench.png",
+    "paired-before/hall.png",
+    "final-visible-after/workbench.png",
+    "final-visible-after/hall.png",
+    "final-visible-after/passes-1.png",
+    "final-visible-after/passes-4.png"
+  ],
+  "image_sha256": {
+    "paired-before/workbench.png": "0b9fe112c2e7bb94dee18e2b8dbc8fa1466167bedc8f604632f2e4d983a15d30",
+    "paired-before/hall.png": "aa7643ac6840e53cf22db928a71e1db2c2a3e640d9026933906da964dbbafbb5",
+    "final-visible-after/workbench.png": "9a133823ec6c103e252e30e0601d326393e2b857b69be48370ed3954778f7846",
+    "final-visible-after/hall.png": "b86b91f743114a260adff356be96aa03a3bfb5b9ed06330d7ccf6128b1cfa728",
+    "final-visible-after/passes-1.png": "64e4dd453b9806d8e39baa19a85a9c399ba817184e2f84e818405be7dd7df9c9",
+    "final-visible-after/passes-4.png": "c1ea4d7a09237a46349f35a15a5fd8d849d7681e2a8b07448555d508dc813cf6"
+  },
+  "verification": {
+    "controls": "control-final-v3/controls-checks.json",
+    "before_museum": "paired-before/museum-checks.json",
+    "after_museum": "final-visible-after/museum-checks.json",
+    "measurements": "measures/measurement.json",
+    "integrity": "integrity.json"
+  },
+  "capture_provenance": "Actual ordinary endless museum. Before replays frozen module with only class_name removed. Current enables comparison via map token. Same camera; target cloth has60 deterministic setup+60 driven steps. Additional1/4pass images use420total undriven steps. Museum camera timers stopped; current camera asserted before/after draw. Background procedural dressing and animation phases not matched.",
+  "diagnostic_images": [
+    "before",
+    "paired-after",
+    "final-after"
+  ],
+  "headset_tested": false,
+  "performance_tested": false
+}

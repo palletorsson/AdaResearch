@@ -1,0 +1,76 @@
+{
+  "sequence": "foundationscrisis",
+  "status": "source_reviewed_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "Godel_Incompleteness",
+      "primary_tokens": [
+        "godel_sentence_machine",
+        "provability_sorter"
+      ],
+      "question": "Does a machine failing to find a proof show that no proof exists?",
+      "ontology": "A formal theory has axioms and inference rules; provability is relative to those rules. Truth in the intended natural numbers is a different relation. The nested-set diagram assumes soundness.",
+      "action": "Follow the machine’s loop through one attempt and its displayed verdict. Then follow a token outside the sorter’s inner PROVABLE ring and ask what evidence would justify that placement.",
+      "observable": "A timed arm attempts, jams and displays TRUE BUT UNPROVABLE. The sorter places predetermined tokens in nested TRUE/PROVABLE regions; it does not test formulas.",
+      "mechanism": "The machine cycles a six-second animation. The sorter’s proper preset assigns seeded inner/outer tokens; radii and proportions are illustrative. Neither runs proof search or a truth decision procedure.",
+      "limit": "Incompleteness concerns sufficiently expressive, effectively axiomatized formal arithmetic under appropriate consistency assumptions. For the room’s semantic true/provable picture, state the stronger soundness assumption explicitly. Finite search failure proves no impossibility; arbitrary opinions are not thereby mathematical truths.",
+      "variation": "Existing: compare what the label asserts with what the moving mechanism actually establishes. Proposed: expose a small proof checker and distinguish an unchecked claim, an unsuccessful search and a metatheorem.",
+      "prior_bridge": "Russell exposed trouble in unrestricted self-membership. Gödel encodes statements about proofs inside arithmetic.",
+      "next_bridge": "Escher next asks how a locally convincing construction can fail as a whole.",
+      "sources": [
+        {
+          "path": "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd",
+          "line": 334,
+          "function_or_anchor": "func _process",
+          "fact": "Scripted attempt/jam/verdict cycle, not proof search."
+        },
+        {
+          "path": "commons/artifacts/provability_sorter/provability_sorter.gd",
+          "line": 221,
+          "function_or_anchor": "func _resolve_reach",
+          "fact": "Authored semantic geometry."
+        },
+        {
+          "path": "commons/artifacts/provability_sorter/provability_sorter.gd",
+          "line": 380,
+          "function_or_anchor": "func _build_tokens",
+          "fact": "Predetermined illustrative token membership."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/Godel_Incompleteness/map_data.json": "66b66fb794e972e07c939da6e23e5c14e5877c045bf4f6c9d69e0e0b09e0d97c",
+        "commons/maps/Godel_Incompleteness/intent.md": "6c50fc6ad2b0f6c9b987d1a994593485f693138d9a09cb82475c555c4274ee73",
+        "commons/maps/Godel_Incompleteness/tutorial.md": "5b6a407cb3d5f8f73d37dbacd3e118180758d3f562f52980d0d5d5365883118c",
+        "commons/maps/Godel_Incompleteness/technical.md": "d8ee66c9d503a25dbf4e32abed37b831717c4dc03ecc96a50d5919458bb626d8",
+        "commons/maps/Godel_Incompleteness/critical.md": "dc5ddb3468ee7f5c8ccbe383c15efdaab94dcaa4d647f2512f006aa34d969e5e",
+        "commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn": "f6712cfb75f6a9e773f65ddafd2b24747d794500753ffa3521359940cc9d050a",
+        "commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd": "e5ad0169703a6886747bb438f83ea13d67c0ee6dfdf87812656d1a8ea833836c",
+        "commons/artifacts/provability_sorter/provability_sorter.tscn": "0dd4a90ff176d9ffa30fa5358cc658c7fd8aa28ab3a4aedbcc7f9e2b98ba74cf",
+        "commons/artifacts/provability_sorter/provability_sorter.gd": "6220b2ca0366aef463a89433eb0d6fdf872c6339b58cd0703e8a875fb0c9d1d5"
+      },
+      "placements": [
+        {
+          "x": 7,
+          "z": 4,
+          "raw": "godel_sentence_machine:0:1:1"
+        },
+        {
+          "x": 5,
+          "z": 11,
+          "raw": "provability_sorter:0:1:1"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do not repeat any system able to count, nor no system can prove consistency without formal qualifications. The diagram presupposes soundness, stronger than consistency. Gold-token percentage is not a measure of unprovable truths."
+      ],
+      "external_sources": [
+        {
+          "url": "https://www.enseignement.polytechnique.fr/informatique/INF412/uploads/Main/chap10english-goodINF412ENGLISH.pdf",
+          "location": "Sections 1.4, 2.1–2.2, 3.1–3.2",
+          "fact": "Faculty course construction: enumerable axioms yield enumerable proofs; arithmetic truth is not enumerable; proof encoding and fixed-point construction separate truth from provability. Use soundness explicitly for semantic argument; avoid the source’s overly broad unqualified second-theorem summary."
+        }
+      ]
+    }
+  ]
+}

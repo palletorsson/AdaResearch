@@ -1,0 +1,102 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your trace returns — Trace into Grid</title><link rel="stylesheet" href="style.css"></head><body><main><header><p>ADA / TRACE INTO GRID · 3 October 2026</p><nav><a href="#reading">Read the corrected tutorial</a><a href="#code">Grid code</a><a href="#trace">Trace handoff</a><a href="Point_Line_Grid.tutorial.diff">Grid text diff</a></nav></header><article id="reading"><h1>Point Grid — your trace returns</h1>
+<p>Find the bend you made in Trace. It is here again. Beside it, the same record has been placed on a grid. Change the spacing and compare what happens to that bend.</p>
+<h2>1. Bring the drawing with you</h2>
+<p>In the <a href="../2026-10-03-ada-xr-starter/index.html#guide">Ada student starter</a>, open <code>point_trace.tscn</code>. Hold the point, draw, then release it. On desktop, mouse movement directs the held point; in VR, your tracked hand moves it. Wait for <strong>Saved for Point Grid</strong>.</p>
+<p>Stop the scene and run <code>point_grid.tscn</code>. It loads that saved trace. If no usable trace has been saved, it asks you to return and draw one. It does not substitute a demonstration for your gesture.</p>
+<p>The supplied <code>TraceMemory</code> keeps the latest released record on this device. It carries positions between the two lessons, including across separate runs. Opening Grid does not change the saved record. Returning to Trace, drawing and releasing saves a new one.</p>
+<figure><a href="trace-saved.png"><img src="trace-saved.png" alt="The Trace room confirms Saved for Point Grid after release"></a><figcaption>Release keeps this drawing. This verification gesture was made with synthetic controller poses through the actual pickup and release path.</figcaption></figure><h2>2. Keep the source and the result separate</h2>
+<p>Open <code>studies/point_grid/grid.gd</code>. We have two lists:</p>
+<pre><code class="language-gdscript">var source_points: Array[Vector3] = []
+var grid_points: Array[Vector3] = []
+var grid_size := 0.25
+</code></pre>
+<p>Both hold positions in metres. <code>source_points</code> receives the saved trace:</p>
+<pre><code class="language-gdscript">    source_points = TraceMemory.read_trace()
+</code></pre>
+<p><code>grid_points</code> begins empty. We will fill it with new values, leaving the source alone. A quarter of a metre is our chosen grid spacing. All calculations use the Study frame in which Trace recorded the points.</p>
+<h2>3. Give each saved position an address</h2>
+<p>Trace's drawing loop visited neighbouring entries by index. This loop takes each stored value in turn:</p>
+<pre><code class="language-gdscript">    for p in source_points:
+        var address := Vector3i(
+            roundi(p.x / grid_size),
+            roundi(p.y / grid_size),
+            roundi(p.z / grid_size)
+        )
+        var placed := Vector3(address) * grid_size
+        grid_points.append(placed)
+</code></pre>
+<p>For every position <code>p</code>, divide each coordinate by the spacing to count grid intervals. <code>roundi()</code> gives the nearest integer. <code>Vector3i</code> holds these three whole-number counts: the grid address.</p>
+<p>For example, X = <code>0.12</code> metres is <code>0.48</code> quarter-metre steps, which rounds to zero. X = <code>0.13</code> metres is <code>0.52</code> steps, which rounds to one. A small difference in the saved input can put two results a quarter of a metre apart.</p>
+<p><code>Vector3(address)</code> turns the integer components into floating-point components. Multiplying by <code>grid_size</code> gives metres again. <code>append()</code> adds that result to the new list. Negative coordinates use the same rule; exact halfway values round away from zero.</p>
+<p>Each input produces one output. Nearby samples may acquire exactly the same position, but we keep their entries and their order. An array index names a sample in the record; a grid address names a place. Several samples can name that same place.</p>
+<figure><a href="quarter.png"><img src="quarter.png" alt="The saved pink loop beside its white grid version"></a><figcaption>The same saved record in Grid. Pink is unchanged; white is the calculated result.</figcaption></figure><h2>4. Change the reading, keep the gesture</h2>
+<p>The supplied display draws the two lists:</p>
+<pre><code class="language-gdscript">    comparison.show_traces(source_points, grid_points, grid_size)
+</code></pre>
+<p>Pink shows your saved trace. White shows the grid version. Both use the same centring and display scale, with a sideways offset so you can compare them. These display adjustments do not edit either list. The faint ruling is one XY section; the rounding still uses all three coordinates.</p>
+<p>Change <code>grid_size</code> from <code>0.25</code> to <code>0.5</code> and run Grid again. You do not have to redraw. It rereads the original trace and calculates another result. Pink stays the same while the white drawing changes. Try <code>0.1</code> next. Use a positive spacing.</p>
+<p>The display joins consecutive entries directly. Equal neighbours produce no segment; a jump can produce a diagonal. It does not invent samples between those you made. A finer grid can retain more of the saved shape, but it cannot recover movements that Trace never recorded.</p>
+<p>We have reused a drawing as data. Its shape can now be read under another rule without losing the earlier record. In Triangle, we will choose corners and give their connections another job: closing a boundary, then making a face.</p><figure><a href="half.png"><img src="half.png" alt="A coarser grid changes the white result while the original pink trace stays the same" loading="lazy"></a><figcaption>Spacing changed to 0.5 m. Both lists still have 41 entries; some output positions coincide. The original view has not moved.</figcaption></figure><p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the corrected starter</a></p><p class="small">Draw in point_trace.tscn → release and see the saved confirmation → run point_grid.tscn. Change grid_size and run Grid again.</p></article><details id="code"><summary>grid.gd · the complete lesson</summary><div><pre><code>extends Node3D
+
+const TraceMemory = preload(&quot;res://prepared/trace_memory.gd&quot;)
+const TraceComparison = preload(&quot;res://prepared/trace_comparison.gd&quot;)
+
+var source_points: Array[Vector3] = []
+var grid_points: Array[Vector3] = []
+var grid_size := 0.25
+var comparison := TraceComparison.new()
+
+func _ready():
+    add_child(comparison)
+    if grid_size &lt;= 0.0:
+        comparison.show_message(&quot;Use a positive grid_size.&quot;)
+        return
+    source_points = TraceMemory.read_trace()
+    if source_points.is_empty():
+        comparison.show_message(&quot;Draw in Point Trace, then release to save.\nOpen Point Grid again to see your trace here.&quot;)
+        return
+    for p in source_points:
+        var address := Vector3i(
+            roundi(p.x / grid_size),
+            roundi(p.y / grid_size),
+            roundi(p.z / grid_size)
+        )
+        var placed := Vector3(address) * grid_size
+        grid_points.append(placed)
+    comparison.show_traces(source_points, grid_points, grid_size)
+</code></pre><p><a href="grid.gd" download>Download grid.gd</a> · <a href="trace_comparison.gd">Supplied comparison display</a></p></div></details><details id="trace"><summary>Trace now hands its record onward</summary><div><p>The sampling lesson stays intact. A supplied TraceMemory node watches release and saves the current list as a value snapshot. Signal handling and file storage are not new requirements for the student's first loop.</p><pre><code>extends Node3D
+
+const PointHandle = preload(&quot;res://prepared/point_handle.gd&quot;)
+const TraceMemory = preload(&quot;res://prepared/trace_memory.gd&quot;)
+const TraceDrawing = preload(&quot;res://prepared/trace_drawing.gd&quot;)
+
+var point := PointHandle.new()
+var drawing := TraceDrawing.new()
+var readout := Label3D.new()
+var memory := TraceMemory.new()
+var points: Array[Vector3] = []
+var spacing := 0.08
+var capacity := 128
+
+func _ready():
+    point.position = Vector3(-0.75, 1.25, 0.0)
+    add_child(point)
+    add_child(drawing)
+    readout.position = Vector3(0.0, 2.4, -0.6)
+    add_child(readout)
+    points.append(point.position)
+    add_child(memory)
+    memory.watch(point, points)
+    readout.text = str(points.size()) + &quot; positions kept&quot;
+
+func _process(_delta):
+    var displacement := point.position - points[-1]
+    if displacement.length() &gt;= spacing:
+        points.append(point.position)
+        if points.size() &gt; capacity:
+            points.pop_front()
+        drawing.clear()
+        for i in range(1, points.size()):
+            drawing.join(points[i - 1], points[i])
+        readout.text = str(points.size()) + &quot; positions kept&quot;
+</code></pre><p><a href="Point_Trace.tutorial.md">Updated Trace tutorial</a> · <a href="Point_Trace.tutorial.diff">Trace text diff</a> · <a href="trace_memory.gd">Supplied transport</a></p></div></details><section class="lineage"><h2>The student brings the material.</h2><p>The earlier Grid pilot started another recording. This version returns to the student's own gesture. The code is reused, and so is what the student made with it.</p><p>One source can support different readings. Grid changes a rule and compares the result while preserving the source. Triangle can continue this distinction between positions, connections and the work we ask them to do.</p></section><details id="checked"><summary>40 checks passed · including a separate engine restart</summary><div><p>Mouse-motion input and synthetic XR grip both save through the actual release callback. Checks cover exact values, snapshot independence, unchanged source bytes, alternate grid spacings, duplicate positions and missing/invalid records. A second engine process successfully reloads and maps the saved trace.</p><p>Images are actual desktop renders of the synthetic controller record. A physical headset and beginner reading trial remain pending. The saved file stays on the same device; this is not desktop-to-headset cloud sync.</p><p><a href="verification.json">Native checks</a> · <a href="restart-verification.json">Restart checks</a> · <a href="empty.png">Empty state</a> · <a href="lesson-contract.json">Teaching scope</a> · <a href="DECISIONS.md">Decisions</a></p></div></details></main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>

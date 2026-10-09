@@ -1,0 +1,143 @@
+[
+  {
+    "name": "initial",
+    "counts": "Right: 24 kept + 0 unfilled = 24 requested. 67 candidates = 24 kept + 43 refused. Showing 43 refusal marks.",
+    "images": [
+      {
+        "alt": "The single point's framed local boundary",
+        "loaded": true
+      },
+      {
+        "alt": "The actual sampling bench in the museum",
+        "loaded": true
+      },
+      {
+        "alt": "The complete candidate count and the bounded ghost display",
+        "loaded": true
+      },
+      {
+        "alt": "The same bench with the right-hand clustered setting",
+        "loaded": true
+      }
+    ],
+    "marks": 139,
+    "measurement": "Right closest pair: 0.131373 m in 3D. Admission spacing: 0.130 m.",
+    "overflow": false,
+    "projection": "xy"
+  },
+  {
+    "name": "loaded",
+    "counts": "Right: 49 kept + 47 unfilled = 96 requested. 5507 candidates = 49 kept + 5458 refused. Showing 220 refusal marks.",
+    "images": [
+      {
+        "alt": "The single point's framed local boundary",
+        "loaded": true
+      },
+      {
+        "alt": "The actual sampling bench in the museum",
+        "loaded": true
+      },
+      {
+        "alt": "The complete candidate count and the bounded ghost display",
+        "loaded": true
+      },
+      {
+        "alt": "The same bench with the right-hand clustered setting",
+        "loaded": true
+      }
+    ],
+    "marks": 510,
+    "measurement": "Right closest pair: 0.130130 m in 3D. Admission spacing: 0.130 m.",
+    "overflow": false,
+    "projection": "xy"
+  },
+  {
+    "name": "depth",
+    "counts": "Right: 49 kept + 47 unfilled = 96 requested. 5507 candidates = 49 kept + 5458 refused. Showing 220 refusal marks.",
+    "images": [
+      {
+        "alt": "The single point's framed local boundary",
+        "loaded": true
+      },
+      {
+        "alt": "The actual sampling bench in the museum",
+        "loaded": true
+      },
+      {
+        "alt": "The complete candidate count and the bounded ghost display",
+        "loaded": true
+      },
+      {
+        "alt": "The same bench with the right-hand clustered setting",
+        "loaded": true
+      }
+    ],
+    "marks": 510,
+    "measurement": "Right closest pair: 0.130130 m in 3D. Admission spacing: 0.130 m.",
+    "overflow": false,
+    "projection": "xz"
+  },
+  {
+    "name": "ghosts-hidden",
+    "counts": "Right: 49 kept + 47 unfilled = 96 requested. 5507 candidates = 49 kept + 5458 refused. Showing 0 refusal marks.",
+    "images": [
+      {
+        "alt": "The single point's framed local boundary",
+        "loaded": true
+      },
+      {
+        "alt": "The actual sampling bench in the museum",
+        "loaded": true
+      },
+      {
+        "alt": "The complete candidate count and the bounded ghost display",
+        "loaded": true
+      },
+      {
+        "alt": "The same bench with the right-hand clustered setting",
+        "loaded": true
+      }
+    ],
+    "marks": 290,
+    "measurement": "Right closest pair: 0.130130 m in 3D. Admission spacing: 0.130 m.",
+    "overflow": false,
+    "projection": "xz"
+  },
+  {
+    "name": "clustered",
+    "counts": "Right: 24 kept + 0 unfilled = 24 requested. 24 candidates = 24 kept + 0 refused. Showing 0 refusal marks.",
+    "images": [
+      {
+        "alt": "The single point's framed local boundary",
+        "loaded": true
+      },
+      {
+        "alt": "The actual sampling bench in the museum",
+        "loaded": true
+      },
+      {
+        "alt": "The complete candidate count and the bounded ghost display",
+        "loaded": true
+      },
+      {
+        "alt": "The same bench with the right-hand clustered setting",
+        "loaded": true
+      }
+    ],
+    "marks": 96,
+    "measurement": "Right closest pair: 0.018010 m in 3D. Gaussian applies no spacing test; shells retain the 0.130 m reference.",
+    "overflow": false,
+    "projection": "xz"
+  },
+  {
+    "name": "book",
+    "codeBlocks": 3,
+    "open": true,
+    "paragraphs": 23
+  },
+  {
+    "name": "primary-passages",
+    "openPassages": 2,
+    "text": "Primary · the book's artifacts\n\n2 artifacts in encounter order. Each card connects the room to its book passage.\n\n1. randompoint\n\nprimary · 271 words in the book\n\nSelect on thread\nRead book passage\nThe stones behind us could disappear. Their order of movement stayed intact; the drawn waits changed how long we had to cross. Here, something much smaller asks what can change at all.\n\nA point waits inside a metal square. Carry it sideways. Release it. Try carrying it toward you, out of the square's plane. Where does it end up?\n\nIt has a place in this room, yet keeps returning to a surface with no depth. The frame marks a limit you can see. The returning coordinate exposes another one.\n\nAt its first appearance, two draws chose x and y. After that, there is no new lottery on release. The point's script repeatedly takes its current position and clips it:\n\n```gdscript\nvar clamped := Vector3(\n\tclamp(pos.x, -area_half_extent, area_half_extent),\n\tclamp(pos.y, -area_half_extent, area_half_extent),\n\t0.0\n)\n```\n\nRead the last line again. There is room in the vector for a third number. The code keeps writing zero there.\n\nThat zero belongs to the point's local frame. Turn the whole artifact in the museum and its plane turns with it. We have met local and world coordinates before; now their difference determines which movement survives your hand. Within the square, x and y can keep your alteration. Beyond its edges, the excess is clipped. Depth is discarded each process frame.\n\nWhat looks like a flat existence takes repeated work to maintain. The engine has not forgotten a dimension. This small procedure keeps declining it.\n\nKeep that action in mind at the next bench. A boundary can be drawn on a surface, written into a generator, or continually reapplied. Those arrangements may look alike until somebody moves.\n2. randompoints\n\nprimary · 616 words in the book\n\nSelect on thread\nRead book passage\nTwo shallow frames stand side by side. Find a pair of points that seem almost to touch in the left one. Look for an equally close pair on the right. Lean a little: each frame has twelve centimetres of depth, so an overlap in your view need not be an overlap in space.\n\nThe shells help. Each has a radius of half the stated spacing. Two centres at that distance have shells that just touch. Grey specks among the right-hand points record some of the proposals that were refused.\n\nPress REDRAW. The pair of clouds returns. Press NEW SEED and look again. The arrangement changes, but the right-hand spacing survives the new draw.\n\nThe left frame keeps each uniformly proposed position. On the right, a candidate is compared with the centres already admitted. Only this condition lets it join them:\n\n```gdscript\nif min_dist >= blue_noise_min_dist:\n\tpts.append(candidate)\n\tplaced = true\n\tbreak\n```\n\nThe candidate's own coordinates are insufficient to decide its place. Its possibility now depends on who arrived before it. Earlier centres stay where they are; the algorithm neither negotiates with them nor rearranges the group.\n\nPress LOAD. The request rises from 24 to 96. The frames and the spacing stay the same size. Read the plate before deciding what the denser cloud means. Candidates split into kept and refused; requested places split into filled and unfilled. These are different accounts.\n\nThe generator allows a hundred attempts for each requested place. A place still unfilled after those attempts is skipped, and the next gets its own attempts. The plate names the exhausted budget. It cannot certify that every remaining gap is impossible. Our time for searching has ended before our question about space has been settled.\n\nOnly the first 220 refusals receive grey bodies. The full refusal count continues beyond them. Even the display of what was excluded has an exclusion of its own, and this time we can read its limit.\n\nReturn LOAD to 24, then press RULE. The right frame gathers toward its centre. This setting makes Gaussian draws for each coordinate and clamps their tails to the frame. It applies no pair-distance test. Shells may already be red before you touch anything. They now show a reference distance that the generator never promised to preserve. A crowded centre and a spacing rule are different ways of making a cloud; the names alone cannot tell us how either was made.\n\nReturn to the spaced rule. Carry a point into another's shell.\n\nThe red arrives. A count changes. Nothing in the sampling script pushes the pair apart.\n\n```gdscript\nif a.position.distance_to(b.position) < blue_noise_min_dist - 0.001:\n\ttouching += 1\n\tbad[i] = true\n\tbad[j] = true\n```\n\nThis passage watches. It counts pairs closer than the spacing minus a one-millimetre tolerance. It writes no replacement position. Compare it with the zero that kept reclaiming the first point's depth.\n\nRelease the point, then RESTORE. The cloud returns to the positions recorded when it was generated. That return is available as an action; it does not make the original arrangement inevitable.\n\nA pleasing order has shown us its procedure and the moment that procedure stops governing. There is room to inhabit the difference. We can keep the useful constraint, learn what it made possible, and still discover a relationship it did not authorize at birth.\n\nThe seed repeats this local construction when its settings and calls repeat. It does not replay the museum. The left cloud consumes the first part of one generator's stream; the right continues it, so these are not identical candidates subjected to different rules. The next hall will give another operation something already formed to work on: a column, and a field that can displace it."
+  }
+]

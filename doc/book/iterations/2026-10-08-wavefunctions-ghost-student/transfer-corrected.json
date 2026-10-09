@@ -1,0 +1,217 @@
+{
+  "checks": [
+    {
+      "claim": "changed recipe starts at top and reaches bottom after two seconds",
+      "hall": "WaveFunctions_Intro",
+      "passed": true
+    },
+    {
+      "claim": "four-second period holds away from the named sample points",
+      "hall": "WaveFunctions_Intro",
+      "passed": true
+    },
+    {
+      "claim": "actual constructed cube displays the predicted height",
+      "hall": "WaveFunctions_Intro",
+      "passed": true
+    },
+    {
+      "claim": "20 slots limit duration at .1-second sampling",
+      "hall": "WaveFunctions_Pendulum",
+      "passed": true
+    },
+    {
+      "claim": "recording changes leave the pendulum state identical",
+      "hall": "WaveFunctions_Pendulum",
+      "passed": true
+    },
+    {
+      "claim": "drawing speed doubles depth without changing the observation",
+      "hall": "WaveFunctions_Pendulum",
+      "passed": true
+    },
+    {
+      "claim": "separate axis frequencies give the predicted crest and baseline",
+      "hall": "WaveFunctions_Sine_Space",
+      "passed": true
+    },
+    {
+      "claim": "X repeats after two metres and Z after one",
+      "hall": "WaveFunctions_Sine_Space",
+      "passed": true
+    },
+    {
+      "claim": "new rule reuses grid connectivity and its collision receiver",
+      "hall": "WaveFunctions_Sine_Space",
+      "passed": true
+    },
+    {
+      "claim": "changed speed and radius put the point at the predicted top",
+      "hall": "WaveFunctions_Unit_Circle",
+      "passed": true
+    },
+    {
+      "claim": "graph shares vertical height but retains its four-metre angle axis",
+      "hall": "WaveFunctions_Unit_Circle",
+      "passed": true
+    },
+    {
+      "claim": "circle radius remains measured from its moved centre",
+      "hall": "WaveFunctions_Unit_Circle",
+      "passed": true
+    },
+    {
+      "claim": "first step matches the hand-calculated centre velocity and displacement",
+      "hall": "WaveFunctions_3D_Wave_Propagation",
+      "passed": true
+    },
+    {
+      "claim": "first step reaches only immediate neighbours equally",
+      "hall": "WaveFunctions_3D_Wave_Propagation",
+      "passed": true
+    },
+    {
+      "claim": "120 steps preserve symmetry and do not depend on traversal order",
+      "hall": "WaveFunctions_3D_Wave_Propagation",
+      "passed": true
+    },
+    {
+      "claim": "ratio change leaves zero-depth audio bytes exactly unchanged",
+      "hall": "WaveFunctions_Effect_Sound",
+      "passed": true
+    },
+    {
+      "claim": "positive depth makes the ratio change consequential",
+      "hall": "WaveFunctions_Effect_Sound",
+      "passed": true
+    },
+    {
+      "claim": "same sample count and byte encoding survive the edit",
+      "hall": "WaveFunctions_Effect_Sound",
+      "passed": true
+    },
+    {
+      "claim": "taller twelve-corner shaft has the predicted topology",
+      "hall": "Wavefunctions_Bernini",
+      "passed": true
+    },
+    {
+      "claim": "height changes without changing total turn",
+      "hall": "Wavefunctions_Bernini",
+      "passed": true
+    },
+    {
+      "claim": "trigger changes whole-object pose while geometry stays stored",
+      "hall": "Wavefunctions_Bernini",
+      "passed": true
+    },
+    {
+      "claim": "new interval generates the six predicted cumulative times",
+      "hall": "WaveFunctions_John_Cage",
+      "passed": true
+    },
+    {
+      "claim": "late frame dispatches all four overdue events in order",
+      "hall": "WaveFunctions_John_Cage",
+      "passed": true
+    },
+    {
+      "claim": "replay preserves both score and random state",
+      "hall": "WaveFunctions_John_Cage",
+      "passed": true
+    },
+    {
+      "claim": "two equal-pitch clips are byte-identical",
+      "hall": "WaveFunctions_AirMusic",
+      "passed": true
+    },
+    {
+      "claim": "actual contact starts a second voice without restarting the first",
+      "hall": "WaveFunctions_AirMusic",
+      "passed": true
+    },
+    {
+      "claim": "equal clips can be read at different ages in the sum",
+      "hall": "WaveFunctions_AirMusic",
+      "passed": true
+    },
+    {
+      "claim": "new rise gives three predicted top heights",
+      "hall": "Wavefunctions_Sky_Stairs",
+      "passed": true
+    },
+    {
+      "claim": "zero amplitude keeps all centres on one circle",
+      "hall": "Wavefunctions_Sky_Stairs",
+      "passed": true
+    },
+    {
+      "claim": "tread top transforms still agree with sampled centres",
+      "hall": "Wavefunctions_Sky_Stairs",
+      "passed": true
+    },
+    {
+      "claim": "changed A and lower control choose 6 and 5.75 Hz",
+      "hall": "WaveFunctions_TrigWalkingPath",
+      "passed": true
+    },
+    {
+      "claim": "same frequency gap cancels at two seconds and reinforces at four",
+      "hall": "WaveFunctions_TrigWalkingPath",
+      "passed": true
+    },
+    {
+      "claim": "gain scales the drawing without changing the raw sum",
+      "hall": "WaveFunctions_TrigWalkingPath",
+      "passed": true
+    },
+    {
+      "claim": "new recipe has predicted signed sum at a quarter cycle",
+      "hall": "WaveFunctions_Synthesis_Lab",
+      "passed": true
+    },
+    {
+      "claim": "new odd recipe reverses sign after half a cycle",
+      "hall": "WaveFunctions_Synthesis_Lab",
+      "passed": true
+    },
+    {
+      "claim": "lowering H3 raises quarter-cycle signal to one",
+      "hall": "WaveFunctions_Synthesis_Lab",
+      "passed": true
+    },
+    {
+      "claim": "baseline action restores new recipe but preserves phase and hold",
+      "hall": "WaveFunctions_Synthesis_Lab",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "air_music": {
+      "ages_after_second_contact": [
+        0.374421775341034,
+        0.0957823097705841
+      ],
+      "first_age_before_second_contact": 0.28154194355011
+    },
+    "audio_boundary": {
+      "actual_indices": [
+        59,
+        180
+      ],
+      "actual_sum": -0.129520554216132,
+      "intended_indices": [
+        60,
+        180
+      ],
+      "old_expected": -0.13342692342906
+    },
+    "pendulum": {
+      "count": 20,
+      "oldest_to_newest_seconds": 1.89999999999999
+    }
+  },
+  "passed": true,
+  "scope": "New author-made variations of all twelve printed studies. Same-assistant ghost-student simulation; no independent-reader or headset claim."
+}

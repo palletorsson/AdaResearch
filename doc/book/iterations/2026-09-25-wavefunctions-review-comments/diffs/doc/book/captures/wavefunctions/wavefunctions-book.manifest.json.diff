@@ -1,0 +1,86 @@
+--- before/doc/book/captures/wavefunctions/wavefunctions-book.manifest.json
++++ doc/book/captures/wavefunctions/wavefunctions-book.manifest.json
+@@ -1,11 +1,11 @@
+ {
+-  "captured_at": "2026-09-18T06:05:10.137507+00:00",
+-  "base_commit": "42496604b02d17856c5dbb69223fbf67747183ef",
++  "captured_at": "2026-09-25T07:12:17.442480+00:00",
++  "base_commit": "4779a313c38fc579c8d8b57436db7fbd7ef1fc36",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+-  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; footnote text and code preserved.",
++  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+   "sequence": "wavefunctions",
+-  "sequence_sha256": "00040c435767e332725b0960f552e26113733b3ee35e46c80c9afb556d0f1851",
++  "sequence_sha256": "3034dd376598746c86925c3d4cc1f91c9d24ad956bc02b823169166eecde39ed",
+   "maps": [
+     {
+       "map": "WaveFunctions_Intro",
+@@ -15,32 +15,32 @@
+     {
+       "map": "WaveFunctions_Pendulum",
+       "path": "commons/maps/WaveFunctions_Pendulum/final.md",
+-      "sha256": "ca12bf9d17f6c803f5990f5c6a77772195862c20b787ee2887753089c8c44aa5"
++      "sha256": "99396653ee8e56f8b20b826b65cf4125dca2d236953991bc5cd1daeaa9aca8fc"
+     },
+     {
+       "map": "WaveFunctions_Sine_Space",
+       "path": "commons/maps/WaveFunctions_Sine_Space/final.md",
+-      "sha256": "1d97723e8dcc802d1c2b5598fe062023570be93cbdedc6dd77f98faf2080c615"
++      "sha256": "5c03c2f4a9fa302819b20627664c30ce24ab7e2c6c2e14d5405ebb77b413c74f"
+     },
+     {
+       "map": "WaveFunctions_Unit_Circle",
+       "path": "commons/maps/WaveFunctions_Unit_Circle/final.md",
+-      "sha256": "e391c3623417c91e8a90b519aec3c7fffca392f79673fbcd4e72ad979f6f6f55"
++      "sha256": "98989d61e16f87d5f0648518e26f72afb6357bb1cd705f9b7c064b10d657e4da"
+     },
+     {
+       "map": "WaveFunctions_3D_Wave_Propagation",
+       "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+-      "sha256": "fb05267354126199f3f83591a0472069ff57b0b6b9b7a71e8398865b438ec095"
++      "sha256": "82cc3d1fe29e60746ced8b46e14a217c1f9a1d369ac51a48320327dc633d2ed0"
+     },
+     {
+       "map": "WaveFunctions_Effect_Sound",
+       "path": "commons/maps/WaveFunctions_Effect_Sound/final.md",
+-      "sha256": "34f3f99f684203ab9ad3e644f3567a30d1879b21a20fa58ed972eb297e6d4f94"
++      "sha256": "44391cd902daf249ca029de6cca263b7252ece3f8c13f8cea1388f15ffaece0c"
+     },
+     {
+       "map": "Wavefunctions_Bernini",
+       "path": "commons/maps/Wavefunctions_Bernini/final.md",
+-      "sha256": "78701900090a59b419c1862e9358f171fa8aee75001a5b04b2d8dfd76c71cbd4"
++      "sha256": "29d793cc377198087ab432679a610ea0df38c8b5e6e5fba24f8510633f215279"
+     },
+     {
+       "map": "WaveFunctions_John_Cage",
+@@ -50,23 +50,23 @@
+     {
+       "map": "WaveFunctions_AirMusic",
+       "path": "commons/maps/WaveFunctions_AirMusic/final.md",
+-      "sha256": "ea6e71249d23663f3b3613bb90908828f6f865635efcfd88526c0aa8c6657a01"
++      "sha256": "d8361d44cf392c1aad70c89ef149a547a8e614337514b0b71ab881e7288b98f6"
+     },
+     {
+       "map": "Wavefunctions_Sky_Stairs",
+       "path": "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+-      "sha256": "2b8e3f5a889a7dca10cd7422b0eb551915702ebfc21e136d42e41bc144fb9556"
++      "sha256": "58549b1b4ace5e614fd34e36ef5e9c9879927f7f75dabdd5681f84829d99f079"
+     },
+     {
+       "map": "WaveFunctions_TrigWalkingPath",
+       "path": "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+-      "sha256": "9feafb76e00cdf28318f5b9e55dc6679ccd534badb9bbaf3da4d27d10deae583"
++      "sha256": "510161ace1a8bfb170f2a3a373e1010ca925a1a265d4e419759a25dc708a70f3"
+     },
+     {
+       "map": "WaveFunctions_Synthesis_Lab",
+       "path": "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+-      "sha256": "00551106af3e40352ac5c9e88aa8d6fb0bcb8526c1c6ea381740dcd05fca8e6d"
++      "sha256": "6f844d746042cbcb3e2a38d7d9808f68e9eda705a258d394fa7579bfcf69ff6f"
+     }
+   ],
+-  "output_sha256": "5ede6ed337461144f7590ae138cdf8638b6c212ed7cea439e6f911906ddb44af"
++  "output_sha256": "de16f369032ca620085319427583b5c58d37bac8686a0cd9fd533bc57d8261cd"
+ }

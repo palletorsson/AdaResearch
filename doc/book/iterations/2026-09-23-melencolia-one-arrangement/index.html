@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What changes when you move? — Ada Research</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#27313b;font:18px/1.75 Georgia,serif}main{max-width:1320px;margin:auto;padding:48px 36px 72px}.eyebrow,nav,figcaption,.status,summary,footer{font-family:system-ui,sans-serif}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#90616e}h1{font-size:clamp(34px,5.8vw,64px);font-weight:400;line-height:1.12;letter-spacing:-.025em;max-width:870px;margin:14px 0 24px}h2{font-size:32px;line-height:1.2;font-weight:400}a{color:#87465e;text-underline-offset:4px}.intro{max-width:720px}.intro p{margin:0 0 16px}nav{display:flex;flex-wrap:wrap;gap:12px 26px;font-size:14px;margin:24px 0 32px}figure{margin:28px 0 38px}figure img{display:block;width:100%;height:auto;border:1px solid #d8d1c5}figcaption{font-size:13px;line-height:1.6;color:#6a655f;margin-top:12px;max-width:850px}.status{font-size:14px;padding:18px 22px;border-left:3px solid #cd6b95;background:#ece5dc;max-width:850px}.reading{max-width:760px;margin:66px auto}.reading img{width:calc(100% + 180px);max-width:none;margin:16px -90px}.reading img+em{font-size:14px}.reading a[id]{scroll-margin-top:25px}.reading h2{margin-top:44px;font-size:27px}code{font:14px/1.6 ui-monospace,monospace;overflow-wrap:anywhere;background:#e8e2d7;padding:2px 4px}pre{background:#e8e2d7;padding:22px;overflow:auto;white-space:pre-wrap}pre code{padding:0}.footnote{font-size:14px;border-top:1px solid #cfc7bb;margin-top:35px}sup{font-size:11px}.wide{margin-top:55px;border-top:1px solid #cfc7bb;padding-top:20px}.meta{max-width:830px;font-size:15px}details{margin:32px 0;border-top:1px solid #cfc7bb;padding-top:20px}summary{font-size:15px;cursor:pointer}details pre{font-size:12px}footer{font-size:13px;border-top:1px solid #cfc7bb;padding-top:20px;color:#69655f}@media(max-width:1050px){.reading img{width:100%;margin:12px 0}}@media(max-width:650px){main{padding:28px 18px 48px}body{font-size:17px}.reading{margin:42px auto}nav{gap:12px 20px}h2{font-size:27px}}
+</style></head><body><main>
+<div class="eyebrow">Ada Research / Primitives Melencolia / 23 September 2026</div>
+<h1>What changes when you move?</h1>
+<div class="intro"><p>From one position, two corner pyramids hide the other two. Walk around and the outlines separate. The court has not moved.</p><p>This closing hall brings the primitives together as an arrangement we can recognise, measure and still want to look at. The book now borrows the court’s actual objects for three views of that encounter.</p></div>
+<nav><a href="#reading">Read the chapter</a><a href="#museum">Inside the hall</a><a href="figures/melencolia-one-arrangement.png">Full-size figure</a><a href="/compose/sources?map=Primitives_Melencolia&amp;doc=final">Read and comment</a><a href="Primitives_Melencolia.diff">Exact text addition</a></nav>
+<figure><img src="figures/melencolia-one-arrangement.png" width="2520" height="1420" alt="The five-pyramid court from aligned, oblique and overhead views. Two corner pyramids hide two others in the aligned view."><figcaption>The nine production artifact scenes with their actual map proportions, pigments and placements. Geometry and arrangement stay fixed across all three views. These are orthographic book views; the plain support finish and lighting make the construction legible on the page.</figcaption></figure>
+<p class="status">Added to <strong>final.md</strong>: the shared court illustration and its caption. The existing prose, Dürer passage and new return to Point One’s counter are preserved. The court, floor and artifact behavior remain as they were.</p>
+<section class="reading" id="reading"><p>What keeps you looking after you know the form?</p>
+<p><a id="reading-encounter-pyramid"></a></p>
+<p>Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?</p>
+<p>Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.</p>
+<p>Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.</p>
+<p><a id="reading-encounter-pyramidlong"></a></p>
+<p>The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?</p>
+<p>Its base is still square. Its apex is still a single point above it. The tall pyramid's source collects the base vertices and then adds that point:</p>
+<pre><code class="language-gdscript">vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+</code></pre>
+<p>The same connections can carry a different height. In this version the pyramid's base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.</p>
+<p><a id="reading-encounter-cube_scene"></a></p>
+<p>Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?</p>
+<p>The arrangement returns to the room's earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.<sup id="fnref:solids"><a class="footnote-ref" href="#fn:solids">1</a></sup> Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.</p>
+<p>Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. You do not need to build every possibility before leaving this one.</p>
+<p><img alt="The museum court from three viewpoints: aligned, oblique and a plan from above." src="/book-review/doc/book/iterations/2026-09-23-melencolia-one-arrangement/figures/melencolia-one-arrangement.png" /></p>
+<p><em>The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.</em></p>
+<p><a id="reading-encounter-snap_pyramid_puzzle"></a></p>
+<p>Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.</p>
+<p>Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.</p>
+<p><a id="reading-encounter-transition"></a></p>
+<h2>The tools are still here</h2>
+<p><a id="reading-encounter-durer_scene"></a></p>
+<p>Follow the raised connection and the next ramp to the separate platform. The tableau gathers objects after Dürer's <em>Melencolia I</em>: a polyhedron, a sphere, a compass, a ladder, a numbered square. Find something you now know how to begin making. Then find something in the arrangement that this knowledge has not explained.</p>
+<p>You have spent a chapter assembling a vocabulary. Here it returns as a scene. The compass belongs among the tools of geometry, but lying beside the other objects it also asks about work: begun, interrupted, waiting. These are possibilities for reading the tableau, not a solution hidden inside it.<sup id="fnref:durer"><a class="footnote-ref" href="#fn:durer">2</a></sup></p>
+<p>Go close to the numbered square. Choose a row and add it before reading further.</p>
+<pre><code class="language-text">16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+</code></pre>
+<p>Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.</p>
+<p>Stay a little longer. Has that correct answer finished what you came to look at?</p>
+<p>Perhaps the pleasure of the arrangement is enough for now. Perhaps its precision makes the interruption more palpable: these instruments can still measure, while the next action remains uncertain. We can read melancholy here without making geometry useless. We can also want the scene for the questions it keeps available.</p>
+<h2>The number that was already running</h2>
+<p><a id="reading-encounter-frame_counter_display"></a></p>
+<p>By the way out, a number is changing. It is the same counter you met on your first step into this chapter: <code>Engine.get_process_frames()</code>, process frames since the engine started, read fresh on every call.</p>
+<p>It is much larger now. Some of that is yours — the picking up, the drawing, the walking, the shifting of a start. A fixed quantity of it is not, and never will be. The frames that passed before you had somewhere to stand did not become yours by being counted alongside the ones that followed. This number adds them together anyway. It has no field for the difference.</p>
+<p>Ten rooms ago we said that its first number for you was not its first number. That is still the one thing it will not tell you, and you now know several reasons why. A record keeps what its rule admits. Someone chose the rule. Between the frames you can account for and the total on the panel lies everything this chapter has been about.</p>
+<h2>Enough to continue</h2>
+<p>The previous room left us approaching a curve with finite pieces. An exact mathematical description and a rendered body make different promises. More triangles can improve an approximation; they cannot decide what we should want to make with it.</p>
+<p>Dürer's engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.</p>
+<p>A few tools, and more possible constructions than we have time to pursue.<sup id="fnref:sublime"><a class="footnote-ref" href="#fn:sublime">3</a></sup></p>
+<p>Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.</p>
+<p>We leave with enough to continue. There is still something here we have not finished looking at.</p>
+<p><a id="reading-encounter-transition-2"></a></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:solids">
+<p>Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See <a href="https://publicdomainreview.org/collection/solid-objects/"><em>Solid Objects</em></a> and the <a href="https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/">image selected for this room</a>. The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.&#160;<a class="footnote-backref" href="#fnref:solids" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:durer">
+<p>Albrecht Dürer, <em>Melencolia I</em> (1514), <a href="https://www.metmuseum.org/art/collection/search/360018">Metropolitan Museum of Art</a>. The museum describes several interpretations rather than a settled key. AdaResearch stages selected objects, not a complete or geometrically exact reconstruction of the engraving. Reading aesthetic attention as a way to continue is this book's proposal.&#160;<a class="footnote-backref" href="#fnref:durer" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sublime">
+<p>Kant's <a href="https://www.gutenberg.org/files/48433/48433-h/48433-h.htm"><em>Critique of Judgement</em></a>, §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.&#160;<a class="footnote-backref" href="#fnref:sublime" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section>
+<section class="wide" id="museum"><h2>The arrangement is already a place</h2>
+<figure><img src="museum/court-entry.png" alt="Approaching the geometric court inside the museum."><figcaption>Actual native museum view from the entrance. The foreground makes the arrangement partial before the walk reveals it.</figcaption></figure>
+<figure><img src="museum/court-side.png" alt="The same court seen from its side, with the cubes and rear corner pyramids becoming visible."><figcaption>The existing court seen from the side. This view and the book figure use the same production objects and placement settings.</figcaption></figure>
+<figure><img src="museum/durer-encounter.png" alt="The Dürer tableau on its separate raised platform."><figcaption>The second platform brings back tools and familiar solids. The tested ramp connects the two levels. The manuscript’s magic-square question remains in place.</figcaption></figure>
+<figure><img src="museum/counter-return.png" alt="The large counter by the exit returns to the running count introduced in Point One."><figcaption>The already placed counter returns to the opening chapter’s machine time. Its current count belongs to this capture’s engine session; it is not a stored visitor duration.</figcaption></figure>
+</section>
+<details><summary>What changed and what was checked</summary><div class="meta"><p>Eleven native capture checks pass: the nine objects match their measured museum bounds, all three views retain identical mesh data/transforms/pigments, and the figure saves successfully. Two controlled ramp walks and three floor rays pass in the current assembled hall. Images inspected.</p><p>The existing frame counter is now included in the primary reading order, following the passage already present in the manuscript. The inventory and intent are aligned with the current hall. The older technical draft is preserved and points to the current tutorial companion.</p><p>No additional museum screen or controller was added. Headset comfort, magic-square reading distance and visitor interpretation remain open. Existing capture logs include resource-UID fallback warnings, plus legacy museum shutdown warnings; the current runs exit successfully.</p><p>Melencolia paragraph notes and core hashes are current. The shared purpose-page rebuild awaits reconciliation of concurrent Point One and Triangle manuscript edits. Frozen book/audio captures and the live museum save/bake were preserved.</p><p><a href="figures/capture-checks.json">Court evidence</a> · <a href="figures/provenance.json">Source provenance</a> · <a href="museum/report.json">Museum evidence</a></p></div></details>
+<details><summary>Exact manuscript addition</summary><pre>--- Primitives_Melencolia.before.md
++++ Primitives_Melencolia/final.md
+@@ -28,6 +28,10 @@
+ The arrangement returns to the room&#x27;s earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.[^solids] Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.
+ 
+ Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. You do not need to build every possibility before leaving this one.
++
++![The museum court from three viewpoints: aligned, oblique and a plan from above.](/book-review/doc/book/iterations/2026-09-23-melencolia-one-arrangement/figures/melencolia-one-arrangement.png)
++
++*The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.*
+ 
+ &lt;!-- @snap_pyramid_puzzle --&gt;
+ 
+</pre></details>
+<footer>Next: Transformation. We keep a form we recognise and begin to change its position, orientation and size.</footer></main></body></html>

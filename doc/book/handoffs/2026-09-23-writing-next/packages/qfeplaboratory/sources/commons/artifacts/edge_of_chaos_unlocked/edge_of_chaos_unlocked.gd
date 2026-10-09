@@ -1,0 +1,571 @@
+# edge_of_chaos_unlocked.gd
+# Reaction-diffusion system with an UNLOCKED lambda slider.
+# The companion to the locked-lambda map. Now the learner controls lambda.
+#
+# @identity
+# essence: Gray-Scott fields integrated with a normalized four-neighbour stencil
+# desire: follow a feature and compare numerical resolution before naming a regime
+# critical_parameter: lambda follows one authored route through four coefficients
+# triggers: lambda and speed rails, reproducible restart, new seed, optional paired timesteps
+# truth: a pattern is evidence of this implementation; regime names require additional measurements
+
+extends Node3D
+
+class_name EdgeOfChaosUnlocked
+
+const ValueSurface = preload("res://commons/ui/control_value_surface.gd")
+
+## Grid resolution for reaction-diffusion
+@export var grid_size: int = 64
+
+## Authored route through feed, removal and diffusion coefficients. No measured regime.
+@export_range(0.0, 1.0, 0.01) var lambda: float = 0.4:
+	set(value):
+		lambda = clampf(value, 0.0, 1.0)
+		_update_reaction_params()
+		_update_regime_label()
+
+## Display update rate (frames between texture updates)
+@export_range(1, 10) var display_rate: int = 2
+
+## Legacy speed selector; each unit now requests 3 model-time units per second.
+@export_range(1, 8) var sim_steps: int = 4:
+	set(value):
+		sim_steps = clampi(value, 1, 8)
+		_update_regime_label()
+
+# Tenure controls access to lambda, not which equations or integrator are used.
+# Earlier capture variants used a different solver from the interactive mode.
+# All modes now use the same normalized stencil and bounded timestep.
+const TENURES: PackedStringArray = ["unlocked", "clamped", "withheld", "frozen", "chaos"]
+
+## Who holds lambda and at what setting.
+@export_enum("unlocked", "clamped", "withheld", "frozen", "chaos") var tenure: String = "unlocked"
+
+# Preset poles advance for the same 192 model-time units as the old stable presets.
+const PREROLL_DURATION: float = 192.0
+const STABLE_DT: float = 0.3
+const MAX_TICKS_PER_FRAME: int = 4
+
+@export var comparison_study: bool = false
+var time_step: float = STABLE_DT
+var model_time: float = 0.0
+var seed_value: int = 0x5EED17
+var solver_fault: bool = false
+var _time_budget: float = 0.0
+var _fine_a: PackedFloat32Array
+var _fine_b: PackedFloat32Array
+var _fine_a_next: PackedFloat32Array
+var _fine_b_next: PackedFloat32Array
+var _fine_image: Image
+var _fine_texture: ImageTexture
+var _fine_display: MeshInstance3D
+var _dt_labels: Array[Dictionary] = []
+var _study_readout: Label
+var _study_sliders: Array[Node3D] = []
+var _study_buttons: Array[Node3D] = []
+var _paused: bool = false
+
+# Fixed seed: the still has to be the same still every run.
+const SEED_RNG: int = 0x5EED17
+
+# Gray-Scott parameters derived from lambda
+var _feed_rate: float = 0.037
+var _kill_rate: float = 0.06
+var _diffusion_a: float = 1.0
+var _diffusion_b: float = 0.5
+
+# Grid state (two chemicals: A and B)
+var _grid_a: PackedFloat32Array
+var _grid_b: PackedFloat32Array
+var _grid_a_next: PackedFloat32Array
+var _grid_b_next: PackedFloat32Array
+
+# Display
+var _texture: ImageTexture
+var _image: Image
+var _display_quad: MeshInstance3D
+var _frame_count: int = 0
+
+# UI
+var _controls: Node
+var _title_label: Node3D
+
+# Lifecycle
+var _built: bool = false
+var _authored_lambda: float = 0.4
+## Only nodes THIS script created. Freeing get_children() would destroy the
+## anthracite plates the label framer adds one deferred call later.
+var _owned: Array[Node] = []
+
+
+func _ready() -> void:
+	_authored_lambda = lambda
+	tenure = _pick_axis(tenure, TENURES, "unlocked")
+	_build_all()
+	_built = true
+
+
+# ═══════════════════════════════════════════════════════════════════
+# GRID CONFIG INTEGRATION
+# ═══════════════════════════════════════════════════════════════════
+#
+# Reached via call_deferred AFTER _ready and BEFORE label framing. Note that
+# curation_station calls this with {"emissive": false} one line after hiding
+# labels — a key this artifact does not claim, so the call falls through both
+# early returns and the framing survives. No key is accepted here that does
+# not do something.
+
+func apply_grid_config(config_data: Dictionary) -> void:
+	var before_tenure: String = tenure
+	var previous_comparison: bool = comparison_study
+	if config_data.has("comparison_study"):
+		comparison_study = str(config_data["comparison_study"]).to_lower() in ["on", "true", "1"]
+	if config_data.has("tenure"):
+		tenure = _pick_axis(str(config_data["tenure"]), TENURES, tenure)
+
+	if not _built:
+		return
+
+	if tenure != before_tenure or previous_comparison != comparison_study:
+		_rebuild_now()
+		print("[EdgeOfChaosUnlocked] Config applied — tenure=%s" % [tenure])
+
+	# lambda is applied IN PLACE — its setter re-derives feed/kill and refreshes
+	# the readout, so no rebuild is owed. Applied after any tenure rebuild so an
+	# explicit lambda wins over the pole tenures' forced value.
+	if config_data.has("lambda"):
+		lambda = clampf(float(config_data["lambda"]), 0.0, 1.0)
+
+
+## Accept an axis value only if it names something we actually build. A typo in
+## a map token falls back to the legacy look rather than stranding the placement
+## with a rack that has neither a fader nor a plate.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+## Model time follows elapsed visitor time, with bounded work per rendered frame.
+## Under load the clock can lag; the readout reports actual integrated time.
+func _process(delta: float) -> void:
+	if _paused or solver_fault: return
+	_frame_count += 1
+	_time_budget = minf(_time_budget + delta * float(sim_steps) * 3.0, time_step * MAX_TICKS_PER_FRAME * 2.0)
+	var ticks := 0
+	while _time_budget + 0.0000001 >= time_step and ticks < MAX_TICKS_PER_FRAME:
+		_advance_tick()
+		_time_budget = maxf(0.0, _time_budget - time_step)
+		ticks += 1
+		if solver_fault: break
+	if _frame_count % display_rate == 0:
+		_update_texture()
+
+
+# ── Build / rebuild ─────────────────────────────────────────
+
+func _build_all() -> void:
+	_apply_tenure_lambda()
+	_init_grid()
+	_build_display()
+	_build_controls()
+	_build_labels()
+	_update_reaction_params()
+	_seed_pattern()
+	_reset_comparison()
+	_preroll()
+	_update_texture()
+	preload("res://commons/ui/exhibit_control_mount.gd").refresh(self)
+
+
+## SYNCHRONOUS. A deferred rebuild that removes children first makes
+## auto-grounding measure a zero AABB and bail.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)
+			c.queue_free()
+	_owned.clear()
+	_display_quad = null
+	_controls = null
+	_title_label = null
+	_texture = null
+	_image = null
+	_frame_count = 0
+	_dt_labels.clear()
+	_study_sliders.clear()
+	_study_buttons.clear()
+	_fine_display = null
+	_fine_texture = null
+	_fine_image = null
+	_study_readout = null
+	_build_all()
+
+
+func exhibit_control_parts() -> Array[Node3D]:
+	return [_controls, get_node("ConsoleStand")]
+
+
+func _own(n: Node) -> void:
+	add_child(n)
+	_owned.append(n)
+
+
+## Only the two poles move lambda. unlocked / clamped / withheld all restore the
+## value the author set, so a rebuild back off chaos does not strand at 1.0.
+func _apply_tenure_lambda() -> void:
+	match tenure:
+		"frozen":
+			lambda = 0.0
+		"chaos":
+			lambda = 1.0
+		_:
+			lambda = _authored_lambda
+
+
+## The two ends of the parameter space, and the only tenures that move lambda.
+func _is_pole() -> bool:
+	return tenure == "frozen" or tenure == "chaos"
+
+
+func _preroll() -> void:
+	if not _is_pole(): return
+	for _i in range(int(round(PREROLL_DURATION / time_step))):
+		_advance_tick()
+
+
+func _reset_comparison() -> void:
+	model_time = 0.0
+	_time_budget = 0.0
+	solver_fault = false
+	_fine_a = _grid_a.duplicate()
+	_fine_b = _grid_b.duplicate()
+	_fine_a_next.resize(_grid_a.size())
+	_fine_b_next.resize(_grid_b.size())
+
+
+func restart() -> void:
+	_init_grid()
+	_seed_pattern()
+	_reset_comparison()
+	_update_texture()
+
+
+func new_seed() -> void:
+	seed_value += 1
+	restart()
+
+
+func toggle_step() -> void:
+	time_step = 0.15 if time_step > 0.2 else 0.3
+	restart()
+
+
+# ── Grid Init ───────────────────────────────────────────────
+
+func _init_grid() -> void:
+	var total := grid_size * grid_size
+	_grid_a = PackedFloat32Array()
+	_grid_b = PackedFloat32Array()
+	_grid_a_next = PackedFloat32Array()
+	_grid_b_next = PackedFloat32Array()
+	_grid_a.resize(total)
+	_grid_b.resize(total)
+	_grid_a_next.resize(total)
+	_grid_b_next.resize(total)
+
+	# Fill with chemical A=1, B=0
+	for i in range(total):
+		_grid_a[i] = 1.0
+		_grid_b[i] = 0.0
+
+
+func _seed_pattern() -> void:
+	# Seed a few spots of chemical B in the center region.
+	# A numbered seed lets RESTART reproduce the field and NEW SEED change it.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value
+	var center := grid_size / 2
+	var radius := grid_size / 8
+	for _s in range(12):
+		var sx := center + rng.randi_range(-radius, radius)
+		var sz := center + rng.randi_range(-radius, radius)
+		for dx in range(-2, 3):
+			for dz in range(-2, 3):
+				var x := clampi(sx + dx, 0, grid_size - 1)
+				var z := clampi(sz + dz, 0, grid_size - 1)
+				var idx := z * grid_size + x
+				_grid_b[idx] = 1.0
+				_grid_a[idx] = 0.5
+
+
+# ── Reaction-Diffusion ─────────────────────────────────────
+
+func _update_reaction_params() -> void:
+	# Map lambda to Gray-Scott feed/kill parameter space
+	# This is a coupled parameter path, not a measurement of criticality.
+	_feed_rate = lerpf(0.01, 0.08, lambda)
+	_kill_rate = lerpf(0.08, 0.03, lambda)
+	_diffusion_a = lerpf(0.8, 1.2, lambda)
+	_diffusion_b = lerpf(0.3, 0.7, lambda)
+
+
+## Normalized neighbour mean minus centre; periodic boundaries.
+## No concentration clipping: B may legitimately exceed 1 during a transient.
+## Palette clipping is separate from this state calculation.
+func _integrate(a: PackedFloat32Array, b: PackedFloat32Array, na: PackedFloat32Array, nb: PackedFloat32Array, dt: float) -> bool:
+	var gs := grid_size
+	for z in range(gs):
+		for x in range(gs):
+			var idx := z * gs + x
+			var xl := (x - 1 + gs) % gs
+			var xr := (x + 1) % gs
+			var zu := (z - 1 + gs) % gs
+			var zd := (z + 1) % gs
+			var av := a[idx]
+			var bv := b[idx]
+			var lap_a := (a[z*gs+xl] + a[z*gs+xr] + a[zu*gs+x] + a[zd*gs+x]) * 0.25 - av
+			var lap_b := (b[z*gs+xl] + b[z*gs+xr] + b[zu*gs+x] + b[zd*gs+x]) * 0.25 - bv
+			var reaction := av * bv * bv
+			na[idx] = av + (_diffusion_a * lap_a - reaction + _feed_rate * (1.0-av)) * dt
+			nb[idx] = bv + (_diffusion_b * lap_b + reaction - (_kill_rate+_feed_rate)*bv) * dt
+			if not is_finite(na[idx]) or not is_finite(nb[idx]) or na[idx] < 0.0 or nb[idx] < 0.0:
+				solver_fault = true
+				push_error("Reaction-diffusion calculation stopped: invalid concentration")
+				return false
+	return true
+
+
+func _simulate_step() -> void:
+	if not _integrate(_grid_a, _grid_b, _grid_a_next, _grid_b_next, time_step): return
+	var temp := _grid_a
+	_grid_a = _grid_a_next
+	_grid_a_next = temp
+	temp = _grid_b
+	_grid_b = _grid_b_next
+	_grid_b_next = temp
+
+
+# Retained for callers; all tenures now use this same solver.
+func _simulate_step_stable() -> void:
+	_simulate_step()
+
+
+func _advance_tick() -> void:
+	_simulate_step()
+	if solver_fault: return
+	if comparison_study:
+		for _half in range(2):
+			if not _integrate(_fine_a, _fine_b, _fine_a_next, _fine_b_next, time_step * 0.5): return
+			var temp := _fine_a
+			_fine_a = _fine_a_next
+			_fine_a_next = temp
+			temp = _fine_b
+			_fine_b = _fine_b_next
+			_fine_b_next = temp
+	model_time += time_step
+
+
+func comparison_error() -> float:
+	if not comparison_study or _fine_b.is_empty(): return 0.0
+	var total := 0.0
+	for i in range(_grid_b.size()): total += pow(_grid_b[i] - _fine_b[i], 2)
+	return sqrt(total / _grid_b.size())
+
+
+# ── Display ─────────────────────────────────────────────────
+
+func _build_display() -> void:
+	_image = Image.create(grid_size, grid_size, false, Image.FORMAT_RGB8)
+	_texture = ImageTexture.create_from_image(_image)
+
+	_display_quad = MeshInstance3D.new()
+	_display_quad.name = "ReactionDiffusionDisplay"
+
+	var quad := QuadMesh.new()
+	quad.size = Vector2(1.5, 1.5)
+	_display_quad.mesh = quad
+
+	var mat := StandardMaterial3D.new()
+	mat.albedo_texture = _texture
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	_display_quad.material_override = mat
+
+	# Tilt the quad to face the viewer
+	_display_quad.position = Vector3(0, 1.65, 0)
+	_own(_display_quad)
+
+	if comparison_study:
+		_display_quad.position = Vector3(-0.85, 1.65, 0)
+		_display_quad.rotation_degrees.x = 0
+		_fine_image = Image.create(grid_size, grid_size, false, Image.FORMAT_RGB8)
+		_fine_texture = ImageTexture.create_from_image(_fine_image)
+		_fine_display = MeshInstance3D.new()
+		_fine_display.name = "HalfStepDisplay"
+		_fine_display.mesh = quad
+		var fine_mat := mat.duplicate() as StandardMaterial3D
+		fine_mat.albedo_texture = _fine_texture
+		_fine_display.material_override = fine_mat
+		_fine_display.position = Vector3(0.85, 1.65, 0)
+		_own(_fine_display)
+		for x in [-0.85, 0.85]:
+			var dt_label := _flat_readout("StepLabel", Vector2(.60, .085), Vector3(x, 2.49, .02), Vector2i(720, 102), 64)
+			_dt_labels.append(dt_label)
+
+	# Screens are mounted objects with frames and supports, not floating quads.
+	for display in [_display_quad, _fine_display]:
+		if not is_instance_valid(display): continue
+		_box(display, "Frame", Vector3(1.54, 1.54, .035), Vector3(0, 0, -.025))
+		_box(display, "Post", Vector3(.08, .93, .08), Vector3(0, -1.185, -.06))
+
+	# Base
+	var base := MeshInstance3D.new()
+	base.name = "Base"
+	var box := BoxMesh.new()
+	box.size = Vector3(3.3 if comparison_study else 1.6, 0.06, 0.3)
+	base.mesh = box
+	var bmat := StandardMaterial3D.new()
+	bmat.albedo_color = Color(0.1, 0.1, 0.12)
+	bmat.metallic = 0.5
+	bmat.roughness = 0.4
+	base.material_override = bmat
+	base.position = Vector3(0, 0.03, 0)
+	_own(base)
+
+
+func _paint_field(field: PackedFloat32Array, target: Image) -> void:
+	for z in range(grid_size):
+		for x in range(grid_size):
+			var b_val: float = field[z * grid_size + x]
+			var col: Color
+			if b_val < 0.15:
+				col = Color(0.05, 0.15, 0.18).lerp(Color(0.1, 0.3, 0.25), b_val / 0.15)
+			elif b_val < 0.4:
+				col = Color(0.1, 0.3, 0.25).lerp(Color(0.7, 0.55, 0.2), (b_val - 0.15) / 0.25)
+			else:
+				col = Color(0.7, 0.55, 0.2).lerp(Color(0.95, 0.9, 0.8), clampf((b_val-0.4)/0.6, 0.0, 1.0))
+			target.set_pixel(x, z, col)
+
+
+func _update_texture() -> void:
+	if _image == null or _grid_b.is_empty(): return
+	_paint_field(_grid_b, _image)
+	_texture.update(_image)
+	if comparison_study and _fine_image != null and not _fine_b.is_empty():
+		_paint_field(_fine_b, _fine_image)
+		_fine_texture.update(_fine_image)
+		_set_flat_text(_dt_labels[0], "DT %.3f" % time_step)
+		_set_flat_text(_dt_labels[1], "DT %.3f" % (time_step * 0.5))
+	_update_regime_label()
+
+
+# ── Controls ────────────────────────────────────────────────
+
+func _build_controls() -> void:
+	_controls = preload("res://commons/ui/physical_parameter_console.gd").new()
+	_controls.name = "Controls"
+	_controls.title = "SAME START / SAME TIME" if comparison_study else "PATTERN PARAMETERS"
+	var access := "open" if tenure == "unlocked" else ("absent" if tenure == "withheld" else "held")
+	_controls.parameters.assign([
+		{"label": "LAMBDA", "value": lambda, "continuous": true, "access": access},
+		{"label": "SIM SPEED", "value": float(sim_steps - 1) / 7.0, "continuous": false, "steps": 8},
+	])
+	_controls.actions = PackedStringArray(["RESTART", "NEW SEED", "DT .3 / .15", "HOLD / RUN"] if comparison_study else ["RESTART", "NEW SEED"])
+	_controls.position = Vector3(0, .88, 1.0)
+	_controls.rotation_degrees.x = -55
+	_own(_controls)
+	_controls.parameter_changed.connect(func(index: int, value: float):
+		if index == 0 and tenure == "unlocked": lambda = value
+		elif index == 1: sim_steps = roundi(value * 7.0) + 1
+	)
+	var callbacks: Array[Callable] = [restart, new_seed, toggle_step, _toggle_pause]
+	_controls.action_pressed.connect(func(index: int): callbacks[index].call())
+	_study_sliders = _controls.sliders
+	_study_buttons = _controls.buttons
+	_study_readout = _controls._readout.label
+	var stand := Node3D.new()
+	stand.name = "ConsoleStand"
+	stand.position.z = 1.0
+	_own(stand)
+	_box(stand, "Stem", Vector3(.10, .80, .10), Vector3(0, .42, -.05))
+	_box(stand, "Foot", Vector3(.54, .045, .42), Vector3(0, .0225, -.05))
+	_update_regime_label()
+
+
+func _toggle_pause() -> void:
+	_paused = not _paused
+	_update_regime_label()
+
+
+func _build_labels() -> void:
+	if comparison_study: return
+	# Retain the deliberate contradiction: CLAMPED still advertises UNLOCKED.
+	var title := "PATTERN — WITHHELD" if tenure == "withheld" else "PATTERN — UNLOCKED"
+	var sub := "The slider the map withheld. Not fitted here." if tenure == "withheld" else "The slider the map withheld. Now it is yours."
+	var title_plate := _flat_readout("Title", Vector2(1.8, .13), Vector3(0, 2.69, .02), Vector2i(1080, 78), 64)
+	_title_label = title_plate.screen
+	_set_flat_text(title_plate, title)
+	var subtitle := _flat_readout("Subtitle", Vector2(1.8, .09), Vector3(0, 2.55, .02), Vector2i(1440, 72), 47)
+	_set_flat_text(subtitle, sub)
+
+
+func _flat_readout(node_name: String, size: Vector2, at: Vector3, pixels: Vector2i, font_size: int) -> Dictionary:
+	var holder := Node3D.new()
+	holder.name = node_name
+	holder.position = at
+	_own(holder)
+	var surface := ValueSurface.build(holder, size, Vector3.ZERO)
+	surface.viewport.size = pixels
+	surface.label.size = Vector2(pixels)
+	surface.viewport.get_child(0).size = Vector2(pixels)
+	surface.label.add_theme_font_size_override("font_size", font_size)
+	_box(holder, "Bezel", Vector3(size.x + .024, size.y + .024, .025), Vector3(0, 0, -.017))
+	return surface
+
+
+func _set_flat_text(surface: Dictionary, text: String) -> void:
+	if surface.label.text == text: return
+	surface.label.text = text
+	surface.viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+
+
+func _box(parent: Node3D, node_name: String, size: Vector3, at: Vector3) -> void:
+	var mesh := MeshInstance3D.new()
+	mesh.name = node_name
+	mesh.mesh = BoxMesh.new()
+	mesh.mesh.size = size
+	mesh.position = at
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(.16, .19, .21)
+	mat.roughness = .72
+	mesh.material_override = mat
+	parent.add_child(mesh)
+
+
+func _update_regime_label() -> void:
+	if not is_instance_valid(_controls): return
+	_controls.set_parameter(0, lambda)
+	_controls.set_parameter(1, float(sim_steps - 1) / 7.0)
+	var state := "FAULT" if solver_fault else ("HOLD" if _paused else "RUN")
+	var text := "%s | SPEED %d | %s\nt %.1f | seed %d | DT %.3f" % [_lambda_line(), sim_steps, state, model_time, seed_value - SEED_RNG, time_step]
+	if comparison_study:
+		text += "\nB difference %.5f" % comparison_error()
+	else:
+		text += "\nLAMBDA follows one authored parameter route"
+	_controls.set_reading(text)
+	if comparison_study:
+		_controls.set_action_selected(2, time_step < .2)
+		_controls.set_action_selected(3, _paused)
+
+
+func _lambda_line() -> String:
+	var line: String = "lambda = %.2f" % lambda
+	match tenure:
+		"clamped":
+			return line + "  HELD"
+		"withheld":
+			return line + "  NO FADER"
+		"frozen", "chaos":
+			return line + "  AT STOP"
+	return line

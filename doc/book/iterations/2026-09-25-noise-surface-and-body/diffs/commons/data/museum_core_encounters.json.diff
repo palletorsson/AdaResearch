@@ -1,0 +1,36 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -7,10 +7,10 @@
+     "status": "source_checked_draft",
+     "sequence": "noise",
+     "text_path": "commons/maps/Noise_6_Wall/final.md",
+-    "text_sha256": "39ec8eb5cd5afdab59ba788fe29ad3400ce29a5f25b3a7e2873b28ef1d849029",
++    "text_sha256": "c6d38115b88b3a935dc8f5affbc530c58037a0b4009128402819990434a93314",
+     "map_sha256": "2e0b4e845e66fd2a5ce44319544ca268af800d84e06f5b40cabfa9fb1f9b1cad",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-noise-wall-inside/index.html"
++    "local_review": "doc/book/iterations/2026-09-25-noise-surface-and-body/DECISIONS.md"
+   },
+   "Noise_Inside_Noise": {
+     "primary_tokens": [
+@@ -23,7 +23,7 @@
+     "text_sha256": "9b013ef1b961316b3ee74c12e6f9c2d3e3d315f48efbcd47e176140bb625730e",
+     "map_sha256": "f1a082ed07da35e4f417f22d05443dc8bbb33fe08b7ccc86f98c9245fbbfddcf",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-borrowed-address/index.html"
++    "local_review": "doc/book/iterations/2026-09-25-noise-surface-and-body/DECISIONS.md"
+   },
+   "Noise_Space_10": {
+     "primary_tokens": [
+@@ -33,9 +33,9 @@
+     "status": "source_checked_draft",
+     "sequence": "noise",
+     "text_path": "commons/maps/Noise_Space_10/final.md",
+-    "text_sha256": "864867f34adcc2470dc25a4ffe8e1c421fcb9d89b96ede2458bef88d8a184d85",
++    "text_sha256": "d2e0d17f183e85df1c957890ea7f8532e76d3cc022ab5beacef0e537783b9b75",
+     "map_sha256": "0c3d80cd8890d2f4335cdd5c9ba4c77ec75b9a4528646e3753a7c07c188b335e",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-25-noise-small-world/index.html"
++    "local_review": "doc/book/iterations/2026-09-25-noise-surface-and-body/DECISIONS.md"
+   }
+ }

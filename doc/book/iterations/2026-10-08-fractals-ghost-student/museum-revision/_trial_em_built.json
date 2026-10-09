@@ -1,0 +1,1566 @@
+{
+	"_readme": "The AS-BUILT plan: what the assembler actually made of each segment this run — every cell's role, every body's final world pose and inventory number, every card, courts, rooms, the gate, the mode. Written as each segment finishes. Read this instead of re-deriving the floor plan; diff two runs (vr vs desktop) to prove parity.",
+	"at": "2026-10-08 13:43:57",
+	"boot_ms": {
+		"autoloads": 2431,
+		"bake_parsed": 1071,
+		"boot_tail": 3715,
+		"engine_pak": 737,
+		"engine_to_ready": 4863,
+		"entry": 1,
+		"first_frame": 3988,
+		"first_physics": 2547,
+		"grid_warm": 1640,
+		"guests_loaded": 1727,
+		"loading_shell": 38,
+		"modules_loaded": 315,
+		"modules_pool": 395,
+		"museum_data": 395,
+		"plan_parsed": 1036,
+		"pool_done": 948,
+		"scene_chain": 1695,
+		"segment0_built": 3715,
+		"world_ready": 2547
+	},
+	"plan": "res://doc/book/iterations/2026-10-08-fractals-ghost-student/museum-revision/plan.json",
+	"schema": "adaresearch.em_built.v1",
+	"segments": [
+		{
+			"bake_stale": false,
+			"bodies": [
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:window",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-3.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:view",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						7.5,
+						1.7,
+						-2.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:counter",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						11.0,
+						1.6,
+						-2.94
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:extinguisher",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						1.14,
+						0.0,
+						-1.4
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": -90.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:elevator",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.94,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 20.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:pallet",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						15.1,
+						0.0,
+						-1.8
+					]
+				},
+				{
+					"inv": "",
+					"kind": "furniture",
+					"rot": 0.0,
+					"scale": 1.0,
+					"tile_cell": [],
+					"token": "lobby:point_zero",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						0.0,
+						0.0,
+						-4.0
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						2,
+						1
+					],
+					"token": "fractal_procedure_gallery",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						2.5,
+						0.0,
+						1.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						5,
+						6
+					],
+					"token": "cantor_set",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						5.5,
+						0.0,
+						6.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 0.42,
+					"tile_cell": [
+						13,
+						6
+					],
+					"token": "recursive_tree",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						13.5,
+						0.0,
+						6.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 1.0,
+					"tile_cell": [
+						16,
+						14
+					],
+					"token": "fractal_recursion_1",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						16.5,
+						1.4,
+						14.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 0.09,
+					"tile_cell": [
+						16,
+						16
+					],
+					"token": "koch_curve",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						16.5,
+						1.6,
+						16.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.3,
+					"tile_cell": [
+						4,
+						17
+					],
+					"token": "sierpinski_triangle",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						1.2,
+						17.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.24,
+					"tile_cell": [
+						8,
+						22
+					],
+					"token": "fractal_clouds",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						8.5,
+						3.4,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 90.0,
+					"scale": 1.0,
+					"tile_cell": [
+						12,
+						22
+					],
+					"token": "dark_sphere",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						12.5,
+						1.0,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 180.0,
+					"scale": 0.18,
+					"tile_cell": [
+						14,
+						22
+					],
+					"token": "strange_attractors",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						14.5,
+						1.2,
+						22.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.65,
+					"tile_cell": [
+						4,
+						27
+					],
+					"token": "romanesco",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						4.5,
+						0.0,
+						27.5
+					]
+				},
+				{
+					"inv": "",
+					"kind": "artifact",
+					"rot": 0.0,
+					"scale": 0.4,
+					"tile_cell": [
+						10,
+						27
+					],
+					"token": "fibonacci_sequences",
+					"walk_kind": "",
+					"walk_space": "",
+					"world": [
+						10.5,
+						1.1,
+						27.5
+					]
+				}
+			],
+			"cards": [
+				{
+					"backing_cell": [
+						2,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						11
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 01",
+					"index": 1,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "01\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.3,
+						1.0,
+						12.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						13
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 02",
+					"index": 2,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "02\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						13.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						32
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						31
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 03",
+					"index": 3,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "03\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.6,
+						1.1,
+						32.0
+					]
+				},
+				{
+					"backing_cell": [
+						2,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						2,
+						1
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 04",
+					"index": 4,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "04\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						2.2,
+						1.2,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						2
+					],
+					"chapter": "fractals",
+					"facing_deg": 90.0,
+					"id": "fractals · fractal synthesis · 05",
+					"index": 5,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "05\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						2.2
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						2
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						2
+					],
+					"chapter": "fractals",
+					"facing_deg": -90.0,
+					"id": "fractals · fractal synthesis · 06",
+					"index": 6,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "06\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.0,
+						2.3
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						11
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 07",
+					"index": 7,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "07\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.6,
+						1.1,
+						12.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						13
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 08",
+					"index": 8,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "08\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						13.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						32
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						31
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 09",
+					"index": 9,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "09\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.2,
+						1.2,
+						32.0
+					]
+				},
+				{
+					"backing_cell": [
+						4,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						4,
+						1
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 10",
+					"index": 10,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "10\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						4.3,
+						1.0,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						4
+					],
+					"chapter": "fractals",
+					"facing_deg": 90.0,
+					"id": "fractals · fractal synthesis · 11",
+					"index": 11,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "11\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.0,
+						4.3
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						4
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						4
+					],
+					"chapter": "fractals",
+					"facing_deg": -90.0,
+					"id": "fractals · fractal synthesis · 12",
+					"index": 12,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "12\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.1,
+						4.6
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						11
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 13",
+					"index": 13,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "13\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.2,
+						1.2,
+						12.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						13
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 14",
+					"index": 14,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "14\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						13.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						32
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						31
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 15",
+					"index": 15,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "15\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.3,
+						1.0,
+						32.0
+					]
+				},
+				{
+					"backing_cell": [
+						6,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						6,
+						1
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 16",
+					"index": 16,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "16\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						6.6,
+						1.1,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						6
+					],
+					"chapter": "fractals",
+					"facing_deg": 90.0,
+					"id": "fractals · fractal synthesis · 17",
+					"index": 17,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "17\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.1,
+						6.6
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						6
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						6
+					],
+					"chapter": "fractals",
+					"facing_deg": -90.0,
+					"id": "fractals · fractal synthesis · 18",
+					"index": 18,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "18\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.2,
+						6.2
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						11
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 19",
+					"index": 19,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "19\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.2,
+						1.2,
+						12.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						12
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						13
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 20",
+					"index": 20,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "20\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.6,
+						1.1,
+						13.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						32
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						31
+					],
+					"chapter": "fractals",
+					"facing_deg": 180.0,
+					"id": "fractals · fractal synthesis · 21",
+					"index": 21,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						0,
+						-1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "21\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.3,
+						1.0,
+						32.0
+					]
+				},
+				{
+					"backing_cell": [
+						12,
+						0
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						12,
+						1
+					],
+					"chapter": "fractals",
+					"facing_deg": 0.0,
+					"id": "fractals · fractal synthesis · 22",
+					"index": 22,
+					"mount": {
+						"format": "landscape",
+						"h": 0.86,
+						"w": 1.32
+					},
+					"normal": [
+						0,
+						1
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "22\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						12.6,
+						1.1,
+						1.0
+					]
+				},
+				{
+					"backing_cell": [
+						0,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						1,
+						8
+					],
+					"chapter": "fractals",
+					"facing_deg": 90.0,
+					"id": "fractals · fractal synthesis · 23",
+					"index": 23,
+					"mount": {
+						"format": "square",
+						"h": 0.58,
+						"w": 0.58
+					},
+					"normal": [
+						1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "23\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						1.0,
+						1.2,
+						8.2
+					]
+				},
+				{
+					"backing_cell": [
+						18,
+						8
+					],
+					"card": {
+						"d": 0.006,
+						"drop": 0.1,
+						"h": 0.09,
+						"proud": 0.003,
+						"w": 0.14
+					},
+					"cell": [
+						17,
+						8
+					],
+					"chapter": "fractals",
+					"facing_deg": -90.0,
+					"id": "fractals · fractal synthesis · 24",
+					"index": 24,
+					"mount": {
+						"format": "portrait",
+						"h": 0.98,
+						"w": 0.72
+					},
+					"normal": [
+						-1,
+						0
+					],
+					"pearl": "fractal synthesis",
+					"segment": 0,
+					"text": "24\nfractals · fractal synthesis",
+					"type": {
+						"field_h": 0.0780000016093254,
+						"field_w": 0.128000006079674,
+						"font_size": 40,
+						"h": 0.0286761708557606,
+						"pixel_size": 0.000260692464358452,
+						"w": 0.128000006079674
+					},
+					"world": [
+						18.0,
+						1.0,
+						8.3
+					]
+				}
+			],
+			"cell_x0": -1,
+			"cells": [
+				"pp.#############################",
+				"................p..#############",
+				"##..............p..#############",
+				"##.................#############",
+				"#########...####################",
+				"##sss..............#############",
+				"##.................#############",
+				"##.................#############",
+				"##..........sssss..#############",
+				"##..........sssss..#############",
+				"##sssssssss.sssss..#############",
+				"##..........sssss..#############",
+				"##..........sssss..#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"#########...####################",
+				"##.................#############",
+				"##...............s.#############",
+				"##.................#############",
+				"##.............ssss#############",
+				"##..sss............#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.......s...s.s...#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##...s.....s.......#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"##.................#############",
+				"#########...####################"
+			],
+			"chapter": "",
+			"court_depth": 0,
+			"courts": [],
+			"forecourt": 0,
+			"gate": {
+				"sealed": false
+			},
+			"h": 33,
+			"legend": {
+				"#": "not floor",
+				".": "floor",
+				"b": "bench",
+				"p": "prop",
+				"s": "sealed by a body",
+				"x": "erased"
+			},
+			"mode": "desktop",
+			"museum": "pompidou-plateau-libre",
+			"pearl": "fractal synthesis",
+			"pearl_index": -1,
+			"porch_depth": 0,
+			"refused": [],
+			"replay": true,
+			"seals": {
+				"1,1": "fractal_procedure_gallery",
+				"1,6": "cantor_set",
+				"10,27": "fibonacci_sequences",
+				"11,4": "recursive_tree",
+				"11,5": "recursive_tree",
+				"11,6": "recursive_tree",
+				"11,7": "recursive_tree",
+				"11,8": "recursive_tree",
+				"12,22": "dark_sphere",
+				"12,4": "recursive_tree",
+				"12,5": "recursive_tree",
+				"12,6": "recursive_tree",
+				"12,7": "recursive_tree",
+				"12,8": "recursive_tree",
+				"13,4": "recursive_tree",
+				"13,5": "recursive_tree",
+				"13,6": "recursive_tree",
+				"13,7": "recursive_tree",
+				"13,8": "recursive_tree",
+				"14,16": "koch_curve",
+				"14,22": "strange_attractors",
+				"14,4": "recursive_tree",
+				"14,5": "recursive_tree",
+				"14,6": "recursive_tree",
+				"14,7": "recursive_tree",
+				"14,8": "recursive_tree",
+				"15,16": "koch_curve",
+				"15,4": "recursive_tree",
+				"15,5": "recursive_tree",
+				"15,6": "recursive_tree",
+				"15,7": "recursive_tree",
+				"15,8": "recursive_tree",
+				"16,14": "fractal_recursion_1",
+				"16,16": "koch_curve",
+				"17,16": "koch_curve",
+				"2,1": "fractal_procedure_gallery",
+				"2,6": "cantor_set",
+				"3,1": "fractal_procedure_gallery",
+				"3,17": "sierpinski_triangle",
+				"3,6": "cantor_set",
+				"4,17": "sierpinski_triangle",
+				"4,27": "romanesco",
+				"4,6": "cantor_set",
+				"5,17": "sierpinski_triangle",
+				"5,6": "cantor_set",
+				"6,6": "cantor_set",
+				"7,6": "cantor_set",
+				"8,22": "fractal_clouds",
+				"8,6": "cantor_set",
+				"9,6": "cantor_set"
+			},
+			"segment": 0,
+			"severed": [],
+			"side_rooms": [],
+			"unbaked": 0,
+			"vestibule": 4,
+			"w": 19,
+			"z0": -4,
+			"z1": 33
+		}
+	]
+}

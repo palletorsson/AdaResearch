@@ -1,0 +1,1928 @@
+{
+ "sweep": "bottleneck_cut",
+ "peak_changed_pct": 32.619,
+ "subject_pct": 53.54,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "changed_px": 30102,
+   "changed_pct": 5.212
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "changed_px": 5099,
+   "changed_pct": 0.883
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "changed_px": 163053,
+   "changed_pct": 28.229
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "changed_px": 30629,
+   "changed_pct": 5.303
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "changed_px": 29766,
+   "changed_pct": 5.153
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "changed_px": 31345,
+   "changed_pct": 5.427
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 151749,
+   "changed_pct": 26.272
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 17062,
+   "changed_pct": 2.954
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 17062,
+   "changed_pct": 2.954
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 23167,
+   "changed_pct": 4.011
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 168498,
+   "changed_pct": 29.172
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 59482,
+   "changed_pct": 10.298
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 62109,
+   "changed_pct": 10.753
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 59482,
+   "changed_pct": 10.298
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 160756,
+   "changed_pct": 27.832
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "changed_px": 32526,
+   "changed_pct": 5.631
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "changed_px": 180986,
+   "changed_pct": 31.334
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "changed_px": 27690,
+   "changed_pct": 4.794
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "changed_px": 26828,
+   "changed_pct": 4.645
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "changed_px": 28327,
+   "changed_pct": 4.904
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 146751,
+   "changed_pct": 25.407
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 32557,
+   "changed_pct": 5.637
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 32557,
+   "changed_pct": 5.637
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 36458,
+   "changed_pct": 6.312
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 182133,
+   "changed_pct": 31.533
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 61320,
+   "changed_pct": 10.616
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 63552,
+   "changed_pct": 11.003
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 61320,
+   "changed_pct": 10.616
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 156348,
+   "changed_pct": 27.069
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "changed_px": 164642,
+   "changed_pct": 28.505
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "changed_px": 33254,
+   "changed_pct": 5.757
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "changed_px": 32391,
+   "changed_pct": 5.608
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "changed_px": 32500,
+   "changed_pct": 5.627
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 151743,
+   "changed_pct": 26.271
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 21667,
+   "changed_pct": 3.751
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 21667,
+   "changed_pct": 3.751
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 23025,
+   "changed_pct": 3.986
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 170832,
+   "changed_pct": 29.576
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 59724,
+   "changed_pct": 10.34
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 62427,
+   "changed_pct": 10.808
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 59724,
+   "changed_pct": 10.34
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 160769,
+   "changed_pct": 27.834
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "changed_px": 178301,
+   "changed_pct": 30.869
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "changed_px": 177438,
+   "changed_pct": 30.72
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "changed_px": 178300,
+   "changed_pct": 30.869
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 61038,
+   "changed_pct": 10.568
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 168994,
+   "changed_pct": 29.258
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 168994,
+   "changed_pct": 29.258
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 171040,
+   "changed_pct": 29.612
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 20804,
+   "changed_pct": 3.602
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 186530,
+   "changed_pct": 32.294
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 187834,
+   "changed_pct": 32.52
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 186530,
+   "changed_pct": 32.294
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "mixed",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 85711,
+   "changed_pct": 14.839
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "changed_px": 1795,
+   "changed_pct": 0.311
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "changed_px": 1253,
+   "changed_pct": 0.217
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 130919,
+   "changed_pct": 22.666
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 32348,
+   "changed_pct": 5.6
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 32348,
+   "changed_pct": 5.6
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 36474,
+   "changed_pct": 6.315
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 178407,
+   "changed_pct": 30.888
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 41506,
+   "changed_pct": 7.186
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 43669,
+   "changed_pct": 7.56
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 41506,
+   "changed_pct": 7.186
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 145386,
+   "changed_pct": 25.171
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "changed_px": 2959,
+   "changed_pct": 0.512
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 132442,
+   "changed_pct": 22.93
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 31487,
+   "changed_pct": 5.451
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 31487,
+   "changed_pct": 5.451
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 35613,
+   "changed_pct": 6.166
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 177546,
+   "changed_pct": 30.739
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 42906,
+   "changed_pct": 7.428
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 45069,
+   "changed_pct": 7.803
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 42906,
+   "changed_pct": 7.428
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 146582,
+   "changed_pct": 25.378
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "changed_px": 131153,
+   "changed_pct": 22.707
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 33064,
+   "changed_pct": 5.724
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 33064,
+   "changed_pct": 5.724
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 36464,
+   "changed_pct": 6.313
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 178680,
+   "changed_pct": 30.935
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 41688,
+   "changed_pct": 7.217
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 43932,
+   "changed_pct": 7.606
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 41688,
+   "changed_pct": 7.217
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 145390,
+   "changed_pct": 25.171
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "changed_px": 152702,
+   "changed_pct": 26.437
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 152702,
+   "changed_pct": 26.437
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 152890,
+   "changed_pct": 26.47
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 62278,
+   "changed_pct": 10.782
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 145371,
+   "changed_pct": 25.168
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 146967,
+   "changed_pct": 25.444
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 145371,
+   "changed_pct": 25.168
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "throat",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 41716,
+   "changed_pct": 7.222
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 13617,
+   "changed_pct": 2.358
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 159601,
+   "changed_pct": 27.632
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 65975,
+   "changed_pct": 11.422
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 68005,
+   "changed_pct": 11.774
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 65975,
+   "changed_pct": 11.422
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 163380,
+   "changed_pct": 28.286
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "changed_px": 13617,
+   "changed_pct": 2.358
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 159601,
+   "changed_pct": 27.632
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 65975,
+   "changed_pct": 11.422
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 68005,
+   "changed_pct": 11.774
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 65975,
+   "changed_pct": 11.422
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 163380,
+   "changed_pct": 28.286
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "changed_px": 169272,
+   "changed_pct": 29.306
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 66719,
+   "changed_pct": 11.551
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 68938,
+   "changed_pct": 11.935
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 66719,
+   "changed_pct": 11.551
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 163407,
+   "changed_pct": 28.291
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "changed_px": 187421,
+   "changed_pct": 32.448
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 188407,
+   "changed_pct": 32.619
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 187421,
+   "changed_pct": 32.448
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "braid",
+    "against": "residual"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 91141,
+   "changed_pct": 15.779
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "changed_px": 5457,
+   "changed_pct": 0.945
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "capacity"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 129113,
+   "changed_pct": 22.353
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "changed_px": 5457,
+   "changed_pct": 0.945
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "edges"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 131512,
+   "changed_pct": 22.769
+  },
+  {
+   "a": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "flow"
+   },
+   "b": {
+    "karger_seed": 20260818,
+    "karger_runs": 8,
+    "bottleneck": "severed",
+    "against": "residual"
+   },
+   "changed_px": 129113,
+   "changed_pct": 22.353
+  }
+ ]
+}

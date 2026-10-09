@@ -1,0 +1,150 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "geometry court and capsule present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: court",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: capsule",
+      "passed": true
+    },
+    {
+      "name": "suspended point installed in the real hall",
+      "passed": true
+    },
+    {
+      "name": "point starts within seated and standing reach",
+      "passed": true
+    },
+    {
+      "name": "paired direction studies have the same actual mesh",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hanging-point",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rings-and-segments",
+      "passed": true
+    },
+    {
+      "name": "unheld sphere does not simplify",
+      "passed": true
+    },
+    {
+      "name": "unheld trigger cannot fire",
+      "passed": true
+    },
+    {
+      "name": "XRTools grab moves the actual point",
+      "passed": true
+    },
+    {
+      "name": "suspension releases when held",
+      "passed": true
+    },
+    {
+      "name": "two held steps reduce each count by two",
+      "passed": true
+    },
+    {
+      "name": "radius and physical boundary do not shrink",
+      "passed": true
+    },
+    {
+      "name": "held trigger creates one form",
+      "passed": true
+    },
+    {
+      "name": "shot has an independent mesh with the selected counts",
+      "passed": true
+    },
+    {
+      "name": "shot starts clear of the held point",
+      "passed": true
+    },
+    {
+      "name": "shot travels along its aim",
+      "passed": true
+    },
+    {
+      "name": "minimum remains valid: one ring, four segments",
+      "passed": true
+    },
+    {
+      "name": "readout names the current mesh",
+      "passed": true
+    },
+    {
+      "name": "later simplification does not rewrite a launched form",
+      "passed": true
+    },
+    {
+      "name": "rapid duplicate trigger respects cooldown",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: held-low-resolution",
+      "passed": true
+    },
+    {
+      "name": "fired form reaches an actual collider and delivers primitives mode",
+      "passed": true
+    },
+    {
+      "name": "at most eight active forms",
+      "passed": true
+    },
+    {
+      "name": "release pauses resolution",
+      "passed": true
+    },
+    {
+      "name": "released point returns to suspension",
+      "passed": true
+    },
+    {
+      "name": "return restores the smooth starting counts",
+      "passed": true
+    },
+    {
+      "name": "desktop holding uses the same resolution rule",
+      "passed": true
+    },
+    {
+      "name": "desktop drop also returns and resets",
+      "passed": true
+    },
+    {
+      "name": "all emitted forms expire",
+      "passed": true
+    },
+    {
+      "name": "body-width route remains beside the point -1.5",
+      "passed": true
+    },
+    {
+      "name": "body-width route remains beside the point 1.5",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "station_position": [
+      9.5,
+      0.0,
+      35.5
+    ]
+  },
+  "passed": true,
+  "scope": "Real Endless Museum scene. Controlled input and native rendering; headset acceptance remains open."
+}

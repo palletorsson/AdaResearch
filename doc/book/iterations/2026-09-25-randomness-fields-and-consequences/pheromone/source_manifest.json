@@ -1,0 +1,31 @@
+{
+  "room": "Random_Pheromone",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Pheromone/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Pheromone/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "d13a57b95217555b48526443477a897e449b785da8a9cd3fe9961f1f19d3ba81",
+    "commons/maps/Random_Pheromone/map_data.json": "2283ff15d3743a64c70a477b58f524f40f6d74dd52ac635a38e0405958f91901",
+    "doc/book/iterations/2026-09-25-randomness-fields-and-consequences/museum-probe.gd": "b85e708449eb27e92d13514f2b58eca727359de798cfe2df1c3de25cdd2e3f79",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/Random_Pheromone/control.json": "16381c4f1220eed41196d79e6727c452b4bc4f1a93bf722efbc94d000659565f",
+    "ada_run/encounter_pilot/Random_Pheromone/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Random_Pheromone/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Random_Pheromone/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a",
+    "commons/artifacts/registry/randomness.json": "a020472029479df1e99409a110e9920dc871632b38db997dddf23d1c6dcbf339",
+    "algorithms/randomness/pheromone_terrain/pheromone_terrain.tscn": "7e4fad31cda8fcad4aca0a444ad6cc97b6755092557b23e32d54cfb6e79a62d2",
+    "algorithms/randomness/pheromone_terrain/pheromone_terrain.gd": "27ec81968155a3369bbde5eddebc9551e248bfe39cd8ff44c52675354ea49727"
+  }
+}

@@ -1,0 +1,27 @@
+# QFEP_Introduction
+
+Authored dimensions: {"width": 13, "depth": 12, "max_height": 3}
+
+![Source plan](QFEP_Introduction.svg)
+
+Source plan only: columns=x, rows=z. Red dots are manuscript/role primary anchors; blue dots are other placed objects; green crosses are utilities. Numbers refer to A rows below. Dark blue is source 0, cream lower structure, grey source wall-height threshold, ochre platforms. Museum overrides can change the built interpretation. Dots show anchors, not footprints or a proven route.
+
+Map: [commons/maps/QFEP_Introduction/map_data.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/QFEP_Introduction/map_data.json)
+
+Text: [commons/maps/QFEP_Introduction/final.md](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/QFEP_Introduction/final.md)
+
+| Instance | x,z | Raw token | Recorded role | Registry / scene |
+|---|---|---|---|---|
+| A1 | 2,1 | `tt:180:qfep_introduction:180:0.5` | secondary | [commons/artifacts/registry/commons_artifacts.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/commons_artifacts.json) → [commons/context/clipboard/codeDisplay.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/context/clipboard/codeDisplay.tscn) |
+| A2 | 2,2 | `qfep_balance_workbench:0:0` | primary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn) |
+| A3 | 4,2 | `grab_sphere_F:0:0.3` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/primitives/point/grab_sphere_point_with_color.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/grab_sphere_point_with_color.tscn) |
+| A4 | 5,2 | `lambda_slider:0:0.5` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/lambda_slider.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/lambda_slider.tscn) |
+| A5 | 8,2 | `science_screen:180:1.5#mode:wave` | secondary | [commons/artifacts/registry/shaders.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/shaders.json) → [commons/artifacts/science_screen/science_screen.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/science_screen/science_screen.tscn) |
+| A6 | 2,3 | `phi_slider:0:0.5` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/phi_slider.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/phi_slider.tscn) |
+| A7 | 1,4 | `synthesis_stand#subject:tt#mode:hero` | secondary | [commons/artifacts/registry/synthesis.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/synthesis.json) → [commons/artifacts/synthesis/synthesis_stand.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/synthesis/synthesis_stand.tscn) |
+| A8 | 5,5 | `qfep_formula_3d:0:1.5` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn) |
+| A9 | 8,7 | `orange_and_apples:270` | unassigned | [commons/artifacts/registry/orange_and_apples.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/orange_and_apples.json) → [commons/artifacts/orange_and_apples/orange_and_apples.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/orange_and_apples/orange_and_apples.tscn) |
+| A10 | 2,9 | `grab_sphere_E:0:0.3` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/primitives/point/grab_sphere_point_with_color.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/grab_sphere_point_with_color.tscn) |
+| A11 | 3,9 | `grab_sphere_lambda:0:0.3` | secondary | [commons/artifacts/registry/qfep.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/qfep.json) → [commons/primitives/point/grab_sphere_point_with_color.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/primitives/point/grab_sphere_point_with_color.tscn) |
+
+Utilities are listed with exact coordinates and raw tokens in space.json. Read map_info.museum and utility_definitions before inferring pits, entrances, movement or collision.

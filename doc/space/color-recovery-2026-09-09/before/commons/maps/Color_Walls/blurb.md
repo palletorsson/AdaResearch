@@ -1,0 +1,1 @@
+The hallway dissolves into rainbow. Color transitions seamlessly from hue to hue, boundary to boundary, without the discrete steps of individual emitters. This is the gradient - color as continuous field, as smooth transition, as the space between names. Walk through the unnamed territory where red becomes orange becomes yellow, and color categories dissolve into flow.

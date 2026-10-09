@@ -1,0 +1,20 @@
+--- before/commons/artifacts/registry/boolean_colour_spaces.json
++++ commons/artifacts/registry/boolean_colour_spaces.json
+@@ -5,7 +5,7 @@
+       "name": "Boolean Colour Chamber",
+       "scene": "res://commons/artifacts/boolean_colour_chamber/boolean_colour_chamber.tscn",
+       "category": "boolean_surfaces",
+-      "description": "Three architectural CSG recipes with a level passage and independent pearl, amber, chrome and chalk finishes. Pointer-selectable materials; optional slow surface drift; geometry remains static.",
++      "description": "Six architectural CSG recipes with supported passages and independent pearl, amber, chrome and chalk finishes. Pointer-selectable materials; optional slow surface drift; geometry remains static.",
+       "include_in_map_data": true,
+       "map_ready": true,
+       "auto_ground": false,
+@@ -28,7 +28,7 @@
+         "cut"
+       ],
+       "parameters": {
+-        "mode": "path, lens or shell; configure before entry",
++        "mode": "path, lens, shell, ring, cross or fold; configure before entry",
+         "surface": "0 pearl, 1 amber, 2 chrome, 3 chalk"
+       },
+       "interactions": [

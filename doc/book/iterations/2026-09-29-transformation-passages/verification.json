@@ -1,0 +1,64 @@
+{
+  "scope": "Native Godot 4.6, simulated tracked headset, actual XRTools physics body. No physical headset or Android build validation.",
+  "results": [
+    {
+      "hall": "Trans_Pre",
+      "next": "Trans_Introduction",
+      "passed": true,
+      "complete_player_scene": true,
+      "isolated_roaming_foes": 0
+    },
+    {
+      "hall": "Trans_Introduction",
+      "next": "Trans_Translation",
+      "passed": true,
+      "complete_player_scene": true,
+      "isolated_roaming_foes": 3
+    },
+    {
+      "hall": "Trans_Translation",
+      "next": "Trans_Rotation",
+      "passed": true,
+      "complete_player_scene": false,
+      "isolated_roaming_foes": 0
+    },
+    {
+      "hall": "Trans_Rotation",
+      "next": "Trans_Scale",
+      "passed": true,
+      "complete_player_scene": false,
+      "isolated_roaming_foes": 0
+    },
+    {
+      "hall": "Trans_Scale",
+      "next": "Trans_Body",
+      "passed": true,
+      "complete_player_scene": false,
+      "isolated_roaming_foes": 0
+    },
+    {
+      "hall": "Trans_Body",
+      "next": "Trans_Pit",
+      "passed": true,
+      "complete_player_scene": false,
+      "isolated_roaming_foes": 0
+    },
+    {
+      "hall": "Trans_Pit",
+      "next": "Biome_Ladder_Transformation",
+      "passed": true,
+      "complete_player_scene": false,
+      "isolated_roaming_foes": 0
+    }
+  ],
+  "source_sha256": {
+    "commons/scenes/em/em_portal_stream.gd": "32d5ea6ff499cc0971761cf840585abc5b29e6eb31b2a5093389f212015d50fc",
+    "commons/scenes/em/em_simulation_stage.gd": "63292b4099b38426c8fc1b80ddea769ea74220b141cd28c5d15d43d39dfaf6e7",
+    "commons/scenes/endless_museum.gd": "7f63e8e49a0cc8277da929620bfedafd6e764408d40b313e8c28ef6b37d4bcd6",
+    "tools/probes/hall_portal_navigation.gd": "b947d595aa2381a553a0a4ebc2453a98def4ae920c9a6ac76bd2907d8b4db360",
+    "commons/maps/Trans_Pre/map_data.json": "8ddab29c1740113ff202b4af811a46efa150c63f8d703a9bbee7e316cc84a341",
+    "commons/maps/Trans_Introduction/map_data.json": "88ca2bf200a2913eb426e933988ee89a95b5c702cbe2a6055406d33b6a79457f",
+    "commons/maps/Trans_Rotation/map_data.json": "3f735ea2cb3a68352077c2c0fd89956fc3e4031f80de58a799a31d60147e4e9a",
+    "commons/maps/Trans_Pit/map_data.json": "0f6f1ce1bc6014b7c049c370b2f68ca477852b44e9bc0d80829085f75a0dcbdd"
+  }
+}

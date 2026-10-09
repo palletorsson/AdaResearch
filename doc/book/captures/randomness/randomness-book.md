@@ -6,62 +6,60 @@
 
 ### A pattern that returns
 
-In Synthesis Lab, five amounts could bring a familiar curve back. Here, choose a patch of colour you would not have thought to put together.
+In Synthesis Lab, five amounts could bring a familiar curve back.
 
 
-Two large grids stand side by side above the controls. Find your patch in one of them, then look in the same place in the other. Press REPLAY and return to those cells before surveying the whole picture.
+Here, two grids of coloured cubes stand above the controls. Choose a small patch you would not have thought to put together. Find it in the other grid.
 
-The patch is still there. REPLAY recoloured every cube from the seed and got the same colours, so nothing on the grid moved. Press RANDOM, choose something in the arrangement it gives you, and replay that one. RANDOM is allowed to choose a seed again, including the one already here. A result can surprise us and still know the way back to itself.
+Press REPLAY.
+
+The colours stay where they were.
+
+The program has coloured every cube again. The seed sets this generator's starting state; start it there again and make the same requests, and the same values return. Press RANDOM, find something in the arrangement it gives you, and replay that one. RANDOM can choose an earlier seed, including the one already here. A result can surprise us and still know the way back to itself.
 
 The seed readout offers a tempting name for the picture. Remember it. Then press +1 DRAW.
 
-The right-hand grid changes while the left keeps its arrangement. The seed has not changed. Look at the cube positions too: nothing has moved sideways to make this difference. One value was requested before the colouring began and was given no colour at all.
+The right-hand grid changes while the left keeps its arrangement. The seed has not changed. Look at the cube positions too: nothing has moved sideways to make this difference.
 
-Above the grids, two strips show the first twenty-four draws as bar heights. Before the extra draw, their contours match. Switch it on: the right strip begins at draw two. Find its first bar in the second position on the left. The colours changed because the same stream was grouped differently, three numbers per cell. The strips expose a repeatable sequence, not a claim that these few numbers reveal a period or hidden geometric order.
+Above the grids, two strips turn the first twenty-four draws into bar heights. Switch the extra draw off, then on. The right strip now starts with the second bar on the left. Find the next two matches.
 
-This is the extra operation, applied to the last grid:
-
-```gdscript
-if _extra_on and i == _columns.size() - 1:
-	for k in range(extra_draws):
-		_rng.randf()
-```
-
-The underlying sequence has not been rearranged. The generator has moved one position farther into it before the first cube asks for red.
-
-A call to `_rng.randf()` requests one number between zero and one. Colour takes three calls:
+With the extra draw enabled, the right-hand grid makes one request before colouring its first cube:
 
 ```gdscript
-mat.albedo_color = Color(
-	_rng.randf(),
-	_rng.randf(),
-	_rng.randf()
-)
+_rng.randf()  # Request one value without using it for a colour.
 ```
 
-Red, green, blue. Then red, green, blue again. Sixty-four cubes use 192 draws. With one value discarded at the start, what would have supplied green now supplies red, blue becomes green, and the next cube's red enters this cube's blue. Nothing in a draw says that it is red. Red is the use made of its place in these three calls. The old boundaries between colours were made by counting in threes. Shift where that counting begins and the same stream dresses the grid differently.
+Each call requests a number between zero and one. A cube takes three: red, green, blue. One unused draw shifts where that grouping begins:
 
-Press +1 DRAW again to switch the extra draw off. The match returns. This button toggles one discarded draw; repeated presses do not keep adding more. REPLAY reconstructs each grid by restoring the generator to its seed and repeating the chosen procedure. We needed more than the seed's number: which generator, which calls, and which use of their results. The picture's name had left out part of its making.
+```text
+Draws:       a  b  c  d  e  f  g ...
+Left grid:  (a, b, c)  (d, e, f)
+Right grid: (b, c, d)  (e, f, g)
+```
 
-Use RANDOM again and wait before replaying. The room continues around you; waiting does not advance the generator that colours these grids. Try to predict one cell from its neighbour. Then press REPLAY: it recolours that cell from the seed, and the cell keeps the colour it had. Difficulty guessing from the picture and the ability to repeat its construction are different things you can encounter here. Neither observation makes the other disappear.
+Nothing in a draw says that it is red. Red is the use made of its place in these three calls.
 
-There is no need to prefer the matched pair. Keep the extra draw on and compare the two colourings as possible companions. Perhaps the misplaced beginning gives you a relation you want. The line that interrupts a demonstration of sameness can also be used to make another palette.
+Look back at your patch. Perhaps the misplaced beginning gives you a relation you want. There is no need to prefer the matched pair. The line that interrupts a demonstration of sameness can also be used to make another palette.
 
-Move the seed slider slowly. Your hand travels between positions while the readout counts whole numbers, from 0 to 999. The handle moves smoothly, but each seed holds for less than a quarter of a millimetre of its travel, so almost any movement you can feel picks another seed. The controls offer many seeds, yet every result still arrives as sixty-four cubes with three varying colour channels. Another seed cannot add a cube or let one leave its cell. Those would be other changes to the program. Here, randomness varies what the program has made variable.
+Press +1 DRAW again. The match returns. The button toggles one discarded draw; it does not keep adding more. REPLAY repeats whichever procedure is selected. We needed more than the seed's number: which generator, which calls, and which use of their results. The picture's name had left out part of its making.
 
+Choose another seed, then wait. The room continues around you. Press REPLAY. The same patch returns; waiting has not spent another draw from this generator. Difficulty guessing from a picture and the ability to repeat its construction are different things we can encounter here.
 
-The three textile panels offer another comparison. Each begins with seed 41. Diagonals, upright and horizontal marks, then blocks: three pairs of signs receive the same draws. Choose a cell and follow its colour across the panels. NEXT SEED changes the draws in all three; RESET returns to 41. These bolts are held still so their marks can be compared. Chance has not chosen what a mark means. The program supplied that vocabulary before drawing.
-
-
-Near the far end of the room, a page of five-digit numbers takes its look from a book of random digits printed in 1955, a table anyone could open at the same line and read the same digits again.[^Random_Definition--rand-1955] This page keeps the look and not the return. About once a second each column takes a new number at the top and lets its lowest one fall away; the numbers come from the game's shared generator, with no seed set for them in this room, and the page keeps no record of a number once it has gone.
+Move the seed slider slowly. The handle travels smoothly; the readout chooses whole numbers. A neighbouring seed can give you a very different palette. The controls offer a thousand seeds, yet every result still arrives as sixty-four cubes with three varying colour channels. Another seed cannot add a cube or let one leave its cell. Those would be other changes to the program. Here, randomness varies what the program has made variable.
 
 
-The crank machine near the entrance, a few steps to one side of the replay console, makes a generator advance by hand: one press of its CRANK button, one state. It gives each request a gesture. We could follow every request here too, but the picture has already asked for 192 of them. What can we leave unexamined and still recognise how it was made?
+The three textile panels offer another comparison. Each begins with seed 41. Diagonals, upright and horizontal marks, then blocks: three pairs of signs receive the same draws. Follow one cell across the panels, then step back to see the larger figures those marks make. NEXT SEED changes the draws in all three; RESET returns to 41. These bolts are held still so their marks can be compared. Chance has not chosen what a mark means. The program supplied that vocabulary before drawing.
+
+
+Near the far end of the room, a page of five-digit numbers takes its look from a book of random digits published in 1955, a table anyone could open at the same line and read the same digits again.[^Random_Definition--rand-1955] This page keeps the look and not the return. About once a second each column takes a new number at the top and lets its lowest one fall away. The page draws from the game's shared generator and keeps no record of a number once it has gone.
+
+
+On your way back towards the entrance, stop at the crank. One press of its CRANK button, one state. It gives each request a gesture. We could follow every request at the colour grids too, but one picture has already asked for 192 of them. What can we leave unexamined and still recognise how it was made?
 
 
 The next room gathers a sequence into a histogram and an entropy reading. Carry one small patch with you. We are about to ask what a number can retain of an arrangement that was worth looking at.
 
-[^Random_Definition--rand-1955]: *A Million Random Digits with 100,000 Normal Deviates* (RAND Corporation, 1955), the last of the printed tables: its digits were made in 1947 by an electronic roulette wheel, and the tables went out of use once a machine could make a number faster than a reader could look one up. Opening the book at a given line is what a seed does. Robert Coveyou's line from 1969 belongs beside it: the generation of random numbers is too important to be left to chance.
+[^Random_Definition--rand-1955]: *A Million Random Digits with 100,000 Normal Deviates* (RAND Corporation, 1955). RAND's [introduction](https://www.rand.org/pubs/monograph_reports/MR1418.html) describes a basic table generated by an electronic roulette wheel in 1947, tested and transformed before publication. Choosing a starting place in a fixed table can help us imagine a repeatable beginning. The table retrieves stored digits; a seeded generator calculates its sequence. Repeatability in this room depends on the generator and procedure being kept with the seed.
 
 ---
 
@@ -152,6 +150,14 @@ Turn toward the museum wall beside the columns. This time the pale courses belon
 RESTORE closes those openings with the same stones and their collision. A wall is more than an image here: its written arrangement decides where a body can go. What else did we accept as background because it had not yet moved?
 
 The ledger at the entrance counted symbols without keeping their neighbours. These stones make that omission bodily: the same inventory can hold different views, gaps and forms. Nothing has calculated the thermodynamic entropy of this ruin. Before calling its broken outline a higher number, we would have to say what we are measuring. What does a count of stones tell us about what they can still hold?
+
+
+<!-- study-spine:signal_room -->
+
+
+The count returns as a room. Black and white continue from the floor onto the far wall and overhead. Choose ROWS, then CELLS. The broad bands loosen into another distribution. Both counts stay at 2,048.
+
+The small four-by-four witness lets you inspect the same record at another scale. The entropy reading stays at one bit per symbol while the number of unlike neighbours changes. In this response to Ikeda, the immensity is made from a finite stored array. Its authority can be felt before its omissions are understood. You can leave along either side of the display; the dark pixels never remove the floor.
 
 
 The last room asked how an arrangement could return. This room asks what survives when we describe one. The histogram retains the counts; the entropy reading condenses those counts further. From that number alone you cannot recover even the bars, let alone the neighbours you chose. The ruin never drew among all 116 stones, only among the exposed tops. In the next room the eligible set is laid out where you can count it: before anything is removed at random, a rule has already decided what can be chosen.
@@ -356,7 +362,7 @@ The reward has a rule. It does not make the throw more earned. For a moment, tho
 
 No random number decides the face. The program draws random values to scatter and tint the reward, but reads the die from its orientation. How your hand let go, the cube's shape and its contact with the felt have already done their work.
 
-Return it with **RESET** and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. On a desktop the object is dropped rather than thrown, and the direction of your view sets its held orientation. A cube's symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.
+Return it with **RESET** and let it fall level from just above the table. Six can come back without surprise. A tilted release can produce another face. A cube's symmetry is a reason to investigate fairness, not proof that every way of releasing it gives equal chances.
 
 The glass keeps the throws after their little storms have passed. Each face has a bar and a percentage; the running mean stands beside the model's 3.50. A short sequence can repeat one face or miss another without settling whether the die is fair.
 
@@ -403,7 +409,7 @@ RETURN DIE recovers it without adding a throw. NEW CHAIN clears the live column.
 
 Across from the first die, eight coins wait on a pedestal beside a dark felt pad. Toss one onto the pad. The console counts heads or tails and adds the result to a ribbon. Here the last thirty outcomes remain in order. A coin resting on its edge is left out. Read the ribbon as steps, heads forward and tails back: where would a walker be now, and how far has it been? The simplest random walk is a coin on a beam; two rooms on, a block on a rail takes it.
 
-Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using **REFILL** between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing. On a desktop, these are drops: the hand's throw is unavailable.
+Three gauges name conditions of the latest release: SPIN, DROP and TILT. A gentle toss and a forceful one can leave different readings even when both land heads. Try a small run each way, using **REFILL** between them. Keep the two runs distinguishable. Combining them immediately would erase the intervention you are testing.
 
 The gauges do not predict the next outcome. They let us see something the tally discards: every toss had conditions. Only the latest release keeps its measurements.
 
@@ -457,7 +463,9 @@ The panel in front of the display is labelled DECAY. The label names the model's
 
 
 
-Behind the display, a low field of cubes begins to tilt, each row by how far along the field it stands. Inside this hall you see only the first few degrees; the steeper rows lie beyond the back wall. Nothing there turns, and nothing there was drawn. The same tilt comes back every time the hall is built. Rotation can be a rule about place as easily as a record of chance.
+Behind the stacks, twenty-five cubes make a low square field. The first row lies level; the middle pitches upward; the last lies level again. Nothing keeps turning as you watch. The angle follows a row’s place along half a sine curve. Walk along its side. The same arrangement returns whenever the hall is built. Here your walk supplies the sequence: level, inclined, level again. Rotation can be a rule about place as easily as a record of chance.
+
+![Twenty-five cubes, level at both ends and tilted through the middle, fit behind the changing stacks.](/book-review/doc/book/figures/randomness/tilt-field-contained.png)
 
 
 Here each piece shows only where its turns have added up to; the turns leave no trail, and RESET wipes even the sum. The random-walk room keeps a trail of one accumulated quantity, position, so there you can separate the next-step rule from the record of earlier steps.
@@ -523,7 +531,11 @@ The next few lines keep another difference:
 
 Read the order aloud. Keep where we were. Shorten the record. Put the bead where we are now. At step 300 the trail holds positions 100 through 299; the bead has reached position 300. The drawing is already behind the body, and the beginning has gone. Its absence from the glass does not mean those steps were never taken.
 
-Nothing in the step generator reads this trail. Erasing its stored points in a controlled source test leaves the subsequent positions unchanged. The program still has memory: a current position, a generator state, a counter, a rule. What it lacks here is a way to consult the drawn history when choosing a heading. To make a walker avoid its own trail, that relation would have to be built. Between this cabinet and the basin, a sculpture of small cubes shows one way to build it. Before each step, that walk sets aside every neighbouring cell it already occupies and chooses among the rest, stopping early if none is left; it lays at most twenty-three cubes. The walk is finished when the hall is built, and what stands is the path alone: nothing marks the moves it turned down.
+Nothing in the step generator reads this trail. Erasing its stored points in a controlled source test leaves the subsequent positions unchanged. The program still has memory: a current position, a generator state, a counter, a rule. What it lacks here is a way to consult the drawn history when choosing a heading. To make a walker avoid its own trail, that relation would have to be built.
+
+
+On your right, between this cabinet and the basin, a sculpture of small cubes shows one way to build it. Before each step, that walk sets aside every neighbouring cell it already occupies and chooses among the rest, stopping early if none is left; it lays at most twenty-three cubes. The walk is finished when the hall is built, and what stands is the path alone: nothing marks the moves it turned down.
+
 
 The wing beside the tank carries the logbook; its buttons now share the front console with the mode controls. ONE and ALL change which beads and trails are bright. All five continue stepping under either view. Following one has changed your access to the population, without sending the other four away.
 
@@ -549,11 +561,9 @@ Watch the journeys between the empty frames. Both motors take one second, with t
 RUN repeats the experiment; HOLD lets the revealed move finish and stops the next draw. REPLAY brings both bodies to the centre and repeats their choices. Your marker can move elsewhere. It changes neither rule. A prediction has entered the room, but the machine has no obligation to meet it.
 
 
-#### A hand with company
-
 Pick up the drawing dot. Move your hand slowly across the space, then hold it still. The small green tip keeps wandering. What part of this line belongs to your movement?
 
-This is the grip from Trace with one addition. Thirty times per second, while you hold it, a random direction adds a small step to an offset. The next step starts from the offset already reached:
+This is the drawing dot from the Point Trace room, with one addition. Thirty times per second, while you hold it, a random direction adds a small step to an offset. The next step starts from the offset already reached:
 
 ```gdscript
 walk_offset = (walk_offset + direction * STEP_SIZE).limit_length(RADIUS)
@@ -562,7 +572,7 @@ tip.global_position = _grab_point.global_position + walk_offset
 
 Your hand carries the origin; the tip walks around it. Each proposed step is 1.2 centimetres, and the offset cannot exceed 25 centimetres. At that boundary, the program shortens an outward proposal. Its freedom has a radius.
 
-Press HAND / RANDOM to clear the line and draw with the hand alone. Switch back and try the same gesture. The point-count display still counts retained samples, as it did in Trace. The random clock proposes thirty steps a second, but the visible trail is sampled by the drawing process; a stalled frame can miss intermediate positions.
+Press HAND / RANDOM to clear the line and draw with the hand alone. Switch back and try the same gesture. The point-count display still counts retained samples, as it did there. The random clock proposes thirty steps a second, but the visible trail is sampled by the drawing process; a stalled frame can miss intermediate positions.
 
 CLEAR / REPLAY restores the random seed and clears the trail. The random steps can repeat. Your hand need not. Let go and the wandering stops: this encounter gives chance movement only while someone holds it.
 
@@ -593,7 +603,9 @@ Yellow beads fall toward a row of blue bars. Some bars grow; others wait. An ora
 
 The cabinet stands in the middle of the hall, its controls facing you as you approach. The other distribution studies stand around it. Its left panel offers UNIFORM, GAUSS, POISSON, EXPON and CLEAR. On the right are BATCH, PAUSE, NEW SEED, BINS and WIDTH. GAUSS is running when you arrive. New beads stop coming after a thousand draws, about twenty seconds; if nothing is falling when you get there, press CLEAR and they begin again.
 
-Press PAUSE. Watch what keeps moving. The beads already released continue to fall. The plate counts them as “in flight” until they land; only the issuing of new draws has stopped. Wait for that count to reach zero. The histogram is now still enough to describe. Where is its highest bar? Where are its gaps? Which of those observations had the word “Gaussian” encouraged you to expect?
+Press PAUSE. Watch what keeps moving. The beads already released continue to fall. The plate beside the histogram counts them as “in flight” until they land; only the issuing of new draws has stopped. Wait for that count to reach zero. The histogram is now still enough to describe. Where is its highest bar? Where are its gaps? Which of those observations had the word “Gaussian” encouraged you to expect?
+
+![The sampler’s numerical record stands beside its histogram, above the compact controls.](/book-review/doc/book/figures/randomness/sampler-visible-record.png)
 
 CLEAR empties the display and restarts its named seed. While paused, it stays empty. Press BATCH. One hundred values are counted immediately, without the falling animation. Describe this particular arrangement. Press twice more, reading the total each time. A gap may close; another bar may fall further short of the pale bar behind it. More evidence does not promise that every part of the picture will improve at the next press.
 
@@ -728,7 +740,7 @@ The radius helps set the requested count. Positions outside the bed are skipped.
 
 The next KIND is “clusters.” Two clusters each choose their own centre, spread and template. Their members receive random angles and distances. They do not pass through the scattered candidates' noise test. Bodies from different routines can overlap. Nothing here negotiates for room.
 
-Walk round the west and south margins. Three spotted red-capped mushrooms, on taller stems than the red caps in the bed, stand just inside the boards. They come from a separate pickable scene and are counted separately. A similar cap has acquired another capability. In the headset, hold one and bring it close to your face: its eating rule starts a visual effect with a ten-second hold and a fade in and out and the mushroom dissolves. The garden has offered a way to change the looking, as well as the thing looked at. The desktop carry lets you inspect it, but holds it beyond that eating distance.
+Walk round the west and south margins. Three spotted red-capped mushrooms, on taller stems than the red caps in the bed, stand just inside the boards. They come from a separate pickable scene and are counted separately. A similar cap has acquired another capability. Hold one and bring it close to your face: its eating rule starts a visual effect with a ten-second hold and a fade in and out and the mushroom dissolves. The garden has offered a way to change the looking, as well as the thing looked at.
 
 
 Near the entrance, off to one side of the glass, a small bubble dish grows another population, with no plate and no seed of its own. Each bubble's place, size and rise are drawn as it appears, about ten a second, and each is gone after four seconds. Nothing there can be grown again.
@@ -765,7 +777,7 @@ The sampled sizes never grow a seventh template between two others. That would n
 What makes neighbouring random heights belong together?
 
 
-Look closely at neighbouring columns in the two small grids. On the WHITE NOISE side, compare one height with the next. On the PERLIN NOISE side, follow a group of heights across several cells. Describe the difference before calling either one a landscape.
+Through the connecting passage, the comparison bench stands among the shapes in the second room. Look closely at neighbouring columns in the two small grids. On the WHITE NOISE side, compare one height with the next. On the PERLIN NOISE side, follow a group of heights across several cells. Describe the difference before calling either one a landscape.
 
 Keep SEED fixed and adjust FREQUENCY. Watch how the scale of features changes on the coherent side. Watch the WHITE NOISE side as you do: not one of its columns moves. Its heights are drawn from the seed alone, so every redraw returns the same values; frequency changes how neighbours relate, and those heights have no relation for it to change. OCTAVES, beside it, lays finer layers of Perlin noise over the broad shape; the white side ignores that slider too. Then choose another seed or press RESAMPLE and repeat the comparison. The two kinds of field remain distinct even when their particular arrangements change.
 
@@ -790,7 +802,7 @@ One productive discipline is to keep withholding the landscape reading, despite 
 
 ### What chance may change
 
-Four works have returned to the gallery. Walk toward the painting on the floor, then take either side around its frame. The dartboard waits to the right, the pipes farther along to the left, and a changing particle study near the rear. Each gives chance a different job. The estimation the last room promised is the dartboard's job.
+Four works share the gallery. Walk toward the painting on the floor, then take either side around its frame. The dartboard waits to the right, the pipes farther along to the left, and a changing particle study near the rear. Each gives chance a different job. The estimation the last room promised is the dartboard's job.
 
 
 Stand at the near edge of the canvas. Find a thin line, a broad mark and a cluster of small splatters. Wait for another layer, then follow the brush cursor as it traces a path. Walk around the frame. A mark that was distant is now close enough to inspect.
@@ -890,7 +902,16 @@ Begin with OCT at one and inspect a broad light region beside a broad dark regio
 
 The field adds scaled versions of a base function. Each layer samples at another frequency and contributes another weighted value. In this display the base is made from several sine expressions, so the noise-like surface connects back to the synthesis lab's lesson: a complex appearance can come from adding simpler contributions.
 
-Look down: the pale patches breaking through the grey floor are the tops of a random surface you walk across, built another way. It is made of small triangles, and the height of every corner is drawn on its own, as each column was on the WHITE NOISE side in Random Space Geometry: one corner's height tells you nothing about the next. Where the surface rises above the floor it shows pale; where it dips below, the floor shows through, so the jagged outline of a patch is where chance heights cross the floor's level, not the edge of a feature. In the picture on the plinth, neighbouring pixels are samples of the same smooth sum taken a short distance apart, so they mostly agree, and a broad feature carries across many of them.
+Look down: a violet surface rises a little above the grey floor. You can follow its unevenness across the room. It is made of small triangles, and the height of every corner is drawn on its own, as each column was on the WHITE NOISE side in Random Space Geometry: one corner's height tells you nothing about the next. The colour separates this ground from its surroundings; it does not explain why one corner is high and the next is low. In the picture on the plinth, neighbouring pixels are samples of the same smooth sum taken a short distance apart, so they mostly agree, and a broad feature carries across many of them.
+
+
+Beside the mixer, a small blue cellular field on a low stand offers another way for neighbours to belong together. Here the value comes from a difference between distances: how far away are the nearest scattered point and the next nearest? Along a seam those distances nearly agree. Follow one seam, then look back at the mixer's broad layers. Both can suggest a landscape, but their neighbours have been related by different rules.
+
+![A blue cellular field on its low stand above the violet random ground.](/book-review/doc/book/figures/randomness/cellular-field-violet-ground.png)
+
+
+Farther along, the entropy gauge returns from the second room. It counts its own two hundred symbols; it is not measuring either field around it. Recall what its number kept of an arrangement and what it lost. A count of symbol shares cannot tell you whether similar values lie together, make a seam, or have been scattered apart. Here the familiar instrument gives us a limit to carry back to the images.
+
 
 Back at the plinth, colour supplies another part of the picture's reading. Low and high values are mapped through an earth-toned palette, encouraging you to see water, vegetation, rock or peaks. Those interpretations are useful associations, but the program has not thereby simulated water movement or the growth of plants.
 
@@ -1017,19 +1038,22 @@ Two draws choose x and z in an eight-metre square. Height is fixed at eight metr
 
 Another draw gives an initial downward speed between 1.6 and 2.6 metres per second. Small sideways velocities and later changes let the bodies drift. The projectile carries its own generator. A seed that repeats its launch position does not, by itself, repeat those later changes or its collisions.
 
-The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. A clock that fires every half-second, or one that fires every tenth of a second with a one-in-five chance, would launch the same number of cubes an hour and make a different room to stand in; the podium's drawn delays, ahead, are the second kind. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
+The crossing drew a duration. This machine draws positions and velocities on a regular launch clock. Both are called random, but the word cannot tell you where to look. A clock that tries every half-second and one that tries every tenth of a second with a one-in-five chance would make the same expected number of attempts over an hour, but different rhythms. The podium ahead uses another rule again: after each arrival, it draws the length of the next wait. Keep track of which encounter supplied your evidence: a sampled wait at the crossing, or a sampled launch in the field.
+
 
 At the last podium, wait for a small wooden cube. It drops from three metres above the floor onto a two-metre-square surface. Another arrives at the other position. The positions alternate; after the first one-second wait, each new delay is drawn between 0.3 and 1.3 seconds. The places are dependable while the rhythm is not.
 
-Pick one up. In a headset, arrivals wait while either cube is held; a desktop carry does not pause them. Release it and the waiting continues. There are at most two cubes: an arrival replaces the cube in its alternating slot. RUN / STOP holds the arrival clock, leaving released cubes to fall. REPLAY restores the arrival sequence, not the history of your hand or an identical physical landing.
+Pick one up. Arrivals wait while either cube is held. Release it and the waiting continues. There are at most two cubes: an arrival replaces the cube in its alternating slot. RUN / STOP holds the arrival clock, leaving released cubes to fall. REPLAY restores the arrival sequence, not the history of your hand or an identical physical landing.
 
 Beside the podium, five cutout profiles recede into the room. Their uneven horizons sit around eye height, 1.7 metres. The nearest is dark; those behind grow lighter. Move sideways and watch one contour uncover another. A landscape appears between flat panels.
+
+![The waiting podium and its five receding profiles, photographed from inside the museum.](/book-review/doc/book/figures/randomness/waiting-and-seeing.png)
 
 Each panel joins seventeen heights. The two ends are fixed; the interior samples vary, with smaller permitted deviations near the edges. PROFILE changes the contours. The nearest, darkest panel shares the podium's seed, so until you press PROFILE its fifteen interior heights trace the first fifteen drawn cube delays, the ones REPLAY brings back, flattened toward its ends. Read that ridge from the end nearest the podium: a point above the level of the fixed ends stands for a wait longer than 0.8 seconds. The panels behind it are separate draws, and so is every contour after PROFILE. Here you can look back and forth along the sequence. At the podium you had to wait through it. What did seeing the whole shape let you anticipate?
 
 
 At the continuing die, a six kept a chain open. The face was already on the felt when the instruction gave it that power. The fire doors arrange the order differently: the assignment precedes your choice, though its disclosure waits for it. The three passages let us separate those events and walk what follows.
 
-The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? In Noise Types we will carry that question between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.
+The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? Carry that question through the biome ladder, where successive compositions gather the rules we have met. In Noise Types we will then take it between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.
 
 ---

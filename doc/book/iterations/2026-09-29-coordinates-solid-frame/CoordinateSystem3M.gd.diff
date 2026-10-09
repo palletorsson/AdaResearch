@@ -1,0 +1,151 @@
+--- before/CoordinateSystem3M.gd
++++ after/CoordinateSystem3M.gd
+@@ -19,6 +19,10 @@
+ 
+ @export var axis_length: float = 3.0
+ @export var axis_thickness: float = 0.02 # Thinner lines
++## Hall-specific appearance; the conventional translucent RGB frame remains default.
++@export_enum("rgb", "pink_grey_black") var axis_palette: String = "rgb"
++@export_range(0.0, 1.0) var axis_opacity: float = 0.5
++@export var axis_unshaded: bool = true
+ ## Spacing for tick marks along each axis, in axis-length units. Default 0.5
+ ## gives ticks every 0.5 m along a 3 m axis — six ticks per axis, marking the
+ ## scale clearly. Set to 0.0 to suppress ticks.
+@@ -148,11 +152,13 @@
+ 
+ 	# Clear existing children to avoid duplication if running in tool mode updates
+ 	for child in get_children():
++		remove_child(child)
+ 		child.queue_free()
+ 
+-	create_axis(Vector3.RIGHT, Color.RED, "X")
+-	create_axis(Vector3.UP, Color.GREEN, "Y")
+-	create_axis(Vector3.BACK, Color.BLUE, "Z")
++	var colours := _axis_colours()
++	create_axis(Vector3.RIGHT, colours[0], "X")
++	create_axis(Vector3.UP, colours[1], "Y")
++	create_axis(Vector3.BACK, colours[2], "Z")
+ 
+ 	# Info frame and gadget only at runtime (not in editor tool mode)
+ 	if not Engine.is_editor_hint():
+@@ -427,6 +433,11 @@
+ 	gyroscope.position = Vector3(-1.5, 0.5, 0)
+ 	add_child(gyroscope)
+ 
++func _axis_colours() -> Array[Color]:
++	if axis_palette == "pink_grey_black":
++		return [Color("d76c9f"), Color("96969d"), Color("202127")]
++	return [Color.RED, Color.GREEN, Color.BLUE]
++
+ func create_axis(direction: Vector3, color: Color, label_text: String) -> void:
+ 	# Build a CoordinateLine instance for the shaft + arrow + ticks. Its internal
+ 	# geometry is along +X; we rotate the whole node to point at `direction`.
+@@ -434,14 +445,15 @@
+ 	# here. The migration ensures tick marks propagate to every consumer
+ 	# (xyz_slider_plate, etc.) without changes there.
+ 	var axis_node: Node3D = Node3D.new()
++	axis_node.name = "Axis" + label_text
+ 	axis_node.script = CoordinateLineScript
+ 	axis_node.length = axis_length
+ 	axis_node.thickness = axis_thickness
+ 	axis_node.color = color
+ 	axis_node.arrow_size = axis_thickness * 4.0       # match the old cone proportions
+ 	axis_node.from_origin = true                       # axis starts at origin, extends +length
+-	axis_node.unshaded = true                          # match the old unshaded look
+-	axis_node.alpha = 0.5                              # match the old 50% transparent look
++	axis_node.unshaded = axis_unshaded
++	axis_node.alpha = axis_opacity
+ 	# tick_space=world: the spacing is asked for in floor metres, and the whole
+ 	# node is scaled by display_scale, so divide it back out in axis units
+ 	var step: float = tick_step
+@@ -460,7 +472,7 @@
+ 	elif direction == Vector3.UP:
+ 		axis_node.rotate(Vector3.FORWARD, deg_to_rad(-90.0))   # +X → +Y
+ 	elif direction == Vector3.BACK:
+-		axis_node.rotate(Vector3.UP, deg_to_rad(90.0))         # +X → +Z (Godot Vector3.BACK = +Z)
++		axis_node.rotate(Vector3.UP, deg_to_rad(90.0))         # Existing arm runs toward -Z, along the basin.
+ 	else:
+ 		var from := Vector3.RIGHT
+ 		var d := direction.normalized()
+@@ -477,11 +489,15 @@
+ 	if not show_labels:
+ 		return
+ 	var label = Label3D.new()
+-	label.text = label_text
++	# Name the actual arm, including its sign; the basin's Z arm points -Z.
++	var drawn_direction: Vector3 = axis_node.basis.x.normalized()
++	label.text = ("−" if drawn_direction.dot(direction) < 0.0 else "") + label_text
++	label.name = "AxisLabel" + label_text
+ 	label.modulate = color
+ 	label.font_size = 64
+ 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+-	label.position = direction * (axis_length + 0.2)
++	label.position = drawn_direction * (axis_length + axis_node.arrow_size + 0.16)
++	if label_text != "Y": label.position.y += 0.25
+ 	add_child(label)
+ 
+ func _exit_tree() -> void:
+@@ -560,7 +576,7 @@
+ 	if live and is_instance_valid(_proj_lines):
+ 		return
+ 	_forget_projection()
+-	var cols: Array = [Color.RED, Color.GREEN, Color.BLUE]
++	var cols := _axis_colours()
+ 	for i in range(3):
+ 		var m := MeshInstance3D.new()
+ 		var sm := SphereMesh.new()
+@@ -568,10 +584,11 @@
+ 		sm.height = sm.radius * 2.0
+ 		m.mesh = sm
+ 		var mat := StandardMaterial3D.new()
+-		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if axis_unshaded else BaseMaterial3D.SHADING_MODE_PER_PIXEL
+ 		mat.albedo_color = cols[i]
+-		mat.emission_enabled = true
++		mat.emission_enabled = axis_unshaded
+ 		mat.emission = cols[i]
++		mat.roughness = 0.4
+ 		m.material_override = mat
+ 		m.name = "AxisMarker%d" % i
+ 		add_child(m)
+@@ -761,6 +778,13 @@
+ 	# nothing (the old bug: tick_step:0.0 was ignored, ticks stayed). Track
+ 	# whether any axis-shaping value changed and rebuild the axes if so.
+ 	var rebuild_axes := false
++	if config.has("axis_palette") and str(config["axis_palette"]) in ["rgb", "pink_grey_black"]:
++		axis_palette = str(config["axis_palette"]); rebuild_axes = true
++	if config.has("axis_opacity"):
++		axis_opacity = clampf(float(config["axis_opacity"]), 0.0, 1.0); rebuild_axes = true
++	if config.has("axis_unshaded"):
++		axis_unshaded = str(config["axis_unshaded"]).to_lower() not in ["0", "false", "no", "off"]
++		rebuild_axes = true
+ 	if config.has("axis_length"):
+ 		axis_length = float(config["axis_length"]); rebuild_axes = true
+ 	if config.has("axis_thickness"):
+@@ -797,11 +821,22 @@
+ 	for child in get_children():
+ 		# Axis nodes carry the CoordinateLine script; their labels are Label3D
+ 		# with single-letter text. Remove both; keep panel + gyroscope.
+-		if child is Label3D and child.text in ["X", "Y", "Z"]:
++		if child is Label3D and child.text in ["X", "Y", "Z", "−Z"]:
++			remove_child(child)
+ 			child.queue_free()
+ 		elif child.get_script() != null and \
+ 				str(child.get_script().resource_path).ends_with("coordinate_line.gd"):
++			remove_child(child)
+ 			child.queue_free()
+-	create_axis(Vector3.RIGHT, Color.RED, "X")
+-	create_axis(Vector3.UP, Color.GREEN, "Y")
+-	create_axis(Vector3.BACK, Color.BLUE, "Z")
++	var colours := _axis_colours()
++	create_axis(Vector3.RIGHT, colours[0], "X")
++	create_axis(Vector3.UP, colours[1], "Y")
++	create_axis(Vector3.BACK, colours[2], "Z")
++	for i in range(_axis_markers.size()):
++		var marker = _axis_markers[i]
++		if not is_instance_valid(marker): continue
++		var material: StandardMaterial3D = marker.material_override
++		material.albedo_color = colours[i]
++		material.emission = colours[i]
++		material.emission_enabled = axis_unshaded
++		material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED if axis_unshaded else BaseMaterial3D.SHADING_MODE_PER_PIXEL

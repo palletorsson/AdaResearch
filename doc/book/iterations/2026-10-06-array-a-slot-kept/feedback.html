@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Array — feedback decisions</title><style>*{box-sizing:border-box}body{margin:0;background:#f0eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:960px;margin:auto;padding:28px}h1{font-size:2.3em;line-height:1.15}h2{font-size:1.45em;line-height:1.3;margin-top:1.8em}a{color:#68435d}nav{display:flex;gap:20px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#24262b;color:#f8f7f1;padding:24px;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.88em}pre code{font-size:inherit}.quiet{font:14px/1.6 system-ui;color:#56524f}.spread{display:grid;grid-template-columns:1fr 1fr;max-width:1700px;gap:42px}.spread article{min-width:0}img{max-width:100%;height:auto}.plate{max-width:520px;display:block;margin:28px auto}table{border-collapse:collapse;font:15px/1.5 system-ui;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}details{margin:25px 0}summary{cursor:pointer}@media(max-width:1000px){.spread{display:block}}@media print{body{background:white;font-size:11pt}nav,.quiet{display:none}pre{background:#eee;color:black}.spread{display:block}h2{break-after:avoid}}</style><header><p class="quiet">ENDLESS MUSEUM · ARRAY · REVIEW DRAFT</p><nav><a href="index.html">Review</a><a href="tutorial.html">Tutorial</a><a href="parallel.html">Tutorial left / reflection right</a><a href="tutorial.md">Markdown</a><a href="array-review.zip">Code + tests</a></nav></header><main><h1>Array feedback — three clarifications</h1>
+<p>6 October 2026. The supplied review recommends keeping both texts and making three small clarifications. I agree: these strengthen the existing lesson without adding another subject or exercise.</p>
+<table>
+<thead>
+<tr>
+<th>Feedback</th>
+<th>Decision in the tutorial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Indices do not come with spatial axes.</td>
+<td>Explain once that our placement and reading code assign X and Z to the indices. This prepares the later change in storage order.</td>
+</tr>
+<tr>
+<td>Fresh inner arrays deserve a concrete comparison with shared references.</td>
+<td>Show in prose what would happen if X entries 0 and 1 reached the same inner array: writing <code>[0][2]</code> would also change the value read at <code>[1][2]</code>. Connect it to two references to one cube.</td>
+</tr>
+<tr>
+<td>Persistent tutorial labels differ from the museum encounter.</td>
+<td>State the intentional difference: all tutorial labels stay; the museum row loses its cube label; the square grid retains its floor plate. The addresses remain in both museum records.</td>
+</tr>
+</tbody>
+</table>
+<p>The unchanged reflection already asks what an empty place means and makes the label difference felt. It does not need another technical recap. The shared-reference example replaces a general explanation rather than adding an exercise or extra code listing.</p>
+<p><strong>The lesson's governing relation remains:</strong> Transformation lets us change a body; Arrays lets us choose which body or stored value to change. The tutorial keeps the address usable; the reflection asks what the record does not tell us about that place.</p>
+<h2>Evidence and scope</h2>
+<p>Only three tutorial passages changed. <code>lesson.gd</code> and the complete printed code are byte-identical to the native-tested version. The 150-check result, three explicit exercise variants and six rejected faults remain the prior native run. No new Godot run was needed for the prose edit; <code>feedback-prose-verification.json</code> checks code equivalence and records the current manuscript hash while the original native verification remains unchanged.</p>
+<p>The previous draft and verification are in <code>before-feedback/</code>; the supplied review is in <code>external-feedback.txt</code>; the exact prose diff is in <code>feedback-tutorial.diff</code>. <code>final.md</code>, canonical map manuscripts, museum code and plan acceptance are unchanged. This remains a review draft.</p></main></html>

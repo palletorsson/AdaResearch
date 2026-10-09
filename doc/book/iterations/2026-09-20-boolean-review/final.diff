@@ -1,0 +1,223 @@
+--- before/commons/maps/Boolean_Verbs/final.md
++++ commons/maps/Boolean_Verbs/final.md
+@@ -1,12 +1,12 @@
+ Three objects on one line down the middle of the room, and the floor rises to either side of you twice on the way, so each one gets a bay to itself without ever being hidden from the next.
+ 
+-They are the same two solids every time. A box and a sphere, one offset from the other, and nothing else changes down the whole length of the hall — not the size, not the spacing, not the material. What changes is a single word set on the sphere, and that word decides whether you are looking at one thing, at the part two things had in common, or at a hole. This room is the argument that the word is doing more work than the shapes.
++A box and a sphere return in each bay. Their sizes, offsets and colours vary between these demonstrations, so this is not yet a test in which only one value changes. Keep the pair in mind and follow what each operation keeps: either region, their shared region, or the part of the box outside the sphere. A small vocabulary can make very different offers.
+ 
+ ## What a solid is here
+ 
+-Before the verbs, the thing they operate on. In this engine a solid is not a lump of material with an inside. It is a surface, and a rule for asking whether a point is on one side of it. Nothing is stored in the middle. The middle is an agreement between two systems — the renderer, which will not draw what faces away from you, and the physics, which will refuse to let you pass — and as long as the two agree, you experience an interior.
++Before the verbs, the thing they operate on. These demonstrations describe solid regions with primitives and generate a boundary for us to see. They do not fill the middle with little pieces of material. Yet the region is not empty of meaning: we can still ask whether a point belongs to it.
+ 
+-This matters because it means none of the three verbs can remove anything. There is nothing in there to remove. What they can do is redraw the boundary so that the same test gives different answers. Every operation in this hall is an operation on a *skin*, and every "inside" you meet is a promise about a region that was never filled in.
++Try passing through one of the small results. These exhibits have not enabled collision. Your body can ignore a boundary your eye has already accepted. A surface, a rule for membership and a rule for contact can agree; here one of those rules has not been supplied. Keep that missing agreement in mind when the objects become architecture.
+ 
+ ## Joining is not stacking
+ 
+@@ -22,13 +22,13 @@
+ 
+ Walk to the first body and watch the seam. Two solids meet, and the surfaces where they met are gone — not hidden, not coincident, gone, replaced by one new closed surface that neither of them had before the operation ran.
+ 
+-The comment above is the artifact talking about its own cousins in the metaball chapter, and it is the most important sentence in this hall. Over there, a union takes a parameter `k`, and inside a band of width `k` the two fields blend: there is a genuine *partly*, a state that is neither two nor one. Here there is no `k`. The solids are two, and then at one floating-point value of the offset they are one, and there is no frame in between. The ladder is not a gradient. It is a sequence of events.
++The comment above points back to the smooth joins in the preceding sequence. There a parameter `k` rounded the meeting of distance fields. Here, moving the operands changes their overlap without a smoothing band. The boundary can move gradually while connectedness changes at a particular contact. Continuous movement and a change in topology can belong to the same encounter.
+ 
+-Same four states, two ontologies of joining. That is the artifact's phrase, not mine, and it is the whole chapter in six words.
++The first setting in this artifact's family is called `distinct`. You will meet it in the next hall: the box and sphere stand apart, but the union still contains both. One result, two disconnected components. The word *joining* has smuggled in an expectation that the operator never promised. It combines membership; it need not build a bridge.
+ 
+-Which makes the first rung of its own ladder awkward. The axis `fusion` runs `distinct, necked, lobed, single`, and at `distinct` the two primitives do not touch at all. The operator still runs. It contributes nothing — the output set is exactly the input set, two solids sitting near each other under a union that has no work to do. The artifact's stated desire is *to show that joining is not stacking*, and a quarter of its primary axis is a stack. The file is honest about it in the only place it can be, a comment at line 42: `TWO DISJOINT SOLIDS, still under OPERATION_UNION`.
++Look back at the joined body here. Which seam disappeared, and which crease remains? The absence of a gap and the smoothness of a join are different accomplishments.
+ 
+-## The interior was never there
++## What the number is about
+ 
+ <!-- @csg_intersection_demo -->
+ 
+@@ -37,13 +37,13 @@
+ if dx * dx + dy * dy + dz * dz <= r2:
+ ```
+ 
+-The second body keeps only what both solids claimed. Set the offset far enough and it keeps nothing, and nothing is a lawful answer: the operation succeeded, and the result is empty. It is the one verb whose correct output can be no output.
++The second body keeps only what both solids claimed. Set the offset far enough and it keeps nothing, and nothing is a lawful answer: the operation succeeded, and the result is empty. An empty result can be correct, here as in a difference that removes all of A. Absence alone does not tell us whether the operation failed.
+ 
+-Standing next to it, on three of its four settings, is a number — the volume of A, of B, and of the two together, printed to three decimals. The artifact calls this measuring itself, and says so: *All three are measured by the SAME instrument on purpose*.
++Beneath this result, a panel prints three volumes: A, B and their shared region. Estimate how much survives before reading the numbers. The artifact calls all three measurements the work of the same instrument.
+ 
+-They are not measured by the same instrument as the object. That line above is the measurement: an analytic sphere, a point tested against a radius, forty-eight cubed samples of a perfect mathematical ball. The thing on the table is a `CSGSphere3D` whose tessellation is never set, so it renders at Godot's default twelve segments by six rings — a faceted approximation. And on the setting that shows you what was lost, the ghosts of the discarded material are built at twenty-four by twelve, smoother than the sphere that cut them.
++The line above shows what that instrument asks. It tests sample points against an analytic sphere, on a forty-eight-by-forty-eight-by-forty-eight lattice. The visible cutter is a tessellated CSG sphere. Both use the same radius parameter, but a faceted boundary and a distance test do not describe precisely the same region; the sampled gauge also has its own resolution.
+ 
+-So there are three spheres in this exhibit. The one you see, the one that did the cutting, and the one the number is about, and no two of them are the same shape. The instrument is honest, the object is honest, and they are describing different things — which is not a bug so much as the clearest possible demonstration of what a boundary representation is. The sphere on the plinth has no radius. It has twelve segments and six rings, and *radius* is a story told about them.
++A number with three decimal places can look more settled than the body it measures. Move close enough to find a facet. The radius is real as a parameter. What that parameter becomes depends on which system is reading it.
+ 
+ ## A face neither of them brought
+ 
+@@ -58,9 +58,9 @@
+ _root_csg.material_override = mat
+ ```
+ 
+-Push the sphere into the box and a face appears that neither solid brought with it. It is the sphere's shape, turned inside out, and it is wearing the box's material — because look at the last line: the material is set once, on the root of the whole operation. There is one skin. There was only ever one skin to give it.
++Follow the place where the sphere enters the box. A face appears that neither solid brought with it. It is the sphere's shape, turned inside out, and it is wearing the box's material — because look at the last line: the material is set once, on the root of the whole operation. The result wears one skin because this implementation assigns it one.
+ 
+-That is not a shortcut in the code. It is what a boundary model leaves you no choice about. The moment you carve, you need a surface for an inside that was never stored, and the only surface available is the outside, relabelled. The cavity wall is not revealed by the cut. It is manufactured at the instant of the cut, out of the material of the thing being cut, and assigned to a solid that did not make it.
++The cavity wall is not uncovered like a buried layer of paint. Its visible boundary is generated by the operation, and this artifact dresses it in the body's material. That last line is a choice. We could give the new faces another material and tell another story about where they came from. Here the cut looks as though the body had always been this colour inside.
+ 
+ Of the three verbs this is the one that shows the mechanism plainly, and it is also the one the heavy hall cannot leave alone: subtraction is the operation this whole chapter keeps returning to, because it is the one where the invention is impossible to hide.
+ 
+@@ -83,8 +83,8 @@
+ 
+ ## What the grammar cannot say
+ 
+-Three verbs, and each one turned out to be an argument about the boundary rather than about the solids. Union deletes a surface. Intersection reveals there was never anything behind it. Difference invents one and dresses it in somebody else's skin.
++Three verbs, three ways of deciding membership. Union can retain separated regions. Intersection keeps what is shared. Difference leaves the region of A outside B and gives its new boundary something to show.
+ 
+-And the foreclosure is the same in all three: the predicate is a yes or a no. There is no `k`. A point is in or it is out, two solids are two or they are one, and the transition between those states does not occupy any time or any space — it happens between one float and the next. Everything this chapter can say about relation, it has to say in a vocabulary with no word for *partly*, no word for *becoming*, and no way to hold a thing that belongs to two sets at once except by making a third set and throwing the question away.
++Membership is a yes or a no, but that does not make every change abrupt. Move a cutter and the cavity can widen continuously; move it far enough and two spaces may become connected. The grammar can compose such changes. What it does not decide by itself is who fits through the result, or what it feels like to be kept on one side. Those questions wait for a body.
+ 
+ The room next door is where you find out that even the four settings on each of these dials are a claim somebody published, and that the published claim and the object do not always agree.
+--- before/commons/maps/Boolean_Gallery/final.md
++++ commons/maps/Boolean_Gallery/final.md
+@@ -25,7 +25,7 @@
+ 
+ The registry declares those four words in that order, and so does the code, and so does the second axis. This is the only band in the room where the published claim and the object match on both dials, and it is worth standing in front of because it shows what the ladder is *for*: it is not four decorations, it is one operation shown at four degrees of disclosure. The object gets progressively less confident about its own result as you walk right.
+ 
+-There is one seam even here, and it is small and revealing. The dial that positions the cut names only two of its four settings in the code that reads it; `centred` — the one the artifact advertises as producing a clean internal void — arrives through the wildcard. It is not a rung. It is what happens when nothing matches.
++There is one seam even here, and it is small and revealing. The dial that positions the cut names only two of its four settings in the code that reads it; `centred` — the one the artifact advertises as producing a clean internal void — arrives through the wildcard. It is a defined fallback rather than a separate named branch. The same path also receives an unrecognised value, so reading the word alone does not tell us whether that value was deliberately selected.
+ 
+ ## The ladder, published out of order
+ 
+@@ -38,7 +38,7 @@
+ 
+ In the code those four are monotonic. They are four multiples of one offset, running down: far apart, nearly touching, overlapping, concentric. Walk them in that order and you watch two things become one, in four steps, with the topology changing under you.
+ 
+-Walk this band left to right and you get `lobed, distinct, necked, single` — the registry's order, which is the order this hall was built from, and which starts you two-thirds of the way up the ladder, sends you back to the bottom, then part way up again, then to the top. The sequence is the same four states. The *argument* is gone, because the argument was the monotonicity.
++Walk this band left to right and you get `lobed, distinct, necked, single` — the registry's order, which is the order this hall was built from, and which starts you two-thirds of the way up the ladder, sends you back to the bottom, then part way up again, then to the top. The sequence is the same four states. The gradual progression is interrupted. The catalogue asks us to recognise the familiar object first; the tutorial asks us to follow the changing offset. Those are two different orders for the same four objects. Start at `distinct`, then find `necked`, `lobed` and `single`. What became legible when you changed your route?
+ 
+ The registry did not do this carelessly; the entry says the order is the sweep's tile order, default leftmost. But the disagreement has consequences past this room: a third file, `fusion_ladder.json`, declares the ladder in the code's order and states that it took that order character for character from `csg_union_demo.gd:128`. So one artifact cites this object's code as canonical while the object's own registry entry publishes something else, and both are read by tools.
+ 
+@@ -57,7 +57,7 @@
+ 
+ The same displacement, one band down. `consensus` asks how much has to be shared before anything survives, and the four values run from complete agreement to a token overlap.
+ 
+-`broad` is not in the match. It reaches its position through the wildcard, which means it is not a defined rung at all — it is the label the artifact wears when nothing matched. The value exists in both lists, in the code and in the registry, and in neither of them does it correspond to a line that says what it is. It is the name of the default, promoted to a name.
++`broad` reaches its position through the wildcard branch, which returns the shipped offset. It therefore has a defined result even without a branch bearing its name. But the fallback also accepts other unmatched inputs. A familiar result can conceal an unfamiliar instruction: to audit the encounter, we need both the selected value and what actually ran.
+ 
+ And it is the one the registry puts first, so this band opens on it.
+ 
+@@ -84,11 +84,11 @@
+ col = color_a if (i % 2 == 0) else color_b
+ ```
+ 
+-This band is about what happens when two faces occupy the same plane and the depth test has no answer — the flicker every 3D artist has seen, where a surface tears into stripes of two materials because the comparison is a coin toss at every pixel.
++This band is about what happens when two faces occupy the same plane and the depth test has no answer — the flicker every 3D artist has seen, where a surface tears into stripes of two materials because finite depth precision can leave the two surfaces competing for the same depth value.
+ 
+-The artifact contains no boolean operation and no z-fight. There is not one CSG node in the file; the four places the string "CSG" appears are all text on labels. The stripes are the line above: even bars one colour, odd bars the other, alternating by index. And they are drawn at an explicitly unambiguous depth, four millimetres in front of everything else, so the renderer is never asked the question the artifact is named after. It is a diagram of a failure, executed by a mechanism that cannot fail.
++The striped diagram contains no Boolean operation and does not rely on z-fighting. There is not one CSG node in the file; the four places the string "CSG" appears are all text on labels. The stripes are the line above: even bars one colour, odd bars the other, alternating by index. And they are drawn at an explicitly unambiguous depth, four millimetres in front of everything else, so the renderer is never asked the question the artifact is named after. It is a diagram of a failure, executed by a mechanism that cannot fail.
+ 
+-That is not a cheat, exactly — a picture of z-fighting that actually z-fights would be unphotographable and would look different on every machine. But it is worth knowing what you are looking at, because there *is* a real coincident face in this file and it is not the one on the wall: at the `coincident` setting the two rectangle fills are placed at the same depth, the same thickness, overlapping in x, and they genuinely contest. The artifact produced the thing it is about by accident, behind the drawing of it, and says nothing about it.
++That is not a cheat, exactly — a diagram can hold still a failure whose appearance depends on the camera and rendering setup. But it is worth knowing what you are looking at, because there *is* a real coincident face in this file and it is not the one on the wall: at the `coincident` setting the two rectangle fills are placed at the same depth, the same thickness, overlapping in x, and they genuinely contest. The artifact produced the thing it is about by accident, behind the drawing of it, and says nothing about it.
+ 
+ The band's other seam is the same one union has: code and registry disagree on order, this time by moving the failure state to the front. The registry declares it in its own note, so it is a known disagreement rather than a hidden one.
+ 
+--- before/commons/maps/Boolean_Works/final.md
++++ commons/maps/Boolean_Works/final.md
+@@ -1,8 +1,8 @@
+ The room gets taller here, and the things in it stop being demonstrations. A workbench, a catalogue rack, a wall with a door cut through it, a five-metre block of rock with a tunnel bored out of the middle. These are the boolean operations at the size where they would have to be architecture, and the question this hall asks is the one the small rooms could not: when the negative gets big enough to stand in, can you stand in it?
+ 
+-You cannot. Not in any of them. That answer took eight bodies to arrive at, and it is the most useful thing in the chapter.
++Do not answer from the doorway. Several objects here offer an image of an interior. One now asks you to enter it. The difference is worth finding with your body before naming it.
+ 
+-## The bench you cannot reach
++## Above the workbench
+ 
+ <!-- @csg_compose_workbench -->
+ 
+@@ -13,7 +13,7 @@
+ 
+ Three solids turning slowly above a table, each labelled with the operation that made it. The file calls itself a workbench, the registry sells it with the tag `catalyst_affordance`, and the header above says you pick one up with the bracelet.
+ 
+-There is no picking. Three hundred and fifty-eight lines and not one input handler, no interaction volume, no signal, no mention of the bracelet outside comments. The only thing that happens at runtime is that the presets rotate. And the geometry has already given it away before you try: the bench top is at 0.56 metres and the work is placed at 1.1, so the objects float just over half a metre above the surface they are supposedly on, out of reach, turning. The file half-admits it in a line called `needs` — *Missing: a live player-built composition surface beside the three fixed presets.*
++There is no picking. Three hundred and fifty-eight lines and not one input handler, no interaction volume, no signal, no mention of the bracelet outside comments. The only thing that happens at runtime is that the presets rotate. And the geometry has already given it away before you try: the bench top is at 0.56 metres and the work is placed at 1.1, so the objects float just over half a metre above the tabletop, turning. Their position does not make them pickable. The file half-admits it in a line called `needs` — *Missing: a live player-built composition surface beside the three fixed presets.*
+ 
+ Its dial is the interesting part. `algebra` has four settings, and one of them, `complete`, builds symmetric difference out of two nested combiners and labels it longhand as `(A ∪ B) − (A ∩ B)` — the artifact's own argument that XOR is derived rather than primitive, which is a real and good point about what an algebra holds versus what a tool exposes. The default is `triad`. Eleven placements exist in this museum and not one of them passes a config value. So XOR is in the repository and has never once been in the building.
+ 
+@@ -65,7 +65,7 @@
+ 
+ And it is the only body here that is fully reproducible — no random number in the file, two placements byte-identical — which is a small joke at the chapter's expense: the artifact that does not do the thing is the one that does it the same way twice.
+ 
+-Take the mechanism seriously and it reframes everything upstream. A boundary model has no interior, so nothing in it can be removed; what looks like removal is always a redrawing of the skin. This artifact skips even that. It gets the appearance of a hole by never putting anything there and then narrating the absence as a cut. Which is not a lesser version of what the verbs do. It is the same thing with the arithmetic taken out.
++Take the mechanism seriously and it reframes everything upstream. A boundary model can define an interior without filling it with material. A Boolean difference changes the represented region and its boundary. This artifact skips even that. It gets the appearance of a hole by never putting anything there and then narrating the absence as a cut. Which is not a lesser version of what the verbs do. It is another construction with a similar silhouette. The image alone does not tell us which work took place.
+ 
+ ## Equals room
+ 
+@@ -80,11 +80,37 @@
+ 
+ A wall, three and a half metres of it, with a door and an opening and a bitten arch cut through. Floating above it in large text: `wall − (door + porthole + window) = room`.
+ 
+-It is one wall. It has been one wall at all twelve of its placements, because the setting that would add returning runs defaults to `none` and no map in the project sets it otherwise. The two lines above are both in the file, thirty-two apart, and the second one is right: a wall has no interior. One difference makes a hole, not an inside. You read the payoff from outside, which is the only place there is.
++In this placement it is one wall. The setting that would add returning runs is still `none`. The two lines above are both in the file, thirty-two apart, and the second one is right: a wall has no interior. One difference makes a hole, not an inside. You read the payoff from outside, which is the only place there is.
+ 
+ Then walk into it. You will not be stopped. There is no collision anywhere in this artifact — no static body, no shape, and the CSG root's own collision flag is never set. This is not something the engine could not do; a tunnel in the alternative-geometries chapter turns exactly that flag on, one line, and you can walk through it. Here the doorway and the wall are the same to your body. The one architectural distinction the object exists to make — that a cut in a solid produces somewhere you can be — is the distinction it does not implement.
+ 
+ Even the porthole is not a hole. Its centre is set 1.4 metres up on a wall whose half-height is 1.3, so it is a scallop bitten out of the top edge.
++
++## The opening that asks for your body
++
++<!-- @boolean_burrow -->
++
++Go around the stone block to the opening on its left side. Try the solid wall first, then the gap. The wall stops you. At the opening, the museum floor continues into a low, turning hollow. Follow it far enough to lose the view you had from outside. Then turn and find your way back.
++
++This burrow was already in the project. Its cutters followed a seeded walk: eleven overlapping spheres, joined and subtracted from a block. The overlap graph reported one connected component. Yet a test body stalled between the second and third hollows. Two spheres can overlap while leaving a raised lip where your feet want a floor. *Connected* had answered a question, just not the whole question we were asking.
++
++The version standing here keeps those eleven centres and their radius. Upright cylindrical cutters replace the spheres. Their bottoms reach just below the museum floor; their tops leave about 2.3 metres of headroom. The rooms of the hollow still overlap along the same wandering plan, but their floors no longer climb into each join.
++
++```gdscript
++column.radius = carver_radius
++column.height = carver_radius * 2.0
++column.position = at
++```
++
++These lines change what gets removed. Another line makes the remaining rock resist the body:
++
++```gdscript
++stock.use_collision = walkable and spoil == "rock"
++```
++
++Neither line works alone. A collider can enforce an opening too small to enter. A generous opening without collision can be indistinguishable, to your body, from the wall beside it. Here the cutter, the floor, the collision surface and the body's dimensions have to meet.
++
++The spherical version remains available in the artifact. It has not become a wrong shape because we wanted a passage. We have made one kind of body easier to accommodate and changed the space to do it. What else might have lived in the rising hollows? The repair carries a preference. You can now stand inside it.
+ 
+ ## Walk the hollow
+ 
+@@ -97,7 +123,7 @@
+ 
+ Five metres of rock rendered as a crust of nearly five thousand small boxes, with five spheres subtracted out of the middle of it to make a cave. It is the most beautiful object in the chapter and the sign over it is the plainest instruction in the building.
+ 
+-There is no collider, and this time it would not help. The block is lifted so its underside sits fifteen centimetres off the floor, and the lowest carved air anywhere inside it is 1.2 metres up — more than a metre of unbroken rock between the ground you are standing on and the bottom of the hollow. The tunnel's floor is above your head. There is a floor in this artifact, a seven-metre plate, and it belongs to the tray, not the cave; it also sways, because the whole node rocks gently on its vertical axis and takes the ground with it.
++There is no collider, and this time it would not help. The block is lifted so its underside sits fifteen centimetres off the floor, and the lowest carved air anywhere inside it is 1.2 metres up — more than a metre of unbroken rock between the ground you are standing on and the bottom of the hollow. The hollow begins well above the floor you are standing on. There is a floor in this artifact, a seven-metre plate, and it belongs to the tray, not the cave; it also sways, because the whole node rocks gently on its vertical axis and takes the ground with it.
+ 
+ So it is a model of a cavern on a table. Which would be fine — most of this museum is models on tables — except that the verb in its own truth line is the one operation it does not implement, and it is the artifact in the entire chapter that is actually shaped like an interior. It carries no declared axis at all, while the word `interior` has been borrowed from the wall next door by three other registry entries as the term for *whether a solid encloses a void you could occupy*.
+ 
+@@ -120,16 +146,14 @@
+ 
+ At the back wall, the flat plate about two faces in the same plane — the failure mode, the one condition under which the whole boolean grammar has no answer. The gallery next door explains what it is and how it is drawn. It is here as well, at the end of the heavy hall, because it is the only object in the chapter that takes the position that a case where the machinery breaks is worth an exhibit rather than a bug report.
+ 
+-## What the physics never turned up for
++## What an outside picture misses
+ 
+-An interior, in this engine, is an agreement between two systems: the renderer will not draw the surfaces facing away from you, and the physics will not let you through. Hold both and you have an inside. Drop either and you have a picture of one.
++The first wall still lets you pass through its uncut part. The cavern still displays a hollow lifted above the ground. The burrow now makes a different offer. These are implementation choices made with related tools; they are not a verdict that Boolean construction cannot make an interior.
+ 
+-In this hall the physics never arrives. Twelve of the chapter's thirteen artifacts contain no collision construct of any kind — no static body, no shape, no collision flag set on a CSG root. The thirteenth has exactly one: a two-metre grab volume on objects scaled to a tenth of that, bolted to a script the same file throws away eleven lines later. `= room` hangs over a wall you pass through. `WALK THE HOLLOW` hangs over a metre of rock. The workbench floats half a metre above the workbench. Seventy-five objects offer themselves to your hand and are not there.
++The old review found a useful blind spot in the project's own instrument. A still-camera sweep judged whether a setting mattered by counting changed pixels. Adding returning walls to the architectural cavity changed little in that outside view. The camera saw a few more slabs. It did not have to find the doorway, stop at a wall, or turn around inside.
+ 
+-The project has already written this down, in a place nobody reads. Its own interaction probe filed both the wall and the cavern under `"verdict": "no affordance"` — zero controls, zero grabbables, zero wired. And the still camera reached the same conclusion from the other direction without anyone noticing what it had said: the sweep that grades whether a dial changes the picture rates the wall's `interior` setting at 4.372 percent of pixels for the step from one wall to a four-walled room. That step is the artifact's entire argument, the rung its own source calls *the first rung on which the player is INSIDE*, and it registers as a rounding error — because a camera standing outside a room cannot see the difference between having an inside and not having one. It sees three more slabs, edge-on.
++A picture from outside can show an entrance. It cannot establish what a particular body will be allowed to do beyond it. In the burrow, changing the cutter profile keeps the same centres and the same overlap graph while changing the walk. The record that says *one component* remains true. The test that asks *can I get there?* needs other evidence.
+ 
+-Which is the last thing this chapter has to teach, and the most uncomfortable. The instrument that decides whether a variant is worth keeping is a photograph taken from outside. An interior is precisely the claim that cannot be photographed from outside. So the one property this whole chapter is about is the one property the apparatus is built to miss.
++Keep the signs that overpromise in view. They tell us where the desire for a room arrived before its floor, its contact rules or its entrance. But the response need not be to abandon that desire. Sometimes a different cut lets the body arrive too.
+ 
+-That is the chapter's dark spot, and it is worth being precise about which kind it is. In the small room the missing interior is generative: because a boundary model stores no inside, difference has to *invent* the cavity wall out of the outside, and that invention is the best idea in the chapter. Here the same absence has gone sterile. The claim got bigger — from *this surface is manufactured* to *this is a room* — and nothing underneath it grew to match. The negative was supposed to become inhabitable at this scale. It became a sign saying so.
+-
+-Which leaves the honest version of what these three halls demonstrate, and it is not the one the labels promise. A solid is a lie told by its skin, and so is its hole. The grammar that carves has no word for *partly*, no word for *becoming*, and nothing to put inside the thing it cuts. Every absence in this chapter is performed rather than found — by inversion, by omission, by parity, by a caption. What you can walk through, you were always going to walk through.
++Next, the individual body gives way to many. In Swarm Intelligence, each agent follows a rule, and the space they make together will again exceed what one instruction says.

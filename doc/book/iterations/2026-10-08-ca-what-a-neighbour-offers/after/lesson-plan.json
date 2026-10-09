@@ -1,0 +1,28 @@
+{
+  "id": "CA_SoftRules",
+  "decision": "draft",
+  "mode": "build",
+  "object": "Same PointBody plants a matched seed in two independent concentration fields, each shown twice.",
+  "change": "Move from thresholded neighbour counts to a four-neighbour difference sum. Compare exchange on/off while keeping the supplied reaction and beginnings equal.",
+  "dependsOn": [
+    "CA_ExpandingSpace",
+    "Point_Coordinates"
+  ],
+  "reuses": "Carried PointBody and action; world/local position to grid address; fractional state, arrays, loops, classes, old-to-next updates and field-to-colour mapping.",
+  "given": "Day Zero Endless Museum host, player, camera, lighting and XR Tools. Gray–Scott reaction terms and constants supplied and named. Three complete printed files create the compact field model, staging and point.",
+  "later": "Derivation and numerical analysis of the reaction model. Compact model uses keyboard clock/view/exchange; installed study keeps eight VR desk controls and body crossing. Clockmaker and four rear works remain encounters, not extra coding requirements.",
+  "checks": [
+    "39 exact-printed-file native checks; 2400 steps per exchange mode exactly match production arrays (maximum difference 0). Uniform sum, periodic boundary, independent old/new buffers, clamps, textures, support and supplied XRTools poses.",
+    "Transfer adds one corner seed in both fields. Predicted nine wrapped addresses and first outward V pass. Missing-centre-subtraction and in-place-read mutations fail the expected results.",
+    "40 native museum checks including cameras: selected hand seed, fixed body seed, withdrawal/reentry, replay while occupied, view/coating, clock and cap, four routes/294 clearance and floor samples, supported portal approaches."
+  ],
+  "transfer": "Add left.seed_at(Vector2i(0,0)) and right.seed_at(Vector2i(0,0)) after right.reset in the study. Predict nine wrapped sites and which field can give adjacent unseeded sites their first V.",
+  "carry": "Two values at one address; the neighbourhood offers differences. State, intervention, update and display have distinct jobs; same intervention can meet different field histories.",
+  "next": "CA_AgentsCircuits: audit the actual row-history / Sierpinski comparison. Its current encounter compares procedures behind resemblance; historical map title is not the lesson contract.",
+  "notes": "Field model separated as RefCounted. Same reaction as installed solver, fresh buffers instead of reused buffers. Point input explicitly replaces a 3x3 patch without stepping. Primary solver and walk receiver unchanged. No headset, Quest, full portal transfer or independent student acceptance.",
+  "baseline": {
+    "tutorial": "49c8387b24a4c7c8af589fad57f6c22979ff5624904b6e63f044e99b9fd7bd79",
+    "choice": "7ea7c24a126950599f3a8947350a62249836f782d5dffa857e8107f701cb0781"
+  },
+  "summary": "Bring the same held PointBody to two tables and place an identical seed. Each 32x32 site stores U,V. Sum four neighbour-minus-centre differences, combine with the named supplied reaction, and write both next arrays before replacing the present. Predict W=(12,15): exchange gives (.92,.02), no exchange (1,0). Enable both to recover agreement. Change the palette without changing state. Add a corner seed, predict its nine wrapped sites, then watch exchange carry V beyond it. Carry input/state/update/display separation into a comparison of different procedures behind similar forms."
+}

@@ -1,0 +1,148 @@
+{
+	"checks": [
+		{
+			"check": "Printed settings compile: 6 / 0.010",
+			"passed": true
+		},
+		{
+			"check": "6 ordered samples remain on the unit circle in XY",
+			"passed": true
+		},
+		{
+			"check": "6 side measured perimeter agrees with the independent chord formula",
+			"passed": true
+		},
+		{
+			"check": "6 drawn segments include the last-to-first edge; guide stays at 256",
+			"passed": true
+		},
+		{
+			"check": "6 sides has the expected tolerance decision",
+			"passed": true
+		},
+		{
+			"check": "Capture sides-6.png",
+			"passed": true
+		},
+		{
+			"check": "Printed settings compile: 12 / 0.010",
+			"passed": true
+		},
+		{
+			"check": "12 ordered samples remain on the unit circle in XY",
+			"passed": true
+		},
+		{
+			"check": "12 side measured perimeter agrees with the independent chord formula",
+			"passed": true
+		},
+		{
+			"check": "12 drawn segments include the last-to-first edge; guide stays at 256",
+			"passed": true
+		},
+		{
+			"check": "12 sides has the expected tolerance decision",
+			"passed": true
+		},
+		{
+			"check": "Capture sides-12.png",
+			"passed": true
+		},
+		{
+			"check": "Printed settings compile: 24 / 0.010",
+			"passed": true
+		},
+		{
+			"check": "24 ordered samples remain on the unit circle in XY",
+			"passed": true
+		},
+		{
+			"check": "24 side measured perimeter agrees with the independent chord formula",
+			"passed": true
+		},
+		{
+			"check": "24 drawn segments include the last-to-first edge; guide stays at 256",
+			"passed": true
+		},
+		{
+			"check": "24 sides has the expected tolerance decision",
+			"passed": true
+		},
+		{
+			"check": "Capture sides-24.png",
+			"passed": true
+		},
+		{
+			"check": "Printed settings compile: 48 / 0.010",
+			"passed": true
+		},
+		{
+			"check": "48 ordered samples remain on the unit circle in XY",
+			"passed": true
+		},
+		{
+			"check": "48 side measured perimeter agrees with the independent chord formula",
+			"passed": true
+		},
+		{
+			"check": "48 drawn segments include the last-to-first edge; guide stays at 256",
+			"passed": true
+		},
+		{
+			"check": "48 sides has the expected tolerance decision",
+			"passed": true
+		},
+		{
+			"check": "Capture sides-48.png",
+			"passed": true
+		},
+		{
+			"check": "Doubling sides decreases the measured shortfall across all four trials",
+			"passed": true
+		},
+		{
+			"check": "Printed settings compile: 48 / 0.001",
+			"passed": true
+		},
+		{
+			"check": "Tighter tolerance changes the decision without changing geometry or perimeter",
+			"passed": true
+		},
+		{
+			"check": "Capture tighter-tolerance.png",
+			"passed": true
+		},
+		{
+			"check": "A 3-4-5 triangle includes its five-unit closing edge",
+			"passed": true
+		},
+		{
+			"check": "Perimeter calculation leaves its input unchanged",
+			"passed": true
+		},
+		{
+			"check": "Translating the sample list does not change its perimeter",
+			"passed": true
+		},
+		{
+			"check": "Doubling radius doubles the measured perimeter",
+			"passed": true
+		},
+		{
+			"check": "Redrawing neither mutates the point list nor accumulates strokes",
+			"passed": true
+		},
+		{
+			"check": "The diagram has no face or collider across its centre",
+			"passed": true
+		},
+		{
+			"check": "Lesson runs on a bare Node3D without scene lookups",
+			"passed": true
+		}
+	],
+	"input": "No new pickup or UI controls; parameter edits rerun _ready",
+	"passed": true,
+	"physical_headset_tested": false,
+	"screenshots": "Native Godot 4.6 student room; no simulated museum grid"
+}

@@ -1,0 +1,21 @@
+{
+  "date": "2026-09-17",
+  "map": "Color_Context_Placed",
+  "primary": [
+    "chroma_stack",
+    "chroma_translation"
+  ],
+  "artifact_instances": 15,
+  "physical_columns": 27,
+  "runtime_checks": 199,
+  "failures": [],
+  "headset_tested": false,
+  "script": "commons/testing/probe_color_column_hall.gd",
+  "files": {
+    "commons/maps/Color_Context_Placed/map_data.json": "f8ad058379b93d91a6627068952e063b838b714837b91e3b304c6690a6f72ed6",
+    "commons/maps/Color_Context_Placed/final.md": "9655fe7f17c4c980576fde5b1d890d3298293ea442c80099bfc3a9eb6c064dfa",
+    "commons/artifacts/chroma_stack/chroma_stack.gd": "b700a06a7e81e834e9c0b48851c7fb132c14cfa792eecab74e18387b4bf12052",
+    "commons/artifacts/registry/chroma_stack.json": "2554ee38ac297ff5b10ec6b8df140616c6698ee6186b5c3af7793c155f3eabc3",
+    "commons/maps/Color_Flashlight/final.md": "4f848a7a7d892bb9616d310b114570014e6832b1b2fba51ddb3bac83b1f53673"
+  }
+}

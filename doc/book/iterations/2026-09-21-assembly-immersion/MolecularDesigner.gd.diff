@@ -1,0 +1,59 @@
+--- before/algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd
++++ current/algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd
+@@ -10,7 +10,7 @@
+ # critical_parameter: assembly_name — switches between VRBody, Chair, entirely different topologies
+ # triggers: auto_cycle timer alternates float/assemble; JSON hot-reload rebuilds catalog live
+ # emerges: the moment of recognition when disordered parts coalesce into a legible form
+-# needs: VR grab on parts [missing], keyboard controls [has], auto-cycle [has]
++# needs: automatic catalogue display [has]; opt-in body_workshop with VR/desktop joints [has]
+ # relationships: unlocks post-reductionist design thinking; depends on Part.tscn/assemblies.json; contrasts snap_cube_puzzle (fixed vs fluid assembly)
+ # truth: target positions and part types are authored; their approach is simulated.
+ 
+@@ -26,6 +26,7 @@
+ @export_group("Assembly Settings")
+ @export var assemble_height: float = 0.0
+ @export var body_study: bool = false
++@export var body_workshop: bool = false
+ @export var bond_radius: float = 0.02
+ @export var bond_color: Color = Color(0.9, 0.9, 1.0, 1.0)
+ 
+@@ -70,6 +71,7 @@
+ 	_spawn_inventory()
+ 	_setup_auto_cycle()
+ 	if body_study: _mark_witness()
++	if body_workshop: call_deferred("_ensure_body_workshop")
+ 	_log_info("Molecular Designer Ready")
+ 	if enable_auto_cycle:
+ 		_log_info("Auto-cycle enabled: %ds float, %ds assemble" % [float_duration, assemble_duration])
+@@ -247,6 +249,9 @@
+ 		var slot: int = i - used
+ 		var side: float = -1.0 if slot % 2 == 0 else 1.0
+ 		var target := Vector3(side * 1.6, 0.3 + floor(slot / 12.0) * 0.45, -1.3 + (slot / 2 % 6) * 0.52)
++		if body_workshop:
++			# Keep the comparison aisle and the visitor's body clear of spare panels.
++			target = Vector3(-.8, .3 + floor(slot / 8.0) * .4, -1.75 + (slot % 8) * .5)
+ 		parts[i].position = parts[i].position.lerp(target, 1.0 - exp(-2.0 * delta))
+ 
+ func _build_bonds_for(asm: Dictionary, base: Vector3, scale: float) -> void:
+@@ -522,9 +527,21 @@
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+ 	if config.has("body_study"): body_study = str(config.body_study).to_lower() in ["true","1"]
++	if config.has("body_workshop"): body_workshop = str(config.body_workshop).to_lower() in ["true","1"]
+ 	if config.has("float_duration"): float_duration = clampf(float(config.float_duration),2,60)
+ 	if config.has("assemble_duration"): assemble_duration = clampf(float(config.assemble_duration),2,60)
+ 	if is_node_ready() and body_study: _mark_witness()
++	if is_node_ready() and body_workshop: call_deferred("_ensure_body_workshop")
++
++func _ensure_body_workshop() -> void:
++	if not body_workshop or has_node("BodyWorkshop"): return
++	var study := Node3D.new()
++	study.set_script(load("res://algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd"))
++	study.name = "BodyWorkshop"
++	study.top_level = true
++	add_child(study)
++	study.global_transform = Transform3D(global_basis.orthonormalized(),to_global(Vector3(2.6,0,.6)))
++	study.build(catalog, assemblies["VRBody"])
+ 
+ func _mark_witness() -> void:
+ 	if parts.is_empty(): return

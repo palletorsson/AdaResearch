@@ -1,0 +1,97 @@
+{
+  "checks": [
+    {
+      "name": "Actual XRTools grab takes the club by its handle",
+      "passed": true
+    },
+    {
+      "name": "Held club keeps world and loose-body contact",
+      "passed": true
+    },
+    {
+      "name": "Held club cannot be recalled",
+      "passed": true
+    },
+    {
+      "name": "Held club physically sends the existing sphere forward",
+      "passed": true
+    },
+    {
+      "name": "Released club becomes a dynamic body",
+      "passed": true
+    },
+    {
+      "name": "RETURN CLUB recalls only the unheld club",
+      "passed": true
+    },
+    {
+      "name": "Club returns accurately to its rack",
+      "passed": true
+    },
+    {
+      "name": "Desktop carry retains the club's collision",
+      "passed": true
+    },
+    {
+      "name": "Desktop release restores a dynamic club",
+      "passed": true
+    },
+    {
+      "name": "Bag remains dynamic and refuses direct pickup",
+      "passed": true
+    },
+    {
+      "name": "Tracked hand receives a local collision mitt",
+      "passed": true
+    },
+    {
+      "name": "A tracked-hand punch moves the bag through contact",
+      "passed": true
+    },
+    {
+      "name": "Punch keeps the pin-joint anchor attached",
+      "passed": true
+    },
+    {
+      "name": "Leaving the bay disables local mitt collision",
+      "passed": true
+    },
+    {
+      "name": "The suspended bag returns after the strike",
+      "passed": true
+    },
+    {
+      "name": "Bag reset succeeds when released",
+      "passed": true
+    },
+    {
+      "name": "Reset restores the bag and its joint",
+      "passed": true
+    },
+    {
+      "name": "Pull grip refuses a reset while held",
+      "passed": true
+    },
+    {
+      "name": "Pulling the separate grip does not detach the bag",
+      "passed": true
+    },
+    {
+      "name": "Removed controller leaves no orphan mitt",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "measurements": {
+    "bag": {
+      "joint_error": 0.000332836963934824,
+      "punch_speed": 1.61280226707459
+    },
+    "club": {
+      "ball_peak_speed": 1.08000111579895,
+      "ball_travel_z": 0.855839490890503
+    }
+  },
+  "passed": true,
+  "scope": "Jolt contacts and pin joint, actual XRTools grab and tracked-hand proxies with supplied controller poses; physical headset feel untested."
+}

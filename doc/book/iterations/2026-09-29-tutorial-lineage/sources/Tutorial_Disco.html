@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial_Disco · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Tutorial_Disco">← Tutorial lineage</a></p><h1>Tutorial Disco</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Tutorial_Disco/final.md">Raw captured source</a></p><pre># A grid with a clock
+
+How can an arrangement that sits still make a rhythm?
+
+In the last two halls, a small change in an instruction could rearrange a field. You could leave it there and look. Here the floor changes while you are still looking. Stand on a square and wait for it to become black, then white, then black again. Nothing has passed beneath your feet.
+
+&lt;!-- @disco_controls --&gt;
+
+At the floor console, press PLAY / HOLD. The checker settles. ONE STEP exchanges its black and white values; a second step brings them back. The whole field changes, although the instruction stays the same:
+
+```gdscript
+return (x+z+phase)%2
+```
+
+`x` and `z` name a square on this floor. The new input is `phase`, a count that advances with each step. Add one and the remainder changes; add another and it returns. On the tiling desk, we compared instructions at the same addresses. Here we keep an instruction and let another input carry it through time.
+
+Start playback, then change SPEED. The same two arrangements can alternate slowly or quickly. The square you chose keeps its place through both. Cross the floor and let your movement meet the returning pattern.
+
+![The same checker floor before and after one step, seen from a fixed viewpoint.](/book-review/doc/book/figures/Tutorial_Disco/fixed-addresses-changing-values.png)
+
+*One step apart. Every tile keeps its place; black and white exchange addresses. Another step brings this checker back.*
+
+With the floor held, change PATTERN. ROWS lights one row at a time. DIAGONALS groups the addresses into bands; SNAKE carries a strip along a route that reverses at the end of each row. ONE STEP lets you follow each rule slowly before releasing it to the clock.
+
+After SNAKE comes SUPER TRIANGLE. The diagonal tile from the earlier halls returns. Let it play. Neighbouring triangles turn toward one another; a chevron appears, then a diamond. Later the motif grows across several tiles. Keep your foot in place and follow the shape that now includes it.
+
+Press HOLD during a turn. The floor keeps that unfinished arrangement. ONE STEP takes it to the next pose. The square joints still mark the old addresses, though your eye can join the triangles into another figure. How large is the thing you are following: one tile, four, the floor? The array supplies places to change; it does not tell us where a figure must end.
+
+![Six black and white triangle combinations on the same museum floor.](/book-review/doc/book/figures/Tutorial_Disco/triangle-combinations.png)
+
+*Six moments in the same movement. The triangles turn and gather into larger figures; the floor beneath the foot stays level.*
+
+The sequencer stands near the entrance, six metres to the right of the console as you enter. Here you can place an event in a returning count. Begin with one cell and listen for the time it becomes audible.
+
+&lt;!-- @step_sequencer --&gt;
+
+Find the sequencer&#x27;s grid. Each row is a **track**, assigned a sound; each column is a **step**, one place in the repeating count. The moving highlight is the playhead: it reads one column at a time.
+
+The sequencer starts with an empty pattern. Turn on one cell. It sounds immediately as a preview. Let that sound finish, then start playback. Wait for the highlight to reach the cell. The note returns with it, once each time around.
+
+Now give that note company. Add a second cell in the same track. Listen to the interval between them. Move the second event by turning its old cell off and another on. The instrument stays the same; its place in the pattern changes when it sounds.
+
+Switch one cell off again. On the next pass its address is still there, but that visit asks for no new note. The grid keeps your choices; the playhead keeps returning to read them.
+
+Change the tempo without moving either address. The time between visits changes. Stay with the rhythm for a few loops.
+
+&lt;!-- @standalone_disco --&gt;
+
+Leave the floor console on PLAY and stop the sequencer. Let the last sound fade while you watch the floor. The pattern keeps passing beneath you. What seemed to move together has come apart: one clock reads the score; another changes the floor.
+
+Restart the sequencer, then HOLD the floor&#x27;s pattern. The music continues. Watch for a brief brightening on the otherwise settled floor. A connection in the code sends each sounding step to a floor column. The two clocks are separate, but the sound can still leave a visible response.
+
+Keep the floor held for a few beats. A flash appears against the settled pattern. Release HOLD, and fresh arrangements can overtake it.
+
+There are sixteen steps but twelve floor columns. The bridge uses `step % disco_floor.grid_width`, taking the remainder by this floor’s width: step indices zero and twelve, the first and thirteenth steps, brighten the same column. Try them separately in the second track. The flash returns to the same place underfoot, at another place in the count. The sequencer tells the addresses apart; that flash alone cannot.
+
+Walk with a pulse, then keep your own rhythm across it. Distinguish the score, the floor&#x27;s independent animation and your movement. Sounding steps can reach the floor, but your footsteps are not written back into the score. Sharing a space with a rhythm is different from being measured by it.
+
+&lt;!-- @ --&gt;
+
+Put a beat somewhere that interrupts the repetition you expected. Does it become a mistake, an accent, or the part you wait for? Keep it for a few loops before deciding. A position that first sounded wrong may become the reason to return.
+
+Let it run while you cross the floor. Your next step need not wait for the next note.
+
+Next, our familiar forms gather in coloured stacks. A stored value can assign a colour to a surface. What happens when that colour meets its neighbours?
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Tutorial_Disco/tutorial.md">Raw captured source</a></p><pre># Disco
+
+A 17×17 dance floor. Each tile triggers when stepped on. A step sequencer loops the pattern.
+
+Build the floor.
+
+```gdscript
+const FLOOR_SIZE := Vector2i(17, 17)
+
+func build_dance_floor() -&gt; void:
+    for y in FLOOR_SIZE.y:
+        for x in FLOOR_SIZE.x:
+            var tile := DANCE_TILE_SCENE.instantiate()
+            tile.position = Vector3(x, 0, y)
+            tile.set_meta(&quot;coords&quot;, Vector2i(x, y))
+            tile.body_entered.connect(_on_tile_entered.bind(tile))
+            add_child(tile)
+```
+
+289 tiles. Each is an Area3D that detects body entry.
+
+Handle tile activation.
+
+```gdscript
+func _on_tile_entered(tile: Area3D) -&gt; void:
+    var coords: Vector2i = tile.get_meta(&quot;coords&quot;)
+    play_tone_for(coords)
+    light_tile(tile, 0.5)
+    if recording:
+        record_in_step(coords)
+```
+
+Playback plus recording, depending on current mode.
+
+Map a tile to a pitch.
+
+```gdscript
+const PENTATONIC := [0, 2, 4, 7, 9]  # semitones from root
+
+func pitch_for(coords: Vector2i) -&gt; float:
+    var scale_index: int = coords.x % PENTATONIC.size()
+    var octave: int = coords.y / PENTATONIC.size()
+    var semitones: int = octave * 12 + PENTATONIC[scale_index]
+    return 440.0 * pow(2.0, (semitones - 9) / 12.0)  # A4 = 440 Hz
+```
+
+Pentatonic scale avoids dissonance. The floor&#x27;s columns map to scale degrees; rows map to octaves.
+
+Light a tile briefly.
+
+```gdscript
+func light_tile(tile: Area3D, duration: float) -&gt; void:
+    var mesh := tile.get_node(&quot;Mesh&quot;)
+    var original: Color = mesh.material_override.albedo_color
+    mesh.material_override.emission_enabled = true
+    mesh.material_override.emission = Color(1, 1, 0)
+    var tween := create_tween()
+    tween.tween_property(mesh.material_override, &quot;emission_energy_multiplier&quot;, 0.0, duration)
+```
+
+Bright yellow emission that fades over the duration. The visual cue lasts long enough to register but not long enough to overlap with the next beat.
+
+Record into the step sequencer.
+
+```gdscript
+var steps: Array = []  # array of arrays of Vector2i
+const STEP_COUNT := 16
+var current_step: int = 0
+
+func _ready() -&gt; void:
+    for _i in STEP_COUNT:
+        steps.append([])
+
+func record_in_step(coords: Vector2i) -&gt; void:
+    if not coords in steps[current_step]:
+        steps[current_step].append(coords)
+```
+
+Each step holds the set of tiles active during that beat. Multiple activations at the same beat stack into one step.
+
+Advance the sequencer.
+
+```gdscript
+@export var bpm: float = 120.0
+var time_since_step: float = 0.0
+
+func _process(delta: float) -&gt; void:
+    time_since_step += delta
+    var step_duration: float = 60.0 / bpm / 4.0  # 16th notes
+    if time_since_step &gt;= step_duration:
+        time_since_step = 0.0
+        current_step = (current_step + 1) % STEP_COUNT
+        play_step(steps[current_step])
+```
+
+Tempo-based advancement. At 120 BPM with 16th notes, the sequencer advances every 0.125 seconds.
+
+Play a step.
+
+```gdscript
+func play_step(active_tiles: Array) -&gt; void:
+    for coords in active_tiles:
+        var tile := find_tile(coords)
+        if tile:
+            play_tone_for(coords)
+            light_tile(tile, 0.1)
+```
+
+Every tile in the step fires simultaneously. A strummed chord or a polyrhythmic pulse.
+
+You can now build a dance floor, map tiles to pitches via a pentatonic scale, record into a step sequencer, and play the sequence back at any tempo. Chamber_Arrays closes the sequence with arrangement-as-catalyst.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Tutorial_Disco/technical.md">Raw captured source</a></p><pre># Tutorial Disco — a fixed grid with changing values
+
+The preceding floor and wall halls repeat an image in space. Tutorial_Disco keeps the receiving tiles fixed and changes what they display over time. The later colour sequence gives surface values another set of possibilities; the coloured disco returns in tiling.
+
+## Current floor and controls
+
+The map configures standalone_disco as a 12 by 12 floor with 0.8 metre tile spacing and a single walkable collision box. StandaloneDiscoFloor.gd renders 144 flat boxes through a MultiMesh. The separate disco_controls artifact finds that floor within the hall, disables its autonomous pattern cycle, and supplies CHECKER, ROWS, DIAGONALS and SNAKE through per-instance colours. A fifth mode, SUPER TRIANGLE, adds a shader surface above the same tiles. Neither changes tile transforms.
+
+The actual checker rule in disco_controls.gd is:
+
+```gdscript
+return (x+z+phase)%2
+```
+
+PLAY / HOLD stops or resumes this console&#x27;s phase clock. ONE STEP advances the phase even while held. PATTERN changes the rule and returns its phase to zero. SPEED cycles 0.5, 1.0 and 0.25 seconds between visual updates. These controls do not change the sequencer&#x27;s tempo.
+
+## SUPER TRIANGLE — an image across fixed tiles
+
+After SNAKE, PATTERN selects SUPER TRIANGLE. The first four rules remain unchanged. The new surface is one unshaded PlaneMesh just above the tile tops, following the receiver&#x27;s actual dimensions, height and gap. It adds no collision. Its shader works in floor-local tile coordinates, so the square joints stay in place.
+
+Six families each have four quarter-turn poses: uniform diagonals, chevrons, diamonds, turning waves, large diamonds and super diamonds. The final two families span two and three tile pitches per motif respectively. Twenty-four steps complete the cycle. Between poses, an eased divider angle changes the black/white areas continuously; larger groupings also interpolate their pitch. Intermediate clipped regions need not themselves be triangles. These are image transformations, not rotating tile bodies.
+
+PLAY / HOLD freezes and resumes the fractional pose. ONE STEP moves to the next exact pose. SPEED preserves progress within the current interval when changing its duration. A one-row pulse texture carries the existing musical column responses into the shader; expiry continues while motion is held. The shared colour-hall controller supplies the same mode with its selected pair of colours.
+
+Sources: commons/artifacts/regularity/super_triangle_surface.gd and super_triangle.gdshader, instantiated by disco_controls.gd only when selected. The book figure uses six native held poses. The review&#x27;s 96 native frames sample the actual shader at quarter-step intervals and replay at eight frames per second, corresponding to the default half-second pose interval. It is an edited, silent comparison rather than a recorded live walk.
+
+## A score and a second clock
+
+step_sequencer stores four tracks of sixteen on/off cells in its UI. A track supplies a sound; a step supplies a position in the repeating count. Activating a cell auditions the sound. Playback advances the displayed playhead and requests notes only for active cells, then advances the next-step index. The configured sound preset is 90s_house; displayed track names follow the resolved instruments.
+
+The interval between sixteenth-note steps is 60 / bpm / 4 seconds. Tempo changes how quickly the score is read. The selected cells keep their addresses.
+
+DiscoSequencerBridge connects the locally placed sequencer to this floor. Sounding steps brighten a column indexed by step % grid_width. Sixteen score steps therefore fold onto twelve columns; step indices 0 and 12 select column 0. The monochrome console expires these responses after 0.15 seconds even while its own pattern is held. Its next repaint may replace a flash sooner.
+
+Walking does not write to the score. There are no per-tile foot-contact recorders in the current encounter. A recorded walk would need a separate input and timing representation.
+
+## Sources and shared illustration
+
+Production sources: commons/artifacts/regularity/disco_controls.gd, commons/context/discofloor/StandaloneDiscoFloor.gd, commons/context/discofloor/DiscoSequencerBridge.gd, commons/audio/sequencer/step_sequencer.gd and sequencer_ui.gd. Placement: map_data.json.
+
+The 23 September book figure pairs native captures of CHECKER at phases 0 and 1 from the same selected camera, with the score stopped and the visual clock held. No tile transforms are changed for the figure. The review animation assembles twelve native held ROWS phases at an editorial interval; it is a state comparison, not a real-time audiovisual recording. Labels, layout and resizing are the only image composition.
+
+Focused evidence and scope: doc/book/iterations/2026-09-23-disco-separate-clocks/. Earlier note/address, instrument-label and modulo checks remain in doc/book/iterations/2026-09-19-arrays-review/disco/. Supplied inputs and muted audio do not establish listening quality, headset comfort or learner understanding.
+
+## Retained proposal: the walk becomes a score
+
+The previous technical draft described a different, unimplemented encounter: contact-sensitive tiles recording a walk, then interpreting it as sound, light or neighbour propagation. That proposal remains intact in this iteration&#x27;s before/commons/maps/Tutorial_Disco/technical.md. It could return after the current distinction between score, clock and body is established. It must not be described as the present floor&#x27;s behaviour.
+
+## Optional comparison recipe — 24 September
+
+The main chapter now follows making a rhythm with less repeated setup. For an isolated comparison:
+
+1. Choose the empty sequencer pattern, activate one cell, let its immediate preview finish, then start playback. Compare the note’s return with the playhead reaching that column.
+2. Turn the cell off and follow the same column on the next loop. Its address remains, but that visit requests no new note. Restore it, add a second cell in the same track, and relocate the second event by switching its old cell off and another on. Keep the tempo fixed for this comparison.
+3. Change tempo with the chosen cells unchanged. Then leave the floor on PLAY and stop the sequencer; let any sustained sound fade. Restart the sequencer and HOLD the floor pattern. The two clocks can be stopped separately; sounding steps still cause brief column flashes while the visual pattern is held.
+4. For a clearer view, return to one active cell. Compare its sequencer column with the flash while the floor is held, then while the floor is running. A repaint can overtake the flash; HOLD does not stop its expiry.
+5. In the second track, try step index 0 alone, then 12 alone. Both brighten floor column 0 because the bridge uses `step % 12`. They remain different positions in the sixteen-step score.
+
+A gesture falling between steps would need another representation to retain that timing. This remains a development question alongside the earlier walk-as-score proposal; the current floor does not record footsteps. The main chapter leaves the visitor free to walk across the sounding score in their own time.
+
+This is a prose and reading-order revision. No sequencer, floor, shader, bridge, controls or runtime configuration changed; earlier evidence remains dated to its original checks.
+
+
+## From changing a rule to advancing its input — 28 September 2026
+
+The new 4x4 tiling studies make it useful to distinguish changing an instruction from changing phase under a fixed instruction. The revised opening holds CHECKER through two steps before introducing the other patterns. The expression itself stays fixed; its phase input changes, and the binary result returns after two increments. The small-study-to-field comparison in the preceding halls therefore prepares a different operation here, rather than implying that the clock rewrites the rule.
+
+The current artifacts already support this encounter. No runtime source, control, map placement or collision changes were needed. Fresh native views show the checker one step apart from the same eye-height position within the floor, and an exact and held intermediate triangle pose. The focused museum probe also exercises separate clocks and the ordinary controller walking across the floor. Audio remains muted in that probe: note events are evidence of dispatch, not a listening test.
+
+The older summary described a 17-by-17 walk-recording floor and an obsolete sequence order. It is preserved in the current review baseline as a future proposal. The current summary now agrees with the map, runtime and manuscript. Review and evidence: doc/book/iterations/2026-09-28-disco-a-rule-in-time/.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Tutorial_Disco/intent.md">Raw captured source</a></p><pre>Concept: A fixed monochrome grid gains a clock. The score, visual pattern and moving body can keep different rhythms.
+
+Sequence: array_tutorial, after the wall tiling encounter and before Color. Current order is declared in commons/maps/sequences/array_tutorial.json. Coloured floor control returns later in tiling.
+
+Encounter: disco_controls drives the 12 by 12 standalone_disco floor with five spatial patterns, hold, single-step and three speeds. The four-track, sixteen-step sequencer retains its own musical clock and briefly brightens floor columns. The stored score can change, repeat or fall silent while its addresses remain. There is no footstep recording.
+
+Critical question: What does the score retain, what is folded together when a sound reaches the floor, and what can a moving body do beyond either account?
+
+23 September pass: Preserve the mature score/clock/body comparison and its closing invitation to keep an unexpected beat. Refine the opening through standing still; add native before/after checker views. The companion texts now describe this actual encounter. Their earlier movement-as-score proposal is retained in the iteration baseline as a possible later artifact, not removed from the project.
+
+Evidence and reading: doc/book/iterations/2026-09-23-disco-separate-clocks/. First-pass layout history remains in doc/space/regularity-split-2026-09-17/. Supplied desktop controls and selected routes are distinct from headset experience and listening quality.
+
+Author-requested extension: SUPER TRIANGLE returns the half-square motif from floor tiling, now continuously turning and grouping it across the same receiver. HOLD can retain an intermediate arrangement; ONE STEP reaches a discrete pose. Its larger figures put visual grouping beside the fixed array addresses. Existing controls, score and physical floor remain. The shared colour controller also supplies its palette to this mode. Current implementation, native images and focused checks: doc/book/iterations/2026-09-23-disco-super-triangle/.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Tutorial_Disco/critical.md">Raw captured source</a></p><pre># Keeping time, keeping a place
+
+The score is exact about the cells we select. A footfall between its steps remains outside that account. We can move with the pattern, anticipate it, miss it or ignore it. The body can inhabit a rhythm without being reduced to the sequence that plays it.
+
+The current floor gives us three things to distinguish: the stored score, the changing light, and our movement. Stopping one clock lets another continue. A selected sound reaches the floor as a brief flash, but a flash does not preserve everything about its source: the first and thirteenth steps can arrive at the same column. What survives the translation becomes visible through the comparison.
+
+An unexpected beat can be kept. Its address gives us a way to return to it, to listen again before calling it wrong. The grid limits the places where we can put an event, yet those places do not settle what we can make of the event when it returns. The chapter lets precision and pleasure ask different questions of the same arrangement.
+
+## An encounter still to make: movement as score
+
+The earlier critical draft imagined recording the visitor&#x27;s path into music and hearing a performance return as a composition. It remains in doc/book/iterations/2026-09-23-disco-separate-clocks/before/commons/maps/Tutorial_Disco/critical.md. That is an artifact-development proposal. A future return could connect the trace&#x27;s sampling of movement with the sequencer&#x27;s division of time, then let the visitor compare a walk with what the recording kept. The current hall first makes the distinction between those things available to experience.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Tutorial_Disco/artifacts.md">Raw captured source</a></p><pre># Tutorial Disco — Artifacts
+*Array Tutorial Sequence · F_order · 3 artifacts*
+
+&gt; A 17×17 grid stretched into a dance floor. Every tile is an address — row, column, state. Step on it, it responds. The array becomes a surface you walk across, a structure large enough to get lost in.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Step Sequencer
+![Step Sequencer](/scene-catalog/step_sequencer.png)
+
+2D step sequencer with click-to-toggle grid. Arrays as sound - playhead reads indices, triggers sounds.
+
+`step_sequencer`
+
+## Standalone Disco Floor
+![Standalone Disco Floor](/scene-catalog/standalone_disco.png)
+
+Self-contained disco floor with white tiles and pattern control. Config: width:8, depth:8, tile_size:0.5, show_controls:true
+
+`standalone_disco`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Tutorial_Disco/summary.md">Raw captured source</a></p><pre># Tutorial Disco — Summary
+
+Tutorial_Disco closes the five-hall Arrays and Regularity sequence, after floor and wall tiling and before Color. The preceding encounters show how a local rule produces a larger spatial pattern. Here an extra input, phase, advances through time while the array addresses remain fixed.
+
+A 12 by 12 monochrome floor can be held, advanced one step or played at three speeds. CHECKER, ROWS, DIAGONALS and SNAKE offer different relations between the addresses and that count. SUPER TRIANGLE returns the earlier diagonal motif, continuously turning it and grouping it into figures spanning several tiles. The physical standing surface stays level.
+
+A separate four-track, sixteen-step sequencer starts empty. The visitor can place a note, hear its return, add another event and change their timing. Musical playback and the floor animation have separate clocks. A sounding step briefly brightens a floor column; because sixteen steps map onto twelve columns, distinct score addresses can reach the same place. Walking neither records a score nor triggers notes in this encounter.
+
+The hall invites the visitor to make a beat worth waiting for, then move with or across it. The score keeps selected events; it does not contain everything a body can do with them. The next hall holds familiar primitives, transformations and arrays in coloured stacks. The controlled colour disco returns later in the Tiling sequence.
+
+The earlier movement-as-score proposal, including contact-sensitive tiles and a captured walk, is retained in doc/book/iterations/2026-09-28-disco-a-rule-in-time/before/commons/maps/Tutorial_Disco/summary.md. It remains a possible future encounter rather than a description of this one.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Tutorial_Disco/blurb.md">Raw captured source</a></p><pre>A monochrome grid gains a clock. The score, visual pattern and moving body can have different rhythms.
+</pre></section></body></html>

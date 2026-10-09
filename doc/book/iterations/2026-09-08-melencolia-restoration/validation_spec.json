@@ -1,0 +1,156 @@
+{
+  "rays": [
+    {
+      "tag": "court top",
+      "x": 4.5,
+      "z": 9.5,
+      "top": 1.0
+    },
+    {
+      "tag": "raised bridge",
+      "x": 5.5,
+      "z": 15.5,
+      "top": 1.0
+    },
+    {
+      "tag": "Durer platform top",
+      "x": 3.2,
+      "z": 22.7,
+      "top": 2.0
+    },
+    {
+      "tag": "flat east bypass",
+      "x": 10.5,
+      "z": 20.5,
+      "top": 0.0
+    },
+    {
+      "tag": "lower ramp midpoint",
+      "x": 2.5,
+      "z": 11.5,
+      "top": 0.75
+    },
+    {
+      "tag": "upper ramp midpoint",
+      "x": 5.5,
+      "z": 17.5,
+      "top": 1.75
+    }
+  ],
+  "walks": [
+    {
+      "tag": "enter court via west ramp",
+      "from": [
+        1.4,
+        0.2,
+        11.5
+      ],
+      "to": [
+        3.6,
+        1.0,
+        11.5
+      ],
+      "seconds": 3.0
+    },
+    {
+      "tag": "climb bridge into Durer platform",
+      "from": [
+        5.5,
+        1.2,
+        16.4
+      ],
+      "to": [
+        5.5,
+        2.0,
+        18.2
+      ],
+      "seconds": 3.0
+    },
+    {
+      "tag": "east bypass past both platforms",
+      "from": [
+        10.0,
+        0.2,
+        8.5
+      ],
+      "to": [
+        10.0,
+        0,
+        24.5
+      ],
+      "seconds": 14
+    },
+    {
+      "tag": "turn behind Durer to exit",
+      "from": [
+        10.0,
+        0.1,
+        24.5
+      ],
+      "to": [
+        6.5,
+        0,
+        24.5
+      ],
+      "seconds": 3
+    },
+    {
+      "tag": "reach the museum exit",
+      "from": [
+        6.5,
+        0.1,
+        24.5
+      ],
+      "to": [
+        6.5,
+        0,
+        26.5
+      ],
+      "seconds": 3
+    }
+  ],
+  "shots": [
+    {
+      "tag": "court_from_walk",
+      "from": [
+        9.8,
+        2.8,
+        8.0
+      ],
+      "look_at": [
+        5.5,
+        1.8,
+        11.5
+      ],
+      "fov": 72
+    },
+    {
+      "tag": "court_and_Durer",
+      "from": [
+        12,
+        11,
+        7.5
+      ],
+      "look_at": [
+        5.5,
+        1.4,
+        15
+      ],
+      "fov": 70
+    },
+    {
+      "tag": "Durer_from_bypass",
+      "from": [
+        10.7,
+        3.9,
+        17.1
+      ],
+      "look_at": [
+        5.5,
+        3.0,
+        20.0
+      ],
+      "fov": 65
+    }
+  ]
+}

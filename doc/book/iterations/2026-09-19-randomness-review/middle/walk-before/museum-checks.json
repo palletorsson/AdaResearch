@@ -1,0 +1,89 @@
+{
+  "checks": 6,
+  "evidence": {
+    "artifact_ids": [
+      "window",
+      "view",
+      "counter",
+      "extinguisher",
+      "elevator",
+      "pallet",
+      "point_zero",
+      "station_plinth",
+      "random_walk_collection",
+      "random_walk_terrarium",
+      "random_walk_leash",
+      "random_draw_dot",
+      "pixel_cloud",
+      "random_walk_128",
+      "exit_sign",
+      "wall_clock",
+      "info_screen",
+      "electrical_panel",
+      "ceiling_vent"
+    ],
+    "spawn": "(7.5, 0.000683, 5.5)",
+    "state": {
+      "box": [
+        0.5,
+        0.400000005960464,
+        0.5
+      ],
+      "catchup_cap": 5,
+      "clock": 9.99999999999998,
+      "follow_one": true,
+      "frames": 300,
+      "levy_cap": 10.0,
+      "lines": [
+        "LEVY · 3D · step 0.015 m × (u+0.01)^-0.5",
+        "steps 300 · sim 10.0 s at 30 steps/s",
+        "clock 10.0 s · 300 frames · cap 5/frame",
+        "trail 200/200 kept · one followed, 4 dimmed",
+        "seed 777 · RESET replays it",
+        "glass folds a step back · LEVY cap 10×"
+      ],
+      "memory": "tail",
+      "mode": 2,
+      "mode_name": "LEVY",
+      "num_walkers": 5,
+      "positions": [
+        [
+          0.00902895629405975,
+          0.336345255374908,
+          -0.170814350247383
+        ],
+        [
+          0.118438132107258,
+          0.25417023897171,
+          0.149038136005402
+        ],
+        [
+          -0.0405885949730873,
+          0.151260077953339,
+          -0.201095536351204
+        ],
+        [
+          0.150035053491592,
+          0.0779758617281914,
+          -0.230065912008286
+        ],
+        [
+          0.244002819061279,
+          0.376469403505325,
+          0.212721928954124
+        ]
+      ],
+      "replay": true,
+      "seed": 777,
+      "sim_time": 10.0,
+      "stand": "logbook",
+      "step_size": 0.015,
+      "steps": 300,
+      "steps_per_second": 30.0,
+      "trail_kept": 200,
+      "trail_length": 200
+    }
+  },
+  "failures": [],
+  "headset_tested": false
+}

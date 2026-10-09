@@ -1,0 +1,63 @@
+{
+  "runs": {
+    "accepted-after": {
+      "returncode": 0,
+      "source_stable": true,
+      "checks": 34,
+      "failed": 0,
+      "script_errors": false
+    },
+    "accepted-before": {
+      "returncode": 1,
+      "source_stable": true,
+      "checks": 34,
+      "failed": 21,
+      "script_errors": false
+    },
+    "maze-after": {
+      "returncode": 0,
+      "source_stable": true,
+      "checks": 21,
+      "failed": 0,
+      "script_errors": false
+    },
+    "maze-before": {
+      "returncode": 1,
+      "source_stable": true,
+      "checks": 21,
+      "failed": 18,
+      "script_errors": false
+    },
+    "maze-final-after": {
+      "returncode": 0,
+      "source_stable": true,
+      "checks": 27,
+      "failed": 0,
+      "script_errors": false
+    },
+    "maze-final-before": {
+      "returncode": 1,
+      "source_stable": true,
+      "checks": 27,
+      "failed": 21,
+      "script_errors": false
+    }
+  },
+  "changed_sources": [
+    "algorithms/randomness/dice_throw/dice_throw.gd",
+    "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd",
+    "algorithms/randomness/seed_replay/seed_replay_demo.gd",
+    "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd"
+  ],
+  "placements": {
+    "Random_Definition": 7,
+    "Random_Entropy": 6,
+    "Random_Remove": 2,
+    "Randomness_10_PRINT_Algorithm": 12,
+    "Random_Cubes": 53
+  },
+  "retained_placements": 80,
+  "headset_verified": false,
+  "new_museum_capture": false,
+  "source_closure_files": 140
+}

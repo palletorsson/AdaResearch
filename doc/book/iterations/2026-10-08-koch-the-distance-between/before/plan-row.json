@@ -1,0 +1,25 @@
+{
+  "id": "Fractal_KochSierpinski",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A geometry-replacement function with two distinct length measures.",
+  "change": "Construct one equilateral Koch replacement from a segment's endpoints and apply it to a separate next list.",
+  "dependsOn": [
+    "Fractal_CantorSet",
+    "Point_Lines",
+    "Trans_Rotation"
+  ],
+  "reuses": "A replacement builds new data from old.; Endpoints, direction and distance.; Turn a displacement.",
+  "given": "line renderer; step controls; comparison triangle",
+  "later": "Do not explain every visible artifact. Keep the equilateral Koch rule distinct from the later L-system editor's five-segment right-angle preset.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A geometry-replacement function with two distinct length measures.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The current encounter surveys Koch, Sierpinski and box counting; the learner's endpoint-to-four-segments function is absent.",
+  "baseline": {
+    "tutorial": "e7196954f0d4dc1fb4b7663760a7994de002b8b5cd968c8d05e276bde7ffddb9",
+    "choice": "3f4bd597a95cdec05ecf740bf82a1ee9cd23d7a38b92997d5f6b8366baa2dff9"
+  },
+  "summary": "Replace one segment with the equilateral Koch construction using its endpoints, direction and length. Apply the operation into a new list and predict endpoint preservation and the changed total path length. Renderer and comparison triangle are supplied. Carry a geometric replacement function whose straight displacement and travelled boundary length remain distinct, without requiring all displayed fractals in the same lesson."
+}

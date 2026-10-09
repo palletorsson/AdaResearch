@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Noise_One · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Noise_One">← Tutorial lineage</a></p><h1>Noise One</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Noise_One/final.md">Raw captured source</a></p><pre># What does a value become?
+
+&lt;!-- @noisetorus --&gt;
+
+Two rings stand upright on a bench. There is room to stop and see both before moving closer. One wears its variation as small folds. The other keeps a round outline while colour travels across it. The columns behind us asked where change enters a body. Here the question becomes more intimate: could these two surfaces be receiving the same thing?
+
+![The upright relief and colour rings seen together from the standing approach inside the museum.](/book-review/doc/book/figures/Noise_One/standing-pair.png)
+
+Watch a bright patch arrive. Then press FREEZE. The rings hold that moment; the museum carries on. Two pale markers indicate matching coordinates. SAMPLE moves them together around the rings. Before reading the plate, look for a place where the folded ring turns inward and its coloured neighbour goes dark.
+
+The plate gives a signed value. A negative number can become an inward movement. What would negative brightness look like?
+
+At first this colour rule makes every negative sample black. Values that differ on the plate share the same darkness. Their differences have reached the display and been folded together there.
+
+Press REMAP. Some of the dark surface returns. The number at the marker does not change. Neither does the relief. A different reading has made room for something that was already being computed.
+
+```gdscript
+func colour_of(value: float) -&gt; float:
+	return (value + 1.0) * 0.5 if _remap else maxf(value, 0.0)
+```
+
+Read the two invitations inside that line. `maxf(value, 0.0)` gives every negative value the same destination. `(value + 1.0) * 0.5` carries the interval from minus one to one into the interval from zero to one. Minus one becomes black, zero becomes halfway, and one becomes full brightness. The colour channel had room for the difference once we changed its address.
+
+This is a small freedom with a specific mechanism. No hidden body has been rescued whole. We have changed what the display distinguishes. Lighting, the changing hue, screen precision and our eyes will still mediate what becomes visible. The plate reports the brightness factor before those further encounters.
+
+Keep the clock held and try AMPLITUDE. The folds deepen or retreat. At zero they leave a plain ring. The coloured ring keeps its pattern, and the sampled value stays where it was.
+
+```gdscript
+func relief_of(value: float) -&gt; float:
+	return value * float(PAIR_AMPS[_amp_i])
+```
+
+A multiplication is enough to change the force of an appearance. It is not a force calculation. In the vertex shader, the same product, computed there again, moves each vertex along its normal, the direction facing away from the surface at that vertex. The two rings have no collision shapes. The bench supports the instrument; its pictured folds will not catch a falling object.
+
+Now change FREQUENCY. Keep watching the same marker. The value itself may change. We have moved the coordinate at which the field is consulted.
+
+```gdscript
+var scale: float = float(PAIR_FREQS[_freq_i])
+var off: float = fmod(t, 3600.0) * noise_speed
+return _noise2(Vector2(x * scale + off, z * scale + off))
+```
+
+The field is sampled through the ring&#x27;s local `x` and `z`. Multiplying those coordinates makes more or less of the field pass across the same small body. Adding the time offset moves the sampling window diagonally. Release FREEZE and that addition resumes from the held moment. A wave of apparent change can come from travelling through values that are already determined by their coordinates.
+
+There is a quiet omission in the expression: no `y`. These are the ring&#x27;s own coordinates. We stood it upright; its addresses came with it. Two places on the front and back, sharing the same local `x` and `z`, consult the same value. The ring is three-dimensional; this field is addressed in two dimensions. Its normals still point in different directions. One value can therefore move two parts of the body differently.
+
+Look at the rings again. We began by treating their appearances as separate events. We can now follow a shared computation into different recipients. Yet the two views are not identical measurements: relief is evaluated at mesh vertices, while colour is evaluated across rendered fragments. The smooth skin and the bright skin spend different sampling budgets.
+
+The marker is a coordinate probe just outside the surface. The plate rounds its field value to three decimals. Neither is a promise of infinite resolution. The little counters from our first drawn line have reached the ring with us.
+
+&lt;!-- @noiselayers --&gt;
+
+Walk around to the landscape basin. At the centre of the room, a small violet terrain stands within a pale coordinate frame. Come to its southern edge, where four buttons offer SUM, LOW, MIDDLE and HIGH.
+
+Start with the whole. Choose a ridge to remember. Then press LOW. What survives? Try MIDDLE and HIGH before returning to SUM. One contribution may look modest beside another. Modest does not mean absent: addition has no obligation to give each ingredient an equally dramatic silhouette.
+
+The earlier arrays have become a sheet of addresses. At each address, three existing noise resources supply three weighted numbers.
+
+```gdscript
+var low_freq_height = low_freq_noise.get_noise_2d(world_x, world_z) * low_freq_amplitude
+var med_freq_height = med_freq_noise.get_noise_2d(world_x, world_z) * med_freq_amplitude
+var high_freq_height = high_freq_noise.get_noise_2d(world_x, world_z) * high_freq_amplitude
+```
+
+```gdscript
+var combined_height = low_freq_height + med_freq_height + high_freq_height
+```
+
+The weights are twelve, six and one-and-a-half. The names suggest a tidy progression, but the first two resources have almost equal base frequencies: 0.0056 and 0.0057. They also differ in algorithm, seed and octave count. These are three authored ingredients, not three pure frequency bands. A name can help us enter a construction while still needing inspection.
+
+Each button isolates a contribution before the same further processing. The code calls that processing erosion. Look at what it actually does: in three passes, it lowers samples whose estimated slope exceeds a threshold. No water carries the removed amount elsewhere. The name lends the calculation a landscape story; the implementation gives us a more limited operation to examine.
+
+Because the lowering happens after combination, the displayed SUM need not equal the displayed LOW, MIDDLE and HIGH added together. Combining, then modifying, can differ from modifying, then combining. Transformation taught us to ask about order. Here the order is present in the arithmetic but not to the eye: on this model the gap is a matter of millimetres, against about half a metre of relief.
+
+The model keeps 101 by 101 sample points. Its original 200-unit width is shown at one-fiftieth scale, four metres across. The terrain has a collision mesh made from its visible triangles, unlike the shader folds on the rings. That makes a different kind of surface available to the simulation, without making this basin a full-size hiking course.
+
+Keep the violet colour in mind. The geometry code also computes grass, rock and snow vertex colours, but the scene&#x27;s material wears its own colour instead. A calculation can exist without being selected for display. A mountain can wear violet without its heights changing. The pleasure of dressing a body has arrived inside the terrain pipeline.
+
+&lt;!-- @dark_sphere --&gt;
+
+Near the exit, the dark orb continues its pulse. Leave the rings held and the terrain on HIGH. The orb still has somewhere else to be in time.
+
+```gdscript
+var pulse_t := (sin(_time_elapsed * pulse_speed) + 1.0) * 0.5
+_sphere_material.emission_energy_multiplier = lerpf(pulse_min * _emit_mul, pulse_max * _emit_mul, pulse_t)
+```
+
+Another scalar finds a surface through a brightness rule. This one comes from the familiar sine and the orb&#x27;s own clock. It need not imitate the landscape to belong in the room. It lets us compare a periodic source with a sampled field, and makes the boundary of FREEZE visible again.
+
+Three works remain three works. Across them, we can follow values into displaced vertices, colour, an added height, a collision surface and a pulse. The shared numerical form permits these crossings. It does not decide which crossings we build, or what each one can support.
+
+Noise_Voxel waits beyond the door. There the field meets another demand: decide whether something occupies a cell. Take the dark patch with you. When a rule says that nothing is there, we now have a reason to ask how it read the value.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Noise_One/tutorial.md">Raw captured source</a></p><pre># Noise One: follow the receiving operation
+
+Book route: **noisetorus → noiselayers → dark_sphere**. All three are primary. Teach from their actual controls; leave explanations until after the comparison.
+
+1. Watch the two rings, then FREEZE at the current moment. SAMPLE moves matching coordinate probes. Find a negative value and compare inward relief with black colour.
+2. REMAP changes negative-to-black clipping into a mapping of the full signed range. The field and relief stay fixed. Return to CLIP to compare.
+3. While held, compare AMPLITUDE with FREQUENCY. The former changes displacement gain; the latter changes the coordinates consulted. Resume FREEZE and watch the local time continue.
+4. Walk to the basin&#x27;s south-facing panel. Inspect SUM before LOW, MIDDLE and HIGH. These isolate three supplied noise resources, each followed by the same slope-lowering pass; do not describe them as isolated octave bands.
+5. Return to SUM. The terrain restores its complete generated vertex array and matching collision mesh. Compare this collider with the rings&#x27; shader-only relief.
+6. Leave the rings frozen and observe the orb&#x27;s continued pulse. Compare sources and recipients without calling every animation noise.
+
+The book&#x27;s code blocks are excerpts from the actual GDScript. The torus field has a pair-only integer lattice hash and cubic interpolation; the legacy single-ring mode keeps its original floating hash. Two shader stages consult the same field expression at different sampling locations: mesh vertices versus interpolated fragment positions. A marker names a probe coordinate, not an exact fragment-pixel measurement.
+
+The terrain&#x27;s material is violet. Generated vertex colours are not enabled as its albedo. All three authored grids remain, with lower line density and opacity in this compact staging. The inherited large-scale terrain still exists outside `stand:basin`.
+
+Do not promise a brush, octave slider, torus collider, hydraulic erosion, procedural audio, or a walkable 200-metre mountain inside this hall. Headset reach and comfort are still pending. The next question is the occupancy threshold in Noise_Voxel.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Noise_One/technical.md">Raw captured source</a></p><pre># Noise One: implementation and limits
+
+## Torus instrument
+
+`noisetorus:180#stand:pair` at (5,4). Two equal TorusMesh objects, 96 rings and 40 ring segments, inner radius 0.18 m and outer radius 0.46 m. Both use `noiseTorus.gdshader`. The left relief/right colour assignment follows each holder, not the viewer&#x27;s camera orientation.
+
+FREEZE holds an artifact-owned accumulated time used by both shader stages and the CPU coordinate readout. Noise speed remains 0.935 and hue speed 0.725. The old approach set those speeds to zero, which reset the shader to time zero instead of preserving the displayed moment. Other shader consumers still default to engine TIME. The inherited one-hour offset wrap is not a proven seamless loop.
+
+Pair mode replaces the fragile floating-point lattice hash with wrapped 32-bit integer operations, followed by the same cubic value interpolation. The CPU and GPU perform equivalent operations; a rendered 256-coordinate readback measures their difference. The original floating hash remains available to legacy single-ring mode. This changes the pair&#x27;s field realization, not just its readout; baseline source and images are archived.
+
+AMPLITUDE cycles 0, 0.01, 0.02, 0.04 m. FREQUENCY cycles 7, 14, 24 coordinate units per local metre. SAMPLE selects six angles around the outer equator. The marker sits 0.04 m beyond the analytically displaced coordinate. Readout values are rounded, and it refreshes about four times a second while running. FREEZE gives a stable comparison.
+
+REMAP toggles brightness between `max(value, 0)` and `(value+1)/2`. The latter distinguishes signed values at the encoding stage; the final lit pixel is also affected by hue, illumination, rendering and display precision. Relief is evaluated at vertices, colour at fragments; neither the plate nor an analytical marker claims to measure a final pixel exactly. Rings have no colliders; bench and buttons do.
+
+## Retained terrain
+
+`noiselayers:0:0.8#stand:basin` at (5,7) attaches an optional staging script to the existing scene root. It retains the complete terrain generator and all three supplied FastNoiseLite resources. Scene cameras, environment and directional light are omitted only in this museum mode, where the museum supplies those services. Original meshes and all three grid planes are retained at 0.02 scale; grid material copies use fewer and fainter lines. The original root tilt is removed in the basin.
+
+| Contribution | Runtime noise type | Seed | Base frequency | Octaves | Weight |
+|---|---:|---:|---:|---:|---:|
+| LOW | 1 | 54321 | 0.0056 | 4 | 12 |
+| MIDDLE | 2 | 98765 | 0.0057 | 1 | 6 |
+| HIGH | 1 | 12345 | 0.0175 | 3 | 1.5 |
+
+Resource settings supplied in the scene take precedence over defaults that the generator constructs only when resources are absent. LOW/MIDDLE/HIGH isolate weighted resources, not individual octaves. SUM restores all three. Each rebuild samples 101×101 positions, combines heights, performs the original three-pass slope-dependent lowering and builds 20,000 triangles. Lowering is in-place, is order-sensitive and does not conserve material. It is not a hydraulic simulation.
+
+The terrain generator and all its height functions are unchanged. Basin mode disables automatic LOD because the legacy LOD meshes bypass the lowering pass. It uses one triangle collider generated from the displayed mesh, rebuilt when a layer changes, instead of the legacy extra walkability collider. Shader normals are a lighting approximation and do not establish whether a slope is traversable.
+
+The landscape spans four metres plus its surrounding case and coordinate frame. It is a model viewed from the room perimeter. The recovered map grows from 13×11 to 13×13 by inserting two floor rows immediately inside the entrance. Every old row remains, with the central five-by-five opening, raised east strip, artifacts and utilities shifted together below the insertion. The dark orb is at (8,10); its independent animation is unchanged. Hall controls reserve a clear area against automatically dealt sculpture plinths.
+
+## Verification
+
+Evidence: `doc/space/torus-review-2026-09-13/`. An isolated rendered Godot museum run checks all authored works, CPU/GPU field agreement, local clock hold, signed remapping, amplitude/frequency separation, terrain restoration, triangle collision equality, desktop pointer controls and museum route continuity. The saved necklace hand remains unchanged. Desktop rendering does not establish Quest performance, physical hand reach or headset comfort.
+
+## Standing comparison, 25 September 2026
+
+Pair-mode holders now turn both rings and their child coordinate markers by +90 degrees around local X. Their centres are 1.40 m high. The unchanged 0.46 m outer radius gives an undisplaced vertical span of 0.94–1.86 m. Each small display mount reaches from the bench top at 0.78 m into the lower tube. The rings still have no collider.
+
+The shader, CPU field functions, sample positions, amplitude/frequency choices and clock are unchanged. Local XZ is still the sampling plane; the holder transform changes its orientation in the room. Equal local XZ positions now lie toward/away from the viewer on the upright tube, rather than above/below a flat tube. No extra field dimension has been introduced.
+
+The two new approach rows move the instrument beyond the entrance piers and reserve a standing view of both recipients. Native evidence, before/after views at a declared held t=2 seconds, scope and limits: `doc/book/iterations/2026-09-25-noise-one-standing/`.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Noise_One/intent.md">Raw captured source</a></p><pre>Concept: A value becomes something through a receiving operation: relief, colour, a combined terrain height or an independently pulsing appearance.
+Sequence role: Continue Noise_Columns&#x27; distinction between driver and recipient; prepare Noise_Voxel&#x27;s occupancy decision.
+Primary order: noisetorus, noiselayers, dark_sphere. Each existing work gets a distinct anchored book passage.
+Encounter: Observe, hold the present, compare amplitude with coordinate frequency, change clipping to signed remapping, isolate the terrain&#x27;s existing contributions, notice the orb&#x27;s independent clock.
+Critical opening: A difference can be computed and then hidden by an encoding; changing the encoding can reveal it. Names such as LOW, MIDDLE and erosion remain open to inspection against implementation.
+Limits: No brush or octave sliders. Rings have no collider. The compact terrain is a 1:50 model. Terrain layering retains different source algorithms/settings rather than claiming a controlled octave comparison. Headset testing remains for later.
+Staging: Upright paired rings share a standing approach beyond the entrance piers. The holders turn both mesh and marker; the two-coordinate field remains unchanged.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Noise_One/critical.md">Raw captured source</a></p><pre># A difference needs somewhere to appear
+
+The torus comparison begins with a practical loss. Negative samples move the relief inward but, under the first colour rule, all become black. Different numbers arrive at one appearance. The shader has computed their difference; a later operation has refused to distinguish it.
+
+REMAP offers a small intervention. It translates the signed range into a non-negative brightness range. A difference that looked unavailable to colour becomes available through another encoding. We can locate the exclusion in a line of code and change that line&#x27;s operation. This is a material argument about a particular apparatus, not a proof that every exclusion can be repaired by adjusting a parameter.
+
+There is queer potential in this redistribution of legibility. A surface need not keep the role assigned by its first mapping. The same scalar can enter a fold, a colour or a height. Dressing the surface can disclose something as well as disguise it. The violet terrain need not become green and brown to make its spatial argument. Its generated vertex colours remain a possibility that the active material does not display.
+
+The analogy has limits worth keeping close. A signed number is not an identity, and a function&#x27;s output range is not a social theory. What the artifact supplies is a manipulable relation: decide which differences a receiving operation can preserve, test the decision, then ask what further mediation remains. A brightness factor is still not the light seen by a particular body.
+
+The terrain expands this argument through combination. Its three named contributions have unequal weights, different seeds and different internal settings. The labels LOW and MIDDLE suggest more separation than their nearly equal base frequencies provide. The material can correct the introductory story. We do not need to remove an existing work because it complicates the question; we can let that complication become part of the lesson.
+
+The generator&#x27;s word erosion is another invitation to inspect. Three passes lower steep samples without moving water or conserving sediment. The operation may produce a useful or beautiful terrain while carrying only a small part of what its name suggests. Calling it an approximation does not finish the inquiry. Which behaviours can it support? Which imagined histories has the name supplied for free?
+
+The compact model also changes the encounter. A former 200-unit landscape becomes four metres across. Its existing algorithm survives, but a visitor now surveys it from the edge instead of entering a mountain at that scale. Preservation of code is not preservation of bodily experience. That tradeoff is explicit here and can be revisited if a later hall needs a full-size terrain.
+
+Finally, the dark orb continues while the rings pause. FREEZE belongs to an instrument. The clock that lets us inspect one event does not stop the museum, and our attention cannot follow every computation at once. The route makes an opening by selecting what to hold. We carry that selection, and the differences it leaves outside, toward the voxel&#x27;s occupancy decision.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Noise_One/artifacts.md">Raw captured source</a></p><pre># Primary works
+
+1. **noisetorus** — paired field readings, with FREEZE, SAMPLE, AMPLITUDE, FREQUENCY and REMAP. Map (5,4), facing north.
+2. **noiselayers** — the existing three-resource terrain, staged as a compact basin with SUM, LOW, MIDDLE and HIGH. Map (5,7); controls face south. Original generator, source settings and coordinate planes retained.
+3. **dark_sphere** — independent periodic brightness and rotation. Map (8,10), near the exit; no new interaction is claimed.
+
+The map&#x27;s recovered structure and utilities remain intact. Optional automatically dealt museum sculpture is not counted as one of these authored works. Previous texts and map are archived under `doc/space/torus-review-2026-09-13/before/`.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Noise_One/summary.md">Raw captured source</a></p><pre># What does a value become?
+
+Noise_One keeps all three authored works as primary: noisetorus, noiselayers and dark_sphere. The rings compare relief, clipped colour and signed remapping. The compact terrain retains its three noise resources and adds controls to isolate their weighted contributions. The orb supplies an independent periodic brightness rule.
+
+The route accumulates arrays, colour mappings, transformation order and coherent fields. What changes depends on where a value is received. The next hall, Noise_Voxel, asks what an occupancy threshold makes present or absent.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Noise_One/blurb.md">Raw captured source</a></p><pre>Two rings receive one field: folds on one, colour on the other. Freeze a moment, find a negative value, and change how colour reads it. Then inspect three contributions to the retained terrain basin while the dark orb keeps its own time.
+</pre></section></body></html>

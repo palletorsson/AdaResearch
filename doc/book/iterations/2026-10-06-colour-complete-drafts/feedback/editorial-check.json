@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "tutorials": [
+    {
+      "hall": "Color_Context_Placed",
+      "fenced_programs_identical": true,
+      "code_blocks": 1,
+      "before_sha256": "9a62acc35759cf86668056b3e01ecef7f915fe62f4d488a39397be2fb6d9d527",
+      "after_sha256": "77da32f3fe1b46418b53dc53f112947896e80dbc13fc4c6d184b5b431a5152a4"
+    },
+    {
+      "hall": "Color_Rainbow",
+      "fenced_programs_identical": true,
+      "code_blocks": 2,
+      "before_sha256": "6f9ee475ebc990ac347e5e88eb00efb935995ce569415537c88b79ab90baf21b",
+      "after_sha256": "607da8bc094a5679b90d849790d114f452a4a954cf3efb55d5d68063c370ce87"
+    },
+    {
+      "hall": "Color_Paint",
+      "fenced_programs_identical": true,
+      "code_blocks": 4,
+      "before_sha256": "778b1838e6d7a90d361799128c86147877948a3d37eb1cf0028146b8a31a5a5f",
+      "after_sha256": "8a7e66029c5f26a9de8c926d5018a999a6708ae144fa811c0963bc010d9900f5"
+    }
+  ],
+  "student_scripts_unchanged": 26,
+  "finals_unchanged": 8,
+  "sequence_unchanged": true,
+  "scope": "Editorial source comparison; native proof remains separately recorded."
+}

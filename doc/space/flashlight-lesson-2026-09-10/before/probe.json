@@ -1,0 +1,43 @@
+{
+	"checks": 36,
+	"failures": [
+		"lamp handles begin within standing reach",
+		"red beam changes received red light",
+		"overlapping green adds a visible green contribution",
+		"blue contributes to overlap"
+	],
+	"headset_tested": false,
+	"samples": {
+		"ambient": {
+			"b": 0.599757611751556,
+			"g": 0.521858870983124,
+			"r": 0.458823829889297
+		},
+		"arrival": {
+			"b": 0.948245584964752,
+			"g": 0.964706242084503,
+			"r": 0.911305487155914
+		},
+		"red": {
+			"b": 0.599467098712921,
+			"g": 0.521858870983124,
+			"r": 0.462793737649918
+		},
+		"red_green": {
+			"b": 0.597966253757477,
+			"g": 0.52490895986557,
+			"r": 0.46492400765419
+		},
+		"returned": {
+			"b": 0.597966253757477,
+			"g": 0.52490895986557,
+			"r": 0.46492400765419
+		},
+		"rgb": {
+			"b": 0.597966253757477,
+			"g": 0.52490895986557,
+			"r": 0.46492400765419
+		}
+	},
+	"xr_input": "supplied grabber, not tracked hands"
+}

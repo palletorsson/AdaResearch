@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What the gauge forgets · Ada Research</title><style>body{max-width:1050px;margin:48px auto;padding:0 24px;background:#eeebe2;color:#242a2c;font:18px/1.6 system-ui}h1{font-size:46px;line-height:1.1}h2{margin-top:48px}a{color:#8b3b20}img{width:100%;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border:1px solid #c2bbaa;padding:12px;text-align:left;vertical-align:top}code{font-size:.86em}li{margin:12px 0} table{font-size:14px} pre{overflow:auto;background:#fff;padding:18px} details{margin:35px 0;padding:20px;border:1px solid #c2bbaa}summary{cursor:pointer;font-weight:600}details h1{font-size:32px} table{overflow-wrap:anywhere} audio{display:block;width:100%;margin:1rem 0 2rem} details{border:1px solid #b7b0a2;padding:20px;margin-top:36px}summary{cursor:pointer;font-weight:600}details h1{font-size:32px}.sample-view{background:#fbf8f0;border:1px solid #c2bbaa;padding:24px;border-radius:8px}.sample-body{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}.sample-body>div{min-width:0}.sample-view figure{margin:20px 0}.sample-view figcaption{font-size:14px;margin-bottom:8px}.sample-grid{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:3px;background:#282b31;padding:7px}.sample-grid span{aspect-ratio:1;display:grid;place-items:center;font:12px ui-monospace,monospace;color:#141923}.sample-controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.sample-controls label{font-size:15px}button{font:inherit;font-size:16px;padding:10px 18px;border:1px solid #716658;border-radius:4px;background:#fff;color:#242a2c;cursor:pointer}button[aria-pressed=true]{background:#743653;color:#fff}button:focus-visible,input:focus-visible{outline:3px solid #743653;outline-offset:3px}.meter{display:flex;flex-direction:column;gap:4px;margin:24px 0 12px}.meter strong{font-size:28px;font-variant-numeric:tabular-nums}.meter span,.chart-key,#count-status{font-size:14px}.count-row{display:grid;grid-template-columns:16px minmax(0,1fr) 110px;gap:10px;align-items:center;margin:4px 0;font:14px ui-monospace,monospace}.count-track{height:16px;position:relative;background:#e1ded6}.count-bar{height:100%;box-shadow:inset 0 0 0 1px #252a3240}.ghost{position:absolute;top:-2px;bottom:-2px;border-left:3px solid white;filter:drop-shadow(1px 0 #444)}.count-value{text-align:right}.chart-key{margin-bottom:12px}h1{font-size:clamp(32px,5vw,46px)}@media(max-width:850px){.sample-body{grid-template-columns:1fr}.sample-body .meter{margin-top:0}}@media(max-width:550px){body{padding:0 14px}.sample-view{padding:12px}.sample-grid{gap:1px;padding:3px}.sample-grid span{font-size:8px}.count-row{grid-template-columns:12px minmax(0,1fr) 96px;gap:6px;font-size:12px}.meter strong{font-size:24px}td,th{padding:6px;font-size:12px}}</style></head><body><main><h1>What the gauge forgets</h1>
+<p><a href="random-definition.html">Random Definition</a> → <strong>Random Entropy</strong> → <a href="random-remove.html">Random Remove</a></p>
+<p><a href="/necklace/thread?map=Random_Entropy&amp;role=primary">The primary and its book passage</a> · <a href="/research/waves-chance-noise/index.html#Random_Entropy">Waves, randomness and noise plan</a></p>
+<p>Choose two neighbouring colours. Perhaps they make a pair you would keep. Find them again in the enlarged row on the desk's front. Now press SORT and follow what happens to their closeness.</p>
+<p><img alt="The meter as drawn: 200 small tiles above an enlarged record of the first forty" src="random-entropy-drawn.png" /></p>
+<p>The upper ribbon gathers into blocks of colour. The bars hold still. So does the number. Below the moving tiles, the first forty keep the neighbours they had before. <strong>What did the gauge fail to notice?</strong></p>
+<p><img alt="The same camera after SORT: the upper ribbon regroups while the enlarged original excerpt stays in place" src="random-entropy-sorted.png" /></p>
+<p>Claude's existing installation carries this encounter: <code>shannon_entropy_meter</code> is the room's one primary and its book anchor. This continuation improves the local controls and caption, checks the complete comparison and develops the text around what can actually be found at the desk.</p>
+<h2>Keep the counts. Move the neighbours.</h2>
+<p>Here are the two complete samples exported by Godot. Try SORT before reading the explanation. The browser wraps the two-metre ribbon into ten rows of twenty; read across each row, then down. Its first-forty excerpt stays as drawn. This is a view of the captured values, not a new random generator or a reproduction of the museum lighting.</p>
+<section class="sample-view" aria-label="Captured entropy samples">
+<div class="sample-controls"><button id="sort" type="button" aria-pressed="false">SORT</button><button id="contrast" type="button" aria-pressed="false">CONTRAST</button><label><input type="checkbox" id="expectations"> Show source expectations</label></div>
+<p id="sample-status" role="status" aria-live="polite"></p>
+<div class="sample-body"><div><figure><figcaption id="order-caption">200 draws · original order</figcaption><div id="ribbon" class="sample-grid" role="img" aria-label="200 symbols in original draw order"></div></figure>
+<figure><figcaption>First forty · always as drawn</figcaption><div id="excerpt" class="sample-grid" role="img" aria-label="First forty symbols in original order"></div></figure>
+</div><div><div class="meter"><strong id="entropy-value"></strong><span>Marginal H · ceiling log₂(10) = 3.321928 bits/symbol</span></div>
+<p class="chart-key">Observed counts · fixed scale from 0 to 200<span id="ghost-key" hidden> · pale vertical ticks: source expectations</span></p>
+<div id="histogram" aria-label="Symbol counts, fixed scale from zero to two hundred"></div>
+<p id="count-status"></p></div></div><noscript>Download the captured samples below, or enable JavaScript to compare the two arrangements.</noscript></section>
+
+<p>The browser histogram uses a fixed <strong>0–200 count scale</strong> so the two samples can be compared directly. In the museum, each histogram makes its own largest bar ten centimetres tall. The different rulers are part of the comparison.</p>
+<p>The meter begins with one tally for each symbol:</p>
+<pre><code class="language-gdscript">for s in sequence:
+    counts[s] += 1
+</code></pre>
+<p>Nothing in that loop records where a symbol stood. SORT moves the tile instances into a stable order without rewriting the sampled sequence. In the arrival sample, 198 of 200 instances change place. Their counts remain 17, 11, 21, 31, 17, 18, 19, 24, 13 and 29. The same counts enter the next loop:</p>
+<pre><code class="language-gdscript">for c in counts:
+    if c &gt; 0:
+        var p: float = float(c) / float(sequence_length)
+        entropy -= p * (log(p) / log(2.0))
+</code></pre>
+<p>The result is <strong>3.255647 bits per symbol</strong>, both before and after sorting. This marginal measurement uses the shares in the sample. It does not look at neighbouring pairs or use their order to predict the next symbol. A repeated cycle through ten symbols can reach the same maximum as any other evenly populated sample.</p>
+<h2>Another sample, another ruler</h2>
+<p>Press CONTRAST. The alphabet and sample size stay: ten symbols, two hundred draws. This second cached sample comes from a weighted source, with each symbol about half as likely as the one before it. It also has its own seed. Switching back restores the first sample; the buttons do not keep resampling it.</p>
+<p><img alt="The concentrated sample from the same desktop camera: symbol zero occurs 109 times, and four symbols have no occurrences" src="random-entropy-concentrated.png" /></p>
+<p>The first symbol occurs 109 times. Four symbols never occur. The entropy falls to <strong>1.817600 bits per symbol</strong>. Compare their counts with the marks on the panel: a zero still has a visible bar because the display includes this line:</p>
+<pre><code class="language-gdscript">height = max(0.002, height)
+</code></pre>
+<p>Every bar gets at least two millimetres. The tallest also has the same ten-centimetre height in both samples, although its count changes from 31 to 109. Its neighbours make it look dominant; its own height cannot tell you how many occurrences it holds. Read the ledger below it.</p>
+<p>DISCLOSE first brings in the formula, then the source and its pale expected-count bars. Those expectations follow the selected source. The uniform source expects twenty of each on average; its actual sample did not divide evenly. The concentrated source supplies a descending set of expectations. Small expected values share the same minimum visible height as some zeros. Keep the numbers beside the picture.</p>
+<h2>What becomes possible in the rearrangement?</h2>
+<p>A sorted row makes every occurrence of a colour easy to find. The original row keeps the pairs and interruptions you first encountered. You might use one as a stock of colours and the other as the beginning of a fabric. The unchanged number cannot decide which arrangement matters to that work.</p>
+<p>There are two losses to follow here. Counts discard positions. The entropy reading condenses those counts again: from H alone you cannot recover even the ten bar values. The first-forty record lets the body remain beside some of the relations the gauge has omitted.</p>
+<p>This gives the critical question somewhere specific to land. Which relations must a representation preserve for the thing we want to do? A high value is no general certificate of freedom, and a low one does not describe a body's possibilities. Here we can change a relation that matters to us while leaving the instrument satisfied that nothing changed.</p>
+<h2>At the desk</h2>
+<p><img alt="Close desktop inspection of the three front controls with matte faces and pale lettered tags" src="random-entropy-controls.png" /></p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>What happens here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SORT</td>
+<td>Rearranges the upper ribbon, then restores its draw order. Counts, H and the enlarged original excerpt stay fixed.</td>
+</tr>
+<tr>
+<td>CONTRAST</td>
+<td>Selects the other cached sample, retaining the sorting choice. Its counts, colours and source expectations replace the current ones.</td>
+</tr>
+<tr>
+<td>DISCLOSE</td>
+<td>Steps the upper panel through ledger → works → origin → oracle → tally → ledger. The desk keeps its own tiles and account throughout.</td>
+</tr>
+</tbody>
+</table>
+<p>The button panel is larger, its backing and lettered tags remain readable under room lighting, and the front excerpt caption now says “first forty · as drawn.” A false ×4 label is gone: the enlargement uses different factors for width and height. Fine lettering on the upper panel still needs a closer approach. Headset reach and reading remain for a later visit.</p>
+<h2>Evidence and the next room</h2>
+<p><strong>149 independent desktop checks passed, zero assertion failures, engine exit 0.</strong> They exercise real button signals and desktop pointer presses, sorting, both orders of source/disclosure selection, source expectations, the zero and maximum-entropy endpoints, approach, unload and rebuilding. The three comparison captures share the same camera pose. The two exported samples are independently counted and their entropy recomputed; twelve production excerpts are checked across final, tutorial and technical texts.</p>
+<p>All nine map placements remain declared. Eight instantiate; the secondary <code>replay_casino</code> has no living scene and is still missing from the built room. The primary is present and tested. The run has no script errors, but reports an unrecognized audio-bus UID, a root-certificate error, a logger failure and an ObjectDB shutdown warning. These remain recorded separately from the passing checks. No headset observation is claimed.</p>
+<p><a href="random-entropy-check.json">Desktop report</a> · <a href="random-entropy-run.json">Run receipt</a> · <a href="random-entropy-samples.json">Captured samples</a> · <a href="random-entropy-tutorial.md">Tutorial</a> · <a href="random-entropy-technical.md">Technical notes</a> · <a href="random-entropy-critical.md">Critical text</a></p>
+<p><strong>Next: <a href="random-remove.html">Random Remove</a>.</strong> Before the draw chooses a place, what has already decided which places are eligible? The question moves from an arrangement on a desk into the space we can walk.</p><details><summary>Read the book passage</summary><h1>What the gauge forgets</h1>
+<p>In the last room, one discarded draw changed which values became neighbours. Here, choose a pair of neighbouring colours before touching a button.</p>
+<p>A gauge hangs on a post at the west side of the corridor, its number glowing over a desk. On the desk, two hundred small coloured tiles stand in a row, and a pale bar lies before the first forty of them.</p>
+<!-- @shannon_entropy_meter -->
+
+<p>Look at the tiles and the ten bars before the large number. Each tile is one draw, in the order it was drawn, coloured by its symbol; the strip along the panel's foot spells out the first forty, the ones behind the bar. Find a colour that comes often in the row and one that comes seldom, and compare their bars. The bars collect every occurrence wherever it fell; the row keeps where each one fell. Choose two neighbouring tiles and ask whether their closeness tells you anything about the height of their bars. Then find another tile of the same colour further along.</p>
+<p>The first forty also appear enlarged across the desk's front, labelled “as drawn.” Keep one pair in that row in view.</p>
+<p>Now press SORT, on the desk's front. Watch the row and the bars together. The tiles glide into ten blocks, one per symbol; the bars hold their places. Look up at the number. It has stayed too. The pale bar before the first forty disappears: those particular draws no longer occupy the beginning of the sorted row. The plate on the desk's front prints the sorted copy's H beside the reading, the word <em>equal</em>, and how many of the two hundred tiles changed place. The enlarged excerpt stays as drawn while the two hundred tiles regroup above it. One part of the desk keeps the old neighbours available beside the new ones. Press SORT again and the upper row comes back as it was drawn.</p>
+<p>What the gauge counts is this:</p>
+<pre><code class="language-gdscript">    for s in sequence:
+        counts[s] += 1
+</code></pre>
+<p>one tally per symbol, and nothing about where in the sequence the symbol stood. The number is made from the tallies alone:</p>
+<pre><code class="language-gdscript">    for c in counts:
+        if c &gt; 0:
+            var p: float = float(c) / float(sequence_length)
+            entropy -= p * (log(p) / log(2.0))
+</code></pre>
+<p>Each symbol's share of the two hundred, times the logarithm of that share, summed and negated. A symbol that never occurred is skipped rather than given a zero times an infinity, and the largest the sum can be is log₂ of the alphabet:</p>
+<pre><code class="language-gdscript">    var max_h: float = log(num_symbols) / log(2.0)
+</code></pre>
+<p>About 3.32 bits per symbol for ten equally frequent symbols, the ceiling marked at the end of the bar. The reading sits just under it, because this sample from an even source did not divide evenly; the bars record this particular sample rather than the ideal distribution as if it had already happened.</p>
+<p>Sorting changed the row without changing any tally. The same counts entered the same loop. Yet the row looks like another object. Keep it sorted for a moment: finding every occurrence of a colour has become easier. Return to the order drawn and a colour has its former neighbours again. Which arrangement would you want to work with? The gauge cannot choose between these uses for you.</p>
+<p>Press CONTRAST. A second sample takes the wall: the same ten symbols, the same two hundred draws, from a source that makes the first symbol about twice as likely as the second, the second twice as likely as the third, and so on. The probabilities are normalised across ten symbols; they do not promise fixed counts. In this sample the first symbol occurs 109 times. Its bar towers, and the number falls to about 1.82 bits. Nothing in the alphabet or the count changed; the shares did. The plate names the source and its seed, so you can tell the two samples apart by their provenance and not only by their look. Look closely at the smallest bars and compare them with the counts on the desk. Four symbols did not occur in this sample. They still have tiny marks. The display gives every bar at least two millimetres:</p>
+<pre><code class="language-gdscript">height = max(0.002, height)
+</code></pre>
+<p>A visible mark can stand for zero. The tallest bar also reaches the same height in both samples: the display divides by that sample's largest count. Read the counts to compare how many occurrences there were. The ruler has changed with the thing it measures.</p>
+<p>Press CONTRAST again and the first sample returns, draw for draw.</p>
+<p>The first sample comes from a seeded local generator, giving each symbol the same chance on each call:</p>
+<pre><code class="language-gdscript">        sequence.append(_rng.randi_range(0, num_symbols - 1))
+</code></pre>
+<p>The seed lets the gauge recover this sample when it rebuilds. The contrast uses a second seed and a weighted draw; it too can be recovered.</p>
+<p>Press DISCLOSE and the formula appears under the title; press it again and the source is named on the panel with a pale bar behind each live one showing the count that source expects on average: one flat line for the even source, a descending staircase for the concentrated one, and the plate prints those expected counts beside its name. Keep pressing and the upper panel withholds its bars and strip, then brings them back. The reading stays. Look down: the desk still carries the tiles and its own account of the counts. Information absent from one display can remain within reach on another. How much would you know if you approached only the glowing number?</p>
+<p>Now ask what the unchanged number failed to notice. It did not notice the order, which the sorted view rearranged. It cannot notice a pattern between neighbours, a repeated pair, a rhythm, a message, because it never looked at two tiles at once. It does not know whether the row was worth reading. A high reading is not a certificate of meaninglessness and a low one is not a certificate of value; here it averages surprise using the shares counted in this sample, without consulting the neighbours of a draw.</p>
+<!-- @ -->
+
+<p>The last room asked how an arrangement could return. This room asks what survives when we describe one. The histogram retains the counts; the entropy reading condenses those counts further. From that number alone you cannot recover even the bars, let alone the neighbours you chose. In the next room the eligible set becomes spatial: before anything is removed at random, a rule has already decided what can be chosen.</p></details></main><script>
+const samples={"concentrated":{"contrast":true,"counts":[109,46,20,17,6,2,0,0,0,0],"disclosure":"ledger","entropy":1.81760045686154,"expected_counts":[100.097751710655,50.0488758553275,25.0244379276637,12.5122189638319,6.25610948191593,3.12805474095797,1.56402737047898,0.782013685239492,0.391006842619746,0.195503421309873],"ghost_heights":[],"max":3.32192809488736,"n":200,"probabilities":[0.500488758553275,0.250244379276637,0.125122189638319,0.0625610948191593,0.0312805474095797,0.0156402737047898,0.00782013685239492,0.00391006842619746,0.00195503421309873,0.000977517106549365],"ribbon_first_40":[1,0,2,5,0,0,2,2,3,3,0,0,0,0,0,2,4,1,0,0,1,0,1,1,1,3,0,0,4,1,0,0,3,0,0,1,0,2,1,0],"rung":2,"seed":1342042699,"sequence":[1,0,2,5,0,0,2,2,3,3,0,0,0,0,0,2,4,1,0,0,1,0,1,1,1,3,0,0,4,1,0,0,3,0,0,1,0,2,1,0,0,0,0,1,3,0,2,1,2,2,0,1,0,1,3,4,0,0,2,0,3,1,1,0,2,1,0,0,1,0,1,1,3,0,2,0,0,0,0,0,0,0,1,1,0,0,0,0,0,4,0,4,1,0,0,5,0,0,1,0,1,0,0,0,0,0,1,0,3,2,0,2,0,3,0,0,0,0,1,0,1,0,0,0,0,1,1,3,0,0,0,1,2,0,1,1,0,0,2,3,2,0,3,2,3,0,0,0,0,2,4,0,0,0,0,1,1,0,0,0,0,1,1,0,0,3,0,0,1,3,0,0,1,0,0,0,2,0,0,0,0,1,1,3,0,1,1,0,2,1,0,1,0,0,0,1,0,1,0,0],"sort_t":0.0,"sorted_counts":[109,46,20,17,6,2,0,0,0,0],"sorted_entropy":1.81760045686154,"sorted_sequence":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,5,5],"sorted_view":false,"source":"concentrated","stand":"ledger","strip":"1 0 2 5 0 0 2 2 3 3 0 0 0 0 0 2 4 1 0 0 1 0 1 1 1 3 0 0 4 1 0 0 3 0 0 1 0 2 1 0 ...","symbol_colors":[[0.800000011920929,0.319999992847443,0.319999992847443],[0.800000011920929,0.607999980449677,0.319999992847443],[0.703999996185303,0.800000011920929,0.319999992847443],[0.415999978780746,0.800000011920929,0.319999992847443],[0.319999992847443,0.800000011920929,0.512000024318695],[0.319999992847443,0.800000011920929,0.800000011920929],[0.319999992847443,0.511999905109406,0.800000011920929],[0.415999889373779,0.319999992847443,0.800000011920929],[0.704000115394592,0.319999992847443,0.800000011920929],[0.800000011920929,0.319999992847443,0.608000218868256]],"symbols":10,"tiles_moved":200},"uniform":{"contrast":false,"counts":[17,11,21,31,17,18,19,24,13,29],"disclosure":"ledger","entropy":3.25564732026922,"expected_counts":[20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0,20.0],"ghost_heights":[],"max":3.32192809488736,"n":200,"probabilities":[0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1],"ribbon_first_40":[7,4,8,2,5,1,1,8,8,2,4,5,9,6,0,8,0,5,0,9,0,6,3,6,5,5,9,8,6,7,5,2,2,7,2,5,3,2,2,9],"rung":2,"seed":1342042698,"sequence":[7,4,8,2,5,1,1,8,8,2,4,5,9,6,0,8,0,5,0,9,0,6,3,6,5,5,9,8,6,7,5,2,2,7,2,5,3,2,2,9,1,3,4,4,9,0,9,1,8,3,2,9,3,6,3,3,2,4,3,2,0,3,3,9,3,6,4,2,9,2,3,7,9,9,7,7,0,9,9,7,2,5,5,6,2,5,7,6,4,1,9,7,0,5,4,6,7,6,0,5,7,8,2,0,6,3,1,3,6,2,3,3,8,6,9,2,3,5,6,7,9,2,0,7,9,6,2,3,9,5,3,0,3,4,4,3,1,7,9,4,7,8,0,3,0,3,4,7,5,0,9,3,9,5,8,1,9,7,7,5,9,6,8,3,5,0,3,7,0,4,7,1,4,3,9,6,2,1,1,3,7,8,4,9,3,9,4,3,7,6,8,2,3,9,9,7,7,9,4,6],"sort_t":0.0,"sorted_counts":[17,11,21,31,17,18,19,24,13,29],"sorted_entropy":3.25564732026922,"sorted_sequence":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],"sorted_view":false,"source":"uniform","stand":"ledger","strip":"7 4 8 2 5 1 1 8 8 2 4 5 9 6 0 8 0 5 0 9 0 6 3 6 5 5 9 8 6 7 5 2 2 7 2 5 3 2 2 9 ...","symbol_colors":[[0.800000011920929,0.319999992847443,0.319999992847443],[0.800000011920929,0.607999980449677,0.319999992847443],[0.703999996185303,0.800000011920929,0.319999992847443],[0.415999978780746,0.800000011920929,0.319999992847443],[0.319999992847443,0.800000011920929,0.512000024318695],[0.319999992847443,0.800000011920929,0.800000011920929],[0.319999992847443,0.511999905109406,0.800000011920929],[0.415999889373779,0.319999992847443,0.800000011920929],[0.704000115394592,0.319999992847443,0.800000011920929],[0.800000011920929,0.319999992847443,0.608000218868256]],"symbols":10,"tiles_moved":198}};
+let sorted=false, concentrated=false;
+const $=id=>document.getElementById(id);
+function tiles(id,sequence,palette){const node=$(id);node.replaceChildren();sequence.forEach((symbol,i)=>{const el=document.createElement('span');el.textContent=symbol;el.style.backgroundColor=`rgb(${palette[symbol].map(c=>c*100+'%').join(' ')})`;el.title=`Position ${i+1}: symbol ${symbol}`;node.append(el);});}
+function render(){
+ const sample=samples[concentrated?'concentrated':'uniform'];
+ const sequence=sorted?[...sample.sequence].sort((a,b)=>a-b):sample.sequence;
+ const counts=Array(10).fill(0);sequence.forEach(v=>counts[v]++);
+ const h=-counts.reduce((sum,c)=>sum+(c?c/200*Math.log2(c/200):0),0);
+ const expected=$('expectations').checked;
+ tiles('ribbon',sequence,sample.symbol_colors);tiles('excerpt',sample.sequence.slice(0,40),sample.symbol_colors);
+ $('ribbon').setAttribute('aria-label',`200 symbols in ${sorted?'sorted':'original draw'} order`);
+ $('order-caption').textContent=`200 draws · ${sorted?'sorted by symbol':'original order'}`;
+ $('sample-status').textContent=`${concentrated?'Concentrated source':'Uniform source'} · seed ${sample.seed} · ${sorted?'sorted; the first-forty record stays as drawn':'as drawn'}`;
+ $('entropy-value').textContent=`${h.toFixed(6)} bits/symbol`;
+ $('sort').setAttribute('aria-pressed',String(sorted));$('contrast').setAttribute('aria-pressed',String(concentrated));$('ghost-key').hidden=!expected;
+ const hist=$('histogram');hist.replaceChildren();
+ counts.forEach((count,i)=>{const row=document.createElement('div');row.className='count-row';
+ const label=document.createElement('span');label.textContent=String(i);const track=document.createElement('div');track.className='count-track';
+ const bar=document.createElement('div');bar.className='count-bar';bar.style.width=count/2+'%';bar.style.backgroundColor=`rgb(${sample.symbol_colors[i].map(c=>c*100+'%').join(' ')})`;track.append(bar);
+ if(expected){const ghost=document.createElement('span');ghost.className='ghost';ghost.style.left=sample.expected_counts[i]/2+'%';track.append(ghost);}
+ const value=document.createElement('span');value.className='count-value';value.textContent=String(count)+(expected?` / ${sample.expected_counts[i].toFixed(1)}`:'');
+ row.setAttribute('aria-label',`Symbol ${i}: ${count} observed${expected?', '+sample.expected_counts[i].toFixed(3)+' expected':''}`);
+ row.append(label,track,value);hist.append(row);});
+ $('count-status').textContent=`Total ${counts.reduce((a,b)=>a+b,0)} · ${counts.filter(c=>!c).length} symbols with no occurrences${expected?' · values: observed / expected':''}`;
+}
+$('sort').addEventListener('click',()=>{sorted=!sorted;render();});$('contrast').addEventListener('click',()=>{concentrated=!concentrated;render();});$('expectations').addEventListener('change',render);render();
+</script></body></html>

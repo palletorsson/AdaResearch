@@ -1,0 +1,7 @@
+# Landscape thread — 12 September 2026
+
+Connected two supplied historical drafts to a recurring sphere experiment across seven existing rooms. Read the guide for provenance and original reported counts. New standalone physical prototype: four colliding trays, same local release and explicit settings, three outcome categories. 45 checks pass; no headset or museum placement accepted. Registry deliberately keeps map_ready/include_in_map_data false. No existing primary or final.md replaced. Per-room landscape_research.md files preserve the specific next action. Guide published separately from the other task's Waves plan to avoid overwriting its evolving runtime evidence.
+
+Corrections discovered while building: world-horizontal release could start outside tilted tray; changed to tray-local coordinates. Upper-surface mesh winding corrected and descending-ray checks added. Pause checks observe the settled physics handoff before comparing transforms. The workshop camera owns its environment so ecosystem fog does not recolour the scientific comparison.
+
+Run scene res://commons/testing/landscape_flow_workshop.tscn for desktop exploration. WASD, Q/E, right mouse to look, left click on control buttons. Run commons/testing/probe_landscape_flow.gd for evidence. Current mesh/rim/release/window differs from 2021; this is a new experiment, not replication. Next: fit a sine-only variant in Sine Space, then physical player and occlusion receivers. No commits.

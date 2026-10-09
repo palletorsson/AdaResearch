@@ -1,0 +1,407 @@
+{
+	"baseline": false,
+	"checks": [
+		{
+			"message": "wheel: root receives pointer input",
+			"passed": true
+		},
+		{
+			"message": "Wheel body has a collision shape",
+			"passed": true
+		},
+		{
+			"message": "Wheel mounting collider matches its rectangular backplate",
+			"passed": true
+		},
+		{
+			"message": "lever: root receives pointer input",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: real XR pickup follows hand angle",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: stationary hand does not accumulate angle",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: flat reading follows the physical joint",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: physical grab excludes pointer ownership",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: canonical control retains angle on release",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: released grab stops processing",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: released proxy returns to visible grip",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: release preserves pointer layers on the grip",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: positive limit clamps",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: negative limit clamps",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: real ray hits the physical face",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: pointer agrees with tilted local axes",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: pointer release retains angle and idles",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 0: native optional detents remain available",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: real XR pickup follows hand angle",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: stationary hand does not accumulate angle",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: flat reading follows the physical joint",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: physical grab excludes pointer ownership",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: canonical control retains angle on release",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: released grab stops processing",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: released proxy returns to visible grip",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: release preserves pointer layers on the grip",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: positive limit clamps",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: negative limit clamps",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: real ray hits the physical face",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: pointer agrees with tilted local axes",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: pointer release retains angle and idles",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 0: native optional detents remain available",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: real XR pickup follows hand angle",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: stationary hand does not accumulate angle",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: flat reading follows the physical joint",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: physical grab excludes pointer ownership",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: canonical control retains angle on release",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: released grab stops processing",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: released proxy returns to visible grip",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: release preserves pointer layers on the grip",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: positive limit clamps",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: negative limit clamps",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: real ray hits the physical face",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: pointer agrees with tilted local axes",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: pointer release retains angle and idles",
+			"passed": true
+		},
+		{
+			"message": "wheel yaw 90: native optional detents remain available",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: real XR pickup follows hand angle",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: stationary hand does not accumulate angle",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: flat reading follows the physical joint",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: physical grab excludes pointer ownership",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: canonical control retains angle on release",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: released grab stops processing",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: released proxy returns to visible grip",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: release preserves pointer layers on the grip",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: positive limit clamps",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: negative limit clamps",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: real ray hits the physical face",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: pointer agrees with tilted local axes",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: pointer release retains angle and idles",
+			"passed": true
+		},
+		{
+			"message": "lever yaw 90: native optional detents remain available",
+			"passed": true
+		},
+		{
+			"message": "Wheel face or grip remains ray-targetable after grabbing",
+			"passed": true
+		},
+		{
+			"message": "Wheel face or grip forwards to its owning control",
+			"passed": true
+		},
+		{
+			"message": "Wheel face or grip remains ray-targetable after grabbing",
+			"passed": true
+		},
+		{
+			"message": "Wheel face or grip forwards to its owning control",
+			"passed": true
+		},
+		{
+			"message": "Wheel continuous grab unwraps 120 degrees",
+			"passed": true
+		},
+		{
+			"message": "Wheel continuous grab unwraps 175 degrees",
+			"passed": true
+		},
+		{
+			"message": "Wheel continuous grab unwraps 185 degrees",
+			"passed": true
+		},
+		{
+			"message": "Wheel continuous grab unwraps 270 degrees",
+			"passed": true
+		},
+		{
+			"message": "Wheel continuous grab unwraps 350 degrees",
+			"passed": true
+		},
+		{
+			"message": "Wheel continuous grab unwraps 370 degrees",
+			"passed": true
+		},
+		{
+			"message": "Wheel regrab preserves turn count",
+			"passed": true
+		},
+		{
+			"message": "Wheel regrab continues beyond the half-turn seam",
+			"passed": true
+		},
+		{
+			"message": "Two different wheel handles agree on one angle",
+			"passed": true
+		},
+		{
+			"message": "Releasing one grip keeps the other active",
+			"passed": true
+		},
+		{
+			"message": "Releasing the last wheel grip stops grab processing",
+			"passed": true
+		},
+		{
+			"message": "Wheel centre does not invent an angular direction",
+			"passed": true
+		},
+		{
+			"message": "Second pointer cannot steal an active lever",
+			"passed": true
+		},
+		{
+			"message": "Original pointer still controls the lever",
+			"passed": true
+		},
+		{
+			"message": "Pointer exit applies configured spring return",
+			"passed": true
+		},
+		{
+			"message": "Removed pointer releases a returning lever",
+			"passed": true
+		},
+		{
+			"message": "Focus loss releases a returning lever",
+			"passed": true
+		},
+		{
+			"message": "Focused InteractableDemo builds the two real controls",
+			"passed": true
+		},
+		{
+			"message": "All reference text is printed on flat surfaces",
+			"passed": true
+		},
+		{
+			"message": "Console stands in front of the visible receivers",
+			"passed": true
+		},
+		{
+			"message": "Controls grouped at 28 cm centres",
+			"passed": true
+		},
+		{
+			"message": "Receiver does not process while its speed command is zero",
+			"passed": true
+		},
+		{
+			"message": "Wheel grab sets the visible angle receiver",
+			"passed": true
+		},
+		{
+			"message": "Wheel index and receiver use the same zero direction",
+			"passed": true
+		},
+		{
+			"message": "Lever grab commands 60 degrees per second",
+			"passed": true
+		},
+		{
+			"message": "Lever readout displays commanded speed, not handle angle",
+			"passed": true
+		},
+		{
+			"message": "Half a second at 60 degrees per second adds 30 degrees",
+			"passed": true
+		},
+		{
+			"message": "A further quarter second adds another 15 degrees",
+			"passed": true
+		},
+		{
+			"message": "Time does not change the position-setting receiver",
+			"passed": true
+		},
+		{
+			"message": "Released wheel and angle receiver retain their pose",
+			"passed": true
+		},
+		{
+			"message": "Released lever returns to zero command",
+			"passed": true
+		},
+		{
+			"message": "Zero speed command stops receiver processing",
+			"passed": true
+		},
+		{
+			"message": "Stopping the command preserves the accumulated receiver angle",
+			"passed": true
+		},
+		{
+			"message": "Pointer can command reverse angular velocity",
+			"passed": true
+		},
+		{
+			"message": "Negative velocity reverses the visible receiver",
+			"passed": true
+		},
+		{
+			"message": "Pointer release stops the command like hand release",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"headset_tested": false
+}

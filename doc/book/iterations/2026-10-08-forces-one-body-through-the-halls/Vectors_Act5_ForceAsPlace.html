@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>The player becomes the receiver</title><style>body{margin:0;background:#eae7df;color:#19191e;font:18px/1.65 Georgia,serif}main{max-width:1080px;margin:auto;padding:40px}h1{font-size:2.7rem;line-height:1.1}h2{margin-top:2em}nav{font:14px system-ui;display:flex;flex-wrap:wrap;gap:12px}a{color:#763d59}article{background:#fffdf8;padding:32px;margin:24px 0;border-top:4px solid #26252b}pre{background:#20232b;color:#f5ede3;padding:20px;overflow:auto;font:14px/1.5 Consolas,monospace}code{font-family:Consolas,monospace}img{width:100%;height:auto}blockquote{border-left:3px solid #a8798e;margin-left:0;padding-left:20px}.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}.meta{font:14px/1.5 system-ui}.badge{background:#ede4e8;padding:10px}@media(max-width:800px){.two{grid-template-columns:1fr}main{padding:16px}}</style><main><nav><a href="index.html">Review</a><a href="tutorials.html">All eleven tutorials</a><a href="shared.html">Shared code</a><a href="final.html">Existing reflections</a></nav><h1>The player becomes the receiver</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Pickup and trigger actions</li>
+<li>Hand direction</li>
+<li>Player acceleration</li>
+<li>Combining two inputs</li>
+<li>Continued velocity</li>
+</ul>
+<p>Take the two black points. Aim where you want to travel and hold the triggers. Let go of the triggers while keeping hold of the points. The thrust ends; your movement continues under gravity and contact.</p>
+<h2>Make the small study</h2>
+<p>Extend the familiar point into a thruster. While held and activated, it reports an acceleration in the direction of your hand. The small station script creates two of these points.</p>
+<p><strong>The hall adds:</strong> The existing capability court supplies the player movement, collisions, gravity and visor. Your new code supplies the held action, direction and identity of the player who receives it.</p>
+<p>Save <code>11_flight.gd</code> beside your shared files and use it on <code>PointStudy</code>. <a href="shared.html">Setup and complete shared code</a>.</p>
+<p>Work inside the existing capability court, whose movement adapter is required for flight. Save <code>thrust_point.gd</code> beside the other files.</p>
+<h3>thrust_point.gd</h3>
+<!-- student-code:thrust_point.gd -->
+
+<pre><code class="language-gdscript">extends &quot;free_point.gd&quot;
+var firing := false
+
+func _ready() -&gt; void:
+    super()
+    freeze = true
+    gravity_scale = 1.0
+    add_to_group(&quot;ada_thrust_points&quot;)
+    action_pressed.connect(func(_hand): firing = is_picked_up())
+    action_released.connect(func(_hand): firing = false)
+    dropped.connect(func(_hand): firing = false)
+
+func held() -&gt; bool:
+    return is_picked_up()
+
+func receiver() -&gt; CharacterBody3D:
+    var controller := get_picked_up_by_controller()
+    if controller == null:
+        return null
+    var origin := XRHelpers.get_xr_origin(controller)
+    for body in get_tree().get_nodes_in_group(&quot;player_body&quot;):
+        if origin != null and body is XRToolsPlayerBody and origin.is_ancestor_of(body):
+            return body
+    return null
+
+func acceleration() -&gt; Vector3:
+    var controller := get_picked_up_by_controller()
+    if not firing or not held() or controller == null:
+        return Vector3.ZERO
+    return -controller.global_basis.z.normalized() * 11.0
+</code></pre>
+<h2>Complete code — 11_flight.gd</h2>
+<!-- student-code:11_flight.gd -->
+
+<pre><code class="language-gdscript">extends &quot;study.gd&quot;
+const ThrustPoint = preload(&quot;thrust_point.gd&quot;)
+var points: Array = []
+
+func _ready() -&gt; void:
+    for x in [-0.3, 0.3]:
+        var point = ThrustPoint.new()
+        point.position = Vector3(x, 1.2, 0)
+        add_child(point)
+        points.append(point)
+    caption(&quot;Hold both points. Aim where you want to go. Press triggers.&quot;)
+</code></pre>
+<h2>Read the change</h2>
+<p><code>action_pressed</code> turns firing on while the point is held. Releasing the trigger or dropping the point turns it off. <code>held()</code> reports whether someone has picked it up.</p>
+<p><code>receiver()</code> follows the holding controller to its XR origin, then finds the player body under that origin. This connects the action to the player whose hand holds the point.</p>
+<p><code>acceleration()</code> reads the controller’s forward direction, local -Z, and multiplies it by 11 m/s². When firing stops, it returns zero. It does not clear the player’s velocity.</p>
+<p>Adding the point to <code>ada_thrust_points</code> lets the existing court find it. The court asks each held point who its receiver is and what acceleration it requests. Two aligned points request 22 m/s²; opposed directions cancel. The court combines those requests, adds gravity once and moves the player with collisions.</p>
+<h2>Change one thing</h2>
+<p>Aim one hand up and one down. Before pressing, predict that the two thrusts cancel while gravity still acts. Then aim both upward: their 22 m/s² request exceeds the court’s 9.8 m/s² gravity. Release the triggers and watch how velocity continues to change.</p>
+<h2>Model notes</h2>
+<p>Mount this study inside the loaded capability court. Its FieldCarryAdapter owns player movement; the points do not set the camera position. The required connection is <code>receiver()</code>, <code>acceleration()</code> and <code>held()</code> in the <code>ada_thrust_points</code> group. This small script uses XR hands; the museum version also supports a desktop pointer. Physical headset comfort still needs a playtest.</p>
+<h2>Into the next room</h2>
+<p>The point now gives you a capacity in the world. Direction, acceleration, resistance and contact are things you can use together. The racer and the larger experiments give you places to try.</p>
+<p><a href="final.html#Vectors_Act5_ForceAsPlace">Reflective text</a>.</p></main></html>

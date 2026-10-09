@@ -1,0 +1,47 @@
+--- before/commons/artifacts/grammar_provenance/grammar_provenance.gd
++++ after/commons/artifacts/grammar_provenance/grammar_provenance.gd
+@@ -96,7 +96,7 @@
+ 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+ 		mat.vertex_color_use_as_albedo = true
+ 		mi.material_override = mat
+-		mi.position = Vector3((i - 1) * tree_spacing, 0, 0)
++		mi.position = Vector3((i - 1) * tree_spacing, 0.30, 0)
+ 		add_child(mi)
+ 		_tree_meshes.append(mi)
+ 
+@@ -106,22 +106,32 @@
+ 		var cyl := CylinderMesh.new()
+ 		cyl.top_radius = 0.3
+ 		cyl.bottom_radius = 0.35
+-		cyl.height = 0.02
++		cyl.height = 0.30
+ 		base.mesh = cyl
+ 		var bmat := StandardMaterial3D.new()
+ 		bmat.albedo_color = Color(0.12, 0.1, 0.08)
+ 		bmat.metallic = 0.3
+ 		bmat.roughness = 0.7
+ 		base.material_override = bmat
+-		base.position = Vector3(0, -0.01, 0)
++		base.position = Vector3(0, -0.15, 0)
+ 		mi.add_child(base)
+ 
+ 		# Title + provenance consolidated on one framed dark panel (R-027)
+ 		var panel := Node3D.new()
+ 		panel.name = "Provenance_%d" % i
+-		panel.position = Vector3(0, -0.2, 0.38)
++		# Tilt the evidence toward the visitor. The shallow sample bases keep
++		# even the flat grammar visible above these low foreground plaques.
++		panel.position = Vector3(0, 0.08, 0.70)
++		panel.rotation_degrees.x = -55
+ 		mi.add_child(panel)
+ 		panel.add_child(_plate(Vector3(0.9, 0.42, 0.03)))
++		var post := MeshInstance3D.new()
++		post.name = "ProvenanceSupport_%d" % i
++		post.mesh = BoxMesh.new()
++		post.mesh.size = Vector3(.045, .26, .045)
++		post.position = Vector3(0, -.17, .70)
++		post.material_override = bmat
++		mi.add_child(post)
+ 		var title_mesh: MeshInstance3D = BakedText.make_label_mesh(_grammars[i]["label"], Color(1, 1, 1), Vector2(0.8, 0.06), 1300, true)
+ 		if title_mesh:
+ 			title_mesh.position = Vector3(0, 0.14, 0.022)

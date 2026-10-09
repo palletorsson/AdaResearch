@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-11",
+  "checks": 87,
+  "failures": [],
+  "headset_tested": false,
+  "probes": {
+    "Change_Intro": {
+      "checks": 22,
+      "failures": []
+    },
+    "Flow_Field": {
+      "checks": 18,
+      "failures": []
+    },
+    "rate": {
+      "checks": 21,
+      "failures": [],
+      "headset_tested": false
+    },
+    "accumulation": {
+      "checks": 26,
+      "failures": [],
+      "headset_tested": false
+    }
+  },
+  "limitations": [
+    "Desktop scripted inputs; tracked hands, headset legibility and comfort deferred.",
+    "Secondary exhibits checked for spawning, not comprehensively audited for interaction quality.",
+    "Overview camera makes target-hall artifacts visible for the capture.",
+    "Supporting screen scenes still emit viewport-texture and code-path warnings during boot; main encounters pass."
+  ]
+}

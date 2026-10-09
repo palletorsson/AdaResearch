@@ -1,0 +1,13 @@
+# Fractals: ghost-student reading packet
+
+Read tutorial.md and final.md in the seven-hall order printed there. They are the current complete readings, including the complete required learner scripts. assets/ contains their figures. prerequisites/ contains frozen earlier tutorial readings you may consult: the point/line/trace lineage, Noise Columns and the Waves opening. Those are source lessons, not teacher solutions for this task.
+
+Assumed environment: the existing Endless Museum Godot 4.6 project, with camera, lights, player and XRTools already installed. The student studies run as described in each tutorial. You may assume prior programming subjects in the earlier curriculum, but name any knowledge you use that the packet does not explain. These pages have not been supplemented with missing explanations for this trial.
+
+You are the imagined future student reading for the pleasure and difficulty of making. Assess the writing honestly. Distinguish the tutorial's construction from the reflective text's wider museum encounter. Do not role-play that you physically visited a room or wore a headset.
+
+First submission: read both tracks; extract all sixteen marked student-code files into per-hall folders in ../attempt/reconstructed/. Reproduce them verbatim. Record pre-execution predictions for the required Synthesis variation, then implement it as a separate file. Choose and implement one response to Synthesis's optional composition task using the declared earlier material. Keep your original. Record its input, receiver, expected invariants, predicted change and reason for choosing it before seeing runtime results. Include a README naming the entry scripts and their adjustable properties so the evaluator can run them. You may author a small native assertion probe for your predictions, but do not run Godot yet.
+
+Write ../attempt/review-before.md: one short assessment per hall, what accumulates, what must be guessed, the relationship between the two texts, where you felt agency and where instructions constrain you. Point to specific passages. Distinguish absent teaching from useful prior knowledge and optional depth. Give a few ranked improvements, not a rewrite. Write ../attempt/reading-log.md listing the packet files you actually read and the outside knowledge used.
+
+Read only this packet and your own output files during the first submission. Do not read other repository files, teacher probes, existing study files, reports, reviews, solutions or conversation history. Do not browse. Do not edit the packet, canonical manuscripts or museum code. Work only in ../attempt/. Tell the parent when the first submission is ready. Runtime results will be returned later for a separate after-run account.

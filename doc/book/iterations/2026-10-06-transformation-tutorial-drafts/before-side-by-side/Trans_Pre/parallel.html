@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One cube, cumulative motion</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="../index.html">Overview</a><a href="../all.html">All seven</a><a href="../Trans_Introduction/tutorial.html">Next</a></nav></header><main class="spread"><article><p class="badge">Tutorial · draft</p><h1>A cube that moves, turns and grows</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Translation: changing position</li>
+<li>Rotation: changing orientation</li>
+<li>Uniform scale: changing size</li>
+<li>Elapsed time and a repeating value</li>
+<li>Collection: overlap detection and a signal</li>
+</ul>
+<p>In Trans_Pre, one cube rises. The next rises and turns. Another adds a pulse in size. Follow one corner: each example keeps the earlier movement and adds another operation.</p>
+<p>We continue with the cube shape from Primitives. Here Godot's <code>BoxMesh</code> supplies it; we change the whole object's transform. The construction of faces has already done its work. This lesson makes one animated pickup that you collect by walking into it.</p>
+<h2>The complete study</h2>
+<p>The Endless Museum is already running. Its room, light, camera and player are supplied. Put an empty <code>Node3D</code> named <code>TransformStudy</code> in clear floor space beside the exhibits and attach <code>lesson.gd</code>. Use floor level as its origin, zero rotation and unit scale. Each coordinate below is in this study's local frame. The script creates every part of the pickup.</p>
+<p>Read the complete result once, then use the small edits below to build up its behaviour.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(0, 1.3, 0)
+var rise := 0.35
+var turn_speed := 45.0
+var pulse := 0.2
+var period := 4.0
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(period &gt; 0.0 and pulse &gt;= 0.0 and pulse &lt; 1.0)
+    cube.mesh = BoxMesh.new()
+    add_child(cube)
+    cube.position = start
+
+    var sensor := Area3D.new()
+    sensor.collision_layer = 0
+    sensor.collision_mask = 1
+    sensor.set_collision_mask_value(20, true)
+    cube.add_child(sensor)
+    var hitbox := CollisionShape3D.new()
+    hitbox.shape = BoxShape3D.new()
+    sensor.add_child(hitbox)
+    sensor.body_entered.connect(_on_body_entered)
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var wave := sin(TAU * elapsed / period)
+    cube.position = start + Vector3.UP * rise * wave
+    cube.rotation_degrees.y = turn_speed * elapsed
+    cube.scale = Vector3.ONE * (1.0 + pulse * wave)
+
+func _on_body_entered(body: Node3D) -&gt; void:
+    if body.is_in_group(&quot;em_walker&quot;) or body.is_in_group(&quot;player_body&quot;):
+        print(&quot;Collected&quot;)
+        queue_free()
+</code></pre>
+<p><code>BoxMesh.new()</code> describes a one-metre cube centred on its origin. The <code>MeshInstance3D</code> holds its position, orientation and size. The same mesh remains throughout.</p>
+<h2>Add one movement at a time</h2>
+<p>First set <code>turn_speed</code> and <code>pulse</code> to <code>0.0</code>. Keep <code>rise</code> at <code>0.35</code>. The cube moves 35 centimetres above and below <code>start</code>, keeping its size and facing.</p>
+<p><code>elapsed += delta</code> counts seconds. <code>sin(TAU * elapsed / period)</code> supplies a repeating value between −1 and 1; <code>TAU</code> is one full cycle in radians. For now, use this as a timing tool. With <code>period = 4.0</code>, the value is zero at the start, one after a second, zero after two, minus one after three, and zero after four. Waves will return to how this curve is made.</p>
+<p>Restore <code>turn_speed</code> to <code>45.0</code>. The cube now rises <strong>and</strong> turns 45 degrees per second around Y. Its mesh has not changed. After eight seconds it completes one turn.</p>
+<p>Restore <code>pulse</code> to <code>0.2</code>. The size factor now ranges from <code>0.8</code> to <code>1.2</code>. Multiplying <code>Vector3.ONE</code> gives all three axes the same factor, so the cube keeps its proportions. Rise and pulse share the wave; the turn continues at its own steady rate. The assertion keeps the period positive and prevents the pulse from collapsing the cube to zero size.</p>
+<p>Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift.</p>
+<h2>Walk into it</h2>
+<p>An <code>Area3D</code> detects overlap. Its <code>BoxShape3D</code> describes the detection box; it does not provide a solid wall. Because the area belongs to the cube, the box follows its movement, turning and uniform scale.</p>
+<p><code>body_entered</code> is a signal announcing that a physics body entered the area. <code>connect</code> names the function to call. The museum supplies the desktop walker in group <code>em_walker</code> on layer 1, and the XR body in group <code>player_body</code> on layer 20. The mask listens to both layers; the group check accepts the player. These are the declared connections to the existing museum.</p>
+<p>Walk into the cube. <code>queue_free()</code> removes the study at the end of the frame, and Output prints <code>Collected</code>. A passing ordinary prop does not collect it. The installed pickup's score and flourish remain outside this small reconstruction.</p>
+<h2>Make another version</h2>
+<p>Set <code>period</code> to <code>8.0</code>. Predict which movements slow down. The rise and pulse take twice as long; the turn still advances at 45 degrees per second. Explain why. Then choose a different rise while preserving the cube's proportions.</p>
+<p>Carry these three operations into the next hall. There, a transformed surface offers somewhere to stand.</p></article><article><p class="badge">Reflection · existing final.md</p><h1>What survives its movement?</h1>
+<p>In Melencolia, the pyramids stayed still while your viewpoint changed. Here, stay a moment and let an object change in front of you. What survives its movement?</p>
+<p>The cubes are black, white and gray. Light catches an edge; a shadow changes as a face turns. Four cubes are spaced down the middle of the hall. Smaller markers stand beside the row. Beyond the cubes, wedges lead up to a raised path. Here we can follow how a game pickup gets its animation.</p>
+<!-- @pick_up_cube -->
+
+<p>The first cube holds still. Pause before approaching and watch a corner: nothing shifts. Then walk into it: even without an animation, it can be collected. Keep its shape in mind as you go to the next one.</p>
+<p>This cube moves up and down. Follow it through a complete rise and fall. Its position changes while its size and facing stay the same. Moving an object from one position to another is <strong>translation</strong>. Here that movement follows the vertical Y direction.</p>
+<p>The script chooses a height between two endpoints:</p>
+<pre><code class="language-gdscript">global_position.y = lerp(original_y - bob_height, original_y + bob_height, t)
+</code></pre>
+<p>The animation moves <code>t</code> back and forth between zero and one. <code>lerp</code>, short for <strong>linear interpolation</strong>, uses that number to choose a height between the lower and upper endpoints. At <code>t = 0.5</code>, the cube is halfway between them. Each rise and fall takes it through the same heights, at a steady speed on each leg.</p>
+<p>The third cube keeps moving up and down. What has been added?</p>
+<p>Follow a corner. The cube turns as well. Changing its orientation — which way it faces — is <strong>rotation</strong>. This line adds a small turn around the upright Y axis on each update:</p>
+<pre><code class="language-gdscript">rotate_y(rotation_speed * delta)
+</code></pre>
+<p>Point Zero's small counter example received <code>delta</code> without using it. Here <code>delta</code> is the time since the previous update. Multiplying the turning speed by those elapsed seconds gives the turn to add now. A longer interval calls for a larger turn.</p>
+<p>The rise and the turn continue together. Follow the same corner once more: it travels around the upright axis as well as up and down.</p>
+<p>At the fourth cube, watch the edges move apart and come together. It grows and shrinks while it rises and turns. Changing size is <strong>scale</strong>.</p>
+<pre><code class="language-gdscript">var size_factor: float = lerp(1.0 - pulse_scale, 1.0 + pulse_scale, t)
+_apply_pulse(size_factor)
+</code></pre>
+<p>The same <code>lerp</code> now chooses a size factor between 0.7 and 1.3. <code>_apply_pulse</code> multiplies the cube's starting size by that factor. A factor of one leaves the size unchanged; below one it shrinks, above one it grows. All three dimensions change together, so it keeps its cube shape.</p>
+<p>Beside each moving example, a smaller marker isolates the operation just added: one moves up and down, one turns in place, one grows and shrinks. They let us separate movements that the larger cubes combine.</p>
+<p>Look back along the four stations. The still cube has gone if you collected it; the three moving examples remain.</p>
+<p>Walk up the wedges. Four more cubes wait above the raised path, rising, turning and changing size. Pick one to approach. As you walk into it, it swells briefly and disappears with a pickup sound. The others keep moving.</p>
+<p>The three moving demonstrations behind you stay in place for another look.</p>
+<p>Translation kept its size and facing. Turning kept the distances between its corners. Multiplying all three dimensions by the same factor kept its proportions. Each operation has left something to recognise. The next hall asks which of these changes can give us somewhere to stand.</p>
+<!-- @ --></article></main></body></html>

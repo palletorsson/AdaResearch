@@ -1,0 +1,29 @@
+{
+  "id": "Fractal_KochSierpinski",
+  "decision": "draft",
+  "mode": "build",
+  "object": "The carried point reads a Koch path, with the same position shown on a larger floor drawing.",
+  "change": "Replace each neighbouring pair of an ordered XY position list by four equilateral detour segments. Build next separately; keep original endpoints; sum path length.",
+  "dependsOn": [
+    "Fractal_CantorSet",
+    "Point_Trace",
+    "Point_Lines",
+    "Trans_Rotation"
+  ],
+  "reuses": "PointBody from Cantor, LineSkin from Recursion, ordered positions from Trace, current/next replacement, rotation and local/world conversion.",
+  "given": "Prepared museum and XRTools; two unchanged helper files printed in full. Closest-point reader supplied inside the complete Koch script. Production floor receiver and comparison desks are encounters.",
+  "later": "Do not explain every visible artifact. Keep the equilateral Koch rule distinct from the later L-system editor's five-segment right-angle preset.",
+  "checks": [
+    "39 native checks execute the three exact printed files and production reader: generations 0–4, endpoints, child lengths, mirrored and tilted seed, projection, actual XRTools and named desktop input.",
+    "33 actual-museum checks: installed reader, floor support, standing reach/clearance, nearby ray buttons, retained comparisons, route samples and native captures. Headset feel remains untested."
+  ],
+  "transfer": "Reverse the sixty-degree turn: predict the mirrored peak while count and length remain. Then use a sloping XY seed and predict its replacement length.",
+  "carry": "A finite segment replacement; endpoint distance, total path length and position along a path are different readings.",
+  "next": "Menger: apply replacement to cells of a cube; distinguish removed volume from bodily access.",
+  "notes": "Implemented 8 October in the existing hall. Koch is the learner construction; Sierpinski compares replacement/area, box counting remains optional. Review: doc/book/iterations/2026-10-08-koch-the-distance-between/index.html.",
+  "baseline": {
+    "tutorial": "e7196954f0d4dc1fb4b7663760a7994de002b8b5cd968c8d05e276bde7ffddb9",
+    "choice": "3f4bd597a95cdec05ecf740bf82a1ee9cd23d7a38b92997d5f6b8366baa2dff9"
+  },
+  "summary": "Take the same black point and read a Koch path; its partner follows a larger floor drawing. Trigger replaces every current segment once. Reconstruct the ordered position list, equilateral four-segment replacement and length sum using a separate next array. Predict fixed endpoints and increasing path length, then reverse the turn and try a sloping seed. The nearest-point reading locates a position along the curve; it does not measure hand travel. Compare the retained Sierpinski triangle before carrying replacement into the Menger cube."
+}

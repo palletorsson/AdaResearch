@@ -1,0 +1,11 @@
+--- before/commons/maps/WaveFunctions_3D_Wave_Propagation/final.md
++++ commons/maps/WaveFunctions_3D_Wave_Propagation/final.md
+@@ -10,7 +10,7 @@
+ 
+ Select two neighbouring spheres and look for a moment when their heights differ. Follow the pair through several movements, describing their separation rather than only the larger pattern. Now choose two spheres farther apart and make the same comparison. Similar heights at one instant do not establish that the two places are always moving together; watch which way each moves next. If you find a repeating relationship, check whether it persists through another cycle. This is a way to investigate coordination without assuming every visible crest is a travelling object. The pattern needs more than one instant to reveal what is changing and what remains related.
+ 
+-Now select PULSE on the panel. After a short wait, the centre receives one push. Follow what happens beyond it. Change COUPLED to INDEPENDENT and watch the same push from the same still beginning. What has stopped travelling? Return to COUPLED before explaining the difference. Every button restarts the comparison; it does not cut a moving wave midway.
++Press SINE; the button now reads PULSE. After a short wait, the centre receives one push. Follow what happens beyond it. Press COUPLED; it becomes INDEPENDENT, and the same push begins from the same still lattice. What has stopped travelling? Press INDEPENDENT to restore COUPLED before explaining the difference. Every button restarts the comparison; it does not cut a moving wave midway.
+ 
+ Each oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force. The program gathers those forces and then updates the oscillators' velocities and displacements. SINE keeps driving the centre; PULSE adds a single initial velocity after half a second. The same source can now be tried with and without the links.
+ 

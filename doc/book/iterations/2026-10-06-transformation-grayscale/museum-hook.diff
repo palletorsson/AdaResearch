@@ -1,0 +1,15 @@
+--- before/endless_museum.gd
++++ commons/scenes/endless_museum.gd
+@@ -8353,6 +8353,12 @@
+ 	seg.set_meta("em_props_deny", peek.get("props_deny", []))
+ 	seg.set_meta("em_pearl", cur_pearl)
+ 	seg.set_meta("em_chapter", next_seq)
++	# Transformation studies form and movement in grayscale. Scope the display
++	# to this streamed hall, so shared artifacts keep their colour elsewhere.
++	if next_seq == "transformation":
++		var grayscale := preload("res://commons/rendering/museum_grayscale.gd").new()
++		grayscale.name = "TransformationGrayscale"
++		seg.add_child(grayscale)
+ 	seg.set_meta("em_map", String(peek.get("map", "")) if String(peek.get("authored", "")) == "map" else "")
+ 	if peek.has("simulation_stage"):
+ 		seg.set_meta("em_simulation_stage", peek["simulation_stage"])

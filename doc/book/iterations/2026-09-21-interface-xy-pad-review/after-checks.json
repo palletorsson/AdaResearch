@@ -1,0 +1,291 @@
+{
+	"baseline": false,
+	"checks": [
+		{
+			"message": "Visible grip and grab target coincide",
+			"passed": true
+		},
+		{
+			"message": "Both values move across the face, never into it",
+			"passed": true
+		},
+		{
+			"message": "Pad text is mounted flat on its face",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: actual grab updates both axes, ignores depth",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: stationary hand does not accumulate movement",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: release retains the position",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: grab target rejoins visible grip on release",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: physical plate receives a ray",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: pointer agrees with hand axes",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: pointer release retains position and stops processing",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: both values stop at plate limits",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 0: full knob remains over the working surface",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: actual grab updates both axes, ignores depth",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: stationary hand does not accumulate movement",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: release retains the position",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: grab processing stops after release",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: grab target rejoins visible grip on release",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: physical plate receives a ray",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: pointer agrees with hand axes",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: pointer release retains position and stops processing",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: both values stop at plate limits",
+			"passed": true
+		},
+		{
+			"message": "tilted pad yaw 90: full knob remains over the working surface",
+			"passed": true
+		},
+		{
+			"message": "Per-axis detents remain available in metres",
+			"passed": true
+		},
+		{
+			"message": "Second pointer cannot steal the pad",
+			"passed": true
+		},
+		{
+			"message": "Optional spring return applies on pointer exit",
+			"passed": true
+		},
+		{
+			"message": "Lost pointer releases and returns the pad",
+			"passed": true
+		},
+		{
+			"message": "Optional spring return applies on actual XR release",
+			"passed": true
+		},
+		{
+			"message": "Flat value screen reports both normalized coordinates",
+			"passed": true
+		},
+		{
+			"message": "Focused demo uses the real two-pad vector console",
+			"passed": true
+		},
+		{
+			"message": "Vector console has flat text throughout",
+			"passed": true
+		},
+		{
+			"message": "Pad 0 starts at its actual vector",
+			"passed": true
+		},
+		{
+			"message": "Pad 0 retains metre scale",
+			"passed": true
+		},
+		{
+			"message": "Pad 0 sits in front of the receiver",
+			"passed": true
+		},
+		{
+			"message": "Pad 1 starts at its actual vector",
+			"passed": true
+		},
+		{
+			"message": "Pad 1 retains metre scale",
+			"passed": true
+		},
+		{
+			"message": "Pad 1 sits in front of the receiver",
+			"passed": true
+		},
+		{
+			"message": "Paired pad centres are grouped within 31 cm",
+			"passed": true
+		},
+		{
+			"message": "Vector 0 yaw 0: actual grab drives the correct operand",
+			"passed": true
+		},
+		{
+			"message": "Pad reading matches vector coordinates",
+			"passed": true
+		},
+		{
+			"message": "Vector 1 yaw 0: actual grab drives the correct operand",
+			"passed": true
+		},
+		{
+			"message": "Pad reading matches vector coordinates",
+			"passed": true
+		},
+		{
+			"message": "Visible sum endpoint matches the two operated vectors",
+			"passed": true
+		},
+		{
+			"message": "Monitor reports the operated sum",
+			"passed": true
+		},
+		{
+			"message": "Vector 0 yaw 180: actual grab drives the correct operand",
+			"passed": true
+		},
+		{
+			"message": "Pad reading matches vector coordinates",
+			"passed": true
+		},
+		{
+			"message": "Vector 1 yaw 180: actual grab drives the correct operand",
+			"passed": true
+		},
+		{
+			"message": "Pad reading matches vector coordinates",
+			"passed": true
+		},
+		{
+			"message": "Visible sum endpoint matches the two operated vectors",
+			"passed": true
+		},
+		{
+			"message": "Monitor reports the operated sum",
+			"passed": true
+		},
+		{
+			"message": "Reconfiguration keeps the graspable control alive",
+			"passed": true
+		},
+		{
+			"message": "Reconfiguration resynchronizes pad and operand",
+			"passed": true
+		},
+		{
+			"message": "Reconfiguration keeps the graspable control alive",
+			"passed": true
+		},
+		{
+			"message": "Reconfiguration resynchronizes pad and operand",
+			"passed": true
+		},
+		{
+			"message": "Reconfiguration updates the mounted operation title",
+			"passed": true
+		},
+		{
+			"message": "Expression variant also uses flat surface text",
+			"passed": true
+		},
+		{
+			"message": "Subtraction variant retains its arithmetic",
+			"passed": true
+		},
+		{
+			"message": "Mounted pad is reachable by a physical ray from in front",
+			"passed": true
+		},
+		{
+			"message": "Mounted pointer drag changes the actual vector",
+			"passed": true
+		},
+		{
+			"message": "Sibling scene loads: wedge_slide",
+			"passed": true
+		},
+		{
+			"message": "Sibling retains its legacy text contract: wedge_slide",
+			"passed": true
+		},
+		{
+			"message": "Sibling receiver builds: wedge_slide",
+			"passed": true
+		},
+		{
+			"message": "Sibling scene loads: dot_aligner",
+			"passed": true
+		},
+		{
+			"message": "Sibling retains its legacy text contract: dot_aligner",
+			"passed": true
+		},
+		{
+			"message": "Sibling receiver builds: dot_aligner",
+			"passed": true
+		},
+		{
+			"message": "Sibling scene loads: projection_shadow",
+			"passed": true
+		},
+		{
+			"message": "Sibling retains its legacy text contract: projection_shadow",
+			"passed": true
+		},
+		{
+			"message": "Sibling receiver builds: projection_shadow",
+			"passed": true
+		},
+		{
+			"message": "Sibling scene loads: circle_train",
+			"passed": true
+		},
+		{
+			"message": "Sibling retains its legacy text contract: circle_train",
+			"passed": true
+		},
+		{
+			"message": "Sibling receiver builds: circle_train",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"headset_tested": false
+}

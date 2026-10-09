@@ -1,0 +1,14 @@
+{
+  "scope": "Current one-script BoxMesh revision. Native checks verify whole-mesh transforms and actual physics overlap; captures use the existing museum walker.",
+  "accepted": {
+    "pickup-before.png": {
+      "sha256": "d1390ed05b1bfa7aa68fda16e26ed2ad47c53681a27fe72e8ee6747552f1a86a",
+      "visible": true
+    },
+    "pickup-after.png": {
+      "sha256": "af908801bc27ba5f32815e580df4abf170435cc5762f8941861390a0538d4c5b",
+      "visible": true
+    }
+  },
+  "note": "Matched camera: plain cube present before player overlap and removed afterward. Desktop walker moved by probe; no physical-headset claim."
+}

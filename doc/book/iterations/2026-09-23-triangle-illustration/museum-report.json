@@ -1,0 +1,3428 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				2.97000002861023,
+				0.850000023841858,
+				-2.52999997138977
+			],
+			"bounds_size": [
+				3.05999970436096,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				1.70000004768372,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "38"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				0.0299999807029963,
+				0.0,
+				1.51360487937927
+			],
+			"bounds_size": [
+				0.186499997973442,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.139999985694885,
+				0.0,
+				1.59999990463257
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				3.49200010299683,
+				-0.808000028133392,
+				-2.50799989700317
+			],
+			"bounds_size": [
+				1.01599979400635,
+				1.01600003242493,
+				1.01599991321564
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						4.0,
+						0.399999976158142,
+						-2.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				4.0,
+				0.0,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				8.27500057220459,
+				1.07500004768372,
+				2.0
+			],
+			"bounds_size": [
+				0.274999618530273,
+				1.14033484458923,
+				1.0
+			],
+			"cell": [
+				8,
+				2
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/FillButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.69161748886108,
+						0.979673206806183,
+						1.85000014305115
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/FillButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.69161748886108,
+						0.979673206806183,
+						1.85000014305115
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				8.5,
+				1.5,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "triangle_line_puzzle"
+		},
+		{
+			"bounds_position": [
+				7.52749967575073,
+				0.0,
+				4.98000001907349
+			],
+			"bounds_size": [
+				4.24499940872192,
+				2.72250008583069,
+				0.399999618530273
+			],
+			"cell": [
+				9,
+				5
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						7.75999975204468,
+						2.51999998092651,
+						5.23999977111816
+					],
+					"text": "ADA RESEARCH   /   PRIMITIVES"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						11.5199995040894,
+						2.51999998092651,
+						5.23999977111816
+					],
+					"text": "FIG. 01"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						7.75999975204468,
+						2.34999990463257,
+						5.23999977111816
+					],
+					"text": "Three points. A boundary. A face."
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						7.81999969482422,
+						2.04999995231628,
+						5.23999977111816
+					],
+					"text": "01"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						7.81999969482422,
+						1.94000005722046,
+						5.23999977111816
+					],
+					"text": "Positions"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						8.29999923706055,
+						1.02999997138977,
+						5.23999977111816
+					],
+					"text": "A    B    C"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						8.29999923706055,
+						0.899999976158142,
+						5.23999977111816
+					],
+					"text": "Three places in space."
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.17000007629395,
+						2.04999995231628,
+						5.23999977111816
+					],
+					"text": "02"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.17000007629395,
+						1.94000005722046,
+						5.23999977111816
+					],
+					"text": "Boundary"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.64999961853027,
+						1.02999997138977,
+						5.23999977111816
+					],
+					"text": "AB  +  BC  +  CA"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.64999961853027,
+						0.899999976158142,
+						5.23999977111816
+					],
+					"text": "Connect, then close."
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						10.5199995040894,
+						2.04999995231628,
+						5.23999977111816
+					],
+					"text": "03"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						10.5199995040894,
+						1.94000005722046,
+						5.23999977111816
+					],
+					"text": "Face"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						11.0,
+						1.02999997138977,
+						5.23999977111816
+					],
+					"text": "ABC"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						11.0,
+						0.899999976158142,
+						5.23999977111816
+					],
+					"text": "Give the inside a surface."
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.64999961853027,
+						0.735000014305115,
+						5.23999977111816
+					],
+					"text": "Closing a boundary and filling it are two operations."
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						7.78499984741211,
+						1.0171000957489,
+						5.32499980926514
+					],
+					"text": "A"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						8.8149995803833,
+						1.0171000957489,
+						5.32499980926514
+					],
+					"text": "B"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						8.29999923706055,
+						1.93289995193481,
+						5.32499980926514
+					],
+					"text": "C"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.13499927520752,
+						1.0171000957489,
+						5.32499980926514
+					],
+					"text": "A"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						10.164999961853,
+						1.0171000957489,
+						5.32499980926514
+					],
+					"text": "B"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						9.64999961853027,
+						1.93289995193481,
+						5.32499980926514
+					],
+					"text": "C"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						10.4849996566772,
+						1.0171000957489,
+						5.32499980926514
+					],
+					"text": "A"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						11.5149993896484,
+						1.0171000957489,
+						5.32499980926514
+					],
+					"text": "B"
+				},
+				{
+					"parent": "TriangleConstructionPlate",
+					"position": [
+						11.0,
+						1.93289995193481,
+						5.32499980926514
+					],
+					"text": "C"
+				}
+			],
+			"position": [
+				9.64999961853027,
+				0.0,
+				5.19999980926514
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "triangle_construction_plate"
+		},
+		{
+			"bounds_position": [
+				2.37131810188293,
+				0.0100000202655792,
+				5.48381805419922
+			],
+			"bounds_size": [
+				0.871181726455688,
+				1.56870007514954,
+				3.03236389160156
+			],
+			"cell": [
+				2,
+				7
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "FoldStudy/StudyPanel/Replay/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						3.18324995040894,
+						1.05250000953674,
+						6.71500015258789
+					]
+				},
+				{
+					"disabled": false,
+					"path": "FoldStudy/StudyPanel/Replay/HandPoseArea/CollisionShape3D",
+					"position": [
+						3.18324995040894,
+						1.05250000953674,
+						6.71500015258789
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61250019073486,
+						1.38099992275238,
+						8.5
+					],
+					"text": "(2.6, 1.3, 8.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						8.38000011444092
+					],
+					"text": "(2.3, 1.6, 8.3)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						8.26000022888184
+					],
+					"text": "(2.6, 1.3, 8.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						8.14000034332275
+					],
+					"text": "(2.3, 1.6, 8.1)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						8.02000045776367
+					],
+					"text": "(2.6, 1.3, 8.0)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						7.89999961853027
+					],
+					"text": "(2.3, 1.6, 7.8)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						7.77999925613403
+					],
+					"text": "(2.6, 1.3, 7.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						7.65999937057495
+					],
+					"text": "(2.3, 1.6, 7.6)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						7.53999948501587
+					],
+					"text": "(2.6, 1.3, 7.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						7.41999959945679
+					],
+					"text": "(2.3, 1.6, 7.4)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						7.29999971389771
+					],
+					"text": "(2.6, 1.3, 7.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						7.17999982833862
+					],
+					"text": "(2.3, 1.6, 7.1)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						7.05999994277954
+					],
+					"text": "(2.6, 1.3, 7.0)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38749980926514,
+						1.64350008964539,
+						6.94000005722046
+					],
+					"text": "(2.3, 1.6, 6.9)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						6.82000017166138
+					],
+					"text": "(2.6, 1.3, 6.8)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38749980926514,
+						1.64350008964539,
+						6.69999980926514
+					],
+					"text": "(2.3, 1.6, 6.6)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						6.57999992370605
+					],
+					"text": "(2.6, 1.3, 6.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38749980926514,
+						1.64350008964539,
+						6.46000003814697
+					],
+					"text": "(2.3, 1.6, 6.4)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						6.34000015258789
+					],
+					"text": "(2.6, 1.3, 6.3)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38749980926514,
+						1.64350008964539,
+						6.22000026702881
+					],
+					"text": "(2.3, 1.6, 6.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						6.09999942779541
+					],
+					"text": "(2.6, 1.3, 6.0)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						5.97999954223633
+					],
+					"text": "(2.3, 1.6, 5.9)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						5.85999965667725
+					],
+					"text": "(2.6, 1.3, 5.8)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38750004768372,
+						1.64350008964539,
+						5.73999929428101
+					],
+					"text": "(2.3, 1.6, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.61249995231628,
+						1.38099992275238,
+						5.61999940872192
+					],
+					"text": "(2.6, 1.3, 5.6)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.38749980926514,
+						1.64350008964539,
+						5.49999952316284
+					],
+					"text": "(2.3, 1.6, 5.4)"
+				},
+				{
+					"parent": "StudyPanel",
+					"position": [
+						3.1652500629425,
+						1.16874992847443,
+						7.0
+					],
+					"text": "FLAT  0°\n24 triangles · grab a point to take over"
+				},
+				{
+					"parent": "StudyPanel",
+					"position": [
+						3.16600012779236,
+						1.05624997615814,
+						6.85750007629395
+					],
+					"text": "REPLAY"
+				}
+			],
+			"position": [
+				2.5,
+				1.0,
+				7.0
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				0.75,
+				0.75,
+				0.75
+			],
+			"token": "folded_strip"
+		},
+		{
+			"bounds_position": [
+				4.75000047683716,
+				2.34999990463257,
+				5.75
+			],
+			"bounds_size": [
+				3.49999952316284,
+				0.140000104904175,
+				3.5
+			],
+			"cell": [
+				6,
+				7
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.5025999546051,
+						5.75
+					],
+					"text": "(4.7, 2.5, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						5.18750047683716,
+						2.37660002708435,
+						5.75
+					],
+					"text": "(5.1, 2.3, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						5.625,
+						2.5025999546051,
+						5.75
+					],
+					"text": "(5.6, 2.5, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.0625,
+						2.37660002708435,
+						5.75
+					],
+					"text": "(6.0, 2.3, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.5,
+						2.5025999546051,
+						5.75
+					],
+					"text": "(6.5, 2.5, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.9375,
+						2.37660002708435,
+						5.75
+					],
+					"text": "(6.9, 2.3, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						7.375,
+						2.5025999546051,
+						5.75
+					],
+					"text": "(7.3, 2.5, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						7.8125,
+						2.37660002708435,
+						5.75
+					],
+					"text": "(7.8, 2.3, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.5025999546051,
+						5.75
+					],
+					"text": "(8.2, 2.5, 5.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.37660002708435,
+						6.1875
+					],
+					"text": "(8.2, 2.3, 6.1)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.5025999546051,
+						6.625
+					],
+					"text": "(8.2, 2.5, 6.6)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.37660002708435,
+						7.0625
+					],
+					"text": "(8.2, 2.3, 7.0)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.5025999546051,
+						7.5
+					],
+					"text": "(8.2, 2.5, 7.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.37660002708435,
+						7.9375
+					],
+					"text": "(8.2, 2.3, 7.9)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.5025999546051,
+						8.375
+					],
+					"text": "(8.2, 2.5, 8.3)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.37660002708435,
+						8.8125
+					],
+					"text": "(8.2, 2.3, 8.8)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.25,
+						2.5025999546051,
+						9.25
+					],
+					"text": "(8.2, 2.5, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						7.8125,
+						2.37660002708435,
+						9.25
+					],
+					"text": "(7.8, 2.3, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						7.375,
+						2.5025999546051,
+						9.25
+					],
+					"text": "(7.3, 2.5, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.9375,
+						2.37660002708435,
+						9.25
+					],
+					"text": "(6.9, 2.3, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.5,
+						2.5025999546051,
+						9.25
+					],
+					"text": "(6.5, 2.5, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.0625,
+						2.37660002708435,
+						9.25
+					],
+					"text": "(6.0, 2.3, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						5.625,
+						2.5025999546051,
+						9.25
+					],
+					"text": "(5.6, 2.5, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						5.18750047683716,
+						2.37660002708435,
+						9.25
+					],
+					"text": "(5.1, 2.3, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.5025999546051,
+						9.25
+					],
+					"text": "(4.7, 2.5, 9.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.37660002708435,
+						8.8125
+					],
+					"text": "(4.7, 2.3, 8.8)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.5025999546051,
+						8.375
+					],
+					"text": "(4.7, 2.5, 8.3)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.37660002708435,
+						7.9375
+					],
+					"text": "(4.7, 2.3, 7.9)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.5025999546051,
+						7.5
+					],
+					"text": "(4.7, 2.5, 7.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.37660002708435,
+						7.0625
+					],
+					"text": "(4.7, 2.3, 7.0)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.5025999546051,
+						6.625
+					],
+					"text": "(4.7, 2.5, 6.6)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.37660002708435,
+						6.1875
+					],
+					"text": "(4.7, 2.3, 6.1)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						4.75000047683716,
+						2.5025999546051,
+						5.75
+					],
+					"text": "(4.7, 2.5, 5.7)"
+				}
+			],
+			"position": [
+				6.5,
+				2.0,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				0.699999988079071,
+				0.699999988079071,
+				0.699999988079071
+			],
+			"token": "triangleprofiles"
+		},
+		{
+			"bounds_position": [
+				11.4749898910522,
+				1.25,
+				6.75
+			],
+			"bounds_size": [
+				0.0450105667114258,
+				1.5,
+				1.5
+			],
+			"cell": [
+				11,
+				7
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.5,
+				2.0,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				270.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "pink_triangle"
+		},
+		{
+			"bounds_position": [
+				11.0200004577637,
+				-0.38960000872612,
+				12.0200004577637
+			],
+			"bounds_size": [
+				0.959999084472656,
+				1.4896000623703,
+				0.967000007629395
+			],
+			"cell": [
+				11,
+				12
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.5,
+				0.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "triangle"
+		},
+		{
+			"bounds_position": [
+				11.4970035552979,
+				1.12999999523163,
+				12.2470035552979
+			],
+			"bounds_size": [
+				0.00599288940429688,
+				0.50600004196167,
+				0.505992889404297
+			],
+			"cell": [
+				11,
+				12
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						11.5,
+						1.14800000190735,
+						12.75
+					],
+					"text": "(11.5, 1.1, 12.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						11.5,
+						1.14800000190735,
+						12.25
+					],
+					"text": "(11.5, 1.1, 12.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						11.5,
+						1.64800000190735,
+						12.5
+					],
+					"text": "(11.5, 1.6, 12.5)"
+				}
+			],
+			"position": [
+				11.5,
+				0.883000016212463,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "triangle"
+		},
+		{
+			"bounds_position": [
+				6.01999998092651,
+				-0.38960000872612,
+				13.0200004577637
+			],
+			"bounds_size": [
+				0.960000038146973,
+				1.4896000623703,
+				0.967000007629395
+			],
+			"cell": [
+				6,
+				13
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "draw_triangle_faces"
+		},
+		{
+			"bounds_position": [
+				6.32999992370605,
+				1.42999994754791,
+				13.4499998092651
+			],
+			"bounds_size": [
+				0.181986331939697,
+				0.0699999332427979,
+				0.100000381469727
+			],
+			"cell": [
+				6,
+				13
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/FillButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.30838251113892,
+						0.944673120975494,
+						12.6000003814697
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/FillButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.30838251113892,
+						0.944673120975494,
+						12.6000003814697
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/NewOutlineButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.30838251113892,
+						0.944673120975494,
+						13.1000003814697
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/NewOutlineButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.30838251113892,
+						0.944673120975494,
+						13.1000003814697
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/ShiftStartButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						7.30838251113892,
+						0.944673120975494,
+						12.8500003814697
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ExperimentPanel/ShiftStartButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						7.30838251113892,
+						0.944673120975494,
+						12.8500003814697
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.5,
+						1.52499985694885,
+						13.5
+					],
+					"text": "(6.5, 1.4, 13.5)"
+				}
+			],
+			"position": [
+				6.5,
+				1.46499991416931,
+				13.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "draw_triangle_faces"
+		},
+		{
+			"bounds_position": [
+				9.96967029571533,
+				0.349999070167542,
+				14.969669342041
+			],
+			"bounds_size": [
+				1.06066417694092,
+				1.50000143051147,
+				1.06066513061523
+			],
+			"cell": [
+				10,
+				15
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						10.3232231140137,
+						0.857500016689301,
+						15.6767768859863
+					],
+					"text": "(10.3, 0.8, 15.6)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						10.6767768859863,
+						0.857500016689301,
+						15.3232231140137
+					],
+					"text": "(10.6, 0.8, 15.3)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						10.3232231140137,
+						1.35750007629395,
+						15.6767768859863
+					],
+					"text": "(10.3, 1.3, 15.6)"
+				},
+				{
+					"parent": "PythagoreanTriangle",
+					"position": [
+						10.5,
+						0.750000238418579,
+						15.5
+					],
+					"text": "a = 1.00"
+				},
+				{
+					"parent": "PythagoreanTriangle",
+					"position": [
+						10.2525129318237,
+						1.10000026226044,
+						15.7474870681763
+					],
+					"text": "b = 1.00"
+				},
+				{
+					"parent": "PythagoreanTriangle",
+					"position": [
+						10.5707111358643,
+						1.20000004768372,
+						15.4292888641357
+					],
+					"text": "c = 1.41"
+				},
+				{
+					"parent": "PythagoreanTriangle",
+					"position": [
+						10.4410743713379,
+						1.61666691303253,
+						15.5589256286621
+					],
+					"text": "aÂ² + bÂ² = cÂ²\n1.0 + 1.0 = 2.0"
+				}
+			],
+			"position": [
+				10.5,
+				0.600000023841858,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				45.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "pythagorean_triangle_angles"
+		},
+		{
+			"bounds_position": [
+				2.01999998092651,
+				-0.38960000872612,
+				16.0200004577637
+			],
+			"bounds_size": [
+				0.960000038146973,
+				1.38960003852844,
+				0.966999053955078
+			],
+			"cell": [
+				2,
+				16
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				0.0,
+				16.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "interactivetriangle"
+		},
+		{
+			"bounds_position": [
+				1.99400675296783,
+				1.02999997138977,
+				16.4940071105957
+			],
+			"bounds_size": [
+				1.01198637485504,
+				1.01200008392334,
+				0.0119857788085938
+			],
+			"cell": [
+				2,
+				16
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						3.0,
+						1.06599998474121,
+						16.5
+					],
+					"text": "(3.0, 1.0, 16.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.0,
+						1.06599998474121,
+						16.5
+					],
+					"text": "(2.0, 1.0, 16.5)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.5,
+						2.06599998474121,
+						16.5
+					],
+					"text": "(2.5, 2.0, 16.5)"
+				}
+			],
+			"position": [
+				2.5,
+				1.53600001335144,
+				16.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "interactivetriangle"
+		},
+		{
+			"bounds_position": [
+				1.71499991416931,
+				0.98334002494812,
+				17.4900016784668
+			],
+			"bounds_size": [
+				1.57000017166138,
+				1.17666006088257,
+				0.0999984741210938
+			],
+			"cell": [
+				2,
+				17
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				1.0,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"token": "science_screen"
+		},
+		{
+			"bounds_position": [
+				2.01999998092651,
+				-0.38960000872612,
+				20.0200004577637
+			],
+			"bounds_size": [
+				0.960000038146973,
+				1.18959999084473,
+				0.966999053955078
+			],
+			"cell": [
+				2,
+				20
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.5,
+				0.0,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "quad"
+		},
+		{
+			"bounds_position": [
+				2.29400682449341,
+				1.82999992370605,
+				19.6940078735352
+			],
+			"bounds_size": [
+				0.211986303329468,
+				1.61199998855591,
+				1.81198501586914
+			],
+			"cell": [
+				2,
+				20
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.5,
+						1.8659999370575,
+						21.2999992370605
+					],
+					"text": "(2.5, 1.8, 21.2)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.29999995231628,
+						1.8659999370575,
+						19.7000007629395
+					],
+					"text": "(2.2, 1.8, 19.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.5,
+						3.46599984169006,
+						19.7000007629395
+					],
+					"text": "(2.5, 3.4, 19.7)"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.29999995231628,
+						3.46599984169006,
+						21.5
+					],
+					"text": "(2.2, 3.4, 21.5)"
+				}
+			],
+			"position": [
+				2.5,
+				2.63599991798401,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "quad"
+		},
+		{
+			"bounds_position": [
+				5.65000009536743,
+				0.0,
+				19.6499996185303
+			],
+			"bounds_size": [
+				1.70000028610229,
+				2.22000002861023,
+				1.70000076293945
+			],
+			"cell": [
+				6,
+				20
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Threshold/@CollisionShape3D@1009",
+					"position": [
+						6.5,
+						1.10000002384186,
+						20.5
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wireframe_threshold"
+		},
+		{
+			"bounds_position": [
+				9.38894081115723,
+				-0.159999996423721,
+				18.7587051391602
+			],
+			"bounds_size": [
+				2.7434778213501,
+				5.11999988555908,
+				3.89934539794922
+			],
+			"cell": [
+				10,
+				20
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "SilhouetteGate",
+					"position": [
+						10.5,
+						4.59999990463257,
+						20.5
+					],
+					"text": "triangle"
+				}
+			],
+			"position": [
+				10.5,
+				0.0,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				260.0,
+				0.0
+			],
+			"scale": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"token": "silhouette_gate"
+		},
+		{
+			"bounds_position": [
+				3.25240468978882,
+				0.125,
+				22.066987991333
+			],
+			"bounds_size": [
+				6.49519014358521,
+				5.625,
+				0.866024017333984
+			],
+			"cell": [
+				6,
+				22
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				2.0,
+				22.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fetish_portal"
+		},
+		{
+			"bounds_position": [
+				3.20651173591614,
+				2.77141904830933,
+				24.4750003814697
+			],
+			"bounds_size": [
+				6.57934093475342,
+				0.425633668899536,
+				0.0499992370605469
+			],
+			"cell": [
+				6,
+				24
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.0,
+				24.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "3t"
+		},
+		{
+			"bounds_position": [
+				10.0,
+				0.525000035762787,
+				26.2749996185303
+			],
+			"bounds_size": [
+				1.0,
+				1.29033493995667,
+				0.274999618530273
+			],
+			"cell": [
+				10,
+				26
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.5,
+				1.0,
+				26.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "quad_line_puzzle"
+		},
+		{
+			"bounds_position": [
+				3.3600001335144,
+				0.0,
+				-3.70499992370605
+			],
+			"bounds_size": [
+				6.28000020980835,
+				3.41199994087219,
+				0.409999847412109
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.24799990653992,
+						-3.36299991607666
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.08800005912781,
+						-3.36299991607666
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.24799990653992,
+						-3.63700008392334
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.08800005912781,
+						-3.63700008392334
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:point triangle context"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.98000001907349,
+				9.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				11.0089998245239
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				17.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				18.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0,
+				1.58000004291534,
+				38.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				2.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.00899982452393,
+				1.58000004291534,
+				30.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				32.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.99100017547607,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.0,
+				0.680000007152557,
+				19.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				19.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				29.9910011291504
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.0,
+				1.58000004291534,
+				38.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.98000001907349,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0,
+				1.58000004291534,
+				4.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				5.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.00899982452393,
+				1.58000004291534,
+				7.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				34.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.99100017547607,
+				1.58000004291534,
+				34.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				9.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-4.08300018310547
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0630002021789551
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				5.27500009536743,
+				2.91000008583069,
+				30.9169998168945
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				3.0,
+				31.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				4.92199993133545,
+				2.31000018119812,
+				3.41000008583069
+			],
+			"bounds_size": [
+				0.0780000686645508,
+				0.179999828338623,
+				0.179999828338623
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				2.40000009536743,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "emergency_button"
+		},
+		{
+			"bounds_position": [
+				5.0,
+				0.300000041723251,
+				4.4211049079895
+			],
+			"bounds_size": [
+				0.16124963760376,
+				0.826871156692505,
+				0.23012113571167
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.09749984741211,
+				0.300000011920929,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_extinguisher"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				12.4599990844727,
+				1.38500010967255,
+				7.47399997711182
+			],
+			"bounds_size": [
+				1.08000183105469,
+				0.629999995231628,
+				0.0510001182556152
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0,
+				1.70000004768372,
+				7.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "info_screen"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				0.810000002384186,
+				13.25
+			],
+			"bounds_size": [
+				0.0999999642372131,
+				1.34000015258789,
+				2.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				0.899999976158142,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "whiteboard"
+		},
+		{
+			"bounds_position": [
+				0.969999969005585,
+				0.920000016689301,
+				23.2199993133545
+			],
+			"bounds_size": [
+				0.0785000920295715,
+				1.55999994277954,
+				2.56000137329102
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.70000004768372,
+				24.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "large_window"
+		},
+		{
+			"bounds_position": [
+				-3.0,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.109999895095825,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				-3.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				15.91100025177,
+				1.23000001907349,
+				-1.5900000333786
+			],
+			"bounds_size": [
+				0.0639991760253906,
+				0.240000009536743,
+				0.180000066757202
+			],
+			"cell": [],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Panel/HandPoseArea/@CollisionShape3D@1147",
+					"position": [
+						15.8169994354248,
+						1.35000002384186,
+						-1.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Panel/ScanArea/@CollisionShape3D@1148",
+					"position": [
+						15.826000213623,
+						1.36440002918243,
+						-1.5
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				15.9499998092651,
+				1.35000002384186,
+				-1.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "palm_scanner"
+		},
+		{
+			"bounds_position": [
+				2.22499990463257,
+				4.62799978256226,
+				-0.000000101514160633087
+			],
+			"bounds_size": [
+				0.950000286102295,
+				0.0920000076293945,
+				0.449999988079071
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.70000004768372,
+				4.6399998664856,
+				0.224999904632568
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				6.22499990463257,
+				4.62799978256226,
+				7.00000047683716
+			],
+			"bounds_size": [
+				0.949999809265137,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.69999980926514,
+				4.6399998664856,
+				7.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				3.40999937057495,
+				4.32000017166138,
+				3.25
+			],
+			"bounds_size": [
+				0.180001258850098,
+				0.0799999237060547,
+				18.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				4.3600001335144,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cable_tray"
+		},
+		{
+			"bounds_position": [
+				1.27999997138977,
+				0.550000011920929,
+				20.1837997436523
+			],
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.616201400756836
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.27999997138977,
+				0.850000023841858,
+				20.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_position": [
+				12.2075910568237,
+				0.0,
+				-3.05457997322083
+			],
+			"bounds_size": [
+				0.636408805847168,
+				0.649999976158142,
+				0.669159650802612
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.5,
+				0.0,
+				-2.72000002861023
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lab_stool"
+		},
+		{
+			"bounds_position": [
+				7.95068788528442,
+				0.419999957084656,
+				28.1366100311279
+			],
+			"bounds_size": [
+				1.07064390182495,
+				1.67455089092255,
+				0.772289276123047
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.419999986886978,
+				28.5
+			],
+			"rotation": [
+				0.0,
+				140.018463134766,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				5.95127391815186,
+				0.419999986886978,
+				14.9476013183594
+			],
+			"bounds_size": [
+				1.09745216369629,
+				0.529922366142273,
+				1.13752365112305
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				15.5
+			],
+			"rotation": [
+				0.0,
+				200.608169555664,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				5.98160791397095,
+				0.419999986886978,
+				32.0018043518066
+			],
+			"bounds_size": [
+				1.0239520072937,
+				1.6599999666214,
+				0.999576568603516
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				0.419999986886978,
+				32.5
+			],
+			"rotation": [
+				0.0,
+				194.73161315918,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				0.0799999982118607,
+				0.64000004529953,
+				-2.75399994850159
+			],
+			"bounds_size": [
+				0.172000005841255,
+				1.15999984741211,
+				0.608127593994141
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Door",
+					"position": [
+						0.244000002741814,
+						1.77999997138977,
+						-2.50399994850159
+					],
+					"text": "IN CASE OF EMERGENCY"
+				}
+			],
+			"position": [
+				0.0920000001788139,
+				1.22000002861023,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "weapon_cabinet"
+		},
+		{
+			"bounds_position": [
+				0.0677500143647194,
+				1.16999995708466,
+				-0.835000038146973
+			],
+			"bounds_size": [
+				0.17724996805191,
+				0.5,
+				0.659000039100647
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				0.0820000022649765,
+				1.41999995708466,
+				-0.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "weapon_cabinet"
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [],
+	"room": "Point_Triangle_Context",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Point_Triangle_Context/triangle-plate-in-hall.png",
+		"res://ada_run/encounter_pilot/Point_Triangle_Context/triangle-hall-context.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": []
+}

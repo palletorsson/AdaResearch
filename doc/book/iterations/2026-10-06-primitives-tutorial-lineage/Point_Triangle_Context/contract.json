@@ -1,0 +1,180 @@
+{
+  "incoming": {
+    "sha256": "f056d7c5708e098661f966e094d018ebed9a3015267266d921a4fb2186b2315b"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\n\nconst TraceArchive = preload(\"trace_archive.gd\")\nconst LineSkin = preload(\"line_skin.gd\")\n\nvar sculpture: Node3D\nvar grid_copy: Node3D\nvar positions := PackedVector3Array()\nvar addresses: Array[Vector3i] = []\nvar grid_step := 0.25\nvar readout: Label3D\n\nfunc _ready() -> void:\n    readout = Label3D.new()\n    readout.position = Vector3(0, 2.0, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.003\n    add_child(readout)\n\n    sculpture = TraceArchive.load_drawing()\n    if sculpture == null:\n        readout.text = \"Draw in Trace, then release the point to save.\"\n        return\n    add_child(sculpture)\n    positions = sculpture.get_meta(\"positions\").duplicate()\n\n    grid_copy = sculpture.duplicate() as Node3D\n    add_child(grid_copy)\n    for i in grid_copy.get_child_count():\n        var segment := grid_copy.get_child(i)\n        var original := sculpture.get_child(i)\n        segment.set_script(LineSkin)\n        segment.mesh = original.mesh.duplicate()\n        segment.material_override = original.material_override.duplicate()\n        segment.material_override.albedo_color = Color(0.25, 0.85, 0.60)\n    _place_on_grid()\n\nfunc _process(_delta: float) -> void:\n    if grid_copy != null and Input.is_action_just_pressed(\"ui_accept\"):\n        grid_step = 0.50 if grid_step == 0.25 else 0.25\n        _place_on_grid()\n\nfunc _place_on_grid() -> void:\n    addresses.clear()\n    for p in positions:\n        addresses.append(Vector3i(\n            roundi(p.x / grid_step),\n            roundi(p.y / grid_step),\n            roundi(p.z / grid_step)\n        ))\n    for i in range(1, addresses.size()):\n        var a := Vector3(addresses[i - 1]) * grid_step\n        var b := Vector3(addresses[i]) * grid_step\n        var displacement := b - a\n        grid_copy.get_child(i - 1).show_segment(a, displacement, displacement.length())\n    readout.text = \"YOUR SAVED TRACE\\nPOINTS \" + str(positions.size())\n    readout.text += \"\\nGRID \" + str(grid_step) + \" m\"\n",
+      "after": "extends Node3D\nconst PointBody = preload(\"point_body.gd\")\nconst FaceBody = preload(\"face_body.gd\")\nconst Archive = preload(\"trace_archive.gd\")\nconst CORNERS := Vector3i(0, 1, 2)\nvar handles: Array[Node3D] = []\nvar points: Array[Vector3] = []\nvar face := FaceBody.new()\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    add_child(face)\n    add_child(message)\n    message.position = Vector3(0, 2, 0)\n    message.font_size = 32\n    message.pixel_size = 0.003\n    var drawing := Archive.load_drawing()\n    if drawing == null:\n        message.text = \"Return to Trace; draw and release the point.\"\n        return\n    var record: PackedVector3Array = drawing.get_meta(\"positions\")\n    drawing.free()\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        if index < 0 or index >= record.size():\n            message.text = \"Choose three indices inside the saved record.\"\n            return\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        var point := PointBody.new()\n        point.position = record[index]\n        add_child(point)\n        handles.append(point)\n\nfunc _process(_delta: float) -> void:\n    if handles.size() != 3:\n        return\n    var current: Array[Vector3] = []\n    for point in handles:\n        current.append(point.position)\n    if current == points:\n        return\n    points = current\n    if face.show_faces(points, [Vector3i(0, 1, 2)]):\n        message.text = \"Three positions; one face.\"\n    else:\n        message.text = \"Separate the corners; lift one off the line.\"\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Triangle_Context/tutorial.md",
+      "sha256": "cd7e63dd5da81c9590e3b98adc59cb68dadf395376841e5a479bd45671f158cb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/lesson.gd",
+      "sha256": "32561b91b52ecdfbc778c251a5964c06301807254ee16e19c78a8d9cb67fc52a"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/three_original_point_handles",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/saved_entries_exact",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/collinear_is_empty",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/one_rendered_face",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/three_edges",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/vertices_match_handles",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/reverse_front",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/front_is_one_sided",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/duplicate_rejected",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/out_of_range_rejected",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/familiar_point_2",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/familiar_point_3",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/familiar_point_4",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/real_pickup_moves_corner",
+      "kind": "native"
+    },
+    {
+      "id": "triangle/held_corner_redraws_face",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Triangle_Context/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/face_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/line_skin.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/point_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

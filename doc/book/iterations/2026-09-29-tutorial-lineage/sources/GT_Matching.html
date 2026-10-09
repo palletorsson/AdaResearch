@@ -1,0 +1,292 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GT_Matching · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=GT_Matching">← Tutorial lineage</a></p><h1>GT Matching</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="GT_Matching/final.md">Raw captured source</a></p><pre># A pair that blocks two pairs
+
+Can every chosen pair be valid while the collection still leaves avoidable gaps?
+
+&lt;!-- @edmonds_algorithm --&gt;
+
+Five points make a ring; each has another point waiting outside it, joined by a single spoke. Choose one of those outer points. In CYCLE FIRST, press STEP and watch the edges considered by the matching display. Predict whether the next edge can be selected: has either endpoint already been paired? RUN / PAUSE lets the scan continue. Keep your chosen point in view as its neighbour finds company.
+
+A matching is a set of edges with no shared endpoints. Each vertex participates in at most one selected pair. This condition tells us whether a collection is allowed, but it does not tell us that the collection contains as many pairs as possible.
+
+Follow an occupied endpoint into the next few decisions. Several rejected edges can share that same endpoint, so one accepted pair can shape the fate of many later candidates. The rule prevents double booking correctly, but that correctness is only one part of the task. Keeping an unmatched vertex in view makes the consequence visible from the waiting vertex’s side, instead of assessing the procedure solely by how confidently it marks each new pair.
+
+The present exhibit scans edges and accepts a pair whenever both endpoints are free. It keeps those choices. That greedy procedure can reach a maximal matching: no extra edge can simply be added without breaking the rule. A maximum matching answers a stronger question by containing the greatest possible number of pairs.
+
+Try a small example in your head or with four people standing in a line, A, B, C, D. If B pairs with C first, neither outer edge can be added. The matching is maximal with one pair. Choosing A with B and C with D instead gives two pairs. Improving the first result requires undoing an accepted edge, not just looking harder for another unused edge.
+
+When the cycle-first scan ends, count the pairs and the points left waiting. There are three pairs, with four outer points unpaired. Follow each unused spoke inwards. The connection is still there. Its inner endpoint was taken by an earlier choice.
+
+Press ORDER for SPOKES FIRST. The points stay where they were; every connection remains. The earlier pairings clear. Before running again, predict what will happen to the point you chose. This time five pairs form, one along each spoke. Nobody has gained a new connection. We changed which possibility was considered first.
+
+![Cycle first: the ring’s edges scanned before the spokes; three pairs, four outer points waiting.](/book-review/doc/book/figures/graphtheory/matching-cycle-first.png)
+
+![Spokes first: the same ten points and ten connections; five pairs, one along each spoke.](/book-review/doc/book/figures/graphtheory/matching-spokes-first.png)
+
+*Same ten points, same ten connections. Cycle first: three pairs, four waiting. Spokes first: five pairs. Two end states of one graph, from the same museum camera.*
+
+RESET repeats the selected order. Switching back to CYCLE FIRST brings the gaps back too. Both scans obey the same rule about free endpoints. Their different results give us a reason to ask for a procedure that can reconsider its own choices. The display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction.[^name] Our order switch starts another scan. It does not teach the first scan how to undo a pair.
+
+Matching also leaves the meaning of a good partnership outside its endpoint rule. Maximising a count cannot establish consent, suitability or fairness. Those questions require further conditions and a way for participants’ preferences to matter.
+
+&lt;!-- @ --&gt;
+
+The next hall keeps five sentences on a plaque and colours one of them gold before you have read it. Ask there, as here, whether a rule that is followed has been proved: a procedure meeting its local rule is not automatically a proof of its strongest advertised conclusion.
+
+[^name]: The caption on the display reads GREEDY MATCHING. The artifact keeps the name of the procedure it was built to become, edmonds_algorithm, in its files, and nowhere a visitor can see.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="GT_Matching/tutorial.md">Raw captured source</a></p><pre># GT Matching
+
+Pair nodes. Each node claimed by at most one edge. Hungarian algorithm for bipartite weighted matching.
+
+Build a bipartite graph.
+
+```gdscript
+class_name BipartiteGraph
+
+var left_vertices: Array = []
+var right_vertices: Array = []
+var edges: Array = []  # [u, v, weight]
+
+func add_edge(u, v, weight: float = 0.0) -&gt; void:
+    if not u in left_vertices: left_vertices.append(u)
+    if not v in right_vertices: right_vertices.append(v)
+    edges.append([u, v, weight])
+```
+
+Two disjoint vertex sets. Edges only cross from left to right.
+
+Greedy matching.
+
+```gdscript
+func greedy_matching(g: BipartiteGraph) -&gt; Dictionary:
+    var matching: Dictionary = {}  # right_vertex -&gt; left_vertex
+    var left_used: Dictionary = {}
+    for edge in g.edges:
+        if not edge[0] in left_used and not edge[1] in matching:
+            matching[edge[1]] = edge[0]
+            left_used[edge[0]] = true
+    return matching
+```
+
+Linear scan. Not optimal; demonstrates why the Hungarian approach exists.
+
+Hopcroft-Karp for maximum matching.
+
+```gdscript
+func hopcroft_karp(g: BipartiteGraph) -&gt; Dictionary:
+    var matching: Dictionary = {}
+    while true:
+        var levels: Dictionary = bfs_layers(g, matching)
+        if levels.is_empty(): break
+        var any_augmented: bool = false
+        for u in g.left_vertices:
+            if not matching.values().has(u):
+                if dfs_augment(u, levels, matching, g):
+                    any_augmented = true
+        if not any_augmented: break
+    return matching
+```
+
+BFS to find layered structure; DFS to find augmenting paths. Runs in O(E·√V).
+
+Hungarian algorithm for weighted matching.
+
+```gdscript
+func hungarian(cost_matrix: Array) -&gt; Array:
+    var n: int = cost_matrix.size()
+    var u_dual: Array = []
+    var v_dual: Array = []
+    for _i in n + 1: u_dual.append(0); v_dual.append(0)
+    var assignment: Array = []
+    for _i in n + 1: assignment.append(-1)
+    # Full Hungarian loop omitted for brevity — finds optimal assignment
+    return assignment
+```
+
+Solves in O(V³). Finds the minimum-cost perfect matching in a bipartite graph.
+
+Blossom contraction.
+
+```gdscript
+func contract_blossom(blossom: Array, graph) -&gt; void:
+    var super_vertex := &quot;blossom_&quot; + str(randi())
+    for v in blossom:
+        for e in graph.edges_touching(v):
+            var other = e.other(v)
+            if not other in blossom:
+                graph.add_edge(super_vertex, other)
+    for v in blossom:
+        graph.remove_vertex(v)
+```
+
+Odd cycles contract into super-vertices. After augmenting through the contraction, the super-vertex expands back into the original blossom.
+
+Detect stable marriage.
+
+```gdscript
+func gale_shapley(proposers: Array, receivers: Array, prefs: Dictionary) -&gt; Dictionary:
+    var engaged: Dictionary = {}  # receiver -&gt; proposer
+    var free_proposers: Array = proposers.duplicate()
+    var next_proposal: Dictionary = {}
+    for p in proposers: next_proposal[p] = 0
+    while not free_proposers.is_empty():
+        var p = free_proposers.pop_front()
+        var r = prefs[p][next_proposal[p]]
+        next_proposal[p] += 1
+        if not r in engaged:
+            engaged[r] = p
+        elif prefs[r].find(p) &lt; prefs[r].find(engaged[r]):
+            free_proposers.append(engaged[r])
+            engaged[r] = p
+        else:
+            free_proposers.append(p)
+    return engaged
+```
+
+Proposers propose in preference order; receivers reject less-preferred matches. Produces a stable matching.
+
+You can now build a bipartite graph, compute greedy, Hopcroft-Karp, and Hungarian matchings, contract blossoms in general matching, and run Gale-Shapley for stable marriage. The Graph Theory sequence closes; the curriculum&#x27;s spine ends with the matching problem.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="GT_Matching/technical.md">Raw captured source</a></p><pre># GT Matching — Technical
+
+A matching is a subset of edges in which every vertex is incident to at most one edge. A perfect matching covers every vertex. A maximum matching is one with the most possible edges.
+
+Bipartite matching is the easier case. The Hungarian algorithm solves the weighted bipartite matching problem in O(V³) using augmenting paths in a residual graph derived from the bipartite structure. The unweighted case — maximum bipartite matching — reduces to max-flow by adding a source connected to one side and a sink connected to the other, and can be solved in O(V·E) with Hopcroft-Karp.
+
+```gdscript
+# Hopcroft-Karp bipartite matching
+func bipartite_matching(left, right, edges_lr) -&gt; Dictionary:
+    var matching := {}  # right_vertex -&gt; left_vertex
+    var improved := true
+    while improved:
+        improved = false
+        var layers := bfs_layers(matching, left, right, edges_lr)
+        if layers.is_empty(): break
+        for u in left:
+            if not matching.values().has(u):
+                if dfs_augment(u, layers, matching, edges_lr):
+                    improved = true
+    return matching
+```
+
+General matching (matching in arbitrary graphs) is harder because of odd cycles. Edmonds&#x27; blossom algorithm handles this by contracting odd-length augmenting cycles into single pseudo-nodes (blossoms), finding augmenting paths through the contracted graph, and expanding the contractions back out once the matching is extended. The algorithm runs in O(V³) in the classical formulation; Micali-Vazirani improves this to O(V·√E).
+
+The blossom contraction is the algorithm&#x27;s distinctive move. When a BFS for augmenting paths discovers an odd cycle, the cycle is contracted into a super-vertex, the search continues from the super-vertex, and any augmenting path found through the super-vertex is expanded by lifting it back through the contraction when the matching is updated.
+
+The map&#x27;s two symmetric halves stage the bipartite case visually. Each side holds a set of vertices; edges run between the sides; the Hungarian algorithm finds the maximum matching and draws it as a set of thick edges. A toggle switches to general-graph mode, where odd cycles become possible and the blossom algorithm takes over.
+
+Within the sequence, Matching is the capstone. It closes Graph Theory and the whole spine. The map argues that fair, exclusive, complete allocation is a graph problem, and the algorithms the sequence has built are enough to solve it.
+
+## König&#x27;s Theorem
+
+For bipartite graphs, the maximum matching size equals the minimum vertex cover size — a set of vertices that covers every edge. This is König&#x27;s theorem, and it has a constructive proof: given a maximum matching, a minimum vertex cover can be computed in linear time by following alternating paths from unmatched vertices.
+
+## Weighted Matching
+
+The Hungarian algorithm solves the weighted bipartite matching problem: find the matching that maximises total edge weight (or minimises total cost). It runs in O(V³) and is the standard algorithm for job-assignment problems where workers have different costs for different tasks.
+
+```gdscript
+# Hungarian algorithm — simplified kernel
+func hungarian(cost: Array) -&gt; Array:
+    var n := cost.size()
+    var u := []; var v := []
+    u.resize(n + 1); v.resize(n + 1)
+    var p := []; var way := []
+    p.resize(n + 1); way.resize(n + 1)
+    for i in range(1, n + 1):
+        p[0] = i
+        var j0 := 0
+        var minv := []; var used := []
+        minv.resize(n + 1); used.resize(n + 1)
+        for k in range(n + 1):
+            minv[k] = INF; used[k] = false
+        while p[j0] != 0:
+            used[j0] = true
+            var i0: int = p[j0]
+            var delta := INF
+            var j1 := 0
+            for j in range(1, n + 1):
+                if not used[j]:
+                    var cur = cost[i0 - 1][j - 1] - u[i0] - v[j]
+                    if cur &lt; minv[j]:
+                        minv[j] = cur
+                        way[j] = j0
+                    if minv[j] &lt; delta:
+                        delta = minv[j]
+                        j1 = j
+            for j in range(n + 1):
+                if used[j]:
+                    u[p[j]] += delta
+                    v[j] -= delta
+                else:
+                    minv[j] -= delta
+            j0 = j1
+        while j0 != 0:
+            var j1 = way[j0]
+            p[j0] = p[j1]
+            j0 = j1
+    var ans := []
+    ans.resize(n)
+    for j in range(1, n + 1):
+        ans[p[j] - 1] = j - 1
+    return ans
+```
+
+## Applications
+
+Kidney donation matching uses general-graph matching because donor-recipient compatibility forms arbitrary graphs. Organ exchange programmes solve maximum matching subject to compatibility constraints, sometimes with additional constraints on cycle length.
+
+Stable marriage (the Gale-Shapley algorithm) is a different kind of matching problem — one where preferences are two-sided rather than weights being symmetric. It runs in O(V²) and always produces a stable matching, though the stability comes at the cost of not being the maximum-weight matching.
+
+Within the sequence, Matching closes Graph Theory and the entire spine. The curriculum&#x27;s closing argument is that allocation problems are graph problems, and the algorithms the sequence has built are enough to solve them.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="GT_Matching/intent.md">Raw captured source</a></p><pre>Concept: Matching pairs nodes — each claimed by at most one edge. Edmonds&#x27; blossom algorithm handles the hardest case: odd cycles in general graphs that defeat simpler approaches.
+Sequence role: Eighth and final map in Graph Theory and the final map of all 19 spine sequences. Matching is the graph theory capstone: pairing, assignment, optimal allocation. The two symmetric halves mirror each other — matching across the divide. Edmonds&#x27; blossom contraction is one of the most beautiful algorithms in computer science, and placing it at the end honors its difficulty and elegance; follows GT_Flow.
+Technical angle: Maximum matching, augmenting paths, the blossom (an odd cycle that can be contracted without losing matching information), Edmonds&#x27; algorithm (find augmenting paths, contract blossoms, expand for final matching). Bipartite matching is easy (Hungarian algorithm); general matching requires the blossom insight.
+Critical angle: Matching is the algorithmic form of pairing — and pairing is never neutral. Who gets matched with whom, what counts as compatible, whose preferences are optimized — these are social and political questions wearing mathematical masks. The blossom (an odd cycle) is the structure that defeats naive approaches: it requires a novel conceptual move (contraction) to handle. The last map&#x27;s message: even in the most formal domain, structural surprises persist. Every formal system has an outside.
+Key artifacts: edmonds_algorithm implements blossom contraction and augmenting path discovery — the complete maximum matching algorithm for general graphs, visualized as nodes pairing across the symmetric room.
+
+Gap: edmonds_algorithm needs slider_horizontal, push_button.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="GT_Matching/critical.md">Raw captured source</a></p><pre># GT_Matching — Critical Reflection
+
+Two symmetric halves mirror each other across a central ridge. Alcoves correspond left to right. The architecture is the problem — find the pairs, close the symmetry. One artifact, `edmonds_algorithm`, sits at the center, on the axis where the two halves meet. The map is a room that asks to be completed by matching, and the algorithm is the process that tries.
+
+Edmonds&#x27; algorithm in its full form is one of the most beautiful constructions in combinatorics. When an augmenting path encounters an odd cycle — a blossom — the algorithm contracts the entire cycle into a single node, matches the reduced graph, then expands the contraction back to recover the matching. The blossom is the structure that defeats naive approaches. Greedy matching, augmenting paths on bipartite graphs, Hungarian method — all fail on general graphs because odd cycles create a combinatorial obstruction that no local operation can resolve. The blossom contraction is the insight that the obstruction can be compressed without losing information, then restored without losing the solution. It treats structural difficulty as compressible rather than irreducible.
+
+The artifact in this map implements a simpler version: greedy maximum matching. Its identity is iterate edges, match unmatched endpoints, move on. `matched vertices turn green, matching edges turn red`. The critical parameter is `edge_density`: sparse graphs leave many vertices unmatched, dense graphs approach perfect matching. The gap between the greedy approach and Edmonds&#x27; full algorithm is itself meaningful — the greedy finds a maximal matching (no edge can be added) but not necessarily a maximum matching (the largest possible). The difference between maximal and maximum is the difference between stopping when no obvious improvement exists and continuing until the structural limit is reached. The greedy is satisficed. Edmonds is optimal. The map implements the satisficed version and names it after the optimal one. The gap between the name and the implementation is the map&#x27;s first quiet dishonesty.
+
+Foucault would see matching as a technology of assignment. Matching pairs nodes — each claimed by at most one edge. A perfect matching claims every node. No leftovers, no loose ends. This is the administrative logic of allocation: every resource assigned to exactly one consumer, every worker assigned to exactly one task, every organ assigned to exactly one recipient. The matching problem is the formal skeleton of every assignment system, and assignment systems are among the most consequential institutions: who gets housing, who gets transplants, who gets school placements. The algorithm that computes the matching encodes the criteria for pairing, and the criteria determine who is matched and who is left over. The unmatched vertices — the ones the graph&#x27;s structure could not pair — are the algorithm&#x27;s remainders, and the remainder is always someone.
+
+Ranciere&#x27;s politics begins with the uncounted — those who are not represented in the existing order. The unmatched vertex is the uncounted node. It exists in the graph. It has edges. It could be matched. But the algorithm&#x27;s sequence of decisions — greedy, left-to-right, first-come-first-served — consumed the available partners before reaching it. The unmatched vertex is not inherently unmatchable; it is unmatchable given the matching that was already constructed. A different algorithm, a different ordering, a different starting point might have matched it and left a different vertex exposed. The remainder is contingent, not structural, but the matching presents it as structural because the matching is complete: maximal, final, done.
+
+The symmetric architecture amplifies this. Left mirrors right. Every alcove on one side has a corresponding alcove on the other. The room is built for perfect matching — every spatial element has a partner. But the algorithm does not achieve perfect matching on all graphs. Some graphs have odd numbers of vertices, and one must remain unmatched. Some graphs have structural bottlenecks — Hall&#x27;s condition fails, and no matching can cover all vertices. The room&#x27;s symmetry promises completeness while the algorithm delivers optimality, and the two are not the same.
+
+The blossom — the odd cycle that defeated all previous approaches to general matching — is the most Ranciere-inflected structure in graph theory. An odd cycle is a set of nodes that cannot be paired internally: match two, and a third is left out. Match a different two, and a different third is left out. The cycle&#x27;s oddness makes internal completion impossible. Edmonds&#x27; insight was that the cycle can be contracted — compressed into a single node — and matched externally, then expanded back with the internal matching resolved. The blossom is the structure that says: this group cannot pair itself. It needs something from outside. The contraction is the recognition that the group&#x27;s internal dynamics are insufficient and that the matching must engage with the broader graph.
+
+Foucault&#x27;s concept of the dispositif — the heterogeneous ensemble of discourses, institutions, and practices that constitutes a power relation — finds an unlikely echo in Edmonds&#x27; algorithm. The blossom is a local dispositif: a configuration of relationships that produces a structural impasse. The contraction is the analytical move that identifies the impasse, compresses it, and resolves it by repositioning the contracted node within the larger system. The expansion is the reinsertion of the resolved structure back into the local context. Analysis, compression, resolution, reinsertion. The algorithm&#x27;s elegance lies in recognizing that the obstruction is real but navigable — not by ignoring it, not by eliminating it, but by temporarily changing the scale at which it is addressed.
+
+Pairing is not reduction. It is the discovery that two things were always incomplete alone. The symmetric room, the central ridge, the matching algorithm at the axis — the map asks whether completeness is achievable and answers: sometimes, depending on the structure. The unmatched vertices remain. The blossoms resolve. The algorithm terminates. What it leaves behind is a graph where some nodes found partners and some did not, and the distribution of partnership was determined by an algorithm whose greedy logic was the first move in a game whose optimal play requires seeing structures the greedy cannot see.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="GT_Matching/artifacts.md">Raw captured source</a></p><pre># GT Matching — Artifacts
+*Graph Theory: Connections Define Structure · relation · 1 artifacts*
+
+&gt; A matching pairs nodes — each node claimed by at most one edge. A perfect matching claims every node. No leftovers, no loose ends. The problem sounds simple: pair things optimally. But in general graphs, with odd cycles and tangled structure, greedy approaches fail. Edmonds solved it in 1965 with a move no one expected — he shrank odd cycles into single nodes, matched the reduced graph, then expanded them back. Blossoms. The algorithm treats obstruction as compression.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Edmonds&#x27; Algorithm
+![Edmonds&#x27; Algorithm](/scene-catalog/edmonds_algorithm.png)
+
+EVALUATE how graph structure enables or blocks pairings and why greedy matching can fall short of the optimum.
+
+`edmonds_algorithm`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="GT_Matching/summary.md">Raw captured source</a></p><pre># GT Matching — Summary
+
+GT_Matching is the eighth and final map in the Graph Theory sequence, and the last map in the whole spine. The task is pairing: each node claimed by at most one edge, each pair an exclusive assignment. A perfect matching claims every node; an optimal matching minimises cost under some weighting.
+
+The room is divided into two symmetric halves. The learner stands on a walkway between them. On each side, a set of nodes waits to be paired with a partner on the other side. A greedy algorithm runs first and fails visibly: it commits to easy pairs early and strands some nodes unmatched. A second station runs the Hungarian algorithm for the bipartite case, lifts the blockage, and produces a complete assignment.
+
+A third station takes the problem to general graphs, where pairs can form across arbitrary edges. The blossom algorithm contracts odd cycles into pseudo-nodes, finds augmenting paths through the contracted graph, and expands the contractions back out when the matching is complete. The algorithm animates the contractions and re-expansions; the room&#x27;s two halves visibly bend as blossoms form.
+
+Within the sequence, Matching is the capstone. Within the whole spine, it is the last thing the learner encounters before the curriculum hands back to the Lab. The argument is that allocation — fair, exclusive, complete — is a graph problem, and the tools the sequence has built are enough to solve it.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="GT_Matching/blurb.md">Raw captured source</a></p><pre>A matching pairs nodes — each node claimed by at most one edge. A perfect matching claims every node. No leftovers, no loose ends. The problem sounds simple: pair things optimally. But in general graphs, with odd cycles and tangled structure, greedy approaches fail. Edmonds solved it in 1965 with a move no one expected — he shrank odd cycles into single nodes, matched the reduced graph, then expanded them back. Blossoms. The algorithm treats obstruction as compression.
+
+The room mirrors itself. Left reflects right across a central ridge. Alcoves correspond. The architecture is the problem — find the pairs, close the symmetry. Edmonds&#x27; blossom algorithm navigates the space, contracting what resists into something tractable, then restoring it whole.
+
+Pairing is not reduction. It is the discovery that two things were always incomplete alone.</pre></section></body></html>

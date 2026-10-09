@@ -1,0 +1,36 @@
+--- before/Point_One/tutorial.md
++++ Point_One/tutorial.md
+@@ -1,10 +1,20 @@
+-# Point One — give a position a place
++# Point One — the point
+ 
+-Day Zero has prepared the environment. Open `points.gd` in [the Point One study](../../../doc/book/studies/point-one/README.md). The supplied `coordinates.tscn` uses the same base and adds two small white markers, named `A` and `B`, and three coloured coordinate guides. The downloaded script shows both markers; we will build up to it.
++Point Zero introduced an instruction that happens when a node is ready, and another that keeps happening as the program runs. Here we introduce **the point**.
+ 
+-The guides and markers are supplied objects. Here we learn to place them. The first change is deliberately invisible.
++A mathematical point has a position and no extent: no length, width or height. We can say where it is before giving it anything to look at.
+ 
+-## Keep a position
++To locate the point in our 3D scene, we use three coordinates measured from an origin. In this exercise, a `Vector3` stores those coordinates. We will call the first point A and keep its position in `a`. Keeping that value draws nothing.
++
++To see where the point is, we will place a small sphere at its position. The sphere is our marker: its centre indicates the point, while its surface gives our eyes something to find. The point, its coordinates and the body used to show it are the distinctions we will work with.
++
++## The supplied study
++
++Open `points.gd` in [the Point One study](../../../doc/book/studies/point-one/README.md). It uses the Day Zero base. Its prepared scene, `coordinates.tscn`, supplies two white sphere markers named `A` and `B`, and three coloured coordinate guides. The downloaded script shows both markers; we will build up to it.
++
++We borrow the markers and guides. Our code will choose where the points are and when their markers become visible. The first step keeps a point's position without showing it.
++
++## Keep the point's position
+ 
+ Replace the contents of `points.gd` with:
+ 
+@@ -38,7 +48,7 @@
+ 
+ The red guide marks X, green Y and blue Z. Their labels identify the positive directions. Follow one change at a time. The marker moves between runs because the saved coordinates changed; we have not yet written movement over time.
+ 
+-## Keep another position
++## Introduce a second point
+ 
+ Restore `a` and add a second position and its marker. The complete script is now:
+ 

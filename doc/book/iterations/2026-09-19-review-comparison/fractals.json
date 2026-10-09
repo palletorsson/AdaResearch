@@ -1,0 +1,45 @@
+{
+  "status": "one encounter strengthened; six chapters preserved",
+  "summary": "The book already noticed an extra recursive call in the pyramid. The existing sculpture now lets a visitor compare its consequences, keeping the inherited form as the default.",
+  "items": [
+    {
+      "title": "A specimen becomes a comparison",
+      "description": "All ten artifacts remain. The pyramid joins Koch, triangle and box-counting as the fourth primary, with compact COMPARE, RULE and RESET buttons.",
+      "images": [
+        "doc/book/iterations/2026-09-19-fractals-review/before-desk.png",
+        "doc/book/iterations/2026-09-19-fractals-review/desk.png"
+      ],
+      "captions": [
+        "Before: the existing pyramid without local controls.",
+        "After: a standing desk and transparent panel, facing the approach."
+      ],
+      "image_note": "Same front camera in the actual Godot museum. These images show the before and after configuration; no headset test is claimed.",
+      "report": "doc/book/iterations/2026-09-19-fractals-review/SUMMARY.md"
+    },
+    {
+      "title": "What can one more call make?",
+      "description": "216 instances become 125 when the extra upper call is held back at every level. The retained cube positions, cube size and recursion depth stay fixed.",
+      "images": [
+        "doc/book/iterations/2026-09-19-fractals-review/six-calls.png",
+        "doc/book/iterations/2026-09-19-fractals-review/five-calls.png"
+      ],
+      "captions": [
+        "A: inherited six-call recipe, depth three.",
+        "B: five calls, with the extra call held back at every level."
+      ],
+      "image_note": "Two states of the updated artifact, captured with the same camera. Counts refer to leaf instances, including overlaps. The controls were exercised through their actual button signals.",
+      "report": "doc/book/iterations/2026-09-19-fractals-review/controls-report.json",
+      "report_label": "Geometry, controls and local walking evidence"
+    },
+    {
+      "title": "Look before counting",
+      "description": "The previous source observation becomes a short embodied investigation. The remaining collection and the onward question about Menger remain.",
+      "before": "Beyond the instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. A name or a beautiful outline invites comparison; neither settles which rule is running. The pyramid's implementation even makes six recursive calls where its comments say five. There is more to inspect than the route can finish.",
+      "after": "The cube pyramid returns from the cellular automata rooms. There we put its resemblance beside another way of making a pattern. Here, walk around it. Keep one of its rising edges in view, then press COMPARE.\n\nSomething has been held back. The top comes down. Did the cubes shrink? Come closer: the cubes have kept their size. Press again and the taller construction returns. Follow an edge that survived both versions. Where did its neighbours go?\n\nAn earlier comment in the source promised five recursive calls. The program made six. We have kept that inherited construction as the first view. COMPARE holds back the extra upper call wherever the recipe repeats. The remaining calls keep their positions and the same three levels of recursion.\n\nRULE reveals the count after we have looked: 216 cube instances become 125. One call withheld, ninety-one instances gone. That call had descendants of its own. Some cubes overlap, so counting what the program creates is not the same as counting separate blocks we can see.\n\nThe discrepancy could have disappeared in a correction. Instead it has become a way to touch the recipe. The name invited us to recognise a form; the switch lets that recognition falter. Which version would you have accepted if the other had never been offered? RESET brings back the inherited one. We can keep the strange result and still learn how it was made.\n\nAround these instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. There is more to inspect than the route can finish.",
+      "text_kind": "book passage",
+      "after_label": "Applied",
+      "report": "commons/maps/Fractal_KochSierpinski/final.md",
+      "report_label": "Read the complete chapter"
+    }
+  ]
+}

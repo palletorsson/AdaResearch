@@ -1,0 +1,47 @@
+{
+  "status": "encounter restaged; seven chapters preserved",
+  "summary": "The writing already follows a clear progression: select, guide, branch, connect, make room, sample and compose. This pass brings the cave onto its written approach and restores the full paired reading order in three halls. All seven final.md chapters are unchanged.",
+  "items": [
+    {
+      "title": "Begin with the opening your shoulders must fit through",
+      "description": "The cave chapter begins: “A connected line has no width. Your shoulders do.” The entrance previously faced the maze. The cave now stands on that approach, making its opening the first direct encounter.",
+      "images": [
+        "doc/book/iterations/2026-09-20-proceduralgeneration-review/before-entrance.png",
+        "doc/book/iterations/2026-09-20-proceduralgeneration-review/after-entrance.png"
+      ],
+      "captions": [
+        "Before · the maze stands directly ahead; the cave is off to one side.",
+        "After · the cave mouth faces the approach; the maze comes later."
+      ],
+      "image_note": "Actual museum captures, matched map-space viewpoint and opening cave seed. The console is unchanged.",
+      "text_kind": "placement; book unchanged",
+      "before": "Cave (9,12), away from the entrance axis.\nMaze (19,6), directly ahead.",
+      "after": "Cave (19,11), on the entrance axis.\nMaze (22,19), beyond the comparison court.",
+      "report": "doc/book/iterations/2026-09-20-proceduralgeneration-review/SUMMARY.md"
+    },
+    {
+      "title": "Keep space to compare, and space to continue",
+      "description": "The cave and maze retain their original dimensions and algorithms. The surrounding floor, BSP comparison and rear structure remain. A controlled body can enter the cave mouth, take the independent aisle around the experiment and continue to the exit approach.",
+      "images": [
+        "doc/book/iterations/2026-09-20-proceduralgeneration-review/before-court.png",
+        "doc/book/iterations/2026-09-20-proceduralgeneration-review/after-court.png"
+      ],
+      "captions": [
+        "Before · the two generators share the front of the court.",
+        "After · cave first, then maze; the surrounding aisle remains open."
+      ],
+      "image_note": "Matched elevated Godot views. Five tested walk segments and five support rays passed. This does not certify every generated interior or headset comfort.",
+      "report": "doc/book/iterations/2026-09-20-proceduralgeneration-review/review-report.json",
+      "report_label": "Read the runtime evidence"
+    },
+    {
+      "title": "Let both written encounters remain primary",
+      "description": "The flat role table already promoted these works. Their ordered reading lists and core encounter records still omitted the second artifact. Those records now agree with the book. No extra chapter or prose rewrite was needed.",
+      "text_kind": "ordered primary encounters",
+      "before": "Caves/Mazes: cave\nSculpted Forms: sampled pile\nMirrored Patterns: mirrored field",
+      "after": "Caves/Mazes: cave → maze\nSculpted Forms: sampled pile → Boolean dome\nMirrored Patterns: mirrored field → network",
+      "report": "doc/book/iterations/2026-09-20-proceduralgeneration-review/content-checks.json",
+      "report_label": "Check preserved chapters and aligned records"
+    }
+  ]
+}

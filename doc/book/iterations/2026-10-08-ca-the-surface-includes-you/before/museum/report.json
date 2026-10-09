@@ -1,0 +1,228 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed proximity bridge found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: depleted",
+      "passed": true
+    },
+    {
+      "name": "Twenty-one near steps remove W support",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ]
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ]
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ]
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ]
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "key": "decaying_bridge",
+        "local": [
+          7.5,
+          0.0,
+          8.5
+        ]
+      },
+      {
+        "key": "ca_chair_test",
+        "local": [
+          4.5,
+          0.0,
+          24.5
+        ]
+      },
+      {
+        "key": "catalyst_vent",
+        "local": [
+          6.5,
+          0.0,
+          24.5
+        ]
+      },
+      {
+        "key": "catalyst_prompter_box",
+        "local": [
+          1.5,
+          0.0,
+          25.5
+        ]
+      },
+      {
+        "key": "dark_sphere",
+        "local": [
+          3.5,
+          0.0,
+          25.5
+        ]
+      },
+      {
+        "key": "cellular_automata_3d_tree",
+        "local": [
+          4.5,
+          0.0,
+          26.5
+        ]
+      },
+      {
+        "key": "crossway_ca",
+        "local": [
+          3.5,
+          0.0,
+          30.5
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          7.5,
+          3.51999998092651,
+          3.0
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          3.5,
+          3.0,
+          31.0
+        ]
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ]
+      },
+      {
+        "key": "info_screen",
+        "local": [
+          1.0,
+          1.70000004768372,
+          21.5
+        ]
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ]
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          3.75,
+          4.6399998664856,
+          10.2250003814697
+        ]
+      },
+      {
+        "key": "fire_hose_box",
+        "local": [
+          1.27999997138977,
+          0.850000023841858,
+          6.5
+        ]
+      },
+      {
+        "key": "station_plinth",
+        "local": [
+          3.5,
+          0.0,
+          29.5
+        ]
+      },
+      {
+        "key": "dream_bodies",
+        "local": [
+          3.5,
+          0.419999986886978,
+          29.5
+        ]
+      }
+    ],
+    "scope": "Native museum, overhead and eye level. Player/neighbouring halls hidden for capture. No physical headset.",
+    "work_local": [
+      7.5,
+      0.0,
+      8.5
+    ]
+  },
+  "passed": true
+}

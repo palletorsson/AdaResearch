@@ -1,0 +1,313 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed explorer and pyramid found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: comparison",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear",
+      "passed": true
+    },
+    {
+      "name": "Pyramid wall caption names its six-call configuration",
+      "passed": true
+    },
+    {
+      "name": "Explorer wall caption follows the installed seed comparison",
+      "passed": true
+    },
+    {
+      "name": "Comparison mounts existing carried inspector",
+      "passed": true
+    },
+    {
+      "name": "Installed depth4 recipe retains1296 cube instances",
+      "passed": true
+    },
+    {
+      "name": "Floor reads exact chronological desk history",
+      "passed": true
+    },
+    {
+      "name": "All recorded floor colours agree within one8bit channel step",
+      "passed": true
+    },
+    {
+      "name": "Only recorded rows occupy the fixed floor addresses",
+      "passed": true
+    },
+    {
+      "name": "Rule90 reaches an empty row at generation16",
+      "passed": true
+    },
+    {
+      "name": "Held inspector chooses address15 without changing row",
+      "passed": true
+    },
+    {
+      "name": "Readout predicts the next occupied cell from differing neighbours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: point-inspector",
+      "passed": true
+    },
+    {
+      "name": "Held trigger advances once and pauses the actual explorer",
+      "passed": true
+    },
+    {
+      "name": "Released point parks at selected address without stepping",
+      "passed": true
+    },
+    {
+      "name": "Installed SEED control resets to adjacent pair",
+      "passed": true
+    },
+    {
+      "name": "Installed STEP control advances pair to four cells",
+      "passed": true
+    },
+    {
+      "name": "Point and seed actions leave every installed cube transform unchanged",
+      "passed": true
+    },
+    {
+      "name": "Installed floor scrolls last24 rows and names range7to30",
+      "passed": true
+    },
+    {
+      "name": "Replay clears history and receiver together",
+      "passed": true
+    },
+    {
+      "name": "A body walks across dark history cells on solid museum floor",
+      "passed": true
+    },
+    {
+      "name": "Walking over image does not advance or edit history",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-and-pyramid",
+      "passed": true
+    },
+    {
+      "name": "entry_to_point: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "entry_to_point: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "desk_to_history: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "desk_to_history: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "history_to_pyramid: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "history_to_pyramid: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "pyramid_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "pyramid_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "body_end": [
+      7.49000024795532,
+      -0.0291223432868719,
+      13.4766321182251
+    ],
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ]
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ]
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ]
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ]
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "key": "ca_rule_explorer",
+        "local": [
+          3.5,
+          1.03999996185303,
+          9.5
+        ]
+      },
+      {
+        "key": "film_ca_triplet",
+        "local": [
+          11.5,
+          0.0,
+          10.5
+        ]
+      },
+      {
+        "key": "station_plinth",
+        "local": [
+          9.5,
+          0.0,
+          16.5
+        ]
+      },
+      {
+        "key": "sierpinski_pyramid",
+        "local": [
+          9.5,
+          2.06500005722046,
+          16.5
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          6.5,
+          3.51999998092651,
+          3.0
+        ]
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ]
+      },
+      {
+        "key": "fire_hose_box",
+        "local": [
+          1.27999997138977,
+          0.850000023841858,
+          6.5
+        ]
+      }
+    ],
+    "maximum_colour_channel_error": 0.0000976622104644775,
+    "pyramid_local": [
+      9.5,
+      2.06500005722046,
+      16.5
+    ],
+    "routes": {
+      "desk_to_history": {
+        "blocked": [],
+        "samples": 59,
+        "unsupported": []
+      },
+      "entry_to_point": {
+        "blocked": [],
+        "samples": 45,
+        "unsupported": []
+      },
+      "history_to_pyramid": {
+        "blocked": [],
+        "samples": 21,
+        "unsupported": []
+      },
+      "pyramid_to_exit": {
+        "blocked": [],
+        "samples": 33,
+        "unsupported": []
+      }
+    },
+    "scope": "Native museum above/inside; hidden player/neighbour halls for capture. No headset.",
+    "work_local": [
+      3.5,
+      1.03999996185303,
+      9.5
+    ]
+  },
+  "passed": true
+}

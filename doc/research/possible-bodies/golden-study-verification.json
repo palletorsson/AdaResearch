@@ -1,0 +1,40 @@
+{
+  "started": "2026-09-14T14:33:42+02:00",
+  "finished": "2026-09-14T14:34:28+02:00",
+  "pid": 44432,
+  "exit": 0,
+  "checks": 93,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/golden_probe_base.gd": "0b64d61b8913cd50eb156d4b5d537ca8e28e169446aea75c970791e52deb99e9",
+    "ada_run/golden_acceptance.gd": "ad01ede3de488db124561fdf0130e3f543b7188b121671d988cc52c2e233e2c1",
+    "commons/maps/Fractal_GoldenSpiral/map_data.json": "a545ec02e6a87ecf1ce063023debcba3aa33f756ace031bdbb251fcce8b8912e",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/golden-review-2026-09-14/review-plan.json": "caac9d1aa37e194c14f6b23d0f9b40de9bfc9c90e750a4c026382e38ed8d6b90",
+    "commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd": "0714f30271419de610b41f99f04fcde14bd63a9224b1661df95ba4aefa5388f0",
+    "algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn": "57e44f585c0af738d28a019e56ccc9d1a3d6652fcec5c105dd56a835b3698f14",
+    "commons/artifacts/registry/fractals.json": "39e4960b52079a5a765279e0687a6b99a0ed0d329d90dd869222d5b66bf257a6",
+    "algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd": "5cce9f38f281e23ce6ac80b7796863b7f14aa4649c822e8bf8ec8650513bad32",
+    "algorithms/fractals/golden_rectangle/golden_rectangle.gd": "1134da8306ff6f96ac073b411cd3da2dac43706b8ddc9fe5955835c1f89d750d",
+    "algorithms/fractals/romanesco/romanesco.gd": "d9b61729f763f1ce350ddd43cd7cc4fe270ea32854f9d070c44a20631d7b0671",
+    "commons/data/book/fractals.json": "acd8b47cde277d877c29826c291fcdf3c9eccc67d33911b71a40977db423f552",
+    "commons/data/trunk_branches.json": "2405a71f5ce450fdcb90c5ca8fd9d473f115c2d0b9dde656c60d434b8519f875",
+    "commons/data/artifact_roles.json": "ce90c18fc91a8e2e09fdb4b245fdf842b4e9c9a039b116619711efa49659e3dd",
+    "commons/maps/Fractal_GoldenSpiral/final.md": "215e1e408713dd455f701897f7eb21cb8d2e7914eb122087127f5be771357284"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

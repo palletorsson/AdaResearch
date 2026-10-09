@@ -1,0 +1,50 @@
+{
+  "sequences": {
+    "formfinding": {
+      "name": "Form Finding: Rules, Constraints and Possible Shapes",
+      "v1_note": "Six-hall route after Forces. Descent has a controlled desktop-verified primary; later halls require source and spatial review before their claims are treated as demonstrated.",
+      "truth": "A chosen update, objective and set of constraints make some configurations accessible. An accepted endpoint depends on the model and its stopping rule.",
+      "qfep_term": "F",
+      "qfep_connection": "Compare how models define a cost, constrain variation and accept an endpoint. This is a methodological connection; the exhibits do not establish that physical energy, numerical objective and variational free energy are interchangeable.",
+      "layer": "F_order",
+      "prerequisites": [
+        "forces"
+      ],
+      "unlocks": [
+        "wavefunctions"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": "20-25 minutes",
+      "learning_objectives": [
+        "Measure a local gradient and distinguish three stopping conditions",
+        "Investigate how supports, length and load constrain a cable",
+        "Compare local relaxation rules for a connected shape",
+        "Distinguish balance from stability",
+        "Investigate uphill proposals and the limits of escaping local minima",
+        "Author a model by choosing its objective, constraints and stopping rule"
+      ],
+      "maps": [
+        "FormFinding_Descent",
+        "FormFinding_Catenary",
+        "FormFinding_Relaxation",
+        "FormFinding_Equilibrium",
+        "FormFinding_Annealing",
+        "FormFinding_Forge"
+      ],
+      "deferred_maps": [
+        "Chamber_FormFinding"
+      ],
+      "deferred_reason": {
+        "Chamber_FormFinding": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+      },
+      "content": [
+        "FormFinding_Descent: where does downhill take you, and why does it stop?",
+        "FormFinding_Catenary: what changes between held endpoints?",
+        "FormFinding_Relaxation: how do local constraints change a connected shape?",
+        "FormFinding_Equilibrium: what balances, and is the balance stable?",
+        "FormFinding_Annealing: what can accepting an uphill move make accessible?",
+        "FormFinding_Forge: which objective, constraints and stopping rule will you author?"
+      ]
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "name": "Earlier interactables preserved",
+      "passed": true
+    },
+    {
+      "name": "Earlier structure preserved",
+      "passed": true
+    },
+    {
+      "name": "Earlier utilities preserved",
+      "passed": true
+    },
+    {
+      "name": "Every layer is15x33",
+      "passed": true
+    },
+    {
+      "name": "Teleporter lies behind door",
+      "passed": true
+    },
+    {
+      "name": "Book markers equal primary encounter order",
+      "passed": true
+    },
+    {
+      "name": "Primary role declared",
+      "passed": true
+    },
+    {
+      "name": "Map hash current",
+      "passed": true
+    },
+    {
+      "name": "Book file-byte hash current (CRLF preserved)",
+      "passed": true
+    },
+    {
+      "name": "Unique artifact registry key",
+      "passed": true
+    },
+    {
+      "name": "ada_run/em_plan.json edits only this hall",
+      "passed": true
+    },
+    {
+      "name": "commons/data/museum/em_plan.json edits only this hall",
+      "passed": true
+    },
+    {
+      "name": "Scene file exists",
+      "passed": true
+    },
+    {
+      "name": "Reading page serves current final text",
+      "passed": true
+    }
+  ],
+  "failures": []
+}

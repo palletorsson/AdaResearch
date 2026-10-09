@@ -1,0 +1,150 @@
+{
+  "git_head": "5c0840334426b7ce24d76c2622afb13809094d68",
+  "maps": [
+    {
+      "map": "Trans_Pre",
+      "sha256": "a1be3168388419ccd0a493c8c8cabf9a883e44b2d095d52340eb76e4a2e62b02",
+      "layers_sha256": "7a86f7809ce8c901e1032631a46c99db1f9d85654f6d24ab4dd0a083fbb2a11d",
+      "dimensions": {
+        "width": 11,
+        "depth": 27,
+        "max_height": 5
+      },
+      "museum_before": {
+        "wall_height": 4,
+        "plinths": false
+      },
+      "artifact_placements": 16
+    },
+    {
+      "map": "Trans_Introduction",
+      "sha256": "15a3a8ae8426686edde8929c1f460b1859981c5640477fd437f4ccca05eb4738",
+      "layers_sha256": "85270e72cd16766ff6fbdc4b68bf016b5f6dc3362a4885d922c61e08d0bc69ef",
+      "dimensions": {
+        "width": 13,
+        "depth": 20,
+        "max_height": 2
+      },
+      "museum_before": {
+        "basin": {
+          "depth": 2.5,
+          "glass": false
+        },
+        "gate": false
+      },
+      "artifact_placements": 14
+    },
+    {
+      "map": "Trans_Translation",
+      "sha256": "6732f9d3b41c8f2d44c8d2578b304706b2a11ea8b7a63c288fbecb3269c4ae34",
+      "layers_sha256": "86f174892a00c4fe35cc60231279c37af16357c299749e04d897f6024a6ccb0b",
+      "dimensions": {
+        "width": 10,
+        "depth": 24,
+        "max_height": 2
+      },
+      "museum_before": {
+        "simulation": {
+          "depth": 3.5,
+          "margin": 2,
+          "grid": true
+        },
+        "gate": false
+      },
+      "artifact_placements": 24
+    },
+    {
+      "map": "Trans_AxisDecomposition",
+      "sha256": "ce81fc4ce04999ec3e8a1abfafa1c8392dda839e0048c605b8271fd458852b29",
+      "layers_sha256": "fb610e29a7e083815162bf9e0369173b227ff79904ad42d6fd2193d9f8668d89",
+      "dimensions": {
+        "width": 9,
+        "depth": 16,
+        "max_height": 2
+      },
+      "museum_before": {
+        "simulation": {
+          "depth": 1.5,
+          "margin": 2.0,
+          "grid": true
+        }
+      },
+      "artifact_placements": 18
+    },
+    {
+      "map": "Trans_Rotation",
+      "sha256": "3f4353683acde8806cc7afbd36867878671ecaf30c11f6377a7932257387480d",
+      "layers_sha256": "80d4eb01803f7790c18afaae8cc2dcf3d1843fa102ffa162d5e3c1e6521ef36b",
+      "dimensions": {
+        "width": 13,
+        "depth": 40,
+        "max_height": 1
+      },
+      "museum_before": {
+        "wall_height": 4,
+        "simulation": {
+          "depth": 1.5,
+          "margin": 2,
+          "grid": true
+        }
+      },
+      "artifact_placements": 24
+    },
+    {
+      "map": "Trans_RotationSpectacle",
+      "sha256": "5a17001bd22a2858b328f289aed47faca236bac2197e388efd7585e802cc927f",
+      "layers_sha256": "4a51fadb21e4f06dfb559c83482c0fc812522bbd98bdd7d0e6d7f137e98bea4c",
+      "dimensions": {
+        "width": 13.0,
+        "depth": 54.0,
+        "max_height": 2.0
+      },
+      "museum_before": {
+        "wall_height": 4,
+        "open_roof": true
+      },
+      "artifact_placements": 19
+    },
+    {
+      "map": "Trans_Scale",
+      "sha256": "ab1e6f36c3637ef80cc138f91c05883085b045a5f1843783ccfe0983c859fc0b",
+      "layers_sha256": "f0eb7d33eb48d997bbd24f8b531861d029095acb859cb0ae8381a43bca5f7b60",
+      "dimensions": {
+        "width": 13,
+        "depth": 20,
+        "max_height": 2
+      },
+      "museum_before": {},
+      "artifact_placements": 17
+    },
+    {
+      "map": "Trans_Body",
+      "sha256": "7b5fa62c1e515dc05e701fffd428022afb1175151e697f5b20f0822a262df114",
+      "layers_sha256": "30793b314acc15266e1b185d5012b819a8def9715d3b1ee099001da56c86965b",
+      "dimensions": {
+        "width": 11,
+        "depth": 25,
+        "max_height": 5
+      },
+      "museum_before": {
+        "wall_height": 4,
+        "plinths": false
+      },
+      "artifact_placements": 4
+    },
+    {
+      "map": "Trans_Pit",
+      "sha256": "8e49684ee5d114ddeb2ccfd4f425de28bdc8044b30409d3509ffef5f3debaa7b",
+      "layers_sha256": "0ce676e6701ec67447308c9d4fd95c260c8a101b9adccc9203457ee519a4d6bf",
+      "dimensions": {
+        "depth": 25.0,
+        "max_height": 5.0,
+        "width": 15.0
+      },
+      "museum_before": {
+        "wall_height": 4.0
+      },
+      "artifact_placements": 10
+    }
+  ]
+}

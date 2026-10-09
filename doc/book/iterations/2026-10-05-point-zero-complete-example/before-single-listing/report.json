@@ -1,0 +1,405 @@
+{
+  "started_utc": "2026-10-05T13:40:04.011862+00:00",
+  "godot_executable": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe",
+  "godot_version": "4.6.stable.official.89cea1439",
+  "source": {
+    "path": "commons\\maps\\Point_Zero\\tutorial.md",
+    "sha256": "da0449509a74c8433b745279d0a866f4222376e0943c9a49540d5cd72a72a57f"
+  },
+  "scripts": {
+    "counter.gd": {
+      "sha256": "ac3fbcc67fa25933df3a6ee96f8377ec725e145d022df1917b84f86cd35ab55d",
+      "origin": "verbatim marked tutorial block"
+    },
+    "counter_once.gd": {
+      "sha256": "cd824e3ed90fd9a65ff8c2741206e37cd00aa103ad7419bc1fb082663724a180",
+      "origin": "verbatim marked tutorial block"
+    },
+    "counter_missing_label.gd": {
+      "sha256": "dbef03cecd8061fa62ea048d2e34275d7e0eb45bd526b97a680267c74efa3870",
+      "origin": "single-line omission from counter.gd"
+    },
+    "counter_missing_parent.gd": {
+      "sha256": "1dc29e9e1f6bb2b0dd803ad3e78863235e503b7046a91e48a51efd44fe90d2ba",
+      "origin": "single-line omission from counter.gd"
+    }
+  },
+  "verifier_sha256": "bde830f3d2594e0350bca2e05b4490af604a85fa57e3f4e75191a91b1a49ad76",
+  "runner_sha256": "49418a75061016dd4c12fc9c06c7e75c75c7758500332389d415fcb733006626",
+  "project_godot_sha256": "432fea1c738e02588401ec161a64f6c068052981a6979dac63ff4ad5449a2592",
+  "isolation": "Temporary minimal Godot project; only tutorial scripts, declared single-line omissions, and verify.gd. No museum code, autoloads, or XR.",
+  "cases": [
+    {
+      "name": "repeated",
+      "script": "counter.gd",
+      "expected_failure": null,
+      "exit_code": 0,
+      "success": true,
+      "assertions_passed": 17,
+      "assertions_failed": 0,
+      "assertions": [
+        {
+          "detail": {},
+          "name": "script loads",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready creates Label3D",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready parents Label3D",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready sets display size",
+          "passed": true
+        },
+        {
+          "detail": {
+            "actual": "0",
+            "expected": "0"
+          },
+          "name": "ready sets initial text",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 2,
+            "label_text": "1",
+            "sample": 1
+          },
+          "name": "engine advances 1",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 2,
+            "label_text": "1",
+            "sample": 1
+          },
+          "name": "label follows engine 1",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 2,
+            "label_text": "1",
+            "sample": 1
+          },
+          "name": "label advances 1",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 4,
+            "label_text": "3",
+            "sample": 2
+          },
+          "name": "engine advances 2",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 4,
+            "label_text": "3",
+            "sample": 2
+          },
+          "name": "label follows engine 2",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 4,
+            "label_text": "3",
+            "sample": 2
+          },
+          "name": "label advances 2",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 6,
+            "label_text": "5",
+            "sample": 3
+          },
+          "name": "engine advances 3",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 6,
+            "label_text": "5",
+            "sample": 3
+          },
+          "name": "label follows engine 3",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 6,
+            "label_text": "5",
+            "sample": 3
+          },
+          "name": "label advances 3",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 8,
+            "label_text": "7",
+            "sample": 4
+          },
+          "name": "engine advances 4",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 8,
+            "label_text": "7",
+            "sample": 4
+          },
+          "name": "label follows engine 4",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 8,
+            "label_text": "7",
+            "sample": 4
+          },
+          "name": "label advances 4",
+          "passed": true
+        }
+      ],
+      "result": [
+        {
+          "completed": true,
+          "mode": "repeated",
+          "passed": 17
+        }
+      ],
+      "log": "repeated.log",
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\palle\\AppData\\Local\\Temp\\point-zero-tutorial-qi5optdn",
+        "--script",
+        "res://verify.gd",
+        "--",
+        "counter.gd",
+        "repeated"
+      ]
+    },
+    {
+      "name": "once",
+      "script": "counter_once.gd",
+      "expected_failure": null,
+      "exit_code": 0,
+      "success": true,
+      "assertions_passed": 13,
+      "assertions_failed": 0,
+      "assertions": [
+        {
+          "detail": {},
+          "name": "script loads",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready creates Label3D",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready parents Label3D",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready sets display size",
+          "passed": true
+        },
+        {
+          "detail": {
+            "actual": "0",
+            "expected": "0"
+          },
+          "name": "ready sets initial text",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 3,
+            "label_text": "0",
+            "sample": 1
+          },
+          "name": "engine advances 1",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 3,
+            "label_text": "0",
+            "sample": 1
+          },
+          "name": "once label holds 1",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 5,
+            "label_text": "0",
+            "sample": 2
+          },
+          "name": "engine advances 2",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 5,
+            "label_text": "0",
+            "sample": 2
+          },
+          "name": "once label holds 2",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 7,
+            "label_text": "0",
+            "sample": 3
+          },
+          "name": "engine advances 3",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 7,
+            "label_text": "0",
+            "sample": 3
+          },
+          "name": "once label holds 3",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 9,
+            "label_text": "0",
+            "sample": 4
+          },
+          "name": "engine advances 4",
+          "passed": true
+        },
+        {
+          "detail": {
+            "engine_frame": 9,
+            "label_text": "0",
+            "sample": 4
+          },
+          "name": "once label holds 4",
+          "passed": true
+        }
+      ],
+      "result": [
+        {
+          "completed": true,
+          "mode": "once",
+          "passed": 13
+        }
+      ],
+      "log": "once.log",
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\palle\\AppData\\Local\\Temp\\point-zero-tutorial-qi5optdn",
+        "--script",
+        "res://verify.gd",
+        "--",
+        "counter_once.gd",
+        "once"
+      ]
+    },
+    {
+      "name": "missing_label",
+      "script": "counter_missing_label.gd",
+      "expected_failure": "ready creates Label3D",
+      "exit_code": 1,
+      "success": true,
+      "assertions_passed": 1,
+      "assertions_failed": 1,
+      "assertions": [
+        {
+          "detail": {},
+          "name": "script loads",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready creates Label3D",
+          "passed": false
+        }
+      ],
+      "result": [],
+      "log": "missing_label.log",
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\palle\\AppData\\Local\\Temp\\point-zero-tutorial-qi5optdn",
+        "--script",
+        "res://verify.gd",
+        "--",
+        "counter_missing_label.gd",
+        "repeated"
+      ]
+    },
+    {
+      "name": "missing_parent",
+      "script": "counter_missing_parent.gd",
+      "expected_failure": "ready parents Label3D",
+      "exit_code": 1,
+      "success": true,
+      "assertions_passed": 2,
+      "assertions_failed": 1,
+      "assertions": [
+        {
+          "detail": {},
+          "name": "script loads",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready creates Label3D",
+          "passed": true
+        },
+        {
+          "detail": {},
+          "name": "ready parents Label3D",
+          "passed": false
+        }
+      ],
+      "result": [],
+      "log": "missing_parent.log",
+      "command": [
+        "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+        "--headless",
+        "--path",
+        "C:\\Users\\palle\\AppData\\Local\\Temp\\point-zero-tutorial-qi5optdn",
+        "--script",
+        "res://verify.gd",
+        "--",
+        "counter_missing_parent.gd",
+        "repeated"
+      ]
+    }
+  ],
+  "success": true,
+  "positive_assertions_passed": 30,
+  "negative_cases_rejected": 2
+}

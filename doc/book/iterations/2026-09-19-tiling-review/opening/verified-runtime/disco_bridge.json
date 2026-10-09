@@ -1,0 +1,133 @@
+{
+	"checks": [
+		{
+			"feedback": [],
+			"passed": true,
+			"states": [
+				{
+					"initial_label": "808_kit",
+					"initial_model": "808_kit",
+					"no_preview_stream": true,
+					"updated_label": "disco"
+				},
+				{
+					"initial_label": "90s_house",
+					"initial_model": "90s_house",
+					"no_preview_stream": true,
+					"updated_label": "disco"
+				}
+			],
+			"tag": "preset_label_follows_model_without_feedback"
+		},
+		{
+			"passed": true,
+			"tag": "first_hall_uses_own_sequencer"
+		},
+		{
+			"passed": true,
+			"tag": "second_hall_uses_own_sequencer"
+		},
+		{
+			"passed": true,
+			"tag": "missing_local_sequencer_does_not_borrow"
+		},
+		{
+			"config": {
+				"sound_preset": "90s_house"
+			},
+			"passed": true,
+			"tag": "explicit_house_config_reaches_sequencer"
+		},
+		{
+			"passed": true,
+			"tag": "actual_packed_scene_ui_is_connected"
+		},
+		{
+			"displayed_after_event": 5,
+			"events": [
+				{
+					"displayed_during_event": 5,
+					"step": 5,
+					"track": 1
+				}
+			],
+			"passed": true,
+			"tag": "active_cell_sound_and_address_agree"
+		},
+		{
+			"passed": true,
+			"scope": "Actual AudioStreamPlayer receives generated stream; no human listening check.",
+			"tag": "active_track_generates_audio_stream"
+		},
+		{
+			"displayed": 6,
+			"event_count_after": 1,
+			"event_count_before": 1,
+			"passed": true,
+			"tag": "inactive_column_adds_no_event"
+		},
+		{
+			"columns": 16,
+			"passed": true,
+			"rows": 4,
+			"same_button": true,
+			"step": 5,
+			"tag": "turning_value_off_preserves_address",
+			"track": 1,
+			"value": false
+		},
+		{
+			"passed": true,
+			"tag": "cleared_cell_no_longer_triggers"
+		},
+		{
+			"event": {
+				"displayed_during_event": 15,
+				"step": 15,
+				"track": 2
+			},
+			"next_step": 0,
+			"passed": true,
+			"tag": "last_column_displays_before_wrap"
+		},
+		{
+			"passed": true,
+			"tag": "wrapped_empty_first_column_adds_no_event"
+		},
+		{
+			"120_bpm_seconds": 0.125,
+			"240_bpm_seconds": 0.0625,
+			"passed": true,
+			"tag": "tempo_changes_time_not_grid_bounds"
+		},
+		{
+			"floor_width": 12,
+			"passed": true,
+			"sequencer_steps": 16,
+			"step_0_columns": [
+				0
+			],
+			"step_12_columns": [
+				0
+			],
+			"tag": "sixteen_steps_fold_onto_twelve_columns"
+		},
+		{
+			"first_hall_columns": [],
+			"passed": true,
+			"second_hall_columns": [
+				3
+			],
+			"tag": "second_hall_event_affects_only_own_floor"
+		},
+		{
+			"animation_step_after": 1,
+			"animation_step_before": 0,
+			"passed": true,
+			"tag": "floor_can_animate_with_sequencer_stopped"
+		}
+	],
+	"failures": [],
+	"passed": true,
+	"scope": "Actual packed scenes and their real UI/data/audio/bridge methods, advanced deterministically. No museum placement, VR pointer, headset audio or learner acceptance claim."
+}

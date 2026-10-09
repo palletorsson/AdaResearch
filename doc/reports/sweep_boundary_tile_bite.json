@@ -1,0 +1,932 @@
+{
+ "sweep": "boundary_tile",
+ "peak_changed_pct": 11.888,
+ "subject_pct": 14.062,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "changed_px": 37353,
+   "changed_pct": 6.467
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "changed_px": 37353,
+   "changed_pct": 6.467
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "changed_px": 39947,
+   "changed_pct": 6.916
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "changed_px": 62502,
+   "changed_pct": 10.821
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "changed_px": 62502,
+   "changed_pct": 10.821
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "changed_px": 7725,
+   "changed_pct": 1.337
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 40328,
+   "changed_pct": 6.982
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 40328,
+   "changed_pct": 6.982
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 32002,
+   "changed_pct": 5.541
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 50085,
+   "changed_pct": 8.671
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 50085,
+   "changed_pct": 8.671
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "changed_px": 62554,
+   "changed_pct": 10.83
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "changed_px": 39991,
+   "changed_pct": 6.924
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "changed_px": 39991,
+   "changed_pct": 6.924
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "changed_px": 40331,
+   "changed_pct": 6.983
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 7734,
+   "changed_pct": 1.339
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 7734,
+   "changed_pct": 1.339
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 50219,
+   "changed_pct": 8.694
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 32724,
+   "changed_pct": 5.666
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 32724,
+   "changed_pct": 5.666
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "changed_px": 62554,
+   "changed_pct": 10.83
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "changed_px": 39991,
+   "changed_pct": 6.924
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "changed_px": 39991,
+   "changed_pct": 6.924
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "changed_px": 40331,
+   "changed_pct": 6.983
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 7734,
+   "changed_pct": 1.339
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 7734,
+   "changed_pct": 1.339
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 50219,
+   "changed_pct": 8.694
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 32724,
+   "changed_pct": 5.666
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "none",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 32724,
+   "changed_pct": 5.666
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "changed_px": 25206,
+   "changed_pct": 4.364
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "changed_px": 25206,
+   "changed_pct": 4.364
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "changed_px": 47120,
+   "changed_pct": 8.158
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 65147,
+   "changed_pct": 11.279
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 65147,
+   "changed_pct": 11.279
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 59570,
+   "changed_pct": 10.313
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 68572,
+   "changed_pct": 11.872
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 68572,
+   "changed_pct": 11.872
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "changed_px": 65095,
+   "changed_pct": 11.27
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 47249,
+   "changed_pct": 8.18
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 47249,
+   "changed_pct": 8.18
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 68664,
+   "changed_pct": 11.888
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 59708,
+   "changed_pct": 10.337
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 59708,
+   "changed_pct": 10.337
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "changed_px": 65095,
+   "changed_pct": 11.27
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 47249,
+   "changed_pct": 8.18
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 47249,
+   "changed_pct": 8.18
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 68664,
+   "changed_pct": 11.888
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 59708,
+   "changed_pct": 10.337
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "edge",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 59708,
+   "changed_pct": 10.337
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "changed_px": 33010,
+   "changed_pct": 5.715
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 33010,
+   "changed_pct": 5.715
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 32044,
+   "changed_pct": 5.548
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 49008,
+   "changed_pct": 8.485
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 49008,
+   "changed_pct": 8.485
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 49145,
+   "changed_pct": 8.508
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 32578,
+   "changed_pct": 5.64
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 32578,
+   "changed_pct": 5.64
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "changed_px": 49145,
+   "changed_pct": 8.508
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 32578,
+   "changed_pct": 5.64
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "cell",
+    "symmetry": "rotate"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 32578,
+   "changed_pct": 5.64
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "changed_px": 20018,
+   "changed_pct": 3.466
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "plain"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 20018,
+   "changed_pct": 3.466
+  },
+  {
+   "a": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "mirror"
+   },
+   "b": {
+    "layout": "single",
+    "boundary": "lattice",
+    "symmetry": "rotate"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  }
+ ]
+}

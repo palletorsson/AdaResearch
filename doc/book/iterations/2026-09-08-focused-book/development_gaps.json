@@ -1,0 +1,718 @@
+[
+  {
+    "room": "Color_Walls",
+    "sequence": "color",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "The cylindrical colour model is labelled HSL but computes HSV. Correct the label or supply a real HSL comparison, then compare the same samples.",
+    "reuse_question": "Make the named representation agree with its calculation.",
+    "primary_tokens": [
+      "gradient_interpolator",
+      "color_space_navigator"
+    ],
+    "sources": {
+      "commons/maps/Color_Walls/map_data.json": "1c249053b26f897e35bcecdf1d9e6306e1b40257c2251875de81b613ca5f95db",
+      "commons/artifacts/registry/color.json": "1533efd23f5a94362e8c4dcbcba0ea58cbabbbcde1452f78b44a42aa47663862",
+      "algorithms/color/gradient_interpolator/gradient_interpolator.tscn": "81502ca1b36612ec05229d0ff3e50c438f08dd2d5d1a32b8de8ee5e35ecd7527",
+      "algorithms/color/gradient_interpolator/gradient_interpolator.gd": "7cdc4157b4ad8492a6250476450ae3a4c165187ca1513f83460a28901c5c6514",
+      "commons/artifacts/color_space_navigator/color_space_navigator.tscn": "6e222e196c2788e2a5e93066d56abc2cda7af012ff02425aa5ef01b92d5ed6bb",
+      "commons/artifacts/color_space_navigator/color_space_navigator.gd": "b6aad6e7f44f83ea9c081f1c92618936d15cdcdb9265b3ee8710b0ccf726ed31"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=color&room=Color_Walls"
+  },
+  {
+    "room": "FormFinding_Forge",
+    "sequence": "formfinding",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The selected balance and descent examples work in source, but the forge's advertised QFEP progress is an animation. Give the forge a computed quantity and expose how its controls affect it before expanding the core.",
+    "reuse_question": "A progress animation needs a causal calculation before it can demonstrate optimisation.",
+    "primary_tokens": [
+      "balance_puzzle",
+      "gradient_descent_optimizer"
+    ],
+    "sources": {
+      "commons/maps/FormFinding_Forge/map_data.json": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+      "commons/artifacts/registry/furniture.json": "d7d7adc5e3562507f7140b669722bd394395fb29ae418148d207d531519babdd",
+      "commons/primitives/balance/balance_puzzle.tscn": "2683d082d1a07667a38c8686add9857c2d2424923ee5abe4178335295dbae8a4",
+      "commons/primitives/balance/balance_puzzle.gd": "aea41d52f1e06bc0b364193e29aac3c3b39deab7f53b83ea3a09bef70b42cc2a",
+      "commons/artifacts/registry/soft_bodies.json": "561db209e779a1ad8ca4966f90b21968d96b1d8931bbd21753b17b11169171e4",
+      "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.tscn": "0123fc14c5f0473b1ec2b30215edf94d9a12c1b2a5b64d7d363ccc7a641bbdba",
+      "commons/artifacts/gradient_descent_optimizer/gradient_descent_optimizer.gd": "6eb3466bd05a03e677086b8570c1aaed4644ac88f2de48a3ca1d38fc16039ad1",
+      "commons/artifacts/self_shaping_forge/self_shaping_forge.gd": "e940ee84fa504dee002d073f8290b652ca9bee53993607ac4317765b6f4ca700"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=formfinding&room=FormFinding_Forge"
+  },
+  {
+    "room": "Random_Remove",
+    "sequence": "randomness",
+    "status": "source_inspected_proposal",
+    "kind": "restore_candidate",
+    "next_action": "The removal script needs an explicitly connected local demonstration grid. Inspect the pre-museum map in Git for the lost host relationship, then test that removal touches only this room's intended pieces.",
+    "reuse_question": "Recover a lost host relationship where history supports it; explicitly bind each restored room.",
+    "primary_tokens": [
+      "remove_random"
+    ],
+    "sources": {
+      "commons/maps/Random_Remove/map_data.json": "e6c7c863eceed1c0613663d49a2ef4984121a537e634d114cbc7c17702cbfa03",
+      "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+      "algorithms/randomness/remove_random.tscn": "b883fa85094bb378a7603baf86343cdea215c059d5726c29c11b7e236a6cb103",
+      "algorithms/randomness/RemoveRandom.gd": "8a6cca6874a29ecf2b4845994d7e0e680706c129713f0f9e1f43c1cce0411350"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=randomness&room=Random_Remove"
+  },
+  {
+    "room": "Random_Rotate_Random_XYZ",
+    "sequence": "randomness",
+    "status": "source_inspected_proposal",
+    "kind": "restore_candidate",
+    "next_action": "The namesake rotation script also relies on a host grid. The chapter currently uses its self-contained changing stacks. Inspect the historical host before promoting the rotation-only comparison.",
+    "reuse_question": "The host-restoration method may transfer from Random_Remove, but the required geometry and changes differ.",
+    "primary_tokens": [
+      "random_decay_multimesh"
+    ],
+    "sources": {
+      "commons/maps/Random_Rotate_Random_XYZ/map_data.json": "1b9afe1916d0dfaca5892e2498506ae8ca3754917fd616e947424939bda6d85f",
+      "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+      "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn": "a11aa0ab8ad853da37733495c469e39ce54000c4bd3725a3d325e650ccc2ae0a",
+      "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd": "ce6cbe4873f1f269580afb87db18c7eb822e010c47506ea07cd394019871d467"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=randomness&room=Random_Rotate_Random_XYZ"
+  },
+  {
+    "room": "Random_Space_Geometry",
+    "sequence": "randomness",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "Check whether OCTAVES changes the field: the Perlin source appears to retain the no-fractal default. Either enable the intended layered calculation or remove the inactive control.",
+    "reuse_question": "Each visible control needs a receiver and an observable consequence.",
+    "primary_tokens": [
+      "perlin_noise_bridge"
+    ],
+    "sources": {
+      "commons/maps/Random_Space_Geometry/map_data.json": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+      "commons/artifacts/registry/randomness.json": "827db0acd59c30580f28a30e44f5d67be3a7bcc8bff21dd339647be21aa0c806",
+      "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.tscn": "31c3b13c6629963970518299c1af44d2be21d58897155dcac159863cac65eda4",
+      "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd": "5287f3fcf25f70f8b59efea569afd40aef6c03b944e6122e76997a0b83dfaed9"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=randomness&room=Random_Space_Geometry"
+  },
+  {
+    "room": "Random_Game",
+    "sequence": "randomness",
+    "status": "source_inspected_proposal",
+    "kind": "verify",
+    "next_action": "Check collision support beneath the cycling cube in the museum before writing a crossing or falling challenge. The present text asks for observation from the surrounding floor.",
+    "reuse_question": "Visible disappearance and loss of support are separate checks.",
+    "primary_tokens": [
+      "r_c"
+    ],
+    "sources": {
+      "commons/maps/Random_Game/map_data.json": "b571c14ac5ad5fd43271c38c9b6503e535af91c4211f41e203ed8344fb7e2660",
+      "commons/artifacts/registry/random_cubes.json": "ea5318d75a1914f370a272c36f0f513a1079055eeabdf910541838ef6d6a84c2",
+      "commons/primitives/cubes/random_cycle_cube.tscn": "3f180a8f17ebdd253d9b09c6a413cff7ea37396c2f80468f2e4e7d6a83f6e7e7",
+      "commons/primitives/cubes/random_cycle_cube.gd": "09f71823f09b6f64bfd3fd28003b313048c5cb903fb23391fdb35445bbda8731"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=randomness&room=Random_Game"
+  },
+  {
+    "room": "Wavefunctions_Sky_Stairs",
+    "sequence": "wavefunctions",
+    "status": "source_inspected_proposal",
+    "kind": "verify",
+    "next_action": "Walk the actual staircase approach, tread joins and landings before requiring traversal in the prose. Record the first inaccessible or unsupported transition.",
+    "reuse_question": "A route specified by sample centres still needs usable surfaces between them.",
+    "primary_tokens": [
+      "sine_cylinder_staircase"
+    ],
+    "sources": {
+      "commons/maps/Wavefunctions_Sky_Stairs/map_data.json": "fa69aaa3878574874e44185b9d303705270a1b6b3c300c5e3ca66b8db5a6c6e5",
+      "commons/artifacts/registry/wavefunctions.json": "004d63421fa2e067d4236358f6908bcdaf255a79c8c6d50c2f1ef8b3a0b06886",
+      "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.tscn": "bcef12ae91474933022e8c402354c5038f5dfb89a6d952b9999e027ebb23c02a",
+      "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd": "cacf3e99ffd5b5412770b740b77f74f627ba4dc1c2fd6de6b71bcc87707d6877"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=wavefunctions&room=Wavefunctions_Sky_Stairs"
+  },
+  {
+    "room": "Noise_Inside_Noise",
+    "sequence": "noise",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The sphere is directly sampled, so the promised domain-warp comparison is missing. Add a paired view that holds the field fixed while exposing the displaced sampling coordinates.",
+    "reuse_question": "Compare the same source under two transformations, retaining evidence of what changed.",
+    "primary_tokens": [
+      "noisesphere"
+    ],
+    "sources": {
+      "commons/maps/Noise_Inside_Noise/map_data.json": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+      "algorithms/randomness/noisesphere/noisesphere.tscn": "c8e06bc7357269c29c7e4319d64532f3f70e6b302278fe9f6d8aad077b2a43f2",
+      "commons/resourses/shaders/noisePlanet2.gdshader": "c4da281f5e62937ae37d01b2b36aa78779dc091cbd9c028752ec38627d06de09",
+      "algorithms/randomness/noisesphere/noisesphere.gd": "be76649404d2de82f7940edf9a0c48d4c9f931cdf62c6db412a6cb7e3791f687",
+      "commons/maps/Noise_Inside_Noise/intent.md": "a4561489cdc08fa49ece49ba7fead3c4ee22fb249ebe9d14b18ca509bdb51054",
+      "commons/maps/Noise_Inside_Noise/blurb.md": "9b3515c12008ecc796fa5236ded6d114b747accfd068b71dc4f7ea0d68d3dbdb",
+      "commons/maps/Noise_Inside_Noise/critical.md": "ce7a88643a3524a007da0dfda827a3195325cf32dead21dfe0dadbed9c1bfd4c",
+      "commons/maps/Noise_Inside_Noise/technical.md": "1cc88e586044a9725473ae2dbc4ede6b1fb041e74125e39f28cfb1ff668b5d71"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=noise&room=Noise_Inside_Noise"
+  },
+  {
+    "room": "Noise_Perlin_Simplex",
+    "sequence": "noise",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "Both named displays currently select simplex. Set one explicitly to Perlin and control sampling, scale and colour before teaching a basis comparison.",
+    "reuse_question": "Matching labels are insufficient; inspect effective configuration in every compared scene.",
+    "primary_tokens": [
+      "simplex_noise",
+      "perlin_noise"
+    ],
+    "sources": {
+      "commons/maps/Noise_Perlin_Simplex/map_data.json": "efc6152f356cf0843a285b6b4e462aa162e1f5ac6143b464d05279197da67a86",
+      "algorithms/randomness/simplexnoise/simplexnoise.tscn": "5d5c6f5553d5dbd9c669ba91188d9d9355bb7a9c81f52777df572eb66e2335cf",
+      "algorithms/randomness/simplexnoise/SimplexNoise.gd": "17a3c63809c72f564307ba0d922a02bb8c618f4848d50f03e06a60a455ad0eac",
+      "algorithms/randomness/simplexnoise/SimplexVisualizer.gd": "7444d51200b3dced210cfc643c346dd0073b191097dae1036f2b5b95059d8e7c",
+      "algorithms/randomness/perlinnoise/perlinnoise.tscn": "6245b5c835c6e66ec5db053fb70bbefbd413409392b622348cc41b8a6f14139a",
+      "algorithms/randomness/perlinnoise/PerlinNoise.gd": "e9b31fa3b51121f63f686276f7fce82204826bbe1f07988e98ad8dcd1222cc53",
+      "algorithms/randomness/perlinnoise/NoiseVisualizer.gd": "a67420f590014593aacd44bebdd343358834842ffcb2519c1d06a0ef718f3bb4",
+      "commons/maps/Noise_Perlin_Simplex/intent.md": "30bbe32f65334f2b214b7d11199573b1d1e4581562edad8e2b133bc89e99e87f",
+      "commons/maps/Noise_Perlin_Simplex/blurb.md": "e42d1f62568a3f20d246afbf76ca687a289ed317576e75b551c338276bc9b285",
+      "commons/maps/Noise_Perlin_Simplex/critical.md": "29ce9550dd318329a8056fd7ac38baa9527a51004d32efe6000d6a0a4f6ff68f",
+      "commons/maps/Noise_Perlin_Simplex/technical.md": "4149f21c3d205d993f970dc220aa1a42991a088e342dd39f810003e29e8795bd"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=noise&room=Noise_Perlin_Simplex"
+  },
+  {
+    "room": "CA_ElementaryRules",
+    "sequence": "cellularautomata",
+    "status": "source_inspected_proposal",
+    "kind": "reconcile",
+    "next_action": "The placed growth specimen uses a three-dimensional multistate rule. Decide whether to restore a one-dimensional elementary-rule comparison or give this room a deliberate new place in the progression.",
+    "reuse_question": "Reconcile the learning dependency before renaming a mismatched encounter.",
+    "primary_tokens": [
+      "structure_growth"
+    ],
+    "sources": {
+      "commons/maps/CA_ElementaryRules/map_data.json": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+      "algorithms/cellularautomata/cellular_automata_3d/StructureGrowth.tscn": "9b0ffb6bc306aad59a5ae329a46423064be9b83107ce58886071a23519bce16c",
+      "algorithms/cellularautomata/cellular_automata_3d/CellularAutomata3D_Flexible.gd": "039fb3f306020476854b70b0dc7c74a64dea95d66a87d736168e949388a7ebd0",
+      "commons/maps/CA_ElementaryRules/intent.md": "ab88db6505139a2cad401989fbf1fbca5157b28f15b79e1ef96600e5d5bd8c58",
+      "commons/maps/CA_ElementaryRules/blurb.md": "7f3887f27fc50ac93b23af6cf9941b00d902102e4d47185e7445193f338bae06",
+      "commons/maps/CA_ElementaryRules/critical.md": "59f42e7daffcac905438f50c2e2b15a8a03fd713d0914921a679d4c19353e617",
+      "commons/maps/CA_ElementaryRules/technical.md": "6d14a10c3a87059138b779d7537c56954b66db70379d8ba2870a20ceb5c126fa"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=cellularautomata&room=CA_ElementaryRules"
+  },
+  {
+    "room": "CA_GameOfLife",
+    "sequence": "cellularautomata",
+    "status": "source_inspected_proposal",
+    "kind": "reconcile",
+    "next_action": "The bridge records Rule 30. The following room contains the working Game of Life board. Reconcile these room identities and prerequisites while retaining both useful encounters.",
+    "reuse_question": "An adjacent working example can repair continuity without deleting either room's useful structure.",
+    "primary_tokens": [
+      "ca_bridge"
+    ],
+    "sources": {
+      "commons/maps/CA_GameOfLife/map_data.json": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+      "algorithms/cellularautomata/ca_bridge/ca_bridge.tscn": "7afc6b400ee6fb83e7e4164b647ebfd8d7a400420b7909367776d2a4f6cf548e",
+      "algorithms/cellularautomata/ca_bridge/ca_bridge.gd": "912ebc7e286c2eb992b8bc1a1a7ad61bfbeda6b5e80f7fba5ae8c539366359c9",
+      "commons/maps/CA_GameOfLife/intent.md": "fe166e939ba9ded1436b5bf53ecbb6c081ba8cbb4aefa5d5883cc3eab4372b04",
+      "commons/maps/CA_GameOfLife/blurb.md": "797faebb0b1b2e3031c0d59d2bce5785a37cc468fa8eabe6e6cfa237734b5c3b",
+      "commons/maps/CA_GameOfLife/critical.md": "41e04f5c83f8a03a03488608e099abcf62894c6fb4ec3157a171b4d99b05e3fb",
+      "commons/maps/CA_GameOfLife/technical.md": "6d364800bd216d514420c558a1e25a68b8847a60035470e850f8f74bf8c02796"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=cellularautomata&room=CA_GameOfLife"
+  },
+  {
+    "room": "CA_BeyondBinary",
+    "sequence": "cellularautomata",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The selected Game of Life board is binary. Add an actual multistate comparison before claiming the room teaches graded states.",
+    "reuse_question": "A broader concept needs a working contrast, not only a broader title.",
+    "primary_tokens": [
+      "game_of_life_petri"
+    ],
+    "sources": {
+      "commons/maps/CA_BeyondBinary/map_data.json": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+      "commons/artifacts/game_of_life_petri/game_of_life_petri.tscn": "a11fd8917fca307c42e6c189c3f8f805506001b06256a8f340fbfe360935ada7",
+      "commons/artifacts/game_of_life_petri/game_of_life_petri.gd": "a72f16fad833f24b603c41fcc9fee0157ef389868065df198976f4c1a3e6fa8a",
+      "commons/maps/CA_BeyondBinary/intent.md": "8f7ba78258557d408524df3971ed6565c0ad5bdc3863884a3fa7dcf34b9e9ab5",
+      "commons/maps/CA_BeyondBinary/blurb.md": "fdf176df0e68069da4461de2b24a5ebd11379477db0d826bdcdeab459521e83e",
+      "commons/maps/CA_BeyondBinary/critical.md": "f3856a1683fb0c8d0b356799a532e7b05bd48f543be8b212eae390ff04f94e92",
+      "commons/maps/CA_BeyondBinary/technical.md": "36bcb2b1274c62a2dd62f9a197cc350d5cbfb41867e02052d8f30907338cbcab"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=cellularautomata&room=CA_BeyondBinary"
+  },
+  {
+    "room": "CA_SoftRules",
+    "sequence": "cellularautomata",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The reaction-diffusion placement has no configuration and builds no visible field; the clockmaker supplies static illustrations. Restore or build a continuous field with one observable update.",
+    "reuse_question": "Inspect historical configuration before building a replacement for a silent placement.",
+    "primary_tokens": [
+      "the_clockmaker_of_rules"
+    ],
+    "sources": {
+      "commons/maps/CA_SoftRules/map_data.json": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+      "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.tscn": "ca601239ecc801e646521f47b94b02191de0eaa2afc0cbfcaa9a59cedf9d84d6",
+      "commons/artifacts/the_clockmaker_of_rules/the_clockmaker_of_rules.gd": "81868d06279a461c79c5ef85cb5e04638770c4891252f83fa8c847e3e55a795f",
+      "commons/maps/CA_SoftRules/intent.md": "6c0bd99dad1610201cfd0997cb6d2d35b49837dc70a165a9f3428836c328c5e1",
+      "commons/maps/CA_SoftRules/blurb.md": "2954f6f921bc91e744526483d90aa66765c034cb95f416de7aa76b97ae7e85cf",
+      "commons/maps/CA_SoftRules/critical.md": "a3b2bceba9b06971f8ea4ce8ddd4712d9094bb30f8db1d116c42e8ecc4754fb5",
+      "commons/maps/CA_SoftRules/technical.md": "dd758f34bb473010d4b50d4f116456cf7a24090e7a99f9fc5106c352c38df06a"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=cellularautomata&room=CA_SoftRules"
+  },
+  {
+    "room": "PG_Genetic_Evolution",
+    "sequence": "proceduralgeneration",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "Evolution starts paused and the old screen controls may not survive the museum conversion. Expose a reachable generation step and its selected parents, offspring and fitness values.",
+    "reuse_question": "A static initial population cannot demonstrate selection over time.",
+    "primary_tokens": [
+      "GeneticProgramming"
+    ],
+    "sources": {
+      "commons/maps/PG_Genetic_Evolution/map_data.json": "555644ad6594a449d85798f704a51074bd2dd8c2afbdeffe64af1db1058afbe0",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn": "94ebeff11132f58e0e035368ee2b9da235e7c55968253e368b3d83fb2a64bde8",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.gd": "b894e25f6e7021de9aeaa2a4678fac63f2d3ef5a702484feef9b0963a358e0cf",
+      "algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticUI.gd": "5635e4f2a208b0b5941833c5e9fd9315e65867475ef4b2f4be10f8c61bd6767b",
+      "commons/maps/PG_Genetic_Evolution/intent.md": "bbaea6d3df3c519478c1c62c6e5ee22e1ff62a10d213080e4131c3ac595c540f",
+      "commons/maps/PG_Genetic_Evolution/blurb.md": "3a8f18b17c58d4647a02a28d1dbdec1bd8bb692c166748fc71a541b1ae2db575",
+      "commons/maps/PG_Genetic_Evolution/critical.md": "89f332fea46e148b83d6a6fdb70a89aaf836fe7f1a536dd0a44c638bdbdea7b7",
+      "commons/maps/PG_Genetic_Evolution/technical.md": "5eabcad10b09756b4a71062cced66737605e110157011ac77cc9eaaa33c2f428"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=proceduralgeneration&room=PG_Genetic_Evolution"
+  },
+  {
+    "room": "PG_Mirrored_Patterns",
+    "sequence": "proceduralgeneration",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "The nested scene retains a script path that no longer exists. Check UID resolution in the museum and point the scene to the inspected moved script if needed.",
+    "reuse_question": "Migration can break a delegated scene while leaving the placed wrapper present.",
+    "primary_tokens": [
+      "mirror_cellular_texture_for_3d"
+    ],
+    "sources": {
+      "commons/maps/PG_Mirrored_Patterns/map_data.json": "7e2e06ce667892acd25e64162d7be0ebfdc055c7ccf43a4842ad1a0063074c96",
+      "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn": "8724a827137a60932010c16b085d9dc72b8bec3900514bba0dd70c630bfb409b",
+      "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.gd": "6b3d556537132421fd94c256d53987b8dea44e9ae691e9a5a1bee782267b17ae",
+      "algorithms/proceduralgeneration/mirroredcellularautomata/mirrored_cellular_automata.tscn": "978ed2704f3ab539cf8692248a046289a8a87063850facbcbd8ce50ac57ce970",
+      "commons/maps/PG_Mirrored_Patterns/intent.md": "a3977b6df5bb3ecfe157901476fea5845ad10bf34736f429d697781bb5e1c6de",
+      "commons/maps/PG_Mirrored_Patterns/blurb.md": "ca2e22ac59f3e8a8dbc6da21f7a5218d2a8b23d9228978cdbef343fa3589d44f",
+      "commons/maps/PG_Mirrored_Patterns/critical.md": "b3653190b3ad2297a7b1b47ee77dcd8ca633b71777bcf01737a4214408b22b5a",
+      "commons/maps/PG_Mirrored_Patterns/technical.md": "b8616f98447f7759c185465435575a66f485585d61aad8d6ea87827d7c3fdeb2",
+      "algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirrored_cellular_automata.gd": "84f5df768257b44283ff3b163e28aafcc4d346be163c5a12fa88d67e06d606c8"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=proceduralgeneration&room=PG_Mirrored_Patterns"
+  },
+  {
+    "room": "SoftBodies_Cloth_Physics",
+    "sequence": "softbodies",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The room contains timed soft-body stopping rather than pinned cloth. Inspect history for the intended sheet, then restore it or build a sheet with visible supports and a controlled release.",
+    "reuse_question": "Restore where there is evidence; build the missing mechanism where there is none.",
+    "primary_tokens": [
+      "softstopscene"
+    ],
+    "sources": {
+      "commons/maps/SoftBodies_Cloth_Physics/map_data.json": "cf3155b9676d4c02e9dc81f29d010d78bcc86be19c7641d33c314d316e7fd6c2",
+      "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn": "03057b372360e7b49f0668210a13e931d49e11b74dd976b70473c11ccb827e74",
+      "algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd": "72dcec7a7d21499865d1c8046ed9b1ea41ccd8c7523e6d2aaabeda311ea1ab3f",
+      "commons/maps/SoftBodies_Cloth_Physics/intent.md": "13fe294520410939fd2369145835acddb5c2ee0f5623511567e68a0232615084",
+      "commons/maps/SoftBodies_Cloth_Physics/blurb.md": "469b65ba1d090dc32a29ad5c97a7935897327846840a030d2b88481ecc40aa83",
+      "commons/maps/SoftBodies_Cloth_Physics/critical.md": "884b5e097eac4c31c799729f65560268efcfef42f8541eeea6f07fb5f382b20f",
+      "commons/maps/SoftBodies_Cloth_Physics/technical.md": "5b0e634185c79c0184bb44583a2d0a78ea208b3130e777bfcfd045be5c7d3b2d"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=softbodies&room=SoftBodies_Cloth_Physics"
+  },
+  {
+    "room": "ISO_ShapesGallery",
+    "sequence": "isosurfaces",
+    "status": "source_inspected_proposal",
+    "kind": "verify",
+    "next_action": "Verify that the museum uses the intended household fields. The compute fallback substitutes spheres, so labels alone do not establish that the chair and cup comparison is present.",
+    "reuse_question": "A fallback should preserve the teaching distinction or make its absence explicit.",
+    "primary_tokens": [
+      "mc_shapes_gallery"
+    ],
+    "sources": {
+      "commons/maps/ISO_ShapesGallery/map_data.json": "d43b39ead4a257c2c324d430060e9764f1304bf62147270fcc4dceea95ed65b4",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingShapesGallery.tscn": "fb0b38d127201a88158c9ce1296627f42dde16b8e299df589c0c4514ee3dada4",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingShapesGallery.gd": "92fd784c8c1b1c1ccf6a61f22a65b06bd20d7a5e85a9200b49d8c5695e3611be",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorShapes.gd": "96cd90b9162880a51a41e1eebf702cb86f2aba898acf8c8eeb482ea4421a613e",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesShapes.glsl": "9d60e34d1c80bb3ea91ce9f5eedbc10ec7f45006728195aa8cf1e81c49424733",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd": "432d46ce6e55d2de3ca08de9d56b9c86b6ebac3b6dd30b63d65bda48b8a3c52b",
+      "commons/maps/ISO_ShapesGallery/blurb.md": "188113a57da556e9c117da7ef121c0537c31a85bb39f44b2f676b0ea3b2f847d"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=isosurfaces&room=ISO_ShapesGallery"
+  },
+  {
+    "room": "ISO_Caves",
+    "sequence": "isosurfaces",
+    "status": "source_inspected_proposal",
+    "kind": "verify",
+    "next_action": "Check the cave's compute path and actual approach. Its CPU fallback is a different, hand-shaped tunnel, which cannot establish the intended noise-threshold comparison.",
+    "reuse_question": "Verify both geometry and source provenance when a fallback changes the example.",
+    "primary_tokens": [
+      "mc_inside_cave"
+    ],
+    "sources": {
+      "commons/maps/ISO_Caves/map_data.json": "99ecb45061987ae113c476f468eebfa56c1b657ea0eefb01ba35153e92ac859c",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_inside_cave.tscn": "8baf8cd856e182b0ae4d1fb96d84e3977c2843a3c77d477539372888e3970a70",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd": "cbd0130ea5c583333440cdff7cd4b57a91ed3a83aa633a274a0d2b42d684a185",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubes.glsl": "5f1ad20d6efb4570a95af5c58c27c2aa3257725731bafc0d99c7b2632991ffa4",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd": "432d46ce6e55d2de3ca08de9d56b9c86b6ebac3b6dd30b63d65bda48b8a3c52b",
+      "commons/maps/ISO_Caves/blurb.md": "60247c3135be8aa1e4de0aab0286aea0633de7482bb9a30ad4ac25e94834cc55"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=isosurfaces&room=ISO_Caves"
+  },
+  {
+    "room": "ISO_CaveGeneration",
+    "sequence": "isosurfaces",
+    "status": "source_inspected_proposal",
+    "kind": "verify",
+    "next_action": "Compare this cave's effective generator with the preceding specimen before attributing differences to their parameters; both can substitute a different CPU fallback.",
+    "reuse_question": "The two sides of a comparison need the intended generating mechanisms.",
+    "primary_tokens": [
+      "marchingcubes_cave"
+    ],
+    "sources": {
+      "commons/maps/ISO_CaveGeneration/map_data.json": "2657480d240860d62ab102e0d8308f81781deb9cb042d3af39dc5fc625835c06",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/marchingcubes_cave.tscn": "4d401add2eb11847adab48bfaeb804cfaa8d461974e083f31e8a3c7d1e08b4c5",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGenerator.gd": "cbd0130ea5c583333440cdff7cd4b57a91ed3a83aa633a274a0d2b42d684a185",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubes.glsl": "5f1ad20d6efb4570a95af5c58c27c2aa3257725731bafc0d99c7b2632991ffa4",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd": "432d46ce6e55d2de3ca08de9d56b9c86b6ebac3b6dd30b63d65bda48b8a3c52b",
+      "commons/maps/ISO_CaveGeneration/blurb.md": "7d4a66430cddc4962b532b0f9b8adb6f9b4ed3687284379dcf70e297a8ca175d"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=isosurfaces&room=ISO_CaveGeneration"
+  },
+  {
+    "room": "ISO_Sculpting",
+    "sequence": "isosurfaces",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "ERASE currently reaches the generator as a positive radius. Repair signed subtraction, then test a short addition and an equally local removal at the same place.",
+    "reuse_question": "Trace a control value all the way to the geometry it is meant to change.",
+    "primary_tokens": [
+      "mc_sculpt_vr"
+    ],
+    "sources": {
+      "commons/maps/ISO_Sculpting/map_data.json": "9f274a93563ba0941f62808fd37d55ca3b3a235531bb6c94f65ce07946c9952d",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scenes/MarchingCubesSculptVR.tscn": "e199a5a57c7278824f787292eb310ea97146be36affe15294138e76fd3fb3748",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/MarchingCubesSculptVR.gd": "9dc9e14eea2451d27646a8deb24cc15c976a6501a7c8a367c949dde9d7c1300d",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorSculpt.gd": "d9698a712b872964aeb6d5dfd11989a92d7b3941bec5e0690af74e91aa953119",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Compute/MarchingCubesSculpt.glsl": "166ce61ca48b9d7602b823b275925793c4c2594e419689146e6d8f21f54c4360",
+      "algorithms/proceduralgeneration/isosurfaces/marchingcave/Scripts/TerrainGeneratorBase.gd": "432d46ce6e55d2de3ca08de9d56b9c86b6ebac3b6dd30b63d65bda48b8a3c52b",
+      "commons/maps/ISO_Sculpting/blurb.md": "d96c1f766f6dfea065977e00131d5d845a5ed71c9105522c1d2a0049d6bd5f09"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=isosurfaces&room=ISO_Sculpting"
+  },
+  {
+    "room": "ML_Perception",
+    "sequence": "machinelearning",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "Sobel filtering is computed, but object names and confidence values are supplied in advance. Connect a recogniser to changing input and show evidence for its decisions.",
+    "reuse_question": "Separate computed stages from authored captions in a displayed pipeline.",
+    "primary_tokens": [
+      "computer_vision_vr"
+    ],
+    "sources": {
+      "commons/maps/ML_Perception/map_data.json": "66d00146dc352a3cb74fd00c373de6990e8c6fc2d926149339d468780b3a3e4c",
+      "commons/maps/ML_Perception/intent.md": "0aa77565f04150e4b3f78c8c8e0d9a8079d79bb127ef4231e2d443d5a30591c1",
+      "commons/maps/ML_Perception/tutorial.md": "33d519bee127f122db995b408b82216f734f9192fe535324a080cf7c92565a75",
+      "commons/maps/ML_Perception/technical.md": "999a97ab0eb5d4089604d11579645c95c7c7a73659ab71a980c0276e966ed85a",
+      "commons/maps/ML_Perception/critical.md": "69b8538c9c2b94eb34f85e0ac6c7b0da7bdb84f391f9dd3c5e516e9a27f9548b",
+      "algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn": "285a89e8a45daa1d47c533acd9e64734b0a1edbf7980e56d5954599832cd061f",
+      "algorithms/machinelearning/computer_vision/ComputerVision_VR.gd": "32ecd698bb3c216f337562ef8e2fdd11dacc4c6849006ca52ff630d82c8b682c"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=machinelearning&room=ML_Perception"
+  },
+  {
+    "room": "ML_Sequence_Memory",
+    "sequence": "machinelearning",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The gates do not yet control a computed recurrent state. Add a short input sequence, a visible cell state and a two-sequence retention comparison.",
+    "reuse_question": "A diagram of memory needs a retained quantity before it can demonstrate remembering.",
+    "primary_tokens": [
+      "lstms_vr"
+    ],
+    "sources": {
+      "commons/maps/ML_Sequence_Memory/map_data.json": "a440e81cfcfd322ea101d64b151b57f1ce2fa900db8610519d8cd27cfd040be5",
+      "commons/maps/ML_Sequence_Memory/intent.md": "343a42d287657bf931e4216655d808ec20b8f51ef3d6e880100c6e10e677e11f",
+      "commons/maps/ML_Sequence_Memory/tutorial.md": "6b577ba77a20525c10967ff4431d2901dc0d03856e3895795b5dde565afd35b8",
+      "commons/maps/ML_Sequence_Memory/technical.md": "9d26d914e46d7ab721e0b2c7faecf582931a50d87433d3ef2721e1b56674ddab",
+      "commons/maps/ML_Sequence_Memory/critical.md": "a86feb01eb54b3d5e6b195e56dbaf0b7b1ae1ed86598a535e247415fa2a20576",
+      "algorithms/machinelearning/LSTMs/LSTMs_VR.tscn": "3c2ecaf40ecc09f6890b36cff9411a0c8e90133c02327abdb72695d2b7a47217",
+      "algorithms/machinelearning/LSTMs/LSTMs_VR.gd": "e2f0486aa2ea84008062aff36c51de20f011fc5d6f6fe0fb9639c614307de5c2"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=machinelearning&room=ML_Sequence_Memory"
+  },
+  {
+    "room": "ML_Generative",
+    "sequence": "machinelearning",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The displayed losses are timed curves. Add a small actual generator/discriminator update with visible samples before using falling losses as evidence of learning.",
+    "reuse_question": "Expose the observation and update that produce a progress readout.",
+    "primary_tokens": [
+      "generative_adversarial_networks_gans_vr"
+    ],
+    "sources": {
+      "commons/maps/ML_Generative/map_data.json": "e3c4371fc4cc586c7c8af70a3cc3a0dcb6bf5d88a523e0d53e5c8ec843bdedc1",
+      "commons/maps/ML_Generative/intent.md": "7c68786bea3b126db8cbd552676f662327c0620742b49825360a185940e7ad33",
+      "commons/maps/ML_Generative/tutorial.md": "dda947611385f311e54aea4985c1632f45bfe5e4e725521acfe357a8299b906c",
+      "commons/maps/ML_Generative/technical.md": "cc8fb3d95d81076a2db8c4553dc496c62d975a7ed45c9014f709c1b82891598a",
+      "commons/maps/ML_Generative/critical.md": "b46ec136f64846f8249075dfc7197b72dd34ca9257011e36b6fe6ff081f7bce7",
+      "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn": "a0ea19b1423ee081289d7dadf03fae342f7e373cfae04b102e626fcedff1c8bd",
+      "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd": "147206593482773dfd8b37f3c44c7f4189bd2aace749eacfe0040ba62ef680d9"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=machinelearning&room=ML_Generative"
+  },
+  {
+    "room": "GT_Network_Analysis",
+    "sequence": "graphtheory",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "Centrality values and summary animation are not calculated from the displayed edges. Compute one named measure and let the visitor check its supporting connections.",
+    "reuse_question": "A visual hierarchy should carry the evidence for the quantity it claims to display.",
+    "primary_tokens": [
+      "network_analysis"
+    ],
+    "sources": {
+      "commons/maps/GT_Network_Analysis/map_data.json": "7028c44b7ff027d269bae2ae88c4314ae0992bbfcca1f2e4524eb514570377f4",
+      "commons/maps/GT_Network_Analysis/intent.md": "b2525982533ad16b674647e2ed56dcf50d4670e3ecc41546c18a056ed2aca745",
+      "commons/maps/GT_Network_Analysis/tutorial.md": "45b009c2879c4de0a717dc4a07e6b8f6a7d867d361eb64579f9977c58b396924",
+      "commons/maps/GT_Network_Analysis/technical.md": "cd04dca521b5cf1957e1e19cec67abee4ef77e980de953bfd8a6675acbbbc12e",
+      "commons/maps/GT_Network_Analysis/critical.md": "51448305d113bd6cae21f53ab46f2a3bc909ff61a3f6211ed9020a20132f1ff1",
+      "algorithms/graphtheory/network_analysis/network_analysis.tscn": "970358e60ab58b49babb381ed9a71dd142342beae8c91504c3e9c6091cad2afb",
+      "algorithms/graphtheory/network_analysis/NetworkAnalysis.gd": "0640e25946b5cdfbd2872c4d3ba38b593ae950f246a2a5cd94ab5e7e7ea5e0cb"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=graphtheory&room=GT_Network_Analysis"
+  },
+  {
+    "room": "GT_Flow",
+    "sequence": "graphtheory",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "The current flow procedure lacks reverse residual adjustments. Add a case requiring rerouting and implement the complete algorithm before claiming maximum flow.",
+    "reuse_question": "Show a counterexample that needs revision of an earlier acceptable choice.",
+    "primary_tokens": [
+      "push_relabel_algorithm"
+    ],
+    "sources": {
+      "commons/maps/GT_Flow/map_data.json": "2d921f58a6fcecd1f787bd516fb756ab447264a3909e37518dbf4d5564c6e780",
+      "commons/maps/GT_Flow/intent.md": "812ab28f64ed9e5ee04d3c10aad3a4852eaab223e1ef21d47a578751c204d769",
+      "commons/maps/GT_Flow/tutorial.md": "79d80f2c6ea334af23f9f524fc197070aee02d5f39b017dea874b9803fdc2237",
+      "commons/maps/GT_Flow/technical.md": "b774eb20a8f81fe4f5aa2824540d56e7f5aa9971700a53287d17b15ccbcef688",
+      "commons/maps/GT_Flow/critical.md": "51cea57ca0d8e4c562dba19298f598eee236b8ede314b60bc7826d313064250d",
+      "algorithms/graphtheory/push_relabel/push_relabel.tscn": "918c998ca48546a4d4e91d3da97afad4c1f410295d66adee7293464ec28c5f4a",
+      "algorithms/graphtheory/push_relabel/push_relabel.gd": "fe288bd5c785032aa3b394b2437899eb0a38791173864b4db0270cd7f1af4fb0"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=graphtheory&room=GT_Flow"
+  },
+  {
+    "room": "GT_Matching",
+    "sequence": "graphtheory",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "The Edmonds-labelled display performs a greedy scan. Add augmenting-path behaviour and the four-vertex path counterexample before claiming a maximum matching.",
+    "reuse_question": "Local validity and global optimality need separate acceptance cases.",
+    "primary_tokens": [
+      "edmonds_algorithm"
+    ],
+    "sources": {
+      "commons/maps/GT_Matching/map_data.json": "4469d6a1f75d10313e706631de37d696f3f51bb4d93aff0d471bda665e332fe1",
+      "commons/maps/GT_Matching/intent.md": "0ba8943d0b77f64d226ff65c848fe2ec781da6b59e639d1faa70b8868ad56225",
+      "commons/maps/GT_Matching/tutorial.md": "33188cf04180e47d581e305716bf8f0bb68e6548a546278c62329a92dd26a67f",
+      "commons/maps/GT_Matching/technical.md": "5f2391329afdcc5ddc7b91f51e0f143d25a66abb2e3d96b124fb9552c2818088",
+      "commons/maps/GT_Matching/critical.md": "c7dfab0d62313f05e00d9db8e5cde6f21a49d8507727999889faee23f79bd049",
+      "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn": "e8bfb0a58d78719294d4353869c90b26f82a2c509c89b99fb2ddcb90360e64aa",
+      "algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd": "f3a850ae8fdc43bd4472f9d5f24eb2d93ccf2cf9aae5dc73590229a5785a3a7e"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=graphtheory&room=GT_Matching"
+  },
+  {
+    "room": "QFEP_F_Term",
+    "sequence": "qfeplaboratory",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The workbench measures source entropy H, not model mismatch or F. Add a visible predictor and its errors while holding the source fixed.",
+    "reuse_question": "A related computed quantity is a starting point, not a substitute for the named one.",
+    "primary_tokens": [
+      "shannon_workbench"
+    ],
+    "sources": {
+      "commons/maps/QFEP_F_Term/map_data.json": "540d4c281d0761c4fde7050cdc0631afe945f65fc84eac39e18373b75afd2a07",
+      "commons/maps/QFEP_F_Term/intent.md": "91b88cd0025e139481485b3a3df8b1b5b496158672682325353ad76d45e5e97d",
+      "commons/maps/QFEP_F_Term/tutorial.md": "e2e4e63a86d197a919afd7d2a948bd48f76f12f3fa3e6e2310c707487d9938fa",
+      "commons/maps/QFEP_F_Term/technical.md": "34cbc34270a2a4c8b628f87c4dc27d87981a54f1aa5692d8f1df78eff4aff686",
+      "commons/maps/QFEP_F_Term/critical.md": "d63190e0c1eadc42de58c9089553a61bca1aeed9a6c43ffdbff4a7aea48e19eb",
+      "commons/artifacts/shannon_workbench/shannon_workbench.tscn": "e2e0ce9d64275aa30f143d11a1c4cbfd4d0e15fd76ab80f14234011403a97a79",
+      "commons/artifacts/shannon_workbench/shannon_workbench.gd": "ddb8dd2a01b82ced17d39ed65671201f0a320a0badd817b9a8147a6ae494b3be"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=qfeplaboratory&room=QFEP_F_Term"
+  },
+  {
+    "room": "QFEP_Phi_Term",
+    "sequence": "qfeplaboratory",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "PHI and the transforming grid run independently. Name one receiving calculation and show the value it actually uses before teaching their causal connection.",
+    "reuse_question": "Physical adjacency does not establish a control relationship.",
+    "primary_tokens": [
+      "phi_slider",
+      "transforming_pattern"
+    ],
+    "sources": {
+      "commons/maps/QFEP_Phi_Term/map_data.json": "432bdd29c25e48a2cb592e30804bc24151a9eb2ca466a0f8faf3d6ed3d06ec03",
+      "commons/maps/QFEP_Phi_Term/intent.md": "9a096bf59e81ff9b189fb35b74bc5860f650661e5388f20c0f59846d0f29492b",
+      "commons/maps/QFEP_Phi_Term/tutorial.md": "49e45ffe1be85065354bd010e9c302adcb36b4a7376d2e0f82a1a2fd5205c12f",
+      "commons/maps/QFEP_Phi_Term/technical.md": "2e746e2dd357696c8b418b2a277efdb5a5bd54155a78d7ddda5b8a767a6829bf",
+      "commons/maps/QFEP_Phi_Term/critical.md": "a07417f2d36406b1dde905968979937fd789ac70307b7049e5fe2dda90589f86",
+      "commons/interfaces/qfep/phi_slider.tscn": "fc69c59d1901ad9c3d0e81015677fbb20e83d99cef25e6a45b6df29695de1f75",
+      "commons/interfaces/qfep/phi_slider.gd": "5712593487bf9d990cb04695b9603cc04ba10fe2ac4aacc7498dc2ad38b54c2c",
+      "commons/interfaces/qfep/transforming_pattern.tscn": "5015ab5f7716ff6c9576de623b6ccf2d1922fe91f795e6a18c114e7dd015246e",
+      "commons/interfaces/qfep/transforming_pattern.gd": "9291b05cfbc90e1914bdb93fb7845dfad3df61b271e43e30e47d528e5536f5c3"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=qfeplaboratory&room=QFEP_Phi_Term"
+  },
+  {
+    "room": "QFEP_Edge_Of_Chaos",
+    "sequence": "qfeplaboratory",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "The unlocked field still uses the legacy numerical update. Compare controlled smaller timesteps from the same initial field before claiming stable regimes or criticality.",
+    "reuse_question": "Distinguish a model's response from instability introduced by its numerical method.",
+    "primary_tokens": [
+      "edge_of_chaos_unlocked"
+    ],
+    "sources": {
+      "commons/maps/QFEP_Edge_Of_Chaos/map_data.json": "6c4b7c923668899ba4680f6fbc9a2dffaae64e3f5d9d67c8f523d12691de2fa2",
+      "commons/maps/QFEP_Edge_Of_Chaos/intent.md": "1b96e0a3c06c5a1b1eaa9508c4d11d42db67f4c7b2574500a8ab4e1227a49beb",
+      "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md": "9b9676233da428a64b712b885f3e3a43ec6029a3604d0db5d55349c53de0fad0",
+      "commons/maps/QFEP_Edge_Of_Chaos/technical.md": "935b3b8b81174d15154c2b50cfd73f0ce0d3e1fc96033e3b02041180220f5924",
+      "commons/maps/QFEP_Edge_Of_Chaos/critical.md": "ffb108f8f0bb053e9454b670b1e8b7490cd48d6f270748ebdce43af422d3f018",
+      "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn": "b1f62eb8c612205ff8a5e712873d755cabf53be8816743754caf2022e578dfd9",
+      "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd": "c0ba684088951edc38b13c346e199bca26070b655ef8ce197bb77be0a49dff1d"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=qfeplaboratory&room=QFEP_Edge_Of_Chaos"
+  },
+  {
+    "room": "QFEP_Sandbox",
+    "sequence": "qfeplaboratory",
+    "status": "source_inspected_proposal",
+    "kind": "repair",
+    "next_action": "The controls and receivers search different groups. Wire one room-scoped receiver, display its actual inputs and repeat one change at a time.",
+    "reuse_question": "Explicit local receivers can replace fragile museum-wide discovery.",
+    "primary_tokens": [
+      "lambda_slider",
+      "phi_slider"
+    ],
+    "sources": {
+      "commons/maps/QFEP_Sandbox/map_data.json": "588ad04da5f7bb2a070ad748be32bf127e6099c047b44169649fecb56677f8d9",
+      "commons/maps/QFEP_Sandbox/intent.md": "3ec29d7b20e643988fd03bf9daf7ac8f6d07c7372cc5cd3f56d441a2ec537fde",
+      "commons/maps/QFEP_Sandbox/tutorial.md": "c79203e58c3e7657274261e23900359a44bbe820c42532dec46b0f8aa30582cf",
+      "commons/maps/QFEP_Sandbox/technical.md": "96a3e70492ca78e09df173da04a748b11ab074c05285d12230a553515e74b417",
+      "commons/maps/QFEP_Sandbox/critical.md": "11b0674888ead34147f5bd1f91cb5422e44f24cd185796380ef77205931adaa1",
+      "commons/interfaces/qfep/lambda_slider.tscn": "c01ca41c8c7c25a75cbab1d98dcdc03fa49382ae2d0fdf354b8bb6bf8ef04574",
+      "commons/interfaces/qfep/lambda_slider.gd": "6a5e778a9ee79ce785e0433d8f0593bfbab39d43baefc627e1de925e0135b9b8",
+      "commons/interfaces/qfep/phi_slider.tscn": "fc69c59d1901ad9c3d0e81015677fbb20e83d99cef25e6a45b6df29695de1f75",
+      "commons/interfaces/qfep/phi_slider.gd": "5712593487bf9d990cb04695b9603cc04ba10fe2ac4aacc7498dc2ad38b54c2c",
+      "commons/interfaces/qfep/qfep_reactor.gd": "62c7f75fc1714b8e5096f9061ffa166e586729102b574bb7726be31af73a0f46",
+      "commons/interfaces/qfep/reactive_particle_field.gd": "00bab35b5f6c55637f6f97d81e00d767f578386a73802fdcc4a0eb6f2ab3ac96"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=qfeplaboratory&room=QFEP_Sandbox"
+  },
+  {
+    "room": "QFEP_Synthesis",
+    "sequence": "qfeplaboratory",
+    "status": "source_inspected_proposal",
+    "kind": "verify",
+    "next_action": "Check the specimen's quarter-scale controls for legibility and reach before treating the written slider comparison as available to every visitor.",
+    "reuse_question": "A working component can become unusable under a room's placement scale.",
+    "primary_tokens": [
+      "queer_morphology_specimen"
+    ],
+    "sources": {
+      "commons/maps/QFEP_Synthesis/map_data.json": "a5b39c7373a571d695057fcc38a8bad7b29f6a099a1831410d91e24e04b31859",
+      "commons/maps/QFEP_Synthesis/intent.md": "a64945aff87d25d009ee686229cf97df16de0b9557ea6f56d3a1e3f10d811eeb",
+      "commons/maps/QFEP_Synthesis/tutorial.md": "319cc063feee8c24436b7e8664359ef1ef835265c18d70a2d85475cd36ea2c6d",
+      "commons/maps/QFEP_Synthesis/technical.md": "5fdadfa0b548d78fab31394dc14a32e1a59e4538dc35bf1f04c8bb9f29ac7c06",
+      "commons/maps/QFEP_Synthesis/critical.md": "1806c816aa4062f268ff698b76be1c99a60c47fae6eb94c7a96e183ac0b4388f",
+      "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn": "6254974d9ba8027133e6b6db06f489b705e6bd56ccf7a57358b72616656d16c9",
+      "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd": "624e38af3c9651f0dc1791a743b45a5bfa94f4aa8d222f703abb320d6771fa58"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=qfeplaboratory&room=QFEP_Synthesis"
+  },
+  {
+    "room": "SpeculativeComputation_Paraconsistent_Engineering",
+    "sequence": "postfoundationscrisis",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The merge-conflict sculpture is an analogy. Add a small visible inference table that retains a contradiction without deriving an unrelated conclusion.",
+    "reuse_question": "A philosophical analogy can introduce a question while a formal claim still needs a demonstrated rule.",
+    "primary_tokens": [
+      "merge_conflict_visualizer"
+    ],
+    "sources": {
+      "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/map_data.json": "8e77b351cfc104bdcd980c81f25a122c8ebeb64a4b85bf27a1314713fc1b0d31",
+      "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/intent.md": "5ba7b7e6c81707a574ddeff1e85281fd3e17bd2afecd3dc5b502c972dcd5c6fa",
+      "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md": "2fa81394ab12af8bc7600fea46406c0627950669f54d426572d21fc4183d3b59",
+      "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/technical.md": "897e3178259c2359d46f59655cef25f1e5a331b828ee46eec41b30ad89b80e52",
+      "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/critical.md": "59a0d94ad10507a3a55a75808c0b8e260e1aac4f731d77e5bd4f03f335d511e7",
+      "algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn": "d1a8dca0d7f03a6c5f09ad6d19d65ae578dfc458c5b1e0d4b901c490dd2f37aa",
+      "algorithms/postfoundationscrisis/merge_conflict_visualizer.gd": "fd58c3f4c89068d0ee603a123f358c58b495459e90090679f7bb030bfd70aa38"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=postfoundationscrisis&room=SpeculativeComputation_Paraconsistent_Engineering"
+  },
+  {
+    "room": "SpeculativeComputation_Situated_Computation",
+    "sequence": "postfoundationscrisis",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The four panels supply fixed viewpoints and percentages. Give each a stated criterion and observation before teaching an actual classification comparison.",
+    "reuse_question": "Preserve subject, criterion, evidence and source as separately inspectable parts of a judgement.",
+    "primary_tokens": [
+      "situated_readout"
+    ],
+    "sources": {
+      "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json": "ac30de151668288af3792cd9b9f6e7aeb465a4356a502dc3fd6b00ed4c04ef86",
+      "commons/maps/SpeculativeComputation_Situated_Computation/intent.md": "31714c047e764e2a1e51c0e098d0c55d7d9773bb559953a6ea966a396aac3630",
+      "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md": "4f2dd5c59c4794b72beced48845c58a5cb7a16fe7371211e5d13df6a87b1b8ae",
+      "commons/maps/SpeculativeComputation_Situated_Computation/technical.md": "65ce1f990d39a041ac28603e02b2928af5ef3b3b21ece99fee2de839e850353c",
+      "commons/maps/SpeculativeComputation_Situated_Computation/critical.md": "70b7ee26dc6df5991da7f03dd85bd708aab003b7cead3e53d78c540f5b8a4244",
+      "commons/artifacts/situated_readout/situated_readout.tscn": "af37ce24f14dee7742b104e63d8801f1c2e7fd766162f8c1a44f9c156c1d53cb",
+      "commons/artifacts/situated_readout/situated_readout.gd": "475e25ef004f8bcee4df688fcf342cc50b5b11a4c150ce1f692e61f73286c6f8"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=postfoundationscrisis&room=SpeculativeComputation_Situated_Computation"
+  },
+  {
+    "room": "PostCrisis_Synthesis",
+    "sequence": "postfoundationscrisis",
+    "status": "source_inspected_proposal",
+    "kind": "build",
+    "next_action": "The ledger scrolls examples rather than saving a visitor's decisions. A later live ledger should preserve one choice, its evidence, the proposed repair and its observed result.",
+    "reuse_question": "A record of an example and a record of completed work need different evidence.",
+    "primary_tokens": [
+      "accountability_ledger"
+    ],
+    "sources": {
+      "commons/maps/PostCrisis_Synthesis/map_data.json": "432c91d0eeeff41f5d0250e7da9e88ab435944eb679682b3ddf441faa920affb",
+      "commons/maps/PostCrisis_Synthesis/intent.md": "2813da2dec285274e29c2e12f95ac24da9b06453892ba253cb91b8d28b652350",
+      "commons/maps/PostCrisis_Synthesis/tutorial.md": "98dfffbe9dc80941f7c501ec2dbe081ed9eef969a4552f183c3f45f887d0f49b",
+      "commons/maps/PostCrisis_Synthesis/technical.md": "cc1ebac96b262d52143eca5c1aa5ddefb6de5cc73e69dd70627ebb1bb860424e",
+      "commons/maps/PostCrisis_Synthesis/critical.md": "cd1fb2bfe57b279526fbc005c1b9d0be3412159a8dcdfb197d631cb42571d5bd",
+      "commons/artifacts/accountability_ledger/accountability_ledger.tscn": "6771e70619ec13fa49f4de2c88db6510fdc579d9d9e8b4b07a54a6974fc00644",
+      "commons/artifacts/accountability_ledger/accountability_ledger.gd": "b0000ffa93c193df8cf7d11615a80bdad0ebfcf6ab4ed4ee7da03b8cf4723a06"
+    },
+    "url": "http://localhost:3003/museum-progress?sequence=postfoundationscrisis&room=PostCrisis_Synthesis"
+  }
+]

@@ -1,0 +1,320 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Noise_Types · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Noise_Types">← Tutorial lineage</a></p><h1>Random Noise Types</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Noise_Types/final.md">Raw captured source</a></p><pre># Which rules keep acting?
+
+&lt;!-- @randompoint --&gt;
+
+The stones behind us could disappear. Their order of movement stayed intact; the drawn waits changed how long we had to cross. Here, something much smaller asks what can change at all.
+
+A point waits inside a metal square. Carry it sideways. Release it. Try carrying it toward you, out of the square&#x27;s plane. Where does it end up?
+
+It has a place in this room, yet keeps returning to a surface with no depth. The frame marks a limit you can see. The returning coordinate exposes another one.
+
+At its first appearance, two draws chose x and y. After that, there is no new lottery on release. The point&#x27;s script repeatedly takes its current position and clips it:
+
+```gdscript
+var clamped := Vector3(
+	clamp(pos.x, -area_half_extent, area_half_extent),
+	clamp(pos.y, -area_half_extent, area_half_extent),
+	0.0
+)
+```
+
+Read the last line again. There is room in the vector for a third number. The code keeps writing zero there.
+
+That zero belongs to the point&#x27;s local frame. Turn the whole artifact in the museum and its plane turns with it. We have met local and world coordinates before; now their difference determines which movement survives your hand. Within the square, x and y can keep your alteration. Beyond its edges, the excess is clipped. Depth is discarded each process frame.
+
+What looks like a flat existence takes repeated work to maintain. The engine has not forgotten a dimension. This small procedure keeps declining it.
+
+Keep that action in mind at the next bench. A boundary can be drawn on a surface, written into a generator, or continually reapplied. Those arrangements may look alike until somebody moves.
+
+&lt;!-- @randompoints --&gt;
+
+Two shallow frames stand side by side. Find a pair of points that seem almost to touch in the left one. Look for an equally close pair on the right. Lean a little: each frame has twelve centimetres of depth, so an overlap in your view need not be an overlap in space.
+
+The shells help. Each has a radius of half the stated spacing. Two centres at that distance have shells that just touch. Grey specks among the right-hand points record some of the proposals that were refused.
+
+Press REDRAW. The pair of clouds returns. Press NEW SEED and look again. The arrangement changes, but the right-hand spacing survives the new draw.
+
+The left frame keeps each uniformly proposed position. On the right, a candidate is compared with the centres already admitted. Only this condition lets it join them:
+
+```gdscript
+if min_dist &gt;= blue_noise_min_dist:
+	pts.append(candidate)
+	placed = true
+	break
+```
+
+The candidate&#x27;s own coordinates are insufficient to decide its place. Its possibility now depends on who arrived before it. Earlier centres stay where they are; the algorithm neither negotiates with them nor rearranges the group.
+
+Press LOAD. The request rises from 24 to 96. The frames and the spacing stay the same size. Read the plate before deciding what the denser cloud means. Candidates split into kept and refused; requested places split into filled and unfilled. These are different accounts.
+
+The generator allows a hundred attempts for each requested place. A place still unfilled after those attempts is skipped, and the next gets its own attempts. The plate names the exhausted budget. It cannot certify that every remaining gap is impossible. Our time for searching has ended before our question about space has been settled.
+
+Only the first 220 refusals receive grey bodies. The full refusal count continues beyond them. Even the display of what was excluded has an exclusion of its own, and this time we can read its limit.
+
+Return LOAD to 24, then press RULE. The right frame gathers toward its centre. This setting makes Gaussian draws for each coordinate and clamps their tails to the frame. It applies no pair-distance test.
+
+Shells may already be red before you touch anything. They now show a reference distance that the generator never promised to preserve. A crowded centre and a spacing rule are different ways of making a cloud; the names alone cannot tell us how either was made.
+
+Return to the spaced rule. Carry a point into another&#x27;s shell.
+
+The red arrives. A count changes. Nothing in the sampling script pushes the pair apart.
+
+```gdscript
+if a.position.distance_to(b.position) &lt; blue_noise_min_dist - 0.001:
+	touching += 1
+	bad[i] = true
+	bad[j] = true
+```
+
+This passage watches. It counts pairs closer than the spacing minus a one-millimetre tolerance. It writes no replacement position. Compare it with the zero that kept reclaiming the first point&#x27;s depth.
+
+Release the point, then RESTORE. The cloud returns to the positions recorded when it was generated. That return is available as an action; it does not make the original arrangement inevitable.
+
+A pleasing order has shown us its procedure and the moment that procedure stops governing. There is room to inhabit the difference. We can keep the useful constraint, learn what it made possible, and still discover a relationship it did not authorize at birth.
+
+The red shells could register your alteration without undoing it. That is a different kind of rule from the zero that kept reclaiming the first point&#x27;s depth. Carry the difference to the field of needles: what does a neighbour get to decide here?[^cloud-replay]
+
+&lt;!-- @WhiteNoiseGallery --&gt;
+
+Walk around the little field of needles. Let your eye follow a row, then cut across it. There are ten thousand bars here. The grid has already given each one an address. Chance decides how far it rises.
+
+The same drawn value gives a bar its height and its place along a colour gradient. Tall and pale can arrive together because one number has been dressed twice. This is something we brought from the colour halls: an arrangement becomes readable through the choices that make its values visible.
+
+```gdscript
+var random_val = _rng.randf() # 0.0 to 1.0
+var height = random_val * max_height
+```
+
+The spacing bench let a neighbour influence whether a new centre could appear. These bars do not consult adjacent heights. Every address receives a draw. A ragged-looking surface has been made from a perfectly regular allocation of places.
+
+Now press WHITE on the console beside it. Then PINK. Listen for a difference while looking at the field. What in the image changes?
+
+The bars stay where they were. The sound has its own stream of draws and its own procedure. It is tempting to let the image explain what we hear, especially when one title seems to cover both. For now, the connection is made by their proximity, their names, and your attention. The sound is not a scan through these ten thousand heights.
+
+That separation leaves an experiment open. What would we hear if a row actually became a sequence of samples? Which row, in which direction, at what speed? A surface offers several ways through; a loudspeaker needs values arriving in time. Choosing the route would already change the work. We can imagine that instrument here without pretending it has been built.
+
+&lt;!-- @NoiseColors3D --&gt;
+
+The neighbouring sculpture keeps five coloured rows together. Brown, pink, white, blue, violet. Try their names on the console. Let each sound last long enough to become a texture before moving on. Return to one you liked.
+
+We are not obliged to hear these as damaged signals. A hiss can be a material to approach, sustain, combine, or leave. The question of what a body may do includes what it may want to remain with.
+
+In the sculpture, a row&#x27;s height comes from a prescribed curve, disturbed by a random multiplier and clipped to the display&#x27;s range. A tall plateau can therefore be the place where different large values meet the same ceiling. The apparent agreement of their tops deserves a second look.
+
+The sound is built elsewhere. At the BROWN setting, a stored value receives a small part of the next draw:
+
+```gdscript
+_brown_state = clampf(_brown_state + white * 0.02, -1.0, 1.0)
+value = _brown_state * 3.5
+```
+
+The previous state participates in what comes next. A neighbour has become a previous moment. Notice the bounds here too: accumulation can meet a limit even though new draws continue arriving.
+
+Try VIOLET. Its short passage keeps the previous draw in order to subtract it:
+
+```gdscript
+value = (white - _previous_white) * 0.9
+_previous_white = white
+```
+
+Keeping something from the past does not always make the next moment more similar. Here, what survives into the output is a difference. The two lines give us another way to hear the relation between memory and change.
+
+These are the shipped filters behind the names. The curves above them are illustrations, not measurements of the sound coming from the speakers. Even BLUE&#x27;s sound uses subtraction from a running low-pass value rather than the exact rising curve that its row illustrates. A name brings several implementations into company; inspecting them keeps that company from becoming an identity claim.
+
+&lt;!-- @related_weather --&gt;
+
+Three walls wait beyond the listening benches. Their faces are closed. A narrow gold line stands on the far side. Start the clock and the walls acquire slits. A fragment of the line appears, disappears, returns somewhere else. Walk alongside it. Can you find a place from which the openings agree?
+
+Each wall keeps eight moments. The newest arrives at the near end; earlier values move back through the display until the oldest leaves it. Your walk can take the opposite direction from the clock. Beyond eight, an earlier value has already left the wall.
+
+The pale wall takes a fresh draw. The brown wall adds a little of that same draw to its previous value:
+
+```gdscript
+sum += 0.10 * white
+```
+
+Here the last place helps make the next one. Follow a run of openings along the brown wall, then return to the pale one. What does each let you anticipate? An independent sequence can also make a run. A few agreeable neighbours do not prove a rule.
+
+The pink wall filters the shared draws. It carries several earlier inputs and outputs into each new value. It already had a past before you pressed RUN: the filter received 4,096 preparation samples. Those samples are not among the eight moments in front of you. We prepared this beginning; we did not remove its history.[^weather-filter]
+
+All three walls travel with the same easing and the same clock. Watch a single opening in the pale wall move. Even independent targets can glide smoothly between their addresses. The motor can make continuity without giving the next draw any memory. Hold the motion, then finish one step with NEXT. Compare where the slit was going with how it got there.
+
+An orange edge sometimes lights beneath an opening. The value wanted a place beyond the display&#x27;s range. The raw calculation continues; the slit stays within its frame. Two different numbers can meet the same limit and appear to agree. A tidy row is not always a shared tendency. Sometimes it is a ceiling.
+
+Lean toward the gold line again. The slits admit a view; fixed glass keeps them from becoming passages. These walls alter what your position lets you see while keeping another boundary in place. The same rule could have been given doors, sound, ground. Here it is given sight.
+
+REPLAY empties the record and restores the local seed. It repeats the targets and the filter&#x27;s preparation, but you are now standing somewhere else. Stay there for another run. Which relation belongs to the numbers, which to the machine that presents them, and which only becomes possible from here?
+
+We can leave this hall with more than one discovery. A plane maintained by clipping. A spacing rule that finishes its work. A field that ties colour to height. A sound that holds a previous value, or answers it with a difference. Each gives a different place for a relation to land.
+
+In the next hall, a column is already waiting. What will happen when variation is given an existing form to act on?
+
+[^cloud-replay]: The seed repeats this local construction when its settings and calls repeat; it does not replay the museum. The left cloud consumes the first part of one generator&#x27;s stream and the right continues it. These are not identical candidates subjected to different rules.
+
+[^weather-filter]: This is a finite filter approximating pink noise, following [Julius O. Smith’s synthesis example](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). The signal is checked separately from the moving, bounded display; the measured frequency range and preparation are recorded in the tutorial companion. A pink colour does not establish a pink spectrum.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Noise_Types/tutorial.md">Raw captured source</a></p><pre># Carry, compare, then read the procedure
+
+1. At **randompoint**, carry the point within its metal frame, then out of its plane. Release it. Compare local x/y with local z. Release does not draw a replacement position.
+2. At **randompoints**, compare the two framed slabs, each 0.90 × 0.90 × 0.12 m. Move your viewpoint before treating projected overlaps as close spatial pairs.
+3. Use REDRAW, then NEW SEED. A repeated construction requires the same settings and generator call order as well as the seed.
+4. LOAD alternates the initial request and four times that request: 24 / 96 in this map. Dimensions and minimum distance stay fixed. Read filled/unfilled separately from kept/refused candidates.
+5. RULE alternates minimum-distance rejection and the clamped Gaussian. Red shells in the latter are comparisons with a reference spacing, not breaches of a promise the Gaussian made.
+6. Return to spacing, carry a point into another shell, release, then RESTORE. Separate a constraint at construction from the first artifact&#x27;s continuously applied coordinate clipping.
+
+Read these actual source passages after the encounters.
+
+The single point clips coordinates on each process frame:
+
+```gdscript
+if clamped != pos:
+	point_node.position = clamped
+_update_label(point_node)
+```
+
+The bench counts neighbours; this branch changes no position:
+
+```gdscript
+if a.position.distance_to(b.position) &lt; blue_noise_min_dist - 0.001:
+	touching += 1
+	bad[i] = true
+	bad[j] = true
+```
+
+Try a three-point overlap. Three coincident centres contain three close pairs, even though only three points change colour. The observer reports pairs, not half the number of coloured shells.
+
+## The galleries extend the route
+
+7. At **WhiteNoiseGallery**, follow a row of the existing 100 × 100 field. Compare height with colour. Both use the same uniform draw; adjacent heights do not constrain one another.
+8. Try its WHITE, PINK, BROWN, BLUE and VIOLET controls, then STOP. Compare sound while watching the image remain fixed. These are separate generators. Reading the field into sound is a proposed extension, not an implemented control.
+9. At **NoiseColors3D**, compare the five illustrated rows, then audition the sounds. Examine the tall plateaus: display clamping makes different powers share one height. The bars are not a measured audio spectrum.
+10. Read the BROWN accumulation and VIOLET difference passages in final.md after listening. What does each retain from its previous step? Carry several discoveries out of the room; every work need not answer the first question in the same way.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Noise_Types/technical.md">Raw captured source</a></p><pre># Two kinds of constraint
+
+This account follows `algorithms/randomness/randompoint/randompoint.gd` and `algorithms/randomness/randompoints/randompoints.gd`.
+
+## The single point
+
+The map&#x27;s `randompoint` opts into `stand:bounds`, with half-extent 0.6 m, rotation 90°, and origin raised 1.25 m at cell (3,2), facing the open approach. Its square marks allowed centre coordinates; it is not a colliding sheet. Two global uniform draws choose the initial local x/y. Local z starts at zero. `_process` clips x/y and replaces z with zero, then updates the coordinate label. `_on_point_dropped` performs the same clipping, without resampling. This repeatedly maintained boundary differs from the bench&#x27;s one-time admission test. The visual casing is opt-in; other placements retain their original bare presentation.
+
+## The bench
+
+`randompoints:180#stand:compare#count:24#size:0.9` builds two equal slabs, 0.90 × 0.90 × 0.12 m. Default spacing is derived once for the configured count and volume: 0.8 times the cube root of volume/count, snapped to 5 mm. This map gives 0.130 m. `radius` can explicitly configure that distance; `dist` is accepted by the script but is not a recognized numeric key in the grid token parser.
+
+The left cloud uses independent uniform coordinate draws. The right either rejects uniform proposals that are too close to already accepted centres, or draws clamped Gaussians independently on each axis. The Gaussian standard deviation is half-extent times 0.25. Clamping puts tail draws on a boundary instead of redrawing them; it is not a truncated Gaussian or pink-noise generator.
+
+One seeded RNG supplies the left cloud first, then continues for the right. REDRAW creates a fresh generator with the same seed. Equal settings and call order therefore repeat both clouds; the clouds do not share the same proposal prefix. Increasing the left count also advances where the right starts reading that stream.
+
+The distance sampler proposes up to 100 candidates per requested slot. Each candidate checks all previously accepted centres. Failed slots do not relax the distance and do not stop later slots trying. This is simple finite dart throwing, without a spatial hash, active list, annulus search, or packing optimality certificate.
+
+```gdscript
+if min_dist &gt;= blue_noise_min_dist:
+	pts.append(candidate)
+	placed = true
+	break
+```
+
+The display keeps these accounts separate:
+
+- Right candidates = accepted + refused. Gaussian candidates equal accepted; its refused count is zero.
+- Requested slots = accepted + unfilled. Unfilled records the finite search shortfall.
+- Ghost instances = min(220, refused). They retain the first refusals, not a representative random subsample.
+
+Each accepted point carries a shell of radius distance/2. Admission uses exact centre distance. A 0.25-second observer counts current pairs below distance minus 1 mm and colours their shells; it counts each pair once. That observer uses coordinates in the common cloud frame. At the map&#x27;s unit scale those units are metres. Arbitrary nonuniform scaling elsewhere would change world-distance interpretation.
+
+The point bodies still use project pickable/physics behaviour. Absence of a spacing force does not mean absence of all physics. RESTORE freezes them, clears velocities and returns their saved local positions. It recomputes close pairs immediately, including naturally close Gaussian pairs. Release a held point before restoring; a pointer still carrying a body can continue to write its position.
+
+## Local controls
+
+REDRAW repeats the current seeded construction. NEW SEED chooses a five-digit seed different from the current one. RULE alternates spaced / clustered. RESTORE restores home coordinates without resampling. LOAD alternates the configured population and four times it, without deriving a new distance. The cased plate names all three dimensions, full candidate counts, ghost display limit and finite attempt budget.
+
+## The galleries: two more primary encounters
+
+The four works remain in place. `WhiteNoiseGallery` and `NoiseColors3D` now use `#stand:gallery#seed:31415`. The console helper counteracts each miniature&#x27;s scale for the controls only; the existing model dimensions, sample counts, bar-generation code and audio filters are retained. The side consoles keep the central visual fields available to inspect. Existing button signals still select five noise modes and STOP. Switching modes stops the old stream before restarting, clearing queued samples, and resets filter state. With a nonzero seed each mode starts from the same white-innovation stream within that artifact; the two artifacts retain their distinct seed offsets (13579 and 24680).
+
+`WhiteNoiseGallery` draws 10,000 bar heights at regular grid addresses. Each height is a uniform draw multiplied by max_height; colour samples a gradient with that same draw. Its sound is generated independently of those heights. None of its five sound buttons regenerates or reads the visual field.
+
+`NoiseColors3D` retains 200 bins in each of five rows. The row values follow 1/f², 1/f, 1, f and f², using f = max((i+1)/200, 0.01). Each is multiplied by a random value in [0.7, 1.3], multiplied by max_height and clamped to [0.01, 2 × max_height]. These are perturbed, clipped illustrations, not measured spectra. With show_all_types=true in this map, selecting sound leaves all rows intact.
+
+Both scripts contain the same sample-filter formulas. WHITE returns an independent uniform innovation. PINK combines several stateful recurrences. BROWN adds 0.02 times the innovation to a state bounded to [-1,1]. BLUE subtracts a running low-pass estimate from the innovation. VIOLET differences adjacent innovations. Gain and the final ±0.95 clamp follow. These implementation names are retained; this review does not certify exact spectral slopes for the approximate, bounded filters, particularly BLUE and BROWN.
+
+The review exports two-second, 44.1 kHz mono PCM previews by calling the actual generators, with seed 12345 and reset filter state for each mode. These dry samples precede room attenuation. They do not record speakers, a headset, or the AudioStreamGenerator&#x27;s output buffer. Pointer tests separately verify that the actual stream starts, switches and stops. Previews keep the existing gain; they are not loudness-normalized, so listening comparisons can reflect both level and temporal structure.
+
+No artifact in this hall currently scans a spatial row into sound. That possibility belongs in the book as a named next experiment. Preserving this distinction makes the existing juxtaposition available for thought without inventing a hidden connection.
+
+## Remaining implementation boundaries
+
+The point sampler&#x27;s enum name BLUE_NOISE and legacy `mode:pink` alias remain for compatibility; the latter selects the clamped Gaussian, while the bench UI names it clustered. The distance sampler has no spectral quality certificate. The galleries&#x27; model curves and audio filters are separate constructions. No entropy estimate or numerical QFEP lambda is assigned to them.
+
+Headset comfort, direct hand presses, perceived timbre in the room and Quest performance remain unverified. The desktop interaction lane and generated audio records establish narrower facts, listed in the review receipt.
+
+
+## Related weather — 24 September 2026
+
+`related_weather` at (6,18) adds three fixed glazed walls to the extended 13×28 hall. Their eight slits each show the newest eight accepted targets; the oldest visible slot is seven samples behind the newest. Opaque panels move but the glass collision stays fixed. Side and end aisles allow the body to move around the walls. Existing four artifacts, their configurations and all prior structure rows remain. Eighteen rows are inserted before former row 9; the teleporter moves from (6,7) to the final doorway (6,27).
+
+`weather_signals.gd` supplies a seeded uniform innovation u in [-1,1] to all three channels. White returns u. The walk adds 0.10u to its unbounded sum. Pink uses the third-order IIR coefficients in [Julius O. Smith, Example: Synthesis of 1/F Noise](https://www.dsprelated.com/freebooks/sasp/Example_Synthesis_1_F_Noise.html). It receives 4096 preparation samples; the visible walk starts at zero afterward. Uniform rather than Gaussian innovations change the marginal distribution, not the filter transfer function. Neither the raw walk nor the raw pink output is clamped in the model.
+
+The display uses fixed gains [1,1,11.6], then y = 1.70 + 0.75 * clamp(value,-1,1), with a 0.64 m sight slit. Orange slot markers identify target clipping. The gain is fixed for every seed, not recalculated to fit each run. Values on the console are before this clamp, with the pink display gain applied. No claim that these three marginal distributions are equal. Raw values, bounds and visible motor motion are distinct layers.
+
+All channels share a one-second cubic smoothstep movement and a one-second dwell. RUN starts or resumes, HOLD pauses both pending travel and clock. NEXT starts one sample or finishes the currently paused stroke without drawing again. REPLAY cancels pending motion, clears the record and repeats filter preparation and visible targets from the same seed. NEW SEED clears with a different seed, which does not guarantee a different-looking short run. The record stops explicitly at 128 samples; the display retains eight and does not silently loop. Glass collision does not move during these controls.
+
+The spectral check exports actual production-model samples, before gain, clipping or motor motion. It uses a stated Welch estimate and frequency band; the report accompanies this review. No spectral claim is made about eight visible targets, eased shutter trajectories or the older unmeasured audio filters. The new record is an architectural time-series display, not an acoustic measurement or a new proof of blue-noise spacing.
+
+
+Measured signal receipt: production seed 4321, 65,536 accepted samples after 4,096 filter-preparation samples. Welch estimate: Hann window, 8192-sample segments, 4096 overlap, linear detrending; fit over 0.01–0.20 cycles per sample. Fitted power slopes: fresh +0.006, accumulated −1.947, filtered −0.992. The unbounded walk is nonstationary; its finite-record fit is descriptive. The filter&#x27;s power×frequency response varies by 0.471 dB across that band. An independent SciPy recurrence agrees within 3.2e-11 after its transient. These checks support the raw pink approximation over the stated band, not an exact all-frequency process or a spectrum for the eased apertures. In the first 128 targets of this seed, clipping counts are [0,0,4]. See `doc/book/iterations/2026-09-24-related-weather/signal-checks.json` and `signal-study.png`.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Noise_Types/intent.md">Raw captured source</a></p><pre>Concept: Where and when a constraint acts changes what a body can do.
+Sequence role: First active noise hall, after Random_Game and before Noise_Columns. Move from random choices within a procedure to the relationships a procedure imposes on positions.
+Technical angle: Repeated local-coordinate clipping; finite minimum-distance rejection sampling; full candidate accounting; replay by seed and call order; clamped Gaussian comparison; uniform heights and gradient colours; illustrated spectral curves; accumulation, difference and approximate temporal filters.
+Critical angle: Distinguish an admission condition from ongoing enforcement, and a finite search failure from a proof of impossibility. The visual record has its own explicit display budget. Investigate what proximity and shared names suggest between separately generated images and sounds; leave room for pleasure and different kinds of attention.
+Key artifacts: randompoint, randompoints, WhiteNoiseGallery and NoiseColors3D remain primary, followed by related_weather. The galleries extend the questions; their displays do not measure the bench or audio spectrum.
+Gap: Headset reach and comfort remain untested. The galleries now have accessible side consoles and tested source previews; perceived sound and headset interaction still need a human pass.
+
+
+24 September — Related weather extends the existing encounters into three full-size viewing walls. Shared innovations, accumulated steps and a finite pink approximation move eight sight slits per wall. The visitor walks alongside recorded time and looks for alignment through the walls. Separate signal memory, display memory, matched motor smoothing, fixed gains and clipped aperture bounds. Glass collision stays fixed; an opening for sight is not a passage for the body. Preserve the listening studies and their distinction between illustrated curves and actual sound. Hall extends 13×10 to 13×28 without changing previous artifacts or structure rows; the exit moves from (6,7) to (6,27). New artifact at (6,18). Headset experience remains open.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Noise_Types/critical.md">Raw captured source</a></p><pre># Admission can stop; a boundary can keep working
+
+The single point has three coordinate components. Its script repeatedly writes zero into one of them. The flatness a visitor encounters is maintained by an operation that discards part of a proposed movement. We can name the operation, locate it, and alter it. This is a specific opening for artistic research: the representation lets us intervene in the condition that makes this body appear possible.
+
+At the bench, a candidate&#x27;s admissibility depends on earlier accepted centres. A late arrival may be refused while those earlier positions remain untouched. The procedure generates an arrangement with a measurable minimum distance; it does not establish that the arrangement is fair, socially desirable, maximally packed, or universally more or less random. Those claims would require another question and another measure.
+
+The visitor can bring admitted points into a relation the generator would have refused. The observer reports that relation without correcting it. The queer possibility here lies in a precise separation: a rule that helped something come into existence need not exhaust what that thing can do afterward. This is an invitation to test the rule&#x27;s reach, not a claim that every constraint is oppressive or that every overlap is emancipatory.
+
+LOAD makes a second limit available. An unfilled slot records the end of one hundred failed attempts. It does not prove the absence of an admissible position elsewhere. Earlier choices may have obstructed later ones; a different sequence may build another arrangement. Search time and spatial possibility have become entangled. This is a useful thread toward later landscapes and optimization, provided we carry the distinction between algorithmic failure and impossibility with us.
+
+The first 220 refused candidates are shown. The rest have a count but no visible body. The record itself has a material budget. Making that budget explicit lets the reader question what the image preserves and what it cannot show, rather than treating the image as an exhaustive account.
+
+None of these mechanisms assigns a politics to a point cloud by itself. Their value is methodological: a visitor can perform a change, observe what remains invariant, read the responsible code, then ask how another implementation might host another relation. The two point artifacts together expose a difference that either alone could leave unnamed. The galleries extend the inquiry in other directions.
+
+## Letting the other works change the question
+
+The two galleries add relationships that the admission/enforcement contrast does not exhaust. In WhiteNoiseGallery, every grid address is provided in advance; height and colour dress the same sampled value. The image and the sound nevertheless come from separate streams. Their proximity can suggest a correspondence that neither generator performs. That suggestion can be a productive artistic arrangement when the book lets the visitor discover and question it.
+
+NoiseColors3D brings illustrated spectral shapes into company with approximate sound filters. Naming them together creates a family, while source inspection reveals differences inside that family. Its display ceiling makes distinct large powers appear alike. The audible BROWN state retains a bounded accumulation; VIOLET retains a previous draw so that it can produce a difference. Those are additional ways to investigate memory, continuity and change. They need not be squeezed into a single claim about whether rules continue to act.
+
+Sound also gives the visitor something to stay with. Attraction, irritation, pleasure and an ear&#x27;s changing attention belong to the encounter; they are not failures to extract its lesson efficiently. Calling noise waste or interference would already assume another signal that deserves to arrive undisturbed. Here a visitor can choose the noise itself as material. The experiment leaves that choice available without assigning a preferred feeling to a filter.
+
+The curatorial method must stay open to the same revision it invites from visitors. A question can organize attention while remaining answerable to the existing work. Removing a substantial encounter because it exceeds our first formulation would let the teaching scaffold determine the research&#x27;s result in advance.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Noise_Types/artifacts.md">Raw captured source</a></p><pre># Random Noise Types — encounters
+
+## Primary: randompoint
+
+A pickable point in a visible square. Its initial x/y are drawn uniformly; later movements are repeatedly clipped to local bounds with z = 0. The frame and cased invitation make that restriction discoverable.
+
+## Primary: randompoints
+
+Two matched slabs compare every uniform proposal kept with minimum-distance rejection or clamped Gaussian sampling. Five controls support replay, changed seed, changed rule, restored positions and increased load. Shells report current close pairs; they apply no spacing force.
+
+## Primary: WhiteNoiseGallery
+
+A grid of independently sampled bar heights. Retained in place; this is not a measured frequency spectrum.
+
+## Primary: NoiseColors3D
+
+Prescribed spectral-power curves, random variation and clipped display heights. Retained in place; the plotted heights do not measure the generated audio or the point bench. Full-size side controls expose the five existing sound filters. Their illustrative curves are distinguished from measured audio.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Noise_Types/summary.md">Raw captured source</a></p><pre># Which rules keep acting?
+
+Four primary encounters connect a continuously clipped single point with a bench that spaces points only when generating them. Carry, release, compare; repeat a seed; quadruple the population while keeping spacing fixed; distinguish a finite search shortfall from impossibility. The galleries extend the route through height/colour, separate image/sound sources, illustrated spectra and temporal filters. Next: Noise_Columns, where a field acts on an existing form.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Noise_Types/blurb.md">Raw captured source</a></p><pre># Which rules keep acting?
+
+A point keeps returning to its plane. At another bench, two points can share a neighbourhood their generator would have refused. Carry them, read the count, and find where each rule stops.
+</pre></section></body></html>

@@ -1,0 +1,20 @@
+--- before/Point_Trace/final.md
++++ current/Point_Trace/final.md
+@@ -44,7 +44,7 @@
+ 
+ Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
+ 
+-The list is finite too: beyond 4096 accepted positions, keeping a new one means dropping the oldest. We can read that limit on the instrument and leave its questions for a return. These dots do not fade their live trails merely because time passes.
++The list is finite too: beyond 4096 accepted positions, keeping a new one means dropping the oldest. A longer drawing can begin to lose its beginning. These dots do not fade their live trails merely because time passes.
+ 
+ ## Move the place that draws
+ 
+@@ -66,8 +66,6 @@
+ 
+ The board brings the nib's world position into its own frame with `to_local(world_tip)`, then turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. For now, try making something with the lift between strokes.
+ 
+-Other machines nearby keep timed rows or make wordless handwriting. They offer further ways to read movement. Let them remain available while we follow the record we have just made.
+-
+ <!-- @ -->
+ 
+ Return to a line you want to keep. Release the drawing dot or stick after making it: that release is how we send a copy onward. A whiteboard image is kept differently and will not take this route.

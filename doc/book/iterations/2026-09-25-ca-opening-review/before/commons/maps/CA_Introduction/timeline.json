@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "description": "CA_Introduction: darkness, a single cell appears, rules run, patterns emerge, complexity unfolds.",
+  "initial_state": {
+    "hidden_artifacts": ["dark_sphere", "persian_rug", "line_network_ca"],
+    "hidden_utilities": ["t"],
+    "lighting": {
+      "ambient_energy": 0.0,
+      "directional_energy": 0.0
+    }
+  },
+  "events": [
+    {
+      "id": "first_cell",
+      "trigger": { "type": "delay", "delay": 2.0 },
+      "actions": [
+        { "type": "lighting", "ambient_energy": 0.05, "directional_energy": 0.0, "duration": 2.0 },
+        { "type": "reveal", "target": "dark_sphere", "animation": "fade_in", "duration": 2.5 },
+        { "type": "text", "text": "one cell", "position": [3, 2.5, 2] }
+      ]
+    },
+    {
+      "id": "rule_begins",
+      "trigger": { "type": "zone", "position": [3, 3], "radius": 2.0 },
+      "actions": [
+        { "type": "reveal", "target": "persian_rug", "animation": "scale_up", "duration": 1.5 },
+        { "type": "lighting", "ambient_energy": 0.2, "directional_energy": 0.3, "duration": 3.0 },
+        { "type": "text", "text": "a rule repeats — a pattern emerges", "position": [3, 2.5, 3] },
+        { "type": "activate", "target": "persian_rug" }
+      ]
+    },
+    {
+      "id": "complexity_grows",
+      "trigger": { "type": "after", "event": "rule_begins", "delay": 4.0 },
+      "actions": [
+        { "type": "lighting", "ambient_energy": 0.4, "directional_energy": 0.6, "duration": 3.0 },
+        { "type": "text", "text": "simple rules, complex behavior", "position": [3, 3.0, 5] }
+      ]
+    },
+    {
+      "id": "network_reveal",
+      "trigger": { "type": "zone", "position": [11, 2], "radius": 2.5 },
+      "actions": [
+        { "type": "reveal", "target": "line_network_ca", "animation": "fade_in", "duration": 2.0 },
+        { "type": "lighting", "ambient_energy": 0.6, "directional_energy": 1.0, "duration": 3.0 },
+        { "type": "text", "text": "cells connect — networks form", "position": [2, 2.5, 11] },
+        { "type": "activate", "target": "line_network_ca" }
+      ]
+    },
+    {
+      "id": "full_light",
+      "trigger": { "type": "after", "event": "network_reveal", "delay": 3.0 },
+      "actions": [
+        { "type": "lighting", "ambient_energy": 0.6, "directional_energy": 1.2, "duration": 2.0 }
+      ]
+    },
+    {
+      "id": "show_exit",
+      "trigger": { "type": "after", "event": "full_light", "delay": 2.0 },
+      "actions": [
+        { "type": "activate", "target": "t" },
+        { "type": "reveal", "target": "t", "animation": "fade_in", "duration": 1.0 }
+      ]
+    }
+  ]
+}

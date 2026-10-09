@@ -1,0 +1,2235 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Primitives — the complete tutorial</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:#f4f1eb;color:#272522;font:19px/1.7 Georgia,serif}a{color:#943a5b;text-underline-offset:3px}nav{position:sticky;top:0;z-index:2;background:#f4f1ebf5;border-bottom:1px solid #d9d1c6;padding:16px 5vw;display:flex;flex-wrap:wrap;gap:12px 28px;font:14px/1.4 system-ui,sans-serif}nav a[aria-current]{font-weight:700;color:#242322}header,main,footer{max-width:950px;margin:auto;padding:42px 28px}h1{font-size:46px;line-height:1.15;font-weight:400}h2{font-size:31px;line-height:1.3}h3{font-size:24px;line-height:1.4}.eyebrow,.meta,.hall-head,.back{font:13px/1.6 system-ui,sans-serif}.eyebrow{letter-spacing:.12em}.meta{color:#665f59}#contents{margin:38px 0;padding:25px;background:#ebe5db}ol{padding-left:25px}.hall{border-top:1px solid #cfc5b8;padding:35px 0 65px;scroll-margin-top:85px}.hall-head{display:flex;justify-content:space-between;gap:20px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:35px;color:#625b54}.prose>h1{font-size:38px}pre{background:#20272c;color:#f0ede6;padding:24px;border-radius:5px;overflow-x:auto;font:14px/1.65 Consolas,monospace;tab-size:4}code{font-family:Consolas,monospace;font-size:.88em}pre code{font-size:inherit}img{max-width:100%;height:auto}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse;font-size:16px}td,th{border:1px solid #cbc3b7;padding:10px;text-align:left}blockquote{border-left:3px solid #bf95a5;margin-left:0;padding-left:25px}.footnote{font-size:15px}.back{display:inline-block;margin-top:35px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:24px}.choice{padding:25px;background:#ebe5db;border:1px solid #d5cbbb}.choice h2{margin-top:0}@media(max-width:650px){header,main,footer{padding:26px 20px}h1{font-size:36px}.prose>h1{font-size:30px}.hall-head{display:block}.choices{grid-template-columns:1fr}pre{padding:16px;font-size:12px}nav{gap:10px 18px;padding:12px 20px}}@media print{nav,.back,.hall-head a,.downloads{display:none}body{background:white;color:black;font-size:11pt}header,main{max-width:none;padding:0}.hall{break-before:page}pre{background:#f1f1f1;color:black;white-space:pre-wrap;overflow:visible;font-size:8pt}a{color:inherit}.footnote{font-size:9pt}h1,h2,h3{break-after:avoid}img{break-inside:avoid}}</style></head><body><nav aria-label="Readings"><a href="index.html">Primitives</a><a href="tutorial.html" aria-current="page">Whole tutorial</a><a href="final.html">Whole reflection</a><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-05-primitives-facing-pages/index.html">Facing pages</a><a href="../2026-10-06-what-the-next-room-keeps/notes.html">What carries onward</a></nav><header><p class="eyebrow">ENDLESS MUSEUM · 6 OCTOBER 2026</p><h1>Primitives — the complete tutorial</h1><p>All 15 tutorial.md texts, including their full code listings. Read continuously in the current museum order, from Point Zero to Melencolia.</p><p class="downloads"><a href="primitives-tutorial.md" download>Download the complete Markdown</a> · <a href="primitives-source-texts.zip" download>Download both tracks by hall</a></p><div id="contents"><h2>Contents</h2><ol><li><a href="#Point_Zero">Point Zero</a></li><li><a href="#Point_One">Point One</a></li><li><a href="#Point_Coordinates">Coordinates</a></li><li><a href="#Point_Lines">Lines</a></li><li><a href="#Point_Trace">Trace</a></li><li><a href="#Point_Line_Grid">Grid</a></li><li><a href="#Point_Triangle_Context">Triangle</a></li><li><a href="#Primitives_Polythedra">Polyhedra</a></li><li><a href="#Point_Animatedcube">Cube</a></li><li><a href="#Primitives_Ignorance">Primitives</a></li><li><a href="#Primitives_Godot">Godot primitives</a></li><li><a href="#Primitives_Columns">Columns</a></li><li><a href="#Primitives_Profiles">Borrowed outlines</a></li><li><a href="#Primitives_Portals">Limits</a></li><li><a href="#Primitives_Melencolia">Melencolia</a></li></ol></div></header><main><section id="Point_Zero" class="hall"><div class="hall-head"><span>01 / 15 · Point Zero</span><a href="final.html#Point_Zero">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Zero--tutorial--point-zero-already-running">Point Zero — Already running</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Initialization</li>
+<li>Per-frame updates</li>
+<li>Function calls</li>
+</ul>
+<p>This tutorial follows a path through <strong>Endless Museum</strong>. We learn selected operations from the works we encounter. Alongside it, <code>final.md</code> follows their critical and poetic questions. Some artifacts belong to both tracks; others remain part of the wider field we explore.</p>
+<h2 id="Point_Zero--tutorial--a-number-that-keeps-changing">A number that keeps changing</h2>
+<p>In Point Zero, the counter is already running. Its number changes as the engine processes frames. We will make the smallest working version of that operation: create a label, then keep updating its text.</p>
+<p>Use the working project from Day Zero. Its camera, light and player remain supplied. For this study, attach <code>counter.gd</code> to an empty <code>Node3D</code> named <code>CounterStudy</code>. Place that node where you can see it in your working scene, with its front facing your view. The script creates its own label; there is no child to prepare or fetch through a scene path. The existing museum console is the reference for this study.</p>
+<p>Here is the <strong>whole script</strong>.</p>
+<!-- student-code:counter.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+var label: Label3D
+
+func _ready() -&gt; void:
+    label = Label3D.new()
+    label.text = "0"
+    label.font_size = 96
+    label.pixel_size = 0.005
+    add_child(label)
+
+func _process(_delta: float) -&gt; void:
+    label.text = str(Engine.get_process_frames())
+</code></pre>
+<p><code>var label: Label3D</code> declares a reference that both functions can use. It does <strong>not</strong> create the label. <code>Label3D.new()</code> creates it; <code>add_child(label)</code> puts it beneath this node in the scene so its text can appear. The two size settings make the text large enough to read.</p>
+<p>Godot calls <code>_ready()</code> when the node and its children are ready. Here it creates the label and gives it an initial text, <code>"0"</code>. That setup finishes before this node's first <code>_process()</code> call.</p>
+<p>Godot then calls <code>_process()</code> each process frame. <code>Engine.get_process_frames()</code> returns the engine's running total; <code>str()</code> converts the number to text; <code>label.text =</code> replaces the displayed text. The supplied <code>_delta</code> is the frame's time interval in seconds. We do not use it: this example reads frames, not seconds.</p>
+<p>Run it. The number advances. Its first visible value need not be zero—the engine was running before this label existed.</p>
+<h2 id="Point_Zero--tutorial--read-it-once">Read it once</h2>
+<p>What would happen if we read the same total only in <code>_ready()</code>?</p>
+<!-- student-edit:read-once -->
+<p>Move <code>label.text = str(Engine.get_process_frames())</code> into <code>_ready()</code>, immediately after <code>add_child(label)</code>. Delete the now-empty <code>_process()</code> function. Keep everything else.</p>
+<!-- /student-edit:read-once -->
+<p>Run again. The number stays where it began, while the room keeps running. The label now holds one reading. Undo the move and the number follows the engine again.</p>
+<p>The instruction is the same. Its place determines when it runs. In Point One, <code>_ready()</code> will construct a point's visible body.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Zero/counter.gd" rel="noopener" target="_blank">Current counter.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Zero/counter_once.gd" rel="noopener" target="_blank">Complete experiment: counter_once.gd</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_One" class="hall"><div class="hall-head"><span>02 / 15 · Point One</span><a href="final.html#Point_One">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_One--tutorial--point-one-give-the-point-a-body">Point One — give the point a body</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Position values</li>
+<li>Variables and constants</li>
+<li>Object references</li>
+<li>Visible and physical boundaries</li>
+</ul>
+<p>In the corridor, one point is absent, one is visible, and one stops your movement. A position, a surface and a physical boundary do different work. We will build a small point with all three.</p>
+<p>Point Zero introduced <code>_ready()</code>. Here it creates the point. Start a new script, <code>point.gd</code>, on an empty <code>Node3D</code> named <code>PointStudy</code> in your working project. Put this study's origin on the floor where the supplied camera or player can see it. Day Zero supplies the room and view; this script creates every part of the point.</p>
+<h2 id="Point_One--tutorial--the-complete-point">The complete point</h2>
+<!-- student-code:point.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+var point: StaticBody3D
+
+func _ready() -&gt; void:
+    point = StaticBody3D.new()
+    point.position = CENTRE
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    point.add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    point.add_child(boundary)
+
+    add_child(point)
+</code></pre>
+<p>Run it. A small sphere appears 1.12 metres above the study's origin. The supplied light shows its surface; its collision shape lets the prepared player meet a solid boundary.</p>
+<h2 id="Point_One--tutorial--a-value-then-an-object">A value, then an object</h2>
+<p><code>CENTRE</code> holds three numbers: X, Y and Z. Used as a position, they locate the point relative to <code>PointStudy</code>. <code>RADIUS</code> measures from the sphere's centre to its surface. In this project, one unit represents one metre.</p>
+<p><code>const</code> keeps a named value fixed while the script runs. You can change that value in the code and run again. <code>:=</code> lets Godot infer its type: <code>RADIUS</code> is a decimal number; <code>CENTRE</code> is a <code>Vector3</code>.</p>
+<p><code>var point: StaticBody3D</code> declares a reference. As with Point Zero's label, declaration does not create the object. <code>StaticBody3D.new()</code> creates it, and <code>point =</code> keeps the reference. A static body provides a fixed physical body; it still needs a shape to define its boundary.</p>
+<p>Change <code>Vector3(0, 1.12, 0)</code> to <code>Vector3(0, 1.7, 0)</code>. Run again. Both surface and boundary rise because they belong to the point. Restore the original value.</p>
+<h2 id="Point_One--tutorial--two-kinds-of-shape">Two kinds of shape</h2>
+<p><code>SphereMesh</code> describes the visible surface. <code>MeshInstance3D</code> displays it. The assignment <code>surface.mesh = sphere</code> connects the two. <code>sphere.height</code> is the full height, twice the radius.</p>
+<p><code>SphereShape3D</code> describes a physical boundary. <code>CollisionShape3D</code> attaches it to the physics body. These objects draw nothing. Both shapes use <code>RADIUS</code>, so they agree in size.</p>
+<p><code>point.add_child(surface)</code> and <code>point.add_child(boundary)</code> put both beneath the point. Their default local positions are zero: they share its centre. Finally, <code>add_child(point)</code> attaches this whole small construction beneath <code>PointStudy</code>. We keep the reference; no scene path is needed to find it later.</p>
+<p>Change <code>RADIUS</code> from <code>0.14</code> to <code>0.3</code>. Predict what grows, then run again. The same value controls both shapes. Restore <code>0.14</code>.</p>
+<h2 id="Point_One--tutorial--separate-seeing-from-contact">Separate seeing from contact</h2>
+<p>After <code>boundary.shape = shape</code>, add <code>boundary.disabled = true</code>. Run again. The sphere remains visible, but its boundary no longer stops the player. Remove that line to restore contact.</p>
+<p>After <code>surface.mesh = sphere</code>, add <code>surface.visible = false</code>. The surface disappears; the boundary remains. Remove that line too. Visibility and collision can be changed separately.</p>
+<p>Keep this working <code>point.gd</code>. In Coordinates, we will give <strong>this same point</strong> pickup behaviour. Its surface and boundary will travel together.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_One/point.gd" rel="noopener" target="_blank">Current point.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_Coordinates" class="hall"><div class="hall-head"><span>03 / 15 · Coordinates</span><a href="final.html#Point_Coordinates">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Coordinates--tutorial--point-coordinates-carry-a-position">Point Coordinates — carry a position</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Pickable</li>
+<li>3D coordinate system</li>
+<li>Local and world position</li>
+</ul>
+<p>Take the black point in the museum's coordinate hall. Its surface and boundary follow your hand. Now give the point you made in Point One that same capacity.</p>
+<p>Continue with your existing <code>PointStudy</code> and <code>point.gd</code>. Keep the radius, centre, mesh and collision shape. Change the body's class and pickup settings, then add a position readout. Day Zero supplies the configured XR hands and Godot XR Tools library. Our script supplies the point they can hold.</p>
+<h2 id="Point_Coordinates--tutorial--the-same-point-now-pickable">The same point, now pickable</h2>
+<p>Here is the complete resulting script. The shape construction is unchanged; the new parts are the body's type and settings, the readout, and <code>_process()</code>.</p>
+<!-- student-code:point.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const RADIUS := 0.14
+const CENTRE := Vector3(0, 1.12, 0)
+
+var point: XRToolsPickable
+var readout: Label3D
+
+func _ready() -&gt; void:
+    point = XRToolsPickable.new()
+    point.position = CENTRE
+    point.freeze = true
+    point.freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    point.release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    point.ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    point.collision_layer = 4
+    point.collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    point.add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    point.add_child(boundary)
+
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+</code></pre>
+<p>Run it in the prepared XR scene. Bring your hand to the point, grip, carry it, then release. Its shape is unchanged. Its relation to the hand has changed.</p>
+<h2 id="Point_Coordinates--tutorial--what-the-pickup-connection-adds">What the pickup connection adds</h2>
+<p><code>XRToolsPickable</code> is a physics body with pickup behaviour from the supplied library. It replaces <code>StaticBody3D</code>; the same mesh and collider remain its children. The configured hand selects this body and moves it. Our script does not rebuild hand tracking or the grab driver.</p>
+<p><code>freeze = true</code> holds the point in place initially. The kinematic freeze mode allows collision checking as a frozen body moves. <code>ReleaseMode.FROZEN</code> makes it stay where you release it. <code>RangedMethod.NONE</code> limits this example to a nearby hand.</p>
+<p>The two collision settings match the prepared museum: <code>4</code> puts the point on layer 3, the grab layer; <code>196615</code> enables contact with layers 1, 2, 3, 17 and 18. These numbers are supplied configuration. Set them before <code>add_child(point)</code>, because the pickup library records its starting settings when the body enters the scene.</p>
+<p>To test permission separately, add <code>point.enabled = false</code> just before <code>add_child(point)</code>. Run again. The visible point and collider remain, but the hand cannot select it. Remove that line to restore pickup.</p>
+<h2 id="Point_Coordinates--tutorial--one-point-two-addresses">One point, two addresses</h2>
+<p>The readout uses the <code>Label3D</code> construction from Point Zero. It belongs to <code>PointStudy</code>, so it stays behind when the point moves. <code>_process()</code> reads the point again each frame.</p>
+<p><code>point.global_position</code> gives the point's position in the world's coordinate system. <code>to_local(world_position)</code> converts that position into the coordinate system of the node running this script: <strong>PointStudy</strong>. The two readings describe the same point from different frames.</p>
+<p>The last line converts each vector to text. <code>+</code> joins the pieces; <code>\n</code> starts a new line. It reports the positions without calculating a distance.</p>
+<p>If <code>PointStudy</code> has the world's origin and orientation, the readings initially agree. Move <code>PointStudy</code> two metres along world X and run again. The point still begins at LOCAL <code>(0, 1.12, 0)</code>, but WORLD now includes the study's displacement. Changing the parent changes where the point is without changing its local starting value.</p>
+<p>Carry the point sideways, up, then forward. Watch which components change. Release it and move your empty hand: the point and its two readings stay where you left them.</p>
+<h2 id="Point_Coordinates--tutorial--the-drawn-frame">The drawn frame</h2>
+<p>The museum's pink, grey and black frame helps you see three directions. Its LOCAL card measures from that coloured frame. Our small study measures from <code>PointStudy</code>; the choice is explicit in each case. <code>point.position</code> would instead mean position relative to the point's parent.</p>
+<p>Carry the museum point beyond an arrow's end. The drawing stops; positions continue. A coordinate system can describe more space than its diagram occupies.</p>
+<p>Keep this <code>point.gd</code>. Lines will continue with the held point and introduce a second endpoint. Distance belongs there.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Coordinates/point.gd" rel="noopener" target="_blank">Current point.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_Lines" class="hall"><div class="hall-head"><span>04 / 15 · Lines</span><a href="final.html#Point_Lines">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Lines--tutorial--point-lines-what-can-two-lines-do">Point Lines — what can two lines do?</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Endpoints and a segment</li>
+<li>Displacement and distance</li>
+<li>A class and its instances</li>
+<li>Parallel, cross and X</li>
+<li>Position in depth</li>
+</ul>
+<p>Take one end of the line in the black room. The other stays. The span turns and changes length. We will make that relation using the point from Coordinates, then arrange two lines into parallel marks, a plus and an X.</p>
+<h2 id="Point_Lines--tutorial--keep-the-point-give-it-another-end">Keep the point; give it another end</h2>
+<p>Continue from your working <a href="tutorial.html#Point_Coordinates">Coordinates script</a>. Its point, surface, collider, pickup settings and local/world readout remain. We will put its familiar construction in a class, make two instances, and draw the relation between them.</p>
+<p>Save <code>point_body.gd</code>, <code>line.gd</code> and <code>line_skin.gd</code> together. All three files are printed below; only the drawing helper is supplied. On your existing <code>PointStudy</code> node, replace the attached <code>point.gd</code> with <code>line.gd</code>. Keep <code>point.gd</code> as the previous working version. Run this one station; the script creates both endpoints. The prepared museum supplies the room, light and configured XR hands.</p>
+<p>Keep <code>PointStudy</code> at scale <code>(1, 1, 1)</code>. Its position and orientation may change. With this scale, our measured units remain metres.</p>
+<h2 id="Point_Lines--tutorial--give-the-familiar-point-a-class-point_bodygd">Give the familiar point a class — point_body.gd</h2>
+<p>We have already built a sphere with a matching boundary and made it pickable. Move those instructions into <code>point_body.gd</code>. A class gives us a repeatable construction: each call to <code>PointBody.new()</code> makes a separate point.</p>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<p><code>extends XRToolsPickable</code> keeps the pickup behaviour supplied by XR Tools. Our class adds the sphere, its collider and the settings chosen in Coordinates. Inside this file, <code>add_child(surface)</code> attaches the surface to this point; there is no outer <code>point.</code> prefix.</p>
+<p><code>_init()</code> runs when we call <code>.new()</code>. It builds the point before the lesson adds it to the scene. We leave XR Tools' <code>_ready()</code> in place. The lesson has its own <code>_ready()</code> for placing the points and creating the readout.</p>
+<p>Each instance gets its own mesh and collision shape. They begin with the same dimensions, but they are separate objects. The class contains no endpoint relation or trace: those belong to the lesson using it.</p>
+<h2 id="Point_Lines--tutorial--the-complete-continuation-linegd">The complete continuation — line.gd</h2>
+<p>The point construction now lives in <code>point_body.gd</code>. This smaller lesson places two instances and reads their relation each frame. The coordinate readout stays here.</p>
+<!-- student-code:line.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+
+const PointBody = preload("point_body.gd")
+
+const LineSkin = preload("line_skin.gd")
+
+var point: XRToolsPickable
+var readout: Label3D
+var point_b: XRToolsPickable
+var line: MeshInstance3D
+var distance := 0.0
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    point_b = PointBody.new()
+    point_b.position = CENTRE + Vector3(1.0, 0, 0)
+    add_child(point_b)
+
+    line = LineSkin.new()
+    add_child(line)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+
+    var a := local_position
+    var b := to_local(point_b.global_position)
+    var displacement := b - a
+    distance = displacement.length()
+    line.show_segment(a, displacement, distance)
+    readout.text += "\nDISTANCE " + str(distance)
+</code></pre>
+<p>Run it. Two equal points begin one metre apart. Carry either one: the pink segment follows, and DISTANCE changes. Release it: the endpoint stays where you left it.</p>
+<h2 id="Point_Lines--tutorial--one-class-two-instances">One class, two instances</h2>
+<p><code>preload("point_body.gd")</code> loads our script class and gives it the local name <code>PointBody</code>. Calling <code>.new()</code> twice makes two instances. They share the construction and inherited pickup behaviour; each has its own position, surface and collider. Carry A, then B. Moving one must leave the other where you put it.</p>
+<p><code>point</code> is our first endpoint, A. <code>point_b</code> is B. The references live outside <code>_ready()</code>, so <code>_process()</code> can read them too. <code>preload("line_skin.gd")</code> loads the drawing helper printed below; <code>LineSkin.new()</code> creates its visible segment.</p>
+<p>The class holds what makes this a pickable point. The station holds what makes these two points a line. We can later extend point behaviour in one file without moving distance calculations or a position history into it.</p>
+<p>Coordinates already produced <code>local_position</code> for the first point. Here <code>a</code> keeps that value. <code>to_local(point_b.global_position)</code> expresses B in the same <code>PointStudy</code> frame. Now we can subtract like from like.</p>
+<p><code>b - a</code> is the displacement from A to B: initially <code>(1, 0, 0)</code>. Its <code>.length()</code> returns <code>1.0</code>. The displacement holds direction and length; the distance holds length alone. The final <code>+=</code> adds a DISTANCE line to the coordinate text written earlier in that frame.</p>
+<p>The drawing helper receives A, the displacement and its length. It draws a thin cylinder between the ends. Each frame reads the bodies again; the line remains a relation between their current positions.</p>
+<p>Change B's starting offset from <code>Vector3(1.0, 0, 0)</code> to <code>Vector3(0, 1.0, 0)</code>. Predict the distance, then run. The line stands upright and keeps its length. Restore the original offset.</p>
+<p>Try <code>a - b</code> instead of <code>b - a</code>. The distance stays the same, but the cylinder now points the opposite way from A and misses B. Subtraction has an order. Restore <code>b - a</code>.</p>
+<h2 id="Point_Lines--tutorial--the-supplied-drawing-code-line_skingd">The supplied drawing code — line_skin.gd</h2>
+<p>A mathematical line has no thickness. Our example joins two endpoints into a finite segment; this helper gives that segment a surface. It supplies no collider or pickup behaviour.</p>
+<p>Save the following beside <code>line.gd</code>. It places the cylinder halfway between the ends and turns its long axis along their displacement. The orientation calculation is supplied for now; basis vectors are not a prerequisite for this lesson. The complete code makes that borrowed part available to inspect and reuse.</p>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<p>Before adding another line, change <code>var displacement := b - a</code> to <code>var displacement := a - b</code>. The distance stays the same, but the segment now extends from A in the opposite direction and misses B. The subtraction drives the drawing, not only its readout. Restore <code>b - a</code>.</p>
+<h2 id="Point_Lines--tutorial--what-can-two-lines-do">What can two lines do?</h2>
+<p>Look at the parallel planks, the plus and the X in the hall. A second segment gives us something to arrange in relation to the first. Add this block in <code>_ready()</code>, immediately after <code>add_child(line)</code>:</p>
+<!-- student-code:two-lines-plus -->
+<pre><code class="language-gdscript">    point.position = Vector3(-0.6, 1.42, 0)
+    point_b.position = Vector3(0.6, 1.42, 0)
+    var c := Vector3(0, 0.82, 0)
+    var d := Vector3(0, 2.02, 0)
+    var other_line := LineSkin.new()
+    add_child(other_line)
+    other_line.show_segment(c, d - c, (d - c).length())
+</code></pre>
+<p>This makes a plus. A and B still belong to held bodies. C and D are position values: we have given them no spheres or pickup bodies. The second segment is drawn once in <code>_ready()</code> and stays while you move the first. An endpoint can define a relation without becoming a separate object we can grab.</p>
+<p>Change those four assignments to try another arrangement. A means <code>point.position</code>; B means <code>point_b.position</code>. C and D are the two vector values. All use the same station frame.</p>
+<table>
+<thead>
+<tr>
+<th>Arrangement</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parallel</td>
+<td>(-0.6, 1.12, 0)</td>
+<td>(0.6, 1.12, 0)</td>
+<td>(-0.6, 1.62, 0)</td>
+<td>(0.6, 1.62, 0)</td>
+</tr>
+<tr>
+<td>Plus</td>
+<td>(-0.6, 1.42, 0)</td>
+<td>(0.6, 1.42, 0)</td>
+<td>(0, 0.82, 0)</td>
+<td>(0, 2.02, 0)</td>
+</tr>
+<tr>
+<td>X</td>
+<td>(-0.6, 0.82, 0)</td>
+<td>(0.6, 2.02, 0)</td>
+<td>(-0.6, 2.02, 0)</td>
+<td>(0.6, 0.82, 0)</td>
+</tr>
+</tbody>
+</table>
+<p>Make an X. Then set the Z component of both C and D to <code>0.2</code>. Viewed straight on, the lines can still look crossed. Step sideways: they occupy different depths. No shared vertex has been created where the drawings cross. We still have four endpoints and two relations.</p>
+<p>Choose an arrangement of your own. Predict which endpoints need to move, then make it. Can you keep both lengths while changing what the pair suggests?</p>
+<h2 id="Point_Lines--tutorial--what-the-line-keeps">What the line keeps</h2>
+<p>Return to the one-line version. Replace <code>CENTRE + Vector3(1.0, 0, 0)</code> with <code>CENTRE</code> for B's initial position. Both ends now occupy the same place: displacement and distance are zero. The helper hides spans of <code>0.0001</code> units or less; it cannot orient a segment with no direction.</p>
+<p>Restore the offset. Carry B around a detour and return it to its starting place. The line returns to the same span. It has kept no journey.</p>
+<p>Keep <code>point_body.gd</code>, <code>line.gd</code> and <code>line_skin.gd</code>. Trace will keep more positions, in order, so that a detour can remain.</p>
+<p>Class reference: <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html#class-constructor" rel="noopener" target="_blank">GDScript classes and constructors</a>.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Lines/line.gd" rel="noopener" target="_blank">Current line.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Lines/line_reversed.gd" rel="noopener" target="_blank">Complete experiment: line_reversed.gd</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_Trace" class="hall"><div class="hall-head"><span>05 / 15 · Trace</span><a href="final.html#Point_Trace">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Trace--tutorial--point-trace-keep-where-the-point-has-been">Point Trace — keep where the point has been</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Reusing the point class</li>
+<li>Arrays of positions</li>
+<li>Appending and reading an index</li>
+<li>A distance condition with if</li>
+<li>Neighbour loops with for</li>
+<li>Saving the drawing for the next hall</li>
+</ul>
+<p>In Lines, you could carry an endpoint around a detour and return it. The segment returned too; nothing kept the journey. Now let the point leave a trace.</p>
+<p>The Trace hall offers pens and a ball whose movement leaves a line. Our small program follows the centre of the same pickable point we have already built. We will keep its positions in an array and reuse the line between each neighbouring pair.</p>
+<h2 id="Point_Trace--tutorial--continue-the-point">Continue the point</h2>
+<p>Start from the working <a href="tutorial.html#Point_Lines">Lines example</a>. Keep the <code>PointBody</code> class from Lines, with its mesh, collider and pickup settings, and keep the coordinate readout. Replace the second endpoint and their live segment with a list of positions and a group of drawn segments.</p>
+<p>Save the complete continuation below as <code>trace.gd</code> beside the unchanged <code>point_body.gd</code> and <code>line_skin.gd</code>. Replace <code>line.gd</code> on your existing <code>PointStudy</code> with <code>trace.gd</code>. Keep the previous file. Work inside the existing Endless Museum Trace hall. Its room, light and XR hands remain supplied; this code creates the point, record and drawing. Keep the station's scale at <code>(1, 1, 1)</code>.</p>
+<h2 id="Point_Trace--tutorial--the-complete-trace-tracegd">The complete trace — trace.gd</h2>
+<!-- student-code:trace.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const CENTRE := Vector3(0, 1.12, 0)
+const MIN_SEGMENT_DISTANCE := 0.05
+
+const PointBody = preload("point_body.gd")
+
+const LineSkin = preload("line_skin.gd")
+const TraceArchive = preload("trace_archive.gd")
+
+var point: XRToolsPickable
+var readout: Label3D
+var positions: Array[Vector3] = []
+var trail: Node3D
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = CENTRE
+    add_child(point)
+
+    readout = Label3D.new()
+    readout.position = Vector3(0, 1.6, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.005
+    add_child(readout)
+
+    trail = Node3D.new()
+    add_child(trail)
+    positions.append(point.position)
+    TraceArchive.keep_on_release(point, trail, positions)
+
+func _process(_delta: float) -&gt; void:
+    var world_position := point.global_position
+    var local_position := to_local(world_position)
+    readout.text = "LOCAL " + str(local_position) + "\nWORLD " + str(world_position)
+
+    var last := positions[positions.size() - 1]
+    if (local_position - last).length() &gt;= MIN_SEGMENT_DISTANCE:
+        positions.append(local_position)
+
+        for segment in trail.get_children():
+            segment.queue_free()
+
+        for i in range(1, positions.size()):
+            var a := positions[i - 1]
+            var displacement := positions[i] - a
+            var segment := LineSkin.new()
+            trail.add_child(segment)
+            segment.show_segment(a, displacement, displacement.length())
+
+    readout.text += "\nPOINTS " + str(positions.size())
+
+</code></pre>
+<p>Run it. The count begins at one: the point's starting position. Carry the point sideways, turn a corner, then pause. The line remains and the count stops growing. Release it; pick it up again and continue. This record keeps going until the study ends.</p>
+<p><code>PointBody.new()</code> makes the familiar point. Its class needs no change for this lesson: the recorder reads its position. The array belongs to this study, so later we can keep the record or change its drawing without changing the point.</p>
+<h2 id="Point_Trace--tutorial--an-array-keeps-an-order">An array keeps an order</h2>
+<p><code>positions</code> is an <code>Array[Vector3]</code>: an ordered list whose entries are position values. <code>[]</code> starts it empty. The type inside the brackets says what it may hold. We store a position, not the point node that can keep moving. Declaring <code>positions</code> outside the functions lets each frame use the same array.</p>
+<p><code>positions.append(point.position)</code> adds the first value in <code>_ready()</code>. At that moment the point is a direct child of <code>PointStudy</code>, so this is its position in the study's frame. Seeding the list gives the recorder a first position to compare against.</p>
+<p><code>positions[0]</code> reads the first entry. <code>positions[1]</code> reads the second, once it exists. Code counts indices from zero. With four positions, the valid indices are 0, 1, 2 and 3.</p>
+<p><code>positions.size()</code> returns the number of entries. Subtract one to get the last valid index: <code>positions[positions.size() - 1]</code>. That is the last position we kept. Moving the point afterwards does not move an earlier value in the array.</p>
+<p>This is a one-dimensional list of three-dimensional positions: one index chooses an entry; that entry holds X, Y and Z.</p>
+<h2 id="Point_Trace--tutorial--if-it-has-moved-far-enough">If it has moved far enough</h2>
+<p>The line lesson gave us the length of a displacement. Here <code>(local_position - last).length()</code> measures from the last <strong>retained</strong> position to the point's current one.</p>
+<p><code>&gt;=</code> means greater than or equal to. The <code>if</code> asks whether that distance has reached <code>MIN_SEGMENT_DISTANCE</code>: <code>0.05</code> metres, or five centimetres. When the answer is true, Godot runs the indented block: append the position and redraw the trace. When it is false, that block is skipped. The coordinate readout still updates each frame.</p>
+<p>The indentation belongs to the code. The POINTS readout sits outside the <code>if</code>; it runs whether or not we add an entry.</p>
+<p>Move by a little, then a little more. The smaller movements can accumulate because we keep comparing with the last accepted position, not the previous frame. Holding still adds no duplicate positions merely because time passes.</p>
+<p>The threshold is a minimum movement for acceptance, not a promise of equally spaced points. Move a long way between two frames and the next segment can be longer than five centimetres. The program joins the positions it kept; it does not recover every bend between them.</p>
+<h2 id="Point_Trace--tutorial--a-loop-joins-the-neighbours">A loop joins the neighbours</h2>
+<p><code>for i in range(1, positions.size())</code> visits the indices from 1 up to, but not including, the size. With four entries, <code>i</code> becomes 1, then 2, then 3. Each visit runs the indented instructions again with that index.</p>
+<p><code>positions[i - 1]</code> is the preceding position. <code>positions[i]</code> is the next. The loop therefore draws 0–1, 1–2 and 2–3: three segments for four retained positions. Starting at 1 keeps the previous index valid. With only the seeded entry, the range is empty and no segment is drawn.</p>
+<p>Inside that loop, the construction from Lines returns: find the displacement, create a <code>LineSkin</code>, and give it the start, displacement and length. We can join many positions without creating a pickup body for every one.</p>
+<p>The shorter loop above it visits the old segment nodes in <code>trail.get_children()</code>. <code>queue_free()</code> schedules their removal at the end of the frame. Then we draw the retained list afresh. This keeps the teaching example small and makes the neighbour loop visible; it is intended for short drawings. Clearing these drawings does not erase <code>positions</code>.</p>
+<p><code>_process()</code> repeats over frames. The <code>for</code> loop visits entries within one update. These are different kinds of repetition.</p>
+<h2 id="Point_Trace--tutorial--change-the-record">Change the record</h2>
+<p>Change <code>MIN_SEGMENT_DISTANCE</code> from <code>0.05</code> to <code>0.20</code>. Draw a small bend, then enlarge it. More movement is needed to add another entry; fewer corners may survive. Restore <code>0.05</code>.</p>
+<p>For a loop experiment, change <code>range(1, positions.size())</code> to <code>range(1, positions.size() - 1)</code>. Draw again. The array and count still grow, but the last neighbouring pair is not drawn. You changed the display's traversal, not the record. Restore the original range.</p>
+<p>Now make your own short shape and return towards its beginning. Predict the next retained entry before moving. A return can add an earlier location again at a later index: the list keeps order, not just distinct places.</p>
+<h2 id="Point_Trace--tutorial--the-carried-point-point_bodygd">The carried point — point_body.gd</h2>
+<p>Keep this file unchanged from Lines. It is repeated here so the complete example is visible; it creates the same body and inherits the same pickup behaviour.</p>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2 id="Point_Trace--tutorial--the-drawing-helper-line_skingd">The drawing helper — line_skin.gd</h2>
+<p>Keep the same helper from Lines. It draws a visible cylinder for a supplied start, displacement and length; it neither records movement nor adds collision. Its complete code is repeated here so these three files are sufficient within the prepared project. The orientation calculation remains supplied.</p>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Point_Trace--tutorial--keep-the-record-for-what-comes-next">Keep the record for what comes next</h2>
+<p>Our positions belong to <code>PointStudy</code>'s local frame. Moving or turning the station carries the drawing with it. We record the point's centre whenever it moves far enough; this small recorder follows the point itself, with no separate pen-tip model.</p>
+<p>Release the held point when you have a drawing to keep. The supplied <code>TraceArchive</code> saves the retained positions <strong>and the segments already made from them</strong>. Grid will place this saved drawing as a sculpture. You will not draw it again or make another sphere there.</p>
+<p><code>TraceArchive.keep_on_release(point, trail, positions)</code> supplies the release connection and waits for the current redraw before packing the snapshot. An intentional release keeps the drawing; removing the study or closing its scene does not replace the saved work. The transport uses local positions in metres; the museum hall's world offset is not baked into the gesture. The archive has no timestamps. A later valid release replaces your saved drawing. Releasing before two positions exist leaves the previous file alone.</p>
+<h2 id="Point_Trace--tutorial--supplied-transport-trace_archivegd">Supplied transport — trace_archive.gd</h2>
+<p>Keep this file beside the lesson scripts. It packs a snapshot of the existing segment nodes and stores the position array as metadata. The source trace remains live and unchanged. <code>user://ada_student_trace.scn</code> belongs to this Godot project's user-data directory, so Trace and Grid must run in the same project. Serialization is supplied here; arrays, sampling and traversal remain this lesson's focus.</p>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<p>Carry that saved drawing into Grid. Its position data can be read again; its existing visible form can be placed in another hall.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Trace/trace.gd" rel="noopener" target="_blank">Current trace.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_Line_Grid" class="hall"><div class="hall-head"><span>06 / 15 · Grid</span><a href="final.html#Point_Line_Grid">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Line_Grid--tutorial--point-grid-place-the-drawing-you-made">Point Grid — place the drawing you made</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Loading your saved trace</li>
+<li>Reusing a drawing as a sculpture</li>
+<li>One record, different representations</li>
+<li>Source positions and grid addresses</li>
+<li>Integer coordinates and rounding</li>
+<li>Changing a copy while keeping the original</li>
+</ul>
+<p>We are in the Endless Museum. In Trace, you moved the held point and released it to save the drawing. Here, place that drawing beside the ruled field. The gesture has become something you can walk around.</p>
+<p>The pink sculpture is your saved work: the same retained positions and the same segment geometry. We do not build another point or ask for another gesture. <strong>One record can support different representations.</strong> Here we derive grid addresses from it and change a separate green copy.</p>
+<p>Trace stored selected samples of movement, not the whole continuous gesture. Its ordered array, visible segments and rounded addresses each let us do different work. Keeping the source means another interpretation can begin without pretending that rounding recovered everything the hand did.</p>
+<h2 id="Point_Line_Grid--tutorial--bring-your-drawing">Bring your drawing</h2>
+<p>Continue in the <strong>same working copy of the museum</strong>. Keep <code>trace.gd</code> for returning to Trace. Save <code>grid.gd</code> beside <code>trace_archive.gd</code> and the unchanged <code>line_skin.gd</code>, then attach it to your unit-scale <code>PointStudy</code> on the clear floor beside Grid's glass field. The museum provides the hall, light and player.</p>
+<p>Release the point in Trace before leaving. The supplied archive stores a snapshot under <code>user://ada_student_trace.scn</code>; opening Grid loads that snapshot. Without a saved drawing, the readout asks you to return to Trace. It does not invent a replacement. Grid never writes this file.</p>
+<p>The first copy stays pink. The two copies stand 1.6 metres apart so you can compare them; these display offsets do not change the saved positions or the grid calculation. A second copy receives its own mesh and material resources before any changes. We reuse the segment renderer from Lines to place those copied segments between rounded positions. The original sculpture keeps the hand's recorded form.</p>
+<h2 id="Point_Line_Grid--tutorial--the-complete-grid-program-gridgd">The complete Grid program — grid.gd</h2>
+<!-- student-code:grid.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const TraceArchive = preload("trace_archive.gd")
+const LineSkin = preload("line_skin.gd")
+
+var sculpture: Node3D
+var grid_copy: Node3D
+var positions := PackedVector3Array()
+var addresses: Array[Vector3i] = []
+var grid_step := 0.25
+var readout: Label3D
+
+func _ready() -&gt; void:
+    readout = Label3D.new()
+    readout.position = Vector3(0, 2.0, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.003
+    add_child(readout)
+
+    sculpture = TraceArchive.load_drawing()
+    if sculpture == null:
+        readout.text = "Draw in Trace, then release the point to save."
+        return
+    add_child(sculpture)
+    positions = sculpture.get_meta("positions").duplicate()
+
+    grid_copy = sculpture.duplicate() as Node3D
+    add_child(grid_copy)
+    sculpture.position.x = -0.8
+    grid_copy.position.x = 0.8
+    for i in grid_copy.get_child_count():
+        var segment := grid_copy.get_child(i)
+        var original := sculpture.get_child(i)
+        segment.set_script(LineSkin)
+        segment.mesh = original.mesh.duplicate()
+        segment.material_override = original.material_override.duplicate()
+        segment.material_override.albedo_color = Color(0.25, 0.85, 0.60)
+    _place_on_grid()
+
+func _place_on_grid() -&gt; void:
+    addresses.clear()
+    for p in positions:
+        addresses.append(Vector3i(
+            roundi(p.x / grid_step),
+            roundi(p.y / grid_step),
+            roundi(p.z / grid_step)
+        ))
+    for i in range(1, addresses.size()):
+        var a := Vector3(addresses[i - 1]) * grid_step
+        var b := Vector3(addresses[i]) * grid_step
+        var displacement := b - a
+        grid_copy.get_child(i - 1).show_segment(a, displacement, displacement.length())
+    readout.text = "YOUR SAVED TRACE\nPOINTS " + str(positions.size())
+    readout.text += "\nGRID " + str(grid_step) + " m"
+</code></pre>
+<p><code>load_drawing()</code> returns the saved sculpture, including its recorded positions. <code>add_child(sculpture)</code> places it under this study. The positions are local to the study and measured in metres; the hall supplies the study's location. Moving the study moves the sculpture as a whole without rewriting the gesture.</p>
+<p><code>duplicate()</code> makes a second node tree. The saved sculpture is static. We attach the familiar <code>LineSkin</code> script only to the copy we want to change, then give each copied segment its own saved mesh and material. Otherwise changing a segment's length or colour could change the pink original. This is the same ownership question we met with two PointBody instances. The archive saves shapes and transforms, so loading the pink sculpture does not rerun its construction script.</p>
+<h2 id="Point_Line_Grid--tutorial--an-entry-is-not-an-address">An entry is not an address</h2>
+<p><code>positions[2]</code> means the third sample in the recorded order. A <code>Vector3i</code> address instead counts grid intervals from this study's origin. At a spacing of 0.25 metres, X = 0.10 rounds to address 0; X = 0.15 rounds to 1. X = -0.15 rounds to -1. At exact halfway values, <code>roundi()</code> rounds away from zero.</p>
+<p>Multiplying the address by the spacing returns a position in metres. The loop visits neighbouring addresses and calls the renderer we already used in Trace. Two entries can receive the same address; they stay in the record, while their zero-length connecting segment becomes invisible. All three coordinates are rounded, including height.</p>
+<p>The saved original remains untouched. We change only the green copy's existing segments. Their connections can be diagonal; this is not a route restricted to grid edges.</p>
+<h2 id="Point_Line_Grid--tutorial--change-a-rule-keep-your-work">Change a rule, keep your work</h2>
+<p>Change <code>grid_step</code> from <code>0.25</code> to <code>0.50</code> and run the study again. Both versions load the same saved sculpture; you do not repeat the gesture. Walk around it and compare the two forms. Restore <code>0.25</code> afterwards.</p>
+<p>Before switching, choose a corner and predict its new address. Find two visits that acquire the same address. Switch back: the finer interpretation returns because the original data was kept, not because coarse rounding can be reversed.</p>
+<p>For one experiment, replace <code>roundi(p.y / grid_step)</code> with <code>0</code>. Run Grid again. Pink keeps the recorded height; green is placed on the study's Y = 0 plane. Restore the expression. This is a one-line edit to the complete program above.</p>
+<h2 id="Point_Line_Grid--tutorial--carried-renderer-line_skingd">Carried renderer — line_skin.gd</h2>
+<p>The saved segments use this same file from Lines and Trace. Its full code is here for completeness; Grid introduces no new recipe for a sphere, cylinder or face.</p>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Point_Line_Grid--tutorial--supplied-archive-trace_archivegd">Supplied archive — trace_archive.gd</h2>
+<p>This is the same transport used by Trace. Grid calls its loading function; it does not call <code>save_drawing()</code>. Keep the file and renderer paths stable in your working project while using the saved scene.</p>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<p>One drawing can now be a record, a sculpture and material for another calculation. Keep its original positions. Triangle can select three corners from them and ask what closes the boundary and gives it a face.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid.gd" rel="noopener" target="_blank">Current grid.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid_flat_y.gd" rel="noopener" target="_blank">Complete experiment: grid_flat_y.gd</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_Triangle_Context" class="hall"><div class="hall-head"><span>07 / 15 · Triangle</span><a href="final.html#Point_Triangle_Context">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Triangle_Context--tutorial--three-positions-become-a-face">Three positions become a face</h1>
+<h2 id="Point_Triangle_Context--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Three selected array entries</li>
+<li>A closed boundary and a face</li>
+<li>Clockwise vertex order</li>
+<li>A guard for a collapsed triangle</li>
+</ul>
+<h2 id="Point_Triangle_Context--tutorial--in-the-museum">In the museum</h2>
+<p>Your drawing has reached Grid as a sculpture. Here, choose three positions from its original record. The triangle tools in this hall show the difference between connecting corners and giving the space between them a surface. We will make that difference with the point and line classes already used.</p>
+<p>The saved record still uses the drawing station's local metres. Grid's rounded copy did not replace it. This lesson reads the original archive and creates three temporary PointBody handles at selected entries. It does not save their later edits back to the drawing.</p>
+<p>Lines already connected two positions. The new step is to store a connection as a recipe that refers to entries in a position list. Three Vector3 values alone do not instruct Godot to draw a face. We choose which entries belong together and in which order; the same stored position can later belong to several faces.</p>
+<h2 id="Point_Triangle_Context--tutorial--make-this-study">Make this study</h2>
+<p>Start with CORNERS = Vector3i(0, 1, 2). These are <strong>entry numbers</strong>, not spatial coordinates. If those entries lie on one straight segment of your drawing, lift one handle to make a face, or choose another triple in the record. A trace with fewer than three entries needs another visit to Trace.</p>
+<p>Attach lesson.gd to an empty Node3D named TriangleStudy in your working copy of this museum hall. Keep its scale at one; its translation places the study without changing the saved local measurements. The existing museum supplies the player, camera, light and XR pickup functions. This program constructs its own handles, edges, face and label.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Point_Triangle_Context--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const PointBody = preload("point_body.gd")
+const FaceBody = preload("face_body.gd")
+const Archive = preload("trace_archive.gd")
+const CORNERS := Vector3i(0, 1, 2)
+var handles: Array[Node3D] = []
+var points: Array[Vector3] = []
+var face := FaceBody.new()
+var message := Label3D.new()
+
+func _ready() -&gt; void:
+    add_child(face)
+    add_child(message)
+    message.position = Vector3(0, 2, 0)
+    message.font_size = 32
+    message.pixel_size = 0.003
+    var drawing := Archive.load_drawing()
+    if drawing == null:
+        message.text = "Return to Trace; draw and release the point."
+        return
+    var record: PackedVector3Array = drawing.get_meta("positions")
+    drawing.free()
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        if index &lt; 0 or index &gt;= record.size():
+            message.text = "Choose three indices inside the saved record."
+            return
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        var point := PointBody.new()
+        point.position = record[index]
+        add_child(point)
+        handles.append(point)
+
+func _process(_delta: float) -&gt; void:
+    if handles.size() != 3:
+        return
+    var current: Array[Vector3] = []
+    for point in handles:
+        current.append(point.position)
+    if current == points:
+        return
+    points = current
+    if face.show_faces(points, [Vector3i(0, 1, 2)]):
+        message.text = "Three positions; one face."
+    else:
+        message.text = "Separate the corners; lift one off the line."
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-point_bodygd">Dependency: point_body.gd</h3>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h3 id="Point_Triangle_Context--tutorial--dependency-trace_archivegd">Dependency: trace_archive.gd</h3>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<h2 id="Point_Triangle_Context--tutorial--read-the-construction">Read the construction</h2>
+<p><code>record[index]</code> reads one saved position. <code>PointBody.new()</code> gives it the same visible, pickable body you already know. The three handles can move independently; their current local positions form a short array.</p>
+<p><code>Vector3i(0, 1, 2)</code> tells FaceBody which three entries to visit, in order. Its renderer adds three edges and a triangular surface. The points specify <strong>where</strong>; the triple specifies <strong>how they connect</strong>. This is a face recipe, not another set of positions.</p>
+<p>Order matters. Godot treats clockwise vertices, viewed from the front, as a front face. Walk around the triangle: this example keeps normal back-face culling. Reversing the triple to <code>Vector3i(0, 2, 1)</code> reverses the front. The outline remains visible from either side.</p>
+<p>Three collinear positions enclose no area. FaceBody checks the cross-product magnitude before submitting vertices and clears the previous face when the triangle collapses. The cross product is supplied here as the area-and-normal calculation; vector products return in Forces. The small threshold also rejects nearly collapsed triangles. The helper creates visible geometry, not a physical barrier.</p>
+<h2 id="Point_Triangle_Context--tutorial--make-it-your-own">Make it your own</h2>
+<p>Choose another three saved entries. Make a valid face, flatten it until it disappears, then restore it. Reverse the order and explain which side is now the front. Keep the original saved drawing unchanged.</p>
+<p>Carry forward the position array, its ordered face recipe, and FaceBody. The next hall adds a fourth position and asks whether several faces can enclose a volume.</p>
+<h2 id="Point_Triangle_Context--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>Godot documents clockwise front faces and ordered vertex submission in <a href="https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html" rel="noopener" target="_blank">SurfaceTool</a>.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Triangle_Context/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Polythedra" class="hall"><div class="hall-head"><span>08 / 15 · Polyhedra</span><a href="final.html#Primitives_Polythedra">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Polythedra--tutorial--four-positions-enclose-a-body">Four positions enclose a body</h1>
+<h2 id="Primitives_Polythedra--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Shared vertices</li>
+<li>A list of face-index triples</li>
+<li>Tetrahedron connectivity</li>
+<li>Surface enclosure versus collision</li>
+</ul>
+<h2 id="Primitives_Polythedra--tutorial--in-the-museum">In the museum</h2>
+<p>A tetrahedron is the smallest closed body made entirely of triangular faces. The museum's polyhedra let you encounter a surface from outside and imagine the volume it encloses. Our construction begins with the same three saved entries used for Triangle and adds one point behind their face.</p>
+<p>This lesson reloads the original Trace record. Moving a temporary Triangle handle did not change that file. Use the same CORNERS triple you selected there; the number of stored drawing entries determines which indices are available.</p>
+<h2 id="Primitives_Polythedra--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a unit-scale Node3D named PolyhedronStudy in this hall's working copy. Copy FaceBody, LineSkin and TraceArchive alongside it. All are printed below. No replacement camera, player or room is required.</p>
+<p>The body uses a two-sided material so that removing a face lets you see the remaining surfaces from inside. Their winding still defines a front, as in Triangle; this display choice does not add volume or collision.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Polythedra--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const Archive = preload("trace_archive.gd")
+const FaceBody = preload("face_body.gd")
+const CORNERS := Vector3i(0, 1, 2)
+const DEPTH := 0.6
+var points: Array[Vector3] = []
+var faces: Array[Vector3i] = [
+    Vector3i(0, 1, 2), Vector3i(0, 3, 1),
+    Vector3i(1, 3, 2), Vector3i(2, 3, 0)]
+var body := FaceBody.new()
+var message := Label3D.new()
+
+func _ready() -&gt; void:
+    body.surface.material_override.cull_mode = BaseMaterial3D.CULL_DISABLED
+    add_child(body)
+    add_child(message)
+    message.position = Vector3(0, 2, 0)
+    message.pixel_size = 0.003
+    var drawing := Archive.load_drawing()
+    if drawing == null:
+        message.text = "Bring a drawing from Trace."
+        return
+    var record: PackedVector3Array = drawing.get_meta("positions")
+    drawing.free()
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        if index &lt; 0 or index &gt;= record.size():
+            message.text = "Choose three saved indices."
+            return
+    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:
+        points.append(record[index])
+    var normal := (points[2] - points[0]).cross(points[1] - points[0])
+    if normal.length() &lt; 0.00001 or DEPTH &lt;= 0.0:
+        message.text = "Use a valid triangle and a positive depth."
+        return
+    var centre := (points[0] + points[1] + points[2]) / 3.0
+    points.append(centre - normal.normalized() * DEPTH)
+    body.show_faces(points, faces)
+    message.text = "%d positions; %d faces." % [points.size(), faces.size()]
+</code></pre>
+<h3 id="Primitives_Polythedra--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Primitives_Polythedra--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h3 id="Primitives_Polythedra--tutorial--dependency-trace_archivegd">Dependency: trace_archive.gd</h3>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<h2 id="Primitives_Polythedra--tutorial--read-the-construction">Read the construction</h2>
+<p><code>points</code> holds four positions. <code>faces</code> holds four <strong>triples of indices into points</strong>. In <code>Vector3i(0, 3, 1)</code>, the renderer reads entries zero, three and one; it does not create three new independent corners.</p>
+<p>The fourth position starts at the base triangle's centre and moves DEPTH metres behind its front. Using the base normal means the apex remains off the base plane whichever way the saved triangle faces. A zero-area base cannot define that normal; the guard stops before normalizing it. DEPTH must be positive.</p>
+<p>Each of the tetrahedron's six edges belongs to exactly two faces. Adjacent faces traverse their common edge in opposite directions, keeping their fronts outside. The renderer reads the same position again wherever its index occurs. For flat lighting it submits separate render vertices per face, but the construction still has four shared positions.</p>
+<p>Change <code>points[3]</code>, then call <code>body.show_faces(points, faces)</code> again. Three faces move with that one entry. Editing an index changes a connection instead. A closed mesh is still only a visible surface: this program adds no collision shape.</p>
+<h2 id="Primitives_Polythedra--tutorial--make-it-your-own">Make it your own</h2>
+<p>Replace the selected base with another valid triple, then halve DEPTH. Check that all four faces remain and that the apex is still off the base plane. Explain why a fifth copied point would not automatically become part of the enclosure.</p>
+<p>Carry the separation between positions and connectivity into Cube. A longer face list will reuse the same renderer.</p>
+<h2 id="Primitives_Polythedra--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>Godot documents clockwise front faces and ordered vertex submission in <a href="https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html" rel="noopener" target="_blank">SurfaceTool</a>.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Polythedra/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Point_Animatedcube" class="hall"><div class="hall-head"><span>09 / 15 · Cube</span><a href="final.html#Point_Animatedcube">Read the reflection here ↗</a></div><div class="prose"><h1 id="Point_Animatedcube--tutorial--eight-corners-twelve-triangles">Eight corners, twelve triangles</h1>
+<h2 id="Point_Animatedcube--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>A reusable CubeBody class</li>
+<li>Shared corner data</li>
+<li>Two triangles per square side</li>
+<li>Connectivity versus object position</li>
+</ul>
+<h2 id="Point_Animatedcube--tutorial--in-the-museum">In the museum</h2>
+<p>The cube appears simple enough to arrive ready-made. The diagonal study in this hall exposes a decision hidden by that familiar outline: a square surface is represented here by two triangles. Build one cube, then a second with the other diagonal on its front side.</p>
+<p>We keep FaceBody from the preceding halls. CubeBody adds a particular set of eight positions and twelve index triples. It is the cube we can carry into Transformation and Arrays.</p>
+<h2 id="Point_Animatedcube--tutorial--make-this-study">Make this study</h2>
+<p>Put the four printed files in one lesson folder and attach lesson.gd to an empty unit-scale Node3D named CubeStudy in the museum hall. CubeBody constructs its visible mesh itself. The placements in lesson.gd leave room between two one-metre cubes; they do not alter their local vertex data.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Point_Animatedcube--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const CubeBody = preload("cube_body.gd")
+var first := CubeBody.new()
+var second := CubeBody.new()
+
+func _ready() -&gt; void:
+    first.position = Vector3(-0.7, 0.7, 0)
+    second.position = Vector3(0.7, 0.7, 0)
+    add_child(first)
+    add_child(second)
+    second.other_diagonal()
+</code></pre>
+<h3 id="Point_Animatedcube--tutorial--dependency-cube_bodygd">Dependency: cube_body.gd</h3>
+<!-- student-code:cube_body.gd -->
+<pre><code class="language-gdscript">extends "face_body.gd"
+# Eight shared positions; each triple addresses three entries.
+var points: Array[Vector3] = [
+    Vector3(-0.5, 0, -0.5), Vector3(0.5, 0, -0.5),
+    Vector3(0.5, 1, -0.5), Vector3(-0.5, 1, -0.5),
+    Vector3(-0.5, 0, 0.5), Vector3(0.5, 0, 0.5),
+    Vector3(0.5, 1, 0.5), Vector3(-0.5, 1, 0.5)]
+var faces: Array[Vector3i] = [
+    Vector3i(4, 7, 5), Vector3i(5, 7, 6),
+    Vector3i(0, 4, 1), Vector3i(1, 4, 5),
+    Vector3i(2, 6, 3), Vector3i(3, 6, 7),
+    Vector3i(1, 2, 0), Vector3i(0, 2, 3),
+    Vector3i(0, 3, 4), Vector3i(4, 3, 7),
+    Vector3i(5, 6, 1), Vector3i(1, 6, 2)]
+
+func _init() -&gt; void:
+    super()
+    show_faces(points, faces)
+
+func other_diagonal() -&gt; void:
+    faces[0] = Vector3i(4, 6, 5)
+    faces[1] = Vector3i(4, 7, 6)
+    show_faces(points, faces)
+</code></pre>
+<h3 id="Point_Animatedcube--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Point_Animatedcube--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Point_Animatedcube--tutorial--read-the-construction">Read the construction</h2>
+<p>CubeBody extends FaceBody, so it inherits the face renderer. Its <code>_init()</code> first calls <code>super()</code> to attach the parent's surface and edge container, then calls the renderer with this cube's recipe. Each call to <code>CubeBody.new()</code> creates a new object with its own position array, face array and mesh.</p>
+<p>The corners use x and z values of −0.5 or 0.5 and y values of zero or one. The first two triples cover the positive-z side. <code>other_diagonal()</code> changes those two triples, keeping the four corner positions fixed. The black internal line moves to the other diagonal; the square's boundary and area stay the same.</p>
+<p>Node position and vertex position do different jobs. <code>second.position</code> places the whole cube in the study. <code>second.points[6] += Vector3(0, 0, 0.35)</code> changes one local corner; call <code>second.show_faces(second.points, second.faces)</code> afterward to redraw it. Every face using entry six changes. A formerly square side can become two angled planes, making the diagonal matter to the surface itself.</p>
+<p>These cubes have visible edges and faces, without colliders. The wider prefab collection in the museum remains available for reflection; it is not another construction dependency.</p>
+<h2 id="Point_Animatedcube--tutorial--make-it-your-own">Make it your own</h2>
+<p>Make a third CubeBody and place it somewhere else. Change one corner on that instance and redraw it. Verify that the first two cubes keep their shapes. Then explain the difference between moving a body and editing the data from which it is made.</p>
+<p>Keep CubeBody. The next hall asks whether a short rule can generate a position list that we have so far written out.</p>
+<h2 id="Point_Animatedcube--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>Godot documents clockwise front faces and ordered vertex submission in <a href="https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html" rel="noopener" target="_blank">SurfaceTool</a>.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Animatedcube/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Ignorance" class="hall"><div class="hall-head"><span>10 / 15 · Primitives</span><a href="final.html#Primitives_Ignorance">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Ignorance--tutorial--a-rule-produces-positions">A rule produces positions</h1>
+<h2 id="Primitives_Ignorance--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Functions and typed return values</li>
+<li>Parameters and arguments</li>
+<li>Symmetry as a construction rule</li>
+<li>Independent generated results</li>
+</ul>
+<h2 id="Primitives_Ignorance--tutorial--in-the-museum">In the museum</h2>
+<p>Among the Platonic solids, the octahedron offers a compact rule: put a position at each end of three perpendicular axes. Six positions replace a long list of coordinates. The geometry courtyard gives the result a place; this lesson makes its construction available to you.</p>
+<p>The hanging black point near the exit previews the next lesson: holding it reduces its rings and segments, and the trigger sends its current form. You can try it here; this tutorial stays with the rule that produces positions. Primitives_Godot returns to the same point to explain its resolution parameters.</p>
+<p>In Cube, you wrote the corner positions into a list. Here you write a rule that returns a list for each radius you give it. Arrays, loops and the face renderer return; a named function makes their work reusable. We supply the eight face triples so that the lesson stays with generating positions.</p>
+<p>You can still work out every coordinate. What changes is where you make the decision: choose the rule and its input, then inspect the positions they produce. Later generators can produce more than you would want to place one point at a time.</p>
+<h2 id="Primitives_Ignorance--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a Node3D named GeneratorStudy in this museum hall. FaceBody and LineSkin are unchanged. The two calls deliberately use different radii and store their results separately.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Ignorance--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const FaceBody = preload("face_body.gd")
+# Connectivity is supplied; this lesson generates the positions.
+const FACES: Array[Vector3i] = [
+    Vector3i(2, 0, 4), Vector3i(2, 4, 1),
+    Vector3i(2, 1, 5), Vector3i(2, 5, 0),
+    Vector3i(3, 4, 0), Vector3i(3, 1, 4),
+    Vector3i(3, 5, 1), Vector3i(3, 0, 5)]
+var small_points: Array[Vector3] = []
+var large_points: Array[Vector3] = []
+
+func _ready() -&gt; void:
+    small_points = octahedron_positions(0.3)
+    large_points = octahedron_positions(0.6)
+    var small := FaceBody.new()
+    var large := FaceBody.new()
+    small.position = Vector3(-0.7, 1.1, 0)
+    large.position = Vector3(0.7, 1.1, 0)
+    add_child(small)
+    add_child(large)
+    small.show_faces(small_points, FACES)
+    large.show_faces(large_points, FACES)
+
+func octahedron_positions(radius: float) -&gt; Array[Vector3]:
+    assert(radius &gt; 0.0)
+    var result: Array[Vector3] = []
+    for axis in [Vector3.RIGHT, Vector3.UP, Vector3.BACK]:
+        result.append(axis * radius)
+        result.append(-axis * radius)
+    return result
+</code></pre>
+<h3 id="Primitives_Ignorance--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Primitives_Ignorance--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Primitives_Ignorance--tutorial--read-the-construction">Read the construction</h2>
+<p><code>radius</code> is the function's parameter. The numbers 0.3 and 0.6 are arguments supplied by two calls. <code>-&gt; Array[Vector3]</code> names the kind of value returned: a list of positions. The positive-radius assertion states the function's domain.</p>
+<p>For each positive axis, the loop appends one position and its opposite. The order is +X, −X, +Y, −Y, +Z, −Z. The supplied face list depends on that order. Rearranging the list without changing the faces would make a different set of connections.</p>
+<p>The function builds a fresh <code>result</code> on every call and returns it. It does not place a body in the room or draw anything. FaceBody takes the returned data and renders it. This separates generating positions from displaying them without introducing a general-purpose factory.</p>
+<p>Changing a returned position changes one result. Changing the rule changes future results. Neither operation makes a claim about which sculpture is better. Radius, geometric relationship and aesthetic judgment are different decisions.</p>
+<h2 id="Primitives_Ignorance--tutorial--make-it-your-own">Make it your own</h2>
+<p>Call the function with 0.45. Use the returned array to display a third body. Move one entry in that array, redraw only that body, and verify that the other two remain unchanged. Describe the symmetry your edit broke.</p>
+<p>Carry the idea of a parameter controlling a construction. In Godot Primitives, return to your original sphere and make two of the engine's construction parameters available while holding it.</p>
+<h2 id="Primitives_Ignorance--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Ignorance/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Godot" class="hall"><div class="hall-head"><span>11 / 15 · Godot primitives</span><a href="final.html#Primitives_Godot">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Godot--tutorial--the-held-sphere-loses-resolution">The held sphere loses resolution</h1>
+<h2 id="Primitives_Godot--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Resolution as a construction parameter</li>
+<li>Rings and radial segments</li>
+<li>Visible construction and collision</li>
+<li>Independent mesh resources</li>
+</ul>
+<h2 id="Primitives_Godot--tutorial--in-the-museum">In the museum</h2>
+<p>Return to the small white sphere you could pick up in Coordinates and use to draw in Trace. In this hall, holding it changes its visible construction. Rings and radial segments decrease in small timed steps. Release it and the change pauses. Its size and physical boundary remain the same.</p>
+<p>The lesson is <strong>resolution as a parameter of construction</strong>: the same named sphere can have several finite meshes. Change rings while keeping radial segments fixed, then reverse that comparison. Keep radius and the spherical collider unchanged.</p>
+<p>Pickup returns from Coordinates. PointBody and the class extension return from earlier lessons; the short held-time controller is supplied support for this comparison. Its complete code and explanation remain below, but reconstructing the timer is not the new learning goal. The museum's wider primitive library is available to explore.</p>
+<h2 id="Primitives_Godot--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a unit-scale Node3D named ResolutionStudy in the working museum hall. The existing XR Tools hands provide pickup. The two spheres use the same class but own separate resources. To repeat the comparison, restart the study. The supplied <code>ui_accept</code> action also calls <code>reset_resolution()</code> on both spheres; its input binding belongs to Day Zero.</p>
+<p>PointBody is a small later edition of the earlier file: <code>sphere</code> is now a member variable instead of a local <code>_init</code> variable. Its radius, height, collider, material defaults and pickup settings are unchanged. Keep this edition in this lesson folder; earlier tested scripts need no edits.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Godot--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const ResolutionPoint = preload("resolution_point.gd")
+var point := ResolutionPoint.new()
+var comparison := ResolutionPoint.new()
+var message := Label3D.new()
+
+func _ready() -&gt; void:
+    point.position = Vector3(-0.3, 1.12, 0)
+    comparison.position = Vector3(0.3, 1.12, 0)
+    add_child(point)
+    add_child(comparison)
+    add_child(message)
+    message.position = Vector3(0, 1.65, 0)
+    message.pixel_size = 0.002
+
+func _process(delta: float) -&gt; void:
+    point.advance(delta)
+    comparison.advance(delta)
+    if Input.is_action_just_pressed("ui_accept"):
+        point.reset_resolution()
+        comparison.reset_resolution()
+    message.text = "RINGS %d   SEGMENTS %d" % [point.sphere.rings, point.sphere.radial_segments]
+</code></pre>
+<h3 id="Primitives_Godot--tutorial--dependency-point_bodygd">Dependency: point_body.gd</h3>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+var sphere := SphereMesh.new()
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h3 id="Primitives_Godot--tutorial--dependency-resolution_pointgd">Dependency: resolution_point.gd</h3>
+<!-- student-code:resolution_point.gd -->
+<pre><code class="language-gdscript">extends "point_body.gd"
+const START_RINGS := 16
+const START_SEGMENTS := 32
+const STEP_SECONDS := 0.15
+var elapsed := 0.0
+
+func _init() -&gt; void:
+    super()
+    reset_resolution()
+
+func advance(delta: float) -&gt; void:
+    if not is_picked_up():
+        return
+    elapsed += delta
+    while elapsed + 0.000001 &gt;= STEP_SECONDS:
+        elapsed = maxf(0.0, elapsed - STEP_SECONDS)
+        sphere.rings = maxi(1, sphere.rings - 1)
+        sphere.radial_segments = maxi(4, sphere.radial_segments - 1)
+
+func reset_resolution() -&gt; void:
+    elapsed = 0.0
+    sphere.rings = START_RINGS
+    sphere.radial_segments = START_SEGMENTS
+</code></pre>
+<h2 id="Primitives_Godot--tutorial--read-the-construction">Read the construction</h2>
+<p>ResolutionPoint extends PointBody. <code>super()</code> runs the base constructor, which constructs the visible sphere and physical boundary; the added class controls the existing sphere mesh. <code>sphere.rings</code> divides the construction along its height; <code>sphere.radial_segments</code> divides it around the axis. Neither setting changes its radius.</p>
+<p><code>advance(delta)</code> receives elapsed seconds from the hall's <code>_process</code>. Its first condition returns immediately while the point is not held. Otherwise it accumulates time. A <code>while</code> loop consumes every complete 0.15-second interval, including several intervals during a long frame. Release preserves the remaining fraction, and re-grabbing continues it.</p>
+<p><code>maxi</code> stops rings at one and radial segments at four, the valid lower bounds used here. We approach a coarse sphere, not a zero-vertex object. The analytical sphere collider remains round: seeing a faceted mesh does not imply feeling a faceted boundary.</p>
+<p><code>reset_resolution()</code> restores the two starting counts and clears the clock. Both calls to <code>ResolutionPoint.new()</code> construct their own mesh; changing one must not quietly change its neighbour.</p>
+<h2 id="Primitives_Godot--tutorial--make-it-your-own">Make it your own</h2>
+<p>First hold only the left sphere. Make a variant that decrements rings but leaves radial segments unchanged; make a second variant that changes only radial segments. Predict and compare the visible results. Identify what stayed the same: radius, collider and the untouched neighbour.</p>
+<p>As a separate check of the supplied controller, release halfway through an interval, wait, and resume. Its change should follow held time, not time spent looking at the sphere.</p>
+<p>Carry the same body and the distinction between shape, appearance, interaction and construction parameters. Columns next gives a family of forms three separate inputs.</p>
+<h2 id="Primitives_Godot--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>Parameter meanings: <a href="https://docs.godotengine.org/en/4.6/classes/class_spheremesh.html" rel="noopener" target="_blank">Godot 4.6 SphereMesh</a>. The minimum counts are checked by this lesson’s native tests.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Godot/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Columns" class="hall"><div class="hall-head"><span>12 / 15 · Columns</span><a href="final.html#Primitives_Columns">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Columns--tutorial--one-profile-several-resolutions">One profile, several resolutions</h1>
+<h2 id="Primitives_Columns--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>A profile as a radius list</li>
+<li>Nested loops over rings and sides</li>
+<li>Independent height and resolution</li>
+<li>Comparing one variable at a time</li>
+</ul>
+<h2 id="Primitives_Columns--tutorial--in-the-museum">In the museum</h2>
+<p>The colonnade varies outlines, heights and resolution. Begin with a controlled row: the same profile and height at 4, 6, 8, 12 and 16 sides. Once you can identify what resolution changes, give the columns different silhouettes.</p>
+<p>The octahedron lesson generated positions with a function. Here another function generates a stack of rings. Circle sampling and the surface stitcher are supplied below so that the new work stays with the profile, the two loops and their indexing.</p>
+<h2 id="Primitives_Columns--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a Node3D named ColumnStudy in this hall's working copy. Allow roughly five metres for the row. The program creates its own meshes and pale material. Keep positive radii, at least two profile entries, a positive height and at least three sides. For the first variations stay near the displayed dimensions; more samples consume more memory and drawing work.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Columns--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const Circle = preload("circle_samples.gd")
+const ColumnSurface = preload("column_surface.gd")
+const PROFILE: Array[float] = [0.35, 0.35, 0.18, 0.25, 0.4, 0.4]
+const HEIGHT := 2.2
+
+func _ready() -&gt; void:
+    var choices := [4, 6, 8, 12, 16]
+    for i in range(choices.size()):
+        var column := MeshInstance3D.new()
+        var points := column_positions(PROFILE, HEIGHT, choices[i])
+        column.mesh = ColumnSurface.make(points, choices[i])
+        column.position.x = (i - 2) * 1.0
+        var finish := StandardMaterial3D.new()
+        finish.albedo_color = Color(0.92, 0.91, 0.87)
+        finish.roughness = 0.7
+        column.material_override = finish
+        add_child(column)
+
+func column_positions(profile: Array[float], height: float, sides: int) -&gt; Array[Vector3]:
+    assert(profile.size() &gt;= 2 and height &gt; 0.0 and sides &gt;= 3)
+    var result: Array[Vector3] = []
+    for ring in range(profile.size()):
+        var y := height * ring / (profile.size() - 1)
+        for point in Circle.make(sides, profile[ring]):
+            result.append(point + Vector3(0, y, 0))
+    return result
+</code></pre>
+<h3 id="Primitives_Columns--tutorial--dependency-circle_samplesgd">Dependency: circle_samples.gd</h3>
+<!-- student-code:circle_samples.gd -->
+<pre><code class="language-gdscript">extends RefCounted
+# Supplied circle sampler. Angles return in the Waves sequence.
+static func make(sides: int, radius: float) -&gt; Array[Vector3]:
+    assert(sides &gt;= 3 and radius &gt; 0.0)
+    var points: Array[Vector3] = []
+    for side in range(sides):
+        var angle := TAU * side / sides
+        points.append(Vector3(cos(angle), 0, sin(angle)) * radius)
+    return points
+</code></pre>
+<h3 id="Primitives_Columns--tutorial--dependency-column_surfacegd">Dependency: column_surface.gd</h3>
+<!-- student-code:column_surface.gd -->
+<pre><code class="language-gdscript">extends RefCounted
+## Supplied renderer. Consecutive rings have the same number and order of samples.
+## It joins neighbours, closes the seam, and adds two planar caps. No collider.
+
+static func make(points: Array[Vector3], sides: int) -&gt; ArrayMesh:
+    assert(sides &gt;= 3 and points.size() &gt;= 2 * sides and points.size() % sides == 0)
+    var rings: int = points.size() / sides
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for ring in range(rings - 1):
+        for side in range(sides):
+            var next := (side + 1) % sides
+            var a := points[ring * sides + side]
+            var b := points[(ring + 1) * sides + side]
+            var c := points[ring * sides + next]
+            var d := points[(ring + 1) * sides + next]
+            triangle(builder, a, b, c)
+            triangle(builder, c, b, d)
+    var bottom := Vector3(0, points[0].y, 0)
+    var top := Vector3(0, points[-1].y, 0)
+    var last := (rings - 1) * sides
+    for side in range(sides):
+        var next := (side + 1) % sides
+        triangle(builder, bottom, points[side], points[next])
+        triangle(builder, top, points[last + next], points[last + side])
+    return builder.commit()
+
+static func triangle(builder: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -&gt; void:
+    # Outward normal from the ordered construction; Godot front faces are clockwise.
+    var normal := (b - a).cross(c - a).normalized()
+    for point in [a, c, b]:
+        builder.set_normal(normal)
+        builder.add_vertex(point)
+</code></pre>
+<h2 id="Primitives_Columns--tutorial--read-the-construction">Read the construction</h2>
+<p>PROFILE stores a radius for each height level. Its entries are spaced evenly from the bottom to the full HEIGHT. The outer loop visits a level; the inner loop visits positions around that level's circle. A profile of six entries at eight sides produces 48 positions.</p>
+<p><code>height * ring / (profile.size() - 1)</code> places the last ring exactly at the requested height. Circle.make supplies a ring in the x–z plane. Adding <code>(0, y, 0)</code> lifts it to the current level. Its cosine and sine are borrowed circle coordinates here; periodic motion returns to their meaning in Waves.</p>
+<p>ColumnSurface joins neighbouring rings, closes the last side to the first, and caps both ends. The side order must match at every ring. It connects samples with straight faces, so this small construction has piecewise straight profiles rather than the museum gallery's more elaborate curves. It adds no collision.</p>
+<p>Changing sides changes angular sampling. Changing PROFILE changes the silhouette. Changing HEIGHT stretches the spacing between its levels. A higher resolution is not a better proportion or a more interesting sculpture.</p>
+<h2 id="Primitives_Columns--tutorial--make-it-your-own">Make it your own</h2>
+<p>Keep eight sides and make a new positive-radius profile. Then keep that profile and change only its height. Finally use it for all five resolutions. Explain which differences come from your rule and which come from sampling it.</p>
+<p>Carry the profile-and-path distinction into the next hall, where the cross-section is borrowed from a letter rather than written as a radius list.</p>
+<h2 id="Primitives_Columns--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Columns/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Profiles" class="hall"><div class="hall-head"><span>13 / 15 · Borrowed outlines</span><a href="final.html#Primitives_Profiles">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Profiles--tutorial--a-letter-carries-its-opening">A letter carries its opening</h1>
+<h2 id="Primitives_Profiles--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>A supplied outline with a hole</li>
+<li>Cross-section versus route</li>
+<li>Sampling placements along a path</li>
+<li>Declaring a dependency</li>
+</ul>
+<h2 id="Primitives_Profiles--tutorial--in-the-museum">In the museum</h2>
+<p>An O can become a short hollow passage. Its interior opening is part of the source outline, not a hole we draw afterward. The museum's glyph gallery explores this relation at architectural scale. Here we use its existing outline-and-sweep builder for one small visible body.</p>
+<p>The lesson is <strong>a section carried along a route</strong>. Return first to the familiar column: at each height, its radius list chose the size of a ring. Imagine keeping those rings the same size and placing them along a straight route. Now substitute the supplied O outline for the ring. The section tells us what is carried; the route tells us where it goes.</p>
+<p>Start with the same O and width throughout. Change only the sideways travel, OFFSET. The font record, placement formula and surface builder are supplied support. Font extraction, triangulation, holes and general path orientation are not additional tasks to solve here.</p>
+<h2 id="Primitives_Profiles--tutorial--make-this-study">Make this study</h2>
+<p>Put lesson.gd, profile_sweep.gd, JetBrainsMono-Medium.ttf and its OFL licence in one folder. The font and licence are in this lesson's downloadable folder; let Godot import the font. Attach lesson.gd to a Node3D named ProfileStudy in the existing museum.</p>
+<p>This small example is a visible hollow mesh, without a collider. Its O has a lower sill, so “opening” does not mean a floor-level walk-through doorway. The museum's larger passage uses its own placement and collision setup.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Profiles--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const Sweep = preload("profile_sweep.gd")
+const FONT = preload("JetBrainsMono-Medium.ttf")
+const WIDTH := 1.4
+const DEPTH := 1.6
+const OFFSET := 0.5
+var section: Dictionary
+var frames: Array[Transform3D] = []
+var body := MeshInstance3D.new()
+
+func _ready() -&gt; void:
+    section = Sweep.profile(FONT, "O")
+    for i in range(5):
+        var fraction := i / 4.0
+        var at := Vector3(OFFSET * fraction, 1.1, DEPTH * fraction)
+        var frame := Transform3D(Basis.IDENTITY.scaled(Vector3.ONE * WIDTH), at)
+        frames.append(frame)
+    body.mesh = Sweep.make(section, frames)
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.78, 0.62, 0.72)
+    finish.roughness = 0.4
+    body.material_override = finish
+    add_child(body)
+</code></pre>
+<h3 id="Primitives_Profiles--tutorial--dependency-profile_sweepgd">Dependency: profile_sweep.gd</h3>
+<!-- student-code:profile_sweep.gd -->
+<pre><code class="language-gdscript">extends RefCounted
+## TextMesh supplies a triangulated 2D region, including holes and components.
+## A sequence of section frames turns that region into a body. No font is edited.
+
+static func profile(font: Font, glyph: String) -&gt; Dictionary:
+    var flat := TextMesh.new()
+    flat.font = font
+    flat.text = glyph
+    flat.font_size = 48
+    flat.pixel_size = .04
+    flat.curve_step = .5
+    flat.depth = 0
+    var arrays := flat.surface_get_arrays(0)
+    var vertices: PackedVector3Array = arrays[Mesh.ARRAY_VERTEX]
+    var indices: PackedInt32Array = arrays[Mesh.ARRAY_INDEX]
+    var bounds := flat.get_aabb()
+    assert(not vertices.is_empty() and bounds.size.y &gt; 0, "No vector glyph")
+    var points: Array[Vector2] = []
+    var ids: Array[int] = []
+    var lookup := {}
+    for vertex in vertices:
+        var p := Vector2(vertex.x - bounds.get_center().x, vertex.y - bounds.get_center().y) / bounds.size.y
+        var key := Vector2i(roundi(p.x * 1000000), roundi(p.y * 1000000))
+        if not lookup.has(key):
+            lookup[key] = points.size()
+            points.append(p)
+        ids.append(lookup[key])
+    var faces: Array[Vector3i] = []
+    var edges := {}
+    var count := indices.size() if not indices.is_empty() else vertices.size()
+    for i in range(0, count, 3):
+        var f := Vector3i(ids[indices[i]] if not indices.is_empty() else ids[i],
+            ids[indices[i+1]] if not indices.is_empty() else ids[i+1],
+            ids[indices[i+2]] if not indices.is_empty() else ids[i+2])
+        faces.append(f)
+        for e in [Vector2i(f.x, f.y), Vector2i(f.y, f.z), Vector2i(f.z, f.x)]:
+            var key := Vector2i(mini(e.x, e.y), maxi(e.x, e.y))
+            if edges.has(key):
+                edges[key][0] += 1
+            else:
+                edges[key] = [1, e]
+    var boundary: Array[Vector2i] = []
+    for entry in edges.values():
+        assert(entry[0] &lt;= 2, "Non-manifold source face")
+        if entry[0] == 1:
+            boundary.append(entry[1])
+    return {"glyph": glyph, "points": points, "faces": faces, "boundary": boundary}
+
+static func make(section: Dictionary, frames: Array[Transform3D], loop: bool = false) -&gt; ArrayMesh:
+    assert(frames.size() &gt;= 2)
+    var points: Array[Vector2] = section.points
+    var vertices := PackedVector3Array()
+    var normals := PackedVector3Array()
+    if not loop:
+        for f: Vector3i in section.faces:
+            _tri(vertices, normals, _at(points[f.x], frames[-1]), _at(points[f.y], frames[-1]), _at(points[f.z], frames[-1]))
+            _tri(vertices, normals, _at(points[f.z], frames[0]), _at(points[f.y], frames[0]), _at(points[f.x], frames[0]))
+    # Smooth only side walls. Cap normals remain distinct at the rim.
+    var side_start := vertices.size()
+    var smooth := {}
+    for e: Vector2i in section.boundary:
+        for i in range(frames.size() if loop else frames.size()-1):
+            var j := (i+1) % frames.size()
+            var a := _at(points[e.x], frames[i])
+            var b := _at(points[e.y], frames[i])
+            var c := _at(points[e.y], frames[j])
+            var d := _at(points[e.x], frames[j])
+            _tri(vertices, normals, a, b, c)
+            _tri(vertices, normals, a, c, d)
+    for i in range(side_start, vertices.size(), 3):
+        var normal := (vertices[i+2]-vertices[i]).cross(vertices[i+1]-vertices[i])
+        for j in 3:
+            var key := Vector3i((vertices[i+j]*100000).round())
+            smooth[key] = smooth.get(key, Vector3.ZERO) + normal
+    for i in range(side_start, vertices.size()):
+        normals[i] = (smooth[Vector3i((vertices[i]*100000).round())] as Vector3).normalized()
+    var arrays := []
+    arrays.resize(Mesh.ARRAY_MAX)
+    arrays[Mesh.ARRAY_VERTEX] = vertices
+    arrays[Mesh.ARRAY_NORMAL] = normals
+    var mesh := ArrayMesh.new()
+    mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+    mesh.set_meta("glyph", section.glyph)
+    mesh.set_meta("loop", loop)
+    return mesh
+
+static func _at(point: Vector2, frame: Transform3D) -&gt; Vector3:
+    return frame * Vector3(point.x, point.y, 0)
+
+static func _tri(v: PackedVector3Array, n: PackedVector3Array, a: Vector3, b: Vector3, c: Vector3) -&gt; void:
+    var normal := (c-a).cross(b-a).normalized() # Godot's clockwise front faces.
+    v.append_array(PackedVector3Array([a,b,c]))
+    n.append_array(PackedVector3Array([normal,normal,normal]))
+</code></pre>
+<h2 id="Primitives_Profiles--tutorial--read-the-construction">Read the construction</h2>
+<p><code>Sweep.profile(FONT, "O")</code> returns a Dictionary: named entries containing the outline positions, cap triangles and boundary edges. You borrow that record intact. Its inner boundary matters as much as its outside edge.</p>
+<p>Each Transform3D is a placement for one copy of that cross-section. The supplied expression uses a uniform WIDTH and the position <code>at</code>; it leaves all sections parallel. Transformation will examine the basis more closely. The loop creates five placements from fraction zero to one. DEPTH sets their z travel and OFFSET their total sideways travel. This version shears along a straight route; it does not solve arbitrary curved-path orientation.</p>
+<p><code>Sweep.make(section, frames)</code> connects corresponding boundary edges between placements and caps the material at the ends. It preserves the O's opening through those caps. The full helper is printed below as a declared dependency. The student-owned decisions are the chosen glyph, size and route—not a claim to have rebuilt font triangulation.</p>
+<h2 id="Primitives_Profiles--tutorial--make-it-your-own">Make it your own</h2>
+<p>Set OFFSET to zero; then give it the opposite sign. Keep the O, WIDTH and DEPTH unchanged. Predict the direction of travel and verify that the opening survives. Point to what belongs to the unchanged section and what came from its route.</p>
+<p>Once that distinction is clear, try C with the same route. Its gap connects the hollow to the outside; the material outline itself still has a closed boundary. Some glyphs have disconnected components, so one character need not make one connected solid.</p>
+<p>Carry the distinction between a rule you write and a structure you borrow. Portals asks how a finite construction can answer a question about an ideal form.</p>
+<h2 id="Primitives_Profiles--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p>The supplied sweep is copied from <code>commons/artifacts/glyph_profile_gallery/profile_sweep.gd</code>; JetBrains Mono is distributed with its OFL licence. Font geometry uses <a href="https://docs.godotengine.org/en/4.6/classes/class_textmesh.html" rel="noopener" target="_blank">Godot TextMesh</a>.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Profiles/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Portals" class="hall"><div class="hall-head"><span>14 / 15 · Limits</span><a href="final.html#Primitives_Portals">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Portals--tutorial--choose-a-useful-limit">Choose a useful limit</h1>
+<h2 id="Primitives_Portals--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>A closed neighbour loop</li>
+<li>Error in a stated unit</li>
+<li>A while loop with a stopping rule</li>
+<li>A finite work budget</li>
+</ul>
+<h2 id="Primitives_Portals--tutorial--in-the-museum">In the museum</h2>
+<p>A circle's perimeter offers a question that a finite polygon can answer approximately. How many sides are enough for a chosen measurement? The hall's encounters with limits give that question a wider setting; our program makes one bounded decision visible.</p>
+<p>Reuse Circle.make from Columns and LineSkin from Lines. There is no new shape factory. Add the lengths between neighbouring samples, including the last sample back to the first.</p>
+<h2 id="Primitives_Portals--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a unit-scale Node3D named LimitStudy in this museum hall. The polygon is drawn horizontally at hand height. TOLERANCE is an absolute perimeter error in metres; BUDGET is the maximum number of sides this run may use.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Portals--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const Circle = preload("circle_samples.gd")
+const LineSkin = preload("line_skin.gd")
+const RADIUS := 0.7
+const TOLERANCE := 0.01
+const BUDGET := 96
+var sides := 3
+var points: Array[Vector3] = []
+var error := 0.0
+var met := false
+var message := Label3D.new()
+
+func _ready() -&gt; void:
+    choose_resolution(TOLERANCE, BUDGET)
+    for i in range(points.size()):
+        var a := points[i] + Vector3(0, 1.1, 0)
+        var b := points[(i + 1) % points.size()] + Vector3(0, 1.1, 0)
+        var line := LineSkin.new()
+        add_child(line)
+        line.show_segment(a, b - a, a.distance_to(b))
+    add_child(message)
+    message.position = Vector3(0, 1.8, 0)
+    message.pixel_size = 0.002
+    message.text = "%d sides; error %.5f m; met: %s" % [sides, error, str(met)]
+
+func perimeter(record: Array[Vector3]) -&gt; float:
+    var total := 0.0
+    for i in range(record.size()):
+        total += record[i].distance_to(record[(i + 1) % record.size()])
+    return total
+
+func choose_resolution(tolerance: float, budget: int) -&gt; void:
+    assert(tolerance &gt; 0.0 and budget &gt;= 3)
+    sides = 3
+    while true:
+        points = Circle.make(sides, RADIUS)
+        error = absf(TAU * RADIUS - perimeter(points))
+        met = error &lt;= tolerance
+        if met or sides == budget:
+            break
+        sides = mini(sides * 2, budget)
+</code></pre>
+<h3 id="Primitives_Portals--tutorial--dependency-circle_samplesgd">Dependency: circle_samples.gd</h3>
+<!-- student-code:circle_samples.gd -->
+<pre><code class="language-gdscript">extends RefCounted
+# Supplied circle sampler. Angles return in the Waves sequence.
+static func make(sides: int, radius: float) -&gt; Array[Vector3]:
+    assert(sides &gt;= 3 and radius &gt; 0.0)
+    var points: Array[Vector3] = []
+    for side in range(sides):
+        var angle := TAU * side / sides
+        points.append(Vector3(cos(angle), 0, sin(angle)) * radius)
+    return points
+</code></pre>
+<h3 id="Primitives_Portals--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Primitives_Portals--tutorial--read-the-construction">Read the construction</h2>
+<p><code>(i + 1) % record.size()</code> wraps the last index to zero. Without that closing edge, the sum would measure an open path. <code>perimeter</code> returns one number rather than creating geometry.</p>
+<p>The program compares that sum with <code>TAU * RADIUS</code>, the floating-point circle circumference used as its numerical reference. Starting with three sides, it doubles the side count, stopping at the budget if a doubling would exceed it. After each new polygon it recomputes error.</p>
+<p>There are two honest endings: the requested tolerance is met, or the available work is spent. <code>met</code> records which happened. A very small tolerance and a small budget should report false, not run forever or silently claim success. The budget counts samples, not elapsed GPU time.</p>
+<p>This does not calculate every digit of pi or prove a limit. Both the circle reference and the sampled coordinates use finite precision. It makes the choice of an adequate approximation inspectable.</p>
+<p>The circle sampler returns from Columns. Its sine and cosine calls are printed support; deriving them is a later investigation. Here, use the sampled positions to choose and test a stopping rule. You can understand the condition for stopping before explaining every operation that supplied the points.</p>
+<h2 id="Primitives_Portals--tutorial--make-it-your-own">Make it your own</h2>
+<p>Compare tolerances 0.05 and 0.005 with the same radius and budget. Then request 0.000001 with a budget of twelve. Predict which run will exhaust its budget. Explain what “enough” means in each case and why the last case must still stop.</p>
+<p>Carry the ability to name a criterion and a limit. The final Primitives hall gives you room to decide what to make with the constructions already available.</p>
+<h2 id="Primitives_Portals--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Portals/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section><section id="Primitives_Melencolia" class="hall"><div class="hall-head"><span>15 / 15 · Melencolia</span><a href="final.html#Primitives_Melencolia">Read the reflection here ↗</a></div><div class="prose"><h1 id="Primitives_Melencolia--tutorial--arrange-what-you-can-already-make">Arrange what you can already make</h1>
+<h2 id="Primitives_Melencolia--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Composition with known classes</li>
+<li>Independent instances</li>
+<li>Placement versus construction</li>
+<li>Reusing a learned capability</li>
+</ul>
+<h2 id="Primitives_Melencolia--tutorial--in-the-museum">In the museum</h2>
+<p>Dürer's objects gather in the museum's Melencolia hall. Our tutorial closes this sequence with a smaller task: make an arrangement from two instances of your cube and the familiar sphere point. The reflective text can ask what geometry promises; the tutorial gives you enough control to make an arrangement of your own.</p>
+<p>There is no new mesh recipe here. Keep CubeBody from Cube and PointBody from the earlier point lessons. These are recognizable constructions, not substitutes downloaded for the closing image.</p>
+<h2 id="Primitives_Melencolia--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a unit-scale Node3D named ArrangementStudy in this hall's working copy. Place that study at floor level. The cube's local bottom is y = 0; the sphere's centre is one radius above the floor. PointBody retains pickup and frozen release; the cubes remain visible mesh objects without colliders.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Melencolia--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const CubeBody = preload("cube_body.gd")
+const PointBody = preload("point_body.gd")
+var places: Array[Vector3] = [Vector3(-0.8, 0, 0), Vector3(0.5, 0, -0.7)]
+var cubes: Array[Node3D] = []
+var point := PointBody.new()
+
+func _ready() -&gt; void:
+    for place in places:
+        var cube := CubeBody.new()
+        cube.position = place
+        add_child(cube)
+        cubes.append(cube)
+    point.position = Vector3(0.1, PointBody.RADIUS, 0.6)
+    add_child(point)
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-cube_bodygd">Dependency: cube_body.gd</h3>
+<!-- student-code:cube_body.gd -->
+<pre><code class="language-gdscript">extends "face_body.gd"
+# Eight shared positions; each triple addresses three entries.
+var points: Array[Vector3] = [
+    Vector3(-0.5, 0, -0.5), Vector3(0.5, 0, -0.5),
+    Vector3(0.5, 1, -0.5), Vector3(-0.5, 1, -0.5),
+    Vector3(-0.5, 0, 0.5), Vector3(0.5, 0, 0.5),
+    Vector3(0.5, 1, 0.5), Vector3(-0.5, 1, 0.5)]
+var faces: Array[Vector3i] = [
+    Vector3i(4, 7, 5), Vector3i(5, 7, 6),
+    Vector3i(0, 4, 1), Vector3i(1, 4, 5),
+    Vector3i(2, 6, 3), Vector3i(3, 6, 7),
+    Vector3i(1, 2, 0), Vector3i(0, 2, 3),
+    Vector3i(0, 3, 4), Vector3i(4, 3, 7),
+    Vector3i(5, 6, 1), Vector3i(1, 6, 2)]
+
+func _init() -&gt; void:
+    super()
+    show_faces(points, faces)
+
+func other_diagonal() -&gt; void:
+    faces[0] = Vector3i(4, 6, 5)
+    faces[1] = Vector3i(4, 7, 6)
+    show_faces(points, faces)
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-point_bodygd">Dependency: point_body.gd</h3>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2 id="Primitives_Melencolia--tutorial--read-the-construction">Read the construction</h2>
+<p>The loop constructs two independent CubeBody instances and assigns positions from places. Reusing a class does not mean sharing one mutable vertex array. Moving an instance should leave its geometry and its neighbour unchanged.</p>
+<p>The point is the same white sphere with the same size and interaction settings. It can be picked up and left somewhere else during a run. That temporary placement is not written back into this script. To keep an arrangement across runs, put your chosen coordinates in the source; persistent composition is a later capability.</p>
+<p>The program uses constructors, arrays, a loop and positions you have already met. Scale and rotation stay for Transformation. You can still change the relation between bodies through distance, overlap and placement. The resulting arrangement is your decision, not the inevitable output of the cube rule.</p>
+<h2 id="Primitives_Melencolia--tutorial--make-it-your-own">Make it your own</h2>
+<p>Make a second arrangement by changing only places and the point's initial position. Keep the classes unchanged. Show how a different interval or overlap changes what you notice. You should be able to reconstruct both arrangements from their saved script values.</p>
+<h2 id="Primitives_Melencolia--tutorial--after-the-chapter-an-arrangement-without-a-recipe">After the chapter: an arrangement without a recipe</h2>
+<p>Choose a different arrangement in a clear part of your working museum hall. Use the earlier files as references, but write your own small main script. This is an independent challenge; there is no new construction hidden in a supplied answer.</p>
+<ul>
+<li>Generate a list of at least five positions with a rule you can explain. Keep an unchanged source list and modify an independently owned copy.</li>
+<li>Reuse PointBody and FaceBody. Choose three non-collinear entries from the list and connect them as a face.</li>
+<li>Show two spheres of equal radius with different resolutions, using the construction already studied in Godot Primitives.</li>
+<li>Decide their spacing and arrangement. Keep the known collider behaviour; making a new walkable structure is outside this task.</li>
+</ul>
+<p>Show the arrangement to someone who has not seen your script. Locate the stored values, the variable referring to each body, and the indices establishing the face. Explain what the generator decided, what resolution changed, what you preserved, and one aesthetic choice that no calculation required.</p>
+<p>Run your script and check that changing the copy leaves the source intact, that the selected face has area, and that each sphere keeps its own mesh. Then change one choice and predict the result before running again. Successful execution is evidence about the program; explaining and transferring the choices gives evidence about what you learned.</p>
+<p>Carry CubeBody and PointBody into Transformation. A body that you can place is ready to become a body whose position, rotation or scale changes over time.</p>
+<h2 id="Primitives_Melencolia--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Melencolia/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div><a class="back" href="#contents">Back to contents ↑</a></section></main><footer class="meta">Compiled from current canonical manuscripts. The source texts are unchanged. Footnote identifiers and local links are adapted for this continuous reading.</footer></body></html>

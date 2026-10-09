@@ -1,0 +1,63 @@
+--- before/Color_Context_Placed/tutorial.md
++++ after/Color_Context_Placed/tutorial.md
+@@ -16,6 +16,8 @@
+ Work in the existing Endless Museum, beside the entrance columns in `Color_Context_Placed`. Attach this complete `lesson.gd` to an empty `Node3D` named `ColourStudy`, with unit scale and its origin on clear floor. It builds one 4.4-metre column, 1.1 metres wide. Leave room to walk around it. The museum supplies the room, camera, player and light. The script creates every part and material; it needs no child nodes or companion scripts. This reduced colour study has no collision or pickup behaviour.
+ 
+ The five construction calls reproduce the opening column's dimensions and order: broad block, block, sphere, block, dome. They gather familiar mesh creation into two small helpers. The last sphere uses Godot's hemisphere option; its origin sits at the dome's base. Those dimensions are already chosen here. Begin by changing only the two lists at the top.
++
++The palette holds the available colour values. The assignment says where they go: `colour_slots` chooses a palette entry for each part. Changing a value and changing its destination are separate decisions.
+ 
+ <!-- student-code:lesson.gd -->
+ ```gdscript
+--- before/Color_Rainbow/tutorial.md
++++ after/Color_Rainbow/tutorial.md
+@@ -52,7 +52,7 @@
+ 
+ Replace the three-entry palette with `[Color(0.8, 0.2, 0.6), Color.WHITE]`. Predict the width, then run. Each band is 0.3 metres thick. Restore the original palette and append `Color.BLACK`: four bands now share the same 0.6 metres, each taking 0.15.
+ 
+-Change one colour without adding or removing an entry. The geometry should stay still. The list controls both the number of bands and their ordered colours, but those are two different edits.
++Change one colour without adding or removing an entry. The geometry should stay still. Band count and colour assignment are separate decisions. This example couples them by making one band per palette entry. Another arrangement could repeat two colours across six bands; the number of available colours would then differ from the number of parts, as it did in the opening Colour lesson.
+ 
+ Choose your own nonempty palette. Before running, state how many bands will appear, their individual width, and the outer radius. As a boundary case, use one colour: it occupies the full thickness without closing the opening.
+ 
+--- before/Color_Paint/tutorial.md
++++ after/Color_Paint/tutorial.md
+@@ -11,6 +11,8 @@
+ Take a spray can in the museum. Colour arrives where the nozzle meets a surface; it remains when you turn away. Grid kept one colour at a cell address. Paint keeps many small deposits in a surface image.
+ 
+ We return to PointBody as a small study brush. Its pickup behaviour is already built. The lesson adds the path from a held object and an action to a retained mark. The museum's can shell, mist, wetness, elongated deposits and paint runs are richer than this study's circular soft stamps.
++
++The first goal is one mark you can account for: **hold → request spray → aim → accepted hit → surface address → retained colour**. Keep `automatic` set to `false`. The automatic caller is included in the complete script for an optional continuation after your own brush works.
+ 
+ ## Continue with the point
+ 
+@@ -122,11 +124,11 @@
+ 
+ Choose another ink colour and use it over an existing mark while the study is running, through the inspector's Remote view. `@export` exposes `ink` there: select the running study node and edit its Ink property. The image keeps its previous contents and the new deposits blend into them. Restarting this study creates a fresh white image; saving it across sessions is not part of this lesson.
+ 
+-## Another caller, the same receiver
+-
+-Set `automatic` to true and run. `automatic_step` supplies a moving UV address through two sine functions, maps it back to the canvas and calls the same `draw_spray` method. It does not require the manual brush to be held. Manual and automatic callers accumulate in the same image.
+-
+-For an independent continuation, change the second sine rate from 1.3 to 2.0. Predict how its repeated path differs. Keep the manual controls working while the path runs. The canvas should not need a second renderer for another source of marks.
++## Know when the manual lesson works
++
++With the automatic caller still off, choose a new ink colour and a clear part of the canvas. Before pressing, predict where the mark will appear. Aim away while holding the action: the readout should become **SPRAY / MISS** and deposits should stop. Aim back: **MARK** returns. Release the action or put down the point: **READY** returns and the earlier marks remain.
++
++You have completed the core lesson when you can make that mark, interrupt it, and explain where its colour is kept. The image holds the accumulated result. The point supplies an aim and a request; it does not keep the painted marks.
+ 
+ ## Supplied receiver — canvas.gd
+ 
+@@ -262,4 +264,12 @@
+     add_child(boundary)
+ ```
+ 
++## Optional continuation — another caller, the same receiver
++
++Continue here after the manual lesson works. You can also leave the automatic painter as an encounter in the museum and proceed to Walls.
++
++Set `automatic` to true and run. `automatic_step` supplies a moving UV address through two sine functions, maps it back to the canvas and calls the same `draw_spray` method. It does not require the manual brush to be held. Manual and automatic callers accumulate in the same image. The addition demonstrates reuse of the receiver; it is not required to complete the manual painting lesson.
++
++Change the second sine rate from 1.3 to 2.0. Predict how its repeated path differs. Keep the manual controls working while the path runs. The canvas should not need a second renderer for another source of marks.
++
+ Paint leaves state on a surface. Walls next asks what happens when a surface changes the view through it while its physical boundary stays put.

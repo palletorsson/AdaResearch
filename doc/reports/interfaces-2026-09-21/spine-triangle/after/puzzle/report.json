@@ -1,0 +1,110 @@
+{
+	"approaches": [
+		{
+			"clear_motion": 1.0,
+			"clear_start": true,
+			"direction": [
+				-1.0,
+				0.0,
+				0.000000131134171965641
+			],
+			"passed": true,
+			"supported": true
+		},
+		{
+			"clear_motion": 1.0,
+			"clear_start": true,
+			"direction": [
+				0.000000174845553146952,
+				0.0,
+				1.0
+			],
+			"passed": true,
+			"supported": true
+		},
+		{
+			"clear_motion": 1.0,
+			"clear_start": false,
+			"direction": [
+				-0.0000000874227836789032,
+				0.0,
+				-1.0
+			],
+			"passed": false,
+			"supported": false
+		}
+	],
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored triangle artifact found",
+			"passed": true
+		},
+		{
+			"message": "Experiment panel assembled",
+			"passed": true
+		},
+		{
+			"message": "Reading position has floor",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits at reading position",
+			"passed": true
+		},
+		{
+			"message": "A supported final metre reaches the operating pose",
+			"passed": true
+		},
+		{
+			"message": "FillButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "FillButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "FillButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "FillButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.979673303663731,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/TriangleLinePuzzle/ExperimentPanel/FillButton/InteractableAreaButton",
+			"horizontal_distance": 0.391617774963379,
+			"label": "FillButton",
+			"position": [
+				7.69161748886108,
+				0.979673206806183,
+				5.85000038146973
+			]
+		}
+	],
+	"failures": [],
+	"panel": {
+		"height_above_floor": 1.20000014454126,
+		"position": [
+			7.84999990463257,
+			1.20000004768372,
+			5.85000038146973
+		]
+	},
+	"passed": true,
+	"room": "Point_Triangle_Context",
+	"scope": "Actual triangle hall; supplied endpoint/drawing positions; desktop images and layout measurements. No headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	],
+	"standing_obstacles": []
+}

@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-28",
+  "scope": "Actual museum code; real XRTools physics body and shipped rig; simulated tracking, not physical headset acceptance. Selected routes, not every map.",
+  "reports": {
+    "before-vr": {
+      "passed": false,
+      "room": "Point_Lines",
+      "next": "Point_Trace",
+      "observed_bounds_reset": true,
+      "peak_resident_halls": 1,
+      "report": "reports/before-vr.json"
+    },
+    "lines-staged": {
+      "passed": true,
+      "room": "Point_Lines",
+      "next": "Point_Trace",
+      "observed_bounds_reset": false,
+      "peak_resident_halls": 1,
+      "report": "reports/lines-staged.json"
+    },
+    "point-zero": {
+      "passed": true,
+      "room": "Point_Zero",
+      "next": "Point_One",
+      "observed_bounds_reset": false,
+      "peak_resident_halls": 1,
+      "report": "reports/point-zero.json"
+    },
+    "color": {
+      "passed": true,
+      "room": "Color_Nails",
+      "next": "Color_Rainbow",
+      "observed_bounds_reset": false,
+      "peak_resident_halls": 1,
+      "report": "reports/color.json"
+    },
+    "transformation": {
+      "passed": true,
+      "room": "Trans_Pre",
+      "next": "Trans_Introduction",
+      "observed_bounds_reset": false,
+      "peak_resident_halls": 1,
+      "report": "reports/transformation.json"
+    }
+  },
+  "staged_menu_scene_load": "Passed; actual endless_museum_staged.tscn loads with the portal scene-base override.",
+  "known_log_warnings": [
+    "Existing artifact and material warnings",
+    "ObjectDB instances leaked at exit in full-rig test"
+  ],
+  "sources_sha256": {
+    "commons/scenes/endless_museum.gd": "fc5e9779b7bacc591d8dac54898b80e02aed472887c9f3fe3059089793ecaf00",
+    "commons/scenes/em/em_portal_stream.gd": "54dfd034113ba01cdf0385f82b86e05ce48467f350ba496d8f42f28f889791ed",
+    "commons/scenes/em/em_portal_frame.gd": "142dcfa382c72a9a7fb560591b1e42b225bda9c04ea78ff5ee1aeca39b224927",
+    "commons/scenes/mapobjects/PlayerBoundsCheck.gd": "09b30ae9721bde4699b178e293c6b8f357effb0d286315bdf9f2bf2868694b41",
+    "commons/scenes/endless_museum_staged.tscn": "f9731094920a816129b60bee5a7961430923571f161b56ff4eb9af8aacbf20be",
+    "commons/maps/Point_Trace/map_data.json": "ee1b842cea1e38a2bd5b8aaae9d44e067085eac6d4b90c43a2335f6360a6861c",
+    "tools/probes/hall_portal_navigation.gd": "80469472da6b3fd904e1c0707d874068241637b8743394bf3530064131679aad",
+    "commons/scenes/em/em_portal_scene_base.gd": "a7bc339d6a3a2d7c61009a448d54711bea48d94564c6ed02c637172db6429f2a"
+  }
+}

@@ -1,0 +1,16 @@
+--- before/commons/maps/curriculum_spine.json
++++ commons/maps/curriculum_spine.json
+@@ -313,11 +313,11 @@
+ 	],
+ 	"note": "Field study: Italian mosaics as frozen algorithms"
+    },
+-   "boolean_surfaces": {
++   "color": {
+ 	"unlocks": [
+      "facade_assembly"
+ 	],
+-	"note": "Composition grammar at architectural scale — column orders, rhythm, hierarchy, fenestration. Branch off CSG; built 2026-05-13 from doc/proposals/2026-05-13_facade-assembly-sequence.md."
++	"note": "Facade Assembly develops architectural composition from primitives, transforms, arrays and colour. Moved from Boolean Surfaces on 2026-09-24: its main encounter is the arrangement of parts. The room-and-positive-cast study remains with Booleans."
+    },
+    "proceduralgeneration": {
+ 	"unlocks": [

@@ -1,0 +1,100 @@
+{
+  "source_scope": [
+    "commons/artifacts/laundry_line_cathedral/laundry_line_cathedral.gd",
+    "commons/artifacts/calder_mobile/calder_mobile.gd",
+    "commons/primitives/tensegrity_triangle/tensegrity_triangle.gd",
+    "commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd",
+    "commons/primitives/parametric/catenoid.gd",
+    "commons/primitives/parametric/catenoid.tscn",
+    "commons/primitives/parametric/helicoid.tscn",
+    "algorithms/wavefunctions/line_builder_3d/cable_builder.gd"
+  ],
+  "pairs": [
+    {
+      "hall": "FormFinding_Catenary",
+      "before": "capture-before-accepted-FormFinding_Catenary",
+      "after": "capture-after-verified-FormFinding_Catenary",
+      "camera_matches": {
+        "laundry-standing": true,
+        "laundry-plaque": true
+      },
+      "shared_source_matches": {
+        "commons/primitives/parametric/helicoid.gd": true,
+        "commons/maps/FormFinding_Catenary/map_data.json": true,
+        "commons/maps/FormFinding_Equilibrium/map_data.json": true,
+        "commons/artifacts/registry/primitives.json": true,
+        "commons/scenes/endless_museum.gd": true,
+        "commons/scenes/em/em_detail.gd": true,
+        "commons/artifacts/science_screen/science_screen.gd": true,
+        "doc/book/iterations/2026-09-19-formfinding-review/structure/frozen-museum.gd": true
+      },
+      "notes": "Restored catalog common to both rendered versions; original artifact source replayed in before. Frozen compiling museum loader common to both."
+    },
+    {
+      "hall": "FormFinding_Equilibrium",
+      "before": "capture-before-verified-FormFinding_Equilibrium",
+      "after": "capture-after-verified-FormFinding_Equilibrium",
+      "camera_matches": {
+        "calder-standing": true,
+        "calder-plaque": true,
+        "truss-standing": true
+      },
+      "shared_source_matches": {
+        "commons/primitives/parametric/helicoid.gd": true,
+        "commons/maps/FormFinding_Catenary/map_data.json": true,
+        "commons/maps/FormFinding_Equilibrium/map_data.json": true,
+        "commons/artifacts/registry/primitives.json": true,
+        "commons/scenes/endless_museum.gd": true,
+        "commons/scenes/em/em_detail.gd": true,
+        "commons/artifacts/science_screen/science_screen.gd": true,
+        "doc/book/iterations/2026-09-19-formfinding-review/structure/frozen-museum.gd": true
+      },
+      "notes": "Restored catalog common to both rendered versions; original artifact source replayed in before. Frozen compiling museum loader common to both."
+    }
+  ],
+  "headset_tested": false,
+  "accepted_runs": {
+    "museum-baseline-final-FormFinding_Catenary": {
+      "checks": 16,
+      "failures": 0,
+      "returncode": 0,
+      "sources_stable": true,
+      "script_errors": false
+    },
+    "headless-after-FormFinding_Catenary": {
+      "checks": 25,
+      "failures": 0,
+      "returncode": 0,
+      "sources_stable": true,
+      "script_errors": false
+    },
+    "capture-before-accepted-FormFinding_Catenary": {
+      "checks": 28,
+      "failures": 0,
+      "returncode": 0,
+      "sources_stable": true,
+      "script_errors": false
+    },
+    "capture-after-verified-FormFinding_Catenary": {
+      "checks": 22,
+      "failures": 0,
+      "returncode": 0,
+      "sources_stable": true,
+      "script_errors": false
+    },
+    "capture-before-verified-FormFinding_Equilibrium": {
+      "checks": 25,
+      "failures": 0,
+      "returncode": 0,
+      "sources_stable": true,
+      "script_errors": false
+    },
+    "capture-after-verified-FormFinding_Equilibrium": {
+      "checks": 19,
+      "failures": 0,
+      "returncode": 0,
+      "sources_stable": true,
+      "script_errors": false
+    }
+  }
+}

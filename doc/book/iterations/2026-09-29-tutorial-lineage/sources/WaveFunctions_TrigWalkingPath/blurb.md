@@ -1,0 +1,1 @@
+Two fast motions make a slow pulse. Compare A, B and their half-scaled sum, then bring the two frequencies together. The beat display is visual only; the finite sine/cosine escalator remains nearby as a different way to place oscillation in space.

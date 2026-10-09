@@ -1,0 +1,920 @@
+[
+  {
+    "map": "WaveFunctions_Intro",
+    "fresh": true,
+    "capture": {
+      "map": "WaveFunctions_Intro",
+      "lane": "live",
+      "started": "2026-09-12T09:36:11+02:00",
+      "finished": "2026-09-12T09:36:40+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_intro_live.gd",
+      "source_sha256": "6d91be7b9463bc8d9985459d0cd7f50145ba45685b13e8fe32ec65e2f6bc73b7",
+      "map_sha256": "7c788e491f08824054e145d1fff546aab51a5f7b141793a182ce968e01d0f5f7",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_intro_desktop_primary_live.png",
+        "probe_intro_live.png"
+      ],
+      "reports": [
+        "probe_intro_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 28,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-WaveFunctions_Intro-probe_intro_desktop_primary_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Intro/probe_intro_desktop_primary_live.png",
+        "sha256": "f7af02513f052382fd38472abd5daccd2202135079021e90ffe9f9f27d172842",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Intro-probe_intro_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Intro/probe_intro_live.png",
+        "sha256": "e780a34501fe5398619d8a4e1d4a1408a5ca0e1788f6b0c8f79262d20e382372",
+        "featured": true
+      }
+    ]
+  },
+  {
+    "map": "WaveFunctions_Pendulum",
+    "fresh": true,
+    "capture": {
+      "map": "WaveFunctions_Pendulum",
+      "lane": "live",
+      "started": "2026-09-12T09:36:41+02:00",
+      "finished": "2026-09-12T09:37:42+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_pendulum_live.gd",
+      "source_sha256": "e2a6ca8fc257eb0a9975319cb20d2ebaef2d27397aee4e5f3e13c33a2ed21345",
+      "map_sha256": "d3e659a5f49624531547eb99418651fdb2a182015fef0a7ebd9f6aa7b79e08e0",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_pendulum_desktop_walk_live.png",
+        "probe_pendulum_live.png",
+        "probe_pendulum_readout_live.png"
+      ],
+      "reports": [
+        "probe_pendulum_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 56,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-WaveFunctions_Pendulum-probe_pendulum_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Pendulum/probe_pendulum_live.png",
+        "sha256": "457a26c4e3c0a120f2ea47bc2106800c5a8442bcae57cfbf8345ee840dc1fcc6",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Pendulum-probe_pendulum_readout_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Pendulum/probe_pendulum_readout_live.png",
+        "sha256": "0fd75334dd144fea909d957f32be6b295202c9d0085e58f07e35bddd6b63336b",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Pendulum-probe_pendulum_desktop_walk_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Pendulum/probe_pendulum_desktop_walk_live.png",
+        "sha256": "7455f246b9ddea47ca73ad84d764748baec63a3202bdbc775573d6a810d99bde",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "WaveFunctions_Sine_Space",
+    "fresh": true,
+    "capture": {
+      "map": "WaveFunctions_Sine_Space",
+      "lane": "live",
+      "started": "2026-09-12T09:37:43+02:00",
+      "finished": "2026-09-12T09:38:09+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_sine_space_live.gd",
+      "source_sha256": "db02c7ee8b7b76021e115b586cd4faa3202dadedb0f3c42446d3c6e83b1e7175",
+      "map_sha256": "b7310c6eec53a631405fbfef700bb08152d7f0ce8b16232cdcce05fa4d552e93",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_sine_space_approach_live.png",
+        "probe_sine_space_bridge_live.png",
+        "probe_sine_space_desktop_exit_live.png",
+        "probe_sine_space_desktop_mid_live.png",
+        "probe_sine_space_inside_live.png",
+        "probe_sine_space_overview_live.png",
+        "probe_sine_space_panel_live.png"
+      ],
+      "reports": [
+        "probe_sine_space_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 61,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_approach_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_approach_live.png",
+        "sha256": "57c3c390bd953340088737b3883759dde2eec57d3628eb2c747307cad1c08acc",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_desktop_mid_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_desktop_mid_live.png",
+        "sha256": "93cc079f4f8c29e5da1a22d5f4f8d684543f7ccfed67f3002c17e1a8b2737b09",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_bridge_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_bridge_live.png",
+        "sha256": "46f118871f5159fdf3c83913c65951973f185b05d485f56072b3b6c28955fb83",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_desktop_exit_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_desktop_exit_live.png",
+        "sha256": "7c9fbe22cdf374757660cd6fe5bd788ef03e8bef65d98b71de9eeabbd8a5619d",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_inside_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_inside_live.png",
+        "sha256": "a0af9d03a5e22474e30742f0f6827924e6eaa870be4bb0cd886be0b609b1d186",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_overview_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_overview_live.png",
+        "sha256": "066e614d927fad84f38f8ec6568aa784e0382c0d8ccf210a4659fd93cf6eb39d",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Sine_Space-probe_sine_space_panel_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Sine_Space/probe_sine_space_panel_live.png",
+        "sha256": "47c6436a60167cd4744e31eba733b84c331db85d4661d1cd1b932abe3a33708a",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "WaveFunctions_Effect_Sound",
+    "fresh": true,
+    "capture": {
+      "map": "WaveFunctions_Effect_Sound",
+      "lane": "live",
+      "started": "2026-09-12T09:38:09+02:00",
+      "finished": "2026-09-12T09:38:54+02:00",
+      "exit": 1,
+      "source": "commons\\testing\\probe_wcn_effect_sound_live.gd",
+      "source_sha256": "05ebf455e22e80eccd5c3a63f01b81ea32b602e0e76011d1d25d2c793875986d",
+      "map_sha256": "aac4b33419bbad2f75a0e84a6c19238849188b87a507879a2dc9d75d9bf45e16",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_effect_sound_desktop_front_live.png",
+        "probe_effect_sound_live.png",
+        "probe_effect_sound_overview_live.png",
+        "probe_effect_sound_readout_live.png",
+        "probe_effect_sound_scope_live.png"
+      ],
+      "reports": [
+        "probe_effect_sound_live.json"
+      ]
+    },
+    "engine_child_exit": 1,
+    "checks": 94,
+    "failures": [
+      "a listener within 3 m wakes the sculptor's tone"
+    ],
+    "images": [
+      {
+        "file": "images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Effect_Sound/probe_effect_sound_desktop_front_live.png",
+        "sha256": "01d2c2c63fb0c13036eb850895ad5ea6cfeb51adad396459921c45f6d68fd6ea",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_overview_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Effect_Sound/probe_effect_sound_overview_live.png",
+        "sha256": "8133fc202e5010ff0c99aeaf8bff7455fa87434cf5042823d5a5d9f4ecaea3ff",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Effect_Sound/probe_effect_sound_live.png",
+        "sha256": "021cbca6f79c06026b79e343c526fdced936fb05da72019a690bbf138cbf7d8d",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_readout_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Effect_Sound/probe_effect_sound_readout_live.png",
+        "sha256": "35c37711d95eb6726c570bfdf09744d398c872a3cba5fa6716a37bd0a23b6a5e",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Effect_Sound-probe_effect_sound_scope_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Effect_Sound/probe_effect_sound_scope_live.png",
+        "sha256": "1414946f9ae85df6b9c983dd548d06f6395511c34f322975705c9af1815e3c7f",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "WaveFunctions_AirMusic",
+    "fresh": true,
+    "capture": {
+      "map": "WaveFunctions_AirMusic",
+      "lane": "live",
+      "started": "2026-09-12T09:38:55+02:00",
+      "finished": "2026-09-12T09:39:33+02:00",
+      "exit": 4294967295,
+      "source": "commons\\testing\\probe_wcn_air_music_live.gd",
+      "source_sha256": "8a083ffa3ba7ddc021d0e50dbc29f409d4a6ba48338a55bd1d0afa58fff3c604",
+      "map_sha256": "265c00beac0389a758a42bd10acaf2e64fd9a31697036c928f7213bb610a2522",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_air_music_desktop_front_live.png",
+        "probe_air_music_live.png",
+        "probe_air_music_overview_live.png",
+        "probe_air_music_readout_live.png",
+        "probe_air_music_two_voices_live.png"
+      ],
+      "reports": [
+        "probe_air_music_live.json"
+      ]
+    },
+    "engine_child_exit": 3221225477,
+    "checks": 55,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-WaveFunctions_AirMusic-probe_air_music_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_AirMusic/probe_air_music_desktop_front_live.png",
+        "sha256": "b536c3383b34da82fefcedb9592f4069e9e30881c0c3c49a8cdf37247b5e4e1d",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_AirMusic-probe_air_music_two_voices_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_AirMusic/probe_air_music_two_voices_live.png",
+        "sha256": "a60df04a190c916e342bf8f3d0fbfecbe986809e908d7dcada610cbb288a3f22",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_AirMusic-probe_air_music_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_AirMusic/probe_air_music_live.png",
+        "sha256": "21dcbb6d41e2e8799fd422b0fa9f7fdb3db99a6520c70436e9803c91699f6204",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_AirMusic-probe_air_music_overview_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_AirMusic/probe_air_music_overview_live.png",
+        "sha256": "27af5e6b89a4f35c139f462ed3bf6c498d9d17b5434e0e45b582a35c55b6819e",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_AirMusic-probe_air_music_readout_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_AirMusic/probe_air_music_readout_live.png",
+        "sha256": "9293ff79400dca03469d52743da1b647ea1b571e947b46a4c1a8d722952d971b",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "fresh": true,
+    "capture": {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "lane": "live",
+      "started": "2026-09-12T09:39:34+02:00",
+      "finished": "2026-09-12T09:40:15+02:00",
+      "exit": 4294967295,
+      "source": "commons\\testing\\probe_wcn_synthesis_lab_live.gd",
+      "source_sha256": "0c2981acbe142f5f55b7503aa773ad692edc5eeba0043250b120e609d20b5b39",
+      "map_sha256": "4d5610d0c427d1c86e346d31f966ac1122f4d3ac7f99bbc997c8415d0452782c",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_synthesis_lab_console_live.png",
+        "probe_synthesis_lab_desktop_front_live.png",
+        "probe_synthesis_lab_h1_alone.png",
+        "probe_synthesis_lab_ladder_live.png",
+        "probe_synthesis_lab_live.png",
+        "probe_synthesis_lab_overview_live.png",
+        "probe_synthesis_lab_plan_live.png",
+        "probe_synthesis_lab_readout_live.png"
+      ],
+      "reports": [
+        "probe_synthesis_lab_live.json"
+      ]
+    },
+    "engine_child_exit": 3221225477,
+    "checks": 93,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_desktop_front_live.png",
+        "sha256": "312d878e0038def18b7fa3f8b5ab88d14746e0059ccd66a13163897ea1355deb",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_console_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_console_live.png",
+        "sha256": "bbdc0388ca7c3d95d9fb3cfc334f31ef1c53cc072959c6b083d8d347afea72df",
+        "featured": true
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_h1_alone.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_h1_alone.png",
+        "sha256": "fb61c0feeb845604a302e2d7dd33c87bdfe514308da1b5d667e7b9d3c5018780",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_ladder_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_ladder_live.png",
+        "sha256": "4ffaa6c6a99e0df21a71c21c355ee220e5b875dd7fc04230219043e973ae935a",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_live.png",
+        "sha256": "156e288a630a557da4ddceadfc0c544f1d9f3b08b00af714cad74213fd6f1b81",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_overview_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_overview_live.png",
+        "sha256": "467b2116c4cf4ad1838b19edefae119a92bc556ba7f1677fabc635fd6b447073",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_plan_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_plan_live.png",
+        "sha256": "38c07f0e1adecedd81379a53710ade5a5b5d70f4bcb3541e40456ddb6d0d47d2",
+        "featured": false
+      },
+      {
+        "file": "images/visual-WaveFunctions_Synthesis_Lab-probe_synthesis_lab_readout_live.png",
+        "source": "ada_run/visual_review_20260912/WaveFunctions_Synthesis_Lab/probe_synthesis_lab_readout_live.png",
+        "sha256": "fe505b2396bb70684f0490bb7917e3f0dc5115441815edf4c8405af55d26d467",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "Random_Definition",
+    "fresh": true,
+    "capture": {
+      "map": "Random_Definition",
+      "lane": "live",
+      "started": "2026-09-12T09:40:15+02:00",
+      "finished": "2026-09-12T09:40:37+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_random_definition_live.gd",
+      "source_sha256": "c0dbf15f8357a8156f9e14426e95df765ff312f61ec4a027151e7109f4807472",
+      "map_sha256": "b637936719c349cd4945a444447a5616e96400d6c5be5d628ccdefd30f04f51b",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_random_definition_desktop_approach_live.png",
+        "probe_random_definition_desktop_close_live.png",
+        "probe_random_definition_live.png"
+      ],
+      "reports": [
+        "probe_random_definition_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 27,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-Random_Definition-probe_random_definition_desktop_close_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Definition/probe_random_definition_desktop_close_live.png",
+        "sha256": "1eff5fd4cdafddbc52de4d52f0cdac7f677ed2444736b5fea1f14d62ac88ecc5",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Definition-probe_random_definition_desktop_approach_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Definition/probe_random_definition_desktop_approach_live.png",
+        "sha256": "a3ee6e7e40e9d3de0e2dbea2255fc19a82432f170c3686b3513e2432332eef1f",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Definition-probe_random_definition_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Definition/probe_random_definition_live.png",
+        "sha256": "cb88239fc264daf9ac5907b74431294a146ee2c9d5f5cacb5eac9d12f847b9b4",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "Random_Entropy",
+    "fresh": true,
+    "capture": {
+      "map": "Random_Entropy",
+      "lane": "live",
+      "started": "2026-09-12T09:40:38+02:00",
+      "finished": "2026-09-12T09:41:24+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_entropy_live.gd",
+      "source_sha256": "414ead4e57c8d3d46463966400c56ff75c6fc662f23fc5e87292b93dd9e3e6f2",
+      "map_sha256": "907455232393cf44c309188a63ee11f688b0210011eabf590b2e03dd3b12e385",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_entropy_approach_live.png",
+        "probe_entropy_buttons_live.png",
+        "probe_entropy_contrast_live.png",
+        "probe_entropy_desktop_front_live.png",
+        "probe_entropy_live.png",
+        "probe_entropy_origin_contrast_live.png",
+        "probe_entropy_origin_live.png",
+        "probe_entropy_overview_live.png",
+        "probe_entropy_panel_close_live.png",
+        "probe_entropy_readout_live.png",
+        "probe_entropy_ribbon_live.png",
+        "probe_entropy_sorted_live.png"
+      ],
+      "reports": [
+        "probe_entropy_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 139,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_approach_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_approach_live.png",
+        "sha256": "d167bf63c83ac163fd45ff99e32e7a51bbaff59994b35c697ee326826c40d7eb",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_panel_close_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_panel_close_live.png",
+        "sha256": "f1c42560940f431c32616b9aa805976886f1ac6c14b75043dd51e4f1ff45d8a8",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_buttons_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_buttons_live.png",
+        "sha256": "c628abe6f2998d8f370116ef9b75278ae840aba00f2590342a62df6985842947",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_contrast_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_contrast_live.png",
+        "sha256": "aeebf51d03ffe2bd73dcc303f1956eeff76deda71ebf0778bcb83ab4fac3e410",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_desktop_front_live.png",
+        "sha256": "91c7533383ad90e04fc9bd6c14ceeaadda251f53411b843a378651e808092e55",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_live.png",
+        "sha256": "ca7b58c48f777c5312ece19271ca36c75036a36b76059e97544055cea8d8a395",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_origin_contrast_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_origin_contrast_live.png",
+        "sha256": "d5d7958a8b355c708065853ba0734f2c7e0548492b37f62c0e6db0ccf764f3a1",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_origin_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_origin_live.png",
+        "sha256": "197f9dc6bc09bd4a368262ab290582046108e19e2f8552611949cf2334ea9470",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_overview_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_overview_live.png",
+        "sha256": "d7ffb9c9ca40076e5bdb2198ab0c746c018b8fb8d5ed1d7fc68f6da03956329b",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_readout_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_readout_live.png",
+        "sha256": "ffd2f70c4f2aaa14de508be3c6765d7334ead32fa8ea5c6af343972aa45e491a",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_ribbon_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_ribbon_live.png",
+        "sha256": "eb8b90bc3a0c4edf117a1365739956d89cdc944060da3bda4624bc7e957681f6",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Entropy-probe_entropy_sorted_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Entropy/probe_entropy_sorted_live.png",
+        "sha256": "dc8b0a10a25ec670257c404f429256dcf23f3f904909b05882bbd27be44ac04f",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "Random_Remove",
+    "fresh": true,
+    "capture": {
+      "map": "Random_Remove",
+      "lane": "live",
+      "started": "2026-09-12T09:41:24+02:00",
+      "finished": "2026-09-12T09:42:34+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_remove_live.gd",
+      "source_sha256": "d3df154d9337f9caf67628099adcd710c8119fb5312693765c80d9cfbad04550",
+      "map_sha256": "c09f7563c03dd908a1d833ea6897106990cefdc82338b70b57ee32a4855f9f29",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_remove_board_live.png",
+        "probe_remove_desktop_front_live.png",
+        "probe_remove_emptied_live.png",
+        "probe_remove_live.png",
+        "probe_remove_one_live.png",
+        "probe_remove_overview_live.png",
+        "probe_remove_panel_live.png",
+        "probe_remove_row_live.png",
+        "probe_remove_status_live.png"
+      ],
+      "reports": [
+        "probe_remove_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 77,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-Random_Remove-probe_remove_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_desktop_front_live.png",
+        "sha256": "ddf71437178ffe24d2c8510a39143a917a55710c8904250eba819fbdcbcb36e5",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_one_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_one_live.png",
+        "sha256": "3ccc6cf4183c5fece9f77503bb43cd8126796ea35916bd95d5de9f009c4a9cb3",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_board_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_board_live.png",
+        "sha256": "65d1d71bde2ebf25d9d6ffddda8d638c93a376e6ba05b0ee79456a74fd2428e0",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_emptied_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_emptied_live.png",
+        "sha256": "1e3f4df1ea04c4989910a268f9d2dc2b32000e2104fb5d22b781ee4fa76faafa",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_live.png",
+        "sha256": "e893af6daa87821e2daf6b9ec64122116530ef948639f635aa7f1e43e81b85dc",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_overview_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_overview_live.png",
+        "sha256": "578dccc43db7d65ad98d9724640a1a8dceb213d5ba966550b34bee5bef604195",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_panel_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_panel_live.png",
+        "sha256": "cc790d109b9c918f62e330f6f5424d3d0b254bfdd106e51d8592ff46d718741f",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_row_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_row_live.png",
+        "sha256": "adef0bfd135747fbedba2d376eca5fb24b7e39ec6cb9d9dae7cdb7ca75c0bbad",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Remove-probe_remove_status_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Remove/probe_remove_status_live.png",
+        "sha256": "94f87055ab54aac674f69d14bb62359c6b3b98f0969f04c23df6148bf6bbebb1",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "Random_Walk",
+    "fresh": true,
+    "capture": {
+      "map": "Random_Walk",
+      "lane": "live",
+      "started": "2026-09-12T09:50:05+02:00",
+      "finished": "2026-09-12T09:50:38+02:00",
+      "exit": 1,
+      "source": "commons\\testing\\probe_wcn_walk_live.gd",
+      "source_sha256": "f5ce18e11f0c2424723897ccbf85dd66bed932790522507d190be8541c8ae36c",
+      "map_sha256": "4cf5bf1ecf8d32c8b33e9ce2b95f9607a6f7245befe56d1175cdef75e32b21df",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_walk_arena_live.png",
+        "probe_walk_desktop_front_live.png",
+        "probe_walk_keypad_live.png",
+        "probe_walk_live.png",
+        "probe_walk_logbook_live.png",
+        "probe_walk_north_door_live.png",
+        "probe_walk_plan_live.png",
+        "probe_walk_running_live.png",
+        "probe_walk_tank_live.png"
+      ],
+      "reports": [
+        "probe_walk_live.json"
+      ]
+    },
+    "engine_child_exit": 1,
+    "checks": 112,
+    "failures": [
+      "…and its keypad's RESET reaches the walk too — the relay is the one shipped-behaviour change (steps 21 → 0)"
+    ],
+    "images": [
+      {
+        "file": "images/visual-Random_Walk-probe_walk_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_desktop_front_live.png",
+        "sha256": "5eb48b90a38fc72fedb022db3f0671dee1e993b3645675e576093db325ed7c15",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_running_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_running_live.png",
+        "sha256": "1b1109aba811a38ff6b0e97e504d14165a185c931434021cdb6c294011741b6b",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_arena_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_arena_live.png",
+        "sha256": "1c271fa363e4d6ecd21ee9e222a11c7515e62863db0a0ca35e7af07ab8c1394e",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_keypad_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_keypad_live.png",
+        "sha256": "6f82212e11ca3014cd33a84a8eeac9ca30b4d22dc51181a9b4c61dd0045d3090",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_live.png",
+        "sha256": "79ebab21a0703014ce64ffd89ae0ad9849fc58c813f2e474c0f49dcbf1f69bd1",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_logbook_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_logbook_live.png",
+        "sha256": "fc67757f7cf44f7f8b7e9b6833b252091c44fd0666aeb7c590b4203ac3035e43",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_north_door_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_north_door_live.png",
+        "sha256": "71863d0e20a03b16aade07f93916cb14bd9f7c071d3feb89738f6bd83720a73e",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_plan_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_plan_live.png",
+        "sha256": "8a94040da0f6d7f5a2909a20ff0985a9edd7a244e9a2e76ccdd5bc7a775cb098",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Walk-probe_walk_tank_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Walk/probe_walk_tank_live.png",
+        "sha256": "07f8dccded0d9b6756439482906da851ffed4711e9c91935a6a5ea1bd536cfcf",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "Random_Gaussian",
+    "fresh": true,
+    "capture": {
+      "map": "Random_Gaussian",
+      "lane": "live",
+      "started": "2026-09-12T09:50:38+02:00",
+      "finished": "2026-09-12T09:51:21+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_gaussian_live.gd",
+      "source_sha256": "98a6c83c8162b15a7a73edb286e7a15cf4bd0f0469e7f2d006ac3245356fed6f",
+      "map_sha256": "1c3498e15d2a68bdcd22b0def9c24d28baa7b161f322215296f70120d8394b77",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_gaussian_arena_live.png",
+        "probe_gaussian_desktop_front_live.png",
+        "probe_gaussian_display_live.png",
+        "probe_gaussian_keypad_live.png",
+        "probe_gaussian_live.png",
+        "probe_gaussian_north_door_live.png",
+        "probe_gaussian_plan_live.png",
+        "probe_gaussian_poisson_live.png",
+        "probe_gaussian_readout_live.png",
+        "probe_gaussian_running_live.png",
+        "probe_gaussian_south_door_live.png",
+        "probe_gaussian_uniform_live.png"
+      ],
+      "reports": [
+        "probe_gaussian_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 107,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_desktop_front_live.png",
+        "sha256": "feca44ec693716e955858b660f6c1fe5ee24bae519c3ae261a0210750d0e0372",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_readout_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_readout_live.png",
+        "sha256": "67dd84ef3d5ec9e4fd333fd94bdfccddb8d4dcd1e565f110d105b653964da247",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_arena_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_arena_live.png",
+        "sha256": "63c0501a7854586f47fdf793d6bee7fa301c0e57ee79a4dcf45c0bfabeb41d8a",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_display_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_display_live.png",
+        "sha256": "baa93a1dcc8ddf187afa3d028d065b8a5dd1cb1e7bed1294efe1e650f56d0684",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_keypad_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_keypad_live.png",
+        "sha256": "ede834521c4a35d704a65ecf112e04c54dbc1455368753ba578b522306e6e880",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_live.png",
+        "sha256": "16b8b889af9c283ef5a492fc45ccfedaf9871b192801042448353a4a5d1d413f",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_north_door_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_north_door_live.png",
+        "sha256": "f6ad491467d897bcbf346650d1a62dca7066b1dcb57d9a3af6d34c92b816d2c2",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_plan_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_plan_live.png",
+        "sha256": "3441fcaf4273eb304f3d76c74456c1fcda45adbc4fecbd8156b4f0f1069ca53f",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_poisson_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_poisson_live.png",
+        "sha256": "4afb4626ad8bbf41311872ce5a0af2e5bd126b36be51916c17b4f850a2fc98a9",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_running_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_running_live.png",
+        "sha256": "f4d19e349cc44b7cbaf7e83ab981e4b87e6844bd841c930449700198a3b77c06",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_south_door_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_south_door_live.png",
+        "sha256": "1ce1475d66ede357b9134225b60ef0d877795dec379e45efc803e128709684f5",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Gaussian-probe_gaussian_uniform_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Gaussian/probe_gaussian_uniform_live.png",
+        "sha256": "363884850c032fdce52d423e60292b2d6378fc90a02a34ceba446f62a91a53a1",
+        "featured": false
+      }
+    ]
+  },
+  {
+    "map": "Random_Mushrooms",
+    "fresh": true,
+    "capture": {
+      "map": "Random_Mushrooms",
+      "lane": "live",
+      "started": "2026-09-12T09:52:20+02:00",
+      "finished": "2026-09-12T09:52:52+02:00",
+      "exit": 0,
+      "source": "commons\\testing\\probe_wcn_mushrooms_live.gd",
+      "source_sha256": "a3e10ad531e8b7795bc8eff0802120195b6a5da2e663a58af847e5b63f638158",
+      "map_sha256": "674bdd1729e2ccc6a1f6d5d9fda07ea95970f03a99409e1a51fbbc3999961966",
+      "source_changed_during_run": false,
+      "map_changed_during_run": false,
+      "images": [
+        "probe_mushrooms_bed_live.png",
+        "probe_mushrooms_desktop_front_live.png",
+        "probe_mushrooms_live.png",
+        "probe_mushrooms_north_door_live.png",
+        "probe_mushrooms_panel_live.png",
+        "probe_mushrooms_plan_live.png",
+        "probe_mushrooms_readout_live.png",
+        "probe_mushrooms_rejected_live.png",
+        "probe_mushrooms_south_door_live.png",
+        "probe_mushrooms_specimens_live.png",
+        "probe_mushrooms_west_margin_live.png"
+      ],
+      "reports": [
+        "probe_mushrooms_live.json"
+      ]
+    },
+    "engine_child_exit": 0,
+    "checks": 81,
+    "failures": [],
+    "images": [
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_desktop_front_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_desktop_front_live.png",
+        "sha256": "09aa374f1ef416627943abe04d97c51166d5a3087ab32334d2a8d7343d3ee782",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_specimens_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_specimens_live.png",
+        "sha256": "2a4e008c94376a99e2c4ad84a03b261f053a95034e0ed78f63b4b8e223720a10",
+        "featured": true
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_bed_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_bed_live.png",
+        "sha256": "5b1d38f0a0beb9d727dd77f0a3efa84c380fd6753a5e5621b28e686b69bd314d",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_live.png",
+        "sha256": "72a8450cebf5a4bf6ddcb0f69179de59b4c8eaa28fc2bd5181b5c3e3bdf885e1",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_north_door_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_north_door_live.png",
+        "sha256": "6977e2a08ea88418039fff44e3adb146df722a0234f68d0e2467c4c2ae737f42",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_panel_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_panel_live.png",
+        "sha256": "b718aca4f984a142fe3ac1931e624787492f2ba1f26cdad3e58ec67b85f18ef4",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_plan_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_plan_live.png",
+        "sha256": "722a2a812df50bbc0ddcb44c0909207c5485cae9d6b945e24b191ba5c3fb1514",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_readout_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_readout_live.png",
+        "sha256": "5407992ca8733df19c62b5e00b38b52587361b11e551eb13beb251d5c055b865",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_rejected_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_rejected_live.png",
+        "sha256": "dc13e1d32c920775d65c13dcb1db26b5bb7dbcd9ec9e42d796855b9ee138de49",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_south_door_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_south_door_live.png",
+        "sha256": "6de38e38155d235e9c108dda697a4215dc07ed764862546f2afd7291fc94b8cb",
+        "featured": false
+      },
+      {
+        "file": "images/visual-Random_Mushrooms-probe_mushrooms_west_margin_live.png",
+        "source": "ada_run/visual_review_20260912/Random_Mushrooms/probe_mushrooms_west_margin_live.png",
+        "sha256": "c5e8190c59679b67020ee2e72b969354857012ebffeb2ffee63b36d7c29616fd",
+        "featured": false
+      }
+    ]
+  }
+]

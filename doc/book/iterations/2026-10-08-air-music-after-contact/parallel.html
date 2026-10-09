@@ -1,0 +1,260 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>After contact</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}</style><header><div class="tag">Endless Museum · Wavefunctions · Hall 9</div><h1>After contact</h1><nav><a href="index.html">Room & evidence</a><a href="parallel.html">Tutorial left · reflection right</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="../2026-10-08-cage-a-score-kept/index.html">Previous: Cage</a></nav></header><main><div class="parallel"><article><div class="tag">tutorial.md</div><h1>A note continues after contact</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Contact as an onset event</li>
+<li>One audio player per voice</li>
+<li>Restarting one voice; overlapping two</li>
+<li>Playback age and decay</li>
+<li>Adding samples from independent voices</li>
+</ul>
+<p>In the Cage hall, a kept score supplied the times. Here your hand supplies them. Strike a bar of the existing metallophone, lift the stick away, then strike another. Two notes can continue together. Strike the first again: its age starts over while the second keeps going.</p>
+<p>We reconstruct that distinction with two touch bars and the black PointBody you already made. Move the point into one bar, withdraw it, then touch the other. The bars are sensors: they detect entry without blocking the sphere. The museum instrument has a physical stick, speed-sensitive strikes and eight bars. Our study keeps two voices at a fixed level so the new operation is clear.</p>
+<h2>Continue inside the museum</h2>
+<p>Use your Day Zero Endless Museum working copy, with its camera, lighting, player and XR Tools pickup already running. Save the four scripts below together. Keep <code>point_body.gd</code> and <code>line_skin.gd</code> unchanged. Attach <code>09_contact_voices.gd</code> to an empty, unit-scale Node3D in the Air Music learner bay: hall-local position <strong>(13, 0, 14)</strong>, Y rotation <strong>180 degrees</strong>. Run that museum scene as before. Do not attach this study to the existing metallophone.</p>
+<p>The script makes the point, two visible bars, contact volumes, players and readout. There are no named scene children to prepare. Grab with the established pickup control and move the point into a bar. No trigger press is needed. Desktop pickup uses the same point; the lesson does not install another player.</p>
+<h2>Two voices, two beginnings</h2>
+<p>The arrays use one shared index: bar 0, player 0 and samples 0 belong together. <code>body_entered</code> supplies the contacting body; <code>bind(i)</code> adds the bar's index. We accept only this point. The collision mask includes both its normal layer and the layer XR Tools uses while it is held.</p>
+<p><code>players[index].play()</code> starts that player's clip from the beginning. Calling it again replaces that voice's current playback. We do not stop the other player. Remaining inside a bar causes no further entry event: leave and return to strike again.</p>
+<!-- student-code:09_contact_voices.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+const RingVoice = preload(&quot;ring_voice.gd&quot;)
+signal struck(index: int)
+var frequencies: Array[float] = [261.63, 392.0]
+var voice := RingVoice.new()
+var players: Array[AudioStreamPlayer3D] = []
+var samples: Array[PackedByteArray] = []
+var bars: Array[Area3D] = []
+var captions: Array[Label3D] = []
+var lines: Array[MeshInstance3D] = []
+var point: RigidBody3D
+var label: Label3D
+
+func text_at(words: String, at: Vector3, size: int = 24) -&gt; Label3D:
+    var text := Label3D.new()
+    text.text = words
+    text.position = at
+    text.font_size = size
+    text.pixel_size = 0.002
+    add_child(text)
+    return text
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.position = Vector3(0, 1.05, 0.8)
+    add_child(point)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.04, 0.04, 0.045)
+    ink.roughness = 0.2
+    point.get_child(0).material_override = ink
+    label = text_at(&quot;&quot;, Vector3(0, 2.2, 0), 28)
+    text_at(&quot;Touch with the point; lift away; touch another.&quot;, Vector3(0, 0.68, 0.3))
+    for i in range(frequencies.size()):
+        var bar := Area3D.new()
+        bar.position = Vector3(-0.55 + 1.1 * i, 1.05, 0)
+        bar.collision_layer = 0
+        bar.collision_mask = point.collision_layer | point.picked_up_layer
+        var boundary := CollisionShape3D.new()
+        var shape := BoxShape3D.new()
+        shape.size = Vector3(0.5, 0.14, 0.6)
+        boundary.shape = shape
+        bar.add_child(boundary)
+        var surface := MeshInstance3D.new()
+        var box := BoxMesh.new()
+        box.size = shape.size
+        surface.mesh = box
+        var material := StandardMaterial3D.new()
+        material.albedo_color = Color(0.85, 0.85, 0.82)
+        surface.material_override = material
+        bar.add_child(surface)
+        bar.body_entered.connect(_on_contact.bind(i))
+        add_child(bar)
+        bars.append(bar)
+        captions.append(text_at(&quot;&quot;, bar.position + Vector3(0, -0.2, 0.32), 21))
+        var player := AudioStreamPlayer3D.new()
+        player.position = bar.position
+        player.max_distance = 7.0
+        player.stream = voice.make_note(frequencies[i])
+        samples.append(player.stream.data)
+        add_child(player)
+        players.append(player)
+    for i in range(64):
+        var line := LineSkin.new()
+        add_child(line)
+        lines.append(line)
+    draw_state()
+
+func _on_contact(body: Node3D, index: int) -&gt; void:
+    if body != point:
+        return
+    players[index].play()
+    struck.emit(index)
+
+func ages_now() -&gt; PackedFloat64Array:
+    var ages := PackedFloat64Array()
+    for player in players:
+        ages.append(player.get_playback_position() if player.playing else -1.0)
+    return ages
+
+func sum_at(ages: PackedFloat64Array, offset: float) -&gt; float:
+    var total := 0.0
+    for i in range(players.size()):
+        if ages[i] &gt;= 0.0:
+            total += voice.read_sample(samples[i], ages[i] + offset)
+    return total
+
+func _process(_delta: float) -&gt; void:
+    draw_state()
+
+func draw_state() -&gt; void:
+    var ages := ages_now()
+    var active := 0
+    for i in range(players.size()):
+        var state := &quot;quiet&quot;
+        if ages[i] &gt;= 0.0:
+            active += 1
+            state = &quot;%.2f s&quot; % ages[i]
+        captions[i].text = &quot;%.2f Hz | %s&quot; % [frequencies[i], state]
+    label.text = &quot;%d voices | each has its own age\n12 ms of their stored samples added&quot; % active
+    var previous := Vector3(-1.0, 1.65 + 0.45 * sum_at(ages, 0.0), 0)
+    for i in range(lines.size()):
+        var u := float(i + 1) / lines.size()
+        var next := Vector3(-1.0 + 2.0 * u, 1.65 + 0.45 * sum_at(ages, u * 0.012), 0)
+        var delta := next - previous
+        lines[i].show_segment(previous, delta, delta.length())
+        previous = next
+</code></pre>
+<p>Each audio player owns its playback clock. <code>ages_now()</code> reads those clocks once for each drawing frame; <code>-1</code> means quiet. The visible study does not invent a second timer and try to keep it synchronized with sound. In conceptual terms, age is the time since this voice's onset. Godot gives us that age through <code>get_playback_position()</code>.</p>
+<p><code>sum_at()</code> reads each active voice at its own age plus the same small offset, then adds the values. A new strike changes one age, so it changes how the samples meet. The pink line shows 12 milliseconds across its width at a fixed vertical scale. It reads the generated data before spatial attenuation and the audio bus. Moving your head can change what you hear without changing this curve. Playback position is reported at audio-mix intervals; this is an inspectable display, not a sample-accurate oscilloscope.</p>
+<h2>Let the note fade</h2>
+<p>Effect Sound already taught a sampled sine, an envelope and 16-bit encoding. <code>RingVoice</code> uses that construction with a longer, plain decaying sine. The previous phase-modulated <code>NoteVoice</code> remains available to Cage; we do not change its sound to write this lesson.</p>
+<!-- student-code:ring_voice.gd -->
+
+<pre><code class="language-gdscript">extends RefCounted
+
+const SAMPLE_RATE := 44100
+const DURATION := 3.0
+const DECAY := 0.8
+
+func sample_at(age: float, frequency: float) -&gt; float:
+    if age &lt; 0.0 or age &gt;= DURATION:
+        return 0.0
+    var envelope := minf(age / 0.005, 1.0) * exp(-age / DECAY)
+    envelope *= minf((DURATION - age) / 0.05, 1.0)
+    return 0.25 * sin(TAU * frequency * age) * envelope
+
+func make_note(frequency: float) -&gt; AudioStreamWAV:
+    var bytes := PackedByteArray()
+    var count := int(SAMPLE_RATE * DURATION)
+    bytes.resize(count * 2)
+    for i in range(count):
+        bytes.encode_s16(i * 2, int(sample_at(float(i) / SAMPLE_RATE, frequency) * 32767.0))
+    var note := AudioStreamWAV.new()
+    note.format = AudioStreamWAV.FORMAT_16_BITS
+    note.mix_rate = SAMPLE_RATE
+    note.stereo = false
+    note.data = bytes
+    return note
+
+func read_sample(bytes: PackedByteArray, age: float) -&gt; float:
+    if age &lt; 0.0:
+        return 0.0
+    var index := int(age * SAMPLE_RATE)
+    if index * 2 &gt;= bytes.size():
+        return 0.0
+    return float(bytes.decode_s16(index * 2)) / 32767.0
+</code></pre>
+<p><code>exp(-age / DECAY)</code> falls as age grows. With <code>DECAY = 0.8</code>, its value is about 0.37 after 0.8 seconds. That number is a decay time constant, not the note's duration. The finite buffer lasts three seconds. A short attack and final fade soften its edges. The chosen frequency makes the sound; the box's size does not calculate a metal bar's resonance.</p>
+<p><code>encode_s16()</code> stores a signed integer for each sample. <code>read_sample()</code> reverses that conversion for the display, returning zero before or after the buffer. We cache the bytes once in <code>samples</code>, so drawing does not repeatedly fetch whole sound resources. Each voice is bounded by 0.25; two unscaled source voices cannot exceed 0.5 in magnitude. That leaves source headroom. The prepared audio output still determines the listening level.</p>
+<h2>The two carried pieces</h2>
+<p>These are the same point body and finite cylinder renderer. Their complete files are included so this reconstruction has no missing dependency; the black finish is applied by the main script.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2>Test the distinction</h2>
+<ol>
+<li>Touch the left bar and withdraw. One age should keep increasing after contact ends.</li>
+<li>Before it finishes, touch the right. There should be two ages. The first must not jump back to zero.</li>
+<li>Leave the right bar and return to it. Only the right age restarts. Hold the point still inside: it must not keep restarting.</li>
+<li>Withdraw and wait three seconds. Both labels should read quiet, and the sum should become a straight line.</li>
+</ol>
+<p>Now change only the second frequency from <code>392.0</code> to <code>261.63</code>. Predict what stays separate. Run again, striking the bars with a gap. The two clips now contain the same samples, but their playback ages remain independent. Equal pitch does not require equal phase or simultaneous beginnings. The download includes the complete <code>09_same_pitch.gd</code> variation; attach it instead of the original, never alongside it in the same bay.</p>
+<p>Native tests extract the exact printed scripts, move the actual sphere collider through both areas, test the held collision layer, reject an unrelated body, check independent restart and compare the displayed sum with stored samples. They also run the same-pitch variation and wait for playback to finish. These assertions check the reconstruction; they do not establish headset comfort or whether a reader can build it unaided.</p>
+<p>The original eight-bar instrument remains in the hall. Return to it and try the same sequence with its stick. Sky Stairs next asks what a sampled curve needs before it can support a body. Later, the beat and synthesis studies will make relations between simultaneous waves the subject.</p></article><article><div class="tag">final.md</div><h1>After the strike</h1>
+<p>In the previous hall, a score could keep an event's place before it sounded. Here you give the note its beginning. Your hand can leave while its consequence continues.</p>
+<p>A stick lies in a cradle at the left end of a table. Eight metal bars lie beside it, the longest nearest the stick. Take it and bring the tip down on that bar. Lift it away at once and keep listening.</p>
+<!-- @resonating_metallophone -->
+
+<p>The contact is over. The bar glows and rings; the plate above the row names a voice and counts its age. As the glow fades, decide whether what you hear is the strike or what the strike began.</p>
+<p>Strike the same bar again before it finishes. There is another attack, but no additional voice. Its age returns towards zero. Now strike a shorter bar while the first is still fading. The plate names two voices, each with its own age. The first was allowed to continue.</p>
+<p>You can withdraw from the encounter without ending it. A second action arrives in a room still occupied by the first. Try a long gap, then a short one. Reverse the order. Listen for the moment when one note makes the other difficult to hear, although both remain present in the readout.</p>
+<p>These bars have chosen notes. Their lengths were arranged to follow those choices; the program does not discover a pitch by calculating the vibration of the metal. There is a resemblance to an instrument, and a working instrument within that resemblance. The seam is available to us: we can change the body without changing its stored note.</p>
+<p>The row offers C, D, E, G and A, continuing into another octave. That is a decision about which pairs your hand can reach. It does not settle which pairs are good. What sounds at ease here has already been given a particular company to keep.</p>
+<p>Try one bar slowly and then quickly. The stick's speed reaches both the sound and the glow through different mappings. Brightness is not a direct measure of loudness. The room makes a gesture legible in more than one way, and those accounts do not quite coincide.</p>
+<p>The ribbon adds a short piece of the sounding voices. Its sum is not a third bar. Nor is it everything that reaches your ears: distance changes the encounter, while these stored samples stay the same. A representation can tell us that two voices continue even when listening makes one seem to disappear.</p>
+<p>Set the stick down away from its cradle. Left alone, it returns. The notes have their own endings. Their mathematical decay would continue indefinitely; the stored sounds finish after seven and a half seconds. Someone has decided how long the consequence may last.</p>
+<!-- @ -->
+
+<p>For a moment, do nothing more. Let the room finish answering. Then carry this distinction onward: an action has ended, and something it began is still happening.</p></article></div></main></html>

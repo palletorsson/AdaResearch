@@ -1,0 +1,1 @@
+Keep one mark. Repeat it, reverse it, then let the reversal slip. Hold one result while another changes. The difference leads to a question: what does a symmetry classification count, and what remains outside its conditions?

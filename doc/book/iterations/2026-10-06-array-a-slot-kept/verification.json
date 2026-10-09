@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "engine": "Godot 4.6 stable",
+  "assertions": 150,
+  "variants": 3,
+  "transfer_examples": 1,
+  "edge_case_variants": 3,
+  "configurations_including_baseline": 8,
+  "variant_edits": {
+    "row": [],
+    "plane": [
+      [
+        "var depth := 1",
+        "var depth := 4"
+      ]
+    ],
+    "spaced": [
+      [
+        "var depth := 1",
+        "var depth := 4"
+      ],
+      [
+        "var spacing := 1.6",
+        "var spacing := 2.0"
+      ]
+    ],
+    "turned": [
+      [
+        "var depth := 1",
+        "var depth := 4"
+      ],
+      [
+        "    refresh_readout()\n\nfunc make_cube",
+        "    cubes[1][0].rotation_degrees.y = 45.0\n    refresh_readout()\n\nfunc make_cube"
+      ]
+    ],
+    "choice": [
+      [
+        "var depth := 1",
+        "var depth := 4"
+      ],
+      [
+        "    refresh_readout()\n\nfunc make_cube",
+        "    cubes[2][1].rotation_degrees.y = 30.0\n    refresh_readout()\n\nfunc make_cube"
+      ]
+    ],
+    "empty_width": [
+      [
+        "var width := 4",
+        "var width := 0"
+      ]
+    ],
+    "empty_depth": [
+      [
+        "var depth := 1",
+        "var depth := 0"
+      ]
+    ],
+    "single": [
+      [
+        "var width := 4",
+        "var width := 1"
+      ]
+    ]
+  },
+  "faults_rejected": 6,
+  "faults": {
+    "disconnected_signal": {
+      "mutation": [
+        "sensor.body_entered.connect(_on_body_entered.bind(x, z))",
+        "pass # Deliberately disconnect collection."
+      ],
+      "required_failure": "fault/collects_named_address",
+      "detected": true
+    },
+    "swapped_binding": {
+      "mutation": [
+        "_on_body_entered.bind(x, z)",
+        "_on_body_entered.bind(z, x)"
+      ],
+      "required_failure": "fault/collects_named_address",
+      "detected": true
+    },
+    "whole_study_removed": {
+      "mutation": [
+        "cubes[x][z].queue_free()",
+        "queue_free()"
+      ],
+      "required_failure": "fault/study_survives",
+      "detected": true
+    },
+    "shift_slot": {
+      "mutation": [
+        "grid_data[x][z] = 0",
+        "grid_data[x].remove_at(z)"
+      ],
+      "required_failure": "fault/retained_length",
+      "detected": true
+    },
+    "shared_rows": {
+      "mutation": [
+        "grid_data.append([])",
+        "grid_data.append(grid_data[0] if x > 0 else [])"
+      ],
+      "required_failure": "fault/independent_rows",
+      "detected": true
+    },
+    "unrecorded_collection": {
+      "mutation": [
+        "grid_data[x][z] = 0",
+        "pass # Deliberately omit the occupancy write."
+      ],
+      "required_failure": "fault/presence_updated",
+      "detected": true
+    }
+  },
+  "inputs": {
+    "doc/book/iterations/2026-10-06-array-a-slot-kept/tutorial.md": "a0bae1d9fe697dc4434f428f22382badaebf0db29ed8fec27858b1ff34fb26f2",
+    "doc/book/iterations/2026-10-06-array-a-slot-kept/lesson.gd": "d907d7a7ac0de2ca0751929736e0fcb539891a3fd4e1e63a4ca429204bb92bc6",
+    "doc/book/iterations/2026-10-06-array-a-slot-kept/verify.gd": "f450fea484ddfa61111d9771a226fd2e9558f35a8132cf20bcfb1386571106f3",
+    "doc/book/iterations/2026-10-06-array-a-slot-kept/run_checks.py": "70e258047d7dcddb59ec79de4893d158dcacf751c772a64a8af32eee431f3f82",
+    "doc/book/iterations/2026-10-06-array-a-slot-kept/native-project.godot": "c04048499bedd9520f674ef9a8f54b6a1ff6d4450e0ca06d64f26408f4605f18"
+  },
+  "preserved": {
+    "commons/maps/Array/tutorial.md": null,
+    "commons/maps/Array/final.md": "65c7f52d3fe627ac484a92d27a2cb281ab40f89d1fdf675bed3926b5f9a3206b",
+    "commons/maps/Array/map_data.json": "4215025442d726a4918db5d5b6e353a4f85b9d5a7e8e6d89a44913e88c52146c",
+    "commons/maps/sequences/array_tutorial.json": "26d3c629bf7d0e0af4cb3310d06f0da883d330f2db41e691cbc123c50fe29281",
+    "doc/book/course/execution-plan/plan.json": "7ea2524f93441abb3bed08a94ae3f0604c4eb3abbda6d021779a9d9a7d8c32f6"
+  },
+  "test_project": "C:\\Users\\palle\\AppData\\Local\\Temp\\ada-array-draft-0_n9ixos",
+  "scope": "Exact printed self-contained study, actual native physics overlaps with synthetic CharacterBody3D capsules on declared desktop/XR layers; translated and rotated host; object and resource identity, retained slots, reference clearing, repeated collection, bounds, empty and single cases, readout initialization and exercise variants. No headset, full museum runtime integration or human learning test."
+}

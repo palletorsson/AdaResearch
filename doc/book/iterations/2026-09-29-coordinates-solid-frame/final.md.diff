@@ -1,0 +1,11 @@
+--- before/final.md
++++ after/final.md
+@@ -28,7 +28,7 @@
+ 
+ <!-- @CoordinateSystem3M -->
+ 
+-Follow the coloured frame's guides as you move the point in your hand. Red follows X, green follows Y, blue follows Z. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
++Follow the coloured frame's guides as you move the point in your hand. Pink follows X, grey follows Y, black follows Z. These colours were chosen for this room; the letters name the directions. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+ 
+ The two cards give the same point different addresses. `WORLD` measures from the scene's origin; `LOCAL` uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.
+ 

@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "shared field encounter loaded in museum",
+      "passed": true
+    },
+    {
+      "name": "field starts held while particles remain active",
+      "passed": true
+    },
+    {
+      "name": "status label is beyond far canvas edge",
+      "passed": true
+    },
+    {
+      "name": "held field still produces particle movement",
+      "passed": true
+    },
+    {
+      "name": "ARROWS reveals shared field directions",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: flow-field-held",
+      "passed": true
+    },
+    {
+      "name": "FIELD TIME advances the sampled field",
+      "passed": true
+    },
+    {
+      "name": "field can be held again with particles active",
+      "passed": true
+    },
+    {
+      "name": "existing Grand Zoetrope remains in hall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: grand-zoetrope",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "status": "FIELD HELD / 80 PARTICLES\nARROWS HIDDEN"
+  },
+  "passed": true,
+  "room": "Flow_Field",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

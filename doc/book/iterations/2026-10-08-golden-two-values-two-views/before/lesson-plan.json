@@ -1,0 +1,24 @@
+{
+  "id": "Fractal_GoldenSpiral",
+  "decision": "draft",
+  "mode": "build",
+  "object": "A finite recurrence with explicitly named display mappings.",
+  "change": "Build a finite Fibonacci list, then compare two height mappings against a fixed-unit addition witness.",
+  "dependsOn": [
+    "Point_Trace",
+    "Noise_Columns"
+  ],
+  "reuses": "An ordered numerical record can be extended.; One source can feed distinct receiving functions.",
+  "given": "tower display; logarithm function; rectangle study",
+  "later": "Do not explain every visible artifact. Do not introduce logarithms silently: supply their input-output mapping here, with a deeper derivation optional.",
+  "checks": [],
+  "transfer": "Select one independent variation of this operation after verifying the learner host; require prediction and explanation, not only successful execution.",
+  "carry": "A finite recurrence with explicitly named display mappings.",
+  "next": "Source audit first: verify the selected artifact and learner edit location; replace broad scope with one minimal construction, a concrete behaviour assertion and a transfer task before writing code.",
+  "notes": "The encounter supports the comparison but omits the learner's recurrence loop and explicit supplied logarithmic mapping.",
+  "baseline": {
+    "tutorial": "115f2ac9b9de6257b58020827f3b5632a2df7ebee2cbfcbbc3c34ade26b0a310",
+    "choice": "fcbcb3a8eaef1f59a7d3e043eae423d043a523e890454b871ae39d6571aea128"
+  },
+  "summary": "Build a finite Fibonacci list from two starting values. Feed the same values into two named height mappings and compare both against an unchanged fixed-unit addition witness. Predict the next number before either display. Tower and logarithm implementation are supplied. Carry a recurrence and separate display readers; a numerical relationship does not establish a universal rule of beauty."
+}

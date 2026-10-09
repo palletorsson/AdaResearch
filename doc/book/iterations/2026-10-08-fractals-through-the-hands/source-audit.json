@@ -1,0 +1,779 @@
+{
+  "date": "2026-10-08",
+  "kind": "source review, not runtime certification",
+  "sequence_sha256": "98fc39595025112a2e130e6829c08efdf0558957d90d6794924ea33650925deb",
+  "placement_count": 65,
+  "distinct_artifact_keys": 47,
+  "missing_scene_files": [],
+  "halls": [
+    {
+      "map": "Fractal_Recursion",
+      "placements": [
+        {
+          "key": "fractal_recursion_2",
+          "cell": [
+            4,
+            5
+          ],
+          "token": "fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true#room:thresholds",
+          "scene": "res://algorithms/fractals/example_8_2_recursion_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "example_8_3_recursion_circles_vr",
+          "cell": [
+            12,
+            5
+          ],
+          "token": "example_8_3_recursion_circles_vr:180:2.4#depth:1#rotation_speed:0#lesson:true",
+          "scene": "res://algorithms/fractals/example_8_3_recursion_circles_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cube_subdivision",
+          "cell": [
+            4,
+            11
+          ],
+          "token": "cube_subdivision:180:1.5#seed_value:31415#lesson:true",
+          "scene": "res://algorithms/fractals/cubesubdivision/cube_subdivision.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "recursive_chair",
+          "cell": [
+            12,
+            11
+          ],
+          "token": "recursive_chair:180:0#lesson:true",
+          "scene": "res://algorithms/fractals/cubesubdivision/recursive_chair.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "science_screen",
+          "cell": [
+            2,
+            14
+          ],
+          "token": "science_screen:90:0.04#mode:bars#label:Independent sample",
+          "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            14,
+            15
+          ],
+          "token": "dark_sphere",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "recursive_table",
+          "cell": [
+            4,
+            17
+          ],
+          "token": "recursive_table:180:0:0.8",
+          "scene": "res://algorithms/fractals/cubesubdivision/recursive_table.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cube_staircase",
+          "cell": [
+            12,
+            17
+          ],
+          "token": "cube_staircase:180:0:0.6",
+          "scene": "res://algorithms/fractals/cubesubdivision/cube_staircase.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fibonacci_pagoda",
+          "cell": [
+            4,
+            22
+          ],
+          "token": "fibonacci_pagoda:180:0.7:0.55",
+          "scene": "res://algorithms/fractals/pillar/fibonacci_pagoda.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "synthesis_stand",
+          "cell": [
+            12,
+            22
+          ],
+          "token": "synthesis_stand#subject:dark_sphere#mode:hero",
+          "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 450,
+          "gdscript_blocks": 8,
+          "sha256": "1863a7018d32e2351398d5a89384f9f9c4f9e4ca45bc918c8feb4225ba2f4578"
+        },
+        "final.md": {
+          "words": 1200,
+          "gdscript_blocks": 3,
+          "sha256": "0658c680365e892cf61fcb91e9e24d9ec44bbfb5ffab45f73322fb347202f30a"
+        }
+      }
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "placements": [
+        {
+          "key": "recursive_tree_2",
+          "cell": [
+            4,
+            5
+          ],
+          "token": "recursive_tree_2:180#lesson:true#room:canopy",
+          "scene": "res://algorithms/fractals/recursivetree/recursive_tree.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "recursive_tree",
+          "cell": [
+            12,
+            5
+          ],
+          "token": "recursive_tree:180:0:0.42#lesson:true",
+          "scene": "res://algorithms/fractals/recursive_tree/recursive_tree.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "living_paper",
+          "cell": [
+            7,
+            11
+          ],
+          "token": "living_paper:180#algorithm:mandelbrot",
+          "scene": "res://commons/primitives/living_paper/living_paper.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fractal_lsystem_tree",
+          "cell": [
+            11,
+            11
+          ],
+          "token": "fractal_lsystem_tree:0:0:0.4",
+          "scene": "res://algorithms/fractals/example_8_9_lsystem_tree_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "small_subdivision_cube",
+          "cell": [
+            2,
+            14
+          ],
+          "token": "small_subdivision_cube",
+          "scene": "res://commons/primitives/cubes/subdivision_cube.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "small_subdivision_cube",
+          "cell": [
+            3,
+            14
+          ],
+          "token": "small_subdivision_cube",
+          "scene": "res://commons/primitives/cubes/subdivision_cube.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "inverted_tree_cloud",
+          "cell": [
+            3,
+            15
+          ],
+          "token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true",
+          "scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            8,
+            16
+          ],
+          "token": "dark_sphere",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cube_desk",
+          "cell": [
+            2,
+            17
+          ],
+          "token": "cube_desk",
+          "scene": "res://algorithms/fractals/cubesubdivision/cube_desk.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "inverted_tree_cloud",
+          "cell": [
+            13,
+            17
+          ],
+          "token": "inverted_tree_cloud:0:3:0.32#freeze_cloud:true#aftermath:strata",
+          "scene": "res://algorithms/fractals/recursive_tree/inverted_tree_cloud.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fractal_scene",
+          "cell": [
+            5,
+            20
+          ],
+          "token": "fractal_scene:0:1:0.65",
+          "scene": "res://algorithms/fractals/meshfractal/fractal_scene.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "mobius_world",
+          "cell": [
+            3,
+            22
+          ],
+          "token": "mobius_world:0:1.25:0.06",
+          "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 163,
+          "gdscript_blocks": 0,
+          "sha256": "c70dd67ec47a75fe7e5eb980086acfaa5f47569d131455b747af00b5be4e8874"
+        },
+        "final.md": {
+          "words": 1001,
+          "gdscript_blocks": 2,
+          "sha256": "921a00ccabcf21ff65890c2ab187940693908db401a860c04b790d49b5cd9dbb"
+        }
+      }
+    },
+    {
+      "map": "Fractal_CantorSet",
+      "placements": [
+        {
+          "key": "film_cantor_thirds",
+          "cell": [
+            2,
+            1
+          ],
+          "token": "film_cantor_thirds:0:0#plinth:0#pin:true",
+          "scene": "res://commons/artifacts/spine_films/monitors/film_cantor_thirds.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cantor_set",
+          "cell": [
+            5,
+            4
+          ],
+          "token": "cantor_set:180#lesson:true",
+          "scene": "res://algorithms/fractals/cantorset/cantor_set.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "example_8_4_cantor_set_vr",
+          "cell": [
+            14,
+            4
+          ],
+          "token": "example_8_4_cantor_set_vr:180:1.2#tick:limit#max_depth:5#initial_width:3.6#vertical_spacing:0.25",
+          "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            16,
+            8
+          ],
+          "token": "dark_sphere",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "example_8_4_cantor_pagoda_vr",
+          "cell": [
+            9,
+            12
+          ],
+          "token": "example_8_4_cantor_pagoda_vr:180#lesson:true",
+          "scene": "res://algorithms/fractals/example_8_4_cantor_pagoda_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fractal_clouds",
+          "cell": [
+            15,
+            17
+          ],
+          "token": "fractal_clouds:0:5:0.25",
+          "scene": "res://algorithms/fractals/fractal_clouds/fractal_clouds.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "stochastic_tree_separated",
+          "cell": [
+            4,
+            18
+          ],
+          "token": "stochastic_tree_separated",
+          "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "stochastic_tree_separated",
+          "cell": [
+            9,
+            18
+          ],
+          "token": "stochastic_tree_separated",
+          "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "stochastic_tree_separated",
+          "cell": [
+            13,
+            18
+          ],
+          "token": "stochastic_tree_separated",
+          "scene": "res://algorithms/fractals/example_8_7_stochastic_tree_separated_vr.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 177,
+          "gdscript_blocks": 0,
+          "sha256": "70d48be3fc51f0d2cba3ce25c64545978e4d5e891dd8e393dcc783884bedc9fc"
+        },
+        "final.md": {
+          "words": 956,
+          "gdscript_blocks": 2,
+          "sha256": "0c090bb8f456b1bf789b44040a72455cdbe9c6a3d9ad3017d83a18bab8a456d3"
+        }
+      }
+    },
+    {
+      "map": "Fractal_KochSierpinski",
+      "placements": [
+        {
+          "key": "fractal_koch_curve",
+          "cell": [
+            5,
+            6
+          ],
+          "token": "fractal_koch_curve:180#lesson:true",
+          "scene": "res://algorithms/fractals/example_8_5_koch_curve_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "sierpinski_triangle",
+          "cell": [
+            13,
+            6
+          ],
+          "token": "sierpinski_triangle:180#lesson:true",
+          "scene": "res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "recursion_observatory",
+          "cell": [
+            13,
+            13
+          ],
+          "token": "recursion_observatory:180#tick:coarse",
+          "scene": "res://commons/artifacts/recursion_observatory/recursion_observatory.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "box_counting_dimension",
+          "cell": [
+            6,
+            14
+          ],
+          "token": "box_counting_dimension:180#lesson:true",
+          "scene": "res://algorithms/fractals/box_counting_dimension/box_counting_dimension.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "science_screen",
+          "cell": [
+            13,
+            16
+          ],
+          "token": "science_screen:180:0:0.6#mode:trace",
+          "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cube_cabin",
+          "cell": [
+            5,
+            21
+          ],
+          "token": "cube_cabin:180:0:0.65",
+          "scene": "res://algorithms/fractals/cubesubdivision/cube_cabin.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cube_bookshelf",
+          "cell": [
+            13,
+            21
+          ],
+          "token": "cube_bookshelf:180:0:0.75",
+          "scene": "res://algorithms/fractals/cubesubdivision/cube_bookshelf.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            9,
+            22
+          ],
+          "token": "dark_sphere",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "sierpinski_pyramid",
+          "cell": [
+            6,
+            25
+          ],
+          "token": "sierpinski_pyramid:180:1.0125:0.45#tick:fine#lesson:true#plinth:0",
+          "scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "koch_curve_3d",
+          "cell": [
+            13,
+            25
+          ],
+          "token": "koch_curve_3d:180:0.05#tick:coarse",
+          "scene": "res://algorithms/fractals/koshcurve/KochCurve3D.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 270,
+          "gdscript_blocks": 0,
+          "sha256": "e7196954f0d4dc1fb4b7663760a7994de002b8b5cd968c8d05e276bde7ffddb9"
+        },
+        "final.md": {
+          "words": 1399,
+          "gdscript_blocks": 3,
+          "sha256": "ce1cfd2522b391580666ae2effc9515145ce307b261f3770b27160796c2604b9"
+        }
+      }
+    },
+    {
+      "map": "Fractal_MengerSponge",
+      "placements": [
+        {
+          "key": "film_menger_twenty",
+          "cell": [
+            10,
+            1
+          ],
+          "token": "film_menger_twenty:0:0#plinth:0#pin:true",
+          "scene": "res://commons/artifacts/spine_films/monitors/film_menger_twenty.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "diffusion_limited_aggregation",
+          "cell": [
+            4,
+            4
+          ],
+          "token": "diffusion_limited_aggregation",
+          "scene": "res://algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "catalyst_prompter_box",
+          "cell": [
+            1,
+            6
+          ],
+          "token": "catalyst_prompter_box:0:0#emergence:slide#sequence:auto#lease_s:45",
+          "scene": "res://commons/hazards/becoming_catalyst/catalyst_prompter_box.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "menger_sponge",
+          "cell": [
+            7,
+            9
+          ],
+          "token": "menger_sponge:0:2#flight_box:true#lesson:true",
+          "scene": "res://algorithms/fractals/mengersponge/menger_sponge.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            7,
+            10
+          ],
+          "token": "dark_sphere",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "catalyst_vent",
+          "cell": [
+            1,
+            13
+          ],
+          "token": "catalyst_vent:0:0#emit_interval_s:2.5#wave_size:3#start_delay_s:5.0#sequence:auto",
+          "scene": "res://commons/hazards/catalyst_foe/catalyst_vent.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 292,
+          "gdscript_blocks": 0,
+          "sha256": "808d58b59b493fe4101ef51e836b5976013d77ef05f9a79282744c10bae377db"
+        },
+        "final.md": {
+          "words": 858,
+          "gdscript_blocks": 1,
+          "sha256": "8760675333bbf53d341cb2b66afdace7155c58bf4989e8998c6b7b82dc1391b5"
+        }
+      }
+    },
+    {
+      "map": "Fractal_GoldenSpiral",
+      "placements": [
+        {
+          "key": "fibonacci_sequences",
+          "cell": [
+            11,
+            8
+          ],
+          "token": "fibonacci_sequences:0:0#lesson:true",
+          "scene": "res://algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "golden_rectangle",
+          "cell": [
+            15,
+            21
+          ],
+          "token": "golden_rectangle:0:0#preset:rainbow#lesson:true",
+          "scene": "res://algorithms/fractals/golden_rectangle/golden_rectangle.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "the_recursion_cabinet",
+          "cell": [
+            7,
+            29
+          ],
+          "token": "the_recursion_cabinet",
+          "scene": "res://commons/artifacts/the_recursion_cabinet/the_recursion_cabinet.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "diffusion_limited_aggregation",
+          "cell": [
+            16,
+            29
+          ],
+          "token": "diffusion_limited_aggregation",
+          "scene": "res://algorithms/patterngeneration/diffusion_limited_aggregation/diffusion_limited_aggregation.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            11,
+            30
+          ],
+          "token": "dark_sphere",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fibonacci_terrain",
+          "cell": [
+            6,
+            34
+          ],
+          "token": "fibonacci_terrain#preset:deep",
+          "scene": "res://algorithms/fractals/fibonacci_terrain/fibonacci_terrain.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "romanesco",
+          "cell": [
+            15,
+            34
+          ],
+          "token": "romanesco",
+          "scene": "res://algorithms/fractals/romanesco/romanesco.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 206,
+          "gdscript_blocks": 0,
+          "sha256": "115f2ac9b9de6257b58020827f3b5632a2df7ebee2cbfcbbc3c34ade26b0a310"
+        },
+        "final.md": {
+          "words": 1209,
+          "gdscript_blocks": 2,
+          "sha256": "9412a6fe693f0d8bb67ff29a325936a28383579e0cd1ebbb94e0636de5d5eb3e"
+        }
+      }
+    },
+    {
+      "map": "Fractal_Synthesis",
+      "placements": [
+        {
+          "key": "fractal_procedure_gallery",
+          "cell": [
+            2,
+            1
+          ],
+          "token": "fractal_procedure_gallery:180",
+          "scene": "res://commons/artifacts/fractal_procedure_gallery/fractal_procedure_gallery.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "cantor_set",
+          "cell": [
+            5,
+            6
+          ],
+          "token": "cantor_set:180#lesson:true",
+          "scene": "res://algorithms/fractals/cantorset/cantor_set.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "recursive_tree",
+          "cell": [
+            13,
+            6
+          ],
+          "token": "recursive_tree:180:0:0.42#lesson:true",
+          "scene": "res://algorithms/fractals/recursive_tree/recursive_tree.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fractal_recursion_1",
+          "cell": [
+            16,
+            14
+          ],
+          "token": "fractal_recursion_1:180:1.4",
+          "scene": "res://algorithms/fractals/example_8_1_recursion_vr.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "koch_curve",
+          "cell": [
+            16,
+            16
+          ],
+          "token": "koch_curve:180:1.6:0.09#evidence:trace",
+          "scene": "res://algorithms/fractals/koch_curve/koch_curve.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "sierpinski_triangle",
+          "cell": [
+            4,
+            17
+          ],
+          "token": "sierpinski_triangle:0:1.2:0.3",
+          "scene": "res://algorithms/fractals/sierpinskitriangle/sierpinski_triangle.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fractal_clouds",
+          "cell": [
+            8,
+            22
+          ],
+          "token": "fractal_clouds:0:3.4:0.24",
+          "scene": "res://algorithms/fractals/fractal_clouds/fractal_clouds.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            12,
+            22
+          ],
+          "token": "dark_sphere:90",
+          "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "strange_attractors",
+          "cell": [
+            14,
+            22
+          ],
+          "token": "strange_attractors:180:1.2:0.18",
+          "scene": "res://algorithms/chaos/strangeattractors/strange_attractors.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "romanesco",
+          "cell": [
+            4,
+            27
+          ],
+          "token": "romanesco:0:0:0.65",
+          "scene": "res://algorithms/fractals/romanesco/romanesco.tscn",
+          "scene_exists": true
+        },
+        {
+          "key": "fibonacci_sequences",
+          "cell": [
+            10,
+            27
+          ],
+          "token": "fibonacci_sequences:0:1.1:0.40",
+          "scene": "res://algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn",
+          "scene_exists": true
+        }
+      ],
+      "texts": {
+        "tutorial.md": {
+          "words": 169,
+          "gdscript_blocks": 0,
+          "sha256": "c0a689da4fad2569b1400c51088579b8cc15c59ebfecb6ba9f860be960e78a19"
+        },
+        "final.md": {
+          "words": 1129,
+          "gdscript_blocks": 3,
+          "sha256": "a7d3769a08f225b8203e87ea801d7f724b4d14623331dc901587482892cd256d"
+        }
+      }
+    }
+  ]
+}

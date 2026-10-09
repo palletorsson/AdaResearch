@@ -1,0 +1,2722 @@
+[
+  {
+    "map": "Vectors_Act1_WhatAVectorIs",
+    "book_anchors": [
+      "VectorBasics",
+      "vector_normalize_demo"
+    ],
+    "primary_order": [
+      "VectorBasics",
+      "vector_normalize_demo"
+    ],
+    "instances": [
+      {
+        "x": 6,
+        "z": 2,
+        "token": "3t#text:WHAT_IS_A_VECTOR_BEFORE_IT_IS_ANY_PARTICULAR_ARROW#size:0.5",
+        "lookup": "3t",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/scenes/mapobjects/word_is.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "token": "route_vector",
+        "lookup": "route_vector",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/route_vector/route_vector.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "z": 5,
+        "token": "CoordinateSystem3M",
+        "lookup": "CoordinateSystem3M",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 8,
+        "token": "VectorBasics:90:1.1:1#lesson:room_reading#pin:1#plinth:0",
+        "lookup": "VectorBasics",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 11,
+        "token": "length_lantern",
+        "lookup": "length_lantern",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/length_lantern.json",
+            "scene": "res://commons/artifacts/length_lantern/length_lantern.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 14,
+        "token": "vector_normalize_demo",
+        "lookup": "vector_normalize_demo",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "VFM_02_Operations",
+    "book_anchors": [
+      "adder_board"
+    ],
+    "primary_order": [
+      "adder_board"
+    ],
+    "instances": [
+      {
+        "x": 12,
+        "z": 6,
+        "token": "adder_board:180:0:1#lesson:room_sum#pin:1#plinth:0",
+        "lookup": "adder_board",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/adder_board.json",
+            "scene": "res://commons/artifacts/adder_board/adder_board.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 11,
+        "token": "vector_projection_demo",
+        "lookup": "vector_projection_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_projection_demo/vector_projection_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 11,
+        "token": "2d_in_3d_vectors_vis:0:0",
+        "lookup": "2d_in_3d_vectors_vis",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/infoboards_3d/boards/Vectors/2d_in_3d_vectors_vis.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "z": 11,
+        "token": "basis_vectors_rig:0:0",
+        "lookup": "basis_vectors_rig",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 11,
+        "token": "coordinate_system_switcher:0:0",
+        "lookup": "coordinate_system_switcher",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/coordinate_system_switcher/coordinate_system_switcher.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 12,
+        "z": 11,
+        "token": "VectorSubtraction",
+        "lookup": "VectorSubtraction",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 11,
+        "token": "example_1_4_vector_multiplication_vr:0:0",
+        "lookup": "example_1_4_vector_multiplication_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/noc_ch01/example_1_4_vector_multiplication_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 16,
+        "z": 11,
+        "token": "stretch_bench:0:0",
+        "lookup": "stretch_bench",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/stretch_bench.json",
+            "scene": "res://commons/artifacts/stretch_bench/stretch_bench.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 18,
+        "z": 11,
+        "token": "vector_addition_demo:0:0",
+        "lookup": "vector_addition_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_addition_demo/vector_addition_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 20,
+        "z": 11,
+        "token": "vector_addition_xl:0:0",
+        "lookup": "vector_addition_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorAddition",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 22,
+        "z": 11,
+        "token": "vector_magnitude_demo:0:0",
+        "lookup": "vector_magnitude_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 13,
+        "token": "vector_subtraction_demo:0:0",
+        "lookup": "vector_subtraction_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_subtraction_demo/vector_subtraction_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 13,
+        "token": "vector_dot_product_xl",
+        "lookup": "vector_dot_product_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorDotProduct",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 19,
+        "z": 13,
+        "token": "vector_cross_product_xl",
+        "lookup": "vector_cross_product_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorCrossProduct",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 22,
+        "z": 13,
+        "token": "vector_translation_demo:0:0",
+        "lookup": "vector_translation_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_translation_demo/vector_translation_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 15,
+        "token": "dot_aligner",
+        "lookup": "dot_aligner",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 19,
+        "z": 15,
+        "token": "torque_crank",
+        "lookup": "torque_crank",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/torque_crank/torque_crank.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 10,
+        "z": 16,
+        "token": "VectorTorque",
+        "lookup": "VectorTorque",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/09_vector_torque/VectorTorque.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 22,
+        "z": 18,
+        "token": "dot_product_projector",
+        "lookup": "dot_product_projector",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/dot_product_projector/dot_product_projector.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 19,
+        "token": "VectorWorkbench",
+        "lookup": "VectorWorkbench",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/vector_workbench/VectorWorkbench.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 19,
+        "token": "vector_add",
+        "lookup": "vector_add",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/vector_op_console/vector_op_console.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 16,
+        "z": 19,
+        "token": "vector_projection_reflection_xl",
+        "lookup": "vector_projection_reflection_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorProjectionReflection",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 16,
+        "z": 21,
+        "token": "projection_shadow",
+        "lookup": "projection_shadow",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/projection_shadow/projection_shadow.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "z": 23,
+        "token": "agreement_gauge",
+        "lookup": "agreement_gauge",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/agreement_gauge.json",
+            "scene": "res://commons/artifacts/agreement_gauge/agreement_gauge.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 23,
+        "token": "opening_pair:0:0",
+        "lookup": "opening_pair",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/opening_pair.json",
+            "scene": "res://commons/artifacts/opening_pair/opening_pair.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 23,
+        "token": "torque_demo",
+        "lookup": "torque_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://algorithms/vectors/06_vector_cross_product/TorqueDemo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 23,
+        "token": "exercise_5_9_angle_between",
+        "lookup": "exercise_5_9_angle_between",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/steering.json",
+            "scene": "res://algorithms/steering/noc_ch05/exercise_5_9_angle_between_vr.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "Vectors_Act2_VectorArithmetic",
+    "book_anchors": [
+      "vector_add",
+      "vector_sub",
+      "dot_aligner",
+      "projection_shadow",
+      "torque_crank"
+    ],
+    "primary_order": [
+      "vector_add",
+      "vector_sub",
+      "dot_aligner",
+      "projection_shadow",
+      "torque_crank"
+    ],
+    "instances": [
+      {
+        "x": 4,
+        "z": 4,
+        "token": "vector_addition_walk:270",
+        "lookup": "vector_addition_walk",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/vector_addition_walk/vector_addition_walk.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 4,
+        "token": "vector_add",
+        "lookup": "vector_add",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/vector_op_console/vector_op_console.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 9,
+        "token": "vector_sub:180:0:1#lesson:room_gap#pin:1#plinth:0",
+        "lookup": "vector_sub",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/vector_op_console/vector_sub.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 11,
+        "token": "example_2_3_gravity_scaled_by_mass_vr",
+        "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 15,
+        "token": "dot_aligner",
+        "lookup": "dot_aligner",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/dot_aligner/dot_aligner.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 15,
+        "token": "vector_dot_product_xl",
+        "lookup": "vector_dot_product_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorDotProduct",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/03_dot_product/VectorDotProduct.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 21,
+        "token": "projection_shadow:180:0:1#lesson:room_projection#pin:1#plinth:0",
+        "lookup": "projection_shadow",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/projection_shadow/projection_shadow.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 21,
+        "token": "vector_projection_reflection_xl",
+        "lookup": "vector_projection_reflection_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorProjectionReflection",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/07_vector_projection_reflection/VectorProjectionReflection.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 27,
+        "token": "torque_crank",
+        "lookup": "torque_crank",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/torque_crank/torque_crank.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 27,
+        "token": "vector_cross_product_xl",
+        "lookup": "vector_cross_product_xl",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorCrossProduct",
+            "delegate_params": {
+              "scale_multiplier": 5.0
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/06_vector_cross_product/VectorCrossProduct.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 36,
+        "token": "vector_addition_xl_laser",
+        "lookup": "vector_addition_xl_laser",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorAddition",
+            "delegate_params": {
+              "scale_multiplier": 8.0,
+              "laser_endpoints": true
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/02_vector_addition/VectorAddition.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 18,
+        "z": 36,
+        "token": "vector_subtraction_xl_laser",
+        "lookup": "vector_subtraction_xl_laser",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "delegate_to": "VectorSubtraction",
+            "delegate_params": {
+              "scale_multiplier": 8.0,
+              "laser_endpoints": true
+            },
+            "target_registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/04_vector_subtraction/VectorSubtraction.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "VFM_05_Launch",
+    "book_anchors": [
+      "launch_arc"
+    ],
+    "primary_order": [
+      "launch_arc"
+    ],
+    "instances": [
+      {
+        "x": 17,
+        "z": 7,
+        "token": "launch_arc:180:0:1#lesson:launch_chamber#pin:1#plinth:0",
+        "lookup": "launch_arc",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/launch_arc/launch_arc.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 14,
+        "token": "ForceMagnitudeDemo:0:0",
+        "lookup": "ForceMagnitudeDemo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 17,
+        "z": 14,
+        "token": "VectorForces:0:0",
+        "lookup": "VectorForces",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 16,
+        "token": "catapult:90:0",
+        "lookup": "catapult",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/catapult.json",
+            "scene": "res://commons/artifacts/catapult/catapult.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 28,
+        "z": 17,
+        "token": "hl_turret_vectors:270:0",
+        "lookup": "hl_turret_vectors",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/hl_turret_vectors/hl_turret_vectors.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 32,
+        "z": 17,
+        "token": "turret_boll_infoboard:270:0",
+        "lookup": "turret_boll_infoboard",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/infoboards_3d/boards/TurretBoll/2d_in_3d_turretboll_vis.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 18,
+        "token": "mortar_vector_siege",
+        "lookup": "mortar_vector_siege",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/mortar_vector_siege.json",
+            "scene": "res://commons/artifacts/mortar_vector_siege/mortar_vector_siege.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 18,
+        "z": 19,
+        "token": "firework_burst:90",
+        "lookup": "firework_burst",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/firework_burst/firework_burst.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 20,
+        "token": "VectorThrowing:90:0",
+        "lookup": "VectorThrowing",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/08_vector_throwing/VectorThrowing.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 24,
+        "z": 23,
+        "token": "firework_launcher:90",
+        "lookup": "firework_launcher",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/fireworklauncher/fireworklauncher.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 25,
+        "token": "return_launcher",
+        "lookup": "return_launcher",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/return_launcher/return_launcher.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 29,
+        "token": "human_catapult:90:0",
+        "lookup": "human_catapult",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/human_catapult.json",
+            "scene": "res://commons/artifacts/human_catapult/human_catapult.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 28,
+        "z": 30,
+        "token": "force_pad",
+        "lookup": "force_pad",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/force_pad.json",
+            "scene": "res://commons/artifacts/force_pad/force_pad.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 31,
+        "token": "drag_lane:90",
+        "lookup": "drag_lane",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/drag_lane/drag_lane.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 28,
+        "z": 32,
+        "token": "circle_train:90",
+        "lookup": "circle_train",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/circle_train/circle_train.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 34,
+        "token": "slingshot_launcher:90:0",
+        "lookup": "slingshot_launcher",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/slingshotlauncher/slingshotlauncher.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 16,
+        "z": 36,
+        "token": "foresight_range",
+        "lookup": "foresight_range",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/foresight_range.json",
+            "scene": "res://commons/artifacts/foresight_range/foresight_range.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "VFM_03_Motion",
+    "book_anchors": [
+      "VectorMotion",
+      "friction_ramp"
+    ],
+    "primary_order": [
+      "VectorMotion",
+      "friction_ramp"
+    ],
+    "instances": [
+      {
+        "x": 12,
+        "z": 7,
+        "token": "VectorMotion:180:0:1#lesson:motion_chamber#pin:1#plinth:0",
+        "lookup": "VectorMotion",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 15,
+        "token": "normal_force_demo",
+        "lookup": "normal_force_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 10,
+        "z": 15,
+        "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+        "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/noc_ch01/example_1_9_motion_101_velocity_and_random_acceleration_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 22,
+        "z": 15,
+        "token": "vector_drone",
+        "lookup": "vector_drone",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/08_vector_throwing/vector_drone.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 18,
+        "token": "bouncing_ball",
+        "lookup": "bouncing_ball",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/bouncingball/bouncingball.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 17,
+        "z": 18,
+        "token": "trajectory_artifact",
+        "lookup": "trajectory_artifact",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/dna_grammar_artifacts.json",
+            "scene": "res://commons/artifacts/trajectory_artifact/trajectory_artifact.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 24,
+        "token": "ForceMagnitudeDemo",
+        "lookup": "ForceMagnitudeDemo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/01_vector_basics/ForceMagnitudeDemo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 24,
+        "token": "VectorForces",
+        "lookup": "VectorForces",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/05_vector_forces/VectorForces.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 12,
+        "z": 24,
+        "token": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+        "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 24,
+        "token": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+        "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/noc_ch01/exercise_1_5_solution_accelerate_and_decelerate_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 18,
+        "z": 24,
+        "token": "example_2_5_fluid_resistance_vr",
+        "lookup": "example_2_5_fluid_resistance_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/forces/example_2_5_fluid_resistance_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 27,
+        "token": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+        "lookup": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/oscillation/noc_ch03/example_3_2_forces_with_arbitrary_angular_motion_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 27,
+        "token": "example_3_3_pointing_in_the_direction_of_motion_vr",
+        "lookup": "example_3_3_pointing_in_the_direction_of_motion_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/oscillation/noc_ch03/example_3_3_pointing_in_the_direction_of_motion_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 27,
+        "token": "friction_ramp:180:0.1:1#table:1#pin:1#plinth:0",
+        "lookup": "friction_ramp",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://commons/artifacts/friction_ramp/friction_ramp.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "token": "newton_cradle",
+        "lookup": "newton_cradle",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/newtoncradle/newtoncradle.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 27,
+        "token": "combined_forces_demo",
+        "lookup": "combined_forces_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://algorithms/vectors/02_vector_addition/CombinedForcesDemo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 30,
+        "token": "collision_crasher",
+        "lookup": "collision_crasher",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/collision_crasher/collision_crasher.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "Vectors_Act3_FieldsAndMotion",
+    "book_anchors": [
+      "VectorFieldFlow"
+    ],
+    "primary_order": [
+      "VectorFieldFlow"
+    ],
+    "instances": [
+      {
+        "x": 9,
+        "z": 7,
+        "token": "VectorFieldFlow:180:0:1#lesson:field_receivers#pin:1#plinth:0",
+        "lookup": "VectorFieldFlow",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "z": 14,
+        "token": "field_room:0:0",
+        "lookup": "field_room",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/field_room.json",
+            "scene": "res://commons/artifacts/field_room/field_room.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 15,
+        "token": "force_field_visualizer:0:0",
+        "lookup": "force_field_visualizer",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 15,
+        "token": "force_fields:0:0",
+        "lookup": "force_fields",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/forcefields/forcefields.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "z": 15,
+        "token": "force_vortex:0:0",
+        "lookup": "force_vortex",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/force_vortex.json",
+            "scene": "res://commons/artifacts/force_vortex/force_vortex.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 15,
+        "token": "magnetic_simulation:0:0",
+        "lookup": "magnetic_simulation",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/magneticsimulation/magnetic_simulation.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 15,
+        "token": "particle_systems:0:0",
+        "lookup": "particle_systems",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/particlesystems/particlesystems.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 15,
+        "token": "vector_field:0:1.5:0.18#pin:1#plinth:0",
+        "lookup": "vector_field",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/transforms.json",
+            "scene": "res://algorithms/transformation/vector_field/vector_field.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 17,
+        "token": "vector_fields:0:0",
+        "lookup": "vector_fields",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/vectorfields/vectorfields.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 24,
+        "token": "weather_vector_field",
+        "lookup": "weather_vector_field",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://algorithms/vectors/weather_vector_field/weather_vector_field.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 31,
+        "token": "launch_arc",
+        "lookup": "launch_arc",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/launch_arc/launch_arc.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 31,
+        "token": "bubble_blaster",
+        "lookup": "bubble_blaster",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/bubble_blaster/bubble_blaster.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 34,
+        "token": "VectorMotion",
+        "lookup": "VectorMotion",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "Vectors_Act4a_KineticForces",
+    "book_anchors": [
+      "drag_corridor",
+      "force_mower",
+      "centrifuge_ring"
+    ],
+    "primary_order": [
+      "drag_corridor",
+      "force_mower",
+      "centrifuge_ring"
+    ],
+    "instances": [
+      {
+        "x": 15,
+        "z": 8,
+        "token": "drag_corridor:0:0:1#lesson:kinetic_drag#pin:1#plinth:0",
+        "lookup": "drag_corridor",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/drag_corridor/drag_corridor.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 17,
+        "token": "wedge_slide",
+        "lookup": "wedge_slide",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/wedge_slide/wedge_slide.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 37,
+        "token": "centrifuge_ring:0:0:1#lesson:kinetic_turn#speed:0#pin:1#plinth:0",
+        "lookup": "centrifuge_ring",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/centrifuge_ring/centrifuge_ring.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 24,
+        "token": "orbit_walk",
+        "lookup": "orbit_walk",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/orbit_walk/orbit_walk.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 30,
+        "token": "force_pad",
+        "lookup": "force_pad",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/force_pad.json",
+            "scene": "res://commons/artifacts/force_pad/force_pad.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 24,
+        "token": "force_mower",
+        "lookup": "force_mower",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/force_mower/force_mower.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 37,
+        "token": "sisyphus_mower",
+        "lookup": "sisyphus_mower",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/sisyphus_mower/sisyphus_mower.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 17,
+        "z": 41,
+        "token": "prop_carousel",
+        "lookup": "prop_carousel",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/prop_carousel/prop_carousel.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "Vectors_Act4b_Oscillation",
+    "book_anchors": [
+      "spring_tower"
+    ],
+    "primary_order": [
+      "spring_tower"
+    ],
+    "instances": [
+      {
+        "x": 15,
+        "z": 8,
+        "token": "spring_tower:0:0:1#lesson:restoring_forces#pin:1#plinth:0",
+        "lookup": "spring_tower",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/spring_tower/spring_tower.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 16,
+        "token": "ChainSwing:0:0",
+        "lookup": "ChainSwing",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/joint/07_chain_swing/ChainSwing.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 16,
+        "token": "ConeTwistBag:0:0",
+        "lookup": "ConeTwistBag",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/joint/06_cone_twist_bag/ConeTwistBag.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 17,
+        "token": "calder_object_mobile#label_depth:scene",
+        "lookup": "calder_object_mobile",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/calder_mobile/calder_object_mobile.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 17,
+        "token": "HingeCrank:0:0",
+        "lookup": "HingeCrank",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/joint/03_hinge_crank/HingeCrank.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "z": 17,
+        "token": "SliderPress:0:0",
+        "lookup": "SliderPress",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/joint/04_slider_press/SliderPress.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "z": 17,
+        "token": "coupled_pendulums:0:0",
+        "lookup": "coupled_pendulums",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 17,
+        "token": "harmonic_motion_demo:0:0",
+        "lookup": "harmonic_motion_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/harmonic_motion_demo/harmonic_motion_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 17,
+        "token": "mass_spring_damper:0:0",
+        "lookup": "mass_spring_damper",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/massspringdamper/massspringdamper.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 17,
+        "z": 17,
+        "token": "slingshot_pull:0:0",
+        "lookup": "slingshot_pull",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/slingshot_pull/slingshot_pull.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 19,
+        "z": 17,
+        "token": "spring_network:0:0",
+        "lookup": "spring_network",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/spring_network/spring_network.tscn",
+            "exists": true
+          },
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/spring_network/spring_network.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 17,
+        "token": "spring_system:0:0",
+        "lookup": "spring_system",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/springsystem/spring_system.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 23,
+        "z": 17,
+        "token": "surreal_kinetic_sculpture:0:0.7:0.12#presentation:museum#pin:1#plinth:0",
+        "lookup": "surreal_kinetic_sculpture",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/surrealkineticsculpture/SurrealKineticSculpture.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 25,
+        "z": 17,
+        "token": "vector_joint_playground:0:0",
+        "lookup": "vector_joint_playground",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/playground/vector_joint_playground.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 27,
+        "z": 17,
+        "token": "work_energy_demo:0:0",
+        "lookup": "work_energy_demo",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://algorithms/vectors/03_dot_product/WorkEnergyDemo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 24,
+        "token": "pendulum_hall#label_depth:scene",
+        "lookup": "pendulum_hall",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/pendulum_hall/pendulum_hall.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 25,
+        "token": "example_6_4_windmill_vr",
+        "lookup": "example_6_4_windmill_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physics/example_6_4_windmill_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "z": 30,
+        "token": "weather_vane",
+        "lookup": "weather_vane",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/weather_vane/weather_vane.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 30,
+        "token": "calder_mobile#label_depth:scene",
+        "lookup": "calder_mobile",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/calder_mobile/calder_mobile.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 36,
+        "token": "lever_balance",
+        "lookup": "lever_balance",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/lever_balance/lever_balance.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 37,
+        "token": "momentum_cradle",
+        "lookup": "momentum_cradle",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/momentum_cradle/momentum_cradle.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 37,
+        "token": "bounce_well",
+        "lookup": "bounce_well",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/bounce_well/bounce_well.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "Change_Choreography",
+    "book_anchors": [
+      "phase_rod_array",
+      "conveyor_backlog"
+    ],
+    "primary_order": [
+      "phase_rod_array",
+      "conveyor_backlog"
+    ],
+    "instances": [
+      {
+        "x": 18,
+        "z": 6,
+        "token": "if_not_exist_create:180:0:1#make:floor_eyes_delayed_attention#why:Twenty_boxed_floor_eyes_follow_the_player_with_different_delays#like:phase_rod_array#cells:4x4#height:1.8#solid:0#pin:1#plinth:0",
+        "lookup": "if_not_exist_create",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/if_not_exist_create/if_not_exist_create.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "token": "phase_rod_array:180:0:1#pin:1#plinth:0",
+        "lookup": "phase_rod_array",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/change.json",
+            "scene": "res://commons/artifacts/timing_machines/phase_rod_array.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 18,
+        "z": 11,
+        "token": "if_not_exist_create:180:0:1#make:late_connection_platform#why:Two_platforms_miss_each_other_until_the_player_adjusts_phase#like:phase_rod_array#cells:4x3#height:1.8#solid:0#pin:1#plinth:0",
+        "lookup": "if_not_exist_create",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/if_not_exist_create/if_not_exist_create.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "z": 18,
+        "token": "if_not_exist_create:180:0:1#make:escalator_wrong_destination#why:An_escalator_meets_a_wall_with_a_clear_alternate_exit#like:conveyor_belt#cells:5x4#height:1.8#solid:0#pin:1#plinth:0",
+        "lookup": "if_not_exist_create",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/if_not_exist_create/if_not_exist_create.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 18,
+        "z": 18,
+        "token": "conveyor_backlog:180:0:1#pin:1#plinth:0",
+        "lookup": "conveyor_backlog",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/change.json",
+            "scene": "res://commons/artifacts/timing_machines/conveyor_backlog.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 19,
+        "z": 22,
+        "token": "parametric_pendulum_waves:180",
+        "lookup": "parametric_pendulum_waves",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/wavefunctions.json",
+            "scene": "res://algorithms/wavefunctions/parametric_pendulum_waves/parametric_pendulum_waves.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 24,
+        "token": "if_not_exist_create:180:0:1#make:mutual_cleanup_machines#why:Two_sweepers_deliver_their_remainder_into_each_others_patch#like:conveyor_backlog#cells:5x2#height:1.8#solid:0#pin:1#plinth:0",
+        "lookup": "if_not_exist_create",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/if_not_exist_create/if_not_exist_create.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "VFM_07_Gravity",
+    "book_anchors": [
+      "orbital_mechanics_demo",
+      "three_body_problem"
+    ],
+    "primary_order": [
+      "orbital_mechanics_demo",
+      "three_body_problem"
+    ],
+    "instances": [
+      {
+        "x": 11,
+        "z": 8,
+        "token": "orbital_mechanics_demo:0:0:1#lesson:gravity_orbit#pin:1#plinth:0",
+        "lookup": "orbital_mechanics_demo",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/commons_artifacts.json",
+            "scene": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 24,
+        "token": "three_body_problem:0:0:1#lesson:gravity_relations#pin:1#plinth:0",
+        "lookup": "three_body_problem",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 20,
+        "z": 33,
+        "token": "nbody_simulation",
+        "lookup": "nbody_simulation",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/nbodysimulation/nbody_problem.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 14,
+        "z": 35,
+        "token": "forcedirected3d:0:2:0.08#presentation:museum#pin:1#plinth:0",
+        "lookup": "forcedirected3d",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/algorithms_misc.json",
+            "scene": "res://algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 40,
+        "token": "exercise_1_8_solution_attraction_magnitude_vr",
+        "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://algorithms/vectors/noc_ch01/exercise_1_8_solution_attraction_magnitude_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 40,
+        "token": "example_2_8_two_body_attraction_vr",
+        "lookup": "example_2_8_two_body_attraction_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/forces/example_2_8_two_body_attraction_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 12,
+        "z": 40,
+        "token": "example_2_9_n_body_attraction_vr",
+        "lookup": "example_2_9_n_body_attraction_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/forces/example_2_9_n_body_attraction_vr.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 42,
+        "token": "orbit_pair",
+        "lookup": "orbit_pair",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/orbit_pair/orbit_pair.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 43,
+        "token": "gravity_well",
+        "lookup": "gravity_well",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/gravitywell/gravitywell.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 12,
+        "z": 43,
+        "token": "grid3d_force_directed",
+        "lookup": "grid3d_force_directed",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/grid3d.json",
+            "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 20,
+        "z": 46,
+        "token": "chaos_attractor",
+        "lookup": "chaos_attractor",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://algorithms/chaos/strangeattractors/strange_attractors.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "VFM_09_Legs",
+    "book_anchors": [
+      "support_polygon_lab",
+      "four_leg_critter"
+    ],
+    "primary_order": [
+      "support_polygon_lab",
+      "four_leg_critter"
+    ],
+    "instances": [
+      {
+        "x": 16,
+        "z": 8,
+        "token": "support_polygon_lab:0:0:1#pin:1#plinth:0",
+        "lookup": "support_polygon_lab",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/support_experiments.json",
+            "scene": "res://commons/artifacts/support_polygon_lab/support_polygon_lab.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 3,
+        "z": 25,
+        "token": "one_leg#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35",
+        "lookup": "one_leg",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/one_leg.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 7,
+        "z": 25,
+        "token": "two_leg_critter#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35",
+        "lookup": "two_leg_critter",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/two_leg_critter.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 25,
+        "token": "three_leg_critter#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35",
+        "lookup": "three_leg_critter",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/three_leg_critter.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 25,
+        "token": "four_leg_critter#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35",
+        "lookup": "four_leg_critter",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/four_leg_critter.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 19,
+        "z": 25,
+        "token": "five_leg_critter#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35",
+        "lookup": "five_leg_critter",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/five_leg_critter.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 23,
+        "z": 25,
+        "token": "six_leg_critter#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35",
+        "lookup": "six_leg_critter",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/six_leg_critter.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 27,
+        "z": 25,
+        "token": "octapod_ik#driven_by_player:false#show_foot_markers:false#pace_reach:1.4#patrol_speed:0.35#walker_scale:8.0",
+        "lookup": "octapod_ik",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/octapod_crawler/octapod_ik.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "VFM_08_Arena",
+    "book_anchors": [
+      "arena_relation_lab",
+      "collision_carts"
+    ],
+    "primary_order": [
+      "arena_relation_lab",
+      "collision_carts"
+    ],
+    "instances": [
+      {
+        "x": 13,
+        "z": 8,
+        "token": "arena_relation_lab:0:0:1#pin:1#plinth:0",
+        "lookup": "arena_relation_lab",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/arena_experiments.json",
+            "scene": "res://commons/artifacts/arena_relation_lab/arena_relation_lab.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 16,
+        "token": "brake_skid:0:0#label_depth:scene",
+        "lookup": "brake_skid",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/brake_skid/brake_skid.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 16,
+        "token": "parlour_orbits:0:0",
+        "lookup": "parlour_orbits",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/parlour_orbits/parlour_orbits.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 17,
+        "token": "newtons_laws",
+        "lookup": "newtons_laws",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/newtonslaws/newtonslaws.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 17,
+        "token": "paused_fountain:0:0",
+        "lookup": "paused_fountain",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/paused_fountain/paused_fountain.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 17,
+        "token": "prop_mobile:0:0",
+        "lookup": "prop_mobile",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/prop_mobile/prop_mobile.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 17,
+        "token": "prop_spigot:0:0",
+        "lookup": "prop_spigot",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/prop_spigot/prop_spigot.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 15,
+        "z": 17,
+        "token": "revolving_door:0:0",
+        "lookup": "revolving_door",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/revolving_door/revolving_door.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 17,
+        "z": 17,
+        "token": "three_gravities:0:0",
+        "lookup": "three_gravities",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/three_gravities/three_gravities.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 19,
+        "z": 17,
+        "token": "tug_of_war:0:0#label_depth:scene",
+        "lookup": "tug_of_war",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/tug_of_war/tug_of_war.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 21,
+        "z": 17,
+        "token": "umbrella_field:0:0",
+        "lookup": "umbrella_field",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/umbrella_field/umbrella_field.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 18,
+        "token": "turret_targeting",
+        "lookup": "turret_targeting",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/turret_targeting/turret_targeting.tscn",
+            "exists": true
+          },
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://algorithms/vectors/11_turret_targeting/TurretTargeting.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 22,
+        "z": 19,
+        "token": "reflection_hall",
+        "lookup": "reflection_hall",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/reflection_hall.json",
+            "scene": "res://commons/artifacts/reflection_hall/reflection_hall.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 13,
+        "z": 24,
+        "token": "queer_cylinder_target",
+        "lookup": "queer_cylinder_target",
+        "role": "decoration",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/primitives.json",
+            "scene": "res://commons/primitives/targets/queer_cylinder_target.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 5,
+        "z": 25,
+        "token": "vector_arena",
+        "lookup": "vector_arena",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vector_arena.json",
+            "scene": "res://commons/artifacts/vector_arena/vector_arena.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "z": 27,
+        "token": "collision_carts",
+        "lookup": "collision_carts",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/collision_carts/collision_carts.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 16,
+        "z": 29,
+        "token": "momentum_cradle",
+        "lookup": "momentum_cradle",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/momentum_cradle/momentum_cradle.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 16,
+        "z": 30,
+        "token": "sentry_turret",
+        "lookup": "sentry_turret",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors.json",
+            "scene": "res://commons/artifacts/sentry_turret/sentry_turret.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 31,
+        "token": "head_crab:0",
+        "lookup": "head_crab",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/head_crab/head_crab.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 20,
+        "z": 32,
+        "token": "head_crab:180#scale:0.11#accent:7fd8cf",
+        "lookup": "head_crab",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/head_crab/head_crab.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 1,
+        "z": 34,
+        "token": "momentum_collision",
+        "lookup": "momentum_collision",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/physicssimulation/momentum_collision/momentum_collision.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 24,
+        "z": 34,
+        "token": "example_2_1_forces_vr",
+        "lookup": "example_2_1_forces_vr",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/physics_simulation.json",
+            "scene": "res://algorithms/forces/example_2_1_forces_vr.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "map": "Vectors_Act5_ForceAsPlace",
+    "book_anchors": [
+      "vector_machine",
+      "force_cube",
+      "force_field_zone"
+    ],
+    "primary_order": [
+      "vector_machine",
+      "force_cube",
+      "force_field_zone"
+    ],
+    "instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "token": "free_vector:0:0:0.7",
+        "lookup": "free_vector",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/free_vector/free_vector.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 11,
+        "z": 4,
+        "token": "force_field",
+        "lookup": "force_field",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/hazards.json",
+            "scene": "res://commons/hazards/force_field/force_field.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 9,
+        "z": 5,
+        "token": "force_cube#lesson:force_as_place",
+        "lookup": "force_cube",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/force_cube/force_cube.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 4,
+        "z": 6,
+        "token": "vector_machine:180#lesson:force_as_place",
+        "lookup": "vector_machine",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/vector_machine/vector_machine.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 6,
+        "token": "force_cube#lesson:force_as_place",
+        "lookup": "force_cube",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/force_cube/force_cube.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 10,
+        "z": 6,
+        "token": "force_cube#lesson:force_as_place",
+        "lookup": "force_cube",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/force_cube/force_cube.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 8,
+        "z": 12,
+        "token": "force_field_zone#lesson:force_as_place",
+        "lookup": "force_field_zone",
+        "role": "primary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/force_field_zone/force_field_zone.tscn",
+            "exists": true
+          }
+        ]
+      },
+      {
+        "x": 12,
+        "z": 18,
+        "token": "invisible_hill:0:0:0.68",
+        "lookup": "invisible_hill",
+        "role": "secondary",
+        "sources": [
+          {
+            "registry": "commons/artifacts/registry/vectors_demos.json",
+            "scene": "res://commons/artifacts/invisible_hill/invisible_hill.tscn",
+            "exists": true
+          }
+        ]
+      }
+    ]
+  }
+]

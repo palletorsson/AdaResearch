@@ -1,0 +1,180 @@
+{
+ "state": {
+  "hall": "Tutorial_3D",
+  "hall_description": "",
+  "chapter_opening": "",
+  "hall_captions": [],
+  "stations": [
+   {
+    "token": "array_flight_lab",
+    "cell": [
+     10,
+     13
+    ],
+    "what_it_is": "64 familiar pickup cubes spaced 2.4m apart in the existing 12m Menger glass flight enclosure. X/Y/Z controls select a slot; collecting records zero without shifting its address.",
+    "configured_as": [],
+    "readable_text": [
+     {
+      "text": "REACH AN ADDRESS",
+      "set_in": "_ready",
+      "file": "array_flight_lab.gd"
+     },
+     {
+      "text": "[x,y,z] = [%d,%d,%d] | value %d",
+      "set_in": "refresh",
+      "file": "array_flight_lab.gd"
+     },
+     {
+      "text": "FINDING FLOOR",
+      "set_in": "_ready",
+      "file": "disco_controls.gd"
+     },
+     {
+      "text": "PLAY",
+      "set_in": "paint",
+      "file": "disco_controls.gd"
+     },
+     {
+      "text": "HOLD",
+      "set_in": "paint",
+      "file": "disco_controls.gd"
+     },
+     {
+      "text": "FINDING MACHINES",
+      "set_in": "_ready",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "ROOM",
+      "set_in": "refresh",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "WALLS",
+      "set_in": "refresh",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "FLOOR",
+      "set_in": "refresh",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "HELD",
+      "set_in": "refresh",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "LIVE",
+      "set_in": "refresh",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "WAIT",
+      "set_in": "refresh",
+      "file": "pattern_architecture.gd"
+     },
+     {
+      "text": "TRANSLATE",
+      "set_in": "TITLES",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "ALTERNATE",
+      "set_in": "TITLES",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "QUARTER TURN",
+      "set_in": "TITLES",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "REFLECT",
+      "set_in": "TITLES",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "SHIFT ROWS",
+      "set_in": "TITLES",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "ONE EXCEPTION",
+      "set_in": "TITLES",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "config_mode",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "WallBacking",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "Rule_",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "ONE MOTIF / SIX RELATIONS",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "TURN MOTIF",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "EXCEPTION",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "BLACK / WHITE | same tile, different rules",
+      "set_in": "_ready",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "MOTIF %d degrees | exception %s",
+      "set_in": "refresh",
+      "file": "tiling_principles.gd"
+     },
+     {
+      "text": "OFF",
+      "set_in": "refresh",
+      "file": "tiling_principles.gd"
+     }
+    ],
+    "captions_beside_it": [],
+    "chapter_passage": "At the console beside the glass enclosure, press Y +. A transparent marker moves up one layer. Press X +, then Z +. Each button changes one index; after three it returns to zero. Read the selected address before looking for its cube. The marker helps you locate the slot, including a slot whose occupant has gone.\n\nWalk through the ground-level opening. Inside this frame you can fly. On desktop, look and use WASD, with Space to rise and Ctrl to descend. In VR, the left stick follows the tilted left controller. Release the controls to hover. The permission belongs to this enclosure; descend to either ground-level doorway to leave it.\n\nRise beside a column, then move between layers. The cubes are spaced 2.4 metres apart. There is room for a body between neighbouring samples. An indexed volume need not be a solid block.\n\nThe placement extends the earlier row's operation along three directions:\n\n```gdscript\ncube_instance.position = Vector3(x * spacing, y * spacing, z * spacing)\n```\n\nAn index becomes a position through this multiplication. Changing the spacing would change the distances you travel without adding an entry. Changing the number of entries would be another operation. The glass frame is another decision again: it supplies the boundary within which this particular body can move vertically.\n\nChoose an address, approach its cube and collect it by contact. Return to the console and select that address. Its value is now zero. The other cubes have not slid into the vacancy. This small record writes collection as an absence:\n\n```gdscript\nvalues[y][z][x] = 0\n```\n\nThe display names coordinates in x, y, z order; the nested storage selects a y layer, then a z row, then an x entry. Those conventions must be connected explicitly. Neither a list nor a number arrives with a direction built into it.",
+    "source": "commons/artifacts/regularity/array_flight_lab.tscn, commons/artifacts/regularity/array_flight_lab.gd, commons/artifacts/regularity/disco_controls.gd",
+    "no_text_found": false
+   }
+  ]
+ },
+ "model": "jev-latest",
+ "questions": {
+  "states_array_flight_lab_0": {
+   "type": "noul",
+   "instructions": "In the museum hall `hall`, the station `stations[0]` is the artifact 'array_flight_lab'. `stations[0].readable_text` lists text this artifact can show and `stations[0].captions_beside_it` the signs standing beside it; `stations[0].chapter_passage` is what the written chapter asks a visitor to find out at this station. Does that readable text or caption already state the chapter's discovery outright — name the pattern, print the answer, or announce the conclusion — so a visitor could read it instead of finding it?",
+   "criteria": {
+    "true": "The text states the conclusion, names the pattern the chapter wants recognised, or shows the answer the chapter asks the visitor to predict or compare.",
+    "false": "The text only invites, instructs, identifies the object, or reports a neutral quantity, leaving the chapter's discovery to be made by acting."
+   }
+  },
+  "when_array_flight_lab_0": {
+   "type": "choice",
+   "instructions": "For that same station `stations[0]`, when does the room first put that conclusion in front of the visitor? `set_in` on each readable string names the function that sets it: a builder or _ready puts text up on arrival, a button or input handler puts it up after the visitor acts.",
+   "criteria": {
+    "on_arrival": "A sign, plate, title or startup readout carries it before the visitor does anything.",
+    "after_action": "It appears only after a press, a grab, a step or some other action by the visitor.",
+    "not_stated": "The conclusion is not stated by this apparatus at all."
+   }
+  }
+ }
+}

@@ -1,0 +1,65 @@
+--- before/commons/maps/Trans_Rotation/final.md
++++ after/commons/maps/Trans_Rotation/final.md
+@@ -22,13 +22,13 @@
+ var endpoint := Vector3(0, 1.5, 0) + orbit
+ ```
+ 
+-`progress` runs from zero to one: half a revolution. The point goes from the lower near bank to the higher far bank; its x coordinate stays fixed. The platform adds its sideways mounting offset and shares each small displacement with a supported rider. Stepping off or jumping releases that support.
++`progress` runs from zero to one: half a revolution. The point goes from the lower near bank to the higher far bank; its x coordinate stays fixed. The platform carries you along with it until you step off or jump.
+ 
+ At the blue blade, z is the axis. Board from the left. This platform carries you sideways along x and up. Look down the hall while it moves. Rotation around z has no displacement along z to give you. The passage asks you to face another bank.
+ 
+ Both rides pause for twelve seconds, then take twelve for the half-turn. After the high pause they retrace the upper arc. Staying aboard brings you back above the basin. The grid wedges and still aisles offer other returns.
+ 
+-The blades remain 8.4 metres long and 2.4 wide. Look back at the bank where your ride began.
++Look back at the bank where your ride began.
+ 
+ <!-- @ -->
+ 
+@@ -63,7 +63,7 @@
+ 
+ The cubes have not been cut or joined. Their internal distances survive the turn; the connections available to your walk need not.
+ 
+-Watch the cyan bodies begin: each is 0.44 metres wide. Pink bodies follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings keep the first endpoints. Readouts record distance, stopping and sideways displacement. REPLAY begins both passes again.
++Watch the cyan bodies begin: each is 0.44 metres wide. Pink bodies follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings keep the first endpoints so you can compare where they arrive.
+ 
+ You might expect wider to mean worse. Watch z before deciding. Here the narrow body catches on a ridge; the wider one can slide sideways and continue. Its changed route matters as much as its arrival.
+ 
+@@ -75,7 +75,7 @@
+ 
+ Compare the first and last orientations in the Y band. The cube's outline returns after ninety degrees. Find the pale L on the top face: the top stays level, but the mark points another way. The occupied shape can be the same while its marked positions have changed places.
+ 
+-The array holds these orientations still. The blades let you encounter the journey between them. A shape can return without giving back the time it took, or undoing where it carried you. What would you need to keep in order to notice that something happened?
++The array holds these orientations still. The blades let you encounter the journey between them. A shape can return without giving back the time it took, or undoing where it carried you.
+ 
+ <!-- @transform_composition_workbench -->
+ 
+@@ -90,17 +90,25 @@
+ 
+ As in the array, the operation on the right acts first. These two turns leave the fin facing different ways. The upward and sideways translations in the previous hall could exchange order and share a destination. Here exchanging the order changes the result.
+ 
+-Move the pair slider to two. A turn and a uniform enlargement now end in the same form whichever comes first. Their intermediate forms still differ. Return to four and follow the fin again. Order matters through the operations we put in it.
++Move the pair slider to two. A turn and a uniform enlargement now end in the same form whichever comes first. Their intermediate forms still differ. Return to four and follow the fin again.
+ 
+ <!-- @axial_sweep -->
+ 
+-A small cube turns on a spindle beside the way onward. Walk up to it and follow the same pale L on its face, then one bright edge. The cube stays a cube; the mark and the edge keep arriving somewhere else.
++A small cube turns on a spindle beside the way onward. Walk up to it and follow the pale L on its face. After a quarter-turn, the cube fits the space it occupied before. The marked face has gone around the corner. What returned depends on what you were following.
++
++![The same cube at zero and ninety degrees, photographed from the same viewpoint. Its outline returns; the marked face moves.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/marked-return.png)
++
++*Two paused moments of the museum study, seen from one place. Follow the mark from the left-hand face to the right.*
+ 
+ Press **BOUNDARY**. A cylinder appears around the turn. Look for the corner that reaches its round side. Then watch that corner leave: the contour keeps the place even when the corner is elsewhere.
+ 
+-The cylinder describes the outside of all the positions this cube occupies over a full turn. It has not replaced the cube. Pause the motion. The cube stops; the contour remains, holding together places the body cannot occupy in one pose.
++Pause the motion. The cube stops inside the cylinder, leaving part of it empty. The contour describes the outside of all the positions the cube occupies over a full turn. A turn needs room that a single pose leaves empty.
+ 
+ Change **SHAPE** to the triangle. Its upright edge lies on the axle. As the face turns, the wide bottom sweeps a circle and the sloping edge describes a cone. Hide the boundary and try following that form with your eyes. Bring it back. The outline helps you keep a whole turn in view, but it has made no new solid wall.
++
++![The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary, captured from the museum study.](/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png)
++
++*The cyan lines describe a full turn. Each amber body is paused in one position; the outline is no new solid. Both views use the same camera.*
+ 
+ The same operation can describe different spaces because the body brought to it differs. The triangle from Primitives has acquired another possibility without acquiring another corner.
+ 

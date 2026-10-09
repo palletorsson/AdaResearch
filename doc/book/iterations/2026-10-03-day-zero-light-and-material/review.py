@@ -1,0 +1,33 @@
+"""Day Zero lighting review: actual Godot captures and the canonical passage."""
+from pathlib import Path
+import difflib
+import markdown
+
+OUT = Path(__file__).resolve().parent
+ROOT = OUT.parents[3]
+before = (OUT / 'before/day-zero.md').read_text(encoding='utf-8')
+after = (ROOT / 'doc/book/day-zero.md').read_text(encoding='utf-8')
+passage = after.split('## Give the work a light\n', 1)[1].split('\n## ', 1)[0]
+reading = markdown.markdown('## Give the work a light\n' + passage)
+(OUT / 'Day_Zero.diff').write_text(''.join(difflib.unified_diff(
+    before.splitlines(True), after.splitlines(True),
+    fromfile='before/day-zero.md', tofile='doc/book/day-zero.md')), encoding='utf-8')
+page = '''<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ada / Day Zero — give the work a light</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f0e8;color:#28272a;font:19px/1.65 Georgia,serif}
+main{max-width:1280px;margin:auto;padding:32px 28px 72px}header{font:14px/1.6 system-ui,sans-serif;border-bottom:1px solid #ccc5bb;padding-bottom:22px}
+nav{display:flex;gap:12px 26px;flex-wrap:wrap}a{color:#85445e;text-underline-offset:4px}h1{font:normal clamp(36px,5vw,64px)/1.12 Georgia,serif;margin:45px 0 22px}h2{font-weight:normal;font-size:29px;margin-top:42px}
+.intro,article{max-width:750px}.intro p{font-size:22px}article{margin:65px auto}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px}.pair>*{min-width:0}figure{margin:32px 0}img{width:100%;height:auto;display:block;border-radius:2px}figcaption,.small{font:14px/1.6 system-ui,sans-serif;color:#5c5559;margin-top:12px}
+.download{display:inline-block;background:#713c52;color:white;text-decoration:none;padding:12px 22px;font:16px/1.5 system-ui,sans-serif;border-radius:3px}code{font:.86em Consolas,monospace}details{border-top:1px solid #ccc5bb;padding:20px 0;margin:30px 0}summary{font:17px/1.6 system-ui,sans-serif;cursor:pointer}details p{max-width:760px}table{border-collapse:collapse;width:100%;font:16px/1.5 system-ui,sans-serif}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc5bb}
+a:focus-visible,summary:focus-visible{outline:3px solid #b66389;outline-offset:4px}@media(max-width:760px){.pair{grid-template-columns:1fr}main{padding:24px 18px}body{font-size:18px}}@media print{nav,.download{display:none}body{background:white}main{padding:0}figure{break-inside:avoid}}
+</style></head><body><main><header><p>ADA / DAY ZERO · 3 October 2026</p><nav><a href="#room">Before / after</a><a href="#light">Change one light</a><a href="#reading">Read the passage</a><a href="#renderers">Desktop and headset</a><a href="Day_Zero.diff">Text diff</a></nav></header>
+<section class="intro"><h1>Give the work a light.</h1><p>A cube already asks something of its surroundings. Where does its face end? Is it resting on the plinth? What makes the shadow legible?</p><p>Day Zero now supplies an editable studio: a sky, two lights, matte architecture and a smoother object. The first lesson can begin inside an image we have considered.</p><a class="download" href="../2026-10-03-ada-xr-starter/ada-xr-starter.zip" download>Download the updated starter</a></section>
+<section id="room"><h2>The same room, prepared differently.</h2><div class="pair"><figure><a href="before.png"><img src="before.png" alt="Original starter room with bright flat walls and hard shadows"></a><figcaption>Before · the original Compatibility setup.</figcaption></figure><figure><a href="after.png"><img src="after.png" alt="Revised studio with off-white walls, a charcoal floor and softened shadows beneath a pink cube"></a><figcaption>After · the Forward+ desktop studio. Geometry, viewpoint and lesson are unchanged. The counter is held at 48 only for this comparison.</figcaption></figure></div></section>
+<section id="light"><h2>Remove a source. See what remains.</h2><div class="pair"><figure><a href="material.png"><img src="material.png" loading="lazy" alt="Pink cube on an off-white plinth with a soft cast shadow"></a><figcaption>Main light on · lit and shaded faces, a shadow joining the cube to its support.</figcaption></figure><figure><a href="key-off.png"><img src="key-off.png" loading="lazy" alt="The cube and plinth under sky and fill alone, without the main light's cast shadow"></a><figcaption>Main light off · the sky and cool fill still illuminate the room. Contact shading remains.</figcaption></figure></div><p class="small">All images are captured inside the running Godot starter. These are desktop views; physical XR has not been tested.</p></section>
+<article id="reading">''' + reading + '''</article>
+<details id="renderers"><summary>The supplied rendering choices</summary><p>The desktop studio uses Forward+ with ACES tone mapping, soft directional shadows, contact shading and edge smoothing. Warm key and cool fill lights are separately adjustable. The fill is a studio approximation; this small setup does not compute bounced light through the room.</p><table><thead><tr><th>Desktop studio</th><th>Portable starting point</th></tr></thead><tbody><tr><td>Forward+ and 4× MSAA. Temporal anti-aliasing stays off to keep the changing counter clear. A 4096 shadow atlas, angular soft shadows and SSAO.</td><td>Android selects Compatibility, 2× MSAA and a 2048 shadow atlas. Direct light is separately calibrated; shadows are sharper. Compatibility can also be selected in the desktop editor.</td></tr><tr><td>The stills above use this configuration on Windows / RTX 3070.</td><td>The image below checks Compatibility on that same computer. It is not evidence of Quest performance.</td></tr></tbody></table><p>When OpenXR is active, the room disables SSAO and angular soft shadows. The actual headset still needs a comfort and frame-rate check. Keep a dependable working setup before beginning the lessons.</p><figure><a href="portable/material.png"><img src="portable/material.png" loading="lazy" alt="Compatibility render with the same cube and plinth, brighter surfaces and sharper shadows"></a><figcaption>Compatibility desktop comparison · same geometry and materials, simpler rendering.</figcaption></figure></details>
+<p class="small"><a href="../2026-10-03-ada-xr-starter/index.html#guide">Starter guide and verification</a> · <a href="../2026-10-03-point-zero-one-lesson/course-world.html">How these studies belong to Ada</a></p>
+</main><script>function reveal(){const el=document.getElementById(location.hash.slice(1));if(el?.tagName==='DETAILS')el.open=true}addEventListener('hashchange',reveal);reveal();</script></body></html>'''
+(OUT / 'index.html').write_text(page, encoding='utf-8')
+print('Day Zero lighting review rebuilt.')

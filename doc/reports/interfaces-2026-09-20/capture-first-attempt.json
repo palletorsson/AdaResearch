@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--no-window",
+    "--audio-driver",
+    "Dummy",
+    "--script",
+    "res://doc/reports/interfaces-2026-09-20/capture_baseline.gd",
+    "--",
+    "--config=res://doc/reports/interfaces-2026-09-20/default-demo.json",
+    "--out=C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\reports\\interfaces-2026-09-20\\default-demo.png",
+    "--size=1600"
+  ],
+  "exit_code": 3221225477,
+  "elapsed_seconds": 8.72,
+  "errors": [
+    "ERROR: Failed to open 'user://logs/godot2026-09-20T15.00.36.log'."
+  ],
+  "screenshot_exists": false
+}

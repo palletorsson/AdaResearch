@@ -1,0 +1,54 @@
+--- before/commons/maps/Point_Lines/summary.md
++++ after/commons/maps/Point_Lines/summary.md
+@@ -1,47 +1,7 @@
+-# Point Lines - Map Summary
++# Point Lines — from connection to arrangement
+ 
+-## Overview
+-Point_Lines multiplies single relations into a line system: puzzles, measurement lanes, perspective demonstrations, and grid framing.
++Make a segment and open a barrier. Measure between two endpoints. Walk a straight black marking while a trace keeps part of your movement. The room then opens into four sightlines: plus and X; parallels; vertical beams and horizon; grid and depth. Pick up the lines and leave another arrangement. A final floor instruction reaches a solid wall and continues upwards.
+ 
+-## Spatial Layout
+-- **Dimensions**: 7x27 grid
+-- **Architecture**: elongated gallery with mid-map enclosure and late-map perspective zone
+-- **Height**: mixed terrain with a raised belt (`4`) acting as structural backdrop
++The same segment can receive a stick, plank, luminous, graduated or beam-shaped body. The visible body and the pickup envelope are separate choices. This encounter extends the point/sphere distinction from Point One and returns to Trace with a detour worth recording.
+ 
+-## Key Elements
+-
+-### Interactables
+-- **line_demo** at (3,3): baseline line relation
+-- **modulor_man_demo** at (1,4) and **line_builder_3d** at (5,4): proportional and constructed line systems
+-- **plus_line_puzzle** at (2,9) and **parallel_line_puzzle** at (4,9): relation constraints
+-- **dark_sphere** at (3,11): focused chamber for transition
+-- **measurement lane** rows 12-14: `line`, `laser_measure`, `laser_exploding_sphere`, and stepped `cube_scene`
+-- **perspective_lines** and **scale_lines** near row 23
+-- **lightrod** and **dgrid** in end-zone framing
+-
+-### Utilities
+-- **spawn** `s` at entry
+-- **annotation board** `an:-90`
+-- **subtitle trigger** `sub:line_measures`
+-- **teleporter** `t` at (5,21)
+-- **floating text** `3t:lines`
+-
+-## Atmosphere
+-- **Background**: sky blue [0.2, 0.3, 0.7]
+-- **Lighting**: standard directional + ambient
+-- **Mood**: workshop-to-gallery progression
+-
+-## Learning Sequence
+-1. Revisit baseline line relation.
+-2. Explore constrained relations (plus/parallel puzzles).
+-3. Transition through enclosed mid-zone.
+-4. Compare practical measurement tools against visual line structures.
+-5. End with perspective/scale frameworks and exit.
+-
+-## Design Intent
+-The map stages line multiplicity as curriculum, not clutter. It moves from direct manipulation to systemic framing, so "line" evolves from local relation into spatial infrastructure.
+-
+-## Connection to Sequence
+-- **Follows**: Point_Line
+-- **Prepares**: trace, grid, and broader coordinate reasoning
+-- **Core transition**: from relation to networked line systems
++The map is now 27 × 37. The original entry and Walk this line basin stay at their source positions. A rear open gallery replaces the partitions; selected earlier works remain on its sides and the four-monitor workshop remains near the exit. The before-layout and parked duplicate placements are preserved in `doc/book/iterations/2026-09-26-lines-four-views/`.

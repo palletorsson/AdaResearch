@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "check": "near probe subtracts 0.04 per step",
+      "pass": true
+    },
+    {
+      "check": "sustained proximity removes support",
+      "pass": true
+    },
+    {
+      "check": "floor and wall share all eighty colours",
+      "pass": true
+    },
+    {
+      "check": "RUN advances and field recovers after withdrawal",
+      "pass": true
+    },
+    {
+      "check": "SYNC chain waits to use newly healthy neighbour",
+      "pass": true
+    },
+    {
+      "check": "ORDER restores matched beginning",
+      "pass": true
+    },
+    {
+      "check": "forward SCAN uses newly healthy neighbour in same pass",
+      "pass": true
+    },
+    {
+      "check": "reverse SCAN changes result from same beginning",
+      "pass": true
+    },
+    {
+      "check": "SYNC whole field invariant under reversal",
+      "pass": true
+    },
+    {
+      "check": "RESTORE returns full held field",
+      "pass": true
+    },
+    {
+      "check": "six actual photographs load",
+      "pass": true
+    },
+    {
+      "check": "chapter renders three code excerpts without page overflow",
+      "pass": true
+    }
+  ],
+  "primary": {
+    "token": "decaying_bridge",
+    "count": 1,
+    "words": 707,
+    "passageOpens": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "http_200_exact_files": [
+    "w1-review.html",
+    "w1-review.md",
+    "w1-source-checks.json",
+    "NEXT_BATCH.md",
+    "HANDOFF.md",
+    "README.md",
+    "pilot-review.html",
+    "index.html",
+    "plan.json",
+    "audit.json",
+    "all-maps.md",
+    "maps/WaveFunctions_Pendulum.md",
+    "maps/WaveFunctions_Sine_Space.md"
+  ],
+  "runtime_acceptance": "pending",
+  "compose_docs_maps": [
+    "WaveFunctions_Pendulum",
+    "WaveFunctions_Sine_Space"
+  ],
+  "compose_docs_live_final": {
+    "WaveFunctions_Pendulum": {
+      "stale": [],
+      "final_hash": "f6b736bd2245",
+      "words": 925,
+      "review_correction_present": "16.7"
+    },
+    "WaveFunctions_Sine_Space": {
+      "stale": [],
+      "final_hash": "6080bf0b7604",
+      "words": 772,
+      "review_correction_present": "x-gap"
+    }
+  },
+  "browser": {
+    "page": "w1-review.html",
+    "semantic_content": "review, next steps and room links verified",
+    "visual": "narrow viewport inspected; legible text, stacked cards, no visible horizontal overflow"
+  },
+  "primary_book_mismatches": 0
+}

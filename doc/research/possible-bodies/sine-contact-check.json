@@ -1,0 +1,379 @@
+{
+  "checks": 41,
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "headset_verified": false,
+  "input": "synthetic mouse input through the project's desktop rig; museum walker and tracked hands are separate lanes",
+  "measurements": {
+    "approach side controls": 1.0,
+    "corridor west to east": 1.0,
+    "desktop_controls": [
+      {
+        "after": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.075,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "before": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.075,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "id": "RULE",
+        "input": {
+          "control": "/Seg0_louisiana-pavilion-chain/SineFlowTray/SideConsole/RULE",
+          "hover": "n-chain/SineFlowTray/SideConsole/RULE/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.84,
+              -0.54,
+              0.0
+            ],
+            "camera_from": [
+              6.85,
+              1.6,
+              3.1
+            ],
+            "independent_ray": "na-pavilion-chain/SineFlowTray/SideConsole/RULE/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "na-pavilion-chain/SineFlowTray/SideConsole/RULE/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              6.03,
+              1.08,
+              3.1
+            ]
+          },
+          "stand": [
+            6.85,
+            0.0,
+            3.1
+          ]
+        }
+      },
+      {
+        "after": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.075,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "before": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.075,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "id": "RULE",
+        "input": {
+          "control": "/Seg0_louisiana-pavilion-chain/SineFlowTray/SideConsole/RULE",
+          "hover": "n-chain/SineFlowTray/SideConsole/RULE/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.84,
+              -0.54,
+              0.0
+            ],
+            "camera_from": [
+              6.85,
+              1.6,
+              3.1
+            ],
+            "independent_ray": "na-pavilion-chain/SineFlowTray/SideConsole/RULE/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "na-pavilion-chain/SineFlowTray/SideConsole/RULE/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              6.03,
+              1.08,
+              3.1
+            ]
+          },
+          "stand": [
+            6.85,
+            0.0,
+            3.1
+          ]
+        }
+      },
+      {
+        "after": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.105,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "before": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.075,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "id": "SIZE",
+        "input": {
+          "control": "/Seg0_louisiana-pavilion-chain/SineFlowTray/SideConsole/SIZE",
+          "hover": "n-chain/SineFlowTray/SideConsole/SIZE/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.84,
+              -0.54,
+              0.0
+            ],
+            "camera_from": [
+              6.85,
+              1.6,
+              4.5
+            ],
+            "independent_ray": "na-pavilion-chain/SineFlowTray/SideConsole/SIZE/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "na-pavilion-chain/SineFlowTray/SideConsole/SIZE/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              6.03,
+              1.08,
+              4.5
+            ]
+          },
+          "stand": [
+            6.85,
+            0.0,
+            4.5
+          ]
+        }
+      },
+      {
+        "after": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.105,
+          "relief_m": 0.55,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "before": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.105,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "id": "RELIEF",
+        "input": {
+          "control": "eg0_louisiana-pavilion-chain/SineFlowTray/SideConsole/RELIEF",
+          "hover": "chain/SineFlowTray/SideConsole/RELIEF/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.84,
+              -0.54,
+              0.0
+            ],
+            "camera_from": [
+              6.85,
+              1.6,
+              5.2
+            ],
+            "independent_ray": "-pavilion-chain/SineFlowTray/SideConsole/RELIEF/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "-pavilion-chain/SineFlowTray/SideConsole/RELIEF/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              6.03,
+              1.08,
+              5.2
+            ]
+          },
+          "stand": [
+            6.85,
+            0.0,
+            5.2
+          ]
+        }
+      },
+      {
+        "after": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.075,
+          "relief_m": 0.3,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "before": {
+          "batch": 0,
+          "other_exit": 0,
+          "outlet": 0,
+          "physics_hz": 60,
+          "radius_m": 0.105,
+          "relief_m": 0.55,
+          "running": false,
+          "still_in": 0,
+          "ticks": 0,
+          "tilt_degrees": 20,
+          "window_seconds": 12
+        },
+        "id": "RESET",
+        "input": {
+          "control": "Seg0_louisiana-pavilion-chain/SineFlowTray/SideConsole/RESET",
+          "hover": "-chain/SineFlowTray/SideConsole/RESET/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.84,
+              -0.54,
+              0.0
+            ],
+            "camera_from": [
+              6.85,
+              1.6,
+              3.8
+            ],
+            "independent_ray": "a-pavilion-chain/SineFlowTray/SideConsole/RESET/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "a-pavilion-chain/SineFlowTray/SideConsole/RESET/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              6.03,
+              1.08,
+              3.8
+            ]
+          },
+          "stand": [
+            6.85,
+            0.0,
+            3.8
+          ]
+        }
+      }
+    ],
+    "east mouth to bridge": 1.0,
+    "entry to old antechamber": 1.0,
+    "museum_severed": [],
+    "tray_extent": [
+      [
+        1.85000026226044,
+        0.0,
+        6.1399998664856
+      ],
+      [
+        6.24000024795532,
+        2.58084869384766,
+        10.4125003814697
+      ]
+    ],
+    "tray_origin": [
+      3.5,
+      0.0,
+      8.5
+    ],
+    "trials": [
+      {
+        "batch": 32,
+        "other_exit": 0,
+        "outlet": 6,
+        "physics_hz": 60,
+        "radius_m": 0.075,
+        "relief_m": 0.3,
+        "running": false,
+        "still_in": 26,
+        "ticks": 720,
+        "tilt_degrees": 20,
+        "window_seconds": 12
+      },
+      {
+        "batch": 32,
+        "other_exit": 0,
+        "outlet": 5,
+        "physics_hz": 60,
+        "radius_m": 0.105,
+        "relief_m": 0.3,
+        "running": false,
+        "still_in": 27,
+        "ticks": 720,
+        "tilt_degrees": 20,
+        "window_seconds": 12
+      },
+      {
+        "batch": 32,
+        "other_exit": 0,
+        "outlet": 7,
+        "physics_hz": 60,
+        "radius_m": 0.045,
+        "relief_m": 0.3,
+        "running": false,
+        "still_in": 25,
+        "ticks": 720,
+        "tilt_degrees": 20,
+        "window_seconds": 12
+      }
+    ]
+  }
+}

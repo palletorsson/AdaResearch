@@ -1,0 +1,462 @@
+{
+  "sequence": "qfeplaboratory",
+  "status": "source_reviewed_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "QFEP_Introduction",
+      "primary_tokens": [
+        "qfep_balance_workbench"
+      ],
+      "question": "Can two different settings produce the same result?",
+      "ontology": "QFEP is the project’s exploratory organising model: QFE=F−λE+φΔE. In this console the four terms are adjustable numbers, not independently measured physicalquantities.",
+      "action": "Move onlyF and watch theresult. Restore it, moveE, and then try compensating withF until the numericalresult is close to whereitstarted.",
+      "observable": "The readout and four-axis polygon change. Differentpolygon shapes can give the sameQFE; colour/category can shift as the setting approaches a different authoredsignature.",
+      "mechanism": "Four0–1sliders feed the formula; ΔE is held at.30. A Manhattan-distance comparison chooses the nearest of7authored phase-signatures. It is not an emergentphase measurement.",
+      "limit": "A single aggregate number loses distinctions between its inputs. These labels are theproject’s vocabulary for exploring tension, not a calibrated biological or thermodynamiclaw.",
+      "variation": "Existing: find two unlike knobconfigurations with a similarQFE. Proposed: let thevisitor change the definition ofΔE and record why.",
+      "prior_bridge": "Foundationscrisis questioned completeness; this laboratory makes its own chosenformula available for interrogation.",
+      "next_bridge": "The nextroom starts with the predictability that a claim oforder relies on.",
+      "sources": [
+        {
+          "path": "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+          "line": 401,
+          "function_or_anchor": "func _compute_qfe",
+          "fact": "Explicitformula with fixedrate_delta_e."
+        },
+        {
+          "path": "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+          "line": 406,
+          "function_or_anchor": "func _detect_phase",
+          "fact": "Nearestauthored signature, notmeasurement."
+        },
+        {
+          "path": "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+          "line": 364,
+          "function_or_anchor": "func _process",
+          "fact": "Fourlocalsliders polled anddisplay refreshed."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_Introduction/map_data.json": "a9fb851dbfe5ea24a46be18562db3ae8e29188041d16eee2628319b3dc743d63",
+        "commons/maps/QFEP_Introduction/intent.md": "2cc59b2435bbe9c2248bf03c63a820d2b71bfa64fb7a9d1269258dc5a178ac46",
+        "commons/maps/QFEP_Introduction/tutorial.md": "9efb04de6d91a1284bdc076218d51c63ef9bce508069fb4a44f224007e1cb53a",
+        "commons/maps/QFEP_Introduction/technical.md": "6daa4ab39a9f887ab0e0df450d95e9ee11f292949ce3a9b3b2456dfbe75e5aa4",
+        "commons/maps/QFEP_Introduction/critical.md": "ba9624c2324f2d62a65ad36fb65c13f65fec42499005a70b49dd81cf91f8780b",
+        "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn": "9b3f6d7c04d79180e3b756863c904a7d760e8da57dedeee6dbc91413ed03efa2",
+        "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd": "2aeac851cd38ea3d5cfe1a90651c7aed67eec8f4260a98077c8a069107a8d133"
+      },
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "raw": "qfep_balance_workbench:0:0"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "QFEP_F_Term",
+      "primary_tokens": [
+        "shannon_workbench"
+      ],
+      "question": "What makes the next mark easy to predict?",
+      "ontology": "Binaryentropy measures average uncertainty for a Bernoulli source. The room uses predictability as a concrete entry to its idea oforder; that does notidentify Shannonentropy with the project’sFterm.",
+      "action": "Move thep slider nearzero, through onehalf and nearone. Predict the nexttilecolour at eachsetting; compare the curve’smarker with thesamplegrid.",
+      "observable": "Near eitherendpoint onecolour dominates andH islow. Atp=.5 the theoreticalcurve reaches1bit perdraw, while any finitesample can stilldepart from equalcounts.",
+      "mechanism": "The bench thresholds a fixedseeded stream to generate a16×16sample and computes H(p)=−p log₂p−(1−p)log₂(1−p). Movingp changes bothprobability and thesample.",
+      "limit": "Entropy describes a specifiedsource distribution. It is not the compressibility of everyparticular256bit picture, nor a measurement of beauty, value orfreeenergy.",
+      "variation": "Existing: compare p=.1 withp=.9: oppositecolours but equal theoreticaluncertainty. Proposed: preserve localcorrelations while holding colourfrequency fixed to expose what a Bernoullimodel omits.",
+      "prior_bridge": "The console combined quantities; thisroom asks what one explicitnotion oforder can actuallymeasure.",
+      "next_bridge": "Possibilityspace next distinguishes one realisedoutcome from the number ofavailableoutcomes.",
+      "sources": [
+        {
+          "path": "commons/artifacts/shannon_workbench/shannon_workbench.gd",
+          "line": 220,
+          "function_or_anchor": "func _on_slider_changed",
+          "fact": "p drives seededgrid andreadouts."
+        },
+        {
+          "path": "commons/artifacts/shannon_workbench/shannon_workbench.gd",
+          "line": 343,
+          "function_or_anchor": "func _binary_entropy",
+          "fact": "BinaryShannon calculation."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_F_Term/map_data.json": "540d4c281d0761c4fde7050cdc0631afe945f65fc84eac39e18373b75afd2a07",
+        "commons/maps/QFEP_F_Term/intent.md": "91b88cd0025e139481485b3a3df8b1b5b496158672682325353ad76d45e5e97d",
+        "commons/maps/QFEP_F_Term/tutorial.md": "e2e4e63a86d197a919afd7d2a948bd48f76f12f3fa3e6e2310c707487d9938fa",
+        "commons/maps/QFEP_F_Term/technical.md": "34cbc34270a2a4c8b628f87c4dc27d87981a54f1aa5692d8f1df78eff4aff686",
+        "commons/maps/QFEP_F_Term/critical.md": "d63190e0c1eadc42de58c9089553a61bca1aeed9a6c43ffdbff4a7aea48e19eb",
+        "commons/artifacts/shannon_workbench/shannon_workbench.tscn": "e2e0ce9d64275aa30f143d11a1c4cbfd4d0e15fd76ab80f14234011403a97a79",
+        "commons/artifacts/shannon_workbench/shannon_workbench.gd": "ddb8dd2a01b82ced17d39ed65671201f0a320a0badd817b9a8147a6ae494b3be"
+      },
+      "placements": [
+        {
+          "x": 1,
+          "z": 3,
+          "raw": "shannon_workbench:0:0"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "F/freeenergy is not directlymeasured. Avoid universal finite-file compressionbound implied by legacycaption. snap_cube_puzzle registryactually resolves to octahedronpuzzle; not selectedcore.",
+        "Central concept gap: selected workbench computes Shannon entropy H(p), not F. Draft gives a predictor comparison as a thought experiment and proposes an actual expectation/error readout; do not treat H, prediction error and variational free energy as identical."
+      ]
+    },
+    {
+      "room_id": "QFEP_E_Term",
+      "primary_tokens": [
+        "entropy_fan"
+      ],
+      "question": "How many endings remain possible before one is chosen?",
+      "ontology": "A possibilitycount W describes the allowedoutcomes of a chosenmodel. For equallyweighted possibilities, logW measures their multiplicity; unequalprobabilities need a weightedentropy.",
+      "action": "Watch the fan narrow to asinglepath and open into branches. Count the firstforks, predict theleafcount, then compare with the FUTURESreadout.",
+      "observable": "The default9secondcycle changes branching between1,2and3 across4levels, giving1,16or81leaves. The displayedS follows the naturallogarithm of actualleafcount.",
+      "mechanism": "The tree is rebuilt onbranchchanges and increments a leafcounter. The readout useslog(max(leaves,1)); this is a countablecombinatorial diagram, not a gasmeasurement.",
+      "limit": "Branches depict permittedfutures, not their likelihood orsocialaccessibility. An unbuiltbranch and an activelyclosedbranch require differentrecords even if they leave the samecount.",
+      "variation": "Existing: attend to a singleend while the fanexpands. Proposed: expose the existing prunedconfiguration, which caps branches and leaves visible stumps, as a visitor-controlledcomparison.",
+      "prior_bridge": "The binarybench measured uncertainty under aprobability; thefan makes the set ofpossible outcomes explicit.",
+      "next_bridge": "Lambda nextasks how aweight mediates between anorderclaim and thepossibilities leftopen.",
+      "sources": [
+        {
+          "path": "commons/artifacts/entropy_fan/entropy_fan.gd",
+          "line": 292,
+          "function_or_anchor": "func _update_readout",
+          "fact": "S is naturallog ofleafcount."
+        },
+        {
+          "path": "commons/artifacts/entropy_fan/entropy_fan.gd",
+          "line": 421,
+          "function_or_anchor": "func _grow_branch",
+          "fact": "Recursivebranches count actualleaves."
+        },
+        {
+          "path": "commons/artifacts/entropy_fan/entropy_fan.gd",
+          "line": 327,
+          "function_or_anchor": "func _process",
+          "fact": "Defaultbreathing branching cycle."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_E_Term/map_data.json": "7c71b092d63872a5887b566e17cef4256ec2d9c2e2ac983769f02bdcf7805187",
+        "commons/maps/QFEP_E_Term/intent.md": "6cd9bd49ce34be0dbb5874e8657f2d5a641420874b128589cc572522ae890c69",
+        "commons/maps/QFEP_E_Term/tutorial.md": "56846b11195dd67c601143e793b11a7607043cecaef027898821c330004bfd01",
+        "commons/maps/QFEP_E_Term/technical.md": "6e21d035126e5d3b408b232b704f765713a360e7de363aeaa6baa89e3a7085b9",
+        "commons/maps/QFEP_E_Term/critical.md": "7c9ed6c42715a74cfe67cae505f23a5a82d4a4ea18c3e7d15f7db5283f734db8",
+        "commons/artifacts/entropy_fan/entropy_fan.tscn": "077dad883268f58c2247a93dc388b040845ff4dcbd2f27b687002c355210c335",
+        "commons/artifacts/entropy_fan/entropy_fan.gd": "70e21a9afe278c9c10f857b885e67f047a0afca6893caa00a0dcd3f9f1683f62"
+      },
+      "placements": [
+        {
+          "x": 4,
+          "z": 2,
+          "raw": "entropy_fan:0:1:1"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "QFEP_Lambda_Spectrum",
+      "primary_tokens": [
+        "lambda_hall"
+      ],
+      "question": "Where does this corridor tell you to stand between stillness and motion?",
+      "ontology": "Lambda is a weightingparameter in theprojectmodel. The hall maps lateralposition to a continuum between two authoredforms oforder anddispersal.",
+      "action": "Look left toward the regularwall and right toward the displacedmoving forms. Locate the litwalkway and compare the rows between theextremes.",
+      "observable": "The westwall repeats a lattice, the eastwall breaks it into animatedforms, and sixrows interpolate between them. The litband is placed at the authoredlambda=.35.",
+      "mechanism": "The script builds these structures directly frompositional fractions; walkway x=−halfwidth+lambda×width. It does not measure a phase transition or calculate an optimalplace forlife.",
+      "limit": "The litroute makes one choice inviting. That choice is a spatialargument by theproject; the displayed.35 is not a universalcriticalpoint or an empiricaldefinition oflife.",
+      "variation": "Existing: inspect the regularside as shelter or the dispersedside as room forvariation instead of accepting the paintedmiddle asbest. Proposed: move thelitband and compare the invitation.",
+      "prior_bridge": "The fan counted possiblefutures; the hall shows how a spatialpresentation canprivilege one region.",
+      "next_bridge": "Phi nextseparates where a system is from how it responds tochange.",
+      "sources": [
+        {
+          "path": "commons/artifacts/lambda_hall/lambda_hall.gd",
+          "line": 109,
+          "function_or_anchor": "func _build",
+          "fact": "Coordinate mapping placeswalkway andsixrows."
+        },
+        {
+          "path": "commons/artifacts/lambda_hall/lambda_hall.gd",
+          "line": 211,
+          "function_or_anchor": "func _build_order_wall",
+          "fact": "Authoredordergeometry."
+        },
+        {
+          "path": "commons/artifacts/lambda_hall/lambda_hall.gd",
+          "line": 243,
+          "function_or_anchor": "func _build_chaos_wall",
+          "fact": "Authoreddispersedgeometry."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_Lambda_Spectrum/map_data.json": "7dd94aace534b5afa669a77468475058c9a90fa2366cea55c5ed350eea4e527b",
+        "commons/maps/QFEP_Lambda_Spectrum/intent.md": "cd6e53f510b4e8d733b8da9a1a4372f0da1ee000fa88efb4ffbd722a267c5cdd",
+        "commons/maps/QFEP_Lambda_Spectrum/tutorial.md": "863857f858706675558d9cc81fde30b40a37edbce96ad6a8e578ac5a57536414",
+        "commons/maps/QFEP_Lambda_Spectrum/technical.md": "11491b77a908642869a2a20f46d2078808ed55ee99df0eaaf655f7b0dbadb5cd",
+        "commons/maps/QFEP_Lambda_Spectrum/critical.md": "152222e09c2178bfb858c5a957b2430518e57783a3da2b5519d0b2705f24be0a",
+        "commons/artifacts/lambda_hall/lambda_hall.tscn": "46e4e964439681299677f336b38ea5c31cc5b632c7975d3eedb805f838d4368f",
+        "commons/artifacts/lambda_hall/lambda_hall.gd": "9d35acdf74841243c93ce0382a021d6255565dc79b682402ad3eb9e27eddf12f"
+      },
+      "placements": [
+        {
+          "x": 11,
+          "z": 11,
+          "raw": "lambda_hall"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Do notpromise walkway reach untilmuseumwalk;14×7m artifact mayneedfit. No lifeatlambda.35claim."
+      ]
+    },
+    {
+      "room_id": "QFEP_Phi_Term",
+      "primary_tokens": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "question": "Can change have a direction without one direction being intrinsically better?",
+      "ontology": "Phi weights thechange term in theprojectformula. Its signedscale is a modelchoice; the neighbouringpattern is an independent illustration of distributedchange.",
+      "action": "Move thePHI handle throughzero and compare its own particlefeedback andcolour. Then watch two differentcells in the transformingpattern and compare theirphases.",
+      "observable": "Negativephi directs the slider’s particlesdown; positivephi directs themup. Thegold gridcontinues its wave-drivenmotion independently of theslider.",
+      "mechanism": "The XRhandle maps railposition to[-1,1]. Thegrid combines prescribedwaves into height,scale andcolour; it does not subscribe to phi. These are two adjacentrepresentations, not a causallylinkedcontrol andsimulation.",
+      "limit": "Upwardgold and downwardpurple colour the valuejudgement before anyargument. Welcomingchange may matter, but preservation can also protect what dominantdefinitions erase.",
+      "variation": "Existing: dwell at neutral ornegativephi and name a kindofchange worthresisting. Proposed: connectphi to a measurabletemporal response and compare with a preservedpattern.",
+      "prior_bridge": "Lambda weighted onebalance; phi introduces thequestion of howchange isvalued.",
+      "next_bridge": "The nextroom gives a control thatactually alters a patternformingprocess.",
+      "sources": [
+        {
+          "path": "commons/interfaces/qfep/phi_slider.gd",
+          "line": 491,
+          "function_or_anchor": "func _on_slider_moved",
+          "fact": "Railposition maps to signedphi."
+        },
+        {
+          "path": "commons/interfaces/qfep/phi_slider.gd",
+          "line": 517,
+          "function_or_anchor": "func _update_visuals",
+          "fact": "Signsets localparticle direction."
+        },
+        {
+          "path": "commons/interfaces/qfep/transforming_pattern.gd",
+          "line": 145,
+          "function_or_anchor": "func _combined",
+          "fact": "Independentwavefield, no phisubscription."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_Phi_Term/map_data.json": "432bdd29c25e48a2cb592e30804bc24151a9eb2ca466a0f8faf3d6ed3d06ec03",
+        "commons/maps/QFEP_Phi_Term/intent.md": "9a096bf59e81ff9b189fb35b74bc5860f650661e5388f20c0f59846d0f29492b",
+        "commons/maps/QFEP_Phi_Term/tutorial.md": "49e45ffe1be85065354bd010e9c302adcb36b4a7376d2e0f82a1a2fd5205c12f",
+        "commons/maps/QFEP_Phi_Term/technical.md": "2e746e2dd357696c8b418b2a277efdb5a5bd54155a78d7ddda5b8a767a6829bf",
+        "commons/maps/QFEP_Phi_Term/critical.md": "a07417f2d36406b1dde905968979937fd789ac70307b7049e5fe2dda90589f86",
+        "commons/interfaces/qfep/phi_slider.tscn": "fc69c59d1901ad9c3d0e81015677fbb20e83d99cef25e6a45b6df29695de1f75",
+        "commons/interfaces/qfep/phi_slider.gd": "5712593487bf9d990cb04695b9603cc04ba10fe2ac4aacc7498dc2ad38b54c2c",
+        "commons/interfaces/qfep/transforming_pattern.tscn": "5015ab5f7716ff6c9576de623b6ccf2d1922fe91f795e6a18c114e7dd015246e",
+        "commons/interfaces/qfep/transforming_pattern.gd": "9291b05cfbc90e1914bdb93fb7845dfad3df61b271e43e30e47d528e5536f5c3"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 5,
+          "raw": "phi_slider:0:0.5"
+        },
+        {
+          "x": 8,
+          "z": 7,
+          "raw": "transforming_pattern:0:0.5"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified."
+      ]
+    },
+    {
+      "room_id": "QFEP_Edge_Of_Chaos",
+      "primary_tokens": [
+        "edge_of_chaos_unlocked"
+      ],
+      "question": "Which changes belong to the pattern, and which to the way we drive it?",
+      "ontology": "This artifact is a two-concentration reaction-diffusion model. Lambda jointly changes feed,kill anddiffusion constants along one authoredpath through itsparameters.",
+      "action": "Move LAMBDA slowly, wait for the patternresponse, and use RESEED tocompare a newstart. Keep SIM SPEEDfixed while comparing lambda.",
+      "observable": "A colouredconcentration image changes as reactions andneighbourdiffusion evolve. ChangingLAMBDA affects severalcoefficients atonce; SIM SPEED changes the numberofupdates perframe.",
+      "mechanism": "The64×64Grid applies Gray-Scottstyle reactionterms with periodicneighbours. Feed rises.01→.08,kill falls.08→.03; bothdiffusions alsorise. Defaultunlocked controluses thelegacystep; frozen/chaospreset tenures use a separatestable step.",
+      "limit": "A patternlabel is not evidence ofuniversalcriticality. Numericaltimestep, initialconditions and thechosenparameterpath all affectthepicture; apparentactivity can be discretisationartifact.",
+      "variation": "Existing: compare persistence beforeandafterRESEED at the samesliderposition. Proposed: a fixed-timestepcomparison and a measuredpatternstatistic acrosslambda.",
+      "prior_bridge": "Phi’sscale revealed avaluedirection; now test acontrol against aresponse that isactuallycomputed.",
+      "next_bridge": "The sandbox asks which nearbyobjects genuinelyrespond to acommoncontrol.",
+      "sources": [
+        {
+          "path": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+          "line": 533,
+          "function_or_anchor": "func _build_controls",
+          "fact": "ConnectedLAMBDA,SIMSPEED,RESEED."
+        },
+        {
+          "path": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+          "line": 355,
+          "function_or_anchor": "func _update_reaction_params",
+          "fact": "Jointparameter mapping."
+        },
+        {
+          "path": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+          "line": 229,
+          "function_or_anchor": "func _process",
+          "fact": "Stablepole/legacyunlocked solver split."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_Edge_Of_Chaos/map_data.json": "6c4b7c923668899ba4680f6fbc9a2dffaae64e3f5d9d67c8f523d12691de2fa2",
+        "commons/maps/QFEP_Edge_Of_Chaos/intent.md": "1b96e0a3c06c5a1b1eaa9508c4d11d42db67f4c7b2574500a8ab4e1227a49beb",
+        "commons/maps/QFEP_Edge_Of_Chaos/tutorial.md": "9b9676233da428a64b712b885f3e3a43ec6029a3604d0db5d55349c53de0fad0",
+        "commons/maps/QFEP_Edge_Of_Chaos/technical.md": "935b3b8b81174d15154c2b50cfd73f0ce0d3e1fc96033e3b02041180220f5924",
+        "commons/maps/QFEP_Edge_Of_Chaos/critical.md": "ffb108f8f0bb053e9454b670b1e8b7490cd48d6f270748ebdce43af422d3f018",
+        "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn": "b1f62eb8c612205ff8a5e712873d755cabf53be8816743754caf2022e578dfd9",
+        "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd": "c0ba684088951edc38b13c346e199bca26070b655ef8ce197bb77be0a49dff1d"
+      },
+      "placements": [
+        {
+          "x": 13,
+          "z": 4,
+          "raw": "edge_of_chaos_unlocked:90"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Numericalstability gap: defaultunlocked stilluses legacydt1 integrator; do notclaim empiricallyestablished edge/chaosregimes fromdefaultpicture."
+      ]
+    },
+    {
+      "room_id": "QFEP_Sandbox",
+      "primary_tokens": [
+        "lambda_slider",
+        "phi_slider"
+      ],
+      "question": "How do we tell a control that changes a number from one that changes a system?",
+      "ontology": "A control, parameter and response form a causalchain only when the receiving system uses the newvalue. Shared vocabulary and proximity do not establish thatconnection.",
+      "action": "Move onehandle at atime, record its own printedvalue/colour, and compare the localfeedback ofLAMBDA with PHI. Keep the otherhandle fixed.",
+      "observable": "LAMBDA reads0–1 and changes itslocalcolour/feedback; PHI reads−1–1 and reverses itslocalparticle direction acrosszero. The nearbyreactor/particlefield are not proven totrack eithercontrol.",
+      "mechanism": "Sliders join qfep_lambda_controllers and qfep_phi_controllers; the reactorandfield search the different qfep_slidergroup. No bridge isbound in theinspectedmap/scene.",
+      "limit": "The intended coupled sandbox has a wiringgap. A correctprinted setting alone cannotdemonstrate a change in a distantartifact or let thisroom certify theformula.",
+      "variation": "Proposed nextbuild: explicitlywire bothcontrols to one scopedreceiver, expose receivedvalues and compare oneparameter at atime. Presentcontrolobservations are a startingpoint, not fulfilment ofthatexperiment.",
+      "prior_bridge": "The reaction-diffusionpiece supplied aconnectedlocalcontrol; the sandbox intends toextend thatrelation acrosspieces.",
+      "next_bridge": "The specimen in thesynthesis has its own locallyconnectedcontrols for a more concretecomparison.",
+      "sources": [
+        {
+          "path": "commons/interfaces/qfep/lambda_slider.gd",
+          "line": 196,
+          "function_or_anchor": "add_to_group(\"qfep_lambda_controllers\")",
+          "fact": "Actualcontrollergroup."
+        },
+        {
+          "path": "commons/interfaces/qfep/phi_slider.gd",
+          "line": 145,
+          "function_or_anchor": "add_to_group(\"qfep_phi_controllers\")",
+          "fact": "Actualcontrollergroup."
+        },
+        {
+          "path": "commons/interfaces/qfep/qfep_reactor.gd",
+          "line": 424,
+          "function_or_anchor": "func _connect_to_sliders",
+          "fact": "Receiverlooks for mismatchedqfep_slidergroup."
+        },
+        {
+          "path": "commons/interfaces/qfep/reactive_particle_field.gd",
+          "line": 291,
+          "function_or_anchor": "func _connect_to_sliders",
+          "fact": "Sameunbridgedgroup mismatch."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_Sandbox/map_data.json": "588ad04da5f7bb2a070ad748be32bf127e6099c047b44169649fecb56677f8d9",
+        "commons/maps/QFEP_Sandbox/intent.md": "3ec29d7b20e643988fd03bf9daf7ac8f6d07c7372cc5cd3f56d441a2ec537fde",
+        "commons/maps/QFEP_Sandbox/tutorial.md": "c79203e58c3e7657274261e23900359a44bbe820c42532dec46b0f8aa30582cf",
+        "commons/maps/QFEP_Sandbox/technical.md": "96a3e70492ca78e09df173da04a748b11ab074c05285d12230a553515e74b417",
+        "commons/maps/QFEP_Sandbox/critical.md": "11b0674888ead34147f5bd1f91cb5422e44f24cd185796380ef77205931adaa1",
+        "commons/interfaces/qfep/lambda_slider.tscn": "c01ca41c8c7c25a75cbab1d98dcdc03fa49382ae2d0fdf354b8bb6bf8ef04574",
+        "commons/interfaces/qfep/lambda_slider.gd": "6a5e778a9ee79ce785e0433d8f0593bfbab39d43baefc627e1de925e0135b9b8",
+        "commons/interfaces/qfep/phi_slider.tscn": "fc69c59d1901ad9c3d0e81015677fbb20e83d99cef25e6a45b6df29695de1f75",
+        "commons/interfaces/qfep/phi_slider.gd": "5712593487bf9d990cb04695b9603cc04ba10fe2ac4aacc7498dc2ad38b54c2c",
+        "commons/interfaces/qfep/qfep_reactor.gd": "62c7f75fc1714b8e5096f9061ffa166e586729102b574bb7726be31af73a0f46",
+        "commons/interfaces/qfep/reactive_particle_field.gd": "00bab35b5f6c55637f6f97d81e00d767f578386a73802fdcc4a0eb6f2ab3ac96"
+      },
+      "placements": [
+        {
+          "x": 5,
+          "z": 1,
+          "raw": "lambda_slider:0:0.5"
+        },
+        {
+          "x": 9,
+          "z": 1,
+          "raw": "phi_slider:0:0.5"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Centralencountergap: wire room-scopedcoupling; do not turnbug into intendedphilosophicalargument. Book should plainly mark intendednext experiment rather than assert success."
+      ]
+    },
+    {
+      "room_id": "QFEP_Synthesis",
+      "primary_tokens": [
+        "queer_morphology_specimen"
+      ],
+      "question": "Which kind of stability are you asking this body to keep?",
+      "ontology": "The specimen interprets two projectparameters through softbodyproperties: lambdaaffects stiffness/pressure; phiaffects damping/drag. These are authoredmappings between vocabulary andmechanics.",
+      "action": "Use the specimen’s own LAMBDA andPHI sliders. Holdone fixed while movingtheother; compare how shape,motion andreadoutrespond.",
+      "observable": "Lambda shifts stiffness andcolour whilephi shifts thedampinganddrag of thespecimen. Namedstates onthelabel are assignedfrom parameterbands.",
+      "mechanism": "Stiffness lerps.9→.1 withlambda; pressure peaksbydesign at.5. Phi[-1,1] maps damping.2→.001 anddrag.3→0. Breathing is also timed. Mapscale.25 makes itsbuiltcontrols notablysmall.",
+      "limit": "A visiblebodyresponding to mechanics is not an assay ofqueerness or alivingstate. The sameword phi had a differentscale on the firstconsole; consistentmeaning requires naming eachmapping.",
+      "variation": "Existing: combine highstiffness with lowdamping, or lowstiffness with highdamping, instead ofchoosing only namedpresets. Proposed: keep one measurabledeformation trace as acomparison.",
+      "prior_bridge": "The sandboxneeds a sharedconnection; this specimen closes a smallerlocal loop between two controls andonebody.",
+      "next_bridge": "Post-crisis asks how an explicitlylimited model can still support accountableaction.",
+      "sources": [
+        {
+          "path": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+          "line": 585,
+          "function_or_anchor": "func _create_vr_controls",
+          "fact": "Localsliders wired tosetters."
+        },
+        {
+          "path": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+          "line": 647,
+          "function_or_anchor": "func _apply_lambda",
+          "fact": "Stiffnessandpressure mapping."
+        },
+        {
+          "path": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+          "line": 681,
+          "function_or_anchor": "func _apply_phi",
+          "fact": "Dampinganddrag mapping."
+        }
+      ],
+      "source_hashes": {
+        "commons/maps/QFEP_Synthesis/map_data.json": "a5b39c7373a571d695057fcc38a8bad7b29f6a099a1831410d91e24e04b31859",
+        "commons/maps/QFEP_Synthesis/intent.md": "a64945aff87d25d009ee686229cf97df16de0b9557ea6f56d3a1e3f10d811eeb",
+        "commons/maps/QFEP_Synthesis/tutorial.md": "319cc063feee8c24436b7e8664359ef1ef835265c18d70a2d85475cd36ea2c6d",
+        "commons/maps/QFEP_Synthesis/technical.md": "5fdadfa0b548d78fab31394dc14a32e1a59e4538dc35bf1f04c8bb9f29ac7c06",
+        "commons/maps/QFEP_Synthesis/critical.md": "1806c816aa4062f268ff698b76be1c99a60c47fae6eb94c7a96e183ac0b4388f",
+        "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn": "6254974d9ba8027133e6b6db06f489b705e6bd56ccf7a57358b72616656d16c9",
+        "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd": "624e38af3c9651f0dc1791a743b45a5bfa94f4aa8d222f703abb320d6771fa58"
+      },
+      "placements": [
+        {
+          "x": 3,
+          "z": 1,
+          "raw": "queer_morphology_specimen:0:0.05:0.25"
+        }
+      ],
+      "cautions": [
+        "Source-reviewed draft; current museum reach, readable labels, controls and human learning unverified.",
+        "Presetbutton lambda callback takes anargument; signalarity notruntimeverified. Focus prose onsliders. Actualscaledcontrols reach/readabilityneedswalk."
+      ]
+    }
+  ]
+}

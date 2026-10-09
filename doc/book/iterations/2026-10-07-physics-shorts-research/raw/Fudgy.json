@@ -1,0 +1,19 @@
+{
+  "source": {
+    "requested_handle": "Fudgy",
+    "source_url": "https://www.youtube.com/@Fudgy/shorts",
+    "selection_purpose": "VR and sandbox gameplay",
+    "status": "error",
+    "error": "ERROR: [youtube:tab] @Fudgy: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+    "count": 0,
+    "warnings": [
+      "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+      "[youtube:tab] Unable to download webpage: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>). Giving up after 1 retries",
+      "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+      "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+      "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+      "ERROR: [youtube:tab] @Fudgy: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)"
+    ]
+  },
+  "entries": []
+}

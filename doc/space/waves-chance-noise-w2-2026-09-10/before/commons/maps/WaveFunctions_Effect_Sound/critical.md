@@ -1,0 +1,15 @@
+# Sound is an infrastructure — latency, quantisation, and the politics of what can be heard
+
+The waveform on the oscilloscope and the sound in the room are not the same thing. The waveform is a continuous mathematical object; the sound is a sequence of pressure differences transmitted through air, sampled by transducers, reconstructed by speakers, and heard by ears. Between the function and the experience is a full stack of infrastructure, and this map refuses to hide any of it.
+
+Wendy Chun argues that software's power is the power to make infrastructure invisible. When a system works, the learner hears the note; when it fails, they hear nothing, or noise, or a glitch. Chun's insight is that the invisibility is not neutral. It is a political achievement: a claim that the translation from waveform to sound is a trustworthy process, and that the translation's costs can be ignored.
+
+This map unhides the infrastructure. The four synthesiser stations each run a different waveform — square, sawtooth, triangle, sine — and a display above each bench tracks the signal at multiple stages. The ideal waveform; the quantised waveform after sampling; the filtered waveform after the DAC reconstruction filter; the measured waveform recovered from the speaker output. The gap between the first and the last is the infrastructure made visible. Each stage subtracts information that the next stage cannot recover.
+
+The FFT monitor extends the argument. The learner plays a chord, and the monitor decomposes the signal into its frequency components in real time. What looks like one sound is actually a handful of dominant frequencies plus a noise floor that never settles to zero. The chord is a spatial claim as well as a temporal one: it occupies a region of the spectrum rather than a single point. Chun would note that the chord's richness is available only because the spectrum is infrastructure — a set of decisions about how to decompose signal into component frequencies, made long before the learner struck the chord.
+
+The latency display is the politics of the stack. Every stage adds delay: the sampling, the buffer, the DAC, the speaker, the air, the ear. The map tracks the delay as a running measurement, and the number sits at some non-trivial value even at the fastest settings. Real-time is a claim, not a property. Audio infrastructure is fast, but it is not free. The gap between striking a key and hearing a tone is the time the infrastructure takes to do its work.
+
+Within the sequence, Effect_Sound is the pivot from visible oscillation to audible oscillation. The maps before this treated the wave as something to see or walk; this map treats it as something to hear. The later maps — Bernini's twisted columns, Cage's silence, AirMusic's phasing loops — all depend on the infrastructure this map makes visible. The learner leaves knowing that hearing is as constructed as seeing, and that the construction is always political.
+
+The map's closing move is to hand the learner the FFT display without explanation, trusting that after the hour of tuning they will read it as a political instrument rather than as a decoration.

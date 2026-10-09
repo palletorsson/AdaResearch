@@ -1,0 +1,57 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Both fresh submitted entry scripts instantiate",
+      "passed": true
+    },
+    {
+      "name": "Original and composition both make fifteen segments in the museum",
+      "passed": true
+    },
+    {
+      "name": "Each temporary study stands on museum floor",
+      "passed": true
+    },
+    {
+      "name": "Both studies retain their two PointBody grips",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: front",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: side",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "placement": {
+      "framing": "Moved the temporary pair inward after visual inspection found the first cameras outside the doorway. First framing preserved separately.",
+      "hall_local": [
+        9.5,
+        0,
+        8.0
+      ],
+      "labels": "Evaluator captions; student source unchanged",
+      "offsets": [
+        -1.25,
+        1.25
+      ],
+      "temporary": true
+    },
+    "scope": "Two unedited learner studies temporarily mounted together in actual Fractal_Synthesis. Static geometry/view comparison; no new permanent artifact and no headset evaluation."
+  },
+  "passed": true,
+  "room": "Fractal_Synthesis",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

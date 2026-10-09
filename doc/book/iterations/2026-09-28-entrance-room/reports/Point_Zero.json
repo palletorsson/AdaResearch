@@ -1,0 +1,158 @@
+{
+  "authored_exit": {
+    "cell": "(8, 8)",
+    "door": "(8.5, 0.05, 8.5)",
+    "inward": "(0.0, 0.0, -1.0)",
+    "source": "t",
+    "yaw": 3.14159265358979
+  },
+  "events": [
+    {
+      "halls": 0,
+      "ms": 7160,
+      "phase": "boot"
+    },
+    {
+      "halls": 1,
+      "ms": 8450,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 8468,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 9655,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 9674,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 9695,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 9695,
+      "phase": "architecture"
+    },
+    {
+      "ms": 315,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 10017,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 10467,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 11118,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 11154,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 11174,
+      "phase": "idle"
+    },
+    {
+      "halls": 1,
+      "ms": 12680,
+      "phase": "entering"
+    },
+    {
+      "halls": 1,
+      "ms": 12705,
+      "phase": "unloading"
+    },
+    {
+      "halls": 0,
+      "ms": 12727,
+      "phase": "empty"
+    },
+    {
+      "halls": 0,
+      "ms": 12727,
+      "phase": "architecture"
+    },
+    {
+      "ms": 225,
+      "phase": "architecture_ms"
+    },
+    {
+      "halls": 1,
+      "ms": 12958,
+      "phase": "resources"
+    },
+    {
+      "halls": 1,
+      "ms": 12962,
+      "phase": "artifacts"
+    },
+    {
+      "halls": 1,
+      "ms": 13159,
+      "phase": "support"
+    },
+    {
+      "halls": 1,
+      "ms": 13203,
+      "phase": "arriving"
+    },
+    {
+      "halls": 1,
+      "ms": 13224,
+      "phase": "idle"
+    }
+  ],
+  "failures": [],
+  "landing_checks": [
+    {
+      "actual": "(7.5, 0.000523, 1.6)",
+      "stage": "Point Zero special opening",
+      "target": "(7.5, 4.0, 1.5)"
+    },
+    {
+      "cage": true,
+      "entry_cell": "(8, 0)",
+      "entry_source": "s",
+      "pad": "(8.5, 0.05, 11.65)",
+      "settled_feet": "(8.499975, 0.0, 11.75)",
+      "slabs": 2,
+      "stage": "Forward arrival"
+    },
+    {
+      "cage": false,
+      "entry_cell": "",
+      "entry_source": "fallback",
+      "pad": "(9.5, 0.05, 4.35)",
+      "settled_feet": "(9.499975, 0.0, 4.45)",
+      "slabs": 2,
+      "stage": "Return arrival"
+    }
+  ],
+  "next": "Point_One",
+  "observed_bounds_reset": false,
+  "passed": true,
+  "peak_resident_halls": 1,
+  "room": "Point_Zero",
+  "staged_rig": true,
+  "vr_simulated": true,
+  "xr_physics_body": true
+}

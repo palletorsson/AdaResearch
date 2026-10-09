@@ -1,0 +1,41 @@
+--- canonical/Trans_Body/final.md
++++ review-draft/Trans_Body/final.md
+@@ -8,15 +8,7 @@
+ 
+ The slats nearest you turn. Step sideways along the wall and the opening follows; step back and it closes. A doorway has come to meet you.
+ 
+-Within reach, the distance part of the rule can be written:
+-
+-```gdscript
+-var t: float = absf(slat_x - visitor_x) / aperture_m
+-var d: float = absf(visitor_z) / reach_m
+-var openness: float = (1.0 - t) * (1.0 - d)
+-```
+-
+-One distance runs along the wall, from the slat to you. The other runs out from the wall to where you stand. Each is divided by its chosen reach, making a fraction. Subtracting the fractions from one gives more weight to closeness; multiplying the results lets both distances shape the opening. The program also smooths the response and opens neighbouring slats far enough for a body to pass.
++The opening responds to two distances: along the wall from each slat to you, and out from the wall to where you stand. The response weakens towards the limits of its reach. Neighbouring slats turn with the ones closest to you, making room for more than a point.
+ 
+ Someone has chosen that width, that reach, and which bodies the wall will notice. The invitation has dimensions. Yet you can move its centre along the wall. Your position changes what this arrangement allows.
+ 
+@@ -54,13 +46,7 @@
+ 
+ Move closer. The nearest blocks shrink. Continue between them: the opening travels with you.
+ 
+-```gdscript
+-var t: float = clampf(sqrt(_dist2[i]) / reach_m, 0.0, 1.0)
+-t = t * t * (3.0 - 2.0 * t)
+-return lerpf(min_scale, 1.0, t)
+-```
+-
+-Each block compares its distance from the nearest body with its sensing reach. The first line turns that comparison into a fraction between zero and one; the second smooths it. `lerpf` uses it to choose a size between about a third and full scale. The visible block and its collision box shrink together, lowering as they do so to keep their feet on the floor. Their places in the horizontal grid stay fixed.
++Each block answers the nearest body within its reach. It shrinks smoothly to about a third of its full size. The visible block and its collision box change together, lowering as they shrink to keep their feet on the floor. Their places in the horizontal grid stay fixed.
+ 
+ All nine blocks are still there. Your distance has become their size.
+ 
+@@ -70,4 +56,6 @@
+ 
+ Two boundaries return; one keeps the cut. Looking back finds a wall, a trench, a field of blocks. Each has answered the same approach differently.
+ 
++The slats and shrinking blocks answer where you are now. The trench keeps a change made by your earlier passage. After you leave, the next visitor can still follow the opening your body made.
++
+ In the next room, growing blocks follow a clock. Coming closer will no longer ask them to make room. You will have to find your moment.

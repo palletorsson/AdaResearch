@@ -1,0 +1,139 @@
+{
+  "incoming": {
+    "sha256": "32561b91b52ecdfbc778c251a5964c06301807254ee16e19c78a8d9cb67fc52a"
+  },
+  "operations": [
+    {
+      "id": "next-museum-study",
+      "kind": "replace",
+      "before": "extends Node3D\nconst PointBody = preload(\"point_body.gd\")\nconst FaceBody = preload(\"face_body.gd\")\nconst Archive = preload(\"trace_archive.gd\")\nconst CORNERS := Vector3i(0, 1, 2)\nvar handles: Array[Node3D] = []\nvar points: Array[Vector3] = []\nvar face := FaceBody.new()\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    add_child(face)\n    add_child(message)\n    message.position = Vector3(0, 2, 0)\n    message.font_size = 32\n    message.pixel_size = 0.003\n    var drawing := Archive.load_drawing()\n    if drawing == null:\n        message.text = \"Return to Trace; draw and release the point.\"\n        return\n    var record: PackedVector3Array = drawing.get_meta(\"positions\")\n    drawing.free()\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        if index < 0 or index >= record.size():\n            message.text = \"Choose three indices inside the saved record.\"\n            return\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        var point := PointBody.new()\n        point.position = record[index]\n        add_child(point)\n        handles.append(point)\n\nfunc _process(_delta: float) -> void:\n    if handles.size() != 3:\n        return\n    var current: Array[Vector3] = []\n    for point in handles:\n        current.append(point.position)\n    if current == points:\n        return\n    points = current\n    if face.show_faces(points, [Vector3i(0, 1, 2)]):\n        message.text = \"Three positions; one face.\"\n    else:\n        message.text = \"Separate the corners; lift one off the line.\"\n",
+      "after": "extends Node3D\nconst Archive = preload(\"trace_archive.gd\")\nconst FaceBody = preload(\"face_body.gd\")\nconst CORNERS := Vector3i(0, 1, 2)\nconst DEPTH := 0.6\nvar points: Array[Vector3] = []\nvar faces: Array[Vector3i] = [\n    Vector3i(0, 1, 2), Vector3i(0, 3, 1),\n    Vector3i(1, 3, 2), Vector3i(2, 3, 0)]\nvar body := FaceBody.new()\nvar message := Label3D.new()\n\nfunc _ready() -> void:\n    add_child(body)\n    add_child(message)\n    message.position = Vector3(0, 2, 0)\n    message.pixel_size = 0.003\n    var drawing := Archive.load_drawing()\n    if drawing == null:\n        message.text = \"Bring a drawing from Trace.\"\n        return\n    var record: PackedVector3Array = drawing.get_meta(\"positions\")\n    drawing.free()\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        if index < 0 or index >= record.size():\n            message.text = \"Choose three saved indices.\"\n            return\n    for index in [CORNERS.x, CORNERS.y, CORNERS.z]:\n        points.append(record[index])\n    var normal := (points[2] - points[0]).cross(points[1] - points[0])\n    if normal.length() < 0.00001 or DEPTH <= 0.0:\n        message.text = \"Use a valid triangle and a positive depth.\"\n        return\n    var centre := (points[0] + points[1] + points[2]) / 3.0\n    points.append(centre - normal.normalized() * DEPTH)\n    body.show_faces(points, faces)\n    message.text = \"Four positions; four faces.\"\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Primitives_Polythedra/tutorial.md",
+      "sha256": "75fe9ba501f4989eba5b86f9591cc2395fb741d03df2bbac87eb7d70c835d509"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/face_body.gd",
+      "sha256": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/lesson.gd",
+      "sha256": "005d88c43547a840e698286144e52226ad444bdf1ec8317854054ea737b9e3ab"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+      "sha256": "08e9b5969ceb95c39dcdcbaba80eb21c16e6fe537353876d17e7b375281ce84b"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+      "sha256": "d11f11641d6369f0cf6b01aca444006b09e3f96c3bda99480e0146adbfc3077d"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+      "sha256": "bff6fe6eacf64c0205532486c9f7dbee2b3b96832d7dc3396e982c2e7505253e"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+      "sha256": "59ad5fac3c17b108e06f8d5708b4a59a6cca339569e657dd146646519158b396"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd",
+      "sha256": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+    }
+  ],
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/four_vertices_four_faces",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/closed_outward_tetrahedron",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/rendered_connectivity",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/apex_off_base_plane",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/shared_apex_updates_three_faces",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/edited_apex_still_enclosed",
+      "kind": "native"
+    },
+    {
+      "id": "polyhedra/no_implied_collision",
+      "kind": "native"
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Primitives_Polythedra/tutorial.md",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/face_body.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/lesson.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/line_skin.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Polythedra/trace_archive.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/verify.gd",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace.gd",
+    "doc/book/iterations/2026-10-06-trace-saved-to-grid/trace/trace_archive.gd"
+  ]
+}

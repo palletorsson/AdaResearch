@@ -1,0 +1,352 @@
+{
+  "mode": "source expressions + independent arithmetic model; no Godot execution",
+  "gdscript_parses": 4,
+  "verbatim_gdscript_excerpts": 26,
+  "map_structure_and_utilities": "unchanged against the review baseline",
+  "map_curation_since_review": {
+    "WaveFunctions_Pendulum": {
+      "removed": [
+        "draw_dot_time_domain @ (5, 4)",
+        "foucault_pendulum @ (8, 1)"
+      ],
+      "added": [
+        "draw_dot_time_domain @ (4, 17)",
+        "foucault_pendulum:0:0:0.5 @ (10, 3)"
+      ],
+      "museum_keys_added": [
+        "sculpture_clear_rects"
+      ]
+    },
+    "WaveFunctions_Sine_Space": {
+      "removed": [
+        "colorballs @ (9, 13)",
+        "colorballs @ (9, 18)",
+        "colorballs @ (9, 8)",
+        "sine_space_explanation:-90:-0.2 @ (11, 2)",
+        "sine_wall_explanation:90:-.4 @ (1, 2)"
+      ],
+      "added": [
+        "sine_wall_explanation:90:-.4 @ (1, 1)"
+      ],
+      "museum_keys_added": [
+        "sculpture_clear_rects"
+      ]
+    }
+  },
+  "phase_error_before": 0.4551313858511317,
+  "phase_error_after": 8.465450562766819e-16,
+  "half_turn_cancellation_error": 4.510281037539698e-16,
+  "flat_colour_intensity": 0.5,
+  "pattern_repeat_seconds": 17.951958020513104,
+  "record_model": {
+    "fine": {
+      "count": 300,
+      "oldest_age": 7.483333349227932,
+      "actual_gaps_ms": [
+        16.666412353515625,
+        33.333778381347656
+      ],
+      "x_spread": 2.828498125076294,
+      "measured_period": 2.9499999999999957
+    },
+    "probe_origin": {
+      "room_origin_count": -1,
+      "pendulum_origin_count": 118
+    },
+    "coarse": {
+      "count": 50,
+      "oldest_age": 9.98333358764663,
+      "actual_gaps_ms": [
+        199.9988555908203,
+        200.00076293945312
+      ],
+      "x_spread": 2.8277506828308105,
+      "measured_period": 2.9499999999998323
+    },
+    "strobe": {
+      "count": 3,
+      "oldest_age": 7.53333282470658,
+      "actual_gaps_ms": [
+        2949.9988555908203,
+        2950.000762939453
+      ],
+      "x_spread": 0.011751294136047363,
+      "measured_period": 2.9499999999998323
+    }
+  },
+  "runtime": {
+    "WaveFunctions_Intro": {
+      "checks": 22,
+      "failures": [],
+      "status": "n/a"
+    },
+    "WaveFunctions_Intro_live": {
+      "checks": 28,
+      "failures": [],
+      "status": "passed",
+      "skipped": [],
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true,
+        "carry_hover": "nothing"
+      }
+    },
+    "Random_Definition": {
+      "checks": 25,
+      "failures": [],
+      "status": "n/a"
+    },
+    "Random_Definition_live": {
+      "checks": 27,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "cabinet-vista/SeedReplayDemo/Panel/Btn_1",
+        "hover": "yDemo/Panel/Btn_1/InteractableAreaButton",
+        "walker_cam_guard_stopped": true
+      }
+    },
+    "Noise_Perlin_Simplex": {
+      "checks": 51,
+      "failures": [],
+      "status": "n/a"
+    },
+    "Noise_Perlin_Simplex_live": {
+      "checks": 54,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "a-room-matrix/SimplexNoise/SIMPLEX/Btn_0",
+        "hover": "ise/SIMPLEX/Btn_0/InteractableAreaButton",
+        "walker_cam_guard_stopped": true
+      }
+    },
+    "WaveFunctions_Pendulum": {
+      "checks": 50,
+      "failures": [],
+      "status": "n/a"
+    },
+    "WaveFunctions_Pendulum_live": {
+      "checks": 56,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "-pavilion-chain/PendulumWave/Panel/Btn_1",
+        "hover": "mWave/Panel/Btn_1/InteractableAreaButton",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true,
+        "rebuilt_marks": 64
+      }
+    },
+    "WaveFunctions_Sine_Space": {
+      "checks": 57,
+      "failures": [],
+      "status": "n/a"
+    },
+    "WaveFunctions_Sine_Space_live": {
+      "checks": 61,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "ilion-chain/SineWallCorridor/Panel/Btn_0",
+        "hover": "ridor/Panel/Btn_0/InteractableAreaButton",
+        "walker_cam_guard_stopped": true
+      }
+    },
+    "WaveFunctions_Effect_Sound": {
+      "checks": 89,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "WaveFunctions_Effect_Sound_live": {
+      "checks": 94,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "WaveFunctions_AirMusic": {
+      "checks": 52,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "WaveFunctions_AirMusic_live": {
+      "checks": 55,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true,
+        "carry_hover": "nothing"
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "WaveFunctions_Synthesis_Lab": {
+      "checks": 84,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "WaveFunctions_Synthesis_Lab_live": {
+      "checks": 93,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Entropy": {
+      "checks": 132,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Entropy_live": {
+      "checks": 139,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Remove": {
+      "checks": 72,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Remove_live": {
+      "checks": 77,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Walk": {
+      "checks": 106,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Walk_live": {
+      "checks": 112,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Gaussian": {
+      "checks": 101,
+      "failures": [],
+      "status": "n/a",
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Gaussian_live": {
+      "checks": 107,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      },
+      "museum_streaming": {
+        "freed": true,
+        "rebuildable": true
+      }
+    },
+    "Random_Mushrooms": {
+      "checks": 75,
+      "failures": [],
+      "status": "n/a"
+    },
+    "Random_Mushrooms_live": {
+      "checks": 81,
+      "failures": [],
+      "status": "n/a",
+      "desktop_input": {
+        "pressed": "",
+        "hover": "",
+        "walker_cam_guard_stopped": true
+      }
+    },
+    "probe_clear_rects": {
+      "checks": 5,
+      "failures": []
+    },
+    "probe_w1_reload": {
+      "checks": 24,
+      "failures": []
+    }
+  },
+  "source_sha256": {
+    "algorithms/wavefunctions/oscillation_driver/PendulumWave.gd": "ebbee4c1a3d50e548dfd0af2c92f0e8a2b6fb0ea5022f338bead877b6f9484e5",
+    "algorithms/wavefunctions/sine_wall/SineWallCorridor.gd": "d43247da7a596e45215b5f2ffe288f676c7bc0d2854579c4920765d3a795d5d6",
+    "commons/testing/probe_wcn_pendulum.gd": "d423d18cb40b00c17dff9ff873b2d0f409f770875146ba737015c80dce6eac02",
+    "commons/testing/probe_wcn_sine_space.gd": "2fa7ec93cc1ab26be1b8b41323f69d3c528f66d889a74318f1f7342c2308630d"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "study belongs to requested museum hall",
+      "passed": true
+    },
+    {
+      "name": "workplace has actual museum floor",
+      "passed": true
+    },
+    {
+      "name": "real grab driver holds the Trace point",
+      "passed": true
+    },
+    {
+      "name": "release saves nine positions and eight existing segments",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-trace-saved",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: museum-trace-side",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "archive_sha256": "1a693548f2000b23b1e70682d74677c7577c016d9c3f79f091bebbe617b06b70",
+    "record_count": 9
+  },
+  "passed": true,
+  "room": "Point_Trace",
+  "scope": "Actual museum halls and exact learner programs, separate process runs. Synthetic controller draws and releases in Trace; Grid loads the saved sculpture. Temporary study placement, not a permanent museum map edit or physical headset test."
+}

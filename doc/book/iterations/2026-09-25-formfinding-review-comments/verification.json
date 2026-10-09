@@ -1,0 +1,278 @@
+{
+  "checks": [
+    {
+      "check": "FormFinding_Descent: titled text without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Descent: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Descent: existing encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Descent: current core hashes",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Descent: live reader matches canonical text",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Descent: placement unchanged",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Descent: only intended core fields changed",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: titled text without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: existing encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: current core hashes",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: live reader matches canonical text",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: placement unchanged",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Catenary: only intended core fields changed",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: titled text without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: existing encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: current core hashes",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: live reader matches canonical text",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: placement unchanged",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Relaxation: only intended core fields changed",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: titled text without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: existing encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: current core hashes",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: live reader matches canonical text",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: placement unchanged",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Equilibrium: only intended core fields changed",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: titled text without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: existing encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: current core hashes",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: live reader matches canonical text",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: placement unchanged",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Annealing: only intended core fields changed",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: titled text without encoding corruption",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: code excerpts retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: existing encounter anchors retained",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: current core hashes",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: live reader matches canonical text",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: placement unchanged",
+      "passed": true
+    },
+    {
+      "check": "FormFinding_Forge: only intended core fields changed",
+      "passed": true
+    },
+    {
+      "check": "Other current core records retained",
+      "passed": true
+    },
+    {
+      "check": "Companion manuscripts retained",
+      "passed": true
+    },
+    {
+      "check": "commons/maps/sequences/formfinding.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/data/book/formfinding.json: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/self_shaping_forge/self_shaping_forge.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/verlet_workbench/verlet_workbench.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd: unchanged",
+      "passed": true
+    },
+    {
+      "check": "Role changes confined to existing forge and its reading order",
+      "passed": true
+    },
+    {
+      "check": "Forge core and curation agree",
+      "passed": true
+    },
+    {
+      "check": "wells: checks passed, exit zero",
+      "passed": true
+    },
+    {
+      "check": "wells: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "relaxation: checks passed, exit zero",
+      "passed": true
+    },
+    {
+      "check": "relaxation: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "forge-standing: checks passed, exit zero",
+      "passed": true
+    },
+    {
+      "check": "forge-standing: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "descent: checks passed, exit zero",
+      "passed": true
+    },
+    {
+      "check": "descent: no GDScript errors",
+      "passed": true
+    },
+    {
+      "check": "Well 0: native mesh differs only in normals",
+      "passed": true
+    },
+    {
+      "check": "Well 1: native mesh differs only in normals",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/formfinding/deep-well-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact photograph served doc/book/figures/formfinding/deep-well-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/formfinding/glass-keeps-a-boundary-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact photograph served doc/book/figures/formfinding/glass-keeps-a-boundary-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Unmodified figure doc/book/figures/formfinding/forge-body-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Exact photograph served doc/book/figures/formfinding/forge-body-museum.png",
+      "passed": true
+    },
+    {
+      "check": "Current capture matches all six chapters",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "scope": "Source, supplied native controls and geometry/ray queries in museum halls. No tracked-headset or reader acceptance."
+}

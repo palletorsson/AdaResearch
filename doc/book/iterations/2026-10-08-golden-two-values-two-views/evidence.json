@@ -1,0 +1,33 @@
+{
+  "checks": 76,
+  "reports": {
+    "lesson-and-artifact": 41,
+    "museum": 35
+  },
+  "source_sha256": {
+    "commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd": "28786315a3b4bad2f5f39c32fddcd001f21865c764b15168e3227a092d29ff42",
+    "commons/artifacts/golden_mapping_lesson/hand_sum.gd": "06b19668f6c4f42b3a4f315ae75d7a7be74368e0b489c0f7d913876da3b99748",
+    "commons/artifacts/golden_mapping_lesson/sum_points.gd": "a3709ae6de3caa26a5a91b9a068050aa9046236d97c4d912279c97dc4b257a77",
+    "commons/artifacts/golden_mapping_lesson/point_body.gd": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+    "commons/maps/Fractal_GoldenSpiral/tutorial.md": "ed889a6b0a5777ce5a89aed39d567073248cab02a8cc849c52cac46a83a08f5c",
+    "commons/maps/Fractal_GoldenSpiral/final.md": "89590b6873f235b9743caa17ec53553665929ba2c3b9bbfef10317849417ca39",
+    "commons/maps/Fractal_GoldenSpiral/technical.md": "244cbf9823f4e480e7725867607db9dff098f0673fb1a245f60db13b36f17f1d",
+    "commons/maps/Fractal_GoldenSpiral/map_data.json": "a6d103042b0755aac03faf548f0e0b1d1883598facf5a0c04517163681ad8358",
+    "tools/probes/golden_hand.gd": "edeab62f1ec7bd9b64aaaac2c48dc3a1cf3039faa329397a30b764e6aa824f41",
+    "tools/probes/golden_hand_museum.gd": "d231e7aac251b1f1ec183a0565b9e5ab5fc1030b5792aa0c74136dd93ae5914f",
+    "algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd": "5cce9f38f281e23ce6ac80b7796863b7f14aa4649c822e8bf8ec8650513bad32",
+    "algorithms/fractals/golden_rectangle/golden_rectangle.gd": "b882e342ed2f2705893d4aa8441c98520b10afa6f7cd463eea1bf6cc11e5ab0e"
+  },
+  "student_extraction": {
+    "sum_points.gd": "d3cd42302e1688de09f1a58526e5edf4babcba7a81b8ea79c3704ee39f86ec1a",
+    "point_body.gd": "2cf3a890cf011740bc22670b217d560973d43f29371124b16bddb11238a4cf5c"
+  },
+  "headset_verified": false,
+  "map_and_original_generators_unchanged": true,
+  "before_capture": "Only new hand table hidden. Existing hall unchanged.",
+  "existing_figure": {
+    "path": "doc/book/figures/fractals/helix-against-golden-spiral.png",
+    "sha256": "8712b8dbe939b37603c9f0fa5aa7374c3b226d751ea748fa5c552fe9816597f8",
+    "kind": "Previously published comparison diagram; not a new museum screenshot."
+  }
+}

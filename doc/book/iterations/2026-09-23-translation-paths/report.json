@@ -1,0 +1,224 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "both existing door mechanisms loaded",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral trace opt-in reached scene",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral placement yaw retained",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral approach has standing floor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral accepts pickup event LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "guided diagonal retains only lift LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral trace records constrained result LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral trace adds no collider LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral accepts pickup event RightDoor",
+      "passed": true
+    },
+    {
+      "name": "guided diagonal retains only lift RightDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral trace records constrained result RightDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral trace adds no collider RightDoor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lift_lateral-first-gesture",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral reset clears trace LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift unlocks second leg LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral reaches shared displacement LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral records a visible trail LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral released movement is not a hand trace LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral reset clears trace RightDoor",
+      "passed": true
+    },
+    {
+      "name": "lift unlocks second leg RightDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral reaches shared displacement RightDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral records a visible trail RightDoor",
+      "passed": true
+    },
+    {
+      "name": "lift_lateral released movement is not a hand trace RightDoor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lift_lateral-completed",
+      "passed": true
+    },
+    {
+      "name": "free trace opt-in reached scene",
+      "passed": true
+    },
+    {
+      "name": "free placement yaw retained",
+      "passed": true
+    },
+    {
+      "name": "free approach has standing floor",
+      "passed": true
+    },
+    {
+      "name": "free accepts pickup event LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free diagonal retains both components LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free trace records constrained result LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free trace adds no collider LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free accepts pickup event RightDoor",
+      "passed": true
+    },
+    {
+      "name": "free diagonal retains both components RightDoor",
+      "passed": true
+    },
+    {
+      "name": "free trace records constrained result RightDoor",
+      "passed": true
+    },
+    {
+      "name": "free trace adds no collider RightDoor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: free-first-gesture",
+      "passed": true
+    },
+    {
+      "name": "free reset clears trace LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free reaches shared displacement LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free records a visible trail LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free released movement is not a hand trace LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free reset clears trace RightDoor",
+      "passed": true
+    },
+    {
+      "name": "free reaches shared displacement RightDoor",
+      "passed": true
+    },
+    {
+      "name": "free records a visible trail RightDoor",
+      "passed": true
+    },
+    {
+      "name": "free released movement is not a hand trace RightDoor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: free-completed",
+      "passed": true
+    },
+    {
+      "name": "free curved route also reaches the goal LeftDoor",
+      "passed": true
+    },
+    {
+      "name": "free curved route also reaches the goal RightDoor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: free-curved",
+      "passed": true
+    },
+    {
+      "name": "unconfigured legacy scene has no added trace",
+      "passed": true
+    },
+    {
+      "name": "long traces stay bounded",
+      "passed": true
+    },
+    {
+      "name": "invalid sample does not corrupt trace",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: translation-exit-terrace",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "free_handle_height": 1.28000003099442,
+    "lift_lateral_handle_height": 1.30000001192093
+  },
+  "passed": true,
+  "room": "Trans_Translation",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

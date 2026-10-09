@@ -1,0 +1,200 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Missing source returns a useful empty record"
+		},
+		{
+			"passed": true,
+			"test": "Unrelated node returns an empty record"
+		},
+		{
+			"passed": true,
+			"test": "Source outside the tree is not assumed ready"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: valid four-position record"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: original vertex and face order retained"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: actual emitted vertices and normals copied exactly"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: inward source normals preserved"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: actual convex hull uses the same four positions"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: closed amount is exact identity"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: base face stays fixed through every stage"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: both shared hinge vertices remain fixed"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: all edge lengths and orientation remain rigid throughout"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: every unfolded corner reaches the base plane"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: each flap unfolds outside the base triangle"
+		},
+		{
+			"passed": true,
+			"test": "Default tetrahedron: display frame puts outward base normal down without reflection"
+		},
+		{
+			"passed": true,
+			"test": "Repeated unchanged reads have a stable signature"
+		},
+		{
+			"passed": true,
+			"test": "Reading and unfolding never change the source, collision or material"
+		},
+		{
+			"passed": true,
+			"test": "Returned arrays are independent copies"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: valid four-position record"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: original vertex and face order retained"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: actual emitted vertices and normals copied exactly"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: inward source normals preserved"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: actual convex hull uses the same four positions"
+		},
+		{
+			"passed": true,
+			"test": "Root movement and nonuniform scale preserve source-local geometry signature"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: closed amount is exact identity"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: base face stays fixed through every stage"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: both shared hinge vertices remain fixed"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: all edge lengths and orientation remain rigid throughout"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: every unfolded corner reaches the base plane"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: each flap unfolds outside the base triangle"
+		},
+		{
+			"passed": true,
+			"test": "Nonuniformly transformed root: display frame puts outward base normal down without reflection"
+		},
+		{
+			"passed": true,
+			"test": "Changed source data with stale rendered mesh is rejected"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: valid four-position record"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: original vertex and face order retained"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: actual emitted vertices and normals copied exactly"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: inward source normals preserved"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: actual convex hull uses the same four positions"
+		},
+		{
+			"passed": true,
+			"test": "A source geometry change updates the signature"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: closed amount is exact identity"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: base face stays fixed through every stage"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: both shared hinge vertices remain fixed"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: all edge lengths and orientation remain rigid throughout"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: every unfolded corner reaches the base plane"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: each flap unfolds outside the base triangle"
+		},
+		{
+			"passed": true,
+			"test": "Rebuilt smaller tetrahedron: display frame puts outward base normal down without reflection"
+		},
+		{
+			"passed": true,
+			"test": "Rendered mesh displaced from geometry is rejected"
+		},
+		{
+			"passed": true,
+			"test": "Collapsed geometry is rejected without rebuilding the source"
+		},
+		{
+			"passed": true,
+			"test": "Empty record has safe identity staging"
+		}
+	],
+	"max_hinge_error": 0.000000259810633451707,
+	"max_length_error": 0.000000357627868652344,
+	"max_planarity_error": 0.000000178813934326172,
+	"passed": true
+}

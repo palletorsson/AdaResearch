@@ -1,187 +1,1688 @@
 {
  "sweep": "csg_difference_demo",
- "peak_changed_pct": 20.563,
+ "peak_changed_pct": 4.678,
+ "subject_pct": 7.26,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
    },
-   "changed_px": 74360,
-   "changed_pct": 12.874
+   "changed_px": 5873,
+   "changed_pct": 1.017
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
    },
-   "changed_px": 64536,
-   "changed_pct": 11.173
+   "changed_px": 14232,
+   "changed_pct": 2.464
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
    },
-   "changed_px": 94590,
-   "changed_pct": 16.376
+   "changed_px": 5727,
+   "changed_pct": 0.992
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
    },
-   "changed_px": 113771,
-   "changed_pct": 19.697
+   "changed_px": 3561,
+   "changed_pct": 0.617
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
    },
-   "changed_px": 118770,
-   "changed_pct": 20.563
+   "changed_px": 7723,
+   "changed_pct": 1.337
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
    },
-   "changed_px": 89463,
-   "changed_pct": 15.489
+   "changed_px": 16786,
+   "changed_pct": 2.906
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
    },
-   "changed_px": 51713,
-   "changed_pct": 8.953
+   "changed_px": 7136,
+   "changed_pct": 1.235
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
    },
-   "changed_px": 113527,
-   "changed_pct": 19.655
+   "changed_px": 3112,
+   "changed_pct": 0.539
   },
   {
    "a": {
-    "sphere_radius": 0.275,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
    },
-   "changed_px": 98374,
-   "changed_pct": 17.032
+   "changed_px": 10741,
+   "changed_pct": 1.86
   },
   {
    "a": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
    },
-   "changed_px": 47970,
-   "changed_pct": 8.305
+   "changed_px": 19338,
+   "changed_pct": 3.348
   },
   {
    "a": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
    },
-   "changed_px": 83933,
-   "changed_pct": 14.531
+   "changed_px": 11573,
+   "changed_pct": 2.004
   },
   {
    "a": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
    },
-   "changed_px": 85550,
-   "changed_pct": 14.811
+   "changed_px": 4455,
+   "changed_pct": 0.771
   },
   {
    "a": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
    },
-   "changed_px": 100686,
-   "changed_pct": 17.432
+   "changed_px": 11848,
+   "changed_pct": 2.051
   },
   {
    "a": {
-    "sphere_radius": 0.55,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
    },
-   "changed_px": 73338,
-   "changed_pct": 12.697
+   "changed_px": 20589,
+   "changed_pct": 3.565
   },
   {
    "a": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.175
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "centred"
    },
    "b": {
-    "sphere_radius": 0.88,
-    "rotation_speed": 0.35
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
    },
-   "changed_px": 36312,
-   "changed_pct": 6.287
+   "changed_px": 12909,
+   "changed_pct": 2.235
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "changed_px": 16113,
+   "changed_pct": 2.79
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "changed_px": 5074,
+   "changed_pct": 0.878
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "changed_px": 7629,
+   "changed_pct": 1.321
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "changed_px": 6577,
+   "changed_pct": 1.139
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "changed_px": 18701,
+   "changed_pct": 3.238
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "changed_px": 6556,
+   "changed_pct": 1.135
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 7771,
+   "changed_pct": 1.345
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 8892,
+   "changed_pct": 1.539
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 21078,
+   "changed_pct": 3.649
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 10834,
+   "changed_pct": 1.876
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 8810,
+   "changed_pct": 1.525
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 10125,
+   "changed_pct": 1.753
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 22123,
+   "changed_pct": 3.83
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 12114,
+   "changed_pct": 2.097
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "changed_px": 17026,
+   "changed_pct": 2.948
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "changed_px": 15530,
+   "changed_pct": 2.689
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "changed_px": 17019,
+   "changed_pct": 2.947
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "changed_px": 15810,
+   "changed_pct": 2.737
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "changed_px": 17625,
+   "changed_pct": 3.051
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 15294,
+   "changed_pct": 2.648
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 19786,
+   "changed_pct": 3.426
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 16896,
+   "changed_pct": 2.925
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 21852,
+   "changed_pct": 3.783
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 16569,
+   "changed_pct": 2.869
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 20893,
+   "changed_pct": 3.617
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 18148,
+   "changed_pct": 3.142
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 23184,
+   "changed_pct": 4.014
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "changed_px": 7427,
+   "changed_pct": 1.286
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "changed_px": 7221,
+   "changed_pct": 1.25
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "changed_px": 19082,
+   "changed_pct": 3.304
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "changed_px": 5787,
+   "changed_pct": 1.002
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 7487,
+   "changed_pct": 1.296
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 9891,
+   "changed_pct": 1.712
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 21444,
+   "changed_pct": 3.713
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 9132,
+   "changed_pct": 1.581
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 8481,
+   "changed_pct": 1.468
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 11038,
+   "changed_pct": 1.911
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 22444,
+   "changed_pct": 3.886
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "outcome",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 10549,
+   "changed_pct": 1.826
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "changed_px": 8565,
+   "changed_pct": 1.483
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "changed_px": 15563,
+   "changed_pct": 2.694
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "changed_px": 8799,
+   "changed_pct": 1.523
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 3768,
+   "changed_pct": 0.652
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 11790,
+   "changed_pct": 2.041
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 18837,
+   "changed_pct": 3.261
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 13200,
+   "changed_pct": 2.285
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 5045,
+   "changed_pct": 0.873
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 12897,
+   "changed_pct": 2.233
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 20136,
+   "changed_pct": 3.486
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 14536,
+   "changed_pct": 2.517
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "changed_px": 18316,
+   "changed_pct": 3.171
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "changed_px": 6087,
+   "changed_pct": 1.054
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 9227,
+   "changed_pct": 1.597
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 7755,
+   "changed_pct": 1.343
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 21013,
+   "changed_pct": 3.638
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 11633,
+   "changed_pct": 2.014
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 10268,
+   "changed_pct": 1.778
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 8997,
+   "changed_pct": 1.558
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 22123,
+   "changed_pct": 3.83
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 12917,
+   "changed_pct": 2.236
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "changed_px": 19619,
+   "changed_pct": 3.397
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 16827,
+   "changed_pct": 2.913
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 21552,
+   "changed_pct": 3.731
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 15816,
+   "changed_pct": 2.738
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 23780,
+   "changed_pct": 4.117
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 18114,
+   "changed_pct": 3.136
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 22659,
+   "changed_pct": 3.923
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 17094,
+   "changed_pct": 2.959
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 25112,
+   "changed_pct": 4.348
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "changed_px": 8908,
+   "changed_pct": 1.542
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 9588,
+   "changed_pct": 1.66
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 21728,
+   "changed_pct": 3.762
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 8260,
+   "changed_pct": 1.43
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 9907,
+   "changed_pct": 1.715
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 10801,
+   "changed_pct": 1.87
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 22806,
+   "changed_pct": 3.948
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "trace",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 9707,
+   "changed_pct": 1.681
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "changed_px": 11202,
+   "changed_pct": 1.939
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 17588,
+   "changed_pct": 3.045
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 13165,
+   "changed_pct": 2.279
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 1714,
+   "changed_pct": 0.297
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 12309,
+   "changed_pct": 2.131
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 19050,
+   "changed_pct": 3.298
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 14499,
+   "changed_pct": 2.51
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "changed_px": 22701,
+   "changed_pct": 3.93
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 8275,
+   "changed_pct": 1.433
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 12222,
+   "changed_pct": 2.116
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 1701,
+   "changed_pct": 0.294
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 23672,
+   "changed_pct": 4.098
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 9641,
+   "changed_pct": 1.669
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "changed_px": 25700,
+   "changed_pct": 4.449
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 18969,
+   "changed_pct": 3.284
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 23717,
+   "changed_pct": 4.106
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 2143,
+   "changed_pct": 0.371
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 27023,
+   "changed_pct": 4.678
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "changed_px": 14037,
+   "changed_pct": 2.43
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 9655,
+   "changed_pct": 1.672
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 26671,
+   "changed_pct": 4.618
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "operands",
+    "strike": "grazing"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 1908,
+   "changed_pct": 0.33
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "changed_px": 11583,
+   "changed_pct": 2.005
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 18224,
+   "changed_pct": 3.155
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "centred"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 13646,
+   "changed_pct": 2.363
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "changed_px": 22942,
+   "changed_pct": 3.972
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "raised"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 9144,
+   "changed_pct": 1.583
+  },
+  {
+   "a": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "corner"
+   },
+   "b": {
+    "rotation_speed": "0.0",
+    "workings": "expression",
+    "strike": "grazing"
+   },
+   "changed_px": 26269,
+   "changed_pct": 4.548
   }
  ]
 }

@@ -1,0 +1,184 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LSystems_Growth · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=LSystems_Growth">← Tutorial lineage</a></p><h1>LSystems Growth</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="LSystems_Growth/final.md">Raw captured source</a></p><pre># What a branch remembers
+
+&lt;!-- @parametric_lsystem --&gt;
+
+A short upright line, a pale point at its tip. Beside it, a second reading waits. We have brought the turtle out of Grammar Lab. There, we changed the angle of a sentence. Here we can follow what the turtle carries from one instruction to the next.
+
+The sentence is already written:
+
+```text
+F[+F]F[-F]F
+```
+
+This tree&#x27;s rule replaced one F with those eleven symbols. It is the first of a small family printed in Prusinkiewicz and Lindenmayer’s *The Algorithmic Beauty of Plants*; Competition’s rule and the readers in the hall after next come from the same page.[^abop] Its first F has drawn a line 0.8 metres long. The pale point marks the turtle&#x27;s current position. What must it keep if it is to leave the trunk, make a branch, and find its way back?
+
+Press STEP once. Nothing extends. The next symbol is `[`. The readout says SAVE; the stack count becomes one. The next length has changed from 0.800 to 0.576 metres, although the point has not moved. An operation has taken place without adding anything to the outline.
+
+STEP again: `+` changes the direction. Another STEP reaches F, and the shorter branch appears. HOLD this reading. The held drawing keeps its pale point at the new tip.
+
+Now comes `]`. Where will the live point go?
+
+It returns to the fork. The branch remains drawn, with no return line joining its tip to the fork. Next length is 0.800 again. Press STEP: the trunk continues upward from the saved position. The branch&#x27;s turn and shorter stride have not become the trunk&#x27;s next instructions.
+
+The turtle carries a state: position, orientation, length, angle and branching depth. At `[`, the interpreter puts a copy on a stack. A stack returns the most recently saved record first. One branch may contain another; the inner branch must finish before we return from the outer one. This nesting gives a small program a way to remember several departures without confusing their returns.
+
+After saving, the source changes two values for the branch:
+
+```gdscript
+current_length *= length_decay
+current_angle *= 0.95
+```
+
+The first line means: take the length we have and multiply it by the ratio. Here, 0.8 × 0.72 gives 0.576 metres. The second changes forty degrees to thirty-eight. F still means draw forward, but how far forward now depends on the state in which the turtle reads it.
+
+At `]`, this excerpt from `parametric_lsystem.gd` retrieves the saved record:
+
+```gdscript
+var state: Dictionary = stack.pop_back()
+pos = state[&quot;pos&quot;]
+dir = state[&quot;dir&quot;]
+right = state[&quot;right&quot;]
+up = state[&quot;up&quot;]
+depth = state[&quot;depth&quot;]
+current_length = state[&quot;length&quot;]
+current_angle = state[&quot;angle&quot;]
+```
+
+Position returns, the orientation axes return, and the previous length becomes available again. None of these assignments removes a segment already drawn. A return can preserve what happened during a departure while allowing something else to continue.
+
+Keep stepping until all eleven symbols have been read. Five segments, two side branches, a stack empty again. HOLD the complete reading. Then press RATIO once: 0.72 becomes 1.00. Follow a side branch against its held counterpart. It now takes the same 0.8-metre stride as the trunk. The sentence and turning directions have stayed the same. Both drawings use metres; neither is squeezed to fit its plinth.
+
+Press RATIO again. At 1.15, the branch is longer than the segment from which it departs: 0.92 metres. The code calls this value `length_decay`. Its name suggested shortening. The multiplication also permits something else. Which proportion made this drawing look like a proper tree to us?
+
+TREE shows two complete rewriting generations. There are now sixty-one symbols and twenty-five drawn segments. The unshortened trunk reaches 7.2 metres above its starting point. Within a branch inside another branch, the length factor is applied twice: 0.8 × 1.15 × 1.15 = 1.058 metres. The pink first generation remains beside it until we choose to hold another reading. We can follow a local rule and still be surprised by the room it begins to occupy.
+
+STEP reveals a recorded trace of the interpreter; it does not make the computer wait between its calculations. TREE requests another sentence. These are two different ways of looking into a process that would otherwise arrive as a finished drawing. RESET brings back the first line when we want to follow it again.
+
+The stack offers a dependable return, but only for the state its programmer chose to save. It contains no sunlight, weight or account of a neighbouring body. The thin branches have no collision surfaces. Their resemblance to a tree leaves those further requirements open. What would we have to add before this branching could support, shelter or obstruct us?
+
+&lt;!-- @ --&gt;
+
+The animated tree, the obstacle-querying tree, the earlier L-system tree and the cypress remain beyond the desk. They approach growth through other operations. Carry this distinction forward: a sentence supplies instructions; an interpreter decides what they do. In the next hall, even forward may be read sideways.
+
+[^abop]: Przemyslaw Prusinkiewicz and Aristid Lindenmayer, *The Algorithmic Beauty of Plants* (Springer, 1990), figure 1.24: F[+F]F[−F]F is its (a), Competition’s F[+F]F[−F][F] its (b), and the believing turtle’s FF+[+F−F−F]−[−F+F+F] and Grammar Lab’s PLANT preset are its (c) and (f) with the turns mirrored.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="LSystems_Growth/tutorial.md">Raw captured source</a></p><pre># Follow the saved state
+
+1. Begin at the parametric tree&#x27;s compact desk, after the first F has drawn 0.8 m. Read the eleven-symbol sentence F[+F]F[-F]F.
+2. STEP to `[`: predict what the point will do. It stays at the fork; stack depth becomes one and the next length becomes 0.576 m.
+3. STEP to `+`, then F. The branch turns 38 degrees and draws 0.576 m. HOLD its tip and geometry as a reference.
+4. STEP to `]`. Compare the live point back at the fork with the held point at the tip. No segment is added or erased. STEP again to draw the trunk&#x27;s next 0.8 m segment upward. Explain the saved record and last-in, first-out stack through this return.
+5. Finish the eleven symbols and HOLD. RATIO changes 0.72 to 1.00, then 1.15: branches shorten, match, or exceed their parent&#x27;s stride. Grammar, turning choices and metre scale stay fixed; the held state stays available.
+6. TREE shows two rewriting generations, 61 symbols and 25 segments. At ratio 1.15, a twice-nested stride is 1.058 m; the depth-zero trunk reaches 7.2 m. TREE toggles between one and two complete generations. RESET restores the initial line and reference.
+7. Walk around the plinths into the retained collection. Their separate algorithms do not share the primary&#x27;s sentence or constitute a controlled corridor-versus-clearing experiment. Continue to LSystems_Grammars_And_Curves and the believing turtle.
+
+Primary: parametric_lsystem. All five existing works remain. STEP replays actual interpreter records; it is not a per-frame execution debugger. Six physical controls are STEP, RATIO, HOLD, TREE, RESET, RULE. RATIO also cycles through 0.45. The small tilted screen remains transparent. Desktop pointer and route checks precede human headset reach, readability and comfort review.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="LSystems_Growth/technical.md">Raw captured source</a></p><pre># A branch carries a state
+
+Growth builds on Grammar Lab&#x27;s separation of rewriting, interpretation and fitting. It adds parameter inheritance and a last-in, first-out stack. The next hall, LSystems_Grammars_And_Curves, compares interpretations at the believing turtle.
+
+## From sentence to travelling state
+
+The installed primary is parametric_lsystem with the opt-in GrowthLesson. It uses the unchanged Bushy Tree production F -&gt; F[+F]F[-F]F. One rewrite gives 11 symbols and 5 F segments; two give 61 symbols and 25 segments. The lesson starts after the first F, with base_length=0.8, base_angle=40, length_decay=0.72, angle_variation=0 and one rewriting generation.
+
+F and G draw using the current length and heading. Lower-case f moves without drawing. Plus and minus turn; X draws nothing. The existing interpreter saves this record on branch entry:
+
+```gdscript
+stack.append({
+    &quot;pos&quot;: pos,
+    &quot;dir&quot;: dir,
+    &quot;right&quot;: right,
+    &quot;up&quot;: up,
+    &quot;depth&quot;: depth,
+    &quot;length&quot;: current_length,
+    &quot;angle&quot;: current_angle,
+    &quot;angle_rad&quot;: angle_rad
+})
+```
+
+It then increments depth, multiplies current_length by length_decay and current_angle by 0.95, and recalculates angle_rad. Closing a branch pops the most recent record and restores every listed field. The segment list is not rolled back. In the first branch, length becomes 0.576 m and angle 38 degrees; after return they are 0.8 m and 40 degrees again. Branch nesting is not the same as rewriting generation: a sentence at one generation can contain several nested levels.
+
+The lesson records the actual interpreter state after each symbol and an initial START frame, together with the number of segments already drawn. STEP exposes one more record and its segment prefix. This is trace replay, not a suspended GDScript interpreter. The source still interprets the whole accepted sentence when it is generated or reinterpreted.
+
+## Hold, change and measure
+
+HOLD deep-copies the displayed prefix, cursor state, sentence, ratio and generation. RATIO cycles 0.45 / 0.72 / 1.00 / 1.15 and reinterprets the same sentence; it does not rewrite or change the reference. Each interpretation starts the existing RNG at seed 42. The lesson sets variation to zero; the retained ordinary presets can have nonzero variation. A repeated seed only establishes repeatability for the same engine and call sequence.
+
+At ratio one a child stride equals its parent. At 1.15 the first child stride is 0.92 m and a twice-nested stride is 1.058 m. The variable name length_decay does not limit the operation to shortening. TREE toggles one/two complete rewriting generations and reveals the full trace. The depth-zero trunk has three then nine strides, reaching 2.4 then 7.2 metres. RESET restores the opening configuration and held reference. RULE names save, multiply and restore.
+
+Ordinary artifact placements retain their fitted display and all four existing preset dictionaries. GrowthLesson hides that small display and renders the raw segment endpoints using cylinder MultiMeshes in common metre units. Both view transforms have unit scale, each starts on a 0.35 m plinth and carries an eight-metre ruler. There are no segment colliders. The lesson desk does not offer preset switching or rule typing.
+
+The complete short sentence is shown. For longer sentences the display declares a local window with ellipses and the current symbol index/total. That text window does not truncate the interpreted geometry. Rewriting separately preflights allocation and retains the last complete generation if the next would exceed max_symbols: 4096 in the lesson, 80000 ordinarily. Requested generations are clamped to 0–6; the desk only uses 1–2. The ordinary label reports an effective/requested difference. This is a resource bound, not a measured entropy value.
+
+## Museum and retained collection
+
+The hall is 19×28 metres with nine-metre perimeter walls and an open roof. The earlier 13×12 structure is carried at offset (3,16); the abandoned teleporter hole is filled. Side margins and the approach let the visitor pass around the two plinths, then use the retained central route. Compact six-button controls keep full-sized touch targets at 1.045 m; a single tilted transparent pane shows the state. Scoped lighting and smaller captions stage the older works without stopping their clocks.
+
+All five artifacts remain. AnimatedTree advances automatically on its own timer and adds wind; its scene now explicitly points to algorithms/lsystems/Growth/AnimatedTree.gd. ContextSensitiveTree raycasts prospective segments against physics obstacles during interpretation and prunes blocked branches. Its source does not implement the neighbouring-symbol rewrite table printed in the old tutorial. The ordinary lsystem_tree and modulor_cypress are separate studies. They do not share one controlled genotype/phenotype comparison with the primary.
+
+The former map, texts and source are archived under doc/space/lsystems-growth-2026-09-14/before, alongside two historical grid versions and a baseline run. Desktop acceptance exercises the real controls, exact saved-state return, geometry, metre scale, preset preservation, configuration timing, budget behavior and route through the exit. Headset reach, comfort, readability and Quest performance remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="LSystems_Growth/intent.md">Raw captured source</a></p><pre>Concept: A turtle&#x27;s stack saves and restores position, orientation and numerical parameters; branch depth differs from rewriting generation.
+Sequence role: After Grammar Lab&#x27;s separation of sentence and interpreter, before the believing turtle&#x27;s alternative readings.
+Primary: parametric_lsystem, using its actual recorded interpreter trace and raw metre geometry.
+Preserve: all five earlier artifacts and the original corridor/clearing layout, with an accessible approach.
+Encounter: STEP through save, turn, draw and restore; HOLD; compare length ratios on the same sentence; TREE shows nesting.
+Critical pressure: What does a return restore and leave outside its record? The name length_decay suggests a restriction the multiplication does not enforce.
+Next: LSystems_Grammars_And_Curves / the_believing_turtle.
+Later: matched obstacle/pruning comparison, support and collision as a separate experiment, editable productions, human headset review.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="LSystems_Growth/critical.md">Raw captured source</a></p><pre># A return that keeps the branch
+
+The point comes back; the drawn branch stays. This division is useful before it is metaphorical. Restoring a travelling state lets another segment proceed without inheriting every local alteration of the last branch. The program can support several departures because it has a procedure for returning from them.
+
+What counts as a return is nevertheless specified. The saved record includes position, axes, angle, length and depth. The segment list is outside it. The turtle comes back while its drawing keeps the detour. Another implementation might save a different record. To investigate that choice, we need to follow both what is restored and what continues accumulating. A picture alone does not show the division.
+
+The length ratio makes a second assumption available for play. A value below one gives us smaller branches; one gives equal strides; a value above one lets a branch outgrow its parent&#x27;s stride. All use the same multiplication. The name length_decay carries an expectation that the operation does not enforce. The change can be pleasurable without proving that a longer branch is freer, more alive, or more queer. It makes the expectation of a proper proportion available to examine.
+
+This is one place where the book&#x27;s question about code as law becomes precise. A saved state specifies what a branch can carry back. The museum&#x27;s collision system separately specifies what the visitor can stand on. These thin lines supply a visible form without supplying bodily support. If we want to inhabit them, we must make and test that further relation. More branches, greater height, a different abstract branching graph and a newly accessible passage are different outcomes.
+
+The older critical manuscript raised useful questions about inherited conditions, repeated rules and environmental constraint. It also treated similarities to theoretical ideas as confirmations, assigned unmeasured QFEP coordinates, and claimed an on/off test of agential realism through context-free versus context-sensitive rules. Those claims exceeded both the experiment and the installed code. The archive keeps that manuscript available; the current text carries its questions forward without those verdicts.
+
+In particular, ContextSensitiveTree queries physical obstacles during drawing. It does not implement the neighbouring-symbol rewriting function described in the earlier tutorial. The retained trees also use different programs, so their placement in a corridor and a clearing cannot establish that habitat alone changed an identical organism. A useful later experiment would keep a grammar, parameters and seed fixed, record each collision query, and vary one obstacle. Then we could ask which boundary prunes, supports, shelters or redirects this particular construction.
+
+Rewriting does not preserve every original character as a historical object: symbols are replaced. A final sentence is not in general a uniquely recoverable record of all earlier sentences. The state stack has a narrower responsibility: nested returns during interpretation. Neither should be asked to prove an entire theory of memory.
+
+Entropic morality helps keep the consequences of a limit open to investigation. Holding a modest tree steady may make its operation understandable; refusing a further generation may preserve the ability to encounter it at all. A named allocation budget is revisable infrastructure. It does not establish a universal optimum of complexity. Here the visitor can compare shortening and lengthening, retain a reference, and return to the initial state. Those are specific capacities for investigation. What else would a body need before the tree&#x27;s promise of shelter became a place?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="LSystems_Growth/artifacts.md">Raw captured source</a></p><pre># LSystems Growth — Artifacts
+*L-Systems: Rules Grow Structure · lambda_edge · 4 artifacts*
+
+&gt; A tree grows generation by generation. Each step applies the same rewriting rule — F becomes F[+F]F[-F]F — and the string doubles, triples, explodes into branches. On the left, a walled corridor. The tree hits walls, prunes, bends, adapts. On the right, open clearing. Same axiom, same rules, unconstrained. Two trees diverge not because they carry different instructions but because they inhabit different worlds.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Animated Tree Growth
+![Animated Tree Growth](/scene-catalog/AnimatedTree.png)
+
+Time-sliced L-System interpretation showing organic growth animation
+
+`AnimatedTree`
+
+## Context-Sensitive Tree
+![Context-Sensitive Tree](/scene-catalog/ContextSensitiveTree.png)
+
+L-System tree with physics-based environmental awareness and branch pruning
+
+`ContextSensitiveTree`
+
+## L-System Tree
+![L-System Tree](/scene-catalog/lsystem_tree.png)
+
+Classic deterministic L-system tree — the foundational teaching example showing how a simple grammar rule produces organic branching structure.
+
+`lsystem_tree`
+
+## Parametric L-System
+![Parametric L-System](/scene-catalog/parametric_lsystem.png)
+
+L-system with continuous angle and length parameters — branch depth controls parametric decay for organic, naturalistic tree and plant forms. More organic than discrete rules.
+
+`parametric_lsystem`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="LSystems_Growth/summary.md">Raw captured source</a></p><pre># What a branch remembers
+
+Follow the parametric tree&#x27;s actual interpreter trace from a 0.8 m trunk into a branch and back. The saved state restores position, direction and length without erasing the branch. HOLD and RATIO compare shortening, equal strides and lengthening on a common metre scale; TREE carries the same operation into nested branches. All five earlier works remain. The next hall changes how a turtle reads an instruction.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="LSystems_Growth/blurb.md">Raw captured source</a></p><pre># What a branch remembers
+
+The point returns to the fork. Its branch remains. What was saved, and what was allowed to continue? Follow one sentence, then let a branch outgrow the length we expected of it.
+</pre></section></body></html>

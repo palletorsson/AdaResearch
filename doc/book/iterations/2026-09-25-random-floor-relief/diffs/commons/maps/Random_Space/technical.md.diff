@@ -1,0 +1,11 @@
+--- before/commons/maps/Random_Space/technical.md
++++ commons/maps/Random_Space/technical.md
+@@ -198,7 +198,7 @@
+ 
+ ### Element Scale
+ - `random_space` at scale 1.4 is largest element
+-- Positioned at (6,6) height -0.3m—slightly below floor, filling upward
++- Map cell (6,6) retains its legacy grid height of -0.3 m. In the museum, the placement adds a 0.20 m upward offset at 1.4× scale; the actual surface lies about 0.033–0.368 m above the hall floor. This hall uses violet `surface_color:6b427d` and low `emission_strength:0.02`; its seeded vertex heights are unchanged.
+ - Dominates central space, reinforcing its importance
+ 
+ ### Dual Exit Symmetry

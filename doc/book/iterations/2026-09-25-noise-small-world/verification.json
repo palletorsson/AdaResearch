@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "preserved commons/context/walkgrids/NoiseSpace.gd",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Noise_Space_10/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Noise_Space_10/critical.md",
+      "passed": true
+    },
+    {
+      "name": "every original chapter paragraph retained",
+      "passed": true
+    },
+    {
+      "name": "all original code and anchors retained",
+      "passed": true
+    },
+    {
+      "name": "museum changes limited to opt-in body scale factor",
+      "passed": true
+    },
+    {
+      "name": "core record uses current text hash",
+      "passed": true
+    },
+    {
+      "name": "hall roles and remaining core metadata retained",
+      "passed": true
+    },
+    {
+      "name": "native run passed",
+      "passed": true
+    },
+    {
+      "name": "desktop and XR cleanup assertions completed",
+      "passed": true
+    },
+    {
+      "name": "no script or shader errors",
+      "passed": true
+    },
+    {
+      "name": "canonical photograph matches native capture",
+      "passed": true
+    }
+  ],
+  "native_assertions": 38,
+  "scope": "Native museum doorway detection, collider, camera, EmFeel and keyboard locomotion; synthetic XR camera poses with real XRTools body, no tracked-headset acceptance."
+}

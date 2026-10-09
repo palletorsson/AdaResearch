@@ -1,0 +1,14 @@
+# When a line acquires walls — encounter
+
+Primary: `lsystem_dungeon`. All nine authored works remain; the miniature has an opt-in full-size lesson.
+
+1. Read the four centrelines and predict the route before pressing BUILD.
+2. Enter at 1.4 m clear width. Follow a side branch, return and take the other main opening.
+3. Read `F[+RF][-RF]F`. Trace the two R instructions through the saved state. They mark the same junction.
+4. Leave the brass frame. ROOMS adds one 2.8×2.8 m footprint at that shared address. Walk off the centreline there.
+5. WIDTH cycles 1.4 → 2.2 → 0.4 → 1.4 m. Compare the same plan with the same 0.6 m diameter desktop collision body.
+6. PLAN removes the construction; RESET restores the initial plan, 1.4 m width and rooms off. RULE explains the two operations without rebuilding.
+
+All construction controls refuse while a player is inside the fixed study bounds; they require another press after exit. The desk stands outside. Museum support stays under the whole experiment. A clear outer route continues past the retained gallery.
+
+The next room is LSystems_Competition. Carry the distinction between a generated instruction and the conditions that let it take effect. Headset reach, comfort and performance remain for later testing.

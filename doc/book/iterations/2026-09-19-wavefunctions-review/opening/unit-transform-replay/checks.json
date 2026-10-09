@@ -1,0 +1,3169 @@
+{
+  "checks": [
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: radius_line identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: radius_line identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 0.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "line": "sine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: sine_line identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: cosine_line identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: cosine_line identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 0.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "line": "_sine_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _sine_cap identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _cos_cap identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: _cos_cap identity angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000306151588455594,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000306151588455594,
+          0.5,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: radius_line identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000306151588455594,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000306151588455594,
+          0.5,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: radius_line identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "line": "sine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: sine_line identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "line": "sine_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: sine_line identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000306151588455594,
+          1.0,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000306151588455594,
+          1.0,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: cosine_line identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "line": "_sine_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _sine_cap identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000612303176911189,
+          0.5,
+          0.0
+        ],
+        "line": "_sine_cap",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: _sine_cap identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0000000000000000306151588455594,
+          1.0,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.0000000000000000306151588455594,
+          1.0,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _cos_cap identity angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -0.5,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: radius_line identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -0.5,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: radius_line identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -1.0,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -1.0,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "line": "sine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: sine_line identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: cosine_line identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: cosine_line identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -1.0,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -1.0,
+          0.0000000000000000612303176911189,
+          0.0
+        ],
+        "line": "_sine_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _sine_cap identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _cos_cap identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          -0.5,
+          0.000000000000000122460635382238,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: _cos_cap identity angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421106100082,
+          0.322108834981918,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.382421106100082,
+          0.322108834981918,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: radius_line identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421106100082,
+          0.322108834981918,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.382421106100082,
+          0.322108834981918,
+          0.0
+        ],
+        "line": "radius_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: radius_line identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "line": "sine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: sine_line identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "line": "sine_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: sine_line identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: cosine_line identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "line": "cosine_line",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: cosine_line identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "line": "_sine_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _sine_cap identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.764842212200165,
+          0.322108834981918,
+          0.0
+        ],
+        "line": "_sine_cap",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: _sine_cap identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod centre follows its artifact: _cos_cap identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          0.382421106100082,
+          0.644217669963837,
+          0.0
+        ],
+        "line": "_cos_cap",
+        "placement": "identity"
+      },
+      "label": "rod axis follows its artifact: _cos_cap identity angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 11.9478034973145,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.5
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: radius_line translated_rotated angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 11.9478034973145,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.5
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: radius_line translated_rotated angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.0,
+          1.5,
+          10.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 0.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.0
+        ],
+        "line": "sine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: sine_line translated_rotated angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 11.9478034973145,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.5
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: cosine_line translated_rotated angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 11.9478034973145,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.5
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: cosine_line translated_rotated angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.0,
+          1.5,
+          10.0
+        ],
+        "angle": 0.0,
+        "axis_dot": 0.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.0
+        ],
+        "line": "_sine_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _sine_cap translated_rotated angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 11.9478034973145,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.5
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _cos_cap translated_rotated angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 11.9478034973145,
+        "expected_center": [
+          6.0,
+          1.5,
+          10.5
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: _cos_cap translated_rotated angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 12.6194295883179,
+        "expected_center": [
+          6.0,
+          2.0,
+          11.0
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: radius_line translated_rotated angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 12.6194295883179,
+        "expected_center": [
+          6.0,
+          2.0,
+          11.0
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: radius_line translated_rotated angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 12.6194295883179,
+        "expected_center": [
+          6.0,
+          2.0,
+          11.0
+        ],
+        "line": "sine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: sine_line translated_rotated angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 12.6194295883179,
+        "expected_center": [
+          6.0,
+          2.0,
+          11.0
+        ],
+        "line": "sine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: sine_line translated_rotated angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.0,
+          2.5,
+          11.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.0,
+          2.5,
+          11.0
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: cosine_line translated_rotated angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 12.6194295883179,
+        "expected_center": [
+          6.0,
+          2.0,
+          11.0
+        ],
+        "line": "_sine_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _sine_cap translated_rotated angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.5,
+          0.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 1.0,
+        "center_error_m": 12.6194295883179,
+        "expected_center": [
+          6.0,
+          2.0,
+          11.0
+        ],
+        "line": "_sine_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: _sine_cap translated_rotated angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.0,
+          2.5,
+          11.0
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.0,
+          2.5,
+          11.0
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _cos_cap translated_rotated angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0000000437113882867379,
+        "center_error_m": 13.2947359085083,
+        "expected_center": [
+          6.0,
+          1.5,
+          11.5
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: radius_line translated_rotated angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0000000437113882867379,
+        "center_error_m": 13.2947359085083,
+        "expected_center": [
+          6.0,
+          1.5,
+          11.5
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: radius_line translated_rotated angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.0,
+          1.5,
+          12.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.0,
+          1.5,
+          12.0
+        ],
+        "line": "sine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: sine_line translated_rotated angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0000000437113882867379,
+        "center_error_m": 13.2947359085083,
+        "expected_center": [
+          6.0,
+          1.5,
+          11.5
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: cosine_line translated_rotated angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0000000437113882867379,
+        "center_error_m": 13.2947359085083,
+        "expected_center": [
+          6.0,
+          1.5,
+          11.5
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: cosine_line translated_rotated angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.0,
+          1.5,
+          12.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 1.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.0,
+          1.5,
+          12.0
+        ],
+        "line": "_sine_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _sine_cap translated_rotated angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0000000437113882867379,
+        "center_error_m": 13.2947359085083,
+        "expected_center": [
+          6.0,
+          1.5,
+          11.5
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _cos_cap translated_rotated angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          0.0
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0000000437113882867379,
+        "center_error_m": 13.2947359085083,
+        "expected_center": [
+          6.0,
+          1.5,
+          11.5
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: _cos_cap translated_rotated angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.322108864784241,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.415016323328018,
+        "center_error_m": 12.1053771972656,
+        "expected_center": [
+          6.0,
+          1.82210886478424,
+          10.6175785064697
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: radius_line translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.322108864784241,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.415016323328018,
+        "center_error_m": 12.1053771972656,
+        "expected_center": [
+          6.0,
+          1.82210886478424,
+          10.6175785064697
+        ],
+        "line": "radius_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: radius_line translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108864784241,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 11.5937633514404,
+        "expected_center": [
+          6.0,
+          1.82210886478424,
+          10.2351579666138
+        ],
+        "line": "sine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: sine_line translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108864784241,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 11.5937633514404,
+        "expected_center": [
+          6.0,
+          1.82210886478424,
+          10.2351579666138
+        ],
+        "line": "sine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: sine_line translated_rotated angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 12.1053771972656,
+        "expected_center": [
+          6.0,
+          2.14421772956848,
+          10.6175785064697
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: cosine_line translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 12.1053771972656,
+        "expected_center": [
+          6.0,
+          2.14421772956848,
+          10.6175785064697
+        ],
+        "line": "cosine_line",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: cosine_line translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108864784241,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 11.5937633514404,
+        "expected_center": [
+          6.0,
+          1.82210886478424,
+          10.2351579666138
+        ],
+        "line": "_sine_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _sine_cap translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108864784241,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": 1.0,
+        "center_error_m": 11.5937633514404,
+        "expected_center": [
+          6.0,
+          1.82210886478424,
+          10.2351579666138
+        ],
+        "line": "_sine_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: _sine_cap translated_rotated angle=0.7",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 12.1053771972656,
+        "expected_center": [
+          6.0,
+          2.14421772956848,
+          10.6175785064697
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod centre follows its artifact: _cos_cap translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217669963837,
+          0.0
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.000000150995802528087,
+        "center_error_m": 12.1053771972656,
+        "expected_center": [
+          6.0,
+          2.14421772956848,
+          10.6175785064697
+        ],
+        "line": "_cos_cap",
+        "placement": "translated_rotated"
+      },
+      "label": "rod axis follows its artifact: _cos_cap translated_rotated angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          -0.000000596046447753906,
+          -0.0000019073486328125
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.0197944641113,
+        "expected_center": [
+          5.96905374526978,
+          1.42680537700653,
+          10.6079730987549
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: radius_line tilted_scaled angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          -0.000000596046447753906,
+          -0.0000019073486328125
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.0197944641113,
+        "expected_center": [
+          5.96905374526978,
+          1.42680537700653,
+          10.6079730987549
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: radius_line tilted_scaled angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          5.93810749053955,
+          1.35361075401306,
+          10.2159471511841
+        ],
+        "angle": 0.0,
+        "axis_dot": 0.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          5.93810749053955,
+          1.35361075401306,
+          10.2159471511841
+        ],
+        "line": "sine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: sine_line tilted_scaled angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          -0.000000596046447753906,
+          -0.0000019073486328125
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.0197944641113,
+        "expected_center": [
+          5.96905374526978,
+          1.42680537700653,
+          10.6079730987549
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: cosine_line tilted_scaled angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          -0.000000596046447753906,
+          -0.0000019073486328125
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.0197944641113,
+        "expected_center": [
+          5.96905374526978,
+          1.42680537700653,
+          10.6079730987549
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: cosine_line tilted_scaled angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          5.93810749053955,
+          1.35361075401306,
+          10.2159471511841
+        ],
+        "angle": 0.0,
+        "axis_dot": 0.0,
+        "center_error_m": 0.0,
+        "expected_center": [
+          5.93810749053955,
+          1.35361075401306,
+          10.2159471511841
+        ],
+        "line": "_sine_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _sine_cap tilted_scaled angle=0.0",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          -0.000000596046447753906,
+          -0.0000019073486328125
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.0197944641113,
+        "expected_center": [
+          5.96905374526978,
+          1.42680537700653,
+          10.6079730987549
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _cos_cap tilted_scaled angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.5,
+          -0.000000596046447753906,
+          -0.0000019073486328125
+        ],
+        "angle": 0.0,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.0197944641113,
+        "expected_center": [
+          5.96905374526978,
+          1.42680537700653,
+          10.6079730987549
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: _cos_cap tilted_scaled angle=0.0",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.499999761581421,
+          -0.00000095367431640625
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 0.859743535518646,
+        "center_error_m": 12.6320524215698,
+        "expected_center": [
+          6.22899341583252,
+          2.04162073135376,
+          10.8807983398438
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: radius_line tilted_scaled angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.499999761581421,
+          -0.00000095367431640625
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 0.859743535518646,
+        "center_error_m": 12.6320524215698,
+        "expected_center": [
+          6.22899341583252,
+          2.04162073135376,
+          10.8807983398438
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: radius_line tilted_scaled angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.499999761581421,
+          -0.00000095367431640625
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 0.859743535518646,
+        "center_error_m": 12.6320524215698,
+        "expected_center": [
+          6.22899341583252,
+          2.04162073135376,
+          10.8807983398438
+        ],
+        "line": "sine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: sine_line tilted_scaled angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.499999761581421,
+          -0.00000095367431640625
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 0.859743535518646,
+        "center_error_m": 12.6320524215698,
+        "expected_center": [
+          6.22899341583252,
+          2.04162073135376,
+          10.8807983398438
+        ],
+        "line": "sine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: sine_line tilted_scaled angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.4579873085022,
+          2.58324146270752,
+          10.7615966796875
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.4579873085022,
+          2.58324146270752,
+          10.7615966796875
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: cosine_line tilted_scaled angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.499999761581421,
+          -0.00000095367431640625
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 0.859743535518646,
+        "center_error_m": 12.6320524215698,
+        "expected_center": [
+          6.22899341583252,
+          2.04162073135376,
+          10.8807983398438
+        ],
+        "line": "_sine_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _sine_cap tilted_scaled angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.0,
+          0.499999761581421,
+          -0.00000095367431640625
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": 0.859743535518646,
+        "center_error_m": 12.6320524215698,
+        "expected_center": [
+          6.22899341583252,
+          2.04162073135376,
+          10.8807983398438
+        ],
+        "line": "_sine_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: _sine_cap tilted_scaled angle=1.5707963267949",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.4579873085022,
+          2.58324146270752,
+          10.7615966796875
+        ],
+        "angle": 1.5707963267949,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.4579873085022,
+          2.58324146270752,
+          10.7615966796875
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _cos_cap tilted_scaled angle=1.5707963267949",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          -0.00000095367431640625
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0262293294072151,
+        "center_error_m": 13.2252225875854,
+        "expected_center": [
+          6.03094625473022,
+          1.57319462299347,
+          11.3920269012451
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: radius_line tilted_scaled angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          -0.00000095367431640625
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0262293294072151,
+        "center_error_m": 13.2252225875854,
+        "expected_center": [
+          6.03094625473022,
+          1.57319462299347,
+          11.3920269012451
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: radius_line tilted_scaled angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.06189250946045,
+          1.64638924598694,
+          11.7840528488159
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 0.859743595123291,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.06189250946045,
+          1.64638924598694,
+          11.7840528488159
+        ],
+        "line": "sine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: sine_line tilted_scaled angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          -0.00000095367431640625
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0262293294072151,
+        "center_error_m": 13.2252225875854,
+        "expected_center": [
+          6.03094625473022,
+          1.57319462299347,
+          11.3920269012451
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: cosine_line tilted_scaled angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          -0.00000095367431640625
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0262293294072151,
+        "center_error_m": 13.2252225875854,
+        "expected_center": [
+          6.03094625473022,
+          1.57319462299347,
+          11.3920269012451
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: cosine_line tilted_scaled angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          6.06189250946045,
+          1.64638924598694,
+          11.7840528488159
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": 0.859743595123291,
+        "center_error_m": 0.0,
+        "expected_center": [
+          6.06189250946045,
+          1.64638924598694,
+          11.7840528488159
+        ],
+        "line": "_sine_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _sine_cap tilted_scaled angle=3.14159265358979",
+      "passed": true
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          -0.00000095367431640625
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0262293294072151,
+        "center_error_m": 13.2252225875854,
+        "expected_center": [
+          6.03094625473022,
+          1.57319462299347,
+          11.3920269012451
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _cos_cap tilted_scaled angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          -0.5,
+          0.0,
+          -0.00000095367431640625
+        ],
+        "angle": 3.14159265358979,
+        "axis_dot": -0.0262293294072151,
+        "center_error_m": 13.2252225875854,
+        "expected_center": [
+          6.03094625473022,
+          1.57319462299347,
+          11.3920269012451
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: _cos_cap tilted_scaled angle=3.14159265358979",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.322108864784241,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.593039572238922,
+        "center_error_m": 12.1648416519165,
+        "expected_center": [
+          6.12385272979736,
+          1.79293918609619,
+          10.6233692169189
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: radius_line tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.322108864784241,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.593039572238922,
+        "center_error_m": 12.1648416519165,
+        "expected_center": [
+          6.12385272979736,
+          1.79293918609619,
+          10.6233692169189
+        ],
+        "line": "radius_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: radius_line tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108745574951,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.859743595123291,
+        "center_error_m": 11.7065362930298,
+        "expected_center": [
+          6.10018396377563,
+          1.73695695400238,
+          10.3235311508179
+        ],
+        "line": "sine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: sine_line tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108745574951,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.859743595123291,
+        "center_error_m": 11.7065362930298,
+        "expected_center": [
+          6.10018396377563,
+          1.73695695400238,
+          10.3235311508179
+        ],
+        "line": "sine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: sine_line tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217252731323,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.1718120574951,
+        "expected_center": [
+          6.27137422561646,
+          2.14186096191406,
+          10.5465774536133
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: cosine_line tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217252731323,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.1718120574951,
+        "expected_center": [
+          6.27137422561646,
+          2.14186096191406,
+          10.5465774536133
+        ],
+        "line": "cosine_line",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: cosine_line tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108745574951,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.859743595123291,
+        "center_error_m": 11.7065362930298,
+        "expected_center": [
+          6.10018396377563,
+          1.73695695400238,
+          10.3235311508179
+        ],
+        "line": "_sine_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _sine_cap tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.76484203338623,
+          0.322108745574951,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": 0.859743595123291,
+        "center_error_m": 11.7065362930298,
+        "expected_center": [
+          6.10018396377563,
+          1.73695695400238,
+          10.3235311508179
+        ],
+        "line": "_sine_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: _sine_cap tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217252731323,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.1718120574951,
+        "expected_center": [
+          6.27137422561646,
+          2.14186096191406,
+          10.5465774536133
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod centre follows its artifact: _cos_cap tilted_scaled angle=0.7",
+      "passed": false
+    },
+    {
+      "details": {
+        "actual_center": [
+          0.382421016693115,
+          0.644217252731323,
+          -0.00000095367431640625
+        ],
+        "angle": 0.7,
+        "axis_dot": -0.026229303330183,
+        "center_error_m": 12.1718120574951,
+        "expected_center": [
+          6.27137422561646,
+          2.14186096191406,
+          10.5465774536133
+        ],
+        "line": "_cos_cap",
+        "placement": "tilted_scaled"
+      },
+      "label": "rod axis follows its artifact: _cos_cap tilted_scaled angle=0.7",
+      "passed": false
+    }
+  ],
+  "observations": [
+    {
+      "actual_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "line": "radius_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 0.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "line": "sine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "line": "cosine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 0.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "line": "_sine_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "line": "_cos_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.0000000000000000306151588455594,
+        0.5,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.0000000000000000306151588455594,
+        0.5,
+        0.0
+      ],
+      "line": "radius_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.0000000000000000612303176911189,
+        0.5,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.0000000000000000612303176911189,
+        0.5,
+        0.0
+      ],
+      "line": "sine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.0000000000000000306151588455594,
+        1.0,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.0000000000000000306151588455594,
+        1.0,
+        0.0
+      ],
+      "line": "cosine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.0000000000000000612303176911189,
+        0.5,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.0000000000000000612303176911189,
+        0.5,
+        0.0
+      ],
+      "line": "_sine_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.0000000000000000306151588455594,
+        1.0,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.0000000000000000306151588455594,
+        1.0,
+        0.0
+      ],
+      "line": "_cos_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0000000000000000612303176911189,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        -0.5,
+        0.0000000000000000612303176911189,
+        0.0
+      ],
+      "line": "radius_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        -1.0,
+        0.0000000000000000612303176911189,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        -1.0,
+        0.0000000000000000612303176911189,
+        0.0
+      ],
+      "line": "sine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.000000000000000122460635382238,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        -0.5,
+        0.000000000000000122460635382238,
+        0.0
+      ],
+      "line": "cosine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        -1.0,
+        0.0000000000000000612303176911189,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        -1.0,
+        0.0000000000000000612303176911189,
+        0.0
+      ],
+      "line": "_sine_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.000000000000000122460635382238,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        -0.5,
+        0.000000000000000122460635382238,
+        0.0
+      ],
+      "line": "_cos_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.382421106100082,
+        0.322108834981918,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.382421106100082,
+        0.322108834981918,
+        0.0
+      ],
+      "line": "radius_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.764842212200165,
+        0.322108834981918,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.764842212200165,
+        0.322108834981918,
+        0.0
+      ],
+      "line": "sine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.382421106100082,
+        0.644217669963837,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.382421106100082,
+        0.644217669963837,
+        0.0
+      ],
+      "line": "cosine_line",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.764842212200165,
+        0.322108834981918,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.764842212200165,
+        0.322108834981918,
+        0.0
+      ],
+      "line": "_sine_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.382421106100082,
+        0.644217669963837,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        0.382421106100082,
+        0.644217669963837,
+        0.0
+      ],
+      "line": "_cos_cap",
+      "placement": "identity"
+    },
+    {
+      "actual_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 11.9478034973145,
+      "expected_center": [
+        6.0,
+        1.5,
+        10.5
+      ],
+      "line": "radius_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        6.0,
+        1.5,
+        10.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 0.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.0,
+        1.5,
+        10.0
+      ],
+      "line": "sine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 11.9478034973145,
+      "expected_center": [
+        6.0,
+        1.5,
+        10.5
+      ],
+      "line": "cosine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        6.0,
+        1.5,
+        10.0
+      ],
+      "angle": 0.0,
+      "axis_dot": 0.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.0,
+        1.5,
+        10.0
+      ],
+      "line": "_sine_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 0.0,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 11.9478034973145,
+      "expected_center": [
+        6.0,
+        1.5,
+        10.5
+      ],
+      "line": "_cos_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 12.6194295883179,
+      "expected_center": [
+        6.0,
+        2.0,
+        11.0
+      ],
+      "line": "radius_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 12.6194295883179,
+      "expected_center": [
+        6.0,
+        2.0,
+        11.0
+      ],
+      "line": "sine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        6.0,
+        2.5,
+        11.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.0,
+        2.5,
+        11.0
+      ],
+      "line": "cosine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.0,
+        0.5,
+        0.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 1.0,
+      "center_error_m": 12.6194295883179,
+      "expected_center": [
+        6.0,
+        2.0,
+        11.0
+      ],
+      "line": "_sine_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        6.0,
+        2.5,
+        11.0
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.0,
+        2.5,
+        11.0
+      ],
+      "line": "_cos_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": -0.0000000437113882867379,
+      "center_error_m": 13.2947359085083,
+      "expected_center": [
+        6.0,
+        1.5,
+        11.5
+      ],
+      "line": "radius_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        6.0,
+        1.5,
+        12.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.0,
+        1.5,
+        12.0
+      ],
+      "line": "sine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": -0.0000000437113882867379,
+      "center_error_m": 13.2947359085083,
+      "expected_center": [
+        6.0,
+        1.5,
+        11.5
+      ],
+      "line": "cosine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        6.0,
+        1.5,
+        12.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 1.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.0,
+        1.5,
+        12.0
+      ],
+      "line": "_sine_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0,
+        0.0
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": -0.0000000437113882867379,
+      "center_error_m": 13.2947359085083,
+      "expected_center": [
+        6.0,
+        1.5,
+        11.5
+      ],
+      "line": "_cos_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.382421016693115,
+        0.322108864784241,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 0.415016323328018,
+      "center_error_m": 12.1053771972656,
+      "expected_center": [
+        6.0,
+        1.82210886478424,
+        10.6175785064697
+      ],
+      "line": "radius_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.76484203338623,
+        0.322108864784241,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 11.5937633514404,
+      "expected_center": [
+        6.0,
+        1.82210886478424,
+        10.2351579666138
+      ],
+      "line": "sine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.382421016693115,
+        0.644217669963837,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 12.1053771972656,
+      "expected_center": [
+        6.0,
+        2.14421772956848,
+        10.6175785064697
+      ],
+      "line": "cosine_line",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.76484203338623,
+        0.322108864784241,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": 1.0,
+      "center_error_m": 11.5937633514404,
+      "expected_center": [
+        6.0,
+        1.82210886478424,
+        10.2351579666138
+      ],
+      "line": "_sine_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.382421016693115,
+        0.644217669963837,
+        0.0
+      ],
+      "angle": 0.7,
+      "axis_dot": -0.000000150995802528087,
+      "center_error_m": 12.1053771972656,
+      "expected_center": [
+        6.0,
+        2.14421772956848,
+        10.6175785064697
+      ],
+      "line": "_cos_cap",
+      "placement": "translated_rotated"
+    },
+    {
+      "actual_center": [
+        0.5,
+        -0.000000596046447753906,
+        -0.0000019073486328125
+      ],
+      "angle": 0.0,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 12.0197944641113,
+      "expected_center": [
+        5.96905374526978,
+        1.42680537700653,
+        10.6079730987549
+      ],
+      "line": "radius_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        5.93810749053955,
+        1.35361075401306,
+        10.2159471511841
+      ],
+      "angle": 0.0,
+      "axis_dot": 0.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        5.93810749053955,
+        1.35361075401306,
+        10.2159471511841
+      ],
+      "line": "sine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.5,
+        -0.000000596046447753906,
+        -0.0000019073486328125
+      ],
+      "angle": 0.0,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 12.0197944641113,
+      "expected_center": [
+        5.96905374526978,
+        1.42680537700653,
+        10.6079730987549
+      ],
+      "line": "cosine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        5.93810749053955,
+        1.35361075401306,
+        10.2159471511841
+      ],
+      "angle": 0.0,
+      "axis_dot": 0.0,
+      "center_error_m": 0.0,
+      "expected_center": [
+        5.93810749053955,
+        1.35361075401306,
+        10.2159471511841
+      ],
+      "line": "_sine_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.5,
+        -0.000000596046447753906,
+        -0.0000019073486328125
+      ],
+      "angle": 0.0,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 12.0197944641113,
+      "expected_center": [
+        5.96905374526978,
+        1.42680537700653,
+        10.6079730987549
+      ],
+      "line": "_cos_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.0,
+        0.499999761581421,
+        -0.00000095367431640625
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 0.859743535518646,
+      "center_error_m": 12.6320524215698,
+      "expected_center": [
+        6.22899341583252,
+        2.04162073135376,
+        10.8807983398438
+      ],
+      "line": "radius_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.0,
+        0.499999761581421,
+        -0.00000095367431640625
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 0.859743535518646,
+      "center_error_m": 12.6320524215698,
+      "expected_center": [
+        6.22899341583252,
+        2.04162073135376,
+        10.8807983398438
+      ],
+      "line": "sine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        6.4579873085022,
+        2.58324146270752,
+        10.7615966796875
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.4579873085022,
+        2.58324146270752,
+        10.7615966796875
+      ],
+      "line": "cosine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.0,
+        0.499999761581421,
+        -0.00000095367431640625
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": 0.859743535518646,
+      "center_error_m": 12.6320524215698,
+      "expected_center": [
+        6.22899341583252,
+        2.04162073135376,
+        10.8807983398438
+      ],
+      "line": "_sine_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        6.4579873085022,
+        2.58324146270752,
+        10.7615966796875
+      ],
+      "angle": 1.5707963267949,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.4579873085022,
+        2.58324146270752,
+        10.7615966796875
+      ],
+      "line": "_cos_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0,
+        -0.00000095367431640625
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": -0.0262293294072151,
+      "center_error_m": 13.2252225875854,
+      "expected_center": [
+        6.03094625473022,
+        1.57319462299347,
+        11.3920269012451
+      ],
+      "line": "radius_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        6.06189250946045,
+        1.64638924598694,
+        11.7840528488159
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 0.859743595123291,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.06189250946045,
+        1.64638924598694,
+        11.7840528488159
+      ],
+      "line": "sine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0,
+        -0.00000095367431640625
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": -0.0262293294072151,
+      "center_error_m": 13.2252225875854,
+      "expected_center": [
+        6.03094625473022,
+        1.57319462299347,
+        11.3920269012451
+      ],
+      "line": "cosine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        6.06189250946045,
+        1.64638924598694,
+        11.7840528488159
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": 0.859743595123291,
+      "center_error_m": 0.0,
+      "expected_center": [
+        6.06189250946045,
+        1.64638924598694,
+        11.7840528488159
+      ],
+      "line": "_sine_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        -0.5,
+        0.0,
+        -0.00000095367431640625
+      ],
+      "angle": 3.14159265358979,
+      "axis_dot": -0.0262293294072151,
+      "center_error_m": 13.2252225875854,
+      "expected_center": [
+        6.03094625473022,
+        1.57319462299347,
+        11.3920269012451
+      ],
+      "line": "_cos_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.382421016693115,
+        0.322108864784241,
+        -0.00000095367431640625
+      ],
+      "angle": 0.7,
+      "axis_dot": 0.593039572238922,
+      "center_error_m": 12.1648416519165,
+      "expected_center": [
+        6.12385272979736,
+        1.79293918609619,
+        10.6233692169189
+      ],
+      "line": "radius_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.76484203338623,
+        0.322108745574951,
+        -0.00000095367431640625
+      ],
+      "angle": 0.7,
+      "axis_dot": 0.859743595123291,
+      "center_error_m": 11.7065362930298,
+      "expected_center": [
+        6.10018396377563,
+        1.73695695400238,
+        10.3235311508179
+      ],
+      "line": "sine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.382421016693115,
+        0.644217252731323,
+        -0.00000095367431640625
+      ],
+      "angle": 0.7,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 12.1718120574951,
+      "expected_center": [
+        6.27137422561646,
+        2.14186096191406,
+        10.5465774536133
+      ],
+      "line": "cosine_line",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.76484203338623,
+        0.322108745574951,
+        -0.00000095367431640625
+      ],
+      "angle": 0.7,
+      "axis_dot": 0.859743595123291,
+      "center_error_m": 11.7065362930298,
+      "expected_center": [
+        6.10018396377563,
+        1.73695695400238,
+        10.3235311508179
+      ],
+      "line": "_sine_cap",
+      "placement": "tilted_scaled"
+    },
+    {
+      "actual_center": [
+        0.382421016693115,
+        0.644217252731323,
+        -0.00000095367431640625
+      ],
+      "angle": 0.7,
+      "axis_dot": -0.026229303330183,
+      "center_error_m": 12.1718120574951,
+      "expected_center": [
+        6.27137422561646,
+        2.14186096191406,
+        10.5465774536133
+      ],
+      "line": "_cos_cap",
+      "placement": "tilted_scaled"
+    }
+  ],
+  "source": "res://doc/book/iterations/2026-09-19-wavefunctions-review/opening/before-source/algorithms/wavefunctions/unit_circle/UnitCircle.gd"
+}

@@ -1,0 +1,3471 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				2.97000002861023,
+				0.850000023841858,
+				-2.52999997138977
+			],
+			"bounds_size": [
+				3.05999970436096,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				1.70000004768372,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-0.508000016212463
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01600003242493
+			],
+			"cell": [
+				0,
+				0
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						0.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "origin"
+		},
+		{
+			"bounds_position": [
+				2.80000019073486,
+				0.193000018596649,
+				0.153999924659729
+			],
+			"bounds_size": [
+				1.79999971389771,
+				0.0299999713897705,
+				2.66725015640259
+			],
+			"cell": [
+				3,
+				1
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.70000004768372,
+				0.200000002980232,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				270.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "you_are_here"
+		},
+		{
+			"bounds_position": [
+				5.6399998664856,
+				0.710000038146973,
+				1.39649987220764
+			],
+			"bounds_size": [
+				3.71999979019165,
+				2.57999992370605,
+				0.643500328063965
+			],
+			"cell": [
+				7,
+				1
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						7.5,
+						2.16499996185303,
+						1.46099996566772
+					],
+					"text": "39"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						7.5,
+						1.65499997138977,
+						1.46099996566772
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						9.02999973297119,
+						1.4449999332428,
+						1.46099984645844
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						7.5,
+						1.19749999046326,
+						1.39199995994568
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				7.5,
+				2.0,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				3.0,
+				3.0,
+				3.0
+			],
+			"token": "frame_counter_display"
+		},
+		{
+			"bounds_position": [
+				0.488389223814011,
+				0.0,
+				1.75
+			],
+			"bounds_size": [
+				1.95651817321777,
+				1.63999998569489,
+				1.7385733127594
+			],
+			"cell": [
+				1,
+				2
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.5,
+				0.0,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "the_invisible_point"
+		},
+		{
+			"bounds_position": [
+				2.4800226688385,
+				-0.0199999995529652,
+				3.36002278327942
+			],
+			"bounds_size": [
+				0.039954662322998,
+				0.0399999991059303,
+				0.151963710784912
+			],
+			"cell": [
+				2,
+				3
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						2.5,
+						0.0599999986588955,
+						3.5
+					],
+					"text": "(2.5, 0.0, 3.5)"
+				},
+				{
+					"parent": "GrabSpherePointSnap",
+					"position": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"text": ""
+				}
+			],
+			"position": [
+				2.5,
+				0.0,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "grab_sphere_point_snap"
+		},
+		{
+			"bounds_position": [
+				2.65000009536743,
+				0.0,
+				2.65000009536743
+			],
+			"bounds_size": [
+				1.70000028610229,
+				2.22000002861023,
+				1.70000028610229
+			],
+			"cell": [
+				3,
+				3
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Threshold/@CollisionShape3D@993",
+					"position": [
+						3.5,
+						1.10000002384186,
+						3.5
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				3.5,
+				0.0,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wireframe_threshold"
+		},
+		{
+			"bounds_position": [
+				3.53999996185303,
+				0.649999916553497,
+				4.44000005722046
+			],
+			"bounds_size": [
+				1.92000007629395,
+				1.3600001335144,
+				0.0984997749328613
+			],
+			"cell": [
+				4,
+				4
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "PrevButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.23999977111816,
+						0.799999952316284,
+						4.53759956359863
+					]
+				},
+				{
+					"disabled": false,
+					"path": "PrevButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.23999977111816,
+						0.799999952316284,
+						4.53759956359863
+					]
+				},
+				{
+					"disabled": false,
+					"path": "PlayButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.5,
+						0.799999952316284,
+						4.53759956359863
+					]
+				},
+				{
+					"disabled": false,
+					"path": "PlayButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.5,
+						0.799999952316284,
+						4.53759956359863
+					]
+				},
+				{
+					"disabled": false,
+					"path": "NextButton/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.76000022888184,
+						0.799999952316284,
+						4.53759956359863
+					]
+				},
+				{
+					"disabled": false,
+					"path": "NextButton/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.76000022888184,
+						0.799999952316284,
+						4.53759956359863
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "CodeEvolutionScreen",
+					"position": [
+						4.23999977111816,
+						0.74399995803833,
+						4.5019998550415
+					],
+					"text": "PREV"
+				},
+				{
+					"parent": "CodeEvolutionScreen",
+					"position": [
+						4.5,
+						0.74399995803833,
+						4.5019998550415
+					],
+					"text": "PLAY"
+				},
+				{
+					"parent": "CodeEvolutionScreen",
+					"position": [
+						4.76000022888184,
+						0.74399995803833,
+						4.5019998550415
+					],
+					"text": "NEXT"
+				},
+				{
+					"parent": "CodeEvolutionScreen",
+					"position": [
+						3.63000011444092,
+						0.799999952316284,
+						4.5019998550415
+					],
+					"text": "Stage 1 / 5"
+				},
+				{
+					"parent": "CodeEvolutionScreen",
+					"position": [
+						3.61999988555908,
+						1.86000001430511,
+						4.51000022888184
+					],
+					"text": "A Point Before It Appears"
+				}
+			],
+			"position": [
+				4.5,
+				1.39999997615814,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"token": "code_evolution_screen"
+		},
+		{
+			"bounds_position": [
+				1.12000000476837,
+				-0.00927064940333366,
+				5.05024480819702
+			],
+			"bounds_size": [
+				0.759999990463257,
+				1.20858073234558,
+				0.899510383605957
+			],
+			"cell": [
+				1,
+				5
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "street_talker"
+		},
+		{
+			"bounds_position": [
+				8.02000045776367,
+				-0.38960000872612,
+				5.01999998092651
+			],
+			"bounds_size": [
+				0.959999084472656,
+				1.28960001468658,
+				0.967000007629395
+			],
+			"cell": [
+				8,
+				5
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "interactive_point_origin_force"
+		},
+		{
+			"bounds_position": [
+				8.44006824493408,
+				0.930000007152557,
+				5.44006776809692
+			],
+			"bounds_size": [
+				0.119863510131836,
+				0.119999945163727,
+				0.119864463806152
+			],
+			"cell": [
+				8,
+				5
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						8.5,
+						1.14999997615814,
+						5.5
+					],
+					"text": "(0.0, 0.0, 0.0)"
+				}
+			],
+			"position": [
+				8.5,
+				0.990000009536743,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"token": "interactive_point_origin_force"
+		},
+		{
+			"bounds_position": [
+				9.47500038146973,
+				2.77141904830933,
+				3.92456436157227
+			],
+			"bounds_size": [
+				0.0499992370605469,
+				0.425633668899536,
+				3.17427158355713
+			],
+			"cell": [
+				9,
+				5
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "3t"
+		},
+		{
+			"bounds_position": [
+				14.1899995803833,
+				0.0,
+				5.26999998092651
+			],
+			"bounds_size": [
+				0.620000839233398,
+				1.14830565452576,
+				0.460000038146973
+			],
+			"cell": [
+				14,
+				5
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CommentBox",
+					"position": [
+						14.5,
+						1.62000000476837,
+						5.55000019073486
+					],
+					"text": "Leave a comment"
+				},
+				{
+					"parent": "CommentBox",
+					"position": [
+						14.5,
+						0.699999988079071,
+						5.63899993896484
+					],
+					"text": "comment box"
+				}
+			],
+			"position": [
+				14.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "comment_box"
+		},
+		{
+			"bounds_position": [
+				2.41840004920959,
+				-0.0400000810623169,
+				7.77199983596802
+			],
+			"bounds_size": [
+				0.163199901580811,
+				2.88000011444092,
+				3.45599985122681
+			],
+			"cell": [
+				2,
+				9
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CoordinateReadout",
+					"position": [
+						2.60559988021851,
+						1.39999997615814,
+						9.5
+					],
+					"text": "x = 6.00\ny = 1.40\nz = 14.00"
+				},
+				{
+					"parent": "CoordinateReadout",
+					"position": [
+						2.60559988021851,
+						2.43199992179871,
+						9.5
+					],
+					"text": "WORLD"
+				}
+			],
+			"position": [
+				2.5,
+				1.39999997615814,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				2.0,
+				2.0,
+				2.0
+			],
+			"token": "coordinate_readout"
+		},
+		{
+			"bounds_position": [
+				6.05000019073486,
+				-0.00499999616295099,
+				10.0500001907349
+			],
+			"bounds_size": [
+				0.899999618530273,
+				2.39934873580933,
+				0.899999618530273
+			],
+			"cell": [
+				6,
+				10
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "DragPointTarget",
+					"position": [
+						6.5,
+						2.8199999332428,
+						10.5
+					],
+					"text": "DRAG POINT HERE"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "drag_point_target"
+		},
+		{
+			"bounds_position": [
+				12.0200004577637,
+				-0.38960000872612,
+				11.0200004577637
+			],
+			"bounds_size": [
+				0.959999084472656,
+				1.38960003852844,
+				0.967000007629395
+			],
+			"cell": [
+				12,
+				11
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.5,
+				0.0,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fontana_puncture"
+		},
+		{
+			"bounds_position": [
+				12.25,
+				1.23000001907349,
+				11.25
+			],
+			"bounds_size": [
+				0.5,
+				0.5,
+				0.5
+			],
+			"cell": [
+				12,
+				11
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						12.5,
+						1.63999998569489,
+						11.5
+					],
+					"text": "(0.0, 0.0, 0.0)"
+				}
+			],
+			"position": [
+				12.5,
+				1.48000001907349,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				270.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fontana_puncture"
+		},
+		{
+			"bounds_position": [
+				1.92792344093323,
+				-0.325000047683716,
+				7.70000028610229
+			],
+			"bounds_size": [
+				7.3720760345459,
+				5.02499961853027,
+				6.52474451065063
+			],
+			"cell": [
+				4,
+				12
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "OriginSign",
+					"position": [
+						4.5,
+						2.25,
+						12.5089998245239
+					],
+					"text": "point zero"
+				},
+				{
+					"parent": "OriginSign",
+					"position": [
+						4.5,
+						2.25,
+						12.4910001754761
+					],
+					"text": "point zero"
+				},
+				{
+					"parent": "MeshInstance3D",
+					"position": [
+						6.0,
+						1.51600003242493,
+						14.0
+					],
+					"text": "(0.0, 0.0, 0.0)"
+				}
+			],
+			"position": [
+				4.5,
+				-0.100000023841858,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.5,
+				1.5,
+				1.5
+			],
+			"token": "CoordinateSystem3M"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [
+				9,
+				14
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.0,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "floating_sphere_field"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.58000004291534,
+				6.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0,
+				1.58000004291534,
+				8.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				9.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.0,
+				1.58000004291534,
+				13.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				17.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				23.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				1.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				3.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				4.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.5,
+				1.58000004291534,
+				4.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.9910001754761,
+				0.180000066757202,
+				20.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0089998245239,
+				1.58000004291534,
+				3.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.0089998245239,
+				1.98000001907349,
+				5.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.0089998245239,
+				1.58000004291534,
+				11.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				19.0090007781982,
+				1.58000004291534,
+				16.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				17.9909992218018,
+				1.58000004291534,
+				15.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0090000629425,
+				1.58000004291534,
+				8.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.9909999370575,
+				1.58000004291534,
+				30.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.0090000629425,
+				1.58000004291534,
+				6.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				20.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0090000629425,
+				1.58000004291534,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				7.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				9.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				15.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				17.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.0,
+				1.58000004291534,
+				18.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				22.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.0,
+				1.58000004291534,
+				26.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				12.0,
+				1.58000004291534,
+				28.0089988708496
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.0,
+				1.58000004291534,
+				1.99100017547607
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				9.27499961853027,
+				3.4300000667572,
+				-4.08300018310547
+			],
+			"bounds_size": [
+				0.450000762939453,
+				0.179999828338623,
+				0.0630002021789551
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				3.51999998092651,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				3.27500009536743,
+				2.91000008583069,
+				26.9169998168945
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.0629997253417969
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				3.0,
+				27.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				9.92199993133545,
+				2.31000018119812,
+				1.4099999666214
+			],
+			"bounds_size": [
+				0.0780000686645508,
+				0.179999828338623,
+				0.180000066757202
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				2.40000009536743,
+				1.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "emergency_button"
+		},
+		{
+			"bounds_position": [
+				11.0,
+				0.300000041723251,
+				2.42110514640808
+			],
+			"bounds_size": [
+				0.161250114440918,
+				0.826871156692505,
+				0.230120897293091
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.0974998474121,
+				0.300000011920929,
+				2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_extinguisher"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				0.810000002384186,
+				24.25
+			],
+			"bounds_size": [
+				0.0999999642372131,
+				1.34000015258789,
+				2.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				0.899999976158142,
+				25.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "whiteboard"
+		},
+		{
+			"bounds_position": [
+				9.95149993896484,
+				0.920000016689301,
+				4.22000026702881
+			],
+			"bounds_size": [
+				0.0784997940063477,
+				1.55999994277954,
+				2.55999946594238
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.70000004768372,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "large_window"
+		},
+		{
+			"bounds_position": [
+				15.91100025177,
+				1.23000001907349,
+				-1.5900000333786
+			],
+			"bounds_size": [
+				0.0639991760253906,
+				0.240000009536743,
+				0.180000066757202
+			],
+			"cell": [],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "Panel/HandPoseArea/@CollisionShape3D@1272",
+					"position": [
+						15.8169994354248,
+						1.35000002384186,
+						-1.5
+					]
+				},
+				{
+					"disabled": false,
+					"path": "Panel/ScanArea/@CollisionShape3D@1273",
+					"position": [
+						15.826000213623,
+						1.36440002918243,
+						-1.5
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				15.9499998092651,
+				1.35000002384186,
+				-1.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "palm_scanner"
+		},
+		{
+			"bounds_position": [
+				4.27500009536743,
+				4.62799978256226,
+				-0.000000101514160633087
+			],
+			"bounds_size": [
+				0.949999809265137,
+				0.0920000076293945,
+				0.449999988079071
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.75,
+				4.6399998664856,
+				0.224999904632568
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				4.27500009536743,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.949999809265137,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.75,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		},
+		{
+			"bounds_position": [
+				3.40999960899353,
+				4.32000017166138,
+				4.25
+			],
+			"bounds_size": [
+				0.180000782012939,
+				0.0799999237060547,
+				14.5
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				4.3600001335144,
+				11.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "cable_tray"
+		},
+		{
+			"bounds_position": [
+				14.2799997329712,
+				0.550000011920929,
+				10.1837997436523
+			],
+			"bounds_size": [
+				0.288000106811523,
+				0.600000083446503,
+				0.61620044708252
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				14.2799997329712,
+				0.850000023841858,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "fire_hose_box"
+		},
+		{
+			"bounds_position": [
+				13.1560001373291,
+				0.0,
+				-0.614579856395721
+			],
+			"bounds_size": [
+				0.636408805847168,
+				0.649999976158142,
+				0.669159770011902
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				13.5,
+				0.0,
+				-0.279999971389771
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lab_stool"
+		},
+		{
+			"bounds_position": [
+				4.93601512908936,
+				0.419999986886978,
+				17.0664596557617
+			],
+			"bounds_size": [
+				1.09612083435059,
+				1.67999994754791,
+				0.96051025390625
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.5,
+				0.419999986886978,
+				17.5
+			],
+			"rotation": [
+				0.0,
+				217.985137939453,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				3.89396548271179,
+				0.419999986886978,
+				13.9542598724365
+			],
+			"bounds_size": [
+				1.21206879615784,
+				1.54306781291962,
+				1.09148025512695
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.5,
+				0.419999986886978,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				180.6455078125,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				8.22223663330078,
+				0.419999986886978,
+				14.2658805847168
+			],
+			"bounds_size": [
+				0.544124603271484,
+				1.66000020503998,
+				0.547440528869629
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.419999986886978,
+				14.5
+			],
+			"rotation": [
+				0.0,
+				141.975723266602,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				-1.92000007629395,
+				0.64000004529953,
+				-2.75399994850159
+			],
+			"bounds_size": [
+				0.172000169754028,
+				1.15999984741211,
+				0.608127593994141
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Door",
+					"position": [
+						-1.75600004196167,
+						1.77999997138977,
+						-2.50399994850159
+					],
+					"text": "IN CASE OF EMERGENCY"
+				}
+			],
+			"position": [
+				-1.90799999237061,
+				1.22000002861023,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "weapon_cabinet"
+		},
+		{
+			"bounds_position": [
+				-1.93224990367889,
+				1.16999995708466,
+				-0.835000038146973
+			],
+			"bounds_size": [
+				0.177249908447266,
+				0.5,
+				0.659000039100647
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				-1.91799998283386,
+				1.41999995708466,
+				-0.5
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "weapon_cabinet"
+		}
+	],
+	"collections": [],
+	"failures": [
+		"stage_1_display_fits"
+	],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": false,
+	"point_one_checks": [
+		{
+			"passed": true,
+			"tag": "loaded_the_invisible_point",
+			"token": "the_invisible_point"
+		},
+		{
+			"passed": true,
+			"tag": "loaded_wireframe_threshold",
+			"token": "wireframe_threshold"
+		},
+		{
+			"passed": true,
+			"tag": "loaded_code_evolution_screen",
+			"token": "code_evolution_screen"
+		},
+		{
+			"passed": true,
+			"tag": "loaded_floating_sphere_field",
+			"token": "floating_sphere_field"
+		},
+		{
+			"passed": true,
+			"tag": "loaded_lobby:view",
+			"token": "lobby:view"
+		},
+		{
+			"passed": true,
+			"tag": "loaded_CoordinateSystem3M",
+			"token": "CoordinateSystem3M"
+		},
+		{
+			"passed": true,
+			"path": "res://commons/maps/Point_One/evolution.json",
+			"stages": 5,
+			"tag": "point_one_evolution_loaded",
+			"title": "A Point Before It Appears"
+		},
+		{
+			"label": "Stage 3 / 5",
+			"passed": true,
+			"scope": "Method navigation, not pointer/button reach acceptance.",
+			"stage_index": 2,
+			"stage_title": "3  A colour and an address",
+			"tag": "screen_methods_reach_stage_three"
+		},
+		{
+			"found": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/CoordinateSystem3M/FloatingPoint",
+			"other_coordinate_points": 3,
+			"own": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/CoordinateSystem3M/FloatingPoint",
+			"passed": true,
+			"tag": "coordinate_frame_owns_its_read_point"
+		},
+		{
+			"actual": [
+				6.40000104904175,
+				1.60000026226044,
+				13.6999988555908
+			],
+			"before": [
+				6.0,
+				1.39999997615814,
+				14.0
+			],
+			"passed": true,
+			"requested": [
+				6.40000009536743,
+				1.60000002384186,
+				13.6999998092651
+			],
+			"scope": "Physics-aware placement method on the actual frame; no grabbing-input claim.",
+			"tag": "controlled_point_move_persists"
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				6.5,
+				1.75,
+				9.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/world-card-controlled.png",
+			"tag": "capture_world-card-controlled",
+			"target": [
+				2.5,
+				1.70000004768372,
+				9.5
+			]
+		},
+		{
+			"cards": [
+				{
+					"card": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/CoordinateReadout",
+					"matches": true,
+					"point": [
+						6.40000104904175,
+						1.60000026226044,
+						13.6999988555908
+					],
+					"read": [
+						6.40000009536743,
+						1.60000002384186,
+						13.6999998092651
+					],
+					"text": "x = 6.40\ny = 1.60\nz = 13.70"
+				}
+			],
+			"passed": true,
+			"tag": "world_card_tracks_that_point"
+		},
+		{
+			"passed": true,
+			"tag": "controlled_point_restored"
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				5.5,
+				1.70000004768372,
+				1.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/opening-overview.png",
+			"tag": "capture_opening-overview",
+			"target": [
+				2.29999995231628,
+				1.20000004768372,
+				3.0
+			]
+		},
+		{
+			"code": {
+				"content_height": 124.0,
+				"content_width": 458.0,
+				"label_position": [
+					16.0,
+					16.0
+				],
+				"label_size": [
+					1368.0,
+					1228.0
+				],
+				"line_count": 4,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": " 1 extends Node3D\n 2 \n 3 var point_position := Vector3(1.0, 0.5, 0.0)\n 4 ",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					700,
+					630
+				],
+				"visible_height": 614.0,
+				"visible_line_count": 4,
+				"visible_width": 684.0
+			},
+			"passed": false,
+			"scope": "Actual rendered RichTextLabel layout; code dimensions include displayed line-number gutter. No scrolling or pointer-input claim.",
+			"stage": 1,
+			"tag": "stage_1_display_fits",
+			"thinking_body": {
+				"content_height": 396.0,
+				"content_width": 425.0,
+				"label_position": [
+					24.0,
+					90.0
+				],
+				"label_size": [
+					441.0,
+					510.0
+				],
+				"line_count": 11,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "These three values can specify a position without drawing a surface. You can read the address before seeing a sphere. This complete illustrative script is displayed here, not executed; it is not the invisible exhibit's own code.\n\nCONCEPTS\nVector3  position  data",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 510.0,
+				"visible_line_count": 11,
+				"visible_width": 441.0
+			},
+			"thinking_title": {
+				"content_height": 84.0,
+				"content_width": 340.0,
+				"label_position": [
+					24.0,
+					20.0
+				],
+				"label_size": [
+					441.0,
+					84.0
+				],
+				"line_count": 2,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "1  An address without a surface",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 84.0,
+				"visible_line_count": 2,
+				"visible_width": 441.0
+			},
+			"title_body_separated": false
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				4.5,
+				1.5,
+				6.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/code-stage-1.png",
+			"tag": "capture_code-stage-1",
+			"target": [
+				4.5,
+				1.39999997615814,
+				4.5
+			]
+		},
+		{
+			"code": {
+				"content_height": 465.0,
+				"content_width": 458.0,
+				"label_position": [
+					16.0,
+					16.0
+				],
+				"label_size": [
+					1368.0,
+					1228.0
+				],
+				"line_count": 15,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": " 1 extends Node3D\n 2 \n 3 var point_position := Vector3(1.0, 0.5, 0.0)\n 4 \n 5 var marker: MeshInstance3D\n 6 \n 7 func _ready() -> void:\n 8 \tmarker = MeshInstance3D.new()\n 9 \tvar sphere := SphereMesh.new()\n10 \tsphere.radius = 0.04\n11 \tsphere.height = 0.08\n12 \tmarker.mesh = sphere\n13 \tmarker.position = point_position\n14 \tadd_child(marker)\n15 ",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					700,
+					630
+				],
+				"visible_height": 614.0,
+				"visible_line_count": 15,
+				"visible_width": 684.0
+			},
+			"passed": true,
+			"scope": "Actual rendered RichTextLabel layout; code dimensions include displayed line-number gutter. No scrolling or pointer-input claim.",
+			"stage": 2,
+			"tag": "stage_2_display_fits",
+			"thinking_body": {
+				"content_height": 396.0,
+				"content_width": 406.0,
+				"label_position": [
+					24.0,
+					90.0
+				],
+				"label_size": [
+					441.0,
+					510.0
+				],
+				"line_count": 11,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "The complete example adds a sphere at the address. Its radius supplies a surface; its position locates the centre. Changing the radius would change what you could see without moving that centre. Geometry has begun to offer more than a location.\n\nCONCEPTS\nSphereMesh  radius  centre",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 510.0,
+				"visible_line_count": 11,
+				"visible_width": 441.0
+			},
+			"thinking_title": {
+				"content_height": 42.0,
+				"content_width": 291.0,
+				"label_position": [
+					24.0,
+					20.0
+				],
+				"label_size": [
+					441.0,
+					60.0
+				],
+				"line_count": 1,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "2  Something to find",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 60.0,
+				"visible_line_count": 1,
+				"visible_width": 441.0
+			},
+			"title_body_separated": true
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				4.5,
+				1.5,
+				6.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/code-stage-2.png",
+			"tag": "capture_code-stage-2",
+			"target": [
+				4.5,
+				1.39999997615814,
+				4.5
+			]
+		},
+		{
+			"code": {
+				"content_height": 465.0,
+				"content_width": 466.0,
+				"label_position": [
+					16.0,
+					16.0
+				],
+				"label_size": [
+					1368.0,
+					1228.0
+				],
+				"line_count": 15,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": " 1 # Excerpts; marker already created.\n 2 # In _ready():\n 3 var material := StandardMaterial3D.new()\n 4 material.albedo_color = Color(0.0, 0.8, 1.0)\n 5 marker.material_override = material\n 6 label = Label3D.new()\n 7 label.position = Vector3(0.0, 0.12, 0.0)\n 8 marker.add_child(label)\n 9 \n10 # In _update_label():\n11 var local_p := marker.position\n12 label.text = \"LOCAL (%.2f, %.2f, %.2f)\" % [\n13     local_p.x, local_p.y, local_p.z\n14 ]\n15 ",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					700,
+					630
+				],
+				"visible_height": 614.0,
+				"visible_line_count": 15,
+				"visible_width": 684.0
+			},
+			"passed": true,
+			"scope": "Actual rendered RichTextLabel layout; code dimensions include displayed line-number gutter. No scrolling or pointer-input claim.",
+			"stage": 3,
+			"tag": "stage_3_display_fits",
+			"thinking_body": {
+				"content_height": 396.0,
+				"content_width": 434.0,
+				"label_position": [
+					24.0,
+					90.0
+				],
+				"label_size": [
+					441.0,
+					510.0
+				],
+				"line_count": 11,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "These excerpts add colour and a LOCAL label. The stored position is unchanged by either. Two decimal places make the address easier to read, while some smaller differences disappear from the report. What would you choose to show?\n\nCONCEPTS\ncolour  Label3D  rounding",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 510.0,
+				"visible_line_count": 11,
+				"visible_width": 441.0
+			},
+			"thinking_title": {
+				"content_height": 42.0,
+				"content_width": 382.0,
+				"label_position": [
+					24.0,
+					20.0
+				],
+				"label_size": [
+					441.0,
+					60.0
+				],
+				"line_count": 1,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "3  A colour and an address",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 60.0,
+				"visible_line_count": 1,
+				"visible_width": 441.0
+			},
+			"title_body_separated": true
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				4.5,
+				1.5,
+				6.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/code-stage-three.png",
+			"tag": "capture_code-stage-three",
+			"target": [
+				4.5,
+				1.39999997615814,
+				4.5
+			]
+		},
+		{
+			"code": {
+				"content_height": 279.0,
+				"content_width": 398.0,
+				"label_position": [
+					16.0,
+					16.0
+				],
+				"label_size": [
+					1368.0,
+					1228.0
+				],
+				"line_count": 9,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": " 1 # Excerpt; marker setup is omitted.\n 2 var elapsed := 0.0\n 3 \n 4 func _process(delta: float) -> void:\n 5     elapsed += delta\n 6     marker.visible = (\n 7         int(elapsed / 2.0) % 2 == 0\n 8     )\n 9 ",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					700,
+					630
+				],
+				"visible_height": 614.0,
+				"visible_line_count": 9,
+				"visible_width": 684.0
+			},
+			"passed": true,
+			"scope": "Actual rendered RichTextLabel layout; code dimensions include displayed line-number gutter. No scrolling or pointer-input claim.",
+			"stage": 4,
+			"tag": "stage_4_display_fits",
+			"thinking_body": {
+				"content_height": 396.0,
+				"content_width": 430.0,
+				"label_position": [
+					24.0,
+					90.0
+				],
+				"label_size": [
+					441.0,
+					510.0
+				],
+				"line_count": 11,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "This example alternates visibility every two seconds, hiding the marker and its child label without changing position. What disappears is the display. The screen only shows this code; it does not run the loop or make the exhibit blink.\n\nCONCEPTS\nvisibility  elapsed time  position",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 510.0,
+				"visible_line_count": 11,
+				"visible_width": 441.0
+			},
+			"thinking_title": {
+				"content_height": 42.0,
+				"content_width": 271.0,
+				"label_position": [
+					24.0,
+					20.0
+				],
+				"label_size": [
+					441.0,
+					60.0
+				],
+				"line_count": 1,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "4  Hide the surface",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 60.0,
+				"visible_line_count": 1,
+				"visible_width": 441.0
+			},
+			"title_body_separated": true
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				4.5,
+				1.5,
+				6.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/code-stage-4.png",
+			"tag": "capture_code-stage-4",
+			"target": [
+				4.5,
+				1.39999997615814,
+				4.5
+			]
+		},
+		{
+			"code": {
+				"content_height": 372.0,
+				"content_width": 431.0,
+				"label_position": [
+					16.0,
+					16.0
+				],
+				"label_size": [
+					1368.0,
+					1228.0
+				],
+				"line_count": 12,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": " 1 # Excerpts; marker is this node's child.\n 2 # In _ready(), shift the parent:\n 3 position = Vector3(2.0, 0.0, 0.0)\n 4 \n 5 # In _update_label(), read both frames:\n 6 var local_p := marker.position\n 7 var world_p := marker.global_position\n 8 \n 9 # With no other transformed parent:\n10 # LOCAL (1.00, 0.50, 0.00)\n11 # WORLD (3.00, 0.50, 0.00)\n12 ",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					700,
+					630
+				],
+				"visible_height": 614.0,
+				"visible_line_count": 12,
+				"visible_width": 684.0
+			},
+			"passed": true,
+			"scope": "Actual rendered RichTextLabel layout; code dimensions include displayed line-number gutter. No scrolling or pointer-input claim.",
+			"stage": 5,
+			"tag": "stage_5_display_fits",
+			"thinking_body": {
+				"content_height": 360.0,
+				"content_width": 383.0,
+				"label_position": [
+					24.0,
+					90.0
+				],
+				"label_size": [
+					441.0,
+					510.0
+				],
+				"line_count": 10,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "With no other transformed parent, shifting this node two units along X gives the same centre two addresses: LOCAL (1.00, 0.50, 0.00), WORLD (3.00, 0.50, 0.00). Which zero do the numbers answer to?\n\nCONCEPTS\nlocal  world  origin",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 510.0,
+				"visible_line_count": 10,
+				"visible_width": 441.0
+			},
+			"thinking_title": {
+				"content_height": 42.0,
+				"content_width": 214.0,
+				"label_position": [
+					24.0,
+					20.0
+				],
+				"label_size": [
+					441.0,
+					60.0
+				],
+				"line_count": 1,
+				"metrics_available": true,
+				"passed": true,
+				"plain_text_including_line_numbers": "5  Whose zero?",
+				"scroll_value": 0.0,
+				"viewport_size": [
+					489,
+					630
+				],
+				"visible_height": 60.0,
+				"visible_line_count": 1,
+				"visible_width": 441.0
+			},
+			"title_body_separated": true
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				4.5,
+				1.5,
+				6.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/code-stage-5.png",
+			"tag": "capture_code-stage-5",
+			"target": [
+				4.5,
+				1.39999997615814,
+				4.5
+			]
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				4.5,
+				1.70000004768372,
+				0.0
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/lobby-window.png",
+			"tag": "capture_lobby-window",
+			"target": [
+				7.5,
+				1.70000004768372,
+				-6.0
+			]
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				7.5,
+				1.70000004768372,
+				-1.0
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/lobby-window-front.png",
+			"tag": "capture_lobby-window-front",
+			"target": [
+				7.5,
+				1.70000004768372,
+				-6.0
+			]
+		},
+		{
+			"emitters": [
+				{
+					"amount": 13,
+					"emission_bounds": [
+						2.5,
+						1.20000004768372,
+						2.5
+					],
+					"emitting": true,
+					"live_bounds": "[P: (-2.26417, -0.821716, -2.583987), S: (3.948219, 2.248887, 5.049669)]",
+					"name": "SphereField",
+					"position": [
+						9.5,
+						2.40000009536743,
+						14.5
+					],
+					"visible": true
+				},
+				{
+					"amount": 5,
+					"emission_bounds": [
+						2.5,
+						1.20000004768372,
+						2.5
+					],
+					"emitting": true,
+					"live_bounds": "[P: (-2.594108, -1.04372, -1.740178), S: (4.801963, 2.269259, 2.340605)]",
+					"name": "SphereFieldBeads",
+					"position": [
+						9.5,
+						2.40000009536743,
+						14.5
+					],
+					"visible": true
+				}
+			],
+			"passed": true,
+			"scope": "GPU emitter existence and state; visible usefulness needs the rendered views.",
+			"tag": "field_configured_emitters",
+			"total": 18
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				9.5,
+				1.70000004768372,
+				17.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/floating-field.png",
+			"tag": "capture_floating-field",
+			"target": [
+				9.5,
+				2.40000009536743,
+				14.5
+			]
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				9.5,
+				1.70000004768372,
+				9.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/floating-field-front.png",
+			"tag": "capture_floating-field-front",
+			"target": [
+				9.5,
+				2.40000009536743,
+				14.5
+			]
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				13.5,
+				1.70000004768372,
+				12.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/floating-field-side.png",
+			"tag": "capture_floating-field-side",
+			"target": [
+				9.5,
+				2.40000009536743,
+				14.5
+			]
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				1.5,
+				1.64999997615814,
+				4.40000009536743
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/invisible-present.png",
+			"tag": "capture_invisible-present",
+			"target": [
+				1.5,
+				1.25,
+				2.5
+			]
+		},
+		{
+			"passed": true,
+			"tag": "invisible_captured_true"
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				1.5,
+				1.64999997615814,
+				4.40000009536743
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/invisible-absent.png",
+			"tag": "capture_invisible-absent",
+			"target": [
+				1.5,
+				1.25,
+				2.5
+			]
+		},
+		{
+			"passed": true,
+			"tag": "invisible_captured_false"
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				5.5,
+				1.70000004768372,
+				1.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/threshold-off.png",
+			"tag": "capture_threshold-off",
+			"target": [
+				2.29999995231628,
+				1.20000004768372,
+				3.0
+			]
+		},
+		{
+			"approach": {
+				"horizontal_error": 0.0333566665649414,
+				"on_floor": true,
+				"position": [
+					3.5,
+					0.000881493207998574,
+					3.53335666656494
+				]
+			},
+			"mode": 4,
+			"passed": true,
+			"prior": 0,
+			"tag": "actual_walker_enters_threshold",
+			"walker_groups": [
+				"em_walker"
+			]
+		},
+		{
+			"debug_draw": 4,
+			"eye": [
+				5.5,
+				1.70000004768372,
+				1.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/threshold-on.png",
+			"tag": "capture_threshold-on",
+			"target": [
+				2.29999995231628,
+				1.20000004768372,
+				3.0
+			]
+		},
+		{
+			"approach": {
+				"horizontal_error": 0.0333118438720703,
+				"on_floor": true,
+				"position": [
+					3.5,
+					0.000881493207998574,
+					5.26668834686279
+				]
+			},
+			"expected": 0,
+			"mode": 0,
+			"passed": true,
+			"tag": "actual_walker_exit_restores_render_mode"
+		},
+		{
+			"debug_draw": 0,
+			"eye": [
+				5.5,
+				1.70000004768372,
+				1.5
+			],
+			"passed": true,
+			"path": "res://ada_run/point_one_restoration/threshold-restored.png",
+			"tag": "capture_threshold-restored",
+			"target": [
+				2.29999995231628,
+				1.20000004768372,
+				3.0
+			]
+		}
+	],
+	"rays": [
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "invisible-approach-support",
+			"top": 0.0000000223517417907715
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "threshold-support",
+			"top": 0.0000000223517417907715
+		},
+		{
+			"collider": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Collision",
+			"hit": true,
+			"passed": true,
+			"tag": "code-approach-support",
+			"top": 0.0000000223517417907715
+		}
+	],
+	"room": "Point_One",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/point_one_restoration/world-card-controlled.png",
+		"res://ada_run/point_one_restoration/opening-overview.png",
+		"res://ada_run/point_one_restoration/code-stage-1.png",
+		"res://ada_run/point_one_restoration/code-stage-2.png",
+		"res://ada_run/point_one_restoration/code-stage-three.png",
+		"res://ada_run/point_one_restoration/code-stage-4.png",
+		"res://ada_run/point_one_restoration/code-stage-5.png",
+		"res://ada_run/point_one_restoration/lobby-window.png",
+		"res://ada_run/point_one_restoration/lobby-window-front.png",
+		"res://ada_run/point_one_restoration/floating-field.png",
+		"res://ada_run/point_one_restoration/floating-field-front.png",
+		"res://ada_run/point_one_restoration/floating-field-side.png",
+		"res://ada_run/point_one_restoration/invisible-present.png",
+		"res://ada_run/point_one_restoration/invisible-absent.png",
+		"res://ada_run/point_one_restoration/threshold-off.png",
+		"res://ada_run/point_one_restoration/threshold-on.png",
+		"res://ada_run/point_one_restoration/threshold-restored.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				1.5,
+				0.000823359994683415,
+				3.76666736602783
+			],
+			"passed": true,
+			"tag": "approach-invisible",
+			"target": [
+				1.5,
+				0.1,
+				3.7
+			]
+		},
+		{
+			"end": [
+				4.5,
+				0.00006103515625,
+				5.5666675567627
+			],
+			"passed": true,
+			"tag": "approach-code",
+			"target": [
+				4.5,
+				0.1,
+				5.5
+			]
+		}
+	]
+}

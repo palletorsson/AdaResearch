@@ -1,0 +1,68 @@
+{
+ "sweep": "vector_add",
+ "peak_changed_pct": 0.466,
+ "subject_pct": 10.04,
+ "verdict": "faint - under 2% of the frame moved",
+ "variants": [
+  {
+   "a": {
+    "workings": "outcome"
+   },
+   "b": {
+    "workings": "trace"
+   },
+   "changed_px": 242,
+   "changed_pct": 0.042
+  },
+  {
+   "a": {
+    "workings": "outcome"
+   },
+   "b": {
+    "workings": "operands"
+   },
+   "changed_px": 325,
+   "changed_pct": 0.056
+  },
+  {
+   "a": {
+    "workings": "outcome"
+   },
+   "b": {
+    "workings": "expression"
+   },
+   "changed_px": 2694,
+   "changed_pct": 0.466
+  },
+  {
+   "a": {
+    "workings": "trace"
+   },
+   "b": {
+    "workings": "operands"
+   },
+   "changed_px": 242,
+   "changed_pct": 0.042
+  },
+  {
+   "a": {
+    "workings": "trace"
+   },
+   "b": {
+    "workings": "expression"
+   },
+   "changed_px": 2452,
+   "changed_pct": 0.425
+  },
+  {
+   "a": {
+    "workings": "operands"
+   },
+   "b": {
+    "workings": "expression"
+   },
+   "changed_px": 2694,
+   "changed_pct": 0.466
+  }
+ ]
+}

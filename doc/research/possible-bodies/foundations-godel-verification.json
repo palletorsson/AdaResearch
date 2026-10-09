@@ -1,0 +1,38 @@
+{
+  "hall": "Godel_Incompleteness",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "ten_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "bordered_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "negative_control_fixture",
+    "critic_regress_stack",
+    "godel_sentence_machine",
+    "rice_verifier_booth",
+    "print_gallery_recursion",
+    "synthesis_stand",
+    "fluency_seam",
+    "godel_statement_plaque",
+    "provability_sorter",
+    "incompleteness_tower"
+  ],
+  "primary_artifacts": [
+    "godel_sentence_machine",
+    "provability_sorter"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Godel_Incompleteness\\map_data.json": "4a05e4ba8ed43dfc2e8023b9a1a795f35f1cfe2de9756a233600c1900b6e645e",
+    "commons\\maps\\Godel_Incompleteness\\final.md": "5b0be4a63f7de2c246cf04c4a888a9d412abc183dc6b15b882ecab5842a39b6c",
+    "commons\\maps\\Godel_Incompleteness\\tutorial.md": "5b6a407cb3d5f8f73d37dbacd3e118180758d3f562f52980d0d5d5365883118c",
+    "commons\\maps\\Godel_Incompleteness\\technical.md": "d8ee66c9d503a25dbf4e32abed37b831717c4dc03ecc96a50d5919458bb626d8",
+    "commons\\maps\\Godel_Incompleteness\\critical.md": "dc5ddb3468ee7f5c8ccbe383c15efdaab94dcaa4d647f2512f006aa34d969e5e"
+  }
+}

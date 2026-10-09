@@ -1,0 +1,31 @@
+--- before/algorithms/wavefunctions/unit_circle/UnitCircle.gd
++++ algorithms/wavefunctions/unit_circle/UnitCircle.gd
+@@ -24,6 +24,8 @@
+ @export_enum("both", "cosine", "tangent", "helix") var correspondence: String = "both"
+ @export_enum("progressive", "complete") var buildup: String = "progressive"
+ @export var start_angle_deg: float = 0.0
++# Keep the finite graph; optionally continue its source and coordinate projections.
++@export var continue_after_build: bool = false
+ 
+ @export var radius: float = 1.0
+ @export var rotation_speed: float = 0.8
+@@ -83,6 +85,9 @@
+ 
+ func _process(delta: float) -> void:
+ 	if finished:
++		if continue_after_build:
++			angle = fposmod(angle + rotation_speed * delta, TAU)
++			_update_rotator_and_indicators()
+ 		return
+ 
+ 	angle += rotation_speed * delta
+@@ -361,6 +366,9 @@
+ 
+ 
+ func apply_grid_config(config: Dictionary) -> void:
++	# A motion toggle does not change or rebuild the retained bridge.
++	if config.has("continue_after_build"):
++		continue_after_build = str(config["continue_after_build"]).to_lower() == "true"
+ 	# Guarded twice over: nothing happens unless the key arrived, the value differs, and
+ 	# _ready has already built once. A map that says nothing about correspondence never
+ 	# reaches _rebuild_bridge() at all.

@@ -1,0 +1,39 @@
+{
+  "id": "Color_Walls",
+  "title": "Compose a view through colour",
+  "storyboard": "Walk the same route between panes in FILTER and OPAQUE modes: a chair disappears while the gaps stay. Bring colour assignment, surface geometry and transformed arrangements. Use the companion’s existing pane or palette edit to change one condition, keeping the other fixed. Alpha controls the contribution of the view behind a supplied transparent surface; the transparency mode, backing light and collision remain explicit support. Predict what can change in the view without changing passage, then walk around it. The RGB/HSV models and interpolation bench offer optional returns to coordinate choices. Carry palette separately from arrangement into Pattern_Disco. The office and assembly’s questions of privacy and who may rearrange a room need no further coding exercise.",
+  "storyboard_short": "Use switchable panes and existing companion edit. Reuse materials/transforms/palette. Vary one pane angle or palette while other condition stays. Explain alpha; supply transparency/light/collision. Predict view versus passage. Carry palette separate from arrangement into Pattern_Disco. RGB/HSV models/interpolation optional; preserve privacy/authority questions. No new composition required. Open: companion spacing prose/code mismatch.",
+  "mode": "deepen",
+  "brings": [
+    "surface materials",
+    "spatial arrangement and colour assignment"
+  ],
+  "learns": [
+    "alpha as a contribution to appearance",
+    "appearance versus physical passage"
+  ],
+  "carries": "A palette and arrangement that can be varied independently in the returning disco floor.",
+  "supplied": [
+    "transparency mode, light and collision",
+    "existing pane construction and optional gradient models"
+  ],
+  "artifact_refs": [
+    "color_constellation_office",
+    "gradient_interpolator",
+    "colour_assembly",
+    "colour_wall_studies"
+  ],
+  "review_note": "Preserve existing bounded edits and keep interpolation optional. Companion prose says try 0.18 while its spacing example uses 0.21; reconcile at the full-lesson pass. This summary revision does not alter that companion or the mature main text.",
+  "prior_maps": [
+    "Color_Flashlight",
+    "Color_Pillar",
+    "Color_Paint",
+    "Tutorial_Tiling_Walls"
+  ],
+  "independent_check": "Predict what changing one pane’s angle or palette does to the view, and which collision boundaries remain.",
+  "source_refs": [
+    "algorithms/color/color_mixing/color_constellation_office.gd",
+    "commons/artifacts/colour_wall_studies/study.gd"
+  ],
+  "change_reason": "Preserve an accomplished ending without adding another required construction."
+}

@@ -1,0 +1,301 @@
+{
+  "checks": [
+    {
+      "label": "museum core ready",
+      "ok": true
+    },
+    {
+      "label": "actual Flow_Field hall loaded",
+      "ok": true
+    },
+    {
+      "label": "retained placement: flow_field_painter",
+      "ok": true
+    },
+    {
+      "label": "retained placement: vector_field_visualizer",
+      "ok": true
+    },
+    {
+      "label": "retained placement: vector_field_grid",
+      "ok": true
+    },
+    {
+      "label": "retained placement: particle_flow_swarm",
+      "ok": true
+    },
+    {
+      "label": "retained placement: noc_5_04_flow_field",
+      "ok": true
+    },
+    {
+      "label": "retained placement: grand_zoetrope",
+      "ok": true
+    },
+    {
+      "label": "shared field host present",
+      "ok": true
+    },
+    {
+      "label": "eighty particles preserved",
+      "ok": true
+    },
+    {
+      "label": "field initially held",
+      "ok": true
+    },
+    {
+      "label": "sampler returns unit direction",
+      "ok": true
+    },
+    {
+      "label": "update unchanged: direction times speed times seconds",
+      "ok": true
+    },
+    {
+      "label": "held field clock remains still while particle advances",
+      "ok": true
+    },
+    {
+      "label": "ARROWS pointer event reveals field",
+      "ok": true
+    },
+    {
+      "label": "twenty-four field glyphs preserved",
+      "ok": true
+    },
+    {
+      "label": "arrow directions still match the particle sampler",
+      "ok": true
+    },
+    {
+      "label": "ARROWS pointer event hides field",
+      "ok": true
+    },
+    {
+      "label": "FIELD TIME pointer event advances clock",
+      "ok": true
+    },
+    {
+      "label": "FIELD TIME holds current time",
+      "ok": true
+    },
+    {
+      "label": "RESET pointer event clears trails",
+      "ok": true
+    },
+    {
+      "label": "RESET preserves field seed and time",
+      "ok": true
+    },
+    {
+      "label": "SEED pointer event changes field",
+      "ok": true
+    },
+    {
+      "label": "SPEED callback reaches existing update",
+      "ok": true
+    },
+    {
+      "label": "SCALE callback changes sampler once",
+      "ok": true
+    },
+    {
+      "label": "wall monitor host exists",
+      "ok": true
+    },
+    {
+      "label": "canvas trails and arrows share one monitor transform",
+      "ok": true
+    },
+    {
+      "label": "screen occupies wall height 0.6 to 3.8 metres",
+      "ok": true
+    },
+    {
+      "label": "screen is vertical",
+      "ok": true
+    },
+    {
+      "label": "reachable standing control height: ARROWS",
+      "ok": true
+    },
+    {
+      "label": "reachable standing control height: FIELD TIME",
+      "ok": true
+    },
+    {
+      "label": "reachable standing control height: RESET",
+      "ok": true
+    },
+    {
+      "label": "reachable standing control height: SEED",
+      "ok": true
+    },
+    {
+      "label": "reachable standing control height: SPEED",
+      "ok": true
+    },
+    {
+      "label": "reachable standing control height: SCALE",
+      "ok": true
+    },
+    {
+      "label": "unobstructed standing pointer ray: ARROWS",
+      "ok": true
+    },
+    {
+      "label": "unobstructed standing pointer ray: FIELD TIME",
+      "ok": true
+    },
+    {
+      "label": "unobstructed standing pointer ray: RESET",
+      "ok": true
+    },
+    {
+      "label": "unobstructed standing pointer ray: SEED",
+      "ok": true
+    },
+    {
+      "label": "inspection camera retained: standing",
+      "ok": true
+    },
+    {
+      "label": "painter visible: standing",
+      "ok": true
+    },
+    {
+      "label": "capture saved: standing",
+      "ok": true
+    },
+    {
+      "label": "inspection camera retained: near",
+      "ok": true
+    },
+    {
+      "label": "painter visible: near",
+      "ok": true
+    },
+    {
+      "label": "capture saved: near",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "learner_verified": false,
+  "observations": {
+    "capture_state": {
+      "delta": 0.0166666666666667,
+      "field_seed": 43,
+      "field_time": 0,
+      "noise_scale": 3,
+      "seed": 43019,
+      "speed": 0.1,
+      "steps": 120
+    },
+    "control_heights": {
+      "ARROWS": 1.11500000953674,
+      "FIELD TIME": 1.11500000953674,
+      "RESET": 1.11939907073975,
+      "SCALE": 1.19916832447052,
+      "SEED": 1.11939907073975,
+      "SPEED": 1.19916832447052
+    },
+    "painter_position": [
+      1.5,
+      0.0,
+      5.5
+    ],
+    "painter_scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "placed_artifacts": {
+      "ceiling_vent": 1,
+      "counter": 1,
+      "dream_bodies": 1,
+      "electrical_panel": 1,
+      "elevator": 1,
+      "exit_sign": 2,
+      "extinguisher": 1,
+      "fire_hose_box": 1,
+      "flow_field_painter": 1,
+      "grand_zoetrope": 1,
+      "info_screen": 1,
+      "noc_5_04_flow_field": 1,
+      "pallet": 1,
+      "particle_flow_swarm": 1,
+      "point_zero": 1,
+      "science_screen": 1,
+      "station_plinth": 1,
+      "vector_field_grid": 1,
+      "vector_field_visualizer": 1,
+      "view": 1,
+      "wall_clock": 1,
+      "window": 1
+    },
+    "pointer_ray_ARROWS": {
+      "eye": [
+        4.09999990463257,
+        1.64999997615814,
+        5.5
+      ],
+      "hit": "InteractableAreaButton:<Area3D#426543943644>",
+      "mask": 1048577,
+      "target": [
+        3.12000012397766,
+        1.11500000953674,
+        5.84999990463257
+      ]
+    },
+    "pointer_ray_FIELD TIME": {
+      "eye": [
+        4.09999990463257,
+        1.64999997615814,
+        5.5
+      ],
+      "hit": "InteractableAreaButton:<Area3D#426879487984>",
+      "mask": 1048577,
+      "target": [
+        3.11999988555908,
+        1.11500000953674,
+        5.15000009536743
+      ]
+    },
+    "pointer_ray_RESET": {
+      "eye": [
+        4.09999990463257,
+        1.64999997615814,
+        5.5
+      ],
+      "hit": "InteractableAreaButton:<Area3D#425403092897>",
+      "mask": 1048577,
+      "target": [
+        2.83444213867188,
+        1.11939907073975,
+        5.59000015258789
+      ]
+    },
+    "pointer_ray_SEED": {
+      "eye": [
+        4.09999990463257,
+        1.64999997615814,
+        5.5
+      ],
+      "hit": "InteractableAreaButton:<Area3D#425889632186>",
+      "mask": 1048577,
+      "target": [
+        2.83444213867188,
+        1.11939907073975,
+        5.40999984741211
+      ]
+    },
+    "screen_y": [
+      0.600000023841858,
+      3.80000019073486
+    ]
+  },
+  "phase": "after"
+}

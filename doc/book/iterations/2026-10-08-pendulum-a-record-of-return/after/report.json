@@ -1,0 +1,1150 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing primary artifact present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: primary",
+      "passed": true
+    },
+    {
+      "name": "student cube present in real hall",
+      "passed": true
+    },
+    {
+      "name": "student bay has floor",
+      "passed": true
+    },
+    {
+      "name": "first study approach has floor",
+      "passed": true
+    },
+    {
+      "name": "first study approach clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "history side walk has floor",
+      "passed": true
+    },
+    {
+      "name": "history side walk clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "comparison bay has floor",
+      "passed": true
+    },
+    {
+      "name": "second study approach has floor",
+      "passed": true
+    },
+    {
+      "name": "second study approach clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "two samplers leave swing states equal",
+      "passed": true
+    },
+    {
+      "name": "fine display reaches its count bound",
+      "passed": true
+    },
+    {
+      "name": "coarse display retains fewer marks",
+      "passed": true
+    },
+    {
+      "name": "coarse record retains longer duration",
+      "passed": true
+    },
+    {
+      "name": "record remains intact in museum",
+      "passed": true
+    },
+    {
+      "name": "cube stays above floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student-fine",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student-coarse",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: context",
+      "passed": true
+    },
+    {
+      "name": "all four principal encounters retained",
+      "passed": true
+    },
+    {
+      "name": "main pendulum is a larger 2.8 metre swing",
+      "passed": true
+    },
+    {
+      "name": "painting enlarged from 20 to 60 percent",
+      "passed": true
+    },
+    {
+      "name": "hand point is at reachable height",
+      "passed": true
+    },
+    {
+      "name": "hand recorder panel stays mounted",
+      "passed": true
+    },
+    {
+      "name": "hand timeline expires before the next display",
+      "passed": true
+    },
+    {
+      "name": "central passage 2.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "central passage 2.5 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "central passage 10.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "central passage 10.5 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "central passage 17.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "central passage 17.5 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "central passage 27.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "central passage 27.5 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 21.0 has floor",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 21.0 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 23.0 has floor",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 23.0 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 24.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 24.5 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 26.5 has floor",
+      "passed": true
+    },
+    {
+      "name": "route between paintings 26.5 clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "sampler buttons has floor",
+      "passed": true
+    },
+    {
+      "name": "sampler buttons clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "side readout has floor",
+      "passed": true
+    },
+    {
+      "name": "side readout clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "hand recorder front has floor",
+      "passed": true
+    },
+    {
+      "name": "hand recorder front clear of other bodies",
+      "passed": true
+    },
+    {
+      "name": "floor projection has a real rendered segment per adjacent sample",
+      "passed": true
+    },
+    {
+      "name": "floor projection retains x and age depth",
+      "passed": true
+    },
+    {
+      "name": "projection lies just above runner",
+      "passed": true
+    },
+    {
+      "name": "projection leaves source observations intact",
+      "passed": true
+    },
+    {
+      "name": "floor cylinder actually joins its two samples",
+      "passed": true
+    },
+    {
+      "name": "unconfigured pendulum retains original dimensions",
+      "passed": true
+    },
+    {
+      "name": "floor projection is opt in",
+      "passed": true
+    },
+    {
+      "name": "large and original rods do not share a changed mesh",
+      "passed": true
+    },
+    {
+      "name": "gallery sampler preserves swing and clock",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pendulum-floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: readout",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: paintings",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: painting-close",
+      "passed": true
+    },
+    {
+      "name": "scripted hand movement leaves a nontrivial timeline",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-timeline",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: foucault",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: gallery-above",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "artifacts": [
+      {
+        "bounds_position": [
+          5.97000026702881,
+          0.850000023841858,
+          -3.52999997138977
+        ],
+        "bounds_size": [
+          3.05999946594238,
+          1.69999992847443,
+          0.0784997940063477
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -3.5
+        ],
+        "token": "lobby:window"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          7.5,
+          1.70000004768372,
+          -2.0
+        ],
+        "token": "lobby:view"
+      },
+      {
+        "bounds_position": [
+          10.3799991607666,
+          1.17000007629395,
+          -3.11999988555908
+        ],
+        "bounds_size": [
+          1.2400016784668,
+          0.859999895095825,
+          0.214499711990356
+        ],
+        "position": [
+          11.0,
+          1.60000002384186,
+          -2.94000005722046
+        ],
+        "token": "lobby:counter"
+      },
+      {
+        "bounds_position": [
+          1.02999997138977,
+          0.0,
+          -1.48639512062073
+        ],
+        "bounds_size": [
+          0.186500072479248,
+          0.826871156692505,
+          0.230121254920959
+        ],
+        "position": [
+          1.13999998569489,
+          0.0,
+          -1.40000009536743
+        ],
+        "token": "lobby:extinguisher"
+      },
+      {
+        "bounds_position": [
+          15.7349996566772,
+          0.0,
+          -2.74000000953674
+        ],
+        "bounds_size": [
+          0.409998893737793,
+          2.38540005683899,
+          1.88000011444092
+        ],
+        "position": [
+          15.9399995803833,
+          0.0,
+          -1.79999995231628
+        ],
+        "token": "lobby:elevator"
+      },
+      {
+        "bounds_position": [
+          14.3993759155273,
+          0.0,
+          -2.38108921051025
+        ],
+        "bounds_size": [
+          1.40124893188477,
+          1.14800000190735,
+          1.16217851638794
+        ],
+        "position": [
+          15.1000003814697,
+          0.0,
+          -1.79999995231628
+        ],
+        "token": "lobby:pallet"
+      },
+      {
+        "bounds_position": [
+          -0.508000016212463,
+          -0.808000028133392,
+          -4.50799989700317
+        ],
+        "bounds_size": [
+          1.01600003242493,
+          1.01600003242493,
+          1.01599979400635
+        ],
+        "position": [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        "token": "lobby:point_zero"
+      },
+      {
+        "bounds_position": [
+          2.07330679893494,
+          0.00749999983236194,
+          5.06561279296875
+        ],
+        "bounds_size": [
+          0.853386402130127,
+          0.95312762260437,
+          0.8687744140625
+        ],
+        "position": [
+          2.5,
+          0.0,
+          5.5
+        ],
+        "token": "dark_sphere"
+      },
+      {
+        "bounds_position": [
+          3.74000000953674,
+          0.0,
+          6.18036222457886
+        ],
+        "bounds_size": [
+          5.87800025939941,
+          4.08000040054321,
+          6.51963758468628
+        ],
+        "position": [
+          6.5,
+          0.0,
+          6.5
+        ],
+        "token": "PendulumWave"
+      },
+      {
+        "bounds_position": [
+          13.0300006866455,
+          -1.4379997253418,
+          4.03000020980835
+        ],
+        "bounds_size": [
+          4.93999862670898,
+          7.4229998588562,
+          4.93999910354614
+        ],
+        "position": [
+          15.5,
+          0.720000028610229,
+          6.5
+        ],
+        "token": "foucault_pendulum"
+      },
+      {
+        "bounds_position": [
+          16.8999996185303,
+          0.0250000115483999,
+          13.1999998092651
+        ],
+        "bounds_size": [
+          1.20843696594238,
+          1.12588846683502,
+          0.600000381469727
+        ],
+        "position": [
+          17.5,
+          0.100000001490116,
+          13.5
+        ],
+        "token": "seismograph"
+      },
+      {
+        "bounds_position": [
+          3.04999995231628,
+          0.0,
+          14.0500001907349
+        ],
+        "bounds_size": [
+          0.900000095367432,
+          1.04999995231628,
+          0.899999618530273
+        ],
+        "position": [
+          3.5,
+          0.0,
+          14.5
+        ],
+        "token": "draw_dot_time_domain"
+      },
+      {
+        "bounds_position": [
+          3.02499985694885,
+          1.08000004291534,
+          14.012020111084
+        ],
+        "bounds_size": [
+          0.0500001907348633,
+          0.0499999523162842,
+          0.149966239929199
+        ],
+        "position": [
+          3.5,
+          0.954999983310699,
+          14.5
+        ],
+        "token": "draw_dot_time_domain"
+      },
+      {
+        "bounds_position": [
+          16.8999996185303,
+          0.0,
+          17.1000003814697
+        ],
+        "bounds_size": [
+          1.20000076293945,
+          0.375,
+          0.799999237060547
+        ],
+        "position": [
+          17.5,
+          0.0,
+          17.5
+        ],
+        "token": "lab_table"
+      },
+      {
+        "bounds_position": [
+          17.2919998168945,
+          0.794400036334991,
+          18.3400001525879
+        ],
+        "bounds_size": [
+          0.416000366210938,
+          0.811199963092804,
+          0.317998886108398
+        ],
+        "position": [
+          17.5,
+          0.800000011920929,
+          18.5
+        ],
+        "token": "GlassRack"
+      },
+      {
+        "bounds_position": [
+          18.0499992370605,
+          0.0,
+          20.0499992370605
+        ],
+        "bounds_size": [
+          0.900001525878906,
+          1.0,
+          0.900001525878906
+        ],
+        "position": [
+          18.5,
+          0.0,
+          20.5
+        ],
+        "token": "VRAudioMonitor"
+      },
+      {
+        "bounds_position": [
+          18.3400001525879,
+          1.02999997138977,
+          20.4489994049072
+        ],
+        "bounds_size": [
+          0.319999694824219,
+          0.240000009536743,
+          0.10099983215332
+        ],
+        "position": [
+          18.5,
+          1.14999997615814,
+          20.5
+        ],
+        "token": "VRAudioMonitor"
+      },
+      {
+        "bounds_position": [
+          3.59927916526794,
+          0.0839998722076416,
+          23.204647064209
+        ],
+        "bounds_size": [
+          13.5412826538086,
+          2.79264521598816,
+          1.29776000976563
+        ],
+        "position": [
+          10.5,
+          0.899999976158142,
+          23.5
+        ],
+        "token": "WavePaintings"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          18.5,
+          0.0,
+          25.5
+        ],
+        "token": "BigPipeSystem"
+      },
+      {
+        "bounds_position": [
+          8.85999965667725,
+          0.0,
+          0.295000016689301
+        ],
+        "bounds_size": [
+          3.28000068664551,
+          3.41199994087219,
+          0.409999966621399
+        ],
+        "position": [
+          10.5,
+          0.0,
+          0.5
+        ],
+        "token": "gate:wavefunctions pendulum"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          27.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          2.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          2.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          19.9909992218018,
+          1.58000004291534,
+          2.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          27.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          4.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          4.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          19.9909992218018,
+          1.58000004291534,
+          4.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          6.0,
+          1.58000004291534,
+          27.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          6.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          6.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          19.9909992218018,
+          1.58000004291534,
+          6.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          8.0,
+          1.58000004291534,
+          27.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          8.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          1.00899994373322,
+          1.58000004291534,
+          8.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          19.9909992218018,
+          1.58000004291534,
+          8.0
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          13.0,
+          1.58000004291534,
+          27.9909992218018
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "bounds_size": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "position": [
+          13.0,
+          1.58000004291534,
+          1.00899982452393
+        ],
+        "token": "showing"
+      },
+      {
+        "bounds_position": [
+          10.2749996185303,
+          3.4300000667572,
+          -1.08299994468689
+        ],
+        "bounds_size": [
+          0.450000762939453,
+          0.179999828338623,
+          0.062999963760376
+        ],
+        "position": [
+          10.5,
+          3.51999998092651,
+          -1.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.27499997615814,
+          2.91000008583069,
+          27.9169998168945
+        ],
+        "bounds_size": [
+          0.450000047683716,
+          0.179999828338623,
+          0.0629997253417969
+        ],
+        "position": [
+          1.5,
+          3.0,
+          28.0
+        ],
+        "token": "exit_sign"
+      },
+      {
+        "bounds_position": [
+          1.00499999523163,
+          2.05920004844666,
+          -3.69079995155334
+        ],
+        "bounds_size": [
+          0.0299999713897705,
+          0.381599903106689,
+          0.381599903106689
+        ],
+        "position": [
+          1.01999998092651,
+          2.25,
+          -3.5
+        ],
+        "token": "wall_clock"
+      },
+      {
+        "bounds_position": [
+          15.8999996185303,
+          0.810000002384186,
+          -2.75
+        ],
+        "bounds_size": [
+          0.100000381469727,
+          1.34000015258789,
+          2.5
+        ],
+        "position": [
+          16.0,
+          0.899999976158142,
+          -1.5
+        ],
+        "token": "whiteboard"
+      },
+      {
+        "bounds_position": [
+          0.999999940395355,
+          1.11539852619171,
+          -2.78460168838501
+        ],
+        "bounds_size": [
+          0.11000007390976,
+          0.709601521492004,
+          0.509601593017578
+        ],
+        "position": [
+          1.0,
+          1.5,
+          -2.5
+        ],
+        "token": "electrical_panel"
+      },
+      {
+        "bounds_position": [
+          4.77500009536743,
+          4.62799978256226,
+          6.00000047683716
+        ],
+        "bounds_size": [
+          0.949999809265137,
+          0.0920000076293945,
+          0.449999809265137
+        ],
+        "position": [
+          5.25,
+          4.6399998664856,
+          6.22500038146973
+        ],
+        "token": "ceiling_vent"
+      },
+      {
+        "bounds_position": [
+          9.40999889373779,
+          4.32000017166138,
+          0.25
+        ],
+        "bounds_size": [
+          0.180002212524414,
+          0.0799999237060547,
+          28.5
+        ],
+        "position": [
+          9.5,
+          4.3600001335144,
+          14.5
+        ],
+        "token": "cable_tray"
+      },
+      {
+        "bounds_position": [
+          9.0,
+          -0.0500000007450581,
+          1.0
+        ],
+        "bounds_size": [
+          1.0,
+          0.0500000007450581,
+          1.0
+        ],
+        "position": [
+          9.5,
+          0.0,
+          1.5
+        ],
+        "token": "floor_grate"
+      }
+    ],
+    "bays": [
+      [
+        10,
+        0,
+        21.8
+      ],
+      [
+        2.5,
+        0,
+        22.2
+      ]
+    ],
+    "central passage 10.5": [],
+    "central passage 17.5": [],
+    "central passage 2.5": [],
+    "central passage 27.5": [],
+    "coarse_count": 30,
+    "fine_count": 120,
+    "first study approach": [],
+    "gallery": {
+      "hand_height": 0.954999983310699,
+      "painting_scale": 0.600000023841858,
+      "pendulum_length": 2.8,
+      "pivot_height": 3.9,
+      "record_count": 49,
+      "scripted_hand_capture": true
+    },
+    "hand recorder front": [],
+    "history side walk": [],
+    "lesson": "res://doc/book/iterations/2026-10-08-pendulum-a-record-of-return/extracted/02_pendulum_record.gd",
+    "route between paintings 21.0": [],
+    "route between paintings 23.0": [],
+    "route between paintings 24.5": [],
+    "route between paintings 26.5": [],
+    "sampler buttons": [],
+    "scope": "Rearranged museum and temporarily mounted student program. Native placement, projection and behaviour checks; scripted hand gesture, no headset claim.",
+    "second study approach": [],
+    "side readout": []
+  },
+  "passed": true,
+  "room": "WaveFunctions_Pendulum",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

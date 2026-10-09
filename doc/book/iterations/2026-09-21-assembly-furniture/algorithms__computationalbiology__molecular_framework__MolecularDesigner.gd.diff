@@ -1,0 +1,54 @@
+--- before/algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd
++++ algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd
+@@ -28,6 +28,7 @@
+ @export var body_study: bool = false
+ @export var body_workshop: bool = false
+ @export var body_ragdoll: bool = false
++@export var body_furniture: bool = false
+ @export var bond_radius: float = 0.02
+ @export var bond_color: Color = Color(0.9, 0.9, 1.0, 1.0)
+ 
+@@ -74,6 +75,7 @@
+ 	if body_study: _mark_witness()
+ 	if body_workshop: call_deferred("_ensure_body_workshop")
+ 	if body_ragdoll: call_deferred("_ensure_body_ragdoll")
++	if body_furniture: call_deferred("_ensure_body_furniture")
+ 	_log_info("Molecular Designer Ready")
+ 	if enable_auto_cycle:
+ 		_log_info("Auto-cycle enabled: %ds float, %ds assemble" % [float_duration, assemble_duration])
+@@ -529,6 +531,7 @@
+ 
+ func apply_grid_config(config: Dictionary) -> void:
+ 	if config.has("body_study"): body_study = str(config.body_study).to_lower() in ["true","1"]
++	if config.has("body_furniture"): body_furniture = str(config.body_furniture).to_lower() in ["true","1"]
+ 	if config.has("body_ragdoll"): body_ragdoll = str(config.body_ragdoll).to_lower() in ["true","1"]
+ 	if config.has("body_workshop"): body_workshop = str(config.body_workshop).to_lower() in ["true","1"]
+ 	if config.has("float_duration"): float_duration = clampf(float(config.float_duration),2,60)
+@@ -536,6 +539,7 @@
+ 	if is_node_ready() and body_study: _mark_witness()
+ 	if is_node_ready() and body_workshop: call_deferred("_ensure_body_workshop")
+ 	if is_node_ready() and body_ragdoll: call_deferred("_ensure_body_ragdoll")
++	if is_node_ready() and body_furniture: call_deferred("_ensure_body_furniture")
+ 
+ func _ensure_body_workshop() -> void:
+ 	if not body_workshop or has_node("BodyWorkshop"): return
+@@ -577,3 +581,19 @@
+ 	add_child(study)
+ 	study.global_transform=Transform3D(global_basis.orthonormalized()*Basis(Vector3.UP,PI/2),to_global(Vector3(0,0,1.85)))
+ 	study.build(assemblies["VRBody"])
++
++func _ensure_body_furniture() -> void:
++	if not body_furniture: return
++	var placements := {
++		"Chair":[Vector3(-.25,0,-1.6),PI/2],
++		"Table":[Vector3(2.6,0,-1.6),-PI/2],
++		"Lamp":[Vector3(2.85,0,2.15),-PI/2]
++	}
++	for kind in placements:
++		if has_node("Furniture_"+kind) or not assemblies.has(kind): continue
++		var study := Node3D.new()
++		study.set_script(load("res://algorithms/computationalbiology/molecular_framework/AssemblyFurnitureStudy.gd"))
++		study.name="Furniture_"+kind;study.assembly_kind=kind;study.catalog=catalog
++		study.top_level=true;add_child(study)
++		study.global_transform=Transform3D(global_basis.orthonormalized()*Basis(Vector3.UP,placements[kind][1]),to_global(placements[kind][0]))
++		study.build(assemblies[kind])

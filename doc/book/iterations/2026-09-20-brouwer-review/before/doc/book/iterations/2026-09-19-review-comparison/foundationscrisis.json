@@ -1,0 +1,162 @@
+{
+  "status": "Opening pair and Godel preserved; Russell strengthened; Escher becomes an inspectable study",
+  "summary": "What did 180 degrees depend on? Euclid returns to the museum route, with physical controls for reading and removing the gold emphasis. The next hall compares measured angles on a plane, a sphere and a Poincare disk. Its former seven-value curvature dial concealed only three geometries; the revised encounter names those three models and measures their corners correctly. All existing artifact families remain. Russell now asks for an answer before explaining the contradiction. An existing workbench returns with physical IN / OUT buttons and a finite separation comparison. Godel keeps its mature manuscript; its two principal exhibits now identify their animations as illustrations. Escher now lets the visitor follow a marker, measure tread heights and compare five constructions. Its triangle aligns separated endpoints to a marked camera position. All four artifact families remain; the manuscript distinguishes a persuasive image from a spatial connection and a geometric measurement from a theorem.",
+  "items": [
+    {
+      "title": "A statement becomes something we can ask again",
+      "description": "The plaque now offers NEXT and GOLD at 1.05 m. Its colonnade and supporting artifacts return, repositioned around the central walk. The printed-angle triangle becomes a primary comparison: the next hall measures what this one labels. No secondary artifact is removed.",
+      "images": [
+        "doc/book/iterations/2026-09-20-foundations-opening-review/euclid-colonnade.png",
+        "doc/book/iterations/2026-09-20-foundations-opening-review/euclid-fifth.png"
+      ],
+      "captions": [
+        "The restored Euclid hall, looking along its central approach.",
+        "The fifth postulate, with NEXT and GOLD below the plaque."
+      ],
+      "image_note": "Current Godot museum captures, not before/after versions. Selected collision-body approaches pass. The test walker is hidden for photographs; museum artifacts remain visible. Tracked hands and headset reading are untested.",
+      "text_kind": "book — Euclid",
+      "before": "So let's break the branch. `highlight_fifth` is an exported bool. Set it false and the fifth reads in the same warm grey as the rest, and `parallel_highlighted` never fires — the branch that shouted was the branch that coloured. `postulate_selected` still emits at index four, the way it does at every other. Cycle again and ask whether the fifth still feels like the odd one.",
+      "after": "Now press GOLD. It switches `highlight_fifth` off: the fifth reads in the same warm grey as the rest, and `parallel_highlighted` never fires — the branch that shouted was the branch that coloured. `postulate_selected` still emits at index four, the way it does at every other. Cycle again and ask whether the fifth still feels like the odd one.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/final.diff",
+      "report_label": "Exact changes to both manuscripts"
+    },
+    {
+      "title": "Three hosts; three measurements",
+      "description": "HOST selects plane, sphere or disk. The surface sits behind the console and tilts towards the visitor so the controls do not cover its triangle. The displayed angles come from analytic edge tangents. Independent spherical and hyperbolic formulas agree with these example sums: 180.0, 202.1 and 103.1 degrees. The bench illustrates a relation; it does not independently verify a curvature integral or prove Gauss–Bonnet.",
+      "images": [
+        "doc/book/iterations/2026-09-20-foundations-opening-review/curvature-plane.png",
+        "doc/book/iterations/2026-09-20-foundations-opening-review/curvature-sphere.png",
+        "doc/book/iterations/2026-09-20-foundations-opening-review/curvature-disk.png"
+      ],
+      "captions": [
+        "PLANE · straight segments, 180.0 degrees.",
+        "SPHERE · great-circle edges, 202.1 degrees.",
+        "DISK · hyperbolic geodesics, 103.1 degrees."
+      ],
+      "image_note": "Three states of the revised workbench in the actual museum, from the same camera at 1.70 m. These are separate example triangles, not an unchanged triangle transported between spaces. The collision-test walker is hidden for photographs.",
+      "text_kind": "book — Non-Euclidean Spaces",
+      "before": "The previous room let you stand inside an assumption until it stopped feeling like one. This room puts the assumption on a dial. There is a slider here with a number on it, and the number is the curvature of space — negative to the left, zero in the middle, positive to the right. Flatness is the detent at zero. It is not the centre because it is correct; it is the centre because it is zero.",
+      "after": "Start with PLANE at the bench near the entrance. Follow each yellow edge with your eye. Before moving the slider, predict what will happen to the angle sum when the triangle sits on a sphere. More than 180°? Less? The same, because it is still a triangle?\n\nMove to SPHERE. The edges take the short great-circle routes between their endpoints. Look at a corner: each incoming direction has to be read on the sphere, where the corner lives. The total rises. Move back to PLANE. It returns to 180°.\n\nNow try DISK. The triangle lies inside a circle; its sides curve towards the centre. Its angles add to less than 180°. The disk looks flat. That is already a complication worth staying with.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/model-checks.json",
+      "report_label": "Control signals and independent angle checks"
+    },
+    {
+      "title": "Keep the invitation; distinguish what each artifact can establish",
+      "description": "Bowing a line in a flat plane is separated from changing its host geometry. Unequal gaps between three parallels are separated from failure of parallelism. The Riemann sphere remains primary, and all six non-Euclidean exhibits remain available. The revised chapter distinguishes a visible disk boundary, metric distance and the point added at infinity.",
+      "text_kind": "book — Non-Euclidean Spaces",
+      "before": "Geometry was chosen, not found. That is settled by the time you leave this room, and it is settled without anyone having to be wrong.",
+      "after": "Mathematics lets us specify different geometries. Which geometry models a physical situation is a further question, answered with measurements and assumptions; a slider cannot settle it. Nor does one curvature value specify every possible space.\n\nHere the question is close enough to touch. When we change the host, what must a line do to remain straight? What have we kept, and what have we quietly replaced?\n\nFor now, return the slider to PLANE. The floor has not moved. Your account of it has.",
+      "report": "doc/book/iterations/2026-09-20-foundations-opening-review/SUMMARY.md",
+      "report_label": "Decisions, remaining six halls and verification limits"
+    },
+    {
+      "title": "IN. OUT. It looks like enough choice.",
+      "description": "A previously existing workbench joins the six earlier artifact families. Test both membership answers, then change the domain. The lamp accepts OUT in the finite restricted example. The hotel becomes primary again because it supplies a surprise with a constructive answer. A reserved centre passage keeps decorative plinths out of the walk.",
+      "images": [
+        "doc/book/iterations/2026-09-20-russell-godel-review/russell-unrestricted.png",
+        "doc/book/iterations/2026-09-20-russell-godel-review/russell-restricted.png"
+      ],
+      "captions": [
+        "Unrestricted rule: IN requires OUT. Trying OUT also contradicts the rule.",
+        "Within an existing set U: OUT agrees. The four numbered dots are the finite ordinal example."
+      ],
+      "image_note": "Two states of the current workbench inside the actual museum, with the same camera at 1.65 m. These are not before/after software versions. The test walker is hidden for photographs; museum artifacts remain visible. Physical button signals and selected collision-body walks pass; tracked hands and headset reading remain untested.",
+      "text_kind": "book — Russell opening",
+      "before": "Four objects arranged as a cross, with a box at the centre, and every one of them is the same sentence said in a different material.",
+      "after": "A rule stands at the entrance, with two buttons beneath it. IN. OUT. It looks like enough choice.",
+      "report": "doc/book/iterations/2026-09-20-russell-godel-review/final.diff",
+      "report_label": "Exact Russell manuscript diff; Godel unchanged"
+    },
+    {
+      "title": "Keep the objects. Ask what each one can establish.",
+      "description": "The box remains an image of regress; the workbench supplies the two-case contradiction. The liar introduces truth rather than membership. Nested braces do not prove self-membership. The hotel supplies a valid reassignment. The revised text keeps these encounters and removes the claim that they are all the same contradiction.",
+      "images": [
+        "doc/book/iterations/2026-09-20-russell-godel-review/russell-approach.png"
+      ],
+      "captions": [
+        "The membership bench faces the entrance, with the earlier artifacts around and beyond it."
+      ],
+      "image_note": "Current Godot museum capture. A side approach and central passage were checked separately with the museum collision body. This is not a complete continuous headset route test.",
+      "text_kind": "book — Russell comparison",
+      "before": "That is the difference this room needs you to hold. The hotel is a **surprise**, and it settles. The box, the barber, the liar and the brace are **contradictions**, and they do not. One of them is your intuition being wrong about infinity; the other four are a formal system being unable to say what it just said. Standing beside each other, they mark the line the rest of the chapter walks along.",
+      "after": "Keep this surprise close to the contradiction. An offended expectation is not yet an inconsistency. Sometimes the answer requires a construction we had not imagined. Sometimes the requested construction cannot satisfy its own terms.",
+      "report": "doc/book/iterations/2026-09-20-russell-godel-review/SUMMARY.md",
+      "report_label": "Decisions, evidence and remaining work"
+    },
+    {
+      "title": "Godel: let the existing text set the standard",
+      "description": "The short chapter already distinguishes a failed search, a broken search and a theorem about proof. Its text and map are byte-preserved. The sentence machine now says ILLUSTRATION — NOT PROOF SEARCH, and the sorter states that its areas and tokens do not count truths. Source and registry descriptions state the mathematical assumptions. No proof-search implementation is claimed.",
+      "images": [
+        "doc/book/iterations/2026-09-20-russell-godel-review/godel-illustration.png",
+        "doc/book/iterations/2026-09-20-russell-godel-review/godel-sorter.png"
+      ],
+      "captions": [
+        "The sentence machine, with its new illustration label.",
+        "The sorter: an illustrated relation, with destinations chosen in advance."
+      ],
+      "image_note": "Current Godot museum captures. Both exhibits instantiate; these views do not certify access to every exhibit or continuous navigation of Godel’s hall. Its existing placement over gaps remains a later spatial review item.",
+      "report": "doc/book/iterations/2026-09-20-russell-godel-review/content-checks.json",
+      "report_label": "Preservation and integration checks"
+    },
+    {
+      "title": "Escher: where does the rise return?",
+      "description": "Physical STEP, BACK, FORM and RESET controls expose the existing staircase constructions. The light follows the selected tread. A side readout measures the displayed tread centres. The closed circuit gains and loses the same height; the open run stops at its cut end. The visitor stays on the floor.",
+      "images": [
+        "doc/book/iterations/2026-09-20-escher-review/escher-return.png",
+        "doc/book/iterations/2026-09-20-escher-review/escher-gap.png"
+      ],
+      "captions": [
+        "RETURN SIDE, after a circuit: 0.88 m up and 0.88 m down.",
+        "OPEN RUN: the marker stops at the cut end, 0.79 m above its start."
+      ],
+      "image_note": "Current Godot museum captures from the same camera at 1.70 m. Two settings of one artifact, not before/after software versions. The visible light, readout and physical button signals were checked. Tracked-hand use and headset legibility remain unverified.",
+      "text_kind": "book — an encounter replaces an unsupported promise",
+      "before": "Check any corner of it. The riser is a sensible height, the tread is level, the joint between this flight and the next is square. Check the next corner and the same is true. Walk the whole loop checking as you go, approve every junction individually, and you will arrive back at the step you began on having climbed the entire way. Nothing you inspected was wrong. The object cannot exist.",
+      "after": "Follow it around the corners. Before completing the circuit, predict where the height will be given back. Then finish. The marker is at the start. The upward and downward totals agree.",
+      "report": "doc/book/iterations/2026-09-20-escher-review/final.diff",
+      "report_label": "Exact Escher manuscript diff"
+    },
+    {
+      "title": "The body can leave the assigned viewpoint",
+      "description": "The triangle had a depth gap, but its marked viewpoint did not align the ends and its detector had no active-camera caller. The back endpoint now lies on the correct viewing ray; optional camera tracking updates the alignment feedback. The chapter calls this a perspective study and does not claim it reproduces the complete Penrose tribar.",
+      "images": [
+        "doc/book/iterations/2026-09-20-escher-review/penrose-aligned.png",
+        "doc/book/iterations/2026-09-20-escher-review/penrose-aside.png"
+      ],
+      "captions": [
+        "At the marked eye position: top endpoint centres project together.",
+        "Camera shifted 0.55 m sideways: the separation becomes visible."
+      ],
+      "image_note": "Current single-camera Godot captures of the same unmoved artifact. Endpoint projection was independently checked with Camera3D.unproject_position. Beam thickness is still visible. These photographs do not establish the same illusion for two eyes in a headset.",
+      "text_kind": "book — a connection in the image",
+      "before": "Which reframes the staircase too. Consistency here is not a property the object has. It is a property of a *view* of the object, and the view is a position you can be standing in without knowing you chose it.",
+      "after": "The mark offers a place from which to believe the image. You are allowed to leave it. What else becomes convincing only when we remain in the assigned place?",
+      "report": "doc/book/iterations/2026-09-20-escher-review/model-checks.json",
+      "report_label": "Controls, visible marker, height and projection checks"
+    },
+    {
+      "title": "Keep the comparison; make the claim testable",
+      "description": "The pipe stays beside the first experiment and the trident remains at the rear. Two rods becoming three tines does not alone establish impossibility: the reader is invited to follow an edge. The book, wall speech, registry descriptions and current encounter hashes agree. Other Foundations manuscripts and maps are byte-preserved.",
+      "images": [
+        "doc/book/iterations/2026-09-20-escher-review/escher-approach.png",
+        "doc/book/iterations/2026-09-20-escher-review/escher-drop.png"
+      ],
+      "captions": [
+        "The entrance study and pipe, with the other comparisons beyond.",
+        "CLOSING DROP: the extra dark tread marks a continued rise; the marker returns to the actual first tread."
+      ],
+      "image_note": "Current Godot museum views. Five selected collision-body approaches pass. They do not constitute a continuous route test or learner verification. No live museum restart or bake replacement was performed.",
+      "text_kind": "book — recognition and inspection",
+      "before": "Consistency is not compositional. You can verify every step and learn nothing about the loop, and this is not a limitation of care or of time — it is a fact about what local verification is. The information that the staircase does not close is not present at any junction. It appears only in the sum.",
+      "after": "Recognition is generous. It supplies stairs we want to climb and connections we expect to continue. This hall asks us to keep that generosity while also approaching, counting, changing position. The pleasure of the impossible image survives finding how a particular model was made.",
+      "report": "doc/book/iterations/2026-09-20-escher-review/SUMMARY.md",
+      "report_label": "Decisions, preserved work and remaining limits"
+    },
+    {
+      "title": "Next: what counts as a construction?",
+      "description": "Brouwer is next. Inspect its constructive-evidence encounter before changing the text. Florensky still lacks an authored museum hall; Crisis Synthesis follows. Seven of eight declared halls are authored, so the sequence is not marked complete.",
+      "report": "doc/book/iterations/2026-09-20-escher-review/content-checks.json",
+      "report_label": "Focused integration and preservation checks"
+    }
+  ]
+}

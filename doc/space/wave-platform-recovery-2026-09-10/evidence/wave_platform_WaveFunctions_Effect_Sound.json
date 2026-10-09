@@ -1,0 +1,510 @@
+{
+  "artifacts_loaded": true,
+  "checks": 152,
+  "failures": [],
+  "headset_verified": false,
+  "measurements": [
+    {
+      "boundary_walls": 50,
+      "map": "WaveFunctions_Effect_Sound",
+      "platforms": 25,
+      "stamps": [
+        {
+          "cell": [
+            1,
+            1
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(1.5, 0.0, 5.5)",
+          "support_anchor": [
+            1.5,
+            0.0,
+            1.5
+          ],
+          "token": "BigPipeSystem"
+        },
+        {
+          "cell": [
+            2,
+            2
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(2.5, 0.167059, 6.5)",
+          "support_anchor": [
+            2.5,
+            0.0,
+            2.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            3,
+            2
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(3.5, 1.0, 6.5)",
+          "support_anchor": [
+            3.5,
+            1.0,
+            2.5
+          ],
+          "token": "AudioContr"
+        },
+        {
+          "cell": [
+            5,
+            2
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(5.5, 1.167059, 6.5)",
+          "support_anchor": [
+            5.5,
+            1.0,
+            2.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            10,
+            2
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(10.5, 0.167059, 6.5)",
+          "support_anchor": [
+            10.5,
+            0.0,
+            2.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            11,
+            2
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(11.5, 1.0, 6.5)",
+          "support_anchor": [
+            11.5,
+            1.0,
+            2.5
+          ],
+          "token": "GlassRack"
+        },
+        {
+          "cell": [
+            2,
+            3
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(2.5, 0.167059, 7.5)",
+          "support_anchor": [
+            2.5,
+            0.0,
+            3.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            3,
+            3
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(3.5, 0.0, 7.5)",
+          "support_anchor": [
+            3.5,
+            0.0,
+            3.5
+          ],
+          "token": "AudioContr"
+        },
+        {
+          "cell": [
+            5,
+            3
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(5.5, 2.0, 7.5)",
+          "support_anchor": [
+            5.5,
+            1.0,
+            3.5
+          ],
+          "token": "RackSineBasic"
+        },
+        {
+          "cell": [
+            10,
+            3
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(10.5, 0.0, 7.5)",
+          "support_anchor": [
+            10.5,
+            0.0,
+            3.5
+          ],
+          "token": "cable_builder"
+        },
+        {
+          "cell": [
+            11,
+            3
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(11.5, 1.0, 7.5)",
+          "support_anchor": [
+            11.5,
+            1.0,
+            3.5
+          ],
+          "token": "VRAudioMonitor"
+        },
+        {
+          "cell": [
+            7,
+            4
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(7.5, 0.167059, 8.5)",
+          "support_anchor": [
+            7.5,
+            0.0,
+            4.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            8,
+            4
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(8.5, 0.167059, 8.5)",
+          "support_anchor": [
+            8.5,
+            0.0,
+            4.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            9,
+            4
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(9.5, 1.167059, 8.5)",
+          "support_anchor": [
+            9.5,
+            1.0,
+            4.5
+          ],
+          "token": "pick_up_cube"
+        },
+        {
+          "cell": [
+            10,
+            4
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(10.5, 1.0, 8.5)",
+          "support_anchor": [
+            10.5,
+            1.0,
+            4.5
+          ],
+          "token": "dark_sphere"
+        },
+        {
+          "cell": [
+            4,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(4.5, 1.0, 9.5)",
+          "support_anchor": [
+            4.5,
+            1.0,
+            5.5
+          ],
+          "token": "DualBallFMController"
+        },
+        {
+          "cell": [
+            5,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(5.5, 2.0, 9.5)",
+          "support_anchor": [
+            5.5,
+            1.0,
+            5.5
+          ],
+          "token": "Rack303Acid"
+        },
+        {
+          "cell": [
+            6,
+            5
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(6.5, 0.0, 9.5)",
+          "support_anchor": [
+            6.5,
+            0.0,
+            5.5
+          ],
+          "token": "rack_room"
+        },
+        {
+          "cell": [
+            7,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(7.5, 2.0, 9.5)",
+          "support_anchor": [
+            7.5,
+            1.0,
+            5.5
+          ],
+          "token": "RackMoogBass"
+        },
+        {
+          "cell": [
+            8,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(8.5, 2.0, 9.5)",
+          "support_anchor": [
+            8.5,
+            1.0,
+            5.5
+          ],
+          "token": "RackDX7Piano"
+        },
+        {
+          "cell": [
+            9,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(9.5, 1.0, 9.5)",
+          "support_anchor": [
+            9.5,
+            1.0,
+            5.5
+          ],
+          "token": "AudioContr"
+        },
+        {
+          "cell": [
+            10,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(10.5, 1.0, 9.5)",
+          "support_anchor": [
+            10.5,
+            1.0,
+            5.5
+          ],
+          "token": "audio_catalog_tablet"
+        },
+        {
+          "cell": [
+            11,
+            5
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(11.5, 1.0, 9.5)",
+          "support_anchor": [
+            11.5,
+            1.0,
+            5.5
+          ],
+          "token": "AudioContr"
+        },
+        {
+          "cell": [
+            6,
+            6
+          ],
+          "floor": 0.0,
+          "plinth_h": 0.0,
+          "position": "(6.5, 0.0, 10.5)",
+          "support_anchor": [
+            6.5,
+            0.0,
+            6.5
+          ],
+          "token": "wave_interference_3d"
+        },
+        {
+          "cell": [
+            3,
+            8
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(3.5, 1.0, 12.5)",
+          "support_anchor": [
+            3.5,
+            1.0,
+            8.5
+          ],
+          "token": "harmonic_distance_table"
+        },
+        {
+          "cell": [
+            5,
+            8
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(5.5, 1.0, 12.5)",
+          "support_anchor": [
+            5.5,
+            1.0,
+            8.5
+          ],
+          "token": "chord_tension_spring"
+        },
+        {
+          "cell": [
+            9,
+            8
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(9.5, 1.0, 12.5)",
+          "support_anchor": [
+            9.5,
+            1.0,
+            8.5
+          ],
+          "token": "timbre_sculptor"
+        },
+        {
+          "cell": [
+            3,
+            9
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(3.5, 1.7, 13.5)",
+          "support_anchor": [
+            3.5,
+            1.0,
+            9.5
+          ],
+          "token": "GlassRack"
+        },
+        {
+          "cell": [
+            2,
+            10
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(2.5, 1.0, 14.5)",
+          "support_anchor": [
+            2.5,
+            1.0,
+            10.5
+          ],
+          "token": "MarioSoundController"
+        },
+        {
+          "cell": [
+            2,
+            11
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(2.5, 1.0, 15.5)",
+          "support_anchor": [
+            2.5,
+            1.0,
+            11.5
+          ],
+          "token": "MarioSoundController"
+        },
+        {
+          "cell": [
+            5,
+            11
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(5.5, 1.4, 15.5)",
+          "support_anchor": [
+            5.5,
+            1.0,
+            11.5
+          ],
+          "token": "MelodyChaser3D"
+        },
+        {
+          "cell": [
+            2,
+            12
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(2.5, 1.0, 16.5)",
+          "support_anchor": [
+            2.5,
+            1.0,
+            12.5
+          ],
+          "token": "MarioSoundController"
+        },
+        {
+          "cell": [
+            4,
+            12
+          ],
+          "floor": 1.0,
+          "plinth_h": 0.0,
+          "position": "(4.5, 1.0, 16.5)",
+          "support_anchor": [
+            4.5,
+            1.0,
+            12.5
+          ],
+          "token": "lab_table"
+        }
+      ]
+    }
+  ]
+}

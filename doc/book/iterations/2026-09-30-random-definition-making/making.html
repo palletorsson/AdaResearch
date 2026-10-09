@@ -1,0 +1,74 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Make a colour return · complete teaching study</title><style>
+:root{color-scheme:light;--paper:#f5f1e8;--ink:#222725;--accent:#7b423f}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:19px/1.75 Georgia,serif}a{color:var(--accent);text-underline-offset:4px}nav{position:sticky;top:0;z-index:5;background:#f5f1e8f5;border-bottom:1px solid #cec9bd;padding:13px max(24px,calc((100vw - 1100px)/2));font:14px/1.5 system-ui;display:flex;gap:24px;flex-wrap:wrap}main{max-width:1100px;margin:55px auto;padding:0 28px 70px}.reading{max-width:740px;margin:auto}.kicker{font:12px/1.5 system-ui;letter-spacing:.17em;text-transform:uppercase;color:#725a52}h1{font-weight:normal;font-size:clamp(36px,5vw,60px);line-height:1.12;margin:18px 0 30px}h2{font-weight:normal;line-height:1.3;margin-top:50px}h3{font:600 20px/1.5 system-ui}p{margin:1.15em 0}pre{overflow:auto;border-left:3px solid #bf9882;padding:19px 22px;background:#e9e5db;font:14px/1.65 Consolas,monospace;tab-size:4}code{font-size:.85em}pre code{font-size:inherit}.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:24px 0}img{width:100%;height:auto;display:block;border-radius:3px}figcaption,.note{font:14px/1.6 system-ui;color:#53605b;margin:10px 0}.panel{padding:20px 25px;background:#e9e5db;margin:22px 0}summary{cursor:pointer;font:16px/1.6 system-ui}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #cec9bd;padding:10px;text-align:left}.footnote{font-size:15px;border-top:1px solid #cec9bd;margin-top:40px}details{margin:15px 0}footer{margin-top:50px;font:13px/1.7 system-ui;color:#53605b}@media(max-width:700px){.pair{grid-template-columns:1fr}main{margin-top:28px}body{font-size:18px}}
+</style><nav><a href="index.html">Review</a><a href="reading.html#reading">Read the encounter</a><a href="making.html#making">Make the study</a><a href="random-definition-study.zip">Download Godot project</a><a href="index.html#changes">Exact changes</a></nav><main><article class="reading" id="making"><p class="kicker">Random Definition · Making · 30 September 2026</p><h1>Make a colour return</h1>
+<p>In the room, a seed helped us recover a colour arrangement. Here we will make that return ourselves: give one cube a generated colour, repeat it, then change the result without changing the seed.</p>
+<p>This builds on <code>_ready()</code> from Point Zero, arrays and loops from Array, and material colour from Colour. The new tool is a local <code>RandomNumberGenerator</code>. We borrow its internal algorithm, just as we borrow the renderer. What we will control is when it draws and what those draws become. Random Entropy will ask what remains when we count the values instead of keeping their arrangement.</p>
+<p>Use the <a href="/book-review/doc/book/iterations/2026-09-30-random-definition-making/random-definition-study.zip">standalone study</a>, with Day Zero's editor and run workflow already in place. Work in <code>study.gd</code>; keep <code>study.tscn</code> as the main scene. <code>display.gd</code> supplies the cubes, one material per cube and a REPLAY button. It does not request random values. Each numbered file in <code>steps/</code> is a complete version you can copy into <code>study.gd</code> if you lose your place.</p>
+<h2>1. Give one cube three values</h2>
+<p>The project opens at this first step. Its complete script is:</p>
+<pre><code class="language-gdscript">extends Node3D
+
+var rng := RandomNumberGenerator.new()
+
+func _ready() -&gt; void:
+    $Display.build(1, false)
+    replay()
+
+func replay() -&gt; void:
+    var cube: MeshInstance3D = $Display.left[0]
+    var material: StandardMaterial3D = cube.material_override
+    var a := rng.randf()
+    var b := rng.randf()
+    var c := rng.randf()
+    material.albedo_color = Color(a, b, c)
+</code></pre>
+<p><code>$Display.build(1, false)</code> asks the supplied display for one cube and no second grid. The cube is the first member, <code>[0]</code>, of its <code>left</code> array. <code>material</code> refers to that cube's own material. These are the things already prepared for us; the three calls to <code>rng.randf()</code> are our new work.</p>
+<p>Each call returns one number between zero and one. <code>Color(a, b, c)</code> assigns them to red, green and blue, in that order. Press REPLAY or Space. The helper calls <code>replay()</code> again; the generator continues from where the previous calls left it. Repetition is possible, but we have given it no instruction to recover a chosen colour.</p>
+<h2>2. Give the return a beginning</h2>
+<p>Add this variable beside <code>rng</code>:</p>
+<pre><code class="language-gdscript">var seed_value := 42
+</code></pre>
+<p>Then make this the first line inside <code>replay()</code>:</p>
+<pre><code class="language-gdscript">rng.seed = seed_value
+</code></pre>
+<p>Press REPLAY several times. Nothing appears to happen, although the code has requested three values again. Setting the seed puts this generator back at the same beginning. Change <code>42</code> to <code>137</code> and run again. Keep a colour you like by keeping its seed and this procedure. The complete version is <code>steps/02-seed.gd</code>.</p>
+<h2>3. Let the array receive the sequence</h2>
+<p>Change the display request to <code>$Display.build(4, false)</code>. It now gives us a 4 × 4 grid. In <code>replay()</code>, keep the seed reset once at the start, then colour each cube:</p>
+<pre><code class="language-gdscript">rng.seed = seed_value
+for cube in $Display.left:
+    var a := rng.randf()
+    var b := rng.randf()
+    var c := rng.randf()
+    var colour := Color(a, b, c)
+    var material: StandardMaterial3D = cube.material_override
+    material.albedo_color = colour
+</code></pre>
+<p>The loop reuses Array's ordered collection. Three draws per cube, sixteen cubes: forty-eight values receive a place. The supplied display orders cubes left to right, bottom row first, as the museum instrument does. REPLAY keeps the arrangement. The complete version is <code>steps/03-grid.gd</code>.</p>
+<p>Try moving the seed reset inside the loop, just before <code>var a</code>. Every cube now starts at the same three values. Move the reset back outside. Its position changes the pattern without changing the seed.</p>
+<h2>4. Put two beginnings beside each other</h2>
+<p>Use <code>steps/04-pair.gd</code>. Its display request is <code>$Display.build(4, true)</code>. The same colouring loop is now a function called <code>colour_grid(cubes)</code>. <code>replay()</code> calls it once with the left array and once with the right:</p>
+<pre><code class="language-gdscript">colour_grid($Display.left)
+colour_grid($Display.right)
+</code></pre>
+<p>The function resets the generator <strong>before each grid</strong>. Check the same cell on both sides. Press REPLAY and check another. If we reset only once before both grids, the right would continue after the left's forty-eight draws. Equal seeds are useful here because we also keep the requests and their assignment equal.</p>
+<h2>5. Spend one value without colouring anything</h2>
+<p>Use <code>steps/05-unused-draw.gd</code>. A <code>skip_first</code> argument tells <code>colour_grid</code> whether to make this extra request, after resetting the seed and before entering the cube loop:</p>
+<pre><code class="language-gdscript">if skip_first:
+    rng.randf()
+</code></pre>
+<p><code>replay()</code> passes <code>false</code> for the left grid and <code>true</code> for the right. The left uses forty-eight draws; the right consumes forty-nine but still gives forty-eight to its colours. REPLAY now recovers the difference too.</p>
+<p>Follow the first cube: the left takes <code>(a, b, c)</code>; the right takes <code>(b, c, d)</code>. No value has changed its position in the generated stream. A different part of that stream is being assigned to each channel.</p>
+<h2>6. Keep the draws. Change their roles.</h2>
+<p>Return to the matched pair from step 4, removing the unused draw. This time keep both beginnings equal and swap the right grid's red and blue assignments. <code>steps/06-channel-roles.gd</code> is the complete version. Its loop first constructs:</p>
+<pre><code class="language-gdscript">var colour := Color(a, b, c)
+</code></pre>
+<p>Then, only for the right grid:</p>
+<pre><code class="language-gdscript">if swap_channels:
+    colour = Color(c, b, a)
+</code></pre>
+<p>Find a cube with visibly different red and blue amounts. Its green stays the same. Both grids consumed the same forty-eight values. We changed what a value does, without requesting another one.</p>
+<p>Choose which comparison you want to keep. Then replace the right-hand assignment with <code>Color(a, a, a)</code>: one requested value now supplies all three channels. The other two requests remain in the loop, so later cells still begin at the same place in the stream.</p>
+<p>You now have a small construction you can alter: a generator, a repeatable beginning, an ordered array and a choice about what each value becomes. The colour grids are one use of those parts. Their arrangement no longer has to exhaust what the program can do.</p>
+<h2>Beside this lesson</h2>
+<p>The museum has 8 × 8 grids and twenty-four-draw bar strips; this study uses 4 × 4 grids so individual cells stay easy to compare. Both use Godot's generator and the same reset → request → assign order. The bars show a short prefix, not evidence from which to infer the generator's period. Godot documents reproducible seeded sequences but treats the underlying algorithm as an implementation detail: keep the engine version with a study you need to reproduce.</p>
+<p><a href="/book-review/commons/maps/Random_Definition/technical.md">Technical companion</a>: current placement, controls, state restoration and implementation references. <a href="https://docs.godotengine.org/en/stable/classes/class_randomnumbergenerator.html">Godot's generator reference</a>.</p><h2>The editable construction</h2><figure><img src="01-colour.png" alt="Step 1: one generated colour. Standalone Godot study."><figcaption>Step 1: one generated colour. Standalone Godot study.</figcaption></figure><figure><img src="05-unused-draw.png" alt="Step 5: the right grid spends one unused draw. Standalone Godot study."><figcaption>Step 5: the right grid spends one unused draw. Standalone Godot study.</figcaption></figure><figure><img src="06-channel-roles.png" alt="Step 6: both grids keep the same draws; only right-hand red and blue exchange roles. Standalone Godot study."><figcaption>Step 6: both grids keep the same draws; only right-hand red and blue exchange roles. Standalone Godot study.</figcaption></figure></article></main></html>

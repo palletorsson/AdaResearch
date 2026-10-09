@@ -1,0 +1,272 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "grid complete",
+      "passed": true
+    },
+    {
+      "name": "actual address lesson present",
+      "passed": true
+    },
+    {
+      "name": "console has indexed this room's floor",
+      "passed": true
+    },
+    {
+      "name": "selected address resolves to actual floor coordinate",
+      "passed": true
+    },
+    {
+      "name": "five console controls and no automatic overwrite",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: console-and-floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-before",
+      "passed": true
+    },
+    {
+      "name": "actual COLOUR control writes first pink ink",
+      "passed": true
+    },
+    {
+      "name": "only the selected floor instance changes",
+      "passed": true
+    },
+    {
+      "name": "console swatch reads actual stored value",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: edited",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: readout-edited",
+      "passed": true
+    },
+    {
+      "name": "X moves selection without moving the exception",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: attention-away",
+      "passed": true
+    },
+    {
+      "name": "five X steps return to the stored exception",
+      "passed": true
+    },
+    {
+      "name": "Z advances the other coordinate",
+      "passed": true
+    },
+    {
+      "name": "five Z steps return without rewriting colour",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: returned",
+      "passed": true
+    },
+    {
+      "name": "ordinary walk passes beside the console",
+      "passed": true
+    },
+    {
+      "name": "ordinary walk reaches the painted square",
+      "passed": true
+    },
+    {
+      "name": "edited floor supports the walker",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: standing-on-colour",
+      "passed": true
+    },
+    {
+      "name": "RULE overwrites the exception with its original value",
+      "passed": true
+    },
+    {
+      "name": "rewrite keeps selected address and standing support",
+      "passed": true
+    },
+    {
+      "name": "equal coordinate sums share a colour",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-after",
+      "passed": true
+    },
+    {
+      "name": "PALETTE uses another collection with the same rule",
+      "passed": true
+    },
+    {
+      "name": "rule reaches addresses outside manual region",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: another-palette",
+      "passed": true
+    },
+    {
+      "name": "three palette steps restore original collection",
+      "passed": true
+    },
+    {
+      "name": "ordinary walk returns from the recoloured floor",
+      "passed": true
+    },
+    {
+      "name": "ordinary walk returns to the console approach",
+      "passed": true
+    },
+    {
+      "name": "all instance transforms remain unchanged",
+      "passed": true
+    },
+    {
+      "name": "focused encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "colour_precision": {
+      "requested": "ff35ac",
+      "stored": "ff35ac",
+      "tolerance_per_channel": 0.00392156862745098
+    },
+    "instance_count": 887,
+    "manual_addresses": 25,
+    "rule_addresses": 321,
+    "states": [
+      {
+        "readout": "(10,10)  #4b0082",
+        "selected": [
+          10,
+          10
+        ],
+        "state": "rule-before",
+        "stored_at_10_10": "4b0082"
+      },
+      {
+        "readout": "(10,10)  #ff35ac",
+        "selected": [
+          10,
+          10
+        ],
+        "state": "edited",
+        "stored_at_10_10": "ff35ac"
+      },
+      {
+        "readout": "(11,10)  #006400",
+        "selected": [
+          11,
+          10
+        ],
+        "state": "attention-away",
+        "stored_at_10_10": "ff35ac"
+      },
+      {
+        "readout": "(10,10)  #ff35ac",
+        "selected": [
+          10,
+          10
+        ],
+        "state": "returned",
+        "stored_at_10_10": "ff35ac"
+      },
+      {
+        "readout": "(10,10)  #4b0082",
+        "selected": [
+          10,
+          10
+        ],
+        "state": "rule-after",
+        "stored_at_10_10": "4b0082"
+      },
+      {
+        "readout": "(10,10)  #12172f",
+        "selected": [
+          10,
+          10
+        ],
+        "state": "another-palette",
+        "stored_at_10_10": "12172f"
+      }
+    ],
+    "walks": [
+      {
+        "arrived": true,
+        "reached": [
+          9.38969612121582,
+          0.000257702544331551,
+          16.7075862884521
+        ],
+        "target": [
+          9.39999961853027,
+          0.0500000007450581,
+          16.7000007629395
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          10.0002584457397,
+          0.000257702544331551,
+          10.0000324249268
+        ],
+        "target": [
+          10.0,
+          0.0500000007450581,
+          10.0
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          9.40372180938721,
+          0.000257702544331551,
+          16.6579971313477
+        ],
+        "target": [
+          9.39999961853027,
+          0.0500000007450581,
+          16.7000007629395
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          7.03832387924194,
+          0.000257702544331551,
+          16.9990577697754
+        ],
+        "target": [
+          7.0,
+          0.0500000007450581,
+          17.0
+        ]
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Grid_Pallet",
+  "scope": "Isolated production museum. Supplied pointer callbacks and ordinary-controller key journeys, actual MultiMesh values and transforms, native captures. No headset, tracked reach, colour calibration, learner or performance claim."
+}

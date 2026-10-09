@@ -1,0 +1,41 @@
+{
+  "started": "2026-09-14T13:57:40+02:00",
+  "finished": "2026-09-14T13:58:54+02:00",
+  "pid": 24696,
+  "exit": 0,
+  "checks": 99,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/menger_encounter_probe_base.gd": "01321f9c2161c8e7cc2c340ed6a62c89a9babb100df672d2d3ffcc04e2f82d73",
+    "ada_run/menger_encounter_acceptance.gd": "8db16ff9b8934be26a90c7d74183fbc5997f518f7f8e48275afb2c77e3b8651a",
+    "commons/maps/Fractal_MengerSponge/map_data.json": "ad88e39eae878114af14b8ff42b4a43dcaa82704bbf0232f0de796c903f23c1f",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/menger-encounter-review-2026-09-14/review-plan.json": "14dcc3e8c597bae25c4e21524cf75c228f5815fe605956653bc5c1c02f5d975f",
+    "commons/artifacts/menger_lesson/menger_lesson.gd": "bfea54abad31952c6de3e97a85690332b126c50873237ac9965c25c8919a434c",
+    "algorithms/fractals/mengersponge/menger_sponge.gd": "860055ceea8880e95659ba186cbc8d0efa6510727b375e204ddcebe0b3335d17",
+    "algorithms/fractals/mengersponge/menger_sponge.tscn": "cb740970d6b41cb1cda0f6fbdbdfbc694734defdce549353150ec2f3c586497f",
+    "commons/movement/museum_flight_box.gd": "1b406fc917e2320e9d04a2100573a346971f26aaf9839cb709d4b6bdbadb095f",
+    "commons/movement/museum_flight_provider.gd": "a42443aca3a3bdd475ed97ef7614c2ce242aa4dc5329ef26a4fcc812fcdc9804",
+    "commons/scenes/endless_museum.gd": "69c8eb9b82bb13f474a9ce5475f9a9e680c4a028b5c348252f993e67c2f2d897",
+    "commons/scenes/DesktopPlayer.gd": "38c6da96f7b5dcaabb0f48cf53f270b5a3d1ab5af8b075924967ed9aafd8828e",
+    "commons/maps/Fractal_MengerSponge/final.md": "dd536779ded483cc5dd5bc08bd28addb5e9442aaf699f39e95d74d234b801c7b",
+    "commons/data/artifact_roles.json": "9b01206f8e069e0c8a0f1aede9964a4c2eec501277c70acf1db595dbe64c0044",
+    "commons/data/book/fractals.json": "f8c51af0b17735821582f898e9db79d7e3400cffd36706d619c714ad10d97551",
+    "commons/data/trunk_branches.json": "4988decb8269f9bac959708f0b5a172f38cc4d0ddc50efdad11cf556c4fe8481"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

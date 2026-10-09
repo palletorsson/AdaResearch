@@ -1,0 +1,202 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "fixed motif lesson is placed",
+      "passed": true
+    },
+    {
+      "name": "source has sixteen cells and eight paints",
+      "passed": true
+    },
+    {
+      "name": "source buttons read top row first",
+      "passed": true
+    },
+    {
+      "name": "legacy touch editor remains inactive",
+      "passed": true
+    },
+    {
+      "name": "reference fields retain independent P1 and PM rules",
+      "passed": true
+    },
+    {
+      "name": "panels share one source image",
+      "passed": true
+    },
+    {
+      "name": "panels and floor give each motif forty centimetres",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-fixed-fields",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-p1",
+      "passed": true
+    },
+    {
+      "name": "PM leaves source cells and bytes unchanged",
+      "passed": true
+    },
+    {
+      "name": "PM reaches the floor rule",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-pm",
+      "passed": true
+    },
+    {
+      "name": "rule switch changes the visible floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: floor-rule-only",
+      "passed": true
+    },
+    {
+      "name": "rule switch preserves visible reference fields",
+      "passed": true
+    },
+    {
+      "name": "P1 returns the translating floor",
+      "passed": true
+    },
+    {
+      "name": "FLIP X changes source cells",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: source-flipped",
+      "passed": true
+    },
+    {
+      "name": "source edit changes visible reference fields",
+      "passed": true
+    },
+    {
+      "name": "source edit leaves reference rules fixed",
+      "passed": true
+    },
+    {
+      "name": "two source reflections return the motif",
+      "passed": true
+    },
+    {
+      "name": "first quarter turn changes the asymmetric source",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: source-turned",
+      "passed": true
+    },
+    {
+      "name": "four quarter turns return the source",
+      "passed": true
+    },
+    {
+      "name": "pointer paint changes only the chosen address",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: an-interruption-repeated",
+      "passed": true
+    },
+    {
+      "name": "new mark reaches both reference images",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: source-with-one-new-cell",
+      "passed": true
+    },
+    {
+      "name": "RESET returns source and P1",
+      "passed": true
+    },
+    {
+      "name": "RESET can itself be undone",
+      "passed": true
+    },
+    {
+      "name": "paint can be undone",
+      "passed": true
+    },
+    {
+      "name": "all edits leave physical floor geometry unchanged",
+      "passed": true
+    },
+    {
+      "name": "ordinary body enters bay through existing opening",
+      "passed": true
+    },
+    {
+      "name": "ordinary body approaches editor",
+      "passed": true
+    },
+    {
+      "name": "ordinary body changes viewing position",
+      "passed": true
+    },
+    {
+      "name": "ordinary body returns to approach",
+      "passed": true
+    },
+    {
+      "name": "ordinary body leaves bay through same opening",
+      "passed": true
+    },
+    {
+      "name": "walking preserves source and reference rules",
+      "passed": true
+    },
+    {
+      "name": "reading encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "floor_changed_bytes": 143546,
+    "ordinary body approaches editor": [
+      0.0653553009033203,
+      0.000836626510135829,
+      1.71192741394043
+    ],
+    "ordinary body changes viewing position": [
+      0.669404983520508,
+      0.000836626510135829,
+      1.59558200836182
+    ],
+    "ordinary body enters bay through existing opening": [
+      -0.0321445465087891,
+      0.000836626510135829,
+      2.00667858123779
+    ],
+    "ordinary body leaves bay through same opening": [
+      -6.97260189056396,
+      0.000836626510135829,
+      2.00685787200928
+    ],
+    "ordinary body returns to approach": [
+      0.00773239135742188,
+      0.000836626510135829,
+      2.0056324005127
+    ],
+    "reference_rule_switch_changed_bytes": 0,
+    "station_world": [
+      22.5,
+      0.0,
+      9.5
+    ]
+  },
+  "passed": true,
+  "room": "Tutorial_Pattern",
+  "scope": "Real museum with pointer callbacks, rendered-image comparisons, stored-source comparisons and ordinary-controller approach/return. No recipe saved. Headset reach/comfort, performance and learner experience remain unverified."
+}

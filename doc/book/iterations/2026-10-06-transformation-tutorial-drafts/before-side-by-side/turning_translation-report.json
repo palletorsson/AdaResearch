@@ -1,0 +1,717 @@
+{
+  "checks": [
+    {
+      "id": "pre/still_when_operations_zero",
+      "passed": true
+    },
+    {
+      "id": "pre/rise_preserves_distances",
+      "passed": true
+    },
+    {
+      "id": "pre/rise_preserves_orientation",
+      "passed": true
+    },
+    {
+      "id": "pre/rise_quarter_period",
+      "passed": true
+    },
+    {
+      "id": "pre/continuous_turn",
+      "passed": true
+    },
+    {
+      "id": "pre/turn_keeps_size",
+      "passed": true
+    },
+    {
+      "id": "pre/time_30",
+      "passed": true
+    },
+    {
+      "id": "pre/combined_rise_30",
+      "passed": true
+    },
+    {
+      "id": "pre/combined_turn_30",
+      "passed": true
+    },
+    {
+      "id": "pre/combined_scale_30",
+      "passed": true
+    },
+    {
+      "id": "pre/distances_scale_together_30",
+      "passed": true
+    },
+    {
+      "id": "pre/lower_size_bound_30",
+      "passed": true
+    },
+    {
+      "id": "pre/sensor_follows_transform_30",
+      "passed": true
+    },
+    {
+      "id": "pre/time_120",
+      "passed": true
+    },
+    {
+      "id": "pre/combined_rise_120",
+      "passed": true
+    },
+    {
+      "id": "pre/combined_turn_120",
+      "passed": true
+    },
+    {
+      "id": "pre/combined_scale_120",
+      "passed": true
+    },
+    {
+      "id": "pre/distances_scale_together_120",
+      "passed": true
+    },
+    {
+      "id": "pre/lower_size_bound_120",
+      "passed": true
+    },
+    {
+      "id": "pre/sensor_follows_transform_120",
+      "passed": true
+    },
+    {
+      "id": "pre/slow_only_wave",
+      "passed": true
+    },
+    {
+      "id": "pre/outside_keeps_em_walker",
+      "passed": true
+    },
+    {
+      "id": "pre/overlap_em_walker",
+      "passed": true
+    },
+    {
+      "id": "pre/outside_keeps_player_body",
+      "passed": true
+    },
+    {
+      "id": "pre/overlap_player_body",
+      "passed": true
+    },
+    {
+      "id": "pre/outside_keeps_prop",
+      "passed": true
+    },
+    {
+      "id": "pre/overlap_prop",
+      "passed": true
+    },
+    {
+      "id": "pre/outside_keeps_wrong_layer",
+      "passed": true
+    },
+    {
+      "id": "pre/overlap_wrong_layer",
+      "passed": true
+    },
+    {
+      "id": "pre/old_place_empty",
+      "passed": true
+    },
+    {
+      "id": "pre/new_place_collects",
+      "passed": true
+    },
+    {
+      "id": "intro/owns_nine_boxes",
+      "passed": true
+    },
+    {
+      "id": "intro/start_position",
+      "passed": true
+    },
+    {
+      "id": "intro/start_growth",
+      "passed": true
+    },
+    {
+      "id": "intro/start_turn",
+      "passed": true
+    },
+    {
+      "id": "intro/held_pose",
+      "passed": true
+    },
+    {
+      "id": "intro/travel_reaches_far_bank",
+      "passed": true
+    },
+    {
+      "id": "intro/growth_uniform",
+      "passed": true
+    },
+    {
+      "id": "intro/growth_centre_fixed",
+      "passed": true
+    },
+    {
+      "id": "intro/growth_top_meets_banks",
+      "passed": true
+    },
+    {
+      "id": "intro/quarter_turn",
+      "passed": true
+    },
+    {
+      "id": "intro/turned_edge_meets_bank",
+      "passed": true
+    },
+    {
+      "id": "intro/moved_bank_gap",
+      "passed": true
+    },
+    {
+      "id": "intro/moved_growth_gap",
+      "passed": true
+    },
+    {
+      "id": "intro/middle",
+      "passed": true
+    },
+    {
+      "id": "intro/time_end_30",
+      "passed": true
+    },
+    {
+      "id": "intro/time_return_30",
+      "passed": true
+    },
+    {
+      "id": "intro/time_end_120",
+      "passed": true
+    },
+    {
+      "id": "intro/time_return_120",
+      "passed": true
+    },
+    {
+      "id": "translation/halfway_base30",
+      "passed": true
+    },
+    {
+      "id": "translation/level_base30",
+      "passed": false
+    },
+    {
+      "id": "translation/shape_preserved_base30",
+      "passed": true
+    },
+    {
+      "id": "translation/destination_base30",
+      "passed": true
+    },
+    {
+      "id": "translation/stops_base30",
+      "passed": true
+    },
+    {
+      "id": "translation/halfway_base120",
+      "passed": true
+    },
+    {
+      "id": "translation/level_base120",
+      "passed": false
+    },
+    {
+      "id": "translation/shape_preserved_base120",
+      "passed": true
+    },
+    {
+      "id": "translation/destination_base120",
+      "passed": true
+    },
+    {
+      "id": "translation/stops_base120",
+      "passed": true
+    },
+    {
+      "id": "translation/halfway_corner30",
+      "passed": true
+    },
+    {
+      "id": "translation/level_corner30",
+      "passed": false
+    },
+    {
+      "id": "translation/shape_preserved_corner30",
+      "passed": true
+    },
+    {
+      "id": "translation/destination_corner30",
+      "passed": true
+    },
+    {
+      "id": "translation/stops_corner30",
+      "passed": true
+    },
+    {
+      "id": "translation/halfway_corner120",
+      "passed": true
+    },
+    {
+      "id": "translation/level_corner120",
+      "passed": false
+    },
+    {
+      "id": "translation/shape_preserved_corner120",
+      "passed": true
+    },
+    {
+      "id": "translation/destination_corner120",
+      "passed": true
+    },
+    {
+      "id": "translation/stops_corner120",
+      "passed": true
+    },
+    {
+      "id": "translation/halfway_diagonal30",
+      "passed": true
+    },
+    {
+      "id": "translation/level_diagonal30",
+      "passed": false
+    },
+    {
+      "id": "translation/shape_preserved_diagonal30",
+      "passed": true
+    },
+    {
+      "id": "translation/destination_diagonal30",
+      "passed": true
+    },
+    {
+      "id": "translation/stops_diagonal30",
+      "passed": true
+    },
+    {
+      "id": "translation/halfway_diagonal120",
+      "passed": true
+    },
+    {
+      "id": "translation/level_diagonal120",
+      "passed": false
+    },
+    {
+      "id": "translation/shape_preserved_diagonal120",
+      "passed": true
+    },
+    {
+      "id": "translation/destination_diagonal120",
+      "passed": true
+    },
+    {
+      "id": "translation/stops_diagonal120",
+      "passed": true
+    },
+    {
+      "id": "rotation/quarter_centre_base",
+      "passed": true
+    },
+    {
+      "id": "rotation/pivot_fixed_base",
+      "passed": true
+    },
+    {
+      "id": "rotation/local_offset_fixed_base",
+      "passed": true
+    },
+    {
+      "id": "rotation/rigid_distances_base",
+      "passed": true
+    },
+    {
+      "id": "rotation/mark_moves_base",
+      "passed": true
+    },
+    {
+      "id": "rotation/full_return_base",
+      "passed": true
+    },
+    {
+      "id": "rotation/quarter_centre_orbit",
+      "passed": true
+    },
+    {
+      "id": "rotation/pivot_fixed_orbit",
+      "passed": true
+    },
+    {
+      "id": "rotation/local_offset_fixed_orbit",
+      "passed": true
+    },
+    {
+      "id": "rotation/rigid_distances_orbit",
+      "passed": true
+    },
+    {
+      "id": "rotation/mark_moves_orbit",
+      "passed": true
+    },
+    {
+      "id": "rotation/full_return_orbit",
+      "passed": true
+    },
+    {
+      "id": "rotation/quarter_centre_vertical",
+      "passed": true
+    },
+    {
+      "id": "rotation/pivot_fixed_vertical",
+      "passed": true
+    },
+    {
+      "id": "rotation/local_offset_fixed_vertical",
+      "passed": true
+    },
+    {
+      "id": "rotation/rigid_distances_vertical",
+      "passed": true
+    },
+    {
+      "id": "rotation/mark_moves_vertical",
+      "passed": true
+    },
+    {
+      "id": "rotation/full_return_vertical",
+      "passed": true
+    },
+    {
+      "id": "scale/local_values_base",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_width_base",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_height_base",
+      "passed": true
+    },
+    {
+      "id": "scale/base_on_floor_base",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_parent_base",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_fixed_base",
+      "passed": true
+    },
+    {
+      "id": "scale/local_values_large",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_width_large",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_height_large",
+      "passed": true
+    },
+    {
+      "id": "scale/base_on_floor_large",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_parent_large",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_fixed_large",
+      "passed": true
+    },
+    {
+      "id": "scale/local_values_wide",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_width_wide",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_height_wide",
+      "passed": true
+    },
+    {
+      "id": "scale/base_on_floor_wide",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_parent_wide",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_fixed_wide",
+      "passed": true
+    },
+    {
+      "id": "scale/local_values_double",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_width_double",
+      "passed": true
+    },
+    {
+      "id": "scale/clear_height_double",
+      "passed": true
+    },
+    {
+      "id": "scale/base_on_floor_double",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_parent_double",
+      "passed": true
+    },
+    {
+      "id": "scale/witness_fixed_double",
+      "passed": true
+    },
+    {
+      "id": "body/no_player_stays_full",
+      "passed": true
+    },
+    {
+      "id": "body/finds_em_walker",
+      "passed": true
+    },
+    {
+      "id": "body/scale_em_walker0.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_em_walker0.0",
+      "passed": true
+    },
+    {
+      "id": "body/scale_em_walker1.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_em_walker1.0",
+      "passed": true
+    },
+    {
+      "id": "body/scale_em_walker2.5",
+      "passed": true
+    },
+    {
+      "id": "body/floor_em_walker2.5",
+      "passed": true
+    },
+    {
+      "id": "body/scale_em_walker4.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_em_walker4.0",
+      "passed": true
+    },
+    {
+      "id": "body/scale_em_walker10.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_em_walker10.0",
+      "passed": true
+    },
+    {
+      "id": "body/height_ignored_em_walker",
+      "passed": true
+    },
+    {
+      "id": "body/returns_em_walker",
+      "passed": true
+    },
+    {
+      "id": "body/turn_variant_em_walker",
+      "passed": true
+    },
+    {
+      "id": "body/new_midpoint_em_walker",
+      "passed": true
+    },
+    {
+      "id": "body/finds_player_body",
+      "passed": true
+    },
+    {
+      "id": "body/scale_player_body0.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_player_body0.0",
+      "passed": true
+    },
+    {
+      "id": "body/scale_player_body1.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_player_body1.0",
+      "passed": true
+    },
+    {
+      "id": "body/scale_player_body2.5",
+      "passed": true
+    },
+    {
+      "id": "body/floor_player_body2.5",
+      "passed": true
+    },
+    {
+      "id": "body/scale_player_body4.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_player_body4.0",
+      "passed": true
+    },
+    {
+      "id": "body/scale_player_body10.0",
+      "passed": true
+    },
+    {
+      "id": "body/floor_player_body10.0",
+      "passed": true
+    },
+    {
+      "id": "body/height_ignored_player_body",
+      "passed": true
+    },
+    {
+      "id": "body/returns_player_body",
+      "passed": true
+    },
+    {
+      "id": "body/turn_variant_player_body",
+      "passed": true
+    },
+    {
+      "id": "body/new_midpoint_player_body",
+      "passed": true
+    },
+    {
+      "id": "pit/open_position",
+      "passed": true
+    },
+    {
+      "id": "pit/open_turn",
+      "passed": true
+    },
+    {
+      "id": "pit/open_scale",
+      "passed": true
+    },
+    {
+      "id": "pit/frame_fixed",
+      "passed": true
+    },
+    {
+      "id": "pit/closed_pose",
+      "passed": true
+    },
+    {
+      "id": "pit/progress_base30",
+      "passed": true
+    },
+    {
+      "id": "pit/returns_base30",
+      "passed": true
+    },
+    {
+      "id": "pit/progress_base120",
+      "passed": true
+    },
+    {
+      "id": "pit/returns_base120",
+      "passed": true
+    },
+    {
+      "id": "pit/progress_slow30",
+      "passed": true
+    },
+    {
+      "id": "pit/returns_slow30",
+      "passed": true
+    },
+    {
+      "id": "pit/progress_slow120",
+      "passed": true
+    },
+    {
+      "id": "pit/returns_slow120",
+      "passed": true
+    },
+    {
+      "id": "pit/progress_wider30",
+      "passed": true
+    },
+    {
+      "id": "pit/wider_pose_30",
+      "passed": true
+    },
+    {
+      "id": "pit/returns_wider30",
+      "passed": true
+    },
+    {
+      "id": "pit/progress_wider120",
+      "passed": true
+    },
+    {
+      "id": "pit/wider_pose_120",
+      "passed": true
+    },
+    {
+      "id": "pit/returns_wider120",
+      "passed": true
+    },
+    {
+      "id": "pit/prop_ignored",
+      "passed": true
+    },
+    {
+      "id": "pit/remaining_xr_holds_open",
+      "passed": true
+    },
+    {
+      "id": "pit/leaving_halfway_returns_gradually",
+      "passed": true
+    },
+    {
+      "id": "pit/reentry_reverses_from_current",
+      "passed": true
+    },
+    {
+      "id": "runtime/process_callback",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "translation/level_base30",
+    "translation/level_base120",
+    "translation/level_corner30",
+    "translation/level_corner120",
+    "translation/level_diagonal30",
+    "translation/level_diagonal120"
+  ],
+  "passed": false
+}

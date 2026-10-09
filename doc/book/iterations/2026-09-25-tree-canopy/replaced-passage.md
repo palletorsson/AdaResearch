@@ -1,0 +1,1 @@
+There is no light to seek, no root taking water, no neighbour whose shade changes the next fork. The branches are visible meshes; they do not offer the player's body a climbable support. Their outline invites a promise that their implementation has not made. What would we have to add for one of these forks to become shelter?

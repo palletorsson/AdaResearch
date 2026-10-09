@@ -1,0 +1,72 @@
+{
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/vertical.gd": {
+    "sha256": "6ee050b65ff899509dbe5dd64d32b876f3b39190a86ee9b4dcb2e0143c1b4df7",
+    "native_filename": "vertical.gd",
+    "edit": {
+      "id": "vertical",
+      "kind": "replace",
+      "before": "    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n",
+      "after": "    point_b.position = CENTRE + Vector3(0, 1.0, 0)\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/coincident.gd": {
+    "sha256": "527b640f57d75a3be1ea47d18817eccc08f75d5428face171512cb12c0854c67",
+    "native_filename": "coincident.gd",
+    "edit": {
+      "id": "coincident",
+      "kind": "replace",
+      "before": "    point_b.position = CENTRE + Vector3(1.0, 0, 0)\n",
+      "after": "    point_b.position = CENTRE\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/reverse_direction.gd": {
+    "sha256": "c3e92ee74bd57b19742a4cc051a616b025e6dd501b10ec11ccce55ad68ee6080",
+    "native_filename": "reverse_direction.gd",
+    "edit": {
+      "id": "reverse_direction",
+      "kind": "replace",
+      "before": "    var displacement := b - a\n",
+      "after": "    var displacement := a - b\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_parallel.gd": {
+    "sha256": "5a0a3f5c281b6d1ee2791ac549bf72988e2ab10ad9b4823f7e348c8d679d99e3",
+    "native_filename": "two_lines_parallel.gd",
+    "edit": {
+      "id": "two_lines_parallel",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 1.12, 0)\n    point_b.position = Vector3(0.6, 1.12, 0)\n    var c := Vector3(-0.6, 1.62, 0)\n    var d := Vector3(0.6, 1.62, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_plus.gd": {
+    "sha256": "1b6c4eff1f829721f9700fa69601970b239df58c52da8c38c7565628b91b1367",
+    "native_filename": "two_lines_plus.gd",
+    "edit": {
+      "id": "two_lines_plus",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 1.42, 0)\n    point_b.position = Vector3(0.6, 1.42, 0)\n    var c := Vector3(0, 0.82, 0)\n    var d := Vector3(0, 2.02, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_x.gd": {
+    "sha256": "07ec14440157bdb8b53d7297191a9aca6e691eb5dbd2906e6be05fb2560ff5b6",
+    "native_filename": "two_lines_x.gd",
+    "edit": {
+      "id": "two_lines_x",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02, 0)\n    var d := Vector3(0.6, 0.82, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  },
+  "doc/book/iterations/2026-10-05-lines-from-the-carried-point/student/variants/two_lines_x_depth.gd": {
+    "sha256": "9e1ba18eee4ae4d78432e687f424af6b5edf19530cd5702ca472213d8b2601c5",
+    "native_filename": "two_lines_x_depth.gd",
+    "edit": {
+      "id": "two_lines_x_depth",
+      "kind": "insert_after",
+      "anchor": "    add_child(line)\n",
+      "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02,0.2)\n    var d := Vector3(0.6, 0.82,0.2)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+    }
+  }
+}

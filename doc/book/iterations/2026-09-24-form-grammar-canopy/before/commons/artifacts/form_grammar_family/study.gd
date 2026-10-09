@@ -1,0 +1,96 @@
+extends Node3D
+## F6 preview uses the production map's floor and boundary, at artifact-local coordinates.
+const Encounter = preload("res://commons/artifacts/form_grammar_family/form_grammar_family.tscn")
+var encounter: Node3D
+var player: CharacterBody3D
+var camera: Camera3D
+var pitch: float = 0.0
+var automated: bool = false
+
+func _ready() -> void:
+	automated = "--verify" in OS.get_cmdline_user_args()
+	var environment := Environment.new()
+	environment.background_mode = Environment.BG_COLOR
+	environment.background_color = Color("242939")
+	environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	environment.ambient_light_color = Color("c8d0db")
+	environment.ambient_light_energy = 0.5
+	environment.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	var world := WorldEnvironment.new()
+	world.environment = environment
+	add_child(world)
+	var sun := DirectionalLight3D.new()
+	sun.rotation_degrees = Vector3(-40,-25,0)
+	sun.light_energy = 0.9
+	sun.shadow_enabled = true
+	add_child(sun)
+	# Map's one-metre cells: artifact at (10,11), turned 180 degrees.
+	# All floor cells share one slab; walls are taken directly from map data.
+	var map: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://commons/maps/LSystems_Shape_Grammars/map_data.json"))
+	_box(Vector3(21,0.2,24), Vector3(0,-0.1,-0.5), Color("b6b4ad"))
+	var rows: Array = map.layers.structure
+	for z in range(rows.size()):
+		for x in range(rows[z].size()):
+			if str(rows[z][x]) == "w":
+				_box(Vector3(1,5,1),Vector3(10-x,2.5,11-z),Color("444958"))
+	encounter = Encounter.instantiate()
+	add_child(encounter)
+	player = CharacterBody3D.new()
+	player.collision_layer = 2
+	player.collision_mask = 1
+	var collision := CollisionShape3D.new()
+	var capsule := CapsuleShape3D.new()
+	capsule.radius = 0.3
+	capsule.height = 1.8
+	collision.shape = capsule
+	collision.position.y = 0.9
+	player.add_child(collision)
+	camera = Camera3D.new()
+	camera.position.y = 1.7
+	camera.near = 0.05
+	camera.fov = 72
+	player.add_child(camera)
+	add_child(player)
+	player.position = Vector3(0,0.02,9)
+	camera.make_current()
+	if not automated:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		var hud := Label.new()
+		hud.text = "A FAMILY THE CUBE CAN BECOME   /   WASD walk   /   mouse look   /   Esc release"
+		hud.position = Vector2(18,18)
+		add_child(hud)
+	else:
+		var probe = load("res://probe.gd").new()
+		add_child(probe)
+		probe.run.call_deferred(self)
+
+func _box(size: Vector3, at: Vector3, colour: Color) -> void:
+	var mesh := MeshInstance3D.new()
+	var shape := BoxMesh.new()
+	shape.size = size
+	mesh.mesh = shape
+	mesh.position = at
+	var material := StandardMaterial3D.new()
+	material.albedo_color = colour
+	material.roughness = 0.9
+	mesh.material_override = material
+	add_child(mesh)
+	mesh.create_trimesh_collision()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if automated: return
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		player.rotate_y(-event.relative.x * 0.002)
+		pitch = clampf(pitch - event.relative.y * 0.002,-1.4,1.4)
+		camera.rotation.x = pitch
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if event is InputEventMouseButton and event.pressed:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _physics_process(delta: float) -> void:
+	if player == null or automated: return
+	var input := Vector2(float(Input.is_physical_key_pressed(KEY_D))-float(Input.is_physical_key_pressed(KEY_A)),float(Input.is_physical_key_pressed(KEY_S))-float(Input.is_physical_key_pressed(KEY_W))).normalized()
+	var direction := player.basis * Vector3(input.x,0,input.y)
+	player.velocity = Vector3(direction.x*3.2,player.velocity.y-9.8*delta,direction.z*3.2)
+	player.move_and_slide()

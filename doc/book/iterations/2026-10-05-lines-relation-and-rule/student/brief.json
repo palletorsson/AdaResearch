@@ -1,0 +1,8 @@
+{
+  "bring": "Same pickable point, surface and collider from Coordinates.",
+  "make": "Two held endpoints; one segment follows their relation.",
+  "given": "Configured museum hands; unit-scale station; supplied line_skin.gd renderer.",
+  "build": "Keep first point; duplicate once; b-a gives displacement; length gives distance; update each frame.",
+  "check": "Either hand moves one end; same segment follows; release stays; coincident ends hide the segment.",
+  "later": "Two segments: parallel, +, X. Trace stores positions; a mesh later stores vertices without a pickup body per vertex."
+}

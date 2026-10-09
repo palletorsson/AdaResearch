@@ -1,0 +1,15 @@
+from pathlib import Path
+r=Path.cwd()
+def change(m,old,new):
+ p=r/'commons/maps'/m/'final.md';s=p.read_text(encoding='utf-8-sig');assert s.count(old)==1,(m,old);p.write_text(s.replace(old,new),encoding='utf-8')
+change('Change_Intro','Beside the curve, another plot shows how its local slope varies from place to place.','Above the curve, a second plot shows how its local slope varies from place to place.')
+change('Change_Intro','For now the curve waits while we change the distance across which we read it.','For now the curve waits while we change the distance across which we read it.\n\nAcross the hall, a puck circles a closed track with an arrow turning beside it. There, a clock advances the position. Watch how the arrow turns as the puck rounds a bend.')
+change('Change_Intro','Four blue rectangles reach up towards it.','Four blue rectangles reach up towards the same curve.')
+change('Change_Intro','The live rectangles take their heights from the right edges instead of the midpoints.','The live rectangles take their heights from the right edges instead of the midpoints. Another press takes the left edges; one more returns to the midpoints. The held image stays available through all three.')
+change('Change_Intro','Back at the line, `b - a` gave the same answer for a direct walk and a detour.','In **Point_Lines**, `b - a` gave the same answer for a direct walk and a detour.')
+change('Change_Intro','The pulse begins again. We know where it will end, and still have the arch to follow.','The pulse begins again. We know where it will end, and still have the arch to follow.\n\nOther encounters wait beyond the bridge: three sampling rules side by side at the pump, frame-sized steps on the staircase, paper boats in a gutter river, a marble in a swaying bowl. Each offers another way to ask what a description of movement keeps.')
+change('Flow_Field','The panel says **FIELD HELD**.','A label above the far edge of the canvas says FIELD HELD.')
+change('Flow_Field','The previous workbench read a series of addresses chosen along an interval.','The bridge and the benches before it read addresses chosen along an interval.')
+change('Flow_Field','From a little distance the trails can suggest a current.','Elsewhere in this hall, two arrow displays, a particle swarm and steering agents offer other ways to follow a field. The Grand Zoetrope puts twelve poses around a turning drum. Compare its repeated return with a particle’s path across the canvas.\n\nBack at the canvas, the trails can suggest a current from a little distance.')
+change('Flow_Field','In Forces, a push will end and a cube will keep going.','Later in Forces, a push will end and a cube will keep going.')
+print('Two chapters revised; no artifact source or map changes.')

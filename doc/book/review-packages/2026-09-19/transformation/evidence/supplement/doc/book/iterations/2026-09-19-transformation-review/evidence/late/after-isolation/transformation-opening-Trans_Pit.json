@@ -1,0 +1,87 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum embeds requested grid",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "museum grid remains full scale",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three separate pusher lanes remain",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "three common-tempo growers remain",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "pusher uses two-metre authored travel PusherBlock",
+      "passed": true,
+      "value": "(0.0, 0.0, 2.0)"
+    },
+    {
+      "name": "full swept pusher box stays clear of walls PusherBlock",
+      "passed": true,
+      "value": []
+    },
+    {
+      "name": "pusher uses two-metre authored travel @Node3D@4167",
+      "passed": true,
+      "value": "(0.0, 0.0, 2.0)"
+    },
+    {
+      "name": "full swept pusher box stays clear of walls @Node3D@4167",
+      "passed": true,
+      "value": []
+    },
+    {
+      "name": "pusher uses two-metre authored travel @Node3D@4169",
+      "passed": true,
+      "value": "(0.0, 0.0, -2.0)"
+    },
+    {
+      "name": "full swept pusher box stays clear of walls @Node3D@4169",
+      "passed": true,
+      "value": []
+    },
+    {
+      "name": "a 52 cm capsule can use the eastern pusher bypass",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower shares the authored period GrowerBlock",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower shares the authored period @Node3D@4267",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "grower shares the authored period @Node3D@4269",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "map": "Trans_Pit",
+  "measurements": {
+    "bypass_width_probe_m": 0.52,
+    "common_grower_period_s": 6.66666666666667,
+    "grid_origin": "(5.5, -0.5, 5.5)",
+    "pusher_collision_sweep_samples": 81,
+    "pusher_start_@Node3D@4167": "(7.0, 0.99, 3.0)",
+    "pusher_start_@Node3D@4169": "(5.0, 0.99, 5.0)",
+    "pusher_start_PusherBlock": "(3.0, 0.99, 3.0)"
+  }
+}

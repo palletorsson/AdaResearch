@@ -1,0 +1,274 @@
+{
+  "sequence": "lsystems",
+  "scope": "source-grounded authoring cards; not runtime verification",
+  "rooms": [
+    {
+      "room_id": "LSystems_Grammar_Lab",
+      "primary_tokens": [
+        "lsystem_editor"
+      ],
+      "question": "Can the same instructions draw a different plant?",
+      "ontology": "An L-system rewrites symbols; a turtle interpreter assigns movements and turns to the resulting string.",
+      "action": "Keep PRESET and GEN fixed while moving ANGLE; then hold ANGLE fixed and increase GEN once.",
+      "observable": "Angle changes branch directions; generation count changes the rewritten string and its number of segments. The drawing is fitted back into its display.",
+      "mechanism": "_generate applies every symbol replacement to a new string each generation; _draw_lsystem reads F/G as draw,+/- as turns,brackets as saved/restored state.",
+      "limit": "A smaller drawn tree need not contain fewer instructions because the display normalises its bounds. The editor exposes presets, not arbitrary visitor rule-text editing.",
+      "variation": "Proposed extension: Let the visitor compare the unchanged string under two interpreters, then author one replacement rule.",
+      "prior_bridge": "Fractal_CrossSequence",
+      "next_bridge": "LSystems_Growth",
+      "sources": [
+        {
+          "path": "commons/artifacts/lsystem_editor/lsystem_editor.gd",
+          "fact": "_create_vr_controls PRESET/GEN/ANGLE;245–333 rewriting and turtle fit."
+        }
+      ],
+      "placements": [
+        {
+          "x": 5,
+          "z": 4,
+          "token": "lsystem_editor:0:0.5#grammar:koch"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/LSystems_Grammar_Lab/map_data.json": "3e1851f1c02fbb4ec1292951c3a369539a64138b8a040cf7b75715f05eb2d533",
+        "commons/artifacts/lsystem_editor/lsystem_editor.tscn": "0f5cb1e9b9d4ebacbe421528c239ff9be8afa95b8b3ca48cb5a9881a3118ba6f",
+        "commons/artifacts/lsystem_editor/lsystem_editor.gd": "4c330483e53cdef8bd74705be28b52e6f42d78130dd8197d4f710c1d2bbd8abe",
+        "commons/maps/LSystems_Grammar_Lab/intent.md": "81babcc573417bc90bcddbc4b007d85c02a52e2c1481190e18d160323227559c",
+        "commons/maps/LSystems_Grammar_Lab/blurb.md": "9a1f2d9c0ad88318222fdb6ea6325d3561cfbd2994660be884fb244fdd7fde32",
+        "commons/maps/LSystems_Grammar_Lab/critical.md": "c77341d81bd4b5f7da690c8a1e52e1289abd84cd4510d38bac7fe9a8aeb858c6",
+        "commons/maps/LSystems_Grammar_Lab/technical.md": "4beb66e439a1ad4de235d3ee51498eada529222c7815d0b32aa4d9119be23f17"
+      }
+    },
+    {
+      "room_id": "LSystems_Growth",
+      "primary_tokens": [
+        "parametric_lsystem"
+      ],
+      "question": "How can descendants inherit a direction while becoming shorter?",
+      "ontology": "A branching interpreter can carry numerical state such as step length, orientation and depth alongside its position.",
+      "action": "Trace a branch from its base to its tips; compare an early fork with a deeper one.",
+      "observable": "Branch lengths decrease with nesting depth and turns vary within a controlled range.",
+      "mechanism": "_generate rewrites a preset string, resets random seed42; _draw_tree pushes full turtle state, multiplies length by length_decay on branch entry and restores it on exit.",
+      "limit": "This displayed tree is generated from numerical rules, not grown by consuming resources or seeking light. A parametric interpreter is not by itself context-sensitive rewriting.",
+      "variation": "Proposed extension: Show two trees with identical grammar and random seed but different length_decay, retaining their unnormalised lengths.",
+      "prior_bridge": "LSystems_Grammar_Lab",
+      "next_bridge": "LSystems_Grammars_And_Curves",
+      "sources": [
+        {
+          "path": "commons/artifacts/parametric_lsystem/parametric_lsystem.gd",
+          "fact": "123–141 rewriting;143–220 stack of length/orientation/depth;seed42."
+        }
+      ],
+      "placements": [
+        {
+          "x": 7,
+          "z": 5,
+          "token": "parametric_lsystem"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor sliders; use observation. Intended contextual-growth comparison can be developed with placed ContextSensitiveTree later.",
+      "source_hashes": {
+        "commons/maps/LSystems_Growth/map_data.json": "c83f86b2520a716095d227e2d81515c5233080d000f781bcf540073f9004153c",
+        "commons/artifacts/parametric_lsystem/parametric_lsystem.tscn": "8435e957c663d0bb9eb1a0c2d97f89c1dd6f8ba55bf2514e2072aee533235286",
+        "commons/artifacts/parametric_lsystem/parametric_lsystem.gd": "3eaaeacbeb93913d9979f9d07f4d3a39fce96f0c2798eaa6cc574d81ff926513",
+        "commons/maps/LSystems_Growth/intent.md": "aaddac7f8ca97c94dc5e196a13c02b7ef8e058999456725b289550f081e37289",
+        "commons/maps/LSystems_Growth/blurb.md": "34d8ff304fe4c1e9870d7832afea9c17ddf5f7db0cca5bc0cd65e3c1cb1fac58",
+        "commons/maps/LSystems_Growth/critical.md": "740ced9dc347c59f9d3df3b1b8aaaeeca428b5e2205d7a2150924b9d6e36f07f",
+        "commons/maps/LSystems_Growth/technical.md": "163d63b842dad67d7f0b36508a0d69a1abed692ff2dae39e5ed258091bd0dad1"
+      }
+    },
+    {
+      "room_id": "LSystems_Grammars_And_Curves",
+      "primary_tokens": [
+        "the_believing_turtle"
+      ],
+      "question": "Does an instruction contain its own meaning?",
+      "ontology": "The same symbolic sentence can be interpreted with different movement conventions.",
+      "action": "Compare the three labelled turtle drawings:25 degrees,45 degrees,and F means sidle. Find a branch correspondence across them.",
+      "observable": "The same expanded sentence yields different directions and shapes; the sideways reader reinterprets forward movement.",
+      "mechanism": "_ready rewrites one final string; _build_three_turtles calls _walk with changed angle and sideways flag; brackets restore position and heading.",
+      "limit": "Similar labels do not make a perfectly controlled size comparison: step lengths differ and rendering stops after260 segments. The exhibit changes how a word is acted upon, not the string itself.",
+      "variation": "Proposed extension: Invite the visitor to give F a fourth meaning, such as leaving a sound at a position, and compare what remains recognisable.",
+      "prior_bridge": "LSystems_Growth",
+      "next_bridge": "LSystems_Architecture",
+      "sources": [
+        {
+          "path": "commons/artifacts/the_believing_turtle/the_believing_turtle.gd",
+          "fact": "33–43 shared string;117–163 three interpretations and260-segment cap."
+        }
+      ],
+      "placements": [
+        {
+          "x": 9,
+          "z": 4,
+          "token": "the_believing_turtle"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Static constructed comparison, no operable turtle controls promised.",
+      "source_hashes": {
+        "commons/maps/LSystems_Grammars_And_Curves/map_data.json": "ac6af238417ca09493df76153d06042fc3a7b18872f0f2f6d793712c7f8bc071",
+        "commons/artifacts/the_believing_turtle/the_believing_turtle.tscn": "a1f3ecea5a3cb9b8dc2fb7fc3a558c1e2a56630ae0327f86587e2bcb75f40747",
+        "commons/artifacts/the_believing_turtle/the_believing_turtle.gd": "0c79e00378d28269c2d4f68c587707b828d444f854889c0c7b73da540a310836",
+        "commons/maps/LSystems_Grammars_And_Curves/intent.md": "41bc416490e288e19ed4a6b3bcb191483043b7b3f6705f30dd210f6a3115a721",
+        "commons/maps/LSystems_Grammars_And_Curves/blurb.md": "a524cac7304d253cb82e8ca316fe97517e42a7eb1e9fb0a5a328d662c626dc2e",
+        "commons/maps/LSystems_Grammars_And_Curves/critical.md": "2ff5690fb030dc3ad7559cda0affbc9f3e4ebe59e55f7765317d582965fbe0be",
+        "commons/maps/LSystems_Grammars_And_Curves/technical.md": "6963a00614544b99886ffaaac8ad9b162fed88a8e09fbc0180470e1986bb33f6"
+      }
+    },
+    {
+      "room_id": "LSystems_Architecture",
+      "primary_tokens": [
+        "lsystem_dungeon"
+      ],
+      "question": "What changes when a grammar makes corridors instead of branches?",
+      "ontology": "A grammar can generate spatial relations without specifying a biological subject; an interpreter can map symbols to corridors and rooms.",
+      "action": "Follow a corridor in the tabletop dungeon until it branches; compare a branch with a room and identify where a saved route resumes.",
+      "observable": "A repeated grammar produces a network of small corridors, room slabs and walls.",
+      "mechanism": "_generate_dungeon resolves grammar, produces string, interprets turtle segments and room positions, then normalises bounds to the display; default warren depth3.",
+      "limit": "A diagram with corridor shapes has not been tested for inhabitation, accessibility or useful destinations. Counting rooms does not establish a good place to live.",
+      "variation": "Proposed extension: Keep the grammar but reinterpret a dead end as a gathering place, then evaluate the resulting route from the visitor’s needs.",
+      "prior_bridge": "LSystems_Grammars_And_Curves",
+      "next_bridge": "LSystems_Competition",
+      "sources": [
+        {
+          "path": "commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd",
+          "fact": "44–47 warren/depth defaults;132–207 grammar-to-turtle-to-model pipeline."
+        }
+      ],
+      "placements": [
+        {
+          "x": 6,
+          "z": 7,
+          "token": "lsystem_dungeon"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/LSystems_Architecture/map_data.json": "5c7926cdae57ce8fa0b94a1f34f4517e80830aaca9554505d8a4ce25d1dd64cb",
+        "commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn": "51fa3c84fb3faad0b53eb28eda01e6446dc562861b840c04ac767bccd71dc110",
+        "commons/artifacts/lsystem_dungeon/lsystem_dungeon.gd": "45e2d40e703fc0f4b04a582d368e03116859de7753ad278ea10672aff5c11f22",
+        "commons/maps/LSystems_Architecture/intent.md": "488b22107d4bfcc95ae7b6f0cecc63c33d910a4a150a489c3e6e87e104950b96",
+        "commons/maps/LSystems_Architecture/blurb.md": "7b88db0cd4e988398ee57aefef84a738f5df09d9cd30dbfef535f898a54e411d",
+        "commons/maps/LSystems_Architecture/critical.md": "c58cc0c0077613c822ba2a76e705498b410cf21a484e0497f3f13f1f607464e7",
+        "commons/maps/LSystems_Architecture/technical.md": "746176ab3dd21a4c6cb3b2b50c6b2d4f13e8806cfc7c60cb6442fb1584f9506d"
+      }
+    },
+    {
+      "room_id": "LSystems_Competition",
+      "primary_tokens": [
+        "ForestCompetition"
+      ],
+      "question": "Can identical kinds of growth meet different futures because they share a resource?",
+      "ontology": "A growth rule is only part of a system; resource fields, timing and neighbours can constrain when it runs.",
+      "action": "Watch neighbouring trees and the soil display over several growth steps; compare their branch development and recorded health.",
+      "observable": "Trees grow in turn, draw on shared nutrients, and can stop at different stages.",
+      "mechanism": "_grow_step consumes nutrients, changes diameter, expands grammar only if nutrients>0.05 and season is not winter, applies competition and records health; _process diffuses/replenishes nutrients and advances seasons.",
+      "limit": "The model chooses what counts as a resource and competition. Its round-robin schedule is also a condition, and finite maximum generations must not be mistaken for ecological maturity.",
+      "variation": "Proposed extension: Compare competition and shared-resource cooperation under the same initial field and measure a chosen collective outcome.",
+      "prior_bridge": "LSystems_Architecture",
+      "next_bridge": "LSystems_Living",
+      "sources": [
+        {
+          "path": "algorithms/lsystems/Ecosystem/ForestCompetition.gd",
+          "fact": "371–423 resource-gated growth,health history,seasons,diffusion."
+        }
+      ],
+      "placements": [
+        {
+          "x": 3,
+          "z": 2,
+          "token": "ForestCompetition:270"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No visitor ecosystem slider verified. Do not present simulated health as biological measurement.",
+      "source_hashes": {
+        "commons/maps/LSystems_Competition/map_data.json": "330fae9dc2707bb0030c45c0e14cbed079c72f05a0298df44233e90b4c5776cb",
+        "algorithms/lsystems/Ecosystem/ForestCompetition.tscn": "e5bab959e85a371b9e4e297a9912dddfc7b48b36c13cc85159b31ddf7855f271",
+        "algorithms/lsystems/Ecosystem/ForestCompetition.gd": "79cacd18017edaad50de8abbf75fcb1855a39f8c4c9d3feff5469bd2468ce280",
+        "commons/maps/LSystems_Competition/intent.md": "d07ceaa46d1c7905ee80bb91a32990fd57bc78904b6e4a9028b383956176c9a7",
+        "commons/maps/LSystems_Competition/blurb.md": "a47db7033a801f2cd8cff69e66eb7f3e316bd859a7402d31b5c70f9754f6b705",
+        "commons/maps/LSystems_Competition/critical.md": "50198581db5320dc56a319e1eba8f3b17567ed7175fd4a9e907598751990beec",
+        "commons/maps/LSystems_Competition/technical.md": "52c0d3ae3239c585cdb0990ada46a46dd2226301bf81b891963a80b8b405fc50"
+      }
+    },
+    {
+      "room_id": "LSystems_Living",
+      "primary_tokens": [
+        "genetic_tree_sculptor"
+      ],
+      "question": "When you change a tree, which choices are yours and which were built into the tool?",
+      "ontology": "A parameterised phenotype is a form generated from a finite set of numerical traits; choosing traits differs from changing the rules that interpret them.",
+      "action": "Move one branch-angle or branching-depth slider and watch the preview; change one trait at a time before trying RANDOM.",
+      "observable": "Each slider edits a named gene-like parameter and rebuilds the preview after a short delay; RANDOM replaces the parameter set.",
+      "mechanism": "_apply_slider_to_dna maps normalised controls into trait ranges; TreeMorphology.build interprets DNA. PLANT saves Engine metadata and flashes preview, rather than itself placing a new tree.",
+      "limit": "The sliders bound what variation can become visible. Calling parameters genes does not make the tool a genetic evolutionary process; pressure defaults none.",
+      "variation": "Proposed extension: Offer two different trait-to-form mappings for the same parameter values and let visitors choose a value the existing fitness functions do not reward.",
+      "prior_bridge": "LSystems_Competition",
+      "next_bridge": "Assemblage_Same_Desire",
+      "sources": [
+        {
+          "path": "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd",
+          "fact": "_build_ui8 sliders/RANDOM/PLANT;_apply_slider_to_dna;298–325 build/export."
+        },
+        {
+          "path": "algorithms/nature_system/morphology/tree_morphology.gd",
+          "fact": "build;_dna_to_lsystem_params;_create_lsystem_from_dna;finite branch caps; actualtrait-to-grammar andturtle mapping."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "token": "genetic_tree_sculptor:270"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. PLANT downstream catalyst pickup is unverified; avoid promising automatic planting.",
+      "source_hashes": {
+        "commons/maps/LSystems_Living/map_data.json": "3dea13559e019a9ff9a3222ff764ff172ca76c519f5a5a941c8f6004a2e8f8a1",
+        "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn": "c45fe5b630724a88430f1e9711a5cf3d84592049b849a6b93863b86bdc30fff4",
+        "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd": "7781d9af2e9eed770d4904cadf0421e21a6854ed9300b0a942c5e43093a88df6",
+        "commons/maps/LSystems_Living/intent.md": "8fc4342f0a9d4e75e64c190dec536a917efe1621112007d9c253b65bcd7a348c",
+        "commons/maps/LSystems_Living/blurb.md": "a17e2557bbbb1382f1d51b7f80c3ee3b2f7d1d536ee08c1ee849a33c7f793c39",
+        "commons/maps/LSystems_Living/critical.md": "c54ef8723e8653ca3c8e6b52f5f7eefa625d5244df6607402dcb5613411500ba",
+        "commons/maps/LSystems_Living/technical.md": "2f6ba5ee1cf8ed6ee3ce7819751ee8c9d491287387a3c3b1084aad0e0a2b6bba",
+        "algorithms/nature_system/morphology/tree_morphology.gd": "da9ed8175ea87667e0c37795e71e37a367a64293753c0eb475115cf5d1a68f13"
+      }
+    },
+    {
+      "room_id": "Assemblage_Same_Desire",
+      "primary_tokens": [
+        "ten_print_textile"
+      ],
+      "question": "How much of a pattern belongs to the rule, and how much to the marks it chooses?",
+      "ontology": "An alphabet is the set of visible marks through which a selection rule is expressed.",
+      "action": "Watch a new row of the textile appear, then trace a diagonal path made by neighbouring marks. Identify where your eye connects marks the program selected separately.",
+      "observable": "Rows of two diagonal orientations accumulate into a maze-like cloth and scroll downward.",
+      "mechanism": "Each cell compares a random draw with odds(default0.5), chooses a mark and colour; _process advances every0.18s and weaves a fresh row.",
+      "limit": "The visual path is not a solved maze or an L-system rewriting history. Two chosen marks can generate relations that no individual choice explicitly planned.",
+      "variation": "Proposed extension: Keep the same seeded choices but replace diagonals with orthogonals or blocks; ask what new uses and readings the same choices allow.",
+      "prior_bridge": "LSystems_Living",
+      "next_bridge": "PG_Genetic_Evolution",
+      "sources": [
+        {
+          "path": "commons/artifacts/ten_print_textile/ten_print_textile.gd",
+          "fact": "_weave_row independent draws;_mark alphabets;138–153 timed weaving."
+        }
+      ],
+      "placements": [
+        {
+          "x": 9,
+          "z": 3,
+          "token": "ten_print_textile"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. One physical loom artifact carries the assemblage question; no mandatory explanation of every gallery object.",
+      "source_hashes": {
+        "commons/maps/Assemblage_Same_Desire/map_data.json": "8c3635c77bbe7481d42594043c475e9e637c6e193f269e4b650b38e52975cb0f",
+        "commons/artifacts/ten_print_textile/ten_print_textile.tscn": "9abfb9bbbf43b5cebbd53c12ae4eb995bc6688e158b8417ead9b1e53ccba4037",
+        "commons/artifacts/ten_print_textile/ten_print_textile.gd": "c7ba11990f0baf4b73df89c30f48fb96a66456c667c865d0d3d8b403d8bb62d9",
+        "commons/maps/Assemblage_Same_Desire/blurb.md": "b30c3d3160220271516f1c7283d7b63d0b0c65eb5f4936424ecc55eae5f8a7f1"
+      }
+    }
+  ]
+}

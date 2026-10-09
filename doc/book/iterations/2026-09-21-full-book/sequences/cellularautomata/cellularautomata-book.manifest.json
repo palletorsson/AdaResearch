@@ -1,0 +1,52 @@
+{
+  "captured_at": "2026-09-21T06:06:43.375850+00:00",
+  "base_commit": "158b23851faaef4e8b1c671c553ef4eec6ec2d55",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; footnote text and code preserved.",
+  "sequence": "cellularautomata",
+  "sequence_sha256": "46f5aeca412aefaf4c1774805185dc737b050c43ad24a752e50b7aa32a815cdd",
+  "maps": [
+    {
+      "map": "CA_Introduction",
+      "path": "commons/maps/CA_Introduction/final.md",
+      "sha256": "6f1d7de34b510fa4f6071ed4ec96432632e8fc8750bcbbecd260ef2574516b82"
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "path": "commons/maps/CA_ElementaryRules/final.md",
+      "sha256": "2638c5ee9765bb8da3c16c383f559b1b35eb7f09dee94dda64005c770c8f3f69"
+    },
+    {
+      "map": "CA_GameOfLife",
+      "path": "commons/maps/CA_GameOfLife/final.md",
+      "sha256": "780fca9f4f6757699d528ddc4e5ab68f33f7585e93c32446deb403f1e2dceff8"
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "path": "commons/maps/CA_BeyondBinary/final.md",
+      "sha256": "4e649666dbd3b3d6a10d68cf8a500aa15e2a6b62c2eaf4b80f50a55434a95c8d"
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "path": "commons/maps/CA_ExpandingSpace/final.md",
+      "sha256": "e862892a45edaa1f9a3e0752638b808873835f27f6bf4de0c94fe329f62b9726"
+    },
+    {
+      "map": "CA_SoftRules",
+      "path": "commons/maps/CA_SoftRules/final.md",
+      "sha256": "32b4a5843bad091e62e8760a4640f524c53181636d3e9e290bae99ea315e454d"
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "path": "commons/maps/CA_AgentsCircuits/final.md",
+      "sha256": "b192cbe9b731e350850ef3a9d9dde90c649fe615d9edbe44f281734e2bfca3b1"
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "path": "commons/maps/CA_EdgeOfChaos/final.md",
+      "sha256": "5851c73fa78f74690eb5019fdd7c4facdd6994abddcf995563661073fc30dce9"
+    }
+  ],
+  "output_sha256": "5f63375fc7dada88b89365fbda1ca09e86a1c69e65081046a8e5421ff4bb78aa"
+}

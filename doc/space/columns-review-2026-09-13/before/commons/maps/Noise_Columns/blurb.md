@@ -1,0 +1,1 @@
+Noise extruded vertically. Sample the 2D function, lift the result into height. Mountains rise from mathematics, valleys fall from continuous variation. The columnar terrain is noise made navigable — you walk through the function, feeling its gradients as slopes beneath your feet.

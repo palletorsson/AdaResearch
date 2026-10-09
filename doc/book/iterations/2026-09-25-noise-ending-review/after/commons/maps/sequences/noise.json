@@ -1,0 +1,189 @@
+{
+  "sequences": {
+    "noise": {
+      "name": "Noise: Fields and Possible Bodies",
+      "truth": "A field can be read as colour, relief, an address or a threshold. Each use makes different bodies and passages possible.",
+      "qfep_term": "λE(S)",
+      "qfep_connection": "The QFEP vocabulary invites us to ask how variation is weighted and what a chosen representation makes possible or withholds. These halls do not calculate QFE, equate spatial coherence with memory, or measure political freedom through noise.",
+      "formula": "Layered example: f(p) = Σᵢ aᵢ n(fᵢ p). Receiving operations turn sampled values into colour, displacement, warped addresses or occupancy.",
+      "description": "Follow a value from a column to a surface, from a threshold into an occupied volume, and from a borrowed address into a room you can enter. Hold a field steady while changing what receives it. Walk its ground, return with another body, and compare Perlin with OpenSimplex2 under shared conditions. Noise can lend an object an organic gesture; its ease can also let a familiar blob arrive before a different form has been imagined. The main spine continues to Cellular Automata, where stored states and neighbours take on another role. Lab Path remains an optional return.",
+      "layer": "E_entropy",
+      "prerequisites": [
+        "randomness"
+      ],
+      "unlocks": [
+        "proceduralgeneration",
+        "morphogenesis"
+      ],
+      "difficulty": "intermediate",
+      "estimated_time": "30-40 minutes",
+      "learning_objectives": [
+        "Distinguish spatial relationships, repeated sampling and stored state",
+        "Follow one field through colour, relief and thresholded occupancy",
+        "Compare layered contributions and the mappings that display their sum",
+        "Use a coordinate field to change where another field is sampled",
+        "Relate a sampled surface to collision, route and body scale",
+        "Compare Perlin and OpenSimplex2 without confusing the display grid with either generator",
+        "Investigate the pleasure and limits of noise as an easy organic gesture"
+      ],
+      "content": [
+        "Random_Noise_Types: Which rules keep acting?",
+        "Noise_Columns: What keeps a body changing?",
+        "Noise_One: What does a value become?",
+        "Noise_Voxel: The line that decides",
+        "Noise_6_Wall: The room wears the sum",
+        "Noise_Inside_Noise: Borrow an address",
+        "Noise_Space_10: Which way will carry you?",
+        "Noise_Perlin_Simplex: What counts as the same",
+        "Lab_Path: What has followed you out of the room? (optional return; outside the museum spine)"
+      ],
+      "maps": [
+        "Random_Noise_Types",
+        "Noise_Columns",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_6_Wall",
+        "Noise_Inside_Noise",
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex",
+        "Lab_Path"
+      ],
+      "deferred_maps": [
+        "Noise_Blue",
+        "Noise_Functions",
+        "Noise_Volume",
+        "Chamber_Noise"
+      ],
+      "deferred_reason": {
+        "Chamber_Noise": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+      },
+      "axiom_files": [
+        "res://commons/context/clipboard/tutorial_text/noise_axioms.md",
+        "res://commons/context/clipboard/tutorial_text/perlin_axioms.md"
+      ],
+      "algorithm_paths": {
+        "Noise_Perlin_Simplex": "res://algorithms/noise/",
+        "VectorFieldFlow": "res://algorithms/vectors/flowfield/"
+      },
+      "return_to": "lab",
+      "lab_map": "Lab/map_data_post_noise",
+      "unlock_requirements": [],
+      "completion_rewards": [
+        "noise_architect_badge",
+        "coherent_chaos_badge",
+        "procedural_mind_badge",
+        "flow_field_badge"
+      ],
+      "artifact_groups": [
+        {
+          "map": "Random_Noise_Types",
+          "position": "intro",
+          "artifacts": [
+            "randompoint",
+            "randompoints",
+            "WhiteNoiseGallery",
+            "NoiseColors3D",
+            "related_weather"
+          ],
+          "size_budget": "environment",
+          "rationale": "From enforced coordinates and initial spacing to independent image/audio constructions, then temporal relationships embodied as moving views."
+        },
+        {
+          "map": "Noise_Columns",
+          "position": "intro",
+          "artifacts": [
+            "MeltingBerniniScene",
+            "dark_sphere",
+            "synthesis_stand"
+          ],
+          "size_budget": "mixed",
+          "rationale": "Three column drivers enter one form; a separately pulsing orb and its six-part relative extend the comparison to appearance, independent time and construction."
+        },
+        {
+          "map": "Noise_One",
+          "position": "foundation",
+          "artifacts": [
+            "noisetorus",
+            "noiselayers",
+            "dark_sphere"
+          ],
+          "size_budget": "mixed",
+          "rationale": "One field received as relief or colour; a basin isolates and combines retained terrain contributions."
+        },
+        {
+          "map": "Noise_Voxel",
+          "position": "exploration",
+          "artifacts": [
+            "perlin_terrain_sculptor",
+            "voxelnoise",
+            "dark_sphere"
+          ],
+          "size_budget": "environment",
+          "rationale": "The same threshold decisions at model and body scale; occupied connectivity does not guarantee a usable route."
+        },
+        {
+          "map": "Noise_6_Wall",
+          "position": "exploration",
+          "artifacts": [
+            "shader_noise_space",
+            "dark_sphere"
+          ],
+          "size_budget": "mixed",
+          "rationale": "A layered sum dresses an enclosure; colour, apparent depth and collision can answer differently."
+        },
+        {
+          "map": "Noise_Inside_Noise",
+          "position": "integration",
+          "artifacts": [
+            "dark_sphere",
+            "noisesphere"
+          ],
+          "size_budget": "mixed",
+          "rationale": "Domain warping borrows another address; values shape an enclosing surface while its floor and doors stay pinned."
+        },
+        {
+          "map": "Noise_Space_10",
+          "position": "integration",
+          "artifacts": [
+            "dark_sphere",
+            "noise_space"
+          ],
+          "size_budget": "mixed",
+          "rationale": "A fixed terrain meets proposed routes, recorded walks and reversible changes of visitor scale."
+        },
+        {
+          "map": "Noise_Perlin_Simplex",
+          "position": "synthesis",
+          "artifacts": [
+            "simplex_noise",
+            "perlin_noise",
+            "noise_terrain",
+            "dark_sphere",
+            "perlin_noise_terrain",
+            "configurable_portal"
+          ],
+          "size_budget": "environment",
+          "rationale": "Matched fields and walk-through arches expose which conditions change; the organic shortcut leads into Cellular Automata."
+        },
+        {
+          "map": "Lab_Path",
+          "position": "synthesis",
+          "artifacts": [
+            "dark_sphere"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Optional grid-lane reflection outside the museum spine; the main Perlin/Simplex ending carries its invitation to return."
+        }
+      ],
+      "local_review_history": [
+        {
+          "date": "2026-09-25",
+          "path": "doc/book/iterations/2026-09-25-noise-ending-review/DECISIONS.md",
+          "scope": "Readable sequence description, corrected encoding, current chapter purposes and explicit optional coda; map order and routing retained."
+        }
+      ]
+    }
+  },
+  "world_phase": "transition",
+  "artifact_groups": []
+}

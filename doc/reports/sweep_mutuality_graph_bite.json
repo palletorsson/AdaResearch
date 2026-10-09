@@ -1,0 +1,68 @@
+{
+ "sweep": "mutuality_graph",
+ "peak_changed_pct": 11.191,
+ "subject_pct": 27.308,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "grouping": "mutual"
+   },
+   "b": {
+    "grouping": "quotient"
+   },
+   "changed_px": 53713,
+   "changed_pct": 9.299
+  },
+  {
+   "a": {
+    "grouping": "mutual"
+   },
+   "b": {
+    "grouping": "linked"
+   },
+   "changed_px": 15594,
+   "changed_pct": 2.7
+  },
+  {
+   "a": {
+    "grouping": "mutual"
+   },
+   "b": {
+    "grouping": "implicit"
+   },
+   "changed_px": 38520,
+   "changed_pct": 6.669
+  },
+  {
+   "a": {
+    "grouping": "quotient"
+   },
+   "b": {
+    "grouping": "linked"
+   },
+   "changed_px": 64641,
+   "changed_pct": 11.191
+  },
+  {
+   "a": {
+    "grouping": "quotient"
+   },
+   "b": {
+    "grouping": "implicit"
+   },
+   "changed_px": 24726,
+   "changed_pct": 4.281
+  },
+  {
+   "a": {
+    "grouping": "linked"
+   },
+   "b": {
+    "grouping": "implicit"
+   },
+   "changed_px": 50428,
+   "changed_pct": 8.731
+  }
+ ]
+}

@@ -1,0 +1,813 @@
+{
+  "goal_id": "book_fractals",
+  "goal_title": "Book: Fractals: Rules, Scale and Room to Move — improvements from the spine reading",
+  "why": "The whole spine was read as a book on 2026-09-24, one sequence at a time, and every stumble, false claim or broken handover in fractals became a task Palle can pick up one at a time. Reader: the VR visitor.",
+  "success_criteria": [
+    "every open task here is done or skipped with a note",
+    "the chapters read through without a stumble in the headset",
+    "every code excerpt and number in the chapters matches the source"
+  ],
+  "prerequisites": [],
+  "book": {
+    "sequence": "fractals",
+    "order": 13,
+    "phase": "lambda_edge",
+    "title": "Fractals: Rules, Scale and Room to Move",
+    "chapters": [
+      "Fractal_Recursion",
+      "Fractal_RecursiveTrees",
+      "Fractal_CantorSet",
+      "Fractal_KochSierpinski",
+      "Fractal_MengerSponge",
+      "Fractal_GoldenSpiral",
+      "Fractal_Synthesis"
+    ],
+    "words": 6283,
+    "read_at": "2026-09-24",
+    "source": "one reader (skeptic pending)",
+    "chapters_read": [
+      "Fractal_Recursion",
+      "Fractal_RecursiveTrees",
+      "Fractal_CantorSet",
+      "Fractal_KochSierpinski",
+      "Fractal_MengerSponge",
+      "Fractal_GoldenSpiral",
+      "Fractal_Synthesis",
+      "CA_EdgeOfChaos (last of cellularautomata)",
+      "LSystems_Grammar_Lab (first of lsystems)"
+    ],
+    "reading": {
+      "arc": "The sequence takes one instruction, call yourself again, and walks it through seven halls, asking at every desk what the call costs and what it leaves a body. It opens with a single self-call (nested squares), four self-calls (rings), a subdivision spent one cell at a time (DRILL and SPREAD buy different bodies for the same 85 cells) and a chair that is recursive in name only; then the call acquires a start, a direction and a length (trees); then a generation that removes (the Cantor bar, and a pagoda whose gaps admit some bodies and refuse others); then a boundary that lengthens (Koch) beside a surface that empties (Sierpinski), a measuring bench whose slope moves with the fit, and a pyramid built with one call more than its recipe promised. Removal then enters a volume the visitor can fly through (Menger), repetition becomes number and the mapping that gives number a height (Fibonacci towers, the golden rectangle), and a synthesis hall asks the visitor to say a rule without its name before handing one explicit rule to the grammar laboratory. The through-argument is that the count, the drawn record and what a body can use are three resolutions that never coincide, and that a resemblance (tree, shell, chair, pyramid) tells you nothing about the procedure until you look behind the image.",
+      "holds": [
+        "One desk grammar: a compact six-key console at every work (NEXT/BACK, two instrument keys, RESET, RULE) with a readout that counts and a RULE key that shows the source line; the visitor learns the desk in the first hall and meets it in all seven (recursion_lesson, recursive_tree_lesson, cantor_lesson, koch_sierpinski_lesson, menger_lesson, golden_mapping_lesson all build the same console).",
+        "Predict before you press: every desk asks for a number before the button (five rings, twenty-one, thirty-one segments, 2^n pieces, 216 to 125) and then shows where the count and the body diverge.",
+        "Three resolutions, carried from the trace hall: what is stored, what is drawn, and what becomes available to a body; re-measured at each work (341 rings the room can hold, 63 bars once history is drawn, 216 overlapping cubes, a one-metre opening light passes and a body does not).",
+        "The removed part made visible: GHOST/SCAR/GONE on the chair, GHOST on the bar and the sponge, VIEW on the triangle; absence drawn without collision, and then a passage (the pagoda gap, the sponge cross) where an absence becomes a place.",
+        "Resemblance is not procedure: a chair with no self-call, a block tree that persuades us it is organic, a shell and a seed head, a helix that is not a golden spiral, a pyramid whose name outran its recipe; each hall keeps the recognition and asks what supplied it.",
+        "The finite instrument against the limit: each desk names its cap (seven levels, five cuts, four replacements, two cuts) and says in one sentence that the limit is not what the headset contains or the body touches."
+      ],
+      "hall_notes": [
+        {
+          "hall": "Fractal_Recursion",
+          "words": 861,
+          "note": "Four desks, one question: what a self-call costs. Squares (one call, LAYOUT and COLLAPSE), rings (four calls, PACKING and TURN), a cube split one selected cell at a time (DRILL versus SPREAD end on the same 85 cells with different bodies) and a chair whose five authored stages contain no self-call. Dense but paced by prediction prompts; the strongest opening for the stored/drawn/body distinction, and all numbers check against the code."
+        },
+        {
+          "hall": "Fractal_RecursiveTrees",
+          "words": 691,
+          "note": "The call gets a start, a direction and a length. A deterministic growing tree (GROW, ANGLE through 15/35/65, LENGTH 0.70/0.85/0.50, FORKS 2 or 3: 31 to 121 segments) beside a seeded block tree read through STRATA, REACH and ENDS. Tight and clear; the closing question about a fork becoming shelter carries the body thread forward."
+        },
+        {
+          "hall": "Fractal_CantorSet",
+          "words": 783,
+          "note": "Removal as generation. The bar desk (six metres, five cuts, 32 pieces under a metre, 63 bars once history is counted), then the pagoda whose openings of 3 m, 1 m and a third of a metre admit different bodies. The best-embodied hall: the proxy-body paragraph is the sequence's thesis in one place, and the ramp up to the deck is real (two walkway cells)."
+        },
+        {
+          "hall": "Fractal_KochSierpinski",
+          "words": 1261,
+          "note": "Four instruments: Koch's detour (256 segments, 12.6 m of path between ends 4 m apart), Sierpinski's removals that VIEW can turn into the work, a box-counting bench whose reported slope moves with RANGE, and a pyramid with one call too many (216 to 125 instances). The longest hall by a third; it reads as two halls, and the pyramid's withheld comparison, the peak of the sequence, arrives when attention is lowest."
+        },
+        {
+          "hall": "Fractal_MengerSponge",
+          "words": 825,
+          "note": "One work, two cuts, and a body that flies. 729 to 540 to 400 cubic metres, seven then 140 ghosts, a twelve-metre glass enclosure whose two ground doors bound the flight, a desk that refuses to rebuild while someone is inside. Reads well until the locomotion paragraph, which becomes a manual for a desktop body the headset reader does not have."
+        },
+        {
+          "hall": "Fractal_GoldenSpiral",
+          "words": 1076,
+          "note": "Number and mapping. Towers whose heights HEIGHT re-maps (half a metre for a one under the log rule, five centimetres per unit under the linear one), SUM stacks that check the recurrence in units, then a five-metre rectangle cut by squares of 3.090, 1.910 and 1.180 m with quarter-circle ARCs. Careful about resemblance (shell, seed head, helix versus spiral); long because it carries two works and the held examples, and one of its comparisons has no body in the room."
+        },
+        {
+          "hall": "Fractal_Synthesis",
+          "words": 786,
+          "note": "Say the rule without its name. The bar and the block tree return on the same desks; the chapter asks what a description omits (how short, at which ends, what a call must remember to place a branch) and hands one explicit rule, F to F+F-F-F+F at ninety degrees, to the grammar laboratory. Quiet, reflective, the right length."
+        }
+      ],
+      "stumbles": [
+        "Fractal_MengerSponge: 'On desktop, Space lifts you and Ctrl lowers you; WASD follows the direction you look' and 'The museum's desktop capsule is 1.5 metres tall' tell a headset reader about keys and a body that are not theirs.",
+        "Fractal_Recursion: 'We already met this gap at the trace' points at Point_Trace, twelve sequences back, and lowercase 'the trace' reads as a noun rather than a hall.",
+        "Fractal_KochSierpinski: 'From Trace we still carry a question' is the same hall, now a proper name; the two chapters disagree about what it is called.",
+        "Fractal_Recursion: 'At depth five, DUST loses a whole level' sends the visitor looking for a DUST key; dust is the fourth value PACKING cycles to.",
+        "CA_EdgeOfChaos into Fractal_Recursion: the handover names the hall by its file token, 'Fractal_Recursion', the only underscore a visitor meets in either sequence.",
+        "Fractal_KochSierpinski: 1,261 words and four desks without a breath; the pyramid's held-back comparison, the sequence's peak, comes last.",
+        "Fractal_GoldenSpiral: the helix is measured against 'a curve usually called a golden spiral' that grows by phi per quarter turn, and no such curve stands anywhere in the hall.",
+        "Fractal_GoldenSpiral: 'The next capability will give those instructions a grammar' is project vocabulary, and the grammar is two halls away, after the synthesis hall.",
+        "Fractal_Synthesis: ENDS is said to mark 'the deepest recorded blocks' while the trees hall, and the code, also put a mark at the trunk's handover.",
+        "Fractal_Recursion and Fractal_KochSierpinski: the quoted square, ring and Koch code is Daniel Shiffman's Nature of Code, translated, and neither chapter says so."
+      ],
+      "keep": [
+        {
+          "hall": "Fractal_Recursion",
+          "quote": "Seeing a square inside another square does not tell us which program made it. We had to look behind the image."
+        },
+        {
+          "hall": "Fractal_Recursion",
+          "quote": "Equal counts have bought different bodies."
+        },
+        {
+          "hall": "Fractal_CantorSet",
+          "quote": "The display can remember an absence without filling it with something that supports a body."
+        },
+        {
+          "hall": "Fractal_CantorSet",
+          "quote": "All are gaps. They do not all admit the same body."
+        },
+        {
+          "hall": "Fractal_KochSierpinski",
+          "quote": "The unoccupied cells tell us where this reading found no points. They have no authority over what may exist."
+        },
+        {
+          "hall": "Fractal_MengerSponge",
+          "quote": "There was a connection in the geometry. There was not yet a route for every body."
+        },
+        {
+          "hall": "Fractal_GoldenSpiral",
+          "quote": "We can change the representation without changing the relation it represents. We can also lose sight of a small value without removing it from the sequence."
+        },
+        {
+          "hall": "Fractal_Synthesis",
+          "quote": "The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room?"
+        }
+      ],
+      "handover_in": "CA_EdgeOfChaos closes by naming the shift (from local exchanges that assemble a resemblance to a procedure that explicitly asks for another instance of itself) and hands over a three-way distinction: resemble a neighbour, inherit a state, or be told to repeat. Fractal_Recursion picks it up without restating it: 'How many times can again happen?' and 'We had to look behind the image' answer the CA line 'The resemblance does not yet explain the making.' The join holds; its one flaw is that CA names the destination by its file token, 'Fractal_Recursion', where every other handover names a hall by its subject.",
+      "handover_out": "Fractal_Synthesis ends on the grammar laboratory's 'Koch Curve' preset (F becomes F+F-F-F+F, ninety degrees) and separates it from the hall's own equilateral snowflake; LSystems_Grammar_Lab opens on exactly that string and angle and says 'We brought a construction out of the fractal halls.' Verified against lsystem_editor.gd:103 (PRESETS[0]). Clean. The only wobble is one hall earlier: Fractal_GoldenSpiral pre-announces the grammar as 'the next capability', jargon that also skips the synthesis hall in between.",
+      "reading_errors": []
+    },
+    "dropped": []
+  },
+  "tasks": [
+    {
+      "id": "book_fractals.001",
+      "title": "Drop the desktop key bindings from the flight paragraph",
+      "spec": "[vr] Fractal_MengerSponge\nQuote: “On desktop, Space lifts you and Ctrl lowers you; WASD follows the direction you look. In VR, tilt the left controller and use its stick.”\nWhy: The reader is in a headset; the desktop clause is a manual line for a body the reader does not have, and it is the only such aside in the seven halls. The in-world sign already carries both bindings for visual tests, so nothing is lost by cutting it from the book.\nDo: Keep only the headset sentence, in the chapter's own voice: 'Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.'\nEvidence: commons/movement/museum_flight_provider.gd:22-26 (VR flight reads the left controller's basis and its 'primary' stick; neutral input hovers); commons/movement/museum_flight_box.gd:35-39 (desktop keys are a separate desktop_velocity path) and :105 (the sign already prints both bindings); commons/maps/Fractal_MengerSponge/final.md:27.\nFile: commons/maps/Fractal_MengerSponge/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_MengerSponge"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Fractal_MengerSponge",
+      "quote": "On desktop, Space lifts you and Ctrl lowers you; WASD follows the direction you look. In VR, tilt the left controller and use its stick.",
+      "why": "The reader is in a headset; the desktop clause is a manual line for a body the reader does not have, and it is the only such aside in the seven halls. The in-world sign already carries both bindings for visual tests, so nothing is lost by cutting it from the book.",
+      "proposal": "Keep only the headset sentence, in the chapter's own voice: 'Tilt the left controller towards where you want to go and push its stick; let go and you hover. Flight belongs to this enclosure. Descend to either ground doorway when you want to walk again.'",
+      "evidence": "commons/movement/museum_flight_provider.gd:22-26 (VR flight reads the left controller's basis and its 'primary' stick; neutral input hovers); commons/movement/museum_flight_box.gd:35-39 (desktop keys are a separate desktop_velocity path) and :105 (the sign already prints both bindings); commons/maps/Fractal_MengerSponge/final.md:27.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.002",
+      "title": "Rewrite the 'desktop capsule' claim for the headset body",
+      "spec": "[vr] Fractal_MengerSponge\nQuote: “The museum's desktop capsule is 1.5 metres tall; even in flight it keeps that height. Flying does not make it small, and it does not make a retained cube permeable.”\nWhy: For the headset reader this is false: XR Tools sizes the player capsule from the tracked head (0.6 to 2.5 m, radius 0.2) and nothing under commons/ overrides it, so a crouching visitor brings a body about 0.4 m wide to the one-metre opening, and the later 'refuses this capsule' is a fact about the desktop tester, not the visitor.\nDo: Replace with the body the sponge actually collides with: 'The body the sponge collides with is a capsule 0.4 metres wide whose height follows your head. Flying does not shrink it, and it does not make a retained cube permeable; whether a crouch admits you to a one-metre opening is something to try, not to assume.' Then either test the crouch in the headset or soften 'a smaller, visibly connected opening that refuses this capsule' (line 35) to match.\nEvidence: addons/godot-xr-tools/player/player_body.gd:60-69 (player_radius 0.2, player_height_min 0.6, player_height_max 2.5); no player_height_min/max override anywhere under commons/ (grep); commons/artifacts/menger_lesson/menger_lesson.gd:101 (smallest axial opening 9/3^n = 1.0 m at two cuts); commons/movement/museum_flight_provider.gd:26 moves the XRToolsPlayerBody itself; commons/maps/Fractal_MengerSponge/final.md:31,35.\nFile: commons/maps/Fractal_MengerSponge/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_MengerSponge"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "vr",
+      "hall": "Fractal_MengerSponge",
+      "quote": "The museum's desktop capsule is 1.5 metres tall; even in flight it keeps that height. Flying does not make it small, and it does not make a retained cube permeable.",
+      "why": "For the headset reader this is false: XR Tools sizes the player capsule from the tracked head (0.6 to 2.5 m, radius 0.2) and nothing under commons/ overrides it, so a crouching visitor brings a body about 0.4 m wide to the one-metre opening, and the later 'refuses this capsule' is a fact about the desktop tester, not the visitor.",
+      "proposal": "Replace with the body the sponge actually collides with: 'The body the sponge collides with is a capsule 0.4 metres wide whose height follows your head. Flying does not shrink it, and it does not make a retained cube permeable; whether a crouch admits you to a one-metre opening is something to try, not to assume.' Then either test the crouch in the headset or soften 'a smaller, visibly connected opening that refuses this capsule' (line 35) to match.",
+      "evidence": "addons/godot-xr-tools/player/player_body.gd:60-69 (player_radius 0.2, player_height_min 0.6, player_height_max 2.5); no player_height_min/max override anywhere under commons/ (grep); commons/artifacts/menger_lesson/menger_lesson.gd:101 (smallest axial opening 9/3^n = 1.0 m at two cuts); commons/movement/museum_flight_provider.gd:26 moves the XRToolsPlayerBody itself; commons/maps/Fractal_MengerSponge/final.md:31,35.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.003",
+      "title": "Credit Nature of Code for the square and ring desks' code",
+      "spec": "[footnote] Fractal_Recursion\nQuote: “Here is the self-call from the artifact:”\nWhy: The squares and the rings are GDScript translations of Daniel Shiffman's Nature of Code Examples 8.2 and 8.3, shipped under CC BY-NC-SA 3.0, and the chapter quotes their lines as 'the artifact's' with no attribution; the book already has a footnote form for exactly this.\nDo: Add a footnote on this sentence in the Point_Trace form: '[^fractal-recursion-noc]: The square desk and the ring desk are GDScript translations of Daniel Shiffman's Nature of Code Examples 8.2 and 8.3 (natureofcode.com), CC BY-NC-SA 3.0. The desks, LAYOUT, COLLAPSE and PACKING are Ada's additions.'\nEvidence: algorithms/fractals/example_8_2_recursion_vr.gd:2-3,7 and algorithms/fractals/example_8_3_recursion_circles_vr.gd:2-3,7 ('NOC Example 8.x', 'Original: Daniel Shiffman (Processing) - https://natureofcode.com', 'License: CC BY-NC-SA 3.0'); commons/maps/Point_Trace/final.md:140-146 (footnote convention); commons/maps/Fractal_Recursion/final.md:9.\nFile: commons/maps/Fractal_Recursion/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Fractal_Recursion",
+      "quote": "Here is the self-call from the artifact:",
+      "why": "The squares and the rings are GDScript translations of Daniel Shiffman's Nature of Code Examples 8.2 and 8.3, shipped under CC BY-NC-SA 3.0, and the chapter quotes their lines as 'the artifact's' with no attribution; the book already has a footnote form for exactly this.",
+      "proposal": "Add a footnote on this sentence in the Point_Trace form: '[^fractal-recursion-noc]: The square desk and the ring desk are GDScript translations of Daniel Shiffman's Nature of Code Examples 8.2 and 8.3 (natureofcode.com), CC BY-NC-SA 3.0. The desks, LAYOUT, COLLAPSE and PACKING are Ada's additions.'",
+      "evidence": "algorithms/fractals/example_8_2_recursion_vr.gd:2-3,7 and algorithms/fractals/example_8_3_recursion_circles_vr.gd:2-3,7 ('NOC Example 8.x', 'Original: Daniel Shiffman (Processing) - https://natureofcode.com', 'License: CC BY-NC-SA 3.0'); commons/maps/Point_Trace/final.md:140-146 (footnote convention); commons/maps/Fractal_Recursion/final.md:9.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Credited in the Recursion footnote (Examples 8.2 and 8.3). (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.004",
+      "title": "Credit Nature of Code for the Koch replacement (and the pagoda)",
+      "spec": "[footnote] Fractal_KochSierpinski\nQuote: “This is the small decision inside each replacement:”\nWhy: The b/d/c construction quoted here is Shiffman's Koch example translated line for line (Example 8.5), and the pagoda's shape.size line quoted in the Cantor hall descends from Example 8.4; neither chapter names the source, and the licence asks for attribution.\nDo: Footnote on this sentence: '[^koch-noc]: The replacement follows Daniel Shiffman's Nature of Code Example 8.5 (Koch curve), translated to GDScript under CC BY-NC-SA 3.0; the desk, TURN and FORM are Ada's. The walkable pagoda in the previous hall is the same lineage (Example 8.4).' A one-line cross-reference from the Cantor hall's pagoda excerpt can point here.\nEvidence: algorithms/fractals/example_8_5_koch_curve_vr.gd:2-3,7 and algorithms/fractals/example_8_4_cantor_pagoda_vr.gd:2-3,7 (headers with the credit and licence); the chapter's excerpt at commons/maps/Fractal_KochSierpinski/final.md:13-17 matches example_8_5_koch_curve_vr.gd:118-128; commons/maps/Fractal_CantorSet/final.md:44-46 matches example_8_4_cantor_pagoda_vr.gd:142.\nFile: commons/maps/Fractal_KochSierpinski/final.md",
+      "effort": "1h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_KochSierpinski"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "footnote",
+      "hall": "Fractal_KochSierpinski",
+      "quote": "This is the small decision inside each replacement:",
+      "why": "The b/d/c construction quoted here is Shiffman's Koch example translated line for line (Example 8.5), and the pagoda's shape.size line quoted in the Cantor hall descends from Example 8.4; neither chapter names the source, and the licence asks for attribution.",
+      "proposal": "Footnote on this sentence: '[^koch-noc]: The replacement follows Daniel Shiffman's Nature of Code Example 8.5 (Koch curve), translated to GDScript under CC BY-NC-SA 3.0; the desk, TURN and FORM are Ada's. The walkable pagoda in the previous hall is the same lineage (Example 8.4).' A one-line cross-reference from the Cantor hall's pagoda excerpt can point here.",
+      "evidence": "algorithms/fractals/example_8_5_koch_curve_vr.gd:2-3,7 and algorithms/fractals/example_8_4_cantor_pagoda_vr.gd:2-3,7 (headers with the credit and licence); the chapter's excerpt at commons/maps/Fractal_KochSierpinski/final.md:13-17 matches example_8_5_koch_curve_vr.gd:118-128; commons/maps/Fractal_CantorSet/final.md:44-46 matches example_8_4_cantor_pagoda_vr.gd:142.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Credited in the Koch footnote (Example 8.5) and the Cantor footnote (Example 8.4, the pagoda). (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.005",
+      "title": "Name the trace hall the reader is being sent back to",
+      "spec": "[prose] Fractal_Recursion\nQuote: “We already met this gap at the trace: what is stored, what is drawn, and what becomes available to a body do not have identical resolutions.”\nWhy: The hall meant is Point_Trace in the primitives sequence, twelve sequences earlier, where a hand-drawn line kept only the positions its grid spacing could tell apart; lowercase 'the trace' reads as a generic noun and gives the reader no way back to it.\nDo: 'We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.'\nEvidence: commons/maps/sequences/primitives.json:48,120 (Point_Trace is a primitives hall); commons/maps/Point_Trace/final.md:29-41 ('Another resolution, another gesture'; a 0.08 m snap sends different readings to the same address); commons/maps/Fractal_Recursion/final.md:35.\nFile: commons/maps/Fractal_Recursion/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Fractal_Recursion",
+      "quote": "We already met this gap at the trace: what is stored, what is drawn, and what becomes available to a body do not have identical resolutions.",
+      "why": "The hall meant is Point_Trace in the primitives sequence, twelve sequences earlier, where a hand-drawn line kept only the positions its grid spacing could tell apart; lowercase 'the trace' reads as a generic noun and gives the reader no way back to it.",
+      "proposal": "'We met this gap in the first sequence, at the trace hall, where a drawn line kept only the positions its spacing could tell apart: what is stored, what is drawn, and what a body can use do not share a resolution.'",
+      "evidence": "commons/maps/sequences/primitives.json:48,120 (Point_Trace is a primitives hall); commons/maps/Point_Trace/final.md:29-41 ('Another resolution, another gesture'; a 0.08 m snap sends different readings to the same address); commons/maps/Fractal_Recursion/final.md:35.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.006",
+      "title": "Replace the file token with the hall's subject in the handover",
+      "spec": "[handover] CA_EdgeOfChaos\nQuote: “The next hall, Fractal_Recursion, changes the instruction.”\nWhy: An underscored file token is not a name a visitor reads, and it is the only one in either sequence; every other handover names the next hall by what it does.\nDo: 'The next hall changes the instruction: instead of waiting for local exchanges to assemble a larger resemblance, a procedure explicitly asks for another instance of itself.' (drop the token; the sentence already says what the hall is)\nEvidence: commons/maps/CA_EdgeOfChaos/final.md:44; commons/maps/Fractal_Recursion/map_data.json map_info.title 'How many times can again happen?'; the six fractal handovers (e.g. Fractal_RecursiveTrees/final.md:47 'Next comes Cantor') name halls by subject.\nFile: commons/maps/CA_EdgeOfChaos/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "CA_EdgeOfChaos"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "handover",
+      "hall": "CA_EdgeOfChaos",
+      "quote": "The next hall, Fractal_Recursion, changes the instruction.",
+      "why": "An underscored file token is not a name a visitor reads, and it is the only one in either sequence; every other handover names the next hall by what it does.",
+      "proposal": "'The next hall changes the instruction: instead of waiting for local exchanges to assemble a larger resemblance, a procedure explicitly asks for another instance of itself.' (drop the token; the sentence already says what the hall is)",
+      "evidence": "commons/maps/CA_EdgeOfChaos/final.md:44; commons/maps/Fractal_Recursion/map_data.json map_info.title 'How many times can again happen?'; the six fractal handovers (e.g. Fractal_RecursiveTrees/final.md:47 'Next comes Cantor') name halls by subject.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.007",
+      "title": "Say that DUST is a PACKING value, not a key",
+      "spec": "[prose] Fractal_Recursion\nQuote: “At depth five, DUST loses a whole level: its smallest requested radius falls below the source's one-centimetre cutoff.”\nWhy: The ring desk has no DUST key; dust is the fourth value PACKING cycles through (fused, contact, open, dust), and the sentence sends the visitor looking for a button that is not there.\nDo: 'Press PACKING until the readout says dust. At depth five the fifth ring's requested radius, 2 m times 0.25 four times over, is about eight millimetres, below the source's one-centimetre cutoff, and a whole level is lost.'\nEvidence: commons/artifacts/recursion_lesson/recursion_lesson.gd:21 (keys MORE, LESS, PACKING, TURN, BEGIN, RULE) and :153-155 (PACKING cycles the four values); algorithms/fractals/example_8_3_recursion_circles_vr.gd:70 (PACKING_R dust 0.25), :87 (start radius 2.0) and :191 ('if level <= 0 or radius < 0.01: return'); commons/maps/Fractal_Recursion/final.md:33.\nFile: commons/maps/Fractal_Recursion/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Fractal_Recursion",
+      "quote": "At depth five, DUST loses a whole level: its smallest requested radius falls below the source's one-centimetre cutoff.",
+      "why": "The ring desk has no DUST key; dust is the fourth value PACKING cycles through (fused, contact, open, dust), and the sentence sends the visitor looking for a button that is not there.",
+      "proposal": "'Press PACKING until the readout says dust. At depth five the fifth ring's requested radius, 2 m times 0.25 four times over, is about eight millimetres, below the source's one-centimetre cutoff, and a whole level is lost.'",
+      "evidence": "commons/artifacts/recursion_lesson/recursion_lesson.gd:21 (keys MORE, LESS, PACKING, TURN, BEGIN, RULE) and :153-155 (PACKING cycles the four values); algorithms/fractals/example_8_3_recursion_circles_vr.gd:70 (PACKING_R dust 0.25), :87 (start radius 2.0) and :191 ('if level <= 0 or radius < 0.01: return'); commons/maps/Fractal_Recursion/final.md:33.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.008",
+      "title": "Show the helix against the golden spiral it is compared to",
+      "spec": "[figure] Fractal_GoldenSpiral\nQuote: “Its radius grows by phi over a full turn. A curve usually called a golden spiral grows by phi over a quarter turn.”\nWhy: The hall holds the helix and the rectangle's quarter-circle arcs but no quarter-turn logarithmic spiral, so the comparison the sentence asks for has no body anywhere in the room; a figure is the only place the two curves can be seen against each other, and the fractal halls are the only spine halls with no image at all.\nDo: One figure after this paragraph: plan view of the hall's helix (r = 0.1 phi^(theta/2pi)), a true golden spiral from the same start (r proportional to phi^(2 theta/pi)) over one turn, and the rectangle's quarter-circle chain as a third line; caption names which of the three the hall actually draws.\nEvidence: algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd:114-121 ('current_radius = radius * pow(golden_ratio, angle / (2 * PI))'); algorithms/fractals/golden_rectangle/golden_rectangle.gd:362-388 (quarter-circle arcs); commons/maps/Fractal_GoldenSpiral/map_data.json interactables list holds no other spiral work; 28 spine chapters carry images, 0 of the fractal chapters (grep '![').\nFile: commons/maps/Fractal_GoldenSpiral/final.md",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_GoldenSpiral"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "figure",
+      "hall": "Fractal_GoldenSpiral",
+      "quote": "Its radius grows by phi over a full turn. A curve usually called a golden spiral grows by phi over a quarter turn.",
+      "why": "The hall holds the helix and the rectangle's quarter-circle arcs but no quarter-turn logarithmic spiral, so the comparison the sentence asks for has no body anywhere in the room; a figure is the only place the two curves can be seen against each other, and the fractal halls are the only spine halls with no image at all.",
+      "proposal": "One figure after this paragraph: plan view of the hall's helix (r = 0.1 phi^(theta/2pi)), a true golden spiral from the same start (r proportional to phi^(2 theta/pi)) over one turn, and the rectangle's quarter-circle chain as a third line; caption names which of the three the hall actually draws.",
+      "evidence": "algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd:114-121 ('current_radius = radius * pow(golden_ratio, angle / (2 * PI))'); algorithms/fractals/golden_rectangle/golden_rectangle.gd:362-388 (quarter-circle arcs); commons/maps/Fractal_GoldenSpiral/map_data.json interactables list holds no other spiral work; 28 spine chapters carry images, 0 of the fractal chapters (grep '![').",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.009",
+      "title": "Use the same name for the trace hall as Fractal_Recursion",
+      "spec": "[prose] Fractal_KochSierpinski\nQuote: “From Trace we still carry a question: how much of the next detail could this encounter distinguish?”\nWhy: This is the same back-reference as 'the trace' in Fractal_Recursion, now capitalised as a proper name, so the two halls disagree about what the earlier hall is called and the reader again has no anchor.\nDo: 'From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?' (same wording as the Fractal_Recursion fix)\nEvidence: commons/maps/Fractal_KochSierpinski/final.md:25 versus commons/maps/Fractal_Recursion/final.md:35; commons/maps/sequences/primitives.json:48 (Point_Trace).\nFile: commons/maps/Fractal_KochSierpinski/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_KochSierpinski"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Fractal_KochSierpinski",
+      "quote": "From Trace we still carry a question: how much of the next detail could this encounter distinguish?",
+      "why": "This is the same back-reference as 'the trace' in Fractal_Recursion, now capitalised as a proper name, so the two halls disagree about what the earlier hall is called and the reader again has no anchor.",
+      "proposal": "'From the trace hall in the first sequence we still carry a question: how much of the next detail could this encounter distinguish?' (same wording as the Fractal_Recursion fix)",
+      "evidence": "commons/maps/Fractal_KochSierpinski/final.md:25 versus commons/maps/Fractal_Recursion/final.md:35; commons/maps/sequences/primitives.json:48 (Point_Trace).",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.010",
+      "title": "ENDS also marks the trunk's handover",
+      "spec": "[code-claim] Fractal_Synthesis\nQuote: “ENDS adds marks at the deepest recorded blocks.”\nWhy: ENDS is the block tree's apparatus view, which places a mark at the joint where the trunk hands off as well as at every deepest block; the visitor sees a mark the sentence does not account for, and the trees hall describes the same key correctly ('at the handover and terminal branches').\nDo: 'ENDS marks the joint where the trunk hands off and every deepest recorded block.'\nEvidence: algorithms/fractals/recursive_tree/recursive_tree.gd:48-49 (apparatus: 'a mark at the fork the trunk hands off to and at every terminal') and :573-582 (AFT_JOINT at trunk_height plus AFT_TERMINAL at deepest tips); commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd:72 (ENDS maps to 'apparatus'); commons/maps/Fractal_RecursiveTrees/final.md:39; commons/maps/Fractal_Synthesis/final.md:31.\nFile: commons/maps/Fractal_Synthesis/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_Synthesis"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Fractal_Synthesis",
+      "quote": "ENDS adds marks at the deepest recorded blocks.",
+      "why": "ENDS is the block tree's apparatus view, which places a mark at the joint where the trunk hands off as well as at every deepest block; the visitor sees a mark the sentence does not account for, and the trees hall describes the same key correctly ('at the handover and terminal branches').",
+      "proposal": "'ENDS marks the joint where the trunk hands off and every deepest recorded block.'",
+      "evidence": "algorithms/fractals/recursive_tree/recursive_tree.gd:48-49 (apparatus: 'a mark at the fork the trunk hands off to and at every terminal') and :573-582 (AFT_JOINT at trunk_height plus AFT_TERMINAL at deepest tips); commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd:72 (ENDS maps to 'apparatus'); commons/maps/Fractal_RecursiveTrees/final.md:39; commons/maps/Fractal_Synthesis/final.md:31.",
+      "review": "confirmed by a code checker (cited files only): recursive_tree.gd:573-582 'apparatus' builds marks = [{at: (0, trunk_height - trunk_width/2, 0), c: AFT_JOINT}] plus one AFT_TERMINAL per box at the deepest depth; :48-49 documents it as 'a mark at the fork the trunk hands off to and at every terminal'. recursive_tree_lesson.gd:72 maps ENDS -> 'apparatus'. Fractal_Synthesis/final.md:31 says only 'at the deepest recorded blocks'; Fractal_RecursiveTrees/final.md:39 says 'at the handover and terminal branches'.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.011",
+      "title": "Quote the box-counting lines as written so 'the key' has a referent",
+      "spec": "[code-claim] Fractal_KochSierpinski\nQuote: “occupied[ix * 10000 + iz] = true”\nWhy: The source computes 'var key := ix * 10000 + iz' and then writes 'occupied[key] = true'; the chapter's merged line drops the key variable that the very next sentence ('The key gives this cell an address') relies on, so 'the key' points at nothing on the page.\nDo: Replace the three-line excerpt with the four source lines: var ix := int(shifted.x / box_size) / var iz := int(shifted.z / box_size) / var key := ix * 10000 + iz / occupied[key] = true.\nEvidence: algorithms/fractals/box_counting_dimension/box_counting_dimension.gd:299-302 (the counting path); the merged form appears only in the longhand cover at :557 and stores a Vector2i, not true; commons/maps/Fractal_KochSierpinski/final.md:59-65.\nFile: commons/maps/Fractal_KochSierpinski/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_KochSierpinski"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Fractal_KochSierpinski",
+      "quote": "occupied[ix * 10000 + iz] = true",
+      "why": "The source computes 'var key := ix * 10000 + iz' and then writes 'occupied[key] = true'; the chapter's merged line drops the key variable that the very next sentence ('The key gives this cell an address') relies on, so 'the key' points at nothing on the page.",
+      "proposal": "Replace the three-line excerpt with the four source lines: var ix := int(shifted.x / box_size) / var iz := int(shifted.z / box_size) / var key := ix * 10000 + iz / occupied[key] = true.",
+      "evidence": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd:299-302 (the counting path); the merged form appears only in the longhand cover at :557 and stores a Vector2i, not true; commons/maps/Fractal_KochSierpinski/final.md:59-65.",
+      "review": "confirmed by a code checker (cited files only): box_counting_dimension.gd:299-302: var ix / var iz / var key := ix * 10000 + iz / occupied[key] = true. The merged form occupied[ix * 10000 + iz] appears only at :557 in the longhand cover and stores Vector2i(ix, iz). Fractal_KochSierpinski/final.md:59-65 prints the three-line merged excerpt followed by 'The key gives this cell an address.'",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.012",
+      "title": "Quote the desk's real height line instead of a paraphrase",
+      "spec": "[code-claim] Fractal_GoldenSpiral\nQuote: “var h = 0.05 * value / # or / var h = 0.5 * log(float(value)) + 0.5”\nWhy: Neither line exists in the source; the desk's actual line is one selector, 'var h: float=0.05*n if linear else 0.5*log(float(n))+0.5', and showing it puts the HEIGHT key itself (it flips 'linear') into the code the reader is told holds 'two decisions'.\nDo: Replace the paraphrase with the lesson's line as written and add: 'HEIGHT flips linear; the recurrence above never sees it.'\nEvidence: commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd:65 (the line) and :97 (HEIGHT toggles linear); algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd:58 (the artifact's own 'var height = log(number) * 0.5 + 0.5'); commons/maps/Fractal_GoldenSpiral/final.md:28-32.\nFile: commons/maps/Fractal_GoldenSpiral/final.md",
+      "effort": "10min",
+      "skill": "verify",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_GoldenSpiral"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the sentence in the headset, or against the code the evidence names",
+      "kind": "code-claim",
+      "hall": "Fractal_GoldenSpiral",
+      "quote": "var h = 0.05 * value / # or / var h = 0.5 * log(float(value)) + 0.5",
+      "why": "Neither line exists in the source; the desk's actual line is one selector, 'var h: float=0.05*n if linear else 0.5*log(float(n))+0.5', and showing it puts the HEIGHT key itself (it flips 'linear') into the code the reader is told holds 'two decisions'.",
+      "proposal": "Replace the paraphrase with the lesson's line as written and add: 'HEIGHT flips linear; the recurrence above never sees it.'",
+      "evidence": "commons/artifacts/golden_mapping_lesson/golden_mapping_lesson.gd:65 (the line) and :97 (HEIGHT toggles linear); algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd:58 (the artifact's own 'var height = log(number) * 0.5 + 0.5'); commons/maps/Fractal_GoldenSpiral/final.md:28-32.",
+      "review": "confirmed by a code checker (cited files only): golden_mapping_lesson.gd:65 is exactly 'var h: float=0.05*n if linear else 0.5*log(float(n))+0.5'; :97 '\"HEIGHT\":linear=not linear;_numbers()'. FibonacciSequences.gd:58 'var height = log(number) * 0.5 + 0.5'. final.md:28-32 shows the two paraphrased lines 'var h = 0.05 * value / # or / var h = 0.5 * log(float(value)) + 0.5', neither in source.",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.013",
+      "title": "Replace 'the next capability' with the hall the reader will reach",
+      "spec": "[prose] Fractal_GoldenSpiral\nQuote: “The next capability will give those instructions a grammar.”\nWhy: 'Capability' is project vocabulary the visitor has never met, and the grammar laboratory is two halls away: the synthesis hall comes first, so 'next' misleads about what the teleporter leads to.\nDo: 'After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.'\nEvidence: commons/maps/sequences/fractals.json maps order (Fractal_GoldenSpiral, Fractal_Synthesis, then the lsystems sequence); commons/maps/LSystems_Grammar_Lab/final.md:15 ('We brought a construction out of the fractal halls'); commons/maps/Fractal_GoldenSpiral/final.md:69.\nFile: commons/maps/Fractal_GoldenSpiral/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_GoldenSpiral"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "prose",
+      "hall": "Fractal_GoldenSpiral",
+      "quote": "The next capability will give those instructions a grammar.",
+      "why": "'Capability' is project vocabulary the visitor has never met, and the grammar laboratory is two halls away: the synthesis hall comes first, so 'next' misleads about what the teleporter leads to.",
+      "proposal": "'After the synthesis hall, a grammar laboratory will give those instructions letters and a reader.'",
+      "evidence": "commons/maps/sequences/fractals.json maps order (Fractal_GoldenSpiral, Fractal_Synthesis, then the lsystems sequence); commons/maps/LSystems_Grammar_Lab/final.md:15 ('We brought a construction out of the fractal halls'); commons/maps/Fractal_GoldenSpiral/final.md:69.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.014",
+      "title": "Give the opening question the heading marker its neighbours use",
+      "spec": "[structure] Fractal_Recursion\nQuote: “How many times can *again* happen?”\nWhy: The six other fractal halls open with a '# ' title and the tag tool lists this one as an untitled region, so the sequence's first hall reads and indexes differently from the rest; the map's own title is this line. (Other sequences do open on bare question lines, so this is a within-sequence consistency fix, not a book rule.)\nDo: Prefix the first line with '# ' (keeping the italic 'again').\nEvidence: python tools/final_tags.py --map=Fractal_Recursion (first region shown as '—' with the question); commons/maps/Fractal_Recursion/final.md:1 versus the '# ' first lines of the other six fractal chapters; commons/maps/Fractal_Recursion/map_data.json map_info.title.\nFile: commons/maps/Fractal_Recursion/final.md",
+      "effort": "10min",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "re-read the chapter after the change",
+      "kind": "structure",
+      "hall": "Fractal_Recursion",
+      "quote": "How many times can *again* happen?",
+      "why": "The six other fractal halls open with a '# ' title and the tag tool lists this one as an untitled region, so the sequence's first hall reads and indexes differently from the rest; the map's own title is this line. (Other sequences do open on bare question lines, so this is a within-sequence consistency fix, not a book rule.)",
+      "proposal": "Prefix the first line with '# ' (keeping the italic 'again').",
+      "evidence": "python tools/final_tags.py --map=Fractal_Recursion (first region shown as '—' with the question); commons/maps/Fractal_Recursion/final.md:1 versus the '# ' first lines of the other six fractal chapters; commons/maps/Fractal_Recursion/map_data.json map_info.title.",
+      "review": "quote checked: verbatim in the chapter (script, no agent) · unreviewed: the skeptic has not run for this sequence yet",
+      "notes": "Heading marker added to the Recursion title. (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "one reader (skeptic pending)",
+      "created_at": "2026-09-24"
+    },
+    {
+      "id": "book_fractals.015",
+      "title": "Say what a fractal is, once, from the squares - and give the line as the edge",
+      "spec": "The sequence's 6,283 words never define the word; 'self-similar' does not appear. NOC states Mandelbrot's definition once (a part is a reduced copy of the whole) and adds the negative test: a straight line is self-similar and is not a fractal - fine structure at every scale is the second condition. The squares desk is the place: seven half-copies, then the edge.\n\nProposal: After 'Seven levels produce seven squares': 'Each square is a smaller copy of the one around it. That is the first half of what the word fractal names; the second half is that the copying does not stop at any scale you can reach - a straight line is also made of smaller lines, and nobody calls it a fractal.' Then keep the loop-vs-recursion sentence.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "Fractal_Recursion",
+      "quote": "Seven levels produce seven squares. One call makes one further call.",
+      "why": "The sequence's 6,283 words never define the word; 'self-similar' does not appear. NOC states Mandelbrot's definition once (a part is a reduced copy of the whole) and adds the negative test: a straight line is self-similar and is not a fractal - fine structure at every scale is the second condition. The squares desk is the place: seven half-copies, then the edge.",
+      "proposal": "After 'Seven levels produce seven squares': 'Each square is a smaller copy of the one around it. That is the first half of what the word fractal names; the second half is that the copying does not stop at any scale you can reach - a straight line is also made of smaller lines, and nobody calls it a fractal.' Then keep the loop-vs-recursion sentence.",
+      "evidence": "commons/maps/Fractal_Recursion/final.md paragraph 5; natureofcode.com/fractals/ 'What Is a Fractal?'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Definition + the line as the edge, after \"Seven levels produce seven squares\"; Mandelbrot footnote. (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_fractals.016",
+      "title": "Name the three trees as three ways of choosing the next fork (deterministic / seeded / grammar)",
+      "spec": "NOC's ladder - the deterministic tree is 'too perfect', random angles and counts 'go too far', noise makes the variation gradual - is standing in this hall: recursive_tree_2 (no randomness; GROW/ANGLE/LENGTH/FORKS), recursive_tree (seeded), fractal_lsystem_tree (NOC 8.9: F -> FF+[+F-F-F]-[-F+F+F], a grammar). The chapter names the first two and calls the third 'the mesh fractal' or nothing. Noise is the sequence two rooms back.\n\nProposal: One paragraph before the handover: the same rule, three ways of choosing the next fork - a number, a seed, a sentence - and which of them looks like a tree to you, and why that is not evidence.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_RecursiveTrees"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "Fractal_RecursiveTrees",
+      "quote": "Further in, the downward trees, the mesh fractal, the desk and the small subdivision cubes keep other possibilities in view.",
+      "why": "NOC's ladder - the deterministic tree is 'too perfect', random angles and counts 'go too far', noise makes the variation gradual - is standing in this hall: recursive_tree_2 (no randomness; GROW/ANGLE/LENGTH/FORKS), recursive_tree (seeded), fractal_lsystem_tree (NOC 8.9: F -> FF+[+F-F-F]-[-F+F+F], a grammar). The chapter names the first two and calls the third 'the mesh fractal' or nothing. Noise is the sequence two rooms back.",
+      "proposal": "One paragraph before the handover: the same rule, three ways of choosing the next fork - a number, a seed, a sentence - and which of them looks like a tree to you, and why that is not evidence.",
+      "evidence": "commons/maps/Fractal_RecursiveTrees/map_data.json (fractal_lsystem_tree placed); registry: fractal_lsystem_tree -> algorithms/fractals/example_8_9_lsystem_tree_vr.tscn",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Three-trees paragraph before the RecursiveTrees handover (number / seed / sentence). (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_fractals.017",
+      "title": "The order of drawing is a subject: GROW is breadth-first, a self-call would be depth-first",
+      "spec": "recursive_tree.gd:3 'A queue evaluates a recursive branching rule one tip at a time' (pop_front at :120): every tip grows at once - the tide. A function that calls itself, NOC's branch() with push()/pop(), draws one side to its last twig before the other - the diver. NOC Ex. 8.6 asks the reader to number the branches in the order they are actually drawn. The chapter has the fact and misses the encounter, and the sequence already met the two orders in GT_Foundations.\n\nProposal: Turn the queue sentence into a beat: 'Press GROW and say, before it happens, which branch comes next. Every tip at once. A function that called itself would have taken one branch to its end first and come back for the rest - the same tree, the tide's order or the diver's.'",
+      "effort": "1h",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_RecursiveTrees"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "Fractal_RecursiveTrees",
+      "quote": "Growth here is a queue of instructions, advanced one generation at a time.",
+      "why": "recursive_tree.gd:3 'A queue evaluates a recursive branching rule one tip at a time' (pop_front at :120): every tip grows at once - the tide. A function that calls itself, NOC's branch() with push()/pop(), draws one side to its last twig before the other - the diver. NOC Ex. 8.6 asks the reader to number the branches in the order they are actually drawn. The chapter has the fact and misses the encounter, and the sequence already met the two orders in GT_Foundations.",
+      "proposal": "Turn the queue sentence into a beat: 'Press GROW and say, before it happens, which branch comes next. Every tip at once. A function that called itself would have taken one branch to its end first and come back for the rest - the same tree, the tide's order or the diver's.'",
+      "evidence": "algorithms/fractals/recursivetree/recursive_tree.gd:3,101,119-120,196; natureofcode.com/fractals/ Exercise 8.6",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "GROW beat rewritten: every tip at once vs one branch to its last twig; no tide/diver names (graphtheory is spine index 20, after fractals at 12). (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "repetition"
+    },
+    {
+      "id": "book_fractals.018",
+      "title": "Say once that the Koch 'next list' is the CA's next generation and the L-system's next sentence",
+      "spec": "NOC says it outright: the segments/next arrays are the Game of Life's current/next swap, and the L-system's current/next strings are the same mechanism. The spine order is the book's (cellularautomata -> fractals -> lsystems); the chapter has the list and neither looks back two rooms nor forward one.\n\nProposal: Add after the quoted sentence: 'Two rooms ago every cell computed its next state from the current row and the rows were swapped; this list is that swap, with segments for cells. In the next sequence it will be a sentence.'",
+      "effort": "10min",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_KochSierpinski"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "Fractal_KochSierpinski",
+      "quote": "The next call receives these segments as its beginning.",
+      "why": "NOC says it outright: the segments/next arrays are the Game of Life's current/next swap, and the L-system's current/next strings are the same mechanism. The spine order is the book's (cellularautomata -> fractals -> lsystems); the chapter has the list and neither looks back two rooms nor forward one.",
+      "proposal": "Add after the quoted sentence: 'Two rooms ago every cell computed its next state from the current row and the rows were swapped; this list is that swap, with segments for cells. In the next sequence it will be a sentence.'",
+      "evidence": "commons/maps/Fractal_KochSierpinski/final.md; natureofcode.com/fractals/ 'The Koch Curve' (Figure 8.13)",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "One sentence after \"The next call receives these segments as its beginning.\" (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_fractals.019",
+      "title": "Hand over through Cantor-as-a-grammar (A->ABA, B->BBB) - needs a Cantor preset in lsystem_editor",
+      "spec": "The handover reaches for the grammar lab's Koch preset and has to apologise that it is the 90-degree quadratic Koch (lsystem_editor.gd:103). NOC's bridge is cleaner: alphabet A B, axiom A, rules A->ABA and B->BBB, A draws and B moves - and the Cantor set appears ('Look familiar?'). grammar_operations.json already says 'delete' is taught_by cantor_set; lsystem_editor has presets Koch/Sierpinski/Dragon/Plant/Bush/Fern/Binary Tree and no Cantor.\n\nProposal: Add a 'Cantor' preset to commons/artifacts/lsystem_editor/lsystem_editor.gd (axiom A; A->ABA, B->BBB; A = draw, B = move; angle 0) and rewrite the handover: 'The interval you cut five times is, in the next hall, two letters and two rules.' Keep the snowflake caveat only if the Koch preset is still the one named.",
+      "effort": "1h",
+      "skill": "ada-sequence-expert",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_Synthesis"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "handover",
+      "hall": "Fractal_Synthesis",
+      "quote": "Its preset called \"Koch Curve\" replaces `F` with `F+F-F-F+F` and turns ninety degrees. Our equilateral snowflake uses a different construction.",
+      "why": "The handover reaches for the grammar lab's Koch preset and has to apologise that it is the 90-degree quadratic Koch (lsystem_editor.gd:103). NOC's bridge is cleaner: alphabet A B, axiom A, rules A->ABA and B->BBB, A draws and B moves - and the Cantor set appears ('Look familiar?'). grammar_operations.json already says 'delete' is taught_by cantor_set; lsystem_editor has presets Koch/Sierpinski/Dragon/Plant/Bush/Fern/Binary Tree and no Cantor.",
+      "proposal": "Add a 'Cantor' preset to commons/artifacts/lsystem_editor/lsystem_editor.gd (axiom A; A->ABA, B->BBB; A = draw, B = move; angle 0) and rewrite the handover: 'The interval you cut five times is, in the next hall, two letters and two rules.' Keep the snowflake caveat only if the Koch preset is still the one named.",
+      "evidence": "commons/artifacts/lsystem_editor/lsystem_editor.gd:75,103; commons/artifacts/grammar_operations.json:394; natureofcode.com/fractals/ 'L-systems' (Figure 8.21)",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Cantor preset added to lsystem_editor.gd (PRESETS[7], grammar \"cantor\", GRAMMAR_INDEX, slider maps 7.0/7.99, registry axis list); handover rewritten. Probe: grammar:cantor -> 32 F in 243 steps, 64 line vertices; koch unchanged. (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_fractals.020",
+      "title": "Name the makers - and the makers before Mandelbrot - one footnote per hall",
+      "spec": "The seven chapters name nobody. NOC dates them (Cantor 1883, von Koch 1904, Lindenmayer 1968, Mandelbrot 1975 - 'fractal' from fractus, 'broken') and gives a paragraph on fractal structure in Ba-ila village layouts and Islamic geometry before the Western formalisation (the source behind it is Eglash, African Fractals, 1999). Boids got Reynolds and GT_Foundations got Euler; this is the sequence's self-colonial-recognition beat, unwritten.\n\nProposal: Footnotes: Cantor 1883 (CantorSet), von Koch 1904 and Sierpinski 1915 (KochSierpinski), Menger 1926 (MengerSponge), Fibonacci 1202 / Liber Abaci (GoldenSpiral), Mandelbrot 1975 (Recursion, where the word is first used). In Synthesis, one paragraph: the Ba-ila layout and the Islamic pattern carried this structure before it had a Latin name - resemblance is not the only thing that arrives before the rule; so does the practice.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_Recursion"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "footnote",
+      "hall": "Fractal_Recursion (also Fractal_CantorSet, Fractal_KochSierpinski, Fractal_MengerSponge, Fractal_GoldenSpiral)",
+      "quote": "",
+      "why": "The seven chapters name nobody. NOC dates them (Cantor 1883, von Koch 1904, Lindenmayer 1968, Mandelbrot 1975 - 'fractal' from fractus, 'broken') and gives a paragraph on fractal structure in Ba-ila village layouts and Islamic geometry before the Western formalisation (the source behind it is Eglash, African Fractals, 1999). Boids got Reynolds and GT_Foundations got Euler; this is the sequence's self-colonial-recognition beat, unwritten.",
+      "proposal": "Footnotes: Cantor 1883 (CantorSet), von Koch 1904 and Sierpinski 1915 (KochSierpinski), Menger 1926 (MengerSponge), Fibonacci 1202 / Liber Abaci (GoldenSpiral), Mandelbrot 1975 (Recursion, where the word is first used). In Synthesis, one paragraph: the Ba-ila layout and the Islamic pattern carried this structure before it had a Latin name - resemblance is not the only thing that arrives before the rule; so does the practice.",
+      "evidence": "natureofcode.com/fractals/ 'What Is a Fractal?' and 'Recursion'; no attribution in any commons/maps/Fractal_*/final.md",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Footnotes: Mandelbrot (Recursion), Cantor 1883 + Smith 1874 (CantorSet), von Koch 1904 + Sierpinski 1915 (KochSierpinski), Menger 1926 (MengerSponge), Fibonacci / Virahanka / Hemachandra / Euclid (GoldenSpiral); the makers-before-the-name paragraph + Eglash footnote in Synthesis. (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_fractals.021",
+      "title": "A Koch segment the hand can pull (NOC Ex. 8.3: each segment a spring) - a decision",
+      "spec": "Shiffman's reason for making each segment an object is that it can then move on its own and join a physics simulation; Exercise 8.3 makes each segment a spring. Ada's Koch is already that list of segments, and in a sequence called Room to Move the only body that moves is the visitor's, in the sponge. The chapter says the pieces are not load-bearing and stops.\n\nProposal: Design decision for Palle: (a) a Koch curve whose segments are grabbable bodies joined by springs (softbodies has the springs) - pull the peak and watch the sub-peaks follow; or (b) keep the sculpture still and let the chapter say the segments are things: 'each of these 256 pieces is a separate object; nothing here has asked them to move yet.'",
+      "effort": "half-day",
+      "skill": "ada-map-expert",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_KochSierpinski"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "encounter",
+      "hall": "Fractal_KochSierpinski",
+      "quote": "Neither view makes these pieces load-bearing: the sculpture has no collision, although its control desk does.",
+      "why": "Shiffman's reason for making each segment an object is that it can then move on its own and join a physics simulation; Exercise 8.3 makes each segment a spring. Ada's Koch is already that list of segments, and in a sequence called Room to Move the only body that moves is the visitor's, in the sponge. The chapter says the pieces are not load-bearing and stops.",
+      "proposal": "Design decision for Palle: (a) a Koch curve whose segments are grabbable bodies joined by springs (softbodies has the springs) - pull the peak and watch the sub-peaks follow; or (b) keep the sculpture still and let the chapter say the segments are things: 'each of these 256 pieces is a separate object; nothing here has asked them to move yet.'",
+      "evidence": "algorithms/fractals/example_8_5_koch_curve_vr.gd (segment list); natureofcode.com/fractals/ Exercise 8.3",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Option (b) applied: one sentence in the Koch section says the 256 pieces are separate objects nothing has yet asked to move. Option (a), a pullable Koch, stays a design decision. (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false,
+      "event": "transformation"
+    },
+    {
+      "id": "book_fractals.022",
+      "title": "The biome ring's own flora is a fractal procedure the visitor walks past - say whether it is the desks' rule",
+      "spec": "NOC's Ecosystem Project asks for plantlike creatures, leaves, fruit. Ada already has it: soft_stages.json grows the fractals stage (order 10) with allow_flags fractal_flora / fractal_terrain, kingdoms flower/tree/fungus, vegetation_density 0.6, terrain_mode growth, ambient recursive_world. No chapter mentions that the trees in the ring and the trees on the desks are, or are not, the same rule.\n\nProposal: Check the flora builder (algorithms/nature_system, BiomeRingComponent) for what fractal_flora actually grows; then one paragraph: the trees around this hall were grown by a rule too - which of the desks' rules, and what did it inherit that the desks do not show (a seed per plant? light? the ring's own clock?).",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "map_refs": [
+        "Fractal_Synthesis"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "structure",
+      "hall": "Fractal_Synthesis",
+      "quote": "The collection beyond offers further procedures to compare.",
+      "why": "NOC's Ecosystem Project asks for plantlike creatures, leaves, fruit. Ada already has it: soft_stages.json grows the fractals stage (order 10) with allow_flags fractal_flora / fractal_terrain, kingdoms flower/tree/fungus, vegetation_density 0.6, terrain_mode growth, ambient recursive_world. No chapter mentions that the trees in the ring and the trees on the desks are, or are not, the same rule.",
+      "proposal": "Check the flora builder (algorithms/nature_system, BiomeRingComponent) for what fractal_flora actually grows; then one paragraph: the trees around this hall were grown by a rule too - which of the desks' rules, and what did it inherit that the desks do not show (a seed per plant? light? the ring's own clock?).",
+      "evidence": "commons/maps/soft_stages.json 'fractals'; algorithms/nature_system/; natureofcode.com/fractals/ 'The Ecosystem Project'",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "NOT applied: the endless museum does not stand the biome ring (no BiomeRingComponent in endless_museum.gd; the ring is a GridSystem component, grid lane only), so a museum visitor never walks past the flora. Decide whether the museum should grow the fractals stage before the chapter mentions it. The nature tree IS recursive (TreeGrowthComponent._grow_branch, depth from dna.segments).",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    },
+    {
+      "id": "book_fractals.023",
+      "title": "Give the stochastic tree a paragraph: the hall's only unseeded fractal, a different tree at every rebuild",
+      "spec": "stochastic_tree_separated is NOC 8.7 plus a repulsion pass ('a tree argues with itself' - branches push apart level by level after growth), shipped with randomize() (rng_seed 0 keeps it). It is the spine halls' only stochastic fractal and the chapter gives it three words. NOC's point about 8.7 - randomness makes the tree organic and then, unbounded, 'goes too far' - lands here, and so does the RESET contrast: every deterministic desk in the sequence returns the same object; this tree never does.\n\nProposal: A paragraph after the pagoda: the three trees are one rule with the fork chosen by chance and then pushed apart; look away and back after a rebuild and it is another tree; ask what 'the same tree' could mean for it.",
+      "effort": "1h",
+      "skill": "ada-humanizer",
+      "depends_on": [],
+      "status": "done",
+      "claimed_by": "claude",
+      "done_at": "2026-09-25",
+      "map_refs": [
+        "Fractal_CantorSet"
+      ],
+      "sequence_refs": [
+        "fractals"
+      ],
+      "verification": "Re-read the hall final.md against the cited NOC section and the cited code lines.",
+      "kind": "prose",
+      "hall": "Fractal_CantorSet",
+      "quote": "The smaller Cantor drawing, the three trees, the cloud and the dark sphere remain around the experiment.",
+      "why": "stochastic_tree_separated is NOC 8.7 plus a repulsion pass ('a tree argues with itself' - branches push apart level by level after growth), shipped with randomize() (rng_seed 0 keeps it). It is the spine halls' only stochastic fractal and the chapter gives it three words. NOC's point about 8.7 - randomness makes the tree organic and then, unbounded, 'goes too far' - lands here, and so does the RESET contrast: every deterministic desk in the sequence returns the same object; this tree never does.",
+      "proposal": "A paragraph after the pagoda: the three trees are one rule with the fork chosen by chance and then pushed apart; look away and back after a rebuild and it is another tree; ask what 'the same tree' could mean for it.",
+      "evidence": "algorithms/fractals/example_8_7_stochastic_tree_separated_vr.gd:17-24,81,96-98,144; commons/maps/Fractal_CantorSet/map_data.json",
+      "review": "by hand: NOC chapter read in full; cited files read",
+      "notes": "Paragraph on the three stochastic trees at the far end of the Cantor hall (self-call, chance at every fork, separation, no seed, never the same tree). (doc/book/iterations/claude-fractals-noc-reading-2026-09-25)",
+      "source": "Nature of Code ch. 8 reading, 25 Sept (doc/book/readings/NOC_fractals_2026-09-25.md)",
+      "created_at": "2026-09-25",
+      "triage": null,
+      "triaged_at": null,
+      "stale": false
+    }
+  ]
+}

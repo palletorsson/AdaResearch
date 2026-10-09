@@ -1,0 +1,33 @@
+--- canonical/Trans_Translation/final.md
++++ review-draft/Trans_Translation/final.md
+@@ -16,13 +16,7 @@
+ 
+ Near the entrance, three small axis markers show x, y and z separately. Along the route, those directions have become sideways travel, a lift and a passage into depth.
+ 
+-The transport script calculates a destination from a starting position, a direction and a distance:
+-
+-```gdscript
+-target_position = initial_position + (move_direction * move_distance)
+-```
+-
+-The direction is normalised: its vector is given a length of one. Multiplying it by `move_distance` sets how far the carrier will go. Adding that displacement to `initial_position` gives its destination. Three metres up and three metres forward use the same addition, with different directions.
++A starting position, a direction and a distance determine each destination. Three metres up and three metres forward use the same relation with different directions.
+ 
+ On the upper route, another carrier travels along z. It repeats a direction you have already travelled near the floor. Now you can look down past its edge to the route that brought you here.
+ 
+@@ -34,14 +28,7 @@
+ 
+ Take one, then look back while the carrier moves on.
+ 
+-The carrier brings your body to a pickup by sharing its displacement:
+-
+-```gdscript
+-var movement_delta = global_position - previous_position
+-_translate_rider(carried_player, movement_delta)
+-```
+-
+-For each small move of the carrier, your position moves with it. A pickup detects the arriving body and disappears. Ride back to its place. The carrier can repeat the journey; the cube is gone.
++Each small displacement of the carrier moves your supported body with it. The pickup detects your arrival and disappears. Ride back to its place. The carrier can repeat the journey; the cube is gone.
+ 
+ <!-- @ -->
+ 

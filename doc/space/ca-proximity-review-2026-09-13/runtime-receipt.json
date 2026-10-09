@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-13T23:48:29+02:00",
+  "finished": "2026-09-13T23:48:56+02:00",
+  "pid": 41224,
+  "exit": 0,
+  "checks": 36,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/ca_proximity_probe_base.gd": "df87134637aabd2ccc7421683d9d9e15efc6af2d98d10c2a745b6ce1df2577a3",
+    "ada_run/ca_proximity_acceptance.gd": "1a76c8747edf3f26d1dd65e0f322e62b4272b49526156873038ff4a5e13418eb",
+    "commons/maps/CA_ExpandingSpace/map_data.json": "1580ee6bc3100cd09d980cab2fff66683de3c4e0a744bcf9c8a15c4e881115f2",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-proximity-review-2026-09-13/review-plan.json": "c661158332e9d947eedc7819dcf1d03b08c0abb9d9ae599626b686d04ea219ce",
+    "algorithms/cellularautomata/living_architecture/decaying_bridge.gd": "c13295b2a9f0638401183e32d713cfcab5e083d66fa0b00279a9cd453e4bea7f",
+    "algorithms/cellularautomata/living_architecture/proximity_study.gd": "8fa0284632e0a0e53ecebccd7f5424a799161bb1becd7bdb0db0f7e90a7aea69",
+    "algorithms/cellularautomata/cellular_automata_3d_tree/CellularAutomata3DTree.gd": "b78c21f13077441d89f88ecc4511384fe2eb8817858d2227fde7dedaa734d6e5"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

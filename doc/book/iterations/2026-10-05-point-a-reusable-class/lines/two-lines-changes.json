@@ -1,0 +1,26 @@
+[
+  {
+    "id": "two_lines_parallel",
+    "kind": "insert_after",
+    "anchor": "    add_child(line)\n",
+    "text": "    point.position = Vector3(-0.6, 1.12, 0)\n    point_b.position = Vector3(0.6, 1.12, 0)\n    var c := Vector3(-0.6, 1.62, 0)\n    var d := Vector3(0.6, 1.62, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+  },
+  {
+    "id": "two_lines_plus",
+    "kind": "insert_after",
+    "anchor": "    add_child(line)\n",
+    "text": "    point.position = Vector3(-0.6, 1.42, 0)\n    point_b.position = Vector3(0.6, 1.42, 0)\n    var c := Vector3(0, 0.82, 0)\n    var d := Vector3(0, 2.02, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+  },
+  {
+    "id": "two_lines_x",
+    "kind": "insert_after",
+    "anchor": "    add_child(line)\n",
+    "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02, 0)\n    var d := Vector3(0.6, 0.82, 0)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+  },
+  {
+    "id": "two_lines_x_depth",
+    "kind": "insert_after",
+    "anchor": "    add_child(line)\n",
+    "text": "    point.position = Vector3(-0.6, 0.82, 0)\n    point_b.position = Vector3(0.6, 2.02, 0)\n    var c := Vector3(-0.6, 2.02,0.2)\n    var d := Vector3(0.6, 0.82,0.2)\n    var other_line := LineSkin.new()\n    add_child(other_line)\n    other_line.show_segment(c, d - c, (d - c).length())\n"
+  }
+]

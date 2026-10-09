@@ -1,0 +1,113 @@
+{
+  "date": "2026-09-12",
+  "hall": "WaveFunctions_Sine_Space",
+  "primary_order": [
+    "sine_flow_tray",
+    "sine_wall_corridor"
+  ],
+  "book_anchors": [
+    "sine_flow_tray",
+    "sine_wall_corridor"
+  ],
+  "primary_photos": true,
+  "placed_hall": {
+    "name": "WaveFunctions_Sine_Space",
+    "sequence": "wavefunctions",
+    "chapter": 9,
+    "i0": 686,
+    "n": 5,
+    "z0": 2260,
+    "z1": 2305,
+    "w": 14,
+    "h": 45,
+    "x0": -7,
+    "built": true,
+    "source": "authored",
+    "in_spine_n": 5,
+    "dead_n": 0,
+    "states": {
+      "placed": 5
+    },
+    "pack": {
+      "planned": 5,
+      "matched": 5,
+      "extra": 0,
+      "slid": 0,
+      "ringed": 0,
+      "placed": 5,
+      "refused": 0,
+      "declared": 0,
+      "unplanned": 0,
+      "vestibule": 4,
+      "key": "wavefunctions|wavefunctions sine space"
+    },
+    "bake_candidate_fails": 0
+  },
+  "next_hall": "WaveFunctions_Effect_Sound",
+  "desktop_checks": 105,
+  "failures": [],
+  "headset_verified": false,
+  "published_bytes_match": {
+    "sine-contact.html": true,
+    "sine-contact.md": true,
+    "sine-contact-final.md": true,
+    "sine-contact-check.json": true,
+    "sine-contact-corridor-check.json": true,
+    "sine-contact-tray.png": true,
+    "sine-contact-hall.png": true,
+    "landscape-thread.html": true,
+    "landscape-thread.md": true,
+    "index.html": true,
+    "working-guide.md": true,
+    "audit.json": true
+  },
+  "guide_links_http_status": {
+    "http://localhost:3003/necklace/thread?map=WaveFunctions_Sine_Space&role=primary": 200,
+    "http://localhost:3003/research/possible-bodies/sine-contact-tray.png": 200,
+    "http://localhost:3003/research/possible-bodies/landscape-thread.html": 200,
+    "http://localhost:3003/research/possible-bodies/sine-contact-corridor-check.json": 200,
+    "http://localhost:3003/research/possible-bodies/sine-contact-hall.png": 200,
+    "http://localhost:3003/research/possible-bodies/landscape-article.html": 200,
+    "http://localhost:3003/research/possible-bodies/sine-contact-final.md": 200,
+    "http://localhost:3003/research/possible-bodies/sine-contact-check.json": 200
+  },
+  "current_source_fingerprints": {
+    "commons/maps/WaveFunctions_Sine_Space/map_data.json": true,
+    "commons/maps/WaveFunctions_Sine_Space/final.md": true,
+    "commons/maps/WaveFunctions_Sine_Space/tutorial.md": true,
+    "commons/maps/WaveFunctions_Sine_Space/technical.md": true,
+    "commons/maps/WaveFunctions_Sine_Space/critical.md": true,
+    "commons/artifacts/sine_flow_tray/sine_flow_tray.gd": true,
+    "commons/artifacts/sine_flow_tray/sine_flow_tray.tscn": true,
+    "commons/artifacts/registry/sine_flow_tray.json": true,
+    "commons/testing/probe_sine_flow_hall.gd": true,
+    "commons/testing/probe_wcn_sine_space.gd": true
+  },
+  "article_sources_unchanged": {
+    "commons/artifacts/landscape_flow_bench/landscape_flow_bench.gd": true,
+    "commons/artifacts/landscape_flow_bench/landscape_flow_bench.tscn": true,
+    "commons/artifacts/timing_machines/machine_stage.gd": true,
+    "commons/testing/landscape_flow_workshop.gd": true,
+    "commons/testing/landscape_flow_workshop.tscn": true,
+    "commons/testing/run_landscape_size_series.gd": true,
+    "project.godot": true
+  },
+  "article_files_unchanged": {
+    "landscape-article.html": true,
+    "landscape-article.md": true,
+    "landscape-size-protocol.md": true,
+    "landscape-size-results.json": true,
+    "landscape-size-analysis.json": true,
+    "landscape-size-trials.csv": true,
+    "landscape-size-contrasts.csv": true,
+    "landscape-size-outcomes.svg": true,
+    "landscape-size-outcomes.png": true,
+    "landscape-size-time.svg": true,
+    "landscape-size-time.png": true,
+    "landscape-size-radius-45.png": true,
+    "landscape-size-radius-75.png": true,
+    "landscape-size-radius-105.png": true,
+    "landscape-size-source.zip": true
+  },
+  "scoped_git_diff_check": "passed; per-command safe.directory used for repository ownership mismatch"
+}

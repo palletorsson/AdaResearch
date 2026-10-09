@@ -1,0 +1,2547 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "39"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [
+				8,
+				3
+			],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				8.5,
+				0.0,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "rhizome_cave_demo"
+		},
+		{
+			"bounds_position": [
+				3.80000019073486,
+				0.0,
+				4.39458894729614
+			],
+			"bounds_size": [
+				3.39999961853027,
+				1.68999993801117,
+				2.05541086196899
+			],
+			"cell": [
+				5,
+				5
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_0/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.61520004272461,
+						1.08779311180115,
+						4.46712446212769
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_0/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.61520004272461,
+						1.08779311180115,
+						4.46712446212769
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_1/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.5,
+						1.08779311180115,
+						4.46712446212769
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_1/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.5,
+						1.08779311180115,
+						4.46712446212769
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_2/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.38479995727539,
+						1.08779311180115,
+						4.46712446212769
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_2/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.38479995727539,
+						1.08779311180115,
+						4.46712446212769
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_3/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.61520004272461,
+						0.974685966968536,
+						4.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_3/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.61520004272461,
+						0.974685966968536,
+						4.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_4/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.5,
+						0.974685966968536,
+						4.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_4/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.5,
+						0.974685966968536,
+						4.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_5/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.38479995727539,
+						0.974685966968536,
+						4.41438150405884
+					]
+				},
+				{
+					"disabled": false,
+					"path": "CONNECTIONS/Btn_5/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.38479995727539,
+						0.974685966968536,
+						4.41438150405884
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "RhizomeGrower",
+					"position": [
+						6.69999980926514,
+						1.39999997615814,
+						5.34999990463257
+					],
+					"text": "NODES 3/3 | EDGES 2\nCOMPONENTS 1 | LINKS 3\nMAX DEGREE 2\nGROWING"
+				},
+				{
+					"parent": "RhizomeGrower",
+					"position": [
+						4.30000019073486,
+						1.39999997615814,
+						5.34999990463257
+					],
+					"text": "NODE 01 | BIRTH 01\nDEGREE 1 | PRESENT\nEarly: white / Later: teal\nCUT toggles removal"
+				},
+				{
+					"parent": "CONNECTIONS",
+					"position": [
+						5.5,
+						1.15021514892578,
+						4.53012800216675
+					],
+					"text": "CONNECTIONS"
+				}
+			],
+			"position": [
+				5.5,
+				0.0,
+				5.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "rhizome_grower"
+		},
+		{
+			"bounds_position": [
+				4.85999965667725,
+				0.0,
+				0.295000016689301
+			],
+			"bounds_size": [
+				3.28000068664551,
+				3.41199994087219,
+				0.409999966621399
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						1.10000002384186
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						1.10000002384186
+					],
+					"text": "Museum of Algorithms"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.61999988555908,
+						-0.100000023841858
+					],
+					"text": "MOA"
+				},
+				{
+					"parent": "ThresholdDoor",
+					"position": [
+						6.5,
+						3.1800000667572,
+						-0.100000023841858
+					],
+					"text": "Museum of Algorithms"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				0.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "gate:speculativecomputation rhizome network"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				10.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				13.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				13.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				14.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.9909999370575,
+				1.58000004291534,
+				10.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				5.00899982452393,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				13.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.99100017547607,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				12.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				10.9910001754761
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				9.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				10.0171728134155,
+				0.419999986886978,
+				9.00439929962158
+			],
+			"bounds_size": [
+				0.981136322021484,
+				1.67999994754791,
+				0.981136322021484
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.5,
+				0.419999986886978,
+				9.5
+			],
+			"rotation": [
+				0.0,
+				213.025344848633,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				8.980224609375,
+				0.419999986886978,
+				2.94754886627197
+			],
+			"bounds_size": [
+				1.0477237701416,
+				1.62438881397247,
+				1.07638883590698
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.419999986886978,
+				3.5
+			],
+			"rotation": [
+				0.0,
+				171.866134643555,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				8.81112766265869,
+				0.419999986886978,
+				7.72938394546509
+			],
+			"bounds_size": [
+				1.46901893615723,
+				0.566275835037231,
+				1.46901941299438
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.5,
+				0.419999986886978,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				218.34912109375,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		},
+		{
+			"bounds_position": [
+				2.94904446601868,
+				0.419999957084656,
+				9.86551094055176
+			],
+			"bounds_size": [
+				1.14383435249329,
+				1.57932984828949,
+				1.20503425598145
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.5,
+				0.419999986886978,
+				10.5
+			],
+			"rotation": [
+				0.0,
+				143.455200195313,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "dream_bodies"
+		}
+	],
+	"captured_states": [
+		{
+			"active": [
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true
+			],
+			"counts": [
+				24,
+				24,
+				22,
+				2,
+				1
+			],
+			"degrees": [
+				1,
+				2,
+				3,
+				3,
+				3,
+				3,
+				2,
+				2,
+				2,
+				3,
+				2,
+				2,
+				1,
+				1,
+				3,
+				1,
+				1,
+				2,
+				1,
+				2,
+				1,
+				1,
+				1,
+				1
+			],
+			"detail": "NODE 03 | BIRTH 03\nDEGREE 3 | PRESENT\nEarly: white / Later: teal\nCUT toggles removal",
+			"positions": [
+				[
+					0.0126328803598881,
+					0.0,
+					0.01914157345891
+				],
+				[
+					-0.0351296663284302,
+					0.0,
+					-0.0408184081315994
+				],
+				[
+					0.197939828038216,
+					-0.0273407623171806,
+					-0.339095175266266
+				],
+				[
+					-0.430394619703293,
+					-0.0309292040765285,
+					-0.434186398983002
+				],
+				[
+					-0.143004179000854,
+					-0.0311143826693296,
+					0.379763424396515
+				],
+				[
+					0.0518048778176308,
+					0.0468351952731609,
+					-0.505841374397278
+				],
+				[
+					-0.671241998672485,
+					0.0442344509065151,
+					-0.500939130783081
+				],
+				[
+					0.221590325236321,
+					0.0306750573217869,
+					0.432427674531937
+				],
+				[
+					-0.775488317012787,
+					-0.0538213178515434,
+					-0.32965886592865
+				],
+				[
+					-0.303732216358185,
+					0.00439886376261711,
+					0.319747000932693
+				],
+				[
+					-0.223618879914284,
+					0.0126828886568546,
+					-0.768355071544647
+				],
+				[
+					0.364823937416077,
+					0.0162534154951572,
+					-0.680055141448975
+				],
+				[
+					-0.304672509431839,
+					-0.0415956899523735,
+					0.419263571500778
+				],
+				[
+					0.263235509395599,
+					-0.0251841172575951,
+					-0.707833468914032
+				],
+				[
+					0.327088475227356,
+					-0.0295326579362154,
+					0.215013012290001
+				],
+				[
+					-0.219919055700302,
+					0.0282851122319698,
+					-0.614128470420837
+				],
+				[
+					0.326837658882141,
+					-0.0590883493423462,
+					-0.250148892402649
+				],
+				[
+					0.346752226352692,
+					0.0487698800861835,
+					0.0340452827513218
+				],
+				[
+					0.573926985263824,
+					-0.0235014520585537,
+					0.424079388380051
+				],
+				[
+					-0.701586008071899,
+					0.0378629006445408,
+					-0.0072705945931375
+				],
+				[
+					0.59401398897171,
+					0.0483568124473095,
+					0.151756465435028
+				],
+				[
+					-0.276336669921875,
+					0.0404208041727543,
+					-0.301322638988495
+				],
+				[
+					-0.715140521526337,
+					-0.0252369679510593,
+					-0.0344990417361259
+				],
+				[
+					-0.496162295341492,
+					0.059529785066843,
+					0.304424583911896
+				]
+			],
+			"readout": "NODES 24/24 | EDGES 22\nCOMPONENTS 2 | LINKS 1\nMAX DEGREE 3\nHELD",
+			"selected": 2,
+			"shot": "rhizome-one"
+		},
+		{
+			"active": [
+				true,
+				true,
+				false,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true
+			],
+			"counts": [
+				24,
+				23,
+				19,
+				4,
+				1
+			],
+			"degrees": [
+				1,
+				1,
+				0,
+				3,
+				3,
+				2,
+				2,
+				2,
+				2,
+				3,
+				2,
+				2,
+				1,
+				1,
+				3,
+				1,
+				0,
+				2,
+				1,
+				2,
+				1,
+				1,
+				1,
+				1
+			],
+			"detail": "NODE 03 | BIRTH 03\nDEGREE 0 | REMOVED\nEarly: white / Later: teal\nCUT toggles removal",
+			"positions": [
+				[
+					0.0126328803598881,
+					0.0,
+					0.01914157345891
+				],
+				[
+					-0.0351296663284302,
+					0.0,
+					-0.0408184081315994
+				],
+				[
+					0.197939828038216,
+					-0.0273407623171806,
+					-0.339095175266266
+				],
+				[
+					-0.430394619703293,
+					-0.0309292040765285,
+					-0.434186398983002
+				],
+				[
+					-0.143004179000854,
+					-0.0311143826693296,
+					0.379763424396515
+				],
+				[
+					0.0518048778176308,
+					0.0468351952731609,
+					-0.505841374397278
+				],
+				[
+					-0.671241998672485,
+					0.0442344509065151,
+					-0.500939130783081
+				],
+				[
+					0.221590325236321,
+					0.0306750573217869,
+					0.432427674531937
+				],
+				[
+					-0.775488317012787,
+					-0.0538213178515434,
+					-0.32965886592865
+				],
+				[
+					-0.303732216358185,
+					0.00439886376261711,
+					0.319747000932693
+				],
+				[
+					-0.223618879914284,
+					0.0126828886568546,
+					-0.768355071544647
+				],
+				[
+					0.364823937416077,
+					0.0162534154951572,
+					-0.680055141448975
+				],
+				[
+					-0.304672509431839,
+					-0.0415956899523735,
+					0.419263571500778
+				],
+				[
+					0.263235509395599,
+					-0.0251841172575951,
+					-0.707833468914032
+				],
+				[
+					0.327088475227356,
+					-0.0295326579362154,
+					0.215013012290001
+				],
+				[
+					-0.219919055700302,
+					0.0282851122319698,
+					-0.614128470420837
+				],
+				[
+					0.326837658882141,
+					-0.0590883493423462,
+					-0.250148892402649
+				],
+				[
+					0.346752226352692,
+					0.0487698800861835,
+					0.0340452827513218
+				],
+				[
+					0.573926985263824,
+					-0.0235014520585537,
+					0.424079388380051
+				],
+				[
+					-0.701586008071899,
+					0.0378629006445408,
+					-0.0072705945931375
+				],
+				[
+					0.59401398897171,
+					0.0483568124473095,
+					0.151756465435028
+				],
+				[
+					-0.276336669921875,
+					0.0404208041727543,
+					-0.301322638988495
+				],
+				[
+					-0.715140521526337,
+					-0.0252369679510593,
+					-0.0344990417361259
+				],
+				[
+					-0.496162295341492,
+					0.059529785066843,
+					0.304424583911896
+				]
+			],
+			"readout": "NODES 23/24 | EDGES 19\nCOMPONENTS 4 | LINKS 1\nMAX DEGREE 3\nRESTORE CUT NODES TO GROW",
+			"selected": 2,
+			"shot": "rhizome-one-cut"
+		},
+		{
+			"active": [
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true
+			],
+			"counts": [
+				24,
+				24,
+				65,
+				1,
+				3
+			],
+			"degrees": [
+				9,
+				10,
+				8,
+				10,
+				7,
+				9,
+				7,
+				5,
+				5,
+				5,
+				5,
+				4,
+				4,
+				3,
+				6,
+				4,
+				4,
+				5,
+				4,
+				4,
+				3,
+				3,
+				3,
+				3
+			],
+			"detail": "NODE 03 | BIRTH 03\nDEGREE 8 | PRESENT\nEarly: white / Later: teal\nCUT toggles removal",
+			"positions": [
+				[
+					0.0126328803598881,
+					0.0,
+					0.01914157345891
+				],
+				[
+					-0.0351296663284302,
+					0.0,
+					-0.0408184081315994
+				],
+				[
+					0.197939828038216,
+					-0.0273407623171806,
+					-0.339095175266266
+				],
+				[
+					-0.430394619703293,
+					-0.0309292040765285,
+					-0.434186398983002
+				],
+				[
+					-0.143004179000854,
+					-0.0311143826693296,
+					0.379763424396515
+				],
+				[
+					0.0518048778176308,
+					0.0468351952731609,
+					-0.505841374397278
+				],
+				[
+					-0.671241998672485,
+					0.0442344509065151,
+					-0.500939130783081
+				],
+				[
+					0.221590325236321,
+					0.0306750573217869,
+					0.432427674531937
+				],
+				[
+					-0.775488317012787,
+					-0.0538213178515434,
+					-0.32965886592865
+				],
+				[
+					-0.303732216358185,
+					0.00439886376261711,
+					0.319747000932693
+				],
+				[
+					-0.223618879914284,
+					0.0126828886568546,
+					-0.768355071544647
+				],
+				[
+					0.364823937416077,
+					0.0162534154951572,
+					-0.680055141448975
+				],
+				[
+					-0.304672509431839,
+					-0.0415956899523735,
+					0.419263571500778
+				],
+				[
+					0.263235509395599,
+					-0.0251841172575951,
+					-0.707833468914032
+				],
+				[
+					0.327088475227356,
+					-0.0295326579362154,
+					0.215013012290001
+				],
+				[
+					-0.219919055700302,
+					0.0282851122319698,
+					-0.614128470420837
+				],
+				[
+					0.326837658882141,
+					-0.0590883493423462,
+					-0.250148892402649
+				],
+				[
+					0.346752226352692,
+					0.0487698800861835,
+					0.0340452827513218
+				],
+				[
+					0.573926985263824,
+					-0.0235014520585537,
+					0.424079388380051
+				],
+				[
+					-0.701586008071899,
+					0.0378629006445408,
+					-0.0072705945931375
+				],
+				[
+					0.59401398897171,
+					0.0483568124473095,
+					0.151756465435028
+				],
+				[
+					-0.276336669921875,
+					0.0404208041727543,
+					-0.301322638988495
+				],
+				[
+					-0.715140521526337,
+					-0.0252369679510593,
+					-0.0344990417361259
+				],
+				[
+					-0.496162295341492,
+					0.059529785066843,
+					0.304424583911896
+				]
+			],
+			"readout": "NODES 24/24 | EDGES 65\nCOMPONENTS 1 | LINKS 3\nMAX DEGREE 10\nHELD",
+			"selected": 2,
+			"shot": "rhizome-three"
+		},
+		{
+			"active": [
+				true,
+				true,
+				false,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true
+			],
+			"counts": [
+				24,
+				23,
+				57,
+				1,
+				3
+			],
+			"degrees": [
+				8,
+				9,
+				0,
+				9,
+				6,
+				8,
+				7,
+				5,
+				5,
+				5,
+				5,
+				3,
+				4,
+				2,
+				6,
+				4,
+				3,
+				5,
+				4,
+				4,
+				3,
+				3,
+				3,
+				3
+			],
+			"detail": "NODE 03 | BIRTH 03\nDEGREE 0 | REMOVED\nEarly: white / Later: teal\nCUT toggles removal",
+			"positions": [
+				[
+					0.0126328803598881,
+					0.0,
+					0.01914157345891
+				],
+				[
+					-0.0351296663284302,
+					0.0,
+					-0.0408184081315994
+				],
+				[
+					0.197939828038216,
+					-0.0273407623171806,
+					-0.339095175266266
+				],
+				[
+					-0.430394619703293,
+					-0.0309292040765285,
+					-0.434186398983002
+				],
+				[
+					-0.143004179000854,
+					-0.0311143826693296,
+					0.379763424396515
+				],
+				[
+					0.0518048778176308,
+					0.0468351952731609,
+					-0.505841374397278
+				],
+				[
+					-0.671241998672485,
+					0.0442344509065151,
+					-0.500939130783081
+				],
+				[
+					0.221590325236321,
+					0.0306750573217869,
+					0.432427674531937
+				],
+				[
+					-0.775488317012787,
+					-0.0538213178515434,
+					-0.32965886592865
+				],
+				[
+					-0.303732216358185,
+					0.00439886376261711,
+					0.319747000932693
+				],
+				[
+					-0.223618879914284,
+					0.0126828886568546,
+					-0.768355071544647
+				],
+				[
+					0.364823937416077,
+					0.0162534154951572,
+					-0.680055141448975
+				],
+				[
+					-0.304672509431839,
+					-0.0415956899523735,
+					0.419263571500778
+				],
+				[
+					0.263235509395599,
+					-0.0251841172575951,
+					-0.707833468914032
+				],
+				[
+					0.327088475227356,
+					-0.0295326579362154,
+					0.215013012290001
+				],
+				[
+					-0.219919055700302,
+					0.0282851122319698,
+					-0.614128470420837
+				],
+				[
+					0.326837658882141,
+					-0.0590883493423462,
+					-0.250148892402649
+				],
+				[
+					0.346752226352692,
+					0.0487698800861835,
+					0.0340452827513218
+				],
+				[
+					0.573926985263824,
+					-0.0235014520585537,
+					0.424079388380051
+				],
+				[
+					-0.701586008071899,
+					0.0378629006445408,
+					-0.0072705945931375
+				],
+				[
+					0.59401398897171,
+					0.0483568124473095,
+					0.151756465435028
+				],
+				[
+					-0.276336669921875,
+					0.0404208041727543,
+					-0.301322638988495
+				],
+				[
+					-0.715140521526337,
+					-0.0252369679510593,
+					-0.0344990417361259
+				],
+				[
+					-0.496162295341492,
+					0.059529785066843,
+					0.304424583911896
+				]
+			],
+			"readout": "NODES 23/24 | EDGES 57\nCOMPONENTS 1 | LINKS 3\nMAX DEGREE 9\nRESTORE CUT NODES TO GROW",
+			"selected": 2,
+			"shot": "rhizome-three-cut"
+		},
+		{
+			"active": [
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true,
+				true
+			],
+			"counts": [
+				24,
+				24,
+				65,
+				1,
+				3
+			],
+			"degrees": [
+				9,
+				10,
+				8,
+				10,
+				7,
+				9,
+				7,
+				5,
+				5,
+				5,
+				5,
+				4,
+				4,
+				3,
+				6,
+				4,
+				4,
+				5,
+				4,
+				4,
+				3,
+				3,
+				3,
+				3
+			],
+			"detail": "NODE 03 | BIRTH 03\nDEGREE 8 | PRESENT\nEarly: white / Later: teal\nCUT toggles removal",
+			"positions": [
+				[
+					0.0126328803598881,
+					0.0,
+					0.01914157345891
+				],
+				[
+					-0.0351296663284302,
+					0.0,
+					-0.0408184081315994
+				],
+				[
+					0.197939828038216,
+					-0.0273407623171806,
+					-0.339095175266266
+				],
+				[
+					-0.430394619703293,
+					-0.0309292040765285,
+					-0.434186398983002
+				],
+				[
+					-0.143004179000854,
+					-0.0311143826693296,
+					0.379763424396515
+				],
+				[
+					0.0518048778176308,
+					0.0468351952731609,
+					-0.505841374397278
+				],
+				[
+					-0.671241998672485,
+					0.0442344509065151,
+					-0.500939130783081
+				],
+				[
+					0.221590325236321,
+					0.0306750573217869,
+					0.432427674531937
+				],
+				[
+					-0.775488317012787,
+					-0.0538213178515434,
+					-0.32965886592865
+				],
+				[
+					-0.303732216358185,
+					0.00439886376261711,
+					0.319747000932693
+				],
+				[
+					-0.223618879914284,
+					0.0126828886568546,
+					-0.768355071544647
+				],
+				[
+					0.364823937416077,
+					0.0162534154951572,
+					-0.680055141448975
+				],
+				[
+					-0.304672509431839,
+					-0.0415956899523735,
+					0.419263571500778
+				],
+				[
+					0.263235509395599,
+					-0.0251841172575951,
+					-0.707833468914032
+				],
+				[
+					0.327088475227356,
+					-0.0295326579362154,
+					0.215013012290001
+				],
+				[
+					-0.219919055700302,
+					0.0282851122319698,
+					-0.614128470420837
+				],
+				[
+					0.326837658882141,
+					-0.0590883493423462,
+					-0.250148892402649
+				],
+				[
+					0.346752226352692,
+					0.0487698800861835,
+					0.0340452827513218
+				],
+				[
+					0.573926985263824,
+					-0.0235014520585537,
+					0.424079388380051
+				],
+				[
+					-0.701586008071899,
+					0.0378629006445408,
+					-0.0072705945931375
+				],
+				[
+					0.59401398897171,
+					0.0483568124473095,
+					0.151756465435028
+				],
+				[
+					-0.276336669921875,
+					0.0404208041727543,
+					-0.301322638988495
+				],
+				[
+					-0.715140521526337,
+					-0.0252369679510593,
+					-0.0344990417361259
+				],
+				[
+					-0.496162295341492,
+					0.059529785066843,
+					0.304424583911896
+				]
+			],
+			"readout": "NODES 24/24 | EDGES 65\nCOMPONENTS 1 | LINKS 3\nMAX DEGREE 10\nHELD",
+			"selected": 2,
+			"shot": "rhizome-side"
+		},
+		{
+			"active": [
+				true,
+				true
+			],
+			"counts": [
+				2,
+				2,
+				0,
+				2,
+				3
+			],
+			"degrees": [
+				0,
+				0
+			],
+			"detail": "NODE 01 | BIRTH 01\nDEGREE 0 | PRESENT\nEarly: white / Later: teal\nCUT toggles removal",
+			"positions": [
+				[
+					0.0126328803598881,
+					0.0,
+					0.01914157345891
+				],
+				[
+					-0.0351296663284302,
+					0.0,
+					-0.0408184081315994
+				]
+			],
+			"readout": "NODES 2/2 | EDGES 0\nCOMPONENTS 2 | LINKS 3\nMAX DEGREE 0\nHELD",
+			"selected": 0,
+			"shot": "rhizome-replay"
+		}
+	],
+	"checks": [
+		{
+			"message": "Primary graph instantiated",
+			"ok": true
+		},
+		{
+			"message": "Full-size interactive graph",
+			"ok": true
+		},
+		{
+			"message": "Map applies enlarged field and slower growth",
+			"ok": true
+		},
+		{
+			"message": "Rebuild preserves museum-owned children",
+			"ok": true
+		},
+		{
+			"message": "Rebuild does not duplicate controls",
+			"ok": true
+		},
+		{
+			"message": "Two isolated initial nodes are counted immediately",
+			"ok": true
+		},
+		{
+			"message": "Readout agrees with the initial graph",
+			"ok": true
+		},
+		{
+			"message": "STEP adds one point with two earlier neighbours and holds",
+			"ok": true
+		},
+		{
+			"message": "Twenty-four-node three-link graph has expected edge count",
+			"ok": true
+		},
+		{
+			"message": "Each edge connects a new node to an earlier node, without self-links",
+			"ok": true
+		},
+		{
+			"message": "Rendered cylinders meet both node positions, including diagonal links",
+			"ok": true
+		},
+		{
+			"message": "One-link rule leaves a forest rooted at the two initial points",
+			"ok": true
+		},
+		{
+			"message": "LINKS preserves all positions and insertion order",
+			"ok": true
+		},
+		{
+			"message": "Undirected degree total is twice the active edge count",
+			"ok": true
+		},
+		{
+			"message": "Cutting a branching forest node increases components by degree minus one",
+			"ok": true
+		},
+		{
+			"message": "CUT removes the selected node and only its incident links",
+			"ok": true
+		},
+		{
+			"message": "CUT preserves stored links and coordinates for restoration",
+			"ok": true
+		},
+		{
+			"message": "Growth stays held while nodes are cut",
+			"ok": true
+		},
+		{
+			"message": "Removed node has an explicit label and zero active degree",
+			"ok": true
+		},
+		{
+			"message": "Restoration returns the original forest without inventing repair links",
+			"ok": true
+		},
+		{
+			"message": "Returning to three links restores the original graph",
+			"ok": true
+		},
+		{
+			"message": "NODE selects the next birth index and holds growth",
+			"ok": true
+		},
+		{
+			"message": "REPLAY returns to two unconnected seeds and waits",
+			"ok": true
+		},
+		{
+			"message": "Replay reproduces the same sample tape and graph",
+			"ok": true
+		},
+		{
+			"message": "Repeated STEP remains bounded at forty nodes",
+			"ok": true
+		},
+		{
+			"message": "Interactive capacity holds for inspection",
+			"ok": true
+		},
+		{
+			"message": "Control 0 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 1 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 2 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 3 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 4 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Control 5 within selected reach",
+			"ok": true
+		},
+		{
+			"message": "Unconfigured placements retain automatic display",
+			"ok": true
+		},
+		{
+			"message": "Configuration bounds protect small displays",
+			"ok": true
+		},
+		{
+			"message": "Passive capacity starts another random sample sequence",
+			"ok": true
+		},
+		{
+			"message": "Gate granted for walking tests",
+			"ok": true
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [],
+	"room": "SpeculativeComputation_Rhizome_Network",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/rhizome-one.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/rhizome-one-cut.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/rhizome-three.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/rhizome-three-cut.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/rhizome-side.png",
+		"res://ada_run/encounter_pilot/SpeculativeComputation_Rhizome_Network/rhizome-replay.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.5,
+						0.0,
+						2.73330450057983
+					],
+					"shape": "@CollisionShape3D@251:<CollisionShape3D#390691031877>"
+				}
+			],
+			"end": [
+				6.5,
+				0.000869494455400854,
+				2.73330450057983
+			],
+			"passed": true,
+			"tag": "entry",
+			"target": [
+				6.5,
+				0.1,
+				2.8
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						5.53582954406738,
+						0.0,
+						3.86058783531189
+					],
+					"shape": "@CollisionShape3D@263:<CollisionShape3D#391093685085>"
+				}
+			],
+			"end": [
+				5.53582954406738,
+				0.000864101340994239,
+				3.86058783531189
+			],
+			"passed": true,
+			"tag": "controls",
+			"target": [
+				5.5,
+				0.1,
+				3.9
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						3.4689679145813,
+						0.0,
+						3.9967155456543
+					],
+					"shape": "@CollisionShape3D@261:<CollisionShape3D#391026576217>"
+				}
+			],
+			"end": [
+				3.4689679145813,
+				0.000170901417732239,
+				3.9967155456543
+			],
+			"passed": true,
+			"tag": "left approach",
+			"target": [
+				3.4,
+				0.1,
+				4.0
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						3.40000009536743,
+						0.0,
+						7.83332967758179
+					],
+					"shape": "@CollisionShape3D@311:<CollisionShape3D#392704297917>"
+				}
+			],
+			"end": [
+				3.40000009536743,
+				0.000170901417732239,
+				7.83332967758179
+			],
+			"passed": true,
+			"tag": "along exhibit",
+			"target": [
+				3.4,
+				0.1,
+				7.9
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.4275221824646,
+						0.0,
+						8.38830947875977
+					],
+					"shape": "@CollisionShape3D@327:<CollisionShape3D#393241168861>"
+				}
+			],
+			"end": [
+				6.4275221824646,
+				0.000170901417732239,
+				8.38830947875977
+			],
+			"passed": true,
+			"tag": "exit approach",
+			"target": [
+				6.5,
+				0.1,
+				8.4
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.5,
+						0.0,
+						10.4333591461182
+					],
+					"shape": "@CollisionShape3D@353:<CollisionShape3D#394113584145>"
+				}
+			],
+			"end": [
+				6.5,
+				0.000846400856971741,
+				10.4333591461182
+			],
+			"passed": true,
+			"tag": "exit throat",
+			"target": [
+				6.5,
+				0.1,
+				10.5
+			]
+		},
+		{
+			"blockers": [
+				{
+					"normal": [
+						0.0,
+						1.0,
+						0.0
+					],
+					"path": "/root/EndlessMuseum/Seg0_uffizi-spine-enfilade/Collision",
+					"position": [
+						6.5,
+						0.0,
+						11.6000146865845
+					],
+					"shape": "@CollisionShape3D@366:<CollisionShape3D#394549791787>"
+				}
+			],
+			"end": [
+				6.5,
+				0.00006103515625,
+				11.6000146865845
+			],
+			"passed": true,
+			"tag": "exit",
+			"target": [
+				6.5,
+				0.1,
+				11.65
+			]
+		}
+	]
+}

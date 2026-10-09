@@ -1,0 +1,320 @@
+{
+  "chapter": "Primitives: Points Build Worlds",
+  "compiled": "2026-10-05",
+  "sequence_sha256": "8f178191a3c971cccee8d18c9a067690c73f594db2dadb5150eb20995d7a410c",
+  "sources": [
+    {
+      "map": "Point_Zero",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Zero/tutorial.md",
+      "sha256": "81b3b9f824e468f7b73605fb49d1c057dd73ade026b31114e99bec9b206230f7",
+      "snapshot": "sources/Point_Zero/tutorial.md",
+      "code_blocks": 1,
+      "images": 0
+    },
+    {
+      "map": "Point_Zero",
+      "side": "final",
+      "path": "commons/maps/Point_Zero/final.md",
+      "sha256": "97102decd65a945a77a31126c743cb59076b6d18fbc501d4742b8a144a636d9b",
+      "snapshot": "sources/Point_Zero/final.md",
+      "code_blocks": 3,
+      "images": 0
+    },
+    {
+      "map": "Point_One",
+      "side": "tutorial",
+      "path": "commons/maps/Point_One/tutorial.md",
+      "sha256": "48380c6369594e603a34ebfdda5192672987e46c384c671e11b2029ec8a59c31",
+      "snapshot": "sources/Point_One/tutorial.md",
+      "code_blocks": 1,
+      "images": 0
+    },
+    {
+      "map": "Point_One",
+      "side": "final",
+      "path": "commons/maps/Point_One/final.md",
+      "sha256": "0e373caae433f14d85ebc34ea4dc22dba99e5706f4b155b15961f0d710c0cb61",
+      "snapshot": "sources/Point_One/final.md",
+      "code_blocks": 1,
+      "images": 0
+    },
+    {
+      "map": "Point_Coordinates",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Coordinates/tutorial.md",
+      "sha256": "bf928382c9b75738b8eccf17f2f5b5552476b9a401bf1cb94c70bbe5b2cfccb8",
+      "snapshot": "sources/Point_Coordinates/tutorial.md",
+      "code_blocks": 1,
+      "images": 0
+    },
+    {
+      "map": "Point_Coordinates",
+      "side": "final",
+      "path": "commons/maps/Point_Coordinates/final.md",
+      "sha256": "deb3af0b25f6a3e4a06b88d722b826160c48ae159df432a4c7ed3990dfda288d",
+      "snapshot": "sources/Point_Coordinates/final.md",
+      "code_blocks": 0,
+      "images": 0
+    },
+    {
+      "map": "Point_Lines",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Lines/tutorial.md",
+      "sha256": "19cc361b9029b5e27a5c3bbf969ceb2a005ff58164415ce91d2ac372d3bb3253",
+      "snapshot": "sources/Point_Lines/tutorial.md",
+      "code_blocks": 4,
+      "images": 0
+    },
+    {
+      "map": "Point_Lines",
+      "side": "final",
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256": "0298ff736cbd5be647951319bb147433b5ee553bb021ce1c279d039013f29a2c",
+      "snapshot": "sources/Point_Lines/final.md",
+      "code_blocks": 0,
+      "images": 0
+    },
+    {
+      "map": "Point_Trace",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "387afe35060fea7a079d30bf6663e53e9b57b3ce152a6d1655396459f8791b4b",
+      "snapshot": "sources/Point_Trace/tutorial.md",
+      "code_blocks": 4,
+      "images": 0
+    },
+    {
+      "map": "Point_Trace",
+      "side": "final",
+      "path": "commons/maps/Point_Trace/final.md",
+      "sha256": "84220aefb569af0c69b397d5dadae1a7d51208ff67972830a444d29f9b362227",
+      "snapshot": "sources/Point_Trace/final.md",
+      "code_blocks": 2,
+      "images": 0
+    },
+    {
+      "map": "Point_Line_Grid",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Line_Grid/tutorial.md",
+      "sha256": "4583bb37e8d7050ed964f5ce3529bc1aae07ac5ff8aae1e2bf4322b4a321abc9",
+      "snapshot": "sources/Point_Line_Grid/tutorial.md",
+      "code_blocks": 3,
+      "images": 0
+    },
+    {
+      "map": "Point_Line_Grid",
+      "side": "final",
+      "path": "commons/maps/Point_Line_Grid/final.md",
+      "sha256": "a70d0cd16cf2795a71344b9eac085108f1d70409908040e6ce49f076078cb83e",
+      "snapshot": "sources/Point_Line_Grid/final.md",
+      "code_blocks": 2,
+      "images": 0
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Triangle_Context/tutorial.md",
+      "sha256": "90d1984454d1d0b915efc9a6f7166d7e1f09bb538d6880136f9cccd4c4e43673",
+      "snapshot": "sources/Point_Triangle_Context/tutorial.md",
+      "code_blocks": 5,
+      "images": 0
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "side": "final",
+      "path": "commons/maps/Point_Triangle_Context/final.md",
+      "sha256": "a76bee2f904fb3282a4354de6cac0dd6b7d2ab1fbee0298ebf50c9fe70c37ee0",
+      "snapshot": "sources/Point_Triangle_Context/final.md",
+      "code_blocks": 0,
+      "images": 1
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Polythedra/tutorial.md",
+      "sha256": "a07f2e586be48b638e3bd1885b6b53b35a4945b19fdab707742beb482d9d6caf",
+      "snapshot": "sources/Primitives_Polythedra/tutorial.md",
+      "code_blocks": 4,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "side": "final",
+      "path": "commons/maps/Primitives_Polythedra/final.md",
+      "sha256": "2cee932f7c0d83466d65b24cf425a6313b7e50e4d5f5eeeadaccf34fd6bd8177",
+      "snapshot": "sources/Primitives_Polythedra/final.md",
+      "code_blocks": 3,
+      "images": 1
+    },
+    {
+      "map": "Point_Animatedcube",
+      "side": "tutorial",
+      "path": "commons/maps/Point_Animatedcube/tutorial.md",
+      "sha256": "344e61dd335e1ca98c940df1f97e27b9481477c75869ec55d16f508c269a647f",
+      "snapshot": "sources/Point_Animatedcube/tutorial.md",
+      "code_blocks": 4,
+      "images": 0
+    },
+    {
+      "map": "Point_Animatedcube",
+      "side": "final",
+      "path": "commons/maps/Point_Animatedcube/final.md",
+      "sha256": "601a071690c0a55c640511c30a9596bd25903f07565cb8d9f896c2fc434a6a45",
+      "snapshot": "sources/Point_Animatedcube/final.md",
+      "code_blocks": 2,
+      "images": 1
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Ignorance/tutorial.md",
+      "sha256": "5685bd71431c334244ebcad756078cf258c94d937b5d357f7f50bdbe24b2b640",
+      "snapshot": "sources/Primitives_Ignorance/tutorial.md",
+      "code_blocks": 3,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "side": "final",
+      "path": "commons/maps/Primitives_Ignorance/final.md",
+      "sha256": "26f16f813afa7143da7eca7205fca801286cdee1e09fc67674bd02c1b3571d52",
+      "snapshot": "sources/Primitives_Ignorance/final.md",
+      "code_blocks": 1,
+      "images": 2
+    },
+    {
+      "map": "Primitives_Godot",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Godot/tutorial.md",
+      "sha256": "7863de2717d2217084749c3d14526ee41b28d348c8a49cbd0a4b5be67fca60c4",
+      "snapshot": "sources/Primitives_Godot/tutorial.md",
+      "code_blocks": 3,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Godot",
+      "side": "final",
+      "path": "commons/maps/Primitives_Godot/final.md",
+      "sha256": "1272771fe48ed198f58657f12516cfe36f0bf6b7ac37d71b4945566a5498ba80",
+      "snapshot": "sources/Primitives_Godot/final.md",
+      "code_blocks": 0,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Columns",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Columns/tutorial.md",
+      "sha256": "363a00c4bd2ca5e9c10b86052558e6f230620ae9ec9af08f495d3419206500aa",
+      "snapshot": "sources/Primitives_Columns/tutorial.md",
+      "code_blocks": 3,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Columns",
+      "side": "final",
+      "path": "commons/maps/Primitives_Columns/final.md",
+      "sha256": "edab46ae1d5d49a3180b97659709a4272a0a10f5fc60cc5cdd8e5ca46651a1aa",
+      "snapshot": "sources/Primitives_Columns/final.md",
+      "code_blocks": 0,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Profiles",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Profiles/tutorial.md",
+      "sha256": "0555e0e8953c7f1c1d19ba09c838e71e95caedcc43e88a209d7094c0c579f4df",
+      "snapshot": "sources/Primitives_Profiles/tutorial.md",
+      "code_blocks": 2,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Profiles",
+      "side": "final",
+      "path": "commons/maps/Primitives_Profiles/final.md",
+      "sha256": "897996ac1d9add8d676a491d265cd8d2d42ded46a62e3e343a26365386e67edd",
+      "snapshot": "sources/Primitives_Profiles/final.md",
+      "code_blocks": 0,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Portals",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Portals/tutorial.md",
+      "sha256": "8014157c3652f2c007776bcda0a59dd22fdb2673948874e805ef25192dd4375b",
+      "snapshot": "sources/Primitives_Portals/tutorial.md",
+      "code_blocks": 3,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Portals",
+      "side": "final",
+      "path": "commons/maps/Primitives_Portals/final.md",
+      "sha256": "6b482e1483ed32d10461a151ffdcf435e712f8720551718de6d33fb72fd1116e",
+      "snapshot": "sources/Primitives_Portals/final.md",
+      "code_blocks": 1,
+      "images": 1
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "side": "tutorial",
+      "path": "commons/maps/Primitives_Melencolia/tutorial.md",
+      "sha256": "b179b15eaff60ed0e9928cad4631f6eae55751eece24ee6aa81c040e683f6cbb",
+      "snapshot": "sources/Primitives_Melencolia/tutorial.md",
+      "code_blocks": 5,
+      "images": 0
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "side": "final",
+      "path": "commons/maps/Primitives_Melencolia/final.md",
+      "sha256": "39a2f1dcd62a19ebce2dfd1b63c0685c7b90443238df0600e5ef2343289630ec",
+      "snapshot": "sources/Primitives_Melencolia/final.md",
+      "code_blocks": 2,
+      "images": 2
+    }
+  ],
+  "halls": [
+    "Point_Zero",
+    "Point_One",
+    "Point_Coordinates",
+    "Point_Lines",
+    "Point_Trace",
+    "Point_Line_Grid",
+    "Point_Triangle_Context",
+    "Primitives_Polythedra",
+    "Point_Animatedcube",
+    "Primitives_Ignorance",
+    "Primitives_Godot",
+    "Primitives_Columns",
+    "Primitives_Profiles",
+    "Primitives_Portals",
+    "Primitives_Melencolia"
+  ],
+  "checks": {
+    "pairs": 15,
+    "texts": 30,
+    "source_text_preserved": true,
+    "canonical_files_unchanged": true,
+    "local_references_resolve": true,
+    "unique_fragment_ids": true,
+    "all_internal_fragments_resolve": true
+  },
+  "pages": {
+    "Point_Zero": "index.html",
+    "Point_One": "Point_One.html",
+    "Point_Coordinates": "Point_Coordinates.html",
+    "Point_Lines": "Point_Lines.html",
+    "Point_Trace": "Point_Trace.html",
+    "Point_Line_Grid": "Point_Line_Grid.html",
+    "Point_Triangle_Context": "Point_Triangle_Context.html",
+    "Primitives_Polythedra": "Primitives_Polythedra.html",
+    "Point_Animatedcube": "Point_Animatedcube.html",
+    "Primitives_Ignorance": "Primitives_Ignorance.html",
+    "Primitives_Godot": "Primitives_Godot.html",
+    "Primitives_Columns": "Primitives_Columns.html",
+    "Primitives_Profiles": "Primitives_Profiles.html",
+    "Primitives_Portals": "Primitives_Portals.html",
+    "Primitives_Melencolia": "Primitives_Melencolia.html"
+  }
+}

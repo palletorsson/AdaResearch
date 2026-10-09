@@ -1,0 +1,249 @@
+{
+  "sequence": "fractals",
+  "scope": "source-grounded authoring cards; not runtime verification",
+  "rooms": [
+    {
+      "room_id": "Fractal_RecursiveTrees",
+      "primary_tokens": [
+        "recursive_tree"
+      ],
+      "question": "How far can one branching instruction carry a structure?",
+      "ontology": "Recursion calls a construction on smaller or later parts, with a stopping condition; a tree stores parent-child relations.",
+      "action": "Follow one thick branch into its smaller descendants, then find a second branch that repeats the relationship without matching every dimension.",
+      "observable": "Box-like limbs differ in widths and orientations while inheriting a repeated branching structure.",
+      "mechanism": "generate_branches chooses seeded random sizes and directions, builds children at branch endpoints and recurses with current_depth+1 until max_depth.",
+      "limit": "Finite depth and random variation make this an approximation with family resemblance, not an infinite exact self-copy. A branching shape is not evidence of biological growth.",
+      "variation": "Proposed extension: Reveal one generation at a time and preserve the random seed so only recursion depth changes.",
+      "prior_bridge": "Fractal_Recursion",
+      "next_bridge": "Fractal_CantorSet",
+      "sources": [
+        {
+          "path": "algorithms/fractals/recursive_tree/recursive_tree.gd",
+          "fact": "84 setup;128 generate_tree;192–262 recursive branch construction."
+        }
+      ],
+      "placements": [
+        {
+          "x": 13,
+          "z": 5,
+          "token": "recursive_tree:0:0:0.7"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. UI sliders are2D; no promised VR branch dragging.",
+      "source_hashes": {
+        "commons/maps/Fractal_RecursiveTrees/map_data.json": "9705a7df1870bb8270e6972525f90c00b6581fb4cb2d3ca587f2330b15883d57",
+        "algorithms/fractals/recursive_tree/recursive_tree.tscn": "ffe51441cb067f24dd9014a6d65c13dce53ee059fed6a2bbc426a3f2f8ea762d",
+        "algorithms/fractals/recursive_tree/recursive_tree.gd": "78bd9267f1a1d56461565c8424100cd12bb0cda607c32d2cf5a2e1d234a769b5",
+        "algorithms/fractals/recursive_tree/RecursiveTreeUI.gd": "91a34f82b50fc905381a5a63661c358c0b0723495ae6be01ddfe36211dbe288e",
+        "commons/maps/Fractal_RecursiveTrees/intent.md": "4b0f60705757f7e1e5bc7427fc8fe632664f0d15109aa12bb899a00a5bba2149",
+        "commons/maps/Fractal_RecursiveTrees/blurb.md": "855d213264e219007ce83b35716fe65d3c291b622c10e96a0a39ef22a0e5cd5b",
+        "commons/maps/Fractal_RecursiveTrees/critical.md": "1e0f9c2ffcf24fde897fdcf92a5849a8abfb33132f6901f2c9ad3eea09e3d549",
+        "commons/maps/Fractal_RecursiveTrees/technical.md": "ea4f2c8da4bcaf3c4326ce0a48d9374c3cf4650e76f88a034a7f755efda6fedb"
+      }
+    },
+    {
+      "room_id": "Fractal_CantorSet",
+      "primary_tokens": [
+        "cantor_set"
+      ],
+      "question": "Can repeated removal produce more pieces while leaving less material?",
+      "ontology": "The middle-third construction replaces each interval with its two outer thirds. Count and total length move in different directions.",
+      "action": "Watch one subdivision and count the descendants of a bar; compare the gap with either surviving third.",
+      "observable": "Each retained segment produces two shorter ones, while the deleted middle separates them.",
+      "mechanism": "perform_iteration finds a bar length, creates length/3 children displaced ±length/3, while retaining the earlier displayed rows; timed grow mode uses physical bars, while instant mode freezes rows.",
+      "limit": "A finite set of thick bars is not the infinite Cantor set. Falling or displaced bodies are consequences of this exhibit and must be distinguished from the mathematical interval.",
+      "variation": "Proposed extension: Retain deleted middles as ghost or scar readouts so visitors can compare what the rule removes with what it keeps.",
+      "prior_bridge": "Fractal_RecursiveTrees",
+      "next_bridge": "Fractal_KochSierpinski",
+      "sources": [
+        {
+          "path": "algorithms/fractals/cantorset/cantor_set.gd",
+          "fact": "perform_iteration;_build_static and _spawn_removed;tick/removal/build_mode settings."
+        }
+      ],
+      "placements": [
+        {
+          "x": 6,
+          "z": 4,
+          "token": "cantor_set"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/Fractal_CantorSet/map_data.json": "ec0d652b81be4d68435630b1b7106dbdb9489c431e5561d971cdcdc0335b6560",
+        "algorithms/fractals/cantorset/cantor_set.tscn": "8807807cda505bf6a89e06d7655bf4db95140278bb85634e3bf73e04229d61a5",
+        "algorithms/fractals/cantorset/cantor_set.gd": "68fb8d4e2a87ed441f160e1d56c28974b645bc46b254b288d7a64bd2af74332d",
+        "commons/maps/Fractal_CantorSet/intent.md": "77b494a7263a06d0914fdbd84f7b663d09a415469647ac3407040a4233984105",
+        "commons/maps/Fractal_CantorSet/blurb.md": "3a02d60e8e5b3dce6594b4891b45728077649576786d7b81f9280bbc0419ab18",
+        "commons/maps/Fractal_CantorSet/critical.md": "353ee78e42668bcd5d6928d4d1b69819c774e7dcb3eeea775057230de27519b0",
+        "commons/maps/Fractal_CantorSet/technical.md": "1dea6bacc2c6226c9f59b0b208a52d35d63b96848c79c4a20c20faae3e8e3953"
+      }
+    },
+    {
+      "room_id": "Fractal_MengerSponge",
+      "primary_tokens": [
+        "menger_sponge"
+      ],
+      "question": "Can a repeated cut increase visible intricacy while reducing volume?",
+      "ontology": "Subdivision divides a cube into27 equal parts; the Menger rule retains20 by removing the centre and face-centred parts.",
+      "action": "Inspect an opening through the sponge, then look for the same pattern of openings at a smaller scale.",
+      "observable": "Repeated square tunnels and smaller retained cubes occupy the original envelope.",
+      "mechanism": "subdivide_cube_menger loops3×3×3 offsets, skips cells with at least two zero indices, scales children by1/3 and replaces the parent.",
+      "limit": "The displayed finite stages retain positive volume and finite detail. Mathematical limit claims need reasoning beyond what a headset can resolve.",
+      "variation": "Proposed extension: Keep the removed seven parts beside one retained block for one stage, and let visitors reconstruct the cut.",
+      "prior_bridge": "Fractal_KochSierpinski",
+      "next_bridge": "Fractal_GoldenSpiral",
+      "sources": [
+        {
+          "path": "algorithms/fractals/mengersponge/menger_sponge.gd",
+          "fact": "perform_iteration and subdivide_cube_menger: local subtree only,20 retained subcubes."
+        }
+      ],
+      "placements": [
+        {
+          "x": 6,
+          "z": 5,
+          "token": "menger_sponge"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. No claim of user-operated subdivision or traversable tunnels; small scene scale matters.",
+      "source_hashes": {
+        "commons/maps/Fractal_MengerSponge/map_data.json": "7b924f9c6d7c9c9993ae56f7853ecb9a000fb6f0b5539616856ee3e5e35b6947",
+        "algorithms/fractals/mengersponge/menger_sponge.tscn": "cb740970d6b41cb1cda0f6fbdbdfbc694734defdce549353150ec2f3c586497f",
+        "algorithms/fractals/mengersponge/menger_sponge.gd": "bf804bb89662a77e37b4312ecbd9f6c621131e6c16cb5865718c118cd1ced401",
+        "commons/maps/Fractal_MengerSponge/intent.md": "5f6d3b1198b57d3fcce4bf43442a5004a94a71e4724b753b67991e49c728ddf3",
+        "commons/maps/Fractal_MengerSponge/blurb.md": "259e9406623d1eede277809bc9fdcb97b42ec29b27997f642ae33276cfa9abaf",
+        "commons/maps/Fractal_MengerSponge/critical.md": "da0f661ce59799dfb3cba29913f8ee185eca8e93502bb4dbb4dfcf79580b3faf",
+        "commons/maps/Fractal_MengerSponge/technical.md": "b5d38a6cc6fd5b4287cbc83b7f686de5e6a282464d72977598ca0a182ae2404b"
+      }
+    },
+    {
+      "room_id": "Fractal_GoldenSpiral",
+      "primary_tokens": [
+        "fibonacci_sequences"
+      ],
+      "question": "Which part of a growing pattern comes from addition, and which part comes from its drawing?",
+      "ontology": "A recurrence constructs each number from earlier values; an encoding determines how those numbers occupy space.",
+      "action": "Read three consecutive labelled values and check whether the last equals the earlier two; compare that arithmetic with the tower heights.",
+      "observable": "The numbers follow1,1,2,3,5…; tower heights grow more slowly than the numbers.",
+      "mechanism": "generate_fibonacci_sequence adds the previous two values; visualize_number_sequence uses log(number)*0.5+0.5 for tower height and highlights successive indices.",
+      "limit": "Tower proportions are logarithmic, so height ratios cannot be read as Fibonacci ratios. A recurrence does not prove all natural growth follows the golden ratio.",
+      "variation": "Proposed extension: Place linear and logarithmic encodings beside the same numbered sequence, then invent a different starting pair.",
+      "prior_bridge": "Fractal_MengerSponge",
+      "next_bridge": "Fractal_JuliaSet",
+      "sources": [
+        {
+          "path": "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibonacciSequences.gd",
+          "fact": "102–107 recurrence;109–140 logarithmic towers;_process current-index advance."
+        }
+      ],
+      "placements": [
+        {
+          "x": 4,
+          "z": 3,
+          "token": "fibonacci_sequences"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified.",
+      "source_hashes": {
+        "commons/maps/Fractal_GoldenSpiral/map_data.json": "04329816b28e9c849ae537b290ce39b69577d75ef8574233ab5ba73910b1a997",
+        "algorithms/fractals/fibonacci_sequences/fibonacci_sequences.tscn": "5aff6a4c1c3fd79339ec49623fe780a3df5504e4886688b223d1cacc816007f9",
+        "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibonacciSequences.gd": "bec44fefcc77b483412ab2e59a50391b71e1b8f309ddface7f9b260efbcf021d",
+        "algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibUI.gd": "e38cbe7eee4687d3481065e82c06bf396a3bbfb3daf91a482cb36f06d286231a",
+        "commons/maps/Fractal_GoldenSpiral/intent.md": "8480b7eb8953448d5ccfb6a63c4d7394341c1fb7673f194d2b1a462349d368bb",
+        "commons/maps/Fractal_GoldenSpiral/blurb.md": "d39c251e538245181aa6cfae0ba13ff4ac482654766d63329b59eee4685505d7",
+        "commons/maps/Fractal_GoldenSpiral/critical.md": "23573f69d229f16504a727eeeb031863d58562155c06c33c18eb8495d101eae4",
+        "commons/maps/Fractal_GoldenSpiral/technical.md": "7b4f11552345663c040e46d9494806398a80ddbaf39d31d11ec36c64a9c88c67"
+      }
+    },
+    {
+      "room_id": "Fractal_Synthesis",
+      "primary_tokens": [
+        "cantor_set",
+        "recursive_tree"
+      ],
+      "question": "What makes two very different objects examples of recursion?",
+      "ontology": "A recursive explanation names what is repeated, how a child relates to its parent, and why the construction stops.",
+      "action": "Choose a Cantor segment and a tree branch. Explain one next step for each before looking at their smaller descendants.",
+      "observable": "The interval construction deletes a middle third; the tree adds branches, yet each repeats a relation at another level.",
+      "mechanism": "Cantor uses two children of length/3; recursive_tree calls generate_branches with an increased depth and depth-scaled randomly sized limbs.",
+      "limit": "Recursion alone does not guarantee exact self-similarity or the same dimension. Sharing a programming technique does not erase the different meanings of removal and branching.",
+      "variation": "Proposed extension: Exchange a rule between the pair: design a branching interval or a tree that withholds its central branch, and predict what the exchange changes.",
+      "prior_bridge": "Fractal_MandelbrotSet",
+      "next_bridge": "Fractal_CrossSequence",
+      "sources": [
+        {
+          "path": "algorithms/fractals/cantorset/cantor_set.gd",
+          "fact": "perform_iteration/ _build_static repeated deletion."
+        },
+        {
+          "path": "algorithms/fractals/recursive_tree/recursive_tree.gd",
+          "fact": "192 generate_branches stopping condition and descendants."
+        }
+      ],
+      "placements": [
+        {
+          "x": 10,
+          "z": 5,
+          "token": "recursive_tree:90"
+        },
+        {
+          "x": 16,
+          "z": 6,
+          "token": "cantor_set:90"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Uses two earlier artifacts in a new comparative role; remaining synthesis displays stay available without all becoming primary.",
+      "source_hashes": {
+        "commons/maps/Fractal_Synthesis/map_data.json": "23ddd63b1df980b035b4b8cbdc846cf246af59a47f464417f7d7523c2159a7ea",
+        "algorithms/fractals/cantorset/cantor_set.tscn": "8807807cda505bf6a89e06d7655bf4db95140278bb85634e3bf73e04229d61a5",
+        "algorithms/fractals/cantorset/cantor_set.gd": "68fb8d4e2a87ed441f160e1d56c28974b645bc46b254b288d7a64bd2af74332d",
+        "algorithms/fractals/recursive_tree/recursive_tree.tscn": "ffe51441cb067f24dd9014a6d65c13dce53ee059fed6a2bbc426a3f2f8ea762d",
+        "algorithms/fractals/recursive_tree/recursive_tree.gd": "78bd9267f1a1d56461565c8424100cd12bb0cda607c32d2cf5a2e1d234a769b5",
+        "algorithms/fractals/recursive_tree/RecursiveTreeUI.gd": "91a34f82b50fc905381a5a63661c358c0b0723495ae6be01ddfe36211dbe288e",
+        "commons/maps/Fractal_Synthesis/intent.md": "4a840d40ac491c28e74e358b13eeb4803a9fd4c041f4f4ad1a6554ddd7f28241",
+        "commons/maps/Fractal_Synthesis/blurb.md": "800b912d95819a9f32622cf90b716825c9799811bbdcd0105855d8ae86905258",
+        "commons/maps/Fractal_Synthesis/critical.md": "ff38537bfdd3297d7403ca62b523e845ba384deade6707271c39b4d1134ae23d",
+        "commons/maps/Fractal_Synthesis/technical.md": "020636515e24e6b02f0b47850999e7d136be88e8f298cbd1d46ade6ceb8ba9c7"
+      }
+    },
+    {
+      "room_id": "Fractal_CrossSequence",
+      "primary_tokens": [
+        "space_filling_curve_gallery"
+      ],
+      "question": "How can a line visit a region without becoming a sheet?",
+      "ontology": "A finite curve is an ordered path; recursive rules can make progressively finer paths visit a grid more densely.",
+      "action": "Follow a stretch on one panel, then compare the way another panel turns and returns through its area.",
+      "observable": "Three differently organised traces share a framed region but distribute their turns differently.",
+      "mechanism": "Gallery rewrites Hilbert,Peano and Moore grammars for finite iterations, interprets F as movement and ± as90° turns, and draws the paths into a texture.",
+      "limit": "Finite images have gaps and pixel thickness. A space-filling limit is not proved by a dense drawing, and these panels are not physical paths to walk.",
+      "variation": "Proposed extension: Compare multiple depths of one grammar with equal framing and line width before comparing separate grammars.",
+      "prior_bridge": "Fractal_Synthesis",
+      "next_bridge": "LSystems_Grammar_Lab",
+      "sources": [
+        {
+          "path": "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+          "fact": "137–160 texture;164–216 grammar definitions and turtle interpretation."
+        }
+      ],
+      "placements": [
+        {
+          "x": 2,
+          "z": 2,
+          "token": "space_filling_curve_gallery"
+        }
+      ],
+      "cautions": "Source read only; actual museum runtime, reachability, controls and learner understanding remain unverified. Bridge to next L-system grammar chapter: separate rewriting symbols from interpreting them as movements.",
+      "source_hashes": {
+        "commons/maps/Fractal_CrossSequence/map_data.json": "ee9a0a0d3483183ca2efd07beed478bf305f013cdbee62d2eae6668e2665c555",
+        "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn": "ed8b9bb8307e0eb99c2d24036ee08bda2f5d0baaffe2134e37ed6421369f4f27",
+        "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd": "af7272a524dedcbd1091fe0f6c3d6670b2ef7ec38c32e6d536a6c44eb13a0f83",
+        "commons/maps/Fractal_CrossSequence/intent.md": "6aa982c8fba0b7c6131164b9e1084b76bc17098b2597875036cea8de96760f10",
+        "commons/maps/Fractal_CrossSequence/blurb.md": "b5ef0224f7195735e16014756ad25ccfac5a6678025a1c5ec603878e2a9b1b05",
+        "commons/maps/Fractal_CrossSequence/critical.md": "45fb47865931f9f786d7f71b232716de5f128a65c840f6e6d8ac97e1575a25ca",
+        "commons/maps/Fractal_CrossSequence/technical.md": "26f0693a0bf38841a92b42c09e83d02cdc4ed7b87bfc691ea50dde60c8277d7c"
+      }
+    }
+  ]
+}

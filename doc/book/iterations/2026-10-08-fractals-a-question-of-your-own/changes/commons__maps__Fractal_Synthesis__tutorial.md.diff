@@ -1,0 +1,33 @@
+--- before/commons/maps/Fractal_Synthesis/tutorial.md
++++ commons/maps/Fractal_Synthesis/tutorial.md
+@@ -6,6 +6,7 @@
+ - Pass named settings to a function; rebuild from the seed.
+ - Copy a recipe without linking its later edits to the original.
+ - Compare two results using the same scale.
++- Optional composition: connect one earlier operation to a construction and test what should remain unchanged.
+ 
+ ## In the museum
+ 
+@@ -232,6 +233,22 @@
+ 
+ For an independent code change, change only the initial `recipe` declaration to four steps. Leave the six-metre seed, fraction and drawing untouched. Before running, predict sixteen pieces and a combined length of `6 * (2 / 3)^4`, about 1.185 metres. The supplied automated check executes that edited script as well as the printed version. It checks the calculation; your explanation is still part of the exercise.
+ 
++## Optional: a question of your own
++
++The table gives you three fractions to compare. Now choose a connection the table does not offer: one construction from this sequence, influenced by one operation you learned earlier. Name the relationship before coding. What receives the value, and what should it change? Keep the question small enough to investigate beside its original in the museum workspace.
++
++One possibility is the tree receiving noise as a branch turn. Noise Columns already asked us to follow a scalar into its receiving function. Here that receiver could be `child.rotation.z` in `branch(length, remaining)`, where the tree currently applies `TURN * sign_value`. Another possibility is a periodic turn from the Waves lessons. Choose one influence; decide what it should let you notice.
++
++For the tree, copy your complete `tree.gd`, `point_body.gd` and `line_skin.gd` from Recursive Trees into a new study folder. Keep the original working folder. Start both study nodes at unit scale, separated on the museum floor. The camera, light and player still belong to the museum. Change the copied tree's turn calculation; retain its two children, shortening ratio and depth limit. Its existing grips continue to turn the first forks after construction.
++
++If you choose noise, create and configure your `FastNoiseLite` before `_ready()` calls `branch()`. Give it an explicit seed and frequency. Decide what coordinates to sample: depth and side can give branches at the same level a shared turn; a distinct branch address can make that relationship different. During construction these nodes have not entered the scene tree, so use your declared coordinates rather than `global_position`. Bound the angle offset. Re-run to rebuild this study. A time-varying influence would also require an update rule; it is a further choice, not something the static generator supplies.
++
++Before running, write down one prediction and one property you intend to preserve. For an angle-only tree edit at three generations, the fifteen segments, their lengths and parent attachments should survive; their endpoints may move. Check finite transforms and the depth cap. Set the influence to zero and compare with the original. Run the same recipe twice before touching the grips: it should reconstruct the same tree. Include your sampling coordinates and noise settings in the recipe you keep.
++
++Then inspect the pair from two positions. What changed that your count could not describe? Revise one choice for a reason found in that encounter. Keep the original script and settings, the changed version, and a short account of the prediction, result and revision. These files are your record; the interval table's KEEP button does not store a tree.
++
++This asks for more than a supplied edit. Your code must run and preserve the properties you declared. Your explanation must identify the relationship you chose. There is no required silhouette, and an unexpected result is not automatically a better one.
++
+ ## What goes into the next room
+ 
+ At the large interval desk, HISTORY and GHOST change what can be inspected without changing which intervals survive. At the tree, FORM, STRATA, REACH and ENDS give different readings of the same branches. At this table, changing the retained fraction changes the generated intervals themselves. State which kind of change you made.

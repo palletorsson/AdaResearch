@@ -1,0 +1,34 @@
+{
+  "returncode": 0,
+  "seconds": 5.309833765029907,
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--headless",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-randomness-review\\navigation-engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-randomness-review/probe_navigation.gd"
+  ],
+  "before": {
+    "commons/scenes/endless_museum.gd": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+    "commons/scenes/em/em_portal_stream.gd": "25101015e0aba06ea11167647d69fc90c3eca5bff09ccb67442ec9a6af24e299",
+    "ada_run/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/data/map_authored.json": "1fbac1d5df3aaf1db8eae54630dbdcc3414dcd5388d164c9daca71f55c9e7302",
+    "commons/data/museum/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/maps/sequences/randomness.json": "d50c48f6446d368610ce319c316d61d47eb57d0b66680a98746e0d3007ef10ab"
+  },
+  "after": {
+    "commons/scenes/endless_museum.gd": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93",
+    "commons/scenes/em/em_portal_stream.gd": "25101015e0aba06ea11167647d69fc90c3eca5bff09ccb67442ec9a6af24e299",
+    "ada_run/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/data/map_authored.json": "1fbac1d5df3aaf1db8eae54630dbdcc3414dcd5388d164c9daca71f55c9e7302",
+    "commons/data/museum/em_plan.json": "c4960470e7cce5dc8d86e98a27828e9c1bc2b8af38f487d4a99155284a397bdc",
+    "commons/maps/sequences/randomness.json": "d50c48f6446d368610ce319c316d61d47eb57d0b66680a98746e0d3007ef10ab"
+  }
+}

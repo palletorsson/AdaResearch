@@ -1,0 +1,137 @@
+{
+  "checks": [
+    {
+      "label": "Silent arrival does not allocate a DSP bus",
+      "passed": true
+    },
+    {
+      "label": "Voice pool is bounded at eight",
+      "passed": true
+    },
+    {
+      "label": "density native slider updates audio state",
+      "passed": true
+    },
+    {
+      "label": "density reaches its minimum",
+      "passed": true
+    },
+    {
+      "label": "rate native slider updates audio state",
+      "passed": true
+    },
+    {
+      "label": "rate reaches its minimum",
+      "passed": true
+    },
+    {
+      "label": "warmth native slider updates audio state",
+      "passed": true
+    },
+    {
+      "label": "warmth reaches its minimum",
+      "passed": true
+    },
+    {
+      "label": "space native slider updates audio state",
+      "passed": true
+    },
+    {
+      "label": "space reaches its minimum",
+      "passed": true
+    },
+    {
+      "label": "drift native slider updates audio state",
+      "passed": true
+    },
+    {
+      "label": "drift reaches its minimum",
+      "passed": true
+    },
+    {
+      "label": "level native slider updates audio state",
+      "passed": true
+    },
+    {
+      "label": "level reaches its minimum",
+      "passed": true
+    },
+    {
+      "label": "PLAY starts asynchronous sample preparation",
+      "passed": true
+    },
+    {
+      "label": "Two legacy synthesizer samples prepared",
+      "passed": true
+    },
+    {
+      "label": "Requested playback starts after preparation",
+      "passed": true
+    },
+    {
+      "label": "pad PCM starts and ends at zero",
+      "passed": true
+    },
+    {
+      "label": "bell PCM starts and ends at zero",
+      "passed": true
+    },
+    {
+      "label": "One isolated effects bus is allocated",
+      "passed": true
+    },
+    {
+      "label": "Same seed reproduces the event score",
+      "passed": true
+    },
+    {
+      "label": "Every generated pitch belongs to the displayed scale",
+      "passed": true
+    },
+    {
+      "label": "NEW SEED changes the generated event score",
+      "passed": true
+    },
+    {
+      "label": "Zero density leaves silence",
+      "passed": true
+    },
+    {
+      "label": "A long frame does not cause a catch-up burst",
+      "passed": true
+    },
+    {
+      "label": "Saturation skips excess notes without stealing held voices",
+      "passed": true
+    },
+    {
+      "label": "Displayed scope reads actual nonzero output PCM",
+      "passed": true
+    },
+    {
+      "label": "LFO ROUTE changes the real modulation destination",
+      "passed": true
+    },
+    {
+      "label": "Pan destination receives the slow modulation",
+      "passed": true
+    },
+    {
+      "label": "STOP fades out and releases every voice",
+      "passed": true
+    },
+    {
+      "label": "Engine mixdown contains recorded PCM",
+      "passed": true
+    },
+    {
+      "label": "Museum process culling stops playback",
+      "passed": true
+    },
+    {
+      "label": "Teardown removes only the instrument's own bus",
+      "passed": true
+    }
+  ],
+  "failures": []
+}

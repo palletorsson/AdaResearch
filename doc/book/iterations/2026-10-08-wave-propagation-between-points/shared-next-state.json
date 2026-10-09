@@ -1,0 +1,129 @@
+{
+  "checks": [
+    {
+      "name": "complete program creates nine points, eight rods and its label",
+      "passed": true
+    },
+    {
+      "name": "same PointBody geometry returns",
+      "passed": true
+    },
+    {
+      "name": "arrays alone govern motion",
+      "passed": true
+    },
+    {
+      "name": "one raised centre is the release condition",
+      "passed": true
+    },
+    {
+      "name": "centre first acceleration is -16.8 m/s squared",
+      "passed": false
+    },
+    {
+      "name": "immediate neighbours first velocities both +0.12 m/s",
+      "passed": false
+    },
+    {
+      "name": "first neighbour displacement uses new velocity",
+      "passed": false
+    },
+    {
+      "name": "centre first height uses new velocity",
+      "passed": false
+    },
+    {
+      "name": "far points do not respond in this first step",
+      "passed": false
+    },
+    {
+      "name": "clock counts simulated seconds",
+      "passed": true
+    },
+    {
+      "name": "second step reaches next neighbours",
+      "passed": true
+    },
+    {
+      "name": "propagation stays mirror symmetric",
+      "passed": false
+    },
+    {
+      "name": "horizontal addresses remain fixed",
+      "passed": true
+    },
+    {
+      "name": "drawing follows the retained state",
+      "passed": true
+    },
+    {
+      "name": "rod meets point through transformed parent",
+      "passed": true
+    },
+    {
+      "name": "paused physics callback preserves state",
+      "passed": true
+    },
+    {
+      "name": "uncoupled neighbours remain exactly still",
+      "passed": true
+    },
+    {
+      "name": "uncoupled centre still oscillates",
+      "passed": true
+    },
+    {
+      "name": "uncoupled rods disappear",
+      "passed": true
+    },
+    {
+      "name": "reset preserves coefficient and clears velocity/time",
+      "passed": true
+    },
+    {
+      "name": "reset reconnects the drawn row",
+      "passed": true
+    },
+    {
+      "name": "equal offsets create no coupling force including ends",
+      "passed": false
+    },
+    {
+      "name": "end point has one neighbour not a wrap or clamp",
+      "passed": false
+    },
+    {
+      "name": "seven point variation has six links and centre index three",
+      "passed": true
+    },
+    {
+      "name": "half initial displacement gives half motion at matching times",
+      "passed": true
+    },
+    {
+      "name": "variants do not share mutable arrays",
+      "passed": true
+    },
+    {
+      "name": "same force at double mass halves acceleration",
+      "passed": false
+    },
+    {
+      "name": "declared step and damping keep motion bounded",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "centre first acceleration is -16.8 m/s squared",
+    "immediate neighbours first velocities both +0.12 m/s",
+    "first neighbour displacement uses new velocity",
+    "centre first height uses new velocity",
+    "far points do not respond in this first step",
+    "propagation stays mirror symmetric",
+    "equal offsets create no coupling force including ends",
+    "end point has one neighbour not a wrap or clamp",
+    "same force at double mass halves acceleration"
+  ],
+  "passed": false,
+  "scope": "Exact printed program in Godot. Teacher-authored behaviour checks, not independent student or headset validation."
+}

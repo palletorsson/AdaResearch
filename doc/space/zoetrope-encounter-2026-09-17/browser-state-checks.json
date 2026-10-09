@@ -1,0 +1,149 @@
+{
+  "source": "doc/research/possible-bodies/transformation-zoetrope.html",
+  "source_sha256": "09b3c1042d9202bfca8f3266134c71320e793c5ab6098f0c249aba8fdda460fd",
+  "generated_at": "2026-09-17T07:49:07.384Z",
+  "runtime": "v22.20.0",
+  "method": "Actual inline page script executed in Node with DOM/Canvas stubs and a controlled animation clock.",
+  "limitations": "State/formula checks only. Canvas pixels, real browser layout, Godot rendering and headset experience are not tested by this harness.",
+  "total": 34,
+  "passed": 34,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Clock and sampling grid start at zero",
+      "passed": true
+    },
+    {
+      "name": "One-second sampling holds the previous pose",
+      "passed": true
+    },
+    {
+      "name": "Translation reaches its 0.6-metre amplitude at one second",
+      "passed": true
+    },
+    {
+      "name": "Uniform scale reaches factor 1.3 at one second",
+      "passed": true
+    },
+    {
+      "name": "Rotation reaches a quarter-turn at one second",
+      "passed": true
+    },
+    {
+      "name": "Changing the interval resamples without resetting running time",
+      "passed": true
+    },
+    {
+      "name": "Whole-cycle sampling remains anchored at time zero",
+      "passed": true
+    },
+    {
+      "name": "Combined translation and scale return after a whole cycle",
+      "passed": true
+    },
+    {
+      "name": "Third-second sampling includes the exact one-second boundary",
+      "passed": true
+    },
+    {
+      "name": "Third-second sampling holds between sample boundaries",
+      "passed": true
+    },
+    {
+      "name": "Paused time remains frozen when animation frames advance",
+      "passed": true
+    },
+    {
+      "name": "Adding a mark preserves running time",
+      "passed": true
+    },
+    {
+      "name": "Sphere selection reaches the model",
+      "passed": true
+    },
+    {
+      "name": "Unequal tetrahedron selection reaches the model",
+      "passed": true
+    },
+    {
+      "name": "Paused scrubbing sets the requested time",
+      "passed": true
+    },
+    {
+      "name": "Resuming advances only the newly elapsed time",
+      "passed": true
+    },
+    {
+      "name": "One cycle contains twelve stored still poses",
+      "passed": true
+    },
+    {
+      "name": "Drum makes a half-turn in three seconds",
+      "passed": true
+    },
+    {
+      "name": "Drum geometry matches the Godot model",
+      "passed": true
+    },
+    {
+      "name": "Observer keeps standing eye height",
+      "passed": true
+    },
+    {
+      "name": "Axial rotation is 18 degrees per second",
+      "passed": true
+    },
+    {
+      "name": "Swept boundary starts hidden",
+      "passed": true
+    },
+    {
+      "name": "Cube swept radius is its half-diagonal",
+      "passed": true
+    },
+    {
+      "name": "Triangle selection exposes cone base radius",
+      "passed": true
+    },
+    {
+      "name": "Boundary toggle does not advance paused time",
+      "passed": true
+    },
+    {
+      "name": "Approach stops outside the disc",
+      "passed": true
+    },
+    {
+      "name": "Orbit completes a turn without changing paused time",
+      "passed": true
+    },
+    {
+      "name": "Retreat has a stable outer limit",
+      "passed": true
+    },
+    {
+      "name": "Return view restores the starting observation point",
+      "passed": true
+    },
+    {
+      "name": "Drum pose selector translation",
+      "passed": true
+    },
+    {
+      "name": "Drum pose selector rotation",
+      "passed": true
+    },
+    {
+      "name": "Drum pose selector scale",
+      "passed": true
+    },
+    {
+      "name": "Drum pose selector combined",
+      "passed": true
+    },
+    {
+      "name": "All three bodies render at closest approach with open comparisons and twelve orbit/time phases",
+      "passed": true
+    }
+  ]
+}

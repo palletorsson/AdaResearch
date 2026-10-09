@@ -1,0 +1,159 @@
+{
+  "checks": [
+    {
+      "check": "Twenty-five full-size columns",
+      "passed": true
+    },
+    {
+      "check": "Column 0 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 1 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 2 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 3 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 4 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 5 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 6 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 7 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 8 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 9 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 10 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 11 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 12 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 13 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 14 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 15 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 16 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 17 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 18 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 19 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 20 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 21 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 22 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 23 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Column 24 rests on its plinth",
+      "passed": true
+    },
+    {
+      "check": "Entry row changes only radial resolution",
+      "passed": true
+    },
+    {
+      "check": "Entry row triangle counts increase with sides",
+      "passed": true
+    },
+    {
+      "check": "Varied grove retains five profiles and at least fifteen heights",
+      "passed": true
+    },
+    {
+      "check": "Finite geometry and unit normals",
+      "passed": true
+    },
+    {
+      "check": "Tallest body retains its 6.17 metre total height",
+      "passed": true
+    },
+    {
+      "check": "No camera, world environment, lights, architecture or floor",
+      "passed": true
+    },
+    {
+      "check": "Physical geometry fits declared museum placement",
+      "passed": true
+    },
+    {
+      "check": "1.7 m capsule has a continuous 2.1 m passage from entrance to exit",
+      "passed": true
+    },
+    {
+      "check": "All columns retain collision",
+      "passed": true
+    }
+  ],
+  "note": "Native isolated headless geometry and collision checks; main museum and headset review remain separate.",
+  "passed": true,
+  "physical_bounds": {
+    "max": [
+      8.10000038146973,
+      6.16999959945679,
+      10.9299993515015
+    ],
+    "min": [
+      -10.9300003051758,
+      0.0,
+      -13.0500001907349
+    ]
+  },
+  "triangles_in_columns": 28980
+}

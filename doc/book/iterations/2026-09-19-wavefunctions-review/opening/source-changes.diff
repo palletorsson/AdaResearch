@@ -1,0 +1,82 @@
+--- before/commons/artifacts/control_pendulum/control_pendulum.gd
++++ commons/artifacts/control_pendulum/control_pendulum.gd
+@@ -1,7 +1,7 @@
+ # control_pendulum.gd
+ # Grabbable pendulum that controls oscillation parameters
+ # When grabbed: oscillation stops. When released: resumes from current position.
+-# Swing harder = faster oscillation. Higher amplitude = bigger movements.
++# The release supplies angle and tangent speed; wider swings need not have a shorter period.
+ # Uses XR Tools grabbable sphere for VR interaction.
+ 
+ extends Node3D
+@@ -12,12 +12,12 @@
+ # @identity
+ # essence: alpha = -(g/L)*sin(theta) + drive, omega += alpha*dt, theta += omega*dt, decayed by the regime's damping
+ # desire: Grab a pendulum bob in VR and feel gravity convert your release into oscillation
+-# critical_parameter: pendulum_length — determines the natural frequency via sqrt(g/L)
++# critical_parameter: pendulum_length — with gravity fixed, sqrt(g/L) gives the small-angle natural frequency
+ # triggers: grab() freezes physics; release() converts hand position to initial angle and starts oscillation
+-# emerges: harmonic motion from the simplest possible setup — mass, string, gravity
++# emerges: a returning swing from an integrated nonlinear restoring rule, with damping and optional drive
+ # needs: VR grab on bob [has], oscillation_updated signal output [has], a picture of what the damping is doing [has, under evidence]
+ # relationships: depends on gravity simulation; drives oscillation_controlled_cube via signal; contrasts with spring_demo (gravity vs spring restoring force) and harmonic_motion_demo, with which it shares the `regime` word
+-# truth: A pendulum is gravity's metronome — length alone determines the tempo.
++# truth: In the small-angle undamped approximation, length and gravity set the period; this simulated swing also has amplitude, damping and optional drive.
+ 
+ ## ── the regime axis ───────────────────────────────────────────────────────────────────
+ ## WHICH NAMED CASE OF THE DAMPED OSCILLATOR THIS PENDULUM IS IN. Family word; the first
+--- before/algorithms/wavefunctions/unit_circle/UnitCircle.gd
++++ algorithms/wavefunctions/unit_circle/UnitCircle.gd
+@@ -4,17 +4,18 @@
+ 
+ # @identity
+ # essence: point(t) = (cos(theta), sin(theta)), waves built stroke by stroke as angle sweeps
+-# desire: Watch a point trace the unit circle while sine and cosine waves build incrementally
++# desire: Follow both coordinate projections of a turning point while the selected graph builds incrementally
+ # critical_parameter: rotation_speed — controls how fast the circle is traced and waves extend
+ # triggers: continuous angle increment builds the wave one sample at a time until complete
+-# emerges: visual proof that sine and cosine are born from circular motion
++# emerges: sine and cosine as coordinate projections of uniform angular progression
+ # needs: VR observation [has], speed control [missing]
+ # relationships: depends on MultiMesh segment rendering; contrasts with UnitCircleTrig (buildup vs continuous trail); unlocks the circle-wave connection
+ # truth: The unit circle is the Rosetta Stone of trigonometry — rotation on one side, oscillation on the other.
+ 
+ # --- DNA ---------------------------------------------------------------------
+ # correspondence: which relation between the angle and the pair of lengths is actually
+-#   drawn and walked. "both" is the shipped figure — the vertical sine rod, the
++#   drawn. Collision boxes accompany the sampled bridge, but do not establish a traversable route.
++#   "both" is the shipped figure — the vertical sine rod, the
+ #   horizontal cosine rod, and a bridge whose planks unroll sin(theta).
+ # buildup / start_angle_deg are BENCH knobs, not axes. The bridge lays itself one plank
+ #   at a time over ~16 seconds, so a still photographed at t=1s shows 6% of the figure
+@@ -275,12 +276,14 @@
+ 	node.position = mid
+ 	if length > 0.001:
+ 		var direction = (to - from).normalized()
+-		# Check if direction is parallel to UP vector (vertical line)
++		# Endpoints and midpoint belong to this artifact's local frame. A global
++		# look_at_from_position would move the rod away when the hall places us.
++		# Keep both position and orientation local; also works before tree entry.
+ 		if abs(direction.dot(Vector3.UP)) > 0.999:
+ 			# For vertical lines, use FORWARD as up to avoid colinear warning
+-			node.look_at_from_position(mid, to, Vector3.FORWARD)
++			node.basis = Basis.looking_at(direction, Vector3.FORWARD)
+ 		else:
+-			node.look_at_from_position(mid, to, Vector3.UP)
++			node.basis = Basis.looking_at(direction, Vector3.UP)
+ 	rod.scale = Vector3(thickness, thickness, max(length, 0.0001))
+ 
+ func _get_shared_box() -> BoxMesh:
+--- before/algorithms/wavefunctions/sine_wall/SineWallCorridor.gd
++++ algorithms/wavefunctions/sine_wall/SineWallCorridor.gd
+@@ -1,8 +1,8 @@
+ # @identity
+ # essence: a corridor whose two walls are layered sine waves — walk between standing waveforms
+-# desire: feel the body inside the wave — left and right walls phasing against each other across 24m
++# desire: compare moving and frozen folds in a passage; the shipped scene is 7 m long with wall collision off
+ # critical_parameter: phase_offset_between_walls — how much the right wall lags the left, gating the beat-pattern between them
+-# triggers: _ready() rebuilds wall meshes on parameter change; animate_at_runtime tweens the phase across animation_speed
++# triggers: controls rebuild wall meshes; animate_at_runtime advances phase by animation_speed * delta and rebuilds the walls
+ # emerges: a 200-column waveform corridor with three superposed wave_layers, plush shader gradient bottom→mid→top, optional wall collision
+ # needs: phase offset slider [has, 2026-09-10]; amplitude slider [has, 2026-09-10]; frequency multiplier dial [missing]; layer count picker [missing]
+ # relationships: cousin of OscillatingWave (single wave) and HarmonicBuilder (sum of sines); contrast to SineSpace (floor as wave, this is walls as wave)

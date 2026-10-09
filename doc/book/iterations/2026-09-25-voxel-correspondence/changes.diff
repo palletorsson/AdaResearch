@@ -1,0 +1,241 @@
+--- before/algorithms/randomness/voxelnoise/voxelnoise.gd
++++ after/algorithms/randomness/voxelnoise/voxelnoise.gd
+@@ -36,6 +36,9 @@
+ var _occupied_cells: Dictionary = {}
+ var _rebuild_ms: float = 0.0
+ @export_enum("none", "volume") var stand: String = "none"
++var _selected_cell: Vector3i = Vector3i(12, 12, 12)
++var _slice_frame: Node3D
++var _cell_frame: Node3D
+ var _contract: bool = false     # true once a staged bench has handed over the contract
+ 
+ # ─────────────────────────────────────────────────────────────────────────────
+@@ -234,7 +237,10 @@
+ 		iso_level = clampf(threshold_value, -1.0, 1.0)   # no bias: the contract owns the line
+ 		noise = PerlinTerrainSculptor.contract_noise(noise_seed, payload.get("noise_scale", noise_scale), noise_octaves)
+ 
+-
++	var selected: Array = payload.get("selected_cell", [_selected_cell.x, _selected_cell.y, _selected_cell.z])
++	if selected.size() == 3:
++		_selected_cell = Vector3i(int(selected[0]), int(selected[1]), int(selected[2]))
++	_update_selection_markers()
+ 	_queue_rebuild()
+ 
+ func _ensure_generated_root() -> void:
+@@ -389,3 +395,58 @@
+ Threshold changes the body; this frame stays."
+ 	label_.font_size=25;label_.pixel_size=0.0016;label_.position=Vector3(0,0.15,-2.63);label_.rotation.y=PI
+ 	label_.set_meta("em_local_instrument",true);stage_.add_child(label_)
++	# Readable from both approaches when the volume shares the model's orientation.
++	var reverse_label := label_.duplicate() as Label3D
++	reverse_label.position.z = 2.63; reverse_label.rotation.y = 0.0
++	stage_.add_child(reverse_label)
++	_build_selection_markers()
++
++
++## CELL marks the screen's horizontal section in the room. These lines have no
++## collider or depth override; solid cells can hide the selected address.
++func _build_selection_markers() -> void:
++	var mat := StandardMaterial3D.new()
++	mat.albedo_color = Color(1.0, 0.82, 0.16)
++	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
++	_slice_frame = Node3D.new(); _slice_frame.name = "SelectedSlice"; add_child(_slice_frame)
++	_cell_frame = Node3D.new(); _cell_frame.name = "SelectedCell"; add_child(_cell_frame)
++	for i in range(4): _selection_bar(_slice_frame, mat)
++	for i in range(12): _selection_bar(_cell_frame, mat)
++	_update_selection_markers()
++
++func _selection_bar(parent: Node3D, mat: Material) -> void:
++	var bar := MeshInstance3D.new()
++	bar.mesh = BoxMesh.new(); bar.material_override = mat
++	bar.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
++	parent.add_child(bar)
++
++func apply_perlin_cell_selection(cell: Vector3i) -> void:
++	if not link_to_perlin_sculptor or stand != "volume" or not _contract: return
++	_selected_cell = cell
++	_update_selection_markers()
++
++func _update_selection_markers() -> void:
++	if not is_instance_valid(_slice_frame): return
++	var valid: bool = _contract and _selected_cell.x >= 0 and _selected_cell.x < chunk_size \
++		and _selected_cell.y >= 0 and _selected_cell.y < world_height \
++		and _selected_cell.z >= 0 and _selected_cell.z < chunk_size
++	_slice_frame.visible = valid; _cell_frame.visible = valid
++	if not valid: return
++	var width: float = chunk_size * voxel_scale + 0.10
++	_slice_frame.position.y = (_selected_cell.y + 0.5) * voxel_scale
++	for i in range(4):
++		var bar: MeshInstance3D = _slice_frame.get_child(i)
++		var side: float = -1.0 if i % 2 == 0 else 1.0
++		bar.position = Vector3(side * width * 0.5, 0, 0) if i < 2 else Vector3(0, 0, side * width * 0.5)
++		(bar.mesh as BoxMesh).size = Vector3(0.012, 0.012, width) if i < 2 else Vector3(width, 0.012, 0.012)
++	_cell_frame.position = Vector3(_selected_cell.x - (chunk_size - 1) * 0.5, _selected_cell.y + 0.5, _selected_cell.z - (chunk_size - 1) * 0.5) * voxel_scale
++	var size: float = voxel_scale * 1.06
++	var index: int = 0
++	for axis in range(3):
++		for a in [-1.0, 1.0]:
++			for b in [-1.0, 1.0]:
++				var bar: MeshInstance3D = _cell_frame.get_child(index)
++				var at := Vector3.ZERO; at[(axis + 1) % 3] = a * size * 0.5; at[(axis + 2) % 3] = b * size * 0.5
++				var dimensions := Vector3.ONE * 0.009; dimensions[axis] = size
++				bar.position = at; (bar.mesh as BoxMesh).size = dimensions
++				index += 1
+--- before/commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd
++++ after/commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd
+@@ -447,6 +447,7 @@
+ 		"grid_size": grid_size,
+ 		"contract_span": CONTRACT_SPAN,
+ 		"contract_bias_scale": CONTRACT_BIAS_SCALE,
++		"selected_cell": [_cell.x, _cell.y, _cell.z],
+ 	}
+ 
+ func _broadcast_controls_to_voxelnoise() -> void:
+@@ -595,7 +596,7 @@
+ 	_lattice_readout.position = Vector3(-0.68, 0.135, 0.018)
+ 	case_root.add_child(_lattice_readout)
+ 
+-	# the marker: a wire cage round the cell the plate is talking about
++	# Translucent marker; neighbours may hide it until CUT opens the model.
+ 	var marker := MeshInstance3D.new()
+ 	marker.name = "CellMarker"
+ 	var bm := BoxMesh.new()
+@@ -678,6 +679,18 @@
+ 	_cell = step[i]
+ 	_place_cell_marker()
+ 	_update_lattice_readout()
++	_broadcast_cell_selection()
++
++
++## Move the address marker without rebuilding either body or changing its field.
++func _broadcast_cell_selection() -> void:
++	if stand != "lattice" or not is_inside_tree(): return
++	var hall: Node = _hall_ancestor()
++	for receiver in get_tree().get_nodes_in_group("voxelnoise_receivers"):
++		if hall != null and not hall.is_ancestor_of(receiver): continue
++		if receiver.has_method("apply_perlin_cell_selection"):
++			receiver.call("apply_perlin_cell_selection", _cell)
++
+ 
+ 
+ func new_lattice_seed() -> void:
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -7,8 +7,8 @@
+   "status": "source_checked_draft",
+   "sequence": "noise",
+   "text_path": "commons/maps/Noise_Voxel/final.md",
+-  "text_sha256": "1714ff63c8bb015cbe067cce746d80fbfb9c3ba3754465c6415d16c211c35a8d",
+-  "map_sha256": "101246a5433011743c3a2bee79414684cdb21d164fa487f39d4c5c7b17821893",
++  "text_sha256": "3cff4c8b5c4844287589b88579fca8502b70ee4b29a387e57ce9708aaf622245",
++  "map_sha256": "ab67d3d90e8b53edafa78b2f97b498e8530c7059c1a320e2b0ff05d1d182a5a6",
+   "learner_verified": false,
+-  "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Voxel/DECISIONS.md"
++  "local_review": "doc/book/iterations/2026-09-25-voxel-correspondence/DECISIONS.md"
+ }
+--- before/commons/maps/Noise_Voxel/artifacts.md
++++ after/commons/maps/Noise_Voxel/artifacts.md
+@@ -12,7 +12,7 @@
+ 
+ ## Voxel Noise
+ 
+-`voxelnoise` at (9,9), in volume mode. A 5.2 m frame contains a 4.8 m sample domain. Its 24³ cells match the model at five times the physical spacing. Exposed cell faces provide both visible geometry and collision. Occupied connectivity does not establish player traversal.
++`voxelnoise` at (9,9), in volume mode. A 5.2 m frame contains a 4.8 m sample domain. Its 24³ cells match the model at five times the physical spacing. Exposed cell faces provide both visible geometry and collision. It now shares the bench's orientation. CELL moves a yellow horizontal perimeter and selected-address outline here, matching the screen without rebuilding the volume. Occupied connectivity does not establish player traversal.
+ 
+ ## Dark Sphere
+ 
+--- before/commons/maps/Noise_Voxel/field_notes.md
++++ after/commons/maps/Noise_Voxel/field_notes.md
+@@ -31,3 +31,9 @@
+ **Rejected.** Making the receiver sample at the bench's own extent (a literal 1:1 copy): it would have made the terrain a magnified model and nothing else, and Astra's card asks for one relationship that is true, not for sameness. Rejected too: claiming a passage through the terrain — nothing here verifies one, and the room says that rather than implying it.
+ 
+ **Pending.** A headset walk; a body actually trying the terrain, which is the only way the passage question can be answered; Astra's review. The receiver's own chunk bounds (32 × 64 × 32 at voxel_scale 1) are unchanged and were not the subject of this pass.
++
++## 25 September — carry the reading across the room
++
++The standing photograph showed the small and large bodies facing opposite ways. Rotated only the large placement by 180 degrees and added a CELL-linked yellow perimeter at the selected horizontal layer, with a selected-cell outline. The existing control now locates the screen reading in the full-size body. No new control or field rule. Solid cells can still hide the selected address; the frame does not cut the body or collide with the visitor.
++
++The chapter keeps all former passages except the opening orientation phrase, adding one observation paragraph and a native photograph. Current role lists and sequence are unchanged. The core record still promotes the bench and volume, while older companion/book-role records name four works; this pre-existing discrepancy is recorded, not treated as permission to promote the legacy orb. The earlier orb passage remains available as a supporting comparison.
+--- before/commons/maps/Noise_Voxel/final.md
++++ after/commons/maps/Noise_Voxel/final.md
+@@ -2,7 +2,7 @@
+ 
+ <!-- @perlin_terrain_sculptor -->
+ 
+-A green body waits on the bench, with little daylight between its blocks. A translucent yellow box marks one cell, whether or not that cell holds a block. Deep inside the body, the blocks around it can hide the box until CUT opens the near half. Across the room, a much larger body has the same irregular outline, turned half round.
++A green body waits on the bench, with little daylight between its blocks. A translucent yellow box marks one cell, whether or not that cell holds a block. Deep inside the body, the blocks around it can hide the box until CUT opens the near half. Across the room, a much larger body has the same irregular outline, facing the same way.
+ 
+ Leave SEED alone for a moment. Press THRESHOLD and watch the green body. Then watch the field value on the plate while you press again. Something has disappeared. Which number changed?
+ 
+@@ -37,6 +37,10 @@
+ The screen keeps a horizontal slice of that array. On the left, colours vary with the field after the height bias. On the right, each square receives the decision: occupied or empty. A small yellow frame marks the selected coordinate in both.
+ 
+ Press CELL at the bench. The box visits another address and the screen takes its horizontal layer. Follow a dark square on the right into the coloured square at the same position on the left. There is still a value there. The decision has withheld a block.
++
++A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square drops below your eyes, then rises above your head as you continue. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
++
++![The selected horizontal slice runs below eye level around the full-size voxel body. Changing CELL moves this yellow frame while the occupied form stays put.](/book-review/doc/book/figures/Noise_Voxel/selected-slice.png)
+ 
+ Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot show how far a rejected value missed the line; the other display keeps that difference as a shade, darker the further below, though it prints no scale.
+ 
+--- before/commons/maps/Noise_Voxel/intent.md
++++ after/commons/maps/Noise_Voxel/intent.md
+@@ -2,7 +2,7 @@
+ 
+ Sequence role: after Noise_One's different readings of a field, carry the array into a volume of occupied/empty decisions. Continue into Noise_6_Wall with another possible receiver for the values classification leaves out.
+ 
+-Encounter: keep the seed while moving the threshold; inspect one coordinate; distinguish a change to occupancy from a cut in the model's visible instances. Read the actual score slice beside the stored decisions, then approach the same 24³ arrangement at five times the cell spacing.
++Encounter: keep the seed while moving the threshold; inspect one coordinate; distinguish a change to occupancy from a cut in the model's visible instances. Read the actual score slice beside the stored decisions, then approach the same 24³ arrangement at five times the cell spacing. The pair shares its orientation; a yellow perimeter carries the selected screen layer into the volume at its actual height. Changing the reading position leaves the body still.
+ 
+ Four primary works: perlin_terrain_sculptor, science_screen, voxelnoise, dark_sphere. The source model, section screen and large receiver compare one field; the orb retains independent sine-driven material variation. It adds an earlier operation to the comparison without being retuned as a noise artifact.
+ 
+--- before/commons/maps/Noise_Voxel/map_data.json
++++ after/commons/maps/Noise_Voxel/map_data.json
+@@ -3,7 +3,7 @@
+   "name": "Voxel Noise: Discretizing the Continuum",
+   "title": "Noise Carved into Blocks",
+   "lookup_name": "Noise_Voxel",
+-  "description": "A fixed Perlin field becomes a sampled occupancy decision. A cased 24-cubed model controls a five-times-larger volume with matching cells. A live screen compares one horizontal score slice with the exact occupied/empty mask; the dark orb keeps its independent pulse. Threshold changes classification, CELL selects a sample and screen layer, SEED changes the field, and CUT changes only the model view. Connected occupied cells do not establish a walkable route.",
++  "description": "A fixed Perlin field becomes a sampled occupancy decision. A cased 24-cubed model controls a five-times-larger volume with matching cells. A live screen compares one horizontal score slice with the exact occupied/empty mask; the dark orb keeps its independent pulse. Threshold changes classification, CELL selects a sample and screen layer, marked at the corresponding height and address in the large volume, SEED changes the field, and CUT changes only the model view. Connected occupied cells do not establish a walkable route.",
+   "version": "1.0",
+   "format": "json",
+   "dimensions": {
+@@ -108,7 +108,7 @@
+    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "perlin_terrain_sculptor:180:1.35:1#stand:lattice#seed:31415", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+-   ["", "", "", "", "", "", "", "", "", "voxelnoise#stand:volume", "", "", "", "", ""],
++   ["", "", "", "", "", "", "", "", "", "voxelnoise:180#stand:volume", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+    ["", "", "", "", "dark_sphere", "", "", "", "", "", "", "", "", "", ""],
+--- before/commons/maps/Noise_Voxel/technical.md
++++ after/commons/maps/Noise_Voxel/technical.md
+@@ -43,7 +43,7 @@
+ 
+ ## Four controls with different scopes
+ 
+-THRESHOLD changes classification and broadcasts the source settings to the hall's volume. CELL cycles five selected coordinates and changes the screen's horizontal layer. SEED generates a new named five-digit seed and rebuilds the field. CUT hides cells with `z > grid_size / 2` in the model's MultiMesh while retaining `_voxels`, all occupancy counts, the receiver and the screen section. With 24 indices this keeps 0–12 visible; the cut is not exactly half the index range.
++THRESHOLD changes classification and broadcasts the source settings to the hall's volume. CELL cycles five selected coordinates and changes the screen's horizontal layer, the large volume's yellow section perimeter and its selected-cell outline. This selection update is scoped to the same hall and does not rebuild either body. The receiver's link opt-out also disables selection updates. SEED generates a new named five-digit seed and rebuilds the field. CUT hides cells with `z > grid_size / 2` in the model's MultiMesh while retaining `_voxels`, all occupancy counts, the receiver and the screen section. With 24 indices this keeps 0–12 visible; the cut is not exactly half the index range.
+ 
+ The lattice mode now omits the legacy slider case and floating labels in favour of its four-button panel and cased readout. The legacy standalone sculptor still offers its own controls. The lattice panel is enlarged and tilted; the model stands on a low solid plinth with a clear northern approach. The source now occupies map cell (4,7), avoiding the retained raised platform near its former controls.
+ 
+@@ -55,7 +55,7 @@
+ 
+ The science screen explicitly uses `mode:voxel_slice`. It shows a 24 × 24 horizontal layer at the selected y. It recalculates the field values from the source sampler and reads the actual stored `_voxels[x][y][z]` booleans. The left heatmap maps the biased scalar through a fixed colour range; the right map displays occupancy. Two yellow outlines identify the same selected x,z address. The screen is a 2D rendering carried by a 3D stand. Its cache includes source identity, seed, frequency, octaves, threshold, cell and grid size. CUT does not change its data.
+ 
+-`voxelnoise#stand:volume` uses 0.20 m spacing and cubes which meet at their faces. The stage occupies 5.2 × 5.2 m around a 4.8 m cube domain. The occupied mask is computed first; a second pass emits only faces with an empty or out-of-bounds neighbour. Each exposed square contributes two triangles. Shared interior faces need no rendering or collision. This preserves the occupied set while reducing mesh construction cost. The boundary includes cavity surfaces, not just the outside silhouette.
++`voxelnoise:180#stand:volume` faces the same way as the bench and uses 0.20 m spacing and cubes which meet at their faces. The stage occupies 5.2 × 5.2 m around a 4.8 m cube domain. The occupied mask is computed first; a second pass emits only faces with an empty or out-of-bounds neighbour. Each exposed square contributes two triangles. Shared interior faces need no rendering or collision. This preserves the occupied set while reducing mesh construction cost. The boundary includes cavity surfaces, not just the outside silhouette.
+ 
+ The same triangle array constructs the ConcavePolygonShape3D. Rebuilding removes the preceding mesh and collider before adding their replacement. A fully empty result creates neither. A matching collider establishes a physical boundary, but does not certify that a player can climb through the volume. The chamber's surrounding museum route remains available independently of the volume's changing occupancy. The original map walls, two raised cells, two openings and utility placements remain unchanged.
+ 
+@@ -70,3 +70,9 @@
+ The accepted rendered museum run passed 61 checks: all 13,824 scalar values and occupancy decisions agree at each of five thresholds; the screen's 576 decisions agree with the stored layer; boundary face counts and collision triangles agree; physical rays hit sampled roofs; empty-volume cleanup and CUT separation pass; all four buttons respond through the project's desktop interaction pointer. Broadcasts exclude an unrelated receiver. The museum reports no severed route for this hall.
+ 
+ This uses synthetic mouse events through the real desktop pointer rig. It is not a human walkthrough or headset test. Headset reach, comfort, step traversal and Quest frame cost remain pending. Mesh rebuilding is still synchronous and a threshold change can produce a hitch; the desktop timing record is not a headset performance guarantee.
++
++## Shared section in the room — 25 September
++
++The volume's section perimeter is 4.9 m wide around the 4.8 m field domain. Its centre height is `(selected_y + 0.5) * 0.20`; the authored five-cell cycle visits 2.5, 1.7, 1.3, 3.5 and 2.5 m. The small wire box follows the same x,y,z address, including empty cells. Both markers are depth-tested, unshaded observations with no collider; solid neighbours can occlude the address marker. Sixteen BoxMesh bars are reused as the selection moves. No field, threshold, occupancy, boundary generation or collision rule changes. The frame's fixed label is readable from either approach.
++
++The new native museum check injects press/release PointerEvent objects into the actual buttons; it does not test ray aiming or hand tracking. It compares all 13,824 field samples and decisions at five thresholds, checks unchanged mesh identity while selecting cells, matching mesh/collision triangles, CUT isolation, receiver opt-out and separation from another hall. Controlled walking paths go around the bench corner; a failed direct diagonal is retained in the review. Current results and photographs: `doc/book/iterations/2026-09-25-voxel-correspondence/`. The older 61-check report above remains the earlier verification record.

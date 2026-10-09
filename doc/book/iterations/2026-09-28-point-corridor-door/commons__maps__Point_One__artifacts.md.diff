@@ -1,0 +1,16 @@
+--- before/commons/maps/Point_One/artifacts.md
++++ after/commons/maps/Point_One/artifacts.md
+@@ -6,6 +6,7 @@
+ 
+ | Artifact | Source cell (x,z) | Configuration |
+ |---|---|---|
++| `point_corridor_door` | (8, 0) | `point_corridor_door:180#plinth:0#pin:1#offset:-0.50,0.00,-0.50` |
+ | `point_absent` | (7, 1) | `point_absent:180#plinth:0#pin:1` |
+ | `point_visible` | (7, 4) | `point_visible:180#plinth:0#pin:1` |
+ | `point_solid` | (7, 7) | `point_solid:180#plinth:0#pin:1` |
+@@ -26,3 +27,5 @@
+ | `point_pedestal` | (8, 26) | `point_pedestal:180#plinth:0#pin:1` |
+ 
+ The first four conditions are primary comparisons, followed by the coordinate frame and its two readouts, the target, and the 1.3 m diameter pedestal sphere. The case, code screen, force point, Fontana, snap sphere, floating field, radio and street talker remain secondary. The comment box is decoration.
++
++The corridor door is architecture: an automatic, once-opening threshold before the first point station. It is placed in the map, so it appears both when arriving from Point_Zero and when opening Point_One directly.

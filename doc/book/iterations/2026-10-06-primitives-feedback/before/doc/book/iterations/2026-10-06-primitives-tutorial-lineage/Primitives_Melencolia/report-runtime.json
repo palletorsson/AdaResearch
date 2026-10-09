@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "composition/known_bodies",
+      "passed": true
+    },
+    {
+      "id": "composition/original_cube_geometry",
+      "passed": true
+    },
+    {
+      "id": "composition/places_used",
+      "passed": true
+    },
+    {
+      "id": "composition/arrangement_keeps_construction",
+      "passed": true
+    },
+    {
+      "id": "composition/sphere_rests_at_radius",
+      "passed": true
+    },
+    {
+      "id": "composition/restart_reconstructs_script",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Primitives_Melencolia",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "lesson.gd",
+      "before": "cube.position = place",
+      "after": "cube.position = Vector3.ZERO"
+    },
+    "required_failure": "composition/places_used",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "composition/known_bodies",
+          "passed": true
+        },
+        {
+          "id": "composition/original_cube_geometry",
+          "passed": true
+        },
+        {
+          "id": "composition/places_used",
+          "passed": false
+        },
+        {
+          "id": "composition/arrangement_keeps_construction",
+          "passed": true
+        },
+        {
+          "id": "composition/sphere_rests_at_radius",
+          "passed": true
+        },
+        {
+          "id": "composition/restart_reconstructs_script",
+          "passed": false
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "composition/places_used",
+        "composition/restart_reconstructs_script"
+      ],
+      "hall": "Primitives_Melencolia",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Primitives_Melencolia/tutorial.md": "a6ac7a526563bb3ee5d8e7ce2f90b9b6737cb2afe8390e69ba03c4f6139463a4",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/cube_body.gd": "cc8b678f50b5ceedc999ffba8351ce461bc9fdfd99afad4c3270a3bb9d33ade1",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/lesson.gd": "1dfafa44266d81db6b0985ae21862480292e7143997b1156165ac9c863ecad97",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Primitives_Melencolia/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

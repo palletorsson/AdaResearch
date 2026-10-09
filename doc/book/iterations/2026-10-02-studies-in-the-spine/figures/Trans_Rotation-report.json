@@ -1,0 +1,59 @@
+{
+  "checks": [
+    {
+      "name": "Trans_Rotation assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "hinge full size",
+      "passed": true
+    },
+    {
+      "name": "hinge visible",
+      "passed": true
+    },
+    {
+      "name": "hinge controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "return policy available",
+      "passed": true
+    },
+    {
+      "name": "hinge bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "hinge bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "hinge_release standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "hinge_release support along side 2",
+      "passed": true
+    },
+    {
+      "name": "hinge_release standing clearance along side 36",
+      "passed": true
+    },
+    {
+      "name": "hinge_release support along side 36",
+      "passed": true
+    },
+    {
+      "name": "hinge_release capture",
+      "passed": true
+    }
+  ],
+  "map": "Trans_Rotation",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

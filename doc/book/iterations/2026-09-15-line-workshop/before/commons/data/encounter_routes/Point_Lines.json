@@ -1,0 +1,158 @@
+{
+  "schema": "encounter-route/1",
+  "map": "Point_Lines",
+  "status": "proposed",
+  "note": "Teaching order proposed with Palle on 2026-09-15. This overlay does not change roles, placements or book text. Later construction stations need development.",
+  "stops": [
+    {
+      "id": "connect",
+      "title": "Connect two points",
+      "action": "Bring the two points together. Watch the line appear and the barrier fly apart.",
+      "question": "What did connecting two positions allow you to do?",
+      "stage": "opening applied to book",
+      "members": [
+        "line_demo",
+        "do_not_cross_barrier"
+      ],
+      "visits": [
+        {
+          "lookup": "line_demo"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "measure",
+      "title": "Give a span a measure",
+      "action": "Move the measuring line's endpoints. Compare the changing distance with one metre.",
+      "question": "What does a unit let us compare?",
+      "stage": "opening applied to book",
+      "members": [
+        "line",
+        "scale_lines"
+      ],
+      "visits": [
+        {
+          "lookup": "line",
+          "at": [
+            16,
+            2
+          ]
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "red-line",
+      "title": "Cross a red line",
+      "action": "Approach the red line, then cross it and look back.",
+      "question": "What does this division change, and what do we bring to it?",
+      "stage": "opening applied to book",
+      "members": [
+        "redline"
+      ],
+      "visits": [
+        {
+          "lookup": "redline"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "walk",
+      "title": "Walk this line; read your trace",
+      "action": "Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.",
+      "question": "What kind of line does your movement leave?",
+      "stage": "existing encounter",
+      "members": [
+        "walk_this_line_marking",
+        "player_trace"
+      ],
+      "visits": [
+        {
+          "lookup": "walk_this_line_marking"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "combine",
+      "title": "Two directions: plus and X",
+      "action": "Compare the horizontal and vertical arrangements with the diagonal pair. A future revision will let you compose them by hand.",
+      "question": "What does the relation between two lines make visible?",
+      "stage": "interaction proposal",
+      "members": [
+        "axis_line"
+      ],
+      "visits": [
+        {
+          "lookup": "axis_line",
+          "at": [
+            6,
+            11
+          ]
+        },
+        {
+          "lookup": "axis_line",
+          "at": [
+            11,
+            15
+          ]
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "depth",
+      "title": "Carry a line into depth",
+      "action": "Carry and turn the grabbable line. Proposed next step: build a flat arrangement, then lift one line out of its plane.",
+      "question": "What changes when the arrangement no longer shares one plane?",
+      "stage": "interaction proposal",
+      "members": [
+        "grabbable_line",
+        "line_collection"
+      ],
+      "visits": [
+        {
+          "lookup": "grabbable_line"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "viewpoint",
+      "title": "Find a viewpoint; begin a grid",
+      "action": "Walk around the perspective arrangements. Proposed next step: manipulate parallel lines and repeat them into a grid.",
+      "question": "What appears joined from here, and separates when you move?",
+      "stage": "interaction proposal",
+      "members": [
+        "perspective_lines",
+        "parallel_lines"
+      ],
+      "visits": [
+        {
+          "lookup": "perspective_lines",
+          "at": [
+            5,
+            14
+          ]
+        }
+      ],
+      "draft": ""
+    }
+  ],
+  "basedOn": [
+    {
+      "path": "commons/maps/Point_Lines/map_data.json",
+      "sha256": "1e6eed1b66a4266019d121bdd4d5e1dc6d069942569545a0bf2c53c90d27a121"
+    },
+    {
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256": "6cf5d3f3373a413fe79bf852e9f16bb6d44c776484b9c1839363294d6c624207"
+    },
+    {
+      "path": "commons/data/artifact_roles.json",
+      "sha256": "bb33f8a18175f56a1880de5762743a10503d0a5c5c3bc61418f59e68aadae31d"
+    }
+  ]
+}

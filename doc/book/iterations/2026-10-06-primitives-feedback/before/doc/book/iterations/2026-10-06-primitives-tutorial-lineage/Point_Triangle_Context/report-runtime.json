@@ -1,0 +1,172 @@
+{
+  "checks": [
+    {
+      "id": "incoming/real_trace_saves_geometry",
+      "passed": true
+    },
+    {
+      "id": "triangle/three_original_point_handles",
+      "passed": true
+    },
+    {
+      "id": "triangle/saved_entries_exact",
+      "passed": true
+    },
+    {
+      "id": "triangle/collinear_is_empty",
+      "passed": true
+    },
+    {
+      "id": "triangle/one_rendered_face",
+      "passed": true
+    },
+    {
+      "id": "triangle/three_edges",
+      "passed": true
+    },
+    {
+      "id": "triangle/vertices_match_handles",
+      "passed": true
+    },
+    {
+      "id": "triangle/reverse_front",
+      "passed": true
+    },
+    {
+      "id": "triangle/front_is_one_sided",
+      "passed": true
+    },
+    {
+      "id": "triangle/duplicate_rejected",
+      "passed": true
+    },
+    {
+      "id": "triangle/out_of_range_rejected",
+      "passed": true
+    },
+    {
+      "id": "triangle/familiar_point_2",
+      "passed": true
+    },
+    {
+      "id": "triangle/familiar_point_3",
+      "passed": true
+    },
+    {
+      "id": "triangle/familiar_point_4",
+      "passed": true
+    },
+    {
+      "id": "triangle/real_pickup_moves_corner",
+      "passed": true
+    },
+    {
+      "id": "triangle/held_corner_redraws_face",
+      "passed": true
+    },
+    {
+      "id": "carry/original_trace_file_unchanged",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "hall": "Point_Triangle_Context",
+  "passed": true,
+  "negative_control": {
+    "mutation": {
+      "file": "lesson.gd",
+      "before": "face.show_faces(points, [Vector3i(0, 1, 2)])",
+      "after": "face.show_faces(points, [Vector3i(0, 2, 1)])"
+    },
+    "required_failure": "triangle/vertices_match_handles",
+    "result": {
+      "checks": [
+        {
+          "id": "incoming/real_trace_saves_geometry",
+          "passed": true
+        },
+        {
+          "id": "triangle/three_original_point_handles",
+          "passed": true
+        },
+        {
+          "id": "triangle/saved_entries_exact",
+          "passed": true
+        },
+        {
+          "id": "triangle/collinear_is_empty",
+          "passed": true
+        },
+        {
+          "id": "triangle/one_rendered_face",
+          "passed": true
+        },
+        {
+          "id": "triangle/three_edges",
+          "passed": true
+        },
+        {
+          "id": "triangle/vertices_match_handles",
+          "passed": false
+        },
+        {
+          "id": "triangle/reverse_front",
+          "passed": false
+        },
+        {
+          "id": "triangle/front_is_one_sided",
+          "passed": true
+        },
+        {
+          "id": "triangle/duplicate_rejected",
+          "passed": true
+        },
+        {
+          "id": "triangle/out_of_range_rejected",
+          "passed": true
+        },
+        {
+          "id": "triangle/familiar_point_2",
+          "passed": true
+        },
+        {
+          "id": "triangle/familiar_point_3",
+          "passed": true
+        },
+        {
+          "id": "triangle/familiar_point_4",
+          "passed": true
+        },
+        {
+          "id": "triangle/real_pickup_moves_corner",
+          "passed": true
+        },
+        {
+          "id": "triangle/held_corner_redraws_face",
+          "passed": false
+        },
+        {
+          "id": "carry/original_trace_file_unchanged",
+          "passed": true
+        }
+      ],
+      "failure_ids": [
+        "triangle/vertices_match_handles",
+        "triangle/reverse_front",
+        "triangle/held_corner_redraws_face"
+      ],
+      "hall": "Point_Triangle_Context",
+      "passed": false
+    }
+  },
+  "inputs": {
+    "commons/maps/Point_Triangle_Context/tutorial.md": "8dd6e9dfa2d25b7335fd5aaa710f4c30140120cbbd3b4fa8a03e4ff3143fa777",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/face_body.gd": "359130b37376cfc3d56d8f6d9f528a7653a7f19ca8bff1e4013ed99fd4000c56",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/lesson.gd": "32561b91b52ecdfbc778c251a5964c06301807254ee16e19c78a8d9cb67fc52a",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/line_skin.gd": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/point_body.gd": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040",
+    "doc/book/iterations/2026-10-06-primitives-tutorial-lineage/Point_Triangle_Context/trace_archive.gd": "2e161167fcfbfe76a5a2e60f77301cd6a6c371b329c728888131a67a47d2bacb"
+  },
+  "engine": "Godot 4.6 stable",
+  "scope": "Exact printed programs in native Godot; synthetic recorded movement and real XR Tools library. Variants and deliberate faults. No headset or human-learning claim."
+}

@@ -1,0 +1,77 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "arrival shaft, frame counter, folding and origin present",
+      "passed": true
+    },
+    {
+      "name": "Point zero label belongs to origin",
+      "passed": true
+    },
+    {
+      "name": "arrival aligned inside shaft",
+      "passed": true
+    },
+    {
+      "name": "counter ahead of falling visitor",
+      "passed": true
+    },
+    {
+      "name": "floor below open shaft",
+      "passed": true
+    },
+    {
+      "name": "shaft has no blocking cap",
+      "passed": true
+    },
+    {
+      "name": "real museum walker falls onto arrival floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival-counter",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: falling",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: origin",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: folding",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "arrival": [
+      7.5,
+      4.0,
+      1.5
+    ],
+    "counter": [
+      7.5,
+      1.64999997615814,
+      4.5
+    ],
+    "landed": [
+      7.5,
+      0.000683411955833435,
+      1.5
+    ],
+    "shaft_ray": {
+      "hit": "none",
+      "position": "none"
+    }
+  },
+  "passed": true,
+  "room": "Point_Zero",
+  "scope": "Native museum render, physical rays and capsule motion; pickup availability and coordinate identity inspected. No headset acceptance claimed."
+}

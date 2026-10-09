@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "transformation",
+    "phase": "F_order",
+    "description": "Seven halls: operations, passage, permission, rotated space, relative scale, bodily input and timed obstruction. Scale is not a rigid motion."
+  },
+  "beats": [
+    {
+      "id": "T0",
+      "role": "GATEWAY",
+      "concept": "arrival from primitives — the static shape is about to move",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "bleed_from": [
+        "primitives"
+      ],
+      "next": "T0b"
+    },
+    {
+      "id": "T0b",
+      "role": "INTRODUCE",
+      "concept": "Observe the still cube before collecting it; three moving demonstrations remain. Add translation, rotation and scale, then climb to four finished pickups.",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "Trans_Pre"
+      ],
+      "next": "T1"
+    },
+    {
+      "id": "T1",
+      "role": "INTRODUCE",
+      "concept": "Compare translation, scaling and rotation as crossings, without the head crab. Move the far bank while the plank keeps its motion: what makes the crossing possible?",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Introduction"
+      ],
+      "bleed_to": [
+        "primitives"
+      ],
+      "next": "T2"
+    },
+    {
+      "id": "T2",
+      "role": "DEMONSTRATE",
+      "concept": "Thirteen pickups sit on seven carrier routes through x, y and z. Two exit mechanisms share a destination but permit different journeys; the turning torus anticipates rotation.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Translation"
+      ],
+      "next": "T4"
+    },
+    {
+      "id": "T4",
+      "role": "DEMONSTRATE",
+      "concept": "Compare a level Y bridge and upright X/Z rides, two body widths in rotated arrays, a tunnel and five carousel profiles. Which dimensions make space for this body?",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Rotation"
+      ],
+      "bleed_to": [
+        "wavefunctions"
+      ],
+      "next": "T6"
+    },
+    {
+      "id": "T6",
+      "role": "DEMONSTRATE",
+      "concept": "Take the bottle: the room changes to four times its size in one update, then your body is relocated onto the table. Descend and compare the enlarged doorway with a fixed museum frame.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Scale"
+      ],
+      "next": "T6b"
+    },
+    {
+      "id": "T6b",
+      "role": "DEMONSTRATE",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Body"
+      ],
+      "concept": "Approach turns slats and shrinks blocks; contact cuts an open-topped trench in a low lattice. Step clear to see reversible openings return; the cut remains.",
+      "next": "T7"
+    },
+    {
+      "id": "T7",
+      "role": "LIMIT",
+      "concept": "Three clear pusher lanes, turning gates and synchronised growers change access on level ground. Try the timed route or its bypass; ask which body has room and time to pass.",
+      "register": "reflecting",
+      "intensity": "high",
+      "maps": [
+        "Trans_Pit"
+      ],
+      "bleed_from": [
+        "foundationscrisis"
+      ],
+      "next": "T8"
+    },
+    {
+      "id": "T8",
+      "role": "CHAMBER",
+      "concept": "synthesis — the player carries translation + rotation + scale forward as a unified vocabulary",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "bleed_to": [
+        "randomness"
+      ],
+      "note": "A vocabulary of operations carried into repeated and generated arrangements.",
+      "next": null
+    }
+  ]
+}

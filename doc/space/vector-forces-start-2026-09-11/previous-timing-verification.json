@@ -1,0 +1,34 @@
+{
+  "date": "2026-09-11",
+  "summary": "24 desktop checks pass: phase offsets and drift, pointer controls, approach lane, real conveyor transport, receiving-tray backlog, recovery and reset. Headset deferred.",
+  "report": "timing-check.json",
+  "capture": "timing_rods_wave.png",
+  "comparisons": [
+    {
+      "file": "timing_backlog.png",
+      "caption": "Slower collection: physical parcels accumulate in the tray and on the belt."
+    },
+    {
+      "file": "timing_recovered.png",
+      "caption": "Faster collection drains the existing backlog."
+    }
+  ],
+  "source_sha256": {
+    "commons/artifacts/timing_machines/conveyor_backlog.gd": "e33e3872187de5ad96bbda93c940867e3ffe848eba41036434ece5ec2d1f08bf",
+    "commons/artifacts/timing_machines/machine_stage.gd": "8b9a126debfbed74b6d9734ddef6d3595778e71d142a757c2d3ce1f5e6097925",
+    "commons/artifacts/timing_machines/phase_rod_array.gd": "42d24d0484003c285ceaf4a0e8bafb16f56b517ab9cb6d7c47d23cd7b309a66c",
+    "commons/artifacts/timing_machines/conveyor_backlog.tscn": "f0725c5e1b985d00a53a399d0207487488c808d9662ce399d909caa548f8c5fd",
+    "commons/artifacts/timing_machines/phase_rod_array.tscn": "ca65716ac3b190c18db015b09e17d5d1c3636228655addc64a0fc91f21254b1f",
+    "commons/maps/Change_Choreography/artifacts.md": "573fa48f4ab5724c61457f08977eeee402e84cd75e4e49f62f8a5a7fc1ca9c5d",
+    "commons/maps/Change_Choreography/blurb.md": "3e3b20bda5549173a47813bbe4b142c5fd6fefed761d779e21eb5863a5ac9fd1",
+    "commons/maps/Change_Choreography/critical.md": "19832f0b771d60acceb468cc50a458d63e35d2ffef77c511735d6b2054ea4f90",
+    "commons/maps/Change_Choreography/final.md": "3880bc0f41e1893357a482995b5477eddf08e3f74d7fc8bdf1d6560684cf9fd6",
+    "commons/maps/Change_Choreography/intent.md": "eaae4f9978426d66110c5873d72103b06ad641486faaf716e505615b87000667",
+    "commons/maps/Change_Choreography/summary.md": "b23df8ca3344508aa897e02279fe11dc093ca855cfe5fc7ceadf0d56570df498",
+    "commons/maps/Change_Choreography/technical.md": "839b9a299bb9f5e1ddaac845081d0a292a4d7af254a2dcb3467f6c94a0a4b9e8",
+    "commons/maps/Change_Choreography/tutorial.md": "839b9a299bb9f5e1ddaac845081d0a292a4d7af254a2dcb3467f6c94a0a4b9e8",
+    "commons/maps/Change_Choreography/map_data.json": "5f88a19cf010b81ac351b9cbbe4894c176d600fd4a72df4c94111a340d8cae5c",
+    "commons/testing/probe_timing_machines.gd": "715830654c1dca76e233df9cbaf86489bfaca9a1ed568cd65f0f0b64092ac1e4",
+    "commons/artifacts/conveyor_belt/conveyor_belt.gd": "193b4140bc349d996659c7e674b0bec824da19f2d0fec1668f74b3d7ab9fdf54"
+  }
+}

@@ -1,0 +1,1042 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "unchanged commons/maps/Point_Lines/map_data.json",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/artifacts/line_relations_gallery/line_relations_gallery.gd",
+      "passed": true
+    },
+    {
+      "name": "unchanged commons/primitives/point/draw_triangle_faces.gd",
+      "passed": true
+    },
+    {
+      "name": "structure is 13 x 30",
+      "passed": true
+    },
+    {
+      "name": "utilities is 13 x 30",
+      "passed": true
+    },
+    {
+      "name": "interactables is 13 x 30",
+      "passed": true
+    },
+    {
+      "name": "museum is 13 x 30",
+      "passed": true
+    },
+    {
+      "name": "eight retained placements",
+      "passed": true
+    },
+    {
+      "name": "nine recoverable parked placements",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: triangle_line_puzzle",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: triangle_construction_plate",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: draw_triangle_faces",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: triangle_live_twin",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: draw_triangle_faces",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: quad_line_puzzle",
+      "passed": true
+    },
+    {
+      "name": "chapter anchor placed: quad",
+      "passed": true
+    },
+    {
+      "name": "other encounter entries preserved",
+      "passed": true
+    },
+    {
+      "name": "chapter and map hashes current",
+      "passed": true
+    },
+    {
+      "name": "lines-final native result",
+      "passed": true
+    },
+    {
+      "name": "triangle-after native result",
+      "passed": true
+    },
+    {
+      "name": "fresh process replay passed",
+      "passed": true
+    },
+    {
+      "name": "index.html unique anchors",
+      "passed": true
+    },
+    {
+      "name": "index.html UTF-8 intact",
+      "passed": true
+    },
+    {
+      "name": "index.html HTTP content equals saved page",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: index.html",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "index.html fragment: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "index.html fragment: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: changes.html",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "index.html fragment: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: /book-review/doc/book/OPERATIONAL_INQUIRY.md",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-aligned.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-aligned.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-side-step.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-side-step.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-lower-eye.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-lower-eye.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-lower-recovered.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-lower-recovered.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-before/triangle-two-scales.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-before/triangle-two-scales.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-two-scales-matched.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-two-scales-matched.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-front.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-front.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-edge.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-edge.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-collapsed.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-collapsed.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-unfilled.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-unfilled.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-maker.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/triangle-maker.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "index.html fragment: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "index.html fragment: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: changes.html",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: QUESTION.md",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: baseline.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: after.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/report.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: lines-final/line-quarter-thickness.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-before/report.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/report.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-trial-one/report.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-trial-two/triangle-collapsed.png",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-trial-two/report.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: parked-placements.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: replay-verification.json",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: probe.gd",
+      "passed": true
+    },
+    {
+      "name": "index.html target exists: triangle-after/stdout.log",
+      "passed": true
+    },
+    {
+      "name": "reading.html unique anchors",
+      "passed": true
+    },
+    {
+      "name": "reading.html UTF-8 intact",
+      "passed": true
+    },
+    {
+      "name": "reading.html HTTP content equals saved page",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: index.html",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: changes.html",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: /book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fn:point-triangle-carry",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fn:point-triangle-carry",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fn:point-triangle-winding",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fn:point-triangle-winding",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fn:point-triangle-construction",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fn:point-triangle-construction",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fn:point-triangle-triangulation",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fn:point-triangle-triangulation",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fnref:point-triangle-winding",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fnref:point-triangle-winding",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fnref:point-triangle-triangulation",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fnref:point-triangle-triangulation",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fnref:point-triangle-carry",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fnref:point-triangle-carry",
+      "passed": true
+    },
+    {
+      "name": "reading.html target exists: #fnref:point-triangle-construction",
+      "passed": true
+    },
+    {
+      "name": "reading.html fragment: #fnref:point-triangle-construction",
+      "passed": true
+    },
+    {
+      "name": "making.html unique anchors",
+      "passed": true
+    },
+    {
+      "name": "making.html UTF-8 intact",
+      "passed": true
+    },
+    {
+      "name": "making.html HTTP content equals saved page",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: index.html",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "making.html fragment: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "making.html fragment: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: changes.html",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "making.html fragment: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: /book-review/commons/maps/Point_Line_Grid/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: /book-review/commons/maps/Point_Triangle_Context/detours.md",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: /book-review/commons/maps/Primitives_Polythedra/tutorial.md",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: /book-review/commons/maps/Point_Triangle_Context/technical.md",
+      "passed": true
+    },
+    {
+      "name": "making.html target exists: /book-review/commons/maps/Point_Triangle_Context/encounter-reference.md",
+      "passed": true
+    },
+    {
+      "name": "changes.html unique anchors",
+      "passed": true
+    },
+    {
+      "name": "changes.html UTF-8 intact",
+      "passed": true
+    },
+    {
+      "name": "changes.html HTTP content equals saved page",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: index.html",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: reading.html#reading",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: making.html#making",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: changes.html",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: index.html#record",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__artifacts__triangle_live_twin__triangle_live_twin.gd.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__artifacts.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__detours.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__encounter-reference.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__final.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__intent.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__summary.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__technical.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__tutorial.md.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__maps__Point_Triangle_Context__map_data.json.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: diffs/commons__data__museum_core_encounters.json.diff",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__0",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__0",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__0",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__0",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__1",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__1",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__1",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__1",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__2",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__2",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__2",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__2",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__3",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__3",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__3",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__3",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__4",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__4",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__4",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__4",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__5",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__5",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__5",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__5",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__6",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__6",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__6",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__6",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__7",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__7",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__7",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__7",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__8",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__8",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__8",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__8",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__9",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__9",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__9",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__9",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__10",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__10",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__10",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__10",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__11",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__11",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__11",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__11",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__12",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__12",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__12",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__12",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__13",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__13",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__13",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__13",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__14",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__14",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__14",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__14",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__15",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__15",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__15",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__15",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__16",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__16",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__16",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__16",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__17",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__17",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__17",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__17",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__18",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__18",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__18",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__18",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__19",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__19",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__19",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__19",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__20",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__20",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__20",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__20",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__21",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__21",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__21",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__21",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__22",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__22",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__22",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__22",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__top",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__top",
+      "passed": true
+    },
+    {
+      "name": "changes.html target exists: #difflib_chg_to0__top",
+      "passed": true
+    },
+    {
+      "name": "changes.html fragment: #difflib_chg_to0__top",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-construction.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset after.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset baseline.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset line-aligned.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset line-lower-eye.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset line-lower-recovered.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset line-quarter-thickness.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset line-side-step.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset parked-placements.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset replay-verification.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-collapsed.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-edge.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-front.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-maker.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-two-scales-matched.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-unfilled.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-two-scales.png",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset report.json",
+      "passed": true
+    },
+    {
+      "name": "HTTP asset triangle-collapsed.png",
+      "passed": true
+    }
+  ],
+  "scope": "Publication integrity and saved evidence only; no additional runtime trial"
+}

@@ -1,0 +1,26 @@
+{
+  "parent_sequence": "color",
+  "world_map_parents": [
+    "color"
+  ],
+  "facade_maps": [
+    "Facade_Assembly_Principle",
+    "Facade_Classical",
+    "Facade_Baroque",
+    "Facade_Venetian_Gothic",
+    "Facade_Rustication",
+    "Facade_Florence_Marble",
+    "Facade_NYC_Tenement",
+    "Facade_Critique"
+  ],
+  "main_spine_unchanged": true,
+  "colour_and_boolean_maps_unchanged": true,
+  "protected_files_unchanged": 41,
+  "changed_files": [
+    "commons/maps/sequences/facade_assembly.json",
+    "commons/maps/sequences/color.json",
+    "commons/maps/sequences/boolean_surfaces.json",
+    "commons/maps/curriculum_spine.json",
+    "commons/maps/Facade_Assembly_Principle/intent.md"
+  ]
+}

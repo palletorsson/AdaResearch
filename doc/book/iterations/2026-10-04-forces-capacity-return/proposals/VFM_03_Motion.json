@@ -1,0 +1,42 @@
+{
+  "id": "VFM_03_Motion",
+  "title": "End the command and keep the motion",
+  "storyboard": "A one-second push ends while the cube continues. Bringing Launch’s initial velocity and Change’s rate and accumulation, the student writes a finite force schedule for a supplied rigid body. Before running, they predict the velocity change: force divided by mass, multiplied by pulse duration. They compare one- and two-kilogram beginnings with drag off, before either cube reaches the frame. The learner owns when the command starts and ends; the engine retains velocity and supplies integration and contact. A perpendicular pulse then meets motion already acquired. COAST cancels the command; it does not erase that history. The kept pulse rule and prediction prepare the next room to expose the state update itself. The friction ramp remains a separate comparison of a threshold and a simplified sliding model.",
+  "storyboard_short": "Reuse Launch’s initial velocity, timed callbacks and Change rates. Own a finite force schedule for a supplied rigid body; predict delta-v = (F/m)T, then compare masses from rest with drag off before contact. COAST ends the command while velocity remains. A perpendicular pulse meets existing motion. Supply engine integration, chamber and readouts. Carry the schedule and prediction into Fields. Keep the friction ramp a separate comparison; do not teach a second solver.",
+  "mode": "make",
+  "brings": [
+    "timed callbacks and Launch’s chosen initial velocity",
+    "finite rates and signed accumulation from Change",
+    "vector direction and chosen acceleration from the supplied launch model"
+  ],
+  "learns": [
+    "force in newtons divided by mass in kilograms gives acceleration in metres per second squared",
+    "a finite force command changes retained velocity",
+    "delta-v = (F/m)T before contact with damping absent",
+    "ending a command and stopping a body are separate operations"
+  ],
+  "carries": "A small force schedule, its declared units and a predicted change in velocity, kept in the learner’s own study or notes for the Fields comparison.",
+  "supplied": [
+    "rigid-body integration and bounded collision chamber",
+    "pulse timing adapter, including a partial final physics step",
+    "mass/reset controls, velocity readout and optional trail"
+  ],
+  "artifact_refs": [
+    "VectorMotion",
+    "friction_ramp"
+  ],
+  "review_note": "Summary proposal only. The installed motion_chamber sends force in newtons to apply_central_force; the engine supplies time integration. Do not multiply that force by dt again. Its active/delta factor only averages a partial final pulse step. COAST leaves optional engine damping active, so the controlled comparison explicitly turns DRAG off. Exact binding from a learner-authored pulse function to the supplied receiver remains to be chosen; the current operating/source companion is not evidence of that authoring interface. No new runtime check in this pass.",
+  "prior_maps": [
+    "Change_Intro",
+    "VFM_05_Launch"
+  ],
+  "independent_check": "Before the run, predict a 2 N pulse lasting 1 s from rest: approximately +2 m/s for 1 kg and +1 m/s for 2 kg. Use DRAG off and observe before frame contact. Predict what COAST changes and what remains; then test a perpendicular pulse without resetting. The two pulse buttons replace the active force command rather than adding concurrent commands.",
+  "source_refs": [
+    "commons/maps/VFM_03_Motion/final.md",
+    "commons/maps/VFM_03_Motion/tutorial.md",
+    "commons/maps/VFM_03_Motion/map_data.json",
+    "algorithms/vectors/08_vector_motion/VectorMotion.gd",
+    "algorithms/vectors/08_vector_motion/motion_chamber.gd"
+  ],
+  "change_reason": "A controlled beginning makes the new idea available for reuse without asking the learner to rebuild the engine’s integrator or turning the friction ramp into another required lesson."
+}

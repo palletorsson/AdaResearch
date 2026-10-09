@@ -1,0 +1,34 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="04bb373e9a49b6de7c059d12f4a724b1f9679315a5d477f6d7e939b19737ad86"><title>commons/maps/Color_Walls/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/Color_Walls/tutorial.md</p><h1>Three ways to pass</h1>
+<p>Begin with a chair seen through two coloured panes. Step sideways until only one pane covers it. The chair, its position and its material have stayed fixed. Follow the edge to a gap and walk around the pane. A view through a surface does not promise passage through it.</p>
+<p>Return to the entrance and press FILTER / OPAQUE. Repeat your route. Inspect <code>toggle_office_glass()</code> in <code>algorithms/color/color_mixing/color_constellation_office.gd</code>: it changes the surface material and shadow setting, without rebuilding the collider. The twelve panes are positioned by <code>PANES</code> in <code>office_planes.gd</code>. Each row contains x, z, yaw, width, height and colour. The geometry uses transforms already introduced in Transformation and a repeated construction already introduced in Arrays.</p>
+<p>The new decision is how the surface combines with the view behind it. Both states use <code>BLEND_MODE_MIX</code>. Filter mode enables alpha transparency with alpha 0.52; opaque mode disables transparency and sets alpha to 1.0. Start with one pane. Change only its colour, then compare the same chair with and without a second pane in front of it. Keep the supplied pale backing so dark surroundings do not obscure the furniture. This operation blends rendered RGB colours; it is not a model of spectral absorption. Transparent surfaces are sorted for rendering, so their order contributes to the result.</p>
+<p>For a first alteration, change one row's yaw, rebuild, and find a new overlap by walking. Keep widths and gaps fixed until you have checked which routes remain possible. The furniture, support geometry and comparison button are supplied apparatus; rebuilding them is not the learning target here.</p>
+<p>At the navigator, identify the RGB axes. Each displayed sample uses its three channels as coordinates relative to the model centre. Locate the same general colour region in the HSV cylinder. Hue is now an angle, saturation a radius, value a height. Compare up in each model: RGB increases green, while HSV increases value, returning to the vertical rule of the Pillar field. Each model shows 500 samples, not every colour. Inspect the black corner's deliberate brightness adjustment.</p>
+<p>At the interpolator, leave the initial red and blue endpoints unchanged and switch RGB / HSV. Describe the middle before reading <code>_recalculate()</code> and <code>_lerp_hsv()</code> in <code>algorithms/color/gradient_interpolator/gradient_interpolator.gd</code>. RGB linearly interpolates channels. HSV chooses the shorter hue arc, then interpolates saturation and value. Use COLOUR A and COLOUR B to choose another pair and repeat.</p>
+<p>Carry three distinctions into Pattern_Disco: a material can change a view, coordinates can organise values, and an interpolation rule can choose a path. Keep the floor arrangement while changing its palette, then keep the palette while changing the pattern. Compare what each change makes visible.</p>
+<!-- study-spine:colour_assembly -->
+
+<h2>Return: Room to gather</h2>
+<p>Shift the colour index by one without moving a panel. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses coordinates, transform, array, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>assembly</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-02-gillick-room-to-gather/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-spine:colour_wall_studies -->
+
+<h2>Return: Wall relations</h2>
+<p>Change the pitch of 24 rails without changing their count. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses line, coordinates, array, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>wall</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-02-gillick-wall-relations/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-edit:colour_assembly -->
+
+<h3>One source change: Room to gather</h3>
+<p>In colour_for(), replace the initial palette_index assignment with this line. In the alternating colour mode, each numbered panel gets the next colour; its transform stays fixed.</p>
+<pre><code class="language-gdscript">var palette_index := (index + 1) % PALETTE.size()
+</code></pre>
+<p>Source: <code>commons/artifacts/colour_assembly/colour_assembly.gd</code>. Use the prepared scene to run and compare.</p>
+<!-- study-edit:colour_wall_studies -->
+
+<h3>One source change: Wall relations</h3>
+<p>The installed SPACING control calls this setter. Try 0.18 as a third state inside station.gd’s wall branch. Twenty-four centres retain their order and count.</p>
+<pre><code class="language-gdscript">set_spacing(0.21)
+</code></pre>
+<p>Source: <code>commons/artifacts/colour_wall_studies/colour_wall_studies.gd</code>. Use the prepared scene to run and compare.</p></body></html>

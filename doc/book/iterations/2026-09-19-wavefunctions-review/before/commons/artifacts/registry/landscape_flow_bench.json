@@ -1,0 +1,19 @@
+{
+  "artifacts": {
+    "landscape_flow_bench": {
+      "lookup_name": "landscape_flow_bench",
+      "name": "What Leaves? What Remains?",
+      "scene": "res://commons/artifacts/landscape_flow_bench/landscape_flow_bench.tscn",
+      "category": "physicssimulation",
+      "complexity": "intermediate",
+      "map_ready": false,
+      "include_in_map_data": false,
+      "development_status": "standalone_physical_prototype; museum placement and headset visit pending",
+      "description": "Four colliding trays compare sine, independent vertex heights, Perlin and Euclidean Worley F1. Shared tilt, relief, sphere size, seed and observation window. Counts distinguish outlet crossing, still inside at the deadline and other exits. Inspired by Palle Torsson's 2021 Blender/Unity experiment; not a numerical reconstruction of its 3600-sphere run.",
+      "interactions": ["RELEASE 32 spheres per tray", "PAUSE or RESET the trial", "TILT, RELIEF, SIZE, SEED and WINDOW start a fresh comparison", "RULE reveals mesh sampling, normalisation and physics assumptions"],
+      "qfep_connection": "A counted exit and a retained body become different outcomes under different purposes; the experiment measures physical passage at a deadline, not entropy, concealment or freedom.",
+      "prototype_scene": "res://commons/testing/landscape_flow_workshop.tscn",
+      "research_plan": "res://doc/research/possible-bodies/landscape-thread.json"
+    }
+  }
+}

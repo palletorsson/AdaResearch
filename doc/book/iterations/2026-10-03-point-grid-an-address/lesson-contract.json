@@ -1,0 +1,42 @@
+{
+  "map": "Point_Line_Grid",
+  "status": "author_review_pilot",
+  "inherits": [
+    "Point One: a position and a visible sphere",
+    "Coordinates/Lines: shared frame and supplied PointHandle",
+    "Trace: Array[Vector3], append, indexing, size, capacity and adjacent-pair traversal"
+  ],
+  "introduces": [
+    "divide coordinate by spacing to count intervals",
+    "roundi: nearest integer, halfway away from zero",
+    "Vector3i: integer lattice address",
+    "Vector3(address) times spacing: placement in metres",
+    "is_empty and !=: seed record, then admit changes",
+    "array index names a visit; grid address names a place"
+  ],
+  "supplied": [
+    "GridRuling: finite XY section at local Z=0, labelled in grid indices",
+    "PointHandle and TraceDrawing: inherited hold and drawing",
+    "Day Zero room, lighting and player"
+  ],
+  "learner_actions": [
+    "change X from 0.12 to 0.13",
+    "repeat with negative X",
+    "move within and between addresses",
+    "return to a previous address",
+    "change spacing from 0.25 to 0.5",
+    "move in depth beyond the XY ruling"
+  ],
+  "museum_relation": "Core nearest-lattice operation from grab_sphere_point_snap; larger visible spacing in Study-local coordinates, separate input and output, no release alignment",
+  "deferred": [
+    "nested loops for a floor plan",
+    "transforming a received drawing",
+    "headset/body choice for a walking trace",
+    "release alignment",
+    "Triangle: boundary, face and collision"
+  ],
+  "coordinates_rewrite_pending": true,
+  "printed_code_matches_download": true,
+  "source_sha256": "f7589cba7a84e5c3b0a453671a1c6964772d26e0f61f0ffed45010408bb44f10",
+  "physical_headset_tested": false
+}

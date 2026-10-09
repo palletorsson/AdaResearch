@@ -1,0 +1,238 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Original sponge and film remain installed",
+      "passed": true
+    },
+    {
+      "name": "One hand reader and six original controls",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "Hand desk is outside the flight enclosure",
+      "passed": true
+    },
+    {
+      "name": "Standing approach has floor and capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "Point waits at reachable height",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-seed",
+      "passed": true
+    },
+    {
+      "name": "Ray reaches hand NEXT at cut 1",
+      "passed": true
+    },
+    {
+      "name": "Ray reaches hand NEXT at cut 2",
+      "passed": true
+    },
+    {
+      "name": "Two nearby presses reach 400 cubes with 147 removed cells",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-second",
+      "passed": true
+    },
+    {
+      "name": "Ray reaches hand BACK",
+      "passed": true
+    },
+    {
+      "name": "Ray reaches hand RESET",
+      "passed": true
+    },
+    {
+      "name": "Hand RESET restores a single cube",
+      "passed": true
+    },
+    {
+      "name": "Held sphere selects the front removed cell",
+      "passed": true
+    },
+    {
+      "name": "Held trigger applies one cut through original desk",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: cell-and-room",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-first",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: second-cut",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ghosts",
+      "passed": true
+    },
+    {
+      "name": "Ghost and frame views add no colliders",
+      "passed": true
+    },
+    {
+      "name": "Hand NEXT refuses a solid change around a visitor",
+      "passed": true
+    },
+    {
+      "name": "Hand BACK refuses a solid change around a visitor",
+      "passed": true
+    },
+    {
+      "name": "Hand RESET refuses a solid change around a visitor",
+      "passed": true
+    },
+    {
+      "name": "Held-point action has the same occupant interlock",
+      "passed": true
+    },
+    {
+      "name": "Leaving does not execute any pending change",
+      "passed": true
+    },
+    {
+      "name": "New request works after the visitor leaves",
+      "passed": true
+    },
+    {
+      "name": "Flight enclosure survives desk rebuilds",
+      "passed": true
+    },
+    {
+      "name": "Central passage admits standing capsule",
+      "passed": true
+    },
+    {
+      "name": "Small axial entrance excludes standing capsule",
+      "passed": true
+    },
+    {
+      "name": "Same small axial opening transmits a ray",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: small-opening",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: inside",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "Ground doorway remains supported and clear (0.0, 0.005, -6.7)",
+      "passed": true
+    },
+    {
+      "name": "Ground doorway remains supported and clear (0.0, 0.005, 6.7)",
+      "passed": true
+    },
+    {
+      "name": "Shipped museum walker rises in flight volume",
+      "passed": true
+    },
+    {
+      "name": "Neutral input holds position inside",
+      "passed": true
+    },
+    {
+      "name": "Gravity resumes beyond ground exit",
+      "passed": true
+    },
+    {
+      "name": "Authored entry and exit validate without fallback",
+      "passed": true
+    },
+    {
+      "name": "Next-hall portal is beyond the rear flight doorway",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: student",
+      "passed": true
+    },
+    {
+      "name": "Exact printed example runs in existing museum",
+      "passed": true
+    },
+    {
+      "name": "Leaving flight at rear does not immediately change halls",
+      "passed": true
+    },
+    {
+      "name": "Walking to authored exit requests next hall",
+      "passed": true
+    },
+    {
+      "name": "Portal completes arrival in Golden Spiral",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "desk": [
+      10.6999998092651,
+      0.0,
+      8.69999980926514
+    ],
+    "entry": {
+      "cage": false,
+      "cell": "(7, 1)",
+      "door": "(7.5, 0.05, 0.35)",
+      "landing": "(7.5, 0.05, 1.5)",
+      "marker": "(7.5, 0.05, 1.5)",
+      "source": "sp"
+    },
+    "exit": {
+      "cell": "(7, 17)",
+      "door": "(7.5, 0.05, 17.5)",
+      "inward": "(0.0, 0.0, -1.0)",
+      "marker": "(7.5, 0.05, 17.5)",
+      "outset": 0.0,
+      "source": "t",
+      "yaw": 3.14159265358979
+    },
+    "hits_(4.5, 1.03, 5.5)": [
+      "/root/EndlessMuseum/Seg0_pompidou-plateau-libre/MengerSponge/@Node3D@3473/CubeBaseStaticBody3D"
+    ],
+    "portal_end": {
+      "failure": "",
+      "map": "Fractal_GoldenSpiral",
+      "phase": "idle"
+    },
+    "scope": "Current museum, actual desktop ray controls and XRTools supplied poses. Before hides only the new reader. Printed study temporarily occupies its workspace. Flight ascent/hover/exit tested with museum keyboard controller. No physical headset claim.",
+    "source": [
+      7.5,
+      0.0,
+      13.5
+    ]
+  },
+  "passed": true,
+  "room": "Fractal_MengerSponge",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

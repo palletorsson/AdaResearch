@@ -1,0 +1,68 @@
+--- before/doc/book/captures/cellularautomata/cellularautomata-book.manifest.json
++++ doc/book/captures/cellularautomata/cellularautomata-book.manifest.json
+@@ -1,52 +1,52 @@
+ {
+-  "captured_at": "2026-09-18T06:05:10.137507+00:00",
+-  "base_commit": "42496604b02d17856c5dbb69223fbf67747183ef",
++  "captured_at": "2026-09-25T12:05:23.209587+00:00",
++  "base_commit": "1abbe7d2db4c1189df52faee9dd40438b4e9f069",
+   "branch": "palm-scanner-door-entry",
+   "source": "current working copy, including uncommitted edits",
+-  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; footnote text and code preserved.",
++  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+   "sequence": "cellularautomata",
+-  "sequence_sha256": "46f5aeca412aefaf4c1774805185dc737b050c43ad24a752e50b7aa32a815cdd",
++  "sequence_sha256": "fbb2cc605d082a9ec57c12a2856194611a5e55abbfbd32c541b637c4c2a73375",
+   "maps": [
+     {
+       "map": "CA_Introduction",
+       "path": "commons/maps/CA_Introduction/final.md",
+-      "sha256": "6f1d7de34b510fa4f6071ed4ec96432632e8fc8750bcbbecd260ef2574516b82"
++      "sha256": "5b77303f769f1358f11681a02fc62a779aec9d94b0a33d35992fc18976209652"
+     },
+     {
+       "map": "CA_ElementaryRules",
+       "path": "commons/maps/CA_ElementaryRules/final.md",
+-      "sha256": "2638c5ee9765bb8da3c16c383f559b1b35eb7f09dee94dda64005c770c8f3f69"
++      "sha256": "3ac68607502e812159df9df2b16c267cfb22d41cceeb81d9f921c7a16485670f"
+     },
+     {
+       "map": "CA_GameOfLife",
+       "path": "commons/maps/CA_GameOfLife/final.md",
+-      "sha256": "780fca9f4f6757699d528ddc4e5ab68f33f7585e93c32446deb403f1e2dceff8"
++      "sha256": "e11e83ea0ad14f973a7ef1fcb290d5771516368e55eca0275b38be3757a10b50"
+     },
+     {
+       "map": "CA_BeyondBinary",
+       "path": "commons/maps/CA_BeyondBinary/final.md",
+-      "sha256": "4e649666dbd3b3d6a10d68cf8a500aa15e2a6b62c2eaf4b80f50a55434a95c8d"
++      "sha256": "41573fe59637a6bfbd262621821bd892f4268b1dbbef84f05184ddd794b6efe3"
+     },
+     {
+       "map": "CA_ExpandingSpace",
+       "path": "commons/maps/CA_ExpandingSpace/final.md",
+-      "sha256": "e862892a45edaa1f9a3e0752638b808873835f27f6bf4de0c94fe329f62b9726"
++      "sha256": "43dfd190333a48537422e1c35566a254ef7f74f44ad2199271d9a0a42e1cb024"
+     },
+     {
+       "map": "CA_SoftRules",
+       "path": "commons/maps/CA_SoftRules/final.md",
+-      "sha256": "e1a93c05bc84db4fc5bfef8240ff0b5c369181c0cbf31170c15ff4e9ceb82dab"
++      "sha256": "14b788401979545528c4c0a7d51d96a41df8e6755c290ca9b5d8a4e97e6e775d"
+     },
+     {
+       "map": "CA_AgentsCircuits",
+       "path": "commons/maps/CA_AgentsCircuits/final.md",
+-      "sha256": "3aafdee5204f474d53da18dd5fe5a85f3ef9bffe3cae6ab02b0c6a06db855625"
++      "sha256": "ada55960434923fd65c072fe2f4e5d54fcb98e4a23f995bb84823848fc2b054c"
+     },
+     {
+       "map": "CA_EdgeOfChaos",
+       "path": "commons/maps/CA_EdgeOfChaos/final.md",
+-      "sha256": "5851c73fa78f74690eb5019fdd7c4facdd6994abddcf995563661073fc30dce9"
++      "sha256": "ce2d3f977ef19072387f8159b474d0886e7c3b14d11c1129143fe043ef158557"
+     }
+   ],
+-  "output_sha256": "ea8e9c0de63f8a25e20788b2a3af07d7412bae6479ab0a2c887db2dc837e4845"
++  "output_sha256": "ed547398cbc8ab97ba2a16b0278ae83e68cc0188ba0a1e52d1f1ba4ae3c368f2"
+ }

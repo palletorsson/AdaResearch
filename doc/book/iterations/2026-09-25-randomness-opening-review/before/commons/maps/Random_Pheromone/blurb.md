@@ -1,0 +1,3 @@
+What changes when a walker helps make the evidence its next decision will read? Four walkers move over a terrain that keeps their traces: every step away from the border leaves scent and lifts the ground a little, until a patch has been visited twenty times. On about four steps in ten a walker smells two cells ahead in eight directions and follows the strongest scent; on the rest it takes a direction at random.
+
+At the console, ATTRACT and AVOID set whether the sensed scent is followed or shunned, the step buttons advance the field, and the walkers start from seeded positions so a run can be taken again. A route that looks chosen may have begun as an accident, or as the first direction on a list.

@@ -1,0 +1,20 @@
+--- before/algorithms/wavefunctions/resonance/ResonatingBar.gd
++++ after/algorithms/wavefunctions/resonance/ResonatingBar.gd
+@@ -11,7 +11,7 @@
+ 
+ # Sound properties
+ @export var frequency: float = 440.0  # Frequency in Hz (musical note)
+-@export var decay_time: float = 3.0  # How long the sound lasts in seconds
++@export var decay_time: float = 3.0  # Exponential time constant; stored duration is 2.5 times this
+ @export var max_amplitude: float = 0.5  # Maximum volume when hit hard
+ 
+ # Visual properties
+@@ -33,7 +33,7 @@
+ # Audio
+ var audio_player: AudioStreamPlayer3D
+ const SAMPLE_RATE = 44100
+-const SOUND_DURATION = 5.0  # the shipped buffer length; see _sound_seconds()
++const SOUND_DURATION = 5.0  # Legacy constant; current buffer duration comes from _sound_seconds()
+ const FADE_S = 0.1          # the last tenth of a second eases out: no click at the buffer's end
+ 
+ func _ready() -> void:

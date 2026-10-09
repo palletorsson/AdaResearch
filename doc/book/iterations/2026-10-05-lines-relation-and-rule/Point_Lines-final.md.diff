@@ -1,0 +1,56 @@
+--- before/Point_Lines/final.md
++++ commons/maps/Point_Lines/final.md
+@@ -1,6 +1,6 @@
+ # Lines, Networks, Measure
+ 
+-The point gave us somewhere to begin. Now put two positions into relation.
++The point gave us somewhere to begin. Now put two positions into relation. The point you could carry becomes an end: moving it changes a span. Soon that span will ask you to walk, forbid you to cross, or gather with another line into a sign.
+ 
+ <!-- @line_black_box -->
+ 
+@@ -8,14 +8,9 @@
+ 
+ A number on the wall follows the distance between them. Try changing the direction without changing that number. The dark room leaves very little else to look at: two positions, and what happens between them.
+ 
+-Can you find a span of one metre? Keep one end still and move the other around it. The segment turns while its length stays steady. We can describe that relation with two small operations:
++Can you find a span of one metre? Keep one end still and move the other around it. The segment turns while its length stays steady. The number can remain the same while the line points somewhere else. What has the measurement kept, and what has it left for your eye and hand to follow?
+ 
+-```gdscript
+-var displacement := b - a
+-var distance := displacement.length()
+-```
+-
+-The first keeps a direction as well as a distance. The second gives us the length alone. Reverse the subtraction and the direction reverses; the length stays the same. Your hand may keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
++Your hand may also keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
+ 
+ Through the side passage: **CAN YOU CONNECT THE DOTS?**
+ 
+@@ -41,7 +36,9 @@
+ 
+ <!-- @redline -->
+ 
+-A red line marks another division. A colour can lend urgency to the same thin form. What, here, gives it the right to stop you?
++A red line marks another division. In speech, a red line can name the limit beyond which we refuse to go. Here the phrase has a colour and a place in the room. Before touching it, you may already have supplied the warning.
++
++The line gathers these associations as we move: a connection, a border, a promise to go no further. The words beside it, the bodies it separates and what happens when we cross give its thin shape different force. What, here, gives it the right to stop you?
+ 
+ Ahead, the instruction moves from a barrier to the floor.
+ 
+@@ -61,7 +58,7 @@
+ 
+ The recorder saves positions and joins them with straight segments. The X and Z come from your headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.
+ 
+-Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The endpoint calculation, `b - a`, gives the same answer for both journeys. It contains no record of the turn you took.
++Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The span between the endpoints is the same for both journeys. It contains no record of the turn you took.
+ 
+ The trace has kept more positions. How many did it need? What happened between the ones it kept?
+ 
+@@ -85,7 +82,7 @@
+ 
+ ## Four views
+ 
+-Two sticks make a plus. Further along, two of the same length make an X. From the marked starting position, each reads as one familiar sign. Step sideways. The sticks sit in slightly different depth planes; the crossing belongs to your view. Take one in your hand and bring it forward. How far can the sign come apart before you stop seeing it?
++What can two lines become together? Two sticks make a plus. Further along, two of the same length make an X. From the marked starting position, each reads as one familiar sign. Step sideways. The sticks sit in slightly different depth planes; the crossing belongs to your view. Take one in your hand and bring it forward. How far can the sign come apart before you stop seeing it?
+ 
+ Beside them, two planks lie parallel. Walk between them. From one end the gap narrows into the distance; moving your head changes that appearance without moving either plank. Then move a plank. Now you have changed the relation itself. The two graduated measures beyond them give the hand another pair to compare.
+ 

@@ -1,0 +1,65 @@
+{
+  "artifact": "rotation_gimbal",
+  "title": "Building a Gimbal That Shows Rotation Losing a Dimension",
+  "concept_layer": "rotation as angular transformation; Euler angles; gimbal lock; why quaternions exist",
+  "technique_first": ["TorusMesh", "nested pivots", "Euler composition order", "axis-tick marks", "rotation matrix R = Rx\u00b7Ry\u00b7Rz", "gimbal lock detection"],
+  "technique_reference": ["Node3D hierarchy (Point_One)", "Basis from direction (Point_Line)", "ImmediateMesh lines (Trans_Translation)", "Label3D (Point_One)", "RackTemplates slider panel (xyz_slider_plate)"],
+  "domain_deferred": ["quaternion math \u2192 wavefunctions (complex exponentials)", "orientation interpolation \u2192 machinelearning (slerp)"],
+  "capture_leaks": {
+    "non_commutativity": "Rx\u00b7Ry \u2260 Ry\u00b7Rx \u2014 Euler rotations don't compose like translations. This map hints; Trans_Composition answers.",
+    "gimbal_lock": "Euler angles lose a degree of freedom when two axes align. The map demonstrates it; quaternions in wavefunctions repair it.",
+    "interpolation": "You can't average two orientations with Euler angles \u2014 quaternions or rotation matrices needed.",
+    "continuous_rotation": "360 \u2261 0 \u2014 angles wrap. This breaks naive distance metrics on SO(3); addressed in softbodies/ML."
+  },
+  "limit": "Three sliders control three axes. Looks clean \u2014 until two axes merge into one. The gimbal teaches why rotation is not three independent numbers. Orientation lives on a curved manifold that Euler angles cannot chart without singularities.",
+  "stages": [
+    {
+      "title": "From displacement to orientation",
+      "thinking": "In Trans_Translation you learned translation requires direction and magnitude \u2014 a vector added to position. Now a new question: if a form can move through space, can it also turn? Translation changes where. Rotation changes which way. Same object, different world.",
+      "code": "# Translation \u2014 what you learned:\nvar position: Vector3 = Vector3(0, 0, 0)\nposition += Vector3(1, 0, 0)  # moves right\n\n# Rotation \u2014 the new question:\n# How do you store \"which way am I facing\"?\n# Three angles? A matrix? A quaternion?\n# This map starts with the obvious answer \u2014 three angles \u2014\n# and shows you why that answer is not enough.\n\nvar angle_x: float = 0.0  # pitch\nvar angle_y: float = 0.0  # yaw\nvar angle_z: float = 0.0  # roll",
+      "concepts": ["orientation", "degrees of freedom", "Euler angles"]
+    },
+    {
+      "title": "Three nested rings",
+      "thinking": "The physical mechanism is old \u2014 ships, telescopes, cameras have used it for centuries. Three rings, each free to spin on one axis, nested inside each other. The outermost ring holds the next, which holds the next, which holds the object. Each Euler angle drives one ring. This is the literal meaning of 'gimbal.'",
+      "code": "extends Node3D\nclass_name RotationGimbal\n\nfunc _build_gimbal() -> void:\n\t_gimbal_root = Node3D.new()\n\tadd_child(_gimbal_root)\n\t\n\t# Outer: X-axis ring (red, pitch)\n\t_x_ring_pivot = Node3D.new()\n\t_gimbal_root.add_child(_x_ring_pivot)\n\t_x_ring = _create_ring(ring_radius_outer, color_x, \"XRing\")\n\t_x_ring_pivot.add_child(_x_ring)\n\t\n\t# Middle: Y-axis ring (green, yaw), child of X\n\t_y_ring_pivot = Node3D.new()\n\t_x_ring_pivot.add_child(_y_ring_pivot)\n\t_y_ring = _create_ring(ring_radius_mid, color_y, \"YRing\")\n\t_y_ring.rotation_degrees.z = 90.0  # align torus with Y axis\n\t_y_ring_pivot.add_child(_y_ring)\n\t\n\t# Inner: Z-axis ring (blue, roll), child of Y\n\t_z_ring_pivot = Node3D.new()\n\t_y_ring_pivot.add_child(_z_ring_pivot)\n\t_z_ring = _create_ring(ring_radius_inner, color_z, \"ZRing\")\n\t_z_ring.rotation_degrees.x = 90.0\n\t_z_ring_pivot.add_child(_z_ring)",
+      "concepts": ["nested pivots", "TorusMesh", "parent-child rotation inheritance", "axis color coding"]
+    },
+    {
+      "title": "Each ring is a torus, glowing",
+      "thinking": "TorusMesh is new here \u2014 inner_radius and outer_radius define a ring shape. The three rings are color-coded by axis: red = X (pitch), green = Y (yaw), blue = Z (roll). Emission energy so they remain visible when rotated edge-on. Semi-transparent so the inner structure reads through.",
+      "code": "func _create_ring(radius: float, tube_radius: float, color: Color, ring_name: String) -> MeshInstance3D:\n\tvar ring = MeshInstance3D.new()\n\tring.name = ring_name\n\tvar torus = TorusMesh.new()\n\ttorus.inner_radius = radius - tube_radius\n\ttorus.outer_radius = radius + tube_radius\n\ttorus.rings = 32\n\ttorus.ring_segments = 24\n\tring.mesh = torus\n\t\n\tvar mat = StandardMaterial3D.new()\n\tmat.albedo_color = Color(color, 0.85)\n\tmat.emission_enabled = true\n\tmat.emission = color\n\tmat.emission_energy_multiplier = 0.6\n\tmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA\n\tring.material_override = mat\n\treturn ring",
+      "concepts": ["TorusMesh", "emission", "transparency", "axis-color convention"]
+    },
+    {
+      "title": "Apply the Euler triple",
+      "thinking": "Three sliders drive three rings. Each ring rotates only on its own axis. Because the rings are nested, each rotation is applied in the frame of its parent \u2014 X first, then Y inside that, then Z inside that. This is the composition order Rx\u00b7Ry\u00b7Rz. A different nesting would give a different result from the same three numbers.",
+      "code": "func _update_gimbal() -> void:\n\t# Euler composition order: X (outer) -> Y (middle) -> Z (inner)\n\t_x_ring_pivot.rotation_degrees = Vector3(angle_x, 0, 0)\n\t_y_ring_pivot.rotation_degrees = Vector3(0, angle_y, 0)\n\t_z_ring_pivot.rotation_degrees = Vector3(0, 0, angle_z)\n\t\n\t# The inner box (child of Z pivot) inherits all three rotations\n\t# via the parent chain \u2014 this is the final orientation.\n\t\n\t_check_gimbal_lock()\n\t_update_angles_label()\n\t_update_matrix_label()",
+      "concepts": ["Euler composition", "rotation order matters", "parent-child transform inheritance"]
+    },
+    {
+      "title": "Build the combined matrix",
+      "thinking": "The three angles compose into a single 3x3 rotation matrix. Rx(\u03b1)\u00b7Ry(\u03b2)\u00b7Rz(\u03b3) expands to nine entries of sines and cosines. The label shows the live matrix. Watch the entries change as sliders move \u2014 the matrix IS the orientation, the angles are just one way to reach it.",
+      "code": "func _update_matrix_label() -> void:\n\tvar rx = deg_to_rad(angle_x)\n\tvar ry = deg_to_rad(angle_y)\n\tvar rz = deg_to_rad(angle_z)\n\tvar cx = cos(rx); var sx = sin(rx)\n\tvar cy = cos(ry); var sy = sin(ry)\n\tvar cz = cos(rz); var sz = sin(rz)\n\t\n\t# R = Rx * Ry * Rz  (9 entries)\n\tvar m00 = cy * cz\n\tvar m01 = -cy * sz\n\tvar m02 = sy\n\tvar m10 = sx * sy * cz + cx * sz\n\tvar m11 = -sx * sy * sz + cx * cz\n\tvar m12 = -sx * cy\n\tvar m20 = -cx * sy * cz + sx * sz\n\tvar m21 = cx * sy * sz + sx * cz\n\tvar m22 = cx * cy\n\t\n\t_matrix_label.text = \"R = Rx\u00b7Ry\u00b7Rz\\n|%5.2f %5.2f %5.2f|\\n|%5.2f %5.2f %5.2f|\\n|%5.2f %5.2f %5.2f|\" % [m00,m01,m02,m10,m11,m12,m20,m21,m22]",
+      "concepts": ["rotation matrix", "matrix composition", "R = Rx\u00b7Ry\u00b7Rz", "sin/cos expansion"]
+    },
+    {
+      "title": "Detect the singularity",
+      "thinking": "The critical moment: when Y approaches \u00b190\u00b0, the X and Z axes point in the same direction in world space. Moving the X slider or the Z slider now does the SAME thing. One degree of freedom vanishes. This is gimbal lock. The detection is simple \u2014 measure distance to 90\u00b0 modulo 360 \u2014 but what it reveals is that Euler angles cannot chart all orientations smoothly.",
+      "code": "@export var gimbal_lock_threshold: float = 5.0  # degrees from 90\n\nvar _is_locked: bool = false\n\nfunc _check_gimbal_lock() -> void:\n\tvar y_mod = fmod(angle_y, 360.0)\n\tif y_mod < 0:\n\t\ty_mod += 360.0\n\tvar dist_to_90 = minf(absf(y_mod - 90.0), absf(y_mod - 270.0))\n\t_is_locked = dist_to_90 < gimbal_lock_threshold\n\nfunc _update_lock_warning() -> void:\n\tif _is_locked:\n\t\t_lock_label.modulate = Color(color_lock, 1.0)\n\t\t_info_label.text = \"X and Z rotate the SAME axis! 1 DOF lost.\"\n\telse:\n\t\t_lock_label.modulate = Color(color_lock, 0.0)",
+      "concepts": ["gimbal lock", "singularity detection", "fmod()", "degrees of freedom"]
+    },
+    {
+      "title": "Make the loss felt",
+      "thinking": "Detection is not teaching. When lock happens, the warning flashes, the outer rings pulse, the info text changes. The player isn\u2019t told Euler is insufficient \u2014 they feel it. They slide X, the box doesn\u2019t twist the way they expect. They slide Z, same thing. Two controls, one response. The body learns before the mind names it.",
+      "code": "func _process(delta: float) -> void:\n\tif _is_locked:\n\t\t_lock_flash_time += delta * 4.0\n\t\tvar alpha = 0.6 + 0.4 * sin(_lock_flash_time)\n\t\t_lock_label.modulate = Color(color_lock, alpha)\n\t\t\n\t\t# Pulse the ring emission when locked\n\t\tvar pulse = 0.8 + 0.6 * sin(_lock_flash_time * 1.5)\n\t\tif _x_ring.material_override:\n\t\t\t_x_ring.material_override.emission_energy_multiplier = pulse\n\t\tif _z_ring.material_override:\n\t\t\t_z_ring.material_override.emission_energy_multiplier = pulse",
+      "concepts": ["embodied feedback", "multichannel response", "sin-wave pulse", "felt constraint"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The gimbal knows what it is. It is not a widget that rotates a box. It is a physical demonstration that rotation cannot be parameterized by three numbers without singularities. Gimbal lock is not a bug to fix inside this map. It is the lesson. Quaternions exist because this map is true.",
+      "code": "# @identity\n# essence: three nested rings driven by Euler angles; when middle angle \u2192 \u00b190\u00b0, outer and inner axes align and collapse to one\n# desire: learner feels rotation as a curved space that Euler angles cannot chart smoothly\n# critical_parameter: angle_y \u2014 at \u00b190\u00b0 the gimbal locks; at other values, three independent rotations\n# triggers: Y slider approaching 90\u00b0 flashes GIMBAL LOCK, pulses X/Z rings, collapses X and Z into the same axis\n# emerges: the need for quaternions; the topology of SO(3); the non-commutativity of rotation\n# needs: 3 angle sliders [has]; rotation matrix display [has]; lock-warning label [has]\n# relationships: extends Trans_Translation; demands what Trans_Composition composes; foreshadows wavefunctions (quaternion)\n# truth: rotation lives on a curved manifold \u2014 three angles are a convenient but leaky chart",
+      "concepts": ["@identity", "curved manifold", "SO(3)", "charts and atlases", "truth"]
+    }
+  ]
+}

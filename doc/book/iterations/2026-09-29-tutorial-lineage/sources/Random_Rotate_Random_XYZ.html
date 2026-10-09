@@ -1,0 +1,536 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Rotate_Random_XYZ · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Rotate_Random_XYZ">← Tutorial lineage</a></p><h1>Random Rotate Random XYZ</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Rotate_Random_XYZ/final.md">Raw captured source</a></p><pre># What remains in a changing stack
+
+Which part of an arrangement can change while its pieces remain?
+
+&lt;!-- @hardware_entropy_decay --&gt;
+
+Along the wall on your right as you come in, a rig holds three shapes that weather together: a box, a sphere and a cylinder, with the same wear pushed to all three at once. The rust rises slowly by itself and faster while you move. Swing your hands, squeeze a grip, turn your head. Scratches follow your hands and fade when you stop; the grime and the rust stay. Nothing in the rig draws a random number. In the headset, a surface can look worn by accident when its grime and rust are a record of how you moved in front of it.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @random_decay_multimesh --&gt;
+
+Further in, a long display crosses the hall. On your right as you face it stand twenty cubes in a block five wide and four high; on your left, a hundred and twenty prisms in twelve columns of ten. Every piece is the same size. None of them has a body, and the way on passes through the prisms.
+
+The pieces may already be turning when you arrive; after a **RESET** they stand in line for a few seconds before they begin. Each turns in the plane of its stack, a little at a time. Nothing else changes. Their size never changes, and in this room neither does their place or their colour. An arrangement can become less regular without any piece moving, shrinking, disappearing or becoming a different kind of object.
+
+The demonstration keeps a changing state for each instance. Every piece carries one hidden number that starts at zero and grows by itself, and now and then a random kick lands on a piece and adds to it. The larger the number, the harder that piece is shaken. Its angle has no limit: each small turn is added to the last. A small angular change repeated many times can produce a visibly altered orientation even though no single step seems dramatic. Give it minutes. Half a minute after a RESET the average piece has turned by about a degree, after five minutes by several, and exactly how many depends on the machine drawing the room.
+
+After a minute or two, find the piece that has turned furthest and lay its edge against the line of its neighbours. It has not moved, so its neighbours are still its neighbours. Then find one that has barely turned, and explain that one difference before judging the whole stack.
+
+Left to its defaults, the hidden number also makes each piece drift, sink and darken, so one broad description of disorder can conceal different changes. Here the drift, the sinking and the darkening are switched off, and only turning is left to follow.
+
+Both stacks now run at the same rate. Each piece in either stack follows the same rule: a stack receives kicks in proportion to its number of pieces, so every piece can expect the same share. At its defaults the display runs the cubes three times as fast as the prisms, and the cubes turn several times as far. That difference is mostly the setting, not the shape. What still differs here is shape, colour, number and spacing, so a difference you think you see is not yet a difference of shape alone.
+
+The panel in front of the display is labelled DECAY. The label names the model&#x27;s presentation; it is not a measurement of thermodynamic entropy or a complete physical explanation of how a material deteriorates. **TOGGLE** pauses the turning and keeps the time already run; press it again and the turning resumes where it stopped. **RESET** puts every piece back in line and starts the delay over. The renewed view restores a reference for comparison, not the turning that followed it: RESET does not rewind the random draws, so the turns that come after it are new. Note which piece leads before a RESET; a minute or two after it, a different piece will usually lead.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @RotateGridCubes --&gt;
+
+Behind the stacks, twenty-five cubes make a low square field. The first row lies level; the middle pitches upward; the last lies level again. Nothing keeps turning as you watch. The angle follows a row’s place along half a sine curve. Walk along its side. The same arrangement returns whenever the hall is built. Here your walk supplies the sequence: level, inclined, level again. Rotation can be a rule about place as easily as a record of chance.
+
+![Twenty-five cubes, level at both ends and tilted through the middle, fit behind the changing stacks.](/book-review/doc/book/figures/randomness/tilt-field-contained.png)
+
+&lt;!-- @ --&gt;
+
+Here each piece shows only where its turns have added up to; the turns leave no trail, and RESET wipes even the sum. The random-walk room keeps a trail of one accumulated quantity, position, so there you can separate the next-step rule from the record of earlier steps.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Rotate_Random_XYZ/tutorial.md">Raw captured source</a></p><pre># Random Rotate Random XYZ
+
+Three axes, three independent rolls. Build the orientation generator that proves 3D randomness is qualitatively different.
+
+Declare the triple roll.
+
+```gdscript
+class_name TripleRoll
+extends Node3D
+
+var x_angle: float = 0.0
+var y_angle: float = 0.0
+var z_angle: float = 0.0
+```
+
+Three angles, three floats. Each is rolled independently.
+
+Roll all three.
+
+```gdscript
+func roll() -&gt; void:
+    x_angle = randf() * TAU
+    y_angle = randf() * TAU
+    z_angle = randf() * TAU
+    rotation = Vector3(x_angle, y_angle, z_angle)
+```
+
+Three calls to randf, three assignments. The resulting orientation is almost never anything the learner would predict.
+
+Animate a continuous roll.
+
+```gdscript
+func _process(dt: float) -&gt; void:
+    if auto_roll:
+        x_angle += randf_range(-1.0, 1.0) * dt
+        y_angle += randf_range(-1.0, 1.0) * dt
+        z_angle += randf_range(-1.0, 1.0) * dt
+        rotation = Vector3(x_angle, y_angle, z_angle)
+```
+
+Auto-roll adds noise to the angles each frame. The object tumbles irregularly. No two frames share an orientation.
+
+Expose axis buttons.
+
+```gdscript
+func _on_axis_button_pressed(axis: String) -&gt; void:
+    match axis:
+        &quot;x&quot;: x_angle = randf() * TAU
+        &quot;y&quot;: y_angle = randf() * TAU
+        &quot;z&quot;: z_angle = randf() * TAU
+    rotation = Vector3(x_angle, y_angle, z_angle)
+```
+
+Three buttons let the learner reroll one axis at a time. The other two stay put. The interaction isolates each axis.
+
+Sample from hardware entropy.
+
+```gdscript
+func hardware_roll() -&gt; float:
+    var t := Time.get_ticks_usec()
+    return float((t ^ (t &gt;&gt; 7)) &amp; 0xffff) / float(0xffff) * TAU
+```
+
+Hardware entropy replaces the PRNG. Same shape, different source. The method swaps cleanly.
+
+Record the roll history.
+
+```gdscript
+func log_roll() -&gt; void:
+    rolls.append(Vector3(x_angle, y_angle, z_angle))
+```
+
+The log stores each orientation. A small panel plots the history as a scatter of rotated arrows.
+
+Show the Euler angles.
+
+```gdscript
+func readout_euler(label: Label3D) -&gt; void:
+    label.text = &quot;X: %5.1f°\nY: %5.1f°\nZ: %5.1f°&quot; % [
+        rad_to_deg(x_angle), rad_to_deg(y_angle), rad_to_deg(z_angle)
+    ]
+```
+
+The readout shows degrees. Three independent numbers describe the orientation. The tutorial refuses to collapse them into one.
+
+You have seen randomness expand into three dimensions. The next map, Random Walk, turns randomness into a path.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Save the current orientation as a preset.
+
+```gdscript
+func save_preset(name: String) -&gt; void:
+    presets[name] = Vector3(x_angle, y_angle, z_angle)
+```
+
+Presets capture a favourite orientation. The learner can return to a surprise they liked.
+
+Animate between presets.
+
+```gdscript
+func tween_to_preset(name: String) -&gt; void:
+    if not presets.has(name): return
+    var target: Vector3 = presets[name]
+    create_tween().tween_property(self, &quot;rotation&quot;, target, 0.8)
+```
+
+A tween smoothly rotates from the current angle to the preset. The transition reads as a handwritten arc.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Rotate_Random_XYZ/technical.md">Raw captured source</a></p><pre># Random_Rotate_Random_XYZ - Technical Documentation
+
+## Core Concept in Code
+
+### Independent Axis Rotation
+
+```gdscript
+extends Node3D
+
+var rotation_speed := Vector3.ZERO
+
+func _ready():
+    randomize_rotation()
+
+func randomize_rotation():
+    # Each axis gets independent random angular velocity
+    rotation_speed = Vector3(
+        randf_range(-PI, PI),
+        randf_range(-PI, PI),
+        randf_range(-PI, PI)
+    )
+
+func _process(delta):
+    rotation += rotation_speed * delta
+```
+
+### Continuous vs Discrete Randomization
+
+```gdscript
+# Discrete: randomize once, keep rotating
+func discrete_random_rotation():
+    rotation = Vector3(
+        randf_range(0, TAU),
+        randf_range(0, TAU),
+        randf_range(0, TAU)
+    )
+
+# Continuous: randomize every frame (chaotic)
+func _process(delta):
+    rotation = Vector3(
+        randf_range(0, TAU),
+        randf_range(0, TAU),
+        randf_range(0, TAU)
+    )
+
+# Noise-driven: smooth random rotation
+var time := 0.0
+var noise := FastNoiseLite.new()
+
+func _process(delta):
+    time += delta
+    rotation = Vector3(
+        noise.get_noise_1d(time) * TAU,
+        noise.get_noise_1d(time + 100) * TAU,
+        noise.get_noise_1d(time + 200) * TAU
+    )
+```
+
+## Implementation Details
+
+### The Random_Rotate_Random_XYZ Component
+
+The visualization likely shows objects with:
+1. Random initial orientation
+2. Random angular velocity per axis
+3. Optional: random acceleration (turbulence)
+
+```gdscript
+class_name RandomRotator
+extends Node3D
+
+@export var speed_range := Vector2(0.5, 2.0)
+@export var randomize_on_spawn := true
+
+var angular_velocity := Vector3.ZERO
+
+func _ready():
+    if randomize_on_spawn:
+        _randomize_velocity()
+
+func _randomize_velocity():
+    angular_velocity = Vector3(
+        randf_range(-1, 1) * randf_range(speed_range.x, speed_range.y),
+        randf_range(-1, 1) * randf_range(speed_range.x, speed_range.y),
+        randf_range(-1, 1) * randf_range(speed_range.x, speed_range.y)
+    )
+
+func _process(delta):
+    rotation += angular_velocity * delta
+```
+
+### Uniform Random Rotation (Correct Method)
+
+For truly uniform distribution over all orientations:
+
+```gdscript
+# Method 1: Quaternion from 4 Gaussian samples
+func uniform_random_rotation() -&gt; Quaternion:
+    var rng = RandomNumberGenerator.new()
+    rng.randomize()
+
+    # Four independent Gaussian samples
+    var x = rng.randfn()
+    var y = rng.randfn()
+    var z = rng.randfn()
+    var w = rng.randfn()
+
+    # Normalize to unit quaternion
+    var length = sqrt(x*x + y*y + z*z + w*w)
+    return Quaternion(x/length, y/length, z/length, w/length)
+
+# Method 2: Shoemake&#x27;s uniform quaternion
+func shoemake_random_rotation() -&gt; Quaternion:
+    var u1 = randf()
+    var u2 = randf() * TAU
+    var u3 = randf() * TAU
+
+    var sq1 = sqrt(1.0 - u1)
+    var sq2 = sqrt(u1)
+
+    return Quaternion(
+        sq1 * sin(u2),
+        sq1 * cos(u2),
+        sq2 * sin(u3),
+        sq2 * cos(u3)
+    )
+```
+
+## Map-Specific Configuration
+
+### Structure Analysis
+- 13×16 grid, all tiles at height 2
+- Exit gap at (6, 14) with height 0
+- Creates a uniform elevated platform
+
+### Boundary Field
+The `bf:0.5:0.5:11.5:15.5:2.2:1.5` creates containment boundaries.
+
+### Lighting
+Red-shifted ambient [2.4, 0.4, 0.5] creates dramatic effect—unusual for randomness maps. This may highlight the rotation demonstration through color contrast.
+
+## Key Takeaways
+
+1. **3D randomness = 3 independent samples** - each axis needs its own random value
+2. **Euler angles have limitations** - gimbal lock makes some orientations unreachable
+3. **Quaternions for uniform sampling** - Shoemake&#x27;s method gives truly uniform random orientations
+4. **Independence creates naturalness** - correlated axes look artificial
+
+## Related Systems
+- `Transform3D.rotated()` - applying rotation
+- `Quaternion` - gimbal-lock-free rotation representation
+- `basis` property - orientation as 3x3 matrix
+
+## Within the Sequence
+
+Random_Rotate_Random_XYZ applies randomness to orientation. The per-axis rotation sampling argument extends the sequence&#x27;s case that randomness is a decomposable operator: each axis is its own independent sampling event.
+
+The per-frame cost of the map scales with the number of instanced artifacts and the resolution of the procedural effects. On typical consumer hardware the whole map runs at 60 frames per second with the default parameter ranges; pushing the parameters to their extremes can raise GPU load to the point where frame rate drops, and the map does not hide this from the learner. A corner indicator reads out the current frame time so the learner can observe the cost of their parameter choices.
+
+Failure modes worth naming. A learner who pushes the sliders off the calibrated ranges can produce visually incoherent output — flickering surfaces, runaway growth, or flat featureless fields. The map&#x27;s controls are clamped at safe bounds, but within those bounds the parameters still interact nonlinearly, and the nonlinear interactions are part of what the map rewards. Understanding the interactions requires running the parameters through their ranges rather than setting them once from a preset.
+
+The map is one station in a longer arc. The artifacts it introduces reappear in later maps with extended parameter sets, composed behaviours, or different contextual framings. The learner who walks this map carefully carries a vocabulary the remaining sequence depends on, and the vocabulary is the map&#x27;s concrete contribution to the curriculum.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Rotate_Random_XYZ/intent.md">Raw captured source</a></p><pre>Concept: Which part of an arrangement can change while its pieces remain? Here only orientation changes. Every piece keeps its place, size and colour, and accumulates small in-plane turns driven by a per-piece hidden number that grows and is kicked at random; the angle has no bound. Restoring the arrangement is not replaying its future.
+Sequence role: Sixth hall of Randomness, after Random_Cubes (records that keep or forget outcomes; a heap that loses pieces at random) and before Random_Walk (a trail of one accumulated quantity, position). This hall shows an accumulation without a trail: each piece shows only the sum of its turns, and RESET wipes the sum.
+Technical angle: random_decay_multimesh#study:rotation sets both stacks to the cubes&#x27; rate (0.3), switches off drift, sinking and colour, and lays the prisms on their regular twelve-column grid; the random stream is unchanged (drift draws are still taken, scaled by zero). Kicks per stack scale with piece count, so every piece expects the same share. Angles accumulate per frame, so the pace depends on the machine. The seed is applied only at start and RESET does not reseed. hardware_entropy_decay pushes the same wear values to a box, a sphere and a cylinder: rust rises by itself and faster with hand speed, grip and head turning; scratches follow the hands live; no RNG. RotateGridCubes loads SlopeGradientCubes, a 7 x 30 field tilted by position along z, still and deterministic; only its first rows lie inside the hall.
+Critical angle: A difference between two stacks is not a difference of shape until the rates are matched, and even then colour, count and spacing still differ. The DECAY label names the model&#x27;s presentation, not thermodynamic entropy. The rig shows wear that looks accidental but records the visitor&#x27;s movement.
+Key artifacts: random_decay_multimesh (primary, under #study:rotation); hardware_entropy_decay (along the right-hand wall); RotateGridCubes (a still tilt by place). The namesake Random_Rotate_Random_XYZ turns the floor cubes of a grid map; in the museum it has no grid floor and turns nothing. dark_sphere is a remainder.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Rotate_Random_XYZ/critical.md">Raw captured source</a></p><pre># Random_Rotate_Random_XYZ - Critical Documentation
+
+## Philosophical Framing
+
+### The Myth of Dimensional Independence
+
+This map teaches that each axis can be randomized independently. But this independence is a mathematical convenience, not a truth about the world.
+
+In physical systems, axes are coupled:
+- Angular momentum is conserved (once spinning, objects don&#x27;t randomly change direction)
+- Gravity imposes a preferred vertical
+- Friction couples rotation to translation
+
+The &quot;pure&quot; 3D randomness shown here is an idealization—useful for understanding but absent from physics.
+
+### Orientation and Disorientation
+
+To rotate randomly is to lose orientation. What does it mean for an object to have &quot;no preferred direction&quot;? This is only meaningful relative to a frame of reference—and the frame is always imposed by the observer.
+
+In VR, the player&#x27;s head establishes &quot;up.&quot; The random rotations are only random *relative to the player*. The objects themselves have no concept of randomness—they simply are where they are.
+
+### The Violence of Coordinates
+
+X, Y, Z are not natural categories. They are Cartesian coordinates—a historical choice dating to Descartes&#x27; grid. To decompose rotation into Euler angles (rotation around X, then Y, then Z) imposes this historical grid onto the object.
+
+Quaternions escape some of this violence (no gimbal lock, no axis preference), but they&#x27;re still mathematical constructs. The object doesn&#x27;t care about our representation.
+
+## Politics and Assumptions
+
+### Who Decides &quot;Random&quot;?
+
+Random rotation, as implemented, depends on:
+- The coordinate system (X, Y, Z)
+- The distribution (uniform over what range?)
+- The frame of reference (random relative to what?)
+
+These are design choices, not inevitable truths. A different culture might decompose rotation differently—spherical coordinates, axis-angle representation, or no decomposition at all.
+
+### Dimensionality as Power
+
+The ability to think in three independent dimensions is itself a privilege. It requires:
+- Spatial visualization training
+- Mathematical education
+- Abstract thinking habits
+
+Not everyone has equal access to these. The map&#x27;s assumption that &quot;3D randomness = three independent random values&quot; is obvious is itself culturally embedded.
+
+### Independence as Ideology
+
+The assumption that axes are independent reflects an atomistic worldview: things can be decomposed into parts that don&#x27;t affect each other. This is the logic of reductionism, of capitalism&#x27;s division of labor, of bureaucratic categorization.
+
+What would rotation look like in a relational worldview? Where the X-axis rotation affects the Y-axis rotation? Where nothing is independent?
+
+## Queer Readings
+
+### Against Axis
+
+Queer theory questions categories. X, Y, Z are categories—they divide the continuous sphere of rotations into named directions. But rotation doesn&#x27;t inherently have axes; we impose them.
+
+A queer approach might:
+- Randomize in quaternion space (no privileged axes)
+- Allow correlated rotations (axes influence each other)
+- Question why we need to decompose at all
+
+### Tumbling as Refusal
+
+The randomly tumbling object refuses to settle into a preferred orientation. It won&#x27;t face forward, won&#x27;t stand upright, won&#x27;t align with expectations.
+
+This is a kind of resistance—the object&#x27;s orientation cannot be captured, predicted, or controlled. It exists in perpetual becoming, never arriving at a stable identity.
+
+### Gimbal Lock as Queer Failure
+
+Euler angles have gimbal lock: at certain orientations, one degree of freedom is lost. The system fails to represent all possible states.
+
+This is a queer moment—the representational system cannot capture what exists. The object&#x27;s orientation exceeds what X, Y, Z can describe. Rather than seeing this as a bug to fix (use quaternions!), we might see it as the inevitable failure of any categorical system to capture lived experience.
+
+## Questions That Remain Open
+
+1. **Is true independence possible?** In any physical system, can dimensions be truly uncorrelated, or is some coupling always present?
+
+2. **What would non-Cartesian randomness look like?** If we abandoned X, Y, Z, how else might we think about random orientation?
+
+3. **Does randomness require a reference frame?** If there&#x27;s no observer, is rotation random, or just rotation?
+
+4. **What is lost in the quaternion?** Quaternions solve gimbal lock but are unintuitive. What understanding do we sacrifice for mathematical convenience?
+
+5. **Can orientation be queer?** What would it mean for an object&#x27;s orientation to resist categorization entirely—not just to be &quot;random&quot; within a known system?
+
+## The Map&#x27;s Tension
+
+This map presents 3D randomness as straightforward: randomize X, randomize Y, randomize Z, done. But this simplicity hides:
+- The cultural specificity of Cartesian coordinates
+- The assumption of dimensional independence
+- The imposition of a frame of reference
+- The mathematical limitations of Euler angles
+
+The critical reading acknowledges the map&#x27;s pedagogical value (it does teach something real) while questioning the framework within which that teaching occurs.
+
+For QFEP: independence of axes is maximum entropy within the Cartesian frame. But the frame itself is a constraint—a choice of how to slice the possibility space. The deeper entropy question is: what frames are we not considering?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Rotate_Random_XYZ/artifacts.md">Raw captured source</a></p><pre># Random Rotate Random XYZ — Artifacts
+*Randomness: Freedom from Pattern · E_entropy · 5 artifacts*
+
+&gt; Rotation untethered from purpose. Each axis receives its own chaos — independent random values for X, Y, Z — demonstrating that 3D randomness is not one roll of the dice but three.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Random Rotate XYZ
+![Random Rotate XYZ](/scene-catalog/Random_Rotate_Random_XYZ.png)
+
+Applies random rotation on all three axes (X, Y, Z), creating fully randomized orientations for chaotic arrangements.
+
+`Random_Rotate_Random_XYZ`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Random Decay MultiMesh
+![Random Decay MultiMesh](/scene-catalog/random_decay_multimesh.png)
+
+Two standing 2D decay stacks rendered with MultiMesh: 1m cubes and 1dm prisms that gradually drift, rotate, sink, and darken.
+
+`random_decay_multimesh`
+
+## Slope Gradient Cubes
+![Slope Gradient Cubes](/scene-catalog/RotateGridCubes.png)
+
+Gradient slope test with animated rotation for walkability check.
+
+`RotateGridCubes`
+
+## Hardware Entropy Decay
+![Hardware Entropy Decay](/scene-catalog/hardware_entropy_decay.png)
+
+Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.
+
+`hardware_entropy_decay`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Rotate_Random_XYZ/summary.md">Raw captured source</a></p><pre># Random_Rotate_Random_XYZ - Map Summary
+
+## Overview
+This map demonstrates how randomness scales into three dimensions. When we randomize rotation, each axis (X, Y, Z) receives independent random values—tripling the dimensionality of chaos. The result is objects that tumble in ways that feel natural precisely because they&#x27;re uncorrelated: real turbulence doesn&#x27;t synchronize its axes.
+
+## Spatial Layout
+- **Dimensions**: 13×16 grid
+- **Architecture**: Uniform elevated platform (height 2), single exit gap
+- **Height**: Flat at height 2, exit at 0
+
+## Key Elements
+
+### Interactables
+- **Random_Rotate_Random_XYZ** (1,1) - Central demonstration of independent 3-axis rotation
+- **dark_sphere** (5,8) - Ambient contemplation zone
+
+### Utilities
+- **bf (boundary field)** (0,0) - Field boundary parameters: 0.5, 0.5, 11.5, 15.5, 2.2, 1.5
+- **Teleporter** (6,14) - Exit to next map (Random_Walk)
+
+## Atmosphere
+- **Background**: Deep blue [0.2, 0.2, 0.7]
+- **Lighting**: Warm red-shifted ambient [2.4, 0.4, 0.5] creating dramatic contrast
+- **Mood**: Experimental, mechanical, observing chaos in motion
+
+## Learning Sequence
+1. Player enters onto elevated platform
+2. Observes Random_Rotate_Random_XYZ demonstration
+3. Notes that rotation appears unpredictable yet natural
+4. Understands: X, Y, Z are independently randomized
+5. Passes through dark sphere for contemplation
+6. Exits to continue sequence
+
+## Design Intent
+The single central demonstration focuses attention on one key concept: dimensional independence. Rather than cluttering with multiple examples, this map isolates the principle. The warm lighting creates visual drama against rotating objects, making the chaos more visible.
+
+## Connection to Sequence
+- **Position in randomness sequence**: 5/13
+- **Precedes**: Random_Walk
+- **Follows**: Random_Cubes
+- **Theme**: Extending randomness from 1D to 3D—each dimension independent
+
+## Theoretical Framework
+
+### Dimensional Independence
+When randomizing rotation:
+```gdscript
+var rotation = Vector3(
+    randf_range(0, TAU),  # X axis: independent
+    randf_range(0, TAU),  # Y axis: independent
+    randf_range(0, TAU)   # Z axis: independent
+)
+```
+
+Each axis samples from its own distribution. The total entropy is additive: if each axis has H bits of entropy, total rotation entropy is 3H.
+
+### Euler Angles vs Quaternions
+Euler angles (X, Y, Z rotation) suffer from gimbal lock—certain orientations lose a degree of freedom. For truly uniform random rotation, quaternions are preferred:
+```gdscript
+# Uniform random quaternion (unit sphere sampling)
+func random_quaternion() -&gt; Quaternion:
+    var u1 = randf()
+    var u2 = randf() * TAU
+    var u3 = randf() * TAU
+    return Quaternion(
+        sqrt(1-u1) * sin(u2),
+        sqrt(1-u1) * cos(u2),
+        sqrt(u1) * sin(u3),
+        sqrt(u1) * cos(u3)
+    )
+```
+
+### Natural vs Artificial Tumbling
+Objects in free fall tumble with correlated rotation (angular momentum is conserved). Pure random rotation—independent each frame—looks artificial. The visual difference teaches what &quot;natural&quot; randomness means: it has constraints.
+
+## QFEP Connection
+This map explores **dimensional entropy**. Each axis adds degrees of freedom to the system. In QFEP terms, the E(S) term scales with dimensionality. The more axes that vary independently, the higher the entropy space. But note: in nature, axes are often correlated (physics constraints). Pure independence is maximum entropy; constrained systems have lower entropy but more structure. The λ parameter modulates between these extremes.
+
+## Sources
+- Shoemake, K. (1992). &quot;Uniform Random Rotations&quot; (quaternion sampling)
+- Shiffman, D. *The Nature of Code*, Chapter 3: Oscillation (rotation and angular motion)
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Rotate_Random_XYZ/blurb.md">Raw captured source</a></p><pre>Two stacks of the same pieces, twenty cubes and a hundred and twenty prisms, stand across the hall and begin to turn. Nothing else about them changes: in this room their drift, sinking and darkening are switched off and both run at one rate, so what differs between them is shape, colour, number and spacing, not the setting.
+
+Each piece carries a hidden number that grows by itself and is bumped by random kicks; the larger it is, the harder the piece is shaken, and the small turns add up without limit. TOGGLE pauses, RESET puts every piece back in line without rewinding the draws, so what follows is new. By the door, a rig of three shapes weathers from your own movement and draws no random number at all.
+</pre></section></body></html>

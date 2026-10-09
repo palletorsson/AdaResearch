@@ -1,0 +1,76 @@
+[
+  {
+    "beads": 5,
+    "images": [
+      {
+        "loaded": true,
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "width": 1280
+      },
+      {
+        "loaded": true,
+        "width": 1280
+      }
+    ],
+    "label": "initial",
+    "overflow": false,
+    "status": "Seed 31415 · step 300 of 300 · five walkers. Stored trail: positions 100–299 (200 kept). Current bead: position 300.",
+    "trailSamples": 200
+  },
+  {
+    "label": "full",
+    "status": "Seed 31415 · step 300 of 300 · five walkers. Full capture: positions 0–300, including the bead's current position.",
+    "trailSamples": 301
+  },
+  {
+    "label": "reflection",
+    "proposal": 1,
+    "status": "Seed 31415 · step 131 of 300 · five walkers. Stored trail: positions 0–130 (131 kept). Current bead: position 131.",
+    "step": "Last proposal: 31.94 mm. Accepted endpoint displacement: 30.87 mm. A wall folded this endpoint; change projection if the difference is hidden."
+  },
+  {
+    "beads": 5,
+    "label": "side-all",
+    "opacities": [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+    ],
+    "projection": "LEVY in z/y, step 131; up to 200 previous positions and five current beads."
+  },
+  {
+    "beads": 5,
+    "label": "release",
+    "previousDisabled": true,
+    "status": "Seed 31415 · step 0 of 300 · five walkers. At release; the stored trail is empty.",
+    "trails": 0
+  },
+  {
+    "hasCode": true,
+    "hasTrace": true,
+    "label": "book",
+    "open": true
+  },
+  {
+    "hasArtifact": true,
+    "hasKeep": true,
+    "hasReplay": true,
+    "hasTwoClocks": true,
+    "label": "primary-card",
+    "primaryButton": true,
+    "words856": true
+  }
+]

@@ -1,0 +1,35 @@
+--- before/final.md
++++ after/final.md
+@@ -38,9 +38,9 @@
+ 
+ Press CELL at the bench. The box visits another address and the screen takes its horizontal layer. Follow a dark square on the right into the coloured square at the same position on the left. There is still a value there. The decision has withheld a block.
+ 
+-A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square drops below your eyes, then rises above your head as you continue. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
++A thin yellow square runs around the large volume at the height of that slice. Press CELL again. The square changes level high above you. Later, inside the glass flight box, you can rise until this reading meets your eyes. The blocks stay put. We have moved the place from which we read them. A smaller yellow outline keeps the selected address inside the volume, though solid neighbours can hide it. An empty cell still has a location. The decision has withheld a block, not erased its address.
+ 
+-![The selected horizontal slice runs below eye level around the full-size voxel body. Changing CELL moves this yellow frame while the occupied form stays put.](/book-review/doc/book/figures/Noise_Voxel/selected-slice.png)
++![Flying above the one-metre voxel cells. The yellow frame locates the selected horizontal slice; the glass enclosure lends flight while occupied blocks remain solid.](/book-review/doc/book/figures/Noise_Voxel/flight-from-above.png)
+ 
+ Return to THRESHOLD. The right-hand border shifts through a left-hand field that stays still. You can now see several different values receive the same answer. The binary mask cannot show how far a rejected value missed the line; the other display keeps that difference as a shade, darker the further below, though it prints no scale.
+ 
+@@ -52,9 +52,9 @@
+ 
+ <!-- @voxelnoise -->
+ 
+-Walk towards the large blue volume with its pink edges. At the bench you look down on most of the arrangement, though its top layers reach just above eye level; here parts of it rise above your head. A recess that looked like a detail becomes somewhere you might want to approach.
++Walk towards the large blue volume with its pink edges. Each cube is now one metre across. Twenty-four cells can rise twenty-four metres above the floor. At the bench a recess was a detail; here you can approach it with your whole body.
+ 
+-Both works ask at the same 24 × 24 × 24 positions in the same Perlin field. Their cell spacing differs: four centimetres at the bench, twenty centimetres here. The model leaves a small gap around each visible block so its addresses remain legible. The large volume joins occupied neighbours and draws their exposed faces. Its surface also supplies the collision triangles.
++Both works ask at the same 24 × 24 × 24 positions in the same Perlin field. Their cell spacing differs: four centimetres at the bench, one metre here: twenty-five times the spacing. The model leaves a small gap around each visible block so its addresses remain legible. The large volume joins occupied neighbours and draws their exposed faces. Its surface also supplies the collision triangles.
+ 
+ The coordinate rule is small enough to carry across the room:
+ 
+@@ -63,6 +63,8 @@
+ ```
+ 
+ The three coordinates run from zero to one within either display. `CONTRACT_SPAN` is 9.6. Increasing the physical spacing therefore enlarges the arrangement without reaching into a different part of the field. The same decisions have gained another relation to your height, reach and route.
++
++Step through a ground-level opening in the glass. Your feet no longer have to ask for a floor. Rise along the edge, then approach a gap. Release the movement and hang there. The blue blocks still stop you; an opening has to admit your body before it can become a route. The glass lends this movement a boundary. Descend to either doorway and leave: the museum asks for your weight again.
+ 
+ The plate counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you. It does not measure headroom. It does not know your step height, or whether a passage has an entrance. One connected mass can contain a route you cannot use. Empty space can offer passage, or leave you without support.
+ 

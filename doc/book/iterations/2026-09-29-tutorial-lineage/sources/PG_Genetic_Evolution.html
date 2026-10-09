@@ -1,0 +1,122 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PG_Genetic_Evolution · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=PG_Genetic_Evolution">← Tutorial lineage</a></p><h1>PG Genetic Evolution</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="PG_Genetic_Evolution/final.md">Raw captured source</a></p><pre># What does the score notice?
+
+&lt;!-- @GeneticProgramming --&gt;
+
+Six boxes wait beyond the desk. One is pink. Before asking why it has been picked, choose a body you would want to keep. Perhaps the small one leaves more room around it. Perhaps you want the largest, though you have no use for it yet. Remember your reason.
+
+Each candidate has a genome: a list of primitive names and parameters. A builder reads that list to make the visible body. An evaluator reads it to produce a number. These readers can notice different things. The six-specimen family in Shape Grammars built without judging; the Forge’s height test in Form Finding showed that a result can hold and still fail a chosen criterion. Here a score decides which descriptions get another generation.
+
+Press HOLD. The current leader appears on the side plinth, a copy that will stay while the population changes. HOLD keeps the numerical leader; it cannot yet keep whichever candidate you preferred. That is already one limit of this instrument. Your other choice must remain in memory.
+
+Now press TARGET. The number changes from 8 to 16. The boxes move into a different order and another becomes pink. Their descriptions have not changed; the generation counter has not advanced. The held box waits where you left it. What has happened to its claim to be best?
+
+The label below each candidate reports an estimate and a score. With target 8, the box at scale 1 had estimate 8 and score 100. At target 16, the box at scale 1.25 leads: its estimate is 15.625 and its score about 72.73. The larger score means closer to the current target. It does not mean larger, older, more complex or more desirable.
+
+Here is the comparison in the running source:
+
+```gdscript
+var volume = estimate_volume(genome)
+fitness = 100.0 / (1.0 + abs(volume - target_volume))
+```
+
+Subtract the target from the estimate. `abs` keeps the distance without its sign: being one unit above or below incurs the same difference. Adding one prevents division by zero. An exact match scores 100; a difference of one scores 50. This is what fitness means in this room. We can inspect it without agreeing that it measures what we value.
+
+Press RING. A loop appears on the leader. Look through its opening, then back at the score. The body acquired a conspicuous part. The number did not move.
+
+RULE exposes the seam. The builder knows how to draw a torus. The volume estimator has cases for spheres, boxes and cylinders, and no case for a torus. The ring reaches the image but contributes nothing to this score. Removing it with RING leaves the score unchanged too.
+
+Even the counted box asks for another look:
+
+```gdscript
+total_volume += scale.x * scale.y * scale.z * 8.0
+```
+
+The renderer starts from a unit box, but this estimate multiplies its scale product by eight. It also adds contributions without subtracting overlaps. The label therefore reports the program&#x27;s proxy, not a measured volume of the completed solid. The missing ring is a defect we can name and repair. For the moment, holding it visible lets us see exactly where the two descriptions part company.
+
+Leave the ring in place and press STEP. The generation advances. Two leading descriptions are copied unchanged; four more places are filled through parent selection, possible crossover and mutation. Each parent is the best of three random draws from the population. A draw can encounter the same candidate again. Selection gives some descriptions more chances to continue; it does not inspect the reason you gave for your first choice.
+
+Find the ring again. An elite copy can carry it into the next generation although it earned no points. Survival does not tell us that every surviving feature was rewarded. The held witness still records the earlier box. RESET restores the six opening boxes and target 8, leaving that witness on its plinth. The opening is repeatable; later offspring depend on random choices and need not repeat.
+
+Walk beyond the study and take the side ramp onto the raised structure. These decks carry you because the museum supplies their collision shapes. The generated candidates have no such support. A cased screen stands below the decks; it scans eight metres for a neighbour with a grid to give it, and this desk’s scores are not one, so whatever it shows, it reads no score from here. A form can score well without offering a place to stand. To select for inhabitation we would have to construct and test that relation: an opening, a surface, a particular body attempting passage.
+
+What would your earlier choice ask us to add? A different measurement, another representation, or permission to keep something without justifying it to the score? The question remains useful after this particular omission is fixed. In Space Colonization, next, the target becomes a distribution of points. We will follow the directions they request before changing which growing sites can respond.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="PG_Genetic_Evolution/tutorial.md">Raw captured source</a></p><pre># Genetic Evolution — a body and two readers
+
+Carry forward the list of parameters from Living and the distinction between generation and interpretation from Assemblage. A genome is a list of primitive types with position, rotation and scale. One program builds its image; another evaluates it.
+
+1. RESET. Compare the six boxes and choose a reason for preferring one before reading scores.
+2. HOLD the current leader. Explain that this control keeps the leader, not an arbitrary nominated candidate.
+3. TARGET once: 8 becomes 16. The same six descriptions are reordered, the generation stays zero and the held witness is unchanged. Read estimate 15.625 and score about 72.73 on the new leader.
+4. Explain the exact score formula in final.md. Compute what happens at differences zero and one. Avoid calling the proxy measured solid volume.
+5. RING. Observe the new part and unchanged score. RULE reveals that the builder draws toruses but the estimate omits them. Find the box&#x27;s factor eight and discuss what an exact union-volume measurement would need to handle.
+6. Leave the ring and STEP. Find an unchanged elite among the new generation. Two elites are copied and four slots filled through tournament selection, possible crossover and mutation. A feature can continue without having contributed to its carrier&#x27;s score.
+7. RESET. The opening population returns; the held witness remains. Later random offspring need not replay. A run stops advancing at the original limit of 50 generations.
+8. Take the side ramp to the retained two-metre deck. Distinguish its physical support from the collision-free generated specimens. Describe the additional construction and test needed to select forms for a visitor&#x27;s passage.
+
+Preserve the secondary science_screen as existing material; its grid display is not connected to this scoring experiment. Ask what a useful genome/score view should expose before promising integration. Continue along the eastern aisle and around the rear partition to PG_Space_Colonization, next on the active museum route. Space Colonization now leads directly into Branching Growth, before Percolation.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="PG_Genetic_Evolution/technical.md">Raw captured source</a></p><pre># Genetic Evolution — representation, estimate and selection
+
+The primary is the existing GeneticProgramming artifact, opting into `GeneticProgramming:180#lesson:true`. Its original GeneticProgramming.gd supplies Genome/Gene, primitive construction, estimate_volume, calculate_fitness, tournament_selection, crossover, mutation and population visualization. This kernel is unchanged. The new genetic_museum.gd wrapper selects a museum lesson; ordinary placements keep their original 20-member population and UI.
+
+## Controlled opening
+
+selection_lesson.gd configures primitive genomes, the volume-target score, six members, two elites, manual steps and four-metre display spacing. It creates one-box genomes at scales .7, 1, 1.25, 1.5, 1.75 and 2. Each box begins with its base at zero. The initial target is 8. Resetting these data does not reseed the shared random generator.
+
+TARGET cycles 8 → 16 → 32 → 8, reevaluating the same genes without advancing generation. Display positions represent current rank, not permanent identity. Score is `100 / (1 + abs(estimate - target))`. The scale-1 box initially scores 100; at target 16 the scale-1.25 box scores approximately 72.727 with estimate 15.625.
+
+## Deliberate comparison with an existing omission
+
+RING adds or removes one torus on the current leader. The original builder renders it; the original estimator has no torus branch. Under this fixed volume criterion the change therefore preserves score. The estimator&#x27;s box term is eight times the scale product even though the rendered BoxMesh is unit-sized. It also sums primitive contributions without union/overlap correction. Label values are proxies, not cubic metres of measured occupied space. This lesson makes those existing defects inspectable; it does not silently correct the scoring kernel.
+
+HOLD duplicates the leader&#x27;s genome and builds a separate visible witness. Its single slot survives target changes, generation steps and RESET; another HOLD replaces it. It currently cannot nominate an arbitrary candidate.
+
+## A generation
+
+STEP calls the original evolve_generation. It copies two elites, then fills four slots. A parent tournament makes three independent random draws, with replacement, and takes the highest score. Crossover is attempted at the original .7 rate; the child then uses the original mutation routine/rate. The population is rescored and reordered. At a fixed criterion, retained elites prevent a lower best score in this step; an improvement is not guaranteed. The original limit is 50 generations. STEP reports reaching that limit instead of pretending to advance. RESET starts again; random offspring are not promised to replay.
+
+The compact 3×2 desk supplies TARGET, STEP, RING, HOLD, RESET and RULE. RULE shows the score and estimator omissions. Per-candidate readouts give rank, estimate, score and part count. The main screen is a small inclined translucent plane.
+
+## Floor and scene contract
+
+The old 13×14 layout is retained at offset (3,20) inside a 19×39 hall. Its 25 numeric height-3 cells are two-metre decks when the museum wall threshold is 4; explicit w cells remain walls. Two old boundary cells at (3,25) and (3,26) open for a new closed convex ramp rising from x=1 to x=4 over three metres. The new eastern aisle and rear turning rows provide a route independent of the population. Generated specimens have no colliders and supply no floor. Both portable plans derive this hall from current map_data; other halls are untouched.
+
+The scene&#x27;s stale Control node carried a script that extends Node3D. Its attachment now uses Node3D, matching the existing programmatic 3D UI. GeneticUI.gd itself is unchanged; broader legacy slider behavior is not certified here. In lesson mode, that UI is hidden/disabled and its colliders are disabled.
+
+The secondary science_screen remains in its earlier grid mode and scene. It is not wired to the genetic genome or score, and is not the lesson&#x27;s readout. Full secondary functionality and headset reach/comfort/Quest timing remain pending.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="PG_Genetic_Evolution/intent.md">Raw captured source</a></p><pre>Concept: A represented body, its rendered form and its score are different descriptions.
+Primary: GeneticProgramming, using the existing primitive and selection kernel.
+Action: HOLD → TARGET → RING → RULE → STEP → ramp and support comparison.
+Preserve: both original artifacts, all 25 raised cells, the old layout and archived prose.
+Application: Compare candidate forms in a full-size museum study with independent walking support.
+Critical opening: Which possible bodies can this criterion notice, and which could we want to keep without its approval?
+Limit: Approximate/incomplete volume estimator; no creature locomotion test, generated support, exact union-volume measurement or quantified entropy claim.
+Next: PG_Space_Colonization on the active museum route; follow the restored field-and-growth comparison.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="PG_Genetic_Evolution/critical.md">Raw captured source</a></p><pre># What the criterion leaves alive
+
+Changing TARGET changes the order without changing the bodies. That consequence locates a small politics of evaluation: an apparently intrinsic quality, being the best, depends on a relation to an authored criterion. A number becomes consequential because the selection routine uses it to decide which descriptions are copied and which receive more chances to become parents.
+
+The ring opens another relation. The builder represents it and the evaluator omits it. An unchanged score does not imply an unchanged body. An elite can carry this uncounted part forward; its survival is not evidence that the criterion selected for every feature it has. These are inspectable consequences of this implementation, not a complete model of biological evolution.
+
+There is pleasure in an opening that the number does not know about. That pleasure can direct a new question without making a software defect into liberation. The estimator should be repairable. The research value is in learning to locate the mismatch, compare its effects and decide what should change. Adding the missing torus formula would address one omission; it would not establish that closeness to target volume exhausts the forms we might desire.
+
+The instrument also limits refusal. HOLD preserves the algorithm&#x27;s current leader, not any candidate the visitor chooses. It provides a witness against later change, but not yet an alternative selection policy. A future nomination control could keep a rejected candidate with the visitor&#x27;s reason, without forcing that reason into a new numerical score. That would be a specific extension of agency worth testing.
+
+The floor makes a further distinction bodily. Generated geometry can be visible and highly scored while offering no support. The old platforms can carry a visitor because the museum constructs collision independently of the genome. Selecting for an inhabitable space would require an explicit body, dimensions, support, connectivity and a test of movement. We cannot infer those from a silhouette or a good volume estimate.
+
+The box factor and missing torus are concrete discrepancies; finite search, limited representation and limited measurement are broader constraints that survive their repair. This hall adds no measured entropy or universal threshold. Its contribution to the red thread is methodological: desire can notice a possibility the current evaluation does not register, and code gives us somewhere precise to investigate that difference.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="PG_Genetic_Evolution/artifacts.md">Raw captured source</a></p><pre># Genetic Evolution — two authored works
+
+GeneticProgramming is the primary and sole book anchor. The front lesson uses its actual primitive builder and evolutionary operations, six controlled opening boxes, one held witness, per-candidate score cases and six physical controls. Its original scene remains the registered artifact; the map opts into the lesson with #lesson:true.
+
+science_screen remains secondary, with its original grid-mode configuration and source. It is not yet a monitor of genetic candidates. Both works are retained exactly once. Roles remain unchanged; book hero, annotation and Necklace primary identify GeneticProgramming.
+
+The old layout and all previous room texts are archived under doc/space/genetic-evolution-2026-09-14/before. The old creature-locomotion tutorial is historical proposed material, not a description of what the present artifact implements.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="PG_Genetic_Evolution/summary.md">Raw captured source</a></p><pre># What does the score notice?
+
+Hold a witness, change the target and watch the same six bodies change rank. Add a ring that the builder draws and the score ignores. Advance one generation to separate copying, selection and variation. Then climb a restored deck and distinguish scored form from physical support. GeneticProgramming remains the primary; science_screen remains secondary. The next active encounter is PG_Space_Colonization.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="PG_Genetic_Evolution/blurb.md">Raw captured source</a></p><pre># What does the score notice?
+
+A different body becomes best when the target moves. A ring appears without moving the score. Hold a witness and follow one generation: what survives, and what did the criterion never notice?
+</pre></section></body></html>

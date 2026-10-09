@@ -1,0 +1,102 @@
+{
+  "checks": [
+    {
+      "label": "Pollock's TextureRect receives the paint texture",
+      "passed": true
+    },
+    {
+      "label": "Initial image contains paint and background",
+      "passed": true
+    },
+    {
+      "label": "SubViewport renders a visible multicolour painting",
+      "passed": true
+    },
+    {
+      "label": "Pollock adds no camera",
+      "passed": true
+    },
+    {
+      "label": "Pollock preserves the visitor camera",
+      "passed": true
+    },
+    {
+      "label": "2D painter contains no unrendered 3D canvas",
+      "passed": true
+    },
+    {
+      "label": "Original four-second painting interval remains",
+      "passed": true
+    },
+    {
+      "label": "Automatic timer advances the paint buildup",
+      "passed": true
+    },
+    {
+      "label": "Automatic drips change the painted image",
+      "passed": true
+    },
+    {
+      "label": "Automatic strokes still drive the 3D brush",
+      "passed": true
+    },
+    {
+      "label": "Updated painting remains visible through the viewport",
+      "passed": true
+    },
+    {
+      "label": "Seeded repaint still reproduces the same marks",
+      "passed": true
+    },
+    {
+      "label": "Support restaging retains the frame: table",
+      "passed": true
+    },
+    {
+      "label": "Support restaging retains the frame: easel",
+      "passed": true
+    },
+    {
+      "label": "Support restaging retains the frame: wall",
+      "passed": true
+    },
+    {
+      "label": "Support restaging retains the frame: floor",
+      "passed": true
+    },
+    {
+      "label": "Original particle population remains 100",
+      "passed": true
+    },
+    {
+      "label": "Particle scene preserves the visitor camera",
+      "passed": true
+    },
+    {
+      "label": "Original ten-second mode interval remains",
+      "passed": true
+    },
+    {
+      "label": "Automatic particle cycle visits all five modes and wraps",
+      "passed": true
+    },
+    {
+      "label": "Particle positions remain finite after every mode",
+      "passed": true
+    },
+    {
+      "label": "Evolution updates emission for all ten winners and ninety followers",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "particle_cycle": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    0
+  ],
+  "stroke_events": 5
+}

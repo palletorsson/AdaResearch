@@ -1,0 +1,10 @@
+--- before/tools/em_map_halls.py
++++ after/tools/em_map_halls.py
+@@ -300,6 +300,7 @@
+         **({"simulation": simulation} if isinstance(simulation, dict) else {}),
+         **({"weathering_wall": mus_decl["weathering_wall"]} if isinstance(mus_decl.get("weathering_wall"), dict) else {}),
+         **({"turning_wall": mus_decl["turning_wall"]} if isinstance(mus_decl.get("turning_wall"), dict) else {}),
++        **({"simplex_corners": mus_decl["simplex_corners"]} if isinstance(mus_decl.get("simplex_corners"), list) else {}),
+         **({"passage": passage} if isinstance(passage, dict) else {}),
+         **({"gate": bool(gate)} if gate is not None else {}),
+         **({"gate_depth_rows": int(gate_depth)} if gate_depth is not None else {}),

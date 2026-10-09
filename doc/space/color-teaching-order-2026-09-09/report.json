@@ -1,0 +1,49 @@
+{
+ "previous_order": [
+  "Color_Context_Placed",
+  "Color_Nails",
+  "Color_Grid_Pallet",
+  "Color_Rainbow",
+  "Color_Pillar",
+  "Chamber_Color",
+  "Color_Paint",
+  "Color_Walls",
+  "Color_Flashlight"
+ ],
+ "order": [
+  "Color_Context_Placed",
+  "Color_Flashlight",
+  "Color_Nails",
+  "Color_Rainbow",
+  "Color_Pillar",
+  "Color_Grid_Pallet",
+  "Color_Paint",
+  "Color_Walls",
+  "Chamber_Color"
+ ],
+ "chamber_configuration_changes": [
+  {
+   "at": [
+    8,
+    8
+   ],
+   "before": "becoming_catalyst#start_mode:chromatic",
+   "after": "becoming_catalyst#start_mode:chromatic#active_mode:chromatic"
+  }
+ ],
+ "geometry_changed": false,
+ "missing_manuscripts": [
+  "Color_Flashlight",
+  "Color_Rainbow",
+  "Color_Grid_Pallet",
+  "Chamber_Color"
+ ],
+ "learner_verified": false,
+ "verification": {
+  "order": "sequence, book, authored declaration, both plans including pearl indices agree",
+  "python_tests": 30,
+  "chamber_runtime_checks": 12,
+  "chamber_runtime_failures": 0,
+  "headset_walkthrough": false
+ }
+}

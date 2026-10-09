@@ -1,0 +1,14 @@
+{
+  "anchor": "(9.5, 0.0, 3.5)",
+  "checks": 37,
+  "failures": [
+    "fixed front wall blocks exterior bypass at x=-6.0",
+    "fixed front wall blocks exterior bypass at x=6.0",
+    "no museum furniture colliders intrude into the expanded room"
+  ],
+  "headset_checked": false,
+  "map": "Trans_Scale",
+  "map_sha256": "4cd780d29de038f94b77f81421fd402094400e0a97e8a562769a1b2453c061c6",
+  "scope": "actual museum collision, desktop bottle pickup, unchanged body scale, serving-step descent and route to hall exit",
+  "script_sha256": "6eefe36bfde21f2753fd203bb99b3368a1ebf13ed9aebb817312a577d5e0a98d"
+}

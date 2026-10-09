@@ -1,0 +1,132 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "actual museum grid exists",
+      "passed": true
+    },
+    {
+      "name": "actual grid finished building",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "installed": [
+      {
+        "local_to_grid": [
+          7.0,
+          2.20000004768372,
+          -4.0
+        ],
+        "name": "Lobby_window",
+        "source": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "local_to_grid": [
+          0.639999985694885,
+          0.5,
+          -1.90000009536743
+        ],
+        "name": "Lobby_extinguisher",
+        "source": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "local_to_grid": [
+          15.4399995803833,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_elevator",
+        "source": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "local_to_grid": [
+          14.6000003814697,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_pallet",
+        "source": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "local_to_grid": [
+          5.0,
+          1.5,
+          5.0
+        ],
+        "name": "DarkSphere",
+        "source": "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+      },
+      {
+        "local_to_grid": [
+          -0.5,
+          0.5,
+          -0.5
+        ],
+        "name": "@Node3D@2687",
+        "source": "res://algorithms/color/gridcolorizer/address_lesson.gd"
+      },
+      {
+        "local_to_grid": [
+          17.0,
+          0.5,
+          8.0
+        ],
+        "name": "film_foundation_class",
+        "source": "res://commons/artifacts/spine_films/foundation_monitor.gd"
+      },
+      {
+        "local_to_grid": [
+          -0.5,
+          0.5,
+          -0.5
+        ],
+        "name": "foundation_class",
+        "source": "res://commons/artifacts/spine_films/foundation_c/foundation_class.gd"
+      },
+      {
+        "local_to_grid": [
+          5.0,
+          2.5,
+          12.0
+        ],
+        "name": "SpectrumForest",
+        "source": "res://algorithms/color/spectrumforest/spectrum_forest.gd"
+      },
+      {
+        "local_to_grid": [
+          15.0,
+          2.0,
+          15.0
+        ],
+        "name": "ScienceScreen",
+        "source": "res://commons/artifacts/science_screen/science_screen.gd"
+      },
+      {
+        "local_to_grid": [
+          6.0,
+          0.5,
+          3.0
+        ],
+        "name": "ArtPlinth0",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          6.0,
+          0.919999957084656,
+          3.0
+        ],
+        "name": "DreamBody0",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Grid_Pallet",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

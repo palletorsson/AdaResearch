@@ -1,0 +1,88 @@
+	report["required_present"] = nodes.has(spec.required)
+	report["checks"] = []
+	var specimen: Node3D = nodes.get("queer_morphology_specimen")
+	if specimen==null:
+		push_error("Synthesis specimen missing")
+		quit(1)
+		return
+	specimen.set_physics_process(false)
+	check(report,specimen.scale.is_equal_approx(Vector3.ONE),"Specimen and controls stand at full scale")
+	var body: SoftBody3D = specimen._soft_body
+	check(report,body!=null,"A real SoftBody3D supplies the specimen")
+	move_handles(specimen,.5,0)
+	specimen._breathing_time=0
+	specimen._update_pressure()
+	check(report,is_equal_approx(body.pressure_coefficient,1.5),"Midpoint pressure baseline is 1.5 at zero phase")
+	specimen._breathing_time=PI/(2*1.25)
+	specimen._update_pressure()
+	check(report,absf(body.pressure_coefficient-1.59)<.00001,"Breathing peak multiplies the mapped baseline: 1.59")
+	specimen._breathing_time=3*PI/(2*1.25)
+	specimen._update_pressure()
+	check(report,absf(body.pressure_coefficient-1.41)<.00001,"Breathing trough retains mapped baseline: 1.41")
+	var old_damping: float = body.damping_coefficient
+	press(specimen,3)
+	check(report,not specimen.breathing_enabled and is_equal_approx(body.pressure_coefficient,1.5),"Actual button selects steady baseline, not zero pressure")
+	specimen._physics_process(4.0)
+	check(report,is_equal_approx(body.pressure_coefficient,1.5) and body.damping_coefficient==old_damping,"Steady pressure persists without altering damping")
+	move_handles(specimen,.1,.8)
+	check(report,absf(body.linear_stiffness-.82)<.00001 and absf(body.pressure_coefficient-1.1)<.00001,"Lambda reaches stiffness and pressure through rail callback")
+	check(report,absf(body.damping_coefficient-.0209)<.00001 and absf(body.drag_coefficient-.03)<.00001,"Signed Phi reaches damping and drag through rail callback")
+	var old_pressure: float = body.pressure_coefficient
+	move_handles(specimen,.1,-.8)
+	check(report,absf(body.damping_coefficient-.1801)<.00001 and body.pressure_coefficient==old_pressure,"Phi changes damping independently of pressure")
+	move_handles(specimen,.8,-.8)
+	check(report,absf(body.linear_stiffness-.26)<.00001 and absf(body.pressure_coefficient-1.2)<.00001,"High lambda gives another stiffness and pressure combination")
+	press(specimen,1)
+	check(report,is_equal_approx(specimen.lambda,.5) and is_zero_approx(specimen.phi),"Pair B button restores its two authored settings")
+	press(specimen,3)
+	check(report,specimen.breathing_enabled and is_zero_approx(specimen._breathing_time),"Pulse restarts its imposed phase")
+	specimen._physics_process(.25)
+	check(report,body.pressure_coefficient>1.5 and absf(body.linear_stiffness-.5)<.00001,"Physics tick modulates pressure while preserving stiffness")
+	check(report,specimen._state_label.text.contains("pressure base 1.500") and not specimen._state_label.text.contains("Life emerges"),"Readout names actual mechanics instead of certifying life")
+	for i in range(4):
+		var button: Node3D=specimen._control_panel.find_child("Btn_%d" % i,true,false)
+		check(report,button.global_position.distance_to(origin+Vector3(3.05,1.15,2.65))<.75,"Button within selected 0.75m reach")
+	for slider in [specimen._lambda_slider,specimen._phi_slider]:
+		check(report,slider.global_position.distance_to(origin+Vector3(3.05,1.15,2.65))<.75,"Slider within selected 0.75m reach")
+	# Reproduce the precise former mapping mismatch from the frozen source.
+	var legacy_code: String = FileAccess.get_file_as_string("res://doc/book/iterations/2026-09-20-qfep-synthesis-review/before/commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd").replace("class_name QueerMorphologySpecimen", "")
+	var legacy_script := GDScript.new()
+	legacy_script.source_code=legacy_code
+	check(report,legacy_script.reload()==OK,"Frozen prior source compiles for the pressure comparison")
+	var legacy := Node3D.new()
+	legacy.set_script(legacy_script)
+	legacy.position=Vector3(1000,10,0)
+	root.add_child(legacy)
+	legacy.set_process(false)
+	legacy.set_lambda(.5)
+	var old_before: float=legacy._soft_body.pressure_coefficient
+	legacy._process(.01)
+	var old_after: float=legacy._soft_body.pressure_coefficient
+	check(report,is_equal_approx(old_before,1.5) and old_after<=1.061 and old_after>=.939,"Frozen breathing overwrites the former midpoint baseline")
+	report["legacy_pressure"]={"after_lambda":old_before,"after_process":old_after}
+	legacy.queue_free()
+	# Let actual physics run, recording a mesh point rather than inferring motion
+	# from the animated fluid shader surrounding it.
+	var initial_point: Vector3=body.get_point_transform(10)
+	for i in range(120): await physics_frame
+	var final_point: Vector3=body.get_point_transform(10)
+	check(report,initial_point.is_finite() and final_point.is_finite(),"Deformable mesh point remains finite through actual physics")
+	report["point_sample"]={"initial":arr(initial_point),"after_120_frames":arr(final_point),"displacement":initial_point.distance_to(final_point)}
+
+	check(report,specimen._phi_slider.range_min==-1.0 and specimen._phi_slider.range_max==1.0,"Small Phi display uses the same signed range as the main plate")
+	for variant in ["jarred","cracked","escaped","clouded"]:
+		var instance := Node3D.new()
+		instance.set_script(specimen.get_script())
+		instance.becoming=variant
+		instance.position=Vector3(1000,10,0)
+		root.add_child(instance)
+		var shell: Node=instance.get_node_or_null("JarBoundary")
+		var correct: bool=true
+		if variant=="escaped":
+			correct=shell==null and instance._soft_body!=null
+		else:
+			correct=shell!=null and shell.get_child_count()==(16 if variant=="cracked" else 17)
+		if variant=="clouded": correct=correct and instance._soft_body==null and instance._cloud.multimesh.instance_count==160 and instance._live_values.text.contains("No deformable body")
+		else: correct=correct and instance._soft_body!=null
+		check(report,correct,"Preserved %s form has the intended body and boundary" % variant)
+		instance.queue_free()

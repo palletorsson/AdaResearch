@@ -1,0 +1,372 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wavefunctions_Sky_Stairs · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Wavefunctions_Sky_Stairs">← Tutorial lineage</a></p><h1>Wavefunctions Sky Stairs</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Wavefunctions_Sky_Stairs/final.md">Raw captured source</a></p><pre># What a curve needs from a stair
+
+When does a sampled curve become a route a body can use?
+
+&lt;!-- @sine_cylinder_staircase --&gt;
+
+Begin by following the treads with your eyes from the lower end. Compare one step with the next: the change of height, the turn, and the distance from the centre. Notice the surfaces joining neighbouring edges as well as the steps themselves.
+
+The route combines an angular progression with a steady rise. Its radius also varies with a sine function. A regular rule therefore produces a stair that does more than circle a fixed cylinder. The outline breathes inward and outward as it climbs.
+
+Choose three consecutive treads that you can see clearly from the surrounding floor. Compare their centres first, then compare the edges a foot would meet. A regular change between centres can still leave different apparent gaps at the inner and outer edges of a turn. Move your viewpoint to check whether a gap is real or hidden by an overlapping surface. You do not need to step onto it to make that distinction. Repeat the comparison where the staircase&#x27;s radius appears wider. Describe which relation changed: height, turn, width or edge connection. These observations turn a general impression of smoothness into several concrete questions about support.
+
+Those sampled positions are only the beginning of a staircase. Each needs a tread with width and depth, an orientation, and a relationship to the next tread. The default construction adds connecting membranes between facing edges. They make the gaps part of the visible argument: a formula gives positions, while a route needs provision for the body moving between them.
+
+Do not judge the whole climb from the smoothness of its outline. An entrance, a comfortable rise, headroom and continuous support have to work at the scale of the visitor. From the surrounding floor you can follow the spiral with your eyes. That journey does not tell you whether your body could complete it.
+
+Identify one turn or gap that would matter to a different stride. A route that feels continuous to one walker can remain discontinuous to another. The question is not answered by adding more samples alone: their arrangement and support also matter.
+
+&lt;!-- @ --&gt;
+
+A handrail, supporting posts or a different connection between treads could each change this encounter; they are choices to test, not qualities the equation supplies automatically. The following room returns to interacting cycles. Keep the distinction between a mathematical relation and the particular object that makes it available to perception.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Wavefunctions_Sky_Stairs/tutorial.md">Raw captured source</a></p><pre># Current hall: what a curve needs from a stair
+
+The primary `sine_cylinder_staircase` builds one helix of eighty treads. With the shipped scene parameters, the tread top rises by 0.11 per sample while the radius is `2.5 + 0.45 * sin(2 * angle)`. The angle completes two turns. This is radial modulation with uniform rise, not three parallel staircases or a sine-shaped height profile.
+
+The default `membrane` provision joins neighbouring tread edges with visible quads and matching colliders, lifted by the configured 0.3 offset. Other source options are `none`, `rail` and `posts`; they change the provision around the same sampled path. The chapter begins with three visible treads inspected from the surrounding floor. Treads and colliders alone do not establish a complete ascent, suitable headroom or headset comfort. `math_objects`, `cube_scene` and `dark_sphere` remain in the hall; their presence does not implement the floating wave-density field described in the earlier proposal. See [the chapter](final.md) and `algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd`.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its three staircases, variable-rise climb, altitude chart and wave-density cube fields are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. Full walking and headset claims remain unverified.
+
+---
+
+# Sky Stairs
+
+Stairs climb along a sine curve. Build the vertical amphitheater and mount the wave one step at a time.
+
+Declare the staircase.
+
+```gdscript
+class_name SineStaircase
+extends Node3D
+
+@export var step_count: int = 60
+@export var horizontal_span: float = 15.0
+@export var amplitude: float = 6.0
+@export var frequency: float = 0.25
+```
+
+Sixty steps across fifteen horizontal metres. Amplitude peaks six metres above the base line.
+
+Place each step.
+
+```gdscript
+func build_steps() -&gt; void:
+    for i in step_count:
+        var t: float = float(i) / float(step_count)
+        var x := t * horizontal_span - horizontal_span * 0.5
+        var y := amplitude * sin(TAU * frequency * x)
+        var step := preload(&quot;res://commons/artifacts/wavefunctions/stair_step.tscn&quot;).instantiate()
+        step.position = Vector3(x, y, 0.0)
+        add_child(step)
+```
+
+Each step sits at sine of its x. The staircase is the waveform; walking the staircase is tracing the wave.
+
+Set step sizes.
+
+```gdscript
+func size_step(step: Node3D) -&gt; void:
+    step.scale = Vector3(0.25, 0.15, 0.6)
+```
+
+Narrow and deep. The learner can walk at a normal stride. Depth matters because the wave steepens near peaks.
+
+Tilt the step to the local slope.
+
+```gdscript
+func tilt_step(step: Node3D, x: float) -&gt; void:
+    var slope: float = TAU * frequency * amplitude * cos(TAU * frequency * x)
+    step.rotation.z = -atan(slope * 0.1)
+```
+
+Steps tilt into the wave so the walker&#x27;s foot finds a level top. The tilt is tiny but prevents the feeling of climbing a corrugated roof.
+
+Spawn floating cubes sampling the air.
+
+```gdscript
+func populate_cubes() -&gt; void:
+    for i in 40:
+        var cube := preload(&quot;res://commons/artifacts/wavefunctions/float_cube.tscn&quot;).instantiate()
+        cube.position = Vector3(randf_range(-7, 7), randf_range(0, 12), randf_range(-3, 3))
+        add_child(cube)
+```
+
+Cubes hang in the air around the staircase. Most are above the wave; some are below. The sample makes the invisible field legible.
+
+Light peaks with a lamp.
+
+```gdscript
+func place_peak_lamps() -&gt; void:
+    var wavelength: float = 1.0 / frequency
+    for i in int(horizontal_span / wavelength) + 1:
+        var x: float = i * wavelength - horizontal_span * 0.5
+        var lamp := OmniLight3D.new()
+        lamp.position = Vector3(x, amplitude + 1.0, 0.0)
+        lamp.light_color = Color(1.0, 0.9, 0.6)
+        add_child(lamp)
+```
+
+Lamps sit above each peak. The learner climbs toward light and descends into cooler air.
+
+Chime on reaching a peak.
+
+```gdscript
+func _on_peak_entered(index: int) -&gt; void:
+    peak_chime.pitch_scale = 1.0 + index * 0.05
+    peak_chime.play()
+```
+
+Each peak sounds slightly higher. The climb becomes a melody. Walking is performance.
+
+You have climbed the wave. The next map, TrigWalkingPath, splits sine from cosine into parallel paths.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Wavefunctions_Sky_Stairs/technical.md">Raw captured source</a></p><pre># Current hall: what a curve needs from a stair
+
+The primary `sine_cylinder_staircase` builds one helix of eighty treads. With the shipped scene parameters, the tread top rises by 0.11 per sample while the radius is `2.5 + 0.45 * sin(2 * angle)`. The angle completes two turns. This is radial modulation with uniform rise, not three parallel staircases or a sine-shaped height profile.
+
+The default `membrane` provision joins neighbouring tread edges with visible quads and matching colliders, lifted by the configured 0.3 offset. Other source options are `none`, `rail` and `posts`; they change the provision around the same sampled path. The chapter begins with three visible treads inspected from the surrounding floor. Treads and colliders alone do not establish a complete ascent, suitable headroom or headset comfort. `math_objects`, `cube_scene` and `dark_sphere` remain in the hall; their presence does not implement the floating wave-density field described in the earlier proposal. See [the chapter](final.md) and `algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd`.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its three staircases, variable-rise climb, altitude chart and wave-density cube fields are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. Full walking and headset claims remain unverified.
+
+---
+
+# Wavefunctions Sky Stairs — Technical
+
+The map generates three parallel helical staircases whose step heights follow sin, cos, and a higher-frequency harmonic.
+
+```gdscript
+class_name SineStaircase extends Node3D
+
+@export var function_type: String = &quot;sin&quot;  # &quot;sin&quot;, &quot;cos&quot;, &quot;harmonic&quot;
+@export var total_height: float = 30.0
+@export var radius: float = 4.0
+@export var angular_rate: float = 0.5  # revolutions per unit height
+@export var step_count: int = 80
+
+func build() -&gt; void:
+    var step_scene: PackedScene = preload(&quot;res://commons/interactables/helix_step.tscn&quot;)
+    for i in range(step_count):
+        var height_fraction: float = float(i) / step_count
+        var y: float = height_fraction * total_height
+        var angle: float = height_fraction * angular_rate * TAU
+        var step_height: float = step_height_for(function_type, height_fraction)
+        var step := step_scene.instantiate()
+        step.position = Vector3(
+            cos(angle) * radius,
+            y + step_height,
+            sin(angle) * radius
+        )
+        add_child(step)
+
+func step_height_for(type: String, t: float) -&gt; float:
+    var amplitude: float = 0.3
+    match type:
+        &quot;sin&quot;: return amplitude * sin(t * TAU * 3)
+        &quot;cos&quot;: return amplitude * cos(t * TAU * 3)
+        &quot;harmonic&quot;: return amplitude * sin(t * TAU * 6) * 0.5
+    return 0.0
+```
+
+## Phase Relationship
+
+Sin and cos staircases are offset by 90° of phase. At a given angle around the helix, the sin staircase and cos staircase have step heights that are 90° out of phase: when sin is at its peak, cos is at zero, and vice versa.
+
+```gdscript
+func phase_offset_at(angle: float) -&gt; float:
+    var sin_height: float = sin(angle)
+    var cos_height: float = cos(angle)
+    return sin_height - cos_height  # visible elevation difference
+```
+
+## Floating Cube Fields
+
+Fields of small cubes drift at different altitudes around the tower. Their density samples the wave equation at that height.
+
+```gdscript
+class_name FloatingField extends Node3D
+
+@export var altitude_range: Vector2 = Vector2(5, 25)
+@export var cube_count: int = 200
+
+func spawn_cubes() -&gt; void:
+    for i in range(cube_count):
+        var altitude: float = randf_range(altitude_range.x, altitude_range.y)
+        var density: float = abs(sin(altitude)) * 0.5 + 0.5
+        if randf() &gt; density: continue
+        var p := random_position_at_altitude(altitude)
+        spawn_cube(p)
+```
+
+## Height Reference Panel
+
+A reference panel at the landing displays the learner&#x27;s current altitude as a value of sin(angle), where angle is the distance travelled around the helix.
+
+```gdscript
+func update_altitude_readout() -&gt; void:
+    var p := learner.global_position
+    var angle: float = atan2(p.z, p.x)
+    var altitude: float = p.y
+    var wave_value: float = sin(altitude / total_height * TAU * 3)
+    readout_label.text = &quot;Altitude: %.1f · Wave: %.2f&quot; % [altitude, wave_value]
+```
+
+## Complexity
+
+Each staircase is O(step_count) at build time. Total geometry across three staircases is about 240 steps. The floating cube fields are O(cube_count); the map uses 200 cubes per field, rendered via MultiMeshInstance3D for efficiency.
+
+Within the sequence, Sky_Stairs returns oscillation to embodied experience. TrigWalkingPath will next put sin and cos walks next to each other.
+
+## Helical Geometry
+
+A helix is parameterised by its pitch (vertical distance per revolution) and radius. For a helix with pitch P and radius R, arc length per revolution is sqrt((2πR)² + P²). The map&#x27;s default helix has R=4 and P=20, giving arc length ~28.6 per revolution.
+
+## Step Placement
+
+Each step is placed tangent to the helix, so its front face is perpendicular to the direction of travel. Computing the tangent requires the derivative of the helical parameterisation:
+
+```gdscript
+func helix_tangent(t: float, radius: float, pitch: float, angular_rate: float) -&gt; Vector3:
+    var dx: float = -angular_rate * TAU * radius * sin(angular_rate * TAU * t)
+    var dy: float = pitch
+    var dz: float = angular_rate * TAU * radius * cos(angular_rate * TAU * t)
+    return Vector3(dx, dy, dz).normalized()
+```
+
+The step&#x27;s orientation basis is built from this tangent plus an up vector (global UP projected onto the plane perpendicular to the tangent).
+
+## Safety Railings
+
+Real staircases need railings; VR staircases need them more because a fall at height is immersion-breaking if handled poorly. The map adds railings whose height is standardised (waist-high from step surface) but whose shape follows the helix.
+
+```gdscript
+func add_railing(step_position: Vector3, tangent: Vector3) -&gt; void:
+    var railing := RAILING_SCENE.instantiate()
+    railing.global_position = step_position + Vector3(0, 1.0, 0)
+    railing.look_at(step_position + tangent, Vector3.UP)
+    add_child(railing)
+```
+
+## Cube Field Density
+
+The floating cube fields&#x27; density is sampled from a wave equation: density(altitude) = (sin(altitude * k) + 1) / 2, producing alternating bands of high and low density. At low wavelength, the cubes form thick bands; at high wavelength, finer stratification.
+
+```gdscript
+func density_at_altitude(altitude: float, wavelength: float) -&gt; float:
+    var k: float = TAU / wavelength
+    return (sin(altitude * k) + 1.0) / 2.0
+```
+
+Cubes are spawned via rejection sampling: candidate positions are proposed at random altitudes, and each candidate is accepted with probability equal to the density at its altitude.
+
+## Performance
+
+The tower contains about 300 steps across three staircases and 600 cubes across multiple altitude fields. Rendering uses MultiMeshInstance3D for the cubes and instanced meshes for the steps, keeping draw calls below 50.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Wavefunctions_Sky_Stairs/intent.md">Raw captured source</a></p><pre># Current hall: what a curve needs from a stair
+
+The primary `sine_cylinder_staircase` builds one helix of eighty treads. With the shipped scene parameters, the tread top rises by 0.11 per sample while the radius is `2.5 + 0.45 * sin(2 * angle)`. The angle completes two turns. This is radial modulation with uniform rise, not three parallel staircases or a sine-shaped height profile.
+
+The default `membrane` provision joins neighbouring tread edges with visible quads and matching colliders, lifted by the configured 0.3 offset. Other source options are `none`, `rail` and `posts`; they change the provision around the same sampled path. The chapter begins with three visible treads inspected from the surrounding floor. Treads and colliders alone do not establish a complete ascent, suitable headroom or headset comfort. `math_objects`, `cube_scene` and `dark_sphere` remain in the hall; their presence does not implement the floating wave-density field described in the earlier proposal. See [the chapter](final.md) and `algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd`.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its three staircases, variable-rise climb, altitude chart and wave-density cube fields are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. Full walking and headset claims remain unverified.
+
+---
+
+Concept: Ascent through oscillation — stairs that climb along sine curves, where each step is a moment in a wave cycle. The tallest structure in the Wavefunctions sequence; climbing stairs IS tracing a waveform.
+Sequence role: Tenth map in Wavefunctions; returns to embodied wave experience after the conceptual maps (Cage, AirMusic). The vertical amphitheater launches the learner skyward, then descends through sine-modulated staircases. Floating cube fields sample 3D space at varying heights. Connects back to Sine_Space&#x27;s spatial wave but extends vertically — the wave is now climbed, not walked; follows WaveFunctions_AirMusic; leads to WaveFunctions_TrigWalkingPath.
+Technical angle: Sine-modulated cylinder geometry for staircase construction (sine_cylinder_staircase), vertical oscillation as navigable architecture, phase relationships visible across the height dimension. The math_objects at the deep stage provide formal reference for the embodied experience above.
+Critical angle: Climbing a sine wave makes frequency and amplitude felt in the legs, not just seen with the eyes. The staircase as helix — vertical progress as rotational persistence — connects directly to the Unit Circle map&#x27;s revelation that oscillation is projected rotation. The tallest structure in the sequence makes a structural argument: waves reach higher than any flat surface.
+Key artifacts: sine_cylinder_staircase generates the wave-shaped stairs; math_objects provide formal mathematical reference; cube_scene frames the floating sample fields; dark_sphere anchors the vertical space.
+
+Gap: No gap identified.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Wavefunctions_Sky_Stairs/critical.md">Raw captured source</a></p><pre># Current hall: what a curve needs from a stair
+
+The primary `sine_cylinder_staircase` builds one helix of eighty treads. With the shipped scene parameters, the tread top rises by 0.11 per sample while the radius is `2.5 + 0.45 * sin(2 * angle)`. The angle completes two turns. This is radial modulation with uniform rise, not three parallel staircases or a sine-shaped height profile.
+
+The default `membrane` provision joins neighbouring tread edges with visible quads and matching colliders, lifted by the configured 0.3 offset. Other source options are `none`, `rail` and `posts`; they change the provision around the same sampled path. The chapter begins with three visible treads inspected from the surrounding floor. Treads and colliders alone do not establish a complete ascent, suitable headroom or headset comfort. `math_objects`, `cube_scene` and `dark_sphere` remain in the hall; their presence does not implement the floating wave-density field described in the earlier proposal. See [the chapter](final.md) and `algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd`.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its three staircases, variable-rise climb, altitude chart and wave-density cube fields are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. Full walking and headset claims remain unverified.
+
+---
+
+# The climb is the curve — verticality, labour, and the politics of ascent
+
+Climbing a staircase is already tracing a waveform. Each step is a sample; the tread is the period; the rise is the amplitude. The map takes this literally. A tall vertical amphitheatre launches the learner up through open space, and the stairs spiral around the central column in a helix whose step heights follow a sine curve.
+
+Sarah Ahmed&#x27;s work on orientations extends to verticality. The staircase is a compulsory orientation: climbing is the only way up. The learner cannot fly and cannot teleport. The rise is paid for in footsteps, and the footsteps are exactly the samples of the sine curve the map is built from. Labour and wave are the same operation in this space, and the map makes the equation physical.
+
+Three staircases climb in parallel, each bound to a different function. One follows sin, another cos, a third a higher-frequency harmonic. The three diverge and converge at predictable intervals, so the phase relationship is visible as a spatial gap between the treads. A learner on the sin staircase can look across and see the cos climber ninety degrees out of phase, sometimes higher, sometimes lower, always out by a quarter of a cycle.
+
+The phase gap has a social valence. Two learners climbing the sin and cos staircases simultaneously are doing the same kind of work at different times. Neither is ahead of the other on any stable measure; the lead alternates as the phase drifts. The map refuses to stabilise a single hierarchy of altitude. The higher staircase is only momentarily higher, and the position will invert before the climb is done.
+
+The floating cube fields drift at different altitudes around the tower, sampling the wave equation at that height. Their density thins with elevation and thickens at the nodes. A reference panel at the landing reads out the learner&#x27;s current height as a value of sin(angle), where angle is the distance travelled around the helix. The reading is the labour receipted into a number.
+
+The sequence&#x27;s politics of ascent crystallise here. Climbing a sine wave is harder than climbing a straight staircase because the rises are non-uniform: steep where the curve is steep, gentle where the curve is gentle. The learner&#x27;s body learns the derivative of the function as a fatigue distribution rather than as an abstract quantity. The map argues that the wave has a body when the wave is walked, and that the body is the surface on which the wave&#x27;s shape is actually legible.
+
+Within the sequence, Sky_Stairs returns to embodied wave experience after the conceptual pauses of Cage and AirMusic. Where Sine_Space put the wave under the learner&#x27;s feet horizontally, this map puts it vertically and asks the learner to climb it. The climb is the proof.
+
+The sequence&#x27;s bodily politics crystallise in the fatigue the climb produces: the sine wave is a labour distribution, and the distribution is legible only to a climber who has paid it.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Wavefunctions_Sky_Stairs/artifacts.md">Raw captured source</a></p><pre># Wavefunctions Sky Stairs — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 4 artifacts*
+
+&gt; Inspect one helix with radial sine modulation and uniform rise. Compare tread centres, edges and connecting membranes from the surrounding floor; a full ascent still needs testing.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Basic Cube Scene
+![Basic Cube Scene](/scene-catalog/cube_scene.png)
+
+TEST how cubes can split, snap, scale, and recombine while remaining the basic reference primitive.
+
+`cube_scene`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## sine_cylinder_staircase
+![sine_cylinder_staircase](/scene-catalog/sine_cylinder_staircase.png)
+
+Builds a helical staircase around a central column, modulating tread radius with a sine wave.
+
+`sine_cylinder_staircase`
+
+## Mathematical Objects
+![Mathematical Objects](/scene-catalog/math_objects.png)
+
+A collection of parametric surfaces and curves—the geometric zoo of mathematical forms. Tori, helicoids, Möbius strips: shapes defined by equations rather than construction.
+
+`math_objects`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Wavefunctions_Sky_Stairs/summary.md">Raw captured source</a></p><pre># Current hall: what a curve needs from a stair
+
+The primary `sine_cylinder_staircase` builds one helix of eighty treads. With the shipped scene parameters, the tread top rises by 0.11 per sample while the radius is `2.5 + 0.45 * sin(2 * angle)`. The angle completes two turns. This is radial modulation with uniform rise, not three parallel staircases or a sine-shaped height profile.
+
+The default `membrane` provision joins neighbouring tread edges with visible quads and matching colliders, lifted by the configured 0.3 offset. Other source options are `none`, `rail` and `posts`; they change the provision around the same sampled path. The chapter begins with three visible treads inspected from the surrounding floor. Treads and colliders alone do not establish a complete ascent, suitable headroom or headset comfort. `math_objects`, `cube_scene` and `dark_sphere` remain in the hall; their presence does not implement the floating wave-density field described in the earlier proposal. See [the chapter](final.md) and `algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd`.
+
+## Archived design proposal
+
+The text below is preserved from an earlier design. Its three staircases, variable-rise climb, altitude chart and wave-density cube fields are proposals, not descriptions of the current hall. Its code is illustrative, not an extract from the shipped artifact. Full walking and headset claims remain unverified.
+
+---
+
+# Wavefunctions Sky Stairs — Summary
+
+Climbing a staircase is already tracing a waveform: each step is a sample, the tread is the period, the height is the amplitude. This map takes that metaphor literally. A tall vertical amphitheatre launches the learner up through open space. Stairs spiral around the central column in a helix whose step heights follow a sine curve.
+
+Three staircases climb in parallel, each bound to a different function. One follows sin, another cos, a third a higher-frequency harmonic. The three diverge and converge at predictable intervals, so the phase relationship is visible as a spatial gap between the treads.
+
+Floating cube fields drift at different altitudes around the tower, sampling the wave equation at that height. Their density thins with elevation and thickens at the nodes. A reference panel at the landing reads out your current height as a value of sin(angle), where angle is the distance traveled around the helix.
+
+Within the sequence, Sky Stairs returns to embodied wave experience after the conceptual pause of Cage and AirMusic. Where Sine_Space put the wave under your feet horizontally, this map puts it under your feet vertically and asks you to climb it.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Wavefunctions_Sky_Stairs/blurb.md">Raw captured source</a></p><pre>The outline breathes inward and outward as the treads climb at a steady rise. Follow three neighbouring steps with your eyes, then compare their edges and the membranes joining them. A sampled curve supplies positions; a route for a body needs more.
+</pre></section></body></html>

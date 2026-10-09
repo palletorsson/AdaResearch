@@ -1,0 +1,16 @@
+--- before/commons/maps/Vectors_Act5_ForceAsPlace/map_data.json
++++ commons/maps/Vectors_Act5_ForceAsPlace/map_data.json
+@@ -17,9 +17,10 @@
+       "estimated_time": "6-10 minutes",
+       "act": "V — force as place",
+       "learning_objectives": [
+-        "Force field as place",
+-        "Dialing a field vector",
+-        "Field replaces gravity"
++        "Compose a local acceleration vector, including the idle yaw at a vertical pole",
++        "Compare loose-cube and visitor receivers and their retained motion",
++        "Distinguish zero acceleration from zero velocity",
++        "Compare the field crossing with the retained plank and inspect the locomotion boundary"
+       ],
+       "n_artifacts": 6
+     },

@@ -1,0 +1,35 @@
+--- before/final.md
++++ after/final.md
+@@ -10,20 +10,13 @@
+ F+F-F-F+F
+ ```
+ 
+-Leave NEXT alone. Press TURN. Follow the first bend across the two drawings. The letters below them have not changed. One reading turns through ninety degrees; the other now turns through a hundred and twenty. Five drawn segments in each, yet the same route through the symbols takes another route through space. Some segments may overlap. Count the instructions as well as the lines you can distinguish.
++Leave NEXT alone. Take the small black point and move it to the next angle, or press TURN. Follow the first bend across the two drawings. The letters below them have not changed. One reading turns through ninety degrees; the other now turns through a hundred and twenty. Five drawn segments in each, yet the same route through the symbols takes another route through space. Some segments may overlap. Count the instructions as well as the lines you can distinguish.
+ 
+-We brought a construction out of the fractal halls. Here we can separate two moments within it: making a sentence, and reading that sentence as movement. HOLD gives us time beside a previous reading. TURN changes the live interpreter's angle. NEXT rewrites the sentence from which it draws.
++We brought a construction out of the fractal halls. Here we can separate two moments within it: making a sentence, and reading that sentence as movement. HOLD gives us time beside a previous reading. The hand changes the live interpreter's angle. Its trigger advances the sentence; the point has acquired another task. NEXT rewrites the sentence from which it draws.
+ 
+ Keep the new angle and press NEXT again. The held drawing remains. The live sentence has forty-nine symbols and twenty-five drawing instructions. The turning signs also take up space in the string; they do not each leave a segment. What has multiplied, and what has merely been carried forward?
+ 
+-RULE opens the replacement used by this preset: each `F` becomes `F+F-F-F+F`. In `lsystem_editor.gd`, the next sentence is assembled from the old one:
+-
+-```gdscript
+-var new_string = ""
+-for c in _current_string:
+-    new_string += str(_rules.get(c, c))
+-_current_string = new_string
+-```
++RULE opens the replacement used by this preset: each `F` becomes `F+F-F-F+F`. The next sentence is assembled from the old one, one symbol at a time.
+ 
+ A symbol without a replacement passes through as itself. The newly written letters wait for the next generation; they are not rewritten again during this pass. First one `F`, then five, then twenty-five. The small loop has a rhythm, and a place where its repetition must wait.
+ 
+@@ -37,7 +30,7 @@
+ 
+ This desk stops at four requested generations, with a budget of 4,096 symbols. If a replacement would exceed that budget, the last complete generation remains. Its readout distinguishes the generation shown from the one requested. A long printed sentence also declares that only its first 120 symbols are visible. Two different limits, two different kinds of remainder.
+ 
+-Seven presets give us places to begin. They do not exhaust the bodies that a grammar could permit; the physical desk does not yet let us type a new rule. Nor does a changed outline automatically make another space habitable: these thin drawings have no collision surfaces. The desire to inhabit them brings another body, another requirement, into the question. Which operation would we have to open next?
++Eight presets give us places to begin. Cantor carries the thirds from the previous hall into letters: one symbol leaves a line, another crosses the gap without leaving one. They do not exhaust the bodies that a grammar could permit; the physical desk does not yet let us type a new rule. Nor does a changed outline automatically make another space habitable: these thin drawings have no collision surfaces. The desire to inhabit them brings another body, another requirement, into the question. Which operation would we have to open next?
+ 
+ <!-- @ -->
+ 

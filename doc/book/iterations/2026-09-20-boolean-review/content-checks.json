@@ -1,0 +1,134 @@
+{
+  "count": 32,
+  "checks": [
+    {
+      "passed": true,
+      "check": "Declared order retained"
+    },
+    {
+      "passed": true,
+      "check": "Authored route retained"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: all other rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: order agrees"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: all other rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: order agrees"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/long_museum.json: derived order agrees"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum_order_effective.json: derived order agrees"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Verbs: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Verbs: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Verbs: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Gallery: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Gallery: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Gallery: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Works: original artifact families retained"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Works: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "Boolean_Works: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "All 24 Gallery placements preserved byte-for-byte"
+    },
+    {
+      "passed": true,
+      "check": "Burrow promoted"
+    },
+    {
+      "passed": true,
+      "check": "Primary order agrees"
+    },
+    {
+      "passed": true,
+      "check": "Burrow is in book index"
+    },
+    {
+      "passed": true,
+      "check": "Burrow has a book encounter"
+    },
+    {
+      "passed": true,
+      "check": "Original path stops at third hollow"
+    },
+    {
+      "passed": true,
+      "check": "Seeded centres unchanged"
+    },
+    {
+      "passed": true,
+      "check": "Same overlap component count"
+    },
+    {
+      "passed": true,
+      "check": "Same graph cycle count"
+    },
+    {
+      "passed": true,
+      "check": "Six inward waypoints passed"
+    },
+    {
+      "passed": true,
+      "check": "Six return waypoints passed"
+    },
+    {
+      "passed": true,
+      "check": "Intact stock wall blocks body"
+    },
+    {
+      "passed": true,
+      "check": "Gallery bypass and original visual wall crossing passed"
+    },
+    {
+      "passed": true,
+      "check": "Intersection volume readout present in actual hall"
+    },
+    {
+      "passed": true,
+      "check": "Relevant runtime reports pass"
+    }
+  ],
+  "failures": []
+}

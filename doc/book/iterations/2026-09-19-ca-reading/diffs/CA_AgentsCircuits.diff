@@ -1,0 +1,26 @@
+--- before/CA_AgentsCircuits/final.md
++++ after/CA_AgentsCircuits/final.md
+@@ -8,7 +8,7 @@
+ 
+ Each new cell is still calculated from a local neighbourhood. No instruction tells the display to draw a large triangle and then decorate it with smaller triangles. The repeated structure becomes visible through many applications of the rule.
+ 
+-Before leaving the rule display, choose one gap whose position you could describe to someone else. Describe the occupied cells around it as well as the empty region itself. A pattern can appear similar because its holes correspond, because its filled parts correspond, or because its outline does. Those are different comparisons. Carry that description to the pyramid and test only the relation you chose first. If it fails, locate the precise mismatch before choosing another relation; otherwise resemblance can become a moving target that never risks being wrong.
++Choose one triangular gap in the rule display. Keep a few occupied cells around it in mind, so there is more to recognise than the outline. Carry that small arrangement to the pyramid. Where would it fit? If one part refuses the match, stay with that part before choosing a different resemblance. We have found something the shared appearance did not tell us.
+ 
+ <!-- @sierpinski_pyramid -->
+ 
+@@ -16,10 +16,12 @@
+ 
+ The resemblance is useful because it gives you a question to test. At which scales do gaps correspond? Which relations are altered by moving from a flat history to a volume? You need not force every visible feature into a match. A failed correspondence tells you where the analogy stops.
+ 
+-Both encounters produce organised patterns, but neither appearance alone proves the presence of an agent, a circuit or a general-purpose computer. Those claims require additional structure: states that can represent something, operations that transform them, and a way of checking the result.
++The row's next state and the pyramid's smaller copies can lead the eye towards a related form. The pleasure of recognising it gives us a reason to compare their making. A name for the resemblance can accompany that inquiry without finishing it.[^ca-resemblance]
+ 
+ A useful variation would keep the pyramid fixed while trying several different seeds in Rule 90. Some seeds preserve familiar triangular relations; others overlap them. The comparison would expose how much the resemblance depends on the starting condition.
+ 
+ <!-- @ -->
+ 
+-Next, the sequence asks what happens when a local update admits graded states and disturbance. Keep asking whether a name describes an observed relation or simply encourages you to see one.
++We will return to the pyramid's way of making in Fractals. First, two almost matching volumes will let us follow one changed value through the same procedure. We have asked how similar appearances can be made differently. What happens when we keep the making the same and alter one small part of the beginning?
++
++[^ca-resemblance]: An organised appearance alone does not demonstrate an agent, a circuit or a general-purpose computer. Such claims require an account of states, operations and the results they can produce. This comparison establishes a question about resemblance and procedure, not a proof of computational universality.

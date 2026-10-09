@@ -1,0 +1,19 @@
+--- Point_Trace.before.md
++++ Point_Trace.after.md
+@@ -18,13 +18,13 @@
+ var point_count = _trail_points.size()
+ ```
+ 
+-Each accepted position occupies a place in that ordered list. The recorder joins neighbouring positions with straight segments. Enough small segments can let us see a curve. Go closer to a turn: the smooth-looking gesture has acquired joints. The connection between two samples has been drawn; it is not a measurement of everything your hand did between them.[^point-trace-sampling]
++`_trail_points` holds positions in the order they were kept; `size()` counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.[^point-trace-sampling]
+ 
+-The dot waits for at least five millimetres of movement before considering another sample. Below that movement threshold, the update can return without adding a position. A stationary pause can leave the list unchanged while Point One's counter has plenty more calls to count.
++The dot compares its present position with the one where it last passed the movement test. Less than five millimetres apart, and no new position is added. A still pause can leave the count unchanged while Point One's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.
+ 
+ Pickup, tracking, drawing, the letters on the screen: more code is running than we can read here. We follow the movement gate because it answers the question our hand just asked.
+ 
+-Read two neighbouring rows. The coordinates give places in world metres. If your loop has more than ten points, its first row may have left the table: the instrument shows the last ten, while the larger count names the whole retained list. The line can hold something its small window is no longer showing.
++Read two neighbouring rows. Each gives three coordinates, in world metres, for a retained position. When the count reaches eleven, the table starts at row 2: it has room to show only the last ten. The drawing still has its beginning. What has left the screen has not yet left the line.
+ 
+ ## Another resolution, another gesture
+ 

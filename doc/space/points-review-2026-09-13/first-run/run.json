@@ -1,0 +1,23 @@
+{
+  "started": "2026-09-13T07:47:07+02:00",
+  "finished": "2026-09-13T07:47:58+02:00",
+  "pid": 2388,
+  "exit": 1,
+  "checks": 82,
+  "failures": [
+    "returning load repeats the original seeded clouds"
+  ],
+  "source_sha256": {
+    "commons/testing/probe_wcn_points_live.gd": "05e1a455e3229a9d4c30f597271aeebd23189c3da988db2f8b0628beef36e40d",
+    "algorithms/randomness/randompoints/randompoints.gd": "68bf72b8c7ae34841de152038e2eb05c5001392c20332a396e82e7d93916768f",
+    "algorithms/randomness/randompoint/randompoint.gd": "2380715a30262da4ed21f1bebfcf9c9b28b5a695bc8afccf3cc14585501daf4a",
+    "commons/maps/Random_Noise_Types/map_data.json": "bbbb3b539768bdffa5ca1c7641a54ff89c44c59b716173b4ea6bfa9b5ec6a22e",
+    "ada_run/points_review_extra.gd": "2160180fc18671d789d9412d64c538999c1b0a553aca093d3b6227861d00bb7f",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot; original probe wording may still say real hand",
+  "headset_verified": false,
+  "heard_by_a_person": false
+}

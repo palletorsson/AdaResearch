@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The diagonal was already there — Ada Research</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f0e7;color:#27313b;font:18px/1.75 Georgia,serif}main{max-width:1320px;margin:auto;padding:48px 36px 72px}.eyebrow,nav,figcaption,.status,summary,footer{font-family:system-ui,sans-serif}.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#90616e}h1{font-size:clamp(34px,5.8vw,64px);font-weight:400;line-height:1.12;letter-spacing:-.025em;max-width:870px;margin:14px 0 24px}h2{font-size:32px;line-height:1.2;font-weight:400}a{color:#87465e;text-underline-offset:4px}.intro{max-width:720px}.intro p{margin:0 0 16px}nav{display:flex;flex-wrap:wrap;gap:12px 26px;font-size:14px;margin:24px 0 32px}figure{margin:28px 0 38px}figure img{display:block;width:100%;height:auto;border:1px solid #d8d1c5}figcaption{font-size:13px;line-height:1.6;color:#6a655f;margin-top:12px;max-width:850px}.status{font-size:14px;padding:18px 22px;border-left:3px solid #cd6b95;background:#ece5dc;max-width:850px}.reading{max-width:760px;margin:66px auto}.reading img{width:calc(100% + 180px);max-width:none;margin:16px -90px}.reading img+em{font-size:14px}.reading a[id]{scroll-margin-top:25px}.reading h2{margin-top:44px;font-size:27px}code{font:14px/1.6 ui-monospace,monospace;overflow-wrap:anywhere;background:#e8e2d7;padding:2px 4px}pre{background:#e8e2d7;padding:22px;overflow:auto;white-space:pre-wrap}pre code{padding:0}.footnote{font-size:14px;border-top:1px solid #cfc7bb;margin-top:35px}sup{font-size:11px}.wide{margin-top:55px;border-top:1px solid #cfc7bb;padding-top:20px}.meta{max-width:830px;font-size:15px}details{margin:32px 0;border-top:1px solid #cfc7bb;padding-top:20px}summary{font-size:15px;cursor:pointer}details pre{font-size:12px}footer{font-size:13px;border-top:1px solid #cfc7bb;padding-top:20px;color:#69655f}@media(max-width:1050px){.reading img{width:100%;margin:12px 0}}@media(max-width:650px){main{padding:28px 18px 48px}body{font-size:17px}.reading{margin:42px auto}nav{gap:12px 20px}h2{font-size:27px}}
+</style></head><body><main>
+<div class="eyebrow">Ada Research / Animated Cube / 23 September 2026</div>
+<h1>The diagonal was already there.</h1>
+<div class="intro"><p>A square seems to be one surface. Pull one corner out of its plane, and a crease appears. The division was already in the cube’s triangle list.</p><p>The chapter already has a good experiment. This pass gives it a common visual reference: a native Godot relief beside the builders, and a capture of that same scene in the book.</p></div>
+<nav><a href="#reading">Read the chapter</a><a href="#museum">Inside the hall</a><a href="figures/cube-hidden-diagonal.png">Full-size figure</a><a href="/compose/sources?map=Point_Animatedcube&amp;doc=final">Read and comment</a><a href="Point_Animatedcube.diff">Exact text addition</a></nav>
+<figure><a href="figures/cube-hidden-diagonal.png"><img src="figures/cube-hidden-diagonal.png" width="2440" height="1280" alt="Two triangle pairs share the amber diagonal 5–7. Moving corner 6 tilts only the triangle that contains it."></a><figcaption>The same four positions and two triples, before and after moving corner 6 out of plane. Dashed lines retain its former edges. Both studies use the same oblique view and shallow depth compression.</figcaption></figure>
+<p class="status">Applied to <strong>final.md</strong>: the illustration and its caption, after the reader’s experiment and the two triangle triples. All earlier sentences, code, footnotes and fourteen artifact placements remain.</p>
+<section class="reading" id="reading"><p>You have been inside boxes since the first room. Now one of them lets you take hold of a corner. What must stay in place for it to remain a cube?</p>
+<p><a id="reading-encounter-cube_lines"></a></p>
+<p>Begin with the outline. Follow the three edges leaving one corner. Look through to the far side. You can recognise a cube before any faces have appeared, although nothing has yet closed the gaps between these lines.</p>
+<p>The previous room gave us forms that could support a foot or interrupt a route. Here we return to their construction. What happens when the parts remain connected but their positions change?</p>
+<p><a id="reading-encounter-animatedcubebuilder"></a></p>
+<p>The builder may have finished before you arrive. Press <strong>REPLAY</strong> on its front instrument. Corners appear, then edges, then triangular patches. Press <strong>PAUSE</strong> at the moment you recognise the shape. How much did you need to see?</p>
+<p>Only this assembly pauses. The folding net and the rest of the room continue. We have borrowed a little attention from a world already running.</p>
+<p>The source has prepared the geometry before this presentation begins. The animation reveals pieces that were hidden. What looks like construction is also an arrangement of when we are allowed to see.</p>
+<p>Resume. Once the assembly finishes, the numbered corner handles become available. Keep the second builder unchanged as a reference. On the one you will alter, find <code>v6</code>. Follow the square face containing <code>v4</code>, <code>v5</code>, <code>v6</code> and <code>v7</code>. Predict what will happen if you pull <code>v6</code> out of that face's plane, leaving its other corners where they are.</p>
+<p>Move it a little. Look along the face. Where did the crease appear?</p>
+<p>Try to locate the seam before pressing <strong>DIAGONALS</strong>. The yellow lines show the six diagonals that divide the cube's square faces into triangle pairs. Your hand has made one of those divisions matter.<sup id="fnref:animatedcube-triangulation"><a class="footnote-ref" href="#fn:animatedcube-triangulation">1</a></sup></p>
+<p>That face is stored as two triples:</p>
+<pre><code class="language-gdscript">[4, 5, 7]
+[5, 6, 7]
+</code></pre>
+<p>Each number names a vertex. Both triples contain <code>5</code> and <code>7</code>: their shared edge. Only the second contains <code>6</code>. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.</p>
+<p><a id="reading-encounter-cube_diagonal_plate"></a></p>
+<p><img alt="The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts." src="/book-review/doc/book/iterations/2026-09-23-cube-hidden-diagonal/figures/cube-hidden-diagonal.png" /></p>
+<p><em>The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.</em></p>
+<p><a id="reading-encounter-animatedcubebuilder-2"></a></p>
+<p>The builder reads a moved handle back into its position list:</p>
+<pre><code class="language-gdscript">vertices[i] = handle_nodes[i].position / cube_size
+</code></pre>
+<p>The edge and triangle lists still refer to the same vertex numbers. The neighbours remain; equal lengths, right angles and flat square faces need not.<sup id="fnref:animatedcube-boundary"><a class="footnote-ref" href="#fn:animatedcube-boundary">2</a></sup> The display measures the largest corner shift in local metres. It cannot tell us what the changed form is worth.</p>
+<p>Release the handle and press <strong>REPLAY</strong>. The layers return around your altered shape. Then try <strong>RESTORE CUBE</strong>. This time the initial corner positions return too. Repeating a presentation and undoing a change are different ways of beginning again.</p>
+<p>Compare the two builders. Name one property your alteration preserved and one it lost. You can keep a crease you like without claiming the result is still a cube.</p>
+<p><a id="reading-encounter-polyhedron_nets_cube"></a></p>
+<p>Further on, watch the net fold. Choose one square and follow it from the flat arrangement into the closed form. Before it folds again, predict which faces will meet.</p>
+<p>Here each square stays rigid. The hinges turn. In the builder, you moved a corner and bent a square into two differently tilted triangles. Similar-looking movement can come from different operations. Knowing which data changes helps you predict what a form can do.</p>
+<p>Now look down at the floor, then along a wall. Find the box form again in the crates. The museum builds its floor slabs and wall blocks from scaled box meshes. The primitive on display has also been carrying us from room to room.</p>
+<p>The initial cube pairs twelve triangle patches into six square faces.<sup id="fnref:animatedcube-counts"><a class="footnote-ref" href="#fn:animatedcube-counts">3</a></sup> The crates add geometry for planks and reinforcing strips. We can recognise the box across these different meshes.</p>
+<p>You can move a corner on the instrument while the museum's boxes support and redirect your body. What we are learning to inspect is also the place from which we inspect it.</p>
+<p>Read the cartons: <strong>A WORLD / WITHOUT / COMPOSITION</strong>. The supply pile and the stamped crate add <strong>YET</strong>.</p>
+<p><em>A world without composition yet.</em> There is already an arrangement around us; the words cannot make it disappear. We can recognise what the museum is made from before we know how to compose another one.</p>
+<p>Take the crease with you: a small movement exposed a decision inside a familiar shape.</p>
+<p>The next room asks what an engine gives us when it supplies another familiar name: a sphere.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:animatedcube-triangulation">
+<p>Godot Engine 4.6, <a href="https://docs.godotengine.org/en/4.6/tutorials/3d/procedural_geometry/arraymesh.html">Using the ArrayMesh</a>, rectangle example: four positions are connected by two triangle triples. This builder submits its patches through <code>SurfaceTool</code> in triangle mode. A flat convex quadrilateral admits either diagonal; moving a corner out of its plane can make that choice visible as a different crease.&#160;<a class="footnote-backref" href="#fnref:animatedcube-triangulation" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:animatedcube-boundary">
+<p><em>Connectivity</em> names which vertices, edges and faces are incident; their positions place that structure in space. Compare the separate point and connectivity properties in Botsch, Sieger, Moeller and Fabri's <a href="https://doc.cgal.org/latest/Surface_mesh/index.html">Surface Mesh manual</a>, CGAL 6.2.1, “Connectivity” and “Properties.” Here the index lists preserve the combinatorial structure, but moving vertices may produce crossings or collapsed faces, so a valid geometric embedding is not guaranteed. The builder's patches also lack enclosing collision geometry; its handles have pickup colliders. See the <a href="/book?map=Point_Animatedcube&amp;section=technical">technical chapter</a>.&#160;<a class="footnote-backref" href="#fnref:animatedcube-boundary" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:animatedcube-counts">
+<p>Euler's <a href="https://scholarlycommons.pacific.edu/euler-works/230/">Elementa doctrinae solidorum</a> (1758) investigates polyhedral counts. For the initial cube, <code>V - E + F = 8 - 12 + 6 = 2</code>. Splitting its squares adds six diagonals and six faces: <code>8 - 18 + 12 = 2</code> again. A proof for the sphere's triangulation appears in Heinz Hopf's <a href="https://pi.math.cornell.edu/~hatcher/Other/hopf-samelson.pdf">Selected Chapters of Geometry</a>, §I.3, from his 1940 lectures reconstructed and translated by Hans Samelson. The equality does not certify cube shape or a valid embedding. The instrument counts twelve patches, excluding reverse rendering copies.&#160;<a class="footnote-backref" href="#fnref:animatedcube-counts" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></section>
+<section class="wide" id="museum"><h2>A reference beside the experiment</h2>
+<figure><img src="cube-diagonal-in-hall.jpg" alt="The shared cube illustration mounted on the museum wall."><figcaption>Actual Godot museum render. The plate faces into the first chamber, its centre at 1.7 metres. The wall, floor and existing exhibits retain their positions.</figcaption></figure>
+<figure><img src="cube-builders-and-plate.jpg" alt="The plate alongside the assembly artifact, its instrument and cartons."><figcaption>The first builder is still assembling in this capture. Its handles, controls and live deformation remain the experiment; the wall relief holds two fixed states for comparison.</figcaption></figure></section>
+<section class="meta"><h2>What this adds</h2><p>The caption follows the attempt to find the crease, so the chapter still gives the reader time to predict and look. The picture then makes the vertex numbers legible as a spatial relation. Replay, restoration, the folding net and <em>A world without composition yet</em> keep their earlier wording.</p><p>The plate is a primary reference inside the existing cube-construction encounter. There are now fifteen placements, including both editable builders. A narrow strip beside the wall excludes automatic decorative sculpture.</p><p>Twenty-five native geometry and capture checks pass. They compare the rendered plate meshes with the builder’s actual position and triangle lists, including the fixed shared edge and changed face normal. The assembled museum capture passes and the images have been inspected. This does not establish headset readability, comfortable reach or learner understanding; those remain open.</p><p><a href="figures/capture-checks.json">Native checks</a> · <a href="figures/provenance.json">Figure provenance</a> · <a href="museum-report.json">Museum capture record</a> · <a href="integration-checks.json">Content preservation checks</a> · <a href="/research/possible-bodies/primitives-purpose.html?map=Point_Animatedcube&amp;view=reading">Paragraph purposes</a></p></section>
+<details><summary>Exact manuscript diff</summary><pre>--- Point_Animatedcube.before.md
++++ Point_Animatedcube/final.md
+@@ -28,6 +28,14 @@
+ ```
+ 
+ Each number names a vertex. Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.
++
++&lt;!-- @cube_diagonal_plate --&gt;
++
++![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-review/doc/book/iterations/2026-09-23-cube-hidden-diagonal/figures/cube-hidden-diagonal.png)
++
++*The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.*
++
++&lt;!-- @animatedcubebuilder --&gt;
+ 
+ The builder reads a moved handle back into its position list:
+ 
+</pre></details>
+<footer>Working reading, 23 September 2026. The canonical chapter is updated; the frozen full-book and audio captures are unchanged. Next: Primitives Ignorance, where the sphere’s smooth appearance meets its finite construction.</footer>
+</main></body></html>

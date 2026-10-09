@@ -1,0 +1,34 @@
+{
+  "pid": 37372,
+  "started": "2026-09-14T06:59:12+02:00",
+  "exit": 0,
+  "checks": 35,
+  "failures": [],
+  "source_sha256": {
+    "commons/artifacts/ca_history_vault/ca_history_vault.gd": "47d2e4a82012aee5bd2204b56e8439f8fa4b008d98ac44215f775bd27b77bf51",
+    "commons/artifacts/ca_history_vault/ca_history_vault.tscn": "91098f23581972b1f5562435354a206100f9110246f2a4e8f304c5282b181174",
+    "commons/artifacts/ca_history_vault/history_model.gd": "675f21a75d1e99ae449bffc2d9095edf5dfafab0d5b22a826b4655b31f30283d",
+    "commons/artifacts/ca_history_vault/workshop.gd": "55a12a1bbcdf2dcc6ebdfea21a3e2303633d2ac4fe81114dbb94be6aa4082942",
+    "commons/artifacts/ca_history_vault/workshop.tscn": "5073b3c6d50528f8f959a561cb0d37c635aa0ec4925cc858b6db02f6aa86de7b",
+    "commons/artifacts/registry/ca_history_vault.json": "3ba9a5ffa13d5e7c277bb83db6c90143cbd4e89e71ab7171a1f8cdd120b8f545",
+    "ada_run/probe_ca_forms.gd": "b3ca3b7e24bb5ec0f6c0f38c4e4300e3bd681b73457674441b3e6471fdf8593d",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/ca-forms-review-2026-09-14/oracle.json": "a78435e885880b481c122254956de9dbae459ce3721b24f8a977c99cda55b470"
+  },
+  "sources_unchanged": true,
+  "museum_and_hand_unchanged": true,
+  "museum_guard_sha256": {
+    "ada_run/em_plan.json": "da21551383f5a39f84c252f1ec3eeebfe650b8142e33e627032a1604118bffa4",
+    "commons/data/museum/em_plan.json": "da21551383f5a39f84c252f1ec3eeebfe650b8142e33e627032a1604118bffa4",
+    "ada_run/necklace_hand.json": "1120b33b4fc6c4837f937ec639267d7531bf036978b12d67505d9db066754d2e",
+    "commons/maps/CA_SoftRules/map_data.json": "6eeea6ca3ca1008ef23874351f126453ca7684fbd271d2ceab23fd2a809e575d",
+    "commons/maps/CA_SoftRules/final.md": "e1a93c05bc84db4fc5bfef8240ff0b5c369181c0cbf31170c15ff4e9ceb82dab"
+  },
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ],
+  "headset_verified": false
+}

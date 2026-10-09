@@ -1,0 +1,164 @@
+{
+  "tower": {
+    "title": "One brick holds the question",
+    "footprint": [
+      10,
+      7,
+      12
+    ],
+    "description": "Pull the bottom rose brick; forty-two upper bricks lose their support."
+  },
+  "gravity": {
+    "title": "The room lets go",
+    "footprint": [
+      22,
+      5,
+      10
+    ],
+    "description": "An entry threshold releases a hinged trapdoor, suspended cargo and a leaning pole."
+  },
+  "mass": {
+    "title": "Same force, different mass",
+    "footprint": [
+      12,
+      4,
+      10
+    ],
+    "description": "Equal-size PointBody spheres: 1, 2 and 4 kg; a matched one-newton pulse."
+  },
+  "trolley": {
+    "title": "Load changes the push",
+    "footprint": [
+      10,
+      4,
+      10
+    ],
+    "description": "Load the cart and pull its hand grip. A low-friction sliding carrier with decorative wheels."
+  },
+  "puzzle": {
+    "title": "Make room for a body",
+    "footprint": [
+      10,
+      4,
+      10
+    ],
+    "description": "Three weighted cubes, staggered walls and destination marks; push and rearrange."
+  },
+  "bowling": {
+    "title": "Ten pins, one commitment",
+    "footprint": [
+      10,
+      5,
+      25
+    ],
+    "description": "Ten compound rigid pins, a black sphere, long lane, bumpers and banked sides."
+  },
+  "recoil": {
+    "title": "The launcher also moves",
+    "footprint": [
+      12,
+      4,
+      10
+    ],
+    "description": "Compare equal opposite impulses on free and braced carts."
+  },
+  "friction": {
+    "title": "The slope does not choose the ending",
+    "footprint": [
+      24,
+      5,
+      16
+    ],
+    "description": "Four slopes compare cube/ball and smooth/rough contact; trajectories leave trails."
+  },
+  "liquids": {
+    "title": "Walk into resistance",
+    "footprint": [
+      24,
+      5,
+      16
+    ],
+    "description": "Three large transparent drag regions slow falling points and the visitor. Approximate drag and buoyancy, not fluid simulation."
+  },
+  "springs": {
+    "title": "Pull one, disturb the row",
+    "footprint": [
+      18,
+      5,
+      12
+    ],
+    "description": "Seven hanging familiar points share restoring springs; pull one and disturb its neighbours."
+  },
+  "swings": {
+    "title": "How long should a disturbance last",
+    "footprint": [
+      24,
+      5,
+      11
+    ],
+    "description": "Three connected swing pairs compare weak, medium and strong damping."
+  },
+  "torque": {
+    "title": "Where you push matters",
+    "footprint": [
+      22,
+      5,
+      10
+    ],
+    "description": "A gate, seesaw and crank retain actual hinges while rose hand grips transmit forces."
+  },
+  "constraints": {
+    "title": "Attachment changes the possible",
+    "footprint": [
+      24,
+      5,
+      11
+    ],
+    "description": "Basket, three-link chain, suspended plank and articulated arm use physical joints."
+  },
+  "magnet": {
+    "title": "The catch must end",
+    "footprint": [
+      14,
+      5,
+      14
+    ],
+    "description": "A large timed magnet attracts twelve prefabs for three seconds. A held point also becomes a trigger-driven gravity gun."
+  },
+  "vortex": {
+    "title": "The field takes a turn",
+    "footprint": [
+      20,
+      5,
+      18
+    ],
+    "description": "Eighteen prefabs move through a visible swirl; the visitor meets the same acceleration field."
+  },
+  "mutual": {
+    "title": "You become another source",
+    "footprint": [
+      20,
+      5,
+      20
+    ],
+    "description": "Five larger orbiting points; the visitor becomes the sixth source. Softened attraction with contact disabled."
+  },
+  "support": {
+    "title": "Move a leg, inherit the load",
+    "footprint": [
+      18,
+      6,
+      16
+    ],
+    "description": "Move an actual table leg beneath a tall uneven load; contacts decide the collapse."
+  },
+  "flight": {
+    "title": "A mat, two points, a way through",
+    "footprint": [
+      14,
+      7,
+      26
+    ],
+    "description": "Two inherited trigger-thrust points carry the visitor and a visual flying mat through four elevated gates."
+  }
+}

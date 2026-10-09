@@ -1,0 +1,37 @@
+{
+  "started": "2026-09-14T12:28:21+02:00",
+  "finished": "2026-09-14T12:28:57+02:00",
+  "pid": 39300,
+  "exit": 0,
+  "checks": 54,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/trees_probe_base.gd": "cc87a69166145fee7f774da2fb784ecb56b4148909b5da25f8c6c016923752ac",
+    "ada_run/trees_acceptance.gd": "e552ffbdbb5f2be12c43d0cae88498c7da2a5a8ec4b89f30a80ef7e32757ea9d",
+    "commons/maps/Fractal_RecursiveTrees/map_data.json": "95f6efd664e92c11e7423fb1a21dce8141778c3d36e7500260e881d336bea9ad",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/trees-review-2026-09-14/review-plan.json": "f716c8cd7ec871400234d8a516d998369841003408de7b24dfc7b58cd9d70b87",
+    "algorithms/fractals/recursivetree/recursive_tree.gd": "2582348dfb3068bb14c725787bb7d8091611c2b3ef44c03717160759452c5086",
+    "algorithms/fractals/recursive_tree/recursive_tree.gd": "6dd8aa587fd8758124a7e6a664f90021dff8dcbb76c27aa5a3bda997608da3de",
+    "commons/artifacts/recursive_tree_lesson/recursive_tree_lesson.gd": "e831b04c7ef3c05497fb0c5c59faa60ff31a725a67cc05bfd905cebeb34b1b9e",
+    "commons/data/trunk_branches.json": "2b11901ef19412028c86e161130db93c11f8957e39dcb4ae027e18432a591567",
+    "commons/data/book/fractals.json": "3819141d4482f6b0bef8af14f53a3137fa0e9872014c9d0aadd1198ab52efaa2",
+    "commons/data/artifact_roles.json": "c2ffa368183316000ce166ab353ddf6a7d705ce1c3aced257f49e7eb78e84bdd",
+    "commons/maps/Fractal_RecursiveTrees/final.md": "173350e90de9a82d762378768a0a7efcd41b7f7fc7c936dca467d7190f0da0fc"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "checks": [
+    {
+      "passed": true,
+      "check": "Thirteen declared halls"
+    },
+    {
+      "passed": true,
+      "check": "Authored route matches sequence"
+    },
+    {
+      "passed": true,
+      "check": "Book pearls for active halls match route"
+    },
+    {
+      "passed": true,
+      "check": "Existing off-route Chamber pearl preserved"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: thirteen halls in order"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: contiguous pearl indices"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: total is thirteen"
+    },
+    {
+      "passed": true,
+      "check": "ada_run/em_plan.json: unrelated plan rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: thirteen halls in order"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: contiguous pearl indices"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: total is thirteen"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum/em_plan.json: unrelated plan rows preserved"
+    },
+    {
+      "passed": true,
+      "check": "Local and shipped plans agree"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/long_museum.json: derived halls match route"
+    },
+    {
+      "passed": true,
+      "check": "commons/data/museum_order_effective.json: derived halls match route"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Introduction: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Introduction: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Introduction: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_LookupTable: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_LookupTable: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_LookupTable: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ShapesGallery: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ShapesGallery: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ShapesGallery: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_TorusGyroid: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_TorusGyroid: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_TorusGyroid: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Sculpting: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Sculpting: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Sculpting: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_FlatTerrain: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_FlatTerrain: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_FlatTerrain: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: original artifact tokens retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: rectangular structure"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: rectangular utilities"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: rectangular interactables"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Caves: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Caves: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Caves: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: original artifact tokens retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: rectangular structure"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: rectangular utilities"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: rectangular interactables"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: original artifact tokens retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: rectangular structure"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: rectangular utilities"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: rectangular interactables"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Metaballs: map byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Metaballs: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Metaballs: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_Metaballs: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: original artifact tokens retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: rectangular structure"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: rectangular utilities"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: rectangular interactables"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_ImplicitModeling: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: prose byte-preserved"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: original artifact tokens retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: rectangular structure"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: rectangular utilities"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: rectangular interactables"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: existing roles retained"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: current text reference"
+    },
+    {
+      "passed": true,
+      "check": "ISO_RhizomeBody: current map reference"
+    },
+    {
+      "passed": true,
+      "check": "iso_portal_console: registered scene exists"
+    },
+    {
+      "passed": true,
+      "check": "ISO_PortalLandscape: helper is secondary"
+    },
+    {
+      "passed": true,
+      "check": "iso_specimen_stage: registered scene exists"
+    },
+    {
+      "passed": true,
+      "check": "ISO_CaveGeneration: helper is secondary"
+    },
+    {
+      "passed": true,
+      "check": "ISO_AnimatedNoise: helper is secondary"
+    },
+    {
+      "passed": true,
+      "check": "Portal runtime report passes"
+    },
+    {
+      "passed": true,
+      "check": "Navigation selection checks pass"
+    },
+    {
+      "passed": true,
+      "check": "All four other restored halls have reports"
+    },
+    {
+      "passed": true,
+      "check": "Restored halls and gallery routes pass"
+    }
+  ],
+  "count": 88,
+  "failures": [],
+  "passed": true
+}

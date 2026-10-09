@@ -1,0 +1,648 @@
+{
+  "date": "2026-10-02",
+  "scope": "Recent artist studies integrated into existing book/museum halls; sequence order preserved.",
+  "studies": [
+    {
+      "id": "hinge_release",
+      "adapter": "hinge",
+      "map": "Trans_Rotation",
+      "sequence": "transformation",
+      "title": "A pose left",
+      "reference": "Lygia Clark",
+      "requires": [
+        "loop",
+        "transform",
+        "trace"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the return speed while keeping the reference pose.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/hinge.tscn",
+      "review": "doc/book/iterations/2026-10-01-clark-a-pose-left/index.html",
+      "placement": {
+        "cell": [
+          19,
+          66
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          60,
+          38,
+          72
+        ]
+      },
+      "capture": "figures/hinge_release.png"
+    },
+    {
+      "id": "reference_passage",
+      "adapter": "passage",
+      "map": "Trans_Scale",
+      "sequence": "transformation",
+      "title": "Who fits through?",
+      "reference": "Mirosław Bałka",
+      "requires": [
+        "coordinates",
+        "transform"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change opening width while keeping the body and opening height.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/passage.tscn",
+      "review": "doc/book/iterations/2026-10-01-five-reference-rooms/index.html",
+      "placement": {
+        "cell": [
+          10,
+          30
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          22,
+          20,
+          38
+        ]
+      },
+      "capture": "figures/reference_passage.png"
+    },
+    {
+      "id": "open_structures",
+      "adapter": "open",
+      "map": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "title": "A rule takes up space",
+      "reference": "Sol LeWitt",
+      "requires": [
+        "line",
+        "coordinates",
+        "transform",
+        "array"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Replace (column + row) % 5 with column; keep all 25 addresses.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/open.tscn",
+      "review": "doc/book/iterations/2026-10-01-lewitt-reading-a-rule/index.html",
+      "placement": {
+        "cell": [
+          10,
+          35
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          25,
+          20,
+          45
+        ]
+      },
+      "capture": "figures/open_structures.png"
+    },
+    {
+      "id": "reference_suspension",
+      "adapter": "suspension",
+      "map": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "title": "A place still held",
+      "reference": "Mona Hatoum",
+      "requires": [
+        "array",
+        "coordinates"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change fragment roughness without changing any of the 75 positions.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/suspension.tscn",
+      "review": "doc/book/iterations/2026-10-01-hatoum-grid-under-load/index.html",
+      "placement": {
+        "cell": [
+          10,
+          56
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          46,
+          20,
+          66
+        ]
+      },
+      "capture": "figures/reference_suspension.png"
+    },
+    {
+      "id": "reference_landscape",
+      "adapter": "landscape",
+      "map": "Color_Context_Placed",
+      "sequence": "color",
+      "title": "A world from a cone",
+      "reference": "Alex McLeod",
+      "requires": [
+        "array",
+        "transform",
+        "colour"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the height factor; keep the 48 sites and three cones per tree.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/landscape.tscn",
+      "review": "doc/book/iterations/2026-10-01-five-reference-rooms/index.html",
+      "placement": {
+        "cell": [
+          11,
+          71
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          61,
+          22,
+          81
+        ]
+      },
+      "capture": "figures/reference_landscape.png"
+    },
+    {
+      "id": "sphere_in_pink",
+      "adapter": "pink",
+      "map": "Color_Flashlight",
+      "sequence": "color",
+      "title": "A sphere in pink",
+      "reference": "Sol LeWitt",
+      "requires": [
+        "point",
+        "colour"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change one lamp state; compare pink light with a pink surface.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/pink.tscn",
+      "review": "doc/book/iterations/2026-10-01-sphere-in-pink/index.html",
+      "placement": {
+        "cell": [
+          21,
+          29
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          20,
+          41,
+          38
+        ]
+      },
+      "capture": "figures/sphere_in_pink.png"
+    },
+    {
+      "id": "colour_assembly",
+      "adapter": "assembly",
+      "map": "Color_Walls",
+      "sequence": "color",
+      "title": "Room to gather",
+      "reference": "Liam Gillick",
+      "requires": [
+        "coordinates",
+        "transform",
+        "array",
+        "colour"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Shift the colour index by one without moving a panel.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/assembly.tscn",
+      "review": "doc/book/iterations/2026-10-02-gillick-room-to-gather/index.html",
+      "placement": {
+        "cell": [
+          18,
+          50
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          39,
+          36,
+          61
+        ]
+      },
+      "capture": "figures/colour_assembly.png"
+    },
+    {
+      "id": "colour_wall_studies",
+      "adapter": "wall",
+      "map": "Color_Walls",
+      "sequence": "color",
+      "title": "Wall relations",
+      "reference": "Liam Gillick",
+      "requires": [
+        "line",
+        "coordinates",
+        "array",
+        "colour"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the pitch of 24 rails without changing their count.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/wall.tscn",
+      "review": "doc/book/iterations/2026-10-02-gillick-wall-relations/index.html",
+      "placement": {
+        "cell": [
+          18,
+          70
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          62,
+          36,
+          78
+        ]
+      },
+      "capture": "figures/colour_wall_studies.png"
+    },
+    {
+      "id": "signal_room",
+      "adapter": "signal",
+      "map": "Random_Entropy",
+      "sequence": "randomness",
+      "title": "Different neighbours",
+      "reference": "Ryoji Ikeda",
+      "requires": [
+        "array",
+        "random"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Shuffle the retained values; compare unchanged counts with changed neighbours.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/signal.tscn",
+      "review": "doc/book/iterations/2026-10-01-signal-room/index.html",
+      "placement": {
+        "cell": [
+          12,
+          48
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          31,
+          24,
+          65
+        ]
+      },
+      "capture": "figures/signal_room.png"
+    },
+    {
+      "id": "reference_pattern_garden",
+      "adapter": "garden",
+      "map": "Shader_05_Patterns",
+      "sequence": "shaders",
+      "title": "The pattern crosses over",
+      "reference": "Claudia Hart",
+      "requires": [
+        "array",
+        "shader"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change pattern phase while retaining every flower position.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/garden.tscn",
+      "review": "doc/book/iterations/2026-10-01-five-reference-rooms/index.html",
+      "placement": {
+        "cell": [
+          10,
+          20
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          10,
+          20,
+          30
+        ]
+      },
+      "capture": "figures/reference_pattern_garden.png"
+    },
+    {
+      "id": "reference_plural_body",
+      "adapter": "body",
+      "map": "Shader_12_PinkExtravaganza",
+      "sequence": "shaders",
+      "title": "A body in the plural",
+      "reference": "Peaches & Pussykrew",
+      "requires": [
+        "transform",
+        "shader"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the unfolding parameter; retain six limbs and three heads.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/body.tscn",
+      "review": "doc/book/iterations/2026-10-01-five-reference-rooms/index.html",
+      "placement": {
+        "cell": [
+          10,
+          26
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          16,
+          20,
+          36
+        ]
+      },
+      "capture": "figures/reference_plural_body.png"
+    },
+    {
+      "id": "conical_sightline",
+      "adapter": "cut",
+      "map": "Boolean_Works",
+      "sequence": "boolean_surfaces",
+      "title": "One cut, three rooms",
+      "reference": "Gordon Matta-Clark",
+      "requires": [
+        "coordinates",
+        "transform",
+        "boolean"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Translate the shared cutter 0.75 metres; keep the three walls.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/cut.tscn",
+      "review": "doc/book/iterations/2026-10-01-matta-clark-one-cut/index.html",
+      "placement": {
+        "cell": [
+          23,
+          67
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          56,
+          36,
+          78
+        ]
+      },
+      "capture": "figures/conical_sightline.png"
+    },
+    {
+      "id": "kapoor_void_studies",
+      "adapter": "void",
+      "map": "Boolean_Works",
+      "sequence": "boolean_surfaces",
+      "title": "The surface that says depth",
+      "reference": "Anish Kapoor",
+      "requires": [
+        "boolean",
+        "shader"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the cavity from unlit black to lit chalk; keep its geometry.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/void.tscn",
+      "review": "doc/book/iterations/2026-10-01-kapoor-surface-and-depth/index.html",
+      "placement": {
+        "cell": [
+          18,
+          89
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          79,
+          36,
+          99
+        ]
+      },
+      "capture": "figures/kapoor_void_studies.png"
+    },
+    {
+      "id": "evidence_network",
+      "adapter": "network",
+      "map": "GT_Network_Analysis",
+      "sequence": "graphtheory",
+      "title": "A relation needs a record",
+      "reference": "Mark Lombardi",
+      "requires": [
+        "graph",
+        "line",
+        "array"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Remove one recorded relation; compare incoming and outgoing counts before moving the layout.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/network.tscn",
+      "review": "doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html",
+      "placement": {
+        "cell": [
+          11,
+          23
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          13,
+          22,
+          33
+        ]
+      },
+      "capture": "figures/evidence_network.png"
+    },
+    {
+      "id": "sentence_authority",
+      "adapter": "sentence",
+      "map": "Crisis_Synthesis",
+      "sequence": "foundationscrisis",
+      "title": "Permission at three scales",
+      "reference": "Jenny Holzer",
+      "requires": [
+        "loop",
+        "array",
+        "inscription",
+        "limit"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change one sentence once; follow the same words across label, strip and wall.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/sentence.tscn",
+      "review": "doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html",
+      "placement": {
+        "cell": [
+          11,
+          34
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          24,
+          22,
+          44
+        ]
+      },
+      "capture": "figures/sentence_authority.png"
+    },
+    {
+      "id": "museum_witnesses",
+      "adapter": "witness",
+      "map": "SpeculativeComputation_Situated_Computation",
+      "sequence": "postfoundationscrisis",
+      "title": "The room arrives late",
+      "reference": "Melanie Gilligan",
+      "requires": [
+        "loop",
+        "trace",
+        "array",
+        "situation"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the delay from three seconds to one; retain the camera and compare the recorded times.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/witness.tscn",
+      "review": "doc/book/iterations/2026-10-02-relations-sentences-and-witnesses/index.html",
+      "placement": {
+        "cell": [
+          11,
+          20
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          10,
+          22,
+          30
+        ]
+      },
+      "capture": "figures/museum_witnesses.png"
+    },
+    {
+      "id": "tension_membrane",
+      "adapter": "tension",
+      "map": "SoftBodies_Cloth_Physics",
+      "sequence": "softbodies",
+      "title": "A little give",
+      "reference": "Senga Nengudi",
+      "requires": [
+        "soft",
+        "constraint",
+        "force"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Change the added load while preserving the four anchors and material compliance.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/tension.tscn",
+      "review": "doc/book/iterations/2026-10-02-nengudi-a-little-give/index.html",
+      "placement": {
+        "cell": [
+          15,
+          57
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          47,
+          29,
+          67
+        ]
+      },
+      "capture": "figures/tension_membrane.png"
+    },
+    {
+      "id": "paired_time",
+      "adapter": "paired_time",
+      "map": "Change_Choreography",
+      "sequence": "forces",
+      "title": "A second together",
+      "reference": "Felix Gonzalez-Torres",
+      "requires": [
+        "loop",
+        "rate",
+        "transform"
+      ],
+      "kind": "application",
+      "new_capability": false,
+      "student_edit": "Halve the rate difference; compare the growing gap with an unchanged phase offset.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/paired_time.tscn",
+      "review": "doc/book/iterations/2026-10-02-gonzalez-torres-a-second-together/index.html",
+      "placement": {
+        "cell": [
+          12,
+          36
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          27,
+          24,
+          45
+        ]
+      },
+      "capture": "figures/paired_time.png"
+    },
+    {
+      "id": "tube_painting",
+      "adapter": "tube",
+      "map": "LSystems_Grammars_And_Curves",
+      "sequence": "lsystems",
+      "title": "A line takes up room",
+      "reference": "Ada / drawing in space",
+      "requires": [
+        "trace",
+        "mesh",
+        "refinement",
+        "rotation",
+        "array",
+        "sweep"
+      ],
+      "kind": "application",
+      "new_capability": true,
+      "student_edit": "Change the middle ring side count from twelve to eight. Keep the path and radius; compare the skin.",
+      "borrow": "Display fabrication, lighting, colliders, main player and pointer controls.",
+      "scene": "res://commons/artifacts/spine_studies/tube.tscn",
+      "review": "doc/book/iterations/2026-10-02-tube-painting-a-line-takes-room/index.html",
+      "placement": {
+        "cell": [
+          11,
+          39
+        ],
+        "rotation": 180,
+        "bay": [
+          0,
+          28,
+          22,
+          50
+        ]
+      },
+      "capture": "figures/tube_painting.png",
+      "introduces": [
+        "sweep"
+      ]
+    }
+  ],
+  "already_installed": [
+    {
+      "id": "boolean_eggs",
+      "map": "Boolean_Works"
+    },
+    {
+      "id": "colour_light_rooms",
+      "map": "Color_Flashlight"
+    }
+  ],
+  "retained_companions": []
+}

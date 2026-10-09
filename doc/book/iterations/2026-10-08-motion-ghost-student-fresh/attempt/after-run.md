@@ -1,0 +1,15 @@
+# After-run account
+
+I did not execute the engine or inspect the checks. I am interpreting the teacher's reported Godot 4.6/Jolt measurements: 43/43 assertions and 21/21 museum-placement checks passed without changes to my submitted files.
+
+The original speeds near 1, 0.5 and 0.25 m/s, the edited third speed of 0.12499996 m/s, and my 3 kg / 3 s transfer speed of 1.0000019 m/s agree with my prior predictions. The mid-pulse restart at 0.5 s produced 1.5 m/s, supporting my reading that another press replaces the remaining time while retaining the body's motion.
+
+The comparison finished with both speeds near 1 m/s. Its saved distances were 1.508 and 1.008 m at 60 Hz, versus my ideal 1.5 and 1 m. The approximately 0.008 m offsets fit the lesson's allowance for a physics-step boundary difference; the 0.5 m distance difference remains. The reported later changes in live distances, while the saved line remains fixed, show why the exercise asks for a snapshot. These reports support equal final speed with unequal distance. They do not give a separate numerical reading at 1 s or a later measured coasting speed, so I cannot independently compare those particular predictions from this summary alone.
+
+The initial 42/43 result was a checker expectation that the entire caption stop changing. My code intentionally retains live measurements alongside one saved pair, as the exercise requests. Correcting the checker to inspect the saved line required no student repair. I would not count that first result as a construction failure.
+
+Holding a point throughout its pulse, then explicitly releasing it with zero velocity after expiry, left it still. That agrees with my conditional prediction: held time is not saved for a later push. It does not resolve arbitrary hand-release behavior. I still need the release state to predict the final motion after catching or throwing a moving point.
+
+The tutorial and reflection do distinct useful work. The tutorial supplies the complete construction, force/mass/duration rule, independent-clock exercise and measurable comparison. The reflection directs attention to what remains after an instruction ends, how a new action meets an existing state, and what a recent trace omits. The repeated-press result supports that first interpretation. These submitted scripts do not test the hall's shortened trace or what a later observer could reconstruct from it; those remain reflective questions rather than measurements established here.
+
+My successful construction is evidence that this packet supported this AI attempt. It is not evidence that a beginner would invent the boolean snapshot guard or calculate piecewise distances unaided. I brought programming fluency and algebra; the packet supplied examples of arrays, displacement, a running boolean and constant-acceleration position, then introduced continuing force and its timed application. I still find the exact integration/readout order unexplained, and “starting position” on repeated presses leaves a small choice: I retained the scene's original positions. Neither ambiguity prevented this fresh-trial comparison, but both matter when extending it.

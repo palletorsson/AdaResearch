@@ -1,0 +1,198 @@
+<!doctype html><meta charset="utf-8"><title>synth_cable.gd</title><style>body{margin:3rem;background:#f5f1e9;color:#202129}pre{white-space:pre-wrap;font:15px/1.7 monospace}</style><h1>synth_cable.gd</h1><pre>extends Node3D
+class_name SynthCable
+
+## A patch cable with two grabbable plugs for VR modular synth
+## Plugs can be grabbed and inserted into SynthJack sockets
+
+signal connection_changed(output_jack: SynthJack, input_jack: SynthJack)
+
+@export var cable_color: Color = Color(0.8, 0.2, 0.2)
+@export var cable_thickness: float = 0.008
+@export var plug_length: float = 0.025
+@export var plug_radius: float = 0.01
+@export var gravity_sag: float = 0.15
+@export var tube_sides: int = 16
+@export var curve_segments: int = 24
+
+var plug_a: SynthCablePlug
+var plug_b: SynthCablePlug
+var cable_mesh: MeshInstance3D
+var flow := 0.0
+var pulse_phase := 0.0
+var pulse: MeshInstance3D
+var path := PackedVector3Array()
+var last_start := Vector3.INF
+var last_end := Vector3.INF
+var mesh_rebuilds := 0
+var curve: Curve3D
+
+# Connection state
+var connected_jack_a: SynthJack = null
+var connected_jack_b: SynthJack = null
+
+
+func _ready():
+	curve = Curve3D.new()
+	_create_plugs()
+	_create_cable_mesh()
+	_update_cable()
+
+
+func _process(delta):
+	_update_cable()
+	pulse.visible = flow &gt; 0.001 and is_fully_connected() and path.size() &gt; 1
+	if pulse.visible:
+		pulse_phase = fposmod(pulse_phase + delta * 0.65,1.0)
+		var t := pulse_phase if connected_jack_a.is_output() else 1.0-pulse_phase
+		var offset := t * (path.size()-1)
+		var index := mini(int(offset),path.size()-2)
+		pulse.position = path[index].lerp(path[index+1],offset-index)
+
+
+
+func _create_plugs():
+	# Create plug A (one end)
+	plug_a = SynthCablePlug.new()
+	plug_a.name = &quot;PlugA&quot;
+	plug_a.plug_color = cable_color
+	plug_a.plug_radius = plug_radius
+	plug_a.plug_length = plug_length
+	plug_a.position = Vector3(-0.15, 0, 0)
+	add_child(plug_a)
+	plug_a.snapped_to_jack.connect(_on_plug_a_snapped)
+	plug_a.unsnapped_from_jack.connect(_on_plug_a_unsnapped)
+	
+	# Create plug B (other end)
+	plug_b = SynthCablePlug.new()
+	plug_b.name = &quot;PlugB&quot;
+	plug_b.plug_color = cable_color
+	plug_b.plug_radius = plug_radius
+	plug_b.plug_length = plug_length
+	plug_b.position = Vector3(0.15, 0, 0)
+	add_child(plug_b)
+	plug_b.snapped_to_jack.connect(_on_plug_b_snapped)
+	plug_b.unsnapped_from_jack.connect(_on_plug_b_unsnapped)
+
+
+func _create_cable_mesh():
+	cable_mesh = MeshInstance3D.new()
+	cable_mesh.name = &quot;CableMesh&quot;
+	add_child(cable_mesh)
+	
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = cable_color
+	mat.metallic = 0.4
+	mat.roughness = 0.55
+	mat.emission_enabled = true
+	mat.emission = cable_color
+	mat.emission_energy_multiplier = 0.1
+	cable_mesh.material_override = mat
+	pulse = MeshInstance3D.new()
+	var bead := SphereMesh.new(); bead.radius = 0.014; bead.height = 0.028; bead.radial_segments = 8; bead.rings = 4
+	pulse.mesh = bead
+	var light := StandardMaterial3D.new(); light.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	light.albedo_color = Color(&quot;fff5ce&quot;); pulse.material_override = light
+	add_child(pulse); pulse.hide()
+
+
+func _update_cable():
+	if not plug_a or not plug_b:
+		return
+	
+	var start_pos = plug_a.get_cable_attachment_point()
+	var end_pos = plug_b.get_cable_attachment_point()
+	
+	# Convert to local space
+	start_pos = to_local(start_pos)
+	end_pos = to_local(end_pos)
+	
+	if start_pos.is_equal_approx(last_start) and end_pos.is_equal_approx(last_end): return
+	last_start = start_pos; last_end = end_pos
+	_generate_cable_mesh(start_pos, end_pos)
+
+
+func _generate_cable_mesh(start: Vector3, end: Vector3):
+	path.clear()
+	for i in range(curve_segments+1):
+		var t := float(i)/curve_segments
+		var point := start.lerp(end,t)
+		point.y -= sin(t*PI)*maxf(0.05,gravity_sag*start.distance_to(end))
+		point.z += sin(t*PI)*0.045
+		path.append(point)
+	var result := preload(&quot;res://commons/primitives/pipes/swept_tube.gd&quot;).build(path,cable_thickness,tube_sides)
+	if not result.is_empty(): cable_mesh.mesh = result.mesh
+	mesh_rebuilds += 1
+
+func _on_plug_a_snapped(jack: SynthJack):
+	connected_jack_a = jack
+	_check_connection()
+
+
+func _on_plug_a_unsnapped(_jack: SynthJack):
+	connected_jack_a = null
+	_check_connection()
+
+
+func _on_plug_b_snapped(jack: SynthJack):
+	connected_jack_b = jack
+	_check_connection()
+
+
+func _on_plug_b_unsnapped(_jack: SynthJack):
+	connected_jack_b = null
+	_check_connection()
+
+
+func _check_connection():
+	# Determine output and input jacks
+	var output_jack: SynthJack = null
+	var input_jack: SynthJack = null
+	
+	if connected_jack_a and connected_jack_a.is_output():
+		output_jack = connected_jack_a
+	elif connected_jack_b and connected_jack_b.is_output():
+		output_jack = connected_jack_b
+	
+	if connected_jack_a and connected_jack_a.is_input():
+		input_jack = connected_jack_a
+	elif connected_jack_b and connected_jack_b.is_input():
+		input_jack = connected_jack_b
+	
+	connection_changed.emit(output_jack, input_jack)
+	
+
+
+## API
+func is_synth_cable() -&gt; bool:
+	return true
+
+
+func get_output_jack() -&gt; SynthJack:
+	if connected_jack_a and connected_jack_a.is_output():
+		return connected_jack_a
+	if connected_jack_b and connected_jack_b.is_output():
+		return connected_jack_b
+	return null
+
+
+func get_input_jack() -&gt; SynthJack:
+	if connected_jack_a and connected_jack_a.is_input():
+		return connected_jack_a
+	if connected_jack_b and connected_jack_b.is_input():
+		return connected_jack_b
+	return null
+
+
+func is_fully_connected() -&gt; bool:
+	return get_output_jack() != null and get_input_jack() != null
+
+
+func set_cable_color(color: Color):
+	cable_color = color
+	if cable_mesh and cable_mesh.material_override:
+		cable_mesh.material_override.albedo_color = color
+	if plug_a:
+		plug_a.set_plug_color(color)
+	if plug_b:
+		plug_b.set_plug_color(color)
+</pre>

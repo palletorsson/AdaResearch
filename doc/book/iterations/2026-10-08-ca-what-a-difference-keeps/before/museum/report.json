@@ -1,0 +1,176 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed paired study found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: paired-volumes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ]
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ]
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ]
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ]
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "key": "self_organization_ca",
+        "local": [
+          9.5,
+          0.0,
+          9.5
+        ]
+      },
+      {
+        "key": "ca_screen",
+        "local": [
+          4.5,
+          1.5,
+          22.5
+        ]
+      },
+      {
+        "key": "disease_spread_ca",
+        "local": [
+          12.5,
+          3.40000009536743,
+          23.5
+        ]
+      },
+      {
+        "key": "volumetric_fog_ca",
+        "local": [
+          4.5,
+          2.0,
+          29.5
+        ]
+      },
+      {
+        "key": "crackpropagation_ca",
+        "local": [
+          12.5,
+          0.899999976158142,
+          29.5
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          9.5,
+          3.51999998092651,
+          3.0
+        ]
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ]
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ]
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          4.75,
+          4.6399998664856,
+          10.2250003814697
+        ]
+      },
+      {
+        "key": "fire_hose_box",
+        "local": [
+          1.27999997138977,
+          0.850000023841858,
+          6.5
+        ]
+      }
+    ],
+    "scope": "Native museum above and inside; player/neighbour halls hidden for capture. No physical headset.",
+    "work_local": [
+      9.5,
+      0.0,
+      9.5
+    ]
+  },
+  "passed": true
+}

@@ -1,0 +1,365 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed paired study found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: paired-volumes",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "Walking study carries the same held point",
+      "passed": true
+    },
+    {
+      "name": "Real body overlap selects section5",
+      "passed": true
+    },
+    {
+      "name": "Walking to section6 hides image but not stored difference",
+      "passed": true
+    },
+    {
+      "name": "Selected frame and floor edge mark follow sameZ",
+      "passed": true
+    },
+    {
+      "name": "Body deadband holds selection near midpoint",
+      "passed": true
+    },
+    {
+      "name": "Held point chooses section5 despite body remaining at6",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: point-reader",
+      "passed": true
+    },
+    {
+      "name": "Hand changes slice without cancelling scheduled plus10",
+      "passed": true
+    },
+    {
+      "name": "Trigger steps once and cancels scheduled run like STEP",
+      "passed": true
+    },
+    {
+      "name": "Installed integer first step removes uniform intervention",
+      "passed": true
+    },
+    {
+      "name": "Release returns section selection to still-present body",
+      "passed": true
+    },
+    {
+      "name": "Leaving reader releases visitor and retains last section",
+      "passed": true
+    },
+    {
+      "name": "Installed STORE resets fractional beginning; next27 peak.75",
+      "passed": true
+    },
+    {
+      "name": "Difference floor and third panel share material and gain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: fractional-first-step",
+      "passed": true
+    },
+    {
+      "name": "Fractional difference spreads while peak fades at20",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: difference-at20",
+      "passed": true
+    },
+    {
+      "name": "Coating and section preserve complete paired state",
+      "passed": true
+    },
+    {
+      "name": "PULL zero resets and preserves its new setting",
+      "passed": true
+    },
+    {
+      "name": "Zero pull and drive keep one whole difference",
+      "passed": true
+    },
+    {
+      "name": "ONE CELL off with DRIVE and scattered seed keeps matched arrays",
+      "passed": true
+    },
+    {
+      "name": "REPLAY preserves parameters and restores matched beginning",
+      "passed": true
+    },
+    {
+      "name": "Plus10 budget advances at most one per eligible frame",
+      "passed": true
+    },
+    {
+      "name": "Scheduled run stops exactly at its requested generation",
+      "passed": true
+    },
+    {
+      "name": "Installed100-update limit prevents extra state change",
+      "passed": true
+    },
+    {
+      "name": "Difference floor remains supported at all witness depths",
+      "passed": true
+    },
+    {
+      "name": "entry_to_console: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "entry_to_console: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "console_to_body_reader: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "console_to_body_reader: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "reader_to_rear: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "reader_to_rear: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "rear_to_exit: capsule clearance",
+      "passed": true
+    },
+    {
+      "name": "rear_to_exit: continuous level floor",
+      "passed": true
+    },
+    {
+      "name": "Entry frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "Exit frame has supported approach",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: printed-study",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "generation20": {
+      "actions": 4,
+      "changed": true,
+      "coating": true,
+      "coupling": 0.25,
+      "different": 1331,
+      "disturbance": 0.0,
+      "gain": 71.377815089131,
+      "integer_storage": false,
+      "max_difference": 0.0140099553166664,
+      "mean_a": 4.0,
+      "mean_b": 4.00076799741698,
+      "mean_difference": 0.000767997416980732,
+      "scattered": false,
+      "slice": 5,
+      "step_usec": 37450,
+      "target": 0,
+      "tick": 20
+    },
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ]
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ]
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ]
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ]
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ]
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "key": "self_organization_ca",
+        "local": [
+          9.5,
+          0.0,
+          9.5
+        ]
+      },
+      {
+        "key": "ca_screen",
+        "local": [
+          4.5,
+          1.5,
+          22.5
+        ]
+      },
+      {
+        "key": "disease_spread_ca",
+        "local": [
+          12.5,
+          3.40000009536743,
+          23.5
+        ]
+      },
+      {
+        "key": "volumetric_fog_ca",
+        "local": [
+          4.5,
+          2.0,
+          29.5
+        ]
+      },
+      {
+        "key": "crackpropagation_ca",
+        "local": [
+          12.5,
+          0.899999976158142,
+          29.5
+        ]
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          9.5,
+          3.51999998092651,
+          3.0
+        ]
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ]
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ]
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          4.75,
+          4.6399998664856,
+          10.2250003814697
+        ]
+      },
+      {
+        "key": "fire_hose_box",
+        "local": [
+          1.27999997138977,
+          0.850000023841858,
+          6.5
+        ]
+      }
+    ],
+    "routes": {
+      "console_to_body_reader": {
+        "blocked": [],
+        "samples": 83,
+        "unsupported": []
+      },
+      "entry_to_console": {
+        "blocked": [],
+        "samples": 50,
+        "unsupported": []
+      },
+      "reader_to_rear": {
+        "blocked": [],
+        "samples": 125,
+        "unsupported": []
+      },
+      "rear_to_exit": {
+        "blocked": [],
+        "samples": 90,
+        "unsupported": []
+      }
+    },
+    "scope": "Native museum above and inside; player/neighbour halls hidden for capture. No physical headset.",
+    "work_local": [
+      9.5,
+      0.0,
+      9.5
+    ]
+  },
+  "passed": true
+}

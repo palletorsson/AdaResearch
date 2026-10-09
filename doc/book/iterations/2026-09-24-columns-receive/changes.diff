@@ -1,0 +1,200 @@
+--- before/algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd
++++ after/algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd
+@@ -856,26 +856,26 @@
+ 		_trio.append(data)
+ 		_rebuild_column(data, data["phase"])
+ 
+-	# the instrument: what both drivers are doing right now, and in what range
++	# Keep the instrument between silhouettes. Reveal explanations after looking.
+ 	var plate_case := Node3D.new()
+ 	plate_case.name = "Readout"
+ 	plate_case.set_meta("em_local_instrument", true)
+-	plate_case.position = Vector3(-0.45, 1.12, 1.60)
+-	plate_case.rotation_degrees = Vector3(-16, 0, 0)
++	plate_case.position = Vector3(-1.10, 1.00, 1.60)
++	plate_case.rotation_degrees = Vector3(-28, 0, 0)
+ 	_stand_root.add_child(plate_case)
+-	plate_case.add_child(HangarKit.box(Vector3.ZERO, Vector3(1.65, 0.42, 0.05), dark))
+-	_stand_root.add_child(HangarKit.box(Vector3(-0.45, 0.52, 1.65), Vector3(0.48, 1.04, 0.34), dark))
++	plate_case.add_child(HangarKit.box(Vector3.ZERO, Vector3(0.92, 0.32, 0.05), dark))
++	_stand_root.add_child(HangarKit.box(Vector3(-1.10, 0.49, 1.55), Vector3(0.24, 0.98, 0.10), dark))
+ 	_readout = Label3D.new()
+ 	_readout.name = "Text"
+-	_readout.pixel_size = 0.0012
+-	_readout.font_size = 22
+-	_readout.line_spacing = 0.5
++	_readout.pixel_size = 0.0015
++	_readout.font_size = 26
++	_readout.line_spacing = 1.0
+ 	_readout.modulate = Color(0.88, 0.94, 1.0)
+ 	_readout.outline_size = 3
+ 	_readout.outline_modulate = Color(0, 0, 0, 1)
+ 	_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+ 	_readout.vertical_alignment = VERTICAL_ALIGNMENT_TOP
+-	_readout.position = Vector3(-0.785, 0.185, 0.029)
++	_readout.position = Vector3(-0.425, 0.137, 0.029)
+ 	plate_case.add_child(_readout)
+ 
+ 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
+@@ -886,11 +886,11 @@
+ 		], true)
+ 		panel.name = "Panel"
+ 		panel.set_meta("em_local_instrument", true)
+-		panel.position = Vector3(0.92, 1.06, 1.62)
++		panel.position = Vector3(1.10, 1.06, 1.62)
+ 		panel.rotation_degrees = Vector3(-26, 0, 0)
+ 		panel.scale = Vector3(1.4, 1.4, 1.4)
+ 		_stand_root.add_child(panel)
+-		_stand_root.add_child(HangarKit.box(Vector3(0.92, 0.48, 1.70), Vector3(0.26, 0.96, 0.24), dark))
++		_stand_root.add_child(HangarKit.box(Vector3(1.10, 0.48, 1.70), Vector3(0.26, 0.96, 0.24), dark))
+ 		var actions := {"Btn_0": func(): toggle_freeze(), "Btn_1": func(): reveal_drivers(), "Btn_2": func(): toggle_spin(), "Btn_3": func(): toggle_marble()}
+ 		for btn_name in actions.keys():
+ 			var btn: Node = panel.find_child(btn_name, true, false)
+@@ -904,8 +904,8 @@
+ 	_update_trio_readout()
+ 
+ 
+-## One column's mesh, rebuilt at a phase, with the cost kept. This is the only
+-## place the trio spends anything, and the readout prints what it spent.
++## Rebuild one shaft at a phase. Runtime state retains the measured rebuild
++## cost; the visitor readout follows the phase used by the displayed mesh.
+ func _rebuild_column(data: Dictionary, phase: float) -> void:
+ 	var shaft: MeshInstance3D = data.get("shaft")
+ 	if shaft == null or not is_instance_valid(shaft):
+@@ -965,14 +965,17 @@
+ 		if str(data.get("driver")) == "periodic": p = float(data["phase"])
+ 		if str(data.get("driver")) == "field": fld = float(data["phase"])
+ 	var lines: PackedStringArray = PackedStringArray()
+-	lines.append("LOCAL t %6.2f s%s · seed %d" % [time, ("  FROZEN" if _frozen else ""), _named_seed])
+-	lines.append("SHAFT %d×%d · mapped top drop 0.00–%.2f m" % [vertical_segments, radial_segments, mapped_drop(1.0)])
+-	lines.append("periodic  phase %.3f → drop %.2f m" % [p, mapped_drop(p)])
+-	lines.append("field     phase %.3f → drop %.2f m" % [fld, mapped_drop(fld)])
+-	lines.append("mesh %.1f ms · ≤%d/s each · veins %s · spin %s" % [
+-		_rebuild_ms, int(TRIO_HZ), ("on" if _marble_on else "off"), ("on" if _spin_on else "off")])
+-	if not _revealed:
+-		lines.append("Watch, then REVEAL. FREEZE holds this local clock.")
++	lines.append("LOCAL t %.2f s%s" % [time, (" · HELD" if _frozen else "")])
++	if _revealed:
++		lines.append("PERIODIC %.3f → −%.2f m" % [p, mapped_drop(p)])
++		lines.append("FIELD    %.3f → −%.2f m" % [fld, mapped_drop(fld)])
++		lines.append("TOP DROP 0–%.2f m · ≤%d/s" % [mapped_drop(1.0), int(TRIO_HZ)])
++		lines.append("seed %d · veins %s · spin %s" % [_named_seed, ("on" if _marble_on else "off"), ("on" if _spin_on else "off")])
++	else:
++		lines.append("Watch a shape return.")
++		lines.append("FREEZE holds this clock.")
++		lines.append("SPIN turns. MARBLE changes the skin.")
++		lines.append("REVEAL names the three drivers.")
+ 	_readout.text = "\n".join(lines)
+ 
+ 
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -620,7 +620,7 @@
+         "derived_at": "2026-04-29T09:39:46.246444Z",
+         "derived_from": "aabb_size + category"
+       },
+-      "qfep_connection": "Bernini's columns dissolving under noise-driven vertex displacement: the baroque — history's most deliberate style — surrendered to structured chance. The primitive of the chapter played as elegy: noise does not destroy the form, it *remembers* it while letting it go, coherence draining out neighbor by neighbor.",
++      "qfep_connection": "A held, periodic or coherent-field value enters the same shaft recipe. The body is already shaped before the varying input arrives. FREEZE, SPIN and MARBLE separate local time, whole-body transform and surface appearance; these display columns imply support but do not simulate it.",
+       "interactions": [
+         "Observe the trio before REVEAL",
+         "FREEZE holds the local column clock, including base/capital shader inputs",
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -1198,16 +1198,18 @@
+     },
+     "Noise_Columns": {
+       "primary_tokens": [
+-        "MeltingBerniniScene"
+-      ],
+-      "reason": "What remains recognisable while a column changes shape?",
++        "MeltingBerniniScene",
++        "dark_sphere",
++        "synthesis_stand"
++      ],
++      "reason": "Compare a driver entering a shaft, a surface and a constructed family. Preserve the three authored encounters; no general promotion of dark spheres.",
+       "status": "source_checked_draft",
+       "sequence": "noise",
+       "text_path": "commons/maps/Noise_Columns/final.md",
+-      "text_sha256": "57cfa534fde3c3c3842de491bbc2ad34c2e72718f189470daa6194123e0b4c88",
++      "text_sha256": "bd4aa871b061a55310f98ee014f9cc80b9c7d1b7466ee728ad8937e0403a9ce2",
+       "map_sha256": "06b174a5ef314896bf53620930252de9b58544b4e1faaa384866aae6c230ce1f",
+       "learner_verified": false,
+-      "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Noise_Columns/DECISIONS.md"
++      "local_review": "doc/book/iterations/2026-09-24-columns-receive/index.html"
+     },
+     "Noise_One": {
+       "primary_tokens": [
+--- before/commons/maps/Noise_Columns/final.md
++++ after/commons/maps/Noise_Columns/final.md
+@@ -1,10 +1,12 @@
+ # What keeps a body changing?
+ 
+-Can you tell how a body changes just by looking at its strange shape?
++Behind us, a number found a height in a wall. An opening moved, and the view changed. Here the number meets a body that already has folds, a foot, a capital. Can you tell how it changes just by looking at its strange shape?
+ 
+ <!-- @MeltingBerniniScene -->
+ 
+-Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. Stand where you can see all three at once and watch for a while before you press anything.
++Three marble columns stand in the east half of the room. Their shafts come from the same recipe, at the same resolution. The plates at their feet say nothing yet. The little instrument between the silhouettes offers ways to look; it leaves the names until you ask. Stand where you can see all three at once and watch for a while before you press anything.
++
++![Three columns inside the museum, viewed from the standing approach before their drivers are revealed.](/book-review/doc/book/figures/Noise_Columns/three-columns.png)
+ 
+ One silhouette holds. The other two rise and sink. There may be a familiar movement among them, something the wave halls have already taught your body to expect. Choose one to follow. When it comes back, keep watching. Does the return arrive after the same interval?
+ 
+@@ -33,7 +35,7 @@
+ 
+ Both drivers hand the shaft one number between zero and one. The code calls it a phase. For the sine, it is a remapped output rather than the angle inside `sin`. For the field, it is a sample remapped and bounded to the same range. The shared name makes the numbers interchangeable at the next operation, while their histories remain different.
+ 
+-In the previous hall, each bar received its own draw. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
++The walls behind us gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.
+ 
+ ```gdscript
+ var melt_factor = pow(v, 0.5) * melt_strength * melt_phase
+--- before/commons/maps/Noise_Columns/technical.md
++++ after/commons/maps/Noise_Columns/technical.md
+@@ -29,7 +29,7 @@
+ 
+ ## Two existing dark-sphere bodies
+ 
+-The standalone orb retains its witness/orb settings. Its own `_time_elapsed` advances independently of the trio, driving rotation, a small angular wobble, emission and albedo pulses, a widening kin ring, and halo opacity. The sine drives appearance; it does not deform sphere vertices. In this hall `_gest_stage()` is empty, so the book promises no catalyst hatching interaction.
++The standalone orb retains its witness/orb settings. Its own `_time_elapsed` advances independently of the trio, driving rotation, a small angular wobble, emission and albedo pulses, and the opacity of a fixed-radius shadow disc. The sine drives appearance; it does not deform sphere vertices. In this hall `_gest_stage()` is empty, so the book promises no catalyst hatching interaction.
+ 
+ The synthesis stand reads the saved dark_sphere verdict: presence=hush, body=swarm. It sets both exports before adding the scene to the tree. The swarm constructor creates six small orbs, with alternating heights, inside a rotating parent. There is no neighbour sensing or agent steering here. The saved score is selection metadata; it is not an objective measure of artistic worth.
+ 
+@@ -38,3 +38,9 @@
+ ## Evidence and limits
+ 
+ See `doc/space/columns-review-2026-09-13/README.md` for the accepted run, failed first run, captures, source hashes, pointer checks, full vertex-array comparison and passage check. The online review plots values sampled from the actual Godot driver functions. Its slider is a browser review tool, not an invented in-game control. Headset reach, comfort and Quest performance remain deferred.
++
++## Instrument and reveal, 24 September 2026
++
++The 0.92 × 0.32 m tilted readout sits between the left and middle shafts (local x −1.10 m, y 1.00 m). The four existing controls remain, with the panel at local x +1.10 m. Driver names and values now wait for REVEAL in the readout as well as the foot plates; hiding REVEAL removes them again. Local time remains visible. Revealed values come from the displayed meshes, and the top-drop range and 12/s rebuild ceiling remain visible. Runtime cost and resolution remain available through trio_state(); they are not extra visitor controls.
++
++The three driver functions, mesh recipe, shader materials and existing local-clock behaviour are unchanged. New native comparison and source-preservation evidence: `doc/book/iterations/2026-09-24-columns-receive/`. Desktop pointer and sampled routes are distinct from a headset test.
+--- before/commons/maps/sequences/noise.json
++++ after/commons/maps/sequences/noise.json
+@@ -27,7 +27,7 @@
+       ],
+       "content": [
+         "Random_Noise_Types: White Noise vs Blue Noise",
+-        "Noise_Columns: Noise Extruded to Terrain",
++        "Noise_Columns: What keeps a body changing?",
+         "Noise_One: Coherent Noise Fundamentals",
+         "Noise_Voxel: Noise Carved into Blocks",
+         "Noise_6_Wall: Fractal Octave Layering",
+@@ -92,10 +92,12 @@
+           "map": "Noise_Columns",
+           "position": "intro",
+           "artifacts": [
+-            "dark_sphere"
++            "MeltingBerniniScene",
++            "dark_sphere",
++            "synthesis_stand"
+           ],
+-          "size_budget": "compact_only",
+-          "rationale": "3D Perlin noise as erosion sculptor on classical columns; visual intro to coherent noise"
++          "size_budget": "mixed",
++          "rationale": "Three column drivers enter one form; a separately pulsing orb and its six-part relative extend the comparison to appearance, independent time and construction."
+         },
+         {
+           "map": "Noise_One",

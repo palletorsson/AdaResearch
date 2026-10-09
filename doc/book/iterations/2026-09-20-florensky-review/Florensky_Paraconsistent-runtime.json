@@ -1,0 +1,1397 @@
+{
+	"artifacts": [
+		{
+			"bounds_position": [
+				5.97000026702881,
+				0.850000023841858,
+				-3.52999997138977
+			],
+			"bounds_size": [
+				3.05999946594238,
+				1.69999992847443,
+				0.0784997940063477
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:window"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.5,
+				1.70000004768372,
+				-2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:view"
+		},
+		{
+			"bounds_position": [
+				10.3799991607666,
+				1.17000007629395,
+				-3.11999988555908
+			],
+			"bounds_size": [
+				1.2400016784668,
+				0.859999895095825,
+				0.214499711990356
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.65499997138977,
+						-2.92700004577637
+					],
+					"text": "42"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.48500001430511,
+						-2.92700004577637
+					],
+					"text": "Frames"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						10.4899997711182,
+						1.41499996185303,
+						-2.92700004577637
+					],
+					"text": "> _"
+				},
+				{
+					"parent": "Console",
+					"position": [
+						11.0,
+						1.33249998092651,
+						-2.90400004386902
+					],
+					"text": "C O U N T E R"
+				}
+			],
+			"position": [
+				11.0,
+				1.60000002384186,
+				-2.94000005722046
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:counter"
+		},
+		{
+			"bounds_position": [
+				1.02999997138977,
+				0.0,
+				-1.48639512062073
+			],
+			"bounds_size": [
+				0.186500072479248,
+				0.826871156692505,
+				0.230121254920959
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.13999998569489,
+				0.0,
+				-1.40000009536743
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:extinguisher"
+		},
+		{
+			"bounds_position": [
+				15.7349996566772,
+				0.0,
+				-2.74000000953674
+			],
+			"bounds_size": [
+				0.409998893737793,
+				2.38540005683899,
+				1.88000011444092
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.9399995803833,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				-90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:elevator"
+		},
+		{
+			"bounds_position": [
+				14.3993759155273,
+				0.0,
+				-2.38108921051025
+			],
+			"bounds_size": [
+				1.40124893188477,
+				1.14800000190735,
+				1.16217851638794
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				15.1000003814697,
+				0.0,
+				-1.79999995231628
+			],
+			"rotation": [
+				0.0,
+				19.9999980926514,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:pallet"
+		},
+		{
+			"bounds_position": [
+				-0.508000016212463,
+				-0.808000028133392,
+				-4.50799989700317
+			],
+			"bounds_size": [
+				1.01600003242493,
+				1.01600003242493,
+				1.01599979400635
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "CubeLines",
+					"position": [
+						0.0,
+						0.399999976158142,
+						-4.0
+					],
+					"text": "Cube (1m³)"
+				}
+			],
+			"position": [
+				0.0,
+				0.0,
+				-4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "lobby:point_zero"
+		},
+		{
+			"bounds_position": [
+				4.25999975204468,
+				0.0,
+				3.65000009536743
+			],
+			"bounds_size": [
+				3.19800043106079,
+				2.49199986457825,
+				2.54444456100464
+			],
+			"cell": [
+				6,
+				4
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "ReportOpen/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						5.15000009536743,
+						1.0,
+						3.69600033760071
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ReportOpen/HandPoseArea/CollisionShape3D",
+					"position": [
+						5.15000009536743,
+						1.0,
+						3.69600033760071
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ReportClosed/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.84999990463257,
+						1.0,
+						3.69600033760071
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ReportClosed/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.84999990463257,
+						1.0,
+						3.69600033760071
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ClearReports/InteractableAreaButton/CollisionShape3D",
+					"position": [
+						4.54999971389771,
+						1.0,
+						3.69600033760071
+					]
+				},
+				{
+					"disabled": false,
+					"path": "ClearReports/HandPoseArea/CollisionShape3D",
+					"position": [
+						4.54999971389771,
+						1.0,
+						3.69600033760071
+					]
+				}
+			],
+			"labels": [
+				{
+					"parent": "BothTrueGate",
+					"position": [
+						6.5,
+						2.65199995040894,
+						4.5
+					],
+					"text": "ONE DOOR / TWO REPORTS"
+				},
+				{
+					"parent": "BothTrueGate",
+					"position": [
+						6.5,
+						2.48200011253357,
+						4.40000009536743
+					],
+					"text": "Ghost leaves. The passage stays open."
+				},
+				{
+					"parent": "BothTrueGate",
+					"position": [
+						4.84999990463257,
+						1.48000001907349,
+						3.90000009536743
+					],
+					"text": "BOTH REPORTS\nP: door open = ON\nnot-P: door closed = ON\nQ: alarm triggered = NO SUPPORT"
+				},
+				{
+					"parent": "BothTrueGate",
+					"position": [
+						5.15000009536743,
+						1.12000000476837,
+						3.72000026702881
+					],
+					"text": "P: OPEN"
+				},
+				{
+					"parent": "BothTrueGate",
+					"position": [
+						4.84999990463257,
+						1.12000000476837,
+						3.72000026702881
+					],
+					"text": "not-P: CLOSED"
+				},
+				{
+					"parent": "BothTrueGate",
+					"position": [
+						4.54999971389771,
+						1.12000000476837,
+						3.72000026702881
+					],
+					"text": "CLEAR"
+				}
+			],
+			"position": [
+				6.5,
+				0.0,
+				4.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "both_true_gate"
+		},
+		{
+			"bounds_position": [
+				5.72639989852905,
+				0.776399970054626,
+				8.09200096130371
+			],
+			"bounds_size": [
+				1.54720020294189,
+				1.16489994525909,
+				0.706719398498535
+			],
+			"cell": [
+				6,
+				8
+			],
+			"detectors": [
+				{
+					"disabled": false,
+					"path": "InteractableArea/@CollisionShape3D@515",
+					"position": [
+						6.5,
+						1.29999995231628,
+						8.5
+					]
+				}
+			],
+			"labels": [],
+			"position": [
+				6.5,
+				1.29999995231628,
+				8.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "florensky_sphere"
+		},
+		{
+			"bounds_position": [
+				3.170090675354,
+				0.799999952316284,
+				11.8608932495117
+			],
+			"bounds_size": [
+				0.659818649291992,
+				0.653760552406311,
+				0.738993644714355
+			],
+			"cell": [
+				3,
+				12
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Body",
+					"position": [
+						3.75,
+						1.04999995231628,
+						12.5
+					],
+					"text": "|0⟩"
+				},
+				{
+					"parent": "Body",
+					"position": [
+						3.25,
+						1.04999995231628,
+						12.5
+					],
+					"text": "|1⟩"
+				},
+				{
+					"parent": "Body",
+					"position": [
+						3.5,
+						0.649999976158142,
+						12.5
+					],
+					"text": "SUPERPOSITION — VISUAL TOY\n|ψ⟩ = α|0⟩ + β|1⟩\n\nOpacity is not a quantum amplitude.\nThis display performs no measurement."
+				},
+				{
+					"parent": "SUPERPOSITION",
+					"position": [
+						3.5,
+						1.44240415096283,
+						11.9175539016724
+					],
+					"text": "SUPERPOSITION"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						3.5,
+						1.42230999469757,
+						11.8925580978394
+					],
+					"text": "0.5"
+				},
+				{
+					"parent": "Frame",
+					"position": [
+						3.5,
+						1.38836181163788,
+						11.8729581832886
+					],
+					"text": "Speed"
+				}
+			],
+			"position": [
+				3.5,
+				0.899999976158142,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "superposition_display"
+		},
+		{
+			"bounds_position": [
+				9.28999996185303,
+				0.850000023841858,
+				12.3424997329712
+			],
+			"bounds_size": [
+				0.420000076293945,
+				0.319999933242798,
+				0.315000534057617
+			],
+			"cell": [
+				9,
+				12
+			],
+			"detectors": [],
+			"labels": [
+				{
+					"parent": "Body",
+					"position": [
+						9.5,
+						0.75,
+						12.5
+					],
+					"text": "SCHRÖDINGER'S BOX — SCRIPTED TOY\nDesktop click: random outcome\nNot a quantum simulation"
+				},
+				{
+					"parent": "Body",
+					"position": [
+						9.5,
+						1.25,
+						12.5
+					],
+					"text": "|ψ⟩ = α|alive⟩ + β|dead⟩"
+				}
+			],
+			"position": [
+				9.5,
+				1.0,
+				12.5
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "schrodinger_box"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				17.0090007781982
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.0,
+				1.58000004291534,
+				17.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				2.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				10.9910001754761,
+				1.58000004291534,
+				18.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				2.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.00899982452393,
+				1.58000004291534,
+				17.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				7.99100017547607,
+				1.58000004291534,
+				16.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				4.0,
+				1.58000004291534,
+				1.00899982452393
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.00899994373322,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				11.9910001754761,
+				1.58000004291534,
+				4.0
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"bounds_size": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				9.0,
+				1.58000004291534,
+				14.9909992218018
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "showing"
+		},
+		{
+			"bounds_position": [
+				6.27500009536743,
+				3.4300000667572,
+				-1.08299994468689
+			],
+			"bounds_size": [
+				0.449999809265137,
+				0.179999828338623,
+				0.062999963760376
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				6.5,
+				3.51999998092651,
+				-1.0
+			],
+			"rotation": [
+				0.0,
+				180.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "exit_sign"
+		},
+		{
+			"bounds_position": [
+				1.00499999523163,
+				2.05920004844666,
+				-3.69079995155334
+			],
+			"bounds_size": [
+				0.0299999713897705,
+				0.381599903106689,
+				0.381599903106689
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.01999998092651,
+				2.25,
+				-3.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "wall_clock"
+		},
+		{
+			"bounds_position": [
+				0.999999940395355,
+				1.11539852619171,
+				-2.78460168838501
+			],
+			"bounds_size": [
+				0.11000007390976,
+				0.709601521492004,
+				0.509601593017578
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				1.0,
+				1.5,
+				-2.5
+			],
+			"rotation": [
+				0.0,
+				90.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "electrical_panel"
+		},
+		{
+			"bounds_position": [
+				3.22499990463257,
+				4.62799978256226,
+				6.00000047683716
+			],
+			"bounds_size": [
+				0.950000286102295,
+				0.0920000076293945,
+				0.449999809265137
+			],
+			"cell": [],
+			"detectors": [],
+			"labels": [],
+			"position": [
+				3.70000004768372,
+				4.6399998664856,
+				6.22500038146973
+			],
+			"rotation": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scale": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"token": "ceiling_vent"
+		}
+	],
+	"capture_note": "Collision-test walker hidden for photographs; museum artifacts unchanged.",
+	"captured_states": [
+		{
+			"caption": "BOTH REPORTS\nP: door open = ON\nnot-P: door closed = ON\nQ: alarm triggered = NO SUPPORT",
+			"reports": {
+				"P": true,
+				"Q": false,
+				"not_P": true
+			},
+			"shot": "florensky-both"
+		},
+		{
+			"caption": "OPEN REPORT\nP: door open = ON\nnot-P: door closed = OFF\nQ: alarm triggered = NO SUPPORT",
+			"reports": {
+				"P": true,
+				"Q": false,
+				"not_P": false
+			},
+			"shot": "florensky-open"
+		},
+		{
+			"caption": "BOTH REPORTS\nP: door open = ON\nnot-P: door closed = ON\nQ: alarm triggered = NO SUPPORT",
+			"reports": {
+				"P": true,
+				"Q": false,
+				"not_P": true
+			},
+			"shot": "florensky-console"
+		}
+	],
+	"checks": [
+		{
+			"message": "Museum token enables the report controls",
+			"ok": true
+		},
+		{
+			"message": "Initial conflicting reports supply no Q",
+			"ok": true
+		},
+		{
+			"message": "Physical button signals select [false, false]",
+			"ok": true
+		},
+		{
+			"message": "Q has no support in [false, false]",
+			"ok": true
+		},
+		{
+			"message": "Ghost leaves follow reports [false, false]",
+			"ok": true
+		},
+		{
+			"message": "Physical button signals select [true, false]",
+			"ok": true
+		},
+		{
+			"message": "Q has no support in [true, false]",
+			"ok": true
+		},
+		{
+			"message": "Ghost leaves follow reports [true, false]",
+			"ok": true
+		},
+		{
+			"message": "Physical button signals select [true, true]",
+			"ok": true
+		},
+		{
+			"message": "Q has no support in [true, true]",
+			"ok": true
+		},
+		{
+			"message": "Ghost leaves follow reports [true, true]",
+			"ok": true
+		},
+		{
+			"message": "Physical button signals select [false, true]",
+			"ok": true
+		},
+		{
+			"message": "Q has no support in [false, true]",
+			"ok": true
+		},
+		{
+			"message": "Ghost leaves follow reports [false, true]",
+			"ok": true
+		},
+		{
+			"message": "Only two jambs and lintel supply frame collision",
+			"ok": true
+		},
+		{
+			"message": "Reports do not obstruct the body",
+			"ok": true
+		},
+		{
+			"message": "Opening is 1.716 m wide and 2.392 m high",
+			"ok": true
+		},
+		{
+			"message": "Configuration rebuild preserves external children",
+			"ok": true
+		},
+		{
+			"message": "Rebuilt controls remain connected",
+			"ok": true
+		},
+		{
+			"message": "Museum token holds both sphere readings",
+			"ok": true
+		},
+		{
+			"message": "Observation and cycle cannot collapse the held study",
+			"ok": true
+		},
+		{
+			"message": "Sphere label does not alternate BOTH and NEITHER",
+			"ok": true
+		},
+		{
+			"message": "Sphere renders both faces of the mesh",
+			"ok": true
+		},
+		{
+			"message": "Both secondary quantum comparisons retained",
+			"ok": true
+		}
+	],
+	"collections": [],
+	"failures": [],
+	"origin": [
+		0.0,
+		0.0,
+		0.0
+	],
+	"passed": true,
+	"rays": [],
+	"required_present": true,
+	"room": "Florensky_Paraconsistent",
+	"scope": "Actual museum geometry and controlled CharacterBody locomotion with museum input/catch logic paused; no continuous gameplay, headset or learner acceptance.",
+	"shots": [
+		"res://ada_run/encounter_pilot/Florensky_Paraconsistent/florensky-both.png",
+		"res://ada_run/encounter_pilot/Florensky_Paraconsistent/florensky-open.png",
+		"res://ada_run/encounter_pilot/Florensky_Paraconsistent/florensky-console.png",
+		"res://ada_run/encounter_pilot/Florensky_Paraconsistent/florensky-sphere.png",
+		"res://ada_run/encounter_pilot/Florensky_Paraconsistent/florensky-comparisons.png"
+	],
+	"walker": {
+		"groups": [
+			"em_walker"
+		],
+		"layer": 1,
+		"mask": 1,
+		"name": "Walker"
+	},
+	"walks": [
+		{
+			"end": [
+				6.5,
+				0.000822271918877959,
+				5.93332958221436
+			],
+			"passed": true,
+			"tag": "through threshold with both reports",
+			"target": [
+				6.5,
+				0.1,
+				6.0
+			]
+		},
+		{
+			"end": [
+				6.5,
+				0.000170901417732239,
+				5.93332958221436
+			],
+			"passed": true,
+			"tag": "through threshold with closed report",
+			"target": [
+				6.5,
+				0.1,
+				6.0
+			]
+		},
+		{
+			"end": [
+				4.84999990463257,
+				0.000170901417732239,
+				2.93333196640015
+			],
+			"passed": true,
+			"tag": "console approach",
+			"target": [
+				4.85,
+				0.1,
+				3.0
+			]
+		},
+		{
+			"end": [
+				5.19999980926514,
+				0.000170901417732239,
+				13.433403968811
+			],
+			"passed": true,
+			"tag": "aisle beside sphere",
+			"target": [
+				5.2,
+				0.1,
+				13.5
+			]
+		},
+		{
+			"end": [
+				9.43334770202637,
+				0.000170901417732239,
+				11.1999998092651
+			],
+			"passed": true,
+			"tag": "rear comparisons",
+			"target": [
+				9.5,
+				0.1,
+				11.2
+			]
+		},
+		{
+			"end": [
+				6.5,
+				0.00006103515625,
+				15.4333724975586
+			],
+			"passed": true,
+			"tag": "exit approach",
+			"target": [
+				6.5,
+				0.1,
+				15.5
+			]
+		}
+	]
+}

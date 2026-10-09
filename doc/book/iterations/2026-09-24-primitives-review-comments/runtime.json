@@ -1,0 +1,86 @@
+{
+  "checks": [
+    {
+      "check": "triangle_line_puzzle: reproduced old bool/yaw misparse",
+      "passed": true
+    },
+    {
+      "check": "triangle_line_puzzle: discovery stays a configuration value",
+      "passed": true
+    },
+    {
+      "check": "triangle_line_puzzle: authored yaw retained",
+      "passed": true
+    },
+    {
+      "check": "triangle_line_puzzle: actual panel missing before fix",
+      "passed": true
+    },
+    {
+      "check": "triangle_line_puzzle: actual panel created after fix",
+      "passed": true
+    },
+    {
+      "check": "draw_triangle_faces: reproduced old bool/yaw misparse",
+      "passed": true
+    },
+    {
+      "check": "draw_triangle_faces: discovery stays a configuration value",
+      "passed": true
+    },
+    {
+      "check": "draw_triangle_faces: authored yaw retained",
+      "passed": true
+    },
+    {
+      "check": "draw_triangle_faces: actual panel missing before fix",
+      "passed": true
+    },
+    {
+      "check": "draw_triangle_faces: actual panel created after fix",
+      "passed": true
+    },
+    {
+      "check": "discovery off retains authored yaw",
+      "passed": true
+    },
+    {
+      "check": "tutorial shorthand unchanged",
+      "passed": true
+    },
+    {
+      "check": "other numeric configuration unchanged",
+      "passed": true
+    },
+    {
+      "check": "quad: off-diagonal corner changes one triangle",
+      "passed": true
+    },
+    {
+      "check": "quad: shared-diagonal corner changes both triangles",
+      "passed": true
+    },
+    {
+      "check": "portal track: old rail crosses real panel",
+      "passed": true
+    },
+    {
+      "check": "portal track: new rail clears real panel",
+      "passed": true
+    },
+    {
+      "check": "new track spans seven authored floor cells inside hall",
+      "passed": true
+    },
+    {
+      "check": "relocated Achilles retains NEXT STEP",
+      "passed": true
+    },
+    {
+      "check": "relocated Achilles retains its own control",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Production grid parsing and configuration of actual Triangle map tokens, then instantiated artifacts; actual quad mesh updates and real portal-panel intersection at before/after source-map positions. Not a full room walkthrough or headset test."
+}

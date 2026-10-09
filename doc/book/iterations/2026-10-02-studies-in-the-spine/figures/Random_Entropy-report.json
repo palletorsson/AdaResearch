@@ -1,0 +1,63 @@
+{
+  "checks": [
+    {
+      "name": "Random_Entropy assembled",
+      "passed": true
+    },
+    {
+      "name": "all authored stations spawned",
+      "passed": true
+    },
+    {
+      "name": "signal full size",
+      "passed": true
+    },
+    {
+      "name": "signal visible",
+      "passed": true
+    },
+    {
+      "name": "signal controls outside occupied zone",
+      "passed": true
+    },
+    {
+      "name": "permutation preserves counts",
+      "passed": true
+    },
+    {
+      "name": "row offset advanced",
+      "passed": true
+    },
+    {
+      "name": "signal bypass floor -9.0",
+      "passed": true
+    },
+    {
+      "name": "signal bypass floor 9.0",
+      "passed": true
+    },
+    {
+      "name": "signal_room standing clearance along side 2",
+      "passed": true
+    },
+    {
+      "name": "signal_room support along side 2",
+      "passed": true
+    },
+    {
+      "name": "signal_room standing clearance along side 22",
+      "passed": true
+    },
+    {
+      "name": "signal_room support along side 22",
+      "passed": true
+    },
+    {
+      "name": "signal_room capture",
+      "passed": true
+    }
+  ],
+  "map": "Random_Entropy",
+  "passed": true,
+  "scope": "Actual endless_museum assembly, pointer-event dispatch and floor rays. No physical headset or full human traversal test."
+}

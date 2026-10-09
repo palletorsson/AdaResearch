@@ -1,0 +1,134 @@
+{
+  "shots": [
+    {
+      "tag": "room",
+      "from": [
+        10.8,
+        3.6,
+        10.8
+      ],
+      "look_at": [
+        6.5,
+        1.6,
+        19
+      ],
+      "fov": 78
+    },
+    {
+      "tag": "along",
+      "from": [
+        8.15,
+        1.7,
+        13.5
+      ],
+      "look_at": [
+        7.9,
+        1.5,
+        23.3
+      ],
+      "fov": 78
+    }
+  ],
+  "rays": [
+    {
+      "tag": "new approach floor",
+      "x": 8.15,
+      "z": 12.4,
+      "top": 0,
+      "tolerance": 0.2
+    },
+    {
+      "tag": "rear floor",
+      "x": 8.15,
+      "z": 24,
+      "top": 0,
+      "tolerance": 0.2
+    }
+  ],
+  "walks": [
+    {
+      "tag": "aisle between white and brown",
+      "from": [
+        8.15,
+        0.1,
+        13
+      ],
+      "to": [
+        8.15,
+        0.1,
+        24
+      ],
+      "seconds": 7
+    },
+    {
+      "tag": "aisle between brown and pink",
+      "from": [
+        4.85,
+        0.1,
+        13
+      ],
+      "to": [
+        4.85,
+        0.1,
+        24
+      ],
+      "seconds": 7
+    },
+    {
+      "tag": "east gallery bypass",
+      "from": [
+        11.4,
+        0.1,
+        13
+      ],
+      "to": [
+        11.4,
+        0.1,
+        24
+      ],
+      "seconds": 7
+    },
+    {
+      "tag": "west viewing aisle",
+      "from": [
+        2.45,
+        0.1,
+        13
+      ],
+      "to": [
+        2.45,
+        0.1,
+        24
+      ],
+      "seconds": 7
+    },
+    {
+      "tag": "rear cross aisle",
+      "from": [
+        2.1,
+        0.1,
+        24.4
+      ],
+      "to": [
+        11.2,
+        0.1,
+        24.4
+      ],
+      "seconds": 6
+    },
+    {
+      "tag": "exit beyond new study",
+      "from": [
+        6.5,
+        0.1,
+        24.4
+      ],
+      "to": [
+        6.5,
+        0.1,
+        27
+      ],
+      "seconds": 3
+    }
+  ]
+}

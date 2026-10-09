@@ -1,0 +1,50 @@
+{
+  "checks": 31,
+  "passed": [
+    "All five authored works remain exactly once",
+    "Original structure and raised cell preserved at (3,16); obsolete hole filled",
+    "All map layers have 19 by 28 dimensions",
+    "Museum follows authored placements",
+    "Primary uses reviewed opt-in lesson configuration",
+    "Four other placements retain their relative positions",
+    "Unrelated registry entries unchanged",
+    "Restored readiness resolves the same existing scene",
+    "All artifact roles and orders unchanged",
+    "The room primary is the believing turtle",
+    "Book anchor matches the live primary",
+    "Book hero and line agree",
+    "Unrelated book pearls unchanged",
+    "Unrelated trunk and hand pearls unchanged",
+    "Only this hall changed in ada_run/em_plan.json",
+    "Only this hall changed in commons/data/museum/em_plan.json",
+    "Only this hall description changed; sequence route unchanged",
+    "Global first-appearance manifest unchanged",
+    "Per-room thread resolves the correct primary",
+    "Original export default preserved: axiom",
+    "Original export default preserved: rule_f",
+    "Original export default preserved: seed",
+    "Original export default preserved: generations",
+    "Book code occurs in actual shared interpreter",
+    "Book code occurs in actual shared interpreter",
+    "Secondary algorithm unchanged: algorithms/lsystems/context_free_grammars/ContextFreeGrammars.gd",
+    "Secondary algorithm unchanged: commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd",
+    "Secondary algorithm unchanged: algorithms/lsystems/Hilbert3D.gd",
+    "Secondary algorithm unchanged: commons/artifacts/lindenmayer_tube_tree/lindenmayer_tube_tree.gd",
+    "Current receipt matches every recorded source",
+    "Working method advances to Architecture"
+  ],
+  "earlier_receipt_status": {
+    "LSystems_Grammar_Lab": true,
+    "LSystems_Growth": false,
+    "fractals": {
+      "recursion_verified": true,
+      "trees_verified": true,
+      "cantor_verified": true,
+      "koch_verified": true,
+      "menger_encounter_verified": false,
+      "golden_verified": true,
+      "synthesis_verified": false
+    }
+  },
+  "note": "Earlier executable hashes may be stale after independent logging changes; no validator exception was added."
+}

@@ -1,0 +1,253 @@
+{
+  "checks": [
+    {
+      "message": "Visitor bench begins with no chosen terms",
+      "ok": true
+    },
+    {
+      "message": "Time never supplies the first term",
+      "ok": true
+    },
+    {
+      "message": "Physical button signals append exactly the chosen values, in order",
+      "ok": true
+    },
+    {
+      "message": "A pause neither extends nor erases a chosen prefix",
+      "ok": true
+    },
+    {
+      "message": "The next unchosen term remains a question",
+      "ok": true
+    },
+    {
+      "message": "Out-of-domain choices cannot alter the prefix",
+      "ok": true
+    },
+    {
+      "message": "A rebuild preserves external map nodes and chosen values",
+      "ok": true
+    },
+    {
+      "message": "RESET removes the actual chosen terms and their meshes",
+      "ok": true
+    },
+    {
+      "message": "Finite storage limit refuses further terms without overwriting the past",
+      "ok": true
+    },
+    {
+      "message": "Long prefixes use a bounded ten-term display",
+      "ok": true
+    },
+    {
+      "message": "Window shows the latest terms while the full prefix remains stored",
+      "ok": true
+    },
+    {
+      "message": "The limit is labelled as an instrument limit",
+      "ok": true
+    },
+    {
+      "message": "Reset after the limit starts a fresh prefix",
+      "ok": true
+    },
+    {
+      "message": "Legacy placements retain the fixed illustration",
+      "ok": true
+    },
+    {
+      "message": "Illustration does not pretend to accept a visitor choice",
+      "ok": true
+    },
+    {
+      "message": "Deferred map config installs the controls after ready",
+      "ok": true
+    },
+    {
+      "message": "Slider selects finite N=4",
+      "ok": true
+    },
+    {
+      "message": "N=4: constructed string differs from every displayed row at its diagonal bit",
+      "ok": true
+    },
+    {
+      "message": "N=4: extending the display preserves earlier bits",
+      "ok": true
+    },
+    {
+      "message": "Slider selects finite N=8",
+      "ok": true
+    },
+    {
+      "message": "N=8: constructed string differs from every displayed row at its diagonal bit",
+      "ok": true
+    },
+    {
+      "message": "N=8: extending the display preserves earlier bits",
+      "ok": true
+    },
+    {
+      "message": "Slider selects finite N=16",
+      "ok": true
+    },
+    {
+      "message": "N=16: constructed string differs from every displayed row at its diagonal bit",
+      "ok": true
+    },
+    {
+      "message": "N=16: extending the display preserves earlier bits",
+      "ok": true
+    },
+    {
+      "message": "Slider selects finite N=24",
+      "ok": true
+    },
+    {
+      "message": "N=24: constructed string differs from every displayed row at its diagonal bit",
+      "ok": true
+    },
+    {
+      "message": "N=24: extending the display preserves earlier bits",
+      "ok": true
+    },
+    {
+      "message": "Slider selects finite N=32",
+      "ok": true
+    },
+    {
+      "message": "N=32: constructed string differs from every displayed row at its diagonal bit",
+      "ok": true
+    },
+    {
+      "message": "N=32: extending the display preserves earlier bits",
+      "ok": true
+    },
+    {
+      "message": "Reading slider exposes the classical explanation",
+      "ok": true
+    },
+    {
+      "message": "Constructive caption does not invent a third truth value",
+      "ok": true
+    }
+  ],
+  "evidence": [
+    {
+      "N": 4,
+      "diagonal": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "readout": "d = 1011\nd differs from all 4 displayed rows"
+    },
+    {
+      "N": 8,
+      "diagonal": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "readout": "d = 10111110\nd differs from all 8 displayed rows"
+    },
+    {
+      "N": 16,
+      "diagonal": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "readout": "d = 101111100000…\nd differs from all 16 displayed rows"
+    },
+    {
+      "N": 24,
+      "diagonal": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "readout": "d = 101111100000…\nd differs from all 24 displayed rows"
+    },
+    {
+      "N": 32,
+      "diagonal": [
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        0,
+        1,
+        0,
+        0
+      ],
+      "readout": "d = 101111100000…\nd differs from all 32 displayed rows"
+    }
+  ],
+  "failures": []
+}

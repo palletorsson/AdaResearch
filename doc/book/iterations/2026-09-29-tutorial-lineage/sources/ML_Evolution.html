@@ -1,0 +1,334 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Evolution · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Evolution">← Tutorial lineage</a></p><h1>ML Evolution</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Evolution/final.md">Raw captured source</a></p><pre># Survival without a finish line
+
+If no judge ranks these bodies, does that mean nothing selects between them?
+
+&lt;!-- @non_teleological_evolution --&gt;
+
+Choose a moving body and watch where it travels. Compare a body covering fresh territory with one remaining near places already visited. Stay long enough to notice a new body appear or an existing one disappear, then compare that event with the population’s continuing motion. The plate under the title counts births and deaths; watch Born and Died tick while you look for the body that changed them.
+
+A sign under the title says it for the room: no fitness function, no goal, just drift. The simulation lets bodies gain energy by visiting new cells. Energy also drains with time. A body with enough energy can reproduce, dividing its available energy and giving its offspring slightly altered traits such as size, speed and colour. There is no final shape on a pedestal that every descendant is trying to become.
+
+Beside these bodies stands a population that does have a judge. Every thirty seconds a score is taken, the higher scorers are picked in small tournaments, and their numbers are crossed to make children, seven times in ten, or copied with a small change the rest of the time. In the time you stand here about ten generations pass. Watch what each population loses: one its unlucky, the other its unscored.[^holland]
+
+Look for continuity as well as difference around a reproduction event. A new body can resemble its parent while beginning a different route, and a visible difference need not immediately alter survival. What matters is how a trait enters the subsequent encounters with the grid and its energy rewards. Keep the description in that order: inherited variation, changed behaviour if you can observe it, then a consequence for continued movement or reproduction.
+
+The changes nevertheless have consequences. A trait that alters movement can alter access to the rewarded cells, and that can affect the opportunity to reproduce. The environment supplies a preference even without a separate leaderboard. Removing an explicit fitness ranking has not removed the conditions under which some lineages continue and others stop.
+
+Follow the child as a new trajectory rather than as an improved copy. Mutation introduces variation; it does not know which variation will help. Nor does a crowded population establish that each surviving body is closer to a universal ideal. It tells you that these bodies have continued under this particular energy economy.
+
+The ecosystem in the previous room combined local behaviour with balancing interventions. Here the lesson is to look carefully at the apparently ordinary rule that pays for survival. Rewarding visits to new cells makes movement into unfamiliar territory consequential before anyone announces an objective called exploration.
+
+The fresh ground is finite. Four hundred cells, and the ground forgets only one of them every two seconds. Watched at the shipped start, the population fills its ceiling of a hundred and twenty within three seconds, the last fresh cell is crossed by ten, and from then on every lineage drains at the same rate: the hall is empty at thirty-six.[^novelty] There is a finish line after all. Nobody announced it, and no body can see it coming.
+
+![Bodies alive and fresh cells visited, over the first fifty seconds of the hall](/book-review/doc/book/figures/machinelearning/fresh-ground-runs-out.png)
+
+*The hall&#x27;s first fifty seconds, measured with the artifact&#x27;s own loop at sixty frames a second. The population reaches its ceiling of 120 within three seconds, the last fresh cell is crossed by ten, and the last body is gone at 35.8. The ground clears one cell every two seconds; nobody can live on that.*
+
+Imagine changing that rule so that revisiting a dependable place also provides energy. Which traits might become useful? That is a proposed comparison, not a control offered by the present encounter. It would test how much of the population’s story belongs to its environment.
+
+The flowers in this hall have a judge too, and the judge is a sentence: symmetry, long petals, a hue near purple, an angle near thirty degrees, each worth so many points. They evolve toward a taste someone wrote down. In 1997 Karl Sims let a museum&#x27;s visitors be the judge, the fitness of an image being how long people stood in front of it. Ask which of the two this hall should run, and what each would breed out.[^sims]
+
+&lt;!-- @ --&gt;
+
+The gradient landscape next puts an objective in full view. Instead of inheriting a reward through survival, a moving point will be told exactly how its position is scored.
+
+[^novelty]: Measured with `commons/testing/probe_novelty_finite.gd`, the artifact&#x27;s own frame loop at a fixed sixty frames a second: thirty bodies at the start, a hundred and twenty at 2.4 seconds, the visited fraction at one by ten seconds, seventy-six bodies at twenty, eight at thirty, none at 35.8. The rule that forgets clears one random cell every 120 drawn frames (`non_teleological_evolution.gd`), too slowly for anyone to live on. A visitor who arrives a minute after the hall was built meets the plane and no bodies.
+
+[^holland]: John Holland, *Adaptation in Natural and Artificial Systems* (1975), the genetic algorithm as a procedure: a fitness function, a mating pool, crossover, mutation. The judged population here is evolved_creatures; its steps are those, at thirty-second generations.
+
+[^sims]: Karl Sims, *Galapagos* (NTT InterCommunication Center, Tokyo, 1997): twelve screens of evolving images, and a floor sensor before each that made looking the fitness function. The flowers here are evolvingflowers; their taste is the artifact&#x27;s calculate_fitness, a generation every eight seconds.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Evolution/tutorial.md">Raw captured source</a></p><pre># ML Evolution
+
+A genetic algorithm. Population, selection, mutation.
+
+Define a creature genome.
+
+```gdscript
+class_name Genome
+
+var genes: Array = []  # array of floats in [-1, 1]
+
+func random_genome(size: int) -&gt; void:
+    genes.clear()
+    for _i in size:
+        genes.append(randf_range(-1.0, 1.0))
+```
+
+An array of real-valued parameters. Each gene influences one behaviour weight.
+
+Build a creature from a genome.
+
+```gdscript
+func spawn_creature(genome: Genome) -&gt; CharacterBody3D:
+    var creature := CREATURE_SCENE.instantiate()
+    creature.set_weights(genome.genes)
+    add_child(creature)
+    return creature
+```
+
+The creature reads the weights and uses them to drive its motion.
+
+Evaluate fitness.
+
+```gdscript
+func evaluate_fitness(genome: Genome) -&gt; float:
+    var creature := spawn_creature(genome)
+    var start := creature.global_position
+    await get_tree().create_timer(10.0).timeout
+    var distance: float = start.distance_to(creature.global_position)
+    creature.queue_free()
+    return distance
+```
+
+Run the creature for 10 seconds; measure distance travelled. Fitness is the distance.
+
+Tournament selection.
+
+```gdscript
+func tournament_select(population: Array, k: int = 3) -&gt; Genome:
+    var contestants: Array = []
+    for _i in k:
+        contestants.append(population[randi() % population.size()])
+    contestants.sort_custom(func(a, b): return a.fitness &gt; b.fitness)
+    return contestants[0]
+```
+
+Pick k random genomes; return the best. Larger k means stronger selection pressure.
+
+Crossover.
+
+```gdscript
+func crossover(parent_a: Genome, parent_b: Genome) -&gt; Genome:
+    var child := Genome.new()
+    for i in parent_a.genes.size():
+        child.genes.append(parent_a.genes[i] if randf() &lt; 0.5 else parent_b.genes[i])
+    return child
+```
+
+Uniform crossover. Each gene comes from one parent at random.
+
+Mutation.
+
+```gdscript
+func mutate(genome: Genome, rate: float = 0.1, strength: float = 0.2) -&gt; void:
+    for i in genome.genes.size():
+        if randf() &lt; rate:
+            genome.genes[i] += randfn(0.0, strength)
+            genome.genes[i] = clamp(genome.genes[i], -1.0, 1.0)
+```
+
+Each gene has a chance of Gaussian perturbation. Rate and strength are tunable.
+
+Run the generation loop.
+
+```gdscript
+func run_generation(population: Array, size: int) -&gt; Array:
+    for g in population:
+        g.fitness = await evaluate_fitness(g)
+    var next_gen: Array = []
+    population.sort_custom(func(a, b): return a.fitness &gt; b.fitness)
+    # Elitism: top 20% carry over
+    for i in size / 5:
+        next_gen.append(population[i])
+    while next_gen.size() &lt; size:
+        var parent_a := tournament_select(population)
+        var parent_b := tournament_select(population)
+        var child := crossover(parent_a, parent_b)
+        mutate(child)
+        next_gen.append(child)
+    return next_gen
+```
+
+Elitism preserves the best; the rest are produced by crossover and mutation. Elitism prevents regression.
+
+You can now build a genetic algorithm with genomes, fitness evaluation, tournament selection, crossover, and mutation. ML_Gradient_Landscape extends into calculus-driven optimisation.
+
+Reset a population.
+
+```gdscript
+func reset_population(size: int, gene_count: int) -&gt; Array:
+    var p: Array = []
+    for _i in size:
+        var g := Genome.new()
+        g.random_genome(gene_count)
+        p.append(g)
+    return p
+```
+
+Start fresh. Used when the current population has collapsed onto a local optimum.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Evolution/technical.md">Raw captured source</a></p><pre># ML Evolution — Technical
+
+The map runs a small genetic algorithm on a population of candidate agents. Each agent has a body plan (limb count, joint positions, weighted behaviours) encoded as a genome — a flat array of floats. The arena is a short obstacle course. Each agent runs the course once, and the distance it travels from spawn is its fitness.
+
+The evolution loop is classical. After each generation, the top-performing agents are selected. Pairs are drawn from the selected set, and each pair produces offspring by crossover (mixing parameter values) plus mutation (adding small Gaussian noise to each parameter). The offspring replace the bottom performers, and the next generation runs.
+
+```gdscript
+class_name EvolutionController extends Node
+
+@export var population_size: int = 32
+@export var mutation_rate: float = 0.1
+@export var selection_pressure: float = 0.3
+
+var genomes: Array = []
+var generation: int = 0
+
+func _ready() -&gt; void:
+    for i in range(population_size):
+        genomes.append(random_genome())
+
+func next_generation(fitnesses: Array) -&gt; void:
+    var sorted: Array = zip(genomes, fitnesses)
+    sorted.sort_custom(func(a, b): return a[1] &gt; b[1])
+    var survivors: int = int(population_size * selection_pressure)
+    var new_pop: Array = []
+    for i in range(survivors):
+        new_pop.append(sorted[i][0])
+    while new_pop.size() &lt; population_size:
+        var parent_a: Array = sorted[randi() % survivors][0]
+        var parent_b: Array = sorted[randi() % survivors][0]
+        var child: Array = crossover(parent_a, parent_b)
+        mutate(child)
+        new_pop.append(child)
+    genomes = new_pop
+    generation += 1
+
+func mutate(g: Array) -&gt; void:
+    for i in range(g.size()):
+        if randf() &lt; mutation_rate:
+            g[i] += randfn(0.0, 0.1)  # Gaussian
+```
+
+## Fitness Evaluation
+
+Each generation requires running the entire population through the obstacle course, which is O(P·T) where P is population size and T is simulation steps per trial. For population 32 and 120 trial steps, that is ~3840 physics ticks per generation. At 60 Hz, a generation takes about one second of wall-clock time.
+
+Fitness shaping matters. A naive fitness — distance travelled — rewards agents that fall forward, not agents that walk. Shaped fitnesses reward time-upright, step-count, and distance separately, then combine them with weights. The map exposes the weights as sliders so the learner can see different fitness landscapes produce different evolved behaviours.
+
+## Exploration vs Exploitation
+
+Selection pressure controls the exploration-exploitation tradeoff. Low pressure keeps diverse genomes alive, favouring exploration; high pressure culls aggressively, favouring exploitation of whatever worked last generation. Extreme pressure collapses the population onto a local optimum and prevents the algorithm from escaping. The map&#x27;s default (0.3) balances the two.
+
+Mutation rate is the other control. High mutation disrupts good solutions as much as bad ones; low mutation prevents the population from escaping local optima. Adaptive mutation — lowering the rate as fitness improves — is a common refinement the map does not implement but notes on a side panel.
+
+Within the sequence, Evolution introduces optimisation without gradient. ML_Gradient_Landscape will replace the blind search with calculus-driven descent and ask what is gained by doing so.
+
+## Crossover Variants
+
+Several crossover strategies produce different exploration profiles. One-point crossover splits each parent at a random index and recombines the pieces. Uniform crossover picks each gene independently from one parent or the other. Arithmetic crossover takes a weighted average of the two parents. The map uses uniform crossover by default because it produces the most diverse offspring, which matters when the population is small.
+
+```gdscript
+func crossover_uniform(a: Array, b: Array) -&gt; Array:
+    var child: Array = []
+    for i in range(a.size()):
+        child.append(a[i] if randf() &lt; 0.5 else b[i])
+    return child
+
+func crossover_arithmetic(a: Array, b: Array) -&gt; Array:
+    var alpha: float = randf()
+    var child: Array = []
+    for i in range(a.size()):
+        child.append(alpha * a[i] + (1.0 - alpha) * b[i])
+    return child
+```
+
+## Comparison With Gradient Descent
+
+The evolutionary approach has two advantages over gradient descent. First, it handles non-differentiable fitness functions; the fitness only needs to be computable, not smooth. Second, it explores the landscape in parallel through the population, which reduces the risk of getting stuck in a single local minimum. The disadvantage is sample efficiency: evolution needs many fitness evaluations, while gradient descent needs one forward pass per step. Modern hybrid approaches (neuroevolution, evolutionary strategies) combine the two.
+
+## Seeding the Population
+
+Random genomes work for small search spaces but fail for large ones: the initial population is so bad that no recombination produces anything useful, and the algorithm never finds a gradient of fitness to climb. The map&#x27;s obstacle course is calibrated so that random genomes produce some variation in fitness — a few agents happen to move forward, most fall over — and the variation is enough to drive the first generation&#x27;s selection.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Evolution/intent.md">Raw captured source</a></p><pre>Concept: Evolutionary algorithms as the precursor to gradient-based learning — before calculus-driven optimization, nature discovered search through variation, selection, and reproduction. A population of candidate solutions evolves toward fitness without any single agent knowing the landscape.
+Sequence role: First map in the Machine Learning sequence (15th spine sequence, integration phase). Opens the ML arc with biology rather than calculus, grounding optimization in intuition before formalizing it. Connects forward to ML_Gradient_Landscape where evolution&#x27;s random search is replaced by directed descent.
+Technical angle: Genetic algorithms with crossover, mutation, and selection operators. Fitness function as the only feedback signal. Population-based search vs. single-point search — the trade-off between exploration (mutation rate) and exploitation (selection pressure). Tournament selection, roulette wheel selection, elitism strategies.
+Critical angle: Evolution is optimization without a gradient — proof that intelligence can emerge from blind variation and selective retention. The absence of a global view is the point: no individual in the population understands the fitness landscape, yet the population as a whole navigates it. This is the integration phase thesis: learning is distributed, emergent, and fundamentally about landscapes you cannot fully see.
+Key artifacts: evolutionary_algorithms demonstrates population-based search with configurable mutation, crossover, and selection parameters.
+Gap: Needs a fitness landscape visualizer that shows the population distribution evolving across generations, making visible how diversity collapses as the population converges.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Evolution/critical.md">Raw captured source</a></p><pre># ML_Evolution — Critical Reflection
+
+The amphitheater invites spectatorship. You stand on the raised ring, looking down into the arena where five populations thrash and converge. Rockets, flowers, bloops, creatures, and a gradient descent visualizer all performing optimization at once. The architecture says: watch. The architecture lies. You are already inside the system. The selection pressure is yours.
+
+Hayles would notice the body first. Not the creatures&#x27; bodies — yours. You are the posthuman observer standing above a process that has no observer, asked to understand distributed intelligence by occupying the one position it never occupies: the view from above. Evolution has no amphitheater. It has no audience. The rockets&#x27; DNA encodes thrust vectors, and the fitness function measures distance to target — `fitness(x) = 1/d(x, target)^2` — and at no point does the swarm know it is being watched. The arena makes the process legible by introducing a vantage point that the process itself has no use for. Legibility is already a distortion.
+
+What the smart rockets normalize is teleology. Each generation gets closer to the target, and the arc looks like progress. But the fitness function was chosen, not discovered. The target was placed, not derived. Evolution in this arena is optimization toward a predetermined goal, which is exactly what biological evolution is not. Chun&#x27;s analysis of software as ideology applies directly: the code presents selection as natural process while the fitness function encodes a human decision about what counts as success. The `mutation_rate` parameter — &quot;too low freezes, too high forgets&quot; — frames mutation as a dial to tune rather than the blind, excessive, catastrophic force it actually is. The interface domesticates contingency.
+
+The evolving flowers make this sharper. Their genome encodes `{petals, color_hue, symmetry, L-system_rules, branch_angle}`, and fitness is calculated as `symmetry + vibrancy + complexity`. Beauty as a fitness landscape. The flowers evolve toward an aesthetic that was baked into the evaluation function before the first generation bloomed. Hayles would call this a skeuomorph — the appearance of organic evolution preserved as a decorative surface on a computational process that has already decided what beautiful means. The flowers cannot evolve toward ugliness. They cannot evolve toward forms the fitness function cannot score. The garden is a cage shaped like freedom.
+
+The bloops complicate things productively. Their metabolism creates a genuine trade-off between size and speed — `energy(t+1) = energy(t) - metabolism(gene) + food` — and the population self-regulates through resource dynamics. This is the closest any artifact in the arena comes to emergence rather than directed optimization. The bloops do not optimize toward a target. They survive or don&#x27;t. The population learns what the individuals cannot: that the ecosystem has carrying capacity, that fitness is relational, that what works depends on who else is alive. The mutation rate here shapes gene drift rather than convergence, and the result is a dynamic equilibrium rather than a solution.
+
+The evolved creatures push further. Their morphologies — symbiotic clusters, phase-shifting blobs, fractal forms — compete through tournament selection, and the `mutation_rate` governs the balance between exploitation and exploration. The critical parameter is not the mutation rate itself but the fact that it must be set externally. The creatures cannot evolve their own evolvability. The meta-parameter is the one thing the evolutionary system cannot reach, the frame outside the frame.
+
+Chun would see in this arrangement an allegory of programmed visions — software that presents evolutionary openness while structuring every possible outcome in advance. Five evolutionary processes run in parallel isolation. No ecosystem connects them. No predation, no symbiosis, no competition across species. The arena normalizes evolution as parallel optimization rather than tangled coevolution, because tangled coevolution would be illegible from the amphitheater, and illegibility is what the map cannot afford.
+
+The gradient descent visualizer placed among the evolutionary artifacts is the map&#x27;s confession. It sits in the arena alongside creatures and flowers, whispering that evolution was always just a slow, noisy version of what calculus does cleanly. The sequence moves from blind search to directed descent, and the visualizer makes the transition explicit. But this is Hayles&#x27; point about the computational universe: treating evolution as proto-gradient-descent commits you to an informational ontology where life is optimization and mutation is noise. An alternative reading — that evolution is what happens when there is no gradient, no landscape, no loss function, just bodies in a world — has no artifact in the arena.
+
+The amphitheater does not contain the thing it most needs to see: the possibility that evolution is not optimization at all, but something for which optimization is a partial and misleading metaphor. The populations converge. The mutation rate is set. The fitness function evaluates. And the learner, standing on the raised ring, is invited to notice that every parameter was chosen, every fitness landscape was designed, and the thing that makes evolution genuinely strange — that it has no designer, no parameter, no amphitheater — is the one thing a designed simulation cannot demonstrate without betraying itself.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Evolution/artifacts.md">Raw captured source</a></p><pre># ML Evolution — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 7 artifacts*
+
+&gt; Darwin had no gradient. No loss function, no backpropagation. Just bodies in a world, and the ones that survived made more of themselves. This is optimization before calculus — blind, parallel, wasteful, and it works.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Science Screen
+![Science Screen](/scene-catalog/science_screen.png)
+
+COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.
+
+`science_screen`
+
+## Evolved Creatures (Karl Sims)
+![Evolved Creatures (Karl Sims)](/scene-catalog/evolved_creatures.png)
+
+Physics-based creature evolution inspired by Karl Sims — bipedal bodies evolve locomotion through genetic algorithms. Morphology and behavior co-evolve, producing creatures that learn to walk through selection pressure.
+
+`evolved_creatures`
+
+## evolvingflowers
+![evolvingflowers](/scene-catalog/evolvingflowers.png)
+
+genome = {petals, color_hue, symmetry, L-system_rules, branch_angle}; fitness = symmetry + vibrancy + complexity
+
+`evolvingflowers`
+
+## Smart Rockets (Genetic Algorithm)
+![Smart Rockets (Genetic Algorithm)](/scene-catalog/9_3_smart_rockets_vr.png)
+
+Rockets evolving to reach a target through genetic algorithm — selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.
+
+`9_3_smart_rockets_vr`
+
+## Non-Teleological Evolution
+![Non-Teleological Evolution](/scene-catalog/non_teleological_evolution.png)
+
+Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization — just drift, variation, and persistence. No best creature. No progress narrative.
+
+`non_teleological_evolution`
+
+## Evolving Bloops
+![Evolving Bloops](/scene-catalog/9_5_evolving_bloops_vr.png)
+
+Organisms evolving size, speed, and behavior through natural selection pressure. Survival of the fittest visualized. Based on Nature of Code Ch.9.
+
+`9_5_evolving_bloops_vr`
+
+## Gradient Descent
+![Gradient Descent](/scene-catalog/gradient_descent_visualization.png)
+
+Gradient descent optimization on a loss landscape — watch the optimizer slide downhill following the steepest direction. The engine behind all neural network training, with learning rate and momentum visible.
+
+`gradient_descent_visualization`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Evolution/summary.md">Raw captured source</a></p><pre># ML Evolution — Summary
+
+ML_Evolution opens the Machine Learning sequence. It introduces optimisation the way biology discovered it — before calculus, without gradients, by variation and selection. The space is staged as a small arena where a population of candidate agents attempts a simple task, and the better ones reproduce.
+
+A row of agents faces a short obstacle course. Each agent is a small body with a handful of weighted behaviours; the weights are its genome. The agents run the course in parallel; those that travel furthest are selected to produce offspring with small mutations. A generation counter at the wall ticks up, and the population improves without any single agent knowing what the landscape looks like.
+
+Several controls expose the mechanics. A mutation-rate slider raises or lowers the variability of new offspring. A selection-pressure slider decides how harshly the weakest agents are culled. A reset button scrambles the population back to random weights, so the learner can run the experiment multiple times and watch the evolutionary trajectory vary.
+
+Within the sequence, Evolution is the first answer to the question the rest of the sequence refines. It claims that optimisation can happen without a calculable gradient. ML_Gradient_Landscape will next replace random search with a directed step and ask what is gained by doing so.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Evolution/blurb.md">Raw captured source</a></p><pre>Darwin had no gradient. No loss function, no backpropagation. Just bodies in a world, and the ones that survived made more of themselves. This is optimization before calculus — blind, parallel, wasteful, and it works.
+
+Rockets evolve thrust sequences toward a target. Flowers breed based on proximity to a selector. Bloops wander, eat, reproduce, die — their DNA encoding the trade-off between size and speed. Karl Sims creatures stumble into locomotion, morphology and behavior entangled in the same genome. Five populations running simultaneously in a sunken arena. Watch from above.
+
+Mutation is the entropy injection. Selection is the compression. The population holds both — enough disorder to search, enough pressure to converge. No individual learns anything. The population learns everything. Design without a designer. Intelligence distributed across generations and death.</pre></section></body></html>

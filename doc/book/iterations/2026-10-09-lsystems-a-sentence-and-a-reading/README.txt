@@ -1,0 +1,1 @@
+Open index.html for report or parallel.html for tutorial left/reflection right. Four complete student files are in printed/. They require the prepared Endless Museum project with XRTools; this is not an empty Godot project. Future halls are described, not certified. Author-led tests; no independent student/headset claim.

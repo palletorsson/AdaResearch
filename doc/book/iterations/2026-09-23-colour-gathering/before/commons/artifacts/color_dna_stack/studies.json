@@ -1,0 +1,120 @@
+{
+  "mondrian": {
+    "title": "BLOCK / BORDER / BLOCK",
+    "body": "A gallery study after Mondrian: primary colours separated by thin black levels.",
+    "parts": [
+      {
+        "source": "mondrian_de_stijl",
+        "height": 5.0,
+        "overrides": {}
+      }
+    ]
+  },
+  "albers": {
+    "title": "WARMTH IN STEPS",
+    "body": "The Albers gallery study: four diminishing blocks, four warm colours. A stacked adaptation, not the painting.",
+    "parts": [
+      {
+        "source": "albers_homage_warm",
+        "height": 5.2,
+        "overrides": {}
+      }
+    ]
+  },
+  "memphis": {
+    "title": "COLOUR TAKES LIBERTIES",
+    "body": "The Memphis gallery study: yellow, red, teal and pink interrupted by dark and pale bands.",
+    "parts": [
+      {
+        "source": "sottsass_carlton_memphis",
+        "height": 5.4,
+        "overrides": {}
+      }
+    ]
+  },
+  "bauhaus_tall": {
+    "title": "EIGHT PIECES / ONE COLUMN",
+    "body": "The tall Bauhaus gallery stack: different primitives and proportions read upward as one construction.",
+    "parts": [
+      {
+        "source": "psI_totem_tall",
+        "height": 5.6,
+        "overrides": {}
+      }
+    ]
+  },
+  "blue": {
+    "title": "A FAMILY OF BLUES",
+    "body": "The Klein gallery study uses two blue values across angular and round forms. Follow the contour as you walk.",
+    "parts": [
+      {
+        "source": "klein_ikb_monochrome",
+        "height": 6.0,
+        "overrides": {}
+      }
+    ]
+  },
+  "kras_rainbow": {
+    "title": "THE RAINBOW BECOMES A COLUMN",
+    "body": "ps07_kras_rainbow, raised to 6.2 metres. Thirty fixed stripes carry six colours around the shaft.",
+    "parts": [
+      {
+        "source": "ps07_kras_rainbow",
+        "height": 6.2,
+        "overrides": {
+          "height": 6.2,
+          "top_radius": 0.95,
+          "pedestal_radius": 0.58,
+          "top_thickness": 0.12
+        }
+      }
+    ]
+  },
+  "rainbow_crown": {
+    "title": "RAINBOW / CROWN",
+    "body": "The rainbow pedestal carries the eight-piece Bauhaus stack: two gallery configurations become one 7.2 m column.",
+    "parts": [
+      {
+        "source": "ps07_kras_rainbow",
+        "height": 3.8,
+        "overrides": {
+          "height": 3.8,
+          "top_radius": 0.95,
+          "pedestal_radius": 0.58,
+          "top_thickness": 0.12
+        }
+      },
+      {
+        "source": "psI_totem_tall",
+        "height": 3.4,
+        "overrides": {}
+      }
+    ]
+  },
+  "memphis_beacon": {
+    "title": "MEMPHIS / STRIPES / BEADS",
+    "body": "Memphis blocks carry a striped shaft and a red-bead crown. Three gallery configurations, one 7.4 m stack.",
+    "parts": [
+      {
+        "source": "sottsass_carlton_memphis",
+        "height": 3.0,
+        "overrides": {}
+      },
+      {
+        "source": "ps07_kras_rainbow",
+        "height": 2.5,
+        "overrides": {
+          "height": 2.5,
+          "top_radius": 0.95,
+          "pedestal_radius": 0.58,
+          "top_thickness": 0.12
+        }
+      },
+      {
+        "source": "ps01_bauhaus_totem_red",
+        "height": 1.9,
+        "overrides": {}
+      }
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+[
+  {
+    "run": "accepted\\Annealing\\run.json",
+    "pid": 41052,
+    "returncode": 1,
+    "seconds": 23.00398564338684,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": "a96409f2a5b988458a025d138731e1992f26919234a773fcfc6dcb3d50acb94d",
+    "checks": 26,
+    "passed": 25
+  },
+  {
+    "run": "after\\Annealing\\run.json",
+    "pid": 35736,
+    "returncode": 0,
+    "seconds": 21.648925304412842,
+    "sources_stable_during_run": false,
+    "changed_during_run": [
+      "commons/scenes/endless_museum.gd"
+    ],
+    "loaded_museum_sha256": null,
+    "checks": 22,
+    "passed": 22
+  },
+  {
+    "run": "after\\annealing_q\\run.json",
+    "pid": 39804,
+    "returncode": 3221225477,
+    "seconds": 13.365668773651123,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 20,
+    "passed": 20
+  },
+  {
+    "run": "after\\focused\\run.json",
+    "pid": 51052,
+    "returncode": -1,
+    "seconds": 75.02892589569092,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 30,
+    "passed": 29
+  },
+  {
+    "run": "after\\Forge\\run.json",
+    "pid": 6252,
+    "returncode": 0,
+    "seconds": 22.543156147003174,
+    "sources_stable_during_run": false,
+    "changed_during_run": [
+      "commons/scenes/endless_museum.gd"
+    ],
+    "loaded_museum_sha256": null,
+    "checks": 10,
+    "passed": 10
+  },
+  {
+    "run": "after\\optimizer\\run.json",
+    "pid": 13968,
+    "returncode": 0,
+    "seconds": 3.628274917602539,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 10,
+    "passed": 10
+  },
+  {
+    "run": "after\\optimizer-dummy-query\\run.json",
+    "pid": 38844,
+    "returncode": 1,
+    "seconds": 5.177450180053711,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 12,
+    "passed": 10
+  },
+  {
+    "run": "after\\survey\\run.json",
+    "pid": 37668,
+    "returncode": 0,
+    "seconds": 11.296400547027588,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 3,
+    "passed": 3
+  },
+  {
+    "run": "before\\Annealing\\run.json",
+    "pid": 37404,
+    "returncode": 1,
+    "seconds": 19.884753227233887,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 2,
+    "passed": 1
+  },
+  {
+    "run": "before\\Forge\\run.json",
+    "pid": 48208,
+    "returncode": 0,
+    "seconds": 23.393410444259644,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 2,
+    "passed": 2
+  },
+  {
+    "run": "before-labels\\Annealing\\run.json",
+    "pid": 38612,
+    "returncode": 0,
+    "seconds": 17.867304801940918,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 10,
+    "passed": 10
+  },
+  {
+    "run": "final\\Annealing\\run.json",
+    "pid": 48800,
+    "returncode": 0,
+    "seconds": 22.776813983917236,
+    "sources_stable_during_run": false,
+    "changed_during_run": [
+      "commons/scenes/endless_museum.gd"
+    ],
+    "loaded_museum_sha256": null,
+    "checks": 25,
+    "passed": 25
+  },
+  {
+    "run": "shapes\\survey\\run.json",
+    "pid": 39692,
+    "returncode": 0,
+    "seconds": 13.030344247817993,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": null,
+    "checks": 3,
+    "passed": 3
+  },
+  {
+    "run": "standing\\Annealing\\run.json",
+    "pid": 37588,
+    "returncode": 0,
+    "seconds": 21.875646114349365,
+    "sources_stable_during_run": true,
+    "changed_during_run": [],
+    "loaded_museum_sha256": "a96409f2a5b988458a025d138731e1992f26919234a773fcfc6dcb3d50acb94d",
+    "checks": 26,
+    "passed": 26
+  }
+]

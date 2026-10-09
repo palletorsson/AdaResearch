@@ -1,0 +1,29 @@
+--- before/commons/maps/WaveFunctions_Unit_Circle/map_data.json
++++ commons/maps/WaveFunctions_Unit_Circle/map_data.json
+@@ -49,7 +49,7 @@
+     "objective": "Follow four positions around the circle, predict a quarter of the adjacent graph, then distinguish coordinate projection from physical motion through the room.",
+     "key_elements": [
+       "Spawn token sp at (0,0)",
+-      "unit_circle_advanced at (1,1), with a rotating point, coordinate rods and finite sampled graph",
++      "unit_circle_advanced at (1,2), with a rotating point, coordinate rods and finite sampled graph",
+       "SimpleOscillatingBridge at (5,1) and OscillationCurve at (11,1) remain supporting works",
+       "Teleporter t at (10,2)"
+     ]
+@@ -626,7 +626,7 @@
+       ],
+       [
+         " ",
+-        "unit_circle_advanced:-90:-0.1",
++        "",
+         " ",
+         " ",
+         "dark_sphere",
+@@ -642,7 +642,7 @@
+       ],
+       [
+         " ",
+-        " ",
++        "unit_circle_advanced:-90:1.6#continue_after_build:true",
+         " ",
+         " ",
+         " ",

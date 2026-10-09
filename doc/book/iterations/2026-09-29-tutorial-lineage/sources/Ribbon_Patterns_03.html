@@ -1,0 +1,112 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ribbon_Patterns_03 · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Ribbon_Patterns_03">← Tutorial lineage</a></p><h1>Ribbon Patterns 03</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#technical">technical</a><a href="#critical">critical</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Ribbon_Patterns_03/final.md">Raw captured source</a></p><pre># What can you take with you?
+
+Look down before choosing another appearance. In the museum, your garment grows as you enter new sequences. Returning to one does not add another layer. If you chose a nail colour in the salon, your virtual hands have already carried one decision here. A dress can carry part of the walk too.
+
+The mark has crossed a floor, reflected, slipped along a row and acquired depth. In the previous room its values stayed fixed while the surface changed how they appeared. Here the surface is waiting beside a body. Find the bent red mark on both. What would have to stay the same for you to call this the same fabric?
+
+&lt;!-- @fabric_shader_studio --&gt;
+
+Choose one of the four paint colours, then touch a square in the small source array. Watch the wall and the skirt together. One address changes; many places answer. **UNDO** brings the earlier source back. We still have the array we learned to read. We have given it somewhere else to arrive.
+
+![The fabric studio and preview dress inside the museum](/book-review/doc/book/figures/tiling/fabric-studio-museum.png)
+
+*The small source reaches a flat wall and a skirt. The crown and sleeves keep the look’s own materials.*
+
+Press **UV / FABRIC**. The familiar mark disappears into a coloured field. Walk around the preview skirt. Where does the colour return to its beginning? This view draws the surface&#x27;s own two coordinates as red and green. A curved body can carry a flat address system. It also has to decide where that system joins, ends or starts again.
+
+Return to the fabric and press **OFFSET**, then **REPEAT**. Which operation moves the mark? Which makes more copies fit? The wall and skirt both begin with four horizontal repeats and two vertical repeats in their own UV coordinates. Their physical widths differ. The wall is three metres wide: four copies sit 0.75 metres apart. Four copies around this skirt do not promise that same spacing.
+
+```glsl
+vec2 address = UV * vec2(repeats, 2.0) + vec2(phase, 0.0);
+ALBEDO = texture(motif, address).rgb;
+```
+
+The source texture is four by four pixels, read with nearest filtering. `UV` supplies an address from the mesh; multiplication repeats it, addition shifts it, and the texture wraps. A small statement keeps finding new places to speak. The skirt&#x27;s side and caps bring their own UV layout. We have not made a tailor&#x27;s continuous cutting pattern, or promised that every seam will match.
+
+Try **CUT OUT**. Narrow strips disappear from the wall and skirt. Look through a strip, then try to move through the sample wall. The view opens. The collision still refuses you.
+
+```glsl
+if (cut_out &amp;&amp; fract(address.x) &gt; 0.8) discard;
+```
+
+Here `discard` stops drawing a fragment. It does not cut a passage into the collision shape. There are already two accounts of the wall: one receives your gaze, another receives your attempt to cross. Finding their disagreement gives us somewhere precise to work. A visible opening has made a promise that the movement system does not keep.
+
+Turn the cut-outs off. Press **FINISH** and compare a pale patch on the plane with one turning around the skirt. This control changes roughness and metallic response in the engine&#x27;s material model. It leaves the source alone. Now try **VERTICES** and look along an edge.
+
+```glsl
+VERTEX += NORMAL * amplitude *
+    sin(UV.y * 18.849556 + UV.x * 6.283185);
+```
+
+The shader moves rendered vertices along their normals, by at most 0.04 local units. The wall&#x27;s subdivisions provide vertices to move. The garment has its own mesh and scale, so its result differs. Collision stays at the old shape; this deformation does not simulate cloth, gravity or a moving hem. Even the shading normals retain the original mesh directions. An edge has changed, but several systems still remember the earlier body.
+
+&lt;!-- @super_drag_mirror --&gt;
+
+Use **LOOK** to choose a silhouette for the preview. When you want to carry the current recipe, press **SAVE**, then **WEAR SAVED**. You take on the preview&#x27;s silhouette as well as its saved fabric. The fabric goes onto your skirt; your bodice, crown and sleeves keep the chosen look&#x27;s own materials. Walk to the mirror.
+
+This looking glass sees the body you are wearing in the shared scene. Turn slightly. Find the altered source cell again. It belongs to the recipe, but the shape and viewpoint have given it another appearance. What seemed like a surface sample is now part of how you meet yourself.
+
+The chosen look keeps the growth your walk has already given it. As new sequences arrive, the hem can descend and spread without adding another copy of the painted mark. The same number of repeats has more cloth to occupy. The source stays small; its reach changes with the body. Which part of this dress would you call the same?
+
+Use **NEXT** or **PREVIOUS** at the mirror to change your look. The new skirt receives the saved recipe. **WALK DRESS** returns to your walking costume; the recipe waits in the wardrobe until you choose a skirted look again. The permission to travel was quite specific: the program looks for a mesh named `Skirt`. Other parts of the outfit have not been invited into this exchange. There is room for another garment adapter here, and for a question about who gets to define the parts of a body.
+
+Return to the studio and edit a cell. Your worn skirt keeps the saved version. **SAVE** replaces the stored recipe; **WEAR SAVED** chooses to wear it again. **UNDO** can restore the outfit and fabric from before a wear action. It follows the studio&#x27;s recent actions and does not erase or rewind the saved recipe file.
+
+&lt;!-- @drag_catwalk --&gt;
+
+Press **RUNWAY SAVED**, then join the four performers. Find the same mark moving towards you and away. Their skirts receive the stored recipe; their other materials and their walking route remain their own. **SWAP LOOKS** changes their silhouettes while keeping the fabric. The studio&#x27;s **UNDO** can restore each performer&#x27;s previous fabric.
+
+These walkers follow a programmed route. Their steps and poses do not prove that the garment can balance, bend or bear weight. Yet they make another comparison available: a recipe shared across bodies, encountered at different moments. Repetition can make a group legible without making its members look identical.
+
+&lt;!-- @ --&gt;
+
+Colour supplied values. Arrays gave them addresses. Patterns gave us rules for returning to those addresses, and shaders let the receiving surface take part. We can now carry a small source into a room, a garment and a procession. Each carries something of it; each leaves something unresolved.
+
+We have followed one mark as its address, surroundings and carrier changed. In **Change_Intro**, a curve waits for us. Read its height at two places and join them with a line. The line can slope down while the curve beside your first reading rises. How far should we look before saying which way something is changing?
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Ribbon_Patterns_03/technical.md">Raw captured source</a></p><pre># From source to skirt
+
+Three primary placements: `fabric_shader_studio` (22,26), `super_drag_mirror` (31,27), `drag_catwalk` (58,24). The ordinary museum hall retains the fourteen earlier exhibits as secondary material. RotatingLaser moves from (58,39) to (58,50), with six-metre beams and a four-metre rig. Three older demos opt into `embedded:true`: no scene-wide environment or screen overlay; coloured-line paths are fitted together inside a three-unit source radius before animated sway and shader expansion.
+
+## One recipe, explicit receivers
+
+`fabric_recipe.gd` validates a versioned 4x4 array of palette indices (0..3), repeats (4/8), phase (0/0.125), cut-out, matte/metal finish, static displacement and UV inspection flags. It normalizes JSON numbers before making an RGBA8 nearest-filtered texture and a spatial ShaderMaterial. Both wall and skirt receive new materials from the same recipe, with their own UV coordinates. Repeats are per UV domain, not equal distances in metres.
+
+The console supplies sixteen source cells, four paint choices and twelve pointer-operated actions. Editing updates only the wall and posed preview. SAVE writes `user://ada_studio_fabric_v1.json`; LOAD validates that file (maximum 16 KB). WEAR SAVED and RUNWAY SAVED read the file, not the current preview. Missing/invalid saved recipes leave recipients unchanged.
+
+The garment adapter targets only the named `Skirt` mesh in SuperDragOutfit. It stores the recipe across `dress()` calls and retains the original skirt material for restoration. CostumeWardrobe persists the outfit and skirt recipe together in `user://super_drag_outfit.cfg`; progression data is untouched. Runway recipes are session-only. The mirror shares the live World3D and reflects the actual player geometry through its own SubViewport, with a head-centred rather than stereo-per-eye view.
+
+## Rendering and movement are separate
+
+The wall is a 3x2 metre subdivided QuadMesh with a full rectangular StaticBody collision. Fragment discard removes the last fifth of each horizontal repeat from drawing. Finish changes roughness (0.92/0.22) and metallic (0/0.85). Static vertex displacement is bounded by 0.04 local units along the original normals. CPU meshes, normals and collision are not rebuilt. This is not cloth physics; the skirt&#x27;s existing UV seam/cap layout and mesh density remain visible limitations.
+
+The studio keeps at most 32 undo entries. They restore edited recipes/look, the wearer&#x27;s previous outfit/recipe, or each recipient performer&#x27;s previous recipe. SAVE is not file-version history, and UNDO does not rewind the saved source file. Weak references tolerate a receiver disappearing when its hall unloads.
+
+## Verification
+
+`commons/testing/probe_fabric_studio.gd` loads the actual Ribbon_Patterns_03 museum, sends XRToolsPointerEvent presses/releases, validates source and shader changes, save round trips, garment-only assignment, isolated appearance persistence, undo, live mirror and walking performers. Tests redirect saves to `res://ada_run/probe-fabric-*`; they do not write the player&#x27;s saved appearance. Desktop captures and the report are linked in the possible-bodies guide. Headset legibility, tracked-hand reach, stereo comfort and continuous gestures remain open.
+
+## Journey-driven garment growth (21 September)
+
+The wardrobe reads all 24 sequences from curriculum_spine.json. Completed sequences restore through the existing progression manager; the endless museum also grants one stage when the visitor enters a new sequence. A revisit cannot grant another stage. Arrival-based stages last within the current visit; no new visit-history save or completion credit is written. Desktop uses its walker wardrobe. VR uses the wardrobe whose costume follows the active origin&#x27;s camera, so the menu rig cannot receive the visitor&#x27;s growth.
+
+The base walk dress adds a bounded tier. Selected super-drag looks now receive the same stage: their existing Skirt CylinderMesh lengthens from 0.50 to 0.90 m, while its waist stays at local y=-0.515. Its lower radius grows by a factor of 0.65 to 1.15 of the look&#x27;s base radius. Pearl hem decorations follow that geometry. New arrivals ease towards their target over 1.4 seconds; waiting creates no additional stages. Quiet restoration and look switching apply the current stage directly. Preview and runway outfits retain their original dimensions unless explicitly given a growth stage.
+
+Growth retains the worn Skirt node, mesh and material instance. The saved recipe and its UV repeat count remain unchanged, so the marks cover a changing physical extent. This is authored geometric growth, not cloth simulation, biological adaptation, new collision or a change to locomotion. The costume&#x27;s chosen finish and the salon&#x27;s hand-colour receivers are separate systems.
+
+See the isolated production-code probe, actual rendered studies and manuscript diff in [the growing-dress review](../../../doc/book/iterations/2026-09-21-growing-dress/index.html). Physical headset comfort remains untested.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Ribbon_Patterns_03/critical.md">Raw captured source</a></p><pre># A surface&#x27;s permissions
+
+A strip disappears under `discard`; the body still meets an intact wall. The disagreement is reproducible. Visibility and traversability have different implementations. Asking which one defines the opening exposes a decision the attractive surface could otherwise conceal.
+
+The same source can dress a wall and a skirt because a material can read both meshes&#x27; UV coordinates. That shared operation permits a crossing between architectural and bodily surfaces. It does not erase their differences: UV seams, dimensions, silhouette, normals and collision all contribute. The experiment offers a way to investigate a relation rather than announcing that everything is interchangeable.
+
+The garment adapter gives the crossing a boundary: the mesh called Skirt can receive the recipe; the crown and sleeves cannot through this control. A name in the implementation becomes a permission. This is a useful place for the question &quot;what bodies are possible?&quot; to land. We can point to the adapter that makes one possibility available, then ask what another adapter would allow.
+
+The wearer chooses when to apply a saved fabric and can recover the prior outfit through studio undo. Editing a public sample does not silently rewrite the worn body. The runway makes another distribution visible: one recipe across four performers whose silhouettes and positions differ. Their scripted route remains a limit of this encounter. Apparent material freedom does not yet grant another way to move.
+
+The next sequence can ask what these configurations do over time. Here we make the conditions of appearance inspectable enough to carry that question forward.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Ribbon_Patterns_03/summary.md">Raw captured source</a></p><pre># From source to skirt
+
+Paint a source cell and compare its repeats on a wall and a skirt. Inspect UV coordinates, offset and repetition; distinguish fragment cut-outs, material finish and static vertex displacement from physical changes. Save a recipe, deliberately wear it, inspect the actual body in the mirror, and dress four walking performers. Studio undo recovers prior assignments. The book follows these three primary artifacts towards Change_Intro: the next question is how variation proceeds over time.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Ribbon_Patterns_03/blurb.md">Raw captured source</a></p><pre>What travels when a pattern becomes a garment? Edit one small source, follow it across a wall and a skirt, then save it and meet your dressed body in the mirror. A visible hole may still stop you. A shared recipe may arrive differently on four walking bodies.
+</pre></section></body></html>

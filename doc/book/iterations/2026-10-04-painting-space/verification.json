@@ -1,0 +1,134 @@
+{
+	"checks": [
+		{
+			"check": "Eight stations created",
+			"passed": true
+		},
+		{
+			"check": "All 420 points lie on the same 1.3m radius",
+			"passed": true
+		},
+		{
+			"check": "Latitude and longitude have 1440 tube segments",
+			"passed": true
+		},
+		{
+			"check": "Central ray reaches the front of the paint sphere",
+			"passed": true
+		},
+		{
+			"check": "Ray pointing away does not paint",
+			"passed": true
+		},
+		{
+			"check": "Ray missing the sphere does not paint",
+			"passed": true
+		},
+		{
+			"check": "Paint wraps across longitude seam",
+			"passed": true
+		},
+		{
+			"check": "Paint reaches all longitudes at north pole",
+			"passed": true
+		},
+		{
+			"check": "Paint does not leak to opposite pole",
+			"passed": true
+		},
+		{
+			"check": "Zero direction rejected",
+			"passed": true
+		},
+		{
+			"check": "Space brush stays within fixed memory budget",
+			"passed": true
+		},
+		{
+			"check": "Oldest brush marks are recycled",
+			"passed": true
+		},
+		{
+			"check": "Clear removes visible space marks",
+			"passed": true
+		},
+		{
+			"check": "Key 6 selects surface painting",
+			"passed": true
+		},
+		{
+			"check": "C clears surface paint",
+			"passed": true
+		},
+		{
+			"check": "Mouse click paints through camera picking",
+			"passed": true
+		},
+		{
+			"check": "Releasing mouse ends drawing",
+			"passed": true
+		},
+		{
+			"check": "Mouse click leaves free-space marks",
+			"passed": true
+		},
+		{
+			"check": "Wheel changes free-space drawing depth",
+			"passed": true
+		},
+		{
+			"check": "Pause freezes the moving trace",
+			"passed": true
+		},
+		{
+			"check": "G disables glow without removing geometry",
+			"passed": true
+		},
+		{
+			"check": "Native render: gallery.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: solid.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: points.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: lines.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: shells.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: space-brush.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: painted-sphere.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: slices.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: memory.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: unpainted-sphere.png",
+			"passed": true
+		},
+		{
+			"check": "Native render: lines-no-glow.png",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"scope": "Native Godot 4.6 Forward+ desktop. Mouse events, ray picking, spherical paint seam/pole, bounded brush memory, animation pause and rendered views. No headset, museum collision or Web export test."
+}

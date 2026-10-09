@@ -1,0 +1,205 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>One point, two coordinates</title><style>body{margin:0;background:#f0efe9;color:#222;font:18px/1.6 Georgia,serif}header,main{max-width:1420px;margin:auto;padding:28px}header{border-bottom:2px solid #333}h1{font-size:44px;line-height:1.1;max-width:900px}h2{font-size:28px}h3{font-size:21px}a{color:#31586c}nav{display:flex;gap:24px;flex-wrap:wrap;font:16px system-ui}article{background:#fffdf6;padding:30px;min-width:0}pre{overflow:auto;padding:18px;background:#edf0ed;font:13px/1.6 Consolas,monospace}code{font-size:.86em}p{max-width:75ch}.parallel,.pictures{display:grid;grid-template-columns:1fr 1fr;gap:24px}img{width:100%;display:block}figure{margin:0}figcaption,.note{font:14px/1.5 system-ui;margin:10px 0 25px;color:#555}.route{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.route article{padding:22px;border-top:4px solid #668690}.tag{font:13px system-ui;letter-spacing:.08em;text-transform:uppercase;color:#44616b}.status{background:#e2ebe7;padding:12px;font:15px system-ui}table{border-collapse:collapse;width:100%;font:15px/1.5 system-ui}td,th{padding:12px;border:1px solid #bbb;text-align:left;vertical-align:top}@media(max-width:950px){.parallel,.pictures,.route{grid-template-columns:1fr}h1{font-size:32px}main,header{padding:18px}}@media print{nav{display:none}.route{grid-template-columns:1fr 1fr}article{break-inside:avoid}pre{white-space:pre-wrap}}</style><header><div class="tag">Endless Museum · Wavefunctions · Hall 4</div><h1>One point, two coordinates</h1><nav><a href="index.html">Evidence</a><a href="parallel.html">Tutorial left · reflection right</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="../2026-10-08-sine-space-a-surface/index.html">Previous: Sine Space</a></nav></header><main><div class="parallel"><article><div class="tag">tutorial.md</div><h1>Unit Circle — two coordinates from one angle</h1>
+<h2>Learning elements</h2>
+<ul>
+<li>Radians and angular speed.</li>
+<li>Sine and cosine as signed coordinate ratios.</li>
+<li>A circle-position function: centre, radius and angle.</li>
+<li>A path and a graph with different horizontal axes.</li>
+</ul>
+<p>In the museum, follow the bright point around the circle. Its vertical rod grows, disappears and grows below the centre. Stop the point with the nearby angle slider. At the top, the vertical offset is one metre and the horizontal offset is zero. Move through another quarter turn: those roles change.</p>
+<p>Sine Space used sine to set heights. Here we open that function's geometric relationship: at radius one, cosine gives the horizontal offset and sine the vertical offset. We continue with our PointBody sphere and the thin cylinder from Lines. This sphere is a marker whose position we prescribe; pickup and collision are disabled in this study. The previous physical sphere remains available in its own lesson.</p>
+<h2>Place the study in the existing hall</h2>
+<p>Use the museum and installed XR Tools from Day Zero. Save the three files below together. Attach <code>04_circle_coordinates.gd</code> to an empty Node3D in the Unit Circle hall's clear forecourt. The verified placement is hall-local <code>(11, 0, 10)</code>, Y rotation <code>180°</code>, scale <code>1</code>. No child nodes or scene paths are required. The museum supplies the player, camera, light and floor.</p>
+<p>The local XY plane holds the circle. Positive X goes right and positive Y goes up when viewed from its positive Z side. The centre starts 1.5 metres above the floor. Angles increase counterclockwise from the rightmost point. <code>PI</code> radians is half a turn; <code>TAU</code> is a full turn. Angular speed is radians per second, so <code>PI / 2</code> makes one turn in four seconds.</p>
+<p>The graph beside it shows one complete turn. Its horizontal axis allocates four metres to <code>TAU</code> radians. It does <strong>not</strong> show the sphere's horizontal position. Its vertical offset is the same <code>radius * sin(angle)</code> used by the sphere. At each full turn, the graph marker returns from the right end to the left.</p>
+<h2>The complete study</h2>
+<!-- student-code:04_circle_coordinates.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const PointBody = preload(&quot;point_body.gd&quot;)
+const LineSkin = preload(&quot;line_skin.gd&quot;)
+@export var centre := Vector3(0, 1.5, 0)
+@export var radius := 1.0
+@export var angle := 0.0
+@export var angular_speed := PI / 2.0
+@export var running := true
+var point: RigidBody3D
+var marker: MeshInstance3D
+var label: Label3D
+var rods: Array[MeshInstance3D] = []
+
+func circle_position(theta: float) -&gt; Vector3:
+    return centre + radius * Vector3(cos(theta), sin(theta), 0)
+
+func graph_position(theta: float) -&gt; Vector3:
+    return centre + Vector3(1.6 + 4.0 * theta / TAU, radius * sin(theta), 0)
+
+func line_between(a: Vector3, b: Vector3, colour: Color) -&gt; MeshInstance3D:
+    var line := LineSkin.new()
+    line.material_override.albedo_color = colour
+    add_child(line)
+    line.show_segment(a, b - a, a.distance_to(b))
+    return line
+
+func _ready() -&gt; void:
+    point = PointBody.new()
+    point.enabled = false
+    point.collision_layer = 0
+    point.collision_mask = 0
+    add_child(point)
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.035, 0.035, 0.04)
+    ink.roughness = 0.22
+    point.get_child(0).material_override = ink
+    marker = MeshInstance3D.new()
+    var cube := BoxMesh.new()
+    cube.size = Vector3.ONE * 0.09
+    marker.mesh = cube
+    add_child(marker)
+    var grey := Color(0.45, 0.45, 0.45)
+    for i in range(48):
+        var a := TAU * i / 48.0
+        var b := TAU * (i + 1) / 48.0
+        line_between(circle_position(a), circle_position(b), grey)
+        line_between(graph_position(a), graph_position(b), grey)
+    line_between(centre - Vector3.RIGHT * 1.2, centre + Vector3.RIGHT * 1.2, grey)
+    line_between(centre - Vector3.UP * 1.2, centre + Vector3.UP * 1.2, grey)
+    for colour in [grey, Color(0.2, 0.75, 0.35), Color(0.2, 0.5, 0.95), grey]:
+        rods.append(line_between(centre, centre, colour))
+    label = Label3D.new()
+    label.position = centre + Vector3(2.4, 1.4, 0)
+    label.font_size = 30
+    label.pixel_size = 0.006
+    label.outline_size = 8
+    add_child(label)
+    draw_state()
+
+func _process(delta: float) -&gt; void:
+    if running:
+        angle = fposmod(angle + angular_speed * delta, TAU)
+    draw_state()
+
+func draw_state() -&gt; void:
+    var p := circle_position(angle)
+    point.position = p
+    marker.position = graph_position(angle)
+    var starts := [centre, Vector3(p.x, centre.y, centre.z), Vector3(centre.x, p.y, centre.z), p]
+    var ends := [p, p, p, marker.position]
+    for i in range(rods.size()):
+        var displacement: Vector3 = ends[i] - starts[i]
+        rods[i].show_segment(starts[i], displacement, displacement.length())
+    label.text = &quot;angle %.2f rad | x %+.2f m | y %+.2f m\nGRAPH: horizontal = angle; vertical = y offset&quot; % [angle, p.x - centre.x, p.y - centre.y]
+</code></pre>
+<p><code>circle_position()</code> returns a position without creating a new body. The centre supplies the location; the radius scales the two ratios. Keeping the centre outside that multiplication lets us move the construction without enlarging its distance from the origin.</p>
+<p>The two short coloured rods show signed offsets through their endpoints. A rod has positive physical length even when its coordinate is negative; the readout supplies the sign. The grey connector joins the point to the graph marker at their shared height.</p>
+<p>The loop in <code>_ready()</code> samples the two outlines once. It reuses the line renderer; it is drawing assistance, not another motion system. <code>_process()</code> advances one shared angle with <code>delta</code>, then updates both markers. There are no competing clocks. Change the radius or centre before running again so the sampled outlines and the moving markers use the same settings.</p>
+<h2>Predict, stop, inspect</h2>
+<p>Set <code>running</code> to <code>false</code> and try these starting angles, rerunning after each edit. These are offsets from the centre, not world positions.</p>
+<table>
+<thead>
+<tr>
+<th>Angle</th>
+<th>X offset at radius 1</th>
+<th>Y offset at radius 1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0.0</code></td>
+<td>+1 m</td>
+<td>0 m</td>
+</tr>
+<tr>
+<td><code>PI / 2.0</code></td>
+<td>0 m</td>
+<td>+1 m</td>
+</tr>
+<tr>
+<td><code>PI</code></td>
+<td>−1 m</td>
+<td>0 m</td>
+</tr>
+<tr>
+<td><code>3.0 * PI / 2.0</code></td>
+<td>0 m</td>
+<td>−1 m</td>
+</tr>
+</tbody>
+</table>
+<p>Restart with <code>running = true</code>. Half the angular speed: the same circle takes twice as long. Its radius and the graph's height do not change.</p>
+<p>Now work independently: set the radius to <code>0.5</code> and the centre to <code>(0.5, 1.5, 0)</code>. Predict the top point's local position before running. Explain why the graph becomes half as high while its angle axis stays four metres wide. A successful variation preserves the shared height and the circle's distance from its new centre.</p>
+<h2>Carried files</h2>
+<p>These are the unchanged PointBody from the preceding lessons and LineSkin from Lines. Keep your existing copies if they match. They provide the sphere and cylinder drawing; the new lesson is the coordinate function above.</p>
+<!-- student-code:point_body.gd -->
+
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<!-- student-code:line_skin.gd -->
+
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<p>One angular state now produces a visible position and two coordinate readings. In the next hall, many moving bodies will affect one another. A shared trigonometric formula alone does not make that coupling.</p></article><article><div class="tag">final.md</div><h1>Unit Circle — a circle becoming a graph</h1>
+<p>The point reaches the top and keeps going. Its height begins to fall. Beside it, a path grows across the room: the same rise, the same fall, laid out where you can follow it with your eyes.</p>
+<p>After two turns the path stops growing. The point continues. Something has finished being drawn while the movement it describes goes on.</p>
+<p>Take the angle control. At the rightmost point, the horizontal offset is one and the vertical offset is zero. At the top they exchange their roles. Another quarter turn makes the horizontal offset negative. There is no privileged beginning on the circle; the rightmost point becomes a beginning because we agree to measure from it.</p>
+<p>Two lengths change together. At radius one we call them cosine and sine. Increase the radius and both offsets grow; their ratios to the radius remain the same. The construction is exact even though its visible outline is made from finite pieces.</p>
+<p>An angle can be measured by the arc it cuts off divided by the radius. That ratio gives radians. A larger circle has a longer circumference, but one complete turn still has the same angular measure.</p>
+<p>The graph makes another agreement. Here one turn occupies six metres along the floor. That distance belongs to this display. It is neither the circle's circumference nor the distance the point has travelled. We have given angle a horizontal address so that height can be read beside it.</p>
+<p>Watch the point cross the same height twice: once rising, once falling. A height alone cannot tell you which movement is happening. The other coordinate restores a distinction the single reading lost. What seemed like a complete description was sufficient only for a particular question.</p>
+<p>Farther into the hall, separate steps oscillate and another curve keeps a short trail. A drawing can suggest a route. Whether it supports a body is a further decision: these coloured graph pieces are a display, while the floor carries your weight.</p>
+<p>The circle gives us a way to calculate a return. The next room asks what happens when a returning body is attached to others. Then its movement must answer to more than its own angle.</p></article></div></main></html>

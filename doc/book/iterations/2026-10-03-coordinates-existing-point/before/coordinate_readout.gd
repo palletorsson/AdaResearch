@@ -1,0 +1,177 @@
+extends Node3D
+
+# @identity
+# essence: the grab point's position as ONE black-and-white wall frame — x, y, z on a white card in a thin dark frame, like the museum's text works
+# desire: the coordinate stops floating over the frame and hangs in the hall like a caption — reading a position becomes reading the room
+# critical_parameter: axis — "xyz" shows all three lines; "x"|"y"|"z" makes it a single-value frame
+# triggers: CoordinateSystem3M supplies world or frame-local coordinates to matching-channel cards; each card can pin its reference space
+# emerges: the separation of the measure from the measured — the frame shows WHERE (markers on the axes), the wall says HOW MUCH, in the same voice as the wall's sentences
+# needs: [a CoordinateSystem3M tracking its own or a named external point; matching readout_channel; shows em-dashes before the first feed]
+# relationships: the words CoordinateSystem3M gave up (#labels:0 #panel:0); styled after the museum's black-and-white text frames; the draw_dot->whiteboard group pattern
+# truth: a readout is a promise that someone is measuring — a blank display is an instrument with no experiment
+
+## THE WALL FRAME (2026-08-24, Palle: "the values of coordinate should be in
+## one black and white wall frames like the text").
+## Map: `coordinate_readout:90:1.4` — rotation faces it, the token's y-offset
+## hangs it. Default shows x, y and z as three lines on one white card;
+## `#axis:x` narrows it to a single value.
+
+@export var axis: String = "xyz"        # "xyz" | "x" | "y" | "z"
+@export var frame_width: float = 0.72
+@export var frame_height: float = 0.6
+## A LOT BIGGER (2026-08-31, Palle: "also make the related display a lot bigger").
+## The card was sized for a hand-held plaque and reads as a postage stamp across a
+## hall — see the screenshot where the three numbers are smaller than the mushroom
+## beside them. Everything the card is made of scales together (frame, card, text,
+## the text's stand-off) so the proportions are the ones that were designed; only
+## the distance you can read it from changes. One map places this artifact, so the
+## default IS the change. `#display_scale:1.0` restores the old plaque.
+@export var display_scale: float = 2.4
+## WHICH SPACE THIS CARD SPEAKS (2026-08-31, Palle: "the text on the point speaks
+## local ... can we show the local and the global point in two different displays").
+##
+## They are not rival answers. They are two true addresses for one point, and the
+## relation between them includes the frame's position, orientation and scale.
+## Hold an external point still and move the frame: WORLD stays fixed while
+## LOCAL changes. Move the point with its frame instead and LOCAL can stay fixed.
+## One card each makes the reference visible alongside the reported position.
+##
+## `frame` follows whatever the CoordinateSystem3M is set to, which is what every
+## existing placement gets. `world` and `local` pin this card to one of them and
+## caption it, so two cards side by side cannot be confused for each other.
+@export_enum("frame", "world", "local") var space: String = "frame"
+## Empty retains the shared feed; named channels belong to one instrument.
+@export var readout_channel: String = "":
+	set(value):
+		readout_channel = value.strip_edges()
+		set_meta("readout_channel", readout_channel)
+## THE CAPTION IN THE DEFAULT CASE (2026-09-04, from the Point_One final's
+## artifact proposals). A card left on `frame` printed no caption at all, so the
+## shipped placement showed three world numbers with nothing saying so, while the
+## artifact's own identity line still talks about the frame-local position. The
+## caption is now built for every card; a pinned card prints its pin, and a
+## `frame` card prints whichever space the feed names when it arrives, so a
+## number is never on the wall without the space it is true in.
+
+var _label: Label3D = null
+var _caption: Label3D = null
+
+
+func _ready() -> void:
+	add_to_group("ada_coordinate_readout")
+	_build()
+
+
+func _build() -> void:
+	# the thin dark frame, proud of the wall
+	var frame := MeshInstance3D.new()
+	frame.name = "Frame"
+	var fb := BoxMesh.new()
+	var ds: float = maxf(0.05, display_scale)
+	fb.size = Vector3(frame_width * ds, frame_height * ds, 0.03 * ds)
+	frame.mesh = fb
+	var fm := StandardMaterial3D.new()
+	fm.albedo_color = Color(0.09, 0.09, 0.1)
+	fm.roughness = 0.55
+	frame.material_override = fm
+	add_child(frame)
+	# the white card inside it — the museum text works' own ground
+	var card := MeshInstance3D.new()
+	card.name = "Card"
+	var cb := BoxMesh.new()
+	cb.size = Vector3((frame_width - 0.06) * ds, (frame_height - 0.06) * ds, 0.034 * ds)
+	card.mesh = cb
+	var cm := StandardMaterial3D.new()
+	cm.albedo_color = Color(0.93, 0.925, 0.91)
+	cm.roughness = 0.85
+	card.material_override = cm
+	add_child(card)
+	# black text on the card
+	_label = Label3D.new()
+	_label.name = "Value"
+	# font_size is the glyph RASTER; pixel_size is metres-per-pixel, which is what
+	# actually makes it big in the room. Raising both keeps the letters crisp.
+	_label.font_size = 44
+	_label.pixel_size = 0.0016 * ds
+	_label.modulate = Color(0.1, 0.1, 0.12)
+	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_label.no_depth_test = false
+	_label.position = Vector3(0, 0, 0.022 * ds)
+	add_child(_label)
+	# the space the numbers are true in — pinned cards say so at once, a `frame`
+	# card says so as soon as the feed names it
+	_caption = Label3D.new()
+	_caption.name = "SpaceCaption"
+	_caption.text = space.to_upper() if space != "frame" else ""
+	_caption.font_size = 30
+	_caption.pixel_size = 0.0016 * ds
+	_caption.modulate = Color(0.42, 0.44, 0.48)
+	_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_caption.position = Vector3(0, (frame_height * 0.5 - 0.085) * ds, 0.022 * ds)
+	add_child(_caption)
+	_reset_text()
+
+
+func _reset_text() -> void:
+	if _label == null:
+		return
+	if axis == "xyz":
+		_label.text = "x = —\ny = —\nz = —"
+	else:
+		_label.text = "%s = —" % axis
+
+
+## Group feed from CoordinateSystem3M: the grab point's position, and optionally
+## the space it is measured in ("world" | "local"). A card pinned to a space keeps
+## its own caption; a `frame` card takes the feed's word for it.
+func show_coordinates(p: Vector3, feed_space: String = "") -> void:
+	if _label == null:
+		return
+	if space == "frame" and _caption != null and feed_space in ["world", "local"]:
+		var cap_text: String = feed_space.to_upper()
+		if _caption.text != cap_text:
+			_caption.text = cap_text
+	var t := ""
+	if axis == "xyz":
+		t = "x = %.2f\ny = %.2f\nz = %.2f" % [p.x, p.y, p.z]
+	else:
+		var v: float = p.x
+		if axis == "y":
+			v = p.y
+		elif axis == "z":
+			v = p.z
+		t = "%s = %.2f" % [axis, v]
+	if _label.text != t:
+		_label.text = t
+
+
+func apply_grid_config(config: Dictionary) -> void:
+	var rebuild: bool = false
+	if config.has("readout_channel"):
+		readout_channel = str(config["readout_channel"])
+	if config.has("display_scale"):
+		display_scale = maxf(0.05, float(config["display_scale"]))
+		rebuild = true
+	if config.has("space"):
+		var sp := str(config["space"]).strip_edges().to_lower()
+		if sp in ["frame", "world", "local"]:
+			space = sp
+			rebuild = true
+	if config.has("axis"):
+		var a := str(config["axis"]).strip_edges().to_lower()
+		if a in ["xyz", "x", "y", "z"]:
+			axis = a
+	# Loaders may configure before adding to the tree. In that case _ready()
+	# builds once with the final parameters, rather than adding a second card.
+	if not is_node_ready():
+		return
+	if rebuild:
+		for child in get_children():
+			remove_child(child)
+			child.queue_free()
+		_label = null
+		_caption = null
+		_build()
+	elif config.has("axis"):
+		_reset_text()

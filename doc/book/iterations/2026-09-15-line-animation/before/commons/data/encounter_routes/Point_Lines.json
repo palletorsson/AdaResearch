@@ -1,0 +1,152 @@
+{
+  "schema": "encounter-route/1",
+  "map": "Point_Lines",
+  "status": "proposed",
+  "note": "The primary Line Space Workshop and its book passage now proceed by count: two, three, four, more. The first three stations keep count and rod lengths fixed. The associated bounded geometry experiment checks 29 arrangements; headset reach and comfort remain unverified. Older line studies remain available.",
+  "stops": [
+    {
+      "id": "connect",
+      "title": "Connect two points",
+      "action": "Bring the two points together. Watch the line appear and the barrier fly apart.",
+      "question": "What did connecting two positions allow you to do?",
+      "stage": "opening applied to book",
+      "members": [
+        "line_demo",
+        "do_not_cross_barrier"
+      ],
+      "visits": [
+        {
+          "lookup": "line_demo"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "measure",
+      "title": "Give a span a measure",
+      "action": "Move the measuring line's endpoints. Compare the changing distance with one metre.",
+      "question": "What does a unit let us compare?",
+      "stage": "opening applied to book",
+      "members": [
+        "line",
+        "scale_lines"
+      ],
+      "visits": [
+        {
+          "lookup": "line",
+          "at": [
+            16,
+            2
+          ]
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "red-line",
+      "title": "Cross a red line",
+      "action": "Approach the red line, then cross it and look back.",
+      "question": "What does this division change, and what do we bring to it?",
+      "stage": "opening applied to book",
+      "members": [
+        "redline"
+      ],
+      "visits": [
+        {
+          "lookup": "redline"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "walk",
+      "title": "Walk this line; read your trace",
+      "action": "Walk across the glass-covered basin, alongside and across the black stripe. Compare it with your recorded route.",
+      "question": "What kind of line does your movement leave?",
+      "stage": "existing encounter",
+      "members": [
+        "walk_this_line_marking",
+        "player_trace"
+      ],
+      "visits": [
+        {
+          "lookup": "walk_this_line_marking"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "combine",
+      "title": "Two lines, three, four, more",
+      "action": "Keep count and lengths fixed while changing relations: two can cross or be skew; three can close a planar triangle; four can fold a closed outline out of the plane. Then compare six-rod grids and a tetrahedron before adding a twelve-edge cube.",
+      "question": "What becomes possible when we add a segment, and what can change without adding one?",
+      "stage": "count-led artifact and book; 29-case geometric study; headset review pending",
+      "members": [
+        "line_space_workshop",
+        "axis_line"
+      ],
+      "visits": [
+        {
+          "lookup": "line_space_workshop",
+          "at": [
+            12,
+            11
+          ]
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "depth",
+      "title": "Carry a fixed span",
+      "action": "Carry and turn the original grabbable line. Compare its fixed length with the independently movable segments in the workshop.",
+      "question": "What changes when the arrangement no longer shares one plane?",
+      "stage": "existing extension",
+      "members": [
+        "grabbable_line",
+        "line_collection"
+      ],
+      "visits": [
+        {
+          "lookup": "grabbable_line"
+        }
+      ],
+      "draft": ""
+    },
+    {
+      "id": "viewpoint",
+      "title": "Compare viewpoints",
+      "action": "Walk around the existing perspective arrangements and parallel lines. Compare their views with the rails and drawing in the workshop.",
+      "question": "What appears joined from here, and separates when you move?",
+      "stage": "existing extension",
+      "members": [
+        "perspective_lines",
+        "parallel_lines"
+      ],
+      "visits": [
+        {
+          "lookup": "perspective_lines",
+          "at": [
+            5,
+            14
+          ]
+        }
+      ],
+      "draft": ""
+    }
+  ],
+  "basedOn": [
+    {
+      "path": "commons/maps/Point_Lines/map_data.json",
+      "sha256": "39bb2b440b3f5c7bdd9b62c7cda9cfeb8418fb1786669bc52f82f9e9766634ed"
+    },
+    {
+      "path": "commons/maps/Point_Lines/final.md",
+      "sha256": "e88ab1d4c4fd810a89e661d44ff7dce8626404fbb45cf9c4ec3b8dd9098a7894"
+    },
+    {
+      "path": "commons/data/artifact_roles.json",
+      "sha256": "eb2c6e178bcd3d18ad5a71752cb5dd1fc9006ed58472d837a33a627ba914bbc5"
+    }
+  ]
+}

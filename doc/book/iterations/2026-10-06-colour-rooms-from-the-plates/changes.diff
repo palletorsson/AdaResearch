@@ -1,0 +1,112 @@
+--- before/commons/scenes/endless_museum.gd
++++ after/commons/scenes/endless_museum.gd
+@@ -11476,6 +11476,7 @@
+ 		return
+ 	if completed:
+ 		gs.set_meta("stage_grid_ready", true)
++		preload("res://commons/scenes/em/em_colour_gallery.gd").install(gs)
+ 	_sim_grid_disarm(gs)
+ 	_sim_grid_carry(gs, zbase)
+ 
+--- before/commons/scenes/em/em_identity.gd
++++ after/commons/scenes/em/em_identity.gd
+@@ -14,6 +14,10 @@
+ 	# Keep lettering out of tall exhibit walls and roofs at the lettering height.
+ 	var keepouts := exclusions.duplicate()
+ 	for mesh: MeshInstance3D in hall.find_children("*", "MeshInstance3D", true, false):
++		# Hidden staging skies and private film viewports are not obstructions
++		# in the hall the visitor occupies.
++		if not mesh.is_visible_in_tree() or mesh.get_world_3d() != hall.get_world_3d():
++			continue
+ 		var bounds: AABB = (hall.global_transform.affine_inverse() * mesh.global_transform) * mesh.get_aabb()
+ 		if bounds.end.y < HEIGHT - 0.3 or bounds.position.y > HEIGHT + 0.4:
+ 			continue
+--- before/commons/maps/Color_Context_Placed/map_data.json
++++ after/commons/maps/Color_Context_Placed/map_data.json
+@@ -6218,6 +6218,7 @@
+ 	"name": "Colour joins the primitives",
+ 	"version": "dna-columns-2026-09-17",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,
+--- before/commons/maps/Color_Flashlight/map_data.json
++++ after/commons/maps/Color_Flashlight/map_data.json
+@@ -23,6 +23,7 @@
+ 	},
+ 	"title": "Light Reveals Color",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,
+--- before/commons/maps/Color_Nails/map_data.json
++++ after/commons/maps/Color_Nails/map_data.json
+@@ -1129,6 +1129,7 @@
+ 	"title": "Grand / Petit — Nail Salon",
+ 	"version": "placed-promenade",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,
+--- before/commons/maps/Color_Rainbow/map_data.json
++++ after/commons/maps/Color_Rainbow/map_data.json
+@@ -25,6 +25,7 @@
+ 	"title": "Every Body / More Colour",
+ 	"eye_shot_adopted": "Trial_eye_Color_Rainbow",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,
+--- before/commons/maps/Color_Pillar/map_data.json
++++ after/commons/maps/Color_Pillar/map_data.json
+@@ -24,6 +24,7 @@
+ 	},
+ 	"title": "Color Mixing and Collection",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,
+--- before/commons/maps/Color_Grid_Pallet/map_data.json
++++ after/commons/maps/Color_Grid_Pallet/map_data.json
+@@ -24,6 +24,7 @@
+ 	},
+ 	"title": "Grid as Color Canvas",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,
+@@ -1279,7 +1280,7 @@
+ 		"",
+ 		"",
+ 		" ",
+-		"spectrum_forest:0:2",
++		"spectrum_forest:0:1.0:0.22#plinth:0",
+ 		" ",
+ 		" ",
+ 		" ",
+--- before/commons/maps/Color_Paint/map_data.json
++++ after/commons/maps/Color_Paint/map_data.json
+@@ -130,6 +130,7 @@
+   "title": "Gestural Action Painting",
+   "version": "placed-humanoid_walker",
+   "museum": {
++    "gallery_finish": "colour_2026_10",
+    "wall_height": 8,
+    "open_roof": true,
+    "gate": false,
+--- before/commons/maps/Color_Walls/map_data.json
++++ after/commons/maps/Color_Walls/map_data.json
+@@ -25,6 +25,7 @@
+ 	"title": "Color_Walls",
+ 	"eye_shot_adopted": "Trial_eye_Color_Walls",
+ 	"museum": {
++	  "gallery_finish": "colour_2026_10",
+ 	  "wall_height": 8,
+ 	  "open_roof": true,
+ 	  "gate": false,

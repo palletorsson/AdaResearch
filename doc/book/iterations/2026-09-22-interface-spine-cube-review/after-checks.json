@@ -1,0 +1,792 @@
+{
+	"approaches": [
+		{
+			"builder": 0,
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"level_floor": true
+		},
+		{
+			"builder": 1,
+			"clear_fraction": 1.0,
+			"clear_start": true,
+			"level_floor": true
+		}
+	],
+	"builders": [
+		{
+			"artifact": [
+				5.5,
+				1.10800004005432,
+				9.5
+			],
+			"feet": [
+				5.5,
+				0.000000141561031341553,
+				11.3299999237061
+			],
+			"index": 0,
+			"panel": [
+				5.5,
+				1.01999998092651,
+				10.8500003814697
+			]
+		},
+		{
+			"artifact": [
+				2.5,
+				1.10800004005432,
+				12.5
+			],
+			"feet": [
+				2.5,
+				0.000000141561031341553,
+				14.3299999237061
+			],
+			"index": 1,
+			"panel": [
+				2.5,
+				1.01999998092651,
+				13.8500003814697
+			]
+		}
+	],
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Both authored builders remain for comparison",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 operating pose has floor",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 standing capsule clears geometry",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 last metre is clear and supported",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 museum walker reaches console",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v0 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v0 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v1 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v1 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v2 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v2 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v3 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v3 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v4 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v4 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v5 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v5 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v6 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v6 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v7 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 v7 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 pause becomes a lit RESUME control",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 pause stops its assembly",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 resume reveals usable corners",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 diagonal button reveals all six source diagonals",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 real XRTools grab holds v6",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 held corner moves in local geometry",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 replay cannot interrupt a held corner",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 restore cannot reset a held corner",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 held-state actions visibly dim",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 held-corner text fits its 2D screen",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 readout keeps at least 22 px per metre-scaled viewport",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 console is excluded from specimen seating",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 console support stands on hall floor",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 readout stays below the intact cube from operating eye",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 moving a corner preserves connectivity",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 leaves its comparison partner unchanged",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 releasing restores available actions",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 replay retains deformation after release",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 restore retains initial cube",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 operating pose has floor",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 standing capsule clears geometry",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 last metre is clear and supported",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 museum walker reaches console",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v0 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v0 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v1 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v1 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v2 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v2 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v3 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v3 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v4 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v4 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v5 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v5 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v6 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v6 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v7 stays in tested grip height band",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 v7 has a clear supported near-grab pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 pause becomes a lit RESUME control",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 pause stops its assembly",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 resume reveals usable corners",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 diagonal button reveals all six source diagonals",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 real XRTools grab holds v6",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 held corner moves in local geometry",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 replay cannot interrupt a held corner",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 restore cannot reset a held corner",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 held-state actions visibly dim",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 held-corner text fits its 2D screen",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 readout keeps at least 22 px per metre-scaled viewport",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 console is excluded from specimen seating",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 console support stands on hall floor",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 readout stays below the intact cube from operating eye",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 moving a corner preserves connectivity",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 leaves its comparison partner unchanged",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 releasing restores available actions",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 replay retains deformation after release",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 restore retains initial cube",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/ReplayButton/InteractableAreaButton",
+			"horizontal_distance": 0.462156802415848,
+			"label": "0 ReplayButton",
+			"position": [
+				5.21500015258789,
+				0.825434148311615,
+				10.9661808013916
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/PauseButton/InteractableAreaButton",
+			"horizontal_distance": 0.376017242670059,
+			"label": "0 PauseButton",
+			"position": [
+				5.40500020980835,
+				0.825434148311615,
+				10.9661808013916
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/RestoreButton/InteractableAreaButton",
+			"horizontal_distance": 0.376017242670059,
+			"label": "0 RestoreButton",
+			"position": [
+				5.59499979019165,
+				0.825434148311615,
+				10.9661808013916
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/DiagonalButton/InteractableAreaButton",
+			"horizontal_distance": 0.462156802415848,
+			"label": "0 DiagonalButton",
+			"position": [
+				5.78499984741211,
+				0.825434148311615,
+				10.9661808013916
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@680/ExperimentPanel/ReplayButton/InteractableAreaButton",
+			"horizontal_distance": 0.462156593799591,
+			"label": "1 ReplayButton",
+			"position": [
+				2.21499991416931,
+				0.825434148311615,
+				13.9661817550659
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@680/ExperimentPanel/PauseButton/InteractableAreaButton",
+			"horizontal_distance": 0.376016855239868,
+			"label": "1 PauseButton",
+			"position": [
+				2.40499997138977,
+				0.825434148311615,
+				13.9661817550659
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@680/ExperimentPanel/RestoreButton/InteractableAreaButton",
+			"horizontal_distance": 0.376016855239868,
+			"label": "1 RestoreButton",
+			"position": [
+				2.59500002861023,
+				0.825434148311615,
+				13.9661817550659
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 0.825434006750584,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@680/ExperimentPanel/DiagonalButton/InteractableAreaButton",
+			"horizontal_distance": 0.462156593799591,
+			"label": "1 DiagonalButton",
+			"position": [
+				2.78500008583069,
+				0.825434148311615,
+				13.9661817550659
+			]
+		}
+	],
+	"failures": [],
+	"grab_poses": [
+		{
+			"builder": 0,
+			"corner": 0,
+			"feet": [
+				5.0981822013855,
+				0.000000141561031341553,
+				8.52992630004883
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217695236206
+		},
+		{
+			"builder": 0,
+			"corner": 1,
+			"feet": [
+				6.47007369995117,
+				0.000000141561031341553,
+				9.09818267822266
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217784643173
+		},
+		{
+			"builder": 0,
+			"corner": 2,
+			"feet": [
+				6.47007369995117,
+				0.000000141561031341553,
+				9.09818267822266
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217784643173
+		},
+		{
+			"builder": 0,
+			"corner": 3,
+			"feet": [
+				5.0981822013855,
+				0.000000141561031341553,
+				8.52992630004883
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217695236206
+		},
+		{
+			"builder": 0,
+			"corner": 4,
+			"feet": [
+				4.52992677688599,
+				0.000000141561031341553,
+				9.90181732177734
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217218399048
+		},
+		{
+			"builder": 0,
+			"corner": 5,
+			"feet": [
+				5.9018177986145,
+				0.000000141561031341553,
+				10.4700736999512
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217695236206
+		},
+		{
+			"builder": 0,
+			"corner": 6,
+			"feet": [
+				5.9018177986145,
+				0.000000141561031341553,
+				10.4700736999512
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217695236206
+		},
+		{
+			"builder": 0,
+			"corner": 7,
+			"feet": [
+				4.52992677688599,
+				0.000000141561031341553,
+				9.90181732177734
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217218399048
+		},
+		{
+			"builder": 1,
+			"corner": 0,
+			"feet": [
+				2.09818243980408,
+				0.000000141561031341553,
+				11.5299263000488
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217725038528
+		},
+		{
+			"builder": 1,
+			"corner": 1,
+			"feet": [
+				3.47007346153259,
+				0.000000141561031341553,
+				12.0981826782227
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217576026917
+		},
+		{
+			"builder": 1,
+			"corner": 2,
+			"feet": [
+				3.47007346153259,
+				0.000000141561031341553,
+				12.0981826782227
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217576026917
+		},
+		{
+			"builder": 1,
+			"corner": 3,
+			"feet": [
+				2.09818243980408,
+				0.000000141561031341553,
+				11.5299263000488
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217725038528
+		},
+		{
+			"builder": 1,
+			"corner": 4,
+			"feet": [
+				1.52992653846741,
+				0.000000141561031341553,
+				12.9018173217773
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217576026917
+		},
+		{
+			"builder": 1,
+			"corner": 5,
+			"feet": [
+				2.90181756019592,
+				0.000000141561031341553,
+				13.4700736999512
+			],
+			"height": 0.60799989849329,
+			"horizontal_distance": 0.480217725038528
+		},
+		{
+			"builder": 1,
+			"corner": 6,
+			"feet": [
+				2.90181756019592,
+				0.000000141561031341553,
+				13.4700736999512
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217725038528
+		},
+		{
+			"builder": 1,
+			"corner": 7,
+			"feet": [
+				1.52992653846741,
+				0.000000141561031341553,
+				12.9018173217773
+			],
+			"height": 1.60799989849329,
+			"horizontal_distance": 0.480217576026917
+		}
+	],
+	"passed": true,
+	"room": "Point_Animatedcube",
+	"scope": "Actual museum hall, standing capsule, native pointer buttons, world control dimensions. Native corner grab and held-action guards; desktop evidence, headset comfort not tested.",
+	"shots": [
+		"builder-0-encounter.png",
+		"builder-0-controls.png",
+		"builder-0-held.png",
+		"builder-1-encounter.png",
+		"builder-1-controls.png",
+		"builder-1-held.png"
+	]
+}

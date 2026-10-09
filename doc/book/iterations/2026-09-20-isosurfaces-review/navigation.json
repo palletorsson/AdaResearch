@@ -1,0 +1,186 @@
+{
+  "checks": [
+    {
+      "message": "thirteen halls and a plan owner",
+      "ok": true
+    },
+    {
+      "message": "select ISO_Introduction",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_Introduction",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_Introduction",
+      "ok": true
+    },
+    {
+      "message": "select ISO_LookupTable",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_LookupTable",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_LookupTable",
+      "ok": true
+    },
+    {
+      "message": "select ISO_ShapesGallery",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_ShapesGallery",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_ShapesGallery",
+      "ok": true
+    },
+    {
+      "message": "select ISO_TorusGyroid",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_TorusGyroid",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_TorusGyroid",
+      "ok": true
+    },
+    {
+      "message": "select ISO_Sculpting",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_Sculpting",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_Sculpting",
+      "ok": true
+    },
+    {
+      "message": "select ISO_FlatTerrain",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_FlatTerrain",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_FlatTerrain",
+      "ok": true
+    },
+    {
+      "message": "select ISO_PortalLandscape",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_PortalLandscape",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_PortalLandscape",
+      "ok": true
+    },
+    {
+      "message": "select ISO_Caves",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_Caves",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_Caves",
+      "ok": true
+    },
+    {
+      "message": "select ISO_CaveGeneration",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_CaveGeneration",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_CaveGeneration",
+      "ok": true
+    },
+    {
+      "message": "select ISO_AnimatedNoise",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_AnimatedNoise",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_AnimatedNoise",
+      "ok": true
+    },
+    {
+      "message": "select ISO_Metaballs",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_Metaballs",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_Metaballs",
+      "ok": true
+    },
+    {
+      "message": "select ISO_ImplicitModeling",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_ImplicitModeling",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_ImplicitModeling",
+      "ok": true
+    },
+    {
+      "message": "select ISO_RhizomeBody",
+      "ok": true
+    },
+    {
+      "message": "owner for ISO_RhizomeBody",
+      "ok": true
+    },
+    {
+      "message": "advance from ISO_RhizomeBody",
+      "ok": true
+    },
+    {
+      "message": "chapter cursor resets after final hall",
+      "ok": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "route": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_PortalLandscape",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling",
+    "ISO_RhizomeBody"
+  ],
+  "scope": "Production plan selection; not a physical portal-crossing test"
+}

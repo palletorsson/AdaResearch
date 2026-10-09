@@ -1,0 +1,18 @@
+--- before/commons/maps/Lab_Path/intent.md
++++ commons/maps/Lab_Path/intent.md
+@@ -1,6 +1,9 @@
+-Concept: The corridor back. Every sequence ends here — not a lesson but a threshold. The dark sphere pulses in the passage between what was learned and what comes next, marking transition without teaching.
+-Sequence role: Ninth and final map in the Noise sequence; the exit shared by all spine sequences. The same 5x5 grid, the same low ceiling, the same teleporter. What changes is what the learner carries through it. Before noise, randomness was memoryless and discontinuous. Now it remembers its neighbors — Perlin gradients, Simplex simplices, octaves layered into terrain, domain warping folding space. The corridor does not summarize. It lets the crossing happen; follows Noise_Perlin_Simplex.
+-Technical angle: No technical content. The map is structurally minimal — a short corridor with a teleporter to the next sequence. The dark_sphere is the only artifact, running its standard emission cycle. The absence of interactables is the point: after eight maps of parameter spaces and shader pipelines, the final map offers nothing to manipulate.
+-Critical angle: The Lab_Path refuses synthesis. It does not ask what was learned or test retention. It is the architectural recognition that transitions are not lessons — they are passages, and passages work by being unremarkable. The sphere rotates. The corridor waits. Becoming does not announce itself. On the other side: procedural generation, morphogenesis, worlds assembled from the structured chaos this sequence defined. The proof of the sequence is not in this room but in what the learner builds after leaving it.
+-Key artifacts: dark_sphere is the sole artifact — pulsing, rotating, unchanged across all nine maps, the constant that outlasts every variation the sequence introduced.
+-Gap: None. The emptiness is the intent.
++# Lab Path — an optional return
++
++Lab_Path remains a small grid-lane corridor and an optional reflection after Noise. It is listed in the sequence source and complete text capture, but its book pearl stays drop:true; the museum goes from Noise_Perlin_Simplex directly to Cellular Automata. It is not the shared endpoint of every sequence.
++
++Keep the question of two tellings: what happened in the encounter, and what the operation did. Their strongest invitation now also belongs to the main Perlin/Simplex ending, where every spine reader can meet it. The optional coda can invite a return without sending the reader into Cellular Automata a second time.
++
++The existing dark sphere gives the corridor a quiet continuing process. No new primary lesson or artifact is promoted here. Spatial correlation in a noise field is not stored memory of a previous state; the next main sequence introduces that different relation explicitly.
++
++Retain the grid, teleporter and existing scene. A future decision to build this pause into the museum would require spatial work, not simply changing its prose or clearing the drop flag.

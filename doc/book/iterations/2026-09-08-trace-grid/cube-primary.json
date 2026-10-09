@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-08",
+  "room": "Point_Animatedcube",
+  "primary": [
+    "cube_lines",
+    "polyhedron_nets_cube",
+    "animatedcubebuilder"
+  ],
+  "improvements": [
+    "Two existing builders gain opt-in side instruments with replay, local assembly pause, restore and diagonal controls",
+    "Numbered handles and actual layer/vertex displacement readout",
+    "Hidden geometry follows deformation so replay retains the current form",
+    "Book, tutorial and critical text ground the distinction between replay and restoration in code; secondary comparisons retained"
+  ],
+  "interaction_checks": {
+    "checks": 40,
+    "failures": [],
+    "scope": "Actual pointer-button events, supplied handle positions in a translated rotated scene, assembly and mesh checks; full-room/headset interaction unverified."
+  },
+  "preview": "ada_run/cube_primary/preview.png",
+  "reusable_pattern": "Separate replaying a presentation from restoring experimental state. Make the distinction explicit in controls and prose; keep an unchanged comparison nearby. Derive explanatory overlays from the same data as the artifact.",
+  "remaining": "Full-museum/headset pass for panel position, handle reach and folding-net legibility; no saved deformation library or physical enclosure validator."
+}

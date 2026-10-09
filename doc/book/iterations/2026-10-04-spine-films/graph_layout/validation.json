@@ -1,0 +1,27 @@
+{
+	"duration": 24.0,
+	"evidence": {
+		"actual_functions": [
+			"initialize_graph",
+			"calculate_repulsion_forces",
+			"calculate_spring_forces",
+			"simulation_step"
+		],
+		"adjacency_hash": 681609261,
+		"display_scale": 0.132792324564736,
+		"edges": 8,
+		"layout_seed": 47,
+		"mutuality": "none",
+		"nodes": 9,
+		"snapshot_count": 401,
+		"source_delta": 0.04,
+		"source_separate_from_scene": true,
+		"source_steps": 400
+	},
+	"geometry_nodes": 21,
+	"phases": 4,
+	"source_paths": [
+		"res://algorithms/graphtheory/forcedirected3d/forcedirected3d.gd"
+	],
+	"title": "THE GRAPH KEEPS ITS CONNECTIONS"
+}

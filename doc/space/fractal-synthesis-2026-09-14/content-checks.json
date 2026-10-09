@@ -1,0 +1,30 @@
+{
+  "checks": 25,
+  "passed": [
+    "Ten original artifacts remain exactly once; one staging fixture added",
+    "Old enclosure and sphere platform preserved; only the obsolete teleporter hole filled",
+    "All layers use consistent 19 by 33 dimensions",
+    "Museum follows authored placements",
+    "Book anchors follow Cantor then tree",
+    "Exactly the book artifacts are primary",
+    "Unrelated roles and order unchanged",
+    "Book cards and hero match the manuscript",
+    "Unrelated book pearls unchanged",
+    "Unrelated trunk and hand pearls unchanged",
+    "Only this hall changed in ada_run/em_plan.json",
+    "Only this hall changed in commons/data/museum/em_plan.json",
+    "Per-room thread follows both primary book passages",
+    "Global dealing manifest keeps its first-appearance deduplication; returning works remain in the room thread",
+    "Unrelated spine entries unchanged",
+    "Existing primary/numerical generator unchanged: algorithms/fractals/cantorset/cantor_set.gd",
+    "Existing primary/numerical generator unchanged: algorithms/fractals/recursive_tree/recursive_tree.gd",
+    "Existing primary/numerical generator unchanged: algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd",
+    "Stale unrelated lesson replaced: commons/maps/Fractal_Synthesis/technical.md",
+    "Stale unrelated lesson replaced: commons/maps/Fractal_Synthesis/critical.md",
+    "Stale unrelated lesson replaced: commons/maps/Fractal_Synthesis/tutorial.md",
+    "Book excerpt comes from active source",
+    "Book excerpt comes from active source",
+    "Seven fractal reviews remain valid; L-systems is next",
+    "Final runtime receipt matches all its sources"
+  ]
+}

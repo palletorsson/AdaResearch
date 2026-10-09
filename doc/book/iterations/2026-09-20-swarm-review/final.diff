@@ -1,0 +1,60 @@
+--- before/commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md
++++ commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md
+@@ -4,7 +4,7 @@
+ 
+ <!-- @ant_colony_optimization -->
+ 
+-Watch the colony long enough to recognise a trail. Raise EVAPORATE and see whether that trail persists between visits. Use RESET before making a second comparison. Keep ANTS steady at first, so a change in the population does not obscure the effect of changing its shared memory.
++Watch the colony long enough to recognise a trail. Use RESET and watch the beginning again. The food returns to the same places, with the same qualities; the ants begin with the same headings. Now raise EVAPORATE, reset, and compare. Keep ANTS steady at first. You are changing how quickly the ground forgets, while giving the next colony the same beginning.
+ 
+ The trail image is a record of deposits that are also disappearing. With faster evaporation, continued traffic matters more to keeping a route visible. A line that looks like a stable piece of the environment is actually being maintained by repeated events.
+ 
+@@ -12,7 +12,7 @@
+ 
+ This is an agent-based model: individuals carry state and follow rules, while their interactions produce a population-level picture. Here those rules include movement, sensing, depositing traces and responding to food. The field is shared state. Changing evaporation changes what every agent can encounter without directly changing every agent’s position.
+ 
+-Next vary ANTS. This control changes the number of agents and respawns them, so treat it as a new population rather than a continuous observation of the old individuals. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks. They may produce superficially similar pictures for different reasons.
++Next vary ANTS. The control replaces the population but leaves its field behind. The new ants arrive in a world marked by ants that are no longer there. Watch whether they pick up an old route. Then RESET: this time the marks disappear too. Replacing the travellers and erasing their history are two different acts. Compare fewer agents leaving more persistent marks with more agents leaving shorter-lived marks; similar pictures can have different histories.
+ 
+ The MODE control offers three behaviours within this model family. It does not turn the room into a language for inventing arbitrary agents. A useful comparison still begins by naming exactly which rule or condition has changed.
+ 
+--- before/commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md
++++ commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md
+@@ -4,9 +4,9 @@
+ 
+ <!-- @fitness_landscape_politics -->
+ 
+-Watch the population under CONVERGE, then choose SPREAD. Keep INERTIA unchanged while you compare the movement. Next try NOVELTY. Before reading these as success and failure, describe what each setting seems to reward.
++Watch the population under CONVERGE, then choose SPREAD. The button changes the score while the particles keep their positions and motion. Keep INERTIA steady and watch the turn. For a comparison from the same beginning, use RESET after selecting each objective: it restores the same scatter and velocities. Next try NOVELTY. Before reading these as success and failure, describe what each setting seems to reward.
+ 
+-CONVERGE rewards movement towards the centre. SPREAD rewards distance from it. NOVELTY rewards distance from positions retained in an archive. The same family of moving particles can therefore gather, disperse or seek unfamiliar territory because the scoring rule has changed.
++CONVERGE rewards movement towards the centre. SPREAD rewards distance from it; two particles can score equally well while crowding the same edge. NOVELTY rewards distance from positions retained in an archive. These are three different questions put to the same moving bodies. The labels Corporate, Ecological and Artistic are invitations to argue about those questions, not properties proved by the equations.
+ 
+ Keep your attention on one region when you exchange CONVERGE for SPREAD. The region has not moved, but its value under the new objective has changed. Describe the difference as a change of reward before describing any particle as more capable. This also helps with a slow response: the visible position belongs to the current moment, while continuing velocity and remembered positions can still influence where the next update carries the particle.
+ 
+@@ -14,7 +14,11 @@
+ 
+ “Best” is a relation between a position and an objective. It is not a property the particle discovers independently of the scoring rule. A position can be excellent under one button and poor under another. The ant colony’s traces remembered visits; these particles explicitly remember evaluations.
+ 
+-Spend longer with NOVELTY. Newness depends on what has been remembered, and this archive has a finite capacity. An apparently unexplored place can be unfamiliar to the stored record without being unfamiliar to the world. Every novelty measure needs an answer to the question “new relative to what?”
++Spend longer with NOVELTY. At its beginning the archive remembers the current positions. Its count grows as more visits are kept, and the bright regions on the plate change with that record. Follow a place that was bright. Does it remain promising once the swarm has been there?
++
++A remembered position must be scored again when the archive changes. Yesterday's high score cannot simply win against today's distances: the question has changed under it. The particle retains a place, but its claim to be best has to be renewed. Here forgetting and revaluation are part of the mechanism that lets movement continue.
++
++The archive holds at most two hundred positions, sampled one at a time rather than recording every visit. When it fills, new entries replace the oldest. An apparently unexplored place can be unfamiliar to this record without being unfamiliar to the world. New relative to whom, and to how much of their past?
+ 
+ Now change INERTIA within one objective. Ask whether overshooting is always wasteful. Motion that delays settling can also carry a particle beyond a region it would otherwise keep revisiting. The consequences depend on the landscape and on what the score values.
+ 
+--- before/commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md
++++ commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md
+@@ -14,7 +14,9 @@
+ 
+ This distinction matters across the sequence. A flock followed neighbours; ants read traces; particles pursued remembered scores. Here the model includes a caretaker that operates at a different scale from its organisms. An overall pattern does not tell us which scale supplied the decisive action.
+ 
+-Watch for a population recovery, but resist assigning its cause from appearance alone. A rising count does not identify whether reproduction or replenishment produced the new bodies. A stronger future version would mark interventions when they occur, allowing you to compare a maintained population with one left to its local rules.
++Watch for a population recovery. Beside the living box, the POPULATION SUPPORT record counts prey and predators supplied from outside. Food has its own count; predator pressure reports when a population-level rule is reducing predator health. These marks come from the interventions themselves. A rise in prey accompanied by five supplied bodies tells a different story from a rise with no addition recorded. Neither view alone gives the whole history.
++
++Look back at the organisms after reading the record. Does the same recovery look different now? The intervention has not become more visible in their movements; you have gained another way to account for them. A future comparison could let you turn population care off while keeping the starting conditions fixed. For now the record exposes support without withdrawing it.
+ 
+ That comparison need not make intervention shameful. Care, repair and replenishment can be necessary. The question is whether they remain visible when someone describes the result as autonomous. A claim about self-organisation should name the support that makes continued organisation possible.
+ 

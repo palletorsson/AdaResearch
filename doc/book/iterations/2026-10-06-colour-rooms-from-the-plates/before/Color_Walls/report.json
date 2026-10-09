@@ -1,0 +1,240 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "actual museum grid exists",
+      "passed": true
+    },
+    {
+      "name": "actual grid finished building",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "installed": [
+      {
+        "local_to_grid": [
+          7.0,
+          2.20000004768372,
+          -4.0
+        ],
+        "name": "Lobby_window",
+        "source": "res://commons/artifacts/large_window/large_window.gd"
+      },
+      {
+        "local_to_grid": [
+          0.639999985694885,
+          0.5,
+          -1.90000009536743
+        ],
+        "name": "Lobby_extinguisher",
+        "source": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.gd"
+      },
+      {
+        "local_to_grid": [
+          15.4399995803833,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_elevator",
+        "source": "res://commons/artifacts/station/station_door.gd"
+      },
+      {
+        "local_to_grid": [
+          14.6000003814697,
+          0.5,
+          -2.29999995231628
+        ],
+        "name": "Lobby_pallet",
+        "source": "res://commons/artifacts/wooden_pallet/wooden_pallet.gd"
+      },
+      {
+        "local_to_grid": [
+          6.0,
+          0.5,
+          8.0
+        ],
+        "name": "DarkSphere",
+        "source": "res://commons/artifacts/dark_sphere/dark_sphere.gd"
+      },
+      {
+        "local_to_grid": [
+          8.0,
+          1.5,
+          9.0
+        ],
+        "name": "RainbowHallway",
+        "source": "res://algorithms/wavefunctions/rainbow_hallway/RainbowHallway.gd"
+      },
+      {
+        "local_to_grid": [
+          23.0,
+          0.5,
+          20.0
+        ],
+        "name": "ColorConstellationOffice",
+        "source": "res://algorithms/color/color_mixing/color_constellation_office.gd"
+      },
+      {
+        "local_to_grid": [
+          12.0,
+          0.0,
+          26.0
+        ],
+        "name": "SubpixelDisplay",
+        "source": "res://algorithms/color/subpixel_display/subpixel_display.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          1.70000004768372,
+          31.0
+        ],
+        "name": "ColorSpaceNavigator",
+        "source": "res://commons/artifacts/color_space_navigator/color_space_navigator.gd"
+      },
+      {
+        "local_to_grid": [
+          28.0,
+          1.45000004768372,
+          31.0
+        ],
+        "name": "GradientInterpolator",
+        "source": "res://algorithms/color/gradient_interpolator/gradient_interpolator.gd"
+      },
+      {
+        "local_to_grid": [
+          1.0,
+          0.5,
+          32.0
+        ],
+        "name": "film_gradient_paths",
+        "source": "res://commons/artifacts/concept_monitor/concept_monitor.gd"
+      },
+      {
+        "local_to_grid": [
+          -0.5,
+          0.5,
+          -0.5
+        ],
+        "name": "GradientPaths",
+        "source": "res://commons/artifacts/spine_films/more_early/gradient_paths.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          50.0
+        ],
+        "name": "ReferenceStudy",
+        "source": "res://commons/artifacts/spine_studies/station.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          50.0
+        ],
+        "name": "Study",
+        "source": "res://commons/artifacts/colour_assembly/colour_assembly.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          70.0
+        ],
+        "name": "@Node3D@14990",
+        "source": "res://commons/artifacts/spine_studies/station.gd"
+      },
+      {
+        "local_to_grid": [
+          18.0,
+          0.5,
+          70.0
+        ],
+        "name": "Study",
+        "source": "res://commons/artifacts/colour_wall_studies/colour_wall_studies.gd"
+      },
+      {
+        "local_to_grid": [
+          31.0,
+          0.5,
+          10.0
+        ],
+        "name": "ArtPlinth0",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          31.0,
+          0.919999957084656,
+          10.0
+        ],
+        "name": "DreamBody0",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          26.0,
+          0.5,
+          2.0
+        ],
+        "name": "ArtPlinth1",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          26.0,
+          0.919999957084656,
+          2.0
+        ],
+        "name": "DreamBody1",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          14.0,
+          0.5,
+          36.0
+        ],
+        "name": "ArtPlinth2",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          14.0,
+          0.919999957084656,
+          36.0
+        ],
+        "name": "DreamBody2",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      },
+      {
+        "local_to_grid": [
+          20.0,
+          0.5,
+          35.0
+        ],
+        "name": "ArtPlinth3",
+        "source": "res://commons/artifacts/station/station_plinth.gd"
+      },
+      {
+        "local_to_grid": [
+          20.0,
+          0.919999957084656,
+          35.0
+        ],
+        "name": "DreamBody3",
+        "source": "res://commons/artifacts/dream_bodies/dream_bodies.gd"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Walls",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

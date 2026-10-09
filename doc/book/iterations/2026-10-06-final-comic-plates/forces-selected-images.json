@@ -1,0 +1,129 @@
+{
+  "tool": "Built-in image_gen",
+  "note": "Refinements retain attempted prompts; only generated_path identifies the selected edition. The second receiver edit was rejected; a later simplified diagram was selected.",
+  "plates": [
+    {
+      "slug": "forces-same-difference",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-15c60b7a-7aed-482a-b81d-9390a7a9bf9e.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e523c533-e6ef-4902-b57a-a73223a959a0.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserveentirecomic6panels/allcaptions/footer/title/subtitle,charactersandallrelationdiagrams. ChangeONLY: Panel3 liftedtip scene hasonepinINHANDandonepinremainingonbench; removeotherstandingtip-pinonbench leavingitsEMPTYbase, totaljustTWOactualpinheads (heldendandstationarystart), not3. Panel5 normalizingcomparison: REMOVE numericalinputcomponenttuplesandinputmagnitudes (v=(2,2,2),|v|=3.46,v=(1,1,1),|v|=1.73). Replacewithsimplelabels 'LONGER INPUT' and 'SHORTER INPUT'. KeeplongerandshortercyanarrowsSAMEdirection andbothequal-lengthunitcompanionredarrowsatsamesphereradius, labels |v̂|=1 underboth. Theseareprojecteddirectionillustrations ratherthanallexactcomponentdata. Allothermathzero/thresholdandpanelsunchanged."
+      ]
+    },
+    {
+      "slug": "forces-journey-zero",
+      "map": "VFM_02_Operations",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-42373aa6-d33e-45e6-81ef-1e30764f33b6.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-0ba69148-84ed-40e0-a632-c531f63d30c9.png",
+      "refinements": [
+        "Use case: precise-object-edit. Edit this SIX-PANEL comic preserving title, subtitle, all caption boxes verbatim, footer, adults, museum materials and layout. Correct ONE THROUGH-LINE: two displacements define the route and CANCEL makes end coincide with home. Panel1 board must show LEFT: HOME (0,0) -> CORNER (1,0) with AMBER horizontal arrow, then CORNER -> END (1,1) with PINK vertical arrow. RIGHT: HOME (0,0)->CORNER(0,1) with PINK vertical arrow then CORNER -> END(1,1) AMBER horizontal. EXACT same HOME and END in the two plans; no third cyan route segment. Label axes X across and F forward, both metres, not y. In the physical panel1 floor, pale travelling cube, amber drawn leg HOME→CORNER, pink leg CORNER→END, CYAN marker at END ONLY. No three coloured cubes posing as vectors. Panel2 physical route must terminate pink exactly at cyan end, no extra leg: HOME bottom-left, corner bottom-right, end top-right, white cube atcorner. Panel3 direct cyan route connects same home/end diagonally; fine priorrightangle reaches exactsameend. Panel4 CANCEL: HOME atleft with CYAN END mark also at HOME, CORNER atright, white moving cube halfway alongRETURN. Amberoutward arrowleft→right, pinkreturnright→left. A single cube moving, endpoints are flat markers notthreecubes. Panel5 board CANCEL+DIRECT MUST show ONE shared dot labelled HOME = END, two equal opposite amber/pink arrows explaining A+B=0, and the cube sits HOME. DELETE nonzero cyan diagonal and distinct END from panel5 board. Panel6 resetexample cankeepnonzerogenerictripbefore-reset, label resetnotcounted; solid measured trip arrow HOME→END only, dashed RESET END→HOME only. Do not implydistance counter2m is alreadyfinalduringhalfwayreturn; panel4 displays DISTANCE GROWING notarbitrary2.00m. All changesexactlyconsistent with captionstory, no extra dialogs.",
+        "Use case: text-localization. Preserve entire six-panel comic artwork, adults, exacttitle/subtitle/captions/footerandALL diagrams. Change only panel4 small COUNTERS board: replace numeric '1.00 m' in DISTANCE GROWS box with 'GROWING'. Keep 'DISPLACEMENT ZERO' and '0.00 m'. Distance is increasing during the return, not a precise value. Do not change any other text."
+      ]
+    },
+    {
+      "slug": "forces-line-keeps",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-b0d34123-579c-4fbc-af3d-ee6911d3d48f.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-539e7d67-daa0-4745-8d80-59555585ca83.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserve wholecomic6panels, beautifulstyleandadults, title/subtitle/allcaptionboxes/footer exactly. Correct vector diagrams only: panel1 SWAP inset has AamberLEFT BpinkRIGHT so cyan GAP MUST POINT LEFT from B to A. It currentlypointsright; reverse arrowhead preservingpositions. Mainlargepanel1 BleftAright keepsarrowright. Panel5 pair fixedcyanGAPmustbeidentical endpoint displacement in BEFORE and AFTER: use SAME O bottomleft SAME C top-right, cyanO→C inboth. BEFORE horizontal GOLD O→P(PbelowC), pinkP→Cvertical. AFTER railturns30°upwards, GOLD O→P alongthatrail, P is footofperpendicularfromC; P mustbe right andbelowC withpinkP→C up-left andPERPENDICULAR goldrail. AllTHREEarrowsformexactclosedrighttriangularhead-to-tail O→P→C=O→C. PinkmustENDatC, do not leavegap or pinkpointoncyaninterior. Panel6 right SCHEMATIC mustmatch45°angle andsinθ0.71: GOLDunitLEVER fromorigin diagonalUPRIGHT45°, CYANunitPUSH fromsameoriginRIGHT horizontal, clear45°arc betweenthem. Remove oldverticallever90°configuration. Physicalleverandwheelholds45poseunchanged. Nootherchanges."
+      ]
+    },
+    {
+      "slug": "forces-inside-curve",
+      "map": "VFM_05_Launch",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-1afe0c1c-db16-4f57-af72-11788ee720aa.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-322e6c19-c37f-4435-9cf4-c0af37d771a2.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserve this comic6panels, title/subtitle, allcaptionboxesandfooterexactly, museumwarmstylecharactersandstaging. Correct its velocityandtiminglabels: panel1 blackINITIALVELOCITYarrow MUST rise30°towardright,tangenttostartofarcnothorizontal. Panel2 low30°andhigh60°bothlaunch10m/s. Remove false bottomsentence 'Both reach a horizontal range of8.66m in1.00s'. Replacewith 'SAME RANGE · DIFFERENT FLIGHT TIMES'. Lowarc endsatrightfloorendpointthatcoincideswithright8.66mrange-mark; lowlandedmarkeratthatendpoint. Higharc muststartsamebaselineheight asitsownendpoint, reachthesamehorizontal8.66mrangeatright, butatthecommoninstant1.00s itsairbornemarkerisonDESCENDINGhalfabout58%ofrangepastlaunchandabovefloor; itsfutureendatrightnotcurrentmarker. Label thatcurrentmarker 'at1.00s(stillinair)' andlowlanded 'at1.00s(onfloor)'. Preserve separateparallelphysicalworldlanespanel3equalrangesbutdifferentworldaddresses. Panel5 remove false '(remains10m/s)' horizontalvelocitylabel; replace 'HORIZONTAL VELOCITY REMAINS'. REMOVE numeric9.8fromdownwardacceltext; keep'Downward acceleration ≠0'. Verticalvelocityzeroapexunchanged. Theseare schematicrelations notnumericallycalibratedgeometry. Nochangesotherpanels.",
+        "Use case: text-localization. PreservethissixpanelcomicALLartwork/captionboxes/title/subtitle/footeranddiagrams. Onlypanel2top-right explanatorylabels: replace heading'SCHEMATIC(t=1.00s)' with 'SCHEMATIC: A COMMON INSTANT'. Replace lowmarker's 'at1.00s(onfloor)' with 'ALREADY LANDED'. Replace highmarker's'at1.00s(stillinair)' with 'STILL IN AIR'. Replace bothdiagramrangedimensionlabels '8.66m' with 'SAME HORIZONTAL RANGE'. Noexacttimeorcalibrateddiagramdistancesclaimedinthispane. Keep launchlabels LOW30°10m/s and HIGH60°10m/s, andSAME RANGE · DIFFERENT FLIGHT TIMES. Other5panelsremainunchanged."
+      ]
+    },
+    {
+      "slug": "forces-push-ends",
+      "map": "VFM_03_Motion",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e8ae162c-0623-4baa-8f06-84372a9a35b0.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e4dbee41-124f-4079-a70e-31a048c069b3.png",
+      "refinements": [
+        "Use case: precise-object-edit. Edit ONLY panel6 (bottomright) LEFT comparison board of thiscomic. Keep wholelayout/adultsandwarmmuseum/title/subtitle/captions/footerandother5panels EXACT. Leftpanel6 currentlyincorrectly says BRAKE(FRICTIONRAMP). Replacewith LARGE CUBE: BRAKE. Replace its slantedramp with a HORIZONTALleveldiagram floor; SAME largecube inthree successive timepositions with cyanvelocityarrows gettinggraduallyshorter and goldopposingforcearrowspointingLEFT. Labelbelow 'Opposing force reduces velocity gradually.' It is the mainlargecubeBRAKEcontrol, not rampfriction. RightSTATICRAMP SWITCH boardstill haslittlefrictionrampandvelocity v→0immediately unchanged. Preservecaption 'Compare that cut with the large cube’s gradual braking.' exactly asoriginal."
+      ]
+    },
+    {
+      "slug": "forces-receiver",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-8b819832-7b39-4654-92f3-f1775b3c878b.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-47e8bdb2-dbfa-4d20-b435-c885e3136be6.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserve comic6panels title/subtitle,all6captionboxesverbatim/footer,charactersandwarmmuseumstyle. CorrectFIELD relationdrawings. Panel1 must be sinkNOTuniform field: replaceparallelgoldarrowgrid witharrows pointing toward ONE MARKED CENTRE on horizontalfloorstage. CyanandpinkSTARTmarkersshareonehorizontaladdress butoneaboveotherforVISUALHEIGHT, label 'DISPLAY HEIGHT ONLY · SAME XZ START'; thisis SIDE VIEWnotTOPVIEW, museumvisitorwatches physicalfloorstage not anothernewposter. Panel2 SAME SINK field: schematic SIDE VIEW (HEIGHT SEPARATES THE MARKERS) goldarrows left ofcentrepointRIGHT, rightofcentrepointLEFT and shortatcentre. Cyanfromleftslowsapproachingcentre; pinkfromlefttravelsstraightpastcentre thenreturns alongSAMEstraighttrack, dotted retraceon same line, NOwidecurl/loop withdifferentreturnroute. Pinkvelocity retains acrosscentre; accelerationturnsback. Panel3 receivercards explicit 'CYAN: v = field' with 'field used as m/s'; PINK: 'v += field × step' with 'field used as m/s²'. Do not labelresultingVELOCITYm/s². Panel4 reverse arrowsandvelocitiesalreadycorrectleaveunchanged. Panel5 UNIFORM field remains allgoldright arrows, replace '(topview)'with'SIDE VIEW · DISPLAY HEIGHT ONLY'; verticalmarker separationisnotforwardXZseparation. Relativehorizontalstartsanddifferentprogressunchanged. Panel6 placePINKmarkeronrightgoldframeedge atstoppingevent, CYANinside;bothvelocityarrowsremainpointingrightbutpositionfrozen. Label 'OBSERVATION PAUSED · NO REBOUND'. Fullsceneandnofoothealthhazardsunchanged.",
+        "Use case: precise-object-edit. Preserve entirecomic EXACTLY except panel4 andpanel5 diagrams. Panel4 FIELD REVERSES: BEFORE goldfieldarrows ALL RIGHT. AFTER goldfieldarrows ALL LEFT. Beforecyanvright,pinkvright. AftercyanvelocityarrowLEFT, pinkvelocitySOLIDmagenta arrowRIGHT frompinkcube, and a SEPARATE DASHEDpinkaccelerationarrowLEFT frompinkcube. Arrowheads unambiguous, don'treplacevwitha. Label solid 'v' anddashed'a'. Panel5 SAME FIELD · DIFFERENT RECEIVERS: botht=0markerssamehorizontalstartx left. Att=1s cyanprogressFARTHERright (roughlytwicepinkprogress); pinkcube placedhalfwaybetweensharedstartandcyanx. Bothvelocityarrowsright, notsamepositions; originalvassignconstant vsaccelerationfromrest. Keep sideviewlabelDISPLAYHEIGHTONLY. Others5captions/title/subtitle/footer, adults, allotherpanels preserved; no newcontrols.",
+        "Use case: precise-object-edit. Replace ONLY the TWO diagramboards in panel4 middleright andpanel5bottomleft ofthis6panelcomic. Preserveallcaptionboxes,title/subtitle/footer,charactersandother4panelsEXACT. SIMPLIFY to avoidwrongdirections. PANEL4: deleteexistingBEFOREandAFTERnesteddiagramsandalltheirlabels. CreateONElargecleanboardheaded 'JUST AFTER REVERSE'. Toprow GOLDfieldarrows ALL POINT LEFT, withlabel 'FIELD ←'. Secondrow CYANcube atcentre withONEsolidCYANarrowPOINTLEFT labelled 'v'. ThirdrowPINKcube atcentre withONEsolidPINKarrowPOINT RIGHT labelled 'v', andaSEPARATEdashedORANGEarrowPOINT LEFT labelled'a'. No prose 'pinkright/left' beneath; onlyvanda. Bottomsimplekey 'velocity v · acceleration a'. The fieldleft whilepinkvrightmustbeunambiguous. PANEL5 deleteexistingt0/t1alignedmarkersdiagram. Newboard 'UNIFORM FIELD · FROM THE SAME HORIZONTAL START'. Goldfieldarrowsallrightabove. TWOHORIZONTALTRACKSstacked: topCYANtrackoriginmarkatfarLEFT, dashedstartcubeatthatmark, currentCYANcube nearRIGHT labelled '0.8 m after 1 s'. BottomPINKtrack originmarkexactlySAMEfarLEFTX, dashedstartcubeatthatmark, currentPINKcube HALFWAY fromsharedstarttoCYANcurrentX, labelled '≈0.4 m after 1 s'. Cyantravelline isTWICE pinktravel-lineLENGTH; tinyrightwardv arrowoncurrenteach. Bottomnote 'HEIGHT SEPARATES THE DRAWINGS ONLY'. ThereisNOsharedrightverticallineatt1; UNEQUAL progresspositionsVERYimportant. Croppedmuseumstagingunchanged. DoNOTchangeelsewhere."
+      ]
+    },
+    {
+      "slug": "forces-return-not-undo",
+      "map": "Vectors_Act4a_KineticForces",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-47299ff5-7170-4b97-8de6-f6026db6957c.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-b03ae73d-aa1b-4544-94a3-bcee72911d25.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserve the 6-panelcomic wholelayout, allcaptionboxesverbatim,title/subtitle/footer, adults, museum, mowerandcirclepod. CorrectsmallDIAGRAM BOARDSONLY. Panel1 dragcurves horizontalaxis mustsay TIME, NOT DISTANCE; speedsdecaywithtime underlineardrag. Curvekey AIR/WATER/HONEYkeepsorder, no exactmeasurements. Panel2 cube board F=−cv itscurvehorizontalaxis TIME, notDISTANCE; visitorboard 'REQUESTED SPEED × FACTOR' must REMOVE decaycurves entirely. Show just simple one-line 'stick request × 0.43' then 'lower commanded speed', no exponentialdecayforvisitor! This is directspeedsettingnotcubeintegration. Panel4 replace BOTHgraphboxeswithplainTEXTCARDS (notplots): LEFT 'SIGNED WORK: TOWARD 0' newline 'return reverses the signed contribution'; RIGHT 'PATH: STILL GROWING' newline 'cut grass stays cut'. Remove Work-vs-time curveandMownarea-vs-distancegraph; returndoesnot regrowgrassorincreasethecutareaalongexistingstrip. Nominalforcearrowremains. Panel6 replace twoconfusingcircleboardswith ONE SCHEMATIC board 'SAME RADIUS' plus 'SPEED ×2 → INWARD ACCELERATION ×4' and rule'a=v²/r'. Onecircleexample tangentcyanv andgoldinwarda, no purportedbeforeafterarrow-lengthmeasurements. Keepthree mediafloorstripsnomaterialliquid, nochangebodyinteractions."
+      ]
+    },
+    {
+      "slug": "forces-coming-back",
+      "map": "Vectors_Act4b_Oscillation",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-a609a5fb-db85-4b8b-aa85-0b328367d9f1.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-f6cad969-10db-4d6c-ab08-9455960c431b.png",
+      "refinements": [
+        "Use case: precise-object-edit. Change ONLY panel3 (middleleft) plotted damping comparisons ofthissixpanelcomic; preserveentireallart/text/layoutelsewhereexactly. Allthree positionvsTIMEplots LIGHT,CRITICAL,HEAVY must START at SAME POSITIVE displacement, ABOVE theirzero dashedbaselines, withinitialhorizontal tangent (releasedfromrest). LIGHTmust begin ABOVE0 atits firstpositivepeak, descendcross0, negativeundershoot, positive smallerpeak, decaytoward0; currentlyitsstartsnegativeandiswrong. CRITICAL startsatsamepositiveheightandapproaches0 relativelyfast WITHOUT crossingbelow. HEAVY startsatsamepositiveheight andapproaches0 moreslowly, remainingfurtherabove0atacommonelapsedtime. Samewidthandheightaxes, sametimedirectionright. Preserveexistingcaption 'Extra resistance has delayed the return.', boardheading'SCHEMATIC: position vs time (from same initial displacement)', labels LIGHT/CRITICAL/HEAVY. No newnumbers orothershifts."
+      ]
+    },
+    {
+      "slug": "forces-out-of-time",
+      "map": "Change_Choreography",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-6a8dbf29-bb5e-4bfb-998d-765ac1adf34b.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-a315be58-14f3-47b0-8f3b-48c8956a66ac.png",
+      "refinements": [
+        "Use case: text-localization. Preservewhole6panelcomic ALLartwork,captions,title/subtitle/footeranddiagrams. Changeonly panel4 middle-rightconveyorcontroltitle toexactword 'RECOVER'. Currentmisspellingmustbe replacedwith R E C O V E R. Keep 'Faster collection' underneath. Nootherchanges."
+      ]
+    },
+    {
+      "slug": "forces-stay-still",
+      "map": "VFM_07_Gravity",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-148e0f9c-e079-44db-b3ae-4ce0047a7466.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-f29a0d00-d1f6-43f7-87da-69788f74bdef.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserveentiresixpanelcomic/title/subtitle/captions/footer,adultsandallotherpanels. CorrectONLY panel3(middleleft) NUDGE diagram. Lowerexperimenthas EXACTLYTHREEsolidmarkers pinkcyanGOLD. Upperseparatecalculation has EXACTLYTHREEtranslucentmarkers samepinkcyanGOLD; remove extrafourthgrey/bluefloater. Their displayheightoffset is solelyforreadability, NOT the3cmnudge. Removeverticalrulerandtext'+3cm(visualonly)'; replacetext 'DISPLAY HEIGHT ONLY' (no numbers, no verticalruler). UppergoldbodyisnudgedHORIZONTALLYX3cmfromitsoriginalmark, show smallhorizontalrightwardarrowbyGOLDonly labelled'INITIAL X +3cm'. Onboardinset BEFORE originalthreefilleddots; AFTER threefilleddots, pinkandcyanatsameaddresses, GOLDslightlyrightfromfaintoldgoldringwithshortXarrow. No missing/dottedgoldcurrentbody. Label 'SEPARATE CALCULATIONS'; no mutualattractionbetweenupper/lower,noalterinitialvelocityorcommonrecenter. Keepnonnumericallycalibratedtrajectories.",
+        "Use case: precise-object-edit. Remove ONLY the EXTRA translucent blue-grey sphere in panel3 (middleleft) raisedcalculation. It is the sphere at about x281 y749 in1024x1536image, directly ABOVELEFT of the maintranslucentCYANsphere, betweenraisedpinkandgold. REMOVE that extraoneanditsdiscshadow. Retain raised PINK atleft, mainraisedCYAN atcentre, raisedGOLD atright: EXACTLY3ghosts. Lowercalculation also3solids unchanged. The tinyoldgolddottedaddress on inset is a referenceMARK notfourthbody; keepit. Preserve ALLotherpixels/layout,title/subtitle/captions/footer,adultcharacters,ALLotherpanelsanddiagram. Do not move the existing3 raisedbodies. No new labels or unrelated edits."
+      ]
+    },
+    {
+      "slug": "forces-body-stand",
+      "map": "VFM_09_Legs",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-cbfac4af-782a-4627-8bfc-4f50c0f12fa3.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-4f8db1e6-6f83-4c2c-8347-c949f2186b39.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preservewhole6panelcomic title/subtitle/allcaptions/footer/artstyle/adultsandotherpanels. CorrectONLYpanel2 and4: Panel2 CENTRE SHIFTED · OUTLINE SAME comparison MUSTkeepEXACTLYTHREEactivefeetatsamepositionsinBEFOREandAFTER(top-left,top-right,bottom-left). AFTERcurrentlylosestop-rightpad; restoreit samepositionandsize asBEFORE. BothactualpinkplatesabovealsokeepthesameTHREEsupportposts, geometryunchanged. OnlyCOMwhite/blackcrossmovesfrominsidehulltooutside; nofeetremoved. Panel4removefalse'LIVE CONTACTS'labelunder tiltedplate: bothdashedgroundoutlines areINITIAL FOOTPRINT, fixedoriginalsupportsregion, NOTupdatedcontacthull. Use'I N I T I A L F O O T P R I N T' underneathbothor onecommonlabel. LiveCOMcrosscanmoveonplate,dottedarrowshowschange, butnofalsecurrenthull. 16cm dimensionmustannotateWIDTHOFONESQUARECONTACTPAD nearfloor/postbase, notwidthofwholepinkplate. AddtinycloseuponeSQUAREPADinset ifneededwith16cmspan, remove16cmrulerfromtopplate. Keepfiniteareaofpadsasmaterialsupportnotmathematicalpoints. Nootherchanges.",
+        "Use case: precise-object-edit. ONE tiny change ONLY. In PANEL2 TOPRIGHT, on the SMALL 'AFTER' TOP-VIEW schematic board atbottomofthepanel, add the MISSING THIRD GREY SQUARE PAD at the UPPER RIGHT CORNER ofits dotted square. At1024x1536image coordinates itscentre is approximately(919,407). Itmustmatchtheupper-rightpadinBEFOREboardtoitsleft: about17x17px darkgreyfillthinblackoutline. AFTER thenhasTHREEpads:topLEFT,topRIGHT,bottomLEFT. PreservewhitecrossoutsideAFTERboundaryandALLotherpixels. DoNOTchangeactualplate,captions,title,layout,anyotherdiagrams. Soleedit addonegrey17pxsquareinsideupper-rightcorneroftheAFTERdottedsquare. Thisisnotfourfeet—threeexactly."
+      ]
+    },
+    {
+      "slug": "forces-encounter",
+      "map": "VFM_08_Arena",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-0f525ad0-f8db-4fa9-b0e7-450c76f2842a.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-9ade7bd4-8d06-478d-94c2-3ae718cfcf71.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preservethissixpanelcomic,title/subtitle/allcaptionboxesandfooterverbatim,adultcharacters/museumandallcollisioncartdiagrams. Correct crabidentity andtarget inpanels1,2,3,6 only. ArtifactisNOTanatural8-leggedcrab: replace EVERY crab depiction (large andschematic) withsameabstractGodotmechanicalcreature: lowdarkfacetedbody, EXACTLYFOURjointedlegs TWOonleftside TWOonrightside, no extraarms/claws/antennas. Eachdrawncreature's4legs independentlycountable; no six/eightlegnaturalcrabs. Shape/bodyremainthesameafterfeeding, no roots/branchesgrown. Panel2 REMOVE secondsmallcrab attheback-left entirely; itwasinventedandisnota target. Keep ONEcrab, mushroomandhumanvisitor. Blue dashedtargetarrow mustconnectfromcrabdirectlytoADULTVISITORinburgundyshirt atleft, not anothercreature; graypotentialpathtomushroom remains. Bluebeaconcanstayinthebackgroundbutisinactivevisitor-mode. SmalldiagramshowsONEcrab + visitorsilhouette + mushroom, visitornearermarked. Otherpanels1bluebeaconinitialmode/meal2s/5mealsrootedstaywithcorrectfourlegbody. Nothingelsechanges."
+      ]
+    },
+    {
+      "slug": "forces-carries-across",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-caac60e5-20c6-41de-afc3-abdf268725d8.png",
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-c593023f-2980-4533-9bbe-c85107648ae2.png",
+      "refinements": [
+        "Use case: precise-object-edit. Preserveentire6panelcomic,title/subtitle6captions/footer, characters,museum, fieldoutlineanddiagrams. Onlypanel2 and5 minorcorrections. Panel2 actualcurrentcubeonRIGHTandbothschematiccubeimagesmustbeCLEARTRANSPARENTGLASS outlinedwhite/cyan withbackgroundvisiblethrough, notopaqueoffwhite stonecubes. LeftdashedcubeispreviousPOSITIONonly; labelearlyposition'BEFORE' andrightcurrentglasscube'AFTER'; no newseparatebody. Cyanarrow is measuredmotion, notpush. Panel5 replacebrokensteppingstonebridge withaCONTINUOUSsolidwhitePLANKacrosspit. It is the fallbackavailableinmuseum, notbrokenarchitecture. Removefloorpointinglabel'EARLIER BROKEN CONNECTION'; move thatphraseas heading ON EXISTINGCODEFLOWBOARD, whereFIELDADDSCARRYVELOCITYthen NEXTCONTROLLEROVERWRITES v=0 illustrates theearlierSOFTWAREfailure. Itsrecordis historical, notcurrentphysicalplankfailure. Keep bothendsplankintact. Nootherchanges."
+      ]
+    }
+  ]
+}

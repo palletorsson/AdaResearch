@@ -1,0 +1,7 @@
+Concept: Separate the eligibility filter, uniform draw without replacement, and zero-scaling operation. A grey cube cannot be selected under the current mask.
+Sequence: Random_Definition → Random_Entropy → Random_Remove → Random_Walk. Returnable procedure becomes measured sample, then a spatial candidate set, then successive movement.
+Primary: remove_random:180#local_grid:true at (4,5), facing −Z. The 9×10 hall holds the existing owned 8×8 bench, its controls and cased status. The repeated reference sphere and unrelated hazards are archived; the bench supplies the complete first encounter.
+Discovery: Find an excluded cube; remove one and inspect its surviving slot; replay; compare ROW and COLUMN with eight candidates and equal draw bounds. Pause over an unfinished pattern before the fully emptied range loses its visible history.
+Critical: Eligibility can protect from removal or exclude from opportunity depending on the action. Equal counts leave spatial differences undescribed. Removal retains a slot and original transform; the code keeps more history than the visible plate.
+Limits: NEW SEED may repeat. No visitor seed-entry field or START/STOP controls. RESET preserves the seed within this bench session; hall rebuild chooses again. Removal edits the owned model, not museum collision. Desktop review is not headset observation.
+Review: doc/space/remove-review-2026-09-12/README.md and /research/possible-bodies/random-remove.html.

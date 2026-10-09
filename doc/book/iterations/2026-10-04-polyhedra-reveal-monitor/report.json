@@ -1,0 +1,97 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Monitor discovers the real tetrahedron"
+		},
+		{
+			"passed": true,
+			"test": "Four positions, six edges and four source faces"
+		},
+		{
+			"passed": true,
+			"test": "Monitor controls leave source geometry, mesh and collision unchanged"
+		},
+		{
+			"passed": true,
+			"test": "Looking at the screen starts the film"
+		},
+		{
+			"passed": true,
+			"test": "Filmed construction advances while viewed"
+		},
+		{
+			"passed": true,
+			"test": "Looking away freezes the film"
+		},
+		{
+			"passed": true,
+			"test": "Manual pause survives returning gaze"
+		},
+		{
+			"passed": true,
+			"test": "Rendered unfolded copies lie in one plane"
+		},
+		{
+			"passed": true,
+			"test": "Unfolding preserves all triangle edge lengths"
+		},
+		{
+			"passed": true,
+			"test": "Folding closes precisely onto the source geometry"
+		},
+		{
+			"passed": true,
+			"test": "Actual Polyhedra museum hall loads"
+		},
+		{
+			"passed": true,
+			"test": "Registered monitor appears in the actual hall"
+		},
+		{
+			"passed": true,
+			"test": "Hall monitor finds the existing tetrahedron"
+		},
+		{
+			"passed": true,
+			"test": "Hall's tetrahedron supplies the filmed surface"
+		},
+		{
+			"passed": true,
+			"test": "Screen has an unobstructed viewing position inside the museum"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (-1.24, -0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (1.24, -0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (-1.24, 0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Screen corner visible: (1.24, 0.68, 0.0)"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: pause"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: replay"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: step"
+		},
+		{
+			"passed": true,
+			"test": "Hall control reachable: route"
+		}
+	],
+	"passed": true
+}

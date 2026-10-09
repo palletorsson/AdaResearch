@@ -1,0 +1,1893 @@
+{
+ "source_maps": [
+  "Ribbon_Color_01",
+  "Ribbon_Color_02",
+  "Ribbon_Color_03",
+  "Ribbon_Color_04",
+  "Ribbon_Color_05",
+  "Ribbon_Color_06",
+  "Ribbon_Color_07"
+ ],
+ "sequence": "tiling",
+ "duplicate_policy": "Remove ribbon copies when the artifact is represented in an authored colour/tiling room; prefer the authored room including its developed configuration. Preserve all remaining ribbon tokens once. Deliberate repeats inside authored rooms are outside this consolidation.",
+ "removed": [
+  {
+   "token": "pick_up_cube",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    10,
+    2
+   ],
+   "source_placement": "pick_up_cube",
+   "retained_at": [
+    {
+     "map": "Color_Rainbow",
+     "placement": "pick_up_cube"
+    }
+   ]
+  },
+  {
+   "token": "grid_model",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    3,
+    5
+   ],
+   "source_placement": "grid_model",
+   "retained_at": [
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "grid_model:180:-0.8"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "grid_model"
+    }
+   ]
+  },
+  {
+   "token": "pillarcolorcollection",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    8,
+    5
+   ],
+   "source_placement": "pillarcolorcollection",
+   "retained_at": [
+    {
+     "map": "Color_Pillar",
+     "placement": "pillarcolorcollection:0:-0.5:1#layout:spatial_gradient#plinth:0"
+    }
+   ]
+  },
+  {
+   "token": "albers_wall_gallery",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    3,
+    10
+   ],
+   "source_placement": "albers_wall_gallery",
+   "retained_at": [
+    {
+     "map": "Color_Paint",
+     "placement": "albers_wall_gallery:180:0.5"
+    }
+   ]
+  },
+  {
+   "token": "color_sets_overview",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    8,
+    14
+   ],
+   "source_placement": "color_sets_overview",
+   "retained_at": [
+    {
+     "map": "Color_Pillar",
+     "placement": "color_sets_overview:180:-0.5:1#mount:wall#plinth:0"
+    }
+   ]
+  },
+  {
+   "token": "pattern_tile_plate",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    3,
+    15
+   ],
+   "source_placement": "pattern_tile_plate",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_tile_plate:180:-0.49"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_tile_plate:180:-0.49#p4m"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_tile_plate:180:-0.49#p4m"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_tile_plate:180:-0.49#p4m"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "pattern_tile_plate:0:-0.49#p4m"
+    }
+   ]
+  },
+  {
+   "token": "pattern_studio_plate",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    3,
+    16
+   ],
+   "source_placement": "pattern_studio_plate",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_studio_plate:0:-0.45"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_studio_plate:0:-0.45"
+    }
+   ]
+  },
+  {
+   "token": "dark_sphere",
+   "source_map": "Ribbon_Color_01",
+   "source_cell": [
+    11,
+    17
+   ],
+   "source_placement": "dark_sphere:270",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Color_Grid_Pallet",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Color_Rainbow",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Color_Pillar",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Color_Paint",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Color_Walls",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "dark_sphere"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "dark_sphere"
+    }
+   ]
+  },
+  {
+   "token": "rainbow_hallway",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    1,
+    1
+   ],
+   "source_placement": "rainbow_hallway:90",
+   "retained_at": [
+    {
+     "map": "Color_Walls",
+     "placement": "rainbow_hallway:180:1.0"
+    }
+   ]
+  },
+  {
+   "token": "color_constellation_office",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    7,
+    1
+   ],
+   "source_placement": "color_constellation_office",
+   "retained_at": [
+    {
+     "map": "Color_Walls",
+     "placement": "color_constellation_office:0:-0.5:1#layout:cubicles#plinth:0"
+    }
+   ]
+  },
+  {
+   "token": "spectrum_forest",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    11,
+    1
+   ],
+   "source_placement": "spectrum_forest:270",
+   "retained_at": [
+    {
+     "map": "Color_Grid_Pallet",
+     "placement": "spectrum_forest:0:2"
+    }
+   ]
+  },
+  {
+   "token": "vr_tile_editor",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    7,
+    4
+   ],
+   "source_placement": "vr_tile_editor",
+   "retained_at": [
+    {
+     "map": "Symmetry_Seventeen",
+     "placement": "vr_tile_editor:90:0"
+    }
+   ]
+  },
+  {
+   "token": "pattern_maker_station",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    1,
+    5
+   ],
+   "source_placement": "pattern_maker_station:90",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_maker_station:0:-0.49"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_maker_station:0:-0.49"
+    }
+   ]
+  },
+  {
+   "token": "tiling_demo",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    1,
+    9
+   ],
+   "source_placement": "tiling_demo:90",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "tiling_demo:180:-1.6"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "tiling_demo:180:-1.6"
+    }
+   ]
+  },
+  {
+   "token": "ball_painting_demo",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    1,
+    13
+   ],
+   "source_placement": "ball_painting_demo:90",
+   "retained_at": [
+    {
+     "map": "Color_Paint",
+     "placement": "ball_painting_demo:180:0.5#automated:true"
+    }
+   ]
+  },
+  {
+   "token": "brick_wall_factory",
+   "source_map": "Ribbon_Color_02",
+   "source_cell": [
+    7,
+    15
+   ],
+   "source_placement": "brick_wall_factory",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "brick_wall_factory:90"
+    }
+   ]
+  },
+  {
+   "token": "flashlight_demo",
+   "source_map": "Ribbon_Color_03",
+   "source_cell": [
+    3,
+    1
+   ],
+   "source_placement": "flashlight_demo",
+   "retained_at": [
+    {
+     "map": "Color_Flashlight",
+     "placement": "flashlight_demo:180:-0.5:1#plinth:0"
+    }
+   ]
+  },
+  {
+   "token": "visual_color_mixing",
+   "source_map": "Ribbon_Color_03",
+   "source_cell": [
+    8,
+    2
+   ],
+   "source_placement": "visual_color_mixing",
+   "retained_at": [
+    {
+     "map": "Color_Pillar",
+     "placement": "visual_color_mixing:0:-0.4:0.9"
+    }
+   ]
+  },
+  {
+   "token": "mario_cube",
+   "source_map": "Ribbon_Color_03",
+   "source_cell": [
+    3,
+    15
+   ],
+   "source_placement": "mario_cube",
+   "retained_at": [
+    {
+     "map": "Color_Rainbow",
+     "placement": "mario_cube"
+    }
+   ]
+  },
+  {
+   "token": "nail_color_controller",
+   "source_map": "Ribbon_Color_04",
+   "source_cell": [
+    10,
+    1
+   ],
+   "source_placement": "nail_color_controller",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "nail_color_controller:180"
+    }
+   ]
+  },
+  {
+   "token": "hand_model",
+   "source_map": "Ribbon_Color_04",
+   "source_cell": [
+    10,
+    7
+   ],
+   "source_placement": "hand_model",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "hand_model:90:-1:3"
+    }
+   ]
+  },
+  {
+   "token": "hand_color_controller",
+   "source_map": "Ribbon_Color_04",
+   "source_cell": [
+    10,
+    8
+   ],
+   "source_placement": "hand_color_controller",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "hand_color_controller:180"
+    }
+   ]
+  },
+  {
+   "token": "grab_rainbow_stick",
+   "source_map": "Ribbon_Color_04",
+   "source_cell": [
+    4,
+    14
+   ],
+   "source_placement": "grab_rainbow_stick",
+   "retained_at": [
+    {
+     "map": "Color_Pillar",
+     "placement": "grab_rainbow_stick:-90:1"
+    }
+   ]
+  },
+  {
+   "token": "color_space_navigator",
+   "source_map": "Ribbon_Color_04",
+   "source_cell": [
+    10,
+    14
+   ],
+   "source_placement": "color_space_navigator",
+   "retained_at": [
+    {
+     "map": "Color_Walls",
+     "placement": "color_space_navigator:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "pattern_tile_herringbone",
+   "source_map": "Ribbon_Color_05",
+   "source_cell": [
+    8,
+    1
+   ],
+   "source_placement": "pattern_tile_herringbone",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_tile_herringbone:0:-0.5"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "pattern_tile_herringbone:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "pattern_tile_brick",
+   "source_map": "Ribbon_Color_05",
+   "source_cell": [
+    10,
+    7
+   ],
+   "source_placement": "pattern_tile_brick",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_tile_brick:0:-0.5"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "pattern_tile_brick:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "pattern_tile_4x4",
+   "source_map": "Ribbon_Color_05",
+   "source_cell": [
+    3,
+    10
+   ],
+   "source_placement": "pattern_tile_4x4",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_tile_4x4:0:-0.5"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "pattern_tile_4x4:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "colorballs",
+   "source_map": "Ribbon_Color_05",
+   "source_cell": [
+    8,
+    12
+   ],
+   "source_placement": "colorballs:90",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "colorballs"
+    }
+   ]
+  },
+  {
+   "token": "pattern_tile_mirror",
+   "source_map": "Ribbon_Color_05",
+   "source_cell": [
+    3,
+    13
+   ],
+   "source_placement": "pattern_tile_mirror",
+   "retained_at": [
+    {
+     "map": "Pattern_Foundry",
+     "placement": "pattern_tile_mirror:0:-0.5"
+    },
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_tile_mirror:0:-0.5"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "pattern_tile_mirror:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "SpectrumVisualizer",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    1,
+    1
+   ],
+   "source_placement": "SpectrumVisualizer",
+   "retained_at": [
+    {
+     "map": "Color_Pillar",
+     "placement": "SpectrumVisualizer"
+    }
+   ]
+  },
+  {
+   "token": "subpixel_display",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    5,
+    1
+   ],
+   "source_placement": "subpixel_display",
+   "retained_at": [
+    {
+     "map": "Color_Walls",
+     "placement": "subpixel_display:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "pattern_tile_puzzle",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    12,
+    1
+   ],
+   "source_placement": "pattern_tile_puzzle",
+   "retained_at": [
+    {
+     "map": "Tutorial_Pattern",
+     "placement": "pattern_tile_puzzle:0:-0.5"
+    },
+    {
+     "map": "Symmetry_Seventeen",
+     "placement": "pattern_tile_puzzle:90:0"
+    }
+   ]
+  },
+  {
+   "token": "science_screen",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    5,
+    6
+   ],
+   "source_placement": "science_screen",
+   "retained_at": [
+    {
+     "map": "Color_Nails",
+     "placement": "science_screen:180:1.5#mode:field"
+    },
+    {
+     "map": "Color_Grid_Pallet",
+     "placement": "science_screen:180:1.5#mode:grid"
+    },
+    {
+     "map": "Chamber_Color",
+     "placement": "science_screen:180:1.5#mode:scatter"
+    },
+    {
+     "map": "Array_Patterns",
+     "placement": "science_screen:180:1.5#mode:grid"
+    }
+   ]
+  },
+  {
+   "token": "gradient_interpolator",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    5,
+    10
+   ],
+   "source_placement": "gradient_interpolator",
+   "retained_at": [
+    {
+     "map": "Color_Walls",
+     "placement": "gradient_interpolator:0:-0.5"
+    }
+   ]
+  },
+  {
+   "token": "kaleidoscope",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    12,
+    10
+   ],
+   "source_placement": "kaleidoscope",
+   "retained_at": [
+    {
+     "map": "Symmetry_Seventeen",
+     "placement": "kaleidoscope:0:0#plinth:0.90"
+    }
+   ]
+  },
+  {
+   "token": "rainbow",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    1,
+    14
+   ],
+   "source_placement": "rainbow",
+   "retained_at": [
+    {
+     "map": "Color_Rainbow",
+     "placement": "rainbow:0:0.5:0.1"
+    }
+   ]
+  },
+  {
+   "token": "wall_pattern_gallery",
+   "source_map": "Ribbon_Color_06",
+   "source_cell": [
+    5,
+    14
+   ],
+   "source_placement": "wall_pattern_gallery",
+   "retained_at": [
+    {
+     "map": "Symmetry_Seventeen",
+     "placement": "wall_pattern_gallery:90:0"
+    }
+   ]
+  },
+  {
+   "token": "tile_meander_floor",
+   "source_map": "Ribbon_Color_07",
+   "source_cell": [
+    2,
+    1
+   ],
+   "source_placement": "tile_meander_floor",
+   "retained_at": [
+    {
+     "map": "Symmetry_Seventeen",
+     "placement": "tile_meander_floor:0:0"
+    }
+   ]
+  }
+ ],
+ "rooms": [
+  {
+   "map": "Ribbon_Patterns_01",
+   "title": "Structure and repetition",
+   "dimensions": [
+    27,
+    49
+   ],
+   "primary": [
+    "grid_2d_4x4",
+    "grid_3d_4x4x4"
+   ],
+   "placements": [
+    {
+     "token": "grid_2d_4x4",
+     "rotation": 0,
+     "bounds": [
+      -2.0,
+      -0.3400000000000001,
+      3.34,
+      3.34
+     ],
+     "measurement": true,
+     "source": {
+      "token": "grid_2d_4x4",
+      "source_map": "Ribbon_Color_01",
+      "source_cell": [
+       3,
+       1
+      ],
+      "source_placement": "grid_2d_4x4"
+     },
+     "cell": [
+      6,
+      8
+     ],
+     "placement": "grid_2d_4x4#pin:1#plinth:0",
+     "reserved_bounds": [
+      4.0,
+      7.66,
+      9.34,
+      11.34
+     ]
+    },
+    {
+     "token": "grid_3d_4x4x4",
+     "rotation": 0,
+     "bounds": [
+      -0.345,
+      -0.345,
+      3.3449999999999998,
+      3.3449999999999998
+     ],
+     "measurement": true,
+     "source": {
+      "token": "grid_3d_4x4x4",
+      "source_map": "Ribbon_Color_01",
+      "source_cell": [
+       3,
+       6
+      ],
+      "source_placement": "grid_3d_4x4x4"
+     },
+     "cell": [
+      18,
+      8
+     ],
+     "placement": "grid_3d_4x4x4#pin:1#plinth:0",
+     "reserved_bounds": [
+      17.655,
+      7.655,
+      21.345,
+      11.344999999999999
+     ]
+    },
+    {
+     "token": "xyz_coordinates",
+     "rotation": 90.0,
+     "bounds": [
+      -0.020000000000000018,
+      -1.2,
+      1.2,
+      0.02000000000000009
+     ],
+     "measurement": true,
+     "source": {
+      "token": "xyz_coordinates",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       8,
+       3
+      ],
+      "source_placement": "xyz_coordinates:90"
+     },
+     "cell": [
+      6,
+      18
+     ],
+     "placement": "xyz_coordinates:90#pin:1#plinth:0",
+     "reserved_bounds": [
+      5.98,
+      16.8,
+      7.2,
+      18.02
+     ]
+    },
+    {
+     "token": "column_3_z",
+     "rotation": 0,
+     "bounds": [
+      -0.35,
+      -0.3500000000000001,
+      0.35,
+      3.35
+     ],
+     "measurement": true,
+     "source": {
+      "token": "column_3_z",
+      "source_map": "Ribbon_Color_04",
+      "source_cell": [
+       4,
+       6
+      ],
+      "source_placement": "column_3_z"
+     },
+     "cell": [
+      19,
+      16
+     ],
+     "placement": "column_3_z#pin:1#plinth:0",
+     "reserved_bounds": [
+      18.65,
+      15.65,
+      19.35,
+      19.35
+     ]
+    },
+    {
+     "token": "row_3_x",
+     "rotation": 270.0,
+     "bounds": [
+      -0.34500000000000064,
+      -0.35000000000000014,
+      1.0050000000000001,
+      3.35
+     ],
+     "measurement": true,
+     "source": {
+      "token": "row_3_x",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       11,
+       1
+      ],
+      "source_placement": "row_3_x:270"
+     },
+     "cell": [
+      7,
+      24
+     ],
+     "placement": "row_3_x:270#pin:1#plinth:0",
+     "reserved_bounds": [
+      6.654999999999999,
+      23.65,
+      8.005,
+      27.35
+     ]
+    },
+    {
+     "token": "grid3d",
+     "rotation": 0,
+     "bounds": [
+      -0.8949999999999999,
+      -0.9750000000000001,
+      0.735,
+      0.595
+     ],
+     "measurement": true,
+     "source": {
+      "token": "grid3d",
+      "source_map": "Ribbon_Color_05",
+      "source_cell": [
+       3,
+       6
+      ],
+      "source_placement": "grid3d"
+     },
+     "cell": [
+      19,
+      25
+     ],
+     "placement": "grid3d#pin:1#plinth:0",
+     "reserved_bounds": [
+      18.105,
+      24.025,
+      19.735,
+      25.595
+     ]
+    },
+    {
+     "token": "bar_array",
+     "rotation": 0,
+     "bounds": [
+      -0.69,
+      -0.09,
+      0.69,
+      0.09
+     ],
+     "measurement": true,
+     "source": {
+      "token": "bar_array",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       8,
+       5
+      ],
+      "source_placement": "bar_array"
+     },
+     "cell": [
+      7,
+      32
+     ],
+     "placement": "bar_array#pin:1#plinth:0",
+     "reserved_bounds": [
+      6.3100000000000005,
+      31.91,
+      7.6899999999999995,
+      32.09
+     ]
+    },
+    {
+     "token": "bar_array_bubble_sort",
+     "rotation": 0,
+     "bounds": [
+      -0.69,
+      -0.09,
+      0.69,
+      0.09
+     ],
+     "measurement": true,
+     "source": {
+      "token": "bar_array_bubble_sort",
+      "source_map": "Ribbon_Color_04",
+      "source_cell": [
+       4,
+       1
+      ],
+      "source_placement": "bar_array_bubble_sort"
+     },
+     "cell": [
+      19,
+      32
+     ],
+     "placement": "bar_array_bubble_sort#pin:1#plinth:0",
+     "reserved_bounds": [
+      18.31,
+      31.91,
+      19.69,
+      32.09
+     ]
+    },
+    {
+     "token": "sorting_algorithm_race",
+     "rotation": 0,
+     "bounds": [
+      -0.14,
+      0.0,
+      0.14,
+      0.04
+     ],
+     "measurement": true,
+     "source": {
+      "token": "sorting_algorithm_race",
+      "source_map": "Ribbon_Color_05",
+      "source_cell": [
+       3,
+       16
+      ],
+      "source_placement": "sorting_algorithm_race"
+     },
+     "cell": [
+      7,
+      36
+     ],
+     "placement": "sorting_algorithm_race#pin:1#plinth:0",
+     "reserved_bounds": [
+      6.86,
+      36.0,
+      7.14,
+      36.04
+     ]
+    },
+    {
+     "token": "shelf",
+     "rotation": 0,
+     "bounds": [
+      -0.465,
+      -0.16499999999999998,
+      0.465,
+      0.045
+     ],
+     "measurement": true,
+     "source": {
+      "token": "shelf",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       7,
+       1
+      ],
+      "source_placement": "shelf"
+     },
+     "cell": [
+      19,
+      37
+     ],
+     "placement": "shelf#pin:1#plinth:0",
+     "reserved_bounds": [
+      18.535,
+      36.835,
+      19.465,
+      37.045
+     ]
+    },
+    {
+     "token": "shelf_with_stickers",
+     "rotation": 0,
+     "bounds": [
+      -0.465,
+      -0.16499999999999998,
+      0.465,
+      0.045
+     ],
+     "measurement": true,
+     "source": {
+      "token": "shelf_with_stickers",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       7,
+       2
+      ],
+      "source_placement": "shelf_with_stickers"
+     },
+     "cell": [
+      7,
+      42
+     ],
+     "placement": "shelf_with_stickers#pin:1#plinth:0",
+     "reserved_bounds": [
+      6.535,
+      41.835,
+      7.465,
+      42.045
+     ]
+    }
+   ]
+  },
+  {
+   "map": "Ribbon_Patterns_02",
+   "title": "Sampling and comparison",
+   "dimensions": [
+    45,
+    74
+   ],
+   "primary": [
+    "SimultaneousContrast",
+    "MetamerismLab"
+   ],
+   "placements": [
+    {
+     "token": "spherecolors",
+     "rotation": 0,
+     "bounds": [
+      -1.885,
+      -1.885,
+      1.885,
+      1.885
+     ],
+     "measurement": true,
+     "source": {
+      "token": "spherecolors",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       3
+      ],
+      "source_placement": "spherecolors"
+     },
+     "cell": [
+      12,
+      9
+     ],
+     "placement": "spherecolors#pin:1#plinth:0",
+     "reserved_bounds": [
+      10.115,
+      7.115,
+      13.885,
+      10.885
+     ]
+    },
+    {
+     "token": "hue_carousel",
+     "rotation": 0,
+     "bounds": [
+      -2.0,
+      -2.0,
+      2.0,
+      2.0
+     ],
+     "measurement": false,
+     "source": {
+      "token": "hue_carousel",
+      "source_map": "Ribbon_Color_04",
+      "source_cell": [
+       12,
+       2
+      ],
+      "source_placement": "hue_carousel"
+     },
+     "cell": [
+      32,
+      9
+     ],
+     "placement": "hue_carousel#pin:1#plinth:0",
+     "reserved_bounds": [
+      30.0,
+      7.0,
+      34.0,
+      11.0
+     ]
+    },
+    {
+     "token": "grabcolorcollection",
+     "rotation": 0,
+     "bounds": [
+      -0.09500000000000003,
+      -0.0050000000000000044,
+      0.9950000000000001,
+      0.225
+     ],
+     "measurement": true,
+     "source": {
+      "token": "grabcolorcollection",
+      "source_map": "Ribbon_Color_05",
+      "source_cell": [
+       3,
+       1
+      ],
+      "source_placement": "grabcolorcollection"
+     },
+     "cell": [
+      11,
+      15
+     ],
+     "placement": "grabcolorcollection#pin:1#plinth:0",
+     "reserved_bounds": [
+      10.905,
+      14.995,
+      11.995000000000001,
+      15.225
+     ]
+    },
+    {
+     "token": "color_mixing",
+     "rotation": 0,
+     "bounds": [
+      -5.8,
+      -0.07500000000000001,
+      5.8,
+      0.095
+     ],
+     "measurement": true,
+     "source": {
+      "token": "color_mixing",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       13
+      ],
+      "source_placement": "color_mixing"
+     },
+     "cell": [
+      32,
+      15
+     ],
+     "placement": "color_mixing#pin:1#plinth:0",
+     "reserved_bounds": [
+      26.2,
+      14.925,
+      37.8,
+      15.095
+     ]
+    },
+    {
+     "token": "SimultaneousContrast",
+     "rotation": 90.0,
+     "bounds": [
+      -0.10000000000000019,
+      -3.5,
+      0.9000000000000002,
+      3.5
+     ],
+     "measurement": true,
+     "source": {
+      "token": "SimultaneousContrast",
+      "source_map": "Ribbon_Color_04",
+      "source_cell": [
+       4,
+       11
+      ],
+      "source_placement": "SimultaneousContrast:90"
+     },
+     "cell": [
+      11,
+      24
+     ],
+     "placement": "SimultaneousContrast:90#pin:1#plinth:0",
+     "reserved_bounds": [
+      10.9,
+      20.5,
+      11.9,
+      27.5
+     ]
+    },
+    {
+     "token": "MetamerismLab",
+     "rotation": 90.0,
+     "bounds": [
+      -0.5000000000000001,
+      -2.75,
+      0.5000000000000002,
+      2.55
+     ],
+     "measurement": true,
+     "source": {
+      "token": "MetamerismLab",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       8,
+       4
+      ],
+      "source_placement": "MetamerismLab:90"
+     },
+     "cell": [
+      32,
+      24
+     ],
+     "placement": "MetamerismLab:90#pin:1#plinth:0",
+     "reserved_bounds": [
+      31.5,
+      21.25,
+      32.5,
+      26.55
+     ]
+    },
+    {
+     "token": "dark_side_prism",
+     "rotation": 0,
+     "bounds": [
+      -4.0,
+      -0.25,
+      5.5,
+      0.25
+     ],
+     "measurement": true,
+     "source": {
+      "token": "dark_side_prism",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       10
+      ],
+      "source_placement": "dark_side_prism"
+     },
+     "cell": [
+      11,
+      32
+     ],
+     "placement": "dark_side_prism#pin:1#plinth:0",
+     "reserved_bounds": [
+      7.0,
+      31.75,
+      16.5,
+      32.25
+     ]
+    },
+    {
+     "token": "prism",
+     "rotation": 0,
+     "bounds": [
+      -0.5,
+      -0.5,
+      0.5,
+      0.5
+     ],
+     "measurement": true,
+     "source": {
+      "token": "prism",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       2,
+       13
+      ],
+      "source_placement": "prism"
+     },
+     "cell": [
+      32,
+      32
+     ],
+     "placement": "prism#pin:1#plinth:0",
+     "reserved_bounds": [
+      31.5,
+      31.5,
+      32.5,
+      32.5
+     ]
+    },
+    {
+     "token": "grab_stick_scanner",
+     "rotation": 0,
+     "bounds": [
+      -0.09000000000000075,
+      -0.085,
+      14.629999999999999,
+      0.085
+     ],
+     "measurement": true,
+     "source": {
+      "token": "grab_stick_scanner",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       11
+      ],
+      "source_placement": "grab_stick_scanner"
+     },
+     "cell": [
+      4,
+      42
+     ],
+     "placement": "grab_stick_scanner#pin:1#plinth:0",
+     "reserved_bounds": [
+      3.9099999999999993,
+      41.915,
+      18.63,
+      42.085
+     ]
+    },
+    {
+     "token": "color_scanner",
+     "rotation": 0,
+     "bounds": [
+      -6.0,
+      -8.1,
+      6.0,
+      2.0
+     ],
+     "measurement": true,
+     "source": {
+      "token": "color_scanner",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       14
+      ],
+      "source_placement": "color_scanner"
+     },
+     "cell": [
+      32,
+      45
+     ],
+     "placement": "color_scanner#pin:1#plinth:0",
+     "reserved_bounds": [
+      26.0,
+      36.9,
+      38.0,
+      47.0
+     ]
+    },
+    {
+     "token": "grab_stick",
+     "rotation": 0,
+     "bounds": [
+      -0.085,
+      -14.995000000000001,
+      0.085,
+      0.01499999999999968
+     ],
+     "measurement": true,
+     "source": {
+      "token": "grab_stick",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       16
+      ],
+      "source_placement": "grab_stick"
+     },
+     "cell": [
+      12,
+      66
+     ],
+     "placement": "grab_stick#pin:1#plinth:0",
+     "reserved_bounds": [
+      11.915,
+      51.004999999999995,
+      12.085,
+      66.015
+     ]
+    },
+    {
+     "token": "two_roads",
+     "rotation": 0,
+     "bounds": [
+      -2.5,
+      -1.5,
+      2.5,
+      7.5
+     ],
+     "measurement": false,
+     "source": {
+      "token": "two_roads",
+      "source_map": "Ribbon_Color_06",
+      "source_cell": [
+       12,
+       3
+      ],
+      "source_placement": "two_roads"
+     },
+     "cell": [
+      32,
+      56
+     ],
+     "placement": "two_roads#pin:1#plinth:0",
+     "reserved_bounds": [
+      29.5,
+      54.5,
+      34.5,
+      63.5
+     ]
+    }
+   ]
+  },
+  {
+   "map": "Ribbon_Patterns_03",
+   "title": "Signals and glitches",
+   "dimensions": [
+    79,
+    113
+   ],
+   "primary": [
+    "minimalglitch",
+    "textureglitch"
+   ],
+   "placements": [
+    {
+     "token": "pulsar_visualizer",
+     "rotation": 0,
+     "bounds": [
+      -1.06,
+      -0.58,
+      0.98,
+      0.5599999999999999
+     ],
+     "measurement": true,
+     "source": {
+      "token": "pulsar_visualizer",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       8,
+       1
+      ],
+      "source_placement": "pulsar_visualizer"
+     },
+     "cell": [
+      20,
+      10
+     ],
+     "placement": "pulsar_visualizer#pin:1#plinth:0",
+     "reserved_bounds": [
+      18.94,
+      9.42,
+      20.98,
+      10.56
+     ]
+    },
+    {
+     "token": "standalone_disco",
+     "rotation": 0,
+     "bounds": [
+      -2.99,
+      -2.99,
+      2.99,
+      2.99
+     ],
+     "measurement": true,
+     "source": {
+      "token": "standalone_disco",
+      "source_map": "Ribbon_Color_01",
+      "source_cell": [
+       8,
+       10
+      ],
+      "source_placement": "standalone_disco"
+     },
+     "cell": [
+      58,
+      10
+     ],
+     "placement": "standalone_disco#pin:1#plinth:0",
+     "reserved_bounds": [
+      55.01,
+      7.01,
+      60.99,
+      12.99
+     ]
+    },
+    {
+     "token": "coloredlines",
+     "rotation": 0,
+     "bounds": [
+      -13.785,
+      -16.97,
+      10.445,
+      10.15
+     ],
+     "measurement": true,
+     "source": {
+      "token": "coloredlines",
+      "source_map": "Ribbon_Color_02",
+      "source_cell": [
+       7,
+       7
+      ],
+      "source_placement": "coloredlines"
+     },
+     "cell": [
+      22,
+      42
+     ],
+     "placement": "coloredlines#pin:1#plinth:0",
+     "reserved_bounds": [
+      8.215,
+      25.03,
+      32.445,
+      52.15
+     ]
+    },
+    {
+     "token": "RotatingLaser",
+     "rotation": 0,
+     "bounds": [
+      -15.83,
+      -21.45,
+      15.83,
+      20.95
+     ],
+     "measurement": true,
+     "source": {
+      "token": "RotatingLaser",
+      "source_map": "Ribbon_Color_02",
+      "source_cell": [
+       7,
+       10
+      ],
+      "source_placement": "RotatingLaser"
+     },
+     "cell": [
+      58,
+      39
+     ],
+     "placement": "RotatingLaser#pin:1#plinth:0",
+     "reserved_bounds": [
+      42.17,
+      17.55,
+      73.83,
+      59.95
+     ]
+    },
+    {
+     "token": "minimalglitch",
+     "rotation": 0,
+     "bounds": [
+      -5.5,
+      -0.5,
+      5.5,
+      0.5
+     ],
+     "measurement": true,
+     "source": {
+      "token": "minimalglitch",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       2
+      ],
+      "source_placement": "minimalglitch"
+     },
+     "cell": [
+      20,
+      64
+     ],
+     "placement": "minimalglitch#pin:1#plinth:0",
+     "reserved_bounds": [
+      14.5,
+      63.5,
+      25.5,
+      64.5
+     ]
+    },
+    {
+     "token": "textureglitch",
+     "rotation": 0,
+     "bounds": [
+      -7.96,
+      -0.034999999999999976,
+      8.06,
+      0.655
+     ],
+     "measurement": true,
+     "source": {
+      "token": "textureglitch",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       4
+      ],
+      "source_placement": "textureglitch"
+     },
+     "cell": [
+      58,
+      64
+     ],
+     "placement": "textureglitch#pin:1#plinth:0",
+     "reserved_bounds": [
+      50.04,
+      63.965,
+      66.06,
+      64.655
+     ]
+    },
+    {
+     "token": "glitchcolor",
+     "rotation": 0,
+     "bounds": [
+      -4.4,
+      -0.4,
+      4.4,
+      0.4
+     ],
+     "measurement": true,
+     "source": {
+      "token": "glitchcolor",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       6
+      ],
+      "source_placement": "glitchcolor"
+     },
+     "cell": [
+      20,
+      70
+     ],
+     "placement": "glitchcolor#pin:1#plinth:0",
+     "reserved_bounds": [
+      15.6,
+      69.6,
+      24.4,
+      70.4
+     ]
+    },
+    {
+     "token": "advancedglitch",
+     "rotation": 0,
+     "bounds": [
+      -4.75,
+      -0.1,
+      4.75,
+      0.1
+     ],
+     "measurement": true,
+     "source": {
+      "token": "advancedglitch",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       12
+      ],
+      "source_placement": "advancedglitch"
+     },
+     "cell": [
+      58,
+      70
+     ],
+     "placement": "advancedglitch#pin:1#plinth:0",
+     "reserved_bounds": [
+      53.25,
+      69.9,
+      62.75,
+      70.1
+     ]
+    },
+    {
+     "token": "colortrails",
+     "rotation": 0,
+     "bounds": [
+      -4.0,
+      -4.0,
+      4.0,
+      4.0
+     ],
+     "measurement": false,
+     "source": {
+      "token": "colortrails",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       2,
+       5
+      ],
+      "source_placement": "colortrails"
+     },
+     "cell": [
+      20,
+      78
+     ],
+     "placement": "colortrails#pin:1#plinth:0",
+     "reserved_bounds": [
+      16.0,
+      74.0,
+      24.0,
+      82.0
+     ]
+    },
+    {
+     "token": "neon_garden",
+     "rotation": 0,
+     "bounds": [
+      -2.5,
+      -2.5,
+      2.5,
+      2.5
+     ],
+     "measurement": false,
+     "source": {
+      "token": "neon_garden",
+      "source_map": "Ribbon_Color_05",
+      "source_cell": [
+       9,
+       3
+      ],
+      "source_placement": "neon_garden"
+     },
+     "cell": [
+      58,
+      78
+     ],
+     "placement": "neon_garden#pin:1#plinth:0",
+     "reserved_bounds": [
+      55.5,
+      75.5,
+      60.5,
+      80.5
+     ]
+    },
+    {
+     "token": "strobe_lasers",
+     "rotation": 0,
+     "bounds": [
+      -5.0,
+      -5.0,
+      5.0,
+      5.0
+     ],
+     "measurement": false,
+     "source": {
+      "token": "strobe_lasers",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       7,
+       7
+      ],
+      "source_placement": "strobe_lasers"
+     },
+     "cell": [
+      20,
+      91
+     ],
+     "placement": "strobe_lasers#pin:1#plinth:0",
+     "reserved_bounds": [
+      15.0,
+      86.0,
+      25.0,
+      96.0
+     ]
+    },
+    {
+     "token": "disco_lights",
+     "rotation": 0,
+     "bounds": [
+      -0.5,
+      -0.5,
+      0.5,
+      0.5
+     ],
+     "measurement": true,
+     "source": {
+      "token": "disco_lights",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       2,
+       9
+      ],
+      "source_placement": "disco_lights"
+     },
+     "cell": [
+      58,
+      91
+     ],
+     "placement": "disco_lights#pin:1#plinth:0",
+     "reserved_bounds": [
+      57.5,
+      90.5,
+      58.5,
+      91.5
+     ]
+    },
+    {
+     "token": "one_bulb_room",
+     "rotation": 0,
+     "bounds": [
+      -3.0,
+      -3.0,
+      3.0,
+      3.0
+     ],
+     "measurement": false,
+     "source": {
+      "token": "one_bulb_room",
+      "source_map": "Ribbon_Color_07",
+      "source_cell": [
+       9,
+       10
+      ],
+      "source_placement": "one_bulb_room"
+     },
+     "cell": [
+      20,
+      103
+     ],
+     "placement": "one_bulb_room#pin:1#plinth:0",
+     "reserved_bounds": [
+      17.0,
+      100.0,
+      23.0,
+      106.0
+     ]
+    },
+    {
+     "token": "laser_turret",
+     "rotation": 0,
+     "bounds": [
+      -0.395,
+      -0.395,
+      0.395,
+      0.395
+     ],
+     "measurement": true,
+     "source": {
+      "token": "laser_turret",
+      "source_map": "Ribbon_Color_03",
+      "source_cell": [
+       3,
+       5
+      ],
+      "source_placement": "laser_turret"
+     },
+     "cell": [
+      58,
+      103
+     ],
+     "placement": "laser_turret#pin:1#plinth:0",
+     "reserved_bounds": [
+      57.605,
+      102.605,
+      58.395,
+      103.395
+     ]
+    }
+   ]
+  }
+ ],
+ "learner_verified": false,
+ "counts": {
+  "source_placements": 75,
+  "removed_duplicate_placements": 38,
+  "retained_unique_artifacts": 37,
+  "old_rooms": 7,
+  "new_rooms": 3
+ },
+ "verification": {
+  "runtime_checks": 43,
+  "runtime_failures": 0,
+  "inventory_and_layout_checks": 358,
+  "python_tests": 30,
+  "necklace_source_check": "passed",
+  "headset_walkthrough": false
+ },
+ "followups": [
+  "Collection annexes need room-by-room teaching development and final manuscripts.",
+  "Graphical overview captures are affected by distance visibility and existing scene-wide labels/UI; they are not headset walkthrough evidence.",
+  "Existing Tutorial_Disco ragged layer warning appears during whole-museum index generation; no edits made to that map."
+ ]
+}

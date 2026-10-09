@@ -1,0 +1,53 @@
+--- before/commons/maps/Color_Walls/final.md
++++ after/commons/maps/Color_Walls/final.md
+@@ -2,36 +2,35 @@
+ 
+ <!-- @color_constellation_office -->
+ 
+-Someone has prepared a place for you. A desk, a monitor, a chair. Seven more places repeat along the aisle. The glass has colour; the office has an order.
++A sheet of cyan stands higher than you. Beyond it, magenta crosses your view. The pale floor continues through both colours. For a moment, the room seems to have several distances at once.
+ 
+-Choose a cubicle. Before entering, look toward its desk through a pane. There is almost nothing between you and the chair. Almost. Walk toward the opening instead. Your view took a route your body could not.
++Step sideways. A dark patch narrows, then opens into blue. Nothing in the office has moved. You have changed which panes stand between you and the far wall.
+ 
+-At the entrance console, press **GLASS / OPAQUE**. Return to the same cubicle. The chair has disappeared behind a coloured wall. Find the opening again. Has the route become longer, or has finding it become a different task?
++There are twelve sheets, staggered across the floor. Some turn away from the others. Their edges stop short of enclosing a room. Follow one edge until you can pass it; the colour that covered the next space falls behind you.
+ 
+-Press once more. The furniture returns to view. No doorway has opened.
++A desk waits to one side. Two more places to work are scattered among the partitions. Sit in imagination, or stand beside a chair and look back through the colours. How much of this office could you call your own without being able to close it?
+ 
+-Now go inside. Stand beside the chair and look back towards the aisle. The glass that let you look in also lets a view reach you here. Would you choose this much openness if you meant to stay?
++![Looking through the overlapping colour planes in the museum office.](/book-review/doc/book/iterations/2026-10-01-office-open-colour/layers-glass.png)
+ 
+-![Looking out from inside a furnished cubicle through its coloured glass.](/book-review/doc/book/iterations/2026-09-28-walls-a-view-from-inside/inside-glass.png)
++*The overlap changes with your position. The panes and the gaps remain still.*
+ 
+-*Inside the cubicle, the aisle remains in view. The same doorway serves the glass and opaque states.*
++At the entrance, press **FILTER / OPAQUE**. The view closes into coloured surfaces. Take the same route again. The next opening is harder to see, although it has not become narrower.
+ 
+-The office has forty panes. The switch changes two material properties on each one:
++Press once more. A chair returns through a pane. The pane still stops your body.
++
++In filter mode, the surface lets the view behind it contribute to the colour:
+ 
+ ```gdscript
+-mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
+-mat.albedo_color.a = 0.26 if glass_visible else 1.0
++surface.albedo_color.a = 0.52
+ ```
+ 
+-The collision bodies remain where they were. Each cubicle still has its 1.2-metre entrance; the walls still meet at right angles. You may have to find the chair again, but the opening that admitted you is still there.
++An overlap adds another tint. The pale backing keeps the view bright enough to follow through the layers. This is a blend of screen colours, not a simulation of the wavelengths passing through real glass.
+ 
+-In Paint, your gesture joined another painter on a shared surface. Here a coloured surface separates a place to work from a place to pass. Through the glass, each remains visible from the other. Opacity interrupts that exchange in both directions. The cubicle offers another degree of privacy without another way out.
+-
+-Move until several panes overlap in your view. A colour gathers where you see through more than one. No new pane has appeared there. The renderer combines their colours and transparency; it does not calculate the wavelengths a real pane would absorb. Move again and the overlap shifts.
++In Paint, your mark joined someone else's on a shared surface. Here the colour between two people changes what each can see. Opaque walls can interrupt that exchange. Gaps still let a view reach around them. Privacy depends on where you stand, where someone else stands, and how far the partition extends.
+ 
+ <!-- @color_space_navigator -->
+ 
+-Leave the cubicle through its opening. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.
++Find a gap between the panes and leave the office. At the smaller models, find the red corner of the cube, then look for red around the cylinder. The colour is familiar. Its neighbours have moved.
+ 
+ You have been walking through an arrangement of coloured space. These models arrange colour values in space. In the cube, increasing the red channel moves a sample along one axis. Green and blue have their own directions. A colour has become an address again, but the address now comes from the colour itself.
+ 

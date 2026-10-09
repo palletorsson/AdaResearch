@@ -1,0 +1,22 @@
+--- tested-before-parallel-edit
++++ current-museum
+@@ -11077,12 +11077,15 @@
+ 			# nothing but the sight of them arriving. 8 ms is the museum's own
+ 			# stamp budget, near enough a frame at 90 Hz.
+ 			gs.set("interactable_place_budget_ms", 8.0)
+-			gs.position = Vector3(0.0, -gdepth, float(VESTIBULE_H))
++			# Grid cubes are centred on integers; museum cells span [n, n + 1].
++			# Align EVERY embedded grid, not only staged ones. Without this half-cell
++			# offset the last cube ends 0.5 m before the exit passage, exposing the
++			# basin below (seen at every Colour hall exit). Internal grid coordinates
++			# and artifact placements stay unchanged; the whole grid moves together.
++			gs.position = Vector3(0.5, -gdepth, float(VESTIBULE_H) + 0.5)
+ 			if seg.has_meta("em_simulation_stage"):
+ 				var stage: Dictionary = seg.get_meta("em_simulation_stage")
+-				# Grid cube centres are integers; museum floor cells start at integers.
+-				# Half a cell aligns their outer edges without changing any grid-local coordinate.
+-				gs.position += Vector3(float(stage.pad) + 0.5, 0, float(stage.pad) + 0.5)
++				gs.position += Vector3(float(stage.pad), 0, float(stage.pad))
+ 				gs.set_meta("em_source_map", map_name)
+ 			seg.add_child(gs)
+ 			# Authored performance floors must stay clear of automatically dealt

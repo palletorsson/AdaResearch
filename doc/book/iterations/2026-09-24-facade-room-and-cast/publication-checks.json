@@ -1,0 +1,215 @@
+{
+  "checks": [
+    {
+      "check": "Boolean_Facade_Cast rectangular layers",
+      "pass": true
+    },
+    {
+      "check": "new artifact and spawn placed",
+      "pass": true
+    },
+    {
+      "check": "return portal present",
+      "pass": true
+    },
+    {
+      "check": "Boolean_Colour_Spaces_II rectangular layers",
+      "pass": true
+    },
+    {
+      "check": "only one original map cell changed",
+      "pass": true,
+      "changes": [
+        [
+          "utilities",
+          26,
+          20,
+          " ",
+          "t:Boolean_Facade_Cast"
+        ]
+      ]
+    },
+    {
+      "check": "registered scene exists",
+      "pass": true
+    },
+    {
+      "check": "unique artifact registry key",
+      "pass": true,
+      "files": [
+        "facade_room_cast.json"
+      ]
+    },
+    {
+      "check": "production source hashes current",
+      "pass": true
+    },
+    {
+      "check": "native image hashes current",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: pair.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: inside.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: positive.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: facade.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: overview.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: window-inside.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: window-positive.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: room-rail.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: positive-rail.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: /book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/pair.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: /book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/positive.png",
+      "pass": true
+    },
+    {
+      "check": "image has alternative text: /book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/inside-return.png",
+      "pass": true
+    },
+    {
+      "check": "section and footnote links resolve",
+      "pass": true
+    },
+    {
+      "check": "no blocked scripts required",
+      "pass": true
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-boolean-more-spaces/index.html",
+      "pass": true,
+      "status": 200,
+      "bytes": 12566
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/DECISIONS.md",
+      "pass": true,
+      "status": 200,
+      "bytes": 4403
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/facade.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 121117
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/index.html",
+      "pass": true,
+      "status": 200,
+      "bytes": 14307
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/inside-return.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 201557
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/inside.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 173308
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/manifest.json",
+      "pass": true,
+      "status": 200,
+      "bytes": 13322
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/overview.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 129042
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/pair.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 143397
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/positive-rail.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 14327
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/positive.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 155289
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/room-rail.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 105968
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/runtime.json",
+      "pass": true,
+      "status": 200,
+      "bytes": 3086
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/study-portal.diff",
+      "pass": true,
+      "status": 200,
+      "bytes": 284
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/window-inside.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 116556
+    },
+    {
+      "check": "HTTP http://localhost:3003/book-review/doc/book/iterations/2026-09-24-facade-room-and-cast/window-positive.png",
+      "pass": true,
+      "status": 200,
+      "bytes": 161048
+    },
+    {
+      "check": "HTTP http://localhost:3003/compose/sources?map=Boolean_Facade_Cast&doc=final",
+      "pass": true,
+      "status": 200,
+      "bytes": 32096
+    },
+    {
+      "check": "engine log has no parse or script errors",
+      "pass": true
+    }
+  ],
+  "browser_note": "In-app inspection unavailable: browser tool process exited at setup. Native images visually inspected; HTML structure and HTTP verified."
+}

@@ -1,0 +1,1 @@
+Colour has been here all along. Primitives, transformations and arrays have given us enough to build, repeat a choice and look again. Walk among the columns: a precise assignment can also awaken a memory, a desire or a question.

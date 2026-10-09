@@ -1,0 +1,41 @@
+--- before/final.md
++++ current/final.md
+@@ -65,9 +65,31 @@
+ 
+ You can move a corner on the instrument while the museum's boxes support and redirect your body. What we are learning to inspect is also the place from which we inspect it.
+ 
++<!-- @prefab_box_library -->
++
++A long shelf holds boxes. Brown cardboard, wooden crates, dark cargo cases, bright printed cartons. Four columns repeat four different models. In the last two, the crate and the printed carton return with changed colours, boards and words. The eye starts sorting before the hand reaches anything.
++
++![The Cube hall’s shelf of cardboard boxes, wooden crates, cargo cases and printed cartons, with an empty table in front.](/book-review/doc/book/figures/Point_Animatedcube/prefab-library.png)
++
++*The first four columns repeat their models. The last two let the same model differ.*
++
++These are *prefabs*: reusable objects stored as scenes. A placed copy is an *instance*. The planks, straps and lettering arrive together, carrying decisions someone has already made. We can begin with a furnished object before knowing how to build each of its parts.
++
++One carton says **AGAIN**. Take it down. Another says the same thing from the shelf. Moving your copy has left the others where they were.
++
++There is pleasure in finding it again: a familiar shape, an interval kept, a difference small enough to search for. A crate can belong to the scenery of many games before it belongs to this room. Its familiarity travels with it.
++
++Warhol's *Brillo Boxes* bring another kind of repetition here. His 1964 sculptures were fabricated plywood boxes, painted and screenprinted with commercial packaging imagery. Their exhibition arrangement recalled a warehouse.[^cube-warhol] Work had gone into making something whose appearance was already familiar. Our printed carton is an original design, but it borrows that tension between an ordinary package and an object given our attention.
++
++The table is empty. Put two identical copies together. Add a different box. Turn its lettering away, or let **AGAIN** face **OTHER**. You have kept the supplied shape and changed its neighbours. The collection offers a vocabulary; it also makes some choices easier to imagine than others.
++
++Look back at the gaps on the shelf. The arrangement records what you took.
++
++<!-- @ -->
++
+ Read the cartons: **A WORLD / WITHOUT / COMPOSITION**. The supply pile and the stamped crate add **YET**.
+ 
+-*A world without composition yet.* There is already an arrangement around us; the words cannot make it disappear. We can recognise what the museum is made from before we know how to compose another one.
++*A world without composition yet.* There was already an arrangement around us. On the table, another has begun. We have borrowed its parts, and made a relation between them.
+ 
+ Take the crease with you: a small movement exposed a decision inside a familiar shape.
+ 
+@@ -78,3 +100,5 @@
+ [^animatedcube-boundary]: *Connectivity* names which vertices, edges and faces are incident; their positions place that structure in space. Compare the separate point and connectivity properties in Botsch, Sieger, Moeller and Fabri's [Surface Mesh manual](https://doc.cgal.org/latest/Surface_mesh/index.html), CGAL 6.2.1, “Connectivity” and “Properties.” Here the index lists preserve the combinatorial structure, but moving vertices may produce crossings or collapsed faces, so a valid geometric embedding is not guaranteed. The builder's patches also lack enclosing collision geometry; its handles have pickup colliders. See the [technical chapter](/book?map=Point_Animatedcube&section=technical).
+ 
+ [^animatedcube-counts]: Euler's [Elementa doctrinae solidorum](https://scholarlycommons.pacific.edu/euler-works/230/) (1758) investigates polyhedral counts. For the initial cube, `V - E + F = 8 - 12 + 6 = 2`. Splitting its squares adds six diagonals and six faces: `8 - 18 + 12 = 2` again. A proof for the sphere's triangulation appears in Heinz Hopf's [Selected Chapters of Geometry](https://pi.math.cornell.edu/~hatcher/Other/hopf-samelson.pdf), §I.3, from his 1940 lectures reconstructed and translated by Hans Samelson. The equality does not certify cube shape or a valid embedding. The instrument counts twelve patches, excluding reverse rendering copies.
++
++[^cube-warhol]: The Andy Warhol Museum, [Brillo: Is It Art?](https://www.warhol.org/lessons/brillo-is-it-art/), on the fabrication and 1964 Stable Gallery exhibition. These were constructed sculptures carrying packaging imagery. The library’s AGAIN carton is a new design for this encounter.

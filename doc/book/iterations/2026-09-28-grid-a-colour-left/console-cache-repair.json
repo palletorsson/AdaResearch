@@ -1,0 +1,7 @@
+{
+  "cause": "An archived reference script was registered as the live ControlPanel class.",
+  "ignored_folder": "doc/reports/interfaces-2026-09-20/shannon-pilot/before",
+  "cache_before": "{\n\"base\": &\"Node3D\",\n\"class\": &\"ControlPanel\",\n\"icon\": \"\",\n\"is_abstract\": false,\n\"is_tool\": true,\n\"language\": &\"GDScript\",\n\"path\": \"res://doc/reports/interfaces-2026-09-20/shannon-pilot/before/original-reference-control-panel.gd\"\n}",
+  "cache_after": "{\n\"base\": &\"Node3D\",\n\"class\": &\"ControlPanel\",\n\"icon\": \"\",\n\"is_abstract\": false,\n\"is_tool\": true,\n\"language\": &\"GDScript\",\n\"path\": \"res://commons/ui/control_panel.gd\"\n}",
+  "scope": "Only the ControlPanel entry in the generated local cache is replaced. Canonical UI and lesson code unchanged."
+}

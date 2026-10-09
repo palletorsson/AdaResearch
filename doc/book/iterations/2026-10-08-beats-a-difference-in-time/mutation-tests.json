@@ -1,0 +1,28 @@
+[
+  {
+    "fault": "unsigned-inputs",
+    "rejected": true,
+    "failures": [
+      "one second cancels substantial opposing sources",
+      "opposition applies across the entire row",
+      "smaller gap cancels at two seconds and aligns at four",
+      "reversing frequency order keeps beat period",
+      "equal-frequency pair retains shared phase"
+    ]
+  },
+  {
+    "fault": "hidden-gain",
+    "rejected": true,
+    "failures": [
+      "gain is applied only to plotted sum"
+    ]
+  },
+  {
+    "fault": "no-restart",
+    "rejected": true,
+    "failures": [
+      "actual pickup action applies local height and resets clock",
+      "process advances one shared clock"
+    ]
+  }
+]

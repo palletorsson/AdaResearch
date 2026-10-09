@@ -1,0 +1,134 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "paired model and volume loaded",
+      "passed": true
+    },
+    {
+      "name": "museum placement disables keyboard shortcuts",
+      "passed": true
+    },
+    {
+      "name": "walking key leaves model unchanged: Up",
+      "passed": true
+    },
+    {
+      "name": "walking key leaves model unchanged: Down",
+      "passed": true
+    },
+    {
+      "name": "walking key leaves model unchanged: Left",
+      "passed": true
+    },
+    {
+      "name": "walking key leaves model unchanged: Right",
+      "passed": true
+    },
+    {
+      "name": "walking key leaves model unchanged: R",
+      "passed": true
+    },
+    {
+      "name": "walking key leaves model unchanged: N",
+      "passed": true
+    },
+    {
+      "name": "all shortcuts leave occupancy unchanged",
+      "passed": true
+    },
+    {
+      "name": "standalone instances retain keyboard default",
+      "passed": true
+    },
+    {
+      "name": "opted-in shortcut still changes frequency",
+      "passed": true
+    },
+    {
+      "name": "explicit opt-out restored",
+      "passed": true
+    },
+    {
+      "name": "pair still shares orientation",
+      "passed": true
+    },
+    {
+      "name": "full volume retains one-metre cells and flight enclosure",
+      "passed": true
+    },
+    {
+      "name": "piece count is on the bench",
+      "passed": true
+    },
+    {
+      "name": "volume keeps front and back dimension captions",
+      "passed": true
+    },
+    {
+      "name": "volume keeps twenty-five times the model spacing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: bench-controls",
+      "passed": true
+    },
+    {
+      "name": "physical THRESHOLD button still changes model",
+      "passed": true
+    },
+    {
+      "name": "THRESHOLD reaches large volume",
+      "passed": true
+    },
+    {
+      "name": "higher threshold removes cells at the same seed",
+      "passed": true
+    },
+    {
+      "name": "model and volume occupancy agree",
+      "passed": true
+    },
+    {
+      "name": "physical CELL button updates volume marker",
+      "passed": true
+    },
+    {
+      "name": "physical CUT button still opens model",
+      "passed": true
+    },
+    {
+      "name": "CUT can be closed again",
+      "passed": true
+    },
+    {
+      "name": "physical SEED button remains connected",
+      "passed": true
+    },
+    {
+      "name": "console updates preserve the flight enclosure",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "button_threshold": 0.1,
+    "captions": [
+      "1.0 m CELLS | 24 x 24 x 24 ADDRESSES\nSame field as the bench | 25.0 times the spacing",
+      "1.0 m CELLS | 24 x 24 x 24 ADDRESSES\nSame field as the bench | 25.0 times the spacing"
+    ],
+    "initial": {
+      "cells": 13824,
+      "largest_piece": 6661,
+      "occupied": 6767,
+      "pieces": 25
+    },
+    "scope": "Real museum: supplied keyboard callbacks and actual console button signals. No physical controller, headset or flight-route acceptance."
+  },
+  "passed": true,
+  "room": "Noise_Voxel",
+  "scope": "Real museum, supplied input events and support checks; no headset or learner acceptance."
+}

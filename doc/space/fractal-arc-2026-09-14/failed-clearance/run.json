@@ -1,0 +1,34 @@
+{
+  "started": "2026-09-14T10:12:46+02:00",
+  "finished": "2026-09-14T10:13:10+02:00",
+  "pid": 13520,
+  "exit": 1,
+  "checks": 16,
+  "failures": [
+    "clearance capsule reaches east approach",
+    "clearance capsule reaches east side of specimen",
+    "clearance capsule reaches rear margin",
+    "clearance capsule reaches exit opening"
+  ],
+  "source_sha256": {
+    "ada_run/fractal_arc_probe_base.gd": "5268b28c873d0f3af0067d7478cc3d541964b72be15f4f260bf304fb9177f147",
+    "ada_run/fractal_arc_acceptance.gd": "b19eec2c37afc806d370ebf75d4ac9009a8f4b40b5622f9872f576d4a989b456",
+    "commons/maps/Fractal_MengerSponge/map_data.json": "822310d60db40bb4bd3948f1746f483e6ce09d033b862abe2177714ae05fc041",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/fractal-arc-review-2026-09-14/review-plan.json": "c633fecab080a0a3717f6c037f766fd3c77c9cd18c24b92979e5df46deee20a3",
+    "algorithms/fractals/mengersponge/menger_sponge.gd": "bf804bb89662a77e37b4312ecbd9f6c621131e6c16cb5865718c118cd1ced401",
+    "algorithms/fractals/mengersponge/menger_sponge.tscn": "cb740970d6b41cb1cda0f6fbdbdfbc694734defdce549353150ec2f3c586497f",
+    "commons/data/map_authored.json": "791f0e25e183b0ef2537ed2170bee6c54c03940aa795581d1c63634c8750d722"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    }
+  ]
+}

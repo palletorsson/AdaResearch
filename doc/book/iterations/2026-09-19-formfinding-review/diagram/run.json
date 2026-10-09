@@ -1,0 +1,29 @@
+{
+  "command": [
+    "C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe",
+    "--path",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46",
+    "--xr-mode",
+    "off",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1400x950",
+    "--log-file",
+    "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\iterations\\2026-09-19-formfinding-review\\diagram\\engine.log",
+    "--script",
+    "res://doc/book/iterations/2026-09-19-formfinding-review/probe_diagram.gd"
+  ],
+  "seconds": 4.957818508148193,
+  "returncode": 0,
+  "before": {
+    "algorithms/formfinding/settling_tremble/settling_tremble.gd": "9acc7092e08eb1af84a3d9df81862e78bbc86038e790204873a25dbc471d9abb",
+    "doc/book/iterations/2026-09-19-formfinding-review/probe_diagram.gd": "4bdf4455fec4252fc22c85d45d344eab1dad84a2eabdc887dfdaef04c6d56d2a"
+  },
+  "after": {
+    "algorithms/formfinding/settling_tremble/settling_tremble.gd": "9acc7092e08eb1af84a3d9df81862e78bbc86038e790204873a25dbc471d9abb",
+    "doc/book/iterations/2026-09-19-formfinding-review/probe_diagram.gd": "4bdf4455fec4252fc22c85d45d344eab1dad84a2eabdc887dfdaef04c6d56d2a"
+  }
+}

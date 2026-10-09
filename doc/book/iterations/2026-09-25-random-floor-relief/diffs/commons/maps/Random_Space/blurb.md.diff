@@ -1,0 +1,7 @@
+--- before/commons/maps/Random_Space/blurb.md
++++ commons/maps/Random_Space/blurb.md
+@@ -1,3 +1,3 @@
+ Layers that look like land. On a plinth, the noise mixer adds several layers of smooth noise at different scales: OCT sets how many, LAC how much finer each is, PER how much each counts. The sum is stretched across an earth-toned palette, so it reads as water, grass, rock and snow although nothing was simulated. Step the sliders back and the same picture returns; SEED starts another.
+ 
+-Underfoot is a different kind of randomness: a surface whose every corner height was drawn on its own, breaking through the floor in jagged pale patches. Neighbouring pixels on the plinth agree; neighbouring corners under your feet need not.
++Underfoot is a different kind of randomness: a surface whose every corner height was drawn on its own, lifted clear of the floor as a violet field of small triangles. Neighbouring pixels on the plinth agree; neighbouring corners under your feet need not.

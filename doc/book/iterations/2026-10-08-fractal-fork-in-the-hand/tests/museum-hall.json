@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Existing recursive tree remains in its authored hall",
+      "passed": true
+    },
+    {
+      "name": "Hand model and full canopy installed in production",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: arrival",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hand-model",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before-turn",
+      "passed": true
+    },
+    {
+      "name": "Actual museum point steers through the XR grab driver",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after-turn",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: under-canopy",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: above",
+      "passed": true
+    },
+    {
+      "name": "Point within standing reach: RosePoint",
+      "passed": true
+    },
+    {
+      "name": "Point within standing reach: BlackPoint",
+      "passed": true
+    },
+    {
+      "name": "Hand-model approach has actual museum floor",
+      "passed": true
+    },
+    {
+      "name": "Route floor 0",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 0",
+      "passed": true
+    },
+    {
+      "name": "Route floor 1",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 1",
+      "passed": true
+    },
+    {
+      "name": "Route floor 2",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 2",
+      "passed": true
+    },
+    {
+      "name": "Route floor 3",
+      "passed": true
+    },
+    {
+      "name": "Route clearance 3",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "direction_after_turn": [
+      0.693244814872742,
+      0.422618269920349,
+      0.58378541469574
+    ],
+    "scope": "Production map, actual XRTools grab with supplied poses; six rendered views. Route sampled every 0.4 m, not every possible path. Headset comfort untested.",
+    "segment_count": 31
+  },
+  "passed": true,
+  "room": "Fractal_RecursiveTrees",
+  "scope": "Real museum, supplied slider/reset events and geometry checks; headset and learner understanding untested."
+}

@@ -1,0 +1,588 @@
+{
+  "sequence": "forces",
+  "declared_maps": [
+    "Vectors_Act1_WhatAVectorIs",
+    "VFM_02_Operations",
+    "Vectors_Act2_VectorArithmetic",
+    "VFM_05_Launch",
+    "VFM_03_Motion",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act4a_KineticForces",
+    "Vectors_Act4b_Oscillation",
+    "Change_Choreography",
+    "VFM_07_Gravity",
+    "VFM_09_Legs",
+    "VFM_08_Arena",
+    "Vectors_Act5_ForceAsPlace"
+  ],
+  "museum_map_authored_order": [
+    "Vectors_Act1_WhatAVectorIs",
+    "VFM_02_Operations",
+    "Vectors_Act2_VectorArithmetic",
+    "VFM_05_Launch",
+    "VFM_03_Motion",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act4a_KineticForces",
+    "Vectors_Act4b_Oscillation",
+    "Change_Choreography",
+    "VFM_07_Gravity",
+    "VFM_09_Legs",
+    "VFM_08_Arena",
+    "Vectors_Act5_ForceAsPlace"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 705,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "VectorBasics",
+          "vector_normalize_demo"
+        ],
+        "reason": "Keep the existing manuscript and its supporting encounters; identify the objects carrying its central comparison as the teaching core.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+        "text_sha256": "859c7c8fdcd36be3be89b0e7e386411fec987678d27e8ce9dfe1f66590a24b2d",
+        "map_sha256": "04d80db61a70e28945a021154a53591a2170e694d26402e0b88a59d99fb5a1e4",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "role_primary_order": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "VFM_02_Operations",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 751,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "adder_board"
+        ],
+        "reason": "Two displacements feed one sum in wall, floor and carriage; compare endpoint with travelled distance.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/VFM_02_Operations/final.md",
+        "text_sha256": "51edcafb21e713d250e36300b70e28d0f5ba8ee832c7804c723a6d4d7016cd9f",
+        "map_sha256": "cdccdc152925176e55cdefcdc7297a2e1fb97ad7fc656b203c08076042fb852b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "adder_board"
+      ],
+      "role_primary_order": [
+        "adder_board"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Vectors_Act2_VectorArithmetic",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1208,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "vector_add",
+          "vector_sub",
+          "dot_aligner",
+          "projection_shadow",
+          "torque_crank"
+        ],
+        "reason": "Five primary comparisons retained; new subtraction and projection share one live gap and expose its remainder.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+        "text_sha256": "9a141e8b922c81f6487ef8ff0aad06e36266e07b5b2465ce0e16247b101cc1fe",
+        "map_sha256": "b3e5c4aba545332ab0340fb6402a10a9f86dc10f92473bcebc7377231ea803e5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank"
+      ],
+      "role_primary_order": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank",
+        "#note-1",
+        "#note-2"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [
+        "#note-1",
+        "#note-2"
+      ],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "VFM_05_Launch",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 919,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "launch_arc"
+        ],
+        "reason": "Stand between full-scale complementary flights; compare range, time and continuing gravity before revealing equations.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/VFM_05_Launch/final.md",
+        "text_sha256": "14c695ecdbbf59a1c3f0041b1346b1c11f40ddb8efd54a35f1a38e7a60b76458",
+        "map_sha256": "cf891a2af0ff03f26ad57a75a512c618d77f2993ea0573e8f9cc1b5e9fa7b813",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "launch_arc"
+      ],
+      "role_primary_order": [
+        "launch_arc"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "VFM_03_Motion",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1087,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "VectorMotion",
+          "friction_ramp"
+        ],
+        "reason": "A finite push leaves a velocity; compare gradual braking with the ramp model's static transition.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/VFM_03_Motion/final.md",
+        "text_sha256": "4674c8b37c0f9b89097f43fea600ca1ae44adda04311fbcf8cd07bb584b01278",
+        "map_sha256": "e1edd1d88baa953a11a679eb97340ed038e887dd54ab16a763fb70a2c6dcca3c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "VectorMotion",
+        "friction_ramp"
+      ],
+      "role_primary_order": [
+        "VectorMotion",
+        "friction_ramp"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 935,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "VectorFieldFlow"
+        ],
+        "reason": "Two receiver rules sample the same field: setting velocity approaches the sink, accumulating acceleration overshoots.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+        "text_sha256": "3050d9438bf37064deb243305c9823223f87428dd6e2c73c2aab650efce8cea3",
+        "map_sha256": "be97fa6bf07a374954ac95b156efe5dadb4ccc23bbbe07a9672c2d5bca3616f7",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "VectorFieldFlow"
+      ],
+      "role_primary_order": [
+        "VectorFieldFlow"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1166,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "drag_corridor",
+          "force_mower",
+          "centrifuge_ring"
+        ],
+        "reason": "Applied drag, signed nominal work and required circular acceleration have different receivers and histories.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/Vectors_Act4a_KineticForces/final.md",
+        "text_sha256": "1f75c3d61f6b2dcc31fafd50e30f7bc88d080b25fc6b2da93c52afba70f0fc76",
+        "map_sha256": "00f5dbea1d4958d9d512db7cbfb1f3f3f3049f985486e5c178fa60e77af0274c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "drag_corridor",
+        "force_mower",
+        "centrifuge_ring"
+      ],
+      "role_primary_order": [
+        "drag_corridor",
+        "force_mower",
+        "centrifuge_ring"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1028,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "spring_tower"
+        ],
+        "reason": "One integrated restoring-force encounter, with the force budget shared by the body and wall; later Wavefunctions develops rhythm and records.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/Vectors_Act4b_Oscillation/final.md",
+        "text_sha256": "dcb13eabab91ba35a0de3d52cd293dd61d276ac6070130d77da7cf7a0bb93cd0",
+        "map_sha256": "8f461aab3551f8b563dc87109a08c98ddee5f8cca5b209042d3c0cf1b164a1c4",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "spring_tower"
+      ],
+      "role_primary_order": [
+        "spring_tower"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Change_Choreography",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 907,
+      "text_record_match": "not recorded",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "sequence": "forces",
+        "primary_tokens": [
+          "phase_rod_array",
+          "conveyor_backlog"
+        ],
+        "status": "desktop_verified_headset_pending",
+        "learner_verified": false,
+        "reason": "Fixed phase difference, relative frequency drift and mismatched throughput are distinct inspectable relations.",
+        "map_sha256": "9c6210a78ae4e1220299895b29435781dcb4f130c8a8d4aa1322f69bf299f69d"
+      },
+      "manuscript_artifact_order": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ],
+      "role_primary_order": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 980,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "orbital_mechanics_demo",
+          "three_body_problem"
+        ],
+        "reason": "A held source becomes a mutual relation, then a third body changes the earlier pair. Shared softened law and controlled paired beginnings.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/VFM_07_Gravity/final.md",
+        "text_sha256": "f6366b3978bf7db77d121824816887d9454bf419642b57376c8ba1b4879b1b7e",
+        "map_sha256": "1b6dd1d66b47c1bad6787426a6a721e28c1b9a78c1a55f3e095bcb12607483d6",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ],
+      "role_primary_order": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "VFM_09_Legs",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1004,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "support_polygon_lab",
+          "four_leg_critter"
+        ],
+        "reason": "Physical support and tipping beside a retained procedural walker: geometry, contact and authored movement become distinguishable.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/VFM_09_Legs/final.md",
+        "text_sha256": "cf1c2f5112ca51a2d82126f5e83c24c508a39e760ce0db60bbd0dcdc02674018",
+        "map_sha256": "089240b597a97326f7e94d570f920531129347a5c74e2be60560ffadbfb4f9ec",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "support_polygon_lab",
+        "four_leg_critter"
+      ],
+      "role_primary_order": [
+        "support_polygon_lab",
+        "four_leg_critter"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "VFM_08_Arena",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1162,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "arena_relation_lab",
+          "collision_carts"
+        ],
+        "reason": "A scoped creature makes selection and retained feeding state inspectable; the existing collision passage distinguishes controller actions from conservation constraints.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/VFM_08_Arena/final.md",
+        "text_sha256": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+        "map_sha256": "bc39731e6147e74c51a0a23d0437248c8e41ee222430d5a505b01e7ca2a2525b",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "arena_relation_lab",
+        "collision_carts"
+      ],
+      "role_primary_order": [
+        "arena_relation_lab",
+        "collision_carts"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "recorded_status": "desktop_verified_headset_pending",
+      "text_words": 1273,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "vector_machine",
+          "force_cube",
+          "force_field_zone"
+        ],
+        "reason": "Aim, observe a probe, then compare a visitor receiver; all supporting exhibits retained.",
+        "status": "desktop_verified_headset_pending",
+        "sequence": "forces",
+        "text_path": "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+        "text_sha256": "ff6d2e1ec8c762288533299a11d60412c4a3b1a2cafb7ca71341efe3e52c8142",
+        "map_sha256": "d6aaa1086dabc9278ddfb87ef2748b6bd36862cc3368fd1b6e56531cac44f566",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ],
+      "role_primary_order": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/physicssimulation/threebodyproblem/CelestialBody.gd",
+      "algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd",
+      "algorithms/physicssimulation/threebodyproblem/threebodyproblem.tscn",
+      "algorithms/vectors/01_vector_basics/VectorBasics.gd",
+      "algorithms/vectors/01_vector_basics/VectorBasics.tscn",
+      "algorithms/vectors/01_vector_basics/room_reading.gd",
+      "algorithms/vectors/08_vector_motion/VectorMotion.gd",
+      "algorithms/vectors/08_vector_motion/VectorMotion.tscn",
+      "algorithms/vectors/08_vector_motion/motion_chamber.gd",
+      "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd",
+      "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.tscn",
+      "algorithms/vectors/10_vector_field_flow/field_receivers.gd",
+      "algorithms/vectors/shared/gadgets/spring_scale_gadget.gd",
+      "algorithms/vectors/shared/vector_scene_base.gd",
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/_embodied/pickable_prop.gd",
+      "commons/artifacts/_toy_console/toy_console.gd",
+      "commons/artifacts/adder_board/adder_board.gd",
+      "commons/artifacts/adder_board/adder_board.tscn",
+      "commons/artifacts/adder_board/room_sum.gd",
+      "commons/artifacts/arena_relation_lab/arena_relation_lab.gd",
+      "commons/artifacts/arena_relation_lab/arena_relation_lab.tscn",
+      "commons/artifacts/arena_relation_lab/lesson_crab.gd",
+      "commons/artifacts/arena_relation_lab/lesson_food.gd",
+      "commons/artifacts/centrifuge_ring/centrifuge_ring.gd",
+      "commons/artifacts/centrifuge_ring/centrifuge_ring.tscn",
+      "commons/artifacts/collision_carts/collision_carts.gd",
+      "commons/artifacts/collision_carts/collision_carts.tscn",
+      "commons/artifacts/conveyor_belt/conveyor_belt.tscn",
+      "commons/artifacts/dot_aligner/dot_aligner.gd",
+      "commons/artifacts/dot_aligner/dot_aligner.tscn",
+      "commons/artifacts/drag_corridor/drag_corridor.gd",
+      "commons/artifacts/drag_corridor/drag_corridor.tscn",
+      "commons/artifacts/drag_corridor/kinetic_drag.gd",
+      "commons/artifacts/force_cube/force_cube.gd",
+      "commons/artifacts/force_cube/force_cube.tscn",
+      "commons/artifacts/force_field_zone/field_carry_provider.gd",
+      "commons/artifacts/force_field_zone/force_field_zone.gd",
+      "commons/artifacts/force_field_zone/force_field_zone.tscn",
+      "commons/artifacts/force_field_zone/force_flow.gdshader",
+      "commons/artifacts/force_mower/force_mower.gd",
+      "commons/artifacts/force_mower/force_mower.tscn",
+      "commons/artifacts/friction_ramp/friction_ramp.gd",
+      "commons/artifacts/friction_ramp/friction_ramp.tscn",
+      "commons/artifacts/launch_arc/launch_arc.gd",
+      "commons/artifacts/launch_arc/launch_arc.tscn",
+      "commons/artifacts/launch_arc/launch_chamber.gd",
+      "commons/artifacts/orbital_mechanics_demo/gravity_relations.gd",
+      "commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.gd",
+      "commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
+      "commons/artifacts/projection_shadow/projection_shadow.gd",
+      "commons/artifacts/projection_shadow/projection_shadow.tscn",
+      "commons/artifacts/spring_tower/restoring_forces.gd",
+      "commons/artifacts/spring_tower/spring_tower.gd",
+      "commons/artifacts/spring_tower/spring_tower.tscn",
+      "commons/artifacts/support_polygon_lab/support_polygon_lab.gd",
+      "commons/artifacts/support_polygon_lab/support_polygon_lab.tscn",
+      "commons/artifacts/timing_machines/conveyor_backlog.gd",
+      "commons/artifacts/timing_machines/conveyor_backlog.tscn",
+      "commons/artifacts/timing_machines/machine_stage.gd",
+      "commons/artifacts/timing_machines/phase_rod_array.gd",
+      "commons/artifacts/timing_machines/phase_rod_array.tscn",
+      "commons/artifacts/torque_crank/torque_crank.gd",
+      "commons/artifacts/torque_crank/torque_crank.tscn",
+      "commons/artifacts/vector_machine/vector_machine.gd",
+      "commons/artifacts/vector_machine/vector_machine.tscn",
+      "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+      "commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+      "commons/artifacts/vector_op_console/gap_projection_room.gd",
+      "commons/artifacts/vector_op_console/vector_op_console.gd",
+      "commons/artifacts/vector_op_console/vector_op_console.tscn",
+      "commons/artifacts/vector_op_console/vector_sub.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/hazards/octapod_crawler/four_leg_critter.gd",
+      "commons/hazards/octapod_crawler/four_leg_critter.tscn",
+      "commons/hazards/octapod_crawler/leg_walker_base.gd",
+      "commons/hazards/octapod_crawler/leg_walker_root.gd",
+      "commons/interactables/push_button.tscn",
+      "commons/ui/control_panel.gd",
+      "commons/ui/interface_presets.gd"
+    ],
+    "unresolved_static_references": [
+      "res://commons/artifacts/%s/%s.tscn"
+    ],
+    "further_dependencies_not_traversed": [
+      "res://.../toy_console.gd",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "res://addons/godot-xr-tools/objects/pickable.gd",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd",
+      "res://addons/godot-xr-tools/rumble/tap_rumble.tres",
+      "res://commons/artifacts/conveyor_belt/conveyor_belt.gd",
+      "res://commons/artifacts/drag_corridor/kinetic_walk_provider.gd",
+      "res://commons/artifacts/spore_mushroom/spore_mushroom.gd",
+      "res://commons/artifacts/spring_tower/spring_handle.gd",
+      "res://commons/hazards/head_crab/head_crab.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://commons/interactables/joystick_smooth.tscn",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_plane.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/primitives/line/line.tscn",
+      "res://commons/primitives/point/laser_point.gd",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/ui/control_console.gd",
+      "res://commons/ui/interface_housing.gd",
+      "res://commons/ui/text_screen.gd",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

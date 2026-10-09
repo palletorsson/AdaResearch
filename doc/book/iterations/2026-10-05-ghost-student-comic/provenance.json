@@ -1,0 +1,21 @@
+{
+  "title": "The student who hasn't arrived",
+  "date": "2026-10-05",
+  "method": "Built-in image_gen tool; original generation, museum-reference edit, then targeted podium-count correction. No image-editing postprocessing.",
+  "prompt": "PROMPT.txt",
+  "edit_prompts": [
+    "EDIT-PROMPT-v2.txt",
+    "EDIT-PROMPT-v2-podiums.txt"
+  ],
+  "asset": "comic-v2.png",
+  "previous_asset": "comic.png",
+  "architectural_references": [
+    "../2026-10-03-point-one-existing-points/corridor.png",
+    "../2026-10-03-point-one-existing-points/solid.png"
+  ],
+  "sha256": "2d033d77a1a0b91a7dca238f45bde7a1f97230928268b48e3c5c47d1070c58ac",
+  "status": "Fictional comic synopsis based on an actual bounded code-continuation experiment. Not a museum screenshot or record of participants.",
+  "provenance_note": "Museum revision: three entrance podiums, straight gallery architecture, repeated title and always another room, large polished black future sphere. The authored transcript is SYNOPSIS.md.",
+  "actual_code_reference": "../2026-10-05-lesson-state-chain/assembled.gd",
+  "evidence_reference": "../2026-10-05-lesson-state-chain/report-runtime.json"
+}

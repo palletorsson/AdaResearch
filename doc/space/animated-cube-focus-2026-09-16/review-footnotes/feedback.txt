@@ -1,0 +1,240 @@
+This is very strong, and I think the hall has found its real problem:
+
+> **What must remain invariant for something still to count as a cube?**
+
+That is a better question than simply “how is a cube constructed?” because it continues the method established in the previous rooms: change one part of the implementation and see which identity survives.
+
+The small tutorial lesson can stay very simple:
+
+> **A cube can be represented as vertices, edges and triangular faces.**
+
+The research question underneath it is:
+
+> **Which properties belong to connectivity, and which belong to geometry?**
+
+Your `v6` experiment makes that distinction physical.
+
+The important discovery is:
+
+* vertex `6` can move;
+* the same vertices remain neighbours;
+* the edge/triangle index lists remain unchanged;
+* but equal edge lengths, right angles, planar square faces and perhaps valid enclosure can disappear.
+
+So the object preserves **combinatorial structure** while losing some of the properties by which we recognize a geometric cube.
+
+That is an excellent Ada experiment.
+
+### The strongest part is the crease
+
+This passage should remain the centre:
+
+> Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place.
+
+That makes triangulation stop being an invisible implementation detail.
+
+The square seemed like one face.
+
+Moving a vertex reveals that the renderer never had “a square” in quite the way the visitor thought. It had two triangles that happened to agree on a plane.
+
+And this is excellent:
+
+> **Your hand has made one of those divisions matter.**
+
+Keep that.
+
+It fits the entire research method: a construction decision remains invisible until a variation exposes it.
+
+### This may be the hall's truth line
+
+> The neighbours remain; equal lengths, right angles and flat square faces need not.
+
+That is very concise and very deep.
+
+It gives you the distinction:
+
+**same adjacency / different geometry**
+
+or perhaps:
+
+**same topology / changed metric geometry**
+
+I would be slightly careful with the word *topology* in the visitor text because technically the mesh may become self-intersecting or degenerate if pushed far enough. But as a nearby footnote, this is an excellent place to introduce the distinction between **connectivity** and **geometric embedding**.
+
+A note could say:
+
+> The index structure records which vertices, edges and faces are connected. Moving a vertex can preserve that combinatorial connectivity while changing lengths, angles and planarity. In geometry processing these are different layers of description: connectivity says which elements are neighbours; vertex positions say how that structure is embedded in space.
+
+That is exactly what the artifact demonstrates.
+
+### `REPLAY` versus `RESTORE CUBE` is surprisingly important
+
+This is a very good distinction:
+
+> Repeating a presentation and undoing a change are different ways of beginning again.
+
+I would keep it.
+
+`REPLAY` resets **time/presentation**.
+
+`RESTORE CUBE` resets **state/geometry**.
+
+That is a subtle programming lesson and a philosophical one without needing to announce itself as philosophy.
+
+It also echoes the opening of the book: restarting how something is shown is not the same thing as returning the world to an earlier condition.
+
+### The folding net is useful, but only for one contrast
+
+The net should do exactly what you currently ask of it:
+
+**same apparent transformation, different underlying operation.**
+
+Builder:
+
+> change vertex positions → faces deform.
+
+Net:
+
+> rigid faces remain unchanged → transforms/hinges change their relation.
+
+Excellent.
+
+I wouldn't expand it into a full lesson about cube nets. Its role is to demonstrate:
+
+> **There can be several ways to produce visually similar change. Inspect which data changed.**
+
+That's enough.
+
+### The architectural return is also good
+
+This sentence is excellent:
+
+> What we are learning to inspect is also the place from which we inspect it.
+
+That makes the recursion of the museum explicit without overwhelming the tutorial.
+
+The cube is:
+
+* mathematical primitive;
+* rendered object;
+* manipulable mesh;
+* crate;
+* floor slab;
+* wall.
+
+Again the primitive proliferates.
+
+But unlike the old Line chapter, you've contained it. You don't try to analyze every box in the museum.
+
+You simply reveal:
+
+> you have been inside the primitive before learning how it was composed.
+
+That connects beautifully back to:
+
+> **You arrive late.**
+
+The learner was already standing on boxes before understanding vertices and faces.
+
+### The cartons are evocative, but I would be careful not to let them become another thesis
+
+> **A WORLD / WITHOUT / COMPOSITION / YET**
+
+is very good as an artwork inside the room.
+
+And:
+
+> There is already an arrangement around us; the words cannot make it disappear.
+
+is a nice correction to the phrase.
+
+But I would keep this brief, as you have. Otherwise “composition” opens a huge new theoretical field just before Sphere.
+
+The crease is the thing to carry out, not the boxes.
+
+Your ending understands this:
+
+> **For now, take the crease with you: a small movement exposed a decision inside a familiar shape.**
+
+Excellent.
+
+---
+
+## I would protect this five-step spine
+
+**1. Outline**
+A cube is already recognizable from vertices/edges.
+
+**2. Reveal**
+The builder exposes vertices → edges → triangle patches.
+
+**3. Deform**
+Move `v6`; connectivity persists while cube-properties change.
+
+**4. Expose hidden construction**
+The square reveals its diagonal/triangulation.
+
+**5. Compare another construction**
+The folding net changes relations between rigid faces instead.
+
+Then exit through the surrounding architecture.
+
+That's enough.
+
+### What I would cut or demote
+
+Very little, but I would consider shortening:
+
+* the discussion of self-intersection/collapse in the main text;
+* some of the detailed crate geometry;
+* perhaps one or two sentences around collision, since Polyhedra already established rendered geometry versus physical shelter.
+
+The footnote can carry the enclosure/collision caution.
+
+The main hall is strongest when it remains about:
+
+> **What can change while connectivity remains?**
+
+---
+
+## This is a very good place for several footnotes
+
+I would use three.
+
+**Connectivity versus geometry.** Introduce the distinction between indexed mesh topology/connectivity and vertex positions.
+
+**Triangulation of quads.** Explain briefly that GPUs render triangles, so a quadrilateral face is usually represented as two triangles; choosing a diagonal is a construction decision that may become visible under deformation.
+
+**Euler's polyhedron relation**, perhaps very lightly: a cube has 8 vertices, 12 edges and 6 faces, satisfying `V - E + F = 2`. Not needed for the walk, but it is an elegant technical genealogy for the counts in your instrument.
+
+And potentially one artistic/theoretical note around the familiar object becoming strange through manipulation. But I would prioritize technical lineage here. Not every room needs a philosopher.
+
+That heterogeneity will make the book stronger.
+
+---
+
+Most importantly, this hall develops the queer research methodology in a particularly precise way.
+
+It doesn't ask:
+
+> How do we deform the cube into something queer?
+
+It asks:
+
+> **How much can change before the name “cube” stops being useful? Which relations persist through transformation? Who or what supplies the criterion of sameness?**
+
+And the answer is not supplied in advance.
+
+The visitor can pull `v6` a little and think:
+
+> still basically a cube.
+
+Pull farther:
+
+> maybe not.
+
+Meanwhile the program can report exactly which structural relations stayed constant.
+
+That gap between **formal invariance, perceptual recognition and naming** is extremely rich territory for Ada.
+
+So I think this chapter is among the strongest so far. It is focused, technically real, and the philosophical question arises directly from moving one vertex rather than being placed on top of the cube afterward.

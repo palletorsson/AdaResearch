@@ -1,0 +1,240 @@
+{
+  "chapter": "qfeplaboratory",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
+    {
+      "pearl": "qfep introduction",
+      "map": "QFEP_Introduction",
+      "lines": [
+        {
+          "token": "qfep_balance_workbench",
+          "text": "The outline remembers what the total cannot. Keep one arrangement; find another that gives the same number.",
+          "by": "hand"
+        },
+        {
+          "token": "tt",
+          "text": "Read a term, then ask which operation receives it.",
+          "by": "hand"
+        },
+        {
+          "token": "grab_sphere_F",
+          "text": "A term can be held before its quantity has been measured.",
+          "by": "hand"
+        },
+        {
+          "token": "grab_sphere_E",
+          "text": "What would count as an outcome here?",
+          "by": "hand"
+        },
+        {
+          "token": "grab_sphere_lambda",
+          "text": "A weight belongs to a relation. What is it weighting?",
+          "by": "hand"
+        },
+        {
+          "token": "lambda_slider",
+          "text": "A separate rail offers another example; it does not drive the four-control console.",
+          "by": "hand"
+        },
+        {
+          "token": "phi_slider",
+          "text": "This rail lets you go below zero. The console does not.",
+          "by": "hand"
+        },
+        {
+          "token": "qfep_formula_3d",
+          "text": "The same symbols return. What would make their quantities accountable?",
+          "by": "hand"
+        }
+      ],
+      "hero": "qfep_balance_workbench"
+    },
+    {
+      "pearl": "qfep f term",
+      "map": "QFEP_F_Term",
+      "lines": [
+        {
+          "token": "shannon_workbench",
+          "text": "The bits stay. Your mistakes change sides. What changes when you change the guess?",
+          "by": "hand"
+        },
+        {
+          "token": "snap_octahedron_puzzle",
+          "text": "Six points meet a set of targets. Whose arrangement are you completing?",
+          "by": "hand"
+        },
+        {
+          "token": "snap_tetrahedron_puzzle",
+          "text": "Four corners can enclose a volume. A target gives your movement a destination.",
+          "by": "hand"
+        },
+        {
+          "token": "crystal_cluster",
+          "text": "A seed makes an arrangement repeatable. What would make it expected?",
+          "by": "hand"
+        }
+      ],
+      "hero": "shannon_workbench"
+    },
+    {
+      "pearl": "qfep e term",
+      "map": "QFEP_E_Term",
+      "lines": [
+        {
+          "token": "entropy_fan",
+          "text": "The branch stops. Its neighbours continue. Who can ask for another kind of ending?",
+          "by": "hand"
+        },
+        {
+          "token": "microstate_counter",
+          "text": "Which differences enter the count?",
+          "by": "hand"
+        },
+        {
+          "token": "possibility_space_cloud",
+          "text": "An offered space has a boundary. What lies beyond its offer?",
+          "by": "hand"
+        }
+      ],
+      "hero": "entropy_fan"
+    },
+    {
+      "pearl": "qfep lambda spectrum",
+      "map": "QFEP_Lambda_Spectrum",
+      "lines": [
+        {
+          "token": "lambda_hall",
+          "text": "The light has moved. Has the invitation?",
+          "by": "hand"
+        },
+        {
+          "token": "bifurcation_walkway",
+          "text": "One rule, many outcomes. Which parameter are you following?",
+          "by": "hand"
+        }
+      ],
+      "hero": "lambda_hall"
+    },
+    {
+      "pearl": "qfep phi term",
+      "map": "QFEP_Phi_Term",
+      "lines": [
+        {
+          "token": "rigid_sculpture",
+          "text": "negative phi crystallizes form into monument — the rigid sculpture is beautiful and dead",
+          "by": "draft",
+          "note": "phi weights a rate and the monument has no clock: rigid_sculpture ships with no _process at all, so negative phi is argued by deleting time — and resistance becomes indistinguishable from being dead",
+          "note_src": {
+            "file": "commons/interfaces/qfep/rigid_sculpture.gd",
+            "quote": "it is not a parameter: there is no _process to turn off"
+          }
+        },
+        {
+          "token": "fluid_form",
+          "text": "positive phi means embracing transformation — the fluid form is not broken, it is becoming",
+          "by": "draft"
+        },
+        {
+          "token": "preserved_pattern",
+          "text": "negative phi preserves pattern at the cost of life",
+          "by": "draft"
+        },
+        {
+          "token": "transforming_pattern",
+          "text": "positive phi means the pattern itself is in motion",
+          "by": "draft"
+        }
+      ],
+      "hero": "rigid_sculpture"
+    },
+    {
+      "pearl": "qfep edge of chaos",
+      "map": "QFEP_Edge_Of_Chaos",
+      "lines": [
+        {
+          "token": "emergence_zone",
+          "text": "A zone where complexity emerges. Particles self-organize at the edge of chaos",
+          "by": "draft"
+        },
+        {
+          "token": "turing_pattern",
+          "text": "Reaction-diffusion Turing pattern. Spots, stripes, labyrinths",
+          "by": "draft"
+        },
+        {
+          "token": "edge_core",
+          "text": "life does not exist at order or chaos but at the narrow boundary between them",
+          "by": "draft"
+        },
+        {
+          "token": "edge_of_chaos_unlocked",
+          "text": "when you control lambda, you understand the parameter space",
+          "by": "draft",
+          "note": "the argument is made by withholding — lambda locked at 0.4 so criticality arrives as a condition, not a choice — and the unlocked companion stands in the same room, which makes the withholding a stage direction",
+          "note_src": {
+            "file": "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+            "quote": "the map withholds what this artifact gives"
+          }
+        }
+      ],
+      "hero": "edge_of_chaos_unlocked"
+    },
+    {
+      "pearl": "qfep",
+      "map": "Chamber_QFEP",
+      "lines": [],
+      "drop": true,
+      "edge": "the reunion is furnished from outside itself: every creature here was befriended in another chamber, and a mode fired alone lights its term on the screen and moves nothing — coherence is all the calibrator can read",
+      "edge_src": {
+        "file": "commons/maps/Chamber_QFEP/critical.md",
+        "quote": "A learner who has not befriended the kaleidocycle would find it absent from this chamber."
+      }
+    },
+    {
+      "pearl": "qfep sandbox",
+      "map": "QFEP_Sandbox",
+      "lines": [
+        {
+          "token": "reactive_particles",
+          "text": "Alias for reactive_particle_field. Particles that respond to λ and φ parameters",
+          "by": "draft",
+          "note": "you get every slider but the one that decides: lambda buys how much order, never what order looks like — a single line of geometry lays the cubic lattice the field falls into, and no control reaches it",
+          "note_src": {
+            "file": "commons/interfaces/qfep/reactive_particle_field.gd",
+            "quote": "λ decides how much order the system buys. It never decides what order LOOKS like"
+          }
+        },
+        {
+          "token": "qfep_reactor",
+          "text": "the reactor is the QFEP formula made tangible",
+          "by": "draft"
+        }
+      ],
+      "hero": "reactive_particles",
+      "drop": true
+    },
+    {
+      "pearl": "qfep synthesis",
+      "map": "QFEP_Synthesis",
+      "lines": [
+        {
+          "token": "queer_morphology_specimen",
+          "text": "queer morphology is not a fixed form but a process of becoming",
+          "by": "draft",
+          "note": "the form that refuses to be one thing needs the vitrine to read as a specimen at all: jar sealed, lid seated, pedestal under it, shipped at quarter scale — becoming is legible here only as something collected",
+          "note_src": {
+            "file": "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+            "quote": "the jar is the claim the artifact exists to argue against"
+          }
+        },
+        {
+          "token": "grab_sphere_phi",
+          "text": "Grabbable sphere representing φ (phi) - the rate sensitivity",
+          "by": "draft"
+        }
+      ],
+      "hero": "queer_morphology_specimen"
+    }
+  ]
+}

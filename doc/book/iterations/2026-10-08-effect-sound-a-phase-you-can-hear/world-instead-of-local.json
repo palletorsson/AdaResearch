@@ -1,0 +1,139 @@
+{
+  "checks": [
+    {
+      "name": "complete script creates point, audio, retained note and readout",
+      "passed": true
+    },
+    {
+      "name": "carried point is pickable and keeps its 14 cm radius",
+      "passed": true
+    },
+    {
+      "name": "label and curve contain no hidden scene dependency",
+      "passed": true
+    },
+    {
+      "name": "height 0.7 maps to depth 0.0 in rotated local frame",
+      "passed": false
+    },
+    {
+      "name": "height 1.0 maps to depth 0.0 in rotated local frame",
+      "passed": false
+    },
+    {
+      "name": "height 1.3 maps to depth 2.0 in rotated local frame",
+      "passed": false
+    },
+    {
+      "name": "height 1.6 maps to depth 4.0 in rotated local frame",
+      "passed": true
+    },
+    {
+      "name": "height 1.9 maps to depth 4.0 in rotated local frame",
+      "passed": true
+    },
+    {
+      "name": "sideways and depth movement do not select another parameter",
+      "passed": false
+    },
+    {
+      "name": "nested phase gives the predicted signed sample",
+      "passed": true
+    },
+    {
+      "name": "zero depth removes the modulator contribution",
+      "passed": true
+    },
+    {
+      "name": "mono 16-bit buffer declares its sample rate",
+      "passed": true
+    },
+    {
+      "name": "0.6 seconds contains exactly 26460 signed samples",
+      "passed": true
+    },
+    {
+      "name": "buffer duration matches its declared rate",
+      "passed": true
+    },
+    {
+      "name": "first sample starts at zero",
+      "passed": true
+    },
+    {
+      "name": "final sample approaches silence",
+      "passed": true
+    },
+    {
+      "name": "every encoded sample matches the signal within one quantisation step",
+      "passed": true
+    },
+    {
+      "name": "PCM preserves both signs",
+      "passed": true
+    },
+    {
+      "name": "bounded synthesis avoids clipping",
+      "passed": true
+    },
+    {
+      "name": "modulated note differs from retained reference",
+      "passed": true
+    },
+    {
+      "name": "real pickable action signal starts reference A",
+      "passed": true
+    },
+    {
+      "name": "second trigger cannot interrupt prepared pair",
+      "passed": false
+    },
+    {
+      "name": "after reference and gap B uses the value at press",
+      "passed": true
+    },
+    {
+      "name": "moving the point does not rewrite reference bytes",
+      "passed": true
+    },
+    {
+      "name": "pair finishes and accepts another trigger",
+      "passed": true
+    },
+    {
+      "name": "scope endpoint uses the carried line in the study frame",
+      "passed": true
+    },
+    {
+      "name": "scope spans two carrier periods rather than the whole note",
+      "passed": true
+    },
+    {
+      "name": "independent variation keeps carrier 440 and selects modulator 660",
+      "passed": true
+    },
+    {
+      "name": "ratio change is silent at zero depth",
+      "passed": true
+    },
+    {
+      "name": "ratio change affects a modulated note",
+      "passed": true
+    },
+    {
+      "name": "second instrument does not change original reference or ratio",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "height 0.7 maps to depth 0.0 in rotated local frame",
+    "height 1.0 maps to depth 0.0 in rotated local frame",
+    "height 1.3 maps to depth 2.0 in rotated local frame",
+    "sideways and depth movement do not select another parameter",
+    "second trigger cannot interrupt prepared pair"
+  ],
+  "max_pcm_error": 0.0000305166167228754,
+  "passed": false,
+  "peak_pcm": 10859,
+  "scope": "Exact printed code in Godot. Teacher-authored assertions; no listening, learner or physical-controller acceptance claim."
+}

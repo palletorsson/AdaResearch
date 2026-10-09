@@ -1,0 +1,157 @@
+{
+ "chapter": "color",
+ "speak": "",
+ "speak_by": "",
+ "pearls": [
+  {
+   "pearl": "context placed",
+   "map": "Color_Context_Placed",
+   "lines": [
+    {
+     "token": "chroma_stack",
+     "text": "Simple comparisons become richer stacks through proportions, turns, offsets and chosen colour.",
+     "by": "astra"
+    },
+    {
+     "token": "color_dna_stack",
+     "text": "Gallery studies rise into columns; the rainbow shaft carries new combinations above the body.",
+     "by": "astra"
+    }
+   ],
+   "hero": "chroma_stack"
+  },
+  {
+   "pearl": "flashlight",
+   "map": "Color_Flashlight",
+   "lines": [
+    {
+     "token": "flashlight_demo",
+     "text": "flashlight demo",
+     "by": "astra"
+    }
+   ],
+   "drop": true,
+   "edge": "the beam can only say what the surface lets it, and the room ships a white board that returns every wavelength offered — so the demo's lesson, red light on blue reads black, is the one thing it cannot show.",
+   "edge_src": {
+    "file": "algorithms/postprocessing/flashlight_demo/flashlight_demo.gd",
+    "quote": "a white surface returns every wavelength it is offered, so nothing this artifact says can ever be false on it"
+   },
+   "hero": "flashlight_demo"
+  },
+  {
+   "pearl": "nails",
+   "map": "Color_Nails",
+   "lines": [
+    {
+     "token": "nail_color_controller",
+     "text": "nail color controller",
+     "by": "astra"
+    },
+    {
+     "token": "hand_color_controller",
+     "text": "hand color controller",
+     "by": "astra"
+    }
+   ],
+   "hero": "nail_color_controller"
+  },
+  {
+   "pearl": "rainbow",
+   "map": "Color_Rainbow",
+   "lines": [
+    {
+     "token": "rainbow",
+     "text": "rainbow",
+     "by": "astra"
+    }
+   ],
+   "hero": "rainbow"
+  },
+  {
+   "pearl": "pillar",
+   "map": "Color_Pillar",
+   "lines": [
+    {
+     "token": "pillarcolorcollection",
+     "text": "pillarcolorcollection",
+     "by": "astra"
+    },
+    {
+     "token": "color_sets_overview",
+     "text": "color sets overview",
+     "by": "astra"
+    }
+   ],
+   "hero": "pillarcolorcollection"
+  },
+  {
+   "pearl": "grid pallet",
+   "map": "Color_Grid_Pallet",
+   "lines": [
+    {
+     "token": "gridcolorizer",
+     "text": "gridcolorizer",
+     "by": "astra"
+    }
+   ],
+   "hero": "gridcolorizer"
+  },
+  {
+   "pearl": "paint",
+   "map": "Color_Paint",
+   "lines": [
+    {
+     "token": "ball_painting_demo",
+     "text": "ball painting demo",
+     "by": "astra"
+    },
+    {
+     "token": "albers_wall_gallery",
+     "text": "albers wall gallery",
+     "by": "astra"
+    }
+   ],
+   "hero": "ball_painting_demo"
+  },
+  {
+   "pearl": "walls",
+   "map": "Color_Walls",
+   "lines": [
+    {
+     "token": "color_constellation_office",
+     "text": "color constellation office",
+     "by": "astra"
+    },
+    {
+     "token": "color_space_navigator",
+     "text": "color space navigator",
+     "by": "astra"
+    },
+    {
+     "token": "gradient_interpolator",
+     "text": "gradient interpolator",
+     "by": "astra"
+    }
+   ],
+   "hero": "color_constellation_office"
+  },
+  {
+   "pearl": "color",
+   "map": "Chamber_Color",
+   "lines": [
+    {
+     "token": "becoming_catalyst",
+     "text": "becoming catalyst",
+     "by": "astra"
+    }
+   ],
+   "drop": true,
+   "edge": "the chamber promises colour as a thing you build with, but the bracelet it hands you is shared infrastructure and places blocks in the default catalyst material — the chapter's verb arrives untinted, which is why the room is dropped.",
+   "edge_src": {
+    "file": "commons/maps/Chamber_Color/intent.md",
+    "quote": "chamber needs sequence-specific color tinting in the bracelet's placed blocks — currently uses default catalyst material"
+   },
+   "hero": "becoming_catalyst"
+  }
+ ]
+}

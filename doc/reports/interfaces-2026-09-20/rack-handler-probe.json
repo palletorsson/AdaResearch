@@ -1,0 +1,29 @@
+{
+	"method": "Direct calls to press and drag handlers; no actual GUI event, 3D hit, or headset input",
+	"results": [
+		{
+			"after": 0.40625,
+			"before": 0.1,
+			"component": "RackSliderH",
+			"handler_changed_value": true
+		},
+		{
+			"after": 0.935897435897436,
+			"before": 0.1,
+			"component": "RackSliderV",
+			"handler_changed_value": true
+		},
+		{
+			"after": 0.1,
+			"before": 0.1,
+			"component": "RackSliderStepped",
+			"handler_changed_value": false
+		},
+		{
+			"after": 0.1,
+			"before": 0.1,
+			"component": "RackSliderBipolar",
+			"handler_changed_value": false
+		}
+	]
+}

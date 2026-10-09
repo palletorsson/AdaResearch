@@ -1,0 +1,49 @@
+--- before/commons/data/artifact_roles.json
++++ after/commons/data/artifact_roles.json
+@@ -4668,14 +4668,17 @@
+     },
+     "Ribbon_Patterns_03": {
+       "primary": [
+-        "minimalglitch",
+-        "textureglitch"
++        "fabric_shader_studio",
++        "super_drag_mirror",
++        "drag_catwalk"
+       ],
+       "secondary": [
+         "pulsar_visualizer",
+         "standalone_disco",
+         "coloredlines",
+         "RotatingLaser",
++        "minimalglitch",
++        "textureglitch",
+         "glitchcolor",
+         "advancedglitch",
+         "colortrails",
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -2477,14 +2477,17 @@
+     },
+     "Ribbon_Patterns_03": {
+       "sequence": "tiling",
+-      "status": "text_pending",
+-      "primary_tokens": [
+-        "minimalglitch",
+-        "textureglitch"
+-      ],
+-      "reason": "Consolidated ribbon collection; primary encounters selected provisionally.",
++      "status": "existing_text_retained",
++      "primary_tokens": [
++        "fabric_shader_studio",
++        "super_drag_mirror",
++        "drag_catwalk"
++      ],
++      "reason": "Current manuscript and placed roles follow fabric source editing, deliberate saved-recipe wear, live mirror comparison and a shared recipe on four runway bodies. Legacy glitch and light works remain secondary; headset and learner verification remain pending.",
+       "learner_verified": false,
+-      "map_sha256": "53d06dd10392d1b6eba476a5100a64a822efa92f596da02c9e2377e95381d45a"
++      "map_sha256": "769ed2dfd6ee3f2cd5d91e23183af272941a8114de85fbdf0678e30ca7753d01",
++      "text_path": "commons/maps/Ribbon_Patterns_03/final.md",
++      "text_sha256": "d37e668f05961bc71d47bdef8b6cb3c6a97195cbb5ec4be69407c950e077d0d8"
+     },
+     "Change_Choreography": {
+       "sequence": "forces",

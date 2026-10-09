@@ -1,0 +1,97 @@
+	report["required_present"] = nodes.has(spec.required)
+	report["checks"] = []
+	var reactor: Node3D = nodes.get("qfep_reactor")
+	var l: Node3D = nodes.get("lambda_slider")
+	var p: Node3D = nodes.get("phi_slider")
+	var field: Node3D = nodes.get("reactive_particles")
+	if reactor==null or l==null or p==null or field==null:
+		push_error("Sandbox receiver or handles missing")
+		quit(1)
+		return
+	var study: Node3D = reactor._wiring_study
+	if study==null:
+		push_error("Wiring study did not build")
+		quit(1)
+		return
+	reactor.set_process(false)
+	check(report, study.lambda_source==l and study.phi_source==p and not study.connected, "Exactly the two same-hall controls bound, initially cut")
+	check(report, not reactor.is_in_group("qfep_reactive"), "Study receiver stays outside global reactive aggregation")
+	var original_l: float = reactor.current_lambda
+	var original_p: float = reactor.current_phi
+	var field_l: float = field.current_lambda
+	var field_p: float = field.current_phi
+	move_handles(l,p,.85,.7)
+	check(report, absf(l.lambda-.85)<.00001 and absf(p.phi-.7)<.00001, "XR rail callbacks set offered values")
+	check(report, reactor.current_lambda==original_l and reactor.current_phi==original_p, "Cut route holds receiver values while handles move")
+	check(report, study.readout.text.contains("handles 0.85 / +0.70") and study.readout.text.contains("used 0.40 / +0.00"), "Readout distinguishes offered and actually used values")
+	press(study,0)
+	check(report, study.connected and absf(reactor.current_lambda-.85)<.00001 and absf(reactor.current_phi-.7)<.00001, "Connect immediately delivers present values")
+	var pm: ParticleProcessMaterial = reactor.particle_system.process_material
+	check(report, absf(pm.initial_velocity_max-.44)<.00001, "Actual receiver particle maximum speed responds to lambda")
+	var lit: Color = (reactor.core_mesh.material_override as StandardMaterial3D).albedo_color
+	move_handles(l,p,.85,-.7)
+	var dark: Color = (reactor.core_mesh.material_override as StandardMaterial3D).albedo_color
+	check(report, dark.r<lit.r and dark.g<lit.g and dark.b<lit.b and absf(pm.initial_velocity_max-.44)<.00001, "Phi darkens colour without changing lambda speed")
+	press(study,0)
+	move_handles(l,p,.15,.6)
+	check(report, not study.connected and absf(reactor.current_lambda-.85)<.00001 and absf(reactor.current_phi+.7)<.00001, "Cut retains last used values rather than resetting the receiver")
+	var phase: float = reactor.pulse_phase
+	reactor._process(.1)
+	check(report, reactor.pulse_phase!=phase, "Receiver continues its own animation while input route is cut")
+	press(study,0)
+	check(report, absf(reactor.current_lambda-.15)<.00001 and absf(reactor.current_phi-.6)<.00001 and absf(pm.initial_velocity_max-.16)<.00001, "Reconnect takes current values, not a stale event")
+	press(study,1)
+	for i in range(20): reactor._process(.01)
+	var first: Transform3D = reactor.core_mesh.transform
+	var first_phase: float = reactor.pulse_phase
+	press(study,1)
+	for i in range(20): reactor._process(.01)
+	check(report, first==reactor.core_mesh.transform and first_phase==reactor.pulse_phase, "Repeat reproduces the same CPU animation under identical update steps")
+	check(report, study.connected and absf(reactor.current_lambda-.15)<.00001 and absf(reactor.current_phi-.6)<.00001, "Repeat retains connection and receiver inputs")
+	move_handles(l,p,.85,.6)
+	press(study,1)
+	for i in range(20): reactor._process(.01)
+	first=reactor.core_mesh.transform
+	first_phase=reactor.pulse_phase
+	press(study,1)
+	for i in range(20): reactor._process(.01)
+	check(report, first==reactor.core_mesh.transform and first_phase==reactor.pulse_phase, "Repeat also reproduces seeded jitter under identical update steps")
+	move_handles(l,p,.15,.6)
+	check(report, field.current_lambda==field_l and field.current_phi==field_p, "Independent particle field receives neither handle value")
+	var t0: float = field.time
+	field._physics_process(.1)
+	check(report, field.time>t0, "Independent field continues its own update")
+	var study_id: int = study.get_instance_id()
+	reactor.apply_grid_config({"wiring_study":"on"})
+	check(report, reactor._wiring_study.get_instance_id()==study_id, "Repeated config preserves connection panel")
+	var distances: Array = []
+	for button in study.buttons:
+		var distance: float = button.global_position.distance_to(origin+Vector3(7.5,1.1,5.5))
+		distances.append(distance)
+		check(report, distance<.75, "Connection button within selected 0.75m reach")
+	check(report, l._handle.global_position.distance_to(origin+Vector3(5.5,1.1,4.9))<.75, "Lambda handle within selected reach")
+	check(report, p._handle.global_position.distance_to(origin+Vector3(8.25,1.1,4.9))<.75, "Phi handle within selected reach")
+	report["button_reaches"]=distances
+	# Another parent represents a concurrently loaded hall. It must not bind.
+	var elsewhere := Node3D.new()
+	root.add_child(elsewhere)
+	var stranger=load("res://commons/interfaces/qfep/lambda_slider.tscn").instantiate()
+	stranger.position=Vector3(1000,0,0)
+	elsewhere.add_child(stranger)
+	stranger.lambda=.99
+	check(report, absf(reactor.current_lambda-.15)<.00001, "Handle in another parent cannot drive this receiver")
+	stranger.reparent(l.get_parent())
+	check(report, not study.discover_sources() and not study.connected, "Ambiguous same-hall handles fail closed")
+	stranger.reparent(elsewhere)
+	check(report, study.discover_sources() and not study.connected, "One local pair can be restored after ambiguity without automatic connection")
+	elsewhere.queue_free()
+	# A missing local handle leaves no fallback to another hall.
+	var saved_parent: Node = l.get_parent()
+	saved_parent.remove_child(l)
+	check(report, not study.discover_sources() and not study.connected, "Missing local handle fails closed")
+	saved_parent.add_child(l)
+	check(report, study.discover_sources() and not study.connected, "Restored local handles can be discovered, still cut")
+	# Establish a known receiving baseline for the first image.
+	reactor.set_lambda(.4)
+	reactor.set_phi(0)
+	reactor._update_visuals()

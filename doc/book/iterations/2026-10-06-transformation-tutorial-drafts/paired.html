@@ -1,0 +1,748 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transformation — facing texts</title><style>body{margin:0;background:#f1eee8;color:#242321;font:19px/1.65 Georgia,serif}header,main{max-width:980px;margin:auto;padding:30px}h1{font-size:2.4em;line-height:1.12}h2{margin-top:2em;line-height:1.25}h3{line-height:1.3}a{color:#684c62}nav{display:flex;gap:18px;flex-wrap:wrap;font:15px/1.5 system-ui}pre{background:#22252b;color:#f5f3eb;padding:23px;border-radius:6px;overflow:auto;font:13px/1.65 Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}code{font-size:.9em}pre code{font-size:inherit}table{border-collapse:collapse;font-size:16px;width:100%}td,th{padding:10px;border-bottom:1px solid #ccc;text-align:left;vertical-align:top}img{max-width:100%;height:auto}.badge{font:13px system-ui;letter-spacing:.1em;text-transform:uppercase}.quiet{font:15px/1.6 system-ui;color:#595651}.card{background:#fffdf8;padding:28px;margin:28px 0;border-top:3px solid #6a5965}.spread{display:grid;grid-template-columns:1fr 1fr;gap:36px;max-width:1700px}.spread article{min-width:0}.full{grid-column:1/-1}hr{border:0;border-top:1px solid #c7c0b6;margin-top:45px}article h1{font-size:1.8em}details{margin:20px 0}summary{cursor:pointer}.plate{max-width:430px;display:block;margin:auto}@media(max-width:1000px){.spread{display:block}}@media print{nav,details,.badge{display:none}body{background:white;font-size:11pt}header,main{padding:0}.spread{display:block}pre{white-space:pre-wrap;background:#f4f4f4;color:black}h1{break-before:page}}</style></head><body><header><p class="badge">Endless Museum · Transformation · Review draft</p><nav><a href="index.html">Overview</a><a href="paired.html">Facing texts</a><a href="changes.html">Before / after</a><a href="all.html">Tutorials</a><a href="final.html">Reflections</a><a href="feedback.html">Feedback decisions</a></nav></header><main class="spread"><div class="full"><h1>Transformation, facing texts</h1><p>Tutorial on the left. Reflection on the right. Both are revised drafts for review.</p><p class="quiet">204 native checks passed; 12 deliberate faults rejected; 19 exercise variants executed. The feedback pass changed prose only; printed code still matches that native run.</p><nav><a href="#Trans_Pre">Pre</a><a href="#Trans_Introduction">Introduction</a><a href="#Trans_Translation">Translation</a><a href="#Trans_Rotation">Rotation</a><a href="#Trans_Scale">Scale</a><a href="#Trans_Body">Body</a><a href="#Trans_Pit">Pit</a></nav></div><div class="full" id="Trans_Pre"><hr><h2>Trans_Pre</h2><p class="quiet">The tutorial now uses the museum’s steady rise and fall. The reflection keeps the three operations and the question of what survives each change, with less procedural explanation.</p><p><a href="Trans_Pre/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Pre">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>A cube that moves, turns and grows</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Translation: changing position</li>
+<li>Rotation: changing orientation</li>
+<li>Uniform scale: changing size</li>
+<li>Elapsed time and a returning fraction</li>
+<li>Collection: overlap detection and a signal</li>
+</ul>
+<p>In Trans_Pre, one cube rises. The next rises and turns. Another adds a pulse in size. Follow one corner: each example keeps the earlier movement and adds another operation.</p>
+<p>We continue with the cube shape from Primitives. Here Godot's <code>BoxMesh</code> supplies it; we change the whole object's transform. The construction of faces has already done its work. This lesson makes one animated pickup that you collect by walking into it.</p>
+<h2>The complete study</h2>
+<p>The Endless Museum is already running. Its room, light, camera and player are supplied. Put an empty <code>Node3D</code> named <code>TransformStudy</code> in clear floor space beside the exhibits and attach <code>lesson.gd</code>. Use floor level as its origin, zero rotation and unit scale. Each coordinate below is in this study's local frame. The script creates every part of the pickup.</p>
+<p>Read the complete result once, then use the small edits below to build up its behaviour.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(0, 1.3, 0)
+var rise := 0.35
+var turn_speed := 45.0
+var pulse := 0.2
+var period := 4.0
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(period &gt; 0.0 and pulse &gt;= 0.0 and pulse &lt; 1.0)
+    cube.mesh = BoxMesh.new()
+    add_child(cube)
+    cube.position = start
+
+    var sensor := Area3D.new()
+    sensor.collision_layer = 0
+    sensor.collision_mask = 1
+    sensor.set_collision_mask_value(20, true)
+    cube.add_child(sensor)
+    var hitbox := CollisionShape3D.new()
+    hitbox.shape = BoxShape3D.new()
+    sensor.add_child(hitbox)
+    sensor.body_entered.connect(_on_body_entered)
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var t := pingpong(2.0 * elapsed / period + 0.5, 1.0)
+    cube.position = start + Vector3.UP * lerpf(-rise, rise, t)
+    cube.rotation_degrees.y = turn_speed * elapsed
+    cube.scale = Vector3.ONE * lerpf(1.0 - pulse, 1.0 + pulse, t)
+
+func _on_body_entered(body: Node3D) -&gt; void:
+    if body.is_in_group(&quot;em_walker&quot;) or body.is_in_group(&quot;player_body&quot;):
+        print(&quot;Collected&quot;)
+        queue_free()
+</code></pre>
+<p><code>BoxMesh.new()</code> describes a one-metre cube centred on its origin. The <code>MeshInstance3D</code> holds its position, orientation and size. The same mesh remains throughout.</p>
+<h2>Add one movement at a time</h2>
+<p>First set <code>turn_speed</code> and <code>pulse</code> to <code>0.0</code>. Keep <code>rise</code> at <code>0.35</code>. The cube moves 35 centimetres above and below <code>start</code>, keeping its size and facing.</p>
+<p><code>elapsed += delta</code> counts seconds. <code>pingpong</code> makes <code>t</code> travel between zero and one at a steady rate, reversing at each end. The factor <code>2.0 / period</code> gives one outward-and-return journey per period. Adding <code>0.5</code> starts halfway up, moving upward. With <code>period = 4.0</code>, <code>t</code> is 0.5 at the start, 1 after a second, 0.5 after two, 0 after three, and 0.5 after four.</p>
+<p><code>lerpf(-rise, rise, t)</code> chooses a height offset between the lower and upper limits. At <code>t = 0.5</code> it gives zero: the cube is back at <code>start</code>. This is the steady rise and fall of the museum example. It changes direction immediately at the ends; a softened turn would be a different timing choice.</p>
+<p>Restore <code>turn_speed</code> to <code>45.0</code>. The cube now rises <strong>and</strong> turns 45 degrees per second around Y. Its mesh has not changed. After eight seconds it completes one turn.</p>
+<p>Restore <code>pulse</code> to <code>0.2</code>. The second <code>lerpf</code> now chooses a size factor between <code>0.8</code> and <code>1.2</code>. Multiplying <code>Vector3.ONE</code> gives all three axes the same factor, so the cube keeps its proportions. Rise and pulse share the returning fraction; the turn continues at its own steady rate. The assertion keeps the period positive and prevents the pulse from collapsing the cube to zero size. The installed specimen uses a larger pulse, from 0.7 to 1.3; this study keeps the same operation with a smaller range.</p>
+<p>Each update assigns a pose from the starting values and elapsed time. Adding that whole pose repeatedly would make the cube drift. <code>elapsed</code> is kept between updates; <code>t</code> is calculated afresh from that clock, and the three transform properties are assigned from those values.</p>
+<h2>Walk into it</h2>
+<p>An <code>Area3D</code> detects overlap. Its <code>BoxShape3D</code> describes the detection box; it does not provide a solid wall. Because the area belongs to the cube, the box follows its movement, turning and uniform scale.</p>
+<p><code>body_entered</code> is a signal announcing that a physics body entered the area. <code>connect</code> names the function to call. The museum supplies the desktop walker in group <code>em_walker</code> on layer 1, and the XR body in group <code>player_body</code> on layer 20. The mask listens to both layers; the group check accepts the player. These are the declared connections to the existing museum.</p>
+<p>Walk into the cube. <code>queue_free()</code> removes the study at the end of the frame, and Output prints <code>Collected</code>. A passing ordinary prop does not collect it. The installed pickup's score and flourish remain outside this small reconstruction.</p>
+<h2>Make another version</h2>
+<p>Set <code>period</code> to <code>8.0</code>. Predict which movements slow down. The rise and pulse take twice as long; the turn still advances at 45 degrees per second. Explain why. Then choose a different rise while preserving the cube's proportions.</p>
+<p>Carry these three operations into the next hall. There, a transformed surface offers somewhere to stand.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>What survives its movement?</h1>
+<p>In Melencolia, the pyramids stayed still while your viewpoint changed. Here, stay a moment and let an object change in front of you. What survives its movement?</p>
+<p>The cubes are black, white and gray. Light catches an edge; a shadow changes as a face turns. Four cubes are spaced down the middle of the hall. Smaller markers stand beside the row. Beyond the cubes, wedges lead up to a raised path. Here we can follow how a game pickup gets its animation.</p>
+<!-- @pick_up_cube -->
+
+<p>The first cube holds still. Pause before approaching and watch a corner: nothing shifts. Then walk into it: even without an animation, it can be collected. Keep its shape in mind as you go to the next one.</p>
+<p>This cube moves up and down. Follow it through a complete rise and fall. Its position changes while its size and facing stay the same. Moving an object from one position to another is <strong>translation</strong>. Here that movement follows the vertical Y direction.</p>
+<p>Each rise and fall takes it through the same heights, at a steady speed on each leg. At the top and bottom it reverses. The shape has kept its dimensions while its place changes.</p>
+<p>The third cube keeps moving up and down. What has been added?</p>
+<p>Follow a corner. The cube turns as well. Changing its orientation — which way it faces — is <strong>rotation</strong>. This line adds a small turn around the upright Y axis on each update:</p>
+<pre><code class="language-gdscript">rotate_y(rotation_speed * delta)
+</code></pre>
+<p>The turn keeps pace with elapsed time. A longer interval between updates calls for a larger turn.</p>
+<p>The rise and the turn continue together. Follow the same corner once more: it travels around the upright axis as well as up and down.</p>
+<p>At the fourth cube, watch the edges move apart and come together. It grows and shrinks while it rises and turns. Changing size is <strong>scale</strong>.</p>
+<p>Its size moves between 0.7 and 1.3 times the starting size. All three dimensions change together, so it keeps its cube shape.</p>
+<p>Beside each moving example, a smaller marker isolates the operation just added: one moves up and down, one turns in place, one grows and shrinks. They let us separate movements that the larger cubes combine.</p>
+<p>Look back along the four stations. The still cube has gone if you collected it; the three moving examples remain.</p>
+<p>Walk up the wedges. Four more cubes wait above the raised path, rising, turning and changing size. Pick one to approach. As you walk into it, it swells briefly and disappears with a pickup sound. The others keep moving.</p>
+<p>The three moving demonstrations behind you stay in place for another look.</p>
+<p>Translation kept its size and facing. Turning kept the distances between its corners. Multiplying all three dimensions by the same factor kept its proportions. Each operation has left something to recognise. The next hall asks which of these changes can give us somewhere to stand.</p>
+<!-- @ --></article><div class="full" id="Trans_Introduction"><hr><h2>Trans_Introduction</h2><p class="quiet">The reflection stays with riding, growing support, waiting and the displaced landing. The code walkthroughs have become short accounts of the bodily consequences.</p><p><a href="Trans_Introduction/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Introduction">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>Three ways to make a crossing</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Translation, rotation and scale as different ways to reach</li>
+<li>A bounded fraction controlling a transform</li>
+<li>Interpolation between two values</li>
+<li>A returning function for repeated construction</li>
+</ul>
+<p>Try the three installed crossings. One carries you, one grows, one turns into alignment. The far bank gives each change a purpose. A correctly moving object can still fail to reach it.</p>
+<p>Keep the <code>MeshInstance3D</code> and <code>BoxMesh</code> construction from Trans_Pre. Remove its collection area: these examples need to remain for comparison. Make three small studies beside the real crossings. Their geometry is visible but has no blocking collision; use the installed crossings for standing and riding. The museum's rider transport is supplied, not reconstructed here.</p>
+<h2>Make the comparison</h2>
+<p>Attach this complete <code>lesson.gd</code> to an empty, unrotated, unit-scale <code>TransformStudy</code> in a clear area about ten metres wide. Its origin is at floor level. The three lanes run along local Z, at X = −4, 0 and 4. Their bank tops are one metre above the origin. The centre of the growing cube stays at the origin height; part of its volume extends below the floor.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var travel: MeshInstance3D
+var grow: MeshInstance3D
+var turn: MeshInstance3D
+var far_banks: Array[MeshInstance3D] = []
+var far_gap := 0.0
+var animate := true
+var pose := 0.0
+var duration := 4.0
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(duration &gt; 0.0 and far_gap &gt;= 0.0)
+    for x in [-4.0, 0.0, 4.0]:
+        box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, -1.5))
+        far_banks.append(box(Vector3(1.2, 0.4, 1), Vector3(x, 0.8, 1.5 + far_gap)))
+    travel = box(Vector3(1.2, 0.2, 0.8), Vector3(-4, 0.9, -1.4))
+    grow = box(Vector3(1.2, 2, 2), Vector3.ZERO)
+    turn = box(Vector3(2, 0.2, 0.6), Vector3(4, 0.9, 0))
+    apply_pose(pose)
+
+func box(size: Vector3, at: Vector3) -&gt; MeshInstance3D:
+    var body := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    body.mesh = mesh
+    body.position = at
+    add_child(body)
+    return body
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    if animate:
+        pose = pingpong(elapsed / duration, 1.0)
+    apply_pose(pose)
+
+func apply_pose(value: float) -&gt; void:
+    var t := clampf(value, 0.0, 1.0)
+    travel.position.z = lerpf(-1.4, 1.4, t)
+    grow.scale = Vector3.ONE * lerpf(0.25, 1.0, t)
+    turn.rotation_degrees.y = 90.0 * t
+</code></pre>
+<p>The <code>box</code> function repeats the construction you already know. Its two arguments choose dimensions and position. It returns the new instance so <code>travel</code>, <code>grow</code> and <code>turn</code> can refer to different bodies. The loop places the same pair of banks in each lane.</p>
+<p><code>apply_pose</code> gives the three operations the same fraction, <code>t</code>. Zero selects their first pose; one selects their last. <code>clampf</code> keeps the fraction within those bounds. <code>lerpf(a, b, t)</code> chooses a value between <code>a</code> and <code>b</code>: halfway gives their average.</p>
+<h2>Hold the two ends</h2>
+<p>Set <code>animate</code> to <code>false</code> and <code>pose</code> to <code>0.0</code>. The travelling surface waits at the near bank. The small cube does not reach the bank tops. The long plank lies across X, away from the route.</p>
+<p>Change <code>pose</code> to <code>1.0</code>. The first surface reaches the far bank without changing size or orientation. The cube has grown around its fixed centre: its top reaches bank height and its Z edges meet the banks. The plank has turned 90 degrees around Y, putting its long dimension along Z. Its centre and dimensions stay fixed.</p>
+<p>One operation moves a surface between banks. The others make a span. They solve different spatial problems using the same three properties from Trans_Pre.</p>
+<h2>Follow the intervening poses</h2>
+<p>Restore <code>animate</code> to <code>true</code>. <code>pingpong</code> moves the fraction from zero to one, then back. With <code>duration = 4.0</code>, each outward journey takes four seconds; the full return takes eight. This timing turns immediately at its endpoints. The installed crossings also have pauses and rider support.</p>
+<h2>Move the place it must reach</h2>
+<p>For a held comparison, set <code>animate</code> to <code>false</code>, <code>pose</code> to <code>1.0</code> and <code>far_gap</code> to <code>0.5</code>. The far banks move half a metre farther along Z. The growing cube and turned plank keep their previous end poses. Each now leaves half a metre unbridged.</p>
+<p>The transform still reaches its intended pose. Reaching the bank also depends on where the bank is.</p>
+<p>Return <code>far_gap</code> to zero and choose <code>pose = 0.5</code>. Predict the travelling surface's position, the cube's size and the plank's angle before running it.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>The far bank is already there</h1>
+<p>In the previous hall, a cube learned to rise, turn and swell. You could watch those movements, walk around them, leave them running.</p>
+<p>Here the floor is missing. Fire glows at the bottom of the basins. If you fall into the fire, you die. The museum returns you to a save point, and you can try the crossing again.</p>
+<p>Stand at the first gap. Look across, then down. The far side is already there. What would have to change for it to become somewhere you can go?</p>
+<!-- @tc -->
+
+<p>A cube travels between the banks. Let it make a journey without you. Its top meets the floor at each end; between them, it is a small piece of floor with nothing beside it.</p>
+<p>Step onto it when it returns. Watch the bank you left. Now look down at the cube.</p>
+<p>Relative to the room, you are moving. Relative to the cube, you may be standing still.</p>
+<p>For each small displacement of the cube, the program moves the supported rider by the same amount. The bank recedes while the surface beneath you stays close. Moving the cube alone would leave you behind.</p>
+<p>Step off at the far bank. The cube waits, then goes back. The gap has not closed. You crossed with a temporary surface under your feet.</p>
+<!-- @sc -->
+
+<p>At the next gap, a cube grows about a fixed centre below the floor. Watch its upper face rise and its edges approach the banks.</p>
+<p>Wait until the surface is level with the floor, then walk across during its pause. Look back as it shrinks. What made a floor a moment ago is withdrawing below it.</p>
+<p>The cube grows from half a metre to three metres on each side. Its visible surface and the collision box that supports your feet grow together. What you see arriving becomes something you can stand on.</p>
+<p>The centre sits below the floor so that the upper face reaches it at full size. Growth spreads downwards as well as upwards. From the bank, you might notice only the part that arrives to meet you.</p>
+<p>The cube keeps its proportions throughout. It is recognisably the same shape when it is too small to carry your walk and when it reaches both banks. Your way across appears and disappears within that sameness.</p>
+<!-- @rc -->
+
+<p>The third gap has a thin plank. A control marked MOVE THE BANK stands at the approach. Leave its slider at the starting setting for now and watch a turn before stepping onto the plank. At first the plank lies across your route, its ends pointing to either side. A quarter-turn brings those ends towards the banks.</p>
+<p>Cross while it holds that alignment. The same length of plank now reaches the places you need it to reach, with its centre still in the middle of the gap.</p>
+<p>The visible plank and its collision body turn together between zero and ninety degrees, with a four-second pause at each end. The plank is three metres long, one metre wide and twenty centimetres thick. Its upper face stays level with the floor; its ends meet the banks when aligned.</p>
+<p>From the bank, follow one end with your eyes as it turns away again. The centre stays in place while the end sweeps a curve around it, carrying the edge of your crossing out of reach.</p>
+<!-- @ -->
+
+<!-- @adjustable_landing -->
+
+<p>Return to MOVE THE BANK at the near bank. The far landing rests on rails. Slide BANK a little, then watch the plank make its usual turn.</p>
+<p>The plank has the same length, the same centre, the same quarter-turn. You have moved the place it needs to reach.</p>
+<p>At the starting setting, the aligned plank meets the landing edge to edge. Move the bank and a gap opens between their surfaces. The readout measures how far apart they have become.</p>
+<p><img alt="The aligned plank meets the landing at BANK +0.00 m." src="http://localhost:3003/book-review/doc/book/figures/Trans_Introduction/bank-edges-meet.png" /></p>
+<p><img alt="A gap opens beyond the same plank at BANK +1.00 m." src="http://localhost:3003/book-review/doc/book/figures/Trans_Introduction/bank-full-gap.png" /></p>
+<p><em>The same crossing at two bank settings: meeting edges, then a one-metre gap. The plank holds the same quarter-turn in both views. The camera has not moved.</em></p>
+<p>Let the plank turn again. An operation that worked a moment ago keeps running exactly as before. The crossing has lost one of its agreements.</p>
+<p>The landing travels along its rails, taking its visible surface and support with it. You can move it up to one metre from its starting place. The side aisles let you return to the control while the gap stays open.</p>
+<!-- @ -->
+
+<p>Bring the landing back with RESET. The plank has kept making the same turn through both crossings. The bank was part of what made one of them work; giving it a handle lets us find out how.</p>
+<p>The travelling cube asks you to board and stay with it. The growing cube asks you to wait until it reaches the banks, then cross before it shrinks. The turning plank gives you a pause in which to cross. A place to stand can also be a moment you have to meet.</p>
+<p>The timers keep going while you think. The simulation supplies an opening and a duration. It does not know how long you need to understand what just carried you.</p>
+<p>There is more to examine beside the route: measurements, matrices, the order of operations. For now, take the experience of crossing into the next hall, where displacement has more work to do.</p></article><div class="full" id="Trans_Translation"><hr><h2>Trans_Translation</h2><p class="quiet">The reflection keeps the different journeys, guided movement and permission. Repeated endpoint and carrier code is shortened.</p><p><a href="Trans_Translation/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Translation">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>A level body on a sloping journey</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Displacement in a named coordinate frame</li>
+<li>Vector interpolation</li>
+<li>A destination and a route to it</li>
+<li>A condition selecting two parts of a journey</li>
+</ul>
+<p>Watch the carrier that travels diagonally. Its route slopes; its top stays level. Translation changes position without requiring a turn. At the exit, compare the guided handle's bend with the freer handle's diagonal.</p>
+<p>Continue with the travelling box from the previous lesson. Keep its mesh and position change; remove the other two studies and their banks. This time choose a destination and the route. The museum supplies the installed ride. Our reduced study displays its movement without rider physics.</p>
+<h2>The complete study</h2>
+<p>Put an empty <code>TransformStudy</code> on clear museum floor, with zero rotation and unit scale, and attach this <code>lesson.gd</code>. The positions are local metres. <code>BoxMesh.size</code> gives the familiar cube a broad, low shape once; the journey then leaves that shape unchanged.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var start := Vector3(-2, 1, 0)
+var finish := Vector3(2, 3, 0)
+var duration := 4.0
+var via_corner := false
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(duration &gt; 0.0)
+    var mesh := BoxMesh.new()
+    mesh.size = Vector3(1.2, 0.2, 1.2)
+    cube.mesh = mesh
+    add_child(cube)
+    cube.position = start
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var t := clampf(elapsed / duration, 0.0, 1.0)
+    if via_corner:
+        var corner := Vector3(start.x, finish.y, start.z)
+        if t &lt; 0.5:
+            cube.position = start.lerp(corner, t * 2.0)
+        else:
+            cube.position = corner.lerp(finish, (t - 0.5) * 2.0)
+    else:
+        cube.position = start.lerp(finish, t)
+</code></pre>
+<p><code>finish - start</code> is the displacement: here <code>(4, 2, 0)</code>, four metres along X and two upward. Lines introduced the length of such a vector. Its components describe one combined change, not an instruction to finish X before starting Y.</p>
+<p><code>start.lerp(finish, t)</code> interpolates all three components together. At <code>t = 0.5</code>, the cube is at <code>(0, 2, 0)</code>, halfway along the diagonal. Neither rotation nor scale is assigned during the journey. The carrier remains level.</p>
+<p>The fraction reaches one after four seconds. Clamping holds the destination even as elapsed time continues. A direct assignment to <code>finish</code> would reach the same place immediately and omit the journey.</p>
+<h2>Give the same displacement another route</h2>
+<p>Set <code>via_corner</code> to <code>true</code>. The first half of the time takes the cube to <code>corner</code>, directly above its start. The second half takes it to the same destination as before. The <code>if</code> chooses which segment currently supplies the position; multiplying each half's fraction by two stretches it back to the range zero to one.</p>
+<p>At two seconds, the direct version is at <code>(0, 2, 0)</code>. The corner version is at <code>(-2, 3, 0)</code>. At four seconds they agree again. A shared destination does not require a shared journey.</p>
+<p>This version gives each segment two seconds. The upward segment is two metres; the horizontal one is four, so their speeds differ. Constant speed along routes of different lengths would need time allocated by distance. We leave that calculation for a later movement study.</p>
+<h2>Choose another destination</h2>
+<p>Keep <code>via_corner</code> true and change <code>finish</code> to <code>Vector3(2, 3, 2)</code>. Predict the new corner and final position. The first leg stays vertical; the second now crosses both X and Z. The body still does not turn to face its travel.</p>
+<p>In Trace, an ordered list kept positions after movement. Here, <code>start</code>, <code>corner</code> and <code>finish</code> name positions for a movement to follow. Put their values in that order on paper. A longer route could keep them in an array, with an index choosing the next destination. Our two branches still choose the segments here; the list would be a different way to describe the route.</p>
+<p>The next hall makes that turn a deliberate choice, with an axis and a centre of its own.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>Translation: seven journeys</h1>
+<p>The far bank is familiar now. In the last hall, a moving surface carried you across. Here seven carriers link a chain of islands, rising to an upper route and descending again.</p>
+<p>Before boarding, follow the small waiting cubes with your eyes. Some hang over the fire basin. Others mark the upper route, beyond the reach of a hand from the floor. The carriers give you a way to meet them.</p>
+<!-- @tc -->
+
+<p>The first carrier travels into depth. Step aboard and let the room pass. Look at the cube under your feet: it keeps its facing and size. Along this journey, only its z coordinate changes.</p>
+<p>At the next island, the route turns sideways. The carrier moves along x. You can keep looking towards the far end of the hall while travelling across it. Direction of travel and direction of attention have separated.</p>
+<p>Then the way goes up.</p>
+<p>Stand on the lift and watch the lower landing descend from view. It is still where it was. The carrier changes y; the room gives that change a consequence. You arrive beside an upper platform, three metres above the ground route.</p>
+<p>Near the entrance, three small axis markers show x, y and z separately. Along the route, those directions have become sideways travel, a lift and a passage into depth.</p>
+<p>A starting position, a direction and a distance determine each destination. Three metres up and three metres forward use the same relation with different directions.</p>
+<p>On the upper route, another carrier travels along z. It repeats a direction you have already travelled near the floor. Now you can look down past its edge to the route that brought you here.</p>
+<p>A sideways return carries you back across x in the opposite direction. Then the next carrier moves down and forward together, like an escalator. Its surface stays level while its path slopes: three metres down, two metres further along z. Watch the pickup approach as the lower landing comes towards you.</p>
+<!-- @pick_up_cube -->
+
+<p>The small pickups have been waiting along these journeys. They rise and fall without turning. Their small vertical loop continues as the carrier brings you into contact with them, and each collected cube disappears with a sound.</p>
+<p>Take one, then look back while the carrier moves on.</p>
+<p>Each small displacement of the carrier moves your supported body with it. The pickup detects your arrival and disappears. Ride back to its place. The carrier can repeat the journey; the cube is gone.</p>
+<!-- @ -->
+
+<p>At the last crossing, the waiting cubes run diagonally over the pit. Watch an edge of the carrier as you travel. It does not turn.</p>
+<p>This direction changes x and z together. The destination lies eight metres across and eight metres further into the hall. Both coordinates change during the same journey. We have combined directions without adding rotation.</p>
+<p>Thirteen pickups mark this passage through seven rides. By the final terrace, the cubes you collected have left empty places along the route. Another arrangement of carriers and pickups could lead you elsewhere using the same operations.</p>
+<!-- @translation_cube_demo -->
+
+<p>Step onto the final terrace. Two pairs of small doors stand on plinths, a left door and a right door in each frame. One pair has rails; the other shows translucent panels where its doors can end up. Try the same upward-and-sideways gesture on a square handle in each frame. A pale line stays behind the moving handle.</p>
+<p>At the rail-guided door, the line rises. The sideways part of your gesture has gone missing. Beside it, the other mechanism lets the handle move in both directions together. Its line can cross the opening diagonally.</p>
+<p>Lift the guided handle to the corner of its rail, then move it sideways. A bend leads to the place the other handle could reach directly. The translucent panel beside the second door marks its destination. Compare the two handles in their frames: they have the same distance to travel up and across.</p>
+<p>The guided door retains the part of a displacement that runs along its current axis:</p>
+<pre><code class="language-gdscript">var t = (knob_pos - start).dot(phase1_dir)
+knob_pos = start + phase1_dir * t
+</code></pre>
+<p>Here <code>phase1_dir</code> points upwards. <code>.dot()</code> extracts the part of your movement along that direction; the next line puts the handle there. The full implementation also limits how far it can go.</p>
+<p>The trail records the handle after this correction. Your hand can propose a diagonal and leave a vertical line.</p>
+<p>In the trace hall, movement left positions behind. Here the handle has already been corrected before its position is kept. The line can be an accurate record of where the handle went without showing everything your hand tried.</p>
+<p>Bring the free handle back towards its starting corner, then try a curved route to the translucent panel. The recent lines remain together as you try another way. There is room to take the long way within the frame.</p>
+<p><img alt="Two door mechanisms leave different traces for different permitted paths." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-translation-paths/translation-paths.png" /></p>
+<p><em>A guided bend, a direct diagonal, and a curved route to the same relative endpoint. Each panel records a separate gesture at the handle.</em></p>
+<p>Up followed by sideways reaches the same position as sideways followed by up. Translation itself does not impose this order. The first mechanism does. The second gives both freedoms together. A destination can be shared by journeys with very different permissions.</p>
+<!-- @ -->
+
+<p>The torus beside the course already turns while its cylinder rises and falls. It offers a glimpse of the next question. Our carriers have kept their facing throughout; this neighbouring object combines the operations. Keep the difference between travelling and facing in mind. In the next hall, the turn itself will become the question.</p></article><div class="full" id="Trans_Rotation"><hr><h2>Trans_Rotation</h2><p class="quiet">The reflection keeps axis, orbit, order and the space swept by a turn. The ride formula and repeated row instructions are shortened.</p><p><a href="Trans_Rotation/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Rotation">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>Give the turn a centre</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Axis, angle and pivot</li>
+<li>Degrees and radians</li>
+<li>A child offset from a rotating parent</li>
+<li>A face mark that makes orientation visible</li>
+</ul>
+<p>A quarter-turn can restore a cube's square outline without returning the same face. Follow the mark on the installed cube. Then watch the end of a turning blade: a fixed centre does not mean the whole body stays in one place.</p>
+<p>Keep the box construction and elapsed clock. Remove the translation route. Put the cube under a new <code>pivot</code>, and make the pivot turn. The small dark mark belongs to the cube so it follows the same transform.</p>
+<h2>The complete study</h2>
+<p>Attach <code>lesson.gd</code> to an empty, unrotated, unit-scale <code>TransformStudy</code> on clear museum floor. Leave room around it for a two-metre offset. The museum supplies the room and viewer; this script creates the pivot, cube and mark.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var pivot := Node3D.new()
+var cube := MeshInstance3D.new()
+var mark := MeshInstance3D.new()
+var axis := Vector3.UP
+var offset := Vector3.ZERO
+var speed := 45.0
+var elapsed := 0.0
+
+func _ready() -&gt; void:
+    assert(axis.length() &gt; 0.0)
+    add_child(pivot)
+    pivot.position = Vector3(0, 1.2, 0)
+    cube.mesh = BoxMesh.new()
+    pivot.add_child(cube)
+    cube.position = offset
+
+    var mark_mesh := BoxMesh.new()
+    mark_mesh.size = Vector3(0.3, 0.12, 0.02)
+    mark.mesh = mark_mesh
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    mark.material_override = ink
+    cube.add_child(mark)
+    mark.position = Vector3(0.18, 0.2, 0.51)
+
+func _process(delta: float) -&gt; void:
+    elapsed += delta
+    var angle := deg_to_rad(speed * elapsed)
+    pivot.basis = Basis(axis.normalized(), angle)
+</code></pre>
+<p><code>axis</code> chooses the direction of the rotation axis in the study's frame. <code>Vector3.UP</code> means Y. <code>normalized()</code> keeps that direction and gives it length one. <code>Basis(axis, angle)</code> constructs the orientation for a turn about that axis. It expects radians, so <code>deg_to_rad</code> converts the degrees produced by <code>speed * elapsed</code>.</p>
+<p>At 45 degrees per second, two seconds gives a quarter-turn and eight gives a full turn. We assign the orientation from elapsed time, rather than repeatedly adding the accumulated angle.</p>
+<h2>Move the cube away from the pivot</h2>
+<p>With <code>offset = Vector3.ZERO</code>, the pivot passes through the cube's centre. Its centre stays fixed while its corners move.</p>
+<p>Change <code>offset</code> to <code>Vector3(2, 0, 0)</code>. The cube remains two metres along the pivot's <strong>local</strong> X axis. As the parent turns, that local direction turns in the museum. The cube's centre now travels around the pivot while its orientation turns with it. The mark remains attached to the same face.</p>
+<p>The child's local position has stayed fixed; its world position has changed. This returns to Coordinates with a moving reference frame. Internal distances stay the same in both examples, but the offset version needs more surrounding space.</p>
+<h2>Choose the axis</h2>
+<p>Keep the two-metre offset and change <code>axis</code> to <code>Vector3.FORWARD</code>. In Godot this is negative Z. The centre now follows a vertical circle instead of a horizontal one. At two seconds, predict which side of the pivot it reaches. Part of the circle goes below the floor; raise the study if you want to see the complete orbit.</p>
+<p>The museum's standing platforms use an additional rule to keep their riders upright. Our cube turns with its parent; it is not a rider mechanism. Reversing two rotations is another comparison in the hall, beyond this lesson's single axis.</p>
+<p>Carry the pivot with you. In Scale, the location of the origin will also decide which part of a change stays put.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>Rotation: room for a turn</h1>
+<p>The transport cube carried you without needing to turn. Here, a blade stays attached to its middle while its ends sweep across the gap. Follow one end. The other moves away.</p>
+<!-- @rotation_wall_crossings -->
+
+<h2>Staying upright</h2>
+<p>The level blade turns around the vertical y axis. At ninety degrees it pauses, its length reaching across your route. Walk over while the crossing holds.</p>
+<p>At the X-axis blade, one end descends as the other rises. It turns around x, like a paddle wheel. The far landing is three grid cubes higher. During the pause, the blade offers a slope you can climb. Through vertical, your feet lose their agreement with it.</p>
+<p>Beside its lower end is a small level platform. Board it and stay through the turn. You rise, move forward, and arrive beside the higher grid. Your head has stayed upright.</p>
+<p>The platform follows an arc while keeping its surface level. It is mounted to one side so the blade can pass through vertical without sweeping through your body. Keeping you upright requires a rule alongside the turn.</p>
+<p>The platform carries you until you step off or jump.</p>
+<p>The sideways ride's blade turns around z. Board from the left: this ride carries you sideways along x and up. Turning around z cannot advance you along z. The destination is another bank.</p>
+<p>Both rides pause for twelve seconds, then take twelve for the half-turn. Staying aboard brings you back along the upper arc. The grid wedges and still aisles offer other returns.</p>
+<!-- @ -->
+
+<p>Beyond the blades, the cubes hold their angles. You bring the movement.</p>
+<!-- @rotation_array_compare -->
+
+<h2>An angle underfoot</h2>
+<p>Four bands each contain two columns and six rows of cubes. Begin at zero and walk forward along z.</p>
+<p>Eighteen degrees. Thirty-six. Fifty-four.</p>
+<p>The centres keep their spacing; each row adds an angle. X makes rises and falls across your route. Z makes ridges along it. Y turns the square footprints while keeping their tops horizontal. The fourth band combines x, then y, then z.</p>
+<p>The row supplies the angle; the band supplies the axis or combination. Waiting will not change the slope. The still aisles let you inspect a difficult row from beside it.</p>
+<p>A stand in the central aisle starts another walk. Narrow capsules, 0.44 metres wide, set off along all four bands. Wider capsules follow from the same places, now 1.20 metres wide. Their height, speed, gravity and forward instruction stay the same. Rings retain their endpoints; the trial repeats, and <strong>REPLAY</strong> starts it again.</p>
+<p>Watch the z band. The narrow body catches on a ridge; the wider one can slide sideways and continue. Wider need not mean less room to move. These bodies neither jump nor choose a detour: the collision solver supplies their slides. You can walk through them and try a route they did not take.</p>
+<!-- @ -->
+
+<p>The last row reaches ninety degrees. In the Y band, compare it with the first. The cube's outline returns, but the pale L on its top points another way. That flat-looking row still waits beyond all the tilted ones.</p>
+<p>Each cube has kept its shape throughout. What changes is how it meets its neighbours and your body.</p>
+<!-- @transform_composition_workbench -->
+
+<h2>Two turns</h2>
+<p>Beyond the combined band, two finned forms stand beside a pale version of their starting shape. The workbench opens on pair four: thirty degrees around X and forty-five around Y. The left form receives X first; the right receives Y first.</p>
+<p>Follow the fin through the smaller intermediate forms. In the two results it points different ways. The display separates the forms for us; both calculations use the same origin.</p>
+<pre><code class="language-gdscript">var left_xform: Transform3D = t2 * t1
+var right_xform: Transform3D = t1 * t2
+</code></pre>
+<p>The operation on the right acts first. In Translation, upward and sideways movements could exchange order and share a destination. These two turns cannot: the second receives the orientation left by the first.</p>
+<p>Move the pair slider to two. A turn and a uniform enlargement now end in the same form whichever comes first. Their intermediate forms still differ. The fin gives you something to follow through both journeys.</p>
+<!-- @axial_sweep -->
+
+<h2>What returned?</h2>
+<p>A small cube turns on a spindle beside the way onward. Follow the pale L on its face. After a quarter-turn, the cube fits the space it occupied before. The marked face has gone around the corner.</p>
+<p>What returned depends on what you were following.</p>
+<p><img alt="The same cube at zero and ninety degrees, photographed from the same viewpoint. Its outline returns; the marked face moves." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/marked-return.png" /></p>
+<p><em>Two paused moments from one place. The mark moves from the left-hand face to the right.</em></p>
+<p>Press <strong>BOUNDARY</strong>. A cylinder appears around the turn. A corner reaches its round side, then leaves. The contour keeps that place while the corner is elsewhere.</p>
+<p>Pause. Part of the cylinder is empty. It describes the outside of all the positions the cube occupies over a full turn. A turn needs room that a single pose leaves empty.</p>
+<p>Change <strong>SHAPE</strong> to the triangle. Its upright edge lies on the axle. As the face turns, the wide bottom sweeps a circle and the sloping edge describes a cone. Hide the boundary and follow the sweep with your eyes; bring it back. The outline helps you keep a whole turn in view. It has made no new solid wall.</p>
+<p><img alt="The rotating cube inside its cylindrical boundary and the triangular face inside its conical boundary." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-rotation-return-and-sweep/spaces-of-a-turn.png" /></p>
+<p><em>In this earlier colour study, the contours describe full turns. Each solid body is paused in one position. The museum now shows these studies in grayscale.</em></p>
+<p>The triangle from Primitives has acquired another possibility without acquiring another corner.</p>
+<!-- @ -->
+
+<p>Walk on into the last court.</p>
+<!-- @boolean_tunnel -->
+
+<h2>Inside the turns</h2>
+<p>Look through the first hollow cube. Four more stand beyond it. Each adds eighteen degrees.</p>
+<pre><code class="language-gdscript">angle_deg = i * rotation_per_segment
+</code></pre>
+<p>Subtracting an inner box made each cube hollow. The turns arrange those openings around a continuous floor. Walk inside and follow a corner with your eye.</p>
+<p>Five segments occupy fifteen metres. They stand still; your walk unfolds their differences. Turn back and the sequence unwinds.</p>
+<p>Which edge did you take for a horizon?</p>
+<!-- @carousel_cake -->
+
+<p>Outside the tunnel, the stacks keep turning. Follow a stripe on a low layer, then near the top. Their relations change while you stand still.</p>
+<p>The lowest layer turns at half a radian per second; each successive layer turns 1.2 times as fast. In the tunnel, eighteen degrees separated neighbours. Here, speed keeps changing the angle through time.</p>
+<p>Eight layers make each of five profiles: a brim, a column, a taper, a pinched spindle, a flare. They share heights and turning speeds. Walk between them and compare the room each leaves around itself.</p>
+<!-- @ -->
+
+<!-- study-spine:hinge_release -->
+
+<!-- @hinge_release -->
+
+<p>A small plate waits on a hinge. Turn it; its neighbours travel with it. Release it under KEEP. The pose stays where you left it. Choose RETURN, turn again, then release. The joint moves towards the earlier angle, as if the object had a preferred answer.</p>
+<p>The fixed support and stored angles make this an Ada response to Lygia Clark's articulated works. They give us a way to ask what an invitation permits. A joint can be available to your hand while the rule after release quietly takes the last word. Switch on TRACE and watch one corner: two journeys can arrive at the same pose without leaving the same line.</p>
+<!-- @ -->
+
+<p>In the next hall, the surroundings change size while your body stays the same. What will fit then?</p></article><div class="full" id="Trans_Scale"><hr><h2>Trans_Scale</h2><p class="quiet">The reflection distinguishes enlarging the room from placing the visitor on its upper plate, without repeating the placement code.</p><p><a href="Trans_Scale/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Scale">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>Enlarge the opening, keep the witness</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Uniform and unequal scale factors</li>
+<li>Scaling around an origin</li>
+<li>Parent and child transforms</li>
+<li>Local dimensions and world dimensions</li>
+</ul>
+<p>In this hall, the furnished room grows while your body keeps its size. A small doorway becomes a possible passage. The bottle also relocates the visitor; that relocation is separate from scaling the room.</p>
+<p>Keep Rotation's parent-child arrangement. Replace the rotating pivot with a fixed doorway parent containing three boxes. Remove the clock and face mark. Bring back the familiar black sphere as a size witness, outside the parent that will change. This simple doorway is a visual model; the installed room supplies physical passage.</p>
+<h2>The complete study</h2>
+<p>Attach this <code>lesson.gd</code> to an empty, unrotated, unit-scale <code>TransformStudy</code> on museum floor. The doorway's origin is at the centre of its threshold. Its initial clear opening is 0.45 metres wide and 0.60 metres high. The sphere's diameter is 0.65 metres.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var doorway := Node3D.new()
+var point := MeshInstance3D.new()
+var factors := Vector3.ONE
+
+func _ready() -&gt; void:
+    assert(factors.x &gt; 0.0 and factors.y &gt; 0.0 and factors.z &gt; 0.0)
+    add_child(doorway)
+    box(Vector3(0.12, 0.6, 0.2), Vector3(-0.285, 0.3, 0))
+    box(Vector3(0.12, 0.6, 0.2), Vector3(0.285, 0.3, 0))
+    box(Vector3(0.69, 0.12, 0.2), Vector3(0, 0.66, 0))
+    doorway.scale = factors
+
+    var sphere := SphereMesh.new()
+    sphere.radius = 0.325
+    sphere.height = 0.65
+    point.mesh = sphere
+    var ink := StandardMaterial3D.new()
+    ink.albedo_color = Color(0.06, 0.06, 0.06)
+    ink.roughness = 0.18
+    point.material_override = ink
+    add_child(point)
+    point.position = Vector3(1.8, 0.325, 0)
+
+func box(size: Vector3, at: Vector3) -&gt; void:
+    var body := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    body.mesh = mesh
+    body.position = at
+    doorway.add_child(body)
+</code></pre>
+<p>The two posts and lintel are children of <code>doorway</code>. The sphere is a sibling of that parent. Setting the parent's <code>scale</code> reaches the three boxes and the distances between them. It does not reach the sphere.</p>
+<p>With <code>factors = Vector3.ONE</code>, the point is wider than the opening. Change the existing line to <code>var factors := Vector3(4, 4, 4)</code> and run again. The clear opening is now 1.80 by 2.40 metres. Every doorway dimension and spacing has grown fourfold. The sphere is still 0.65 metres across.</p>
+<p>Each box keeps its local position and mesh dimensions. Its world dimensions change through the parent. The posts' bottom edges stay at floor level because the scaling origin is there. An origin halfway up the door would produce a different relation to the floor.</p>
+<h2>Change width without changing height</h2>
+<p>Set <code>factors</code> to <code>Vector3(4, 1, 1)</code>. The opening is now 1.80 metres wide but only 0.60 metres high. The sphere remains too tall. This scale changes proportions: X grows, Y and Z do not.</p>
+<p>Uniform scale preserves proportions; it does not preserve every possible action around an object. In the installed room, compare the enlarged doorway with the museum frame that stayed outside the changing group.</p>
+<h2>Make a deliberate opening</h2>
+<p>Try <code>Vector3(2, 2, 1)</code>. Predict the opening's width, height and depth before running it. The width becomes 0.90 metres and the height 1.20; depth stays unchanged. Explain why the sphere keeps both its position and diameter.</p>
+<p>The next hall keeps this size factor but lets your distance choose it. You will change the surroundings by approaching them.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>A door, at last</h1>
+<!-- @scale_me -->
+
+<p>In the rotation hall, you tried the openings against the size of your body. Here, something waits to be taken.</p>
+<p>A figure stands behind a tower of food. Crystal grows through her suit; broad panels lean around her body. The food has begun to flower. Porcelain plates climb above it, and smaller serving plates wind down the side. These are familiar enough to approach, strange enough to keep looking at. In the far wall, beside the figure, a little gold frame surrounds a door.</p>
+<p>Try to put yourself through it.</p>
+<p>You can see the opening. You can point to the space beyond. Your body will not follow. For the moment, calling it an exit describes somebody else's possibility.</p>
+<p>There is a bottle on the highest plate. DRINK ME. Take it.</p>
+<p>A cut. Now the plate is under your feet. The figure rises beyond you, her leaning panels large enough to seem architectural. The table has become a place to stand. Look down along the serving plates. What could be read at a glance now asks for a journey.</p>
+<p>The bottle is gone. You have not watched the room swell through the sizes between. The room and its contents are suddenly four times as large: the food, the figure, the spaces between them. Your body has kept its size. The effect may feel like shrinking. The program has made that feeling by changing the other side of the comparison.</p>
+<pre><code class="language-gdscript">room.scale = Vector3.ONE * FACTOR
+</code></pre>
+<p><code>FACTOR</code> is four. The food and the figure belong to <code>room</code>, so the same multiplication reaches their positions as well as their dimensions. The figure is farther from the table now. Increasing only their dimensions would have left the distance between them unchanged.</p>
+<p>The arrival on the plate is another operation. Scaling the room would not put you there. The program finds the top plate in the enlarged world, then places your feet eight centimetres above it. The room has changed size, and you have been given a new place from which to meet it.</p>
+<p>Follow the plates down. Their winding descent was already present when they were small. Nothing in their arrangement needed to be invented after you took the bottle. Yet the distance from one to the next now belongs to balance, gravity and the time spent falling. The program did not multiply your walking speed or the gravity with the room. Uniform scaling has left a very uneven experience.</p>
+<p>Find the little door again. It was forty-five centimetres wide and sixty high. Now it is 1.8 metres wide and 2.4 high. Walk through.</p>
+<p>Just beyond it stands a second gold frame, also 1.8 metres wide and 2.4 high. Pass through that one too. It stood at this size before you took the bottle.</p>
+<p><img alt="The tiny gold doorway and its enlarged version viewed from the same standing height and distance." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png" /></p>
+<p><em>The camera stays 1.65 metres above the floor and 2.5 metres from the opening in both views. On the right, the second gold frame beyond the doorway has stayed at its original size.</em></p>
+<p>The little doorway has kept its proportions. There is a difference between preserving a shape and preserving what someone can do there. If the bottle had enlarged you by the same factor, would that doorway have become an exit?</p>
+<p>The figure has not become hostile by becoming enormous. Her unfamiliar body remains with you through the change. The same is true of the food: its strangeness preceded its usefulness as a landscape. You can learn a route through something without exhausting what it is.</p>
+<!-- @ -->
+
+<!-- study-spine:reference_passage -->
+
+<!-- @reference_passage -->
+
+<p>Another wall waits beyond the enlarged room. Its opening changes width; your body stays the same. At the narrow setting the strip on the floor continues through a passage you cannot take. Walk around the wall instead.</p>
+<p>The displaced dark disc belongs to this sparse arrangement too. Following the supplied Bałka reference, a few architectural parts make the missing room present. The code can name a clearance. It cannot decide whose body ought to be the measure. Widen the opening and return to the same strip.</p>
+<!-- @ -->
+
+<p>Beyond the changing opening, turn toward the museum's own exit. There is still a short walk to the next hall. The museum and its second frame have kept their ordinary size. The code placed the furnished room inside the change and left them outside it. In the next hall, your approach will be enough to make the surroundings respond.</p>
+<!-- @ --></article><div class="full" id="Trans_Body"><hr><h2>Trans_Body</h2><p class="quiet">The reflection stays with approach, room for a body and the limits of a response. The distance formulas become spatial descriptions.</p><p><a href="Trans_Body/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Body">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>Let your approach choose the transform</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>World-space separation and horizontal distance</li>
+<li>Mapping a distance range to a bounded fraction</li>
+<li>Driving scale or rotation from the same input</li>
+<li>Keeping a shrinking body's base on the floor</li>
+</ul>
+<p>Approach the slat wall, then step back. The slats return. Farther on, blocks shrink around you and recover when you leave. Your relation to the object now supplies the changing value.</p>
+<p>Continue with one familiar box. Replace Scale's chosen factor with a value calculated from the player. Remove the doorway group and witness. The museum supplies the tracked body; the lesson creates the cube and its response. Like the previous visual studies, this cube does not block your route. The installed exhibits supply their own collision.</p>
+<h2>The complete study</h2>
+<p>Put this <code>lesson.gd</code> on an empty <code>TransformStudy</code> at floor level, with zero rotation and unit scale. Leave several metres of clear approach space. The player already exists when the study enters the scene.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+var cube := MeshInstance3D.new()
+var player: Node3D
+var near_distance := 1.0
+var far_distance := 4.0
+var minimum := 0.25
+var turn_instead := false
+
+func _ready() -&gt; void:
+    assert(far_distance &gt; near_distance and near_distance &gt;= 0.0)
+    assert(minimum &gt; 0.0 and minimum &lt;= 1.0)
+    cube.mesh = BoxMesh.new()
+    add_child(cube)
+    cube.position.y = 0.5
+    player = get_tree().get_first_node_in_group(&quot;player_body&quot;) as Node3D
+    if player == null:
+        player = get_tree().get_first_node_in_group(&quot;em_walker&quot;) as Node3D
+
+func _process(_delta: float) -&gt; void:
+    if not is_instance_valid(player):
+        return
+    var separation := player.global_position - global_position
+    separation.y = 0.0
+    respond(separation.length())
+
+func respond(distance: float) -&gt; void:
+    var closeness := 1.0 - clampf((distance - near_distance) / (far_distance - near_distance), 0.0, 1.0)
+    if turn_instead:
+        cube.scale = Vector3.ONE
+        cube.position.y = 0.5
+        cube.rotation_degrees.y = 90.0 * closeness
+    else:
+        var factor := lerpf(1.0, minimum, closeness)
+        cube.rotation_degrees.y = 0.0
+        cube.scale = Vector3.ONE * factor
+        cube.position.y = factor * 0.5
+</code></pre>
+<p>The lookup selects the supplied XR body in group <code>player_body</code>, or the desktop museum walker in <code>em_walker</code>. These are named connections to the existing player. If neither exists, the cube remains at its starting pose; the script does not invent a player.</p>
+<p>Both positions in the subtraction are <strong>world positions</strong>. Taking the difference in one frame avoids confusing a local coordinate with a world coordinate. Setting its Y component to zero measures horizontal distance: crouching should not alter this study's response just by changing height.</p>
+<h2>Turn metres into a size</h2>
+<p>At four metres or farther, <code>closeness</code> is zero. At one metre or nearer, it is one. Halfway between, at 2.5 metres, it is one half. Subtracting the near distance shifts the range; dividing by its width gives a fraction; <code>clampf</code> bounds it; subtracting from one makes closer mean larger input.</p>
+<p><code>lerpf(1.0, minimum, closeness)</code> uses that input to shrink the cube from a one-metre side to a quarter-metre side. The mesh is centred on its origin. Moving its centre to half the current height keeps its bottom on the floor.</p>
+<p>Walk away. The same calculation restores the larger cube. No new cube is created and none is removed. At the same distance, it gives the same size whether or not you have approached before. Trace kept earlier positions after the point moved on; this study keeps no record of earlier approaches.</p>
+<p>Compare that return with the lattice's retained cut elsewhere in this hall. Leaving does not put its missing cells back. This tutorial selects the reversible distance-to-transform relation; the lattice changes which cells remain. Both are visible in the hall.</p>
+<h2>Keep the input, change the response</h2>
+<p>Set <code>turn_instead</code> to <code>true</code>. The cube now keeps its size and turns from zero to 90 degrees around Y as you approach. At 2.5 metres it turns 45 degrees. One bodily relation can control different transforms.</p>
+<p>Return to shrinking and set <code>far_distance</code> to <code>6.0</code>. Predict where the response starts and where it reaches half its range. The start moves to six metres; halfway is now 3.5 metres, not three. Keep the near limit at one.</p>
+<p>Our one-body study responds immediately. The installed wall smooths movement and attends to neighbouring parts. Carry the distance-to-transform relation into a combined opening.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>The Body</h1>
+<p>The corridor narrows, and then it stops.</p>
+<!-- @approach_wall -->
+
+<p>A wall of upright slats stands across the way. There is no handle. Walk towards it.</p>
+<p>The slats nearest you turn. Step sideways along the wall and the opening follows; step back and it closes. A doorway has come to meet you.</p>
+<p>The opening responds to two distances: along the wall from each slat to you, and out from the wall to where you stand. The response weakens towards the limits of its reach. Neighbouring slats turn with the ones closest to you, making room for more than a point.</p>
+<p>Someone has chosen that width, that reach, and which bodies the wall will notice. The invitation has dimensions. Yet you can move its centre along the wall. Your position changes what this arrangement allows.</p>
+<p>Pass through and look back. While you are still close, a slat may remain open for you. Go farther and wait. It settles into the wall again. You have crossed the boundary before you have left its attention.</p>
+<!-- @carve_grid -->
+
+<p>The next narrow passage holds a block of small cubes, about 1.3 metres high. You can see over it. Your legs still need a way through.</p>
+<p>Press forward. A layer gives way, and another waits behind it. The missing cubes leave an open-topped trench. Your eyes had crossed this space before your body could.</p>
+<p>Physics stops your body at the solid cells. To let the cut begin, the program gives its removal test a little extra reach:</p>
+<pre><code class="language-gdscript">@export var bite_m: float = 0.16
+</code></pre>
+<p>Sixteen centimetres beyond the collision shape used for your body. With cells spaced thirty-four centimetres apart, that margin clears roughly one layer at a time. The next step becomes possible because something has been removed.</p>
+<p>Moving a cube would leave it somewhere. Here, the count changes. The lattice loses cells as you advance.</p>
+<p>Turn back. The cut stays when you walk away. A return during the same session can reopen the cells kept in memory. Look along the stepped sides: they record where the lattice met your body's collision shape, widened by that small margin. Whole cubes are either present or absent. The record can have no finer edge than the cells that make it.</p>
+<p>Some of you passed above the entire record.</p>
+<p><img alt="The low cube lattice before a passage and the open-topped cut left by a body, photographed from the same elevated viewpoint." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-body-what-remains/the-cut-remains.png" /></p>
+<p><em>The body has left the second view. These elevated views show the missing cells; the opening was made by walking through the block.</em></p>
+<p>The cut keeps the route without keeping your reason for taking it. Its width includes an allowance you may never have noticed. Somebody following would meet an opening already shaped by another passage. Would their body fit, or would they need to widen it?</p>
+<!-- @approach_scale -->
+
+<p>Nine blocks stand ahead. At rest, the gap between neighbours is thirty-five centimetres.</p>
+<p>Move closer. The nearest blocks shrink. Continue between them: the opening travels with you.</p>
+<p>Each block answers the nearest body within its reach. It shrinks smoothly to about a third of its full size. The visible block and its collision box change together, lowering as they shrink to keep their feet on the floor. Their places in the horizontal grid stay fixed.</p>
+<p>All nine blocks are still there. Your distance has become their size.</p>
+<p>Look behind you near the last row. Some blocks may still be small. Take a few more steps towards the far end and watch them fill out. You can be through the gap and still be holding it open.</p>
+<!-- @ -->
+
+<p>Two boundaries return; one keeps the cut. Looking back finds a wall, a trench, a field of blocks. Each has answered the same approach differently.</p>
+<p>The slats and shrinking blocks answer where you are now. The trench keeps a change made by your earlier passage. After you leave, the next visitor can still follow the opening your body made.</p>
+<p>In the next room, growing blocks follow a clock. Coming closer will no longer ask them to make room. You will have to find your moment.</p></article><div class="full" id="Trans_Pit"><hr><h2>Trans_Pit</h2><p class="quiet">The tutorial now builds solid leaves and a solid frame, with collision that moves and resizes with the mesh. The reflection keeps timing, clearance and the passage’s conditional welcome, with fewer repeated formulas.</p><p><a href="Trans_Pit/parallel.html">Read this hall alone</a> · <a href="changes.html#Trans_Pit">Before / after</a></p></div><article><p class="badge">Tutorial · complete code and explanation</p><h1>Make room with three operations</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Combining translation, rotation and scale</li>
+<li>One progress value driving several properties</li>
+<li>Overlap as a continuing condition</li>
+<li>Opening and returning over time</li>
+<li>Keeping a solid boundary with the visible shape</li>
+</ul>
+<p>First watch the blocks that arrive, turn and grow regardless of your approach. Then meet the door at the end of the hall. Its leaves move aside, turn and shrink while the frame stays still. The same operations can take space or offer it.</p>
+<p>Combine the sequence's parts: Scale's fixed frame, two familiar boxes, Pre's player-detecting area and a timed change. Body used continuous distance; this study asks whether anyone is within reach. This time the frame and leaves are solid. A closed leaf stops you; the transformed leaves leave a passage. The installed door's staggered movements and closing delay remain further variations.</p>
+<h2>The complete study</h2>
+<p>Attach <code>lesson.gd</code> to an empty <code>TransformStudy</code> on clear museum floor, with zero rotation and unit scale. Stand at least three metres away before starting, then approach from either side. All dimensions below are local metres. The area extends two metres in front of and behind the doorway.</p>
+<!-- student-code:lesson.gd -->
+
+<pre><code class="language-gdscript">extends Node3D
+
+const LEAF_SIZE := Vector3(1.1, 2.5, 0.18)
+var leaves: Array[AnimatableBody3D] = []
+var visuals: Array[MeshInstance3D] = []
+var shapes: Array[BoxShape3D] = []
+var sensor := Area3D.new()
+var duration := 3.0
+var progress := 0.0
+var slide := 1.15
+
+func _ready() -&gt; void:
+    assert(duration &gt; 0.0 and slide &gt;= 0.0)
+    box(Vector3(0.25, 2.6, 0.35), Vector3(-1.25, 1.3, 0))
+    box(Vector3(0.25, 2.6, 0.35), Vector3(1.25, 1.3, 0))
+    box(Vector3(2.75, 0.2, 0.35), Vector3(0, 2.7, 0))
+    for side in [-1.0, 1.0]:
+        box(LEAF_SIZE, Vector3(side * 0.55, 1.25, 0), true)
+
+    sensor.collision_layer = 0
+    sensor.collision_mask = 1
+    sensor.set_collision_mask_value(20, true)
+    add_child(sensor)
+    var hitbox := CollisionShape3D.new()
+    var shape := BoxShape3D.new()
+    shape.size = Vector3(5, 3, 4)
+    hitbox.shape = shape
+    hitbox.position.y = 1.5
+    sensor.add_child(hitbox)
+
+func box(size: Vector3, at: Vector3, is_leaf := false) -&gt; void:
+    var body := AnimatableBody3D.new()
+    body.sync_to_physics = false
+    body.position = at
+    add_child(body)
+    var visual := MeshInstance3D.new()
+    var mesh := BoxMesh.new()
+    mesh.size = size
+    visual.mesh = mesh
+    body.add_child(visual)
+    var shape := BoxShape3D.new()
+    shape.size = size
+    var collision := CollisionShape3D.new()
+    collision.shape = shape
+    body.add_child(collision)
+    if is_leaf:
+        leaves.append(body)
+        visuals.append(visual)
+        shapes.append(shape)
+
+func _physics_process(delta: float) -&gt; void:
+    var target := 0.0
+    for body in sensor.get_overlapping_bodies():
+        if body.is_in_group(&quot;em_walker&quot;) or body.is_in_group(&quot;player_body&quot;):
+            target = 1.0
+            break
+    progress = move_toward(progress, target, delta / duration)
+    apply_pose(progress)
+
+func apply_pose(t: float) -&gt; void:
+    for i in leaves.size():
+        var side := -1.0 if i == 0 else 1.0
+        leaves[i].position = Vector3(side * (0.55 + slide * t), 1.25 + 0.9 * t, 0)
+        leaves[i].rotation_degrees.z = side * 55.0 * t
+        var factor := lerpf(1.0, 0.35, t)
+        visuals[i].scale = Vector3.ONE * factor
+        shapes[i].size = LEAF_SIZE * factor
+</code></pre>
+<p>The box function now builds each box around an <code>AnimatableBody3D</code>: a solid body whose movement our code controls. Inside it, a <code>MeshInstance3D</code> supplies the visible box and a <code>CollisionShape3D</code> holds a matching <code>BoxShape3D</code>. The frame uses the same construction but stays still. We set <code>sync_to_physics</code> false because our own <code>_physics_process</code> assigns the poses on physics ticks.</p>
+<p>When <code>is_leaf</code> is true, the function keeps three references: the body in <code>leaves</code>, its mesh instance in <code>visuals</code>, and its collision shape in <code>shapes</code>. The same index identifies parts of the same leaf. Their centres begin equally far from the middle. The frame boxes are outside these lists, so the pose function leaves them alone.</p>
+<p>Pre reacted once when a body entered. Here <code>get_overlapping_bodies()</code> reads who is still in the area on each physics tick. The loop recognises the same museum player groups. If one qualifies, the target becomes one and <code>break</code> ends the search. If no player qualifies, the target remains zero. An ordinary prop does not hold the opening. If two qualifying bodies enter, either one remaining is enough.</p>
+<p><code>move_toward</code> changes <code>progress</code> by at most <code>delta / duration</code> per physics tick and stops at its target. Three seconds takes it from fully closed to fully open. Leaving halfway reverses from the current pose; it does not jump to an endpoint. Physics ticks keep the overlap reading with the physics simulation, while <code>delta</code> still measures seconds.</p>
+<h2>Follow each operation</h2>
+<p>The <code>side</code> value is −1 for the left leaf and +1 for the right. Multiplying by it gives opposite horizontal directions and opposite turns.</p>
+<p>At <code>t = 0</code>, the two leaves meet. At <code>t = 1</code>, their centres have moved sideways and upward, each has turned 55 degrees in the doorway's face, and each is 35 percent of its starting size. Z is the rotation axis here; Y remains up. Both leaves keep their own centres as their turning and scaling origins.</p>
+<p>The body's position and rotation carry both its mesh and collision. For size, we scale the visual and resize the box shape by the same factor, while the physics body keeps unit scale. That makes the visible gap agree with the solid boundary. Shrinking only the mesh would leave an invisible barrier.</p>
+<p>Approach and wait as the leaves withdraw, then walk through the frame. The area keeps the door open while you remain nearby, including on the far side. After everyone leaves, this version begins closing immediately. Its frame has finite width: walking around it is also possible.</p>
+<p>These operations share one fraction and happen together in our study. The installed mechanism staggers them and waits three seconds before closing. In either case, inspect intermediate poses: endpoints alone do not describe the available space throughout the movement.</p>
+<h2>Author another opening</h2>
+<p>Change <code>duration</code> to <code>6.0</code>. The journey takes twice as long; its end pose stays the same. Then restore three seconds and change <code>slide</code> to <code>1.5</code>. The leaves travel farther sideways while keeping the same turn and final size. Predict the larger gap before approaching.</p>
+<p>You have made a response from three known operations. Arrays can now repeat a body and give each instance its own place or variation. Keep this working opening as one composition; not every object in the next hall needs to inherit its sensor.</p></article><article><p class="badge">Reflection · encounter and questions</p><h1>The Moving Boundary</h1>
+<p>A wall can arrive on level ground. You can wait beside its path, or step into the space it is about to occupy.</p>
+<p>Three rooms in a row: translating blocks, turning slabs, growing cubes. There is a way around the first lanes and room to watch the others from beside them. The ground stays level. An opening can disappear while you stand still.</p>
+<h2>Translation, from inside</h2>
+<!-- @pusher_block -->
+
+<p>Three blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.</p>
+<p>Each block travels two metres, but they take different times and their pauses differ. Two advance along Z; the third goes the other way. An opening that works for the first does not give you the timing of the next.</p>
+<p>The block keeps its dimensions. Standing where it wants to be, you meet a wall that arrives. The displacement that carried you in an earlier hall can also occupy your place. Beside these lanes, open floor lets you walk around.</p>
+<!-- @ -->
+
+<h2>Rotation, from inside</h2>
+<!-- @rc -->
+
+<p>The middle room has two turning slabs. Watch one end while the centre stays put. Each makes a quarter-turn, waits, then reverses. Their different pauses let one begin while the other still holds its place.</p>
+<p>The collision follows the visible angle. These upright wall profiles offer a broad face to the route, then a narrow edge. Their dimensions stay the same as the clearance beside them changes. The middle route lets you keep your distance.</p>
+<p>Look at the floor just beyond a slab's present edge. It is empty now. Follow the edge into it. The space this slab sweeps through is larger than the space one pose shows. Your place can become part of its turn without you taking a step.</p>
+<p>Balls arrive from the side platforms as well. There is more than one clock here, and their movements do not wait for you to finish comparing them.</p>
+<h2>Scale, from inside</h2>
+<!-- @grower_block -->
+
+<p>The last room has three cubes sharing a tempo. Wait before approaching. They grow anyway.</p>
+<p>The previous hall's blocks made room when you came close. Here their size follows elapsed time. Walking towards them, standing still and turning away all leave the same clock running.</p>
+<p>All three cubes move from thirty centimetres to three and a half metres on a side, then return together. Their shared rhythm leaves different amounts of floor available around them.</p>
+<p><img alt="At its smallest, the cube leaves the final door visible down the lane." src="http://localhost:3003/book-review/doc/book/figures/Trans_Pit/growers-small.png" /></p>
+<p><img alt="At full size, the same cube fills the view from the same position." src="http://localhost:3003/book-review/doc/book/figures/Trans_Pit/growers-large.png" /></p>
+<p><em>The same view at two moments in the cycle. At its smallest, the cube leaves the final door visible beyond it. At its largest, it fills the view. The camera has not moved.</em></p>
+<p>Watch a bottom edge. It stays on the floor. The mesh and collision box grow together, with their centres kept half a side-length above that edge. Growth takes space upwards and sideways rather than passing through the ground.</p>
+<p>As a cube expands, the gap beside it narrows, then widens again. All three axes scale equally, so the cube keeps its proportions. The gap has no such guarantee. Your available space is the remainder after its growth.</p>
+<!-- @ -->
+
+<h2>What returns</h2>
+<p>The block returns to its starting place, the slab to its earlier angle, the cube to its small size. You may still be waiting, or already be on the other side. An object can recover its pose while your encounter with it continues.</p>
+<p>Which body can use the opening? Width, pace and the collision shape assigned to you all matter. A gap may admit you before you are ready to cross. There is room here to wait, watch or take the way around.</p>
+<h2>Make room</h2>
+<!-- @transformation_airlock -->
+
+<p>After the growing cubes, two armoured leaves meet inside a heavy frame. These wait for your arrival. Approach, then stop. Follow the bright strip along one leaf.</p>
+<p>It moves sideways and up. It turns through a quarter-turn. Then it becomes smaller, drawing its armour into a recess beside the opening. The frame has stayed still. The passage has changed.</p>
+<p><img alt="The same door closed, partway through its turn, and fully open with the leaves reduced into their recesses." src="http://localhost:3003/book-review/doc/book/iterations/2026-09-23-moving-boundary/make-room.png" /></p>
+<p><em>Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.</em></p>
+<p>The three movements overlap in time. Each leaf turns across the doorway's face and ends at thirty-four percent of its original size. Its collision shape changes with it: the visible opening is also an opening your body can use.</p>
+<p>Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again. Its welcome has a reach, a width and a waiting time, each chosen in advance.</p>
+<p>These are the same three operations we added to the pickup cube at the beginning of the sequence. There they made a small object conspicuous. Here they make room for you.</p>
+<!-- @ --></article></main></body></html>

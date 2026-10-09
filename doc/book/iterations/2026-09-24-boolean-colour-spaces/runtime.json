@@ -1,0 +1,288 @@
+{
+  "checks": [
+    {
+      "check": "path CSG generated mesh",
+      "pass": true
+    },
+    {
+      "check": "path nonempty carved boundary",
+      "pass": true
+    },
+    {
+      "check": "path triangle count",
+      "pass": true,
+      "triangles": 4682
+    },
+    {
+      "check": "path capsule traversal direction -1",
+      "pass": true
+    },
+    {
+      "check": "path maintained level support",
+      "pass": true
+    },
+    {
+      "check": "path capsule traversal direction 1",
+      "pass": true
+    },
+    {
+      "check": "path maintained level support",
+      "pass": true
+    },
+    {
+      "check": "path solid side blocks ray",
+      "pass": true
+    },
+    {
+      "check": "path ray reaches surface button 0",
+      "pass": true
+    },
+    {
+      "check": "path pointer selected finish 0",
+      "pass": true
+    },
+    {
+      "check": "path ray reaches surface button 1",
+      "pass": true
+    },
+    {
+      "check": "path pointer selected finish 1",
+      "pass": true
+    },
+    {
+      "check": "path ray reaches surface button 2",
+      "pass": true
+    },
+    {
+      "check": "path pointer selected finish 2",
+      "pass": true
+    },
+    {
+      "check": "path ray reaches surface button 3",
+      "pass": true
+    },
+    {
+      "check": "path pointer selected finish 3",
+      "pass": true
+    },
+    {
+      "check": "path surface changes preserve geometry",
+      "pass": true
+    },
+    {
+      "check": "path drift advances only surface phase",
+      "pass": true
+    },
+    {
+      "check": "path drift can stop",
+      "pass": true
+    },
+    {
+      "check": "capture path-inside",
+      "pass": true
+    },
+    {
+      "check": "capture path-entry",
+      "pass": true
+    },
+    {
+      "check": "capture path-ceiling",
+      "pass": true
+    },
+    {
+      "check": "capture surface-0",
+      "pass": true
+    },
+    {
+      "check": "capture surface-1",
+      "pass": true
+    },
+    {
+      "check": "capture surface-2",
+      "pass": true
+    },
+    {
+      "check": "capture surface-3",
+      "pass": true
+    },
+    {
+      "check": "lens CSG generated mesh",
+      "pass": true
+    },
+    {
+      "check": "lens nonempty carved boundary",
+      "pass": true
+    },
+    {
+      "check": "lens triangle count",
+      "pass": true,
+      "triangles": 1104
+    },
+    {
+      "check": "lens capsule traversal direction -1",
+      "pass": true
+    },
+    {
+      "check": "lens maintained level support",
+      "pass": true
+    },
+    {
+      "check": "lens capsule traversal direction 1",
+      "pass": true
+    },
+    {
+      "check": "lens maintained level support",
+      "pass": true
+    },
+    {
+      "check": "lens solid side blocks ray",
+      "pass": true
+    },
+    {
+      "check": "lens ray reaches surface button 0",
+      "pass": true
+    },
+    {
+      "check": "lens pointer selected finish 0",
+      "pass": true
+    },
+    {
+      "check": "lens ray reaches surface button 1",
+      "pass": true
+    },
+    {
+      "check": "lens pointer selected finish 1",
+      "pass": true
+    },
+    {
+      "check": "lens ray reaches surface button 2",
+      "pass": true
+    },
+    {
+      "check": "lens pointer selected finish 2",
+      "pass": true
+    },
+    {
+      "check": "lens ray reaches surface button 3",
+      "pass": true
+    },
+    {
+      "check": "lens pointer selected finish 3",
+      "pass": true
+    },
+    {
+      "check": "lens surface changes preserve geometry",
+      "pass": true
+    },
+    {
+      "check": "lens drift advances only surface phase",
+      "pass": true
+    },
+    {
+      "check": "lens drift can stop",
+      "pass": true
+    },
+    {
+      "check": "capture lens-inside",
+      "pass": true
+    },
+    {
+      "check": "capture lens-entry",
+      "pass": true
+    },
+    {
+      "check": "capture lens-ceiling",
+      "pass": true
+    },
+    {
+      "check": "shell CSG generated mesh",
+      "pass": true
+    },
+    {
+      "check": "shell nonempty carved boundary",
+      "pass": true
+    },
+    {
+      "check": "shell triangle count",
+      "pass": true,
+      "triangles": 6246
+    },
+    {
+      "check": "shell capsule traversal direction -1",
+      "pass": true
+    },
+    {
+      "check": "shell maintained level support",
+      "pass": true
+    },
+    {
+      "check": "shell capsule traversal direction 1",
+      "pass": true
+    },
+    {
+      "check": "shell maintained level support",
+      "pass": true
+    },
+    {
+      "check": "shell solid side blocks ray",
+      "pass": true
+    },
+    {
+      "check": "shell ray reaches surface button 0",
+      "pass": true
+    },
+    {
+      "check": "shell pointer selected finish 0",
+      "pass": true
+    },
+    {
+      "check": "shell ray reaches surface button 1",
+      "pass": true
+    },
+    {
+      "check": "shell pointer selected finish 1",
+      "pass": true
+    },
+    {
+      "check": "shell ray reaches surface button 2",
+      "pass": true
+    },
+    {
+      "check": "shell pointer selected finish 2",
+      "pass": true
+    },
+    {
+      "check": "shell ray reaches surface button 3",
+      "pass": true
+    },
+    {
+      "check": "shell pointer selected finish 3",
+      "pass": true
+    },
+    {
+      "check": "shell surface changes preserve geometry",
+      "pass": true
+    },
+    {
+      "check": "shell drift advances only surface phase",
+      "pass": true
+    },
+    {
+      "check": "shell drift can stop",
+      "pass": true
+    },
+    {
+      "check": "capture shell-inside",
+      "pass": true
+    },
+    {
+      "check": "capture shell-entry",
+      "pass": true
+    },
+    {
+      "check": "capture shell-ceiling",
+      "pass": true
+    }
+  ],
+  "scope": "Isolated production artifact with a 1.8m x 0.30m CharacterBody capsule. Native renders and pointer-event tests; not a headset or museum-loader test."
+}

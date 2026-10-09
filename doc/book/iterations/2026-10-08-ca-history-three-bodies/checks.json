@@ -1,0 +1,127 @@
+{
+  "checks": [
+    {
+      "name": "Printed construction creates point, label, two views and 360 support slots",
+      "passed": true
+    },
+    {
+      "name": "Generation zero is a single occupied centre",
+      "passed": true
+    },
+    {
+      "name": "Current row and saved row are independent",
+      "passed": true
+    },
+    {
+      "name": "In-place current edit cannot rewrite saved past",
+      "passed": true
+    },
+    {
+      "name": "First generation occupies 6, 7 and 8",
+      "passed": true
+    },
+    {
+      "name": "Step preserves seed and stores an independent next row",
+      "passed": true
+    },
+    {
+      "name": "All eight ordered neighbourhood cases implement Rule 30",
+      "passed": true
+    },
+    {
+      "name": "Wrapped left boundary gives sites 14, 0 and 1",
+      "passed": true
+    },
+    {
+      "name": "Eight seeded histories through all 24 rows agree with installed solver",
+      "passed": true
+    },
+    {
+      "name": "Full record stops without discarding earliest rows",
+      "passed": true
+    },
+    {
+      "name": "Independent two-site exercise has predicted six occupied sites",
+      "passed": true
+    },
+    {
+      "name": "Reading an old row leaves latest state and full history intact",
+      "passed": true
+    },
+    {
+      "name": "Reading leaves geometry and support intact",
+      "passed": true
+    },
+    {
+      "name": "Both gold markers agree on selected generation",
+      "passed": true
+    },
+    {
+      "name": "Unrecorded and negative selections are ignored",
+      "passed": true
+    },
+    {
+      "name": "Step after looking back evolves latest state, not selected past",
+      "passed": true
+    },
+    {
+      "name": "All 360 slots in both views show only occupied recorded cells",
+      "passed": true
+    },
+    {
+      "name": "All view coordinates separate site from generation",
+      "passed": true
+    },
+    {
+      "name": "Only occupied deck slots enable collision",
+      "passed": true
+    },
+    {
+      "name": "Generation selects intended rendered colour",
+      "passed": true
+    },
+    {
+      "name": "Physics ray lands on occupied seed tile",
+      "passed": true
+    },
+    {
+      "name": "Recorded empty site offers no support",
+      "passed": true
+    },
+    {
+      "name": "Occupied wall cell has no collision",
+      "passed": true
+    },
+    {
+      "name": "Deliberately shared snapshot is rejected",
+      "passed": true
+    },
+    {
+      "name": "Independent wall-flip task changes mapping without changing history",
+      "passed": true
+    },
+    {
+      "name": "Actual XRTools held point reads row 2 in rotated local frame",
+      "passed": true
+    },
+    {
+      "name": "Held trigger appends one generation without replacing earlier rows",
+      "passed": true
+    },
+    {
+      "name": "Release parks reader at its selected local row",
+      "passed": true
+    },
+    {
+      "name": "Enter appends once and ignores repeat",
+      "passed": true
+    },
+    {
+      "name": "Replay restores edited seed and removes all later generations",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "scope": "Exact printed code in native renderer; installed Rule30 parity; independent seed/view tasks; fault rejection; physics rays; XRTools with supplied controller poses. No tracked headset or human learner."
+}

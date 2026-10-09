@@ -1,0 +1,82 @@
+{
+  "passed": true,
+  "scope": "Prose and publication checks; runtime code unchanged, native tests not rerun for this editorial revision. Existing verification.json records the runtime run before this prose pass.",
+  "protected_files_unchanged": 28,
+  "only_eleven_plan_rows_changed": true,
+  "review_decisions_preserved": true,
+  "artifact_selection_and_layout_unchanged": true,
+  "code_blocks_unchanged": 12,
+  "prose_counts": [
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "before_prose_words": 388,
+      "after_prose_words": 370
+    },
+    {
+      "map": "VFM_05_Launch",
+      "before_prose_words": 437,
+      "after_prose_words": 383
+    },
+    {
+      "map": "VFM_03_Motion",
+      "before_prose_words": 401,
+      "after_prose_words": 378
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "before_prose_words": 401,
+      "after_prose_words": 408
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "before_prose_words": 411,
+      "after_prose_words": 356
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "before_prose_words": 416,
+      "after_prose_words": 394
+    },
+    {
+      "map": "Change_Choreography",
+      "before_prose_words": 428,
+      "after_prose_words": 342
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "before_prose_words": 418,
+      "after_prose_words": 395
+    },
+    {
+      "map": "VFM_09_Legs",
+      "before_prose_words": 404,
+      "after_prose_words": 352
+    },
+    {
+      "map": "VFM_08_Arena",
+      "before_prose_words": 413,
+      "after_prose_words": 384
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "before_prose_words": 480,
+      "after_prose_words": 455
+    }
+  ],
+  "current_tutorial_sha256": {
+    "Vectors_Act1_WhatAVectorIs": "d2d802c5b37c624fbea93366b6c1883904c1ed443b16276efd6165bb8bb952d0",
+    "VFM_05_Launch": "052a99d332de9b5fdb33d6ee9e0ec52571ce2878a41ba2cb2bbf73434c0e3cd9",
+    "VFM_03_Motion": "84a1ff572febe756d796c9e3605d3a3cddef22a4f49ac5f7b1d276ea35af67a2",
+    "Vectors_Act3_FieldsAndMotion": "93bffa25476926c2edcf1d88a8968ab6b61169c69e9263b19c85135badbda6e7",
+    "Vectors_Act4a_KineticForces": "63bd0a902c1a4b99b4bee668b8971a7f46d02786201e87a4034948eff7d43a01",
+    "Vectors_Act4b_Oscillation": "951054f21c06353ce2aa54659296a3323ae15a7a9b5ada54609e8f4f6ac10a8d",
+    "Change_Choreography": "49ff77269a053374ef92459ff0d4806499ae53f2c1cac2e90a4c88cc9492d4db",
+    "VFM_07_Gravity": "0b1a1b4af3fe8ab2dbcedb6d588c0fe90a7f3a5b960a84df2478cca73c303890",
+    "VFM_09_Legs": "c1993e3bdb7f18e090d5301139f2b55183f6325ef2cf64f68312ba1d075ea7bc",
+    "VFM_08_Arena": "bc576a19fb47803bb6a2e1d0c39ffed203b0de6f858a09d329df4e6d83286270",
+    "Vectors_Act5_ForceAsPlace": "720f53f97789ebf013f7b72902aa383b7da212138e61e62ea6ee243f5cc8ba99"
+  },
+  "publication_links_checked": 198,
+  "broken_links": [],
+  "shared_code_blocks_equal": 3
+}

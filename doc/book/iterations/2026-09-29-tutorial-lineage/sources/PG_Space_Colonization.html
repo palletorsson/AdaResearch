@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PG_Space_Colonization · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=PG_Space_Colonization">← Tutorial lineage</a></p><h1>PG Space Colonization</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="PG_Space_Colonization/final.md">Raw captured source</a></p><pre># Which points get a say?
+
+&lt;!-- @space_colonization_algorithm --&gt;
+
+Three pink points wait above a small root. Two sit apart at the same height; the third is higher, between them. Before pressing anything, follow a line from the root towards each point. Which way would you go if all three asked at once?
+
+Thin threads run from the root to each point: those are the requests. The short gold stubs at the root are their unit directions, one metre each; the white segment proposes the half-metre step. Press STEP and watch a pale branch take its place. The root has moved nowhere. It has acquired a child, half a metre above it. Neither side point has been reached. Something useful happened between their demands.
+
+In the last room, an evaluator compared whole bodies with a target number. Here the target has become a distribution of positions. We call them attraction points. They do not exert a simulated force, and they are not light sensors. They are coordinates that a rule consults while adding segments.
+
+Start with one request. Subtract the site&#x27;s position from the point&#x27;s position. This gives a vector pointing from here to there. We have met that subtraction before. Now normalize it: keep its direction, give it length one. A distant point will not get a longer vote merely because it is farther away.
+
+These are the lines in the running program:
+
+```gdscript
+var direction = (attr_point - closest_node.position).normalized()
+closest_node.growth_direction += direction
+```
+
+The opening root receives three unit directions. The leftward and rightward components cancel; the upward components add. The program normalizes their sum and takes a fixed step:
+
+```gdscript
+var growth_dir = node.growth_direction.normalized()
+var new_position = node.position + growth_dir * segment_length
+```
+
+Here `segment_length` is 0.5. The two side requests are at (-2, 3, 0) and (2, 3, 0); the upper request is at (0, 5, 0), measured from the model&#x27;s root. The first new position is therefore (0, 0.5, 0). The geometry you predicted is the geometry the code builds. The gold construction now shows a decision for the next generation, not a replay of the previous one.
+
+![The root, three pink points, three gold unit directions and the white half-metre step of the opening decision](/book-review/doc/book/figures/proceduralgeneration/first-step-three-requests.png)
+
+*The opening decision, drawn from the study’s own numbers. Unit directions (−0.55, 0.83), (0.55, 0.83) and (0, 1) sum to (0, 2.66); normalised and scaled by half a metre, the first child sits at (0, 0.5).*
+
+Press FIELD once. Eight known points replace the three, and growth starts again. Their arrangement is uneven. Press STEP several times and follow the strand. Some points pull it sideways; others remain behind. You can keep advancing, one generation at a time. A reached point becomes small and dark. It leaves the active calculation but stays visible, so the encounter does not erase every trace of what mattered.
+
+There is a restriction easy to miss under the name Space Colonization, the tree model of Runions, Lane and Prusinkiewicz, from which this study takes its attraction points and its kill distance.[^runions] Under TIPS, a growing end can produce one successor. That successor replaces it in the eligible set. From this single root, the rule makes a strand. A sufficiently crooked strand may suggest a tree in silhouette, but it has not made a fork.
+
+Press HOLD when you have a specimen worth comparing. It appears on the side plinth at 0.45 times the display scale; its proportions and parent relations are kept. This is a small witness, not evidence that the algorithm shrank its body. Now press POLICY. The same eight points and the same root return at generation zero, with NETWORK on the readout. Press STEP again.
+
+Watch for a site that has already produced a child and later produces another. The new policy lets earlier sites remain eligible to receive requests. Each active point chooses its nearest eligible site within eight metres. Requests assigned to one site are still summed; each site can add at most one child per generation. A fork becomes possible across generations because an earlier site can act again. Changing who may respond changes what this construction can become.
+
+The held strand remains beside the growing tree. Compare a local fork before comparing their overall outlines. NETWORK is the control&#x27;s name; this implementation still attaches each new node to one parent. It builds a rooted tree, without joining existing branches into loops. Another topology will require another operation.
+
+FIELD once more opens a canopy of 96 fixed points. Its asymmetry is authored through sine offsets, using a tool we already know. It is not fresh randomness at each step. The field helps make the form; calling the result organic does not remove that authorship. A perfectly balanced field can cancel sideways directions and leave a stem. More points alone do not promise more branches.
+
+Some requests may remain when growth stops. RULE names the operations and the budgets: this study permits at most 192 nodes and 60 generations. A limit reached by the computer is not a tree&#x27;s natural maturity. RESET restores the three-point opening and TIPS, while keeping the held witness. You can return without pretending that nothing has happened.
+
+Walk around the specimen and onto the rear deck by its side ramp. The museum supports your body. The drawn branches do not have collision surfaces. A connected parent record, a visible shape and a place you can inhabit are three relations we must learn to build together.
+
+We have changed eligibility while keeping the points. In Branching Growth, next, we will change what a site listens to: one nearest invitation, rather than the sum of several. Before admiring another tree, find that smaller difference.
+
+&lt;!-- @ --&gt;
+
+[^runions]: Adam Runions, Brendan Lane and Przemyslaw Prusinkiewicz, “Modeling Trees with a Space Colonization Algorithm”, *Eurographics Workshop on Natural Phenomena* (2007). Attraction points, an influence distance and a kill distance are theirs; the single-successor rule under TIPS is this study’s restriction.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="PG_Space_Colonization/tutorial.md">Raw captured source</a></p><pre># Teach one decision, then change eligibility
+
+1. Begin at the compact console in PG_Space_Colonization. Read the three pink positions from the root. Predict the first half-metre segment before pressing STEP. Side components cancel and upward components add.
+2. Explain subtraction, normalization, unit-direction accumulation and normalization of the sum using the actual SpaceColonizationAlgorithm.gd lines in final.md. Gold previews the next decision; it is not a reconstruction of the last one.
+3. FIELD opens the fixed eight-point array and restarts growth. STEP repeatedly under TIPS. Follow the active end and small/dark reached witnesses. One successor per replaced leaf makes a strand from this root.
+4. HOLD a specimen, then POLICY to restart the same field under NETWORK. Step until an earlier site has two children. Compare an actual fork with the held strand at its labelled .45 display scale. Each site still makes at most one child per generation; the new permission is to answer again later.
+5. FIELD opens the 96-point asymmetric canopy. The same rule operates at a larger scale; sine offsets are authored input. Remaining requests and stop reasons matter. Do not equate a budget with completion. RULE exposes the decision; RESET restores the opening and keeps the witness.
+6. Walk the side ramp onto the retained rear deck and take the eastern route to the exit. Distinguish parent connectivity, visible segments and the collision that carries the visitor.
+
+Continue directly to PG_Branching_Growth: compare a nearest-target decision with the accumulated direction just learned. Keep its existing organic_space comparison available. This first traverse does not impose a one-artifact quota on later rooms.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="PG_Space_Colonization/technical.md">Raw captured source</a></p><pre># Space Colonization — assignment, eligibility and support
+
+The existing space_colonization_algorithm is the sole primary. The opt-in museum token is `space_colonization_algorithm:180#lesson:true`. colonization_museum.gd installs colonization_lesson.gd and hides/disables the old UI and its collision shapes. Ordinary placements keep the existing programmatic 3D UI and the original TIPS policy. The old Control attachment was replaced with Node3D to match SpaceColonizationUI.gd; the UI script itself is unchanged.
+
+## Reusable kernel and explicit policy
+
+SpaceColonizationAlgorithm.gd retains the original grow_iteration body as _grow_tips_iteration. Each attraction point chooses its nearest eligible leaf strictly inside influence_distance. A point at or inside kill_distance is removed from the active list. Other assigned points contribute unit directions. Each influenced leaf adds one successor in the normalized sum direction and is replaced by that successor. With one root this cannot fork. The legacy kernel can produce a zero-length successor when opposing requests cancel completely; it is preserved for comparison rather than represented as a universal growth model.
+
+The new decision_snapshot exposes eligible sites, target assignments, accumulated directions and reached indices without advancing the state. Under NETWORK, all earlier nodes remain eligible. _grow_network_iteration reads one unchanged generation, removes reached points, then adds at most one child per eligible site. Zero sums and already occupied proposed positions are skipped. Every child has one parent; no joining operation creates cycles. Older sites can produce another child on a later generation, so forks become possible. The name NETWORK does not certify a looped network.
+
+The wrapper grow_iteration reports a budget or a no-growth reason. Ordinary placements have node_budget 0 (no additional node cap) and retain the original iteration setting. The museum study uses node_budget 192, max_iterations 60, segment_length .5 m, influence_distance 8 m and kill_distance .32 m. One-root TIPS advances one node per step; NETWORK enforces the node cap during additions. Parent/child reference cycles are broken when discarded and on exit.
+
+## Fixed fields and controls
+
+The three fields contain 3, 8 and 96 deterministic positions. The opening positions are (-2,3,0), (2,3,0), (0,5,0); with root zero the first step is (0,.5,0). The second field is an explicit asymmetric eight-point array. The third uses four heights, three rings and eight points per ring, with declared sine offsets to break rotational balance. No shared random seed is changed by the lesson.
+
+STEP performs one generation. FIELD cycles fields and restarts the origin while preserving the policy. POLICY toggles TIPS/NETWORK and restarts the same field. HOLD copies node positions, parent indices and depths into a separate witness, displayed at .45 scale and retained across resets. A later HOLD replaces it. RESET restores field zero and TIPS, leaving the witness. RULE toggles the explanation card. The six physical controls share one compact 3×2 console and a small inclined translucent readout.
+
+Rendering shows the actual node/parent record as constant-width cyan segments, so branch thickness is a display choice here. Unreached points are pink; reached points remain small/dark. One eligible site&#x27;s assignments are shown at a time to keep the canopy legible. Gold unit-direction lines, fine pink target connections and the white normalized half-metre resultant preview the next decision. This is a preview, not a stored historical explanation. The original model is hidden; its cylinder builder is reused. Generated branches and points have no colliders.
+
+## Floor ownership
+
+The earlier 8×14 structure remains at offset (4,18) in a 19×36 surround. Its four numeric height-3 cells are two-metre decks under wall_height 4. All 43 raw zeros remain zeros: 42 former specimen-void cells plus one old teleporter hole. Explicit map_info.museum.floor_cells supply museum support because the relocated specimen supplies none. This decision does not redefine zeros in other halls.
+
+A closed convex ramp rises two metres over x=1..4, z=23..25. The eastern aisle and rear rows provide an independent exit. Source placement is explicit, and both portable plans carry the same hall. Prior files and historical grid are archived in doc/space/space-colonization-2026-09-14.
+
+Desktop verification must exercise the pointer controls, half-metre prediction, actual fork records, independent canopy calculation, witness retention, budgets, all covers/decks, ramp and museum exit. Headset reach/readability/comfort, audio and Quest performance remain pending. The next hall is PG_Branching_Growth.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="PG_Space_Colonization/intent.md">Raw captured source</a></p><pre># From criterion to distributed requests
+
+Sequence role: second hall, after PG_Genetic_Evolution and before PG_Branching_Growth. Reuse vectors, arrays, sine and parent records. Add nearest-site assignment, accumulated directions and eligibility across generations. Primary: space_colonization_algorithm; the book follows its actual six-button lesson. Preserve the legacy tip-only rule as a comparison, and the original map structure inside a supported museum surround.
+
+Test what permission to respond again makes possible. Name what remains authored: points, radius, unit weighting, origin, step, schedule, budget and parent topology. The next comparison changes which target a site consults. Headset validation is deferred until hardware is available.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="PG_Space_Colonization/critical.md">Raw captured source</a></p><pre># Permission to respond again
+
+The first step makes a useful agreement visible: several directions can add to a direction none of the points individually requested. Normalize before summing and distance does not buy a larger vote. Yet distance still decides eligibility and nearest assignment. Calling all votes equal would conceal those other choices.
+
+POLICY changes one part of that agreement. An earlier growth site can respond again. A strand can become a branching tree without adding a new primitive or changing the eight requests. This is a specific formal consequence of eligibility, not proof that more branching is more free or that a named network has escaped hierarchy. Each new node still has one parent. The roots, field, step length, influence boundary and representation remain authored.
+
+The word colonization also belongs to the program&#x27;s history. Here it names consuming target coordinates; it does not turn a history of conquest into a neutral account of how bodies ought to grow. We can inspect who sets the requests, which sites can answer and what counts as having satisfied one. We should not let the botanical image settle those questions for us.
+
+A reached point leaves the active array. Keeping a dark witness makes that removal legible. A held strand survives a change of policy and refuses a simple ranking by complexity: perhaps its empty space or economy is what we wanted. The new construction need not invalidate the earlier desire.
+
+The larger canopy borrows sine to break symmetry. Its supposedly natural form therefore has a visible ancestry in earlier rooms. A balanced cloud can cancel sideways directions. No amount of ornamental complexity guarantees another structural possibility. The kernel still needs an operation that joins existing sites before it can produce loops.
+
+Budget stops locate another boundary. The study&#x27;s 192 nodes and 60 generations protect a finite computation; neither number establishes biological maturity or an entropy threshold. When targets remain, name the remainder. When the body approaches the tree, name the missing collision. The museum&#x27;s floor carries the visitor through a form the algorithm has only drawn. The research can begin again at that difference.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="PG_Space_Colonization/artifacts.md">Raw captured source</a></p><pre># PG Space Colonization — Artifacts
+
+## space_colonization_algorithm — primary
+
+The existing scene now offers a museum lesson through `space_colonization_algorithm:180#lesson:true`: one root, fixed attraction fields, manual steps and an explicit eligibility comparison. TIPS retains the old single-strand behavior; NETWORK allows older sites to produce later children. HOLD preserves geometry at a labelled .45 display scale. The ordinary artifact keeps its original UI and default tip policy. See final.md for the anchored book passage and technical.md for the precise contract.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="PG_Space_Colonization/summary.md">Raw captured source</a></p><pre># Space Colonization — guide, then branch
+
+Second of seven procedural-generation halls, following Genetic Evolution and leading directly to Branching Growth. The existing space_colonization_algorithm becomes an opt-in, manually stepped encounter with three deterministic fields. Predict a vector sum; compare TIPS with NETWORK over identical points; retain a witness; inspect reached targets and explicit limits. The structure remains a rooted tree. Museum floor covers, the inherited two-metre deck and a closed ramp support the body independently of the drawn growth.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="PG_Space_Colonization/blurb.md">Raw captured source</a></p><pre># Which points get a say?
+
+Three requests make one direction. Grow a strand, hold it, then let earlier sites respond again. A fork appears through a change of permission. What still cannot be made by this rule?
+</pre></section></body></html>

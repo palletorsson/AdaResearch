@@ -1,0 +1,51 @@
+
+	report["checks"]=[]
+	var study: Node3D=nodes.get("room_shape_demonstrator")
+	if study==null:
+		push_error("Missing furniture study")
+		quit(1)
+		return
+	check(report,study.scale.is_equal_approx(Vector3.ONE),"Full-size model pedestals retained")
+	check(report,study.plan=="head" and study.palette=="neutral" and study.interactive,"Hall starts with one neutral plan")
+	var console: Node=study._console
+	var marker:=Node3D.new()
+	marker.name="ExternalLabelMarker"
+	study.add_child(marker)
+	var counts: Dictionary={"head":7,"circle":6,"pair":13,"panopticon":16,"vacant":0}
+	var parts: Dictionary={}
+	for value in ["head","circle","pair","panopticon","vacant"]:
+		press_plan(study,value)
+		await process_frame
+		check(report,study.plan==value,"Button selects "+value)
+		check(report,chairs(study).size()==counts[value],"Seat count agrees with "+value)
+		check(report,study._console==console and is_instance_valid(marker),"Rebuild preserves control panel and external children: "+value)
+		check(report,chairs(study).is_empty() or shades(study)==[study.NEUTRAL_CHAIR],"Neutral palette retained in "+value)
+		parts[value]=study._parts.size()
+	press_plan(study,"pair")
+	await process_frame
+	var neutral_poses: Array=poses(study)
+	press_palette(study,"authored")
+	await process_frame
+	check(report,poses(study)==neutral_poses,"Colour comparison leaves every chair transform unchanged")
+	check(report,shades(study).size()==3,"Authored pair restores red, tan and green")
+	press_palette(study,"neutral")
+	await process_frame
+	check(report,poses(study)==neutral_poses and shades(study).size()==1,"Neutral returns without changing geometry")
+	check(report,study._parts.size()==parts.pair,"Rebuild does not accumulate model parts")
+	check(report,study.find_children("*","StaticBody3D",true,false).size()>=2,"Pedestals have actual collision")
+	for i in range(7):
+		var btn: Node3D=study._panel.find_child("Btn_%d" % i,true,false)
+		check(report,btn.global_position.distance_to(origin+Vector3(6.5,1.3,3.8))<.85,"Button %d is within selected 0.85m reach" % i)
+	var original=load("res://algorithms/postfoundationscrisis/room_shape_demonstrator.tscn").instantiate()
+	original.position=Vector3(1000,10,0)
+	root.add_child(original)
+	check(report,original.plan=="pair" and original.palette=="authored" and not original.interactive and chairs(original).size()==13,"Unconfigured placements retain the legacy pair")
+	original.queue_free()
+	marker.queue_free()
+	# Walk with the broadest furnished pair present.
+	var gate: Dictionary=museum.get("_gate")
+	if not gate.is_empty():
+		gate.scanner.palm_scanned.emit()
+		museum.get("_mod_gate").call("step_open",gate,10.0)
+		await physics_frame
+	check(report,gate.is_empty() or float(museum.get("_gate_t"))>=0.0,"Arrival gate grants before walking")

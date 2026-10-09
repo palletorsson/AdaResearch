@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "lab and mounted apparatus remain",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lab-sign",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: lab-annotation",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: history-and-rear-gallery",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "lab_labels": [
+      {
+        "name": "SignageTop",
+        "text": "TURING MACHINE LAB"
+      },
+      {
+        "name": "SignageSub",
+        "text": "Rule 110 → universal computation"
+      },
+      {
+        "name": "AnnotationEast",
+        "text": "M = (Q, Σ, Γ, δ, q0, F) — Game of Life is Turing complete"
+      },
+      {
+        "name": "AnnotationWest",
+        "text": "belt = Γ*, panel = q, server rack = δ, button = HALT"
+      }
+    ]
+  },
+  "passed": true,
+  "room": "CA_GameOfLife",
+  "scope": "Current isolated museum, supplied control signals and cameras; no headset or performance acceptance."
+}

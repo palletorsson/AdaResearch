@@ -1,0 +1,362 @@
+{
+  "checks": 50,
+  "control_path": "button_pressed emitted programmatically on the panel's push buttons; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "hand_file": "ada_run/necklace_hand.json (real)",
+  "headset_verified": false,
+  "map": "WaveFunctions_Pendulum",
+  "measurements": {
+    "bob_rest_height": 1.30644536018372,
+    "built_bodies": [
+      [
+        "lobby:window",
+        [
+          7.5,
+          1.7,
+          -3.5
+        ],
+        []
+      ],
+      [
+        "lobby:view",
+        [
+          7.5,
+          1.7,
+          -2.0
+        ],
+        []
+      ],
+      [
+        "lobby:counter",
+        [
+          11.0,
+          1.6,
+          -2.94
+        ],
+        []
+      ],
+      [
+        "lobby:extinguisher",
+        [
+          1.14,
+          0.0,
+          -1.4
+        ],
+        []
+      ],
+      [
+        "lobby:elevator",
+        [
+          15.94,
+          0.0,
+          -1.8
+        ],
+        []
+      ],
+      [
+        "lobby:pallet",
+        [
+          15.1,
+          0.0,
+          -1.8
+        ],
+        []
+      ],
+      [
+        "lobby:point_zero",
+        [
+          0.0,
+          0.0,
+          -4.0
+        ],
+        []
+      ],
+      [
+        "WavePaintings",
+        [
+          2.5,
+          1.0,
+          1.5
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      [
+        "foucault_pendulum",
+        [
+          10.5,
+          0.0,
+          3.5
+        ],
+        [
+          10,
+          3
+        ]
+      ],
+      [
+        "BigPipeSystem",
+        [
+          7.5,
+          1.0,
+          5.5
+        ],
+        [
+          7,
+          5
+        ]
+      ],
+      [
+        "dark_sphere",
+        [
+          9.5,
+          0.0,
+          5.5
+        ],
+        [
+          9,
+          5
+        ]
+      ],
+      [
+        "lab_table",
+        [
+          9.5,
+          0.0,
+          9.5
+        ],
+        [
+          9,
+          9
+        ]
+      ],
+      [
+        "PendulumWave",
+        [
+          6.5,
+          0.0,
+          11.5
+        ],
+        [
+          6,
+          11
+        ]
+      ],
+      [
+        "GlassRack",
+        [
+          10.5,
+          0.6,
+          12.5
+        ],
+        [
+          10,
+          12
+        ]
+      ],
+      [
+        "seismograph",
+        [
+          2.5,
+          0.0,
+          13.5
+        ],
+        [
+          2,
+          13
+        ]
+      ],
+      [
+        "VRAudioMonitor",
+        [
+          11.5,
+          0.0,
+          16.5
+        ],
+        [
+          11,
+          16
+        ]
+      ],
+      [
+        "draw_dot_time_domain",
+        [
+          4.5,
+          0.0,
+          17.5
+        ],
+        [
+          4,
+          17
+        ]
+      ],
+      [
+        "gate:wavefunctions pendulum",
+        [
+          6.5,
+          0.0,
+          0.5
+        ],
+        []
+      ]
+    ],
+    "built_cells": [
+      "pp.########################",
+      "................p##########",
+      "##..............p##########",
+      "##............#############",
+      "######...##################",
+      "##ssss...ssss##############",
+      "##.......ssss##############",
+      "##.......ssss##############",
+      "##.......ssss##############",
+      "##..#..#ss#ss##############",
+      "##..#.....#..##############",
+      "##..#.....#..##############",
+      "##.##.....#..##############",
+      "##..#######s.##############",
+      "##...........##############",
+      "##...sssss...##############",
+      "##ssssssss.s.##############",
+      "##ssssssss...##############",
+      "##sss........##############",
+      "##.sss.......##############",
+      "##.sss......s##############",
+      "##.sss.......##############",
+      "##......#....##############",
+      "###.........###############",
+      "######...##################",
+      "######...##################",
+      "#######..##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######...##################",
+      "######..###################",
+      "######...##################"
+    ],
+    "built_refused": [],
+    "built_seals": {
+      "1,1": "WavePaintings",
+      "1,12": "seismograph",
+      "1,13": "seismograph",
+      "1,14": "seismograph",
+      "10,1": "foucault_pendulum",
+      "10,12": "GlassRack",
+      "10,2": "foucault_pendulum",
+      "10,3": "foucault_pendulum",
+      "10,4": "foucault_pendulum",
+      "10,5": "foucault_pendulum",
+      "10,9": "lab_table",
+      "11,1": "foucault_pendulum",
+      "11,16": "VRAudioMonitor",
+      "11,2": "foucault_pendulum",
+      "11,3": "foucault_pendulum",
+      "11,4": "foucault_pendulum",
+      "11,5": "foucault_pendulum",
+      "2,1": "WavePaintings",
+      "2,12": "seismograph",
+      "2,13": "seismograph",
+      "2,14": "seismograph",
+      "2,15": "draw_dot_time_domain",
+      "2,16": "draw_dot_time_domain",
+      "2,17": "draw_dot_time_domain",
+      "3,1": "WavePaintings",
+      "3,12": "seismograph",
+      "3,13": "seismograph",
+      "3,14": "seismograph",
+      "3,15": "draw_dot_time_domain",
+      "3,16": "draw_dot_time_domain",
+      "3,17": "draw_dot_time_domain",
+      "4,1": "WavePaintings",
+      "4,11": "PendulumWave",
+      "4,12": "PendulumWave",
+      "4,13": "PendulumWave",
+      "4,15": "draw_dot_time_domain",
+      "4,16": "draw_dot_time_domain",
+      "4,17": "draw_dot_time_domain",
+      "5,11": "PendulumWave",
+      "5,12": "PendulumWave",
+      "5,13": "PendulumWave",
+      "6,11": "PendulumWave",
+      "6,12": "PendulumWave",
+      "6,13": "PendulumWave",
+      "7,11": "PendulumWave",
+      "7,12": "PendulumWave",
+      "7,13": "PendulumWave",
+      "7,5": "BigPipeSystem",
+      "8,1": "foucault_pendulum",
+      "8,11": "PendulumWave",
+      "8,12": "PendulumWave",
+      "8,13": "PendulumWave",
+      "8,2": "foucault_pendulum",
+      "8,3": "foucault_pendulum",
+      "8,4": "foucault_pendulum",
+      "8,5": "foucault_pendulum",
+      "9,1": "foucault_pendulum",
+      "9,2": "foucault_pendulum",
+      "9,3": "foucault_pendulum",
+      "9,4": "foucault_pendulum"
+    },
+    "built_severed": [],
+    "coarse_after_10.5s": {
+      "count": 50,
+      "kept": 9.88333320617693,
+      "oldest_depth": 5.92999992370616
+    },
+    "fine_actual_gaps_ms": [
+      16.6666507720947,
+      33.333420753479
+    ],
+    "fine_after_3s": {
+      "count": 119,
+      "kept": 2.96666666492819,
+      "t": 2.99999999999999
+    },
+    "fine_after_9s": {
+      "count": 300,
+      "kept": 7.48333334922793,
+      "oldest_depth": 4.49000000953676
+    },
+    "fine_x_spread": 2.82849836349487,
+    "lane_other_colliders": [],
+    "museum_severed": [],
+    "museum_severed_tokens": [],
+    "newest_local": [
+      5.13158893585205,
+      1.44142162799835,
+      11.5100002288818
+    ],
+    "oldest_local": [
+      7.90846872329712,
+      1.48006439208984,
+      15.9899997711182
+    ],
+    "origin_local": [
+      6.5,
+      0.0,
+      15.5
+    ],
+    "panel_height": 1.18499994277954,
+    "period_measured": 2.95,
+    "readout_fine": "t 9.0 s · 300 marks kept 7.5 s\ntarget 25 ms · 0.6 m per s\nactual gaps 16.7–33.3 ms\nperiod 2.95 s measured · step 16.7 ms",
+    "readout_height": 1.45000004768372,
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "strobe": {
+      "count": 3,
+      "interval": 2.94999999999983,
+      "x_spread": 0.0259575843811035
+    },
+    "walk_east_walkway": 1.0,
+    "walk_to_the_south_door": 1.0,
+    "walk_west_walkway": 1.0
+  },
+  "physics_fps": 60
+}

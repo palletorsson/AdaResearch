@@ -1,0 +1,338 @@
+{
+	"checks": [
+		{
+			"actual": [
+				"Kick",
+				"Snare",
+				"HiHat",
+				"Bass"
+			],
+			"passed": false,
+			"tag": "placed_house_instruments"
+		},
+		{
+			"passed": true,
+			"path": "res://doc/book/iterations/2026-09-19-arrays-review/disco/before-house-panel.png",
+			"scope": "Direct capture of the actual packed scene's 800 x 300 screen, identical preset and cell; no museum or headset view.",
+			"size": [
+				800,
+				300
+			],
+			"tag": "actual_ui_capture"
+		},
+		{
+			"passed": false,
+			"presets": [
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Dark 808 Kick",
+						"TR-909 Kick",
+						"Acid 606 Hi-Hat",
+						"Dark 808 Sub Bass"
+					],
+					"preset": "808_kit"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Dark 808 Kick",
+						"Explosion",
+						"Acid 606 Hi-Hat",
+						"Shield Hit"
+					],
+					"preset": "trap_beats"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"TB-303 Acid Bass",
+						"Moog Bass Lead",
+						"DX7 Electric Piano",
+						"PPG Wave Pad"
+					],
+					"preset": "synth_kit"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Melodic Drone",
+						"Ghost Drone",
+						"Ambient Wind",
+						"Teleport Drone"
+					],
+					"preset": "tech_noir"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"C64 SID Lead",
+						"Amiga MOD Sample",
+						"Retro Jump",
+						"Mario Pickup"
+					],
+					"preset": "retro"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"TR-909 Kick",
+						"Korg M1 Piano",
+						"Acid 606 Hi-Hat",
+						"TB-303 Acid Bass"
+					],
+					"preset": "90s_house"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Track 1",
+						"Jupiter-8 Strings",
+						"PPG Wave Pad",
+						"Cinematic 432Hz Pad"
+					],
+					"preset": "juno_pads"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Moog Kraftwerk Sequencer",
+						"TR-909 Kick",
+						"Acid 606 Hi-Hat",
+						"Moog Bass Lead"
+					],
+					"preset": "kraftwerk"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"TR-909 Kick",
+						"Synare 3 Disco Tom",
+						"Acid 606 Hi-Hat",
+						"Track 4"
+					],
+					"preset": "disco"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Aphex Twin Modular",
+						"PPG Wave Pad",
+						"Ghost Drone",
+						"Melodic Drone"
+					],
+					"preset": "ambient_works"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Herbie Hancock Moog Fusion",
+						"DX7 Electric Piano",
+						"Track 3",
+						"TR-909 Kick"
+					],
+					"preset": "jazz_fusion"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"C64 SID Lead",
+						"Amiga MOD Sample",
+						"Retro Jump",
+						"Mario Pickup"
+					],
+					"preset": "chiptune"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Sci-Fi Lab Hum (Clean)",
+						"Sci-Fi Data Chirps",
+						"Sci-Fi Electromagnetic",
+						"Sci-Fi Ventilation"
+					],
+					"preset": "sci_fi_lab"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"CS-80 Brass Lead",
+						"Cinematic 432Hz Pad",
+						"Jupiter-8 Strings",
+						"Melodic Drone"
+					],
+					"preset": "cinematic"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Dark 808 Kick",
+						"TR-909 Kick",
+						"Acid 606 Hi-Hat",
+						"Flying Lotus Sampler"
+					],
+					"preset": "breakbeat"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"Synare 3 Cosmic FX",
+						"ARP 2600 Lead",
+						"Teleport Drone",
+						"PPG Wave Pad"
+					],
+					"preset": "cosmic"
+				},
+				{
+					"actual": [
+						"Kick",
+						"Snare",
+						"HiHat",
+						"Bass"
+					],
+					"expected": [
+						"DX7 Electric Piano",
+						"Dark 808 Kick",
+						"Ambient Wind",
+						"Track 4"
+					],
+					"preset": "lo_fi"
+				}
+			],
+			"tag": "all_17_model_presets_match_resolved_sounds"
+		},
+		{
+			"events": [],
+			"passed": true,
+			"tag": "model_refresh_emits_no_selection_feedback"
+		},
+		{
+			"actual": [
+				"Kick",
+				"Snare",
+				"HiHat",
+				"Bass"
+			],
+			"events": [
+				"90s_house"
+			],
+			"passed": false,
+			"tag": "visitor_selector_updates_model_and_track_names"
+		},
+		{
+			"actual": [
+				"Kick",
+				"Snare",
+				"HiHat",
+				"Bass"
+			],
+			"passed": false,
+			"tag": "unknown_preset_labels_actual_fallback_kit"
+		},
+		{
+			"actual": [
+				"Kick",
+				"Snare",
+				"HiHat",
+				"Bass"
+			],
+			"passed": false,
+			"sound": "POP_FUNK_BASS exists in SoundType but lacks a catalog display name.",
+			"tag": "uncatalogued_sound_uses_neutral_track_number"
+		},
+		{
+			"passed": false,
+			"tag": "preset_switch_does_not_audition_sounds"
+		},
+		{
+			"passed": true,
+			"tag": "preset_switch_preserves_cell_and_address"
+		},
+		{
+			"passed": true,
+			"tag": "labelled_piano_still_generates_playback_stream"
+		}
+	],
+	"passed": false,
+	"scope": "Actual packed sequencer scene, resolved instrument types, UI signals, unchanged grid and audio stream generation. Scripted, no pointer, listening or headset claim."
+}

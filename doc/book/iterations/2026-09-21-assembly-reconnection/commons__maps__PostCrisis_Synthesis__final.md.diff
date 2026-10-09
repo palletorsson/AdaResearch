@@ -1,0 +1,40 @@
+--- before/commons/maps/PostCrisis_Synthesis/final.md
++++ current/commons/maps/PostCrisis_Synthesis/final.md
+@@ -8,7 +8,7 @@
+ 
+ If you came straight here, the amber space will be empty. There is a place for a record, but no pose has yet been kept. That emptiness belongs to the work too.
+ 
+-The two bodies need not be dramatically different. Perhaps you moved one hand and decided that was enough. Perhaps you made the figure almost unrecognisable. Each still has thirteen joints and twelve connections. The totals agree. The bodies may no longer seem to.
++The two bodies need not be dramatically different. Perhaps you moved one hand and decided that was enough. Perhaps you made the figure almost unrecognisable. Perhaps you left the joints where they were and took a connection elsewhere. Each still has thirteen joints and twelve connections. The totals agree. The bodies may no longer seem to.
+ 
+ At the beginning of the museum, a counter was already running before we could read it. We could follow its increase without knowing everything that had happened. Here a count of released edits tells us that someone did something. Looking from one body to the other lets us ask what changed. Neither tells us why.
+ 
+@@ -18,7 +18,7 @@
+ 
+ <!-- @accountability_ledger -->
+ 
+-Come close enough to read the ledger. It names the Assembly Laboratory, gives the time of the last kept change, counts the joints displaced from their starting places, and reports that the twelve connections remain. Its account comes from the same record as the amber body. Waiting in front of it does not add another achievement.
++Come close enough to read the ledger. It names the Assembly Laboratory, gives the time of the last kept change, counts the joints displaced from their starting places, and distinguishes twelve connections from twelve unchanged connections. Its account comes from the same record as the amber body. Waiting in front of it does not add another achievement.
+ 
+ After a changed joint is released, the program writes its record:
+ 
+@@ -26,7 +26,7 @@
+ file.store_string(JSON.stringify(record,"\t"))
+ ```
+ 
+-The line is short because the choice of what to remember has already been made. The record contains the starting and released coordinates, the named joints and their connections. Those are enough to reconstruct this pair. They are not enough to reconstruct the encounter between your body and the figure.
++The line is short because the choice of what to remember has already been made. The record contains the starting and released coordinates, the named joints, and both arrangements of their connections. Those are enough to reconstruct this pair. They are not enough to reconstruct the encounter between your body and the figure.
+ 
+ Earlier, drawing a trace meant choosing which positions of the hand could be retained. Here we have chosen less: a destination after release. The missing path saves work and storage. It also closes a question. From this record alone, we cannot ask whether the hand moved carefully, reluctantly or with delight. Increasing the precision of its final coordinates would not recover the movement.
+ 
+@@ -36,7 +36,9 @@
+ 
+ For now, the ledger holds one latest pose. Another released change replaces it. It is labelled as the last kept pose; it does not identify who made it. Before calling a record ours, we have to ask what connects it to us.
+ 
+-There is another absence you can see without opening the file. The amber body can have a longer arm, but it still has the same connections as the blue one. The previous room allowed you to revise positions. It did not yet allow another hand to grow. The record preserves that permission and that limit together.
++Look along the connections too. If you took the turquoise collar to the head, the amber body's hand can be in exactly the same place as the blue body's hand, yet no line reaches it. A turquoise line elsewhere shows where the relation went. The record had to keep more than coordinates to let this difference return.
++
++The previous room opened one connection to revision. It kept the thirteen joints. There is still no place in this record for the extra part you may have wanted to take from the neighbouring catalogue. What the workshop permits and what the record can remember have grown together. They can grow again.
+ 
+ Or remember a form you wanted to enter. A branch with no passage through it, a body you could see but could not inhabit. The question need not begin with a fault. Desire can also locate the next piece of work. What would have to change for that encounter to become possible?
+ 

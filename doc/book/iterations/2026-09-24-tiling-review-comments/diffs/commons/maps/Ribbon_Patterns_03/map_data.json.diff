@@ -1,0 +1,11 @@
+--- before/commons/maps/Ribbon_Patterns_03/map_data.json
++++ commons/maps/Ribbon_Patterns_03/map_data.json
+@@ -4786,7 +4786,7 @@
+         "",
+         "",
+         "",
+-        "laser_turret#pin:1#plinth:0",
++        "laser_turret#target_player:false#pin:1#plinth:0",
+         "",
+         "",
+         "",

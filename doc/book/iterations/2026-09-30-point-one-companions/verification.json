@@ -1,0 +1,138 @@
+{
+  "main_manuscripts_preserved": true,
+  "hall_geometry_and_placements_preserved": true,
+  "canonical_and_portable_point_one_tutorial_match": true,
+  "three_complete_examples_match_executable_scripts": true,
+  "study_archives_and_review_manifest_verified": true,
+  "html_anchors_and_footnotes_resolve": true,
+  "changed_sources": [
+    "commons/maps/Point_Coordinates/artifacts.md",
+    "commons/maps/Point_Coordinates/map_data.json",
+    "commons/maps/Point_Coordinates/technical.md",
+    "commons/maps/Point_Coordinates/tutorial.md",
+    "commons/maps/Point_One/artifacts.md",
+    "commons/maps/Point_One/critical.md",
+    "commons/maps/Point_One/encounter-reference.md",
+    "commons/maps/Point_One/intent.md",
+    "commons/maps/Point_One/map_data.json",
+    "commons/maps/Point_One/technical.md",
+    "commons/maps/Point_One/tutorial.md",
+    "doc/book/PRIMITIVES_LINEAGE.md",
+    "doc/book/STUDENT_TOOLBOX.md",
+    "doc/book/studies/point-coordinates/TUTORIAL.md",
+    "doc/book/studies/point-one/CONSTRUCTION.md",
+    "doc/book/studies/point-one/README.md",
+    "doc/book/studies/point-one/solid.gd",
+    "doc/book/studies/point-one/study.tscn",
+    "doc/book/studies/point-one/TUTORIAL.md",
+    "doc/book/studies/point-one/visible.gd",
+    "commons/maps/Point_One/README.md",
+    "doc/book/studies/point-one/contact_probe.gd"
+  ],
+  "native_report": {
+    "checks": [
+      {
+        "name": "Position alone creates no body",
+        "passed": true
+      },
+      {
+        "name": "Visible station only has a marker",
+        "passed": true
+      },
+      {
+        "name": "Three actual moving bodies supplied",
+        "passed": true
+      },
+      {
+        "name": "Visible and physical radii initially coincide",
+        "passed": true
+      },
+      {
+        "name": "Empty station lets the feeler cross",
+        "passed": true
+      },
+      {
+        "name": "Visible surface lets the feeler cross",
+        "passed": true
+      },
+      {
+        "name": "Solid boundary stops its feeler",
+        "passed": true
+      },
+      {
+        "name": "Actual stop is at the authored boundary plus feeler width",
+        "passed": true
+      },
+      {
+        "name": "Screenshot saved: contact-default.png",
+        "passed": true
+      },
+      {
+        "name": "Pause holds the moving bodies still",
+        "passed": true
+      },
+      {
+        "name": "R resets every contact result and position",
+        "passed": true
+      },
+      {
+        "name": "Space resumes the paused sweep",
+        "passed": true
+      },
+      {
+        "name": "Enlarged boundary stops the feeler earlier",
+        "passed": true
+      },
+      {
+        "name": "Enlarged boundary leaves the visible sphere unchanged",
+        "passed": true
+      },
+      {
+        "name": "Screenshot saved: contact-larger-boundary.png",
+        "passed": true
+      },
+      {
+        "name": "Smaller boundary stops the feeler inside the larger visible surface",
+        "passed": true
+      },
+      {
+        "name": "Screenshot saved: contact-smaller-boundary.png",
+        "passed": true
+      },
+      {
+        "name": "Automatic repeat clears the previous stop",
+        "passed": true
+      },
+      {
+        "name": "Learner edit compiles: height",
+        "passed": true
+      },
+      {
+        "name": "Height edit raises the marker",
+        "passed": true
+      },
+      {
+        "name": "Learner edit compiles: visible radius",
+        "passed": true
+      },
+      {
+        "name": "Radius edit expands only the visible marker",
+        "passed": true
+      },
+      {
+        "name": "Learner edit compiles: collision radius",
+        "passed": true
+      },
+      {
+        "name": "Boundary edit retains the original visible radius",
+        "passed": true
+      }
+    ],
+    "engine": "4.6-stable (official)",
+    "passed": true,
+    "scope": "Native portable study: actual moving-body contact, radius edits, pause/repeat and complete learner scripts. No museum or headset test."
+  },
+  "scope": "Canonical companions, portable Point One helper, packaging. No museum or headset test; portable XR pickup remains separate work.",
+  "http_served_files_match_disk": true,
+  "pre_existing_whitespace_note": "Point_One/final.md has a pre-existing trailing blank line; manuscript bytes were preserved."
+}

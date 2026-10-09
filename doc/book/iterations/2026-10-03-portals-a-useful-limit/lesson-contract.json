@@ -1,0 +1,66 @@
+{
+  "map": "Primitives_Portals",
+  "status": "author_review_pilot",
+  "needs": [
+    "ordered Array[Vector3]",
+    "for traversal of neighbours",
+    "distance between positions",
+    "accumulation with +=",
+    "a function parameter and returned value",
+    "simple comparison"
+  ],
+  "gives": [
+    "closed polygon perimeter including last-to-first edge",
+    "a list-to-number function",
+    "refinement at fixed radius",
+    "absolute tolerance on a stated measurement",
+    "a finite visual guide distinct from a numerical reference"
+  ],
+  "learner_owns": [
+    "polygon_perimeter",
+    "divisions",
+    "radius",
+    "tolerance",
+    "circumference comparison"
+  ],
+  "supplied": [
+    "circle sampler with source",
+    "segment rendering and finite grey reference",
+    "readouts and their threshold comparison",
+    "room, player, camera and lighting"
+  ],
+  "function_contract": {
+    "input": "at least three ordered positions defining a closed path",
+    "output": "sum of successive distances plus closing distance, in local metres",
+    "side_effects": "none"
+  },
+  "sampler_contract": {
+    "input": "3..256 divisions and positive radius",
+    "output": "distinct ordered Vector3 positions in XY, no repeated closing point",
+    "deferred": "sine/cosine derivation; inspection is optional"
+  },
+  "comparison_contract": {
+    "reference": "TAU * radius, a numerical evaluation of circle circumference",
+    "not_measured": [
+      "maximum chord-to-circle distance",
+      "torus surface accuracy",
+      "frame time"
+    ],
+    "within_tolerance": "gap <= tolerance for valid inscribed polygons in the stated range",
+    "scope": "positive absolute tolerance; moderate counts, not a precision-saturation experiment"
+  },
+  "deferred": [
+    "trigonometric derivation",
+    "automatic search for minimum adequate count",
+    "portal teleportation and Transform3D",
+    "torus topology",
+    "floating-point saturation",
+    "Achilles autoplay implementation"
+  ],
+  "museum_relation": "Selected planar comparison beside combine_portals, not a copy of the full hall",
+  "critical_and_live_map_edited": false,
+  "all_lesson_objects_created_in_code": true,
+  "numeric_taxonomy_promoted": false,
+  "coordinates_pilot_still_pending": true,
+  "physical_headset_tested": false
+}

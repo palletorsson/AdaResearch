@@ -1,0 +1,154 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CA_ExpandingSpace · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=CA_ExpandingSpace">← Tutorial lineage</a></p><h1>CA ExpandingSpace</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="CA_ExpandingSpace/final.md">Raw captured source</a></p><pre># The surface includes you
+
+&lt;!-- @decaying_bridge --&gt;
+
+The path looks available. Five tiles across, a longer line ahead. Its colours repeat in panels on a free-standing frieze beside the path. Beneath it lies a shallow basin, already drawn with the addresses of tiles that have not yet disappeared.
+
+Begin at the desk. Press SOURCE once to put the pink probe in your place. The readout shows PROBE / NEAR. Press RUN. Follow the gold square W. The number falls. The tile changes colour, then becomes a faint sheet through which the basin is visible. Stop the local experiment. How much of a path is still there?
+
+Use NEAR/FAR to withdraw the probe and run again. Watch the edge of the depleted region before its centre. Something returns through what remained around it. There is no separate instruction ordering this particular patch to grow back into its old outline.
+
+RESTORE prepares a full bridge. Change SOURCE to VISITOR and start RUN. Your position now takes the probe&#x27;s place. Approach the marked region, wait, move away. The ordinary museum floor continues alongside the basin; recovery ramps rise at either end of its right-hand edge, on the desk&#x27;s side. On the bridge, lingering can cost you support. The faint tile can still be seen after it can no longer carry you.
+
+Look up to find W again. A gold frame holds its place on the frieze. Wait above the tile while watching its colour there. The change stays in front of you; the consequence arrives beneath your feet. When the surface gives way, you are still looking at the same address from a little lower down.
+
+![The gold address W remains visible on the wall and the depleted bridge.](images/ca-presence-depleted.png)
+
+*One cell, two surfaces. The basin receives the body when the bridge can no longer carry it.*
+
+The bridge&#x27;s variable is called health. Here that means a number between zero and one. The name lends it a small biological story, but the operations are available to read. Nearby cells lose a fixed amount on each update:
+
+```gdscript
+if present and cell_position(coord).distance_to(local_visitor) &lt; decay_radius:
+    next[coord] = maxf(0.0, health - decay_speed * dt * 5.0)
+```
+
+Distance is measured in three dimensions from a cell&#x27;s centre to the tracked body&#x27;s origin. No scale weighs your feet. The surface can respond before your body is standing on the cell you are watching. The pink probe can produce the same numerical influence without a person above it. Which part of our first explanation came from the event, and which part did the appearance of a bridge invite us to supply?
+
+Outside that radius, a cell can recover through its four immediate axial neighbours. Each neighbour above 0.5 contributes to recovery. At 0.3 a tile can support you, yet it cannot contribute as a healthy neighbour. Below 0.2, its collider is disabled:
+
+```gdscript
+colliders[coord].set_deferred(&quot;disabled&quot;, health &lt; 0.2)
+```
+
+One changing value meets two different thresholds. Being visible, carrying a visitor and helping a neighbour recover are separate permissions. The frieze wears the same changing colours. Its solid backing remains even when the tile can no longer carry you. A room can wear an answer without offering the same way through it.
+
+There is another condition hidden in “each update.” Choose CHAIN for a small prepared comparison. The bridge begins mostly depleted; three adjacent values are 0.600, 0.495 and 0.000. SOURCE becomes NONE. We can attend to recovery without moving the input at the same time.
+
+STEP once in SYNC. The middle value crosses 0.5. Has the next cell been allowed to use that change already? ORDER switches to SCAN and restores the same beginning. Step again, then use REVERSE and repeat. A different answer can appear even though the neighbouring cells and the amount of time are unchanged. The loop has a direction too.
+
+SYNC reads the previous field throughout the update. SCAN reads answers already written during the same pass. In this study, changing scan direction leaves the synchronous result unchanged; in-place recovery can change. The choice sits in a single line:
+
+```gdscript
+var read_states: Dictionary = previous if snapshot_reads else next
+```
+
+We have returned to the Life dish&#x27;s two buffers. Their separation now changes when a weakened surface can help another part of itself. The rule includes a schedule, even when the picture conceals it.
+
+Restore the full bridge and return to the visitor input. There is pleasure in architecture answering us, and a stranger pleasure when its answer interrupts the role we expected it to play. We can study that relation without deciding that a responsive surface must be alive. A fully depleted field with no healthy neighbours remains depleted. Withdrawal alone does not promise repair.
+
+At thirty simulated seconds this study holds. The museum continues. We leave with a more precise question than whether the path is living: which relations let it carry a body, recover, or become unavailable? Three of the four choices moved in this hall: a cell holds a fraction, the visitor&#x27;s position is among what it consults, and the order of the loop decides when an answer counts.
+
+&lt;!-- @ --&gt;
+
+The next room asks what a cell can receive from its neighbourhood when counting healthy neighbours is no longer enough. A softer-looking surface will need another working rule to earn that difference.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="CA_ExpandingSpace/tutorial.md">Raw captured source</a></p><pre># Approach, wait, withdraw; then inspect the update
+
+Start with the inherited array and the Life dish&#x27;s explicit output connection. The new capability is a graded field whose external input can be the observing body.
+
+1. From the desk choose SOURCE → PROBE and inspect NEAR. Run, watch W=(2,6), and hold. Name separately the colour, health and support changes.
+2. Move the probe FAR and run. Follow recovery from a healthier edge into the depleted region. The probe controls a position, not a load.
+3. RESTORE the full beginning. Select VISITOR and RUN. Approach, wait, withdraw; inspect the actual tracked body&#x27;s distance. The ordinary margin and the basin ramps let the learner return after lost support.
+4. Explain the proximity subtraction and four-neighbour recovery after observation. Compare the &gt;0.5 participation threshold with the ≥0.2 support threshold. A value between them is a useful counterexample to “healthy or dead.”
+5. Read the same state in the wall frieze. Ask which parts change colour, which support a body, and which influence the next update.
+6. Choose CHAIN. With input NONE, STEP in SYNC. Switch ORDER to SCAN (the beginning resets), then STEP. REVERSE resets again; compare the same three addresses. Follow the `read_states` reference into the code.
+7. Return to FULL and VISITOR. Describe one observation through an input, a state update, a threshold and a physical consequence.
+
+Do not require a learner to fall to understand the rule; PROBE and the readout permit inspection from the stable floor. A desktop body has been tested on the bridge and recovery ramp. Headset comfort and reach are deferred. The next hall needs a live weighted-neighbour or coupled-field experiment before the book can claim richer exchange.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="CA_ExpandingSpace/technical.md">Raw captured source</a></p><pre># Proximity, graded state and the timing of recovery
+
+This primary continues the Life dish&#x27;s distinction between state and mapping. `decaying_bridge:0:0#study:proximity#plinth:0` opts into a 5 × 16 study, with 0.6 m cell pitch, a separate health frieze and an instrument. The original scene&#x27;s unconfigured dimensions and sequential update mode remain available. Player tracking and material reuse are repaired in the shared script.
+
+## Inputs and state
+
+`grid` maps Vector2i addresses to health in [0,1]. Cell centres lie at y=-0.1 m; their collision tops align with the ordinary floor. The visitor resolver first follows a real player camera to its physical body, including XRToolsPlayerBody for an XR camera; otherwise it checks em_walker, player_body and player groups. A capture camera is not treated as a visitor. When no body exists, no origin-position substitute causes decay. The XR path is implemented but has not been tested in a headset.
+
+The study can use VISITOR, a nominated PROBE position, or NONE. Probe NEAR is (0,0.05,3.6) in bridge space; FAR is (-3,0.05,3.6). The sphere is drawn above that nominated coordinate so it can be seen. Distance includes y; it is not a pressure sensor or horizontal-only footprint. The witness W=(2,6) is at local (0,-0.1,3.6), so the near probe is 0.15 m from it.
+
+## One update
+
+The radius is 1.35 m. Inside it, health decreases by decay_speed × dt × 5. The configured decay_speed is 0.08 and dt is 0.1, giving 0.04 lost per step. Outside it, recovery adds regrow_speed × dt × 0.1 × N, with regrow_speed=1 and N the number of four axial neighbours above 0.5. Missing boundary neighbours do not wrap. Values clamp to [0,1]. A zero field with no healthy neighbour remains zero.
+
+SYNC reads the whole previous field and writes another. SCAN reads the growing result in place, preserving the original algorithm&#x27;s scheduling choice. REVERSE changes traversal direction. ORDER and REVERSE restore the current beginning, allowing comparisons from the same values. CHAIN creates a depleted field with (1,6)=0.600, (2,6)=0.495, (3,6)=0, disables external input and holds the clock. After one forward SCAN step the third value is 0.010; after reverse SCAN or either synchronous direction it is zero. The original pre-edit solver exhibited the same scan dependence.
+
+RUN attempts one 0.1-second update per 0.1 seconds of frame time, without catch-up. Slow rendering can therefore stretch real time. STEP performs one update. The 300-step limit represents 30 simulated seconds, not a claim of equilibrium. RESTORE resets the FULL beginning and holds; source and scheduling choices remain selected. CHAIN resets its own beginning. SOURCE and NEAR/FAR change the input without resetting health.
+
+## Three consequences of health
+
+- Recovery participation: a neighbour contributes only above 0.5.
+- Support: collision is enabled at health ≥0.2 and disabled below, applied through deferred physics updates.
+- Appearance: colour interpolates between the configured depleted and healthy colours. Below 0.2 the study retains a transparent ghost, with alpha 0.18+health. At zero, an address is still visible.
+
+Each cell has one reused material. The eighty frieze panels reference those exact materials; they do not run another simulation or create support colliders. The gold witness stays fixed. Its readout reports current health, support, healthy neighbours, source distance, input, update mode, direction and local clock. A small light reflects the witness&#x27;s support threshold.
+
+## Architecture and verification
+
+The map is 15 × 28. An added front bay contains the bridge, a 0.6 m collecting basin, two closed convex recovery wedges and an independent museum margin. The original seven artifacts remain, with the other six shifted together into the rear gallery. The old automatic arrangement removed crossway_ca to reopen its path; authored placement now retains it. The retained tree&#x27;s optional host_lighting configuration disables its standalone sun/environment in this placement, preventing it from overexposing the hall. Geometry and growth parameters remain.
+
+Real desktop checks exercise tracking, the rule, thresholds, matched schedules, all eight pointer controls, support/basin rays, a body losing support, a climbed ramp and a margin walk. Evidence is under `doc/space/ca-proximity-review-2026-09-13/`. Headset testing and the retained secondary encounters remain further work. Existing catalyst viewport-texture diagnostics are separate from this primary; the final run must have no runtime script errors.
+
+## 25 September: locating the same cell with the body
+
+W now has a fixed gold frame and address on the frieze at the existing panel for (2,6). The frame has no collision, state or clock. The panel still shares the exact floor-cell material. Four lining faces close the collecting basin below floor height; the basin bottom, both recovery ramps, tile collision, rule and console are unchanged. No global floor policy changes. See `encounter-notes.md` for current native checks and their limits.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="CA_ExpandingSpace/intent.md">Raw captured source</a></p><pre># The surface includes you
+
+Question: How does the observing body become an input, and which conditions let a changing surface continue to carry it?
+
+Inheritance: arrays and clocks, Life&#x27;s shared previous state, explicit state-to-object mappings, and the history bridge&#x27;s distinction between colour and support.
+
+Primary: decaying_bridge with study:proximity. A held 5×16 graded field; visitor/probe/no-input comparison; witness health and thresholds; a shallow basin and recovery ramps; the same health on a wall frieze; matched synchronous/in-place/reversed update comparisons.
+
+The radius of external proximity is separate from the four-neighbour recovery stencil. No variable-radius tree-growth slider is claimed. All seven existing works remain; six are retained for later encounters. This pass repairs player tracking, exposes scan order and gives the primary coherent space and prose. Active sequence order and artifact roles are unchanged.
+
+Next: CA_SoftRules. A weighted-neighbour or coupled-field study must actually update before its softness can be explained as a new mechanism.
+
+25 September refinement: find the same W on the wall while standing above it. The visible colour remains in front of the body as the loss of support changes its height. A lined shallow basin makes the receiving surface legible. This strengthens the existing encounter without adding a rule or an interface.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="CA_ExpandingSpace/critical.md">Raw captured source</a></p><pre># A floor&#x27;s permissions
+
+The bridge seems to notice a visitor. That description is useful only if we can ask what arrives in the calculation. Here it is the distance from a cell to a tracked body origin. A sphere nominating the same position can cause the same decay. Neither weight nor intention is measured.
+
+There was a practical exclusion in the old implementation: it searched for a group called player while the museum walker belonged to em_walker. The scene could contain a visitor the artifact did not recognise. Repairing that lookup is part of the research, because the claimed relation must exist before its consequences can be interpreted. The implemented resolver makes its chosen source visible; a headset remains a distinct test.
+
+“Health” lends the field a biological familiarity. Yet its capacities split. At 0.3 a tile carries the visitor but does not contribute to a neighbour&#x27;s recovery. Below 0.2 it loses support; a faint shape remains. The state does not contain a single verdict on whether it exists. It meets separate rules for participation, collision and display.
+
+The wall makes this separation spatial. It wears the same materials as the bridge, but it is not an alternative set of walkable tiles. A recognisable pattern can move between architecture&#x27;s roles only through further implementation. We can enjoy the frieze and still ask what it is capable of doing.
+
+The most revealing detail may be the update schedule. The original in-place loop allowed newly recovered cells to influence later cells in the same pass. Reversing that pass changes a prepared result. Synchronous reading removes this particular ordering effect. It does not make the model universally impartial or natural; it defines another time in which influence may travel. If we describe only the local formula, we miss part of the rule.
+
+The queer potential is in making these roles revisable without treating every change as an improvement. A floor may cease to carry us while remaining visible. A weakened cell may remain capable of support. A beautiful surface need not be an organism, and a less useful path may reveal a relation our expectation of usefulness concealed. These are specific invitations to investigate what bodies and dependencies the construction permits.
+
+Recovery is conditional. Withdrawal does not heal a completely depleted field when no healthy neighbours remain. RESTORE is an explicit intervention by the visitor, not proof that the simulated surface repairs itself. The basin and the independent museum margin are also authored provisions. They make room for exploring failure without demanding that failure be the visitor&#x27;s only route.
+
+The thirty-second observation budget belongs to this study. It does not establish a critical regime or a universal entropy threshold. The next question is what else neighbours might exchange, and which new capacities would require a different implemented rule.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="CA_ExpandingSpace/artifacts.md">Raw captured source</a></p><pre># CA_ExpandingSpace — retained collection
+
+| Artifact | Role | This pass |
+|---|---|---|
+| decaying_bridge | Primary / book hero | Proximity study, shared health frieze, matching floor/wall witness and support/recovery experiment above a lined basin. |
+| ca_chair_test | Secondary | Retained furniture study in the rear gallery. |
+| catalyst_vent | Secondary | Retained with its existing emission configuration. |
+| catalyst_prompter_box | Secondary | Retained; existing viewport-texture diagnostics need separate review. |
+| cellular_automata_3d_tree | Secondary | Retained growth/geometry, with host lighting for this museum placement. |
+| crossway_ca | Secondary | Retained under authored placement; the previous automatic hall removed it when opening a route. |
+| dark_sphere | Decoration | Retained spatial reference. |
+
+The bridge and frieze read one graded state. No artifact quota is imposed. Further primary passages should follow tested encounters with the retained works, rather than borrowing a mechanism from their names.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="CA_ExpandingSpace/summary.md">Raw captured source</a></p><pre># The surface includes you
+
+A full bridge waits above a shallow basin. Its cells lose health near the tracked visitor or a nominated probe. Outside that radius, healthier axial neighbours permit recovery. One fixed readout separates health, neighbour participation and support. The same state dresses a wall frieze.
+
+The prepared CHAIN comparison reveals a second input to the outcome: update order. SYNC reads a shared previous state; SCAN reads changes already written in the pass. Reversing SCAN changes the example&#x27;s result. The text discovers proximity and support before returning to this timing choice.
+
+Seven artifacts remain in a 15×28 hall. The new front study has continuous circulation beside the basin, with actual desktop falling and ramp recovery tested. The retained rear collection and headset experience need later review. The next hall investigates richer neighbourhood exchange.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="CA_ExpandingSpace/blurb.md">Raw captured source</a></p><pre>A path changes while you wait on it. The tile is still visible when it stops carrying you. Withdraw: what has to remain for it to recover? Then reverse the loop and ask whether the same neighbourhood still makes the same answer.
+</pre></section></body></html>

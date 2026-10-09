@@ -1,0 +1,898 @@
+{
+  "passed": true,
+  "native_checks": 50,
+  "checks": [
+    {
+      "name": "Point_Zero native checks pass",
+      "passed": true
+    },
+    {
+      "name": "Point_Zero no script or shader errors",
+      "passed": true
+    },
+    {
+      "name": "Point_One native checks pass",
+      "passed": true
+    },
+    {
+      "name": "Point_One no script or shader errors",
+      "passed": true
+    },
+    {
+      "name": "book order begins Zero, One, Lines",
+      "passed": true
+    },
+    {
+      "name": "museum declaration agrees",
+      "passed": true
+    },
+    {
+      "name": "book pearls agree",
+      "passed": true
+    },
+    {
+      "name": "other book pearls unchanged",
+      "passed": true
+    },
+    {
+      "name": "all existing registered artifacts retained",
+      "passed": true
+    },
+    {
+      "name": "Point_Zero grid dimensions consistent",
+      "passed": true
+    },
+    {
+      "name": "Point_Zero footnotes complete",
+      "passed": true
+    },
+    {
+      "name": "Point_One grid dimensions consistent",
+      "passed": true
+    },
+    {
+      "name": "Point_One footnotes complete",
+      "passed": true
+    },
+    {
+      "name": "author inherited-work paragraph retained exactly",
+      "passed": true
+    },
+    {
+      "name": "old arrival opening occurs once",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Point_One/evolution.json",
+      "passed": true
+    },
+    {
+      "name": "preserved commons/maps/Point_One/artifact_proposals.json",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Point_Lines",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Point_Trace",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Point_Line_Grid",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Point_Triangle_Context",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Primitives_Polythedra",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Point_Animatedcube",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Primitives_Ignorance",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Primitives_Portals",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Primitives_Melencolia",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Biome_Ladder_Primitives",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Pre",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Introduction",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Translation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Rotation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Scale",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Body",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Trans_Pit",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Biome_Ladder_Transformation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Context_Placed",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Flashlight",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Nails",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Rainbow",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Pillar",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Grid_Pallet",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Paint",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Color_Walls",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Chamber_Color",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Biome_Ladder_Color",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Change_Intro",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Flow_Field",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Vectors_Act1_WhatAVectorIs",
+      "passed": true
+    },
+    {
+      "name": "preserved hall VFM_02_Operations",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Vectors_Act2_VectorArithmetic",
+      "passed": true
+    },
+    {
+      "name": "preserved hall VFM_05_Launch",
+      "passed": true
+    },
+    {
+      "name": "preserved hall VFM_03_Motion",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Vectors_Act3_FieldsAndMotion",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Vectors_Act4a_KineticForces",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Vectors_Act4b_Oscillation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Change_Choreography",
+      "passed": true
+    },
+    {
+      "name": "preserved hall VFM_07_Gravity",
+      "passed": true
+    },
+    {
+      "name": "preserved hall VFM_09_Legs",
+      "passed": true
+    },
+    {
+      "name": "preserved hall VFM_08_Arena",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Vectors_Act5_ForceAsPlace",
+      "passed": true
+    },
+    {
+      "name": "preserved hall FormFinding_Descent",
+      "passed": true
+    },
+    {
+      "name": "preserved hall FormFinding_Catenary",
+      "passed": true
+    },
+    {
+      "name": "preserved hall FormFinding_Relaxation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall FormFinding_Equilibrium",
+      "passed": true
+    },
+    {
+      "name": "preserved hall FormFinding_Annealing",
+      "passed": true
+    },
+    {
+      "name": "preserved hall FormFinding_Forge",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_Intro",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_Pendulum",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_Sine_Space",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_Unit_Circle",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_3D_Wave_Propagation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_Effect_Sound",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Wavefunctions_Bernini",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_John_Cage",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_AirMusic",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Wavefunctions_Sky_Stairs",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_TrigWalkingPath",
+      "passed": true
+    },
+    {
+      "name": "preserved hall WaveFunctions_Synthesis_Lab",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Definition",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Entropy",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Remove",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Randomness_10_PRINT_Algorithm",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Cubes",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Rotate_Random_XYZ",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Walk",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Gaussian",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Mushrooms",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Biome_Cage",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Space_Geometry",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Randomness_Examples_of_Randomness",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Pheromone",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Space",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Game",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Biome_Ladder_Randomness",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Random_Noise_Types",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_Columns",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_One",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_Voxel",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_6_Wall",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_Inside_Noise",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_Space_10",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Noise_Perlin_Simplex",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_Introduction",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_ElementaryRules",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_GameOfLife",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_BeyondBinary",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_ExpandingSpace",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_SoftRules",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_AgentsCircuits",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CA_EdgeOfChaos",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_Recursion",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_RecursiveTrees",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_CantorSet",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_KochSierpinski",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_MengerSponge",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_GoldenSpiral",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Fractal_Synthesis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall LSystems_Grammar_Lab",
+      "passed": true
+    },
+    {
+      "name": "preserved hall LSystems_Growth",
+      "passed": true
+    },
+    {
+      "name": "preserved hall LSystems_Grammars_And_Curves",
+      "passed": true
+    },
+    {
+      "name": "preserved hall LSystems_Architecture",
+      "passed": true
+    },
+    {
+      "name": "preserved hall LSystems_Competition",
+      "passed": true
+    },
+    {
+      "name": "preserved hall LSystems_Living",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Assemblage_Same_Desire",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Genetic_Evolution",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Space_Colonization",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Branching_Growth",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Percolation_Network",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Caves_Mazes",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Sculpted_Forms",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PG_Mirrored_Patterns",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Soft_Body_Deformation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Cloth_Physics",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Carusell",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Obsticals",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Obsticals_Part2",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Playground_of_Joy",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SoftBodies_Affect_Theory_Visualization",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ProceduralGeneration_Reaction_Diffusion_Systems",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Topology_Entropy_Morphogenesis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_Introduction",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_LookupTable",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_ShapesGallery",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_TorusGyroid",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_Sculpting",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_FlatTerrain",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_PortalLandscape",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_Caves",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_CaveGeneration",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_AnimatedNoise",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_Metaballs",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_ImplicitModeling",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ISO_RhizomeBody",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Boolean_Verbs",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Boolean_Gallery",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Boolean_Works",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_PhysarumColony",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_FlowFields",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_Boids_Algorithm",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_Ant_Colony_Optimization",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_Particle_Swarm_Optimization",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Evolution",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Gradient_Landscape",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Classification",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Neural_Networks",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Perception",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Sequence_Memory",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Generative",
+      "passed": true
+    },
+    {
+      "name": "preserved hall ML_Synthesis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Foundations",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Layout",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Pathfinding",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Network_Analysis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Connectivity",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Spanning_Trees",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Flow",
+      "passed": true
+    },
+    {
+      "name": "preserved hall GT_Matching",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Euclid_Parallel",
+      "passed": true
+    },
+    {
+      "name": "preserved hall NonEuclidean_Spaces",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Russell_Paradox",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Godel_Incompleteness",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Escher_Impossible",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Brouwer_Intuitionism",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Florensky_Paraconsistent",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Crisis_Synthesis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_Introduction",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_F_Term",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_E_Term",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_Lambda_Spectrum",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_Phi_Term",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_Edge_Of_Chaos",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_Sandbox",
+      "passed": true
+    },
+    {
+      "name": "preserved hall QFEP_Synthesis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "passed": true
+    },
+    {
+      "name": "preserved hall CriticalAlgorithms_Applied_Ethics",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SpeculativeComputation_Paraconsistent_Engineering",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SpeculativeComputation_Situated_Computation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SpeculativeComputation_Collective_Knowledge",
+      "passed": true
+    },
+    {
+      "name": "preserved hall SpeculativeComputation_Rhizome_Network",
+      "passed": true
+    },
+    {
+      "name": "preserved hall AdvancedLaboratory_Lab_Equipment_Simulation",
+      "passed": true
+    },
+    {
+      "name": "preserved hall PostCrisis_Synthesis",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Array",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Tutorial_3D",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Tutorial_Tiling_Floor",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Tutorial_Tiling_Walls",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Tutorial_Disco",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Pattern_Disco",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Pattern_Foundry",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Tutorial_Pattern",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Array_Patterns",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Symmetry_Seventeen",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Ribbon_Patterns_01",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Ribbon_Patterns_02",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Ribbon_Patterns_03",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Shader_01_Shaping",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Shader_05_Patterns",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Shader_11_QueerRubber",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Shader_09_FBM",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Shader_12_PinkExtravaganza",
+      "passed": true
+    },
+    {
+      "name": "preserved hall Shader_10_ReactionDiffusion",
+      "passed": true
+    },
+    {
+      "name": "eleven current captured chapters",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "Installed history bridge found",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-oblique",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: entry",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: history-margin",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rear-gallery",
+      "passed": true
+    },
+    {
+      "name": "Arrival record has twelve rows and original rule",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "inventory": [
+      {
+        "key": "window",
+        "local": [
+          7.5,
+          1.70000004768372,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_window"
+      },
+      {
+        "key": "view",
+        "local": [
+          7.5,
+          1.70000004768372,
+          2.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_view"
+      },
+      {
+        "key": "counter",
+        "local": [
+          11.0,
+          1.60000002384186,
+          1.05999994277954
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_counter"
+      },
+      {
+        "key": "extinguisher",
+        "local": [
+          1.13999998569489,
+          0.0,
+          2.59999990463257
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_extinguisher"
+      },
+      {
+        "key": "elevator",
+        "local": [
+          15.9399995803833,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_elevator"
+      },
+      {
+        "key": "pallet",
+        "local": [
+          15.1000003814697,
+          0.0,
+          2.20000004768372
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_pallet"
+      },
+      {
+        "key": "point_zero",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/Lobby_point_zero"
+      },
+      {
+        "key": "ca_bridge",
+        "local": [
+          6.5,
+          0.0,
+          9.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CABridge"
+      },
+      {
+        "key": "film_cellular_history",
+        "local": [
+          1.5,
+          0.0,
+          19.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/film_cellular_history"
+      },
+      {
+        "key": "lab_room",
+        "local": [
+          6.5,
+          0.0,
+          26.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/LabRoom"
+      },
+      {
+        "key": "dark_sphere",
+        "local": [
+          5.5,
+          0.0,
+          29.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DarkSphere"
+      },
+      {
+        "key": "ca_columns",
+        "local": [
+          5.5,
+          0.0,
+          30.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CAColumns"
+      },
+      {
+        "key": "mirrored_cellular_automata",
+        "local": [
+          6.5,
+          0.0,
+          36.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/MirroredCellularAutomata2"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          7.5,
+          3.51999998092651,
+          3.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ExitSign"
+      },
+      {
+        "key": "exit_sign",
+        "local": [
+          8.5,
+          3.0,
+          40.0
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/@Node3D@1533"
+      },
+      {
+        "key": "wall_clock",
+        "local": [
+          1.01999998092651,
+          2.25,
+          0.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/WallClock"
+      },
+      {
+        "key": "info_screen",
+        "local": [
+          1.0,
+          1.70000004768372,
+          22.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/InfoScreen"
+      },
+      {
+        "key": "electrical_panel",
+        "local": [
+          1.0,
+          1.5,
+          1.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ElectricalPanel"
+      },
+      {
+        "key": "ceiling_vent",
+        "local": [
+          3.75,
+          4.6399998664856,
+          22.2250003814697
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/CeilingVent"
+      },
+      {
+        "key": "station_plinth",
+        "local": [
+          8.5,
+          0.0,
+          37.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ArtPlinth0"
+      },
+      {
+        "key": "dream_bodies",
+        "local": [
+          8.5,
+          0.419999986886978,
+          37.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DreamBody0"
+      },
+      {
+        "key": "station_plinth",
+        "local": [
+          11.5,
+          0.0,
+          31.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/ArtPlinth1"
+      },
+      {
+        "key": "dream_bodies",
+        "local": [
+          11.5,
+          0.419999986886978,
+          31.5
+        ],
+        "path": "/root/EndlessMuseum/Seg0_neue-nationalgalerie-free-plan/DreamBody1"
+      }
+    ],
+    "scope": "Actual museum overhead, raised and visitor-height views. Player and neighbouring halls hidden for capture. No physical headset test.",
+    "study_local": [
+      6.5,
+      0.0,
+      9.5
+    ]
+  },
+  "passed": true
+}

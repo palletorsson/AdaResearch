@@ -1,0 +1,62 @@
+--- before/tutorial.md
++++ current/tutorial.md
+@@ -19,7 +19,7 @@
+ 
+ ## Give the position a visible body
+ 
+-In `visible.gd` the same first line is followed by the visible-sphere passage from the main chapter. The full file is supplied; these are its additions inside `_ready()`:
++In `visible.gd` the same first line is followed by the construction of a visible sphere. The full file is supplied; these are its additions inside `_ready()`:
+ 
+ ```gdscript
+ var radius := 0.14
+@@ -72,6 +72,48 @@
+ 
+ The museum's black point uses `commons/primitives/point/interactive_point_origin.tscn` and the held branch of `point_condition.gd`. That branch supplies the dark finish, radius and coordinate identity. Its inherited pickup system manages hands, holding and release. These scripts are part of the full AdaResearch project, with XR Tools and museum dependencies; they are not included in this small standalone study.
+ 
+-The rest of the main chapter opens the held point's WORLD/LOCAL addresses, the rounded report and the arrival test. Those excerpts explain operations within the museum. This first building exercise stops at position, visible shape and fixed collision. A portable pickup starter is a further teaching step, not something created by connecting two signals.
++The first building exercise stops at position, visible shape and fixed collision. A portable pickup starter is a further teaching step. Point Lines can connect positions you already know how to keep and show.
+ 
+-From here, Point Lines can connect positions you already know how to keep and show.
++## A further look inside the museum
++
++These three examples explain the coordinate cards and arrival target in the main text. They belong to the museum's existing components; they are not further lines to paste into `solid.gd`.
++
++### A shorter address
++
++The report accepts a scene node called `point` and reads its world position:
++
++```gdscript
++func report_position(point: Node3D) -> String:
++    var p := point.global_position
++    return "(%.2f, %.2f, %.2f)" % [p.x, p.y, p.z]
++```
++
++`%.2f` rounds each component to two decimal places in the text: `1.231` and `1.234` both print as `1.23`. The function returns a string. The museum card displays that string; this function alone does not create a card. Formatting leaves the stored position unchanged.
++
++### Two references
++
++Here `point` is the held body and `frame` is the coordinate frame, both existing `Node3D` objects in the museum:
++
++```gdscript
++var world_p := point.global_position
++var local_p := frame.to_local(world_p)
++```
++
++`global_position` supplies the world address. `to_local()` expresses it relative to the frame, accounting for its position, orientation and scale. Both readings describe the same body.
++
++### Room to arrive
++
++This reduced distance test belongs to a target node with its own position:
++
++```gdscript
++@export var catch_radius: float = 0.45
++@export var catch_height: float = 1.20
++
++func accepts_position(p: Vector3) -> bool:
++    var centre := global_position + Vector3(0.0, catch_height, 0.0)
++    return p.distance_to(centre) <= catch_radius
++```
++
++`p` is the point's world position. The target's centre is 1.20 metres above its origin. `distance_to()` measures the gap; `<=` accepts 0.45 metres or less. The exported values are editable parameters.
++
++The actual museum target also remembers whether the point is already inside, rearms when it leaves, and releases the falling balls on entry. This function isolates the acceptance test; it does not supply those other actions.

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grid — Primitives facing pages · Endless Museum</title>
+<style>
+:root{--paper:#fcfaf5;--ink:#272c2b;--muted:#707570;--rule:#dcdcd3;--green:#36584e}*{box-sizing:border-box}html,body{margin:0;height:100%;background:#e7e8e2;color:var(--ink)}body{font:16px/1.6 Georgia,'Times New Roman',serif;display:grid;grid-template-rows:auto minmax(0,1fr) auto}a{color:var(--green);text-underline-offset:3px}button,select{font:13px/1.3 system-ui,sans-serif;color:inherit}button{cursor:pointer;background:transparent;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px}button:hover{background:#f5f5ef}button:disabled{opacity:.32;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible,article:focus-visible{outline:2px solid var(--green);outline-offset:3px}header{padding:17px 32px 13px;display:flex;gap:28px;align-items:center;justify-content:space-between}.brand{font-size:25px;line-height:1.1;letter-spacing:-.7px}.strap{font:10px/1.5 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-top:6px}.chapter-title{font:13px/1.5 system-ui,sans-serif}.chapter-title strong{display:block;font-weight:500;font-size:16px}.chapter-title span{color:var(--muted);font-size:11px}nav{display:flex;align-items:center;gap:9px}select{background:#f8f8f3;border:1px solid #bfc4ba;border-radius:3px;padding:9px 26px 9px 11px;max-width:220px}main{min-height:0;padding:0 28px 4px}.spread{height:100%;max-width:1680px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);box-shadow:0 5px 22px #28302712;border:1px solid #d5d7ce;background:var(--paper)}[hidden]{display:none!important}.page{min-width:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#bac0b3 transparent;padding:22px clamp(25px,4vw,67px) 34px;scroll-padding-top:25px}.tutorial{background:linear-gradient(to left,#e7e6dd 0, #f6f3ec 5px,var(--paper) 28px)}.final{background:linear-gradient(to right,#e7e6dd 0,#f6f3ec 5px,var(--paper) 28px);border-left:1px solid #d8d7cc}.running-head{display:flex;align-items:center;gap:10px;min-height:30px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:32px;font:10px/1.5 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.running-head a{margin-left:auto;white-space:nowrap;text-decoration:none}.intent{font-size:9px;background:#efeadc;border-radius:2px;padding:2px 5px;letter-spacing:0}.prose{font-size:18px;line-height:1.75;overflow-wrap:break-word}.prose h1,.prose h2,.prose h3,.prose h4{font-weight:400;line-height:1.2;scroll-margin-top:20px}.prose h1{font-size:clamp(28px,2.6vw,40px);letter-spacing:-.7px;margin:0 0 32px;text-wrap:balance}.prose h2{font-size:27px;margin:38px 0 18px}.prose h3{font-size:22px;margin:30px 0 15px}.prose p{margin:0 0 21px}.prose ul,.prose ol{padding-left:24px;margin:0 0 23px}.prose li{margin:6px 0}.prose blockquote{margin:27px 0;border-left:2px solid #b8c4b7;padding-left:22px;color:#4b5851}.prose pre{padding:18px 20px;margin:25px -7px;background:#edf0e9;border:1px solid #dce2d5;border-radius:2px;overflow:auto;font:12.5px/1.7 Consolas,'Courier New',monospace;tab-size:4}.prose code{font-family:Consolas,'Courier New',monospace;font-size:.79em}.prose :not(pre)>code{background:#eeeee5;padding:1px 3px;border-radius:2px;overflow-wrap:anywhere}.prose pre code{font-size:inherit;white-space:pre;overflow-wrap:normal}.prose img{display:block;max-width:100%;height:auto;margin:30px auto}.prose table{width:100%;display:block;overflow:auto;border-collapse:collapse;margin:25px 0;font:13px/1.6 system-ui,sans-serif}.prose th,.prose td{text-align:left;border-bottom:1px solid var(--rule);padding:8px 10px;vertical-align:top}.prose th{font-weight:500}.prose hr{border:0;border-top:1px solid var(--rule);margin:35px 0}.prose .footnote{font-size:13px;line-height:1.6;color:#62665f}.prose sup{font-size:10px;line-height:0}.page-end{display:flex;justify-content:space-between;margin-top:42px;padding-top:14px;border-top:1px solid var(--rule);font:11px/1.4 system-ui,sans-serif;color:var(--muted)}footer{padding:9px 33px 12px;display:flex;justify-content:space-between;gap:20px;font:11px/1.4 system-ui,sans-serif;color:var(--muted)}#position{color:#414d43}.mobile-switch{display:none}.skip{position:absolute;top:-60px;background:var(--paper);padding:8px;z-index:2}.skip:focus{top:6px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1750px){.prose{font-size:19px}.prose pre{font-size:14px}}
+@media(max-width:1080px){header{padding:14px 20px;gap:15px}.chapter-title{display:none}main{padding:0 16px 2px}.page{padding-left:28px;padding-right:28px}.prose{font-size:16px}.prose pre{font-size:12px}footer{padding-left:20px;padding-right:20px}}
+@media(max-width:720px){body{grid-template-rows:auto minmax(0,1fr) auto}header{flex-wrap:wrap;padding:12px 13px;gap:12px}.brand{font-size:21px}.strap{font-size:8px}nav{margin-left:auto;gap:5px}nav button{padding:8px}select{max-width:160px;padding:8px 3px}.mobile-switch{display:flex;width:100%;gap:6px}.mobile-switch button{flex:1;padding:7px;font-size:12px}.mobile-switch button[aria-pressed=true]{background:#36584e;color:white;border-color:#36584e}main{padding:0 8px}.spread{display:block}.page{height:100%;padding:17px 24px 32px;background:var(--paper)}body[data-side=tutorial] .final,body[data-side=final] .tutorial{display:none}.prose{font-size:17px}.prose h1{font-size:30px}.running-head{margin-bottom:25px}footer{font-size:10px;padding:8px 12px}.desktop-hint{display:none}}
+@media print{body{display:block;background:white;height:auto}header,footer{display:none}main{padding:0}.spread{height:auto;box-shadow:none;border:0;display:grid!important;break-after:page}.page{overflow:visible;height:auto;background:white!important;padding:12mm!important;display:block!important}.prose{font-size:10pt}.prose h1{font-size:22pt}.prose h2{font-size:16pt}.prose pre,.prose pre code{font-size:7pt;white-space:pre-wrap;overflow-wrap:anywhere}.running-head{margin-bottom:20px}.running-head a{display:none}a{color:inherit}.page-end{display:none}@page{size:A3 landscape;margin:10mm}}
+
+.nav-button{display:block;font:13px/1.3 system-ui,sans-serif;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px;text-decoration:none;color:inherit;white-space:nowrap}.nav-button:hover{background:#f5f5ef}.nav-button.disabled{opacity:.32;pointer-events:none}.contents{position:relative;font:13px/1.3 system-ui,sans-serif;z-index:3}.contents summary{cursor:pointer;list-style:none;min-width:196px;display:flex;justify-content:space-between;gap:16px;border:1px solid #bfc4ba;border-radius:3px;background:#f8f8f3;padding:9px 12px}.contents ol{position:absolute;right:0;top:29px;width:260px;max-height:70vh;overflow:auto;background:#fcfaf5;border:1px solid #c9cdbf;box-shadow:0 10px 30px #1e2b1e22;list-style:none;padding:9px;margin:10px 0}.contents a{display:block;padding:9px 12px;text-decoration:none;color:inherit}.contents a span{color:var(--muted);margin-right:9px;font-size:11px}.contents a:hover,.contents a[aria-current=page]{background:#e9ede3}.contents summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:720px){.nav-button{padding:8px;font-size:12px}.contents summary{min-width:135px;padding:8px;font-size:12px}.mobile-switch input{position:absolute;opacity:0;width:1px;height:1px}.mobile-switch label{flex:1;padding:7px;border:1px solid #bfc4ba;border-radius:3px;text-align:center;font:12px/1.3 system-ui,sans-serif;cursor:pointer}.mobile-switch input:checked+label{background:#36584e;color:white}.mobile-switch input:focus-visible+label{outline:2px solid #36584e;outline-offset:3px}body:has(#side-final:checked) .tutorial{display:none}body:has(#side-final:checked) .final{display:block}}
+</style>
+</head>
+<body data-side="tutorial">
+<a class="skip" href="#book">Skip to the texts</a>
+<header>
+  <div><div class="brand">Endless Museum</div><div class="strap">Always another room</div></div>
+  <div class="chapter-title"><strong>I. Primitives</strong><span>Points build worlds · Facing pages</span></div>
+  <nav aria-label="Chapter navigation">
+    <a class="nav-button" aria-label="Previous hall" href="Point_Trace.html">← Previous</a>
+    <details class="contents"><summary aria-label="Choose a hall">06 · Grid <span>⌄</span></summary><ol><li><a href="index.html" ><span>01</span> Point Zero</a></li>
+<li><a href="Point_One.html" ><span>02</span> Point One</a></li>
+<li><a href="Point_Coordinates.html" ><span>03</span> Coordinates</a></li>
+<li><a href="Point_Lines.html" ><span>04</span> Lines</a></li>
+<li><a href="Point_Trace.html" ><span>05</span> Trace</a></li>
+<li><a href="Point_Line_Grid.html" aria-current=page><span>06</span> Grid</a></li>
+<li><a href="Point_Triangle_Context.html" ><span>07</span> Triangle</a></li>
+<li><a href="Primitives_Polythedra.html" ><span>08</span> Polyhedra</a></li>
+<li><a href="Point_Animatedcube.html" ><span>09</span> Cube</a></li>
+<li><a href="Primitives_Ignorance.html" ><span>10</span> Primitives</a></li>
+<li><a href="Primitives_Godot.html" ><span>11</span> Godot primitives</a></li>
+<li><a href="Primitives_Columns.html" ><span>12</span> Columns</a></li>
+<li><a href="Primitives_Profiles.html" ><span>13</span> Borrowed outlines</a></li>
+<li><a href="Primitives_Portals.html" ><span>14</span> Limits</a></li>
+<li><a href="Primitives_Melencolia.html" ><span>15</span> Melencolia</a></li></ol></details>
+    <a class="nav-button" aria-label="Next hall" href="Point_Triangle_Context.html">Next →</a>
+  </nav>
+  <div class="mobile-switch" aria-label="Reading side">
+    <input type="radio" name="reading-side" id="side-tutorial" checked><label for="side-tutorial">Left · Tutorial</label>
+    <input type="radio" name="reading-side" id="side-final"><label for="side-final">Right · Reflection</label>
+  </div>
+</header>
+<main id="book" aria-label="Tutorial left, reflection right">
+<section class="spread" data-map="Point_Line_Grid" data-label="Grid" aria-label="Grid facing pages"><article class="page tutorial" tabindex="0" aria-label="Grid — tutorial">
+              <div class="running-head"><span>Make / tutorial.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Line_Grid/tutorial.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Line_Grid--tutorial--point-grid-place-the-drawing-you-made">Point Grid — place the drawing you made</h1>
+<p><strong>Learning elements</strong></p>
+<ul>
+<li>Loading your saved trace</li>
+<li>Reusing a drawing as a sculpture</li>
+<li>One record, different representations</li>
+<li>Source positions and grid addresses</li>
+<li>Integer coordinates and rounding</li>
+<li>Changing a copy while keeping the original</li>
+</ul>
+<p>We are in the Endless Museum. In Trace, you moved the held point and released it to save the drawing. Here, place that drawing beside the ruled field. The gesture has become something you can walk around.</p>
+<p>The pink sculpture is your saved work: the same retained positions and the same segment geometry. We do not build another point or ask for another gesture. <strong>One record can support different representations.</strong> Here we derive grid addresses from it and change a separate green copy.</p>
+<p>Trace stored selected samples of movement, not the whole continuous gesture. Its ordered array, visible segments and rounded addresses each let us do different work. Keeping the source means another interpretation can begin without pretending that rounding recovered everything the hand did.</p>
+<h2 id="Point_Line_Grid--tutorial--bring-your-drawing">Bring your drawing</h2>
+<p>Continue in the <strong>same working copy of the museum</strong>. Keep <code>trace.gd</code> for returning to Trace. Save <code>grid.gd</code> beside <code>trace_archive.gd</code> and the unchanged <code>line_skin.gd</code>, then attach it to your unit-scale <code>PointStudy</code> on the clear floor beside Grid's glass field. The museum provides the hall, light and player.</p>
+<p>Release the point in Trace before leaving. The supplied archive stores a snapshot under <code>user://ada_student_trace.scn</code>; opening Grid loads that snapshot. Without a saved drawing, the readout asks you to return to Trace. It does not invent a replacement. Grid never writes this file.</p>
+<p>The first copy stays pink. The two copies stand 1.6 metres apart so you can compare them; these display offsets do not change the saved positions or the grid calculation. A second copy receives its own mesh and material resources before any changes. We reuse the segment renderer from Lines to place those copied segments between rounded positions. The original sculpture keeps the hand's recorded form.</p>
+<h2 id="Point_Line_Grid--tutorial--the-complete-grid-program-gridgd">The complete Grid program — grid.gd</h2>
+<!-- student-code:grid.gd -->
+<pre><code class="language-gdscript">extends Node3D
+
+const TraceArchive = preload("trace_archive.gd")
+const LineSkin = preload("line_skin.gd")
+
+var sculpture: Node3D
+var grid_copy: Node3D
+var positions := PackedVector3Array()
+var addresses: Array[Vector3i] = []
+var grid_step := 0.25
+var readout: Label3D
+
+func _ready() -&gt; void:
+    readout = Label3D.new()
+    readout.position = Vector3(0, 2.0, 0)
+    readout.font_size = 36
+    readout.pixel_size = 0.003
+    add_child(readout)
+
+    sculpture = TraceArchive.load_drawing()
+    if sculpture == null:
+        readout.text = "Draw in Trace, then release the point to save."
+        return
+    add_child(sculpture)
+    positions = sculpture.get_meta("positions").duplicate()
+
+    grid_copy = sculpture.duplicate() as Node3D
+    add_child(grid_copy)
+    sculpture.position.x = -0.8
+    grid_copy.position.x = 0.8
+    for i in grid_copy.get_child_count():
+        var segment := grid_copy.get_child(i)
+        var original := sculpture.get_child(i)
+        segment.set_script(LineSkin)
+        segment.mesh = original.mesh.duplicate()
+        segment.material_override = original.material_override.duplicate()
+        segment.material_override.albedo_color = Color(0.25, 0.85, 0.60)
+    _place_on_grid()
+
+func _place_on_grid() -&gt; void:
+    addresses.clear()
+    for p in positions:
+        addresses.append(Vector3i(
+            roundi(p.x / grid_step),
+            roundi(p.y / grid_step),
+            roundi(p.z / grid_step)
+        ))
+    for i in range(1, addresses.size()):
+        var a := Vector3(addresses[i - 1]) * grid_step
+        var b := Vector3(addresses[i]) * grid_step
+        var displacement := b - a
+        grid_copy.get_child(i - 1).show_segment(a, displacement, displacement.length())
+    readout.text = "YOUR SAVED TRACE\nPOINTS " + str(positions.size())
+    readout.text += "\nGRID " + str(grid_step) + " m"
+</code></pre>
+<p><code>load_drawing()</code> returns the saved sculpture, including its recorded positions. <code>add_child(sculpture)</code> places it under this study. The positions are local to the study and measured in metres; the hall supplies the study's location. Moving the study moves the sculpture as a whole without rewriting the gesture.</p>
+<p><code>duplicate()</code> makes a second node tree. The saved sculpture is static. We attach the familiar <code>LineSkin</code> script only to the copy we want to change, then give each copied segment its own saved mesh and material. Otherwise changing a segment's length or colour could change the pink original. This is the same ownership question we met with two PointBody instances. The archive saves shapes and transforms, so loading the pink sculpture does not rerun its construction script.</p>
+<h2 id="Point_Line_Grid--tutorial--an-entry-is-not-an-address">An entry is not an address</h2>
+<p><code>positions[2]</code> means the third sample in the recorded order. A <code>Vector3i</code> address instead counts grid intervals from this study's origin. At a spacing of 0.25 metres, X = 0.10 rounds to address 0; X = 0.15 rounds to 1. X = -0.15 rounds to -1. At exact halfway values, <code>roundi()</code> rounds away from zero.</p>
+<p>Multiplying the address by the spacing returns a position in metres. The loop visits neighbouring addresses and calls the renderer we already used in Trace. Two entries can receive the same address; they stay in the record, while their zero-length connecting segment becomes invisible. All three coordinates are rounded, including height.</p>
+<p>The saved original remains untouched. We change only the green copy's existing segments. Their connections can be diagonal; this is not a route restricted to grid edges.</p>
+<h2 id="Point_Line_Grid--tutorial--change-a-rule-keep-your-work">Change a rule, keep your work</h2>
+<p>Change <code>grid_step</code> from <code>0.25</code> to <code>0.50</code> and run the study again. Both versions load the same saved sculpture; you do not repeat the gesture. Walk around it and compare the two forms. Restore <code>0.25</code> afterwards.</p>
+<p>Before switching, choose a corner and predict its new address. Find two visits that acquire the same address. Switch back: the finer interpretation returns because the original data was kept, not because coarse rounding can be reversed.</p>
+<p>For one experiment, replace <code>roundi(p.y / grid_step)</code> with <code>0</code>. Run Grid again. Pink keeps the recorded height; green is placed on the study's Y = 0 plane. Restore the expression. This is a one-line edit to the complete program above.</p>
+<h2 id="Point_Line_Grid--tutorial--carried-renderer-line_skingd">Carried renderer — line_skin.gd</h2>
+<p>The saved segments use this same file from Lines and Trace. Its full code is here for completeness; Grid introduces no new recipe for a sphere, cylinder or face.</p>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h2 id="Point_Line_Grid--tutorial--supplied-archive-trace_archivegd">Supplied archive — trace_archive.gd</h2>
+<p>This is the same transport used by Trace. Grid calls its loading function; it does not call <code>save_drawing()</code>. Keep the file and renderer paths stable in your working project while using the saved scene.</p>
+<!-- student-code:trace_archive.gd -->
+<pre><code class="language-gdscript"># Supplied transport between museum halls. The lesson owns the drawing.
+extends RefCounted
+
+const PATH := "user://ada_student_trace.scn"
+
+static func keep_on_release(point: Node3D, trail: Node3D, positions: Array[Vector3]) -&gt; void:
+    # Supplied lifecycle boundary: removing a scene is not a request to save.
+    point.dropped.connect(func(_body):
+        if point.get_meta("ada_release_cleanup", false):
+            return
+        if not is_instance_valid(trail) or not trail.is_inside_tree():
+            return
+        await trail.get_tree().process_frame
+        if not is_instance_valid(point) or not is_instance_valid(trail):
+            return
+        if not point.is_inside_tree() or not trail.is_inside_tree():
+            return
+        if point.is_queued_for_deletion() or trail.is_queued_for_deletion():
+            return
+        if positions.size() &gt;= 2:
+            var error := save_drawing(trail, positions)
+            if error != OK:
+                push_error("Could not keep the trace: " + error_string(error))
+    )
+
+static func save_drawing(trail: Node3D, positions: Array[Vector3]) -&gt; Error:
+    if positions.size() &lt; 2:
+        return ERR_INVALID_DATA
+    var saved := Node3D.new()
+    saved.name = "SavedTrace"
+    saved.set_meta("positions", PackedVector3Array(positions))
+    saved.set_meta("frame", "PointStudy local metres")
+    saved.set_meta("version", 1)
+    for child in trail.get_children():
+        if child.is_queued_for_deletion():
+            continue
+        var segment := MeshInstance3D.new()
+        segment.transform = child.transform
+        segment.visible = child.visible
+        segment.mesh = child.mesh.duplicate()
+        segment.mesh.resource_local_to_scene = true
+        segment.material_override = child.material_override.duplicate()
+        segment.material_override.resource_local_to_scene = true
+        saved.add_child(segment)
+        segment.owner = saved
+    var scene := PackedScene.new()
+    var error := scene.pack(saved)
+    if error == OK:
+        error = ResourceSaver.save(scene, PATH)
+    saved.free()
+    return error
+
+static func load_drawing() -&gt; Node3D:
+    if not FileAccess.file_exists(PATH):
+        return null
+    var scene := ResourceLoader.load(PATH, "PackedScene", ResourceLoader.CACHE_MODE_IGNORE) as PackedScene
+    if scene == null:
+        return null
+    var drawing := scene.instantiate() as Node3D
+    if drawing == null:
+        return null
+    if drawing.get_meta("version", 0) != 1 or drawing.get_meta("frame", "") != "PointStudy local metres":
+        drawing.free()
+        return null
+    var record = drawing.get_meta("positions", null)
+    if not record is PackedVector3Array or record.size() &lt; 2 or drawing.get_child_count() != record.size() - 1:
+        drawing.free()
+        return null
+    return drawing
+</code></pre>
+<p>One drawing can now be a record, a sculpture and material for another calculation. Keep its original positions. Triangle can select three corners from them and ask what closes the boundary and gives it a face.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid.gd" rel="noopener" target="_blank">Current grid.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Point_Line_Grid/grid_flat_y.gd" rel="noopener" target="_blank">Complete experiment: grid_flat_y.gd</a></p></div>
+              <div class="page-end">Grid <span>Tutorial</span></div>
+            </article><article class="page final" tabindex="0" aria-label="Grid — final">
+              <div class="running-head"><span>Reflect / final.md</span><a href="http://localhost:3003/book-review/commons/maps/Point_Line_Grid/final.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Point_Line_Grid--final--grid-quantizes-movement">Grid Quantizes Movement</h1>
+<p>Look for your bend. It may have grown.</p>
+<p>This is the drawing you brought from Trace. Your hand made the movement in the previous hall; here its recorded positions give that movement a sculptural form. Over the ruled field, it may have acquired another size. You can walk around a gesture you have finished making.</p>
+<p>Keep the original in view. We are going to give its positions grid addresses, then ask what another arrangement can make of the same trace.</p>
+<h2 id="Point_Line_Grid--final--find-somewhere-to-return">Find somewhere to return</h2>
+<!-- @grab_sphere_point_snap -->
+<p>Pick up the snapping sphere and move it slowly. Its marker follows your hand while the retained line waits, then gains another corner. Between those changes, there is room to move.</p>
+<p>Trace already made choices about which positions to keep. Here the table shows the last ten kept positions, naming each in metres and in whole-number steps from the origin. With five centimetres between grid positions, <code>0.15</code> metres along X has index <code>3</code>: three steps from world zero. The same place has two names.</p>
+<p>The calculation, reduced to one axis, is:</p>
+<pre><code class="language-gdscript">var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
+</code></pre>
+<p>Divide by the spacing. Round to the nearest integer. Multiply back to get metres. At this spacing, <code>0.12</code> becomes <code>0.10</code>; <code>0.13</code> becomes <code>0.15</code>. One centimetre of movement can carry the record across a five-centimetre interval. Elsewhere, a larger movement can leave its address unchanged.</p>
+<p>Let go. The tool brings its marker onto the lattice. Pick it up, move away, then try to return to that address. Several nearby positions can round to the same result. Your hand has room to vary while the point finds its place again. This can help us make two pieces meet without placing them exactly by eye.<sup id="Point_Line_Grid--final--fnref:point-grid-bowker-star"><a class="footnote-ref" href="#Point_Line_Grid--final--fn:point-grid-bowker-star">1</a></sup></p>
+<p>Both columns in the table describe the position the program kept. Your hand can still be somewhere between the addresses.</p>
+<h2 id="Point_Line_Grid--final--give-the-interval-a-rhythm">Give the interval a rhythm</h2>
+<!-- @player_trace -->
+<p>Walk a small loop, then look behind you. Two accounts of the walk remain: a finer sampled reference and a path rounded to one-metre spacing in the recorder's own frame.</p>
+<p>Find a place where you can move while the coarse address holds. Slowly cross into another. Cross back. There is a rhythm in the jump, and room to move within the interval. A rule for making positions agree has also given us something to dance with.<sup id="Point_Line_Grid--final--fnref:point-grid-ahmed-return"><a class="footnote-ref" href="#Point_Line_Grid--final--fn:point-grid-ahmed-return">2</a></sup></p>
+<p>A lean with your feet planted can enter this record too: it follows your headset across the floor. It must choose a point before it can draw a path called yours.</p>
+<p>The lines connect the positions it keeps. A diagonal can cut across ground you went around. Returning to an earlier address can add another turn to the record; the program keeps an order of visits, not just a collection of places visited once. The address marks a return; your reason for coming back has stayed with you.</p>
+<h2 id="Point_Line_Grid--final--let-the-drawing-find-another-use">Let the drawing find another use</h2>
+<!-- @grid_lines -->
+<p>Return to the ruled field. Find your bend in pink, then compare green. Is it still your bend at this size?<sup id="Point_Line_Grid--final--fnref:point-grid-carry"><a class="footnote-ref" href="#Point_Line_Grid--final--fn:point-grid-carry">5</a></sup></p>
+<p>This display subtracts the centre of the received drawing's bounds and applies a scale:</p>
+<pre><code class="language-gdscript">mesh.surface_add_vertex((p - center) * final_scale)
+</code></pre>
+<p>Pink gives the drawing another centre and size. Green rounds those displayed positions onto a new grid. The panel still lists the original positions: the program can give a record another appearance without rewriting what it received.<sup id="Point_Line_Grid--final--fnref:point-grid-replay"><a class="footnote-ref" href="#Point_Line_Grid--final--fn:point-grid-replay">6</a></sup></p>
+<p>Both versions came from your hand; neither contains the whole movement. One bend has become several things we can return to. Keeping them beside one another lets us see what the new rule changed, and leaves the earlier record available for a use we have not chosen yet.</p>
+<p>A turn made by your wrist might now suggest a route for your whole body. Is there a part you would want to follow? A record can become a score, but it needs another decision about what following means.</p>
+<h2 id="Point_Line_Grid--final--give-the-address-a-floor">Give the address a floor</h2>
+<!-- @plan_vitrine -->
+<p>Step onto the small plan in its glass enclosure. Five rows cross five columns: twenty-five one-metre cells. Their printed indices run from zero to four.</p>
+<p>Entering in VR gives each hand a pen. Draw a small circle with the cyan left hand, then try it with the amber right. Cyan follows the sampled movement. Amber places its horizontal positions above the nearest cell centres. A small circle of your hand may leave the amber line waiting at one address.</p>
+<p>The floor has entered the drawing. Its addresses reach up into the air, but they have not taken over every direction. Lift the amber hand without moving it sideways: height still has room to vary. Stepping out returns the pens; the traces linger briefly, then clear.</p>
+<p>Find a cell using both numbers. Leave it and find it again. You can now describe where a cube might stand without pointing. Two indices can become an instruction for placing it.<sup id="Point_Line_Grid--final--fnref:point-grid-scott"><a class="footnote-ref" href="#Point_Line_Grid--final--fn:point-grid-scott">3</a></sup></p>
+<p>Cross a row, then cut diagonally. The drawn divisions do not stop you. A continuous collision surface supports the plan. Over the other basin, the museum supplies walkable glass; the replayed lines provide no floor of their own.</p>
+<p>An address can tell a program where to put something. What lets a body reach it needs further work.<sup id="Point_Line_Grid--final--fnref:point-grid-lefebvre"><a class="footnote-ref" href="#Point_Line_Grid--final--fn:point-grid-lefebvre">4</a></sup></p>
+<!-- @ -->
+<p>A shared address can help us repeat a placement or coordinate a meeting. The grid gives us a way to name a place and return to it together.</p>
+<p>We can bring endpoints back to places where they meet. Next, join three points that do not all lie on one straight line, and close the last gap. The grid can help the corners meet; it does not fill the space between them. What must we add before there is a face inside?</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="Point_Line_Grid--final--fn:point-grid-bowker-star">
+<p>Geoffrey C. Bowker and Susan Leigh Star, <a href="https://mitpress.mit.edu/9780262024617/sorting-things-out/" rel="noopener" target="_blank"><em>Sorting Things Out: Classification and Its Consequences</em></a> (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. The operational comparison here is treating different inputs as equivalent: it can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence. <a class="footnote-backref" href="#Point_Line_Grid--final--fnref:point-grid-bowker-star" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="Point_Line_Grid--final--fn:point-grid-ahmed-return">
+<p>Return to Ahmed, <a href="https://www.dukeupress.edu/queer-phenomenology" rel="noopener" target="_blank"><em>Queer Phenomenology</em></a>, introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument. <a class="footnote-backref" href="#Point_Line_Grid--final--fnref:point-grid-ahmed-return" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="Point_Line_Grid--final--fn:point-grid-scott">
+<p>James C. Scott, <a href="https://yalebooks.yale.edu/book/9780300252989/seeing-like-a-state/" rel="noopener" target="_blank"><em>Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed</em></a> (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place. <a class="footnote-backref" href="#Point_Line_Grid--final--fnref:point-grid-scott" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="Point_Line_Grid--final--fn:point-grid-lefebvre">
+<p>Henri Lefebvre, <a href="https://www.wiley-vch.de/de?isbn=9780631181774&amp;option=com_eshop&amp;title=The+Production+of+Space&amp;view=product" rel="noopener" target="_blank"><em>The Production of Space</em></a>, translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants. <a class="footnote-backref" href="#Point_Line_Grid--final--fnref:point-grid-lefebvre" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="Point_Line_Grid--final--fn:point-grid-carry">
+<p>If the field is empty, return to Trace, draw with one of the three coloured pens until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records. <a class="footnote-backref" href="#Point_Line_Grid--final--fnref:point-grid-carry" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="Point_Line_Grid--final--fn:point-grid-replay">
+<p>Small drawings grow fivefold; larger ones receive a smaller multiplier to fit within five metres. Green rounds the displayed positions with six intervals per metre along each axis. The <a href="http://localhost:3003/book?map=Point_Line_Grid&amp;section=technical" rel="noopener" target="_blank">technical companion</a> gives the transforms and the panel's page controls. <a class="footnote-backref" href="#Point_Line_Grid--final--fnref:point-grid-replay" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+              <div class="page-end">Grid <span>Reflection</span></div>
+            </article></section>
+</main>
+<footer><span id="position" role="status" aria-live="polite">06 / 15 · Grid</span><span class="desktop-hint">Read at your own pace · Each page scrolls independently</span><span>5 October 2026 · Tutorial + reflection</span></footer>
+
+</body>
+</html>

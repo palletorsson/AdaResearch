@@ -1,0 +1,428 @@
+{
+  "ForestCompetition": {
+    "category": "procedural",
+    "complexity": "advanced",
+    "description": "Multiple L-System trees with competing growth strategies and health mechanics",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "ForestCompetition",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "name": "Forest Ecosystem",
+    "parameters": {
+      "footprint": [
+        4.0,
+        6.0,
+        6.0
+      ],
+      "size_group": "environment"
+    },
+    "qfep_connection": "Competition as multi-agent F-minimization \u2014 each tree's growth strategy (its F-model) competes for shared resources. The ecosystem emerges from local growth rules interacting through environmental constraints.",
+    "scene": "res://algorithms/lsystems/Ecosystem/ForestCompetition.tscn",
+    "tags": [
+      "l_system",
+      "procedural",
+      "simulation"
+    ],
+    "geometry_spec": {
+      "mesh_type": "procedural_line",
+      "topology": "non_manifold",
+      "construction": {
+        "method": "l_system_turtle",
+        "primitives": [],
+        "operations": [
+          "string_rewrite",
+          "turtle_interpret",
+          "emit_lines"
+        ]
+      },
+      "material": {
+        "type": "vertex_color",
+        "shading_model": "unshaded",
+        "key_properties": [
+          "transparency",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "vertex",
+        "driven_by": "per_frame_rebuild",
+        "affects": [
+          "vertex_positions"
+        ]
+      },
+      "instance_strategy": "array",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 9,
+      "clearance": {
+        "front": 2,
+        "back": 2,
+        "left": 2,
+        "right": 2
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "lsystem_tree",
+        "single",
+        "competing",
+        "forest",
+        "allometric"
+      ],
+      "preferred_zone": "end",
+      "measured_footprint_cells": 56,
+      "footprint_source": "measured_capped"
+    },
+    "measurements": {
+      "aabb_size": [
+        7.37,
+        1.59,
+        7.0
+      ],
+      "aabb_center": [
+        0.19,
+        0.78,
+        0.0
+      ],
+      "grid_cells": [
+        8.0,
+        7.0
+      ],
+      "max_dimension_m": 7.37,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      8.0,
+      1,
+      7.0
+    ],
+    "spatial_profile": {
+      "dir_group": "plane",
+      "range": 18,
+      "density": "field",
+      "min_clearance": 0,
+      "stack_priority": 0.3,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "branching_coral": {
+    "category": "procedural",
+    "complexity": "intermediate",
+    "description": "Marine L-system coral colony \u2014 multiple shoots with wide branching angles produce organic fan and staghorn forms. Color gradient from deep purple-brown base to bright pink coral tips on a rock base.",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "branching_coral",
+    "map_ready": true,
+    "map_sequences": [
+      "lsystems"
+    ],
+    "name": "Branching Coral",
+    "dna": {
+      "promoted": "2026-08-03",
+      "stage": "2 - variation",
+      "axes": {
+        "growth_form": [
+          "staghorn",
+          "fan",
+          "table",
+          "whip",
+          "brain"
+        ],
+        "condition": [
+          "living",
+          "bleached",
+          "fluorescent",
+          "encrusted"
+        ]
+      },
+      "default": "growth_form=staghorn, condition=living - staghorn IS the shipped build, value for value: its rules are the old CORAL_RULES strings unchanged, angle_scale and decay_scale are 1.0 so current_angle stays base_angle and decay stays length_decay, and spread 0.6 / out 0.3 / lift 1.0 are the literals that were baked into _grow_shoot's shoot_angle and base_dir. living returns [base_color, Color(0.8, 0.35, 0.3), tip_color], the third of which was a local named mid_color inside _draw_coral. So both existing placements (LSystems_Competition at (6,4), LSystems_Living at (2,6), plus the three curation_station rosters that list the token) draw the identical colony.",
+      "was": "no enum export at all. One grammar: CORAL_RULES was a const read directly by _grow_shoot, the fork angle was base_angle alone, the shoot fan was the literals 0.6 and 0.3, and the depth ramp was base_color -> a local mid_color -> tip_color. Every knob that existed (iterations, num_shoots, base_angle, length_decay, display_size) turned the SIZE of one fixed coral; nothing turned the coral into a different coral. apply_grid_config also called _generate() unconditionally, so any config pass redrew the mesh.",
+      "note": "growth_form is the grammar, not the scale - a different production read by the same turtle, off a differently tilted holdfast. fan drops the roll symbols so branching stays in the shoot's own plane and the shoots barely spread (one surface held into the current); table tilts the holdfast almost flat and throws the shoots right around, growing sideways for light instead of upward for height; whip runs long between rare forks; brain pushes the fork angle past 60 degrees, which folds each branch back over itself so the colony closes into a mound instead of opening into a thicket. condition turns what the colour gradient REPORTS. In this artifact the purple-brown-to-pink ramp is a readout of recursion depth - a segment's colour says how deep in the grammar it sits. bleached does not reshape one branch; it deletes that readout, so the colony is still there and no longer says where it is. fluorescent and encrusted re-key the same three stops without touching the geometry, which makes the pair separable: growth_form moves the lines, condition moves only their colour.",
+      "kin": "growth_form, not form. branching_growth_algorithm, recursive_tree and space_colonization_algorithm already spend the bare word `form` as a VALUE of their staging axis `aftermath`, and reusing it as an axis NAME here would have made the family's vocabulary ambiguous in the one place it is meant to be shared. No sibling in the corpus declares growth_form or condition, so both words are new rather than borrowed-and-bent.",
+      "fixture_note": "no fixture is needed. The colony was already fully determined - _ready seeds the rng at 77 and every shoot reseeds to 77 + shoot_idx * 13 before it draws - so two values of an axis differ by the axis and nothing else. The literal 77 is now the var _base_seed, which also makes the pre-existing but dead `seed` config key actually reach the geometry (it used to set _rng.seed only to have _grow_shoot overwrite it on the next line); no placed token passes seed, so nothing shipped moves.",
+      "reads": "the .tscn root is the scripted node (branching_coral.gd, class_name BranchingCoral) so both axes are reachable from a map token and from the sweep. apply_grid_config accepts growth_form (or form) and condition, IGNORES an unknown value instead of assigning it - a silent fallback to the default is how a sweep publishes N identical frames and calls the axis inert - and rebuilds only when a value actually changed AND _ready has already built once."
+    },
+    "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
+    "tags": [
+      "color",
+      "l_system",
+      "procedural",
+      "simulation",
+      "swarm"
+    ],
+    "geometry_spec": {
+      "mesh_type": "procedural_line",
+      "topology": "non_manifold",
+      "construction": {
+        "method": "l_system_turtle",
+        "primitives": [
+          "box"
+        ],
+        "operations": [
+          "string_rewrite",
+          "turtle_interpret",
+          "emit_lines"
+        ]
+      },
+      "material": {
+        "type": "vertex_color",
+        "shading_model": "unshaded",
+        "key_properties": [
+          "metallic"
+        ]
+      },
+      "animation": {
+        "type": "static",
+        "driven_by": null,
+        "affects": []
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "unknown"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "lsystem_tree",
+        "single",
+        "trunk",
+        "multi",
+        "shoot"
+      ],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.35,
+        0.53,
+        0.28
+      ],
+      "aabb_center": [
+        0.0,
+        0.23,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.53,
+      "measured_at": "2026-04-29T07:09:56.762620Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "floor",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  },
+  "dark_sphere": {
+    "dna": {
+      "promoted": "2026-07-27",
+      "stage": "2 - variation",
+      "axes": {
+        "presence": [
+          "witness",
+          "hush",
+          "beacon",
+          "eclipse",
+          "becoming"
+        ],
+        "body": [
+          "orb",
+          "swarm",
+          "cage",
+          "cairn"
+        ]
+      },
+      "default": "presence=witness + body=orb is the legacy lineage; every witness multiplier is 1.0.",
+      "note": "The agent DEMOTED pulse_speed rather than exposing it: the identity named a rate as critical_parameter, but its own justification was about how much room the sphere takes - the rate was a proxy for presence. presence spends part of its delta on radius, which self-cancels under an AABB-fitted camera; judge hush vs witness at a fixed camera."
+    },
+    "category": "procedural",
+    "complexity": "intermediate",
+    "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+    "dev_themes": [
+      "grammar",
+      "l_systems",
+      "procedural"
+    ],
+    "include_in_map_data": true,
+    "lookup_name": "dark_sphere",
+    "map_ready": true,
+    "map_sequences": [
+      "array_tutorial",
+      "bricolage",
+      "cellularautomata",
+      "color",
+      "constraint_solvers",
+      "forces",
+      "fractals",
+      "isosurfaces",
+      "lsystems",
+      "noise",
+      "particles",
+      "patterngeneration",
+      "physicssimulation",
+      "primitives",
+      "proceduralgeneration",
+      "proceduralgeneration_all",
+      "qfeplaboratory",
+      "randomness",
+      "testmaps",
+      "transformation",
+      "unused",
+      "wavefunctions"
+    ],
+    "name": "Dark Sphere",
+    "parameters": {
+      "footprint": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "size_group": "compact"
+    },
+    "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+    "tags": [
+      "reference",
+      "atmosphere",
+      "sphere",
+      "scale_marker",
+      "lighting",
+      "geometry",
+      "procedural"
+    ],
+    "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
+    "gamwell_reference": "",
+    "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
+    "interactions": [
+      "observe the pulsing sphere against transformed geometry",
+      "use it as a scale and occlusion reference in the room",
+      "compare its stable silhouette with more dynamic artifacts nearby",
+      "treat it as an atmospheric marker when reading spatial change"
+    ],
+    "geometry_spec": {
+      "mesh_type": "composed_primitives",
+      "topology": "manifold_closed",
+      "construction": {
+        "method": "primitive_assembly",
+        "primitives": [
+          "sphere",
+          "cylinder"
+        ],
+        "operations": [
+          "create_primitives",
+          "position_children"
+        ]
+      },
+      "material": {
+        "type": "unlit",
+        "shading_model": "unshaded",
+        "key_properties": [
+          "emission",
+          "metallic",
+          "transparency",
+          "double_sided"
+        ]
+      },
+      "animation": {
+        "type": "transform",
+        "driven_by": "per_frame_update",
+        "affects": [
+          "transform"
+        ]
+      },
+      "instance_strategy": "single",
+      "vertex_estimate": "~1536"
+    },
+    "spatial_needs": {
+      "platform": "none",
+      "footprint_cells": 1,
+      "clearance": {
+        "front": 1,
+        "back": 1,
+        "left": 1,
+        "right": 1
+      },
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any",
+      "measured_footprint_cells": 1,
+      "footprint_source": "measured"
+    },
+    "measurements": {
+      "aabb_size": [
+        0.84,
+        0.95,
+        0.84
+      ],
+      "aabb_center": [
+        0.0,
+        0.48,
+        0.0
+      ],
+      "grid_cells": [
+        1.0,
+        1.0
+      ],
+      "max_dimension_m": 0.95,
+      "measured_at": "2026-08-12T04:39:51.280397Z"
+    },
+    "footprint_measured": [
+      1.0,
+      1,
+      1.0
+    ],
+    "spatial_profile": {
+      "dir_group": "omni",
+      "range": 2,
+      "density": "medium",
+      "min_clearance": 1,
+      "stack_priority": 0.5,
+      "approach_dir": "any",
+      "derived_at": "2026-04-29T09:39:46.147725Z",
+      "derived_from": "aabb_size + category"
+    }
+  }
+}

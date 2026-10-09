@@ -1,0 +1,83 @@
+{
+  "checks": 22,
+  "control_path": "picked_up/dropped emitted programmatically on the bob pickable; no tracked hand",
+  "engine": "4.6-stable (official)",
+  "failures": [],
+  "headset_verified": false,
+  "map": "WaveFunctions_Intro",
+  "measurements": {
+    "bob_detached_at_frame": 1,
+    "bob_in_tree": false,
+    "bob_parent": "none",
+    "bob_present_when_found": false,
+    "bob_tree_events": [],
+    "bob_valid": true,
+    "bob_var": "BobSphere:<RigidBody3D#404783894346>",
+    "crossings": [
+      {
+        "dir": -1,
+        "omega": -0.709070185414102,
+        "t": 0.347000000000001
+      },
+      {
+        "dir": 1,
+        "omega": 0.633309554116129,
+        "t": 1.118
+      },
+      {
+        "dir": -1,
+        "omega": -0.562813957792387,
+        "t": 1.889
+      },
+      {
+        "dir": 1,
+        "omega": 0.500034937120102,
+        "t": 2.683
+      },
+      {
+        "dir": -1,
+        "omega": -0.444130756907461,
+        "t": 3.448
+      },
+      {
+        "dir": 1,
+        "omega": 0.396460967297603,
+        "t": 4.213
+      }
+    ],
+    "grab_spheres_elsewhere": [],
+    "installation_aabb": [
+      0.6,
+      0.73,
+      0.27
+    ],
+    "pendulum_children": [
+      "Pivot:Node3D",
+      "@Label3D@688:Label3D",
+      "Reference:Node3D",
+      "Evidence:Node3D"
+    ],
+    "pendulum_children_at_detach": [
+      "Pivot",
+      "@Label3D@688",
+      "Reference",
+      "Evidence"
+    ],
+    "pendulum_found_at_frame": 0,
+    "pendulum_grabbed_at_detach": false,
+    "pendulum_in_tree_at_detach": true,
+    "pendulum_parent_at_detach": "Seg0_louisiana-pavilion-chain",
+    "release_path": "NOT TESTABLE in a SceneTree probe: grab_sphere.gd / XR Tools pickable name autoloads at compile time (see engine.log); the bob is built in the shipped game",
+    "rest_point_local": [
+      2.5,
+      0.899999976158142,
+      15.5
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "physics_fps": 60
+}

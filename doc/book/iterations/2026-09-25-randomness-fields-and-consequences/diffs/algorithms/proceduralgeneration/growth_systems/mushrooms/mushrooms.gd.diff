@@ -1,0 +1,17 @@
+--- before/algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd
++++ algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd
+@@ -127,6 +127,14 @@
+ ## What the stand needs before the first build: a NAMED seed a visitor can read and repeat
+ ## (from a private generator, never the global stream), a cap on the lights, the bed lifted.
+ func _prepare_stand() -> void:
++	# Standalone preview furniture is not part of the specimen population.
++	# Remove it only for this opt-in staging; leave the authored scene intact.
++	for node_name in ["Camera3D", "FillLight", "MeshInstance3D"]:
++		var demo := get_node_or_null(node_name)
++		if demo != null:
++			remove_child(demo)
++			demo.queue_free()
++	set_meta("specimen_scene_cleaned", true)
+ 	if population_seed < 0:
+ 		var r := RandomNumberGenerator.new()
+ 		r.randomize()

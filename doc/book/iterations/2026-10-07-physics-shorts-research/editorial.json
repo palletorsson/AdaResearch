@@ -1,0 +1,402 @@
+{
+  "title": "Will it work? Physics as a small story",
+  "date": "2026-10-07",
+  "finding": "The attraction is a physical question with a visible answer. Precision and failure can both complete it. A clean fit, a well-timed catch and a mechanism that unexpectedly defeats its own task belong in the same museum.",
+  "revision": "This revises the earlier emphasis on catastrophe: every encounter should offer a satisfying ordinary success, a readable near miss, and room for an alternative outcome. Do not arrange failure as the compulsory ending.",
+  "method": "1,000 unique public Shorts titles from 17 channel lists. Purposive channel selection, up to 100 visible entries per list, then fixed-order round-robin selection by unique video ID. Titles include promotional and unrelated entries; these were retained to avoid silently cherry-picking results. This is neither a random YouTube sample nor the author's personalised feed.",
+  "limits": "Title analysis cannot establish what happens in a video, whether it is one continuous take, how often the maker tried, or why viewers stayed. Keyword counts below are overlapping lexical cues, not verified content categories or popularity findings. The visual questions and Ada proposals are editorial interpretations. No videos were downloaded or watched for this title study.",
+  "modes": [
+    {
+      "name": "Prediction",
+      "question": "Where will it land? Which exit?",
+      "example_ids": [
+        "FL7uolAXwJI",
+        "JwYB9nCdKOM"
+      ],
+      "ada": "Launch the same point at two receiver openings. Commit, watch the whole arc, then change one parameter."
+    },
+    {
+      "name": "Fit and obstruction",
+      "question": "Will it pass, slot in or become stuck?",
+      "example_ids": [
+        "af86iJXVds0",
+        "CsEV7ryCJ9A"
+      ],
+      "ada": "Rotate a box through a doorway, or roll a sphere through a transparent elbow. The collision boundary supplies the answer."
+    },
+    {
+      "name": "Balance and threshold",
+      "question": "How much more before it moves?",
+      "example_ids": [
+        "hE_RoySTrOg",
+        "kCNnW0XC7t4"
+      ],
+      "ada": "Add one known weight, shift a support or release a hinged pole. A small change can cross a visible threshold."
+    },
+    {
+      "name": "Precision and completion",
+      "question": "Can all the parts meet at the right time?",
+      "example_ids": [
+        "IVg1OWjE168",
+        "TSZ4L_A1Y7s"
+      ],
+      "ada": "Catch a spring-launched sphere in a moving cup. Let a clean landing and its sound be the reward."
+    },
+    {
+      "name": "Chain reaction",
+      "question": "Will this one event reach the end?",
+      "example_ids": [
+        "B5NdMM7x7lE",
+        "Os6_0Fjc9f8"
+      ],
+      "ada": "A pole knocks a ball into a spring, which opens a gate. Each transfer remains visible; a stall can be inspected."
+    },
+    {
+      "name": "Escalation and comparison",
+      "question": "How far, fast or heavy can it go?",
+      "example_ids": [
+        "HKdAMTdCcwA",
+        "zdcH2xsb9h0"
+      ],
+      "ada": "Repeat a known launch with one changed demand. Keep the mechanism constant so the threshold can be understood."
+    },
+    {
+      "name": "The helper defeats its task",
+      "question": "Will the machine's promise survive its own operation?",
+      "example_ids": [
+        "ufVki_0QRL8",
+        "-fCMFoM0Bxk"
+      ],
+      "ada": "One robot arm puts the cube away; another returns it. Both complete their tasks, while the combined task never finishes."
+    },
+    {
+      "name": "Rhythm and return",
+      "question": "Will it come back and repeat?",
+      "example_ids": [
+        "IzEXN2tHiUc",
+        "vNQQ7lt07Wc"
+      ],
+      "ada": "A spring pair exchanges a point; the same path becomes a beat. Change damping or spacing and hear the relation change."
+    }
+  ],
+  "rhythm": [
+    "Show the whole apparatus and an intelligible destination before explaining the rule.",
+    "Let the player make a prediction: land, fit, balance, repeat, escape or stop.",
+    "Offer one meaningful adjustment and an explicit release or start.",
+    "Let the process unfold without hiding the decisive contact.",
+    "Keep the result visible: a fit, rebound, jam, missed catch or new arrangement.",
+    "Make another trial easy while preserving the option to keep the aftermath."
+  ],
+  "source_findings": [
+    {
+      "name": "Hinge crank",
+      "paths": [
+        "algorithms/joint/03_hinge_crank/HingeCrank.gd"
+      ],
+      "finding": "Creates rigid wheel and rod with HingeJoint3D, PinJoint3D and SliderJoint3D. The inspected script sets target speed but does not enable the hinge motor. A runnable mechanism test is needed before treating the comment's powered motion as verified."
+    },
+    {
+      "name": "Drawbridge",
+      "paths": [
+        "algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.gd"
+      ],
+      "finding": "Creates a rigid bridge and a limited hinge, changes target velocity from keys/idle oscillation. It likewise does not enable the motor in the inspected script. Review hinge orientation and limits while testing the actual movement."
+    },
+    {
+      "name": "Slider press",
+      "paths": [
+        "algorithms/joint/04_slider_press/SliderPress.gd"
+      ],
+      "finding": "Builds a SliderJoint3D and drives the rigid piston with an applied-force velocity controller. The comment's declared Z guide and the joint rotation need verification; the explicit delta * 60 factor in applied force also needs a timestep review. It is a useful candidate, not a proven stock actuator."
+    },
+    {
+      "name": "Bowling",
+      "paths": [
+        "algorithms/forces/games/force_bowling_vr.gd",
+        "core/mover.gd"
+      ],
+      "finding": "A small bowling study already creates Mover balls and pins, applies gravity/friction and scores motion/height thresholds. This inspection does not establish full rigid-body ball-pin contacts or working hand release. Reuse its layout intent; verify or replace the receiver mechanism before calling it a playable physics lane."
+    },
+    {
+      "name": "Robot arms",
+      "paths": [
+        "commons/artifacts/robot_arm/robot_arm.gd",
+        "commons/artifacts/industrial_robot_arm/industrial_robot_arm.gd"
+      ],
+      "finding": "Both inspected artifacts construct articulated-looking props in configured poses. The pair that picks up and returns a cube would be a new interaction, not a switch on an existing grasp controller."
+    },
+    {
+      "name": "Four-legged opponent",
+      "paths": [
+        "commons/hazards/octapod_crawler/four_leg_critter.gd"
+      ],
+      "finding": "The existing walker has four IK leg chains and a commanded sequential stepping gait. It is a visual/behavioral starting point, not evidence of force-supported balance. A back-mounted turret, recoil response and physical support would be explicit additions."
+    },
+    {
+      "name": "Mortar and three bodies",
+      "paths": [
+        "commons/artifacts/mortar_vector_siege/mortar_vector_siege.gd",
+        "algorithms/physicssimulation/threebodyproblem/ThreeBodyProblem.gd"
+      ],
+      "finding": "The mortar contains aim/charge, preview and rigid-shell firing logic. Its variable called force sets launch speed; keep speed and force distinct in the tutorial. The three-body study exposes initial-condition families and trails. Neither was run in this pass; do not promise every initial condition becomes chaotic or escapes."
+    },
+    {
+      "name": "The cube conveyor",
+      "paths": [
+        "commons/artifacts/cube_sorting_line/cube_sorting_line.gd",
+        "commons/artifacts/timing_machines/conveyor_backlog.gd"
+      ],
+      "finding": "The familiar sorting line and Forces backlog apparatus give two concrete precedents for input, accumulation and delayed consequences. Preserve their documented finite-body/storage policies rather than implying an unbounded simulation."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "push",
+      "title": "One box, one passage",
+      "question": "Can I clear the door without blocking my way out?",
+      "learn": "Contact, friction, pushing direction",
+      "precision": "The box fits its bay and the route stays open.",
+      "failure": "The push solves one obstruction and creates another.",
+      "scope": "Core; small puzzle using the familiar cube.",
+      "source_names": []
+    },
+    {
+      "id": "catapult",
+      "title": "The cup across the room",
+      "question": "Can I make one clean landing?",
+      "learn": "Launch velocity, impulse and gravity",
+      "precision": "The black sphere lands and stays in its cup.",
+      "failure": "A rim strike turns the intended catch into a second trajectory.",
+      "scope": "Core; catapult/launch family is already present.",
+      "source_names": [
+        "Mortar and three bodies"
+      ]
+    },
+    {
+      "id": "flight",
+      "title": "Two points, one landing",
+      "question": "Can my two hands bring me to rest on that ledge?",
+      "learn": "Vector sum, sustained thrust, retained velocity",
+      "precision": "Counter-thrust produces a controlled landing.",
+      "failure": "One hand keeps thrusting and the approach curves.",
+      "scope": "Core ability already chosen: aim down/back + triggers; implementation still proposed.",
+      "source_names": []
+    },
+    {
+      "id": "wall",
+      "title": "Push away from the wall",
+      "question": "Can I free a platform that has carried me into a corner?",
+      "learn": "External contact impulse and reaction",
+      "precision": "A push against the wall moves the platform out.",
+      "failure": "A poor contact point turns it and wedges it again.",
+      "scope": "Small skateboard/trolley variant. A paddle in empty air must not supply unexplained propulsion.",
+      "source_names": []
+    },
+    {
+      "id": "fit",
+      "title": "Will it fit?",
+      "question": "Can this cube pass through this slot?",
+      "learn": "Orientation, collision shapes and clearance",
+      "precision": "A deliberate rotation finds the opening.",
+      "failure": "A near fit jams on an edge.",
+      "scope": "Return to Transformation inside a physical encounter.",
+      "source_names": []
+    },
+    {
+      "id": "pole",
+      "title": "The falling pole becomes a bridge",
+      "question": "Where will its far end land?",
+      "learn": "Hinge axis, gravity, angular limits",
+      "precision": "One released pole spans the gap.",
+      "failure": "It stops short or tips a second support.",
+      "scope": "Priority prototype; one hinge and one readable destination.",
+      "source_names": [
+        "Drawbridge",
+        "Hinge crank"
+      ]
+    },
+    {
+      "id": "crank",
+      "title": "The crank and the waiting cube",
+      "question": "Will the piston meet the cube while the gate is open?",
+      "learn": "Constraints, rotary-to-linear conversion and timing",
+      "precision": "A cube advances one place each cycle.",
+      "failure": "A badly timed contact leaves a visible jam.",
+      "scope": "Optional mechanism study after the hinge and slider have passed tests.",
+      "source_names": [
+        "Hinge crank",
+        "Slider press"
+      ]
+    },
+    {
+      "id": "spring",
+      "title": "The spring catches another ball",
+      "question": "Will the returning point catch, miss or strike its neighbour?",
+      "learn": "Restoring force, damping and contact",
+      "precision": "Two spring-mounted spheres exchange motion in a readable rhythm.",
+      "failure": "A changed spacing produces a missed contact or an extra collision.",
+      "scope": "Core spring encounter. Source energy comes from the player's stretch or a declared preload.",
+      "source_names": []
+    },
+    {
+      "id": "three",
+      "title": "Three bodies, two beginnings",
+      "question": "Will nearly identical starts stay together?",
+      "learn": "Mutual attraction and sensitivity to initial conditions",
+      "precision": "A chosen repeating family holds its visible organization.",
+      "failure": "A different starting condition changes the partnership or sends a body away.",
+      "scope": "Later Forces comparison; preserve deterministic replay and inspect integration error before claiming chaos.",
+      "source_names": [
+        "Mortar and three bodies"
+      ]
+    },
+    {
+      "id": "bowling",
+      "title": "One ball, ten pins",
+      "question": "Can I clear the arrangement with one release?",
+      "learn": "Release velocity, contact, mass and friction",
+      "precision": "A legible line of contacts yields a strike.",
+      "failure": "A pin remains standing or rebounds into a different lane.",
+      "scope": "Priority prototype after the point has a verified dynamic receiver.",
+      "source_names": [
+        "Bowling"
+      ]
+    },
+    {
+      "id": "pads",
+      "title": "Poles over the burning void",
+      "question": "Can I arrive on the next pole with the right velocity?",
+      "learn": "Pad impulse, ballistic flight and timing",
+      "precision": "A chain of well-timed landings carries the player across.",
+      "failure": "A late or sideways approach misses the next receiver.",
+      "scope": "Course assembled from the already taught pads and gravity; no new compulsory force law.",
+      "source_names": []
+    },
+    {
+      "id": "mortar",
+      "title": "The three-ring mortar range",
+      "question": "Can the sphere pass through the rings and reach the cup?",
+      "learn": "Prediction of a trajectory and a visible tolerance",
+      "precision": "One arc passes the openings cleanly.",
+      "failure": "A ring contact redirects the sphere.",
+      "scope": "Candidate interpretation of the donut/mortar idea: torus targets return from Primitives. Hollow colliders must match the openings.",
+      "source_names": [
+        "Mortar and three bodies"
+      ]
+    },
+    {
+      "id": "incline",
+      "title": "Slide, roll or tip?",
+      "question": "Which body arrives first, and in what orientation?",
+      "learn": "Friction, angular motion and rotational constraints",
+      "precision": "The chosen body reaches its matching receiver.",
+      "failure": "A sliding cube tips and changes its contact.",
+      "scope": "Priority controlled comparison. First compare the same body with rotation free/locked, then compare shapes.",
+      "source_names": [
+        "Slider press"
+      ]
+    },
+    {
+      "id": "arms",
+      "title": "Put it away / put it back",
+      "question": "Which machine gets the last word?",
+      "learn": "States, conditions, grasp/release and conflicting goals",
+      "precision": "Each arm completes its own transfer reliably.",
+      "failure": "Together they produce an endless exchange; blocking one changes the cycle.",
+      "scope": "Sandbox/reflective encounter with supplied controllers; do not smuggle full robot kinematics into the first Forces tutorial.",
+      "source_names": [
+        "Robot arms"
+      ]
+    },
+    {
+      "id": "dog",
+      "title": "The four-legged turret",
+      "question": "Can it keep its aim while its support changes?",
+      "learn": "Support, applied impulse, recoil and control limits",
+      "precision": "It fires from a stable stance.",
+      "failure": "A push or displaced support forces a recovery and opens a crossing.",
+      "scope": "Later arena opponent; the existing commanded gait is not a physics dog. Telegraph its action and allow diversion/obstruction as well as shooting.",
+      "source_names": [
+        "Four-legged opponent"
+      ]
+    },
+    {
+      "id": "wood",
+      "title": "Cut one support",
+      "question": "What will the remaining structure carry?",
+      "learn": "Constraint removal, gravity and redistributed load",
+      "precision": "A chosen cut makes a pole fall into a useful bridge.",
+      "failure": "A different support falls or the load lands elsewhere.",
+      "scope": "Optional chopping encounter using authored breakable connections; not a claim of simulated wood grain or general mesh fracture.",
+      "source_names": []
+    },
+    {
+      "id": "skate",
+      "title": "The skateboard and the point",
+      "question": "Can I cross the room and stop on the mark?",
+      "learn": "Impulse, friction and balance",
+      "precision": "One push and a measured brake produce the stop.",
+      "failure": "The board travels farther than its load can remain balanced.",
+      "scope": "Embodied return to known forces; desktop/tabletop ball-on-board comparison remains available.",
+      "source_names": []
+    },
+    {
+      "id": "pipe",
+      "title": "The transparent pipe",
+      "question": "Where does the ball go when the curve stops guiding it?",
+      "learn": "Constraint contact, tangential departure and gravity",
+      "precision": "The exit points at a receiving cup.",
+      "failure": "The ball leaves tangentially where the player expected it to keep curving.",
+      "scope": "Priority apparatus with a visible whole path. Use a declared spring/impulse source, not unexplained pneumatic realism.",
+      "source_names": []
+    },
+    {
+      "id": "factory",
+      "title": "The conveyor fills the room",
+      "question": "Can the receiver keep up?",
+      "learn": "Rates, retained stock, contact and available space",
+      "precision": "Matched input and removal sustain a steady flow.",
+      "failure": "Backlog occupies the route and changes later contacts.",
+      "scope": "Core combination from the known cube and existing conveyors.",
+      "source_names": [
+        "The cube conveyor"
+      ]
+    },
+    {
+      "id": "relay",
+      "title": "One release, five transfers",
+      "question": "Will the first push ring the final bell?",
+      "learn": "Composition of already learned contacts and constraints",
+      "precision": "The whole relay completes.",
+      "failure": "It stalls at a contact the player can inspect and adjust.",
+      "scope": "Final sandbox: choose a few verified mechanisms, not every exhibit active at once.",
+      "source_names": [
+        "Hinge crank",
+        "Slider press"
+      ]
+    }
+  ],
+  "priorities": [
+    "Falling hinged pole: one release, one arc, one clear landing.",
+    "Transparent pipe: the point remains visible while a constraint changes its route.",
+    "Mini bowling: repeatable skill, legible contact, satisfying success and near misses.",
+    "Incline comparison: one controlled change makes sliding, rolling and tipping tangible.",
+    "Conveyor: the strongest existing example of a small rule accumulating into a changed room."
+  ],
+  "curriculum": "Use an intelligible route through push/fit → launch/catch → fly/land → roll/slide → hinge/slider → spring/contact → attraction/orbit → composed arena. These are teaching groups for selecting encounters, not a new canonical map order. The robot pair, physics dog and complex mechanisms can be supplied sandbox encounters; they do not all require full construction tutorials here.",
+  "compact_brief": "KNOWN BODY → VISIBLE GOAL → PREDICT → ONE ADJUSTMENT → RELEASE → CAUSAL RESULT → RETRY/KEEP. Offer precision, near miss, surprise. Show decisive contact. Reuse sphere/cube. Test mechanism, not a prescribed gag. Preserve aftermath; reset deliberately.",
+  "references": [
+    {
+      "label": "Garry's Mod: official physics-sandbox description",
+      "url": "https://gmod.facepunch.com/"
+    },
+    {
+      "label": "Physics Sandbox VR: developer product description",
+      "url": "https://store.steampowered.com/app/1403040/Physics_Sandbox_VR/"
+    },
+    {
+      "label": "Godot HingeJoint3D: motor must be enabled",
+      "url": "https://docs.godotengine.org/en/stable/classes/class_hingejoint3d.html"
+    }
+  ]
+}

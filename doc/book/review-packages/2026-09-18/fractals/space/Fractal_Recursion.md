@@ -1,0 +1,26 @@
+# Fractal_Recursion
+
+Authored dimensions: {"width": 17, "depth": 25, "max_height": 6}
+
+![Source plan](Fractal_Recursion.svg)
+
+Source plan only: columns=x, rows=z. Red dots are manuscript/role primary anchors; blue dots are other placed objects; green crosses are utilities. Numbers refer to A rows below. Dark blue is source 0, cream lower structure, grey source wall-height threshold, ochre platforms. Museum overrides can change the built interpretation. Dots show anchors, not footprints or a proven route.
+
+Map: [commons/maps/Fractal_Recursion/map_data.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/Fractal_Recursion/map_data.json)
+
+Text: [commons/maps/Fractal_Recursion/final.md](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/maps/Fractal_Recursion/final.md)
+
+| Instance | x,z | Raw token | Recorded role | Registry / scene |
+|---|---|---|---|---|
+| A1 | 4,5 | `fractal_recursion_2:180:2.2#initial_size:2.2#depth:1#lesson:true` | primary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/example_8_2_recursion_vr.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/example_8_2_recursion_vr.tscn) |
+| A2 | 12,5 | `example_8_3_recursion_circles_vr:180:2.4#depth:1#rotation_speed:0#lesson:true` | primary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/example_8_3_recursion_circles_vr.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/example_8_3_recursion_circles_vr.tscn) |
+| A3 | 4,11 | `cube_subdivision:180:1.5#seed_value:31415#lesson:true` | primary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/cubesubdivision/cube_subdivision.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/cubesubdivision/cube_subdivision.tscn) |
+| A4 | 12,11 | `recursive_chair:180:0#lesson:true` | primary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/cubesubdivision/recursive_chair.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/cubesubdivision/recursive_chair.tscn) |
+| A5 | 2,14 | `science_screen:90:0.04#mode:bars#label:Independent sample` | secondary | [commons/artifacts/registry/shaders.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/shaders.json) → [commons/artifacts/science_screen/science_screen.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/science_screen/science_screen.tscn) |
+| A6 | 14,15 | `dark_sphere` | decoration | [commons/artifacts/registry/lsystems.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/lsystems.json) → [commons/artifacts/dark_sphere/dark_sphere.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/dark_sphere/dark_sphere.tscn) |
+| A7 | 4,17 | `recursive_table:180:0:0.8` | secondary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/cubesubdivision/recursive_table.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/cubesubdivision/recursive_table.tscn) |
+| A8 | 12,17 | `cube_staircase:180:0:0.6` | secondary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/cubesubdivision/cube_staircase.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/cubesubdivision/cube_staircase.tscn) |
+| A9 | 4,22 | `fibonacci_pagoda:180:0.7:0.55` | secondary | [commons/artifacts/registry/procgen_extra.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/procgen_extra.json) → [algorithms/fractals/pillar/fibonacci_pagoda.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/algorithms/fractals/pillar/fibonacci_pagoda.tscn) |
+| A10 | 12,22 | `synthesis_stand#subject:dark_sphere#mode:hero` | secondary | [commons/artifacts/registry/synthesis.json](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/registry/synthesis.json) → [commons/artifacts/synthesis/synthesis_stand.tscn](https://github.com/palletorsson/AdaResearch/blob/palm-scanner-door-entry/commons/artifacts/synthesis/synthesis_stand.tscn) |
+
+Utilities are listed with exact coordinates and raw tokens in space.json. Read map_info.museum and utility_definitions before inferring pits, entrances, movement or collision.

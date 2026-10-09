@@ -1,0 +1,103 @@
+extends Node3D
+## A point released to gravity. Samples the real rigid body; never drives its path.
+const RADIUS := 0.14
+const HOME := Vector3(0, 1.14, -0.20)
+const SAMPLE_DISTANCE := 0.018
+const CAPACITY := 1024
+var ball: XRToolsPickable
+var samples: PackedVector3Array = []
+var recording := false
+var held := false
+var ink: MultiMeshInstance3D
+var segment_count := 0
+
+func _ready() -> void:
+	var porcelain := material(Color(0.93,0.92,0.88),0.48)
+	var black := material(Color(0.009,0.01,0.015),0.27)
+	box("Plinth",Vector3(1.25,1,1.25),Vector3(0,0.5,0),porcelain)
+	var a := Vector3(0,1,0.55)
+	var b := Vector3(0,0.045,3.80)
+	var axis := (b-a).normalized()
+	var ramp_basis := Basis(Quaternion(Vector3.BACK,axis))
+	var plank := box("Plank",Vector3(0.82,0.12,a.distance_to(b)),(a+b)*0.5-ramp_basis.y*0.06,porcelain)
+	plank.basis=ramp_basis
+	for side in [-1.0,1.0]:
+		var rail := box("PlankLip",Vector3(0.028,0.055,a.distance_to(b)),(a+b)*0.5+ramp_basis.y*0.027+Vector3(side*0.425,0,0),black)
+		rail.basis=ramp_basis
+	box("Landing",Vector3(1.8,0.045,1.65),Vector3(0,0.0225,4.57),porcelain)
+	box("EndStop",Vector3(1.8,0.26,0.045),Vector3(0,0.15,5.395),black)
+	for side in [-1.0,1.0]:
+		box("LandingLip",Vector3(0.045,0.26,1.65),Vector3(side*0.88,0.15,4.57),black)
+	ball=XRToolsPickable.new()
+	ball.name="BlackPoint"
+	ball.collision_layer=6
+	ball.collision_mask=1
+	ball.mass=0.3
+	ball.freeze=true
+	ball.release_mode=XRToolsPickable.ReleaseMode.UNFROZEN
+	ball.continuous_cd=true
+	ball.linear_damp=0.06
+	ball.angular_damp=0.08
+	ball.physics_material_override=PhysicsMaterial.new()
+	ball.physics_material_override.friction=0.6
+	ball.physics_material_override.bounce=0.02
+	var visual := MeshInstance3D.new()
+	var sphere := SphereMesh.new()
+	sphere.radius=RADIUS;sphere.height=RADIUS*2;sphere.radial_segments=32;sphere.rings=16
+	visual.mesh=sphere;visual.material_override=black;ball.add_child(visual)
+	var collider := CollisionShape3D.new()
+	var shape := SphereShape3D.new();shape.radius=RADIUS;collider.shape=shape
+	ball.add_child(collider);add_child(ball);ball.position=HOME
+	ball.picked_up.connect(_picked_up)
+	ball.dropped.connect(_dropped)
+	ink=MultiMeshInstance3D.new();ink.name="ActualPath"
+	ink.multimesh=MultiMesh.new();ink.multimesh.transform_format=MultiMesh.TRANSFORM_3D
+	var tube := CylinderMesh.new();tube.top_radius=0.009;tube.bottom_radius=0.009;tube.height=1;tube.radial_segments=8
+	ink.multimesh.mesh=tube;ink.multimesh.instance_count=CAPACITY;ink.multimesh.visible_instance_count=0
+	ink.material_override=black;ink.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	add_child(ink)
+	label("POINT / RELEASE",Vector3(-0.632,0.79,0.00),Vector3(0,-PI/2,0),0.004,black.albedo_color)
+	label("Place the ball on the plank. Let go.",Vector3(-0.632,0.56,0.00),Vector3(0,-PI/2,0),0.002,black.albedo_color)
+	label("A path after your hand lets go",Vector3(0,0.051,4.70),Vector3(-PI/2,0,0),0.002,black.albedo_color)
+
+func _picked_up(_body: Node3D) -> void:
+	held=true
+	recording=false
+
+func _dropped(_body: Node3D) -> void:
+	held=false
+	samples.clear();segment_count=0;ink.multimesh.visible_instance_count=0
+	recording=true
+	samples.append(to_local(ball.global_position))
+
+func _physics_process(_delta: float) -> void:
+	if not is_instance_valid(ball) or held:return
+	var p := to_local(ball.global_position)
+	if p.y < -2 or p.length() > 16:
+		# Recover an abandoned ball; keep its last path until the next release.
+		recording=false;ball.freeze=true;ball.linear_velocity=Vector3.ZERO;ball.angular_velocity=Vector3.ZERO
+		ball.global_position=to_global(HOME)
+		return
+	if not recording or samples.is_empty() or segment_count>=CAPACITY:return
+	var a := samples[-1]
+	var length := a.distance_to(p)
+	if length<SAMPLE_DISTANCE:return
+	var direction := (p-a)/length
+	var frame := Basis(Quaternion(Vector3.UP,direction))*Basis.from_scale(Vector3(1,length,1))
+	ink.multimesh.set_instance_transform(segment_count,Transform3D(frame,(a+p)*0.5))
+	segment_count+=1;ink.multimesh.visible_instance_count=segment_count;samples.append(p)
+
+func material(colour: Color, roughness: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new();m.albedo_color=colour;m.roughness=roughness
+	return m
+
+func box(title: String, size: Vector3, at: Vector3, mat: Material) -> StaticBody3D:
+	var body := StaticBody3D.new();body.name=title;body.position=at;body.collision_layer=1;body.collision_mask=0
+	var mesh := MeshInstance3D.new();var form := BoxMesh.new();form.size=size;mesh.mesh=form;mesh.material_override=mat
+	var collision := CollisionShape3D.new();var shape := BoxShape3D.new();shape.size=size;collision.shape=shape
+	body.add_child(mesh);body.add_child(collision);add_child(body)
+	return body
+
+func label(words: String, at: Vector3, angles: Vector3, size: float, colour: Color) -> void:
+	var text := Label3D.new();text.text=words;text.position=at;text.rotation=angles;text.pixel_size=size;text.font_size=32
+	text.modulate=colour;text.outline_size=0;text.no_depth_test=false;add_child(text)

@@ -1,0 +1,464 @@
+{
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-06-trace-to-grid/incoming.gd",
+    "sha256": "57fd873768abaedd22de2808743c522c7067ab19d36ae9cb97fa2b5d27520124"
+  },
+  "operations": [
+    {
+      "id": "room-for-address-readout",
+      "kind": "replace",
+      "before": "    readout.position = Vector3(0, 1.6, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.005\n",
+      "after": "    readout.position = Vector3(0, 2.0, 0)\n    readout.font_size = 36\n    readout.pixel_size = 0.003\n"
+    },
+    {
+      "id": "grid-state",
+      "kind": "insert_after",
+      "anchor": "var trail: Node3D\n",
+      "text": "var grid_step := 0.25\nvar addresses: Array[Vector3i] = []\nvar snapped_positions: Array[Vector3] = []\nvar grid_trail: Node3D\n"
+    },
+    {
+      "id": "prepare-comparison",
+      "kind": "insert_after",
+      "anchor": "    positions.append(point.position)\n",
+      "text": "\n    grid_trail = Node3D.new()\n    add_child(grid_trail)\n    point.action_pressed.connect(_change_pitch)\n    _redraw_grid()\n"
+    },
+    {
+      "id": "desktop-control",
+      "kind": "insert_after",
+      "anchor": "func _process(_delta: float) -> void:\n",
+      "text": "    if Input.is_action_just_pressed(\"ui_accept\"):\n        _change_pitch()\n\n"
+    },
+    {
+      "id": "derive-after-sample",
+      "kind": "insert_after",
+      "anchor": "            segment.show_segment(a, displacement, displacement.length())\n",
+      "text": "\n        _redraw_grid()\n"
+    },
+    {
+      "id": "inspect-address",
+      "kind": "insert_after",
+      "anchor": "    readout.text += \"\\nPOINTS \" + str(positions.size())\n",
+      "text": "    readout.text += \"\\nPITCH \" + str(grid_step) + \" m\"\n    if not addresses.is_empty():\n        readout.text += \"\\nLAST ADDRESS \" + str(addresses[addresses.size() - 1])\n\nfunc _change_pitch(_held_point: Node3D = null) -> void:\n    if grid_step == 0.25:\n        grid_step = 0.50\n    else:\n        grid_step = 0.25\n    _redraw_grid()\n\nfunc _redraw_grid() -> void:\n    addresses.clear()\n    snapped_positions.clear()\n    for segment in grid_trail.get_children():\n        segment.queue_free()\n    if grid_step <= 0.0:\n        return\n\n    for p in positions:\n        var address := Vector3i(\n            roundi(p.x / grid_step),\n            roundi(p.y / grid_step),\n            roundi(p.z / grid_step)\n        )\n        addresses.append(address)\n        snapped_positions.append(Vector3(address) * grid_step)\n\n    for i in range(1, snapped_positions.size()):\n        var a := snapped_positions[i - 1]\n        var displacement := snapped_positions[i] - a\n        var segment := LineSkin.new()\n        var finish := segment.material_override as StandardMaterial3D\n        finish.albedo_color = Color(0.25, 0.85, 0.60)\n        grid_trail.add_child(segment)\n        segment.show_segment(a, displacement, displacement.length())\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Point_Line_Grid/tutorial.md",
+      "sha256": "98fd9158357ef8e5ebfb75985ffb21ab49131fb522d5436c26ce982db1b0c79d"
+    },
+    {
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "b06e1c851fbfa0c96c5f50bbfc5fce68f367f5629913fa05f1a0fec2681e4139"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/trace.gd",
+      "sha256": "57fd873768abaedd22de2808743c522c7067ab19d36ae9cb97fa2b5d27520124"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/report-runtime.json",
+      "sha256": "284b82c114b53587e43bfbf6d3bb4dd3639893b739b71441820cc388a878e3c5"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/point_body.gd",
+      "sha256": "35cda8ec169017226dbe6dd0dfc7627464525afaa6c031287163e271a6892040"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-06-trace-to-grid/tutorial.md",
+      "sha256": "98fd9158357ef8e5ebfb75985ffb21ab49131fb522d5436c26ce982db1b0c79d"
+    }
+  ],
+  "checks": [
+    {
+      "id": "types/addresses",
+      "kind": "native",
+      "expect": "Addresses use integer triples."
+    },
+    {
+      "id": "types/derived",
+      "kind": "native",
+      "expect": "Placed positions remain Vector3 values in metres."
+    },
+    {
+      "id": "quant/0.25/2/source_kept",
+      "kind": "native",
+      "expect": "Rounding leaves every original value and its order intact."
+    },
+    {
+      "id": "quant/0.25/2/addresses",
+      "kind": "native",
+      "expect": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits."
+    },
+    {
+      "id": "quant/0.25/2/placed",
+      "kind": "native",
+      "expect": "Each address becomes the expected local position at this pitch."
+    },
+    {
+      "id": "quant/0.25/2/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "quant/0.25/2/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "quant/0.25/2/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "quant/0.5/8/source_kept",
+      "kind": "native",
+      "expect": "Rounding leaves every original value and its order intact."
+    },
+    {
+      "id": "quant/0.5/8/addresses",
+      "kind": "native",
+      "expect": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits."
+    },
+    {
+      "id": "quant/0.5/8/placed",
+      "kind": "native",
+      "expect": "Each address becomes the expected local position at this pitch."
+    },
+    {
+      "id": "quant/0.5/8/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "quant/0.5/8/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "quant/0.5/8/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "quant/0.25/14/source_kept",
+      "kind": "native",
+      "expect": "Rounding leaves every original value and its order intact."
+    },
+    {
+      "id": "quant/0.25/14/addresses",
+      "kind": "native",
+      "expect": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits."
+    },
+    {
+      "id": "quant/0.25/14/placed",
+      "kind": "native",
+      "expect": "Each address becomes the expected local position at this pitch."
+    },
+    {
+      "id": "quant/0.25/14/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "quant/0.25/14/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "quant/0.25/14/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "frame/local_snapshot",
+      "kind": "native",
+      "expect": "Moving the station does not change its local derived positions."
+    },
+    {
+      "id": "frame/moved/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "frame/moved/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "frame/moved/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "edge/empty",
+      "kind": "native",
+      "expect": "Empty records yield empty arrays and no segments."
+    },
+    {
+      "id": "edge/single",
+      "kind": "native",
+      "expect": "One retained entry has an address but no neighbouring line."
+    },
+    {
+      "id": "edge/invalid_0.0",
+      "kind": "native",
+      "expect": "Nonpositive pitch produces no division and leaves the source intact."
+    },
+    {
+      "id": "edge/invalid_-0.25",
+      "kind": "native",
+      "expect": "Nonpositive pitch produces no division and leaves the source intact."
+    },
+    {
+      "id": "flat/types/addresses",
+      "kind": "native",
+      "expect": "Addresses use integer triples."
+    },
+    {
+      "id": "flat/types/derived",
+      "kind": "native",
+      "expect": "Placed positions remain Vector3 values in metres."
+    },
+    {
+      "id": "flat/0.25/30/source_kept",
+      "kind": "native",
+      "expect": "Rounding leaves every original value and its order intact."
+    },
+    {
+      "id": "flat/0.25/30/addresses",
+      "kind": "native",
+      "expect": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits."
+    },
+    {
+      "id": "flat/0.25/30/placed",
+      "kind": "native",
+      "expect": "Each address becomes the expected local position at this pitch."
+    },
+    {
+      "id": "flat/0.25/30/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "flat/0.25/30/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "flat/0.25/30/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "flat/0.5/36/source_kept",
+      "kind": "native",
+      "expect": "Rounding leaves every original value and its order intact."
+    },
+    {
+      "id": "flat/0.5/36/addresses",
+      "kind": "native",
+      "expect": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits."
+    },
+    {
+      "id": "flat/0.5/36/placed",
+      "kind": "native",
+      "expect": "Each address becomes the expected local position at this pitch."
+    },
+    {
+      "id": "flat/0.5/36/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "flat/0.5/36/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "flat/0.5/36/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "flat/0.25/42/source_kept",
+      "kind": "native",
+      "expect": "Rounding leaves every original value and its order intact."
+    },
+    {
+      "id": "flat/0.25/42/addresses",
+      "kind": "native",
+      "expect": "Manual oracle matches negatives, exact half-cell ties, neighbouring boundaries, repeats and return visits."
+    },
+    {
+      "id": "flat/0.25/42/placed",
+      "kind": "native",
+      "expect": "Each address becomes the expected local position at this pitch."
+    },
+    {
+      "id": "flat/0.25/42/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "flat/0.25/42/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "flat/0.25/42/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "flat/frame",
+      "kind": "native",
+      "expect": "Moving the station does not change its local derived positions."
+    },
+    {
+      "id": "flat/moved/pairs",
+      "kind": "native",
+      "expect": "One renderer per neighbouring pair; no discarded entries."
+    },
+    {
+      "id": "flat/moved/geometry",
+      "kind": "native",
+      "expect": "Green cylinders end at the expected station-local snapped positions; coincident pairs are hidden."
+    },
+    {
+      "id": "flat/moved/finish",
+      "kind": "native",
+      "expect": "Only the derived rendering receives green."
+    },
+    {
+      "id": "flat/empty",
+      "kind": "native",
+      "expect": "Empty records yield empty arrays and no segments."
+    },
+    {
+      "id": "flat/single",
+      "kind": "native",
+      "expect": "One retained entry has an address but no neighbouring line."
+    },
+    {
+      "id": "carry/body",
+      "kind": "native",
+      "expect": "The original sphere construction and pickup/release settings remain."
+    },
+    {
+      "id": "carry/seed",
+      "kind": "native",
+      "expect": "Both programs start with the same local seed and empty pink trace."
+    },
+    {
+      "id": "xr/target",
+      "kind": "native",
+      "expect": "Unmodified XRTools overlap finds this sphere."
+    },
+    {
+      "id": "xr/pickup",
+      "kind": "native",
+      "expect": "The actual grab library holds the original sphere."
+    },
+    {
+      "id": "sampling/0.02",
+      "kind": "native",
+      "expect": "The inherited threshold compares to the last retained sample."
+    },
+    {
+      "id": "sampling/0.04",
+      "kind": "native",
+      "expect": "The inherited threshold compares to the last retained sample."
+    },
+    {
+      "id": "sampling/0.06",
+      "kind": "native",
+      "expect": "The inherited threshold compares to the last retained sample."
+    },
+    {
+      "id": "drawing/source",
+      "kind": "native",
+      "expect": "A real grab-driver route supplies Grid's actual ordered trace."
+    },
+    {
+      "id": "action/xr_pitch",
+      "kind": "native",
+      "expect": "The actual pickup tool action button emits the inherited action signal and switches pitch."
+    },
+    {
+      "id": "action/same_record",
+      "kind": "native",
+      "expect": "Changing pitch derives a different result from this retained drawing."
+    },
+    {
+      "id": "action/pink_nodes",
+      "kind": "native",
+      "expect": "Switching pitch does not rebuild or erase the pink source drawing."
+    },
+    {
+      "id": "action/desktop_pitch",
+      "kind": "native",
+      "expect": "One ui_accept event returns to the finer result from the same source."
+    },
+    {
+      "id": "readout/current",
+      "kind": "native",
+      "expect": "The initialized label shows local/world point, retained count, pitch and last retained address."
+    },
+    {
+      "id": "release/record",
+      "kind": "native",
+      "expect": "Release keeps the same point and source record as the empty hand moves."
+    },
+    {
+      "id": "resume/history",
+      "kind": "native",
+      "expect": "Re-grabbing extends the existing source instead of replacing it."
+    },
+    {
+      "id": "carry/identity",
+      "kind": "native",
+      "expect": "Both derivations and another pickup leave the live point and its resource identities intact."
+    },
+    {
+      "id": "lifetime/new_station",
+      "kind": "native",
+      "expect": "A new station starts with its seed; no cross-scene persistence is invented."
+    }
+  ],
+  "evidence_inputs": [
+    "commons/maps/Point_Line_Grid/tutorial.md",
+    "commons/maps/Point_Trace/tutorial.md",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/trace.gd",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/report-runtime.json",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/point_body.gd",
+    "doc/book/iterations/2026-10-05-point-a-reusable-class/trace/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/prepare.py",
+    "doc/book/iterations/2026-10-06-trace-to-grid/run_checks.py",
+    "doc/book/iterations/2026-10-06-trace-to-grid/verify.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/operations.json",
+    "doc/book/iterations/2026-10-06-trace-to-grid/grid.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/point_body.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/line_skin.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/incoming.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/assembled.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/expected.gd",
+    "doc/book/iterations/2026-10-06-trace-to-grid/tutorial.md",
+    "doc/book/iterations/2026-10-06-trace-to-grid/next-input.json",
+    "doc/book/iterations/2026-10-06-trace-to-grid/exercise-variants.json",
+    "doc/book/iterations/2026-10-06-trace-to-grid/variants/flat_y.gd"
+  ],
+  "host": "Existing unit-scale PointStudy in the prepared project; this continuation creates all lesson objects. Same-station source reuse, no scene transfer."
+}

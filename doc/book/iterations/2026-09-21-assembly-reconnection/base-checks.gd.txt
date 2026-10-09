@@ -1,0 +1,90 @@
+	report["checks"] = []
+	var study: Node3D = nodes.get("MolecularDesigner")
+	check(report,is_instance_valid(study),"Existing MolecularDesigner placed")
+	if not is_instance_valid(study): quit(1); return
+	await process_frame
+	var body: Node3D = study.get_node_or_null("BodyWorkshop")
+	check(report,is_instance_valid(body),"Opt-in body workshop built in actual hall")
+	if not is_instance_valid(body): quit(1); return
+	study.set_process(false)
+	study._assemble("VRBody")
+	settle(study,18)
+	for p in study.parts: p.set_process(false)
+	check(report,body.joints.size()==study.assemblies.VRBody.nodes.size(),"Editable body reuses complete existing VRBody specification")
+	check(report,body.pairs.size()==study.assemblies.VRBody.bonds.size(),"Every declared body relation retained")
+	check(report,body.global_basis.get_scale().is_equal_approx(Vector3.ONE),"Pickable body stays at metre scale beneath enlarged artifact")
+	check(report,body.joints[1].position.y>1.7 and body.joints[1].position.y<2.0,"Body is within standing reach")
+	var index: int = body.names.find("l_hand")
+	var handle: RigidBody3D = body.joints[index]
+	var initial: Vector3 = body.targets[index]
+	var hand_camera := Camera3D.new()
+	root.add_child(hand_camera)
+	hand_camera.global_position = handle.global_position + Vector3(0,0,1.2)
+	hand_camera.look_at(handle.global_position)
+	var pointer: Node3D = load("res://commons/scenes/DesktopInteractionPointer.gd").new()
+	root.add_child(pointer)
+	pointer.set_process(false)
+	pointer._camera = hand_camera
+	await physics_frame
+	check(report,pointer._find_grabbable()==handle,"Actual desktop ray finds joint on pickable layer")
+	pointer._grab_held(handle)
+	check(report,body.active.has(index),"Desktop grab starts an edit")
+	hand_camera.global_position += Vector3(-.55,.25,.5)
+	for frame in range(24):
+		pointer._process(1.0/60)
+		body._process(1.0/60)
+	pointer._drop_held()
+	var released: Vector3 = body.targets[index]
+	check(report,released.distance_to(initial)>.6,"Desktop carrying actually changes body proportions")
+	check(report,handle.freeze and handle.collision_layer==4,"Drop retains pose and restores pickable layer")
+	check(report,body.edit_count==1 and body.active.is_empty(),"Completed desktop edit recorded once")
+	var untouched: Vector3 = body.targets[body.names.find("r_hand")]
+	study._assemble("Chair")
+	settle(study,18)
+	for p in study.parts: p.set_process(false)
+	for frame in range(120): body._process(1.0/60)
+	check(report,body.targets[index].is_equal_approx(released),"Authored catalogue cycle cannot overwrite visitor pose")
+	check(report,body.targets[body.names.find("r_hand")].is_equal_approx(untouched),"Other joints do not silently follow the edited hand")
+	# Exercise the real XRTools grab driver through a synthetic controller; not headset input.
+	var controller := XRController3D.new()
+	root.add_child(controller)
+	var pickup: Node3D = load("res://addons/godot-xr-tools/functions/function_pickup.gd").new()
+	controller.add_child(pickup)
+	pickup.set_process(false)
+	controller.global_position = handle.global_position
+	handle.pick_up(pickup)
+	check(report,handle.is_picked_up() and body.active.has(index),"XRTools pickup driver starts edit")
+	var before_vr_move: Vector3 = handle.global_position
+	controller.global_position += Vector3(.25,.1,-.3)
+	for frame in range(5): await physics_frame
+	check(report,handle.global_position.distance_to(before_vr_move)>.1,"XRTools driver carries joint with synthetic controller movement")
+	handle.let_go(pickup,Vector3.ZERO,Vector3.ZERO)
+	check(report,not handle.is_picked_up() and body.active.is_empty(),"XRTools release completes edit")
+	check(report,handle.freeze and handle.collision_layer==4,"VR release remains frozen and pickable")
+	var rod_index := 0
+	for i in range(body.pairs.size()):
+		if body.pairs[i].y==index: rod_index=i
+	var pair: Vector2i = body.pairs[rod_index]
+	body._process(0)
+	check(report,is_equal_approx(body.rods[rod_index].mesh.height,body.targets[pair.x].distance_to(body.targets[pair.y])),"Connection length updates to moved endpoints")
+	handle.global_position = body.to_global(Vector3(20,-3,20))
+	body._process(0)
+	check(report,body.targets[index].is_equal_approx(Vector3(1.9,.12,1.9)),"Workspace bounds keep joints in the bay")
+	body.reset_pose()
+	check(report,body.targets[index].is_equal_approx(initial),"Author reset restores original without changing adjacency")
+	check(report,body.export_pose().positions.size()==body.joints.size(),"All joint positions available for research capture")
+
+	study._assemble("VRBody")
+	settle(study,18)
+	for p in study.parts: p.set_process(false)
+	var legacy: Node3D = load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	legacy.enable_auto_cycle=false
+	root.add_child(legacy)
+	await process_frame
+	check(report,not legacy.has_node("BodyWorkshop"),"Other placements keep legacy default")
+	legacy.queue_free()
+	# Open the actual exit for controlled continuous walking.
+	var gate: Dictionary = museum.get("_gate")
+	if not gate.is_empty():
+		gate.scanner.palm_scanned.emit()
+		museum.get("_mod_gate").call("step_open",gate,10.0)

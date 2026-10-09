@@ -1,0 +1,173 @@
+{
+  "checks": [
+    {
+      "check": "Live census has 190 rooms",
+      "passed": true
+    },
+    {
+      "check": "A core is recorded for every live room",
+      "passed": true
+    },
+    {
+      "check": "All room map files unchanged from the census",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "No unaccounted concurrent manuscript edits",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "Every substantive artifact tag is placed",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "Every primary has tagged prose, including the retained shared comparisons",
+      "passed": true,
+      "detail": {
+        "missing": [],
+        "retained_shared_markers": {
+          "Primitives_Ignorance": [
+            "sphere_low",
+            "sphere_mid"
+          ],
+          "Trans_AxisDecomposition": [
+            "x_translation_cube"
+          ]
+        }
+      }
+    },
+    {
+      "check": "Core order agrees with tutorial primary order",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "50 earlier chapters retained; only 11 documented narrow corrections",
+      "passed": true,
+      "detail": {
+        "Trans_Pre": [
+          "A transformation is a difference between a thing and its copy, and there are exactly three kinds.",
+          "a vector, four along x, nothing else.",
+          "it is the first one that needs the block to have a shape: you cannot turn a point."
+        ],
+        "Trans_Introduction": [
+          "Melencolia left you with a solid that would not move. This is the room where the primitives finally do, and there are exactly three ways they can: a thing can go somewhere else, it can turn, or it can grow."
+        ],
+        "Trans_Pit": [
+          "The next chapter is colour, which moves nothing at all."
+        ],
+        "Vectors_Act2_VectorArithmetic": [
+          "The next act takes these and spreads them over space and time, so that a vector is no longer one arrow you hold but a field of them, everywhere at once, and the arrow stops holding still."
+        ],
+        "Vectors_Act4b_Oscillation": [
+          "The last hall asked what a force does to a body. The next one stops asking that, and asks what a force does to a room.",
+          "Spring, pendulum, cradle, bounce, lever, wind. Forces that repeat, conserve and balance, and every one of them keeps faith for the same reason: the pull back is proportional to how far you have been pulled, and the sign on it points home."
+        ],
+        "FormFinding_Annealing": [
+          "Next: the same question in the language of matter that will not hold still at all.",
+          "Then this one. If falling all the way down is how a form is found, the fully found form is a crystal, and a crystal is over. What is alive is what stopped part way, in a basin wide enough that it can be knocked about and come back, resting at a minimum it has not finished with."
+        ],
+        "Fractal_Recursion": [
+          "Next: what these rules make, measured, and the two moves that make all of it."
+        ],
+        "Fractal_KochSierpinski": [
+          "Next: a fractal nobody built at all.",
+          "Nobody noticed it could be fractional until somebody measured a coastline."
+        ],
+        "Fractal_MandelbrotSet": [
+          "Next: what these rules make when they are set to grow rather than to draw."
+        ],
+        "SoftBodies_Soft_Body_Deformation": [
+          "They are silicon lattices grown by single-celled organisms, and they are the last room of this chapter standing early in the first one."
+        ],
+        "SoftBodies_Obsticals": [
+          "The chapter has now had three answers to who decides the form. The material alone. The field it hangs in. And here, the thing it runs into. The next answer is the one that outlasts all of them: what happens when the record does not argue itself away, and the encounter stays.\n\nNext: a skeleton that kept the shape of the water it grew in."
+        ]
+      }
+    },
+    {
+      "check": "Preserved notes",
+      "passed": true
+    },
+    {
+      "check": "Preserved positions",
+      "passed": true
+    },
+    {
+      "check": "Preserved groups",
+      "passed": true
+    },
+    {
+      "check": "Preserved non-spine roles",
+      "passed": true
+    },
+    {
+      "check": "Preserved non-spine order",
+      "passed": true
+    },
+    {
+      "check": "All 140 new chapters meet deterministic wall-text checks",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "check": "140 new chapters have unchanged inspected sources",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "Live progress sees all written rooms and explicit primaries",
+      "passed": true,
+      "detail": {
+        "generated": "2026-09-08T07:23:28.480971+00:00",
+        "sequences": 24,
+        "rooms": 190,
+        "outlined": 151,
+        "source_scaffolded": 39,
+        "written": 190,
+        "critical": 147,
+        "with_artifacts": 190,
+        "primary_assigned": 190,
+        "needs_attention": 169,
+        "baseline_ready": 0,
+        "note": "Written counts nonempty manuscript files; outlined counts authored proposals. Placement and role counts are inventory facts, not evidence of working or reachable lessons.",
+        "orphan_outlines": []
+      }
+    },
+    {
+      "check": "No unverified room promoted to a learner baseline",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "new_chapter_word_range": [
+    385,
+    460
+  ],
+  "new_chapter_word_count": 57278,
+  "inspected_source_files": 845,
+  "core_size_histogram": {
+    "1": 127,
+    "2": 53,
+    "3": 5,
+    "4": 2,
+    "5": 2,
+    "7": 1
+  },
+  "larger_comparisons": {
+    "Point_One": 4,
+    "Point_Animatedcube": 3,
+    "Primitives_Ignorance": 5,
+    "Primitives_Melencolia": 4,
+    "Trans_AxisDecomposition": 3,
+    "Vectors_Act2_VectorArithmetic": 5,
+    "Vectors_Act4a_KineticForces": 3,
+    "VFM_09_Legs": 7,
+    "Boolean_Verbs": 3,
+    "Crisis_Synthesis": 3
+  },
+  "repeated_sentences_to_review": {}
+}

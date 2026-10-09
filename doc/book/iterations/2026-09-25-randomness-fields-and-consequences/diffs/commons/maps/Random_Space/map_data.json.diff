@@ -1,0 +1,20 @@
+--- before/commons/maps/Random_Space/map_data.json
++++ commons/maps/Random_Space/map_data.json
+@@ -606,7 +606,7 @@
+         " ",
+         " ",
+         " ",
+-        "worley_noise:0:-0.5",
++        "worley_noise:0:-0.5#plinth:0.35",
+         " ",
+         " ",
+         " ",
+@@ -677,7 +677,7 @@
+         " ",
+         " ",
+         " ",
+-        "shannon_entropy_meter:0:-0.5",
++        "shannon_entropy_meter:0:-0.5#plinth:1.05",
+         " ",
+         " ",
+         " ",

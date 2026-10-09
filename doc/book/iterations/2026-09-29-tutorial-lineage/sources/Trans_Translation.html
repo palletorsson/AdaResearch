@@ -1,0 +1,302 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trans_Translation · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Trans_Translation">← Tutorial lineage</a></p><h1>Trans Translation</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Trans_Translation/final.md">Raw captured source</a></p><pre># Translation: seven journeys
+
+The far bank is familiar now. In the last hall, a moving surface carried you across. Here seven carriers link a chain of islands, rising to an upper route and descending again.
+
+Before boarding, follow the small waiting cubes with your eyes. Some hang over the fire basin. Others mark the upper route, beyond the reach of a hand from the floor. The carriers give you a way to meet them.
+
+&lt;!-- @tc --&gt;
+
+The first carrier travels into depth. Step aboard and let the room pass. Look at the cube under your feet: it keeps its facing and size. Along this journey, only its z coordinate changes.
+
+At the next island, the route turns sideways. The carrier moves along x. You can keep looking towards the far end of the hall while travelling across it. Direction of travel and direction of attention have separated.
+
+Then the way goes up.
+
+Stand on the lift and watch the lower landing descend from view. It is still where it was. The carrier changes y; the room gives that change a consequence. You arrive beside an upper platform, three metres above the ground route.
+
+Near the entrance, three small axis markers show x, y and z separately. Along the route, those directions have become sideways travel, a lift and a passage into depth.
+
+The transport script calculates a destination from a starting position, a direction and a distance:
+
+```gdscript
+target_position = initial_position + (move_direction * move_distance)
+```
+
+The direction is normalised: its vector is given a length of one. Multiplying it by `move_distance` sets how far the carrier will go. Adding that displacement to `initial_position` gives its destination. Three metres up and three metres forward use the same addition, with different directions.
+
+On the upper route, another carrier travels along z. It repeats a direction you have already travelled near the floor. Now you can look down past its edge to the route that brought you here.
+
+A sideways return carries you back across x in the opposite direction. Then the next carrier moves down and forward together, like an escalator. Its surface stays level while its path slopes: three metres down, two metres further along z. Watch the pickup approach as the lower landing comes towards you.
+
+&lt;!-- @pick_up_cube --&gt;
+
+The small pickups have been waiting along these journeys. They rise and fall without turning. Their small vertical loop continues as the carrier brings you into contact with them, and each collected cube disappears with a sound.
+
+Take one, then look back while the carrier moves on.
+
+The carrier brings your body to a pickup by sharing its displacement:
+
+```gdscript
+var movement_delta = global_position - previous_position
+_translate_rider(carried_player, movement_delta)
+```
+
+For each small move of the carrier, your position moves with it. A pickup detects the arriving body and disappears. Ride back to its place. The carrier can repeat the journey; the cube is gone.
+
+&lt;!-- @ --&gt;
+
+At the last crossing, the waiting cubes run diagonally over the pit. Watch an edge of the carrier as you travel. It does not turn.
+
+This direction changes x and z together. The destination lies eight metres across and eight metres further into the hall. Both coordinates change during the same journey. We have combined directions without adding rotation.
+
+Thirteen pickups mark this passage through seven rides. By the final terrace, the cubes you collected have left empty places along the route. Another arrangement of carriers and pickups could lead you elsewhere using the same operations.
+
+&lt;!-- @translation_cube_demo --&gt;
+
+Step onto the final terrace. Two pairs of small doors stand on plinths, a red door and a blue door in each frame. One pair has rails; the other shows translucent panels where its doors can end up. Try the same upward-and-sideways gesture on a square handle in each frame. A pale line stays behind the moving handle.
+
+At the rail-guided door, the line rises. The sideways part of your gesture has gone missing. Beside it, the other mechanism lets the handle move in both directions together. Its line can cross the opening diagonally.
+
+Lift the guided handle to the corner of its rail, then move it sideways. A bend leads to the place the other handle could reach directly. The translucent panel beside the second door marks its destination. Compare the two handles in their frames: they have the same distance to travel up and across.
+
+The guided door retains the part of a displacement that runs along its current axis:
+
+```gdscript
+var t = (knob_pos - start).dot(phase1_dir)
+knob_pos = start + phase1_dir * t
+```
+
+Here `phase1_dir` points upwards. `.dot()` extracts the part of your movement along that direction; the next line puts the handle there. The full implementation also limits how far it can go.
+
+The trail records the handle after this correction. Your hand can propose a diagonal and leave a vertical line.
+
+In the trace hall, movement left positions behind. Here the handle has already been corrected before its position is kept. The line can be an accurate record of where the handle went without showing everything your hand tried.
+
+Bring the free handle back towards its starting corner, then try a curved route to the translucent panel. The recent lines remain together as you try another way. There is room to take the long way within the frame.
+
+![Two door mechanisms leave different traces for different permitted paths.](/book-review/doc/book/iterations/2026-09-23-translation-paths/translation-paths.png)
+
+*A guided bend, a direct diagonal, and a curved route to the same relative endpoint. Each panel records a separate gesture at the handle.*
+
+Up followed by sideways reaches the same position as sideways followed by up. Translation itself does not impose this order. The first mechanism does. The second gives both freedoms together. A destination can be shared by journeys with very different permissions.
+
+&lt;!-- @ --&gt;
+
+The torus beside the course already turns while its cylinder rises and falls. It offers a glimpse of the next question. Our carriers have kept their facing throughout; this neighbouring object combines the operations. Keep the difference between travelling and facing in mind. In the next hall, the turn itself will become the question.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Trans_Translation/tutorial.md">Raw captured source</a></p><pre># Trans Translation
+
+Moving. Displacement. Position as coefficients.
+
+Translate a single object.
+
+```gdscript
+func move_to(node: Node3D, target: Vector3) -&gt; void:
+    node.global_position = target
+```
+
+Direct assignment. One frame, the object is there.
+
+Translate smoothly over time.
+
+```gdscript
+func tween_to(node: Node3D, target: Vector3, duration: float) -&gt; void:
+    var tween := create_tween()
+    tween.tween_property(node, &quot;global_position&quot;, target, duration)
+```
+
+The tween interpolates linearly. Duration in seconds.
+
+Translate along a local axis.
+
+```gdscript
+func move_forward(node: Node3D, distance: float) -&gt; void:
+    var forward: Vector3 = -node.global_transform.basis.z
+    node.global_position += forward * distance
+```
+
+Local translation respects the node&#x27;s current orientation. Forward is -Z in Godot.
+
+Apply a translation impulse to a rigid body.
+
+```gdscript
+func nudge(body: RigidBody3D, impulse: Vector3) -&gt; void:
+    body.apply_central_impulse(impulse)
+```
+
+Impulse is velocity times mass. Physics integrates the impulse into velocity on the next step.
+
+Translate relative to another node.
+
+```gdscript
+func move_relative_to(node: Node3D, reference: Node3D, offset_local: Vector3) -&gt; void:
+    var offset_world: Vector3 = reference.global_transform.basis * offset_local
+    node.global_position = reference.global_position + offset_world
+```
+
+Local offset is transformed through the reference&#x27;s basis. The result is a world-space position.
+
+Chain multiple translations.
+
+```gdscript
+func move_sequence(node: Node3D, steps: Array, duration_per_step: float) -&gt; void:
+    var tween := create_tween().set_parallel(false)
+    for target in steps:
+        tween.tween_property(node, &quot;global_position&quot;, target, duration_per_step)
+```
+
+Sequential tweens move the node through a sequence of positions. Useful for scripted paths.
+
+Interpolate along a curved path.
+
+```gdscript
+func move_along_bezier(node: Node3D, curve: Curve3D, duration: float) -&gt; void:
+    var tween := create_tween()
+    tween.tween_method(
+        func(t): node.global_position = curve.sample_baked(t * curve.get_baked_length()),
+        0.0, 1.0, duration
+    )
+```
+
+Sample the Bezier curve at interpolated positions. The node follows the curve&#x27;s shape over the duration.
+
+You can now translate a node instantly or over time, locally or relative to another node, along straight lines or curves. The seven rides in this hall already separate and combine those components. Trans_Rotation follows in the active sequence.
+
+Check identity.
+
+```gdscript
+func is_identity(t: Transform3D) -&gt; bool:
+    return t.is_equal_approx(Transform3D.IDENTITY)
+```
+
+Identity preserves the input. Useful as a test for whether a chain of transforms cancels out.
+
+Invert a transform.
+
+```gdscript
+func invert(t: Transform3D) -&gt; Transform3D:
+    return t.affine_inverse()
+```
+
+Undo the transform. Composing t with t.affine_inverse() produces identity.
+
+Compose with multiplication.
+
+```gdscript
+func combine(a: Transform3D, b: Transform3D) -&gt; Transform3D:
+    return a * b
+```
+
+Right-to-left application order. a * b applies b first, then a.
+
+Extract the origin.
+
+```gdscript
+func get_origin(t: Transform3D) -&gt; Vector3:
+    return t.origin
+```
+
+The origin is the translation part of the transform. Ignore the basis to get just the position.
+
+
+## Same destination, different permission
+
+On the final terrace, `translation_cube_demo` is instantiated twice: `course:lift_lateral` with a rail guide, and `course:free` with ghost endpoints. Their knobs begin 0.5 m above each artifact root; the 0.8 m plinth brings that to 1.3 m above the deck.
+
+The guided mechanism projects hand displacement onto a permitted axis, clamps the distance and admits the next axis only after the lift threshold. The free mechanism admits both components at once within the same bounds. In `constrained_door.gd`:
+
+```gdscript
+var t = _clamp_run((knob_pos - start).dot(phase1_dir), target_y, 0.0, 0.05)
+knob_pos = start + phase1_dir * t
+```
+
+Pure translations commute: adding the same two displacement vectors in reverse order gives the same endpoint. This puzzle imposes an order through its constraints; that is a property of the mechanism, not a limitation of vector addition.
+
+## Watch the accepted movement
+
+The exit mechanisms now leave a pale trace when a handle is held. Try the same small upward-and-outward gesture on each. The guided door records the lift after discarding the sideways component; the free door keeps both components within its bounds. Then follow the rail to its corner and outwards. Compare that bend with a direct diagonal in the other mechanism.
+
+The free handle can be brought back towards its starting corner to try a curved route. The short recent history remains visible, with older samples eventually rolling off. This returns to Point_Trace with a changed receiver: the record belongs to the constrained knob, not to the whole hand gesture. Release does not reset the mechanism or erase its trail; the artifact’s existing reset method clears it when called, and reloading the hall starts a fresh record.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Trans_Translation/technical.md">Raw captured source</a></p><pre># Translation as transport
+
+The carrier normalises its direction and defines its target:
+
+```gdscript
+target_position = initial_position + (move_direction * move_distance)
+```
+
+Each frame advances towards the target by at most speed times elapsed seconds. The same displacement is added to its detected rider:
+
+```gdscript
+global_position = global_position.move_toward(target_position, move_speed * delta)
+var movement_delta = global_position - previous_position
+_translate_rider(carried_player, movement_delta)
+```
+
+The rider helper handles a desktop body or the VR tracking origin and its collision body; it applies an incremental displacement rather than teleporting the visitor to the destination. Contact with each pickup&#x27;s Area3D calls collect(). Thirteen pickups use motion=slide: a vertical sine oscillation with the default 0.2 m amplitude and bob speed 2, without spin or a scale pulse. The carrier supplies the longer approach while each pickup rises and falls.
+
+| Ride | Displacement | Starting deck |
+| --- | --- | --- |
+| First depth crossing | (0, 0, 6) | 0 m |
+| Sideways | (8, 0, 0) | 0 m |
+| Lift | (0, 3, 0) | 0 m |
+| High crossing | (0, 0, 7) | 3 m |
+| Return sideways | (-8, 0, 0) | 3 m |
+| Escalator descent | (0, -3, 2) | 3 m |
+| Diagonal | (8, 0, 8) | 0 m |
+
+The escalator token is `tc:3.6055513:0,-3,2#deck:3`: direction (0,-3,2), normalised, and distance sqrt(13). Its standing surface moves from (3,3,35) to (3,0,37), meeting the platform beginning at z=38. The final diagonal uses direction (1,0,1), normalised, with distance sqrt(128), approximately 11.3137085 m. Rotation remains zero and ride_scale remains one on all carriers.
+
+GridUtilitiesComponent seats the collider top, not the origin, on its starting deck before _ready. #deck:3 means three grid units above the arena&#x27;s ground deck; GridSystem&#x27;s museum origin is y=-0.5. The upward and downward lift sockets can therefore share the same type of empty cell while starting on different levels.
+
+Run: Godot --headless --xr-mode off --path . --script res://commons/testing/probe_translation_course.gd
+
+## A trace after the constraint — 23 September
+
+Both exit studies use `#trace:on`. This opt-in passes `trace_motion` to their existing constrained doors. `accepted_motion_trace.gd` records the knob position after projection and clamping, and only while the pickup signal marks it held. It does not capture the tracked hand’s rejected displacement. The pale trace is displayed 9 cm forward of the sampled position to keep it visible in front of the door panel; the stored points are unshifted door-local coordinates.
+
+Samples require 6 mm of movement. At most 256 positions remain, with old samples rolling off; reset clears the record. The tube radius is 4 mm, with six sides and one unshaded mesh per handle. No collider, new control, or movement constraint is added. Other placements retain their default untraced form.
+
+The shared book illustration is rendered from the actual museum artifacts using separate supplied gestures. It compares a guided two-leg route, a direct free route and a curved free route. It is not a photograph of somebody’s headset trial.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Trans_Translation/intent.md">Raw captured source</a></p><pre>Concept: Translate a body by carrying it. A single longer course combines Translation and AxisDecomposition, isolating x, y and z before a final x/z diagonal. No carrier rotation or scaling.
+Sequence role: After Trans_Introduction, before Trans_Rotation. Trans_AxisDecomposition is absorbed into this active stop; both original maps are preserved under doc/space/translation-merge-2026-09-09/before.
+Primary encounters: tc, pick_up_cube and translation_cube_demo (two exit comparisons). Three axis markers at the entrance are secondary references. Thirteen vertically bobbing pickups are collected through physical contact during the seven rides.
+Space: 15 x 55 m. Islands at y=0 and y=3. Route: +z, +x, +y, elevated +z, -x, simultaneous -y/+z (escalator), simultaneous +x/+z. Shared grid seating puts the carrier centre half a metre below its standing deck. Explicit #deck values remove ambiguity at lift sockets adjacent to both low and high banks.
+Question: Which coordinate changes, relative to which frame? Can two mechanisms share a destination while admitting different paths? Why does repeating z translation high above the ground feel different? What has changed when you return along a route whose pickups have been taken?
+Critical angle: A reachable position depends on a carrier, detection and a landing that meet. Collection records an encounter that reversing a displacement does not undo. The route makes selected positions accessible while other positions remain outside it.
+Validation: probe_translation_course.gd builds the actual grid and checks seating, detection, carried displacement, pickup collection and stepping onto every landing. A museum screenshot checks staging. Learner experience and VR comfort remain for a walkthrough.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Trans_Translation/critical.md">Raw captured source</a></p><pre># The same displacement, another encounter
+
+The upper crossing repeats a direction already travelled near the ground. The displacement remains a translation along z; the view below the rider changes its significance. The coordinate operation does not, by itself, account for the encounter.
+
+A transport cube becomes usable through several agreements: its top meets the landing, its detection area recognises the rider, and its movement is added to that body. The simulation&#x27;s representation of contact participates in what becomes reachable.
+
+The pickups make another distinction visible. Reversing a displacement returns the visitor to a position. It does not restore a collected object. Position is one part of the scene&#x27;s state, and changing it cannot reverse every other process that occurred on the way.
+
+The final diagonal is translation with two changing coordinates. It leaves the carrier&#x27;s facing alone. This separation prepares a question for rotation while retaining a remainder here: which possible journeys did this arrangement of islands and pickups leave untried?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Trans_Translation/artifacts.md">Raw captured source</a></p><pre># Trans Translation — current encounters
+
+Seven rides make the main course. Nineteen artifact placements accompany them: thirteen collecting cubes, three axis markers, the torus/cylinder study, and two existing door mechanisms. The previous generated inventory named an older arrangement; its version is preserved in the 23 September iteration baseline.
+
+| Role | Artifact or utility | Source placement | Work in the hall |
+|---|---|---|---|
+| Primary | `tc` | Seven authored utility cells | Depth, sideways, lift, high crossing, reverse x, down-and-forward, x/z diagonal. The carriers keep their facing and size. |
+| Primary | `pick_up_cube` | Thirteen placements along the rides | Carried contact collects a vertically bobbing cube. The carrier can return without restoring the collected object. |
+| Primary | `translation_cube_demo` | (3,52), lift_lateral / rail | One permitted direction at a time. A pale trace records the accepted handle motion. |
+| Primary | `translation_cube_demo` | (7,52), free / ghost | The same relative destination admits a diagonal or curved route. The trace records that choice within the bounds. |
+| Secondary | `z_translation_cube` | (5,2) | A small depth reference near the entrance. |
+| Secondary | `x_translation_cube` | (8,2) | A small sideways reference. |
+| Secondary | `y_translation_cube` | (11,2) | A small vertical reference. |
+| Secondary | `toruscylinder` | (4,25) | Existing combined movement, acknowledged as a glimpse of Rotation. |
+
+The two door studies stand on 0.8 m plinths. Native checks measured the resting handles around 1.3 m above their approach floor. `#trace:on` adds a bounded visual record to these two placements; their doors, constraints, dimensions, positions and guides remain. No additional controller panel is introduced.
+
+Current record: [Translation paths](../../../doc/book/iterations/2026-09-23-translation-paths/index.html). All seven rides and thirteen pickup placements are unchanged by this pass.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Trans_Translation/summary.md">Raw captured source</a></p><pre># Translation: seven journeys
+
+This 15 x 55 m hall merges the former Translation and AxisDecomposition maps. Seven transport cubes carry the visitor through depth, sideways movement, ascent, a high crossing, reverse sideways movement, descent and a final diagonal. Thirteen pickups wait along their paths. The route climbs three metres and returns to ground level before the exit.
+
+The carriers do not rotate or scale. Pickups rise and fall without spinning or pulsing in size until collected. Entrance markers make x, y and z explicit; the transport and pickup objects carry the book&#x27;s primary thread. At the final terrace, two grabbable door mechanisms compare the same destination under sequential axis constraints and free combined movement. These are a third primary encounter. The next active hall is Trans_Rotation.
+
+Original maps and texts are preserved in doc/space/translation-merge-2026-09-09/before. The active Trans_AxisDecomposition stop was removed from the sequence, not deleted from the repository.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Trans_Translation/blurb.md">Raw captured source</a></p><pre>A small floor carries you into depth, sideways, then upwards. Thirteen cubes wait along the journeys. Follow their positions through seven rides, and notice what changes when the same displacement happens above the ground.
+</pre></section></body></html>

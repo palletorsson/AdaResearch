@@ -1,0 +1,330 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random_Mushrooms · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Random_Mushrooms">← Tutorial lineage</a></p><h1>Random Mushrooms</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Random_Mushrooms/final.md">Raw captured source</a></p><pre># Which differences were invited?
+
+In the previous room the numbers gathered into bars. Here they have caps and stems, and the sizes are drawn under the last room&#x27;s UNIFORM law, not GAUSS. Which differences can this recipe make?
+
+&lt;!-- @mushrooms --&gt;
+
+The glass enclosure around the bed makes a population into a place you can enter. Its front opening leaves room beside the specimen table; another opening is opposite. Begin at the compact console, then walk round the mushroom bed inside the glass. The cage holds an experiment, not a claim that these bodies exhaust what a mushroom could be.
+
+A bed fills the middle of the hall. Before it, six mushrooms stand on numbered discs. Look past the table and choose two in the bed that seem related. A cap bends out over a stem; another, smaller, repeats its proportions. Before pressing anything, decide what you are using to recognise their relation.
+
+Press SHOW. A magenta ring moves to the next disc, and magenta rings on the ground mark its copies in the bed, each with a small bead floating high above it. Keep pressing until the plate names the template you were following. There may be many copies, or none in this particular population. The table still gives the absent form a place.
+
+The discs run from 0 to 5: tan cap, red cap, flat brown cap, tall white mushroom, puffball, glowing cap. These are construction recipes rather than six biological species. Within this build, each recipe has become a template. A copy carries its template&#x27;s details with it:
+
+```gdscript
+		var mushroom = mushroom_types[type_index].duplicate()
+		mushroom.name = &quot;Mushroom_&quot; + str(i)
+```
+
+Look at two marked copies again. Their positions, turning and scale can differ. Their material situation can differ too: a cap lit by a neighbour need not look like the same cap in shadow. SHOW names a construction relationship; it cannot make every appearance identical.
+
+Now press SIZE. The bed is rebuilt. Find your pair. Their places and orientations remain, but the extra scaling has gone. They have not all become the same physical size: a tall template remains tall beside a low one. The plate says “scale 1 · template sizes kept.” What did you think the button would remove?
+
+For a scattered mushroom, the scale had been chosen here:
+
+```gdscript
+		var scale_factor = _size(0.7 + _rf() * 0.6)  # 0.7 to 1.3
+		mushroom.scale = Vector3(scale_factor, scale_factor, scale_factor)
+```
+
+And the switch decides what to do with that value:
+
+```gdscript
+func _size(v: float) -&gt; float:
+	return v if size_variation else 1.0
+```
+
+The draw still happens when the scale rule is off. Only its use changes. If the program skipped the draw, the following decisions would receive different numbers and our comparison would slip away. Press SIZE again. The earlier scales return.
+
+The seed on the plate makes this return possible under the same recipe. REGROW rebuilds the population and its ground. NEW SEED chooses a number different from the current one; it does not promise a number never used before. A new seed can also change one detail inside a template: where the puffball&#x27;s bumps sit. Six available recipes do not mean six eternally identical objects.
+
+Press KIND until the plate says “scattered.” Count what it calls accepted and rejected. Together they account for eighty candidate positions. The total mushroom count can be larger: two other routines add bodies later. First look at the spaces between the scattered ones. Which gaps seem intentional?
+
+Continue to “rejected.” Grey markers appear at candidate positions that the placement rule refused. They were never mushrooms that died. At each proposed position, a noise field was consulted:
+
+```gdscript
+		var noise_val = noise.get_noise_2d(pos_x * 2, pos_z * 2)
+
+		# Skip if noise value is too low (creates natural clearings)
+		if noise_val &lt; -0.3:
+			_rejected.append(Vector3(pos_x, get_ground_height(pos_x, pos_z), pos_z))
+			continue
+```
+
+The 2 in that line, with the field&#x27;s own frequency of one half, decides how far apart two candidates are in the field&#x27;s coordinates, and so how wide a clearing can be: about a metre here. In Random Space Geometry, that number is a slider.
+
+Even the source calls them “natural clearings.” The marks let us read what that phrase stands for here. A number crossed a threshold. This is the accept–reject method: propose a position, test it, keep it or throw it away.[^accept-reject] The beads in the last hall took the other road, a formula that needs no rejection. In Gaussian, a value beyond the display was kept at its boundary. Here an unsuccessful candidate leaves a recorded position and no body.
+
+Keep pressing KIND until it says “rings.” Green marks pick out the members added by the circle routine. One circle is requested at this bed&#x27;s six-metre size. Find it. Usually only an arc fits; imagine the rest continuing beyond the boards. Its members were given equal angular intervals:
+
+```gdscript
+	for i in range(count):
+		var angle = (2.0 * PI / count) * i
+		var pos_x = center_x + cos(angle) * radius
+		var pos_z = center_z + sin(angle) * radius
+```
+
+The radius helps set the requested count. Positions outside the bed are skipped. The plate&#x27;s bracket counts the members actually placed; it does not show the missing ones. A partial circle can carry the trace of two decisions: draw the ring, then admit only what fits.
+
+The next KIND is “clusters.” Two clusters each choose their own centre, spread and template. Their members receive random angles and distances. They do not pass through the scattered candidates&#x27; noise test. Bodies from different routines can overlap. Nothing here negotiates for room.
+
+Walk round the west and south margins. Three spotted red-capped mushrooms, on taller stems than the red caps in the bed, stand just inside the boards. They come from a separate pickable scene and are counted separately. A similar cap has acquired another capability. Hold one and bring it close to your face: its eating rule starts a visual effect with a ten-second hold and a fade in and out and the mushroom dissolves. The garden has offered a way to change the looking, as well as the thing looked at.
+
+&lt;!-- @bubbles_random --&gt;
+
+Near the entrance, off to one side of the glass, a small bubble dish grows another population, with no plate and no seed of its own. Each bubble&#x27;s place, size and rise are drawn as it appears, about ten a second, and each is gone after four seconds. Nothing there can be grown again.
+
+&lt;!-- @silhouette_arrivals --&gt;
+
+At the smaller arrival stage, press REPLAY: the places empty. Wait for a silhouette. Another place is chosen from those still empty. Six arrivals fill it; the program does not keep producing bodies without somewhere to put them. Press REPLAY again and watch the places return in the same order.
+
+Choose one figure and press DRESS. A hem may widen or narrow, a collar may appear or go, the pleats take another colour. Try again. How far can this wardrobe take the figure?
+
+Now press FORMS. Branches extend from the garment. Read the dress number: it has stayed. Switch FORMS back and the earlier dress returns. You did not need a luckier draw to find the branches. They needed another instruction. DRESS samples within the available recipe; FORMS switches between two recipes, one of which adds branches. Neither button changes the six places or the arrival order.[^chance-repertoire]
+
+These figures still turn towards you as flat images. Their new outlines give them no new way to walk, touch or refuse. A different appearance has not yet become a different permission. Which of those changes would you make next?
+
+&lt;!-- @couture_comparison --&gt;
+
+Beyond the garden, three couture bodies stand together. All begin with the hare head and sheath garment. Their seeds are 41, 42 and 43. Look for differences in proportion, print and pose before pressing NEXT SEED. Three more individuals appear under the same two named constructions.
+
+Keep this trio and press GARMENT. The seeds stay while the sheath gives way to a crinoline, then quilting, bloom and fringe. The body generator receives another construction instruction. Some details may change with the construction too: a seed is not a promise that every branch of a program spends its draws in the same way. RESET restores the starting trio. The garment&#x27;s possibilities were authored; chance finds individuals within them. Which possibility would you want to add to this wardrobe?
+
+&lt;!-- @ --&gt;
+
+The sampled sizes never grow a seventh template between two others. That would need another rule. Yet these rules could carry other forms, other ranges, other permissions. Which difference would you add first, and what would have to change to let it exist? Carry that question through the cage interlude. Then, in Random Space Geometry, compare values chosen independently with values related across neighbouring positions. The bed has already shown you both: each height of its jagged ground was drawn on its own, and its clearings came from a noise field in which nearby positions receive related values. What changes when difference acquires a neighbourhood?
+
+[^chance-repertoire]: The “Randomness” chapter of *10 PRINT CHR$(205.5+RND(1)); : GOTO 10*, pp. 125–127, discusses chance operations in Cage, Kelly and Morellet: variation takes place within constructed parameters and arrangements. The distinction between sampling a wardrobe and changing its repertoire is this hall’s experiment, rather than a claim that chance abolishes authorship.
+
+[^accept-reject]: The accept–reject method — draw, then test the draw against a rule or a second draw, and keep only what qualifies — is the oldest of the Monte Carlo methods; the dartboard in the gallery ahead carries that name for a reason its chapter gives.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Random_Mushrooms/tutorial.md">Raw captured source</a></p><pre># Read a population by changing one rule
+
+Build on Random_Gaussian&#x27;s distinction between a value and the account made from it. Here draws are assigned to construction tasks. Use the six-metre specimen bed and its five buttons; there is no mean/variance slider or live shape morphing control.
+
+1. Choose two apparently related mushrooms. SHOW cycles template 0–5, marks that disc and its field copies. Zero copies is a possible observation. SHOW returns KIND to template selection.
+2. Press SIZE. Follow the same instances. Their positions, templates, groups, yaw and ground should remain; their transform scales become 1. Distinct templates retain distinct dimensions. Press again to restore the sampled scales.
+3. Press REGROW under the displayed seed. Compare specific instances, not only total count. NEW SEED changes the current seed; earlier numbers may recur.
+4. KIND cycles scattered → rings → clusters → rejected → template. Read the current label rather than assuming a fixed number of presses. Accepted plus rejected counts only the eighty scattered candidates. Ring and cluster members are added separately.
+5. Inspect the edible mushrooms from the west and south margins. Their pickable/eating behaviour belongs to a separate scene. Headset eating depends on holding one within 0.25 m of the active camera. Desktop carrying does not reach that distance by itself.
+
+## The scale comparison
+
+The scattered-body code evaluates the draw before calling `_size`:
+
+```gdscript
+		var scale_factor = _size(0.7 + _rf() * 0.6)  # 0.7 to 1.3
+		mushroom.scale = Vector3(scale_factor, scale_factor, scale_factor)
+```
+
+```gdscript
+func _size(v: float) -&gt; float:
+	return v if size_variation else 1.0
+```
+
+Taking the draw out would change subsequent generator state. Keeping it and replacing its use preserves the comparison. The ranges differ by construction routine: scattered 0.7–1.3, rings 0.8–1.2, clusters 0.5–1.2. These scale draws are uniform within their respective ranges; the room does not use Gaussian sizing.
+
+## More than one source of draws
+
+```gdscript
+func _rf() -&gt; float:
+	return _pop_rng.randf() if _pop_rng != null else randf()
+
+func _ri() -&gt; int:
+	return _pop_rng.randi() if _pop_rng != null else randi()
+```
+
+These helpers serve the templates, placement routines and ground cover. A separate `ground_rng` produces vertex heights, seeded by population seed + 1 unless an explicit ground seed overrides it. NEW SEED uses another temporary generator to choose a seed. `_rf` is not the file&#x27;s only random call.
+
+## Candidate selection and explicit arrangement
+
+```gdscript
+		var pos_x = _rf() * meadow_size - meadow_size / 2
+		var pos_z = _rf() * meadow_size - meadow_size / 2
+```
+
+These draw candidates in a square. A fixed-count sample filtered by a noise threshold is not a spatial Poisson point process. The `density` parameter multiplies the requested count; the computed `area` variable is unused, so it does not maintain a number per square metre as bed size changes.
+
+```gdscript
+	var ring_count = int(meadow_size / 5)
+```
+
+```gdscript
+	var cluster_count = int(meadow_size / 3)
+```
+
+Six metres gives one ring and two clusters. Their members are generated separately, rejected outside the square, and permitted to overlap existing bodies. The plate reports placed membership; requested ring/cluster counts are available in source inspection and the review data.
+
+```gdscript
+		var angle = _rf() * PI * 2
+		var distance = _rf() * cluster_size
+```
+
+Uniform radius is not uniform area: equal-width radial bands receive equal probability while outer bands contain more area. That choice can thicken a cluster near its centre without any attraction between mushrooms.
+
+## Carry the question forward
+
+Template selection is discrete, while scale and yaw vary numerically. SIZE does not interpolate between templates. A proposed future experiment could replace one discrete choice with a shape parameter, but it would need its own implementation and comparison. Random_Game takes the next step in the active route: sampled choices with consequences for an encounter.
+
+
+## Spatial staging — 16 September 2026
+
+The map keeps a reachable instrument alongside its spatial applications. `map_data.json` is authoritative for placements. `#controls:compact` gathers the existing Rack panels, preserving their callbacks, into an 80 cm console. `#glass_width` opts into an enclosure with open entrances; its grid marks are not floor colliders.
+
+### Arrival stage
+
+`silhouette_arrivals` samples six distinct places without replacement. AUTO waits a seeded 1.5–3.5 seconds between arrivals; ARRIVE advances manually. REPLAY clears the population and restores the placement/timing stream. DRESS changes a separate wardrobe seed, retaining occupied places. The figures use the existing silhouette generator plus sampled collars, hems and pleats. They are non-colliding billboard visitors, not autonomous walking agents. Appearance does not determine hostility. The compact console retains all five touch callbacks.
+
+FORMS toggles `repertoire` between 0 (tailored) and 1 (tailored plus branches). It retains both seeds, arrival RNG state and occupied slots. Branches are drawn after the original garment parameters are sampled, so adding that rule preserves the earlier choices. Switching back recovers the earlier texture. REPLAY retains dress and repertoire while restarting arrivals.
+
+### DNA comparison
+
+Three dream_couture_beast instances use seeds 41,42,43 and head=hare. GARMENT cycles sheath, crinoline, quilted, bloom and fringe with seeds retained. NEXT SEED advances all by three. RESET restores the starting trio. Controls share the compact console.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Random_Mushrooms/technical.md">Raw captured source</a></p><pre># Random_Mushrooms - Technical Documentation
+
+## The primary: `mushrooms`
+
+`algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd` (Node3D, built in `_ready`). The population build is one pass in this order. The field has no growth simulation; REGROW rebuilds it, and the separately planted edible objects can be carried and consumed.
+
+1. **The ground.** A `meadow_size` × `meadow_size` plane at `ground_resolution` (36) cells, its vertex heights drawn by `ground_rng` within ±`ground_random_amplitude` (0.18 m), a trimesh collider from the same mesh (`Ground/GroundStaticBody/GroundCollision`). `get_ground_height(x, z)` bilinearly interpolates the height grid, and every mushroom uses that interpolated height estimate.
+2. **Six templates.** `create_mushroom_template(i)` for `i` in `mushroom_variety` (5): a tan cap, a red cap with spots, a flat brown cap with gills, a tall white one, a puffball with bumps; then `create_glowing_mushroom()` (a green stem, an emissive cap and an `OmniLight3D` named `GlowLight`). The templates are Node3Ds that never enter the tree.
+3. **Candidates.** `generate_mushroom_positions()` draws `target_count = mushroom_count × mushroom_density` (100 × 0.8 = 80) uniform positions in the square, evaluates a `FastNoiseLite` (seeded by a draw, frequency 0.5) at twice the position, and refuses any candidate under −0.3. The refused positions are kept in `_rejected`.
+4. **The scattered field.** For each accepted position: a template by `_ri() % 6` (the glowing one re-drawn against `glowing_mushroom_spawn_chance` 0.32), a copy by `duplicate()`, a yaw `_rf() * 360`, a uniform scale `_size(0.7 + _rf() * 0.6)`. Metadata `template` and `kind = &quot;scattered&quot;` on the instance.
+5. **Rings.** `int(meadow_size / 5)` fairy rings, each a centre, a radius `1.0 + _rf() * 2.0`, one template (never the glowing one), `int(radius * 8)` members at equal angles; a member outside the square is skipped. Scale `_size(0.8 + _rf() * 0.4)`; metadata `kind = &quot;ring&quot;`, `group`. Each ring records `requested` and `placed`.
+6. **Clusters.** `int(meadow_size / 3)` clusters, each a centre, a spread `0.5 + _rf() * 1.0`, `5 + _ri() % 10` members at random angle and distance, one template (the glowing one allowed); scale `_size(0.5 + _rf() * 0.7)`; `kind = &quot;cluster&quot;`.
+7. **Lighting and cover.** A `DirectionalLight3D`, a `WorldEnvironment` with fog, then `Grass` (a MultiMesh of blades), `Rocks` (three MultiMeshes) and `FallenLeaves` (a MultiMesh), all drawn from the same stream.
+
+### The draws
+
+Template, population and ground-cover draws go through two helpers. Ground heights use ground_rng separately; choosing a new seed also uses a temporary generator:
+
+```gdscript
+func _rf() -&gt; float:
+	return _pop_rng.randf() if _pop_rng != null else randf()
+
+func _ri() -&gt; int:
+	return _pop_rng.randi() if _pop_rng != null else randi()
+```
+
+`population_seed` is −1 by default: `_pop_rng` is null and the calls fall through to the global `randf()` / `randi()`, the same call in the same order as the shipped file, so the shipped meadow is unchanged. Under a non-negative seed a private `RandomNumberGenerator` makes every draw, and `ground_rng` takes `population_seed + 1` unless `ground_seed` is set. `regrow()` frees the field, the ground, the templates and the cover and rebuilds them in the build&#x27;s order, so a seeded regrow returns every instance&#x27;s template, kind, position, yaw and scale and the same ground heights (a probe compares the full instance list and a hash of the height grid, not the seed).
+
+### The size rule
+
+```gdscript
+func _size(v: float) -&gt; float:
+	return v if size_variation else 1.0
+```
+
+The draw is made whether or not the rule is on, so switching `size_variation` under the same seed changes each population instance scale to 1. Template dimensions stay different; the other construction draws are retained.
+
+### The specimen table (`stand:specimen`, opt-in)
+
+`stand` is an export enum `none | specimen`, default none. Under `specimen`, `_prepare_stand()` runs before the first build: a five-digit `population_seed` from a private generator if none was given, `max_glow_lights` 12 if 0, `bed_lift` = `ground_random_amplitude` if 0. After the build:
+
+- `_lift_bed()` raises `Ground`, `MushroomField`, `Grass`, `Rocks` and `FallenLeaves` by `bed_lift`, so a ground that undulates ±0.18 around 0 stands on a floor at 0 rather than being cut by it; `_build_kerb()` boards the bed&#x27;s four sides at the ground&#x27;s highest reach.
+- `_build_table()` stands a 1.5 × 0.5 × 0.9 m body at `+z` = half the bed plus a 0.9 m gap (the map token is rotated 180° so this edge faces the door), with a `StaticBody3D` collider, six discs and numbered tags along the top, a stencil, a 0.78 × 0.19 m plate leaning back 12° carrying a six-line `Label3D` at font 23 and 0.95 mm per pixel, and a `RackTemplates.create_panel` with SHOW · KIND · SIZE / REGROW · NEW SEED at 32°. Each `Btn_N/InteractableAreaButton.button_pressed(button)` is connected to a one-argument lambda (the signal carries the button; a zero-argument method is refused at emit).
+- `_refresh_specimens()` duplicates the six templates onto the discs at scale 0.8 (the glowing specimen&#x27;s light off), again after every regrow.
+- `_refresh_highlight()` fills two `MultiMeshInstance3D`s, a torus outline wider than a cap (radii 0.23–0.28) on the ground 4 cm over the instance&#x27;s own ground height plus the lift, and a pin (a sphere of radius 6 cm) 0.75 m above it (0.35 m for a rejected candidate), unshaded and vertex-coloured: magenta for every instance of the shown template (and a ring on that template&#x27;s disc on the table), deep blue for every scattered instance, green for ring members, violet for cluster members, dark grey for rejected candidates (saturated since the visual pass of 12 September: pale marks competed with the caps and grass). The disc numbers are 3.3 cm.
+- `readout_lines()`: the seed and REGROW&#x27;s policy; candidates, accepted, rejected; rings (placed), clusters (placed), templates; the SHOW or KIND line with its count; the size rule or SIZE off; glow instances, lit lights of the cap, mushrooms. Lines ≤ 46 characters.
+- `_note_light()` counts glowing instances and switches off the `OmniLight3D` of any past `max_glow_lights` (the cap keeps its emissive material).
+- `_exit_tree()` frees the templates, which never entered the tree (51 objects leaked at exit before this, measured 2026-09-12).
+
+API for probes and other callers: `regrow()`, `new_seed()`, `set_population_seed(v)`, `set_size_variation(on)`, `show_template(i)`, `cycle_show()`, `set_kind(i)`, `cycle_kind()`, `instances()`, `ground_signature()`, `readout_lines()`, `highlighted_count()`, `get_specimen_state()`.
+
+### The edible ones (`edible`, opt-in; Palle, 12 September)
+
+`edible` is a word-valued export enum `none | some | many` (3 or 6; `#edible:some` in this map&#x27;s token) read by `apply_grid_config`. `_plant_edibles()` runs after the whole build (and after every regrow): its draws come last on the same generator, so the population is exactly what it is without them and REGROW plants them at the same places; NEW SEED elsewhere. Each is an instance of `res://commons/hazards/mushroom/edible_mushroom.tscn` (`EdibleMushroom extends XRToolsPickable`, a RigidBody3D on the pickable layer) at `mushroom_scale` 1.5, planted still (frozen) at the ground&#x27;s height plus the lift, a third of a metre inside the local +x or −z kerb in turn — under the token&#x27;s 180° turn the west and south margins, where the walk runs. `edibles_state()` reports planted, present, eaten and both the planted and the settled positions; the plate&#x27;s last line counts the ones still standing (`glow 6 · lit 6/12 · mushrooms 104 · edible 3`), refreshed by a one-second watch because an eaten mushroom dissolves without a signal. Eating is the artifact&#x27;s own rule: held within 0.25 m of the camera (a headset brings it to the face) it calls the health manager with five health units, triggers a `MushroomEffect` (ten-second hold plus fades) and dissolves. The desktop pointer carries it at a metre or more, so on desktop it can be picked up and put down but not eaten by that rule; the live probe calls the eat as the desktop stand-in and says so.
+
+### Map configuration
+
+`apply_grid_config` reads `size` (the bed&#x27;s side in metres; a whitelisted key), `count`, `density`, `seed` and `stand`. The museum hands the config before `_ready`, so the values are stored and the first build uses them; the grid hands it after, and a built meadow regrows. The Random_Mushrooms token:
+
+```
+mushrooms:180#stand:specimen#size:6#edible:some
+```
+
+A six-metre bed at cell (6,7) with its table at the north edge facing the north door, its own seed each run, three edible mushrooms at its reachable edges. `#seed:NNNNN` pins one.
+
+## The hall
+
+13 × 13 cells; the interior x 1..10 at floor level with a one-metre platform strip along x 11 (rows 3–9; the 10 September recovery); the north door three cells wide at x 5–7, the south door at (6,12), the teleporter at (8,12). Museum block: `wall_height 3`, `gate_depth_rows 0`, `artifact_placement map` (the map&#x27;s cells are final; the dealt lane neither slides nor shrinks a body), `sculpture_clear_rects [[3,1,10,12]]` (cells 3–9 × 1–11 kept free of dealt plinths; the far edge is exclusive), `floor_cells [[8,12]]` (the teleporter&#x27;s void cell floored in the museum; the grid keeps its `0`).
+
+Tokens: `mushrooms:180#stand:specimen#size:6#edible:some` (6,7); `dark_sphere` (10,2); `bubbles_random:0:-0.5:1.0` (10,4); `random_number_book_page_collection:0:1` (10,7); `bubble_particles:0:-0.5` (10,9); `reaction_diffusion_intro:0:-0.5` (9,11). The bed spans x 3.5–9.5, z 4.5–10.5; the table&#x27;s face is at z ≈ 3.1 and the visitor&#x27;s spot at (6.5, 2.3); the walk runs from the north door down the west margin (x 1–3.5) and along the south margin (z 10.5–12) to the south door.
+
+## Measured
+
+See `field_notes.md` for the runtime pass (both lanes) and `ada_run/waves_chance_noise/Random_Mushrooms/report.md`.
+
+## Failure modes worth naming
+
+A ring whose centre falls near the kerb is an arc, and the plate&#x27;s bracket says how many of its members were placed. The clusters&#x27; members can land on top of scattered mushrooms; nothing prevents overlap, and nothing in the scene claims to. The glow cap is a count of lights, not of glowing caps: past twelve, a glowing mushroom keeps its emissive cap and loses its light. Under the shipped default (no seed) REGROW is a new population, and the plate says so.
+
+
+## Review distinctions — 12 September 2026
+
+Builds on Random_Gaussian; prepares for Random_Game on the active route. The ground-height lookup uses a sampled height grid and bilinear interpolation, while the visible ground/collider is triangulated. It is an approximation to that surface, not a proof of exact mushroom-foot contact at every position. The walk uses the actual collision geometry and remains on the margins.
+
+The requested scatter count is fixed by count × density; `area` is calculated but unused. This is not a spatial Poisson process and does not maintain density per square metre as the bed is resized. Ring and cluster counts change with bed size. The templates are chosen discretely; the additional scattered glow gate can consume extra random draws, so “three draws per mushroom” is not a general count. Rings exclude the glowing template, clusters permit it. Beyond the light cap, emissive caps remain but their individual lights are disabled.
+
+Cluster radius is sampled uniformly, concentrating points per unit area toward its centre. Scale is uniform within each kind&#x27;s stated interval. The original “smaller ones more common” code comment meant a lower size range, not a nonuniform scale distribution.
+
+The specimen stand&#x27;s five buttons control selection, kind, scale use and seeds. There is no editable seed field on it. NEW SEED excludes the current number, but may revisit an older one. A seed repeats a build under the same source/configuration, including template detail draws and edible planting; it does not promise cross-version identity or rewind the player&#x27;s state. Eating calls `heal_player(5.0)` where available and an effect with a ten-second hold plus fades; the code does not establish that five health units are five percent for every player configuration.
+
+The September 12 review repairs the desktop canvas shader&#x27;s invalid early return and sizes its ColorRect to the viewport, updating it on resize. The VR spatial shader is unchanged. Rendered tests distinguish zero-intensity passthrough from active distortion; the actual eating effect finishes before the neutral room captures.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Random_Mushrooms/intent.md">Raw captured source</a></p><pre>Concept: Which differences can this recipe make? Template copying, continuous transform variation, noise-gated candidates and explicitly constructed rings/clusters contribute different parts of one visible population.
+Sequence role: From Random_Gaussian&#x27;s retained values and changing accounts to body construction; onward to Random_Game on the active seven-hall randomness route. The broader stored sequence contains additional rooms and is not changed here.
+Primary: mushrooms, matching its role, final anchor and book hero. Preserve the specimen table, six-metre raised bed and three edible mushrooms. A 13×14 hall gives the bed a clear margin; one small bubble dish remains as supporting company. The second bubble system, duplicate historical page, reference sphere and later reaction-diffusion lesson are archived.
+Encounter: infer a relationship; SHOW its copies; remove only scale variation; compare a seeded rebuild; use KIND to inspect different placement permissions; approach the pickable mushrooms from the west and south margins.
+Critical angle: unit scale does not imply equal dimensions; a continuous parameter does not interpolate discrete templates; resemblance does not establish ecology or interaction capability. The edible scene can alter the observer&#x27;s view while the bed stays arranged.
+Limits: no ecology, no shape-morphing or parameter sliders, no calculated entropy threshold. REGROW repeats construction rather than rewinding the entire world. The bed is viewed from its margins. Headset effect, reach and lettering require the later embodied check.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Random_Mushrooms/critical.md">Raw captured source</a></p><pre># A resemblance leaves work to do
+
+Random_Gaussian asked what a count preserves and what its boundaries absorb. Random_Mushrooms puts the same question into a population of recognisable forms. The meadow invites an ecological reading before the source has earned one. Its ring is specified by a centre, radius and equally spaced angles. Its empty patches include candidate positions refused by a threshold. Its clusters do not arise from the mushrooms attracting one another.
+
+The pleasure of that appearance remains part of the encounter. Recognising a garden can make us curious enough to investigate its construction. The specimen table gives that curiosity somewhere to act: SHOW follows a template&#x27;s copies, KIND separates placement routines, and SIZE removes one use of a draw while preserving the other decisions. Discovery oscillates between what a patch suggests and what an intervention lets us establish.
+
+## Which bodies can exist here?
+
+The available body recipes are discrete. Continuous scale variation cannot turn the tan template into the tall white one, however many intermediate scale values we allow. Sharing a code substrate makes revisions and combinations possible; it does not make every transition already implemented. The missing intermediate body identifies a concrete research task: which representation or construction rule would let it appear?
+
+Scale 1 exposes another assumption. Equality of a transform parameter does not imply equality of physical dimensions. The templates carry different sizes into the comparison. They also carry sampled internal details: the puffball&#x27;s bumps are chosen while the template is built, then copied with it. A new seed can alter such details. Even the reference object on the table has a procedure behind it.
+
+A rejection marker records a tested position, not a history of an organism that failed to survive. Calling the threshold hostile, or the ring cooperative, would add a relation absent from this implementation. The threshold becomes available for critical thought when we name exactly what it admits, where it is applied and where it is bypassed. Ring and cluster members do not undergo the scattered candidates&#x27; noise test. Different members of the same visible population therefore arrive under different permissions.
+
+## A body that changes the looking
+
+The edible mushrooms extend this question beyond geometry. Their red caps resemble one of the population&#x27;s forms, but they instantiate another scene with a rigid body, pickup state, camera-distance check and an eating effect. Appearance does not settle capability. The player encounters that distinction by attempting an action.
+
+Eating starts a timed visual effect; it does not regrow the landscape. The observer&#x27;s view can change while the arrangement remains. This is a useful bridge back to colour, shaders and the avatar, and forward to other ways a simulated body may sense its world. The implementation can be checked on desktop; the felt quality and comfort of the headset effect still need a person&#x27;s account.
+
+REGROW restores planted edibles along with the bed, but it is not a rewind of player health, carried-object history or every process in the museum. A repeated construction gives an experiment a stable reference without recovering its entire past.
+
+## An opening for further work
+
+The room suggests a queer use of its own tools: let the familiar copy become a question about what the template cannot produce. A proposed extension might allow cap and stem dimensions to vary independently, or let a form inherit another scene&#x27;s capability. These are proposals, not controls already on the table. Their value would lie in comparing what new bodies become possible and which new limits arrive with them.
+
+QFEP is a research lens here: a way to ask how a bounded repertoire permits variation and how a change of rules enlarges it. This scene does not calculate free energy, entropy, lambda or an entropy threshold. A static seeded arrangement cannot supply measurements of those quantities by resemblance alone. The nearby reaction-diffusion artifact offers a later comparison with an evolving field; the mushroom meadow remains this room&#x27;s book primary.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Random_Mushrooms/artifacts.md">Raw captured source</a></p><pre># Artifacts in Random_Mushrooms
+
+The instrument and the spatial encounter share a hall. Placements are source-grid metres; the entrance is at -Z.
+
+| Artifact | Role | Position (x, z) |
+|---|---|---|
+| `mushrooms` | primary | (8, 11) |
+| `bubbles_random` | secondary | (3, 5) |
+| `silhouette_arrivals` | secondary | (13, 4) |
+
+The book markers match the primary roles. Glass boundaries are staging, with open entrances and exits. Controls marked `compact` retain their original callbacks on a common console.
+
+Supporting comparison: `couture_comparison` at (8, 20), with a compact console.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Random_Mushrooms/summary.md">Raw captured source</a></p><pre># Random Mushrooms
+
+A six-metre specimen bed makes a population&#x27;s construction inspectable. Six template recipes are copied into scattered positions, an explicit ring and two clusters. SHOW follows copies; KIND separates the routines and rejected candidates; SIZE removes per-instance scale variation under the same seed; REGROW repeats the build; NEW SEED changes the current seed.
+
+Scale 1 preserves the templates&#x27; different dimensions. The size rule uses uniform ranges, not Gaussian draws. Template details can also change between seeds. Three separately planted edible mushrooms add pickup and a timed perception effect, extending the question from the displayed bodies to the looking body.
+
+The west and south margins carry the walk around the raised bed. One primary, `mushrooms`, anchors the book; the existing bubbles, RAND pages and reaction-diffusion study remain as secondary encounters. Continue from Random_Gaussian toward Random_Game on the active review route.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Random_Mushrooms/blurb.md">Raw captured source</a></p><pre># Which differences were invited?
+
+Follow two related caps. Remove their extra scaling. Turn on the marks for rejected positions and search for a circle that continues beyond the boards. The garden&#x27;s variety comes from several rules sharing a place. Three edible mushrooms offer another change: the way the place is seen.
+</pre></section></body></html>

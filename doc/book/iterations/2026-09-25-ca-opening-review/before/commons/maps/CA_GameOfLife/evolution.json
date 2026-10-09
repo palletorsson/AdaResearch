@@ -1,0 +1,82 @@
+{
+  "artifact": "7_2_game_of_life_vr",
+  "title": "Building a Universe of Local Rules",
+  "concept_layer": "cellular automata; local rules \u2192 global emergence; discrete time + discrete space; state update from neighbors",
+  "technique_first": ["PackedByteArray for cell state", "double-buffer update", "neighbor counting", "Conway's B3/S23 rule", "MultiMesh for cell rendering", "generation counter", "probability-based initialization"],
+  "technique_reference": ["Grid indexing (Tutorial_Single, arrays)", "FastNoiseLite analog (noise)", "randf_range seeding (Random_Definition)", "apply_grid_config (all prior)", "RackTemplates sliders (rotation_gimbal)"],
+  "domain_deferred": ["elementary CA rules \u2192 CA_ElementaryRules (sibling map)", "beyond-binary states \u2192 CA_BeyondBinary", "hexagonal/totalistic \u2192 later CA maps", "Wireworld computation \u2192 CA_Wireworld", "edge of chaos / Langton's \u03bb \u2192 CA_EdgeOfChaos", "Rule 90 = Sierpinski \u2192 fractals"],
+  "capture_leaks": {
+    "deterministic_rule": "Conway's B3/S23 is fixed. Totalistic, outer-totalistic, probabilistic rules are all variations. The rule is one choice in a vast space.",
+    "synchronous_update": "All cells update simultaneously, based on the previous state. Asynchronous (each cell updates at its own time) gives different emergent behavior.",
+    "moore_neighborhood": "Eight neighbors (square + diagonals). Von Neumann (4), hexagonal (6), extended (radius r), 3D (26). Topology shapes outcomes.",
+    "boundary_conditions": "What about the edges? Wrap-around (torus), dead (walls), reflect (mirror). Each changes long-run behavior. This map wraps.",
+    "no_influence_from_afar": "A glider at (0,0) cannot affect (100,100) faster than 100 generations. CA are strictly local. Long-range phenomena (gravity, light) need different machinery.",
+    "irreversibility": "Given the current state, we can compute the next \u2014 but many past states lead here. Time is one-way. Reversibility requires more bits per cell."
+  },
+  "limit": "A 20\u00d720 grid, one rule, pure local logic. The artifact shows that complex global behavior emerges from trivially-local rules. What it refuses: causality from outside the grid, non-square topology, variable rules, continuous values. It is one step along the computational-universality ladder: elementary CA (1D) \u2192 Life (2D) \u2192 Turing machine (1D tape with read/write head) \u2192 lambda calculus. The grid is a computer the player can watch thinking.",
+  "grammar_alignment": {
+    "sequence": "cellularautomata",
+    "operations_taught": ["step", "evolve"],
+    "operations_deferred_to_sequence": ["rule (CA_ElementaryRules teaches the 256-rule space)", "seed (CA_Introduction handles initialization patterns)"],
+    "note": "7_2_game_of_life_vr teaches step (advance one generation) and evolve (run many generations). The rule is hardcoded here \u2014 rule parameterization is the job of CA_ElementaryRules. Seed patterns (glider, pulsar, R-pentomino) are taught by a dedicated pattern loader artifact."
+  },
+  "biome_alignment": {
+    "sequence": "cellularautomata",
+    "density_at_entry": 0.5,
+    "kingdoms_unlocked": ["flower", "tree", "fungus"],
+    "hand_verbs_gained": ["apply_rule"],
+    "catalyst_mode": "cellular",
+    "hazard_type": "octapod_crawler (promoted from wary to neutral)",
+    "note": "Big shift \u2014 density crosses 0.5 (world is becoming alive). 'cellular' catalyst lets the player apply local rules to any surface. Flowers and fungus arrange via CA-like rules now; vegetation patches form organically. The world is literally running cellular automata as its growth algorithm."
+  },
+  "stages": [
+    {
+      "title": "From noise to rule",
+      "thinking": "Perlin noise produces terrain from neighbor correlation \u2014 a rule that says 'agree gently.' Now a stricter rule, and a surprise: sharp discrete rules can produce behavior more complex than noise, not less. A cell is alive or dead. It has 8 neighbors. Three rules decide its fate. That's the entire system. Gliders, oscillators, replicators, universal computation \u2014 all from those three rules. Emergence from local logic is the subject of this sequence.",
+      "code": "# Noise: gradient sum, smooth blending, continuous values\n# CA: binary cell, discrete time, three rules\n#\n# Conway's B3/S23 (Game of Life):\n#   Birth:     dead cell with exactly 3 neighbors \u2192 alive\n#   Survive:   alive cell with 2 or 3 neighbors \u2192 stays alive\n#   Die:       all other cases \u2192 dead\n#\n# Three rules. Infinite complexity.\n# This is the deepest claim of the CA sequence.",
+      "concepts": ["B3/S23 rule", "binary state", "discrete time + space", "local rule"]
+    },
+    {
+      "title": "Store the grid as a packed array",
+      "thinking": "A 20\u00d720 grid has 400 cells. Each cell needs one bit (alive/dead). PackedByteArray is Godot's efficient byte storage. One byte per cell is overkill for a bit but simplifies indexing. The grid is stored, updated, read, rendered every tick. Storing two grids (current and next) enables double-buffering: compute the next state from the current without overwriting.",
+      "code": "extends Node3D\n\n@export var grid_size: int = 20\n@export var update_interval: float = 0.4\n@export var alive_probability: float = 0.3\n\nvar _cells: Array[PackedByteArray] = []  # 2D: rows of cells\nvar _generation: int = 1\n\nfunc _initialize_grid() -> void:\n\t_cells.clear()\n\tfor y in range(grid_size):\n\t\tvar row := PackedByteArray()\n\t\trow.resize(grid_size)\n\t\tfor x in range(grid_size):\n\t\t\trow[x] = 1 if randf() < alive_probability else 0\n\t\t_cells.append(row)",
+      "concepts": ["PackedByteArray", "2D grid as array-of-rows", "probability-based init", "state storage"]
+    },
+    {
+      "title": "Count alive neighbors \u2014 the atomic query",
+      "thinking": "For each cell, look at 8 surrounding cells and count how many are alive. Wrap around at edges (torus topology \u2014 what leaves the right comes in the left). This count determines the cell's fate. The neighbor-count function is the heart of every CA \u2014 different rules just map count-and-current-state to next-state differently.",
+      "code": "func _count_neighbors(x: int, y: int) -> int:\n\tvar count = 0\n\tfor dy in [-1, 0, 1]:\n\t\tfor dx in [-1, 0, 1]:\n\t\t\tif dx == 0 and dy == 0:\n\t\t\t\tcontinue  # skip self\n\t\t\t# Wrap around edges (torus)\n\t\t\tvar nx = (x + dx + grid_size) % grid_size\n\t\t\tvar ny = (y + dy + grid_size) % grid_size\n\t\t\tcount += _cells[ny][nx]\n\treturn count\n\n# 3 lines do the topology work.\n# Modulo + offset = wrap-around.\n# This would break if the grid were infinite.\n# Wrap is the CHEAP fix; truth is more complex.",
+      "concepts": ["Moore neighborhood", "modulo for torus wrap", "double-for over offsets", "neighbor counting"]
+    },
+    {
+      "title": "Apply the B3/S23 rule",
+      "thinking": "This is Conway's entire universe in four lines. A dead cell with exactly 3 neighbors becomes alive (birth). A living cell with 2 or 3 neighbors stays alive (survival). Every other case: dead. Change `[3]` to `[3, 6]` and you get HighLife, which has replicators that Life doesn't. Change the numbers and you change the physics of the universe.",
+      "code": "func _step() -> void:\n\tvar next_cells: Array[PackedByteArray] = []\n\tfor y in range(grid_size):\n\t\tvar row := PackedByteArray()\n\t\trow.resize(grid_size)\n\t\tfor x in range(grid_size):\n\t\t\tvar neighbors = _count_neighbors(x, y)\n\t\t\tvar current = _cells[y][x]\n\t\t\t\n\t\t\t# Conway's Game of Life (B3/S23)\n\t\t\tif current == 1:\n\t\t\t\trow[x] = 1 if (neighbors == 2 or neighbors == 3) else 0\n\t\t\telse:\n\t\t\t\trow[x] = 1 if neighbors == 3 else 0\n\t\tnext_cells.append(row)\n\t_cells = next_cells\n\t_generation += 1",
+      "concepts": ["rule application", "double-buffering", "synchronous update", "B3/S23 in code"]
+    },
+    {
+      "title": "Run the rule every update_interval seconds",
+      "thinking": "The grid doesn't update every frame \u2014 it updates every update_interval. This is a deliberate choice. Too fast: the eye can't track emergence. Too slow: the player gets bored. 0.4 seconds per generation lets the player see individual events (a glider taking one step) while also watching long-term patterns form. Time discretization is a critical pedagogical choice.",
+      "code": "var _timer: float = 0.0\n\nfunc _process(delta: float) -> void:\n\t_timer += delta\n\tif _timer >= update_interval:\n\t\t_timer = 0.0\n\t\t_step()\n\t\t_render_cells()\n\t\t_update_status()\n\nfunc _update_status() -> void:\n\t_status_label.text = \"Gen %d | alive: %d\" % [\n\t\t_generation, _count_alive()\n\t]",
+      "concepts": ["fixed timestep", "_process delta accumulation", "generation counter", "status feedback"]
+    },
+    {
+      "title": "Render cells as a grid of materials",
+      "thinking": "Two materials: alive (pink) and dead (translucent glass). For each cell, set material based on state. At 400 cells and 0.4 seconds per update, performance is trivial. For larger grids, MultiMeshInstance3D is the pattern \u2014 one mesh, hundreds of transforms, single draw call. The artifact uses a simpler per-cell approach because readability trumps performance at teaching scale.",
+      "code": "const MAT_ALIVE := preload(\n\t\"res://commons/resourses/materials/noc_vr/noc_vr_pink_primary.tres\"\n)\nconst MAT_DEAD := preload(\n\t\"res://commons/resourses/materials/noc_vr/noc_vr_fishtank_glass.tres\"\n)\n\nfunc _render_cells() -> void:\n\tfor y in range(grid_size):\n\t\tfor x in range(grid_size):\n\t\t\tvar cell_node = _cell_instances[y][x]\n\t\t\tif _cells[y][x] == 1:\n\t\t\t\tcell_node.material_override = MAT_ALIVE\n\t\t\telse:\n\t\t\t\tcell_node.material_override = MAT_DEAD\n\n# 400 cells, two materials, clear signal.\n# For 10,000 cells: use MultiMesh.\n# For now, clarity > scale.",
+      "concepts": ["preload of .tres material", "material_override", "rendering strategy scales"]
+    },
+    {
+      "title": "Let the player inject initial conditions",
+      "thinking": "A slider for alive_probability. Low values (5%): mostly dead, few survivors, tiny glimmers. Medium (30%): rich interactions, gliders emerge. High (80%): dense clumps that mostly die from overcrowding. The player tunes the initial density and watches different universes play out. Each universe has the SAME RULE. Different initial conditions are different STORIES of the same physics.",
+      "code": "var probability_controller := CONTROLLER_SCENE.instantiate()\nprobability_controller.parameter_name = \"Alive %\"\nprobability_controller.min_value = 0.05\nprobability_controller.max_value = 0.9\nprobability_controller.default_value = alive_probability\nprobability_controller.value_changed.connect(func(v: float) -> void:\n\talive_probability = v\n\t# Rebuild initial grid with new probability\n\t_initialize_grid()\n\t_generation = 1\n)\n\n# Same rule, different seeds, different stories.\n# Chaos theory in a grid.",
+      "concepts": ["initial condition sensitivity", "parameter_controller_3d", "same rule \u2260 same outcome", "sensitivity as feature"]
+    },
+    {
+      "title": "Give it identity",
+      "thinking": "The Game of Life knows what it is. Not a toy grid \u2014 a proof that complexity arises from simplicity. The rule is trivial; the behaviors are inexhaustible. Gliders glide. Oscillators pulse. R-pentominoes evolve for 1,103 generations before settling. Gospers discovered a glider gun that emits gliders forever. All from the same four lines of code. The Life grid is a window into why the universe can be at once law-abiding and surprising. What it refuses: continuity, long-range forces, variable rules, rich cell states. Those are doors to the rest of the sequence.",
+      "code": "# @identity\n# essence: 20\u00d720 grid of binary cells updated by Conway's B3/S23 rule \u2014 dead cells with 3 neighbors come alive, alive cells with 2 or 3 neighbors survive, all else die\n# desire: learner watches patterns emerge, die, oscillate, glide \u2014 and realizes the rule is three lines and the behavior is inexhaustible\n# critical_parameter: alive_probability \u2014 initial density controls which universe of behaviors unfolds\n# triggers: timer ticks every update_interval, _step() computes next state, _render_cells() updates visual, _update_status() reports generation count\n# emerges: gliders, oscillators, still-lifes, chaos regions \u2014 all from three local rules with no global coordination\n# needs: PackedByteArray grid [has]; material swap rendering [has]; probability slider [has]; reset [missing explicit]\n# relationships: 2D case of elementary CA (CA_ElementaryRules = 1D version); feeds CA_BeyondBinary (more states), CA_ExpandingSpace (larger scale), fractals (Rule 90 \u2192 Sierpinski)\n# truth: complexity is cheap \u2014 a universe obeying three rules can host an infinity of stories",
+      "concepts": ["@identity", "emergence from locality", "cheap complexity", "truth"]
+    }
+  ]
+}

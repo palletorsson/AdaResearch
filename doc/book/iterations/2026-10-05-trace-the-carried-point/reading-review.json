@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-05",
+  "reviewer": "line_student_step",
+  "scope": "Read-only teaching and continuity review; runtime reported separately.",
+  "required_corrections": [],
+  "verified": [
+    "Point and readout constructions and existing coordinate process prefix preserved from Lines.",
+    "One _ready definition; supplied helper unchanged.",
+    "Seed before index access; typed array stores values, not node references.",
+    "Distance measured from last accepted position.",
+    "Neighbour loop indices and deferred cleanup explained.",
+    "Storage and coordinate frame explicit; Grid transfer not claimed implemented."
+  ],
+  "clarification_added": "State that the array declaration outside the functions keeps it across frames."
+}

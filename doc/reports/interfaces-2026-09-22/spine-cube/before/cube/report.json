@@ -1,0 +1,339 @@
+{
+	"builders": [
+		{
+			"artifact": [
+				5.5,
+				1.55499994754791,
+				9.5
+			],
+			"feet": [
+				6.94999980926514,
+				0.0000000223517417907715,
+				10.8299999237061
+			],
+			"index": 0,
+			"panel": [
+				6.94999980926514,
+				1.55499994754791,
+				10.3500003814697
+			]
+		},
+		{
+			"artifact": [
+				2.5,
+				1.55499994754791,
+				12.5
+			],
+			"feet": [
+				3.95000004768372,
+				0.0000000223517417907715,
+				13.8299999237061
+			],
+			"index": 1,
+			"panel": [
+				3.95000004768372,
+				1.55499994754791,
+				13.3500003814697
+			]
+		}
+	],
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Both authored builders remain for comparison",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 operating pose has floor",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 standing capsule clears geometry",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton inside working height band 0.65–1.25 m",
+			"passed": false
+		},
+		{
+			"message": "0 ReplayButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 ReplayButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton inside working height band 0.65–1.25 m",
+			"passed": false
+		},
+		{
+			"message": "0 PauseButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 PauseButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 RestoreButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "0 DiagonalButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 pause stops its assembly",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 resume reveals usable corners",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 diagonal button reveals all six source diagonals",
+			"passed": true
+		},
+		{
+			"message": "Builder 0 restore retains initial cube",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 operating pose has floor",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 standing capsule clears geometry",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton inside working height band 0.65–1.25 m",
+			"passed": false
+		},
+		{
+			"message": "1 ReplayButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 ReplayButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton inside working height band 0.65–1.25 m",
+			"passed": false
+		},
+		{
+			"message": "1 PauseButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 PauseButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 RestoreButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton inside working height band 0.65–1.25 m",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "1 DiagonalButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 pause stops its assembly",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 resume reveals usable corners",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 diagonal button reveals all six source diagonals",
+			"passed": true
+		},
+		{
+			"message": "Builder 1 restore retains initial cube",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 1.4349999204278,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/ReplayButton/InteractableAreaButton",
+			"horizontal_distance": 0.500140964984894,
+			"label": "0 ReplayButton",
+			"position": [
+				6.67999982833862,
+				1.43499994277954,
+				10.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.4349999204278,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/PauseButton/InteractableAreaButton",
+			"horizontal_distance": 0.500140964984894,
+			"label": "0 PauseButton",
+			"position": [
+				7.21999979019165,
+				1.43499994277954,
+				10.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.20499990135431,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/RestoreButton/InteractableAreaButton",
+			"horizontal_distance": 0.500140964984894,
+			"label": "0 RestoreButton",
+			"position": [
+				6.67999982833862,
+				1.20499992370605,
+				10.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.20499990135431,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/Animatedcubebuilder/ExperimentPanel/DiagonalButton/InteractableAreaButton",
+			"horizontal_distance": 0.500140964984894,
+			"label": "0 DiagonalButton",
+			"position": [
+				7.21999979019165,
+				1.20499992370605,
+				10.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.4349999204278,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@763/ExperimentPanel/ReplayButton/InteractableAreaButton",
+			"horizontal_distance": 0.50014054775238,
+			"label": "1 ReplayButton",
+			"position": [
+				3.6800000667572,
+				1.43499994277954,
+				13.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.4349999204278,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@763/ExperimentPanel/PauseButton/InteractableAreaButton",
+			"horizontal_distance": 0.500140726566315,
+			"label": "1 PauseButton",
+			"position": [
+				4.22000026702881,
+				1.43499994277954,
+				13.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.20499990135431,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@763/ExperimentPanel/RestoreButton/InteractableAreaButton",
+			"horizontal_distance": 0.50014054775238,
+			"label": "1 RestoreButton",
+			"position": [
+				3.6800000667572,
+				1.20499992370605,
+				13.4090003967285
+			]
+		},
+		{
+			"clear_ray": true,
+			"height": 1.20499990135431,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/@Node3D@763/ExperimentPanel/DiagonalButton/InteractableAreaButton",
+			"horizontal_distance": 0.500140726566315,
+			"label": "1 DiagonalButton",
+			"position": [
+				4.22000026702881,
+				1.20499992370605,
+				13.4090003967285
+			]
+		}
+	],
+	"failures": [
+		"0 ReplayButton inside working height band 0.65–1.25 m",
+		"0 PauseButton inside working height band 0.65–1.25 m",
+		"1 ReplayButton inside working height band 0.65–1.25 m",
+		"1 PauseButton inside working height band 0.65–1.25 m"
+	],
+	"passed": false,
+	"room": "Point_Animatedcube",
+	"scope": "Actual museum hall, standing capsule, native pointer buttons, world control dimensions. Desktop evidence; headset comfort not tested.",
+	"shots": [
+		"builder-0-encounter.png",
+		"builder-0-controls.png",
+		"builder-1-encounter.png",
+		"builder-1-controls.png"
+	]
+}

@@ -1,0 +1,36 @@
+{
+  "hall": "Brouwer_Intuitionism",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "eight_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "stepping_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "cantor_diagonal_workbench",
+    "intractable_evidence",
+    "angle_sum_triangle",
+    "constructive_proof",
+    "brouwer_choice_sequence",
+    "constructive_staircase",
+    "excluded_middle_demo",
+    "parallel_lines"
+  ],
+  "primary_artifacts": [
+    "constructive_proof",
+    "brouwer_choice_sequence"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Brouwer_Intuitionism\\map_data.json": "e6db443d58b4c2a965c942143b33256772a4ca0f8c37465f0eadf45ee440f930",
+    "commons\\maps\\Brouwer_Intuitionism\\final.md": "0007c103b870c74b5166cb6f56eeb095b33282bddc3d47744edd387d9f683fd0",
+    "commons\\maps\\Brouwer_Intuitionism\\tutorial.md": "6f501c6016892a07a24464413702cfba244b677131885629cc550365aebf3791",
+    "commons\\maps\\Brouwer_Intuitionism\\technical.md": "96d58dff26401c7b7042fd3bb831f916b63221beb0651e3ba58af837f38cc211",
+    "commons\\maps\\Brouwer_Intuitionism\\critical.md": "f75c648713ceabcd97083bd2655100afea2b0c95661ce71067f4fc677dc05feb"
+  }
+}

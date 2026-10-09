@@ -1,0 +1,259 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "new gallery loads inside Point Lines",
+      "passed": true
+    },
+    {
+      "name": "twenty line bodies in four views",
+      "passed": true
+    },
+    {
+      "name": "plus_horizontal is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "plus_horizontal keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "plus_vertical is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "plus_vertical keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "cross_a is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "cross_a keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "cross_b is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "cross_b keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "rail_a is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "rail_a keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "rail_b is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "rail_b keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "measure_a is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "measure_a keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "measure_b is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "measure_b keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "upright_a is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "upright_a keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "upright_b is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "upright_b keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "horizon is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "horizon keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "grid_horizontal_0 is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "grid_horizontal_0 keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "grid_vertical_0 is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "grid_vertical_0 keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "grid_horizontal_1 is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "grid_horizontal_1 keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "grid_vertical_1 is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "grid_vertical_1 keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "grid_horizontal_2 is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "grid_horizontal_2 keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "grid_vertical_2 is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "grid_vertical_2 keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "depth_a is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "depth_a keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "depth_b is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "depth_b keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "depth_cross is on the VR pickup layer",
+      "passed": true
+    },
+    {
+      "name": "depth_cross keeps its declared span",
+      "passed": true
+    },
+    {
+      "name": "five visible skins available",
+      "passed": true
+    },
+    {
+      "name": "production pickup moves a line",
+      "passed": true
+    },
+    {
+      "name": "new arrangement stays after release",
+      "passed": true
+    },
+    {
+      "name": "walk opens directly into gallery",
+      "passed": true
+    },
+    {
+      "name": "open walking path -8.0",
+      "passed": true
+    },
+    {
+      "name": "floor supports path -8.0",
+      "passed": true
+    },
+    {
+      "name": "open walking path -3.0",
+      "passed": true
+    },
+    {
+      "name": "floor supports path -3.0",
+      "passed": true
+    },
+    {
+      "name": "open walking path 2.0",
+      "passed": true
+    },
+    {
+      "name": "floor supports path 2.0",
+      "passed": true
+    },
+    {
+      "name": "open walking path 7.0",
+      "passed": true
+    },
+    {
+      "name": "floor supports path 7.0",
+      "passed": true
+    },
+    {
+      "name": "followed line meets a real wall",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: four-views",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: plus-and-cross",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: parallel-and-grid",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: follow-to-wall",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "gallery_position": [
+      13.5,
+      0.0,
+      17.5
+    ],
+    "wall_stop": [
+      25.6875,
+      0.025000000372529,
+      31.2000007629395
+    ]
+  },
+  "passed": true,
+  "scope": "Native museum geometry, production pickup with supplied grabber, collision paths, and screenshots. No headset acceptance claimed."
+}

@@ -1,0 +1,2430 @@
+{
+	"id": "dream_figures",
+	"name": "Dream Bodies — the families",
+	"description": "Each dream body as its own artifact with its own two axes of surreal variation, so every family can be swept into a DNA gallery. The scenes under commons/artifacts/dream_bodies/figures/ are GENERATED from each builder's own axes() by tools/dream_bodies_promote.py — edit the builder.",
+	"category": "dream_bodies",
+	"artifacts": {
+		"dream_asawa_wire": {
+			"lookup_name": "dream_asawa_wire",
+			"name": "Dream Body — asawa wire",
+			"scene": "res://commons/artifacts/dream_bodies/figures/asawa_wire.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The asawa wire family, grown from a seed and varied along winding (figure, mirrored, skein, unravelled, flooded) and strand (fibre, fossil, molten, bloom).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"winding": [
+						"figure",
+						"mirrored",
+						"skein",
+						"unravelled",
+						"flooded"
+					],
+					"strand": [
+						"fibre",
+						"fossil",
+						"molten",
+						"bloom"
+					]
+				},
+				"default": "winding=figure, strand=fibre",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/asawa_wire.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_bacon_smear": {
+			"lookup_name": "dream_bacon_smear",
+			"name": "Dream Body — bacon smear",
+			"scene": "res://commons/artifacts/dream_bodies/figures/bacon_smear.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The bacon smear family, grown from a seed and varied along smear (drag, still, fan, shred, spill, cast) and hold (open, pin, rail, frame, ring, strip).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"smear": [
+						"drag",
+						"still",
+						"fan",
+						"shred",
+						"spill",
+						"cast"
+					],
+					"hold": [
+						"open",
+						"pin",
+						"rail",
+						"frame",
+						"ring",
+						"strip"
+					]
+				},
+				"default": "smear=drag, hold=open",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "hold: open vs pin (at any smear)",
+					"predicted_pct": 0.8,
+					"reasoning": "pin is ONE rod, 22 mm across and ~1.50 m tall: 0.033 m2 of picture plane. It is driven through the chalk core, so roughly 55% of its run is behind the torso and thighs — 0.015 m2 visible. The silhouette of a smeared body is ~0.55 m2 and the corpus's measured subject share is ~30% of frame, so the frame is ~1.83 m2 of that plane: 0.015 / 1.83 = 0.8%. Every other hold value paints 2x to 20x more — frame is 15.2 m of rod (~0.28 m2), ring 2.1 m of projected tube (~0.15 m2), strip a 0.09 x 1.5 m emissive plank that also blooms. The body is fitted into a 1.06 m box BEFORE any furniture is placed and every hold value is then sized inside the 14 cm left over, so the final settle scale is identical across all six and no pair can be inflated by the figure being re-photographed at a new size."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/bacon_smear.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_batik_beast": {
+			"lookup_name": "dream_batik_beast",
+			"name": "Dream Body — batik beast",
+			"scene": "res://commons/artifacts/dream_bodies/figures/batik_beast.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The batik beast family, grown from a seed and varied along stuffing (stuffed, inflated, melted, swarmed, unpicked) and head (muzzled, herd, crowned, blooming, boned).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"stuffing": [
+						"stuffed",
+						"inflated",
+						"melted",
+						"swarmed",
+						"unpicked"
+					],
+					"head": [
+						"muzzled",
+						"herd",
+						"crowned",
+						"blooming",
+						"boned"
+					]
+				},
+				"default": "stuffing=stuffed, head=muzzled",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/batik_beast.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_botanic_mannequin": {
+			"lookup_name": "dream_botanic_mannequin",
+			"name": "Dream Body — botanic mannequin",
+			"scene": "res://commons/artifacts/dream_bodies/figures/botanic_mannequin.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The botanic mannequin family, grown from a seed and varied along skin (printed, sprouting, unravelled, cage, poured) and rank (one, twinned, multiplied, swarm).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"skin": [
+						"printed",
+						"sprouting",
+						"unravelled",
+						"cage",
+						"poured"
+					],
+					"rank": [
+						"one",
+						"twinned",
+						"multiplied",
+						"swarm"
+					]
+				},
+				"default": "skin=printed, rank=one",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/botanic_mannequin.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_brass_stamen": {
+			"lookup_name": "dream_brass_stamen",
+			"name": "Dream Body — brass stamen",
+			"scene": "res://commons/artifacts/dream_bodies/figures/brass_stamen.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The brass stamen family, grown from a seed and varied along assembly (braced, fossilised, melted, exploded) and crown (lens, triune, bloom, swarm).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"assembly": [
+						"braced",
+						"fossilised",
+						"melted",
+						"exploded"
+					],
+					"crown": [
+						"lens",
+						"triune",
+						"bloom",
+						"swarm"
+					]
+				},
+				"default": "assembly=braced, crown=lens",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/brass_stamen.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_ceramic_puppet": {
+			"lookup_name": "dream_ceramic_puppet",
+			"name": "Dream Body — ceramic puppet",
+			"scene": "res://commons/artifacts/dream_bodies/figures/ceramic_puppet.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The ceramic puppet family, grown from a seed and varied along stringing (strung, swarmed, unstrung, wired, swollen) and vestment (maze_cloth, flooded, unravelled, bloomed).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"stringing": [
+						"strung",
+						"swarmed",
+						"unstrung",
+						"wired",
+						"swollen"
+					],
+					"vestment": [
+						"maze_cloth",
+						"flooded",
+						"unravelled",
+						"bloomed"
+					]
+				},
+				"default": "stringing=strung, vestment=maze_cloth",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/ceramic_puppet.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_clay_splash": {
+			"lookup_name": "dream_clay_splash",
+			"name": "Dream Body — clay splash",
+			"scene": "res://commons/artifacts/dream_bodies/figures/clay_splash.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The clay splash family, grown from a seed and varied along clay (boneless, melted, swarm, fossil, mirrored, fused) and paint (flat, crust, flood, bloom).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"clay": [
+						"boneless",
+						"melted",
+						"swarm",
+						"fossil",
+						"mirrored",
+						"fused"
+					],
+					"paint": [
+						"flat",
+						"crust",
+						"flood",
+						"bloom"
+					]
+				},
+				"default": "clay=boneless, paint=flat",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/clay_splash.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_coral_polyp": {
+			"lookup_name": "dream_coral_polyp",
+			"name": "Dream Body — coral polyp",
+			"scene": "res://commons/artifacts/dream_bodies/figures/coral_polyp.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The coral polyp family, grown from a seed and varied along colony (single, budding, spawning, bleached, drowned, fused) and frond (branch, bloom, antler, thread).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"colony": [
+						"single",
+						"budding",
+						"spawning",
+						"bleached",
+						"drowned",
+						"fused"
+					],
+					"frond": [
+						"branch",
+						"bloom",
+						"antler",
+						"thread"
+					]
+				},
+				"default": "colony=single, frond=branch",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/coral_polyp.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_couch_lounge": {
+			"lookup_name": "dream_couch_lounge",
+			"name": "Dream Body — couch lounge",
+			"scene": "res://commons/artifacts/dream_bodies/figures/couch_lounge.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The couch lounge family, grown from a seed and varied along repose (sprawl, melt, swarm, cage, bloom) and seat (chaise, mirror, flood, heels).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"repose": [
+						"sprawl",
+						"melt",
+						"swarm",
+						"cage",
+						"bloom"
+					],
+					"seat": [
+						"chaise",
+						"mirror",
+						"flood",
+						"heels"
+					]
+				},
+				"default": "repose=sprawl, seat=chaise",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/couch_lounge.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_couture_beast": {
+			"lookup_name": "dream_couture_beast",
+			"name": "Dream Body — couture beast",
+			"scene": "res://commons/artifacts/dream_bodies/figures/couture_beast.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The couture beast family, grown from a seed and varied along head (hare, cat, beak, serpent, fan, antler) and garment (sheath, crinoline, quilted, bloom, fringe).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"head": [
+						"hare",
+						"cat",
+						"beak",
+						"serpent",
+						"fan",
+						"antler"
+					],
+					"garment": [
+						"sheath",
+						"crinoline",
+						"quilted",
+						"bloom",
+						"fringe"
+					]
+				},
+				"default": "head=hare, garment=sheath",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "head: hare vs cat, at garment=quilted",
+					"predicted_pct": 2.0,
+					"reasoning": "the two mammal helmets share the grammar — one skull, one muzzle, two eyes, two ears — so only the ears really move: hare's two 0.29 m tapered plates against cat's 0.125 m wedges plus four whiskers, with a small skull and muzzle difference, is ~0.042 m^2 of changed silhouette on a ~0.333 m^2 body, or 12.6% of the body. The body's share of frame is calibrated off the corpus's one measured case (fetish_idol: 3.4% of silhouette read 0.98% of frame, so a 0.78 m-wide body is ~29% of frame) scaled by area for this narrower 0.50 m column: ~17%. 12.6% x 17% = ~2.0% of the picture. A LOWER bound — the plates are specular, and the 1.68 m fit rescales the hare frame ~7% smaller, which moves the gown too"
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/couture_beast.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_crackle_peak": {
+			"lookup_name": "dream_crackle_peak",
+			"name": "Dream Body — crackle peak",
+			"scene": "res://commons/artifacts/dream_bodies/figures/crackle_peak.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The crackle peak family, grown from a seed and varied along congregation (one, twinned, procession, swarm) and habit (standing, melted, fossil, blooming).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"congregation": [
+						"one",
+						"twinned",
+						"procession",
+						"swarm"
+					],
+					"habit": [
+						"standing",
+						"melted",
+						"fossil",
+						"blooming"
+					]
+				},
+				"default": "congregation=one, habit=standing",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/crackle_peak.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_crystal_suit": {
+			"lookup_name": "dream_crystal_suit",
+			"name": "Dream Body — crystal suit",
+			"scene": "res://commons/artifacts/dream_bodies/figures/crystal_suit.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The crystal suit family, grown from a seed and varied along crust (gravel, spire, shard, bloom, geode) and panels (leaning, shell, fallen, wings, grove).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"crust": [
+						"gravel",
+						"spire",
+						"shard",
+						"bloom",
+						"geode"
+					],
+					"panels": [
+						"leaning",
+						"shell",
+						"fallen",
+						"wings",
+						"grove"
+					]
+				},
+				"default": "crust=gravel, panels=leaning",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "crust: gravel vs shard (at any one panels value)",
+					"predicted_pct": 9.5,
+					"reasoning": "gravel and shard are the two habits that HUG the body — both are dealt onto identical anchors in identical colours over an identical core, so neither the silhouette nor the hue moves and only the grain's own shape changes. Arithmetic: the body is ~30% of frame at framing 0.62; the crust covers ~0.8 of it, so ~24% of frame is grain; a grain is ~4-5 px, and re-shaping a facet moves its highlight and its two shadow edges but not its interior colour, so call it 40% of crust pixels over threshold. 0.30 x 0.80 x 0.40 = 9.6%, round to 9.5%. It is a LOWER bound: this arithmetic has no shadows, no AO and no antialiasing in it, and every prediction in the corpus has under-shot by 1.5x to 7x. A measurement BELOW 9.5% means the plates and the pebbles are not reaching the surface, not that the axis is quiet."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/crystal_suit.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_david_drape": {
+			"lookup_name": "dream_david_drape",
+			"name": "Dream Body — david drape",
+			"scene": "res://commons/artifacts/dream_bodies/figures/david_drape.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The david drape family, grown from a seed and varied along drape (spiral, flood, unravel, cage) and chorus (one, twinned, hydra, frieze).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"drape": [
+						"spiral",
+						"flood",
+						"unravel",
+						"cage"
+					],
+					"chorus": [
+						"one",
+						"twinned",
+						"hydra",
+						"frieze"
+					]
+				},
+				"default": "drape=spiral, chorus=one",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/david_drape.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_deity_figurine": {
+			"lookup_name": "dream_deity_figurine",
+			"name": "Dream Body — deity figurine",
+			"scene": "res://commons/artifacts/dream_bodies/figures/deity_figurine.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The deity figurine family, grown from a seed and varied along manifestation (dancing, multiplied, blooming, fossilised) and drapery (pleats, flood, threads, flame).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"manifestation": [
+						"dancing",
+						"multiplied",
+						"blooming",
+						"fossilised"
+					],
+					"drapery": [
+						"pleats",
+						"flood",
+						"threads",
+						"flame"
+					]
+				},
+				"default": "manifestation=dancing, drapery=pleats",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/deity_figurine.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_dotted_colossus": {
+			"lookup_name": "dream_dotted_colossus",
+			"name": "Dream Body — dotted colossus",
+			"scene": "res://commons/artifacts/dream_bodies/figures/dotted_colossus.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The dotted colossus family, grown from a seed and varied along cladding (dots, marble, brick, fur, drape) and stance (contrapposto, torsion, fragment, pair, frieze).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"cladding": [
+						"dots",
+						"marble",
+						"brick",
+						"fur",
+						"drape"
+					],
+					"stance": [
+						"contrapposto",
+						"torsion",
+						"fragment",
+						"pair",
+						"frieze"
+					]
+				},
+				"default": "cladding=dots, stance=contrapposto",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "stance: contrapposto vs torsion (any cladding)",
+					"predicted_pct": 6.4,
+					"reasoning": "silhouette budget for one figure, in square metres of projected area: torso 0.24, legs 0.24, arms 0.12, head 0.05 = 0.65 total. Torsion moves the crossing arm to the far shoulder — 0.06 vacated plus 0.06 arrived, but half the arrival lands ON the chest and is not new pixels, so ~0.09; the other arm goes behind the back, ~0.04 net; the head turns 45 deg and repaints ~40% of 0.05 = 0.02; the counter-rotated shoulder and hip move the torso edge ~20 mm over 0.6 m = 0.012. Sum 0.162 of 0.65 = 25% of the SILHOUETTE. At framing 0.62 a 1.6 m body is about 26% of the frame, so 0.25 x 0.26 = 6.4% of picture. Every other stance pair adds or removes a whole body, a head and two arms, or a 0.72 m column, and every cladding pair repaints the entire surface.",
+					"measured_pct": 6.07,
+					"outcome": "RIGHT PAIR, WRONG AXIS, AND THE ARITHMETIC WAS RIGHT TWICE BY ACCIDENT. contrapposto-vs-torsion is the smallest stance pair in all five claddings (6.07 dots, 7.59 fur, 8.49 drape, 9.71 brick, 9.90 marble, mean 8.35), so the pair was named correctly and 6.4 predicted against 6.07 measured is 0.95x — under the prediction, which by the corpus's rule means stop and look. Looking says the two errors cancelled: the subject is 15.1% of frame, not the 26% assumed, and the silhouette share is nearer 40% than the 25% computed. WHAT THE PREDICTION MISSED is that the gallery's minimum is on the OTHER axis — marble-vs-brick at 2.275%, stance=fragment, smallest of all 300 pairs and one of three under the 3% decoration line. The clause 'every cladding pair repaints the entire surface' was the false step. Two causes, and only the second one is real: the cape was built on the +Z hemisphere (the reference is shot from behind) while the sweep camera stands at yaw 0.62 in front, so it now wraps 2.2 rad and over both deltoids — worth 0.1 points, i.e. NOTHING, which is how the standpoint theory was disproved. The real cause is the DENOMINATOR: a cape over the back of a body that is itself 15% of frame is ~2% of picture whatever it is made of, and pale brick on pale marble spends little value on top of that. It is faithful to the reference and small in the frame at once, and the frame is not the argument. Kept, and recorded, rather than tuned until the number flattered it."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/dotted_colossus.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_dragon": {
+			"lookup_name": "dream_dragon",
+			"name": "Dream Body — dragon",
+			"scene": "res://commons/artifacts/dream_bodies/figures/dragon.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The dragon family, grown from a seed and varied along kiln (glazed, molten, crazed, fossil, swarm, cast) and necks (one, twinned, hydra, ouroboros).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"kiln": [
+						"glazed",
+						"molten",
+						"crazed",
+						"fossil",
+						"swarm",
+						"cast"
+					],
+					"necks": [
+						"one",
+						"twinned",
+						"hydra",
+						"ouroboros"
+					]
+				},
+				"default": "kiln=glazed, necks=one",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/dragon.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_dubuffet": {
+			"lookup_name": "dream_dubuffet",
+			"name": "Dream Body — dubuffet",
+			"scene": "res://commons/artifacts/dream_bodies/figures/dubuffet.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The dubuffet family, grown from a seed and varied along matter (plaster, melted, swarm, cage, inflated) and outgrowth (none, six_arms, crown, bloom, twin).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"matter": [
+						"plaster",
+						"melted",
+						"swarm",
+						"cage",
+						"inflated"
+					],
+					"outgrowth": [
+						"none",
+						"six_arms",
+						"crown",
+						"bloom",
+						"twin"
+					]
+				},
+				"default": "matter=plaster, outgrowth=none",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/dubuffet.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_fetish_idol": {
+			"lookup_name": "dream_fetish_idol",
+			"name": "Dream Body — fetish idol",
+			"scene": "res://commons/artifacts/dream_bodies/figures/fetish_idol.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The fetish idol family, grown from a seed and varied along surface (latex, patent, oilslick, holo, pvc, chrome) and harness (bare, strap, lace, buckle, cage, zip).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"surface": [
+						"latex",
+						"patent",
+						"oilslick",
+						"holo",
+						"pvc",
+						"chrome"
+					],
+					"harness": [
+						"bare",
+						"strap",
+						"lace",
+						"buckle",
+						"cage",
+						"zip"
+					]
+				},
+				"default": "surface=latex, harness=bare",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "harness: bare vs zip (any surface)",
+					"predicted_pct": 2.2,
+					"measured_pct": 0.98,
+					"reasoning": "the zip is a 9 cm tape on a 1.68 m body, ~3.4% of the silhouette; chrome's hardware is closest in value to its own skin",
+					"outcome": "right pair, 2.2x high — 3.4% of the SILHOUETTE against a subject that is ~30% of frame is ~1.0% of the picture; the number was quoted against the wrong denominator, not measured off a broken render"
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/fetish_idol.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_food_table": {
+			"lookup_name": "dream_food_table",
+			"name": "Dream Body — food table",
+			"scene": "res://commons/artifacts/dream_bodies/figures/food_table.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The food table family, grown from a seed and varied along spread (heaped, rotted, swarm, blooming, reaching) and service (three_tier, flooded, tower, wire).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"spread": [
+						"heaped",
+						"rotted",
+						"swarm",
+						"blooming",
+						"reaching"
+					],
+					"service": [
+						"three_tier",
+						"flooded",
+						"tower",
+						"wire"
+					]
+				},
+				"default": "spread=heaped, service=three_tier",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/food_table.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_garet_still": {
+			"lookup_name": "dream_garet_still",
+			"name": "Dream Body — garet still",
+			"scene": "res://commons/artifacts/dream_bodies/figures/garet_still.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The garet still family, grown from a seed and varied along cast (one, melted, twinned, many_armed) and still_life (around, flooded, climbing, canopy).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"cast": [
+						"one",
+						"melted",
+						"twinned",
+						"many_armed"
+					],
+					"still_life": [
+						"around",
+						"flooded",
+						"climbing",
+						"canopy"
+					]
+				},
+				"default": "cast=one, still_life=around",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/garet_still.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_gehry_metal": {
+			"lookup_name": "dream_gehry_metal",
+			"name": "Dream Body — gehry metal",
+			"scene": "res://commons/artifacts/dream_bodies/figures/gehry_metal.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The gehry metal family, grown from a seed and varied along sheet (crumple, melt, swarm, fossil, unravel) and gesture (lean, mirror, burst, crown).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"sheet": [
+						"crumple",
+						"melt",
+						"swarm",
+						"fossil",
+						"unravel"
+					],
+					"gesture": [
+						"lean",
+						"mirror",
+						"burst",
+						"crown"
+					]
+				},
+				"default": "sheet=crumple, gesture=lean",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/gehry_metal.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_griffin_plume": {
+			"lookup_name": "dream_griffin_plume",
+			"name": "Dream Body — griffin plume",
+			"scene": "res://commons/artifacts/dream_bodies/figures/griffin_plume.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The griffin plume family, grown from a seed and varied along plumage (fans, bloom, swarm, quills, mantle) and condition (whole, melted, twinned, flooded, fossil).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"plumage": [
+						"fans",
+						"bloom",
+						"swarm",
+						"quills",
+						"mantle"
+					],
+					"condition": [
+						"whole",
+						"melted",
+						"twinned",
+						"flooded",
+						"fossil"
+					]
+				},
+				"default": "plumage=fans, condition=whole",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/griffin_plume.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_hadid_shell": {
+			"lookup_name": "dream_hadid_shell",
+			"name": "Dream Body — hadid shell",
+			"scene": "res://commons/artifacts/dream_bodies/figures/hadid_shell.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The hadid shell family, grown from a seed and varied along bore (holes, cage, swarm, bloom) and figure (standing, twinned, poured, crowned).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"bore": [
+						"holes",
+						"cage",
+						"swarm",
+						"bloom"
+					],
+					"figure": [
+						"standing",
+						"twinned",
+						"poured",
+						"crowned"
+					]
+				},
+				"default": "bore=holes, figure=standing",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/hadid_shell.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_hicks_fiber": {
+			"lookup_name": "dream_hicks_fiber",
+			"name": "Dream Body — hicks fiber",
+			"scene": "res://commons/artifacts/dream_bodies/figures/hicks_fiber.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The hicks fiber family, grown from a seed and varied along fibre (roving, unravelling, matted, shorn, blooming) and wearer (mannequin, twinned, hydra, hollow, flooded).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"fibre": [
+						"roving",
+						"unravelling",
+						"matted",
+						"shorn",
+						"blooming"
+					],
+					"wearer": [
+						"mannequin",
+						"twinned",
+						"hydra",
+						"hollow",
+						"flooded"
+					]
+				},
+				"default": "fibre=roving, wearer=mannequin",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/hicks_fiber.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_hokusai_kimono": {
+			"lookup_name": "dream_hokusai_kimono",
+			"name": "Dream Body — hokusai kimono",
+			"scene": "res://commons/artifacts/dream_bodies/figures/hokusai_kimono.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The hokusai kimono family, grown from a seed and varied along cloth (wrapped, drowned, unspooling, boned, shoal) and frieze (single, mirrored, triptych, kannon, shed).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"cloth": [
+						"wrapped",
+						"drowned",
+						"unspooling",
+						"boned",
+						"shoal"
+					],
+					"frieze": [
+						"single",
+						"mirrored",
+						"triptych",
+						"kannon",
+						"shed"
+					]
+				},
+				"default": "cloth=wrapped, frieze=single",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/hokusai_kimono.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_horse_hybrid": {
+			"lookup_name": "dream_horse_hybrid",
+			"name": "Dream Body — horse hybrid",
+			"scene": "res://commons/artifacts/dream_bodies/figures/horse_hybrid.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The horse hybrid family, grown from a seed and varied along beast (horse, hydra, reliquary, blossom, swarm) and cloak (folds, flood, unravelling, shattered).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"beast": [
+						"horse",
+						"hydra",
+						"reliquary",
+						"blossom",
+						"swarm"
+					],
+					"cloak": [
+						"folds",
+						"flood",
+						"unravelling",
+						"shattered"
+					]
+				},
+				"default": "beast=horse, cloak=folds",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/horse_hybrid.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_kruger_suit": {
+			"lookup_name": "dream_kruger_suit",
+			"name": "Dream Body — kruger suit",
+			"scene": "res://commons/artifacts/dream_bodies/figures/kruger_suit.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The kruger suit family, grown from a seed and varied along wearer (kneeling, inflated, multiplied, unravelling, hollow) and flat (leaning, chorus, flood, crown).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"wearer": [
+						"kneeling",
+						"inflated",
+						"multiplied",
+						"unravelling",
+						"hollow"
+					],
+					"flat": [
+						"leaning",
+						"chorus",
+						"flood",
+						"crown"
+					]
+				},
+				"default": "wearer=kneeling, flat=leaning",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/kruger_suit.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_lava_bloom": {
+			"lookup_name": "dream_lava_bloom",
+			"name": "Dream Body — lava bloom",
+			"scene": "res://commons/artifacts/dream_bodies/figures/lava_bloom.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The lava bloom family, grown from a seed and varied along bough (writhe, melt, mirror, unravel, triune, fused) and bloom (spray, flood, cage, crown).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"bough": [
+						"writhe",
+						"melt",
+						"mirror",
+						"unravel",
+						"triune",
+						"fused"
+					],
+					"bloom": [
+						"spray",
+						"flood",
+						"cage",
+						"crown"
+					]
+				},
+				"default": "bough=writhe, bloom=spray",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/lava_bloom.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_lilac_quarry": {
+			"lookup_name": "dream_lilac_quarry",
+			"name": "Dream Body — lilac quarry",
+			"scene": "res://commons/artifacts/dream_bodies/figures/lilac_quarry.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The lilac quarry family, grown from a seed and varied along strata (bedded, faulted, folded, quarried, cast) and bathers (leaning, reclining, embedded, pair, strewn).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"strata": [
+						"bedded",
+						"faulted",
+						"folded",
+						"quarried",
+						"cast"
+					],
+					"bathers": [
+						"leaning",
+						"reclining",
+						"embedded",
+						"pair",
+						"strewn"
+					]
+				},
+				"default": "strata=bedded, bathers=leaning",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "bathers: leaning vs pair, at strata=bedded",
+					"predicted_pct": 3.1,
+					"reasoning": "every number is dealt BEFORE the axis branches, so leaning and pair share one rock and one identical standing body and differ by exactly the added reclining figure: 0.58 m long x 0.19 m tall at ~0.70 fill is 0.077 m2 projected, against a statue silhouette of ~0.95 x 1.35 m at ~0.58 fill = 0.74 m2, so 10.4% of the SILHOUETTE; the silhouette is about 30% of the frame, so 0.104 x 0.30 = 3.1% of the picture. Quoting 10.4% would be the denominator error fetish_idol already paid for. It is a LOWER bound: a hand estimate has no shadow, no AO and no specular, and the added body is pearl over matte chalk, which is the highest-contrast edge in the statue."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/lilac_quarry.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_mannerist_tumble": {
+			"lookup_name": "dream_mannerist_tumble",
+			"name": "Dream Body — mannerist tumble",
+			"scene": "res://commons/artifacts/dream_bodies/figures/mannerist_tumble.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The mannerist tumble family, grown from a seed and varied along mound (faceted, quarried, billow, shredded, cast) and pile (heap, cascade, spiral, fragments, single).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"mound": [
+						"faceted",
+						"quarried",
+						"billow",
+						"shredded",
+						"cast"
+					],
+					"pile": [
+						"heap",
+						"cascade",
+						"spiral",
+						"fragments",
+						"single"
+					]
+				},
+				"default": "mound=faceted, pile=heap",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "pile: heap vs cascade, at mound=cast",
+					"predicted_pct": 2.0,
+					"reasoning": "cloth, spire, column, plinth and the three putti are the same object in both values — call them 72% of the subject's pixels. The four bodies are the other 28%, and about a third of each is inside the mound in both, so ~19% of the subject is body you can see. Re-anchoring them down the flank changes roughly 70% of that, counting the ground they leave as well as the ground they take: 0.19 x 0.70 = 13% of the subject. The subject is ~30% of the frame at the family's framing 0.62, so ~4% of frame at the four PRIMITIVE mounds. At cast the same move is halved: an 8.5 cm smooth union swallows the gap between a limb and the cloth, so each figure reads as a swelling in one mass and the two arrangements photograph as two lumpy monoliths. 4% x 0.5 = 2.0%."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/mannerist_tumble.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_masked_dancer": {
+			"lookup_name": "dream_masked_dancer",
+			"name": "Dream Body — masked dancer",
+			"scene": "res://commons/artifacts/dream_bodies/figures/masked_dancer.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The masked dancer family, grown from a seed and varied along rite (mid_step, twinned, melted, swarmed, flooded) and shell (eared, antlered, shoal, cage, bloom).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"rite": [
+						"mid_step",
+						"twinned",
+						"melted",
+						"swarmed",
+						"flooded"
+					],
+					"shell": [
+						"eared",
+						"antlered",
+						"shoal",
+						"cage",
+						"bloom"
+					]
+				},
+				"default": "rite=mid_step, shell=eared",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/masked_dancer.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_mosaic_body": {
+			"lookup_name": "dream_mosaic_body",
+			"name": "Dream Body — mosaic body",
+			"scene": "res://commons/artifacts/dream_bodies/figures/mosaic_body.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The mosaic body family, grown from a seed and varied along tessera (bedded, proud, spalling, unset) and companion (none, mirror, huddle, pour).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"tessera": [
+						"bedded",
+						"proud",
+						"spalling",
+						"unset"
+					],
+					"companion": [
+						"none",
+						"mirror",
+						"huddle",
+						"pour"
+					]
+				},
+				"default": "tessera=bedded, companion=none",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/mosaic_body.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_nana_gloss": {
+			"lookup_name": "dream_nana_gloss",
+			"name": "Dream Body — nana gloss",
+			"scene": "res://commons/artifacts/dream_bodies/figures/nana_gloss.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The nana gloss family, grown from a seed and varied along nana (dancing, melting, caged, swarming, ronde, poured) and paint (flat, relief, blooming, unravelling).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"nana": [
+						"dancing",
+						"melting",
+						"caged",
+						"swarming",
+						"ronde",
+						"poured"
+					],
+					"paint": [
+						"flat",
+						"relief",
+						"blooming",
+						"unravelling"
+					]
+				},
+				"default": "nana=dancing, paint=flat",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/nana_gloss.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_obi_frieze": {
+			"lookup_name": "dream_obi_frieze",
+			"name": "Dream Body — obi frieze",
+			"scene": "res://commons/artifacts/dream_bodies/figures/obi_frieze.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The obi frieze family, grown from a seed and varied along chorus (rank, ring, spiral, cascade, huddle) and sleeve (swung, furled, fanned, shredded, winged).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"chorus": [
+						"rank",
+						"ring",
+						"spiral",
+						"cascade",
+						"huddle"
+					],
+					"sleeve": [
+						"swung",
+						"furled",
+						"fanned",
+						"shredded",
+						"winged"
+					]
+				},
+				"default": "chorus=rank, sleeve=swung",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "sleeve: fanned vs shredded (any chorus)",
+					"predicted_pct": 4.5,
+					"reasoning": "the two values are built into the SAME shoulder wedge on purpose - +14 to -70 degrees, radius 0.30 to 0.38 - and differ only in how densely it is filled: 4 blades 10.4 cm wide against 7 shreds 4.4 cm wide. Along the wedge's outer arc (0.50 m at r = 0.34) that is 0.416 m covered against 0.308 m, so 83% fill against 62%, a difference of 21% of a wedge whose area is 0.5 * 0.34^2 * 1.47 rad = 0.085 m2. That is 0.018 m2 per side, x2 sides x5 figures = 0.18 m2, of which perhaps 80% lands over background or over a neighbour printed in another colour and so actually changes a pixel: 0.14 m2. TWO denominators follow and both are traps. The frieze's filled silhouette is about 65% of its 1.20 x 1.37 m box = 1.07 m2, so this is 13% of the BODY. And this subject is a dense row rather than one slender figure, so call it 35% of the frame: 13% x 35% = 4.5% of the picture. Note the shape of the claim - every OTHER pair in either axis moves whole limbs or whole figures and should land far above this; if the sweep's peak is near 4.5% something is wrong with the capture, not with the axes."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/obi_frieze.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_oni_dragon": {
+			"lookup_name": "dream_oni_dragon",
+			"name": "Dream Body — oni dragon",
+			"scene": "res://commons/artifacts/dream_bodies/figures/oni_dragon.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The oni dragon family, grown from a seed and varied along possession (single, three_faced, six_armed, brood) and curse (flesh, tallow, exorcised, reliquary, fused).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"possession": [
+						"single",
+						"three_faced",
+						"six_armed",
+						"brood"
+					],
+					"curse": [
+						"flesh",
+						"tallow",
+						"exorcised",
+						"reliquary",
+						"fused"
+					]
+				},
+				"default": "possession=single, curse=flesh",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/oni_dragon.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_paik_light": {
+			"lookup_name": "dream_paik_light",
+			"name": "Dream Body — paik light",
+			"scene": "res://commons/artifacts/dream_bodies/figures/paik_light.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The paik light family, grown from a seed and varied along broadcast (scatter, raster, swarm, chassis, melt) and crowd (one, twin, chorus, aerial).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"broadcast": [
+						"scatter",
+						"raster",
+						"swarm",
+						"chassis",
+						"melt"
+					],
+					"crowd": [
+						"one",
+						"twin",
+						"chorus",
+						"aerial"
+					]
+				},
+				"default": "broadcast=scatter, crowd=one",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/paik_light.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_painted_chorus": {
+			"lookup_name": "dream_painted_chorus",
+			"name": "Dream Body — painted chorus",
+			"scene": "res://commons/artifacts/dream_bodies/figures/painted_chorus.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The painted chorus family, grown from a seed and varied along mark (labyrinth, banded, marbled, scaled, sliced) and mask (skull, eared, crested, frond, blank).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"mark": [
+						"labyrinth",
+						"banded",
+						"marbled",
+						"scaled",
+						"sliced"
+					],
+					"mask": [
+						"skull",
+						"eared",
+						"crested",
+						"frond",
+						"blank"
+					]
+				},
+				"default": "mark=labyrinth, mask=skull",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "mask: skull vs blank (any mark)",
+					"predicted_pct": 1.25,
+					"reasoning": "skull and blank are the SAME chalk shell at the same size on the same painted cranium; only three things differ and all three are small. Per head: two dark eyes of 0.038 x 0.032 m in sockets the shell already carries (3.0e-3 m2 with their shading), a muzzle 0.085 m long and 0.042 m across (3.6e-3 m2), a jaw 0.064 x 0.032 m (2.1e-3 m2) = 8.6e-3 m2 — and there are three heads, so 2.6e-2 m2 changes. The chorus silhouette is three figures about 1.45 m tall and 0.19 m mean width at roughly 0.75 fill, so 0.62 m2. That is 4.2% of the BODY — and the body is about 30% of the frame at framing 0.62, so 4.2% x 0.30 = 1.25% of the PICTURE. Mind the denominator: fetish_idol quoted a silhouette share as a frame share and was 2.2x out on a render that was fine. Only the muzzle and jaw reach the silhouette; the eyes are a value change inside it, which a difference metric counts and a silhouette metric would not. The `mark` axis has no pair anywhere near this tight — its closest is labyrinth vs marbled, both relief over the whole column, and even that repaints 100% of the skin and re-cuts every link, so read the per-pair rows and never the headline peak."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/painted_chorus.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_panel_robot": {
+			"lookup_name": "dream_panel_robot",
+			"name": "Dream Body — panel robot",
+			"scene": "res://commons/artifacts/dream_bodies/figures/panel_robot.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The panel robot family, grown from a seed and varied along panelling (floating, shed, swarmed, ribbed, molten) and assembly (walker, totem, twinned, poured).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"panelling": [
+						"floating",
+						"shed",
+						"swarmed",
+						"ribbed",
+						"molten"
+					],
+					"assembly": [
+						"walker",
+						"totem",
+						"twinned",
+						"poured"
+					]
+				},
+				"default": "panelling=floating, assembly=walker",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/panel_robot.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_panton_pop": {
+			"lookup_name": "dream_panton_pop",
+			"name": "Dream Body — panton pop",
+			"scene": "res://commons/artifacts/dream_bodies/figures/panton_pop.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The panton pop family, grown from a seed and varied along mould (shell, melt, swarm, cage, inflate) and crown (ball, hydra, bloom, mirror).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"mould": [
+						"shell",
+						"melt",
+						"swarm",
+						"cage",
+						"inflate"
+					],
+					"crown": [
+						"ball",
+						"hydra",
+						"bloom",
+						"mirror"
+					]
+				},
+				"default": "mould=shell, crown=ball",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/panton_pop.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_pierced_screen": {
+			"lookup_name": "dream_pierced_screen",
+			"name": "Dream Body — pierced screen",
+			"scene": "res://commons/artifacts/dream_bodies/figures/pierced_screen.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The pierced screen family, grown from a seed and varied along piercing (arp, coral, torn, portal, sealed) and wearer (threading, folded, twinned, swarm, negative).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"piercing": [
+						"arp",
+						"coral",
+						"torn",
+						"portal",
+						"sealed"
+					],
+					"wearer": [
+						"threading",
+						"folded",
+						"twinned",
+						"swarm",
+						"negative"
+					]
+				},
+				"default": "piercing=arp, wearer=threading",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "wearer: threading vs folded (piercing=arp)",
+					"predicted_pct": 3.2,
+					"reasoning": "the two poses SHARE their legs by construction — same hips, knees, ankles and feet — so only the torso, head and arms can move. The dancer's silhouette is about 0.23 m2 against the sheet's 0.78 m2, so the body is 0.23/1.01 = 23% of a subject that fills ~30% of the frame, i.e. 6.8% of the picture; the shared legs are ~45% of that body, leaving 3.7% able to change, and ~85% of the upper body's pixels land somewhere new when the figure bows from leaning-in to doubled-over: 0.85 x 3.7 = 3.2%. Every other pair on either axis moves more — the piercing axis rewrites the sheet, which is 77% of the subject"
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/pierced_screen.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_pink_scaffold": {
+			"lookup_name": "dream_pink_scaffold",
+			"name": "Dream Body — pink scaffold",
+			"scene": "res://commons/artifacts/dream_bodies/figures/pink_scaffold.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The pink scaffold family, grown from a seed and varied along plate (torn, swarm, sag, cage) and armature (leaning, mirrored, flooded, crowned).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"plate": [
+						"torn",
+						"swarm",
+						"sag",
+						"cage"
+					],
+					"armature": [
+						"leaning",
+						"mirrored",
+						"flooded",
+						"crowned"
+					]
+				},
+				"default": "plate=torn, armature=leaning",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/pink_scaffold.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_piped_icing": {
+			"lookup_name": "dream_piped_icing",
+			"name": "Dream Body — piped icing",
+			"scene": "res://commons/artifacts/dream_bodies/figures/piped_icing.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The piped icing family, grown from a seed and varied along piping (coil, melted, swarm, wire, burst) and budding (limbs, bloom, twinned, crowned).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"piping": [
+						"coil",
+						"melted",
+						"swarm",
+						"wire",
+						"burst"
+					],
+					"budding": [
+						"limbs",
+						"bloom",
+						"twinned",
+						"crowned"
+					]
+				},
+				"default": "piping=coil, budding=limbs",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/piped_icing.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_porcelain_doll": {
+			"lookup_name": "dream_porcelain_doll",
+			"name": "Dream Body — porcelain doll",
+			"scene": "res://commons/artifacts/dream_bodies/figures/porcelain_doll.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The porcelain doll family, grown from a seed and varied along winding (bandage, unravelling, cage, blooming, swarm) and figure (reaching, three_headed, budding, flooded).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"winding": [
+						"bandage",
+						"unravelling",
+						"cage",
+						"blooming",
+						"swarm"
+					],
+					"figure": [
+						"reaching",
+						"three_headed",
+						"budding",
+						"flooded"
+					]
+				},
+				"default": "winding=bandage, figure=reaching",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/porcelain_doll.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_print_inflatable": {
+			"lookup_name": "dream_print_inflatable",
+			"name": "Dream Body — print inflatable",
+			"scene": "res://commons/artifacts/dream_bodies/figures/print_inflatable.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The print inflatable family, grown from a seed and varied along pattern (harlequin, snakeskin, swirl, stripe, pucci) and inflation (taut, overblown, slack, deflated, bursting).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"pattern": [
+						"harlequin",
+						"snakeskin",
+						"swirl",
+						"stripe",
+						"pucci"
+					],
+					"inflation": [
+						"taut",
+						"overblown",
+						"slack",
+						"deflated",
+						"bursting"
+					]
+				},
+				"default": "pattern=harlequin, inflation=taut",
+				"framing": 0.62,
+				"predicted_degeneracy": {
+					"pair": "inflation: taut vs bursting (any pattern)",
+					"predicted_pct": 2.6,
+					"reasoning": "bursting is the only value that is a LOCAL edit — every other one re-sections all eight members, so taut's nearest neighbour has to be it. The pile is one core mass plus six limbs; the limbs carry about 58% of the subject's pixels, so ~9.7% each. Two limbs burst, and only past their split at t~0.48, so 2 x 0.55 x 9.7 = 10.7% of the subject is touched. The collapsed ribbon still covers ~30% of the taut tube's width, so ~0.7 of that band actually turns into background: 7.5% of the subject. A dream body at framing 0.62 is ~30% of the frame, so 7.5% x 0.30 = 2.2%, plus ~0.4% for the sixteen blown-open flaps and six blisters that are new pixels. Call it 2.6% of frame, and it is a LOWER bound: a Python-grade estimate has no shadows, no AO and no specular, and the corpus has never seen one over-predict."
+				},
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/print_inflatable.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_rocaille": {
+			"lookup_name": "dream_rocaille",
+			"name": "Dream Body — rocaille",
+			"scene": "res://commons/artifacts/dream_bodies/figures/rocaille.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The rocaille family, grown from a seed and varied along kiln (fired, slumped, burst, biscuit, fused) and ornament (scrolls, shells, blooms, threads).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"kiln": [
+						"fired",
+						"slumped",
+						"burst",
+						"biscuit",
+						"fused"
+					],
+					"ornament": [
+						"scrolls",
+						"shells",
+						"blooms",
+						"threads"
+					]
+				},
+				"default": "kiln=fired, ornament=scrolls",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/rocaille.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_sea_forms": {
+			"lookup_name": "dream_sea_forms",
+			"name": "Dream Body — sea forms",
+			"scene": "res://commons/artifacts/dream_bodies/figures/sea_forms.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The sea forms family, grown from a seed and varied along flesh (clay, melted, fossil, swarm, inflated, fused) and crown (swan, hydra, bloom, coral).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"flesh": [
+						"clay",
+						"melted",
+						"fossil",
+						"swarm",
+						"inflated",
+						"fused"
+					],
+					"crown": [
+						"swan",
+						"hydra",
+						"bloom",
+						"coral"
+					]
+				},
+				"default": "flesh=clay, crown=swan",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/sea_forms.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_stella_wall": {
+			"lookup_name": "dream_stella_wall",
+			"name": "Dream Body — stella wall",
+			"scene": "res://commons/artifacts/dream_bodies/figures/stella_wall.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The stella wall family, grown from a seed and varied along cutout (flat, melt, swarm, fossil, bloom) and backing (black, flood, mirror, unhoused).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"cutout": [
+						"flat",
+						"melt",
+						"swarm",
+						"fossil",
+						"bloom"
+					],
+					"backing": [
+						"black",
+						"flood",
+						"mirror",
+						"unhoused"
+					]
+				},
+				"default": "cutout=flat, backing=black",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/stella_wall.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_stijl_robot": {
+			"lookup_name": "dream_stijl_robot",
+			"name": "Dream Body — stijl robot",
+			"scene": "res://commons/artifacts/dream_bodies/figures/stijl_robot.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The stijl robot family, grown from a seed and varied along assembly (danced, exploded, swarmed, melted, skeletal) and crown (helmet, chorus, bloom, cage, post).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"assembly": [
+						"danced",
+						"exploded",
+						"swarmed",
+						"melted",
+						"skeletal"
+					],
+					"crown": [
+						"helmet",
+						"chorus",
+						"bloom",
+						"cage",
+						"post"
+					]
+				},
+				"default": "assembly=danced, crown=helmet",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/stijl_robot.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_tatlin_red": {
+			"lookup_name": "dream_tatlin_red",
+			"name": "Dream Body — tatlin red",
+			"scene": "res://commons/artifacts/dream_bodies/figures/tatlin_red.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The tatlin red family, grown from a seed and varied along monument (tower, twinned, brigade, collapse, exploded) and sheet (torn, thread, bloom, slab).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"monument": [
+						"tower",
+						"twinned",
+						"brigade",
+						"collapse",
+						"exploded"
+					],
+					"sheet": [
+						"torn",
+						"thread",
+						"bloom",
+						"slab"
+					]
+				},
+				"default": "monument=tower, sheet=torn",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/tatlin_red.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_tube_reef": {
+			"lookup_name": "dream_tube_reef",
+			"name": "Dream Body — tube reef",
+			"scene": "res://commons/artifacts/dream_bodies/figures/tube_reef.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The tube reef family, grown from a seed and varied along growth (arch, melt, swarm, fossil, bloom, fused) and tenants (eels, shoal, hydra, chorus).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"growth": [
+						"arch",
+						"melt",
+						"swarm",
+						"fossil",
+						"bloom",
+						"fused"
+					],
+					"tenants": [
+						"eels",
+						"shoal",
+						"hydra",
+						"chorus"
+					]
+				},
+				"default": "growth=arch, tenants=eels",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/tube_reef.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_type_wrap": {
+			"lookup_name": "dream_type_wrap",
+			"name": "Dream Body — type wrap",
+			"scene": "res://commons/artifacts/dream_bodies/figures/type_wrap.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The type wrap family, grown from a seed and varied along wrap (bandage, unravelling, sodden, quire, shed) and edition (single, recto_verso, run, offcuts).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"wrap": [
+						"bandage",
+						"unravelling",
+						"sodden",
+						"quire",
+						"shed"
+					],
+					"edition": [
+						"single",
+						"recto_verso",
+						"run",
+						"offcuts"
+					]
+				},
+				"default": "wrap=bandage, edition=single",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/type_wrap.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		},
+		"dream_vasarely_beast": {
+			"lookup_name": "dream_vasarely_beast",
+			"name": "Dream Body — vasarely beast",
+			"scene": "res://commons/artifacts/dream_bodies/figures/vasarely_beast.tscn",
+			"category": "dream_bodies",
+			"artifact_type": "sculpture",
+			"complexity": "intermediate",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [],
+			"footprint": [
+				1,
+				2,
+				1
+			],
+			"tags": [
+				"sculpture",
+				"procedural",
+				"stable-diffusion",
+				"dream-bodies"
+			],
+			"description": "The vasarely beast family, grown from a seed and varied along tube (smooth, vertebrae, cage, swarm, melt, fused) and growth (sail, crest, mirror, bloom).",
+			"dna": {
+				"promoted": "2026-08-29",
+				"stage": "2 - variation",
+				"axes": {
+					"tube": [
+						"smooth",
+						"vertebrae",
+						"cage",
+						"swarm",
+						"melt",
+						"fused"
+					],
+					"growth": [
+						"sail",
+						"crest",
+						"mirror",
+						"bloom"
+					]
+				},
+				"default": "tube=smooth, growth=sail",
+				"framing": 0.62,
+				"note": "axes DERIVED from commons/artifacts/dream_bodies/bodies/vasarely_beast.gd axes() by tools/dream_bodies_promote.py; the scene is generated from the same parse, so registry and code cannot drift."
+			}
+		}
+	}
+}

@@ -1,0 +1,139 @@
+{
+  "checks": [
+    {
+      "message": "configured plaque starts at first postulate with controls",
+      "ok": true
+    },
+    {
+      "message": "wired NEXT reaches fifth with gold",
+      "ok": true
+    },
+    {
+      "message": "wired GOLD removes emphasis without changing the sentence",
+      "ok": true
+    },
+    {
+      "message": "fifth returns to first",
+      "ok": true
+    },
+    {
+      "message": "repeated configuration does not duplicate buttons",
+      "ok": true
+    },
+    {
+      "message": "other plaque placements remain opt-in",
+      "ok": true
+    },
+    {
+      "message": "pre-ready model configuration survives initialization",
+      "ok": true
+    },
+    {
+      "message": "physical slider selects model 0",
+      "ok": true
+    },
+    {
+      "message": "model 0 agrees with independent angle formula",
+      "ok": true
+    },
+    {
+      "message": "readout names model rather than unsupported curvature magnitude",
+      "ok": true
+    },
+    {
+      "message": "model 0 edge reaches both vertices",
+      "ok": true
+    },
+    {
+      "message": "model 0 edge stays on selected host",
+      "ok": true
+    },
+    {
+      "message": "measurement independent of rendering resolution",
+      "ok": true
+    },
+    {
+      "message": "physical slider selects model 1",
+      "ok": true
+    },
+    {
+      "message": "model 1 agrees with independent angle formula",
+      "ok": true
+    },
+    {
+      "message": "readout names model rather than unsupported curvature magnitude",
+      "ok": true
+    },
+    {
+      "message": "model 1 edge reaches both vertices",
+      "ok": true
+    },
+    {
+      "message": "model 1 edge stays on selected host",
+      "ok": true
+    },
+    {
+      "message": "measurement independent of rendering resolution",
+      "ok": true
+    },
+    {
+      "message": "physical slider selects model 2",
+      "ok": true
+    },
+    {
+      "message": "model 2 agrees with independent angle formula",
+      "ok": true
+    },
+    {
+      "message": "readout names model rather than unsupported curvature magnitude",
+      "ok": true
+    },
+    {
+      "message": "model 2 edge reaches both vertices",
+      "ok": true
+    },
+    {
+      "message": "model 2 edge stays on selected host",
+      "ok": true
+    },
+    {
+      "message": "measurement independent of rendering resolution",
+      "ok": true
+    },
+    {
+      "message": "legacy negative magnitude selects disk",
+      "ok": true
+    },
+    {
+      "message": "return to plane repeats 180 degrees",
+      "ok": true
+    },
+    {
+      "message": "repeated model changes do not accumulate displayed geometry",
+      "ok": true
+    }
+  ],
+  "evidence": {
+    "angle_sums": [
+      {
+        "display": "α+β+γ = 103.1°\nDISK · deficit 76.9°",
+        "measured": 103.082123322823,
+        "model": 0,
+        "oracle": 103.082139728925
+      },
+      {
+        "display": "α+β+γ = 180.0°\nPLANE · straight segments",
+        "measured": 180.0,
+        "model": 1,
+        "oracle": 180.0
+      },
+      {
+        "display": "α+β+γ = 202.1°\nSPHERE · excess +22.1°",
+        "measured": 202.140400175532,
+        "model": 2,
+        "oracle": 202.140405155879
+      }
+    ]
+  },
+  "failures": []
+}

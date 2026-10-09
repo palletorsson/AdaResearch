@@ -1,0 +1,26 @@
+--- before/commons/maps/Flow_Field/final.md
++++ current/commons/maps/Flow_Field/final.md
+@@ -10,18 +10,20 @@
+ 
+ The display says **FIELD HELD**. The particles are moving, but the field's time coordinate is held still. Press **ARROWS**. Twenty-four arrows appear over the canvas. Find one near a particle and compare their directions. An arrow gives the instruction at its own address; a particle a little farther away samples a different address. They need not point exactly alike.
+ 
+-The arrows and particles call the same function. The neighbouring vector-field exhibit has its own definitions; it is not secretly steering this canvas. Here we can inspect the data connection itself.
++The arrows and particles call the same function. The particle update can be condensed into this teaching sketch:
+ 
+ ```gdscript
+ var direction = field_direction(position)
+ position += direction * speed * delta
+ ```
+ 
+-One local direction, one speed, one elapsed interval. The program repeats that operation at the new position. The trail remembers a limited sequence of those positions. It does not remember an infinitely detailed movement between them.
++The sum has begun to move. At the accumulation bench, the loop added a height times a width. Here `direction * speed` is a velocity: how fast, and which way. `delta` is the time since the previous frame, in seconds. Their product gives a displacement to add to the position.
++
++The clock has entered the calculation. For this small interval, the program treats the sampled direction as fixed. Then it asks again at the new position. What changes if the interval spans a bend? The accumulated answer chooses the next address, and the trail remembers a limited sequence of those answers. It cannot remember an infinitely detailed movement between them.
+ 
+ Keep SCALE fixed and move SPEED. What changes about the spacing of the samples? Now keep SPEED fixed and change SCALE. Look at the arrows as well as the trails. You have changed how the directional rule varies across space. Existing trails still contain earlier instructions, so give the particles time to replace that history, or use RESET.
+ 
+-The field starts from a scalar noise value. The program turns that value into an angle, then takes its cosine and sine to obtain a unit direction:
++The field starts from a noise value: one number at each address. Here noise gives us smoothly varying values across space, with the same address returning the same value while the field is held. The program turns that value into an angle, then takes its cosine and sine to obtain a unit direction. That turn can be written as:
+ 
+ ```gdscript
+ var angle = noise_value * TAU * 2.0

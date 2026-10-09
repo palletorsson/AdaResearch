@@ -1,0 +1,38 @@
+--- before/commons/maps/CriticalAlgorithms_Applied_Ethics/technical.md
++++ commons/maps/CriticalAlgorithms_Applied_Ethics/technical.md
+@@ -1,10 +1,8 @@
+-# Arrange — implementation and encounter
++# Arrange — choose a plan, then examine its terms
+ 
+-The primary artifact is `room_shape_demonstrator`. Its [scene](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.tscn) and [implementation](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.gd) supply the behaviour described here.
++The previous hall moved word positions. Here an array gives possible participants positions. The source is [room_shape_demonstrator.gd](../../../algorithms/postfoundationscrisis/room_shape_demonstrator.gd).
+ 
+-The placed default is plan=pair. _build_centralized_room() creates a separate head chair plus a nested 3-by-2 loop of chairs at scale 0.6*s. _build_distributed_room() creates six chairs at scale s. Other implemented author configurations are head, circle, panopticon and vacant. They are map/editor parameters, not visitor buttons in this placement. This primary exhibit is a passive miniature; it runs no classifier or turn-taking simulation.
+-
+-## Operation to read after the encounter
++This map opts into interactive=true, plan=head and palette=neutral. HEAD and CIRCLE show one miniature at 1.5 times the paired model scale. PAIR returns to the original side-by-side comparison. WATCH selects the existing panopticon plan: the long-table model beside a ring of eight outward-facing backed seats and a taller central block. VACANT removes the furniture from both rectangular rooms. These remain miniature studies, not full-size occupied meeting rooms.
+ 
+ ```gdscript
+ for i in 6:
+@@ -17,16 +15,12 @@
+ 
+ Six iterations divide a full turn, TAU, into equal angles. cos and sin place each chair on a ring around origin. The little circle carries the arrays, transformations and waves we have already learned. Equal spacing is what this loop guarantees. Equal opportunity to speak would require another kind of evidence.
+ 
+-## What to compare
++The long-table model contains seven chairs: one at scale s and six at 0.6*s. The circle contains six at scale s. The WATCH pair contains seven plus nine; VACANT contains none. Chair count, scale and geometry therefore vary across the plans. The console presents choices, not an isolated test of table shape.
+ 
+-Walk around the paired miniature rooms. Count every chair in each. Compare the head chair with a side chair, then compare two chairs around the round table. Imagine a participant who needs a clear sightline to an interpreter.
++NEUTRAL and COLOUR are separate from PLAN. The palette applies a shared material colour or restores the original red/tan/green scheme without changing any chair transform. Neutral colour does not make the arrangement itself neutral. The unconfigured scene retains plan=pair, palette=authored and no visitor console, preserving other placements.
+ 
+-The long-table model has a head chair and six smaller side chairs. The circle has six equally scaled chairs. Count, scale, colour and position change together; the pair is not an experiment that isolates table shape.
++The compact panel remains outside the rebuild list. Only the model's own parts are replaced, so the controls and externally attached labels survive. Interactive pedestals have box collisions. The panopticon wall segments now follow the circle's tangent; their former radial orientation left a ring of fins.
+ 
+-## Limits and next test
++The hall retains its six artifact families. The primary moves to (6,5), faces the entry and reserves space for both model widths. The arrival gate stays at the boundary; a local clear rectangle keeps a decorative plinth off the exit approach. The authored structure layer is preserved.
+ 
+-Build a comparison with equal chair count, scale and colour, changing only the arrangement. Test sightlines and approach routes before claiming the circle is more accessible. Keep the present pair as the openly persuasive first example.
+-
+-This source audit does not establish headset readability, comfortable reach, collision clearance or frame rate. Those remain runtime observations. Existing supporting artifacts stay in the map; primary status identifies the book's encounter, not the only permitted content.
+-
+-[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/CriticalAlgorithms_Applied_Ethics/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
++Compare actual sightlines and turn-taking with people in a later experiment. These models contain neither a speaking process nor measured accessibility. The next hall keeps conflicting requirements visible after participants have found a place.

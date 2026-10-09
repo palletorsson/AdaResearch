@@ -1,0 +1,13 @@
+--- before/final.md
++++ final.md
+@@ -19,6 +19,10 @@
+ ```
+ 
+ The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.
++
++![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png)
++
++*One set of positions. Connecting them closes a boundary; filling it adds a face.*
+ 
+ This fill is visible from both sides. Walk around it, looking for a view where the patch narrows almost to a line. Its three corners have not moved; you have. Move back and watch the face open again.[^point-triangle-winding]
+ 

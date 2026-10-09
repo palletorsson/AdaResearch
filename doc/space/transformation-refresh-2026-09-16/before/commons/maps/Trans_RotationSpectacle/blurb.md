@@ -1,0 +1,1 @@
+A central line of hollow cubes holds a turn in space. Six stacks, three on either side, let a turning rule continue in time. Walk the tunnel, then change your pace among the cakes: what does the shape make you notice about the same motion?

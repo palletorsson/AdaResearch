@@ -1,0 +1,2431 @@
+{
+  "date": "2026-09-08",
+  "policy": "One or a few primary teaching objects for new chapters; preserve developed prose and meaningful comparisons. No placement removal in the manuscript pass. Source inspection supports prose, not human or runtime acceptance.",
+  "rooms": {
+    "Point_One": {
+      "sequence": "primitives",
+      "index": 1,
+      "before_sha256": "59a7fa1bea93f7824a34b711e0efca16b57449bcd3b736b6e5efe34c2e3e34e9",
+      "before_words": 1088,
+      "map_sha256": "c243239ce64ece3e42d9642a9b8773b654f7e36bee3123c7ba426450907c3e69",
+      "status": "existing"
+    },
+    "Point_Lines": {
+      "sequence": "primitives",
+      "index": 2,
+      "before_sha256": "52df4a9c5fcebdabe9391eb4c78d968f5d7a4d5ba341311a3dbf8227a348eb79",
+      "before_words": 1059,
+      "map_sha256": "8415cba99e4028409e5d1d246eb8d2221bdfff64d2dda9c94b37bf5f3cde52c0",
+      "status": "existing"
+    },
+    "Point_Trace": {
+      "sequence": "primitives",
+      "index": 3,
+      "before_sha256": "85c0557b5442426fb9c54cc71881a1205acf4ee02ecb4a897bb56a3b1f7ce593",
+      "before_words": 1133,
+      "map_sha256": "b2faed88c51797ffbb37005c0994c7169187ebe2faa6555c9ee8f0d1f180bda5",
+      "status": "existing"
+    },
+    "Point_Line_Grid": {
+      "sequence": "primitives",
+      "index": 4,
+      "before_sha256": "076867a36aa90b703682068d05c1b0e2add20b47b873875ec7bfb2be3d785066",
+      "before_words": 1072,
+      "map_sha256": "3cc38535ee06d60ad05b2f79728ee556c9a38c3ebb25cc6bb38170b092cdfe26",
+      "status": "existing"
+    },
+    "Point_Triangle_Context": {
+      "sequence": "primitives",
+      "index": 5,
+      "before_sha256": "df796198b31ac836bc8d9be26946cb20b84ce63a08aa868868f6363749154b98",
+      "before_words": 1168,
+      "map_sha256": "43da38706c3220c73b5db1826c66fc819f1ebd1fe83a13463d249e18c00d9239",
+      "status": "existing"
+    },
+    "Primitives_Polythedra": {
+      "sequence": "primitives",
+      "index": 6,
+      "before_sha256": "c3c396b74731d66701773d57a340e45d1df64fdfce2be0dacc65e6151d3e8825",
+      "before_words": 1091,
+      "map_sha256": "5f3618e9660d5192286f40f9ced1dc48fbfa71264da4c01b422d03992ca653d1",
+      "status": "existing"
+    },
+    "Point_Animatedcube": {
+      "sequence": "primitives",
+      "index": 7,
+      "before_sha256": "6b11ecd7cb601627f3136cd6785e4a47c809a762abd7d443cca38d5159d14d1f",
+      "before_words": 959,
+      "map_sha256": "fbd4a575f99985151911f3297b5eb9519886873ab2f7bbbe6fb44acb08247c96",
+      "status": "existing"
+    },
+    "Primitives_Ignorance": {
+      "sequence": "primitives",
+      "index": 8,
+      "before_sha256": "50f5c27364963261313c35ef9b2f31f5dcef8a9f45d17c8451939258f19eea8e",
+      "before_words": 1070,
+      "map_sha256": "8cbcd5d2ff400e9c7a56050376d06c993d9643a11a25e0046d68eaad07e5652a",
+      "status": "existing"
+    },
+    "Primitives_Portals": {
+      "sequence": "primitives",
+      "index": 9,
+      "before_sha256": "9c121f63027df3b2e4cb998fa51ec0b1f089b71d8932752c3c21f3067e0f3806",
+      "before_words": 857,
+      "map_sha256": "d53f3585b2c878c14d56a14de82f6598fb65933a2c6f902a08eb9b4b41106528",
+      "status": "existing"
+    },
+    "Primitives_Melencolia": {
+      "sequence": "primitives",
+      "index": 10,
+      "before_sha256": "035502c5a3ccd415baae246a9fcc6828c36c48e105b1fcd5e924b246b5c636d4",
+      "before_words": 1305,
+      "map_sha256": "8fed9482f93c4828aa87adc6e6c29e3444ebcc966afad630eac0ea1bcb8d5a2a",
+      "status": "existing"
+    },
+    "Trans_Pre": {
+      "sequence": "transformation",
+      "index": 11,
+      "before_sha256": "186baee98a0e5f3f0e50bf22ace6f57af0f7c0fd0e94aeb872c466f8f7f249a1",
+      "before_words": 876,
+      "map_sha256": "d834c8967cd10e69de76de3d7a805de8c0e052ce492a36213a4542236198a1d7",
+      "status": "existing",
+      "installed_sha256": "31d425a0508780736146b0f183051a675e3235458e29a63341d268ac9c5dd6c6",
+      "editorial_corrections": [
+        "A transformation is a difference between a thing and its copy, and there are exactly three kinds.",
+        "a vector, four along x, nothing else.",
+        "it is the first one that needs the block to have a shape: you cannot turn a point."
+      ]
+    },
+    "Trans_Introduction": {
+      "sequence": "transformation",
+      "index": 12,
+      "before_sha256": "13cba61dea0ae7fc51c0c80e1c9c0a2a9714cf0cc57492261885969ae651fcbf",
+      "before_words": 1210,
+      "map_sha256": "15a3a8ae8426686edde8929c1f460b1859981c5640477fd437f4ccca05eb4738",
+      "status": "existing",
+      "installed_sha256": "54e2ecb398f057e0ec001e69eafba6be87e7363ef344e5a0a89ad38b0b29b48b",
+      "editorial_corrections": [
+        "Melencolia left you with a solid that would not move. This is the room where the primitives finally do, and there are exactly three ways they can: a thing can go somewhere else, it can turn, or it can grow."
+      ]
+    },
+    "Trans_Translation": {
+      "sequence": "transformation",
+      "index": 13,
+      "before_sha256": "11563dd395ce76996ae66b583a2627304a866d7bd7632d23226208bc03881b5f",
+      "before_words": 1365,
+      "map_sha256": "ff629bae2c21c4b066678717b3eb9d0f148816e4410dd8e1a74cb9ae5b693805",
+      "status": "existing"
+    },
+    "Trans_AxisDecomposition": {
+      "sequence": "transformation",
+      "index": 14,
+      "before_sha256": "dcbdee7bdb4d77428ae78a309db565f0358eb0b6b05c484675688c4eb68dd70a",
+      "before_words": 953,
+      "map_sha256": "5dcd08ae5e1530cb0a1bc3dbe381f1474dcdc4ce6cd04db0149681cc0265d979",
+      "status": "existing"
+    },
+    "Trans_Rotation": {
+      "sequence": "transformation",
+      "index": 15,
+      "before_sha256": "d8ee50fe4493e5d488fbaa0b4eb2739197c60d7ad8a847f30abf4ea820bead43",
+      "before_words": 1389,
+      "map_sha256": "1fc5d3bb0316667aaf02b447073cd065cfd372022babc78698dbf15bdf7dc947",
+      "status": "existing"
+    },
+    "Trans_RotationSpectacle": {
+      "sequence": "transformation",
+      "index": 16,
+      "before_sha256": "d5f52a81c0c8dcf763f9cca670649cf21a8cf556220e090929e050067332ea07",
+      "before_words": 989,
+      "map_sha256": "9c0e7223fe83481db0d043f21f1d9c09bad6cdda807bb34945a8210a7c9cfa4f",
+      "status": "existing"
+    },
+    "Trans_Scale": {
+      "sequence": "transformation",
+      "index": 17,
+      "before_sha256": "d2327589e48543a624908eda89fd07bbc340a3edb97b628f104921299807a5b0",
+      "before_words": 1094,
+      "map_sha256": "c7dc7c453c02478a48ceeb2d73c152d3d9267db9c5ea39070a8bb4302ab574b7",
+      "status": "existing"
+    },
+    "Trans_Pit": {
+      "sequence": "transformation",
+      "index": 18,
+      "before_sha256": "e6c91715739c058144642579cf71b10369a2168ba164ea77b41393d91f6eb848",
+      "before_words": 590,
+      "map_sha256": "0e863230e14ba8b42bef8ba8d6559bd1c04515f9d7f832382859151e9854fed3",
+      "status": "existing",
+      "installed_sha256": "7b922ebebd4992e0e36c55aadc4a0689c048af72e74d738be01d6846510a5d5f",
+      "editorial_corrections": [
+        "The next chapter is colour, which moves nothing at all."
+      ]
+    },
+    "Array": {
+      "sequence": "array_tutorial",
+      "index": 19,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "4aaac8627abfb74ea9e6f522bb11be52a0b9a54ece2e632c74434b0593e7bcd9",
+      "status": "drafted",
+      "installed_sha256": "cb056bf0eb1fb89ddf14c909428393b90312f37acc43a539a20a984a079c2fe0",
+      "words": 446,
+      "primary_tokens": [
+        "row_3_x",
+        "grid_2d_4x4"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/array_tutorial.json"
+    },
+    "Tutorial_Single": {
+      "sequence": "array_tutorial",
+      "index": 20,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "0a8f57e28f1c4ee89612462e551bc690b9c98b53dd2667204203428a73330a4b",
+      "status": "drafted",
+      "installed_sha256": "c70bc260d6ad9269ee03dd24c325bd2baf5a15c9893a79633a23c0a3280c2d4c",
+      "words": 427,
+      "primary_tokens": [
+        "pick_up_cube"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/array_tutorial.json"
+    },
+    "Tutorial_Disco": {
+      "sequence": "array_tutorial",
+      "index": 21,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "88d6f722bb0e2b30d7b7c0ce989a0b933664a9ba7653bca6ae106178a18c3c2f",
+      "status": "drafted",
+      "installed_sha256": "36605cf2b6eceaef69f92e21ea289597e137f5c3ee2cd92796cae5308fbcc3c5",
+      "words": 457,
+      "primary_tokens": [
+        "step_sequencer",
+        "standalone_disco"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/array_tutorial.json"
+    },
+    "Color_Context_Placed": {
+      "sequence": "color",
+      "index": 22,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "831f592b45c5bfc4352f9e041cbbf878d31c5201f6faea01b962d9a89339fcb6",
+      "status": "drafted",
+      "installed_sha256": "a9406b2d8cd5d8c7055475079a75593a1733b25b2d961af7bddd6e2246914e61",
+      "words": 409,
+      "primary_tokens": [
+        "albers_wall_gallery"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/color.json"
+    },
+    "Color_Nails": {
+      "sequence": "color",
+      "index": 23,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "f6e9ab090f9d7f778118c2656b5aefea42f04b919666676b17c739dd49f0a55e",
+      "status": "drafted",
+      "installed_sha256": "097eff83d5d7c17c76384c6bb20c2b03d7c9b9482715d9c4bdc0606b473fb87f",
+      "words": 406,
+      "primary_tokens": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/color.json"
+    },
+    "Color_Pillar": {
+      "sequence": "color",
+      "index": 24,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7e034a41ba8f0385cf13f7d2362b80227144e40315c2f248f9c07e5d37b04e33",
+      "status": "drafted",
+      "installed_sha256": "71131f516f0838ca6ee6e19b5db00ff8dfb93db80be4f2cd3b87e7c451ca2e12",
+      "words": 407,
+      "primary_tokens": [
+        "pillarcolorcollection",
+        "composition_twins"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/color.json"
+    },
+    "Color_Walls": {
+      "sequence": "color",
+      "index": 25,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "1c249053b26f897e35bcecdf1d9e6306e1b40257c2251875de81b613ca5f95db",
+      "status": "drafted",
+      "installed_sha256": "ddc3bd27573860df1846daccdfebb466ec5499b6794493fb3bb705c58057371e",
+      "words": 406,
+      "primary_tokens": [
+        "gradient_interpolator",
+        "color_space_navigator"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/color.json"
+    },
+    "Pattern_Foundry": {
+      "sequence": "tiling",
+      "index": 26,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "6f14247ec2180edb3477ec93a176bfac22dfec96d40f672a592f50d69c8101f7",
+      "status": "drafted",
+      "installed_sha256": "fbbfb27cda2221d8e304d2572b4c272431b822d3049193a65ecbecc09d57c885",
+      "words": 406,
+      "primary_tokens": [
+        "pattern_tile_4x4",
+        "pattern_tile_mirror"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/tiling.json"
+    },
+    "Tutorial_Pattern": {
+      "sequence": "tiling",
+      "index": 27,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "09d0c6788dd0cea82de96d404fdcd6284c81793f5c3f37fa55d8d56b8a6b1314",
+      "status": "drafted",
+      "installed_sha256": "83d4ad634e1e3805f97de643de691a7beeb134760bfd91e531e0b8a91cd57fed",
+      "words": 422,
+      "primary_tokens": [
+        "pattern_maker_station"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/tiling.json"
+    },
+    "Array_Patterns": {
+      "sequence": "tiling",
+      "index": 28,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "259969aef0af13121dce65b0520441b39f8e0042dae9b8fabc12ae14890a9e8c",
+      "status": "drafted",
+      "installed_sha256": "a8a77345b0f4e88596455b06b67d3b83d2cf966b6e8df511314d79aac9208052",
+      "words": 407,
+      "primary_tokens": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/tiling.json"
+    },
+    "Symmetry_Seventeen": {
+      "sequence": "tiling",
+      "index": 29,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "8967f5270c051b6adc8bd779b222fb8be4bd7b82a07f17db14be9fb2eba28e55",
+      "status": "drafted",
+      "installed_sha256": "9d9e3d5d8ec8afe0aac8d46688c12cebbe27c31664e4ac101f8b55162ae7ee60",
+      "words": 426,
+      "primary_tokens": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/tiling.json"
+    },
+    "Change_Intro": {
+      "sequence": "change",
+      "index": 30,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "6cf99c6f74d4bb8abfa37a50c25e1433768e633c3c23bbc0d6495f44a3e1eca4",
+      "status": "drafted",
+      "installed_sha256": "a46847362e9899065097af9ec084517afc5e8bd6221e5994efd27a8180fc5bd9",
+      "words": 418,
+      "primary_tokens": [
+        "tangent_slope_workbench"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/change.json"
+    },
+    "Accumulation_Riemann": {
+      "sequence": "change",
+      "index": 31,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "4dc42f0ddd218a39b5b9dcd4b91339f804dc347764330a537d85a294a09077a8",
+      "status": "drafted",
+      "installed_sha256": "4e52e62c6b4c4a04b4f1237190f5803ad671f0a015fedfc854893aca2585734e",
+      "words": 386,
+      "primary_tokens": [
+        "riemann_sum_workbench"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/change.json"
+    },
+    "Flow_Field": {
+      "sequence": "change",
+      "index": 32,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "f59df630154306f0ec5d7fb42f57e9a101e8f153c8de47817dcc318a2796a52a",
+      "status": "drafted",
+      "installed_sha256": "5a0048fd4bf06de1d83aab0c38fe4d55b69e0a1d0bd010ab992fe3b228f9066b",
+      "words": 408,
+      "primary_tokens": [
+        "flow_field_painter"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/change.json"
+    },
+    "Change_Reconciliation": {
+      "sequence": "change",
+      "index": 33,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "c377e070f2f2bbd15f2ea38a7a1fc7cbb8a781ab1eccffb3f1f55782305a38be",
+      "status": "drafted",
+      "installed_sha256": "3cb47bf3b3f4b284583309d83ae1aa8529041c243cb8825d9b31b7952181fa92",
+      "words": 402,
+      "primary_tokens": [
+        "ftc_bridge"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/change.json"
+    },
+    "Vectors_Act1_WhatAVectorIs": {
+      "sequence": "forces",
+      "index": 34,
+      "before_sha256": "859c7c8fdcd36be3be89b0e7e386411fec987678d27e8ce9dfe1f66590a24b2d",
+      "before_words": 1204,
+      "map_sha256": "0b8f4bf3f57cf5d35c48d27ad44e8721527c308f684358a8355a92dd78f87779",
+      "status": "existing"
+    },
+    "VFM_02_Operations": {
+      "sequence": "forces",
+      "index": 35,
+      "before_sha256": "036ef3b0640a6009089aa6c1f6446b91e7660211dfccae5b38d9c3f5abe2c31e",
+      "before_words": 1248,
+      "map_sha256": "7a8d8d2c826656e3557768b8dc1706fa4252bd4cd8f4338f9d0ba2a801951d2d",
+      "status": "existing"
+    },
+    "Vectors_Act2_VectorArithmetic": {
+      "sequence": "forces",
+      "index": 36,
+      "before_sha256": "b8faaf62c58e3a8a8841ad88893ab6d4220f28abaf0e13c6e6392afafd643842",
+      "before_words": 1408,
+      "map_sha256": "b7655414f70682ea27f515b851a384f95e5c4b590dd6b05e298b7d306ecc8e25",
+      "status": "existing",
+      "editorial_corrections": [
+        "The next act takes these and spreads them over space and time, so that a vector is no longer one arrow you hold but a field of them, everywhere at once, and the arrow stops holding still."
+      ],
+      "installed_sha256": "3939ec9cbc3ef4d9e034a3850f4ae5f4751f9f2c766b2bdf856c60482cd685fc"
+    },
+    "VFM_05_Launch": {
+      "sequence": "forces",
+      "index": 37,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "ee09ac70530a95027610541880c0d7b1c73e5cb93f49185c5c603347c184d9fb",
+      "status": "drafted",
+      "installed_sha256": "ef316c9c83f6af80e55fc6726898785713478b39a9739460736414dff30d4230",
+      "words": 394,
+      "primary_tokens": [
+        "launch_arc"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/forces.json"
+    },
+    "VFM_03_Motion": {
+      "sequence": "forces",
+      "index": 38,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "5f9a7f29f87bec240ac7bd98c412d4f59d6178b9437fb0b874d18f030fddb03a",
+      "status": "drafted",
+      "installed_sha256": "d631028702afbda3e8841cc9a879c7389dabb9c08e07ba26ce1b48720b1fe0b6",
+      "words": 418,
+      "primary_tokens": [
+        "friction_ramp"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/forces.json"
+    },
+    "Vectors_Act3_FieldsAndMotion": {
+      "sequence": "forces",
+      "index": 39,
+      "before_sha256": "5da7b7ff7ff7e121cbe961ea07fd87a9d6eccc960ee9143956373fd5b27ecea7",
+      "before_words": 1024,
+      "map_sha256": "3e7f14b08227158032e556be7e7146b79844042182dd4f2c5d838bbda4c6b69b",
+      "status": "existing"
+    },
+    "Vectors_Act4a_KineticForces": {
+      "sequence": "forces",
+      "index": 40,
+      "before_sha256": "0bc190da295350fe9258a604853a4f87825c0425d4b3b9b2edddd6022af2e16d",
+      "before_words": 1243,
+      "map_sha256": "fde5ea0a6bfc712542670ab0996f96d66b3fdcf22cd37b00f98542bba4610835",
+      "status": "existing"
+    },
+    "Vectors_Act4b_Oscillation": {
+      "sequence": "forces",
+      "index": 41,
+      "before_sha256": "a62bbe3bcc25cd92905057081be06003f50f5e6869b530e972888e8f7bf8d04a",
+      "before_words": 1522,
+      "map_sha256": "708adf6be63eaebb54f7e5658b48d6ffa254c6c4900abe317e586409616c7009",
+      "status": "existing",
+      "editorial_corrections": [
+        "The last hall asked what a force does to a body. The next one stops asking that, and asks what a force does to a room.",
+        "Spring, pendulum, cradle, bounce, lever, wind. Forces that repeat, conserve and balance, and every one of them keeps faith for the same reason: the pull back is proportional to how far you have been pulled, and the sign on it points home."
+      ],
+      "installed_sha256": "1f28e806d3275d2f02d3fe8b38a934af8c5b784a47f3668795cc8ec73a92194a"
+    },
+    "VFM_07_Gravity": {
+      "sequence": "forces",
+      "index": 42,
+      "before_sha256": "9ed09b6ce56284202a62b8b022608e3b5c63042a6ce3ba01f33d68e9b4f48cd9",
+      "before_words": 1132,
+      "map_sha256": "6cdba89a07c86ba8ce38050c114bc7f7f23b36738e674ded60dbddca66a2ba25",
+      "status": "existing"
+    },
+    "VFM_09_Legs": {
+      "sequence": "forces",
+      "index": 43,
+      "before_sha256": "a15784a057ca8362d6442ec092b1be3966fa1c7ef7110ed0c939cd4d41b4b58b",
+      "before_words": 985,
+      "map_sha256": "81c665c82d5cb481c35b4c3497e51e97c75269adc5b577930e84715f60c95956",
+      "status": "existing"
+    },
+    "VFM_08_Arena": {
+      "sequence": "forces",
+      "index": 44,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "14adf91ff012ae0c38db5316883edef11d7299691974ba4711ffc27e9e83f97b",
+      "status": "drafted",
+      "installed_sha256": "a0a848b250be52997fdf54323e12e9f561ea8e6e9e611ecdc31e0337e3a1725b",
+      "words": 417,
+      "primary_tokens": [
+        "collision_carts"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/forces.json"
+    },
+    "Vectors_Act5_ForceAsPlace": {
+      "sequence": "forces",
+      "index": 45,
+      "before_sha256": "685aa0f8937f48fdaa4d681a17e8d6f5c5848aa17d707e208d624a2abc9b2bd9",
+      "before_words": 1437,
+      "map_sha256": "50a0df6761d1a3ed03ec8681dac3f5ebd5a869f38c743fbb68cba41c6b3511c9",
+      "status": "existing"
+    },
+    "FormFinding_Descent": {
+      "sequence": "formfinding",
+      "index": 46,
+      "before_sha256": "f0115aad7de12b87e8d1a9becf6beeddd380b105a5c5e6eebd3c6712503227d3",
+      "before_words": 1008,
+      "map_sha256": "3fc0f6bd3243eae7705562c3627d22a499bd5f78732ab57adbd589f653da00e4",
+      "status": "existing"
+    },
+    "FormFinding_Catenary": {
+      "sequence": "formfinding",
+      "index": 47,
+      "before_sha256": "49df26a33ccdf2fb45c3ecd4867312d51175748ca4bda4ac31e67a1c19e63f54",
+      "before_words": 912,
+      "map_sha256": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+      "status": "existing"
+    },
+    "FormFinding_Relaxation": {
+      "sequence": "formfinding",
+      "index": 48,
+      "before_sha256": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+      "before_words": 877,
+      "map_sha256": "48dd20392e58877ae1c3b2ecaf2c7e7ea5698c5ea42c7fcc7a663fb4ce36ddb0",
+      "status": "existing"
+    },
+    "FormFinding_Equilibrium": {
+      "sequence": "formfinding",
+      "index": 49,
+      "before_sha256": "40e01a633d3f6f5107cc5e9dfba642813a70431720088c744978974a31d888ec",
+      "before_words": 862,
+      "map_sha256": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+      "status": "existing"
+    },
+    "FormFinding_Annealing": {
+      "sequence": "formfinding",
+      "index": 50,
+      "before_sha256": "41c9d7bbf8d217984f4ceca3ddec7ab6e51e36b4020581f2a2fb6704f2275358",
+      "before_words": 979,
+      "map_sha256": "2e104a48ed4414fbaf3ae54b719922b52bbf1aa531104f514c58faa2fc583374",
+      "status": "existing",
+      "editorial_corrections": [
+        "Next: the same question in the language of matter that will not hold still at all.",
+        "Then this one. If falling all the way down is how a form is found, the fully found form is a crystal, and a crystal is over. What is alive is what stopped part way, in a basin wide enough that it can be knocked about and come back, resting at a minimum it has not finished with."
+      ],
+      "installed_sha256": "d1aa490701065b2e49a4b6f49a791c0947c6d7a6db6ed3d43dd0af4250409b7c"
+    },
+    "FormFinding_Forge": {
+      "sequence": "formfinding",
+      "index": 51,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+      "status": "drafted",
+      "installed_sha256": "9b37c121ad49f071c1eeb43bdfa952dfda11f95edfb1fc692f71f4c1ac791b3d",
+      "words": 440,
+      "primary_tokens": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/formfinding.json"
+    },
+    "WaveFunctions_Intro": {
+      "sequence": "wavefunctions",
+      "index": 52,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a8237ceb0c1c449e807302023262ed1aad6da0d3cc17702b76bc1c13a3e0c81c",
+      "status": "drafted",
+      "installed_sha256": "bd5f4142457119e783785a4934e17a7cbbf0ef4fe2e0e034a556085f7cbb79dd",
+      "words": 393,
+      "primary_tokens": [
+        "control_pendulum"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_Pendulum": {
+      "sequence": "wavefunctions",
+      "index": 53,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "f50e97e66d1530e35944fa0bba963af945ee44b4838b4c2f3b677ed8a579adbf",
+      "status": "drafted",
+      "installed_sha256": "4cde393f67f819721270ee6793cfdaf6d4edcfbb90a8a2bbc2f9aa670ff2457c",
+      "words": 411,
+      "primary_tokens": [
+        "PendulumWave"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_Sine_Space": {
+      "sequence": "wavefunctions",
+      "index": 54,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "f3cfbaf96167676056741c4451d845919281fa448e615f2be25afeb975c80226",
+      "status": "drafted",
+      "installed_sha256": "08f38e5f5136a2d3288788d2013273a285b051ce24337e172b6e5e468dede90b",
+      "words": 409,
+      "primary_tokens": [
+        "sine_wall_corridor"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_Unit_Circle": {
+      "sequence": "wavefunctions",
+      "index": 55,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "5b5a017ec0721fc88724a0b1959ea42437d52d9cbbaa0e1b0838a4c862fb04d6",
+      "status": "drafted",
+      "installed_sha256": "e391c3623417c91e8a90b519aec3c7fffca392f79673fbcd4e72ad979f6f6f55",
+      "words": 400,
+      "primary_tokens": [
+        "unit_circle_advanced"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_3D_Wave_Propagation": {
+      "sequence": "wavefunctions",
+      "index": 56,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "67ff1fa30f881251fe98a854658b2dc9d90094589809b80da7b20e7b0010b32c",
+      "status": "drafted",
+      "installed_sha256": "fb05267354126199f3f83591a0472069ff57b0b6b9b7a71e8398865b438ec095",
+      "words": 400,
+      "primary_tokens": [
+        "coupled_oscillator_lattice"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_Effect_Sound": {
+      "sequence": "wavefunctions",
+      "index": 57,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "54d63a50832fea182e71ac07e7c38325e1714c0a8833088100a25ead537bac74",
+      "status": "drafted",
+      "installed_sha256": "c1ec17b1ece73e5b087a03e923ec489843ef1ffc417c766d9c33bec03d38c34c",
+      "words": 400,
+      "primary_tokens": [
+        "DualBallFMController"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "Wavefunctions_Bernini": {
+      "sequence": "wavefunctions",
+      "index": 58,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "5f711c76a0d6cb050e5e6b5a4333a457cf0e2b587bfa8b29724007810afa0b53",
+      "status": "drafted",
+      "installed_sha256": "78701900090a59b419c1862e9358f171fa8aee75001a5b04b2d8dfd76c71cbd4",
+      "words": 406,
+      "primary_tokens": [
+        "bernini_columns"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_John_Cage": {
+      "sequence": "wavefunctions",
+      "index": 59,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "0739c54571993372d4e69382c4c770fd888ca96a0b8985d4335f28040bf64fc8",
+      "status": "drafted",
+      "installed_sha256": "16a16df2bd92561ab237bd1e14d59e2c5ddfa36c6d28d325389686271ee323f4",
+      "words": 407,
+      "primary_tokens": [
+        "john_cage_tech_noir"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_AirMusic": {
+      "sequence": "wavefunctions",
+      "index": 60,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "817e1106532d1c61f37a66c0795d9da5fb42b66b4fe0ebd54927f5b783cbd87f",
+      "status": "drafted",
+      "installed_sha256": "05b3d769db84f7b9c75c147a5c2f75669bbd3a25d936f5db68d85cfc4276f858",
+      "words": 418,
+      "primary_tokens": [
+        "resonating_metallophone"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "Wavefunctions_Sky_Stairs": {
+      "sequence": "wavefunctions",
+      "index": 61,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "fa69aaa3878574874e44185b9d303705270a1b6b3c300c5e3ca66b8db5a6c6e5",
+      "status": "drafted",
+      "installed_sha256": "2b8e3f5a889a7dca10cd7422b0eb551915702ebfc21e136d42e41bc144fb9556",
+      "words": 410,
+      "primary_tokens": [
+        "sine_cylinder_staircase"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_TrigWalkingPath": {
+      "sequence": "wavefunctions",
+      "index": 62,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "8b8bd9dd3b8e2501fcae3d0356fac5eb673efcc886daced7b4234173f911c672",
+      "status": "drafted",
+      "installed_sha256": "9feafb76e00cdf28318f5b9e55dc6679ccd534badb9bbaf3da4d27d10deae583",
+      "words": 395,
+      "primary_tokens": [
+        "beat_frequency_demo"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "WaveFunctions_Synthesis_Lab": {
+      "sequence": "wavefunctions",
+      "index": 63,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "cdfa59ee9707ebfc4a2a55a3f1e6d9b55c49b93f0bb64a11ac25a4e3749099f6",
+      "status": "drafted",
+      "installed_sha256": "1321781d39f01ad65ff21e2210af0401a276252ef46324a1a870005f1e7506ac",
+      "words": 418,
+      "primary_tokens": [
+        "additive_wave_demo"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/wavefunctions.json"
+    },
+    "Random_Definition": {
+      "sequence": "randomness",
+      "index": 64,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "341ef6bfa561c55c83163db06f79fc123ad51442ed74ed270919da6ef73ac999",
+      "status": "drafted",
+      "installed_sha256": "a2159027dbaeb80766c6b5a5409d49d2d850598f89de61a9b4dcf5d43e17b104",
+      "words": 403,
+      "primary_tokens": [
+        "seed_replay_demo"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Entropy": {
+      "sequence": "randomness",
+      "index": 65,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "c45774d9e628acafbd72539f6c0416248cedb2a79adf1e4054e8c56c814c68cd",
+      "status": "drafted",
+      "installed_sha256": "a06434ff4ef2c39fec09d32628efd15848af194eab9ceaa4122f7170cf9a205a",
+      "words": 412,
+      "primary_tokens": [
+        "shannon_entropy_meter"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Remove": {
+      "sequence": "randomness",
+      "index": 66,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "e6c7c863eceed1c0613663d49a2ef4984121a537e634d114cbc7c17702cbfa03",
+      "status": "drafted",
+      "installed_sha256": "d03b87a070bae20c8d712bc1ec0cc63e289c9ea1369ce376e93543e2f52919db",
+      "words": 411,
+      "primary_tokens": [
+        "remove_random"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Randomness_10_PRINT_Algorithm": {
+      "sequence": "randomness",
+      "index": 67,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "06e692a18aee7c842aa2a5ddc9e68867968c51cba06a09ff616980d2f4171a1c",
+      "status": "drafted",
+      "installed_sha256": "259612018d5721a305e97399d9c5652c5db6917fe019651bca5774c8f4fd8535",
+      "words": 412,
+      "primary_tokens": [
+        "ten_print_maze_3d"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Cubes": {
+      "sequence": "randomness",
+      "index": 68,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a8bbd32bd3644f79ccfc75d42fa40fa8033a2111d1e7a2b9e33cd5851cc0c9d9",
+      "status": "drafted",
+      "installed_sha256": "a7b9c7d24246a4be627e2e3dc74492aac82ea2b9d4a69ac2f38144775a48536f",
+      "words": 400,
+      "primary_tokens": [
+        "dice_throw"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Rotate_Random_XYZ": {
+      "sequence": "randomness",
+      "index": 69,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "1b9afe1916d0dfaca5892e2498506ae8ca3754917fd616e947424939bda6d85f",
+      "status": "drafted",
+      "installed_sha256": "4ab6e6a1681f6ad918c3f9d09914c2f4836c995f0d7e0e8edf1279a62dd34c6e",
+      "words": 396,
+      "primary_tokens": [
+        "random_decay_multimesh"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Walk": {
+      "sequence": "randomness",
+      "index": 70,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "dac38a76008538ef7c5171c7f2d55e51778b8a168f98269259624c487695f777",
+      "status": "drafted",
+      "installed_sha256": "04ea233436e3734dcb804fdbcb5b2998ef7119445c068265ac8569d5a41bb623",
+      "words": 396,
+      "primary_tokens": [
+        "random_walk_terrarium"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Gaussian": {
+      "sequence": "randomness",
+      "index": 71,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "35e4de411e96f2b44512e068e4f95eee6911eb68fd8c43e11d1678dfa0033534",
+      "status": "drafted",
+      "installed_sha256": "8dd403ee9ce118e4ccbe5f457d9505edf6d2b2b42ce7b4b8a31d2c2ce0d09d7a",
+      "words": 405,
+      "primary_tokens": [
+        "distribution_sampler"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Mushrooms": {
+      "sequence": "randomness",
+      "index": 72,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "2b3731abed8b4b1e3591d6e249354492f0299e3ab309ff0db2dbf86a5703bca0",
+      "status": "drafted",
+      "installed_sha256": "fe2b70a3323b52652ceda925a661aa8b4738900751e4adf1b33a661a5ba53f50",
+      "words": 402,
+      "primary_tokens": [
+        "mushrooms"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Space_Geometry": {
+      "sequence": "randomness",
+      "index": 73,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "9eaaa551be48f09d28202c8586b36e393e66aed81d6f80a8a18c43f773a181db",
+      "status": "drafted",
+      "installed_sha256": "29bf71622aa8c6b6ffb794168029e019f20a1afacef24c3a7a44ca96f7c2e8e4",
+      "words": 389,
+      "primary_tokens": [
+        "perlin_noise_bridge"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Randomness_Examples_of_Randomness": {
+      "sequence": "randomness",
+      "index": 74,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "fa1472e16bd3b13dfb4f2e3664297266aa645ea404458f992c53ab9f1974c29b",
+      "status": "drafted",
+      "installed_sha256": "a71c92e05c9c62e95f3dd35d257abf72631eadc3e70e8aa2f760d11fa1694b6f",
+      "words": 394,
+      "primary_tokens": [
+        "monte_carlo_dartboard"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Pheromone": {
+      "sequence": "randomness",
+      "index": 75,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "5e151bd709d9be048ac393b9453a7d1bbf6dc0482ae2756421e79be7382f083f",
+      "status": "drafted",
+      "installed_sha256": "c5f7c334ffc655035c960f245caa1292af2c63b1d893ea240c5947c8487dd9cb",
+      "words": 397,
+      "primary_tokens": [
+        "pheromone_terrain"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Space": {
+      "sequence": "randomness",
+      "index": 76,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "03307d0e358ec577bdb2b4eb687921038b5f23896e82a3bcd6d140b090f22a0a",
+      "status": "drafted",
+      "installed_sha256": "5ee4f8d430a547742015918ba2cbe935dfd120c197d07f6c27115019bd9b466a",
+      "words": 397,
+      "primary_tokens": [
+        "noise_mixer"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Game": {
+      "sequence": "randomness",
+      "index": 77,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "b571c14ac5ad5fd43271c38c9b6503e535af91c4211f41e203ed8344fb7e2660",
+      "status": "drafted",
+      "installed_sha256": "3b7a7a9f9ef5f0d00086d0c2e1829a55b0554a8e352de6345a2b293ef9ea0338",
+      "words": 419,
+      "primary_tokens": [
+        "r_c"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/randomness.json"
+    },
+    "Random_Noise_Types": {
+      "sequence": "noise",
+      "index": 78,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
+      "status": "drafted",
+      "installed_sha256": "7aa551478c3170b1f6c68819d8e8f6ea7c5e4c27b1fe642cebc55a1cc70a79a0",
+      "words": 387,
+      "primary_tokens": [
+        "randompoints"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_Columns": {
+      "sequence": "noise",
+      "index": 79,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+      "status": "drafted",
+      "installed_sha256": "6431a6046c435b1848a31f1cad5cd7a3d55e93fc0cc296c6eb4d99db6c4af0c9",
+      "words": 382,
+      "primary_tokens": [
+        "MeltingBerniniScene"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_One": {
+      "sequence": "noise",
+      "index": 80,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+      "status": "drafted",
+      "installed_sha256": "24eb619b5cf18b5bdc15ebb7c176dab080d72f9af6fd5a1e7ee04c034798ac20",
+      "words": 384,
+      "primary_tokens": [
+        "noisetorus"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_Voxel": {
+      "sequence": "noise",
+      "index": 81,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+      "status": "drafted",
+      "installed_sha256": "06264cd74c028c727fa63ad728325826f1ca38706d75a58d62e6844de6bdfc77",
+      "words": 389,
+      "primary_tokens": [
+        "perlin_terrain_sculptor",
+        "voxelnoise"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_6_Wall": {
+      "sequence": "noise",
+      "index": 82,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+      "status": "drafted",
+      "installed_sha256": "399a8f654aba82fcce3dc28a21901d8f5bf1de642b64bbe4e38bc57da1aa34a6",
+      "words": 396,
+      "primary_tokens": [
+        "shader_noise_space"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_Inside_Noise": {
+      "sequence": "noise",
+      "index": 83,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+      "status": "drafted",
+      "installed_sha256": "f10412f3539ca924de3e5764a4ce87722d5878bb4a8a009865c9e6446552176c",
+      "words": 396,
+      "primary_tokens": [
+        "noisesphere"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_Space_10": {
+      "sequence": "noise",
+      "index": 84,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+      "status": "drafted",
+      "installed_sha256": "32e6473ae9e727d1de3e51cd092636990bc3758e293f8c71b143a4af4b413cbf",
+      "words": 393,
+      "primary_tokens": [
+        "noise_space"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Noise_Perlin_Simplex": {
+      "sequence": "noise",
+      "index": 85,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "efc6152f356cf0843a285b6b4e462aa162e1f5ac6143b464d05279197da67a86",
+      "status": "drafted",
+      "installed_sha256": "669c8888b7f1176176574e5cf36b760e91dca2d4e580df81d94c55e55d6ea47a",
+      "words": 392,
+      "primary_tokens": [
+        "simplex_noise",
+        "perlin_noise"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "Lab_Path": {
+      "sequence": "noise",
+      "index": 86,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+      "status": "drafted",
+      "installed_sha256": "30ec6de21896f63ab272d36d012cef582ef4bdd577687830bb8b14eda6512fc2",
+      "words": 385,
+      "primary_tokens": [
+        "dark_sphere"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/noise.json"
+    },
+    "CA_Introduction": {
+      "sequence": "cellularautomata",
+      "index": 87,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "0dd7f6783f53914f9268b47c1be2f44f225c9da8e46e60be34126029bd5d3454",
+      "status": "drafted",
+      "installed_sha256": "491dd3cd3a193dc8e8441173458345fd591e4b011d46cd1a5ad916e3d3e69b17",
+      "words": 386,
+      "primary_tokens": [
+        "ca_rule_explorer"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_ElementaryRules": {
+      "sequence": "cellularautomata",
+      "index": 88,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a9d84eccd76ebce8e615beb1a3321831a4a0655f28888e59492e879f059376c0",
+      "status": "drafted",
+      "installed_sha256": "76266e161d5dd41920df0b7300418cc34654dd3ba1b9d0ba4ce2e92183de75d8",
+      "words": 390,
+      "primary_tokens": [
+        "structure_growth"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_GameOfLife": {
+      "sequence": "cellularautomata",
+      "index": 89,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "1bb63693cf5dfccec8672aa50efa59c4d32e5f5778cabc1985b674ee0413d692",
+      "status": "drafted",
+      "installed_sha256": "7bd487ca69fdf64fad630dcf2f763aa6ddf9d3a12eab80dce31d22558e222d51",
+      "words": 401,
+      "primary_tokens": [
+        "ca_bridge"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_BeyondBinary": {
+      "sequence": "cellularautomata",
+      "index": 90,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "9bbeb8e919a8d06631fe157308c5548d094694de82d76e8b242f8082523cf642",
+      "status": "drafted",
+      "installed_sha256": "9922a99ec9f42e89a7957e120abf1d2918f1c9bb90d5728ac7ad388e8d539262",
+      "words": 394,
+      "primary_tokens": [
+        "game_of_life_petri"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_ExpandingSpace": {
+      "sequence": "cellularautomata",
+      "index": 91,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "2a76177aa29a4c9ade208b0717549ec82fd92ef31ca1fcb15ab4722f832998bb",
+      "status": "drafted",
+      "installed_sha256": "a206ec9904d6bada67762ef6ed46f2bbdb9abd3c8d0ea5704790f0d11b2f5e7f",
+      "words": 388,
+      "primary_tokens": [
+        "decaying_bridge"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_SoftRules": {
+      "sequence": "cellularautomata",
+      "index": 92,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "60e4d9d98caaa6af7e1db9364a40d3abb7cb92c5336b18fa894edf98880d707f",
+      "status": "drafted",
+      "installed_sha256": "ef9a7fe34cfb1077be13a65d22f668260e8703c6af40beacddd06a3ae14cf543",
+      "words": 392,
+      "primary_tokens": [
+        "the_clockmaker_of_rules"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_AgentsCircuits": {
+      "sequence": "cellularautomata",
+      "index": 93,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "0bd90c88a790dabe974396630b2c610852d7118db8913b897d2d62f886b8d457",
+      "status": "drafted",
+      "installed_sha256": "3aafdee5204f474d53da18dd5fe5a85f3ef9bffe3cae6ab02b0c6a06db855625",
+      "words": 403,
+      "primary_tokens": [
+        "ca_rule_explorer",
+        "sierpinski_pyramid"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "CA_EdgeOfChaos": {
+      "sequence": "cellularautomata",
+      "index": 94,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "80e06512c53e2d3870e7a98023990850f2044d161088613ddbce3fb8faec6e4f",
+      "status": "drafted",
+      "installed_sha256": "86d3283b51843f23678340ecb80ae6c8400463436894384b54487bb4e47165ec",
+      "words": 391,
+      "primary_tokens": [
+        "self_organization_ca"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/cellularautomata.json"
+    },
+    "Fractal_Recursion": {
+      "sequence": "fractals",
+      "index": 95,
+      "before_sha256": "63af568a7f8ce99c62f65cf911c588350ce070f0c464b0f684afac260aa8fe18",
+      "before_words": 967,
+      "map_sha256": "20725fd717f85d4d5157803bc23907c0e36045a99aa806abfba97aa712d1a89e",
+      "status": "existing",
+      "editorial_corrections": [
+        "Next: what these rules make, measured, and the two moves that make all of it."
+      ],
+      "installed_sha256": "fa4431af41ffa820b94fbaebe539f749c2760f23a185dd0fa982e568fd924f96"
+    },
+    "Fractal_RecursiveTrees": {
+      "sequence": "fractals",
+      "index": 96,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "9705a7df1870bb8270e6972525f90c00b6581fb4cb2d3ca587f2330b15883d57",
+      "status": "drafted",
+      "installed_sha256": "bb4e073471c7e3ddfe76c928dedaf6d15e88cd1cf5f5aba473e514d4eae12a81",
+      "words": 385,
+      "primary_tokens": [
+        "recursive_tree"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/fractals.json"
+    },
+    "Fractal_CantorSet": {
+      "sequence": "fractals",
+      "index": 97,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "ec0d652b81be4d68435630b1b7106dbdb9489c431e5561d971cdcdc0335b6560",
+      "status": "drafted",
+      "installed_sha256": "2ab27ab791162903797b1e023f4b7489531a67486098fc626b78aad2f97bbfe9",
+      "words": 401,
+      "primary_tokens": [
+        "cantor_set"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/fractals.json"
+    },
+    "Fractal_KochSierpinski": {
+      "sequence": "fractals",
+      "index": 98,
+      "before_sha256": "d5957d759befd7c541d3d69bf18d9dc5859839e2ebe7e5b88bd9c7803ea646e6",
+      "before_words": 966,
+      "map_sha256": "1134e815a7ff21dfeeba85380dba286f011a337d07b4a0e470964fe5e0ea2508",
+      "status": "existing",
+      "editorial_corrections": [
+        "Next: a fractal nobody built at all.",
+        "Nobody noticed it could be fractional until somebody measured a coastline."
+      ],
+      "installed_sha256": "77d36193a0ede508ac3bdbace27c26cf9d381c4ae6851315e96211400c80f60d"
+    },
+    "Fractal_MengerSponge": {
+      "sequence": "fractals",
+      "index": 99,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7b924f9c6d7c9c9993ae56f7853ecb9a000fb6f0b5539616856ee3e5e35b6947",
+      "status": "drafted",
+      "installed_sha256": "420fe45ee3965e2bc24c6a5a6c405d511d9f7705f65f4f118cd603de412a33e2",
+      "words": 393,
+      "primary_tokens": [
+        "menger_sponge"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/fractals.json"
+    },
+    "Fractal_GoldenSpiral": {
+      "sequence": "fractals",
+      "index": 100,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "04329816b28e9c849ae537b290ce39b69577d75ef8574233ab5ba73910b1a997",
+      "status": "drafted",
+      "installed_sha256": "b6f7e668445d48a9bc0cce946923731c16f0ecc22e3153dfdc81e9014e79eee3",
+      "words": 395,
+      "primary_tokens": [
+        "fibonacci_sequences"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/fractals.json"
+    },
+    "Fractal_JuliaSet": {
+      "sequence": "fractals",
+      "index": 101,
+      "before_sha256": "e9cea40ffeff63270be9693db50983d8faa74d9da314a47f89f707f39b033ee1",
+      "before_words": 686,
+      "map_sha256": "c3d28a755331bcf791a9aea32e6d18a453ddf190d046c60556024be67e27843f",
+      "status": "existing"
+    },
+    "Fractal_MandelbrotSet": {
+      "sequence": "fractals",
+      "index": 102,
+      "before_sha256": "edcd8b212306fdd255d34c6fcbb7206c71d9190f743e1f67bf95df0ddcb5a386",
+      "before_words": 675,
+      "map_sha256": "672ca8dc41d35c8f86c36ae10cfe12ed46f3ac302139da3214538677c66af18d",
+      "status": "existing",
+      "editorial_corrections": [
+        "Next: what these rules make when they are set to grow rather than to draw."
+      ],
+      "installed_sha256": "b9836c0dd2b9e545d2dc7559e2101b00a0ac6b39acdc2e28e313fdd36c69c287"
+    },
+    "Fractal_Synthesis": {
+      "sequence": "fractals",
+      "index": 103,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "23ddd63b1df980b035b4b8cbdc846cf246af59a47f464417f7d7523c2159a7ea",
+      "status": "drafted",
+      "installed_sha256": "1d06c23a574ee28ae4fa4dff6ecf9a983ad4fed2e8b27e6d9afcbd0560136726",
+      "words": 395,
+      "primary_tokens": [
+        "cantor_set",
+        "recursive_tree"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/fractals.json"
+    },
+    "Fractal_CrossSequence": {
+      "sequence": "fractals",
+      "index": 104,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "ee9a0a0d3483183ca2efd07beed478bf305f013cdbee62d2eae6668e2665c555",
+      "status": "drafted",
+      "installed_sha256": "e48d6996d5c349b606ce5e301b055524d308662eca5a2e82e3548802f28234c6",
+      "words": 391,
+      "primary_tokens": [
+        "space_filling_curve_gallery"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/fractals.json"
+    },
+    "LSystems_Grammar_Lab": {
+      "sequence": "lsystems",
+      "index": 105,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "3e1851f1c02fbb4ec1292951c3a369539a64138b8a040cf7b75715f05eb2d533",
+      "status": "drafted",
+      "installed_sha256": "a8e9293ff77b78217098effde68db9386f8758350c9a6d5dfbc6e526f5fabfa4",
+      "words": 384,
+      "primary_tokens": [
+        "lsystem_editor"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "LSystems_Growth": {
+      "sequence": "lsystems",
+      "index": 106,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "c83f86b2520a716095d227e2d81515c5233080d000f781bcf540073f9004153c",
+      "status": "drafted",
+      "installed_sha256": "42d327c800320c2887f20671442c843bb862bec6b61c21a3be00b022159b94a9",
+      "words": 388,
+      "primary_tokens": [
+        "parametric_lsystem"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "LSystems_Grammars_And_Curves": {
+      "sequence": "lsystems",
+      "index": 107,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "ac6af238417ca09493df76153d06042fc3a7b18872f0f2f6d793712c7f8bc071",
+      "status": "drafted",
+      "installed_sha256": "98fecdd9e5365db11f2f384fdc44469dd4ca6a73b0d5bc3c40c9b7dfe8464b00",
+      "words": 393,
+      "primary_tokens": [
+        "the_believing_turtle"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "LSystems_Architecture": {
+      "sequence": "lsystems",
+      "index": 108,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "5c7926cdae57ce8fa0b94a1f34f4517e80830aaca9554505d8a4ce25d1dd64cb",
+      "status": "drafted",
+      "installed_sha256": "cdbf268cd1bcf7ee1e6ab14cb5bd5d5c332eb48e9b7eaf80018d143f1d622fc3",
+      "words": 397,
+      "primary_tokens": [
+        "lsystem_dungeon"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "LSystems_Competition": {
+      "sequence": "lsystems",
+      "index": 109,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "330fae9dc2707bb0030c45c0e14cbed079c72f05a0298df44233e90b4c5776cb",
+      "status": "drafted",
+      "installed_sha256": "032878015b56568ea881936b7a8de0e9e8656f489b86d7bb0b40deb9117430a1",
+      "words": 399,
+      "primary_tokens": [
+        "ForestCompetition"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "LSystems_Living": {
+      "sequence": "lsystems",
+      "index": 110,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "3dea13559e019a9ff9a3222ff764ff172ca76c519f5a5a941c8f6004a2e8f8a1",
+      "status": "drafted",
+      "installed_sha256": "7b59f87fa27857d50aa4befdefa32cc09846772f5cf596a326e68f089fc430f6",
+      "words": 401,
+      "primary_tokens": [
+        "genetic_tree_sculptor"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "Assemblage_Same_Desire": {
+      "sequence": "lsystems",
+      "index": 111,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "8c3635c77bbe7481d42594043c475e9e637c6e193f269e4b650b38e52975cb0f",
+      "status": "drafted",
+      "installed_sha256": "92e6decfaf65c8317db002af6f69bbe084d462dec4d33c563b08c6cfff9aad0a",
+      "words": 397,
+      "primary_tokens": [
+        "ten_print_textile"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/lsystems.json"
+    },
+    "PG_Genetic_Evolution": {
+      "sequence": "proceduralgeneration",
+      "index": 112,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "555644ad6594a449d85798f704a51074bd2dd8c2afbdeffe64af1db1058afbe0",
+      "status": "drafted",
+      "installed_sha256": "5d084c1cf5f159f159442b337fd524845321186f4b73396401135b1c9437c82c",
+      "words": 383,
+      "primary_tokens": [
+        "GeneticProgramming"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "PG_Space_Colonization": {
+      "sequence": "proceduralgeneration",
+      "index": 113,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "be6b4464714b8a357bef287d0e08e3ffcc55ee7438eccf8b248f1bfae1792133",
+      "status": "drafted",
+      "installed_sha256": "5f4e213cab5e35c262b8b173c9442ba7eed46bade01d12c1e1a1060beb1bb7dd",
+      "words": 394,
+      "primary_tokens": [
+        "space_colonization_algorithm"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "PG_Percolation_Network": {
+      "sequence": "proceduralgeneration",
+      "index": 114,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "c40b5fd9183c9fa68ee5c0226f9537660f7b91742896be116e022e92d1d8db39",
+      "status": "drafted",
+      "installed_sha256": "548a1e1faa3e84e3c14e8cda095076f18fec258260b291cbd52b0d7e43a07dbb",
+      "words": 390,
+      "primary_tokens": [
+        "percolationnetwork_ca"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "PG_Branching_Growth": {
+      "sequence": "proceduralgeneration",
+      "index": 115,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "fd64cdf10263ee50bfaea4f5de75c16b521c61a6f7c5762ab3bac9121cd7a0f0",
+      "status": "drafted",
+      "installed_sha256": "c753b91ce75bb1db51159c4c5916afcf83cd8bd931d571234bcec4e364e36887",
+      "words": 396,
+      "primary_tokens": [
+        "branching_growth_algorithm"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "PG_Caves_Mazes": {
+      "sequence": "proceduralgeneration",
+      "index": 116,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "c706ebbd6dcdd0ef8ad2de57a6337dc7184bd744defc6ce3cd76cfa84decfd5d",
+      "status": "drafted",
+      "installed_sha256": "5220c6e4cb3190da989e75ffd8cce302d64c1e56a3a494b2a61af0b0162b1865",
+      "words": 393,
+      "primary_tokens": [
+        "caverandomwalk"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "PG_Sculpted_Forms": {
+      "sequence": "proceduralgeneration",
+      "index": 117,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "5f38abdf62db38d37dfe870af50699b2dc705ce3770f9ef20d7c2bd9d101d36a",
+      "status": "drafted",
+      "installed_sha256": "dfdb60a1f34679084dae91e3366f7313292ab1cb17012a915411a20a6b77800d",
+      "words": 398,
+      "primary_tokens": [
+        "cube_mound_scene"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "PG_Mirrored_Patterns": {
+      "sequence": "proceduralgeneration",
+      "index": 118,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7e2e06ce667892acd25e64162d7be0ebfdc055c7ccf43a4842ad1a0063074c96",
+      "status": "drafted",
+      "installed_sha256": "353240c134927a887ca51261f18a74e310a7bbc3051320be587b1233890f9ea2",
+      "words": 405,
+      "primary_tokens": [
+        "mirror_cellular_texture_for_3d"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/proceduralgeneration.json"
+    },
+    "SoftBodies_Soft_Body_Deformation": {
+      "sequence": "softbodies",
+      "index": 119,
+      "before_sha256": "a3b73648186a86c1c6656e10a166723a7f6542324b98993a852c40b7e3f9fd7e",
+      "before_words": 701,
+      "map_sha256": "594e8db8a91e75ede3cf987c68a65e95a103e3c66d5b7c7f2b82cd0678884309",
+      "status": "existing",
+      "editorial_corrections": [
+        "They are silicon lattices grown by single-celled organisms, and they are the last room of this chapter standing early in the first one."
+      ],
+      "installed_sha256": "d64b213c1023bcf609d4cae68e3af572232d4f41ba3037334bf8d3ec8b010ffb"
+    },
+    "SoftBodies_Carusell": {
+      "sequence": "softbodies",
+      "index": 120,
+      "before_sha256": "78eca03cbd8e7ea20e5f618acb81bb727f22e4c96e072172238abfeb40c7de45",
+      "before_words": 706,
+      "map_sha256": "5986f24ba050be7843688380388dab7d3a2a0e4130e35dcffa4700ccc6d0cf49",
+      "status": "existing"
+    },
+    "SoftBodies_Obsticals": {
+      "sequence": "softbodies",
+      "index": 121,
+      "before_sha256": "37fec0764f8e0c6b0f3748afcc36e143e410cba72f945e43e513bc72fe464af9",
+      "before_words": 746,
+      "map_sha256": "a2d048ef5768f3b224e0a7cac118541d27631cb6b352c4962269296ec38011f0",
+      "status": "existing",
+      "editorial_corrections": [
+        "The chapter has now had three answers to who decides the form. The material alone. The field it hangs in. And here, the thing it runs into. The next answer is the one that outlasts all of them: what happens when the record does not argue itself away, and the encounter stays.\n\nNext: a skeleton that kept the shape of the water it grew in."
+      ],
+      "installed_sha256": "d5aea5882f048a89371051022a72b0703a1dab8a7da16db1ea06dcf42f9310b4"
+    },
+    "SoftBodies_Obsticals_Part2": {
+      "sequence": "softbodies",
+      "index": 122,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "79d1fd31f219018c660f399b64d9e6d88439a0b3c77b255df6ca1e7ce358d2b0",
+      "status": "drafted",
+      "installed_sha256": "565668e968e6574a2dd542bb3dbbd88a4a1d952dea039f6741399d6e55a7ad59",
+      "words": 389,
+      "primary_tokens": [
+        "softbody_gallery_part2"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/softbodies.json"
+    },
+    "SoftBodies_Cloth_Physics": {
+      "sequence": "softbodies",
+      "index": 123,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "cf3155b9676d4c02e9dc81f29d010d78bcc86be19c7641d33c314d316e7fd6c2",
+      "status": "drafted",
+      "installed_sha256": "0fe31a98e0bb4476011be02587103c76757cf3f5fde8e53b6a6d5bc2fbdf049c",
+      "words": 389,
+      "primary_tokens": [
+        "softstopscene"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/softbodies.json"
+    },
+    "SoftBodies_Playground_of_Joy": {
+      "sequence": "softbodies",
+      "index": 124,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "c8373dee6a0b05cfad1eadd52c4e98365c752b1fba746073221ebb201f984b10",
+      "status": "drafted",
+      "installed_sha256": "de89d36c5958ffbb1e0bc362850a9140d6b01a20bba92acfad1024618e9d22bc",
+      "words": 395,
+      "primary_tokens": [
+        "rounded_softbody_test"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/softbodies.json"
+    },
+    "SoftBodies_Affect_Theory_Visualization": {
+      "sequence": "softbodies",
+      "index": 125,
+      "before_sha256": "fd04fa2da02d505dfd26a38abe7cc457fe4ead54065cb01bfb759db0a4b1527d",
+      "before_words": 543,
+      "map_sha256": "433fd53d2da92b96fe8256dc43847f0a6cbf4b01f5ce2aa06d00aa659ae2d465",
+      "status": "existing"
+    },
+    "ProceduralGeneration_Reaction_Diffusion_Systems": {
+      "sequence": "softbodies",
+      "index": 126,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "6b1c31227d9fc039eed8867660a5591b8b28964215a9920bf3598441eab20f45",
+      "status": "drafted",
+      "installed_sha256": "4ad2a94edba3463e46a25bedf042a97ecf56248245bdd8b2f3ba2c3cf7b3c48b",
+      "words": 404,
+      "primary_tokens": [
+        "turing_pattern_generator"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/softbodies.json"
+    },
+    "Topology_Entropy_Morphogenesis": {
+      "sequence": "softbodies",
+      "index": 127,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "58a7cfa16f02fd3aaa8b20ba20a83b4afc534416b05802b3cc1561d3860a4b10",
+      "status": "drafted",
+      "installed_sha256": "f4c7f84a5be30767d79a81fa112ea5954e5070773135bbd15fb1af84dfeba949",
+      "words": 412,
+      "primary_tokens": [
+        "entropy_morphogenesis"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/softbodies.json"
+    },
+    "ISO_Introduction": {
+      "sequence": "isosurfaces",
+      "index": 128,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "f104e5fc1bad3d72c5d606414d06c74adde2a693354547a37078a8590d94a104",
+      "status": "drafted",
+      "installed_sha256": "d48ae5da1f74a9787d5361f06555611edd0e86b52f32fcc7c25b98ef016523cf",
+      "words": 393,
+      "primary_tokens": [
+        "voxel_noise_demo"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_LookupTable": {
+      "sequence": "isosurfaces",
+      "index": 129,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a55e788d3a9b0a091838eb908955b222bce446fdb54b057e4fe6e7c7cb9d6f3c",
+      "status": "drafted",
+      "installed_sha256": "7656ab164789ac128e57747e1b9f4ef86b88796e042662be77cb71593a8c1e28",
+      "words": 397,
+      "primary_tokens": [
+        "fifteen_cases_demo"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_ShapesGallery": {
+      "sequence": "isosurfaces",
+      "index": 130,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "d43b39ead4a257c2c324d430060e9764f1304bf62147270fcc4dceea95ed65b4",
+      "status": "drafted",
+      "installed_sha256": "e4f158a2c5264923af8f55c4f22eab28a9160814786fdc04eb85ffc21a29b321",
+      "words": 393,
+      "primary_tokens": [
+        "mc_shapes_gallery"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_TorusGyroid": {
+      "sequence": "isosurfaces",
+      "index": 131,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "06d173abd83b69a4d854d1812f2f4a4ab35a8f5dd0de5636d4bffa1d39882801",
+      "status": "drafted",
+      "installed_sha256": "ea3976b3fc9139f9fa157fe55a2304fe6a0399dfd134045a39531c315341b67b",
+      "words": 385,
+      "primary_tokens": [
+        "GyroidDemo"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_Sculpting": {
+      "sequence": "isosurfaces",
+      "index": 132,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "9f274a93563ba0941f62808fd37d55ca3b3a235531bb6c94f65ce07946c9952d",
+      "status": "drafted",
+      "installed_sha256": "3f11c6f315742e3dde2813d224830c9175771462723eba7ab2ce94754194fb84",
+      "words": 393,
+      "primary_tokens": [
+        "mc_sculpt_vr"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_FlatTerrain": {
+      "sequence": "isosurfaces",
+      "index": 133,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7400fc95c1d4f735f0f69bcc1e669daa1980f6344ff8d64de69ff02a40893e1a",
+      "status": "drafted",
+      "installed_sha256": "71ba407e9a483ad6b92d9297806ffcb478d1ba68f8afde223c007fb858a884b3",
+      "words": 389,
+      "primary_tokens": [
+        "mc_flat_landscape"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_PortalLandscape": {
+      "sequence": "isosurfaces",
+      "index": 134,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "d77db5177ae840957367875f86deafcc86a2242da0fabd0a460e446ab246c71d",
+      "status": "drafted",
+      "installed_sha256": "f40c475d123f61a759b1d7c07a401a0027de4d2097e4f1e906d5f8b69baf21bc",
+      "words": 399,
+      "primary_tokens": [
+        "marchingcubes_portal_landscape"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_Caves": {
+      "sequence": "isosurfaces",
+      "index": 135,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "99ecb45061987ae113c476f468eebfa56c1b657ea0eefb01ba35153e92ac859c",
+      "status": "drafted",
+      "installed_sha256": "c8fa3b2d81c103b611f7484e61b2fa8964f7847c0cb37e267b7a04f92b9be2dd",
+      "words": 391,
+      "primary_tokens": [
+        "mc_inside_cave"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_CaveGeneration": {
+      "sequence": "isosurfaces",
+      "index": 136,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "2657480d240860d62ab102e0d8308f81781deb9cb042d3af39dc5fc625835c06",
+      "status": "drafted",
+      "installed_sha256": "71d94dd8759c7d5f2a75789c40244b27f37148cc895b87e4015e730909c82e3f",
+      "words": 400,
+      "primary_tokens": [
+        "marchingcubes_cave"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_AnimatedNoise": {
+      "sequence": "isosurfaces",
+      "index": 137,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7f778e5349949c217da94ec9b38f4786d9c0af0bcb7c3bb43905422bcadfef5e",
+      "status": "drafted",
+      "installed_sha256": "bbbdbecab0a0f5d32963beced4a914f7f0cfb0deaa9061f93b37c8ef03b2057e",
+      "words": 385,
+      "primary_tokens": [
+        "animated_noise_explorer"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_Metaballs": {
+      "sequence": "isosurfaces",
+      "index": 138,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "73a4e2e24020c8919d1cd2d3080a0afa81c7271880a8c9ef4df6ba2417684ec7",
+      "status": "drafted",
+      "installed_sha256": "13fd93e27d2d356fcbb6e0641a4163ca8e0c9e40ef1a2d3e35e7cab46496f661",
+      "words": 397,
+      "primary_tokens": [
+        "metaball_world"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_ImplicitModeling": {
+      "sequence": "isosurfaces",
+      "index": 139,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "6aa23fbdf8e724976e4159643f74377a69b5f53125a8cefe20f53e93fc45c7c0",
+      "status": "drafted",
+      "installed_sha256": "62ff4147f00f0b832f2c4e81a13698efb1df5e603283a301ca1cc4ddbb953cd0",
+      "words": 399,
+      "primary_tokens": [
+        "implicit_surface_modeling"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "ISO_RhizomeBody": {
+      "sequence": "isosurfaces",
+      "index": 140,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "fe120fc5d10a4bee18abfb112f016be9dcab651a0a7ca8f4e90cdace86eb9d59",
+      "status": "drafted",
+      "installed_sha256": "4e92761846c77a2bbae6e6e0635c7c06243f369d74cd982725859867f781e624",
+      "words": 415,
+      "primary_tokens": [
+        "rhizome_inside"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/isosurfaces.json"
+    },
+    "Boolean_Verbs": {
+      "sequence": "boolean_surfaces",
+      "index": 141,
+      "before_sha256": "f6029c352fd8965410788bef510863cdfe08ef4e0c7708ae29df46981ba28cf3",
+      "before_words": 1421,
+      "map_sha256": "fbfde713a88542c583ff9afcc9e5c5cbce7c651c8e403599b43577b2a3a0983c",
+      "status": "existing"
+    },
+    "Boolean_Gallery": {
+      "sequence": "boolean_surfaces",
+      "index": 142,
+      "before_sha256": "c99174be04428be6ffad757ad5592cb1fcfa8cca37fd93f84370633d0f3644e3",
+      "before_words": 1755,
+      "map_sha256": "e69fff77aab674f969e50b3b3e91a940fac751c5785ab486797448566696384b",
+      "status": "existing"
+    },
+    "Boolean_Works": {
+      "sequence": "boolean_surfaces",
+      "index": 143,
+      "before_sha256": "59b3e5b0809ca20248f56157c5fdc97fe9279d742b17ead465f4826444eb0085",
+      "before_words": 2230,
+      "map_sha256": "e6e4a26f8ef8b57a7e0b143d83a668b7c1cef8e123d49a9b82a96f17b80947ab",
+      "status": "existing"
+    },
+    "SwarmIntelligence_PhysarumColony": {
+      "sequence": "swarmintelligence",
+      "index": 144,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "bc26039f9496d9e4218d50c5b5e2e72c6ea474a390131c482e8a89235400c833",
+      "status": "drafted",
+      "installed_sha256": "2a527b6831544109fd080fbcee3dfd9b70f975bc5de68d6d905ac7bd2083ec60",
+      "words": 404,
+      "primary_tokens": [
+        "PhysarumColony"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "SwarmIntelligence_FlowFields": {
+      "sequence": "swarmintelligence",
+      "index": 145,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "df55a34da73c97ed010994975d78395ce1c6b94aee51e08d3201290c4974452e",
+      "status": "drafted",
+      "installed_sha256": "30e9e9ed291ea280b0a5f220e6b6eeeba0a140016e39ec1a4143538af6af947b",
+      "words": 416,
+      "primary_tokens": [
+        "FlowFieldMain"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "SwarmIntelligence_Boids_Algorithm": {
+      "sequence": "swarmintelligence",
+      "index": 146,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "074b54a857290dfd2f4acf4e0017ae75efd2bc1f73ae90781384ff11013bc693",
+      "status": "drafted",
+      "installed_sha256": "ef27362697ecd55e5d7a7db50cfd6ae5ae59a669c7d0047ac2a33fc7fe7a9360",
+      "words": 413,
+      "primary_tokens": [
+        "flocking_controls"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "SwarmIntelligence_Agent_Based_Modeling_ABM": {
+      "sequence": "swarmintelligence",
+      "index": 147,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "8ed87776d65532eb7017922c649ca8690ef6c996f00f6b44e2d9244ebdc64e86",
+      "status": "drafted",
+      "installed_sha256": "6ec78d1a6bb4bcad3b145bc53ee7b630a48326c2d47b093bbc017b5205e73277",
+      "words": 416,
+      "primary_tokens": [
+        "ant_colony_optimization"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "SwarmIntelligence_Ant_Colony_Optimization": {
+      "sequence": "swarmintelligence",
+      "index": 148,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "b9f8d6e49525d00407cb478aff684fb60dd110e1f13ae7238a5aec6627e17770",
+      "status": "drafted",
+      "installed_sha256": "d26e1d5319847d4442e2703636bafaa8fed4985d642837109e3d0302ccbb3ceb",
+      "words": 419,
+      "primary_tokens": [
+        "AntColonyV2"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "SwarmIntelligence_Particle_Swarm_Optimization": {
+      "sequence": "swarmintelligence",
+      "index": 149,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "dd42ab107006a953e454347b48df3b8fe04bb71811ebbc5126c148697ff80dd2",
+      "status": "drafted",
+      "installed_sha256": "89a97dacc128ad10474efd60f43f028b2639b9dacbbcfd5bc812107646b15ab4",
+      "words": 406,
+      "primary_tokens": [
+        "fitness_landscape_politics"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms": {
+      "sequence": "swarmintelligence",
+      "index": 150,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "dae90306000c9a908b2312bf273f57158ab1c0d626e9318b265cf4b5e17e329a",
+      "status": "drafted",
+      "installed_sha256": "9706354bc60e7bfc9f4d24998b6eab48f4f32efbbbfc4b8a090e9a9190ddf290",
+      "words": 415,
+      "primary_tokens": [
+        "ecosystem_simulation"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/swarmintelligence.json"
+    },
+    "ML_Evolution": {
+      "sequence": "machinelearning",
+      "index": 151,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "80cc03c973abdf48708648c391981cbcfb7016c696456211f5f28795f38ca4bc",
+      "status": "drafted",
+      "installed_sha256": "1982cda825c0419b4f97e389dff9e3311d6d44d8f9e08d585b437c3b7c879ccc",
+      "words": 409,
+      "primary_tokens": [
+        "non_teleological_evolution"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Gradient_Landscape": {
+      "sequence": "machinelearning",
+      "index": 152,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "565bcdae76a35913fd72102788888c77d0e4455179b5e34974bd268c2fbe5a9b",
+      "status": "drafted",
+      "installed_sha256": "6795babe138f9416e8699971868293245c5772360551cd46a07479f8bff9c06a",
+      "words": 397,
+      "primary_tokens": [
+        "loss_function_comparator"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Classification": {
+      "sequence": "machinelearning",
+      "index": 153,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "b9fe57ce05f08610b745b31f37aa7305ba1ff2af584d13ebc0ed66c752bb6db0",
+      "status": "drafted",
+      "installed_sha256": "1f1fbee4a528691e9b37ad9429617be4b6d73f96fd34ad1f0e72cbe241a6d2e0",
+      "words": 417,
+      "primary_tokens": [
+        "enhanced_kmeans"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Neural_Networks": {
+      "sequence": "machinelearning",
+      "index": 154,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a17e4d5fd22c56ad39c9e588ea89c3311683fc6c534967b060824df48ab9b15d",
+      "status": "drafted",
+      "installed_sha256": "654ee502f50169df70ab30f1e754bf0708dbe9efafe93435ec2e7903d5a5d70c",
+      "words": 398,
+      "primary_tokens": [
+        "neural_network_visualization"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Perception": {
+      "sequence": "machinelearning",
+      "index": 155,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "66d00146dc352a3cb74fd00c373de6990e8c6fc2d926149339d468780b3a3e4c",
+      "status": "drafted",
+      "installed_sha256": "686ca6d3b2791614b6a686f946a81ff17d692372c9350ac364c6dc678a7a0b12",
+      "words": 387,
+      "primary_tokens": [
+        "computer_vision_vr"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Sequence_Memory": {
+      "sequence": "machinelearning",
+      "index": 156,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a440e81cfcfd322ea101d64b151b57f1ce2fa900db8610519d8cd27cfd040be5",
+      "status": "drafted",
+      "installed_sha256": "971490b3dfe4fcd40ca80aae3250d71630e53fd3639b2006ee622737cf3ce5f0",
+      "words": 397,
+      "primary_tokens": [
+        "lstms_vr"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Generative": {
+      "sequence": "machinelearning",
+      "index": 157,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "e3c4371fc4cc586c7c8af70a3cc3a0dcb6bf5d88a523e0d53e5c8ec843bdedc1",
+      "status": "drafted",
+      "installed_sha256": "923305fd32806ca72863e89059b90461b449d5f46a46ac1c8a03eb93b78d81e1",
+      "words": 401,
+      "primary_tokens": [
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "ML_Synthesis": {
+      "sequence": "machinelearning",
+      "index": 158,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "e4346e3782296b62ee4c7926e4c76cebe9531cb3ab98c768ae368546d7a77020",
+      "status": "drafted",
+      "installed_sha256": "aa7d3958ace196298215d1f9e7fd01f05e64a6696e22bc9df23860d40c21dc19",
+      "words": 401,
+      "primary_tokens": [
+        "anomaly_detection"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/machinelearning.json"
+    },
+    "GT_Foundations": {
+      "sequence": "graphtheory",
+      "index": 159,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "760a28e902eead601a237d86ecc0dd0154daa4d61ba8586b429e7457e3e4423a",
+      "status": "drafted",
+      "installed_sha256": "7e7e883c45e3c3d7f250584cef53e65d99c25e0d3ccdb928f70e02dd3be18dfc",
+      "words": 394,
+      "primary_tokens": [
+        "two_travelers"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Layout": {
+      "sequence": "graphtheory",
+      "index": 160,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "f3273bf4d179fb63dd0ccd27027da236f93aeac316842477ff57084498677c4d",
+      "status": "drafted",
+      "installed_sha256": "d611d7eebda2f9e71cf4b2b56f38f1df5adf47bcc4381975983ec359e406659e",
+      "words": 394,
+      "primary_tokens": [
+        "force_directed_layout"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Pathfinding": {
+      "sequence": "graphtheory",
+      "index": 161,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "b8a333adc5bb403e0ad0bedb13171885ccb7d74375a6f67a7446c6c9ef9f08fa",
+      "status": "drafted",
+      "installed_sha256": "be4cae950e37a4c187602ef3eda78a94746419501008ff005a2b2f9e8f903d28",
+      "words": 403,
+      "primary_tokens": [
+        "impatient_river"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Network_Analysis": {
+      "sequence": "graphtheory",
+      "index": 162,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7028c44b7ff027d269bae2ae88c4314ae0992bbfcca1f2e4524eb514570377f4",
+      "status": "drafted",
+      "installed_sha256": "67b9122dbc9cdfb22ffcf7655c553923055ff433749ff58b4b0d1cf5e7263936",
+      "words": 393,
+      "primary_tokens": [
+        "network_analysis"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Connectivity": {
+      "sequence": "graphtheory",
+      "index": 163,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "3aa5970405e8a8459a387ccd95f8232fb59aab5a36eb1dd05303b6554f8f01c5",
+      "status": "drafted",
+      "installed_sha256": "e657d9ac21123ee3f42f0bb4742c7d3db1864212e56fbe50f03ba26b579c7812",
+      "words": 402,
+      "primary_tokens": [
+        "tarjan_algorithm"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Spanning_Trees": {
+      "sequence": "graphtheory",
+      "index": 164,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "2bb490dcfe7a0cd4e47068a8e34a38443972129552bf2d90f93127cd9e318256",
+      "status": "drafted",
+      "installed_sha256": "22a212a47d918e95e32e9a259b8d155312604bf6bac3367105536775c1181434",
+      "words": 391,
+      "primary_tokens": [
+        "mst_visualization"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Flow": {
+      "sequence": "graphtheory",
+      "index": 165,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "2d921f58a6fcecd1f787bd516fb756ab447264a3909e37518dbf4d5564c6e780",
+      "status": "drafted",
+      "installed_sha256": "246c007bc670ab87e9e8f0579570b08e2d5a6f60fe476726e9a87dcf991673b0",
+      "words": 398,
+      "primary_tokens": [
+        "push_relabel_algorithm"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "GT_Matching": {
+      "sequence": "graphtheory",
+      "index": 166,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "4469d6a1f75d10313e706631de37d696f3f51bb4d93aff0d471bda665e332fe1",
+      "status": "drafted",
+      "installed_sha256": "086247b960405eca435aaa0c897ea90e5ed0f537cf1ebead258e606e512bbe10",
+      "words": 399,
+      "primary_tokens": [
+        "edmonds_algorithm"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/graphtheory.json"
+    },
+    "Euclid_Parallel": {
+      "sequence": "foundationscrisis",
+      "index": 167,
+      "before_sha256": "24219c28503d382a8bd6fab129aa8c58f7350729e7a7295049c58fb4ed1d7fcb",
+      "before_words": 1595,
+      "map_sha256": "790f5367e304ca17da1d88500339f0cbc733127479b394d0d1e6fa362c2ece4d",
+      "status": "existing"
+    },
+    "NonEuclidean_Spaces": {
+      "sequence": "foundationscrisis",
+      "index": 168,
+      "before_sha256": "c52511e05a8b13f1a544812a9031df8d33c6c4a7949c8e3f75caa9ab8792fe9a",
+      "before_words": 1109,
+      "map_sha256": "bbe7c21e81f5470f3b88a895a9a5d7d21854e96ab9c7f8c0ddc953e3cc8b997d",
+      "status": "existing"
+    },
+    "Russell_Paradox": {
+      "sequence": "foundationscrisis",
+      "index": 169,
+      "before_sha256": "e548e10b8e76d79e198099afd722985c0eac90fe239ca484ddf8d1c5244df4ce",
+      "before_words": 958,
+      "map_sha256": "ce5c25308fc1bed5e105e4801fd39340d0aef77ce674deefe7bf7f24e58090ee",
+      "status": "existing"
+    },
+    "Godel_Incompleteness": {
+      "sequence": "foundationscrisis",
+      "index": 170,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "66b66fb794e972e07c939da6e23e5c14e5877c045bf4f6c9d69e0e0b09e0d97c",
+      "status": "drafted",
+      "installed_sha256": "5b0be4a63f7de2c246cf04c4a888a9d412abc183dc6b15b882ecab5842a39b6c",
+      "words": 438,
+      "primary_tokens": [
+        "godel_sentence_machine",
+        "provability_sorter"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/foundationscrisis.json"
+    },
+    "Escher_Impossible": {
+      "sequence": "foundationscrisis",
+      "index": 171,
+      "before_sha256": "52cd6050a999a1fbb8833f2220876120b7f741111e795735a8505007358def89",
+      "before_words": 1172,
+      "map_sha256": "d56edc7d947587a4d62cb78f4d219938c0a0d70c4e0f1a88e7ba0c0920965a63",
+      "status": "existing"
+    },
+    "Brouwer_Intuitionism": {
+      "sequence": "foundationscrisis",
+      "index": 172,
+      "before_sha256": "0007c103b870c74b5166cb6f56eeb095b33282bddc3d47744edd387d9f683fd0",
+      "before_words": 1289,
+      "map_sha256": "935ef967270289b2467531142aa26968bf7aae74eab8e0f51bbd147d3c1523d5",
+      "status": "existing"
+    },
+    "Florensky_Paraconsistent": {
+      "sequence": "foundationscrisis",
+      "index": 173,
+      "before_sha256": "d83ca81cc54c89cdb3063afc981587d2748c67ad12d4e1150f8aa98a17360c18",
+      "before_words": 929,
+      "map_sha256": "0221a080257da0cfc55a22d1b7abd89246b38d5f0f07c34585913f6b9cc6dc70",
+      "status": "existing"
+    },
+    "Crisis_Synthesis": {
+      "sequence": "foundationscrisis",
+      "index": 174,
+      "before_sha256": "0ac964e00ea1ba1baf047bb1de87f1b0a009aacb204dcc8b534a0e79e886f953",
+      "before_words": 1317,
+      "map_sha256": "fe88cb7abc4f4bc5a380f44de33124360b58e3fa8af11bae9c2a7ccb2eb7fef2",
+      "status": "existing"
+    },
+    "QFEP_Introduction": {
+      "sequence": "qfeplaboratory",
+      "index": 175,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a9fb851dbfe5ea24a46be18562db3ae8e29188041d16eee2628319b3dc743d63",
+      "status": "drafted",
+      "installed_sha256": "c768c5bb38adc6ea85cdb257517c5bf3be0cdc69f0cc3e26bf3646f2b0246f2a",
+      "words": 406,
+      "primary_tokens": [
+        "qfep_balance_workbench"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_F_Term": {
+      "sequence": "qfeplaboratory",
+      "index": 176,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "540d4c281d0761c4fde7050cdc0631afe945f65fc84eac39e18373b75afd2a07",
+      "status": "drafted",
+      "installed_sha256": "db3e855ee8ee0bd10b5850a202ab459792189145e0c15a07bdce6d9f6c08fb98",
+      "words": 400,
+      "primary_tokens": [
+        "shannon_workbench"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_E_Term": {
+      "sequence": "qfeplaboratory",
+      "index": 177,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7c71b092d63872a5887b566e17cef4256ec2d9c2e2ac983769f02bdcf7805187",
+      "status": "drafted",
+      "installed_sha256": "4b6e0ea0d9b5cfe06cd4c3922fbe411626802356d9d1f8b0eafd4f22504ee1dc",
+      "words": 412,
+      "primary_tokens": [
+        "entropy_fan"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_Lambda_Spectrum": {
+      "sequence": "qfeplaboratory",
+      "index": 178,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "7dd94aace534b5afa669a77468475058c9a90fa2366cea55c5ed350eea4e527b",
+      "status": "drafted",
+      "installed_sha256": "d9c6a196f31f52fc58b861a2a7cbaf5555cca54bd2b0a4dc712a22e9c3d8eb4e",
+      "words": 408,
+      "primary_tokens": [
+        "lambda_hall"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_Phi_Term": {
+      "sequence": "qfeplaboratory",
+      "index": 179,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "432bdd29c25e48a2cb592e30804bc24151a9eb2ca466a0f8faf3d6ed3d06ec03",
+      "status": "drafted",
+      "installed_sha256": "207244a11537a994772442c850d74b68b010448eb2fef08a4d2cc93738661b3a",
+      "words": 396,
+      "primary_tokens": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_Edge_Of_Chaos": {
+      "sequence": "qfeplaboratory",
+      "index": 180,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "6c4b7c923668899ba4680f6fbc9a2dffaae64e3f5d9d67c8f523d12691de2fa2",
+      "status": "drafted",
+      "installed_sha256": "8009d98019dee94d7af9f418e9dbe2bff90926f93dcf8b8629076121825b1c59",
+      "words": 414,
+      "primary_tokens": [
+        "edge_of_chaos_unlocked"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_Sandbox": {
+      "sequence": "qfeplaboratory",
+      "index": 181,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "588ad04da5f7bb2a070ad748be32bf127e6099c047b44169649fecb56677f8d9",
+      "status": "drafted",
+      "installed_sha256": "83f19c6d22526e30b752d9ecac115b28d2116fc3edd43a36ea8e08793dca736f",
+      "words": 409,
+      "primary_tokens": [
+        "lambda_slider",
+        "phi_slider"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "QFEP_Synthesis": {
+      "sequence": "qfeplaboratory",
+      "index": 182,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "a5b39c7373a571d695057fcc38a8bad7b29f6a099a1831410d91e24e04b31859",
+      "status": "drafted",
+      "installed_sha256": "5b9f36701d1416b8fa4b3836659aa9d3e9d1d061354851a0d6b4532d86a3cc25",
+      "words": 406,
+      "primary_tokens": [
+        "queer_morphology_specimen"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/qfeplaboratory.json"
+    },
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization": {
+      "sequence": "postfoundationscrisis",
+      "index": 183,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "3a2fdf3db30d8a7c6fa00e2f76edd5fe446cf9383f15055258e051ca7a9317af",
+      "status": "drafted",
+      "installed_sha256": "fd166e9333d7689f5f9d832cf95970d363681e6a8fb53b41012297c441ac4dbb",
+      "words": 400,
+      "primary_tokens": [
+        "bias_from_inside"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "CriticalAlgorithms_Applied_Ethics": {
+      "sequence": "postfoundationscrisis",
+      "index": 184,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "e35d06b6a50cf97055f270f8511a4bd600d3e1ef138bc072e25d829d3d1e5696",
+      "status": "drafted",
+      "installed_sha256": "7db30dc9f21f55ee017866c29f416dec579e1dbb270d4784bbf586b4fdfd714d",
+      "words": 396,
+      "primary_tokens": [
+        "room_shape_demonstrator"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "SpeculativeComputation_Paraconsistent_Engineering": {
+      "sequence": "postfoundationscrisis",
+      "index": 185,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "8e77b351cfc104bdcd980c81f25a122c8ebeb64a4b85bf27a1314713fc1b0d31",
+      "status": "drafted",
+      "installed_sha256": "7b954bc820c5f73bfeecebb29bc0cc65418067aa810a1dc89cbe47fbc9a9de66",
+      "words": 405,
+      "primary_tokens": [
+        "merge_conflict_visualizer"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "SpeculativeComputation_Situated_Computation": {
+      "sequence": "postfoundationscrisis",
+      "index": 186,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "ac30de151668288af3792cd9b9f6e7aeb465a4356a502dc3fd6b00ed4c04ef86",
+      "status": "drafted",
+      "installed_sha256": "3cabe65f9cd1b114ba45c55729761d05c1c11eed5b05c19b0f0a454f98a5b4fd",
+      "words": 396,
+      "primary_tokens": [
+        "situated_readout"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "SpeculativeComputation_Collective_Knowledge": {
+      "sequence": "postfoundationscrisis",
+      "index": 187,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "ab407d37b940c92a720c16c6e8ea75bb3eea74333f562f86d38c14007395c0bd",
+      "status": "drafted",
+      "installed_sha256": "9457cd1c88676de412d7bcdc7b04d61d17a8f454ca05fbce7dcc330254566c51",
+      "words": 406,
+      "primary_tokens": [
+        "peer_production_tool"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "SpeculativeComputation_Rhizome_Network": {
+      "sequence": "postfoundationscrisis",
+      "index": 188,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "edd8d96385a47740672acf16547c36d36818609aec2f753bfd33d555f265f125",
+      "status": "drafted",
+      "installed_sha256": "cbcc061a9fc89e4683fc3dd9d7eef80ea9ca91b06d948535ebac1146a3b89bc8",
+      "words": 408,
+      "primary_tokens": [
+        "rhizome_grower"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "AdvancedLaboratory_Lab_Equipment_Simulation": {
+      "sequence": "postfoundationscrisis",
+      "index": 189,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "15f3311f2526065cc89ce227fb657b93a51a3f9948b9eed499789586b2c5d8df",
+      "status": "drafted",
+      "installed_sha256": "a0c790e5d1f585197bd3257769b74d7b96d65cf16472b886aa5db5055ca7de44",
+      "words": 411,
+      "primary_tokens": [
+        "MolecularDesigner"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    },
+    "PostCrisis_Synthesis": {
+      "sequence": "postfoundationscrisis",
+      "index": 190,
+      "before_sha256": null,
+      "before_words": 0,
+      "map_sha256": "432c91d0eeeff41f5d0250e7da9e88ab435944eb679682b3ddf441faa920affb",
+      "status": "drafted",
+      "installed_sha256": "0959be9f226807a885a6054f15b5634d43c6cc143aec71735771f7ab3b1bbd65",
+      "words": 426,
+      "primary_tokens": [
+        "accountability_ledger"
+      ],
+      "evidence": "doc/book/iterations/2026-09-08-focused-book/evidence/postfoundationscrisis.json"
+    }
+  }
+}

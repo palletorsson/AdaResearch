@@ -1,0 +1,49 @@
+--- before/commons/maps/Point_One/intent.md
++++ commons/maps/Point_One/intent.md
+@@ -1,16 +1,39 @@
+ # A body for a position
+ 
+-The same name meets an absence, a white surface, a solid sphere and a black sphere you can carry. The coordinate frame follows the carried body. Before leaving, the point grows larger than your hand.
++## We arrive with
+ 
+-Second chapter of Primitives. Let the reader notice a difference before naming its construction. The body tests whether a visible limit also resists or can be carried. Keep coordinates and tolerance concrete; allow the final sphere to remain a sculpture, not only an explanation.
++Day Zero has established opening, editing, saving and running a supplied project. Point Zero has let us arrive in a world already at work. The first tutorial may borrow the prepared environment; it must introduce the position itself.
+ 
+-Let the encounter read continuously. final.md keeps the single position line, while the prose carries the distinctions between position, appearance, resistance and holding. Longer construction and syntax belong to the separate making passage in tutorial.md, following the encounter rather than competing with it on a facing page.
++## Here we investigate
+ 
+-The making passage keeps the reduced real construction and complete working scripts. Short code earns a place in the main text only when its wording helps the current encounter; line count alone does not measure cognitive load. The reader can understand the situation before choosing to build it.
++What must be attached to a position before it can be seen, resist a body or follow a hand? The repeated name, Point one, crosses absence, surface, collision and holding. A coordinate locates something without exhausting what it can become. The closing sphere remains a sculpture as well as a return to the question.
+ 
+-Preserve the naming question, the choice to make surfaces coincide, the limits of a report, arrival without an intention test and the closing sculpture. Pickup is a borrowed museum system; it need not be taught in full to make its different relation felt.
++## The encounters
+ 
+-The study and tutorial supply the first making step: arrange visible and solid points with different positions and sizes. The fuller target remains a student work that can also use a supplied pickup body and movement. Do not claim the fixed-camera study already provides that portable XR kit. See doc/book/STUDENT_TOOLBOX.md.
++The hall, main text and tutorial are overlapping selections. They have different jobs.
+ 
++| Encounter | Work in the hall and main text | Work in the first tutorial |
++| --- | --- | --- |
++| point_absent, point_visible | Distinguish an address from the body used to show it | Keep a Vector3 position; place and reveal a supplied marker |
++| point_solid, point_held | Compare seeing, resistance and being able to carry something | Retain as encounters; borrow their behavior rather than teach physics or XR pickup here |
++| CoordinateSystem3M, coordinate_readout | Locate the held point; encounter reference, rounded reporting and finite guides | Change X, Y and Z in one fixed reference; guides are supplied explanatory objects |
++| drag_point_target | Let different gestures satisfy one arrival rule; intention remains outside the test | Defer distance thresholds, rearming and triggering |
++| point_pedestal | Give the same name a body larger than the hand; a pause before departure | No further code required |
+ 
+-Day Zero, in the preface, handles editor/project setup, running and saving, and the separate headset route. Point One assumes that preparation. Its study inherits the supplied base.tscn; it introduces point construction rather than explaining how to start Godot again.
++The distance arrow helps someone understand coordinates. Its construction is outside this first lesson. Neither a technical helper nor an atmospheric object needs to become another coding task.
++
++Current placement is recorded in artifacts.md. The case, force point, Fontana, snap sphere, floating field and other retained works remain secondary. Do not promote them simply because they exist, or remove them merely because the tutorial does not use them. Give an object a reason to occupy attention: comparison, contradiction, return, bodily consequence, pleasure or rhythm. If no relation can be found, reconsider its placement. This writing pass changes no museum placement; it does not claim that the present density has been walked and resolved.
++
++## We learn to make
++
++Keep a position, use a supplied sphere to mark it, change one coordinate at a time, and give a second marker another position. Both addresses use the same reference. The marker has a radius; the position has coordinates.
++
++The working material is doc/book/studies/point-one/coordinates.tscn with points.gd and the Day Zero base. A, B and the guides are provided in the scene. No undefined helper functions enter the lesson. Constructors, collision, pickup, text formatting, world/local conversion and target tests are deferred. The previous construction study is retained separately for readers who want it.
++
++## We leave with
++
++Two named positions, a and b, and the ability to arrange their visible markers independently. Point Lines should start by connecting these positions before multiplying them. Trace can later retain successive positions; the grid selects addresses; three non-collinear positions can bound a triangular face. This is a lineage of added relations, not permission to teach every later operation here.
++
++## Writing decision
++
++Keep final.md as the continuous encounter, with its single position line and the critical distinctions carried by the prose. The first tutorial is read separately. Only its source-reference footnote needs to follow this narrower making exercise. A correct program, an intelligible lesson and a compelling room require different evidence; native execution alone cannot settle the last two.

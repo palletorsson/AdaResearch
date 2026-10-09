@@ -1,0 +1,279 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Trans_Pit · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Trans_Pit">← Tutorial lineage</a></p><h1>Trans Pit</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Trans_Pit/final.md">Raw captured source</a></p><pre># The Moving Boundary
+
+A wall can arrive on level ground. You can wait beside its path, or step into the space it is about to occupy.
+
+Three rooms in a row: translating blocks, turning slabs, growing cubes. There is a way around the first lanes and room to watch the others from beside them. The ground stays level. An opening can disappear while you stand still.
+
+## Translation, from inside
+
+&lt;!-- @pusher_block --&gt;
+
+Three red blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.
+
+The script keeps a fraction, `_t`, for its place along the journey: zero at the start, one at the far end. It places the block between those endpoints:
+
+```gdscript
+var target_pos: Vector3 = _start_pos.lerp(_end_pos, _t)
+_body.global_position = target_pos
+```
+
+Each block travels two metres, but they take different times and their pauses differ. Two advance along Z; the third goes the other way. An opening that works for the first does not give you the timing of the next.
+
+The block keeps its dimensions. Standing where it wants to be, you meet a wall that arrives. The displacement that carried you in an earlier hall can also occupy your place. Beside these lanes, open floor lets you walk around.
+
+&lt;!-- @ --&gt;
+
+## Rotation, from inside
+
+&lt;!-- @rc --&gt;
+
+The middle room has two orange turning slabs. Watch one end while the centre stays put. Each makes a quarter-turn, waits, then reverses. Their different pauses let one begin while the other still holds its place.
+
+```gdscript
+mesh_instance.rotation_degrees = rotation_axis * current_angle
+static_body.transform = mesh_instance.transform
+```
+
+The collision follows the visible angle. These upright wall profiles offer a broad face to the route, then a narrow edge. Their dimensions stay the same as the clearance beside them changes. The middle route lets you keep your distance.
+
+Look at the floor just beyond a slab&#x27;s present edge. It is empty now. Follow the edge into it. The space this slab sweeps through is larger than the space one pose shows. Your place can become part of its turn without you taking a step.
+
+Balls arrive from the side platforms as well. There is more than one clock here, and their movements do not wait for you to finish comparing them.
+
+## Scale, from inside
+
+&lt;!-- @grower_block --&gt;
+
+The last room has three cubes sharing a tempo. Wait before approaching. They grow anyway.
+
+The previous hall&#x27;s blocks made room when you came close. Here their size follows elapsed time. Walking towards them, standing still and turning away all leave the same clock running.
+
+For this floor-anchored configuration, the size factor comes from:
+
+```gdscript
+var t: float = (1.0 - cos(_time)) * 0.5
+var current_scale: float = lerpf(min_scale, max_scale, t)
+```
+
+Cosine carries `t` from zero to one and back; `lerpf` places the size between its two limits. All three cubes move from thirty centimetres to three and a half metres on a side, then return together.
+
+![At its smallest, the green cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
+
+![At full size, the same cube fills the view from the same position.](/book-review/doc/book/figures/Trans_Pit/growers-large.png)
+
+*The same view at two moments in the cycle. At its smallest, the cube leaves the final door visible beyond it. At its largest, it fills the view. The camera has not moved.*
+
+Watch a bottom edge. It stays on the floor. The mesh and collision box grow together, with their centres kept half a side-length above that edge. Growth takes space upwards and sideways rather than passing through the ground.
+
+As a cube expands, its colour warms. The gap beside it narrows, then widens again. All three axes scale equally, so the cube keeps its proportions. The gap has no such guarantee. Your available space is the remainder after its growth.
+
+&lt;!-- @ --&gt;
+
+## What returns
+
+The block returns to its starting place, the slab to its earlier angle, the cube to its small size. You may still be waiting, or already be on the other side. An object can recover its pose while your encounter with it continues.
+
+Which body can use the opening? Width, pace and the collision shape assigned to you all matter. A gap may admit you before you are ready to cross. There is room here to wait, watch or take the way around.
+
+## Make room
+
+&lt;!-- @transformation_airlock --&gt;
+
+After the growing cubes, two armoured leaves meet inside a heavy frame. These wait for your arrival. Approach, then stop. Follow the bright strip along one leaf.
+
+It moves sideways and up. It turns through a quarter-turn. Then it becomes smaller, drawing its armour into a recess beside the opening. The frame has stayed still. The passage has changed.
+
+![The same door closed, partway through its turn, and fully open with the leaves reduced into their recesses.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/make-room.png)
+
+*Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.*
+
+The door keeps a fraction of its opening, from zero to one. Three overlapping intervals of that fraction drive position, angle and size:
+
+```gdscript
+var factor: float = lerpf(1.0, 0.34, operations.z)
+var at := Vector3(side * lerpf(0.75, 2.15, operations.x), lerpf(1.4, 2.0, operations.x), -0.26)
+var turn := Basis(Vector3.BACK, side * operations.y * PI * 0.5)
+```
+
+`side` gives the leaves opposite directions. The local Z axis points through the doorway, so these turns happen across its face. Each leaf ends at thirty-four percent of its original size. Its collision shape changes with it: the visible opening is also an opening your body can use.
+
+Walk through. The door stays open while someone is near it. Once everyone leaves its clearance area, it waits three seconds and reverses. You can return from the other side and open it again. Its welcome has a reach, a width and a waiting time, each chosen in advance.
+
+These are the same three operations we added to the pickup cube at the beginning of the sequence. There they made a small object conspicuous. Here they make room for you.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Trans_Pit/tutorial.md">Raw captured source</a></p><pre># The Moving Boundary — read the timed study
+
+The three zones use position, rotation and size as timed obstacles. The floor remains level, and a bypass remains available. Watch a complete cycle from beside the lane before choosing to enter it. The source artifacts are `pusher_block.gd`, `rotation_cube.gd` and `grower_block.gd`; the middle zone also retains four `free_ball_launcher` instances.
+
+## Translate between endpoints, with a pause
+
+The pusher caches a world-space start and endpoint:
+
+```gdscript
+_end_pos = _start_pos + push_axis.normalized() * push_distance
+```
+
+A late grid configuration refreshes this cached endpoint and its direction arrow. Without that refresh, a block configured for Z could keep the default path along X.
+
+During the moving part of its physics update:
+
+```gdscript
+var speed_normalized: float = push_speed / push_distance
+_t += _direction * speed_normalized * delta
+_t = clampf(_t, 0.0, 1.0)
+var target_pos: Vector3 = _start_pos.lerp(_end_pos, _t)
+_body.global_position = target_pos
+```
+
+At `_t = 0` or `_t = 1`, the block waits for `pause_time`, then reverses `_direction`. The moving surface is an `AnimatableBody3D`.
+
+| Placement (x,z) | Direction | Travel | Speed | One-way time | Pause at each end |
+|---|---|---|---|---|---|
+| (3,3) | +Z | 2 m | 1.5 m/s | about 1.33 s | 1.5 s |
+| (7,3) | +Z | 2 m | 2 m/s | 1 s | 1 s |
+| (5,5) | −Z | 2 m | 1.8 m/s | about 1.11 s | 1.2 s |
+
+Each token places the block centre 0.49 m above the floor, half its 0.98 m side. Its cached endpoints therefore keep the whole block above the deck. The three paths are separate and stop before the solid transverse walls. The eastern route avoids these lanes. Compare travel and waiting by choosing a lane, rather than treating progress through the room as proof that its timing was learned.
+
+## Rotate a wall profile
+
+The middle zone places `rc:90:y:4:-0.6` and `rc:90:y:3:-0.6`. These are step-and-pause rotation cubes, not continuous revolving walls. Their box profile is 2.2 × 2.2 × 1 metre; the authored vertical offset sinks part of that profile below the deck.
+
+```gdscript
+mesh_instance.rotation_degrees = rotation_axis * current_angle
+static_body.transform = mesh_instance.transform
+```
+
+The angle moves between zero and ninety degrees around Y at 45 degrees per second. Each turn takes two seconds; pauses are four and three seconds respectively. Measure the available width beside a slab at both orientations. Its own dimensions are fixed while its projection across the route changes.
+
+## Grow from the floor on a clock
+
+All three map tokens specify `min:0.3`, `max:3.5`, `speed:0.15`, `anchor:floor`, and `plinth:0`. Configuration reaches the live artifact.
+
+```gdscript
+_time += delta * grow_speed * TAU
+```
+
+For floor anchoring, the interpolation value is:
+
+```gdscript
+var t: float = (1.0 - cos(_time)) * 0.5
+var current_scale: float = lerpf(min_scale, max_scale, t)
+```
+
+All three growers share this rate and small starting configuration. The cosine starts this configuration small. A complete cycle takes `1.0 / grow_speed`, about 6.67 seconds. No visitor distance is read.
+
+The artifact sets the same side length on its mesh and collision box. It keeps their centres half that length above the root&#x27;s floor position:
+
+```gdscript
+var centre_y: float = s * 0.5 if anchor == &quot;floor&quot; else 0.0
+_col_shape.position.y = centre_y
+_mesh.position.y = centre_y
+```
+
+The `AnimatableBody3D` origin remains fixed. Updating the child geometry avoids its physics synchronization restoring an old body position while the collision shape has already changed size. Existing placements without `anchor:floor` retain their centre-anchored sine cycle.
+
+## What to compare
+
+Ask what stays invariant in the object, then ask what happens to the visitor&#x27;s available space. Translation preserves the object&#x27;s dimensions; rotation preserves its internal distances; this positive uniform scaling preserves proportions. Nonuniform scaling would change those proportions.
+
+The legacy fire utilities have been removed, so their flames no longer occupy the observation floor. This is a ground-level study without an enforced failure consequence. A clear route around a lane is part of the current design; do not describe it as a lethal pit or a compulsory timing gate.
+
+Compare clearances for particular bodies. A capsule test checks one radius and height. It does not stand in for all player sizes, locomotion choices or comfort needs.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Trans_Pit/technical.md">Raw captured source</a></p><pre># The Moving Boundary — technical companion
+
+Current museum configuration, 24 September 2026. Canonical map ID: `Trans_Pit`. The display title describes timed boundaries on level ground. The historical technical draft described a lethal pit course and included illustrative implementations that do not match these artifacts; its complete text is retained in the [before snapshot](/book-review/doc/book/iterations/2026-09-23-moving-boundary/before/commons/maps/Trans_Pit/technical.md).
+
+## Three timed studies
+
+The map retains an optional route around the first lanes and room to observe the other studies. All 28 legacy fire utilities were removed on 24 September 2026. Disarming their Area3D detection had left their flame visuals in place, including across the middle route and the floor beside the rotation slabs. The final manuscript therefore makes no claim that failure kills the visitor or that every obstacle must be crossed.
+
+| Encounter | Current placement and rule | Source |
+| --- | --- | --- |
+| Translation | Three 0.98 m pushers at source cells (3,3), (7,3), (5,5), centred 0.49 m above the deck. Each travels 2 m; axes +Z, +Z, −Z; speeds 1.5, 2, 1.8 m/s; endpoint pauses 1.5, 1, 1.2 s. | `commons/hazards/transformation_blocks/pusher_block.gd` |
+| Rotation | Two `rc` utilities turn 90° about Y and reverse, with 4 s and 3 s endpoint pauses. Their wall profiles offer broad faces and narrow edges to the route. Four ball launchers add independent timing in this zone. | `commons/scenes/mapobjects/rotation_cube.gd`; see tutorial.md for the exact configuration. |
+| Scale | Three growers at (3,21), (7,21), (11,21): side length 0.3–3.5 m, rate 0.15 cycles/s, `anchor:floor`. No visitor distance enters this size calculation. | `commons/hazards/transformation_blocks/grower_block.gd` |
+
+The [tutorial](tutorial.md) follows the actual pusher interpolation, reversing turn and growth code. The grower advances its phase by `delta * grow_speed * TAU`; the floor-anchored cosine starts small and completes a cycle in about 6.67 s. Mesh and collision dimensions change together. Their centres remain half a side length above the fixed floor reference. The legacy centre-anchored mode is a different configuration.
+
+These object invariants do not determine a body&#x27;s usable route. Translation preserves dimensions; rotation preserves internal distances; positive uniform scale preserves proportions. Available clearance also depends on placement, timing and the collision body attempting passage.
+
+## The final door
+
+`commons/artifacts/transformation_airlock/transformation_airlock.gd` is placed at (7,29), beyond the timed studies. It deliberately returns to proximity as input. The next sequence, Array, returns to the pickup cube and asks what changes when it has indexed copies.
+
+The frame has a nominal 3 m wide by 2.8 m high opening. Two leaves translate outward and upward, turn in the frame&#x27;s plane, then shrink to 34 percent of their initial dimensions. The three intervals overlap. They share an opening fraction driven toward one over 4.8 seconds while a qualifying visitor occupies the sensor; after three empty seconds it runs back toward zero. Approach from either side can open it. No pickup count or player relocation is involved.
+
+The sensor is an 8.8 × 4.6 × 9 m box, centred 2 m above the root. It accepts the configured player collision layers, then checks for CharacterBody3D or the player/walker groups. This is a programmed recognition of the body, not a universal definition of presence.
+
+Physical leaf bodies retain unit scale. Each leaf&#x27;s convex shape is resized with the visible armour and shares the leaf&#x27;s translated/rotated transform. The opening can admit the museum body before all three operations finish: the mechanism demonstrates composition, not three individually necessary locks. It holds while a qualifying body remains in its clearance area; vacancy, rather than successful collection, allows it to close.
+
+## Shared book figures and current checks
+
+Both figures are native Godot renders of this hall with its current artifact placements, geometry and materials. `tools/probes/moving_boundary_illustrations.gd` runs through `tools/run_encounter_probe.py`, which isolates museum output paths. No live bake or save is replaced.
+
+- **The room keeps time:** one fixed camera, 2 m above the grower floor reference, at the small and large extremes. The probe freezes phase at 0 and π for photography; a separate ordinary-clock check confirms all three grow while the player remains parked away. This is a view down one lane, not an overhead comparison of all three cubes.
+- **Make room:** one fixed camera at 1.7 m above the door&#x27;s floor reference. Selected opening fractions 0, 0.52 and 1 show the closed, turning and reduced poses. These are supplied photographic poses. The subsequent interaction check restores the ordinary proximity controller.
+- **Current interaction evidence:** the actual museum body (0.64 m wide, 1.5 m high) receives walking input to approach, cross and return. The door opens, holds with the body waiting, and closes after the body is parked outside its sensor. The probe also compares visible/physical leaf sizes and the growers&#x27; fixed bases and matching geometry.
+
+All 46 focused checks pass, exit 0. [Runtime report and source manifest](/book-review/doc/book/iterations/2026-09-23-moving-boundary/index.html#evidence). This pass does not repeat the entire pusher/rotation course, demonstrate contact forces for every player rig, or establish headset comfort or learner understanding. Historical endpoint and full-cycle studies remain documented in `commons/testing/probe_transformation_pit.gd`; earlier airlock mechanics and placement evidence are in `doc/space/transformation-airlock-2026-09-17/`.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Trans_Pit/intent.md">Raw captured source</a></p><pre>Concept: Position, orientation and size become optional timed encounters on level ground. The visitor can watch, enter a lane, wait or take the bypass. The question is what an operation preserves in an object and what it changes in the space available around that object.
+
+Sequence role: After Trans_Body. There, proximity opened slats, removed cells and shrank blocks. Here the input is time: motion continues even when the visitor stands still. The final airlock returns to proximity: translation, rotation and scale withdraw two armoured leaves to make a passage. The hall closes the transformation arc before arrays.
+
+Technical angle: Three pusher_block instances travel two metres on +Z, +Z and −Z with different speeds and endpoint pauses. Two rotation_cube utilities turn through ninety degrees around Y and reverse after four- and three-second pauses. Four free_ball_launcher artifacts remain in the middle zone. Three grower_block instances use min 0.3, max 3.5, speed 0.15 and anchor floor. Their visible and physical geometry share the same size and floor reference. None of the growers senses visitor distance.
+
+Critical angle: A transformation can preserve the object&#x27;s dimensions or proportions while withdrawing a route from a body. Mathematical invariants and bodily opportunities describe different relations. Timing matters as much as the eventual configuration.
+
+Key artifacts: pusher_block; rotation_cube utilities (rc), rather than a revolving_wall artifact; grower_block; transformation_airlock as the final combined passage. Ball launchers complicate the timing of the middle zone. Legacy fire utilities were removed on 24 September 2026, including those on the observation floor. The timed bodies remain available to approach or watch from beside them.
+
+Validation: commons/testing/probe_transformation_pit.gd opens the actual endless museum, reads the instantiated map configurations, tests pusher endpoints and pauses, and checks grower mesh/collider agreement and floor contact across a full cycle. This does not establish headset comfort, pushing strength for every player rig. Those remain embodied review questions.
+
+Alignment review 2026-09-17: local display title is The Moving Boundary; canonical map ID remains Trans_Pit. The first and third pushers no longer end in solid walls, and the third has its own lane. Explicit half-height seats keep their cached paths above the floor. Growers keep a common tempo as a repetition study. The closing question is which body can use a clearance, not whether one assumed body survives it.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Trans_Pit/critical.md">Raw captured source</a></p><pre># What a moving boundary permits
+
+On this room&#x27;s level floor, an obstacle can approach without a pit beneath it. There is time to stand aside. The existing way around matters: it gives the visitor a choice about how to encounter a moving boundary. A successful exit is not evidence that the visitor has entered every lane, and a detour is not a failed lesson.
+
+The translation blocks repeat their paths with different pauses. The turning slabs occupy different widths as they change orientation. The growers repeat a common tempo. These distinctions can be watched before they are walked. They offer conditions under which an opening becomes usable, rather than one dramatic consequence for getting it wrong.
+
+An invariant of an object does not decide that relation. The translating block keeps its dimensions, but the available clearance depends on the body beside it. A rotating slab retains its internal distances while changing the width left along a route. Uniformly growing cubes preserve their proportions while the spaces between them contract.
+
+Which body do those gaps fit? A collision capsule has a radius and height; a visitor also has a pace, a viewpoint, a way of controlling movement and a tolerance for moving surroundings. These do not collapse into a single number called passable. A gap can be physically open and awkward to approach, or comfortable to observe and unwelcome to cross.
+
+The three growers share a period. Repetition makes the rhythm easier to perceive, but it does not make every visitor ready at the same moment. The clock offers another opening; the way around offers another route. Keeping both available gives the study more than one legitimate form of participation.
+
+This is the critical force of the room as it now stands. It does not stage irreversible death or demonstrate that transformation must become violence. It lets us inspect how programmed motion distributes room, timing and choice. The mathematics remains exact about the operation. The encounter asks what else must be described before we can say what that operation permits.
+
+The final door turns the question towards hospitality. Its leaves move, turn and shrink when someone approaches. The mechanism makes room, but the welcome still has parameters: a detection area, an opening size, a waiting time. These can be inspected and changed. The same vocabulary that displaced the visitor can support their passage.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Trans_Pit/artifacts.md">Raw captured source</a></p><pre># Trans Pit — Artifacts
+*Transformation: What Stays the Same When Everything Changes · F_order · 2 artifacts*
+
+&gt; Three transformations, three ways to die. A corridor where pushing stones shove you over fire pits. An arena with revolving walls sweeping toward the edge. A room where the center grows and forces you out. Translation displaces, rotation sweeps, scale pressures. The pit below is the same in every case — only the geometry of your removal changes.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## Pusher Block
+![Pusher Block](/scene-catalog/pusher_block.png)
+
+A red cube that translates back and forth along one axis, physically pushing the player into pits. Uses AnimatableBody3D for proper physics collision. The translation transformation made dangerous.
+
+`pusher_block`
+
+## Grower Block
+![Grower Block](/scene-catalog/grower_block.png)
+
+A cube that pulses between tiny and huge, physically pushing the player as it grows. When small you can pass, when large it fills the corridor and squeezes you into the pit. Color shifts from green (safe) to red (danger).
+
+`grower_block`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Trans_Pit/summary.md">Raw captured source</a></p><pre># The Moving Boundary — Summary
+
+Three timed zones turn the chapter&#x27;s transformations into obstacles. The first contains three pusher blocks travelling two metres along configured Z directions, with different speeds and endpoint pauses. The second uses two step-and-pause rotation cubes, plus four ball launchers on the side platforms. The third contains three floor-anchored growers cycling from 0.3 to 3.5 metres at 0.15 cycles per second.
+
+A ground-level bypass remains available around the pusher lanes. The growers share a tempo and respond to time, not approach. Their bottom faces remain fixed while mesh and collision grow together. The previous hall could make room in response to the visitor; this one asks the visitor to read movements already running.
+
+The critical comparison is between an invariant of an object and an affordance of the room. A block can keep its dimensions while occupying a route. A slab can retain every internal distance while obstructing a different width. A uniformly growing cube can preserve its proportions while removing the space beside it. The legacy fire utilities have been removed from the observation floor and routes. This is an optional encounter with timed boundaries, not a forced failure trial. Clearance belongs to the relation between a particular body and the opening, rather than to one universal visitor.
+
+At the end of the simulation route, the transformation_airlock combines the three operations in two armoured leaves. Approach from either side: they slide apart and upwards, rotate in the doorway plane, then shrink into the side recesses. The fixed frame leaves a three-metre-wide, 2.8-metre-high passage. A visitor in the clearance area holds the door open; after three seconds without visitors it reverses. The collision follows the moving and shrinking leaves. The museum observation route remains available.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Trans_Pit/blurb.md">Raw captured source</a></p><pre>Watch a wall arrive, turn edge-on, or grow into the space beside you. Choose a timed lane or its detour. At the end, a pair of armoured door leaves brings translation, rotation and scale together: this time the moving boundary makes room as you approach.
+</pre></section></body></html>

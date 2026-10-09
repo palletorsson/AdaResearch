@@ -1,0 +1,516 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "authored grid ready",
+      "passed": true
+    },
+    {
+      "name": "field and named palette wall placed",
+      "passed": true
+    },
+    {
+      "name": "authored spatial and named layouts active",
+      "passed": true
+    },
+    {
+      "name": "thirty-five pillars",
+      "passed": true
+    },
+    {
+      "name": "every pillar material evaluates its coordinate",
+      "passed": true
+    },
+    {
+      "name": "every address label records its sample colour",
+      "passed": true
+    },
+    {
+      "name": "walking length holds hue and value while saturation rises",
+      "passed": true
+    },
+    {
+      "name": "crossing width changes hue while saturation and value hold",
+      "passed": true
+    },
+    {
+      "name": "field evaluates a colour where no pillar stands",
+      "passed": true
+    },
+    {
+      "name": "floor UV directions agree with position sampling",
+      "passed": true
+    },
+    {
+      "name": "coloured column reaches 4.6m above the base",
+      "passed": true
+    },
+    {
+      "name": "gradient is an unshaded plane over supporting floor",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: field-overview",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: pale-edge",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: sample-address",
+      "passed": true
+    },
+    {
+      "name": "twelve named sets with pickable swatches",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: named-collections",
+      "passed": true
+    },
+    {
+      "name": "actual palette swatch can be picked up",
+      "passed": true
+    },
+    {
+      "name": "held swatch follows supplied movement into the field",
+      "passed": true
+    },
+    {
+      "name": "carrying preserves colour and name",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: carried-colour",
+      "passed": true
+    },
+    {
+      "name": "swatch releases after return",
+      "passed": true
+    },
+    {
+      "name": "original wall placement restored",
+      "passed": true
+    },
+    {
+      "name": "ordinary walking follows saturation between columns",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: within-the-field",
+      "passed": true
+    },
+    {
+      "name": "ordinary walking crosses hues between rows",
+      "passed": true
+    },
+    {
+      "name": "ordinary walking returns toward pale edge",
+      "passed": true
+    },
+    {
+      "name": "body remains on supporting floor",
+      "passed": true
+    },
+    {
+      "name": "walking and holding leave all pillars fixed",
+      "passed": true
+    },
+    {
+      "name": "focused encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "carried_swatch": {
+      "hex": "b87333",
+      "name": "#B87333\nPeru"
+    },
+    "floor_shader": "shader_type spatial; render_mode unshaded, cull_disabled; void fragment(){ vec3 p=abs(fract(vec3(UV.x*0.85)+vec3(0.0,2.0/3.0,1.0/3.0))*6.0-3.0); ALBEDO=0.95*mix(vec3(1.0),clamp(p-1.0,0.0,1.0),mix(0.25,1.0,UV.y)); }",
+    "palette_titles": [
+      "Autumn Melancholy",
+      "Bauhaus School Colors",
+      "Dance Floor Energy",
+      "Desert Sunset Meditation",
+      "Frida Kahlo's Palette",
+      "Harlem Renaissance Jazz",
+      "Hokusai's Great Wave",
+      "Industrial Brutalism",
+      "Pure Joy & Celebration",
+      "Love & Warmth",
+      "Memphis Design Movement",
+      "Mondrian's Primary Composition"
+    ],
+    "samples": [
+      {
+        "hex": "f2b6b6",
+        "local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sample": "Pillar_0_0"
+      },
+      {
+        "hex": "e2f2b6",
+        "local": [
+          3.20000004768372,
+          0.0,
+          0.0
+        ],
+        "sample": "Pillar_0_1"
+      },
+      {
+        "hex": "b6f2d7",
+        "local": [
+          6.40000009536743,
+          0.0,
+          0.0
+        ],
+        "sample": "Pillar_0_2"
+      },
+      {
+        "hex": "b6c0f2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          0.0
+        ],
+        "sample": "Pillar_0_3"
+      },
+      {
+        "hex": "f2b6ec",
+        "local": [
+          12.8000001907349,
+          0.0,
+          0.0
+        ],
+        "sample": "Pillar_0_4"
+      },
+      {
+        "hex": "f29797",
+        "local": [
+          0.0,
+          0.0,
+          3.20000004768372
+        ],
+        "sample": "Pillar_1_0"
+      },
+      {
+        "hex": "d9f297",
+        "local": [
+          3.20000004768372,
+          0.0,
+          3.20000004768372
+        ],
+        "sample": "Pillar_1_1"
+      },
+      {
+        "hex": "97f2c9",
+        "local": [
+          6.40000009536743,
+          0.0,
+          3.20000004768372
+        ],
+        "sample": "Pillar_1_2"
+      },
+      {
+        "hex": "97a7f2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          3.20000004768372
+        ],
+        "sample": "Pillar_1_3"
+      },
+      {
+        "hex": "f297e9",
+        "local": [
+          12.8000001907349,
+          0.0,
+          3.20000004768372
+        ],
+        "sample": "Pillar_1_4"
+      },
+      {
+        "hex": "f27979",
+        "local": [
+          0.0,
+          0.0,
+          6.40000009536743
+        ],
+        "sample": "Pillar_2_0"
+      },
+      {
+        "hex": "d1f279",
+        "local": [
+          3.20000004768372,
+          0.0,
+          6.40000009536743
+        ],
+        "sample": "Pillar_2_1"
+      },
+      {
+        "hex": "79f2bc",
+        "local": [
+          6.40000009536743,
+          0.0,
+          6.40000009536743
+        ],
+        "sample": "Pillar_2_2"
+      },
+      {
+        "hex": "798ef2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          6.40000009536743
+        ],
+        "sample": "Pillar_2_3"
+      },
+      {
+        "hex": "f279e6",
+        "local": [
+          12.8000001907349,
+          0.0,
+          6.40000009536743
+        ],
+        "sample": "Pillar_2_4"
+      },
+      {
+        "hex": "f25b5b",
+        "local": [
+          0.0,
+          0.0,
+          9.60000038146973
+        ],
+        "sample": "Pillar_3_0"
+      },
+      {
+        "hex": "c9f25b",
+        "local": [
+          3.20000004768372,
+          0.0,
+          9.60000038146973
+        ],
+        "sample": "Pillar_3_1"
+      },
+      {
+        "hex": "5bf2ae",
+        "local": [
+          6.40000009536743,
+          0.0,
+          9.60000038146973
+        ],
+        "sample": "Pillar_3_2"
+      },
+      {
+        "hex": "5b75f2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          9.60000038146973
+        ],
+        "sample": "Pillar_3_3"
+      },
+      {
+        "hex": "f25be3",
+        "local": [
+          12.8000001907349,
+          0.0,
+          9.60000038146973
+        ],
+        "sample": "Pillar_3_4"
+      },
+      {
+        "hex": "f23d3d",
+        "local": [
+          0.0,
+          0.0,
+          12.8000001907349
+        ],
+        "sample": "Pillar_4_0"
+      },
+      {
+        "hex": "c0f23d",
+        "local": [
+          3.20000004768372,
+          0.0,
+          12.8000001907349
+        ],
+        "sample": "Pillar_4_1"
+      },
+      {
+        "hex": "3df2a0",
+        "local": [
+          6.40000009536743,
+          0.0,
+          12.8000001907349
+        ],
+        "sample": "Pillar_4_2"
+      },
+      {
+        "hex": "3d5cf2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          12.8000001907349
+        ],
+        "sample": "Pillar_4_3"
+      },
+      {
+        "hex": "f23de0",
+        "local": [
+          12.8000001907349,
+          0.0,
+          12.8000001907349
+        ],
+        "sample": "Pillar_4_4"
+      },
+      {
+        "hex": "f21e1e",
+        "local": [
+          0.0,
+          0.0,
+          16.0
+        ],
+        "sample": "Pillar_5_0"
+      },
+      {
+        "hex": "b8f21e",
+        "local": [
+          3.20000004768372,
+          0.0,
+          16.0
+        ],
+        "sample": "Pillar_5_1"
+      },
+      {
+        "hex": "1ef293",
+        "local": [
+          6.40000009536743,
+          0.0,
+          16.0
+        ],
+        "sample": "Pillar_5_2"
+      },
+      {
+        "hex": "1e43f2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          16.0
+        ],
+        "sample": "Pillar_5_3"
+      },
+      {
+        "hex": "f21edd",
+        "local": [
+          12.8000001907349,
+          0.0,
+          16.0
+        ],
+        "sample": "Pillar_5_4"
+      },
+      {
+        "hex": "f20000",
+        "local": [
+          0.0,
+          0.0,
+          19.2000007629395
+        ],
+        "sample": "Pillar_6_0"
+      },
+      {
+        "hex": "b0f200",
+        "local": [
+          3.20000004768372,
+          0.0,
+          19.2000007629395
+        ],
+        "sample": "Pillar_6_1"
+      },
+      {
+        "hex": "00f285",
+        "local": [
+          6.40000009536743,
+          0.0,
+          19.2000007629395
+        ],
+        "sample": "Pillar_6_2"
+      },
+      {
+        "hex": "002af2",
+        "local": [
+          9.60000038146973,
+          0.0,
+          19.2000007629395
+        ],
+        "sample": "Pillar_6_3"
+      },
+      {
+        "hex": "f200da",
+        "local": [
+          12.8000001907349,
+          0.0,
+          19.2000007629395
+        ],
+        "sample": "Pillar_6_4"
+      }
+    ],
+    "swatches": 144,
+    "walks": [
+      {
+        "arrived": true,
+        "reached": [
+          1.60000038146973,
+          0.000839395856019109,
+          17.5545692443848
+        ],
+        "target": [
+          1.60000002384186,
+          0.0500000007450581,
+          17.6000003814697
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          11.1502552032471,
+          0.000839395856019109,
+          17.6014747619629
+        ],
+        "target": [
+          11.1999998092651,
+          0.0500000007450581,
+          17.6000003814697
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          11.2002410888672,
+          0.000839395856019109,
+          -0.976951122283936
+        ],
+        "target": [
+          11.1999998092651,
+          0.0500000007450581,
+          -1.0
+        ]
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Pillar",
+  "scope": "Isolated production museum. Actual field materials/UVs, native captures, supplied swatch grabber and key journeys through the ordinary controller. No headset, tracked reach, colour calibration, learner or performance claim."
+}

@@ -1,0 +1,6 @@
+# Two encounters, nine retained studies
+
+- **form_grammar_family**, (10,11), facing the entrance: six constructions using existing InsetFaceOp and ExtrudeFaceOp. Unchanged in this extension.
+- **form_grammar_canopy**, (10,31), facing the entrance: one retained cube triangle, that same face with PetalSplayOp, and the same generated data at four times scale. Original operator reused without modification. Two-sided open-surface collision; separate authored supports.
+
+The name petal is an analogy. The generated strips do not form a watertight mesh and do not behave as living or flexible material. The stand and floor provide the stable encounter. Registry metadata and the chapter distinguish these constructions from simulation and from an interactive parameter editor.

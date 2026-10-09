@@ -1,0 +1,556 @@
+{
+  "checks": [
+    {
+      "label": "Arrival is silent; microphone is never started automatically",
+      "passed": true
+    },
+    {
+      "label": "Nine physical buttons, two physical sliders",
+      "passed": true
+    },
+    {
+      "label": "All six absorber panels and three walls follow the surface setting",
+      "passed": true
+    },
+    {
+      "label": "Clear standing space in the room centre",
+      "passed": true
+    },
+    {
+      "label": "Doorway has a clear walking route into the room",
+      "passed": true
+    },
+    {
+      "label": "VOICE has a clear operating position",
+      "passed": true
+    },
+    {
+      "label": "VOICE is reachable from the centre",
+      "passed": true
+    },
+    {
+      "label": "RETURN has a clear operating position",
+      "passed": true
+    },
+    {
+      "label": "RETURN is reachable from the centre",
+      "passed": true
+    },
+    {
+      "label": "SURFACE has a clear operating position",
+      "passed": true
+    },
+    {
+      "label": "SURFACE is reachable from the centre",
+      "passed": true
+    },
+    {
+      "label": "EXIT has a clear operating position",
+      "passed": true
+    },
+    {
+      "label": "EXIT is reachable from the centre",
+      "passed": true
+    },
+    {
+      "label": "record is within working reach",
+      "passed": true
+    },
+    {
+      "label": "record has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "demo is within working reach",
+      "passed": true
+    },
+    {
+      "label": "demo has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "original is within working reach",
+      "passed": true
+    },
+    {
+      "label": "original has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "next is within working reach",
+      "passed": true
+    },
+    {
+      "label": "next has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "auto is within working reach",
+      "passed": true
+    },
+    {
+      "label": "auto has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "replay is within working reach",
+      "passed": true
+    },
+    {
+      "label": "replay has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "reset is within working reach",
+      "passed": true
+    },
+    {
+      "label": "reset has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "exit is within working reach",
+      "passed": true
+    },
+    {
+      "label": "exit has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "ambient is within working reach",
+      "passed": true
+    },
+    {
+      "label": "ambient has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "absorption0.0 is within working reach",
+      "passed": true
+    },
+    {
+      "label": "absorption0.0 has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "absorption1.0 is within working reach",
+      "passed": true
+    },
+    {
+      "label": "absorption1.0 has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "absorption responds to native XR Tools grab on rotated station",
+      "passed": true
+    },
+    {
+      "label": "level0.0 is within working reach",
+      "passed": true
+    },
+    {
+      "label": "level0.0 has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "level1.0 is within working reach",
+      "passed": true
+    },
+    {
+      "label": "level1.0 has an unobstructed interaction ray",
+      "passed": true
+    },
+    {
+      "label": "level responds to native XR Tools grab on rotated station",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Bundled synthetic phrase creates pass zero with a finite tail",
+      "passed": true
+    },
+    {
+      "label": "Demo plays and is labelled as synthetic speech",
+      "passed": true
+    },
+    {
+      "label": "Native output capture contains audible PCM",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Pass counter increments exactly once",
+      "passed": true
+    },
+    {
+      "label": "Repeated passes do not grow the recording window",
+      "passed": true
+    },
+    {
+      "label": "Original voice survives repeated filtering",
+      "passed": true
+    },
+    {
+      "label": "Repeated signal differs from the source",
+      "passed": true
+    },
+    {
+      "label": "Each pass is peak-normalized below full scale",
+      "passed": true
+    },
+    {
+      "label": "Two passes really recurse, rather than replaying one filtered original",
+      "passed": true
+    },
+    {
+      "label": "Dimensions change the computed resonances",
+      "passed": true
+    },
+    {
+      "label": "Original comparison does not reset the experiment",
+      "passed": true
+    },
+    {
+      "label": "REPLAY restores the current generation",
+      "passed": true
+    },
+    {
+      "label": "RESET stops audio and restores the original",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "RESET during processing discards the pending result",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Absorbent and reflective surfaces produce different sound from the same voice",
+      "passed": true
+    },
+    {
+      "label": "Visible surface changes follow the actual audio parameter",
+      "passed": true
+    },
+    {
+      "label": "Changing absorption restarts from the same original for comparison",
+      "passed": true
+    },
+    {
+      "label": "AUTO starts playback",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Finished playback schedules exactly one new automatic pass",
+      "passed": true
+    },
+    {
+      "label": "AUTO / STOP stops the sequence",
+      "passed": true
+    },
+    {
+      "label": "Automatic recursion is bounded at 24 passes",
+      "passed": true
+    },
+    {
+      "label": "Microphone bus is muted to prevent live feedback",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Recording pipeline accepts PCM then closes capture",
+      "passed": true
+    },
+    {
+      "label": "Silence is rejected instead of amplifying microphone noise",
+      "passed": true
+    },
+    {
+      "label": "Recording automatically ends at eight seconds",
+      "passed": true
+    },
+    {
+      "label": "Worker completes without blocking scene frames",
+      "passed": true
+    },
+    {
+      "label": "Synthesis Lab ENTER ROOM now selects the Lucier experiment",
+      "passed": true
+    },
+    {
+      "label": "Leaving the instrument removes only its owned audio buses",
+      "passed": true
+    },
+    {
+      "label": "Arrival does not overlap the exit trigger",
+      "passed": true
+    },
+    {
+      "label": "Complete scene loads through the existing XR wrapper",
+      "passed": true
+    },
+    {
+      "label": "Earlier generative ambient room remains available",
+      "passed": true
+    },
+    {
+      "label": "Return uses the existing staged museum",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "scope": "Desktop source/PCM/native control/geometry tests. Headset microphone permission, comfort and performance untested.",
+  "worker_ms": [
+    103,
+    95,
+    90,
+    99,
+    83,
+    80,
+    88,
+    88,
+    90,
+    100,
+    98,
+    80
+  ]
+}

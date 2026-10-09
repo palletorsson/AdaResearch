@@ -1,0 +1,150 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "existing held station, coordinate frame and two cards loaded",
+      "passed": true
+    },
+    {
+      "name": "named frame follows the existing pickable",
+      "passed": true
+    },
+    {
+      "name": "one frame unit spans 1.5 museum metres",
+      "passed": true
+    },
+    {
+      "name": "station scale preserves the starting-position metre values",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: held-point",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: coordinates-basin",
+      "passed": true
+    },
+    {
+      "name": "printed starting-position edit compiles",
+      "passed": true
+    },
+    {
+      "name": "same held variant begins half a metre higher",
+      "passed": true
+    },
+    {
+      "name": "surface and collider stay attached with equal radii",
+      "passed": true
+    },
+    {
+      "name": "station label remains in place",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: raised-point",
+      "passed": true
+    },
+    {
+      "name": "restored point starts at original position and reporting resumes",
+      "passed": true
+    },
+    {
+      "name": "supplied grab carries the production point",
+      "passed": true
+    },
+    {
+      "name": "world card after movement",
+      "passed": true
+    },
+    {
+      "name": "local card after movement",
+      "passed": true
+    },
+    {
+      "name": "parent-local point address differs from frame-local address",
+      "passed": true
+    },
+    {
+      "name": "moving reference leaves world position fixed",
+      "passed": true
+    },
+    {
+      "name": "moving reference by 1.5 m changes local X by one",
+      "passed": true
+    },
+    {
+      "name": "world card after moving reference",
+      "passed": true
+    },
+    {
+      "name": "local card after moving reference",
+      "passed": true
+    },
+    {
+      "name": "two-decimal report can stay still while position moves",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-decimals",
+      "passed": true
+    },
+    {
+      "name": "printed formatting line exists",
+      "passed": true
+    },
+    {
+      "name": "three-decimal card source compiles",
+      "passed": true
+    },
+    {
+      "name": "printed formatting line exists",
+      "passed": true
+    },
+    {
+      "name": "three-decimal card source compiles",
+      "passed": true
+    },
+    {
+      "name": "world card after formatting edit",
+      "passed": true
+    },
+    {
+      "name": "local card after formatting edit",
+      "passed": true
+    },
+    {
+      "name": "formatting edit leaves the held position unchanged",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: three-decimals",
+      "passed": true
+    },
+    {
+      "name": "supplied release lets go",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "frame_world": [
+      4.5,
+      0.0,
+      12.5
+    ],
+    "same_position": [
+      5.23399925231934,
+      1.12000000476837,
+      11.2689981460571
+    ],
+    "three_decimals": "x = 5.234\ny = 1.120\nz = 11.269",
+    "two_decimals": "x = 5.23\ny = 1.12\nz = 11.27"
+  },
+  "passed": true,
+  "room": "Point_Coordinates",
+  "scope": "Actual museum hall and pickable; synthetic holder uses supplied pickup/release. Printed edits compiled and substituted in memory at existing placements. No production artifacts changed; no physical headset or learner test."
+}

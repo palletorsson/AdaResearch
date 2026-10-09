@@ -1,0 +1,151 @@
+{
+  "actual_endless_museum": true,
+  "captured_narrow": true,
+  "captured_wide": true,
+  "failures": [],
+  "grid_position": "(5.5, -0.5, 5.5)",
+  "headset_verified": false,
+  "map": "Trans_Rotation",
+  "results": {
+    "NARROW": [
+      {
+        "band": "X",
+        "elapsed_s": 5.14999999999999,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": -0.506902158260345,
+        "position": [
+          13.0,
+          -0.506902158260345,
+          35.9995346069336
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 6.89953422546387,
+        "width": 0.44
+      },
+      {
+        "band": "Y",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          20.0,
+          0.000934190466068685,
+          43.1333122253418
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0333118438721,
+        "width": 0.44
+      },
+      {
+        "band": "Z",
+        "elapsed_s": 3.68333333333333,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0445365905761719,
+        "lowest_y": 0.0000512138940393925,
+        "position": [
+          26.9554634094238,
+          0.0494710318744183,
+          33.762035369873
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 4.66203498840332,
+        "width": 0.44
+      },
+      {
+        "band": "XYZ",
+        "elapsed_s": 7.11666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 1.01103591918945,
+        "lowest_y": -0.862703740596771,
+        "position": [
+          35.0110359191895,
+          -0.86147803068161,
+          34.321533203125
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 5.22153282165527,
+        "width": 0.44
+      }
+    ],
+    "WIDE": [
+      {
+        "band": "X",
+        "elapsed_s": 5.06666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0,
+        "lowest_y": -0.239777028560638,
+        "position": [
+          13.0,
+          -0.239777028560638,
+          35.9996910095215
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 6.89969062805176,
+        "width": 1.2
+      },
+      {
+        "band": "Y",
+        "elapsed_s": 7.31666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.000011444091796875,
+        "lowest_y": -0.000766023120377213,
+        "position": [
+          19.9999885559082,
+          0.000935811433009803,
+          43.133228302002
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0332279205322,
+        "width": 1.2
+      },
+      {
+        "band": "Z",
+        "elapsed_s": 8.06666666666665,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 1.15397644042969,
+        "lowest_y": -0.0795471221208572,
+        "position": [
+          25.8460235595703,
+          0.000839665532112122,
+          43.1127967834473
+        ],
+        "reason": "ARRIVED",
+        "speed_m_s": 2.0,
+        "travel_m": 14.0127964019775,
+        "width": 1.2
+      },
+      {
+        "band": "XYZ",
+        "elapsed_s": 3.76666666666666,
+        "forward_input": true,
+        "height_m": 1.6,
+        "lateral_m": 0.0285186767578125,
+        "lowest_y": -0.0273522306233644,
+        "position": [
+          33.9714813232422,
+          0.228263452649117,
+          33.8872604370117
+        ],
+        "reason": "BLOCKED",
+        "speed_m_s": 2.0,
+        "travel_m": 4.78726005554199,
+        "width": 1.2
+      }
+    ]
+  }
+}

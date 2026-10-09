@@ -1,0 +1,6 @@
+Concept: Where and when a constraint acts changes what a body can do.
+Sequence role: First active noise hall, after Random_Game and before Noise_Columns. Move from random choices within a procedure to the relationships a procedure imposes on positions.
+Technical angle: Repeated local-coordinate clipping; finite minimum-distance rejection sampling; full candidate accounting; replay by seed and call order; clamped Gaussian comparison; uniform heights and gradient colours; illustrated spectral curves; accumulation, difference and approximate temporal filters.
+Critical angle: Distinguish an admission condition from ongoing enforcement, and a finite search failure from a proof of impossibility. The visual record has its own explicit display budget. Investigate what proximity and shared names suggest between separately generated images and sounds; leave room for pleasure and different kinds of attention.
+Key artifacts: randompoint, randompoints, WhiteNoiseGallery and NoiseColors3D are primary, in that order. The galleries extend the questions; their displays do not measure the bench or audio spectrum.
+Gap: Headset reach and comfort remain untested. The galleries now have accessible side consoles and tested source previews; perceived sound and headset interaction still need a human pass.

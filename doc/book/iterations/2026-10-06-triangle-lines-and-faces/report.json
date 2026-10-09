@@ -1,0 +1,235 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "puzzle and drawing twin present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: puzzle",
+      "passed": true
+    },
+    {
+      "name": "three short edges begin open",
+      "passed": true
+    },
+    {
+      "name": "edge 0 keeps Lines pink and white materials",
+      "passed": true
+    },
+    {
+      "name": "edge 1 keeps Lines pink and white materials",
+      "passed": true
+    },
+    {
+      "name": "edge 2 keeps Lines pink and white materials",
+      "passed": true
+    },
+    {
+      "name": "edges lie on triangle axes with 16 percent gaps",
+      "passed": true
+    },
+    {
+      "name": "held endpoint does not finish puzzle 0/0",
+      "passed": true
+    },
+    {
+      "name": "release snaps endpoint exactly 0/0",
+      "passed": true
+    },
+    {
+      "name": "held endpoint does not finish puzzle 0/1",
+      "passed": true
+    },
+    {
+      "name": "release snaps endpoint exactly 0/1",
+      "passed": true
+    },
+    {
+      "name": "held endpoint does not finish puzzle 1/0",
+      "passed": true
+    },
+    {
+      "name": "release snaps endpoint exactly 1/0",
+      "passed": true
+    },
+    {
+      "name": "held endpoint does not finish puzzle 1/1",
+      "passed": true
+    },
+    {
+      "name": "release snaps endpoint exactly 1/1",
+      "passed": true
+    },
+    {
+      "name": "held endpoint does not finish puzzle 2/0",
+      "passed": true
+    },
+    {
+      "name": "release snaps endpoint exactly 2/0",
+      "passed": true
+    },
+    {
+      "name": "held endpoint does not finish puzzle 2/1",
+      "passed": true
+    },
+    {
+      "name": "release snaps endpoint exactly 2/1",
+      "passed": true
+    },
+    {
+      "name": "all three released edges close the triangle",
+      "passed": true
+    },
+    {
+      "name": "closure retains three visible shared white corners",
+      "passed": true
+    },
+    {
+      "name": "face is a separate control after closure",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: puzzle-closed",
+      "passed": true
+    },
+    {
+      "name": "reset reopens puzzle and returns grabbable endpoints",
+      "passed": true
+    },
+    {
+      "name": "reversed endpoint order still completes with one sphere at each corner",
+      "passed": true
+    },
+    {
+      "name": "compact creator retains an initial editable triangle",
+      "passed": true
+    },
+    {
+      "name": "hand-scale triangle is 80cm wide",
+      "passed": true
+    },
+    {
+      "name": "small boundary and larger added face are distinct",
+      "passed": true
+    },
+    {
+      "name": "seven visible actions share a reachable compact panel",
+      "passed": true
+    },
+    {
+      "name": "held small corner changes larger triangle immediately",
+      "passed": true
+    },
+    {
+      "name": "large corner is exact 3.3x source coordinate",
+      "passed": true
+    },
+    {
+      "name": "release commits to the 5cm grid",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: corner-moved",
+      "passed": true
+    },
+    {
+      "name": "new face keeps the pen held and the old face",
+      "passed": true
+    },
+    {
+      "name": "trigger reuses two existing corners and adds only one new point",
+      "passed": true
+    },
+    {
+      "name": "repeated trigger at same point creates no duplicates",
+      "passed": true
+    },
+    {
+      "name": "close face adds a second face to both scales",
+      "passed": true
+    },
+    {
+      "name": "two adjacent triangles share one edge",
+      "passed": true
+    },
+    {
+      "name": "release does not place an unwanted extra corner",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: added-face",
+      "passed": true
+    },
+    {
+      "name": "fill control hides surface while retaining edges",
+      "passed": true
+    },
+    {
+      "name": "undo removes unfinished point without damaging completed faces",
+      "passed": true
+    },
+    {
+      "name": "close rejects fewer than three points",
+      "passed": true
+    },
+    {
+      "name": "restore returns one triangle at both scales",
+      "passed": true
+    },
+    {
+      "name": "restore docks the released drawing point on the plinth",
+      "passed": true
+    },
+    {
+      "name": "four-corner loop can close",
+      "passed": true
+    },
+    {
+      "name": "shift start changes the diagonal while preserving three total faces",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: two-scales",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: maker",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: large-face",
+      "passed": true
+    },
+    {
+      "name": "walking passage beside both plinths x=-2.2",
+      "passed": true
+    },
+    {
+      "name": "walking passage beside both plinths x=2.2",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "puzzle": [
+      7.5,
+      1.39999997615814,
+      2.5
+    ],
+    "source": [
+      6.5,
+      1.29999995231628,
+      12.5
+    ],
+    "twin": [
+      6.5,
+      0.0,
+      15.5
+    ]
+  },
+  "passed": true
+}

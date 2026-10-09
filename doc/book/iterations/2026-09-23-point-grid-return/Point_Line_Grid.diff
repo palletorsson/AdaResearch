@@ -1,0 +1,23 @@
+--- Point_Line_Grid.before.md
++++ Point_Line_Grid.after.md
+@@ -8,7 +8,7 @@
+ 
+ Pick up the snapping sphere. Move it slowly, watching its marker and the retained line. Try to move without adding a new place to the record. Then go far enough for another place to appear.
+ 
+-Trace already made choices about which positions to keep. Here, look at the table's other way of naming them. Beside the coordinates in metres are integer indices. With this tool's five-centimetre spacing, `0.15` metres along X has index `3`: three spacings from world zero. The same place has two names.
++Trace already made choices about which positions to keep. Here the table names each kept position in metres and in whole-number steps from the origin. With five centimetres between grid positions, `0.15` metres along X has index `3`: three steps from world zero. The same place has two names.
+ 
+ The calculation, reduced to one axis, is:
+ 
+@@ -19,9 +19,9 @@
+ 
+ Divide by the spacing. Round to the nearest integer. Multiply back to get metres. At this spacing, `0.12` becomes `0.10`; `0.13` becomes `0.15`. One centimetre of movement can carry the record across a five-centimetre interval. Elsewhere, a larger movement can leave its address unchanged.
+ 
+-Let go. The tool brings its marker onto the lattice. Pick it up and try to return to that address. You have some room to be imprecise and still arrive at the same result. That can be useful: we may want two pieces to meet without having to place them by eye.[^point-grid-bowker-star]
++Let go. The tool brings its marker onto the lattice. Pick it up, move away, then try to return to that address. Several nearby positions can round to the same result. Your hand has room to vary while the point finds its place again. This can help us make two pieces meet without placing them exactly by eye.[^point-grid-bowker-star]
+ 
+-The table gives another name to the retained position. It does not show the unrounded position beside it. We still need your movement to notice what this record leaves out.
++Move the marker a little while watching where the recorded line ends. Can you keep that end still? Both columns in the table name retained positions. The difference to look for is between the moving marker and the position the program keeps.
+ 
+ ## Give the interval a rhythm
+ 

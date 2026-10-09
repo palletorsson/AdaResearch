@@ -1,0 +1,2820 @@
+{
+  "checks": 49,
+  "failures": [],
+  "headset_verified": false,
+  "map": "LSystems_Living",
+  "measurements": {
+    "budget_case": {
+      "budget": 200,
+      "commands": 4964,
+      "forks": 5,
+      "generations": 5,
+      "sentence": "S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]][+S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+//S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]][+S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+//S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]][+S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+//S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]][+S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+//S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]][+S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][-/S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]][+//S[+F][-F][+/F][-/F][+//F]S[+F][-F][+/F][-/F][+//F][+FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][-/FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]][+//FF[+S[+F][-F][+/F][-/F][+//F]][-S[+F][-F][+/F][-/F][+//F]][+/S[+F][-F][+/F][-/F][+//F]][-/S[+F][-F][+/F][-/F][+//F]][+//S[+F][-F][+/F][-/F][+//F]]]]]"
+    },
+    "captures": {
+
+    },
+    "depth_steps": [
+      {
+        "generations": 2,
+        "raw": 4.2
+      },
+      {
+        "generations": 2,
+        "raw": 4.4
+      },
+      {
+        "generations": 2,
+        "raw": 4.6
+      },
+      {
+        "generations": 2,
+        "raw": 4.8
+      },
+      {
+        "generations": 3,
+        "raw": 5.0
+      }
+    ],
+    "driver_log": [
+      {
+        "event": "walker_cam_guard_stopped",
+        "value": true
+      },
+      {
+        "at": [
+          9.5,
+          0.00100000004749745,
+          5.93000030517578
+        ],
+        "event": "spawn"
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1025",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1025/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1025/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1025/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.8,
+              1.09,
+              6.36
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1023",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1023",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1023",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1023",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1023",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            0.0,
+            -0.77,
+            0.64
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1027",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1027/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.77,
+              0.64
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1027/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1027/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.5,
+              1.1,
+              6.35
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "de-galerie-axial/GeneticTreeSculptor/LivingLesson/PushButton",
+          "hover": "cTreeSculptor/LivingLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "ial/GeneticTreeSculptor/LivingLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ial/GeneticTreeSculptor/LivingLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.8,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "de-galerie-axial/GeneticTreeSculptor/LivingLesson/PushButton",
+          "hover": "cTreeSculptor/LivingLesson/PushButton/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "ial/GeneticTreeSculptor/LivingLesson/PushButton/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "ial/GeneticTreeSculptor/LivingLesson/PushButton/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.8,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.34,
+            -0.59,
+            0.73
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1023",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.34,
+              -0.59,
+              0.73
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1023/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            0.0,
+            -0.63,
+            0.78
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1021",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1021/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              0.0,
+              -0.63,
+              0.78
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1021/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1021/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.5,
+              1.08,
+              6.58
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1029",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1029/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1029/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1029/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.09,
+              6.36
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            5.93
+          ],
+          "forward": [
+            -0.41,
+            -0.7,
+            0.58
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "button": 1,
+        "event": "click"
+      },
+      {
+        "event": "press",
+        "record": {
+          "control": "-galerie-axial/GeneticTreeSculptor/LivingLesson/@Node3D@1029",
+          "hover": "reeSculptor/LivingLesson/@Node3D@1029/InteractableAreaButton",
+          "ray": {
+            "camera_dir": [
+              -0.41,
+              -0.7,
+              0.58
+            ],
+            "camera_from": [
+              9.5,
+              1.6,
+              5.93
+            ],
+            "independent_ray": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1029/InteractableAreaButton",
+            "raycast_areas": true,
+            "raycast_collider": "l/GeneticTreeSculptor/LivingLesson/@Node3D@1029/InteractableAreaButton",
+            "raycast_colliding": true,
+            "raycast_length": 5.0,
+            "raycast_mask": 1310720,
+            "raycast_point": [
+              9.2,
+              1.09,
+              6.36
+            ]
+          },
+          "stand": [
+            9.5,
+            0.0,
+            5.93
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            2.0,
+            1.7,
+            3.0
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            2.0,
+            0.1,
+            3.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 180,
+        "moved": [
+          0.0,
+          -0.1,
+          14.92
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            2.0,
+            1.6,
+            17.92
+          ],
+          "forward": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "rig": [
+            2.0,
+            0.0,
+            17.92
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            2.0,
+            1.6,
+            17.92
+          ],
+          "forward": [
+            0.0,
+            0.01,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            2.0,
+            0.0,
+            17.92
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 181,
+        "moved": [
+          0.0,
+          0.0,
+          15.08
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            2.0,
+            1.6,
+            33.0
+          ],
+          "forward": [
+            0.0,
+            0.01,
+            1.0
+          ],
+          "rig": [
+            2.0,
+            0.0,
+            33.0
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            2.0,
+            1.6,
+            33.0
+          ],
+          "forward": [
+            1.0,
+            0.01,
+            0.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            2.0,
+            0.0,
+            33.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 90,
+        "moved": [
+          7.5,
+          0.0,
+          0.0
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            33.0
+          ],
+          "forward": [
+            1.0,
+            0.01,
+            0.0
+          ],
+          "rig": [
+            9.5,
+            0.0,
+            33.0
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            33.0
+          ],
+          "forward": [
+            0.0,
+            0.02,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            9.5,
+            0.0,
+            33.0
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 52,
+        "moved": [
+          0.0,
+          0.0,
+          4.33
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            37.33
+          ],
+          "forward": [
+            0.0,
+            0.02,
+            1.0
+          ],
+          "rig": [
+            9.5,
+            0.0,
+            37.33
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            9.5,
+            1.6,
+            37.33
+          ],
+          "forward": [
+            1.0,
+            0.03,
+            0.02
+          ],
+          "miss_deg": 0.02,
+          "rig": [
+            9.5,
+            0.0,
+            37.33
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 36,
+        "moved": [
+          3.0,
+          0.0,
+          0.07
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            12.5,
+            1.6,
+            37.4
+          ],
+          "forward": [
+            1.0,
+            0.03,
+            0.02
+          ],
+          "rig": [
+            12.5,
+            0.0,
+            37.4
+          ]
+        }
+      },
+      {
+        "event": "aim",
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            12.5,
+            1.6,
+            37.4
+          ],
+          "forward": [
+            0.0,
+            0.09,
+            1.0
+          ],
+          "miss_deg": 0.0,
+          "rig": [
+            12.5,
+            0.0,
+            37.4
+          ]
+        }
+      },
+      {
+        "action": "ui_up",
+        "event": "walk",
+        "frames": 13,
+        "moved": [
+          0.0,
+          0.0,
+          1.08
+        ],
+        "pose": {
+          "current_camera": "/root/EndlessMuseum/@Camera3D@1819",
+          "eye": [
+            12.5,
+            1.6,
+            38.48
+          ],
+          "forward": [
+            0.0,
+            0.09,
+            1.0
+          ],
+          "rig": [
+            12.5,
+            0.0,
+            38.48
+          ]
+        }
+      },
+      {
+        "current_camera_after": "/root/EndlessMuseum/@Camera3D@1819",
+        "event": "teardown"
+      }
+    ],
+    "exit_walk_cells": {
+      "37": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "38": [
+        12,
+        13
+      ],
+      "39": [],
+      "40": [],
+      "41": [],
+      "42": [],
+      "43": []
+    },
+    "inventory": [
+      {
+        "meshes": [
+          {
+            "name": "Frame",
+            "position": [
+              5.4830002784729,
+              0.893722772598267,
+              7.44119548797607
+            ],
+            "size": [
+              0.633999824523926,
+              0.250864148139954,
+              0.121234893798828
+            ]
+          },
+          {
+            "name": "Panel",
+            "position": [
+              5.48600006103516,
+              0.896864295005798,
+              7.4397439956665
+            ],
+            "size": [
+              0.628000259399414,
+              0.24627149105072,
+              0.120512008666992
+            ]
+          },
+          {
+            "name": "Highlight",
+            "position": [
+              5.48800039291382,
+              1.14017486572266,
+              7.55016708374023
+            ],
+            "size": [
+              0.62399959564209,
+              0.00132894515991211,
+              0.00132942199707031
+            ]
+          },
+          {
+            "name": "AccentStrip",
+            "position": [
+              5.61160039901733,
+              1.14141464233398,
+              7.55370140075684
+            ],
+            "size": [
+              0.376799583435059,
+              0.00265789031982422,
+              0.00265693664550781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@979",
+            "position": [
+              5.95600032806396,
+              1.06323039531708,
+              7.51578521728516
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@980",
+            "position": [
+              5.95500040054321,
+              1.06232404708862,
+              7.51717567443848
+            ],
+            "size": [
+              0.145999908447266,
+              0.0466444492340088,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.95100021362305,
+              1.06301665306091,
+              7.50433731079102
+            ],
+            "size": [
+              0.154000282287598,
+              0.0537114143371582,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.97200012207031,
+              1.08832740783691,
+              7.51373863220215
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              6.04830026626587,
+              1.0793616771698,
+              7.50020694732666
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              6.03150033950806,
+              1.08247649669647,
+              7.49713706970215
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@981",
+            "position": [
+              5.97600030899048,
+              1.04941952228546,
+              7.49606513977051
+            ],
+            "size": [
+              0.104000091552734,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@982",
+            "position": [
+              5.80400037765503,
+              1.06323039531708,
+              7.51578521728516
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@983",
+            "position": [
+              5.80300045013428,
+              1.06232404708862,
+              7.51717567443848
+            ],
+            "size": [
+              0.145999908447266,
+              0.0466444492340088,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.79900026321411,
+              1.06301665306091,
+              7.50433731079102
+            ],
+            "size": [
+              0.154000282287598,
+              0.0537114143371582,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.82000017166138,
+              1.08832740783691,
+              7.51373863220215
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              5.90680027008057,
+              1.0793616771698,
+              7.50020694732666
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              5.89000034332275,
+              1.08247649669647,
+              7.49713706970215
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@984",
+            "position": [
+              5.82400035858154,
+              1.04941952228546,
+              7.49606513977051
+            ],
+            "size": [
+              0.104000091552734,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@985",
+            "position": [
+              5.65199995040894,
+              1.06323039531708,
+              7.51578521728516
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@986",
+            "position": [
+              5.65100002288818,
+              1.06232404708862,
+              7.51717567443848
+            ],
+            "size": [
+              0.145999908447266,
+              0.0466444492340088,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.64699983596802,
+              1.06301665306091,
+              7.50433731079102
+            ],
+            "size": [
+              0.154000282287598,
+              0.0537114143371582,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.66799974441528,
+              1.08832740783691,
+              7.51373863220215
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              5.74919986724854,
+              1.0793616771698,
+              7.50020694732666
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              5.73239994049072,
+              1.08247649669647,
+              7.49713706970215
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@987",
+            "position": [
+              5.67199993133545,
+              1.04941952228546,
+              7.49606513977051
+            ],
+            "size": [
+              0.104000091552734,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@988",
+            "position": [
+              5.5,
+              1.06323039531708,
+              7.51578521728516
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@989",
+            "position": [
+              5.49900007247925,
+              1.06232404708862,
+              7.51717567443848
+            ],
+            "size": [
+              0.145999908447266,
+              0.0466444492340088,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.49499988555908,
+              1.06301665306091,
+              7.50433731079102
+            ],
+            "size": [
+              0.154000282287598,
+              0.0537114143371582,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.51599979400635,
+              1.08832740783691,
+              7.51373863220215
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              5.55146646499634,
+              1.0793616771698,
+              7.50020694732666
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              5.53466653823853,
+              1.08247649669647,
+              7.49713706970215
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@990",
+            "position": [
+              5.51999998092651,
+              1.04941952228546,
+              7.49606513977051
+            ],
+            "size": [
+              0.104000091552734,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@991",
+            "position": [
+              5.95600032806396,
+              0.997069954872131,
+              7.48493480682373
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@992",
+            "position": [
+              5.95500040054321,
+              0.996163547039032,
+              7.48632431030273
+            ],
+            "size": [
+              0.145999908447266,
+              0.046644389629364,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.95100021362305,
+              0.996856153011322,
+              7.47348594665527
+            ],
+            "size": [
+              0.154000282287598,
+              0.053711473941803,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.97200012207031,
+              1.02216696739197,
+              7.48288726806641
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              6.07280015945435,
+              1.01320123672485,
+              7.46935653686523
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              6.05600023269653,
+              1.01631605625153,
+              7.46628665924072
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@993",
+            "position": [
+              5.9680004119873,
+              0.983259081840515,
+              7.46521377563477
+            ],
+            "size": [
+              0.119999885559082,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@994",
+            "position": [
+              5.80400037765503,
+              0.997069954872131,
+              7.48493480682373
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@995",
+            "position": [
+              5.80300045013428,
+              0.996163547039032,
+              7.48632431030273
+            ],
+            "size": [
+              0.145999908447266,
+              0.046644389629364,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.79900026321411,
+              0.996856153011322,
+              7.47348594665527
+            ],
+            "size": [
+              0.154000282287598,
+              0.053711473941803,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.82000017166138,
+              1.02216696739197,
+              7.48288726806641
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              5.92080020904541,
+              1.01320123672485,
+              7.46935653686523
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              5.9040002822876,
+              1.01631605625153,
+              7.46628665924072
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@996",
+            "position": [
+              5.8080005645752,
+              0.983259081840515,
+              7.46521377563477
+            ],
+            "size": [
+              0.13599967956543,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@997",
+            "position": [
+              5.65199995040894,
+              0.997069954872131,
+              7.48493480682373
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@998",
+            "position": [
+              5.65100002288818,
+              0.996163547039032,
+              7.48632431030273
+            ],
+            "size": [
+              0.145999908447266,
+              0.046644389629364,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.64699983596802,
+              0.996856153011322,
+              7.47348594665527
+            ],
+            "size": [
+              0.154000282287598,
+              0.053711473941803,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.66799974441528,
+              1.02216696739197,
+              7.48288726806641
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              5.71979999542236,
+              1.01320123672485,
+              7.46935653686523
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              5.70300006866455,
+              1.01631605625153,
+              7.46628665924072
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@999",
+            "position": [
+              5.67199993133545,
+              0.983259081840515,
+              7.46521377563477
+            ],
+            "size": [
+              0.104000091552734,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1000",
+            "position": [
+              5.5,
+              0.997069954872131,
+              7.48493480682373
+            ],
+            "size": [
+              0.144000053405762,
+              0.0456769466400146,
+              0.0234260559082031
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1001",
+            "position": [
+              5.49900007247925,
+              0.996163547039032,
+              7.48632431030273
+            ],
+            "size": [
+              0.145999908447266,
+              0.046644389629364,
+              0.0224590301513672
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              5.49499988555908,
+              0.996856153011322,
+              7.47348594665527
+            ],
+            "size": [
+              0.154000282287598,
+              0.053711473941803,
+              0.0300102233886719
+            ]
+          },
+          {
+            "name": "TrackMesh",
+            "position": [
+              5.51599979400635,
+              1.02216696739197,
+              7.48288726806641
+            ],
+            "size": [
+              0.112000465393066,
+              0.00663995742797852,
+              0.00359344482421875
+            ]
+          },
+          {
+            "name": "AccentMesh",
+            "position": [
+              5.56780004501343,
+              1.01320123672485,
+              7.46935653686523
+            ],
+            "size": [
+              0.00839996337890625,
+              0.0281212329864502,
+              0.0230426788330078
+            ]
+          },
+          {
+            "name": "ShadowMesh",
+            "position": [
+              5.55100011825562,
+              1.01631605625153,
+              7.46628665924072
+            ],
+            "size": [
+              0.0419998168945313,
+              0.0177500247955322,
+              0.0380649566650391
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1002",
+            "position": [
+              5.50400018692017,
+              0.983259081840515,
+              7.46521377563477
+            ],
+            "size": [
+              0.13599967956543,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1003",
+            "position": [
+              5.80399990081787,
+              0.926377832889557,
+              7.45197010040283
+            ],
+            "size": [
+              0.064000129699707,
+              0.050208568572998,
+              0.0255393981933594
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1004",
+            "position": [
+              5.80299997329712,
+              0.925471603870392,
+              7.45336055755615
+            ],
+            "size": [
+              0.0659999847412109,
+              0.0511758327484131,
+              0.0245723724365234
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              5.81949996948242,
+              0.94149374961853,
+              7.43714809417725
+            ],
+            "size": [
+              0.0329999923706055,
+              0.0345569849014282,
+              0.0239162445068359
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              5.81400012969971,
+              0.937334954738617,
+              7.43958568572998
+            ],
+            "size": [
+              0.0439996719360352,
+              0.0414799451828003,
+              0.0220317840576172
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1005",
+            "position": [
+              5.80000019073486,
+              0.91256707906723,
+              7.43224906921387
+            ],
+            "size": [
+              0.0719995498657227,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1006",
+            "position": [
+              5.73200035095215,
+              0.926377832889557,
+              7.45197010040283
+            ],
+            "size": [
+              0.064000129699707,
+              0.050208568572998,
+              0.0255393981933594
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1007",
+            "position": [
+              5.7310004234314,
+              0.925471603870392,
+              7.45336055755615
+            ],
+            "size": [
+              0.0659999847412109,
+              0.0511758327484131,
+              0.0245723724365234
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              5.7475004196167,
+              0.94149374961853,
+              7.43714809417725
+            ],
+            "size": [
+              0.0329999923706055,
+              0.0345569849014282,
+              0.0239162445068359
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              5.74200057983398,
+              0.937334954738617,
+              7.43958568572998
+            ],
+            "size": [
+              0.0439996719360352,
+              0.0414799451828003,
+              0.0220317840576172
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1008",
+            "position": [
+              5.72800064086914,
+              0.91256707906723,
+              7.43224906921387
+            ],
+            "size": [
+              0.0719995498657227,
+              0.0217514038085938,
+              0.0101432800292969
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1009",
+            "position": [
+              10.8999996185303,
+              0.735000014305115,
+              10.3999996185303
+            ],
+            "size": [
+              1.20000076293945,
+              0.0499999523162842,
+              1.20000076293945
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1011",
+            "position": [
+              8.9399995803833,
+              0.889999985694885,
+              6.27999973297119
+            ],
+            "size": [
+              1.1200008392334,
+              0.120000004768372,
+              0.440000534057617
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1014",
+            "position": [
+              9.88000011444092,
+              0.0,
+              6.35000038146973
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.299999237060547
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1017",
+            "position": [
+              9.03999996185303,
+              0.0,
+              6.35000038146973
+            ],
+            "size": [
+              0.0799999237060547,
+              0.889999985694885,
+              0.299999237060547
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.77112483978271,
+              1.03925001621246,
+              6.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.78549957275391,
+              1.05074989795685,
+              6.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.77400016784668,
+              1.05483615398407,
+              6.57400035858154
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0919990539550781
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.4511251449585,
+              1.03925001621246,
+              6.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.46549987792969,
+              1.05074989795685,
+              6.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.45400047302246,
+              1.05483615398407,
+              6.57400035858154
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0919990539550781
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.13112545013428,
+              1.03925001621246,
+              6.57112503051758
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.14550018310547,
+              1.05074989795685,
+              6.58549976348877
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.13400077819824,
+              1.05483615398407,
+              6.57400035858154
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0919990539550781
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.77112483978271,
+              1.03925001621246,
+              6.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.78549957275391,
+              1.05074989795685,
+              6.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.77400016784668,
+              1.05483615398407,
+              6.34400081634521
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0919990539550781
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.4511251449585,
+              1.03925001621246,
+              6.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.46549987792969,
+              1.05074989795685,
+              6.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.45400047302246,
+              1.05483615398407,
+              6.34400081634521
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0919990539550781
+            ]
+          },
+          {
+            "name": "BaseMesh",
+            "position": [
+              9.13112545013428,
+              1.03925001621246,
+              6.34112548828125
+            ],
+            "size": [
+              0.0977497100830078,
+              0.0114998817443848,
+              0.0977497100830078
+            ]
+          },
+          {
+            "name": "ButtonMesh",
+            "position": [
+              9.14550018310547,
+              1.05074989795685,
+              6.35550022125244
+            ],
+            "size": [
+              0.069000244140625,
+              0.0230000019073486,
+              0.069000244140625
+            ]
+          },
+          {
+            "name": "AccentRing",
+            "position": [
+              9.13400077819824,
+              1.05483615398407,
+              6.34400081634521
+            ],
+            "size": [
+              0.0919990539550781,
+              0.00792765617370605,
+              0.0919990539550781
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1031",
+            "position": [
+              8.9399995803833,
+              0.824999988079071,
+              6.25250053405762
+            ],
+            "size": [
+              1.1200008392334,
+              0.149999976158142,
+              0.0249996185302734
+            ]
+          },
+          {
+            "name": "Glass",
+            "position": [
+              8.90999984741211,
+              1.12255263328552,
+              6.81675624847412
+            ],
+            "size": [
+              1.18000030517578,
+              0.294894695281982,
+              0.206487655639648
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1033",
+            "position": [
+              8.89000034332275,
+              1.10321927070618,
+              6.79987716674805
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222854614257813
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1034",
+            "position": [
+              8.89000034332275,
+              1.4144971370697,
+              7.01783752441406
+            ],
+            "size": [
+              1.21999931335449,
+              0.0222835540771484,
+              0.0222854614257813
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1035",
+            "position": [
+              10.0920000076294,
+              1.10977244377136,
+              6.80446720123291
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1036",
+            "position": [
+              8.89199924468994,
+              1.10977244377136,
+              6.80446720123291
+            ],
+            "size": [
+              0.0160007476806641,
+              0.320455074310303,
+              0.23106575012207
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1037",
+            "position": [
+              9.9709997177124,
+              0.980000019073486,
+              6.79100036621094
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1038",
+            "position": [
+              9.01099967956543,
+              0.980000019073486,
+              6.79100036621094
+            ],
+            "size": [
+              0.0179996490478516,
+              0.220000028610229,
+              0.0179996490478516
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1040",
+            "position": [
+              10.3500003814697,
+              0.0,
+              9.85000038146973
+            ],
+            "size": [
+              2.29999923706055,
+              0.75,
+              2.29999923706055
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1043",
+            "position": [
+              6.34999990463257,
+              0.0,
+              9.85000038146973
+            ],
+            "size": [
+              2.29999971389771,
+              0.75,
+              2.29999923706055
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1048",
+            "position": [
+              7.75000095367432,
+              0.0,
+              14.75
+            ],
+            "size": [
+              3.5,
+              0.0199999995529652,
+              3.5
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1052",
+            "position": [
+              5.40000009536743,
+              0.889999985694885,
+              7.19999980926514
+            ],
+            "size": [
+              0.800000190734863,
+              0.100000023841858,
+              0.600000381469727
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1055",
+            "position": [
+              5.71000003814697,
+              0.0,
+              7.35000038146973
+            ],
+            "size": [
+              0.180000305175781,
+              0.899999976158142,
+              0.299999237060547
+            ]
+          },
+          {
+            "name": "@MeshInstance3D@1063",
+            "position": [
+              12.0500011444092,
+              0.0,
+              22.0499992370605
+            ],
+            "size": [
+              0.899999618530273,
+              0.800000011920929,
+              0.900001525878906
+            ]
+          },
+          {
+            "name": "Branch_481",
+            "position": [
+              11.4584312438965,
+              0.779999971389771,
+              10.9519996643066
+            ],
+            "size": [
+              0.0831375122070313,
+              1.20000004768372,
+              0.0960006713867188
+            ]
+          },
+          {
+            "name": "Branch_482",
+            "position": [
+              11.4709014892578,
+              1.98000001907349,
+              10.9664001464844
+            ],
+            "size": [
+              0.058197021484375,
+              0.815999984741211,
+              0.06719970703125
+            ]
+          },
+          {
+            "name": "Branch_483",
+            "position": [
+              11.3167781829834,
+              2.78581547737122,
+              10.9764795303345
+            ],
+            "size": [
+              0.200861930847168,
+              0.308183908462524,
+              0.0470409393310547
+            ]
+          },
+          {
+            "name": "Branch_484",
+            "position": [
+              10.8462228775024,
+              3.06756615638733,
+              10.9776563644409
+            ],
+            "size": [
+              0.496988296508789,
+              0.305928707122803,
+              0.0446872711181641
+            ]
+          },
+          {
+            "name": "Branch_485",
+            "position": [
+              11.3141851425171,
+              3.08432412147522,
+              10.9776563644409
+            ],
+            "size": [
+              0.038701057434082,
+              0.554880142211914,
+              0.0446872711181641
+            ]
+          },
+          {
+            "name": "Branch_486",
+            "position": [
+              11.4823598861694,
+              2.78581547737122,
+              10.9764795303345
+            ],
+            "size": [
+              0.200861930847168,
+              0.308183908462524,
+              0.0470409393310547
+            ]
+          },
+          {
+            "name": "Branch_487",
+            "position": [
+              11.6471138000488,
+              3.08432412147522,
+              10.9776563644409
+            ],
+            "size": [
+              0.038701057434082,
+              0.554880142211914,
+              0.0446872711181641
+            ]
+          },
+          {
+            "name": "Branch_488",
+            "position": [
+              11.6567888259888,
+              3.06756615638733,
+              10.9776563644409
+            ],
+            "size": [
+              0.496988296508789,
+              0.305928707122803,
+              0.0446872711181641
+            ]
+          }
+        ],
+        "position": "(9.5, 0.0, 12.5)",
+        "token": "genetic_tree_sculptor"
+      },
+      {
+        "meshes": [
+          {
+            "name": "LSystemTreeDisplay",
+            "position": [
+              9.49999046325684,
+              0.0,
+              22.4508419036865
+            ],
+            "size": [
+              0.0000095367431640625,
+              0.450000017881393,
+              0.0983161926269531
+            ]
+          },
+          {
+            "name": "Base",
+            "position": [
+              9.26000022888184,
+              -0.0299999993294477,
+              22.2600002288818
+            ],
+            "size": [
+              0.479999542236328,
+              0.0299999993294477,
+              0.479999542236328
+            ]
+          }
+        ],
+        "position": "(9.5, 0.0, 26.5)",
+        "token": "lsystem_tree"
+      },
+      {
+        "meshes": [
+          {
+            "name": "CoralDisplay",
+            "position": [
+              12.4098424911499,
+              0.850000023841858,
+              22.3789443969727
+            ],
+            "size": [
+              0.180315017700195,
+              0.490000009536743,
+              0.242111206054688
+            ]
+          },
+          {
+            "name": "RockBase",
+            "position": [
+              12.3599996566772,
+              0.810000061988831,
+              22.3250007629395
+            ],
+            "size": [
+              0.280000686645508,
+              0.0399999618530273,
+              0.349998474121094
+            ]
+          }
+        ],
+        "position": "(12.5, 0.85, 26.5)",
+        "token": "branching_coral"
+      },
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              14.4025001525879,
+              -0.10249999910593,
+              22.4950008392334
+            ],
+            "size": [
+              0.194999694824219,
+              0.204999998211861,
+              0.00999832153320313
+            ]
+          },
+          {
+            "name": "RandomWalkPlanMesh",
+            "position": [
+              14.4049997329712,
+              -0.0890000015497208,
+              22.5094718933105
+            ],
+            "size": [
+              0.190000534057617,
+              0.189999997615814,
+              0.0
+            ]
+          }
+        ],
+        "position": "(14.5, 0.0, 26.5)",
+        "token": "living_paper_fern"
+      },
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              5.40250015258789,
+              -0.10249999910593,
+              27.4950008392334
+            ],
+            "size": [
+              0.194999694824219,
+              0.204999998211861,
+              0.00999832153320313
+            ]
+          },
+          {
+            "name": "RandomWalkPlanMesh",
+            "position": [
+              5.40500020980835,
+              -0.0890000015497208,
+              27.5094718933105
+            ],
+            "size": [
+              0.189999580383301,
+              0.189999997615814,
+              0.0
+            ]
+          }
+        ],
+        "position": "(5.5, 0.0, 31.5)",
+        "token": "living_paper_tree"
+      },
+      {
+        "meshes": [
+          {
+            "name": "MeshInstance3D",
+            "position": [
+              12.4025001525879,
+              -0.10249999910593,
+              30.4949989318848
+            ],
+            "size": [
+              0.194999694824219,
+              0.204999998211861,
+              0.0100021362304688
+            ]
+          },
+          {
+            "name": "RandomWalkPlanMesh",
+            "position": [
+              12.4049997329712,
+              -0.0890000015497208,
+              30.5094718933105
+            ],
+            "size": [
+              0.190000534057617,
+              0.189999997615814,
+              0.0
+            ]
+          }
+        ],
+        "position": "(12.5, 0.0, 34.5)",
+        "token": "living_paper_dragon"
+      }
+    ],
+    "next_map": "Assemblage_Same_Desire"
+  }
+}

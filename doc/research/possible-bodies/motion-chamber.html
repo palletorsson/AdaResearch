@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>When the push ends · Ada Research</title><style>body{max-width:1050px;margin:48px auto;padding:0 24px;background:#eeebe2;color:#242a2c;font:18px/1.6 system-ui}h1{font-size:46px;line-height:1.1}h2{margin-top:48px}a{color:#8b3b20}img{width:100%;border-radius:5px}table{border-collapse:collapse;width:100%;font-size:16px}td,th{border:1px solid #c2bbaa;padding:12px;text-align:left;vertical-align:top}code{font-size:.86em}li{margin:12px 0} table{font-size:14px} pre{overflow:auto;background:#fff;padding:18px}</style><main><h1>When the push ends</h1>
+<p><a href="index.html#VFM_03_Motion">Working route</a> · <a href="/necklace/thread?map=VFM_03_Motion&amp;role=primary">Primary and book</a> · <a href="launch-chamber.html">Previous: Launch</a> · <a href="vectors-forces-plan.html">Vector / Forces plan</a></p>
+<p><strong>Motion now starts with a full-scale experiment controlled from the middle.</strong> A rigid body moves across a metre grid around two inward-facing control banks. A finite push ends; its acquired velocity continues. This gives the chapter a concrete question to carry into mass, resistance and contact.</p>
+<p><img alt="The Motion chamber and central controls, captured in Godot" src="motion_chamber_overview.png" /></p>
+<h2>Try these comparisons</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Look for</th>
+<th>What it adds</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PUSH X, then wait</td>
+<td>The cube continues after the one-second command</td>
+<td>Velocity persists without continued force in this undamped model</td>
+</tr>
+<tr>
+<td>COAST, then BRAKE</td>
+<td>Only braking progressively stops the moving body</td>
+<td>Cancelling a request and opposing existing motion differ</td>
+</tr>
+<tr>
+<td>MASS, then the same pulse</td>
+<td>Twice the mass acquires half the velocity change</td>
+<td>Response depends on a property the silhouette does not show</td>
+</tr>
+<tr>
+<td>PUSH X, then PUSH F</td>
+<td>The old velocity component survives the new direction</td>
+<td>Vector addition becomes accumulated motion</td>
+</tr>
+<tr>
+<td>DRAG, then COAST</td>
+<td>Speed decays after the command ends</td>
+<td>Enabled damping remains an influence</td>
+</tr>
+<tr>
+<td>PARTS, RULE, TRAIL</td>
+<td>Command, measured response and recent path differ</td>
+<td>A displayed history has limits and omissions</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="The standing position faces physical buttons, a live body and a large readout" src="motion_chamber_inside.png" /></p>
+<p>The actual body is a Godot RigidBody3D. A pulse applies 2 N for one second; masses are 1, 2 and 4 kg. DRAG toggles engine linear damping. The amber perimeter produces elastic contact for this cube while remaining passable to the visitor. Height and rotation are locked. That deliberately selected collision world is part of what the book asks the reader to discover.</p>
+<p>Velocity, measured acceleration and commanded force have separate arrow scales. Arrows cap at 2.5 m; the numeric readout identifies units. The trail retains at most 120 samples at nominally 10 Hz. There is no claim that the displayed trace preserves every cause of the present velocity.</p>
+<h2>A second body, a different stopping rule</h2>
+<p>The existing <strong>friction_ramp</strong> remains primary, now on a stand with its control panel at <strong>1.06 m</strong>. Change mu at a fixed angle, then angle at fixed mu. The block crosses between STATIC and SLIDING.</p>
+<p><img alt="The existing ramp and controls on their standing-height support" src="motion_friction_stand.png" /></p>
+<p>Its scalar model immediately clears velocity when the STATIC condition returns. The large chamber instead brakes through an opposing force. The chapter exposes this difference, including the ramp's 0.01 display travel factor, so a useful teaching abbreviation can become something to investigate.</p>
+<h2>Evidence and preservation</h2>
+<p><a href="motion-chamber-check.json"><strong>34 desktop checks pass</strong></a>, covering pointer controls, real rigid-body response, finite pulses, mass, perpendicular contributions, damping, coasting, braking, elastic contact, bounded history, stable arrow allocation, sampled centre/side approaches, both control heights, ramp threshold and the ordinary compact VectorMotion scene. The final probe reported no GDScript errors. Screenshots above are actual Godot museum captures.</p>
+<p>All <strong>17 source artifact identities remain</strong>. The hall grows from 24 × 18 to 24 × 32 cells. Sixteen exhibits retain their relative positions fourteen rows beyond the new arrival; VectorMotion moves into the new chamber. Two primaries match the book: <strong>VectorMotion → friction_ramp</strong>. <a href="motion-chamber-placements.json">Placement ledger</a>. Previous source and text are backed up under the project record.</p>
+<p>Headset reach, comfort and sustained performance remain untested. The supporting exhibits have been preserved; they are not all newly certified by this probe.</p>
+<p><strong>Next: <a href="index.html#Vectors_Act3_FieldsAndMotion">Vectors_Act3_FieldsAndMotion</a>.</strong> We can now ask what happens when the next influence depends on where a body arrives. The first task is to distinguish a field that sets velocity from one that changes it through acceleration.</p>
+<h2>Book chapter</h2>
+<h1>When the push ends</h1>
+<!-- @VectorMotion -->
+
+<p>Step between the two control banks. The cube waits beyond them, held a metre above the grid. Press <strong>PUSH X</strong> once, then leave the controls alone.</p>
+<p>The command lasts one second. The cube keeps going.</p>
+<p>There is time to look back at the button. It has finished its small contribution. Something of that contribution is still crossing the room.</p>
+<p>Press <strong>COAST</strong>. Does the cube stop? Try <strong>BRAKE</strong> instead. This time it slows. Two controls that might sound like ways of ending movement have asked different things of the body.</p>
+<p>RESET returns the cube to its starting place and clears this run's velocity, trace and clock. Begin again. Press PUSH X, then COAST before the second is over. The cube leaves with less speed. Cutting the command short changes how much motion it acquires; it does not take back what has already accumulated.</p>
+<p>In Launch we watched a position calculated from an initial velocity and elapsed time. Here a rigid body keeps its current velocity in the physics engine. Each new influence meets that state. The apparatus does not supply a complete curve in advance.</p>
+<p>Turn toward the other control bank and reveal <strong>PARTS</strong> and <strong>RULE</strong>. Cyan gives velocity. Amber gives the force requested by the controls. When the pulse ends, amber disappears. Cyan remains.</p>
+<p>The opening body has a mass of one kilogram. PUSH X requests two newtons for one second. Before a boundary intervenes, its velocity changes by about two metres per second. The relationship is acceleration = force / mass. An acceleration changes velocity for as long as it acts; velocity continues carrying position between those interventions.</p>
+<p><strong>MASS</strong> resets the run and cycles through one, two and four kilograms. Try the same pulse at two kilograms. The velocity change is halved. The cube looks the same size. A property that matters to its response was not something its silhouette could tell you.</p>
+<p>Return to one kilogram. PUSH X, let the pulse finish, then <strong>PUSH F</strong>. The second command points forward along this chamber's local negative Z axis. Watch the cube leave sideways as well as forward. The new component has joined a velocity that was already there. An arrow showing only the latest request would miss part of where this body is going.</p>
+<p>The source hands its requested force to the engine during each physics update:</p>
+<pre><code class="language-gdscript">body.apply_central_force(global_basis * local_force)
+</code></pre>
+<p>The multiplication turns the room's local direction into a world direction. The engine integrates the body's response. This call does not set its destination, nor replace its velocity with the arrow we just chose.</p>
+<p>BRAKE makes another request. It points against the current velocity, with a cap of two newtons. Near rest, a smaller force avoids carrying the body into reverse during the next step. Stopping takes an intervention and time. RESET can erase the velocity immediately because resetting an experiment has been granted a different power.</p>
+<p>Try <strong>DRAG</strong>, then COAST. Now the cube slows even though the command has ended. DRAG enables the engine's linear damping. COAST leaves that setting active. With DRAG off, this model explicitly removes both gravity and inherited linear damping; persistence was made possible by those choices too.</p>
+<p>At the amber perimeter the cube rebounds. You can walk across that same line. The solver boundary recognises one collision layer, and the cube belongs to it. Your body and the control furniture do not. We appear to share a room, while its rules have divided us into different possible encounters.</p>
+<p>The cube also keeps its height and cannot turn. These are locks, not achievements of balance. A three-dimensional body has been admitted to a horizontal experiment. Releasing a lock would open another question, but these controls do not yet release it.</p>
+<p>Pink shows acceleration measured from successive velocities. At a rebound it may jump while the command reads zero. That is not an absent cause: the boundary has acted through collision response. The readout separates the force we requested from the body's measured change. Damping can separate them too.</p>
+<p>The arrows use different stated scales, and each stops growing at 2.5 metres. Read the numbers when a long arrow reaches that limit. <strong>TRAIL</strong> keeps the latest 120 samples, taken at nominally ten per second. Follow the body long enough and the beginning leaves the drawing. Its velocity can still carry a contribution whose trace has already been discarded.</p>
+<p>The run has room for a recent history. It has not kept everything that made the present.</p>
+<!-- @friction_ramp -->
+
+<p>Farther into the hall, a much smaller block waits on a ramp. Leave its angle at thirty degrees. Move <strong>μ</strong> until STATIC becomes SLIDING. Reset the block and approach that boundary again, more slowly.</p>
+<p>Now hold μ fixed and change <strong>ANGLE</strong>. Can another adjustment reach the same beginning of movement?</p>
+<p>Just before it starts, look at the arrows. Stillness has not emptied the block of influences. Gravity pulls partly down the incline and partly into its surface. Support answers the inward component; friction can answer the downhill component, up to the bound selected here.</p>
+<p>The demonstration tests that boundary with this expression:</p>
+<pre><code class="language-gdscript">sin(angle_rad) &gt; friction_mu * cos(angle_rad)
+</code></pre>
+<p>On one side the model holds the block still. On the other it accumulates downhill velocity. A continuous adjustment has crossed a condition that changes which behaviour the program permits.</p>
+<p>Choose a setting that clearly slides. RESET and watch successive parts of the descent. The block gains speed. Increase resistance a little, reset, and compare. Keep the beginning, the acceleration and the automatic return at the bottom separate: that return prepares another run; friction has not thrown the block uphill.</p>
+<p>This ramp has a different implementation from the large chamber. It computes one scalar velocity, uses one friction coefficient, and slows the displayed travel with a factor of 0.01. If you raise resistance into its STATIC condition while the block is moving, it immediately sets that velocity to zero. It does not apply the chamber's gradual braking force. Try that transition and look for the cut.</p>
+<p>We need the comparison, and we need to know what made it manageable. The model exposes a threshold while abbreviating part of the contact history. What would become visible if starting friction and sliding friction could differ? What would it take to keep the existing motion when the rule changes?</p>
+<!-- @ -->
+
+<p>Next, fields and motion. A single command has met a body carrying a past. What happens when the next influence depends on where that body arrives?</p><section><h2>Fields and Motion is now built</h2><p><a href="field-receivers.html">The arrow does not decide</a>: two receivers sample one spatial rule, with central controls and linked floor/wall histories. One matching book primary; all 13 artifacts remain. 39 desktop checks pass. Kinetic Forces follows; headset review remains open.</p></section></main></html>

@@ -1,0 +1,268 @@
+{
+ "_note": "Does the verdict describe the artifact, or the standpoint? Every published DNA tile was shot from the canonical view. If another standpoint scores materially higher, the pipeline has been reporting its own position as a fact about the work.",
+ "token": "boolean_burrow",
+ "axis": "overburden",
+ "views": {
+  "canonical": [
+   0.62,
+   -0.26
+  ],
+  "opposite": [
+   3.7615926535897932,
+   -0.26
+  ],
+  "square-on": [
+   0.0,
+   -0.1
+  ],
+  "from-above": [
+   0.62,
+   -1.05
+  ],
+  "from-below": [
+   0.62,
+   0.3
+  ]
+ },
+ "canonical_mean_focus": 0.0,
+ "best_other_view": "from-above",
+ "best_other_mean_focus": 0.36073,
+ "ratio": null,
+ "results": {
+  "canonical": {
+   "mean_focus": 0.0,
+   "best_pair": {
+    "a": "roofed",
+    "b": "broached",
+    "focus": 0.0,
+    "colour": 0.0
+   },
+   "pairs": [
+    {
+     "a": "roofed",
+     "b": "broached",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "skylit",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "ruined",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "broached",
+     "b": "skylit",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "broached",
+     "b": "ruined",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "skylit",
+     "b": "ruined",
+     "focus": 0.0,
+     "colour": 0.0
+    }
+   ]
+  },
+  "opposite": {
+   "mean_focus": 0.20283,
+   "best_pair": {
+    "a": "skylit",
+    "b": "ruined",
+    "focus": 0.33449,
+    "colour": 0.34345
+   },
+   "pairs": [
+    {
+     "a": "roofed",
+     "b": "broached",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "skylit",
+     "focus": 0.21203,
+     "colour": 0.21978
+    },
+    {
+     "a": "roofed",
+     "b": "ruined",
+     "focus": 0.22922,
+     "colour": 0.23497
+    },
+    {
+     "a": "broached",
+     "b": "skylit",
+     "focus": 0.21203,
+     "colour": 0.21978
+    },
+    {
+     "a": "broached",
+     "b": "ruined",
+     "focus": 0.22922,
+     "colour": 0.23497
+    },
+    {
+     "a": "skylit",
+     "b": "ruined",
+     "focus": 0.33449,
+     "colour": 0.34345
+    }
+   ]
+  },
+  "square-on": {
+   "mean_focus": 0.21241,
+   "best_pair": {
+    "a": "roofed",
+    "b": "ruined",
+    "focus": 0.42483,
+    "colour": 0.44459
+   },
+   "pairs": [
+    {
+     "a": "roofed",
+     "b": "broached",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "skylit",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "ruined",
+     "focus": 0.42483,
+     "colour": 0.44459
+    },
+    {
+     "a": "broached",
+     "b": "skylit",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "broached",
+     "b": "ruined",
+     "focus": 0.42483,
+     "colour": 0.44459
+    },
+    {
+     "a": "skylit",
+     "b": "ruined",
+     "focus": 0.42483,
+     "colour": 0.44459
+    }
+   ]
+  },
+  "from-above": {
+   "mean_focus": 0.36073,
+   "best_pair": {
+    "a": "skylit",
+    "b": "ruined",
+    "focus": 0.63744,
+    "colour": 0.65716
+   },
+   "pairs": [
+    {
+     "a": "roofed",
+     "b": "broached",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "skylit",
+     "focus": 0.12718,
+     "colour": 0.13024
+    },
+    {
+     "a": "roofed",
+     "b": "ruined",
+     "focus": 0.63628,
+     "colour": 0.6559
+    },
+    {
+     "a": "broached",
+     "b": "skylit",
+     "focus": 0.12718,
+     "colour": 0.13024
+    },
+    {
+     "a": "broached",
+     "b": "ruined",
+     "focus": 0.63628,
+     "colour": 0.6559
+    },
+    {
+     "a": "skylit",
+     "b": "ruined",
+     "focus": 0.63744,
+     "colour": 0.65716
+    }
+   ]
+  },
+  "from-below": {
+   "mean_focus": 0.02151,
+   "best_pair": {
+    "a": "skylit",
+    "b": "ruined",
+    "focus": 0.04302,
+    "colour": 0.0451
+   },
+   "pairs": [
+    {
+     "a": "roofed",
+     "b": "broached",
+     "focus": 0.0,
+     "colour": 0.0
+    },
+    {
+     "a": "roofed",
+     "b": "skylit",
+     "focus": 0.01347,
+     "colour": 0.01443
+    },
+    {
+     "a": "roofed",
+     "b": "ruined",
+     "focus": 0.02955,
+     "colour": 0.0307
+    },
+    {
+     "a": "broached",
+     "b": "skylit",
+     "focus": 0.01347,
+     "colour": 0.01443
+    },
+    {
+     "a": "broached",
+     "b": "ruined",
+     "focus": 0.02955,
+     "colour": 0.0307
+    },
+    {
+     "a": "skylit",
+     "b": "ruined",
+     "focus": 0.04302,
+     "colour": 0.0451
+    }
+   ]
+  }
+ }
+}

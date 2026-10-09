@@ -1,0 +1,105 @@
+--- before/tutorial.md
++++ tutorial.md
+@@ -1,64 +1,61 @@
+-# Primitives Portals
++# Portals — how close is useful?
+ 
+-The number goes up, and the circle does not arrive.
++The sphere became rounder as we added divisions. How many would be enough for something we want to make?
+ 
+-Approximate a circle with the straight segments we already know how to connect.
++Open `primitive_portals.tscn` in the [Ada student starter](../../../doc/book/studies/ada-xr-starter/README.md). A pink hexagon sits inside a grey circle guide. This is a reduced version of the planar comparison beside the museum's rings.
++
++## 1. Follow the closed line
++
++Open `studies/primitive_portals/perimeter.gd`. A supplied sampler gives us six positions equally spaced around a circle of radius one metre. They are in order; the first position is not repeated at the end.
++
++We reuse the segment from Lines. To measure the whole boundary, we add the distances between neighbours, then close the line:
+ 
+ ```gdscript
+-func polygon_perimeter(n: int, r: float) -> float:
++func polygon_perimeter(positions: Array[Vector3]) -> float:
+     var total := 0.0
+-    for i in n:
+-        var a := Vector2.RIGHT.rotated(TAU * i / n) * r
+-        var b := Vector2.RIGHT.rotated(TAU * (i + 1) / n) * r
+-        total += a.distance_to(b)
++    for i in range(positions.size() - 1):
++        total += positions[i].distance_to(positions[i + 1])
++    total += positions[positions.size() - 1].distance_to(positions[0])
+     return total
+ ```
+ 
+-n points evenly round, joined by n straight edges. That is every ring, torus and portal in this hall.
++The loop measures all but the closing edge. The next line measures from the last position back to the first. Together they make the **perimeter**. This function takes a list and returns a number; it does not change the list or draw anything.
+ 
+-Measure what is missing.
++The hexagon's perimeter is about six metres. The corresponding circle's circumference is about 6.283185 metres. The straight edges take a shorter route.
++
++## 2. Add sides
++
++Find the settings:
+ 
+ ```gdscript
+-func gap_to_circle(n: int, r: float) -> float:
+-    return TAU * r - polygon_perimeter(n, r)
++var divisions := 6
++var radius := 1.0
++var tolerance := 0.01
+ ```
+ 
+-The true circumference is TAU times the radius. The polygon's is always less, and the gap is positive for every n you can name. Archimedes doubled from a hexagon to a 96-gon and boxed the ratio between 3.1408 and 3.1429. The 96-gon gives 3.1410. It is close. It is not there, and no finite doubling gets there.
++Change `divisions` to `12`, then `24`, then `48`, running the scene after each edit. Keep the radius fixed. Watch the corners become less visible and the measured shortfall decrease. Walk closer when a corner becomes hard to see.
+ 
+-Walk toward the far end the way Achilles does.
++Each doubling uses twice as many segments. More detail has a construction cost, though a segment count alone does not tell us the frame rate.
++
++The grey guide stays at 256 segments throughout. It is another finite drawing, not the exact circle against which the number is calculated.
++
++## 3. Choose what counts as enough
++
++The script compares the measured perimeter with the circumference formula:
+ 
+ ```gdscript
+-func achilles(steps: int) -> float:
+-    # each step covers half of what remains of one unit of track
+-    var covered := 0.0
+-    for i in steps:
+-        covered += (1.0 - covered) * 0.5
+-    return covered
++    var circle_length := TAU * radius
++    gap = circle_length - perimeter
+ ```
+ 
+-Ten steps cover 0.999 of the track. A hundred would cover more. In mathematics no number of steps covers all of it, because every step leaves half of what was left. Run the code and watch what the machine does instead: at fifty-four steps `covered` becomes exactly `1.0`, because the remaining half is smaller than a float can hold next to one. The last number a float can hold below one is one minus two to the fifty-third, and the next halving rounds away. The machine arrives. It arrives by running out of digits, and that arrival is exactly as honest as the sphere in the last room.
++`TAU` is Godot's approximation to 2π. The gap is a difference between total lengths, in metres. It is not the visible distance from a pink edge to the grey guide.
+ 
+-Count a surface with a hole in it.
++A **tolerance** is the difference we agree to accept. The supplied readout says *within tolerance* when `gap <= tolerance`. With `0.01`, 48 sides is the first of our four trials to pass.
+ 
+-```gdscript
+-func torus_counts(rings: int, segments: int) -> Dictionary:
+-    # a torus mesh of rings x segments quads
+-    var v := rings * segments
+-    var f := rings * segments
+-    var e := 2 * rings * segments
+-    return {"vertices": v, "edges": e, "faces": f, "euler": v - e + f}
+-```
++Keep 48 sides and change the tolerance to `0.001`. Run again. The same polygon now falls outside the requirement. We changed the decision, not the geometry.
+ 
+-For every closed solid so far, vertices minus edges plus faces was two. For a torus it is zero, at any resolution. The hole is not a feature of the surface; it is a change in the number the surface cannot help giving you.
++In exact geometry, these polygons approach the circle without becoming it. The displayed numbers also have limited precision. Neither a pleasing outline nor a passing comparison makes the construction exact.
+ 
+-Cross a portal.
++The sampler and display are supplied, with their source included. You own the perimeter calculation and the settings. The museum's torus ladder and halving track give other ways to encounter a limit; this study measures neither their surfaces nor their motion.
+ 
+-```gdscript
+-func through_portal(entry: Transform3D, exit: Transform3D, velocity: Vector3) -> Vector3:
+-    var turn := exit.basis * entry.basis.inverse()
+-    return turn * velocity
+-```
+-
+-A portal does not cover the distance between its two mouths. It changes the frame: whatever direction you carried in is rotated by the difference between the mouths and handed back at the same speed. Crossing is a transformation, not a transport.
+-
+-You can now draw the machine's circle and measure how far it falls short, watch a halving sequence fail to arrive in mathematics and arrive in a float, count the hole in a torus, and cross a portal by rotating a frame. Primitives_Melencolia will next stand inside the limit and not reach it either.
++We can now give a construction a purpose and a stopping criterion. Melencolia gathers these tools and asks what we want to do with them.

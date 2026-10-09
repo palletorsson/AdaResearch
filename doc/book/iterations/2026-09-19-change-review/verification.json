@@ -1,0 +1,78 @@
+{
+  "scope": "Change: two halls; source/preservation and recorded desktop evidence",
+  "manuscripts": {
+    "Flow_Field": "unchanged",
+    "Change_Intro": "only the displayed sentence relocation and bridge-control paragraph"
+  },
+  "frozen_review_inputs_preserved": true,
+  "sequence_order_and_original_overview_preserved": true,
+  "registry_scope": "four descriptions/related curation fields; all other entries unchanged",
+  "placed_artifacts_resolved": 23,
+  "roles_and_primary_order_preserved": true,
+  "core_records": "two scoped records updated; source hashes current; other rooms preserved",
+  "desktop_checks": {
+    "intro/after/staging-checks.json": 27,
+    "intro/after/probe_change_intro.json": 21,
+    "intro/after/probe_accumulation.json": 26,
+    "bridge/runtime/verification.json": 29,
+    "bridge/museum/verification.json": 11
+  },
+  "flow_report": {
+    "checks": {
+      "snapshot_hashes_match": true,
+      "only_two_artifact_scripts_changed": true,
+      "painter_executable_lines_unchanged": true,
+      "map_final_tutorial_scene_unchanged": true,
+      "paired_cameras_match": true,
+      "paired_particle_states_match": true,
+      "paired_shared_museum_sources_match": true
+    },
+    "runtime": {
+      "runtime-headless-v2": {
+        "checks": 25,
+        "failures": [],
+        "returncode": 0,
+        "source_hashes_stable_during_run": true
+      },
+      "before-headless-v2": {
+        "checks": 26,
+        "failures": [],
+        "returncode": 0,
+        "source_hashes_stable_during_run": true
+      },
+      "final-headless": {
+        "checks": 32,
+        "failures": [],
+        "returncode": 0,
+        "source_hashes_stable_during_run": true
+      },
+      "before-runtime": {
+        "checks": 47,
+        "failures": [],
+        "returncode": 0,
+        "source_hashes_stable_during_run": true
+      },
+      "after-runtime": {
+        "checks": 50,
+        "failures": [],
+        "returncode": 0,
+        "source_hashes_stable_during_run": true
+      }
+    },
+    "headset_tested": false,
+    "learner_verified": false
+  },
+  "comparison_local_links_checked": 112,
+  "chosen_image_sha256": {
+    "doc/book/iterations/2026-09-19-change-review/intro/before/entry.png": "01d0e8a4a8f5562523e586a63f401891ba9d125205d156ee437f80f97eb4a340",
+    "doc/book/iterations/2026-09-19-change-review/intro/after/entry.png": "e0998f4dbca75170dd6a7cfc159baea4e940ffacca52bf931cc78f6d953da8e9",
+    "doc/book/iterations/2026-09-19-change-review/bridge/museum/museum-predict.png": "0bd4b48dfe1384c60d016037a746982da7561657a906354c1b013b7b2aadf7b6",
+    "doc/book/iterations/2026-09-19-change-review/bridge/museum/museum-compared.png": "a15a94bc7542c96d92857ca651e0cbca45d535b04104e6c62ae1f131ffdcbca4",
+    "doc/book/iterations/2026-09-19-change-review/flow/before-runtime/standing-hidden.png": "518d85bbbb4ee253f6ef01b57a1f62176212c70d4a180e929608a8a030bae565",
+    "doc/book/iterations/2026-09-19-change-review/flow/after-runtime/standing-hidden.png": "ccb097f4ccbf978c8c77abea1f1f8e54e45c0ee52d85b76e4f002e350d713749"
+  },
+  "headset_tested": false,
+  "learner_verified": false,
+  "browser_layout_verified": false,
+  "diagnostics": "See each local audit: existing startup/renderer/cache/shutdown diagnostics retained. No whole-project clean-log claim."
+}

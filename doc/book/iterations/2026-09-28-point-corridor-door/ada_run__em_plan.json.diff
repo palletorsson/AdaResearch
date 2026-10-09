@@ -1,0 +1,37 @@
+--- before/ada_run/em_plan.json
++++ after/ada_run/em_plan.json
+@@ -985,6 +985,34 @@
+       "h": 28,
+       "rooms": 0,
+       "artifacts": [
++        {
++          "token": "point_corridor_door",
++          "cell": [
++            8,
++            0
++          ],
++          "tile_cell": [
++            8,
++            0
++          ],
++          "rotation": 180,
++          "mode": "freestanding",
++          "venue": "interior",
++          "support_height_m": 0.0,
++          "hand": false,
++          "ruled": {
++            "by": "map: Point_One",
++            "cell": [
++              8,
++              0
++            ]
++          },
++          "config": {
++            "plinth": "0",
++            "pin": "1",
++            "offset": "-0.50,0.00,-0.50"
++          }
++        },
+         {
+           "token": "point_absent",
+           "cell": [

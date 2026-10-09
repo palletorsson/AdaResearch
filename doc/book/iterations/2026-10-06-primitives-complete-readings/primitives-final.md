@@ -1,0 +1,1283 @@
+# Primitives — the complete reflective sequence
+
+Complete current sequence · 6 October 2026
+
+
+---
+
+<!-- Hall 01: Point_Zero; source: commons/maps/Point_Zero/final.md -->
+
+# Point Zero — You arrive late
+
+… You arrive late.[^Point_Zero-1]
+
+<!-- @arrival_shaft -->
+
+You fall through a dark shaft into a lit room. In front of you, a number is running. Like Alice, you have entered before you know what kind of place this is. The floor catches you; the number goes on.
+
+<!-- @frame_counter_display -->
+
+Its first number for you is not its first number.
+
+You can stand in a room you did not build. Someone has made that possible. Their work gives us somewhere to begin and brings decisions with it. We inherit possibilities before we know their conditions.
+
+Let it run while you look around. When you return to the number, it has moved on.
+
+Where does the next one come from?
+
+A small counter can begin here:
+
+```gdscript
+extends Node3D
+
+var _count := 0
+
+func _process(delta: float) -> void:
+    _count += 1
+```
+
+Godot repeatedly calls `_process`. Each call adds one to `_count`: one, then two, then three.
+
+The line `var _count := 0` gives the counter its starting value. It sits outside `_process`, so the repeated calls do not set the count back to zero. Each call begins with the value the previous one left behind.
+
+`delta` supplies this update's time interval, in seconds. Our counter ignores it. A hundred calls add a hundred, however long they took. The number keeps how many, leaving how long unanswered.
+
+Our example starts its own count. The panel reads the engine's count, which began earlier:
+
+```gdscript
+var frames: int = int(Engine.get_process_frames())
+```
+
+`Engine.get_process_frames()` counts process frames since the engine started. The panel displays that total, including frames from before the panel existed, before you found the number.
+
+We begin with a number that includes something we did not witness.
+
+The view of this room has to be drawn again while you are in it. Turn your head and another view is drawn. That is the demand of real time here: the program must keep answering a body that has already moved. The counter gives this continuing work a visible trace. It does not count the years it took to make the room possible.
+
+We have read the line that asks for that number. Much of the code making it readable remains unopened. We are standing on the shoulders of giants, in fog.
+
+<!-- @folding_past -->
+
+Through the entrance window, rectangular frames recede within frames. They keep folding while you look elsewhere. There is a temptation to follow them back to a first frame, a place from which everything here might be explained in order.
+
+Ten frames, scaled and moved through a repeating cycle, make this depth. They hold no record of your arrival. A few repeated shapes can invite a journey far beyond their repeating cycle.
+
+We could stay with the counter: how a digit gets its shape, how its glass is drawn. We would also like time to pick something up. The code we leave unread keeps working while our attention moves elsewhere. Who gets to decide which questions can wait?
+
+<!-- @origin -->
+
+## Somewhere to count from
+
+We cannot follow everything back to its beginning. But we can choose somewhere to count from.
+
+Find the black sphere with its pink glow and wireframe cube. Its label says “Point zero”. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.
+
+```gdscript
+var origin := Vector3.ZERO
+```
+
+`Vector3.ZERO` is shorthand for three zeroes: `(0, 0, 0)`. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.
+
+Nearby, three words are printed on the floor: “~~you~~ are here.” The first is struck through.
+
+Take hold of the crossed-out *you*. It lifts. Carry it a few steps away. The rest of the sentence stays on the floor, still saying *are here* to the room.
+
+Set the word down somewhere else and look back at what is left behind.
+
+What part of you has arrived here?[^Point_Zero-point-one-ahmed-reach]
+
+<!-- @ -->
+
+We have chosen a place to count from. In the next corridor, a label is waiting for something to appear above it.
+
+Point one.
+
+[^Point_Zero-1]: Heidegger’s *thrownness* names finding ourselves already delivered into an existence we did not choose—not simply arriving after the clock started. Here, the room offers a small encounter with that condition. Genesis, first light: we look for a beginning. But is this the world beginning, or our first glimpse of something already underway? See [*Being and Time*, §29](https://www.beyng.com/pages/en/BeingandTimeMR/BeingandTimeMR.174.html).
+
+[^Point_Zero-point-one-ahmed-reach]: Sara Ahmed, [*Queer Phenomenology: Orientations, Objects, Others*](https://www.dukeupress.edu/queer-phenomenology) (Duke University Press, 2006), introduction. Ada’s questions about orientation and reach draw on her account of bodies finding their bearings through relations with objects, spaces and others. Lines will make this conversation more explicit.
+
+
+---
+
+<!-- Hall 02: Point_One; source: commons/maps/Point_One/final.md -->
+
+# Point One — A body in the light
+
+<!-- @point_absent -->
+
+The corridor begins with a label: “Point one”. Above it, nothing.
+
+There is somewhere to look because the words have given you a place to look. The name arrives before its object. You can stand in front of it, lean closer, and pass your hand through the empty space.
+
+Here is the point, but you cannot see it. We can keep its position in three numbers:[^Point_One-point-one-code]
+
+```gdscript
+var point_position := Vector3(0.0, 1.12, 0.0)
+```
+
+We have given that position a name, `point_position`. The numbers locate a place. They draw nothing. In the next hall, we will take them apart.
+
+A mathematical point has no extent.[^Point_One-point-one-euclid] To let it appear in the room, we will have to give it something a point does not have: a surface.
+
+<!-- @point_visible -->
+
+Further along, the same label sits below a small white sphere. Now there is something to look around. Its curved surface holds a highlight; as you move, the highlight moves too.
+
+Walk towards it. The sphere does not stop you. Your view can pass through its surface and come out the other side. You have crossed something you could see.
+
+We have given the position a surface for the light to meet. Make the sphere larger and more of the room disappears behind it. Its centre can stay exactly where it was. Drawing this body has still given it no power to stop you.
+
+<!-- @point_solid -->
+
+The next white sphere has the same size and finish. It says “Point one” too. Try the same approach.
+
+This time a collision body occupies the place the surface describes. Your movement meets a limit. The difference was invisible until you tried to cross it. Two objects can look alike and permit different lives around them.
+
+Its visible surface and its physical boundary are made separately. We have given them the same size and position. They could have been arranged otherwise. Make only the boundary larger, and your approach would stop before you reached the sphere. The empty space would resist you.
+
+<!-- @point_sun_switch -->
+
+## First there was light
+
+First there was light, right? Look at the crooked shadows under the white spheres. Round bodies leave stretched marks on the floor. Something outside the shape has helped to draw them.
+
+There is a switch on the wall. Turn it.
+
+You have removed their sun.
+
+The long shadows disappear. The spheres remain, faintly lit. Try approaching the solid one again. Its boundary has not gone with its shadow. What helped you see the body was never what stopped your body.
+
+Here the sun is a direction from which light arrives. We did not have to build a burning star. A few instructions gave the room a familiar consequence, and familiarity let the source go unquestioned. The switch puts that borrowed certainty within reach.
+
+Turn it back. A shadow returns to the same place. It makes the sphere easier to locate, but it is not another point beneath the first one. It belongs to a relation between a surface, a light and somewhere for the light to be interrupted.
+
+<!-- @point_pedestal -->
+
+## The size of a point
+
+Before leaving, you meet a white sphere on a pedestal. It is 1.3 metres across. The text still says “Point one”.
+
+The small sphere let you approach its centre. This one asks you to walk around it. A change in size has changed how much of the room you can see, and where your body can go. Its centre can still be written with three numbers. The same short address leaves a great deal unsaid.
+
+Look from the small white spheres to the sphere on the pedestal. We have given each a body and called each a point. Neither has to stop being interesting once we know the difference.
+
+In the next room, the point can leave its place with your hand. Now we can ask where it has gone.
+
+[^Point_One-point-one-code]: The position is drawn from the station's construction in `point_condition.gd`. The absent station creates no hidden sphere. The separate tutorial keeps a position, adds a visible surface and compares it with a collision boundary. Reading the three components and using pickup belong to the next hall, Point Coordinates.
+
+[^Point_One-point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+
+
+
+---
+
+<!-- Hall 03: Point_Coordinates; source: commons/maps/Point_Coordinates/final.md -->
+
+# Point Coordinates — Where is the point?
+
+<!-- @point_held -->
+
+The first label says “Point one”. This time the sphere is black. Take hold of it. The place you were looking towards can now leave with your hand.
+
+It fits within your hand. While you hold it, its movement answers to yours. Put it down and look back at the label. “Point one” stays at the station; the point has gone elsewhere.
+
+Which part did the name belong to? The position, the sphere, the possibility of taking hold?
+
+We have already separated seeing a body from being stopped by it. Holding adds another relation. Someone has made this point available to a hand. A position could not have supplied that permission on its own.
+
+Keep the black point. The corridor opens towards a coloured frame standing in an L-shaped basin. Its glass is level with the floor; the depth belongs below your feet. The point can travel over a hollow without falling into it.
+
+<!-- @coordinate_readout -->
+
+## Two addresses
+
+Keep the point in your hand and watch the white card as you move.
+
+The guides and the card follow the point you are already holding.
+
+The card marked `WORLD` puts its position into another visible form. Move the point slightly while watching the card. A printed component may stay unchanged through a movement you can see.
+
+The card rounds each component to two decimal places: `1.231` and `1.234` both appear as `1.23`. The stored position is left alone. Several nearby positions can share this shorter address. Your hand can move without the number changing. The apparent stillness belongs to the report.
+
+Now compare it with the card marked `LOCAL`. Move the same point between two places. Both cards answer, but with different numbers. What would you need to know to read either address?
+
+<!-- @CoordinateSystem3M -->
+
+Follow the coloured frame's guides as you move the point in your hand. Pink follows X, grey follows Y, black follows Z. These colours were chosen for this room; the letters name the directions. Move along one direction, then across it. The guides separate a movement into components, letting you follow several directions within one gesture.
+
+The two cards give the same point different addresses. `WORLD` measures from the scene's origin; `LOCAL` uses the coloured frame, including its position, orientation and scale. The point has not become two things. We have asked where it is from two different references.
+
+A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^Point_Coordinates-coordinates-haraway]
+
+Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.
+
+<!-- @drag_point_target -->
+
+## Room to arrive
+
+The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.
+
+“Here” has become a request, and the request has a tolerance. The target accepts the point when it comes within 45 centimetres of its centre. It measures the gap between the two positions. A hand has room to arrive. “Here” has become a small region.
+
+The target remembers whether the point is already inside. Staying there produces no further fall; leaving and returning allows another. A careful delivery and an accidental pass can bring the same rain. Your intention never enters this comparison.
+
+Return again, and a destination can become an instrument. Come straight back once; next time, take a longer way round. The target accepts both arrivals, but you have changed the pause between them. Your detour has given the falling balls another rhythm.
+
+In the next hall, we keep two positions at once. The space between them will become a line, and a distance we can change.
+
+[^Point_Coordinates-coordinates-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits?
+
+
+---
+
+<!-- Hall 04: Point_Lines; source: commons/maps/Point_Lines/final.md -->
+
+# Lines, Networks, Measure
+
+The point gave us somewhere to begin. Now put two positions into relation. The point you could carry becomes an end: moving it changes a span. Soon that span will ask you to walk, forbid you to cross, or gather with another line into a sign.
+
+<!-- @line_black_box -->
+
+In the black room, a pale line hangs between two small points. Take one end and move it. The line grows longer, turns, shortens. Release it. The end stays where your hand left it, still joined to the other.
+
+A number on the wall follows the distance between them. Try changing the direction without changing that number. The dark room leaves very little else to look at: two positions, and what happens between them.
+
+Can you find a span of one metre? Keep one end still and move the other around it. The segment turns while its length stays steady. The number can remain the same while the line points somewhere else. What has the measurement kept, and what has it left for your eye and hand to follow?
+
+Your hand may also keep moving while the rounded number on the wall appears still. A display has its own smallest difference.
+
+Through the side passage: **CAN YOU CONNECT THE DOTS?**
+
+<!-- @line_demo -->
+
+Two black points wait beside a barrier: **DO NOT CROSS.** Bring one close to the other, then let go. Watch for the segment that joins them. What else moved?
+
+The barrier flies apart.
+
+Keep hold of this small beginning: **two distinct points determine a straight line.**[^Point_Lines-point-lines-euclid] Here we draw only the part between them: a segment. Move an endpoint. The segment changes length and direction while the connection remains.
+
+Already something else has attached itself to the lesson. Joining two points has opened a passage.
+
+<!-- @do_not_cross_barrier -->
+
+Try crossing where the barrier stood. Before it broke, an invisible collision shape filled the space from the floor to the bar. The space looked open beneath the plank, but you could not pass through it. When it breaks, that boundary stops holding too. Disconnecting the points does not close the passage. After a short interval, the barrier returns, waiting if your body is still in its place.
+
+Connecting the points sends another instruction to the barrier. Someone joined those events in code. Geometry supplies a relation; another instruction gives that relation a consequence for your body. We could have made the connection ring a bell, or left the barrier standing.
+
+The words, the plank and the collision boundary all helped to say **DO NOT CROSS**. Opening the way required changing what enforced that instruction. For a moment, a line has given us passage through another line's prohibition.
+
+In Coordinates, leaving the target made another arrival possible. Here, joining the points gives us a few seconds of passage. The clock has acquired another task: it puts a prohibition back.
+
+<!-- @redline -->
+
+A red line marks another division. In speech, a red line can name the limit beyond which we refuse to go. Here the phrase has a colour and a place in the room. Before touching it, you may already have supplied the warning.
+
+The line gathers these associations as we move: a connection, a border, a promise to go no further. The words beside it, the bodies it separates and what happens when we cross give its thin shape different force. What, here, gives it the right to stop you?
+
+Ahead, the instruction moves from a barrier to the floor.
+
+<!-- @walk_this_line_marking -->
+
+Across the glass cover of a shallow basin, a black stripe: **WALK THIS LINE.** The glass supports your crossing.
+
+Try following it. Then walk alongside it. Cross it at an angle. The stripe stays straight through all three journeys.
+
+Did a sideways step feel like a mistake? The marking does not measure how closely you follow it. Its script draws the stripe and lettering. Yet you may already have corrected a step in answer to the words.[^Point_Lines-point-lines-ahmed-paths] You might also find yourself dancing around the same steady line.
+
+Choose which end to start from, and the line gives you a direction to follow. It cannot settle what following will mean to a body.
+
+<!-- @player_trace -->
+
+Turn and look at the route your movement has left behind. Compare it with the stripe. Where do the two lines part company?[^Point_Lines-point-lines-ahmed-deviation] One was waiting for you; the other has taken shape while you moved.
+
+The recorder saves positions and joins them with straight segments. The X and Z come from your headset; the line is drawn near floor level. A lean can change the drawing even when your feet stay put.
+
+Choose a start and an end. Walk between them with a detour. Imagine walking directly between those same positions instead. The span between the endpoints is the same for both journeys. It contains no record of the turn you took.
+
+The trace has kept more positions. How many did it need? What happened between the ones it kept?
+
+<!-- @line_relations_gallery -->
+
+## A body for the line
+
+After the crossing, the hall opens into four views: pairs, crosses, uprights and a grid. A familiar mark begins to acquire other uses.[^Point_Lines-point-lines-ingold]
+
+The point needed a sphere before we could see it. Here a line takes the form of a stick, a plank, a luminous rod, a measure, a beam. The mathematical line has no width. Each of these has enough width to appear, and a shape the hand can find.
+
+We might call this a *conceptual skin*: the body we give an idea so that we can encounter it. Look at what comes with that gift. The plank has a broad face and a narrow edge. The ruler divides its length into intervals. The light can seem to have hardly any substance, although this one is a mesh with a pickup body. Their common direction does not tell us what it will be like to hold them.
+
+The barrier already gave this distinction consequences. Its visible plank and its invisible collision shape occupied different amounts of space. Here the thin rods have slightly wider pickup shapes so a hand can find them. What we can see and what we can touch are being decided together, but they need not coincide.
+
+Two long black lines run along the floor, with equal intervals marked beside them. Walk between them. Their distance apart stays the same, although the gap seems to narrow ahead. A pair of lines can suggest depth in a flat drawing. Here you can walk into the depth they describe.
+
+Look up at the edge of the ceiling. A shorter length hangs nearer to you. Move a little sideways until it seems to join the edge. A lower or taller eye finds that agreement from another place. Then take another step. The line comes away from the ceiling and hangs over the room again.
+
+The two objects have stayed still. Your movement let them become one edge, then gave them back their distance. What else in the room is held together by the place from which you see it?
+
+## Four views
+
+What can two lines become together? Two sticks make a plus. Further along, two of the same length make an X. From the marked starting position, each reads as one familiar sign. Step sideways. The sticks sit in slightly different depth planes; the crossing belongs to your view. Take one in your hand and bring it forward. How far can the sign come apart before you stop seeing it?
+
+Beside them, two planks lie parallel. Walk between them. From one end the gap narrows into the distance; moving your head changes that appearance without moving either plank. Then move a plank. Now you have changed the relation itself. The two graduated measures beyond them give the hand another pair to compare.
+
+In the third view, two beams stand upright. A thin luminous horizon crosses the space behind them. Your own upright posture has company. Turn one beam in your hand and keep it there. The room does not correct it when you let go.
+
+The fourth view begins with six lines: three in each direction. Together they suggest a plane divided into places. Pull one line towards you. Its crossings separate as you move around it; a regular drawing opens into depth. Behind it, three more bars already occupy different directions. There are edges here without a surface stretched between them.
+
+The fixed lines on the walls keep another version of these arrangements. Your hands can change the bodies in the room while the wall keeps its own arrangement.
+
+Take the measuring laser. Its number ends at the body the beam meets. Keep it on a rod and the rod breaks; the reading reaches whatever lies behind it. The instrument that measured a distance has removed one of its limits.
+
+The hammer can break these studies too; the pink gun leaves them coloured for a while. Wait, and the study returns. Take the rod again. Its ability to come back belongs to the room we have written, as much as its ability to resist a hand.
+
+## Follow this line
+
+On the floor: **FOLLOW THIS LINE.**
+
+The mark reaches the wall. It turns upwards and continues across the plaster. You can follow it with your eyes. Your next step meets the wall's collision boundary.
+
+The earlier connection opened a barrier. This line opens nothing. An instruction has reached the limit of the body to which it was addressed. Do you stop, turn, look up? The mark remains available to another kind of following.
+
+<!-- @anamorphic_cross -->
+
+At the exit the passage narrows: **× + × + × +**. Cross the first X and your health falls.
+
+<!-- @health_cross -->
+
+The plus gives some back, opening into a brief scatter of light and a rising sound. Hurt, recovery, hurt, recovery. Two crossed lines can read as a refusal or an offer of care; here those associations have been given access to your body.
+
+<!-- @ -->
+
+Look back at the route you have left among these arrangements. The question taking us towards the exit has become precise: **what must we save if we want to keep something of the journey?**
+
+Two endpoints were enough for the segment. To remember the detour, we will need to add something.
+
+Bring the detour.
+
+[^Point_Lines-point-lines-euclid]: See Euclid, [*Elements*, Book I, Postulate 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/post1.html), on drawing a straight line between two points. The construction concerns the finite segment; extending it and treating it as an unbounded line are further steps. The postulate is a historical reference, not an account of the renderer or the barrier’s programmed response.
+
+[^Point_Lines-point-lines-ingold]: Tim Ingold, [*Lines: A Brief History*](https://www.routledge.com/Lines-A-Brief-History/Ingold/p/book/9781138640399) (Routledge Classics edition, 2016), especially “Traces, Threads and Surfaces” and “Up, Across and Along.” Walking, drawing, weaving and connecting enter his inquiry as different practices of making lines. This helps us take the room’s proliferation seriously: a connector, a trace and a boundary need not perform the same work merely because we call each a line.
+
+[^Point_Lines-point-lines-ahmed-paths]: Sara Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology) (2006), 15–20, especially 16: repeated journeys make paths, while established paths help direct later journeys. Ada takes up this relation as an experiment. Its stripe is authored rather than worn into the ground, and its instruction does not score compliance. Being oriented by a line, evaluated against one and physically blocked by one remain different operations to investigate.
+
+[^Point_Lines-point-lines-ahmed-deviation]: Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), 20, considers how deviations can leave marks and generate other lines. This sampled drawing offers one specific record, not the whole history of the body’s deviation.
+
+
+---
+
+<!-- Hall 05: Point_Trace; source: commons/maps/Point_Trace/final.md -->
+
+# Duration and Residue
+
+Bring the detour.
+
+There was time between the ends. We passed through it. Let the next line try to keep something of the passage.[^Point_Trace-point-trace-klee]
+
+## Let the hand leave a line
+
+<!-- @draw_dot -->
+
+Three coloured pens wait on their plinths. Take the red pen and draw a short loop in the air. Pause with it still in your hand. Beside the line, a small instrument tilts its face towards reading: a count above a table of positions.
+
+The nib is the point being followed. Turn your wrist while keeping your hand almost still: the tip can travel while your grip barely moves.
+
+Watch during the pause. Does another point enter merely because time passes?
+
+Move again. Give the loop a tail, then release the pen. Your hand can rest while the line stays. Something of the movement has become available to look at from another side.
+
+The count comes from a list:
+
+```gdscript
+var point_count = _trail_points.size()
+```
+
+`_trail_points` holds positions in the order they were kept; `size()` counts them. The recorder joins each position to the next with a straight segment. Repeated in small enough steps, the two-point construction from the last room lets us see a curve. The gesture has acquired joints. Between those joints, the program draws a connection; your hand may have taken another way.[^Point_Trace-point-trace-sampling]
+
+The recorder waits for at least five millimetres of movement before considering another position. A still pause can leave the count unchanged while Point Zero's counter keeps running. You spend time holding the line still; the position list does not say how long you waited.
+
+Pickup, tracking, drawing, the letters on the screen: more code is running than we can read here. We follow the movement gate because it answers the question our hand just asked.
+
+Each row gives three coordinates for a retained position. As the drawing grows, earlier rows leave the small table. The drawing still has its beginning. What has left the screen has not yet left the line.
+
+## Another resolution, another gesture
+
+The other pens give the line a coarser grain. From red through green to blue, their grids grow wider.
+
+Repeat a small bend with the blue pen. Then enlarge the movement until another turn appears. Your wrist is negotiating with a spacing. A gesture that one recorder can distinguish may need to become larger for another.
+
+The program rounds each coordinate to the nearest grid position. Several movements of your hand can arrive at the same saved address. Until a different address is kept, the line has no new corner.[^Point_Trace-point-trace-quantisation]
+
+The saved positions lie on the grid, but the segments between them can cut across it diagonally. A grid of corners does not require a drawing made only of right angles.
+
+Now give the coarse recorder something it might do well. Make a corner you can return to. Let your hand wander while one address stays steady, then find the edge where it changes. The same interval that swallowed a small flourish can help you repeat a shape. What kind of drawing do you want to make with it?
+
+There is also a limit to how many positions a pen can keep. Near the exit, another dot has a shorter memory. We will reach its limit while drawing.
+
+
+## After the hand lets go
+
+<!-- @trace_ball_ramp -->
+
+A black ball rests on a pale plinth. A plank slopes from its edge to the floor. Pick up the ball, set it near the top of the plank and let go.
+
+The ball continues. A thin black line stays behind it.
+
+The point has acquired weight. Your hand chose where to release it; gravity, the slope and contact with the plank carry the movement further. Here the recorder follows the ball's centre. The mark hangs a radius above the surface it seems to draw on.
+
+Wait until the ball settles in the shallow tray. The line stops growing. Walk alongside it: the slope has become part of the drawing. Carry the ball back and release it from another place. The next release begins a new trace.
+
+You have set a line in motion and let something else continue it. How much of the drawing did you make when you placed the ball?
+
+
+## Touch the page
+
+<!-- @whiteboard -->
+
+Four pens and an eraser wait on the shelf beneath the wall-mounted whiteboard. These belong to the board. Take the red one and touch its nib to the face. Make a short stroke, lift the pen, cross a little space, and touch down again.
+
+Your hand travelled across the gap. The picture leaves it white.
+
+The pen writes within the board's edges and close enough to its face. Lift beyond that contact allowance, and the next touch begins a new stroke. Your hand keeps moving across the gap; the rule stops admitting it to the picture. You can use that interruption to give two marks some space.
+
+The board turns the accepted contacts into a painted image. The coloured pens have the familiar spacings. A lift of the hand gives the drawing a gap.
+
+## A line with a short memory
+
+<!-- @trace_short_memory -->
+
+The amber point near the exit has room for thirty-two positions. Draw a loop, then lead it away. Small beads mark the positions the cord joins. Watch its far end.
+
+At first you make more line. Then you begin to unmake it.
+
+Hold your hand still. Does the remaining line wait with you?
+
+This recorder uses the same movement gate as the red pen. We have given its list less room. When a new position takes it over that limit, the oldest goes:
+
+```gdscript
+if _trail_points.size() > trail_max_points:
+    _trail_points.pop_front()
+```
+
+Waiting does not spend another place. Continuing the drawing can. Thirty-two positions are neither thirty-two seconds nor a fixed length of line.
+
+Now try drawing with the loss. Give yourself a tail. Curl it around your other hand, then lead it elsewhere. The space you just marked can open again. What would you make with a line that follows you without keeping all of where you have been?
+
+<!-- @ -->
+
+Return to a line you want to keep. Release the drawing pen after making it: that release sends a copy onward. With the amber dot, only the surviving positions travel.[^Point_Trace-point-trace-carry]
+
+We bring that trace into the next hall. Your hand can rest now. The movement that made the line has already passed; its recorded positions can remain.[^Point_Trace-point-trace-inscription] There we will place the drawing as a sculpture, something you can approach from another side.
+
+The recorder was made to keep a gesture. Its list can now become something to compose with. A bend of the wrist may return at the size of a room, inviting another movement. The first use is still there, but it no longer tells us everything the record can become.[^Point_Trace-point-trace-hauntology]
+
+In the next room, look for your bend. It may have grown.
+
+[^Point_Trace-point-trace-klee]: Paul Klee, [*Pedagogical Sketchbook*](https://openendedgroup.com/field2/assets/Klee_Paul_Pedagogical_Sketchbook_1960.pdf), translated by Sibyl Moholy-Nagy (1960 edition; German original 1925), opening section. Klee begins with an “active line on a walk” and a moving point. Ada makes the recording conditions part of that encounter: which point moves, when a position is accepted, and how retained positions become a line.
+
+[^Point_Trace-point-trace-sampling]: Claude E. Shannon, [“Communication in the Presence of Noise”](https://fab.cba.mit.edu/classes/S62.12/docs/Shannon_noise.pdf), *Proceedings of the IRE* 37, no. 1 (1949), 10–21, Theorem 1, gives a reconstruction result for band-limited signals sampled uniformly in time. It is a technical neighbour, not a guarantee for this trace: frame timing, a movement threshold and spatial rounding do not meet those assumptions. Joining retained positions with straight segments cannot by itself recover the intervening gesture.
+
+[^Point_Trace-point-trace-quantisation]: Godot’s [`snappedf`](https://docs.godotengine.org/en/4.6/classes/class_%40globalscope.html#class-globalscope-method-snappedf) returns the nearest multiple of a spacing. Here this quantises spatial components; it does not set a fixed temporal sampling rate. The separate movement gate determines whether to consider another reading. Changing either operation can alter the record, for different reasons. The [technical companion](/book?map=Point_Trace&section=technical) gives the spacings, recording gate and list capacities.
+
+[^Point_Trace-point-trace-carry]: A drawing pen must retain at least two positions to send a copy onward. The whiteboard's image and the ball's path stay in this hall. The [technical companion](/book?map=Point_Trace&section=technical) distinguishes these records and their transfer routes.
+
+[^Point_Trace-point-trace-inscription]: Sigmund Freud’s [“A Note upon the ‘Mystic Writing-Pad’”](https://web.english.upenn.edu/~cavitch/pdf-library/Freud_WritingPad.pdf) (1925) and Jacques Derrida’s “Freud and the Scene of Writing,” in [*Writing and Difference*](https://press.uchicago.edu/ucp/books/book/chicago/W/bo27619783.html), translated by Alan Bass (1978), open a neighbouring inquiry into inscription, retention and the relation between a mark and what is no longer present. Here they open a question to pursue: what can a retained mark tell us about a movement that has already passed?
+
+[^Point_Trace-point-trace-hauntology]: Jacques Derrida's [*Specters of Marx*](https://api.pageplace.de/preview/DT0400.9781040559963_A63760427/preview-9781040559963_A63760427.pdf) (1993; English translation by Peggy Kamuf, 1994), “Exordium,” connects inheritance with responsibilities towards those no longer or not yet present. Ada extends this question to technical use: a tool can carry an earlier purpose into an unanticipated connection. The [project afterword](/book-review/doc/book/iterations/2026-09-23-book-frame/index.html#afterword) develops this proposal alongside entropy as difference and Ashby's requisite variety.
+
+
+---
+
+<!-- Hall 06: Point_Line_Grid; source: commons/maps/Point_Line_Grid/final.md -->
+
+# Grid Quantizes Movement
+
+Look for your bend. It may have grown.
+
+This is the drawing you brought from Trace. Your hand made the movement in the previous hall; here its recorded positions give that movement a sculptural form. Over the ruled field, it may have acquired another size. You can walk around a gesture you have finished making.
+
+Keep the original in view. We are going to give its positions grid addresses, then ask what another arrangement can make of the same trace.
+
+## Find somewhere to return
+
+<!-- @grab_sphere_point_snap -->
+
+Pick up the snapping sphere and move it slowly. Its marker follows your hand while the retained line waits, then gains another corner. Between those changes, there is room to move.
+
+Trace already made choices about which positions to keep. Here the table shows the last ten kept positions, naming each in metres and in whole-number steps from the origin. With five centimetres between grid positions, `0.15` metres along X has index `3`: three steps from world zero. The same place has two names.
+
+The calculation, reduced to one axis, is:
+
+```gdscript
+var index = roundi(pos.x / grid_size)
+var placed_x = index * grid_size
+```
+
+Divide by the spacing. Round to the nearest integer. Multiply back to get metres. At this spacing, `0.12` becomes `0.10`; `0.13` becomes `0.15`. One centimetre of movement can carry the record across a five-centimetre interval. Elsewhere, a larger movement can leave its address unchanged.
+
+Let go. The tool brings its marker onto the lattice. Pick it up, move away, then try to return to that address. Several nearby positions can round to the same result. Your hand has room to vary while the point finds its place again. This can help us make two pieces meet without placing them exactly by eye.[^Point_Line_Grid-point-grid-bowker-star]
+
+Both columns in the table describe the position the program kept. Your hand can still be somewhere between the addresses.
+
+## Give the interval a rhythm
+
+<!-- @player_trace -->
+
+Walk a small loop, then look behind you. Two accounts of the walk remain: a finer sampled reference and a path rounded to one-metre spacing in the recorder's own frame.
+
+Find a place where you can move while the coarse address holds. Slowly cross into another. Cross back. There is a rhythm in the jump, and room to move within the interval. A rule for making positions agree has also given us something to dance with.[^Point_Line_Grid-point-grid-ahmed-return]
+
+A lean with your feet planted can enter this record too: it follows your headset across the floor. It must choose a point before it can draw a path called yours.
+
+The lines connect the positions it keeps. A diagonal can cut across ground you went around. Returning to an earlier address can add another turn to the record; the program keeps an order of visits, not just a collection of places visited once. The address marks a return; your reason for coming back has stayed with you.
+
+## Let the drawing find another use
+
+<!-- @grid_lines -->
+
+Return to the ruled field. Find your bend in pink, then compare green. Is it still your bend at this size?[^Point_Line_Grid-point-grid-carry]
+
+This display subtracts the centre of the received drawing's bounds and applies a scale:
+
+```gdscript
+mesh.surface_add_vertex((p - center) * final_scale)
+```
+
+Pink gives the drawing another centre and size. Green rounds those displayed positions onto a new grid. The panel still lists the original positions: the program can give a record another appearance without rewriting what it received.[^Point_Line_Grid-point-grid-replay]
+
+Both versions came from your hand; neither contains the whole movement. One bend has become several things we can return to. Keeping them beside one another lets us see what the new rule changed, and leaves the earlier record available for a use we have not chosen yet.
+
+A turn made by your wrist might now suggest a route for your whole body. Is there a part you would want to follow? A record can become a score, but it needs another decision about what following means.
+
+## Give the address a floor
+
+<!-- @plan_vitrine -->
+
+Step onto the small plan in its glass enclosure. Five rows cross five columns: twenty-five one-metre cells. Their printed indices run from zero to four.
+
+Entering in VR gives each hand a pen. Draw a small circle with the cyan left hand, then try it with the amber right. Cyan follows the sampled movement. Amber places its horizontal positions above the nearest cell centres. A small circle of your hand may leave the amber line waiting at one address.
+
+The floor has entered the drawing. Its addresses reach up into the air, but they have not taken over every direction. Lift the amber hand without moving it sideways: height still has room to vary. Stepping out returns the pens; the traces linger briefly, then clear.
+
+Find a cell using both numbers. Leave it and find it again. You can now describe where a cube might stand without pointing. Two indices can become an instruction for placing it.[^Point_Line_Grid-point-grid-scott]
+
+Cross a row, then cut diagonally. The drawn divisions do not stop you. A continuous collision surface supports the plan. Over the other basin, the museum supplies walkable glass; the replayed lines provide no floor of their own.
+
+An address can tell a program where to put something. What lets a body reach it needs further work.[^Point_Line_Grid-point-grid-lefebvre]
+
+<!-- @ -->
+
+A shared address can help us repeat a placement or coordinate a meeting. The grid gives us a way to name a place and return to it together.
+
+We can bring endpoints back to places where they meet. Next, join three points that do not all lie on one straight line, and close the last gap. The grid can help the corners meet; it does not fill the space between them. What must we add before there is a face inside?
+
+[^Point_Line_Grid-point-grid-bowker-star]: Geoffrey C. Bowker and Susan Leigh Star, [*Sorting Things Out: Classification and Its Consequences*](https://mitpress.mit.edu/9780262024617/sorting-things-out/) (MIT Press, 1999), study classifications and standards as information infrastructure, including whose differences become visible or disappear within them. The operational comparison here is treating different inputs as equivalent: it can support coordination while leaving distinctions out. Its consequences depend on what we build with that equivalence.
+
+[^Point_Line_Grid-point-grid-ahmed-return]: Return to Ahmed, [*Queer Phenomenology*](https://www.dukeupress.edu/queer-phenomenology), introduction: bodily orientation involves relations of alignment and reach. Dancing with the interval is Ada’s proposed use of this rule, not a result already established by her argument.
+
+[^Point_Line_Grid-point-grid-scott]: James C. Scott, [*Seeing Like a State: How Certain Schemes to Improve the Human Condition Have Failed*](https://yalebooks.yale.edu/book/9780300252989/seeing-like-a-state/) (Yale University Press, 1998), chapter 1, examines practices of administrative legibility, including cadastral mapping. The connection here is narrow: a plan can make a placement describable to someone not standing beside it. This does not make every grid coercive or establish that a legible plan is sufficient for inhabiting the place.
+
+[^Point_Line_Grid-point-grid-lefebvre]: Henri Lefebvre, [*The Production of Space*](https://www.wiley-vch.de/de?isbn=9780631181774&option=com_eshop&title=The+Production+of+Space&view=product), translated by Donald Nicholson-Smith (Blackwell, 1991; French original 1974), chapter 1, distinguishes spatial practice, representations of space and representational spaces. His account keeps planning, practical activity and lived meanings in relation. The vitrine enters that problem without reproducing the whole theory: addresses and a plan do not by themselves establish access, habits, belonging or a place’s meaning to its inhabitants.
+
+[^Point_Line_Grid-point-grid-carry]: If the field is empty, return to Trace, draw with one of the three coloured pens until it retains at least two points, and release it. That release sends the record onward. The whiteboard, ball and walking recorder keep separate records.
+
+[^Point_Line_Grid-point-grid-replay]: Small drawings grow fivefold; larger ones receive a smaller multiplier to fit within five metres. Green rounds the displayed positions with six intervals per metre along each axis. The [technical companion](/book?map=Point_Line_Grid&section=technical) gives the transforms and the panel's page controls.
+
+
+---
+
+<!-- Hall 07: Point_Triangle_Context; source: commons/maps/Point_Triangle_Context/final.md -->
+
+# Closing a boundary, adding a face
+
+Three edges meet. You can still see the room between them.
+
+<!-- @triangle_line_puzzle -->
+
+Bring the loose lines to the three waiting corners. Fit the last edge and look through the triangle. Closing it has not covered anything.
+
+Press **SHOW / HIDE FILL**. A translucent patch appears between the same corners. Press again. The edges stay; the patch goes.
+
+A boundary and a face have arrived through different actions. Connecting these three points closes a loop. Asking the renderer to make a triangle gives it a surface to show. We have chosen that these corners belong together, in this order. Their positions did not make that commitment for us.
+
+<!-- @triangle_construction_plate -->
+
+The wall plate holds the distinction still: three points, three connected edges, a face.
+
+![The same three corners shown as points, a connected boundary and a filled triangle.](/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png)
+
+We built this plate while writing the chapter. The book needed an image; the room gained another object to approach. This illustration is a Godot view of that same construction. A sentence can ask for something to try, and making it can change the sentence.
+
+<!-- @draw_triangle_faces -->
+
+At the small drawing station, a triangle waits with black corners and an off-white face. If you released a drawing in Trace, your own bend waits here instead, still open. Its journey has changed it: six positions kept, its span reduced to arm's reach, its height flattened. The machine has prepared your drawing for a method that expects a plane. What did that preparation leave behind?[^Point_Triangle_Context-point-triangle-carry]
+
+Move the drawing point near the first corner to close that carried loop. For the simpler comparison, **RESTORE TRIANGLE** replaces the current drawing with three editable corners.
+
+<!-- @triangle_live_twin -->
+
+Look up. The small drawing has a twin in the middle of the hall. Move a corner and watch the same change arrive more than three times larger. Your hand can reach the small figure; your body can walk around the other.
+
+Leave the corners where they are. Walk towards the side of the large face. Its breadth narrows until the black edges almost meet in your view. Step back and the surface opens again. You have changed where you look from, without moving a single corner.[^Point_Triangle_Context-point-triangle-winding]
+
+Now return to the small drawing. Bring its upper corner down onto the line between the other two and release it. The large figure flattens too. This time walking around cannot recover the missing area. Three positions remain, but they lie along one line. Lift the corner away and a face opens between them again.
+
+From one view, these two events can look alike. In one, the face waits for another viewpoint. In the other, we must change what we made.
+
+<!-- @draw_triangle_faces -->
+
+Press **SHOW / HIDE FILL** while the triangle is open in your view. Both copies lose their faces together; the corners and edges remain. Hiding a surface has left its geometry available for a return. The large fill also lets you walk through it while it is visible. What covers your view need not stop your body.
+
+We have been calling all of these a triangle. A boundary, a rendered face, a figure seen edge-on, three corners with no area: keeping their differences lets us do more with the name.
+
+The tool will accept longer outlines too. Draw a six-corner L, close it, then release the handles and press **SHIFT START**. The corners stay where they were. The fill can reach across the notch you left open.[^Point_Triangle_Context-point-triangle-construction]
+
+Every triangle in this method shares the first corner. Choosing another beginning changes the fan. Its rule has kept working while failing to keep your intended interior. The counter still reports four triangles; counting them does not tell us whether they belong there.
+
+We can choose a suitable start, ask for a different filling method, or keep the unexpected wing as the beginning of another work.[^Point_Triangle_Context-point-triangle-triangulation] The mistake needs an explanation, but its explanation need not decide what we want from it.
+
+<!-- @quad_line_puzzle -->
+
+At the far end, four edges offer another empty boundary.
+
+<!-- @quad -->
+
+Nearby, the quad adds two triangular faces along a diagonal. Lift a corner away from that diagonal: one face follows while the other stays. Move an end of the shared edge and both change. A shape that looked like one square has given us two surfaces that can tilt apart.
+
+Next, faces meet at a corner. What must we add to enclose a volume?
+
+[^Point_Triangle_Context-point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.
+[^Point_Triangle_Context-point-triangle-triangulation]: One available development route is Godot’s [`Geometry2D.triangulate_polygon`](https://docs.godotengine.org/en/4.6/classes/class_geometry2d.html#class-geometry2d-method-triangulate-polygon), which returns triangle indices for a 2D polygon and an empty result if triangulation fails. A planar 3D drawing would first need coordinates in its plane, followed by mapping the returned indices back to its vertices and handling winding. This room still uses its first-vertex fan; no alternate triangulator is installed by this note.
+[^Point_Triangle_Context-point-triangle-carry]: The trace travels on the same `TraceData` autoload that brings your drawing to the ruled field in Grid: releasing one of the three coloured drawing pens in Trace appends a snapshot of its retained positions, and this tool reads the most recent one. Grid and Triangle each read that saved drawing; Triangle does not receive Grid's enlarged or snapped display. If nothing was released there, or you have come to this room first, the tool opens with one editable triangle, also shown by the large twin. NEW OUTLINE begins another drawing while keeping that triangle. A carried trace is left open; the twin does not close it for you. The reduction to six corners, the rescaling and the flattening happen on arrival, not in Trace; the stored positions are unchanged, and the whiteboard's image travels by no route at all.
+[^Point_Triangle_Context-point-triangle-construction]: The [technical companion](/book?map=Point_Triangle_Context&section=technical) gives the six coordinates and the manual two-fill comparison. SHIFT START changes the last completed loop; release the pen and every corner, and leave no unfinished outline. The instrument reports START and whether the action is ready. Letters A–F name our route here; the tool displays numbered corners.
+
+
+---
+
+<!-- Hall 08: Primitives_Polythedra; source: commons/maps/Primitives_Polythedra/final.md -->
+
+# Trihedra and First Solids
+
+The face you made in the last room could be seen from either side. Now let faces meet. When do they begin to enclose something?
+
+<!-- @grab_trihedron -->
+
+Pick up the open corner and turn it. Follow the three triangles toward the point they share. Then look through the opening opposite that point. Something suggests an inside, although one side is missing.
+
+Count the faces before looking at the code. Three. The artifact is a finite model of a trihedral corner: three faces meeting at one vertex. Its four stored positions are connected like this:
+
+```gdscript
+[0, 1, 2]
+[0, 2, 3]
+[0, 3, 1]
+```
+
+Position `0` belongs to all three triangles. The other positions make a rim around the opening. No row joins those three rim points into a base.
+
+We have turned the face into a corner. We have not yet closed a surface around a volume.
+
+<!-- @grab_tetrahedron -->
+
+Turn the tetrahedron a few steps on. Find a face where the first object has an opening. Follow its edges toward the opposite vertex. Four faces now complete the enclosure.[^Primitives_Polythedra-polyhedra-separation]
+
+Adding a base to the open corner would close a tetrahedron. This neighbouring example is regular, with four congruent equilateral faces. Its proportions differ, so compare how the faces connect before comparing their shapes.
+
+Look at the tetrahedron as a little room with no door. Imagine it large enough to stand inside: where would you enter? The renderer draws the boundary without filling the interior with material. Enclosing a region has not supplied a way into it.
+
+Now look back through the open corner. Would a small object fit through its missing side?
+
+The same four positions used for drawing enter another construction:
+
+```gdscript
+var convex_shape = ConvexPolygonShape3D.new()
+convex_shape.points = geometry["vertices"]
+collision_shape.shape = convex_shape
+```
+
+The convex collision hull spans the four positions, including the base absent from the drawing.[^Primitives_Polythedra-polyhedra-hull] Rendering leaves an opening; physics receives a closed shape. The points have entered two rules and acquired different boundaries.
+
+<!-- @polyhedra_boundary_plate -->
+
+Look at the two versions on the wall. The amber base makes visible a boundary you could not see on the object in your hand.
+
+![The open trihedron beside the convex hull of the same four points; an amber face shows where physics closes the missing base.](/book-review/doc/book/figures/Primitives_Polythedra/polyhedra-boundaries.png)
+
+*Four positions, two boundaries. The amber face shows where the convex hull closes the opening.*
+
+That does not mean your tracked hand must stop there. Which body collides, with which layers, matters too. The geometric surface remains open; passage for a particular simulated body is another question.
+
+## A corner makes room
+
+Walk toward a pink corner. A triangular face meets you before the two walls do. Follow its lower edge across the floor, then look up to the point where it ends. The corner looks cut away because we have filled it.
+
+Imagine four points: one at the old floor corner, one farther along each wall at floor level, and one directly above the corner. Join every pair. Three triangular faces lie against the floor and the two walls. The fourth faces you. Behind it, the collision hull occupies the enclosed volume.
+
+This tetrahedron is a **three-dimensional simplex**. We have been approaching it all along: a point, a line segment, a triangle, a tetrahedron. Each step adds a point outside the space spanned by the previous ones. Here four points that do not lie in one plane are enough to enclose a volume.
+
+The small regular tetrahedron has equal edges. This one takes its proportions from the room: three edges leave the old corner at right angles. Follow the pink face into the walls. Its fit depends on their agreement.
+
+Walk up to it. The room has gained a solid and lost a little space for your walk. To make one body fit, we have changed the room available to another.
+
+## A face meets the floor
+
+<!-- @prism_block -->
+
+Find the bare prism examples toward the entrance side of the room. Follow a triangular end, then an edge joining it to the other end. The triangle has acquired a length. Two triangular ends and three connecting faces bound a triangular prism.
+
+Compare the whole block with the quartered version and the open frame. Their visible construction changes; all three retain the original prism's collision surface. The gaps offered to your eye have no corresponding cutouts in that surface.
+
+Approach a utility wedge from its low end and try walking toward the raised floor. Compare that approach with an upright face. Where can forward movement become upward movement?
+
+The museum builds these wedges from a walkable prism scene, scaling the rise and the run:
+
+```gdscript
+w.scale = Vector3(1.0, maxf(0.05, rise), maxf(0.2, run_cells))
+```
+
+The low edge must meet the floor; the upper edge needs somewhere to arrive. The moving body's collision and slope settings also participate.[^Primitives_Polythedra-polyhedra-gibson] If a join catches you, notice where. A continuous-looking route still has to work as a route.
+
+You can hold a small solid and inspect it. A larger arrangement of faces begins to carry the inspector. The lesson has moved from the object in your hand to the conditions of your own movement.
+
+<!-- @concrete_barrier -->
+
+Approach the striped concrete enclosure and follow its outside edge. Its stepped profile is carried along a length too, with a collision body added. Related constructions can offer ascent or interrupt a route. Geometry does not decide the use.
+
+A barrier might protect a place to stand; a slope might lead somewhere difficult to leave. Follow what this arrangement permits before deciding what you would change.
+
+<!-- @street_sign -->
+
+STOP stands beside the concrete. Did you pause at the word or at the physical boundary? Recall WALK THIS LINE: an instruction can orient you without enforcing collision. This sign has no collision body of its own.[^Primitives_Polythedra-polyhedra-ahmed]
+
+Read one arrow on its blue disc, then look where it points. An arrow can propose a direction without knowing whether the route is traversable.
+
+Look back at the barrier and the slope. Which would you change, and whose movement would it change? The fixtures are fixed here; this is a proposal to carry onward.
+
+Keep the distinction: enclosing a region, admitting a body and suggesting a direction require different decisions. Next, take hold of a cube's corner. Several faces will answer the same movement. We know how faces can close around a space; now we can ask what keeps them together when their positions change.
+
+[^Primitives_Polythedra-polyhedra-separation]: For the Jordan–Brouwer separation theorem, see Zuoqin Wang's [Topology lecture 23](https://staff.ustc.edu.cn/~wangzuoq/Courses/20S-Topology/Notes/Lec23.pdf), Theorem 2.7 (2020). In three dimensions, a surface embedded in Euclidean space and homeomorphic to a sphere separates its complement into two components, one bounded and one unbounded. The tetrahedron's boundary fits these conditions. This establishes separation, not a collider, an entrance or habitability.
+
+[^Primitives_Polythedra-polyhedra-hull]: Godot's [ConvexPolygonShape3D](https://docs.godotengine.org/en/4.6/classes/class_convexpolygonshape3d.html) is a solid collision shape. The opening here belongs to the rendered mesh, not to that hull. A collision model assembled from surface triangles is a different construction; Godot's [ConcavePolygonShape3D](https://docs.godotengine.org/en/4.6/classes/class_concavepolygonshape3d.html) is intended chiefly for static geometry. This is not an instruction to replace a held object's hull with a concave shape without considering its physics behavior.
+
+[^Primitives_Polythedra-polyhedra-gibson]: James J. Gibson, [The Ecological Approach to Visual Perception](https://memoof.me/download/1058/pdf/1058.pdf) (1979; linked Classic Edition), chapter 8, relates a surface's affordance of support to the animal's size, weight and behavior. The wedge invites a computational comparison: passage depends on the surface and the moving body's implementation. The engine's settings do not exhaust Gibson's account of perception or the visitor's bodily experience.
+
+[^Primitives_Polythedra-polyhedra-ahmed]: See Sara Ahmed, [Queer Phenomenology](https://www.dukeupress.edu/queer-phenomenology) (2006), Introduction; the fuller discussion accompanies WALK THIS LINE. Here orientation returns through a sign beside a physical boundary. Reading an instruction and meeting collision remain different operations.
+
+
+---
+
+<!-- Hall 09: Point_Animatedcube; source: commons/maps/Point_Animatedcube/final.md -->
+
+# Cube Assembly from Primitives
+
+You have been inside boxes since the first room. Now one of them lets you take hold of a corner. What must stay in place for it to remain a cube?
+
+<!-- @cube_lines -->
+
+Begin with the outline. Follow the three edges leaving one corner. Look through to the far side. You can recognise a cube before any faces have appeared, although nothing has yet closed the gaps between these lines.
+
+The previous room gave us forms that could support a foot or interrupt a route. Here we return to their construction. What happens when the parts remain connected but their positions change?
+
+<!-- @animatedcubebuilder -->
+
+The builder may have finished before you arrive. Press **REPLAY** on its front instrument. Corners appear, then edges, then triangular patches. Press **PAUSE** at the moment you recognise the shape. How much did you need to see?
+
+Only this assembly pauses. The folding net and the rest of the room continue. We have borrowed a little attention from a world already running.
+
+The source has prepared the geometry before this presentation begins. The animation reveals pieces that were hidden. What looks like construction is also an arrangement of when we are allowed to see.
+
+Resume. Once the assembly finishes, the numbered corner handles become available. Keep the second builder unchanged as a reference. On the one you will alter, find `v6`. Follow the square face containing `v4`, `v5`, `v6` and `v7`. Predict what will happen if you pull `v6` out of that face's plane, leaving its other corners where they are.
+
+Move it a little. Look along the face. Where did the crease appear?
+
+Try to locate the seam before pressing **DIAGONALS**. The yellow lines show the six diagonals that divide the cube's square faces into triangle pairs. Your hand has made one of those divisions matter.[^Point_Animatedcube-animatedcube-triangulation]
+
+That face is stored as two triples:
+
+```gdscript
+[4, 5, 7]
+[5, 6, 7]
+```
+
+Each number names a vertex. Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.
+
+<!-- @cube_diagonal_plate -->
+
+![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-review/doc/book/figures/Point_Animatedcube/cube-hidden-diagonal.png)
+
+*The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.*
+
+<!-- @animatedcubebuilder -->
+
+The builder reads a moved handle back into its position list:
+
+```gdscript
+vertices[i] = handle_nodes[i].position / cube_size
+```
+
+The edge and triangle lists still refer to the same vertex numbers. The neighbours remain; equal lengths, right angles and flat square faces need not.[^Point_Animatedcube-animatedcube-boundary] The display measures the largest corner shift in local metres. It cannot tell us what the changed form is worth.
+
+Release the handle and press **REPLAY**. The layers return around your altered shape. Then try **RESTORE CUBE**. This time the initial corner positions return too. Repeating a presentation and undoing a change are different ways of beginning again.
+
+Compare the two builders. Name one property your alteration preserved and one it lost. You can keep a crease you like without claiming the result is still a cube.
+
+<!-- @polyhedron_nets_cube -->
+
+Further on, six squares wait in the air. Follow the pink one as the net folds. Predict which faces will meet. The last flap closes. The cube shrinks, then drops to the floor.
+
+It stays there for a moment, as though it needs to think. Above it, another net opens. The first cube remains. Each return leaves something behind; the floor begins to hold a collection.
+
+Here each square stays rigid. The hinges turn. In the builder, you moved a corner and bent a square into two differently tilted triangles. Similar-looking movement can come from different operations. Knowing which data changes helps you predict what a form can do.
+
+<!-- @ -->
+
+Now look down at the floor, then along a wall. Find the box form again in the crates. The museum builds its floor slabs and wall blocks from scaled box meshes. The primitive on display has also been carrying us from room to room.
+
+The initial cube pairs twelve triangle patches into six square faces.[^Point_Animatedcube-animatedcube-counts] The crates add geometry for planks and reinforcing strips. We can recognise the box across these different meshes.
+
+You can move a corner on the instrument while the museum's boxes support and redirect your body. What we are learning to inspect is also the place from which we inspect it.
+
+<!-- @prefab_box_library -->
+
+The shelf holds twenty-four pickable copies: cardboard boxes, crates, cargo boxes and printed cartons, followed by variations. Take two copies from one family to the worktable. Moving one leaves the other where it was. Give them a neighbour, leave a gap, or begin a stack. A scene can supply the same made object again; the relation between its copies is yours to arrange. Across the aisle, the conveyor will ask you to follow a matching rule.
+
+<!-- @cube_sorting_line -->
+
+A net folds above a conveyor belt. The closed cube drops onto the moving surface. Passing under the printer, it receives one of two editions: cream and red **AGAIN**, or mint and teal **YET**. The shape stays the same. Its surface now asks for a choice.
+
+These are *prefabs*: reusable objects stored as scenes. A placed copy is an *instance*. The printed carton supplies the basket's sample. Each moving delivery has the same cube geometry and pickup behaviour; two shared textures give it the familiar carton editions. The lettering and stripes arrive together, carrying decisions someone has already made. We can begin with a furnished object before knowing how to build each of its parts.
+
+Take an **AGAIN** cube from the belt and release it into the **AGAIN** basket. It shrinks inside. The **YET** basket receives the other edition. Moving one copy leaves the others carrying on along the belt.
+
+There is pleasure in finding it again: a familiar shape, an interval kept, a difference small enough to search for. A crate can belong to the scenery of many games before it belongs to this room. Its familiarity travels with it.
+
+Warhol's *Brillo Boxes* bring another kind of repetition here. His 1964 sculptures were fabricated plywood boxes, painted and screenprinted with commercial packaging imagery. Their exhibition arrangement recalled a warehouse.[^Point_Animatedcube-cube-warhol] Work had gone into making something whose appearance was already familiar. Our printed carton is an original design, but it borrows that tension between an ordinary package and an object given our attention.
+
+Let one pass. At the end of the conveyor it falls onto the floor. Let more pass and the copies begin to pile up, keeping the angles at which they land. Neither edition gets a side of its own. They remain available to your hands, but the line keeps adding another task. The round ends when the room fills; the controls let you pause production or start again.
+
+Look between the small cubes in the baskets and the growing pile on the floor. The arrangement records what you sorted and what you left.
+
+<!-- @ -->
+
+Read the cartons: **A WORLD / WITHOUT / COMPOSITION**. The supply pile and the stamped crate add **YET**.
+
+*A world without composition yet.* There was already an arrangement around us. Between the table, the belt, the baskets and the floor, another has begun. We have borrowed its parts, and made a relation between them.
+
+Take the crease with you: a small movement exposed a decision inside a familiar shape.
+
+The boxes offered a made object we could use again. The next room offers a rule for making a family of objects: choose how many divisions, and the engine constructs the surface. We have followed a corner through a mesh. Now we can inspect what the engine chooses when we ask it for a sphere.
+
+[^Point_Animatedcube-animatedcube-triangulation]: Godot Engine 4.6, [Using the ArrayMesh](https://docs.godotengine.org/en/4.6/tutorials/3d/procedural_geometry/arraymesh.html), rectangle example: four positions are connected by two triangle triples. This builder submits its patches through `SurfaceTool` in triangle mode. A flat convex quadrilateral admits either diagonal; moving a corner out of its plane can make that choice visible as a different crease.
+
+[^Point_Animatedcube-animatedcube-boundary]: *Connectivity* names which vertices, edges and faces are incident; their positions place that structure in space. Compare the separate point and connectivity properties in Botsch, Sieger, Moeller and Fabri's [Surface Mesh manual](https://doc.cgal.org/latest/Surface_mesh/index.html), CGAL 6.2.1, “Connectivity” and “Properties.” Here the index lists preserve the combinatorial structure, but moving vertices may produce crossings or collapsed faces, so a valid geometric embedding is not guaranteed. The builder's patches also lack enclosing collision geometry; its handles have pickup colliders. See the [technical chapter](/book?map=Point_Animatedcube&section=technical).
+
+[^Point_Animatedcube-animatedcube-counts]: Euler's [Elementa doctrinae solidorum](https://scholarlycommons.pacific.edu/euler-works/230/) (1758) investigates polyhedral counts. For the initial cube, `V - E + F = 8 - 12 + 6 = 2`. Splitting its squares adds six diagonals and six faces: `8 - 18 + 12 = 2` again. A proof for the sphere's triangulation appears in Heinz Hopf's [Selected Chapters of Geometry](https://pi.math.cornell.edu/~hatcher/Other/hopf-samelson.pdf), §I.3, from his 1940 lectures reconstructed and translated by Hans Samelson. The equality does not certify cube shape or a valid embedding. The instrument counts twelve patches, excluding reverse rendering copies.
+
+[^Point_Animatedcube-cube-warhol]: The Andy Warhol Museum, [Brillo: Is It Art?](https://www.warhol.org/lessons/brillo-is-it-art/), on the fabrication and 1964 Stable Gallery exhibition. These were constructed sculptures carrying packaging imagery. The library’s AGAIN carton is a new design for this encounter.
+
+
+---
+
+<!-- Hall 10: Primitives_Ignorance; source: commons/maps/Primitives_Ignorance/final.md -->
+
+# Limits of Geometric Knowledge
+
+You left a cube whose connections could outlast its name. Now try the name sphere. What are you accepting when you recognise something as round?
+
+<!-- @sphere -->
+
+Begin with the ordinary sphere near the entrance. Look at it from a distance, then approach. Follow its silhouette against the room beyond it. Where does the outline give you something to inspect that the name had allowed you to pass over?
+
+Above the entrance: **Let No One Ignorant of Geometry Enter.** It recalls the motto traditionally associated with Plato's Academy.[^Primitives_Ignorance-ignorance-inscription] Here we have entered with a little geometry. We will use it to inspect the limits of the forms that seemed to admit us.
+
+<!-- @geometry_courtyard -->
+
+Inside, five solids have been given five places. Tetrahedron, cube, octahedron, dodecahedron, icosahedron. Off-white and almost black, each rests on a plain block. You can lift one and bring a face toward you. Its edges remain sharp. There is nothing unfinished about that sharpness.
+
+Columns surround the group. Near the entrance their sides are easy to count; farther along, the corners draw closer together. Four divisions, then five, six, eight. Eventually the column looks round. Walking along the court, you pass through several constructions of the same architectural name.
+
+Four sides can be a poor approximation to a round column and the outline we wanted to keep. A proportion gives us a relation between dimensions. It does not tell us whether that relation is beautiful. Before asking for more detail, what are we asking the form to give us?
+
+The solids do not take that journey. An icosahedron has twenty faces because it is an icosahedron. Adding more would give you something else. In the next room, the sphere keeps its name while the number of faces changes. What did the name ask us to preserve?
+
+<!-- @sphere_high -->
+
+The next room holds three pairs of spheres. Start with the first pair in the resolution display. One sphere wears lines along its triangle edges; the other has plain shading. Predict whether removing the lines also changes the sphere's outline. Walk around the pair and compare.
+
+The two meshes have the same vertex positions and triangle connections. The lines are an added overlay. They make a construction easier to follow without rebuilding its surface.
+
+Choose one place where the silhouette changes direction. Step back until that distinction becomes difficult to see, then approach again. Your distance changed. The mesh did not.
+
+<!-- @sphere_mid -->
+
+Continue to the middle pair. Inspect it from a comparable distance. Which distinctions are easier to find now? Compare the marked example with its plain neighbour before comparing it with the finer pair behind you.
+
+The finer pair uses sixteen rings and sixteen radial segments; this pair uses seven of each. Those two settings divide different directions of the surface. Changing them changes the positions and connections available for making it.
+
+<!-- @sphere_low -->
+
+At the coarsest pair, follow one flat patch toward its edge. Is this merely a sphere missing something, or is there a feature here you would choose to keep?
+
+Its construction uses one ring and ten radial segments. One direction is divided more often than in the middle example, the other much less. Resolution has a distribution. It does not arrive as a single quantity called detail.
+
+The script gives the two choices separate names:
+
+```gdscript
+sphere_mesh.radial_segments = segment_count
+sphere_mesh.rings = ring_count
+```
+
+You once held a point and decided where it would stay. Two points gave you a span. To make a face, positions needed an order; to make a mesh, faces needed connections. Here two settings ask the engine to distribute positions and connect them across a whole surface. A small decision reaches many places at once.
+
+The vertices remain finite and countable. A hand places a corner; a rule places a family of corners in relation. We choose a procedure, let it make the placements, then return to what appeared. Knowing the rule gives us another way to know the form, while its particular surface still asks to be looked at. Which differences can we make through the rule, and which require us to return to a particular point?
+
+<!-- @sphere_resolution_atlas -->
+
+Across the room, twelve smaller spheres spread the two choices out in space. Across each row, more rings divide the height. Along each column, more segments divide the circumference. Their triangle edges remain visible. You can follow one change while the other holds still.
+
+A crowded equator can belong to a sparsely divided body. One figure has a broad flat face where another gathers many narrow triangles. Both answer to sphere. Before deciding which is more convincing, look for a shape you had not expected to find there.
+
+A mathematical sphere consists of points at a fixed distance from a centre. The mesh joins sampled positions with flat triangles. Adding triangles can improve that approximation; no finite collection of flat patches acquires the sphere's continuous curvature. Shading can soften their appearance while the polygonal outline remains.
+
+![The existing high, middle and low sphere artifacts in matched views: triangle edges visible above, hidden below. Each column keeps the same mesh.](/book-review/doc/book/figures/Primitives_Ignorance/sphere-visible-construction.png)
+
+*The lower row keeps every triangle in the upper row. The lines disappear; the construction remains.*
+
+This is where ignorance turns around. Plato distinguishes the drawn figure from the geometric object considered in thought. Here we turn our attention toward the constructed figure: what its polygons leave out, and what their particular arrangement makes available.[^Primitives_Ignorance-ignorance-plato]
+
+The formula specifies a sphere. The mesh gives us one finite construction through which to encounter it. The ridge is available too. We can learn from its shape without requiring it to disappear into a smoother answer.
+
+<!-- @budget_of_smoothness -->
+
+At the far end of this room, a counter makes the cost of these choices countable. Four numbered spheres turn at the same rate. Keep the counts hidden at first. Choose one for a distant background and one for someone to inspect close to their face. The spheres stay on their stands; you are choosing possible uses.
+
+Press **SHOW / HIDE COUNTS**. Did the numbers change your choice? Then press **SHOW / HIDE EDGES** and follow the lines toward a pole.
+
+Each tag gives two triangle counts. Even counting depends on what the instrument agrees to include.[^Primitives_Ignorance-ignorance-counts]
+
+Hide the counts while keeping the edges visible, then try the reverse. What becomes easier to judge? Both controls alter what is shown while keeping the sphere meshes in place.
+
+A triangle count does not measure frame time or tell us which object deserves to exist. For your proposed use, name the distinction worth spending geometry on. You might spend more on a close silhouette, or keep a facet because it makes this body recognisable.
+
+<!-- @capsule_reliquary -->
+
+At the centre, the five-sided capsule turns above a stepped pedestal. Eight pale tiers carry it: cylinders with four divisions through eleven, each smaller than the one beneath. Corners shift around the stack. The support is making its own argument about roundness.
+
+The capsule is taller now, nearly the height of a person. Its dark surface receives the light slowly as it turns. A small, awkward construction has been given the place of an object worth lingering before. Its five divisions did not require this ceremony. We gave it height, a pedestal, room around it. How much of what holds your attention have we built between you and the object?
+
+When a ridge faces you, picture the other side. Would the same ridge be waiting there? Follow the silhouette as another side comes into view. The arrangement draws you closer to a construction you can inspect. Knowing how the encounter was made can give you another reason to stay.
+
+Five segments divide the body around its long axis. Opposite a ridge is the middle of a facet. Half a turn does not bring this cross-section back onto itself. The divisions are evenly spaced, but their odd number interrupts that particular symmetry.[^Primitives_Ignorance-ignorance-capsule]
+
+You cannot fold your understanding around this corner by simply repeating the front at the back. The shortcut fails. You have to follow another side, or learn the rule well enough to work it out. The object remains knowable; recognising a capsule was not yet knowing this one.
+
+Stay with what the five divisions produced. Between the familiar pill and its polygonal construction, a body appears that the name did not prepare you for. Its surprise is made within the restriction. What would you miss if you corrected it into the capsule you expected?
+
+This gives ignorance another direction: a limit in our expectation becomes somewhere to look. The same small set of instructions that confines the form can make more available than we first knew to ask of it.
+
+![The five-segment capsule raised on eight cylinders, with resolutions four through eleven.](/book-review/doc/book/iterations/2026-09-27-ignorance-courtyard/five-on-four-to-eleven.png)
+
+*The capsule keeps its five divisions. The pedestal changes the attention we give them.*
+
+The old studies remain through the side opening: the rock, the star, the extra cubes and other studies. The choir joins the engine mesh library in the next hall, Primitives_Godot. The court has made a clear arrangement without exhausting what these forms might become.
+
+<!-- @form_in_hand -->
+
+The last bay opens to the night. A torus hangs five metres above the floor, with sky visible through its centre. Its rings and segments change one count at a time. Watch the shadow: a rounded opening acquires corners without anything touching the ground. The moon carries a decision made overhead to the place where you stand.
+
+Beside it, a black point hangs within reach. Take it. As you hold it, the rings and segments decrease; corners emerge where the surface seemed continuous. Its radius stays the same. The hand that examined the form now changes the terms of its construction.
+
+Press the trigger and a copy leaves your hand, keeping the divisions it had at that instant. The point remains with you. Here is the beginning of a catalyst: a form we were learning to recognise becomes something we can act with. What do we want it to do, once understanding gives us that possibility?
+
+<!-- @ -->
+
+Carry a more specific question than whether the sphere is good enough: **enough to hold which distinction, for whom, at what distance?**
+
+The polygonal model has a limit; our first understanding of its possibilities has one too. Godot’s supplied forms, a family of columns and borrowed letter outlines give these choices their own rooms. Portals then follows a finite sequence of round-looking objects toward a boundary none of its examples reaches.
+
+[^Primitives_Ignorance-ignorance-inscription]: The Academy motto is a later tradition, not a securely documented inscription from Plato's lifetime. See [The Academy of Plato](https://mathshistory.st-andrews.ac.uk/Societies/Plato/), MacTutor History of Mathematics. The museum stages the familiar wording as an instruction whose authority we can question.
+
+[^Primitives_Ignorance-ignorance-plato]: Plato, [Republic, Book VI](https://classics.mit.edu/Plato/republic.7.vi.html), Benjamin Jowett translation, the divided-line discussion: drawn figures serve reasoning about geometric objects rather than being its ultimate objects. Ada's reversal is methodological: stay with the implemented figure and investigate its limits and possibilities. This does not establish that Plato was unaware of imperfect drawings, or that geometry cannot describe curves.
+
+[^Primitives_Ignorance-ignorance-counts]: Some generated triangle triples collapse at the poles. The counter distinguishes all submitted triples from those with measurable area in [Godot 4.6 SphereMesh](https://docs.godotengine.org/en/4.6/classes/class_spheremesh.html) arrays. “With area” excludes triangles below a local squared-cross-product tolerance of `1e-16`; it is a practical threshold. The [technical chapter](/book?map=Primitives_Ignorance&section=technical) records all four measured pairs of counts. Overlays and counter furniture are excluded. Analytic sphere descriptions and this finite polygonal rendering are different representations.
+
+[^Primitives_Ignorance-ignorance-capsule]: The central installation reuses `capsule.tscn`, enlarged uniformly to 1.6 times its authored size. It uses a [CapsuleMesh](https://docs.godotengine.org/en/4.6/classes/class_capsulemesh.html) with five radial segments and five rings. Its regular pentagonal cross-section repeats after 72 degrees, but not after 180 degrees about the long axis. The absent half-turn symmetry does not make all symmetry disappear. The scene turns at 45 degrees per second. These are the authored mesh and spin settings, not controls available on the plinth.
+
+
+---
+
+<!-- Hall 11: Primitives_Godot; source: commons/maps/Primitives_Godot/final.md -->
+
+# Forms the engine gives us
+
+<!-- @primitive_mesh_library -->
+
+This room has another collection of beginnings. A wedge, a ring, a plane. A pair of letters with depth. The engine supplies these constructions before we decide what to make of them. Each has been wrapped in a reusable scene, like the boxes met in Cube. The mesh supplies a surface; the scene can bring its material, collision and behaviour along. Choosing a shape and choosing what an object can do are still different decisions.
+
+Here, even the word primitive has practical habits. A plane offers a surface to subdivide. A quad supplies two triangles. Move beside them and their broad faces narrow toward an edge. The letters already carry a language; their geometry lets that language cast a shadow.
+
+One stand holds a point drawn twenty-two screen pixels wide. Approach it: its mark keeps that pixel width while the stand grows in your view. This is another way of giving a point a visible body. It does not behave like the sphere we first called Point One.[^Primitives_Godot-godot-prefabs]
+
+Two longer forms belong to the engine's trail meshes. Here they are shown at rest, before particles or moving bones would shape them into trails. Some of the engine's simplest forms are beginnings of movement.
+
+<!-- @seven_words_choir -->
+
+Seven small bodies share a set of choir risers: plane, box, sphere, cylinder, capsule, prism and torus. They move gently in turn. This is a selection of familiar forms, not the engine's complete vocabulary. The letters and trail specimens nearby already exceed that list.
+
+A name helps us choose where to begin. It does not determine the use. A cylinder can be a support; a sphere can mark a position. Their scene supplies the conditions in which we meet them. Which inherited choice would you keep, and which would you want to make yourself?
+
+The next room separates a column's outline, its height and its sampling. A supplied beginning can become a rule we examine more closely.
+
+<!-- @ -->
+
+[^Primitives_Godot-godot-prefabs]: Godot 4.6 [PrimitiveMesh](https://docs.godotengine.org/en/4.6/classes/class_primitivemesh.html) is a family of generated mesh resources. The new room wraps PrismMesh, TorusMesh, PlaneMesh, QuadMesh, PointMesh, TextMesh, RibbonTrailMesh and TubeTrailMesh in reusable scenes. Box, cylinder, sphere and capsule have already appeared; a cone is a CylinderMesh with one radius set to zero. QuadMesh inherits PlaneMesh. The [PointMesh](https://docs.godotengine.org/en/4.6/classes/class_pointmesh.html) display uses a point-size material: its 22 pixels describe the rendered mark, not a world-space diameter. Trail specimens show their undeformed rest geometry.
+
+
+---
+
+<!-- Hall 12: Primitives_Columns; source: commons/maps/Primitives_Columns/final.md -->
+
+# One outline, several bodies
+
+<!-- @resolution_colonnade_museum -->
+
+Begin with the first five columns. Their profile and height agree; four, six, eight, twelve and sixteen sides divide them around their axes. Follow an edge into a corner, then compare the next body. More sides change the cross-section's approximation. They do not decide whether the corner was something you wanted to lose.
+
+The first row holds the profile sampling fixed. Farther in, the columns vary their outlines and heights as well as their sampling. A narrow waist becomes a swelling body; a short support rises into a shaft. These later differences belong to several choices. Read the labels before attributing every change to resolution.
+
+A profile names a progression of radii along a height. The builder joins sampled rings to make the visible body. The column's full height, its profile and the number of samples remain distinct inputs. A taller result is not automatically a more detailed one.
+
+Keep one column in view while walking to another. Which relation matters to your choice: the silhouette, the intervals between its parts, the way light meets a facet? A count can tell us something about the construction without deciding how it should stand among its neighbours.
+
+The next room borrows an outline that already has another use: a letter.
+
+<!-- @ -->
+
+
+---
+
+<!-- Hall 13: Primitives_Profiles; source: commons/maps/Primitives_Profiles/final.md -->
+
+# Borrowed outlines
+
+<!-- @glyph_profile_gallery -->
+
+Five written signs supply six bodies: O, O again, B, C, I and a colon. A flat source profile stays beside each result. We can follow what was borrowed before deciding what the new body might become.
+
+The first O stands at bodily scale. Its opening invites an architectural reading, but the lower stroke makes a sill. An opening in a letter has not yet become a level doorway. The second O narrows and flares as it rises. It resembles a vessel; its lower opening remains. It would need another construction to hold liquid.
+
+B carries two separate wells through a rising turn. C follows an open circular arc into a channel. I travels around a closed path and returns to its beginning. The path gives this body an opening that the original character did not have. The colon's two dots bend along the same route while remaining separate bodies.
+
+One outline gives the body its boundary; the route gives that boundary somewhere to go. Look back at the small letter. Which feature is still legible, and which do you notice only after walking around its larger form?
+
+The font supplies stroke thickness, inner contours and the shapes of the signs. We supply a route, dimensions and a possible use. Turning a familiar mark into an unfamiliar body makes those inherited choices available to inspect.
+
+A letter was made to be read. What happens when its opening becomes a place for a body?
+
+<!-- @ -->
+
+
+---
+
+<!-- Hall 14: Primitives_Portals; source: commons/maps/Primitives_Portals/final.md -->
+
+# Circular Approximation and Limits
+
+The previous room asked when a finite model was enough to hold a distinction. Here we make that question move. Add a division, then another. **What would count as arriving?**
+
+<!-- @combine_portals -->
+
+Begin beside an early faceted ring. Follow a straight edge around its opening, then look along the progression. Choose a later ring that seems round enough from where you stand. Keep that choice in mind as you approach it. Does the edge you had stopped seeing return?
+
+These are portals for looking through: twenty rings that frame the space beyond. Near the beginning, their flat patches are easy to see. Each following member divides both surface directions more finely.[^Primitives_Portals-portals-mesh]
+
+At the side instrument, use **NEXT RING** and **PREVIOUS** to select a member. It turns gold. Find the selected ring in the space. The button directs your attention while leaving your body where it is.
+
+Beside the counts, a rose-coloured polygon sits inside a grey circle. Selecting a finer ring adds sides to the polygon while the circle stays. This separate, flat figure borrows one of the torus's subdivision counts to ask a simpler question: how closely can straight sides approach a circle?
+
+The circle has radius one. For its inscribed polygon, the code calculates:
+
+```gdscript
+var perimeter: float = 2.0*mesh.rings*sin(PI/mesh.rings)
+```
+
+Each straight side is a chord between two points on the circle. Adding sides brings their total length closer to the circumference, which the panel labels **Circle**. The positive gap belongs to this planar comparison; a measure of the whole torus's accuracy would need its own definition.[^Primitives_Portals-portals-circle]
+
+![Three states of the museum diagram: three, eight and twenty-two straight sides approach the same circle.](/book-review/doc/book/figures/Primitives_Portals/portals-visible-limit.png)
+
+*The corner becomes harder to see. The gap remains. These are three states of the same diagram beside the rings; the numbers compare boundary lengths.*
+
+This is **convergence**: as the rule continues, the perimeters approach a limit. They can get arbitrarily close to the circumference, though no finite polygon in this sequence has that exact perimeter. Twenty examples show part of an approach that can continue beyond the display.
+
+Suppose you needed this polygon for something you were making. You could set a small positive gap you were willing to accept and stop when a member met it. That bound is a **tolerance**. It might lead you to a different choice from the ring that first looked round enough. The comparison answers to a requirement you supplied. Passing it leaves other decisions open: the corner you like, the view through the opening, the place this ring might have beside another.
+
+Press **REVERSE** and return to the beginning. The positions stay; the same family of resolutions appears in the opposite order. What the earlier arrangement kept for later has become the entrance.
+
+The sequence had quietly given refinement a direction. Walking the other way, corners become available again. You might want one of those corners. Adding more sides would take it away.
+
+Through this change, the openings remain. More divisions need not give the body another kind of passage.[^Primitives_Portals-portals-hole]
+
+<!-- @achilles_tortoise -->
+
+Two figures wait along the next instrument's track. Press **NEXT STEP** and watch the space between them.
+
+Achilles is placed where the tortoise was. The tortoise moves ahead again. In this construction the gaps halve at each stage. The marked end of the track stays where it is.[^Primitives_Portals-portals-zeno]
+
+The first stage carries Achilles halfway along the track, the second three quarters of the way. Each new stage leaves half the remaining distance. The endpoint is close enough to point to. The rule keeps putting him short of it.
+
+At stage ten, the instrument holds. The bodies may look as though they have arrived together, but Achilles' anchor is still less than six millimetres from the limit. His visible body is larger than the gap. The display has a last stage. Does the sequence it represents have one?
+
+Use **RESTART**, then **PLAY** to let the figures move between stages. Pause them partway through a movement. The panel keeps both distances in view: where Achilles is now, and where this step was taking him.
+
+The program gives these stages a regular schedule and adds movement between them. That schedule does not reproduce the shrinking durations of a continuous runner's journey. An infinite subdivision can have a finite total; it does not make ordinary motion impossible.
+
+This instrument can pause while the museum continues. We have held one process still long enough to ask about it.
+
+<!-- @ -->
+
+Twenty rings. Ten stages. Each display has a last member because someone chose where to stop building it. Neither mathematical approach acquires a last step merely because its display has ended.
+
+**The limit gives the sequence a direction. It does not tell us where to stop.**
+
+There may already be a ring you want to return to. A finite encounter can teach us something without exhausting what its rules make possible.
+
+Melencolia gathers the tools we have learned to use. They can give exact answers. What would make the work complete?
+
+[^Primitives_Portals-portals-mesh]: The installed `combine_portals` uses [Godot 4.6 TorusMesh](https://docs.godotengine.org/en/4.6/classes/class_torusmesh.html). `rings` divides the torus around its opening; `ring_segments` divides the tube's cross-section. The authored linear rule uses `(3 + i, 3 + 2i)` for indices 0–19. The panel calls the latter **Tube sides**. Its selection highlights a mesh; these rings do not implement teleportation.
+
+[^Primitives_Portals-portals-circle]: For a regular `n`-gon inscribed in a unit circle, each chord has length `2 * sin(PI/n)`, giving perimeter `2 * n * sin(PI/n)`. `TAU = 2 * PI` is the circle's circumference. In exact mathematics the perimeter is smaller for every finite `n ≥ 3` and converges to `TAU`. A useful tolerance can be met before equality. A floating-point calculation may eventually round a gap away; that is a separate computational event. The [technical chapter](/book?map=Primitives_Portals&section=technical) explains what the instrument measures.
+
+[^Primitives_Portals-portals-hole]: These subdivisions preserve the torus surface's central opening. Resolution and topology are different questions: more triangles do not give this surface another hole. Whether an opening is a usable passage also depends on scale, placement and collision. Keep that distinction for the later investigations of possible spaces.
+
+[^Primitives_Portals-portals-zeno]: Aristotle discusses the Achilles argument and the bisection argument in [Physics, Book VI, parts 2 and 9](https://classics.mit.edu/Aristotle/physics.6.vi.html), translated by R. P. Hardie and R. K. Gaye. This exhibit stages a particular halving construction: `A_n = L(1 − 2⁻ⁿ)` and `T_n = L(1 − 2⁻⁽ⁿ⁺¹⁾)`. Its six-metre track ends the display at stage ten, leaving `6/1024` metres between Achilles' anchor and the limit. Autoplay schedules stages two seconds apart and eases movement for one second. That theatrical timing is part of the implementation, not a proof about the duration of a physical race.
+
+
+---
+
+<!-- Hall 15: Primitives_Melencolia; source: commons/maps/Primitives_Melencolia/final.md -->
+
+# Melancholy of Finitude
+
+What keeps you looking after you know the form?
+
+<!-- @pyramid -->
+
+Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?
+
+Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.
+
+Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.
+
+<!-- @pyramidlong -->
+
+The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?
+
+Its base is still square. Its apex is still a single point above it. The tall pyramid's source collects the base vertices and then adds that point:
+
+```gdscript
+vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+```
+
+The same connections can carry a different height. In this version the pyramid's base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.
+
+<!-- @cube_scene -->
+
+Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?
+
+The arrangement returns to the room's earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.[^Primitives_Melencolia-solids] Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.
+
+Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. What you know now gives you several ways to make it. None chooses its place for you. You do not need to build every possibility before leaving this one.
+
+![The museum court from three viewpoints: aligned, oblique and a plan from above.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-one-arrangement.png)
+
+*The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.*
+
+<!-- @snap_pyramid_puzzle -->
+
+Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.
+
+Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.
+
+<!-- @ -->
+
+## The tools are still here
+
+<!-- @durer_scene -->
+
+Follow the raised connection to the next platform. The large stone stands to the left; the winged figure sits to the right, her head resting on a fist. A sphere lies near the sleeping dog. Above them, the ladder, scales, hourglass and bell give the wall its own order. Beneath them, a saw and a carpenter's plane lie among the small tools. Here the forms have company.[^Primitives_Melencolia-durer]
+
+The compass is in her hand. She has not lost the instrument. A book lies on her lap, and the skirt falls in heavy folds over her knees. Beside her, a smaller winged figure bends over a tablet. One is drawing. The other looks away.
+
+Earlier, a sphere could introduce a primitive. Here it occupies ground beside a tired animal. Nothing has happened to the sphere's definition. Much has happened to what we can see in it.
+
+We have carried something from the court of ideal forms into this clutter of work and waiting. We might call it *geometric desire*: the wish that a form might let us see further, or give us somewhere else to stand. Here that wish meets a body that cannot be reduced to its instruments. Knowing how to construct another solid does not tell her what to do next.
+
+Perhaps we had hoped that getting the form right would put something else right with it. The compass can give a circle a radius. What should we make with the circle? That question stays with the hand holding the instrument.
+
+Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.
+
+![The reconstructed Melencolia tableau inside the museum.](/book-review/doc/book/figures/Primitives_Melencolia/melencolia-tableau.png)
+
+*After Dürer's engraving: an arrangement of sculpted figures, tools and solids. Their placement follows the image; their depth is an interpretation. Walking changes which objects conceal one another.*
+
+The stone has six pentagonal faces and two triangular ends. Its mesh begins with a rhombohedron and cuts off two opposite corners. The proportions are one possible reading of the printed form. We can make a closed solid without claiming to have recovered the only solid the image permits.
+
+Now look up at the numbered square. Choose a row and add it before reading further.
+
+```text
+16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+```
+
+Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.
+
+Stay a little longer. Has that correct answer finished what you came to look at?
+
+## What do we want a form to promise?
+
+We have learned to recognise a construction and change its rule. The reasons for choosing it have histories too.[^Primitives_Melencolia-geometric-desire]
+
+This desire will return with different demands. In the patterned surfaces of the Alhambra, geometry belongs to built space; Escher's study of its mosaics later fed his own investigations of repeating figures.[^Primitives_Melencolia-pattern] A rule can continue beyond the piece of wall that holds it. Our museum also stops building at an edge while letting us imagine more.
+
+Malevich's tilted square in *White on White* offers another possibility: a painted surface can suggest release into unbounded space. Hilma af Klint's *Paintings for the Temple* give abstract forms a different task, within a spiritual inquiry.[^Primitives_Melencolia-abstraction] The same circle would not mean the same thing in each of these worlds. What someone asks of it matters.
+
+And abstraction need not carry us away from the body. Lygia Clark's hinged metal *Bichos* ask for hands: a flat arrangement opens into a changing object.[^Primitives_Melencolia-clark] To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?
+
+These histories meet here because we have placed them beside one another. Their different desires remain. Keep that question beside the seated figure. The tools are here. Their next use is not settled.
+
+## The number that was already running
+
+<!-- @frame_counter_display -->
+
+By the way out, a number is changing. It is the same counter you met on your first step into this chapter: `Engine.get_process_frames()`, process frames since the engine started, read fresh on every call.
+
+It is much larger now. Some of that is yours — the picking up, the drawing, the walking, the shifting of a start. A fixed quantity of it is not, and never will be. The frames that passed before you had somewhere to stand did not become yours by being counted alongside the ones that followed. This number adds them together anyway. It has no field for the difference.
+
+In the first room we said that its first number for you was not its first number. That is still the one thing it will not tell you, and you now know several reasons why. A record keeps what its rule admits. Someone chose the rule. The number keeps growing while you read it.
+
+## Enough to continue
+
+Dürer's engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.
+
+A few tools, and more possible constructions than we have time to pursue.[^Primitives_Melencolia-sublime]
+
+Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.
+
+We leave with enough to continue. There is still something here we have not finished looking at.
+
+<!-- @ -->
+
+[^Primitives_Melencolia-solids]: Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See [*Solid Objects*](https://publicdomainreview.org/collection/solid-objects/) and the [image selected for this room](https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/). The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies.
+
+[^Primitives_Melencolia-durer]: Albrecht Dürer, *Melencolia I* (1514), [Metropolitan Museum of Art](https://www.metmuseum.org/art/collection/search/360018). The museum describes several interpretations rather than a settled key. The [National Gallery of Art](https://www.nga.gov/artworks/6641-melencolia-i) provides a detailed visual description. AdaResearch follows the principal objects and their image relationships in a stylised sculptural arrangement. Depth, rear surfaces, dimensions and the solid's proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book's reading, not a settled account of Dürer's intention.
+
+[^Primitives_Melencolia-sublime]: Kant's [*Critique of Judgement*](https://www.gutenberg.org/files/48433/48433-h/48433-h.htm), §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified.
+
+[^Primitives_Melencolia-pattern]: The [Metropolitan Museum's account of geometric pattern](https://www.metmuseum.org/essays/geometric-patterns-in-islamic-art) describes its construction and combination with other ornament. It does not license a single spiritual meaning for all Islamic geometry. [Escher in The Palace's timeline](https://escherinhetpaleis.nl/en/about-escher/timeline) records his sustained study of the Alhambra and Córdoba mosaics in 1936; tessellation already appeared in his earlier work.
+
+[^Primitives_Melencolia-abstraction]: Kazimir Malevich, [*Suprematist Composition: White on White* (1918)](https://www.moma.org/collection/works/80385), MoMA; Hilma af Klint, [*Paintings for the Temple*](https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple), Guggenheim. These are distinct historical projects. Their juxtaposition here asks what abstraction promises; it does not establish a direct line of influence from Dürer or treat spiritual claims as scientific evidence.
+
+[^Primitives_Melencolia-clark]: Lygia Clark, [*Poetic Shelter* (1964)](https://www.moma.org/collection/works/91767), MoMA, and the museum's account of [Neo-Concrete art](https://www.moma.org/collection/terms/neo-concrete-art). Clark's participatory work is a particular Brazilian response to geometric abstraction, not a description of every South American modernism. The suggestion that participation changes what escape can mean is this book's proposal.
+
+[^Primitives_Melencolia-geometric-desire]: Lynn Gamwell, *Mathematics and Art: A Cultural History* (Princeton University Press), especially the preface, the account of chapter 2 on proportion, and the discussions of mathematical models and Minimal Art. Read in the [project's study copy](https://docs.google.com/document/d/1CaUhLfk_CvbcpKYPoIcafWBVoxSZvnw8NujHhC2thIQ/edit?tab=t.0). These discussions inform our distinction between constructing a relationship and assigning it aesthetic or cultural authority. The reading of Ada's pedestals, columns and geometric desire is our own. It does not establish a common intention or a line of influence among the artists brought together here.

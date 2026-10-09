@@ -1,0 +1,54 @@
+--- before/commons/maps/Point_One/final.md
++++ commons/maps/Point_One/final.md
+@@ -51,7 +51,7 @@
+ 
+ The code we leave unread keeps working. It gives the number its appearance and the room its possibilities while our attention moves elsewhere. Choosing a first principle also means choosing what we will, for now, take on trust. Who gets to decide which questions can wait?
+ 
+-Alice's rabbit is already ahead. There are functions we would like to open, but we still have a point to find. We carry a question forward; others fold behind us.
++Like Alice after the White Rabbit, we could keep following one opening into another. But we still have a point to find. We carry a question forward; others fold behind us.
+ 
+ <!-- @origin -->
+ 
+@@ -101,14 +101,16 @@
+ 
+ <!-- @interactive_point_origin_force -->
+ 
+-The dark point offers itself to your hands. Pick it up. Move it a little to one side, then back. Its surface changes when you take hold. Put it down and pick it up again: its coordinate label changes format with each pickup. One format leaves the body without a printed address.
++The dark point offers itself to your hands. Pick it up. Move it a little to one side, then back. Its surface changes when you take hold. Put it down and pick it up again: its coordinate label changes format with each pickup. One format leaves the body without a printed address. Writing a position differently is another change we can make without moving it.
+ 
+ The first point has already broken the promise of taking things one step at a time. There is shine here, a surface, a changing body. We are already Alice. We can follow that interest into the construction, where the things meeting us at once were made separately.
+ 
+ A mathematical point specifies a location without extension.[^point-one-euclid] Here, a sphere makes the position visible. A collision shape and pickup code make the artifact available to your controller. Seeing it and being able to hold it are different things the program has to arrange.
+ 
++The screen's example gives the position a name:
++
+ ```gdscript
+-var p := Vector3(1.0, 0.5, 0.0)
++var point_position := Vector3(1.0, 0.5, 0.0)
+ ```
+ 
+ Three components again, now another position. There is nowhere in this value to put the sphere's radius, your hesitation, or the reason you chose this place. Those would need records of their own.
+@@ -145,13 +147,13 @@
+ 
+ A coordinate needs its reference. Reading more digits cannot supply one that has been left unnamed.[^point-one-haraway]
+ 
+-Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. An earlier version confined the point to the arrows' span. A drawing made to explain movement had also been deciding where movement could end. The frame now keeps describing the point outside that span.
++Carry the point beyond an arrow's end. The drawn axis has a length; the coordinate system can describe positions beyond it. A drawing made to explain movement could also become a limit on movement. Here the guides keep following your hand.
+ 
+ <!-- @drag_point_target -->
+ 
+ ## Room to arrive
+ 
+-The red arrow says “drag point here”. Carry the point towards it without letting go. Watch for the falling balls.
++The red arrow says “drag point here”. Carry the point towards it without letting go, and watch what falls.
+ 
+ “Here” has become a request, and the request has a tolerance. This is the distance test, reduced to one position:
+ 
+@@ -182,6 +184,6 @@
+ 
+ [^point-one-euclid]: Euclid, [*Elements*, Book I, Definition 1](https://mathcs.clarku.edu/~djoyce/elements/bookI/defI1.html), defines a point as that which has no part. This is a historical starting point for the abstraction, not a specification of a Godot object. A stored position, a visible marker and a collision body require different constructions; the invisible point lets us keep them apart.
+ 
+-[^point-one-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. Naming a coordinate frame is not equivalent to that epistemology. It gives this room a technical way to ask a related question: what must accompany a reading for someone else to understand its reference and limits?
++[^point-one-haraway]: Donna Haraway, [“Situated Knowledges: The Science Question in Feminism and the Privilege of Partial Perspective”](https://doi.org/10.2307/3178066), *Feminist Studies* 14, no. 3 (1988), 575–599, especially 581–585. Haraway argues for embodied, situated and accountable knowledge, challenging both a view from nowhere and an easy relativism. This room asks a related question through its two coordinate readings: what must accompany a reading for someone else to understand its reference and limits?
+ 
+ [^point-one-room-history]: Ivan E. Sutherland, [“A Head-Mounted Three Dimensional Display”](https://doi.org/10.1145/1476589.1476686) (1968), especially “Results”; [accessible paper](https://archive.aec.at/media/assets/636b23b07bfd1b4f1d1154827ac9d9ab.pdf). The wireframe room and response to head movement are described there. The acknowledgments name a collective effort, and the funding note names ARPA, the Office of Naval Research and Bell Telephone Laboratories. This is one historical encounter with these problems, not a claim that the museum follows a single line of descent.

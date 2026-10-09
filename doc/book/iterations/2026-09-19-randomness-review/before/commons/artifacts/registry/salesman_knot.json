@@ -1,0 +1,78 @@
+{
+	"artifacts": {
+		"salesman_knot": {
+			"lookup_name": "salesman_knot",
+			"name": "Salesman Knot",
+			"class_name": "SalesmanKnot",
+			"scene": "res://commons/artifacts/salesman_knot/salesman_knot.tscn",
+			"category": "graphtheory",
+			"artifact_type": "demonstration",
+			"complexity": "intermediate",
+			"sequence": "graphtheory",
+			"description": "A 2.4 m floor plate carrying ONE closed tour of a 28x28 lattice, after Robert Bosch's 'Knot?' (2006). From across the room the dark gaps organise into a trefoil woven over and under itself; from directly above, the pale thing you are standing on resolves as a single line that visits all 784 cities exactly once and never crosses itself. Both readings are true of the same geometry and the only variable is where you stand. The tour is a boustrophedon Hamiltonian circuit — exact, not solved: row 0 runs the full width, rows 1..n-1 serpentine through columns 1..n-1, column 0 is the return spine, and it closes only on an EVEN row count, so an odd count is decremented rather than accepted. The figure is NOT made by rerouting, because it cannot be: on a Hamiltonian circuit through a uniform lattice every city has degree 2 and every edge is one grid step, so total drawn length is N*pitch however the tour runs and ink coverage is exactly stroke/pitch, constant and independent of routing. Bosch makes his picture by stippling 5000 cities where the image is dark; that needs a solver and 2-opt run to convergence, and a nearest-neighbour tour self-crosses constantly, which would cost the artifact its one claim. So the picture is made by STROKE WIDTH instead, modulated by the (2,3) torus knot x=(2+cos3t)cos2t, y=(2+cos3t)sin2t, z=sin3t, with z deciding which strand is in front at each of its three crossings and the under strand erased inside the over strand's halo — that background break IS the over-and-under. Cities may jitter off their cell centres, seeded, inside a bound that keeps the claim provable: two parallel runs one pitch apart with stroke w touch when 2a + w >= p, so a < p(1-w/p)/2 keeps every city strictly inside its own cell and two edges still meet only where they share a vertex. Measured at the shipped defaults (2026-09-09, Python mirror, seed 2006): 784 cities each visited once, every edge one grid step, closes, and 0 self-crossings brute-forced over all 307k edge pairs with jitter applied; pitch 81.4 mm, stroke 11.4 mm in the cord and 53.7 mm on the ground, never less than 13.1 mm of black between adjacent runs — measured over every non-incident edge pair with the jitter applied, where 27.7 mm is the same figure with jitter off and was what this entry claimed first — coverage 14% against 66%, albedo 0.152 against 0.608 for a ratio of 3.98:1. Reviewed 2026-09-09: the knot field was scaled as if the cord had no width, so the lobe pointing at +x overshot the outermost lattice run by 71 mm and photographed cut flat against the frame; KNOT_FILL went 0.94 to 0.84, which is where all three lobes close. The whole tour is one MultiMesh of scaled BoxMesh instances — 1568 of them, one draw call, ~18.8k triangles — rather than a hand-written ribbon, because a primitive box has correct clockwise winding, normals and tangents by construction and 19k hand-wound faces do not. The plate is a slab, never a quad, so it does not vanish edge-on; the origin is its base, so it does not stand half in the floor where auto-grounding is skipped; the collider is 16 mm tall because the stack is 16 mm tall. The corpus's first travelling salesman and first Hamiltonian circuit.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"footprint": [
+				3,
+				3,
+				1
+			],
+			"map_sequences": [
+				"graphtheory"
+			],
+			"tags": [
+				"graph",
+				"hamiltonian",
+				"travelling_salesman",
+				"tour",
+				"knot",
+				"trefoil",
+				"floor",
+				"figure_ground",
+				"hero"
+			],
+			"parameters": {
+				"footprint": [
+					3,
+					3,
+					1
+				],
+				"size_group": "large"
+			},
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 3,
+				"clearance": {
+					"front": 3,
+					"back": 2,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "above",
+				"wall_backing": false,
+				"orientation": "any",
+				"isolation": "none"
+			},
+			"measurements": {
+				"aabb_size": [
+					2.4,
+					0.016,
+					2.4
+				],
+				"source": "procedural: an 8 mm ink slab the full panel, a 16 mm metal rail round it, and the tour as 4 mm strokes on top — nothing here is taller than the frame"
+			},
+			"relationships": {
+				"stands_in": [
+					"GT_Pathfinding"
+				]
+			},
+			"dev_themes": [
+				"figure and ground trading places with distance",
+				"the route that cannot be seen because every route looks the same"
+			],
+			"qfep_connection": "GT_Pathfinding's blurb says the shortest path 'exists whether or not you find it — structure precedes discovery'. This is the case where that sentence turns over. A tour that visits every point of a lattice once lays down the same length of line however it is routed, so nothing in the picture was decided by the path: the salesman's labour is real and completely invisible in its own product. What you read as a knot is the width, and the gaps, and the distance you are standing at. Neither reading is the illusion, which is the point — a thing can be two things without one of them being the lie.",
+			"note": "NEW 2026-09-09. Config keys: #size:<m> panel edge, #rows:<n> / #cols:<n> cities per side (forced even), #width:<0..0.85> the WIDEST stroke as a fraction of the lattice pitch, #inner:<0..0.85> the thinnest, #mode:knot|flat, #intensity:<0..1> lattice jitter, #generation_seed:<n>, #nodes:on|off raise a bead at every city, #frame:on|off, #solid:on|off, #color1/#color2. The two stroke keys are named `width` and `inner` because those are the two numeric keys in GridInteractablesComponent.CONFIG_PARAM_NAMES that fit; a key not on that list is read as the tutorial's positional shorthand, so #stroke_max:0.66 would set yaw to 0.66 degrees and leave the stroke at its default, silently. NO dna.axes block: stroke_max is the axis that matters and it has not been swept. NOT captured or compiled in the session that wrote it — the owner had the editor open and a second Godot instance dies on the user:// lock."
+		}
+	}
+}

@@ -1,0 +1,33 @@
+--- before/commons/artifacts/assembly_return/assembly_return.gd
++++ current/commons/artifacts/assembly_return/assembly_return.gd
+@@ -44,7 +44,7 @@
+ 		return
+ 	_draw_body(record,"start",Vector3(-2.35,0,0),BLUE)
+ 	_draw_body(record,"end",Vector3(2.35,0,0),AMBER)
+-	status.text = "%d joints moved · 13 joints / 12 connections\n%s · path of the hand not recorded" % [Store.changed(record),record.get("persistence","this session only")]
++	status.text = "%d joints moved · %d connection rerouted\n13 joints / 12 connections · %d connected groups\n%s · path of the hand not recorded" % [Store.changed(record),Store.changed_connections(record),Store.components(record),record.get("persistence","this session only")]
+ 
+ func _starting_record() -> Dictionary:
+ 	var data: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(DATA))
+@@ -74,7 +74,10 @@
+ 		mesh.position = p
+ 		mesh.material_override = material(color)
+ 		figure.add_child(mesh)
+-	for edge in data.edges:
++	var edges: Array = data.get("start_edges",data.edges) if key=="start" else data.edges
++	var baseline: Dictionary = {}
++	for edge in data.get("start_edges",data.edges): baseline[Store.edge_key(edge)] = true
++	for edge in edges:
+ 		var a: Vector3 = points[edge[0]]
+ 		var b: Vector3 = points[edge[1]]
+ 		var delta := b-a
+@@ -89,7 +92,8 @@
+ 		mesh.position = (a+b)*.5
+ 		var up := Vector3.RIGHT if absf(delta.normalized().dot(Vector3.UP))>.99 else Vector3.UP
+ 		mesh.basis = Basis.looking_at(delta.normalized(),up)*Basis(Vector3.RIGHT,PI/2)
+-		mesh.material_override = material(color.lightened(.15))
++		var changed: bool = key=="end" and not baseline.has(Store.edge_key(edge))
++		mesh.material_override = material(Color(.12,.85,.8) if changed else color.lightened(.15))
+ 		figure.add_child(mesh)
+ 
+ func material(color: Color) -> StandardMaterial3D:

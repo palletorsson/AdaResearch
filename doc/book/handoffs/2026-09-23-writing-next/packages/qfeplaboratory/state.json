@@ -1,0 +1,403 @@
+{
+  "sequence": "qfeplaboratory",
+  "declared_maps": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis"
+  ],
+  "museum_map_authored_order": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis"
+  ],
+  "route_orders_match": true,
+  "halls": [
+    {
+      "map": "QFEP_Introduction",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 730,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "qfep_balance_workbench"
+        ],
+        "reason": "Keep one outline and total, then find another arrangement with the same total. Test the zero-weight case; distinguish supplied quantities and authored reference names from measurements.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Introduction/final.md",
+        "text_sha256": "db14dc091ae5ed7ddeefd6411a80fccf9c24cf47b302b5607b94b6ee214f54b9",
+        "map_sha256": "166b488f070c5d64b60e5975e0ecd2de7c35f628b2b09fc3dc7b967c121df193",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-introduction-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "qfep_balance_workbench"
+      ],
+      "role_primary_order": [
+        "qfep_balance_workbench"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_F_Term",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 462,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "shannon_workbench"
+        ],
+        "reason": "Compare equal source entropy with unequal predictor error, then change EXPECT 0/1 while keeping the observed bits fixed.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_F_Term/final.md",
+        "text_sha256": "0c383fda53506972a64a21091bd2dd813ba677c96300a7269d898951b389fd1d",
+        "map_sha256": "65f67e5ae9b64adef862e82e5818d6ae28aba989f711339e051e1eafc00d79a9",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-f-term-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "shannon_workbench"
+      ],
+      "role_primary_order": [
+        "shannon_workbench"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_E_Term",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 656,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "entropy_fan"
+        ],
+        "reason": "Count equally weighted endings; prune and reopen the fan, then ask who may revise its authored alternatives.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_E_Term/final.md",
+        "text_sha256": "393e31577e7e91038a65e3777d0f00ced09b6f47b47754eab531f0d42f538cce",
+        "map_sha256": "3e8de1983acf2f2fa2d8156d6f9e04ec703c971c03976e386567b14ef053098a",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-e-term-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "entropy_fan"
+      ],
+      "role_primary_order": [
+        "entropy_fan"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 581,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lambda_hall"
+        ],
+        "reason": "Move the lit recommendation while keeping the authored spectrum and its animation independent; compare the invitation with the arrangement it inherits.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+        "text_sha256": "ccb0679010939a220c1587db5b8382a1552bf376b3bcce3910e80cd81a2b7b50",
+        "map_sha256": "320b6c8a9388f8ec4f6938f5cfef3100b244c01b5c9eeb13ae86f700719de473",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-lambda-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "lambda_hall"
+      ],
+      "role_primary_order": [
+        "lambda_hall"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_Phi_Term",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 515,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "phi_slider",
+          "transforming_pattern"
+        ],
+        "reason": "Compare sign and magnitude before revealing an interpretation; the neighbouring pattern keeps its independent rhythm.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Phi_Term/final.md",
+        "text_sha256": "e4ca8afdd0a9cf4ba4151b725f57f16a8d82cff3c983c58b036c4bb4c21fa020",
+        "map_sha256": "82f88e7c64cfce23802526a453d6904b1e45425e0bb678fd98616dfe162a45ee",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-phi-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "role_primary_order": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 610,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "edge_of_chaos_unlocked"
+        ],
+        "reason": "Compare the same starting field at equal model time with two numerical timesteps; choose a feature before naming a regime.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+        "text_sha256": "a3985167c07b9cd5d29b587862ce48579f5af8a9887ede492180b2b96c15af79",
+        "map_sha256": "211e9c5ab59ec333a121ba6181153fe4d6e36244510fa9c20c58162c60f85b3d",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-edge-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "edge_of_chaos_unlocked"
+      ],
+      "role_primary_order": [
+        "edge_of_chaos_unlocked"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 534,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lambda_slider",
+          "phi_slider",
+          "qfep_reactor"
+        ],
+        "reason": "Make, interrupt and repeat a local connection; compare a handle value with one receiver input and response.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Sandbox/final.md",
+        "text_sha256": "f17a66f424511f91e663fc63e66cb098d450be50db975ddef9a2be240f9ab14b",
+        "map_sha256": "e5fbc64e6cba06d618c41d49177a47b818af624f5da4de3eae54a18a0b901c4e",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-sandbox-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "lambda_slider",
+        "phi_slider",
+        "qfep_reactor"
+      ],
+      "role_primary_order": [
+        "lambda_slider",
+        "phi_slider",
+        "qfep_reactor"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "QFEP_Synthesis",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 580,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "queer_morphology_specimen"
+        ],
+        "reason": "Separate stiffness, pressure and dissipation in one existing specimen; stop imposed pressure modulation while physics continues.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Synthesis/final.md",
+        "text_sha256": "2d03b5a9d94511171ace3d3a1bef79c0a841ee42af107e6d226fbb45eb7c8d66",
+        "map_sha256": "79e8681536268206c1455bdc9d3b90e1a13e07e3f795e087f7714be956050eae",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-synthesis-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "queer_morphology_specimen"
+      ],
+      "role_primary_order": [
+        "queer_morphology_specimen"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "commons/artifacts/_embodied/embodied_prop.gd",
+      "commons/artifacts/_hangar/hangar_kit.gd",
+      "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+      "commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+      "commons/artifacts/entropy_fan/entropy_fan.gd",
+      "commons/artifacts/entropy_fan/entropy_fan.tscn",
+      "commons/artifacts/lambda_hall/lambda_hall.gd",
+      "commons/artifacts/lambda_hall/lambda_hall.tscn",
+      "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+      "commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+      "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+      "commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+      "commons/artifacts/shannon_workbench/shannon_workbench.gd",
+      "commons/artifacts/shannon_workbench/shannon_workbench.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/audio/runtime/CubeAudioPlayer.gd",
+      "commons/context/clipboard/tutorial_text_library.gd",
+      "commons/grid/GridCommon.gd",
+      "commons/grid/GridStructureComponent.gd",
+      "commons/grid/GridUtilitiesComponent.gd",
+      "commons/grid/UtilityRegistry.gd",
+      "commons/interactables/push_button.tscn",
+      "commons/interactables/slider_horizontal.tscn",
+      "commons/interfaces/qfep/lambda_slider.gd",
+      "commons/interfaces/qfep/lambda_slider.tscn",
+      "commons/interfaces/qfep/phi_slider.gd",
+      "commons/interfaces/qfep/phi_slider.tscn",
+      "commons/interfaces/qfep/qfep_reactor.gd",
+      "commons/interfaces/qfep/qfep_reactor.tscn",
+      "commons/interfaces/qfep/sandbox_wiring_study.gd",
+      "commons/interfaces/qfep/transforming_pattern.gd",
+      "commons/interfaces/qfep/transforming_pattern.tscn",
+      "commons/resourses/shaders/PinkTeleport.gdshader",
+      "commons/scenes/endless_museum.gd",
+      "commons/scenes/mapobjects/overhead_light.gd",
+      "commons/scenes/mapobjects/overhead_light.tscn",
+      "commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "commons/scenes/mapobjects/subtitle_trigger.gd",
+      "commons/scenes/mapobjects/subtitle_trigger.tscn",
+      "commons/scenes/mapobjects/teleport.gd",
+      "commons/scenes/mapobjects/teleport_scene.tscn",
+      "commons/scenes/mapobjects/word_is.gd",
+      "commons/scenes/mapobjects/word_is.tscn",
+      "commons/ui/control_panel.gd",
+      "commons/ui/control_value_surface.gd",
+      "commons/ui/display_mount.gd",
+      "commons/ui/exhibit_control_mount.gd",
+      "commons/ui/interface_presets.gd",
+      "commons/ui/physical_parameter_console.gd",
+      "commons/ui/text_screen.gd",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://adaresearch/Common/Scripts/Managers/artifact_data.gd",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "res://addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "res://addons/godot-xr-tools/objects/grab_points/grab_point_redirect.tscn",
+      "res://addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "res://addons/godot-xr-tools/rumble/rumbler.gd",
+      "res://addons/godot-xr-tools/rumble/tap_rumble.tres",
+      "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+      "res://commons/artifacts/large_window/large_window.tscn",
+      "res://commons/artifacts/queer_confetti/queer_confetti.gd",
+      "res://commons/artifacts/randomness_space/museum_exhibit_stage.gd",
+      "res://commons/artifacts/station/%s.tscn",
+      "res://commons/artifacts/station/station_door.tscn",
+      "res://commons/artifacts/station/station_plinth.tscn",
+      "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
+      "res://commons/context/clipboard/codeDisplay.tscn",
+      "res://commons/grid/grid_system.tscn",
+      "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/angular_handle.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/interactable_area_button_pointer.gd",
+      "res://commons/interactables/joystick_smooth.tscn",
+      "res://commons/interactables/linear_driver.gd",
+      "res://commons/interactables/materials/ui_shadow.tres",
+      "res://commons/interactables/physical_stepped_slider.gd",
+      "res://commons/interactables/push_button.gd",
+      "res://commons/interactables/slider_horizontal.gd",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/movement/museum_flight_box.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/player/costume_wardrobe.gd",
+      "res://commons/primitives/cubes/grab_cube.tscn",
+      "res://commons/primitives/origin/origin.tscn",
+      "res://commons/primitives/temporal/animated_folding_past.tscn",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/resourses/shaders/SimpleGrid.gdshader",
+      "res://commons/scenes/em/em_cartridge.gd",
+      "res://commons/scenes/em/em_desktop_pointer.gd",
+      "res://commons/scenes/em/em_detail.gd",
+      "res://commons/scenes/em/em_lighting.gd",
+      "res://commons/scenes/em/em_portal_stream.gd",
+      "res://commons/scenes/em/em_simplex_corners.gd",
+      "res://commons/scenes/em/em_simulation_stage.gd",
+      "res://commons/scenes/em/em_splatter.gd",
+      "res://commons/scenes/em/em_transform_gizmo.gd",
+      "res://commons/scenes/em/em_wall_fit.gd",
+      "res://commons/scenes/em/em_weathering_wall.gd",
+      "res://commons/scenes/em/floor_seams.gdshader",
+      "res://commons/scenes/endless_museum.tscn",
+      "res://commons/scenes/mapobjects/bridge_path.tscn",
+      "res://commons/scenes/mapobjects/jump_pad.tscn",
+      "res://commons/scenes/mapobjects/transport_cube.tscn",
+      "res://commons/scenes/mapobjects/walkableprism.tscn",
+      "res://commons/ui/control_console.gd",
+      "res://commons/ui/interface_housing.gd",
+      "res://commons/ui/materials/handle_glow.tres",
+      "res://commons/ui/materials/metal_dark.tres",
+      "res://commons/ui/materials/panel_white.tres",
+      "res://commons/ui/materials/track_groove.tres",
+      "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
+    ],
+    "scope": "Primary artifact scenes and active utility scenes plus two static resource-reference hops; utility registry/grid/museum dispatch context copied without further traversal. Text resources only. Dynamic loads, class-name dependencies, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

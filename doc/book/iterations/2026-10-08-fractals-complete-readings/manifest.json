@@ -1,0 +1,498 @@
+{
+  "date": "2026-10-08",
+  "sequence": "fractals",
+  "order": [
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_CantorSet",
+    "Fractal_KochSierpinski",
+    "Fractal_MengerSponge",
+    "Fractal_GoldenSpiral",
+    "Fractal_Synthesis"
+  ],
+  "source_sequence_sha256": "98fc39595025112a2e130e6829c08efdf0558957d90d6794924ea33650925deb",
+  "halls": [
+    {
+      "id": "Fractal_Recursion",
+      "label": "Recursion",
+      "number": 1,
+      "operation": "A self-call receives a smaller size and a remaining budget.",
+      "question": "Where does more detail stop producing another usable distinction?",
+      "tracks": {
+        "tutorial": {
+          "title": "Recursion — one more frame",
+          "prose_words_approx": 498,
+          "fenced_blocks": 2,
+          "fenced_lines": 75
+        },
+        "final": {
+          "title": "How many times can *again* happen?",
+          "prose_words_approx": 1210,
+          "fenced_blocks": 3,
+          "fenced_lines": 5
+        }
+      }
+    },
+    {
+      "id": "Fractal_RecursiveTrees",
+      "label": "Recursive Trees",
+      "number": 2,
+      "operation": "Two calls inherit a parent transform; turn one fork and its descendants follow.",
+      "question": "What travels from a local edit to a canopy, and what does a drawing leave out?",
+      "tracks": {
+        "tutorial": {
+          "title": "Recursive Trees — turn one fork",
+          "prose_words_approx": 919,
+          "fenced_blocks": 3,
+          "fenced_lines": 139
+        },
+        "final": {
+          "title": "Where will the next branch go?",
+          "prose_words_approx": 1292,
+          "fenced_blocks": 2,
+          "fenced_lines": 2
+        }
+      }
+    },
+    {
+      "id": "Fractal_CantorSet",
+      "label": "Cantor Set",
+      "number": 3,
+      "operation": "Replace an interval with two survivors; separate current, next and history.",
+      "question": "How can more pieces leave less material, and when is a gap a passage?",
+      "tracks": {
+        "tutorial": {
+          "title": "Cantor Set — keep the two ends",
+          "prose_words_approx": 890,
+          "fenced_blocks": 2,
+          "fenced_lines": 133
+        },
+        "final": {
+          "title": "More pieces, less material",
+          "prose_words_approx": 985,
+          "fenced_blocks": 3,
+          "fenced_lines": 6
+        }
+      }
+    },
+    {
+      "id": "Fractal_KochSierpinski",
+      "label": "Koch / Sierpinski",
+      "number": 4,
+      "operation": "Replace each segment with a detour; distinguish a path address from travelled distance.",
+      "question": "What changes when the boundary grows or the discarded parts become the subject?",
+      "tracks": {
+        "tutorial": {
+          "title": "Koch / Sierpinski — the distance between",
+          "prose_words_approx": 1094,
+          "fenced_blocks": 3,
+          "fenced_lines": 177
+        },
+        "final": {
+          "title": "The boundary takes a detour",
+          "prose_words_approx": 1509,
+          "fenced_blocks": 3,
+          "fenced_lines": 10
+        }
+      }
+    },
+    {
+      "id": "Fractal_MengerSponge",
+      "label": "Menger Sponge",
+      "number": 5,
+      "operation": "Select cells in three dimensions; inspect an address and try the resulting passage.",
+      "question": "When does a geometrical connection become a route for this body?",
+      "tracks": {
+        "tutorial": {
+          "title": "Menger — a cell and a room",
+          "prose_words_approx": 1208,
+          "fenced_blocks": 2,
+          "fenced_lines": 124
+        },
+        "final": {
+          "title": "A hole becomes a place",
+          "prose_words_approx": 952,
+          "fenced_blocks": 1,
+          "fenced_lines": 3
+        }
+      }
+    },
+    {
+      "id": "Fractal_GoldenSpiral",
+      "label": "Golden Spiral",
+      "number": 6,
+      "operation": "Append the previous pair’s sum; read one record through two height functions.",
+      "question": "Which choices turn numbers into convincing forms?",
+      "tracks": {
+        "tutorial": {
+          "title": "Two values, two views",
+          "prose_words_approx": 1021,
+          "fenced_blocks": 2,
+          "fenced_lines": 151
+        },
+        "final": {
+          "title": "A number needs a mapping",
+          "prose_words_approx": 1293,
+          "fenced_blocks": 3,
+          "fenced_lines": 5
+        }
+      }
+    },
+    {
+      "id": "Fractal_Synthesis",
+      "label": "Synthesis",
+      "number": 7,
+      "operation": "Copy and compare recipes; optionally compose one earlier influence with a chosen construction, then prepare a symbolic rewrite.",
+      "question": "Which difference is worth keeping, and how does an encounter revise its description?",
+      "tracks": {
+        "tutorial": {
+          "title": "A rule kept",
+          "prose_words_approx": 1511,
+          "fenced_blocks": 2,
+          "fenced_lines": 175
+        },
+        "final": {
+          "title": "What, exactly, is repeated?",
+          "prose_words_approx": 1410,
+          "fenced_blocks": 0,
+          "fenced_lines": 0
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "commons/maps/Fractal_Recursion/tutorial.md",
+      "copy": "sources/Fractal_Recursion/tutorial.md",
+      "sha256": "6efc2a75e51c1ee43b108a765600fb06eb0b376cb40d2fedb5acdcb0a7c2e358"
+    },
+    {
+      "path": "commons/maps/Fractal_Recursion/final.md",
+      "copy": "sources/Fractal_Recursion/final.md",
+      "sha256": "be286ff770816e3888d20e0c9dc419e3cd39ce6095fa971d12caef075fbabeda"
+    },
+    {
+      "path": "commons/maps/Fractal_RecursiveTrees/tutorial.md",
+      "copy": "sources/Fractal_RecursiveTrees/tutorial.md",
+      "sha256": "14b6280d6e86e03a5d7c36d2bba2a813366961713c9143fd23c89c8357c1c805"
+    },
+    {
+      "path": "commons/maps/Fractal_RecursiveTrees/final.md",
+      "copy": "sources/Fractal_RecursiveTrees/final.md",
+      "sha256": "de2b55b4fdb7a7a203a3fab20e58c4ab917131c238d76190631f341f1725fd3f"
+    },
+    {
+      "path": "commons/maps/Fractal_CantorSet/tutorial.md",
+      "copy": "sources/Fractal_CantorSet/tutorial.md",
+      "sha256": "16486dbf019db78b50356a75bdcb893a77afff2a60bfbb0c5fe4f7c578e7aca9"
+    },
+    {
+      "path": "commons/maps/Fractal_CantorSet/final.md",
+      "copy": "sources/Fractal_CantorSet/final.md",
+      "sha256": "438cd65e891852393e1bc06611ebbefcd7d5e3ae12cb48fb7f4ae23245414e4b"
+    },
+    {
+      "path": "commons/maps/Fractal_KochSierpinski/tutorial.md",
+      "copy": "sources/Fractal_KochSierpinski/tutorial.md",
+      "sha256": "9308a2fa1293a3d318af4c1dfe429203ceca49ce51811546447254f376c4ee22"
+    },
+    {
+      "path": "commons/maps/Fractal_KochSierpinski/final.md",
+      "copy": "sources/Fractal_KochSierpinski/final.md",
+      "sha256": "f510896641bd1ec2577b5585daa18f0f28f8c5bafc1bb436c30fa6c57349758e"
+    },
+    {
+      "path": "commons/maps/Fractal_MengerSponge/tutorial.md",
+      "copy": "sources/Fractal_MengerSponge/tutorial.md",
+      "sha256": "df64edd088ffa30939bd560da6f93d2bb7258000e8e04d22a96ba7f3293006d7"
+    },
+    {
+      "path": "commons/maps/Fractal_MengerSponge/final.md",
+      "copy": "sources/Fractal_MengerSponge/final.md",
+      "sha256": "cee0651046059bd15fd9be85025586631201b75d93c63b791668556901bfa9d1"
+    },
+    {
+      "path": "commons/maps/Fractal_GoldenSpiral/tutorial.md",
+      "copy": "sources/Fractal_GoldenSpiral/tutorial.md",
+      "sha256": "ed889a6b0a5777ce5a89aed39d567073248cab02a8cc849c52cac46a83a08f5c"
+    },
+    {
+      "path": "commons/maps/Fractal_GoldenSpiral/final.md",
+      "copy": "sources/Fractal_GoldenSpiral/final.md",
+      "sha256": "89590b6873f235b9743caa17ec53553665929ba2c3b9bbfef10317849417ca39"
+    },
+    {
+      "path": "commons/maps/Fractal_Synthesis/tutorial.md",
+      "copy": "sources/Fractal_Synthesis/tutorial.md",
+      "sha256": "24e259387c07611b41324100e1403fb26cec925fa97ea96d567c87fd9fae40e8"
+    },
+    {
+      "path": "commons/maps/Fractal_Synthesis/final.md",
+      "copy": "sources/Fractal_Synthesis/final.md",
+      "sha256": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856"
+    }
+  ],
+  "student_files": [
+    {
+      "hall": "Fractal_Recursion",
+      "file": "frames.gd",
+      "sha256": "ce33a4b2dae7e700d89266a6dbfe02a847d3c0ed2423838ae98191a825779aff",
+      "lines": 43,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_Recursion/frames.gd"
+    },
+    {
+      "hall": "Fractal_Recursion",
+      "file": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+      "lines": 32,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_Recursion/line_skin.gd"
+    },
+    {
+      "hall": "Fractal_RecursiveTrees",
+      "file": "tree.gd",
+      "sha256": "43d2f54b2a96f8668c43decc9946fda9f633ad02c4495bfe389f61780b7211e3",
+      "lines": 66,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_RecursiveTrees/tree.gd"
+    },
+    {
+      "hall": "Fractal_RecursiveTrees",
+      "file": "point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_RecursiveTrees/point_body.gd"
+    },
+    {
+      "hall": "Fractal_RecursiveTrees",
+      "file": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+      "lines": 32,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_RecursiveTrees/line_skin.gd"
+    },
+    {
+      "hall": "Fractal_CantorSet",
+      "file": "cantor.gd",
+      "sha256": "20a8794daceca0c47e3dde819343b7b72218df3415c7971fbaea12b3b621eef1",
+      "lines": 92,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_CantorSet/cantor.gd"
+    },
+    {
+      "hall": "Fractal_CantorSet",
+      "file": "point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_CantorSet/point_body.gd"
+    },
+    {
+      "hall": "Fractal_KochSierpinski",
+      "file": "koch.gd",
+      "sha256": "4282ef05852943d87eacabb0081c03e0976b6cdc5b6c4b130872a4ce9d4ed815",
+      "lines": 104,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_KochSierpinski/koch.gd"
+    },
+    {
+      "hall": "Fractal_KochSierpinski",
+      "file": "point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_KochSierpinski/point_body.gd"
+    },
+    {
+      "hall": "Fractal_KochSierpinski",
+      "file": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+      "lines": 32,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_KochSierpinski/line_skin.gd"
+    },
+    {
+      "hall": "Fractal_MengerSponge",
+      "file": "menger.gd",
+      "sha256": "f3dca3abe42405786b6a9679c7e446259637964425f920fd0a26972531ab0f65",
+      "lines": 83,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_MengerSponge/menger.gd"
+    },
+    {
+      "hall": "Fractal_MengerSponge",
+      "file": "point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_MengerSponge/point_body.gd"
+    },
+    {
+      "hall": "Fractal_GoldenSpiral",
+      "file": "sum_points.gd",
+      "sha256": "a3709ae6de3caa26a5a91b9a068050aa9046236d97c4d912279c97dc4b257a77",
+      "lines": 110,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_GoldenSpiral/sum_points.gd"
+    },
+    {
+      "hall": "Fractal_GoldenSpiral",
+      "file": "point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_GoldenSpiral/point_body.gd"
+    },
+    {
+      "hall": "Fractal_Synthesis",
+      "file": "recipe.gd",
+      "sha256": "829bf30efe7c7745600d126a9a9edb2393a63009b701f5dad93b6b16b5360cd8",
+      "lines": 134,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_Synthesis/recipe.gd"
+    },
+    {
+      "hall": "Fractal_Synthesis",
+      "file": "point_body.gd",
+      "sha256": "0e33cc5f8653f04a9d0cb7375227ae8787aedd62148b59052369d8a14db39efe",
+      "lines": 41,
+      "study_source": "doc/book/studies/fractals-through-the-hands/Fractal_Synthesis/point_body.gd"
+    }
+  ],
+  "assets": [
+    {
+      "source": "commons/maps/Fractal_Recursion/images/recursion-thresholds.png",
+      "file": "assets/Fractal_Recursion/recursion-thresholds.png",
+      "sha256": "24f5da35e04ba52a8cf6c7f80e4346c57391ef24e66c7e78459f78542c44ec8b"
+    },
+    {
+      "source": "commons/maps/Fractal_RecursiveTrees/images/tree-canopy.png",
+      "file": "assets/Fractal_RecursiveTrees/tree-canopy.png",
+      "sha256": "c717fa52f3a453ea64f7ea6edc996a93032be223b7eee84f703f58e14642e226"
+    },
+    {
+      "source": "doc/book/figures/fractals/helix-against-golden-spiral.png",
+      "file": "assets/Fractal_GoldenSpiral/helix-against-golden-spiral.png",
+      "sha256": "8712b8dbe939b37603c9f0fa5aa7374c3b226d751ea748fa5c552fe9816597f8"
+    }
+  ],
+  "totals": {
+    "tutorial": {
+      "prose_words_approx": 7141,
+      "fenced_blocks": 16,
+      "fenced_lines": 974
+    },
+    "final": {
+      "prose_words_approx": 8651,
+      "fenced_blocks": 15,
+      "fenced_lines": 31
+    }
+  },
+  "earlier_evidence": [
+    {
+      "hall": "Fractal_Recursion",
+      "receipt": "evidence/2026-10-08-fractal-fork-in-the-hand.json",
+      "earlier_check_count": 68,
+      "tutorial_hash_matches_receipt": true,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    },
+    {
+      "hall": "Fractal_RecursiveTrees",
+      "receipt": "evidence/2026-10-08-fractal-fork-in-the-hand.json",
+      "earlier_check_count": 68,
+      "tutorial_hash_matches_receipt": true,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    },
+    {
+      "hall": "Fractal_CantorSet",
+      "receipt": "evidence/2026-10-08-cantor-a-cut-in-the-hand.json",
+      "earlier_check_count": 61,
+      "tutorial_hash_matches_receipt": true,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    },
+    {
+      "hall": "Fractal_KochSierpinski",
+      "receipt": "evidence/2026-10-08-koch-the-distance-between.json",
+      "earlier_check_count": 72,
+      "tutorial_hash_matches_receipt": true,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    },
+    {
+      "hall": "Fractal_MengerSponge",
+      "receipt": "evidence/2026-10-08-menger-a-cell-and-a-room.json",
+      "earlier_check_count": 83,
+      "tutorial_hash_matches_receipt": true,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    },
+    {
+      "hall": "Fractal_GoldenSpiral",
+      "receipt": "evidence/2026-10-08-golden-two-values-two-views.json",
+      "earlier_check_count": 76,
+      "tutorial_hash_matches_receipt": true,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    },
+    {
+      "hall": "Fractal_Synthesis",
+      "receipt": "evidence/2026-10-08-synthesis-a-rule-kept.json",
+      "earlier_check_count": 80,
+      "tutorial_hash_matches_receipt": false,
+      "status": "Previously recorded run; not rerun for this compilation. Counts may cover multiple halls and must not be summed blindly."
+    }
+  ],
+  "canonical_sources_modified_by_compiler": false,
+  "runtime_tests_rerun_by_compiler": false,
+  "revision_evidence": {
+    "date": "2026-10-08",
+    "changes": [
+      {
+        "path": "commons/maps/Fractal_Synthesis/tutorial.md",
+        "scope": "file",
+        "before_sha256": "596cf7d845eba4e7c4f503f5c55dd3fe37c11294eae7930744e9cc0bc89fbb05",
+        "after_sha256": "24e259387c07611b41324100e1403fb26cec925fa97ea96d567c87fd9fae40e8",
+        "diff": "changes/commons__maps__Fractal_Synthesis__tutorial.md.diff"
+      },
+      {
+        "path": "commons/maps/Fractal_Synthesis/final.md",
+        "scope": "file",
+        "before_sha256": "9b891f4cd63c6dc1c3b204541bc06fd010bc6d1cf9638830f04e1d00b4337a43",
+        "after_sha256": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856",
+        "diff": "changes/commons__maps__Fractal_Synthesis__final.md.diff"
+      },
+      {
+        "path": "commons/maps/Fractal_MengerSponge/final.md",
+        "scope": "file",
+        "before_sha256": "9c77b084ef4001e3852b7fc3317b6a096c2e399cbe3d928b6e30d917cbfbf3ca",
+        "after_sha256": "cee0651046059bd15fd9be85025586631201b75d93c63b791668556901bfa9d1",
+        "diff": "changes/commons__maps__Fractal_MengerSponge__final.md.diff"
+      },
+      {
+        "path": "commons/maps/Fractal_KochSierpinski/final.md",
+        "scope": "file",
+        "before_sha256": "a3790b803915aee33b8a1a18df3de3c06e3004d4996200d99f15ec7c84cfe14d",
+        "after_sha256": "f510896641bd1ec2577b5585daa18f0f28f8c5bafc1bb436c30fa6c57349758e",
+        "diff": "changes/commons__maps__Fractal_KochSierpinski__final.md.diff"
+      },
+      {
+        "path": "doc/book/course/fractals-scale-and-return.md",
+        "scope": "file",
+        "before_sha256": "093e00fefe6b6c8c3fd5811f92673d89dec07fb4ee26a286a15d3d24397ad663",
+        "after_sha256": "fcf122a5fd76047806ccad8427267fa0b00ba38303697b76fc3e768fb37b6d09",
+        "diff": "changes/doc__book__course__fractals-scale-and-return.md.diff"
+      },
+      {
+        "path": "doc/book/course/execution-plan/plan.json",
+        "scope": "Fractal_Synthesis row only; concurrent edits to other rows are excluded",
+        "before_sha256": "483d032dfc15d9841d9fc4eec71ab6592f5bb7e479464de278d28b07e710b795",
+        "after_sha256": "f44db6599f3de15c3895100e6aacdb79d9d538242b94bbc965e61cdcedb7a9b6",
+        "diff": "changes/doc__book__course__execution-plan__plan.json.diff"
+      },
+      {
+        "path": "tools/publish_fractals_complete_readings.py",
+        "scope": "file",
+        "before_sha256": "da6093be3c133a18ca4d73ff95d0edc94fd67860bc2eee25d8db4a49d6cfbe6f",
+        "after_sha256": "3970282c740f12b4a14125c16d686395a5f817f7d7d3212a2848b7e5644eec94",
+        "diff": "changes/tools__publish_fractals_complete_readings.py.diff"
+      }
+    ],
+    "required_printed_code_unchanged": true,
+    "tests": {
+      "composition": 21,
+      "required-recipe": 46
+    },
+    "source_sha256": {
+      "commons/maps/Fractal_Synthesis/tutorial.md": "24e259387c07611b41324100e1403fb26cec925fa97ea96d567c87fd9fae40e8",
+      "commons/maps/Fractal_Synthesis/final.md": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856",
+      "commons/maps/Fractal_MengerSponge/final.md": "cee0651046059bd15fd9be85025586631201b75d93c63b791668556901bfa9d1",
+      "commons/maps/Fractal_KochSierpinski/final.md": "f510896641bd1ec2577b5585daa18f0f28f8c5bafc1bb436c30fa6c57349758e"
+    },
+    "scope": "Editorial revision; unchanged required lesson and one agent-authored optional composition executed. No new museum placement, independent ghost student or headset certification."
+  },
+  "fresh_runtime_scope": "Required Synthesis:46; one writing-agent tree/noise response:21. See review-notes/tests. No whole-sequence or headset rerun."
+}

@@ -1,0 +1,271 @@
+{
+  "sequence": "swarmintelligence",
+  "declared_maps": [
+    "SwarmIntelligence_PhysarumColony",
+    "SwarmIntelligence_FlowFields",
+    "SwarmIntelligence_Boids_Algorithm",
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Ant_Colony_Optimization",
+    "SwarmIntelligence_Particle_Swarm_Optimization",
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+  ],
+  "museum_map_authored_order": [
+    "SwarmIntelligence_PhysarumColony",
+    "SwarmIntelligence_FlowFields",
+    "SwarmIntelligence_Boids_Algorithm",
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Particle_Swarm_Optimization"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "SwarmIntelligence_PhysarumColony",
+      "recorded_status": "source_checked_draft",
+      "text_words": 415,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "PhysarumColony"
+        ],
+        "reason": "Can a path remember which way to grow when no individual holds the whole network?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+        "text_sha256": "2a527b6831544109fd080fbcee3dfd9b70f975bc5de68d6d905ac7bd2083ec60",
+        "map_sha256": "bc26039f9496d9e4218d50c5b5e2e72c6ea474a390131c482e8a89235400c833",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "PhysarumColony"
+      ],
+      "role_primary_order": [
+        "PhysarumColony"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "SwarmIntelligence_FlowFields",
+      "recorded_status": "source_checked_draft",
+      "text_words": 428,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "FlowFieldMain"
+        ],
+        "reason": "If many agents turn together, must they be watching one another?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_FlowFields/final.md",
+        "text_sha256": "30e9e9ed291ea280b0a5f220e6b6eeeba0a140016e39ec1a4143538af6af947b",
+        "map_sha256": "df55a34da73c97ed010994975d78395ce1c6b94aee51e08d3201290c4974452e",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "FlowFieldMain"
+      ],
+      "role_primary_order": [
+        "FlowFieldMain"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "recorded_status": "source_checked_draft",
+      "text_words": 425,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "flocking_controls"
+        ],
+        "reason": "Which local relationship is making this flock hold together?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+        "text_sha256": "ef27362697ecd55e5d7a7db50cfd6ae5ae59a669c7d0047ac2a33fc7fe7a9360",
+        "map_sha256": "074b54a857290dfd2f4acf4e0017ae75efd2bc1f73ae90781384ff11013bc693",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "flocking_controls"
+      ],
+      "role_primary_order": [
+        "flocking_controls"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "recorded_status": "source_checked_draft",
+      "text_words": 429,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ant_colony_optimization"
+        ],
+        "reason": "How much of a collective result changes when one rule changes?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/final.md",
+        "text_sha256": "6ec78d1a6bb4bcad3b145bc53ee7b630a48326c2d47b093bbc017b5205e73277",
+        "map_sha256": "8ed87776d65532eb7017922c649ca8690ef6c996f00f6b44e2d9244ebdc64e86",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ant_colony_optimization"
+      ],
+      "role_primary_order": [
+        "ant_colony_optimization"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "recorded_status": "source_checked_draft",
+      "text_words": 431,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "AntColonyV2"
+        ],
+        "reason": "How can an ant leave useful directions without carrying a map?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/final.md",
+        "text_sha256": "d26e1d5319847d4442e2703636bafaa8fed4985d642837109e3d0302ccbb3ceb",
+        "map_sha256": "b9f8d6e49525d00407cb478aff684fb60dd110e1f13ae7238a5aec6627e17770",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "AntColonyV2"
+      ],
+      "role_primary_order": [
+        "AntColonyV2"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "recorded_status": "source_checked_draft",
+      "text_words": 418,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "fitness_landscape_politics"
+        ],
+        "reason": "When a swarm improves, who decided what better means?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/final.md",
+        "text_sha256": "89a97dacc128ad10474efd60f43f028b2639b9dacbbcfd5bc812107646b15ab4",
+        "map_sha256": "dd42ab107006a953e454347b48df3b8fe04bb71811ebbc5126c148697ff80dd2",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "fitness_landscape_politics"
+      ],
+      "role_primary_order": [
+        "fitness_landscape_politics"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "recorded_status": "source_checked_draft",
+      "text_words": 427,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "ecosystem_simulation"
+        ],
+        "reason": "If this small ecosystem persists, which rules are helping it persist?",
+        "status": "source_checked_draft",
+        "sequence": "swarmintelligence",
+        "text_path": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+        "text_sha256": "9706354bc60e7bfc9f4d24998b6eab48f4f32efbbbfc4b8a090e9a9190ddf290",
+        "map_sha256": "dae90306000c9a908b2312bf273f57158ab1c0d626e9318b265cf4b5e17e329a",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "ecosystem_simulation"
+      ],
+      "role_primary_order": [
+        "ecosystem_simulation"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+      "algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
+      "algorithms/pathfinding/flow_field/FieldVisualizer.gd",
+      "algorithms/pathfinding/flow_field/FlowAgent.gd",
+      "algorithms/pathfinding/flow_field/FlowAgent.tscn",
+      "algorithms/pathfinding/flow_field/FlowFieldMain.gd",
+      "algorithms/pathfinding/flow_field/FlowFieldMain.tscn",
+      "algorithms/swarmintelligence/ant_colony_optimization/AntColonyOptimization.gd",
+      "algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
+      "algorithms/swarmintelligence/ants_v2/AntColonyV2.gd",
+      "algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+      "algorithms/swarmintelligence/ants_v2/SimpleAnt.gd",
+      "algorithms/swarmintelligence/ants_v2/SimpleAnt.tscn",
+      "algorithms/swarmintelligence/ants_v2/ant_valley.gdshader",
+      "algorithms/swarmintelligence/physarum/PhysarumAgent.gd",
+      "algorithms/swarmintelligence/physarum/PhysarumAgent.tscn",
+      "algorithms/swarmintelligence/physarum/PhysarumColony.gd",
+      "algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+      "algorithms/swarmintelligence/physarum/physarum_veins.gdshader",
+      "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd",
+      "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn",
+      "commons/artifacts/flocking_controls/flocking_controls.gd",
+      "commons/artifacts/flocking_controls/flocking_controls.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/resourses/shaders/Grid.gdshader",
+      "res://commons/utils/baked_text_albedo.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

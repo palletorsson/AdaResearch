@@ -1,0 +1,28 @@
+{
+  "room": "Point_One",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Point_One/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Point_One/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Point_One/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Point_One/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Point_One/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Point_One/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Point_One/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Point_One/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Point_One/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Point_One/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Point_One/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "fc5e9779b7bacc591d8dac54898b80e02aed472887c9f3fe3059089793ecaf00",
+    "commons/maps/Point_One/map_data.json": "9fbdff0b8afdd8e5a98127cc3dab8579fe775f11972b370bede12f94ed29ea3d",
+    "doc/book/iterations/2026-09-29-point-and-coordinates/probe.gd": "07a96e71b5e00268e6fa29f1d291e3520ab451edc384048aba246f15b42da9b1",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "4a2739314297b6218f427bb23914fa963ef0a14d9fc936af22723892194cb60e",
+    "ada_run/encounter_pilot/Point_One/control.json": "f326f484f479fdd1ba6c82c7753e6cecc013cfab37827a775d3619d73a4e91a1",
+    "ada_run/encounter_pilot/Point_One/necklace_hand.json": "b38336e283e054b864b39d689cb4d4efcd8e14710e781dde385bf30faa304d01",
+    "ada_run/encounter_pilot/Point_One/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Point_One/em_bake.json": "970b7f634c446e10ce47517f2141d58c10cd53367cde44718cd2e2a5b2a76394"
+  }
+}

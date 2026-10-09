@@ -1,0 +1,81 @@
+--- before/commons/artifacts/additive_wave_demo/additive_wave_demo.gd
++++ after/commons/artifacts/additive_wave_demo/additive_wave_demo.gd
+@@ -5,8 +5,8 @@
+ 
+ class_name AdditiveWaveDemo
+ ## Demonstrates additive wave synthesis: building complex waveforms from sine harmonics.
+-## Uses the Fourier principle: f(t) = Σ Aₙ·sin(n·ωt + φₙ), where each harmonic
+-## contributes a sine wave at integer multiples of the fundamental frequency.
++## Draws f(t) = Σ Aₙ·sin(n·ωt): five nonnegative, phase-locked harmonics
++## at integer multiples of the fundamental frequency.
+ ## Sliders control amplitudes of harmonics 1–5; preset detection identifies
+ ## nearby finite square/sawtooth recipes and the legacy positive odd 1/n² mix.
+ 
+@@ -15,7 +15,7 @@
+ # desire: Stack harmonics with VR sliders and watch complex waveforms build from pure sines
+ # critical_parameter: harmonic_amplitudes[] — each slider adds one frequency component
+ # triggers: slider movement updates harmonic amplitudes; waveform redraws in real-time
+-# emerges: square waves from odd harmonics, sawtooth from all — Fourier theorem made tactile
++# emerges: finite sums resemble familiar recipes; their names do not remove truncation or phase restrictions
+ # needs: VR sliders for 5 harmonics [has], preset buttons [has]
+ # relationships: depends on fundamental + harmonics; contrasts with timbre_sculptor (visual vs audible synthesis); unlocks Fourier intuition
+ # truth: Five nonnegative, phase-locked sine coefficients form a restricted family of sums.
+@@ -73,6 +73,10 @@
+ @export_enum("ladder", "overlay", "hidden") var components: String = "ladder"
+ ## The staging: `none` (the shipped scene as it is) or `bench` (see THE BENCH above).
+ @export_enum("none", "bench") var stand: String = "none"
++## On the bench, keep recipe recognition until H1 ALONE or BASELINE is used.
++## Coefficients, formula, rows and controls remain visible throughout.
++@export var name_after_compare: bool = false
++var _comparison_made: bool = false
+ 
+ ## Path to the fundamental amplitude slider in the scene tree
+ @export var fundamental_slider_path: NodePath = "ControlPanel/FundamentalSlider"
+@@ -90,6 +94,8 @@
+ @onready var component_meshes: Node3D = $ComponentWaves
+ @onready var formula_label: Label3D = $FormulaLabel
+ @onready var preset_label: Label3D = $PresetLabel
++@onready var _explanation_label: Label3D = $ExplanationLabel
++@onready var _default_explanation: String = _explanation_label.text
+ 
+ ## Sliders
+ var fundamental_slider
+@@ -371,7 +377,11 @@
+ 
+ 	if preset_label:
+ 		var preset = _detect_preset()
++		if stand == "bench" and name_after_compare and not _comparison_made:
++			preset = "ARRIVAL RECIPE" if harmonic_amplitudes == _baseline else "COMPARE THE SUM"
+ 		preset_label.text = preset
++	if _explanation_label:
++		_explanation_label.text = "Five phase-locked sine harmonics\nA finite sum with nonnegative coefficients" if stand == "bench" and name_after_compare else _default_explanation
+ 
+ ## Labels describe nearby recipes, not an exact identity of the drawn shape.
+ ## Compare every coefficient relative to H1: changing H4 or H5 must count too.
+@@ -457,6 +467,12 @@
+ ## promotion exists to leave alone.
+ func apply_grid_config(config_data: Dictionary) -> void:
+ 	var changed: bool = false
++	if config_data.has("name_after_compare"):
++		var delayed: bool = str(config_data["name_after_compare"]).to_lower() in ["true", "1", "yes"]
++		if delayed != name_after_compare:
++			name_after_compare = delayed
++			_comparison_made = false
++			changed = true
+ 	if config_data.has("waveform"):
+ 		var w: String = str(config_data["waveform"])
+ 		if w != waveform:
+@@ -757,11 +773,13 @@
+ 
+ ## The arrival coefficients, back on every slider.
+ func restore_baseline() -> void:
++	_comparison_made = true
+ 	_set_amplitudes(_baseline)
+ 	waveform_changed.emit(harmonic_amplitudes)
+ 
+ ## The first harmonic by itself (as it is; 1.0 if it was down), the rest at zero.
+ func first_alone() -> void:
++	_comparison_made = true
+ 	var a1: float = harmonic_amplitudes[0] if harmonic_amplitudes[0] >= 0.01 else 1.0
+ 	_set_amplitudes([a1, 0.0, 0.0, 0.0, 0.0])
+ 	waveform_changed.emit(harmonic_amplitudes)

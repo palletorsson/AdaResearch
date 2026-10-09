@@ -1,0 +1,1309 @@
+--- before/commons/artifacts/door_timing_trials/door_timing_trial.gd
++++ after/commons/artifacts/door_timing_trials/door_timing_trial.gd
+@@ -0,0 +1,186 @@
++extends Node3D
++## Two choices, one short route. Timing is retained as separate DRAW/CHOOSE/REVEAL events.
++const Stage = preload("res://commons/artifacts/randomness_space/museum_exhibit_stage.gd")
++const Rack = preload("res://commons/audio/rack_templates/RackTemplates.gd")
++enum Schedule { SHOWN_FIRST, DRAWN_AFTER, HIDDEN_FIRST }
++@export var schedule: Schedule = Schedule.SHOWN_FIRST
++@export var run_seed: int = 39017
++const INK := Color(0.085,0.13,0.17)
++const CHALK := Color(0.92,0.92,0.85)
++const CYAN := Color(0.24,0.76,0.80)
++const AMBER := Color(0.98,0.68,0.26)
++signal trial_changed(state: Dictionary)
++var rng := RandomNumberGenerator.new()
++var short_door := -1
++var chosen := -1
++var revealed := false
++var draws := 0
++var round_id := 0
++var ready_to_walk := false
++var events: Array[String] = []
++var event_labels: Array[Label3D] = []
++var choice_labels: Array[Label3D] = []
++var entries: Array[MeshInstance3D] = []
++var entry_locks: Array[CollisionShape3D] = []
++var shortcuts: Array[MeshInstance3D] = []
++var shortcut_locks: Array[CollisionShape3D] = []
++var triggers: Array[Area3D] = []
++var occupancy: Area3D
++var status: Label3D
++var motion: Tween
++var museum: Node
++
++func _ready() -> void:
++	museum = get_parent()
++	while museum != null and not museum.has_method("_basin_burned"): museum = museum.get_parent()
++	_build()
++	_begin_round()
++
++func lane_x(index: int) -> float:
++	return 0.70 if index == 0 else -0.70
++
++func _build() -> void:
++	var colour: Color = [CYAN,AMBER,Color(0.95,0.43,0.64)][schedule]
++	# Opaque partitions keep an unrevealed outcome from leaking through the architecture.
++	for x in [-2.45,2.45]:
++		Stage.box(self,Vector3(x,1.35,-0.8),Vector3(0.10,2.7,3.4),INK,true)
++		Stage.box(self,Vector3(x,2.75,-0.8),Vector3(0.14,0.08,3.6),colour)
++		# Seal the outside corridors at their front; enter via the chosen inner lane.
++		Stage.box(self,Vector3(signf(x)*1.90,1.35,-2.45),Vector3(1.1,2.7,0.10),INK,true)
++	Stage.box(self,Vector3(0,1.35,-0.85),Vector3(0.10,2.7,3.20),INK,true)
++	for side in [-1.0,1.0]:
++		# Gap at z=-1.15 leads out to a longer path around the blocked shortcut.
++		Stage.box(self,Vector3(side*1.35,1.35,-2.075),Vector3(0.10,2.7,0.75),CHALK,true)
++		Stage.box(self,Vector3(side*1.35,1.35,0.15),Vector3(0.10,2.7,1.30),CHALK,true)
++		Stage.box(self,Vector3(side*1.90,0.012,-0.4),Vector3(0.08,0.02,3.0),colour)
++		Stage.box(self,Vector3(side*1.35,0.012,-1.12),Vector3(1.10,0.02,0.08),colour)
++		Stage.box(self,Vector3(side*1.35,0.012,1.10),Vector3(1.10,0.02,0.08),colour)
++	for i in range(2):
++		var x := lane_x(i)
++		Stage.box(self,Vector3(x,0.012,-1.35),Vector3(0.08,0.02,4.30),colour)
++		Stage.box(self,Vector3(x,2.65,-2.45),Vector3(1.35,0.25,0.28),INK,true)
++		var door := Stage.box(self,Vector3(x,1.20,-2.45),Vector3(1.24,2.4,0.14),colour,true)
++		door.name = "Entry%d" % i
++		entries.append(door);entry_locks.append(door.find_children("*","CollisionShape3D",true,false)[0])
++		var short_gate := Stage.box(self,Vector3(x,1.20,0.0),Vector3(1.26,2.4,0.14),INK,true)
++		short_gate.name = "Shortcut%d" % i
++		shortcuts.append(short_gate);shortcut_locks.append(short_gate.find_children("*","CollisionShape3D",true,false)[0])
++		var marker := Stage.box(self,Vector3(x,0.025,-3.28),Vector3(1.20,0.04,0.72),colour)
++		marker.name = "ChoicePlate%d" % i
++		var plate := _label("A" if i == 0 else "B",Vector3(x,0.049,-3.28),0.15)
++		plate.rotation_degrees.x = -90
++		choice_labels.append(_label("",Vector3(x,2.80,-2.62),0.058))
++		var area := Area3D.new();area.name = "Choice%d" % i
++		area.position = Vector3(x,1.0,-3.28);area.collision_layer = 0;area.collision_mask = 1 | 524288
++		var shape := CollisionShape3D.new();var bounds := BoxShape3D.new();bounds.size = Vector3(1.20,2.2,0.72);shape.shape = bounds;area.add_child(shape);add_child(area)
++		area.body_entered.connect(_on_choice_body.bind(i));triggers.append(area)
++	Stage.box(self,Vector3(0,3.27,-2.46),Vector3(4.90,0.66,0.16),INK)
++	var titles := ["SHOWN FIRST","DRAWN AFTER","HIDDEN FIRST"]
++	_label(titles[schedule],Vector3(0,3.47,-2.56),0.10)
++	for i in range(3):
++		Stage.box(self,Vector3((1-i)*1.50,3.15,-2.56),Vector3(1.42,0.23,0.025),Color(0.19,0.25,0.27))
++		event_labels.append(_label("",Vector3((1-i)*1.50,3.15,-2.58),0.049))
++	status = _label("",Vector3(0,2.97,-2.58),0.035)
++	var panel := Rack.create_panel("",[[{"type":"button","label":"REPLAY"},{"type":"button","label":"NEW ROUND"}]],true)
++	panel.name = "RoundControls";panel.position = Vector3(2.00,1.04,-3.65);panel.rotation = Vector3(deg_to_rad(-50),PI,0);panel.scale = Vector3.ONE*1.8;add_child(panel)
++	Stage.box(self,Vector3(2.00,0.45,-3.60),Vector3(0.30,0.90,0.22),INK,true)
++	panel.find_child("Btn_0",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): replay())
++	panel.find_child("Btn_1",true,false).get_node("InteractableAreaButton").button_pressed.connect(func(_b): new_round())
++	var instruction := _label("STEP ON A PLATE TO CHOOSE",Vector3(0,0.035,-4.15),0.09)
++	instruction.rotation_degrees.x = -90
++	occupancy = Area3D.new();occupancy.name = "OccupiedRoute";occupancy.position = Vector3(0,1.2,-0.10);occupancy.collision_layer = 0;occupancy.collision_mask = 1 | 524288
++	var shape := CollisionShape3D.new();var bounds := BoxShape3D.new();bounds.size = Vector3(4.85,3.2,5.40);shape.shape = bounds;occupancy.add_child(shape);add_child(occupancy)
++	occupancy.body_exited.connect(func(_body): call_deferred("_refresh_route_notice"))
++
++func _label(text: String, pos: Vector3, height: float) -> Label3D:
++	var node := Label3D.new();node.text = text;node.position = pos;node.rotation.y = PI;node.font_size = 44;node.pixel_size = height/44.0;node.outline_size = 4;add_child(node);return node
++
++func is_player(body: Node) -> bool:
++	if museum != null:
++		var walker = museum.get("_player")
++		if walker != null and body == walker: return true
++	return body.is_in_group("player") or body.is_in_group("player_body") or body.is_in_group("vr_player")
++
++func _on_choice_body(body: Node3D, index: int) -> void:
++	if is_player(body): choose(index)
++
++func occupied() -> bool:
++	for body in occupancy.get_overlapping_bodies():
++		if is_player(body): return true
++	return false
++
++func _refresh_route_notice() -> void:
++	if ready_to_walk and not occupied():
++		status.text = "DIRECT PASSAGE" if chosen == short_door else "AROUND THE WALL / follow the floor line"
++
++func replay() -> bool:
++	if occupied():
++		status.text = "LEAVE THE ROUTE BEFORE RESET"
++		return false
++	_begin_round()
++	return true
++
++func new_round() -> bool:
++	if occupied():
++		status.text = "LEAVE THE ROUTE BEFORE RESET"
++		return false
++	var source := RandomNumberGenerator.new();source.randomize()
++	var next_seed := run_seed
++	while next_seed == run_seed: next_seed = source.randi_range(10000,99999)
++	run_seed = next_seed
++	_begin_round()
++	return true
++
++func _begin_round() -> void:
++	round_id += 1
++	if motion != null: motion.kill()
++	motion = null
++	rng.seed = run_seed
++	short_door = -1;chosen = -1;revealed = false;draws = 0;ready_to_walk = false;events.clear()
++	for i in range(2):
++		entries[i].position.y = 1.20;shortcuts[i].position.y = 1.20
++		entry_locks[i].set_deferred("disabled",false);shortcut_locks[i].set_deferred("disabled",false)
++	if schedule != Schedule.DRAWN_AFTER: _draw()
++	if schedule == Schedule.SHOWN_FIRST: _reveal()
++	_update_labels()
++	status.text = "SEED %d / choose by stepping onto A or B" % run_seed
++
++func _draw() -> void:
++	short_door = rng.randi_range(0,1)
++	draws += 1
++	events.append("DRAW")
++
++func _reveal() -> void:
++	revealed = true
++	events.append("REVEAL")
++
++func choose(index: int) -> bool:
++	if index < 0 or index > 1 or chosen != -1: return false
++	chosen = index
++	events.append("CHOOSE "+("A" if index == 0 else "B"))
++	if schedule == Schedule.DRAWN_AFTER: _draw()
++	if not revealed: _reveal()
++	_update_labels()
++	status.text = "OPENING / wait for the panel"
++	motion = create_tween().set_parallel(true)
++	motion.tween_property(entries[index],"position:y",3.90,0.80)
++	if index == short_door: motion.tween_property(shortcuts[index],"position:y",3.90,0.80)
++	motion.set_parallel(false)
++	motion.tween_callback(_opened)
++	trial_changed.emit(get_state())
++	return true
++
++func _opened() -> void:
++	entry_locks[chosen].set_deferred("disabled",true)
++	if chosen == short_door: shortcut_locks[chosen].set_deferred("disabled",true)
++	ready_to_walk = true;motion = null
++	status.text = "DIRECT PASSAGE" if chosen == short_door else "AROUND THE WALL / follow the floor line"
++	trial_changed.emit(get_state())
++
++func _update_labels() -> void:
++	for i in range(3):event_labels[i].text = "%d / %s"%[i+1,events[i]] if i < events.size() else "%d / ..."%(i+1)
++	for i in range(2):
++		choice_labels[i].text = ("A" if i == 0 else "B")+" / "+(("DIRECT" if i == short_door else "AROUND") if revealed else "?")
++
++func get_state() -> Dictionary:
++	return {"schedule":schedule,"seed":run_seed,"round":round_id,"short_door":short_door,"chosen":chosen,"revealed":revealed,"draws":draws,"ready":ready_to_walk,"events":events.duplicate(),"route":"unselected" if chosen < 0 else ("direct" if chosen == short_door else "around")}
+--- before/commons/artifacts/door_timing_trials/door_timing_trials.gd
++++ after/commons/artifacts/door_timing_trials/door_timing_trials.gd
+@@ -0,0 +1,16 @@
++extends Node3D
++## Same walking construction, three times at which its draw becomes available.
++const Trial = preload("res://commons/artifacts/door_timing_trials/door_timing_trial.gd")
++var trials: Array[Node3D] = []
++func _ready() -> void:
++	for i in range(3):
++		var trial := Trial.new()
++		trial.name = ["ShownFirst","DrawnAfter","HiddenFirst"][i]
++		trial.schedule = i
++		trial.run_seed = 39017+i*101
++		trial.position.x = (1-i)*5.0
++		add_child(trial);trials.append(trial)
++func get_state() -> Dictionary:
++	var states: Array = []
++	for trial in trials: states.append(trial.get_state())
++	return {"trials":states,"spacing":5.0,"scope":"Matched geometry and draw law; different private seeds, independent replay controls."}
+--- before/commons/artifacts/door_timing_trials/door_timing_trials.tscn
++++ after/commons/artifacts/door_timing_trials/door_timing_trials.tscn
+@@ -0,0 +1,4 @@
++[gd_scene load_steps=2 format=3]
++[ext_resource type="Script" path="res://commons/artifacts/door_timing_trials/door_timing_trials.gd" id="1"]
++[node name="DoorTimingTrials" type="Node3D"]
++script = ExtResource("1")
+--- before/commons/artifacts/registry/randomness.json
++++ after/commons/artifacts/registry/randomness.json
+@@ -15842,6 +15842,41 @@
+         "exploding_dice"
+       ],
+       "complexity": "beginner"
++    },
++    "door_timing_trials": {
++      "lookup_name": "door_timing_trials",
++      "name": "When did the door decide?",
++      "scene": "res://commons/artifacts/door_timing_trials/door_timing_trials.tscn",
++      "category": "randomness",
++      "sequence": "randomness",
++      "map_sequences": [
++        "randomness"
++      ],
++      "map_ready": true,
++      "include_in_map_data": true,
++      "parameters": {
++        "footprint": [
++          15,
++          6,
++          7
++        ],
++        "size_group": "room_scale"
++      },
++      "description": "Three matched walk-through trials: draw-reveal-choose, choose-draw-reveal, and draw-choose-reveal. Floor plates select a lane; its result opens a direct shortcut or leaves a longer path around a wall. Seeded algorithmic assignment, not physical entropy. Independent replay controls reject resets while a player occupies the route.",
++      "interactions": [
++        "Step on A or B to choose",
++        "Walk the direct passage or the longer route",
++        "Read the retained event order",
++        "Replay from outside or start a new seeded round"
++      ],
++      "tags": [
++        "uncertainty",
++        "decision",
++        "disclosure",
++        "timing",
++        "spatial_consequence"
++      ],
++      "qfep_connection": "A decision and access to that decision are separate events. Changing disclosure changes what a visitor can act upon even with the same possible routes."
+     }
+   }
+ }
+--- before/commons/data/museum_core_encounters.json
++++ after/commons/data/museum_core_encounters.json
+@@ -4,16 +4,17 @@
+       "r_c",
+       "random_removal_arena",
+       "random_doors",
++      "door_timing_trials",
+       "cube_projectile_spawner"
+     ],
+-    "reason": "Separate already sampled deadlines from undrawn waits and connect random events to bodily support.",
++    "reason": "Waits, removal, hidden assignment and matched decision/disclosure passages make distinct uncertainty visible through support, fire and walking distance.",
+     "status": "source_checked_draft",
+     "sequence": "randomness",
+     "text_path": "commons/maps/Random_Game/final.md",
+-    "text_sha256": "1afd7b95fe97e865002b8f4820d047211af3d12ebcc3babcbd79abde32ff7137",
+-    "map_sha256": "d58f1dd4bc357d64222e5e4f0e82b5f04f7cb4432b20f88f1d523c3d71465de8",
++    "text_sha256": "0ec3fc9b487bdaf6107066e765f7203037bbaeb4c16aef1b221b8126e33b05e5",
++    "map_sha256": "d1326e9ca7aa334bdf4921369db6ec249f18805afb755e46ead4005bd176e833",
+     "learner_verified": false,
+-    "verification_scope": "Current source including previously omitted projectile dependency, plus qualified historical evidence. No new bodily crossing, headset or safety-performance validation.",
+-    "local_review": "doc/book/iterations/2026-09-24-claude-randomness-onwards/Random_Game/DECISIONS.md"
++    "verification_scope": "Door timing addition: 64 native control/state/collision checks; actual museum player plate entry, direct and detour walks, reset refusal and sampled gallery bypasses. No headset/learner or whole-hall hazard/performance acceptance. Earlier encounter evidence retained in previous reviews.",
++    "local_review": "doc/book/iterations/2026-09-24-door-timing/DECISIONS.md"
+   }
+ }
+--- before/commons/maps/Random_Game/final.md
++++ after/commons/maps/Random_Game/final.md
+@@ -71,6 +71,30 @@
+ 
+ REPLAY restores the same assignment. NEW SEED makes another seeded round, which may choose the same passage. The doors begin from the same seed each time the hall is built, so until someone presses NEW SEED the passage is the same door for every visitor. After looking once, your next attempt is different even when the doors are not. Memory belongs to the player as well as to the machine.
+ 
++<!-- @door_timing_trials -->
++
++Farther along, three small passages repeat the same plan. Two lettered plates lie before each entrance. A wall waits behind each door. One lane will open straight through; the other asks you to turn and go around it. Both reach the far side. Here the cost of a choice is a piece of walking.
++
++At SHOWN FIRST, one letter already says DIRECT. The other says AROUND. Step onto a plate. Your entrance lifts. You can choose the shorter passage, or choose the longer one because you want to see where it goes. Knowing does not prescribe what you must want.
++
++At DRAWN AFTER, both letters carry a question mark. Step forward and watch the three signs above you fill: CHOOSE, DRAW, REVEAL. The program waits for your foot before assigning the shortcut. Your chosen letter stays chosen while its meaning arrives.
++
++The third passage looks equally undecided. But HIDDEN FIRST already carries a DRAW in its first sign. Something has happened without becoming available to you. Step onto a plate: CHOOSE, then REVEAL. Perhaps you turn a corner. Perhaps you walk straight through. Could the walk alone have told you whether the assignment came before your step or after it?
++
++The walls have the same dimensions. The drawing rule has the same two possible answers. What changes is the order:
++
++```text
++draw â†’ reveal â†’ choose
++a choice â†’ a draw â†’ its revelation
++draw â†’ choose â†’ reveal
++```
++
++We needed separate instructions for making a decision and making it visible. A question mark could mean that the program has not decided yet. It could mean that it is keeping its decision from you. On the face of the door, these can look the same.
++
++Walk back to the controls outside. REPLAY restores this passage's seed. Now an answer withheld by its sign may still be present in your memory. NEW ROUND chooses a different seed, which can still assign the same shortcut. Each passage has its own seed; the first one does not give away the others.
++
++Take the longer way once. What arrived as a letter becomes a turn of the body, a wall passing close to your shoulder, a few more steps. The draw did not make the distance. We built that consequence around it.
++
+ <!-- @cube_projectile_spawner -->
+ 
+ After the doors, cubes arrive from above. Watch from the edge before entering their space. Does the interval between arrivals vary in the way the stones' pauses did?
+@@ -103,6 +127,6 @@
+ 
+ <!-- @ -->
+ 
+-At the continuing die, a six kept a chain open. The face was already on the felt when the instruction gave it that power. These doors arrange the order differently: the assignment precedes your choice, though its disclosure waits for it.
++At the continuing die, a six kept a chain open. The face was already on the felt when the instruction gave it that power. The fire doors arrange the order differently: the assignment precedes your choice, though its disclosure waits for it. The three passages let us separate those events and walk what follows.
+ 
+ The room leaves a more specific question than whether a world is predictable. Which decisions are already made, which are still to come, and what tells us the difference? In Noise Types we will carry that question between neighbouring places. A choice can be uncertain and still have a relation to the choice beside it.
+--- before/commons/maps/Random_Game/intent.md
++++ after/commons/maps/Random_Game/intent.md
+@@ -1,9 +1,9 @@
+-Concept: Specify what is uncertain. A fixed state order can carry random waits; a regular launch clock can carry random positions and velocities.
++Concept: Specify what is uncertain, when it is drawn, when it becomes knowable, and what a choice changes for the body.
+ 
+-Sequence role: Random_Game closes the active seven-hall randomness route after Random_Mushrooms and prepares for Noise_Types. The larger stored route is not reordered.
++Sequence role: Random_Game closes the active fourteen-map randomness route after Random_Space and prepares for Noise_Types. Sequence order is preserved.
+ 
+-Primary thread: r_c → cube_projectile_spawner. First anticipate a support transition; then stop an emitter and observe its remaining flights. Several primary artifacts belong when their relationship contributes a distinct discovery.
++Primary thread: r_c → random_removal_arena → random_doors → door_timing_trials → cube_projectile_spawner. The waiting_profile remains a closing companion. Multiple encounters contribute distinct comparisons; none is removed to enforce a primary count.
+ 
+-Critical question: Which decisions are already made, which are still to come, and what does the interface make available to the body?
++Critical question: Which decisions are already made, which are still to come, and what lets the visitor know the difference? Knowledge can guide a choice without determining what the visitor wants.
+ 
+-Staging: A 15×20 hall puts the crossing on the centre line at (7,5), with its original five-by-three-metre pit, and the falling field in a separate rear bay at (7,13). Both controls already face −Z. The folding creatures and incomplete Monte Carlo display are archived from this teaching route. Open work: headset traversal and comfort. No score controller or distribution-mode controls are inferred.
++Staging, 24 September 2026: 19×66 hall. Existing crossing at (9,6), removal enclosure at (9,17) and fire doors at (9,29) retained. Fourteen solid-floor rows inserted before the former row 32 create a bay for three matched passages at (9,38). Falling field moves from (9,37) to (9,51); waiting profile from (9,47) to (9,61); exit moves to row 65. All original rows and artifact configuration strings are preserved. The three passages occupy fifteen metres across the seventeen-metre interior, leaving side bypasses. The new comparison has no fire: DIRECT or AROUND changes the walking route. Opaque gates conceal shortcuts until selection; each route can be exited or backed out of. Reset is refused while a player occupies the passage. Headset reach, comfort and learner acceptance remain open.
+--- before/commons/maps/Random_Game/map_data.json
++++ after/commons/maps/Random_Game/map_data.json
+@@ -8,7 +8,7 @@
+     "format": "json",
+     "dimensions": {
+       "width": 19,
+-      "depth": 52,
++      "depth": 66,
+       "max_height": 9
+     },
+     "metadata": {
+@@ -19,7 +19,8 @@
+         "Separate fixed state order from sampled waits",
+         "Compare advance notice with during-motion reporting",
+         "Distinguish a regular spawn clock from random positions and later jitter",
+-        "Separate replayed local state from the rest of the museum"
++        "Separate replayed local state from the rest of the museum",
++        "Compare draw timing with reveal timing by walking matched direct and detour passages"
+       ]
+     },
+     "museum": {
+@@ -35,7 +36,7 @@
+           1,
+           1,
+           17,
+-          50
++          64
+         ]
+       ],
+       "open_roof": true,
+@@ -1175,6 +1176,300 @@
+       ],
+       [
+         "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "1",
++        "w"
++      ],
++      [
++        "w",
+         "w",
+         "w",
+         "w",
+@@ -2277,6 +2572,300 @@
+         " ",
+         " ",
+         " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
+         "t",
+         " ",
+         " ",
+@@ -2910,6 +3499,300 @@
+         " ",
+         " ",
+         "random_doors#controls:compact#control_front:-4.0#control_facing:-z",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        "door_timing_trials",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " "
++      ],
++      [
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
++        " ",
+         " ",
+         " ",
+         " ",
+--- before/commons/maps/Random_Game/technical.md
++++ after/commons/maps/Random_Game/technical.md
+@@ -65,3 +65,14 @@
+ The independent desktop run checks museum placement, floor rays, recovery, real pointer controls, reset during movement, cue invariance, initial launch records and the cap. Headset approach, comfort, legibility and performance remain for a later visit.
+ 
+ The map still names `monte_carlo`, but the current museum loader reports no living scene for it and omits that body. It is a secondary candidate, not a verified encounter in this lane. Eight of the nine requested artifact placements currently build.
++
++
++## Current staging and door timing — 24 September 2026
++
++This note supersedes the earlier placement and creature-inventory notes above; those describe an older hall. The current 19×66 source map has the crossing (9,6), removal arena (9,17), original fire doors (9,29), door_timing_trials (9,38), falling field (9,51), and waiting_profile (9,61). Fourteen floor rows were inserted before old row 32, retaining every former row and token. The incomplete Monte Carlo display and folding creatures are not current placements.
++
++The new trials share geometry and the binary uniform `randi_range(0, 1)` draw law, but use distinct local seeds. SHOWN FIRST draws and reveals on reset. DRAWN AFTER draws after the first accepted plate entry. HIDDEN FIRST draws on reset but reveals only after plate entry. Each accepted choice records an immutable DRAW/CHOOSE/REVEAL event order for that round. Re-entry cannot draw again. This comparison separates assignment from disclosure; it does not claim a visitor can infer timing from outcome statistics alone.
++
++Each plate is a player-filtered Area3D, usable by the museum CharacterBody or registered VR player bodies. Initially both entry panels and both shortcut panels are closed. Selection lifts the chosen entry, and its shortcut only if it is the direct lane; the unchosen entry stays closed. This prevents the hidden assignment being exposed by different pre-choice geometry. The other lane has a 1.2 m side opening and one-metre outer corridor. Both routes meet at the rear. The visitor may retreat through the chosen entrance. Reset/new-round controls are outside the route and reject requests while player occupancy is detected. An accepted reset kills any opening tween before restoring collision. No draw forces a particular face or switches passage after selection.
++
++The printed seed belongs to that trial only. REPLAY repeats its assignment, not the visitor's knowledge or the rest of the hall. NEW ROUND excludes the present seed but can still give the same binary result. The existing fire-door artifact is unchanged and remains a separate earlier encounter.
+--- before/commons/maps/sequences/randomness.json
++++ after/commons/maps/sequences/randomness.json
+@@ -254,10 +254,13 @@
+           "position": "synthesis",
+           "artifacts": [
+             "r_c",
++            "random_removal_arena",
++            "random_doors",
++            "door_timing_trials",
+             "cube_projectile_spawner"
+           ],
+           "size_budget": "world_scale",
+-          "rationale": "The central crossing samples waits; a separate rear bay samples falling-cube positions and velocities. Both remain book encounters.",
++          "rationale": "Sampled waits, removal, concealed assignment and matched decision/disclosure trials give uncertainty distinct bodily consequences before the regular falling field.",
+           "grammar": "central_hero"
+         },
+         {

@@ -1,0 +1,474 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Point_Animatedcube · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=Point_Animatedcube">← Tutorial lineage</a></p><h1>Point Animatedcube</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="Point_Animatedcube/final.md">Raw captured source</a></p><pre># Cube Assembly from Primitives
+
+You have been inside boxes since the first room. Now one of them lets you take hold of a corner. What must stay in place for it to remain a cube?
+
+&lt;!-- @cube_lines --&gt;
+
+Begin with the outline. Follow the three edges leaving one corner. Look through to the far side. You can recognise a cube before any faces have appeared, although nothing has yet closed the gaps between these lines.
+
+The previous room gave us forms that could support a foot or interrupt a route. Here we return to their construction. What happens when the parts remain connected but their positions change?
+
+&lt;!-- @animatedcubebuilder --&gt;
+
+The builder may have finished before you arrive. Press **REPLAY** on its front instrument. Corners appear, then edges, then triangular patches. Press **PAUSE** at the moment you recognise the shape. How much did you need to see?
+
+Only this assembly pauses. The folding net and the rest of the room continue. We have borrowed a little attention from a world already running.
+
+The source has prepared the geometry before this presentation begins. The animation reveals pieces that were hidden. What looks like construction is also an arrangement of when we are allowed to see.
+
+Resume. Once the assembly finishes, the numbered corner handles become available. Keep the second builder unchanged as a reference. On the one you will alter, find `v6`. Follow the square face containing `v4`, `v5`, `v6` and `v7`. Predict what will happen if you pull `v6` out of that face&#x27;s plane, leaving its other corners where they are.
+
+Move it a little. Look along the face. Where did the crease appear?
+
+Try to locate the seam before pressing **DIAGONALS**. The yellow lines show the six diagonals that divide the cube&#x27;s square faces into triangle pairs. Your hand has made one of those divisions matter.[^animatedcube-triangulation]
+
+That face is stored as two triples:
+
+```gdscript
+[4, 5, 7]
+[5, 6, 7]
+```
+
+Each number names a vertex. Both triples contain `5` and `7`: their shared edge. Only the second contains `6`. When you move that corner, the second triangle tilts while the first stays in place. A face that appeared to be one flat square can now bend along a choice made in its construction.
+
+&lt;!-- @cube_diagonal_plate --&gt;
+
+![The same cube face before and after corner 6 moves out of its plane. Triangles 4-5-7 and 5-6-7 share the amber diagonal; only the second triangle tilts.](/book-review/doc/book/figures/Point_Animatedcube/cube-hidden-diagonal.png)
+
+*The diagonal was already there. Corners 4, 5 and 7 stay still. Moving corner 6 makes the shared edge into a crease.*
+
+&lt;!-- @animatedcubebuilder --&gt;
+
+The builder reads a moved handle back into its position list:
+
+```gdscript
+vertices[i] = handle_nodes[i].position / cube_size
+```
+
+The edge and triangle lists still refer to the same vertex numbers. The neighbours remain; equal lengths, right angles and flat square faces need not.[^animatedcube-boundary] The display measures the largest corner shift in local metres. It cannot tell us what the changed form is worth.
+
+Release the handle and press **REPLAY**. The layers return around your altered shape. Then try **RESTORE CUBE**. This time the initial corner positions return too. Repeating a presentation and undoing a change are different ways of beginning again.
+
+Compare the two builders. Name one property your alteration preserved and one it lost. You can keep a crease you like without claiming the result is still a cube.
+
+&lt;!-- @polyhedron_nets_cube --&gt;
+
+Further on, watch the net fold. Choose one square and follow it from the flat arrangement into the closed form. Before it folds again, predict which faces will meet.
+
+Here each square stays rigid. The hinges turn. In the builder, you moved a corner and bent a square into two differently tilted triangles. Similar-looking movement can come from different operations. Knowing which data changes helps you predict what a form can do.
+
+&lt;!-- @ --&gt;
+
+Now look down at the floor, then along a wall. Find the box form again in the crates. The museum builds its floor slabs and wall blocks from scaled box meshes. The primitive on display has also been carrying us from room to room.
+
+The initial cube pairs twelve triangle patches into six square faces.[^animatedcube-counts] The crates add geometry for planks and reinforcing strips. We can recognise the box across these different meshes.
+
+You can move a corner on the instrument while the museum&#x27;s boxes support and redirect your body. What we are learning to inspect is also the place from which we inspect it.
+
+&lt;!-- @prefab_box_library --&gt;
+
+A long shelf holds boxes. Brown cardboard, wooden crates, dark cargo cases, bright printed cartons. Four columns repeat four different models. In the last two, the crate and the printed carton return with changed colours, boards and words. The eye starts sorting before the hand reaches anything.
+
+![The Cube hall’s shelf of cardboard boxes, wooden crates, cargo cases and printed cartons, with an empty table in front.](/book-review/doc/book/figures/Point_Animatedcube/prefab-library.png)
+
+*The first four columns repeat their models. The last two let the same model differ.*
+
+These are *prefabs*: reusable objects stored as scenes. A placed copy is an *instance*. The planks, straps and lettering arrive together, carrying decisions someone has already made. We can begin with a furnished object before knowing how to build each of its parts.
+
+One carton says **AGAIN**. Take it down. Another says the same thing from the shelf. Moving your copy has left the others where they were.
+
+There is pleasure in finding it again: a familiar shape, an interval kept, a difference small enough to search for. A crate can belong to the scenery of many games before it belongs to this room. Its familiarity travels with it.
+
+Warhol&#x27;s *Brillo Boxes* bring another kind of repetition here. His 1964 sculptures were fabricated plywood boxes, painted and screenprinted with commercial packaging imagery. Their exhibition arrangement recalled a warehouse.[^cube-warhol] Work had gone into making something whose appearance was already familiar. Our printed carton is an original design, but it borrows that tension between an ordinary package and an object given our attention.
+
+The table is empty. Put two identical copies together. Add a different box. Turn its lettering away, or let **AGAIN** face **OTHER**. You have kept the supplied shape and changed its neighbours. The collection offers a vocabulary; it also makes some choices easier to imagine than others.
+
+Look back at the gaps on the shelf. The arrangement records what you took.
+
+&lt;!-- @ --&gt;
+
+Read the cartons: **A WORLD / WITHOUT / COMPOSITION**. The supply pile and the stamped crate add **YET**.
+
+*A world without composition yet.* There was already an arrangement around us. On the table, another has begun. We have borrowed its parts, and made a relation between them.
+
+Take the crease with you: a small movement exposed a decision inside a familiar shape.
+
+The boxes offered a made object we could use again. The next room offers a rule for making a family of objects: choose how many divisions, and the engine constructs the surface. We have followed a corner through a mesh. Now we can inspect what the engine chooses when we ask it for a sphere.
+
+[^animatedcube-triangulation]: Godot Engine 4.6, [Using the ArrayMesh](https://docs.godotengine.org/en/4.6/tutorials/3d/procedural_geometry/arraymesh.html), rectangle example: four positions are connected by two triangle triples. This builder submits its patches through `SurfaceTool` in triangle mode. A flat convex quadrilateral admits either diagonal; moving a corner out of its plane can make that choice visible as a different crease.
+
+[^animatedcube-boundary]: *Connectivity* names which vertices, edges and faces are incident; their positions place that structure in space. Compare the separate point and connectivity properties in Botsch, Sieger, Moeller and Fabri&#x27;s [Surface Mesh manual](https://doc.cgal.org/latest/Surface_mesh/index.html), CGAL 6.2.1, “Connectivity” and “Properties.” Here the index lists preserve the combinatorial structure, but moving vertices may produce crossings or collapsed faces, so a valid geometric embedding is not guaranteed. The builder&#x27;s patches also lack enclosing collision geometry; its handles have pickup colliders. See the [technical chapter](/book?map=Point_Animatedcube&amp;section=technical).
+
+[^animatedcube-counts]: Euler&#x27;s [Elementa doctrinae solidorum](https://scholarlycommons.pacific.edu/euler-works/230/) (1758) investigates polyhedral counts. For the initial cube, `V - E + F = 8 - 12 + 6 = 2`. Splitting its squares adds six diagonals and six faces: `8 - 18 + 12 = 2` again. A proof for the sphere&#x27;s triangulation appears in Heinz Hopf&#x27;s [Selected Chapters of Geometry](https://pi.math.cornell.edu/~hatcher/Other/hopf-samelson.pdf), §I.3, from his 1940 lectures reconstructed and translated by Hans Samelson. The equality does not certify cube shape or a valid embedding. The instrument counts twelve patches, excluding reverse rendering copies.
+
+[^cube-warhol]: The Andy Warhol Museum, [Brillo: Is It Art?](https://www.warhol.org/lessons/brillo-is-it-art/), on the fabrication and 1964 Stable Gallery exhibition. These were constructed sculptures carrying packaging imagery. The library’s AGAIN carton is a new design for this encounter.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="Point_Animatedcube/tutorial.md">Raw captured source</a></p><pre># Follow a corner through the cube
+
+The small experiment is this: move one vertex and find which surfaces must follow. This room builds on the triangle hall&#x27;s three positions per face and the polyhedra hall&#x27;s distinction between a visible boundary and a physical obstacle.
+
+## Begin with connections
+
+At `cube_lines`, follow the three edges meeting at one corner. The complete outline shows twelve edges. Faces are not needed for you to recognise the cube, although its wire outline has not closed a surface around an interior.
+
+The builder stores two kinds of information separately: where the vertices are, and which ones form edges or triangle patches. A list of positions by itself is not a surface.
+
+## Replay before editing
+
+Both `animatedcubebuilder` placements have the discovery instrument. Keep one unchanged so you have a reference.
+
+| Control | What it does here |
+| --- | --- |
+| REPLAY | Hides and reveals corners, edges and patches using the current vertex positions. |
+| PAUSE / RESUME | Stops or resumes this builder&#x27;s assembly steps. Replay first if assembly has finished. |
+| RESTORE CUBE | Returns the eight initial corner positions and shows the completed cube. |
+| DIAGONALS | Shows or hides six face diagonals after assembly completes. |
+
+Replay the builder and pause when the shape becomes recognisable. Resume and let it finish. Corner handles can be picked up after completion; they are disabled during assembly. Release a held corner before using replay or restore.
+
+The source constructs the hidden geometry at setup. Its timed steps change visibility. This is not the same operation as translating a finished cube across the room. Pausing this sequence does not stop the room clock or the neighbouring net.
+
+## Make the seam visible
+
+Find the face containing `v4`, `v5`, `v6` and `v7`. Before moving anything, trace its boundary and predict what will follow `v6`. Pull that corner a little out of the face&#x27;s plane, leaving the others unchanged. Look for a crease, then use DIAGONALS to check it.
+
+The two triangle entries for that face are:
+
+```gdscript
+[4, 5, 7]
+[5, 6, 7]
+```
+
+The numbers are indices into the builder&#x27;s vertex list. Both triangles use vertices 5 and 7, so that pair forms their common edge. Only the second triangle uses vertex 6. Moving it out of the original plane tilts that triangle while the other remains in place. Moving it only within the plane would not demonstrate this crease.
+
+The update reads a changed handle position into the stored geometry:
+
+```gdscript
+vertices[i] = handle_nodes[i].position / cube_size
+```
+
+`i` identifies the handle and its corresponding vertex. `position` is local to the builder; dividing by `cube_size` converts it back to the builder&#x27;s stored coordinates. The edges and patches are rebuilt from those coordinates using the same connection lists.
+
+Release the handle. Predict what REPLAY will show, then test it. Predict what RESTORE CUBE will change, then test that. One repeats the presentation; the other restores the original coordinates.
+
+## Compare a different operation
+
+At `polyhedron_nets_cube`, follow one square as the net folds and unfolds. Each square remains rigid. The program changes hinge angles through `fold_progress`. The room has one net placement using the default cross configuration and `loop_fold:true`; the source&#x27;s other net configurations are not additional displays here.
+
+In your edited builder a corner moved relative to its neighbours. In the net, an entire face rotates around a hinge. Use this difference to explain why one square creased and the other stayed flat.
+
+The detailed timing, triangle counts and folding code are in the [technical chapter](/book?map=Point_Animatedcube&amp;section=technical). More general position, rotation and scale experiments belong to the transformation sequence.
+
+## Recognise the room that carries you
+
+After comparing the builder and the folding net, look at the museum floor and walls. Follow the box form from an exhibit into the surrounding structure. In the endless museum, floor slabs and wall blocks use scaled box meshes, with separate box-shaped collision geometry. The editable builder offers corner handles; the architecture participates in the movement of the visitor&#x27;s body.
+
+Compare a crate&#x27;s planks and reinforcing strips with the builder&#x27;s triangle pairs. Six geometric faces do not prescribe one mesh budget. A detailed box-shaped prefab can contain many pieces and many more triangles while remaining recognisable as a box.
+
+This recognition belongs to the main walk. Composing new arrangements can develop later. For now, connect the object you are examining with the construction you are already inside. The [technical chapter](/book?map=Point_Animatedcube&amp;section=technical) follows the shared box mesh and its separate colliders in the museum source.
+
+## Return visits
+
+These comparisons remain in the room. Choose one if it helps the question you are following; none is an additional requirement for finishing the main walk.
+
+### A world without composition yet
+
+Read the pallet&#x27;s **A WORLD / WITHOUT / COMPOSITION**, the supply pile&#x27;s **WITHOUT COMPOSITION / YET**, and the single crate&#x27;s **YET**. Their arrangement already composes a scene. The admission concerns what we have learned to choose and examine so far.
+
+Compare the pallet, supply pile and two `station_crates` placements as arrangements. Which box seems accessible, protected, ready to move or forgotten? Identify the position, spacing or surrounding object that produces your reading. The box shape alone cannot account for all of it.
+
+Compare a detailed crate with the bare builder. Both may be recognisable as boxes, but that resemblance does not require an identical mesh or triangle budget. The [technical chapter](/book?map=Point_Animatedcube&amp;section=technical) counts the builder&#x27;s particular representation; it does not assign that count to every crate.
+
+### The glove between bodies
+
+The single-glove chamber offers a different encounter with an enclosure. A glove stands between an imagined worker and the contents. Compare the kind of access its design suggests with the exposed handles on the cube. This is a comparison of represented access; the glove is not an additional working sculpting control.
+
+### A shadow with a setting
+
+In `first_shadow`, compare the turning triangle with the thin line beside it. Then inspect `_build_line()` in its source. The line is a narrow cylinder, and its `cast_shadow` setting is explicitly OFF. The triangle&#x27;s is ON.
+
+The missing line shadow therefore cannot establish that every line lacks a shadow because it has no area. This rendered line has thickness, and the program has disabled its shadow. The comparison exposes a setting as well as a shape. A later experiment could change that setting while keeping the same geometry; no switch for it is installed here.
+
+### The point returns through an instrument
+
+The dark glass of `first_phosphor` carries a green dot. Follow its repeating light and fading glow. The program changes material emission over time; this is a representation of a phosphor display, not an electron-beam simulation. What was added to make the point visible, and what does that addition let you notice?
+
+### Another neighbour list
+
+The nearby pyramid is configured `#base_sides:8`. Follow its apex connections and compare them with the three cube edges meeting at a corner. Its different pattern of neighbours provides a comparison for the builder, whose edits keep the old connections. The pyramid has no matching corner-editing instrument here.
+
+The floating sphere field remains decoration. Its presence need not become another compulsory lesson before the next room&#x27;s investigation of the sphere.
+
+## For a second pass
+
+The existing instruments support deformation and comparison. They do not validate an enclosure, save a collection of altered forms or make the surface into walkable collision geometry. Keep those possible developments distinct from actions available now. A headset visit still needs to check reach and sightlines between the two builders and the net.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="Point_Animatedcube/technical.md">Raw captured source</a></p><pre># A cube assembled, replayed and changed
+
+Primitives_Polythedra distinguished a visible boundary from a collision boundary and tested how forms support or interrupt movement. Here, the primary order is an outline (`cube_lines`), a timed reveal with editable corners (`animatedcubebuilder`), then a hinged surface (`polyhedron_nets_cube`). The room has two builder placements; one can remain an unchanged reference.
+
+## Read a position and a connection separately
+
+Before moving a handle, predict which parts will follow. The builder starts with eight local positions at the combinations of ±0.5 on X, Y and Z. It also stores twelve cube edges and twelve triangle patches in separate lists. The positions alone do not specify which vertices should connect.
+
+For example, the front surface uses these source triples:
+
+```gdscript
+[4, 5, 7]
+[5, 6, 7]
+```
+
+Their common edge is `[5, 7]`. Move vertex 6 out of the original face plane. The second triangle can tilt while the first remains unchanged. This pair no longer forms a planar square.
+
+The initial cube&#x27;s geometric face count gives `8 - 12 + 6 = 2`. Counting the triangulated boundary gives `8 - 18 + 12 = 2`, because triangulating the six squares adds six diagonals as well as six faces. The visible edge cylinders initially show only the twelve cube edges. The DIAGONALS control exposes the other six, derived from the triangle list rather than a separate hand-authored diagram.
+
+Each triangle patch is submitted with a reversed copy for visibility from both sides. The panel counts twelve patches, not the twenty-four submitted triangles in this particular implementation. Counts must identify their representation.
+
+## What the builder animates
+
+At setup, the builder prepares hidden handle, edge and surface nodes. Its default timed presentation reveals eight vertices at 0.5-second steps, twelve edges at 0.2-second steps, then twelve patches at 0.15-second steps. Frame timing can extend those intervals: the state machine reveals at most one item per process call and resets its step timer after each item.
+
+The default `closure:strata` leaves all layers visible. It does not automatically replace them with a final solid mesh. Existing configuration alternatives remain: `closure:scaffold` retains corners and edges; `closure:solid` shows a combined surface with corner handles. `order:descend` reveals triangles, edges and vertices in that order; `order:together` reveals all layers at once. These are configuration choices, not new controls on the front panel.
+
+The `#discovery:1` option adds the room&#x27;s instrument and source-index labels `v0` through `v7`. During assembly, handles are disabled for pickup; completion enables them. This lets a visitor pause a readable layer without accidentally editing a hidden corner.
+
+## Four controls, four operations
+
+- **REPLAY** hides and reveals the layers again using the current positions. It resumes a paused assembly and preserves deformation.
+- **PAUSE / RESUME** stops or resumes only the builder&#x27;s timed reveal. It does not pause the game clock, the folding net or the room. At completion, it asks the visitor to replay before pausing steps.
+- **RESTORE CUBE** returns all eight handles to their initial local positions and displays the completed result, without replaying the animation.
+- **DIAGONALS** shows or hides the six additional triangulation edges after assembly completes. It does not change the faces.
+
+Replay and restore ask for a held corner to be released first. The panel reports visible points, visible cube edges, surface patches and the largest corner displacement from its initial local position. Local metres do not include additional scale applied to the artifact by a parent.
+
+## Deformation reads handles back into geometry
+
+After a completed build, changed handles update the stored positions:
+
+```gdscript
+vertices[i] = handle_nodes[i].position / cube_size
+```
+
+The existing edge and triangle lists are then used to rebuild geometry. Hidden surface patches update too, so replaying or changing the configured closure cannot bring back stale geometry. The yellow diagonal cylinders follow their corresponding vertex pairs.
+
+This preserves connectivity, not cube validity. It does not enforce equal lengths, right angles, planarity or a non-intersecting enclosure. The mesh surfaces have no enclosing collision body; the corner handles have their own pickup colliders. A deformed shape is therefore a visual construction, not a newly tested walkable shelter.
+
+## Folding changes another set of data
+
+The cube net keeps each square face rigid and rotates parent hinge nodes. Its animation targets a fold-progress property:
+
+```gdscript
+tween.tween_property(self, &quot;fold_progress&quot;, 1.0, fold_duration)
+```
+
+For the default net, that property maps to ±90-degree hinge rotations, with the back flap delayed relative to the others. The current room has one net placement, using the default `latin_cross` configuration with `loop_fold:true`. Other net configurations exist in the source but are not additional placements in this room. This is a different operation from the builder&#x27;s visibility sequence and from independently moving its corners.
+
+Primitives_Ignorance follows by examining what an engine&#x27;s primitive names leave unspecified. Here, the word cube has already required a distinction between positions, connections, presentation and permitted edits.
+
+## The box becomes museum structure
+
+The endless museum&#x27;s `_box()` records a position, size and material for each architectural box. `_flush_boxes()` renders batches using a shared `BoxMesh` with `size = Vector3.ONE`. Each instance receives its own scale and position:
+
+```gdscript
+mm.set_instance_transform(i, Transform3D(Basis.from_scale(s), p))
+```
+
+Here `s` is the box&#x27;s size and `p` its centre. An ordinary floor tile is specified as `Vector3(1, 0.2, 1)`; `_wall_at()` specifies a wall cell as `Vector3(1, hh, 1)`, with `hh` carrying wall height. The repeated unit box becomes slabs and wall blocks. These are box-based constructions, rather than literal equal-sided cubes at every scale. Alternative wall-run batching can merge neighbouring cells into longer boxes.
+
+The paired `_add_col()` constructs a separate `BoxShape3D` with the requested size. This is how the visible architecture gains collision for the walking body. The corner-editable builder does not use this architectural collision setup for its surface patches. A connection between the two constructions does not imply identical meshes, controls or physical behavior.
+
+The placed `crate` provides another example. Its `_build()` calls `_build_plank_face()` for six sides, adds reinforcement strips and optionally builds a diagonal brace. Those components use additional box meshes. Six sides in a geometric description need not mean six rendered polygons or twelve total triangles in a furnished object.
+
+This source connection is enough for the current recognition: the museum&#x27;s floor and walls belong to the same box vocabulary as the exhibits. The new prefab library begins composition with existing objects; later Transformation encounters examine the operations used to place and alter them.
+
+## Source and verification
+
+- `commons/primitives/animatedcubebuilder/animatedcubebuilder.gd`
+- `commons/ui/cube_experiment_panel.gd`
+- `commons/infoboards_3d/visualizations/polyhedron_nets.gd`
+- `commons/scenes/endless_museum.gd` (`_box`, `_flush_boxes`, `_wall_at`, `_add_col`, floor stamping)
+- `commons/artifacts/crate/crate.gd` (`_build`, `_build_plank_face`)
+- `commons/maps/Point_Animatedcube/map_data.json`
+- `commons/testing/probe_cube_primary.gd`
+
+The probe exercises actual pointer-button events and supplied corner positions in a translated, rotated artifact. It checks pause, replay, restoration, connection preservation, surface updates, diagonals and readout bounds. A full-room headset walk remains necessary for reach, viewing distance and comparison between placements.
+
+## Shared front-face illustration
+
+`cube_diagonal_plate` renders the same four front-face positions and the same two triples as the builder. In the right specimen only v6 receives `(0,0,0.55)`. The common diagonal 5–7 and triangle 4–5–7 remain fixed. Both specimens use one oblique projection with equal depth compression; the reference is not metrically to scale on the wall.
+
+`tools/capture_cube_diagonal_plate.py` extracts the builder&#x27;s current vertices and faces, then checks the actual plate meshes against them in a private Godot project. It renders the production scene for the book. The plate is static; handle interaction, replay and restoration still belong to the existing builders.
+
+## A library of box prefabs
+
+`prefab_box_library` occupies the widened east gallery at grid (16,7), facing west. Its 9.12 m shelf contains 24 pickable copies: six columns and four tiers. The first four columns repeat cardboard, wooden crate, cargo crate and the original AGAIN carton respectively. The last two vary the wooden crate and carton through exported colour, construction and lettering properties. Twelve distinct source/configuration editions produce the 24 copies.
+
+The editable `commons/artifacts/prefab_box_library/catalog.json` names the four real scene sources and their settings. The original cardboard, crate and cargo scenes are unchanged. At construction, each edition loads its source once, applies exported settings before `_ready`, and collects the resulting meshes and static labels. Meshes are batched by material into a cached `PackedScene`; copies share its mesh resources but have independent pickable bodies, transforms and physics state. This is a static display-and-pickup adapter for the listed sources, not a general copier of arbitrary prefab scripts or behaviours.
+
+Each copy has one enclosing box collider, fitted to the source bounds. The cardboard opening is visible but does not have a hollow collision interior. Copies begin frozen on the shelf; pickup uses the production XRToolsPickable and release enables rigid-body physics. Layer 6/mask 7 allows contact with the table, the museum and other pickable copies. Mesh batching produces 24 geometry nodes and 105 geometry surfaces, plus lettering; this is not a claim of 24 draw calls or tested Quest performance.
+
+The worktop is 0.775 m above the gallery floor. It is initially empty. The bottom and second tiers provide direct-reach copies; the higher tiers use the existing ranged pickup. Dropped objects below -2 m or more than 25 m from the library return to their shelf positions on the next periodic check, unless held. Arrangements are temporary in-session state, not a new save system.
+
+The native museum probe checks actual production pickup/release with a supplied grabber, separate instance state, shared geometry, gravity settling on the worktop, box-on-box stacking and a visitor-width walk along the shelf. All 19 checks pass. The four screenshots are native views from within the hall. Headset reach, real controller targeting and Quest performance have not been verified.
+
+Sources and evidence: `commons/artifacts/prefab_box_library/`; `doc/book/iterations/2026-09-26-cube-prefab-library/probe.gd`; the adjacent review page and native report.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="Point_Animatedcube/intent.md">Raw captured source</a></p><pre>Concept: Positions can change while connections remain. Follow a cube outline, replay its assembly, then move one numbered corner out of a face&#x27;s plane to discover the diagonal inside a seemingly flat square. Compare this deformation with a net whose rigid faces turn at hinges.
+
+Sequence role: Seventh of ten maps in primitives. Follows Primitives_Polythedra&#x27;s encounter with closure, collision and use. Makes the triangle construction of a familiar cube experimentally visible. Prepares Primitives_Ignorance&#x27;s question about what an engine&#x27;s primitive names conceal.
+
+Primary order: cube_lines -&gt; animatedcubebuilder -&gt; cube_diagonal_plate -&gt; polyhedron_nets_cube. The three original types remain primary, with a shared book/museum illustration after the live corner experiment. The two builders support an unchanged reference beside an altered example. All fourteen earlier artifact placements remain; the wall reference is the fifteenth.
+
+Small lesson: Moving a vertex changes the geometry of every triangle that refers to it. It does not automatically change those references, preserve a cube, or produce a valid enclosure. Replay preserves the alteration; restore returns the original coordinates.
+
+Technical angle: Separate position and connection lists; eight corners, twelve cube edges, twelve triangle patches; the shared diagonal [5, 7] of [4, 5, 7] and [5, 6, 7]. Distinguish timed visibility, vertex deformation and hinge rotation. The front instrument provides replay, local assembly pause, restoration and a diagonal overlay; it does not offer a general transformation timeline.
+
+Critical angle: An assembly that began before arrival can be replayed without pretending to stop the whole room. A crease makes an earlier triangulation decision perceptible. Displacement is measurable; the value of an altered form is not decided by its displacement counter. Keep Palle&#x27;s admission, &quot;A world without composition yet,&quot; in the main text.
+
+Museum connection: Near the exit, turn from the primary objects to the floor, walls and cube-based prefabs. The museum&#x27;s structure is itself an application of the box vocabulary. Recognising this belongs to the main walk even while composition remains a later subject. Distinguish geometric faces from triangle count, and related construction from identical mesh, collision or editing permissions. This is an observation of the existing architecture, not an additional artifact placement or a new primary card.
+
+Return visits: The tutorial retains the cartons and crate arrangements, glove box, shadow and phosphor comparisons, and the eight-sided pyramid. Detailed counting and implementation remain in technical.md. The critical essay remains a separate, longer inquiry.
+
+Focus guard: Keep the five-step encounter: outline, timed reveal, deform one corner, expose the shared diagonal, compare rigid-face folding. Exit through recognition of the museum&#x27;s own box construction. Connectivity, triangulation and Euler&#x27;s count have short source-linked footnotes; crossing, collapse and collision caveats remain available there and in the technical chapter. The main walk asks what changes while the connection lists remain, without prescribing when the visitor must stop calling the result a cube.
+
+Remaining: Full-room headset review of panel and handle reach, sightlines and the folding net. No saved deformation collection, enclosure validator or physical shelter behavior is claimed.
+
+Shared illustration: Preserve prediction and discovery before showing the comparison. The wall relief and its book capture isolate the fixed triangle [4,5,7], the moved triangle [5,6,7] and their shared diagonal. This is a reference to test with the existing handles, not another control panel.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="Point_Animatedcube/critical.md">Raw captured source</a></p><pre># What returns when we begin again?
+
+The cube may already be assembled when we arrive. There is nothing mysterious about the timing: its script began a short delay after the scene entered the tree. Our arrival was not the beginning of its process. The finished form conceals that small difference until we give ourselves a way to replay it.
+
+Pressing PAUSE here creates a local exception. This assembly stops advancing; the room and the other artifacts continue. It gives attention a place to stay without pretending that the surrounding computation can be gathered into the same present. We choose something to examine and leave other processes running.
+
+## A construction can also be a presentation
+
+The builder shows corners, then edges, then surfaces. That order makes a useful teaching argument, but it is not a discovery that every cube must be made through this visible sequence. The script prepares hidden geometry before revealing it. Its triangle list already names the connections that will appear later.
+
+There are also configured alternatives: surfaces can appear first, or everything can appear together. The relation between a triangle and its vertex positions remains; the order in which we encounter those relations can change. The lesson needs both facts. An animation can clarify construction while also staging a particular account of it.
+
+The folding net offers another account. Squares keep their shape while hinge angles change. In the builder, moving a corner can change the shape of the triangles themselves. Calling both animation is accurate but insufficient for deciding what each allows us to learn.
+
+## The diagonal was there before the crease
+
+Move one corner away from a formerly flat face. The apparent square can split along a diagonal. The yellow overlay does not invent that split: it identifies the shared edge already present in the triangle list.
+
+The seam becomes a place to inspect an assumption. We recognised six square faces, but the implementation supplied triangle pairs. Under the initial positions, the two descriptions agreed closely enough for the distinction to pass unnoticed. A small movement makes their difference consequential.
+
+This is a remainder we can locate in code and see in the room. It does not require treating every approximation as a betrayal of an original. The triangulation supports the encounter; it also gives the deformation a particular crease. Another triangulation could produce another result. The choice is productive and can still be questioned.
+
+## A name may cease to fit before a process stops
+
+The connection lists remain unchanged while the handles move. Equal lengths, right angles and planar faces need not remain. Calling the result a cube therefore requires more than checking that eight vertices still exist. With larger changes, patches may collapse or cross, and the initial counts do not certify a valid enclosure.
+
+The script continues rebuilding those patches. That continuation opens room for another purpose: a silhouette, a folded-looking surface, an awkward form someone wants to keep exploring. Its departure from the cube is neither automatically a failure nor proof of freedom. We have to ask what became possible and which constraints are still doing the work.
+
+The counter on the front panel measures displacement from the initial positions. A large number is not a measure of novelty or queer possibility. It is one geometric measurement which might help us compare two attempts. The interpretation belongs to the encounter we choose to build around it.
+
+## Replay and restoration
+
+Release a corner and replay the builder. The changed shape assembles again. The presentation returns to its beginning while the coordinates retain your intervention. RESTORE CUBE does something else: it replaces those coordinates with the stored initial positions.
+
+The button&#x27;s name should keep that operation explicit. Restoration can support comparison and another attempt; it can also remove a form we were learning to value. The second builder lets us preserve a reference without requiring every experiment to end there. This version does not yet save a collection of deformations or test a new form as architecture.
+
+The boxes later in the room carry an additional question about use. A crate, a sealed glove chamber and a pile of cartons draw on a familiar enclosure but offer different relations to storage, work and access. Their forms do not settle those relations by themselves. The words WITHOUT COMPOSITION / YET invite us to continue arranging what we have learned, even though an arrangement is already present.
+
+The next hall will unsettle another familiar primitive. We take the distinction with us: a name, the data beneath it, and the operations that can carry that data elsewhere.
+
+## Implementation anchors
+
+The claims about visibility, replay, restoration and fixed connectivity come from `animatedcubebuilder.gd` and `cube_experiment_panel.gd`. Hinge behavior comes from `polyhedron_nets.gd`. The builder&#x27;s surfaces are visual meshes; pickup collision belongs to the handles. Their appearance does not establish a physical enclosure or a usable shelter.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="Point_Animatedcube/artifacts.md">Raw captured source</a></p><pre># Point Animatedcube — artifact inventory
+
+Current map_data.json and commons/data/artifact_roles.json, updated 2026-09-26. Sixteen placements, fourteen artifact types. All fifteen earlier placements are retained at their original grid cells.
+
+## Primary encounters
+
+The book and necklace order is **cube_lines → animatedcubebuilder → cube_diagonal_plate → polyhedron_nets_cube → prefab_box_library**. These five types occupy six placements because the builder appears twice. One builder can remain a reference while the visitor changes the other.
+
+## Every placement
+
+Coordinates are (column,row) grid indices, not world metres. Placement strings below preserve the current rotation, offset and configuration tokens.
+
+| Grid cell | Artifact | Role | Full placement string |
+| --- | --- | --- | --- |
+| (2,1) | `cube_lines` | primary | `cube_lines:0:0` |
+| (2,2) | `floating_sphere_field` | decoration | `floating_sphere_field:0:0#bounds:4,3,8` |
+| (5,3) | `wooden_pallet` | secondary | `wooden_pallet:0:0#box_arrangement:pyramid#stencil_words:A_WORLD;WITHOUT;COMPOSITION` |
+| (11,3) | `first_shadow` | secondary | `first_shadow` |
+| (5,5) | `animatedcubebuilder` | primary | `animatedcubebuilder:0:0#plinth:0.55#discovery:1` |
+| (7,5) | `cube_diagonal_plate` | primary reference | `cube_diagonal_plate:-90:0:0.8#offset:0.30,0.34,0` |
+| (16,7) | `prefab_box_library` | primary | `prefab_box_library:270:0#plinth:0` |
+| (5,7) | `hangar_supply_pile` | secondary | `hangar_supply_pile:0:0#palette:metal#crate_count:2#stencil_words:WITHOUT_COMPOSITION;YET` |
+| (2,8) | `animatedcubebuilder` | primary | `animatedcubebuilder:0:0#plinth:0.55#discovery:1` |
+| (6,9) | `crate` | secondary | `crate:0:0#stamp_label:YET` |
+| (1,10) | `station_crates` | secondary | `station_crates#upkeep:store` |
+| (4,10) | `polyhedron_nets_cube` | primary | `polyhedron_nets_cube:0:1#loop_fold:true` |
+| (2,11) | `glove_box` | secondary | `glove_box:0:0#glove_count:1` |
+| (8,11) | `pyramid` | secondary | `pyramid#base_sides:8` |
+| (3,12) | `station_crates` | secondary | `station_crates:0:0` |
+| (11,12) | `first_phosphor` | secondary | `first_phosphor` |
+
+## What the instrument makes available
+
+Both builders have `#discovery:1`: REPLAY, local PAUSE / RESUME, RESTORE CUBE and DIAGONALS, with numbered handles enabled when assembly completes. The net uses the default cross configuration and folds repeatedly. The source supports other nets; this map contains one net placement.
+
+The edited cube&#x27;s surfaces are visual meshes, not a collision enclosure. Six primary placements include two builder instances and the library with 24 individually pickable copies. `dark_sphere` and `science_screen` are absent from this map&#x27;s current interactables.
+
+## Secondary and decorative work
+
+The pallet, supply pile, single crate, two station-crate placements, glove box and phosphor display retain the Boxes Example group. The shadow display and eight-sided pyramid remain secondary outside it. Their comparisons are available in tutorial.md. The floating sphere field remains decoration.
+
+The pallet, pile and crate carry Palle&#x27;s &quot;A world without composition yet&quot; across their stencils; this admission remains in final.md. Secondary placement does not mean the work has been removed.
+
+## Source references
+
+- `commons/primitives/line/cube_lines.gd`
+- `commons/primitives/animatedcubebuilder/animatedcubebuilder.gd`
+- `commons/ui/cube_experiment_panel.gd`
+- `commons/infoboards_3d/visualizations/polyhedron_nets.gd`
+- `commons/artifacts/first_shadow/first_shadow.gd`
+- `commons/artifacts/first_phosphor/first_phosphor.gd`
+
+The archive and validation record are in `doc/space/animated-cube-focus-2026-09-16/`.
+
+## Shared illustration
+
+The wall plate compares the same front-face triangle triples before and after v6 moves out of plane. It is static reference geometry; the two builders remain the hands-on comparison. Its centre is 1.7 m high on the east wall of the first chamber. A narrow sculpture-clear strip keeps its approach available. The September 23 illustration pass moved no existing artifact, floor or wall. The September 26 library pass widens the east gallery and opens its dividing wall; all earlier artifact and utility cells remain unchanged.
+
+## Prefab library — September 26
+
+A 9.12 m shelf shows four repeated families followed by two columns of variations. It reuses `cardboard_box`, `crate` and `tech_crate`, and adds an original printed `edition_carton`. A low, initially empty table receives copies taken down for a new arrangement. The secondary crates and stencilled supply pile remain in place; their earlier “A world without composition yet” returns beside an arrangement the visitor can change.
+
+The editable library is `commons/artifacts/prefab_box_library/catalog.json`. The manuscript&#x27;s Warhol reference concerns fabricated plywood sculptures with packaging imagery; the AGAIN carton is an original study, not a reproduction. Full scene references, separate-copy/stacking checks and native interior photographs are in `doc/book/iterations/2026-09-26-cube-prefab-library/`.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="Point_Animatedcube/summary.md">Raw captured source</a></p><pre># Point Animatedcube — Map Summary
+
+## The room&#x27;s experiment
+
+Follow an outline, reveal its layers, then move one corner. A diagonal becomes a crease: positions have changed while the triangle connections remain. Compare this deformation with the folding net&#x27;s rigid faces and moving hinges.
+
+## Current spatial setup
+
+- Dimensions: 13 × 14 grid cells; maximum structure height value 2.
+- Fourteen artifact placements, twelve distinct artifact types.
+- Outline: `cube_lines` at (2,1).
+- Two instrumented builders at (5,5) and (2,8), both configured `#plinth#discovery:1`.
+- Folding net at (4,10), configured `polyhedron_nets_cube:0:1#loop_fold:true`.
+- Existing carton, crate, glove-box, shadow, phosphor, pyramid and sphere-field placements remain. See artifacts.md for every placement.
+- Spawn `sp` at (0,0), orientation `an:-90` at (6,0), exit `t` at (5,12).
+
+Coordinates above are (column,row) indices from map_data.json, not world metres or measured visitor reach.
+
+## Primary encounter order
+
+1. `cube_lines`: recognise a cube through its connected edges.
+2. `animatedcubebuilder`: replay; pause the local reveal; resume; move `v6` out of the face plane; find the shared diagonal; compare replay with restoration. Keep the second builder unchanged as a reference.
+3. `polyhedron_nets_cube`: follow one rigid square through the folding loop and distinguish hinge rotation from corner deformation.
+
+Three primary types make four physical placements. The tutorial&#x27;s optional return visits keep the other exhibits available without making all their questions prerequisites for leaving.
+
+## Sequence context
+
+Seventh of ten maps in the current `primitives` sequence. Follows `Primitives_Polythedra`; precedes `Primitives_Ignorance`. The admission &quot;A world without composition yet&quot; stays in the book as the transition from known parts to relations still to investigate.
+
+## Verification limit
+
+The existing component probe checks actual pointer-button events, supplied handle movement, geometry updates and both map-configured instruments. Full-room headset reach and viewing comfort remain to be checked.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="Point_Animatedcube/blurb.md">Raw captured source</a></p><pre>A cube assembles from corners, edges and triangular patches. Move one numbered corner and find the crease in what looked like a flat square. The connections remain while the shape changes. Replay keeps your alteration; restore returns the initial cube. A folding net offers another way for faces to meet.
+</pre></section></body></html>

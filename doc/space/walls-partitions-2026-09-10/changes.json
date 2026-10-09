@@ -1,0 +1,35 @@
+{
+  "unchanged": "All other grid layers preserved",
+  "placement_changes": [
+    {
+      "x": 18,
+      "z": 10,
+      "before": "",
+      "after": "color_space_navigator:180:1.2:1#mount:comparison#plinth:0"
+    },
+    {
+      "x": 28,
+      "z": 10,
+      "before": "",
+      "after": "gradient_interpolator:180:0.95:1#mount:comparison#plinth:0"
+    },
+    {
+      "x": 6,
+      "z": 13,
+      "before": "color_space_navigator:0:-0.5",
+      "after": " "
+    },
+    {
+      "x": 23,
+      "z": 20,
+      "before": "color_constellation_office:0:-0.5:1#layout:cubicles#plinth:0",
+      "after": "color_constellation_office:0:0:1#layout:cubicles#compare:visibility#plinth:0"
+    },
+    {
+      "x": 9,
+      "z": 28,
+      "before": "gradient_interpolator:0:-0.5",
+      "after": " "
+    }
+  ]
+}

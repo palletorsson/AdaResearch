@@ -1,0 +1,254 @@
+{
+	"checks": [
+		{
+			"check": "Stage zero: elapsed seconds advance while all transforms stay still",
+			"passed": true
+		},
+		{
+			"check": "Code-created mesh has the documented size and one attached orientation mark",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: still.png",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Stage one: independent midpoint/end/return values; no rotation or scaling",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: rise.png",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: fall.png",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: linear.png",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var travel := 0.25",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Printed extent edit reaches 0.9 and 1.7 at the same times",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var leg_seconds := 1.5",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Printed duration edit doubles the period to six seconds without changing endpoints",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Stage two: one eighth of a turn after one second, with the previous translation and unit scale",
+			"passed": true
+		},
+		{
+			"check": "Stage two quarter-turn keeps the local centre on its path",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: turn.png",
+			"passed": true
+		},
+		{
+			"check": "Eight-second rotation returns the marked face to its orientation",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: TAU / 8.0",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Printed rate edit gives a four-second full turn",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: large.png",
+			"passed": true
+		},
+		{
+			"check": "Stage three links the documented height and uniform scale extrema",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: small.png",
+			"passed": true
+		},
+		{
+			"check": "Sixty seconds of updates do not accumulate scale or rewrite the mesh",
+			"passed": true
+		},
+		{
+			"check": "Different frame partitions give the same pose after one second",
+			"passed": true
+		},
+		{
+			"check": "This study does not introduce an implicit cube or backdrop collider",
+			"passed": true
+		},
+		{
+			"check": "Prepared room floor still supports the visitor",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var pulse := 0.3",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Printed pulse edit changes only scale extent",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Actual printed sine replacement preserves initial position, extrema times and period",
+			"passed": true
+		},
+		{
+			"check": "Between the same endpoints, sine has a different progress at the same time",
+			"passed": true
+		},
+		{
+			"check": "Native room capture: sine.png",
+			"passed": true
+		},
+		{
+			"check": "Sine approaches its end more slowly than linear motion",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var leg_seconds := 1.5",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Sine's printed duration edit keeps its extent and gives a six-second return",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var t := pingpong(elapsed / leg_seconds + 0.5, 1.0)",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var travel := 0.25",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "Sine's printed extent edit keeps the period and reaches 0.9 / 1.7",
+			"passed": true
+		},
+		{
+			"check": "Original script constructs on an empty Node3D with direct references",
+			"passed": true
+		},
+		{
+			"check": "Printed edit target exists: var stage := 0",
+			"passed": true
+		},
+		{
+			"check": "Actual edited learner source compiles",
+			"passed": true
+		},
+		{
+			"check": "240 native frames recorded at the actual stage-three script's fixed 30 Hz progression",
+			"passed": true
+		}
+	],
+	"evidence": "Printed edits compiled and run in the freshly extracted student room; deterministic native rendering.",
+	"godot": "4.6-stable (official)",
+	"passed": true,
+	"physical_headset_tested": false,
+	"scene": "trans_pre.tscn",
+	"video_frames": 240
+}

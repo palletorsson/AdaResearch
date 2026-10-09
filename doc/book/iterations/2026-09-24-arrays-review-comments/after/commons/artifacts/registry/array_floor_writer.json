@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "array_floor_writer": {
+      "lookup_name": "array_floor_writer",
+      "name": "The floor is being written",
+      "scene": "res://commons/artifacts/array_floor_writer/array_floor_writer.tscn",
+      "category": "arrays",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        21,
+        3,
+        23
+      ],
+      "parameters": {
+        "size_group": "environment"
+      },
+      "description": "A copy agent consumes and copies the containing hall’s actual structure cells. Writes occur once per operation, with a pause; entrance controls pause and restore changes. The thresholds and perimeter remain. Restoring waits for a body to leave a cell.",
+      "qfep_connection": "An address becomes support for a body. Autonomous writes alter that support while the pickup arrays keep their separate records.",
+      "interactions": [
+        "Observe the sphere consuming or copying a floor cell",
+        "Walk around a vacancy or a new obstruction",
+        "Use PAUSE / RESUME and RESTORE FLOOR at the entrance"
+      ]
+    }
+  }
+}

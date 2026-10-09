@@ -1,158 +1,128 @@
 {
  "sweep": "julia_bench",
- "peak_changed_pct": 1.46,
- "subject_pct": 5.142,
- "verdict": "faint - under 2% of the frame moved",
+ "peak_changed_pct": 4.943,
+ "subject_pct": 17.589,
+ "verdict": "BITES",
  "variants": [
   {
    "a": {
+    "animate_c": false,
     "ladder": "figure"
    },
    "b": {
+    "animate_c": false,
     "ladder": "series"
    },
-   "changed_px": 6653,
-   "changed_pct": 1.152
+   "changed_px": 22484,
+   "changed_pct": 3.893
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "figure"
    },
    "b": {
+    "animate_c": false,
     "ladder": "seed"
    },
-   "changed_px": 6421,
-   "changed_pct": 1.112
+   "changed_px": 19642,
+   "changed_pct": 3.401
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "figure"
    },
    "b": {
+    "animate_c": false,
     "ladder": "relief"
    },
-   "changed_px": 8377,
-   "changed_pct": 1.45
+   "changed_px": 27649,
+   "changed_pct": 4.787
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "figure"
    },
    "b": {
+    "animate_c": false,
     "ladder": "section"
    },
-   "changed_px": 5521,
-   "changed_pct": 0.956
+   "changed_px": 16018,
+   "changed_pct": 2.773
   },
   {
    "a": {
-    "ladder": "figure"
-   },
-   "b": {
-    "ladder": "figure"
-   },
-   "changed_px": 0,
-   "changed_pct": 0.0
-  },
-  {
-   "a": {
-    "ladder": "series"
-   },
-   "b": {
-    "ladder": "seed"
-   },
-   "changed_px": 7162,
-   "changed_pct": 1.24
-  },
-  {
-   "a": {
+    "animate_c": false,
     "ladder": "series"
    },
    "b": {
-    "ladder": "relief"
+    "animate_c": false,
+    "ladder": "seed"
    },
-   "changed_px": 7104,
-   "changed_pct": 1.23
+   "changed_px": 24336,
+   "changed_pct": 4.213
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "series"
    },
    "b": {
-    "ladder": "section"
+    "animate_c": false,
+    "ladder": "relief"
    },
-   "changed_px": 7341,
-   "changed_pct": 1.271
+   "changed_px": 24255,
+   "changed_pct": 4.199
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "series"
    },
    "b": {
-    "ladder": "figure"
+    "animate_c": false,
+    "ladder": "section"
    },
-   "changed_px": 6653,
-   "changed_pct": 1.152
+   "changed_px": 24639,
+   "changed_pct": 4.266
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "seed"
    },
    "b": {
+    "animate_c": false,
     "ladder": "relief"
    },
-   "changed_px": 8021,
-   "changed_pct": 1.389
+   "changed_px": 27501,
+   "changed_pct": 4.761
   },
   {
    "a": {
+    "animate_c": false,
     "ladder": "seed"
    },
    "b": {
+    "animate_c": false,
     "ladder": "section"
    },
-   "changed_px": 4234,
-   "changed_pct": 0.733
+   "changed_px": 13737,
+   "changed_pct": 2.378
   },
   {
    "a": {
-    "ladder": "seed"
-   },
-   "b": {
-    "ladder": "figure"
-   },
-   "changed_px": 6421,
-   "changed_pct": 1.112
-  },
-  {
-   "a": {
+    "animate_c": false,
     "ladder": "relief"
    },
    "b": {
+    "animate_c": false,
     "ladder": "section"
    },
-   "changed_px": 8434,
-   "changed_pct": 1.46
-  },
-  {
-   "a": {
-    "ladder": "relief"
-   },
-   "b": {
-    "ladder": "figure"
-   },
-   "changed_px": 8377,
-   "changed_pct": 1.45
-  },
-  {
-   "a": {
-    "ladder": "section"
-   },
-   "b": {
-    "ladder": "figure"
-   },
-   "changed_px": 5521,
-   "changed_pct": 0.956
+   "changed_px": 28552,
+   "changed_pct": 4.943
   }
  ]
 }

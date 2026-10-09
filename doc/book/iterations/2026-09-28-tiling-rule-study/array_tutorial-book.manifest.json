@@ -1,0 +1,37 @@
+{
+  "captured_at": "2026-09-28T06:52:52.697111+00:00",
+  "base_commit": "05b94a776e3de66337c85e41a59e17fec25941f6",
+  "branch": "palm-scanner-door-entry",
+  "source": "current working copy, including uncommitted edits",
+  "transform": "Artifact-routing comments removed outside fenced code; footnote identifiers scoped per hall; ATX manuscript headings nested two levels beneath sequence and hall; footnote text and code preserved.",
+  "sequence": "array_tutorial",
+  "sequence_sha256": "9967982815a9f066cbcb547d1a6cc69d99a69a7b21e5380f7e4b23d04e9bad80",
+  "maps": [
+    {
+      "map": "Array",
+      "path": "commons/maps/Array/final.md",
+      "sha256": "65c7f52d3fe627ac484a92d27a2cb281ab40f89d1fdf675bed3926b5f9a3206b"
+    },
+    {
+      "map": "Tutorial_3D",
+      "path": "commons/maps/Tutorial_3D/final.md",
+      "sha256": "266cef6442787f98dc65e5c9db2b6e7efa25030a824d92f199e27ea438f10aed"
+    },
+    {
+      "map": "Tutorial_Tiling_Floor",
+      "path": "commons/maps/Tutorial_Tiling_Floor/final.md",
+      "sha256": "dbae51c3653ff8cb3ca73a7f21bef0f7eb9fbd1eae3d17855a37f05acd2f123a"
+    },
+    {
+      "map": "Tutorial_Tiling_Walls",
+      "path": "commons/maps/Tutorial_Tiling_Walls/final.md",
+      "sha256": "6a559e56ca13cfc622a6484e8a121a1bf3def85ae2bf2252f38c620e8e404a8e"
+    },
+    {
+      "map": "Tutorial_Disco",
+      "path": "commons/maps/Tutorial_Disco/final.md",
+      "sha256": "eba167e1ffab9d198b30c6ac2305b704fb76e383626aba798c307e432fbf6b7e"
+    }
+  ],
+  "output_sha256": "5188eb3c88a908b6227e055d021a8a5115669ea1a2c3437835447a7afea08117"
+}

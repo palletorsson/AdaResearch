@@ -1,0 +1,93 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "ball, plinth and ramp are placed",
+      "passed": true
+    },
+    {
+      "name": "black point has production pickup and gravity release",
+      "passed": true
+    },
+    {
+      "name": "ball starts on its one metre plinth",
+      "passed": true
+    },
+    {
+      "name": "point waits without drawing",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ball-on-plinth",
+      "passed": true
+    },
+    {
+      "name": "production pickup suspends recording",
+      "passed": true
+    },
+    {
+      "name": "held ball follows the supplied hand onto plank",
+      "passed": true
+    },
+    {
+      "name": "zero-impulse release rolls downhill under gravity",
+      "passed": true
+    },
+    {
+      "name": "actual motion grows a trace",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ball-rolling",
+      "passed": true
+    },
+    {
+      "name": "ball remains supported in the landing tray",
+      "passed": true
+    },
+    {
+      "name": "trace follows measured centres",
+      "passed": true
+    },
+    {
+      "name": "rest does not accumulate points",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: ball-path",
+      "passed": true
+    },
+    {
+      "name": "the ball can be carried back",
+      "passed": true
+    },
+    {
+      "name": "next release starts a new bounded trace",
+      "passed": true
+    },
+    {
+      "name": "side bay has an open walking approach",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "map": "Point_Trace",
+  "observations": {
+    "landed_local": [
+      0.0,
+      0.184005454182625,
+      5.23172044754028
+    ],
+    "ramp_world": [
+      12.5,
+      0.0,
+      2.5
+    ],
+    "samples": 124
+  },
+  "passed": true,
+  "scope": "Native museum physics, production pickup with supplied grabber, shared vertices and real renders. Headset feel untested."
+}

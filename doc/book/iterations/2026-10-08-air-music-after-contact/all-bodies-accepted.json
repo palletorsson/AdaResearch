@@ -1,0 +1,93 @@
+{
+  "checks": [
+    {
+      "name": "complete program builds point, two bars, players and readout",
+      "passed": true
+    },
+    {
+      "name": "unchanged point retains sphere and pickup",
+      "passed": true
+    },
+    {
+      "name": "initial scene is silent",
+      "passed": true
+    },
+    {
+      "name": "two chosen pitches produce different clips",
+      "passed": true
+    },
+    {
+      "name": "sound is finite three-second 16-bit mono",
+      "passed": true
+    },
+    {
+      "name": "real point-area collision starts first voice",
+      "passed": true
+    },
+    {
+      "name": "remaining inside does not retrigger",
+      "passed": true
+    },
+    {
+      "name": "second collision joins without stopping first",
+      "passed": true
+    },
+    {
+      "name": "first voice retains its older playback age",
+      "passed": true
+    },
+    {
+      "name": "same bar restarts one voice only",
+      "passed": true
+    },
+    {
+      "name": "held pickup layer still reaches contact sensor",
+      "passed": true
+    },
+    {
+      "name": "another body enters sensor but is rejected",
+      "passed": false
+    },
+    {
+      "name": "display adds independent stored samples, not one shared age",
+      "passed": true
+    },
+    {
+      "name": "quiet voice contributes zero even at positive offset",
+      "passed": true
+    },
+    {
+      "name": "reading before or past finite data is safe",
+      "passed": true
+    },
+    {
+      "name": "each source stays within quarter scale",
+      "passed": true
+    },
+    {
+      "name": "envelope approaches zero at finite end",
+      "passed": true
+    },
+    {
+      "name": "both voices finish without a stop event",
+      "passed": true
+    },
+    {
+      "name": "finished sum returns to baseline",
+      "passed": true
+    },
+    {
+      "name": "same-pitch variation has identical data but separate players",
+      "passed": true
+    },
+    {
+      "name": "same-pitch exercise retains separate ages",
+      "passed": true
+    }
+  ],
+  "failures": [
+    "another body enters sensor but is rejected"
+  ],
+  "passed": false,
+  "scope": "Native physics contact and Dummy-driver playback of exact printed files. Teacher-authored assertions, not independent student or headset verification."
+}

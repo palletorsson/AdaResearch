@@ -1,0 +1,70 @@
+{
+  "tool": "Built-in image_gen",
+  "plates": [
+    {
+      "slug": "pattern-disco",
+      "map": "Pattern_Disco",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-f95a336c-ee37-41b9-8d29-7aefd97188b4.png",
+      "refinements": [
+        "Edit only panel 3 (middle-left) of this six-panel comic. SUPERTRIANGLE is a flat, two-dimensional colour pattern on the floor, not a raised diamond sculpture or a pyramid. Replace the two upright solids and their plinths with two side-by-side flat square floor-pattern sample boards, clearly labelled SCHEMATIC DETAIL. On each draw the SAME planar four-triangle shape partway between a chevron and diamond: identical edges and angles, left navy/pink, right teal/yellow. No thickness or relief, no third dimensional extrusion. Keep HOLD above both, and the caption 'The unfinished turn stays unfinished.' Preserve every other panel, words, footer, characters and layout unchanged."
+      ]
+    },
+    {
+      "slug": "pattern-foundry",
+      "map": "Pattern_Foundry",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-ad9d4287-efc0-4d37-bed1-ada0e3eca954.png",
+      "refinements": [
+        "Correct ONLY middle-right panel 4 of this comic. Its point is a source edit reaches the flat display but not the HELD curved display. Keep new source card, captions, arrows and labels. Make new source card a 4x4 cream grid with one BLUE square in row1 column2 (zero-based). Flat / Live has repeated clearly BLUE squares replacing its RED marks, with other grey pattern unchanged. Curve / Held retains RED squares and NO BLUE, same grey pattern. Thus LIVE blue vs HELD red visually unmistakable. Preserve panels1,2,3,5,6 and footer exactly."
+      ]
+    },
+    {
+      "slug": "pattern-return",
+      "map": "Tutorial_Pattern",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-d536db21-e9b5-4c33-92e1-d834e44f16d5.png",
+      "refinements": [
+        "Correct the pattern logic throughout this comic, preserving six captions, footer, characters and layout. All motif diagrams should be CLEARLY labelled SCHEMATIC DETAIL. Motif A is exact4x4: rows [RED,CREAM,CREAM,BLUE]; [RED,CREAM,CREAM,CREAM]; [RED,RED,OCHRE,CREAM]; [CREAM,CREAM,CREAM,CREAM]. Motif B is its exact horizontal reflection: [BLUE,CREAM,CREAM,RED]; [CREAM,CREAM,CREAM,RED]; [CREAM,OCHRE,RED,RED]; [CREAM,CREAM,CREAM,CREAM]. Keep each cell visibly separate; empty bottomrow required. Panel1 SOURCE=A, P1 diagram A A A, PM diagram A B A. Panel2 unchanged SOURCE=A below copy comparisons A B. Panel3 FLIP X stored source A to B; P1 after edit B B B, PM B A B, not old A motifs. Panel4 one blue cell added at row2column1 replacing red: edited source A'=rows R..B/R.../RBO./....; all P1 copies A'; PM alternates A' with its horizontal mirror. Panel5 facingcycle A B A, bracket spansfirsttwo. Panel6 cropfields consistentA for P1 and alternatingA B forPM. Simplify wide fields to few enlarged sample blocks if necessary; omit excess repetition rather than draw wrong transformations. No invented rotation or data deletion.",
+        "Edit ONLY middle-right panel4, preserve all other panels, captions, footer. Source detail now one exact4x4 grid with rows [BLUE,CREAM,CREAM,BLUE]; [RED,CREAM,CREAM,CREAM]; [RED,RED,OCHRE,CREAM]; [CREAM,CREAM,CREAM,CREAM]. Label SOURCE EDIT: FIRST CELL RED → BLUE (small). P1 below shows TWO exact copies of that source side byside. PM below shows same source onleft and EXACT horizontal reflection onright: [BLUE,CREAM,CREAM,BLUE]; [CREAM,CREAM,CREAM,RED]; [CREAM,OCHRE,RED,RED]; [CREAM,CREAM,CREAM,CREAM]. Label SCHEMATIC DETAIL. The new blue top-left source cell repeats as blue top-right in mirrored copy. Make justtwo4x4copiesperfield to keep cellgridreadable. There must be no extra bluecell at row1column0. Do not changeanyotherpanel.",
+        "One tiny correction ONLY in middle-rightpanel4: PM field has two4x4tiles. In its RIGHTHAND reflectedtile, change the TOP-RIGHT RED cell to BLUE. Both top corners of thisrighttilemustbeBLUE, exactlylike two bluecornersin the editedsourceabove. Its remainingrowsstayunchanged: secondrow ...RED; thirdrow CREAM OCHRE RED RED; bottomrowallCREAM. This makes a sourceedittravelintothereflectedcopy. Preserveeveryothercell,caption,characterandpanel; nootherchanges."
+      ]
+    },
+    {
+      "slug": "pattern-address",
+      "map": "Array_Patterns",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-bf25eb84-1a08-4175-928c-ac6d6228ab5a.png",
+      "refinements": []
+    },
+    {
+      "slug": "pattern-symmetry",
+      "map": "Symmetry_Seventeen",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-1fa05cf7-5810-4026-a809-71d7e584235b.png",
+      "refinements": [
+        "Correct the schematic comparisons of this comic. Preserve six caption boxes, title, footer, characters and panel6. Add SCHEMATIC COMPARISON labels. Fourbyfour grids should use exactcells: A rows R..B/R.../RRO./...., where R=red B=blue O=ochre .=cream. MIRROR rows B..R/...R/.ORR/..... Panel1 show A under HELD and MIRROR under LIVE, with ochre in thirdrowsecondcolumn of mirror, notsecondrow. Panel2 exact PG rows .ORR/..../B..R/...R. Lastrow rightmostcell MUSTRED. Panel3 HELD remains exact A, LIVE becomes mirror after FIRST CELL RED→BLUE: rows B..B/...R/.ORR/..... Two bluecornersattop, noothernewcells. Person's fingeron LIVE/sourceeditcontrol NOTon unchangedheldgrid. Panel4 replace asymmetric/symmetric dot comparison with two simple 4x4source diagrams. Left A arrowMIRROR tohorizontalmirror; right completelyuniformRED4x4 arrowMIRROR tosameuniformRED4x4: SAME APPEARANCE, DIFFERENT READS. Uniformred sourceisactuallyreflectioninvariant. Panel5 replace currentambiguouspatternpictures with mathematical angle schematic: five small circles eachone narrow radialspoke and circulararrow labelledALLOWEDROTATIONORDER1,2,3,4,6; adjacent crossed5and7 labelledNOTFORAPERIODICPLANARLATTICE. Add NOT A BAN ON FIVEFOLD MOTIFS. These are explanatory symbols not texture samples or empiricaltrials. Keep allquote captions.",
+        "Fix ONLY upper-right panel2 of this image, leaving all otherpanels exactly as they are. The LEFT 'Original source (4x4)' diagram must match source in upper-leftpanel: row1 RED CREAM CREAM BLUE; row2 RED CREAM CREAM CREAM; row3 RED RED OCHRE CREAM; row4 CREAM CREAM CREAM CREAM. The RIGHT 'Reflected and shifted (2 rows, wrapped)' diagram exactly: row1 CREAM OCHRE RED RED; row2 CREAM CREAM CREAM CREAM; row3 BLUE CREAM CREAM RED; row4 CREAM CREAM CREAM RED. Cell boundaries fourrowsfourcolumns only. Correct neither caption nor arrow. These two gridsareimportant, do not shiftleftgridorapplyshift twice. Preserve the existing correctlyreflectedgrid in panel1, unchangedheld source inpanel3, uniformredtestpanel4, rotationlabels5 andatlas6."
+      ]
+    },
+    {
+      "slug": "pattern-volume",
+      "map": "Ribbon_Patterns_01",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-bee452a1-aba2-4bfb-b9cc-c6ae53814f61.png",
+      "refinements": [
+        "Targeted correction: preserve all captions, footer, characters and sixpanel layout. Panel3 and panel6 sculptural staircases are NOT full4x4x4volume. Label each one CROPPED VOLUME DETAIL; retain64storedasdatafactnotvisiblecount. Panel3 change SOURCE[z][x] highlight from bottom-left to bottomrowTHIRDCOLUMN to match selectedcreamcube; keep that SAMEhighlightfixed in source asvolumeaddressrises. Volume inset depict fourlayers withverticalarrow, labelSCHEMATIC. Panel5 SHIFT source small4x4 highlight MUSTbe top-rowsecondcellcream for SOURCE[0][1], REPEAThighlighttop-rowfirstcellREDforSOURCE[0][0]. Change only SHIFTgridhighlight. Bottompanel5 unchangedpositions use singlepair of cubeimagesSAMEPOSITIONforred→cream, rather thanimplytranslate. Add labelCOLOURLOOKUPONLY. Panel4 16visible/64stored layer alreadyshowshiddenlevelsasdashedguides, preserve. All otherimagesunchanged."
+      ]
+    },
+    {
+      "slug": "pattern-carrier",
+      "map": "Ribbon_Patterns_02",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e1c4a277-40fc-41a1-bd1b-9404805f156f.png",
+      "refinements": [
+        "Preserve thiscomic, onlyfix the small 'Source4×4pattern' card in bottom-rightpanel6: add itsmissing completelycream bottomrow. Sourcegrid exactlyfourrowsfourcolumns: [RED,CREAM,CREAM,BLUE], [RED,CREAM,CREAM,CREAM], [RED,RED,OCHRE,CREAM], [CREAM,CREAM,CREAM,CREAM]. Sourcegrid must not be3rows whilelabelled4×4. Preserve the reflectivecolourperception comparisons, bothcurves, normals, all captionsandfooter andcharactersunchanged. Repeatedlargerfields remain illustrativecroppedviews."
+      ]
+    },
+    {
+      "slug": "pattern-fabric",
+      "map": "Ribbon_Patterns_03",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-5e8acdd5-4a37-4c87-9db1-f0c24646a248.png",
+      "refinements": [
+        "Correct ONLY bottom-leftpanel5. Make a clear live-edit / saved distinction: change the BLUE upper-rightsquare on the wallsource to TEALGREEN, and change BLUE stripe on the preview mannequin's SKIRT to TEALGREEN. The visitor's own worn skirt MUST retain BLUE upper-rightstripe, because it is SAVEDVERSION. Allred,ochre,creamareasstay. Purplecrown/bodice/sleeves stayunchanged. Add smalllabelSOURCE EDIT: BLUE→GREEN onwall. Thus livepreviewgreen, wornskirtblue. Preservecaptions 'Your worn skirt keeps the saved version.' andallotherpanels1,2,3,4,6, footer, title unchanged."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "grid complete",
+      "passed": true
+    },
+    {
+      "name": "both existing primary encounters are placed",
+      "passed": true
+    },
+    {
+      "name": "thirty spray cans are parked on their tray",
+      "passed": true
+    },
+    {
+      "name": "unheld cans have written no samples",
+      "passed": true
+    },
+    {
+      "name": "placed rectangular canvas has independent spray feedback",
+      "passed": true
+    },
+    {
+      "name": "automatic painter is a can too",
+      "passed": true
+    },
+    {
+      "name": "automatic painter works before pickup",
+      "passed": true
+    },
+    {
+      "name": "unpainted canvas starts on its white ground",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: studio",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: can-tray",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: before-hand",
+      "passed": true
+    },
+    {
+      "name": "actual can can be picked up",
+      "passed": true
+    },
+    {
+      "name": "holding and aiming alone do not paint",
+      "passed": true
+    },
+    {
+      "name": "trigger writes via real ray and rectangular UV",
+      "passed": true
+    },
+    {
+      "name": "mist emits with a successful spray",
+      "passed": true
+    },
+    {
+      "name": "trigger release stops without dropping",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: close-spray",
+      "passed": true
+    },
+    {
+      "name": "close nozzle leaves visible pigment in the actual GPU texture",
+      "passed": true
+    },
+    {
+      "name": "distance broadens the footprint",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: far-spray",
+      "passed": true
+    },
+    {
+      "name": "distant spray also reaches the GPU texture",
+      "passed": true
+    },
+    {
+      "name": "aiming away adds no samples",
+      "passed": true
+    },
+    {
+      "name": "nozzle range is bounded",
+      "passed": true
+    },
+    {
+      "name": "a blocking body prevents painting through it",
+      "passed": true
+    },
+    {
+      "name": "automatic painter continues alongside the hand",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: shared-canvas",
+      "passed": true
+    },
+    {
+      "name": "drop restores the can to its own dock",
+      "passed": true
+    },
+    {
+      "name": "drop stops all manual emission",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after-release",
+      "passed": true
+    },
+    {
+      "name": "sprayed pigment reaches the GPU image",
+      "passed": true
+    },
+    {
+      "name": "quiet feedback changes the retained image",
+      "passed": true
+    },
+    {
+      "name": "quiet feedback fades gently toward its ground",
+      "passed": true
+    },
+    {
+      "name": "spray stamps are bounded and consumed",
+      "passed": true
+    },
+    {
+      "name": "legacy splat queue also clears",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: after-wait",
+      "passed": true
+    },
+    {
+      "name": "museum desktop hand present",
+      "passed": true
+    },
+    {
+      "name": "desktop carry activates the can without a VR grab",
+      "passed": true
+    },
+    {
+      "name": "desktop left press routes to the nozzle",
+      "passed": true
+    },
+    {
+      "name": "desktop carry produces real canvas samples",
+      "passed": true
+    },
+    {
+      "name": "desktop release routes to the same can",
+      "passed": true
+    },
+    {
+      "name": "desktop trigger release stops pigment",
+      "passed": true
+    },
+    {
+      "name": "desktop drop restores dock and stops the nozzle",
+      "passed": true
+    },
+    {
+      "name": "existing Albers studies remain present",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: albers-studies",
+      "passed": true
+    },
+    {
+      "name": "tray approach has supporting floor",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker approaches the tray",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: at-the-tray",
+      "passed": true
+    },
+    {
+      "name": "ordinary walker returns from tray",
+      "passed": true
+    },
+    {
+      "name": "unconfigured tool placement retains thirty balls",
+      "passed": true
+    },
+    {
+      "name": "legacy feedback stays out of spray mode",
+      "passed": true
+    },
+    {
+      "name": "feedback material is per canvas",
+      "passed": true
+    },
+    {
+      "name": "nonwhite priming survives explicit reset setup",
+      "passed": true
+    },
+    {
+      "name": "focused encounter completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "feedback": {
+      "after_darkness": 0.00581281241296286,
+      "before_darkness": 0.00620043749174025,
+      "pool_size": 6
+    },
+    "footprints": {
+      "far_radius_m": 0.159341449664189,
+      "near_radius_m": 0.0611137738633039,
+      "range_m": 3.0
+    },
+    "states": [
+      {
+        "automatic_strokes": 72,
+        "elapsed": 3.08333333333333,
+        "rendered_frames": 149,
+        "state": "before-hand"
+      },
+      {
+        "automatic_strokes": 72,
+        "elapsed": 3.08333333333333,
+        "rendered_frames": 205,
+        "state": "close-spray"
+      },
+      {
+        "automatic_strokes": 72,
+        "elapsed": 3.08333333333333,
+        "rendered_frames": 244,
+        "state": "far-spray"
+      },
+      {
+        "automatic_strokes": 123,
+        "elapsed": 4.79999999999999,
+        "rendered_frames": 371,
+        "state": "shared-canvas"
+      },
+      {
+        "automatic_strokes": 137,
+        "elapsed": 5.39672833333332,
+        "rendered_frames": 400,
+        "state": "after-release"
+      },
+      {
+        "automatic_strokes": 137,
+        "elapsed": 5.39672833333332,
+        "rendered_frames": 530,
+        "state": "after-wait"
+      }
+    ],
+    "walks": [
+      {
+        "arrived": true,
+        "reached": [
+          12.0,
+          0.000839395856019109,
+          17.0548648834229
+        ],
+        "target": [
+          12.0,
+          0.0500000007450581,
+          17.0499992370605
+        ]
+      },
+      {
+        "arrived": true,
+        "reached": [
+          12.0,
+          0.000839395856019109,
+          18.4772205352783
+        ],
+        "target": [
+          12.0,
+          0.0500000007450581,
+          18.5
+        ]
+      }
+    ]
+  },
+  "passed": true,
+  "room": "Color_Paint",
+  "scope": "Isolated production museum. Supplied grabber and trigger actions with actual nozzle ray, range, obstruction, native GPU images, quiet-input feedback and ordinary-controller approach. No tracked hand, headset, colour calibration, learner or performance claim."
+}

@@ -1,0 +1,27 @@
+--- before/commons/data/artifact_roles.json
++++ pending/commons/data/artifact_roles.json
+@@ -1774,7 +1774,7 @@
+       "the_fourth_limit": "secondary",
+       "peer_production_tool": "primary",
+       "wiki_fragment": "secondary",
+-      "the_commons_table": "secondary"
++      "the_commons_table": "primary"
+     },
+     "SpeculativeComputation_Rhizome_Network": {
+       "rhizome_cave_demo": "primary",
+@@ -4559,12 +4559,12 @@
+     },
+     "SpeculativeComputation_Collective_Knowledge": {
+       "primary": [
+-        "peer_production_tool"
++        "peer_production_tool",
++        "the_commons_table"
+       ],
+       "secondary": [
+         "the_fourth_limit",
+-        "wiki_fragment",
+-        "the_commons_table"
++        "wiki_fragment"
+       ],
+       "decoration": []
+     },

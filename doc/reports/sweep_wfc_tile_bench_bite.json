@@ -1,0 +1,68 @@
+{
+ "sweep": "wfc_tile_bench",
+ "peak_changed_pct": 2.289,
+ "subject_pct": 7.009,
+ "verdict": "BITES",
+ "variants": [
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "rule"
+   },
+   "changed_px": 7526,
+   "changed_pct": 1.303
+  },
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "trial"
+   },
+   "changed_px": 9131,
+   "changed_pct": 1.581
+  },
+  {
+   "a": {
+    "workings": "result"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 5636,
+   "changed_pct": 0.976
+  },
+  {
+   "a": {
+    "workings": "rule"
+   },
+   "b": {
+    "workings": "trial"
+   },
+   "changed_px": 13224,
+   "changed_pct": 2.289
+  },
+  {
+   "a": {
+    "workings": "rule"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 9890,
+   "changed_pct": 1.712
+  },
+  {
+   "a": {
+    "workings": "trial"
+   },
+   "b": {
+    "workings": "reject"
+   },
+   "changed_px": 11904,
+   "changed_pct": 2.061
+  }
+ ]
+}

@@ -1,0 +1,94 @@
+{
+  "pairs": [
+    {
+      "hall": "Random_Walk",
+      "before": "walk-before/instrument.png",
+      "after": "walk-accepted/instrument.png",
+      "claim": "Accurate LONG STEP label; primary seed777/mode2/300steps and camera matched. Ambient terrain is not seeded in this harness and differs between runs.",
+      "before_sha256": "1ec16e347c832516d9a4fad34c0f992aca193c48dcfaa81818aaf27d5636b095",
+      "after_sha256": "36dd659aca136c85d628e6415ffe3d63fca42ad8c63dc9beb7a639158403627b"
+    },
+    {
+      "hall": "Random_Rotate_Random_XYZ",
+      "before": "rotate-before/stacks.png",
+      "after": "rotate-after/stacks.png",
+      "claim": "Same camera in actual museum, complete20+120 stacks before/after common geometry fit.",
+      "before_sha256": "458bb805a30fff0d2b0677fc027373c025728ca4e9a845a93d810ed85c12c83e",
+      "after_sha256": "bb32427f0e905139b83850675de5fc715319b6559421cf384257f3215825379e"
+    },
+    {
+      "hall": "Random_Mushrooms",
+      "before": "mushroom-before/hall-plan.png",
+      "after": "mushroom-after/hall-plan.png",
+      "claim": "Same hall camera and seeded mushroom population; arrivals moved behind bed for the three-pass walking order.",
+      "before_sha256": "b317e0ebe05818cfe2ad4a474a33cdef1c20ba866315f5d34f7d9c2430a8aad4",
+      "after_sha256": "1b064af461b00bceea087335414a4d4b165c9e901ba6e6702352b3eb9ae1461c"
+    },
+    {
+      "hall": "Random_Mushrooms",
+      "before": "mushroom-before/silhouette_arrivals.png",
+      "after": "mushroom-after/silhouette_arrivals.png",
+      "claim": "Same relative standing view and dress/form state; existing encounter at its new position.",
+      "before_sha256": "d3c2fd78a47fe061521fac3faa22960a2e153cfd49fa8dc67015cb8413f44b4e",
+      "after_sha256": "ce1d94f89bc081a52e5d0bc4a4fbbe379441bbd6fddfc1dca0b8eead0df89222"
+    }
+  ],
+  "actual_museum_runs": [
+    {
+      "folder": "walk-before",
+      "checks": 6,
+      "returncode": 0,
+      "source_stable": true,
+      "shared_loader_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93"
+    },
+    {
+      "folder": "walk-accepted",
+      "checks": 6,
+      "returncode": 0,
+      "source_stable": true,
+      "shared_loader_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93"
+    },
+    {
+      "folder": "rotate-before",
+      "checks": 4,
+      "returncode": 0,
+      "source_stable": true,
+      "shared_loader_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93"
+    },
+    {
+      "folder": "rotate-after",
+      "checks": 11,
+      "returncode": 0,
+      "source_stable": true,
+      "shared_loader_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93"
+    },
+    {
+      "folder": "mushroom-before",
+      "checks": 18,
+      "returncode": 0,
+      "source_stable": true,
+      "shared_loader_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93"
+    },
+    {
+      "folder": "mushroom-after",
+      "checks": 20,
+      "returncode": 0,
+      "source_stable": true,
+      "shared_loader_sha256": "fcb1ac97a080d99abddd8f3d90bcac6d172b11f400cfaa8ee284d4c07663ce93"
+    }
+  ],
+  "focused": "focused-accepted/behavior-checks.json",
+  "focused_checks": 49,
+  "owned_sources": [
+    "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+    "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd"
+  ],
+  "before_context_files": 170,
+  "limits": [
+    "Headset reach, eating interaction and comfort not tested.",
+    "Button-signal simulation and static capsule queries do not establish player understanding.",
+    "Ambient terrain state differs in Walk images; the primary terrarium is matched.",
+    "Walk button newline was changed to a plain space after focused checks because baked rendering joined words; final actual-museum run verifies the final label.",
+    "Baseline run manifests predate addition of live-plan/sequence hashes to the runner; root restoration/staging records preserve those intentional route changes."
+  ]
+}

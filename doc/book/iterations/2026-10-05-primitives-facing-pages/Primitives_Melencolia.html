@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Melencolia — Primitives facing pages · Endless Museum</title>
+<style>
+:root{--paper:#fcfaf5;--ink:#272c2b;--muted:#707570;--rule:#dcdcd3;--green:#36584e}*{box-sizing:border-box}html,body{margin:0;height:100%;background:#e7e8e2;color:var(--ink)}body{font:16px/1.6 Georgia,'Times New Roman',serif;display:grid;grid-template-rows:auto minmax(0,1fr) auto}a{color:var(--green);text-underline-offset:3px}button,select{font:13px/1.3 system-ui,sans-serif;color:inherit}button{cursor:pointer;background:transparent;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px}button:hover{background:#f5f5ef}button:disabled{opacity:.32;cursor:default}button:focus-visible,select:focus-visible,a:focus-visible,article:focus-visible{outline:2px solid var(--green);outline-offset:3px}header{padding:17px 32px 13px;display:flex;gap:28px;align-items:center;justify-content:space-between}.brand{font-size:25px;line-height:1.1;letter-spacing:-.7px}.strap{font:10px/1.5 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-top:6px}.chapter-title{font:13px/1.5 system-ui,sans-serif}.chapter-title strong{display:block;font-weight:500;font-size:16px}.chapter-title span{color:var(--muted);font-size:11px}nav{display:flex;align-items:center;gap:9px}select{background:#f8f8f3;border:1px solid #bfc4ba;border-radius:3px;padding:9px 26px 9px 11px;max-width:220px}main{min-height:0;padding:0 28px 4px}.spread{height:100%;max-width:1680px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);box-shadow:0 5px 22px #28302712;border:1px solid #d5d7ce;background:var(--paper)}[hidden]{display:none!important}.page{min-width:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#bac0b3 transparent;padding:22px clamp(25px,4vw,67px) 34px;scroll-padding-top:25px}.tutorial{background:linear-gradient(to left,#e7e6dd 0, #f6f3ec 5px,var(--paper) 28px)}.final{background:linear-gradient(to right,#e7e6dd 0,#f6f3ec 5px,var(--paper) 28px);border-left:1px solid #d8d7cc}.running-head{display:flex;align-items:center;gap:10px;min-height:30px;border-bottom:1px solid var(--rule);padding-bottom:12px;margin-bottom:32px;font:10px/1.5 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.running-head a{margin-left:auto;white-space:nowrap;text-decoration:none}.intent{font-size:9px;background:#efeadc;border-radius:2px;padding:2px 5px;letter-spacing:0}.prose{font-size:18px;line-height:1.75;overflow-wrap:break-word}.prose h1,.prose h2,.prose h3,.prose h4{font-weight:400;line-height:1.2;scroll-margin-top:20px}.prose h1{font-size:clamp(28px,2.6vw,40px);letter-spacing:-.7px;margin:0 0 32px;text-wrap:balance}.prose h2{font-size:27px;margin:38px 0 18px}.prose h3{font-size:22px;margin:30px 0 15px}.prose p{margin:0 0 21px}.prose ul,.prose ol{padding-left:24px;margin:0 0 23px}.prose li{margin:6px 0}.prose blockquote{margin:27px 0;border-left:2px solid #b8c4b7;padding-left:22px;color:#4b5851}.prose pre{padding:18px 20px;margin:25px -7px;background:#edf0e9;border:1px solid #dce2d5;border-radius:2px;overflow:auto;font:12.5px/1.7 Consolas,'Courier New',monospace;tab-size:4}.prose code{font-family:Consolas,'Courier New',monospace;font-size:.79em}.prose :not(pre)>code{background:#eeeee5;padding:1px 3px;border-radius:2px;overflow-wrap:anywhere}.prose pre code{font-size:inherit;white-space:pre;overflow-wrap:normal}.prose img{display:block;max-width:100%;height:auto;margin:30px auto}.prose table{width:100%;display:block;overflow:auto;border-collapse:collapse;margin:25px 0;font:13px/1.6 system-ui,sans-serif}.prose th,.prose td{text-align:left;border-bottom:1px solid var(--rule);padding:8px 10px;vertical-align:top}.prose th{font-weight:500}.prose hr{border:0;border-top:1px solid var(--rule);margin:35px 0}.prose .footnote{font-size:13px;line-height:1.6;color:#62665f}.prose sup{font-size:10px;line-height:0}.page-end{display:flex;justify-content:space-between;margin-top:42px;padding-top:14px;border-top:1px solid var(--rule);font:11px/1.4 system-ui,sans-serif;color:var(--muted)}footer{padding:9px 33px 12px;display:flex;justify-content:space-between;gap:20px;font:11px/1.4 system-ui,sans-serif;color:var(--muted)}#position{color:#414d43}.mobile-switch{display:none}.skip{position:absolute;top:-60px;background:var(--paper);padding:8px;z-index:2}.skip:focus{top:6px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1750px){.prose{font-size:19px}.prose pre{font-size:14px}}
+@media(max-width:1080px){header{padding:14px 20px;gap:15px}.chapter-title{display:none}main{padding:0 16px 2px}.page{padding-left:28px;padding-right:28px}.prose{font-size:16px}.prose pre{font-size:12px}footer{padding-left:20px;padding-right:20px}}
+@media(max-width:720px){body{grid-template-rows:auto minmax(0,1fr) auto}header{flex-wrap:wrap;padding:12px 13px;gap:12px}.brand{font-size:21px}.strap{font-size:8px}nav{margin-left:auto;gap:5px}nav button{padding:8px}select{max-width:160px;padding:8px 3px}.mobile-switch{display:flex;width:100%;gap:6px}.mobile-switch button{flex:1;padding:7px;font-size:12px}.mobile-switch button[aria-pressed=true]{background:#36584e;color:white;border-color:#36584e}main{padding:0 8px}.spread{display:block}.page{height:100%;padding:17px 24px 32px;background:var(--paper)}body[data-side=tutorial] .final,body[data-side=final] .tutorial{display:none}.prose{font-size:17px}.prose h1{font-size:30px}.running-head{margin-bottom:25px}footer{font-size:10px;padding:8px 12px}.desktop-hint{display:none}}
+@media print{body{display:block;background:white;height:auto}header,footer{display:none}main{padding:0}.spread{height:auto;box-shadow:none;border:0;display:grid!important;break-after:page}.page{overflow:visible;height:auto;background:white!important;padding:12mm!important;display:block!important}.prose{font-size:10pt}.prose h1{font-size:22pt}.prose h2{font-size:16pt}.prose pre,.prose pre code{font-size:7pt;white-space:pre-wrap;overflow-wrap:anywhere}.running-head{margin-bottom:20px}.running-head a{display:none}a{color:inherit}.page-end{display:none}@page{size:A3 landscape;margin:10mm}}
+
+.nav-button{display:block;font:13px/1.3 system-ui,sans-serif;border:1px solid #bfc4ba;border-radius:3px;padding:9px 15px;text-decoration:none;color:inherit;white-space:nowrap}.nav-button:hover{background:#f5f5ef}.nav-button.disabled{opacity:.32;pointer-events:none}.contents{position:relative;font:13px/1.3 system-ui,sans-serif;z-index:3}.contents summary{cursor:pointer;list-style:none;min-width:196px;display:flex;justify-content:space-between;gap:16px;border:1px solid #bfc4ba;border-radius:3px;background:#f8f8f3;padding:9px 12px}.contents ol{position:absolute;right:0;top:29px;width:260px;max-height:70vh;overflow:auto;background:#fcfaf5;border:1px solid #c9cdbf;box-shadow:0 10px 30px #1e2b1e22;list-style:none;padding:9px;margin:10px 0}.contents a{display:block;padding:9px 12px;text-decoration:none;color:inherit}.contents a span{color:var(--muted);margin-right:9px;font-size:11px}.contents a:hover,.contents a[aria-current=page]{background:#e9ede3}.contents summary:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@media(max-width:720px){.nav-button{padding:8px;font-size:12px}.contents summary{min-width:135px;padding:8px;font-size:12px}.mobile-switch input{position:absolute;opacity:0;width:1px;height:1px}.mobile-switch label{flex:1;padding:7px;border:1px solid #bfc4ba;border-radius:3px;text-align:center;font:12px/1.3 system-ui,sans-serif;cursor:pointer}.mobile-switch input:checked+label{background:#36584e;color:white}.mobile-switch input:focus-visible+label{outline:2px solid #36584e;outline-offset:3px}body:has(#side-final:checked) .tutorial{display:none}body:has(#side-final:checked) .final{display:block}}
+</style>
+</head>
+<body data-side="tutorial">
+<a class="skip" href="#book">Skip to the texts</a>
+<header>
+  <div><div class="brand">Endless Museum</div><div class="strap">Always another room</div></div>
+  <div class="chapter-title"><strong>I. Primitives</strong><span>Points build worlds · Facing pages</span></div>
+  <nav aria-label="Chapter navigation">
+    <a class="nav-button" aria-label="Previous hall" href="Primitives_Portals.html">← Previous</a>
+    <details class="contents"><summary aria-label="Choose a hall">15 · Melencolia <span>⌄</span></summary><ol><li><a href="index.html" ><span>01</span> Point Zero</a></li>
+<li><a href="Point_One.html" ><span>02</span> Point One</a></li>
+<li><a href="Point_Coordinates.html" ><span>03</span> Coordinates</a></li>
+<li><a href="Point_Lines.html" ><span>04</span> Lines</a></li>
+<li><a href="Point_Trace.html" ><span>05</span> Trace</a></li>
+<li><a href="Point_Line_Grid.html" ><span>06</span> Grid</a></li>
+<li><a href="Point_Triangle_Context.html" ><span>07</span> Triangle</a></li>
+<li><a href="Primitives_Polythedra.html" ><span>08</span> Polyhedra</a></li>
+<li><a href="Point_Animatedcube.html" ><span>09</span> Cube</a></li>
+<li><a href="Primitives_Ignorance.html" ><span>10</span> Primitives</a></li>
+<li><a href="Primitives_Godot.html" ><span>11</span> Godot primitives</a></li>
+<li><a href="Primitives_Columns.html" ><span>12</span> Columns</a></li>
+<li><a href="Primitives_Profiles.html" ><span>13</span> Borrowed outlines</a></li>
+<li><a href="Primitives_Portals.html" ><span>14</span> Limits</a></li>
+<li><a href="Primitives_Melencolia.html" aria-current=page><span>15</span> Melencolia</a></li></ol></details>
+    <span class="nav-button disabled" aria-disabled="true">Next →</span>
+  </nav>
+  <div class="mobile-switch" aria-label="Reading side">
+    <input type="radio" name="reading-side" id="side-tutorial" checked><label for="side-tutorial">Left · Tutorial</label>
+    <input type="radio" name="reading-side" id="side-final"><label for="side-final">Right · Reflection</label>
+  </div>
+</header>
+<main id="book" aria-label="Tutorial left, reflection right">
+<section class="spread" data-map="Primitives_Melencolia" data-label="Melencolia" aria-label="Melencolia facing pages"><article class="page tutorial" tabindex="0" aria-label="Melencolia — tutorial">
+              <div class="running-head"><span>Make / tutorial.md</span><a href="http://localhost:3003/book-review/commons/maps/Primitives_Melencolia/tutorial.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Primitives_Melencolia--tutorial--arrange-what-you-can-already-make">Arrange what you can already make</h1>
+<h2 id="Primitives_Melencolia--tutorial--learning-elements">Learning elements</h2>
+<ul>
+<li>Composition with known classes</li>
+<li>Independent instances</li>
+<li>Placement versus construction</li>
+<li>Reusing a learned capability</li>
+</ul>
+<h2 id="Primitives_Melencolia--tutorial--in-the-museum">In the museum</h2>
+<p>Dürer's objects gather in the museum's Melencolia hall. Our tutorial closes this sequence with a smaller task: make an arrangement from two instances of your cube and the familiar sphere point. The reflective text can ask what geometry promises; the tutorial gives you enough control to make an arrangement of your own.</p>
+<p>There is no new mesh recipe here. Keep CubeBody from Cube and PointBody from the earlier point lessons. These are recognizable constructions, not substitutes downloaded for the closing image.</p>
+<h2 id="Primitives_Melencolia--tutorial--make-this-study">Make this study</h2>
+<p>Attach lesson.gd to a unit-scale Node3D named ArrangementStudy in this hall's working copy. Place that study at floor level. The cube's local bottom is y = 0; the sphere's centre is one radius above the floor. PointBody retains pickup and frozen release; the cubes remain visible mesh objects without colliders.</p>
+<p>Create the following files together. The complete main program appears once; the remaining listings name every local code dependency. Earlier files return unchanged unless this lesson explicitly identifies a later edition.</p>
+<h3 id="Primitives_Melencolia--tutorial--the-program">The program</h3>
+<!-- student-code:lesson.gd -->
+<pre><code class="language-gdscript">extends Node3D
+const CubeBody = preload("cube_body.gd")
+const PointBody = preload("point_body.gd")
+var places: Array[Vector3] = [Vector3(-0.8, 0, 0), Vector3(0.5, 0, -0.7)]
+var cubes: Array[Node3D] = []
+var point := PointBody.new()
+
+func _ready() -&gt; void:
+    for place in places:
+        var cube := CubeBody.new()
+        cube.position = place
+        add_child(cube)
+        cubes.append(cube)
+    point.position = Vector3(0.1, PointBody.RADIUS, 0.6)
+    add_child(point)
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-cube_bodygd">Dependency: cube_body.gd</h3>
+<!-- student-code:cube_body.gd -->
+<pre><code class="language-gdscript">extends "face_body.gd"
+# Eight shared positions; each triple addresses three entries.
+var points: Array[Vector3] = [
+    Vector3(-0.5, 0, -0.5), Vector3(0.5, 0, -0.5),
+    Vector3(0.5, 1, -0.5), Vector3(-0.5, 1, -0.5),
+    Vector3(-0.5, 0, 0.5), Vector3(0.5, 0, 0.5),
+    Vector3(0.5, 1, 0.5), Vector3(-0.5, 1, 0.5)]
+var faces: Array[Vector3i] = [
+    Vector3i(4, 7, 5), Vector3i(5, 7, 6),
+    Vector3i(0, 4, 1), Vector3i(1, 4, 5),
+    Vector3i(2, 6, 3), Vector3i(3, 6, 7),
+    Vector3i(1, 2, 0), Vector3i(0, 2, 3),
+    Vector3i(0, 3, 4), Vector3i(4, 3, 7),
+    Vector3i(5, 6, 1), Vector3i(1, 6, 2)]
+
+func _init() -&gt; void:
+    super()
+    show_faces(points, faces)
+
+func other_diagonal() -&gt; void:
+    faces[0] = Vector3i(4, 6, 5)
+    faces[1] = Vector3i(4, 7, 6)
+    show_faces(points, faces)
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-face_bodygd">Dependency: face_body.gd</h3>
+<!-- student-code:face_body.gd -->
+<pre><code class="language-gdscript">extends Node3D
+## Visible triangular faces and their edges. This class adds no collision.
+const LineSkin = preload("line_skin.gd")
+var surface := MeshInstance3D.new()
+var edges := Node3D.new()
+
+func _init() -&gt; void:
+    add_child(surface)
+    add_child(edges)
+    var paper := StandardMaterial3D.new()
+    paper.albedo_color = Color(0.92, 0.91, 0.87)
+    paper.roughness = 0.75
+    surface.material_override = paper
+
+func show_faces(points: Array[Vector3], faces: Array[Vector3i]) -&gt; bool:
+    surface.mesh = null
+    for edge in edges.get_children():
+        edge.free()
+    if faces.is_empty():
+        return false
+    for face in faces:
+        for index in [face.x, face.y, face.z]:
+            if index &lt; 0 or index &gt;= points.size():
+                return false
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        if (c - a).cross(b - a).length() &lt; 0.00001:
+            return false
+    var builder := SurfaceTool.new()
+    builder.begin(Mesh.PRIMITIVE_TRIANGLES)
+    for face in faces:
+        var a := points[face.x]
+        var b := points[face.y]
+        var c := points[face.z]
+        # Godot's front faces use clockwise winding.
+        var normal := (c - a).cross(b - a).normalized()
+        for point in [a, b, c]:
+            builder.set_normal(normal)
+            builder.add_vertex(point)
+        for pair in [[a, b], [b, c], [c, a]]:
+            var edge := LineSkin.new()
+            edge.material_override.albedo_color = Color(0.04, 0.04, 0.045)
+            edges.add_child(edge)
+            var difference: Vector3 = pair[1] - pair[0]
+            edge.show_segment(pair[0], difference, difference.length())
+    surface.mesh = builder.commit()
+    return true
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-line_skingd">Dependency: line_skin.gd</h3>
+<!-- student-code:line_skin.gd -->
+<pre><code class="language-gdscript"># Supplied renderer, adapted from commons/primitives/line/line.gd.
+# This finite cylinder gives the segment a visible thickness. It is not a collider.
+# Inputs share the parent station's local frame; that station has unit scale.
+extends MeshInstance3D
+
+func _init() -&gt; void:
+    var cylinder := CylinderMesh.new()
+    cylinder.top_radius = 0.012
+    cylinder.bottom_radius = 0.012
+    cylinder.radial_segments = 16
+    cylinder.rings = 0
+    mesh = cylinder
+    var finish := StandardMaterial3D.new()
+    finish.albedo_color = Color(0.98, 0.70, 0.82)
+    finish.roughness = 0.3
+    material_override = finish
+    visible = false
+
+func show_segment(start: Vector3, displacement: Vector3, distance: float) -&gt; void:
+    # A zero-length segment has no direction. Do not normalize it.
+    visible = distance &gt; 0.0001
+    if not visible:
+        return
+    (mesh as CylinderMesh).height = distance
+    position = start + displacement * 0.5
+    # CylinderMesh runs along local Y. This borrowed basis aligns it to the ends.
+    var direction := displacement / distance
+    var right := direction.cross(Vector3.UP).normalized()
+    if right.length() &lt; 0.001:
+        right = Vector3.RIGHT
+    var depth := right.cross(direction).normalized()
+    basis = Basis(right, direction, depth)
+</code></pre>
+<h3 id="Primitives_Melencolia--tutorial--dependency-point_bodygd">Dependency: point_body.gd</h3>
+<!-- student-code:point_body.gd -->
+<pre><code class="language-gdscript">extends XRToolsPickable
+
+const RADIUS := 0.14
+
+func _init() -&gt; void:
+    freeze = true
+    freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+    release_mode = XRToolsPickable.ReleaseMode.FROZEN
+    ranged_grab_method = XRToolsPickable.RangedMethod.NONE
+    collision_layer = 4
+    collision_mask = 196615
+
+    var surface := MeshInstance3D.new()
+    var sphere := SphereMesh.new()
+    sphere.radius = RADIUS
+    sphere.height = RADIUS * 2.0
+    surface.mesh = sphere
+    add_child(surface)
+
+    var boundary := CollisionShape3D.new()
+    var shape := SphereShape3D.new()
+    shape.radius = RADIUS
+    boundary.shape = shape
+    add_child(boundary)
+</code></pre>
+<h2 id="Primitives_Melencolia--tutorial--read-the-construction">Read the construction</h2>
+<p>The loop constructs two independent CubeBody instances and assigns positions from places. Reusing a class does not mean sharing one mutable vertex array. Moving an instance should leave its geometry and its neighbour unchanged.</p>
+<p>The point is the same white sphere with the same size and interaction settings. It can be picked up and left somewhere else during a run. That temporary placement is not written back into this script. To keep an arrangement across runs, put your chosen coordinates in the source; persistent composition is a later capability.</p>
+<p>The program uses constructors, arrays, a loop and positions you have already met. Scale and rotation stay for Transformation. You can still change the relation between bodies through distance, overlap and placement. The resulting arrangement is your decision, not the inevitable output of the cube rule.</p>
+<h2 id="Primitives_Melencolia--tutorial--make-it-your-own">Make it your own</h2>
+<p>Make a second arrangement by changing only places and the point's initial position. Keep the classes unchanged. Show how a different interval or overlap changes what you notice. You should be able to reconstruct both arrangements from their saved script values.</p>
+<h2 id="Primitives_Melencolia--tutorial--after-the-chapter-an-arrangement-without-a-recipe">After the chapter: an arrangement without a recipe</h2>
+<p>Choose a different arrangement in a clear part of your working museum hall. Use the earlier files as references, but write your own small main script. This is an independent challenge; there is no new construction hidden in a supplied answer.</p>
+<ul>
+<li>Generate a list of at least five positions with a rule you can explain. Keep an unchanged source list and modify an independently owned copy.</li>
+<li>Reuse PointBody and FaceBody. Choose three non-collinear entries from the list and connect them as a face.</li>
+<li>Show two spheres of equal radius with different resolutions, using the construction already studied in Godot Primitives.</li>
+<li>Decide their spacing and arrangement. Keep the known collider behaviour; making a new walkable structure is outside this task.</li>
+</ul>
+<p>Show the arrangement to someone who has not seen your script. Locate the stored values, the variable referring to each body, and the indices establishing the face. Explain what the generator decided, what resolution changed, what you preserved, and one aesthetic choice that no calculation required.</p>
+<p>Run your script and check that changing the copy leaves the source intact, that the selected face has area, and that each sphere keeps its own mesh. Then change one choice and predict the result before running again. Successful execution is evidence about the program; explaining and transferring the choices gives evidence about what you learned.</p>
+<p>Carry CubeBody and PointBody into Transformation. A body that you can place is ready to become a body whose position, rotation or scale changes over time.</p>
+<h2 id="Primitives_Melencolia--tutorial--source-and-scope">Source and scope</h2>
+<p>The runnable study is a small reconstruction in the existing Endless Museum. The hall contains additional artifacts; this lesson does not reproduce their complete runtime. Camera, light, player and XR Tools are declared museum infrastructure. Local geometry is generated by the printed files.</p>
+<p><a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/lessons/Primitives_Melencolia/lesson.gd" rel="noopener" target="_blank">Current lesson.gd</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-03-ada-xr-starter/ada-xr-starter.zip" rel="noopener" target="_blank">Complete working project</a> · <a href="http://localhost:3003/book-review/doc/book/iterations/2026-10-06-starter-one-course/index.html" rel="noopener" target="_blank">Verification and changes</a></p></div>
+              <div class="page-end">Melencolia <span>Tutorial</span></div>
+            </article><article class="page final" tabindex="0" aria-label="Melencolia — final">
+              <div class="running-head"><span>Reflect / final.md</span><a href="http://localhost:3003/book-review/commons/maps/Primitives_Melencolia/final.md" target="_blank" rel="noopener">Source ↗</a></div>
+              <div class="prose"><h1 id="Primitives_Melencolia--final--melancholy-of-finitude">Melancholy of Finitude</h1>
+<p>What keeps you looking after you know the form?</p>
+<!-- @pyramid -->
+<p>Four pale blue pyramids mark the corners of a raised square. Before going closer, try to hold the arrangement in mind. Where would you put a fifth?</p>
+<p>Walk around the court. One pyramid passes in front of another. A gap opens where two outlines seemed to meet. The objects have stayed still; your movement changes the picture. You have met this distinction before, but now the picture has become a place with room around it.</p>
+<p>Take the side ramp onto the platform. The four corners repeat a form you can describe: a square base, four triangular sides, one apex. Five vertices, eight edges, five faces. Knowing those counts helps you recognise the family. It leaves you free to notice something else.</p>
+<!-- @pyramidlong -->
+<p>The fifth pyramid is pink, taller, and stands in the centre on a matching block. Look back at a corner. Does the centre seem to organise the others, or have you made it important because it rises above them?</p>
+<p>Its base is still square. Its apex is still a single point above it. The tall pyramid's source collects the base vertices and then adds that point:</p>
+<pre><code class="language-gdscript">vertices.append_array(ring)
+vertices.append(_apex_position(ring))
+</code></pre>
+<p>The same connections can carry a different height. In this version the pyramid's base is 0.8 metres wide and its apex rises 2.8 metres above that base. The pink block lifts the whole pyramid another 0.8 metres above the court. The script triangulates the square base into two faces for rendering; together with the four sides, that makes six triangles. We can explain how it is built without settling what its height does to the arrangement.</p>
+<!-- @cube_scene -->
+<p>Four ochre cubes sit around the spire in a cross. Follow that cross with your eyes, then look toward the corner pyramids. A few familiar solids are becoming a court, a monument, perhaps a model of somewhere you would like to go. Which reading arrived first?</p>
+<p>The arrangement returns to the room's earlier floor plan. Its reference belongs to an anonymous sixteenth-century manuscript of geometric and perspective studies: solids drawn, combined and staged until a study begins to suggest an unfamiliar architecture.<sup id="Primitives_Melencolia--final--fnref:solids"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:solids">1</a></sup> Here the forms stand on a platform made from the same cube vocabulary as the museum floor. The support is already part of the picture.</p>
+<p>Imagine one cube placed outside the cross. Its construction would be unchanged; its relation to the court would be different. What you know now gives you several ways to make it. None chooses its place for you. You do not need to build every possibility before leaving this one.</p>
+<p><img alt="The museum court from three viewpoints: aligned, oblique and a plan from above." loading="lazy" src="http://localhost:3003/book-review/doc/book/figures/Primitives_Melencolia/melencolia-one-arrangement.png"/></p>
+<p><em>The same court, from three viewpoints. At the left, two corner pyramids hide two others. None of the objects has moved.</em></p>
+<!-- @snap_pyramid_puzzle -->
+<p>Beside the front of the court, five snap points offer a small construction. Connect four into a base cycle and join each to the fifth. Watch what the puzzle accepts.</p>
+<p>Its detector recognises those connections. It does not measure whether the base is square. Keep that distinction close: the program can complete its test while your question about the form remains open. The court was here before the test succeeded. Its place in the room has another history.</p>
+<!-- @ -->
+<h2 id="Primitives_Melencolia--final--the-tools-are-still-here">The tools are still here</h2>
+<!-- @durer_scene -->
+<p>Follow the raised connection to the next platform. The large stone stands to the left; the winged figure sits to the right, her head resting on a fist. A sphere lies near the sleeping dog. Above them, the ladder, scales, hourglass and bell give the wall its own order. Beneath them, a saw and a carpenter's plane lie among the small tools. Here the forms have company.<sup id="Primitives_Melencolia--final--fnref:durer"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:durer">2</a></sup></p>
+<p>The compass is in her hand. She has not lost the instrument. A book lies on her lap, and the skirt falls in heavy folds over her knees. Beside her, a smaller winged figure bends over a tablet. One is drawing. The other looks away.</p>
+<p>Earlier, a sphere could introduce a primitive. Here it occupies ground beside a tired animal. Nothing has happened to the sphere's definition. Much has happened to what we can see in it.</p>
+<p>We have carried something from the court of ideal forms into this clutter of work and waiting. We might call it <em>geometric desire</em>: the wish that a form might let us see further, or give us somewhere else to stand. Here that wish meets a body that cannot be reduced to its instruments. Knowing how to construct another solid does not tell her what to do next.</p>
+<p>Perhaps we had hoped that getting the form right would put something else right with it. The compass can give a circle a radius. What should we make with the circle? That question stays with the hand holding the instrument.</p>
+<p>Walk sideways. The stone hides the smaller figure, then lets it appear again. Our sculpture gives depth to an engraving; Dürer did not leave us the far side of this room. Those hidden surfaces are decisions we have made. The apparent completeness of the model rests on what the picture could not tell us.</p>
+<p><img alt="The reconstructed Melencolia tableau inside the museum." loading="lazy" src="http://localhost:3003/book-review/doc/book/figures/Primitives_Melencolia/melencolia-tableau.png"/></p>
+<p><em>After Dürer's engraving: an arrangement of sculpted figures, tools and solids. Their placement follows the image; their depth is an interpretation. Walking changes which objects conceal one another.</em></p>
+<p>The stone has six pentagonal faces and two triangular ends. Its mesh begins with a rhombohedron and cuts off two opposite corners. The proportions are one possible reading of the printed form. We can make a closed solid without claiming to have recovered the only solid the image permits.</p>
+<p>Now look up at the numbered square. Choose a row and add it before reading further.</p>
+<pre><code class="language-text">16   3   2  13
+ 5  10  11   8
+ 9   6   7  12
+ 4  15  14   1
+</code></pre>
+<p>Try a column. Each row and column, and the two main diagonals, sums to 34. The 15 and 14 in the bottom row recall 1514, the year of the engraving. The numbers work.</p>
+<p>Stay a little longer. Has that correct answer finished what you came to look at?</p>
+<h2 id="Primitives_Melencolia--final--what-do-we-want-a-form-to-promise">What do we want a form to promise?</h2>
+<p>We have learned to recognise a construction and change its rule. The reasons for choosing it have histories too.<sup id="Primitives_Melencolia--final--fnref:geometric-desire"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:geometric-desire">7</a></sup></p>
+<p>This desire will return with different demands. In the patterned surfaces of the Alhambra, geometry belongs to built space; Escher's study of its mosaics later fed his own investigations of repeating figures.<sup id="Primitives_Melencolia--final--fnref:pattern"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:pattern">4</a></sup> A rule can continue beyond the piece of wall that holds it. Our museum also stops building at an edge while letting us imagine more.</p>
+<p>Malevich's tilted square in <em>White on White</em> offers another possibility: a painted surface can suggest release into unbounded space. Hilma af Klint's <em>Paintings for the Temple</em> give abstract forms a different task, within a spiritual inquiry.<sup id="Primitives_Melencolia--final--fnref:abstraction"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:abstraction">5</a></sup> The same circle would not mean the same thing in each of these worlds. What someone asks of it matters.</p>
+<p>And abstraction need not carry us away from the body. Lygia Clark's hinged metal <em>Bichos</em> ask for hands: a flat arrangement opens into a changing object.<sup id="Primitives_Melencolia--final--fnref:clark"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:clark">6</a></sup> To call this Brazilian work only escapist would miss that return to touch. Perhaps the escape is from having to remain a spectator. What can geometry make possible between a form and the person who meets it?</p>
+<p>These histories meet here because we have placed them beside one another. Their different desires remain. Keep that question beside the seated figure. The tools are here. Their next use is not settled.</p>
+<h2 id="Primitives_Melencolia--final--the-number-that-was-already-running">The number that was already running</h2>
+<!-- @frame_counter_display -->
+<p>By the way out, a number is changing. It is the same counter you met on your first step into this chapter: <code>Engine.get_process_frames()</code>, process frames since the engine started, read fresh on every call.</p>
+<p>It is much larger now. Some of that is yours — the picking up, the drawing, the walking, the shifting of a start. A fixed quantity of it is not, and never will be. The frames that passed before you had somewhere to stand did not become yours by being counted alongside the ones that followed. This number adds them together anyway. It has no field for the difference.</p>
+<p>In the first room we said that its first number for you was not its first number. That is still the one thing it will not tell you, and you now know several reasons why. A record keeps what its rule admits. Someone chose the rule. The number keeps growing while you read it.</p>
+<h2 id="Primitives_Melencolia--final--enough-to-continue">Enough to continue</h2>
+<p>Dürer's engraving is itself a made thing. An accomplished image gives us an encounter with unfinished work. That matters here. Looking, arranging, imagining and taking pleasure in a form can keep an investigation moving while its purpose is unsettled. The aesthetic attention is already doing work.</p>
+<p>A few tools, and more possible constructions than we have time to pursue.<sup id="Primitives_Melencolia--final--fnref:sublime"><a class="footnote-ref" href="#Primitives_Melencolia--final--fn:sublime">3</a></sup></p>
+<p>Look back toward the five pyramids. They have become another picture from here. The objects stayed still while your viewpoint changed. In transformation, you can watch from one place as objects move, turn and scale. Choose one relation from this court—the repeated corners, the tall centre, the distance between the platforms—and ask what would survive such a change.</p>
+<p>We leave with enough to continue. There is still something here we have not finished looking at.</p>
+<!-- @ -->
+<div class="footnote">
+<hr/>
+<ol>
+<li id="Primitives_Melencolia--final--fn:solids">
+<p>Anonymous, sixteenth-century geometric and perspective manuscript, Herzog August Bibliothek, Cod. Guelf. 74.1 Aug. 2°. See <a href="https://publicdomainreview.org/collection/solid-objects/" rel="noopener" target="_blank"><em>Solid Objects</em></a> and the <a href="https://pdimagearchive.org/images/4577a16c-d0e9-43d6-96fc-f125c47c6afe/" rel="noopener" target="_blank">image selected for this room</a>. The court follows the drawing's blue corner spires, pink centre and ochre blocks within the earlier AdaResearch floor arrangement. Its dimensions are adapted for the museum. The manuscript is not attributed here to Dürer; its additional compound solids remain references for later studies. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:solids" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="Primitives_Melencolia--final--fn:durer">
+<p>Albrecht Dürer, <em>Melencolia I</em> (1514), <a href="https://www.metmuseum.org/art/collection/search/360018" rel="noopener" target="_blank">Metropolitan Museum of Art</a>. The museum describes several interpretations rather than a settled key. The <a href="https://www.nga.gov/artworks/6641-melencolia-i" rel="noopener" target="_blank">National Gallery of Art</a> provides a detailed visual description. AdaResearch follows the principal objects and their image relationships in a stylised sculptural arrangement. Depth, rear surfaces, dimensions and the solid's proportions are authored interpretations. The passage from ideal form to embodied hesitation is this book's reading, not a settled account of Dürer's intention. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:durer" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="Primitives_Melencolia--final--fn:sublime">
+<p>Kant's <a href="https://www.gutenberg.org/files/48433/48433-h/48433-h.htm" rel="noopener" target="_blank"><em>Critique of Judgement</em></a>, §§25–27, discusses the mathematical sublime through the distinction between apprehending parts and comprehending a whole; §49 describes aesthetic ideas as occasioning thought beyond what a determinate concept can exhaust. These offer a later vocabulary for this room's investigation: how a finite arrangement can keep attention moving among possibilities we have not yet specified. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:sublime" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="Primitives_Melencolia--final--fn:pattern">
+<p>The <a href="https://www.metmuseum.org/essays/geometric-patterns-in-islamic-art" rel="noopener" target="_blank">Metropolitan Museum's account of geometric pattern</a> describes its construction and combination with other ornament. It does not license a single spiritual meaning for all Islamic geometry. <a href="https://escherinhetpaleis.nl/en/about-escher/timeline" rel="noopener" target="_blank">Escher in The Palace's timeline</a> records his sustained study of the Alhambra and Córdoba mosaics in 1936; tessellation already appeared in his earlier work. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:pattern" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="Primitives_Melencolia--final--fn:abstraction">
+<p>Kazimir Malevich, <a href="https://www.moma.org/collection/works/80385" rel="noopener" target="_blank"><em>Suprematist Composition: White on White</em> (1918)</a>, MoMA; Hilma af Klint, <a href="https://www.guggenheim.org/teaching-materials/hilma-af-klint-paintings-for-thefuture/paintings-for-the-temple" rel="noopener" target="_blank"><em>Paintings for the Temple</em></a>, Guggenheim. These are distinct historical projects. Their juxtaposition here asks what abstraction promises; it does not establish a direct line of influence from Dürer or treat spiritual claims as scientific evidence. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:abstraction" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="Primitives_Melencolia--final--fn:clark">
+<p>Lygia Clark, <a href="https://www.moma.org/collection/works/91767" rel="noopener" target="_blank"><em>Poetic Shelter</em> (1964)</a>, MoMA, and the museum's account of <a href="https://www.moma.org/collection/terms/neo-concrete-art" rel="noopener" target="_blank">Neo-Concrete art</a>. Clark's participatory work is a particular Brazilian response to geometric abstraction, not a description of every South American modernism. The suggestion that participation changes what escape can mean is this book's proposal. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:clark" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+<li id="Primitives_Melencolia--final--fn:geometric-desire">
+<p>Lynn Gamwell, <em>Mathematics and Art: A Cultural History</em> (Princeton University Press), especially the preface, the account of chapter 2 on proportion, and the discussions of mathematical models and Minimal Art. Read in the <a href="https://docs.google.com/document/d/1CaUhLfk_CvbcpKYPoIcafWBVoxSZvnw8NujHhC2thIQ/edit?tab=t.0" rel="noopener" target="_blank">project's study copy</a>. These discussions inform our distinction between constructing a relationship and assigning it aesthetic or cultural authority. The reading of Ada's pedestals, columns and geometric desire is our own. It does not establish a common intention or a line of influence among the artists brought together here. <a class="footnote-backref" href="#Primitives_Melencolia--final--fnref:geometric-desire" title="Jump back to footnote 7 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+              <div class="page-end">Melencolia <span>Reflection</span></div>
+            </article></section>
+</main>
+<footer><span id="position" role="status" aria-live="polite">15 / 15 · Melencolia</span><span class="desktop-hint">Read at your own pace · Each page scrolls independently</span><span>5 October 2026 · Tutorial + reflection</span></footer>
+
+</body>
+</html>

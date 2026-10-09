@@ -1,0 +1,116 @@
+{
+	"registry_info": {
+		"name": "wall_drawing_291",
+		"description": "Sol LeWitt's Wall Drawing 291 (1976) as a black wall of 30 cm squares where the visitor is the draftsman: each square is pressed to draw its one line and pressed again to turn it.",
+		"note": "Per-token registry file so parallel builders never share one JSON. No randomness anywhere in the artifact: the open choice in LeWitt's instruction belongs to whoever presses, so the work can stand before the randomness sequence. start = drawn is ONE fixed execution authored by hand in the script's DRAWN_SHEET, not generated."
+	},
+	"artifacts": {
+		"wall_drawing_291": {
+			"dna": {
+				"promoted": "2026-09-16",
+				"stage": "2 - variation",
+				"axes": {
+					"start": [
+						"empty",
+						"drawn"
+					]
+				},
+				"default": "start=empty. The instruction waiting for its draftsman, which is the artifact's claim: the choice in each square belongs to whoever stands here. This artifact is new and has zero placements, so the default is a design choice with no preservation duty.",
+				"note": "DERIVED from the @export_enum line by tools/apply_dna_block.py (values empty|drawn), then re-indented by hand to the file's tabs; the values were not retyped. The axis is what the wall ARGUES before anyone touches it: an instruction with no execution, or one execution already on the wall. `drawn` is AUTHORED by hand in the script's DRAWN_SHEET (each row mirrors left to right with the diagonals swapped, except one pair in row 4), not generated: there is no RNG in the file, so the two tiles are two fixed pictures. columns and rows are exported and reachable from a token but are NOT axes: they change the size of the wall, not its argument. Nothing interactive shows in a still; the press is the probe's to prove (commons/testing/probe_wall_drawing_291.gd), not the sweep's.",
+				"predicted_degeneracy": {
+					"pair": "empty against drawn",
+					"percent": 1.1,
+					"arithmetic": "REGISTERED BEFORE ANY CAPTURE. A two-value axis has one pair, so it is also the closest. The drawn sheet has 20 straight lines (11 V, 9 H) at 0.296 x 0.016 m = 0.00474 m2 each, 0.0947 m2, and 20 diagonals at 0.4026 x 0.016 m = 0.00644 m2 each, 0.1288 m2: 0.2235 m2 of light chalk on the black face. The face is 3.85 x 2.20 = 8.47 m2, so the lines are 2.64% of it. The plate's last line also changes ('0 of 40 squares drawn' to 'all 40 squares drawn'), about 0.68 x 0.037 m with maybe half the glyph pixels different, under 0.02 m2, adding about 0.1%. The canonical camera fits by the DIAGONAL, and a 3.85 x 2.20 m flat wall seen at yaw 0.62 fills about 40% of frame, so about 2.75% x 0.40 = 1.1% of frame pixels differ. The difference is light on near-black, the largest contrast the scene has, so a focus metric on the hottest pixels should read far higher than the area share. A LOWER BOUND like every prediction in this corpus. If the sweep comes back BELOW 1.1%, suspect the harness before the axis: a 1.6 cm line across a frame about 5 m wide is 2-3 px at 512 px and can alias away, and a fit-by-diagonal on this wide flat body may leave the grid too small, which dna.framing below 1.0 would fix."
+				}
+			},
+			"lookup_name": "wall_drawing_291",
+			"name": "Wall Drawing 291",
+			"class_name": "WallDrawing291",
+			"scene": "res://commons/artifacts/wall_drawing_291/wall_drawing_291.tscn",
+			"category": "art",
+			"artifact_type": "interactive_algorithm",
+			"complexity": "beginner",
+			"sequence": "tiling",
+			"map_sequences": [
+				"tiling"
+			],
+			"description": "A black wall ruled into 30 cm squares, 8 across and 5 up, the lowest row half a metre above the floor. After Sol LeWitt, Wall Drawing 291 (1976), whose instruction the chapter 'Regularity' in 10 PRINT CHR$(205.5+RND(1)); : GOTO 10 sets beside the one-line program (p. 81): a 30 cm grid on a black wall, one line bisecting each square (vertical, horizontal, diagonal right or diagonal left), every square filled, and the direction in each square left to the draftsman. The program flips between two diagonals; the instruction offers four directions and leaves the choosing to a person. Here that person is the visitor. Every square is its own press target. The first press draws a vertical line in light chalk; each further press turns it, vertical to horizontal to diagonal right to diagonal left and back to vertical. A drawn square is never blank again. The plate reads the rule in paraphrase and keeps a count that describes rather than grades: 'N of 40 squares drawn', then 'all 40 squares drawn'. START AGAIN clears the wall. There is no randomness anywhere in the code; whatever irregularity the wall ends up with came from a hand.",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"size_group": "large",
+			"hazard": false,
+			"interactions": [
+				"press a blank square: it gets a vertical line",
+				"press a drawn square again: the line turns, vertical to horizontal to diagonal right to diagonal left, and never goes back to blank",
+				"fill all forty and watch the plate change from a count to 'all 40 squares drawn'",
+				"press START AGAIN and draft a different wall under the same rule",
+				"walk up to it already drafted: #start:drawn hangs one execution authored by hand"
+			],
+			"parameters": {
+				"columns": 8,
+				"rows": 5,
+				"start": "empty",
+				"square_m": 0.30,
+				"grid_base_m": 0.50,
+				"line_width_m": 0.016
+			},
+			"token_examples": [
+				"wall_drawing_291",
+				"wall_drawing_291#start:drawn",
+				"wall_drawing_291#columns:10#rows:6",
+				"wall_drawing_291#columns:4#rows:3#start:drawn"
+			],
+			"token_note": "`columns` and `rows` are BOTH listed in GridInteractablesComponent.CONFIG_PARAM_NAMES (the list at :16: `rows` in its first lines, `columns` under the art history gallery params, `cols` too), so `#columns:10#rows:6` arrives as values and not as the tutorial rotation shorthand. `cols` is accepted as an alias. If a count ever arrives as the boolean true (the shorthand misparse of an unlisted key), _count_value refuses it and keeps the current value instead of reading it as 1. columns clamps to 1..16 and rows to 1..10. `start` is word-valued (`empty` | `drawn`) and safe under any key. The default 8 x 5 needs no config. A config that changes columns or rows rebuilds the wall; a config that changes only start re-drafts the same wall in place, with no rebuild. Both clear what the visitor drew. A config that changes none of the three does nothing.",
+			"map_note": "A WALL WORK, 3.85 m wide at the default 8 x 5 (0.20 m black margin, 2.40 m grid, 0.25 m gutter, 0.80 m plate column, 0.20 m margin) and 2.20 m tall, presenting +Z with its base at y = 0 and all 6 cm of its thickness behind z = 0. NO BODY COLLIDER by contract; the press areas (40 push_button.tscn instances with their round meshes hidden, their cap bodies switched off at layer 0 / mask 0, and their area widened to a 27 x 27 cm box that runs from 5 cm in front of the face to 25 cm behind it, so a hand pushing through the collider-less wall stays one press) and START AGAIN's panel sit under nodes marked em_local_instrument, so the museum's seal walk does not read them as footprint. The press boxes reach 19 cm past the work's own back face, so a hand reaching through whatever backs it from the far side could press a square. The top row's centre is at 1.85 m and the bottom row's at 0.65 m: a standing hand reaches every square, and the desktop pointer (5 m ray) presses any of them from about a metre in front. Wants a front approach and room to step sideways along it. Placed 2026-09-16 in Pattern_Foundry (tiling, hall 1) at (21,36), rotation 180, against the row-37 wall, with sculpture_clear_rects [19,33,24,37] keeping dressing off its standing area. It uses no randomness, so it may stand before the randomness sequence: the exception comes from the visitor's hand.",
+			"footprint": [
+				4,
+				1,
+				2.2
+			],
+			"spatial_needs": {
+				"platform": "none",
+				"footprint_cells": 4,
+				"footprint_source": "authored",
+				"clearance": {
+					"front": 3,
+					"back": 0,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": true,
+				"orientation": "face_approach",
+				"isolation": "none",
+				"reading_radius": 3
+			},
+			"tags": [
+				"sol_lewitt",
+				"wall_drawing",
+				"conceptual_art",
+				"instruction",
+				"grid",
+				"regularity",
+				"ten_print",
+				"draftsman",
+				"interactive",
+				"no_randomness"
+			],
+			"qfep_connection": "LeWitt's sentence hands the direction of every line to the draftsman and then says nothing about how to choose. Most executions of 291 hide that choice inside a crew and a date; this wall puts it in the visitor's hand one square at a time, so the rule and the person carrying it out stand in the same room. The book reads the instruction beside 10 PRINT, where a coin flip decides each diagonal. Here nothing is flipped. Any pattern or any mess on the wall is a record of a body deciding, and START AGAIN keeps the decision open instead of sealing it into a finished object.",
+			"measurements": {
+				"aabb_size": [
+					3.85,
+					2.2,
+					0.125
+				],
+				"aabb_center": [
+					0.0,
+					1.1,
+					0.0025
+				],
+				"max_dimension_m": 3.85,
+				"source": "computed from the shipped defaults: wall 3.85 x 2.20 x 0.06 behind z = 0; the frontmost mesh is START AGAIN's button cap, about 6.5 cm proud. Minimum Y is 0.",
+				"measured_at": "unmeasured in engine; run tools/sync_footprints.py after the first capture"
+			}
+		}
+	}
+}

@@ -1,0 +1,44 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A handle you can hold · Ada Research</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f5f2eb;color:#242a29;font:17px/1.65 system-ui,sans-serif}
+main,header,footer{max-width:1400px;margin:auto;padding:32px 5vw}header{padding-top:58px;padding-bottom:0}
+h1{font:500 clamp(36px,5vw,65px)/1.1 Georgia,serif;max-width:900px;margin:20px 0}
+h2{font:500 30px/1.25 Georgia,serif}p{max-width:900px}a{color:#255d52;text-underline-offset:4px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#4f6b62}
+.lead{font-size:21px}.metrics{display:flex;flex-wrap:wrap;gap:18px;margin:30px 0}
+.metric{background:#e5ece5;padding:17px 24px;border-left:3px solid #3a7162}
+.metric strong{display:block;font:32px Georgia,serif}.metric span{font-size:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:22px}figure{margin:0}img{width:100%;height:auto;display:block;border-radius:5px}
+figcaption{font-size:14px;line-height:1.5;color:#58635e;margin:12px 0 24px}section{border-top:1px solid #c8d0c7;margin-top:30px;padding-top:20px}
+code{font-size:14px;overflow-wrap:anywhere}pre{white-space:pre-wrap;background:#e8ede6;padding:20px}
+.note{font-size:14px;color:#58635e}li{margin:8px 0}table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #c8d0c7}
+@media(max-width:760px){.pair{grid-template-columns:1fr}header,main,footer{padding-left:20px;padding-right:20px}table{font-size:13px}th,td{padding:8px}}
+
+.hero-image img{width:100%;height:auto;display:block}.hero-image{margin:0}.zoom-note{font-size:.9rem;color:#496c63}
+.pair img{object-fit:contain}pre{overflow-x:auto}.comparison>input{accent-color:#234e42;margin:1rem .4rem 1rem 1rem}.comparison>label{display:inline-block;border:1px solid #315d50;border-radius:30px;padding:.65rem 1.2rem;cursor:pointer}
+.comparison>input:checked+label{background:#234e42;color:white}.comparison .before-view{display:none}#view-before:checked~.before-view{display:block}#view-before:checked~.after-view{display:none}.comparison figcaption{padding:1rem 0}
+
+.comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.comparison figure{margin:0}.comparison img{width:100%;height:auto} @media(max-width:760px){.comparison{grid-template-columns:1fr}}</style></head>
+<body><header><div class="eyebrow">Ada Research · Physical interface pilot · 21 September 2026</div>
+<h1>A handle<br>you can hold.</h1>
+<p class="lead">The grammar station now has a moving 3D slider. Its title, numbers and depth readout remain flat on surfaces. The interface stays in front of the work.</p>
+<p><a href="../2026-09-20-interface-rack-wrapper-review/index.html?placement=front">Previous screen version</a> · <a href="/necklace/thread?map=LSystems_Grammar_Lab&amp;role=primary">Grammar hall</a></p>
+<div class="metrics"><div class="metric"><strong>6 stops</strong><span>A graspable handle along an 18 cm track</span></div><div class="metric"><strong>Grab + pointer</strong><span>Both operate the same retained selection</span></div><div class="metric"><strong>46 + 46</strong><span>Physical checks and retained-screen regressions pass</span></div></div></header>
+<main><section><h2>Physical movement, flat lettering</h2>
+<figure class="hero-image"><a href="physical-close.png"><img src="physical-close.png" width="1600" height="1200" alt="The physical depth slider with a raised dark grip, orange index and six printed positions, above a flat Depth 2 readout"></a><figcaption>Actual Godot rendering. The cap projects from the face and moves through six positions. The selected depth remains after release.</figcaption></figure>
+<p>“2D in 3D” describes the text. The controls can have depth, movement and graspable parts. Here the numbered scale is printed on the face; the grip is a 3D object constrained to its track.</p></section>
+<section><h2>The same station, two ways to operate it</h2>
+<div class="comparison"><figure><a href="physical-close.png"><img src="physical-close.png" width="1600" height="1200" alt="Physical slider at generation two"></a><figcaption><strong>Physical: current default.</strong> Near grab or pointer drag moves the handle.</figcaption></figure><figure><a href="screen-close.png"><img src="screen-close.png" width="1600" height="1200" alt="Preserved flat screen slider at generation two"></a><figcaption><strong>Screen: retained comparison.</strong> Pointer input operates the drawn slider.</figcaption></figure></div>
+<p>Both captures use generation two and exactly the same camera pose. The supporting case, inclination and depth display keep their previous visual size. Physics nodes stay at unit scale in the physical assembly.</p></section>
+<section><h2>Player → controls → work</h2>
+<figure><a href="physical-front.png"><img src="physical-front.png" width="1600" height="1200" alt="Operating-position view with the physical slider in front and all three grammar forms and provenance panels visible behind it"></a><figcaption>Standing test view at local height 1.65 m. The forms and all three provenance boards remain visible behind the controls. <a href="screen-front.png">Compare the screen version from the same position.</a></figcaption></figure>
+<p>The captures instantiate the real artifact in a test scene. They establish its assembly and sightline at this pose; they are not museum-hall or headset captures.</p></section>
+<section><h2>From a moving hand to a changed form</h2>
+<p>The test moves a generated grabber through the actual XR Tools pickup, grab-driver and release path. It visits all six stops in both directions and holds each still. Separate physics rays exercise pointer dragging, competing pointers, exit and focus loss.</p>
+<p>In the real grammar artifact, both grab and pointer input change generation one to two: the first grammar goes from five to twenty-five rendered segments, and its readout changes to Depth: 2. The tests also found and fixed a feedback bug where a stationary held proxy could repeatedly advance its parent track.</p>
+<p><a href="checks.json">46 physical checks</a> and <a href="screen-checks.json">46 retained-screen checks</a> pass. The complete selector range is checked on the isolated control; the real geometry check uses generations one and two. The existing much heavier generation-six rendering has not been performance-certified.</p></section>
+<section><h2>What this establishes</h2>
+<p>One artifact now uses a physical control through a reusable helper. The grammar rules and manuscript are unchanged. The screen variant remains available for comparison; other artifact interfaces retain their existing implementations.</p>
+<p>Headset reach, tracked-hand comfort and Quest performance still need a headset session. The discrete stops have visible feedback; controller vibration or force feedback has not been added.</p>
+<p><a href="implementation.md">Implementation and test notes</a> · <a href="source-hashes.json">Source hashes</a></p></section>
+</main><footer><p><a href="../2026-09-21-interface-fitness-console-review/index.html">Continue: physical choices in front of the fitness landscape.</a></p>Moving 3D control · Flat surface text · Headset comparison pending</footer></body></html>

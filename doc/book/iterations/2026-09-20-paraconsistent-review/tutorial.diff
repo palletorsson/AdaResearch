@@ -1,0 +1,20 @@
+--- before/commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md
++++ commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md
+@@ -6,7 +6,7 @@
+ 
+ Read branch A and branch B and locate the light between them. Give each branch a concrete report about one door, including a time and a source. Decide whether your reports actually contradict each other before proposing a resolution.
+ 
+-The placed junction keeps two upright pillars and a pulsing marker. It displays a relation; it does not run a merge algorithm or derive logical consequences.
++JUNCTION keeps two separate upright pillars and a pulsing marker. OVERLAP leans them into a shared volume; FORK leans them apart. MARKER hides or reveals the glow without moving either branch. The sculpture displays relations; it does not run a merge algorithm or derive logical consequences.
+ 
+ The source makes the operation inspectable:
+ 
+@@ -18,7 +18,7 @@
+         Vector3(0.2, RESOLVED_STUMP_H, 0.2), "branch B", 0.0, true)
+ ```
+ 
+-There is a second arrangement in the source that this placement does not show. In resolved, A keeps its full height and B becomes a labelled stump. The two builder calls make resolution visible as a change in what remains. That is an authored picture of a decision, not a proof that the decision was warranted.
++The MERGE panel exposes JUNCTION, OVERLAP, RESOLVED and FORK. In RESOLVED, A keeps its full height and takes the centre; B becomes a labelled stump. Return to OVERLAP to recover both full-height branches. This is an authored picture of a decision, not a proof that the decision was warranted.
+ 
+ [Implementation](../../../algorithms/postfoundationscrisis/merge_conflict_visualizer.gd). This is an excerpt from the artifact, not a standalone program.
+ 

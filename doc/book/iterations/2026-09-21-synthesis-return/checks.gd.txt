@@ -1,0 +1,98 @@
+	report["checks"] = []
+	var ledger: Node3D = nodes.get("accountability_ledger")
+	var gallery: Node3D = nodes.get("assembly_return")
+	check(report,is_instance_valid(ledger) and is_instance_valid(gallery),"Ledger and return gallery instantiate in actual museum")
+	if not is_instance_valid(ledger) or not is_instance_valid(gallery): quit(1); return
+	check(report,ledger.visitor_record,"Hall opts into actual visitor record")
+	check(report,gallery.bodies.has_node("StartingPose") and not gallery.bodies.has_node("KeptPose"),"No pose is invented before a visitor change")
+	check(report,ledger._count==0 and ledger._entries[0]=="No pose kept yet.","Empty ledger declares missing record")
+	await take_view(report,folder,"museum-empty",origin+Vector3(7.5,1.7,9.7),origin+Vector3(7.5,1.35,12.5),96)
+	var producer: Node3D = load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	producer.body_workshop=true
+	producer.enable_auto_cycle=false
+	producer.enable_hot_reload=false
+	producer.position=Vector3(80,0,60)
+	producer.scale=Vector3.ONE*2
+	root.add_child(producer)
+	await process_frame
+	var body: Node3D=producer.get_node("BodyWorkshop")
+	check(report,not FileAccess.file_exists(pose_path),"Viewing an unedited body creates no saved pose")
+	var hand: int=body.names.find("l_hand")
+	var other: int=body.names.find("r_hand")
+	var other_start: Vector3=body.targets[other]
+	body.joints[hand].on_desktop_grab(null)
+	body.joints[other].on_desktop_grab(null)
+	body.joints[hand].global_position=body.to_global(Vector3(-1.65,1.8,.5))
+	body.joints[other].global_position=body.to_global(Vector3(1.6,.55,-.4))
+	body._process(0)
+	body.joints[hand].on_desktop_drop(null)
+	var saved: Dictionary=Store.read(self)
+	check(report,body.last_keep_error==OK and FileAccess.file_exists(pose_path),"First release writes a local pose record")
+	check(report,Store.changed(saved)==1,"Held second hand is not counted as a released change")
+	var saved_other: Dictionary={}
+	for node in saved.nodes:
+		if node.id=="r_hand":saved_other=node
+	check(report,Store.vector(saved_other.end).is_equal_approx(other_start),"Unreleased hand keeps its previous destination in the record")
+	body.joints[other].on_desktop_drop(null)
+	check(report,body.last_keep_error==OK and Store.changed(Store.read(self))==2,"Second release atomically replaces the existing record")
+	for key in {"head":Vector3(-.55,1.7,.45),"l_knee":Vector3(-.85,.65,.55)}:
+		var i: int=body.names.find(key)
+		body.joints[i].on_desktop_grab(null)
+		body.joints[i].global_position=body.to_global({"head":Vector3(-.55,1.7,.45),"l_knee":Vector3(-.85,.65,.55)}[key])
+		body.joints[i].on_desktop_drop(null)
+	saved=Store.read(self)
+	check(report,saved.completed_edits==4 and Store.changed(saved)==4,"Four released changes record four displaced joints")
+	var file_text:=FileAccess.get_file_as_string(pose_path)
+	var invalid:=saved.duplicate(true)
+	invalid.nodes[0].end=[1,2]
+	check(report,Store.keep(self,invalid)==ERR_INVALID_DATA and FileAccess.get_file_as_string(pose_path)==file_text,"Malformed pose cannot replace a valid record")
+	invalid=saved.duplicate(true);invalid.nodes[0].radius=NAN
+	check(report,not Store.valid(invalid),"Non-finite geometry is rejected")
+	invalid=saved.duplicate(true);invalid.completed_edits=[]
+	check(report,not Store.valid(invalid),"Malformed metadata is rejected")
+	producer.queue_free()
+	await process_frame
+	remove_meta(Store.KEY)
+	saved=Store.read(self)
+	check(report,Store.changed(saved)==4 and saved.persistence=="saved locally","Disk record survives producer teardown and clearing session memory")
+	gallery.refresh();ledger._refresh_record()
+	check(report,gallery.bodies.has_node("StartingPose") and gallery.bodies.has_node("KeptPose"),"Final hall reconstructs both poses after producer is gone")
+	check(report,gallery.bodies.get_node("KeptPose/l_hand").position.is_equal_approx(Vector3(-1.65,1.8,.5)),"Returned hand uses the saved coordinates")
+	check(report,gallery.bodies.get_node("StartingPose/l_hand").position.distance_to(Vector3(-1.65,1.8,.5))>.5,"Starting pose remains a distinct comparison")
+	check(report,ledger._entries[2]=="4 / 13 joints displaced" and ledger._count==4,"Ledger counts actual changes from the same record")
+	check(report,ledger._line_labels[5].modulate==ledger.COOL_WHITE,"Record fields retain full contrast instead of fading as old events")
+	var count: int=ledger._count
+	ledger._process(20)
+	check(report,ledger._count==count,"Standing in the final hall cannot fabricate progress")
+	var external:=Node3D.new();ledger.add_child(external)
+	ledger.apply_grid_config({"visitor_record":true})
+	check(report,is_instance_valid(external) and external.get_parent()==ledger,"Ledger reconfiguration preserves museum attachments")
+	# Re-entering Assembly restores the file instead of a fresh prescribed body.
+	var restored: Node3D=load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	restored.body_workshop=true;restored.enable_auto_cycle=false;restored.position=Vector3(80,0,60)
+	root.add_child(restored);await process_frame
+	var next_body: Node3D=restored.get_node("BodyWorkshop")
+	check(report,next_body.targets[next_body.names.find("l_hand")].is_equal_approx(Vector3(-1.65,1.8,.5)),"Revisited Assembly restores the kept pose")
+	check(report,next_body.edit_count==4,"Revisited edit count continues")
+	restored.queue_free();await process_frame
+	# Failed disk writes remain explicit session records; use only private probe paths.
+	var block_path:=folder+"not_a_directory"
+	var block:=FileAccess.open(block_path,FileAccess.WRITE);block.store_string("probe");block.close()
+	set_meta(Store.PATH_KEY,block_path+"/pose.json")
+	check(report,Store.keep(self,saved)!=OK and Store.read(self).persistence=="this session only","Write failure keeps an honest session-only record")
+	set_meta(Store.PATH_KEY,pose_path);remove_meta(Store.KEY)
+	var corrupt:=FileAccess.open(pose_path,FileAccess.WRITE);corrupt.store_string("{broken");corrupt.close()
+	check(report,Store.read(self).is_empty(),"Corrupt disk record produces empty state")
+	check(report,Store.keep(self,saved)==OK,"Valid record can be kept again after corruption")
+	gallery.refresh();ledger._refresh_record()
+	report["pose"]=Store.read(self)
+	var legacy: Node3D=load("res://commons/artifacts/accountability_ledger/accountability_ledger.tscn").instantiate()
+	root.add_child(legacy)
+	count=legacy._count
+	legacy._push_entry()
+	check(report,not legacy.visitor_record and legacy._count==count+1,"Other ledger placements retain illustrative behaviour")
+	legacy.queue_free()
+	var gate: Dictionary=museum.get("_gate")
+	if not gate.is_empty():
+		gate.scanner.palm_scanned.emit()
+		museum.get("_mod_gate").call("step_open",gate,10.0)

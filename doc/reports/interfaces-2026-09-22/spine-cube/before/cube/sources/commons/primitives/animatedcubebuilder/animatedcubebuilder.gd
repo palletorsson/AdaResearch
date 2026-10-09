@@ -1,0 +1,871 @@
+﻿# VRAnimatedCubeBuilder.gd - Clean VR cube construction animation
+# Optional side instrument for replaying and examining the construction.
+extends Node3D
+
+# @identity
+# essence: cube = 8 vertices + 12 edges + 6 faces — build it layer by layer from its components
+# desire: learner watches a cube assemble itself and understands it as an accumulation of primitives
+# critical_parameter: the animation sequence — vertices appear first, then edges, then faces, in order
+# triggers: automatically starts on ready; after full build, vertex drag handles activate for deformation
+# emerges: the pedagogical insight that a solid is constructed from lower-dimensional elements: 0D → 1D → 2D → 3D
+# needs: [has grabbable vertex handles after animation completes [has], missing play/pause/reset button]
+# relationships: depends on triangle (faces) and line (edges) concepts; precursor to animating fractals
+# truth: dimension accumulates — points make edges, edges make faces, faces make solids
+
+# STAGE-2 DNA PROMOTION (2026-07-29). The artifact had no exports: the whole
+# argument — "dimension accumulates: points make edges, edges make faces" — was
+# frozen in a hard-coded state machine that could only run one way and could only
+# end one way. Its own @identity names the animation sequence as its critical
+# parameter, so that is what gets lifted:
+#
+#   order    the direction the build argues in   ascend · descend · together
+#   closure  what stands when the build ends     strata · scaffold · solid
+#
+# order=ascend is the shipped path (vertices → edges → triangles) and
+# closure=strata is the shipped ending (nothing is hidden; all three layers are
+# left standing, because create_final_mesh() was commented out years ago). Both
+# defaults reproduce the existing behaviour exactly, timings included.
+#
+# descend runs the same machine backwards — faces, then edges, then corners — and
+# argues the opposite: a solid DECOMPOSES into lower-dimensional elements.
+# together reveals everything at once and argues nothing about dimension at all,
+# which is the useful null case for the sweep.
+#
+# Usage in map_data.json:
+#   "animatedcubebuilder#order:descend"
+#   "animatedcubebuilder#closure:solid"
+
+const HANDLE_SCENE := preload("res://commons/primitives/point/grab_sphere_point.tscn")
+
+## DNA axis: the direction the construction runs.
+@export var order: String = "ascend"
+## DNA axis: what remains visible once the build completes.
+@export var closure: String = "strata"
+## Opt-in room instrument; existing placements keep their presentation.
+@export var discovery: bool = false
+var discovery_paused: bool = false
+var discovery_diagonals: bool = false
+var discovery_message: String = ""
+var _initial_vertices: Array = []
+var _diagonal_pairs: Array = []
+var _diagonal_lines: Array = []
+
+# Animation states
+enum BuildState {
+	WAITING,
+	SHOWING_VERTICES,
+	SHOWING_EDGES,
+	SHOWING_TRIANGLES,
+	SHOWING_FINAL_MESH,
+	COMPLETE
+}
+
+var current_state = BuildState.WAITING
+var animation_step = 0
+var cube_size = 1.0
+
+# The build read as an ordered list of phases instead of a hard-wired chain, so
+# the same machine can run either direction. Populated by start_animation().
+var _phases: Array = ["vertices", "edges", "triangles"]
+var _phase_index: int = 0
+var _triangles_built: bool = false
+var _built: bool = false
+
+# Cube vertices (8 corners)
+var vertices = [
+	Vector3(-0.5, -0.5, -0.5),  # 0: bottom-back-left
+	Vector3(0.5, -0.5, -0.5),   # 1: bottom-back-right
+	Vector3(0.5, 0.5, -0.5),    # 2: top-back-right
+	Vector3(-0.5, 0.5, -0.5),   # 3: top-back-left
+	Vector3(-0.5, -0.5, 0.5),   # 4: bottom-front-left
+	Vector3(0.5, -0.5, 0.5),    # 5: bottom-front-right
+	Vector3(0.5, 0.5, 0.5),     # 6: top-front-right
+	Vector3(-0.5, 0.5, 0.5)     # 7: top-front-left
+]
+
+# Grab sphere handles
+var handle_nodes: Array = []
+var last_handle_positions: Array = []
+var is_updating_geometry: bool = false
+
+# Cube edges (12 edges connecting vertices)
+var edges = [
+	# Bottom face edges
+	[0, 1], [1, 2], [2, 3], [3, 0],
+	# Top face edges  
+	[4, 5], [5, 6], [6, 7], [7, 4],
+	# Vertical edges
+	[0, 4], [1, 5], [2, 6], [3, 7]
+]
+
+# Triangle faces (2 triangles per face, 12 total)
+var triangles = [
+	# Bottom face
+	[0, 1, 4], [1, 5, 4],
+	# Top face
+	[2, 3, 6], [3, 7, 6], 
+	# Front face
+	[4, 5, 7], [5, 6, 7],
+	# Back face  
+	[1, 0, 2], [0, 3, 2],
+	# Left face
+	[0, 4, 3], [4, 7, 3],
+	# Right face
+	[5, 1, 6], [1, 2, 6]
+]
+
+# Visual components
+var vertex_spheres = []
+var edge_lines = []
+var triangle_meshes = []
+var final_cube_mesh: MeshInstance3D
+
+# Animation timing
+var vertex_blink_timer = 0.0
+var step_duration = 0.5  # Much faster animation
+var current_step_time = 0.0
+var initial_delay = 0.5  # Shorter delay before starting animation
+
+# Colors optimized for VR - Marble green balls, transparent triangles, black edges
+var vertex_color = Color(0.2, 0.8, 0.3, 0.7)  # Transparent green marble
+var vertex_color_alt = Color(0.2, 0.8, 0.3, 0.7)  # Same marble green for all
+var edge_color = Color(1.0, 1.0, 1.0)    # White edges
+var triangle_color = Color(0.8, 0.2, 0.4, 0.6)  # Transparent dark pink
+var triangle_color_alt1 = Color(0.8, 0.1, 0.1, 0.6)  # Transparent red
+var triangle_color_alt2 = Color(0.1, 0.1, 0.1, 0.6)  # Transparent black
+var final_color = Color(0.2, 1.0, 0.4)   # Bright green
+
+# Audio feedback (optional - can be connected externally)
+signal animation_step_completed(step_name: String)
+signal animation_completed()
+
+func _ready():
+	_initial_vertices = vertices.duplicate()
+	if has_meta("config_discovery"):
+		discovery = str(get_meta("config_discovery")) in ["1", "true"]
+	setup_scene()
+	_built = true
+	if discovery:
+		_setup_discovery()
+	await get_tree().create_timer(initial_delay).timeout
+	# A visitor may already have requested replay during the initial delay.
+	if current_state == BuildState.WAITING:
+		start_animation()
+
+func setup_scene():
+	create_vertex_spheres()
+	create_edge_lines()
+	create_triangle_meshes()
+
+func create_vertex_spheres():
+	# Initialize last_handle_positions array
+	last_handle_positions.resize(vertices.size())
+
+	for i in range(vertices.size()):
+		# Create grab sphere handle
+		var handle := HANDLE_SCENE.instantiate()
+		handle.name = "vertex_%d" % i
+		handle.position = vertices[i] * cube_size
+		handle.alter_freeze = false
+		handle.freeze = true
+		handle.set_meta("vertex_index", i)
+		handle.visible = false
+
+		handle_nodes.append(handle)
+		vertex_spheres.append(handle)
+		add_child(handle)
+		if owner:
+			handle.owner = owner
+
+		# Store initial position
+		last_handle_positions[i] = handle.position
+
+func create_edge_lines():
+	for edge in edges:
+		var line = create_line_mesh(vertices[edge[0]] * cube_size, vertices[edge[1]] * cube_size)
+		line.visible = false
+		edge_lines.append(line)
+		add_child(line)
+
+func create_line_mesh(start: Vector3, end: Vector3) -> MeshInstance3D:
+	var mesh_instance = MeshInstance3D.new()
+	
+	# Create a thicker line for VR visibility
+	var cylinder = CylinderMesh.new()
+	var line_length = start.distance_to(end)
+	cylinder.height = line_length
+	cylinder.top_radius = 0.015  # Thicker for VR
+	cylinder.bottom_radius = 0.015
+	cylinder.radial_segments = 8
+	
+	mesh_instance.mesh = cylinder
+	
+	# Position at the center point between start and end
+	var center_pos = (start + end) * 0.5
+	mesh_instance.position = center_pos
+	
+	# Calculate the direction vector from start to end
+	var direction = (end - start).normalized()
+	
+	# Create a proper transform that aligns the cylinder's Y-axis (height) with the line direction
+	var transform = Transform3D()
+	transform.origin = center_pos
+	
+	# If direction is not straight up or down, use cross product for alignment
+	if abs(direction.dot(Vector3.UP)) < 0.99:
+		# Standard case: create orthonormal basis
+		var up = Vector3.UP
+		var right = direction.cross(up).normalized()
+		up = right.cross(direction).normalized()
+		transform.basis = Basis(right, direction, up)
+	else:
+		# Special case: direction is nearly vertical
+		var right = Vector3.RIGHT if direction.y > 0 else Vector3.LEFT
+		var forward = direction.cross(right).normalized()
+		right = forward.cross(direction).normalized()
+		transform.basis = Basis(right, direction, forward)
+	
+	mesh_instance.transform = transform
+	
+	# Create matte white material for edges
+	var material = StandardMaterial3D.new()
+	material.albedo_color = edge_color
+	material.emission_enabled = false
+	material.roughness = 1.0
+	material.metallic = 0.0
+	material.metallic_specular = 0.0
+	mesh_instance.material_override = material
+	
+	return mesh_instance
+
+func create_triangle_meshes():
+	# order=descend needs the faces before the 3 s timer in setup_scene fires, so
+	# this can now be called early; the flag keeps it from building 12 more later.
+	if _triangles_built:
+		return
+	_triangles_built = true
+	for triangle in triangles:
+		var mesh_instance = MeshInstance3D.new()
+		var st = SurfaceTool.new()
+		st.begin(Mesh.PRIMITIVE_TRIANGLES)
+		
+		# Get triangle vertices
+		var v0 = vertices[triangle[0]] * cube_size
+		var v1 = vertices[triangle[1]] * cube_size  
+		var v2 = vertices[triangle[2]] * cube_size
+		
+		# Calculate normal
+		var normal = (v1 - v0).cross(v2 - v0).normalized()
+		
+		# Add triangle (both sides for VR visibility)
+		st.set_normal(normal)
+		st.add_vertex(v0)
+		st.set_normal(normal)
+		st.add_vertex(v1)
+		st.set_normal(normal)
+		st.add_vertex(v2)
+		
+		# Add reverse side
+		st.set_normal(-normal)
+		st.add_vertex(v0)
+		st.set_normal(-normal)
+		st.add_vertex(v2)
+		st.set_normal(-normal)
+		st.add_vertex(v1)
+		
+		mesh_instance.mesh = st.commit()
+		
+		# Create transparent material with alternating colors
+		var material = StandardMaterial3D.new()
+		var tri_index = triangle_meshes.size()
+		var color = triangle_color
+		if tri_index % 3 == 1:
+			color = triangle_color_alt1  # Red
+		elif tri_index % 3 == 2:
+			color = triangle_color_alt2  # Black
+		
+		material.albedo_color = color
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.emission_enabled = false
+		material.roughness = 1.0
+		material.metallic = 0.0
+		material.metallic_specular = 0.0
+		material.specular_mode = BaseMaterial3D.SPECULAR_DISABLED
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED  # Show both sides in VR
+		mesh_instance.material_override = material
+		
+		mesh_instance.visible = false
+		triangle_meshes.append(mesh_instance)
+		add_child(mesh_instance)
+
+func create_final_mesh():
+	final_cube_mesh = MeshInstance3D.new()
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	
+	# Add all triangles to create the complete cube
+	for triangle in triangles:
+		var v0 = vertices[triangle[0]] * cube_size
+		var v1 = vertices[triangle[1]] * cube_size  
+		var v2 = vertices[triangle[2]] * cube_size
+		
+		var normal = (v1 - v0).cross(v2 - v0).normalized()
+		
+		st.set_normal(normal)
+		st.add_vertex(v0)
+		st.set_normal(normal)
+		st.add_vertex(v1)
+		st.set_normal(normal)
+		st.add_vertex(v2)
+	
+	final_cube_mesh.mesh = st.commit()
+	
+	# Create final material with shader if available
+	var shader = load("res://commons/resourses/shaders/grid_solid.gdshader")
+	if shader:
+		var material = ShaderMaterial.new()
+		material.shader = shader
+		material.set_shader_parameter("base_color", final_color)
+		material.set_shader_parameter("edge_color", Color.WHITE)
+		material.set_shader_parameter("edge_width", 2.0)
+		material.set_shader_parameter("edge_sharpness", 2.0)
+		material.set_shader_parameter("emission_strength", 1.2)  # Brighter for VR
+		final_cube_mesh.material_override = material
+	else:
+		var material = StandardMaterial3D.new()
+		material.albedo_color = final_color
+		material.emission_enabled = true
+		material.emission = final_color * 0.5
+		final_cube_mesh.material_override = material
+	
+	#final_cube_mesh.visible = false
+	add_child(final_cube_mesh)
+
+func start_animation():
+	if discovery:
+		_set_handles_enabled(false)
+	_phases = _phase_order()
+	_phase_index = 0
+	animation_step = 0
+	current_step_time = 0.0
+	if _phases.is_empty():
+		# order=together — no dimensional narrative, the cube simply is
+		create_triangle_meshes()
+		for sphere in vertex_spheres:
+			sphere.visible = true
+		for line in edge_lines:
+			line.visible = true
+		for triangle in triangle_meshes:
+			triangle.visible = true
+		current_state = BuildState.COMPLETE
+		_finish()
+		return
+	_enter_phase()
+
+
+## DNA axis order, read as a phase list. ascend is the shipped chain.
+func _phase_order() -> Array:
+	match order:
+		"descend":
+			return ["triangles", "edges", "vertices"]
+		"together":
+			return []
+		_:
+			return ["vertices", "edges", "triangles"]
+
+
+func _state_for(phase: String) -> int:
+	match phase:
+		"edges":
+			return BuildState.SHOWING_EDGES
+		"triangles":
+			return BuildState.SHOWING_TRIANGLES
+		_:
+			return BuildState.SHOWING_VERTICES
+
+
+func _enter_phase() -> void:
+	var phase: String = str(_phases[_phase_index])
+	if phase == "triangles":
+		create_triangle_meshes()
+	animation_step = 0
+	current_step_time = 0.0
+	current_state = _state_for(phase)
+
+
+func _advance_phase() -> void:
+	animation_step_completed.emit(str(_phases[_phase_index]) + "_complete")
+	_phase_index += 1
+	if _phase_index >= _phases.size():
+		animation_step = 0
+		current_step_time = 0.0
+		current_state = BuildState.COMPLETE
+		_finish()
+		return
+	_enter_phase()
+
+
+## DNA axis closure — what the finished build leaves standing.
+func _finish() -> void:
+	if discovery:
+		_set_handles_enabled(true)
+		_update_discovery_diagonals()
+	animation_completed.emit()
+	match closure:
+		"scaffold":
+			# The diagram without its surface: corners and edges only.
+			for triangle in triangle_meshes:
+				if is_instance_valid(triangle):
+					triangle.visible = false
+		"solid":
+			# The lineage that was commented out: the scaffold dissolves into one
+			# shaded mesh. The vertex handles stay, so the solid can still be
+			# deformed by its corners — _update_geometry_from_handles already
+			# rebuilds the final mesh when it is visible.
+			if not is_instance_valid(final_cube_mesh):
+				create_final_mesh()
+			for line in edge_lines:
+				if is_instance_valid(line):
+					line.visible = false
+			for triangle in triangle_meshes:
+				if is_instance_valid(triangle):
+					triangle.visible = false
+			if is_instance_valid(final_cube_mesh):
+				final_cube_mesh.visible = true
+		_:
+			# strata — the shipped ending: nothing is hidden, all three layers are
+			# left standing and the cube is its own exploded diagram.
+			pass
+
+func _process(delta):
+	if discovery and discovery_paused and current_state != BuildState.COMPLETE:
+		return
+	current_step_time += delta
+	vertex_blink_timer += delta
+
+	# Check if handles moved and update geometry (but throttle updates)
+	if current_state == BuildState.COMPLETE and _handles_changed():
+		if discovery:
+			discovery_message = "Positions change; connections stay."
+		call_deferred("_update_geometry_from_handles")
+
+	match current_state:
+		BuildState.SHOWING_VERTICES:
+			animate_vertices(delta)
+		BuildState.SHOWING_EDGES:
+			animate_edges(delta)
+		BuildState.SHOWING_TRIANGLES:
+			animate_triangles(delta)
+		#BuildState.SHOWING_FINAL_MESH:
+			#animate_final_mesh(delta)
+		BuildState.COMPLETE:
+			# Keep what we built without animation
+			pass
+
+func animate_vertices(_delta):
+	# Show vertices one by one with blinking effect
+	if current_step_time >= step_duration and animation_step < vertices.size():
+		vertex_spheres[animation_step].visible = true
+		animation_step += 1
+		current_step_time = 0.0
+		
+		if animation_step >= vertices.size():
+			_advance_phase()
+	
+	# Note: Blinking animation removed since grab spheres handle their own appearance
+
+func animate_edges(_delta):
+	# Show edges progressively
+	var edge_step_duration = step_duration * 0.4
+	
+	if current_step_time >= edge_step_duration and animation_step < edges.size():
+		edge_lines[animation_step].visible = true
+		animation_step += 1
+		current_step_time = 0.0
+		
+		if animation_step >= edges.size():
+			_advance_phase()
+
+func animate_triangles(_delta):
+	# Show triangles progressively
+	var triangle_step_duration = step_duration * 0.3
+	
+	if current_step_time >= triangle_step_duration and animation_step < triangles.size():
+		triangle_meshes[animation_step].visible = true
+		animation_step += 1
+		current_step_time = 0.0
+		
+		if animation_step >= triangles.size():
+			_advance_phase()
+
+func animate_final_mesh(_delta):
+	# Wait a moment, then transition to final mesh
+	if current_step_time >= step_duration:
+		# Hide all individual components
+		for sphere in vertex_spheres:
+			sphere.visible = false
+		for line in edge_lines:
+			line.visible = false
+		for triangle in triangle_meshes:
+			triangle.visible = false
+		
+		# Show final mesh
+		final_cube_mesh.visible = true
+		current_state = BuildState.COMPLETE
+		animation_completed.emit()
+
+func animate_complete_rotation(delta):
+	# Slowly rotate the completed cube
+	final_cube_mesh.rotation.y += delta * 0.3  # Slower rotation for VR comfort
+	final_cube_mesh.rotation.x += delta * 0.1
+
+# Public methods for external control (if needed by your VR system)
+func restart_animation():
+	if discovery and _any_handle_held():
+		discovery_message = "Release the corner before replay."
+		return
+	if current_state == BuildState.COMPLETE:
+		_update_geometry_from_handles()
+	discovery_paused = false
+	discovery_message = "Replay keeps your vertex positions."
+	for diagonal in _diagonal_lines:
+		diagonal.visible = false
+	# Hide everything and restart
+	for sphere in vertex_spheres:
+		if is_instance_valid(sphere):
+			sphere.visible = false
+	for line in edge_lines:
+		if is_instance_valid(line):
+			line.visible = false
+	for triangle in triangle_meshes:
+		if is_instance_valid(triangle):
+			triangle.visible = false
+	# final_cube_mesh only exists under closure=solid
+	if is_instance_valid(final_cube_mesh):
+		final_cube_mesh.visible = false
+
+	start_animation()
+
+func skip_to_final():
+	current_state = BuildState.COMPLETE
+	for sphere in vertex_spheres:
+		if is_instance_valid(sphere):
+			sphere.visible = false
+	for line in edge_lines:
+		if is_instance_valid(line):
+			line.visible = false
+	for triangle in triangle_meshes:
+		if is_instance_valid(triangle):
+			triangle.visible = false
+	if not is_instance_valid(final_cube_mesh):
+		create_final_mesh()
+	if is_instance_valid(final_cube_mesh):
+		final_cube_mesh.visible = true
+
+func set_animation_speed(speed_multiplier: float):
+	step_duration = 0.5 / speed_multiplier
+
+# VR-specific helpers
+func get_current_phase() -> String:
+	match current_state:
+		BuildState.SHOWING_VERTICES:
+			return "vertices"
+		BuildState.SHOWING_EDGES:
+			return "edges"
+		BuildState.SHOWING_TRIANGLES:
+			return "triangles"
+		BuildState.SHOWING_FINAL_MESH:
+			return "final_mesh"
+		BuildState.COMPLETE:
+			return "complete"
+		_:
+			return "waiting"
+
+func get_progress_percentage() -> float:
+	# Phase-index based, so it stays honest whichever direction order runs.
+	if current_state == BuildState.COMPLETE:
+		return 1.0
+	if _phases.is_empty() or current_state == BuildState.WAITING:
+		return 0.0
+	var share: float = 1.0 / float(_phases.size())
+	var items: int = _phase_item_count(str(_phases[_phase_index]))
+	var within: float = 0.0
+	if items > 0:
+		within = clamp(float(animation_step) / float(items), 0.0, 1.0)
+	return clamp(share * (float(_phase_index) + within), 0.0, 1.0)
+
+
+func _phase_item_count(phase: String) -> int:
+	match phase:
+		"edges":
+			return edges.size()
+		"triangles":
+			return triangles.size()
+		_:
+			return vertices.size()
+
+# Grab sphere interaction functions
+func _handles_changed() -> bool:
+	if handle_nodes.is_empty():
+		return false
+
+	var changed := false
+	for i in range(handle_nodes.size()):
+		var handle: Node3D = handle_nodes[i]
+		var pos := handle.position
+		var last_position = last_handle_positions[i]
+		if last_position == null or not pos.is_equal_approx(last_position):
+			changed = true
+			last_handle_positions[i] = pos
+
+	return changed
+
+func _update_geometry_from_handles() -> void:
+	# Prevent recursive updates
+	if is_updating_geometry:
+		return
+
+	# Safety checks
+	if handle_nodes.is_empty() or handle_nodes.size() != vertices.size():
+		return
+
+	is_updating_geometry = true
+
+	# Update vertices array from handle positions
+	for i in range(handle_nodes.size()):
+		if not is_instance_valid(handle_nodes[i]):
+			is_updating_geometry = false
+			return
+		vertices[i] = handle_nodes[i].position / cube_size
+
+	# Rebuild edge lines
+	for i in range(edge_lines.size()):
+		if not is_instance_valid(edge_lines[i]):
+			continue
+		var edge = edges[i]
+		_update_edge_line(i, vertices[edge[0]] * cube_size, vertices[edge[1]] * cube_size)
+
+	# Rebuild triangle meshes
+	for i in range(triangle_meshes.size()):
+		if not is_instance_valid(triangle_meshes[i]):
+			continue
+		_update_triangle_mesh(i)
+
+	# Rebuild final mesh if visible
+	if is_instance_valid(final_cube_mesh):
+		_rebuild_final_mesh()
+
+	_update_discovery_diagonals()
+	is_updating_geometry = false
+
+func _update_edge_line(index: int, start: Vector3, end: Vector3) -> void:
+	var line = edge_lines[index]
+	if not line:
+		return
+
+	# Recalculate line mesh
+	var line_length = start.distance_to(end)
+	var cylinder = line.mesh as CylinderMesh
+	if cylinder:
+		cylinder.height = line_length
+
+	# Position at the center point between start and end
+	var center_pos = (start + end) * 0.5
+	line.position = center_pos
+
+	# Calculate the direction vector from start to end
+	var direction = (end - start).normalized()
+
+	# Create a proper transform that aligns the cylinder's Y-axis (height) with the line direction
+	var transform = Transform3D()
+	transform.origin = center_pos
+
+	# If direction is not straight up or down, use cross product for alignment
+	if abs(direction.dot(Vector3.UP)) < 0.99:
+		var up = Vector3.UP
+		var right = direction.cross(up).normalized()
+		up = right.cross(direction).normalized()
+		transform.basis = Basis(right, direction, up)
+	else:
+		var right = Vector3.RIGHT if direction.y > 0 else Vector3.LEFT
+		var forward = direction.cross(right).normalized()
+		right = forward.cross(direction).normalized()
+		transform.basis = Basis(right, direction, forward)
+
+	line.transform = transform
+
+func _update_triangle_mesh(index: int) -> void:
+	var mesh_instance = triangle_meshes[index]
+	if not mesh_instance:
+		return
+
+	var triangle = triangles[index]
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Get triangle vertices
+	var v0 = vertices[triangle[0]] * cube_size
+	var v1 = vertices[triangle[1]] * cube_size
+	var v2 = vertices[triangle[2]] * cube_size
+
+	# Calculate normal
+	var normal = (v1 - v0).cross(v2 - v0).normalized()
+
+	# Add triangle (both sides for VR visibility)
+	st.set_normal(normal)
+	st.add_vertex(v0)
+	st.set_normal(normal)
+	st.add_vertex(v1)
+	st.set_normal(normal)
+	st.add_vertex(v2)
+
+	# Add reverse side
+	st.set_normal(-normal)
+	st.add_vertex(v0)
+	st.set_normal(-normal)
+	st.add_vertex(v2)
+	st.set_normal(-normal)
+	st.add_vertex(v1)
+
+	mesh_instance.mesh = st.commit()
+
+func _rebuild_final_mesh() -> void:
+	if not final_cube_mesh:
+		return
+
+	var st = SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+
+	# Add all triangles to create the complete cube
+	for triangle in triangles:
+		var v0 = vertices[triangle[0]] * cube_size
+		var v1 = vertices[triangle[1]] * cube_size
+		var v2 = vertices[triangle[2]] * cube_size
+
+		var normal = (v1 - v0).cross(v2 - v0).normalized()
+
+		st.set_normal(normal)
+		st.add_vertex(v0)
+		st.set_normal(normal)
+		st.add_vertex(v1)
+		st.set_normal(normal)
+		st.add_vertex(v2)
+
+	final_cube_mesh.mesh = st.commit()
+
+
+## Guarded: only restart when a declared axis actually changed AND the first build
+## has already run. Restarting unconditionally here would reset the animation of
+## every shipped placement each time the grid hands it a config.
+func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("discovery"):
+		discovery = str(config_data["discovery"]) in ["1", "true"]
+		if discovery and _built and is_inside_tree():
+			_setup_discovery()
+	var changed: bool = false
+	if config_data.has("order"):
+		var o: String = str(config_data["order"]).to_lower()
+		if o != order:
+			order = o
+			changed = true
+	if config_data.has("closure"):
+		var c: String = str(config_data["closure"]).to_lower()
+		if c != closure:
+			closure = c
+			changed = true
+	if changed and _built and is_inside_tree():
+		restart_animation()
+
+
+func _any_handle_held() -> bool:
+	for handle in handle_nodes:
+		if handle.is_picked_up():
+			return true
+	return false
+
+func _set_handles_enabled(value: bool) -> void:
+	for handle in handle_nodes:
+		handle.enabled = value
+
+func _setup_discovery() -> void:
+	if has_node("ExperimentPanel"):
+		return
+	for i in handle_nodes.size():
+		var label := Label3D.new()
+		label.name = "VertexNumber"
+		label.text = "v%d" % i
+		label.position.y = 0.09
+		label.font_size = 28
+		label.pixel_size = 0.001
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		handle_nodes[i].add_child(label)
+	_set_handles_enabled(current_state == BuildState.COMPLETE)
+	# Derive the six face diagonals from the triangle list, excluding cube edges.
+	var known := {}
+	for edge in edges:
+		known[Vector2i(mini(edge[0],edge[1]),maxi(edge[0],edge[1]))] = true
+	for triangle in triangles:
+		for i in 3:
+			var a: int = triangle[i]
+			var b: int = triangle[(i+1)%3]
+			var key := Vector2i(mini(a,b),maxi(a,b))
+			if known.has(key): continue
+			known[key] = true
+			_diagonal_pairs.append(key)
+			var line := create_line_mesh(vertices[a]*cube_size,vertices[b]*cube_size)
+			line.name = "FaceDiagonal%d" % _diagonal_lines.size()
+			line.material_override = line.material_override.duplicate()
+			line.material_override.albedo_color = Color(1.0,0.78,0.15)
+			line.mesh.top_radius = 0.006
+			line.mesh.bottom_radius = 0.006
+			line.visible = false
+			add_child(line)
+			_diagonal_lines.append(line)
+	var panel := Node3D.new()
+	panel.name = "ExperimentPanel"
+	panel.set_script(preload("res://commons/ui/cube_experiment_panel.gd"))
+	panel.position = Vector3(1.45,0.0,0.85)
+	add_child(panel)
+
+func toggle_discovery_pause() -> void:
+	if current_state == BuildState.COMPLETE:
+		discovery_message = "Replay first to pause assembly."
+		return
+	discovery_paused = not discovery_paused
+	discovery_message = "Only this assembly pauses."
+
+func restore_discovery_cube() -> void:
+	if _any_handle_held():
+		discovery_message = "Release the corner before restoring."
+		return
+	discovery_paused = false
+	for i in handle_nodes.size():
+		handle_nodes[i].position = _initial_vertices[i] * cube_size
+		handle_nodes[i].linear_velocity = Vector3.ZERO
+		handle_nodes[i].angular_velocity = Vector3.ZERO
+		last_handle_positions[i] = handle_nodes[i].position
+	current_state = BuildState.COMPLETE
+	for sphere in vertex_spheres: sphere.visible = true
+	for line in edge_lines: line.visible = true
+	for triangle in triangle_meshes: triangle.visible = true
+	_update_geometry_from_handles()
+	_finish()
+	discovery_message = "Initial corners restored."
+
+func toggle_discovery_diagonals() -> void:
+	discovery_diagonals = not discovery_diagonals
+	_update_discovery_diagonals()
+
+func _update_discovery_diagonals() -> void:
+	for i in _diagonal_lines.size():
+		var pair: Vector2i = _diagonal_pairs[i]
+		var a: Vector3 = vertices[pair.x] * cube_size
+		var b: Vector3 = vertices[pair.y] * cube_size
+		var line: MeshInstance3D = _diagonal_lines[i]
+		var offset: Vector3 = b-a
+		var length: float = offset.length()
+		line.visible = discovery_diagonals and current_state == BuildState.COMPLETE and length > 0.0001
+		line.mesh.height = maxf(length,0.0001)
+		line.position = (a+b)*0.5
+		if length > 0.0001:
+			line.quaternion = Quaternion(Vector3.UP,offset/length)

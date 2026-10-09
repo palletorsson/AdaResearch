@@ -1,0 +1,4348 @@
+{
+  "room": {
+    "width": 16,
+    "depth": 24,
+    "spawn_row": 23,
+    "spawn_col": 8,
+    "teleporter_row": 3,
+    "teleporter_col": 8
+  },
+  "artifacts": [
+    {
+      "lookup_name": "force_field_zone",
+      "footprint_cells": 16,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "any",
+      "wall_backing": false,
+      "orientation": "any",
+      "isolation": 2,
+      "cluster_with": [
+        "vector_machine"
+      ],
+      "preferred_zone": "center"
+    },
+    {
+      "lookup_name": "vector_machine",
+      "footprint_cells": 2,
+      "clearance_front": 2,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "front",
+      "isolation": 1,
+      "cluster_with": [
+        "force_field_zone"
+      ],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "force_cube",
+      "footprint_cells": 2,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "any",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "force_field",
+      "footprint_cells": 9,
+      "clearance_front": 2,
+      "clearance_back": 1,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "central",
+        "demonstration",
+        "pairs",
+        "plasma_critter",
+        "creature"
+      ],
+      "preferred_zone": "end"
+    }
+  ],
+  "results": {
+    "random": {
+      "constraint_score": 0.9101,
+      "walkability": 0.594,
+      "combined": 0.784,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.875,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 56,
+        "detour_ratio": 2.8,
+        "backtrack_rate": 0.196,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.619,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "vector_machine",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          16,
+          12
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          12,
+          8
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          7,
+          14
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 12,
+          "col": 12
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 13,
+          "col": 1
+        },
+        {
+          "artifact": "force_cube",
+          "row": 8,
+          "col": 15
+        },
+        {
+          "artifact": "force_field",
+          "row": 9,
+          "col": 7
+        }
+      ]
+    },
+    "rule_based": {
+      "constraint_score": 0.938,
+      "walkability": 0.801,
+      "combined": 0.883,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.866,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.867,
+        "cluster_satisfied": 0.675,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 36,
+        "detour_ratio": 1.8,
+        "backtrack_rate": 0.028,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.601,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "force_cube",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 10,
+          "col": 6
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 8,
+          "col": 4
+        },
+        {
+          "artifact": "force_cube",
+          "row": 12,
+          "col": 13
+        },
+        {
+          "artifact": "force_field",
+          "row": 13,
+          "col": 12
+        }
+      ]
+    },
+    "sdf": {
+      "constraint_score": 0.9234,
+      "walkability": 0.854,
+      "combined": 0.896,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 42,
+        "detour_ratio": 2.1,
+        "backtrack_rate": 0.071,
+        "encounter_order": 1.0,
+        "centerpiece_proximity": 0.705,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_cube",
+          "force_field",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          19,
+          5
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          18,
+          3
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          16,
+          3
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 13,
+          "col": 6
+        },
+        {
+          "artifact": "force_field",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 4,
+          "col": 12
+        },
+        {
+          "artifact": "force_cube",
+          "row": 20,
+          "col": 3
+        }
+      ]
+    },
+    "fold": {
+      "constraint_score": 0.9588,
+      "walkability": 0.719,
+      "combined": 0.863,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.938,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.865,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 40,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.05,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.705,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "vector_machine",
+          "force_field",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          16,
+          6
+        ],
+        [
+          15,
+          6
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          14,
+          5
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          7,
+          14
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          5,
+          14
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 13,
+          "col": 7
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 13,
+          "col": 5
+        },
+        {
+          "artifact": "force_cube",
+          "row": 8,
+          "col": 15
+        },
+        {
+          "artifact": "force_field",
+          "row": 7,
+          "col": 5
+        }
+      ]
+    },
+    "paradoxical": {
+      "constraint_score": 0.9196,
+      "walkability": 0.789,
+      "combined": 0.867,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.964,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 58,
+        "detour_ratio": 2.9,
+        "backtrack_rate": 0.086,
+        "encounter_order": 1.0,
+        "centerpiece_proximity": 0.667,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_cube",
+          "force_field",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          21,
+          7
+        ],
+        [
+          21,
+          6
+        ],
+        [
+          21,
+          5
+        ],
+        [
+          21,
+          4
+        ],
+        [
+          21,
+          3
+        ],
+        [
+          21,
+          2
+        ],
+        [
+          21,
+          1
+        ],
+        [
+          20,
+          1
+        ],
+        [
+          19,
+          1
+        ],
+        [
+          18,
+          1
+        ],
+        [
+          17,
+          1
+        ],
+        [
+          16,
+          1
+        ],
+        [
+          15,
+          1
+        ],
+        [
+          14,
+          1
+        ],
+        [
+          13,
+          1
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          11,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          3,
+          14
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 12,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 1,
+          "col": 14
+        },
+        {
+          "artifact": "force_cube",
+          "row": 22,
+          "col": 1
+        }
+      ]
+    },
+    "hybrid": {
+      "constraint_score": 0.9234,
+      "walkability": 0.81,
+      "combined": 0.878,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 38,
+        "detour_ratio": 1.9,
+        "backtrack_rate": 0.026,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.705,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "force_cube",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          14,
+          5
+        ],
+        [
+          13,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 13,
+          "col": 6
+        },
+        {
+          "artifact": "force_field",
+          "row": 7,
+          "col": 4
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 6,
+          "col": 11
+        },
+        {
+          "artifact": "force_cube",
+          "row": 3,
+          "col": 3
+        }
+      ]
+    },
+    "circle_packing": {
+      "constraint_score": 0.8934,
+      "walkability": 0.696,
+      "combined": 0.814,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.718,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 38,
+        "detour_ratio": 1.9,
+        "backtrack_rate": 0.053,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.512,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "vector_machine",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          13,
+          5
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 9,
+          "col": 0
+        },
+        {
+          "artifact": "force_field",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "force_cube",
+          "row": 0,
+          "col": 8
+        }
+      ]
+    },
+    "warehouse": {
+      "constraint_score": 0.9363,
+      "walkability": 0.793,
+      "combined": 0.879,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.766,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.733,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 22,
+        "detour_ratio": 1.1,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.667,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field",
+          "force_cube",
+          "force_field_zone",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 12,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 21,
+          "col": 9
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 11,
+          "col": 8
+        },
+        {
+          "artifact": "force_cube",
+          "row": 23,
+          "col": 7
+        }
+      ]
+    },
+    "simulated_annealing": {
+      "constraint_score": 0.9637,
+      "walkability": 0.618,
+      "combined": 0.825,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.709,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 42,
+        "detour_ratio": 2.1,
+        "backtrack_rate": 0.048,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.566,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field",
+          "force_field_zone",
+          "vector_machine",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          13,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          6
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 9,
+          "col": 6
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 9,
+          "col": 3
+        },
+        {
+          "artifact": "force_cube",
+          "row": 9,
+          "col": 13
+        },
+        {
+          "artifact": "force_field",
+          "row": 15,
+          "col": 5
+        }
+      ]
+    },
+    "voronoi": {
+      "constraint_score": 0.9163,
+      "walkability": 0.722,
+      "combined": 0.839,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.225,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 40,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.075,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.791,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "vector_machine",
+          "force_field",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          20,
+          9
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          17,
+          4
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          17,
+          4
+        ],
+        [
+          16,
+          4
+        ],
+        [
+          15,
+          4
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          12,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 16,
+          "col": 9
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 16,
+          "col": 3
+        },
+        {
+          "artifact": "force_cube",
+          "row": 5,
+          "col": 12
+        },
+        {
+          "artifact": "force_field",
+          "row": 4,
+          "col": 3
+        }
+      ]
+    },
+    "humanoid_walker": {
+      "constraint_score": 0.926,
+      "walkability": 0.82,
+      "combined": 0.884,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.802,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.533,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 38,
+        "detour_ratio": 1.9,
+        "backtrack_rate": 0.026,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.769,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_cube",
+          "vector_machine",
+          "force_field"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          12,
+          11
+        ],
+        [
+          11,
+          11
+        ],
+        [
+          10,
+          11
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          8,
+          11
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 15,
+          "col": 8
+        },
+        {
+          "artifact": "force_cube",
+          "row": 14,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 14,
+          "col": 11
+        }
+      ]
+    },
+    "grow_walker": {
+      "constraint_score": 0.9089,
+      "walkability": 0.76,
+      "combined": 0.849,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.739,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.667,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 30,
+        "detour_ratio": 1.5,
+        "backtrack_rate": 0.067,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.802,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "vector_machine",
+          "force_field",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          15,
+          9
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          8,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 16,
+          "col": 8
+        },
+        {
+          "artifact": "force_cube",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 0,
+          "col": 9
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 15,
+          "col": 11
+        }
+      ]
+    },
+    "focal_composition": {
+      "constraint_score": 0.9593,
+      "walkability": 0.667,
+      "combined": 0.842,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.967,
+        "cluster_satisfied": 0.675,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 40,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.125,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.558,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field",
+          "force_cube",
+          "force_field_zone",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          11
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          19,
+          5
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          18,
+          4
+        ],
+        [
+          17,
+          4
+        ],
+        [
+          16,
+          4
+        ],
+        [
+          15,
+          4
+        ],
+        [
+          14,
+          4
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 9,
+          "col": 4
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 7,
+          "col": 2
+        },
+        {
+          "artifact": "force_field",
+          "row": 16,
+          "col": 11
+        },
+        {
+          "artifact": "force_cube",
+          "row": 18,
+          "col": 3
+        }
+      ]
+    },
+    "pacing_arc": {
+      "constraint_score": 0.8812,
+      "walkability": 0.745,
+      "combined": 0.827,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.667,
+        "cluster_satisfied": 0.023,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 38,
+        "detour_ratio": 1.9,
+        "backtrack_rate": 0.053,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.843,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "vector_machine",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          21,
+          7
+        ],
+        [
+          21,
+          6
+        ],
+        [
+          21,
+          5
+        ],
+        [
+          20,
+          5
+        ],
+        [
+          19,
+          5
+        ],
+        [
+          18,
+          5
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          17,
+          4
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          16,
+          3
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          11,
+          6
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          11,
+          8
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          10,
+          9
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 17,
+          "col": 6
+        },
+        {
+          "artifact": "force_field",
+          "row": 14,
+          "col": 4
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 10,
+          "col": 10
+        },
+        {
+          "artifact": "force_cube",
+          "row": 6,
+          "col": 6
+        }
+      ]
+    },
+    "alexander": {
+      "constraint_score": 0.9469,
+      "walkability": 0.751,
+      "combined": 0.869,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.413,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 40,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.15,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.681,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "force_cube",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          9
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          17,
+          9
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          15,
+          9
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          10,
+          9
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          11
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 13,
+          "col": 3
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 8,
+          "col": 4
+        },
+        {
+          "artifact": "force_cube",
+          "row": 8,
+          "col": 11
+        },
+        {
+          "artifact": "force_field",
+          "row": 14,
+          "col": 10
+        }
+      ]
+    },
+    "promenade": {
+      "constraint_score": 0.9455,
+      "walkability": 0.725,
+      "combined": 0.857,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.919,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.633,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 30,
+        "detour_ratio": 1.5,
+        "backtrack_rate": 0.067,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.566,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field",
+          "force_cube",
+          "force_field_zone",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          20,
+          6
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          18,
+          5
+        ],
+        [
+          18,
+          6
+        ],
+        [
+          17,
+          6
+        ],
+        [
+          16,
+          6
+        ],
+        [
+          15,
+          6
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          13,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 9,
+          "col": 6
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 13,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 17,
+          "col": 7
+        },
+        {
+          "artifact": "force_cube",
+          "row": 17,
+          "col": 5
+        }
+      ]
+    },
+    "tile_wfc": {
+      "constraint_score": 0.9291,
+      "walkability": 0.748,
+      "combined": 0.857,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.906,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.933,
+        "cluster_satisfied": 0.709,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 30,
+        "detour_ratio": 1.5,
+        "backtrack_rate": 0.133,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.899,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "vector_machine",
+          "force_cube",
+          "force_field"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          23,
+          7
+        ],
+        [
+          22,
+          7
+        ],
+        [
+          21,
+          7
+        ],
+        [
+          20,
+          7
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          18,
+          7
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          17,
+          7
+        ],
+        [
+          16,
+          7
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 19,
+          "col": 8
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 16,
+          "col": 8
+        },
+        {
+          "artifact": "force_cube",
+          "row": 13,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 10,
+          "col": 8
+        }
+      ]
+    },
+    "crystallization": {
+      "constraint_score": 0.9454,
+      "walkability": 0.729,
+      "combined": 0.859,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.388,
+        "preferred_zone_match": 0.65,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 40,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.636,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "force_field",
+          "vector_machine",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          15,
+          9
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          12,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          10,
+          10
+        ],
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          10,
+          8
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          8,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 11,
+          "col": 6
+        },
+        {
+          "artifact": "force_field",
+          "row": 6,
+          "col": 6
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 11,
+          "col": 1
+        },
+        {
+          "artifact": "force_cube",
+          "row": 6,
+          "col": 1
+        }
+      ]
+    },
+    "stickiness": {
+      "constraint_score": 0.9028,
+      "walkability": 0.788,
+      "combined": 0.857,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.771,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.533,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 34,
+        "detour_ratio": 1.7,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.899,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_field_zone",
+          "vector_machine",
+          "force_field",
+          "force_cube"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          23,
+          9
+        ],
+        [
+          23,
+          10
+        ],
+        [
+          23,
+          11
+        ],
+        [
+          23,
+          12
+        ],
+        [
+          23,
+          13
+        ],
+        [
+          22,
+          13
+        ],
+        [
+          21,
+          13
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          19,
+          15
+        ],
+        [
+          18,
+          15
+        ],
+        [
+          17,
+          15
+        ],
+        [
+          16,
+          15
+        ],
+        [
+          15,
+          15
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 19,
+          "col": 8
+        },
+        {
+          "artifact": "force_field",
+          "row": 16,
+          "col": 12
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 22,
+          "col": 12
+        },
+        {
+          "artifact": "force_cube",
+          "row": 15,
+          "col": 12
+        }
+      ]
+    },
+    "colonization": {
+      "constraint_score": 0.8151,
+      "walkability": 0.662,
+      "combined": 0.754,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.316,
+        "preferred_zone_match": 0.3,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.0
+      },
+      "walk_details": {
+        "walk_length": 40,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.05,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.324,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "force_cube",
+          "force_field",
+          "force_field_zone",
+          "vector_machine"
+        ]
+      },
+      "full_path": [
+        [
+          23,
+          8
+        ],
+        [
+          22,
+          8
+        ],
+        [
+          21,
+          8
+        ],
+        [
+          20,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          17,
+          8
+        ],
+        [
+          16,
+          8
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          16,
+          12
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          15,
+          9
+        ],
+        [
+          15,
+          8
+        ],
+        [
+          15,
+          7
+        ],
+        [
+          15,
+          6
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          15,
+          4
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          14,
+          5
+        ],
+        [
+          13,
+          5
+        ],
+        [
+          12,
+          5
+        ],
+        [
+          11,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          7,
+          11
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          7,
+          14
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "force_field_zone",
+          "row": 2,
+          "col": 7
+        },
+        {
+          "artifact": "force_field",
+          "row": 12,
+          "col": 2
+        },
+        {
+          "artifact": "vector_machine",
+          "row": 8,
+          "col": 14
+        },
+        {
+          "artifact": "force_cube",
+          "row": 15,
+          "col": 12
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+	"checks": [
+		{
+			"check": "Short trace produces an instruction, no substitute geometry",
+			"passed": true
+		},
+		{
+			"check": "Capture empty.png",
+			"passed": true
+		},
+		{
+			"check": "Original Trace release record exists",
+			"passed": true
+		},
+		{
+			"check": "Earlier three positions return unchanged as rim vertices",
+			"passed": true
+		},
+		{
+			"check": "Fourth point is the declared Z offset from their centre",
+			"passed": true
+		},
+		{
+			"check": "Four editable corners and six boundary segments are constructed",
+			"passed": true
+		},
+		{
+			"check": "Three face rows submit nine correct positions and leave a three-edge rim",
+			"passed": true
+		},
+		{
+			"check": "Capture open.png",
+			"passed": true
+		},
+		{
+			"check": "Adding the fourth row closes the rim without moving any position",
+			"passed": true
+		},
+		{
+			"check": "The retained trace fixture supplies a nonzero tetrahedron volume",
+			"passed": true
+		},
+		{
+			"check": "Capture closed.png",
+			"passed": true
+		},
+		{
+			"check": "Removing the row restores the opening and preserves all four vertices",
+			"passed": true
+		},
+		{
+			"check": "The printed one-row code edit compiles",
+			"passed": true
+		},
+		{
+			"check": "Edited lesson constructs four faces on a bare Node3D",
+			"passed": true
+		},
+		{
+			"check": "Moving apex updates its three faces while the opposite face stays fixed",
+			"passed": true
+		},
+		{
+			"check": "Repeated updates keep one mesh surface and six segment nodes",
+			"passed": true
+		},
+		{
+			"check": "Four coplanar points enclose zero volume despite four face rows",
+			"passed": true
+		},
+		{
+			"check": "Capture coplanar.png",
+			"passed": true
+		},
+		{
+			"check": "Moving apex out of the plane restores nonzero volume",
+			"passed": true
+		},
+		{
+			"check": "Closing the visible rim does not introduce a collision surface",
+			"passed": true
+		},
+		{
+			"check": "Desktop aim picks up a numbered corner",
+			"passed": true
+		},
+		{
+			"check": "Mouse movement updates all faces referring to the moved vertex",
+			"passed": true
+		},
+		{
+			"check": "Desktop release retains the edited position without saving over Trace",
+			"passed": true
+		},
+		{
+			"check": "Synthetic XR near grip picks up the corner",
+			"passed": true
+		},
+		{
+			"check": "Synthetic hand movement retains the shared frame and face connections",
+			"passed": true
+		},
+		{
+			"check": "XR release holds its corner without altering the source file",
+			"passed": true
+		},
+		{
+			"check": "Restart recovers original positions and the open face list",
+			"passed": true
+		},
+		{
+			"check": "Empty face list keeps the wire structure without an invalid submission",
+			"passed": true
+		}
+	],
+	"passed": true,
+	"physical_headset_tested": false,
+	"source_points": 41,
+	"source_record": "Same synthetic XR release record used in Trace, Grid and Triangle",
+	"source_sha256": "d7a334b32fdf7e3787d66cae6b8a8cbcb7412c25859740d77199274ae5619bbb"
+}

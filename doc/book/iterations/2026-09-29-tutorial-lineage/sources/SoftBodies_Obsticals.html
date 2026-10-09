@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SoftBodies_Obsticals · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=SoftBodies_Obsticals">← Tutorial lineage</a></p><h1>SoftBodies Obsticals</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="SoftBodies_Obsticals/final.md">Raw captured source</a></p><pre># The room has a body
+
+&lt;!-- @breathing_room --&gt;
+
+Two pink walls, ten metres long and four high, half a metre thick, stand six metres apart. They swell. Find a position from which both their edges and their centres stay visible: the edges do not move, the middles do. Every vertex along the top, the bottom and the two ends of each wall is pinned; everything between answers to a pressure that rises and falls once every six seconds or so. Before entering, watch a complete breath.
+
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received. STIFFNESS changes the walls’ resistance without touching the drive, so the same pressure meets a different material; RESET PHASE returns the drive to the start of its cycle.
+
+```gdscript
+var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
+for sb in _walls:
+    sb.pressure_coefficient = p
+```
+
+The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. At the opening setting the pressure runs from nothing to a half; AMPLITUDE takes it down to 0.15 and up to 0.9, and RATE slows the breath to one every sixteen seconds or quickens it to one every three and a half. The same instruction, and the wall between the pins does something different each time. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
+
+Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor? Stand between the walls at the middle of their length, where the pinned rows are farthest away, and wait for the inhale. How far the wall comes towards you is not in the sine; it is what stiffness, damping and the pinned edges make of the pressure, and STIFFNESS shows you the same breath meeting a different material. The walls carry collision. What a wall at full inhale does to a body standing in its way is for that body to find out.
+
+&lt;!-- @ --&gt;
+
+&lt;!-- @softbody_gallery_part2 --&gt;
+
+The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
+
+The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the floor that carries you through this hall does not deform. A deforming wall and an onward route make different promises.
+
+Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="SoftBodies_Obsticals/tutorial.md">Raw captured source</a></p><pre># The room has a body
+
+&lt;!-- @breathing_room --&gt;
+
+The walls swell. Find a position from which both their edges and their centres remain visible. Selected vertices stay pinned while the surfaces respond between them. Before entering, watch a complete pressure cycle.
+
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received.
+
+```gdscript
+var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
+for sb in _walls:
+    sb.pressure_coefficient = p
+```
+
+The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
+
+Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor?
+
+
+
+&lt;!-- @softbody_gallery_part2 --&gt;
+
+The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
+
+The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.
+
+Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="SoftBodies_Obsticals/technical.md">Raw captured source</a></p><pre># The room has a body — implementation
+
+Primary source scenes:
+
+- `res://algorithms/softbodies/advanced_concepts/breathing_room.tscn`
+- `res://algorithms/softbodies/softbody_gallery_part2.tscn`
+
+The hall desk is implemented in `commons/artifacts/timing_machines/soft_workshop.gd`. It binds models inside this map, offers AMPLITUDE, RATE, HOLD DRIVE, STIFFNESS, RESET PHASE, RULE, and blocks repeated activation during rebuilds. The six controls fit a 3×2 desk with a small inclined transparent readout.
+
+The walls swell. Find a position from which both their edges and their centres remain visible. Selected vertices stay pinned while the surfaces respond between them. Before entering, watch a complete pressure cycle.
+
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received.
+
+```gdscript
+var p = (sin(_time) + 1.0) * 0.5 * breath_amplitude
+for sb in _walls:
+    sb.pressure_coefficient = p
+```
+
+The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
+
+Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor?
+
+The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
+
+The flag dancer remains as another encounter with a driven system. Together these objects begin to distribute softness across the room rather than confine it to one specimen. Yet the museum crossing still has independent support. A deforming wall and an onward route make different promises.
+
+Next we will hold and replay a contact experiment. A spectacle of differences becomes more useful when we can identify which differences were introduced.
+
+Floor provenance: earlier structure cells remain behind the front court. Raw zeros receive explicit covers after relocation; this does not redefine zero globally. See `doc/space/soft-sequence-2026-09-15/floor-audit.json`. Headset reach and comfort require a human pass; runtime receipts separately record tested desktop operations.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="SoftBodies_Obsticals/intent.md">Raw captured source</a></p><pre># Intent
+
+What happens when the enclosing architecture deforms?
+
+Begin with a prediction and one controlled change. Observe before explaining. Distinguish shape, connectivity, body clearance and the apparatus that makes a result legible.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="SoftBodies_Obsticals/critical.md">Raw captured source</a></p><pre># The room has a body — question the construction
+
+What happens when the enclosing architecture deforms?
+
+AMPLITUDE changes the range of pressure. RATE changes how quickly its driving phase advances. HOLD DRIVE holds that phase; it does not freeze the wall vertices. The soft solver can continue settling under the pressure it last received.
+
+The sine wave supplies pressure to a deformable body. It does not directly specify the location of every point on the wall. The actual surface is a result of the solver, its constraints and its encounters. This is the bridge from the earlier sine spaces: a periodic instruction now enters a system that can respond.
+
+Calling it breathing is an invitation to bodily recognition. This room has no need for air and no sensor deciding when to inhale. The resemblance can be affecting without becoming a description of its mechanism. Its capacity to narrow space still deserves a practical question: how much room remains for the visitor?
+
+The nearby contact gallery keeps other combinations visible: soft bodies meet rigid obstructions. Look at one named cell before surveying the whole array. The specimen, its support and its settings constitute a particular test; their variety is not a single scale from hard to soft.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="SoftBodies_Obsticals/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `soft_workshop_console` — decoration
+- `pick_up_cube` — secondary
+- `grab_long_stick` — secondary
+- `softbody_gallery_part2` — primary
+- `breathing_room` — primary
+- `flagdancer` — secondary
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="SoftBodies_Obsticals/summary.md">Raw captured source</a></p><pre># The room has a body
+
+What happens when the enclosing architecture deforms?
+
+Primary encounters: breathing_room, softbody_gallery_part2. Existing collection retained. Follow the anchored book passages; controls change the actual source models.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="SoftBodies_Obsticals/blurb.md">Raw captured source</a></p><pre># The room has a body
+
+What happens when the enclosing architecture deforms?
+</pre></section></body></html>

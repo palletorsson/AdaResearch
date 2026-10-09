@@ -1,0 +1,46 @@
+{
+  "physics_engine": "Jolt Physics",
+  "godot_version": "4.6-stable (official)",
+  "passed": true,
+  "checks": 275,
+  "reports": [
+    {
+      "name": "Eighteen force studies",
+      "path": "models/report.json",
+      "passed": true,
+      "checks": 130,
+      "failures": []
+    },
+    {
+      "name": "Existing court and XRTools flight",
+      "path": "court/report.json",
+      "passed": true,
+      "checks": 35,
+      "failures": []
+    },
+    {
+      "name": "Eleven-hall travel and XR return",
+      "path": "teleports/report.json",
+      "passed": true,
+      "checks": 77,
+      "failures": []
+    },
+    {
+      "name": "Actual Gravity hall and captures",
+      "path": "gravity/report.json",
+      "passed": true,
+      "checks": 33,
+      "failures": []
+    }
+  ],
+  "sources": {
+    "project.godot": "2dca361b20ef24c6a91a490d5333055485c377f494735b9fcdfbde704191b032",
+    "tools/probes/force_play_models.gd": "1c2fb6e3c249c9b2f91d53c470e752a8157ded3e37b5c992822a29718ff45273",
+    "tools/probes/force_play_museum.gd": "0e7b4e7dc48b86718fb32f84104092b5194731ea124dadb53a7e139a6215f3c0"
+  },
+  "limits": [
+    "Physical headset comfort and Quest frame timing untested.",
+    "This migration does not certify all older physics examples in the entire museum.",
+    "Logs retain a legacy custom shape solver-bias warning (ignored by Jolt), and the pre-existing unresolved UID warning."
+  ]
+}

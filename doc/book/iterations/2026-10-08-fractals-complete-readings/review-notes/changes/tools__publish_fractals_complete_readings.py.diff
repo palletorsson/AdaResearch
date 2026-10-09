@@ -1,0 +1,109 @@
+--- before/tools/publish_fractals_complete_readings.py
++++ tools/publish_fractals_complete_readings.py
+@@ -1,4 +1,4 @@
+-"""Collect the current seven-hall texts verbatim; assess them without editing them."""
++"""Collect the current seven-hall texts verbatim and include the editorial revision."""
+ from pathlib import Path
+ from urllib.parse import urlsplit, unquote
+ from html import escape
+@@ -9,6 +9,7 @@
+ R=Path(__file__).resolve().parents[1]
+ O=R/'doc/book/iterations/2026-10-08-fractals-complete-readings'
+ SEQ=R/'commons/maps/sequences/fractals.json'
++REVISION=R/'doc/book/iterations/2026-10-08-fractals-a-question-of-your-own'
+ order=json.loads(SEQ.read_text(encoding='utf-8-sig'))['sequences']['fractals']['maps']
+ assert len(order)==7
+ for d in ['sources','student-files','assets','evidence']:(O/d).mkdir(parents=True,exist_ok=True)
+@@ -18,7 +19,7 @@
+ def dump(p,obj):write(p,json.dumps(obj,indent=2,ensure_ascii=False)+'\n')
+ shutil.copy2(SEQ,O/'sources/fractals.json')
+ labels=['Recursion','Recursive Trees','Cantor Set','Koch / Sierpinski','Menger Sponge','Golden Spiral','Synthesis']
+-operations=['A self-call receives a smaller size and a remaining budget.','Two calls inherit a parent transform; turn one fork and its descendants follow.','Replace an interval with two survivors; separate current, next and history.','Replace each segment with a detour; distinguish a path address from travelled distance.','Select cells in three dimensions; inspect an address and try the resulting passage.','Append the previous pair’s sum; read one record through two height functions.','Copy a recipe, vary it, reconstruct both results and prepare a symbolic rewrite.']
++operations=['A self-call receives a smaller size and a remaining budget.','Two calls inherit a parent transform; turn one fork and its descendants follow.','Replace an interval with two survivors; separate current, next and history.','Replace each segment with a detour; distinguish a path address from travelled distance.','Select cells in three dimensions; inspect an address and try the resulting passage.','Append the previous pair’s sum; read one record through two height functions.','Copy and compare recipes; optionally compose one earlier influence with a chosen construction, then prepare a symbolic rewrite.']
+ questions=['Where does more detail stop producing another usable distinction?','What travels from a local edit to a canopy, and what does a drawing leave out?','How can more pieces leave less material, and when is a gap a passage?','What changes when the boundary grows or the discarded parts become the subject?','When does a geometrical connection become a route for this body?','Which choices turn numbers into convincing forms?','Which difference is worth keeping, and how does an encounter revise its description?']
+ receipts={
+  'Fractal_Recursion':'2026-10-08-fractal-fork-in-the-hand',
+@@ -114,26 +115,28 @@
+ 
+ The tutorials supply complete code, declared dependencies, predictions and variations. The reflections extend what the learner has made into questions of access, recognition, omission and judgment. They sometimes still duplicate the tutorial’s explanations and controls. The distinction between the tracks holds, but their rhythms could differ more.
+ 
+-## What I would tighten next
++## What this revision changes
+ 
+-1. **Koch/Sierpinski is the densest encounter.** The final text also visits box-counting and the altered pyramid. Keep them as clearly optional detours, so the main line-to-boundary-to-volume passage remains easy to follow. The tutorial already makes the core assignment narrower.
+-2. **Synthesis reaches its strongest writing late.** Its return to the interval and tree is useful, but the detailed controls and source excerpts repeat earlier work. A later edit could shorten that recap and bring the kept recipe, the return from body to description, and the question of significance forward.
+-3. **The collected tutorial exposes repeated scaffolding.** Complete helpers are valuable in a standalone lesson. Reprinting PointBody and LineSkin, setup and reset instructions repeatedly makes a continuous book heavier. Preserve the full per-hall downloads; consider one shared-code appendix and precise references for a future book edition. Nothing has been removed from this reading.
+-4. **Keep the distinctions, vary their expression.** Finite result versus infinite limit, drawing versus collision, and rule versus view recur throughout. Those distinctions belong to the argument. Let the changed encounter do more of their work, rather than restating every caution each time.
++1. **Synthesis now invites an authored composition.** The required recipe lesson remains complete. An optional task asks for one chosen connection between a Fractals construction and an earlier operation. Keep the original, declare an invariant, predict, run, inspect and revise. The tree/noise example in the review notes is one tested response, not the required answer.
++2. **The reflective ending reaches its question sooner.** The interval/tree recap is shorter and three repeated source excerpts are removed. The table's local exercise is distinguished from the larger research practice of moving between description, code and bodily encounter.
++3. **Menger stays with the attempted passage.** Collision dimensions and occupied-room controls remain in a note. The main text follows hole, passage and body.
++4. **Koch's additional studies are explicit detours.** Box-counting and the inherited pyramid can be explored without becoming required stops in the line-to-boundary-to-volume progression.
+ 
+-I would keep the seven-hall order. The next improvement is pacing and selective emphasis, followed by an independent learner trying to reconstruct and vary the studies. Passing code checks cannot settle how the prose teaches.
++The seven-hall order still holds. Reconstruct → predict → compose adds responsibility without requiring every lesson to become a hybrid simulation. The full helpers still repeat in the collected tutorial because each study must be complete. A future book layout may distinguish carried files more economically. Passing code checks cannot settle how the prose teaches.
++
++The next useful test is an independent learner choosing and explaining a composition. The writing agent's feasibility example does not substitute for that encounter. An unexpected shape and a precisely anticipated shape can both be worth pursuing.
+ 
+ ## What this package establishes
+ 
+-The fourteen current manuscripts are preserved. All sixteen marked learner code blocks match their existing study files, and the combined tutorial retains those exact blocks. Included images, footnotes, chapter links and local assets are checked. This is a reading and assembly pass, not a fresh execution of the Godot tests.
++The fourteen revised canonical manuscripts are copied in full. All sixteen marked learner code blocks match their existing study files, and the combined tutorial retains those exact blocks. Included images, footnotes, chapter links and local assets are checked. Editorial before/after texts and the separate optional composition example are in review-notes/.
+ 
+-Earlier native receipts are included as historical evidence, with current tutorial-hash comparisons. Their counts overlap and are not added into a new whole-sequence score. Headset comfort, performance and learning remain separate questions. The known obstruction at the Grammar Lab’s onward exit is outside this seven-hall reading and remains open.
++For this revision, the exact required Synthesis code passed 46 fresh native assertions; the optional tree/noise feasibility response passed 21. Both runs exited successfully without script errors. The latter was authored by the writing agent, not an independent student. Earlier whole-hall receipts remain historical evidence with tutorial-hash comparisons; their counts overlap and are not added into a new whole-sequence score. Headset comfort, performance and learning remain separate questions. The previously recorded Grammar Lab onward-exit obstruction was not reassessed in this editorial pass.
+ '''
+ write(O/'ASSESSMENT.md',assessment)
+ review=render(assessment,'assessment')
+ rows=''.join('<tr><td><a href="parallel.html#'+h['id']+'">'+str(h['number']).zfill(2)+' · '+escape(h['label'])+'</a></td><td>'+escape(h['operation'])+'</td><td>'+escape(h['question'])+'</td></tr>' for h in halls)
+ stats=f'<p class="meta">Tutorial: approximately {totals["tutorial"]["prose_words_approx"]:,} prose words + {totals["tutorial"]["fenced_lines"]:,} printed code lines · Reflection: approximately {totals["final"]["prose_words_approx"]:,} prose words</p>'
+-index='<main><p class="eyebrow">Endless Museum · complete Fractals sequence</p><h1>Rules, scale<br>and room to move.</h1><p class="lead">Seven halls. Two complete readings. The same work followed through making and reflection.</p><div class="downloads"><a href="tutorial.html">Read the full tutorial</a><a href="final.html">Read the full final text</a><a href="fractals-complete-readings.zip">Download the review package</a></div>'+stats+'<p><a href="parallel.html">Read the tracks side by side</a> · <a href="fractals-tutorial.md">Tutorial Markdown</a> · <a href="fractals-final.md">Final Markdown</a></p><h2>The progression</h2><table><thead><tr><th>Hall</th><th>What the learner can do</th><th>What the encounter asks</th></tr></thead><tbody>'+rows+'</tbody></table>'+review+'<p><a href="manifest.json">Source and code hashes</a> · <a href="ASSESSMENT.md">Download this assessment</a></p></main>'
++index='<main><p class="eyebrow">Endless Museum · complete Fractals sequence</p><h1>Rules, scale<br>and room to move.</h1><p class="lead">Seven halls. Two complete readings. The same work followed through making and reflection.</p><div class="downloads"><a href="tutorial.html">Read the full tutorial</a><a href="final.html">Read the full final text</a><a href="fractals-complete-readings.zip">Download the review package</a></div>'+stats+'<p><a href="parallel.html">Read the tracks side by side</a> · <a href="fractals-tutorial.md">Tutorial Markdown</a> · <a href="fractals-final.md">Final Markdown</a></p><p class="note"><a href="review-notes/index.html">Editorial revision: a question of your own</a> — optional composition task, lighter reflection, before/after texts and fresh focused checks.</p><h2>The progression</h2><table><thead><tr><th>Hall</th><th>What the learner can do</th><th>What the encounter asks</th></tr></thead><tbody>'+rows+'</tbody></table>'+review+'<p><a href="manifest.json">Source and code hashes</a> · <a href="ASSESSMENT.md">Download this assessment</a></p></main>'
+ write(O/'index.html',page('Fractals — complete readings and assessment',index))
+ readme='''# Fractals — complete readings
+ 
+@@ -144,12 +147,17 @@
+ - parallel.html places tutorial left and reflection right, hall by hall.
+ - sources/ preserves the fourteen canonical source manuscripts byte for byte, plus the sequence JSON. Raw source image paths are unchanged; use the compiled readings for portable images.
+ - student-files/ contains the sixteen exact printed files in separate hall folders. Use them in the prepared Endless Museum workspace with installed XRTools, existing camera, lighting and player. This ZIP is not a standalone Godot project. Follow each lesson’s attachment and orientation instructions.
+-- ASSESSMENT.md is editorial judgment, separate from the manuscripts. No canonical texts or museum code were rewritten by this compilation.
+-- evidence/ contains previously recorded receipts. These tests were not rerun for this package; counts overlap. manifest.json states which current tutorial hashes match those receipts.
++- ASSESSMENT.md is editorial judgment, separate from the manuscripts. This compiler reads the revised canonical texts without modifying them.
++- review-notes/ records the editorial changes with before versions and diffs. Its composition-example/ holds one optional noise/tree response and instructions for running it in the museum workspace. This is a feasibility example, not a required answer or independent student submission.
++- review-notes/tests/ contains fresh 46-check required Synthesis and 21-check composition runs. evidence/ contains earlier receipts; those whole-hall runs were not repeated. Counts overlap and must not be added into a whole-sequence score. manifest.json records hash comparisons and the scope of fresh evidence.
+ 
+ Namespaced footnotes and local image links allow the two combined readings to work without localhost. Code blocks remain unchanged. Existing external source links require internet access.
+ '''
+ write(O/'README.md',readme)
++assert (REVISION/'evidence.json').is_file(), 'Publish the editorial revision first'
++shutil.copytree(REVISION,O/'review-notes',dirs_exist_ok=True)
++revision_evidence=json.loads(read(REVISION/'evidence.json'))
++for name,digest in revision_evidence['source_sha256'].items():assert sha(R/name)==digest
+ # Confirm assembly did not alter any printed code, and each archive source remains current.
+ combined_blocks=re.findall(r'<!-- student-code:([^>]+) -->\s*```gdscript\n(.*?)\n```',read(O/'fractals-tutorial.md'),re.S)
+ assert len(combined_blocks)==len(printed)
+@@ -158,7 +166,7 @@
+ assert len(rendered_blocks)==len(printed)
+ for rendered,(_,body) in zip(rendered_blocks,combined_blocks):assert rendered.get_text().rstrip()==body.rstrip()
+ for source in sources:assert sha(R/source['path'])==source['sha256']==sha(O/source['copy'])
+-manifest={'date':'2026-10-08','sequence':'fractals','order':order,'source_sequence_sha256':sha(SEQ),'halls':halls,'sources':sources,'student_files':printed,'assets':assets,'totals':totals,'earlier_evidence':archive_evidence,'canonical_sources_modified':False,'runtime_tests_rerun':False}
++manifest={'date':'2026-10-08','sequence':'fractals','order':order,'source_sequence_sha256':sha(SEQ),'halls':halls,'sources':sources,'student_files':printed,'assets':assets,'totals':totals,'earlier_evidence':archive_evidence,'canonical_sources_modified_by_compiler':False,'runtime_tests_rerun_by_compiler':False,'revision_evidence':revision_evidence,'fresh_runtime_scope':'Required Synthesis:46; one writing-agent tree/noise response:21. See review-notes/tests. No whole-sequence or headset rerun.'}
+ dump(O/'manifest.json',manifest)
+ # Create archive before checking links, since pages link to the archive itself.
+ archive=O/'fractals-complete-readings.zip'
+@@ -168,7 +176,7 @@
+             if p.is_file() and p!=archive and '__pycache__' not in p.parts:z.write(p,p.relative_to(O).as_posix())
+ pack()
+ links=0;chapters=0
+-for p in O.glob('*.html'):
++for p in O.rglob('*.html'):
+     soup=BeautifulSoup(read(p),'html.parser');ids=[x['id'] for x in soup.find_all(id=True)];assert len(ids)==len(set(ids)),p
+     for tag in soup.find_all(['a','img','link']):
+         url=tag.get('href') or tag.get('src')
+@@ -185,6 +193,6 @@
+ with zipfile.ZipFile(archive) as z:
+     assert z.testzip() is None
+     for src in sources:assert hashlib.sha256(z.read(src['copy'])).hexdigest()==src['sha256']
+-dump(O/'validation.json',{'canonical_manuscripts_unchanged':14,'printed_code_files_match':len(printed),'combined_code_blocks_match':len(combined_blocks),'rendered_code_blocks_match':len(rendered_blocks),'chapter_sections':chapters,'relative_links_and_anchors':links,'assets':len(assets),'duplicate_html_ids':0,'zip_integrity':'passed','runtime_tests_rerun':False})
++dump(O/'validation.json',{'canonical_manuscripts_match_snapshots':14,'printed_code_files_match':len(printed),'combined_code_blocks_match':len(combined_blocks),'rendered_code_blocks_match':len(rendered_blocks),'chapter_sections':chapters,'relative_links_and_anchors':links,'assets':len(assets),'duplicate_html_ids':0,'zip_integrity':'passed','runtime_tests_rerun_by_compiler':False,'fresh_native_checks':revision_evidence['tests']})
+ pack()
+ print(json.dumps({'output':str(O),'totals':totals,'files':len(sources),'printed':len(printed),'assets':len(assets),'links':links,'zip_MB':round(archive.stat().st_size/1024**2,2)},indent=2))

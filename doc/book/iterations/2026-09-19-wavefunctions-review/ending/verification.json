@@ -1,0 +1,441 @@
+{
+  "owned_live_hashes_match": true,
+  "maps": {
+    "WaveFunctions_AirMusic": {
+      "before_count": 10,
+      "after_count": 10,
+      "same_cells": true,
+      "same_keys": true,
+      "changed_tokens": [],
+      "other_layers_unchanged": true
+    },
+    "Wavefunctions_Sky_Stairs": {
+      "before_count": 4,
+      "after_count": 4,
+      "same_cells": true,
+      "same_keys": true,
+      "changed_tokens": [],
+      "other_layers_unchanged": true
+    },
+    "WaveFunctions_TrigWalkingPath": {
+      "before_count": 6,
+      "after_count": 6,
+      "same_cells": true,
+      "same_keys": true,
+      "changed_tokens": [],
+      "other_layers_unchanged": true
+    },
+    "WaveFunctions_Synthesis_Lab": {
+      "before_count": 25,
+      "after_count": 25,
+      "same_cells": true,
+      "same_keys": true,
+      "changed_tokens": [
+        {
+          "before": {
+            "cell": [
+              4,
+              2
+            ],
+            "token": "additive_wave_demo:0#stand:bench#waveform:sawtooth"
+          },
+          "after": {
+            "cell": [
+              4,
+              2
+            ],
+            "token": "additive_wave_demo:0#stand:bench#waveform:sawtooth#name_after_compare:true"
+          }
+        }
+      ],
+      "other_layers_unchanged": true
+    }
+  },
+  "archived_designs_preserved": {
+    "commons/maps/Wavefunctions_Sky_Stairs/intent.md": true,
+    "commons/maps/Wavefunctions_Sky_Stairs/summary.md": true,
+    "commons/maps/Wavefunctions_Sky_Stairs/technical.md": true,
+    "commons/maps/Wavefunctions_Sky_Stairs/tutorial.md": true,
+    "commons/maps/Wavefunctions_Sky_Stairs/critical.md": true,
+    "commons/maps/WaveFunctions_TrigWalkingPath/intent.md": true,
+    "commons/maps/WaveFunctions_TrigWalkingPath/summary.md": true,
+    "commons/maps/WaveFunctions_TrigWalkingPath/technical.md": true,
+    "commons/maps/WaveFunctions_TrigWalkingPath/tutorial.md": true,
+    "commons/maps/WaveFunctions_TrigWalkingPath/critical.md": true
+  },
+  "identity_edits_comment_only": {
+    "algorithms/wavefunctions/resonance/ResonatingMetallophone.gd": true,
+    "algorithms/wavefunctions/resonance/ResonatingBar.gd": true,
+    "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd": true,
+    "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd": true,
+    "algorithms/wavefunctions/oscillation_driver/TrigWalkingPath.gd": true
+  },
+  "same_camera": {
+    "arrival": true,
+    "first-alone": true,
+    "restored": true
+  },
+  "actual_museum_placed_cells": {
+    "before": {
+      "count": 25,
+      "keys_and_cells": [
+        {
+          "key": "dna_specimen",
+          "cell": [
+            2,
+            1
+          ]
+        },
+        {
+          "key": "holographicdisplay",
+          "cell": [
+            3,
+            1
+          ]
+        },
+        {
+          "key": "electronicscales",
+          "cell": [
+            4,
+            1
+          ]
+        },
+        {
+          "key": "air_music_display_case",
+          "cell": [
+            1,
+            2
+          ]
+        },
+        {
+          "key": "additive_wave_demo",
+          "cell": [
+            4,
+            2
+          ]
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            7,
+            2
+          ]
+        },
+        {
+          "key": "biomagneticresonator",
+          "cell": [
+            9,
+            2
+          ]
+        },
+        {
+          "key": "UnitCircleTrig",
+          "cell": [
+            10,
+            2
+          ]
+        },
+        {
+          "key": "record_room",
+          "cell": [
+            12,
+            2
+          ]
+        },
+        {
+          "key": "GlassRack",
+          "cell": [
+            2,
+            4
+          ]
+        },
+        {
+          "key": "hallway_scene",
+          "cell": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "synthesis_stand",
+          "cell": [
+            10,
+            4
+          ]
+        },
+        {
+          "key": "lissajous_curves",
+          "cell": [
+            2,
+            6
+          ]
+        },
+        {
+          "key": "seismograph",
+          "cell": [
+            2,
+            8
+          ]
+        },
+        {
+          "key": "samplevialrack",
+          "cell": [
+            9,
+            8
+          ]
+        },
+        {
+          "key": "oscilloscope",
+          "cell": [
+            10,
+            8
+          ]
+        },
+        {
+          "key": "double_helix_scene",
+          "cell": [
+            2,
+            9
+          ]
+        },
+        {
+          "key": "spring_demo",
+          "cell": [
+            6,
+            9
+          ]
+        },
+        {
+          "key": "SoundscapeRadioRack",
+          "cell": [
+            7,
+            9
+          ]
+        },
+        {
+          "key": "petri_dish_worms",
+          "cell": [
+            9,
+            10
+          ]
+        },
+        {
+          "key": "atmosphericmonitoring",
+          "cell": [
+            10,
+            10
+          ]
+        },
+        {
+          "key": "chladni_plate",
+          "cell": [
+            7,
+            11
+          ]
+        },
+        {
+          "key": "microscope",
+          "cell": [
+            7,
+            12
+          ]
+        },
+        {
+          "key": "chemicalapparatus",
+          "cell": [
+            9,
+            12
+          ]
+        },
+        {
+          "key": "multimeter",
+          "cell": [
+            10,
+            12
+          ]
+        }
+      ]
+    },
+    "after": {
+      "count": 25,
+      "keys_and_cells": [
+        {
+          "key": "dna_specimen",
+          "cell": [
+            2,
+            1
+          ]
+        },
+        {
+          "key": "holographicdisplay",
+          "cell": [
+            3,
+            1
+          ]
+        },
+        {
+          "key": "electronicscales",
+          "cell": [
+            4,
+            1
+          ]
+        },
+        {
+          "key": "air_music_display_case",
+          "cell": [
+            1,
+            2
+          ]
+        },
+        {
+          "key": "additive_wave_demo",
+          "cell": [
+            4,
+            2
+          ]
+        },
+        {
+          "key": "dark_sphere",
+          "cell": [
+            7,
+            2
+          ]
+        },
+        {
+          "key": "biomagneticresonator",
+          "cell": [
+            9,
+            2
+          ]
+        },
+        {
+          "key": "UnitCircleTrig",
+          "cell": [
+            10,
+            2
+          ]
+        },
+        {
+          "key": "record_room",
+          "cell": [
+            12,
+            2
+          ]
+        },
+        {
+          "key": "GlassRack",
+          "cell": [
+            2,
+            4
+          ]
+        },
+        {
+          "key": "hallway_scene",
+          "cell": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "synthesis_stand",
+          "cell": [
+            10,
+            4
+          ]
+        },
+        {
+          "key": "lissajous_curves",
+          "cell": [
+            2,
+            6
+          ]
+        },
+        {
+          "key": "seismograph",
+          "cell": [
+            2,
+            8
+          ]
+        },
+        {
+          "key": "samplevialrack",
+          "cell": [
+            9,
+            8
+          ]
+        },
+        {
+          "key": "oscilloscope",
+          "cell": [
+            10,
+            8
+          ]
+        },
+        {
+          "key": "double_helix_scene",
+          "cell": [
+            2,
+            9
+          ]
+        },
+        {
+          "key": "spring_demo",
+          "cell": [
+            6,
+            9
+          ]
+        },
+        {
+          "key": "SoundscapeRadioRack",
+          "cell": [
+            7,
+            9
+          ]
+        },
+        {
+          "key": "petri_dish_worms",
+          "cell": [
+            9,
+            10
+          ]
+        },
+        {
+          "key": "atmosphericmonitoring",
+          "cell": [
+            10,
+            10
+          ]
+        },
+        {
+          "key": "chladni_plate",
+          "cell": [
+            7,
+            11
+          ]
+        },
+        {
+          "key": "microscope",
+          "cell": [
+            7,
+            12
+          ]
+        },
+        {
+          "key": "chemicalapparatus",
+          "cell": [
+            9,
+            12
+          ]
+        },
+        {
+          "key": "multimeter",
+          "cell": [
+            10,
+            12
+          ]
+        }
+      ]
+    }
+  },
+  "same_loaded_museum": true
+}

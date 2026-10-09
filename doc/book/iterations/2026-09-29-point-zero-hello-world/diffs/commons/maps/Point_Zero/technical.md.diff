@@ -1,0 +1,17 @@
+--- before/commons/maps/Point_Zero/technical.md
++++ commons/maps/Point_Zero/technical.md
+@@ -27,3 +27,14 @@
+ ## A spatial zero
+ 
+ The origin marker now owns the label “Point zero”, configured through its existing beam label. `Vector3.ZERO` specifies a coordinate-system origin; it does not reset the process counter. The existing removable “you” is retained beside that encounter.
++
++
++## Hello-world making passage — 29 September 2026
++
++tutorial.md supplies an executable first exercise after Day Zero. doc/book/studies/point-zero/hello_world.tscn inherits the unchanged base and adds Greeting and Counter Label3D children. hello_world.gd assigns the greeting in _ready(); a node-level integer begins at zero and increases in _process(_delta), which assigns str(count) to the counter.
++
++The lesson checks a greeting-only script, repeated counting, moving the same update into _ready(), and incrementing by two. Readiness is the node's lifecycle event, not a declaration that the entire world has begun. The inherited base greeting is hidden, so its script produces no duplicate hello.
++
++The production artifact still reads the engine's process-frame count by default. Its source _ready() builds the console and records its arrival reference; the tutorial borrows the display and simplifies the running count. It is not a reproduction of the artifact's shader, geometry or selectable reading/epoch system.
++
++Frame counts are not elapsed seconds. Process callbacks are also not a guarantee that a particular image was presented to a headset. The lesson's evidence is native lifecycle and display-state behavior, not a headset or learner trial.

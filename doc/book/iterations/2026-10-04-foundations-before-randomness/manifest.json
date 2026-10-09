@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-04",
+  "status": "Proposed foundation plan; no lessons or runtime changed",
+  "hall_count": 35,
+  "sequence_count": 4,
+  "coverage_count": 12,
+  "validated": [
+    "first four sequences match current route",
+    "all 35 halls in existing order",
+    "coverage references valid",
+    "five consolidation sequences precede Randomness"
+  ],
+  "limitations": [
+    "source review only",
+    "learner readiness untested",
+    "planned bindings not implemented"
+  ],
+  "sources": [
+    {
+      "path": "doc/book/iterations/2026-10-04-museum-tutorial-storyboards/route.json",
+      "sha256": "1c3daebd6f8b3c4effba8aecc47ad49d015f661a256bdaac0f251cde7f388d23"
+    },
+    {
+      "path": "doc/book/course/storyboards/BRIEF.md",
+      "sha256": "84915fa12585a7db3772a4fd09413b91ef24b7de3970467bbf86beee74be51a2"
+    },
+    {
+      "path": "doc/book/course/storyboards/LINES-TRACE-GRID.md",
+      "sha256": "b91323268cb116867688553a17961be97149d4fb0ace9dde6112d63e1fc1e32b"
+    },
+    {
+      "path": "doc/book/course/sketch/subject_lineage.json",
+      "sha256": "92d3abe9d5cc599a605b5e5ff080ea16933557003b62efd6d49ff56fca13025a"
+    },
+    {
+      "path": "commons/maps/Point_One/tutorial.md",
+      "sha256": "09979370381493e170ce349368ae4d3ec72286f6fd1b4d468dfa0680eb2039e2"
+    },
+    {
+      "path": "commons/maps/Point_Trace/tutorial.md",
+      "sha256": "8ad5211bab859c2a8fd86f60145624af9753bf818ed271a342d2e804bec0238f"
+    },
+    {
+      "path": "algorithms/color/gridcolorizer/address_lesson.gd",
+      "sha256": "4669b301b83240170a4193a38ab9b5231f9f168dbb066100feb1c773e8527e4d"
+    },
+    {
+      "path": "algorithms/color/pillarcolorcollection/field_sampler.gd",
+      "sha256": "fb26c2bea40a85366b5241d1009a8d48a60bb7a6ec23c9fb2c00e099761bca43"
+    },
+    {
+      "path": "commons/maps/Color_Nails/tutorial.md",
+      "sha256": "5437ec1394fbec1f4c3c0f481e7d99bec52101c36cd449984a3439c8e48aeab4"
+    },
+    {
+      "path": "doc/book/iterations/2026-10-04-foundations-before-randomness/plan.json",
+      "sha256": "5ae215c1aa80f2b28ff1ace1d9bb4d60e177d6c2a1953dec8fe2ccbc028538e0"
+    }
+  ]
+}

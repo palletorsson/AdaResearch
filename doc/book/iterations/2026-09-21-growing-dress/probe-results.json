@@ -1,0 +1,209 @@
+{
+  "checks": [
+    {
+      "label": "independent preview retains original size: latex_cathedral",
+      "pass": true
+    },
+    {
+      "label": "independent preview retains original size: chrome_orchid",
+      "pass": true
+    },
+    {
+      "label": "independent preview retains original size: holo_fan",
+      "pass": true
+    },
+    {
+      "label": "independent preview retains original size: pearl_rococo",
+      "pass": true
+    },
+    {
+      "label": "wardrobe creates the actual costume",
+      "pass": true
+    },
+    {
+      "label": "authoritative 24-sequence spine includes Arrays and Tiling in order",
+      "pass": true
+    },
+    {
+      "label": "unknown sequence cannot grow the costume",
+      "pass": true
+    },
+    {
+      "label": "first visited sequence grows once",
+      "pass": true
+    },
+    {
+      "label": "revisit cannot grant another stage",
+      "pass": true
+    },
+    {
+      "label": "selected drag outfit is wearable",
+      "pass": true
+    },
+    {
+      "label": "selected fabric reaches skirt",
+      "pass": true
+    },
+    {
+      "label": "growth starts from a fixed waist",
+      "pass": true
+    },
+    {
+      "label": "growth accepts transformation",
+      "pass": true
+    },
+    {
+      "label": "growth accepts array_tutorial",
+      "pass": true
+    },
+    {
+      "label": "growth accepts color",
+      "pass": true
+    },
+    {
+      "label": "growth accepts tiling",
+      "pass": true
+    },
+    {
+      "label": "five unique sequences give five stages",
+      "pass": true
+    },
+    {
+      "label": "the visible selected outfit receives the stage",
+      "pass": true
+    },
+    {
+      "label": "worn hem lengthens and widens",
+      "pass": true
+    },
+    {
+      "label": "growth preserves the exact skirt mesh and chosen material",
+      "pass": true
+    },
+    {
+      "label": "growth preserves chosen fabric values",
+      "pass": true
+    },
+    {
+      "label": "arrival animation starts at the current hem",
+      "pass": true
+    },
+    {
+      "label": "arrival passes through an intermediate hem",
+      "pass": true
+    },
+    {
+      "label": "arrival settles at the visited stage",
+      "pass": true
+    },
+    {
+      "label": "waiting does not add progress",
+      "pass": true
+    },
+    {
+      "label": "all current sequences fit the growth budget",
+      "pass": true
+    },
+    {
+      "label": "base dress has exactly 24 tiers without queued duplicate children",
+      "pass": true
+    },
+    {
+      "label": "all 24 sequence keepsakes are present without replacing one another",
+      "pass": true
+    },
+    {
+      "label": "worn hem remains bounded below the fixed waist",
+      "pass": true
+    },
+    {
+      "label": "grown silhouette stays within the authored radius bound",
+      "pass": true
+    },
+    {
+      "label": "cosmetic growth adds no collision bodies",
+      "pass": true
+    },
+    {
+      "label": "look change retains growth and recipe: latex_cathedral",
+      "pass": true
+    },
+    {
+      "label": "look change retains growth and recipe: chrome_orchid",
+      "pass": true
+    },
+    {
+      "label": "look change retains growth and recipe: holo_fan",
+      "pass": true
+    },
+    {
+      "label": "look change retains growth and recipe: pearl_rococo",
+      "pass": true
+    },
+    {
+      "label": "return to walk dress retains growth",
+      "pass": true
+    },
+    {
+      "label": "completed Arrays and Tiling restore on a new wardrobe",
+      "pass": true
+    },
+    {
+      "label": "VR hall growth reaches the current rig, not menu rig",
+      "pass": true
+    },
+    {
+      "label": "same VR hall cannot double-grow",
+      "pass": true
+    },
+    {
+      "label": "VR chapter transition carries previous growth",
+      "pass": true
+    },
+    {
+      "label": "switching active rigs reacquires the correct wardrobe",
+      "pass": true
+    },
+    {
+      "label": "a wardrobe arriving after its XR rig still receives the current hall",
+      "pass": true
+    },
+    {
+      "label": "costume-off suppresses museum growth",
+      "pass": true
+    },
+    {
+      "label": "desktop hall entry still grows its own wardrobe",
+      "pass": true
+    }
+  ],
+  "failures": [],
+  "headset_tested": false,
+  "observations": [
+    {
+      "bottom_radius": 0.288458347320557,
+      "height": 0.516666650772095,
+      "hem_y": -1.03166663646698,
+      "label": "dress-one",
+      "material_id": -9223371995851258236,
+      "stage": 1
+    },
+    {
+      "bottom_radius": 0.324291676282883,
+      "height": 0.583333313465118,
+      "hem_y": -1.09833332896233,
+      "label": "dress-five",
+      "material_id": -9223371995851258236,
+      "stage": 5
+    },
+    {
+      "bottom_radius": 0.494500011205673,
+      "height": 0.899999976158142,
+      "hem_y": -1.41499996185303,
+      "label": "dress-twenty-four",
+      "material_id": -9223371995851258236,
+      "stage": 24
+    }
+  ],
+  "scope": "Actual wardrobe/costume/outfit source and literal museum routing methods; stub completion manager and generated poses. No production autoloads, player saves or physical headset."
+}

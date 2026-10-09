@@ -1,0 +1,277 @@
+{
+  "collection_date": "2026-10-07",
+  "yt_dlp_version": "2026.01.31",
+  "target": 1000,
+  "selected_unique_titles": 1000,
+  "method": "Purposive channel sample; up to first 100 entries supplied by each public /shorts list; fixed-order round-robin selection of 1000 unique video IDs. Default list order recorded as list_position; not a random sample.",
+  "limits": [
+    "Titles and list metadata only; no videos watched by this script.",
+    "Not the user personalized feed; no claim of platform-wide representativeness.",
+    "View counts are approximate list-display values; not used to infer retention or causation.",
+    "Dates of individual uploads are unavailable in these flat lists."
+  ],
+  "sources": [
+    {
+      "requested_handle": "TheActionLab",
+      "source_url": "https://www.youtube.com/@TheActionLab/shorts",
+      "selection_purpose": "science demonstrations",
+      "channel": "The Action Lab",
+      "channel_id": "UC1VLQPn9cYSqx8plbk9RxxQ",
+      "list_title": "The Action Lab - Shorts",
+      "status": "ok",
+      "count": 30,
+      "warnings": []
+    },
+    {
+      "requested_handle": "ActionLabShorts",
+      "source_url": "https://www.youtube.com/@ActionLabShorts/shorts",
+      "selection_purpose": "science demonstrations",
+      "channel": "Action Lab Shorts",
+      "channel_id": "UCA19mAJURyYHbJzhfpqhpCA",
+      "list_title": "Action Lab Shorts - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "SteveMould",
+      "source_url": "https://www.youtube.com/@SteveMould/shorts",
+      "selection_purpose": "science demonstrations",
+      "channel": "Steve Mould",
+      "channel_id": "UCEIwxahdLz7bap-VDs9h35A",
+      "list_title": "Steve Mould - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "SteveSpangler",
+      "source_url": "https://www.youtube.com/@SteveSpangler/shorts",
+      "selection_purpose": "science demonstrations",
+      "status": "error",
+      "error": "ERROR: [youtube:tab] @SteveSpangler: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+      "count": 0,
+      "warnings": [
+        "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+        "[youtube:tab] Unable to download webpage: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>). Giving up after 1 retries",
+        "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+        "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+        "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+        "ERROR: [youtube:tab] @SteveSpangler: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)"
+      ]
+    },
+    {
+      "requested_handle": "physicsfun",
+      "source_url": "https://www.youtube.com/@physicsfun/shorts",
+      "selection_purpose": "physical toys and demonstrations",
+      "channel": "physicsfun",
+      "channel_id": "UCVs-1uGf7DWid0GNWgPWLzw",
+      "list_title": "physicsfun - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "Engineezy",
+      "source_url": "https://www.youtube.com/@Engineezy/shorts",
+      "selection_purpose": "mechanisms and making",
+      "channel": "Engineezy",
+      "channel_id": "UCSksodwjNeOQ3Oywr1G4Nag",
+      "list_title": "Engineezy - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "JosephsMachines",
+      "source_url": "https://www.youtube.com/@JosephsMachines/shorts",
+      "selection_purpose": "mechanisms and chain reactions",
+      "channel": "Joseph's Machines",
+      "channel_id": "UCbNvfx3rYYxEopnRGxfu53Q",
+      "list_title": "Joseph's Machines - Shorts",
+      "status": "ok",
+      "count": 96,
+      "warnings": []
+    },
+    {
+      "requested_handle": "BrickExperimentChannel",
+      "source_url": "https://www.youtube.com/@BrickExperimentChannel/shorts",
+      "selection_purpose": "mechanisms and making",
+      "channel": "Brick Experiment Channel",
+      "channel_id": "UClsFdM0HzTdF1JYoraQ0aUw",
+      "list_title": "Brick Experiment Channel - Shorts",
+      "status": "ok",
+      "count": 22,
+      "warnings": []
+    },
+    {
+      "requested_handle": "Hevesh5",
+      "source_url": "https://www.youtube.com/@Hevesh5/shorts",
+      "selection_purpose": "dominoes and chain reactions",
+      "channel": "Hevesh5",
+      "channel_id": "UCxJsQFhb8PFjtuN5gdOV6-w",
+      "list_title": "Hevesh5 - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "MarbleRunJapan",
+      "source_url": "https://www.youtube.com/@MarbleRunJapan/shorts",
+      "selection_purpose": "marble runs",
+      "status": "error",
+      "error": "ERROR: [youtube:tab] @MarbleRunJapan: This channel does not have a shorts tab",
+      "count": 0,
+      "warnings": [
+        "ERROR: [youtube:tab] @MarbleRunJapan: This channel does not have a shorts tab"
+      ]
+    },
+    {
+      "requested_handle": "HowRidiculous",
+      "source_url": "https://www.youtube.com/@HowRidiculous/shorts",
+      "selection_purpose": "throws, drops and targets",
+      "channel": "How Ridiculous",
+      "channel_id": "UC5f5IV0Bf79YLp_p9nfInRA",
+      "list_title": "How Ridiculous - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "DudePerfect",
+      "source_url": "https://www.youtube.com/@DudePerfect/shorts",
+      "selection_purpose": "trick shots and challenges",
+      "channel": "Dude Perfect",
+      "channel_id": "UCRijo3ddMTht_IHyNSNXpNQ",
+      "list_title": "Dude Perfect - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "JoshHorton",
+      "source_url": "https://www.youtube.com/@JoshHorton/shorts",
+      "selection_purpose": "balance, juggling and trick shots",
+      "status": "error",
+      "error": "ERROR: [youtube:tab] @JoshHorton: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+      "count": 0,
+      "warnings": [
+        "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+        "[youtube:tab] Unable to download webpage: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>). Giving up after 1 retries",
+        "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+        "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+        "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+        "ERROR: [youtube:tab] @JoshHorton: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)"
+      ]
+    },
+    {
+      "requested_handle": "THATLLWORK",
+      "source_url": "https://www.youtube.com/@THATLLWORK/shorts",
+      "selection_purpose": "trick shots and challenges",
+      "status": "error",
+      "error": "ERROR: [youtube:tab] @THATLLWORK: This channel does not have a shorts tab",
+      "count": 0,
+      "warnings": [
+        "ERROR: [youtube:tab] @THATLLWORK: This channel does not have a shorts tab"
+      ]
+    },
+    {
+      "requested_handle": "MDMXGames",
+      "source_url": "https://www.youtube.com/@MDMXGames/shorts",
+      "selection_purpose": "VR physics sandbox developer",
+      "channel": "MDMX Games",
+      "channel_id": "UCXReqHSwghVwJeGxhhxE7LQ",
+      "list_title": "MDMX Games - Shorts",
+      "status": "ok",
+      "count": 39,
+      "warnings": []
+    },
+    {
+      "requested_handle": "BrandonJLa",
+      "source_url": "https://www.youtube.com/@BrandonJLa/shorts",
+      "selection_purpose": "VR physics sandbox developer",
+      "channel": "BrandonJLa",
+      "channel_id": "UC7XQ-N5zRR6hG07urYrK7Aw",
+      "list_title": "BrandonJLa - Shorts",
+      "status": "ok",
+      "count": 1,
+      "warnings": []
+    },
+    {
+      "requested_handle": "Ctop",
+      "source_url": "https://www.youtube.com/@Ctop/shorts",
+      "selection_purpose": "VR and sandbox gameplay",
+      "channel": "Ctop",
+      "channel_id": "UCPhckk25N7P8OI580ucRidA",
+      "list_title": "Ctop - Shorts",
+      "status": "ok",
+      "count": 9,
+      "warnings": []
+    },
+    {
+      "requested_handle": "Fudgy",
+      "source_url": "https://www.youtube.com/@Fudgy/shorts",
+      "selection_purpose": "VR and sandbox gameplay",
+      "status": "error",
+      "error": "ERROR: [youtube:tab] @Fudgy: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)",
+      "count": 0,
+      "warnings": [
+        "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+        "[youtube:tab] Unable to download webpage: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>). Giving up after 1 retries",
+        "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+        "[youtube:tab] HTTP Error 404: Not Found. Retrying (1/1)...",
+        "[youtube:tab] YouTube said: ERROR - Requested entity was not found.",
+        "ERROR: [youtube:tab] @Fudgy: Unable to download API page: HTTP Error 404: Not Found (caused by <HTTPError 404: Not Found>)"
+      ]
+    },
+    {
+      "requested_handle": "SpyCakes",
+      "source_url": "https://www.youtube.com/@SpyCakes/shorts",
+      "selection_purpose": "sandbox gameplay",
+      "channel": "SpyCakes",
+      "channel_id": "UC1rsLSbsz0Y2blrWDZ_-8Qw",
+      "list_title": "SpyCakes - Shorts",
+      "status": "ok",
+      "count": 3,
+      "warnings": []
+    },
+    {
+      "requested_handle": "DoodleChaos",
+      "source_url": "https://www.youtube.com/@DoodleChaos/shorts",
+      "selection_purpose": "simulated physics, rhythm and chain reactions",
+      "channel": "DoodleChaos",
+      "channel_id": "UCnVimh35ecf46P_Bt-2AArg",
+      "list_title": "DoodleChaos - Shorts",
+      "status": "ok",
+      "count": 18,
+      "warnings": [
+        "[youtube:tab] unable to extract yt initial data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U",
+        "[youtube:tab] Incomplete yt initial data received. Retrying (1/1)...",
+        "[youtube:tab] unable to extract yt initial data; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U",
+        "[youtube:tab] Incomplete yt initial data received; please report this issue on  https://github.com/yt-dlp/yt-dlp/issues?q= , filling out the appropriate issue template. Confirm you are on the latest version using  yt-dlp -U. Giving up after 1 retries"
+      ]
+    },
+    {
+      "requested_handle": "SickScience",
+      "source_url": "https://www.youtube.com/@SickScience/shorts",
+      "selection_purpose": "science demonstrations",
+      "channel": "Sick Science!",
+      "channel_id": "UCDom90xOqP4avehFjSJO6NA",
+      "list_title": "Sick Science! - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    },
+    {
+      "requested_handle": "FailArmy",
+      "source_url": "https://www.youtube.com/@FailArmy/shorts",
+      "selection_purpose": "physical mishaps and fail compilations",
+      "channel": "FailArmy",
+      "channel_id": "UCPDis9pjXuqyI7RYLJ-TTSA",
+      "list_title": "FailArmy - Shorts",
+      "status": "ok",
+      "count": 100,
+      "warnings": []
+    }
+  ]
+}

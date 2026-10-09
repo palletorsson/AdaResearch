@@ -1,0 +1,33 @@
+{
+  "hall": "QFEP_Edge_Of_Chaos",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "six_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "tt",
+    "emergence_zone",
+    "turing_pattern",
+    "edge_core",
+    "lambda_slider",
+    "edge_of_chaos_unlocked"
+  ],
+  "primary_artifacts": [
+    "edge_of_chaos_unlocked"
+  ],
+  "source_sha256": {
+    "commons\\maps\\QFEP_Edge_Of_Chaos\\map_data.json": "c75985c55d2c5bd8c0e960a7c2b958788f79bdb928d2da06d2286eddaf9645f8",
+    "commons\\maps\\QFEP_Edge_Of_Chaos\\final.md": "8009d98019dee94d7af9f418e9dbe2bff90926f93dcf8b8629076121825b1c59",
+    "commons\\maps\\QFEP_Edge_Of_Chaos\\tutorial.md": "9b9676233da428a64b712b885f3e3a43ec6029a3604d0db5d55349c53de0fad0",
+    "commons\\maps\\QFEP_Edge_Of_Chaos\\technical.md": "935b3b8b81174d15154c2b50cfd73f0ce0d3e1fc96033e3b02041180220f5924",
+    "commons\\maps\\QFEP_Edge_Of_Chaos\\critical.md": "ffb108f8f0bb053e9454b670b1e8b7490cd48d6f270748ebdce43af422d3f018"
+  }
+}

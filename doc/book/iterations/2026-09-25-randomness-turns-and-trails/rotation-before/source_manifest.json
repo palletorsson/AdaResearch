@@ -1,0 +1,31 @@
+{
+  "room": "Random_Rotate_Random_XYZ",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "750b8c87dd2b856ca091ba7c670513ec50daa3a73d3ae87e34f1324a2eb1c0eb",
+    "commons/maps/Random_Rotate_Random_XYZ/map_data.json": "9c71df12ff7f593dcf318283e33d0c936048a46d04f23a5f5e66b6b8d0deb9d4",
+    "doc/book/iterations/2026-09-25-randomness-turns-and-trails/museum-probe.gd": "184d3da88a50b6e036c146a21175b6e7f8326df34d0ba4f0d4c98f95d5688d94",
+    "tools/run_encounter_probe.py": "63a0e95210078a23047fdd0fa0cb620bb85fed9529449bcdc2ba7ab02cabf8fe",
+    "ada_run/em_plan.json": "83c07b75bc02c997ab8ac2043f4ee791f9aaf772408410e9f38fd22e661a36b7",
+    "ada_run/encounter_pilot/Random_Rotate_Random_XYZ/control.json": "fae6b8316071f954442a7f804280ed2c45273c2fde1f4968a99747db397ef46f",
+    "ada_run/encounter_pilot/Random_Rotate_Random_XYZ/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/Random_Rotate_Random_XYZ/em_bake.json": "499e9d02a9d384210fd8318da9901f9e8483bfa1ba0377e02503357bf761185a",
+    "commons/artifacts/registry/randomness.json": "a020472029479df1e99409a110e9920dc871632b38db997dddf23d1c6dcbf339",
+    "algorithms/randomness/randomdecay/scenes/random_decay_multimesh.tscn": "a11aa0ab8ad853da37733495c469e39ce54000c4bd3725a3d325e650ccc2ae0a",
+    "algorithms/randomness/randomdecay/scripts/random_decay_multimesh.gd": "53a50bd31299814a90535d9412e0a079e9ed7f51cd1c981e7c970b0bf7deb813"
+  }
+}

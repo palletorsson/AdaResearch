@@ -1,0 +1,153 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "real court loaded",
+      "passed": true
+    },
+    {
+      "name": "visor starts off",
+      "passed": true
+    },
+    {
+      "name": "visor button faces its approach",
+      "passed": true
+    },
+    {
+      "name": "real pointer button wears the display",
+      "passed": true
+    },
+    {
+      "name": "overlay reads the actual visitor",
+      "passed": true
+    },
+    {
+      "name": "velocity comes from the actual body",
+      "passed": true
+    },
+    {
+      "name": "unheld points produce zero thrust",
+      "passed": true
+    },
+    {
+      "name": "gravity is acceleration not a fabricated force",
+      "passed": true
+    },
+    {
+      "name": "world arrow holds its direction when the head turns",
+      "passed": true
+    },
+    {
+      "name": "head turn does not change world components",
+      "passed": true
+    },
+    {
+      "name": "zero vector hides its direction",
+      "passed": true
+    },
+    {
+      "name": "pad is labelled an initial velocity",
+      "passed": true
+    },
+    {
+      "name": "desktop held action feeds the same thrust as movement",
+      "passed": true
+    },
+    {
+      "name": "display hides outside its court",
+      "passed": true
+    },
+    {
+      "name": "display returns inside the court",
+      "passed": true
+    },
+    {
+      "name": "second press removes the overlay",
+      "passed": true
+    },
+    {
+      "name": "desktop F8 toggles the same wearable",
+      "passed": true
+    },
+    {
+      "name": "XR movement adapter present",
+      "passed": true
+    },
+    {
+      "name": "XR visitor can wear the same visor",
+      "passed": true
+    },
+    {
+      "name": "two real held points sum in the visor",
+      "passed": true
+    },
+    {
+      "name": "display velocity matches integrated XR body",
+      "passed": true
+    },
+    {
+      "name": "actual XR body rises while wearing it",
+      "passed": true
+    },
+    {
+      "name": "release removes thrust but not upward velocity",
+      "passed": true
+    },
+    {
+      "name": "detached visor frees its camera child",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: visor-dock",
+      "passed": true
+    },
+    {
+      "name": "teleport button faces its approach",
+      "passed": true
+    },
+    {
+      "name": "teleport pointer reaches the button before the plinth",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: teleport-console",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "base_position": [
+      1.61999988555908,
+      1.02999997138977,
+      2.75999999046326
+    ],
+    "button_position": [
+      1.62000000476837,
+      1.02999997138977,
+      2.75999999046326
+    ],
+    "button_up": [
+      0.0,
+      -0.0000000568248026411311,
+      -1.29999995231628
+    ],
+    "cap_colour": "(0.7412, 0.5294, 0.6235, 1.0)",
+    "cap_position": [
+      1.61999988555908,
+      1.02999997138977,
+      2.74049997329712
+    ],
+    "xr_height_gain": 1.37656664848328,
+    "xr_velocity": [
+      0.0000000000000392327331375213,
+      5.69333410263062,
+      0.000000448770350658378
+    ]
+  },
+  "passed": true,
+  "room": "Vectors_Act5_ForceAsPlace",
+  "scope": "Production court and player, real pointer events, supplied XRTools rig and pickups. Numeric readings and real lift. No headset comfort or Quest timing claim."
+}

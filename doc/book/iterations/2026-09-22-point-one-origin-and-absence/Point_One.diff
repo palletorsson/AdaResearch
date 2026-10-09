@@ -1,0 +1,41 @@
+--- Point_One.before.md
++++ Point_One.after.md
+@@ -55,13 +55,13 @@
+ 
+ We cannot follow everything back to its beginning. But we can choose somewhere to count from.
+ 
+-Find the origin marker. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.
++Find the black sphere with its pink glow and wireframe cube. Zero has been given a place in this room too. This zero is a reference in space, not the first moment of the running clock.
+ 
+ ```gdscript
+ var origin := Vector3.ZERO
+ ```
+ 
+-The origin is a point chosen as the reference from which other positions are measured. Calling it zero establishes a relation with other positions. It does not put zero outside the world it helps describe.
++`Vector3.ZERO` is shorthand for three zeroes: `(0, 0, 0)`. Used as a position, it names the origin of a coordinate system. From there we can measure where something else is. Nothing in those three zeroes explains why this place was chosen.
+ 
+ Nearby, a sign says “~~you~~ are here.” The location remains legible after its visitor is crossed out. What part of you has arrived at this address?[^point-one-ahmed-reach]
+ 
+@@ -77,17 +77,17 @@
+ const FOCUS := Vector3(0.0, 1.25, 0.0)
+ ```
+ 
+-`Vector3` holds three components. Here we use them as a position: zero along the case's local X direction, 1.25 metres along its Y direction, zero along Z. These are coordinates relative to the case. They specify a location without making anything visible.
++`Vector3` holds three numbers in the order X, Y, Z. Here they locate a position in the case's own coordinate system: 1.25 metres up from its origin, with no displacement along X or Z. The numbers specify where the lines will meet. They do not draw anything there.
+ 
+-The arrows and lines are built in relation to `FOCUS`. They make its location available through things beside it and passing through it. The point itself is never drawn. It has no hidden mesh and no later appearance to wait for.
++The arrows aim towards `FOCUS`; the red lines pass through it. What they locate is never drawn. There is no hidden mesh waiting to appear.
+ 
+-That is a strange thing to exhibit: a position you can locate, with no body of its own. The source offers another access to it. You can read the address and follow how the surrounding construction was arranged. The position has become available through those relations, without acquiring a surface.
++That is a strange thing to exhibit: a position you can locate, with no body of its own. The source lets us approach it from the other direction. In the case, we follow the arrows towards a meeting place. In the code, that place is given first, and the arrows are arranged around it.
+ 
+ <!-- @code_evolution_screen -->
+ 
+-The nearby code screen builds a visible marker in a separate example. Its excerpts give a sphere a position, then colour and a label. The screen does not execute these scripts. Their sphere belongs to that example; the point in the case remains undrawn. The complete illustrative scripts accompany the excerpts in the room's source.
++On the nearby screen, a separate example begins with three numbers. The displayed code adds a sphere at that position, then colour and a label. The screen advances through excerpts; it does not run the program. We can follow the decisions that would give this position a visible body.
+ 
+-In a later stage, `_process(delta)` adds `delta` to `elapsed`. The example accumulates time rather than adding one per call; that elapsed time selects when its marker would be drawn. Its position stays the same. This is a construction we could make from a position. The invisible point keeps its empty centre.
++Here `delta`, which the counter received without using, has something to do. Each call to `_process(delta)` adds its time interval to `elapsed`. In this example, the accumulated time would hide and show the sphere every two seconds. Its centre would stay at the same address. A body can disappear from view without going anywhere.
+ 
+ The additions matter separately, even though they arrive together when we look at the finished object. A position does not contain a colour. A mesh does not tell us whether a hand can hold it. To make the next point approachable, we have to give it more.
+ 

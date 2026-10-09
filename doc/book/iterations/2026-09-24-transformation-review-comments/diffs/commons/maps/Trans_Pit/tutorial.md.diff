@@ -1,0 +1,10 @@
+--- before/commons/maps/Trans_Pit/tutorial.md
++++ commons/maps/Trans_Pit/tutorial.md
+@@ -74,6 +74,6 @@
+ 
+ Ask what stays invariant in the object, then ask what happens to the visitor's available space. Translation preserves the object's dimensions; rotation preserves its internal distances; this positive uniform scaling preserves proportions. Nonuniform scaling would change those proportions.
+ 
+-The map retains legacy fire utility tokens, which the current embedded museum disarms. This is a ground-level study without an enforced failure consequence. A clear route around a lane is part of the current design; do not describe it as a lethal pit or a compulsory timing gate.
++The legacy fire utilities have been removed, so their flames no longer occupy the observation floor. This is a ground-level study without an enforced failure consequence. A clear route around a lane is part of the current design; do not describe it as a lethal pit or a compulsory timing gate.
+ 
+ Compare clearances for particular bodies. A capsule test checks one radius and height. It does not stand in for all player sizes, locomotion choices or comfort needs.

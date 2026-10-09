@@ -1,0 +1,1 @@
+Reading mirror for the supported /book-review/doc/book/iterations/ route. Complete source packages and ZIP files remain in doc/book/handoffs/2026-09-23-writing-next/. No canonical manuscript or scene changes.

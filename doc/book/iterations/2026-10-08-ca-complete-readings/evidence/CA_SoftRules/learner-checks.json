@@ -1,0 +1,164 @@
+{
+  "checks": [
+    {
+      "name": "1024 addresses each hold U and V; central 36 begin seeded",
+      "passed": true
+    },
+    {
+      "name": "Periodic index wraps negatives and positive overflow",
+      "passed": true
+    },
+    {
+      "name": "Uniform neighbourhood contributes zero including at corner",
+      "passed": true
+    },
+    {
+      "name": "Axial difference crosses edge; diagonal does not contribute",
+      "passed": true
+    },
+    {
+      "name": "Periodic difference sum cancels before reaction or clamps",
+      "passed": true
+    },
+    {
+      "name": "First W is U .92 V .02",
+      "passed": true
+    },
+    {
+      "name": "Step retains previous arrays and advances once",
+      "passed": true
+    },
+    {
+      "name": "Exchange off keeps untouched W at U 1 V 0",
+      "passed": true
+    },
+    {
+      "name": "Exchange off still reacts inside original square",
+      "passed": true
+    },
+    {
+      "name": "Supplied reaction and exchange clamp both answers",
+      "passed": true
+    },
+    {
+      "name": "Reverse evaluation of snapshot gives same complete answer",
+      "passed": true
+    },
+    {
+      "name": "Without exchange initial seed has nearly faded at limit",
+      "passed": true
+    },
+    {
+      "name": "Both schedules match installed field through 2400 ticks each",
+      "passed": true
+    },
+    {
+      "name": "Complete fields remain bounded at limit",
+      "passed": true
+    },
+    {
+      "name": "Corner intervention replaces exactly nine extra sites and keeps time",
+      "passed": true
+    },
+    {
+      "name": "Repeated seed replaces values instead of adding",
+      "passed": true
+    },
+    {
+      "name": "Missing centre subtraction fails uniform-field prediction",
+      "passed": true
+    },
+    {
+      "name": "Writing into the read state fails snapshot answer",
+      "passed": true
+    },
+    {
+      "name": "Printed study creates two independent fields, point and visible reading",
+      "passed": true
+    },
+    {
+      "name": "Changing A cannot edit B",
+      "passed": true
+    },
+    {
+      "name": "One clock advances both once with different W",
+      "passed": true
+    },
+    {
+      "name": "VIEW changes pixels while preserving state and clock",
+      "passed": true
+    },
+    {
+      "name": "All displayed U pixels map their corresponding addresses",
+      "passed": true
+    },
+    {
+      "name": "Each table and upright panel share one texture",
+      "passed": true
+    },
+    {
+      "name": "Native table support stays at one metre",
+      "passed": true
+    },
+    {
+      "name": "Enabling B exchange resets matched histories and makes fields equal",
+      "passed": true
+    },
+    {
+      "name": "Printed independent corner edit seeds both identical nine-site patches",
+      "passed": true
+    },
+    {
+      "name": "Corner edit first V reaches adjacent site only through exchange",
+      "passed": true
+    },
+    {
+      "name": "Unheld point cannot plant",
+      "passed": true
+    },
+    {
+      "name": "Held world position maps to local address despite rotated study",
+      "passed": true
+    },
+    {
+      "name": "Moving without triggering leaves fields and clock unchanged",
+      "passed": true
+    },
+    {
+      "name": "Held trigger replaces same selected patch in both, without advancing",
+      "passed": true
+    },
+    {
+      "name": "Other table selects matching address in both fields",
+      "passed": true
+    },
+    {
+      "name": "Point above table range cannot plant",
+      "passed": true
+    },
+    {
+      "name": "Release parks same sphere and withdraws input",
+      "passed": true
+    },
+    {
+      "name": "Keyboard step ignores repeated key event",
+      "passed": true
+    },
+    {
+      "name": "Space advances one hundred more updates",
+      "passed": true
+    },
+    {
+      "name": "Replay restores fields and seeds but preserves comparison and view",
+      "passed": true
+    },
+    {
+      "name": "Both clocks stop at 2400 without an extra update",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "maximum_parity_difference": 0.0,
+  "passed": true,
+  "scope": "Exact printed files; 4800 solver comparisons; native display/collision; supplied XRTools poses; corner transfer; two intentional faults. No physical headset or independent learner."
+}

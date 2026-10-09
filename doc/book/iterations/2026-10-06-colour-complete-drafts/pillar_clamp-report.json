@@ -1,0 +1,56 @@
+{
+  "checks": [
+    {
+      "id": "Color_Pillar/start/initial_colour",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/local_frame",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/original_body",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/low_height",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/high_height",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/height_clamped",
+      "passed": false
+    },
+    {
+      "id": "Color_Pillar/start/hsv_origin",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/hsv_far",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/hsv_bounded",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/pure_function",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/moving_point_red",
+      "passed": true
+    },
+    {
+      "id": "Color_Pillar/start/height_changes_value",
+      "passed": true
+    }
+  ],
+  "failure_ids": [
+    "Color_Pillar/start/height_clamped"
+  ],
+  "passed": false
+}

@@ -1,0 +1,28 @@
+{
+  "room": "GT_Flow",
+  "replacements": {
+    "res://ada_run/em_inventory.json": "res://ada_run/encounter_pilot/GT_Flow/em_inventory.json",
+    "res://ada_run/em_showing_cards.json": "res://ada_run/encounter_pilot/GT_Flow/em_showing_cards.json",
+    "res://ada_run/em_live_footprints.json": "res://ada_run/encounter_pilot/GT_Flow/em_live_footprints.json",
+    "res://ada_run/em_bake.json": "res://ada_run/encounter_pilot/GT_Flow/em_bake.json",
+    "res://ada_run/em_layout_walk.json": "res://ada_run/encounter_pilot/GT_Flow/em_layout_walk.json",
+    "res://ada_run/em_adoptions.json": "res://ada_run/encounter_pilot/GT_Flow/em_adoptions.json",
+    "res://ada_run/em_built.json": "res://ada_run/encounter_pilot/GT_Flow/em_built.json",
+    "res://ada_run/em_foes.json": "res://ada_run/encounter_pilot/GT_Flow/em_foes.json",
+    "res://ada_run/em_boot_last.json": "res://ada_run/encounter_pilot/GT_Flow/em_boot_last.json",
+    "res://ada_run/em_pack_report.json": "res://ada_run/encounter_pilot/GT_Flow/em_pack_report.json",
+    "res://ada_run/em_basin_plan.txt": "res://ada_run/encounter_pilot/GT_Flow/em_basin_plan.txt"
+  },
+  "scope": "Live museum code; only output paths replaced. Headset and learner checks remain open.",
+  "sources": {
+    "commons/scenes/endless_museum.gd": "dc37cbdc082afb682ffb69909439c886c6ccb4aa1e02731669f571b7843b0479",
+    "commons/maps/GT_Flow/map_data.json": "6e67bddf8d078bd85a11df867cff8714d842bf57d232c4c6dc02a9e750bb3fc8",
+    "tools/probes/museum_encounter.gd": "a464454c0f139b5a5e0a4fe03263a6600496a89668a358704d2999b193d70e6b",
+    "tools/run_encounter_probe.py": "001bf9a38ca215454d6ee276775c7438299f31fc57b05060d423b62afad960d6",
+    "ada_run/em_plan.json": "3aef4b74eff19048d1a181cafce899c47d5f03780691854aea4efa2c1679ad4d",
+    "ada_run/encounter_pilot/GT_Flow/control.json": "1498dc02ea615a268317416b442b045de3823fd56ecf113cb27a5e39a51ac7d7",
+    "ada_run/encounter_pilot/GT_Flow/necklace_hand.json": "29aa5b58501e2d2104a5ed2d22e483570ea7df3b3dc419f8b7d9e459193aa0fd",
+    "ada_run/encounter_pilot/GT_Flow/em_overrides.json": "f08dc4cc58ebf9e83c68fe7439c713591f6c81507b9f4d0e4f568cfe02ae131c",
+    "ada_run/encounter_pilot/GT_Flow/em_bake.json": "8a8f2cc535a5370b98626c34e45745eea8440499f8590e143478418bd4141f22"
+  }
+}

@@ -1,0 +1,86 @@
+	var collar: Node3D = body.bond_handle
+	check(report,is_instance_valid(collar) and collar.collision_layer==4,"Turquoise collar is a real pickable on desktop/VR layer")
+	var base_positions: Array=body.targets.duplicate()
+	var base_pairs: Array=body.pairs.duplicate()
+	body.edit_count=0
+	var head_index: int=body.names.find("head")
+	var old_target: int=body.pairs[body.bond_index].y
+	var elbow: int=body.pairs[body.bond_index].x
+	hand_camera.global_position=collar.global_position+Vector3(0,0,1.2)
+	hand_camera.look_at(collar.global_position)
+	await physics_frame
+	check(report,pointer._find_grabbable()==collar,"Actual desktop ray selects the collar separately from the wrist")
+	pointer._grab_held(collar)
+	check(report,body.bond_held,"Desktop pickup loosens the connection")
+	var destination: Vector3=body.to_global(body.targets[head_index])
+	hand_camera.global_position=destination+Vector3(0,0,1.2)
+	hand_camera.look_at(destination)
+	for frame in range(60):pointer._process(1.0/60);body._process(1.0/60)
+	check(report,body.connection_candidate()==head_index and body.bond_preview.visible,"Carried endpoint finds the head and shows a snap preview")
+	check(report,same_points(body.targets,base_positions) and body.pairs==base_pairs,"Holding a connection changes neither committed graph nor joint positions")
+	pointer._drop_held()
+	check(report,not body.bond_held and body.pairs[body.bond_index].y==head_index,"Desktop drop commits the new neighbour")
+	check(report,same_points(body.targets,base_positions) and body.joints.size()==13 and body.pairs.size()==12,"Reconnection preserves all coordinates and both counts")
+	check(report,collar.freeze and collar.collision_layer==4,"Released collar remains reachable and pickable")
+	var record: Dictionary=Store.read(self)
+	check(report,record.schema==2 and Store.changed(record)==0 and Store.changed_connections(record)==1,"Record separates a relation change from moved joints")
+	check(report,Store.components(record)==2,"Same thirteen points and twelve edges now form two connected groups")
+	check(report,record.start_edges[body.bond_index][1]=="l_hand" and record.edges[body.bond_index][1]=="head","Original and altered graphs are kept separately")
+	var revision: String=record.revision
+	# Empty drop, self-connection and duplicate edge all restore the previous attachment.
+	for invalid_target in [Vector3(1.85,2.3,1.8),body.targets[elbow],body.targets[body.names.find("l_sh")]]:
+		collar.on_desktop_grab(null);collar.global_position=body.to_global(invalid_target)
+		check(report,body.connection_candidate()==-1,"Unavailable target has no snap candidate")
+		collar.on_desktop_drop(null)
+		check(report,body.pairs[body.bond_index].y==head_index and Store.read(self).revision==revision,"Invalid drop returns the edge without writing another edit")
+	# A true XRTools pickup path, using a synthetic controller, can undo the reconnection.
+	controller.global_position=collar.global_position
+	collar.pick_up(pickup)
+	check(report,collar.is_picked_up() and body.bond_held,"XRTools driver can take the loose end")
+	controller.global_position+=body.to_global(body.targets[old_target])-collar.global_position
+	for frame in range(8):await physics_frame
+	check(report,body.connection_candidate()==old_target,"Synthetic controller carries the endpoint back to the original wrist")
+	collar.let_go(pickup,Vector3.ZERO,Vector3.ZERO)
+	check(report,body.pairs==base_pairs and Store.changed_connections(Store.read(self))==0,"XRTools release can restore the original relation")
+	# A concurrently held gold joint is still uncommitted when the collar is released.
+	var held_index: int=body.names.find("r_hand")
+	body.joints[held_index].on_desktop_grab(null)
+	body.joints[held_index].global_position=body.to_global(Vector3(1.1,1.5,.5))
+	body._process(0)
+	collar.on_desktop_grab(null);collar.global_position=body.to_global(body.targets[head_index]);collar.on_desktop_drop(null)
+	record=Store.read(self)
+	check(report,Store.changed(record)==0 and Store.changed_connections(record)==1,"Saving a connection excludes a still-held joint's unfinished position")
+	body.joints[held_index].global_position=body.to_global(base_positions[held_index])
+	body.joints[held_index].on_desktop_drop(null)
+	remove_meta(Store.KEY)
+	record=Store.read(self)
+	check(report,Store.changed_connections(record)==1,"Rewired graph survives clearing session memory and reading disk")
+	var restored: Node3D=load("res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn").instantiate()
+	restored.body_workshop=true;restored.enable_auto_cycle=false;restored.position=Vector3(80,0,60)
+	root.add_child(restored);await process_frame
+	var restored_body: Node3D=restored.get_node("BodyWorkshop")
+	check(report,restored_body.pairs[restored_body.bond_index].y==head_index,"Revisited workshop restores the altered relation")
+	check(report,restored_body.original_pairs==base_pairs,"Restoring does not overwrite the comparison's original graph")
+	restored.queue_free();await process_frame
+	var returned: Node3D=load("res://commons/artifacts/assembly_return/assembly_return.tscn").instantiate()
+	returned.position=Vector3(80,0,60);root.add_child(returned)
+	check(report,Store.changed_connections(returned.record)==1 and Store.components(returned.record)==2,"Final gallery reads the rewired record")
+	var expected_length: float=base_positions[elbow].distance_to(base_positions[head_index])
+	var return_rods: Array=[]
+	for node in returned.bodies.get_node("KeptPose").get_children():
+		if node is MeshInstance3D and node.mesh is CylinderMesh:return_rods.append(node)
+	check(report,is_equal_approx(return_rods[body.bond_index].mesh.height,expected_length),"Returned connecting rod uses the new endpoints")
+	var ledger: Node3D=load("res://commons/artifacts/accountability_ledger/accountability_ledger.tscn").instantiate()
+	ledger.visitor_record=true;ledger.position=Vector3(80,0,60);root.add_child(ledger)
+	check(report,ledger._entries[3]=="12 connections; 1 rerouted","Final ledger distinguishes retained count from changed relation")
+	var v1:=record.duplicate(true);v1.schema=1;v1.erase("start_edges");v1.edges=record.start_edges.duplicate(true)
+	check(report,Store.valid(v1) and Store.changed_connections(v1)==0,"Earlier schema-one pose files remain readable")
+	var invalid_record:=record.duplicate(true);invalid_record.start_edges=[]
+	check(report,not Store.valid(invalid_record),"New records require the original graph")
+	invalid_record=record.duplicate(true);invalid_record.edges[0]=invalid_record.edges[1].duplicate()
+	check(report,not Store.valid(invalid_record),"Duplicate edges are rejected before saving")
+	returned.queue_free();ledger.queue_free()
+	controller.queue_free();pointer.queue_free();hand_camera.queue_free()
+	body.reset_pose();body.edit_count=0
+	Store.keep(self,body._record())
+	check(report,body.pairs==base_pairs and same_points(body.targets,base_positions),"Author reset restores both geometry and graph for paired views")

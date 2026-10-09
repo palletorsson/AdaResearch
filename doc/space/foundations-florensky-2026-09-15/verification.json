@@ -1,0 +1,32 @@
+{
+  "hall": "Florensky_Paraconsistent",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "map_dimensions": true,
+    "four_artifacts": true,
+    "primary_focus": true,
+    "registers_present": true,
+    "grid_structure": true,
+    "registry_resolution": true
+  },
+  "tokens": [
+    "schrodinger_box",
+    "both_true_gate",
+    "florensky_sphere",
+    "superposition_display"
+  ],
+  "primary_artifacts": [
+    "both_true_gate",
+    "florensky_sphere"
+  ],
+  "source_sha256": {
+    "commons\\maps\\Florensky_Paraconsistent\\map_data.json": "0328afd23a150b5c35fa21fa57b2ce5bc9fe793cde7e145581398a9e1116bf5d",
+    "commons\\maps\\Florensky_Paraconsistent\\final.md": "d83ca81cc54c89cdb3063afc981587d2748c67ad12d4e1150f8aa98a17360c18",
+    "commons\\maps\\Florensky_Paraconsistent\\tutorial.md": "314c961c040f26f8d644221dd3626c270aa54f5748a14d060801e8fb565a17db",
+    "commons\\maps\\Florensky_Paraconsistent\\technical.md": "75095c330095be015569d3f9a8e8d9cf797ff7dfb07e8d32abaedb602e890104",
+    "commons\\maps\\Florensky_Paraconsistent\\critical.md": "0ce06eb26494e32775966b900398c2f674c4bc6ecadfd5c5818deb73c7bc3aa6"
+  }
+}

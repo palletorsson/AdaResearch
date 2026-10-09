@@ -1,0 +1,9 @@
+While we learn to use these tools, they are being revised. With AI, I feel the change in what we can attempt together. A question in the manuscript can become code, a room we enter, and a reason to rewrite the question. We can carry an idea through these forms while it is still unsettled.
+
+Work accumulates; what becomes possible can arrive as a leap. A change in how we write code reaches into how we make a room, then into what we can learn by being there. One capacity becomes a tool for another. This spillover is part of the exhilaration: the next opening may change the work we thought we were doing. It also changes what we need to learn. How much of our time can go into catching up? When do we get time to play?
+
+We arrive among systems we did not choose, and find our bearings while their possibilities are changing. I sometimes feel knowledge gathering around us, exerting a new gravitational pull. An answer arrives beside a question, with code we can run and another direction to follow. The ease of following gives that answer weight before we have understood whose assumptions it carries. We need ways to test it, turn it, make something else of it. Learning includes finding a position from which to do that.
+
+Like Alice after the White Rabbit, we want to see what happens next. The reward can be a possibility we could not have imagined asking for. The risk includes the time, energy and labour we commit before we can judge it. Where does that desire become a death drive, an insistence on continuing that makes the cost harder to see? We can ask this from inside the pleasure of making. It is one reason to keep the work open to interruption.
+
+First light, or the light at the end of a tunnel? An opening can draw us forward before we know where it leads. We begin this book in that light.

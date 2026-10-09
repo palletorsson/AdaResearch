@@ -1,0 +1,31 @@
+	report["checks"]=[]
+	var study: Node3D=nodes.get("accountability_ledger")
+	check(report,is_instance_valid(study),"Ledger instantiates")
+	if not is_instance_valid(study):
+		quit(1)
+		return
+	study.set_process(false)
+	check(report,study.log_interval==6 and study.visible_lines==6,"Six examples with six seconds between arrivals")
+	check(report,study.scale.is_equal_approx(Vector3.ONE*1.8),"Ledger enlarged for reading")
+	var external:=Node3D.new()
+	study.add_child(external)
+	study.apply_grid_config({"log_interval":6})
+	check(report,is_instance_valid(external) and external.get_parent()==study,"Configuration preserves museum attachments")
+	var count: int=study._count
+	for i in range(9):study._push_entry()
+	study._refresh_lines()
+	check(report,study._entries.size()==6 and study._count==count+9,"Visible memory is bounded while counter keeps increasing")
+	check(report,study._line_labels[0].text==study._entries[0] and study._counter_label.text=="entries: "+str(study._count),"Readouts reflect current examples and cumulative count")
+	check(report,not study._line_labels[0].no_depth_test and is_equal_approx(study._line_labels[0].pixel_size,.0012),"Example text respects depth and its panel dimensions")
+	check(report,is_equal_approx(study._readout.pixel_size,.0015) and not study._readout.no_depth_test,"Headings fit the device and respect the room")
+	study._timer=0
+	count=study._count
+	study._process(5.9)
+	check(report,study._count==count,"Example remains for reading before six seconds")
+	study._process(.2)
+	check(report,study._count==count+1,"Next example arrives after its interval")
+	check(report,study.CHOICES.size()==study.EXCLUDED.size(),"Every illustrative choice has a corresponding excluded case")
+	study._rng.seed=19
+	study._entries.clear()
+	for i in range(6):study._push_entry()
+	study._refresh_lines()

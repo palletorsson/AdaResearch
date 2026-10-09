@@ -1,0 +1,109 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Catenary reflection before / after</title><style>body{margin:0;background:#ecebe6;color:#252329;font:18px/1.65 Georgia,serif}main{max-width:1480px;margin:auto;padding:40px}nav{position:sticky;top:0;background:#17171b;color:white;padding:12px;font:14px system-ui;z-index:2}nav a{color:#f2c2da;margin-right:20px}h1{font-size:42px;line-height:1.12}h2{font-size:24px}a{color:#9b285d}pre{background:#18191d;color:#eee;padding:22px;overflow:auto;font:13px/1.6 Consolas,monospace}code{font-size:.9em}img{width:100%;height:auto}article{background:#faf9f4;padding:32px;margin:20px 0;border-top:3px solid #e69fc2}.spread{display:grid;grid-template-columns:1fr 1fr;gap:24px}.spread article{min-width:0}.small{font:14px/1.5 system-ui;color:#62616a}table{border-collapse:collapse;width:100%}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #ccc}@media(max-width:1000px){.spread{display:block}main{padding:16px}}</style><nav><a href="../index.html">Sequence</a> <a href="../shared.html">Shared code</a> <a href="../FormFinding_Descent/parallel.html">Descent</a> <a href="../FormFinding_Catenary/parallel.html">Catenary</a> <a href="../FormFinding_Relaxation/parallel.html">Relaxation</a> <a href="../FormFinding_Equilibrium/parallel.html">Equilibrium</a> <a href="../FormFinding_Annealing/parallel.html">Annealing</a> <a href="../FormFinding_Forge/parallel.html">Forge</a></nav><main><p style="background:#fff1c9;padding:18px;font:16px system-ui"><b>Exploratory draft — sequence being rethought.</b> The original museum layouts and tutorials are restored. <a href="../RETHINK.md">Read the purpose and status</a>.</p><div class="spread"><article><h2>Before</h2><h1>Drawn, evaluated, settled</h1>
+<p>What has already been decided when a curve seems to find itself?</p>
+<p>The last hall let you follow a search taking steps. Here, first take a curve in your hand. Then compare it with one whose coordinates come from a formula. The hanging chain and the soap film are the physical references: under specified supports, loads and material assumptions, a settled chain or film can make a difficult calculation visible. But these objects in the museum arrive by different routes. Watch for the difference between drawing an answer, evaluating an answer, and letting a system settle toward one.</p>
+<h2>The chain</h2>
+<!-- @cable_builder -->
+
+<p>Four cyan beads, and a four-metre cable glowing magenta into blue slung through them. Take a bead and move it. The whole curve recomputes and re-skins in your hands, every frame. Hold the ends in mind while you move an interior point: what have you asked the curve to obey?</p>
+<p>Read it carefully, because it is the room's honest object. The cable is not a chain solving its own equation. It is a spline whose sag is two Bezier handles per span, each pulled down by a fixed fraction of that span's length, so the depth is drafted rather than found. It resembles a hanging cable because its maker supplied a rule for sag. Your hand changes the constraints of that drawing. No weight has been measured and no rope length conserved.</p>
+<!-- @laundry_line_cathedral -->
+
+<p>Three washing lines pegged with towels and shirts, supported at their ends by crossbars. These curves are sampled from <code>cosh</code>. Their sag comes from three chosen parameters; the washing adds colour and an association with weight, but it adds no load to the calculation. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. The cathedral is implied.</p>
+<p>Gaudí used hanging models to study structural form. Inverting a suitable tension model can suggest a compression structure under corresponding loads and supports; it is not a guarantee that any inverted curve will stand. Here the two poses let you see that reversal, while the plaque names the limit: an analytic drawing, not a gravity solver. The washing and the cathedral share a curve. They do not yet share a test.<sup id="fnref:hanging-model"><a class="footnote-ref" href="#fn:hanging-model">1</a></sup></p>
+<!-- @ -->
+
+<h2>The film</h2>
+<!-- @catenoid -->
+
+<p>The chain, revolved into a surface. A soap film can form a catenoid between two coaxial rings, but the rings do not guarantee one enduring answer: stability depends on their separation, and a film can collapse into separate discs. “Minimal” does not promise a globally smallest surface for every boundary.<sup id="fnref:film"><a class="footnote-ref" href="#fn:film">2</a></sup></p>
+<p>Here it lies low and wide, a cyan wireframe hourglass about a metre and a fifth across and a little over a third of a metre tall. Lift the model and turn it. The opening travels with it; the sampled mesh retains its shape. The same <code>cosh</code> appears again, now drawn around an axis. You can inspect the result in your hand, but you cannot stretch its rings or watch a film settle between them.</p>
+<pre><code class="language-gdscript">@export var c: float = 0.5      # waist radius
+
+var r: float = c * cosh(u / c)
+var x: float = r * cos(v)
+var y: float = r * sin(v)
+var z: float = u
+</code></pre>
+<p>The same <code>cosh</code> appears in a catenary and in the radial profile of a catenoid. Here <code>c</code> sets the waist radius; the chosen range of <code>u</code> decides how much surface we keep. The formula does not choose its own boundary. Somebody has already chosen the numbers from which it will begin.</p>
+<!-- @helicoid -->
+
+<p>In a slot between two pillars, the other one, and you may step over it before you notice it: a green wireframe corkscrew twenty centimetres across, about thirty-eight centimetres high, six thousand triangles in a thing the size of a mug. Lift this one too. A straight line rotates as it rises; the display gains about nineteen centimetres in each full turn.</p>
+<p>A helicoid is ruled: straight lines lie along its surface. A catenoid is a surface of revolution. Suitable patches of these surfaces belong to an isometric family: they can be continuously related while preserving their intrinsic distances. That does not make these two differently bounded meshes the same object, and nothing in the room performs the deformation.<sup id="fnref:surfaces"><a class="footnote-ref" href="#fn:surfaces">3</a></sup></p>
+<!-- @science_screen -->
+
+<p>The screen has no compatible live measurement from these objects. Its scanner needs more than a nearby shape or a suggestive name: it needs data in a form it recognises. The surfaces are visible; their mathematical relation has not become a signal the screen can read. There is still work between having an object and having an instrument for it.</p>
+<!-- @ -->
+
+<h2>Matter as the solver</h2>
+<p>A real chain can move, overshoot and settle after an end is displaced. A film has a history too. The equilibrium equation describes a possible settled condition; it does not erase the time needed to reach it. In this room that time is absent for another reason: the laundry curves and surface meshes are constructed from chosen formulas.</p>
+<p>The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told <code>cosh</code>. That is the difference this room has been drawing, a curve evaluated and a curve arrived at.</p>
+<p>This is still a powerful way to make form. The boundary, the formula, the sampling and the drawing each decide something. The calculus of variations asks what makes a shape stationary under allowed changes. Our objects let us approach that question, and also ask which changes their code has allowed us to make.</p>
+<p>Next: what happens when the solving has to be done in steps after all, by a machine with a frame budget.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:hanging-model">
+<p>Santiago Huerta, <a href="https://oa.upm.es/703/">“Structural design in the work of Gaudí”</a> (2006), on hanging models, graphical methods and equilibrium design. The inversion is conditional on loads and supports; the laundry artifact evaluates and mirrors a formula.&#160;<a class="footnote-backref" href="#fnref:hanging-model" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:film">
+<p>Gareth P. Alexander and Thomas Machon, <a href="https://arxiv.org/abs/1912.13009">“A Björling Representation for Jacobi Fields on Minimal Surfaces and Soap Film Instabilities”</a> (2020). Instability and the transition to separated films are not implemented in this model.&#160;<a class="footnote-backref" href="#fnref:film" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:surfaces">
+<p>Danny Calegari, <a href="https://math.uchicago.edu/~dannyc/courses/minimal_surfaces_2014/minimal_surfaces_notes.pdf"><em>Minimal Surfaces</em>, §1.4</a>, on the conjugate family and isometric deformation. The local relation does not identify arbitrary finite meshes or their boundaries.&#160;<a class="footnote-backref" href="#fnref:surfaces" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article><article><h2>After</h2><h1>Drawn, evaluated, settled</h1>
+<p>What has already been decided when a curve seems to find itself?</p>
+<p>The last hall let you follow a search taking steps. Here, first take a curve in your hand. Then compare it with one whose coordinates come from a formula. The hanging chain and the soap film are the physical references: under specified supports, loads and material assumptions, a settled chain or film can make a difficult calculation visible. But these objects in the museum arrive by different routes. Watch for the difference between drawing an answer, evaluating an answer, and letting a system settle toward one.</p>
+<h2>The chain</h2>
+<!-- @cable_builder -->
+
+<p>Four cyan beads, and a four-metre cable glowing magenta into blue slung through them. Take a bead and move it. The whole curve recomputes and re-skins in your hands, every frame. Hold the ends in mind while you move an interior point: what have you asked the curve to obey?</p>
+<p>Read it carefully, because it is the room's honest object. The cable is not a chain solving its own equation. It is a spline whose sag is two Bezier handles per span, each pulled down by a fixed fraction of that span's length, so the depth is drafted rather than found. It resembles a hanging cable because its maker supplied a rule for sag. Your hand changes the constraints of that drawing. No weight has been measured and no rope length conserved.</p>
+<!-- @laundry_line_cathedral -->
+
+<p>Three washing lines pegged with towels and shirts, supported at their ends by crossbars. These curves are sampled from <code>cosh</code>. Their sag comes from three chosen parameters; the washing adds colour and an association with weight, but it adds no load to the calculation. Then look up. Above each line hangs its ghost: the same curve mirrored upward as a pale arch. The cathedral is implied.</p>
+<p>Gaudí used hanging models to study structural form. Inverting a suitable tension model can suggest a compression structure under corresponding loads and supports; it is not a guarantee that any inverted curve will stand. Here the two poses let you see that reversal, while the plaque names the limit: an analytic drawing, not a gravity solver. The washing and the cathedral share a curve. They do not yet share a test.<sup id="fnref:hanging-model"><a class="footnote-ref" href="#fn:hanging-model">1</a></sup></p>
+<!-- @ -->
+
+<h2>The film</h2>
+<!-- @catenoid -->
+
+<p>The chain, revolved into a surface. A soap film can form a catenoid between two coaxial rings, but the rings do not guarantee one enduring answer: stability depends on their separation, and a film can collapse into separate discs. “Minimal” does not promise a globally smallest surface for every boundary.<sup id="fnref:film"><a class="footnote-ref" href="#fn:film">2</a></sup></p>
+<p>Here it lies low and wide, a cyan wireframe hourglass about a metre and a fifth across and a little over a third of a metre tall. Lift the model and turn it. The opening travels with it; the sampled mesh retains its shape. The same <code>cosh</code> appears again, now drawn around an axis. You can inspect the result in your hand, but you cannot stretch its rings or watch a film settle between them.</p>
+<pre><code class="language-gdscript">@export var c: float = 0.5      # waist radius
+
+var r: float = c * cosh(u / c)
+var x: float = r * cos(v)
+var y: float = r * sin(v)
+var z: float = u
+</code></pre>
+<p>The same <code>cosh</code> appears in a catenary and in the radial profile of a catenoid. Here <code>c</code> sets the waist radius; the chosen range of <code>u</code> decides how much surface we keep. The formula does not choose its own boundary. Somebody has already chosen the numbers from which it will begin.</p>
+<!-- @helicoid -->
+
+<p>In a slot between two pillars, the other one, and you may step over it before you notice it: a green wireframe corkscrew twenty centimetres across, about thirty-eight centimetres high, six thousand triangles in a thing the size of a mug. Lift this one too. A straight line rotates as it rises; the display gains about nineteen centimetres in each full turn.</p>
+<p>A helicoid is ruled: straight lines lie along its surface. A catenoid is a surface of revolution. Suitable patches of these surfaces belong to an isometric family: they can be continuously related while preserving their intrinsic distances. That does not make these two differently bounded meshes the same object, and nothing in the room performs the deformation.<sup id="fnref:surfaces"><a class="footnote-ref" href="#fn:surfaces">3</a></sup></p>
+<!-- @science_screen -->
+
+<p>The screen has no compatible live measurement from these objects. Its scanner needs more than a nearby shape or a suggestive name: it needs data in a form it recognises. The surfaces are visible; their mathematical relation has not become a signal the screen can read. There is still work between having an object and having an instrument for it.</p>
+<!-- @ -->
+
+<h2>Matter as the solver</h2>
+<p>A real chain can move, overshoot and settle after an end is displaced. A film has a history too. The equilibrium equation describes a possible settled condition; it does not erase the time needed to reach it. In this room that time is absent for another reason: the laundry curves and surface meshes are constructed from chosen formulas.</p>
+<p>The bench in the next hall could supply it: a row of its particles hung from two points, corrected toward their rest lengths pass after pass, would settle into this curve without being told <code>cosh</code>. That is the difference this room has been drawing, a curve evaluated and a curve arrived at.</p>
+<p>This is still a powerful way to make form. The boundary, the formula, the sampling and the drawing each decide something. The calculus of variations asks what makes a shape stationary under allowed changes. Our objects let us approach that question, and also ask which changes their code has allowed us to make.</p>
+<p>Next: what happens when the solving has to be done in steps after all, by a machine with a frame budget.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:hanging-model">
+<p>Santiago Huerta, <a href="https://oa.upm.es/703/">“Structural design in the work of Gaudí”</a> (2006), on hanging models, graphical methods and equilibrium design. The inversion is conditional on loads and supports; the laundry artifact evaluates and mirrors a formula.&#160;<a class="footnote-backref" href="#fnref:hanging-model" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:film">
+<p>Gareth P. Alexander and Thomas Machon, <a href="https://arxiv.org/abs/1912.13009">“A Björling Representation for Jacobi Fields on Minimal Surfaces and Soap Film Instabilities”</a> (2020). Instability and the transition to separated films are not implemented in this model.&#160;<a class="footnote-backref" href="#fnref:film" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:surfaces">
+<p>Danny Calegari, <a href="https://math.uchicago.edu/~dannyc/courses/minimal_surfaces_2014/minimal_surfaces_notes.pdf"><em>Minimal Surfaces</em>, §1.4</a>, on the conjugate family and isometric deformation. The local relation does not identify arbitrary finite meshes or their boundaries.&#160;<a class="footnote-backref" href="#fnref:surfaces" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></article></div></main>

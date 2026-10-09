@@ -1,0 +1,102 @@
+{
+	"checks": [
+		{
+			"passed": true,
+			"test": "Viewer uses outer camera, not private filmed camera"
+		},
+		{
+			"passed": true,
+			"test": "Looking at the screen qualifies"
+		},
+		{
+			"passed": true,
+			"test": "Brief glance does not start construction"
+		},
+		{
+			"passed": true,
+			"test": "Dwell starts playback"
+		},
+		{
+			"passed": true,
+			"test": "Looking away freezes timeline without catching up"
+		},
+		{
+			"passed": true,
+			"test": "Unwatched feed stops rendering"
+		},
+		{
+			"passed": true,
+			"test": "Looking back resumes from the held moment"
+		},
+		{
+			"passed": true,
+			"test": "Looking back respects manual pause"
+		},
+		{
+			"passed": true,
+			"test": "Manual changes get a frame even while paused"
+		},
+		{
+			"passed": true,
+			"test": "Paused feed stops after its requested refresh"
+		},
+		{
+			"passed": true,
+			"test": "Looking above the screen does not qualify"
+		},
+		{
+			"passed": true,
+			"test": "Rear of monitor cannot trigger it"
+		},
+		{
+			"passed": true,
+			"test": "Distant screen does not trigger it"
+		},
+		{
+			"passed": true,
+			"test": "Screen can be watched from an oblique angle"
+		},
+		{
+			"passed": true,
+			"test": "A solid wall blocks gaze activation"
+		},
+		{
+			"passed": true,
+			"test": "Removing obstruction allows viewing again"
+		},
+		{
+			"passed": true,
+			"test": "Hidden monitor cannot activate"
+		},
+		{
+			"passed": true,
+			"test": "Moved and rotated monitors use their actual screen plane"
+		},
+		{
+			"passed": true,
+			"test": "Synthetic XR camera is selected and can trigger the screen"
+		},
+		{
+			"passed": true,
+			"test": "Synthetic headset turn leaves the screen"
+		},
+		{
+			"passed": true,
+			"test": "Live callbacks run while watched"
+		},
+		{
+			"passed": true,
+			"test": "Live callbacks freeze during a sustained look away"
+		},
+		{
+			"passed": true,
+			"test": "Rendered screen holds exactly the same pixels while unwatched"
+		},
+		{
+			"passed": true,
+			"test": "Rendered feed refreshes after returning to look"
+		}
+	],
+	"passed": true,
+	"scope": "Desktop runtime and synthetic XRCamera3D; physical headset not tested."
+}

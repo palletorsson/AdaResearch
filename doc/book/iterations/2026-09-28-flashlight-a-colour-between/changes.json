@@ -1,0 +1,12 @@
+[
+  {
+    "label": "Begin at the board",
+    "before": "The colour is already there when you arrive. Several pools meet on a pale surface.",
+    "after": "Several pools of colour meet on a pale board."
+  },
+  {
+    "label": "Read the assignment after following the light onto the sphere",
+    "before": "Inside each lamp, `flashlight_color.gd` finds the light and gives it its colour:\n\n```gdscript\nvar spot = _find_spot_light(target_root)\nif spot:\n    spot.light_color = light_color\n```\n\nFour copies of the same scene receive four values. The red instance is given `Color(1, 0, 0, 1)`; the green instance `Color(0, 1, 0, 1)`. The first three numbers address red, green and blue channels, each from zero to one. Zero contributes none of that channel; one gives its full value. The final number, alpha, stays at one here; transparency will become a separate question at the glass walls. The assignment happens when the scene starts. Your hand supplies the subsequent movement; the lamp does not need to change its colour value to make the surface look different.",
+    "after": "The red lamp has crossed from board to sphere without changing its assigned colour. Inside each lamp, `flashlight_color.gd` finds the light and gives it its colour:\n\n```gdscript\nvar spot = _find_spot_light(target_root)\nif spot:\n    spot.light_color = light_color\n```\n\nFour copies of the same scene receive four values. The red instance is given `Color(1, 0, 0, 1)`; the green instance `Color(0, 1, 0, 1)`. The first three numbers address red, green and blue channels, each from zero to one. Zero contributes none of that channel; one gives its full value. The fourth number, alpha, stays at one here.\n\nThe assignment happens when the scene starts. While you move the lamp, its colour value stays fixed. You have changed where its light meets the room."
+  }
+]

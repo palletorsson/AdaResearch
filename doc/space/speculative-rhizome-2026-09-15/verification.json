@@ -1,0 +1,29 @@
+{
+  "hall": "SpeculativeComputation_Rhizome_Network",
+  "date": "2026-09-15",
+  "checks": 6,
+  "total_checks": 6,
+  "failures": [],
+  "checks_detail": {
+    "dimensions": true,
+    "two_artifacts": true,
+    "primary": true,
+    "registers": true,
+    "grid": true,
+    "registry": true
+  },
+  "tokens": [
+    "rhizome_cave_demo",
+    "rhizome_grower"
+  ],
+  "primary_artifacts": [
+    "rhizome_grower"
+  ],
+  "source_sha256": {
+    "commons\\maps\\SpeculativeComputation_Rhizome_Network\\map_data.json": "62ba46cc7b506ea24adba5affedc194ade2bca2dbdbbcdb618c5f938d0b50e1b",
+    "commons\\maps\\SpeculativeComputation_Rhizome_Network\\final.md": "cbcc061a9fc89e4683fc3dd9d7eef80ea9ca91b06d948535ebac1146a3b89bc8",
+    "commons\\maps\\SpeculativeComputation_Rhizome_Network\\tutorial.md": "559025eba140707e75e33c849462481777901fd042c8f3effd69a9474ffc4c6f",
+    "commons\\maps\\SpeculativeComputation_Rhizome_Network\\technical.md": "164afb8f54472116af14e65fab6ec03286b7913d3dc9a87dd21ef360c7f9fd6e",
+    "commons\\maps\\SpeculativeComputation_Rhizome_Network\\critical.md": "7e8c57ad422c0350cdf1a4aa1f216d62e4bd7dc76da980daaaa5ae458e23250e"
+  }
+}

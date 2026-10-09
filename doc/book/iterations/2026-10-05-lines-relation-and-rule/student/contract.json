@@ -1,0 +1,373 @@
+{
+  "version": 1,
+  "map": "Point_Lines",
+  "predecessor": "point-coordinates",
+  "incoming_path": "ghost-student/states/002-point-coordinates/point.gd",
+  "incoming_sha256": "ceb274ec9bc3b15b8eba6f03a61895fbd32d477333f4730e8b508afbcd747c7d",
+  "outgoing_sha256": "2a064f3d46cee8f7c78533f6f396538852ee5ad931d82c18577bc2becbfeb5f4",
+  "operations": [
+    {
+      "id": "line-state",
+      "kind": "insert_after",
+      "anchor": "const CENTRE := Vector3(0, 1.12, 0)\n",
+      "text": "\n# Supplied drawing helper; the station remains in the configured museum.\nconst LineSkin = preload(\"line_skin.gd\")\nvar point_a: XRToolsPickable\nvar point_b: XRToolsPickable\nvar line: MeshInstance3D\nvar distance := 0.0\n"
+    },
+    {
+      "id": "second-end-and-segment",
+      "kind": "insert_after",
+      "anchor": "\tbody.reparent(solid)\n",
+      "text": "\n\tpoint_a = solid\n\tpoint_b = solid.duplicate() as XRToolsPickable\n\tpoint_b.name = \"SecondPoint\"\n\tpoint_b.position = CENTRE + Vector3(1.0, 0, 0)\n\tadd_child(point_b)\n\tline = LineSkin.new()\n\tline.name = \"Segment\"\n\tadd_child(line)\n"
+    },
+    {
+      "id": "live-relation",
+      "kind": "insert_after",
+      "anchor": "\treturn mat\n",
+      "text": "\nfunc _process(_delta: float) -> void:\n\t# Express both held positions in this station's local coordinates.\n\tvar a := to_local(point_a.global_position)\n\tvar b := to_local(point_b.global_position)\n\tvar displacement := b - a\n\tdistance = displacement.length()\n\tline.show_segment(a, displacement, distance)\n"
+    }
+  ],
+  "given_files": [
+    {
+      "path": "line_skin.gd",
+      "sha256": "16c8aa0e91cd96257b03c5f58a309cf157c92d33204ae48174cb1dbd00866e1f",
+      "role": "Explicit borrowed cylinder renderer; rotation basis is not a prerequisite of Lines."
+    }
+  ],
+  "coordinate_contract": "a, b and displacement are in the unit-scale station's local frame. to_local converts either held endpoint from world position even if its parent changes. Rotation and translation of the station are allowed; scale is fixed at Vector3.ONE.",
+  "scope": "Proposed continuation of the historical assumed Coordinates learner state. No museum runtime or published tutorial is changed by composing this state.",
+  "mode": "continuation",
+  "lesson": "commons/maps/Point_Lines/tutorial.md",
+  "example": "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/assembled.gd",
+  "host": "Unit-scale Node3D student station in the prepared museum; existing XR hand. Native check uses an isolated unchanged XR Tools copy and synthetic controller.",
+  "incoming": {
+    "path": "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/incoming.gd",
+    "sha256": "ceb274ec9bc3b15b8eba6f03a61895fbd32d477333f4730e8b508afbcd747c7d",
+    "provenance": "Exact saved historical Coordinates state, whose original Point One input was an explicit assumed reconstruction."
+  },
+  "sources": [
+    {
+      "path": "commons/maps/Point_Lines/tutorial.md",
+      "sha256": "e18def8d83456b22caeb6a73260dc434c6c9031bb4916b3e02e57c4d7f7db86f"
+    },
+    {
+      "path": "commons/primitives/line/line.gd",
+      "sha256": "57f85dfd8fa492017da9e4f9687ce2034e46674a9df663fc610a84a9d77bf8d5"
+    },
+    {
+      "path": "commons/artifacts/line_black_box/line_black_box.gd",
+      "sha256": "e2176517dc21a1e72d07817aa5ba8db0cc326cf889d3ef1c2dcb1dcff8ae3aec"
+    },
+    {
+      "path": "commons/primitives/line/puzzles/parallel_line_puzzle.gd",
+      "sha256": "3a3dfe5ae0ab9f8869299a1ed34cec5326f6ce9532ec62065a79c898601a4f6c"
+    },
+    {
+      "path": "commons/primitives/line/puzzles/plus_line_puzzle.gd",
+      "sha256": "66246d91273e6f541160ac35e00a6298110be186d7b0967db64e517da07001de"
+    },
+    {
+      "path": "commons/primitives/line/puzzles/cross_line_puzzle.gd",
+      "sha256": "52a751c2b08f3bdac3e033db2284250add9eabcc4986242373d2815a0f2520c0"
+    }
+  ],
+  "checks": [
+    {
+      "id": "carry/first_point",
+      "kind": "native"
+    },
+    {
+      "id": "carry/place",
+      "kind": "native"
+    },
+    {
+      "id": "carry/radius",
+      "kind": "native"
+    },
+    {
+      "id": "carry/shared_shape",
+      "kind": "native"
+    },
+    {
+      "id": "carry/two_colliders",
+      "kind": "native"
+    },
+    {
+      "id": "coincident/distance",
+      "kind": "native"
+    },
+    {
+      "id": "coincident/hidden",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/basis",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/depth",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/distance",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/relation",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/parallel/visible",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/basis",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/depth",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/distance",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/relation",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/plus/visible",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/basis",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/depth",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/distance",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/relation",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x/visible",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/basis",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/depth",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/distance",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/relation",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "exercise/x_depth/visible",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/basis",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/distance",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/held",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/moved",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/near_pickup",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/released",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/same_surface",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "held_a/visible",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/basis",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/distance",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/held",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/moved",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/near_pickup",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/released",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/same_surface",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "held_b/visible",
+      "kind": "native"
+    },
+    {
+      "id": "initial/basis",
+      "kind": "native"
+    },
+    {
+      "id": "initial/distance",
+      "kind": "native"
+    },
+    {
+      "id": "initial/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "initial/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "initial/visible",
+      "kind": "native"
+    },
+    {
+      "id": "separated_again/basis",
+      "kind": "native"
+    },
+    {
+      "id": "separated_again/distance",
+      "kind": "native"
+    },
+    {
+      "id": "separated_again/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "separated_again/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "separated_again/visible",
+      "kind": "native"
+    },
+    {
+      "id": "vertical/basis",
+      "kind": "native"
+    },
+    {
+      "id": "vertical/distance",
+      "kind": "native"
+    },
+    {
+      "id": "vertical/mesh_length",
+      "kind": "native"
+    },
+    {
+      "id": "vertical/segment_endpoints",
+      "kind": "native"
+    },
+    {
+      "id": "vertical/visible",
+      "kind": "native"
+    }
+  ],
+  "evidence_inputs": [
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/incoming.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/assembled.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/expected.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/line_skin.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/verify.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/run_checks.py",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/build_state.py",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/contract.json",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/brief.json",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/two-lines-changes.json",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/tutorial.md",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/two_lines_parallel.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/two_lines_plus.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/two_lines_x.gd",
+    "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/two_lines_x_depth.gd"
+  ],
+  "native_report": "doc/book/iterations/2026-10-05-lines-relation-and-rule/student/report-runtime.json",
+  "expected_target_status": "expected.gd is a reviewed frozen composition target, not an independent implementation or proof of learner comprehension. Native checks and the deliberate failing mutation provide behavioral evidence."
+}

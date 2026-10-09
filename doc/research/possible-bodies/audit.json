@@ -1,0 +1,1967 @@
+{
+  "generated_at": "2026-09-12T13:55:39.041941+00:00",
+  "scope": [
+    "color",
+    "tiling",
+    "change",
+    "forces",
+    "formfinding"
+  ],
+  "summary": {
+    "halls": 37,
+    "with_final": 37,
+    "missing_final": 0,
+    "role_reviews": 4,
+    "ribbon_halls": 3
+  },
+  "basis": "Effective museum order + sequence lists + map placements + explicit roles + final.md anchors. Runtime evidence is recorded separately per room, with source fingerprints; source coverage alone does not establish runtime or headset readiness.",
+  "sequence_threads": {
+    "formfinding": "A local search gains constraints and connected bodies; inspect the measure and the rule that accepts a form.",
+    "color": "A value becomes appearance in relation to light, neighbours, surfaces and bodies.",
+    "tiling": "Make a motif, repeat it, give it different bodies, perform it, inspect its shader, and wear a saved fabric.",
+    "change": "A configuration gains a history: measure variation, accumulate contributions and inspect paths.",
+    "forces": "Directions and rates participate in interactions that constrain or enable bodily movement."
+  },
+  "legacy_groups_outside_sequence": {
+    "color": [],
+    "tiling": [],
+    "change": [],
+    "forces": [
+      "VectorFoundations",
+      "VectorOperations",
+      "VectorApplied",
+      "VectorAdvanced",
+      "ForcesComposition",
+      "ForcesFoundations",
+      "ForcesSystems",
+      "ForcesChaos",
+      "ForcesArena"
+    ],
+    "formfinding": []
+  },
+  "maps": [
+    {
+      "map": "Color_Context_Placed",
+      "layer": "surface",
+      "question": "What makes one colour appear different among other colours?",
+      "leads": [
+        "dna_modern_art_albers_homage_warm"
+      ],
+      "carry": "A colour needs a context before we judge it.",
+      "next": "Keep the Albers study as the opening; identify a comparison whose stored colours can be checked.",
+      "proof": "Record the material values and viewing conditions; do not promise an interactive surround control unless one exists.",
+      "method": "Hold one thing fixed",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "dna_modern_art_albers_homage_warm"
+      ],
+      "book_anchors": [
+        "dna_modern_art_albers_homage_warm"
+      ],
+      "book_words": 154,
+      "placed_tokens": [
+        "serial_principle",
+        "crackpropagation_ca",
+        "csg_architecture_cavity",
+        "dna_color_stacks_stack_triadic_primary",
+        "dna_color_stacks_stack_monochrome_blue",
+        "dna_color_stacks_stack_value_steps_warm",
+        "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+        "dna_color_furniture_furniture_vignelli_metafora_primary",
+        "dna_color_stacks_stack_simultaneous_contrast",
+        "dna_color_stacks_stack_complementary_red_green",
+        "dna_modern_art_albers_homage_warm",
+        "dna_color_furniture_furniture_coco_pendant_warm",
+        "primitive_assembler",
+        "primitive_combo_puzzle",
+        "dna_color_furniture_furniture_lamp_warm_glow",
+        "dna_modern_art_kandinsky_bauhaus_triad",
+        "dna_modern_art_rothko_chromatic_field",
+        "dna_primitive_stack_ps01_bauhaus_totem_green",
+        "dress_selector",
+        "dna_modern_art_mondrian_de_stijl",
+        "constraint_sculptor",
+        "el",
+        "t",
+        "s"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Flashlight",
+      "layer": "surface",
+      "question": "What can the same surface become under different light?",
+      "leads": [
+        "flashlight_demo"
+      ],
+      "carry": "Separate illumination from the surface receiving it.",
+      "next": "First writing and staging pass complete. Next: a tracked-hand walkthrough of the four lamps; retain the existing Nails handoff.",
+      "proof": "40 desktop museum checks pass, including held-lamp aiming and rendered overlap. Book, primary and placement name flashlight_demo. Headset usability remains open.",
+      "method": "Separate appearance from mechanism",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 40 desktop museum checks pass: mounting, floor, pickup/movement/release, RGB overlap, aim-away/return and unchanged receiving material. Supplied grabber; tracked hands and headset comfort remain untested.",
+      "verification_current": true,
+      "verification_report": "flashlight-check.json",
+      "verification_capture": "flashlight-arrival.png",
+      "verification_comparisons": [],
+      "primary": [
+        "flashlight_demo"
+      ],
+      "book_anchors": [
+        "flashlight_demo"
+      ],
+      "book_words": 581,
+      "placed_tokens": [
+        "flashlight_demo",
+        "sp",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Nails",
+      "layer": "player",
+      "question": "What happens when the same chosen colour dresses a giant hand and a petite one?",
+      "leads": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "carry": "One material address can reach the same body at two scales.",
+      "next": "Open plinths and book pass complete. Next: assess tracked-hand reach into both RGB boxes and compare the connected player hand with the giant and petite displays.",
+      "proof": "35 desktop museum checks pass: supplied RGB pickup, separate surfaces, plinth reach, both side routes and palette-ball containment. Tracked hands remain untested.",
+      "method": "Trace the receiving body",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "book_anchors": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "book_words": 593,
+      "placed_tokens": [
+        "science_screen",
+        "colorballs",
+        "brick_wall_factory",
+        "nail_salon",
+        "nail_color_controller",
+        "hand_color_controller",
+        "sp",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Rainbow",
+      "layer": "world",
+      "question": "Who decides how many colours a rainbow holds?",
+      "leads": [
+        "rainbow"
+      ],
+      "carry": "A continuous-looking appearance can be made from authored finite divisions; changing colour need not change the route.",
+      "next": "Celebration and final.md complete. Next: walk the optional steps and level route in a headset, then follow the book into Pillar sampling.",
+      "proof": "93 desktop museum checks pass: 6/7/48/2 bands, fixed total width and tile transforms, real button signals, arrival overlap, repeatable confetti and clear level route. Headset untested.",
+      "method": "Hold geometry fixed while changing its colour divisions",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "rainbow"
+      ],
+      "book_anchors": [
+        "rainbow"
+      ],
+      "book_words": 606,
+      "placed_tokens": [
+        "pick_up_cube",
+        "catalyst_pedestal",
+        "rainbow",
+        "t",
+        "sp"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Pillar",
+      "layer": "world",
+      "question": "What is a pillar sampling from the space around it?",
+      "leads": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ],
+      "carry": "Distinguish a spatial field from selected palette samples.",
+      "next": "Keep the field and palette wall as a paired encounter; make the handoff to indexed cells explicit.",
+      "proof": "Move along one field axis while holding the other fixed; explain one palette choice without calling the samples the entire field.",
+      "method": "Hold one thing fixed",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ],
+      "book_anchors": [
+        "pillarcolorcollection",
+        "color_sets_overview"
+      ],
+      "book_words": 326,
+      "placed_tokens": [
+        "visual_color_mixing",
+        "pillarcolorcollection",
+        "grab_rainbow_stick",
+        "dark_sphere",
+        "SpectrumVisualizer",
+        "color_sets_overview",
+        "el",
+        "wp",
+        "s",
+        "an",
+        "t",
+        "sp"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "layer": "grid",
+      "question": "What remains at an address when attention moves elsewhere?",
+      "leads": [
+        "gridcolorizer"
+      ],
+      "carry": "A cell can hold an exception; reapplying the rule replaces it without changing geometry.",
+      "next": "Address console and final.md complete. Next: test tracked-controller pressing and follow the handoff into Paint’s accumulating marks.",
+      "proof": "30 desktop museum checks pass: actual button signals, one-instance edits, address return, rule replacement, palette evaluation, unchanged geometry and console approach. Headset untested.",
+      "method": "Distinguish the stored value from the rule that can overwrite it",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "gridcolorizer"
+      ],
+      "book_anchors": [
+        "gridcolorizer"
+      ],
+      "book_words": 559,
+      "placed_tokens": [
+        "dark_sphere",
+        "gridcolorizer",
+        "spectrum_forest",
+        "science_screen",
+        "el",
+        "tc",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Paint",
+      "layer": "surface",
+      "question": "What does a surface keep after a gesture has passed?",
+      "leads": [
+        "ball_painting_demo",
+        "albers_wall_gallery"
+      ],
+      "carry": "Manual and automatic gestures enter one changing image; the image keeps neither gesture intact.",
+      "next": "Shared-canvas interaction and book pass complete. Next: test tracked-hand pickup, aim and return; continue into Walls and colour as a partition.",
+      "proof": "27 desktop museum checks pass: actual pickable movement and ray hits, correct canvas and UV mapping, automatic continuation, retained GPU pigment, return to tray, sightline and approach. Headset untested.",
+      "method": "Trace different inputs to the same receiver, then inspect what it retains",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 27 desktop museum checks pass: supplied pickup and real ray hits, correct receiver and rectangular UV mapping, automatic continuation, rendered pigment after release, return to tray, canvas sightline and body-sized approach. Tracked hands untested.",
+      "verification_current": true,
+      "verification_report": "paint-encounter-check.json",
+      "verification_capture": "paint-encounter-museum.png",
+      "verification_comparisons": [],
+      "primary": [
+        "albers_wall_gallery",
+        "ball_painting_demo"
+      ],
+      "book_anchors": [
+        "ball_painting_demo",
+        "albers_wall_gallery"
+      ],
+      "book_words": 589,
+      "placed_tokens": [
+        "dark_sphere",
+        "albers_wall_gallery",
+        "ball_painting_demo",
+        "el",
+        "wp",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Color_Walls",
+      "layer": "world",
+      "question": "What can a view pass through that a body cannot?",
+      "leads": [
+        "color_constellation_office",
+        "color_space_navigator",
+        "gradient_interpolator"
+      ],
+      "carry": "Visibility, colour coordinates and interpolation choose different kinds of passage.",
+      "next": "Three-encounter book and desktop pass complete. Next: tracked-hand controls and a first-time visitor walkthrough; continue to Chamber_Color.",
+      "proof": "52 desktop museum checks: both opacity states, aisle and eight entrances, pane blocking, exact collider identity, reachable controls, fixed endpoints with changed interiors and sampled coordinates. Headset untested.",
+      "method": "Change one representation while holding the comparison conditions fixed",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "color_space_navigator",
+        "color_constellation_office",
+        "gradient_interpolator"
+      ],
+      "book_anchors": [
+        "color_constellation_office",
+        "color_space_navigator",
+        "gradient_interpolator"
+      ],
+      "book_words": 677,
+      "placed_tokens": [
+        "dark_sphere",
+        "rainbow_hallway",
+        "color_space_navigator",
+        "gradient_interpolator",
+        "color_constellation_office",
+        "subpixel_display",
+        "sp",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Chamber_Color",
+      "layer": "world",
+      "question": "What does a delivered colour actually change?",
+      "leads": [
+        "becoming_catalyst"
+      ],
+      "carry": "One contact invokes separate receiving operations; a changed image does not imply changed collision.",
+      "next": "Closing manuscript and mounted encounter complete. Next: tracked-hand reach and the transition into Pattern_Foundry.",
+      "proof": "32 desktop museum checks: supplied pointer input, physical hits, cooldown, target tint, two altered grid samples, unchanged floor colliders, three-hit disappearance, return and side approach. Headset untested.",
+      "method": "Trace each receiver and its distinct state and reset",
+      "sequence": "color",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "becoming_catalyst"
+      ],
+      "book_anchors": [
+        "becoming_catalyst"
+      ],
+      "book_words": 592,
+      "placed_tokens": [
+        "science_screen",
+        "proximity_spawner",
+        "becoming_catalyst",
+        "catalyst_target",
+        "s",
+        "wp",
+        "e",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Pattern_Foundry",
+      "layer": "surface",
+      "question": "How many bodies can share one small decision?",
+      "leads": [
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "carry": "A small source can surround a body; wall and floor may share its rule while retaining different moments. Curvature and surface mapping are distinct decisions.",
+      "next": "Walk the curved studio room in a headset, then add deliberate held-hand pattern offset with release and tracking-loss handling. Other editor adapters, garment transfer and the shader conclusion remain open.",
+      "proof": "99 Foundry checks and 86 studio/room checks pass: source ownership, live/held surfaces, shared undo, physical mapping, curved wall collision, entrance and aisle route. Headset untested.",
+      "method": "Separate the recipe from its receiving form",
+      "sequence": "tiling",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 99 Foundry regression checks and 86 studio/room checks pass in the desktop museum. The studio now stands inside an eight-metre curved room, with independent wall and floor receivers. Source ownership, hold, shared undo, arc-length mapping, entrance collision and the aisle route are checked. Headset untested; outfit hidden only for inspection photos.",
+      "verification_current": true,
+      "verification_report": "pattern-recipe-check.json",
+      "verification_capture": "pattern-recipe-museum.png",
+      "verification_comparisons": [
+        {
+          "file": "pattern-wall-museum.png",
+          "caption": "The original wall follows the source at 30 cm repeat and U05 offset."
+        },
+        {
+          "file": "pattern-architecture-museum.png",
+          "caption": "NORTH follows at 30 cm repeat and U05 on an existing inner wall. Inspection view; player outfit hidden for the probe camera."
+        },
+        {
+          "file": "pattern-east-museum.png",
+          "caption": "EAST retains 15 cm repeat and U00 while linked surfaces follow at 30 cm and U05. Its standing approach is reserved from automatic sculptures."
+        },
+        {
+          "file": "pattern-studio-console.png",
+          "caption": "The studio edits a source inside the room. ROOM selects its curved wall and planar floor together; 86 checks in pattern-studio-check.json."
+        },
+        {
+          "file": "pattern-studio-room.png",
+          "caption": "The source editor and surface selector inside the curved studio bay. Pattern edits preserve the wall geometry and entrance."
+        },
+        {
+          "file": "curved-room-inside.png",
+          "caption": "Inside the room: a small editable source surrounds the body. Wall and floor can follow it live or retain different moments."
+        },
+        {
+          "file": "curved-room-entrance.png",
+          "caption": "The eight-metre curved bay, broad entrance and roof opening, seen from its approach. Actual Godot capture; Guilloche motif with Renaissance palette."
+        }
+      ],
+      "primary": [
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "book_anchors": [
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_a"
+      ],
+      "book_words": 1684,
+      "placed_tokens": [
+        "pattern_tile_4x4",
+        "pattern_tile_mirror",
+        "pattern_machine_c",
+        "pattern_studio_plate",
+        "pattern_tile_herringbone",
+        "pattern_maker_station",
+        "pattern_machine_a",
+        "pattern_mill",
+        "pattern_tile_plate",
+        "drag_catwalk",
+        "tiling_demo",
+        "pattern_machine_d",
+        "pattern_tile_brick",
+        "super_drag_mirror",
+        "l",
+        "sp"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Tutorial_Pattern",
+      "layer": "surface",
+      "question": "What changes when the mark stays fixed?",
+      "leads": [
+        "pattern_maker_station"
+      ],
+      "carry": "The same stored cells can face differently through a sampling rule; editing the source and changing its repetitions are different interventions.",
+      "next": "Continue to Array_Patterns: carry repetition into an environment and inspect its corners and passage. Headset walkthroughs and continuous hand gestures are deferred.",
+      "proof": "41 desktop checks pass for the mounted source editor, paired P1/PM fields, floor selection, paint, undo, source transformations and bay route. Book and primary agree.",
+      "method": "Hold the source fixed, then hold the rule fixed",
+      "sequence": "tiling",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "pattern_maker_station"
+      ],
+      "book_anchors": [
+        "pattern_maker_station"
+      ],
+      "book_words": 706,
+      "placed_tokens": [
+        "grid_model",
+        "pattern_studio_plate",
+        "pattern_tile_plate",
+        "dark_sphere",
+        "pattern_maker_station",
+        "pattern_tile_mirror",
+        "pattern_tile_puzzle",
+        "panel_bridge_loom",
+        "script_runner",
+        "pulsar_compact",
+        "s",
+        "t",
+        "sp"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Array_Patterns",
+      "layer": "world",
+      "question": "Where does an address acquire its physical direction and size?",
+      "leads": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "carry": "One source can cover differently oriented faces; each face restarts its coordinates. Drawn divisions and physical passage are separate.",
+      "next": "Continue to Symmetry_Seventeen: compare encountered operations before classifying ideal repeating fields. Headset and gestures remain deferred.",
+      "proof": "50 desktop checks pass: source addresses, raised platform, wp ramps, blocked side bypasses, reachable lower console and clear exit route.",
+      "method": "Trace the address through its receiving surface",
+      "sequence": "tiling",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "book_anchors": [
+        "pattern_tunnel_machine",
+        "pattern_tile_brick"
+      ],
+      "book_words": 739,
+      "placed_tokens": [
+        "pattern_tile_4x4",
+        "vr_tile_editor_mirror",
+        "pattern_tile_mirror",
+        "science_screen",
+        "tiling_demo",
+        "dark_sphere",
+        "pattern_tile_plate",
+        "panel_bridge_loom",
+        "grid_model",
+        "pattern_tunnel_machine",
+        "facade_grammar_demo",
+        "pattern_tile_brick",
+        "pattern_tile_herringbone",
+        "s",
+        "wp"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "layer": "surface",
+      "question": "Which assumptions make a catalogue of possible patterns finite?",
+      "leads": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "carry": "A classification has a domain; local ornament is not whole-field symmetry.",
+      "next": "Continue to Ribbon_Patterns_01: give the source another index and inspect the volume in slices. Headset work remains deferred.",
+      "proof": "40 desktop checks: pointer edits, P1/PM/PG source lookup, independent held pixels, undo, reachable controls and bay passage. Only three selected rules are verified.",
+      "method": "Hold a comparison; distinguish construction rules from resulting symmetry",
+      "sequence": "tiling",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 40 desktop checks pass: actual pointer controls, three source lookup rules, independently held pixels, undo, physical approach and unchanged legacy editor. Headset deferred.",
+      "verification_current": true,
+      "verification_report": "symmetry-compare-check.json",
+      "verification_capture": "symmetry-compare-bay.png",
+      "verification_comparisons": [
+        {
+          "file": "symmetry-compare-console.png",
+          "caption": "One source, three rules; a held image makes the next change comparable."
+        }
+      ],
+      "primary": [
+        "wallpaper_cage",
+        "vr_tile_editor"
+      ],
+      "book_anchors": [
+        "vr_tile_editor",
+        "wallpaper_cage"
+      ],
+      "book_words": 689,
+      "placed_tokens": [
+        "wallpaper_cage",
+        "loom_alhambra_p6m",
+        "wall_pattern_gallery",
+        "pattern_loom",
+        "loom_escher_mirror",
+        "mill_alhambra_p6m",
+        "pattern_tile_puzzle",
+        "vr_tile_editor",
+        "mill_persian_p4",
+        "mill_escher_p4g",
+        "kaleidoscope",
+        "pattern_atlas_gallery",
+        "pattern_artifact",
+        "tile_meander_floor",
+        "sp",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Ribbon_Patterns_01",
+      "layer": "grid",
+      "question": "What becomes addressable when a layer gains depth?",
+      "leads": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "carry": "A third index permits layered relationships; visibility, palette lookup and geometry remain separate decisions.",
+      "next": "Continue to Ribbon_Patterns_02: distinguish stored values from carrier and viewing conditions. Keep sorting as an optional revisit.",
+      "proof": "22 desktop checks: corresponding addresses, fixed source, height-dependent sampling, slice visibility without data deletion, undo, reachable console and no duplicate lattice after initialization.",
+      "method": "Keep addresses fixed while changing what their values do",
+      "sequence": "tiling",
+      "source": "ribbon",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 22 primary interaction checks and 13 layout checks pass after compaction. All artifacts retained, primaries full scale, central aisle clear. Headset and supporting control review deferred.",
+      "verification_current": true,
+      "verification_report": "layer-pattern-check.json",
+      "verification_capture": "compact_Ribbon_Patterns_01.png",
+      "verification_comparisons": [
+        {
+          "file": "compact_entry_Ribbon_Patterns_01.png",
+          "caption": "Standing view through the compact gallery and its framed walls."
+        }
+      ],
+      "primary": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "book_anchors": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4"
+      ],
+      "book_words": 702,
+      "placed_tokens": [
+        "grid_2d_4x4",
+        "grid_3d_4x4x4",
+        "column_3_z",
+        "row_3_x",
+        "xyz_coordinates",
+        "grid3d",
+        "bar_array",
+        "bar_array_bubble_sort",
+        "sorting_algorithm_race",
+        "shelf",
+        "shelf_with_stickers",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "curation"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Ribbon_Patterns_02",
+      "layer": "surface",
+      "question": "When can two rendered appearances agree while their construction differs?",
+      "leads": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "carry": "Context can change while target values stay fixed; a carrier shader can change rendered values while source pixels stay fixed. These are different experiments.",
+      "next": "Continue to Ribbon_Patterns_03: complete the shader/fabric studio and garment transfer. Headset and gestures remain deferred.",
+      "proof": "23 desktop checks: fixed context targets, shared source and material, matched surface distances, normal/light response, undo/reset, both console approaches and neighbouring label occlusion.",
+      "method": "State which relation changes and which data stays fixed",
+      "sequence": "tiling",
+      "source": "ribbon",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 23 primary interaction checks and 14 layout checks pass after compaction. All artifacts retained, primaries full scale, central aisle clear. Headset and supporting control review deferred.",
+      "verification_current": true,
+      "verification_report": "carrier-check.json",
+      "verification_capture": "compact_Ribbon_Patterns_02.png",
+      "verification_comparisons": [
+        {
+          "file": "compact_entry_Ribbon_Patterns_02.png",
+          "caption": "Standing view through the compact gallery and its framed walls."
+        }
+      ],
+      "primary": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "book_anchors": [
+        "SimultaneousContrast",
+        "MetamerismLab"
+      ],
+      "book_words": 720,
+      "placed_tokens": [
+        "SimultaneousContrast",
+        "MetamerismLab",
+        "spherecolors",
+        "hue_carousel",
+        "grabcolorcollection",
+        "color_mixing",
+        "dark_side_prism",
+        "prism",
+        "grab_stick_scanner",
+        "two_roads",
+        "color_scanner",
+        "grab_stick",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "curation"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Ribbon_Patterns_03",
+      "layer": "player",
+      "question": "What travels when one source becomes a wall, a skirt and a procession?",
+      "leads": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "carry": "One saved recipe can travel through explicit receivers without making their UV maps, collisions or bodies identical.",
+      "next": "Continue to Change_Intro: how much changes, and how quickly? Return for headset reach, mirror comfort, continuous gestures and the secondary exhibit review.",
+      "proof": "Paint, inspect UVs, compare cut-out with collision, save/load, wear deliberately, see the live mirror, dress four walkers and undo.",
+      "method": "Trace the receiving body",
+      "sequence": "tiling",
+      "source": "ribbon",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-10: 39 primary interaction checks and 19 layout checks pass after compaction. All artifacts retained, primaries full scale, central aisle clear. Headset and supporting control review deferred.",
+      "verification_current": true,
+      "verification_report": "fabric-studio-check.json",
+      "verification_capture": "compact_Ribbon_Patterns_03.png",
+      "verification_comparisons": [
+        {
+          "file": "compact_entry_Ribbon_Patterns_03.png",
+          "caption": "Standing view through the compact gallery and its framed walls."
+        }
+      ],
+      "primary": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "book_anchors": [
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "drag_catwalk"
+      ],
+      "book_words": 971,
+      "placed_tokens": [
+        "drag_catwalk",
+        "fabric_shader_studio",
+        "super_drag_mirror",
+        "pulsar_visualizer",
+        "standalone_disco",
+        "coloredlines",
+        "RotatingLaser",
+        "minimalglitch",
+        "textureglitch",
+        "glitchcolor",
+        "advancedglitch",
+        "colortrails",
+        "neon_garden",
+        "strobe_lasers",
+        "disco_lights",
+        "one_bulb_room",
+        "laser_turret",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "curation"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Change_Intro",
+      "layer": "artifact",
+      "question": "What is retained when we measure, add and recover a change?",
+      "leads": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "carry": "Sampling and signed accumulation retain different accounts of one function.",
+      "next": "Continue through the three bays, then enter Flow_Field.",
+      "proof": "Compare finite differences, held Riemann sums and the bridge endpoint difference.",
+      "method": "Compare measurement scales",
+      "sequence": "change",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 22 hall checks pass; 21 rate and 26 accumulation checks also pass. Headset and secondary interaction review pending.",
+      "verification_current": true,
+      "verification_report": "change-two-halls-check.json",
+      "verification_capture": "change_two_Change_Intro.png",
+      "verification_comparisons": [],
+      "primary": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "book_anchors": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "ftc_bridge"
+      ],
+      "book_words": 2038,
+      "placed_tokens": [
+        "tangent_slope_workbench",
+        "riemann_sum_workbench",
+        "velocity_arrow",
+        "ftc_bridge",
+        "derivative_pair",
+        "integral_area",
+        "riemann_pump",
+        "gradient_descent_well",
+        "code_display",
+        "paper_regatta",
+        "slope_tangent_demo",
+        "partial_derivative_terrain",
+        "descent_marble_toy",
+        "riemann_pi",
+        "zeno_staircase",
+        "science_screen",
+        "synthesis_stand",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Flow_Field",
+      "layer": "world",
+      "question": "What paths can local instructions produce?",
+      "leads": [
+        "flow_field_painter"
+      ],
+      "carry": "A direction field prescribes movement; a force model updates velocity through acceleration.",
+      "next": "Inspect the shared field arrows and particles before moving to Forces.",
+      "proof": "Freeze field evolution; compare one sampled direction with one particle update.",
+      "method": "Separate appearance from mechanism",
+      "sequence": "change",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 18 hall checks pass; arrows and particles use the same sampler. Headset and secondary interaction review pending.",
+      "verification_current": true,
+      "verification_report": "change-two-halls-check.json",
+      "verification_capture": "change_two_Flow_Field.png",
+      "verification_comparisons": [],
+      "primary": [
+        "flow_field_painter"
+      ],
+      "book_anchors": [
+        "flow_field_painter"
+      ],
+      "book_words": 714,
+      "placed_tokens": [
+        "flow_field_painter",
+        "vector_field_visualizer",
+        "vector_field_grid",
+        "particle_flow_swarm",
+        "noc_5_04_flow_field",
+        "grand_zoetrope",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "layer": "artifact",
+      "question": "What changes when both addresses move but their difference does not?",
+      "leads": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "carry": "One measured vector can be represented in several receivers; a later force needs its own physical update.",
+      "next": "Addition is now implemented in VFM_02_Operations: wall, floor and carriage share one sum.",
+      "proof": "Pointer presets, world displacement invariance, projection clipping and zero normalization.",
+      "method": "Align the four registers",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 17 desktop checks pass: world displacement under common translation, magnitude presets, components, clipping, zero recovery, normalization readout and console approach. Headset deferred.",
+      "verification_current": true,
+      "verification_report": "vector-forces-start-check.json",
+      "verification_capture": "vector_start_Vectors_Act1_WhatAVectorIs.png",
+      "verification_comparisons": [],
+      "primary": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "book_anchors": [
+        "VectorBasics",
+        "vector_normalize_demo"
+      ],
+      "book_words": 705,
+      "placed_tokens": [
+        "3t",
+        "route_vector",
+        "CoordinateSystem3M",
+        "VectorBasics",
+        "length_lantern",
+        "vector_normalize_demo",
+        "s",
+        "sub",
+        "an",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "VFM_02_Operations",
+      "layer": "world",
+      "question": "How can a journey have zero displacement?",
+      "leads": [
+        "adder_board"
+      ],
+      "carry": "One shared vector sum drives a wall plan and a carriage destination; distance preserves what endpoint displacement omits.",
+      "next": "Continue to the implemented subtraction/projection pair in Vectors_Act2_VectorArithmetic; see vector-gap-projection.html.",
+      "proof": "Pointer controls, swapped and cancelled routes, frame partitioning, actual physics motion and arena approach; see vector-addition.html.",
+      "method": "Carry one result into two receivers",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 27 desktop checks pass: pointer component editing, cancellation, swapped/direct routes, timestep agreement, real physics motion, approach and ordinary board compatibility. Headset review remains open.",
+      "verification_current": true,
+      "verification_report": "vector-addition-check.json",
+      "verification_capture": "vector_sum_room.png",
+      "verification_comparisons": [],
+      "primary": [
+        "adder_board"
+      ],
+      "book_anchors": [
+        "adder_board"
+      ],
+      "book_words": 751,
+      "placed_tokens": [
+        "adder_board",
+        "vector_projection_demo",
+        "2d_in_3d_vectors_vis",
+        "basis_vectors_rig",
+        "coordinate_system_switcher",
+        "VectorSubtraction",
+        "example_1_4_vector_multiplication_vr",
+        "stretch_bench",
+        "vector_addition_demo",
+        "vector_addition_xl",
+        "vector_magnitude_demo",
+        "vector_subtraction_demo",
+        "vector_dot_product_xl",
+        "vector_cross_product_xl",
+        "vector_translation_demo",
+        "dot_aligner",
+        "torque_crank",
+        "VectorTorque",
+        "dot_product_projector",
+        "VectorWorkbench",
+        "vector_add",
+        "vector_projection_reflection_xl",
+        "projection_shadow",
+        "agreement_gauge",
+        "opening_pair",
+        "torque_demo",
+        "exercise_5_9_angle_between",
+        "s",
+        "sub",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Vectors_Act2_VectorArithmetic",
+      "layer": "world",
+      "question": "What changes when the same gap meets a different rail?",
+      "leads": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank"
+      ],
+      "carry": "Subtraction reverses under exchange; projection depends on the receiver; retaining the perpendicular remainder reconstructs the gap.",
+      "next": "Launch is now an implemented full-scale chamber; continue to launch-chamber.html, then VFM_03_Motion.",
+      "proof": "Room-local linked controls: SHIFT, SWAP, coincidence, perpendicular SLIDE, rotated and reversed rail, input limits. See vector-gap-projection.html.",
+      "method": "Change the receiver while holding the input",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 30 desktop checks pass: shared room-local inputs, gap reversal/invariance/zero, projection/remainder, rail turn/flip, upstream slide, limits, controls and clear approach. Headset untested.",
+      "verification_current": true,
+      "verification_report": "vector-gap-projection-check.json",
+      "verification_capture": "vector_gap_RoomProjection.png",
+      "verification_comparisons": [],
+      "primary": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank"
+      ],
+      "book_anchors": [
+        "vector_add",
+        "vector_sub",
+        "dot_aligner",
+        "projection_shadow",
+        "torque_crank"
+      ],
+      "book_words": 1208,
+      "placed_tokens": [
+        "vector_addition_walk",
+        "vector_add",
+        "vector_sub",
+        "example_2_3_gravity_scaled_by_mass_vr",
+        "dot_aligner",
+        "vector_dot_product_xl",
+        "projection_shadow",
+        "vector_projection_reflection_xl",
+        "torque_crank",
+        "vector_cross_product_xl",
+        "vector_addition_xl_laser",
+        "vector_subtraction_xl_laser",
+        "s",
+        "sub",
+        "an",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "VFM_05_Launch",
+      "layer": "world",
+      "question": "What changes when you stand between two flights with equal horizontal range?",
+      "leads": [
+        "launch_arc"
+      ],
+      "carry": "An initial velocity and continuing acceleration have distinct roles; equal horizontal range does not preserve flight duration.",
+      "next": "Motion is implemented: compare a calculated flight with a body carrying velocity through later interventions; see motion-chamber.html.",
+      "proof": "Full-scale central controls, complementary angles and separate landing clocks, local slow playback, unit-labelled vectors; see launch-chamber.html.",
+      "method": "Stand inside the representation",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 40 desktop checks pass: complementary ranges, distinct landing clocks, gravity/speed/angle, slow playback, analytic motion, components, pooled arrows, centre/side approaches and ordinary-console compatibility. Headset untested.",
+      "verification_current": true,
+      "verification_report": "launch-chamber-check.json",
+      "verification_capture": "launch_chamber_overview.png",
+      "verification_comparisons": [],
+      "primary": [
+        "launch_arc"
+      ],
+      "book_anchors": [
+        "launch_arc"
+      ],
+      "book_words": 919,
+      "placed_tokens": [
+        "launch_arc",
+        "ForceMagnitudeDemo",
+        "VectorForces",
+        "catapult",
+        "hl_turret_vectors",
+        "turret_boll_infoboard",
+        "mortar_vector_siege",
+        "firework_burst",
+        "VectorThrowing",
+        "firework_launcher",
+        "return_launcher",
+        "human_catapult",
+        "force_pad",
+        "drag_lane",
+        "circle_train",
+        "slingshot_launcher",
+        "foresight_range",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "VFM_03_Motion",
+      "layer": "world",
+      "question": "What remains when the push ends?",
+      "leads": [
+        "VectorMotion",
+        "friction_ramp"
+      ],
+      "carry": "Velocity persists between interventions; a still body can have balanced influences.",
+      "next": "Fields and Motion is implemented: one field, two update rules; see field-receivers.html.",
+      "proof": "Finite force pulses, coasting, braking, mass, damping and elastic contact; compare the ramp static reset. See motion-chamber.html.",
+      "method": "Stand inside the representation; expose its exclusions",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 34 desktop checks pass: finite force/mass response, coasting, braking, perpendicular contributions, damping, elastic contact, bounded history, stable arrows, reach, ramp threshold and legacy scene. Headset untested.",
+      "verification_current": true,
+      "verification_report": "motion-chamber-check.json",
+      "verification_capture": "motion_chamber_overview.png",
+      "verification_comparisons": [],
+      "primary": [
+        "friction_ramp",
+        "VectorMotion"
+      ],
+      "book_anchors": [
+        "VectorMotion",
+        "friction_ramp"
+      ],
+      "book_words": 1087,
+      "placed_tokens": [
+        "VectorMotion",
+        "normal_force_demo",
+        "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+        "vector_drone",
+        "bouncing_ball",
+        "trajectory_artifact",
+        "ForceMagnitudeDemo",
+        "VectorForces",
+        "exercise_1_3_solution_3_d_bouncing_ball_vr",
+        "exercise_1_5_solution_accelerate_and_decelerate_vr",
+        "example_2_5_fluid_resistance_vr",
+        "example_3_2_forces_with_arbitrary_angular_motion_vr",
+        "example_3_3_pointing_in_the_direction_of_motion_vr",
+        "friction_ramp",
+        "newton_cradle",
+        "combined_forces_demo",
+        "collision_crasher",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "layer": "world",
+      "question": "What does the body do with the arrow?",
+      "leads": [
+        "VectorFieldFlow"
+      ],
+      "carry": "One dimensionless field yields different motion when its receiver sets velocity or accumulates acceleration.",
+      "next": "Vectors_Act4a_KineticForces: inspect the units, receiving body and actual force application.",
+      "proof": "Full-scale central controls, two receivers, linked floor and wall paths, sink overshoot, uniform comparison, reversal and fixed steps. See field-receivers.html.",
+      "method": "Change the receiver while holding the spatial rule",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 39 desktop checks pass: two receiver rules, overshoot, uniform prediction, preserved state, fixed-step partition agreement, bounded history, stable geometry, approaches, controls, live wall markers and legacy scene. Headset untested.",
+      "verification_current": true,
+      "verification_report": "field-receivers-check.json",
+      "verification_capture": "field_receivers_overview.png",
+      "verification_comparisons": [],
+      "primary": [
+        "VectorFieldFlow"
+      ],
+      "book_anchors": [
+        "VectorFieldFlow"
+      ],
+      "book_words": 935,
+      "placed_tokens": [
+        "VectorFieldFlow",
+        "field_room",
+        "force_field_visualizer",
+        "force_fields",
+        "force_vortex",
+        "magnetic_simulation",
+        "particle_systems",
+        "vector_field",
+        "vector_fields",
+        "weather_vector_field",
+        "launch_arc",
+        "bubble_blaster",
+        "VectorMotion",
+        "s",
+        "sub",
+        "an",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "layer": "object / player",
+      "question": "What survives when a body returns?",
+      "leads": [
+        "drag_corridor",
+        "force_mower",
+        "centrifuge_ring"
+      ],
+      "carry": "Distinguish an applied force, a nominal work ledger and the acceleration required by a prescribed path.",
+      "next": "Continue to Oscillation; later test tracked-controller reach, comfort and the remaining five supporting exhibits.",
+      "proof": "45 checks pass: physical drag decay, mass, desktop movement, XR stick adapter without hardware, signed work, ring phase and sampled clear approaches. See kinetic-forces.html.",
+      "method": "Name the receiving body, units and retained state",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Recorded verification is stale: source changed; repeat the comparison.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "force_mower",
+        "drag_corridor",
+        "centrifuge_ring"
+      ],
+      "book_anchors": [
+        "drag_corridor",
+        "force_mower",
+        "centrifuge_ring"
+      ],
+      "book_words": 1166,
+      "placed_tokens": [
+        "drag_corridor",
+        "wedge_slide",
+        "centrifuge_ring",
+        "orbit_walk",
+        "force_pad",
+        "force_mower",
+        "sisyphus_mower",
+        "prop_carousel",
+        "s",
+        "t",
+        "an",
+        "sub"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "layer": "object / world",
+      "question": "Does returning to equilibrium mean stopping?",
+      "leads": [
+        "spring_tower"
+      ],
+      "carry": "Restoring force opposes displacement; damping opposes velocity. Their sum enters the next state.",
+      "next": "Revisit the existing timing machines, then continue with Gravity. Headset and secondary-exhibit review remain open.",
+      "proof": "48 checks pass: integration, damping comparisons, supplied grab/drop, force signs, wall/body agreement and approaches. See restoring-forces.html.",
+      "method": "Separate the reference, state and release policy",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 48 checks pass: integrated spring, damping comparisons, mass response, supplied XRTools grab/release, live controls, wall/body force values, clear approaches and supporting presentation. Headset comfort and supporting review remain open.",
+      "verification_current": true,
+      "verification_report": "restoring-forces-check.json",
+      "verification_capture": "restoring_overview.png",
+      "verification_comparisons": [],
+      "primary": [
+        "spring_tower"
+      ],
+      "book_anchors": [
+        "spring_tower"
+      ],
+      "book_words": 1028,
+      "placed_tokens": [
+        "spring_tower",
+        "ChainSwing",
+        "ConeTwistBag",
+        "calder_object_mobile",
+        "HingeCrank",
+        "SliderPress",
+        "coupled_pendulums",
+        "harmonic_motion_demo",
+        "mass_spring_damper",
+        "slingshot_pull",
+        "spring_network",
+        "spring_system",
+        "surreal_kinetic_sculpture",
+        "vector_joint_playground",
+        "work_energy_demo",
+        "pendulum_hall",
+        "example_6_4_windmill_vr",
+        "weather_vane",
+        "calder_mobile",
+        "lever_balance",
+        "momentum_cradle",
+        "bounce_well",
+        "s",
+        "t",
+        "an",
+        "sub"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Change_Choreography",
+      "layer": "world",
+      "question": "When does a difference in timing become cooperation, and when does it become obstruction?",
+      "leads": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ],
+      "carry": "A collective pattern depends on relationships between local updates.",
+      "next": "Compare fixed phase offsets with drifting periods; overload and recover the receiver.",
+      "proof": "Rods share a clock; rigid boxes physically reach the receiver before collection. Compare matched, backlog and recovery states.",
+      "method": "Change one relationship while keeping the components visible.",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 7 new desktop checks pass: four named non-solid idea markers and an unobstructed central lane. Previous 24 timing-machine checks remain separate evidence for unchanged machine scripts.",
+      "verification_current": true,
+      "verification_report": "vector-forces-start-check.json",
+      "verification_capture": "vector_start_Change_Choreography.png",
+      "verification_comparisons": [],
+      "primary": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ],
+      "book_anchors": [
+        "phase_rod_array",
+        "conveyor_backlog"
+      ],
+      "book_words": 907,
+      "placed_tokens": [
+        "if_not_exist_create",
+        "phase_rod_array",
+        "conveyor_backlog",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "layer": "agent",
+      "question": "What new relations appear when another attracting body joins?",
+      "leads": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ],
+      "carry": "A shared interaction rule can produce different collective trajectories.",
+      "next": "Implemented: two room-scale gravity encounters and chapter; see gravity-relations.html. Headset test later. Continue to VFM_09_Legs: support and contact.",
+      "proof": "51 desktop checks: fixed orbit, mutual pair, third-body forces, one-coordinate nudge, conservation tolerances, frame exit and accessible control approaches.",
+      "method": "Hold one thing fixed",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 51 checks pass: controlled beginnings, circular orbit and mutual pair, reversal, three-body contributions, fixed-step replay, bounded history/arrows, live buttons and sampled standing approaches. Headset and detailed secondary review remain open.",
+      "verification_current": true,
+      "verification_report": "gravity-relations-check.json",
+      "verification_capture": "gravity_orbit.png",
+      "verification_comparisons": [],
+      "primary": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ],
+      "book_anchors": [
+        "orbital_mechanics_demo",
+        "three_body_problem"
+      ],
+      "book_words": 980,
+      "placed_tokens": [
+        "orbital_mechanics_demo",
+        "three_body_problem",
+        "nbody_simulation",
+        "forcedirected3d",
+        "exercise_1_8_solution_attraction_magnitude_vr",
+        "example_2_8_two_body_attraction_vr",
+        "example_2_9_n_body_attraction_vr",
+        "orbit_pair",
+        "gravity_well",
+        "grid3d_force_directed",
+        "chaos_attractor",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "VFM_09_Legs",
+      "layer": "agent",
+      "question": "What lets a body stand, and what lets this walker move?",
+      "leads": [
+        "support_polygon_lab",
+        "four_leg_critter"
+      ],
+      "carry": "Support geometry, physical contact and a locomotion controller are different capabilities.",
+      "next": "Implemented: finite support pads, editable mass centre and real rigid-body tipping, followed by the original walkers. See legs-support.html; next VFM_08_Arena.",
+      "proof": "37 desktop checks: supported and tipping cases, explicit material, mass-centre location, pointer controls, sampled approaches and retained procedural walker.",
+      "method": "Compare receiver rules",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-11: 37 checks pass: actual support and tipping, finite-pad geometry, reset, explicit material, mass centre, shared floor/wall display, live pointer controls, approaches and retained procedural walker. Headset and detailed secondary review remain open.",
+      "verification_current": true,
+      "verification_report": "legs-support-check.json",
+      "verification_capture": "legs_support.png",
+      "verification_comparisons": [],
+      "primary": [
+        "four_leg_critter",
+        "support_polygon_lab"
+      ],
+      "book_anchors": [
+        "support_polygon_lab",
+        "four_leg_critter"
+      ],
+      "book_words": 1004,
+      "placed_tokens": [
+        "support_polygon_lab",
+        "one_leg",
+        "two_leg_critter",
+        "three_leg_critter",
+        "four_leg_critter",
+        "five_leg_critter",
+        "six_leg_critter",
+        "octapod_ik",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "VFM_08_Arena",
+      "layer": "agent",
+      "question": "What makes a body into a candidate, and what does an encounter preserve?",
+      "leads": [
+        "arena_relation_lab",
+        "collision_carts"
+      ],
+      "carry": "Selection, retained state and conservation constrain different kinds of encounter.",
+      "next": "Implemented: scoped crab, sight screen, food and visitor controls; existing collision-carts passage retained. See arena-relations.html. Next Vectors_Act5_ForceAsPlace.",
+      "proof": "45 actual-museum desktop checks: sight/range, autonomous food arrival, feeding time, threshold/reset, visitor nomination, approaches and collision totals.",
+      "method": "Compare encounter rules",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-12: 45 actual-museum checks pass: sight/range, scoped selection, autonomous food arrival, timed feeding and five-meal threshold, controls/reset, visitor nomination, approaches and retained collision totals. Headset and detailed secondary review remain open.",
+      "verification_current": true,
+      "verification_report": "arena-relations-check.json",
+      "verification_capture": "arena_screen.png",
+      "verification_comparisons": [],
+      "primary": [
+        "collision_carts",
+        "arena_relation_lab"
+      ],
+      "book_anchors": [
+        "arena_relation_lab",
+        "collision_carts"
+      ],
+      "book_words": 1162,
+      "placed_tokens": [
+        "arena_relation_lab",
+        "brake_skid",
+        "parlour_orbits",
+        "newtons_laws",
+        "paused_fountain",
+        "prop_mobile",
+        "prop_spigot",
+        "revolving_door",
+        "three_gravities",
+        "tug_of_war",
+        "umbrella_field",
+        "turret_targeting",
+        "reflection_hall",
+        "queer_cylinder_target",
+        "vector_arena",
+        "collision_carts",
+        "momentum_cradle",
+        "sentry_turret",
+        "head_crab",
+        "momentum_collision",
+        "example_2_1_forces_vr",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "layer": "player",
+      "question": "What admits a body into a spatial rule, and what motion does it retain?",
+      "leads": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ],
+      "carry": "Acceleration becomes a condition of movement through explicit receiver adapters.",
+      "next": "Implemented local field, probe and visitor carry; see force-as-place.html. Next: Form Finding; headset visit later.",
+      "proof": "45 actual-museum checks: scoped binding, full desktop crossing/landing, zero acceleration, gravity recovery, XR dispatch and reachable controls.",
+      "method": "Trace the receiving body",
+      "sequence": "forces",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-12: 45 actual-museum checks pass: local binding, real desktop carry and far-shore landing, zero acceleration, mass-independent increments, gravity restoration, late XR provider dispatch, standing controls and restored supporting hill. Headset untested.",
+      "verification_current": true,
+      "verification_report": "force-as-place-check.json",
+      "verification_capture": "place_crossing.png",
+      "verification_comparisons": [
+        {
+          "file": "place_machine.png",
+          "caption": "Standing controls: pitch, yaw and acceleration. Camera in the actual museum."
+        },
+        {
+          "file": "place_hill.png",
+          "caption": "Restored supporting invisible-hill diorama; its own radial field remains separate."
+        }
+      ],
+      "primary": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ],
+      "book_anchors": [
+        "vector_machine",
+        "force_cube",
+        "force_field_zone"
+      ],
+      "book_words": 1273,
+      "placed_tokens": [
+        "free_vector",
+        "force_field",
+        "force_cube",
+        "vector_machine",
+        "force_field_zone",
+        "invisible_hill",
+        "s",
+        "sub",
+        "an",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "FormFinding_Descent",
+      "layer": "object / world",
+      "question": "Where does downhill take you, and why does it stop?",
+      "leads": [
+        "descent_landscape_lab"
+      ],
+      "carry": "A local vector update searches an authored objective.",
+      "next": "Implemented; see descent-landscape.html. Next Catenary; headset and learner visit later.",
+      "proof": "36 desktop checks; same rule reaches unequal valleys.",
+      "method": "Name the stopping condition",
+      "sequence": "formfinding",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "2026-09-12: 36 actual-museum checks: pointer controls, distinct valley endpoints, stopping states, finite history, standing reach, clear approaches and all five retained exhibits. Headset untested.",
+      "verification_current": true,
+      "verification_report": "descent-landscape-check.json",
+      "verification_capture": "descent_valleys.png",
+      "verification_comparisons": [
+        {
+          "file": "descent_bowl.png",
+          "caption": "The same update on one bowl; inspect each step before revealing the rule."
+        }
+      ],
+      "primary": [
+        "descent_landscape_lab"
+      ],
+      "book_anchors": [
+        "descent_landscape_lab"
+      ],
+      "book_words": 1039,
+      "placed_tokens": [
+        "descent_landscape_lab",
+        "settling_tremble",
+        "descent_marble_toy",
+        "gradient_descent",
+        "gradient_descent_well",
+        "science_screen",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "FormFinding_Catenary",
+      "layer": "object / world",
+      "question": "What can change between held endpoints?",
+      "leads": [
+        "cable_builder",
+        "laundry_line_cathedral"
+      ],
+      "carry": "An address gains neighbours and constraints.",
+      "next": "Inspect cable construction, supports, length and load before rewriting.",
+      "proof": "Change one support or length; compare the measured and drawn curve.",
+      "method": "Hold a constraint fixed",
+      "sequence": "formfinding",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "cable_builder",
+        "catenoid"
+      ],
+      "book_anchors": [
+        "cable_builder",
+        "laundry_line_cathedral",
+        "catenoid",
+        "helicoid",
+        "science_screen"
+      ],
+      "book_words": 951,
+      "placed_tokens": [
+        "cable_builder",
+        "catenoid",
+        "helicoid",
+        "science_screen",
+        "laundry_line_cathedral",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "roles"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "FormFinding_Relaxation",
+      "layer": "object / world",
+      "question": "How do local constraints change a connected shape?",
+      "leads": [
+        "mass_spring_bench",
+        "verlet_workbench"
+      ],
+      "carry": "Many local updates negotiate one connected body.",
+      "next": "Read both solvers and stage a controlled comparison.",
+      "proof": "Hold topology fixed; compare damping, constraint error and convergence.",
+      "method": "Compare update rules",
+      "sequence": "formfinding",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "mass_spring_bench",
+        "verlet_workbench"
+      ],
+      "book_anchors": [
+        "verlet_workbench",
+        "mass_spring_bench",
+        "frozen_glass_vessel",
+        "science_screen"
+      ],
+      "book_words": 910,
+      "placed_tokens": [
+        "mass_spring_bench",
+        "verlet_workbench",
+        "frozen_glass_vessel",
+        "science_screen",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "roles"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "FormFinding_Equilibrium",
+      "layer": "object / world",
+      "question": "What balances, and is that balance stable?",
+      "leads": [
+        "calder_mobile",
+        "tensegrity_triangle"
+      ],
+      "carry": "An endpoint must survive a disturbance to count as stable.",
+      "next": "Inspect the actual joints and force/torque model.",
+      "proof": "Perturb a configuration and observe whether it returns, drifts or departs.",
+      "method": "Perturb the accepted state",
+      "sequence": "formfinding",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "calder_mobile",
+        "tensegrity_triangle"
+      ],
+      "book_anchors": [
+        "calder_mobile",
+        "tensegrity_triangle",
+        "fractal_truss_tower",
+        "science_screen"
+      ],
+      "book_words": 895,
+      "placed_tokens": [
+        "calder_mobile",
+        "fractal_truss_tower",
+        "tensegrity_triangle",
+        "science_screen",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "roles"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "FormFinding_Annealing",
+      "layer": "object / world",
+      "question": "What can accepting an uphill move make accessible?",
+      "leads": [
+        "energy_landscape_bench",
+        "simulated_annealing"
+      ],
+      "carry": "A search can admit temporary worsening.",
+      "next": "Inspect acceptance, temperature and repeatability before claiming escape.",
+      "proof": "Compare repeated runs and schedules; report failures as well as lower costs.",
+      "method": "Compare repeated trials",
+      "sequence": "formfinding",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "energy_landscape_bench",
+        "simulated_annealing"
+      ],
+      "book_anchors": [
+        "energy_landscape_bench",
+        "simulated_annealing",
+        "max_q_basin_room",
+        "impossible_end_table",
+        "science_screen"
+      ],
+      "book_words": 1017,
+      "placed_tokens": [
+        "max_q_basin_room",
+        "energy_landscape_bench",
+        "simulated_annealing",
+        "impossible_end_table",
+        "science_screen",
+        "s",
+        "t"
+      ],
+      "flags": [
+        "roles"
+      ],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    },
+    {
+      "map": "FormFinding_Forge",
+      "layer": "object / world",
+      "question": "Which objective and constraints can you author?",
+      "leads": [
+        "self_shaping_forge"
+      ],
+      "carry": "The visitor can question how a search values its result.",
+      "next": "Audit real controls and map them to editable model decisions.",
+      "proof": "Demonstrate a changed objective or constraint with a reproducible outcome.",
+      "method": "Expose the model choices",
+      "sequence": "formfinding",
+      "source": "authored",
+      "in_sequence_list": true,
+      "runtime_verification": "Not recorded in this guide.",
+      "verification_current": false,
+      "verification_report": null,
+      "verification_capture": null,
+      "verification_comparisons": [],
+      "primary": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "book_anchors": [
+        "balance_puzzle",
+        "gradient_descent_optimizer"
+      ],
+      "book_words": 454,
+      "placed_tokens": [
+        "self_shaping_forge",
+        "balance_puzzle",
+        "gradient_descent_optimizer",
+        "science_screen",
+        "s",
+        "t"
+      ],
+      "flags": [],
+      "book_unplaced": [],
+      "primary_unplaced": []
+    }
+  ],
+  "source_sha256": {
+    "doc/research/possible-bodies/curation.tsv": "fbbd2f42f731b06c86eeb24e546f5653a38cb31272a378c896299ae2756c4065",
+    "doc/research/possible-bodies/verification.json": "120df4fe3f71942fa8e5a20e425f0ce6c4a9c4a7e73ed96cd68205660efe459f",
+    "commons/data/artifact_roles.json": "e51bdbe87139f9dd63438f75c83e3f0dc45fc34887059d093b07169637be64df",
+    "commons/data/museum_order_effective.json": "052c5873d9eeb2cea28fb0c8122807d8523ebced3a990dceb58b075a74f485ba",
+    "commons/maps/sequences/color.json": "d6a91a856e42837c7d35b553fe17fa72d0883e150ae75d99afc8bfcb1b4b674f",
+    "commons/maps/sequences/tiling.json": "f98d1623e7aa769b64c7f8726033a5253e20c1d1067d67df6c08bcdea78c9e64",
+    "commons/maps/sequences/change.json": "7a31ddeefab0bdac41627d0a7d51f319f53148748d083e0dd9eb02e67569dc0a",
+    "commons/maps/sequences/forces.json": "9d718f263d0110623349333f0c472fdfd8384d7126dc34e0926a8e90190e2a28",
+    "commons/maps/sequences/formfinding.json": "608c8b67d8c6c56c367a0492bcd617aec0f37f320cfec652ed5dcc2b3bab8dbf",
+    "commons/maps/Color_Context_Placed/map_data.json": "883842e24f62190a2c42033a195641cfd579326a780130d279585c62038f34c2",
+    "commons/maps/Color_Context_Placed/final.md": "a11b6d691bb26b22fffafa188274db725d8ff991a7dd830b37a73513189d5eb6",
+    "commons/maps/Color_Flashlight/map_data.json": "031d60bdd81aae8d574c6bae4dfcc6b3ce88d5a3269069ba1f1c39d47880839e",
+    "commons/maps/Color_Flashlight/final.md": "7f35e144f23879bf0306016ac02f6afd33d786fb9f6cfe87f92179adb2e4bbe3",
+    "commons/maps/Color_Nails/map_data.json": "42eff2aba79ba74de6228ca6a04635f9901cbbf06bcfedf2e27813c512e0262c",
+    "commons/maps/Color_Nails/final.md": "214546e32247a68a09e1c3530e493e7fe9d1513ff163ca5a9899b225f4b36f64",
+    "commons/maps/Color_Rainbow/map_data.json": "86a0d12b4a69ed9b24271deff703d302475c8e1f5dd8e1ed04c9eb43ae9e2e4c",
+    "commons/maps/Color_Rainbow/final.md": "89624ea7e30ebd62d994ffe573fc1440a1bf7110b75449a5c0e6069facbe1646",
+    "commons/maps/Color_Pillar/map_data.json": "f5c52af3bb63becc8d872d26ab94aa7cae9c570fd0d63e6217057535cebaffdb",
+    "commons/maps/Color_Pillar/final.md": "51cf3d6bea1a33c12f3b7c156a928db69606dd8ff39e8b674263b41e2cc06180",
+    "commons/maps/Color_Grid_Pallet/map_data.json": "9b5b3e58b5f31d7550cf223f26b911de6f90d4f055b31345c48af231792450e0",
+    "commons/maps/Color_Grid_Pallet/final.md": "8ba544dda4c4625245ad7661d98f5ee83a31885e54b750984138b6e0e1c3070d",
+    "commons/maps/Color_Paint/map_data.json": "f55bf811435f74f72bee98a7c198bce8fa649581b241f9204a8da351b902da16",
+    "commons/maps/Color_Paint/final.md": "a941b43cad8ee1ef202142d4e4c9ab79104e5883dcd1013b4f10e0f77241cf3e",
+    "commons/maps/Color_Walls/map_data.json": "3c86168bb41aed7dffdc4be584da1699d92ba433a751691848c6197f3119cfb1",
+    "commons/maps/Color_Walls/final.md": "ff6d93047447d8d18c7e3978f1b8e50fe84d84a8109eb1d38be739ce890a0385",
+    "commons/maps/Chamber_Color/map_data.json": "829b52138e3f558099a96dab614853e0ce6b55ef8ba9a816e65766459b832cef",
+    "commons/maps/Chamber_Color/final.md": "2101807fbf562dca07c2f5ec37b91f8f770fc478f86aa792ab009059526a9af7",
+    "commons/maps/Pattern_Foundry/map_data.json": "49bc12787b56946ad4b7d9aea567cc2fe260c483efc7c1eceae47764880a7c12",
+    "commons/maps/Pattern_Foundry/final.md": "50d46ac7e91191a1288e5b26cab91e723bb879d4b7b6df7a2bfb41f14fdee7f2",
+    "commons/maps/Tutorial_Pattern/map_data.json": "1fc9b8d4467cece6921d155e06209b844bbd2211de725db2208d9ed732644a4c",
+    "commons/maps/Tutorial_Pattern/final.md": "897d88c50dff322e9a9d6dedf0a88e65985c8bfef7b196119a42917cbc5a2373",
+    "commons/maps/Array_Patterns/map_data.json": "3b3fe75974df6f020a3c0f107b1cdd695c8c5fe1636bad611a6f7c11200e1e01",
+    "commons/maps/Array_Patterns/final.md": "67cfa28ed8b81221a14c2ce061ace7930b806d57eef920a076f70e818ec2f032",
+    "commons/maps/Symmetry_Seventeen/map_data.json": "cc9353c1a549d07bad9d3eb84b16694951ff1841776fea9235659a6be1e41377",
+    "commons/maps/Symmetry_Seventeen/final.md": "ed35f6d3e880e8a5e6af2353cf71860e49e66a7c0a396574800ad25e52d1c798",
+    "commons/maps/Ribbon_Patterns_01/map_data.json": "db587570b0f260889c87664c6cc664ee5efa5e8e0fd0593e9bf4e1c4fc9362cf",
+    "commons/maps/Ribbon_Patterns_01/final.md": "494882d0579203c1678cbfea061bd57a40cb4b90430061c1cf92dd64640e1cc2",
+    "commons/maps/Ribbon_Patterns_02/map_data.json": "1e803ac63f9f8ff1eb66bdb9b8bed069cfcc3be7e2a311c9dc0a08a07446dda9",
+    "commons/maps/Ribbon_Patterns_02/final.md": "738c850adf0b894d24386b5030ebde05df99e79b8d64f51d875042c115cb5040",
+    "commons/maps/Ribbon_Patterns_03/map_data.json": "769ed2dfd6ee3f2cd5d91e23183af272941a8114de85fbdf0678e30ca7753d01",
+    "commons/maps/Ribbon_Patterns_03/final.md": "d37e668f05961bc71d47bdef8b6cb3c6a97195cbb5ec4be69407c950e077d0d8",
+    "commons/maps/Change_Intro/map_data.json": "161c0c111cc9b333aae61dd21fe88a6351869d7e24476ee08277f0df3d9dcfbc",
+    "commons/maps/Change_Intro/final.md": "3f0dda74ccd813d4b648a6928b125becabfd5f8945e46110d210cd9c3239d327",
+    "commons/maps/Flow_Field/map_data.json": "7b6fa11161c119c8489adcf20c0af24a01cc6b6986b1ef99767752d0c637de11",
+    "commons/maps/Flow_Field/final.md": "3ea544c0c2772fd26164796aa38cc652ab9b8b84d28dff2b7953dc9f03f88223",
+    "commons/maps/Vectors_Act1_WhatAVectorIs/map_data.json": "04d80db61a70e28945a021154a53591a2170e694d26402e0b88a59d99fb5a1e4",
+    "commons/maps/Vectors_Act1_WhatAVectorIs/final.md": "e270dec4f34a0a1894a148093a442442e33c12b2fbaa47b5b13392c3261c6606",
+    "commons/maps/VFM_02_Operations/map_data.json": "cdccdc152925176e55cdefcdc7297a2e1fb97ad7fc656b203c08076042fb852b",
+    "commons/maps/VFM_02_Operations/final.md": "51edcafb21e713d250e36300b70e28d0f5ba8ee832c7804c723a6d4d7016cd9f",
+    "commons/maps/Vectors_Act2_VectorArithmetic/map_data.json": "b3e5c4aba545332ab0340fb6402a10a9f86dc10f92473bcebc7377231ea803e5",
+    "commons/maps/Vectors_Act2_VectorArithmetic/final.md": "9a141e8b922c81f6487ef8ff0aad06e36266e07b5b2465ce0e16247b101cc1fe",
+    "commons/maps/VFM_05_Launch/map_data.json": "cf891a2af0ff03f26ad57a75a512c618d77f2993ea0573e8f9cc1b5e9fa7b813",
+    "commons/maps/VFM_05_Launch/final.md": "14c695ecdbbf59a1c3f0041b1346b1c11f40ddb8efd54a35f1a38e7a60b76458",
+    "commons/maps/VFM_03_Motion/map_data.json": "e1edd1d88baa953a11a679eb97340ed038e887dd54ab16a763fb70a2c6dcca3c",
+    "commons/maps/VFM_03_Motion/final.md": "4674c8b37c0f9b89097f43fea600ca1ae44adda04311fbcf8cd07bb584b01278",
+    "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json": "be97fa6bf07a374954ac95b156efe5dadb4ccc23bbbe07a9672c2d5bca3616f7",
+    "commons/maps/Vectors_Act3_FieldsAndMotion/final.md": "3050d9438bf37064deb243305c9823223f87428dd6e2c73c2aab650efce8cea3",
+    "commons/maps/Vectors_Act4a_KineticForces/map_data.json": "00f5dbea1d4958d9d512db7cbfb1f3f3f3049f985486e5c178fa60e77af0274c",
+    "commons/maps/Vectors_Act4a_KineticForces/final.md": "1f75c3d61f6b2dcc31fafd50e30f7bc88d080b25fc6b2da93c52afba70f0fc76",
+    "commons/maps/Vectors_Act4b_Oscillation/map_data.json": "8f461aab3551f8b563dc87109a08c98ddee5f8cca5b209042d3c0cf1b164a1c4",
+    "commons/maps/Vectors_Act4b_Oscillation/final.md": "dcb13eabab91ba35a0de3d52cd293dd61d276ac6070130d77da7cf7a0bb93cd0",
+    "commons/maps/Change_Choreography/map_data.json": "9c6210a78ae4e1220299895b29435781dcb4f130c8a8d4aa1322f69bf299f69d",
+    "commons/maps/Change_Choreography/final.md": "3880bc0f41e1893357a482995b5477eddf08e3f74d7fc8bdf1d6560684cf9fd6",
+    "commons/maps/VFM_07_Gravity/map_data.json": "1b6dd1d66b47c1bad6787426a6a721e28c1b9a78c1a55f3e095bcb12607483d6",
+    "commons/maps/VFM_07_Gravity/final.md": "f6366b3978bf7db77d121824816887d9454bf419642b57376c8ba1b4879b1b7e",
+    "commons/maps/VFM_09_Legs/map_data.json": "089240b597a97326f7e94d570f920531129347a5c74e2be60560ffadbfb4f9ec",
+    "commons/maps/VFM_09_Legs/final.md": "cf1c2f5112ca51a2d82126f5e83c24c508a39e760ce0db60bbd0dcdc02674018",
+    "commons/maps/VFM_08_Arena/map_data.json": "bc39731e6147e74c51a0a23d0437248c8e41ee222430d5a505b01e7ca2a2525b",
+    "commons/maps/VFM_08_Arena/final.md": "0b474626dc1121778ac9837c9b76ee44d1ea52501bb19ce34de3be59e8753cea",
+    "commons/maps/Vectors_Act5_ForceAsPlace/map_data.json": "d6aaa1086dabc9278ddfb87ef2748b6bd36862cc3368fd1b6e56531cac44f566",
+    "commons/maps/Vectors_Act5_ForceAsPlace/final.md": "ff6d2e1ec8c762288533299a11d60412c4a3b1a2cafb7ca71341efe3e52c8142",
+    "commons/maps/FormFinding_Descent/map_data.json": "e8075f3e1abb677ee419781b3df93eb3efde199a1b4064c7e58bf322e68b9a3f",
+    "commons/maps/FormFinding_Descent/final.md": "c58b046d7db922054cee08dc7aaf4c429c9d188ab77cd4fd2900f5849d4b6c5b",
+    "commons/maps/FormFinding_Catenary/map_data.json": "8ad12a2910e30a4537a5d401cc43e636f31adeb39e5e90ff0f267e6c29339756",
+    "commons/maps/FormFinding_Catenary/final.md": "49df26a33ccdf2fb45c3ecd4867312d51175748ca4bda4ac31e67a1c19e63f54",
+    "commons/maps/FormFinding_Relaxation/map_data.json": "48dd20392e58877ae1c3b2ecaf2c7e7ea5698c5ea42c7fcc7a663fb4ce36ddb0",
+    "commons/maps/FormFinding_Relaxation/final.md": "98b18b3ba7c0edc659ab7ece1d338e589fa05d7d81dbfb701739953afb5f3b05",
+    "commons/maps/FormFinding_Equilibrium/map_data.json": "6e3d2ce7c6b493f50d9b2eb201b2e1bbadf6db4e7e5a90521a226590a447a372",
+    "commons/maps/FormFinding_Equilibrium/final.md": "40e01a633d3f6f5107cc5e9dfba642813a70431720088c744978974a31d888ec",
+    "commons/maps/FormFinding_Annealing/map_data.json": "2e104a48ed4414fbaf3ae54b719922b52bbf1aa531104f514c58faa2fc583374",
+    "commons/maps/FormFinding_Annealing/final.md": "d1aa490701065b2e49a4b6f49a791c0947c6d7a6db6ed3d43dd0af4250409b7c",
+    "commons/maps/FormFinding_Forge/map_data.json": "27cbb81b1ced002536b58ebe83866c637a14ddd6137eb1b7a25e0290a1693078",
+    "commons/maps/FormFinding_Forge/final.md": "9b37c121ad49f071c1eeb43bdfa952dfda11f95edfb1fc692f71f4c1ac791b3d"
+  }
+}

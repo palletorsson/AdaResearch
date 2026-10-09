@@ -1,0 +1,628 @@
+{
+  "museum": "sainsbury-false-perspective-enfilade",
+  "tile": [
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4"
+    ],
+    [
+      "4",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4",
+      "4"
+    ],
+    [
+      "4",
+      "4",
+      "4",
+      "1",
+      "1",
+      "1",
+      "4",
+      "4",
+      "4",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ]
+  ],
+  "h": 12,
+  "rooms": 0,
+  "artifacts": [
+    {
+      "token": "automatic_writing_desk",
+      "cell": [
+        4,
+        1
+      ],
+      "tile_cell": [
+        4,
+        1
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          4,
+          1
+        ]
+      },
+      "config": {
+        "recording": "head_height",
+        "rows": "5",
+        "write_speed": "0.06",
+        "run_demo": "0"
+      }
+    },
+    {
+      "token": "trace_ball_ramp",
+      "cell": [
+        12,
+        2
+      ],
+      "tile_cell": [
+        12,
+        2
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          12,
+          2
+        ]
+      },
+      "config": {
+        "plinth": "0"
+      }
+    },
+    {
+      "token": "head_trace_projection",
+      "cell": [
+        2,
+        3
+      ],
+      "tile_cell": [
+        2,
+        3
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          2,
+          3
+        ]
+      },
+      "config": {
+        "plinth": "0",
+        "pin": "1"
+      }
+    },
+    {
+      "token": "whiteboard",
+      "cell": [
+        7,
+        3
+      ],
+      "tile_cell": [
+        7,
+        3
+      ],
+      "rotation": 270,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          7,
+          3
+        ]
+      },
+      "config": {
+        "board_width": "2.0",
+        "offset": "0.46,0.95,0.00",
+        "pens": "1",
+        "pen_shelf": "1"
+      }
+    },
+    {
+      "token": "draw_dot",
+      "cell": [
+        2,
+        5
+      ],
+      "tile_cell": [
+        2,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          2,
+          5
+        ]
+      },
+      "config": {
+        "plinth": "0.90",
+        "offset": "0.00,0.25,0.00"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "token": "draw_dot",
+      "cell": [
+        3,
+        5
+      ],
+      "tile_cell": [
+        3,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          3,
+          5
+        ]
+      },
+      "config": {
+        "retention": "trace",
+        "resolution": "10",
+        "ink": "ff0000",
+        "plinth": "0.90",
+        "offset": "0.00,0.25,0.00"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "token": "draw_dot",
+      "cell": [
+        4,
+        5
+      ],
+      "tile_cell": [
+        4,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          4,
+          5
+        ]
+      },
+      "config": {
+        "retention": "trace",
+        "resolution": "40",
+        "ink": "00ff00",
+        "plinth": "0.90",
+        "offset": "0.00,0.25,0.00"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "token": "draw_dot",
+      "cell": [
+        5,
+        5
+      ],
+      "tile_cell": [
+        5,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          5,
+          5
+        ]
+      },
+      "config": {
+        "retention": "trace",
+        "resolution": "80",
+        "ink": "0000ff",
+        "plinth": "0.90",
+        "offset": "0.00,0.25,0.00"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "token": "draw_stick",
+      "cell": [
+        6,
+        5
+      ],
+      "tile_cell": [
+        6,
+        5
+      ],
+      "rotation": 0,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          6,
+          5
+        ]
+      },
+      "config": {
+        "plinth": "0.90",
+        "offset": "0.00,0.25,0.00"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "token": "hand_telemetry_diptych",
+      "cell": [
+        2,
+        7
+      ],
+      "tile_cell": [
+        2,
+        7
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          2,
+          7
+        ]
+      },
+      "config": {
+        "offset": "0.00,1.45,0.38"
+      }
+    },
+    {
+      "token": "science_screen",
+      "cell": [
+        6,
+        7
+      ],
+      "tile_cell": [
+        6,
+        7
+      ],
+      "rotation": 180,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.0,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          6,
+          7
+        ]
+      },
+      "config": {
+        "offset": "0.50,1.45,0.47",
+        "support": "pylon",
+        "screen_width": "2.6"
+      },
+      "scale": 0.5
+    },
+    {
+      "token": "trace_short_memory",
+      "cell": [
+        2,
+        9
+      ],
+      "tile_cell": [
+        2,
+        9
+      ],
+      "rotation": 90,
+      "mode": "freestanding",
+      "venue": "interior",
+      "support_height_m": 0.9,
+      "hand": false,
+      "ruled": {
+        "by": "map: Point_Trace",
+        "cell": [
+          2,
+          9
+        ]
+      },
+      "config": {
+        "plinth": "0.90",
+        "offset": "0.00,-0.03,0.00"
+      },
+      "offset": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    }
+  ],
+  "rejected": [],
+  "room": {
+    "w": 17,
+    "h": 12
+  },
+  "apron": 0,
+  "interior_count": 138,
+  "ordered": true,
+  "pages": [],
+  "sequence": "primitives",
+  "pearl": "point trace",
+  "pearl_index": 4,
+  "map": "Point_Trace",
+  "pearls_total": 13,
+  "authored": "map",
+  "source": "em_map_halls: the map IS the hall",
+  "_ruling": {
+    "src_w": 17,
+    "src_h": 12,
+    "rotated": false,
+    "pad": 0,
+    "pad_closed": false,
+    "ring": null
+  }
+}

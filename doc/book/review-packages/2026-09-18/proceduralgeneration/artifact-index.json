@@ -1,0 +1,2016 @@
+{
+  "GeneticProgramming": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "GeneticProgramming",
+      "entry": {
+        "dna": {
+          "fixture": {
+            "population_seed": 20260802
+          },
+          "axes": {
+            "alphabet": [
+              "primitives",
+              "csg_tree",
+              "parametric",
+              "voxel"
+            ],
+            "muster": [
+              "parade",
+              "champion",
+              "scatter"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Watch 3D creatures evolve generation by generation toward a fitness goal no individual understands. Population grid displays organisms with fitness labels. Auto-evolve ticks on a timer or step manually. Creatures converge on similar body plans despite random initialization — convergent evolution from pure math. Evolution does not design — it accumulates accidents that happen to survive.",
+        "qfep_connection": "phi-dE — the rate of evolutionary change. Each generation is a dE step. Fitness is the selection pressure (phi) that amplifies some mutations and kills others. Lambda emerges as the mutation rate: too low and evolution stalls, too high and it melts.",
+        "gamwell_reference": "Constraint satisfaction, evolutionary computation, genetic algorithms",
+        "capacity": "WATCH evolution accumulate accidents that happen to survive — design without a designer",
+        "interactions": [
+          "auto-evolve on timer",
+          "manual step one generation",
+          "observe fitness labels on population grid"
+        ],
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "GeneticProgramming",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "GeneticProgramming",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://algorithms/proceduralgeneration/growth_systems/genetic_programming/GeneticProgramming.tscn",
+        "size_group": "compact",
+        "tags": [
+          "evolution",
+          "genetic",
+          "fitness",
+          "population",
+          "mutation",
+          "crossover",
+          "procedural",
+          "emergence"
+        ],
+        "spatial_needs": {
+          "platform": "pedestal",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "opener",
+            "proceduralgeneration",
+            "sequence",
+            "contrasts",
+            "space_colonization_algorithm"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 720,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            29.96,
+            6.18,
+            23.33
+          ],
+          "aabb_center": [
+            11.83,
+            2.02,
+            9.37
+          ],
+          "grid_cells": [
+            30.0,
+            24.0
+          ],
+          "max_dimension_m": 29.96,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 60,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.214642Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "science_screen": [
+    {
+      "registry_file": "commons/artifacts/registry/shaders.json",
+      "registry_sha256": "565f7f2712e6ec41c7c27f55e5cd79659c707a5e548c18c8dc45364a1880af8f",
+      "entry_key": "science_screen",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "support": [
+              "stand",
+              "frame",
+              "cabinet",
+              "pylon"
+            ],
+            "surface": [
+              "plane",
+              "curve",
+              "triptych",
+              "tiles"
+            ]
+          },
+          "default": "housing=stand + surface=plane is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+          "note": "CORRECTED 2026-07-27. This block first shipped with FABRICATED values (housing none|bezel|hooded|cabinet, surface flat|curved|tiles|frosted) that were never in the code's @export_enum. Nothing failed loudly: the sweep set an invalid value, the artifact fell back to its default, 16 identical frames were published, and the critic measured them and called the axis INERT at 0.69% focus. The declaration was wrong, not the design. Only 'tiles' survived, because it happens to appear in both lists, which is why surface scored a nonzero 0.29% instead of zero. A fabricated declaration produces a complete-looking experiment whose verdict is secretly about the registry. tools/check_dna_declarations.py now diffs every declared axis against its code enum, and build_dna_gallery.py refuses to sweep one that fails. The face is wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected."
+        },
+        "category": "shaders",
+        "complexity": "intermediate",
+        "description": "Cased 2D instruments in 3D with stand, frame, cabinet and pylon supports. Explicit mode:voxel_slice reads its own hall lattice source and compares one horizontal biased-field section with the actual occupied/empty decisions, without substituting data when the source is absent.",
+        "dev_themes": [
+          "shaders",
+          "visual"
+        ],
+        "footprint": [
+          4,
+          3,
+          1
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "science_screen",
+        "map_ready": true,
+        "map_sequences": [],
+        "name": "Science Screen",
+        "parameters": {
+          "footprint": [
+            4,
+            3,
+            1
+          ],
+          "size_group": "standard"
+        },
+        "scene": "res://commons/artifacts/science_screen/science_screen.tscn",
+        "sequence": "patterngeneration",
+        "size_group": "standard",
+        "tags": [
+          "projection",
+          "transformation",
+          "screen",
+          "abstraction",
+          "2d",
+          "reflection",
+          "display",
+          "viewport",
+          "grid",
+          "configurable"
+        ],
+        "qfep_connection": "Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relations. It shows how representation changes without becoming arbitrary.",
+        "gamwell_reference": "",
+        "capacity": "COMPARE a 3D artifact with its 2D abstraction and see what structure survives projection.",
+        "interactions": [
+          "bring a grid-aware artifact near the screen",
+          "compare the embodied 3D object with its flat rendering",
+          "read algorithm labels and cell statistics on the display",
+          "use the screen to reflect on what projection keeps and discards"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere",
+              "plane"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "physics",
+            "driven_by": "physics_engine",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "table",
+          "footprint_cells": 4,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": true,
+          "orientation": "face_approach",
+          "isolation": 1,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 4,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            3.14,
+            2.35,
+            0.2
+          ],
+          "aabb_center": [
+            0.0,
+            1.14,
+            -0.08
+          ],
+          "grid_cells": [
+            4,
+            1
+          ],
+          "max_dimension_m": 3.14,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "panel",
+          "range": 10,
+          "density": "high",
+          "min_clearance": 1,
+          "stack_priority": 0.85,
+          "approach_dir": "front",
+          "derived_at": "2026-04-29T09:39:46.268877Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "space_colonization_algorithm": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "space_colonization_algorithm",
+      "entry": {
+        "dna": {
+          "framing": 0.2,
+          "fixture": {
+            "growth_seed": 20260802
+          },
+          "axes": {
+            "aftermath": [
+              "apparatus",
+              "form",
+              "field",
+              "envelope",
+              "strata"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "Growth algorithm that builds branching structures by attracting tips toward a cloud of auxin-like markers — Runions-style space colonisation producing tree/coral/blood-vessel topologies.",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "space_colonization_algorithm",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "space_colonization_algorithm",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://algorithms/proceduralgeneration/growth_systems/space_colonization_algorithm/SpaceColonizationAlgorithm.tscn",
+        "size_group": "compact",
+        "tags": [
+          "procedural"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "follows",
+            "evolution",
+            "growth",
+            "contrasts",
+            "branching_growth_algorithm"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            8.0,
+            10.0,
+            8.0
+          ],
+          "aabb_center": [
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "grid_cells": [
+            8,
+            8
+          ],
+          "max_dimension_m": 10.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "qfep_connection": "The algorithm that grows a tree the way a tree grows: scatter invisible attractors (auxin, the growth hormone), and let branch tips crawl toward the nearest ones, consuming them as they arrive. No blueprint of the tree exists anywhere — the form is the negotiation between hungry tips and a cloud of demand. Venation, antlers, river deltas, lightning: all this one rule, met with different clouds."
+      }
+    }
+  ],
+  "pg_workshop_console": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "pg_workshop_console",
+      "entry": {
+        "lookup_name": "pg_workshop_console",
+        "scene": "res://commons/artifacts/timing_machines/pg_workshop.tscn",
+        "name": "Procedural Generation Workshop Desk",
+        "description": "Compact physical controls for the existing artifacts in five PG halls.",
+        "category": "procedural",
+        "footprint": [
+          1.3,
+          2.5,
+          2.5
+        ],
+        "include_in_map_data": true,
+        "map_ready": true
+      }
+    }
+  ],
+  "branching_growth_algorithm": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "branching_growth_algorithm",
+      "entry": {
+        "dna": {
+          "fixture": {
+            "growth_seed": 20260802
+          },
+          "axes": {
+            "aftermath": [
+              "form",
+              "field",
+              "envelope",
+              "apparatus",
+              "strata"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "Interactive visualization of branching growth patterns and algorithmic plant generation",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "branching_growth_algorithm",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all",
+          "softbodies"
+        ],
+        "name": "Branching Growth Algorithm",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
+        "size_group": "compact",
+        "tags": [
+          "procedural"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 16,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "appears",
+            "bridging",
+            "growth",
+            "algorithms",
+            "connects"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "probe_artifact_elements"
+        },
+        "measurements": {
+          "aabb_size": [
+            5.97,
+            6.0,
+            5.97
+          ],
+          "aabb_center": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            6.0,
+            6.0
+          ],
+          "max_dimension_m": 6.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "qfep_connection": "Growth as a rule iterated — a tip that splits, angles, and splits again, each branch a smaller copy of the decision that made it. The engine behind the organic_space beside it: structure accumulating from a repeated local choice, the procedural chapter's handshake with the fractal one next door.",
+        "footprint_measured": [
+          4,
+          1,
+          4
+        ]
+      }
+    }
+  ],
+  "organic_space": [
+    {
+      "registry_file": "commons/artifacts/registry/alternative_geometries.json",
+      "registry_sha256": "d9f7cac4b67d3831a64eed069ca4be6a5abca37e5bdfc75415ed5f9c406d7f65",
+      "entry_key": "organic_space",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-03",
+          "stage": "2 - variation",
+          "axes": {
+            "formation": [
+              "chance",
+              "erode",
+              "accrete",
+              "alternate"
+            ],
+            "cast": [
+              "all",
+              "membrane",
+              "crystal",
+              "growth"
+            ]
+          },
+          "default": "formation=chance, cast=all - reproduces the shipped build exactly. formation=chance calls the same coin flip at the same two thresholds the hard-coded expressions used (0.5 on the shell's deformation spheres, 0.3 on the tunnel details), and cast=all runs membranes, crystals and growths together as before, so all 13 existing placements are untouched.",
+          "was": "One hard-coded expression, twice: `OPERATION_UNION if randf() > 0.5 else OPERATION_SUBTRACTION` on the shell and the same at 0.3 on the tunnel details. The artifact's own truth line says organic form 'is what remains after noise has eaten away at geometry from within' — but the code was flipping a coin between eating away and piling on, and never said so. formation states the position; erode is the truth line taken literally, accrete is its opposite, alternate is neither chance nor doctrine but rhythm. cast was three generators that always all ran; the word and the all-plus-one-each shape are borrowed verbatim from particle_systems.cast, which asks the same question of its emitters.",
+          "fixture": {
+            "form_seed": 20260803
+          },
+          "fixture_note": "MANDATORY for the sweep. Every draw in this artifact was an unseeded global randf/randi, so without a pinned seed the N variants are N different caves and any bite number measures the RNG, not the axis (the trap CLAUDE.md names for generative artifacts). form_seed now routes all randomness through one RandomNumberGenerator; 0 keeps the shipped fresh-every-run behaviour, so this pin is capture-bench only and no placement sees it.",
+          "framing_note": "The subject is 25 m across (space_size 25,18,25 in the .tscn) and mostly hollow shell. If the sweep reports a small subject share, that is the shell's thin wall against a big frame, not an inert axis."
+        },
+        "category": "unknown",
+        "complexity": "expert",
+        "description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
+        "dev_themes": [
+          "geometry",
+          "non_euclidean"
+        ],
+        "footprint": [
+          1,
+          6,
+          13
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "organic_space",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "Organic Space",
+        "parameters": {
+          "footprint": [
+            1,
+            6,
+            13
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
+        "size_group": "world_scale",
+        "tags": [
+          "geometry"
+        ],
+        "geometry_spec": {
+          "mesh_type": "boolean_composition",
+          "topology": "volumetric",
+          "construction": {
+            "method": "csg_boolean",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_primitives",
+              "boolean_combine"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "paired",
+            "branching_growth_algorithm",
+            "contrasts",
+            "deterministic",
+            "growth"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 625,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            25.75,
+            25.0,
+            25.0
+          ],
+          "aabb_center": [
+            0.38,
+            0.0,
+            0.0
+          ],
+          "grid_cells": [
+            26,
+            25
+          ],
+          "max_dimension_m": 25.75,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.045261Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A space that looks grown rather than built — chambers and passages with the irregular rightness of something that developed instead of being placed. The proof that 'organic' is not a texture but a *process*: authorless form has a feel, and the walker can tell."
+      }
+    }
+  ],
+  "percolationnetwork_ca": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "percolationnetwork_ca",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "P(occupied) = threshold -> CA flow propagation from top to bottom — does the random lattice percolate?",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          18.0,
+          1.0,
+          18.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "percolationnetwork_ca",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration"
+        ],
+        "name": "percolationnetwork_ca",
+        "parameters": {
+          "footprint": [
+            18.0,
+            1.0,
+            18.0
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.tscn",
+        "size_group": "world_scale",
+        "tags": [
+          "procedural"
+        ],
+        "dna": {
+          "promoted": "2026-08-03",
+          "stage": "2 - variation",
+          "axes": {
+            "occupation": [
+              "sparse",
+              "critical",
+              "conductive",
+              "dense",
+              "solid"
+            ],
+            "inlet": [
+              "face",
+              "point",
+              "seam",
+              "shell"
+            ]
+          },
+          "fixture": {
+            "lattice_seed": 7
+          },
+          "default": "occupation=conductive (p = 0.40), inlet=face - the shipped constant and the shipped top-face seeding exactly, same materials and same collision rule, so all 5 existing placements are unchanged; no map carries an #occupation: or #inlet: token today",
+          "was": "zero exports on the one artifact in the corpus whose whole subject is a number. Its own @identity block names PERCOLATION_THRESHOLD as the critical parameter and then lists a threshold control under `needs` as MISSING - the value was a const, so every player who ever met this lattice met p = 0.40, comfortably above the 3D site-percolation point p_c ~= 0.3116. The claim 'below the threshold nothing connects, above it everything does, and at the threshold the system decides' was only ever demonstrated on its winning side.",
+          "note": "occupation is p, how much lattice there is: sparse 0.20 (well under p_c - isolated pockets, the flow dies near the inlet face), critical 0.31 (at p_c - the incipient cluster, fractal, the outcome genuinely open), conductive 0.40 (the shipped value), dense 0.60 (everything connects and the paths stop being paths), solid 0.80 (a wall; percolation is trivial and the network is no longer one). inlet is the boundary condition - where the flow is injected: face = every open site on the +z face, the shipped rain front; point = the open site nearest that face's centre, so one dendrite grows and the question becomes about ONE cluster instead of all of them; seam = one row, a line source spreading as a sheet; shell = all six faces, flow arriving from outside inward, which asks not whether the lattice spans but whether anything in it stays dry. An inlet only ever marks sites the lattice already opened, so p and the boundary stay independent.",
+          "warning": "WHITE (occupied) CUBES CARRY COLLISION and the player walks inside this lattice. dense and solid are honest arguments and bad rooms - they are bench values. Nothing above conductive should be placed in a walked map without re-running the pathfinder on it.",
+          "fixture_note": "the lattice and the flow jitter have always come from the global unseeded randf(), so five variants of an unseeded lattice are five different objects rather than five values of one axis. lattice_seed = -1 preserves the shipped behaviour exactly and is the default; the fixture pins 7 so a sweep measures the axis and not the dice.",
+          "reads": "this scene's root carries the script, so apply_grid_config arrives directly; it is guarded on change (a rebuild recasts 5,832 cells and their collision bodies, which must not happen because a placement passed an unrelated key). _read_grid_config_meta also reads the config_<key> metadata the grid writes before the scene enters the tree, so a token builds the right lattice once instead of building the default and tearing it down."
+        },
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": [
+              "transparency"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~0"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "bridges",
+            "cellularautomata",
+            "sequence",
+            "proceduralgeneration",
+            "contrasts"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 81,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            9.0,
+            9.0,
+            9.0
+          ],
+          "aabb_center": [
+            -0.25,
+            -0.25,
+            -0.25
+          ],
+          "grid_cells": [
+            9.0,
+            9.0
+          ],
+          "max_dimension_m": 9.0,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.215359Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Percolation: raise the density of open cells and, at one sharp threshold, disconnected pockets suddenly span the whole space — a path appears from edge to edge where an instant before there was none. The turn's physics: connectivity is not gradual, it is a phase change, and the procedural world snaps from rubble to network at a single critical value. Where forests burn, fluids seep, and rumors spread."
+      }
+    }
+  ],
+  "synthesis_stand": [
+    {
+      "registry_file": "commons/artifacts/registry/synthesis.json",
+      "registry_sha256": "8562bf645fb4eaba8741b61917e88cb43632a5c078b032a229b5f25b66db1f47",
+      "entry_key": "synthesis_stand",
+      "entry": {
+        "dna": {
+          "axes": {
+            "mode": [
+              "auto",
+              "hero",
+              "series"
+            ]
+          }
+        },
+        "name": "Synthesis Stand",
+        "lookup_name": "synthesis_stand",
+        "scene": "res://commons/artifacts/synthesis/synthesis_stand.tscn",
+        "category": "synthesis",
+        "complexity": "intermediate",
+        "description": "Every promoted family's one best public form, decided by measurement rather than taste. Given #subject:<token> it reads the verdict file tools/synthesize_heroes.py derived from the swept renders: a HERO subject stands as its single strongest variant, pinned and stated on a plaque with the focus number that chose it; a SERIES subject stands as its whole family on one rail, shipped default first, then ascending by measured departure — because for those families the progression is the argument. 282 families carry verdicts: 113 heroes, 64 series, 100 where the shipped form stands.",
+        "measurements": {
+          "aabb_size": [
+            5.34,
+            1.25,
+            1.31
+          ],
+          "aabb_center": [
+            0.0,
+            0.21,
+            -0.01
+          ],
+          "grid_cells": [
+            6,
+            2
+          ],
+          "max_dimension_m": 5.34,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          6,
+          1,
+          2
+        ],
+        "map_ready": true,
+        "include_in_map_data": true
+      }
+    }
+  ],
+  "dark_sphere": [
+    {
+      "registry_file": "commons/artifacts/registry/lsystems.json",
+      "registry_sha256": "569dc69fc045dd2d888632c4d2e7b1ac2fd310d29bbc704c429dafc9c4752a88",
+      "entry_key": "dark_sphere",
+      "entry": {
+        "dna": {
+          "promoted": "2026-07-27",
+          "stage": "2 - variation",
+          "axes": {
+            "presence": [
+              "witness",
+              "hush",
+              "beacon",
+              "eclipse",
+              "becoming"
+            ],
+            "body": [
+              "orb",
+              "swarm",
+              "cage",
+              "cairn"
+            ]
+          },
+          "default": "presence=witness + body=orb is the legacy lineage; every witness multiplier is 1.0.",
+          "note": "The agent DEMOTED pulse_speed rather than exposing it: the identity named a rate as critical_parameter, but its own justification was about how much room the sphere takes - the rate was a proxy for presence. presence spends part of its delta on radius, which self-cancels under an AABB-fitted camera; judge hush vs witness at a fixed camera."
+        },
+        "category": "procedural",
+        "complexity": "intermediate",
+        "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
+        "dev_themes": [
+          "grammar",
+          "l_systems",
+          "procedural"
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "dark_sphere",
+        "map_ready": true,
+        "map_sequences": [
+          "array_tutorial",
+          "bricolage",
+          "cellularautomata",
+          "color",
+          "constraint_solvers",
+          "forces",
+          "fractals",
+          "isosurfaces",
+          "lsystems",
+          "noise",
+          "particles",
+          "patterngeneration",
+          "physicssimulation",
+          "primitives",
+          "proceduralgeneration",
+          "proceduralgeneration_all",
+          "qfeplaboratory",
+          "randomness",
+          "testmaps",
+          "transformation",
+          "unused",
+          "wavefunctions"
+        ],
+        "name": "Dark Sphere",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
+        "tags": [
+          "reference",
+          "atmosphere",
+          "sphere",
+          "scale_marker",
+          "lighting",
+          "geometry",
+          "procedural"
+        ],
+        "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
+        "gamwell_reference": "",
+        "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
+        "interactions": [
+          "observe the pulsing sphere against transformed geometry",
+          "use it as a scale and occlusion reference in the room",
+          "compare its stable silhouette with more dynamic artifacts nearby",
+          "treat it as an atmospheric marker when reading spatial change"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "sphere",
+              "cylinder"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "unlit",
+            "shading_model": "unshaded",
+            "key_properties": [
+              "emission",
+              "metallic",
+              "transparency",
+              "double_sided"
+            ]
+          },
+          "animation": {
+            "type": "transform",
+            "driven_by": "per_frame_update",
+            "affects": [
+              "transform"
+            ]
+          },
+          "instance_strategy": "single",
+          "vertex_estimate": "~1536"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            0.84,
+            0.95,
+            0.84
+          ],
+          "aabb_center": [
+            0.0,
+            0.48,
+            0.0
+          ],
+          "grid_cells": [
+            1.0,
+            1.0
+          ],
+          "max_dimension_m": 0.95,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "footprint_measured": [
+          1.0,
+          1,
+          1.0
+        ],
+        "spatial_profile": {
+          "dir_group": "omni",
+          "range": 2,
+          "density": "medium",
+          "min_clearance": 1,
+          "stack_priority": 0.5,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.147725Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "maze_generation": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "maze_generation",
+      "entry": {
+        "dna": {
+          "framing": 0.45,
+          "fixture": {
+            "maze_seed": 20260802
+          },
+          "axes": {
+            "hand": [
+              "backtracker",
+              "prim",
+              "binary_tree",
+              "sidewinder",
+              "labyrinth"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "advanced",
+        "description": "VR-scale walkable maze with recursive backtracking generation",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "maze_generation",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "Maze Generation",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://algorithms/proceduralgeneration/procedural_logic/mazegeneration/maze_generator_vr.tscn",
+        "size_group": "compact",
+        "tags": [
+          "vr"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 1,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "end",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            30.0,
+            3.0,
+            30.0
+          ],
+          "aabb_center": [
+            14.0,
+            1.3,
+            14.0
+          ],
+          "grid_cells": [
+            30,
+            30
+          ],
+          "max_dimension_m": 30.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "qfep_connection": "A walkable maze carved by recursive backtracking — the algorithm drills forward at random, and when it hits a dead end it reverses just far enough to try a new direction, until every cell has been visited exactly once. The result is a perfect maze, one path between any two points, and no designer ever saw the whole of it. Getting lost in a corridor no mind laid out."
+      }
+    }
+  ],
+  "caverandomwalk": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "caverandomwalk",
+      "entry": {
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "N walkers carve air from solid voxel grid — biased random walk inward, then upward level by level",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "caverandomwalk",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "caverandomwalk",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://algorithms/proceduralgeneration/growth_systems/caverandomwalk/caverandomwalk.tscn",
+        "size_group": "compact",
+        "tags": [
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "composed_primitives",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "primitive_assembly",
+            "primitives": [
+              "box",
+              "sphere"
+            ],
+            "operations": [
+              "create_primitives",
+              "position_children"
+            ]
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "paired",
+            "maze_generation",
+            "contrasts",
+            "random",
+            "organic"
+          ],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 400,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            20.0,
+            10.0,
+            20.0
+          ],
+          "aabb_center": [
+            0.0,
+            4.5,
+            0.0
+          ],
+          "grid_cells": [
+            20.0,
+            20.0
+          ],
+          "max_dimension_m": 20.0,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.214642Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A cave dug by a random walk — a wanderer eating rock as it drifts, and the tunnel it leaves behind is the cave. The chapter's most direct marriage of the randomness thread and the space one: chance given a chisel, and the negative of its stagger becomes a place you can stand."
+      }
+    }
+  ],
+  "binary_space_partitioning": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "binary_space_partitioning",
+      "entry": {
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "binary_space_partitioning",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          11.0,
+          1.0,
+          11.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "binary_space_partitioning",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration_all",
+          "spatial_partitioning"
+        ],
+        "name": "binary_space_partitioning",
+        "parameters": {
+          "footprint": [
+            11.0,
+            1.0,
+            11.0
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/proceduralgeneration/spatial_partitioning/binary_space_partitioning/BinarySpacePartitioning.tscn",
+        "size_group": "world_scale",
+        "tags": [
+          "procedural"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "box",
+              "sphere",
+              "cylinder"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": [
+              "metallic"
+            ]
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "~800"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "dungeon",
+            "generators",
+            "constraint_solvers",
+            "proximity"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 196,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            13.5,
+            11.53,
+            13.5
+          ],
+          "aabb_center": [
+            0.0,
+            0.27,
+            0.0
+          ],
+          "grid_cells": [
+            14.0,
+            14.0
+          ],
+          "max_dimension_m": 13.5,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.214642Z",
+          "derived_from": "aabb_size + category"
+        }
+      }
+    }
+  ],
+  "cube_mound_scene": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "cube_mound_scene",
+      "entry": {
+        "dna": {
+          "fixture": {
+            "release_seed": 20260802
+          },
+          "axes": {
+            "release": [
+              "cylinder",
+              "ring",
+              "sheet",
+              "chute",
+              "rift"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Procedural mound built from stacked cubes — layered cellular logic deposits cubes where conditions permit, producing terrain that is both built and eroded.",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          13.0,
+          3.0,
+          13.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "cube_mound_scene",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "cube_mound_scene",
+        "parameters": {
+          "footprint": [
+            13.0,
+            3.0,
+            13.0
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_scene.tscn",
+        "size_group": "world_scale",
+        "tags": [
+          "procedural"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 121,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            10.5,
+            8.65,
+            10.64
+          ],
+          "aabb_center": [
+            -0.14,
+            9.85,
+            -0.06
+          ],
+          "grid_cells": [
+            11.0,
+            11.0
+          ],
+          "max_dimension_m": 10.64,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 35,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.214642Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A mound built by stacked cubes under cellular logic — deposit a cube where the local conditions say yes, and a landform accretes with no landscaper. The chapter's plainest proof: give a rule a place to look and a thing to drop, and terrain grows itself, one conditional at a time."
+      }
+    }
+  ],
+  "dome": [
+    {
+      "registry_file": "commons/artifacts/registry/primitives.json",
+      "registry_sha256": "2884a0475399fa12da99a0c38253519924457c06662525fbf009c7c12edb272a",
+      "entry_key": "dome",
+      "entry": {
+        "dna": {
+          "fixture": {
+            "capture_anchor": true
+          },
+          "axes": {
+            "facture": [
+              "cast",
+              "blank",
+              "core",
+              "section"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "beginner",
+        "description": "Half-sphere primitive produced by boolean subtraction — used as reference geometry for enclosures and shelters.",
+        "dev_themes": [
+          "core",
+          "primitives"
+        ],
+        "footprint": [
+          1,
+          21,
+          11
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "dome",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "dome",
+        "parameters": {
+          "footprint": [
+            1,
+            21,
+            11
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://commons/primitives/booleans/dome.tscn",
+        "size_group": "world_scale",
+        "tags": [
+          "primitive"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "entry",
+          "measured_footprint_cells": 400,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            20,
+            26,
+            20
+          ],
+          "aabb_center": [
+            0,
+            12.68,
+            0
+          ],
+          "grid_cells": [
+            20,
+            20
+          ],
+          "max_dimension_m": 26,
+          "measured_at": "2026-04-29T07:09:56.762620Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 60,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.188778Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "A half-sphere cut from a solid by boolean subtraction — reference geometry for enclosure, the simplest roof. In the procedural rooms it stands as the authored control against which the grown forms are measured: this is what shape looks like when someone *drew* it, so you can feel how different the grown ones are."
+      }
+    }
+  ],
+  "layered_membrane": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "layered_membrane",
+      "entry": {
+        "dna": {
+          "fixture": {
+            "membrane_seed": 20260802
+          },
+          "axes": {
+            "registration": [
+              "drift",
+              "unison",
+              "twist",
+              "alternation",
+              "scatter"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "Procedural membrane generation with layered structures",
+        "dev_themes": [
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "layered_membrane",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "Layered Membrane",
+        "parameters": {
+          "footprint": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "size_group": "compact"
+        },
+        "scene": "res://algorithms/proceduralgeneration/hybrid_complex/layeredmembrane/layered_membrane.tscn",
+        "size_group": "compact",
+        "tags": [
+          "procedural"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 1,
+            "back": 1,
+            "left": 1,
+            "right": 1
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "paired",
+            "cube_mound_scene",
+            "contrasts",
+            "stacking",
+            "discrete"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 49,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            6.66,
+            2.83,
+            6.78
+          ],
+          "aabb_center": [
+            0.04,
+            1.24,
+            -0.02
+          ],
+          "grid_cells": [
+            7,
+            7
+          ],
+          "max_dimension_m": 6.78,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "floor",
+          "range": 18,
+          "density": "high",
+          "min_clearance": 2,
+          "stack_priority": 0.85,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.215359Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Surfaces accreted in layers, each draping over the last — sediment, skin, stratum. Form as history made visible: the membrane is a record of the order in which its rule fired, procedural generation wearing its own timeline."
+      }
+    }
+  ],
+  "mirror_cellular_texture_for_3d": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "mirror_cellular_texture_for_3d",
+      "entry": {
+        "dna": {
+          "framing": 0.55,
+          "fixture": {
+            "pattern_seed": 20260802
+          },
+          "axes": {
+            "stencil": [
+              "motif",
+              "quadrant",
+              "octant",
+              "none"
+            ]
+          }
+        },
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "Interactive 3D cellular automata with mirroring and texture generation capabilities",
+        "dev_themes": [
+          "biology",
+          "generation",
+          "procedural"
+        ],
+        "footprint": [
+          1.0,
+          2.0,
+          6.0
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "mirror_cellular_texture_for_3d",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all",
+          "recursiveemergence"
+        ],
+        "name": "Mirror Cellular Texture for 3D",
+        "parameters": {
+          "footprint": [
+            1.0,
+            2.0,
+            6.0
+          ],
+          "size_group": "environment"
+        },
+        "scene": "res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_cellular_texture_for_3d.tscn",
+        "size_group": "environment",
+        "tags": [
+          "3d",
+          "cellular_automata"
+        ],
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 16,
+          "footprint_source": "measured_capped"
+        },
+        "measurements": {
+          "aabb_size": [
+            4.0,
+            0.16,
+            4.0
+          ],
+          "aabb_center": [
+            0.0,
+            -0.07,
+            0.0
+          ],
+          "grid_cells": [
+            4,
+            4
+          ],
+          "max_dimension_m": 4.0,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "spatial_profile": {
+          "dir_group": "plane",
+          "range": 10,
+          "density": "field",
+          "min_clearance": 0,
+          "stack_priority": 0.3,
+          "approach_dir": "any",
+          "derived_at": "2026-04-29T09:39:46.215359Z",
+          "derived_from": "aabb_size + category"
+        },
+        "qfep_connection": "Cellular automata run and then mirrored — local disorder folded across an axis into pattern with a spine. The room's demonstration that symmetry is cheap: take any grown texture, reflect it, and the eye reads intention where there was only a rule and a fold."
+      }
+    }
+  ],
+  "rhizomatic_maze_space": [
+    {
+      "registry_file": "commons/artifacts/registry/alternative_geometries.json",
+      "registry_sha256": "d9f7cac4b67d3831a64eed069ca4be6a5abca37e5bdfc75415ed5f9c406d7f65",
+      "entry_key": "rhizomatic_maze_space",
+      "entry": {
+        "dna": {
+          "promoted": "2026-08-05",
+          "deepened": "2026-08-05",
+          "stage": "2 - variation",
+          "axes": {
+            "topology": [
+              "rhizome",
+              "tree",
+              "severed",
+              "plateau"
+            ]
+          },
+          "fixture": {
+            "layout_draw": "pinned",
+            "bench_stage": "bare"
+          },
+          "fixture_why": "MANDATORY for the sweep, and not an axis. The layout is drawn entirely from the UNSEEDED global randf/randi — generation_seed only ever fed the two FastNoiseLite fields, never the growth — so four topology frames would be four different mazes and any bite number would be measuring the RNG rather than the rule. This is the generative-artifact trap in CLAUDE.md. layout_draw defaults to `fresh`, which is the shipped every-launch-is-a-new-maze behaviour and is the artifact's point, so no placement ever sees the pin.",
+          "default": "topology=rhizome - the shipped network line for line. generate_primary_connections keeps the same three-nearest loop with the same randf() draw against the same branch_prob, generate_secondary_branches builds the same 250 nodes from the same three randf_range calls and hands over the same flat 0.7 width_multiplier, sever_network returns on its first line, and the seed ring keeps the identical layer_y expression. The tree, plateau and rupture code is reachable only from a non-default word, so the RNG consumes exactly the draws it always consumed in exactly the order it consumed them. MEASURED, not assumed: there are 14 mentions across 12 map files, not the 5 the promotion brief carried, and four reach-paths rather than one - bare tokens in PG_Mirrored_Patterns and its three parts and in ProceduralGeneration_Eight; a curation_station collection in Corridor_PG_Mirrored_Patterns whose #layout and #with_* flags belong to the station and not to this artifact; `exhibit_furniture#kind:floor_work#size:s#mount:rhizomatic_maze_space` in six museum trials, where the token is the furniture's mount value; and `rhizomatic_maze_space->layered_membrane` in Trial_rooms_proceduralgeneration, which is a transformation target and not a config. Not one of the fourteen carries a topology key, and apply_grid_config returns unless a token names a word this file knows AND that word differs from the one it holds AND _ready has already grown the maze once.",
+          "was": "thirteen float and int exports, none of which said what the artifact is FOR. The runner refused it as NO TURNABLE KNOBS because nothing enumerated: branch_probability could be turned from 0.7 to 0.8 but there was no way for a map to ask for the thing the name promises. An artifact called rhizomatic shipped exactly one topology, and — measured rather than assumed — it was mostly a TREE: the only rhizomatic operation in the file is the three-nearest-neighbour pass over about 20 seeds, while the 250 secondary branches each attach by exactly one edge and close no loop at all.",
+          "note": "The axis is Deleuze and Guattari's own opposition, not a dial. `tree` is a minimum spanning tree from the lowest seed with growth oriented away from the root and tunnel width tapering by depth, so hierarchy is visible as thickness — there is no critically-rhizomatic middle value, the way bouncing_ball found there is no critically-bouncing. `severed` is asignifying rupture performed ON a finished rhizome rather than a different way of growing one, and it recounts node degrees afterwards so the chamber pass cannot drop a nine-metre CSG sphere into the fissure it just opened. `plateau` keeps every seed the four levels would have made and puts them all on one, so the comparison is about arrangement and not about how much was grown.",
+          "declined": "branch_probability, growth_iterations, merge_threshold, chamber_probability, organic_distortion and tunnel_segments — six knobs that are already exports and all of them decline for the same reason: they change how MUCH tangle there is, not what the tangle claims. connection_probability and deadend_pruning are declined for a different reason worth recording: they are exported, they are set in the .tscn, and no line of code reads either of them.",
+          "still_note": "topology is resolved before a single tunnel mesh is built and never moves again, so one frame is a complete account of it. Expect plateau to be the loudest value by far — a 25 m tower collapsing to a flat mat is a silhouette change, not a texture one. tree and rhizome differ in loop structure and in tunnel thickness rather than in extent, so compare where routes close and how width falls off toward the periphery.",
+          "deepened_why": "THE BENCH HAD NEVER PHOTOGRAPHED THIS ARTIFACT, and that is the finding — the axis was not on trial, it was never called. The sweep reported peak 0.062% across ALL SIX pairs on a subject of 8.217%, and the tell is that the peak was rhizome-vs-plateau, the pair the still_note above had predicted would be the loudest in the batch by a distance: a 25 m tower against a flat mat cannot differ by six hundredths of a percent. A number that impossible is a fact about the instrument. Three causes, all measured in the sheet at doc/reports/sweep_rhizomatic_maze_space.png rather than guessed: (1) the .tscn carries a DebugInfo Control — a 390x110 panel with a RichTextLabel reading 'Generating organic tunnel network...' — and the sweep's chrome suppressor stands down CanvasLayer and Camera3D only, so a Control under a Node3D drew straight into the viewport and IS the 8.2% subject, identical in every frame. The statistic that was supposed to report on the axis was mostly a photograph of a debug readout. (2) NavigationHelpers hangs four 0.6 m marker spheres at x,z = +/-25; they are MeshInstance3D, so they pin the fitted AABB to a 50 m box no matter what the maze does, which put the camera about 220 m out. (3) At 220 m the artifact's own WorldEnvironment — volumetric fog at density 0.03 over a 50 m length, authored for a player standing INSIDE the tunnels — fills the frame with haze: the background samples (130,165,118) and the 90th percentile of per-pixel difference from it is SEVEN grey levels. The maze is a ghost, and it visibly MOVES between the four tiles, which is the proof the values were arriving all along. Repair: a bench-only `bench_stage` export, the same shape as the existing layout_draw, defaulting to `scene`; `bare` frees the Control and the marker spheres and turns off exactly two properties on the environment (fog_enabled, volumetric_fog_enabled) rather than freeing it — with the sweep rig adding a WorldEnvironment of its own, two in a tree is undefined enough that freeing would make the picture depend on node order, and this scene's own 0.02/0.02/0.08 background is the best backdrop available for tunnels of albedo 0.7/0.8/0.9. It touches no generator code and no placement sets it. THE SECOND REPAIR IS THE DESIGN ONE and it stands on its own: severed cut the graph in half and left both halves where they were, measuring 0.012% against the intact rhizome. The tempting reading is the Deleuzian one — that cutting a rhizome changes nothing because any point still reaches any other — and it is wrong about this code: a plane cut removes EVERY crossing edge, so the graph really does fall into two components. The failure was that CONNECTION IS NOT A VISIBLE PROPERTY. The fissure is now 0.14 of maze_size.x instead of 0.08 and the two fragments stand 0.06 apart on each side, so the wound is about 20 m of a 50 m object and reads in the silhouette; tendrils are suppressed over the gap so nothing sews it shut. Extent grows about 12%, which the freed camera repays many times.",
+          "expected": "NO NUMBER IS PREDICTED HERE, and that is honest rather than evasive: nothing about this artifact has ever been photographed, so there is no scale to extrapolate from. What IS predicted is the SHAPE of the result, and it is falsifiable. (1) The frame should stop being a flat field: the background sampled at (3,3) should come back near (5,5,18) instead of (130,165,118), and the 90th percentile of per-pixel difference from it should rise from 7 grey levels into the dozens. (2) The loudest pair should become rhizome-vs-plateau, because a 25 m tower against a flat mat is a silhouette. (3) The subject share will probably FALL from 8.2%, and that is the fix working, not failing - the 8.2% was a debug panel that has now been freed, so the number will finally be about the maze. IF EVERY PAIR IS STILL UNDER 0.1%, the fixture did not arrive: check that bench_stage reached the root before concluding anything at all about topology.",
+          "deepened_declined": "A FIFTH VALUE, `radicle` — Deleuze and Guattari's own middle figure, the fascicular root whose principal root has aborted and onto which an indefinite multiplicity of secondary roots grafts. It is the strongest thing missing from this axis, because it is the figure that LOOKS tangled and still is not a rhizome, which is the distinction the whole Introduction turns on, and the axis currently ships the two easy poles and two operations. It is not taken in this pass on a sequencing judgement: not one of the four existing values has ever been photographed, so designing a fifth against an imagined frame is the finished-looking-experiment failure the promotion brief warns about — 'an artifact that does not build is a finding, not an axis' applies just as well to an artifact that has never been seen. Take it after a clean sweep exists. Implementation sketch so the next agent does not start cold: connect_as_radicle() builds a short thick taproot from the lowest seed to a graft node above it, joins every other seed to that ONE graft at equal width (the star, against tree's spanning chain), and generate_secondary_branches concentrates the flourish near the graft with NO taper, because in a radicle the unity is the pivot and not the branching. The 20 primary connections are only about 16% of the 270 the file builds, so the secondary rule has to carry the value too or it will read as a variation on tree.",
+          "open": "THE SAME THREE CHILDREN SHIP INTO EVERY MAP, and this is NOT repaired here. All fourteen placements get the DebugInfo Control — a panel reading 'Generating organic tunnel network...' with the parameter list under it — because neither the sweep's chrome suppressor nor GridInteractablesComponent._suppress_embedded_chrome stands down a raw Control, and a Control under a Node3D draws to the viewport regardless. They also get a WorldEnvironment that overrides the map's own environment with volumetric fog, and four navigation marker spheres at +/-25 m that inflate the AABB the grid auto-grounds against. Every one of those is a change to what fourteen rooms look like, so fixing it belongs in its own pass with its own walk, not smuggled in under a DNA deepening. Worth checking how many other artifacts carry a Control child before repairing this one alone — the suppressor is the shared meeting point and this is likely a class, not a case."
+        },
+        "category": "unknown",
+        "complexity": "intermediate",
+        "description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
+        "dev_themes": [
+          "geometry",
+          "non_euclidean"
+        ],
+        "footprint": [
+          50,
+          21,
+          50
+        ],
+        "include_in_map_data": true,
+        "lookup_name": "rhizomatic_maze_space",
+        "map_ready": true,
+        "map_sequences": [
+          "proceduralgeneration",
+          "proceduralgeneration_all"
+        ],
+        "name": "Rhizomatic Maze Space",
+        "parameters": {
+          "footprint": [
+            50,
+            21,
+            50
+          ],
+          "size_group": "world_scale"
+        },
+        "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+        "size_group": "world_scale",
+        "tags": [
+          "geometry"
+        ],
+        "geometry_spec": {
+          "mesh_type": "hybrid",
+          "topology": "manifold_closed",
+          "construction": {
+            "method": "unknown",
+            "primitives": [
+              "sphere",
+              "cylinder"
+            ],
+            "operations": []
+          },
+          "material": {
+            "type": "standard",
+            "shading_model": "pbr",
+            "key_properties": []
+          },
+          "animation": {
+            "type": "static",
+            "driven_by": null,
+            "affects": []
+          },
+          "instance_strategy": "array",
+          "vertex_estimate": "unknown"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 1,
+          "clearance": {
+            "front": 2,
+            "back": 2,
+            "left": 2,
+            "right": 2
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "face_approach",
+          "isolation": 0,
+          "cluster_with": [
+            "paired",
+            "mirror_cellular_texture_for_3d",
+            "contrasts",
+            "maze_generation",
+            "structured"
+          ],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 1,
+          "footprint_source": "measured"
+        },
+        "measurements": {
+          "aabb_size": [
+            66.8,
+            146.49,
+            50.8
+          ],
+          "aabb_center": [
+            -8.1,
+            -51.96,
+            0.1
+          ],
+          "grid_cells": [
+            67,
+            51
+          ],
+          "max_dimension_m": 146.49,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        },
+        "qfep_connection": "A labyrinth grown as rhizome — interconnected, centerless, any point reachable from any other by more than one route. The counter-maze: where recursive backtracking makes a tree with a single path, this makes a mesh with many, Deleuze's figure walked as architecture. A world with no author and, deliberately, no throughline either."
+      }
+    }
+  ],
+  "pattern_tunnel_machine": [
+    {
+      "registry_file": "commons/artifacts/registry/procgen_extra.json",
+      "registry_sha256": "558a5c265dcc903af0f937fed31f841cb23de6c6f7b527abb3c2fab2d08f2e42",
+      "entry_key": "pattern_tunnel_machine",
+      "entry": {
+        "lookup_name": "pattern_tunnel_machine",
+        "scene": "res://commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn",
+        "name": "Pattern Tunnel Machine",
+        "description": "A subway-tiled walkway tunnel that paints itself tile by tile (floor then walls then ceiling), driven by a pattern-maker console at the mouth. The console's GROUP / MOTIF / PALETTE / SPEED sliders re-skin the whole tube through any of the 17 wallpaper symmetry groups; touching a control surges the fill faster. Same WallpaperGroups engine as pattern_studio_plate.",
+        "category": "procedural",
+        "complexity": "advanced",
+        "footprint": [
+          3.0,
+          3.0,
+          10.0
+        ],
+        "size_group": "large",
+        "include_in_map_data": true,
+        "map_ready": true,
+        "map_sequences": [],
+        "tags": [
+          "pattern",
+          "wallpaper",
+          "tunnel",
+          "tiles",
+          "symmetry",
+          "subway",
+          "interactive",
+          "wallpaper-groups"
+        ],
+        "dev_themes": [
+          "patterns",
+          "symmetry",
+          "wallpaper_groups",
+          "tiling"
+        ],
+        "parameters": {
+          "group_index": "0..16 wallpaper symmetry group",
+          "motif_index": "0..3 source motif",
+          "period_index": "0..4 palette period",
+          "fill_speed": "rings per second the tunnel paints",
+          "start_reveal": "0..1 pre-painted fraction (for captures)"
+        },
+        "spatial_needs": {
+          "platform": "none",
+          "footprint_cells": 9,
+          "clearance": {
+            "front": 10,
+            "back": 1,
+            "left": 2,
+            "right": 3
+          },
+          "player_position": "front",
+          "wall_backing": false,
+          "orientation": "front",
+          "isolation": 2,
+          "cluster_with": [],
+          "preferred_zone": "any",
+          "measured_footprint_cells": 9,
+          "footprint_source": "designed"
+        },
+        "qfep_connection": "f_order: the tunnel that paints itself — a subway-tiled walkway laid tile by tile from a pattern console at its mouth; ornament as a running program you can walk into while it executes.",
+        "measurements": {
+          "aabb_size": [
+            3.6,
+            3.2,
+            16.77
+          ],
+          "aabb_center": [
+            0.0,
+            1.6,
+            -5.61
+          ],
+          "grid_cells": [
+            4,
+            17
+          ],
+          "max_dimension_m": 16.77,
+          "measured_at": "2026-08-12T04:39:51.280397Z"
+        }
+      }
+    }
+  ]
+}

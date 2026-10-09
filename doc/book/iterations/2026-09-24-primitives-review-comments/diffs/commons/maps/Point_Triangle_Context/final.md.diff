@@ -1,0 +1,49 @@
+--- before/commons/maps/Point_Triangle_Context/final.md
++++ commons/maps/Point_Triangle_Context/final.md
+@@ -20,9 +20,15 @@
+ 
+ The word `TRIANGLES` asks the renderer to treat each three vertices as a face. The positions alone did not ask for this. Their order, the primitive type and the material participate in what you see.
+ 
+-![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/iterations/2026-09-23-triangle-illustration/figures/triangle-construction.png)
++<!-- @triangle_construction_plate -->
++
++The wall plate places the same three corners side by side: first as points, then as a boundary, then as a face.
++
++![Three identical sets of points A, B and C: points alone, connected boundary, and pink triangular face.](/book-review/doc/book/figures/Point_Triangle_Context/triangle-construction.png)
+ 
+ *One set of positions. Connecting them closes a boundary; filling it adds a face.*
++
++<!-- @triangle_line_puzzle -->
+ 
+ This fill is visible from both sides. Walk around it, looking for a view where the patch narrows almost to a line. Its three corners have not moved; you have. Move back and watch the face open again.[^point-triangle-winding]
+ 
+@@ -32,17 +38,17 @@
+ 
+ <!-- @draw_triangle_faces -->
+ 
+-Something is already lying here, unclosed: green corners joined into an open path. It is your bend from Trace, carried in.[^point-triangle-carry]
++Something is already lying here, unclosed: pale corners joined into an open path. It is your bend from Trace, carried in.[^point-triangle-carry]
+ 
+ Three decisions were taken to get it this far. Six positions were kept out of the hundreds you made, sampled at even intervals along the stored order rather than at the turns you thought you were making. The shape was scaled to arm's reach. And your height was dropped, because a fan asks what lies inside a plane, and your hand was not working in one. Your drawing has been made fillable. Look at what that cost before you close it.
+ 
+ Pick up the drawing point and finish the loop: move near the first corner and wait for it to take. Positions fall on a ten-centimetre grid. The addresses we met in Grid now help corners meet.
+ 
+-Look for the filled face. The side instrument distinguishes **filled loops** from **triangles**. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.
++Look for the filled face. The side instrument counts **loops** and **triangles** separately. Press **SHOW / HIDE FILL** and compare the surface with its retained boundary. Hiding the fill preserves the points and edges.
+ 
+ Now release the tool at the corner where your loop began, and press **SHIFT START** once. The same corners begin their order one place along.
+ 
+-If your bend turned back on itself anywhere, the fill has just reached into somewhere your hand never went.
++If your bend turned back on itself, the fill may have reached into somewhere your hand never went. Look for a patch beyond the boundary.
+ 
+ Try a six-corner L, drawn flat, with two equal arms. Begin where the two long outer edges meet and follow the boundary around the notch. **NEW OUTLINE** lets you begin without erasing your earlier faces; the drawing guide gives the dimensions and timing.[^point-triangle-construction]
+ 
+@@ -71,6 +77,8 @@
+ 
+ Carry this distinction onward: closing a boundary, making a face and choosing how to show it are operations we can separate. A convenient method need not require everyone to want a convenient shape.
+ 
++Try the four-edge puzzle too. Its closed outline still has no face. Nearby, the quad joins two triangular patches along a diagonal. Move a corner away from that diagonal: one patch follows while the other stays. Move an end of the diagonal and both change. Four corners have given us two faces that can tilt differently. Remember their shared edge when a cube offers you what looks like a single square.
++
+ Next, faces meet at a corner. What must we add to enclose a volume?
+ 
+ [^point-triangle-winding]: For the rendering convention, see [Godot 4.6’s SurfaceTool documentation](https://docs.godotengine.org/en/4.6/classes/class_surfacetool.html): triangle front faces use clockwise winding. Vertex order, shading normals and the material’s culling setting have different jobs. The puzzle deliberately displays both sides. That choice changes visibility; it does not give the face thickness or a collider.

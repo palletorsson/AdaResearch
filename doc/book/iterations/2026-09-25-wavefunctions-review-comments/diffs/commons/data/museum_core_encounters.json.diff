@@ -1,0 +1,152 @@
+--- before/commons/data/museum_core_encounters.json
++++ commons/data/museum_core_encounters.json
+@@ -10,7 +10,7 @@
+     "text_sha256": "a4cfd70349d87286032d53620ddae87752d902acc02531881262e47960546f9e",
+     "map_sha256": "680e2fe5414db351be215d9f3020efc3882875cce1cd2ad8e8a5798b50b5889c",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Current source and historical 58-check desktop evidence; no full historical source fingerprint or new headset run."
+   },
+   "WaveFunctions_Pendulum": {
+@@ -21,10 +21,10 @@
+     "status": "source_checked_draft",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_Pendulum/final.md",
+-    "text_sha256": "ca12bf9d17f6c803f5990f5c6a77772195862c20b787ee2887753089c8c44aa5",
++    "text_sha256": "99396653ee8e56f8b20b826b65cf4125dca2d236953991bc5cd1daeaa9aca8fc",
+     "map_sha256": "3c0d2b3a9fa8d91010771b9bf8ce353a5dd955866a4c01f0785d0e07d5dec483",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Current source and historical 81-check desktop evidence; no full historical source fingerprint or new headset run."
+   },
+   "WaveFunctions_Sine_Space": {
+@@ -36,10 +36,10 @@
+     "status": "source_checked_draft",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_Sine_Space/final.md",
+-    "text_sha256": "7a3d47b2a0dd31ccee00d2de68b9337eb6704085f9b71af3aa145b10a1b94a2d",
++    "text_sha256": "5c03c2f4a9fa302819b20627664c30ce24ab7e2c6c2e14d5405ebb77b413c74f",
+     "map_sha256": "6dbc4c8c5d6ad0cd3085127748f4f1e3c5b1acebbf66f0cadd51b4ca75655b24",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Current source; dated tray source/scene/probe/registry match earlier evidence, but whole-room configuration does not. Corridor evidence is historical."
+   },
+   "WaveFunctions_Unit_Circle": {
+@@ -50,10 +50,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_Unit_Circle/final.md",
+-    "text_sha256": "e391c3623417c91e8a90b519aec3c7fffca392f79673fbcd4e72ad979f6f6f55",
+-    "map_sha256": "5cda5eeb4d200bba1949a979cbf9855cf6818c3bec454f21b99a8f0b7d9fad67",
++    "text_sha256": "98989d61e16f87d5f0648518e26f72afb6357bb1cd705f9b7c064b10d657e4da",
++    "map_sha256": "8b47b658ed8f4d42c36ad011a892be5fc88f329fcf01167dc95b7770bc30e746",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Fresh isolated local/world transform regression: 102 checks; saved original fails 51. No complete museum walkthrough."
+   },
+   "WaveFunctions_3D_Wave_Propagation": {
+@@ -64,10 +64,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+-    "text_sha256": "8c798adf7d3effdc315f48f3b3cfebca642398e3d06dae7b072667eb590c18dc",
++    "text_sha256": "82cc3d1fe29e60746ced8b46e14a217c1f9a1d369ac51a48320327dc633d2ed0",
+     "map_sha256": "73af4041bae391cc4899e3ab5f89c3df0f6dfbda23f2a769d49952584cf6b3da",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Fresh isolated comparison controls and bounded actual-museum placement/capture checks; see middle/AUDIT.md for reach limits."
+   },
+   "WaveFunctions_Effect_Sound": {
+@@ -78,10 +78,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_Effect_Sound/final.md",
+-    "text_sha256": "c02c67069138f08a4ef4d26c05584bfb7c7295094ed73c24e82399a6dcf26cb4",
++    "text_sha256": "44391cd902daf249ca029de6cca263b7252ece3f8c13f8cea1388f15ffaece0c",
+     "map_sha256": "5e4a7ddf98a33a47be1a6ccd5df21047c41aa51dfc4a3090478b890dff507d6b",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Current DSP source and bounded actual-museum label capture; no new complete listening or headset session."
+   },
+   "Wavefunctions_Bernini": {
+@@ -92,10 +92,10 @@
+     "status": "source_checked_draft",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/Wavefunctions_Bernini/final.md",
+-    "text_sha256": "78701900090a59b419c1862e9358f171fa8aee75001a5b04b2d8dfd76c71cbd4",
++    "text_sha256": "29d793cc377198087ab432679a610ea0df38c8b5e6e5fba24f8510633f215279",
+     "map_sha256": "0f0a80debf5acab39b20774e08e5381fd50a710374250bb0ccb1d595264e38a4",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Current mesh/audio source and restored route contract; no new runtime or headset validation of this encounter."
+   },
+   "WaveFunctions_John_Cage": {
+@@ -109,7 +109,7 @@
+     "text_sha256": "16a16df2bd92561ab237bd1e14d59e2c5ddfa36c6d28d325389686271ee323f4",
+     "map_sha256": "90d7f96b761ece598766e46a21b23df9d8bed3553fb4c7a9676a2e11695f6289",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Current scheduling/audio source and restored route contract; no new listening or headset validation."
+   },
+   "WaveFunctions_AirMusic": {
+@@ -120,10 +120,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_AirMusic/final.md",
+-    "text_sha256": "dd67e9c981558502829a688a83e682faebea33f671899521db06f0d030366e14",
++    "text_sha256": "d8361d44cf392c1aad70c89ef149a547a8e614337514b0b71ab881e7288b98f6",
+     "map_sha256": "39f9a3d2b5d77acff58191d97b27e702110113603f4adf1ac7cb162637a6c619",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Fresh isolated PCM, per-bar retrigger and sample-sum checks; no full museum listening or headset session."
+   },
+   "Wavefunctions_Sky_Stairs": {
+@@ -134,10 +134,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+-    "text_sha256": "2b8e3f5a889a7dca10cd7422b0eb551915702ebfc21e136d42e41bc144fb9556",
++    "text_sha256": "58549b1b4ace5e614fd34e36ef5e9c9879927f7f75dabdd5681f84829d99f079",
+     "map_sha256": "c16d46c87ed0559749a674c0279ba6192f0c7194ace1cc155599049f75b73ab3",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Fresh isolated geometry/collider checks and restored route contract; complete ascent and headset comfort remain untested."
+   },
+   "WaveFunctions_TrigWalkingPath": {
+@@ -148,10 +148,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+-    "text_sha256": "9feafb76e00cdf28318f5b9e55dc6679ccd534badb9bbaf3da4d27d10deae583",
++    "text_sha256": "510161ace1a8bfb170f2a3a373e1010ca925a1a265d4e419759a25dc708a70f3",
+     "map_sha256": "759a87fe9f020d38eb887f70833464db06b3a046edc24b0b913cfa9ba12f270f",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Fresh isolated beat algebra and finite path/collider checks; no complete physical traversal or headset session."
+   },
+   "WaveFunctions_Synthesis_Lab": {
+@@ -162,10 +162,10 @@
+     "status": "desktop_checked_headset_pending",
+     "sequence": "wavefunctions",
+     "text_path": "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+-    "text_sha256": "00551106af3e40352ac5c9e88aa8d6fb0bcb8526c1c6ea381740dcd05fca8e6d",
+-    "map_sha256": "365b53c985b30d93fc0dc950995f7e85686ba89c47fc0c1b134e9fd393aa2cb0",
++    "text_sha256": "6f844d746042cbcb3e2a38d7d9808f68e9eda705a258d394fa7579bfcf69ff6f",
++    "map_sha256": "1b870d524612436e943ae5d2b997389d207bda8a58c21a90b0b7c65b075370b9",
+     "learner_verified": false,
+-    "local_review": "doc/book/iterations/2026-09-19-wavefunctions-review/SUMMARY.md",
++    "local_review": "doc/book/iterations/2026-09-25-wavefunctions-review-comments/DECISIONS.md",
+     "verification_scope": "Fresh focused controls and actual-museum pointer/reveal/capture checks at standing eye height; no headset or learner validation."
+   }
+ }

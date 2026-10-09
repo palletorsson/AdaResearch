@@ -1,0 +1,22 @@
+--- Primitives_Portals.before.md
++++ Primitives_Portals/final.md
+@@ -8,7 +8,7 @@
+ 
+ At the side instrument, use **NEXT RING** and **PREVIOUS** to select a member. It turns gold. Find the selected ring in the space. The button directs your attention while leaving your body where it is.
+ 
+-The display names the two subdivisions and counts the mesh's triangles. It also names a **separate unit polygon**. This is a simpler question placed beside the torus: how closely does a regular polygon's perimeter approach the circumference of a circle of radius one?
++The display names the two subdivisions and counts the mesh's triangles. Beside it, a rose-coloured polygon sits inside a grey circle. Select another ring: the polygon changes its number of sides while the circle stays. This **separate unit polygon** places a simpler question beside the torus: how closely does its perimeter approach the circumference of a circle of radius one?
+ 
+ Predict which way its gap will move when you select a finer ring. Compare the numbers, then look at the object again. The display borrows the torus's ring count as the polygon's number of sides. Its code calculates:
+ 
+@@ -17,6 +17,10 @@
+ ```
+ 
+ Each straight side is a chord between two points on the circle. Adding sides brings their total length closer to the circumference, which the panel labels **Circle**. The positive gap belongs to this planar comparison; a measure of the whole torus's accuracy would need its own definition.[^portals-circle]
++
++![Three states of the museum diagram: three, eight and twenty-two straight sides approach the same circle.](/book-review/doc/book/iterations/2026-09-23-portals-visible-limit/figures/portals-visible-limit.png)
++
++*The corner becomes harder to see. The gap remains. These are three states of the same diagram beside the rings; the numbers compare boundary lengths.*
+ 
+ This is **convergence**: as the rule continues, the perimeters approach a limit. They can get arbitrarily close to the circumference, though no finite polygon in this sequence has that exact perimeter. Twenty examples show part of an approach that can continue beyond the display.
+ 

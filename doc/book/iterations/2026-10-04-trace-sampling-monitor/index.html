@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ada · One hand, three records</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eee9e2;color:#24262c;font:17px/1.6 system-ui,sans-serif}main{max-width:1160px;margin:auto;padding:48px 28px}small{color:#985573;letter-spacing:.15em;text-transform:uppercase}h1{font:clamp(42px,6vw,76px)/1.08 Georgia,serif}h2{font:32px/1.2 Georgia,serif}p{max-width:850px}header p{font-size:21px}img{width:100%;display:block;border-radius:4px}figure{margin:30px 0}figcaption{font-size:14px;color:#68616a;margin-top:10px}button{padding:12px 18px;font:inherit;border:1px solid #777;background:transparent;border-radius:4px;cursor:pointer;margin-right:8px}button[aria-pressed=true]{background:#252630;color:#f6d5e4}a{color:inherit;text-underline-offset:4px}code{font-size:13px;overflow-wrap:anywhere}.controls{margin:26px 0 12px}details{border-top:1px solid #ccc;padding:20px 0;margin-top:34px}summary{cursor:pointer}
+</style></head><body><main>
+<header><small>Ada / Point Trace / 04 October 2026</small><h1>One hand.<br>Three records.</h1><p>You move the pen once. The monitor lets three different rules remember the movement.</p></header>
+<figure id="museum"><img src="museum.png" alt="The sampling monitor on the side wall of the actual Point Trace museum hall, beside its drawing pens."><figcaption>Inside the Endless Museum. The screen observes the existing Draw Dot pens. The pictured trace is a labelled test gesture.</figcaption></figure>
+<h2>What should a point have to do to be kept?</h2>
+<p>With a small sampling distance, the trace follows small turns. With a larger distance, fewer positions survive. Switch to Grid and another choice appears: where is a recorded position allowed to stand?</p>
+<div class="controls"><button id="grain" aria-pressed="true">Sample spacing</button><button id="grid" aria-pressed="false">Grid snapping</button></div>
+<figure><img id="comparison" src="grain.png" alt="One spatial gesture sampled at 5, 20 and 80 millimetre spacing."><figcaption id="caption">The same test gesture leaves 228, 93 and 26 positions. This changes the distance needed before another point is kept.</figcaption></figure>
+<h2>Draw, then look.</h2>
+<p>Pick up a Draw Dot pen in the Trace hall. Its moving tip supplies the monitor. Release it to replay that gesture. Look away and the replay holds; look back and it continues. Recording while you draw remains independent of your gaze.</p>
+<p>In the desktop preview, hold <strong>Space</strong> and move the mouse; use the wheel to draw in depth. Release Space to replay. <strong>D</strong> supplies a labelled demonstration. Right-drag looks away, Home returns, and the arrow keys turn the camera around the three traces.</p>
+<p>Open <code>commons/artifacts/concept_monitor/trace_sampling_preview.tscn</code> in Godot and press F6.</p>
+<details><summary>What was tested</summary><p>The comparison matches Draw Dot’s own output at all six settings. Tests also check a rotated whiteboard, unchanged source records, the private buffer limit, and placement and control access inside the museum. Physical headset testing remains open.</p><p>These are actual Godot renders of a known test trajectory driven through Draw Dot. The browser switches still comparisons; live drawing and replay run in Godot.</p><p><a href="report.json">Runtime checks</a> · <a href="protected-sources.json">Source checks</a> · <a href="DECISIONS.md">Decisions and limits</a></p></details>
+</main><script>
+const image=document.getElementById('comparison'),caption=document.getElementById('caption');
+for(const mode of ['grain','grid'])document.getElementById(mode).onclick=()=>{image.src=mode+'.png';image.alt=mode==='grain'?'One gesture sampled at 5, 20 and 80 mm spacing':'One gesture snapped onto 10, 40 and 80 mm grids';caption.textContent=mode==='grain'?'The same test gesture leaves 228, 93 and 26 positions. This changes the distance needed before another point is kept.':'The same sampling distance; three grids. These records keep 207, 74 and 41 distinct positions.';for(const name of ['grain','grid'])document.getElementById(name).setAttribute('aria-pressed',String(name===mode))};
+</script></body></html>

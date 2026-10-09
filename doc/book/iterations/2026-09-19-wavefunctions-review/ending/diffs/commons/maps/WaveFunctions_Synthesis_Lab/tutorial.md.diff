@@ -1,0 +1,11 @@
+--- before/commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md
++++ after/commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md
+@@ -55,6 +55,8 @@
+ 
+ Multiplying the whole phase by `h + 1` keeps the components related as the picture scrolls. There are no separate phase controls, signed coefficients, constant offset or harmonics above five. This finite family is useful without containing every periodic shape. The older source preset ID `triangle` keeps its positive odd 1/n² coefficients; the label now names that mix. A triangle series with this sine orientation would require alternating signs, which these sliders cannot supply.
+ 
++In this hall, read the amounts and compare the rows before naming the recipe. `name_after_compare:true` leaves the preset name at `ARRIVAL RECIPE` until H1 ALONE or BASELINE is used; HOLD does not reveal it. After a manual edit it instead says `COMPARE THE SUM`. Those invitations do not change the coefficients or their drawing.
++
+ ## The slider and the name are different operations
+ 
+ Moving a real slider updates its own coefficient from the handle position:

@@ -1,0 +1,166 @@
+{
+  "checks": [
+    {
+      "name": "requested museum hall loaded",
+      "passed": true
+    },
+    {
+      "name": "authored grid present",
+      "passed": true
+    },
+    {
+      "name": "grid completed",
+      "passed": true
+    },
+    {
+      "name": "fifteen stack studies and eight gallery studies",
+      "passed": true
+    },
+    {
+      "name": "all four opening rules placed",
+      "passed": true
+    },
+    {
+      "name": "one preserves the same five forms and local transforms",
+      "passed": true
+    },
+    {
+      "name": "one distinct assigned colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-one",
+      "passed": true
+    },
+    {
+      "name": "by_shape preserves the same five forms and local transforms",
+      "passed": true
+    },
+    {
+      "name": "by_shape distinct assigned colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-by_shape",
+      "passed": true
+    },
+    {
+      "name": "by_height preserves the same five forms and local transforms",
+      "passed": true
+    },
+    {
+      "name": "by_height distinct assigned colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-by_height",
+      "passed": true
+    },
+    {
+      "name": "by_neighbour preserves the same five forms and local transforms",
+      "passed": true
+    },
+    {
+      "name": "by_neighbour distinct assigned colours",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rule-by_neighbour",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: hall-entrance",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rainbow-near",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: rainbow-around",
+      "passed": true
+    },
+    {
+      "name": "rainbow remains fixed between two camera positions",
+      "passed": true
+    },
+    {
+      "name": "rainbow and combined studies retain authored heights",
+      "passed": true
+    },
+    {
+      "name": "capture camera retained: whole-configurations",
+      "passed": true
+    },
+    {
+      "name": "focused comparison completed",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "observations": {
+    "by_height": {
+      "colours": [
+        "3688d9ff",
+        "36d9cdff",
+        "36d95bff",
+        "83d936ff",
+        "d9bd36ff"
+      ],
+      "position": [
+        14.0,
+        0.5,
+        6.0
+      ]
+    },
+    "by_neighbour": {
+      "colours": [
+        "c7994dff",
+        "4d7ac7ff",
+        "c7994dff",
+        "4d7ac7ff",
+        "c7994dff"
+      ],
+      "position": [
+        18.0,
+        0.5,
+        6.0
+      ]
+    },
+    "by_shape": {
+      "colours": [
+        "cc2929ff",
+        "cc2929ff",
+        "295cccff",
+        "cc2929ff",
+        "295cccff"
+      ],
+      "position": [
+        8.0,
+        0.5,
+        6.0
+      ]
+    },
+    "commons/artifacts/chroma_stack/chroma_stack.gd": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0",
+    "commons/artifacts/color_dna_stack/color_dna_stack.gd": "9b8e88fbe70152d6d57c8bea4eb701968acc4b2bf0c9de16ba171d95a7b2cf96",
+    "commons/artifacts/color_dna_stack/studies.json": "40570ac488061e733f0fae1ba7ebaa38200804909ca0e0e22f24d5b7f436a5a4",
+    "commons/primitive_grammar/primitive_stack.gd": "7acefdcfd1023297f52e06f7532a8174c5c6dda6b20aac994d21559c2950fc8f",
+    "one": {
+      "colours": [
+        "c7994dff",
+        "c7994dff",
+        "c7994dff",
+        "c7994dff",
+        "c7994dff"
+      ],
+      "position": [
+        4.0,
+        0.5,
+        6.0
+      ]
+    }
+  },
+  "passed": true,
+  "room": "Color_Context_Placed",
+  "scope": "Isolated production museum. Native renders of placed columns, same local camera for four rules, material/geometry and fixed-pose checks. No walking, grabbing, headset or learner test. No artifact or placement change."
+}

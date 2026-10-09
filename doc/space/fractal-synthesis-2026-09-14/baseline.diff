@@ -1,0 +1,56 @@
+diff --git a/commons/maps/Fractal_Synthesis/map_data.json b/commons/maps/Fractal_Synthesis/map_data.json
+index 0f7eb0ce7..03c9b1dc4 100644
+--- a/commons/maps/Fractal_Synthesis/map_data.json
++++ b/commons/maps/Fractal_Synthesis/map_data.json
+@@ -17,6 +17,10 @@
+    "category": "fractals",
+    "estimated_time": "4-5 minutes",
+    "learning_objectives": [ "D = log(N)/log(S)", "Edge of chaos", "F + -- E(S)", "Queer geometry" ]
++  },
++  "museum": {
++   "wall_height": 3,
++   "gate_depth_rows": 0
+   }
+  },
+  "utility_definitions": {
+@@ -30,24 +34,12 @@
+   }
+  },
+  "lighting": {
+-  "ambient_color": [
+-   0.4,
+-   0.4,
+-   0.5
+-  ],
++  "ambient_color": [ 0.4, 0.4, 0.5 ],
+   "ambient_energy": 0.6,
+   "directional_light": {
+    "enabled": true,
+-   "direction": [
+-	-0.4,
+-	-0.7,
+-	-0.4
+-   ],
+-   "color": [
+-	1.0,
+-	0.95,
+-	0.9
+-   ],
++   "direction": [ -0.4, -0.7, -0.4 ],
++   "color": [ 1.0, 0.95, 0.9 ],
+    "energy": 1.2
+   }
+  },
+@@ -60,11 +52,7 @@
+   "initial_tile_visibility": "hidden_except_corners",
+   "background": {
+    "type": "sky",
+-   "color": [
+-	0.15,
+-	0.15,
+-	0.25
+-   ]
++   "color": [ 0.15, 0.15, 0.25 ]
+   }
+  },
+  "layers": {

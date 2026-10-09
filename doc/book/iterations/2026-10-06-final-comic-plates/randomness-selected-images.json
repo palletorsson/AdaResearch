@@ -1,0 +1,189 @@
+{
+  "tool": "Built-in image_gen",
+  "plates": [
+    {
+      "slug": "random-seed",
+      "map": "Random_Definition",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-7d03fa98-e5d0-4f53-ae39-dbcea225e558.png",
+      "refinements": [
+        "Edit only the top-left panel's two coloured 8 by 8 grids. They must be EXACTLY IDENTICAL cell for cell, because replay under the same procedure gives the same picture. Use the left-hand grid in the middle-left panel as the common reference: copy its exact colours to BOTH top-left grids, preserving 8 rows and 8 columns and fixed positions. Keep the middle-left panel, in which the right grid is differently coloured after one discarded draw, entirely unchanged. Preserve all six panels, figures, captions, diagrams, controls, typography and lighting. Do not add any extra grid, text or object. The original colours on the left stay across these two temporal panels; only the right grid after +1 DRAW differs."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-69847f1e-fe8d-4385-8487-08f8ac6cf0c0.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-7d03fa98-e5d0-4f53-ae39-dbcea225e558.png"
+      ]
+    },
+    {
+      "slug": "random-shares",
+      "map": "Random_Entropy",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-578fa249-98a3-432c-8913-102ceaffda6b.png",
+      "refinements": [
+        "Edit only diagram areas in top-right and middle-right panels. Top-right AS DRAWN must show a mixed order of coloured tiles, SORTED groups exactly the SAME tiles by colour; ten bars above each row must be IDENTICAL in height and order. Use a cropped illustrative row with two of each of ten colours, 20 tiles total. Label the diagram CROPPED EXCERPT. Keep the enlarged earlier excerpt below. Middle-right inset labelled 2/4 and 4/8 must have the red maximum bars EXACTLY THE SAME DISPLAY HEIGHT and the blue bars also same height across the two examples, because each sample scales by its own largest count. Show labels max 4 / max 8. Preserve all other panels, characters, captions, numbers and style. No entropy gauge for the ruin."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-33a13453-e606-4d04-a3fd-5cb784a707f7.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-578fa249-98a3-432c-8913-102ceaffda6b.png"
+      ]
+    },
+    {
+      "slug": "random-eligible",
+      "map": "Random_Remove",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-6df6a47a-518f-4bce-9844-814e48eb809d.png",
+      "refinements": [
+        "Edit only the four small board diagrams in the first three panels and the two hopper machines in middle-right. The board diagrams must be precisely 8x8 squares, with central 4x4 amber, 48 grey outside. Top-right upper diagram ONE red cube at column3 row3, and lower diagram that exact ONE slot empty while 15 amber remain. Middle-left diagram central4x4 EMPTY pale slot plates, 48 grey unchanged. Avoid rounded ambiguous blocks; clear crisp grid. Main board perspective can remain illustrative. HOPPERS: both cases numbered1..8 once. Left retains ALL8 blocks including2; a single RESULT COPY2 below its case. Right has ONLY slot2 empty, all1,3,4,5,6,7,8 filled; the ONE selected2 block sits below this case. Remove current duplicated selected/result inset boxes entirely. Preserve all captions, six-panel layout, people and fire basin.",
+        "Simplify ONLY tiny inset diagrams in top-left, top-right and middle-left; preserve the museum views and hopper correction. These are CROPPED ELIGIBLE SET, not full-board census. Replace each tiny inset with a very clear 4x4 square grid, EXACTLY FOUR rows and FOUR columns, sixteen cells total. Draw exactly THREE internal vertical and THREE internal horizontal lines inside the square border. Coordinate headers columns2,3,4,5 and rows2,3,4,5. Top-left16amber. Top-right BEFORE16amber except oneRED at column3row3; AFTER samegrid oneEMPTY at column3row3 and15amber. Middle-left same16slots EMPTY pale. NO grey border cells in the tiny insets, NO fifth row or column. Label each crop ELIGIBLE SET. Preserve all captions, main perspectival boards, people, hoppers, fire-floor and page layout. Existing perspective boards are illustrative crops, the inset supplies exact selected set."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-1daafe45-d1e2-4c2d-8626-0a9e2bdbc48b.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-8dc6b2f0-a30e-4dce-a17d-889343988df3.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-6df6a47a-518f-4bce-9844-814e48eb809d.png"
+      ]
+    },
+    {
+      "slug": "random-marks",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-458f1d17-5684-4e8a-b033-20d1608f4e87.png",
+      "refinements": [
+        "Correct three panels only. MIDDLE LEFT: keep 4x4 planar marks, but replace misleading six-cell column labelled16x1 with exactly16 narrow cells containing the SAME16 marks as the plane read row by row. Clearly legible slender column, label16x1. MIDDLE RIGHT: extend four diagonal line segments to touch EXACTLY at diamond corners, with a CLOSED diamond centred inside 2x2 grid. Top-left /, top-right backslash, lower-left backslash, lower-right /. Their endpoints meet at outer-edge midpoints. BOTTOM RIGHT: the four tall diagonal walls form a COMPLETELY CLOSED diamond-shaped enclosure. Close both current vertical gaps at front and rear where walls meet. People stay OUTSIDE. No doorway. Keep nearby separate open passage and all other panels, captions, figures, colours and style unchanged.",
+        "Correct ONLY middle-left comparison diagram and close tiny gaps in middle-right diamond. Middle-left replace BOTH diagram boards with one simple SCHEMATIC four-mark example: left2x2 grid with THREE outer? Precisely square border with ONE internal vertical and ONE internal horizontal line. Top-left diagonal /, top-right backslash, bottom-left backslash, bottom-right /. These four diagonals join into a CLOSED diamond. Right is one column of EXACTLY4 cells with diagonal order /, backslash, backslash, /. Label left PLANE (excerpt), right COLUMN (same four marks). Remove labels4x4 and16x1. Thus identical stream, different layout, no claim to depict16chars. Middle-right diamond black endpoints must TOUCH at all four corners, not stop short. Preserve all other panels including correctly closed tall walls, captions, people, title and style."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-1a9878a3-2867-473d-b1de-b25ff642cf94.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-286594d4-ef74-4b3d-be3f-3d0672a89aca.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-458f1d17-5684-4e8a-b033-20d1608f4e87.png"
+      ]
+    },
+    {
+      "slug": "random-throws",
+      "map": "Random_Cubes",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-cc5f9e31-9936-450e-81d5-7d00b7ee85e7.png",
+      "refinements": [
+        "Correct only middle-right and bottom-left panels. Middle-right WORKED EXAMPLES must show two columns of EXACTLY seven equal-height thin blocks each: left3blue bottom plus4pink top; right5blue bottom plus2pink top. Both tops and bases match, unit divisions legible, join heights different. Replace the multiple little dice beneath EACH column with precisely ONE blue die and ONE pink die, showing the respective3/4 and5/2 faces upward. Bottom-left six inset must say OPEN under its raised flag, not CLOSED. Three inset remains CLOSED. The15-block worked example must grow bottom6, middle6, top3, with visible6/6/3unit bands in that chronological bottom-to-top order. Label WORKED EXAMPLE above it. Keep all other panels, faces, captions, tallies, shelf, title and colour unchanged."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-ed22486f-a2f4-4e30-bb3d-7cfcadf721d3.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-cc5f9e31-9936-450e-81d5-7d00b7ee85e7.png"
+      ]
+    },
+    {
+      "slug": "random-turns",
+      "map": "Random_Rotate_Random_XYZ",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-65ee30d0-cc29-49dd-b2d2-ce5fbbf454b8.png",
+      "refinements": [
+        "Correct only top-left main arrangement and bottom-right static field. Top-left: cube group is a VERTICAL plane5cubes wide and4high, not flat on table. Prism group is a VERTICAL plane12columns of10 triangular prisms, same prism size throughout. The display crosses the hall; cubic group at observer right, prism group left. They are render-only separated instances; do not invent physical shelves beneath every row. Bottom-right: static sine tilt field EXACTLY5by5 cubes. First and fifth rows are level, second and fourth tilted equally, third most tilted. Five evenly spaced rows, five equal-sized cubes in every row, centres fixed. No motion arrows. Preserve all other panels and their captions, in-plane square overlays, wear rig, figures, materials and layout."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-7a4961f6-9f87-453f-81dd-5bbcba901a0b.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-65ee30d0-cc29-49dd-b2d2-ce5fbbf454b8.png"
+      ]
+    },
+    {
+      "slug": "random-trail",
+      "map": "Random_Walk",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e279703a-7caf-467f-b5fa-2b1eea00eee3.png",
+      "refinements": [
+        "Correct only middle-left numberline, middle-right trail and first two tank views. NUMBERLINE: left-to-right numeric positions .23, .24, .25wall, .27. Solid red retained segment from OLD .24 LEFTWARD to ACCEPTED .23. Dotted proposal fromOLD .24 RIGHTWARD through .25wall to .27; label proposed. Accepted green at .23; old grey at .24; proposal hollow at .27. Physically correct monotonically increasing coordinate axis. MIDDLE-RIGHT: red drawn trail ends EXACTLY at centre of P3, remove its extension towardCURRENT, leaving a clear unconnected gap. P1/P2/P3 retained samples should be tiny dots much smaller than bright red CURRENT bead. FIRST TWO TANKS: one bright red bead has a thin red trail ending just before it. Four DIM beads are SEPARATE walkers, scattered elsewhere in tank with faint independent trails, not a line of past bead images. In 2D all trails remain at same height; past retained samples are tiny dots, not bead-sized spheres. Preserve all other panels, captions, offset illustration, figures and gallery.",
+        "Make one precise correction to the retained-trail drawing, preserving all captions and other scenes. MIDDLE RIGHT: draw ONE CONTINUOUS thin red polyline from centre of tiny P1 dot to centre of tiny P2 dot, then to centre of tiny P3 dot, and END THERE. Exactly two straight red segments P1-P2 andP2-P3. Nothing continues right of P3. The large CURRENT bead remains separate with a clear emptygap. P0 remains outside record. TOP LEFT and TOP RIGHT main tank views: simplify to a CROPPED ONE-WALKER view showing ONLY one large bright redCURRENT bead, with a continuous thin redline through tiny retained sample dots behind it that stops short ofCURRENT. Remove all other bead-sized dimwalkerobjects from these cropped views so no incorrect populationcensus is implied. Do NOT remove the tank. Top-right constantheight inset has continuous line through sample dots; 3D inset has a bent continuous line through sample dots rising andfalling, ending before itsCURRENT bead. Keep the mathematically corrected .23/.24/.25/.27 diagram, green drawing tip, retained-height field, people, text andlayout."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-446a98c3-932b-420c-922c-061e2124a3f8.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-632e333d-4133-4c53-a1cd-9677c2441ca5.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e279703a-7caf-467f-b5fa-2b1eea00eee3.png"
+      ]
+    },
+    {
+      "slug": "random-bins",
+      "map": "Random_Gaussian",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-4db1e881-7b71-44c6-9154-66a0ae7e5da0.png",
+      "refinements": [
+        "Correct only middle-right small rebinning inset and bottom-left upper clipping arrow. Upper clipping arrow must point FROM hollow raw1.12 LEFTWARD TO red kept1, arrowhead at1. Never point toward1.12. Preserve label raw1.12 kept as1. In middle-right inset replace the inaccurate bin-box dots with two matched number lines0..1 containing the SAME FOUR labelled dots .12,.18,.51,.89 at identical relative positions. Upper line 10equal intervals, lower5equal intervals. The .12 and .18 points stay separately visible, even when they share an interval. Each row must show all4points and exactly the labels10intervals and5intervals. Add SCHEMATIC to the larger30/10 histograms; countsN300 stay. Preserve everything else including PAUSE, painted annulus, captions, people and layout.",
+        "Change ONLY the two small labels above the FOUR-retained-values numberlines in middle-right. Replace '10 intervals (bins)' with 'Finer intervals (schematic)' and '5 intervals (bins)' with 'Coarser intervals (schematic)'. Keep identical four dot positions and labels .12,.18,.51,.89. Do not alter mainhistograms30/10/N300, clippingarrows, or any other text/figure/panel. This removes an inaccurate tick-census claim while keeping the rebinning comparison."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-22af60e4-01ba-45cc-86c6-59cfc2f071ee.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-3a5b36b4-374f-4aa5-b157-fbe4972f38a0.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-4db1e881-7b71-44c6-9154-66a0ae7e5da0.png"
+      ]
+    },
+    {
+      "slug": "random-wardrobe",
+      "map": "Random_Mushrooms",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-8aa62d7c-9a5f-45de-8a77-cac102cf9a45.png",
+      "refinements": [
+        "Correct four example areas while preserving all captions, figures, layout and painterly style. Top-left six numbered specimens0..5 must match source:0tan cap ordinary stem;1red spotted cap;2low flat brown cap;3tall narrow white mushroom;4rounded puffball;5small cyan luminous cap. Top-right selected specimen is tall white3; copies vary SCALE and TURN only, not arbitrary cap redesign; selection magenta rings are on ground discs, not collars around stems. Middle-left SIZE OFF example: show one tall template and one short template, then TWO copies of SAME tall template EXACTLY SAME HEIGHT, diameter and proportions; template height differences remain across kinds. Bottom-left arrival stage: the two dress41 bodies are FLAT cutout silhouettes on thin upright panels, visibly paper-flat side edge, not3D dress forms. One has pleated hem, other sparse garment branches; both label41. Bottom-right couture trio all have hare heads and the SAME CRINOLINE garment construction, with differences only proportion, print and pose; seeds41/42/43. Do not show sheath/bloom/fringe simultaneously as if the same construction. Other paintings and REJECTED markers unchanged.",
+        "Change ONLY the small number label under the tall white specimen in middle-left SIZE OFF mainview from '1' to '3'. It is template3, the tallwhite specimen shown top-left. Preserve every other detail, same-height copies, all six captions, dress41 flatcutouts, hare-head crinolines and page layout."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-65b3d842-8cd6-4dcd-aa75-2a38b6914e71.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-10e5d0e7-e9a2-4ebc-b4dc-bb90ae7c5889.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-8aa62d7c-9a5f-45de-8a77-cac102cf9a45.png"
+      ]
+    },
+    {
+      "slug": "random-neighbours",
+      "map": "Random_Space_Geometry",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-761f4ccf-cb42-42f4-af1b-cabc6b59b4a7.png",
+      "refinements": [
+        "Correct the shared palette and frequency comparison only. EVERY WHITE NOISE grid and column sample must use the SAME HEIGHT-BASED BLUE-GREEN-WHITE ramp as PERLIN, blue low, greenmiddle, whitestall. White noise means independent draws, NOT white material. Preserve heights of independent grid unchanged across BEFORE/AFTER. Middle-left higher FREQUENCY coherent AFTER grid must have several smaller broad features instead of the same singlehill: clear multiple small peaks, sameheightscale and seed. Remove '=' signs BETWEEN White and Perlin in both middle panels; they falsely equate different fields. Keep captions Exactly the same ONLY under repeated White grid, referring to its own before-after. Preserve all other diagrams, octaves, selected3columns, labels, student, companion and page style."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-db421f2e-8f2b-40d2-a582-1b66572d376e.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-761f4ccf-cb42-42f4-af1b-cabc6b59b4a7.png"
+      ]
+    },
+    {
+      "slug": "random-jobs",
+      "map": "Randomness_Examples_of_Randomness",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-2a702773-1576-4df8-a703-9f848ea6c2eb.png",
+      "refinements": [
+        "Correct top two painting views and Monte Carlo count diagrams only. TOP LEFT and TOP RIGHT: painting lies HORIZONTAL on the FLOOR in a low frame, not hung upright on wall. People look down and around its near edge. Keep all its painted marks and replay-cursor inset. MIDDLE LEFT board beside Total4 must show exactlyFOUR points:3redINSIDE and1blueOUTSIDE. Remove secondbluepoint. MIDDLE RIGHT left Total5 board has4redINSIDE+1blueOUTSIDE. Right Total6 board must have4redINSIDE+2blueOUTSIDE, not3outside. Preserve formulas and errornumbers3.000,3.200,2.667. Label these three arithmetic diagrams WORKED EXAMPLE. Keep pipe route and particle sketches, captions, characters and layout unchanged.",
+        "Change only middle-right header. Restore the original exact caption in a white top box: 'A growing sample does not require every new estimate to improve.' Place smaller 'WORKED EXAMPLE' just below that caption above the two arithmetic boards, without obscuring any dots or numbers. Do not replace the source caption with the example label. Preserve corrected point counts, horizontal floor painting, all other panels, figures and style."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-b4f14289-7d1f-4941-b4bf-9db52fda7b90.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-72b48cab-fba0-4874-b6f3-c84cf348e879.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-2a702773-1576-4df8-a703-9f848ea6c2eb.png"
+      ]
+    },
+    {
+      "slug": "random-scent",
+      "map": "Random_Pheromone",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-b81a8700-ae2a-433f-b100-e75c9a207198.png",
+      "refinements": [
+        "Correct ONLY visible walker counts and overlay labels. Main physical terrain at top-left has exactly FOUR cyan walkers, add one to existingthree. Bottom-right new AVOID trial must have exactly FOUR cyan walkers, remove fifth at far front. Keep top-right local patch views as CROPPED views, not a count of entire population. Add small SCHEMATIC label to all cyan scent-colour explanatory insets, and label middle-left circulardiagram SCHEMATIC. Do not imply a new runtime scent-screen capability; these are explanatory overlays. Preserve all existing captions, stable ridge while scent fades, controls, people, tie-direction diagram and style.",
+        "In TOP-LEFT panel ONLY, remove the cyan walker closest to viewer at lower-left end of terrain, at the frontleft slope. Preserve the other FOUR cyan walkers: upper ridge, mid-left, mid-right, far-right. Currently there are five; after removing this one there must be four. Restore the pale terrain surface naturally underneath it. Change absolutely nothing else, no text edits, no new dots, no altering bottomright fourwalkers."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-193608b6-c1ba-4eaa-932d-aaa0e84897e2.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-d6a6c6ff-0067-4a0f-afd7-3564de775a8c.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-b81a8700-ae2a-433f-b100-e75c9a207198.png"
+      ]
+    },
+    {
+      "slug": "random-layers",
+      "map": "Random_Space",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e9edffae-8cdc-4323-bcbc-5133018a9df1.png",
+      "refinements": [
+        "Correct the conflation of field mixer and violet floor. TOP LEFT and MIDDLE LEFT plinth images must be FLAT EARTH-TONED smooth numerical textures, not violet triangulated relief. Browns/ochres/greens/blues mapped to continuous smooth broad high/low values, no actual terrain relief or miniature geology. TOP RIGHT OCT1/OCT4 images are also FLAT EARTH-TONED textures: OCT1 broad smooth features; OCT4 SAME broad features with finer smooth variation. NOT polygon facets, NOT violet steps. MIDDLE LEFT returningOCT1 picture must match top-left broadpicture, labelOCT1. The VIOLET jagged independently sampled triangular surface belongs to museum FLOOR, visible beneath and around the plinths. MIDDLE RIGHT closeup must therefore show violet triangles on FLOOR LEVEL adjoining grey museumfloor, remove raisedplinth/frame. Small cornerdots still indicate independent sample heights. Keep bluecellularfieldanddistanceinset, separateentropyinstrument, ALLcaptions, figures, panel layout and lighting unchanged."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-fdabe6c8-5cfb-46c9-8258-8f37658e9a14.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-e9edffae-8cdc-4323-bcbc-5133018a9df1.png"
+      ]
+    },
+    {
+      "slug": "random-time",
+      "map": "Random_Game",
+      "generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-34850816-65d7-458f-9591-4a9a868fbc2e.png",
+      "refinements": [
+        "Correct first three panels' crossing and bottom trials without changing any captions. CROSSING is a DRY shallow rectangularpit with visible recovery bed one metre below museumfloor, NEVER a waterpool. Precisely3CYAN rectangularsteppingstones, tops slightly ABOVE hallfloor, 12cmgaps, approachramp atfirst, sidebypassstillopen. Top-left stateicons must depict a stone standing, sinking, absent, rising (not humanfigures), same STANDS LEAVES GONE RETURNSlabels. Top-right goldringmiddlecyanstone, tablet3.6sremaining1.0skeep. Middle-left CUEOFF no goldring; middle stone ORANGE partiallysinking withsmallBEACON litduringmovement, tablet remainsavailable. BOTTOM LEFT and RIGHT trialentrances have letteredfloorplates A/B and '?' beneath bothA/B unrevealed signs; keep CHOOSE DRAW REVEAL ordering. BottomleftstudentonA, drawnotyetfilled; bottomright DRAWalreadyfilled beforestudentsteps. Middle-right shownfirst DIRECT/AROUND retainslabels and longerwalkingroute. No firejets in this particularpassage trial. Preserve characters, exact quotes, sixpanelstyle.",
+        "Change only first three crossing panels' stone colours and middle-left tablet. Top-left and top-right: fill the TOP surface of each of the THREE standingstones with clear bright CYAN, matching the source's standingstate. Keep stonegeometry/pit/bed/museum unchanged. Middle-left CUEOFF: sinkingmiddle top ORANGE as now, left/rightstandingtopsCYAN. The movement tablet here reads last wait3.6s and Remaining0.0s, because previouswait has ended whilestone moves; replace Remaining1.0s with0.0s in this panel ONLY. Top-right standingtimer stays3.6/1.0. Preserve all captions, cueicons, goldring, beacon, threepassagetrialsandlayout."
+      ],
+      "original_generated_path": "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-92f4cf9d-eaf5-4215-8e92-515b29456be6.png",
+      "refinement_paths": [
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-6cb37702-bf6a-462f-b0da-c186a84360cf.png",
+        "C:\\Users\\palle\\.codex\\generated_images\\01a10bc8-df03-7ef0-8c2e-130d9b01e6aa\\exec-34850816-65d7-458f-9591-4a9a868fbc2e.png"
+      ]
+    }
+  ]
+}

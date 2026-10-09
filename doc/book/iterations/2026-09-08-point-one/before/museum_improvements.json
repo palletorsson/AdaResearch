@@ -1,0 +1,754 @@
+{
+  "_readme": "Small proposed interventions joined to live spine rooms. Order is an explicit curatorial choice: unblock a visible learning distinction, then expose retention, then test a representational limit. Ready means ready to try, never accepted. Each evidence hash records source inspection on 2026-09-08; a changed source asks for reinspection. Advance stages only with a recorded observation; do not refresh hashes automatically. Keep shared-component effects separate from method candidates. Successful scoped findings belong in doc/curation_lessons.json, with its evidence/scope/confidence/test contract. See doc/book/COMPLETION_STRATEGY.md for the workflow.",
+  "actions": [
+    {
+      "id": "snap-sphere-readable",
+      "room_id": "Point_Line_Grid",
+      "priority": 1,
+      "title": "Walk the repaired snap sphere in Grid and Point One",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "second_room",
+      "why": "The precision, units, indices and visible-tip drop correction are implemented and pass actual-scene checks in two placement configurations. The next uncertainty is whether a visitor can see and understand the comparison from the room.",
+      "next_step": "In Grid, read the revised opening while making one adjacent 5 cm move and releasing. Compare the retained table with the marker, then walk the separate 1 m lattice. Repeat the hand experiment in Point One; record reading distance, any obscured label and the visitor's explanation.",
+      "done_when": [
+        "In Point_Line_Grid, move the sphere between two adjacent lattice positions: displayed positions differ by 0.05 m and one lattice index; the released marker agrees.",
+        "Read the revised passage while doing it. A visitor can distinguish the sphere's 5 cm spacing from the walking recorder's 1 m lattice before reading the explanation.",
+        "Repeat the readout check in Point_One with that placement's effective settings, and record what changed and what remained uncertain."
+      ],
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "critical_question": "Which movements become indistinguishable when this grid decides which positions count? Try two different hand positions that settle on the same lattice point.",
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/primitives/point/grab_sphere_point_snap.gd",
+          "sha256": "b14c83136cf643015cf9fc80ba6af440758942491c826ec937b554c1b9c63dea"
+        },
+        {
+          "path": "commons/primitives/point/grab_sphere_point_snap.tscn",
+          "sha256": "b1985a595e85978f708d6c05e17d685264f62afaacb017b4e76700775137b74e"
+        },
+        {
+          "path": "commons/maps/Point_Line_Grid/map_data.json",
+          "sha256": "3cc38535ee06d60ad05b2f79728ee556c9a38c3ebb25cc6bb38170b092cdfe26"
+        },
+        {
+          "path": "commons/maps/Point_Line_Grid/final.md",
+          "sha256": "076867a36aa90b703682068d05c1b0e2add20b47b873875ec7bfb2be3d785066"
+        },
+        {
+          "path": "commons/maps/Point_One/map_data.json",
+          "sha256": "c243239ce64ece3e42d9642a9b8773b654f7e36bee3123c7ba426450907c3e69"
+        },
+        {
+          "path": "commons/maps/Point_One/final.md",
+          "sha256": "59a7fa1bea93f7824a34b711e0efca16b57449bcd3b736b6e5efe34c2e3e34e9"
+        },
+        {
+          "path": "tools/probes/museum_snap_and_pen.gd",
+          "sha256": "734d41589693bdadc41c0ebbd7b7fd2e153011cd3ef0d8f6240886010322ee34"
+        }
+      ],
+      "reuse": {
+        "principle": "Make the displayed precision sufficient to see the distinctions the interaction retains.",
+        "mechanism": "Both rooms place grab_sphere_point_snap, which resolves to the same scene and script. A shared display edit reaches both; each placement still needs checking.",
+        "tokens": [
+          "grab_sphere_point_snap"
+        ],
+        "method_rooms": [],
+        "second_room": "Point_One",
+        "second_test": "Repeat one adjacent-position move in Point_One. Confirm the displayed units and precision fit its effective grid and its introductory question, then inspect any shared-code effect on the earlier encounter.",
+        "limits": [
+          "Shared placement proves a code dependency, not that both rooms have the same textual error or teaching purpose.",
+          "Derive spacing from script, scene and placement. Do not change grid sizes merely to match an old sentence.",
+          "Two decimal places fit the current 0.05 m spacing; a finer configuration requires an appropriate display precision."
+        ],
+        "lesson_ids": [
+          "the-join-is-the-tool",
+          "when-a-number-flatters-you-re-derive-it",
+          "a-tool-is-answerable-for-what-it-changes",
+          "display-the-point-the-tool-keeps"
+        ]
+      },
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Point_Line_Grid",
+          "prediction": "Adjacent lattice positions must remain distinguishable and the dropped marker must match the retained point.",
+          "observed": "Actual-scene checks pass at 0.05 m spacing, including a 0.7 m placement offset; table persists after release. Human viewing distance remains unchecked.",
+          "evidence": "doc/book/iterations/2026-09-08-primitives/snap_and_pen.json"
+        },
+        {
+          "date": "2026-09-08",
+          "room": "Point_One",
+          "prediction": "The same correction must survive the introductory room's different placement.",
+          "observed": "The zero-offset placement passes the same retained-position/drop checks. This establishes shared code behavior, not identical teaching outcomes.",
+          "evidence": "doc/book/iterations/2026-09-08-primitives/snap_and_pen.json"
+        }
+      ]
+    },
+    {
+      "id": "trace-recording-contract",
+      "room_id": "Point_Trace",
+      "priority": 2,
+      "title": "Walk the pen's visible memory rule, then compare Translation",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "second_room",
+      "why": "The pen now exposes capacity, movement threshold and grid spacing; its text matches the four current pens and the room's new telemetry/desk comparisons. Inspecting another recorder also revealed and repaired an elapsed-time speed error.",
+      "next_step": "Follow the revised Trace opening in free space: loop, pause, small bend; compare the default and 80 mm pen. Check the board projection separately. In Translation, repeat a short safe walking segment faster and with a pause; compare the visible path with its speed tint.",
+      "done_when": [
+        "Pausing the pen does not increase the accepted-point count merely because time passes; a new qualifying position does.",
+        "The default and coarse pens let the visitor observe which small movements become the same stored point; instructions identify free-space or board use.",
+        "A controlled low-capacity check shows eviction by accepted-point count. The text no longer promises a fixed time horizon or another visitor's archived stroke."
+      ],
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "critical_question": "A record can erase difference before it runs out of space. Can two gestures leave the same trace, and what would you need to keep to distinguish them?",
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/primitives/point/draw_dot.gd",
+          "sha256": "60f465f573372c2a38ea311fb78323678ae5a86661cd46d48a002af0072fb98e"
+        },
+        {
+          "path": "commons/primitives/point/draw_dot.tscn",
+          "sha256": "6f387a85ea15b5c40488c0edb4d5739900d7cfedc4c529b0db6e397366f259d7"
+        },
+        {
+          "path": "commons/primitives/point/draw_stick.tscn",
+          "sha256": "5cd9f9881209dcf0f04ce397e53a05877d689b6a3a3021de6c2f1d78a8044e35"
+        },
+        {
+          "path": "commons/maps/Point_Trace/map_data.json",
+          "sha256": "b2faed88c51797ffbb37005c0994c7169187ebe2faa6555c9ee8f0d1f180bda5"
+        },
+        {
+          "path": "commons/maps/Point_Trace/final.md",
+          "sha256": "85c0557b5442426fb9c54cc71881a1205acf4ee02ecb4a897bb56a3b1f7ce593"
+        },
+        {
+          "path": "commons/primitives/point/draw_dot_time_domain.gd",
+          "sha256": "90e42c6931a62d3f5e3655864287610b1b9363a5d8f9e90808c752a16aef2b39"
+        },
+        {
+          "path": "commons/primitives/point/player_trace.gd",
+          "sha256": "d3cd0eadaa545b0d5129ac11a1b9b9d3b7d98faaf44f472b7a510648d392966e"
+        },
+        {
+          "path": "commons/maps/Trans_Translation/map_data.json",
+          "sha256": "ff629bae2c21c4b066678717b3eb9d0f148816e4410dd8e1a74cb9ae5b693805"
+        },
+        {
+          "path": "commons/maps/Trans_Translation/final.md",
+          "sha256": "11563dd395ce76996ae66b583a2627304a866d7bd7632d23226208bc03881b5f"
+        },
+        {
+          "path": "tools/probes/museum_trace_speed.gd",
+          "sha256": "9ffec4e434fceffe8c7bc19a8c1a991350b00565b1562229c22ff472a28f3b75"
+        }
+      ],
+      "reuse": {
+        "principle": "Expose the recording contract: sample trigger, coordinate frame, quantization, retained fields and eviction.",
+        "mechanism": "draw_dot and draw_stick share draw_dot.gd in the pilot room. player_trace is a different implementation where the inspection method may transfer.",
+        "tokens": [
+          "draw_dot",
+          "draw_stick"
+        ],
+        "method_rooms": [
+          {
+            "id": "Point_Line_Grid",
+            "reason": "player_trace also retains a bounded sampled path, with a placement-specific 1 m lattice and discarded-path display."
+          },
+          {
+            "id": "Trans_Translation",
+            "reason": "The same player_trace component appears with default settings; compare its own trigger, frame and retention."
+          }
+        ],
+        "second_room": "Trans_Translation",
+        "second_test": "Inspect player_trace's own script, scene and placement, then repeat loop / pause / small gesture in Trans_Translation. Record which parts of the method transfer and which settings or feedback must differ.",
+        "limits": [
+          "A shared concept is an experiment candidate, not an automatic code rollout.",
+          "Whiteboard projection changes the frame; test it separately before extending free-space instructions.",
+          "The prepared retention:trace illustration is not evidence of an archived live visitor stroke.",
+          "player_trace before spatial duplicate suppression. In the unsnapped Trans_Translation placement, admitted measurement and retained point coincide. Coarse Grid points can omit intermediate measurements; their speed is not necessarily displacement between displayed lattice nodes divided by their timestamps."
+        ],
+        "lesson_ids": [
+          "seen-beats-clever",
+          "when-a-number-flatters-you-re-derive-it",
+          "sampling-contract-follows-the-sampler",
+          "speed-needs-the-displacements-interval"
+        ]
+      },
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Point_Trace",
+          "prediction": "A movement-triggered pen must reject a stationary interval and report its actual capacity and quantization.",
+          "observed": "Base dot/stick checks pass; labels update after eviction. The timer-derived pen needed a separate sampling description because stationary time does add samples there. New desk/telemetry artifacts are now represented in the manuscript.",
+          "evidence": "doc/book/iterations/2026-09-08-primitives/snap_and_pen.json"
+        },
+        {
+          "date": "2026-09-08",
+          "room": "Trans_Translation",
+          "prediction": "A supplied 1 m/s body should retain a 1 m/s rate when samples are gated.",
+          "observed": "Before correction it reported 5 m/s; after correction timed, distance-gated and every-frame cases report approximately 1 m/s. The Translation passage now describes retained fields and pauses. Active-rig and learner checks remain open.",
+          "evidence": "doc/book/iterations/2026-09-08-primitives/trace_speed.json"
+        }
+      ]
+    },
+    {
+      "id": "triangle-fan-counterexample",
+      "room_id": "Point_Triangle_Context",
+      "priority": 3,
+      "title": "Try the repeatable L-shaped triangle-fan counterexample",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "pilot",
+      "why": "The same six-corner L now has a tested counterexample and an actual New Outline button. Changing the first corner keeps the boundary but produces overspill; the manuscript gives the timed placement and comparison.",
+      "next_step": "Follow the revised triangle passage: close a simple triangle, then draw A→B→C→D→E→F→A in one plane. Release, press NEW OUTLINE, pick up and reuse the corners as B→C→D→E→F→A→B. Record whether the visitor can make both fills and identify the unwanted part without an explanation first.",
+      "done_when": [
+        "A visitor can follow the recorded gestures to make the simple loop and the counterexample.",
+        "The chosen starting vertex reproducibly makes an unwanted triangle visible; keep searching if the first concave loop fills correctly.",
+        "The passage explains the filling method's extra choice and invites changing the outline or starting point, without claiming concave shapes cannot have surfaces."
+      ],
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "critical_question": "Does this filling rule respect the boundary you drew? Keep a planar, simple concave outline fixed and begin at another vertex: the intended interior stays the same, while the fan may fill it differently.",
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/primitives/point/draw_triangle_faces.gd",
+          "sha256": "26082aa273ca9aa5fc3b5496296e99ce21354f72a31b1865bf3aed3e4c96f0ac"
+        },
+        {
+          "path": "commons/primitives/point/draw_triangle_faces.tscn",
+          "sha256": "0f32664de38ea8b65fcda85e40b05d9b95e67f6372e4a0235efa0efc21b0e6bc"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/map_data.json",
+          "sha256": "43da38706c3220c73b5db1826c66fc819f1ebd1fe83a13463d249e18c00d9239"
+        },
+        {
+          "path": "commons/maps/Point_Triangle_Context/final.md",
+          "sha256": "df796198b31ac836bc8d9be26946cb20b84ce63a08aa868868f6363749154b98"
+        },
+        {
+          "path": "tools/probes/museum_triangle_fan.gd",
+          "sha256": "2ddb221bfd6ee669ac8a9ccd006fced6fc98fbc5e9f949f335889879263dba7d"
+        }
+      ],
+      "reuse": {
+        "principle": "Teach a representation through a working example and one reproducible counterexample to its assumptions.",
+        "mechanism": "Only this live spine room currently places draw_triangle_faces. A broader method may transfer after a second concrete experiment is chosen.",
+        "tokens": [
+          "draw_triangle_faces"
+        ],
+        "method_rooms": [],
+        "second_room": null,
+        "second_test": "After the pilot works, choose a different representation with a specific assumption and reproduce its own counterexample. Name that room before promoting this into a rollout.",
+        "limits": [
+          "Concavity alone does not make every triangle fan fail; the outline and starting vertex are part of the evidence.",
+          "A failure can become a critical encounter only when the visitor can reproduce and interpret it."
+        ],
+        "lesson_ids": [
+          "the-fault-is-often-the-argument",
+          "seen-beats-clever",
+          "counterexamples-need-a-repeatable-control"
+        ]
+      },
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Point_Triangle_Context",
+          "prediction": "Changing only the first vertex may change the fan while the polygon's intended interior stays fixed.",
+          "observed": "The real scene emits four triangles for each start; A has no outside centroids and B has two. A real pointer-button event begins the next outline while preserving completed faces. Supplied positions establish reproducibility in the engine; a hand-drawn trial remains.",
+          "evidence": "doc/book/iterations/2026-09-08-primitives/triangle_fan.json"
+        }
+      ]
+    },
+    {
+      "id": "melencolia-useful-completion",
+      "room_id": "Primitives_Melencolia",
+      "priority": 4,
+      "title": "Walk the restored pyramid court and Dürer platform",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "pilot",
+      "why": "The historical four-corner court, long centre pyramid and separate higher Dürer deck are restored. Actual-museum support and physics checks pass; a learner walk is the next improvement check.",
+      "next_step": "Enter from the front gallery, climb the west ramp, compare the four equal corners with the long centre and cross of cubes, then follow the raised connection and upper ramp to Dürer. Return by the surrounding floor and rear turning space to the exit. Record whether a solo visitor can read the composition before its explanation, then try the group walk.",
+      "done_when": [
+        "A visitor can identify the four equal corners, long centre and cross of cubes from floor and court views.",
+        "The visitor can climb both ramps, inspect Dürer on its separate deck and follow the surrounding route to the exit with their actual controls.",
+        "The passage matches the built arrangement and distinguishes the puzzle's recognition response from the already-existing architecture and a visitor's chosen purpose."
+      ],
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "critical_question": "What does the same arrangement let you see or do from different positions, and which purpose would you choose for it beyond satisfying the connection detector?",
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/maps/Primitives_Melencolia/map_data.json",
+          "sha256": "8fed9482f93c4828aa87adc6e6c29e3444ebcc966afad630eac0ea1bcb8d5a2a"
+        },
+        {
+          "path": "commons/maps/Primitives_Melencolia/final.md",
+          "sha256": "035502c5a3ccd415baae246a9fcc6828c36c48e105b1fcd5e924b246b5c636d4"
+        },
+        {
+          "path": "commons/scenes/endless_museum.gd",
+          "sha256": "eb106a0da0ef494660f184e4276266d9c1e3d87c12f73ad45991cd744e3f7d67"
+        },
+        {
+          "path": "commons/primitives/snappoint/puzzles/snap_pyramid_puzzle.tscn",
+          "sha256": "6a6bef05eb26af1ad96488c1a88480d76edcd62b261766230367b6cb38490a42"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-melencolia-restoration/report.json",
+          "sha256": "a8918e54d46f39974564a1287cd23a327c8a0ad14b7ba0e299fca74ee7633d77"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-melencolia-restoration/README.md",
+          "sha256": "120fc2286f5277fd183f967caab4fc85767d5051aa6f2c91a15d5c2742fee03d"
+        }
+      ],
+      "reuse": {
+        "principle": "When prose and space disagree, inspect the room's history for a lost spatial relationship before deciding what to rebuild or rewrite.",
+        "mechanism": "A map-scoped restoration from the last intact grid composition, checked in the actual museum with its generated dressing and physics.",
+        "tokens": [],
+        "method_rooms": [],
+        "second_room": null,
+        "second_test": "Choose another room whose remembered composition was flattened or rearranged; find its last intact layout and verify its own elevations, artifacts and route before applying this method.",
+        "limits": [
+          "The immediately pre-museum revision already contained drift; its timing alone did not make it the right reference.",
+          "The enlarged deck and rear turning space fit this tableau and museum dressing; copying their dimensions is not a general solution.",
+          "Engine support and movement checks do not establish human comfort or teaching outcomes.",
+          "History is evidence to inspect: restore an arrangement when it still serves the room's question; distinguish never-built promises and obsolete designs from lost structure."
+        ],
+        "lesson_ids": [
+          "recover-lost-spatial-relationships"
+        ]
+      },
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Primitives_Melencolia",
+          "prediction": "Restore the user's remembered static court and Dürer platform from Git, then verify their support and route in the current museum.",
+          "observed": "Found the intact July layout, restored four equal corners/long centre/cross cubes and two raised decks. Actual-museum support, both ramp ascents, the floor bypass, rear turn and exit pass. Added two rear circulation rows after generated sculpture narrowed the first return route. The earlier puzzle-spawn proposal was superseded by this historical evidence and the user's clarification.",
+          "evidence": "doc/book/iterations/2026-09-08-melencolia-restoration/report.json"
+        }
+      ]
+    },
+    {
+      "id": "portals-reachable-comparison",
+      "room_id": "Primitives_Portals",
+      "priority": 5,
+      "title": "Fit the portal comparison to a route a visitor can actually walk",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "proposal",
+      "why": "The scene constructs twenty rings at 4.5 m intervals, about 85.5 m between first and last centres. A reachable token origin is insufficient evidence that the full ladder fits this room.",
+      "next_step": "Measure the generated ladder in the loaded room and follow its accessible route. If later rings lie beyond it, expose a scoped count/spacing configuration or arrange a shorter comparison whose increasing subdivisions remain readable. Test early→late and reverse reading before changing the manuscript's walk.",
+      "done_when": [
+        "At least an early and a later ring are reachable and can be compared at a known viewing distance.",
+        "The route preserves the entry and exit.",
+        "The text describes the installed comparison and distinguishes an aperture from a transport mechanism."
+      ],
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "critical_question": "Who chooses when refinement is sufficient, and what becomes visible if you walk the order backwards?",
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/maps/Primitives_Portals/map_data.json",
+          "sha256": "d53f3585b2c878c14d56a14de82f6598fb65933a2c6f902a08eb9b4b41106528"
+        },
+        {
+          "path": "commons/maps/Primitives_Portals/final.md",
+          "sha256": "9c121f63027df3b2e4cb998fa51ec0b1f089b71d8932752c3c21f3067e0f3806"
+        },
+        {
+          "path": "commons/primitives/combines/combine_portals.gd",
+          "sha256": "33194450466bd14b8effb8ca0e2aff81eff8258e2958e29d999de286014cc1bc"
+        }
+      ],
+      "reuse": {
+        "principle": "Recognition, reachable consequence and the visitor's purpose need separate checks.",
+        "mechanism": "A source-grounded build candidate discovered during the ten-room pass.",
+        "tokens": [],
+        "method_rooms": [],
+        "second_room": null,
+        "second_test": "Choose a contrasting room only after this encounter works.",
+        "limits": [
+          "No working spatial outcome or transferable learner result is established yet."
+        ],
+        "lesson_ids": []
+      }
+    },
+    {
+      "id": "array-addresses-persist",
+      "room_id": "Array",
+      "priority": 0,
+      "title": "Try the empty-slot comparison in Array, then Disco",
+      "why": "The row and grid now stand on continuous floor. Collection changes exactly one value; the grid plate remains while the row label leaves. Desktop pickup detection also needed repair.",
+      "next_step": "Read the Array opening with one visitor. Let them predict a row collection, then collect one off-diagonal grid cube. Before explaining, ask them to identify each empty slot and say what the zero does and does not record. Repeat the address/value distinction by switching one sequencer cell off in Disco.",
+      "done_when": [
+        "Engine: the museum walker collects one row cube and one grid cube, only their values change, and both tested approach/return segments pass.",
+        "Learner: locates the empty grid slot by its surviving plate and explains the distinction between address and occupancy before reading the explanation.",
+        "Second room: an inactive Disco cell keeps its address while its next reading adds no note; record what the visitor transfers and what needs explaining."
+      ],
+      "critical_question": "Can a zero distinguish absence, a reserved place and a rest? What would you need to retain to tell those apart?",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "second_room",
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/scenes/mapobjects/pick_up_cube.gd",
+          "sha256": "fc4599790d901965a0688c5f031812653d3261ad4e611bd9c35b2137e04b617c"
+        },
+        {
+          "path": "commons/scenes/mapobjects/pick_up_cube.tscn",
+          "sha256": "b58dd2b472b40498ce7bb2fa388126eb7fcdc7c52a054bac4464b1d274bac619"
+        },
+        {
+          "path": "algorithms/arrays/row_3_x.gd",
+          "sha256": "48220ac5cb4b41618cc2e6b73c02ffb54ebc162ecca88aea329e964a0ef306aa"
+        },
+        {
+          "path": "algorithms/arrays/grid_2d_4x4.gd",
+          "sha256": "9318036545bbbebbf1518400a9535ed9a2f96f98293f84bf9892c3c9be9ef856"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/array-runtime.json",
+          "sha256": "4f4ff6f9ec74e948a737c22cc2e5db00a5fb5f4f1b961e8bcf3d1ead50340c10"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/array-museum.json",
+          "sha256": "654de6a68c5c1999c4833b295999a5d65f1fc71c66c370d559a7db0b20dde21b"
+        },
+        {
+          "path": "commons/maps/Array/map_data.json",
+          "sha256": "5e0344043f1ea8ccb2f5a680ecf9d0444e68bf0f5b67bc85eb679b8d5d7806a6"
+        },
+        {
+          "path": "commons/maps/Array/final.md",
+          "sha256": "a199aa637d0651c3d3c766aa88267620b912148814fbd5c8327303ae5e831c22"
+        }
+      ],
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Array",
+          "prediction": "Engine: the museum walker collects one row cube and one grid cube, only their values change, and both tested approach/return segments pass.",
+          "observed": "Engine: 21 actual-scene checks cover exact updates, a rectangular grid, retained addresses and contact/negative cases. Actual museum walker collection and return segments pass for row and grid; four support rays pass. Rendered grid plates were inspected. Headset comfort, whole-route traversal and learner understanding remain open.",
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+        }
+      ],
+      "reuse": {
+        "principle": "Keep a visible address when its occupant or value changes, then check that the resulting readout still names the same slot.",
+        "mechanism": "Room-specific implementation and runtime evidence recorded in the encounter pilot.",
+        "tokens": [
+          "row_3_x",
+          "grid_2d_4x4"
+        ],
+        "method_rooms": [
+          {
+            "id": "Tutorial_Disco",
+            "reason": "Switch one cell off, hear its next reading remain silent, and find the same cell again after a tempo change. The 16-step sequencer and 12-column floor must be distinguished."
+          }
+        ],
+        "second_room": "Tutorial_Disco",
+        "second_test": "Switch one cell off, hear its next reading remain silent, and find the same cell again after a tempo change. The 16-step sequencer and 12-column floor must be distinguished.",
+        "limits": [
+          "Row labels intentionally leave with their occupants as the comparison case.",
+          "A preserved address does not preserve the reason for absence or its history.",
+          "Disco is a method comparison with different code, time and representation limits."
+        ],
+        "lesson_ids": [
+          "keep-an-address-when-its-value-changes"
+        ]
+      }
+    },
+    {
+      "id": "single-contact-once",
+      "room_id": "Tutorial_Single",
+      "priority": 0.1,
+      "title": "Try the contact lesson with the museum walker",
+      "why": "The pickup scene previously excluded the desktop museum Walker. Detection now accepts that body while retaining VR detection and rejecting unrelated bodies.",
+      "next_step": "Pause outside the pickup, predict the effect of approaching, make contact and describe the difference between its idle animation, the collection event and the resulting absence. Record whether the visitor can see the response and return to the route.",
+      "done_when": [
+        "Engine: unrelated body overlap and waiting outside do not collect; the desktop museum walker and VR body collect once; demo mode remains unchanged.",
+        "Learner: distinguishes a contact event from the persistent collected state, without being told that disappearance proves understanding.",
+        "Space: inspect the actual approach, visibility and return in the full museum; record headset and controller limitations separately."
+      ],
+      "critical_question": "What did the detector fail to notice about your pause before you approached?",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "pilot",
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/scenes/mapobjects/pick_up_cube.gd",
+          "sha256": "fc4599790d901965a0688c5f031812653d3261ad4e611bd9c35b2137e04b617c"
+        },
+        {
+          "path": "commons/scenes/mapobjects/pick_up_cube.tscn",
+          "sha256": "b58dd2b472b40498ce7bb2fa388126eb7fcdc7c52a054bac4464b1d274bac619"
+        },
+        {
+          "path": "tools/probes/pickup_encounter.gd",
+          "sha256": "3ea269241af65c6d4b7cf58e48744227f133463ccf3d2bc2e476445f05cd2b1b"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/pickup-after.json",
+          "sha256": "b17ed756890972f8dece8ae7cbcf7df5998405dfb8388077adcf59af9de1ecdb"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/single-museum.json",
+          "sha256": "b065665b69504778d301247b0a0f79042ddb8686492f40551d261816b5d49051"
+        },
+        {
+          "path": "commons/maps/Tutorial_Single/map_data.json",
+          "sha256": "d0bf3f596abad38c52360c18fd86cce04ddd4d14c7debe125268872b08ebed83"
+        },
+        {
+          "path": "commons/maps/Tutorial_Single/final.md",
+          "sha256": "c70bc260d6ad9269ee03dd24c325bd2baf5a15c9893a79633a23c0a3280c2d4c"
+        }
+      ],
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Tutorial_Single",
+          "prediction": "Engine: unrelated body overlap and waiting outside do not collect; the desktop museum walker and VR body collect once; demo mode remains unchanged.",
+          "observed": "Engine: actual Area3D overlap tests preserve XR collection, accept the museum walker, reject an unrelated layer-1 body, and retain demo mode. A separate museum probe records the installed room approach. These checks do not establish learner understanding.",
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+        }
+      ],
+      "reuse": {
+        "principle": "Test the body that actually enters the museum, including an unrelated-body negative case.",
+        "mechanism": "Room-specific implementation and runtime evidence recorded in the encounter pilot.",
+        "tokens": [
+          "pick_up_cube"
+        ],
+        "method_rooms": [
+          {
+            "id": "Array",
+            "reason": "Collect an array occupant through actual walker contact and inspect its dependent table update. Merely calling collect() does not verify detection or reach."
+          }
+        ],
+        "second_room": "Array",
+        "second_test": "Collect an array occupant through actual walker contact and inspect its dependent table update. Merely calling collect() does not verify detection or reach.",
+        "limits": [
+          "The shared pickup is widely used; keep existing VR detection and demo behavior in the regression check.",
+          "Controller reach and comfort are not established by a desktop overlap test."
+        ],
+        "lesson_ids": [
+          "a-tool-is-answerable-for-what-it-changes"
+        ]
+      }
+    },
+    {
+      "id": "disco-stored-step-trace",
+      "room_id": "Tutorial_Disco",
+      "priority": 0.2,
+      "title": "Predict one Disco note, then silence its address",
+      "why": "The visible playhead previously led the sound by one step, and a floor could follow another hall's sequencer. Both are repaired; the chapter distinguishes audition, playback and independent floor animation.",
+      "next_step": "Start with an empty pattern, activate one cell and predict its returning note. Switch that cell off, wait for its next reading, then change tempo. Compare the first and thirteenth steps on the second track with the twelve-column floor.",
+      "done_when": [
+        "Engine: sounding and highlighted addresses agree, including wrap; inactive cells add no event; the bridge stays inside its own hall.",
+        "Learner: predicts the next event and explains how an inactive cell can retain its address.",
+        "Space: use the restored panel at its authored height/scale; verify headset reading and pointing before accepting the room."
+      ],
+      "critical_question": "Which timing differences does the step grid discard, and which different step addresses does the floor show as the same column?",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "second_room",
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "commons/audio/sequencer/step_sequencer.gd",
+          "sha256": "319e801f9b12d32112ce33137a7039cd1f6acda0b796dc044e5d8524c56cd8c1"
+        },
+        {
+          "path": "commons/audio/sequencer/sequencer_ui.gd",
+          "sha256": "991b8087fd483890ed7183530bb5d5db7a006418253c75ea25baa28099406499"
+        },
+        {
+          "path": "commons/context/discofloor/DiscoSequencerBridge.gd",
+          "sha256": "dae7721972aaa4345cbfef5646f1731fbf15b09d5659dbdcc656f8397b660652"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/disco-runtime.json",
+          "sha256": "a04bf8777b1440aa23453c18119bb8f263a836f7280b280bffda768cf4c78cab"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/disco-museum.json",
+          "sha256": "df1320e1c73d6f9a24f787947ee96e5334628d253c95754bb69f25646890b602"
+        },
+        {
+          "path": "commons/maps/Tutorial_Disco/map_data.json",
+          "sha256": "786e7b8664336dc87cba85ad43330d3c0b1be412f3d028d6b105fc4977273445"
+        },
+        {
+          "path": "commons/maps/Tutorial_Disco/final.md",
+          "sha256": "a36aa50ca13d9eb956d6baddf99d9707b14ca2dfcc18dd5b80cdfb86d12f8e7d"
+        }
+      ],
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Tutorial_Disco",
+          "prediction": "Engine: sounding and highlighted addresses agree, including wrap; inactive cells add no event; the bridge stays inside its own hall.",
+          "observed": "Engine: 17 actual-scene checks pass, including a silent-cell negative case, step 15/0, two-hall isolation, persistent button identity, tempo, the 16-to-12 fold and preset display agreement without preview audio. The separate museum report records placement/render inspection. Listening in a headset and learner interpretation remain open.",
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+        }
+      ],
+      "reuse": {
+        "principle": "Display the address being read, and distinguish stored state from the process reading it.",
+        "mechanism": "Room-specific implementation and runtime evidence recorded in the encounter pilot.",
+        "tokens": [
+          "step_sequencer",
+          "standalone_disco"
+        ],
+        "method_rooms": [
+          {
+            "id": "Array",
+            "reason": "Compare an inactive sequencer cell with an empty array slot: both remain addressable, but only the sequencer repeatedly revisits its addresses in time."
+          }
+        ],
+        "second_room": "Array",
+        "second_test": "Compare an inactive sequencer cell with an empty array slot: both remain addressable, but only the sequencer repeatedly revisits its addresses in time.",
+        "limits": [
+          "The floor has 12 columns; the sequencer has 16 steps. Their positions are not interchangeable.",
+          "Floor animation continues independently; not every flash is evidence of a sequencer event."
+        ],
+        "lesson_ids": [
+          "keep-an-address-when-its-value-changes"
+        ]
+      }
+    },
+    {
+      "id": "remove-bounded-candidates",
+      "room_id": "Random_Remove",
+      "priority": 0.3,
+      "title": "Try Random Remove's restored candidate board",
+      "why": "Git preserved the old eight-by-eight grid relationship. The museum now has an explicitly owned board with visible eligibility, one-step removal and reset; unbound removers no longer search the surrounding scene.",
+      "next_step": "Choose RANGE, name the sixteen candidates and one excluded cube, then remove one member. Empty the set and press again to check the grey border survives. Reset, then deliberately use the gaps as a drawing and describe how your stopping choice changes the process.",
+      "done_when": [
+        "Engine: RANGE/ROW/COLUMN/ALL expose 16/8/8/64 candidates, removals never repeat a missing member, reset restores the chosen set, and unrelated objects survive.",
+        "Space: the installed bench and six controls have recorded support and clear approach rays.",
+        "Learner: names eligible and excluded objects before the draw, and distinguishes unpredictable order from a predictable final empty region."
+      ],
+      "critical_question": "Who draws the boundary within which chance is allowed to act, and what changes when you stop the process to make a drawing?",
+      "kind": "curated",
+      "status": "ready",
+      "stage": "pilot",
+      "registers": [
+        "SPACE",
+        "TUTORIAL",
+        "BOOK",
+        "CRITICAL"
+      ],
+      "dependencies": [],
+      "evidence": [
+        {
+          "path": "algorithms/randomness/RemoveRandom.gd",
+          "sha256": "e88afb3271918a52acdcd3f31975235e29e274d3586f21523081374b6d8d35a6"
+        },
+        {
+          "path": "algorithms/randomness/remove_random_fixture.gd",
+          "sha256": "bfa0c0b4dda7a0c4e65c415557f217b28baed322af8cce60fd449683364bbe75"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/random-runtime.json",
+          "sha256": "b2e3392548fb79bc12d15db1446f82f25996bc21ac7d2469a7d9b3b7ded169f8"
+        },
+        {
+          "path": "doc/book/iterations/2026-09-08-encounter-pilot/random-museum.json",
+          "sha256": "8af616be3daa236c5b6dccc4cce840c06c1e1481f688d96d3231cc1013cd8fe9"
+        },
+        {
+          "path": "commons/maps/Random_Remove/map_data.json",
+          "sha256": "896054c3ff82e5a431315a4134b45a411c26072bf4e5cb8555476080a5cd2668"
+        },
+        {
+          "path": "commons/maps/Random_Remove/final.md",
+          "sha256": "a17afdc7ef711ba73ad85f3cebcb3f9d2b6ff5debc5ce6210939e384784c485f"
+        }
+      ],
+      "observations": [
+        {
+          "date": "2026-09-08",
+          "room": "Random_Remove",
+          "prediction": "Engine: RANGE/ROW/COLUMN/ALL expose 16/8/8/64 candidates, removals never repeat a missing member, reset restores the chosen set, and unrelated objects survive.",
+          "observed": "Engine: 14 isolated and 12 museum checks cover eligibility, distinct removals, exhaustion, reset, controls and preservation of unrelated objects. The restored relationship is adapted into a local bench; headset use and learning remain unverified.",
+          "evidence": "doc/book/iterations/2026-09-08-encounter-pilot/README.md"
+        }
+      ],
+      "reuse": {
+        "principle": "Use history to recover a lost relationship, then adapt it into an explicitly owned, testable encounter.",
+        "mechanism": "Room-specific implementation and runtime evidence recorded in the encounter pilot.",
+        "tokens": [
+          "remove_random"
+        ],
+        "method_rooms": [
+          {
+            "id": "Primitives_Melencolia",
+            "reason": "Compare the two restorations: Melencolia recovers spatial composition; Random Remove recovers the candidate grid a computation acts on. Record the different verification each requires."
+          }
+        ],
+        "second_room": "Primitives_Melencolia",
+        "second_test": "Compare the two restorations: Melencolia recovers spatial composition; Random Remove recovers the candidate grid a computation acts on. Record the different verification each requires.",
+        "limits": [
+          "Historical recovery does not require reproducing the entire old map.",
+          "An unconfigured remover stays idle; other maps need their own deliberate local target.",
+          "Seven other current randomness rooms remain absent from the generated plan; this action restores Random_Remove only."
+        ],
+        "lesson_ids": [
+          "recover-lost-spatial-relationships"
+        ]
+      }
+    }
+  ]
+}

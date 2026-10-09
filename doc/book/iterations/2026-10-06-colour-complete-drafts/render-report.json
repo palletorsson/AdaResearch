@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "id": "rainbow/image",
+      "passed": true
+    },
+    {
+      "id": "rainbow/three_distinct_bands",
+      "passed": true
+    },
+    {
+      "id": "pillar-middle/image",
+      "passed": true
+    },
+    {
+      "id": "pillar-high/image",
+      "passed": true
+    },
+    {
+      "id": "pillar/value_rises",
+      "passed": true
+    },
+    {
+      "id": "grid-rule/image",
+      "passed": true
+    },
+    {
+      "id": "grid-mark/image",
+      "passed": true
+    },
+    {
+      "id": "grid/retained_visible_mark",
+      "passed": true
+    },
+    {
+      "id": "paint-marks/image",
+      "passed": true
+    },
+    {
+      "id": "paint/mark_and_blank",
+      "passed": true
+    },
+    {
+      "id": "paint/ray_deposits",
+      "passed": true
+    },
+    {
+      "id": "walls-filter/image",
+      "passed": true
+    },
+    {
+      "id": "walls-opaque/image",
+      "passed": true
+    },
+    {
+      "id": "walls/background_contributes",
+      "passed": true
+    }
+  ],
+  "failure_ids": [],
+  "passed": true,
+  "renderer": "NVIDIA GeForce RTX 3070",
+  "scope": "Exact draft examples in an isolated supplied camera/light fixture; not museum or headset captures."
+}

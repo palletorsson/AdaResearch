@@ -1,0 +1,18 @@
+--- before/algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd
++++ after/algorithms/randomness/proceduralrandomness/particlerandomness/extrem_randomness.gd
+@@ -135,12 +135,9 @@
+ 	
+ 	This is how birds flock, fish school, and complex social systems form.""",
+ 	
+-	"""Evolutionary algorithms use random mutations guided by selection.
+-	
+-	Like natural evolution, randomness explores possibilities while selection preserves
+-	what works. This combination can solve problems in ways humans wouldn't imagine.
+-	
+-	This approach produces novel art, music, designs, and engineering solutions."""
++	"""Particles are ranked by distance from a moving target.
++	The leading tenth guide the others, with random changes to their movement.
++	The same particles remain: this sketch selects influences, not parents or offspring."""
+ ]
+ 
+ # Initialize

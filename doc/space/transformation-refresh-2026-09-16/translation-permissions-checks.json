@@ -1,0 +1,102 @@
+{
+  "actual_endless_museum": true,
+  "checks": [
+    {
+      "name": "actual museum grid exists",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "two door studies instantiated",
+      "passed": true,
+      "value": 2
+    },
+    {
+      "name": "authored course arrived intact",
+      "passed": true,
+      "value": "lift_lateral"
+    },
+    {
+      "name": "authored yaw preserved",
+      "passed": true,
+      "value": -179.999984741211
+    },
+    {
+      "name": "lift_lateral handle within standing reach",
+      "passed": true,
+      "value": 1.29999995231628
+    },
+    {
+      "name": "lift_lateral pickup signal accepted",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "guided first leg refuses sideways movement",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "lift unlocks sideways leg",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "lift_lateral reaches shared displacement",
+      "passed": true,
+      "value": "(-0.52, 0.25, 0.0)"
+    },
+    {
+      "name": "lift_lateral release signal accepted",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "lift_lateral resets for next visitor",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "authored course arrived intact",
+      "passed": true,
+      "value": "free"
+    },
+    {
+      "name": "authored yaw preserved",
+      "passed": true,
+      "value": -179.999984741211
+    },
+    {
+      "name": "free handle within standing reach",
+      "passed": true,
+      "value": 1.27999997138977
+    },
+    {
+      "name": "free pickup signal accepted",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "free study permits simultaneous components",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "free reaches shared displacement",
+      "passed": true,
+      "value": "(-0.52, 0.25, 0.0)"
+    },
+    {
+      "name": "free release signal accepted",
+      "passed": true,
+      "value": null
+    },
+    {
+      "name": "free resets for next visitor",
+      "passed": true,
+      "value": null
+    }
+  ],
+  "failures": [],
+  "headset_tested": false
+}

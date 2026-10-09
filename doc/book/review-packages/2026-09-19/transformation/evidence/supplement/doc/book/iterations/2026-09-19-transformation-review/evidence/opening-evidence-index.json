@@ -1,0 +1,264 @@
+{
+  "audit_date": "2026-09-19",
+  "sources": [
+    {
+      "path": "commons/grid/UtilityRegistry.gd",
+      "sha256": "461c2a3cf6d3988e26ba1e07dea907b00e535ebc717ddeb6c808c494d90447cc",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/grid/GridUtilitiesComponent.gd",
+      "sha256": "c3d8c3f47c3506081bdaf2cf5bb82b5045e9aebea17185c096cb5e6234875287",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/grid/GridCommon.gd",
+      "sha256": "4585ec60b6564206f28451f3a09b9c048628b40662fb0e3f95174cb35a4bf68f",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/grid/GridStructureComponent.gd",
+      "sha256": "7d33537b5e0d0c9bfe9c94e314a70596a83b2dd91485c8063bbee4bcf92efc99",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/grid/GridSystem.gd",
+      "sha256": "3004b4b6891bc0b8164ad985487d6ec29c48404ae741aac404ef722cee219a5d",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/grid/grid_system.tscn",
+      "sha256": "750ed70edd4f936e3840bd12cc0aff5870605aa564a0eb37edd5d96f95055a85",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/endless_museum.gd",
+      "sha256": "4701f0857f9134b39494a15162dd70a587eff0227062ccb9e001dff3bd79611c",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/transport_cube.tscn",
+      "sha256": "358384c05506f08e40646c9b3749d54698ac8e41cc683234ed3b18b4f15a27c6",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/transport_cube.gd",
+      "sha256": "6309d0221cdaee631de109d40f230ad3c6be260df9758f37de70f8ced713db3d",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/scale_cube.tscn",
+      "sha256": "862b59e6f9fb6dee1e5eabe677e50bc5e17b2cb6169e4c4417c95dd3be48b59b",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/scale_cube.gd",
+      "sha256": "8b410c166fb2c561d68cc70bfbbcfc74db27ab51eb5a4adf87cbcc206e4b3b04",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/rotation_cube.tscn",
+      "sha256": "cdb445fef77838bc1e146ed198281e59ae4925015adedff6a603d9ee066fcc5d",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/rotation_cube.gd",
+      "sha256": "89d84ed52a1ea27666cd3ebc4ea436ac773a409c0f2cfa8f2b91289183b89366",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/scenes/mapobjects/walkableprism.tscn",
+      "sha256": "d3001ec41ab05950ebe8706fb7b6fd1be88e0f71ac880a5575741fded5634403",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/primitives/cubes/cube_scene.tscn",
+      "sha256": "8fb5db55fb30bc9580593c93732eeb089873f6be3ff154a61e5517ac12a2f755",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/primitives/cubes/cube_scene.gd",
+      "sha256": "77e5ae122082a331a4d326da6464f2de04e477cf9bb7e9ea3d24172a04f93783",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/primitives/shared/solid_primitive_finish.gd",
+      "sha256": "a966478b26d12d11ab0c0bce477c422733db2b5ffb951b972dba62b2f99d4121",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "addons/godot-xr-tools/player/player_body.gd",
+      "sha256": "66159167a1848b5ea8e48d5091bd3ee5b549315e15d3c4a43c935c85493582da",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "addons/godot-xr-tools/player/player_body.tscn",
+      "sha256": "ef6a6e032284409cdc80ab3cd59618fc48e77540dfad9179daad359a3ffac7e5",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "addons/godot-xr-tools/misc/xr_helpers.gd",
+      "sha256": "038e3100ae7d53e3fce6c01b48b97f6c14d39de46159c48b9da7b1dc3ce92367",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/resourses/shaders/Grid.gdshader",
+      "sha256": "149e54e8a149c9a7c9852419cca1b40bd6edc9be8393fa7e31342fb56bc7ba3b",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/resourses/shaders/SimpleGrid.gdshader",
+      "sha256": "12475b96ee735d3b1e4c37593a54cf6f9ed78f5c6a527940183112379c6f7b5d",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/artifacts/rotation_studies/rotation_rider_deck.gd",
+      "sha256": "625667c85e4c83883c8046ee2d6ec2afa8d5840c6fa4e10ed650a2c691a59bc2",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/testing/probe_transport_cube_vr.gd",
+      "sha256": "54ebc6870230abfa94fe329c11587312d8a25301014ffa4841575ad130009997",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/testing/probe_translation_course.gd",
+      "sha256": "ba2861cb533e82d03fe1c9c9611db7dd23eea042bf6fb66b6b1be7277e5df723",
+      "in_frozen_sources": false
+    },
+    {
+      "path": "commons/maps/Trans_Pre/final.md",
+      "sha256": "250748b3aa518b718da48b755f19c8811ce8f8a76bc6cbf757d7188e09582bab",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/maps/Trans_Pre/map_data.json",
+      "sha256": "ba4d4c1dc5320263f2b0250bdffc3b184ced341202063c0e5ac23b2f626e0767",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/maps/Trans_Introduction/final.md",
+      "sha256": "6f3cf31ef89108c88fcbf109366be262710968857c630da5c53c22e7799acc5e",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/maps/Trans_Introduction/map_data.json",
+      "sha256": "332beef034f129f45cd71636181598203f7212f1a5cfd9c804a6938959aafba2",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/maps/Trans_Translation/final.md",
+      "sha256": "c775cec8b9d3e70b96f2d4eea07f611cd5d5c72256a2d4116a3a82a61b23e7b0",
+      "in_frozen_sources": true
+    },
+    {
+      "path": "commons/maps/Trans_Translation/map_data.json",
+      "sha256": "8ef1b5213526f0b19eb1b7da2b18e038a41ebf7909a1997c4ece7a849a82298c",
+      "in_frozen_sources": true
+    }
+  ],
+  "existing_reports": [
+    {
+      "path": "doc/space/transformation-refresh-2026-09-16/Trans_Pre-checks.json",
+      "sha256": "9884f2c86a2a111d79eb255d9b0f00b48d451b47209d6e0dc2ffa5eed3e527c1",
+      "checks": 8,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "doc/space/transformation-refresh-2026-09-16/Trans_Introduction-checks.json",
+      "sha256": "ba74803822ed967ee69a14ccd761f2eb41a570f28ea2ff1f25669bd224eb2ab9",
+      "checks": 15,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "doc/space/transformation-experiments-2026-09-16/landing-checks.json",
+      "sha256": "8c23b436f29247206556e2d56458e54c426dfcc5263616227888aadc328e9212",
+      "checks": 28,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "doc/space/transformation-alignment-2026-09-17/Trans_Pre-museum.json",
+      "sha256": "bf3c7eabd2fb105c3f8302eb161aa246210009bf6f04afd152591a835aadf613",
+      "checks": 8,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "doc/space/transformation-alignment-2026-09-17/Trans_Introduction-museum.json",
+      "sha256": "ada0162046b1f976b78d6653ccf55661acade4fce1df6cd2b8fab3ab2575aa65",
+      "checks": 4,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "doc/space/transformation-alignment-2026-09-17/Trans_Translation-museum.json",
+      "sha256": "10dc007d5187d7ddf1c081c81acbf70ff9efc3587022314a54d54fbb1210d4c0",
+      "checks": 58,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "doc/space/transformation-refresh-2026-09-16/translation-permissions-checks.json",
+      "sha256": "8c979ab86a489cbf49dfac2f5bde59a8bd0eaf21974409f234ad6057e8f29efb",
+      "checks": 19,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "ada_run/transport-cube-vr-checks.json",
+      "sha256": "bfbd482e2b19058c76e9038767381d05dd9e884f1d57a69a9cb99a658bbbca10",
+      "checks": 116,
+      "failures": [],
+      "fresh_run_this_audit": false
+    },
+    {
+      "path": "ada_run/translation_y_descent_checks.json",
+      "sha256": "6a5cd3ce897ac73b4ca4e4daed62252ff82a0c515f07710e589acdd54c38e419",
+      "checks": 12,
+      "failures": [],
+      "fresh_run_this_audit": false
+    }
+  ],
+  "note": "Saved runtime reports were inspected and fresh source-grid course/one-ride diagnostic probes ran separately after archive source isolation. Fresh reports retain failed assertions; see opening-audit.md for their actual scope and measured limits. Matching source hashes do not establish all environmental conditions.",
+  "fresh_reports": [
+    {
+      "sha256": "0eaa43d2927f331e2f4dd67d51bdfbfd59be85d7640c5dea4bba0161d49562ff",
+      "fresh_run_this_audit": true,
+      "failures": [
+        "z_first pickup is at the authored world position [3.0, 1.0, 6.0]",
+        "z_first pickup is at the authored world position [3.0, 1.0, 8.0]",
+        "z_first steps off onto the landing",
+        "x_sideways pickup is at the authored world position [6.0, 1.0, 13.0]",
+        "x_sideways pickup is at the authored world position [8.0, 1.0, 13.0]",
+        "x_sideways steps off onto the landing",
+        "y_lift pickup is at the authored world position [11.0, 2.2, 17.0]",
+        "z_high pickup is at the authored world position [11.0, 4.0, 23.0]",
+        "z_high pickup is at the authored world position [11.0, 4.0, 26.0]",
+        "z_high steps off onto the landing",
+        "x_return pickup is at the authored world position [8.0, 4.0, 31.0]",
+        "x_return pickup is at the authored world position [6.0, 4.0, 31.0]",
+        "y_descent pickup is at the authored world position [3.0, 2.5, 36.0]",
+        "xz_diagonal pickup is at the authored world position [5.0, 1.0, 41.0]",
+        "xz_diagonal pickup is at the authored world position [7.0, 1.0, 43.0]",
+        "xz_diagonal pickup is at the authored world position [9.0, 1.0, 45.0]",
+        "xz_diagonal steps off onto the landing"
+      ],
+      "path": "evidence/opening-translation-course-checks.json",
+      "checks": 85
+    },
+    {
+      "sha256": "3f781bdac5f341473ef1645e71fa6c637cd38ed2d9f561eff54db451d3ac08bd",
+      "fresh_run_this_audit": true,
+      "failures": [
+        "z_first pickup is at the authored world position [3.0, 1.0, 6.0]",
+        "z_first pickup is at the authored world position [3.0, 1.0, 8.0]",
+        "z_first steps off onto the landing; start=(3.0, 0.01, 10.0) final=(3.0, 0.442878, 11.33196) lowest=0.00093544140691 expected_y=0.0"
+      ],
+      "path": "evidence/opening-translation-diagnostic_z_first_checks.json",
+      "checks": 14
+    }
+  ]
+}

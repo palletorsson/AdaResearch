@@ -1,0 +1,300 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ML_Perception · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=ML_Perception">← Tutorial lineage</a></p><h1>ML Perception</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="ML_Perception/final.md">Raw captured source</a></p><pre># An edge is not yet an object
+
+At which point does a difference between pixels become a claim about what is there?
+
+&lt;!-- @computer_vision_vr --&gt;
+
+Find an edge of the cross or disk in the input image. Compare that location with the neighbouring edge image. A small outline crawls over the input image one cell at a time; find the same cell in the edge image beside it and compare the two when the outline sits on a boundary rather than a uniform patch.
+
+The edge image emphasises abrupt changes in intensity. The exhibit applies horizontal and vertical Sobel filters to a small pixel grid, combines their responses into a gradient magnitude, and displays that result. A bright response says that nearby pixel values change sharply; it does not by itself say “circle” or “cross”.
+
+Compare the interior of the disk with its boundary. Both belong to what you recognise as the same object, yet the filter treats them differently because its question is about local change. Then compare a short fragment of the disk’s edge with a fragment of the cross. The image-wide identity that seems obvious to you is not present as a complete object inside either tiny neighbourhood. The outline makes that difference of scale inspectable.
+
+The outline marks the neighbourhood whose calculation you can read off the edge image. The whole boundary is assembled from many such responses. At the outer border, this implementation leaves the result at zero, which is another reminder that an image-processing rule includes a decision about what happens where neighbours are missing.
+
+Now read the object names and confidence percentages. In this exhibit those names and percentages are supplied in advance. They are not predictions learned from the computed edges. The room currently places a real filtering operation beside an illustrated classification claim; the link between the two remains to be built.
+
+That separation gives us a precise question for developing the encounter. What evidence would a recogniser need before it could justify the name, and how would its confidence be checked? Two signs in the hall already promise a way in: INPUT IMAGE, paint pixels with hand; FILTER TOOLKIT, grab to apply. Neither works. The pixels take no touch and the four filter blocks cannot be picked up; the signs describe a room that has not been built. A future interaction could alter the input while exposing which stages actually change, allowing an unsupported label to become visible as a broken dependency.
+
+For now, use your own observation: identify one edge fragment that could belong to more than one object. Local contrast can be real while its interpretation remains ambiguous. Adding a confident word does not remove that ambiguity.
+
+&lt;!-- @ --&gt;
+
+The sequence-memory room adds another source of evidence: what happened before the current input arrived.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="ML_Perception/tutorial.md">Raw captured source</a></p><pre># ML Perception
+
+One neuron. Weighted sum, threshold, output.
+
+Build a perceptron.
+
+```gdscript
+class_name Perceptron
+
+var weights: Array = []
+var bias: float = 0.0
+
+func initialize(input_size: int) -&gt; void:
+    weights.clear()
+    for _i in input_size:
+        weights.append(randf_range(-0.5, 0.5))
+    bias = randf_range(-0.5, 0.5)
+```
+
+Random weights in [-0.5, 0.5]. The bias is a constant offset.
+
+Compute the output.
+
+```gdscript
+func predict(inputs: Array) -&gt; int:
+    var sum: float = bias
+    for i in inputs.size():
+        sum += weights[i] * inputs[i]
+    return 1 if sum &gt; 0 else 0
+```
+
+Binary output: positive threshold produces 1, otherwise 0.
+
+Update on a misclassified example.
+
+```gdscript
+func train_step(inputs: Array, label: int, lr: float = 0.1) -&gt; void:
+    var predicted := predict(inputs)
+    var error: int = label - predicted
+    if error != 0:
+        for i in weights.size():
+            weights[i] += lr * error * inputs[i]
+        bias += lr * error
+```
+
+The perceptron learning rule. Correct classifications don&#x27;t update; errors nudge the weights.
+
+Run several epochs.
+
+```gdscript
+func train(dataset: Array, epochs: int = 50, lr: float = 0.1) -&gt; bool:
+    for _e in epochs:
+        var errors: int = 0
+        for entry in dataset:
+            var predicted := predict(entry.inputs)
+            if predicted != entry.label:
+                train_step(entry.inputs, entry.label, lr)
+                errors += 1
+        if errors == 0: return true
+    return false
+```
+
+Converges when all examples are classified correctly. Fails on linearly inseparable data (XOR).
+
+Apply a convolution kernel.
+
+```gdscript
+func convolve(image: Array, kernel: Array) -&gt; Array:
+    var h := image.size()
+    var w := image[0].size()
+    var kh := kernel.size()
+    var kw := kernel[0].size()
+    var out: Array = []
+    for y in h - kh + 1:
+        out.append([])
+        for x in w - kw + 1:
+            var sum: float = 0.0
+            for dy in kh:
+                for dx in kw:
+                    sum += image[y + dy][x + dx] * kernel[dy][dx]
+            out[y].append(sum)
+    return out
+```
+
+Slide the kernel across the image. Each output pixel is a weighted sum of a local window.
+
+Edge-detection kernel.
+
+```gdscript
+const SOBEL_X := [
+    [-1, 0, 1],
+    [-2, 0, 2],
+    [-1, 0, 1],
+]
+
+const SOBEL_Y := [
+    [-1, -2, -1],
+    [0, 0, 0],
+    [1, 2, 1],
+]
+```
+
+Sobel filters detect horizontal and vertical edges. Combining the two gives edge magnitude.
+
+Compute edge magnitude.
+
+```gdscript
+func edge_magnitude(image: Array) -&gt; Array:
+    var gx := convolve(image, SOBEL_X)
+    var gy := convolve(image, SOBEL_Y)
+    var mag: Array = []
+    for y in gx.size():
+        mag.append([])
+        for x in gx[0].size():
+            mag[y].append(sqrt(gx[y][x] * gx[y][x] + gy[y][x] * gy[y][x]))
+    return mag
+```
+
+Pythagorean combination. The result is a single edge-strength image.
+
+You can now build a perceptron with training, convolve an image with a kernel, and detect edges with Sobel filters. ML_Sequence_Memory extends into recurrent networks.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="ML_Perception/technical.md">Raw captured source</a></p><pre># ML Perception — Technical
+
+The map stages the perceptron as a single large interactive unit. Three inputs arrive as coloured arrows; each has an adjustable weight; their weighted sum crosses a threshold; the output is a binary decision.
+
+```gdscript
+class_name Perceptron extends Node3D
+
+@export var weights: Array = [0.5, -0.3, 0.2]
+@export var threshold: float = 0.0
+
+func predict(inputs: Array) -&gt; int:
+    var sum: float = 0.0
+    for i in range(weights.size()):
+        sum += weights[i] * inputs[i]
+    return 1 if sum &gt; threshold else 0
+```
+
+## Learning Rule
+
+The perceptron learning rule updates weights when a training example is misclassified. For input x with true label y and prediction ŷ, the update is w_i ← w_i + η(y − ŷ)x_i where η is the learning rate. This is equivalent to stochastic gradient descent on a hinge-like loss.
+
+```gdscript
+func train_step(x: Array, y: int, lr: float = 0.1) -&gt; void:
+    var pred := predict(x)
+    var err := y - pred
+    if err != 0:
+        for i in range(weights.size()):
+            weights[i] += lr * err * x[i]
+        threshold -= lr * err
+```
+
+The perceptron convergence theorem guarantees that if the data is linearly separable, this rule converges to a separating hyperplane in a finite number of steps. The bound is O(R²/γ²) where R is the maximum input magnitude and γ is the margin of the optimal separator. If the data is not linearly separable, the rule oscillates and never settles — a famous limitation that Minsky and Papert&#x27;s 1969 book made visible.
+
+## Convolution Station
+
+The second station extends the perceptron into vision. A small pixel grid sits at the top; a convolution window slides across it, computing a weighted sum at each position; the resulting activation map is drawn below.
+
+```gdscript
+func convolve(image: Array, kernel: Array) -&gt; Array:
+    var h := image.size()
+    var w := image[0].size()
+    var kh := kernel.size()
+    var kw := kernel[0].size()
+    var out: Array = []
+    for y in range(h - kh + 1):
+        var row: Array = []
+        for x in range(w - kw + 1):
+            var sum := 0.0
+            for dy in range(kh):
+                for dx in range(kw):
+                    sum += image[y + dy][x + dx] * kernel[dy][dx]
+            row.append(sum)
+        out.append(row)
+    return out
+```
+
+A filter library lets the learner swap in edge-detection, blur, and sharpening kernels and see the effect on the activation map. Edge detection uses a Sobel kernel; blur uses a Gaussian kernel; sharpening uses a Laplacian-of-Gaussian approximation.
+
+## Complexity
+
+The single-perceptron forward pass is O(N) for N inputs. Convolution of an H×W image with a K×K kernel is O(H·W·K²). Modern CNN implementations use FFT-based convolution or im2col-based matrix multiplication for large kernels; the map&#x27;s small grid runs at interactive rates on naive convolution.
+
+Within the sequence, Perception makes the atomic mechanism transparent. ML_Sequence_Memory will next add recurrence.
+
+## Pooling and Downsampling
+
+CNNs interleave convolution layers with pooling layers. Max pooling takes the maximum value in each local window; average pooling takes the mean. Pooling reduces spatial resolution and increases the receptive field of subsequent layers.
+
+```gdscript
+func max_pool_2x2(image: Array) -&gt; Array:
+    var h := image.size()
+    var w := image[0].size()
+    var out: Array = []
+    for y in range(0, h, 2):
+        var row: Array = []
+        for x in range(0, w, 2):
+            var mx: float = -INF
+            for dy in range(2):
+                for dx in range(2):
+                    if y + dy &lt; h and x + dx &lt; w:
+                        mx = max(mx, image[y + dy][x + dx])
+            row.append(mx)
+        out.append(row)
+    return out
+```
+
+Modern architectures have mostly replaced pooling with strided convolutions, which achieve similar downsampling as a learnable operation rather than a fixed one.
+
+## Receptive Fields
+
+A neuron&#x27;s receptive field is the region of input it is influenced by. Stacking convolutions expands the receptive field: two stacked 3×3 convolutions cover a 5×5 input region; three stacked cover 7×7. Dilated (atrous) convolutions skip input positions and achieve large receptive fields with few parameters.
+
+## Minsky and Papert
+
+Minsky and Papert&#x27;s 1969 book *Perceptrons* proved that single-layer perceptrons cannot compute XOR. The proof was taken (incorrectly) as a general argument against neural network research, and funding for connectionist work dried up for a decade. The multilayer perceptron with backpropagation, developed in the 1980s, resolves the limitation — XOR is trivial for a two-layer network — but the history is worth knowing.
+
+The map&#x27;s single-perceptron station stages Minsky and Papert&#x27;s argument: place four XOR training examples and the perceptron fails to learn them regardless of how many training steps it runs.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="ML_Perception/intent.md">Raw captured source</a></p><pre>Concept: The perceptron as the atomic unit of neural computation — a single neuron with inputs, weights, a threshold, and a binary output. The simplest possible learning machine, and the place where the biological metaphor meets linear algebra.
+Sequence role: Fifth map in the Machine Learning sequence (15th spine sequence, integration phase). A deliberate zoom-in after ML_Neural_Networks showed the whole architecture. By isolating one neuron, the map makes the weight-sum-threshold mechanism fully transparent before the learner re-encounters it multiplied by thousands. Connects back to ML_Neural_Networks (the single unit within the layers) and forward to ML_Sequence_Memory (adding state to the neuron).
+Technical angle: Perceptron learning rule: adjust weights by the error times the input. Convergence theorem: if the data is linearly separable, the perceptron converges in finite steps. XOR problem as the proof that single perceptrons cannot learn nonlinear functions — the historical motivation for multi-layer networks. Geometric interpretation: the weight vector defines a hyperplane, and learning rotates it until separation is achieved.
+Critical angle: The perceptron is where the myth of the artificial neuron begins and should be questioned. Biological neurons are vastly more complex — dendritic computation, temporal coding, neuromodulation — yet the stripped-down abstraction works. Rosenblatt&#x27;s perceptron and Minsky&#x27;s critique of it shaped decades of AI research, proving that a single mathematical result can redirect an entire field. The simplest model teaches the most about the politics of simplification.
+Key artifacts: perceptron_demo provides an interactive single-neuron simulation with adjustable weights, threshold, and input space visualization showing the decision boundary rotating during learning.
+Gap: Needs an XOR failure demonstration — an artifact that shows the perceptron trying and failing to learn XOR, making the linearity limitation visceral rather than theoretical.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="ML_Perception/critical.md">Raw captured source</a></p><pre># ML_Perception — Critical Reflection
+
+A gallery. Open center, three alcoves cut into walls, each framing an artifact like a painting in a museum. Computer vision in one alcove. Convolutional neural networks in another. The third alcove is structurally present but empty in the interactables layer. The gallery format is the map&#x27;s thesis: perception is something you observe from a distance. The gallery format is also the map&#x27;s blind spot: perception is the one thing you cannot observe from a distance, because observation is already perception.
+
+Hayles describes how computational media restructure what it means to see. The CNN artifact is the literal restructuring: a small window slides across an image, multiplying and summing, extracting edges, textures, shapes. Each layer sees more abstraction. The convolution operation treats every region of the image with the same filter — translation invariance — which means the network assumes that a feature meaningful in one location is meaningful in every location. A face in the corner and a face in the center are treated identically. A tumor in a scan and a scanner artifact are processed by the same weights. The CNN does not know where things are; it only knows what things look like. Spatial meaning is the first casualty of convolutional perception.
+
+The computer vision artifact sits in the opposite alcove, and the spatial arrangement creates a dialogue across the gallery&#x27;s open center. A pixel is a number. A grid of pixels is a matrix. Vision starts there — raw arithmetic on light. This is Hayles&#x27; informational ontology made literal: the image is data before it is image, numbers before it is scene, computation before it is perception.
+
+The artifact normalizes the transformation from visual experience to numerical representation as though it were costless. But the transformation is where everything happens. The choice of resolution determines what can be seen. The choice of color space determines what can be distinguished. The sensor&#x27;s dynamic range determines what is light and what is darkness. Machine perception begins with hardware decisions that foreclose entire categories of visual experience before the first pixel is processed.
+
+Chun writes about the face as the paradigmatic object of computational vision — the site where recognition, identification, and surveillance converge. The gallery layout aestheticizes this convergence. The CNN learns to detect edges, then textures, then objects, and the progression is presented as increasing sophistication. But the face is not a neutral test case. Facial recognition systems trained on unbalanced datasets produce unequal error rates across demographic groups. The features the network learns to detect are features of the training distribution, not features of the human face. The CNN&#x27;s learned filters encode the demographics of its dataset as the geometry of its feature detectors. The gallery presents this as technical achievement without presenting the misidentification rates.
+
+The blurb mentions attention — &quot;Instead of scanning left-to-right, the model asks: what matters here?&quot; — but no attention artifact occupies the third alcove. This absence is structurally significant. Attention mechanisms are the dominant paradigm in contemporary machine perception, and their absence creates a gallery frozen in the convolutional era. Attention would complicate the gallery&#x27;s clean narrative because it introduces a computational gaze — a learned decision about where to look before deciding what to see. Attention is perception with an agenda, and the agenda is learned from data, which means the model&#x27;s gaze is shaped by the distribution of gazes in its training set. The absent alcove is the gallery&#x27;s most honest wall: a blank space where the politics of computational attention should hang.
+
+The gallery format normalizes the separation between perceiver and perceived. You stand in the open center and look into alcoves. The artifacts look back at you in the sense that they process visual input and produce representations. But the gallery maintains a safe distance. You are not the data being classified.
+
+You are the viewer appreciating the classification. Hayles would note that this separation is the foundational gesture of Western epistemology — the subject who observes without being changed by observation — and that computational perception dissolves it. Every camera pointed at a face is also a classification system pointed at a person. Every perceptual model is also a surveillance architecture. The gallery refuses this collapse. It keeps you in the center, safely observing.
+
+Perception is compression with an agenda. The CNN compresses an image into features. The features compress a scene into categories. The categories compress a world into decisions. At every stage, something is discarded to make the remainder tractable, and the discarding is guided by the loss function&#x27;s definition of what matters. The gallery invites you to see how machines learn to see. What it does not invite is the harder question: what do machines learn not to see, and whose invisibility is the cost of their clarity?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="ML_Perception/artifacts.md">Raw captured source</a></p><pre># ML Perception — Artifacts
+*Machine Learning: Algorithms That Learn · integration · 2 artifacts*
+
+&gt; A pixel is a number. A grid of pixels is a matrix. Vision starts there — raw arithmetic on light. Convolution slides a small window across the image, multiplying and summing, extracting edges, textures, shapes. Each layer sees more abstraction. Edges become contours. Contours become faces. The network learns its own features — no one tells it what an eye is.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## ComputerVision_VR
+![ComputerVision_VR](/scene-catalog/computer_vision_vr.png)
+
+Interactive image processing with spatial convolution filters
+
+`computer_vision_vr`
+
+## ConvolutionalNeuralNetworksCNNs_VR
+![ConvolutionalNeuralNetworksCNNs_VR](/scene-catalog/convolutional_neural_networks_cnns_vr.png)
+
+Walkable CNN architecture with interactive kernels
+
+`convolutional_neural_networks_cnns_vr`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="ML_Perception/summary.md">Raw captured source</a></p><pre># ML Perception — Summary
+
+ML_Perception is the fifth map in the Machine Learning sequence. It zooms in on the single neuron — the perceptron — after the previous map showed the whole network. A small room contains one large interactive neuron, with inputs, weights, a summation, a threshold, and a binary output made visible as a sequence of labelled stages.
+
+Three input channels arrive at the neuron as coloured arrows. Each arrow has a weight slider attached to it; the learner can turn the weights up or down and watch the arrows fatten or thin accordingly. The summation stage draws the total of the weighted inputs as a bar against a threshold line. When the bar crosses the threshold, the neuron fires; when it does not, the neuron is silent.
+
+A second station extends the perceptron into vision. A small grid of pixels sits at the top of the room; a convolution window slides across it, multiplying and summing against a small filter matrix. The resulting activation map is drawn below the pixel grid. A filter library lets the learner swap in edge-detection, blur, and sharpening filters and see the effect on the activation map.
+
+Within the sequence, Perception makes the atomic mechanism transparent. After this map, every reference to &quot;a neuron&quot; in the rest of the sequence has a concrete referent. ML_Sequence_Memory will next add the connection back to itself that turns a neuron into a memory.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="ML_Perception/blurb.md">Raw captured source</a></p><pre>A pixel is a number. A grid of pixels is a matrix. Vision starts there — raw arithmetic on light. Convolution slides a small window across the image, multiplying and summing, extracting edges, textures, shapes. Each layer sees more abstraction. Edges become contours. Contours become faces. The network learns its own features — no one tells it what an eye is.
+
+Attention changes the game. Instead of scanning left-to-right, the model asks: what matters here? It learns to weight regions, to focus. A computational gaze that decides where to look before it decides what to see.
+
+Three alcoves. Three artifacts. Each one a different way a machine carves signal from noise. Stand in the gallery&#x27;s open center and consider: seeing was never passive. Perception is compression with an agenda — and every model chooses what to discard.</pre></section></body></html>

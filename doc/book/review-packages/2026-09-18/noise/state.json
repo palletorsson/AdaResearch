@@ -1,0 +1,415 @@
+{
+  "sequence": "noise",
+  "declared_maps": [
+    "Random_Noise_Types",
+    "Noise_Columns",
+    "Noise_One",
+    "Noise_Voxel",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Noise_Perlin_Simplex",
+    "Lab_Path"
+  ],
+  "museum_map_authored_order": [
+    "Random_Noise_Types",
+    "Noise_Columns",
+    "Noise_One",
+    "Noise_Voxel",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Noise_Perlin_Simplex"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "Random_Noise_Types",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1583,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "randompoints"
+        ],
+        "reason": "Can random positions still refuse to be neighbours?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Random_Noise_Types/final.md",
+        "text_sha256": "7aa551478c3170b1f6c68819d8e8f6ea7c5e4c27b1fe642cebc55a1cc70a79a0",
+        "map_sha256": "77936c9ead2cf0875a512e26e24759d819b27e624f96f797bf24b484cc53bc1d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D"
+      ],
+      "role_primary_order": [
+        "randompoint",
+        "randompoints",
+        "WhiteNoiseGallery",
+        "NoiseColors3D"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_Columns",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1280,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "MeltingBerniniScene"
+        ],
+        "reason": "What remains recognisable while a column changes shape?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Columns/final.md",
+        "text_sha256": "6431a6046c435b1848a31f1cad5cd7a3d55e93fc0cc296c6eb4d99db6c4af0c9",
+        "map_sha256": "6052c9aa186d4befe00dacbbe6ba05cec01f56d0c56b0f35434677ea8f2bb8c7",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "role_primary_order": [
+        "MeltingBerniniScene",
+        "dark_sphere",
+        "synthesis_stand"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_One",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1286,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noisetorus"
+        ],
+        "reason": "Is a restless surface changing its underlying shape or only how that shape is expressed?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_One/final.md",
+        "text_sha256": "24eb619b5cf18b5bdc15ebb7c176dab080d72f9af6fd5a1e7ee04c034798ac20",
+        "map_sha256": "d63c41e4f5945ef4cbdfc50da14fdb4269f440ee476bf7ddc446c458afb73b11",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noisetorus",
+        "noiselayers",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "noisetorus",
+        "noiselayers",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_Voxel",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1144,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "perlin_terrain_sculptor",
+          "voxelnoise"
+        ],
+        "reason": "Can you remove matter without changing the field that decides where it could appear?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Voxel/final.md",
+        "text_sha256": "06264cd74c028c727fa63ad728325826f1ca38706d75a58d62e6844de6bdfc77",
+        "map_sha256": "62191f51cdc8f9f16eaca9e20a6b25bc8abd707a10abe0ee89c70dec653d4fb5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "perlin_terrain_sculptor",
+        "science_screen",
+        "voxelnoise",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "perlin_terrain_sculptor",
+        "science_screen",
+        "voxelnoise",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_6_Wall",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1062,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "shader_noise_space"
+        ],
+        "reason": "What changes when the field surrounds you instead of sitting on a bench?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_6_Wall/final.md",
+        "text_sha256": "399a8f654aba82fcce3dc28a21901d8f5bf1de642b64bbe4e38bc57da1aa34a6",
+        "map_sha256": "bf64859d03a790b6c137043d96c39cec133d33ee58097ddd3489ea74318f3840",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "shader_noise_space",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "shader_noise_space",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1169,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noisesphere"
+        ],
+        "reason": "Does placing noise on a sphere mean one noise is being fed into another?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Inside_Noise/final.md",
+        "text_sha256": "f10412f3539ca924de3e5764a4ce87722d5878bb4a8a009865c9e6446552176c",
+        "map_sha256": "d35a465d17c2b8b04521d9f11c2b1b5e970b715863e8c34497c4b7bff037ff63",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noisesphere",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "noisesphere",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_Space_10",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1043,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "noise_space"
+        ],
+        "reason": "When a field becomes ground, which variations become a route?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Space_10/final.md",
+        "text_sha256": "32e6473ae9e727d1de3e51cd092636990bc3758e293f8c71b143a4af4b413cbf",
+        "map_sha256": "3dd2e47b3b4a25ce2b9c9ff30ea91844a2db7588fa1d270d22d523c17373751e",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "noise_space",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "noise_space",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "recorded_status": "source_checked_draft",
+      "text_words": 1281,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "simplex_noise",
+          "perlin_noise"
+        ],
+        "reason": "What would make two noise surfaces a fair comparison?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Noise_Perlin_Simplex/final.md",
+        "text_sha256": "669c8888b7f1176176574e5cf36b760e91dca2d4e580df81d94c55e55d6ea47a",
+        "map_sha256": "efc6152f356cf0843a285b6b4e462aa162e1f5ac6143b464d05279197da67a86",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "simplex_noise",
+        "perlin_noise",
+        "perlin_noise_terrain",
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "simplex_noise",
+        "perlin_noise",
+        "perlin_noise_terrain",
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Lab_Path",
+      "recorded_status": "source_checked_draft",
+      "text_words": 391,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "dark_sphere"
+        ],
+        "reason": "What can you carry out of a sequence when the busy demonstrations are gone?",
+        "status": "source_checked_draft",
+        "sequence": "noise",
+        "text_path": "commons/maps/Lab_Path/final.md",
+        "text_sha256": "30ec6de21896f63ab272d36d012cef582ef4bdd577687830bb8b14eda6512fc2",
+        "map_sha256": "8b14ce1bdba663470d1ed6484899bf78e24c32d167a8a7ba14f11d2f7dadab7d",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "dark_sphere"
+      ],
+      "role_primary_order": [
+        "dark_sphere"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "algorithms/patterngeneration/fabrics/displacement.gdshader",
+      "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniColumns.gd",
+      "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/MeltingBerniniScene.tscn",
+      "algorithms/proceduralgeneration/hybrid_complex/berninicolumns/shaders/marble_column.gdshader",
+      "algorithms/randomness/noise/perlinnoise/scenes/perlin_noise_terrain.tscn",
+      "algorithms/randomness/noise/perlinnoise/scripts/terrain_generator.gd",
+      "algorithms/randomness/noiselayers/noiselayers.gd",
+      "algorithms/randomness/noiselayers/noiselayers.tscn",
+      "algorithms/randomness/noiselayers/noiselayers_stage.gd",
+      "algorithms/randomness/noisesphere/noisesphere.gd",
+      "algorithms/randomness/noisesphere/noisesphere.tscn",
+      "algorithms/randomness/noisesphere/warp_study.gd",
+      "algorithms/randomness/noisetorus/noisetorus.gd",
+      "algorithms/randomness/noisetorus/noisetorus.tscn",
+      "algorithms/randomness/perlinnoise/NoiseVisualizer.gd",
+      "algorithms/randomness/perlinnoise/PerlinNoise.gd",
+      "algorithms/randomness/perlinnoise/perlinnoise.tscn",
+      "algorithms/randomness/randompoint/randompoint.gd",
+      "algorithms/randomness/randompoint/randompoint.tscn",
+      "algorithms/randomness/randompoints/randompoints.gd",
+      "algorithms/randomness/randompoints/randompoints.tscn",
+      "algorithms/randomness/shadernoisespace/QueerNoiseShader.gdshader",
+      "algorithms/randomness/shadernoisespace/WallNoiseShader.gdshader",
+      "algorithms/randomness/shadernoisespace/noiseroom.gd",
+      "algorithms/randomness/shadernoisespace/noiseroom.tscn",
+      "algorithms/randomness/simplexnoise/SimplexNoise.gd",
+      "algorithms/randomness/simplexnoise/SimplexVisualizer.gd",
+      "algorithms/randomness/simplexnoise/pair_study.gd",
+      "algorithms/randomness/simplexnoise/simplexnoise.tscn",
+      "algorithms/randomness/voxelnoise/voxelnoise.gd",
+      "algorithms/randomness/voxelnoise/voxelnoise.tscn",
+      "algorithms/randomness/whitenoise/NoiseColors3D.tscn",
+      "algorithms/randomness/whitenoise/WhiteNoiseGallery.tscn",
+      "algorithms/randomness/whitenoise/noise_gallery_console.gd",
+      "algorithms/randomness/whitenoise/noise_spectrum_3d.gd",
+      "algorithms/randomness/whitenoise/white_noise_spectrum.gd",
+      "commons/artifacts/_hangar/hangar_kit.gd",
+      "commons/artifacts/dark_sphere/dark_sphere.gd",
+      "commons/artifacts/dark_sphere/dark_sphere.tscn",
+      "commons/artifacts/dark_sphere/gest_triangle_weaver.gd",
+      "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.gd",
+      "commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
+      "commons/artifacts/science_screen/science_screen.gd",
+      "commons/artifacts/science_screen/science_screen.tscn",
+      "commons/artifacts/synthesis/synthesis_stand.gd",
+      "commons/artifacts/synthesis/synthesis_stand.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/context/walkgrids/NoiseSpace.gd",
+      "commons/context/walkgrids/noise_space.tscn",
+      "commons/context/walkgrids/noise_walk_study.gd",
+      "commons/grid/artifact_identity.gd",
+      "commons/hazards/head_crab/head_crab.tscn",
+      "commons/primitives/line/coordinate_axes_xy.tscn",
+      "commons/primitives/line/coordinate_line.tscn",
+      "commons/primitives/point/grab_sphere_point_color_with_text.tscn",
+      "commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "commons/render/pbr_kit.gd",
+      "commons/resourses/shaders/Grid.gdshader",
+      "commons/resourses/shaders/noisePlanet2.gdshader",
+      "commons/resourses/shaders/noiseTorus.gdshader",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "res://addons/godot-xr-tools/objects/pickable.tscn",
+      "res://algorithms/randomness/noisesphere/enclosing_sphere.gd",
+      "res://commons/hazards/head_crab/head_crab.gd",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/primitives/line/coordinate_line.gd",
+      "res://commons/primitives/point/grab_sphere.gd",
+      "res://commons/primitives/point/point_color.gd",
+      "res://commons/primitives/point/point_mesh.gd",
+      "res://commons/primitives/point/qfep_term_grasp.gd",
+      "res://commons/primitives/point/simple_position_text.gd"
+    ],
+    "scope": "Primary scenes plus two static resource-reference hops; text resources only. Dynamic loads, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

@@ -1,0 +1,37 @@
+--- before/commons/maps/Trans_Pit/final.md
++++ commons/maps/Trans_Pit/final.md
+@@ -48,7 +48,7 @@
+ 
+ The last room has three cubes sharing a tempo. Wait before approaching. They grow anyway. Watch them together first; the repetition makes the size change easier to read.
+ 
+-The previous hall's blocks made room when you came close. These read elapsed time. Walking towards them, standing still and turning away all leave the same clock running.
++The previous hall's blocks made room when you came close. Here their size follows elapsed time. Walking towards them, standing still and turning away all leave the same clock running. Standing still does not hold the room still.
+ 
+ For this floor-anchored configuration, the size factor comes from:
+ 
+@@ -58,6 +58,10 @@
+ ```
+ 
+ All three share the same clock rate, moving from thirty centimetres to three and a half metres on a side. Watch one complete small–large–small cycle, then choose when to approach.
++
++![A fixed view down a lane: a small green cube, then the same cube enlarged across the view.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/the-room-keeps-time.png)
++
++*The same view at two moments in the cycle. At its smallest, the cube leaves the final door visible beyond it. At its largest, it fills the view. The camera has not moved.*
+ 
+ Watch a bottom edge. It stays on the floor. The mesh and collision box grow together, with their centres kept half a side-length above that edge. Growth takes space upwards and sideways rather than passing through the ground.
+ 
+@@ -79,9 +83,13 @@
+ 
+ <!-- @transformation_airlock -->
+ 
+-After the growing cubes, two armoured leaves meet inside a heavy frame. Approach, then stop. Follow the bright strip along one leaf.
++After the growing cubes, two armoured leaves meet inside a heavy frame. These wait for your arrival. Approach, then stop. Follow the bright strip along one leaf.
+ 
+ It moves sideways and up. It turns through a quarter-turn. Then it becomes smaller, drawing its armour into a recess beside the opening. The frame has stayed still. The passage has changed.
++
++![The same museum door closed, partway through its turn, and fully open with the leaves reduced into their recesses.](/book-review/doc/book/iterations/2026-09-23-moving-boundary/make-room.png)
++
++*Follow the bright meeting strip through the three views. Each leaf moves, turns and becomes smaller; the frame keeps its place. The opening appears before the whole movement is finished.*
+ 
+ These are the same three operations we added to the pickup cube at the beginning of the chapter. There they made a small object conspicuous. Here they make room for you.
+ 

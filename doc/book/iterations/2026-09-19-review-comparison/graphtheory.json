@@ -1,0 +1,59 @@
+{
+  "status": "eight halls restored to the route; six chapters preserved",
+  "summary": "A valid local choice can still close off a better arrangement. Matching now lets a visitor test that on the same ten points: three pairs or five, depending on which edges are considered first. Spanning Trees and Matching return to the authored museum. The existing eight-hall progression holds; only Matching and Flow receive manuscript edits.",
+  "items": [
+    {
+      "title": "Keep your eye on one point left waiting",
+      "description": "The graph already contained the counterexample. ORDER now chooses cycle edges first or spokes first without moving a point or changing a connection. STEP, RUN / PAUSE and RESET make its decisions available to prediction and repetition. Both outcomes follow the free-endpoint rule; the earlier choices change who remains unpaired.",
+      "images": [
+        "doc/book/iterations/2026-09-20-graphtheory-review/matching-cycle-first.png",
+        "doc/book/iterations/2026-09-20-graphtheory-review/matching-spokes-first.png"
+      ],
+      "captions": [
+        "CYCLE FIRST · three pairs, four outer points still waiting.",
+        "SPOKES FIRST · five pairs; the same graph can pair everyone."
+      ],
+      "image_note": "Two completed scans of the revised artifact in the actual Godot museum, from the same raised camera. These are alternative states, not before/after software versions. Button signals and selected walking paths pass; headset use remains untested.",
+      "text_kind": "book — Matching",
+      "before": "The exhibit’s name refers to Edmonds’ algorithm, but its current procedure does not implement that algorithm’s augmenting and blossom-handling steps. Treat the visible greedy process as a starting case; the next development needs to make revision possible and show the example in which it matters.",
+      "after": "When the cycle-first scan ends, count the pairs and the points left waiting. There are three pairs, with four outer points unpaired. Follow each unused spoke inwards. The connection is still there. Its inner endpoint was taken by an earlier choice.\n\nPress ORDER for SPOKES FIRST. The points stay where they were; every connection remains. The earlier pairings clear. Before running again, predict what will happen to the point you chose. This time five pairs form, one along each spoke. Nobody has gained a new connection. We changed which possibility was considered first.\n\nRESET repeats the selected order. Switching back to CYCLE FIRST brings the gaps back too. Both scans obey the same rule about free endpoints. Their different results give us a reason to ask for a procedure that can reconsider its own choices. The artifact retains the source name `edmonds_algorithm`, but the display runs greedy matching; Edmonds’ augmenting paths and blossom handling remain a further construction. Our order switch starts another scan. It does not teach the first scan how to undo a pair.",
+      "report": "doc/book/iterations/2026-09-20-graphtheory-review/final.diff",
+      "report_label": "Exact manuscript diff, including the new opening"
+    },
+    {
+      "title": "The price of one more route",
+      "description": "Spanning Trees was in the manuscript but absent from the authored route. Its existing graph returns in a bounded gallery, raised above the floor and facing the approach. A startup reset was switching computation off; it now advances edge by edge. The chapter remains unchanged.",
+      "images": [
+        "doc/book/iterations/2026-09-20-graphtheory-review/GT_Spanning_Trees.png"
+      ],
+      "captions": [
+        "Current Spanning Trees hall · accepted connections remain visible within the weighted graph."
+      ],
+      "image_note": "Actual Godot museum capture. All vertex spheres clear the floor and the selected perimeter walk passes. The graph still has dense labels; readability in the headset and new hand controls are later work.",
+      "report": "doc/book/iterations/2026-09-20-graphtheory-review/model-checks.json",
+      "report_label": "Model checks and controlled comparisons"
+    },
+    {
+      "title": "Could an earlier allocation be taken back?",
+      "description": "Flow now keeps a blocked junction and its excess visible. Its readout reports what reached the sink, without calling the partial allocation a maximum. The graph is raised to reading height, the old placement refreshed, and its wall text synchronized. The existing funnel and supporting artifacts remain.",
+      "images": [
+        "doc/book/iterations/2026-09-20-graphtheory-review/GT_Flow.png"
+      ],
+      "captions": [
+        "Current Flow hall · the forward-only study during a run, with revised wall speech."
+      ],
+      "image_note": "Current museum capture, not a before/after pair or a picture of the controlled blocked-state test. The selected approach passes. Residual reverse adjustments are not implemented; the manuscript invites that next comparison.",
+      "text_kind": "book — Flow",
+      "before": "A complete maximum-flow method also needs a way to revise earlier allocations. Residual reverse capacity represents that possibility: some previously sent flow can be undone so that a better arrangement becomes available. This exhibit does not yet implement those reverse adjustments, so its current run cannot establish the general maximum-flow claim suggested by its title and readout.",
+      "after": "A junction can run out of forward capacity while still holding excess. If the display stops at BLOCKED, find that junction. Its neighbours have not vanished; the remaining space on its outgoing edges has run out. The readout keeps the excess visible and reports how much reached the sink. It leaves us with a question: could some of what was sent earlier be taken back?\n\nA complete maximum-flow method also needs a way to revise earlier allocations. Residual reverse capacity represents that possibility: some previously sent flow can be undone so that a better arrangement becomes available. The display is labelled a forward-only study because it has no such reverse adjustments. What reached the sink records this run; it does not settle how much could reach it under another allocation.",
+      "report": "doc/book/iterations/2026-09-20-graphtheory-review/GT_Flow-runtime.json",
+      "report_label": "Placement and approach evidence"
+    },
+    {
+      "title": "Preserve the sequence; make the missing comparison possible",
+      "description": "Foundations, Layout, Pathfinding, Network Analysis, Connectivity and Spanning Trees retain their manuscripts byte for byte. No artifact family or role is removed. All eight halls occur in order in the authored route and derived views. The next sequence is Foundations Crisis.",
+      "report": "doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md",
+      "report_label": "Decisions by hall, verification limits and later tasks"
+    }
+  ]
+}

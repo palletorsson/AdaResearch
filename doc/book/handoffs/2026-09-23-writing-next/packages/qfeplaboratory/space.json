@@ -1,0 +1,3814 @@
+{
+  "QFEP_Introduction": {
+    "map_source": "commons/maps/QFEP_Introduction/map_data.json",
+    "text_source": "commons/maps/QFEP_Introduction/final.md",
+    "map_sha256": "166b488f070c5d64b60e5975e0ecd2de7c35f628b2b09fc3dc7b967c121df193",
+    "text_sha256": "db14dc091ae5ed7ddeefd6411a80fccf9c24cf47b302b5607b94b6ee214f54b9",
+    "map_info": {
+      "name": "QFEP Introduction",
+      "lookup_name": "QFEP_Introduction",
+      "description": "Keep one arrangement, then seek another with the same total. A local arithmetic study of the QFEP proposal; no entropy or physical phase is measured.",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Compare two parameter tuples with the same total.",
+          "Test what happens to the E contribution at lambda = 0.",
+          "Distinguish an authored reference tuple from a detected phase."
+        ]
+      },
+      "title": "Four controls, one result",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "gate": false,
+        "piers": false,
+        "plinths": false,
+        "props_deny": [
+          "dream_bodies"
+        ],
+        "artifact_placement": "map"
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "auto_reveal_on_entry": false,
+      "initial_tile_visibility": "visible",
+      "background": {
+        "type": "sky",
+        "color": [
+          0.05,
+          0.05,
+          0.15
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Continue",
+        "description": "Explore the F term",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:180:qfep_introduction:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 2,
+        "raw_token": "grab_sphere_F:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_F",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "lambda_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 2,
+        "raw_token": "science_screen:180:1.5#mode:wave",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "phi_slider:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 4,
+        "raw_token": "synthesis_stand#subject:tt#mode:hero",
+        "commented_out": false,
+        "lookup_hint": "synthesis_stand",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "qfep_balance_workbench:180:0#comparison:on",
+        "commented_out": false,
+        "lookup_hint": "qfep_balance_workbench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "orange_and_apples:270",
+        "commented_out": false,
+        "lookup_hint": "orange_and_apples",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "qfep_formula_3d:180:1.5",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 9,
+        "raw_token": "grab_sphere_E:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_E",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "raw_token": "grab_sphere_lambda:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_lambda",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 5,
+        "z": 3,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 2,
+        "z": 4,
+        "raw_token": "3t:THE FORMULA",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 2,
+        "z": 5,
+        "raw_token": "el:2",
+        "commented_out": false,
+        "lookup_hint": "el",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/overhead_light.tscn"
+      },
+      {
+        "x": 8,
+        "z": 5,
+        "raw_token": "el:2",
+        "commented_out": false,
+        "lookup_hint": "el",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/overhead_light.tscn"
+      },
+      {
+        "x": 2,
+        "z": 6,
+        "raw_token": "3t:TUNE λ AND φ",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "3t:GRAB THE TERMS",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 5,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Introduction",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 730,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "qfep_balance_workbench"
+        ],
+        "reason": "Keep one outline and total, then find another arrangement with the same total. Test the zero-weight case; distinguish supplied quantities and authored reference names from measurements.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Introduction/final.md",
+        "text_sha256": "db14dc091ae5ed7ddeefd6411a80fccf9c24cf47b302b5607b94b6ee214f54b9",
+        "map_sha256": "166b488f070c5d64b60e5975e0ecd2de7c35f628b2b09fc3dc7b967c121df193",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-introduction-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "qfep_balance_workbench"
+      ],
+      "role_primary_order": [
+        "qfep_balance_workbench"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_F_Term": {
+    "map_source": "commons/maps/QFEP_F_Term/map_data.json",
+    "text_source": "commons/maps/QFEP_F_Term/final.md",
+    "map_sha256": "65f67e5ae9b64adef862e82e5818d6ae28aba989f711339e051e1eafc00d79a9",
+    "text_sha256": "0c383fda53506972a64a21091bd2dd813ba677c96300a7269d898951b389fd1d",
+    "map_info": {
+      "name": "F Term: Predictable according to what model?",
+      "lookup_name": "QFEP_F_Term",
+      "description": "Change a binary source, then change a constant predictor while the sample stays fixed. Compare source entropy, expected errors and observed misses.",
+      "version": "prediction-encounter-2026-09-20",
+      "format": "json",
+      "dimensions": {
+        "width": 10,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Distinguish source uncertainty from mismatch with one predictor.",
+          "Compare expected error with observed errors in a finite sample.",
+          "Change a predictor without changing the displayed source sample."
+        ]
+      },
+      "title": "Predictable according to what model?",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "gate": false,
+        "piers": false,
+        "plinths": false,
+        "props_deny": [
+          "dream_bodies"
+        ],
+        "artifact_placement": "map"
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.1,
+          0.2
+        ]
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "3"
+      ],
+      [
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "3",
+        "3",
+        "3"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Continue to entropy",
+        "description": "Which alternatives does the model include?",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 1,
+        "z": 1,
+        "raw_token": "tt:180:free_energy:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "lambda_slider:180:0.5#calibration:none",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 2,
+        "raw_token": "science_screen:180:1.5#mode:scatter",
+        "commented_out": false,
+        "lookup_hint": "science_screen",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 4,
+        "raw_token": "shannon_workbench:180:0#prediction_study:on#initial_p:0.1",
+        "commented_out": false,
+        "lookup_hint": "shannon_workbench",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 6,
+        "raw_token": "dark_sphere",
+        "commented_out": false,
+        "lookup_hint": "dark_sphere",
+        "role": "decoration",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "snap_octahedron_puzzle:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "snap_octahedron_puzzle",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 8,
+        "raw_token": "snap_tetrahedron_puzzle:0:0.3",
+        "commented_out": false,
+        "lookup_hint": "snap_tetrahedron_puzzle",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 1,
+        "z": 9,
+        "raw_token": "crystal_cluster:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "crystal_cluster",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 4,
+        "z": 1,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 5,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 5,
+        "z": 11,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_F_Term",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 462,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "shannon_workbench"
+        ],
+        "reason": "Compare equal source entropy with unequal predictor error, then change EXPECT 0/1 while keeping the observed bits fixed.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_F_Term/final.md",
+        "text_sha256": "0c383fda53506972a64a21091bd2dd813ba677c96300a7269d898951b389fd1d",
+        "map_sha256": "65f67e5ae9b64adef862e82e5818d6ae28aba989f711339e051e1eafc00d79a9",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-f-term-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "shannon_workbench"
+      ],
+      "role_primary_order": [
+        "shannon_workbench"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_E_Term": {
+    "map_source": "commons/maps/QFEP_E_Term/map_data.json",
+    "text_source": "commons/maps/QFEP_E_Term/final.md",
+    "map_sha256": "3e8de1983acf2f2fa2d8156d6f9e04ec703c971c03976e386567b14ef053098a",
+    "text_sha256": "393e31577e7e91038a65e3777d0f00ced09b6f47b47754eab531f0d42f538cce",
+    "map_info": {
+      "description": "A visitor-controlled branching fan shows how the count changes when continuations multiply or are pruned. The readout states equal leaf weights. QFEP asks who defines the alternatives and who can revise them.",
+      "dimensions": {
+        "width": 14,
+        "depth": 14,
+        "max_height": 1
+      },
+      "format": "json",
+      "lookup_name": "QFEP_E_Term",
+      "metadata": {
+        "category": "qfep",
+        "difficulty": "advanced",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Count leaves over successive branching levels",
+          "Distinguish an outcome count from a probability distribution",
+          "Compare an open fan with visible branch closures",
+          "Ask who can revise the alternatives a model permits"
+        ]
+      },
+      "name": "E Term: Counting What Could Happen",
+      "title": "Counting what could happen",
+      "version": "encounter-review-2026-09-20",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0
+      }
+    },
+    "settings": {
+      "background": {
+        "color": [
+          0.15,
+          0.05,
+          0.1
+        ],
+        "type": "sky"
+      },
+      "cube_size": 1.0,
+      "enable_physics": true,
+      "grid_animation": {
+        "delay_between": 0.01,
+        "duration": 0.5,
+        "easing": "elastic_out",
+        "enabled": true,
+        "order": "random",
+        "type": "random_pop"
+      },
+      "gutter": 0.0,
+      "show_grid": true
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "description": "What changes when a model gives one contribution more weight?",
+        "name": "Continue to Lambda",
+        "properties": {
+          "action": "next_in_sequence"
+        },
+        "type": "teleporter"
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "tt:180:entropy_axioms:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 5,
+        "raw_token": "microstate_counter:180:0:1",
+        "commented_out": false,
+        "lookup_hint": "microstate_counter",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "entropy_fan:180:0:1#visitor_control:on",
+        "commented_out": false,
+        "lookup_hint": "entropy_fan",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 5,
+        "raw_token": "possibility_space_cloud:180:0:1",
+        "commented_out": false,
+        "lookup_hint": "possibility_space_cloud",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 8,
+        "raw_token": "random_cubes:0:0.5:0.5",
+        "commented_out": false,
+        "lookup_hint": "random_cubes",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 10,
+        "raw_token": "particle_chaos:0:1:0.35",
+        "commented_out": false,
+        "lookup_hint": "particle_chaos",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 10,
+        "raw_token": "lambda_slider:180:0:1#calibration:none",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 6,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 2,
+        "z": 3,
+        "raw_token": "3t:WHICH ENDINGS REMAIN?",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 12,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_E_Term",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 656,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "entropy_fan"
+        ],
+        "reason": "Count equally weighted endings; prune and reopen the fan, then ask who may revise its authored alternatives.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_E_Term/final.md",
+        "text_sha256": "393e31577e7e91038a65e3777d0f00ced09b6f47b47754eab531f0d42f538cce",
+        "map_sha256": "3e8de1983acf2f2fa2d8156d6f9e04ec703c971c03976e386567b14ef053098a",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-e-term-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "entropy_fan"
+      ],
+      "role_primary_order": [
+        "entropy_fan"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Lambda_Spectrum": {
+    "map_source": "commons/maps/QFEP_Lambda_Spectrum/map_data.json",
+    "text_source": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+    "map_sha256": "320b6c8a9388f8ec4f6938f5cfef3100b244c01b5c9eeb13ae86f700719de473",
+    "text_sha256": "ccb0679010939a220c1587db5b8382a1552bf376b3bcce3910e80cd81a2b7b50",
+    "map_info": {
+      "name": "Lambda: The Path the Hall Recommends",
+      "lookup_name": "QFEP_Lambda_Spectrum",
+      "description": "An authored spectrum from repeated to dispersed forms. Move its lit recommendation without rearranging the structures or retiming their motion.",
+      "version": "encounter-review-2026-09-20",
+      "format": "json",
+      "dimensions": {
+        "width": 17,
+        "depth": 24,
+        "max_height": 1
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Recognise lambda as a weight in the project expression",
+          "Compare an authored spectrum with a measured distribution",
+          "Move the lit recommendation independently of its surroundings",
+          "Ask who can revise the terms by which a place becomes preferable"
+        ]
+      },
+      "title": "The path the hall recommends",
+      "museum": {
+        "wall_height": 5,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            4,
+            1,
+            12,
+            21
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "gradient",
+        "color_top": [
+          0.1,
+          0.1,
+          0.3
+        ],
+        "color_bottom": [
+          0.3,
+          0.1,
+          0.1
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "wave",
+        "duration": 0.3,
+        "delay_between": 0.05,
+        "order": "front_to_back",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Continue",
+        "description": "Now explore the φ term — rate of change.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 2,
+        "raw_token": "qfep_chalkboard:180:0:1",
+        "commented_out": false,
+        "lookup_hint": "qfep_chalkboard",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 4,
+        "raw_token": "crystal_formation:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "crystal_formation",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 14,
+        "z": 5,
+        "raw_token": "edge_particles:0:0.8:0.4",
+        "commented_out": false,
+        "lookup_hint": "edge_particles",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 6,
+        "raw_token": "ordered_grid:0:0.5",
+        "commented_out": false,
+        "lookup_hint": "ordered_grid",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 14,
+        "z": 10,
+        "raw_token": "chaos_particles:0:0.8:0.4",
+        "commented_out": false,
+        "lookup_hint": "chaos_particles",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 12,
+        "raw_token": "lambda_hall:180:0:1#recommendation_control:on#recommendation_position:0.35",
+        "commented_out": false,
+        "lookup_hint": "lambda_hall",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 14,
+        "z": 15,
+        "raw_token": "phase_cube:180:0.8:1",
+        "commented_out": false,
+        "lookup_hint": "phase_cube",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 18,
+        "raw_token": "bifurcation_walkway:90:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "bifurcation_walkway",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 14,
+        "z": 19,
+        "raw_token": "dissolving_form:180:0.8:1",
+        "commented_out": false,
+        "lookup_hint": "dissolving_form",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 21,
+        "raw_token": "complexity_pattern:180:0.8:1",
+        "commented_out": false,
+        "lookup_hint": "complexity_pattern",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 8,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 4,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 8,
+        "z": 22,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Lambda_Spectrum",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 581,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lambda_hall"
+        ],
+        "reason": "Move the lit recommendation while keeping the authored spectrum and its animation independent; compare the invitation with the arrangement it inherits.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Lambda_Spectrum/final.md",
+        "text_sha256": "ccb0679010939a220c1587db5b8382a1552bf376b3bcce3910e80cd81a2b7b50",
+        "map_sha256": "320b6c8a9388f8ec4f6938f5cfef3100b244c01b5c9eeb13ae86f700719de473",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-lambda-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "lambda_hall"
+      ],
+      "role_primary_order": [
+        "lambda_hall"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Phi_Term": {
+    "map_source": "commons/maps/QFEP_Phi_Term/map_data.json",
+    "text_source": "commons/maps/QFEP_Phi_Term/final.md",
+    "map_sha256": "82f88e7c64cfce23802526a453d6904b1e45425e0bb678fd98616dfe162a45ee",
+    "text_sha256": "e4ca8afdd0a9cf4ba4151b725f57f16a8d82cff3c983c58b036c4bb4c21fa020",
+    "map_info": {
+      "name": "Giving change a sign",
+      "lookup_name": "QFEP_Phi_Term",
+      "description": "Compare negative, zero and positive feedback; reveal the earlier labels and ask what they decide. Nearby forms keep their own dynamics.",
+      "version": "1.0",
+      "format": "json",
+      "dimensions": {
+        "width": 13,
+        "depth": 12,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "4-5 minutes",
+        "learning_objectives": [
+          "Distinguish sign from magnitude by crossing zero",
+          "Compare the same magnitude with opposite signs",
+          "Distinguish a parameter, a measured change and an interpretation",
+          "Notice that neighbouring artifacts need not be causally connected"
+        ]
+      },
+      "title": "Sign, magnitude and interpretation",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            1,
+            0,
+            11,
+            12
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.08,
+          0.15
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "split_reveal",
+        "duration": 0.4,
+        "delay_between": 0.03,
+        "order": "center_out",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Find the Edge",
+        "description": "Next: compare a pattern with the controls actually driving it.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "rigid_sculpture:0:0.05:1",
+        "commented_out": false,
+        "lookup_hint": "rigid_sculpture",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 3,
+        "raw_token": "fluid_form:0:0.05:1",
+        "commented_out": false,
+        "lookup_hint": "fluid_form",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 4,
+        "raw_token": "phi_slider:180:1.1:1#sign_study:on#phi:0",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 7,
+        "raw_token": "preserved_pattern:0:0.05:2.5",
+        "commented_out": false,
+        "lookup_hint": "preserved_pattern",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 7,
+        "raw_token": "transforming_pattern:0:0.05:1#cell_size:0.15",
+        "commented_out": false,
+        "lookup_hint": "transforming_pattern",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 9,
+        "raw_token": "tt:90:phi_conservative:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 9,
+        "raw_token": "lambda_promenade:0:0",
+        "commented_out": false,
+        "lookup_hint": "lambda_promenade",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 9,
+        "z": 9,
+        "raw_token": "tt:90:phi_queer:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 6,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 4,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 6,
+        "z": 10,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Phi_Term",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 515,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "phi_slider",
+          "transforming_pattern"
+        ],
+        "reason": "Compare sign and magnitude before revealing an interpretation; the neighbouring pattern keeps its independent rhythm.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Phi_Term/final.md",
+        "text_sha256": "e4ca8afdd0a9cf4ba4151b725f57f16a8d82cff3c983c58b036c4bb4c21fa020",
+        "map_sha256": "82f88e7c64cfce23802526a453d6904b1e45425e0bb678fd98616dfe162a45ee",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-phi-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "role_primary_order": [
+        "phi_slider",
+        "transforming_pattern"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Edge_Of_Chaos": {
+    "map_source": "commons/maps/QFEP_Edge_Of_Chaos/map_data.json",
+    "text_source": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+    "map_sha256": "211e9c5ab59ec333a121ba6181153fe4d6e36244510fa9c20c58162c60f85b3d",
+    "text_sha256": "a3985167c07b9cd5d29b587862ce48579f5af8a9887ede492180b2b96c15af79",
+    "map_info": {
+      "name": "A pattern and the way we drive it",
+      "lookup_name": "QFEP_Edge_Of_Chaos",
+      "description": "Compare the same reaction-diffusion field with two numerical timesteps; follow a feature before naming a regime.",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 16,
+        "depth": 15,
+        "max_height": 4
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Separate an authored parameter path from a measured regime",
+          "Compare two timesteps at equal elapsed model time",
+          "Distinguish repeating a start from choosing a new seed",
+          "Ask which visible features persist across numerical resolution"
+        ]
+      },
+      "title": "Same start, same time",
+      "eye_shot_adopted": "Trial_eye_QFEP_Edge_Of_Chaos",
+      "museum": {
+        "wall_height": 3.5,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            1,
+            0,
+            15,
+            15
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.05,
+          0.12,
+          0.1
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "organic_grow",
+        "duration": 0.5,
+        "delay_between": 0.02,
+        "order": "radial_center",
+        "easing": "ease_in_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4",
+        "4",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "4",
+        "4",
+        "4",
+        "4",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "4",
+        "4",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "3",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "To the Sandbox",
+        "description": "Next: find out which objects receive each control.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:180:edge_of_chaos:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "emergence_zone:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "emergence_zone",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "turing_pattern:0:0.8",
+        "commented_out": false,
+        "lookup_hint": "turing_pattern",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "edge_core:0:1.5",
+        "commented_out": false,
+        "lookup_hint": "edge_core",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 2,
+        "raw_token": "lambda_slider:0:0.5#locked:0.4",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 13,
+        "z": 6,
+        "raw_token": "edge_of_chaos_unlocked:270:0:1#comparison_study:on",
+        "commented_out": false,
+        "lookup_hint": "edge_of_chaos_unlocked",
+        "role": "primary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 7,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 7,
+        "z": 7,
+        "raw_token": "el:2:1",
+        "commented_out": false,
+        "lookup_hint": "el",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/overhead_light.tscn"
+      },
+      {
+        "x": 7,
+        "z": 13,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Edge_Of_Chaos",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 610,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "edge_of_chaos_unlocked"
+        ],
+        "reason": "Compare the same starting field at equal model time with two numerical timesteps; choose a feature before naming a regime.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Edge_Of_Chaos/final.md",
+        "text_sha256": "a3985167c07b9cd5d29b587862ce48579f5af8a9887ede492180b2b96c15af79",
+        "map_sha256": "211e9c5ab59ec333a121ba6181153fe4d6e36244510fa9c20c58162c60f85b3d",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-edge-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "edge_of_chaos_unlocked"
+      ],
+      "role_primary_order": [
+        "edge_of_chaos_unlocked"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Sandbox": {
+    "map_source": "commons/maps/QFEP_Sandbox/map_data.json",
+    "text_source": "commons/maps/QFEP_Sandbox/final.md",
+    "map_sha256": "e5fbc64e6cba06d618c41d49177a47b818af624f5da4de3eae54a18a0b901c4e",
+    "text_sha256": "f17a66f424511f91e663fc63e66cb098d450be50db975ddef9a2be240f9ab14b",
+    "map_info": {
+      "name": "Where the control reaches",
+      "lookup_name": "QFEP_Sandbox",
+      "description": "Repeat a handle movement before and after connecting one reactor. Compare the handle setting with the value the receiver actually uses.",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 16,
+        "max_height": 4
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "10+ minutes",
+        "learning_objectives": [
+          "Distinguish local feedback from a received input",
+          "Connect and cut one explicit control route",
+          "Compare one parameter at a time",
+          "Separate an authored visual response from a measured physical quantity"
+        ]
+      },
+      "title": "Connect / Cut",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            0,
+            0,
+            14,
+            16
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.08,
+          0.08,
+          0.12
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "scale_up",
+        "duration": 0.4,
+        "delay_between": 0.02,
+        "order": "radial_center",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Synthesis",
+        "description": "Integrate everything you've learned.",
+        "properties": {
+          "action": "next_in_sequence"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 2,
+        "raw_token": "tt:180:qfep_mastery:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 5,
+        "raw_token": "lambda_slider:180:0:1#calibration:none",
+        "commented_out": false,
+        "lookup_hint": "lambda_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 8,
+        "z": 5,
+        "raw_token": "phi_slider:180:0.1:1#sign_study:on#phi:0",
+        "commented_out": false,
+        "lookup_hint": "phi_slider",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 7,
+        "z": 9,
+        "raw_token": "qfep_reactor:180:0.3:1#wiring_study:on",
+        "commented_out": false,
+        "lookup_hint": "qfep_reactor",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 11,
+        "raw_token": "reactive_particles:0:1:1#field_seed:401",
+        "commented_out": false,
+        "lookup_hint": "reactive_particles",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 11,
+        "z": 12,
+        "raw_token": "qfep_formula_3d:180:0.05:1",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 7,
+        "z": 1,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 7,
+        "z": 2,
+        "raw_token": "sub:map",
+        "commented_out": false,
+        "lookup_hint": "sub",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/subtitle_trigger.tscn"
+      },
+      {
+        "x": 7,
+        "z": 14,
+        "raw_token": "t",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Sandbox",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 534,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "lambda_slider",
+          "phi_slider",
+          "qfep_reactor"
+        ],
+        "reason": "Make, interrupt and repeat a local connection; compare a handle value with one receiver input and response.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Sandbox/final.md",
+        "text_sha256": "f17a66f424511f91e663fc63e66cb098d450be50db975ddef9a2be240f9ab14b",
+        "map_sha256": "e5fbc64e6cba06d618c41d49177a47b818af624f5da4de3eae54a18a0b901c4e",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-sandbox-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "lambda_slider",
+        "phi_slider",
+        "qfep_reactor"
+      ],
+      "role_primary_order": [
+        "lambda_slider",
+        "phi_slider",
+        "qfep_reactor"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  },
+  "QFEP_Synthesis": {
+    "map_source": "commons/maps/QFEP_Synthesis/map_data.json",
+    "text_source": "commons/maps/QFEP_Synthesis/final.md",
+    "map_sha256": "79e8681536268206c1455bdc9d3b90e1a13e07e3f795e087f7714be956050eae",
+    "text_sha256": "2d03b5a9d94511171ace3d3a1bef79c0a841ee42af107e6d226fbb45eb7c8d66",
+    "map_info": {
+      "name": "QFEP_Synthesis",
+      "lookup_name": "QFEP_Synthesis",
+      "description": "A specimen with local Lambda and Phi controls: compare stiffness, pressure, damping and drag; switch imposed pressure between pulsing and steady while the body remains in the simulation. The central terraces and surrounding works remain.",
+      "version": "placed-humanoid_walker",
+      "format": "json",
+      "dimensions": {
+        "width": 14,
+        "depth": 14,
+        "max_height": 3
+      },
+      "metadata": {
+        "difficulty": "advanced",
+        "category": "qfep",
+        "estimated_time": "5-6 minutes",
+        "learning_objectives": [
+          "Integration of all QFEP concepts",
+          "The formula as lived experience",
+          "You have the capacity to oscillate consciously",
+          "Return to the lab transformed"
+        ]
+      },
+      "title": "QFEP_Synthesis",
+      "eye_shot_adopted": "Trial_eye_QFEP_Synthesis",
+      "museum": {
+        "wall_height": 3,
+        "gate_depth_rows": 0,
+        "artifact_placement": "map",
+        "sculpture_clear_rects": [
+          [
+            1,
+            1,
+            5,
+            5
+          ]
+        ]
+      }
+    },
+    "settings": {
+      "cube_size": 1.0,
+      "gutter": 0.0,
+      "show_grid": true,
+      "enable_physics": true,
+      "background": {
+        "type": "sky",
+        "color": [
+          0.1,
+          0.1,
+          0.15
+        ]
+      },
+      "grid_animation": {
+        "enabled": true,
+        "type": "scale_up",
+        "duration": 0.5,
+        "delay_between": 0.03,
+        "order": "radial_center",
+        "easing": "ease_out"
+      }
+    },
+    "structure_rows_z_columns_x": [
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "3",
+        "3",
+        "3",
+        "3",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "2",
+        "2",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "w"
+      ],
+      [
+        "w",
+        "2",
+        "2",
+        "2",
+        "2",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2",
+        "2",
+        "2",
+        "0",
+        "w"
+      ],
+      [
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "1",
+        "1",
+        "1",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w",
+        "w"
+      ]
+    ],
+    "utility_definitions": {
+      "t": {
+        "type": "teleporter",
+        "name": "Return to Lab",
+        "description": "Return transformed. The lab has changed.",
+        "properties": {
+          "destination": "Lab",
+          "lab_variant": "post_qfeplaboratory"
+        }
+      }
+    },
+    "artifact_instances": [
+      {
+        "x": 2,
+        "z": 1,
+        "raw_token": "tt:270:qfep_synthesis:180:0.5",
+        "commented_out": false,
+        "lookup_hint": "tt",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 5,
+        "z": 2,
+        "raw_token": "grab_sphere_F:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_F",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "qfep_formula_3d:0:2.0",
+        "commented_out": false,
+        "lookup_hint": "qfep_formula_3d",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 3,
+        "raw_token": "queer_morphology_specimen:180:0.105:1",
+        "commented_out": false,
+        "lookup_hint": "queer_morphology_specimen",
+        "role": "primary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "entropy_ceiling",
+        "commented_out": false,
+        "lookup_hint": "entropy_ceiling",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 10,
+        "z": 7,
+        "raw_token": "entropy_meter",
+        "commented_out": false,
+        "lookup_hint": "entropy_meter",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 8,
+        "raw_token": "grasp_cabinet:0:0",
+        "commented_out": false,
+        "lookup_hint": "grasp_cabinet",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 2,
+        "z": 10,
+        "raw_token": "grab_sphere_E:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_E",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 3,
+        "z": 10,
+        "raw_token": "grab_sphere_lambda:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_lambda",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      },
+      {
+        "x": 4,
+        "z": 10,
+        "raw_token": "grab_sphere_phi:0:0.4",
+        "commented_out": false,
+        "lookup_hint": "grab_sphere_phi",
+        "role": "secondary",
+        "registry_candidate_count": 1
+      }
+    ],
+    "utility_instances": [
+      {
+        "x": 6,
+        "z": 2,
+        "raw_token": "s",
+        "commented_out": false,
+        "lookup_hint": "s",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/spawn_point_scene.tscn"
+      },
+      {
+        "x": 4,
+        "z": 3,
+        "raw_token": "3t:EGG",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 3,
+        "z": 4,
+        "raw_token": "3t:F",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 9,
+        "z": 4,
+        "raw_token": "3t:E(S)",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 5,
+        "raw_token": "3t:THE PLINTH OF BECOMING",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 3,
+        "z": 6,
+        "raw_token": "3t:λ",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 6,
+        "raw_token": "el:3:1",
+        "commented_out": false,
+        "lookup_hint": "el",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/overhead_light.tscn"
+      },
+      {
+        "x": 9,
+        "z": 6,
+        "raw_token": "3t:φ",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 8,
+        "raw_token": "3t:FORMULA UNFOLDS",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 10,
+        "raw_token": "3t:IMAGO",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 11,
+        "raw_token": "3t:RETURN TRANSFORMED",
+        "commented_out": false,
+        "lookup_hint": "3t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/word_is.tscn"
+      },
+      {
+        "x": 6,
+        "z": 12,
+        "raw_token": "t:lab",
+        "commented_out": false,
+        "lookup_hint": "t",
+        "role": "unassigned",
+        "utility_source_resolution": "literal registry scene",
+        "scene": "res://commons/scenes/mapobjects/teleport_scene.tscn"
+      }
+    ],
+    "editorial_state": {
+      "map": "QFEP_Synthesis",
+      "recorded_status": "encounter_and_text_revised",
+      "text_words": 580,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "queer_morphology_specimen"
+        ],
+        "reason": "Separate stiffness, pressure and dissipation in one existing specimen; stop imposed pressure modulation while physics continues.",
+        "status": "encounter_and_text_revised",
+        "sequence": "qfeplaboratory",
+        "text_path": "commons/maps/QFEP_Synthesis/final.md",
+        "text_sha256": "2d03b5a9d94511171ace3d3a1bef79c0a841ee42af107e6d226fbb45eb7c8d66",
+        "map_sha256": "79e8681536268206c1455bdc9d3b90e1a13e07e3f795e087f7714be956050eae",
+        "learner_verified": false,
+        "review_evidence": "doc/book/iterations/2026-09-20-qfep-synthesis-review/SUMMARY.md"
+      },
+      "manuscript_artifact_order": [
+        "queer_morphology_specimen"
+      ],
+      "role_primary_order": [
+        "queer_morphology_specimen"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  }
+}

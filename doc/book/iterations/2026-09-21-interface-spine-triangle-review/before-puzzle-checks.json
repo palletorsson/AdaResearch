@@ -1,0 +1,76 @@
+{
+	"checks": [
+		{
+			"message": "Requested hall built",
+			"passed": true
+		},
+		{
+			"message": "Authored triangle artifact found",
+			"passed": true
+		},
+		{
+			"message": "Experiment panel assembled",
+			"passed": true
+		},
+		{
+			"message": "Reading position has floor",
+			"passed": true
+		},
+		{
+			"message": "Standing capsule fits at reading position",
+			"passed": true
+		},
+		{
+			"message": "Final metre of approach is unobstructed",
+			"passed": true
+		},
+		{
+			"message": "FillButton retains unit physics scale",
+			"passed": true
+		},
+		{
+			"message": "FillButton inside working height band 0.65–1.25 m",
+			"passed": false
+		},
+		{
+			"message": "FillButton within 0.70 m horizontal layout budget",
+			"passed": true
+		},
+		{
+			"message": "FillButton has unobstructed interaction ray from operating pose",
+			"passed": true
+		}
+	],
+	"controls": [
+		{
+			"clear_ray": true,
+			"height": 1.27000007778406,
+			"hit": "/root/EndlessMuseum/Seg0_sainsbury-false-perspective-enfilade/TriangleLinePuzzle/ExperimentPanel/FillButton/InteractableAreaButton",
+			"horizontal_distance": 0.676251292228699,
+			"label": "FillButton",
+			"position": [
+				8.44600009918213,
+				1.26999998092651,
+				5.90000009536743
+			]
+		}
+	],
+	"failures": [
+		"FillButton inside working height band 0.65–1.25 m"
+	],
+	"panel": {
+		"height_above_floor": 1.50000009685755,
+		"position": [
+			8.5,
+			1.5,
+			5.69999980926514
+		]
+	},
+	"passed": false,
+	"room": "Point_Triangle_Context",
+	"scope": "Actual triangle hall; supplied endpoint/drawing positions; desktop images and layout measurements. No headset test.",
+	"shots": [
+		"reading.png",
+		"encounter.png"
+	]
+}

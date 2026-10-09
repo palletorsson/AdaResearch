@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PG_Branching_Growth · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=PG_Branching_Growth">← Tutorial lineage</a></p><h1>PG Branching Growth</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="PG_Branching_Growth/final.md">Raw captured source</a></p><pre># One nearest invitation
+
+&lt;!-- @branching_growth_algorithm --&gt;
+
+Eight points wait. You have met their arrangement in Space Colonization. There, several requests could contribute to a direction. Before pressing STEP here, find the nearest point to the root. Does the branch listen to the others?
+
+The first segment leans left. In local coordinates the nearest target is (-2, 1.5, 0), two and a half metres away. Normalizing its direction and taking a half-metre step gives (-0.4, 0.3, 0). We can predict this small displacement before we have a tree to admire.
+
+The running program searches unreached attractors inside `attraction_distance`. Each active branch site chooses the nearest one. Its construction begins with:
+
+```gdscript
+var direction = (attractor.position - branch.position).normalized()
+```
+
+That direction receives optional jitter. A pulsing multiplier can change the segment length. The opening suppresses both so that we can distinguish the choice of target from these additional variations. Press TEN STEPS. It performs ten calls to the same growth operation, without making you hold a button for every generation.
+
+Now compare the readout&#x27;s records with its distinct positions. They need not agree. Older active sites can produce another child; with no variation, an old site can choose the same target and put that child where it put the last one. Several records may occupy one place. A count of parents with multiple children therefore tells us about the stored tree, not necessarily about visibly separate branches.
+
+This is a useful failure of our first description. We said a branch had appeared; the database agreed. The space may have acquired nothing new. The remainder is not always an extravagant shape. Sometimes it is redundant work concealed by a familiar outline.
+
+Press HOLD to keep a separate mesh witness, displayed at 0.4 scale beside the desk. Then press VARIATION. The root and eight targets return, with jitter and pulsing enabled. Advance again. These settings can separate previously coincident paths, but their presence does not make a biological explanation. They are explicit additions to a directional rule. RESET removes those variations and starts the comparison again; the witness remains.
+
+The museum study caps the record count at 192. The counter includes coincident children. That limit tells us something about what this program spends, not how mature its tree has become. RULE reveals the operation after you have had a chance to follow it.
+
+Keep the Organic Space work nearby in view. It obtains an organic appearance through a different construction: geometric shells, tunnels and detail. A resemblance does not establish a common method. We are learning to ask what a form did to become available, rather than treating its appearance as its explanation.
+
+Neither a parent record nor a drawn line has yet made a passage for us. In Percolation, next, we ask a narrower question first: under a stated rule of contact, what can reach what?
+
+&lt;!-- @ --&gt;
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="PG_Branching_Growth/tutorial.md">Raw captured source</a></p><pre># One nearest invitation — encounter
+
+&lt;!-- @branching_growth_algorithm --&gt;
+
+Eight points wait. You have met their arrangement in Space Colonization. There, several requests could contribute to a direction. Before pressing STEP here, find the nearest point to the root. Does the branch listen to the others?
+
+The first segment leans left. In local coordinates the nearest target is (-2, 1.5, 0), two and a half metres away. Normalizing its direction and taking a half-metre step gives (-0.4, 0.3, 0). We can predict this small displacement before we have a tree to admire.
+
+The running program searches unreached attractors inside `attraction_distance`. Each active branch site chooses the nearest one. Its construction begins with:
+
+```gdscript
+var direction = (attractor.position - branch.position).normalized()
+```
+
+That direction receives optional jitter. A pulsing multiplier can change the segment length. The opening suppresses both so that we can distinguish the choice of target from these additional variations. Press TEN STEPS. It performs ten calls to the same growth operation, without making you hold a button for every generation.
+
+Now compare the readout&#x27;s records with its distinct positions. They need not agree. Older active sites can produce another child; with no variation, an old site can choose the same target and put that child where it put the last one. Several records may occupy one place. A count of parents with multiple children therefore tells us about the stored tree, not necessarily about visibly separate branches.
+
+This is a useful failure of our first description. We said a branch had appeared; the database agreed. The space may have acquired nothing new. The remainder is not always an extravagant shape. Sometimes it is redundant work concealed by a familiar outline.
+
+Press HOLD to keep a separate mesh witness, displayed at 0.4 scale beside the desk. Then press VARIATION. The root and eight targets return, with jitter and pulsing enabled. Advance again. These settings can separate previously coincident paths, but their presence does not make a biological explanation. They are explicit additions to a directional rule. RESET removes those variations and starts the comparison again; the witness remains.
+
+The museum study caps the record count at 192. The counter includes coincident children. That limit tells us something about what this program spends, not how mature its tree has become. RULE reveals the operation after you have had a chance to follow it.
+
+Keep the nearby organic_space in view. It obtains an organic appearance through a different construction: geometric shells, tunnels and detail. A resemblance does not establish a common method. We are learning to ask what a form did to become available, rather than treating its appearance as its explanation.
+
+Neither a parent record nor a drawn line has yet made a passage for us. In Percolation, next, we ask a narrower question first: under a stated rule of contact, what can reach what?
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="PG_Branching_Growth/technical.md">Raw captured source</a></p><pre># One nearest invitation — implementation
+
+Sources: branching_growth_algorithm.gd::grow_step, update_mesh_immediate; organic_space.gd.
+
+The opt-in `pg_workshop_console` binds the named artifacts within its own museum hall; controls are implemented in commons/artifacts/timing_machines/pg_workshop.gd. Six push buttons occupy one compact 3×2 desk with an inclined translucent readout. RULE reveals the implementation card. Actions are guarded while a rebuild is in progress.
+
+Nearest-target growth; compare stored children with distinct positions, then restore variation.
+
+The first segment leans left. In local coordinates the nearest target is (-2, 1.5, 0), two and a half metres away. Normalizing its direction and taking a half-metre step gives (-0.4, 0.3, 0). We can predict this small displacement before we have a tree to admire.
+
+The running program searches unreached attractors inside `attraction_distance`. Each active branch site chooses the nearest one. Its construction begins with:
+
+Now compare the readout&#x27;s records with its distinct positions. They need not agree. Older active sites can produce another child; with no variation, an old site can choose the same target and put that child where it put the last one. Several records may occupy one place. A count of parents with multiple children therefore tells us about the stored tree, not necessarily about visibly separate branches.
+
+The museum study caps the record count at 192. The counter includes coincident children. That limit tells us something about what this program spends, not how mature its tree has become. RULE reveals the operation after you have had a chance to follow it.
+
+Space: the inherited structure is retained in a larger surround; relocated objects have an independent museum aisle. Source zeros remain present and receive explicitly listed museum.floor_cells covers. The floor audit records offsets and covers. Raised historic cells are retained witnesses, not universally certified decks.
+
+Validation: see doc/space/pg-sequence-2026-09-15 and ada_run/pg-review-2026-09-15. Report actual runtime checks separately from outstanding human headset/clearance review.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="PG_Branching_Growth/intent.md">Raw captured source</a></p><pre># Intent
+
+Nearest-target growth; compare stored children with distinct positions, then restore variation.
+
+Ask what the current construction permits a body, signal or representation to do. Ground the critical question in an observed operation and the code that produces it. Do not infer access from an image or entropy from apparent complexity.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="PG_Branching_Growth/critical.md">Raw captured source</a></p><pre># One nearest invitation — the assumption to test
+
+Now compare the readout&#x27;s records with its distinct positions. They need not agree. Older active sites can produce another child; with no variation, an old site can choose the same target and put that child where it put the last one. Several records may occupy one place. A count of parents with multiple children therefore tells us about the stored tree, not necessarily about visibly separate branches.
+
+This is a useful failure of our first description. We said a branch had appeared; the database agreed. The space may have acquired nothing new. The remainder is not always an extravagant shape. Sometimes it is redundant work concealed by a familiar outline.
+
+Press HOLD to keep a separate mesh witness, displayed at 0.4 scale beside the desk. Then press VARIATION. The root and eight targets return, with jitter and pulsing enabled. Advance again. These settings can separate previously coincident paths, but their presence does not make a biological explanation. They are explicit additions to a directional rule. RESET removes those variations and starts the comparison again; the witness remains.
+
+The museum study caps the record count at 192. The counter includes coincident children. That limit tells us something about what this program spends, not how mature its tree has become. RULE reveals the operation after you have had a chance to follow it.
+
+Keep the nearby organic_space in view. It obtains an organic appearance through a different construction: geometric shells, tunnels and detail. A resemblance does not establish a common method. We are learning to ask what a form did to become available, rather than treating its appearance as its explanation.
+
+Neither a parent record nor a drawn line has yet made a passage for us. In Percolation, next, we ask a narrower question first: under a stated rule of contact, what can reach what?
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="PG_Branching_Growth/artifacts.md">Raw captured source</a></p><pre># Collection
+
+- `pg_workshop_console` — decoration
+- `branching_growth_algorithm` — primary
+- `organic_space` — secondary
+
+Primary markers match the book passages. The workshop desk controls the works; it is not an additional required algorithm.
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="PG_Branching_Growth/summary.md">Raw captured source</a></p><pre># One nearest invitation
+
+Nearest-target growth; compare stored children with distinct positions, then restore variation.
+
+Primary: branching_growth_algorithm. Supporting collection retained. The physical workshop desk operates these existing programs. Follow final.md in artifact order.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="PG_Branching_Growth/blurb.md">Raw captured source</a></p><pre># One nearest invitation
+
+Nearest-target growth; compare stored children with distinct positions, then restore variation.
+</pre></section></body></html>

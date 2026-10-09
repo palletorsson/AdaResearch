@@ -1,0 +1,18 @@
+--- before/algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd
++++ after/algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd
+@@ -7,13 +7,13 @@
+ #
+ # @identity
+ # essence: f_beat = |f_a - f_b| — difference becomes rhythm
+-# desire: drag two frequencies close together and hear/see the slow pulse emerge from their interference
++# desire: drag two frequencies close together and see the slow pulse emerge from their interference
+ # critical_parameter: freq_a and freq_b sliders — the smaller the gap, the slower the beat
+ # triggers: slider_moved on either frequency recalculates the wave animation
+ # emerges: the beat envelope — a slow amplitude modulation born from two fast oscillations
+ # needs: RackTemplates panel with two sliders [has]; 3 rows of spheres [has]; Label3D [has]
+ # relationships: builds on sine_oscillation; connects to fourier_transform, standing_waves, resonance
+-# truth: When two nearly identical things interfere, their tiny difference becomes the loudest signal.
++# truth: The frequency difference appears as a slow visual envelope; this artifact produces no audio.
+ 
+ extends Node3D
+ 

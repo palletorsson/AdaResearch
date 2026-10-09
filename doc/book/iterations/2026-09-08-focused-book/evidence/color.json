@@ -1,0 +1,210 @@
+{
+  "sequence": "color",
+  "status": "source_read_not_runtime_verified",
+  "rooms": [
+    {
+      "room_id": "Color_Context_Placed",
+      "primary_tokens": [
+        "albers_wall_gallery"
+      ],
+      "question": "How much of a colour belongs to what surrounds it?",
+      "ontology": "A composition puts coloured regions into relations: adjacency, enclosure, proportion and contrast. A stored colour and its appearance in a particular arrangement are not interchangeable descriptions.",
+      "action": "Choose one nested-square canvas. Alternate looking at its centre and its surrounding bands; move back to take in the whole canvas, then compare a neighbouring canvas. Report a visible difference before trying to name a colour rule.",
+      "observable": "The same nested-square construction supports many different colour relationships. Smaller fields are seen through the frames supplied by larger ones; attention and viewing distance change which relationship dominates.",
+      "mechanism": "The passive gallery builds canvases in rows and columns, with five nested squares by default. Each inset scales by inset_ratio; palette_seed plus canvas index generates repeatable but distinct palettes. There are no runtime palette controls.",
+      "limit": "Different canvases have different palette values, so they do not establish a controlled same-colour/different-background experiment. A visitor’s report describes perception here, not a universal response shared by every eye or display.",
+      "variation": "Use your hand or change your viewing angle to reduce the surrounding bands you can see, then look at the full canvas again. A paired identical-centre comparison would be a proposed future variant.",
+      "prior_bridge": "Live previous room: Tutorial_Disco",
+      "next_bridge": "Live next room: Color_Nails",
+      "sources": [
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd :: _build_canvases, nested-square palette generation; no runtime input",
+        "commons/maps/Color_Context_Placed/map_data.json :: albers_wall_gallery:180:0.5"
+      ],
+      "source_files": [
+        "commons/maps/Color_Context_Placed/map_data.json",
+        "commons/artifacts/registry/algorithms_misc.json",
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn",
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Color_Context_Placed/map_data.json": "831f592b45c5bfc4352f9e041cbbf878d31c5201f6faea01b962d9a89339fcb6",
+        "commons/artifacts/registry/algorithms_misc.json": "8e9c24c4da207dfd30eef90bd1b2fcd065c6325459c44f92610df368e8be3b0b",
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.tscn": "7235c5b17d70c3613bd453ad7a02849d4a37ca425cccc7f57fcef8176a87bf9d",
+        "algorithms/primitives/homagetothesquare/albers_wall_gallery.gd": "32e7d9558e3e81ebb2f5ea9ae9ff2a48d80fb5d0e9a64f3c1d0dfadc6e4b7f8b"
+      },
+      "placements": [
+        {
+          "cell": [
+            9,
+            14
+          ],
+          "value": "albers_wall_gallery:180:0.5"
+        }
+      ],
+      "cautions": "Runtime access and controls require a museum walk; source-read only."
+    },
+    {
+      "room_id": "Color_Nails",
+      "primary_tokens": [
+        "nail_color_controller",
+        "hand_color_controller"
+      ],
+      "question": "What changes when a colour becomes part of the body you act through?",
+      "ontology": "An RGB triple is three independent channel values mapped from a position in a bounded coordinate space. The material receiving those values determines another part of the visible result.",
+      "action": "Move the grabbable point inside the controller’s RGB box along one axis at a time. Watch the Preview swatch. With XR hands available, compare the colour on nails and skin using the two stations.",
+      "observable": "One axis changes one channel. The swatch changes immediately; the nail and skin controllers target different hand surfaces and use different material treatments. Colours are saved through GameManager.",
+      "mechanism": "value_mapper_3d._constrain_point clamps the point to space_size; _update_output normalizes each coordinate and emits values_changed. nail_color_controller._on_color_values_changed constructs Color(r,g,b), updates its preview and available hand materials. hand_color_controller.tscn reuses the script with target_surface=1.",
+      "limit": "The preview is available even when the expected XR hand nodes cannot be found. A chosen RGB value does not guarantee identical appearance on a glossy nail, matte skin, a screen, or someone else’s display. The editable channels do not exhaust bodily identity.",
+      "variation": "Choose a colour for an unexpected body surface, then compare its appearance with the swatch without demanding a naturalistic match. A future palette-history tool could preserve several choices; no such interface is claimed here.",
+      "prior_bridge": "Live previous room: Color_Context_Placed",
+      "next_bridge": "Live next room: Color_Pillar",
+      "sources": [
+        "commons/interfaces/value_mapper_3d.gd :: _create_point, _constrain_point, _update_output",
+        "commons/interfaces/nail_color_controller.gd :: _find_hand_nodes, _on_color_values_changed",
+        "commons/interfaces/hand_color_controller.tscn :: target_surface=1"
+      ],
+      "source_files": [
+        "commons/maps/Color_Nails/map_data.json",
+        "commons/artifacts/registry/commons_artifacts.json",
+        "commons/interfaces/nail_color_controller.tscn",
+        "commons/interfaces/nail_color_controller.gd",
+        "commons/interfaces/hand_color_controller.tscn",
+        "commons/interfaces/value_mapper_3d.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Color_Nails/map_data.json": "f6e9ab090f9d7f778118c2656b5aefea42f04b919666676b17c739dd49f0a55e",
+        "commons/artifacts/registry/commons_artifacts.json": "349186eb66fb6850f79d2e98f244bc6af646e2b71dcc2601fba9d06d755ad0b1",
+        "commons/interfaces/nail_color_controller.tscn": "2c109866c27d3a0258064f1f956c52ab685e7e739fd4d30bacc51505fe2b0bdc",
+        "commons/interfaces/nail_color_controller.gd": "ae59be415cbfbc3af8da17db4ccb90e46464dee34d9ba887d96c63278b2d476e",
+        "commons/interfaces/hand_color_controller.tscn": "3ef98ef28cb63e401711ea86225ec04640f0f9e63d46140d85bba29471f40e2a",
+        "commons/interfaces/value_mapper_3d.gd": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265"
+      },
+      "placements": [
+        {
+          "cell": [
+            3,
+            5
+          ],
+          "value": "nail_color_controller:180"
+        },
+        {
+          "cell": [
+            3,
+            7
+          ],
+          "value": "hand_color_controller:180"
+        }
+      ],
+      "cautions": "Describe point movement rather than three separate sliders. XR material binding is conditional; desktop visitors may only see the preview. Runtime validation outstanding."
+    },
+    {
+      "room_id": "Color_Pillar",
+      "primary_tokens": [
+        "pillarcolorcollection",
+        "composition_twins"
+      ],
+      "question": "Can a small arrangement help you see a large composition?",
+      "ontology": "A palette is an ordered collection of colours, while composition relates coloured bodies through positions, intervals and scale. The room makes both relations spatial.",
+      "action": "First look along and across the coloured pillars to compare overlapping sight lines. At the twins table, move one small primitive and watch its larger counterpart in the basin respond; change a second position while keeping the first as a reference.",
+      "observable": "A colonnade reads differently from different viewpoints even though its palette stays fixed. A small displacement at the table becomes a larger displacement in the paired composition, while colour and shape help identify the pair.",
+      "mechanism": "pillarcolorcollection._spawn_pillars assigns palette[color_index modulo size] along a row/column grid. composition_twins uses actual XRTools pickable leaders and _process copies each leader transform; _place_twin scales displacement from the table anchor by offset_scale and body size by twin_scale. This map requests three objects and a four-metre-deep basin.",
+      "limit": "The large composition is constrained to a control bed; the follower cannot be arranged independently. This is a designed similarity, not proof that every effect of scale, material and viewpoint is preserved. Pillar palette cycling exists as a method but has no authored visitor selector.",
+      "variation": "Arrange an awkward alignment or intentional occlusion instead of a balanced composition. View the large result from two positions and ask who each arrangement makes room for. Independent twin movement would require an interface change.",
+      "prior_bridge": "Live previous room: Color_Nails",
+      "next_bridge": "Live next room: Color_Walls",
+      "sources": [
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd :: _spawn_pillars, cycle_to_next_palette",
+        "commons/artifacts/composition_twins/composition_twins.gd :: _process, _place_twin, _clamp_lead",
+        "commons/maps/Color_Pillar/map_data.json :: composition_twins pool_offset/depth/count/width configuration"
+      ],
+      "source_files": [
+        "commons/maps/Color_Pillar/map_data.json",
+        "commons/artifacts/registry/color.json",
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn",
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+        "commons/artifacts/registry/composition_twins.json",
+        "commons/artifacts/composition_twins/composition_twins.tscn",
+        "commons/artifacts/composition_twins/composition_twins.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Color_Pillar/map_data.json": "7e034a41ba8f0385cf13f7d2362b80227144e40315c2f248f9c07e5d37b04e33",
+        "commons/artifacts/registry/color.json": "1533efd23f5a94362e8c4dcbcba0ea58cbabbbcde1452f78b44a42aa47663862",
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.tscn": "3dc213d01edeb255f91978684ad3f4ef65bc31fd822a61ccf0665e9934a7a69f",
+        "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd": "6bc2bb7f8e1b3d490c1a433b290554cf6a353accf03a67226ad6178c08f88358",
+        "commons/artifacts/registry/composition_twins.json": "eed00aa56d973cf68a348da758fd1b0579ee8679dd0dd991aeec0f869ad30bcb",
+        "commons/artifacts/composition_twins/composition_twins.tscn": "c529dce0c7fa4c2348d48d1b0d158c37b30acae3d9000d1e47b358761c6d99a7",
+        "commons/artifacts/composition_twins/composition_twins.gd": "52c2f5f30bda4ae8a8fcd742f767befdafa2e5f27100aa6f593d79d0a3ba0747"
+      },
+      "placements": [
+        {
+          "cell": [
+            4,
+            5
+          ],
+          "value": "pillarcolorcollection:0:-0.5"
+        },
+        {
+          "cell": [
+            6,
+            10
+          ],
+          "value": "composition_twins#pool_offset:-2.5,0,0.5#depth:4#cube_size:0.6#count:3#width:4"
+        }
+      ],
+      "cautions": "Current source supports the two chosen encounters. Do not promise absent flashlight_demo. visual_color_mixing legacy bench has additive settings on the supposed subtractive side; it needs a separate review before anchoring prose to that comparison."
+    },
+    {
+      "room_id": "Color_Walls",
+      "primary_tokens": [
+        "gradient_interpolator",
+        "color_space_navigator"
+      ],
+      "question": "If two paths begin and end at the same colours, must the colours between them agree?",
+      "ontology": "A colour space provides coordinates; interpolation supplies a rule for travelling between two coordinate values. The path is part of the result.",
+      "action": "At GRADIENT choose the two endpoint colours using COLOR A and COLOR B, then press MODE to compare RGB and HSV. Keep the endpoints fixed for the first comparison. Look at the RGB cube and cylindrical companion to connect the path difference to different coordinate systems.",
+      "observable": "The endpoints remain while intermediate cubes change. The default red-to-blue pair takes different middle colours under direct channel interpolation and hue interpolation. The navigator is a passive model you examine from outside; its points have no selection or grab control.",
+      "mechanism": "GradientInterpolator._recalculate uses Color.lerp in RGB mode and _lerp_hsv in HSV mode. HSV adjusts hue difference across the wrap to take the shorter arc, then interpolates saturation and value. ColorSpaceNavigator maps RGB to XYZ sample positions, with a fixed seed and a separate cylindrical companion.",
+      "limit": "A straight coordinate path is not a guarantee of equal perceptual steps. The navigator’s companion is labelled HSL but uses Color.from_hsv internally, so do not teach it as a verified HSL model. Neither display contains every possible colour.",
+      "variation": "Find endpoints for which the choice of route strongly changes the middle, then choose nearby endpoints and see whether the difference becomes less obvious. A long-way-round hue route would be a proposed extension, because the current code always chooses the shorter arc.",
+      "prior_bridge": "Live previous room: Color_Pillar",
+      "next_bridge": "Live next room: Pattern_Foundry",
+      "sources": [
+        "algorithms/color/gradient_interpolator/gradient_interpolator.gd :: _build_panel, _recalculate, _lerp_hsv",
+        "commons/artifacts/color_space_navigator/color_space_navigator.gd :: _build_rgb_cube, _create_sample_points_rgb, _build_hsl_cylinder"
+      ],
+      "source_files": [
+        "commons/maps/Color_Walls/map_data.json",
+        "commons/artifacts/registry/color.json",
+        "algorithms/color/gradient_interpolator/gradient_interpolator.tscn",
+        "algorithms/color/gradient_interpolator/gradient_interpolator.gd",
+        "commons/artifacts/color_space_navigator/color_space_navigator.tscn",
+        "commons/artifacts/color_space_navigator/color_space_navigator.gd"
+      ],
+      "source_hashes": {
+        "commons/maps/Color_Walls/map_data.json": "1c249053b26f897e35bcecdf1d9e6306e1b40257c2251875de81b613ca5f95db",
+        "commons/artifacts/registry/color.json": "1533efd23f5a94362e8c4dcbcba0ea58cbabbbcde1452f78b44a42aa47663862",
+        "algorithms/color/gradient_interpolator/gradient_interpolator.tscn": "81502ca1b36612ec05229d0ff3e50c438f08dd2d5d1a32b8de8ee5e35ecd7527",
+        "algorithms/color/gradient_interpolator/gradient_interpolator.gd": "7cdc4157b4ad8492a6250476450ae3a4c165187ca1513f83460a28901c5c6514",
+        "commons/artifacts/color_space_navigator/color_space_navigator.tscn": "6e222e196c2788e2a5e93066d56abc2cda7af012ff02425aa5ef01b92d5ed6bb",
+        "commons/artifacts/color_space_navigator/color_space_navigator.gd": "b6aad6e7f44f83ea9c081f1c92618936d15cdcdb9265b3ee8710b0ccf726ed31"
+      },
+      "placements": [
+        {
+          "cell": [
+            2,
+            9
+          ],
+          "value": "color_space_navigator:0:-0.5"
+        },
+        {
+          "cell": [
+            5,
+            24
+          ],
+          "value": "gradient_interpolator:0:-0.5"
+        }
+      ],
+      "cautions": "Navigator defaults to a 0.7m cube; do not instruct visitors to stand inside it. HSL naming/math mismatch should remain an improvement item rather than be repeated as truth."
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Motion — build and investigate</title><style>body{margin:0;background:#eae7df;color:#202026;font:18px/1.65 Georgia,serif}main{max-width:1480px;padding:34px;margin:auto}h1{font-size:2.7rem;line-height:1.12}h2{font-size:1.55rem;line-height:1.25;margin-top:1.7em}nav,.meta,table{font:14px/1.55 system-ui}nav{display:flex;flex-wrap:wrap;gap:18px}a{color:#733a56}article,.panel{background:#fffdf8;padding:28px;margin:22px 0}.pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.pair article{min-width:0}pre{background:#20232a;color:#f6f0e8;padding:18px;overflow:auto;font:13px/1.55 Consolas,monospace}code{font-family:Consolas,monospace}blockquote{border-left:3px solid #ad8194;margin-left:0;padding-left:20px}.badge{background:#e4d8df;padding:15px}img{width:100%;height:auto}table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #ccc;padding:12px}summary{cursor:pointer} @media(max-width:1000px){.pair{grid-template-columns:1fr}main{padding:16px}} @media print{nav{display:none}pre{white-space:pre-wrap}.pair{display:block}}</style><main><nav><a href="index.html">Review</a><a href="parallel.html">Tutorial / reflection</a><a href="tutorial.html">Tutorial</a><a href="final.html">Reflection</a><a href="before.html">Reflection before / after</a><a href="shared.html">Shared code</a></nav><h1>When the push ends</h1><p>Motion pilot · 8 October 2026 · one tutorial and its reflective companion.</p><p>The tested example remains complete. The lesson now names its inherited skills, teaches the new physics callback, and asks the student to construct another comparison. The reflection follows the three current spheres and keeps the passages about a command’s continuing consequence and incomplete history.</p><p class="badge">52 native checks passed. Printed-code reconstruction, an independent AI-authored variation, current mass artifact and placement in the actual museum. Physical headset comfort and human comprehension remain untested.</p><p><a href="parallel.html">Read tutorial left / reflection right</a> · <a href="before.html">Compare the reflective revision</a></p><table><thead><tr><th>Carried from earlier halls</th><th>New in Motion</th><th>Student responsibility</th></tr></thead><tbody>
+    <tr><td>Point class and instances: Lines. Pickup and coordinates: Coordinates.</td><td>A physical point receives a continuing force.</td><td>Create the instances and choose their masses.</td></tr>
+    <tr><td>Arrays, indices, loops and if: Trace. Timed change: Transformation.</td><td>Physics updates and force × duration ÷ mass. Writing an existing numeric array entry is explained here.</td><td>Build two independent push clocks.</td></tr>
+    <tr><td>Displacement: Lines. Initial velocity and timed position: Launch.</td><td>Velocity persists after a push; equal final speeds need not mean equal travel.</td><td>Predict, measure both quantities, then choose another mass/duration pair.</td></tr></tbody></table><article><h2>The actual museum</h2><img src="museum/primary.png" alt="The three weighted black spheres and nearby push controls in the Motion hall"><p class="meta">Current mass artifact, rendered inside Endless Museum during this check.</p><img src="museum/student.png" alt="The independently reconstructed two-sphere comparison running in the right-hand museum bay"><p class="meta">Temporary student study at hall-local (23, 0, 18). It is not an additional permanent museum artifact.</p></article><article><h2>What the ghost student exposed</h2><p>A separate AI received only the lesson, supplied helpers and declared earlier readings. Its first construction ran successfully, but it identified missing explanations for indexed assignment, the mass–duration relationship and distance measurement. Those explanations were added, the student revised its readout, and the submitted code was checked again.</p><p>This is evidence of one AI reconstruction attempt. It does not show that a human learner already understands the lesson.</p><details><summary>First student review</summary><h1>Ghost student reconstruction review</h1>
+<h2>What I used and produced</h2>
+<p>I read the packet README, lesson.md, shared-code.md and the declared Lines, Coordinates, Trace, Transformation and Launch tutorials. I did not inspect existing force implementations, the source lesson directory, teacher probes or other review reports. I have not run Godot or engine tests.</p>
+<p>The four reference scripts are extracted from the visible complete code blocks without substantive edits. comparison.gd is my independent construction using the reference loop, a two-entry mass array, a two-entry duration array and a separate remaining-time entry for each point. Predictions were saved before the scripts were written or any engine execution.</p>
+<h2>Instructions I could follow</h2>
+<p>The local file arrangement is explicit: keep the three helpers together and save a lesson script beside them. The supplied museum and button scene contract make rebuilding the hall unnecessary. The reference provides the force call, physics callback, pickup check, final partial-step scaling and caption formatting. Trace supplies indexing and iteration. Launch supplies the displacement calculation needed to compare distance, although the exercise does not explicitly point back to that formula.</p>
+<h2>Exact points that needed interpretation</h2>
+<ol>
+<li>
+<p><strong>lesson.md, “Build another comparison”: “Keep an independent remaining-time value for each point. A two-entry array and the loop pattern above are enough.”</strong> The example only assigns a scalar clock. The earlier Trace lesson explains reading and appending entries, but does not demonstrate assigning an existing numeric entry with <code>remaining[i] = ...</code>. I inferred indexed assignment and used it both to start and to decrease each clock. This is a small new syntax step that could use one explanatory sentence without giving away the comparison.</p>
+</li>
+<li>
+<p><strong>lesson.md, “Read the change”: “A greater mass receives a smaller acceleration from the same force.”</strong> The text gives three specific speed changes but does not explicitly state acceleration = force / mass or change in velocity = force × duration / mass. I inferred those relationships to predict a new mass and duration. The mass comparison supports the inverse relationship, but the request to calculate a new duration would be clearer with the proportional rule stated explicitly.</p>
+</li>
+<li>
+<p><strong>lesson.md, “Build another comparison”: “Also predict whether equal final speed puts them at the same distance from their starting places.”</strong> The caption requirement later says only “Show both speeds in the caption.” There is no distance readout or sampling instruction, so a student can predict unequal distance but has no specified numerical verification route. I used Launch's position formula, separately for the accelerated and coasting intervals, to predict 1.5 m and 1 m at 2 seconds. My comparison follows the requested two-speed caption and does not add a distance display.</p>
+</li>
+<li>
+<p><strong>lesson.md, “Build another comparison”: “Use a clear bay, no gravity or damping, and separate the points so they cannot collide during this comparison.”</strong> I interpret separation as two parallel free trajectories at X = -1 and X = 1 with force along +Z, rather than adding lane constraints. With 0.14 m radii, they have 2 m of lateral centre separation. This is enough under the stated hands-off conditions. It does not prevent a later grab or external collision from steering one into the other. The lesson's “Model notes” explicitly says the tutorial leaves all three directions available, which supports this choice.</p>
+</li>
+<li>
+<p><strong>shared-code.md, “Set up once”: “Use your existing PointStudy Node3D in a clear working bay inside each hall”.</strong> The supplied museum is sufficient as a dependency, but the packet does not identify a concrete bay placement or unobstructed run length. I assume the parent will install the study where both +Z paths have enough room for at least the two-second comparison and an additional coasting interval. At 3 seconds the faster-starting point has travelled 2.5 m. I did not inspect the hall to choose that placement.</p>
+</li>
+<li>
+<p><strong>lesson.md, “Read the change”: “Wait for one pulse to end before comparing a second” and “pressing during a pulse restarts its remaining time.”</strong> The separate exercise does not restate the two-clock version. I kept that behavior: pressing the shared button assigns both durations again, and does not reset positions or velocities. Fresh numerical trials therefore require restarting the study. Pressing again after the first run adds another 1 m/s to both bodies, given the same hands-off conditions.</p>
+</li>
+<li>
+<p><strong>lesson.md, “Model notes”: “Godot accounts for the physics time step when applying force.”</strong> The packet explains the final partial force step, but does not state when a readout within <code>_physics_process</code> observes the resulting velocity, or what numerical tolerance to use for distance. I treat the caption as an ongoing observation and predict the ideal continuous values. I would not infer a failed force rule from a single displayed frame at the boundary without knowing its sampling time.</p>
+</li>
+<li>
+<p><strong>lesson.md links such as “Setup and complete shared code” and the links in “What you bring”.</strong> Their relative paths refer to the course layout rather than this flat packet. The README and clear filenames allowed me to find the supplied texts. If this packet is intended as a standalone student handout, those links should point at its local files.</p>
+</li>
+</ol>
+<h2>Assumptions carried into the comparison</h2>
+<ul>
+<li>The existing museum provides Godot XR Tools and the exact push_button scene path shown in study.gd.</li>
+<li>The study and its ancestors have unit scale, and the study frame remains stationary during the trial.</li>
+<li>New points start at rest; neither is held while measuring; no extra forces or contacts intervene.</li>
+<li>The supplied free_point.gd contract governs gravity, damping and physical release. I did not reproduce those settings in comparison.gd.</li>
+<li>The same force means the same 1 N world-space vector for both points, obtained from the shared local vector by the study's global_basis.</li>
+<li>A “lane” in this small reconstruction is the point's separate straight path; no extra physical rails, locks or collision-layer edits were specified.</li>
+</ul>
+<p>These findings describe what I could reconstruct from the lesson. They do not establish compilation, measured engine behavior, visual usability or a human learning outcome; execution remains for the independent checker.</p></details><details><summary>Review after the clarification</summary><h1>Ghost student follow-up</h1>
+<p>I read the revised student-packet/lesson.md and updated my comparison using its instructions. I did not inspect teacher or production sources and have not run engine tests. The original predictions.md is unchanged; the predictions still apply.</p>
+<h2>My change</h2>
+<p>comparison.gd keeps each point's initial local position in a start_positions array when it is created. Its caption shows each point's live speed and a distance reading in metres. Until the comparison ends, the distance reading is the length of its current local position minus its saved start. When both clocks first become zero after a press, the code sets snapshot_taken and retains both distance readings. The caption identifies these as the distances when both pushes ended; the speed readings continue updating while the spheres coast.</p>
+<p>The started flag prevents the initially zero clocks from capturing a snapshot before the first press. A new press clears snapshot_taken and starts both clocks again. The starting positions remain the original study positions, so the new snapshot on a repeated press measures from those original positions. A fresh comparison requires restarting the study, as Model notes says.</p>
+<p>This uses the point's position and its saved start in the same frame. With unit scale and straight, forward paths, the displacement length equals travelled distance. Grabbing a point and making a detour would break that equality; the caption deliberately describes distance from the start, not accumulated path length.</p>
+<h2>Gaps resolved by the new text</h2>
+<ul>
+<li><strong>Proportional rule:</strong> Read the change now explicitly gives acceleration as force divided by mass and velocity change as force times duration divided by mass. My 3 kg / 3 s prediction can be calculated directly from the text instead of inferred from the three examples.</li>
+<li><strong>Indexed clock assignment:</strong> Build another comparison now explains that assigning remaining[i] replaces that clock and that the index must remain paired with its point. This supplies the previously unstated array-editing step.</li>
+<li><strong>Measuring the distance comparison:</strong> The exercise now requires both speeds and distances, tells me to preserve starting positions, gives the displacement-length operation, and connects it to Lines. I could add that readout without looking elsewhere for a solution.</li>
+<li><strong>Reading the end of the comparison:</strong> The latest instruction explicitly requests one snapshot when both clocks first reach zero and suggests a boolean flag that a new press clears. This resolves the earlier concern about trying to read a changing distance after the two-second boundary. I can read the retained values during coasting without confusing them with the current positions.</li>
+<li><strong>Concrete trial location:</strong> Model notes now places PointStudy at (23, 0, 8) in the hall's local coordinates, with zero rotation and unit scale, and asks for four metres of clear +Z space. This resolves where to install the script. I treat it as scene setup rather than assigning that position inside comparison.gd, since the script is attached to the already placed PointStudy.</li>
+<li><strong>Fresh starts and boundary expectations:</strong> The explicit restart instruction makes the fresh-trial procedure clear. Capturing when both clocks reach zero and allowing a small physics-step difference explains why the retained reading need not exactly equal the ideal calculation.</li>
+</ul>
+<h2>Remaining points</h2>
+<ul>
+<li>The lesson does not define a numerical tolerance or the exact physics-frame observation point. The new qualitative boundary guidance is enough for the proposed observation, but not for deciding a strict pass/fail numerical threshold. I have not supplied one or adjusted predictions to a measured result.</li>
+<li>The packet still uses course-relative links rather than links to its own flat filenames. README and filenames still make the texts findable, but clicking those references inside this packet is not the stated route.</li>
+<li>Two-clock behavior on another press remains an inference from the reference's button behavior: both remaining values restart, while velocities and positions remain. The new restart instruction makes this manageable for fresh comparisons, so it is not blocking the exercise.</li>
+</ul>
+<p>I continue to assume the supplied helper contract, a stationary unit-scale frame, no grabbing or collisions during measurement, and a clear bay. The two paths at X = -1 and X = 1 remain freely moving and separate under those conditions. I have not verified the bay visually or changed any museum scene.</p>
+<p>I found no blocker to constructing the requested snapshot from the packet. I implemented the capture in the physics callback after updating both clocks, and retained the lesson's allowance for a small physics-step boundary difference. No engine execution was performed for this adjustment.</p></details><details><summary>Student predictions, written before execution</summary><h1>Predictions recorded before running</h1>
+<p>No Godot execution has been performed. These are predictions from the packet, for a fresh start at rest, one press, no grabbing, no contact, unit study scale, and a stationary study frame. The force is 1 N along local +Z. A is 1 kg and receives it for 1 second; B is 2 kg and receives it for 2 seconds.</p>
+<p>I infer acceleration = force / mass from the lesson's mass and speed-change examples. A accelerates at 1 m/s² while pushed; B at 0.5 m/s².</p>
+<table>
+<thead>
+<tr>
+<th>Time after press</th>
+<th>A speed</th>
+<th>B speed</th>
+<th>A distance from start</th>
+<th>B distance from start</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 s</td>
+<td>1 m/s</td>
+<td>0.5 m/s</td>
+<td>0.5 m</td>
+<td>0.25 m</td>
+</tr>
+<tr>
+<td>2 s</td>
+<td>1 m/s</td>
+<td>1 m/s</td>
+<td>1.5 m</td>
+<td>1 m</td>
+</tr>
+</tbody>
+</table>
+<p>At 2 seconds, A has travelled 0.5 m during its push and then 1 m during one second of coasting. B has travelled 0.5 × 0.5 × 2² = 1 m while accelerating throughout. I used Launch's displacement rule for each interval. Equal final speeds do not imply equal distances: A was faster throughout the interior of the two-second interval. Its forward lead is 0.5 m at 2 seconds.</p>
+<p>For t &gt;= 2 seconds, predicted distances are A = 1.5 + (t - 2) metres and B = 1 + (t - 2) metres. Both retain a speed of 1 m/s; the 0.5 m forward lead remains. Their paths are separated by 2 m across X as well, so neither touches the other in this trial.</p>
+<p>Each remaining-time entry reaches zero. Then minf(remaining[i], delta) returns zero and the force branch is skipped for that point. Nothing assigns zero velocity. The supplied free_point.gd sets gravity_scale to zero, replaces linear and angular damping with zero, unfreezes the point, and disables sleeping. The continuing motion assumes no collision or hand interaction.</p>
+<p>A new choice: use a 3 kg point with the same 1 N force for 3 seconds. Starting at rest, (1 N / 3 kg) × 3 s = 1 m/s. Its distance when its own push ends would be 0.5 × (1/3) × 3² = 1.5 m. The general duration for a target 1 m/s at force 1 N is numerically equal to the chosen mass in kilograms, expressed in seconds.</p>
+<p>These distances are continuous-motion predictions. The lesson delegates integration to the engine, so displayed or measured positions at finite physics steps may differ slightly. I have not observed or fitted any measured result.</p></details><details><summary>Independent construction — inspect after attempting the exercise</summary><pre><code>extends &quot;study.gd&quot;
+
+var points: Array[RigidBody3D] = []
+var start_positions: Array[Vector3] = []
+var masses: Array[float] = [1.0, 2.0]
+var durations: Array[float] = [1.0, 2.0]
+var remaining: Array[float] = [0.0, 0.0]
+var distances: Array[float] = [0.0, 0.0]
+var started := false
+var snapshot_taken := false
+var force := Vector3(0, 0, 1)
+var reading: Label3D
+
+func _ready() -&gt; void:
+    for i in range(2):
+        var point = Point.new()
+        point.position = Vector3(i * 2 - 1, 1.2, 0)
+        point.mass = masses[i]
+        add_child(point)
+        points.append(point)
+        start_positions.append(point.position)
+    reading = caption(&quot;&quot;)
+    button(&quot;PUSH 1 s / 2 s&quot;, Vector3(0, 1, -0.8), push)
+
+func push() -&gt; void:
+    started = true
+    snapshot_taken = false
+    for i in range(2):
+        remaining[i] = durations[i]
+
+func _physics_process(delta: float) -&gt; void:
+    for i in range(2):
+        var point = points[i]
+        var interval := minf(remaining[i], delta)
+        if interval &gt; 0 and not point.is_picked_up():
+            point.apply_central_force(global_basis * force * interval / delta)
+        remaining[i] = maxf(0, remaining[i] - delta)
+    if not snapshot_taken:
+        for i in range(2):
+            distances[i] = (points[i].position - start_positions[i]).length()
+        if started and remaining[0] == 0.0 and remaining[1] == 0.0:
+            snapshot_taken = true
+    var distance_heading := &quot;DISTANCE FROM START (LIVE)&quot;
+    if snapshot_taken:
+        distance_heading = &quot;DISTANCE WHEN BOTH PUSHES ENDED&quot;
+    reading.text = distance_heading + &quot;\n1 kg / 1 s: %.2f m/s, %.2f m\n2 kg / 2 s: %.2f m/s, %.2f m&quot; % [
+        points[0].linear_velocity.length(),
+        distances[0],
+        points[1].linear_velocity.length(),
+        distances[1]]
+</code></pre></details></article><p><a href="motion_learning_pilot.json">Native reconstruction and artifact assertions</a> · <a href="museum/report.json">Actual museum checks</a> · <a href="student-packet/README.md">Student reading packet</a> · <a href="prerequisite-audit.json">Earlier knowledge audit</a> · <a href="verification.json">Execution and source record</a> · <a href="publication-checks.json">Publication checks</a> · <a href="SUMMARY.md">Compact instruction for the next pass</a></p></main></html>

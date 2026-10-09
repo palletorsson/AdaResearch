@@ -1,0 +1,299 @@
+--- before/commons/artifacts/registry/vectors.json
++++ commons/artifacts/registry/vectors.json
+@@ -6779,151 +6779,151 @@
+ 			}
+ 		},
+ 		"vector_normalize_demo": {
+-			"category": "mathematics",
+-			"class_name": "VectorNormalizeDemo",
+-			"complexity": "beginner",
+-			"description": "Shows normalization: V̂ = V/|V|. Converts any vector to unit length while preserving direction.",
+-			"dev_category": "vector_operations",
+-			"dev_themes": [
+-				"vectors"
+-			],
+-			"include_in_map_data": true,
+-			"interaction": "grab",
+-			"interactions": [
+-				"grab"
+-			],
+-			"lookup_name": "vector_normalize_demo",
+-			"map_ready": true,
+-			"map_sequences": [
+-				"forces",
+-				"testmaps",
+-				"transformation"
+-			],
+-			"name": "Vector Normalization",
+-			"parameters": {
+-				"footprint": [
+-					2,
+-					2,
+-					1
+-				],
+-				"size_group": "compact"
+-			},
+-			"qfep_connection": "Pure direction - stripping magnitude to reveal only orientation",
+-			"dna": {
+-				"promoted": "2026-07-29",
+-				"stage": "2 - variation",
+-				"axes": {
+-					"input_mode": [
+-						"long",
+-						"short",
+-						"unit"
+-					],
+-					"reference_mode": [
+-						"sphere",
+-						"rings",
+-						"none"
+-					]
+-				},
+-				"default": "input_mode=long, reference_mode=sphere - the shipped V = (1.2, 0.8, 0.4) inside the translucent unit shell with its three rings, so all 8 existing placements are unchanged",
+-				"was": "no exports of its own: the input vector, the unit shell and its rings were hard-coded in _ready(), and apply_grid_config() was an empty pass",
+-				"framing": 0.34,
+-				"framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 33.6% of frame width and 26.7% of its height, with a subject share of 4.96%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.34. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
+-			},
+-			"scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
+-			"sequence": "forces",
+-			"tags": [
+-				"vectors",
+-				"normalize",
+-				"unit_vector",
+-				"direction",
+-				"interactive"
+-			],
+-			"geometry_spec": {
+-				"mesh_type": "instanced_particles",
+-				"topology": "scattered",
+-				"construction": {
+-					"method": "multimesh_instancing",
+-					"primitives": [
+-						"sphere",
+-						"cylinder"
+-					],
+-					"operations": [
+-						"allocate_instances",
+-						"set_transforms",
+-						"update_per_frame"
+-					]
+-				},
+-				"material": {
+-					"type": "standard",
+-					"shading_model": "wireframe",
+-					"key_properties": [
+-						"grid_overlay",
+-						"transparency",
+-						"double_sided"
+-					]
+-				},
+-				"animation": {
+-					"type": "particle_lifecycle",
+-					"driven_by": "cpu_simulation",
+-					"affects": [
+-						"transform",
+-						"color"
+-					]
+-				},
+-				"instance_strategy": "multimesh",
+-				"vertex_estimate": "~3072"
+-			},
+-			"spatial_needs": {
+-				"platform": "none",
+-				"footprint_cells": 1,
+-				"clearance": {
+-					"front": 2,
+-					"back": 1,
+-					"left": 1,
+-					"right": 1
+-				},
+-				"player_position": "front",
+-				"wall_backing": false,
+-				"orientation": "face_approach",
+-				"isolation": 0,
+-				"cluster_with": [],
+-				"preferred_zone": "entry",
+-				"measured_footprint_cells": 1,
+-				"footprint_source": "measured"
+-			},
+-			"measurements": {
+-				"aabb_size": [
+-					1.13,
+-					1.0,
+-					0.99
+-				],
+-				"aabb_center": [
+-					0.23,
+-					0.17,
+-					0.16
+-				],
+-				"grid_cells": [
+-					2,
+-					1
+-				],
+-				"max_dimension_m": 1.13,
+-				"measured_at": "2026-08-12T04:39:51.280397Z"
+-			},
+-			"footprint_measured": [
+-				2,
+-				1,
+-				1
+-			],
+-			"spatial_profile": {
+-				"dir_group": "omni",
+-				"range": 2,
+-				"density": "medium",
+-				"min_clearance": 1,
+-				"stack_priority": 0.5,
+-				"approach_dir": "any",
+-				"derived_at": "2026-04-29T09:39:46.292842Z",
+-				"derived_from": "aabb_size + category"
+-			}
++		  "category": "mathematics",
++		  "class_name": "VectorNormalizeDemo",
++		  "complexity": "beginner",
++		  "description": "Compare a vector with its normalized direction. The implemented threshold uses the measured magnitude: greater than 0.001 returns a unit vector; at or below it returns zero. Direction is preserved when normalization is admitted, while magnitude is discarded.",
++		  "dev_category": "vector_operations",
++		  "dev_themes": [
++		    "vectors"
++		  ],
++		  "include_in_map_data": true,
++		  "interaction": "grab",
++		  "interactions": [
++		    "grab"
++		  ],
++		  "lookup_name": "vector_normalize_demo",
++		  "map_ready": true,
++		  "map_sequences": [
++		    "forces",
++		    "testmaps",
++		    "transformation"
++		  ],
++		  "name": "Vector Normalization",
++		  "parameters": {
++		    "footprint": [
++		      2,
++		      2,
++		      1
++		    ],
++		    "size_group": "compact"
++		  },
++		  "qfep_connection": "An example of chosen reduction: magnitude is discarded, and the numerical threshold decides which measured vectors retain a direction. This association is not a computed QFEP quantity.",
++		  "dna": {
++		    "promoted": "2026-07-29",
++		    "stage": "2 - variation",
++		    "axes": {
++		      "input_mode": [
++		        "long",
++		        "short",
++		        "unit"
++		      ],
++		      "reference_mode": [
++		        "sphere",
++		        "rings",
++		        "none"
++		      ]
++		    },
++		    "default": "input_mode=long, reference_mode=sphere - the shipped V = (1.2, 0.8, 0.4) inside the translucent unit shell with its three rings, so all 8 existing placements are unchanged",
++		    "was": "no exports of its own: the input vector, the unit shell and its rings were hard-coded in _ready(), and apply_grid_config() was an empty pass",
++		    "framing": 0.34,
++		    "framing_why": "SOLVED, NOT GUESSED, by tools/solve_framing.py. At framing 1.0 this artifact's subject bounding box filled 33.6% of frame width and 26.7% of its height, with a subject share of 4.96%. The visible frame is 2 * PAD * radius * framing metres wide, so the box grows as 1/framing; solving for a target of 78% of the smaller-headroom dimension gives 0.34. THE ARTIFACT WAS NEVER DARK, EMPTY OR MISSING A FIXTURE - the camera was between three and eight times too far away, and the near-zero subject share this token had on record was a fact about the standpoint rather than about the axis."
++		  },
++		  "scene": "res://commons/artifacts/vector_normalize_demo/vector_normalize_demo.tscn",
++		  "sequence": "forces",
++		  "tags": [
++		    "vectors",
++		    "normalize",
++		    "unit_vector",
++		    "direction",
++		    "interactive"
++		  ],
++		  "geometry_spec": {
++		    "mesh_type": "instanced_particles",
++		    "topology": "scattered",
++		    "construction": {
++		      "method": "multimesh_instancing",
++		      "primitives": [
++		        "sphere",
++		        "cylinder"
++		      ],
++		      "operations": [
++		        "allocate_instances",
++		        "set_transforms",
++		        "update_per_frame"
++		      ]
++		    },
++		    "material": {
++		      "type": "standard",
++		      "shading_model": "wireframe",
++		      "key_properties": [
++		        "grid_overlay",
++		        "transparency",
++		        "double_sided"
++		      ]
++		    },
++		    "animation": {
++		      "type": "particle_lifecycle",
++		      "driven_by": "cpu_simulation",
++		      "affects": [
++		        "transform",
++		        "color"
++		      ]
++		    },
++		    "instance_strategy": "multimesh",
++		    "vertex_estimate": "~3072"
++		  },
++		  "spatial_needs": {
++		    "platform": "none",
++		    "footprint_cells": 1,
++		    "clearance": {
++		      "front": 2,
++		      "back": 1,
++		      "left": 1,
++		      "right": 1
++		    },
++		    "player_position": "front",
++		    "wall_backing": false,
++		    "orientation": "face_approach",
++		    "isolation": 0,
++		    "cluster_with": [],
++		    "preferred_zone": "entry",
++		    "measured_footprint_cells": 1,
++		    "footprint_source": "measured"
++		  },
++		  "measurements": {
++		    "aabb_size": [
++		      1.13,
++		      1.0,
++		      0.99
++		    ],
++		    "aabb_center": [
++		      0.23,
++		      0.17,
++		      0.16
++		    ],
++		    "grid_cells": [
++		      2,
++		      1
++		    ],
++		    "max_dimension_m": 1.13,
++		    "measured_at": "2026-08-12T04:39:51.280397Z"
++		  },
++		  "footprint_measured": [
++		    2,
++		    1,
++		    1
++		  ],
++		  "spatial_profile": {
++		    "dir_group": "omni",
++		    "range": 2,
++		    "density": "medium",
++		    "min_clearance": 1,
++		    "stack_priority": 0.5,
++		    "approach_dir": "any",
++		    "derived_at": "2026-04-29T09:39:46.292842Z",
++		    "derived_from": "aabb_size + category"
++		  }
+ 		},
+ 		"vector_projection_demo": {
+ 			"category": "mathematics",

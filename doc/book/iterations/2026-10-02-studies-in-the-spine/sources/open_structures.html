@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="c12875fda5ebb7491ff498f012ee35d49b45d009d217347b7a020342ea82959c"><title>commons/artifacts/spine_studies/open_rules.gd</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/artifacts/spine_studies/open_rules.gd</p><pre><code>extends Node3D
+## OUR decoding studies after the supplied LeWitt images, not certified replicas.
+## The cyclic table and height fields are proposed rules, not historical scores.
+const Structure = preload(&quot;res://commons/artifacts/spine_studies/open_structure.gd&quot;)
+const NAMES := [&quot;cube&quot;, &quot;pyramid&quot;, &quot;narrow box&quot;, &quot;taper&quot;, &quot;shear&quot;]
+var mode := 0
+var alternative := false
+var visible_fraction := 1.0
+var bars: MultiMeshInstance3D
+var records: Array=[]
+var total_edges := 0
+
+func _ready() -&gt; void: rebuild()
+
+# These three numbers form a small vocabulary. The y height stays one metre.
+func shape(which: int) -&gt; Array[Vector3]:
+	match which:
+		1:return Structure.corners(1.0,0.0,0.0)
+		2:return Structure.corners(0.38,1.0,0.0)
+		3:return Structure.corners(1.0,0.52,0.0)
+		4:return Structure.corners(1.0,1.0,0.32)
+	return Structure.corners()
+
+# The address decides the form. A cyclic shift is our proposed reading of a series.
+func form_at(column: int,row: int) -&gt; int:
+	if alternative:return column
+	return (column+row)%5
+
+# Five possible height rules on one footprint. Our rules, not LeWitt&#x27;s score.
+func height_at(x: int,z: int,version: int) -&gt; int:
+	match version:
+		0:return x+1
+		1:return 5-x
+		2:return z+1
+		3:return 5-z
+	return 5
+
+func occupied(x: int,z: int) -&gt; bool:
+	return alternative or x==2 or z==2
+
+func translated_edges(points: Array[Vector3],at: Vector3,unit: float=1.0) -&gt; Array:
+	var moved: Array[Vector3]=[]
+	for p in points:moved.append(at+p*unit)
+	return Structure.segments(moved)
+
+func rebuild() -&gt; void:
+	for child in get_children():
+		remove_child(child);child.queue_free()
+	records.clear()
+	var lines: Array=[]
+	if mode==0 or mode==3:
+		var count := 5 if mode==0 else 7
+		for i in count:
+			var at:=Vector3((i-(count-1)*.5)*1.65,.18,0)
+			var p:=shape(i) if mode==0 else Structure.corners(1.0,float(i)/6.0,0.0)
+			lines.append_array(translated_edges(p,at))
+			records.append({&quot;index&quot;:i,&quot;top_fraction&quot;:float(i)/6.0 if mode==3 else -1.0,&quot;origin&quot;:at})
+			plaque(at+Vector3(0,0,-.83),NAMES[i] if mode==0 else &quot;%.2f&quot;%(float(i)/6.0))
+		plinth(Vector3(0,.08,0),Vector3(count*1.65+.5,.16,2.15))
+	elif mode==1:
+		for row in 5:
+			for column in 5:
+				var kind:=form_at(column,row)
+				var at:=Vector3((column-2)*1.65,.18,(row-2)*1.65)
+				lines.append_array(translated_edges(shape(kind),at,.9))
+				plinth(Vector3(at.x,.08,at.z),Vector3(1.55,.16,1.55))
+				records.append({&quot;column&quot;:column,&quot;row&quot;:row,&quot;form&quot;:kind,&quot;origin&quot;:at})
+	else:
+		var sites := [Vector3(-3.5,.06,-1.6),Vector3(0,.06,-1.6),Vector3(3.5,.06,-1.6),Vector3(-1.8,.06,2),Vector3(1.8,.06,2)]
+		var unique: Dictionary={}
+		for version in 5:
+			for z in 5:
+				for x in 5:
+					if not occupied(x,z):continue
+					var height:=height_at(x,z,version)
+					records.append({&quot;version&quot;:version,&quot;x&quot;:x,&quot;z&quot;:z,&quot;height&quot;:height})
+					for y in height:
+						var at: Vector3=sites[version]+Vector3(x-2,y,z-2)*.31
+						for segment in translated_edges(shape(0),at,.31):
+							# Adjacent cells share a physical bar. Merge its two representations.
+							var a: String=str(segment[0].snapped(Vector3.ONE*.0001))
+							var b: String=str(segment[1].snapped(Vector3.ONE*.0001))
+							unique[a+&quot;|&quot;+b if a&lt;b else b+&quot;|&quot;+a]=segment
+			plaque(sites[version]+Vector3(0,0,1.17),[&quot;x + 1&quot;,&quot;5 - x&quot;,&quot;z + 1&quot;,&quot;5 - z&quot;,&quot;5 everywhere&quot;][version])
+		lines=unique.values()
+	bars=Structure.display(lines,.028 if mode==2 else .065)
+	add_child(bars)
+	total_edges=lines.size()
+	set_reveal(visible_fraction)
+
+func set_reveal(value: float) -&gt; void:
+	visible_fraction=clampf(value,0,1)
+	if is_instance_valid(bars):bars.multimesh.visible_instance_count=roundi(total_edges*visible_fraction)
+
+func plinth(at: Vector3,size: Vector3) -&gt; void:
+	var mesh:=MeshInstance3D.new()
+	var box:=BoxMesh.new();box.size=size;mesh.mesh=box;mesh.position=at
+	var material:=StandardMaterial3D.new();material.albedo_color=Color(.62,.64,.61);material.roughness=.9
+	mesh.material_override=material;add_child(mesh)
+
+func plaque(at: Vector3,text: String) -&gt; void:
+	var label:=Label3D.new();label.text=text;label.font_size=36;label.pixel_size=.0018
+	label.modulate=Color(.18,.22,.21);label.outline_size=0
+	label.position=at+Vector3(0,.025,0);label.rotation_degrees.x=-90;add_child(label)
+</code></pre></body></html>

@@ -1,0 +1,40 @@
+--- before/commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/technical.md
++++ commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/technical.md
+@@ -1,10 +1,8 @@
+-# Distinguish — implementation and encounter
++# Distinguish — an arrangement changes
+ 
+-The primary artifact is `bias_from_inside`. Its [scene](../../../commons/artifacts/bias_from_inside/bias_from_inside.tscn) and [implementation](../../../commons/artifacts/bias_from_inside/bias_from_inside.gd) supply the behaviour described here.
++Synthesis asked which conditions a specimen receives. Here an array of indexed words receives positions. The transformation is the same linear interpolation encountered earlier; the question is what remains distinguishable when those positions converge.
+ 
+-The seeded position generator uses seed 42 and two arrays of twelve terms. A horizontal slider calls _on_perspective_changed(), clamps its input and updates MultiMesh instance transforms and label positions. The map places the default blend; perspective_blend is also configurable for authors. The exhibit does not train, query or evaluate an embedding model. Inspect the expanding grey group's clearance at both endpoints; its configured offset and spread exceed the initial compact cloud.
+-
+-## Operation to read after the encounter
++The primary artifact is bias_from_inside. It retains two arrays of twelve terms and seed 42. Each term has an authored position in arrangement A and in arrangement B. The legacy export and map-token key remains perspective_blend; the visible handle is COMPRESSION. No camera, player transform, model training or measured embedding is involved.
+ 
+ ```gdscript
+ var pos := _marginalized_positions_default[i].lerp(
+@@ -15,18 +13,12 @@
+ _marginalized_multimesh.multimesh.set_instance_transform(i, xf)
+ ```
+ 
+-The index i keeps a word attached to its two authored positions. lerp blends those positions; blend chooses how far the word has travelled. The same operation learned in transformation can make a distinction easier or harder to see. The script calls this perspective, but it changes the represented geometry. It is not a camera command.
++The tags follow those same indices. The warm points contract towards a cluster with a default radius of 0.15 m; the grey points move out to a seeded ring whose radii are 2.3–2.7 m. These are authored spatial coordinates. Neither arrangement is labelled fair or unfair by the interface.
+ 
+-## What to compare
++The rail signal carries physical travel. The handler now obtains get_normalized_value() from the wrapper, so the full rail spans the whole 0–1 interpolation. The previous callback treated travel as blend; its upper endpoint supplied only 0.14. Author configuration now regenerates endpoints when radii change and synchronizes the handle. Repeated configuration clears the coordinate arrays first.
+ 
+-Choose two pink labels. Move the Perspective slider partway, compare their separation, then repeat with two grey labels. Hold the slider at one value while moving your own viewpoint.
++Warm emission and grey alpha are fixed throughout the comparison. The two groups still have different authored colours, and all tags face the viewer. Fixing their materials isolates one changing cause; it does not remove the interpretive choices already made by their grouping or their spatial arrangement.
+ 
+-The slider changes the positions of the labels themselves. Moving your head changes the view of that arrangement. Keep these two transformations separate.
++READ / CLOSE reveals or hides a short project reading without changing geometry. The header names arrangement A, the interval or arrangement B; the handle gives the numerical setting. The stand keeps the handle near 1.1 m in this hall. The study is placed in the wider southern area with clearance for its expanded endpoint. The other three artifact families remain secondary.
+ 
+-## Limits and next test
+-
+-Compare a named pair at three slider positions from the same viewing distance, then ask whether the labels remain distinguishable from the intended approach. Record the pair and viewpoint before generalising this to other dense displays.
+-
+-This source audit does not establish headset readability, comfortable reach, collision clearance or frame rate. Those remain runtime observations. Existing supporting artifacts stay in the map; primary status identifies the book's encounter, not the only permitted content.
+-
+-[Earlier design proposal](../../../doc/space/postcrisis-pass-2026-09-15/before/commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/technical.md) preserves the previous text and its proposed systems. It is not a description of the current implementation.
++The applied-ethics hall takes the next step: a furniture arrangement can distribute possible relations before anyone speaks. Headset reach, readability and learner understanding remain to be tested; the controlled museum probe checks a selected approach, the callbacks and actual coordinates.

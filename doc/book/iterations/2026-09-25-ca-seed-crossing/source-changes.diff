@@ -1,0 +1,186 @@
+--- before/commons/artifacts/rd_artifact/exchange_study.gd
++++ after/commons/artifacts/rd_artifact/exchange_study.gd
+@@ -12,6 +12,7 @@
+ var coating:bool=true
+ var injections:int=0
+ var exchange_revealed:bool=false
++var walk_seed:bool=false
+ var console:Node3D
+ var reading:Label3D
+ var left_title:Label3D
+@@ -24,6 +25,19 @@
+ func _ready() -> void:
+ 	right.exchange=false
+ 	_build_space();_build_console();reset()
++	_sync_seed_crossing()
++
++func configure_walk_seed(enabled:bool) -> void:
++	walk_seed=enabled
++	if is_node_ready():_sync_seed_crossing()
++
++func _sync_seed_crossing() -> void:
++	var existing:Node=get_node_or_null("WalkSeed")
++	if walk_seed and existing==null:
++		var crossing:Node3D=load("res://commons/artifacts/rd_artifact/walk_seed.gd").new()
++		crossing.name="WalkSeed";add_child(crossing)
++	elif not walk_seed and existing!=null:
++		remove_child(existing);existing.queue_free()
+ 
+ func reset() -> void:
+ 	left.reset();right.reset();running=false;target=0;elapsed=0;injections=0;_paint()
+--- before/commons/artifacts/rd_artifact/rd_artifact.gd
++++ after/commons/artifacts/rd_artifact/rd_artifact.gd
+@@ -18,6 +18,7 @@
+ 
+ var _current: MeshInstance3D = null
+ var study_mode: bool = false
++var walk_seed: bool = false
+ 
+ 
+ func _ready() -> void:
+@@ -31,6 +32,7 @@
+ func apply_grid_config(cfg: Dictionary) -> void:
+ 	if str(cfg.get("study", "")) == "exchange":
+ 		study_mode = true
++		if cfg.has("seed"): walk_seed = str(cfg["seed"]) == "walk"
+ 		if is_node_ready(): _mount_study()
+ 		return
+ 	if cfg.has("config_path"): config_path = str(cfg["config_path"])
+@@ -41,11 +43,14 @@
+ 
+ 
+ func _mount_study() -> void:
+-	if has_node("ExchangeStudy"): return
++	if has_node("ExchangeStudy"):
++		get_node("ExchangeStudy").configure_walk_seed(walk_seed)
++		return
+ 	_clear()
+ 	var study := Node3D.new()
+ 	study.set_script(load("res://commons/artifacts/rd_artifact/exchange_study.gd"))
+ 	study.name = "ExchangeStudy"
++	study.set("walk_seed", walk_seed)
+ 	add_child(study)
+ 
+ 
+--- before/commons/maps/CA_SoftRules/artifacts.md
++++ after/commons/maps/CA_SoftRules/artifacts.md
+@@ -2,7 +2,7 @@
+ 
+ | Work | Role | Place in this pass |
+ |---|---|---|
+-| rd_artifact | Primary | Live matched Gray–Scott fields; eight controls; table/wall mapping |
++| rd_artifact | Primary | Live matched Gray–Scott fields; eight controls; table/wall mapping; a body crossing performs the existing matched injection once |
+ | the_clockmaker_of_rules | Primary | Restored diagram bench; stencils, trays, computed histories and labelled static ring |
+ | lattice_gas_pump | Secondary | Preserved in rear gallery; interaction review pending |
+ | ca_sphere | Secondary | Preserved in rear gallery; topology/control review pending |
+--- before/commons/maps/CA_SoftRules/final.md
++++ after/commons/maps/CA_SoftRules/final.md
+@@ -39,7 +39,13 @@
+ 
+ Press COAT. The colour surfaces disappear while the table fields continue. Bring them back. The fixed museum floor carries you through both views.[^ca-soft-coating] The field has become something the room can wear. Perhaps you would keep it here, or want it closer, as a lining against a body. What would you change for that other use?
+ 
+-Try INJECT. Both fields receive the same small second patch. Let it run. We are no longer only watching a prepared beginning; we have entered another event into its history. REPLAY can restore that beginning. It cannot make our first encounter with the difference happen again.
++Between the displays, a small floor mark says **STEP IN / LEAVE A SEED**. Cross it. Both fields receive the same small second patch. With the clock running, watch beyond its edge as well as at its centre. Exchange lets some concentration leave the place where you put it. Try this after the first hundred updates: the new patch thins in A while the earlier pattern continues to spread. What lets something travel can also let it disperse.
++
++Stay on the mark. It does not keep replenishing the seed. Leave and return to place it again. INJECT makes the same intervention from the desk. We are no longer only watching a prepared beginning; we have entered another event into its history. REPLAY can restore that beginning. It cannot make our first encounter with the difference happen again.
++
++![A floor crossing places the same small patch on both curved field displays.](images/ca-seed-crossing.png)
++
++*The floor receives your arrival. What happens to the seed continues through the field's own relations.*
+ 
+ <!-- @the_clockmaker_of_rules -->
+ 
+--- before/commons/maps/CA_SoftRules/intent.md
++++ after/commons/maps/CA_SoftRules/intent.md
+@@ -5,3 +5,5 @@
+ Application: the same field texture dresses a table and curved wall. Fixed museum support remains.
+ Critical question: what becomes possible through exchange, and what does the displayed surface hide about state, boundaries and its mechanism?
+ Retained works: lattice_gas_pump, ca_sphere, crack_propagation_ca and rule_30_110_gravity; they require their own later reviews.
++
++Body intervention: cross a floor mark to place the existing matched second seed, once per arrival. Standing does not replenish it. Follow what leaves the patch as well as what remains. Exchange permits propagation and dispersal; the visitor supplies an event without determining its continuation.
+--- before/commons/maps/CA_SoftRules/technical.md
++++ after/commons/maps/CA_SoftRules/technical.md
+@@ -19,3 +19,11 @@
+ ## Preservation and limits
+ 
+ The old 13×10 map's retained gallery is carried into a 17×26 hall, with an added front bay and eastern aisle. All six authored works remain. rd_artifact and the_clockmaker_of_rules are primary and each has a book passage. Four other works remain secondary for later interaction review. The clockmaker lacked map_ready in the museum registry; its scene is restored and its labels now distinguish calculated histories from static illustrations. Current sequence order is unchanged. Desktop evidence accompanies the review page; headset reach, readability and performance remain unverified.
++
++## 25 September: a body leaves a seed
++
++The map adds `#seed:walk` to its existing exchange-study token. `walk_seed.gd` adds a flush visual mark, 1.5 × 1 m, centred at local (0,0,2.15). Its 1.8 m high Area3D receives the actual museum CharacterBody or XRToolsPlayerBody. Props, hands and unrelated characters are ignored. This measures body-volume overlap, not foot pressure or a chemical response to weight. The ordinary museum floor remains the collider beneath it.
++
++The first accepted arrival calls the existing `inject()` once. Both fields receive U=.5,V=.25 at the existing nine addresses x=3..5,y=14..16. No numerical time advances. Remaining in the mark does not replenish the patch; after all visitors leave, another arrival can inject again. REPLAY while occupied restores and holds the clean beginning until a fresh entrance. VIEW and COAT retain the body input and stored values. The original eight controls and solver are unchanged; the unconfigured exchange study has no floor receiver.
++
++After the first hundred updates, the controlled body enters and leaves this second patch. One further update transports V outside its original edge in A relative to a matched no-entry control; B's unseeded neighbour stays zero. After a hundred further updates, the patch centre is weaker in A than B. This is dispersal as well as propagation, not evidence that exchange guarantees a seed's persistence. Current native checks and limits are recorded in `encounter-notes.md`.
+--- before/commons/artifacts/rd_artifact/walk_seed.gd
++++ after/commons/artifacts/rd_artifact/walk_seed.gd
+@@ -0,0 +1,39 @@
++extends Node3D
++## One body crossing calls the existing matched INJECT action once.
++## This is a receiver for presence, not pressure and not a diffusion source.
++var study:Node3D
++var visitors:Dictionary={}
++var pad_material:StandardMaterial3D
++
++func _ready() -> void:
++	study=get_parent()
++	var pad:MeshInstance3D=study.box("SeedCrossingPlate",Vector3(1.5,0.012,1.0),Vector3(0,0.012,2.15),Color("263744"))
++	pad.reparent(self,false);pad_material=pad.material_override
++	for side in [-1,1]:
++		var a:MeshInstance3D=study.box("SeedCrossingSide_%d"%side,Vector3(0.025,0.014,1.0),Vector3(side*0.75,0.021,2.15),Color("d5ae74"));a.reparent(self,false)
++		var b:MeshInstance3D=study.box("SeedCrossingEnd_%d"%side,Vector3(1.5,0.014,0.025),Vector3(0,0.021,2.15+side*0.5),Color("d5ae74"));b.reparent(self,false)
++	var words:Label3D=study.label("SeedCrossingWords","STEP IN\nLEAVE A SEED",44)
++	words.pixel_size=0.002;words.position=Vector3(0,0.031,2.15);words.rotation_degrees=Vector3(-90,180,0);add_child(words)
++	var area:=Area3D.new();area.name="BodyReceiver";area.collision_layer=0;area.collision_mask=0xFFFFFFFF
++	var shape:=CollisionShape3D.new();var box:=BoxShape3D.new();box.size=Vector3(1.5,1.8,1.0);shape.shape=box;shape.position=Vector3(0,0.9,2.15);area.add_child(shape)
++	area.body_entered.connect(_entered);area.body_exited.connect(_exited);add_child(area)
++
++func accepts(body:Node3D) -> bool:
++	return body is XRToolsPlayerBody or (body is CharacterBody3D and (body.is_in_group("em_walker") or body.is_in_group("player_body") or body.is_in_group("player")))
++
++func _entered(body:Node3D) -> void:
++	if not accepts(body):return
++	var id:int=body.get_instance_id()
++	if visitors.has(id):return
++	for old_id in visitors.keys():
++		if not is_instance_valid(visitors[old_id].get_ref()):visitors.erase(old_id)
++	var was_empty:bool=visitors.is_empty()
++	visitors[id]=weakref(body)
++	if was_empty:study.inject()
++	_update_plate()
++
++func _exited(body:Node3D) -> void:
++	visitors.erase(body.get_instance_id());_update_plate()
++
++func _update_plate() -> void:
++	pad_material.albedo_color=Color("735269") if not visitors.is_empty() else Color("263744")
+--- before/commons/maps/CA_SoftRules/encounter-notes.md
++++ after/commons/maps/CA_SoftRules/encounter-notes.md
+@@ -0,0 +1,27 @@
++# CA Soft Rules — leave a seed
++
++25 September 2026. The mature two-field comparison remains. A floor crossing brings its existing INJECT action into the visitor's route; it does not introduce a different solver or a new control panel.
++
++## Changes and decisions
++
++The map's existing rd_artifact gains seed:walk. Its wrapper passes this opt-in to ExchangeStudy, which mounts walk_seed.gd. A 1.5 × 1 m flush floor mark occupies the existing aisle at local (0,0,2.15). An Area3D receives the museum CharacterBody or XRToolsPlayerBody. This measures body-volume overlap, not pressure or mass. The first arrival writes the original nine-cell seed to both fields, once. Remaining inside does not replenish it; all visitors leaving rearms the mark. Props, hands and unrelated characters are ignored. No numerical time advances on entry. REPLAY while standing in the mark stays a clean held beginning until the next entrance.
++
++The existing eight controls, deterministic 32² solver, synchronous buffers, constants, wrapping, palettes and table/wall textures remain. COAT hides the walls while the floor mark remains available. The unconfigured exchange study has no receiver. All six artifacts, their roles, root placements, museum architecture and sequence order are retained. The already-present A/B discovery labels remain unnamed until the exchange intervention; no duplicate reveal mechanism was added.
++
++Only the manuscript's INJECT encounter is expanded, with one original native photograph. The preceding prose, three code excerpts, footnotes and entire clockmaker passage remain. Companion files explain the receiver and evidence; critical.md is unchanged.
++
++## What the experiment changed in our expectation
++
++The first behavioural run rejected an assumed outcome: the small seed did not persist more strongly at its centre with exchange. After the existing fields had run 100 updates, crossing wrote U=.5,V=.25 into x=3..5,y=14..16 in both. One further step gave the unseeded neighbour at (6,15) V=.02325669 in A, compared with .00332856 in a matched no-entry control; B remained zero there. Exchange carried some of the new concentration beyond the patch.
++
++After 100 further updates, its centre (4,15) held V=.00515910 in A and .03019554 in B. Both were below the planted .25. The image showed the small patch thinning while the earlier, larger pattern continued spreading. This is a result for this beginning, placement, timing and fixed parameter set, not a general law about all seeds. The rule and injection size were retained. The text now follows the observed dispersal rather than promising that connection guarantees survival.
++
++## Evidence and limits
++
++49 native assertions and eight actual museum mouse-ray events pass. Actual CharacterBody routes enter, leave, return and pass beside the mark. Entering changes exactly the existing nine U/V cells in both fields without a tick; staying does not reseed; REPLAY while occupied holds; a new entry writes once. Native tests cover unseeded witness arithmetic, boundary wrapping, scheduled +100, whole-image texture mapping, original controls, display/state separation, shared exchange equality, observation limit, duplicate configuration and the unconfigured study. Real XRTools class recognition is checked in code, not worn-headset behaviour.
++
++All recorded native artifact root placements match the before view. The final owned Godot process exits 0 with no GDScript errors; existing UID/environment/material/registry/generated-art warnings remain in the log. The fixture pauses automatic museum input/catch behaviour and supplies controlled body moves and local clock opportunities. No human headset, Quest performance, continuous gameplay, whole rear collection or learner acceptance is claimed.
++
++first-native/ retains the initial missing receiver caused by dynamic helper return type inference; explicit mesh types fixed it. seed-diagnostic/ retains the failed persistence expectation and its images. These failures precede the final passing run and are not hidden. Source hashes, exact text/source diffs and the final report accompany the review.
++
++No live museum plan, bake or save edits, frozen export refresh or commit. Shared core metadata changes only this hall, using a fresh read. Next: CA_AgentsCircuits, following the active sequence.

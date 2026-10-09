@@ -1,0 +1,32 @@
+[
+  {
+    "fault": "missing-angle-conversion",
+    "rejected": true,
+    "failures": [
+      "quarter metre reaches crest",
+      "half metre returns to baseline",
+      "opposite quarter metre reaches trough",
+      "one metre repeats spatial value",
+      "rays reach known heights after translation and rotation",
+      "half-metre sampling misses the crests",
+      "coarse sampling does not flatten the underlying function",
+      "half spatial frequency puts crest at half metre"
+    ]
+  },
+  {
+    "fault": "wrong-neighbour-row",
+    "rejected": true,
+    "failures": [
+      "every triangle faces upwards",
+      "triangles cover four square metres in plan"
+    ]
+  },
+  {
+    "fault": "missing-collision",
+    "rejected": true,
+    "failures": [
+      "rays reach known heights after translation and rotation",
+      "flat receiver supports the physical sphere"
+    ]
+  }
+]

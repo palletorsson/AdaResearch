@@ -1,0 +1,419 @@
+{
+  "sequence": "transformation",
+  "declared_maps": [
+    "Trans_Pre",
+    "Trans_Introduction",
+    "Trans_Translation",
+    "Trans_Rotation",
+    "Trans_Scale",
+    "Trans_Body",
+    "Trans_Pit"
+  ],
+  "museum_map_authored_order": [
+    "Trans_Pre",
+    "Trans_Introduction",
+    "Trans_Translation",
+    "Trans_Rotation",
+    "Trans_Scale",
+    "Trans_Body",
+    "Trans_Pit",
+    "Biome_Ladder_Transformation"
+  ],
+  "route_orders_match": false,
+  "halls": [
+    {
+      "map": "Trans_Pre",
+      "recorded_status": "draft",
+      "text_words": 499,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pick_up_cube"
+        ],
+        "reason": "Observe the still cube before collecting it; three moving demonstrations remain. Add translation, rotation and scale, then climb to four finished pickups.",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Pre/final.md",
+        "text_sha256": "250748b3aa518b718da48b755f19c8811ce8f8a76bc6cbf757d7188e09582bab",
+        "map_sha256": "ba4d4c1dc5320263f2b0250bdffc3b184ced341202063c0e5ac23b2f626e0767",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pick_up_cube"
+      ],
+      "role_primary_order": [
+        "pick_up_cube"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Trans_Introduction",
+      "recorded_status": "draft",
+      "text_words": 997,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "tc",
+          "sc",
+          "rc",
+          "adjustable_landing"
+        ],
+        "reason": "Compare translation, scaling and rotation as crossings, without the head crab. Move the far bank while the plank keeps its motion: what makes the crossing possible?",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Introduction/final.md",
+        "text_sha256": "6f3cf31ef89108c88fcbf109366be262710968857c630da5c53c22e7799acc5e",
+        "map_sha256": "290cf36f1cda91dadfce973c26b930b14b7fb536f215739ccaa9b0df54392eca",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "tc",
+        "sc",
+        "rc",
+        "adjustable_landing"
+      ],
+      "role_primary_order": [
+        "#note-1",
+        "tc",
+        "sc",
+        "rc",
+        "adjustable_landing"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [
+        "#note-1"
+      ],
+      "anchors_without_ordinary_placement_hint": [
+        "rc",
+        "sc",
+        "tc"
+      ],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Trans_Translation",
+      "recorded_status": "draft",
+      "text_words": 871,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "tc",
+          "pick_up_cube",
+          "translation_cube_demo"
+        ],
+        "reason": "Thirteen pickups sit on seven carrier routes through x, y and z. Two exit mechanisms share a destination but permit different journeys; the turning torus anticipates rotation.",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Translation/final.md",
+        "text_sha256": "c775cec8b9d3e70b96f2d4eea07f611cd5d5c72256a2d4116a3a82a61b23e7b0",
+        "map_sha256": "8ef1b5213526f0b19eb1b7da2b18e038a41ebf7909a1997c4ece7a849a82298c",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "tc",
+        "pick_up_cube",
+        "translation_cube_demo"
+      ],
+      "role_primary_order": [
+        "tc",
+        "pick_up_cube",
+        "translation_cube_demo"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [
+        "tc"
+      ],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Trans_Rotation",
+      "recorded_status": "draft",
+      "text_words": 1265,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "rotation_wall_crossings",
+          "rotation_array_compare",
+          "boolean_tunnel",
+          "carousel_cake"
+        ],
+        "reason": "Compare a level Y bridge and upright X/Z rides, two body widths in rotated arrays, a tunnel and five carousel profiles. Which dimensions make space for this body?",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Rotation/final.md",
+        "text_sha256": "86a9fea52da61a0b0d471b410d42262cd02a0adc7f5527d40b94beb6b5951653",
+        "map_sha256": "e50c469be7cc3360630efc78036c2f9323ebf70d93597f93e2b7750f6b2c8ab0",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "rotation_wall_crossings",
+        "rotation_array_compare",
+        "boolean_tunnel",
+        "carousel_cake"
+      ],
+      "role_primary_order": [
+        "rotation_wall_crossings",
+        "rotation_array_compare",
+        "boolean_tunnel",
+        "carousel_cake"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Trans_Scale",
+      "recorded_status": "draft",
+      "text_words": 653,
+      "text_record_match": "matches bytes",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "scale_me"
+        ],
+        "reason": "Take the bottle: the room changes to four times its size in one update, then your body is relocated onto the table. Descend and compare the enlarged doorway with a fixed museum frame.",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Scale/final.md",
+        "text_sha256": "ee9cbc1847e08e342a55cb7f63d07623da6665af664f0666de6ed2fa578cd18f",
+        "map_sha256": "c08af215657c23b1d1ee770f0a36ae790fb6e84414e1b51c7f3e977311109af3",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "scale_me"
+      ],
+      "role_primary_order": [
+        "scale_me"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Trans_Body",
+      "recorded_status": "draft",
+      "text_words": 972,
+      "text_record_match": "matches bytes",
+      "map_record_match": "matches bytes",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "approach_wall",
+          "carve_grid",
+          "approach_scale"
+        ],
+        "reason": "Approach turns slats and shrinks blocks; contact cuts an open-topped trench in a low lattice. Step clear to see reversible openings return; the cut remains.",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Body/final.md",
+        "text_sha256": "a61584f0b9ee47b1faec56c21ce4c7e53a84f08a51ffd5e5ed6c92be91f261da",
+        "map_sha256": "19bddcd6ff6efec677215c81e4e6dcf7222a731dce00e5479ec97e5ed4371fa5",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "approach_wall",
+        "carve_grid",
+        "approach_scale"
+      ],
+      "role_primary_order": [
+        "approach_wall",
+        "carve_grid",
+        "approach_scale"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    },
+    {
+      "map": "Trans_Pit",
+      "recorded_status": "draft",
+      "text_words": 1285,
+      "text_record_match": "differs — recorded review may refer to another revision",
+      "map_record_match": "differs — recorded review may refer to another revision",
+      "recorded_learner_verified": false,
+      "recorded_core_entry": {
+        "primary_tokens": [
+          "pusher_block",
+          "rc",
+          "grower_block",
+          "transformation_airlock"
+        ],
+        "reason": "Timed pushers, rotating slabs and synchronised growers change access on level ground. At the exit, two armoured door leaves combine translation, rotation and scale into a passage that opens on approach.",
+        "status": "draft",
+        "sequence": "transformation",
+        "text_path": "commons/maps/Trans_Pit/final.md",
+        "text_sha256": "ef8c536a58d17b5f9918d3810a0af94bde631645830d4f3163c0c97a36de49b6",
+        "map_sha256": "c0320524345d7b0bb532300a2df111b0b00f42e92bb92eee95d267542371c5df",
+        "learner_verified": false
+      },
+      "manuscript_artifact_order": [
+        "pusher_block",
+        "rc",
+        "grower_block",
+        "transformation_airlock"
+      ],
+      "role_primary_order": [
+        "pusher_block",
+        "rc",
+        "grower_block",
+        "transformation_airlock"
+      ],
+      "anchors_not_in_primary_roles": [],
+      "primary_roles_without_anchors": [],
+      "anchors_without_ordinary_placement_hint": [
+        "rc"
+      ],
+      "note": "Status is a recorded label, not an independent quality assessment. Old runtime evidence is not proof of this snapshot; hash matches do not prove runtime correctness."
+    }
+  ],
+  "primary_source_snapshot": {
+    "included": [
+      "addons/godot-xr-tools/effects/fade.tscn",
+      "addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "addons/godot-xr-tools/objects/pickable.tscn",
+      "addons/godot-xr-tools/player/player_body.gd",
+      "addons/godot-xr-tools/player/player_body.tscn",
+      "algorithms/primitives/booleans/booleanHollowCube.tscn",
+      "algorithms/primitives/scaleme/drink_me_room.gd",
+      "algorithms/primitives/scaleme/scale_me.gd",
+      "algorithms/primitives/scaleme/scale_me.tscn",
+      "algorithms/transformation/booleanTunnel/booleanTunnel.gd",
+      "algorithms/transformation/booleanTunnel/boolean_tunnel.tscn",
+      "algorithms/transformation/carousel_cake/carousel_cake.gd",
+      "algorithms/transformation/carousel_cake/carousel_cake.tscn",
+      "algorithms/transformation/carousel_cake/carousel_stripes.gdshader",
+      "algorithms/transformation/carousel_cake/circus_complete.gdshader",
+      "commons/artifacts/adjustable_landing/adjustable_landing.gd",
+      "commons/artifacts/adjustable_landing/adjustable_landing.tscn",
+      "commons/artifacts/approach_scale/approach_scale.gd",
+      "commons/artifacts/approach_scale/approach_scale.tscn",
+      "commons/artifacts/approach_wall/approach_wall.gd",
+      "commons/artifacts/approach_wall/approach_wall.tscn",
+      "commons/artifacts/carve_grid/carve_grid.gd",
+      "commons/artifacts/carve_grid/carve_grid.tscn",
+      "commons/artifacts/rotation_studies/array_body_comparison.gd",
+      "commons/artifacts/rotation_studies/array_compare.gd",
+      "commons/artifacts/rotation_studies/array_compare.tscn",
+      "commons/artifacts/rotation_studies/parts.gd",
+      "commons/artifacts/rotation_studies/rotation_rider_deck.gd",
+      "commons/artifacts/rotation_studies/wall_crossings.gd",
+      "commons/artifacts/rotation_studies/wall_crossings.tscn",
+      "commons/artifacts/transformation_airlock/transformation_airlock.gd",
+      "commons/artifacts/transformation_airlock/transformation_airlock.tscn",
+      "commons/audio/rack_templates/RackTemplates.gd",
+      "commons/audio/runtime/CubeAudioPlayer.gd",
+      "commons/grid/GridCommon.gd",
+      "commons/grid/GridStructureComponent.gd",
+      "commons/grid/GridUtilitiesComponent.gd",
+      "commons/grid/UtilityRegistry.gd",
+      "commons/hazards/DangerZone.gd",
+      "commons/hazards/transformation_blocks/grower_block.gd",
+      "commons/hazards/transformation_blocks/grower_block.tscn",
+      "commons/hazards/transformation_blocks/pusher_block.gd",
+      "commons/hazards/transformation_blocks/pusher_block.tscn",
+      "commons/primitives/cubes/cube_scene.gd",
+      "commons/primitives/cubes/cube_scene.tscn",
+      "commons/primitives/point/grab_sphere.gd",
+      "commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "commons/primitives/point/point_color.gd",
+      "commons/primitives/point/point_mesh.gd",
+      "commons/primitives/point/qfep_term_grasp.gd",
+      "commons/primitives/translation/constrained_door.gd",
+      "commons/primitives/translation/translation_cube_demo.gd",
+      "commons/primitives/translation/translation_cube_demo.tscn",
+      "commons/render/pbr_kit.gd",
+      "commons/resourses/shaders/Grid.gdshader",
+      "commons/resourses/shaders/PinkTeleport.gdshader",
+      "commons/resourses/shaders/SimpleGrid.gdshader",
+      "commons/resourses/shaders/slime.gdshader",
+      "commons/scenes/endless_museum.gd",
+      "commons/scenes/mapobjects/AnnotationInfoBoard.gd",
+      "commons/scenes/mapobjects/danger_zone.tscn",
+      "commons/scenes/mapobjects/info_board.tscn",
+      "commons/scenes/mapobjects/pick_up_cube.gd",
+      "commons/scenes/mapobjects/pick_up_cube.tscn",
+      "commons/scenes/mapobjects/rotation_cube.gd",
+      "commons/scenes/mapobjects/rotation_cube.tscn",
+      "commons/scenes/mapobjects/scale_cube.gd",
+      "commons/scenes/mapobjects/scale_cube.tscn",
+      "commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "commons/scenes/mapobjects/teleport.gd",
+      "commons/scenes/mapobjects/teleport_scene.tscn",
+      "commons/scenes/mapobjects/transport_cube.gd",
+      "commons/scenes/mapobjects/transport_cube.tscn",
+      "commons/scenes/mapobjects/walkableprism.tscn",
+      "commons/scenes/mapobjects/word_is.gd",
+      "commons/scenes/mapobjects/word_is.tscn",
+      "commons/utils/baked_text_albedo.gd"
+    ],
+    "unresolved_static_references": [],
+    "further_dependencies_not_traversed": [
+      "res://adaresearch/Common/Scripts/Managers/artifact_data.gd",
+      "res://addons/godot-xr-tools/effects/fade.gd",
+      "res://addons/godot-xr-tools/effects/fade.gdshader",
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "res://addons/godot-xr-tools/objects/highlight/highlight_ring.tres",
+      "res://addons/godot-xr-tools/objects/pickable.gd",
+      "res://algorithms/primitives/scaleme/drink_me_bottle.gd",
+      "res://commons/artifacts/dream_bodies/figures/crystal_suit.tscn",
+      "res://commons/artifacts/dream_bodies/figures/food_table.tscn",
+      "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
+      "res://commons/artifacts/large_window/large_window.tscn",
+      "res://commons/artifacts/queer_confetti/queer_confetti.gd",
+      "res://commons/artifacts/randomness_space/museum_exhibit_stage.gd",
+      "res://commons/artifacts/station/%s.tscn",
+      "res://commons/artifacts/station/station_door.tscn",
+      "res://commons/artifacts/station/station_plinth.tscn",
+      "res://commons/artifacts/wooden_pallet/wooden_pallet.tscn",
+      "res://commons/context/clipboard/codeDisplay.tscn",
+      "res://commons/grid/grid_system.tscn",
+      "res://commons/infoboards_3d/base/HandheldInfoBoard.tscn",
+      "res://commons/interactables/RackPassiveElements.gd",
+      "res://commons/interactables/dial_smooth.tscn",
+      "res://commons/interactables/push_button.tscn",
+      "res://commons/interactables/slider_horizontal.tscn",
+      "res://commons/interactables/slider_smooth.tscn",
+      "res://commons/movement/museum_flight_box.gd",
+      "res://commons/pattern_grammar/pattern_sim.gd",
+      "res://commons/player/costume_wardrobe.gd",
+      "res://commons/primitives/cubes/grab_cube.tscn",
+      "res://commons/primitives/origin/origin.tscn",
+      "res://commons/primitives/point/grab_sphere_point.tscn",
+      "res://commons/primitives/shared/solid_primitive_finish.gd",
+      "res://commons/primitives/temporal/animated_folding_past.tscn",
+      "res://commons/scenes/em/em_cartridge.gd",
+      "res://commons/scenes/em/em_desktop_pointer.gd",
+      "res://commons/scenes/em/em_detail.gd",
+      "res://commons/scenes/em/em_lighting.gd",
+      "res://commons/scenes/em/em_portal_stream.gd",
+      "res://commons/scenes/em/em_simulation_stage.gd",
+      "res://commons/scenes/em/em_splatter.gd",
+      "res://commons/scenes/em/em_transform_gizmo.gd",
+      "res://commons/scenes/em/em_wall_fit.gd",
+      "res://commons/scenes/em/em_weathering_wall.gd",
+      "res://commons/scenes/em/floor_seams.gdshader",
+      "res://commons/scenes/endless_museum.tscn",
+      "res://commons/scenes/mapobjects/bridge_path.tscn",
+      "res://commons/scenes/mapobjects/jump_pad.tscn",
+      "res://commons/ui/text_screen.gd",
+      "res://commons/visualaid/frame_counter/frame_counter_display.tscn"
+    ],
+    "scope": "Primary artifact scenes and active utility scenes plus two static resource-reference hops; utility registry/grid/museum dispatch context copied without further traversal. Text resources only. Dynamic loads, class-name dependencies, UID-only references, binary assets and remaining engine dependencies may need repository inspection. Not a runnable project."
+  }
+}

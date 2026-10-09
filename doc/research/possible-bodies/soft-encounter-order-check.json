@@ -1,0 +1,113 @@
+{
+  "scope": "Only order[map].primary for the nine Soft Bodies halls; runtime files unchanged. Necklace room enumeration now uses museum order, retaining legacy rooms afterward.",
+  "before_sha256": "180aa99b91fd1cbdad286583ec16c4d7f5acc6543179af3a69178cdacc8fd245",
+  "after_sha256": "23dd3d85700206e2d43206d8b9d6d0078c7a5df2f546f96d027999e164c1bbfa",
+  "room_reader_sha256": "b36de4370a981bb9db2a98b1f78b68a945de3c72f635557a25ad23d183c7af04",
+  "museum_rooms": 161,
+  "previous_index_rooms": 189,
+  "retained_all_previous_rooms": true,
+  "checks": [
+    {
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "expected": [
+        "jelly_cube",
+        "softmill"
+      ],
+      "actual": [
+        "jelly_cube",
+        "softmill"
+      ],
+      "ok": true
+    },
+    {
+      "map": "SoftBodies_Cloth_Physics",
+      "expected": [
+        "cloth_straps",
+        "softstopscene"
+      ],
+      "actual": [
+        "cloth_straps",
+        "softstopscene"
+      ],
+      "ok": true
+    },
+    {
+      "map": "SoftBodies_Carusell",
+      "expected": [
+        "revolving_joy_ride",
+        "cloth_straps"
+      ],
+      "actual": [
+        "revolving_joy_ride",
+        "cloth_straps"
+      ],
+      "ok": true
+    },
+    {
+      "map": "SoftBodies_Obsticals",
+      "expected": [
+        "breathing_room",
+        "softbody_gallery_part2"
+      ],
+      "actual": [
+        "breathing_room",
+        "softbody_gallery_part2"
+      ],
+      "ok": true
+    },
+    {
+      "map": "SoftBodies_Obsticals_Part2",
+      "expected": [
+        "softbody_gallery_part2"
+      ],
+      "actual": [
+        "softbody_gallery_part2"
+      ],
+      "ok": true
+    },
+    {
+      "map": "SoftBodies_Playground_of_Joy",
+      "expected": [
+        "rounded_softbody_test",
+        "frozen_glass_vessel"
+      ],
+      "actual": [
+        "rounded_softbody_test",
+        "frozen_glass_vessel"
+      ],
+      "ok": true
+    },
+    {
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "expected": [
+        "radiolaria"
+      ],
+      "actual": [
+        "radiolaria"
+      ],
+      "ok": true
+    },
+    {
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "expected": [
+        "turing_pattern_generator",
+        "reaction_diffusion"
+      ],
+      "actual": [
+        "turing_pattern_generator",
+        "reaction_diffusion"
+      ],
+      "ok": true
+    },
+    {
+      "map": "Topology_Entropy_Morphogenesis",
+      "expected": [
+        "entropy_morphogenesis"
+      ],
+      "actual": [
+        "entropy_morphogenesis"
+      ],
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+--- before/commons/maps/Fractal_Synthesis/final.md
++++ commons/maps/Fractal_Synthesis/final.md
+@@ -4,50 +4,25 @@
+ 
+ Can you explain two recursive constructions without using their names?
+ 
+-Start at the interval. Before NEXT, describe one step to another person, or say it quietly to yourself: take an interval, keep two shorter intervals at its ends, and repeat on each survivor. Point to an example of the input, the descendants and the gap. Then identify where the displayed construction stops.
+-
+-Try the description without pointing. “Shorter” leaves something undecided. How short? At which ends? This desk begins with six metres and keeps thirds. After one cut there are two pieces, each two metres long. Before the second cut, predict both the number of pieces and their combined length. They will not change in the same direction.
+-
+-Here is the step that actually creates a descendant's size:
+-
+-```gdscript
+-var new_length = bar_length / 3.0
+-```
+-
+-In `cantor_set.gd`, `perform_iteration()` creates a left bar and a right bar of that length, each centred a third of the parent's length away from its centre. The middle receives no surviving bar. The call preserves the position needed to place its descendants; “repeat” alone would not tell us where they belong.
++Start at the interval. Before NEXT, describe one step to another person, or say it quietly to yourself: take an interval, keep two shorter intervals at its ends, and repeat on each survivor. Then try the description without pointing. “Shorter” leaves something undecided. How short? At which ends? This desk begins with six metres and keeps thirds. A stranger would need those decisions to make what you are looking at.
+ 
+ After three cuts, press HISTORY. The upper rows appear. Has any material returned to the current generation?
+ 
+-The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What returned was the visible record of earlier stages. Hide it and bring it back, then try GHOST. Pale middles mark the new removals at each row. These markers have no collision bodies and do not re-enter the surviving population. We can change what the drawing lets us examine without undoing the selection rule.
++The lowest eight pieces stay where they were. Together they retain about 1.778 metres. What returned was their history. GHOST makes the removed middles visible too, without returning them to the surviving population. A drawing can hold an absence before us. What we can see and what we could stand on remain different questions.
+ 
+-This difference matters to our question about possible bodies. A drawing can omit a history while retaining the state that history produced. It can also make an absence visible without making that place available to stand on. Neither visibility nor omission tells us everything about what the program permits.
+-
+-The fifth cut is the desk's last. It leaves thirty-two finite pieces. The stopping point gives our attention and this instrument somewhere to stand. It does not establish that further difference is impossible. RESET returns to the uncut beginning; it does not rewind the museum.
++The fifth cut is the desk's last. Its thirty-two pieces give this instrument somewhere to stop. They do not establish that further difference is impossible.
+ 
+ <!-- @recursive_tree -->
+ 
+ The red block tree has already branched. Find a fork that seems to end, and follow it backward. What would a call have to remember to place a smaller branch there?
+ 
+-Press STRATA. The blocks change colour according to their recorded branch levels. Press REACH and volumes enclose the extents accumulated through those levels. ENDS marks the joint where the trunk hands off and every deepest recorded block. FORM brings the solid reading back. Compare the same fork through these views: none of these buttons grows a new tree.
++STRATA colours the branch levels. REACH encloses their accumulated extents. Follow the same fork through those views. The cage includes empty space as well as blocks; its apparent shelter has no walls. We have changed how the tree can be read while leaving its branches in place.
+ 
+-The source receives a parent, an origin, a number of branches and two depth values. Its stopping condition is small enough to read in one breath:
++This tree's recipe includes random choices, a fixed seed and a stop after three branching levels. The seed helps us return, but it cannot reconstruct the tree alone. The rules that received its values still matter.
+ 
+-```gdscript
+-if current_depth >= max_depth:
+-    return
+-```
++Try the description “make several smaller things.” It could describe both desks and reconstruct neither. The intervals need a retained fraction and placement rule. The tree needs inherited origins, directions, dimensions and descendants. What seemed like a shared principle becomes useful when we can name where the procedures differ.
+ 
+-Later in `recursive_tree.gd`, `generate_branches()` passes the continuation on:
+-
+-```gdscript
+-generate_branches(branch, end_point, num_sub, current_depth + 1, max_depth)
+-```
+-
+-The surrounding code chooses dimensions, directions and descendant counts with a local random-number generator. This placement starts from seed 12345. The nested calls stop after three branching levels. A seed is one part of that recipe; the generator, draw order and ranges also matter. The desk's changing colours and cages read the resulting geometry without drawing those random choices again.
+-
+-Try the incomplete description “make several smaller things.” It could describe both desks and reconstruct neither. The intervals need a retained fraction and placement rule. The tree needs inherited origins, directions, dimensions and descendants. A cage around its reach adds another representation: it encloses empty space as well as blocks. It is not a new shelter with solid walls.
+-
+-We have accumulated ways to make form, and ways to mistake a reading for the form. The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room? Another colour might help us notice a branch. Another branching rule might alter where the branches can go. Those are different interventions, with different consequences.
++The queer possibility here is a question we can keep material: which instruction would have to change for another body to have room? Another colour might help us notice a branch. Another branching rule might alter where the branches can go. Those interventions offer different ways to act.
+ 
+ <!-- @fractal_procedure_gallery -->
+ 
+@@ -56,6 +31,8 @@
+ Press KEEP. The rose row holds this recipe while the dark row follows your next choice. Both occupy the same scale. You can return to the earlier construction without asking your memory to redraw it, and change the live version without revising the one you kept. This small pause in the work lets a difference stay available for judgment.
+ 
+ The table cannot decide what that difference is worth. More surviving length might answer one wish and frustrate another. The narrow piece, the larger gap, the version you almost discarded: comparison gives them time beside each other. It does not turn preference into a result of the loop.
++
++Here we practise one part of a larger work: keeping a version while another changes. The three fractions were chosen before we arrived. A further decision belongs to the person making the experiment—what relationship to try, and why. A tree receiving a value from a noise field would pose another question. Keeping its recipe would let us return to that question; it would not answer it for us.
+ 
+ <!-- @ -->
+ 

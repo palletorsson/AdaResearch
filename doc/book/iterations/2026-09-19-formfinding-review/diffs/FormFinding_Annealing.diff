@@ -1,0 +1,77 @@
+--- before/FormFinding_Annealing/final.md
++++ FormFinding_Annealing/final.md
+@@ -1,6 +1,18 @@
+ You have to be willing to get worse to get better. And then the room asks a harder question: how far down do you actually want to go?
+ 
+-The first stable shape you fall into is rarely the best one. The marble in the first hall found the nearest bottom, not the lowest, and every settling thing since has done the same. This is the room that knows the trick for getting out, and the room that argues the trick can be taken too far.
++The first stable shape you fall into need not be the one you want. The point in the first hall could finish in different valleys, and the rooms since have changed what makes a shape hold: a drafted curve, a formula, a finite relaxation, an encoded relation. This is the room that knows the trick for getting out, and the room that argues the trick can be taken too far.
++
++## Getting out
++
++<!-- @energy_landscape_bench -->
++
++A bench with a wrinkled tabletop: four hundred and eighty-four little boxes standing at the height of an energy field, three sine waves crossed, coloured from blue in the troughs to violet on the ridges. A soft yellow blob sits in one of the hollows. Gravity and local downhill nudges draw it toward lower parts of the surface; no rule surveys all the basins for the deepest one. The first hall's question returns in another body: what can a local move discover, and what can it miss?
++
++<!-- @simulated_annealing -->
++
++The cabinet that fixes it: a dark survey table, waist high, with a milled basin holding a metre and a half of glowing relief. The surface is the Rastrigin function, the particular cruelty here: a smooth bowl with a cosine corrugation laid over it so that it has one true bottom and a regular grid of decoys all the way out. A temperature starts at a hundred; the run stops at a tenth or at its step limit. The rail's histogram groups the acceptance probabilities assigned to uphill proposals. The separate accept percentage counts all accepted proposals, including downhill ones.
++
++Run it hot and larger uphill proposals can be accepted. As it cools, the random proposals shrink and costly ones become less likely to pass. This is still a search through random neighbours, not the gradient rule from the first hall. START T sets the next reset's temperature; moving it during a run also changes the proposal scale, without directly replacing the current temperature.
+ 
+ ```gdscript
+ var delta_energy: float = neighbor_energy - current_energy
+@@ -12,45 +24,33 @@
+     accept = randf() < probability
+ ```
+ 
+-A better move is always taken. A worse move is taken with a probability that depends on how much worse it is and how hot things are. That second branch is the entire idea, and it is a strange thing to write down: a rule that deliberately accepts a bad outcome, because a run of bad outcomes is the only way out of a hole.
++A better move is always taken. A worse move is taken with a probability that depends on how much worse it is and how hot things are. That second branch is annealing's central permission, and it is a strange thing to write down: a rule that sometimes accepts a worse outcome so that a local improvement need not become a prison.
+ 
+-## Getting out
+-
+-<!-- @energy_landscape_bench -->
+-
+-A bench with a wrinkled tabletop: four hundred and eighty-four little boxes standing at the height of an energy field, three sine waves crossed, coloured from blue in the troughs to violet on the ridges. A soft yellow blob sits in one of the hollows. It descends into whichever basin it was dropped above and stays there, which is the first hall's marble again on a surface with more than one bottom, and it is here as the thing that needs fixing.
+-
+-<!-- @simulated_annealing -->
+-
+-The cabinet that fixes it: a dark survey table, waist high, with a milled basin holding a metre and a half of glowing relief. The surface is the Rastrigin function, which is the standard cruelty of this field, a smooth bowl with a cosine corrugation laid over it so that it has one true bottom and a regular grid of decoys all the way out. A temperature starts at a hundred and cools toward a tenth. A gauge along the rail shows how often a worse move is being accepted.
+-
+-Run it hot and the search wanders almost anywhere, uphill as readily as down. Run it cold and it is gradient descent again, refusing every backward step. Cool it in between and it explores first and commits later.
+-
+-The numbers behind the gauge are worth a moment. A move costing five hundredths of an energy unit is accepted about four times in five at a temperature of a fifth, and never at all at two thousandths. And when the search stops improving for long enough, the cabinet does not wait: it hops the whole solution to a new basin and starts again from there. This is a machine built around the admission that its own best rule gets stuck.
++The numbers behind the gauge are worth a moment. A move costing five hundredths of an energy unit has an acceptance probability of about 0.779 at a temperature of a fifth. At two thousandths it would be about 1.39 × 10⁻¹¹: extraordinarily unlikely, not zero, and below this run's stopping temperature. The cabinet also watches recent acceptance and adjusts its cooling rate. After eighty successive proposals without a downhill improvement, a separate rule can force a random relocation and reheat the search. HOP invokes that relocation directly; it does not ask the acceptance branch for permission. This is a machine built around the admission that its own local rule can get stuck.
+ 
+ <!-- @max_q_basin_room -->
+ 
+-And then the turn, and you will have to look up to find it. Two wells cut into one seven-metre plate, and the plate is hanging three and a third metres over your head: it shares its cell with the spawn and got bumped, then the grounding pass lifted it clear of the walls, so the room's argument is on the ceiling and the frozen cube in its dead well dangles at about your eye level.
++And then the turn toward two wells in a low, open tank. Approach the narrow well from its outside edge and look down into it. Compare them before pressing INTERPRET. What stays still? What keeps changing? The lower result and the more responsive result have been placed beside one another, but have they been given the same conditions?
+ 
+-On one side a narrow pit two and a fifth metres deep with steep walls, holding a single rigid half-metre cube. It is at the lowest energy here, it is perfectly settled, and it will never be anything else. On the other a broad shallow basin with something soft in it that keeps moving, finding a shape and losing it and finding it again. That one is higher up. By the arithmetic of the previous four halls it is worse.
++On one side a deep, narrow pit holds a static cube. On the other a broad, shallow basin holds something soft that keeps moving, finding a shape and losing it and finding it again. The difference is staged: the cube is a mesh with no motion assigned, while the soft lattice receives a random jostle every two and a half seconds. Its floor constraint and the drawn bowl are separate constructions. These are different receivers under different conditions, not two runs of one measured objective.
+ 
+-The claim on the floor is that it is the better minimum, and the room calls the difference Q. The deepest well is a dead-perfect crystal, finished. A form that can still be moved has to be resting somewhere shallow enough to be moved out of, which means the liveliest place in an energy landscape is never the bottom of it.
++Press INTERPRET after the comparison. The work proposes that the more responsive form is the better minimum, and gives that preference the name Q. Its dead-perfect crystal and its still-changing body are roles in an argument: low enough to hold, high enough to be moved. The installation has authored those roles; it has not measured a universal boundary between life and rest.
+ 
+ <!-- @impossible_end_table -->
+ 
+-The proof that this is not a metaphor, standing in the room as furniture, and the tensegrity the last hall promised and did not deliver. An end table whose top never touches its base: two steel Y-brackets whose arms overlap in plan with sixteen centimetres of daylight between them, one central cable holding the top down against three perimeter cables that stop it swaying. A teacup on top, unbothered.
++A further image, standing in the room as furniture: an end table whose top never touches its base. Two steel brackets overlap in plan with sixteen centimetres of daylight between them, joined in the drawing by one central cable and three perimeter cables. A teacup on top, unbothered. The pose refers to tension-supported furniture, but no force or contact solver tests whether this pictured arrangement can stand.
+ 
+-Islands of compression in a sea of tension. Nothing here is resting on anything. Every part is being pulled, hard, in a direction that exactly cancels, and the stillness of the teacup is the sum of forces that never stop.
++Islands of compression in a sea of tension is the invitation. Here the brackets and cables are meshes placed at chosen addresses. Their stillness does not establish cancelling forces; the scene never lets gravity trouble the teacup. What would a physical version have to demonstrate that this image can only ask?
+ 
+ <!-- @science_screen -->
+ 
+-A screen, washing the wall green. Had it looked up it would have drawn two basins and drawn the deeper one deeper, because depth is the only quantity a diagram of this kind carries. Q is the difference between those two wells, and depth is precisely the axis on which the shallow one loses.
++A screen, washing the wall green. Its diagram is another representation, not a measurement of Q in the two wells. Depth alone would leave out the different receivers and the disturbance supplied to one of them. The comparison asks which of those differences matters to the purpose we have chosen.
+ 
+ <!-- @ -->
+ 
+ ## Low enough to hold, high enough to be moved
+ 
+-That is the chapter, and it ends by turning against its own first sentence. A form is the answer to a minimisation problem, and matter finds those answers by falling. Four halls of that: the marble, the chain, the settling mesh, the balanced mobile, none of them drawn, each one the shape that costs the least.
++That is the chapter, and it ends by turning against its own first sentence. Finding a form has meant several different operations: a point following a local slope, a cable drafted between controls, a surface generated from a formula, a mesh retaining a finite relaxation, a mobile drawn to satisfy ideal moments. None gives us permission to treat every still shape as the least-cost answer to the same problem.
+ 
+ Then this one. Reaching the lowest value in a model is not the same as finding the form you want. A shallow basin can preserve a useful response to disturbance even when a deeper basin gives a lower score. That comparison is a choice about this model's purpose, not a test that separates living matter from dead matter.
+ 

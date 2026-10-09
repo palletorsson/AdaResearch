@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="source-sha256" content="71c0c8088739464d2a96c5914a1716e8d4412c92dd5b39b2f6c50c7cb275fabe"><title>commons/maps/Color_Flashlight/tutorial.md</title><style>body{max-width:900px;margin:40px auto;padding:0 24px;background:#f3f0e9;color:#252328;font:18px/1.65 system-ui}h1,h2,h3{line-height:1.2}h1{font:42px/1.2 Georgia}a{color:#883c5b}pre{background:#252328;color:#ffe6ef;padding:22px;white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace}code{font-size:.9em}img{max-width:100%}.caption{font-size:13px;color:#68606a}</style><body><nav><a href="../index.html">Back to the installed studies</a></nav><p class="caption">2 October 2026 · Source snapshot: commons/maps/Color_Flashlight/tutorial.md</p><h1>Move a condition of appearance</h1>
+<p>Primary encounters: <code>flashlight_demo</code>, then <code>colour_light_rooms</code>. Read <code>final.md</code> for the book voice and <code>technical.md</code> for the implementation.</p>
+<ol>
+<li>Find the boundary of one coloured pool on the board. Identify the lamp responsible by aiming it aside, then back.</li>
+<li>Leave that lamp aimed at the board. Move another so the pools separate and overlap. Describe the change before naming additive colour.</li>
+<li>Bring the white lamp into the comparison. If the overlap becomes hard to distinguish, separate the beams again.</li>
+<li>Aim onto the floor or side cube. Carry the same light across the faceted sphere; compare neighbouring faces before naming their normals. No face has been repainted.</li>
+<li>After following the light between these receivers, inspect <code>spot.light_color = light_color</code> in <code>flashlight_color.gd</code>. The assignment stays fixed while position and direction change.</li>
+<li>Enter the side white room. Keep one corner in view while the central light changes. Compare this fixed lamp/changing value with the handheld lamps' fixed values/changing positions. Approach the pink recess, then move sideways to find its return walls. Its two sources keep their pink value while the surrounding room changes.</li>
+<li>Enter the taller room and look through the stepped light well. Wait for its light to change, then walk up the ramp and compare the lips from the raised landing. Separate these observations: first change time while holding the viewpoint, then change viewpoint. The room's script does not recolour the museum sky.</li>
+<li>Carry light-versus-material into Color_Nails, where a colour choice addresses a surface resembling part of a body.</li>
+</ol>
+<p>The lamp's grab and orientation are the interaction. Do not instruct the visitor to switch it off, choose a hue, spawn a prism or select a receiving-ground variant: this placement provides none of those controls. Ask what the RGB model can show and what it leaves unrepresented, without treating this renderer as a spectral optics laboratory.</p>
+<h2>Making score: a room receives a value</h2>
+<p>After reading the encounter, return to the supplied <code>colour_light_rooms</code> scene. Its <code>set_phase()</code> method includes the same kind of assignment used by the handheld lamp:</p>
+<pre><code class="language-gdscript">central_light.light_color = c
+</code></pre>
+<p>First give <code>c</code> one fixed RGB value, run the scene, then substitute another. Keep the white receiving material and camera position. This reuses the light assignment already introduced in this hall; building all the room geometry is a separate exercise. The luminous reveal has its own material and is not the source that lights the walls.</p>
+<p>Then inspect <code>_process(delta)</code>: Point Zero's repeating callback advances the phase of a 110-second cycle. Pause the cycle with <code>running = false</code> and call <code>set_phase(0.16)</code> or <code>set_phase(0.38)</code> to compare two moments. Those are authoring changes in the script, not controls installed in the hall. The transferable operations are assigning a light colour, changing it over time, and holding conditions fixed to read a difference.</p>
+<!-- study-spine:sphere_in_pink -->
+
+<h2>Return: A sphere in pink</h2>
+<p>Change one lamp state; compare pink light with a pink surface. Begin with the supplied study in the museum and compare the two states from the same place. Name what remained fixed before inspecting the code.</p>
+<p>This application reuses point, colour. The small edit belongs to the learner; the display, main player and physical controls are supplied. Its adapter is <code>commons/artifacts/spine_studies/station.gd</code> (<code>pink</code>), which calls the study’s own setters. Change one parameter, predict the visible consequence, then test another value. Reconstructing every mesh is not a prerequisite for this encounter.</p>
+<p><a href="/book-review/doc/book/iterations/2026-10-01-sphere-in-pink/index.html">Earlier study and making notes</a>. Geometry controls wait until the exhibit is clear. RESET returns the original comparison.</p>
+<!-- study-edit:sphere_in_pink -->
+
+<h3>One source change: A sphere in pink</h3>
+<p>Replace the final set_lights(1) call in _ready(). Mask 3 enables the first two lamps. Bit-mask construction is supplied here; the first task is to compare illumination while the sphere stays fixed.</p>
+<pre><code class="language-gdscript">set_lights(3)
+</code></pre>
+<p>Source: <code>commons/artifacts/spine_studies/pink_sphere.gd</code>. Use the prepared scene to run and compare.</p></body></html>

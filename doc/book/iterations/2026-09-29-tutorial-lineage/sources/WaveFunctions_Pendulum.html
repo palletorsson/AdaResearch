@@ -1,0 +1,329 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WaveFunctions_Pendulum · Lineage sources</title><style>body{max-width:920px;margin:48px auto;padding:0 24px;background:#f6f3ec;color:#252d2a;font:16px/1.6 system-ui}a{color:#28594b}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#fffdf8;border:1px solid #d7d9cd;padding:22px;font:14px/1.7 ui-monospace,Consolas,monospace}h1{font:42px/1.1 Georgia}h2{margin-top:42px}nav{display:flex;flex-wrap:wrap;gap:15px}section{scroll-margin-top:20px}</style><body><p><a href="/tutorial-lineage#hall=WaveFunctions_Pendulum">← Tutorial lineage</a></p><h1>WaveFunctions Pendulum</h1><p>Captured current source, 29 September 2026. These documents may describe different iterations. This page does not certify their claims.</p><nav><a href="#final">final</a><a href="#tutorial">tutorial</a><a href="#technical">technical</a><a href="#intent">intent</a><a href="#critical">critical</a><a href="#artifacts">artifacts</a><a href="#summary">summary</a><a href="#blurb">blurb</a></nav><section id="final"><h2>final.md</h2><p><a href="WaveFunctions_Pendulum/final.md">Raw captured source</a></p><pre># Where a swing leaves its past
+
+Behind the bob, something is leaving the room very slowly.
+
+&lt;!-- @PendulumWave --&gt;
+
+Stand beside the frame and follow the swing. Then choose one teal mark just behind it. The bob turns. Keep looking at your mark: does it turn too?
+
+It continues away along the hall. Walk beside it. From here the whole record resembles a wave, although the bob has only swung in one plane. The long direction belongs to something the bob did not do.
+
+Each mark keeps a position and a time. When the record is drawn, this line gives it depth:
+
+```gdscript
+var depth: float = (time - p.z) * time_speed
+```
+
+`p.z` holds the time of the sample. Subtract it from the present and an age appears; multiply by 0.6 metres per second and that age becomes a distance. An old moment is further away. We can walk beside a duration because a direction has been given another job.
+
+One swing on this length of line takes about two and four-fifths seconds; at 0.6 metres a second it leaves about 1.7 metres of record. A period has become a length: a wavelength, the word for a return measured along a direction instead of along time.
+
+Look at the two intervals on the plate. FINE requests 25 milliseconds. The actual gaps, at a desk, are 16.7 and 33.3 milliseconds. Which rhythm is in the drawing?
+
+The recorder works on the physics clock: sixty ticks a second at a desk, and in a headset as many as the display draws, seventy-two or ninety. Its request falls between ticks either way, so the gaps alternate between two neighbouring tick counts: at sixty, 16.7 and 33.3 milliseconds; at ninety, 22.2 and 33.3. The small mismatch has a place in every swing&#x27;s record. The cyan joins can make it easy to overlook.
+
+Press COARSE and let a few swings leave their marks. Now find two crossings of the record&#x27;s centre line that go the same way, one full swing apart. There are far fewer marks to count between them. Divide the measured period on the plate by the requested interval: does it come close to your count?
+
+Keep watching as the older marks move away. Compare how far the oldest gets before disappearing. The rougher line can reach further into the past.
+
+Two endings are written into this list:
+
+```gdscript
+while trail_points.size() &gt; max_trail_length:
+	trail_points.pop_back()
+while not trail_points.is_empty() and time - trail_points.back().z &gt; max_history_seconds:
+	trail_points.pop_back()
+```
+
+The newest samples enter at the front. These lines remove from the back: first anything beyond three hundred entries, then anything older than ten seconds. FINE fills the available entries in roughly 7.5 seconds. COARSE keeps around fifty under the age limit. We changed which detail was affordable, and gained duration. A person looking for a small tremor and a person looking for a long return would have different reasons to choose.
+
+Walk to the far end and wait with one mark. It is there, then absent. No fading gives it a farewell. The pendulum carries on from its current angle and speed; this little piece of its accessible past has gone.
+
+Now press STROBE. The sampler uses the period measured from the pendulum&#x27;s own crossings. After a few swings, compare the moving bob with the sparse record behind it. The marks nearly line up. Tick-sized differences remain, but much of the movement has vanished from what was kept.
+
+This can become an instrument for finding repetition. It can also make repetition look like stillness. Film cameras did this to wagon wheels for a century: a wheel whose spokes advance by one spoke-spacing between frames photographs as still, and by a little less as turning backwards. STROBE is that fault chosen on purpose.[^wagon-wheel] Try reading the marks before glancing back at the bob. The same setting helps with one question and makes another difficult to answer.
+
+RESET begins this experiment again: starting angle, local time, empty list. The museum continues. We have already seen how useful it is to make a beginning without beginning everything.
+
+&lt;!-- @ --&gt;
+
+Across from the sampler panel, a drum turns beneath a pen. There, time takes an angle instead of a depth. In the point rooms, the drawing dot asked whether a hand had moved far enough to keep another position. These recorders ask different questions of what passes them.
+
+Across the hall a pendulum draws a rosette because the paper under it turns while its plane does not. In Paris in 1851 that turning was the Earth&#x27;s, and the pendulum was the proof; here no floor turns, so the program turns the paper, in three minutes instead of a day and a half.[^foucault] And three pendulums hung from pendulums paint on wet canvases: their rule is as fixed as this one&#x27;s, and no second release will paint the same picture.
+
+We could stay and change what a record values. Ahead, rising and falling are being given yet another direction: two walls carry waves along a passage. A line that helped us read time will become something we read with a moving body.
+
+[^wagon-wheel]: The wagon-wheel effect is temporal aliasing: any sampler misses what returns between its samples, and a sampler timed to the return misses all of it (Nyquist and Shannon, 1949). *Nature of Code* names it in passing in its chapter on oscillation.
+
+[^foucault]: Léon Foucault hung his pendulum in the Panthéon in 1851. A swing plane turns at the Earth&#x27;s rate times the sine of the latitude: at 45 degrees, once in about 34 hours; the artifact here (foucault_pendulum) turns its canvas at 0.05 radians a second times that sine, once in about three minutes, some seven hundred times faster. The painters are WavePaintings, three double pendulums with the middle bob grabbable.
+</pre></section><section id="tutorial"><h2>tutorial.md</h2><p><a href="WaveFunctions_Pendulum/tutorial.md">Raw captured source</a></p><pre># Pendulum
+
+A swing that keeps returning, and a record of it that keeps receding. Build the pendulum on the fixed step, then decide what its record is allowed to keep. All code below is from `algorithms/wavefunctions/oscillation_driver/PendulumWave.gd`.
+
+Integrate the swing on the physics step.
+
+```gdscript
+angular_acceleration = -(gravity / length) * sin(angle)
+angular_velocity += angular_acceleration * delta
+angular_velocity *= (1.0 - damping * delta) # Apply damping
+angle += angular_velocity * delta
+time += delta
+```
+
+Gravity over length, times the sine of the angle, pulls the bob back toward hanging. Velocity accumulates the pull; the angle accumulates the velocity. `delta` is one sixtieth of a second at this project’s current physics setting, and `time` is this experiment&#x27;s own clock. With `damping` at zero there is no deliberate energy loss; numerical integration still approximates the motion.
+
+Keep a sample with the time it was taken.
+
+```gdscript
+_sample_clock += delta
+if _sample_clock &gt;= sample_interval:
+	_sample_clock -= sample_interval
+	if _sample_clock &gt;= sample_interval:
+		_sample_clock = fmod(_sample_clock, sample_interval)
+	var bob_local := Vector3(length * sin(angle), pivot_height - length * cos(angle), 0.0)
+	trail_points.push_front(Vector3(bob_local.x, bob_local.y, time))
+```
+
+A sample is where the bob is and when. The third component is not a position; it is the clock reading. Nothing is kept between samples. A 25 ms target at 60 physics ticks per second is serviced on alternating one/two-tick gaps, about 16.7/33.3 ms. The display reports those actual gaps alongside the target.
+
+Give the record two limits.
+
+```gdscript
+while trail_points.size() &gt; max_trail_length:
+	trail_points.pop_back()
+while not trail_points.is_empty() and time - trail_points.back().z &gt; max_history_seconds:
+	trail_points.pop_back()
+```
+
+Three hundred marks, or ten seconds, whichever runs out first. At the 25 ms target the count binds near 7.5 seconds. At 200 ms the age binds around fifty marks; entry count and time span are different quantities.
+
+Draw depth from age.
+
+```gdscript
+var depth: float = (time - p.z) * time_speed
+var at := Vector3(p.x, p.y, -depth)
+```
+
+Age times 0.6 metres per second. The newest mark sits at the bob; the oldest retained mark is the farthest. The line joining them is a list laid out along the hall, not a path anything travelled.
+
+Let the pendulum time itself.
+
+```gdscript
+if _prev_angle &lt; 0.0 and angle &gt;= 0.0 and angular_velocity &gt; 0.0:
+	if _last_upward_crossing &gt;= 0.0:
+		_period_measured = time - _last_upward_crossing
+```
+
+Two successive upward crossings of the centre give a period. STROBE sets the sampling interval to that period, and marks nearly align. The period and the sampling instants are both quantized to ticks.
+
+Reset this experiment only.
+
+```gdscript
+angle = deg_to_rad(initial_angle)
+angular_velocity = 0.0
+time = 0.0
+trail_points.clear()
+```
+
+The swing back to its starting angle, the clock to zero, the list to empty. The hall&#x27;s clock, and everything else swinging in it, is untouched.
+
+## The walk
+
+Enter from the north and pass the raised stage on either side. At the head of the open south half the pendulum swings under its frame; the record recedes away from you toward the exit. Stand at the east post and pick one mark to follow. Walk south beside the record and find two crossings a whole swing apart; count the marks between them. Read the plate: count, span, interval, rate, period, step. Divide the period by the interval. Return to the post and press COARSE; read the plate again. Walk to the far end and wait for a mark to leave. Press STROBE and watch the record stand still while the bob swings. Press RESET. On the way to the south door, ask the seismograph on the west walkway the same questions.
+
+You have seen a record made from a motion, and the rules that end it. The next map, Sine Space, lays the rising and falling along a passage you walk.
+&lt;&lt;&lt;/MAP&gt;&gt;&gt;
+
+Change the depth rate.
+
+```gdscript
+@export var time_speed: float = 0.6
+```
+
+A faster rate stretches the same ten seconds over more of the hall; the marks do not change, only their spacing. Any placement can set it, and the readout prints whatever value is in force.
+</pre></section><section id="technical"><h2>technical.md</h2><p><a href="WaveFunctions_Pendulum/technical.md">Raw captured source</a></p><pre># PendulumWave: motion, recording and the clocks between them
+
+This chapter describes the placed primary, `algorithms/wavefunctions/oscillation_driver/PendulumWave.gd`, in WaveFunctions_Pendulum. The map places it at (6,11), rotated 180 degrees, so its local negative-Z record recedes south. Its current controls are FINE, COARSE, STROBE and RESET. Length and damping are exports for the scene author; this panel does not offer those adjustments.
+
+## Advance a state
+
+```gdscript
+angular_acceleration = -(gravity / length) * sin(angle)
+angular_velocity += angular_acceleration * delta
+angular_velocity *= (1.0 - damping * delta) # Apply damping
+angle += angular_velocity * delta
+time += delta
+```
+
+The script runs this symplectic-Euler update in `_physics_process`. The project currently supplies sixty physics ticks per second. This separates integration from rendering; it does not make the numerical solution exact or guarantee a wall-clock performance rate under load.
+
+Length is 2 m, gravity 9.8 m/s², initial angle 45 degrees and damping zero. The small-angle period estimate is `TAU * sqrt(length / gravity)`, approximately 2.84 seconds here. At 45 degrees the acceleration is nonlinear in angle, so that estimate and the measured period differ. The script measures between successive negative-to-positive centre crossings; those detections are also resolved on physics ticks.
+
+## Keep a different state: the record
+
+```gdscript
+_sample_clock += delta
+if _sample_clock &gt;= sample_interval:
+	_sample_clock -= sample_interval
+	if _sample_clock &gt;= sample_interval:
+		_sample_clock = fmod(_sample_clock, sample_interval)
+	var bob_local := Vector3(length * sin(angle), pivot_height - length * cos(angle), 0.0)
+	trail_points.push_front(Vector3(bob_local.x, bob_local.y, time))
+while trail_points.size() &gt; max_trail_length:
+	trail_points.pop_back()
+while not trail_points.is_empty() and time - trail_points.back().z &gt; max_history_seconds:
+	trail_points.pop_back()
+```
+
+A sample stores two coordinates and the experiment timestamp. FINE targets 0.025 s; COARSE targets 0.2 s. Samples are taken at the first servicing physics tick, without interpolating an intermediate bob position. At 60 Hz, FINE alternates approximately 16.7 and 33.3 ms gaps. `recorded_interval_range()` measures the differences between retained timestamps and the readout reports them alongside the target.
+
+The count limit is 300 and the age limit 10 s. FINE fills the count budget with about 7.5 s of history. A collection of 300 positions spans 299 inter-sample gaps; the oldest sample&#x27;s age also includes the time since the newest sample. COARSE retains around fifty marks under the age limit. Count, age and target interval are related quantities, not interchangeable ones.
+
+## Lay the record into space
+
+```gdscript
+var depth: float = (time - p.z) * time_speed
+var at := Vector3(p.x, p.y, -depth)
+```
+
+Depth is age times 0.6 m/s. The longest permitted history reaches about 6 m; the FINE count limit reaches about 4.5 m. The bob swings in one plane. The trail&#x27;s depth is an encoding of time, not a direction the bob travelled. An ImmediateMesh joins the samples, and a MultiMesh places a small sphere at each retained sample.
+
+Changing sampler clears the record and retains the swing state. STROBE targets the measured period, with a small-angle estimate until a measurement exists. Samples then nearly align; quantized timing and numerical integration can leave a spread. RESET preserves the selected policy while returning this experiment&#x27;s angle, velocity, time and list to their starting state. It does not reset the museum clock.
+
+The gallows frame, side panel and cased readout make these choices available in the room. Standalone camera, environment, light and floor are removed when embedded. The panel carries `em_local_instrument` so its touch targets do not become the installation&#x27;s planning footprint.
+
+The Foucault pendulum, WavePaintings and seismograph remain secondary comparisons. Their independent implementations must be read before attributing this recorder&#x27;s timing policy to them. The earlier broad explanatory sketches are preserved in the W1 review archive; they are not the code running in this primary.
+
+Source and arithmetic checks support this account. Placement, label legibility, physical controls, unloading and headset access still require the museum probe and a walk.
+
+
+## Measured on 2026-09-13
+
+The claim that integration is separated from rendering is now a measurement. The same FINE record was taken for three seconds of experiment time at two render rates:
+
+| render cap | frames drawn | physics steps | marks | span kept | actual gaps |
+|---|---|---|---|---|---|
+| 30 | 91 | 180 | 120 | 2.983 s | 16.7–33.3 ms |
+| 120 (vsync held it at 60) | 180 | 180 | 120 | 2.983 s | 16.7–33.3 ms |
+
+Twice the frames drawn, and the record did not change by a mark. The gaps belong to the physics step: FINE asks for 25 ms and a 16.7 ms step can only meet it by alternating one step and two.
+
+Eviction, past the 300-mark cap, sampled at 9, 14 and 19 s: the count held at 300 each time while the oldest retained timestamp moved on from 1.73 s to 6.92 s to 11.57 s. The marks&#x27; instance count and the trail&#x27;s vertex count stayed at 300, and the engine&#x27;s static memory did not move (+0.00 MB over those ten seconds).
+
+**A step longer than the interval.** The sampler fires at most once per physics step. At 30 ticks a step is 33.3 ms, longer than FINE&#x27;s 25 ms, so every gap is 33.3 ms and the request is simply not met. The readout shows it in its actual gaps. The shipped code also carried the unmet remainder forward, and it grew by 8.3 ms every step: measured on HEAD, 491.7 ms after two seconds, a backlog the record would then have over-sampled to drain. The carried remainder is now kept under one interval (25.0 ms at most, same run). At the shipped 60 ticks the new branch never runs, so the record is unchanged there.
+</pre></section><section id="intent"><h2>intent.md</h2><p><a href="WaveFunctions_Pendulum/intent.md">Raw captured source</a></p><pre>Concept: Where a movement puts its past. One pendulum, integrated on the fixed physics step, and a finite record of its positions laid out behind it by age, so that a returning motion becomes a series of distinct marks and the record&#x27;s two limits (300 marks, 10 seconds) can be read in the room.
+Sequence role: Second active hall in Wavefunctions. The Intro gave a returning bob two velocities at one position and kept only a count of its crossings; this hall gives the return a history with a depth axis and shows what a finite, sampled record keeps and loses. Follows WaveFunctions_Intro; leads to WaveFunctions_Sine_Space, where the same rising and falling is laid along a passage in space.
+Technical angle: `PendulumWave.gd`: motion in `_physics_process` (symplectic Euler, angular acceleration -(g/L)·sin θ, fixed 60 Hz step, no damping so the amplitude and period hold); a tick-quantized sampler pushing (x, y, t) samples with targets FINE 25 ms, COARSE 200 ms or STROBE = the period measured from two successive upward crossings of the centre; two eviction rules, count over 300 and age over 10 s; depth = age × 0.6 m per second; a cased readout printing count, span kept, target interval, actual timestamp gaps, depth rate, period and step; RESET returns this experiment&#x27;s swing, clock and list to their start and nothing else.
+Critical angle: A record is a list with its own rules, separate from the rule that moves the thing recorded. The fine sampler spends its memory on resolution and loses span; the coarse one keeps the span and loses the shape; a sampler given the rhythm of its subject makes the motion disappear. What a record keeps was decided before the reader arrived, and the reader can change it here.
+Key artifacts: PendulumWave (primary): the swing under its gallows frame, the receding record of marks, the four-button panel on the east post and the cased readout three metres down the trail. seismograph (secondary): a drum recorder on the west walkway beside the trail, time as angle rather than depth. foucault_pendulum, WavePaintings, draw_dot_time_domain: other pendulums and other recorders, kept as developed secondary work in the north half. lab_table, GlassRack, BigPipeSystem, VRAudioMonitor: the laboratory around the raised stage. dark_sphere continues.
+
+Gap: this pendulum has no grab (the Intro&#x27;s has one); the seismograph has no apply_grid_config; the runtime probe (`commons/testing/probe_wcn_pendulum.gd`) is written and not yet run; no headset walk.
+</pre></section><section id="critical"><h2>critical.md</h2><p><a href="WaveFunctions_Pendulum/critical.md">Raw captured source</a></p><pre># Two clocks decide what survives
+
+Follow a mark until it leaves the record. Nothing happened to gravity at that moment. `PendulumWave.gd` can advance the next swing from its current angle and angular velocity; the disappearing mark belonged to another system, a list with a count limit and an age limit. The motion continues while its accessible past gets shorter.
+
+FINE targets 25 milliseconds and spends three hundred entries on roughly 7.5 seconds. COARSE targets 200 milliseconds and keeps around fifty entries under the ten-second age limit. More detail keeps less duration here because the memory budget is held constant. A different budget would produce a different trade. Before calling one record better, ask what it must let someone discover.
+
+The target has to meet another clock. At sixty physics ticks per second there is no tick exactly 25 milliseconds after the last one. Actual sample gaps alternate around the request, and the readout admits the difference. The continuous cyan line joins positions the simulation retained; its joins are not evidence of positions sampled between them. The recording rule is already being translated into the capabilities of its host.
+
+STROBE gives the sampler the pendulum&#x27;s measured period. The marks nearly align while the bob keeps moving. Tick-scale spread remains because the measurement of the period is itself discrete. The record makes movement look close to rest without needing to fabricate a single position. What happens between its appointments falls outside its account. Which histories acquire that appearance because of how often someone looks?
+
+The drawing dot in the point rooms asked whether the hand had moved far enough before keeping a position. This recorder asks whether enough simulation time has accumulated. Each can reveal something the other misses. Neither offers an unencoded original to which all other records must answer.
+
+The pendulum is also a model: one angular degree of freedom, a chosen length and gravitational acceleration, a numerical integrator. Its restoring acceleration uses `sin(angle)`; it is only approximately linear for small angles. This instance starts at 45 degrees and has zero damping, so the room does not demonstrate friction settling a body into obedience. That story would require different parameters. The critical work begins with the decisions this body actually carries.
+
+RESET makes one more selection. It clears this experiment&#x27;s state and record while the museum keeps running. A beginning is made available inside a world that has already begun.
+</pre></section><section id="artifacts"><h2>artifacts.md</h2><p><a href="WaveFunctions_Pendulum/artifacts.md">Raw captured source</a></p><pre># WaveFunctions Pendulum — Artifacts
+*Wavefunctions: Everything Oscillates · oscillation · 10 artifacts*
+
+&gt; Gravity creates rhythm. A weight on a string swings, tracing time with its body. The pendulum is sine made physical — restoring force proportional to displacement, perpetual return toward equilibrium that momentum always overshoots.
+
+The map, read through what it holds — its artifacts in the order you meet them:
+
+## PendulumWave
+![PendulumWave](/scene-catalog/PendulumWave.png)
+
+Pendulum generating a sine wave
+
+`PendulumWave`
+
+## draw_dot_time_domain
+![draw_dot_time_domain](/scene-catalog/draw_dot_time_domain.png)
+
+Draw dot with time-domain trace along +Z.
+
+`draw_dot_time_domain`
+
+## Dark Sphere
+![Dark Sphere](/scene-catalog/dark_sphere.png)
+
+USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.
+
+`dark_sphere`
+
+## Wave Paintings
+![Wave Paintings](/scene-catalog/WavePaintings.png)
+
+Three pendulum-painting stations—grab the bob to swing it, watch oscillation become visible trace. Each pendulum paints on a wet canvas below, translating harmonic motion into color trails. The physics of swinging becomes the brush; chaos becomes art.
+
+`WavePaintings`
+
+## Glass Rack
+![Glass Rack](/scene-catalog/GlassRack.png)
+
+Modular laboratory glassware system. Configurable spiral condensers, wobbly tubes, flasks, junctions. Use #config:spiral_tube, #config:spiral_condenser, #config:distillation_rack, or #config:simple_tube. Turtle path commands: f,l,r,u,d,spiral,wobbly,flask,junction.
+
+`GlassRack`
+
+## Lab Table
+![Lab Table](/scene-catalog/lab_table.png)
+
+Procedural wooden lab table with legs and support frame. Surface for placing instruments and apparatus. The workbench where oscillation becomes experiment.
+
+`lab_table`
+
+## Foucault Pendulum
+![Foucault Pendulum](/scene-catalog/foucault_pendulum.png)
+
+A brass pendulum swings from high above, drawing rosette patterns on a cream canvas below. The swing plane slowly precesses—Foucault&#x27;s elegant proof that Earth rotates beneath us. Dark ink traces accumulate into intricate spirograph-like figures over time.
+
+`foucault_pendulum`
+
+## Big Pipe System
+![Big Pipe System](/scene-catalog/BigPipeSystem.png)
+
+Industrial drain pipe network built from modular segments — straights, corners, T-junctions, crosses, vertical bends. Pipes as frozen flow: the physical infrastructure that channels movement. WFC-adjacent: each segment constrains its neighbors.
+
+`BigPipeSystem`
+
+## VR Audio Monitor
+![VR Audio Monitor](/scene-catalog/VRAudioMonitor.png)
+
+Standalone audio monitor display showing waveform and spectrum analysis. Place near any audio source to visualize sound. The waveform shows amplitude over time; the spectrum shows frequency content—two complementary views of the same signal.
+
+`VRAudioMonitor`
+
+## seismograph
+![seismograph](/scene-catalog/seismograph.png)
+
+Seismograph-style traveling-pen chart — draws the driving signal over time onto a scrolling paper strip, reading oscillation as a physical trace.
+
+`seismograph`
+</pre></section><section id="summary"><h2>summary.md</h2><p><a href="WaveFunctions_Pendulum/summary.md">Raw captured source</a></p><pre># WaveFunctions_Pendulum — Summary
+
+A pendulum swings under a gallows frame at the head of the hall&#x27;s open south half, its bob at hand height. Behind it, a line of small marks recedes six metres down the hall toward the exit. Each mark is a sample of the bob&#x27;s position, kept together with the experiment time it was taken at and drawn at a depth of 0.6 metres per second of age. Walking south beside the record, the visitor sees the swing side-on as a wave that the bob itself never drew.
+
+The record has two limits. At most three hundred marks are kept, and nothing older than ten seconds. A cased readout three metres down the trail prints the count, the span kept, the sampling interval, the depth rate, the measured period and the physics step. A four-button panel on the east post switches the sampler. FINE targets 25 ms, recorded on alternating 16.7/33.3 ms physics-tick gaps at 60 Hz; three hundred entries retain about 7.5 seconds. COARSE targets 200 ms and retains around fifty entries under the age limit. The readout distinguishes the target from measured timestamp gaps. STROBE uses the measured period (or a small-angle estimate until available), producing near-aligned samples with some tick-scale spread. RESET returns this experiment&#x27;s swing, clock and list to their start and touches nothing else in the room.
+
+The motion runs on the fixed physics step, so the record does not depend on how often the headset redraws it. On the west walkway a seismograph keeps a comparable record on a drum, where time is an angle. The north half keeps the Foucault pendulum, the double-pendulum paintings and the dot plotter as other pendulums and other recorders.
+
+Within the sequence this is the second active hall. The Intro kept a count of a bob&#x27;s crossings; this hall keeps a history and shows what a finite, sampled record loses. Sine Space, next, lays the same rising and falling along a passage in space.
+
+
+## Measured (2026-09-13)
+
+Every button on the panel now answers a real press. The record does not care how fast the room is drawn: at thirty frames a second and at sixty it keeps the same 120 marks over the same three seconds. Past its limit of 300 marks it keeps losing its oldest as it gains the newest, and nothing grows while it does.
+</pre></section><section id="blurb"><h2>blurb.md</h2><p><a href="WaveFunctions_Pendulum/blurb.md">Raw captured source</a></p><pre>Where does a movement put its past? A pendulum swings under a gallows frame and behind it a line of marks recedes down the hall: a target of 25 milliseconds meets a physics clock that can only record on its ticks; the bob’s position is kept with the time it was taken, and each mark is drawn at a depth proportional to its age. Seen side-on the record is a wave; the bob never drew one.
+
+The `PendulumWave` holds its record with two limits, three hundred marks and ten seconds, and a plate beside the trail prints which one is binding. A panel on the post switches the sampler: FINE spends its memory on resolution, COARSE keeps more time in fewer marks, and STROBE samples once per measured period, so the record of a moving bob looks still. The `seismograph` on the west walkway keeps the same kind of past on a drum, where time is an angle.
+</pre></section></body></html>

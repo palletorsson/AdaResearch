@@ -1,0 +1,40 @@
+{
+  "started": "2026-09-14T11:33:36+02:00",
+  "finished": "2026-09-14T11:34:14+02:00",
+  "pid": 17060,
+  "exit": 0,
+  "checks": 98,
+  "failures": [],
+  "source_sha256": {
+    "ada_run/recursion_probe_base.gd": "7d1f601d770ae5b869ea0eebb432b045059d613b6706bc638733572ccbd0a9ef",
+    "ada_run/recursion_acceptance.gd": "fa2cfade726d151cfa409abbd9af6bd6215d21f7dcea707b1fffa1a0aea97541",
+    "commons/maps/Fractal_Recursion/map_data.json": "c9255643410c08dd27f05bd34192e23952639b6e9883d1c1dfeb855a971495be",
+    "commons/testing/wcn_desktop_driver.gd": "abafcd23a15afdd54df24a22f1be2977e3df771c2629817131258933b3b9f272",
+    "ada_run/recursion-review-2026-09-14/review-plan.json": "27247d3fff5d12a0d67f39e39a144ecf66e317319d2301d76cec177fc04d96d1",
+    "algorithms/fractals/example_8_2_recursion_vr.gd": "0a896e8089031e5b4fea316388d2a6f1898dd24aee964017b41dc49d3009ed3d",
+    "algorithms/fractals/example_8_3_recursion_circles_vr.gd": "9dead8343808fd455d74c94fd6b6374f2a763b849afc64b455a93313013a5d31",
+    "algorithms/fractals/cubesubdivision/cube_subdivision.gd": "a2894bead5c125fcf9d9d72e76f0dbb4126c0c6cd004b486f7f6bf67b5aff8bf",
+    "algorithms/fractals/cubesubdivision/recursive_chair.gd": "437ed1c8afc2f377556ef77b4d99f61adffe1b18c9b6885ad6f9708c02f91c3f",
+    "commons/artifacts/recursion_lesson/recursion_lesson.gd": "19ca236086e0b51165f0f4c1316cde58bd3b8a01fab2c0f3439cdb372d30c1d4",
+    "commons/data/map_authored.json": "791f0e25e183b0ef2537ed2170bee6c54c03940aa795581d1c63634c8750d722",
+    "commons/data/trunk_branches.json": "f5c0c5db42224625f1e59a04839dc1b0985b1f09dbb5de442fa1853c313a0df7",
+    "commons/data/book/fractals.json": "5b026628c323ec6a92aaf2f46dfadb1ed1f0307056e310c3ced86c2dac5e003f",
+    "commons/data/artifact_roles.json": "117c29d98b0aa224e6a74c555dba07e83dce06c39b38a6d16557bad76028c2ae",
+    "commons/maps/Fractal_Recursion/final.md": "3f072d996797876cc871cac46b080ff437270824ad5b70f77c9d0bd9c4926775"
+  },
+  "sources_unchanged": true,
+  "original_hand_unchanged": true,
+  "hand_mode": "isolated snapshot",
+  "headset_verified": false,
+  "heard_by_a_person": false,
+  "coexisting_processes": [
+    {
+      "ProcessId": 40112,
+      "CommandLine": "\"C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe\"  --path \"C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\" --editor --rendering-driver vulkan"
+    },
+    {
+      "ProcessId": 2936,
+      "CommandLine": "C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 40112 --scene res://commons/scenes/endless_museum.tscn --xr-mode off --wid 28118058 --position \"380,96\" --resolution 1800x1200"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "actual_endless_museum": true,
+  "captures": [
+    "x-ride-low.png",
+    "x-ride-arc.png",
+    "x-ride-high.png",
+    "z-ride-sideways.png"
+  ],
+  "failures": [],
+  "found": {
+    "array_columns": 2,
+    "array_rows": 6,
+    "blades": true,
+    "cake_instances": 5,
+    "tunnel_segments": 5
+  },
+  "grid_position": "(5.5, -0.5, 5.5)",
+  "headset_verified": false,
+  "loaded_dimensions": "(39, 4, 60)",
+  "map": "Trans_Rotation",
+  "tokens": [
+    "rotation_wall_crossings:0:0.5#plinth:0",
+    "rotation_array_compare:0:0#columns:2#rows:6#band_spacing:7#row_angle_step:18#plinth:0",
+    "boolean_tunnel:0:0:1#segment_vertical_offset:-0.65#num_segments:5#rotation_per_segment:18#accrual:ramp#plinth:0",
+    "carousel_cake:0:0:0.4#profile:cake#gallery:clean#plinth:0",
+    "carousel_cake:0:0:0.4#profile:column#gallery:clean#plinth:0",
+    "carousel_cake:0:0:0.4#profile:ziggurat#gallery:clean#plinth:0",
+    "carousel_cake:0:0:0.4#profile:spindle#gallery:clean#plinth:0",
+    "carousel_cake:0:0:0.4#profile:flare#gallery:clean#plinth:0"
+  ]
+}

@@ -1,0 +1,17 @@
+--- before/commons/maps/Change_Intro/map_data.json
++++ after/commons/maps/Change_Intro/map_data.json
+@@ -2237,1 +2237,1 @@
+-        "tangent_slope_workbench:90:0:1#comparison:true#pin:1#plinth:0",
++        "",
+@@ -2240,1 +2240,1 @@
+-        "",
++        "tangent_slope_workbench:90:0:1#comparison:true#pin:1#plinth:0",
+@@ -2251,1 +2251,1 @@
+-        "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0",
++        "",
+@@ -2367,1 +2367,1 @@
+-        "",
++        "riemann_sum_workbench:270:0:1#comparison:true#pin:1#plinth:0",
+@@ -2440,1 +2440,1 @@
+-        "ftc_bridge:0:0:1#pin:1#plinth:0#evidence:longhand",
++        "ftc_bridge:0:0:1#pin:1#plinth:0#evidence:longhand#reveal_on_request:true",

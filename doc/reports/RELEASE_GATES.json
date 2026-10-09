@@ -1,17 +1,17 @@
 {
   "measurement": {
-    "measured_at": "2026-10-02T09:14:54+02:00",
+    "measured_at": "2026-10-08T09:23:11+02:00",
     "measured_by": "tools/run_release_gates.py",
-    "head": "4213f90860015083f71f495757fbe4226fe71297",
-    "head_subject": "feat(course): ten more long-track kits, the look lesson extended, six kits re-checked",
-    "tree_dirty": 1994,
-    "tree_untracked": 3783,
+    "head": "afa79864cb9f542ad3a045fff145f9ecc738fd23",
+    "head_subject": "chore(gates): land 80 stranded files for gates L, M, N - pure additions (idle 38-237h, unclaimed, all compile)",
+    "tree_dirty": 2173,
+    "tree_untracked": 4191,
     "tree_state_detector": "PASS"
   },
   "overall_pass": false,
   "overall_status": "FAIL",
   "enabled_gate_count": 15,
-  "passing_enabled_gate_count": 8,
+  "passing_enabled_gate_count": 9,
   "total_gate_count": 15,
   "command_exit_codes": {
     "sequence_contract": 0,
@@ -21,9 +21,9 @@
     "validate_museum_templates": 0,
     "em_autopilot": 3,
     "check_map_tokens": 0,
-    "check_prose_reachable": 2,
-    "check_artifacts_reachable": 32,
-    "check_tools_reachable": 1,
+    "check_prose_reachable": 4,
+    "check_artifacts_reachable": 52,
+    "check_tools_reachable": 0,
     "check_cell_types": 0
   },
   "gates": [
@@ -47,7 +47,7 @@
         "missing_scene_path": 0,
         "invalid_biome_token": 0,
         "unsupported_scene_path": 0,
-        "missing_map_ready": 101,
+        "missing_map_ready": 102,
         "missing_include_in_map_data": 107
       },
       "enabled": true
@@ -57,9 +57,9 @@
       "name": "Map Validation",
       "pass": true,
       "metrics": {
-        "grade_A": 2308,
-        "grade_B": 354,
-        "grade_C": 150,
+        "grade_A": 2306,
+        "grade_B": 369,
+        "grade_C": 149,
         "grade_F": 0,
         "max_grade_c": null,
         "grade_c_blocking": false,
@@ -118,7 +118,7 @@
         "stall_events": -1,
         "frontier_z": -1,
         "reason": "contended_builder",
-        "autopilot_says": "autopilot: REFUSED - 1 Godot instance(s) already hold this project (detector=psutil). A second boot either dies on the user:// lock or walks a tree the resident session is still saving into, and its verdict then reads as a fact about the corridor. | pid 37664: C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46 --editor --rendering-driver vulkan",
+        "autopilot_says": "autopilot: REFUSED - 1 Godot instance(s) already hold this project (detector=psutil). A second boot either dies on the user:// lock or walks a tree the resident session is still saving into, and its verdict then reads as a fact about the corridor. | pid 38608: C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46 --editor --rendering-driver vulkan",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -129,10 +129,10 @@
       "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 204,
-        "maps_named": 204,
+        "maps_scanned": 205,
+        "maps_named": 205,
         "maps_without_data": "none",
-        "placements": 1493,
+        "placements": 1461,
         "unresolved_placements": 0,
         "unresolved_tokens": "",
         "malformed_empty_cells": 0
@@ -189,14 +189,14 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "token_lines": 710,
+        "token_lines": 713,
         "closed_dishonestly": 18,
         "ghost": 0,
         "echo": 18,
         "no_registry": 0,
         "broken_body": 0,
         "hero_ghost": 0,
-        "open_not_counted": "empty 117 · stub 60 · elsewhere 51 · no_body 6 · no_subject 48",
+        "open_not_counted": "empty 117 · stub 60 · elsewhere 63 · no_body 6 · no_subject 48",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -209,17 +209,17 @@
         "detector_selftest": "PASS",
         "rooms_declared": 1017,
         "rooms_resolved": 937,
-        "prose_files": 1469,
-        "prose_tracked": 1467,
-        "unreachable_from_a_clone": 2,
-        "stranded_words": 1724,
-        "age_reading": "every one of these has lain untouched for over 24h (oldest 93.2h). Nobody is mid-sentence: this is finished writing sitting outside the repository.",
-        "claimed_in_the_forum": 2,
-        "claimed_reading": "2 of 2 claimed in writing by claude-opus-artifacts -- leave those alone. The other 0 are nobody's: no open thread names them.",
-        "claimed_by": "commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 22.8d), claude-chroma (260917-q1h14, 15d), claude-chroma (260917-13jf7, 14.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 22.8d), claude-chroma (260917-q1h14, 15d), claude-chroma (260917-13jf7, 14.9d)",
-        "unreachable": "commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md",
+        "prose_files": 1477,
+        "prose_tracked": 1473,
+        "unreachable_from_a_clone": 4,
+        "stranded_words": 1978,
+        "age_reading": "every one of these has lain untouched for over 24h (oldest 237.4h). Nobody is mid-sentence: this is finished writing sitting outside the repository.",
+        "claimed_in_the_forum": 4,
+        "claimed_reading": "4 of 4 claimed in writing by claude-opus-artifacts -- leave those alone. The other 0 are nobody's: no open thread names them.",
+        "claimed_by": "commons/maps/Color_Context_Placed/critical.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d), commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d), commons/maps/Color_Context_Placed/technical.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d)",
+        "unreachable": "commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/technical.md, commons/maps/Color_Context_Placed/critical.md, commons/maps/Color_Context_Placed/field_notes.md",
         "declared_case_mismatch": "none",
-        "tree_state": "untracked 2  [untracked: commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/field_notes.md]"
+        "tree_state": "untracked 4  [untracked: commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/technical.md, commons/maps/Color_Context_Placed/critical.md, commons/maps/Color_Context_Placed/field_notes.md]"
       },
       "enabled": true
     },
@@ -230,16 +230,16 @@
       "metrics": {
         "detector_selftest": "PASS",
         "artifacts_declared": 2890,
-        "files_checked": 6374,
-        "unreachable_from_a_clone": 32,
-        "rooms_affected": 62,
+        "files_checked": 6406,
+        "unreachable_from_a_clone": 52,
+        "rooms_affected": 82,
         "absent_from_every_tree": 81,
         "vendored_not_in_repo": 102,
         "ignored_on_purpose": 31,
-        "live_under_24h": 1,
+        "live_under_24h": 21,
         "stranded": 0,
         "landable_today": 0,
-        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 1 touched within 24h (somebody's open buffer), 0 stranded (0 of them claimed in the forum). Landable by an agent today: 0.",
+        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 21 touched within 24h (somebody's open buffer), 0 stranded (0 of them claimed in the forum). Landable by an agent today: 0.",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -247,16 +247,15 @@
     {
       "id": "N",
       "name": "Tools Reachable From A Clone",
-      "pass": false,
+      "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "tools_on_disk": 960,
-        "tools_tracked": 951,
-        "unreachable_from_a_clone": 1,
-        "live_uncommitted": 8,
+        "tools_on_disk": 1113,
+        "tools_tracked": 1030,
+        "unreachable_from_a_clone": 0,
+        "live_uncommitted": 83,
         "ignored_on_purpose": 0,
-        "stranded": "tools/em_shots.py (93h)",
-        "tree_state": "untracked 1  [untracked: tools/em_shots.py]"
+        "stranded": "none"
       },
       "enabled": true
     },
@@ -266,8 +265,8 @@
       "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 2810,
-        "cells_scanned": 3760840,
+        "maps_scanned": 2822,
+        "cells_scanned": 3848590,
         "non_string_cells": 0,
         "maps_affected": 0,
         "in_working_tree": 0,
@@ -279,20 +278,20 @@
   ],
   "raw": {
     "sequence_contract_summary": {
-      "total_sequences": 83,
-      "declared_entries": 1052,
-      "declared_unique_maps": 1013,
-      "map_folders_with_data": 2810,
+      "total_sequences": 84,
+      "declared_entries": 1063,
+      "declared_unique_maps": 1025,
+      "map_folders_with_data": 2822,
       "duplicate_entries_within_sequence": 0,
-      "duplicates_across_sequences": 39,
+      "duplicates_across_sequences": 38,
       "missing_declared_maps": 0,
       "undeclared_map_folders": 1870,
       "undeclared_prefix_hints": 1065,
-      "cross_sequence_prefix_hints": 433
+      "cross_sequence_prefix_hints": 432
     },
     "artifact_audit_summary": {
-      "total_entries": 3112,
-      "dict_entries": 3112,
+      "total_entries": 3235,
+      "dict_entries": 3235,
       "non_dict_entries": 0,
       "placeholder_entries": 0,
       "missing_scene_path": 0,
@@ -301,15 +300,15 @@
       "disallowed_scene_prefix": 1,
       "unresolved_scene_files": 0,
       "missing_include_in_map_data": 107,
-      "missing_map_ready": 101,
-      "missing_map_sequences_field": 366,
+      "missing_map_ready": 102,
+      "missing_map_sequences_field": 397,
       "empty_map_sequences": 839,
       "algorithm_without_curation": 5
     },
     "grade_counts": {
-      "A": 2308,
-      "C": 150,
-      "B": 354
+      "A": 2306,
+      "C": 149,
+      "B": 369
     },
     "lab_metrics": {
       "total_issues": 39,
@@ -338,16 +337,16 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_sequences` | 83 |",
-        "| `declared_entries` | 1052 |",
-        "| `declared_unique_maps` | 1013 |",
-        "| `map_folders_with_data` | 2810 |",
+        "| `total_sequences` | 84 |",
+        "| `declared_entries` | 1063 |",
+        "| `declared_unique_maps` | 1025 |",
+        "| `map_folders_with_data` | 2822 |",
         "| `duplicate_entries_within_sequence` | 0 |",
-        "| `duplicates_across_sequences` | 39 |",
+        "| `duplicates_across_sequences` | 38 |",
         "| `missing_declared_maps` | 0 |",
         "| `undeclared_map_folders` | 1870 |",
         "| `undeclared_prefix_hints` | 1065 |",
-        "| `cross_sequence_prefix_hints` | 433 |",
+        "| `cross_sequence_prefix_hints` | 432 |",
         "",
         "### Interpretation Notes",
         "",
@@ -360,8 +359,8 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_entries` | 3112 |",
-        "| `dict_entries` | 3112 |",
+        "| `total_entries` | 3235 |",
+        "| `dict_entries` | 3235 |",
         "| `non_dict_entries` | 0 |",
         "| `placeholder_entries` | 0 |",
         "| `missing_scene_path` | 0 |",
@@ -370,8 +369,8 @@
         "| `disallowed_scene_prefix` | 1 |",
         "| `unresolved_scene_files` | 0 |",
         "| `missing_include_in_map_data` | 107 |",
-        "| `missing_map_ready` | 101 |",
-        "| `missing_map_sequences_field` | 366 |",
+        "| `missing_map_ready` | 102 |",
+        "| `missing_map_sequences_field` | 397 |",
         "| `empty_map_sequences` | 839 |",
         "| `algorithm_without_curation` | 5 |"
       ],

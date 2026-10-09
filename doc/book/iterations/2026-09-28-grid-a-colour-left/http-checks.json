@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "file": "Color_Grid_Pallet.current.md",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "Color_Grid_Pallet.diff",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "checks.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "color-book.md",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "console-and-floor.png",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "console-cache-repair.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "encounter-sources.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "report.json",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "standing-on-colour.png",
+      "status": 200,
+      "bytes_match": true
+    },
+    {
+      "file": "/book-review/doc/book/iterations/2026-09-28-grid-a-colour-left/an-address-keeps-colour.png",
+      "status": 200,
+      "bytes_match": true
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "checks": [
+    {
+      "message": "configured study is stationary with physical controls",
+      "ok": true
+    },
+    {
+      "message": "FORM button reaches none",
+      "ok": true
+    },
+    {
+      "message": "none: visible marker follows the actual selected tread after reparenting",
+      "ok": true
+    },
+    {
+      "message": "none: ledger matches independently summed actual tread heights",
+      "ok": true
+    },
+    {
+      "message": "none: closed route returns with zero net height",
+      "ok": true
+    },
+    {
+      "message": "none: reset clears the journey",
+      "ok": true
+    },
+    {
+      "message": "none: external map node survives rebuild",
+      "ok": true
+    },
+    {
+      "message": "FORM button reaches hairline",
+      "ok": true
+    },
+    {
+      "message": "hairline: visible marker follows the actual selected tread after reparenting",
+      "ok": true
+    },
+    {
+      "message": "hairline: ledger matches independently summed actual tread heights",
+      "ok": true
+    },
+    {
+      "message": "hairline: closed route returns with zero net height",
+      "ok": true
+    },
+    {
+      "message": "hairline: reset clears the journey",
+      "ok": true
+    },
+    {
+      "message": "hairline: external map node survives rebuild",
+      "ok": true
+    },
+    {
+      "message": "FORM button reaches gap",
+      "ok": true
+    },
+    {
+      "message": "gap: visible marker follows the actual selected tread after reparenting",
+      "ok": true
+    },
+    {
+      "message": "gap: ledger matches independently summed actual tread heights",
+      "ok": true
+    },
+    {
+      "message": "gap: marker stops at actual cut end",
+      "ok": true
+    },
+    {
+      "message": "gap: repeated attempt does not invent an absent step",
+      "ok": true
+    },
+    {
+      "message": "gap: leaving the cut end clears its readout status",
+      "ok": true
+    },
+    {
+      "message": "gap: reset clears the journey",
+      "ok": true
+    },
+    {
+      "message": "gap: external map node survives rebuild",
+      "ok": true
+    },
+    {
+      "message": "FORM button reaches scaffold",
+      "ok": true
+    },
+    {
+      "message": "scaffold: visible marker follows the actual selected tread after reparenting",
+      "ok": true
+    },
+    {
+      "message": "scaffold: ledger matches independently summed actual tread heights",
+      "ok": true
+    },
+    {
+      "message": "scaffold: marker stops at actual cut end",
+      "ok": true
+    },
+    {
+      "message": "scaffold: repeated attempt does not invent an absent step",
+      "ok": true
+    },
+    {
+      "message": "scaffold: leaving the cut end clears its readout status",
+      "ok": true
+    },
+    {
+      "message": "scaffold: reset clears the journey",
+      "ok": true
+    },
+    {
+      "message": "scaffold: external map node survives rebuild",
+      "ok": true
+    },
+    {
+      "message": "FORM button reaches field",
+      "ok": true
+    },
+    {
+      "message": "field: visible marker follows the actual selected tread after reparenting",
+      "ok": true
+    },
+    {
+      "message": "field: ledger matches independently summed actual tread heights",
+      "ok": true
+    },
+    {
+      "message": "field: closed route returns with zero net height",
+      "ok": true
+    },
+    {
+      "message": "field: reset clears the journey",
+      "ok": true
+    },
+    {
+      "message": "field: external map node survives rebuild",
+      "ok": true
+    },
+    {
+      "message": "all five forms cycle without replacing the controls",
+      "ok": true
+    },
+    {
+      "message": "BACK reverses the measured transition",
+      "ok": true
+    },
+    {
+      "message": "step advances marker without moving the visitor camera",
+      "ok": true
+    },
+    {
+      "message": "other staircase placements remain opt-in",
+      "ok": true
+    },
+    {
+      "message": "active camera drives alignment feedback",
+      "ok": true
+    },
+    {
+      "message": "aligned endpoints are physically separate",
+      "ok": true
+    },
+    {
+      "message": "independent camera projection confirms endpoint alignment",
+      "ok": true
+    },
+    {
+      "message": "sideways movement reveals separation",
+      "ok": true
+    },
+    {
+      "message": "exploded beams do not report false alignment at the former viewpoint",
+      "ok": true
+    },
+    {
+      "message": "sealed endpoints really meet",
+      "ok": true
+    }
+  ],
+  "evidence": [
+    {
+      "centres": [
+        0.819999992847443,
+        0.892000019550323,
+        0.96399998664856,
+        1.03600001335144,
+        1.10800004005432,
+        1.17999994754791,
+        1.25199997425079,
+        1.32399988174438,
+        1.39600002765656,
+        1.46799993515015,
+        1.53999996185303,
+        1.61199998855591,
+        1.68400001525879,
+        1.69749999046326,
+        1.57599997520447,
+        1.29250001907349
+      ],
+      "display": "RETURN SIDE | 1/16 | AT START\nCentre change -0.47 m | from start +0.00 m\nUp 0.88 m | down 0.88 m",
+      "down": 0.877499997615814,
+      "form": "none",
+      "up": 0.877499997615814
+    },
+    {
+      "centres": [
+        0.819999992847443,
+        0.892000019550323,
+        0.96399998664856,
+        1.03600001335144,
+        1.10800004005432,
+        1.17999994754791,
+        1.25199997425079,
+        1.32399988174438,
+        1.39600002765656,
+        1.46799993515015,
+        1.53999996185303,
+        1.61199998855591,
+        1.68400001525879,
+        1.75600004196167,
+        1.82799983024597,
+        1.89999985694885
+      ],
+      "display": "CLOSING DROP | 1/16 | AT START\nCentre change -1.08 m | from start +0.00 m\nUp 1.08 m | down 1.08 m",
+      "down": 1.07999986410141,
+      "form": "hairline",
+      "up": 1.07999986410141
+    },
+    {
+      "centres": [
+        0.819999992847443,
+        0.892000019550323,
+        0.96399998664856,
+        1.03600001335144,
+        1.10800004005432,
+        1.17999994754791,
+        1.25199997425079,
+        1.32399988174438,
+        1.39600002765656,
+        1.46799993515015,
+        1.53999996185303,
+        1.61199998855591
+      ],
+      "display": "OPEN RUN | 12/12 | CUT END\nCentre change +0.07 m | from start +0.79 m\nUp 0.79 m | down 0.00 m",
+      "down": 0.0,
+      "form": "gap",
+      "up": 0.791999995708466
+    },
+    {
+      "centres": [
+        0.819999992847443,
+        0.892000019550323,
+        0.96399998664856,
+        1.03600001335144,
+        1.10800004005432,
+        1.17999994754791,
+        1.25199997425079,
+        1.32399988174438,
+        1.39600002765656,
+        1.46799993515015,
+        1.53999996185303,
+        1.61199998855591
+      ],
+      "display": "SCAFFOLD | 12/12 | CUT END\nCentre change +0.07 m | from start +0.79 m\nUp 0.79 m | down 0.00 m",
+      "down": 0.0,
+      "form": "scaffold",
+      "up": 0.791999995708466
+    },
+    {
+      "centres": [
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583,
+        1.35999989509583
+      ],
+      "display": "TILTED TREADS | 1/16 | AT START\nCentre change +0.00 m | from start +0.00 m\nUp 0.00 m | down 0.00 m",
+      "down": 0.0,
+      "form": "field",
+      "up": 0.0
+    }
+  ],
+  "failures": []
+}

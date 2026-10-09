@@ -1,0 +1,38 @@
+--- before/Trans_Pit-final.md
++++ commons/maps/Trans_Pit/final.md
+@@ -8,7 +8,7 @@
+ 
+ <!-- @pusher_block -->
+ 
+-Three red blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.
++Three blocks, each with an arrow on its face. Follow one through a complete journey before entering its path. It travels, stops, returns and stops again. The pause is part of the movement you need to learn.
+ 
+ The script keeps a fraction, `_t`, for its place along the journey: zero at the start, one at the far end. It places the block between those endpoints:
+ 
+@@ -27,7 +27,7 @@
+ 
+ <!-- @rc -->
+ 
+-The middle room has two orange turning slabs. Watch one end while the centre stays put. Each makes a quarter-turn, waits, then reverses. Their different pauses let one begin while the other still holds its place.
++The middle room has two turning slabs. Watch one end while the centre stays put. Each makes a quarter-turn, waits, then reverses. Their different pauses let one begin while the other still holds its place.
+ 
+ ```gdscript
+ mesh_instance.rotation_degrees = rotation_axis * current_angle
+@@ -57,7 +57,7 @@
+ 
+ Cosine carries `t` from zero to one and back; `lerpf` places the size between its two limits. All three cubes move from thirty centimetres to three and a half metres on a side, then return together.
+ 
+-![At its smallest, the green cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
++![At its smallest, the cube leaves the final door visible down the lane.](/book-review/doc/book/figures/Trans_Pit/growers-small.png)
+ 
+ ![At full size, the same cube fills the view from the same position.](/book-review/doc/book/figures/Trans_Pit/growers-large.png)
+ 
+@@ -65,7 +65,7 @@
+ 
+ Watch a bottom edge. It stays on the floor. The mesh and collision box grow together, with their centres kept half a side-length above that edge. Growth takes space upwards and sideways rather than passing through the ground.
+ 
+-As a cube expands, its colour warms. The gap beside it narrows, then widens again. All three axes scale equally, so the cube keeps its proportions. The gap has no such guarantee. Your available space is the remainder after its growth.
++As a cube expands, the gap beside it narrows, then widens again. All three axes scale equally, so the cube keeps its proportions. The gap has no such guarantee. Your available space is the remainder after its growth.
+ 
+ <!-- @ -->
+ 

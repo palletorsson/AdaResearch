@@ -1,0 +1,421 @@
+{
+  "chapter": "randomness",
+  "speak": "",
+  "speak_by": "",
+  "pearls": [
+    {
+      "pearl": "random definition",
+      "map": "Random_Definition",
+      "lines": [
+        {
+          "token": "seed_replay_demo",
+          "text": "One draw goes unused. The seed stays, the cubes stay, and green becomes red as the same stream dresses the grid differently. Can the interrupted match become another palette you want?",
+          "by": "astra-random-definition-review-2026-09-12"
+        },
+        {
+          "token": "prng_crank_machine",
+          "text": "Step a deterministic generator and inspect the successive states behind its outputs.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "slot_machine",
+          "text": "Draw symbols repeatedly and watch their counts accumulate.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "trng_vs_prng",
+          "text": "Compare the two labelled sources and inspect what the apparatus calls random.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "random_number_book_page_1955",
+          "text": "A historical table makes a generated sequence into a durable record that can be read again.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "catalyst_pickup",
+          "text": "One Randomness catalyst remains available on the route; it is a progression object, not another explanation of the seed.",
+          "by": "curated-2026-09-16"
+        }
+      ],
+      "hero": "seed_replay_demo"
+    },
+    {
+      "pearl": "random entropy",
+      "map": "Random_Entropy",
+      "lines": [
+        {
+          "token": "shannon_entropy_meter",
+          "text": "The tiles regroup while the bars and reading hold still. One arrangement helps us find a colour; another keeps its neighbours. The gauge cannot choose between those uses.",
+          "by": "astra-r1-review-2026-09-11"
+        },
+        {
+          "token": "entropy_jar",
+          "text": "A small mixing apparatus beside the ledger. Compare its visible arrangement with the measurement contract of the central instrument.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "hardware_entropy_decay",
+          "text": "An arrangement of built forms undergoing disorder. Its visible changes are a comparison for the ledger, not proof that all disorder has one measure.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "entropy_axiom",
+          "text": "A point cloud varies displacement along its length. Ask which properties this visual order-to-disorder gradient actually changes.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "random_butterflies",
+          "text": "The butterflies can find landing points in the neighbouring entropy cloud: one shared setting rather than a second copy of that setting.",
+          "by": "curated-2026-09-16"
+        }
+      ],
+      "hero": "shannon_entropy_meter"
+    },
+    {
+      "pearl": "random remove",
+      "map": "Random_Remove",
+      "lines": [
+        {
+          "token": "remove_random",
+          "text": "Eight choices along a row; eight along a column. The seed chooses the same list positions while different cubes disappear. Their addresses remain. What did the set decide before the draw began?",
+          "by": "astra-remove-review-2026-09-12",
+          "note": "The placed #local_grid:true artifact builds an owned bench. Removal zero-scales its own instances; RESET restores their original transforms and replays the seed. It never hunts museum geometry.",
+          "note_src": {
+            "file": "algorithms/randomness/RemoveRandom.gd",
+            "quote": "# Never search the room, an ancestor or current_scene for replacement targets."
+          }
+        },
+        {
+          "token": "random_removal_arena",
+          "text": "Walk to trigger removal without replacement. Red warns before a cell loses its collider; a permanent apron and replay console remain.",
+          "by": "spatial-staging-2026-09-16"
+        }
+      ],
+      "hero": "remove_random"
+    },
+    {
+      "pearl": "10 print algorithm",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "lines": [
+        {
+          "token": "ten_print_maze_3d",
+          "text": "Extrudes the classic 10 PRINT pattern into a standing maze and animates an ant pathfinder through …",
+          "by": "draft",
+          "note": "One random bit per cell decides nothing about mazes: the corridors come from two C64 glyphs whose diagonals happen to meet at the cell corners, so the program borrows its structure from a character ROM and from the eye.",
+          "note_src": {
+            "file": "algorithms/randomness/generative/tenprintantmaze/ten_print_maze.gd",
+            "quote": "the maze was never in the program. It is in the eye that refuses to see a grid of unrelated marks."
+          }
+        },
+        {
+          "token": "pickup_cube_placer",
+          "text": "Finds the active grid system and populates pickup cubes using randomized or patterned placement …",
+          "by": "draft"
+        },
+        {
+          "token": "nature_system_demo",
+          "text": "A kingdom is not a boundary — it is a region in a continuous morphospace",
+          "by": "draft"
+        }
+      ],
+      "hero": "ten_print_maze_3d"
+    },
+    {
+      "pearl": "random cubes",
+      "map": "Random_Cubes",
+      "lines": [
+        {
+          "token": "random_edge_profile",
+          "text": "A planar surface that generates random edge profiles and patterns",
+          "by": "draft"
+        },
+        {
+          "token": "random_object_spawner",
+          "text": "A spawning algorithm that randomly generates and places objects in the environment",
+          "by": "draft",
+          "note": "Nothing is placed at random: every cube enters at one fixed spigot and the scatter you read as chance was made by collision — the spawner rents its randomness from the physics solver, and pays each arrival with a death.",
+          "note_src": {
+            "file": "algorithms/randomness/random_object_spawner.gd",
+            "quote": "every cube in the artifact's life enters the world at exactly `spawn_position`, one fixed spigot, and whatever spread you see afterwards was made by collision, not by the spawner"
+          }
+        },
+        {
+          "token": "coin_toss",
+          "text": "The Bernoulli trial is the hydrogen atom of randomness",
+          "by": "draft"
+        },
+        {
+          "token": "dice_throw",
+          "text": "Fairness is not a single outcome — it is the symmetry of the generating process",
+          "by": "draft"
+        }
+      ],
+      "hero": "random_object_spawner"
+    },
+    {
+      "pearl": "random rotate random xyz",
+      "map": "Random_Rotate_Random_XYZ",
+      "lines": [
+        {
+          "token": "Random_Rotate_Random_XYZ",
+          "text": "Applies random rotation on all three axes (X, Y",
+          "by": "draft"
+        },
+        {
+          "token": "random_decay_multimesh",
+          "text": "Two standing 2D decay stacks rendered with MultiMesh",
+          "by": "draft"
+        },
+        {
+          "token": "RotateGridCubes",
+          "text": "Gradient slope test with animated rotation for walkability check",
+          "by": "draft",
+          "note": "There is no random orientation, only numbers poured into a chosen decomposition: X then Y then Z, in an order somebody picked — and the tilts sweeping this grid are a written score no frame can distinguish from a draw.",
+          "note_src": {
+            "file": "commons/maps/Random_Rotate_Random_XYZ/critical.md",
+            "quote": "To decompose rotation into Euler angles (rotation around X, then Y, then Z) imposes this historical grid onto the object."
+          }
+        }
+      ],
+      "hero": "RotateGridCubes"
+    },
+    {
+      "pearl": "random walk",
+      "map": "Random_Walk",
+      "lines": [
+        {
+          "token": "random_walk_terrarium",
+          "text": "Keep where we were. Shorten the record. Put the bead where we are now. What does the trail remember that its next step does not use?",
+          "by": "astra-walk-review-2026-09-12",
+          "note": "The glass folds proposed endpoints; the trail omits wall contacts and keeps 200 previous positions. At step 300 it holds positions 100–299 while the bead is at 300. ONE/ALL changes emphasis, not the five-walker population. The seeded procedure replays at equal counts.",
+          "note_src": {
+            "file": "commons/artifacts/random_walk_terrarium/random_walk_terrarium.gd",
+            "quote": "_walker_trails[i].append(_walker_positions[i])"
+          }
+        },
+        {
+          "token": "random_walk_collection",
+          "text": "Six small, grabbable sheets compare traces produced by different walk rules. They now rest above a reachable plinth.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "random_walk_leash",
+          "text": "A hand-held relation gives the sampled motion another constraint.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "random_walk_128",
+          "text": "A low floor study gives the accumulated path a spatial footprint.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "pixel_cloud",
+          "text": "One compact self-avoiding, upward-biased walk in cubes. Its size keeps the supporting study inside the room.",
+          "by": "curated-2026-09-16"
+        }
+      ],
+      "hero": "random_walk_terrarium"
+    },
+    {
+      "pearl": "random gaussian",
+      "map": "Random_Gaussian",
+      "lines": [
+        {
+          "token": "distribution_sampler",
+          "text": "The values stay; the account of them moves. Change the bins, read the centre again, and ask what the display has kept at its edges.",
+          "by": "astra-gaussian-review-2026-09-12",
+          "note": "The cabinet compares laws at equal landed N, preserves values across rebinning, and labels binned mean/deviation. Pale frames carry ideal expected counts; the orange model shape has a separate scale. Log inputs, in-flight capacity, marker cleanup and landing height are repaired.",
+          "note_src": {
+            "file": "commons/artifacts/distribution_sampler/distribution_sampler.gd",
+            "quote": "for v in _values:"
+          }
+        },
+        {
+          "token": "galton_board",
+          "text": "Falling beads give repeated choices a visible accumulation.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "distribution_comparator",
+          "text": "Compare three sampling laws using the same number of draws.",
+          "by": "curated-2026-09-16"
+        },
+        {
+          "token": "GaussianPaintSplatter",
+          "text": "Gaussian draws become marks; the protected central region rejects some of them. The painting is not an unfiltered picture of the sampling law.",
+          "by": "curated-2026-09-16"
+        }
+      ],
+      "hero": "distribution_sampler"
+    },
+    {
+      "pearl": "random",
+      "map": "Chamber_Random",
+      "lines": [],
+      "drop": true,
+      "edge": "Mutual illegibility is not achieved by either body — it is issued: the chamber reseeds both sides every frame, so the levelling depends on a referee neither the learner nor the octapod can see, and no shot teaches the next.",
+      "edge_src": {
+        "file": "commons/maps/Chamber_Random/critical.md",
+        "quote": "both are structurally random because the chamber's rules enforce randomness on both"
+      }
+    },
+    {
+      "pearl": "random mushrooms",
+      "map": "Random_Mushrooms",
+      "lines": [
+        {
+          "token": "mushrooms",
+          "text": "The sampled sizes never grow a seventh template between two others. Which difference would need another rule?",
+          "by": "astra-mushrooms-review-2026-09-12",
+          "note": "SHOW follows template copies; KIND reveals placement permissions; SIZE keeps draws but substitutes scale 1. The separately planted edible scene changes what a similar cap can do.",
+          "note_src": {
+            "file": "algorithms/proceduralgeneration/growth_systems/mushrooms/mushrooms.gd",
+            "quote": "return v if size_variation else 1.0"
+          }
+        },
+        {
+          "token": "bubbles_random",
+          "text": "A small bubble dish offers another population of similar but varied bodies without competing with the specimen bed.",
+          "by": "curated-2026-09-16"
+        }
+      ],
+      "hero": "mushrooms"
+    },
+    {
+      "pearl": "random space geometry",
+      "map": "Random_Space_Geometry",
+      "lines": [
+        {
+          "token": "env_one",
+          "text": "A procedural environment generation algorithm using randomness for kitbashing",
+          "by": "draft",
+          "note": "A world made entirely of draws — thirty positions, thirty scales, fifteen connections — arrives with none of them on its face, and it stands inside a 12x24 grid nobody rolled: the randomness is furniture in an authored room.",
+          "note_src": {
+            "file": "algorithms/randomness/envOne.gd",
+            "quote": "It shows you the result of all of that and not one thing about it."
+          }
+        },
+        {
+          "token": "random_transformations_geometric",
+          "text": "Random geometric transform visualization",
+          "by": "draft"
+        },
+        {
+          "token": "perlin_noise_bridge",
+          "text": "Coherence is not the opposite of randomness — it is randomness with memory",
+          "by": "draft"
+        },
+        {
+          "token": "sculpt_one",
+          "text": "An artistic sculpting algorithm that randomly modifies and shapes geometric forms",
+          "by": "draft"
+        },
+        {
+          "token": "curl_noise_particles",
+          "text": "Curl noise is water without a container — it swirls forever because the mathematics of incompressibility has no room for …",
+          "by": "draft"
+        }
+      ],
+      "hero": "env_one"
+    },
+    {
+      "pearl": "examples of randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "lines": [
+        {
+          "token": "pollock_painting_in_3d",
+          "text": "Walk around a floor painting as a moving brush leaves randomized colour and width. The mark varies inside an authored gesture.",
+          "by": "restored-gallery-2026-09-16"
+        },
+        {
+          "token": "monte_carlo_dartboard",
+          "text": "Throw and count points inside a circle and its square. The estimate can improve without each new draw bringing it closer.",
+          "by": "restored-gallery-2026-09-16"
+        },
+        {
+          "token": "pipe_dream",
+          "text": "A growing pipe chooses another local turn. Its available directions and enclosure are already part of the work.",
+          "by": "restored-gallery-2026-09-16"
+        },
+        {
+          "token": "extreme_randomness",
+          "text": "The same particles receive different motion rules. Compare random kicks, smooth trigonometric flow, spirals, swarming and selection.",
+          "by": "restored-gallery-2026-09-16"
+        }
+      ],
+      "hero": "pollock_painting_in_3d"
+    },
+    {
+      "pearl": "random pheromone",
+      "map": "Random_Pheromone",
+      "lines": [
+        {
+          "token": "pheromone_terrain",
+          "text": "Stigmergy is memory without a brain — the environment itself becomes the communication …",
+          "by": "draft",
+          "note": "Memory without a brain still needs somewhere to be kept, and here it is a decay constant: what the walkers can collectively remember is decided by an evaporation rate none of them set and none of them can change.",
+          "note_src": {
+            "file": "commons/maps/Random_Pheromone/critical.md",
+            "quote": "the evaporation rate is a design choice"
+          }
+        }
+      ],
+      "hero": "pheromone_terrain"
+    },
+    {
+      "pearl": "random space",
+      "map": "Random_Space",
+      "lines": [
+        {
+          "token": "random_space",
+          "text": "A crystal that contains mathematical chaos algorithms",
+          "by": "draft",
+          "note": "A floor has to hold still to be stood on: this finale's chaos ships with the animation off and the seed set to 1, so the world randomness built is the same world on every visit, down to the vertex.",
+          "note_src": {
+            "file": "commons/context/walkgrids/random_space.tscn",
+            "quote": "seed_value = 1 ... enable_animation = false"
+          }
+        },
+        {
+          "token": "noise_mixer",
+          "text": "Complexity is layered repetition. The same simple wave",
+          "by": "draft"
+        },
+        {
+          "token": "worley_noise",
+          "text": "Worley noise is a democracy — every pixel votes for its nearest neighbor",
+          "by": "draft"
+        }
+      ],
+      "hero": "random_space"
+    },
+    {
+      "pearl": "random game",
+      "map": "Random_Game",
+      "lines": [
+        {
+          "token": "r_c",
+          "text": "Which decision is already made, and which signal makes it available to you?",
+          "by": "astra-game-review-2026-09-13"
+        },
+        {
+          "token": "cube_projectile_spawner",
+          "text": "Stopping a source leaves the bodies it has already released.",
+          "by": "astra-game-review-2026-09-13"
+        },
+        {
+          "token": "random_removal_arena",
+          "text": "Walk to trigger removal without replacement. Red warns before a cell loses its collider; a permanent apron and replay console remain.",
+          "by": "spatial-staging-2026-09-16"
+        },
+        {
+          "token": "random_doors",
+          "text": "One seeded door is a passage; two reveal timed fire jets. Replay restores the same assignment.",
+          "by": "spatial-staging-2026-09-16"
+        }
+      ],
+      "hero": "r_c"
+    }
+  ]
+}

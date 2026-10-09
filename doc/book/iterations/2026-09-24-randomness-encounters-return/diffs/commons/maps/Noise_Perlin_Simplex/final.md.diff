@@ -1,0 +1,11 @@
+--- before/commons/maps/Noise_Perlin_Simplex/final.md
++++ commons/maps/Noise_Perlin_Simplex/final.md
+@@ -45,7 +45,7 @@
+ 
+ Now alter FREQ on just one side. Look back at the central plate. Alongside the different bases, it reports another difference: the scale at which the field is sampled. That one adjustment changes what you might have attributed to the basis. MATCH returns both generators to the declared settings. REPLAY on either side returns that side alone.
+ 
+-Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colour retains the sampled values, unless REGEN has left the Simplex side on a new seed: VIEW also returns that field to its declared seed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.
++Press VIEW. Keep following the pink markers as the relief is levelled at once into two flat arrangements. The colours keep their values. The seed stays where you left it, even after REGEN; only the way a value occupies space has changed. Nothing has been flattened inside the noise function; the display has stopped spending its answer on height.
+ 
+ The cubes remain at half-metre intervals. Their square arrangement is still present whichever basis produced the values. It would be easy to mistake the grid of the display for the lattice inside the calculation. VIEW gives us another way to notice that two decisions have been folded together.
+ 

@@ -1,0 +1,22 @@
+[probe] AT REST   carved=0.000  wall_open=0.000  narrowest_gap=0.35 m
+[probe]   the lattice is whole: 0.000 carved  OK
+[probe]   the wall is closed: openness 0.000  OK
+[probe]   the lattice has 484 live cube(s)  OK
+[probe]   the lattice carries a layers=0 AABB anchor  OK
+[probe]     wall settles to openness 0.000 with 0 visitor(s)
+[probe]     field settles to a narrowest gap of 0.35 m
+[probe] IMPOSTER  carved=0.000  wall_open=0.000  narrowest_gap=0.35 m
+[probe]   it carved nothing: 0.000  OK
+[probe]   the wall stayed shut: 0.000  OK
+[probe]   the field stayed big: 0.35 m  OK
+[probe]     wall settles to openness 0.999 with 1 visitor(s)
+[probe]     field settles to a narrowest gap of 0.44 m
+[probe] WALKER    carved=0.273  wall_open=0.999  narrowest_gap=0.44 m
+[probe]   it cut a tunnel: 0.273 of the lattice gone  OK
+[probe]   the wall made way: openness 0.999  OK
+[probe]   the field shrank: gap 0.35 -> 0.44 m  OK
+[probe] LEFT      carved=0.273  wall_open=0.000  narrowest_gap=0.37 m
+[probe]   the wall closed again: 0.000  OK
+[probe]   the blocks grew back: 0.37 m  OK
+[probe]   the tunnel stayed cut: 0.273  OK
+[probe] PASS
