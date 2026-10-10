@@ -31,6 +31,9 @@ func _ready() -> void:
 	source._mesh_instance.hide();source.get_node("Base").hide();source._info_label.hide()
 	source.tree_changed.connect(refresh)
 	begin()
+	var hand = load("res://commons/artifacts/growth_lesson/growth_hand.gd").new()
+	hand.name = "GrowthHand"
+	add_child(hand)
 	_stage_hall.call_deferred()
 
 func begin() -> void:
@@ -72,7 +75,10 @@ func _draw(host: Node3D,reading: Dictionary,tint: String) -> void:
 		mm.mesh=tube;mm.instance_count=segments.size()
 		for i in segments.size():
 			var a: Vector3=segments[i][0];var b: Vector3=segments[i][1];var direction: Vector3=(b-a).normalized()
-			mm.set_instance_transform(i,Transform3D(Basis(Quaternion(Vector3.UP,direction)).scaled(Vector3(1,a.distance_to(b),1)),(a+b)*0.5))
+			var orientation := Basis(Quaternion(Vector3.UP,direction))
+			# Scale the cylinder's own Y axis, not world Y after rotation.
+			orientation.y *= a.distance_to(b)
+			mm.set_instance_transform(i,Transform3D(orientation,(a+b)*0.5))
 		var mesh:=MultiMeshInstance3D.new();mesh.multimesh=mm;mesh.material_override=material(tint,true);host.add_child(mesh)
 	var marker:=MeshInstance3D.new();var sphere:=SphereMesh.new();sphere.radius=0.065;sphere.height=0.13;marker.mesh=sphere
 	marker.position=reading.frame.pos;marker.material_override=material("fff2c9",true);host.add_child(marker)

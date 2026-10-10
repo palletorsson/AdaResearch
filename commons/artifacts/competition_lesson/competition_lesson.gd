@@ -32,6 +32,9 @@ func _ready() -> void:
 		label("4x branch display\nroot address marked on soil",Vector3(x,0.24,-4.16),0.001)
 	instruction=label("SAME F RULE / SAME INITIAL DIAMETER\nA shared soil. Two turns.",Vector3(0,2.7,-6.4),0.0018)
 	reset_pair()
+	var hand = load("res://commons/artifacts/competition_lesson/competition_hand.gd").new()
+	hand.name = "CompetitionHand"
+	add_child(hand)
 	_stage_original.call_deferred()
 
 func reset_pair() -> void:

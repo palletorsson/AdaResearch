@@ -1,6 +1,6 @@
 extends "res://commons/artifacts/timing_machines/machine_stage.gd"
 ## A fixed grammar produces records. Footprint and boundary policies make a place.
-const PITCH := 0.2
+const PITCH := 0.1
 const STRIDE := 4.0
 const WIDTHS := [0.4, 1.4, 2.2]
 var source: Node3D
@@ -34,6 +34,9 @@ func _ready() -> void:
 	box(Vector3(0, 0.45, -23), Vector3(0.9, 0.9, 0.9), material("29414a"), true)
 	label("ORIGINAL MODEL\nwarren / depth 3 / fitted display", Vector3(0, 0.65, -22.54), 0.0007)
 	rebuild()
+	var hand = load("res://commons/artifacts/architecture_lesson/architecture_hand.gd").new()
+	hand.name = "ArchitectureHand"
+	add_child(hand)
 	_stage_hall.call_deferred()
 
 func plan_point(p: Vector3) -> Vector2:

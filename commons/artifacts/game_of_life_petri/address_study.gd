@@ -42,6 +42,10 @@ func _ready() -> void:
 	_build_floor()
 	_build_receivers()
 	replay()
+	if walk_floor:
+		var hand: Node3D = load("res://commons/artifacts/game_of_life_petri/life_hand.gd").new()
+		hand.name = "LifeHand"
+		add_child(hand)
 
 func choose_glider() -> void:
 	preset = "GLIDER";replay()

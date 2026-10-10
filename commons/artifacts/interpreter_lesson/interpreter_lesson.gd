@@ -30,6 +30,9 @@ func _ready() -> void:
 		label("y",Vector3(x,5.33,0),0.0012)
 	program=label("",Vector3(0,1.65,0.3),0.0013);program.font_size=30
 	reset_readings()
+	var hand = load("res://commons/artifacts/interpreter_lesson/interpreter_hand.gd").new()
+	hand.name = "InterpreterHand"
+	add_child(hand)
 	_stage_hall.call_deferred()
 
 func reset_readings() -> void:
@@ -71,7 +74,9 @@ func refresh() -> void:
 			mm.mesh=tube;mm.instance_count=count
 			for j in count:
 				var a: Vector3=reading.segments[j][0];var b: Vector3=reading.segments[j][1]
-				mm.set_instance_transform(j,Transform3D(Basis(Quaternion(Vector3.UP,(b-a).normalized())).scaled(Vector3(1,a.distance_to(b),1)),(a+b)*0.5))
+				var orientation := Basis(Quaternion(Vector3.UP,(b-a).normalized()))
+				orientation.y *= a.distance_to(b)
+				mm.set_instance_transform(j,Transform3D(orientation,(a+b)*0.5))
 			var mesh:=MultiMeshInstance3D.new();mesh.multimesh=mm;mesh.material_override=material(colors[i],true);view.add_child(mesh)
 		var point:=MeshInstance3D.new();var sphere:=SphereMesh.new();sphere.radius=0.05;sphere.height=0.1
 		point.mesh=sphere;point.position=frame.pos;point.material_override=material("fff1c9",true);view.add_child(point)

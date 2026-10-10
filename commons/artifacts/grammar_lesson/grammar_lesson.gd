@@ -27,6 +27,9 @@ func _ready() -> void:
 	source._mesh_instance.hide();source.get_node("Base").hide();source._info_label.hide()
 	source.drawing_changed.connect(refresh)
 	begin()
+	var hand = load("res://commons/artifacts/grammar_lesson/grammar_hand.gd").new()
+	hand.name = "GrammarHand"
+	add_child(hand)
 	_light_hall.call_deferred()
 
 func begin() -> void:
@@ -50,7 +53,7 @@ func act(id: String) -> void:
 			source.angle_degrees=turns[(turns.find(float(source.angle_degrees))+1)%turns.size()]
 		"HOLD":reference=_snapshot()
 		"PRESET":
-			source.preset=(source.preset+1)%7
+			source.preset=(source.preset+1)%8
 			source.generations=0
 		"RULE":show_rule=true
 	refresh()
@@ -84,7 +87,7 @@ func refresh() -> void:
 		_draw(reference_view,reference.lines,"f0b3db")
 		reference_text.text=_sentence(reference.text)
 		relation.text=("SAME SENTENCE" if live.text==reference.text else "DIFFERENT SENTENCES")+"\nLIVE %.0f deg / HELD %.0f deg\nBoth drawings fitted to their display"%[live.angle,reference.angle]
-	var names: Array=["KOCH","SIERPINSKI","DRAGON","PLANT","BUSH","FERN","BINARY TREE","CUSTOM"]
+	var names: Array=["KOCH","SIERPINSKI","DRAGON","PLANT","BUSH","FERN","BINARY TREE","CANTOR","CUSTOM"]
 	if show_rule:
 		var rules:=PackedStringArray()
 		for c in source._rules:rules.append("%s -> %s"%[c,source._rules[c]])

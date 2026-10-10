@@ -40,6 +40,9 @@ other grammars / authored terrain", Vector3(0, 3.5, -11), 0.0016)
 	sculptor.rebuilt.connect(refresh)
 	sculptor.dna_exported.connect(_plant_snapshot)
 	reset_design()
+	var hand=load("res://commons/artifacts/genetic_tree_sculptor/living_hand.gd").new()
+	hand.name="LivingHand"
+	add_child(hand)
 	for at in [Vector3(-4, 4, -3), Vector3(4, 4, -3), Vector3(0, 4, -9)]:
 		var light := OmniLight3D.new();light.position=at;light.omni_range=12;light.light_energy=3;add_child(light)
 	# Support the preserved coral over its original void address.

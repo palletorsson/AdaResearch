@@ -26,6 +26,8 @@ func _ready() -> void:
 	right.exchange=false
 	_build_space();_build_console();reset()
 	_sync_seed_crossing()
+	var hand:Node3D=load("res://commons/artifacts/rd_artifact/exchange_hand.gd").new()
+	hand.name="ExchangeHand";add_child(hand)
 
 func configure_walk_seed(enabled:bool) -> void:
 	walk_seed=enabled
@@ -67,6 +69,15 @@ func toggle_exchange() -> void:
 
 func inject() -> void:
 	left.inject();right.inject();injections+=1;_paint()
+
+func inject_at(site:Vector2i) -> void:
+	# One hand action writes the same patch to both fields, without advancing time.
+	for field in [left,right]:
+		for dy in range(-1,2):
+			for dx in range(-1,2):
+				var i:int=posmod(site.y+dy,32)*32+posmod(site.x+dx,32)
+				field.u[i]=0.5;field.v[i]=0.25
+	injections+=1;_paint()
 
 func change_view() -> void:
 	show_u=not show_u;_paint()
