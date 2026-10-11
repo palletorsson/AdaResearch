@@ -33,6 +33,8 @@ func driver_phase(kind: String, t: float) -> float:
 
 The sine repeats after a fixed interval. At the room's speed of 0.9, that interval is about seven seconds. The field has a different history. Nearby sample coordinates give related values; the path does not carry the sine's promise of a seven-second return. That does not make it unknowable. With the same seed, settings and coordinate, this implementation gives the same value again.
 
+One held shape cannot tell us which driver supplied it. Watching how it returns gives us evidence to compare with the revealed rule. A short, convincing repetition is still less than a guarantee of what every later moment will do.
+
 Both drivers hand the shaft one number between zero and one. The code calls it a phase. For the sine, it is a remapped output rather than the angle inside `sin`. For the field, it is a sample remapped and bounded to the same range. The shared name makes the numbers interchangeable at the next operation, while their histories remain different.
 
 The walls behind us gave each arriving value an opening. Here a whole shaft receives one phase. The field is not being sampled separately at every vertex. It proposes a value; the column recipe decides where that value can go.

@@ -45,6 +45,8 @@ It runs once, when the room loads, and stops. The pose it happens to be in at th
 
 In the source, changing stiffness, gravity or the number of settling steps makes other vessels possible; those controls are not on this exhibit. A different duration keeps a different moment of the process. The clock is part of the genome here. The form records the conditions that acted on it and how long they were allowed to act.
 
+D'Arcy Thompson called form a “diagram of forces” in *On Growth and Form*.[^growth-form] The vessel gives us a particular way to approach that thought: we can return to the procedure that changed its points. Its outline alone would not tell us the pinned collar, the initial expansion or the moment we stopped. Keeping a shape does not establish that its motion had finished.
+
 <!-- @science_screen -->
 
 A screen, and the thing this room is about is the one thing no still image can hold. Every shape here is a duration: eighty steps, two hundred steps, a cloth still taking another step. A picture of a vessel contains none of the falling that made it, which is exactly what a fossil is and exactly what the vessel is.
@@ -55,8 +57,10 @@ A screen, and the thing this room is about is the one thing no still image can h
 
 The vessel in this room was designed through conditions rather than by placing its final vertices. What you see is the frozen output of a simulation, kept because it was interesting, in the same way a fossil is a shape that some process left behind and then stopped.
 
-That is the chapter's argument at its most literal. Nobody drew the amphora. Somebody chose a stiffness, a pin ring, a pulse and a number of steps, and the amphora is what those choices left.
+That is the chapter's argument at its most literal. Nobody drew the amphora. Somebody chose a stiffness, a pinned collar, an initial expansion and a number of steps, and the amphora is what those choices left.
 
 Next: a balance written into the relations between parts. How can we tell an encoded equilibrium from a form that has physically found one?
+
+[^growth-form]: D'Arcy Wentworth Thompson, [*On Growth and Form*](https://www.gutenberg.org/files/55264/55264-h/55264-h.htm) (1917), “Introductory.” His account of form as a diagram of present and past forces invites us to read a shape through the conditions that produced and sustain it.
 
 [^verlet]: Loup Verlet, [“Computer Experiments on Classical Fluids. I”](https://journals.aps.org/pr/abstract/10.1103/PhysRev.159.98) (1967). The bench adds distance-constraint corrections to its position update; those corrections and their pass budget are part of this implementation. The corrections are younger than the integrator: Thomas Jakobsen, "Advanced Character Physics" (2001), is where game cloth and ragdolls learned to satisfy their distances by relaxation, pass after pass, and this bench's pass budget descends from it.

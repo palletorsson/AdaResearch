@@ -28,6 +28,8 @@ _The labels below set the revision focus; the existing lesson still needs alignm
 
 The first weight is .5 and the frequency is 1. The cumulative weights are .5, .75, .9375 and .984375. These are not predicted brightness values: each term has its own sampled magnitude, followed by gain and clipping.
 
+With BASIS, coordinates and time held fixed, the first term is identical in all four sums: changing `layers` extends the same loop. Later terms can still move the resulting maxima and displayed boundaries. The windows recompute different cumulative sums; they do not recover component values from a finished sum. Predict a change before increasing LAYERS, compare the held windows, then restore the previous count.
+
 6. Change BASIS separately. The control cycles the implementations Perlin → Value → Cellular → Simplex → Perlin. Return to Perlin at the held moment. There is no exposed seed control.
 7. Restore the dress. The complete finish adds an independent four-term turbulence calculation, density, smoothstep, colour, corner/edge shading, roughness and lighting-normal variation. Reducing LAYERS does not disable that second calculation.
 8. Follow a cloud towards a door or corner. Each quad restarts its UV chart; the sphere has another chart. A shared procedure does not guarantee continuity between those surfaces.

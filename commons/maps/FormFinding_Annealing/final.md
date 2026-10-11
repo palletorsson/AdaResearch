@@ -56,7 +56,7 @@ A screen, washing the wall green. Its diagram is another representation, not a m
 
 ## Low enough to hold, high enough to be moved
 
-That is the chapter, and it ends by turning against its own first sentence. Finding a form has meant several different operations: a point following a local slope, a cable drafted between controls, a surface generated from a formula, a mesh retaining a finite relaxation, a mobile drawn to satisfy ideal moments. None gives us permission to treat every still shape as the least-cost answer to the same problem.
+We can now question the expectation that finding a form means reaching a bottom. Finding a form has meant several different operations: a point following a local slope, a cable drafted between controls, a surface generated from a formula, a mesh retaining a finite relaxation, a mobile drawn to satisfy ideal moments. None gives us permission to treat every still shape as the least-cost answer to the same problem.
 
 Then this one. Reaching the lowest value in a model is not the same as finding the form you want. A shallow basin can preserve a useful response to disturbance even when a deeper basin gives a lower score. That comparison is a choice about this model's purpose, not a test that separates living matter from dead matter.
 

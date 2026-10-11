@@ -66,7 +66,7 @@ The three coordinates run from zero to one within either display. `CONTRACT_SPAN
 
 Step through a ground-level opening in the glass. Your feet no longer have to ask for a floor. Rise along the edge, then approach a gap. Release the movement and hang there. The blue blocks still stop you; an opening has to admit your body before it can become a route. The glass lends this movement a boundary. Descend to either doorway and leave: the museum asks for your weight again.
 
-The plate at the bench counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you. It does not measure headroom. It does not know your step height, or whether a passage has an entrance. One connected mass can contain a route you cannot use. Empty space can offer passage, or leave you without support.
+Occupancy is a fact about cells; passage is a fact about bodies. The plate at the bench counts groups joined through cell faces. Stand beside the volume and ask what that count cannot tell you. It does not measure headroom. It does not know your step height, or whether a passage has an entrance. One connected mass can contain a route you cannot use. Empty space can offer passage, or leave you without support.
 
 There is pleasure in a cavity before its usefulness is settled. Try looking from another side. The blocks need not become an enemy, a resource or a successful level to hold your attention. They can make you curious about what sort of body would find a way here. Our own body gives one answer, with particular dimensions and particular permissions.
 

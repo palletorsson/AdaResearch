@@ -40,7 +40,7 @@ var off: float = fmod(t, 3600.0) * noise_speed
 return _noise2(Vector2(x * scale + off, z * scale + off))
 ```
 
-The field is sampled through the ring's local `x` and `z`. Multiplying those coordinates makes more or less of the field pass across the same small body. Adding the time offset moves the sampling window diagonally. Release FREEZE and that addition resumes from the held moment. A wave of apparent change can come from travelling through values that are already determined by their coordinates.
+The field is sampled through the ring's local `x` and `z`. Multiplying those coordinates makes more or less of the field pass across the same small body. Adding the time offset moves the sampling window diagonally. The changing hue reads the same local clock at another rate. FREEZE holds both; release it and both resume from the held moment. A wave of apparent change can come from travelling through values that are already determined by their coordinates.
 
 There is a quiet omission in the expression: no `y`. These are the ring's own coordinates. We stood it upright; its addresses came with it. Two places on the front and back, sharing the same local `x` and `z`, consult the same value. The ring is three-dimensional; this field is addressed in two dimensions. Its normals still point in different directions. One value can therefore move two parts of the body differently.
 

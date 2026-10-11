@@ -12,6 +12,8 @@
 
 A mesh released settles into a shape nobody specified. Before it, particles that remember where they were and springs that know their rest length.
 
+Read the excerpts below alongside the installed cloth, lattice and vessel. They expose parts of those constructions; they are not one complete script. The cloth keeps stepping, while the other two retain a pose after a fixed run.
+
 Store the previous position, not the velocity.
 
 ```gdscript
@@ -50,7 +52,7 @@ func add_spring(a: int, b: int, rest_length: float = -1.0) -> void:
     springs.append([a, b, rest_length])
 ```
 
-You specify the connections. The rest lengths are read off the lattice you built. Nobody types in a shape.
+You specify the initial positions and connections. The rest lengths are read from that starting lattice; the later shape follows its updates.
 
 Nudge every constraint halfway back, several times a frame.
 
@@ -66,7 +68,7 @@ for _p in constraint_passes:
             positions[s[1]] -= cv
 ```
 
-No linear system is ever assembled. Each spring corrects its ends by half the error, and the network agrees by repetition.
+No linear system is assembled here. Each free endpoint receives half the error scaled by stiffness. Correcting one spring can disturb another; repetition reduces disagreement without certifying that every constraint is satisfied.
 
 Turn the number of passes.
 
@@ -79,7 +81,7 @@ const RELAXATION_PASSES := {
 }
 ```
 
-One pass sags, twelve is taut. At equilibrium the cloth hangs at 0.6406 m against 0.5988 m and mean spring stretch falls from 0.701% to 0.051% — a one-over-passes law. Four resting shapes, not four stages of one.
+The installed comparison offers PASSES, RESET and WIND. Each setting restarts the grid, runs sixty preliminary steps, then continues at fixed one-sixtieth-second steps. Turn WIND off and compare MEAN and WORST at the same step count for one, four, eight and twelve passes. More passes give constraints more corrections. A finite comparison does not establish equilibrium or a universal one-over-passes law.
 
 Wire a lattice and let gravity argue with it.
 
@@ -91,7 +93,7 @@ for _i in pre_steps:
     sim.step()
 ```
 
-Edge springs plus face diagonals, eighty steps, and the argument is over. The bulge is where the disagreement ended, not where anyone put it.
+Edge springs plus face diagonals, then eighty steps. The lattice retains that pose because its loop ends. Neither a residual-error test nor a convergence test decides the stopping point.
 
 Pin the top ring and run the clock.
 
@@ -105,7 +107,7 @@ for v in initial_verts:
 sim.simulate(sim_steps)
 ```
 
-A sphere, a pinned collar, a pressure pulse, 200 steps of gravity. Duration is a design parameter — a short run is a bowl, a long one a neck. The clock is part of the genome.
+A sphere, a pinned collar, an initial expansion of the free vertices, then 200 steps. Rest lengths are set after expansion; this is not a continuing pressure calculation. Duration is a design parameter. In a source experiment, hold the initial mesh and other settings fixed, change the step budget, inspect the retained pose, then restore it. These settings are not live controls on the vessel.
 
 Freeze the pose and keep it.
 
@@ -117,6 +119,6 @@ var am := ArrayMesh.new()
 am.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 ```
 
-The simulation runs once, at `_ready`. What stands in the room is not a model of the forces but a recording of them. A form is a fossil of what made it.
+The vessel simulates during construction and copies the resulting positions into its mesh. It keeps the state reached by a model, including the effects of its step budget. The cloth continues to run; it has not been frozen by this operation.
 
-You can now integrate positions from positions, hold constraints by correcting rather than solving them, tune insistence with a pass count, and freeze a settled pose. FormFinding_Equilibrium asks what holds a shape still once the settling stops.
+Keep the distinction between a pose retained after a budget and a measured equilibrium. FormFinding_Equilibrium asks which relations have actually been solved when a shape holds still.

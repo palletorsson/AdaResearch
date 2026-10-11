@@ -20,4 +20,4 @@ Perhaps what stays with you is the small sheet's swelling surface. You wanted to
 
 <!-- @ -->
 
-Bring one of your unfinished questions with you.
+Bring one of your unfinished questions with you. Shaders comes next on the book's spine: a rule will give a circle its edge on a wall and on a cube. Keep asking what belongs to the value, what belongs to its reading, and what the surface lets your body do.

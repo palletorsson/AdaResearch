@@ -18,6 +18,8 @@ We have changed what the surface offers the eye. The wall's vertices and the sha
 
 At the panel, compare the first grey window with the second. A smaller variation has entered the same region. The four- and six-term windows add finer disturbances. LAYERS carries each of those cumulative choices into the room; the four windows keep their separate counts so you can look back.
 
+The first contribution is still included in the fourth window. Its presence does not promise that a visible edge will stay in place as other terms arrive. Nor can a single sum tell us which contributions made it. The board can show these stages because their construction remains available; it has not peeled layers back out of the finished grey.
+
 Here is the loop doing that work:
 
 ```glsl

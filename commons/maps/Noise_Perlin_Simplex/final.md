@@ -99,6 +99,6 @@ After several rooms, that usefulness can become a mental algorithmic wall. The f
 
 Stay with the sheet and ask what else this body could do. Its changing slice has no record of what happened to the preceding surface. We could give it stored states, neighbours that affect its next move, something to exchange with another body. Each would require another decision and something further to learn. Noise can remain part of those constructions.
 
-In the next chapter, Cellular Automata, a row waits for its first update. We will let a cell's next state depend on the states beside it. Bring the pleasure of the moving surface, and leave room for another form.
+The next chapter is Shaders. A circle on a wall and another on a cube will share a rule, giving a value a visible edge. We will ask what changes when that rule is evaluated across a surface. Cellular Automata follows later, when a cell's next state will depend on stored neighbours. Bring the pleasure of the moving surface, and leave room for another form.
 
 [^engine-noise]: The [Godot 4.6 FastNoiseLite reference](https://docs.godotengine.org/en/4.6/classes/class_fastnoiselite.html#enumerations) distinguishes TYPE_PERLIN from TYPE_SIMPLEX, which uses OpenSimplex2, and TYPE_SIMPLEX_SMOOTH, which uses OpenSimplex2S.

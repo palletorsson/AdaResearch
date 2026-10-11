@@ -19,6 +19,8 @@ Book route: **noisetorus → noiselayers → dark_sphere**. All three are primar
 
 The book's code blocks are excerpts from the actual GDScript. The torus field has a pair-only integer lattice hash and cubic interpolation; the legacy single-ring mode keeps its original floating hash. Two shader stages consult the same field expression at different sampling locations: mesh vertices versus interpolated fragment positions. A marker names a probe coordinate, not an exact fragment-pixel measurement.
 
+In the installed `stand:pair` branch, `_pair_time` advances only while `_pair_frozen` is false. `_apply_pair_params()` sends that value to the shader's `local_time`. Field drift uses `noise_speed`; hue rotation uses `hue_shift_speed`. Both read that one local clock. Freezing only field drift in a reconstruction would leave the hue moving. Predict both effects, hold the pair, then resume without resetting its time.
+
 The terrain's material is violet. Generated vertex colours are not enabled as its albedo. All three authored grids remain, with lower line density and opacity in this compact staging. The inherited large-scale terrain still exists outside `stand:basin`.
 
 Do not promise a brush, octave slider, torus collider, hydraulic erosion, procedural audio, or a walkable 200-metre mountain inside this hall. Headset reach and comfort are still pending. The next question is the occupancy threshold in Noise_Voxel.

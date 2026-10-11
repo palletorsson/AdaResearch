@@ -9,7 +9,7 @@
 - Solved arm lengths
 - Model assumptions
 
-Where forces cancel, form holds still. Before it, weights that are real numbers and distances you are free to choose.
+The installed mobile draws a static balance from modelled masses and chosen distances. The excerpts below expose its construction and two neighbouring displays; they are not one complete script or a dynamic load test.
 
 Weigh a leaf from its own geometry.
 
@@ -21,7 +21,7 @@ var r: float = _rng.randf_range(0.09, 0.24)
 var mass: float = PI * r * r * SHEET_T * DENSITY
 ```
 
-The mass is not a label on the disc. It is the disc — radius, thickness, density. Change the radius and the whole mobile is re-solved.
+The model assigns a mass from radius, thickness and density. Rebuilding with a different radius changes that mass and the computed pivots. Rods and wires contribute no mass to this calculation.
 
 Place the pivot by the lever law.
 
@@ -34,7 +34,7 @@ var dl: float = arm * wr / total
 var dr: float = arm * wl / total
 ```
 
-τ = w·d. The heavier child gets the shorter arm, because each distance is scaled by the *other* one's weight. The arm is solved, not drawn.
+Here `wl` and `wr` store masses. Torque magnitude would be `m*g*d` for each vertical load on the horizontal arm; the shared gravity factor cancels when comparing the two sides. The heavier child gets the shorter arm. The code solves those distances, then draws the result. The installed source also varies `arm` by a seeded multiplier from 0.85 to 1.15, omitted from this excerpt; the balance relation is unchanged.
 
 Let every arm hang from the arm above.
 
@@ -49,7 +49,7 @@ func _build_subtree(d: int) -> Dictionary:
 
 Each subtree reports its mass upward. A parent balances two numbers without looking inside either.
 
-Break the law, and let the leftover moment become an angle.
+For a source comparison, set the mobile's exported `lever` to `halved` and rebuild. The installed map uses `solved`; there is no live lever-mode control in this hall. The alternate branch draws equal arms and converts the remaining imbalance into a tilt:
 
 ```gdscript
 dl = arm * 0.5      # halved — the rod cut in the middle instead
@@ -59,7 +59,7 @@ lp = pivot + Vector3(-dl * cos(tilt), dl * sin(tilt), 0)
 rp = pivot + Vector3(dr * cos(tilt), -dr * sin(tilt), 0)
 ```
 
-Residual moment, normalised by the largest moment the arm could carry. Zero residual is zero tilt — which is why a balanced mobile never reaches this branch.
+The mass-distance difference is divided by `arm * total`, then mapped through `asin`. This is an authored diagram of residual imbalance, not a physically solved equilibrium angle. Equal masses give zero tilt. Predict the direction for a heavier right-hand child, inspect the rebuilt diagram, then restore `solved`.
 
 Brace a section instead of thickening it.
 
@@ -72,7 +72,7 @@ for i in range(4):
     parent.add_child(_cylinder_between(corners_t[i], corners_t[j], br, brace_mat))
 ```
 
-Two diagonals and a tie per face, at just over half the leg radius. The strength is in the bracing, not the bulk.
+Two diagonals and a tie per face, at just over half the leg radius. This constructs visible bracing. No load or strength is measured by these mesh-building calls.
 
 Recurse the bracing.
 
@@ -83,7 +83,7 @@ _truss_segment(parent, y0, ym, w_bot, w_mid, d - 1, leg_mat, brace_mat)
 _truss_segment(parent, ym, y1, w_mid, w_top, d - 1, leg_mat, brace_mat)
 ```
 
-Every strut becomes a truss of thinner struts; `leg_r` runs 0.05 down to 0.018 with depth. Strength from geometry, not mass. Walk inside and you are in a beam made of beams.
+The recursive calls divide the tower into upper and lower storeys; they do not replace each strut with a truss. Finer corner members overlap the coarser ones. Repetition builds this geometry without proving that it is lighter or stronger under a specified load.
 
 Lock three angles.
 
@@ -96,9 +96,9 @@ _add_strut(v_bl, v_br, strut_mat)
 _add_strut(v_br, v_top, strut_mat)
 ```
 
-Push a square and it racks into a diamond. A triangle cannot: its angles are already fixed by the lengths of its sides.
+An ideal planar triangle with fixed side lengths cannot rack as an unbraced hinged four-bar frame can. This excerpt only places three struts; it does not implement that comparative experiment.
 
-Load it, and watch it refuse.
+Inspect what the triangle's apparent loading actually runs:
 
 ```gdscript
 _phase += delta * load_speed
@@ -106,6 +106,6 @@ var load: float = maxf(0.0, sin(_phase)) * load_amplitude
 scale = Vector3(1.0 + load * 0.4, 1.0 - load, 1.0)
 ```
 
-It squashes and springs back. Nothing here is stacked. The form holds because forces balance in a field, not because mass piles up in a column.
+The sine writes directly to scale. No force is applied and no spring restores the body. Its squash is an animation; it cannot validate the structural claim above.
 
-You can now weigh a part from its geometry, solve a pivot instead of drawing one, recurse bracing into a self-similar truss, and lock a frame with three members. Gaudí hung weighted chains and turned the photograph upside down — tension inverted is compression, and the arch was found rather than imposed. FormFinding_Annealing asks what to do when the rest you reach is only the nearest one.
+Keep the mobile's mass-distance relation and distinguish it from the tower's repeated geometry and the triangle's prescribed animation. FormFinding_Annealing asks what to do when a search reaches only a nearby minimum.

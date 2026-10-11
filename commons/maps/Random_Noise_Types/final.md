@@ -57,7 +57,7 @@ Shells may already be red before you touch anything. They now show a reference d
 
 Return to the spaced rule. Carry a point into another's shell.
 
-The red arrives. A count changes. Nothing in the sampling script pushes the pair apart.
+The red arrives. A count changes. Nothing in the sampling script pushes the pair apart. The distance was a condition of admission; it has not become a force that keeps the neighbours separated.
 
 ```gdscript
 if a.position.distance_to(b.position) < blue_noise_min_dist - 0.001:
@@ -96,6 +96,8 @@ That separation leaves an experiment open. What would we hear if a row actually 
 <!-- @NoiseColors3D -->
 
 The neighbouring sculpture keeps five coloured rows together. Brown, pink, white, blue, violet. Try their names on the console. Let each sound last long enough to become a texture before moving on. Return to one you liked.
+
+White and pink name different distributions of power across frequency. At the earlier spacing bench, the question was which positions could be admitted beside existing points. A spectrum and an admission distance describe different relations; one does not establish the other merely because we call both noise.
 
 We are not obliged to hear these as damaged signals. A hiss can be a material to approach, sustain, combine, or leave. The question of what a body may do includes what it may want to remain with.
 

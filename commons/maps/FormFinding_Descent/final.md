@@ -26,7 +26,7 @@ proposed = point - rate * gradient(point)
 
 The subtraction is familiar. We have carried vectors, combined them and used them to cross space. Here subtraction changes an address in a search. RATE decides how far to trust the local direction. It does not name speed in metres per second. No mass is divided out; no acceleration is accumulated.
 
-On the opening bowl, the cost is a quarter of the sum of x squared and z squared. At the usual rate, the steps shrink as the point approaches the centre. The program does not need to know the centre's address to make those steps. We can see the whole bowl; the update uses nearby samples.
+On the opening bowl, the cost is a quarter of the sum of x squared and z squared. For this quadratic, the two-sided measurement agrees with the slope, apart from numerical rounding. The more complicated surfaces will ask the same measurement to serve as an estimate. At the usual rate, the steps shrink as the point approaches the centre. The program does not need to know the centre's address to make those steps. We can see the whole bowl; the update uses nearby samples.
 
 Eventually the display says SMALL SLOPE. Look at that wording before calling the run solved.
 
@@ -76,7 +76,7 @@ The terrain station takes the local comparison onto seeded Perlin ground. Here t
 
 <!-- @gradient_descent_well -->
 
-At the glowing well, marbles descend, settle, pulse and begin again. Its title says that falling is how it learns. The marbles combine the local slope with retained motion; the LOSS readout follows the first marble on this authored landscape. A return to the top gives it another beginning, not a memory of the previous lesson. What does the falling let us understand about learning, and what does that resemblance leave out?
+At the glowing well, marbles descend, settle, pulse and begin again. Its title says that falling is how it learns. The marbles combine the local slope with retained motion; the LOSS readout follows the first marble on this authored landscape. Retained motion can carry a marble through a shallow dip and up the other side. Where it goes depends on its beginning too: these marbles start in different places, so their different arrivals cannot be credited to momentum alone. A return to the top gives it another beginning, not a memory of the previous lesson. What does the falling let us understand about learning, and what does that resemblance leave out?
 
 <!-- @settling_tremble -->
 
