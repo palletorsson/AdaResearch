@@ -8,7 +8,7 @@ Their sizes, offsets and colours vary between these demonstrations. We are learn
 
 These bodies do not have to be filled with little pieces of material. Each primitive describes a region: we can ask whether a point belongs to it. The program combines those regions and makes a boundary visible. This is constructive solid geometry, usually shortened to CSG.
 
-There are several agreements inside the word *solid*. These small exhibits have not enabled collision. You can pass through a surface that your eye has already accepted. The region still has an inside and an outside in the calculation; it has not acquired the power to stop your body. Keep that difference with you when the objects become architecture.
+A visible boundary, a rule for membership and a rule for contact are three different agreements inside the word *solid*. These small exhibits have not enabled collision. You can pass through a surface that your eye has already accepted. The region still has an inside and an outside in the calculation; it has not acquired the power to stop your body. Keep that difference with you when the objects become architecture.
 
 ## What can belong together
 

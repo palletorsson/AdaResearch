@@ -95,7 +95,7 @@ Their bottoms reach just below the museum floor. Their tops leave about 2.3 metr
 stock.use_collision = walkable and spoil == "rock"
 ```
 
-The shape of the cut and the rule for contact have to work together. A collider can enforce an opening too small to enter. A generous hollow without collision can make the wall beside it equally passable. Here a body's dimensions have become part of what the room needs to get right.
+The shape of the cut and the rule for contact have to work together. A collider can enforce an opening too small to enter. A generous hollow without collision can make the wall beside it equally passable. A geometric interior becomes somewhere this body can inhabit only when shape, contact and clearance work together.
 
 The spherical version remains possible. It has not become a wrong shape because we wanted a passage. The hollow here has been adapted to one kind of movement. Another body might find a use for its rising floors, or ask for more clearance than we have left.
 
@@ -127,7 +127,7 @@ Three coloured bodies wait on a low white plinth. Violet swells into a second vo
 
 Move sideways. The lip changes its outline, but the dark interior offers no travelling highlight to tell you how far it goes. The cut has a bottom. Its material has stopped helping you find it.
 
-These are three different arrangements of ovoids, using union, intersection and subtraction. Their colours and proportions differ too. The first hall held the operands still to compare the verbs. Here those verbs have become choices in making a body we might want to stay with.
+These are three different arrangements of ovoids, using union, intersection and subtraction. Their colours and proportions differ too. The first hall introduced the verbs through recurring boxes and spheres whose sizes, offsets and colours also varied. Here those verbs have become choices in making a body we might want to stay with.
 
 The study borrows a question from Anish Kapoor's void works: how can a surface make depth uncertain? An ordinary unlit material covers this real concavity. The calculation has finished, but looking has not. Knowing the recipe does not quite return the bottom to the eye.
 

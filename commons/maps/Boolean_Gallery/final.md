@@ -2,7 +2,7 @@
 
 Twenty-four objects in six rows. A familiar shape has company: beside it stand other versions of what it could have been. Two wait on each side of the aisle. To see a whole family, you have to cross the floor.
 
-Each row changes a named setting within one artifact. Some settings alter the shape. Others alter how much of its making becomes visible. These are authored possibilities: somebody chose the values, gave them names and decided which one would meet us first.
+Each row changes a named setting within one artifact. Some settings alter the shape. Others alter how much of its making becomes visible. These are authored possibilities: somebody chose the values, gave them names and decided which one would meet us first. The row puts a published claim beside its specimens. You can check what the names promise against what changes between them.
 
 In the previous room, a short list of operations opened into many possible bodies. Here the museum has made another selection from those possibilities. Its arrangement can be investigated too.
 
