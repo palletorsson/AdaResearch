@@ -12,8 +12,8 @@
  "granularity": "micro",
  "model_version": "opus-5",
  "created": "2026-09-20",
- "updated": "2026-10-08",
- "earned_from": "breath 2026-09-20T06:40 \u00e2\u20ac\u201d gate L read 182 unreachable / 84,069 stranded words. Its own age_reading and claimed_reading split that into 9 fresh, 4 forum-claimed and 169 safe. Committing the 169 took the gate to 13 and prose_tracked 1278 -> 1447, against four consecutive breaths of delta 0.0 on a pinned scorer. EXTENDED 2026-09-23 (breath 09:15): the same filter run against L, M and N in one morning took 13 -> 4, 68 -> 31 and 10 -> 1, and every one of the 36 rows left standing is either forum-claimed or gitignored on purpose. The new node is `revisit`: 37 of gate M's 68 were files this same flow held back 24h earlier for being fresh, and nobody had touched or claimed them since. EXTENDED 2026-10-08 (breath 09:12): L 10 -> 4, M 63 -> 52 (stranded 11 -> 0), N 57 -> 0 PASS in one additive commit of 80 files; gates 8/15 -> 9/15. Two new facts: (1) a stale .git/index.lock (0 bytes, days old, no git process) blocks the additive stage - check `ls -la .git/index.lock` and `tasklist | grep -i git` before removing it; (2) six of gate L's rows were one study-spine block copied four times per room, so 'substance' can come back 'generated stub' and the honest move is to land it WITH that label in the commit and the thread, not to leave the gate red for want of literature.",
+ "updated": "2026-10-11",
+ "earned_from": "breath 2026-09-20T06:40 â€” gate L read 182 unreachable / 84,069 stranded words. Its own age_reading and claimed_reading split that into 9 fresh, 4 forum-claimed and 169 safe. Committing the 169 took the gate to 13 and prose_tracked 1278 -> 1447, against four consecutive breaths of delta 0.0 on a pinned scorer. EXTENDED 2026-09-23 (breath 09:15): the same filter run against L, M and N in one morning took 13 -> 4, 68 -> 31 and 10 -> 1, and every one of the 36 rows left standing is either forum-claimed or gitignored on purpose. The new node is `revisit`: 37 of gate M's 68 were files this same flow held back 24h earlier for being fresh, and nobody had touched or claimed them since. EXTENDED 2026-10-08 (breath 09:12): L 10 -> 4, M 63 -> 52 (stranded 11 -> 0), N 57 -> 0 PASS in one additive commit of 80 files; gates 8/15 -> 9/15. Two new facts: (1) a stale .git/index.lock (0 bytes, days old, no git process) blocks the additive stage - check `ls -la .git/index.lock` and `tasklist | grep -i git` before removing it; (2) six of gate L's rows were one study-spine block copied four times per room, so 'substance' can come back 'generated stub' and the honest move is to land it WITH that label in the commit and the thread, not to leave the gate red for want of literature. EXTENDED 2026-10-11 (breath 10:55): gate M stranded 10 -> 4 by landing three of four 10-09 passes - one whole (all hunks additive), two code-only (their hall pairs delete two footnotes), one declined (a shipped artifact's identity replaced). New node `pair`: read the whole pair's deletions before deciding whole / code-only / ask. Also: a compile verdict is a fact about an engine version - 4.3 convicted two files on a 4.4+ API that 4.6, the project's engine, accepts; the non-console 4.6 exe reports only in user://logs/godot.log.",
  "nodes": [
   {
    "id": "revisit",
@@ -31,13 +31,20 @@
    "id": "ignored",
    "type": "decision",
    "label": "Is the file gitignored, or merely never added?",
-   "detail": "`git check-ignore -v <paths>`. Exit 1 on every path means nothing was stopping these entering the repo \u00e2\u20ac\u201d the sessions ended at the write. A gitignored path is a deliberate exclusion and must NOT be forced in; see forum 260914-kdrdw, where git was taught to refuse images under ada_run/ and doc/reports/ on purpose. When the gitignored rows are ALL that is left, the gate's floor is a policy decision, not a task - say so in the report instead of leaving it reading FAIL forever. Gate M's residual 31 are .tres materials excluded by .gitignore:328 ('*.tres' placed after the '!*.tres' force-include at line 320, so exclusion wins); asked of Palle in 260922-zhdio and 260923-pc08y, unanswered."
+   "detail": "`git check-ignore -v <paths>`. Exit 1 on every path means nothing was stopping these entering the repo â€” the sessions ended at the write. A gitignored path is a deliberate exclusion and must NOT be forced in; see forum 260914-kdrdw, where git was taught to refuse images under ada_run/ and doc/reports/ on purpose. When the gitignored rows are ALL that is left, the gate's floor is a policy decision, not a task - say so in the report instead of leaving it reading FAIL forever. Gate M's residual 31 are .tres materials excluded by .gitignore:328 ('*.tres' placed after the '!*.tres' force-include at line 320, so exclusion wins); asked of Palle in 260922-zhdio and 260923-pc08y, unanswered."
   },
   {
    "id": "substance",
    "type": "action",
    "label": "Measure whether it is writing or a stub",
-   "detail": "Word count distribution plus a TODO/TBD/placeholder/lorem scan across the whole safe set, then READ two files end to end. A commit is a claim that this is work; make the claim on evidence. On 09-20: median 412 words, zero placeholders, and the GT_Flow final named the limit of its own exhibit. Short files are not automatically stubs \u00e2\u20ac\u201d five ISO intent.md came in at 23-27 words because intent is a one-line walk-through spine in those rooms, not because they were unfinished."
+   "detail": "Word count distribution plus a TODO/TBD/placeholder/lorem scan across the whole safe set, then READ two files end to end. A commit is a claim that this is work; make the claim on evidence. On 09-20: median 412 words, zero placeholders, and the GT_Flow final named the limit of its own exhibit. Short files are not automatically stubs â€” five ISO intent.md came in at 23-27 words because intent is a one-line walk-through spine in those rooms, not because they were unfinished."
+  },
+  {
+   "id": "pair",
+   "type": "decision",
+   "label": "Does the pass's PAIR add, or does it delete?",
+   "detail": "A stranded file is rarely alone: a hand has the hunk that loads it, a lesson has its map token, a bay has its hall's final.md and tutorial.md. Read the WHOLE pair with `git diff --numstat` and `git diff | grep '^-'`. If every hunk adds (new files; a gated hook whose default leaves a map without the token untouched; prose +N/-0), land the pair whole - 10-10 did this for eight hands and their eight loader hunks, 10-11 for the euler step study (code + one map cell + final.md +9/-0 + tutorial.md +304/-0). If the hall half DELETES - 10-11 found the dartboard pass dropping the Metropolis/Ulam 1949 footnote and the Random_Space pass dropping the Perlin 1985 footnote, both tutorials rewritten - land the gated CODE ONLY and leave the hall pair (token + prose) in the working tree for the author or Palle: after 7a5773d04 and the 10-08 restore by hand, a deleting rewrite is theirs to commit, and gated code without its token changes no shipped hall. If the pass REPLACES a shipped artifact's identity (10-11: omoss, 574-line rewrite, registry entry reindented, footprint changed), it is not stranded work at all - ask in the thread and move on; gate M keeps those rows as a floor until the ruling.",
+   "check": "for each modified file in the pair: `git diff --numstat -- <f>` deletions column; a pass with any deletions in prose is a ruling, not a landing"
   },
   {
    "id": "heads_up",
@@ -49,7 +56,7 @@
    "id": "additive",
    "type": "action",
    "label": "Stage new files ONLY, and prove it",
-   "detail": "Check the shared index is empty first (`git diff --cached --name-only | wc -l` \u00e2\u20ac\u201d the index is shared between concurrent sessions). Stage from a pathspec file with `git add --pathspec-from-file=` (strip CRLF first, or every path gets a trailing \\r and git rejects the lot). Then prove additivity: `git diff --cached --name-status | grep -cv '^A'` must read 0. A commit of pure additions cannot overwrite anyone's uncommitted work, which is what makes the sweep safe to do without asking. CRLF bites twice, not once: a path list written by Windows python and read through bash carries \\r, which broke `git check-ignore --stdin` on 09-22 (reported nothing ignored) and `xargs git add` on 09-23 (pathspec 'angular_handle.gd?' did not match). `tr -d '\\r'` before the pipe, every time. If `git add` dies on `.git/index.lock: File exists`, do not remove it on reflex: read the lock's mtime and check tasklist for git/GitHubDesktop. On 2026-10-08 it was 0 bytes, dated 3 days back, with no process alive - stale, removed, staged. A lock with a live process behind it is another session mid-commit; wait."
+   "detail": "Check the shared index is empty first (`git diff --cached --name-only | wc -l` â€” the index is shared between concurrent sessions). Stage from a pathspec file with `git add --pathspec-from-file=` (strip CRLF first, or every path gets a trailing \\r and git rejects the lot). Then prove additivity: `git diff --cached --name-status | grep -cv '^A'` must read 0. A commit of pure additions cannot overwrite anyone's uncommitted work, which is what makes the sweep safe to do without asking. CRLF bites twice, not once: a path list written by Windows python and read through bash carries \\r, which broke `git check-ignore --stdin` on 09-22 (reported nothing ignored) and `xargs git add` on 09-23 (pathspec 'angular_handle.gd?' did not match). `tr -d '\\r'` before the pipe, every time. If `git add` dies on `.git/index.lock: File exists`, do not remove it on reflex: read the lock's mtime and check tasklist for git/GitHubDesktop. On 2026-10-08 it was 0 bytes, dated 3 days back, with no process alive - stale, removed, staged. A lock with a live process behind it is another session mid-commit; wait."
   },
   {
    "id": "verify",
@@ -81,11 +88,16 @@
   {
    "from": "ignored",
    "to": "answer",
-   "label": "gitignored on purpose \u00e2\u20ac\u201d stop, say so"
+   "label": "gitignored on purpose â€” stop, say so"
   },
   {
    "from": "substance",
-   "to": "heads_up"
+   "to": "pair"
+  },
+  {
+   "from": "pair",
+   "to": "heads_up",
+   "label": "adds -> whole; deletes -> code only; replaces -> ask"
   },
   {
    "from": "heads_up",
@@ -105,6 +117,7 @@
   "Refusing the whole red list because some of it is live. That is what four consecutive delta-0.0 breaths did while 84,069 words sat one `git clean` from gone.",
   "Turning a reachability gate green by committing spent one-shot scripts. Gate N's 120 are ~100 build_*_review.py builders that have run once and will not run again; committing them games the gate instead of repairing the repo. Prose is the artifact itself, so gate L was a different call from gate N. TENSION, recorded 2026-10-08: the breather landed gate-N tools five mornings running (09-25, 09-30, 10-01, 10-05, 10-08) with a forum heads-up each time and no objection, on the argument that a probe whose report sits in doc/reports/ is a reproducibility file, not a spent script. Neither side has been ruled on. Whichever you do, say in the thread which side you took.",
   "Treating the held-back set as permanently somebody else's. Freshness expires. If the next breath does not re-read it, the flow quietly converts a one-breath courtesy into a permanent exclusion - which is how 37 files sat convicted for an extra day with nobody claiming them.",
-  "Reporting a clone gate as FAIL without saying what the residual IS. 'L=4, M=31, N=1' reads like unfinished work; 'all 4 claimed, all 31 gitignored pending a ruling, the 1 claimed' reads like a floor. Same number, opposite instruction to the next session."
+  "Reporting a clone gate as FAIL without saying what the residual IS. 'L=4, M=31, N=1' reads like unfinished work; 'all 4 claimed, all 31 gitignored pending a ruling, the 1 claimed' reads like a floor. Same number, opposite instruction to the next session.",
+  "Landing the hall half of a pair because the code half is clean. A gated hook is additive; the final.md that describes its buttons may have lost a footnote on the way. 10-11: two hall rewrites each dropped a dated citation (1949, 1985) that the committed text carried. Deletions in prose are the author's or Palle's to commit; the breath lands the code and names the deletions in the thread."
  ]
 }

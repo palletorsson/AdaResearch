@@ -792,6 +792,24 @@
       "topic": "release gates",
       "insight": "2026-10-08 breath: a stale .git/index.lock (0 bytes, dated 3 days back, no git process alive) blocks every git add in the shared tree; check its mtime and tasklist for git/GitHubDesktop before removing. Landing 80 stranded files (L 12, M 11, N 57) as pure additions took gates 8/15 -> 9/15, N to PASS, L to its forum-claimed floor of 4, M to its 21-live + 31-gitignored floor.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-10-09T07:22:39.066021+00:00",
+      "topic": "release gates",
+      "insight": "Gate I LOST edges sort three ways by diffing the anchor file against its previous commit: live prose (wait), accidental drop (restore in the anchor), retraction (the anchor now denies the claim - rewrite the edge in the book). On 2026-10-09 all 7 non-primitives losses were retractions landed 10-08/10-09.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-10-10T07:24:23.019835+00:00",
+      "topic": "stranded-work",
+      "insight": "A reachability gate's 24h line can cut ONE pass in half: gate M convicted 5 *_hand.gd at 24-40h and called 3 more live at 23h, all eight written 10-08 17:00 -> 10-09 10:04 by one hands pass. A companion file is landed WITH the hunk that loads it (hand + lesson.gd) or not at all - an orphan hand and a broken load() are the two halves of the same mistake. Landed all 8 pairs in fe6588bd7; M 49 -> 41, stranded 5 -> 0.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-10-11T09:23:11.185501+00:00",
+      "topic": "stranded-work",
+      "insight": "A stranded file's PAIR decides the landing: all hunks additive -> land whole (euler step study 10-11); the hall half deletes (two footnotes, 1949 and 1985) -> land the gated code only and leave token+prose to the author; the pass replaces a shipped artifact's identity (omoss) -> ask, not land. Compile verdicts are per engine version: 4.3 convicted Basis.scaled_local that 4.6 accepts; the non-console 4.6 exe prints only to user://logs/godot.log.",
+      "lod": 3
     }
   ]
 }
