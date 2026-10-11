@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-11T15:37:13.289498+02:00",
+  "scope": "Current working maps, prose, map-derived saved plan and six-hall headless bake. Not a clean-checkout, pixel, headset or ghost-student test.",
+  "passed": true,
+  "halls": [
+    {
+      "map": "Shader_01_Shaping",
+      "footprint": {
+        "w": 22,
+        "h": 20
+      },
+      "placed": 4,
+      "refused": 0,
+      "map_derived_plan": true,
+      "printed_blocks_unchanged": true
+    },
+    {
+      "map": "Shader_05_Patterns",
+      "footprint": {
+        "w": 37,
+        "h": 62
+      },
+      "placed": 9,
+      "refused": 0,
+      "map_derived_plan": true,
+      "printed_blocks_unchanged": true
+    },
+    {
+      "map": "Shader_11_QueerRubber",
+      "footprint": {
+        "w": 34,
+        "h": 18
+      },
+      "placed": 4,
+      "refused": 0,
+      "map_derived_plan": true,
+      "printed_blocks_unchanged": true
+    },
+    {
+      "map": "Shader_09_FBM",
+      "footprint": {
+        "w": 26,
+        "h": 29
+      },
+      "placed": 3,
+      "refused": 0,
+      "map_derived_plan": true,
+      "printed_blocks_unchanged": true
+    },
+    {
+      "map": "Shader_12_PinkExtravaganza",
+      "footprint": {
+        "w": 39,
+        "h": 37
+      },
+      "placed": 4,
+      "refused": 0,
+      "map_derived_plan": true,
+      "printed_blocks_unchanged": true
+    },
+    {
+      "map": "Shader_10_ReactionDiffusion",
+      "footprint": {
+        "w": 25,
+        "h": 29
+      },
+      "placed": 3,
+      "refused": 0,
+      "map_derived_plan": true,
+      "printed_blocks_unchanged": true
+    }
+  ],
+  "other_plan_rows_unchanged": true,
+  "other_baked_segments_unchanged": true,
+  "godot_exit": 0,
+  "placements": [
+    "[em-pack] shaders · shader 01 shaping <- Shader_01_Shaping: 4 verbatim + 0 slid of 4, 0 left behind, 0 plinth(s)",
+    "[em-pack] shaders · shader 05 patterns <- Shader_05_Patterns: 9 verbatim + 0 slid of 9, 0 left behind, 0 plinth(s)",
+    "[em-pack] shaders · shader 11 queerrubber <- Shader_11_QueerRubber: 4 verbatim + 0 slid of 4, 0 left behind, 0 plinth(s)",
+    "[em-pack] shaders · shader 09 fbm <- Shader_09_FBM: 3 verbatim + 0 slid of 3, 0 left behind, 0 plinth(s)",
+    "[em-pack] shaders · shader 12 pinkextravaganza <- Shader_12_PinkExtravaganza: 4 verbatim + 0 slid of 4, 0 left behind, 0 plinth(s)",
+    "[em-pack] shaders · shader 10 reactiondiffusion <- Shader_10_ReactionDiffusion: 3 verbatim + 0 slid of 3, 0 left behind, 0 plinth(s)"
+  ],
+  "warnings": [
+    "Unrecognized default audio-bus UID uid://rwex60pqapc (project.godot:24)",
+    "ObjectDB instances leaked at exit"
+  ],
+  "source_sha256": {
+    "commons/maps/Shader_01_Shaping/map_data.json": "9b1c655ba98883d2f672defb7332f25f95fdb88f567c30e7dda22bd4b90c37b1",
+    "commons/artifacts/registry/shader_shaping_wall.json": "291937648c5e18d9ac37a968b809696aee84c1e0a7dd2eb56fe4597fe192e5d1",
+    "commons/maps/Shader_01_Shaping/final.md": "e8e2b4a399d24464207e649eecb3d0cd71dc3419a34cda83130f14922cf996c1",
+    "commons/maps/Shader_01_Shaping/tutorial.md": "1729fb3ba4e4bb28cf3ca626161bf71f14c74b2164df72eef92ee6315163eb08",
+    "commons/maps/Shader_05_Patterns/map_data.json": "0fb6fe94d5d52606d8df851b33b89b04abd2c8be24cc111b034b43be53d78045",
+    "commons/artifacts/registry/shader_pattern_passage.json": "79729a4cb668cd4b75967d27a69438deb62c7531aad35a7d76999dfded44e43a",
+    "commons/artifacts/registry/fuzzy_body.json": "fb32e00d655ebf494c223dc07dbd9644fe978d39718bdaa9e3b7fa43f82f6e00",
+    "commons/artifacts/registry/model_disagreement.json": "95b35e9c9f9e5f7756f5922a40c5e66baa340ecd87e5b8e62535e3e23ab7dd1f",
+    "commons/artifacts/registry/fuzzy_doorway.json": "7f8fac2c31b5c91ebc8b70ccc83277b9fd81cb0325dd95c9b8fc58b72f04ca54",
+    "commons/maps/Shader_05_Patterns/final.md": "7ac5a4bbfe7247cc9605a676c7d13ad59b6640a00823590d45f0c777ff17e1d5",
+    "commons/maps/Shader_05_Patterns/tutorial.md": "efeeb0ecaf786496f7b0bb3d0a8795f713fb9eb53b97011850b5ace8fd588eb2",
+    "commons/maps/Shader_11_QueerRubber/map_data.json": "e8a48c6fe30aaca1630f3d7165d6a51c98ce5bf879d6cb5f237b00c08ce8c380",
+    "commons/artifacts/registry/shader_material_parlour.json": "eacc815760287a936ab58bad71ac7569e3664bba2082ac5dfe2df190852ee1ed",
+    "commons/maps/Shader_11_QueerRubber/final.md": "45599ca356aa8ccfc39178fd5ba005f32ae9dc0f8b02a757e1492f4689a7ea95",
+    "commons/maps/Shader_11_QueerRubber/tutorial.md": "e7d701019938e5d890998458264ea683e1b69100dd7ddd28ada55f18149badb5",
+    "commons/maps/Shader_09_FBM/map_data.json": "2d2e3a668da43ba7f80fac36f13147376ec357af0c77de5bf664166622019898",
+    "commons/artifacts/registry/basin_water.json": "a1f4f92f2e1d69b1750ca81acde6677cd95278afb25f03fb6d4628cd9ab31389",
+    "commons/maps/Shader_09_FBM/final.md": "391e53f0edddaf3f2276ad8b33eed061d1a28db7444a9c1b80b0ad1b5698f2a4",
+    "commons/maps/Shader_09_FBM/tutorial.md": "57c77822f7f04e4bcc290fd427f773fdb821189824c5521a9535e21e71b932a9",
+    "commons/maps/Shader_12_PinkExtravaganza/map_data.json": "77f59f5990132bcca0caad925d69c1ffa2b0e0ed2030f9aae5f3ed5f2827b965",
+    "commons/artifacts/registry/shader_composition_stage.json": "829c2591a5a08401454bc836191b4f765b0a3eb0323d86feb2bc8d1367698a28",
+    "commons/maps/Shader_12_PinkExtravaganza/final.md": "0b450d5fb12485bd985c4212d67ed8887b5e8ccee4b70d57b213839b3180751f",
+    "commons/maps/Shader_12_PinkExtravaganza/tutorial.md": "5bf954ac6a942867029997d12bd51be800877069c52607de6af1d92648852515",
+    "commons/maps/Shader_10_ReactionDiffusion/map_data.json": "68398e1402e5c5bbc007646237df8a2c41708f857ea50e8b1d3d451a159a2dbc",
+    "commons/artifacts/registry/shader_state_chamber.json": "c2557095e105e2c223ac2fde0dcf7f1363450b6c42e5e58a104bdd022b17361f",
+    "commons/maps/Shader_10_ReactionDiffusion/final.md": "f0cc72fb6955d9deda0af840baea3eb7efa16766bde1d588bd1341dea714ef24",
+    "commons/maps/Shader_10_ReactionDiffusion/tutorial.md": "0aa333032cfac23b26e5380f59a186751c49773eec5668f2552a78bdbd6def29",
+    "tools/em_map_halls.py": "1a1fc58dce8f107b0b32d7dff8d04fb12f3c7c2550586cb37c6e85b8f1411cf1",
+    "commons/scenes/endless_museum.gd": "2341c0ad84de54d0950abc0095acbbbb179e2761156193ec37aa432dcbda2ba2",
+    "commons/maps/sequences/shaders.json": "7e3f3c83ca9ba0ea0b001c261ed1216a98c826bb18cdb145ce645130541cb161",
+    "algorithms/shaders/book_of_shaders/patterns_tile.gdshader": "8d8a007b1807686f4fd56cddcc77ea1d44a0706ec9cc84fa90e9d3bd2be09c89",
+    "commons/artifacts/shader_pattern_passage/repeated_mask.gdshader": "e8be5cce7cad289a8a348c54c03724e912918f598eb876906b66d61abbfca5b9",
+    "algorithms/shaders/book_of_shaders/shader_09_fbm.gd": "641550d5d3b5cbc8c054a9fec3fb8809ca8a158541a12addc086cc9570f2408a",
+    "algorithms/shaders/book_of_shaders/fbm_basic.gdshader": "cb9c90d3d9ec5cd08fd16d648f299d0b5b19e0764cedf9d0d26c7fe49f3570da",
+    "commons/artifacts/basin_water/basin_water.gd": "ea8c07fbbd4886cbc7123e195197fbdfa0b5559599a0091a3c0f8004e1862b34",
+    "commons/artifacts/basin_water/water_study.gd": "c7dea0c4a0ede06afefcc1000058b537b4e56b65063b311f538eaebc5ca289a5",
+    "commons/artifacts/basin_water/layered_water.gdshader": "eec8dfc3b61b6bb37c0790c1e90eea541ef7f2affb5e45423f1e60065dc617ee",
+    "algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.gd": "00d046e54a6f2983c33dccdf4f9d97bd97ec8b9691cab12d1fdc7dd6ff60c04c",
+    "algorithms/shaders/book_of_shaders/drag_extravaganza.gdshader": "0caac6ece5593a1a681ede650425afd94f21dab8ab10499ae1edfb580e735f69",
+    "commons/artifacts/shader_state_chamber/field.gd": "88368a7941aad5743f721308857f5703374f050f4760afc8c9aff3bcb5e167c3",
+    "commons/artifacts/shader_state_chamber/field_step.gdshader": "c63653efb726226b52ecb11798d1e8864d7d26ff8adae52e5eb993c0ea46c2bb",
+    "commons/artifacts/shader_state_chamber/field_view.gdshader": "1e22bbc00bf58b5001233759c3adbf6559ce6aedf72935f4cd47a6925a023042",
+    "algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.gd": "b3831818ca56d58970c6857030c83edbd7b61fa45c618ca70573a2e7e3596781",
+    "commons/resourses/shaders/reaction_diffusion.gdshader": "264b4fb75bcd6d1bdbbd2ea4fade3a17e8e60e822fd6e9ea67b1d6f11960ef83"
+  },
+  "bake_log_sha256": "173f0f750cafa65d8027016cf3e98cf183fb287394d433c74cb72bc593428755"
+}
