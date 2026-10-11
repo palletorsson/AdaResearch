@@ -69,6 +69,8 @@ func draw_frame(centre: Vector3, size: float) -> void:
 
 Otherwise it draws one frame. The last line calls the same function with the same centre, a smaller size and `remaining - 1`. With the default values, the sizes are 1.8, 1.17 and 0.7605 metres. The next call receives zero remaining steps and returns. Each earlier call then finishes.
 
+Either test can stop this example. If one remains reachable, the calls can still finish. If both tests are removed, each call proceeds into another with no programmed end to the chain. The depth clamp only limits the starting value; counting down does not stop a self-call unless the function checks that count.
+
 The loop in `draw_frame()` constructs four sides. Recursion repeats the whole construction. `(i + 1) % 4` returns to the first corner after the fourth; the last line closes the square.
 
 `depth` controls how many frames may be made. `ratio` controls their relative sizes. They are separate choices. The small-size cutoff is another stopping condition: raising the depth does not guarantee that every allowed frame will be drawn. `clampi()` also caps scripted depth requests at seven; the limit applies beyond the Inspector slider.

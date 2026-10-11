@@ -168,6 +168,19 @@ Compare the two operations: Koch keeps the connection and increases length; Sier
 
 The optional box-counting desk changes its measurement grid over a held sample. Leave it for a separate investigation if needed. The next main construction is Menger: carry the replacement pattern from a segment and a triangle into cells of a cube.
 
+## Optional: a dimension from the rule
+
+For these ideal self-similar constructions, count `N` equal copies, each with lengths `1/s` of the whole. The similarity dimension satisfies `N = s^D`, so `D = log(N) / log(s)`. Use the same logarithm base in both places.
+
+| Construction | Copies N | Scale divisor s | Dimension D |
+| --- | ---: | ---: | ---: |
+| Line split in halves | 2 | 2 | 1 |
+| Square split into four half-width squares | 4 | 2 | 2 |
+| Koch curve | 4 | 3 | ≈ 1.262 |
+| Sierpinski triangle | 3 | 2 | ≈ 1.585 |
+
+These dimensions describe the ideal limits of the rules, not our finite, thick renderings. At the box-counting desk, RANGE instead fits a slope to selected measurements of a finite point sample. Its result can change with the chosen scales. Counting copies in an exact rule and estimating from a sample are different procedures.
+
 ## The carried files
 
 These are unchanged from the earlier lessons. `PointBody` supplies pickup, release and the trigger signal inherited from XRTools. `LineSkin` places a cylinder between two ends. They are printed here so the example has no missing code dependency; the prepared museum still supplies XRTools and the player.

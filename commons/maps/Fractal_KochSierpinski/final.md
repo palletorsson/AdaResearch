@@ -52,6 +52,8 @@ DEPTH gives the drawn pieces more thickness. Their planar area does not change. 
 
 We can change the view back. That matters here. The ease with which this display restores a discarded part belongs to this stored construction. It does not make every act of removal reversible.
 
+At one desk, replacement makes the route longer; at the other, removal leaves less surface. More descendants do not always mean more material.
+
 <!-- @box_counting_dimension -->
 
 Two side benches offer a detour before removal enters a volume in the next hall. Stay with them to ask how we measure or recognise a construction; the route into Menger can also continue from the triangle's openings.
@@ -91,7 +93,9 @@ The discrepancy could have disappeared in a correction. Instead it has become a 
 
 <!-- @ -->
 
-Around these instruments, the earlier collection remains: assembled cubes, a bent Koch arch, recursive specimens and the dark sphere on the old raised cell. There is more to inspect than the route can finish.
+Around these instruments, the earlier collection remains. The cabin and bookshelf assemble named parts, with loops for repeated shelves, dividers and details. The pyramid's self-calls pass the construction to smaller descendants. Repeated boxes can hide that difference in procedure.
+
+The bent Koch arch draws its path with thick cylinders. A finer sequence of points can cease to produce a visible distinction at this thickness and viewing distance. The recursive specimens and dark sphere remain nearby. There is more to inspect than the route can finish.
 
 In the next hall, removal enters a volume. We will approach the Menger sponge with a body that can fly. Which of its openings will become somewhere we can go?
 
