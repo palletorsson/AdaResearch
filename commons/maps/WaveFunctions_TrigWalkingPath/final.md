@@ -18,7 +18,7 @@ Air Music let two voices begin at different moments. Here the relation is visibl
 
 <!-- @ -->
 
-Elsewhere, red and blue steps give sine and cosine places a body might stand. The glowing figure gives oscillations separate spatial coordinates. These parts have been assembled differently: added on one axis, offered as support, or distributed across three axes.
+Elsewhere, red and blue steps give sine and cosine places a body might stand. The rows add oscillations along one axis to make a slow pulse; the glowing figure assigns oscillations to separate coordinates to make a shape. A familiar operation has acquired another job: describing movement, offering support, or drawing a path through three dimensions.
 
 For fixed phases, a rational relation between frequencies can close the figure. An ideal irrational relation does not exactly repeat. Our finite drawing cannot demonstrate “never”, however long we wait beside it.
 

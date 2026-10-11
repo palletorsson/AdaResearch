@@ -34,4 +34,6 @@ In the point rooms, the drawing dot asked whether a hand had moved far enough to
 
 At the plinth, take the point and move your hand. Your own record extends along the open side of the room. Further on, three double pendulums paint on separate canvases. The marks stay on those surfaces while the bodies continue. There is space to approach each account and return to what is making it.
 
+Across from the sampler panel, a drum turns and a trace advances along a paper strip. Nearby, the Foucault model slowly turns its swing direction over a stationary canvas; a separate ring marks a rotating reference frame. The accumulating rosette asks us to distinguish the bob's repeated swing from the slower change in its direction. These instruments give time different visible forms. To read them, we need to notice what moves and what keeps the marks.
+
 We could stay and change what a record values. Ahead, rising and falling are being given yet another direction. A repeating rule will take position in space as its input. We leave this hall knowing that a wave-shaped drawing can tell us about a movement, a clock, and the decisions that let one stand for the other.

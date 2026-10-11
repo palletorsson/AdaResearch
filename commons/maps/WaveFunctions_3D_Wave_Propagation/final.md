@@ -14,7 +14,7 @@ The sphere you chose has not visited its neighbours. Its changing relation to th
 
 Look at the boundary. An interior point has eight neighbours here, including the diagonals. A corner has three. Each point has the same kind of rule, yet its position in the arrangement gives that rule different relationships to work with. The edge participates in the movement. It is not simply where we stopped drawing.
 
-The rods make those relationships visible. They have no collision and are not physical springs. A body can pass through the drawing; the stored relation still acts. Conversely, two spheres passing through similar heights would not by itself prove that one had affected the other. The switch gives us a comparison that resemblance alone cannot supply.
+The rods make those relationships visible. They have no collision and are not physical springs. A body can pass through the drawing; the stored relation still acts. Each oscillator has its own restoring influence towards an equilibrium and a damping term that resists its velocity. Coupling adds another influence: a neighbour displaced differently contributes a force. Conversely, two spheres passing through similar heights would not by itself prove that one had affected the other. The switch gives us a comparison that resemblance alone cannot supply.
 
 <!-- @wave_propagation_3d -->
 

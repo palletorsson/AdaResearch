@@ -12,7 +12,7 @@ Strike the same bar again before it finishes. There is another attack, but no ad
 
 You can withdraw from the encounter without ending it. A second action arrives in a room still occupied by the first. Try a long gap, then a short one. Reverse the order. Listen for the moment when one note makes the other difficult to hear, although both remain present in the readout.
 
-These bars have chosen notes. Their lengths were arranged to follow those choices; the program does not discover a pitch by calculating the vibration of the metal. There is a resemblance to an instrument, and a working instrument within that resemblance. The seam is available to us: we can change the body without changing its stored note.
+These bars have chosen notes. Their lengths were arranged to follow those choices; the program does not discover a pitch by calculating the vibration of the metal. Length follows the inverse square root of the chosen frequency: a note four times as high in frequency gets a bar half as long. The row gives the scale a visible shape before you strike anything. There is a resemblance to an instrument, and a working instrument within that resemblance. The seam is available to us: we can change the body without changing its stored note.
 
 The row offers C, D, E, G and A, continuing into another octave. That is a decision about which pairs your hand can reach. It does not settle which pairs are good. What sounds at ease here has already been given a particular company to keep.
 
