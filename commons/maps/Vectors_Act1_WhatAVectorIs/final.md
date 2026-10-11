@@ -1,5 +1,9 @@
 # The same difference, somewhere else
 
+The current hall puts direction, addition and projection together. Move the familiar black points; each station reads them in its own local frame. The two collection studies below use other apparatus to ask what a displacement keeps when its starting address or length changes. Their wall views and named controls belong to those studies, not to the three stations installed here.
+
+## Collection comparison — a difference carried elsewhere
+
 <!-- @VectorBasics -->
 
 Two pins hold a small arrow between them. On the wall, two larger yellow arrows show it from different directions: one from the side, one from above. Move the tip. The wall answers.
@@ -28,11 +32,11 @@ These are world axes. Turning the bench changes its relation to them; it does no
 
 <!-- @ -->
 
-The coordinate frame, route courier and length lantern remain nearby. A courier has to begin somewhere, even when its instruction is only *this far, this way*. Later, the point where a force is applied will matter too. The freedom to move a displacement arrow does not make every use of a vector independent of place.
+The collection also includes a coordinate frame, route courier and length lantern. A courier has to begin somewhere, even when its instruction is only *this far, this way*. Later, the point where a force is applied will matter too. The freedom to move a displacement arrow does not make every use of a vector independent of place.
 
 <!-- @vector_normalize_demo -->
 
-At the next diagram, a sphere gives the companion arrow a reference for unit length. Lengthen the input: its companion keeps its length. Change the direction: both turn.
+In the collection's normalisation diagram, a sphere gives the companion arrow a reference for unit length. Lengthen the input: its companion keeps its length. Change the direction: both turn.
 
 A long arrow becomes shorter here. A short one becomes longer. Both have one unit of length, with their different directions intact.
 
@@ -51,6 +55,6 @@ Near zero, the companion has no length to draw. The code treats any input length
 
 At the first bench, the same difference could begin elsewhere. At the second, different lengths could share a direction. These are two ways of finding something in common without making the inputs identical.
 
-In the next room, two displacements meet. The question becomes where they can take us together.
+Back at this hall's addition station, two displacements meet; projection asks which part follows the chosen rail. Carry that distinction into Launch. There an initial velocity supplies a direction and speed, and gravity changes the journey after release.
 
 [^stick-chart]: Before the arrow there was the frond. The navigators of the Marshall Islands tied the directions of ocean swells and the positions of islands into lattices of coconut-frond midribs and shells, the mattang, meddo and rebbelib stick charts: an instrument of *this far, this way*, memorised before a voyage and left ashore. *Nature of Code* opens its chapter on vectors with one.

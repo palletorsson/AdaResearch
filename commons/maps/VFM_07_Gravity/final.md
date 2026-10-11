@@ -1,5 +1,9 @@
 # Who gets to stay still?
 
+The timing machines gave bodies their paths. In this hall, the PointBody spheres continually change one another's motion. The installed mutual-attraction field offers PAIR / FIVE; in FIVE, entering the field adds your position as another source. The collection comparison below isolates a fixed source and a three-body beginning. Its RUN, SPEED and NUDGE controls belong to those separate studies, which are not placed in the current hall.
+
+## Collection comparison — a fixed centre, then a moving one
+
 <!-- @orbital_mechanics_demo -->
 
 The spring had an address to return to. You could move its body through that address without moving the address itself. Here the reference has acquired a body: a pink sphere, apparently untroubled by the small gold one waiting beside it.
@@ -26,7 +30,7 @@ if mutual or i!=0:a[i] += pair_force / masses[i]
 if mutual or j!=0:a[j] -= pair_force / masses[j]
 ```
 
-Here `mutual` is false and body zero receives no acceleration. The source is held in place by the implementation. Newton's third law, that every pull is paired with an equal pull the other way, has been switched off by that one word. Its stillness is useful: it lets us learn one moving body's relation to a fixed reference. It also withholds a response. What happens if the thing we called the centre is allowed to answer?
+Here `mutual` is false and body zero receives no acceleration. The source is held in place by the implementation: its response to the opposite force is not integrated. This is a constrained source, not an isolated pair whose total momentum we can expect to remain unchanged. Its stillness is useful: it lets us learn one moving body's relation to a fixed reference. It also withholds a response. What happens if the thing we called the centre is allowed to answer?
 
 <!-- @three_body_problem -->
 
@@ -34,7 +38,7 @@ The next floor begins with two equal masses. Press RUN before adding anything. B
 
 Now press BODIES. Time returns to zero and a third body waits above the pair in the floor plan. The original two keep their starting positions and velocities; the newcomer starts at rest. Run again. Follow one of the original paths. Where does it first cease to be the path you expected?
 
-No new instruction says “be complicated.” Each pair contributes the same softened attraction, with an equal and opposite force on its partner: the third law switched back on. All three masses are 4 kg. The arrangement has changed, so the forces summed at each body change. The original pair's circular beginning is no longer a promise about its future.
+No new instruction says “be complicated.” Each pair contributes the same softened attraction, and both bodies receive their equal and opposite forces. All three masses are 4 kg. The arrangement has changed, so the forces summed at each body change. The original pair's circular beginning is no longer a promise about its future.
 
 ```gdscript
 var a=accelerations(state)
@@ -51,7 +55,7 @@ NUDGE prepares a second beginning. Only the last body's X coordinate changes, by
 
 Watch a corresponding pair, then read the displayed difference. It combines the distances between corresponding bodies as a root mean square. In the checked three-body run, three centimetres added to one initial coordinate gave about 7.6 centimetres of this paired difference after four seconds. Reset and compare again. This is a measured departure under specified conditions. A tangled trail alone would not establish chaos, and this short comparison does not establish an exponential rate of separation.
 
-The pair on the first floor had a path that can be written down; the triple does not, and has not since Poincaré showed in 1890 that none can be. That is not the same as saying it has no order: three equal masses can chase one another for ever round a figure-eight, found in 1993 and proved in 2000.[^three-body] Behind these floors, a sculpture does the same sum for every pair of many bodies, as many pairs as there are bodies squared, which is why simulations of galaxies do not.
+Adding a third body does not mean that order becomes impossible. In the Newtonian problem, three equal masses can follow a periodic figure-eight.[^three-body] Here we numerically step a softened force law; neither that theorem nor a claim that three bodies have no analytical solution describes what this apparatus has established. Each new body changes the relations we must read again. With N bodies, a direct pairwise calculation has N(N−1)/2 pairs.
 
 There are two white crosses now. Moving that one initial coordinate also moved its copy's centre of mass. We did not secretly recentre it. Even an experiment about difference has to decide which differences it will retain.
 
@@ -59,8 +63,8 @@ Return to `EPS * EPS`. The quarter-metre softening, called Plummer softening, ke
 
 The floor keeps at most 240 samples for each trail, taken twenty times a second: roughly twelve seconds of visible past. Hiding PATH does not stop this recording. Large acceleration arrows stop growing at two metres, while the numerical acceleration continues beyond that drawing limit. At the golden frame the whole experiment pauses with its outgoing state intact. The edge says our observation has ended; it does not prove that a body has escaped its partners.
 
-We have allowed the centre to move and the third body to alter a relation already underway. Your feet, meanwhile, have remained on the museum floor. Gravity in the next encounter will need an answer from the ground. What lets a body stand?
+Return to the installed field. PAIR makes the exchange between two points available for study; FIVE lets your entry add a source to an arrangement already moving. Your feet remain on the museum floor while the points respond to your position. Gravity in the next encounter will need an answer from that floor. What lets a body stand?
 
-[^plummer]: The added squared length softens the short-distance interaction. The [galpy Plummer potential documentation](https://docs.galpy.org/en/latest/reference/potentialplummer.html) gives the corresponding potential; this hall uses a softening length of 0.25 metres.
+[^plummer]: The added squared length softens the short-distance interaction. The [galpy Plummer potential documentation](https://docs.galpy.org/en/latest/reference/potentialplummer.html) gives the corresponding potential. The collection comparison uses 0.25 metres; the installed mutual-attraction field and the small tutorial study use 1.2 metres.
 
-[^three-body]: Henri Poincaré's prize essay of 1890 on the three-body problem showed that no general closed solution exists. Periodic orbits do: Cristopher Moore found the figure-eight numerically in 1993, and Alain Chenciner and Richard Montgomery proved it in 2000 (*Annals of Mathematics* 152). The sculptures behind the floors, nbody_simulation, example_2_9_n_body_attraction_vr, gravity_well and chaos_attractor, sum every pair; the Barnes–Hut tree of 1986 is how simulations of galaxies avoid doing so.
+[^three-body]: Chenciner and Montgomery's [proof of the figure-eight orbit](https://arxiv.org/abs/math/0011268) concerns three equal masses under Newtonian attraction. Malte Henkel's [account of Sundman's solution](https://arxiv.org/abs/physics/0203001) explains why “the three-body problem has no analytical solution” is too broad. These mathematical results are distinct from this study's softened law and finite numerical steps.

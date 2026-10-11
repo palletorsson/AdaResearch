@@ -65,6 +65,8 @@ Increase `coefficient` from 0.6 to 3.0 and restart. At the same speed the drag i
 
 ## Model notes
 
+The reflective text compares this with the collection's linear-drag corridor. There, doubling speed doubles the force; here it quadruples the force before the cap. The corridor uses a coefficient in kg/s and removes gravity. This study keeps gravity and uses kg/m. Those are two declared models, not interchangeable settings for the same liquid.
+
 The coefficient has units kg/m in this quadratic model. `limit_length` caps drag so that this contribution alone cannot reverse velocity in one physics step. This is a force model, not a fluid simulation. Set the starting position before `add_child`, as shown: moving a frozen kinematic body afterward can introduce unintended velocity. The museum uses a separate movement rule for the player walking through a region.
 
 ## Into the next room

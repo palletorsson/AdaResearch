@@ -73,7 +73,7 @@ rb.linear_velocity += f * delta
 
 The missing division matters. This field gives an acceleration directly. It never divides a force by the receiver's mass. A one-kilogram body and a four-kilogram body receive the same velocity increment. They can still meet different contacts or have different damping. Equal instruction does not promise equal journeys.
 
-Gravity arrives at the same place by a different route: its pull grows with the mass it pulls, and the division by that same mass cancels the growth, which is why Galileo's two balls reached the ground together. This field skips the multiplication and the division at once.
+In the ideal uniform-gravity model, weight grows with mass and dividing by that mass gives the same acceleration, when other forces are absent. This field assigns acceleration directly.
 
 The visitor's controller carries its velocity through a separate receiver:
 
@@ -95,6 +95,8 @@ The plank originally repaired a promise the museum could not keep: a field drew 
 The repair belongs in the argument. Keep the plank. It gives you a way through while you investigate the other crossing, and it makes a comparison available: contact underneath, or a rule changing motion around you. Both depend on what the receiver can do.
 
 The small free-vector display and the green invisible-hill diorama remain as side encounters. A vector can be drawn at another address without changing its components. A region can assign vectors to addresses and make paths bend. Between those two statements lies the work of this hall: admitting a body into a rule, retaining its history, and deciding where the rule stops.
+
+In the capability court farther along this hall, take the two black points. These carry the tutorial forward. Holding a point and pressing its trigger makes your hand's direction an acceleration request for your body. The outlined field admits you by location; the point admits your action through a held object. Releasing the trigger removes that request without erasing your velocity. Gravity continues in the court, whereas the outlined field replaces it while you are inside. The same capacity to receive an instruction belongs to two different arrangements.
 
 What bodies are possible here? A carried visitor and a damped cube have become possible through related operations, implemented differently. The crab from the previous room would need its own receiver before this field could carry its commanded mesh. Shared code as a medium does not make that translation automatic. It gives us somewhere to work on it.
 

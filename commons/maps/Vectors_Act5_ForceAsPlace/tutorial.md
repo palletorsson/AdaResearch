@@ -91,6 +91,8 @@ Aim one hand up and one down. Before pressing, predict that the two thrusts canc
 
 ## Model notes
 
+Compare the court with the outlined field in the reflective text. That field selects receivers by location and replaces ordinary gravity inside its boundary. Here the held point selects its player and requests thrust only while activated; the court adds gravity to that request. Both change retained velocity, but they choose receivers and combine influences differently.
+
 Mount this study inside the loaded capability court. Its FieldCarryAdapter owns player movement; the points do not set the camera position. The required connection is `receiver()`, `acceleration()` and `held()` in the `ada_thrust_points` group. This small script uses XR hands; the museum version also supports a desktop pointer. Physical headset comfort still needs a playtest.
 
 ## Into the next room

@@ -10,6 +10,12 @@ tree, 2 October); this decision does not change that form. A hall tutorial keeps
 paragraph prose, measured against the sample below, until the day it is rewritten into
 the course form.
 
+## Check the current map before revising text
+
+Standing instruction from Palle, 11 October 2026: always check text against the existing maps. Read the current sequence order, the hall's placed tokens and configuration, the registry scenes and their active script branches. For Endless Museum, check the generated hall plan too. An artifact existing in the repository does not establish that it is in this room, and a named configuration must actually be enabled before its controls can be promised.
+
+Keep installed encounters, the learner's reconstruction and collection comparisons explicit. Verify controls, units, limits, receivers and incoming/outgoing links before making claims about them. `tutorial.md` teaches the declared reconstruction with code and explanation; `final.md` develops the encounter and reflection. Record source verification separately from runtime or headset testing; one does not establish the other.
+
 ## final.md: keep the voice
 
 Golden samples: `commons/maps/Point_Zero/final.md` and `commons/maps/Point_Trace/final.md`.

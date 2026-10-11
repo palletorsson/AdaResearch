@@ -60,6 +60,8 @@ Multiplying that difference by `stiffness` gives the force magnitude. The normal
 
 The last term subtracts `damping * velocity`. It opposes movement, so the returns gradually settle. Gravity still acts: the hanging point rests with the spring stretched enough to support its weight.
 
+At rest under the anchor, the stretch is `mass * gravity / stiffness`, provided the spring force is below its cap and no contact supports the point. Its equilibrium length is therefore longer than `rest_length`. The rail comparison in the reflective text removes gravity, so its equilibrium is the unstretched position. Keep those two experiments distinct.
+
 ## Change one thing
 
 Release from the same position with damping at 0.5, then at 3.0. Predict which will keep moving longer. Restore damping and double stiffness. Compare the stronger return without changing rest length.

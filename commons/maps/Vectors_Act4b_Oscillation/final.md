@@ -1,5 +1,11 @@
 # Coming back takes you through
 
+Begin with the hanging points in this hall. Gravity stretches each spring; the place where a point settles is already a balance between pulls. The tutorial carries one point into that balance. The horizontal rail study below removes gravity to isolate another question: why does arriving at the spring's resting length not stop the body?
+
+## Collection comparison — the rail
+
+This comparison uses the tower's separate restoring-forces configuration. The tower currently placed in this hall shows a prescribed vertical oscillation; it does not expose the rail study's RELEASE, PULL and DAMP controls.
+
 <!-- @spring_tower -->
 
 A cube waits to one side of a line. A coil connects it to the frame. The line continues across the floor, where your feet can find it too.
@@ -30,6 +36,8 @@ displacement += velocity * STEP
 
 The cube does not consult a cosine to find its next address. This one-dimensional model computes the next state from the current one, at 120 steps per model second. Its pickable cube displays that state. It is not a second, freely colliding physics body, and its coil does not push the visitor. The rail assumes vertical support; gravity and contact friction have been left out.
 
+On this rail, the spring's unstretched position is also its equilibrium. The hanging point needs a stretched spring to hold its weight. Rest length belongs to the spring; equilibrium belongs to all the influences acting on the body.
+
 The opening mass is two kilograms and the spring stiffness is eight newtons per metre. With damping off, RESET and RELEASE, then compare a heavier **MASS** from the same start. It takes longer to cross the line. Return to two kilograms and increase **SPRING**: a stiffer spring brings it through sooner. The buttons cycle through one, two and four kilograms, and four, eight and sixteen newtons per metre.
 
 Changing those values during motion keeps position and velocity. It does not promise to keep energy. Stiffening a stretched spring changes the energy attributed to that state; replacing mass while keeping velocity does too. The edit is an intervention in the apparatus, not a free transformation of an isolated system.
@@ -50,7 +58,7 @@ The hand's sideways travel was discarded. Its throwing speed was discarded. The 
 
 There are further limits. A long computer stall advances at most a quarter of a model second on the next update. If an intervention sends the cube outside the observation frame, beyond 2.25 metres of displacement, FRAME EXIT holds its outgoing state. No imaginary collision is supplied to make the frame seem like a wall. And the finite update can introduce numerical error even when damping is off. The recurring movement is something to examine, not a promise of perfect repetition.
 
-Other balances, springs and pendulums remain farther into this hall. Among them hang two mobiles after Alexander Calder, who made the first in 1931: every arm balanced so that weight times distance is equal on both sides, the crank you turned two halls ago hung up and at rest. One carries painted discs; the other the museum's own objects.[^calder] A similar swing may be prescribed directly from time; the older tall pendulum does exactly that. Looking alike does not establish the same mechanism. The question follows you from one apparatus to the next.
+The wider collection includes two mobiles after Alexander Calder: every arm balanced so that weight times distance is equal on both sides. One carries painted discs; the other the museum's own objects.[^calder] They are not installed in this hall. The tall spring tower here prescribes its movement directly from time. Looking alike does not establish the same mechanism. The question follows you from one apparatus to the next.
 
 <!-- @ -->
 
@@ -58,4 +66,4 @@ We will return to oscillation in Wavefunctions. There a pendulum leaves a histor
 
 Next, the timing machines. What happens when several returning movements share a clock, or begin to fall out of step?
 
-[^calder]: Alexander Calder made his first mobiles in 1931; the name was Marcel Duchamp's. The two here are calder_mobile and calder_object_mobile: each disc's mass is its area times a three-millimetre sheet times the density of aluminium, and each arm's pivot is placed where the two moments cancel, weight times distance on either side. They do not move. The balance is arithmetic, as the Equilibrium hall in Form Finding says at length.
+[^calder]: The collection's calder_mobile and calder_object_mobile calculate each disc's mass from its area, a three-millimetre sheet and the density of aluminium, then place the arm's pivot where the two moments cancel. They do not move. The balance is arithmetic, as the Equilibrium hall in Form Finding says at length.

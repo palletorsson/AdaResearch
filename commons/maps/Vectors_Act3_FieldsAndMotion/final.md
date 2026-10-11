@@ -72,4 +72,4 @@ The earlier field, weather and motion exhibits remain beyond this opening. A sim
 
 <!-- @ -->
 
-Next, three cubes enter strips named air, water and honey. The influence will depend on the movement it is slowing. The body has become part of the rule that acts on it.
+Next, points fall through three coloured regions. The influence will depend on the movement it is slowing. The body has become part of the rule that acts on it.

@@ -1,5 +1,9 @@
 # The return is not an undo
 
+In the current hall, points fall through three coloured regions. Their resistance grows with the square of speed, until the force limit is reached. The tutorial reconstructs one of these falling points. The linear-drag corridor below is a collection comparison, absent from this map: its cubes travel horizontally with gravity removed. A similar appearance of slowing can come from different rules.
+
+## Collection comparison — three strips
+
 <!-- @drag_corridor -->
 
 Three strips cross the floor. AIR, WATER, HONEY. Each holds a cube, waiting at the same starting X coordinate. The controls stand before the passage between them.
@@ -18,7 +22,7 @@ body.apply_central_force(-COEFFICIENTS[i] * body.linear_velocity)
 
 A minus sign makes the force oppose velocity. The coefficient has units of kilograms per second; multiplied by metres per second, it gives newtons. The three values are 0.4, 1.3 and 3.2. They are chosen for this comparison, not measured properties of air, water or honey.
 
-This is the linear rule: double the speed, double the resistance. Air at any speed you can throw a cube resists with the square of the speed instead, a law whose coefficient carries kilograms per metre; this corridor does not model it, which is one more reason the strips are names.
+This is the linear rule: double the speed, double the resistance. The falling points use a quadratic rule: doubling speed gives four times the resistance before its limit is reached. Neither rule becomes a measured property of a substance because we write AIR or WATER beside it. Real drag depends on the body and the flow conditions.[^drag]
 
 The opening mass is one kilogram. Increase **MASS** to two, then FIRE again. The same resistance now changes velocity more slowly. The force at a given speed has not doubled to match the body. Dividing by the greater mass produces a smaller acceleration.
 
@@ -30,15 +34,15 @@ Your controller is a different receiver. Its requested walking speed is multipli
 
 One visible medium contains two implementations. The fact that both seem slower is a beginning for comparison, not proof that they share a mechanism.
 
-![Standing inside the coloured walking passage in the Kinetic Forces hall](/book-images/figures/forces/inside-the-passage-museum.png)
+![Earlier installation of the coloured walking passage](/book-images/figures/forces/inside-the-passage-museum.png)
 
-*The cubes cross the strips; the walking passage runs through them. A cube receives a force. The stick receives a change to its requested speed.*
+*Earlier installation, retained for comparison. The cubes receive a force; the walking passage changes the stick's requested speed. This corridor is not in the current hall.*
 
 The cubes ignore furniture and the visitor. Gravity and inherited damping are removed. If a cube reaches the end of its eight-metre observation window, the apparatus freezes it and labels FRAME EXIT. It has reached the limit of what we are watching, not a wall that did work to stop it. The displayed velocity remains its outgoing value.
 
 <!-- @force_mower -->
 
-Farther into the hall, grass stands around a mower. Take hold of it and push it forward. A strip is cut, the wheels turn, and the path counter increases.
+Recall the mower in Motion, earlier in the sequence. Take hold of it and push it forward. A strip is cut, the wheels turn, and the path counter increases.
 
 Now bring it back without turning it around.
 
@@ -62,26 +66,22 @@ The cut lawn is a small remainder that the return journey cannot cancel. Zero ne
 
 <!-- @centrifuge_ring -->
 
-At the ring, a pod follows a circle. Stand beside the controls outside the circle and watch it pass. Press **SPEED** to go from two to four metres per second.
+Back in Kinetic Forces, take the ring's rose handle. The controller begins steering you around the circle. Its trigger changes the requested speed from two to four, then six metres per second; the nearby SPEED button offers the same choice.
 
-The velocity arrow doubles. The inward acceleration arrow grows fourfold.
+From two to four, the velocity arrow doubles. The inward acceleration arrow grows fourfold.
 
-At six metres per second the contrast grows again. The radius stays at 3.4 metres. More speed demands more change of direction during each second if the pod is to remain on that circle.
+At six metres per second the contrast grows again. The target radius stays at 3.4 metres. More speed demands more change of direction during each second if a body is to remain on that circle.
 
-The ring now uses the same speed for its movement and its readout:
-
-```gdscript
-_omega = lerpf(2.0, 9.0, speed) / radius
-```
-
-Angular speed is linear speed divided by radius. The inward acceleration required for the circle is speed squared divided by radius. At two metres per second it is about 1.18 metres per second squared; at four, about 4.71.
+The arrows describe the requested circular motion. The inward acceleration for an ideal circle is speed squared divided by radius: about 1.18 metres per second squared at two metres per second, and 4.71 at four. These are calculated requirements, not measurements of the force acting on the visitor.
 
 The arrows remain perpendicular: one tangent to the circle, one inward. An acceleration can change direction while leaving speed constant. That is a different possibility from the drag arrow opposing the direction of travel.
 
-But look at what this particular machine does. The pod is placed along a prescribed circular path. The inward arrow reports the acceleration that path requires; it is not a simulated force holding a free rigid body in orbit. The ring does not pull the visitor inward. SPEED keeps the pod's current phase when changing its pace, so the experiment continues from where you intervened.
+Look at what this particular machine does. While you hold the handle, the controller steers velocity toward a tangent and corrects departures from the target radius. Collisions can interrupt that request. Your tracked head remains yours to turn. Release the handle: the controller briefly retains your horizontal motion while slowing it, then hands movement back. This is an authored ride, not a free body's orbit produced by a centripetal force. The difference between the requested circle and the journey you make is available to feel.
 
 We have met a force applied to a body, a force chosen for a work annotation, and an acceleration calculated from a prescribed path. The visual argument becomes useful when those differences can be examined. An arrow needs units, a receiver, and an account of how it entered the movement.
 
 <!-- @ -->
 
 Next, oscillation and balance. What happens when the restoring influence changes sign as a body crosses its resting place, and the accumulated motion carries it across once more?
+
+[^drag]: NASA's [discussion of the drag coefficient](https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/dragco.html) explains why shape and flow conditions, including Reynolds number, matter when carrying a measured drag relation into another situation.

@@ -14,6 +14,8 @@
 
 ## Core Rule
 
+- **Hall text follows the current map** (Palle, 2026-10-11). Before revising `tutorial.md` or `final.md`, verify sequence order, placements, enabled configurations and active artifact scripts; check the Endless Museum plan too. Distinguish installed encounters, learner reconstructions and collection comparisons. See `doc/book/course/VOICE_DECISION.md`.
+
 - **Grid system changes are allowed** (guard lifted 2026-07-08 — it was for older models). Discipline still applies: additive hooks gated by new data (a map without the new layer must be untouched), headless compile-check + live map-load test before commit, pathfinder extended in the same change, and a negative test proving the new behavior actually bites.
 
 ## The Sieve — three questions for substantial decisions
