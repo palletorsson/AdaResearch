@@ -48,7 +48,7 @@ The small cube offers the word *witness* a place to land. To establish that some
 
 Consider a classical existence argument. Let `c = √2^√2`. If c is rational, the irrational pair √2, √2 already gives a rational power. If c is irrational, the irrational pair c, √2 gives `c^√2 = 2`. Either way such a pair exists. This argument does not tell us which pair its case split has supplied.
 
-The constructive demand asks for that missing identification. It changes what we accept as evidence. It does not make every classical proof worthless, or require every mathematical object to be a physical object we have touched.
+The constructive demand asks for that missing identification. It changes what we accept as evidence. An existence proof that supplies no witness may need a different construction, and some classical conclusions cannot be carried over unchanged. This is work within mathematics, including analysis, rather than the loss of analysis itself. It does not make every classical proof worthless, or require every mathematical object to be a physical object we have touched.
 
 ## A witness you can check
 
@@ -64,7 +64,7 @@ Increase the size. More rows arrive; the earlier bits stay. The construction ext
 _d[i] = 1 - _list[i][i]
 ```
 
-This is a finite stage of diagonalisation. The mathematical argument for infinite binary sequences applies the same rule to every row of a proposed countable list. The headset displays finite strings, up to 32 bits here. Their disagreement is real and inspectable; displaying it does not display the completed infinite object.
+This is a finite stage of diagonalisation. The mathematical argument for infinite binary sequences applies the same rule to every row of a proposed countable list. The headset displays finite strings, up to 32 bits here. Their disagreement is real and inspectable; displaying it does not display the completed infinite object. Here the red string is the witness: you watched it being made and can check its difference from each displayed row.
 
 You now have two ways of extending a row. At the first bench you choose the next bit. Here a rule determines it from another bit. Both produce something, but they distribute the work differently.
 

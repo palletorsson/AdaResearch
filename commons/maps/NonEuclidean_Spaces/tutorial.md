@@ -1,5 +1,7 @@
 # NonEuclidean Spaces
 
+**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed triangle workbench switches between PLANE, SPHERE and DISK. Its angle calculation uses edge tangents in the selected model. The separate curvature slider changes a surface sketch. The radial warp below supplies neither those metrics nor their geodesics; it is not a reconstruction of that workbench.
+
 **Learning elements — proposed focus**
 
 *The labels below set the revision focus; the existing lesson still needs alignment.*
@@ -8,7 +10,7 @@
 - Geodesics
 - Triangle comparisons
 
-Two alternatives, equally consistent with the first four postulates. Build a curvature slider that moves continuously between hyperbolic, Euclidean, and elliptic space.
+Inspect the difference between deforming coordinates and defining a distance model. The installed hall compares three hosts; this older sketch only alters a drawing.
 
 Declare the curvature state.
 
@@ -23,7 +25,7 @@ func set_curvature(k: float) -> void:
     _update_grid()
 ```
 
-A single scalar controls everything. Negative is hyperbolic, zero is Euclidean, positive is elliptic. The slider is the curvature.
+This scalar is a deformation parameter. Its sign and name do not give the mesh a hyperbolic or spherical metric.
 
 Build the base grid.
 
@@ -35,7 +37,7 @@ func _update_grid() -> void:
     grid_mesh.update_from(grid_vertices)
 ```
 
-The grid starts flat. Each frame, vertices warp according to the current curvature. The mesh is the same vertex list differently placed.
+Each call overwrites the stored vertices. Repeated calls compound the warp rather than rebuilding from a retained original. The snippet has no frame callback and does not define grid_mesh.update_from.
 
 Warp a vertex.
 
@@ -46,9 +48,9 @@ func _warp(v: Vector3, k: float) -> Vector3:
     return v * factor
 ```
 
-Parabolic scaling with distance from origin. Close to the slider, the warp is subtle; far away, it bends dramatically.
+The multiplier depends on squared distance from the origin. For vertices in the plane y = 0, the result remains in that plane. It does not create the hall’s sphere or saddle.
 
-Draw two parallel geodesics.
+Inspect the paths called geodesics in this prototype.
 
 ```gdscript
 func draw_parallels(k: float) -> void:
@@ -57,11 +59,9 @@ func draw_parallels(k: float) -> void:
     parallels_mesh.draw(a, b)
 ```
 
-Two lines start parallel. At k=-1 they diverge.
+The paths begin with parallel directions. At k = 0 the warp is the identity. Their behaviour at other values must not be used as evidence for spherical or hyperbolic parallels: no corresponding metric has been supplied.
 
-At k=0 they stay parallel. At k=+1 they converge and meet.
-
-Integrate a geodesic step by step.
+Inspect the path update.
 
 ```gdscript
 func _geodesic(start: Vector3, direction: Vector3, k: float) -> PackedVector3Array:
@@ -75,7 +75,7 @@ func _geodesic(start: Vector3, direction: Vector3, k: float) -> PackedVector3Arr
     return points
 ```
 
-Forty steps per geodesic. Direction updates each step by tangent to the warped grid. The line walks the curvature rather than assuming it.
+Forty iterations update a direction using differences of warped positions. Calling this function _geodesic does not establish that its paths are geodesics in any of the three intended models.
 
 Label the three regimes.
 
@@ -86,7 +86,7 @@ func label_regime(k: float) -> void:
     else: regime_label.text = "euclidean"
 ```
 
-Hyperbolic, euclidean, elliptic. The slider passes through all three continuously. No regime is privileged.
+These are thresholded labels, not measured geometries. In a replacement lesson, select the host model explicitly and compute angles from its edge tangents, as the installed workbench does.
 
 Colour the floor by curvature sign.
 
@@ -96,7 +96,7 @@ func tint_floor(k: float) -> void:
     mat.albedo_color = Color(0.5 - k * 0.3, 0.5, 0.5 + k * 0.3)
 ```
 
-Cool toward negative, warm toward positive. The learner's steps tell them which geometry they're inside.
+The parameter changes the tint. It changes neither the player’s movement metric nor the geometry of the museum floor.
 
-You have moved continuously through three geometries. The next map, Russell Paradox, turns from geometry to logic and finds the first genuine contradiction.
+Keep the distinction between a declared model and a persuasive picture. Russell Paradox next asks whether a declared membership rule can be satisfied.
 <<</MAP>>>

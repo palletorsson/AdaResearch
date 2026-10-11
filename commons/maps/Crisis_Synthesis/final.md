@@ -66,7 +66,7 @@ Find the doorway you just used. It is there again, too small for you.
 
 The construction repeats a room-making procedure at a tenth of the previous scale. Here it stops after two nested models. The source permits that stop; the image encourages your eye to carry on. We have met this bargain before, in recursion: the suggestion of more, paid for with a finite number of things.
 
-A system can contain a description of itself. This atrium makes that relation approachable. Gödel's argument required something more specific: an effective arithmetic theory able to encode statements and proofs, together with the relevant consistency or soundness assumptions. A model on a plinth does not perform that proof.
+A system can contain a description of itself. This atrium makes that relation approachable. Gödel's argument required something more specific: an effective arithmetic theory able to encode statements and proofs, together with the relevant consistency or soundness assumptions. A model on a plinth does not perform that proof. A weaker theory can be complete. The obstruction concerns consistent, effectively axiomatized theories with enough arithmetic, not every system that describes itself.[^4]
 
 But the difference in scale does something the sentence alone cannot. You can look into your description. You cannot enter it with this body.
 
@@ -119,3 +119,5 @@ An equals sign waits. So does the world it has not yet accounted for.
 [^2]: Mitchell J. Feigenbaum, [“Quantitative Universality for a Class of Nonlinear Transformations”](https://doi.org/10.1007/BF01020332), 1978. The universality is conditional on a class of maps and their local properties; it is not a claim about every system that changes or oscillates.
 
 [^3]: Ada's working argument in [“Entropic Morality”](../../../doc/research/qfep/entropic-morality.md) asks how a system preserves the capacity to respond, change and revise its terms. The formula here is a research proposal, not a deduction from Gödel's theorems.
+
+[^4]: Olivier Bournez, [*Gödel Incompleteness Theorem*, INF412 course notes](https://www.enseignement.polytechnique.fr/informatique/INF412/uploads/Main/chap10english-goodINF412ENGLISH.pdf), states the effective-theory and arithmetic hypotheses. The scope of the theorem matters when a miniature room supplies the image of self-description.

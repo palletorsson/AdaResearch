@@ -1,5 +1,7 @@
 # Crisis Synthesis
 
+**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The current hall has eleven placed artifacts, including the formula study, separate controls and the returning encounters. Brouwer’s choice bench is recalled from its own hall, not placed here. The four-wing summit below is an earlier proposal. The installed sentence-authority study is identified separately at the end.
+
 **Learning elements**
 
 - Sentence arrays
@@ -7,7 +9,7 @@
 - Display rhythm
 - Claims and warrant
 
-Four wings, one summit, one complete formula. Build the synthesis that turns crisis into capacity.
+Inspect the earlier four-wing proposal, then use the installed sentence study below to change a presentation while keeping its words fixed.
 
 Declare the wing registry.
 
@@ -23,7 +25,7 @@ const WINGS := {
 }
 ```
 
-Four wings, four names, four words. The registry is the map key. Each wing hosts one artifact from the sequence.
+This is a proposed name-to-topic dictionary. It is not the current map registry and does not place artifacts by itself.
 
 Place the wings around the summit.
 
@@ -49,7 +51,7 @@ func render_summit(label: Label3D) -> void:
     label.modulate = Color(1.0, 0.95, 0.8)
 ```
 
-The complete formula for the first time. Earlier maps showed fragments. The summit holds the whole.
+The label prints the formula. The current study treats its terms as a research proposal requiring defined quantities and units; displaying the expression does not validate it.
 
 Wire the bifurcation diagram.
 
@@ -62,7 +64,7 @@ func update_bifurcation(diagram: MeshInstance3D, lambda_value: float) -> void:
     diagram.mesh = _mesh_from_samples(samples)
 ```
 
-The bifurcation rides λ. Low λ is stable; moving λ up opens doublings and then chaos. The diagram explains the critical zones visually.
+This samples a proposed _logistic_step once for each starting value. It does not generate a bifurcation diagram, which requires iterating and discarding a transient for each parameter. The installed diagram has its own r control, independent of λ.
 
 Slide λ and φ.
 
@@ -76,7 +78,7 @@ func _on_phi_slider_moved(v: float) -> void:
     update_wings(phi_value)
 ```
 
-Each slider rewrites the summit's readout. The wings update to show what their response implies under the current parameters.
+These callbacks propose a coupling that is not installed. In the current hall λ and φ update their own displays; the logistic diagram keeps its separate parameter.
 
 Open the wings by proximity.
 
@@ -86,7 +88,7 @@ func _on_player_near_wing(wing: Node3D) -> void:
     wing.play_open_animation()
 ```
 
-Proximity is the trigger, not a button. Walking toward Gödel unlocks Gödel. The learner pieces the argument together at their own pace.
+This proposed handler would need a proximity signal and a wing scene with the stated method. It is not the current hall’s access rule.
 
 Mark completion on all four visits.
 
@@ -97,9 +99,9 @@ func mark_wing_visited(wing: Node3D) -> void:
         summit_light.light_energy = 4.0
 ```
 
-All four wings must be visited before the summit lights fully. The formula only reads complete after every response to the crisis has been witnessed.
+This is proposed visit tracking, not an installed completion requirement. The current hall does not require four wing visits to display its formula.
 
-You have assembled the crisis into capacity. The next map, Chamber Foundations, embodies Gödel as a creature you cannot distinguish from itself.
+The next sequence is the QFEP laboratory. Carry the distinction between the displayed proposal, the implemented model and evidence for its claims.
 <<</MAP>>>
 
 Animate the summit light on full completion.
@@ -111,7 +113,7 @@ func animate_summit() -> void:
     summit_light.light_color = Color(1.0, 0.9, 0.7)
 ```
 
-A gentle pulse once the four wings are visited. The pulse is slow enough to read as breath.
+This changes the light whenever called; it contains no visit check. Connecting it to a completion event is absent from the sketch.
 
 
 <!-- study-spine:sentence_authority -->

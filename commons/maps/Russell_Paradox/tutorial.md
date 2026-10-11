@@ -1,5 +1,7 @@
 # Russell Paradox
 
+**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed workbench tests IN and OUT against the unrestricted demand, then against a finite domain. Its lesson controls are enabled and it starts at cell 5. The box sketch below needs declared labels, nodes and event connections; it does not construct an unrestricted Russell set.
+
 **Learning elements — proposed focus**
 
 *The labels below set the revision focus; the existing lesson still needs alignment.*
@@ -9,7 +11,7 @@
 - Self reference
 - Restricted construction
 
-The set of all sets that don't contain themselves. Build two boxes and the third box that breaks both.
+Inspect a finite membership filter, then distinguish it from the unrestricted demand tested by the installed workbench.
 
 Declare a set container.
 
@@ -23,7 +25,7 @@ func contains_self() -> bool:
     return members.has(label)
 ```
 
-A box holds named members. `contains_self` checks whether the box's own label is in its own member list. Recursion as a property.
+A box holds named members. `contains_self` checks whether the box's own label is in its own member list. A self-label in data is not a recursive function call.
 
 Populate two example boxes.
 
@@ -35,7 +37,7 @@ func populate() -> void:
 
 The even-number box does not contain itself. The box-of-boxes does. Two clean examples before the paradox.
 
-Build Russell's set.
+Filter a supplied finite collection.
 
 ```gdscript
 func collect_non_self_containing(all_sets: Array[SetBox]) -> Array[String]:
@@ -46,9 +48,9 @@ func collect_non_self_containing(all_sets: Array[SetBox]) -> Array[String]:
     return out
 ```
 
-The filter returns all boxes that do not contain themselves. This list is the rule for the third box.
+The filter returns labels from the supplied all_sets array at that moment. Its finite domain and the time of evaluation matter.
 
-Create the paradox box.
+Store the snapshot in another box.
 
 ```gdscript
 func build_russell_box(all_sets: Array[SetBox]) -> void:
@@ -56,7 +58,7 @@ func build_russell_box(all_sets: Array[SetBox]) -> void:
     russell.label = "russell"
 ```
 
-Russell's box collects every non-self-containing box. Then ask whether it belongs to itself.
+The result contains labels selected from the supplied domain. Storing it does not make it satisfy unrestricted comprehension or update it when its inputs change.
 
 Check membership.
 
@@ -69,7 +71,7 @@ func russell_paradox() -> String:
         return "russell is not in russell → russell MUST contain itself"
 ```
 
-Either answer produces the opposite requirement. The function returns the two halves of the paradox as a sentence.
+These strings state the two consequences of the unrestricted demand. They do not prove that the finite snapshot just constructed satisfies that demand.
 
 Render the paradox as a spinning box.
 
@@ -80,7 +82,7 @@ func _process(dt: float) -> void:
     russell_mesh.scale = Vector3.ONE * (1.0 + 0.1 * t)
 ```
 
-The box pulses because it cannot resolve. Its geometry is a visual restlessness.
+The box pulses because _process changes its scale with a sine. The animation illustrates restlessness; no logical contradiction forces it to move.
 
 Alarm when the learner opens the box.
 
@@ -91,7 +93,7 @@ func _on_russell_opened() -> void:
     readout.text = russell_paradox()
 ```
 
-The alarm is not playful. Naive set theory is broken at the foundation. The readout says so in full.
+This proposed opening handler triggers an alarm and a text display. The membership argument, not the alarm, identifies the inconsistent unrestricted assumption.
 
 You have met the first genuine contradiction. The next map, Gödel Incompleteness, encodes logic in numbers and finds the limit even careful systems share.
 <<</MAP>>>
@@ -109,7 +111,7 @@ russell: %d" % [
     ]
 ```
 
-The counts let the learner compare sizes at a glance. Russell's count shifts whenever a non-self-containing set is added elsewhere in the room.
+The counts report stored array lengths when this function is called. No automatic recollection or change listener is supplied here.
 
 Disable inference when Russell is opened.
 
@@ -119,7 +121,7 @@ func disable_inference() -> void:
     inference_lamp.light_energy = 0.0
 ```
 
-Classical inference halts. The lamp darkens. The room makes the failure of the system visible.
+This disables a proposed node named classical_engine. No inference engine is defined here; switching a property is not a logical derivation.
 
 Offer a restart.
 
@@ -130,4 +132,4 @@ func _on_reset_pressed() -> void:
     classical_engine.enabled = true
 ```
 
-Reset clears the paradox and re-enables inference. The learner can rebuild from scratch. The sequence continues.
+Reset clears the stored array and changes two supplied-node properties. It does not repair the unrestricted definition. The replacement lesson must test both Boolean assumptions and then show what restricting the domain changes.

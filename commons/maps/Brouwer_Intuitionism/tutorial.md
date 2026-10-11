@@ -1,5 +1,7 @@
 # Brouwer Intuitionism
 
+**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed choice bench appends a 0 or 1 only when you press a button; the diagonal workbench constructs a string differing from every displayed row. These are the reconstruction targets. The checklist and physical proof-block bench below are an earlier proposal, not the current room or a proof checker.
+
 **Learning elements — proposed focus**
 
 *The labels below set the revision focus; the existing lesson still needs alignment.*
@@ -8,7 +10,7 @@
 - Witnesses
 - Open continuations
 
-No existence without construction. Build a room where claims are only valid if the learner assembles them step by step.
+Inspect this older checklist proposal alongside the installed finite-prefix and diagonal studies. A recorded action and a mathematical proof require different validation.
 
 Declare an intuitionistic proposition.
 
@@ -21,7 +23,7 @@ extends Resource
 @export var steps: Array[String] = []
 ```
 
-A proposition has a name and a record of construction. It is not true until `constructed` flips. Proof is assembly, not assertion.
+This resource records a name, a Boolean and strings. Flipping constructed records a program state; it does not make a proposition true or prove it.
 
 Instantiate a construction bench.
 
@@ -42,7 +44,7 @@ func add_step(prop: Proposition, step: String) -> void:
     bench.display(prop)
 ```
 
-Each step is a text operation the learner performs. The display updates so the learner sees the proof growing in front of them.
+This appends a string to a checklist. No inference rule is checked.
 
 Validate the construction.
 
@@ -55,9 +57,9 @@ func validate(prop: Proposition) -> bool:
     return true
 ```
 
-Required steps are listed per proposition. Missing any means the proposition stays unconstructed. No proof by absence.
+The missing required_steps_for helper would supply a checklist. Testing string membership does not check order, dependencies or logical validity.
 
-Reject law of excluded middle.
+Report the stored construction status.
 
 ```gdscript
 func attempt_lem(prop: Proposition) -> String:
@@ -66,7 +68,7 @@ func attempt_lem(prop: Proposition) -> String:
     return "not yet constructed"
 ```
 
-Classical logic returns either "true" or "false" for every proposition. Brouwer's room returns "not yet constructed" instead of "false". The third option is the whole point.
+Not yet constructed is a status message, not a third truth value. Classical logic does not provide an algorithm deciding every proposition. This function implements neither classical nor intuitionistic logic.
 
 Light the proposition when constructed.
 
@@ -89,7 +91,7 @@ func present_blocks(panel: Node3D) -> void:
         panel.add_child(block)
 ```
 
-Blocks are physical. The learner assembles proofs by moving blocks onto the bench. Construction is a bodily act.
+This proposes instancing block scenes; it supplies no pickup, assembly or proof-validation behaviour. The installed hall instead lets the visitor choose bits and inspect a diagonal witness.
 
 Refuse to finalize without all steps.
 
@@ -103,7 +105,7 @@ func _on_finalize_pressed(prop: Proposition) -> void:
 
 Finalization either locks the proof or lists the missing steps. Errors are named, not silent. The rule is that claims require construction.
 
-You have built without proving by contradiction. The next map, Florensky Paraconsistent, accepts contradictions without collapse.
+Intuitionistic logic still uses contradiction to establish negations; double-negation elimination is unavailable in general. Florensky Paraconsistent next distinguishes conflicting reports from the consequences they license.
 <<</MAP>>>
 
 Count constructed propositions on a tally.
@@ -116,4 +118,4 @@ func update_tally(label: Label3D) -> void:
     label.text = "%d / %d constructed" % [built, propositions.size()]
 ```
 
-The tally rises only when propositions are actually built. Claims without construction do not count. The tally is a running honesty check.
+The tally counts true constructed flags. Its reliability depends on validation that this sketch has not supplied.

@@ -1,5 +1,7 @@
 # Euclid Parallel
 
+**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed hall uses one postulates plaque with lesson controls, parallel lines and a triangle comparison. Reconstruct a declaration and a separately measured example; the five-plinth layout and timed door below are an earlier proposal.
+
 **Learning elements — proposed focus**
 
 *The labels below set the revision focus; the existing lesson still needs alignment.*
@@ -8,7 +10,7 @@
 - Constructed examples
 - Measurement and proof
 
-Five postulates. The first four feel inevitable. Build a room that exposes the fifth as a choice.
+Inspect this earlier display sketch. A postulate rendered as text is a declaration; a constructed example needs a separate measurement.
 
 Declare the five postulates as data.
 
@@ -50,7 +52,7 @@ func emphasize_fifth(plinth: Node3D) -> void:
 
 Gold tint and a slightly larger scale. The fifth is set apart before any argument is made. The architecture performs the claim.
 
-Animate parallel lines that actually stay parallel.
+Draw five static parallel segments.
 
 ```gdscript
 func draw_parallels(mesh: ImmediateMesh) -> void:
@@ -77,7 +79,7 @@ func toggle_fifth() -> void:
         chaos_preview.visible = true
 ```
 
-Turn the fifth off and a second preview appears. Lines that should stay parallel begin to diverge. The postulate was doing work; without it, the picture fractures.
+This function switches preview visibility. It supplies no alternative metric or line construction, so it cannot demonstrate the independence of a postulate. The active branch also leaves the other preview’s visibility unchanged.
 
 Record the 2300-year history on a scroll.
 
@@ -86,7 +88,7 @@ func populate_history(scroll: Label3D) -> void:
     scroll.text = "300 BCE Euclid\n1733 Saccheri\n1829 Lobachevsky\n1832 Bolyai\n1854 Riemann"
 ```
 
-Five names across two millennia. Every one tried to prove the fifth from the first four. Every one failed — because it is independent.
+These names belong to different contributions to geometry; the list does not establish that they all attempted the same proof.
 
 Open the door once the learner reads the scroll.
 
@@ -96,7 +98,7 @@ func _on_scroll_read(duration_ms: int) -> void:
         door.unlock()
 ```
 
-The door waits until the scroll has been dwelt with. Reading is the action, not clicking.
+This proposed handler needs a reading event and a door object. Neither is supplied here or promised by the installed hall.
 
-You have seen geometry as a list of choices. The next map, NonEuclidean Spaces, turns the fifth postulate off and walks what remains.
+Next, NonEuclidean Spaces compares explicit distance models. Hiding a preview does not change the geometry of the museum.
 <<</MAP>>>

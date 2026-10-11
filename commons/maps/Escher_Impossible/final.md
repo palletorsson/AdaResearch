@@ -38,7 +38,7 @@ Press again for **OPEN RUN**. The fourth side disappears. Follow the light to th
 
 The last form, **TILTED TREADS**, puts the centres at one height and tips the individual treads. Look along their edges. A tread can rise while the next one begins lower. The centre readout stays level: it does not measure the climb along each tilted surface. Even this small instrument has a question it can answer and a question it leaves to the eye.
 
-Cycle back. Five arrangements, five ways of handling the desire to keep going up. Which one first persuaded you that it might?
+Cycle back. In a closed route the measured gains must be returned; the model can relocate that return, but cannot remove it. OPEN RUN and SCAFFOLD leave the route unfinished. TILTED TREADS changes what the eye follows while the measured centres stay level. Five arrangements, five ways of handling the desire to keep going up. Which one first persuaded you that it might?
 
 ## Where you have to stand
 
@@ -64,7 +64,7 @@ Two becoming three is not, by itself, impossible. We have already grown branches
 
 <!-- @magritte_pipe -->
 
-The pipe has been waiting beside the first experiment: *Ceci n'est pas une pipe.* A mesh, a frame, a sentence. You recognised a pipe before asking what you could do with it.
+The pipe has been waiting beside the first experiment: *Ceci n'est pas une pipe.* A mesh, a frame, a sentence. You recognised a pipe before asking what you could do with it. The engine can render this object consistently without fulfilling everything its image promises. A representation needs another kind of evidence before it can answer for the thing represented.
 
 Recognition is generous. It supplies stairs we want to climb and connections we expect to continue. This hall asks us to keep that generosity while also approaching, counting, changing position. The pleasure of the impossible image survives finding how a particular model was made.
 

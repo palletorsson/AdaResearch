@@ -86,92 +86,128 @@
         "godel_badge"
 	  ],
 	  "artifact_groups": [
-		{
-		  "map": "Euclid_Parallel",
-		  "position": "intro",
-		  "artifacts": [
-			"parallel_lines",
-			"angle_sum_triangle",
-            "euclid_postulates_plaque"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Three compact geometry artifacts introduce Euclidean certainty with minimal density"
-		},
-		{
-		  "map": "NonEuclidean_Spaces",
-		  "position": "intro",
-		  "artifacts": [
-			"hyperbolic_surface",
-			"elliptic_surface",
-			"curvature_slider",
-			"poincare_disk",
-            "riemann_sphere"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Five artifacts across split dual landscape; surfaces are room_scale, slider and models compact"
-		},
-		{
-		  "map": "Russell_Paradox",
-		  "position": "foundation",
-		  "artifacts": [
-            "russell_set_box"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Single focused artifact at center of nested concentric structure embodies self-reference"
-		},
-		{
-		  "map": "Godel_Incompleteness",
-		  "position": "exploration",
-		  "artifacts": [
-            "godel_statement_plaque"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Single plaque artifact; the spatial layout of unreachable islands carries the concept"
-		},
-		{
-		  "map": "Brouwer_Intuitionism",
-		  "position": "exploration",
-		  "artifacts": [
-			"excluded_middle_demo",
-			"constructive_proof",
-            "brouwer_choice_sequence"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Three compact artifacts on stepping-stone platforms; fragmented layout enacts constructivism"
-		},
-		{
-		  "map": "Florensky_Paraconsistent",
-		  "position": "integration",
-		  "artifacts": [
-			"florensky_sphere",
-			"schrodinger_box",
-            "superposition_display"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Three artifacts across overlapping diamonds; sphere is room_scale centerpiece, others compact"
-		},
-		{
-		  "map": "Crisis_Synthesis",
-		  "position": "synthesis",
-		  "artifacts": [
-			"qfep_formula_3d",
-			"lambda_slider",
-			"phi_slider",
-			"bifurcation_diagram",
-			"goedel_atrium",
-			"russell_paradox_workbench",
-			"godel_statement_plaque",
-			"russell_set_box",
-			"escher_staircase",
-			"florensky_sphere",
-            "sentence_authority"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Level 19 by 24 gallery: local formula reading, independent logistic-map control, walk-in recursive atrium, Russell workbench and four retained comparisons.",
-		  "application_studies": {
-			"sentence_authority": "Change one sentence once; follow the same words across label, strip and wall."
-		  }
-		}
+	    {
+	      "map": "Euclid_Parallel",
+	      "position": "intro",
+	      "artifacts": [
+	        "science_screen",
+	        "euclid_postulates_plaque",
+	        "parallel_lines",
+	        "angle_sum_triangle"
+	      ],
+	      "size_budget": "compact_only",
+	      "rationale": "One postulates plaque has lesson_controls:on; the triangle and parallel-lines studies distinguish declarations from measurements. The screen is a grid display."
+	    },
+	    {
+	      "map": "NonEuclidean_Spaces",
+	      "position": "intro",
+	      "artifacts": [
+	        "film_curvature_triangle",
+	        "triangle_curvature_workbench",
+	        "curvature_slider",
+	        "elliptic_surface",
+	        "poincare_disk",
+	        "hyperbolic_surface",
+	        "riemann_sphere"
+	      ],
+	      "size_budget": "mixed",
+	      "rationale": "The triangle bench starts at PLANE and compares plane, sphere and disk using model-specific edge tangents. The separate slider only changes its own sketch; the saddle is not a constant-curvature hyperbolic metric."
+	    },
+	    {
+	      "map": "Russell_Paradox",
+	      "position": "foundation",
+	      "artifacts": [
+	        "euclid_postulates_plaque",
+	        "russell_paradox_workbench",
+	        "self_membership_set",
+	        "barber_paradox",
+	        "russell_set_box",
+	        "liar_loop",
+	        "hilbert_hotel"
+	      ],
+	      "size_budget": "compact_only",
+	      "rationale": "Seven placed artifacts replace the old single-box record. The workbench has membership_controls:on and initial_cell:5; IN/OUT tests lead to the restricted finite domain. The returning plaque keeps independence distinct from contradiction."
+	    },
+	    {
+	      "map": "Godel_Incompleteness",
+	      "position": "exploration",
+	      "artifacts": [
+	        "negative_control_fixture",
+	        "critic_regress_stack",
+	        "godel_sentence_machine",
+	        "rice_verifier_booth",
+	        "print_gallery_recursion",
+	        "synthesis_stand",
+	        "fluency_seam",
+	        "godel_statement_plaque",
+	        "provability_sorter",
+	        "incompleteness_tower"
+	      ],
+	      "size_budget": "compact_only",
+	      "rationale": "Ten placements include the sentence machine, verifier and regress comparisons, plaque, provability sorter and tower. The final distinguishes a bounded search from an unprovability theorem; the old island/plaque-only record is obsolete."
+	    },
+	    {
+	      "map": "Escher_Impossible",
+	      "position": "exploration",
+	      "size_budget": "mixed",
+	      "artifacts": [
+	        "magritte_pipe",
+	        "escher_staircase",
+	        "penrose_triangle",
+	        "impossible_trident"
+	      ],
+	      "rationale": "STEP reads tread-centre heights with lesson_controls:on. Closed routes balance ascent/descent; OPEN RUN and SCAFFOLD stop before closing; TILTED TREADS has level centres. The Penrose study tracks the viewer."
+	    },
+	    {
+	      "map": "Brouwer_Intuitionism",
+	      "position": "exploration",
+	      "artifacts": [
+	        "brouwer_choice_sequence",
+	        "intractable_evidence",
+	        "constructive_proof",
+	        "cantor_diagonal_workbench",
+	        "excluded_middle_demo",
+	        "angle_sum_triangle",
+	        "constructive_staircase",
+	        "parallel_lines"
+	      ],
+	      "size_budget": "compact_only",
+	      "rationale": "visitor_choices:on enables a finite 0/1 prefix; the diagonal bench constructs an inspectable finite witness. Timed stairs and supplied geometry remain comparisons, not hand-built proofs or general proof checkers."
+	    },
+	    {
+	      "map": "Florensky_Paraconsistent",
+	      "position": "integration",
+	      "artifacts": [
+	        "both_true_gate",
+	        "florensky_sphere",
+	        "superposition_display",
+	        "schrodinger_box"
+	      ],
+	      "size_budget": "mixed",
+	      "rationale": "The gate has report_controls:on; OPEN and CLOSED persist independently while Q has no support. The sphere has hold_both:on. The box uses a desktop-only random opening and the opacity display has no measurement operation."
+	    },
+	    {
+	      "map": "Crisis_Synthesis",
+	      "position": "synthesis",
+	      "artifacts": [
+	        "lambda_slider",
+	        "phi_slider",
+	        "qfep_formula_3d",
+	        "godel_statement_plaque",
+	        "bifurcation_diagram",
+	        "goedel_atrium",
+	        "russell_paradox_workbench",
+	        "russell_set_box",
+	        "escher_staircase",
+	        "florensky_sphere",
+	        "sentence_authority"
+	      ],
+	      "size_budget": "environment",
+	      "rationale": "Eleven placements include reading_study:on, dispute-calibrated lambda/phi rails, an independent visitor-controlled logistic r starting at 3.2, the recursive atrium and sentence-authority study. Brouwer’s bench is recalled from its hall; there is no placed constructive wing or four-visit summit gate.",
+	      "application_studies": {
+	        "sentence_authority": "Change one sentence once; follow the same words across label, strip and wall."
+	      }
+	    }
 	  ]
 	}
   },

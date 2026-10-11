@@ -41,7 +41,7 @@ That limit belongs to the drawing. Rendering a thousand more boxes would not set
 
 The nested braces nearby ask another question. Does drawing a set inside a set show a set belonging to *itself*? The second brace could enclose a different set. The picture alone cannot decide.
 
-In standard ZF with Foundation, no set belongs to itself. Other choices of axioms require their own examination. “Self-reference is bad” would teach us too little: a program can name itself without collapsing, and a recursive call can have a perfectly good stopping condition. We need to find the particular demand that cannot be met.
+In standard ZF with Foundation, no set belongs to itself. Other choices of axioms require their own examination. “Self-reference is bad” would teach us too little: a program can name itself without collapsing, and a recursive call can have a perfectly good stopping condition. We need to find the particular demand that cannot be met: unrestricted comprehension asks for a set whose self-membership holds exactly when it does not. Neither naming oneself nor using negation alone imposes that demand.
 
 ## A barber, a lamp, a guest
 
@@ -67,7 +67,7 @@ Keep this surprise close to the contradiction. An offended expectation is not ye
 
 <!-- @euclid_postulates_plaque -->
 
-The returning postulates plaque keeps the earlier question in view. Changing the parallel postulate led to other geometries. Russell asks us to withdraw a different permission: we cannot assume that every description calls a set into being. We can still state the question. Indeed, stating it carefully is how we learn why the unrestricted set cannot exist.
+The returning postulates plaque keeps the earlier question in view. Changing the parallel postulate led to other geometries. Independence from the remaining geometric assumptions left a choice of models; the unrestricted Russell demand gives a contradiction. Russell asks us to withdraw a different permission: we cannot assume that every description calls a set into being. We can still state the question. Indeed, stating it carefully is how we learn why the unrestricted set cannot exist.
 
 <!-- @ -->
 

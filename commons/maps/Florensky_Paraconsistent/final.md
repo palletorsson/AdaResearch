@@ -67,7 +67,7 @@ Keep the resemblance. Investigate what it leaves out. We have been learning to d
 
 ## Continue without settling everything
 
-Brouwer's hall asked what you could construct and what counted as a witness. This hall asks what follows when the available claims conflict. One question does not answer the other.
+Brouwer's hall asked what you could construct and what counted as a witness. This hall asks what follows when the available claims conflict. One tightens what warrants an assertion; the other limits what incompatible premises license us to conclude. They change different demands, and one response does not supply the other.
 
 At the exit, the reports may still disagree. Your movement has not resolved them. It has exposed another rule: the decision that lets you pass while the disagreement remains.
 

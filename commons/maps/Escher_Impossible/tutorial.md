@@ -1,5 +1,7 @@
 # Escher Impossible
 
+**Revision status — legacy code sketch.** The fragments below are retained for inspection, not supplied as a complete runnable lesson. Required scene objects and helpers are missing. They have not passed the ghost-student reconstruction test. The installed STEP control measures changes between tread centres. FORM compares RETURN SIDE, CLOSING DROP, OPEN RUN, SCAFFOLD and TILTED TREADS. Reconstruct that measurement and its closed-route check. The fragments below omit the corners array and scene setup and do not build an impossible staircase.
+
 **Learning elements — proposed focus**
 
 *The labels below set the revision focus; the existing lesson still needs alignment.*
@@ -8,7 +10,7 @@
 - Projection
 - Local and global claims
 
-Local truth, global impossibility. Build a staircase where every step is correct and the whole cannot exist.
+Inspect a finite list of heights. Predict the return difference before adding the closing edge.
 
 Declare the staircase graph.
 
@@ -21,7 +23,7 @@ const SIDES := [Vector3.FORWARD, Vector3.RIGHT, Vector3.BACK, Vector3.LEFT]
 @export var rise_per_side: float = 1.0
 ```
 
-Four sides, each rising by the same amount. The graph is a perimeter loop with monotonic height. Locally consistent by construction.
+SIDES declares four directions, but build_corners below uses only their count. It does not use those directions to make a perimeter.
 
 Place the corners.
 
@@ -36,7 +38,7 @@ func build_corners() -> void:
         add_child(corner)
 ```
 
-Four corners, each raised by rise_per_side above the previous. Every edge feels like a normal staircase.
+The function places four boxes in a row with three rises between their centres. It does not populate the corners array required by the later fragments.
 
 Connect the last corner back to the first.
 
@@ -52,7 +54,7 @@ func close_loop() -> void:
     loop_mesh.mesh = line
 ```
 
-The edge from the last corner back to the first is the impossibility. Height has risen four times; the return edge must descend all four rises in one step or the loop does not close.
+If those four centres are stored, the closing edge descends three rises. That is a possible segment, and exactly the height needed to close the route.
 
 Hide the return seam.
 
@@ -62,7 +64,7 @@ func camouflage_seam(segment: MeshInstance3D, cam: Camera3D) -> void:
     segment.visible = abs(to_cam.dot(Vector3.UP)) < 0.2
 ```
 
-The seam only disappears from one viewing angle. The illusion depends on perspective. Move your head and the trick shows.
+The dot-product threshold hides a segment over a range of viewing directions. This is an explicit visibility switch, not the installed perspective study.
 
 Simulate a creature walking the loop.
 
@@ -73,7 +75,7 @@ func step_creature(creature: Node3D, t: float) -> void:
     creature.position = corners[idx].position.lerp(corners[next_idx].position, fmod(t, 1.0))
 ```
 
-The creature walks forever. Each step is valid locally. The loop never ends because height climbs every leg.
+With a populated corners array and advancing t, interpolation traverses each edge and wraps to the first point. The closing leg descends.
 
 Label each edge as locally valid.
 
@@ -83,7 +85,7 @@ func label_edge(label: Label3D, from: Vector3, to: Vector3) -> void:
     label.position = (from + to) * 0.5 + Vector3.UP * 0.5
 ```
 
-Each edge reports its height change. All four read positive. The contradiction is global only; no edge is lying.
+For the four centres above and a positive rise, three differences are positive and the closing difference is negative. Their signs expose the return directly.
 
 Show the global sum.
 
@@ -97,7 +99,7 @@ func show_global_sum(label: Label3D) -> void:
     label.text = "loop Δh = %+0.2f" % total
 ```
 
-The sum around the loop must be zero for the staircase to close. The plaque shows it is not. Gödel's result, rendered as a floor plan.
+The cyclic differences telescope to zero, up to floating-point rounding: each height is added once and subtracted once. This is the check to assert in the replacement lesson. It is not an incompleteness result.
 
-You have walked a local truth with a global impossibility. The next map, Brouwer Intuitionism, responds by restricting logic to what can be built.
+The current exhibit moves a marker while the player stays on the museum floor. Brouwer Intuitionism next asks what a construction can witness.
 <<</MAP>>>

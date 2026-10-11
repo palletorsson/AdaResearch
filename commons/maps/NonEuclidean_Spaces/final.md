@@ -16,6 +16,8 @@ In the previous room, bowing an edge changed a picture. Here each model specifie
 
 The curved arc in the disk is not a detour through its geometry. It is the direct route. Your eye is looking from the surrounding Euclidean room, using a different account of distance.
 
+Return to the last hall's question about parallels. In the Euclidean plane, one line through a point off a given line avoids meeting it. On the sphere, any two distinct great circles meet twice, at antipodal points. In the hyperbolic disk, more than one geodesic through a point off a given geodesic can avoid meeting it. These are consequences of the respective models; the triangle bench does not itself perform all three parallel tests. Each model supplies its own account of straightness.
+
 There are three settings, not a continuous dial for the curvature of the whole museum. Each rebuilds its own example triangle. We are comparing hosts; we have not carried an unchanged triangle between them.
 
 ```gdscript
