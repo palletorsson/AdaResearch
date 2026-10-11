@@ -22,7 +22,7 @@ Make a recognisably asymmetric mark at the mirror station. A mark away from the 
 
 The simple repetition keeps the tile's orientation. The mirror rule reverses selected copies along its directions. The source motif and the transformation applied to its copies do different work: changing either can change the field.
 
-Now try to make the mark appear only once while the rest of the field stays unchanged. Editing the shared source makes it recur. The instrument makes it easier to change every appearance than to keep just one different. A single stored cell holds all these places together.
+Now try to make the mark appear only once while the rest of the field stays unchanged. Editing the shared source makes it recur. One choice is stored for all its appearances, so choosing another colour cannot create an exception.
 
 <!-- @pattern_machine_a -->
 

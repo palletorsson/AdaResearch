@@ -10,7 +10,7 @@ The two grids near the entrance begin this study. The bars, shelves and sorting 
 
 These cubes have bodies, but their addresses use only two indices: a row and a column. Giving a cell a visible thickness has not added a third index to its data. The room has made a two-dimensional arrangement out of three-dimensional objects.
 
-At the console, press **X +** and **Z +**. Follow the turquoise frames. One frame selects a cell in the volume. The other shows the source cell from which it takes its colour. The displayed order is `SOURCE [z][x]` and `VOLUME [y][z][x]`; the same coordinates are placed in the room as `Vector3(x, y, z)`. We have to choose an order for storage as well as directions for space.
+At the console, press **X +** and **Z +**. Follow the turquoise frames. One frame selects a cell in the volume. The other shows the source cell from which it takes its colour. The displayed order is `SOURCE [z][x]` and `VOLUME [y][z][x]`; the same coordinates are placed in the room as `Vector3(x, y, z)`. The order used to store an address is a convention; it does not rearrange the directions in space.
 
 <!-- @grid_3d_4x4x4 -->
 

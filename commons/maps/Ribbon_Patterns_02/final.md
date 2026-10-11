@@ -26,7 +26,7 @@ The two targets and the connector are assigned `Color(0.5, 0.5, 0.5)`. This comp
 
 At the other station, the familiar bent mark covers a plane and a curved wall. Find its blue corner on both. The plane is four metres wide; the half-cylinder is four metres along its arc. Each begins with four horizontal repeats and two vertical repeats. Walk a little sideways. Equal distances along the surfaces need not occupy equal widths in your view.
 
-Press **GRID** to mark the repeat boundaries. Follow one around the curve. Its width along the surface stays fixed while its visible width changes with your position. The two ends of this half-cylinder are edges, not a welded seam; this station has not tested a pattern closing around an entire body.
+Press **GRID** to mark the repeat boundaries. Follow one around the curve. Its width along the surface stays fixed while its visible width changes with your position. The half-cylinder ends at two open edges. It shows how a pattern bends, without testing whether its ends would meet around a whole body.
 
 Turn the grid off and press **FLAT / SHADED**. Keep watching one pale part of the mark. Now press **LIGHT SIDE**. Where does it darken? Compare the plane with the curve before reading the explanation.
 

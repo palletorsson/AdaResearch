@@ -22,7 +22,7 @@ For the square-cell patterns, `value_at` returns zero or one for the address `x,
 
 In the earlier palette grid, you could leave one square changed. Here one choice reaches every square carrying the same value. The four pairs are prepared for us, including black and white. We can choose among them, but this console does not let us give a single square a colour of its own. The reach of a choice belongs to the way the tool has been made.
 
-Leave the palette alone and change PATTERN. ROWS, DIAGONALS and SNAKE return from the earlier floor. A new pattern begins at step zero. COLOUR keeps the current step; SPEED changes how long a step takes. Try following one band through a slower and a faster passage.
+Leave the palette alone and change PATTERN. ROWS, DIAGONALS and SNAKE return from the earlier floor. COLOUR preserves the current phase. PATTERN starts its new arrangement at phase zero. SPEED changes how long a step takes. Try following one band through a slower and a faster passage.
 
 After SNAKE comes SUPER TRIANGLE. The two colours can now meet inside a square. Hold it during a turn, when the diagonals have not yet settled into chevrons or diamonds. Change COLOUR there. The unfinished turn stays unfinished. Does the same edge still draw your attention?
 
@@ -38,7 +38,7 @@ Return to black and white while it runs. The paired values are familiar again. N
 
 Bring in one repeating note, then another. Watch a chosen column brighten briefly when a sounding step reaches it. Hold the floor's pattern and listen: the notes continue, and their flashes can still appear. Stop the sequencer too when you want both instruments to settle.
 
-The score has its own clock; the moving pattern has another. Matching their tempos does not guarantee that they reach their beginnings together. Let them run for a while. Look away from the floor and keep moving. When you look back, where do you find the beat?
+The score has its own clock; the moving pattern has another. Even at the same tempo, they can reach their beginnings at different moments. Let them run for a while. Look away from the floor and keep moving. When you look back, where do you find the beat?
 
 Your footsteps are not written into the score. You can move with a pulse, miss it, or keep another rhythm across it. The room can repeat its invitation without knowing what you make of it.
 

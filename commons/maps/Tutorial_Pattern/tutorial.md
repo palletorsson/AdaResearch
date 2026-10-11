@@ -17,6 +17,8 @@ Begin at the Pattern Maker in the side bay. Find the red bend in the sixteen sou
 
 Make the floor-rule comparison and the source reflection visible before explaining either address operation. The shader splits a position into a tile index and a local address. Translation keeps that address. This reflection rule reverses x on alternate columns. The source-reflection button instead rebuilds each source row in reverse order. The technical chapter contains the corresponding implementation excerpts.
 
+The installed floor's shader uses nearest filtering: it selects one source cell's colour without blending neighbouring cells. This is a choice in the supplied display, separate from the reflection rule.
+
 Each displayed tile spans 40 cm, whether on a panel or the floor. A reflected pair spans two tile columns. Make a source symmetrical enough to conceal a reversal, then break its symmetry with one mark and compare again.
 
 Array_Patterns next asks how these repeated relations meet an environment. Headset and continuous gesture work remain deferred; these controls also accept the desktop pointer.
