@@ -2,7 +2,7 @@
 
 <!-- @parametric_lsystem -->
 
-A short upright line, a pale point at its tip. Beside it, a second reading waits. We have brought the turtle out of Grammar Lab. There, we changed the angle of a sentence. Here we can follow what the turtle carries from one instruction to the next.
+A short upright line, a pale point at its tip. Beside it, a second reading waits. We have brought the turtle out of Grammar Lab. There, we changed the angle of a sentence. Here we follow what it carries from one instruction to the next.
 
 The sentence is already written:
 
@@ -10,54 +10,30 @@ The sentence is already written:
 F[+F]F[-F]F
 ```
 
-This tree's rule replaced one F with those eleven symbols. It is the first of a small family printed in Prusinkiewicz and Lindenmayer’s *The Algorithmic Beauty of Plants*; Competition’s rule and the readers in the hall after next come from the same page.[^abop] Its first F has drawn a line 0.8 metres long. The pale point marks the turtle's current position. What must it keep if it is to leave the trunk, make a branch, and find its way back?
+Its rule comes from a small family in Prusinkiewicz and Lindenmayer’s *The Algorithmic Beauty of Plants*.[^abop] The first F has drawn a line. What must the turtle keep if it is to leave the trunk, make a branch, and find its way back?
 
-Press STEP once. Nothing extends. The next symbol is `[`. The readout says SAVE; the stack count becomes one. The next length has changed from 0.800 to 0.576 metres, although the point has not moved. An operation has taken place without adding anything to the outline.
+The dark sphere is our handle; the pale point records where the drawing has arrived. Step to the opening bracket. Nothing extends. The readout says SAVE. A state has been kept, and the next stride has shortened, although the point has not moved. An operation has taken place without adding anything to the outline. STEP reveals a reading already recorded by the interpreter; it does not pause the calculation between presses.
 
-STEP again: `+` changes the direction. Another STEP reaches F, and the shorter branch appears. HOLD this reading. The held drawing keeps its pale point at the new tip.
+Continue through the turn and the shorter branch. Hold this reading before its closing bracket. The witness keeps its pale point at the branch end.
 
-Now comes `]`. Where will the live point go?
+Where will the live point go?
 
-It returns to the fork. The branch remains drawn, with no return line joining its tip to the fork. Next length is 0.800 again. Press STEP: the trunk continues upward from the saved position. The branch's turn and shorter stride have not become the trunk's next instructions.
+It returns to the fork. The branch remains, with no return line joining its tip to the trunk. The next F continues upward from the saved place. The branch's turn and shorter stride have not become the trunk's next instructions. F still means draw forward; the distance it travels depends on the state in which the turtle reads it.
 
-The turtle carries a state: position, orientation, length, angle and branching depth. At `[`, the interpreter puts a copy on a stack. A stack returns the most recently saved record first. One branch may contain another; the inner branch must finish before we return from the outer one. This nesting gives a small program a way to remember several departures without confusing their returns.
+A branch may contain another branch. The most recent departure must be recovered first. Position returns with direction and stride; restoring only the place would leave the turtle facing somewhere else. What it can recover depends on what was saved.
 
-After saving, the source changes two values for the branch:
+A return can preserve what happened during a departure while allowing something else to continue. The drawing does not have to erase its branch to resume its trunk.
 
-```gdscript
-current_length *= length_decay
-current_angle *= 0.95
-```
+Keep a complete reading, then change the branch ratio. At one, a branch takes the same stride as its parent. Above one, it becomes longer. The sentence and turns stay fixed, and both drawings use metres. Neither is squeezed to fit its plinth.
 
-The first line means: take the length we have and multiply it by the ratio. Here, 0.8 × 0.72 gives 0.576 metres. The second changes forty degrees to thirty-eight. F still means draw forward, but how far forward now depends on the state in which the turtle reads it.
+The code calls the value length_decay. Its name suggested shortening. The multiplication permits something else. Which proportion made this drawing look like a proper tree to us?
 
-At `]`, this excerpt from `parametric_lsystem.gd` retrieves the saved record:
+Read another generation. The unshortened trunk reaches above us; a branch within a branch applies the ratio again. The earlier drawing stays beside it. We can follow the local decision and still be surprised by the room it begins to occupy.
 
-```gdscript
-var state: Dictionary = stack.pop_back()
-pos = state["pos"]
-dir = state["dir"]
-right = state["right"]
-up = state["up"]
-depth = state["depth"]
-current_length = state["length"]
-current_angle = state["angle"]
-```
-
-Position returns, the orientation axes return, and the previous length becomes available again. None of these assignments removes a segment already drawn. A return can preserve what happened during a departure while allowing something else to continue.
-
-Keep stepping until all eleven symbols have been read. Five segments, two side branches, a stack empty again. HOLD the complete reading. Then press RATIO once: 0.72 becomes 1.00. Follow a side branch against its held counterpart. It now takes the same 0.8-metre stride as the trunk. The sentence and turning directions have stayed the same. Both drawings use metres; neither is squeezed to fit its plinth.
-
-Press RATIO again. At 1.15, the branch is longer than the segment from which it departs: 0.92 metres. The code calls this value `length_decay`. Its name suggested shortening. The multiplication also permits something else. Which proportion made this drawing look like a proper tree to us?
-
-TREE shows two complete rewriting generations. There are now sixty-one symbols and twenty-five drawn segments. The unshortened trunk reaches 7.2 metres above its starting point. Within a branch inside another branch, the length factor is applied twice: 0.8 × 1.15 × 1.15 = 1.058 metres. The pink first generation remains beside it until we choose to hold another reading. We can follow a local rule and still be surprised by the room it begins to occupy.
-
-STEP reveals a recorded trace of the interpreter; it does not make the computer wait between its calculations. TREE requests another sentence. These are two different ways of looking into a process that would otherwise arrive as a finished drawing. RESET brings back the first line when we want to follow it again.
-
-The stack offers a dependable return, but only for the state its programmer chose to save. It contains no sunlight, weight or account of a neighbouring body. The thin branches have no collision surfaces. Their resemblance to a tree leaves those further requirements open. What would we have to add before this branching could support, shelter or obstruct us?
+The stack offers a dependable return for the state its programmer chose to save. It contains no sunlight, weight or account of a neighbouring body. These branches have no collision surfaces. Resemblance has brought us to the idea of a tree; support, shelter and obstruction would ask for further work.
 
 <!-- @ -->
 
-The animated tree, the obstacle-querying tree, the earlier L-system tree and the cypress remain beyond the desk. They approach growth through other operations. Carry this distinction forward: a sentence supplies instructions; an interpreter decides what they do. In the next hall, even forward may be read sideways.
+The animated tree, obstacle-querying tree, earlier L-system tree and cypress remain beyond the desk. They approach growth through other operations. A sentence supplies instructions; an interpreter decides what they do. Carry the saved state forward. In the next hall, even forward may be read sideways.
 
 [^abop]: Przemyslaw Prusinkiewicz and Aristid Lindenmayer, *The Algorithmic Beauty of Plants* (Springer, 1990), figure 1.24: F[+F]F[−F]F is its (a), Competition’s F[+F]F[−F][F] its (b), and the believing turtle’s FF+[+F−F−F]−[−F+F+F] and Grammar Lab’s PLANT preset are its (c) and (f) with the turns mirrored.
