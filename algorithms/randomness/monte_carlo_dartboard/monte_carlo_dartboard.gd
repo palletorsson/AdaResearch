@@ -21,6 +21,11 @@ class_name MonteCarloDartboard
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+const SampleRun = preload("res://algorithms/randomness/monte_carlo_dartboard/sample_run.gd")
+var sample_budget: bool = false
+var sample_run: RefCounted
+var sample_console: Node3D
+var _budget_paint_from: int = 0
 
 # ─────────────────────────────────────────────────────────────────────────────
 # DNA PROMOTION (2026-08-02) — disclosure
@@ -204,6 +209,8 @@ var _readout_width: float = _READOUT_WIDTH
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	if str(get_meta("config_lesson", "")) == "sample_budget":
+		_configure_sample_budget()
 	# APPENDED FIRST and draws nothing: _setup_seeded_stream() only constructs (or
 	# clears) a generator. The first sample is taken in _preseed() at the bottom of
 	# this list, so no draw above or below this line shifts on the default path.
@@ -223,12 +230,15 @@ func _build_all() -> void:
 	_create_vr_controls()
 	_create_cabinet()
 	_preseed()
+	if is_instance_valid(sample_console): sample_console.refresh()
 
 
 ## Builds the local generator, or leaves it null. Null is the default and the
 ## room behaviour: _unit_draw() falls straight through to the global randf() this
 ## file has always used.
 func _setup_seeded_stream() -> void:
+	if sample_budget:
+		sample_run = SampleRun.new(dart_seed)
 	if dart_seed < 0:
 		_rng = null
 		return
@@ -435,13 +445,20 @@ func _throw_dart() -> void:
 	# Random point in unit square [0,1] × [0,1], mapped to board.
 	# _unit_draw() IS randf() whenever dart_seed is -1, which is every shipped
 	# room: same two calls, same order, same count.
-	var rx := _unit_draw()
-	var ry := _unit_draw()
+	var point: Vector2
+	var rx: float
+	var ry: float
+	if sample_budget:
+		point = sample_run.next_sample()
+		rx = point.x; ry = point.y
+	else:
+		rx = _unit_draw(); ry = _unit_draw()
 
 	# Check if inside inscribed circle (center 0.5, 0.5, radius 0.5)
 	var dx := rx - 0.5
 	var dy := ry - 0.5
 	var inside := (dx * dx + dy * dy) <= 0.25  # radius^2 = 0.25
+	if sample_budget: inside = SampleRun.in_circle(point)
 
 	_total_count += 1
 	if inside:
@@ -450,6 +467,8 @@ func _throw_dart() -> void:
 	_last_rx = rx
 	_last_ry = ry
 	_last_inside = inside
+	# Budget fills retain all data but only construct the newest visible markers.
+	if sample_budget and _total_count < _budget_paint_from: return
 
 	# THE MARKS. At `oracle` the machine throws, judges and counts exactly as
 	# always and simply does not paint the evidence: no marker is built, the
@@ -1009,12 +1028,19 @@ func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Materia
 
 
 func _create_vr_controls() -> void:
+	if sample_budget:
+		sample_console = load("res://algorithms/randomness/monte_carlo_dartboard/sample_console.gd").new()
+		sample_console.host = self
+		sample_console.position = Vector3(0,0,1.0)
+		add_child(sample_console)
+		return
+	var button_shape: String = str(get_meta("config_button_shape", "round"))
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
 	var panel: Node3D = RackTpl.create_panel("", [
 		[
-			{"type": "button", "label": "THROW"},
-			{"type": "button", "label": "AUTO"},
-			{"type": "button", "label": "RESET"},
+			{"type": "button", "shape": button_shape, "label": "THROW"},
+			{"type": "button", "shape": button_shape, "label": "AUTO"},
+			{"type": "button", "shape": button_shape, "label": "RESET"},
 		],
 	])
 	# seated on the service column's wedge (all-in-one cabinet)
@@ -1046,6 +1072,7 @@ func _create_vr_controls() -> void:
 
 
 func _reset() -> void:
+	if sample_budget: sample_run.reset(dart_seed)
 	_inside_count = 0
 	_total_count = 0
 	_throw_timer = 0.0
@@ -1058,6 +1085,28 @@ func _reset() -> void:
 	_readout_color = Color(0.85, 0.87, 0.95)
 	_readout_cache = ""
 	_rebuild_readout(["π ≈ ?", "", "darts: 0", "inside: 0", "outside: 0"])
+	if is_instance_valid(sample_console): sample_console.refresh()
+
+func _configure_sample_budget() -> void:
+	sample_budget = true
+	if dart_seed < 0: dart_seed = 1847
+	max_darts = 500
+	preseed_darts = 100
+	auto_throw = false
+
+func budget_replay() -> void:
+	auto_throw = false
+	_reset()
+
+func budget_add(amount: int) -> void:
+	var target := mini(_total_count + maxi(amount,0), max_darts)
+	_budget_paint_from = maxi(_total_count+1, target-299)
+	_seeding = true
+	while _total_count < target: _throw_dart()
+	_seeding = false
+	_budget_paint_from = 0
+	_update_display()
+	if is_instance_valid(sample_console): sample_console.refresh()
 
 func _exit_tree() -> void:
 	for child in get_children():
@@ -1080,6 +1129,8 @@ func _exit_tree() -> void:
 ## disclosure key; an unconditional rebuild would throw that framing away on every
 ## curated shelf. Unchanged rung means touch nothing.
 func apply_grid_config(config: Dictionary) -> void:
+	var budget_changed: bool = config.get("lesson", "") == "sample_budget" and not sample_budget
+	if budget_changed: _configure_sample_budget()
 	if config.has("keyboard"):
 		keyboard_shortcuts = str(config["keyboard"]).to_lower() != "off"
 	var before: String = disclosure
@@ -1095,8 +1146,10 @@ func apply_grid_config(config: Dictionary) -> void:
 			dart_seed = want
 			reseed = true
 
-	if disclosure == before and not reseed:
+	if disclosure == before and not reseed and not budget_changed:
 		return
+	# Map configuration can arrive before _ready; that call will build once.
+	if not is_inside_tree(): return
 	_rebuild_now()
 
 
@@ -1106,6 +1159,7 @@ func apply_grid_config(config: Dictionary) -> void:
 ## leave the cabinet ungrounded. Every child of this node is script-built (the
 ## .tscn holds only the root), so clearing them all is exactly the teardown.
 func _rebuild_now() -> void:
+	sample_console = null
 	for c in get_children():
 		remove_child(c)          # leaves the tree synchronously — no double render
 		c.queue_free()

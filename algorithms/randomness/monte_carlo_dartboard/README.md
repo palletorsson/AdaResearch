@@ -1,6 +1,6 @@
 # Monte Carlo Dartboard
 
-A visual Monte Carlo simulation that estimates the value of pi by throwing random darts at a square board with an inscribed circle. Darts that land inside the circle are colored green; those outside are colored red. The ratio of inside darts to total darts converges to pi/4, so multiplying by 4 gives an increasingly accurate estimate of pi.
+A visual Monte Carlo simulation that estimates pi using uniformly generated positions on a square board with an inscribed circle. Inside samples are green; outside samples are red. The estimate is `4 * inside / total`. Individual updates can move farther from pi; increasing the budget does not guarantee monotonic improvement.
 
 This artifact teaches **Monte Carlo estimation** -- the idea that random sampling, repeated enough times, converges to a true mathematical value. Computation emerges from accumulation.
 
@@ -54,3 +54,13 @@ This artifact teaches **Monte Carlo estimation** -- the idea that random samplin
 |------|-------------|
 | `monte_carlo_dartboard.gd` | Main script -- board, dart physics, pi estimation, VR controls |
 | `monte_carlo_dartboard.tscn` | Scene file |
+
+## Optional sample-budget study (P3)
+
+The existing placement in `Randomness_Examples_of_Randomness` selects `lesson:sample_budget`. Unconfigured instances retain the earlier controls. One unit-scale native dial selects 100, 500, 2000 or 8000 samples. Six adjacent rectangular buttons provide THROW, +100, FILL, REPLAY, NEXT SEED and 8 SEEDS. Changing the budget clears and rewinds the same seed. The installed study begins at seed 1847 with 100 samples in a 500-sample budget.
+
+`sample_run.gd` owns a local RNG and all sampled positions; `sample_console.gd` reuses the glitch console's native dial/button construction. Comparison creates separate generators and preserves the active stream. A reset rewinds both counts and RNG. Every sample counts; only the newest 300 marks remain visible. Points are generated, not hand-aimed shots. Engine/build-specific replay is tested; future-engine bitwise identity is not promised.
+
+The [illustrated report](../../../doc/book/iterations/2026-10-09-samples-and-disagreement/index.html) includes a [complete runnable core companion](../../../doc/book/iterations/2026-10-09-samples-and-disagreement/sampler.md). The main hall tutorial is a separate PointBody reconstruction. Core and deliberate-fault checks: `python -X utf8 tools/test_sample_budget.py`. Native museum: `python -X utf8 tools/run_encounter_probe.py Randomness_Examples_of_Randomness --sequence randomness --render --output-tag uncertainty-budget --probe tools/probes/sample_budget_room.gd`. The unique output tag prevents concurrent same-hall probes overwriting receipts.
+
+Validation: 24 core checks; 24 printed-core checks plus eight printed-example assertions; two rejected mutations; 25 native room checks. Desktop pointer and simulated XRTools hold/release pass; physical headset, Quest performance and independent learning remain untested.

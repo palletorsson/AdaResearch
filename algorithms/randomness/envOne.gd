@@ -93,6 +93,64 @@ const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "o
 ## the same world. The DNA fixture must set it, and `origin` has something to show
 ## only when it is set.
 @export var kitbash_seed: int = -1
+@export var seed_controls: bool = false
+const SeedControls = preload("res://algorithms/randomness/art_seed_controls.gd")
+var _seed_rng: RandomNumberGenerator
+var _seed_owned: Array[Node] = []
+
+func _draw_randf() -> float:
+	return _seed_rng.randf() if _seed_rng != null else randf()
+
+func _draw_randf_range(low: float, high: float) -> float:
+	return _seed_rng.randf_range(low, high) if _seed_rng != null else randf_range(low, high)
+
+func _draw_randi() -> int:
+	return _seed_rng.randi() if _seed_rng != null else randi()
+
+func get_generation_seed() -> int:
+	return kitbash_seed
+
+func set_generation_seed(value: int) -> void:
+	kitbash_seed = maxi(1, value)
+	set_meta("config_kitbash_seed", kitbash_seed)
+	if _seed_rng == null: _seed_rng = RandomNumberGenerator.new()
+	_seed_rng.seed = kitbash_seed
+	for child in _seed_owned:
+		if is_instance_valid(child):
+			remove_child(child)
+			child.queue_free()
+	_seed_owned.clear()
+	_disclosure_root = null
+	placed_modules.clear()
+	_placed_kinds.clear()
+	_placed_pos.clear()
+	_free_templates()
+	color_theme = color_themes[_draw_randi() % color_themes.size()]
+	load_or_create_modules()
+	generate_space()
+	apply_lighting()
+	apply_atmosphere()
+	_build_disclosure()
+	_remember_seed_geometry()
+	var controls = get_node_or_null("ArtSeedControls")
+	if controls != null: controls.show_seed(kitbash_seed)
+
+func _free_templates() -> void:
+	for module in modules:
+		if module is Node and is_instance_valid(module): module.free()
+	modules.clear()
+	_module_kinds.clear()
+
+func _remember_seed_geometry() -> void:
+	_seed_owned.clear()
+	for child in get_children():
+		if child not in _initial_children and child.name != "ArtSeedControls":
+			_seed_owned.append(child)
+
+func _install_seed_controls() -> void:
+	if seed_controls and is_node_ready():
+		SeedControls.install(self, "KITBASH / SEED", Vector3(0, 0, 3.5), 0.0)
+
 
 # Color themes inspired by the reference images
 @export var color_themes = [
@@ -146,6 +204,9 @@ func _rung() -> int:
 
 # -- Regenerate handling --
 func regenerate_scene() -> void:
+	if seed_controls:
+		set_generation_seed(1 + kitbash_seed % 100)
+		return
 	_clear_current_geometry()
 	generate_space()
 	apply_lighting()
@@ -211,16 +272,21 @@ var _initial_children: Array = []
 var _regenerate_connected: bool = false
 
 func _ready() -> void:
+	_initial_children = get_children()
 	# The grid sets config_* metadata SYNCHRONOUSLY before add_child, so the meta
 	# read happens here, before the first draw.
 	_read_meta_overrides()
 	# BEFORE anything draws. At the default (-1) this is the identical randomize()
 	# call that has always stood here and the whole stream below is untouched.
-	if kitbash_seed >= 0:
+	if seed_controls:
+		kitbash_seed = kitbash_seed if kitbash_seed > 0 else 42
+		_seed_rng = RandomNumberGenerator.new()
+		_seed_rng.seed = kitbash_seed
+	elif kitbash_seed >= 0:
 		seed(kitbash_seed)
 	else:
 		randomize()
-	color_theme = color_themes[randi() % color_themes.size()]
+	color_theme = color_themes[_draw_randi() % color_themes.size()]
 	load_or_create_modules()
 	generate_space()
 	apply_lighting()
@@ -229,6 +295,8 @@ func _ready() -> void:
 	# APPENDED LAST, after every draw the world is made of, and using none of its
 	# own. At `oracle` this builds nothing at all.
 	_build_disclosure()
+	_remember_seed_geometry()
+	_install_seed_controls.call_deferred()
 
 func load_or_create_modules() -> void:
 	# Try to load existing modules
@@ -278,7 +346,7 @@ func create_surrealist_modules() -> void:
 		# Add some random geometry - mixing disparate elements is key to surrealism
 		# The draw is lifted into a variable so the census can record WHICH recipe
 		# this template is. Exactly one randi() either way: the stream is untouched.
-		var kind: int = randi() % 5
+		var kind: int = _draw_randi() % 5
 		_module_kinds.append(kind)
 		match kind:
 			0: # Stack of primitive shapes
@@ -300,7 +368,7 @@ func create_mechanical_modules() -> void:
 		var module = Node3D.new()
 		module.name = "MechanicalModule_" + str(i)
 
-		var kind: int = randi() % 4
+		var kind: int = _draw_randi() % 4
 		_module_kinds.append(5 + kind)
 		match kind:
 			0: # Mechanical joint
@@ -320,7 +388,7 @@ func create_organic_modules() -> void:
 		var module = Node3D.new()
 		module.name = "OrganicModule_" + str(i)
 
-		var kind: int = randi() % 4
+		var kind: int = _draw_randi() % 4
 		_module_kinds.append(9 + kind)
 		match kind:
 			0: # Plant-like structure
@@ -343,13 +411,13 @@ func create_mixed_modules() -> void:
 # Helper functions to create different module types
 func add_stacked_primitives(parent) -> void:
 	var height = 0
-	var pieces = randi() % 5 + 2  # 2-6 pieces
+	var pieces = _draw_randi() % 5 + 2  # 2-6 pieces
 	
 	for i in range(pieces):
 		var mesh_instance = MeshInstance3D.new()
 		
 		# Choose a primitive mesh
-		match randi() % 5:
+		match _draw_randi() % 5:
 			0: mesh_instance.mesh = SphereMesh.new()
 			1: mesh_instance.mesh = BoxMesh.new()
 			2: mesh_instance.mesh = CylinderMesh.new()
@@ -357,12 +425,12 @@ func add_stacked_primitives(parent) -> void:
 			4: mesh_instance.mesh = TorusMesh.new()
 		
 		# Randomize size
-		var scale_factor = randf_range(0.5, 1.5)
+		var scale_factor = _draw_randf_range(0.5, 1.5)
 		mesh_instance.scale = Vector3(scale_factor, scale_factor, scale_factor)
 		
 		# Position above previous piece
 		mesh_instance.position.y = height
-		height += randf_range(0.5, 1.0) * scale_factor
+		height += _draw_randf_range(0.5, 1.0) * scale_factor
 		
 		# Random material
 		apply_random_material(mesh_instance)
@@ -370,13 +438,13 @@ func add_stacked_primitives(parent) -> void:
 		parent.add_child(mesh_instance)
 
 func add_floating_parts(parent) -> void:
-	var parts = randi() % 5 + 3  # 3-7 parts
+	var parts = _draw_randi() % 5 + 3  # 3-7 parts
 	
 	for i in range(parts):
 		var mesh_instance = MeshInstance3D.new()
 		
 		# Choose a primitive mesh
-		match randi() % 5:
+		match _draw_randi() % 5:
 			0: mesh_instance.mesh = SphereMesh.new()
 			1: mesh_instance.mesh = BoxMesh.new()
 			2: mesh_instance.mesh = CylinderMesh.new()
@@ -384,14 +452,14 @@ func add_floating_parts(parent) -> void:
 			4: mesh_instance.mesh = TorusMesh.new()
 		
 		# Randomize size
-		var scale_factor = randf_range(0.3, 1.0)
+		var scale_factor = _draw_randf_range(0.3, 1.0)
 		mesh_instance.scale = Vector3(scale_factor, scale_factor, scale_factor)
 		
 		# Position randomly in space
 		mesh_instance.position = Vector3(
-			randf_range(-2, 2),
-			randf_range(-2, 2),
-			randf_range(-2, 2)
+			_draw_randf_range(-2, 2),
+			_draw_randf_range(-2, 2),
+			_draw_randf_range(-2, 2)
 		)
 		
 		# Apply material
@@ -416,27 +484,27 @@ func add_nonsensical_machine(parent) -> void:
 	parent.add_child(body)
 	
 	# Add random attachments
-	for i in range(randi() % 4 + 2):  # 2-5 attachments
+	for i in range(_draw_randi() % 4 + 2):  # 2-5 attachments
 		var attachment = MeshInstance3D.new()
-		var mesh_choice = randi() % 3
+		var mesh_choice = _draw_randi() % 3
 		
 		if mesh_choice == 0:
 			attachment.mesh = CylinderMesh.new()
-			attachment.scale = Vector3(0.2, randf_range(0.5, 1.5), 0.2)
+			attachment.scale = Vector3(0.2, _draw_randf_range(0.5, 1.5), 0.2)
 		elif mesh_choice == 1:
 			attachment.mesh = BoxMesh.new()
-			attachment.scale = Vector3(randf_range(0.3, 0.6), randf_range(0.3, 0.6), randf_range(0.3, 0.6))
+			attachment.scale = Vector3(_draw_randf_range(0.3, 0.6), _draw_randf_range(0.3, 0.6), _draw_randf_range(0.3, 0.6))
 		else:
 			attachment.mesh = SphereMesh.new()
-			var radius = randf_range(0.3, 0.5)
+			var radius = _draw_randf_range(0.3, 0.5)
 			attachment.scale = Vector3(radius, radius, radius)
 		
 		# Position around the body randomly
-		var angle = randf_range(0, TAU)
-		var distance = randf_range(0.8, 1.2)
+		var angle = _draw_randf_range(0, TAU)
+		var distance = _draw_randf_range(0.8, 1.2)
 		attachment.position = Vector3(
 			cos(angle) * distance,
-			randf_range(0.5, 1.5),
+			_draw_randf_range(0.5, 1.5),
 			sin(angle) * distance
 		)
 		
@@ -461,19 +529,19 @@ func add_abstract_sculpture(parent) -> void:
 	main_body.add_child(primary)
 	
 	# Subtract random shapes to create interesting form
-	for i in range(randi() % 3 + 2):
-		var cutter = CSGBox3D.new() if randf() > 0.5 else CSGSphere3D.new()
+	for i in range(_draw_randi() % 3 + 2):
+		var cutter = CSGBox3D.new() if _draw_randf() > 0.5 else CSGSphere3D.new()
 		cutter.operation = CSGShape3D.OPERATION_SUBTRACTION
 		
 		if cutter is CSGBox3D:
-			cutter.size = Vector3(randf_range(0.3, 0.5), randf_range(0.3, 0.5), randf_range(0.3, 0.5))
+			cutter.size = Vector3(_draw_randf_range(0.3, 0.5), _draw_randf_range(0.3, 0.5), _draw_randf_range(0.3, 0.5))
 		else:
-			cutter.radius = randf_range(0.3, 0.5)
+			cutter.radius = _draw_randf_range(0.3, 0.5)
 		
 		cutter.position = Vector3(
-			randf_range(-0.5, 0.5),
-			randf_range(-0.5, 0.5),
-			randf_range(-0.5, 0.5)
+			_draw_randf_range(-0.5, 0.5),
+			_draw_randf_range(-0.5, 0.5),
+			_draw_randf_range(-0.5, 0.5)
 		)
 		
 		main_body.add_child(cutter)
@@ -481,8 +549,8 @@ func add_abstract_sculpture(parent) -> void:
 	# Apply material to the CSG result
 	var material = StandardMaterial3D.new()
 	material.albedo_color = color_theme["primary"]
-	material.metallic = randf_range(0.0, 0.5)
-	material.roughness = randf_range(0.3, 0.7)
+	material.metallic = _draw_randf_range(0.0, 0.5)
+	material.roughness = _draw_randf_range(0.3, 0.7)
 	
 	primary.material = material
 	
@@ -500,7 +568,7 @@ func add_composite_creature(parent) -> void:
 	
 	# Head (random object)
 	var head = MeshInstance3D.new()
-	match randi() % 4:
+	match _draw_randi() % 4:
 		0: head.mesh = SphereMesh.new()
 		1: head.mesh = BoxMesh.new()
 		2: head.mesh = TorusMesh.new()
@@ -514,15 +582,15 @@ func add_composite_creature(parent) -> void:
 	parent.add_child(head)
 	
 	# Limbs
-	for i in range(randi() % 3 + 2):  # 2-4 limbs
+	for i in range(_draw_randi() % 3 + 2):  # 2-4 limbs
 		var limb = MeshInstance3D.new()
 		limb.mesh = CylinderMesh.new()
-		limb.scale = Vector3(0.2, randf_range(0.7, 1.2), 0.2)
+		limb.scale = Vector3(0.2, _draw_randf_range(0.7, 1.2), 0.2)
 		
-		var angle = randf_range(0, TAU)
+		var angle = _draw_randf_range(0, TAU)
 		limb.position = Vector3(
 			cos(angle) * 0.7,
-			randf_range(-0.5, 0.5),
+			_draw_randf_range(-0.5, 0.5),
 			sin(angle) * 0.7
 		)
 		
@@ -558,9 +626,9 @@ func add_mechanical_joint(parent) -> void:
 	parent.add_child(arm)
 	
 	# Add details
-	for i in range(randi() % 5 + 3):
+	for i in range(_draw_randi() % 5 + 3):
 		var detail = MeshInstance3D.new()
-		if randf() > 0.5:
+		if _draw_randf() > 0.5:
 			detail.mesh = CylinderMesh.new()
 			detail.scale = Vector3(0.1, 0.1, 0.1)
 		else:
@@ -568,9 +636,9 @@ func add_mechanical_joint(parent) -> void:
 			detail.scale = Vector3(0.1, 0.1, 0.1)
 		
 		detail.position = Vector3(
-			randf_range(-0.5, 0.5),
-			randf_range(0.1, 0.5),
-			randf_range(-0.5, 0.5)
+			_draw_randf_range(-0.5, 0.5),
+			_draw_randf_range(0.1, 0.5),
+			_draw_randf_range(-0.5, 0.5)
 		)
 		
 		apply_material(detail, "metal")
@@ -586,15 +654,15 @@ func add_control_panel(parent) -> void:
 	parent.add_child(panel)
 	
 	# Add controls
-	for i in range(randi() % 10 + 5):
+	for i in range(_draw_randi() % 10 + 5):
 		var control = MeshInstance3D.new()
 		
-		if randf() > 0.7:
+		if _draw_randf() > 0.7:
 			# Button
 			control.mesh = CylinderMesh.new()
 			control.scale = Vector3(0.1, 0.05, 0.1)
 			apply_material(control, "accent")
-		elif randf() > 0.4:
+		elif _draw_randf() > 0.4:
 			# Dial
 			control.mesh = CylinderMesh.new()
 			control.scale = Vector3(0.15, 0.03, 0.15)
@@ -606,8 +674,8 @@ func add_control_panel(parent) -> void:
 			apply_material(control, "primary")
 		
 		# Position on panel
-		var panel_local_x = randf_range(-0.8, 0.8)
-		var panel_local_z = randf_range(-1.2, 1.2)
+		var panel_local_x = _draw_randf_range(-0.8, 0.8)
+		var panel_local_z = _draw_randf_range(-1.2, 1.2)
 		
 		# Adjust for panel rotation
 		var angle_rad = deg_to_rad(-30)
@@ -621,8 +689,8 @@ func add_control_panel(parent) -> void:
 
 func add_pipe_system(parent) -> void:
 	# Start and end points
-	var start_pos = Vector3(randf_range(-1.0, 1.0), 0, randf_range(-1.0, 1.0))
-	var end_pos = Vector3(randf_range(-1.0, 1.0), randf_range(1.0, 2.0), randf_range(-1.0, 1.0))
+	var start_pos = Vector3(_draw_randf_range(-1.0, 1.0), 0, _draw_randf_range(-1.0, 1.0))
+	var end_pos = Vector3(_draw_randf_range(-1.0, 1.0), _draw_randf_range(1.0, 2.0), _draw_randf_range(-1.0, 1.0))
 	
 	# Create main pipe
 	create_pipe_segment(parent, start_pos, Vector3(start_pos.x, start_pos.y + 0.5, start_pos.z))
@@ -683,10 +751,10 @@ func add_electronic_component(parent) -> void:
 	parent.add_child(board)
 	
 	# Add electronic components
-	for i in range(randi() % 15 + 10):
+	for i in range(_draw_randi() % 15 + 10):
 		var component = MeshInstance3D.new()
 		
-		match randi() % 4:
+		match _draw_randi() % 4:
 			0: # Chip
 				component.mesh = BoxMesh.new()
 				component.scale = Vector3(0.2, 0.05, 0.2)
@@ -706,22 +774,22 @@ func add_electronic_component(parent) -> void:
 				apply_material(component, "primary")
 		
 		component.position = Vector3(
-			randf_range(-0.8, 0.8),
+			_draw_randf_range(-0.8, 0.8),
 			0.05,
-			randf_range(-1.3, 1.3)
+			_draw_randf_range(-1.3, 1.3)
 		)
 		
 		parent.add_child(component)
 	
 	# Add circuits (thin lines)
-	for i in range(randi() % 10 + 5):
+	for i in range(_draw_randi() % 10 + 5):
 		var circuit = MeshInstance3D.new()
 		circuit.mesh = BoxMesh.new()
 		
-		var start_x = randf_range(-0.8, 0.8)
-		var start_z = randf_range(-1.3, 1.3)
-		var end_x = randf_range(-0.8, 0.8)
-		var end_z = randf_range(-1.3, 1.3)
+		var start_x = _draw_randf_range(-0.8, 0.8)
+		var start_z = _draw_randf_range(-1.3, 1.3)
+		var end_x = _draw_randf_range(-0.8, 0.8)
+		var end_z = _draw_randf_range(-1.3, 1.3)
 		
 		var midpoint = Vector3((start_x + end_x) / 2, 0.03, (start_z + end_z) / 2)
 		circuit.position = midpoint
@@ -753,17 +821,17 @@ func add_plant_structure(parent) -> void:
 	parent.add_child(stem)
 	
 	# Add branches or leaves
-	var branch_count = randi() % 5 + 3
+	var branch_count = _draw_randi() % 5 + 3
 	for i in range(branch_count):
 		var branch = MeshInstance3D.new()
-		if randf() > 0.5:
+		if _draw_randf() > 0.5:
 			# Branch
 			branch.mesh = CylinderMesh.new()
-			branch.scale = Vector3(0.05, randf_range(0.3, 0.7), 0.05)
+			branch.scale = Vector3(0.05, _draw_randf_range(0.3, 0.7), 0.05)
 			apply_organic_material(branch, Color(0.3, 0.4, 0.2), 0.0, 0.7)
 		else:
 			# Leaf/flower
-			if randf() > 0.3:
+			if _draw_randf() > 0.3:
 				branch.mesh = SphereMesh.new()
 				branch.scale = Vector3(0.2, 0.1, 0.2)
 				apply_organic_material(branch, Color(0.1, 0.7, 0.3), 0.0, 0.9)
@@ -772,9 +840,9 @@ func add_plant_structure(parent) -> void:
 				branch.scale = Vector3(0.15, 0.15, 0.15)
 				apply_organic_material(branch, Color(0.9, 0.3, 0.5), 0.0, 0.6)
 		
-		var height = randf_range(0.3, 1.1)
-		var angle = randf_range(0, TAU)
-		var distance = randf_range(0.1, 0.3)
+		var height = _draw_randf_range(0.3, 1.1)
+		var angle = _draw_randf_range(0, TAU)
+		var distance = _draw_randf_range(0.1, 0.3)
 		
 		branch.position = Vector3(
 			cos(angle) * distance,
@@ -812,9 +880,9 @@ func add_fluid_vessel(parent) -> void:
 	
 	# Fluid material
 	var fluid_color = Color(
-		randf_range(0.0, 0.3),
-		randf_range(0.2, 0.7),
-		randf_range(0.5, 0.9),
+		_draw_randf_range(0.0, 0.3),
+		_draw_randf_range(0.2, 0.7),
+		_draw_randf_range(0.5, 0.9),
 		0.8
 	)
 	var fluid_mat = StandardMaterial3D.new()
@@ -877,36 +945,36 @@ func create_coral_branch(parent, position, size, depth, max_depth = 3) -> void:
 		return
 	
 	# Create this branch segment
-	var branch = CSGSphere3D.new() if randf() > 0.3 else CSGCylinder3D.new()
+	var branch = CSGSphere3D.new() if _draw_randf() > 0.3 else CSGCylinder3D.new()
 	
 	if branch is CSGSphere3D:
 		branch.radius = size
 	else:
 		branch.radius = size / 2
 		branch.height = size * 2
-		branch.rotation_degrees.x = randf_range(-30, 30)
-		branch.rotation_degrees.z = randf_range(-30, 30)
+		branch.rotation_degrees.x = _draw_randf_range(-30, 30)
+		branch.rotation_degrees.z = _draw_randf_range(-30, 30)
 	
 	branch.position = position
 	
 	# Material
 	var branch_mat = StandardMaterial3D.new()
 	branch_mat.albedo_color = Color(
-		randf_range(0.7, 1.0),
-		randf_range(0.2, 0.5),
-		randf_range(0.5, 0.8)
+		_draw_randf_range(0.7, 1.0),
+		_draw_randf_range(0.2, 0.5),
+		_draw_randf_range(0.5, 0.8)
 	)
-	branch_mat.roughness = randf_range(0.7, 0.9)
+	branch_mat.roughness = _draw_randf_range(0.7, 0.9)
 	branch.material = branch_mat
 	
 	parent.add_child(branch)
 	
 	# Create sub-branches if not at max depth
 	if depth < max_depth:
-		var sub_branches = randi() % 3 + 1
+		var sub_branches = _draw_randi() % 3 + 1
 		for i in range(sub_branches):
-			var angle = randf_range(0, TAU)
-			var branch_dir = Vector3(cos(angle), randf_range(0.5, 1.5), sin(angle))
+			var angle = _draw_randf_range(0, TAU)
+			var branch_dir = Vector3(cos(angle), _draw_randf_range(0.5, 1.5), sin(angle))
 			var new_pos = position + branch_dir * size
 			create_coral_branch(parent, new_pos, size * 0.6, depth + 1, max_depth)
 
@@ -919,27 +987,27 @@ func add_egg_structure(parent) -> void:
 	parent.add_child(base)
 	
 	# Add multiple small egg-like protrusions
-	var egg_count = randi() % 8 + 5
+	var egg_count = _draw_randi() % 8 + 5
 	for i in range(egg_count):
 		var egg = MeshInstance3D.new()
 		egg.mesh = SphereMesh.new()
 		
-		var scale_factor = randf_range(0.15, 0.3)
+		var scale_factor = _draw_randf_range(0.15, 0.3)
 		egg.scale = Vector3(scale_factor, scale_factor * 1.2, scale_factor)
 		
-		var angle = randf_range(0, TAU)
-		var radius = randf_range(0.5, 0.9)
+		var angle = _draw_randf_range(0, TAU)
+		var radius = _draw_randf_range(0.5, 0.9)
 		egg.position = Vector3(
 			cos(angle) * radius,
-			randf_range(-0.1, 0.3),
+			_draw_randf_range(-0.1, 0.3),
 			sin(angle) * radius
 		)
 		
 		# Random egg colors
 		var egg_color = Color(
-			randf_range(0.5, 0.9),
-			randf_range(0.2, 0.6),
-			randf_range(0.2, 0.6)
+			_draw_randf_range(0.5, 0.9),
+			_draw_randf_range(0.2, 0.6),
+			_draw_randf_range(0.2, 0.6)
 		)
 		
 		var egg_mat = StandardMaterial3D.new()
@@ -958,20 +1026,20 @@ func add_egg_structure(parent) -> void:
 		var tendril = MeshInstance3D.new()
 		tendril.mesh = CylinderMesh.new()
 		
-		var start_angle = randf_range(0, TAU)
-		var end_angle = randf_range(0, TAU)
-		var start_radius = randf_range(0.5, 0.9)
-		var end_radius = randf_range(0.5, 0.9)
+		var start_angle = _draw_randf_range(0, TAU)
+		var end_angle = _draw_randf_range(0, TAU)
+		var start_radius = _draw_randf_range(0.5, 0.9)
+		var end_radius = _draw_randf_range(0.5, 0.9)
 		
 		var start_pos = Vector3(
 			cos(start_angle) * start_radius,
-			randf_range(-0.1, 0.3),
+			_draw_randf_range(-0.1, 0.3),
 			sin(start_angle) * start_radius
 		)
 		
 		var end_pos = Vector3(
 			cos(end_angle) * end_radius,
-			randf_range(-0.1, 0.3),
+			_draw_randf_range(-0.1, 0.3),
 			sin(end_angle) * end_radius
 		)
 		
@@ -1005,29 +1073,29 @@ func place_random_module() -> void:
 		
 	# Lifted into a variable so the record knows WHICH recipe was drawn. Exactly
 	# one randi() either way: the stream is untouched.
-	var pick: int = randi() % modules.size()
+	var pick: int = _draw_randi() % modules.size()
 	var module_instance = modules[pick].duplicate()
 	if not module_instance:
 		return
 
 	# Position randomly in space
 	var position = Vector3(
-		randf_range(-space_size.x/2, space_size.x/2),
-		randf_range(-space_size.y/2, space_size.y/2),
-		randf_range(-space_size.z/2, space_size.z/2)
+		_draw_randf_range(-space_size.x/2, space_size.x/2),
+		_draw_randf_range(-space_size.y/2, space_size.y/2),
+		_draw_randf_range(-space_size.z/2, space_size.z/2)
 	)
 	
 	module_instance.position = position
 	
 	# Random rotation
 	module_instance.rotation_degrees = Vector3(
-		randf_range(0, 360),
-		randf_range(0, 360),
-		randf_range(0, 360)
+		_draw_randf_range(0, 360),
+		_draw_randf_range(0, 360),
+		_draw_randf_range(0, 360)
 	)
 	
 	# Random scale variations for more diverse results
-	var scale_factor = randf_range(0.5, 2.0)
+	var scale_factor = _draw_randf_range(0.5, 2.0)
 	module_instance.scale = Vector3(scale_factor, scale_factor, scale_factor)
 	
 	add_child(module_instance)
@@ -1044,12 +1112,12 @@ func connect_modules() -> void:
 	# Create connections between modules
 	var connections = min(placed_modules.size() / 2.0, 15) # Limit to prevent too many connections
 	for i in range(connections):
-		var index_a = randi() % placed_modules.size()
-		var index_b = randi() % placed_modules.size()
+		var index_a = _draw_randi() % placed_modules.size()
+		var index_b = _draw_randi() % placed_modules.size()
 		
 		# Make sure we're not connecting a module to itself
 		while index_a == index_b:
-			index_b = randi() % placed_modules.size()
+			index_b = _draw_randi() % placed_modules.size()
 			
 		var module_a = placed_modules[index_a]
 		var module_b = placed_modules[index_b]
@@ -1071,7 +1139,7 @@ func create_mechanical_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
 	
-	if randf() > 0.5:
+	if _draw_randf() > 0.5:
 		# Pipe connection
 		create_pipe_path(start_pos, end_pos)
 	else:
@@ -1080,7 +1148,7 @@ func create_mechanical_connection(module_a, module_b) -> void:
 
 func create_pipe_path(start_pos, end_pos) -> void:
 	var midpoint = (start_pos + end_pos) / 2
-	midpoint.y += randf_range(1.0, 3.0) # Arch up
+	midpoint.y += _draw_randf_range(1.0, 3.0) # Arch up
 	
 	# Create a 3-segment path
 	create_pipe_segment_with_joint(start_pos, Vector3(start_pos.x, midpoint.y, start_pos.z))
@@ -1113,7 +1181,7 @@ func create_pipe_segment_with_joint(start_pos, end_pos) -> void:
 	add_child(pipe)
 	
 	# Add joint at end position if it's not the destination
-	if randf() > 0.5 and start_pos.distance_to(end_pos) > 0.5:
+	if _draw_randf() > 0.5 and start_pos.distance_to(end_pos) > 0.5:
 		var joint = MeshInstance3D.new()
 		joint.mesh = SphereMesh.new()
 		joint.position = end_pos
@@ -1180,13 +1248,13 @@ func create_beam_connection(module_a, module_b) -> void:
 	add_child(beam)
 	
 	# Add energy particles along the beam
-	if randf() > 0.3:
+	if _draw_randf() > 0.3:
 		add_particles_along_beam(start_pos, end_pos, color_theme["accent"])
 
 func create_floating_connection(module_a, module_b) -> void:
 	var start_pos = module_a.global_position
 	var end_pos = module_b.global_position
-	var steps = randi() % 5 + 3
+	var steps = _draw_randi() % 5 + 3
 
 	var sphere_data: Array[Transform3D] = []
 	var box_data: Array[Transform3D] = []
@@ -1194,12 +1262,12 @@ func create_floating_connection(module_a, module_b) -> void:
 	for i in range(steps):
 		var t_val = float(i) / float(steps - 1)
 		var pos = start_pos.lerp(end_pos, t_val)
-		pos += Vector3(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
+		pos += Vector3(_draw_randf_range(-1.0, 1.0), _draw_randf_range(-1.0, 1.0), _draw_randf_range(-1.0, 1.0))
 
-		if randf() > 0.6:
+		if _draw_randf() > 0.6:
 			sphere_data.append(Transform3D(Basis.IDENTITY.scaled(Vector3(0.2, 0.2, 0.2)), pos))
 		else:
-			var rot = Basis.from_euler(Vector3(deg_to_rad(randf_range(0, 360)), deg_to_rad(randf_range(0, 360)), deg_to_rad(randf_range(0, 360))))
+			var rot = Basis.from_euler(Vector3(deg_to_rad(_draw_randf_range(0, 360)), deg_to_rad(_draw_randf_range(0, 360)), deg_to_rad(_draw_randf_range(0, 360))))
 			box_data.append(Transform3D(rot.scaled(Vector3(0.15, 0.15, 0.15)), pos))
 
 	var mat = StandardMaterial3D.new()
@@ -1239,7 +1307,7 @@ func create_floating_connection(module_a, module_b) -> void:
 		add_child(mmi)
 
 func add_particles_along_beam(start_pos, end_pos, color) -> void:
-	var particle_count = randi() % 5 + 3
+	var particle_count = _draw_randi() % 5 + 3
 
 	var sphere = SphereMesh.new()
 	sphere.radius = 0.05
@@ -1259,7 +1327,7 @@ func add_particles_along_beam(start_pos, end_pos, color) -> void:
 	mm.mesh = sphere
 
 	for i in range(particle_count):
-		var t = randf()
+		var t = _draw_randf()
 		var pos = start_pos.lerp(end_pos, t)
 		mm.set_instance_transform(i, Transform3D(Basis.IDENTITY.scaled(Vector3(1, 1, 1)), pos))
 
@@ -1269,21 +1337,21 @@ func add_particles_along_beam(start_pos, end_pos, color) -> void:
 	add_child(mmi)
 
 func add_ambient_elements() -> void:
-	var total = randi() % 20 + 10
+	var total = _draw_randi() % 20 + 10
 	# Pre-generate per-type data
 	var type_data: Array[Array] = [[], [], [], [], []]  # sphere, box, cyl, prism, torus
 
 	for i in range(total):
-		var type_idx = randi() % 5
-		var scale_factor = randf_range(0.1, 0.5)
+		var type_idx = _draw_randi() % 5
+		var scale_factor = _draw_randf_range(0.1, 0.5)
 		var pos = Vector3(
-			randf_range(-space_size.x, space_size.x),
-			randf_range(-space_size.y, space_size.y),
-			randf_range(-space_size.z, space_size.z)
+			_draw_randf_range(-space_size.x, space_size.x),
+			_draw_randf_range(-space_size.y, space_size.y),
+			_draw_randf_range(-space_size.z, space_size.z)
 		)
-		var rot = Vector3(randf_range(0, 360), randf_range(0, 360), randf_range(0, 360))
-		var col = Color(randf_range(0.3, 1.0), randf_range(0.3, 1.0), randf_range(0.3, 1.0))
-		var emit = randf() > 0.7
+		var rot = Vector3(_draw_randf_range(0, 360), _draw_randf_range(0, 360), _draw_randf_range(0, 360))
+		var col = Color(_draw_randf_range(0.3, 1.0), _draw_randf_range(0.3, 1.0), _draw_randf_range(0.3, 1.0))
+		var emit = _draw_randf() > 0.7
 		type_data[type_idx].append({"pos": pos, "rot": rot, "scale": scale_factor, "color": col, "emit": emit})
 
 	var meshes: Array[Mesh] = []
@@ -1378,16 +1446,16 @@ func apply_lighting() -> void:
 	
 	for i in range(5):
 		var spot_light = SpotLight3D.new()
-		spot_light.light_color = colors[randi() % colors.size()]
-		spot_light.light_energy = randf_range(2.0, 5.0)
-		spot_light.spot_range = randf_range(10.0, 20.0)
-		spot_light.spot_angle = randf_range(20.0, 45.0)
+		spot_light.light_color = colors[_draw_randi() % colors.size()]
+		spot_light.light_energy = _draw_randf_range(2.0, 5.0)
+		spot_light.spot_range = _draw_randf_range(10.0, 20.0)
+		spot_light.spot_angle = _draw_randf_range(20.0, 45.0)
 		
 		# Position the light randomly but pointing toward the center
 		var light_pos = Vector3(
-			randf_range(-space_size.x, space_size.x),
-			randf_range(-space_size.y, space_size.y),
-			randf_range(-space_size.z, space_size.z)
+			_draw_randf_range(-space_size.x, space_size.x),
+			_draw_randf_range(-space_size.y, space_size.y),
+			_draw_randf_range(-space_size.z, space_size.z)
 		) * 0.8
 		
 		spot_light.position = light_pos
@@ -1424,12 +1492,12 @@ func create_atmosphere_particles() -> void:
 
 	for i in range(100):
 		var t = Transform3D()
-		var scale_factor = randf_range(0.02, 0.1) / 0.06  # normalize to base radius
+		var scale_factor = _draw_randf_range(0.02, 0.1) / 0.06  # normalize to base radius
 		t.basis = Basis.IDENTITY.scaled(Vector3(scale_factor, scale_factor, scale_factor))
 		t.origin = Vector3(
-			randf_range(-space_size.x, space_size.x),
-			randf_range(-space_size.y, space_size.y),
-			randf_range(-space_size.z, space_size.z)
+			_draw_randf_range(-space_size.x, space_size.x),
+			_draw_randf_range(-space_size.y, space_size.y),
+			_draw_randf_range(-space_size.z, space_size.z)
 		)
 		mm.set_instance_transform(i, t)
 
@@ -1441,7 +1509,7 @@ func create_atmosphere_particles() -> void:
 # Utility functions for materials
 
 func apply_random_material(mesh_instance) -> void:
-	var material_type = randi() % 4
+	var material_type = _draw_randi() % 4
 	
 	match material_type:
 		0: apply_material(mesh_instance, "primary")
@@ -1455,24 +1523,24 @@ func apply_material(mesh_instance, type) -> void:
 	match type:
 		"primary":
 			material.albedo_color = color_theme["primary"]
-			material.metallic = randf_range(0.0, 0.3)
-			material.roughness = randf_range(0.3, 0.7)
+			material.metallic = _draw_randf_range(0.0, 0.3)
+			material.roughness = _draw_randf_range(0.3, 0.7)
 		"secondary":
 			material.albedo_color = color_theme["secondary"]
-			material.metallic = randf_range(0.0, 0.3)
-			material.roughness = randf_range(0.3, 0.7)
+			material.metallic = _draw_randf_range(0.0, 0.3)
+			material.roughness = _draw_randf_range(0.3, 0.7)
 		"accent":
 			material.albedo_color = color_theme["accent"]
-			material.emission_enabled = randf() > 0.5
+			material.emission_enabled = _draw_randf() > 0.5
 			if material.emission_enabled:
 				material.emission = color_theme["accent"]
-				material.emission_energy = randf_range(0.5, 2.0)
+				material.emission_energy = _draw_randf_range(0.5, 2.0)
 			material.metallic = 0.0
-			material.roughness = randf_range(0.2, 0.5)
+			material.roughness = _draw_randf_range(0.2, 0.5)
 		"metal":
 			material.albedo_color = color_theme["metal"]
-			material.metallic = randf_range(0.7, 1.0)
-			material.roughness = randf_range(0.1, 0.3)
+			material.metallic = _draw_randf_range(0.7, 1.0)
+			material.roughness = _draw_randf_range(0.1, 0.3)
 	
 	mesh_instance.material_override = material
 
@@ -1484,6 +1552,7 @@ func apply_organic_material(mesh_instance, base_color, metallic_range, roughness
 	mesh_instance.material_override = material
 
 func _exit_tree() -> void:
+	_free_templates()
 	for child in get_children():
 		if not child.owner:
 			child.queue_free()
@@ -1504,9 +1573,13 @@ func apply_grid_config(config: Dictionary) -> void:
 	# 43 rooms' backdrops. A config that carries no disclosure key touches nothing.
 	if disclosure != before:
 		_build_disclosure()
+		_remember_seed_geometry()
+	_install_seed_controls()
 
 
 func _read_meta_overrides() -> void:
+	if has_meta("config_seed_controls"):
+		seed_controls = str(get_meta("config_seed_controls")).to_lower() in ["true", "1"]
 	if has_meta("config_disclosure"):
 		var raw: String = str(get_meta("config_disclosure")).strip_edges().to_lower()
 		disclosure = raw if DISCLOSURES.has(raw) else disclosure

@@ -1,11 +1,8 @@
 # euler_drift.gd — THE FORCE IS REAL; THE STEPPING IS THE MACHINE'S.
 #
-# The forces seam (the discrete-integration crack). Continuous dynamics are
-# integrated in jumps. The true parabola (amber) is where the throw goes; the
-# Euler path (blue), stepped at a coarse timestep, drifts off it — gaining
-# energy it was never given, arcing wider each step. And at a big step a fast
-# body TUNNELS: it is on one side of the wall this frame and the far side the
-# next, having stepped clean over the barrier the physics said was solid.
+# The amber curve is the analytic constant-acceleration reference; blue uses
+# explicit Euler. The pink wall is a visual marker, not a collider. This scene
+# does not test tunnelling. Optional lesson:step_study adds a metre-scale pair.
 extends Node3D
 class_name EulerDrift
 
@@ -19,12 +16,15 @@ class_name EulerDrift
 
 
 func _ready() -> void:
+	if str(get_meta("config_lesson",""))=="step_study":
+		add_child(preload("res://algorithms/forces/euler_drift/step_study.gd").new())
+		return
 	_backing()
 	_draw_true()
 	_draw_euler()
 	_wall()
 	_plate("THE STEP",
-		"physics is continuous · the engine jumps\nthe Euler path (blue) drifts from the true arc (amber)\nat a big step a fast body tunnels the wall",
+		"one second · constant acceleration\nexplicit Euler (blue) / formula (amber)\npink is a graphic marker · no collision test",
 		Vector3(0.0, 0.33, 0.0), color_euler)
 
 
@@ -62,7 +62,7 @@ func _draw_euler() -> void:
 		_seg(_v(prev), _v(pos), color_euler, 0.008)
 		_dot(_v(pos), color_euler, 0.009)
 		prev = pos
-	# the tunnelled body: the last Euler point, sitting past the wall
+	# Endpoint of the numerical trajectory, with no contact calculation.
 	_dot(_v(pos), color_euler, 0.02)
 
 

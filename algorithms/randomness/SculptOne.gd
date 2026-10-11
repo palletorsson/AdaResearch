@@ -59,6 +59,23 @@ extends Node3D
 ## what three rooms have always shown. A positive value pins the whole piece so
 ## a sweep photographs ONE object under different axes instead of five objects.
 @export var sculpt_seed: int = 0
+@export var seed_controls: bool = false
+const SeedControls = preload("res://algorithms/randomness/art_seed_controls.gd")
+
+func get_generation_seed() -> int:
+	return sculpt_seed
+
+func set_generation_seed(value: int) -> void:
+	sculpt_seed = maxi(1, value)
+	set_meta("config_sculpt_seed", sculpt_seed)
+	_rebuild_now()
+	var controls = get_node_or_null("ArtSeedControls")
+	if controls != null: controls.show_seed(sculpt_seed)
+
+func _install_seed_controls() -> void:
+	if seed_controls and is_node_ready():
+		SeedControls.install(self, "SCULPTURE / SEED", Vector3(1.9, 0, -2.7), PI)
+
 
 const HANDS: PackedStringArray = ["composition", "pour", "drape", "stipple", "spatter"]
 const SUBSTANCES: PackedStringArray = ["mixed", "glossy", "fabric", "granular"]
@@ -85,7 +102,12 @@ var _owned: Array[Node] = []
 var _built: bool = false
 
 func _ready() -> void:
+	var initial: Dictionary = {}
+	for key in ["hand", "substance", "sculpt_seed", "seed_controls"]:
+		if has_meta("config_" + key): initial[key] = get_meta("config_" + key)
+	apply_grid_config(initial)
 	_build_all()
+	_install_seed_controls.call_deferred()
 
 
 func _build_all() -> void:
@@ -672,8 +694,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("sculpt_seed"):
 		sculpt_seed = int(config["sculpt_seed"])
 
+	if config.has("seed_controls"):
+		seed_controls = str(config["seed_controls"]).to_lower() in ["true", "1"]
+	if seed_controls and sculpt_seed <= 0: sculpt_seed = 42
 	if not _built:
 		return
+	_install_seed_controls()
 	if hand == before_hand and substance == before_substance and sculpt_seed == before_seed:
 		return
 	_rebuild_now()
