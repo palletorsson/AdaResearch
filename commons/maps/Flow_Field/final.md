@@ -36,6 +36,8 @@ var direction = Vector2(cos(angle), sin(angle))
 
 For now, look at what the conversion chose. This particle does not compare neighbouring values to find a downhill slope. It receives an angle made from one value. A similar-looking swirl could have come from another rule.
 
+A gradient would instead describe how that scalar value changes across space. We would return to the first hall's question about rates, now asking it in more than one direction.
+
 Change SCALE. The directions now vary across space differently. The existing trails still carry the earlier arrangement; give them time to leave the picture. Or use RESET to scatter new starting positions and clear their trails. RESET keeps the field's seed; SEED chooses another field as well. Changing a beginning and changing what waits there are different interventions.
 
 Press **FIELD TIME**. Now the field changes while the particles move through it. A particle returning to an address can receive a different direction. Press again and the field holds at this later moment. Movement continues through what it has become.

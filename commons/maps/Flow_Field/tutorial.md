@@ -19,6 +19,8 @@ FIELD TIME toggles only the field clock, holding its current time on pause. Part
 
 The field takes a noise value, turns it into an angle and constructs a unit direction with cosine and sine. It does not calculate the gradient of the noise. The two short code blocks in final.md are teaching sketches of the angle conversion and the position update, with the coordinate mapping and renderer omitted.
 
+A gradient would have one component for the scalar field's rate of change along each canvas coordinate. We could estimate those components by finite differences between neighbouring samples, returning to Change Intro's rate calculation. The gradient points towards local increase; its negative points towards decrease. This would require another field rule, not merely a different angle scale in the current one.
+
 ## What the controls retain
 
 RESET scatters new particle positions and clears their trails without selecting a new seed. SEED changes the seed and resets those particles. Neither rewinds every clock. Changes to speed or scale leave existing trail positions present until new samples replace them; they therefore temporarily show the history of more than one setting.

@@ -35,7 +35,7 @@ At initial x=1, the h=0.5 estimate is about -0.5956, while the analytic derivati
 
 The slider selects x continuously; x - and x + change it by 0.125 with endpoint clamping. RESET restores x=1, h=0.5 and the hidden analytic comparison. DERIVATIVE toggles the comparison without changing either function. Source curve vertices remain fixed; only sample markers, tangent, secant and readouts change.
 
-The rendered polyline uses 200 intervals. The two sample values and derivative are evaluated from the formula, not estimated from those rendered vertices. The plotted axes have different drawing scales; the numeric derivative is df/dx in model coordinates. The sign indicator's magnitude threshold (0.05) is labelled near zero, not an extremum detector. Four finite sample intervals are not a numerical proof of a limit or an assertion that smaller always means more accurate.
+The rendered polyline uses 200 intervals. The two sample values and derivative are evaluated from the formula, not estimated from those rendered vertices. The plotted axes have different drawing scales; the numeric derivative is df/dx in model coordinates. The sign card labels the analytic slope near zero when `absf(d) < 0.05`. This display threshold neither asserts an exact zero nor detects an extremum. Four finite sample intervals are not a numerical proof of a limit or an assertion that smaller always means more accurate.
 
 The comparison adapter is opt-in. Other placements retain the existing slider/tangent interface. This does not connect the displayed slope to the player's walking physics. Headset legibility, tracked-hand slider use and comfort remain to be checked.
 
@@ -54,7 +54,9 @@ The calculation is `width=(b-a)/n`, `x=a+(i+fraction)*width`, `total+=f(x)*width
 
 At N=4, MID is about 2.23665, RIGHT about 3.26367 and LEFT about 3.53733. The reference is about 2.86384. RIGHT is closer than MID here, disproving the old claim that midpoint always wins. For this smooth function, fine partitions converge toward the integral; six finite slider stops are an experiment, not the limit itself.
 
-The difference bar saturates at 0.05. Its numeric readout retains the signed difference. The function is positive throughout this encounter; signed cancellation and total distance are later experiments, not demonstrations already present here. The rectangles are a mounted plot, not walkable steps.
+The difference bar reaches full height when the absolute difference from the finite reference is 0.05 or greater. Its numeric readout retains the signed difference, so two full bars need not represent equal discrepancies. The function is positive throughout this encounter; signed cancellation and total distance are later experiments, not demonstrations already present here. The rectangles are a mounted plot, not walkable steps.
+
+To use the same sum for a rate over time, declare those units separately. A velocity sample in metres per second multiplied by an interval in seconds estimates displacement in metres. For a varying velocity, one sample approximates that interval's contribution; a constant velocity, or the interval's true average velocity, gives it exactly. The current workbench still uses horizontal position and height, not time and velocity.
 
 The third bay is the ftc_bridge. Compare its signed derivative contributions with its endpoint height difference. Its arch is a different function from the two workbenches. Flow_Field follows this encounter, introducing trajectories whose sampling addresses depend on prior movement.
 

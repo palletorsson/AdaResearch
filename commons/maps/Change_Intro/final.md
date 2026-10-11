@@ -27,11 +27,15 @@ Now press **DERIVATIVE**. A gold tangent appears at the red point. Above the cur
 
 The derivative asks what the finite ratios approach as the interval tends to zero, where that limit exists. The gold line comes from an analytic calculation for this smooth function. We can compare our samples with it, although none of the four STEP settings reaches the limit itself. Dividing by zero would not bring us closer.
 
+A sharp corner could deny us one tangent: the slopes approached from its two sides need not agree. This bench offers one smooth function; the corner remains an experiment we could build.
+
 ![A shorter interval and the revealed slope plot at the museum workbench](/book-images/figures/change/two-readings-near-museum.png)
 
 *The red sample has stayed at the same address. The green one has come closer; their joining line now rises. Above the curve, the second plot gives its slope another place to appear.*
 
 Move the red point with the slider. Find a crest. The curve is high there; the gold line is almost level. Follow the slope plot while moving down the other side. Height and rate have acquired separate lives in the picture: a high value can be changing very little, and a low one can be changing quickly.
+
+The sign card's “near zero” names a range we have chosen. It does not certify an exact zero or establish that this is a maximum or minimum.
 
 Try two places of similar height on opposite sides of a crest. A height alone would not tell you which side you had reached. Even the tangent answers only locally. Extend its line in your imagination and watch it leave the curve behind.
 
@@ -77,6 +81,8 @@ There is pleasure in watching the little steps approach a curve. The smooth-look
 
 Press **REFERENCE**. Another total appears, made from 4,096 midpoint rectangles. It gives our smaller sums something to compare with; it does not stand outside the same process of sampling. The integral is the limit approached as the intervals become arbitrarily narrow. This reference, like every setting on the slider, remains finite.
 
+The small difference bar stops growing at its display limit. Two full bars can therefore hide different discrepancies. Read the numbers alongside them.
+
 Return to four rectangles and compare MID with RIGHT. Against this reference, the right-edge choice happens to come closer. A familiar method has no entitlement to win every coarse comparison. For this smooth curve, sufficiently fine partitions bring the estimates together, but the first few choices can disagree substantially.
 
 HOLD has given that disagreement somewhere to stay. We can change the live picture without asking our memory to preserve every earlier rectangle. The extra display is a small provision for thinking: the answer we left behind remains available to challenge the next one.
@@ -84,6 +90,8 @@ HOLD has given that disagreement somewhere to stay. We can change the live pictu
 <!-- @ -->
 
 The total is useful when we want the area. The picture is useful when we want to see how we arrived at it. We might need a finer estimate for one task and be ready to act on a coarser one for another. How much work should the calculation do before we let its result matter?
+
+In another model, the height could represent a rate and the width a time interval. Their product would estimate an amount gained during that interval. We would need to name the quantity and its units before reading the sum that way.
 
 At the bridge, contributions will begin to cancel.
 
