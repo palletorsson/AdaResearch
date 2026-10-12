@@ -2109,6 +2109,7 @@ func _cartridge_sources(map_name: String) -> PackedStringArray:
 		"res://commons/scenes/em/em_cartridge.gd",
 		"res://commons/scenes/em/em_detail.gd",
 		"res://commons/scenes/em/em_lighting.gd",
+		"res://commons/scenes/em/em_observation_balcony.gd",
 	])
 	if map_name != "":
 		paths.append("res://commons/maps/%s/map_data.json" % map_name)
@@ -8099,6 +8100,7 @@ func _build_segment() -> void:
 			peek["weathering_wall"] = mm.get("weathering_wall", {})
 			peek["turning_wall"] = mm.get("turning_wall", {})
 			peek["simplex_corners"] = mm.get("simplex_corners", [])
+			peek["observation_balcony"] = mm.get("observation_balcony", {})
 			if mm.has("gate"):
 				peek["gate"] = bool(mm["gate"])
 			if mm.has("gate_depth_rows"):
@@ -8791,6 +8793,10 @@ func _build_segment() -> void:
 		var row_xs: Array = skin_xs if y_skin >= 0 else [-1 - sim_margin, vest_w + sim_margin]
 		for si in range(row_xs.size()):
 			var sx2: int = int(row_xs[si])
+			# An authored balcony supplies the floor and outer guards beyond this skin.
+			var balcony_door: Array = (peek.get("observation_balcony", {}) as Dictionary).get("door_z", [])
+			if sx2 == -1 and balcony_door.size() == 2 and y_skin >= int(balcony_door[0]) and y_skin < int(balcony_door[1]):
+				continue
 			if y_skin >= 0 and sx2 == w and doorways.has(y_skin):
 				continue                    # the doorway: no skin; the room walls take over
 			# the tile cell this skin would stand beside
@@ -9126,6 +9132,11 @@ func _build_segment() -> void:
 			_walk_cells[Vector2i(cell.x, cell.y + VESTIBULE_H + zbase)] = true
 	if wr:
 		_stamp_wall_runs(seg, solid, wcells, wall_col, m_wall)
+	var balcony_decl: Dictionary = peek.get("observation_balcony", {})
+	if not balcony_decl.is_empty():
+		var balcony_cells = preload("res://commons/scenes/em/em_observation_balcony.gd").install(seg, balcony_decl, VESTIBULE_H)
+		for cell: Vector2i in balcony_cells:
+			_walk_cells[Vector2i(cell.x, cell.y + VESTIBULE_H + zbase)] = true
 	_stamp_stages(seg, solid, tile, zbase)
 	_stamp_gaps(seg, tile, zbase)
 	_stamp_ramps(seg, tile, zbase)

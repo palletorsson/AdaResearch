@@ -1,0 +1,46 @@
+{
+  "id": "garment_cutting_table",
+  "name": "Cloth to a garment",
+  "artifacts": {
+    "garment_cutting_table": {
+      "lookup_name": "garment_cutting_table",
+      "name": "Cutting table and robot tailor",
+      "scene": "res://commons/artifacts/garment_cutting_table/garment_cutting_table.tscn",
+      "description": "Choose SUIT, A-LINE, GOWN or PLEATED and preview the shape. Load committed cloth saved at the Jacquard loom, inspect ten labelled panels, CUT their outlines, ASSEMBLE them one at a time with the robot arm, then WEAR on the real avatar. Shape and cloth persist together; TAKE OFF restores the prior look. Includes tartan, houndstooth and optical samples. Geometric tailoring, not cloth physics or a production sewing draft.",
+      "qfep_connection": "A retained weave meets a selected cut and an inferred avatar body; exact source data does not make the fit universal.",
+      "category": "patterns",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        7,
+        4,
+        4
+      ],
+      "size_group": "large",
+      "tags": [
+        "cloth",
+        "suit",
+        "cutting-table",
+        "robot-arm",
+        "wardrobe",
+        "wearable",
+        "jacquard",
+        "dress",
+        "a-line",
+        "gown",
+        "pleats"
+      ],
+      "spatial_profile": {
+        "dir_group": "front",
+        "range": 4,
+        "density": "medium",
+        "reading_radius": 1.4,
+        "derived_from": "authored"
+      }
+    }
+  }
+}

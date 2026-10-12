@@ -114,6 +114,8 @@ var _pins: Dictionary = {}      # slot name -> what is hanging there
 var _built := false
 var _garment_tween: Tween
 const DragOutfit := preload("res://commons/player/super_drag_outfit.gd")
+const TailoredSuit := preload("res://commons/player/tailored_suit.gd")
+var tailored_suit: Node3D
 var drag_outfit: Node3D
 var outfit_id: String = ""
 var _head_layer_was_visible: bool = true
@@ -121,13 +123,23 @@ var _head_layer_overridden: bool = false
 
 ## Choice of dress is independent of earned tiers and trophies.
 func wear_outfit(id: String) -> bool:
-	if id != "" and not DragOutfit.LOOKS.has(id):
+	if id != "" and id != "tailored_suit" and not DragOutfit.LOOKS.has(id):
 		return false
 	outfit_id = id
 	if not _built:
 		_build()
 	if _garment != null:
 		_garment.visible = id == ""
+	if is_instance_valid(tailored_suit):tailored_suit.visible=false
+	if id == "tailored_suit":
+		if is_instance_valid(drag_outfit):drag_outfit.visible=false
+		if not is_instance_valid(tailored_suit):
+			tailored_suit=TailoredSuit.new();tailored_suit.name="TailoredSuit";_torso.add_child(tailored_suit)
+		tailored_suit.visible=true
+		if _head is Camera3D and _head_layer_overridden:
+			(_head as Camera3D).set_cull_mask_value(19,_head_layer_was_visible)
+			_head_layer_overridden=false
+		return true
 	if id == "":
 		if is_instance_valid(drag_outfit):
 			drag_outfit.visible = false
@@ -254,7 +266,10 @@ func _compose_torso(delta: float) -> void:
 			face = (face * 0.65 + from_hands * 0.35).normalized()
 	face.y = 0.0
 	if face.length() > 0.01:
-		var want: float = atan2(-face.x, -face.z)
+		# Head and hands give a world-space direction. The torso is a child of
+		# the XR origin: remove its turn before assigning a local yaw.
+		var local_face: Vector3 = global_basis.inverse() * face
+		var want: float = atan2(-local_face.x, -local_face.z)
 		_torso.rotation.y = lerp_angle(_torso.rotation.y, want, 1.0 - exp(-8.0 * delta))
 
 
@@ -709,3 +724,5 @@ func _process(delta: float) -> void:
 	_drive_limbs(delta)
 	if is_instance_valid(drag_outfit) and drag_outfit.visible:
 		drag_outfit.call("follow", _head, _hand_l, _hand_r)
+	if is_instance_valid(tailored_suit) and tailored_suit.visible:
+		tailored_suit.call("follow",_hand_l,_hand_r)

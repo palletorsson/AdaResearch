@@ -68,16 +68,25 @@ var _given: Dictionary = {}          # sequence -> true, so a re-emit cannot dou
 var _mount: Node3D = null
 signal outfit_changed(outfit: String)
 var skirt_fabric: Dictionary = {}
+var suit_cloth: Dictionary = {}
+var suit_style := "suit"
+const GarmentPanels = preload("res://commons/artifacts/garment_cutting_table/suit_panels.gd")
+const SuitCloth = preload("res://commons/artifacts/garment_cutting_table/cloth_record.gd")
 @export var appearance_save_path: String = "user://super_drag_outfit.cfg"
 
 func choose_outfit(id: String, persist: bool = true) -> bool:
 	if not is_instance_valid(costume) or not bool(costume.call("wear_outfit", id)):
 		return false
 	if is_instance_valid(costume.drag_outfit):costume.drag_outfit.apply_skirt_fabric(skirt_fabric)
+	if is_instance_valid(costume.tailored_suit):
+		costume.tailored_suit.set_style(suit_style)
+		if not suit_cloth.is_empty():costume.tailored_suit.set_record(suit_cloth)
 	if persist and not appearance_save_path.is_empty():
 		var save := ConfigFile.new()
 		save.load(appearance_save_path)
 		save.set_value("appearance", "skirt_fabric", skirt_fabric)
+		save.set_value("appearance", "suit_cloth", suit_cloth)
+		save.set_value("appearance", "suit_style", suit_style)
 		save.set_value("appearance", "outfit", id)
 		var error := save.save(appearance_save_path)
 		if error != OK:
@@ -124,6 +133,10 @@ func _start() -> void:
 	if not appearance_save_path.is_empty():
 		var saved := ConfigFile.new()
 		if saved.load(appearance_save_path) == OK:
+			var cloth: Variant=saved.get_value("appearance","suit_cloth",{})
+			if cloth is Dictionary and SuitCloth.valid(cloth):suit_cloth=cloth
+			var style:=String(saved.get_value("appearance","suit_style","suit"))
+			suit_style=style if GarmentPanels.STYLES.has(style) else "suit"
 			var recipe = saved.get_value("appearance", "skirt_fabric", {})
 			if recipe is Dictionary and (recipe.is_empty() or preload("res://commons/artifacts/fabric_shader_studio/fabric_recipe.gd").valid(recipe)):skirt_fabric=recipe
 			choose_outfit(String(saved.get_value("appearance", "outfit", "")), false)
@@ -204,5 +217,18 @@ func set_skirt_fabric(recipe: Dictionary, persist: bool = true) -> bool:
 		var config=ConfigFile.new();config.load(appearance_save_path)
 		config.set_value("appearance","skirt_fabric",skirt_fabric)
 		config.set_value("appearance","outfit",costume.outfit_id)
+		return config.save(appearance_save_path)==OK
+	return true
+
+func set_tailored_suit(data: Dictionary, persist: bool = true, style: String = "suit") -> bool:
+	if not SuitCloth.valid(data) or not GarmentPanels.STYLES.has(style) or not is_instance_valid(costume):return false
+	suit_cloth=data.duplicate(true)
+	suit_style=style
+	if not choose_outfit("tailored_suit",false):return false
+	if persist and not appearance_save_path.is_empty():
+		var config:=ConfigFile.new();config.load(appearance_save_path)
+		config.set_value("appearance","outfit","tailored_suit")
+		config.set_value("appearance","suit_cloth",suit_cloth)
+		config.set_value("appearance","suit_style",suit_style)
 		return config.save(appearance_save_path)==OK
 	return true

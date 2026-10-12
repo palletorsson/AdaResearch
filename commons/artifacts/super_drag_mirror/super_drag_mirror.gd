@@ -3,6 +3,7 @@ extends Node3D
 ## live world: it sees the actual worn geometry, not a posed duplicate.
 ## One head-centred view in XR; stereo-per-eye reflections are not implemented.
 const Outfits := preload("res://commons/player/super_drag_outfit.gd")
+const GarmentPanels := preload("res://commons/artifacts/garment_cutting_table/suit_panels.gd")
 const ControlPanelScript := preload("res://commons/ui/control_panel.gd")
 const MIRROR_LAYER := 1 << 19
 @export var viewer_path: NodePath
@@ -115,7 +116,9 @@ func _build() -> void:
 		add_child(light)
 
 func _process(_delta: float) -> void:
-	if not is_instance_valid(viewer):
+	# A museum can hand control from a desktop/staging camera to the VR eye.
+	# Follow that active visitor instead of retaining the first camera forever.
+	if viewer_path.is_empty() or not is_instance_valid(viewer):
 		viewer = get_viewport().get_camera_3d()
 	if not is_instance_valid(viewer) or viewer == reflection:
 		viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
@@ -126,6 +129,7 @@ func _process(_delta: float) -> void:
 		var id := String(_wardrobe.get("costume").get("outfit_id"))
 		selected = Outfits.LOOKS.find(id)
 		readout.text = Outfits.TITLES[selected] if selected >= 0 else "Your walking costume"
+		if id=="tailored_suit":readout.text=GarmentPanels.title(_wardrobe.suit_style)+" / YOUR CLOTH"
 
 func update_reflection() -> void:
 	var local_eye := to_local(viewer.global_position)
@@ -144,8 +148,9 @@ func update_reflection() -> void:
 	reflection.set_frustum(HEIGHT * unit, Vector2(local_eye.x, CENTRE - local_eye.y) * unit, local_eye.z * unit, (local_eye.z + 35.0) * unit)
 
 func _resolve_wardrobe() -> void:
-	if is_instance_valid(_wardrobe):
+	if is_instance_valid(_wardrobe) and _wardrobe.has_method("wears_head") and _wardrobe.wears_head(viewer):
 		return
+	_wardrobe=null
 	for candidate in get_tree().get_nodes_in_group("costume_wardrobes"):
 		var costume: Node = candidate.get("costume")
 		if is_instance_valid(costume) and costume.get("_head") == viewer:

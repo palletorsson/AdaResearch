@@ -35,6 +35,8 @@ const SHADER_PATH := "res://commons/artifacts/basin_water/basin_water.gdshader"
 
 var _mesh: MeshInstance3D = null
 var _built: bool = false
+var _study_mode: bool = false
+var _study: Node3D
 
 
 func _ready() -> void:
@@ -43,6 +45,9 @@ func _ready() -> void:
 
 
 func _build() -> void:
+	if is_instance_valid(_study):
+		_study.queue_free()
+		_study = null
 	if _mesh != null and is_instance_valid(_mesh):
 		_mesh.queue_free()
 	var plane := PlaneMesh.new()
@@ -67,11 +72,22 @@ func _build() -> void:
 	_mesh.position = Vector3(0.0, lift, 0.0)
 	_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	add_child(_mesh)
+	# This hall opts into a controlled FBM study. Other basin instances retain
+	# the original three-sine surface and its map parameters.
+	if _study_mode:
+		_study = load("res://commons/artifacts/basin_water/water_study.gd").new()
+		_study.surface = _mesh
+		add_child(_study)
 
 
 ## Map tokens reach the surface here, e.g. basin_water:0:0#width:5#depth:5#amplitude:0.08#calm:on
 func apply_grid_config(config: Dictionary) -> void:
 	var changed := false
+	if config.has("study"):
+		var study: bool = str(config["study"]).to_lower() in ["on", "true", "1", "yes"]
+		if study != _study_mode:
+			_study_mode = study
+			changed = true
 	for key in ["width", "depth", "amplitude", "wavelength", "speed", "noise_amount", "lift"]:
 		if config.has(key):
 			var v: float = float(config[key])

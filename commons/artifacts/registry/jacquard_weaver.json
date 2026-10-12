@@ -1,0 +1,145 @@
+{
+  "id": "jacquard_weaver",
+  "name": "Cards become cloth",
+  "artifacts": {
+    "jacquard_studio": {
+      "lookup_name": "jacquard_studio",
+      "name": "Cards become cloth — loom and layers",
+      "scene": "res://commons/artifacts/jacquard_weaver/jacquard_studio.tscn",
+      "description": "Choose stripes, checks, tartan, chevron, herringbone, houndstooth or optical checks with seven physical buttons. Each starts a fresh 96-pick sample. Open its actual yarn geometry with LAYERS or the slider; FLAT closes the same cloth. Clear and run to watch the laced punch-card chain weave the chosen sample one pass at a time. Card lifts and warp/weft colour periods are independent. Edit cards or colours to change future picks while preserving earlier cloth. Dense 96-warp cloth, up to 128 actual picks, with a linked top-thread drawdown. Optical checks use graduated burgundy/cream colour bands in 2/2 twill; the cloth remains flat until deliberately opened. Longer colour sequences have paged controls.",
+      "category": "patterns",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        8,
+        4,
+        5
+      ],
+      "size_group": "large",
+      "parameters": {},
+      "tags": [
+        "weaving",
+        "jacquard",
+        "punch-card",
+        "warp",
+        "weft",
+        "history",
+        "layers",
+        "pickable",
+        "tartan",
+        "thread-colour",
+        "drawdown",
+        "dense-cloth",
+        "moving-card-chain",
+        "stripes",
+        "checks",
+        "chevron",
+        "herringbone",
+        "houndstooth",
+        "woven-samples",
+        "optical-checks"
+      ],
+      "spatial_profile": {
+        "dir_group": "front",
+        "range": 5,
+        "density": "medium",
+        "reading_radius": 1.5,
+        "derived_from": "authored"
+      }
+    },
+    "jacquard_weaver": {
+      "lookup_name": "jacquard_weaver",
+      "name": "Twelve-hook Jacquard loom",
+      "scene": "res://commons/artifacts/jacquard_weaver/jacquard_weaver.tscn",
+      "description": "Eight editable, pickable cards hang in a laced loop and drive a twelve-hook geometric loom. ONE PICK seats a card, lifts hooks and draws the weft before committing one record. Warp and weft colours repeat independently of the lift program. TARTAN + CLEAR starts a fresh authored 2/2 twill. Colour and card edits preserve earlier picks. Dense 96-thread cloth, up to 128 actual picks. Use jacquard_studio for the seven sample buttons and linked layer inspection table.",
+      "category": "patterns",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        5,
+        3,
+        3
+      ],
+      "size_group": "medium",
+      "parameters": {},
+      "tags": [
+        "weaving",
+        "jacquard",
+        "punch-card",
+        "warp",
+        "weft",
+        "history",
+        "layers",
+        "pickable",
+        "tartan",
+        "thread-colour",
+        "drawdown",
+        "dense-cloth",
+        "moving-card-chain"
+      ],
+      "spatial_profile": {
+        "dir_group": "front",
+        "range": 5,
+        "density": "medium",
+        "reading_radius": 1.5,
+        "derived_from": "authored"
+      }
+    },
+    "weave_layers": {
+      "lookup_name": "weave_layers",
+      "name": "A pick becomes a layer",
+      "scene": "res://commons/artifacts/jacquard_weaver/weave_layers.tscn",
+      "description": "Inspect supplied loom records as dense coloured yarn. The grabbable slider and FLAT/LAYERS buttons reversibly open the same mesh without changing its history. A flat drawdown shows each upper thread colour. Starts empty without a record. The paired jacquard_studio connects seven sample buttons: stripes, checks, tartan, chevron, herringbone, houndstooth and optical checks. Up to 128 recorded picks across 96 warp threads.",
+      "category": "patterns",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "tiling"
+      ],
+      "footprint": [
+        3,
+        4,
+        4
+      ],
+      "size_group": "medium",
+      "parameters": {},
+      "tags": [
+        "weaving",
+        "jacquard",
+        "punch-card",
+        "warp",
+        "weft",
+        "history",
+        "layers",
+        "pickable",
+        "tartan",
+        "thread-colour",
+        "drawdown",
+        "dense-cloth",
+        "stripes",
+        "checks",
+        "chevron",
+        "herringbone",
+        "houndstooth",
+        "woven-samples",
+        "optical-checks"
+      ],
+      "spatial_profile": {
+        "dir_group": "front",
+        "range": 5,
+        "density": "medium",
+        "reading_radius": 1.5,
+        "derived_from": "authored"
+      }
+    }
+  }
+}
