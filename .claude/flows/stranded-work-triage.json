@@ -12,8 +12,8 @@
  "granularity": "micro",
  "model_version": "opus-5",
  "created": "2026-09-20",
- "updated": "2026-10-11",
- "earned_from": "breath 2026-09-20T06:40 â€” gate L read 182 unreachable / 84,069 stranded words. Its own age_reading and claimed_reading split that into 9 fresh, 4 forum-claimed and 169 safe. Committing the 169 took the gate to 13 and prose_tracked 1278 -> 1447, against four consecutive breaths of delta 0.0 on a pinned scorer. EXTENDED 2026-09-23 (breath 09:15): the same filter run against L, M and N in one morning took 13 -> 4, 68 -> 31 and 10 -> 1, and every one of the 36 rows left standing is either forum-claimed or gitignored on purpose. The new node is `revisit`: 37 of gate M's 68 were files this same flow held back 24h earlier for being fresh, and nobody had touched or claimed them since. EXTENDED 2026-10-08 (breath 09:12): L 10 -> 4, M 63 -> 52 (stranded 11 -> 0), N 57 -> 0 PASS in one additive commit of 80 files; gates 8/15 -> 9/15. Two new facts: (1) a stale .git/index.lock (0 bytes, days old, no git process) blocks the additive stage - check `ls -la .git/index.lock` and `tasklist | grep -i git` before removing it; (2) six of gate L's rows were one study-spine block copied four times per room, so 'substance' can come back 'generated stub' and the honest move is to land it WITH that label in the commit and the thread, not to leave the gate red for want of literature. EXTENDED 2026-10-11 (breath 10:55): gate M stranded 10 -> 4 by landing three of four 10-09 passes - one whole (all hunks additive), two code-only (their hall pairs delete two footnotes), one declined (a shipped artifact's identity replaced). New node `pair`: read the whole pair's deletions before deciding whole / code-only / ask. Also: a compile verdict is a fact about an engine version - 4.3 convicted two files on a 4.4+ API that 4.6, the project's engine, accepts; the non-console 4.6 exe reports only in user://logs/godot.log.",
+ "updated": "2026-10-12",
+ "earned_from": "breath 2026-09-20T06:40 â€” gate L read 182 unreachable / 84,069 stranded words. Its own age_reading and claimed_reading split that into 9 fresh, 4 forum-claimed and 169 safe. Committing the 169 took the gate to 13 and prose_tracked 1278 -> 1447, against four consecutive breaths of delta 0.0 on a pinned scorer. EXTENDED 2026-09-23 (breath 09:15): the same filter run against L, M and N in one morning took 13 -> 4, 68 -> 31 and 10 -> 1, and every one of the 36 rows left standing is either forum-claimed or gitignored on purpose. The new node is `revisit`: 37 of gate M's 68 were files this same flow held back 24h earlier for being fresh, and nobody had touched or claimed them since. EXTENDED 2026-10-08 (breath 09:12): L 10 -> 4, M 63 -> 52 (stranded 11 -> 0), N 57 -> 0 PASS in one additive commit of 80 files; gates 8/15 -> 9/15. Two new facts: (1) a stale .git/index.lock (0 bytes, days old, no git process) blocks the additive stage - check `ls -la .git/index.lock` and `tasklist | grep -i git` before removing it; (2) six of gate L's rows were one study-spine block copied four times per room, so 'substance' can come back 'generated stub' and the honest move is to land it WITH that label in the commit and the thread, not to leave the gate red for want of literature. EXTENDED 2026-10-11 (breath 10:55): gate M stranded 10 -> 4 by landing three of four 10-09 passes - one whole (all hunks additive), two code-only (their hall pairs delete two footnotes), one declined (a shipped artifact's identity replaced). New node `pair`: read the whole pair's deletions before deciding whole / code-only / ask. Also: a compile verdict is a fact about an engine version - 4.3 convicted two files on a 4.4+ API that 4.6, the project's engine, accepts; the non-console 4.6 exe reports only in user://logs/godot.log. EXTENDED 2026-10-12 (breath 09:25): gate M stranded 14 -> 4 by landing three 10-10 passes code-only (cd0ea75f5, 32 paths, 27 new + 5 hunks that were each file's whole diff); the 4 left are the omoss ruling. New node `folder`: a gate M row is a PRELOAD, not a file - 7 of the 14 rows were the seven scripts two new artifact folders' 20 files that tracked player scripts happen to preload; the pathspec has to be the folder the row lives in, or the clone gets half a loom. New fact: a hall's prose can be committed AHEAD of its map and code (ff5cd73ca committed Shader_09_FBM/final.md describing the 26x29 bathhouse while map_data 1995/28 and the study code were uncommitted); the reachability gates convict stranded code, never stranded truth, so read the hall's committed final.md before deciding what 'code only' leaves a clone with.",
  "nodes": [
   {
    "id": "revisit",
@@ -38,6 +38,13 @@
    "type": "action",
    "label": "Measure whether it is writing or a stub",
    "detail": "Word count distribution plus a TODO/TBD/placeholder/lorem scan across the whole safe set, then READ two files end to end. A commit is a claim that this is work; make the claim on evidence. On 09-20: median 412 words, zero placeholders, and the GT_Flow final named the limit of its own exhibit. Short files are not automatically stubs â€” five ISO intent.md came in at 23-27 words because intent is a one-line walk-through spine in those rooms, not because they were unfinished."
+  },
+  {
+   "id": "folder",
+   "type": "action",
+   "label": "A row is a PRELOAD - walk the folder it lives in before writing the pathspec",
+   "detail": "Gate M walks preload()/load() strings out of scripts a HEAD registry reaches, so its row names the file some tracked script asks for, not the unit of work. On 10-12 the seven garment/jacquard rows were suit_panels, cloth_record, weave_geometry/program/samples, yarn_colours and tailored_suit - the files the player's costume scripts preload - out of two untracked artifact folders holding 20 files, two untracked registry files and a cutting-table scene that calls them all. Land the seven and a clone holds a suit with no loom and a registry that never heard of either. `ls` the folder of every stranded row, `git status --short` it, read its README for the pass's own account of what it installed, and `git check-ignore -v` the whole folder; then the pathspec is the folder plus its NEW registry file, and the hall token stays out under `pair`. Negative check once staged: `comm -13 <(sort pathspec) <(git diff --cached --name-only | sort)` empty, and `git diff --name-only -- $(cat pathspec)` empty (every modified file staged whole).",
+   "check": "for each stranded row: `ls $(dirname row)`; any sibling untracked .gd/.tscn/.json means the row is a fragment of a folder"
   },
   {
    "id": "pair",
@@ -92,7 +99,7 @@
   },
   {
    "from": "substance",
-   "to": "pair"
+   "to": "folder"
   },
   {
    "from": "pair",
@@ -110,6 +117,10 @@
   {
    "from": "verify",
    "to": "answer"
+  },
+  {
+   "from": "folder",
+   "to": "pair"
   }
  ],
  "anti_patterns": [
@@ -118,6 +129,7 @@
   "Turning a reachability gate green by committing spent one-shot scripts. Gate N's 120 are ~100 build_*_review.py builders that have run once and will not run again; committing them games the gate instead of repairing the repo. Prose is the artifact itself, so gate L was a different call from gate N. TENSION, recorded 2026-10-08: the breather landed gate-N tools five mornings running (09-25, 09-30, 10-01, 10-05, 10-08) with a forum heads-up each time and no objection, on the argument that a probe whose report sits in doc/reports/ is a reproducibility file, not a spent script. Neither side has been ruled on. Whichever you do, say in the thread which side you took.",
   "Treating the held-back set as permanently somebody else's. Freshness expires. If the next breath does not re-read it, the flow quietly converts a one-breath courtesy into a permanent exclusion - which is how 37 files sat convicted for an extra day with nobody claiming them.",
   "Reporting a clone gate as FAIL without saying what the residual IS. 'L=4, M=31, N=1' reads like unfinished work; 'all 4 claimed, all 31 gitignored pending a ruling, the 1 claimed' reads like a floor. Same number, opposite instruction to the next session.",
-  "Landing the hall half of a pair because the code half is clean. A gated hook is additive; the final.md that describes its buttons may have lost a footnote on the way. 10-11: two hall rewrites each dropped a dated citation (1949, 1985) that the committed text carried. Deletions in prose are the author's or Palle's to commit; the breath lands the code and names the deletions in the thread."
+  "Landing the hall half of a pair because the code half is clean. A gated hook is additive; the final.md that describes its buttons may have lost a footnote on the way. 10-11: two hall rewrites each dropped a dated citation (1949, 1985) that the committed text carried. Deletions in prose are the author's or Palle's to commit; the breath lands the code and names the deletions in the thread.",
+  "Landing exactly the rows the gate printed. The gate names preloads; 10-12's fourteen rows were four passes and the seven garment rows were fragments of two folders. A pathspec copied from the gate's list turns the gate green and leaves the clone a half-artifact that loads but cannot be placed."
  ]
 }
