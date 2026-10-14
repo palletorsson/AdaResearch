@@ -108,6 +108,19 @@
   ],
   "imports_optional": true,
   "destinations_have_local_baselines": true,
+  "book_architecture": {
+    "contract": "doc/book/RECURSIVE_ARCHITECTURE.md",
+    "pilot_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+    "reader_modes": [
+      "read",
+      "reconstruct",
+      "investigate"
+    ],
+    "first_pilot": "random-definition.seed-bench-001",
+    "first_pilot_selection": "selected_by_user_for_plan",
+    "pilot_status": "proposed_not_run",
+    "edition_status": "not_frozen"
+  },
   "text_simulation_loop": {
     "contract": "TEXT_SIMULATION.md",
     "examples": "text_experiments.json",
@@ -121,9 +134,24 @@
     ],
     "many_to_many": true,
     "observations_can_revise_plan": true,
+    "initiating_text_roles": [
+      "tutorial",
+      "final"
+    ],
+    "text_review_targets": [
+      "tutorial",
+      "final"
+    ],
+    "review_decisions": [
+      "revise",
+      "retain_with_reason",
+      "open_question"
+    ],
+    "both_rewrites_required": false,
+    "next_experiment_basis": "actual_observations_or_reconstruction_difficulties",
     "pilot_outcomes": [
       "apparatus result",
-      "revised or competing passage",
+      "independent tutorial and final reviews",
       "task-plan decision"
     ]
   },

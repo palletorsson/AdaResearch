@@ -10,11 +10,13 @@ The approved world cycle remains: **baseline → one-condition change → observ
 
 ```mermaid
 flowchart LR
-    P[Versioned passage] --> I[One explicit interpretation]
+    T[Tutorial: construction and inquiry] --> I[One explicit interpretation]
+    P[Final: encounter and possibility] --> I
     I --> A[Bounded apparatus variant]
     A --> E[Experiment cycle and scoped evidence]
-    E --> R[Revised or competing passage]
+    E --> R[Review each text: revise, retain or keep a question]
     R --> P
+    R --> T
     E --> Q[Question changes the task plan]
     Q --> I
     P --> I2[Another interpretation]
@@ -40,7 +42,7 @@ Reuse the experiment record in [RESEARCH_RECORD.md](RESEARCH_RECORD.md). Add onl
 | Revision | New passage, apparatus, both, a retained disagreement or a deliberate decision to defer. Link the before/after objects and the observation or source inspection that prompted it. |
 | Plan consequence | A change to tasks/dependencies, a new branch or a reason to continue unchanged. Preserve the previous plan and the decision; do not report a proposed revision as an applied one. |
 
-Use separate IDs for a passage, its interpretations and its experiments. Record a many-to-many relationship: one passage may produce several variants; one variant may support incompatible accounts. Canonical, experimental, deferred and abandoned are distinct dispositions, not a ladder on which everything must become canonical. No new runtime graph service is needed for the pilot: JSON plus linked Markdown in this folder is sufficient.
+Use separate IDs for a passage, its interpretations and its experiments. Record a many-to-many relationship: one passage may produce several variants; one variant may support incompatible accounts. Canonical, experimental, deferred and abandoned are distinct dispositions, not a ladder on which everything must become canonical. No new runtime graph service is needed for the pilot: JSON plus linked Markdown is sufficient. The new [book-level architecture](../../RECURSIVE_ARCHITECTURE.md) places concrete companion records under [book experiments](../../experiments/README.md), while these sleeve/wall examples remain design branches in the specification.
 
 ## Dissipated authorship and learning debt
 
@@ -54,7 +56,13 @@ Learning debt is the distance between what the apparatus makes available and wha
 
 Keep the pilot smaller than the research route. Task .002 selects a bounded interpretation and available evidence level; .003 supplies the seed-bench cycle, and writing .001–.002 supply its passage/interpretation record and reciprocal trial. This is a proposed pilot scope, not an implementation authorization inferred from the critique's “I would authorize” phrasing.
 
-The pilot produces three linked outcomes: **an apparatus result, a revised or competing passage, and a reasoned decision about the next work**. “No meaningful difference” and “the interpretation was not useful” remain possible results. The next task may be a bodily-memory experiment, a different record adapter or a new paragraph; it need not be the next item in the original queue.
+The pilot produces three linked outcomes: **an apparatus result, independent reviews of tutorial and final, and a reasoned decision about the next work**. A review can revise, retain with reasons or preserve an open question. “No meaningful difference” and “the interpretation was not useful” remain possible results. The next task may be a bodily-memory experiment, a different record adapter or a new paragraph; it need not be the next item in the original queue.
+
+The supplied concrete architecture makes the smallest proposal specific: sixteen triples, forty-eight retained values, RGB and a height interpretation. [The companion proposition](../../experiments/random-definition/seed-bench-001/proposition.md) defines a shared 4×4 layout and keeps RGB fixed while only the height rule changes. Its [hypothetical trace](../../experiments/random-definition/seed-bench-001/text-simulation.md) exposes assumptions before execution. Its observation and revision logs are explicitly pending. This records a proposed pilot, not a result. The sleeve remains a later experiment in relations between objects.
+
+The six connected components are the two text practices, simulation proposition, text simulation, Godot experiment, research record, and revision/edition. Tutorial and final can each start the loop and receive its consequences. Read, Reconstruct and Investigate are three entry modes into that material. A frozen reading edition must identify exact sources and output; a changing research graph must not silently replace its chapters. Writing task W004 carries that future edition work.
+
+The user has selected the 48-value seed bench as the first pilot in the task plan. Its companion binds a real tutorial exercise and a real final passage, with distinct questions. This is a small test of the method before broader research. After actual evidence, W002 reviews both texts independently and W005 chooses the next work from what happened. A review may revise, retain with reasons or preserve an unresolved question. Both texts need not change. Further work can be redirected, deferred or stopped; the imagined sleeve is not automatically next. State what could make us reconsider the question before testing, and preserve contrary or inconclusive results.
 
 ### Compare two kinds of attention without building a new hall
 
@@ -87,7 +95,7 @@ Both the generator definitions and canonical JSON must reflect an accepted chang
 
 ## What counts as verification
 
-Use the existing three verification levels and seven-step world cycle, extended by a round trip: select a passage → preserve an interpretation → change an apparatus → record scoped evidence → revise the passage or preserve a disagreement → propose a next apparatus/task change. Check the traceable relationship, not whether the visitor endorses the method or produces a surprising result.
+Use the existing three verification levels and seven-step world cycle, extended by a round trip: select a question from tutorial, final or both → preserve an interpretation → change an apparatus → record scoped evidence → review each text independently → decide the next apparatus/task change. Check the traceable relationship, not whether the visitor endorses the method or produces a surprising result.
 
 Demonstrate that two interpretations can coexist, a predecessor survives a revision, an unbuilt variant cannot be reported as observed, and a rejected proposal remains retrievable. For independent reconstruction, supply the passage, companion interpretation and declared code/assets; do not expect metaphor alone to specify a program. For the writing return, ask what the author or visitor now understands differently, if anything. Technical replay and a meaningful reading have different evidence.
 

@@ -1,0 +1,334 @@
+{
+  "schema": "ada.book-experiment.v1",
+  "id": "random-definition.seed-bench-001",
+  "status": "proposed",
+  "disposition": "experimental",
+  "runtime_verified": false,
+  "sources": [
+    {
+      "passage_id": "random-definition.values-and-assignment.v1",
+      "source_path": "commons/maps/Random_Definition/final.md",
+      "snapshot_path": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-book-architecture/Random_Definition.final.md",
+      "sha256": "591234ea2ef7b688bb6af55c780e721c7a903752125eb12506b4b0f2bb8b47a7",
+      "excerpt": "A picture needs one more agreement. Here, three successive draws supply the red, green and blue amounts of a cube.",
+      "version_basis": "Archived exact working-tree source; no commit inferred for uncommitted source bytes",
+      "text_role": "final"
+    },
+    {
+      "passage_id": "random-definition.channel-assignment.v1",
+      "text_role": "tutorial",
+      "source_path": "commons/maps/Random_Definition/tutorial.md",
+      "snapshot_path": "doc/book/course/randomness-research-2026-10-14/history/2026-10-14-before-book-architecture/Random_Definition.tutorial.md",
+      "sha256": "3ff25583b33f202139e8287dab68eda85fd84258301b9113a7c23695ef355b31",
+      "excerpt": "Now change only `Color(a, b, c)` to `Color(c, b, a)`. Predict which channel survives unchanged. Run it: red and blue exchange jobs, green stays, and the generator makes exactly the same requests. Restore the original assignment. Explain why matching seeds were insufficient to preserve the picture after that edit.",
+      "version_basis": "Archived exact working-tree tutorial; not an executed height comparison"
+    }
+  ],
+  "documents": {
+    "proposition": "doc/book/experiments/random-definition/seed-bench-001/proposition.md",
+    "text_simulation": "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md",
+    "observations": "doc/book/experiments/random-definition/seed-bench-001/observations.md",
+    "revision": "doc/book/experiments/random-definition/seed-bench-001/revision.md"
+  },
+  "interpretations": [
+    {
+      "id": "seed-bench.rgb-fixed.v1",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); local centre y=0.10 m",
+      "assumptions": [
+        "16 row-major triples in a shared 4x4 XZ study layout",
+        "All 48 values retained before display; no draws while switching",
+        "Same cube dimensions, XZ, material mapping, lighting and host transform in both modes"
+      ],
+      "exclusions": [
+        "No new random acquisition",
+        "No force or connection model"
+      ]
+    },
+    {
+      "id": "seed-bench.rgb-mean-height.v1",
+      "passage_ids": [
+        "random-definition.channel-assignment.v1",
+        "random-definition.values-and-assignment.v1"
+      ],
+      "mapping": "RGB=(a,b,c); local centre y=0.10 m + 0.30 m * (a+b+c)/3",
+      "assumptions": [
+        "Same retained triples and RGB as the baseline",
+        "Only the local centre-height rule changes",
+        "Equal sums may give equal heights for different colours"
+      ],
+      "exclusions": [
+        "Not a neutral-colour height comparison",
+        "No claim that colour and geometry have equivalent perceptual meaning",
+        "No wearability or comfort result"
+      ]
+    }
+  ],
+  "simulation": {
+    "text": {
+      "path": "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md",
+      "kind": "text_thought_experiment",
+      "status": "authored_hypothesis"
+    },
+    "godot": {
+      "scene": null,
+      "build": null,
+      "execution_status": "not_run",
+      "runs": []
+    }
+  },
+  "record_contract": {
+    "raw_values": null,
+    "sample_count": 48,
+    "cells": 16,
+    "values_per_cell": 3,
+    "grid": [
+      4,
+      4
+    ],
+    "draw_order": "row-major triples; no discard in this comparison",
+    "layout": "same pilot-local XZ layout in both modes; shipped vertical grids unchanged",
+    "spacing_m": 0.1,
+    "cube_side_m": 0.04,
+    "base_centre_height_m": 0.1,
+    "height_span_m": 0.3,
+    "retained_fields": [
+      "generator/build",
+      "seed",
+      "state_before",
+      "state_after",
+      "raw_values",
+      "draw_order",
+      "parameters",
+      "mapping_version",
+      "host_transform",
+      "independent_kept_copy",
+      "ordered_interventions",
+      "observation",
+      "next_change"
+    ],
+    "replay": "Stored values and mapping version; generator rerun is a separate scoped check",
+    "fresh_acquisition": "Separate operation, never invoked by replay or interpretation change"
+  },
+  "reference_fixture": {
+    "kind": "invented_arithmetic_fixture_not_rng_output",
+    "values": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "expected_heights_m": [
+      0.1,
+      0.4,
+      0.2,
+      0.2,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25,
+      0.25
+    ],
+    "evidence_status": "calculated_expectation_not_executed"
+  },
+  "observations": [],
+  "revisions": [],
+  "learning_debt": [
+    {
+      "id": "seed-bench.debt.mapping",
+      "kind": "unverified_implementation",
+      "question": "Does a retained record survive switching, copying, export/import and replay without extra draws or mutation?",
+      "next_test": "Build the bounded variant and probe, including deliberate copy/draw faults.",
+      "status": "open",
+      "responsible_reviewer": null
+    },
+    {
+      "id": "seed-bench.debt.reading",
+      "kind": "unresolved_interpretation",
+      "question": "Does height suggest a useful question, obscure the colour relation, or change nothing interesting for a visitor?",
+      "next_test": "Record a real encounter and competing accounts without requiring a preferred judgment.",
+      "status": "open",
+      "responsible_reviewer": null
+    },
+    {
+      "id": "seed-bench.debt.reconstruction",
+      "kind": "not_yet_understood",
+      "question": "Can an independent reader reconstruct the mapping and explain what the mean omits?",
+      "next_test": "A human attempt using the exact printed continuation, with assistance recorded.",
+      "status": "open",
+      "responsible_reviewer": null
+    }
+  ],
+  "contributions": [
+    {
+      "role": "architecture and pilot direction",
+      "contributor": "User-supplied text; original sentence authorship not inferred",
+      "source": "doc/book/course/randomness-research-2026-10-14/imports/2026-10-14-book-architecture/concrete_book_architecture.md"
+    },
+    {
+      "role": "companion specification and hypothetical trace",
+      "contributor": "Codex in this conversation",
+      "model_version": null,
+      "note": "Model version not recorded; no simulated or human observation implied."
+    },
+    {
+      "role": "equal initiating and returning roles for tutorial and final; first pilot retained",
+      "contributor": "User direction in this conversation",
+      "source": "doc/book/course/randomness-research-2026-10-14/imports/2026-10-14-two-texts/two_texts_one_world.md"
+    }
+  ],
+  "related_tasks": [
+    "randomness_research.003",
+    "randomness_research_writing.001",
+    "randomness_research_writing.002",
+    "randomness_research_writing.005"
+  ],
+  "evidence_status": {
+    "artifact": "not_tested",
+    "experiment_cycle": "not_tested",
+    "specified_cross_hall": "not_applicable_local_pilot",
+    "scene_loading": "not_tested",
+    "runtime_stability": "not_tested",
+    "performance": "not_tested",
+    "physical_VR": "not_tested",
+    "independent_learner": "not_tested"
+  },
+  "edition": {
+    "id": null,
+    "status": "not_selected",
+    "publication_status": "not_published"
+  },
+  "initiation": {
+    "allowed_text_roles": [
+      "tutorial",
+      "final"
+    ],
+    "status": "proposed",
+    "questions": [
+      {
+        "text_role": "tutorial",
+        "passage_id": "random-definition.channel-assignment.v1",
+        "question": "Can a reader reconstruct and explain a changed assignment while the retained draws stay fixed?"
+      },
+      {
+        "text_role": "final",
+        "passage_id": "random-definition.values-and-assignment.v1",
+        "question": "What does assigning height allow us to notice or attempt with the same retained arrangement?"
+      }
+    ],
+    "reconsider_if": [
+      "Reconstruction exposes an untaught concept or hidden dependency.",
+      "Correct geometry yields no useful perceived difference or a contrary interpretation.",
+      "Kept values or generator state change during the mapping switch."
+    ]
+  },
+  "text_reviews": {
+    "final": {
+      "source_path": "commons/maps/Random_Definition/final.md",
+      "source_passage_ids": [
+        "random-definition.values-and-assignment.v1"
+      ],
+      "status": "pending_evidence",
+      "decision": null,
+      "reason": null,
+      "observation_ids": [],
+      "successor_source": null
+    },
+    "tutorial": {
+      "source_path": "commons/maps/Random_Definition/tutorial.md",
+      "source_passage_ids": [
+        "random-definition.channel-assignment.v1"
+      ],
+      "status": "pending_evidence",
+      "decision": null,
+      "reason": null,
+      "observation_ids": [],
+      "successor_source": null
+    }
+  },
+  "review_contract": {
+    "targets": [
+      "tutorial",
+      "final"
+    ],
+    "allowed_decisions": [
+      "revise",
+      "retain_with_reason",
+      "open_question"
+    ],
+    "both_rewrites_required": false,
+    "each_review_requires": [
+      "source_version",
+      "observation_refs",
+      "reason"
+    ],
+    "pending_is_complete": false
+  },
+  "next_experiment": {
+    "selection_status": "awaiting_observations",
+    "allowed_decisions": [
+      "continue",
+      "redirect",
+      "defer",
+      "stop"
+    ],
+    "source_observation_ids": [],
+    "question": null,
+    "decision": null,
+    "proposition": null
+  }
+}

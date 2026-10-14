@@ -1,0 +1,574 @@
+{
+  "schema": "ada.research-plan-revisions.v1",
+  "revisions": [
+    {
+      "id": "2026-10-14-recursive-writing",
+      "status": "applied_to_spec_only",
+      "basis_kind": "user_supplied_method_clarification",
+      "trigger_sources": [
+        "imports/2026-10-14-recursive-writing/critique.md",
+        "imports/2026-10-14-recursive-writing/text_world_loop.md",
+        "imports/2026-10-14-recursive-writing/a_book_that_can_build_its_own_rooms.md"
+      ],
+      "reason": "Writing can initiate operational interpretations; observations can revise prose and the future task graph. Preserve competing worlds and different moments of understanding.",
+      "predecessor_manifest": "history/2026-10-14-before-recursive-writing/manifest.json",
+      "predecessor_scope": "Frozen local document and canonical task/route data; not a runtime capture. The preceding generator source was not snapshotted.",
+      "selection": "Incorporate the supplied clarification into the current local spec; keep live museum unchanged and all runtime tasks unperformed.",
+      "alternatives": [
+        "Keep writing as a late editorial step (superseded).",
+        "Start reciprocal writing beside the pilot and review the graph before expansion (selected).",
+        "Build the full sleeve or new halls now (not selected or authorized by this pass)."
+      ],
+      "task_changes": [
+        {
+          "task_id": "randomness_research.001",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [],
+          "depends_on_after": []
+        },
+        {
+          "task_id": "randomness_research.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.001"
+          ],
+          "depends_on_after": [
+            "randomness_research.001"
+          ]
+        },
+        {
+          "task_id": "randomness_research.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research.004",
+          "change": "revised",
+          "changed_fields": [
+            "spec",
+            "depends_on"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research.005",
+          "change": "revised",
+          "changed_fields": [
+            "spec",
+            "depends_on"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research.006",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.005"
+          ],
+          "depends_on_after": [
+            "randomness_research.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research.007",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.006"
+          ],
+          "depends_on_after": [
+            "randomness_research.006"
+          ]
+        },
+        {
+          "task_id": "randomness_research.008",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research.009",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.008"
+          ],
+          "depends_on_after": [
+            "randomness_research.008"
+          ]
+        },
+        {
+          "task_id": "randomness_research.010",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.011"
+          ],
+          "depends_on_after": [
+            "randomness_research.011"
+          ]
+        },
+        {
+          "task_id": "randomness_research.011",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.009"
+          ],
+          "depends_on_after": [
+            "randomness_research.009"
+          ]
+        },
+        {
+          "task_id": "randomness_research.012",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.013",
+            "randomness_research.007"
+          ],
+          "depends_on_after": [
+            "randomness_research.013",
+            "randomness_research.007"
+          ]
+        },
+        {
+          "task_id": "randomness_research.013",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.010"
+          ],
+          "depends_on_after": [
+            "randomness_research.010"
+          ]
+        },
+        {
+          "task_id": "randomness_research.014",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research.015",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.006",
+            "randomness_research.014"
+          ],
+          "depends_on_after": [
+            "randomness_research.006",
+            "randomness_research.014"
+          ]
+        },
+        {
+          "task_id": "randomness_research.016",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.014",
+            "randomness_research.015"
+          ],
+          "depends_on_after": [
+            "randomness_research.014",
+            "randomness_research.015"
+          ]
+        },
+        {
+          "task_id": "randomness_research.017",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.016"
+          ],
+          "depends_on_after": [
+            "randomness_research.016"
+          ]
+        },
+        {
+          "task_id": "randomness_research.018",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.013",
+            "randomness_research.017"
+          ],
+          "depends_on_after": [
+            "randomness_research.013",
+            "randomness_research.017"
+          ]
+        },
+        {
+          "task_id": "randomness_research.019",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.018"
+          ],
+          "depends_on_after": [
+            "randomness_research.018"
+          ]
+        },
+        {
+          "task_id": "randomness_research.020",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ],
+          "depends_on_after": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.001",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "depends_on",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.001",
+            "randomness_research.007"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.003",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.004",
+          "change": "revised",
+          "changed_fields": [
+            "title",
+            "spec",
+            "depends_on",
+            "acceptance"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.003"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "added",
+          "title": "Let the pilot revise the future task graph",
+          "depends_on_after": [
+            "randomness_research_writing.002"
+          ]
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/FINAL.md": "da91f8a87b7dcfb7b8803dde38edb5d2a091fe66bf6cff220e6deccf497457b2",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "8bffafc3c7ab738dbd2bb1ee36126094b2117e8844ca11a6e79818e8e8793cfd",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "ad22ee72fc42fcb111d54e8fd30f0157a198f973970c842651a3b224893db609",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "948d71f0fd91fbb9a18af60e1a107511ddd1daebfc4a7248da0162b854fe084b",
+        "doc/tasks/randomness_research.json": "c022ad2c1bdf207580c63aa17d89658af4568712d353dc65ee5bf99d7fe0fee7",
+        "doc/tasks/randomness_research_writing.json": "55789b17811e56fb5d287dab771d397f1511ebf67efe515d7f5f81830555afa5",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "fdcb765dec56050d21eeb521e2be21738ca8a6065341a3878fc4a114a386c56a",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "8d753b2b88848abc70f0958bccb77a31f00c4914616d3d2605365e634b2c8fb8",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "0c89389707a24c1d87864f41d767044246a02e9118ec9d2ff10d9813644d4a72"
+      },
+      "observations": [],
+      "runtime_changes": false,
+      "followup_task": "randomness_research_writing.005",
+      "future_revision_contract": "Attach actual trigger evidence, preserve before/after versions, keep stable IDs/progress, update generator and JSON together, validate references and DAG, and distinguish proposed from selected/applied changes."
+    },
+    {
+      "id": "2026-10-14-book-architecture",
+      "status": "applied_to_spec_only",
+      "basis_kind": "user_supplied_method_clarification",
+      "trigger_sources": [
+        "imports/2026-10-14-book-architecture/concrete_book_architecture.md"
+      ],
+      "reason": "Connect the existing book to six distinct research components, a concrete seed companion, three reader modes and recoverable frozen editions.",
+      "predecessor_manifest": "history/2026-10-14-before-book-architecture/manifest.json",
+      "predecessor_scope": "Exact working-tree documents, canonical task/route files, source anchors, generator and validator; no runtime capture. Base commit 63b5d7ba34eb2a7206a387f8ce2f170ce3cf9c83.",
+      "selection": "Apply the architecture to documentation and task acceptance; author a proposed 48-value RGB/height companion with no invented run or observation.",
+      "alternatives": [
+        "Build the whole sleeve first (deferred).",
+        "Add a second museum/book system (not selected).",
+        "Connect existing hall sources through a small companion and begin with the seed comparison (selected design)."
+      ],
+      "design_resolution": "Sixteen ordered triples; preserve RGB in both views and change only centre height from fixed to scaled mean. Mapping/layout choices are explicit proposals by this revision, not attributed user formulas.",
+      "hall_order_changed": false,
+      "task_dependencies_changed": false,
+      "task_changes": [
+        {
+          "task_id": "randomness_research.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.001"
+          ],
+          "depends_on_after": [
+            "randomness_research.001"
+          ]
+        },
+        {
+          "task_id": "randomness_research.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research.020",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ],
+          "depends_on_after": [
+            "randomness_research.004",
+            "randomness_research.005",
+            "randomness_research.006",
+            "randomness_research.007",
+            "randomness_research.013",
+            "randomness_research.014",
+            "randomness_research.015",
+            "randomness_research_writing.004"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.001",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research.002"
+          ],
+          "depends_on_after": [
+            "randomness_research.002"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.002",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.001",
+            "randomness_research.003"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.003",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002",
+            "randomness_research.013"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.004",
+          "change": "revised",
+          "changed_fields": [
+            "acceptance",
+            "output",
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.003",
+            "randomness_research_writing.005"
+          ]
+        },
+        {
+          "task_id": "randomness_research_writing.005",
+          "change": "revised",
+          "changed_fields": [
+            "spec"
+          ],
+          "depends_on_before": [
+            "randomness_research_writing.002"
+          ],
+          "depends_on_after": [
+            "randomness_research_writing.002"
+          ]
+        }
+      ],
+      "after_sha256": {
+        "doc/book/course/randomness-research-2026-10-14/README.md": "cb28986f2a46b9ccb091180192e3ef811f4e1799f5aeaaa8ece2b3d099e7958e",
+        "doc/book/course/randomness-research-2026-10-14/SPEC.md": "6b9409c522d6e28fa9cc9c6912706f6bc18c8908d9276cd977b0f222e2447b50",
+        "doc/book/course/randomness-research-2026-10-14/TASKS.md": "eb3ee7fc54106470d940780fe6119f6c72b35a96576f294c6c8aba63889018f5",
+        "doc/book/course/randomness-research-2026-10-14/TEXT_SIMULATION.md": "829083165d418d69471685260bfad69970ae629ea655d6682621f9b74ea0190a",
+        "doc/book/course/randomness-research-2026-10-14/RESEARCH_RECORD.md": "15988eba5c18773f939f5f82978dd49ae0d8226ae7c7af35fca2899a29607fc4",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md": "a6afaac63908f83af21dbebdf25ba66ee05f0d01100c80a85dcf94813dd3a84c",
+        "doc/book/course/randomness-research-2026-10-14/route.json": "81e046b7190904d09e54aca208e4927a0de7cb39424b34ae222b6d0f3a6c36ec",
+        "doc/book/course/randomness-research-2026-10-14/text_experiments.json": "469ba8ec7568149797e17b7942c286df8e8d3b75c31c31192d23977bf0c90934",
+        "doc/book/course/randomness-research-2026-10-14/build_plan.py": "260a06212b41f0e75a9a33d8a5e8c18c51519fd24bccda0a6b2894636e1c7c9f",
+        "doc/book/course/randomness-research-2026-10-14/validate_plan.py": "e897dd78dbc6b4cc9be6e8bad1ef6d59fb46fdc992ff9a21eec4822b4bba98ea",
+        "doc/tasks/randomness_research.json": "d15e5c32612ed86a5f59078790711bedf863b0b3da8f45e31de26f22c93a799c",
+        "doc/tasks/randomness_research_writing.json": "e8e9e3a11bf80220a2c6f9d1e213e26963ae9522949104e0d1b41fa256c3c790",
+        "doc/book/BOOK_FRAME.md": "b603c200bd7fa835479f27d75845d2102d7298faac49d23dc4f6dbc9d88cf8c0",
+        "doc/book/RECURSIVE_ARCHITECTURE.md": "8d55c3a98f80f038b431e895ed8585ef9cd71adece92ee0af7995987a11dd8c1",
+        "doc/book/RECURSIVE_BOOK_BLOG.md": "39f2c81c1799fa29605a96fe52d3a3b742cb18ef4e310e22620983b5c486a475",
+        "doc/book/experiments/README.md": "00af65cef161d335d455171c79ccd0799a621c17220d5ea78fb16e618eb44e3e",
+        "doc/book/experiments/validate_experiments.py": "ac95e45ea09f1649ab43dbad843969616a576dae782601517d5f7821cba39d06",
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json": "c77f5be967083841d2517b2b28a4d5f32c38ad44950717462244cfe10722b533",
+        "doc/book/experiments/random-definition/seed-bench-001/observations.md": "1f05d33c2c0d0b4f2704391489bac9f87334b2eafc81ad939b8a3f01313bd6fa",
+        "doc/book/experiments/random-definition/seed-bench-001/proposition.md": "3a72f427a751c24054a31a3b3d28b45e136b4c1ab7247ffe6dac48a01195466f",
+        "doc/book/experiments/random-definition/seed-bench-001/revision.md": "92561468f1588de9ce3921961f17e387b0b54d75e8aa22b7dde971a8bd0bf88f",
+        "doc/book/experiments/random-definition/seed-bench-001/text-simulation.md": "d88f76b29a4e11dc789330aced40032e75d32b6145ea16b8cd2c97934f468cdc"
+      },
+      "observations": [],
+      "runtime_changes": false,
+      "followup_task": "randomness_research_writing.005",
+      "future_revision_contract": "Retain the earlier plan and sources; attach actual evidence, preserve IDs/progress, update generator and canonical records together; frozen editions acquire successors rather than silent edits."
+    }
+  ]
+}

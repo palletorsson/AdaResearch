@@ -2,6 +2,7 @@
 from pathlib import Path
 import ast
 import hashlib
+import importlib.util
 import json
 import re
 
@@ -138,6 +139,43 @@ def main():
     check("Pilot review can redirect source/distribution expansion", all("randomness_research_writing.005" in ancestors(f"randomness_research.{n:03}") for n in [4,5]))
     check("Five particle lessons do not wait for the plan review", "randomness_research_writing.005" not in ancestors("randomness_research.013"))
     check("Writing cycle and two opening trials explicit", route["text_simulation_loop"]["writing_cycle"] == ["generate","read","question","test","revise","rediscover"] and route["text_simulation_loop"]["many_to_many"] and route["text_simulation_loop"]["observations_can_revise_plan"] and route["opening_trials"]["status"] == "proposed_not_run" and route["opening_trials"]["requires_new_hall"] is False)
+    architecture_sources = HERE / "imports/2026-10-14-book-architecture"
+    architecture_manifest = load(architecture_sources / "manifest.json")
+    check("Supplied book architecture preserved", all(digest(architecture_sources / name) == item["sha256"] for name,item in architecture_manifest["files"].items()))
+    architecture_history = HERE / "history/2026-10-14-before-book-architecture"
+    architecture_before = load(architecture_history / "manifest.json")
+    check("Pre-architecture documents and source anchors preserved", all(digest(architecture_history / name) == item["sha256"] for name,item in architecture_before["files"].items()))
+    history_errors = []
+    revision_path = (HERE / "plan_revisions.json").relative_to(ROOT).as_posix()
+    for index, revision in enumerate(revisions[1:], start=1):
+        manifest_path = HERE / revision["predecessor_manifest"]
+        manifest = load(manifest_path)
+        archived_by_path = {item["source_path"]: manifest_path.parent / name for name,item in manifest["files"].items()}
+        if any(digest(manifest_path.parent / name) != item["sha256"] for name,item in manifest["files"].items()):
+            history_errors.append(revision["id"] + ": predecessor receipt differs")
+        if revision_path not in archived_by_path or load(archived_by_path[revision_path])["revisions"] != revisions[:index]:
+            history_errors.append(revision["id"] + ": predecessor history differs")
+        if any(path not in archived_by_path or digest(archived_by_path[path]) != sha for path,sha in revisions[index-1]["after_sha256"].items()):
+            history_errors.append(revision["id"] + ": previous documents not recoverable")
+    check("Earlier plan revisions remain recoverable", not history_errors, history_errors)
+    book = route["book_architecture"]
+    check("Book entry modes and proposed pilot linked", book["reader_modes"] == ["read","reconstruct","investigate"] and book["pilot_status"] == "proposed_not_run" and book["edition_status"] == "not_frozen" and (ROOT / book["contract"]).exists() and (ROOT / book["pilot_record"]).exists() and book["pilot_record"] in examples["companion_records"])
+    module_spec = importlib.util.spec_from_file_location("ada_book_companions", ROOT / "doc/book/experiments/validate_experiments.py")
+    module = importlib.util.module_from_spec(module_spec)
+    module_spec.loader.exec_module(module)
+    companion_report = module.validate_all()
+    check("Companion provenance, links and evidence boundaries valid", not companion_report["errors"], companion_report["errors"])
+    progress_fields = ("status","claimed_by","done_at","blocked_reason","progress","evidence","notes")
+    old_tasks = {t["id"]:t for name in ("randomness_research.json","randomness_research_writing.json") for t in load(architecture_history / name)["tasks"]}
+    check("Architecture retains task identities dependencies and progress", ids == set(old_tasks) and all(t["depends_on"] == old_tasks[t["id"]]["depends_on"] and all(t.get(k) == old_tasks[t["id"]].get(k) for k in progress_fields) for t in tasks))
+    two_texts = HERE / "imports/2026-10-14-two-texts"
+    two_texts_manifest = load(two_texts / "manifest.json")
+    check("Supplied two-text proposal preserved", all(digest(two_texts / name) == item["sha256"] for name,item in two_texts_manifest["files"].items()))
+    loop = route["text_simulation_loop"]
+    check("Tutorial and final can initiate and receive experiments", loop["initiating_text_roles"] == loop["text_review_targets"] == ["tutorial","final"] and loop["review_decisions"] == ["revise","retain_with_reason","open_question"] and loop["both_rewrites_required"] is False and loop["next_experiment_basis"] == "actual_observations_or_reconstruction_difficulties")
+    check("Writing tasks preserve both research roles", all(t["initiating_text_roles"] == t["text_review_targets"] == ["tutorial","final"] and t["text_review_decisions"] == ["revise","retain_with_reason","open_question"] for t in issues[1]["tasks"]))
+    pilot = load(ROOT / book["pilot_record"])
+    check("Selected first pilot retains the 48-value comparison", book["first_pilot"] == pilot["id"] == "random-definition.seed-bench-001" and book["first_pilot_selection"] == "selected_by_user_for_plan" and pilot["record_contract"]["sample_count"] == 48 and pilot["record_contract"]["cells"] == 16 and pilot["record_contract"]["values_per_cell"] == 3 and pilot["simulation"]["godot"]["execution_status"] == "not_run")
     for p in HERE.glob("*.py"):
         ast.parse(p.read_text(encoding="utf-8"),filename=str(p))
     check("Proposal Python sources parse", True)

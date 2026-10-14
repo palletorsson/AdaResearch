@@ -37,3 +37,23 @@ The supplied critique discusses an older eighteen-stop/25-check proposal. It doe
 Current proposal: keep Definition → Entropy and trial a source-oriented alternative locally at Definition; no Source Lab is required. Start writing W001/W002 alongside main .003. W005 reviews the observed result before main .004/.005 expansion and may revise future work. Particle tutorials retain their independent five-lesson track. Later graphs and texts keep predecessors, explicit decisions and scoped evidence.
 
 [TEXT_SIMULATION.md](TEXT_SIMULATION.md) and [plan_revisions.json](plan_revisions.json) distinguish this completed document revision from future execution. The earlier draft and task graph are preserved in [history](history/2026-10-14-before-recursive-writing/manifest.json); the supplied sources are preserved separately. The seven-step world cycle and three verification levels remain unchanged.
+
+## Concrete book architecture
+
+The next supplied text defines the book as a versioned literary and computational research apparatus and recommends a 4×4 seed-bench comparison before the sleeve. This pass incorporates that direction into a book-level architecture, a readable blog draft, a concrete companion folder and the existing task plan. The exact supplied text is [preserved](imports/2026-10-14-book-architecture/manifest.json); its pasted diagram CSS is excluded from the authored documents. The predecessor and source anchors are [preserved separately](history/2026-10-14-before-book-architecture/manifest.json).
+
+**Now specified:** six connected components; Read/Reconstruct/Investigate entry modes; a many-to-many passage/interpretation record; explicit text-only predictions; exact source recovery; contribution review; frozen edition identities and change records. Existing Course World and book-frame agreements remain in force. Existing hall files and scene locations remain canonical.
+
+**Pilot design choice made here:** all forty-eight values form sixteen triples. RGB is the same in both modes; only the local centre-height rule changes from fixed height to the scaled triple mean. The proposed layout, dimensions and arithmetic fixture are declared in the companion. This resolves an ambiguity in the supplied idea; it is not a user-specified formula or an observed result. Pure greyscale-height rendering and first-channel height remain other possible comparisons.
+
+**Still future work:** actual Godot implementation, runtime observations, independent learner reconstruction, physical VR, editorial freezing and publication. No live hall order or final text was changed. The first pilot and selected route scope remain recorded through main .002; existing verification approval requires no repeat interview. The established 14/11/5 hall identities and particle order, task IDs/dependencies and execution progress are retained. W004 gains an explicit edition-candidate deliverable. This architectural revision does not commit, push or publish itself.
+
+## Two texts initiating and revising research
+
+The user explicitly requested updating the spec and task plan so `tutorial.md` and `final.md` can both initiate and revise experiments, keeping the 48-value seed bench first, then committing. This selects the first pilot in the plan and authorizes this document/task update and its Git commit. It does not request running the Godot implementation or publishing an edition.
+
+Both text roles now initiate the same bounded pilot through preserved source passages and separate questions. The tutorial develops construction, prediction and variation; the final develops encounter, interpretation and possibility. Either can also initiate alone in subsequent work. A result can revise either text, both, or neither with reasons. Review each independently as revise, retain_with_reason or open_question; pending reviews remain incomplete.
+
+The first pilot is no longer a choice that main .002 needs to ask the user to repeat. That task records it alongside remaining route/host details. The 48 values, RGB/mean-height mapping and all hall/particle orders stay unchanged. W002 requires the two reviews; W005 selects subsequent work from actual observations or reconstruction difficulties, allowing continue, redirect, defer or stop. The sleeve is an optional later question. No second experiment or outcome is invented here.
+
+The [supplied two-text proposal](imports/2026-10-14-two-texts/manifest.json) and [preceding local architecture](history/2026-10-14-before-two-texts/manifest.json) are preserved. Existing task IDs, dependencies and execution progress remain intact. Static validation cannot certify the research loop; its observation, human reconstruction and headset evidence are still absent.

@@ -6,6 +6,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 GOAL = "randomness_research"
 WRITING_GOAL = "randomness_research_writing"
+BOOK = ROOT / "doc/book"
+COMPANION = BOOK / "experiments/random-definition/seed-bench-001"
 RANDOMNESS = ["Random_Definition", "Random_Entropy", "Random_Cubes", "Random_Gaussian", "Random_Remove",
               "Randomness_10_PRINT_Algorithm", "Random_Rotate_Random_XYZ", "Random_Walk", "Random_Mushrooms",
               "Random_Space_Geometry", "Randomness_Examples_of_Randomness", "Random_Pheromone", "Random_Space", "Random_Game"]
@@ -37,7 +39,7 @@ WORK = [(1,
   'Static coverage includes 31 maps; every selected name/scene resolves at the snapshot. Duplicates and '
   'runtime/learner limits remain visible. No scene is certified by execution.'),
  (2,
-  "Record the author's decision on the concrete route and first pilot",
+  "Record route scope and the selected 48-value seed-bench pilot",
   'design',
   [1],
   [],
@@ -49,7 +51,7 @@ WORK = [(1,
   'implementation request may supply the needed authorization; do not demand redundant confirmation. Record '
   'concrete route, host, prose and pilot choices without changing live maps in this task. Include the Text '
   'Simulation Loop, a bounded source-versus-Entropy opening trial, and three pilot outcomes: apparatus '
-  'result, revised/competing passage and a task-plan decision. The later supplied texts are methodological '
+  'result, independent tutorial/final reviews and a task-plan decision. The later supplied texts are methodological '
   'direction, not approval to execute every proposed world.',
   'A decision record distinguishes author choices from alternatives. This review changes no live hall order. '
   'The first build is one complete bounded experiment.'),
@@ -343,12 +345,12 @@ WORK = [(1,
 
 
 WRITING = [
-    (1, "Bind a selected passage to interpretations and learning debt", [],
-     "Read TEXT_SIMULATION.md, RESEARCH_RECORD.md and text_experiments.json. Choose a passage for the bounded pilot and retain its exact excerpt, source version and companion ID. Extend the existing record with separate interpretation IDs, assumptions, omitted meanings, apparatus versions, evidence and revision links. Permit several worlds per passage and competing accounts per world. Distinguish unverified claims, unfamiliar mechanisms and unresolved interpretations; retain known contributors, uncertain origins and the person responsible for publication. Prose remains literary, not an execution language.",
-     "The selected source can be recovered; two interpretations coexist without overwriting it. Unbuilt variants have no invented apparatus path or observation. Known contributions and missing understanding are explicit."),
+    (1, "Bind tutorial and final questions to the first experiment", [],
+     "Read TEXT_SIMULATION.md, RESEARCH_RECORD.md and text_experiments.json. Either tutorial.md or final.md can initiate an experiment; bind both exact source passages for the selected seed-bench pilot and preserve the distinct questions they contribute. Retain source versions, text roles and companion IDs. Extend the existing record with separate interpretation IDs, assumptions, omitted meanings, apparatus versions, evidence and revision links. Permit several worlds per passage and competing accounts per world. Distinguish unverified claims, unfamiliar mechanisms and unresolved interpretations; retain known contributors, uncertain origins and the person responsible for publication. Neither text must explain everything in the other, and not every passage needs an experiment.",
+     "Both source texts can be recovered and initiate explicit questions; two interpretations coexist without overwriting them. Unbuilt variants have no invented apparatus path or observation. State what could change the interpretation or planned work; known contributions and missing understanding are explicit."),
     (2, "Run a bounded Text Simulation Loop beside the seed-bench pilot", [1],
      "Coordinate with main .003 using the selected scope from .002. Let one passage initiate an explicit bounded interpretation; preserve at least one alternative. Build a small experimental variant and native probe under this task's directory when runtime work is authorized. Compare the source-oriented and Entropy-oriented openings at the available evidence level, without building a Source Lab. Keep apparatus A/B and passage A/B with actual evidence. Return the observation to the writing and propose a further apparatus or task change. A textual simulation is a thought experiment, not executed or headset evidence. Do not wait for the whole noise route or force a sleeve implementation. Preserve failures, rival accounts and noncanonical worlds.",
-     "Completion requires a traceable passage → interpretation → apparatus → scoped observation → revised/competing passage → next-change record. If a required stage is missing, leave the task blocked/not tested rather than marking it complete. Predict, compare and keep evidence; a model's imagined outcome cannot close execution or human encounter gates."),
+     "Completion requires source question(s) from tutorial/final → interpretation → apparatus → scoped observation → independent review of both texts → next-change record. Each text receives revise, retain_with_reason or open_question with evidence and reasons; revision includes a recoverable successor. Both rewrites are not compulsory. A missing review or other required stage leaves this task incomplete. A model's imagined outcome cannot close execution or human encounter gates."),
     (3, "Audit reciprocal claims and the five reconstructed lessons", [2],
      "Audit proposed passages, interpretation records and five particle lessons: source/PRNG/hash, distribution/correlation, memory, entropy, chaos and variational free energy remain distinct. Keep source/license notices. Hard claims use primary sources or scoped tests, otherwise unverified labels. Compare the original proposition with the operational assumptions and actual evidence; do not infer one definitive literary meaning from a passing program. Separate code inspection, thought experiment, executed desktop simulation, AI image interpretation, human desktop/VR and independent reconstruction.",
      "Every asserted observation has an observer, method and recoverable source/build; technical correctness and a collaborator's understanding are separate. Five exact continuations and their assistance/evidence are documented."),
@@ -357,8 +359,22 @@ WRITING = [
      "Each selected passage and variant has an explicit disposition, evidence basis and next question. Changes in what the book or a collaborator understands are described without a mandatory novelty or learning score."),
     (5, "Let the pilot revise the future task graph", [2],
      "Use the pilot observation and reciprocal record to propose continuing, branching, reprioritizing, replacing or abandoning the next planned work. Preserve the predecessor route/task files and hashes; record affected stable IDs, dependencies, alternatives, trigger evidence and the selection decision in plan_revisions.json. Keep completed/claimed evidence and coordinate any changed active scope. Cancel superseded tasks with a reason; never reuse IDs for unrelated work. For selected changes update both build_plan.py and canonical JSON so regeneration cannot restore a discarded plan. Existing user authorization may cover the change; only genuinely new scope needs another decision. Validate the graph and retain an explicit continue-unchanged decision if warranted.",
-     "A traceable evidence-led decision precedes automatic source/distribution expansion. The prior graph survives, changes or continuation have reasons, dependencies resolve without cycles, and a proposed change is not falsely marked applied. The record may redirect work away from the original hall outline."),
+     "Actual observations or reconstruction difficulties support a continue, redirect, defer or stop decision before source/distribution expansion. Any next experiment names that evidence; a predetermined sleeve is insufficient. Both text reviews remain linked. The prior graph survives, changes or continuation have reasons, dependencies resolve without cycles, and a proposed change is not falsely marked applied."),
 ]
+
+# Refine existing work rather than creating a second set of book/pilot tickets.
+BOOK_WORK = {
+    2: " The user has selected the 4x4, 48-value RGB/height seed bench as the first pilot in the plan. Record that decision without asking for it again, alongside any remaining route/host scope. Use the existing companion with both tutorial and final source questions; retain the established museum host and separate opening-order trial. This specification request does not execute the pilot.",
+    3: " Use doc/book/experiments/random-definition/seed-bench-001 as the companion. Retain sixteen ordered triples (48 scalar values); compare fixed local centre height with 0.10 m + 0.30 m * the triple mean. Keep RGB visible, XZ layout, dimensions, host and lighting fixed; switch only the height rule with no new draws. Read proposition.md for the exact proposed layout and independently calculated fixture. Preserve the shipped vertical grids. The authored text simulation is a hypothesis; attach actual scene/build/run records only when they exist. Prove kept-copy independence and no draw on switching, then supply the exact printed continuation and independent reconstruction evidence.",
+    20: " Preserve Read/Reconstruct/Investigate links and the versioned companion sources. The reading route and research graph have different scopes; selected integration must not silently rewrite any frozen edition. Report the actual edition candidate and review status, not an assumed publication.",
+}
+BOOK_WRITING = {
+    1: " Start with the authored seed-bench companion and both archived source bindings; verify rather than duplicate them. Keep the six components, separate IDs and Read/Reconstruct/Investigate links. Tutorial builds construction and inquiry; final develops encounter and possibility; either can originate later research alone. New source versions retain predecessors. The existing sleeve and wall records remain separate design branches. Record source ownership and unknown model/version information honestly.",
+    2: " Use the companion's text-simulation.md as an explicit prediction and compare it with an actual selected execution. Fill observations.md and experiment.json only from scoped evidence, then revision.md and text_reviews from independent tutorial/final decisions. A tutorial-origin question can change the final; a final-origin question can change the tutorial. Reasoned retention or an open question is valid. Use the same 48 values for RGB and height, with RGB unchanged in both modes. Keep mapping A/B distinct from the source-versus-Entropy opening trial. Neither a hypothetical trace nor these authored companion documents completes this task.",
+    3: " Check all three reader entry modes, both initiating roles and both review targets, source recovery after later edits, and the separation of prediction from observation. Review the blog draft against actual implementation status; not every hall yet has its proposed tutorial. A proposed contribution must carry its source version, method, assistance and limits before editorial acceptance. Preserve contradictory accounts; code correctness, learner reconstruction and a meaningful encounter require different evidence.",
+    4: " Prepare a frozen local edition candidate only from the selected, reviewed material: unique edition/parent IDs, ordered chapter and tutorial versions, recoverable snapshots or Git objects with hashes, code/build and asset provenance, contributor decisions, evidence/debt scope, readable output hash and change record. Confirm the readable artifact before freezing. Later corrections create a new edition; model or script updates never silently alter an old one. Draft/frozen/published remain separate. Publication requires its actual decision and is not implied by freezing. Keep open branches navigable outside the curated route.",
+    5: " Link the companion's actual observations, tutorial/final reviews and reconstruction difficulties to the next-work decision; the current architecture clarification is not pilot evidence. Select any next experiment from what happened, or record a reasoned defer/stop decision. Do not automatically advance to a sleeve, new hall or larger apparatus. The mostly predictable first mapping tests the method; it does not need to manufacture novelty. The supplied texts and historical plan must remain recoverable.",
+}
 
 
 def absolute(relative):
@@ -402,10 +418,21 @@ def main():
              "transfer_ids": [f"X{i}" for i in range(1,8)], "first_local_transfer": "X1",
              "first_cross_hall_transfer": "X2", "optional_extension_transfers": ["X3", "X6", "X7"],
              "imports_optional": True, "destinations_have_local_baselines": True,
+             "book_architecture": {"contract": "doc/book/RECURSIVE_ARCHITECTURE.md",
+                                   "pilot_record": "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+                                   "reader_modes": ["read", "reconstruct", "investigate"],
+                                   "first_pilot": "random-definition.seed-bench-001",
+                                   "first_pilot_selection": "selected_by_user_for_plan",
+                                   "pilot_status": "proposed_not_run", "edition_status": "not_frozen"},
              "text_simulation_loop": {"contract": "TEXT_SIMULATION.md", "examples": "text_experiments.json",
                                       "writing_cycle": ["generate", "read", "question", "test", "revise", "rediscover"],
                                       "many_to_many": True, "observations_can_revise_plan": True,
-                                      "pilot_outcomes": ["apparatus result", "revised or competing passage", "task-plan decision"]},
+                                      "initiating_text_roles": ["tutorial", "final"],
+                                      "text_review_targets": ["tutorial", "final"],
+                                      "review_decisions": ["revise", "retain_with_reason", "open_question"],
+                                      "both_rewrites_required": False,
+                                      "next_experiment_basis": "actual_observations_or_reconstruction_difficulties",
+                                      "pilot_outcomes": ["apparatus result", "independent tutorial and final reviews", "task-plan decision"]},
              "opening_trials": {"status": "proposed_not_run", "A": ["Random_Definition", "source comparison within Random_Definition"],
                                 "B": ["Random_Definition", "Random_Entropy"], "requires_new_hall": False}}
     write_json(HERE / "route.json", route)
@@ -415,6 +442,7 @@ def main():
         "Five particle tutorials complete without optional field/rule extensions", "Seven-step cycles end in a next question/change",
         "Selected transfers preserve records; deferred contracts stay visibly untested", "Runtime, headset and learner evidence remain distinct"]
     for n,title,skill,deps,maps,artifacts,brief,acceptance in WORK:
+        brief += BOOK_WORK.get(n, "")
         output = HERE / "implementation" / f"{n:03}"
         refs = [absolute(f"commons/maps/{m}/map_data.json") for m in maps]
         refs += [absolute("commons/artifacts/registry/randomness.json"), absolute("commons/artifacts/registry/physics_simulation.json")]
@@ -424,6 +452,10 @@ def main():
         refs += [absolute(f"doc/tasks/{g}.json") for g in sorted({x.rsplit('.',1)[0] for x in linked})]
         preamble = f"Work in {ROOT.as_posix()}. Read {HERE.as_posix()}/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. "
         preamble += "Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. "
+        if n in BOOK_WORK:
+            preamble += f"Read {BOOK.as_posix()}/RECURSIVE_ARCHITECTURE.md and {COMPANION.as_posix()}/proposition.md. "
+        if n == 3:
+            brief += " Both tutorial and final initiate this pilot; preserve their distinct source questions and review each after execution. Record what would change the interpretation before testing. W005 selects later experiments from actual evidence, including a reason to defer or stop."
         if n > 2:
             preamble += f"Record accepted implementation scope in {GOAL}.002 before this work. "
         if n in OPTIONAL_TASKS:
@@ -467,6 +499,9 @@ def main():
                                     "Writing can initiate apparatus variants and observations can change the book and task plan",
                                     "Unresolved findings lead to a next test", "Contributions and editorial decisions are accountable"]
     for n,title,deps,brief,acceptance in WRITING:
+        brief += BOOK_WRITING.get(n, "")
+        if n == 4:
+            acceptance += " The selected local edition candidate has a recoverable ordered manifest, verified readable output, parent/change record and explicit editorial decision; publication is not inferred."
         tid = f"{WRITING_GOAL}.{n:03}"
         output = HERE / "implementation/writing" / f"{n:03}"
         dependencies = [f"{WRITING_GOAL}.{d:03}" for d in deps] or [f"{GOAL}.002"]
@@ -475,24 +510,28 @@ def main():
         if n == 3:
             dependencies.append(f"{GOAL}.013")
         writing["tasks"].append({"id":tid,"title":title,"skill":"verify" if n>=3 else "edit","effort":"half-day",
-            "spec":f"Work in {ROOT.as_posix()}. Read {HERE.as_posix()}/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Preserve unrelated and current hall prose. "+brief+f" Write Markdown/JSON evidence to {output.as_posix()}/REPORT.md and ledger.json; source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
+            "spec":f"Work in {ROOT.as_posix()}. Read {HERE.as_posix()}/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read {BOOK.as_posix()}/RECURSIVE_ARCHITECTURE.md and {COMPANION.as_posix()}/experiment.json. Preserve unrelated and current hall prose. "+brief+f" Write Markdown/JSON evidence to {output.as_posix()}/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
             "depends_on":dependencies,"status":"blocked","claimed_by":None,"done_at":None,
             "blocked_reason":"Depends on selected scope and versioned evidence; implementation has not begun.",
-            "output":str(output / "REPORT.md")+"; "+str(output / "ledger.json")+("; "+str(output / "probe.gd") if n == 2 else ""),
+            "output":str(output / "REPORT.md")+"; "+str(output / "ledger.json")+("; "+str(output / "probe.gd") if n == 2 else "")+("; "+str(output / "edition/manifest.json")+"; verified readable artifact and CHANGELOG.md under that edition directory" if n == 4 else ""),
             "verification": (f"& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path '{ROOT.as_posix()}' --script 'res://{output.relative_to(ROOT).as_posix()}/probe.gd'; then inspect the linked passage and scoped observation in REPORT.md; record human/headset evidence separately" if n == 2 else f"python -X utf8 '{HERE.as_posix()}/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision"),
             "acceptance":acceptance,"map_refs":["Random_Definition","Random_Entropy","Random_Space","Noise_Space_10","Particles_Collision"],"artifact_refs":[],
             "imported_task_refs":[t["imported_id"] for t in comparison["imported_task_mapping"] if tid in t["incorporated_into"]],
             "verification_levels":["artifact","experiment_cycle","specified_cross_hall"],
+            "initiating_text_roles":["tutorial","final"],
+            "text_review_targets":["tutorial","final"],
+            "text_review_decisions":["revise","retain_with_reason","open_question"],
             "separate_evidence":["scene_loading","runtime_stability","performance","physical_VR","independent_learner"]})
     for goal in (issue, writing):
         target = ROOT / "doc/tasks" / f"{goal['goal_id']}.json"
         preserve_progress(target, goal["tasks"])
         write_json(target, goal)
-    md = ["# Work to undertake", "", "Revised from the ZIP comparison and the supplied recursive-writing texts. Twenty stable implementation/planning IDs remain in the main goal; five writing tasks form a linked subgoal. All thirty-four imported IDs map into these canonical tasks in comparison.json. Imported JSON files are archived input, not duplicate live tickets.", "",
+    md = ["# Work to undertake", "", "Revised from the ZIP comparison, recursive-writing texts and concrete book architecture. Twenty stable implementation/planning IDs remain in the main goal; five writing tasks form a linked subgoal. All thirty-four imported IDs map into these canonical tasks in comparison.json. Imported JSON files are archived input, not duplicate live tickets.", "",
           "[Main tracker](../../../tasks/randomness_research.json) · [Writing tracker](../../../tasks/randomness_research_writing.json) · [Comparison](COMPARISON.md) · [Text Simulation Loop](TEXT_SIMULATION.md)", "",
           "The static audit is complete. Task .002 remains open to record selected implementation scope; the user's current request authorizes this specification revision. Existing verification decisions do not need reconfirmation. No runtime task is marked complete.", "",
-          "The first build is .003, one complete seed-bench cycle, alongside W001/W002 passage interpretation and reciprocal experiment. W005 then records what the observation changes about future work; proposed source/distribution expansion waits for that review. The five particle lessons build as **.008 → .009 → .011 → .010 → .013**; IDs remain stable although lesson numbers changed. P2 has a local birth table, so it does not wait for the distribution sender. Integration checks X2 after both sides are available.", "",
+          "The selected first build is .003, the 48-value seed-bench cycle. W001 binds tutorial and final as distinct initiating questions; W002 performs the reciprocal trial and reviews both texts independently. Each can be revised, retained with reasons or left with an open question; both rewrites are not compulsory. W005 chooses later work from actual observations or reconstruction difficulties, allowing continue, redirect, defer or stop. The sleeve is not automatically next. Proposed source/distribution expansion waits for that review. The five particle lessons build as **.008 → .009 → .011 → .010 → .013**; IDs remain stable although lesson numbers changed. P2 has a local birth table, so it does not wait for the distribution sender. Integration checks X2 after both sides are available.", "",
           "Optional .012 and .016–.019 retain field/sensitivity/selection/rule/QFEP research. They do not gate .020 or the five tutorials. No new hall is required. The writing subgoal begins at the pilot; it no longer waits for noise implementation. W005 may redirect the future graph. Preserve the previous graph and reasons, update generator plus JSON together, and keep claimed/completed evidence. W004 later gates the selected delivery review.", "",
+          "The [book architecture](../../RECURSIVE_ARCHITECTURE.md) connects six components and Read/Reconstruct/Investigate entry modes. The [first companion](../../experiments/random-definition/seed-bench-001/proposition.md) is authored design work: .003/W001/W002 must still complete its actual 48-value RGB/height cycle. W003 checks claims and entry links; W004 prepares a reviewed, frozen edition candidate with recoverable source and output versions. No edition is frozen or published by this specification pass. The sleeve remains a later selected experiment.", "",
           "| Task | Work | Depends on | Status | Scope |", "| --- | --- | --- | --- | --- |"]
     for goal in (issue,writing):
         for t in goal["tasks"]:

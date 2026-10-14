@@ -54,3 +54,19 @@ Selected records also link a stable passage ID and exact source version to sever
 Extend learning-debt entries with the collaborator or position to which understanding is missing. Distinguish unverified claims, unfamiliar working mechanisms and unresolved meanings. Mark unknown origins rather than assigning them an author. Keep text-only reasoning, executed simulation, AI image interpretation and human encounters separate. A later return can revise the question without closing the debt.
 
 After the first pilot, preserve the old task graph and record a decision to continue or change it. The final record can therefore yield a revised passage, a new apparatus, a different task dependency or a retained disagreement. [Plan revisions](plan_revisions.json) keep the reason and before/after identities. This is a proposal for research practice, not an automatic loop that executes whatever a passage suggests.
+
+## Book companion and edition identity
+
+The [concrete companion](../../experiments/random-definition/seed-bench-001/experiment.json) links a source snapshot/excerpt to two explicit interpretations, a hypothetical text simulation, open debt and future runs. Its [record contract](../../experiments/README.md) defines repository-relative paths and distinct passage/interpretation/experiment/run IDs. No sampled baseline or observation has been invented to fill it. The existing generic run record remains the place to preserve actual apparatus state; the companion refers to that record rather than making a second copy.
+
+A source hash detects a difference but cannot recover missing text. Preserve the source bytes or a reachable immutable Git object. Keep the hall's current source in place and bind each experiment to the version it actually used. Reader contributions remain proposed until a named review distinguishes the observation, interpretation and publication decision.
+
+A frozen edition selects an ordered set of recoverable passage/tutorial, image, code and experiment versions, and identifies its readable output and change record. It can expose unresolved learning debt without including every branch. Subsequent changes produce a new edition. The [architecture](../../RECURSIVE_ARCHITECTURE.md) specifies this contract; the current documents do not constitute a published or frozen edition.
+
+## Two initiating texts and two independent reviews
+
+An initiating source has a `text_role` of tutorial or final, a passage ID, an exact source version and the question it contributes. Either role can initiate alone; both can initiate together. Keep the two questions separate even when they meet in one experiment. The seed-bench pilot binds both current texts: changing RGB assignment from the tutorial, and questioning the jobs assigned to values from the final.
+
+Before execution, record what result or difficulty could change the interpretation or planned work. After execution, `text_reviews` contains a separate tutorial and final entry with source version, observation references, decision, reason and successor version if revised. Allowed decisions are revise, retain_with_reason and open_question; pending is not a completed review. A speculative passage need not be turned into a technical instruction or rewritten to claim agreement with the result.
+
+The companion's next-experiment decision remains empty until actual evidence can support continue, redirect, defer or stop. Link the selected question to that evidence in W005. Unexpected behaviour and reconstruction difficulties can motivate it; a mostly predictable first comparison is still useful for testing the method. Do not record the proposed second experiment as already run or require every cycle to generate a new hall.

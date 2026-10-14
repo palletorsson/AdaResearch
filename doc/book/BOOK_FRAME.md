@@ -2,6 +2,10 @@
 
 Editorial scaffold · 23 September 2026 · Working drafts for Palle's revision.
 
+**14 October — recursive research architecture:** [The book as a literary and computational apparatus](RECURSIVE_ARCHITECTURE.md) connects selected passages to propositions, text simulations, Godot experiments, research records and revisions. It adds Read/Reconstruct/Investigate entry modes and a frozen-edition contract while retaining this publication frame and the [Course World](course/COURSE_WORLD.md) agreement. The [seed-bench companion](experiments/random-definition/seed-bench-001/proposition.md) is proposed work, with no runtime observations yet. [Blog draft](RECURSIVE_BOOK_BLOG.md).
+
+`tutorial.md` and `final.md` can each initiate experiments and be revised by their consequences. Review both after a selected cycle, allowing revision, reasoned retention or an open question. The 48-value seed bench is the selected first pilot; later experiments follow its evidence rather than a compulsory literary or technical conclusion.
+
 ## Publication order
 
 1. [Before the first point](preface.md): the invitation, naming the audience, desire, method and relation between page and museum.

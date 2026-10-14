@@ -1,8 +1,8 @@
 {
   "date": "2026-10-14",
   "scope": "Static specification/comparison validation only",
-  "passed": 51,
-  "total": 51,
+  "passed": 61,
+  "total": 61,
   "errors": [],
   "checks": [
     {
@@ -252,6 +252,56 @@
     },
     {
       "check": "Writing cycle and two opening trials explicit",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Supplied book architecture preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Pre-architecture documents and source anchors preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Earlier plan revisions remain recoverable",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "Book entry modes and proposed pilot linked",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Companion provenance, links and evidence boundaries valid",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "Architecture retains task identities dependencies and progress",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Supplied two-text proposal preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Tutorial and final can initiate and receive experiments",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Writing tasks preserve both research roles",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Selected first pilot retains the 48-value comparison",
       "pass": true,
       "detail": null
     },
