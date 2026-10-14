@@ -1,12 +1,12 @@
 # Randomness: from explanation to shared experiment
 
-**14 October 2026 · Local specification · ready-for-agent (planning input)**
+**14 October 2026 · Revised after ZIP comparison and recursive-writing clarification · Local specification · ready-for-agent (planning input)**
 
 The author requested an audit of the current randomness/noise halls, a proposed sequence using existing and new artifacts, a particle tutorial path, and final writing developed from the supplied research map. This document uses the `to-spec` process. The author explicitly accepted the seven-step experiment cycle and three verification levels recorded below. Hall order, new room names and apparatus designs remain **proposals**, not decisions attributed to the author or instructions to change the live museum immediately.
 
-The existing repository task tracker is the publication destination: [task issue](../../../tasks/randomness_research.json). Its existing open/blocked/done vocabulary is retained. `ready-for-agent` means this specification is usable as planning input; the implementation tasks depend on the route-review task. No external issue tracker is assumed.
+The existing repository task tracker is the publication destination: [main task issue](../../../tasks/randomness_research.json) and [writing subgoal](../../../tasks/randomness_research_writing.json). Its existing open/blocked/done vocabulary is retained. `ready-for-agent` means this specification is usable as planning input; the implementation tasks depend on the route-review task. No external issue tracker is assumed.
 
-[Hall order and artifact decisions](HALLS.md) · [Particle tutorial path](PARTICLE_PATH.md) · [Final-text draft](FINAL.md) · [Complete current inventory](INVENTORY.md) · [Source findings](FINDINGS.md) · [Original supplied text](SOURCE.md)
+[Hall order and artifact decisions](HALLS.md) · [Particle tutorial path](PARTICLE_PATH.md) · [Final-text draft](FINAL.md) · [Complete current inventory](INVENTORY.md) · [Source findings](FINDINGS.md) · [Original supplied text](SOURCE.md) · [ZIP comparison](COMPARISON.md) · [Research record](RESEARCH_RECORD.md) · [Text Simulation Loop](TEXT_SIMULATION.md)
 
 ## Problem Statement
 
@@ -16,15 +16,19 @@ The author wants learning and artistic research to share a world. AI changes the
 
 The supplied text is a source for final writing. It is not a script to distribute unchanged across eighteen subject labels. The world and its text should gradually give the visitor more power to frame a question, choose an intervention and reconstruct the apparatus.
 
+The later supplied texts clarify that the book is itself an instrument of inquiry. A passage can initiate a simulation before its author knows how to implement or fully understand it. An implementation can contradict the passage; a later reader, including the author, can reconstruct the discrepancy. Learning debt and dissipated authorship concern different moments of understanding, not only faster production or missing verification.
+
 ## Solution
 
-Propose an **18-stop research route in eight movements**, using **15 existing hosts and three new halls**, with twelve existing randomness/noise halls retained as connected side visits. Two existing hosts are later returns to Procedural Generation and the QFEP Laboratory; their prerequisites remain visible. This is a proposed route across the museum, not an automatic replacement of its 25-sequence spine.
+Retain **all fourteen randomness and eleven noise sequence identities**, with a six-stop early randomness trial and the optional Lab Path coda. Keep the existing museum interlude and the current noise ending's Shaders handover. New source, sensitivity and rule experiments use current hosts first; four new hall names are deferred until spatial evidence warrants them. The eight research movements become a set of comparisons and returns, not a requirement to build more rooms.
 
-Build a **seven-stop particle branch** from five existing particle halls, one proposed field laboratory and the shared rule workshop. The learner carries one small particle model forward. The museum's richer artifacts are comparison material; copying all their machinery is not a prerequisite for asking a question.
+Build **five particle tutorials in the existing order**: single/arrays, emitters, forces, lifetime/types, collision. Teach simple retirement early; develop curves and types at the existing fourth hall. Optional field and rule studies return to existing rooms after the five lessons, with explicit randomness/noise prerequisites. Neither is a dependency of the collision/campfire lesson. Later Procedural Generation and QFEP visits retain their own preparation.
+
+Add a reciprocal Text Simulation Loop: **generate → read → question → test → revise → rediscover**, connected in both directions to the approved seven-step world experiment. Preserve the ambiguity of prose; translate selected propositions through a separate, versioned interpretation record. Allow several implementations of a passage and several accounts of one implementation.
 
 The recurring object is an experiment record. At first it preserves a colour arrangement. It later preserves a population, a field, a trajectory, a boundary policy and a rule revision. A record changes what can be compared; it does not stand in for the experience of being there.
 
-The first implementation should be a small complete encounter at the existing seed bench: baseline → one changed interpretation → retained result → replay → independent reconstruction → proposed further change. Expand only after that encounter gives us useful evidence about the method.
+The first implementation should be a small complete encounter at the existing seed bench: baseline → one changed interpretation → observation/comparison → retained result → replay → independent reconstruction → proposed further change. Pair the pilot with a passage interpretation, scoped observations and a task-plan decision. Compare the source-oriented and Entropy-oriented openings as bounded trials without requiring a new hall; Definition → Entropy remains the current proposed route. Evidence may lead to branching, reprioritizing or abandoning proposed work. The five particle lessons remain a separate design track.
 
 ## User Stories
 
@@ -52,6 +56,16 @@ The first implementation should be a small complete encounter at the existing se
 22. As a visitor, I want seated and standing interactions, readable comparisons and a clear exit, so that uncertainty in the experiment does not mean uncertainty about operating the room.
 23. As a researcher, I want runtime, headset and human-learning evidence reported separately, so that one passing script cannot certify all three.
 24. As a visitor, I want to return to the first instrument with a revised question, so that the last hall opens another investigation.
+25. As a learner, I want all five particle lessons to work without optional research extensions, so that I can complete and reconstruct a bounded program.
+26. As a visitor, I want a local baseline when I bring no record, so that entering a hall does not require a perfect earlier journey.
+27. As an author, I want unresolved claims and contributions linked to evidence and a next test, so that rapid AI-assisted production does not conceal work still to be done.
+28. As an editor, I want old and revised passages attached to their apparatus versions, so that a changed room can contradict a sentence without erasing its history.
+29. As a writer, I want a selected passage to propose an apparatus through an explicit interpretation, so that writing can initiate research before its meaning is exhausted.
+30. As a reader, I want several interpretations and simulations of a passage to remain accessible, so that one implementation does not become its sole meaning.
+31. As a returning author, I want to investigate material I did not personally compose or fully understand, so that reading can produce later knowledge without concealing contributions.
+32. As a researcher, I want an observation to revise the future task graph, so that the plan can learn rather than merely collect results along a predetermined route.
+33. As an editor, I want failed and noncanonical worlds retained with their reasons, so that preservation does not imply success or adoption.
+34. As a collaborator, I want source inspection, thought experiments, executed simulation, AI image interpretation and human encounters labelled separately, so that a plausible account cannot stand in for an observation.
 
 ## Implementation Decisions
 
@@ -66,15 +80,19 @@ The first implementation should be a small complete encounter at the existing se
 ### Proposed architecture and interfaces
 
 1. **Preserve the current museum as the baseline.** Build the research route as a reviewable manifest first. A later integration task must reconcile spine, museum route generation, sequence metadata, portals, teaching prerequisites and prose handovers. Renaming a hall in a plan does not change its runtime identifier.
-2. **One small experiment record, introduced by use.** Start locally at the seed bench. Store schema version, experiment and parent IDs, source provenance, generator/version, seed and captured generator states, sampled values when needed, draw roles/order, parameters, simulation step and tick, entity state, boundary policy, rule/interpreter version, ordered interventions and the visitor's observation. Include dependency/engine/build identity for replay claims. Do not build a museum-wide persistence framework before the pilot needs one.
+2. **One small experiment record, introduced by use.** Start locally at the seed bench. Store schema version, experiment and parent IDs, source provenance, generator/version, seed and captured generator states, sampled values when needed, draw roles/order, parameters, simulation step and tick, entity state, boundary policy, rule/interpreter version, ordered interventions and the visitor's observation. Include dependency/engine/build identity for replay claims. Do not build a museum-wide persistence framework before the pilot needs one. Export/import/clear are explicit. No raw headset or microphone stream is stored by default; any necessary target trace has a declared capture and retention choice.
 3. **Two comparisons.** SAME RECORD changes interpretation without spending new draws. SAME CONDITIONS, NEW SAMPLE investigates repeated trials. Changing distribution may need a declared sampling adapter; equal seeds alone do not guarantee matched variates if algorithms consume different numbers of draws.
 4. **Three replay promises.** Exact data replay reconstructs a retained record; deterministic simulation replay is scoped to a declared build, fixed step and ordered inputs; a fresh physical/network acquisition is a new observation. A screenshot can document appearance but cannot reproduce a simulation. GPU/physics display similarity must not be labelled exact replay without evidence.
 5. **Freshness is disclosed.** The opening's saved atmospheric seed remains available offline with its provenance. A crypto source would generate bytes through the engine's secure API. A Quest timing probe would record measured intervals and limitations. Simulated quantum/thermal/atmospheric values must be labelled simulations. A changing number or histogram is not an entropy-source certification.
-6. **A staged particle model.** Reuse the visible point and declared input infrastructure, then introduce explicit particle state, a fixed simulation tick, local random streams, birth/death records, emitters, lifetime curves, forces, fields and boundaries. Use a small CPU reference population before considering a rendering scale-up. The tutorial model and production artifact remain separately identified.
-7. **Cross-hall transfers are named contracts.** Only the links in the hall plan promise a carried record. Unknown schemas and changed dependencies produce an explanation, an explicit migration or a preserved old record; no silent reseeding. Reloading the application is tested only where persistent retention is promised.
+6. **A staged particle model.** Reuse the visible point and declared input infrastructure, then introduce explicit particle state, a fixed simulation tick, local random streams, birth/death records, emitters, forces, lifetime curves and boundaries; then optional field and rule extensions. Use a small CPU reference population before considering a rendering scale-up. The tutorial model and production artifact remain separately identified.
+7. **Cross-hall transfers are named contracts.** Only the links in the hall plan promise a carried record. Unknown schemas and changed dependencies produce an explanation, an explicit migration or a preserved old record; no silent reseeding. Reloading the application is tested only where persistent retention is promised. Every destination retains a usable local baseline; an incompatible import offers an explicit choice rather than silently substituting that baseline. Transfers are optional. The first adapter is local and the first cross-hall candidate connects distributions to emitters.
 8. **Bounded rule revision.** The initial workshop offers visible, versioned rule edits: detached versus connected cells; connect/disconnect conditions; sensor versus moving-body role. It preserves an undoable predecessor. Arbitrary code execution inside the headset is not required. A cloth sleeve is a later investigation, not a promised first implementation.
 9. **AI is a collaborator under examination.** Use saved, versioned examples for an initial model-sampling comparison. Distinguish sampling from a fixed model, modifying the prompt, and changing the model/training. The model proposes hypotheses or code; a visitor decides which intervention to perform and interprets evidence. Assistance is recorded; an automated reconstruction does not establish human learning.
-10. **Research writing has a feedback role.** Keep a short observation, what remains uncertain, and the next proposed change beside the record. The final text can be revised after experiments. Tests must not require the visitor to endorse QFEP or reach the author's desired interpretation.
+10. **Research writing has an initiating and revising role.** Keep a short observation, uncertainty and next change beside the record. Distinguish reconstructable tutorial, literary encounter and field notes. A contribution/learning-debt ledger names claim version, evidence basis, assistance, reviewer, open question and next test. Preserve paired passages against actual apparatus versions when a change makes earlier prose false. The new user-supplied texts explicitly introduce dissipated authorship and learning debt as methodological direction. Preserve their wording and delivery provenance without inventing individual authorship. Literary proposals do not become observations. Tests must not require the visitor to endorse QFEP or the author's desired interpretation.
+
+11. **A passage can have several operational interpretations.** Store its stable identity, exact source version/excerpt, interpretations, assumptions, apparatus versions, evidence, learning debt and revisions. Use existing records and local files; no new execution language is required. A textual simulation remains a thought experiment until executed, and one simulation never certifies a passage's entire meaning.
+12. **The task graph is revisable from evidence.** Preserve the old graph, changed IDs/dependencies, triggering observation or user clarification, alternatives and selection decision. Keep surviving IDs and completed evidence; cancel rather than erase superseded tasks. Update the generator and canonical tracker together, then check references and cycles. Review the first pilot before automatically pursuing the proposed source/distribution expansion. A plan change within selected scope does not require a redundant approval ritual; new scope requires its actual decision.
+13. **Learning debt is situated.** Distinguish an unverified claim, a working mechanism a collaborator does not yet understand, and an unresolved interpretation. Keep contributions and uncertain origins visible. A later author can learn from material they did not personally compose; a passing script does not settle that understanding. Give speculative worlds explicit experimental, deferred, abandoned or canonical status.
 
 ### Scientific and artistic distinctions
 
@@ -84,7 +102,7 @@ Treat QFEP as the author's proposed theoretical and artistic framework. Specify 
 
 ## Testing Decisions
 
-**Approved primary seam: the observable experiment cycle.** Tests use the participant-facing operations and the record they produce. They check a stated contract, not a particular internal class hierarchy. Start with one complete seed-bench encounter; reuse the same test structure as later instruments expose equivalent operations.
+**Approved primary seam: the observable experiment cycle.** The reciprocal writing test extends that seam through its passage and next-change records; it does not replace the agreed seven steps. Tests use the participant-facing operations and the record they produce. They check a stated contract, not a particular internal class hierarchy. Start with one complete seed-bench encounter; reuse the same test structure as later instruments expose equivalent operations.
 
 | Level | Evidence and acceptance | Explicit limit |
 | --- | --- | --- |
@@ -94,11 +112,13 @@ Treat QFEP as the author's proposed theoretical and artistic framework. Specify 
 
 For each completed cycle record whether there was an observable difference, a meaningful question, or a reason to reconstruct the apparatus. Record who made that judgment and why. “No useful difference under these conditions” remains admissible and may suggest a new intervention. There is no numerical score for artistic transformation.
 
-Use the existing exact-printed-code reconstruction practice: declared incoming program plus printed changes produces the program tested. Never fill gaps by importing the complete museum artifact. The independent reconstruction gate is a person attempting the supplied tutorial with assistance disclosed; it remains **not tested** until that occurs.
+Use the existing exact-printed-code reconstruction practice: declared incoming program plus printed changes produces the program tested. Never fill gaps by importing the complete museum artifact. Each lesson includes a prediction and an explicit incoming/outgoing program version. The independent reconstruction gate is a person attempting the supplied tutorial with assistance disclosed; it remains **not tested** until that occurs.
 
 Useful behavioural fixtures include: unchanged records under rebinning; different adjacency with equal histograms; restoring a consumed generator state; no extra draw during display changes; a particle population cap and simultaneous deaths; fixed-step trajectories across different render cadences; boundary exits counted separately from emission; deposited signals influencing subsequent decisions; deterministic neighbouring trajectories; a changed rule enabling an outcome unavailable under the previous rule. Statistical checks use stated sample sizes and tolerances, not a demand that every larger Monte Carlo sample be closer.
 
 Separately verify scene resolution/loading, bounded memory and object counts, numerical finiteness, long-run stability, measured CPU/GPU time on a declared device, actual headset controller interaction, comfort and accessibility. A scene file existing on disk is not a successful load. A synthetic grab is not a headset test. Establish performance budgets from the target build and hardware in the pilot; do not invent a passing Quest frame rate.
+
+For the reciprocal pilot, verify passage → explicit interpretation → bounded apparatus → scoped evidence → revised/competing passage → proposed apparatus or task change. Preserve predecessors and competing interpretations. No useful difference is an admissible outcome; an invented observation is not. Compare the two opening trials with recorded order/prior exposure, and do not infer a universal preference from a small trial.
 
 Before accepting a moved hall, review both neighbours' prose and required capabilities. Current handovers explicitly depend on the old order. Source hashes in the inventory identify the inspected working-tree content; old test reports do not automatically apply to later edits.
 
@@ -119,3 +139,7 @@ The route proposal and particle path specify buildable experiments; they also na
 Current source findings, especially simulated TRNG labels, the curl-flow replay gap, particle input/persistence gaps and incomplete noise tutorial revisions, must be addressed before those works carry stronger teaching claims. This pass performs a static audit and validates the plan's references. It does not claim fresh runtime, headset or learner results.
 
 Technical references: [Godot 4.6 RNG seed/state](https://docs.godotengine.org/en/4.6/classes/class_randomnumbergenerator.html), [secure random bytes](https://docs.godotengine.org/en/4.6/classes/class_crypto.html), [particle systems](https://natureofcode.com/particles/), [Friston on variational free energy](https://www.nature.com/articles/nrn2787), and [exploration, novelty and surprise within FEP research](https://discovery.ucl.ac.uk/id/eprint/1423327/1/fpsyg-04-00710.pdf). These inform bounded distinctions, not evidence that the proposed Ada experiments have run.
+
+The ZIP comparison maps thirty-four imported task IDs into twenty stable main tasks and five writing tasks. Current book-ticket statuses were inspected; completed repairs are retained, and open headset/traversal work remains separate. Archived handoff instructions are source material, not execution authority. This revision updates the specification, not the museum or its final prose.
+
+The new methodological sources and pre-revision documents are preserved with hashes. The current plan revision is based on the supplied clarification, not pilot evidence. A fifth writing task reviews what the pilot changes about future work; neither this review nor the supplied critique authorizes a complete museum rebuild.

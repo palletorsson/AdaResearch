@@ -1,0 +1,4 @@
+# Preserve the exact bytes used by source and predecessor hash receipts.
+# Imported prose is evidence; retain its original whitespace as well.
+imports/** -text -whitespace
+history/** -text whitespace=cr-at-eol

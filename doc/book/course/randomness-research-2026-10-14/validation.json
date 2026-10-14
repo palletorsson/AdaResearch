@@ -1,82 +1,72 @@
 {
   "date": "2026-10-14",
-  "scope": "Static specification/reference validation only",
-  "passed": 25,
-  "total": 25,
+  "scope": "Static specification/comparison validation only",
+  "passed": 51,
+  "total": 51,
   "errors": [],
   "checks": [
     {
-      "check": "All 25 current sequence halls assigned",
+      "check": "All randomness identities retained once",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Eleven noise identities retain current order",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Five particle identities retain current order",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "No required new halls; four earlier names deferred",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Optional coda and museum interlude retained",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Noise handover is Shaders",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Local baselines and optional imports explicit",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Seven contracts; local pilot before cross-hall",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Manifest proposed and not installed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "All proposed reused hosts exist",
       "pass": true,
       "detail": []
     },
     {
-      "check": "Core and side visits do not overlap",
+      "check": "Inventory covers 31 spaces",
       "pass": true,
       "detail": null
     },
     {
-      "check": "All 5 particle halls retained",
+      "check": "Selected names/scenes resolve at snapshot",
       "pass": true,
       "detail": null
     },
     {
-      "check": "Museum-only Biome Cage accounted for",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "18 unique core stops, 8 movements",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "7 unique particle stops",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "15 existing core hosts and 3 new proposals",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "4 new halls total and shared workshop",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "Every reused map exists",
-      "pass": true,
-      "detail": []
-    },
-    {
-      "check": "New halls not mislabelled as existing",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "Seven transfers declared",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "Manifest explicitly proposed",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "Inventory covers 31 selected maps",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "Selected names and scenes resolve at snapshot",
-      "pass": true,
-      "detail": null
-    },
-    {
-      "check": "20 unique tracker tasks",
+      "check": "Twenty stable main IDs and five writing IDs",
       "pass": true,
       "detail": null
     },
@@ -91,29 +81,89 @@
       "detail": null
     },
     {
-      "check": "Dependencies exist",
+      "check": "Cross-goal dependencies exist",
       "pass": true,
       "detail": null
     },
     {
-      "check": "Task graph acyclic",
+      "check": "Combined task graph acyclic",
       "pass": true,
       "detail": null
     },
     {
-      "check": "Only static audit is done",
+      "check": "Five lessons and integration do not wait for optional research",
       "pass": true,
       "detail": null
     },
     {
-      "check": "Implementation awaits review/evidence",
+      "check": "Emitter lesson does not require distribution import",
       "pass": true,
       "detail": null
     },
     {
-      "check": "All three verification levels recorded",
+      "check": "Particle continuation order is P1 P2 P3 P4 P5",
       "pass": true,
       "detail": null
+    },
+    {
+      "check": "Only static audit marked done in this specification",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "All three verification levels retained",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Runtime headset and learner evidence separate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Task map references resolve",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "Eight imported sources preserved byte for byte",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "All 34 imported tasks mapped once",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Imported mappings resolve",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Canonical tasks link back to imported sources",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "No imported goal duplicated in live tracker",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Existing book-ticket references resolve",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Inventory evidence remains current",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "Comparison evidence remains current",
+      "pass": true,
+      "detail": []
     },
     {
       "check": "Authored local links resolve",
@@ -121,17 +171,98 @@
       "detail": []
     },
     {
-      "check": "to-spec sections present",
+      "check": "to-spec structure retained",
       "pass": true,
       "detail": null
     },
     {
-      "check": "User text preserved byte for byte",
+      "check": "Original user text byte-identical",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Written particle order matches manifest",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Written hall orders match manifest",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Written transfers match manifest",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Three supplied method texts preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Predecessor prose and task graph preserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Current plan revision is clarification rather than invented observation",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Plan revision matches current generated documents",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Revision preserves task IDs and names a real review",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Text examples explicitly unbuilt and unobserved",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Passage and interpretation IDs distinct and unique",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Passage sources resolve by excerpt and snapshot hash",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Reciprocal pilot starts before noise and final particle delivery",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Pilot review can redirect source/distribution expansion",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Five particle lessons do not wait for the plan review",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Writing cycle and two opening trials explicit",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Proposal Python sources parse",
       "pass": true,
       "detail": null
     }
   ],
   "stale_source_receipts": [],
+  "stale_comparison_receipts": [],
   "runtime": "not run",
   "physical_VR": "not tested",
   "independent_learner": "not tested"

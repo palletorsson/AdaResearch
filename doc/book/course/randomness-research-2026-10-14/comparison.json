@@ -1,0 +1,479 @@
+{
+  "date": "2026-10-14",
+  "baseline_commit": "e5414cb18",
+  "source_zip_sha256": "7bc2387a249800755157c5f8ee6de59b4a10cda282fec7287ce3a72a9cfd1a21",
+  "evidence": {
+    "commons/maps/sequences/randomness.json": {
+      "working_sha256": "5e3456596d4ef6721cab71d3f456e40a886009408ff3a023894d9d964b920e1a",
+      "committed_sha256": "76be5400058ed3e81c99ca1b9077dde725b780e0e497e30f54b8eab3046833ee"
+    },
+    "commons/maps/sequences/noise.json": {
+      "working_sha256": "6cb5fbd7f986f6b7b89fa0302dcad7c866d6b35eff6c3ba5ae8c5cf0d15047f2",
+      "committed_sha256": "3461b6b0caf8f60a9e35eac0c1c87c9f52dd358d6a1f593bc859501e51d91408"
+    },
+    "commons/maps/sequences/particles.json": {
+      "working_sha256": "8608694dd4fa0c863b95bf9dec2eb08ad73242a774a3378f5f56c68a346f9761",
+      "committed_sha256": "3c50f15740ccb68675e89afea8e5bb76e140b0c9b01c121819d14faeecb1e139"
+    },
+    "commons/maps/curriculum_spine.json": {
+      "working_sha256": "cb70f81bd614ed6ff7e3eebfdde22b0d67e61390946706aa9f073b66cf196322",
+      "committed_sha256": "6060342958b99e07017e504981a46c9778fb1f1c260ab5c1df66d9febb48a97e"
+    },
+    "commons/data/map_authored.json": {
+      "working_sha256": "0cae822952ff79235af66d71b99a69d4fa19cb73bbd8581579a8f11e0541020a",
+      "committed_sha256": "96c7d0683e433aa1c93e0eb028e60afefcb5b3f53dbd1604c35a5ce3e6944a34"
+    },
+    "commons/data/museum/em_plan.json": {
+      "working_sha256": "e7376044793703ba9f8492f1747353a991f2251dfce3e562fcdc412ecea2871b",
+      "committed_sha256": "246f1da9a8e807c690f02158d28c1fae904376fdc632318d194ebaa3f2d4d587"
+    },
+    "commons/maps/Random_Definition/map_data.json": {
+      "working_sha256": "58f52333f7b0ad026aa740df0f4dd4e15b59baaba15d4fa9a0486ec181288f07",
+      "committed_sha256": "9111b5c0143c67c09e79d0fdd049534e96cc1e488bd99ea12d35b7c608e503bc"
+    },
+    "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json": {
+      "working_sha256": "eb6313fd41ce8e39a4fcd67e6fa395d63bcdf574081826c7aa401c139b1c046d",
+      "committed_sha256": "802f6849b3b9737a2af638a02dd8e91a17156ee5e5ab60e2c86a94c56b9ac611"
+    },
+    "commons/maps/Noise_Perlin_Simplex/final.md": {
+      "working_sha256": "b796bf918b2b41cae3054dc4d417dac949417704ead13c2e6bf9616bc6dafafb",
+      "committed_sha256": "740021774be211669a6a253e3f80c8ea77a9e774ceea1105d9f36d219694cad0"
+    },
+    "commons/maps/Noise_Perlin_Simplex/tutorial.md": {
+      "working_sha256": "10284549cee6d9189f07224dcad3f41c4902bc893cfcd25b4df8f54881d40afe",
+      "committed_sha256": "21c4ad9275bcccab080ac32bf3c10665d3087069ea655bcc8095bc1a7b4640dd"
+    },
+    "doc/tasks/book_randomness.json": {
+      "working_sha256": "4ff5936b2d033f7d767aea199dc015a8ebd7f1301c7473f80dd12ec812ac7642",
+      "committed_sha256": "e2035426859577bb07ec5fede44b662ea1a0b606797f3656df3cd4840debe8f5"
+    },
+    "doc/tasks/book_noise.json": {
+      "working_sha256": "0af146cfd04f1e7e0870d9c206b8dfb0fa30ce933ab313dc70516c2bcb0d7baa",
+      "committed_sha256": "861e6464b9f2d7ed163d0c1ba2e067667ad45c07e1759ae52e3acc02aa89f40b"
+    }
+  },
+  "orders": {
+    "randomness": {
+      "committed": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Cubes",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk",
+        "Random_Gaussian",
+        "Random_Mushrooms",
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness",
+        "Random_Pheromone",
+        "Random_Space",
+        "Random_Game"
+      ],
+      "working": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Cubes",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk",
+        "Random_Gaussian",
+        "Random_Mushrooms",
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness",
+        "Random_Pheromone",
+        "Random_Space",
+        "Random_Game"
+      ]
+    },
+    "noise": {
+      "committed": [
+        "Random_Noise_Types",
+        "Noise_Columns",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_6_Wall",
+        "Noise_Inside_Noise",
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex",
+        "Lab_Path"
+      ],
+      "working": [
+        "Random_Noise_Types",
+        "Noise_Columns",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_6_Wall",
+        "Noise_Inside_Noise",
+        "Noise_Cellular",
+        "Noise_Box",
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex",
+        "Lab_Path"
+      ]
+    },
+    "particles": {
+      "committed": [
+        "Particles_SingleAndArrays",
+        "Particles_Emitters",
+        "Particles_Forces",
+        "Particles_LifetimeAndTypes",
+        "Particles_Collision"
+      ],
+      "working": [
+        "Particles_SingleAndArrays",
+        "Particles_Emitters",
+        "Particles_Forces",
+        "Particles_LifetimeAndTypes",
+        "Particles_Collision"
+      ]
+    }
+  },
+  "textile_locations": {
+    "Random_Definition": {
+      "committed": [
+        "textile_comparison#controls:compact#control_front:-1.7#control_facing:-z"
+      ],
+      "working": []
+    },
+    "Randomness_10_PRINT_Algorithm": {
+      "committed": [],
+      "working": [
+        "textile_comparison#controls:compact#control_front:-1.7#control_facing:-z"
+      ]
+    }
+  },
+  "existing_task_statuses": [
+    {
+      "id": "book_randomness.001",
+      "title": "Put the noise bench on the hall's floor",
+      "status": "done"
+    },
+    {
+      "id": "book_randomness.017",
+      "title": "Walk the printed maze in the headset",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.018",
+      "title": "Throw the die and the coin in the headset",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.019",
+      "title": "The landed die still hops and turns on its felt at 60 Hz",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.020",
+      "title": "Walk the matched rotation study in the headset",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.021",
+      "title": "The 7 x 30 cube field (RotateGridCubes) lies mostly beyond the hall",
+      "status": "done"
+    },
+    {
+      "id": "book_randomness.026",
+      "title": "The compact console may hide the readout plate from the standing spot",
+      "status": "done"
+    },
+    {
+      "id": "book_randomness.028",
+      "title": "The random ground severs the museum walker",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.029",
+      "title": "Walk to the mixer on its plinth in the headset",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.030",
+      "title": "Press ATTRACT/AVOID and REPLAY in the headset",
+      "status": "open"
+    },
+    {
+      "id": "book_randomness.044",
+      "title": "A sigma control on the sampler, so the 'two in three' sentence can be tested (NOC Exercise 0.4)",
+      "status": "done"
+    },
+    {
+      "id": "book_noise.014",
+      "title": "The museum does not build Lab_Path, and the book gives two handovers",
+      "status": "done"
+    },
+    {
+      "id": "book_noise.017",
+      "title": "SimplexNoise: treat a readout-only change like Perlin does",
+      "status": "done"
+    },
+    {
+      "id": "book_noise.019",
+      "title": "perlin_terrain_sculptor reads R/N and the arrow keys across the whole museum",
+      "status": "done"
+    },
+    {
+      "id": "book_noise.020",
+      "title": "Nothing in the chapter changed; the steep-stretch claim rests on one walk",
+      "status": "open"
+    }
+  ],
+  "imported_task_mapping": [
+    {
+      "imported_id": "ada_random_noise_route.001",
+      "title": "Freeze and reconcile all source orders",
+      "incorporated_into": [
+        "randomness_research.001"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.002",
+      "title": "Resolve physical route versus teaching order",
+      "incorporated_into": [
+        "randomness_research.002"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.003",
+      "title": "Reconcile the seeded opening and textile move",
+      "incorporated_into": [
+        "randomness_research.001",
+        "randomness_research.006"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.004",
+      "title": "Trial the early probability route without permanently reordering",
+      "incorporated_into": [
+        "randomness_research.002",
+        "randomness_research.005"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.005",
+      "title": "Design the later randomness exploration arc",
+      "incorporated_into": [
+        "randomness_research.006",
+        "randomness_research.015",
+        "randomness_research.018"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.006",
+      "title": "Decide noise hall order and field handoff",
+      "incorporated_into": [
+        "randomness_research.002",
+        "randomness_research.007"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.007",
+      "title": "Specify an opt-in cross-hall experiment record",
+      "incorporated_into": [
+        "randomness_research.003"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.008",
+      "title": "Plan minimal map diffs without erasing local work",
+      "incorporated_into": [
+        "randomness_research.020"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_route.009",
+      "title": "Verify route, transfers and headset experience",
+      "incorporated_into": [
+        "randomness_research.020"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.001",
+      "title": "Audit all five particle halls and real code inheritance",
+      "incorporated_into": [
+        "randomness_research.001",
+        "randomness_research.008"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.002",
+      "title": "Build Tutorial 1: one particle, then an array",
+      "incorporated_into": [
+        "randomness_research.008"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.003",
+      "title": "Build Tutorial 2: emitter as a source over time",
+      "incorporated_into": [
+        "randomness_research.009"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.004",
+      "title": "Build Tutorial 3: forces and fields",
+      "incorporated_into": [
+        "randomness_research.011"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.005",
+      "title": "Build Tutorial 4: lifetime, types and populations",
+      "incorporated_into": [
+        "randomness_research.010"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.006",
+      "title": "Build Tutorial 5: repulsion, collisions and campfire",
+      "incorporated_into": [
+        "randomness_research.013"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.007",
+      "title": "Specify optional randomness and noise particle extensions",
+      "incorporated_into": [
+        "randomness_research.012",
+        "randomness_research.018"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.008",
+      "title": "Implement experimental run recording without false replay claims",
+      "incorporated_into": [
+        "randomness_research.003",
+        "randomness_research.008",
+        "randomness_research.009"
+      ]
+    },
+    {
+      "imported_id": "ada_particles_tutorial.009",
+      "title": "Run ghost-student and headset acceptance for all five tutorials",
+      "incorporated_into": [
+        "randomness_research.013",
+        "randomness_research.020"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.001",
+      "title": "Audit the randomness source claims and PRNG instruments",
+      "incorporated_into": [
+        "randomness_research.001",
+        "randomness_research.004"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.002",
+      "title": "Prototype a source comparator as a proposed artifact",
+      "incorporated_into": [
+        "randomness_research.004"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.003",
+      "title": "Make the entropy gauge reveal what it discards",
+      "incorporated_into": [
+        "randomness_research.014"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.004",
+      "title": "Preserve the 10 PRINT grammar comparison",
+      "incorporated_into": [
+        "randomness_research.006"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.005",
+      "title": "Compare sampling distributions with existing physical exhibits",
+      "incorporated_into": [
+        "randomness_research.005"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.006",
+      "title": "Trial geometry perturbation with a saved baseline",
+      "incorporated_into": [
+        "randomness_research.006",
+        "randomness_research.007"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.007",
+      "title": "Decide locations for curl flow, mixer and Worley",
+      "incorporated_into": [
+        "randomness_research.007",
+        "randomness_research.012"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.008",
+      "title": "Open a question-led Noise Space 10 experiment",
+      "incorporated_into": [
+        "randomness_research.007"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.009",
+      "title": "Compare independent particle noise with correlated flow",
+      "incorporated_into": [
+        "randomness_research.012"
+      ]
+    },
+    {
+      "imported_id": "ada_random_noise_artifacts.010",
+      "title": "Test randomness as a change to the rules",
+      "incorporated_into": [
+        "randomness_research.018"
+      ]
+    },
+    {
+      "imported_id": "ada_dissipated_author_book.001",
+      "title": "Write the final-text editorial charter",
+      "incorporated_into": [
+        "randomness_research_writing.001"
+      ]
+    },
+    {
+      "imported_id": "ada_dissipated_author_book.002",
+      "title": "Create a learning-debt and contribution ledger",
+      "incorporated_into": [
+        "randomness_research_writing.001"
+      ]
+    },
+    {
+      "imported_id": "ada_dissipated_author_book.003",
+      "title": "Trial a changing final text after a changing artifact",
+      "incorporated_into": [
+        "randomness_research_writing.002"
+      ]
+    },
+    {
+      "imported_id": "ada_dissipated_author_book.004",
+      "title": "Introduce uncertainty without invented discoveries",
+      "incorporated_into": [
+        "randomness_research_writing.002"
+      ]
+    },
+    {
+      "imported_id": "ada_dissipated_author_book.005",
+      "title": "Audit randomness, noise and QFEP terminology",
+      "incorporated_into": [
+        "randomness_research_writing.003"
+      ]
+    },
+    {
+      "imported_id": "ada_dissipated_author_book.006",
+      "title": "Run the authorial checkpoint as a design decision",
+      "incorporated_into": [
+        "randomness_research_writing.004"
+      ]
+    }
+  ],
+  "runtime_verified": false,
+  "historical_library_snapshots": "Described by ZIP, not supplied or independently verified in this comparison"
+}

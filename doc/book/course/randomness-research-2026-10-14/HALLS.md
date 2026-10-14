@@ -1,114 +1,113 @@
-# A proposed route through increasingly consequential changes
+# A route that can learn from its existing rooms
 
-**Proposal, 14 October 2026.** The current routes remain the baseline in [the inventory](INVENTORY.md). This route has eighteen stops: fifteen existing hosts and three new hall proposals. Thirteen existing hosts belong to the current randomness/noise sequences; two are later returns. Every other current randomness/noise hall has a side-visit role below. The full particle branch adds one further new hall and shares the final workshop.
+**Revised proposal, 14 October 2026.** Compared with committed proposal `e5414cb18`, this version keeps all fourteen randomness halls and eleven noise sequence identities, including the optional Lab Path coda. The five existing particle halls form a complete tutorial branch. No new hall is required for the first implementation. [The comparison](COMPARISON.md) records what was adopted, adapted or deferred from the ZIP.
 
-The eight movements are an editorial structure, not eight new game sequences. A small version can stop after movement 3 and remain a complete investigation. Later returns are invitations available after their supporting concepts, not shortcuts that silently assume cellular automata, grammars or QFEP have already been taught.
+These are teaching orders to trial, not installed museum routes. The live routes, authored map layout and prose remain unchanged. Keep Biome Cage between Mushrooms and Geometry where the museum currently places it. Lab Path is an optional sequence coda outside the current museum; its absence is an intentional documented distinction, not a newly discovered broken portal. Preserve the Forces branch entry for particles and reconcile its metadata before integration.
 
-## The order
+## Let the first encounter change the route
 
-| Movement | Stops | Shift in the investigation |
+The [Text Simulation Loop](TEXT_SIMULATION.md) adds an early comparison: Definition → a source comparison beside the same bench, and Definition → Entropy. Keep the same retained arrangement and disclose trial order and evidence level. Compare the questions each encounter produces, without claiming one universal winner. Definition → Entropy remains the current proposed order; neither trial requires a new Source Lab.
+
+The pilot yields an apparatus result, a revised or competing passage, and a decision about the next tasks. A question about bodily memory, for example, can redirect work away from source acquisition. Preserve the previous route and its reasons. Writing W005 makes this decision before the proposed source/distribution expansion, while the particle tutorial track can continue separately. The larger hall list is a revisable proposal, not a predetermined research result.
+
+## Randomness: a small early reorder, then increasingly open questions
+
+The proposed trial is **Definition → Entropy → Cubes → Gaussian → Remove → 10 PRINT → Rotate → Walk → Mushrooms → Geometry → Examples → Pheromone → Space → Game**. Dice now prepare distributions, and both prepare eligibility and interpretation. Entropy stays beside the opening: a histogram offers an early example of a correct account that leaves something out. Later encounters return to that limitation with richer records.
+
+| Stop | Existing hall and anchors to retain | Proposed experiment and observation to carry |
 | --- | --- | --- |
-| I · An arrival and a return | 1–2 | Make a result return; then investigate its source. |
-| II · Likelihood and permission | 3–4 | Change what is likely and who is eligible. |
-| III · Marks become relations | 5–6 | Distinguish the draw, its interpretation and its neighbours. |
-| IV · A field becomes a place | 7–10 | Values shape surfaces, occupancy and inhabited boundaries. |
-| V · The past enters the next choice | 11–12 | A retained trace becomes active feedback. |
-| VI · An account and its omissions | 13–14 | Measure uncertainty and question what the measure forgets. |
-| VII · Sensitivity and persistence | 15–16 | Investigate divergence, mutation and selection. |
-| VIII · Revise the possible | 17–18 | Change relationships or criteria; return with a question. |
+| R1 | `Random_Definition`: seed bench, return sphere, RAND page, crank and labelled saved atmospheric record | Complete one seven-step cycle with the 4×4 grid, REPLAY and +1 DRAW. SAME RECORD changes colour/height interpretation without spending draws. Carry seed/state, 48 colour draws, assignment order and interpreter version. A source comparator belongs beside this bench first, with NEW ACQUISITION separate from REPLAY RECORD. |
+| R2 | `Random_Entropy`: Shannon meter, jar, ruin and signal study | Preserve the same multiset while rearranging neighbours. Keep histogram and a separately defined adjacency measure visible. Carry alphabet, counts, ordering, units and the difference the gauge misses. The added adjacency view is a proposed extension of the existing instrument. |
+| R3 | `Random_Cubes`: die, coin, paired dice column and continuing die | Establish trial counts, expected/observed frequencies and the difference between drawing a face and replaying a physical throw. Keep outcomes, continuation rule and sample budget. Physical motion replay needs separate evidence. |
+| R4 | `Random_Gaussian`: sampler, comparator, Galton board and splatter | Hold raw samples while changing bins; reset, then vary one distribution parameter. Record law, parameters, clipping and bins separately. Extended waiting/count/heavy-tail laws are individual later studies. X2 can supply a particle birth table. |
+| R5 | `Random_Remove`: removal board, sampling hoppers and arena | Make the eligible set visible before drawing. Compare returning/withholding a selected member, then distinguish hiding geometry from withdrawing support. Preserve exclusions, empty outcomes and recoverable predecessor state. |
+| R6 | `Randomness_10_PRINT_Algorithm`: screen, three maze placements, floor/wall structures, composition and locally moved textile comparison | Keep one binary decision grid across interpreters. Compare vocabulary, contours and a separately computed passage. Carry the draw stream and interpreter; a visual maze is not proof of traversability. Do not move or duplicate the textile again. |
+| R7 | `Random_Rotate_Random_XYZ`: bounded transform/rotation comparison and decay studies | Distinguish assignment from accumulated rotation. Hold geometry fixed while changing one axis or rule. Retain transformation order and relevant state. Recheck the current rotator target before making a stronger claim. |
+| R8 | `Random_Walk`: terrarium, position rails, leash and walk collections | Compare independent positions, accumulated steps and boundary-modified steps. Retain proposed/accepted increments, fixed tick and boundary events. A stored trace need not influence the next choice. Particle research can return here after its five lessons. |
+| R9 | `Random_Mushrooms`: sampled specimens, arrivals wardrobe and couture comparison | Compare variation inside a recipe with visitor selection. Keep a rejected specimen if it matters to the question. SIZE is not a grammar editor. Later return to selection or revisable relations without claiming current evolutionary causality. |
+| R10 | `Random_Space_Geometry`: bridge, sculpture/environment and curl particles | Compare independent heights and a correlated field at matched addresses. Keep grid spacing distinct from sampling frequency. Reuse the existing geometry-noise apparatus before adding a Gaussian perturbation mode; the ZIP's 0.18 value is an unadopted trial suggestion, not a calibrated setting. Carry addresses, samples and field settings. |
+| R11 | `Randomness_Examples_of_Randomness`: Monte Carlo budget study, painting, pipe paths and particle study | Preserve the sample-budget apparatus and artistic histories. Keep several trials against a stated reference; greater sample count need not improve every trial. Record whether more sampling addresses the visitor's question. |
+| R12 | `Random_Pheromone`: deposited-signal comparison | Hold initial state and stream fixed; CUT/CONNECT the guidance path. Feedback creates a branch rather than replaying the old trajectory. Carry field history, deposition/decay rules, walker state and update order. |
+| R13 | `Random_Space`: noise mixer, Worley, spatial and entropy displays | Make this the first proposed open experiment desk: prediction, one change, observation, retained failure and a next apparatus change. Reuse canonical mixer/field scenes. Optional sensitivity and rule-revision benches can be trialled here after their prerequisites. Resolve the existing path issue before relying on a physical carrying route. |
+| R14 | `Random_Game`: deadlines, doors, removal and falling-field encounters | Investigate what is already sampled, what is revealed, and what a body must still discover. Keep a safe observation position and voluntary hazard bypass. It can test a later boundary-rule revision; hazard survival is not a required learning outcome. |
 
-| Stop | Host and status | Existing material to retain | Proposed intervention and open question | What is carried |
-| --- | --- | --- | --- | --- |
-| **1 · What can return?** | `Random_Definition` — existing | `seed_replay_demo`, `random_return`, RAND page, crank and saved atmospheric seed | Keep the 4×4 grid. REPLAY and +1 DRAW establish the procedure. Add SAME RECORD → COLOUR / HEIGHT as a bounded adapter. Does the relation that caught your eye survive another interpretation? | Seed/state, 48 recorded colour draws, assignment order and interpretation version. |
-| **2 · Where did this arrive from?** | `Random_Source_Lab` — new proposal | Reuse the seed bench's provenance display and the TRNG comparison's physical housing only after correcting its claims | Three visibly different sources: local seeded stream; secure-byte request; measured timing intervals. Include the existing saved atmospheric response as a labelled record. NEW ACQUISITION and REPLAY RECORD have different controls. Can a recorded arrival become usable without misdescribing its origin? | Raw retained data and acquisition provenance; “new” is never inferred from a changed image. |
-| **3 · What is likely?** | `Random_Gaussian` — existing | `distribution_sampler`, comparator, Galton board, splatter | Start with uniform/Gaussian. Keep samples while changing bins; change the law in a separately recorded trial. Later add Bernoulli choice, Poisson event counts, exponential waiting and bounded heavy tails one at a time. What becomes ordinary under a different law? | Raw values, law and parameters, clipping policy, bins kept separately. |
-| **4 · Who is eligible?** | `Random_Remove` — existing | `remove_random`, `sampling_hoppers`, removal arena | Keep the candidate set visible; change the eligibility predicate before drawing. Preserve exclusions and the empty-set outcome. Who or what never gets a chance? | Candidate IDs, predicate, selected ID, discarded possibilities. |
-| **5 · Two marks, many paths** | `Randomness_10_PRINT_Algorithm` — existing | `ten_print`, floor/wall structures, textile comparison, composition study | Use one retained binary decision field across the screen, floor and textile interpretation. Make visual continuity and navigable connectivity separately inspectable. Which connections were drawn, and which can a body use? | Decision grid and interpreter; not an unearned “solved maze.” |
-| **6 · What do neighbours share?** | `Random_Space_Geometry` — existing | `perlin_noise_bridge`, seeded sculpture/environment; curl particles as a preview | Compare independent heights with a sampled correlated field at matched addresses. Separate physical grid spacing from sampling frequency. What relation changes while value bounds stay the same? | Addresses, samples, field settings, neighbour comparisons. |
-| **7 · A place must be admitted** | `Random_Noise_Types` — existing | `randompoint`, `randompoints`, `geometry_noise`, `related_weather`, white/coloured noise galleries | Preserve the current rejection/minimum-distance lesson. Add a small white/spacing/spectral comparison only after sampling definitions are explicit; reuse a blue-noise candidate if appropriate. Does absence of clumps come from randomness or a refusal rule? | Proposed, admitted and refused positions; attempt budget; saved geometry perturbations. |
-| **8 · What does a value become?** | `Noise_One` — existing | `noisetorus`, `noiselayers` | Drive colour and displacement from the same saved field. Connect/redirect the receiver without drawing a new field. Which apparent property belongs to the source and which to the receiving operation? | Field plus colour/displacement mapping, sampled addresses and geometry reference. |
-| **9 · The line that decides** | `Noise_Voxel` — existing | `voxelnoise`, `perlin_terrain_sculptor`, slice screen | Keep values fixed and move the occupancy threshold. Follow a cell across rejection/acceptance, then separately inspect connectivity. When does a small numerical change become a passage? | Field, threshold, occupied cell IDs, a declared connectivity result. |
-| **10 · A boundary is a relation** | `Noise_Cellular` — existing | `cellular_atrium_space`, `cellular_womb_space`, `voronoi_strands` | Enter and compare shells; separate distance assignment, visible wall and collider. Propose a switchable permeability study only after this distinction is visible. What kind of boundary is your body meeting? | Field/metric and receiver/collision policy; no claim to a statistical Markov blanket. |
-| **11 · A point keeps its steps** | `Random_Walk` — existing | Terrarium, position rails, leash, dot and walk collections | Replay increments; distinguish new independent position, accumulated steps and boundary-modified steps. Brownian and bounded long-step extensions need their own defined laws. Does a visible history affect the next decision? | Ordered proposed/accepted steps, fixed tick, boundary record. **Particle branch can join here.** |
-| **12 · The trace enters the next choice** | `Random_Pheromone` — existing | `pheromone_terrain` comparison | Hold initial state and random stream fixed; connect/cut the deposited signal and vary one decay/response rule. What becomes possible when the past can recruit its next visitor? | Field history, deposition/decay rules, walker state and ordered updates. |
-| **13 · What the gauge forgets** | `Random_Entropy` — existing | `shannon_entropy_meter`, jar, ruin, signal study | Compare equal counts arranged differently, then spatial/temporal dependence with the variable and measurement declared. Keep the visitor's chosen patch beside the readout. Which difference matters but is absent from this gauge? | Sample, histogram, ordering and observation; entropy units explicitly named. |
-| **14 · A draw estimates** | `Randomness_Examples_of_Randomness` — existing | Existing Monte Carlo sample-budget study, painting, pipe path, particle study | Preserve the tested sample-budget apparatus. Compare multiple retained trials and a stated geometric reference. Let the visitor decide whether more sampling answers their question. What is uncertainty costing here? | Trial values, sample budget, estimate, reference and limits; not only the attractive picture. |
-| **15 · The small change with a large consequence** | `Random_Sensitivity_Lab` — new proposal | Reuse `lyapunov_bench` as a companion and `percolation_ca` as a later optional comparison | New primary: two deterministic trajectories, identical rule/step and nearby initial states; RESET PAIR and CHANGE EPSILON. A separate connectivity experiment distinguishes threshold from sensitivity. Where does divergence originate, and over what interval? | Initial pair, rule/build, integration conditions and measured separation. |
-| **16 · What gets to persist?** | `PG_Genetic_Evolution` — existing later return | Existing six-candidate ranking/held witness and evolution artifact | First change selection without changing candidates. Then add one bounded mutation/offspring comparison; the current compact tutorial does not reconstruct offspring. Let the visitor retain a candidate the scorer rejects. Which feature is valuable but not counted? | Candidate identities/genes, mutation lineage, selection criterion and visitor choice. |
-| **17 · Who wrote the possible?** | `Random_Rule_Workshop` — new proposal, shared with particles | Reuse mushroom recipes, textile/garment comparisons, `ParticleBody` connection ideas and grammar witnesses | New primary: the original sixteen cells can detach, connect or become sensors under an explicit versioned rule. Replay old samples through old/new rules. Start with small connected components; a deformable sleeve remains a further study. What previously impossible relation can now occur? | Old/new grammar or rule, predecessor state, record and reason for revision. |
-| **18 · Carry the question back** | `QFEP_Sandbox` — existing later return | Existing CONNECT/CUT and independent receiver state; later synthesis as companion | Bring one tested emitter or field into a stated explore/retain/revise cycle. Compare fixed openness with feedback-controlled openness using a declared observation/viability criterion. Optional recorded AI-sampling comparison distinguishes sample, prompt and model revision. Can an observation change our criterion as well as our result? | Research account, replay record and a proposed next intervention. Return link to stop 1. |
+The six-stop opening is a complete first route trial. Preserve current prose until the trial's new handovers are written and checked: Remove currently follows sorting; Gaussian recalls dice; 10 PRINT interprets decisions after eligibility. The experiment record supplies continuity without forcing each artwork to illustrate the same conclusion.
 
-## Why this order is different
+## Noise: preserve the eleven identities and the existing exit
 
-The opening establishes what can be retained before asking what was acquired. Distributions precede the changing body, and eligibility precedes the apparent freedom of generation. Neighbours and receiving operations then make the distinction between a field and its embodiment available. Motion follows a field that can already be inspected; feedback follows a walk whose trace initially has no causal role. Entropy and estimation arrive with records worth comparing. Sensitivity, selection and revisable rules can then be investigated without using “randomness” as a catch-all explanation.
+Retain the current order. The ZIP's nine-hall list omits Cellular and Box; both are active in the local sequence. Do not swap the last two teaching halls yet: Perlin/Simplex currently hands over to Shaders, with Cellular Automata later and the optional return invitation. An earlier matched-field comparison and a referenced return to Space 10 provide the ZIP's proposed research progression without silently breaking that ending.
 
-This order changes existing handovers. In particular, Gaussian currently recalls the dice; Entropy currently follows +1 DRAW; Remove recalls sorting; the Noise opening recalls the random crossing. The proposed route needs alternate linking paragraphs and explicit prerequisite summaries. Preserve the authored original texts until that route is accepted. Moving metadata alone is not enough.
-
-## All twelve remaining current halls have a role
-
-| Current hall | Proposed side visit from | Why retain it / next action |
+| Stop | Existing hall | Experimental capacity to develop |
 | --- | --- | --- |
-| `Random_Cubes` | Stops 1–3 | Body-thrown die versus sampled face, continuation rule and accumulated outcomes. Preserve physical/sampled distinction; recorded outcomes can be replayed without claiming identical throws. |
-| `Random_Rotate_Random_XYZ` | Stops 6 or 11 | Assignment versus accumulation, rotation records. Keep the small comparison; audit the namesake floor rotator's missing target before relying on it. |
-| `Random_Mushrooms` | Stops 3–4, return at 16–17 | Variation inside fixed recipes, independent visitor selection and garment comparisons. It prepares the rule workshop without pretending its existing SIZE control changes the grammar. |
-| `Random_Space` | Stops 6–8 | Noise mixer and Worley distances; scale and layers become landscape. Preserve it as a compositional visit rather than a second compulsory introduction. |
-| `Random_Game` | Stops 4 or 11 | Embodied timing, retained deadlines and advance cues. Keep voluntary hazard participation and a clear observation position; this is a consequential use of a record, not a proof of unpredictability. |
-| `Noise_Columns` | Between stops 7–8 | One sculptural body under fixed, periodic and field drivers. This is a useful optional prerequisite for the receiving-operation comparison. |
-| `Noise_6_Wall` | Stops 8–10 | Inhabit a shader-dressed room; distinguish what changes on the surface from what supports the body. |
-| `Noise_Inside_Noise` | Stops 8–10 | Domain warping/borrowed addresses, inside versus outside observation. Keep frozen address/field comparisons. |
-| `Noise_Box` | Stops 9–10 | A sampled decision held over a volume; separate grid-imposed edges from the field. |
-| `Noise_Space_10` | Stops 9–10 | Physical terrain and traversable routes: replay terrain geometry, then inspect passage and collision separately. |
-| `Noise_Perlin_Simplex` | Stops 6–8 | Compare generators at matched settings/addresses, including their limits. Keep the visitor's eye but do not infer generator quality from one pair of landscapes. |
-| `Lab_Path` | After stop 10 or 18 | A pause and an account of what followed the visitor. No new compulsory control or algorithm. Keep unanswered questions here. |
+| N1 | `Random_Noise_Types` | Retain the rejection/minimum-distance lesson, `geometry_noise`, `related_weather` and noise galleries. Keep proposed/admitted/refused positions, attempts and perturbations; do not replace this lesson with a generic list of noise colours. |
+| N2 | `Noise_Columns` | One sculptural body receives fixed, periodic and field drivers. Retain its baseline and independent time; compare a changed driver with a changed form. |
+| N3 | `Noise_One` | One saved field becomes colour or displacement. Separate source, sampled address, receiver and geometry. Revisit field-family comparisons here as needed, without requiring the final hall early. |
+| N4 | `Noise_Voxel` | Hold field values while moving a threshold. Record accepted cells and declared connectivity; occupied connectivity does not itself prove a usable bodily passage. |
+| N5 | `Noise_6_Wall` | Distinguish shader surface change, apparent depth and support/collision. CPU/GPU comparisons need matched definitions and explicit tolerances. |
+| N6 | `Noise_Inside_Noise` | Inspect borrowed addresses/domain warping with a frozen field. Do not infer temporal memory from spatial correlation. |
+| N7 | `Noise_Cellular` | Separate distance assignment, visible shell and collider; develop a bounded permeability study only after that distinction is inspectable. No untested Markov-blanket claim. |
+| N8 | `Noise_Box` | Hold a sampled volume decision and distinguish grid edges from field structure. Retain threshold, occupied IDs and receiver policy. |
+| N9 | `Noise_Space_10` | Prediction → recorded crossing/observation → one terrain or visitor-scale change → retained consequence → next question. Geometry replay and bodily experience have separate evidence. A field/particle comparison can be revisited here once built. |
+| N10 | `Noise_Perlin_Simplex` | Compare generators at matched addresses/settings and retain the current handover to Shaders (Cellular Automata follows later). A later return to Space 10 is an invitation to investigate, not a new mandatory portal already present. |
+| N11, optional | `Lab_Path` | Keep a coda for unresolved questions outside the current museum spine; no new compulsory control or dependency. |
 
-Support objects, films, dark spheres, clipboards and every other placed artifact are enumerated in the inventory. A core/side designation is about route priority, not a deletion instruction or an artistic value ranking.
+Noise Blue, Functions and Volume remain deferred possibilities rather than newly activated halls. The ZIP's historical Biome Ladder account is unverified here; preserve the verified Biome Cage and do not revive historical routing from prose alone.
 
-There is also a current museum-only interlude: **Biome_Cage**, containing `biome_vitrine`, appears between Mushrooms and Geometry in Endless Museum but not in the fourteen-map randomness sequence. Preserve it as an optional enclosure/constraint encounter beside Mushrooms and the Rule Workshop. `Lab_Path` has sequence data but is absent from the ten-space noise museum declaration. These differences must be reconciled explicitly if the proposed route is integrated.
+## The research arc is a set of returns, not four compulsory new rooms
 
-## Coverage of the supplied eighteen subjects
+The committed proposal's eight movements remain useful as a conceptual map: return/source; likelihood/eligibility; marks/neighbours; field/place; memory/feedback; measurement/omission; sensitivity/selection; revising what is possible. The physical route now meets measurement early, then returns to it. The subject coverage below preserves the original research ambition while making the first build smaller.
 
-| Subject | First encounter / deeper return |
+| Supplied subject | First encounter / deeper return |
 | --- | --- |
-| Sources | 1–2: provenance, secure API, experimental timing; no fabricated physical source |
-| Pseudorandomness | 1: seed bench and crank |
-| Seeds and states | 1, then every retained simulation record |
-| Distributions | 3; particle birth and waiting times; extended laws added individually |
-| Independence/correlation | 6–7; matched coordinates and declared comparisons |
-| Noise/random fields | 6–10; spectral colours, coherent fields, cellular distance and spaced samples kept distinct |
-| Stochastic processes | 11–12; particle branch; optional existing Markov and Living Paper studies |
-| Monte Carlo | 14, existing sample-budget study |
-| Chaos/sensitivity | 15; deterministic pair with controlled numerics |
-| Entropy/information | 13, revisited at 18 with a stated variable |
-| Complexity/emergence | 12 and later CA visits; deterministic rules can generate complexity |
-| Thresholds/criticality | 9 thresholding; 15 percolation investigation after CA; no criticality claim from an attractive pattern |
-| Mutation/evolution | 16; random variation and explicit nonrandom selection |
-| Procedural grammars | 5 interpretation; 17 rule revision after grammar preparation |
-| Stochastic ML | Optional 18 comparison: fixed model samples, prompt edit, model revision are separate interventions |
-| Chance/authorship | Every retained choice; explicit at 4, 16 and 17 |
-| Feedback/entropy modulation | 12 measurable signal return; 18 explicitly defined experimental controller |
-| Randomness/power | 4 eligibility, 9 threshold, 16 criterion, 17 authority to revise the rule |
+| Sources | R1 source records and optional acquisition comparison |
+| Pseudorandomness | R1 seed bench and crank |
+| Seeds and states | R1, then every retained simulation record |
+| Distributions | R3–R4, later particle birth laws |
+| Independence/correlation | R10 and N1–N3, optional particle field comparison |
+| Noise/random fields | N1–N10; spectral, coherent, cellular and spaced samples remain distinct |
+| Stochastic processes | R8–R12 and particle continuations; define Brownian/Markov extensions separately |
+| Monte Carlo | R11 sample-budget comparison |
+| Chaos/sensitivity | Optional deterministic paired-start study in R13; control integration and fresh forcing |
+| Entropy/information | R2, returned to with fields and traces |
+| Complexity/emergence | R12 and later Cellular Automata visits; complexity can be deterministic |
+| Thresholds/criticality | N4/N8 thresholds; later percolation after CA preparation, with no premature criticality claim |
+| Mutation/evolution | R9 variation, later `PG_Genetic_Evolution` selection and a new bounded offspring study |
+| Procedural grammars | R6 interpretation; optional rule revision at R13 after grammar preparation |
+| Stochastic ML | Optional later `QFEP_Sandbox` comparison of samples, prompts and model revisions |
+| Chance/authorship | Visitor selection throughout, especially R5/R9/R13 |
+| Feedback/entropy modulation | R12 signal return; a later explicitly defined controller in QFEP |
+| Randomness/power | R5 eligibility, N4 threshold, later selection criterion and authority to change rules |
 
-## Four initial new artifacts, plus bounded extensions
-
-| Proposed artifact | Home | Minimum build / unanswered research question |
+| Proposed apparatus | First host / required scope | Decision about the old new-hall proposal |
 | --- | --- | --- |
-| Source recorder | Source Lab | Acquire, retain, label and replay one source record; offline saved record stays available. What does measuring the Quest's timing actually tell us? |
-| Deterministic pair bench | Sensitivity Lab | One inspectable rule, paired starts, fixed ticks, separation record. Can a visitor distinguish sensitivity from new forcing or numerical error? |
-| Field-to-particle comparator | New `Particles_Field_Lab` | Same births, either independent kicks or a frozen spatial field; record policy and boundary exits. Which differences come from correlation and which from integration? |
-| Rule revision bench | Rule Workshop | Sixteen entities, versioned relation rule, old/new comparison and rollback. Does a new relation create a possibility that parameter variation could not? |
+| Source recorder/comparator | R1; seeded stream, engine secure API and separately labelled optional timing measurements. Replay never acquires again. | `Random_Source_Lab` deferred unless space/access evidence justifies a room. |
+| Adjacency companion | R2; same counts, a specified neighbour measure and an explicit alphabet. | Extend the existing gauge; no duplicate entropy implementation. |
+| Deterministic pair bench | R13 after fixed-step reconstruction; same rule, nearby starts, separation and step-size comparison. | `Random_Sensitivity_Lab` deferred. |
+| Particle field comparator | First trial at `Particles_Forces`; referenced returns to R10/N9. Same births; fixed motion, independent kicks and a frozen vector field; curl only after claim/replay audit. | `Particles_Field_Lab` deferred. |
+| Rule revision bench | R13, with R14 as a possible boundary comparison; old/new sixteen-entity relation rules and rollback. | `Random_Rule_Workshop` deferred. A sleeve remains an investigation, not a promised artifact. |
 
-An experiment-record adapter starts at the seed bench and is extended only where needed. New UI, controls and record handling are adaptations, not pre-existing capabilities. A full cloth/garment simulator, automatic QFEP controller and model-sampling display are later bounded extensions with separate evidence requirements.
+The five particle tutorials finish before field or grammar extensions are required. Later `PG_Genetic_Evolution` and `QFEP_Sandbox` visits retain their own prerequisites; they do not delay the first route or the five-lesson branch.
 
-## Promised transfers, not merely adjacent rooms
+## Seven explicit, optional transfer contracts
 
-| ID | Sender → receiver | Payload / receiving operation | Failure/limit |
+Each destination has a usable local baseline. Importing is an explicit choice and preserves the incoming record. Missing/incompatible data gives an explanation and a choice to use that local baseline, never a silent substitution. Persistent export is opt-in; raw headset/audio streams are not part of the default record.
+
+| ID | Sender → receiver | Payload / receiving operation | Failure or limit |
 | --- | --- | --- | --- |
-| X1 | Definition → Source Lab → Definition | Source record seeds the local generator; retained draw record can bypass acquisition for replay. | A replay must not request a fresh source. Unsupported source format is disclosed. |
-| X2 | Gaussian → particle Emitters | Law, parameters and a recorded birth sample table with stable IDs. | Existing alive particles remain unchanged; only declared future births use a new rule. |
-| X3 | Geometry / Noise One → Particle Field Lab | Field type/version, seed, coordinates, scale and time policy. | Scalar height is not automatically a vector force. The adapter declares gradient, direction or velocity mapping. |
-| X4 | Walk → Pheromone | Initial walker state and ordered steps; baseline guidance remains disconnected. | Enabling feedback creates a branch; it does not claim to replay the original trajectory. |
-| X5 | Entropy ↔ Noise One | A retained sample arrangement and a stated measurement. | Display remapping does not silently redraw values; a histogram does not preserve adjacency. |
-| X6 | Particle Collision / Mushrooms → Rule Workshop | Entity IDs, state, recipe/role, relation policy and previous rule version. | Visual links do not imply force coupling; refuse unsupported roles rather than losing them. |
-| X7 | Rule Workshop → QFEP Sandbox → Definition | Parent/child experiment records, observation and proposed next change. | Carrying a research record does not make the earlier bench execute an incompatible grammar. It shows the record and offers a compatible new branch. |
+| X1 | R1 source comparator → R1 seed bench | Captured source/provenance seeds the generator, or retained draws replay directly. First local adapter. | Replay cannot call acquisition. Unsupported source format is reported. |
+| X2 | R4 Gaussian → P2 Emitters | Law, parameters and birth sample table with stable IDs. | Only declared future births change. P2 works with its own deterministic birth table when no import is available. |
+| X3 | R10 Geometry / N3 Noise One → optional field comparator at Particles Forces | Field/version, coordinates, seed, scale and time policy. | Scalar height requires an explicit gradient/direction/velocity adapter; imported terrain is not automatically force. |
+| X4 | R8 Walk → R12 Pheromone | Initial walker state and ordered steps, guidance initially disconnected. | Enabling feedback creates a child experiment, not a replay of the parent trajectory. |
+| X5 | R2 Entropy ↔ N3 Noise One | Retained arrangement and a stated measurement. | Remapping spends no draws; a histogram alone cannot restore adjacency. |
+| X6 | P5 Collision / R9 Mushrooms → optional rule bench at R13 Space | Entity IDs, state, recipe/role and prior relation policy. | Visual links are not force bonds; unknown roles are explicitly refused. |
+| X7 | R13 rule bench → later QFEP Sandbox → R1 | Parent/child records, observation and proposed next change. | Earlier benches may display a record they cannot execute; a compatible branch must be explicit. |
 
-Cross-hall persistence is **new work**. Current local KEEP/REPLAY behaviours are not evidence that these links already exist. Ship one transfer at a time with its sender, receiver and explicit incompatibility test.
+X1 is the first local pilot; X2 is the first cross-hall candidate. X3, X6 and X7 belong to optional research extensions. Build and verify only named transfers, one sender/receiver pair at a time. The current runtime does not provide these new contracts merely because local KEEP/REPLAY controls exist.
+
+## Readiness and learning debt
+
+Use the existing tickets rather than duplicate their work: `book_randomness.001`, `.021`, `.026`, `.044` and `book_noise.014`, `.017`, `.019` are marked done locally. Preserve that status; recheck only the touched capability when implementing. Randomness `.017–.020`, `.028–.030` and noise `.020` remain open; source checks do not close physical headset or traversal evidence. The complete snapshot and mapping are in [comparison.json](comparison.json).
+
+A visitor may leave with no useful difference, an unexpected failure or a question. Preserve the conditions and say what should be tried next. [The research record](RESEARCH_RECORD.md) separates reconstructable code, final-text encounter and field notes. It lets a later observation contradict a sentence without silently erasing the earlier apparatus or its history.
+
+A passage can also initiate a bounded optional variant, such as connected grid cells or a wall whose contact history changes its response. Record which interpretation was chosen, keep rival interpretations, and label the resulting world experimental/deferred/abandoned/canonical. These possibilities do not add mandatory halls or assert current runtime behaviour.

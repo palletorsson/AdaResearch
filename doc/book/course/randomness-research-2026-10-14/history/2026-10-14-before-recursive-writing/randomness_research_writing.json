@@ -1,0 +1,178 @@
+{
+  "goal_id": "randomness_research_writing",
+  "goal_title": "Research writing: versioned encounters, learning debt and responsibility",
+  "kind": "spec",
+  "labels": [
+    "ready-for-agent"
+  ],
+  "label_meaning": "Usable planning input; not authorization for unrequested museum changes.",
+  "why": "Develop reconstructable experiments whose observations can change the apparatus and its writing.",
+  "specification": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\SPEC.md",
+  "decision_record": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\DECISIONS.md",
+  "implementation_authorization": "This request revises the spec. Record selected implementation scope in .002; prior authorization need not be asked again.",
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "randomness_research_writing.001",
+      "title": "Develop the editorial charter and learning-debt ledger",
+      "skill": "edit",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, FINAL.md and PARTICLE_PATH.md. Preserve unrelated and current hall prose. Use RESEARCH_RECORD.md and the archived ZIP as design input. Implement one small versioned ledger schema/example linking source, capture, hypothesis, untested claims, contributor/AI assistance, reviewer and next test. Distinguish tutorial reconstruction, final encounter and research notes. The imported dissipated-authorship wording is a proposal, not a verified user quotation. Keep the first seed-bench record small. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md and ledger.json; source paths and versions must be named.",
+      "depends_on": [
+        "randomness_research.002"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\001\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\001\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each ledger evidence link and version against its actual capture/source and record the editorial decision",
+      "acceptance": "A real untested claim is labelled as such, has evidence/provenance and a useful next test; no invented observation or automatic claim of human authorship.",
+      "map_refs": [
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [
+        "ada_dissipated_author_book.001",
+        "ada_dissipated_author_book.002"
+      ],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.002",
+      "title": "Trial two passages against two observed apparatus versions",
+      "skill": "edit",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, FINAL.md and PARTICLE_PATH.md. Preserve unrelated and current hall prose. Select one accepted late-hall experiment at Random Space or Noise Space 10. Preserve apparatus A/B, their actual evidence and matching passage A/B under this task's output directory. Compare an observable version difference; keep historical sources and strange consequences without overwriting current final.md. If no corresponding observation exists, keep the passage conditional and the runtime claim untested. Include an open question and a next apparatus change. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md and ledger.json; source paths and versions must be named.",
+      "depends_on": [
+        "randomness_research_writing.001",
+        "randomness_research.007"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\002\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\002\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each ledger evidence link and version against its actual capture/source and record the editorial decision",
+      "acceptance": "Each present-tense passage matches its own evidence/version; contradictions and failed trials are preserved, and no literary fragment is presented as an eyewitness report without observation.",
+      "map_refs": [
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [
+        "ada_dissipated_author_book.003",
+        "ada_dissipated_author_book.004"
+      ],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.003",
+      "title": "Audit scientific claims, sources, contributions and reconstruction",
+      "skill": "verify",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, FINAL.md and PARTICLE_PATH.md. Preserve unrelated and current hall prose. Audit proposed passages and five particle lessons: source/PRNG/hash, distribution/correlation, temporal memory, Shannon versus physical entropy, deterministic chaos and variational free energy remain distinct. Retain source/license notices for reused material. Use primary sources for new historical/scientific claims; mark unresolved ones. Cross-link exact tested code, evidence, contributor decisions and remaining learning debt. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/003/REPORT.md and ledger.json; source paths and versions must be named.",
+      "depends_on": [
+        "randomness_research_writing.002",
+        "randomness_research.013"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\003\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\003\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each ledger evidence link and version against its actual capture/source and record the editorial decision",
+      "acceptance": "Hard claims have a source or scoped test, otherwise an explicit unverified label; source inspection, headset observation, automated reconstruction and human learning are never conflated.",
+      "map_refs": [
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [
+        "ada_dissipated_author_book.005"
+      ],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.004",
+      "title": "Record the editorial decision on evidence and open questions",
+      "skill": "verify",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, FINAL.md and PARTICLE_PATH.md. Preserve unrelated and current hall prose. Present concrete versioned passages, changes, observations and remaining learning debt for an authorial accept/revise/defer decision. Record the responsible reviewer and the reason. Distinguish the user's current approval to improve this spec from future acceptance of runtime findings or publication. Keep unresolved research questions useful; they need not support the author's initial interpretation. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/004/REPORT.md and ledger.json; source paths and versions must be named.",
+      "depends_on": [
+        "randomness_research_writing.003"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\004\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\004\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each ledger evidence link and version against its actual capture/source and record the editorial decision",
+      "acceptance": "Every selected passage and speculative extension has an explicit decision and next verification step. Nothing is published as observed merely because a model wrote it.",
+      "map_refs": [
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [
+        "ada_dissipated_author_book.006"
+      ],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    }
+  ],
+  "success_criteria": [
+    "Tutorial, encounter and field notes have distinct functions",
+    "Claims match versioned evidence",
+    "Unresolved findings lead to a next test",
+    "Contributions and editorial decisions are accountable"
+  ]
+}

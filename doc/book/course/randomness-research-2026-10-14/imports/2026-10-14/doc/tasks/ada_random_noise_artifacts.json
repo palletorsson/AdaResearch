@@ -1,0 +1,285 @@
+{
+  "goal_id": "ada_random_noise_artifacts",
+  "goal_title": "Random/noise artifacts: from draws to changing rules",
+  "why": "Use existing instruments as baselines, then build selected comparisons that allow unforeseen observations to change the experiment.",
+  "success_criteria": [
+    "New proposals clearly distinguished from existing scenes and installed behaviour",
+    "Secure, physical, deterministic and statistical randomness claims never conflated",
+    "A standard baseline → change → preserve → replay → reconstruct experiment can be documented",
+    "No duplicate curl/noise mixer/Worley scenes introduced without placement review"
+  ],
+  "prerequisites": [
+    "ada_random_noise_route"
+  ],
+  "tasks": [
+    {
+      "id": "ada_random_noise_artifacts.001",
+      "title": "Audit the randomness source claims and PRNG instruments",
+      "spec": "Inspect code and scene registrations behind seed_replay_demo, prng_crank_machine, slot_machine, trng_vs_prng, random_number_book_page_1955 and hardware_entropy_decay. For each, record whether source is deterministic PRNG, OS cryptographic randomness, proposed physical sensor, a historical demonstration or only a decorative label. Do not call hashing a physical movement new entropy. Verify exact algorithm behavior in source and document unknowns.",
+      "effort": "half-day",
+      "skill": "read",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "seed_replay_demo",
+        "trng_vs_prng",
+        "hardware_entropy_decay"
+      ],
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Rotate_Random_XYZ"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/tasks/_audits/random_source_truth_table.md",
+      "verification": "Every claim backed by a located code path and test status"
+    },
+    {
+      "id": "ada_random_noise_artifacts.002",
+      "title": "Prototype a source comparator as a proposed artifact",
+      "spec": "Write a design spec for new randomness_source_comparator placed near Random_Definition or Random_Entropy only after map audit. Present a seeded PRNG replay, OS-backed secure random seed, and a separately labelled experimental Quest timing-jitter trace. Do not certify the jitter as entropy; assess bias and dependence before use. Include capture/replay, source labels, test protocol, VR controls and privacy-minimal telemetry. Only then select a scene/registry path following existing patterns.",
+      "effort": "multi-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_artifacts.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "randomness_source_comparator"
+      ],
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/proposals/artifacts/randomness_source_comparator.md",
+      "verification": "Source labels checked against implementation; repeated captures and replay tested independently"
+    },
+    {
+      "id": "ada_random_noise_artifacts.003",
+      "title": "Make the entropy gauge reveal what it discards",
+      "spec": "Inspect shannon_entropy_meter and the sorting/comparison mechanism in Random_Entropy; propose an adjacency-sensitive companion view for the identical colour histogram. Baseline: same symbol counts before/after sorting; intervention: rearrange adjacency while counts and marginal Shannon entropy remain invariant. Record alphabet, measurement units, source probabilities and comparison result. Preserve the original gauge as an important instrument.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_artifacts.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "shannon_entropy_meter",
+        "entropy_adjacency_view"
+      ],
+      "map_refs": [
+        "Random_Entropy"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/proposals/artifacts/entropy_adjacency_view.md",
+      "verification": "For a saved colour multiset, entropy equal before/after rearrangement and adjacency metric differs"
+    },
+    {
+      "id": "ada_random_noise_artifacts.004",
+      "title": "Preserve the 10 PRINT grammar comparison",
+      "spec": "Check ten_print_maze_3d ×3 and any local textile_comparison move into Randomness_10_PRINT_Algorithm. Test the same draw stream assigned to differing marks, and distinguish changing vocabulary from merely changing seed. Show one conserved numerical trace across two rendered grammars. Keep final.md historical and literary material separate from the reconstruction tutorial.",
+      "effort": "half-day",
+      "skill": "verify",
+      "depends_on": [
+        "ada_random_noise_artifacts.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "ten_print_maze_3d",
+        "textile_comparison"
+      ],
+      "map_refs": [
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Definition"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/tasks/_audits/10print_shared_draw_test.md",
+      "verification": "Identical recorded draws; differing interpreted geometry; VR screenshot from both modes"
+    },
+    {
+      "id": "ada_random_noise_artifacts.005",
+      "title": "Compare sampling distributions with existing physical exhibits",
+      "spec": "Use Random_Cubes (coin, die) and Random_Gaussian (galton_board, distribution_sampler, distribution_comparator). Specify trials changing one parameter or source distribution; measure samples, expected versus observed frequencies and reset. Keep distinct uniform, Gaussian and accept-reject behaviours; verify any claims about standard deviation against code. Link existing book_randomness.018, .019, .026 and .044 tasks.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_artifacts.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "coin_toss",
+        "dice_throw",
+        "galton_board",
+        "distribution_comparator"
+      ],
+      "map_refs": [
+        "Random_Cubes",
+        "Random_Gaussian"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/tasks/_audits/random_distributions_trial.md",
+      "verification": "Sample counts and histograms reproducible under saved test fixture"
+    },
+    {
+      "id": "ada_random_noise_artifacts.006",
+      "title": "Trial geometry perturbation with a saved baseline",
+      "spec": "In Random_Space_Geometry inspect random_transformations_geometric, perlin_noise_bridge, curl_noise_particles and the previously proposed Gaussian vertex perturbation strength 0.18. Build only after the known accessibility issue book_randomness.001 is resolved. Trial a seeded geometry/noise perturbation with baseline, measured displacement, reset and collision-safe VR output. Clearly mark the Gaussian geometry-noise artifact as proposed rather than installed.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "ada_random_noise_artifacts.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "random_transformations_geometric",
+        "perlin_noise_bridge",
+        "geometry_noise_test"
+      ],
+      "map_refs": [
+        "Random_Space_Geometry"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise"
+      ],
+      "output": "doc/tasks/_audits/geometry_noise_trial.md",
+      "verification": "python tools/map_pathfinder.py check Random_Space_Geometry --verbose; seeded baseline/diff/reset checks"
+    },
+    {
+      "id": "ada_random_noise_artifacts.007",
+      "title": "Decide locations for curl flow, mixer and Worley",
+      "spec": "Verify existing tracked placements of curl_noise_particles in Random_Space_Geometry and noise_mixer/worley_noise in Random_Space. Inspect their scenes and registrations and decide whether to carry configurations forward, move an instance to Noise_Inside_Noise or Noise_Space_10, or provide a referenced return. Avoid duplicate implementations. Record field/particle distinction: curl flow uses a spatial vector field, not independently resampled position noise.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_artifacts.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "curl_noise_particles",
+        "noise_mixer",
+        "worley_noise"
+      ],
+      "map_refs": [
+        "Random_Space_Geometry",
+        "Random_Space",
+        "Noise_Inside_Noise",
+        "Noise_Space_10"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/noise_particle_anchor_decisions.md",
+      "verification": "One canonical scene per artifact; all displayed artifact lookup_names resolve"
+    },
+    {
+      "id": "ada_random_noise_artifacts.008",
+      "title": "Open a question-led Noise Space 10 experiment",
+      "spec": "Preserve the existing noise_space terrain and crossing, but propose a reusable observation table that asks the visitor to predict a route, change one parameter, record what the body actually does, keep an unforeseen result and construct a new condition. Separate VR-tested traversability from reported desktop walks. Do not imply Perlin/Simplex noise is itself a physical entropy source; verify field sampling and temporal state.",
+      "effort": "multi-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_artifacts.007"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "noise_space",
+        "open_experiment_table"
+      ],
+      "map_refs": [
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "output": "doc/proposals/artifacts/open_noise_experiment_table.md",
+      "verification": "Baseline/change/save/replay/reconstruction demonstrated; observations labeled verified or unverified"
+    },
+    {
+      "id": "ada_random_noise_artifacts.009",
+      "title": "Compare independent particle noise with correlated flow",
+      "spec": "Prototype particle_field_comparator as an optional shared experiment: identical initial positions and saved seed in (A) fixed motion, (B) independent stochastic impulses, (C) noise-defined vector field, and if feasible (D) curl-noise flow. Use existing curl_noise_particles rather than rewriting it. Compare path smoothness, clustering, boundary escape and sample cadence; avoid claims of perfect incompressibility at numerical integration limits. State which simulation is exactly replayable.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "ada_random_noise_artifacts.007"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "curl_noise_particles",
+        "particle_field_comparator"
+      ],
+      "map_refs": [
+        "Random_Space_Geometry",
+        "Noise_Space_10",
+        "Particles_Forces"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/proposals/artifacts/particle_field_comparator.md",
+      "verification": "Same starting state; mode-specific traces and parameters; Quest performance capture"
+    },
+    {
+      "id": "ada_random_noise_artifacts.010",
+      "title": "Test randomness as a change to the rules",
+      "spec": "Construct a reversible trial in Random_Space or Random_Game in which random values first vary an existing parameter, then affect which parameters/rules are editable. Test a state-space change (for example freeing a cube from its original grid) separately from another colour draw. This is a proposed artifact, not the installed sleeve. Track authored constraints, new outcomes, surprising failures and a concrete revision decision; keep QFEP interpretation as research, not proven physics.",
+      "effort": "multi-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_artifacts.003",
+        "ada_random_noise_artifacts.006"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "rule_boundary_experiment"
+      ],
+      "map_refs": [
+        "Random_Space",
+        "Random_Game"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/proposals/artifacts/rule_boundary_experiment.md",
+      "verification": "Demonstrate a difference in allowed states or transitions, not just a changed random seed"
+    }
+  ]
+}

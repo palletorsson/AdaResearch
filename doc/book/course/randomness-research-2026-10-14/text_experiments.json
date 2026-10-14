@@ -1,0 +1,134 @@
+{
+  "schema": "ada.text-world.proposal.v1",
+  "status": "design_examples_only",
+  "runtime_installed": false,
+  "records": [
+    {
+      "passage_id": "random-definition.sleeve-proposition.v1",
+      "source_path": "commons/maps/Random_Definition/final.md",
+      "source_snapshot": "history/2026-10-14-before-recursive-writing/Random_Definition.final.md",
+      "source_sha256": "591234ea2ef7b688bb6af55c780e721c7a903752125eb12506b4b0f2bb8b47a7",
+      "excerpt": "Imagine taking a coloured square between your fingers and drawing it towards your wrist. Suppose we let its neighbours follow, still joined, bending as you pull. A corner folds around your arm; the rest trails across the floor. We have not built this behaviour. Some draws might choose which squares come loose. Keeping them connected would require another rule.",
+      "proposition": "A coloured grid can acquire relations that allow part of it to be worn; this is an interpretation of the passage, not installed behaviour.",
+      "interpretations": [
+        {
+          "interpretation_id": "sleeve.visible-links.v1",
+          "proposition": "Detach sixteen cells and draw persistent neighbour links.",
+          "assumptions": [
+            "Keep samples and IDs fixed; edit one relation rule.",
+            "A link is a visible relation only."
+          ],
+          "exclusions": [
+            "No mechanical coupling.",
+            "No claim to wearability."
+          ],
+          "status": "proposed",
+          "disposition": "experimental",
+          "apparatus": null,
+          "observations": [],
+          "execution_status": "not_run",
+          "replay_scope": "To be defined by the selected bounded implementation",
+          "passage_revisions": [],
+          "plan_revision": null
+        },
+        {
+          "interpretation_id": "sleeve.constraints.v1",
+          "proposition": "Make selected neighbour links force-bearing constraints.",
+          "assumptions": [
+            "Retain the visible-link predecessor.",
+            "Choose one bounded solver and explicit time step."
+          ],
+          "exclusions": [
+            "No validated cloth solver yet.",
+            "No wrist encounter or comfort result."
+          ],
+          "status": "proposed",
+          "disposition": "experimental",
+          "apparatus": null,
+          "observations": [],
+          "execution_status": "not_run",
+          "replay_scope": "To be defined by the selected bounded implementation",
+          "passage_revisions": [],
+          "plan_revision": null
+        }
+      ],
+      "learning_debt": [
+        {
+          "kind": "unverified_implementation",
+          "question": "Which constraints would keep a connected part together?",
+          "next_test": "Trial a bounded pair/chain with retained inputs and a separation measurement before a wearable object.",
+          "status": "open"
+        },
+        {
+          "kind": "not_yet_understood",
+          "question": "Does wearing depend on the mesh, the constraint, or what the visitor attempts?",
+          "next_test": "After a functioning bounded variant, record a human encounter separately from solver checks.",
+          "status": "open"
+        }
+      ],
+      "contribution": "Current hall prose plus the user-supplied method; companion interpretations developed in this specification. Individual source authorship is not inferred from delivery.",
+      "responsible_reviewer": null,
+      "runtime_verified": false
+    },
+    {
+      "passage_id": "recursive-book.remembering-wall.v1",
+      "source_path": "doc/book/course/randomness-research-2026-10-14/imports/2026-10-14-recursive-writing/a_book_that_can_build_its_own_rooms.md",
+      "source_snapshot": "imports/2026-10-14-recursive-writing/a_book_that_can_build_its_own_rooms.md",
+      "source_sha256": "1bbc33fba52b3243f5298785d00a5780cb4d49ee03ae5c91463d40420c99a90f",
+      "excerpt": "Perhaps particles are allowed to establish permanent connections. Perhaps a boundary remembers previous collisions and gradually becomes permeable. Perhaps the field governing their motion is modified by the traces they leave behind.",
+      "proposition": "A boundary can retain contact history and change what it admits.",
+      "interpretations": [
+        {
+          "interpretation_id": "wall.fixed-response.v1",
+          "proposition": "Reflect a matched trajectory at a fixed boundary.",
+          "assumptions": [
+            "Declared event order and contact rule.",
+            "Baseline for a selected particle E2 return."
+          ],
+          "exclusions": [
+            "Not a claim about an installed particle scene."
+          ],
+          "status": "proposed",
+          "disposition": "experimental",
+          "apparatus": null,
+          "observations": [],
+          "execution_status": "not_run",
+          "replay_scope": "To be defined by the selected bounded implementation",
+          "passage_revisions": [],
+          "plan_revision": null
+        },
+        {
+          "interpretation_id": "wall.contact-threshold.v1",
+          "proposition": "Count contacts and switch one boundary from reflection to passage at a declared threshold.",
+          "assumptions": [
+            "Retain the same incoming conditions and predecessor.",
+            "Specify whether threshold contact or the next contact passes."
+          ],
+          "exclusions": [
+            "No claim to human-like memory or autonomous choice.",
+            "No headset result."
+          ],
+          "status": "proposed",
+          "disposition": "experimental",
+          "apparatus": null,
+          "observations": [],
+          "execution_status": "not_run",
+          "replay_scope": "To be defined by the selected bounded implementation",
+          "passage_revisions": [],
+          "plan_revision": null
+        }
+      ],
+      "learning_debt": [
+        {
+          "kind": "unresolved_interpretation",
+          "question": "Would changing permeability make the previous contacts meaningful to the visitor?",
+          "next_test": "Compare the counted event trace and a separately observed encounter; retain disagreement between them.",
+          "status": "open"
+        }
+      ],
+      "contribution": "Proposition in the supplied essay; operational interpretations are proposed here, not observations.",
+      "responsible_reviewer": null,
+      "runtime_verified": false
+    }
+  ]
+}

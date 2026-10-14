@@ -1,0 +1,263 @@
+{
+  "goal_id": "ada_particles_tutorial",
+  "goal_title": "Particle tutorial: from a single mover to uncertain matter",
+  "why": "Create a reconstructable five-hall Nature of Code particle path using existing Godot examples and a separate, explicitly speculative bridge to randomness/noise.",
+  "success_criteria": [
+    "Five tutorial.md files each teach a representative independently reconstructable mechanism",
+    "Existing Particle/Emitter inheritance and source attribution verified",
+    "Predicted change, observation, reset and reconstruction in each hall",
+    "CPU/GPU/VR determinism limits and performance documented",
+    "Optional noise/randomness extensions do not silently displace the canonical five halls"
+  ],
+  "prerequisites": [
+    "ada_random_noise_route"
+  ],
+  "tasks": [
+    {
+      "id": "ada_particles_tutorial.001",
+      "title": "Audit all five particle halls and real code inheritance",
+      "spec": "Inspect commons/maps/sequences/particles.json, five commons/maps/Particles_*/map_data.json files, core/particle.gd, core/particle_emitter.gd, core/confetti_particle.gd, algorithms/particles/example_4_*_vr.gd, relevant .tscn files and artifact registry. Record actual source behavior versus planned exercises, keyboard-only controls, memory costs, reset paths, prerequisites from Forces and Nature of Code attribution/licensing. Note that the tracked particle hall folders currently lack tutorial.md. Do not generate tutorials until this audit.",
+      "effort": "half-day",
+      "skill": "read",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Particles_SingleAndArrays",
+        "Particles_Emitters",
+        "Particles_Forces",
+        "Particles_LifetimeAndTypes",
+        "Particles_Collision"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/particle_tutorial_inheritance.md",
+      "verification": "All five hall artifact tokens and code dependencies resolved or explicitly flagged"
+    },
+    {
+      "id": "ada_particles_tutorial.002",
+      "title": "Build Tutorial 1: one particle, then an array",
+      "spec": "Write commons/maps/Particles_SingleAndArrays/tutorial.md from the actual example_4_1_single_particle_vr and example_4_2_array_particles_vr. Begin with prior Point/Vector3/forces, explain the one new position/velocity/acceleration update, predict one outcome, reconstruct from complete new code and linked inheritance, then scale to an array and measured count. Demonstrate delta vs fixed-step timing. Provide a baseline, one variable change, reset, numerical observation and Quest-safe interaction.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_particles_tutorial.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "example_4_1_single_particle_vr",
+        "example_4_2_array_particles_vr"
+      ],
+      "map_refs": [
+        "Particles_SingleAndArrays"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "commons/maps/Particles_SingleAndArrays/tutorial.md",
+      "verification": "Cold reconstruction in isolated Godot scene; two expected parameter effects observed"
+    },
+    {
+      "id": "ada_particles_tutorial.003",
+      "title": "Build Tutorial 2: emitter as a source over time",
+      "spec": "Write commons/maps/Particles_Emitters/tutorial.md from example_4_3_particle_emitter_vr, example_4_4_multiple_emitters_vr, example_particle_body and sub_emitters. Explicitly teach rate, spawn point, initial velocity sampling, stored RNG seed, arrays and cleanup, plus a prediction about emission density. Identify desktop keyboard controls in source and provide a documented headset path or a blocking VR task. Do not claim an emitter rate makes physically random particles.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_particles_tutorial.001",
+        "ada_particles_tutorial.002"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "example_4_3_particle_emitter_vr",
+        "example_4_4_multiple_emitters_vr",
+        "sub_emitters"
+      ],
+      "map_refs": [
+        "Particles_Emitters"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "commons/maps/Particles_Emitters/tutorial.md",
+      "verification": "Cold emitter reconstruction; stable particle count and reset; input test on headset"
+    },
+    {
+      "id": "ada_particles_tutorial.004",
+      "title": "Build Tutorial 3: forces and fields",
+      "spec": "Write commons/maps/Particles_Forces/tutorial.md from force_fields and example_2_6_single_attractor_vr. Derive force→acceleration→velocity→position with units and timestep. Compare saved initial conditions under constant force, random impulses and optional noise-field guidance (only after artifact prototype passes). Show actual flow geometry and explain stochastic versus deterministic field behavior. Use the same one-change trial protocol.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_particles_tutorial.001",
+        "ada_particles_tutorial.002"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "force_fields",
+        "example_2_6_single_attractor_vr"
+      ],
+      "map_refs": [
+        "Particles_Forces"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "commons/maps/Particles_Forces/tutorial.md",
+      "verification": "Reconstructed field produces expected path/acceleration changes at two settings"
+    },
+    {
+      "id": "ada_particles_tutorial.005",
+      "title": "Build Tutorial 4: lifetime, types and populations",
+      "spec": "Write commons/maps/Particles_LifetimeAndTypes/tutorial.md from example_4_5_inheritance_polymorphism_vr, lifetime_curves and particle_systems. Show a complete new subclass or exact method replacement; reuse core/particle.gd by link. Compare fixed lifetime and a distribution of lifetimes with histogram and observed population size. Explain CPU educational implementation versus GPUParticles3D population visuals and do not promise bitwise GPU replay.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_particles_tutorial.001",
+        "ada_particles_tutorial.003"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "example_4_5_inheritance_polymorphism_vr",
+        "lifetime_curves",
+        "particle_systems"
+      ],
+      "map_refs": [
+        "Particles_LifetimeAndTypes"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "commons/maps/Particles_LifetimeAndTypes/tutorial.md",
+      "verification": "Cold reconstruction with lifetime changes measured; Quest FPS/count comparison recorded"
+    },
+    {
+      "id": "ada_particles_tutorial.006",
+      "title": "Build Tutorial 5: repulsion, collisions and campfire",
+      "spec": "Write commons/maps/Particles_Collision/tutorial.md from example_4_6_particle_repeller_vr and particle_campfire. Build from earlier particles, force and lifetime examples. Explain repulsion versus collision, boundaries and integrated fire/smoke/embers; ask which visible features arise from which rule. Include an open-ended experiment that may fail and prompts a recorded new question instead of treating every result as an expected demonstration.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_particles_tutorial.001",
+        "ada_particles_tutorial.004",
+        "ada_particles_tutorial.005"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "example_4_6_particle_repeller_vr",
+        "particle_campfire"
+      ],
+      "map_refs": [
+        "Particles_Collision"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "commons/maps/Particles_Collision/tutorial.md",
+      "verification": "Cold reconstruction from linked prior lessons; VR proximity and visual readability tested"
+    },
+    {
+      "id": "ada_particles_tutorial.007",
+      "title": "Specify optional randomness and noise particle extensions",
+      "spec": "Do not insert a sixth mandatory hall yet. Write a companion path using existing curl_noise_particles, particle_randomness_pure/perlin/emergent/patterns (registry/scene existence to be verified), and the proposed particle_field_comparator. Stage contrasts: independent draws, stochastic motion, correlated fields, flow, feedback and selection. Make each extension a branch from a relevant existing particle/randomness/noise hall; record unresolved prerequisites before enabling.",
+      "effort": "2h",
+      "skill": "design",
+      "depends_on": [
+        "ada_particles_tutorial.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "curl_noise_particles",
+        "particle_field_comparator"
+      ],
+      "map_refs": [
+        "Particles_Forces",
+        "Particles_Collision",
+        "Random_Space_Geometry",
+        "Noise_Space_10"
+      ],
+      "sequence_refs": [
+        "particles",
+        "randomness",
+        "noise"
+      ],
+      "output": "doc/proposals/particle_optional_extensions.md",
+      "verification": "No extension described as installed without corresponding map token/scene/VR evidence"
+    },
+    {
+      "id": "ada_particles_tutorial.008",
+      "title": "Implement experimental run recording without false replay claims",
+      "spec": "After approving the run-record schema, add opt-in record/restore hooks to one CPU particle example before extending across halls. Record initial conditions, fixed physics tick, force parameters, particle birth draws, seed/state and runtime version. Confirm replay within the chosen CPU model. Treat GPU visual effects, XR tracking and collisions as potentially nondeterministic without stronger snapshot or event logging; document exactly which outputs are reconstructed.",
+      "effort": "multi-day",
+      "skill": "build",
+      "depends_on": [
+        "ada_particles_tutorial.002",
+        "ada_particles_tutorial.003",
+        "ada_particles_tutorial.004",
+        "ada_particles_tutorial.005",
+        "ada_particles_tutorial.006"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Particles_SingleAndArrays",
+        "Particles_Emitters",
+        "Particles_Forces",
+        "Particles_LifetimeAndTypes",
+        "Particles_Collision"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/particle_replay_contract.md",
+      "verification": "Saved fixture test with parameter equality and measured tolerances; VR re-entry test"
+    },
+    {
+      "id": "ada_particles_tutorial.009",
+      "title": "Run ghost-student and headset acceptance for all five tutorials",
+      "spec": "For each particles tutorial, attempt a cold reconstruction from no undocumented source. Check inherited code links, accurate code replacements, scene load, lifetime/array cleanup, actual XR inputs, readout reach, reset, performance and experiment reproducibility limits. Record whether the student can predict an effect, perform it and explain its cause. Write blocked/unknown outcomes as learning debt; do not silently patch the instructions from private context.",
+      "effort": "multi-day",
+      "skill": "verify",
+      "depends_on": [
+        "ada_particles_tutorial.002",
+        "ada_particles_tutorial.003",
+        "ada_particles_tutorial.004",
+        "ada_particles_tutorial.005",
+        "ada_particles_tutorial.006"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Particles_SingleAndArrays",
+        "Particles_Emitters",
+        "Particles_Forces",
+        "Particles_LifetimeAndTypes",
+        "Particles_Collision"
+      ],
+      "sequence_refs": [
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/particle_ghost_student_quest.md",
+      "verification": "Five independent reconstructions and documented headset checks"
+    }
+  ]
+}

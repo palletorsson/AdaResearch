@@ -1,0 +1,155 @@
+{
+  "goal_id": "ada_dissipated_author_book",
+  "goal_title": "Dissipated authorship: the book as research apparatus",
+  "why": "Make the final text a time-distributed collaboration among people, AI, code, instruments and observed consequences, while keeping evidence and accountability legible.",
+  "success_criteria": [
+    "Final text can preserve genuinely open research questions without false closure",
+    "Source observations, speculative passages and installed behavior have distinguishable provenance",
+    "The tutorial and final text have different functions and remain cross-linked",
+    "Revisions can change the world and changed worlds can challenge previous prose"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "ada_dissipated_author_book.001",
+      "title": "Write the final-text editorial charter",
+      "spec": "Use the author-provided proposition \"the author is not dead; the author is dissipated\" and \"writing always was a collaboration of given time\" to draft doc/proposals/dissipated_author_editorial_charter.md. The tutorial is a reconstructable kit; final.md is a situated literary encounter that may include history, strangeness, critique, provisional hypotheses and admitted ignorance. Do not transform every hall into a lecture about AI. Preserve intentional images and particular algorithmic behaviours. Mark this text as human-provided research direction, not a discovered source fact.",
+      "effort": "2h",
+      "skill": "edit",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/proposals/dissipated_author_editorial_charter.md",
+      "verification": "Editorial charter distinguishes tutorial mechanics, final encounter and research field notes"
+    },
+    {
+      "id": "ada_dissipated_author_book.002",
+      "title": "Create a learning-debt and contribution ledger",
+      "spec": "Design an opt-in manifest for each final.md research branch that records what the text knows from SOURCE, what was seen in CAPTURE/VR, what was inferred as HYPOTHESIS, what was borrowed or AI-proposed, what remains UNTESTED and the next experiment. Include linkable versions/commit IDs when available. Do not label all AI-assisted prose as an undifferentiated author; preserve relevant human contributors, source rights and responsibility for publication.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_dissipated_author_book.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/proposals/learning_debt_ledger.schema.json",
+      "verification": "Ledger example shows a genuine unknown and a falsifiable next test"
+    },
+    {
+      "id": "ada_dissipated_author_book.003",
+      "title": "Trial a changing final text after a changing artifact",
+      "spec": "In one late hall (prefer Random_Space or Noise_Space_10), choose an observable difference between two artifact versions and write two short final.md passages that are each accurate to their version. Preserve both with date/provenance; do not silently smooth a contradictory observation. Test whether the second version changes how the first reads. Keep all new text in a proposal until human review.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_dissipated_author_book.001",
+        "ada_dissipated_author_book.002"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Random_Space",
+        "Noise_Space_10"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise"
+      ],
+      "output": "doc/proposals/recursive_final_text_trial.md",
+      "verification": "Two passage versions each grounded in their corresponding scene/code and observation"
+    },
+    {
+      "id": "ada_dissipated_author_book.004",
+      "title": "Introduce uncertainty without invented discoveries",
+      "spec": "For the final text in Noise_Space_10 and the particle experimental coda, create one open question derived from installed behaviour plus one unrealized experimental extension. Distinguish present operation, proposed extension, and unknowable result. Include the visitor choice to keep a surprising failure rather than declaring novelty mandatory. Do not promise finished implementations of the garment, a physical entropy source, or new physics.",
+      "effort": "half-day",
+      "skill": "edit",
+      "depends_on": [
+        "ada_dissipated_author_book.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "sequence_refs": [
+        "noise",
+        "particles"
+      ],
+      "output": "doc/proposals/open_questions_for_final_text.md",
+      "verification": "Every present-tense interaction confirmed in source or labeled requiring runtime test"
+    },
+    {
+      "id": "ada_dissipated_author_book.005",
+      "title": "Audit randomness, noise and QFEP terminology",
+      "spec": "Review all proposed passages for distinctions among entropy source, PRNG, physical randomness, hashing, distribution, correlation, stationary coherent noise, temporal memory, Shannon entropy, thermodynamic entropy, deterministic chaos and variational free energy. Treat QFEP as this project’s artistic research framework, not a proven universal physical equation. Record claims needing primary sources; do not invent historical citations.",
+      "effort": "half-day",
+      "skill": "research",
+      "depends_on": [
+        "ada_dissipated_author_book.003",
+        "ada_dissipated_author_book.004"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/random_noise_theory_claims.md",
+      "verification": "Every hard historical/scientific claim has a source, code test, or UNVERIFIED label"
+    },
+    {
+      "id": "ada_dissipated_author_book.006",
+      "title": "Run the authorial checkpoint as a design decision",
+      "spec": "Hold a human editorial review after artifact and text trials. Present what changed, why, provenance, verified observations, remaining learning debt and one or two consequential open decisions. Accept, defer or reject each possible new hall and writing change. Create follow-up JSON tasks only for approved work; ensure the book can continue to generate questions for the system without being automatically treated as verified truth.",
+      "effort": "2h",
+      "skill": "verify",
+      "depends_on": [
+        "ada_dissipated_author_book.002",
+        "ada_dissipated_author_book.005"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/dissipated_author_checkpoint.md",
+      "verification": "Each adopted speculative claim has an accountable reviewer and next verification step"
+    }
+  ]
+}

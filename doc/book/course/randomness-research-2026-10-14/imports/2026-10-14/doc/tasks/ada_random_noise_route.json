@@ -1,0 +1,240 @@
+{
+  "goal_id": "ada_random_noise_route",
+  "goal_title": "Randomness and noise: evidence-led hall route",
+  "why": "Move from demonstrated mechanisms to open experiments, without silently destroying old halls or manuscript connections.",
+  "success_criteria": [
+    "Tracked, local and runtime orders compared; no accidental changes to authorial route",
+    "Proposed change list and cross-hall handovers accepted by the author",
+    "Every changed hall traversable in map checker and headset, with code/VR verification distinguished",
+    "Existing task issues explicitly referenced rather than duplicated"
+  ],
+  "prerequisites": [],
+  "tasks": [
+    {
+      "id": "ada_random_noise_route.001",
+      "title": "Freeze and reconcile all source orders",
+      "spec": "On the working computer compare git status, commons/maps/sequences/randomness.json, commons/maps/sequences/noise.json, commons/maps/sequences/particles.json, commons/maps/curriculum_spine.json and the current runtime-authored order (including any local map_authored.json or generated plan). Also compare the September 2026 randomness-review.md and noise-review.md snapshots and doc/tasks/book_randomness.json, book_noise.json. Inventory every hall map_data.json interactables layer. Mark items as tracked, locally modified, planned or unverified; do not treat uncommitted work as missing. Save discrepancies and hashes in doc/tasks/_audits/random_noise_particle_route_state.md; make no edits to routes.",
+      "effort": "half-day",
+      "skill": "read",
+      "depends_on": [],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Noise_Types",
+        "Particles_SingleAndArrays"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/random_noise_particle_route_state.md",
+      "verification": "git status --short; python tools/ada/ada.py seq randomness; python tools/ada/ada.py seq noise"
+    },
+    {
+      "id": "ada_random_noise_route.002",
+      "title": "Resolve physical route versus teaching order",
+      "spec": "Prepare two columns: tracked sequence maps[] order and actual Endless Museum runtime route (including Biome_Cage and Biome_Ladder_Randomness if still present). Compare with the proposal in ADA_RANDOMNESS_NOISE_PARTICLES_PLAN.md. Keep all teleporters, gating and previous lesson references intact until human approval. Write an explicit change list with old index, proposed index and dependencies, including any question about Lab_Path not being built. Do not modify a map in this task.",
+      "effort": "2h",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_route.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/random_noise_route_decision.md",
+      "verification": "Review generated order against commons/maps/sequences/*.json and existing runtime route"
+    },
+    {
+      "id": "ada_random_noise_route.003",
+      "title": "Reconcile the seeded opening and textile move",
+      "spec": "Inspect commons/maps/Random_Definition/map_data.json and final.md, commons/maps/Randomness_10_PRINT_Algorithm/map_data.json and final.md, and the newer illustrated review. Identify whether textile_comparison is still physically in Random_Definition or already moved locally; confirm seed_replay_demo, RAND page, sphere and the 4x4 mode in source. Propose exactly one move, not a duplicate. Document the inherited mechanism and what changed.",
+      "effort": "2h",
+      "skill": "read",
+      "depends_on": [
+        "ada_random_noise_route.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [
+        "seed_replay_demo",
+        "textile_comparison",
+        "ten_print_maze_3d"
+      ],
+      "map_refs": [
+        "Random_Definition",
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/tasks/_audits/random_definition_to_10print.md",
+      "verification": "Compare actual map token counts in both interactables layers and inspect local git diff"
+    },
+    {
+      "id": "ada_random_noise_route.004",
+      "title": "Trial the early probability route without permanently reordering",
+      "spec": "Create a proposal/capture test for Random_Definition → Random_Entropy → Random_Cubes → Random_Gaussian → Random_Remove → Randomness_10_PRINT_Algorithm. Explain why coin/die and distributions may need to precede removal and grammar. Keep current canonical order until human review of one walk-through and existing final.md handovers; maintain existing map names. Do not alter locked gates in this task.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_route.002",
+        "ada_random_noise_route.003"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Cubes",
+        "Random_Gaussian",
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/tasks/_audits/randomness_early_route_trial.md",
+      "verification": "Compare trial experience with current route; record approval or rejection explicitly"
+    },
+    {
+      "id": "ada_random_noise_route.005",
+      "title": "Design the later randomness exploration arc",
+      "spec": "Design an encounter-by-encounter movement through Random_Rotate_Random_XYZ, Random_Walk, Random_Mushrooms, Random_Space_Geometry, Randomness_Examples_of_Randomness, Random_Pheromone, Random_Space and Random_Game. Keep the installed anchor for each; mark new proposals separately. Include the existing book_randomness.001 unreachable-geometry issue and book_randomness.028 path severance as prerequisites before physical carrying. Specify what the visitor may preserve, predict, vary or discover in each hall.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_route.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Random_Walk",
+        "Random_Space_Geometry",
+        "Random_Space",
+        "Random_Game"
+      ],
+      "sequence_refs": [
+        "randomness"
+      ],
+      "output": "doc/tasks/_audits/randomness_late_arc.md",
+      "verification": "Artifact-by-artifact walkability and narrative dependency review"
+    },
+    {
+      "id": "ada_random_noise_route.006",
+      "title": "Decide noise hall order and field handoff",
+      "spec": "Compare existing noise hall order with the proposal to put Noise_Perlin_Simplex before Noise_Space_10, leaving Noise_Space_10 as open investigation. Check Lab_Path presence in actual runtime versus prose (existing book_noise.014) and whether Chamber_Noise is in use or deferred. Do not silently activate Noise_Blue, Noise_Functions or Noise_Volume. Write a route decision and concrete edit diff only after approval.",
+      "effort": "2h",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_route.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Noise_Perlin_Simplex",
+        "Noise_Space_10",
+        "Lab_Path",
+        "Chamber_Noise"
+      ],
+      "sequence_refs": [
+        "noise"
+      ],
+      "output": "doc/tasks/_audits/noise_route_decision.md",
+      "verification": "Cross-check route, return_to and portal state against the actual manager and sequence files"
+    },
+    {
+      "id": "ada_random_noise_route.007",
+      "title": "Specify an opt-in cross-hall experiment record",
+      "spec": "Design a minimal JSON run record to carry captured seed and source classification, generator version, parameters, draw order, timestamp/build, observation and uncertainty labels between halls. Do not assume the museum already persists this state. Include explicit export/import, clear/reset and provenance; do not collect raw pose/audio data without separate necessity and consent. Name producer and consumer artifacts and test both same-hall replay and cross-hall restore. Write schema and example.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_route.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Walk",
+        "Random_Space",
+        "Noise_Space_10"
+      ],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/proposals/randomness_run_record.schema.json",
+      "verification": "python -m json.tool doc/proposals/randomness_run_record.schema.json"
+    },
+    {
+      "id": "ada_random_noise_route.008",
+      "title": "Plan minimal map diffs without erasing local work",
+      "spec": "After signed route decisions, specify per-map JSON cell edits, source paths, teleporter checks, collision clearance and staging. Reconcile the existing registry entries first; do not recreate curl_noise_particles or noise_mixer which are already present on the tracked branch. Preserve local uncommitted map edits and historical snapshots. Include before/after map plans and rollback steps.",
+      "effort": "half-day",
+      "skill": "design",
+      "depends_on": [
+        "ada_random_noise_route.004",
+        "ada_random_noise_route.005",
+        "ada_random_noise_route.006",
+        "ada_random_noise_route.007"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise"
+      ],
+      "output": "doc/tasks/_audits/random_noise_map_diff_plan.md",
+      "verification": "python tools/map_pathfinder.py check --all; human approval of plan before writing map_data.json"
+    },
+    {
+      "id": "ada_random_noise_route.009",
+      "title": "Verify route, transfers and headset experience",
+      "spec": "After map edits have been implemented by separately approved tasks, validate all touched maps with python tools/map_pathfinder.py check <MapName> --verbose and then python tools/map_pathfinder.py check --all. Run an actual Godot scene load and VR headset traversal. Verify approaches, visibility, reach, reset, save/replay, performance, teleporter progression and return-to-Lab. Record failures, build/commit IDs and headset tests; do not present desktop checks as headset evidence.",
+      "effort": "multi-day",
+      "skill": "verify",
+      "depends_on": [
+        "ada_random_noise_route.008"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "artifact_refs": [],
+      "map_refs": [],
+      "sequence_refs": [
+        "randomness",
+        "noise",
+        "particles"
+      ],
+      "output": "doc/tasks/_audits/random_noise_vr_acceptance.md",
+      "verification": "python tools/map_pathfinder.py check --all; headset acceptance record attached"
+    }
+  ]
+}
