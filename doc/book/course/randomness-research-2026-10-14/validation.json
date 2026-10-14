@@ -1,0 +1,138 @@
+{
+  "date": "2026-10-14",
+  "scope": "Static specification/reference validation only",
+  "passed": 25,
+  "total": 25,
+  "errors": [],
+  "checks": [
+    {
+      "check": "All 25 current sequence halls assigned",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "Core and side visits do not overlap",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "All 5 particle halls retained",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Museum-only Biome Cage accounted for",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "18 unique core stops, 8 movements",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "7 unique particle stops",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "15 existing core hosts and 3 new proposals",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "4 new halls total and shared workshop",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Every reused map exists",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "New halls not mislabelled as existing",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Seven transfers declared",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Manifest explicitly proposed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Inventory covers 31 selected maps",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Selected names and scenes resolve at snapshot",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "20 unique tracker tasks",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Required repository task fields",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Repository status vocabulary",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Dependencies exist",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Task graph acyclic",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Only static audit is done",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Implementation awaits review/evidence",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "All three verification levels recorded",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "Authored local links resolve",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "check": "to-spec sections present",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "check": "User text preserved byte for byte",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "stale_source_receipts": [],
+  "runtime": "not run",
+  "physical_VR": "not tested",
+  "independent_learner": "not tested"
+}

@@ -1,0 +1,179 @@
+{
+  "schema": "ada.randomness-research.proposal.v1",
+  "date": "2026-10-14",
+  "status": "proposed",
+  "runtime_installed": false,
+  "accepted_verification": "Seven-step cycle and three verification levels; see DECISIONS.md",
+  "movements": [
+    {
+      "id": "I",
+      "title": "An arrival and a return",
+      "maps": [
+        "Random_Definition",
+        "Random_Source_Lab"
+      ]
+    },
+    {
+      "id": "II",
+      "title": "Likelihood and permission",
+      "maps": [
+        "Random_Gaussian",
+        "Random_Remove"
+      ]
+    },
+    {
+      "id": "III",
+      "title": "Marks become relations",
+      "maps": [
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Space_Geometry"
+      ]
+    },
+    {
+      "id": "IV",
+      "title": "A field becomes a place",
+      "maps": [
+        "Random_Noise_Types",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_Cellular"
+      ]
+    },
+    {
+      "id": "V",
+      "title": "The past enters the next choice",
+      "maps": [
+        "Random_Walk",
+        "Random_Pheromone"
+      ]
+    },
+    {
+      "id": "VI",
+      "title": "An account and its omissions",
+      "maps": [
+        "Random_Entropy",
+        "Randomness_Examples_of_Randomness"
+      ]
+    },
+    {
+      "id": "VII",
+      "title": "Sensitivity and persistence",
+      "maps": [
+        "Random_Sensitivity_Lab",
+        "PG_Genetic_Evolution"
+      ]
+    },
+    {
+      "id": "VIII",
+      "title": "Revise the possible",
+      "maps": [
+        "Random_Rule_Workshop",
+        "QFEP_Sandbox"
+      ]
+    }
+  ],
+  "core_order": [
+    "Random_Definition",
+    "Random_Source_Lab",
+    "Random_Gaussian",
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Space_Geometry",
+    "Random_Noise_Types",
+    "Noise_One",
+    "Noise_Voxel",
+    "Noise_Cellular",
+    "Random_Walk",
+    "Random_Pheromone",
+    "Random_Entropy",
+    "Randomness_Examples_of_Randomness",
+    "Random_Sensitivity_Lab",
+    "PG_Genetic_Evolution",
+    "Random_Rule_Workshop",
+    "QFEP_Sandbox"
+  ],
+  "new_maps": [
+    "Random_Source_Lab",
+    "Random_Sensitivity_Lab",
+    "Random_Rule_Workshop",
+    "Particles_Field_Lab"
+  ],
+  "later_returns": [
+    "PG_Genetic_Evolution",
+    "QFEP_Sandbox"
+  ],
+  "particle_order": [
+    "Particles_SingleAndArrays",
+    "Particles_Emitters",
+    "Particles_LifetimeAndTypes",
+    "Particles_Forces",
+    "Particles_Field_Lab",
+    "Particles_Collision",
+    "Random_Rule_Workshop"
+  ],
+  "side_visits": {
+    "Random_Cubes": [
+      1,
+      3
+    ],
+    "Random_Rotate_Random_XYZ": [
+      6,
+      11
+    ],
+    "Random_Mushrooms": [
+      3,
+      4,
+      16,
+      17
+    ],
+    "Random_Space": [
+      6,
+      8
+    ],
+    "Random_Game": [
+      4,
+      11
+    ],
+    "Noise_Columns": [
+      7,
+      8
+    ],
+    "Noise_6_Wall": [
+      8,
+      10
+    ],
+    "Noise_Inside_Noise": [
+      8,
+      10
+    ],
+    "Noise_Box": [
+      9,
+      10
+    ],
+    "Noise_Space_10": [
+      9,
+      10
+    ],
+    "Noise_Perlin_Simplex": [
+      6,
+      8
+    ],
+    "Lab_Path": [
+      10,
+      18
+    ],
+    "Biome_Cage": [
+      4,
+      17
+    ]
+  },
+  "transfer_ids": [
+    "X1",
+    "X2",
+    "X3",
+    "X4",
+    "X5",
+    "X6",
+    "X7"
+  ]
+}
