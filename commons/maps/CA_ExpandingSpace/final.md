@@ -26,7 +26,7 @@ Choose CHAIN, then STEP. Switch ORDER, repeat; reverse it and try again.[^ca-pre
 
 Restore the full bridge and return to the visitor input. Choose where you intend to cross. Leave the clock running. If the route changes beneath you, where do you go next? The position you take there becomes another condition of the field. There is pleasure in architecture answering us, and a stranger pleasure when its answer interrupts the role we expected it to play. A fully depleted field with no healthy neighbours remains depleted. Withdrawal alone does not promise repair.
 
-At thirty simulated seconds this study holds. The museum continues. We leave with a more precise question than whether the path is living: which relations let it carry a body, recover, or become unavailable? Three of the four choices moved in this hall: a cell holds a fraction, the visitor's position is among what it consults, and the order of the loop decides when an answer counts.
+At thirty simulated seconds this study holds. The museum continues. We leave with a more precise question than whether the path is living: which relations let it carry a body, recover, or become unavailable? Our position has entered the conditions. What the surface permits can change that position in return.
 
 <!-- @ -->
 

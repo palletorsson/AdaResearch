@@ -12,17 +12,7 @@ So something up there is being held. Before naming it, find out what.
 
 Press **SUPPORT**. The gantry the strips appeared to hang from vanishes, and they go on hanging — the held edge in the same place, the rest still free to move. Press it again for a hoop, again for a mast. Three pieces of architecture, and not one of them changes where the cloth is held.
 
-The rule that holds that edge never looks at the frame:
-
-```gdscript
-var top: bool = absf(verts[i].y - ymax) < 0.01
-var keep: bool = top and (mode == 0 or (mode == 1 and absf(absf(verts[i].x) - xmax) < 0.01))
-sb.set_point_pinned(i, keep)
-```
-
-`verts` is the strip's own rest geometry, in its own coordinates. `ymax` is the highest value in it. A point is held if its height matches that top to within a hundredth of a metre — eight points of the hundred and twelve in each strip. The strip is a mesh of triangles; its points are linked, and the pin rule chooses which must stay. That rule does not consult the frame. The apparent reason for the cloth to hang was built for you to see.
-
-A convincing support does not prove how a simulation is attached to it. You have just taken the support away and watched the attachment survive it.
+The attachment rule reads the strip’s original coordinates and holds its eight upper points. The frame was built for you to see. You have taken the apparent support away and watched the attachment survive it.
 
 Press **SUPPORT** once more and a wall arrives behind the rank. The opening behind the cloth is now occupied by a solid surface. The pins stay where they were, but the passage changes. The pin rule can ignore a wall that a body must go around.
 
@@ -30,9 +20,9 @@ Now change what is actually holding. **PINS** keeps only the two points where th
 
 Then press **RELEASE**, and the last two let go.
 
-The material never changed while the pins did. The solver ran the same way on the same mesh. What changed is how many of its points were forbidden to move — eight, then two, then none. Boundary conditions are not a detail of the setup. Here they are most of what you have been looking at.
+The material settings remained the same. Eight points were forbidden to move, then two, then none. What looked like a quality of the cloth belonged partly to the arrangement holding it.
 
-The strips are on the floor now. **REBUILD** makes a fresh hanging rank. Keep its top row held and try **STIFFNESS**. We can now compare two ways of changing the silhouette: change how strongly the surface resists deformation, or change which of its points may move.
+The strips can fall now. **REBUILD** makes a fresh hanging rank. Keep its top row held and try **STIFFNESS**. We can now compare two ways of changing the silhouette: change how strongly the surface resists deformation, or change which of its points may move.
 
 When we call an object compliant, how much of that belongs to the object, and how much to the arrangement holding it?
 
@@ -44,13 +34,16 @@ Four bodies stand nearby. They began falling when the room loaded, and by the ti
 
 A narrow rail crosses each landing. Look for where a body has come to rest: on the bar, against a post, or on the floor below. Then press **LANDING**. It exchanges the support and starts a new fall; the pan that arrives offers a floor between two walls. Stay for the fall this time.
 
-Worth knowing before you read too much into any held shape: the stop raises damping and stiffness rather than recording the vertex positions, so what you are looking at is partly the solver's and not a destination the material was travelling toward.
+Their stop raises damping and stiffness. The quiet shape is still a simulated body. Later we will keep a separate record of a surface; here we have changed the conditions under which it moves.
 
 Two questions leave this room together. What makes a body deform, and what makes us stop looking?
 
-On the way out the floor runs empty for a long time, and then a few cells stand higher than the rest and one is missing altogether — the fixed points of the room this hall used to be, left where they were when everything around them was moved.
+The raised cells farther into the hall ask your feet to negotiate another boundary. What the pins hold for the cloth, the floor must supply for you.
 
 <!-- @ -->
+
+<details markdown="1">
+<summary>Further encounter — A little give</summary>
 
 <!-- study-spine:tension_membrane -->
 
@@ -67,6 +60,8 @@ Nengudi's stretched hosiery brings a used material, close to skin, into this que
 The anchors have asked nothing of themselves. We have asked the middle to accommodate another weight.
 
 <!-- @ -->
+
+</details>
 
 Carry the fixed edge into the next hall. There, the support itself moves, and the bodies hanging from it will know.
 

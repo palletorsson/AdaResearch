@@ -99,6 +99,8 @@ if _trail_points.size() > trail_max_points:
 
 Waiting does not spend another place. Continuing the drawing can. Thirty-two positions are neither thirty-two seconds nor a fixed length of line.
 
+Rafael Lozano-Hemmer's *Pulse Room* lets recorded heartbeats continue as light after a participant releases the sensor. New arrivals move older recordings along a finite queue.[^point-trace-pulse-room] Watch the amber tail disappear at its far end. What can remain when making room is part of the work?
+
 Now try drawing with the loss. Give yourself a tail. Curl it around your other hand, then lead it elsewhere. The space you just marked can open again. What would you make with a line that follows you without keeping all of where you have been?
 
 <!-- @ -->
@@ -112,6 +114,8 @@ The trace sends perfectly: this is what a GPS track is, and a mocap take, and ev
 The recorder was made to keep a gesture. Its list can now become something to compose with. A bend of the wrist may return at the size of a room, inviting another movement. The first use is still there, but it no longer tells us everything the record can become.[^point-trace-hauntology]
 
 In the next room, look for your bend. It may have grown.
+
+[^point-trace-pulse-room]: Rafael Lozano-Hemmer, [*Pulse Room*](https://www.lozano-hemmer.com/pulse_room.php) (2006). The comparison concerns limited retention. His installation keeps pulse rhythms; this recorder keeps ordered positions without their timing.
 
 [^point-trace-klee]: Paul Klee, [*Pedagogical Sketchbook*](https://openendedgroup.com/field2/assets/Klee_Paul_Pedagogical_Sketchbook_1960.pdf), translated by Sibyl Moholy-Nagy (1960 edition; German original 1925), opening section. Klee begins with an “active line on a walk” and a moving point. Ada makes the recording conditions part of that encounter: which point moves, when a position is accepted, and how retained positions become a line.
 
