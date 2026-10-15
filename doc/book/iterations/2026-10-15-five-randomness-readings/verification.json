@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-15",
+  "type": "author_preflight_not_reader_verdict",
+  "all_full_drafts": true,
+  "route_matches_all": true,
+  "range_words": [
+    600,
+    1500
+  ],
+  "count_method": "Unicode word tokens; excludes title, artifact markers and link URLs; includes quoted documents and section labels.",
+  "drafts": [
+    {
+      "id": "a",
+      "title": "After the hand withdraws",
+      "words": 889,
+      "sha256": "d1d56c500ac82e85f9f5990903e07d5c2e85f74f397e11ecec5735c93de79864",
+      "form": "Continuous observation",
+      "proposed_effect": "Attention begins with marks after withdrawal and ends with a record the apparatus could make.",
+      "risk": "Different operations of keeping may become too similar.",
+      "route": [
+        "random_touch",
+        "random_number_book_page_1955",
+        "geiger_counter",
+        "seed_replay_demo/movement_sampler",
+        "random_return"
+      ]
+    },
+    {
+      "id": "b",
+      "title": "A room with two dates",
+      "words": 819,
+      "sha256": "606400c5f5957e0db0527cc9978cb82788245ead5dbdb09ff0ea80325dbe416f",
+      "form": "Documentary montage",
+      "proposed_effect": "Readouts, procedural descriptions and the dated receipt interrupt the present account.",
+      "risk": "The registers may break the spatial continuity.",
+      "route": [
+        "random_touch",
+        "random_number_book_page_1955",
+        "geiger_counter",
+        "seed_replay_demo/movement_sampler",
+        "random_return"
+      ]
+    },
+    {
+      "id": "c",
+      "title": "A suspicion about the centre",
+      "words": 946,
+      "sha256": "77d2cebde449f4c5b2fb36b625f4cabcdc12770019504d157f1a14b2b353675c",
+      "form": "Investigation",
+      "proposed_effect": "A suspicion about the drawing becomes questions about selection, measurement and rules.",
+      "risk": "Explanations may settle what could remain interesting.",
+      "route": [
+        "random_touch",
+        "random_number_book_page_1955",
+        "geiger_counter",
+        "seed_replay_demo/movement_sampler",
+        "random_return"
+      ]
+    },
+    {
+      "id": "d",
+      "title": "The room keeps several times",
+      "words": 876,
+      "sha256": "8f1c4877c2990475f422afa8c79077e7d4d9bc40d4641983a4ba45112712fc79",
+      "form": "Temporal composition",
+      "proposed_effect": "Different durations organize the sequence, including waiting and an acquisition date.",
+      "risk": "Printed pacing may promise a sensation it cannot establish.",
+      "route": [
+        "random_touch",
+        "random_number_book_page_1955",
+        "geiger_counter",
+        "seed_replay_demo/movement_sampler",
+        "random_return"
+      ]
+    },
+    {
+      "id": "e",
+      "title": "A small constitution for chance",
+      "words": 918,
+      "sha256": "55d7d515f8f9f6d604bd22f376b0b7d6834bfb2b11d7586ac7549ce56976e0db",
+      "form": "Speculative constitution",
+      "proposed_effect": "Clauses about permitted actions accumulate and need amendment as the body enters.",
+      "risk": "The analogy may make the apparatus illustrate a predetermined argument.",
+      "route": [
+        "random_touch",
+        "random_number_book_page_1955",
+        "geiger_counter",
+        "seed_replay_demo/movement_sampler",
+        "random_return"
+      ]
+    },
+    {
+      "id": "f",
+      "title": "How long a result remains",
+      "words": 1179,
+      "sha256": "2f754ca11994a8546001a9c1c2f042c5837b0b9274de0fad1934c1d3bc00bd7a",
+      "form": "Composed candidate (after a reading of A-E)",
+      "proposed_effect": "D's durations carry C's refining suspicion from stop to stop; A's unkept release point and B's receipt sentence are folded in; E's constitutional exit opens the door out.",
+      "risk": "A composition of favourites may inherit three intentions without any single form's discipline, and its seams may show to a reader who knows the five.",
+      "route": [
+        "random_touch",
+        "random_number_book_page_1955",
+        "geiger_counter",
+        "seed_replay_demo/movement_sampler",
+        "random_return"
+      ]
+    }
+  ],
+  "source_drift": [],
+  "reader_responses": [],
+  "canonical_adoption": false,
+  "technical_limits": [
+    "MOVE / KEEP placement unresolved",
+    "Composed accounts are not participant reports",
+    "No new headset session or independent reconstruction"
+  ],
+  "author_factual_check": "Compared all five drafts with evidence.md and retained sources; public REPLAY-only abacus, hand/body distinction, seed/provenance, clock/event distinction and conditional collision claim retained."
+}

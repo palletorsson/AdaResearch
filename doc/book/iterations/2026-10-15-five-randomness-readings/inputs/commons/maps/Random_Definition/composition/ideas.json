@@ -1,0 +1,236 @@
+{
+  "schema": "ada-literary-idea-bank/1",
+  "map": "Random_Definition",
+  "updated": "2026-10-15",
+  "purpose": "Retain portable observations and tensions independently of a chosen chapter. A reported preference does not establish a tested gem or adoption.",
+  "sources": {
+    "supplied_reading": "doc/book/iterations/2026-10-15-five-randomness-readings/supplied-reading.txt",
+    "apparatus": "doc/book/iterations/2026-10-15-five-randomness-readings/evidence.md",
+    "prior_reading": "doc/book/iterations/2026-10-15-composition-consequences/supplied-reading.txt",
+    "calibration": "doc/book/iterations/2026-10-15-independent-writer/calibration.md",
+    "draft_a": "doc/book/iterations/2026-10-15-five-randomness-readings/drafts/a.md"
+  },
+  "ideas": [
+    {
+      "id": "RD-001",
+      "title": "Less time inside the same distance",
+      "idea": "A fixed spatial path becomes a different encounter when its pace changes.",
+      "anchor": "The rods have not grown, but there is less time inside the same distance.",
+      "source": "supplied_reading",
+      "artifacts": [
+        "random_touch"
+      ],
+      "status": "reported_attention",
+      "evidence": "Supplied packet reading identifies this sentence as worth preserving. Code shares X positions at four rates; no headset sensation is inferred.",
+      "risk": "Conflating speed with another source of randomness or prescribing a feeling.",
+      "next_test": "Compare which draft makes the pace change matter without explaining an emotion.",
+      "used_in": [
+        "a",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-002",
+      "title": "Marks become available after withdrawal",
+      "idea": "Movement leaves a surface that can be examined when following has ended.",
+      "source": "supplied_reading",
+      "artifacts": [
+        "random_touch",
+        "random_number_book_page_1955"
+      ],
+      "status": "reported_attention",
+      "evidence": "The supplied reading asks for more attention to the recording wall. Current ink persists after release; return motion adds no marks.",
+      "risk": "Treating the image as a complete recording of the bodily event.",
+      "next_test": "Does the reader want to compare marks, revisit a motion, or inspect a dark patch?",
+      "used_in": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-003",
+      "title": "A dense image does not identify its source",
+      "idea": "Selected destinations and interpolated travel both contribute to the visible marks.",
+      "source": "apparatus",
+      "artifacts": [
+        "random_touch"
+      ],
+      "status": "technical_tension_candidate",
+      "evidence": "Installed targets are uniform; twelve phase samples per segment contribute ink. Gaussian generation exists in reconstruction code without a room selector.",
+      "risk": "Inferring a Gaussian source from a crowded centre, or offering a control absent from the exhibit.",
+      "next_test": "Retain endpoints and path samples separately in a future reconstruction; compare their distributions.",
+      "used_in": [
+        "a",
+        "b",
+        "c",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-004",
+      "title": "Production, recording and selection",
+      "idea": "A hand can change which result stays available without having produced that result.",
+      "source": "prior_reading",
+      "artifacts": [
+        "random_number_book_page_1955",
+        "random_touch"
+      ],
+      "status": "reported_attention",
+      "evidence": "Earlier user response distinguishes producing, recording and selecting. Touch toggles a generated five-digit group; release of the hand alone does not release it.",
+      "risk": "Flattening all kinds of keeping into one metaphor, or implying a complete table proves provenance.",
+      "next_test": "Can a reader distinguish what the touch changes here from what it changes at the abacus?",
+      "used_in": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-005",
+      "title": "A date interrupts a repeating present",
+      "idea": "A retained acquisition document and a replaying calculation have different temporalities.",
+      "source": "supplied_reading",
+      "artifacts": [
+        "geiger_counter"
+      ],
+      "status": "reported_attention",
+      "evidence": "Supplied reading values the receipt beside the repeating gaps. The receipt reports 435 acquired on 13 October; the current sequence is synthesized and reused.",
+      "risk": "Making the receipt prove more than it records, or treating later clicks as new physical measurements.",
+      "next_test": "Does documentary interruption create curiosity without requiring a second explanatory summary?",
+      "used_in": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-006",
+      "title": "A clock loses a distinction while the sound keeps it",
+      "idea": "The same retained event times can yield different measured comparisons.",
+      "source": "apparatus",
+      "artifacts": [
+        "geiger_counter"
+      ],
+      "status": "technical_tension_candidate",
+      "evidence": "Changing comparison resolution preserves events/audio; equal measured intervals are skipped.",
+      "risk": "Confusing quantization with changed event timing or asserting every coarser comparison loses the same amount.",
+      "next_test": "Keep the same trace, change resolution, and ask what disappeared from which representation.",
+      "used_in": [
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-007",
+      "title": "A movement becomes one of a thousand beginnings",
+      "idea": "Bodily input can alter a generator while many distinctions in its measurement do not survive the seed mapping.",
+      "source": "apparatus",
+      "artifacts": [
+        "seed_replay_demo/movement_sampler"
+      ],
+      "status": "candidate_placement_pending",
+      "evidence": "Pose records are rounded, hashed and reduced modulo 1000. Different records can collide; no found pair is claimed. The saved room currently removes this part.",
+      "risk": "Describing an absent stop as installed, certifying true randomness, or claiming an unperformed collision trial.",
+      "next_test": "Resolve placement; retain two different records with the same seed and compare consequences.",
+      "used_in": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-008",
+      "title": "Another draw cannot repeal the return",
+      "idea": "Variation within an excursion and alteration of its route rule are different capacities.",
+      "source": "prior_reading",
+      "artifacts": [
+        "random_return",
+        "random_touch"
+      ],
+      "status": "reported_attention",
+      "evidence": "User's full reading found the distinction consequential. Direction/distance vary while the sphere's return remains authored; release ends body carry.",
+      "risk": "Equating the sphere's compulsory return with a player being forced to remain attached.",
+      "next_test": "Does the ending prompt another seed choice or a proposal to alter the rule—and why?",
+      "used_in": [
+        "a",
+        "c",
+        "d",
+        "e"
+      ]
+    },
+    {
+      "id": "RD-009",
+      "title": "A visible cell can cease to support a body",
+      "idea": "A computational distinction can arrive as a spatial event before it receives an explanation.",
+      "anchor": "The faint tile can still be seen after it can no longer carry you.",
+      "source": "supplied_reading",
+      "artifacts": [
+        "decaying_bridge"
+      ],
+      "status": "calibration_attention",
+      "evidence": "Supplied packet reading prefers this CA encounter. It belongs to CA_ExpandingSpace, not Random Definition; proximity affects health and support thresholds.",
+      "risk": "Importing a bridge into the wrong room, prescribing a moral, or describing pressure sensing.",
+      "next_test": "Look for a comparably precise consequence in randomness without copying the bridge's plot.",
+      "used_in": [],
+      "scope": "Cross-map calibration principle only"
+    },
+    {
+      "id": "RD-010",
+      "title": "Replay supplies events, not the first encounter",
+      "idea": "The procedure can repeat while recognition, attention and reading duration change.",
+      "source": "supplied_reading",
+      "artifacts": [
+        "random_touch",
+        "geiger_counter",
+        "random_return"
+      ],
+      "status": "candidate",
+      "evidence": "Repeatable paths and event lists are implemented. What a listener or visitor learns from repetition remains open.",
+      "risk": "Claiming an inevitable response to repetition or treating reading speed as simulated time.",
+      "next_test": "Ask what changed on the second reading or hearing; retain a report of no gain.",
+      "used_in": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "RD-011",
+      "title": "A new record would keep the release point",
+      "idea": "An encounter can reveal something the apparatus does not currently preserve.",
+      "source": "draft_a",
+      "artifacts": [
+        "random_return"
+      ],
+      "status": "new_draft_proposal",
+      "evidence": "Candidate A imagines wanting a mark where carry ends. No such mark is asserted to exist.",
+      "risk": "Making a narrator's proposal look like a participant request or a shipped feature.",
+      "next_test": "Does another reader want this record; what would it let them compare?",
+      "used_in": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "decision_log": [
+    {
+      "date": "2026-10-15",
+      "action": "Retained supplied ideas and technical tensions for five exploratory full-chapter candidates.",
+      "adopted": false,
+      "note": "Palle requested divergent texts. The supplied reader's provisional calibration preference remains distinct from Palle's approval."
+    }
+  ]
+}
