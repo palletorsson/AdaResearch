@@ -82,6 +82,24 @@ Hall one of fourteen must hand off. The door opens; the room still closes on the
 >
 > The sphere comes back to centre.
 
+### R7-add-inscription · add (random_return)
+
+Palle's line, 16 October: the room names its own comfort. It stands alone, in the room's voice rather than the walkers' — the register break is the point — and the final line then proves the claim. It is also the hinge of the testimony question recorded in the forum: the arc owes a later hall the revocation of exactly this comfort, and a comfort named is one that can be revoked on purpose.
+
+**Old:**
+
+> The rooms ahead give it more to decide.
+>
+> The sphere comes back to centre.
+
+**New:**
+
+> The rooms ahead give it more to decide.
+>
+> Here, randomness is domesticated.
+>
+> The sphere comes back to centre.
+
 ## Reading check
 
 Read r2 complete, then against the original and r1 in the comparison. Does the named definition close the Geiger stop or finally focus it? Does the prediction paragraph invite the experiment or instruct it? Does the door weaken the final return, or does the return close the door's claim? A report of no improvement over r1 belongs in the record.
