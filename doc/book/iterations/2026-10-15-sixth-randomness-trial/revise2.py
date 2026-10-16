@@ -63,6 +63,14 @@ CHANGES = [
         "before": "Once released, we are not obliged to accompany it.\n\nThe sphere comes back to centre.",
         "after": "Once released, we are not obliged to accompany it.\n\nIn this room chance was allowed a position, a duration, a destination — each inside a rule it did not write. The rooms ahead give it more to decide.\n\nThe sphere comes back to centre.",
     },
+    {
+        "id": "R7-add-inscription",
+        "kind": "add",
+        "stop": "random_return",
+        "why": "Palle: could we add a mystical line - here randomness is domesticated. The room names its own comfort, alone, in the room's voice rather than the walkers'; the final line then proves the claim. A comfort named is one the arc can later revoke on purpose.",
+        "before": "The rooms ahead give it more to decide.\n\nThe sphere comes back to centre.",
+        "after": "The rooms ahead give it more to decide.\n\nHere, randomness is domesticated.\n\nThe sphere comes back to centre.",
+    },
 ]
 
 revised = base.replace(

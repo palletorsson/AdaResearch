@@ -87,4 +87,6 @@ A new seed can give it another direction, another distance. The return is not am
 
 In this room chance was allowed a position, a duration, a destination — each inside a rule it did not write. The rooms ahead give it more to decide.
 
+Here, randomness is domesticated.
+
 The sphere comes back to centre.
