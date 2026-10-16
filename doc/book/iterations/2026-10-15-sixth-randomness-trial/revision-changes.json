@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-15",
+  "authorized_scope": "Small corrections and RAND-to-Geiger transition; preserve opening and ending; compare with original.",
+  "opening_paragraph_unchanged": true,
+  "last_three_paragraphs_unchanged": true,
+  "changes": [
+    {
+      "reason": "Uniform selection",
+      "before": "The targets were drawn uniformly.",
+      "after": "The targets were drawn uniformly, with equal chances for equal intervals within their range."
+    },
+    {
+      "reason": "Release before replay",
+      "before": "One large button says REPLAY. It clears the paper and restores the stored paths.",
+      "after": "After withdrawing from the bead, we press the large button marked REPLAY. It clears the paper and restores the stored paths."
+    },
+    {
+      "reason": "RAND leaves a question about production",
+      "before": "That is a fact about our selection, not evidence that the group deserved it.",
+      "after": "That is a fact about our selection, not evidence that the group deserved it.\n\nThe five figures are still there when we turn away. We have kept a result; the procedure that made it remains out of view."
+    },
+    {
+      "reason": "Another kept number at Geiger",
+      "before": "Its screen shows 435. So does the colour window, and a capture beside the virtual lamps.",
+      "after": "The cabinet's screen shows a number that has also been kept: 435. So does the colour window, and a capture beside the virtual lamps."
+    },
+    {
+      "reason": "Seed at first use",
+      "before": "A generator began from 435, advanced its internal state, and supplied numbers from which the intervals were made.",
+      "after": "435 is the seed, the number that set the generator's starting state. The calculation then advanced that state, supplying numbers from which the intervals were made."
+    },
+    {
+      "reason": "Bits and clock resolution",
+      "before": "The cabinet has another way of reading the intervals. We keep the ninety-six events fixed and make the comparison clock coarser. Two gaps that had different durations may now receive the same measured value. The bit extractor skips such a pair.",
+      "after": "The cabinet has another way of reading the intervals. It compares pairs of gaps to produce bits, zeros or ones. We keep the ninety-six events fixed and make the comparison clock coarser, measuring in larger steps. Two gaps that had different durations may now receive the same measured value. Such a pair is skipped."
+    },
+    {
+      "reason": "A tied pair produces no bit",
+      "before": "We can hear the gaps once more. Listening cannot restore the bit that this particular comparison declined to produce.",
+      "after": "We can hear the gaps once more. For this comparison, the tied pair still yields no bit."
+    },
+    {
+      "reason": "Describe the transformation without requiring hash vocabulary",
+      "before": "The apparatus has kept more than the number. There is a timed series of poses. These measurements are rounded, encoded and hashed by a fixed procedure, then reduced to one of a thousand possible seeds.",
+      "after": "The apparatus has kept more than the number: positions and orientations recorded over time. A fixed calculation turns the rounded measurements into a whole number, then reduces it to one of a thousand possible seeds."
+    },
+    {
+      "reason": "Join the existing excursion",
+      "before": "Holding it begins an excursion. This time the viewpoint moves.",
+      "after": "We take hold and join an excursion already under way. This time the viewpoint moves."
+    }
+  ],
+  "canonical_adoption": false,
+  "reader_responses": []
+}

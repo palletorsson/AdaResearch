@@ -1,0 +1,114 @@
+{
+  "date": "2026-10-15",
+  "id": "supplied-sixth-trial",
+  "title": "What chance is allowed to do",
+  "reported_exposure": "Composed after reading A-E, as stated in supplied subtitle.",
+  "provenance": "Supplied by Palle; writer identity and setting not independently established.",
+  "distinct_from": "Existing local F, How long a result remains, and the five returned short form studies.",
+  "status": "two_revisions_prepared_reading_pending",
+  "words": 1109,
+  "route": [
+    "random_touch",
+    "random_number_book_page_1955",
+    "geiger_counter",
+    "seed_replay_demo/movement_sampler",
+    "random_return"
+  ],
+  "source_preserved_byte_for_byte": true,
+  "reader_responses": [],
+  "canonical_adoption": false,
+  "files": [
+    {
+      "path": "supplied-trial.txt",
+      "sha256": "6e9af417620e58c5575f1e84a078afdbdeef43e4be4f44313f4cfa25d5dc1122"
+    },
+    {
+      "path": "trial.md",
+      "sha256": "9c69517ddc82abc0ada4a6c869a453684d481fb0ff37d10941c64fe43a540577"
+    },
+    {
+      "path": "index.html",
+      "sha256": "046d3c19219c836a9e38ebae3c754b8c847a35b60b00242ca413c5eff6607fa3"
+    },
+    {
+      "path": "assessment.md",
+      "sha256": "22cd75255a785b1452175f8769ccadad339e3f5936d0b25aba775bd0fe59c7d8"
+    },
+    {
+      "path": "assessment.html",
+      "sha256": "e9e1fdad8ac2ab9df3b2f924249baba93c27aa4406802e0e0051d3f2c5fcd86b"
+    },
+    {
+      "path": "revised.md",
+      "sha256": "fcd60e60f74f585d28e2177d48352e0002abc239e8587b4d50193bb021fcb6f2"
+    },
+    {
+      "path": "revised.html",
+      "sha256": "a3fd30a2fa98b57a1c863285a7c000ebc64001f17afb431a9efdf924926a9b6d"
+    },
+    {
+      "path": "compare.html",
+      "sha256": "86aaa5594d9eef7476ff2ce1c124cf0719a0f75c3a7f139cdca640f3819e9373"
+    },
+    {
+      "path": "revision-notes.md",
+      "sha256": "f04bf3f11979d33ca15931cb8c00c665f369a5a5c89727248e36b90509ac607b"
+    },
+    {
+      "path": "revision-notes.html",
+      "sha256": "3b4bebddf0bbdc08dbd2ebd6c62ea7adf241d5e0a40233d1f45aef003b0fdbf9"
+    },
+    {
+      "path": "revision-changes.json",
+      "sha256": "d31e88d314231c56cb61984c18f11e78d6d7d6a1fe47780c93383c02f0db224d"
+    },
+    {
+      "path": "revise.py",
+      "sha256": "e77f911dd4e7e151332e8d7e1f09142aecce92bf81da8a86efc1e86a64aa793b"
+    },
+    {
+      "path": "revised-r2.md",
+      "sha256": "3ba20c04c12be8f7713fefc6f591b4dc3e039aaa2b3806c0ec935ce46e77166d"
+    },
+    {
+      "path": "revised-r2.html",
+      "sha256": "b0e969d19612f443de36e8f2a49c0a062262f81fcaaad0ca563af02da420a254"
+    },
+    {
+      "path": "revision2-notes.md",
+      "sha256": "83beb65c253f8e0766a1d10418ecb9a1fbf6791864ab3e9e590d610691397400"
+    },
+    {
+      "path": "revision2-notes.html",
+      "sha256": "fee51b1b9d7445e8a0e1428a615be82dac617017fc7517fe53c1c6b59e928d50"
+    },
+    {
+      "path": "revision2-changes.json",
+      "sha256": "3e0b6db2cad49648fcde5902a8a1ba5e369afb1d06338aa6b059735e40d9c486"
+    },
+    {
+      "path": "revise2.py",
+      "sha256": "37978b3b0be5453387a6c11321e22042afe77f1ff674f338cd8d16fae9643463"
+    }
+  ],
+  "revision": {
+    "words": 1181,
+    "opening_paragraph_unchanged": true,
+    "last_three_paragraphs_unchanged": true,
+    "route_unchanged": true,
+    "comparison": "compare.html",
+    "changes": "revision-changes.json",
+    "reader_responses": [],
+    "canonical_adoption": false
+  },
+  "revision2": {
+    "words": 1298,
+    "first_paragraph_unchanged": true,
+    "final_paragraph_unchanged": true,
+    "route_unchanged": true,
+    "base": "revised.md",
+    "changes": "revision2-changes.json",
+    "reader_responses": [],
+    "canonical_adoption": false
+  }
+}
