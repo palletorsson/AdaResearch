@@ -34,6 +34,7 @@ Exit 0 iff the verdict says done && ok; 3 if refused for a contended builder.
 from __future__ import annotations
 import json
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -56,11 +57,17 @@ def _all_godot_processes() -> tuple[list[tuple[int, str]], str]:
     except ImportError:
         pass
     else:
-        out: list[tuple[int, str]] = []
+        out: list[tuple] = []
         for p in psutil.process_iter(["pid", "name", "cmdline"]):
             try:
                 if "godot" in (p.info.get("name") or "").lower():
-                    out.append((int(p.info["pid"]), " ".join(p.info.get("cmdline") or [])))
+                    # The cwd rides along because `--path .` names no project
+                    # until it is read against the directory it was launched in.
+                    try:
+                        cwd = p.cwd() or ""
+                    except Exception:
+                        cwd = ""
+                    out.append((int(p.info["pid"]), " ".join(p.info.get("cmdline") or []), cwd))
             except Exception:
                 continue
         return out, "psutil"
@@ -114,17 +121,46 @@ def _contenders() -> tuple[list[tuple[int, str]], str]:
     return _match(procs, str(REPO)), source
 
 
-def _match(procs: list[tuple[int, str]], repo: str) -> list[tuple[int, str]]:
+_PATH_ARG = re.compile(r'--path\s+(?:"([^"]*)"|(\S+))')
+
+
+def _holds(cmd: str, cwd: str, here: str) -> bool:
+    """Does one process (command line + launch directory) hold the repo `here`?"""
+    if not cmd.strip():
+        return True
+    if here in cmd.replace("\\", "/").lower():
+        return True
+    # `--path .` spells no project: it is the launch directory. Measured
+    # 2026-10-17, a `--path . --check-only` from the repo had been alive two
+    # hours when gate F walked beside it and the child died 0xC0000005 - the
+    # matcher above had read it as an all-clear. Read relative paths (and a
+    # missing --path) against the cwd; a relative path whose cwd we cannot read
+    # is unattributable, and is counted like an unreadable command line.
+    m = _PATH_ARG.search(cmd)
+    arg = (m.group(1) or m.group(2)) if m else ""
+    if arg and re.match(r"^([A-Za-z]:)?[\\/]", arg):
+        return False  # absolute, and not this repo
+    base = cwd.replace("\\", "/").rstrip("/").lower()
+    if not base:
+        return bool(m)
+    if not arg:
+        return base == here
+    return os.path.normpath(os.path.join(base, arg)).replace("\\", "/").lower() == here
+
+
+def _match(procs: list[tuple], repo: str) -> list[tuple[int, str]]:
     """Which of these processes hold `repo`. Pure, so --selftest can prove it.
+
+    Each entry is (pid, cmdline) or (pid, cmdline, cwd).
 
     Separator-blind on purpose: the editor writes `--path C:\\Users\\...` and the
     play-run it spawns writes `--path C:/Users/...`, and an interlock that saw
     only one of those spellings would have let exactly the pair that collided on
     2026-08-28 straight through.
     """
-    here = repo.replace("\\", "/").lower()
-    return [(pid, cmd) for pid, cmd in procs
-            if not cmd.strip() or here in cmd.replace("\\", "/").lower()]
+    here = repo.replace("\\", "/").rstrip("/").lower()
+    return [(t[0], t[1]) for t in procs
+            if _holds(t[1], t[2] if len(t) > 2 else "", here)]
 
 
 def _selftest() -> int:
@@ -137,6 +173,11 @@ def _selftest() -> int:
         ("unreadable command line", [(4, "   ")], [4]),
         ("quiet machine", [], []),
         ("mixed", [(5, "godot.exe --path C:/other"), (6, r"godot.exe --path C:\Users\p\Documents\GitHub\AdaResearch_46")], [6]),
+        ("relative --path, launched in the repo", [(7, "godot.exe --headless --path . --check-only", repo)], [7]),
+        ("relative --path, launched elsewhere", [(8, "godot.exe --path . --editor", r"C:\Users\p\Documents\GitHub\SomethingElse")], []),
+        ("relative --path, cwd unreadable", [(9, "godot.exe --path . --check-only", "")], [9]),
+        ("no --path, launched in the repo", [(10, "godot.exe --editor", repo)], [10]),
+        ("no --path, cwd unreadable (project manager)", [(11, "godot.exe", "")], []),
     ]
     bad = 0
     for name, procs, want in cases:
