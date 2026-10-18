@@ -253,7 +253,35 @@ def disk_paths():
     return out
 
 
-def reading(unreachable, ignored, mtimes, now, hold_hours=HOLD_HOURS):
+def folder_newest(paths):
+    """folder -> newest mtime of any file directly in it, for these rows' folders.
+
+    A pass is a folder, not a file. On 2026-10-15/16/17 gate M called a family
+    landable three mornings running because each of its new scripts was idle
+    past the hold while the tracked script beside them -- the one that loads
+    them -- had been written 18h earlier. The per-file clock read a breathing
+    pass as abandoned (prop-056).
+
+    Files the ENGINE writes (.uid, .import) are skipped: an editor scan
+    touches them, and that is no session's hand on the pass.
+    """
+    out = {}
+    for folder in {str(Path(p).parent).replace("\\", "/") for p in paths}:
+        newest = None
+        try:
+            for f in (ROOT / folder).iterdir():
+                if f.is_file() and f.suffix not in (".uid", ".import"):
+                    m = f.stat().st_mtime
+                    newest = m if newest is None or m > newest else newest
+        except OSError:
+            continue
+        if newest is not None:
+            out[folder] = newest
+    return out
+
+
+def reading(unreachable, ignored, mtimes, now, hold_hours=HOLD_HOURS,
+            folders=None):
     """Split the convicted rows by what could move them. A READING, not a verdict.
 
     Three mornings running (2026-09-22..24) a breath re-derived this split by
@@ -273,6 +301,15 @@ def reading(unreachable, ignored, mtimes, now, hold_hours=HOLD_HOURS):
     for u in unreachable:
         age = now - mtimes.get(u["path"], now)
         row = dict(u, age_hours=round(age / 3600.0, 1))
+        # `folders` (folder -> newest mtime) clocks the row by its PASS: a
+        # sibling touched since makes the file as young as the sibling. The
+        # file's own age stays on the row so nothing is hidden.
+        folder = str(Path(u["path"]).parent).replace("\\", "/")
+        if folders and folder in folders and now - folders[folder] < age:
+            row["file_age_hours"] = row["age_hours"]
+            age = now - folders[folder]
+            row["age_hours"] = round(age / 3600.0, 1)
+            row["clocked_by"] = "folder"
         if u["path"] in ignored:
             out["ignored"].append(row)
         elif age < hold:
@@ -414,7 +451,27 @@ def selftest():
                   and [r["path"] for r in split["live"]] == ["m/new.gd"]
                   and len(rows) == 3))
 
-    bad = [name for name, ok in cases if not ok]
+    # 9. The folder clock (prop-056). m/old.gd is 30h idle but a sibling in
+    #    m/ was written 2h ago: it is a breathing pass, live, not landable --
+    #    and its own 30h stays on the row. A folder older than the file never
+    #    ages it. Without `folders` the split is case 8's, unchanged.
+    split = reading(rows, ignored={"m/old.tres"},
+                    mtimes={"m/old.tres": now - 90 * 3600,
+                            "m/old.gd": now - 30 * 3600,
+                            "m/new.gd": now - 2 * 3600}, now=now,
+                    folders={"m": now - 2 * 3600})
+    old = [r for r in split["live"] if r["path"] == "m/old.gd"]
+    cases.append(("clocks a row by its folder's newest file",
+                  [r["path"] for r in split["stranded"]] == []
+                  and len(old) == 1 and old[0].get("file_age_hours") == 30.0
+                  and old[0]["age_hours"] == 2.0
+                  and [r["path"] for r in split["ignored"]] == ["m/old.tres"]))
+    split = reading(rows, ignored=set(), mtimes={"m/old.gd": now - 30 * 3600},
+                    now=now, folders={"m": now - 50 * 3600})
+    cases.append(("an older folder never ages a younger file",
+                  all("file_age_hours" not in r for v in split.values() for r in v)))
+
+    bad =[name for name, ok in cases if not ok]
     for name, ok in cases:
         print("  %-52s %s" % (name, "ok" if ok else "FAIL"))
     print("selftest: %d/%d" % (len(cases) - len(bad), len(cases)))
@@ -448,7 +505,8 @@ def main():
             mtimes[rel] = (ROOT / rel).stat().st_mtime
         except OSError:
             pass
-    split = reading(unreachable, git_ignored(paths), mtimes, time.time())
+    split = reading(unreachable, git_ignored(paths), mtimes, time.time(),
+                    folders=folder_newest(paths))
     claimed = {}
     if forum_claims is not None and paths:
         try:
@@ -496,8 +554,9 @@ def main():
         print("UNREACHABLE FROM A CLONE                 : %d" % report["unreachable_from_a_clone"])
         for kind in ("stranded", "live", "ignored"):
             for u in split[kind]:
-                print("   %-34s %-8s %6.1fh  %s%s" % (
-                    u["token"], kind, u["age_hours"], u["path"],
+                print("   %-34s %-8s %6.1fh%s %s%s" % (
+                    u["token"], kind, u["age_hours"],
+                    "f" if u.get("clocked_by") == "folder" else " ", u["path"],
                     ("   <- " + u["claimed_by"]) if u.get("claimed_by") else ""))
         print("  reading: %s" % floor)
         print("absent from every tree (gate B's)        : %d" % report["absent_from_every_tree"])
