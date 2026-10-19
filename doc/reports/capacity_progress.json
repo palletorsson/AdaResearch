@@ -1,0 +1,5775 @@
+{
+  "scope": "Evidence flags per hall, read from the files in this checkout against the live spine. A rung is the highest rung any file supports; it is not a grade, not a percentage and not a learner result. `learner` has no recording file yet and is always 0.",
+  "rungs": [
+    "none",
+    "written",
+    "focused",
+    "contracted",
+    "runs",
+    "learner"
+  ],
+  "live": {
+    "sequences": 25,
+    "halls": 206
+  },
+  "totals": {
+    "rungs": {
+      "focused": 69,
+      "runs": 5,
+      "written": 122,
+      "none": 10
+    },
+    "lineage": {
+      "aligned": 74,
+      "needs_revision": 121,
+      "missing": 10,
+      "unrecorded": 1
+    },
+    "curriculum_nodes": {
+      "proposed": 70,
+      "desktop-tested": 1,
+      "implemented_unverified_learner": 1
+    },
+    "curriculum_issues": {
+      "next": 2,
+      "resolved": 1,
+      "resolved-scope": 1,
+      "bridge": 4,
+      "source-conflict": 1,
+      "source-check": 1
+    },
+    "saved_focus": 13,
+    "plan": {
+      "present": false,
+      "concrete_contracts": 30,
+      "unresolved_contracts": 177
+    },
+    "memory": {
+      "source": "doc/book/memory/history/revision-00000056-340ebe8fcc7249819a646c00b4d3c0a8.json",
+      "revision": 56,
+      "updated_at": "2026-10-04T18:29:06.293092Z",
+      "findings": {
+        "accepted": 27,
+        "proposed": 9
+      }
+    },
+    "installed_studies": 19,
+    "ghost_states_current": 5
+  },
+  "drift": {
+    "live_not_in_lineage": [
+      "Pattern_Temple"
+    ],
+    "lineage_not_live": [
+      "VFM_02_Operations",
+      "Vectors_Act2_VectorArithmetic"
+    ],
+    "live_not_in_curriculum": [
+      "Pattern_Temple",
+      "Primitives_Columns",
+      "Primitives_Godot",
+      "Primitives_Profiles"
+    ],
+    "curriculum_not_live": [
+      "VFM_02_Operations",
+      "Vectors_Act2_VectorArithmetic"
+    ],
+    "tutorial_changed_since_lineage": [
+      "Point_Zero",
+      "Point_One",
+      "Point_Coordinates",
+      "Point_Lines",
+      "Point_Trace",
+      "Point_Line_Grid",
+      "Point_Triangle_Context",
+      "Primitives_Polythedra",
+      "Point_Animatedcube",
+      "Primitives_Ignorance",
+      "Primitives_Godot",
+      "Primitives_Columns",
+      "Primitives_Profiles",
+      "Primitives_Portals",
+      "Primitives_Melencolia",
+      "Trans_Introduction",
+      "Trans_Rotation",
+      "Tutorial_Pattern",
+      "Change_Intro",
+      "Flow_Field",
+      "Vectors_Act1_WhatAVectorIs",
+      "VFM_05_Launch",
+      "VFM_03_Motion",
+      "Vectors_Act3_FieldsAndMotion",
+      "Vectors_Act4a_KineticForces",
+      "Vectors_Act4b_Oscillation",
+      "Change_Choreography",
+      "VFM_07_Gravity",
+      "VFM_09_Legs",
+      "VFM_08_Arena",
+      "Vectors_Act5_ForceAsPlace",
+      "FormFinding_Descent",
+      "FormFinding_Relaxation",
+      "FormFinding_Equilibrium",
+      "WaveFunctions_Intro",
+      "WaveFunctions_Pendulum",
+      "WaveFunctions_Sine_Space",
+      "WaveFunctions_Unit_Circle",
+      "WaveFunctions_3D_Wave_Propagation",
+      "WaveFunctions_Effect_Sound",
+      "Wavefunctions_Bernini",
+      "WaveFunctions_John_Cage",
+      "WaveFunctions_AirMusic",
+      "Wavefunctions_Sky_Stairs",
+      "WaveFunctions_TrigWalkingPath",
+      "WaveFunctions_Synthesis_Lab",
+      "Random_Definition",
+      "Noise_One",
+      "Noise_6_Wall",
+      "Noise_Perlin_Simplex",
+      "Shader_12_PinkExtravaganza",
+      "CA_Introduction",
+      "CA_ElementaryRules",
+      "CA_GameOfLife",
+      "CA_BeyondBinary",
+      "CA_ExpandingSpace",
+      "CA_SoftRules",
+      "CA_AgentsCircuits",
+      "CA_EdgeOfChaos",
+      "Fractal_Recursion",
+      "Fractal_RecursiveTrees",
+      "Fractal_CantorSet",
+      "Fractal_KochSierpinski",
+      "Fractal_MengerSponge",
+      "Fractal_GoldenSpiral",
+      "Fractal_Synthesis",
+      "LSystems_Grammar_Lab",
+      "Boolean_Gallery",
+      "Euclid_Parallel",
+      "NonEuclidean_Spaces",
+      "Russell_Paradox",
+      "Godel_Incompleteness",
+      "Escher_Impossible",
+      "Brouwer_Intuitionism",
+      "Florensky_Paraconsistent",
+      "Crisis_Synthesis"
+    ],
+    "lineage_fingerprint_variants": {
+      "none": 76,
+      "raw": 18,
+      "crlf": 101
+    },
+    "protected_sources_changed": [
+      "commons/maps/Point_Zero/tutorial.md",
+      "commons/maps/Point_Zero/final.md",
+      "commons/maps/Point_Zero/map_data.json",
+      "commons/maps/Point_One/tutorial.md",
+      "commons/maps/Point_One/final.md",
+      "commons/maps/Point_Coordinates/tutorial.md",
+      "commons/maps/Point_Coordinates/final.md",
+      "commons/maps/Point_Lines/tutorial.md",
+      "commons/maps/Point_Lines/final.md",
+      "commons/maps/Point_Lines/map_data.json",
+      "commons/maps/Point_Trace/tutorial.md",
+      "commons/maps/Point_Trace/final.md",
+      "commons/maps/Point_Line_Grid/tutorial.md",
+      "commons/maps/Point_Line_Grid/final.md",
+      "commons/maps/Point_Line_Grid/map_data.json",
+      "commons/maps/Point_Triangle_Context/tutorial.md",
+      "commons/maps/Point_Triangle_Context/final.md",
+      "commons/maps/Point_Triangle_Context/map_data.json",
+      "commons/maps/Primitives_Polythedra/tutorial.md",
+      "commons/maps/Primitives_Polythedra/final.md",
+      "commons/maps/Point_Animatedcube/tutorial.md",
+      "commons/maps/Point_Animatedcube/final.md",
+      "commons/maps/Primitives_Ignorance/tutorial.md",
+      "commons/maps/Primitives_Ignorance/final.md",
+      "commons/maps/Primitives_Ignorance/map_data.json",
+      "commons/maps/Primitives_Godot/tutorial.md",
+      "commons/maps/Primitives_Godot/final.md",
+      "commons/maps/Primitives_Columns/tutorial.md",
+      "commons/maps/Primitives_Columns/final.md",
+      "commons/maps/Primitives_Profiles/tutorial.md",
+      "commons/maps/Primitives_Profiles/final.md",
+      "commons/maps/Primitives_Portals/tutorial.md",
+      "commons/maps/Primitives_Portals/final.md",
+      "commons/maps/Primitives_Melencolia/tutorial.md",
+      "commons/maps/Primitives_Melencolia/final.md",
+      "commons/maps/Trans_Pre/final.md",
+      "commons/maps/Trans_Introduction/tutorial.md",
+      "commons/maps/Trans_Introduction/final.md",
+      "commons/maps/Trans_Translation/final.md",
+      "commons/maps/Trans_Rotation/tutorial.md",
+      "commons/maps/Trans_Rotation/final.md",
+      "commons/maps/Trans_Scale/final.md",
+      "commons/maps/Trans_Body/final.md",
+      "commons/maps/Trans_Pit/final.md",
+      "commons/maps/Array/final.md",
+      "commons/maps/Tutorial_3D/final.md",
+      "commons/maps/Tutorial_Tiling_Floor/final.md",
+      "commons/maps/Tutorial_Tiling_Walls/final.md",
+      "commons/maps/Tutorial_Disco/final.md",
+      "commons/maps/Color_Context_Placed/final.md",
+      "commons/maps/Color_Context_Placed/map_data.json",
+      "commons/maps/Color_Flashlight/final.md",
+      "commons/maps/Color_Flashlight/map_data.json",
+      "commons/maps/Color_Nails/final.md",
+      "commons/maps/Color_Nails/map_data.json",
+      "commons/maps/Color_Rainbow/final.md",
+      "commons/maps/Color_Rainbow/map_data.json",
+      "commons/maps/Color_Pillar/final.md",
+      "commons/maps/Color_Pillar/map_data.json",
+      "commons/maps/Color_Grid_Pallet/final.md",
+      "commons/maps/Color_Grid_Pallet/map_data.json",
+      "commons/maps/Color_Paint/final.md",
+      "commons/maps/Color_Paint/map_data.json",
+      "commons/maps/Color_Walls/final.md",
+      "commons/maps/Color_Walls/map_data.json",
+      "commons/maps/Pattern_Disco/final.md",
+      "commons/maps/Pattern_Foundry/final.md",
+      "commons/maps/Tutorial_Pattern/tutorial.md",
+      "commons/maps/Tutorial_Pattern/final.md",
+      "commons/maps/Symmetry_Seventeen/final.md",
+      "commons/maps/Ribbon_Patterns_01/final.md",
+      "commons/maps/Ribbon_Patterns_02/final.md",
+      "commons/maps/Ribbon_Patterns_03/final.md",
+      "commons/maps/sequences/tiling.json",
+      "commons/maps/Change_Intro/tutorial.md",
+      "commons/maps/Change_Intro/final.md",
+      "commons/maps/Flow_Field/tutorial.md",
+      "commons/maps/Flow_Field/final.md",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+      "commons/maps/Vectors_Act1_WhatAVectorIs/map_data.json",
+      "commons/maps/VFM_02_Operations/map_data.json",
+      "commons/maps/Vectors_Act2_VectorArithmetic/map_data.json",
+      "commons/maps/VFM_05_Launch/tutorial.md",
+      "commons/maps/VFM_05_Launch/final.md",
+      "commons/maps/VFM_05_Launch/map_data.json",
+      "commons/maps/VFM_03_Motion/tutorial.md",
+      "commons/maps/VFM_03_Motion/final.md",
+      "commons/maps/VFM_03_Motion/map_data.json",
+      "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+      "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+      "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json",
+      "commons/maps/Vectors_Act4a_KineticForces/tutorial.md",
+      "commons/maps/Vectors_Act4a_KineticForces/final.md",
+      "commons/maps/Vectors_Act4a_KineticForces/map_data.json",
+      "commons/maps/Vectors_Act4b_Oscillation/tutorial.md",
+      "commons/maps/Vectors_Act4b_Oscillation/final.md",
+      "commons/maps/Vectors_Act4b_Oscillation/map_data.json",
+      "commons/maps/Change_Choreography/tutorial.md",
+      "commons/maps/Change_Choreography/final.md",
+      "commons/maps/Change_Choreography/map_data.json",
+      "commons/maps/VFM_07_Gravity/tutorial.md",
+      "commons/maps/VFM_07_Gravity/final.md",
+      "commons/maps/VFM_07_Gravity/map_data.json",
+      "commons/maps/VFM_09_Legs/tutorial.md",
+      "commons/maps/VFM_09_Legs/map_data.json",
+      "commons/maps/VFM_08_Arena/tutorial.md",
+      "commons/maps/VFM_08_Arena/map_data.json",
+      "commons/maps/Vectors_Act5_ForceAsPlace/tutorial.md",
+      "commons/maps/Vectors_Act5_ForceAsPlace/final.md",
+      "commons/maps/Vectors_Act5_ForceAsPlace/map_data.json",
+      "commons/maps/sequences/forces.json",
+      "commons/maps/FormFinding_Descent/tutorial.md",
+      "commons/maps/FormFinding_Descent/final.md",
+      "commons/maps/FormFinding_Relaxation/tutorial.md",
+      "commons/maps/FormFinding_Relaxation/final.md",
+      "commons/maps/FormFinding_Equilibrium/tutorial.md",
+      "commons/maps/FormFinding_Annealing/final.md",
+      "commons/maps/FormFinding_Forge/final.md",
+      "commons/maps/WaveFunctions_Intro/tutorial.md",
+      "commons/maps/WaveFunctions_Intro/final.md",
+      "commons/maps/WaveFunctions_Intro/map_data.json",
+      "commons/maps/WaveFunctions_Pendulum/tutorial.md",
+      "commons/maps/WaveFunctions_Pendulum/final.md",
+      "commons/maps/WaveFunctions_Pendulum/map_data.json",
+      "commons/maps/WaveFunctions_Sine_Space/tutorial.md",
+      "commons/maps/WaveFunctions_Sine_Space/final.md",
+      "commons/maps/WaveFunctions_Sine_Space/map_data.json",
+      "commons/maps/WaveFunctions_Unit_Circle/tutorial.md",
+      "commons/maps/WaveFunctions_Unit_Circle/final.md",
+      "commons/maps/WaveFunctions_Unit_Circle/map_data.json",
+      "commons/maps/WaveFunctions_3D_Wave_Propagation/tutorial.md",
+      "commons/maps/WaveFunctions_3D_Wave_Propagation/final.md",
+      "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json",
+      "commons/maps/WaveFunctions_Effect_Sound/tutorial.md",
+      "commons/maps/WaveFunctions_Effect_Sound/final.md",
+      "commons/maps/Wavefunctions_Bernini/tutorial.md",
+      "commons/maps/Wavefunctions_Bernini/final.md",
+      "commons/maps/WaveFunctions_John_Cage/tutorial.md",
+      "commons/maps/WaveFunctions_John_Cage/final.md",
+      "commons/maps/WaveFunctions_AirMusic/tutorial.md",
+      "commons/maps/WaveFunctions_AirMusic/final.md",
+      "commons/maps/Wavefunctions_Sky_Stairs/tutorial.md",
+      "commons/maps/Wavefunctions_Sky_Stairs/final.md",
+      "commons/maps/WaveFunctions_TrigWalkingPath/tutorial.md",
+      "commons/maps/WaveFunctions_TrigWalkingPath/final.md",
+      "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md",
+      "commons/maps/WaveFunctions_Synthesis_Lab/final.md",
+      "commons/maps/sequences/wavefunctions.json",
+      "commons/maps/Random_Definition/tutorial.md",
+      "commons/maps/Random_Definition/final.md",
+      "commons/maps/Random_Entropy/final.md",
+      "commons/maps/Random_Rotate_Random_XYZ/final.md",
+      "commons/maps/Random_Gaussian/final.md",
+      "commons/maps/Random_Space/final.md",
+      "commons/maps/Random_Game/final.md",
+      "commons/maps/Random_Noise_Types/final.md",
+      "commons/maps/Noise_Columns/final.md",
+      "commons/maps/Noise_One/tutorial.md",
+      "commons/maps/Noise_One/final.md",
+      "commons/maps/Noise_Voxel/final.md",
+      "commons/maps/Noise_6_Wall/tutorial.md",
+      "commons/maps/Noise_6_Wall/final.md",
+      "commons/maps/Noise_Inside_Noise/final.md",
+      "commons/maps/Noise_Space_10/final.md",
+      "commons/maps/Noise_Perlin_Simplex/tutorial.md",
+      "commons/maps/Noise_Perlin_Simplex/final.md",
+      "commons/maps/Lab_Path/final.md",
+      "commons/maps/Shader_05_Patterns/final.md",
+      "commons/maps/Shader_09_FBM/final.md",
+      "commons/maps/Shader_12_PinkExtravaganza/tutorial.md",
+      "commons/maps/Shader_12_PinkExtravaganza/final.md",
+      "commons/maps/Shader_10_ReactionDiffusion/final.md",
+      "commons/maps/CA_Introduction/tutorial.md",
+      "commons/maps/CA_Introduction/final.md",
+      "commons/maps/CA_Introduction/map_data.json",
+      "commons/maps/CA_ElementaryRules/tutorial.md",
+      "commons/maps/CA_ElementaryRules/final.md",
+      "commons/maps/CA_ElementaryRules/map_data.json",
+      "commons/maps/CA_GameOfLife/tutorial.md",
+      "commons/maps/CA_GameOfLife/final.md",
+      "commons/maps/CA_BeyondBinary/tutorial.md",
+      "commons/maps/CA_BeyondBinary/final.md",
+      "commons/maps/CA_ExpandingSpace/tutorial.md",
+      "commons/maps/CA_ExpandingSpace/final.md",
+      "commons/maps/CA_SoftRules/tutorial.md",
+      "commons/maps/CA_SoftRules/final.md",
+      "commons/maps/CA_AgentsCircuits/tutorial.md",
+      "commons/maps/CA_AgentsCircuits/final.md",
+      "commons/maps/CA_EdgeOfChaos/tutorial.md",
+      "commons/maps/CA_EdgeOfChaos/final.md",
+      "commons/maps/Fractal_Recursion/tutorial.md",
+      "commons/maps/Fractal_Recursion/final.md",
+      "commons/maps/Fractal_RecursiveTrees/tutorial.md",
+      "commons/maps/Fractal_RecursiveTrees/final.md",
+      "commons/maps/Fractal_CantorSet/tutorial.md",
+      "commons/maps/Fractal_CantorSet/final.md",
+      "commons/maps/Fractal_KochSierpinski/tutorial.md",
+      "commons/maps/Fractal_KochSierpinski/final.md",
+      "commons/maps/Fractal_MengerSponge/tutorial.md",
+      "commons/maps/Fractal_MengerSponge/final.md",
+      "commons/maps/Fractal_MengerSponge/map_data.json",
+      "commons/maps/Fractal_GoldenSpiral/tutorial.md",
+      "commons/maps/Fractal_GoldenSpiral/final.md",
+      "commons/maps/Fractal_Synthesis/tutorial.md",
+      "commons/maps/Fractal_Synthesis/final.md",
+      "commons/maps/Fractal_Synthesis/map_data.json",
+      "commons/maps/LSystems_Grammar_Lab/tutorial.md",
+      "commons/maps/LSystems_Grammar_Lab/final.md",
+      "commons/maps/LSystems_Growth/final.md",
+      "commons/maps/LSystems_Grammars_And_Curves/final.md",
+      "commons/maps/LSystems_Architecture/final.md",
+      "commons/maps/LSystems_Living/final.md",
+      "commons/maps/LSystems_Shape_Grammars/final.md",
+      "commons/maps/PG_Space_Colonization/final.md",
+      "commons/maps/SoftBodies_Cloth_Physics/final.md",
+      "commons/maps/Topology_Entropy_Morphogenesis/final.md",
+      "commons/maps/ISO_LookupTable/final.md",
+      "commons/maps/Boolean_Verbs/final.md",
+      "commons/maps/Boolean_Gallery/tutorial.md",
+      "commons/maps/Boolean_Gallery/final.md",
+      "commons/maps/Boolean_Works/final.md",
+      "commons/maps/sequences/boolean_surfaces.json",
+      "commons/maps/SwarmIntelligence_Boids_Algorithm/final.md",
+      "commons/maps/ML_Evolution/final.md",
+      "commons/maps/GT_Matching/final.md",
+      "commons/maps/Euclid_Parallel/tutorial.md",
+      "commons/maps/NonEuclidean_Spaces/tutorial.md",
+      "commons/maps/NonEuclidean_Spaces/final.md",
+      "commons/maps/Russell_Paradox/tutorial.md",
+      "commons/maps/Russell_Paradox/final.md",
+      "commons/maps/Godel_Incompleteness/tutorial.md",
+      "commons/maps/Escher_Impossible/tutorial.md",
+      "commons/maps/Escher_Impossible/final.md",
+      "commons/maps/Brouwer_Intuitionism/tutorial.md",
+      "commons/maps/Brouwer_Intuitionism/final.md",
+      "commons/maps/Florensky_Paraconsistent/tutorial.md",
+      "commons/maps/Florensky_Paraconsistent/final.md",
+      "commons/maps/Crisis_Synthesis/tutorial.md",
+      "commons/maps/Crisis_Synthesis/final.md",
+      "commons/maps/sequences/foundationscrisis.json",
+      "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/final.md"
+    ],
+    "protected_sources_absent": [],
+    "protected_fingerprint_variants": {
+      "none": 242,
+      "raw": 77,
+      "crlf": 318
+    },
+    "plan_validation_errors_as_recorded": [
+      "Protected source changed without a matching recorded revision: commons/maps/Point_Triangle_Context/map_data.json"
+    ]
+  },
+  "missing_authoritative_files": [
+    "doc/book/course/execution-plan/plan.json",
+    "doc/book/memory/state.json",
+    "doc/book/course/storyboards/early.json",
+    "doc/book/course/storyboards/growth.json",
+    "doc/book/course/storyboards/later.json"
+  ],
+  "sequences": [
+    {
+      "id": "primitives",
+      "order": 1,
+      "title": "Primitives: Points Build Worlds",
+      "halls": 15,
+      "rungs": {
+        "focused": 10,
+        "runs": 5
+      },
+      "lineage": {
+        "aligned": 15
+      },
+      "curriculum_nodes": 13,
+      "memory_findings": {
+        "proposed": 1,
+        "accepted": 2
+      },
+      "drifted_tutorials": [
+        "Point_Zero",
+        "Point_One",
+        "Point_Coordinates",
+        "Point_Lines",
+        "Point_Trace",
+        "Point_Line_Grid",
+        "Point_Triangle_Context",
+        "Primitives_Polythedra",
+        "Point_Animatedcube",
+        "Primitives_Ignorance",
+        "Primitives_Godot",
+        "Primitives_Columns",
+        "Primitives_Profiles",
+        "Primitives_Portals",
+        "Primitives_Melencolia"
+      ]
+    },
+    {
+      "id": "transformation",
+      "order": 2,
+      "title": "Transformation: What Stays the Same When Everything Changes",
+      "halls": 7,
+      "rungs": {
+        "focused": 3,
+        "written": 4
+      },
+      "lineage": {
+        "aligned": 3,
+        "needs_revision": 4
+      },
+      "curriculum_nodes": 4,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Trans_Introduction",
+        "Trans_Rotation"
+      ]
+    },
+    {
+      "id": "array_tutorial",
+      "order": 3,
+      "title": "Arrays and Regularity",
+      "halls": 5,
+      "rungs": {
+        "none": 1,
+        "written": 4
+      },
+      "lineage": {
+        "missing": 1,
+        "needs_revision": 4
+      },
+      "curriculum_nodes": 3,
+      "memory_findings": {
+        "accepted": 1
+      },
+      "drifted_tutorials": []
+    },
+    {
+      "id": "color",
+      "order": 4,
+      "title": "Color and Composition",
+      "halls": 8,
+      "rungs": {
+        "written": 5,
+        "focused": 3
+      },
+      "lineage": {
+        "needs_revision": 5,
+        "aligned": 3
+      },
+      "curriculum_nodes": 4,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "tiling",
+      "order": 5,
+      "title": "Patterns: Dress the Architecture",
+      "halls": 9,
+      "rungs": {
+        "focused": 4,
+        "written": 1,
+        "none": 4
+      },
+      "lineage": {
+        "aligned": 4,
+        "needs_revision": 1,
+        "unrecorded": 1,
+        "missing": 3
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Tutorial_Pattern"
+      ]
+    },
+    {
+      "id": "change",
+      "order": 6,
+      "title": "Change: Rate, Accumulation, and Flow",
+      "halls": 2,
+      "rungs": {
+        "written": 2
+      },
+      "lineage": {
+        "needs_revision": 2
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Change_Intro",
+        "Flow_Field"
+      ]
+    },
+    {
+      "id": "forces",
+      "order": 7,
+      "title": "Vectors & Forces: From Direction to Dynamics",
+      "halls": 11,
+      "rungs": {
+        "written": 6,
+        "focused": 5
+      },
+      "lineage": {
+        "needs_revision": 6,
+        "aligned": 5
+      },
+      "curriculum_nodes": 3,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Vectors_Act1_WhatAVectorIs",
+        "VFM_05_Launch",
+        "VFM_03_Motion",
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "Change_Choreography",
+        "VFM_07_Gravity",
+        "VFM_09_Legs",
+        "VFM_08_Arena",
+        "Vectors_Act5_ForceAsPlace"
+      ]
+    },
+    {
+      "id": "formfinding",
+      "order": 8,
+      "title": "Form Finding: Rules, Constraints and Possible Shapes",
+      "halls": 6,
+      "rungs": {
+        "focused": 1,
+        "written": 5
+      },
+      "lineage": {
+        "aligned": 1,
+        "needs_revision": 5
+      },
+      "curriculum_nodes": 3,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "FormFinding_Descent",
+        "FormFinding_Relaxation",
+        "FormFinding_Equilibrium"
+      ]
+    },
+    {
+      "id": "wavefunctions",
+      "order": 9,
+      "title": "Wavefunctions: What Returns",
+      "halls": 12,
+      "rungs": {
+        "focused": 4,
+        "written": 8
+      },
+      "lineage": {
+        "aligned": 4,
+        "needs_revision": 8
+      },
+      "curriculum_nodes": 4,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle",
+        "WaveFunctions_3D_Wave_Propagation",
+        "WaveFunctions_Effect_Sound",
+        "Wavefunctions_Bernini",
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_AirMusic",
+        "Wavefunctions_Sky_Stairs",
+        "WaveFunctions_TrigWalkingPath",
+        "WaveFunctions_Synthesis_Lab"
+      ]
+    },
+    {
+      "id": "randomness",
+      "order": 10,
+      "title": "Randomness: What Can Chance Change?",
+      "halls": 14,
+      "rungs": {
+        "focused": 6,
+        "written": 8
+      },
+      "lineage": {
+        "aligned": 6,
+        "needs_revision": 8
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Random_Definition"
+      ]
+    },
+    {
+      "id": "noise",
+      "order": 11,
+      "title": "Noise: Fields and Possible Bodies",
+      "halls": 9,
+      "rungs": {
+        "written": 7,
+        "focused": 2
+      },
+      "lineage": {
+        "needs_revision": 7,
+        "aligned": 2
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Noise_One",
+        "Noise_6_Wall",
+        "Noise_Perlin_Simplex"
+      ]
+    },
+    {
+      "id": "shaders",
+      "order": 12,
+      "title": "Shaders: What a Surface Answers To",
+      "halls": 6,
+      "rungs": {
+        "none": 3,
+        "written": 3
+      },
+      "lineage": {
+        "missing": 4,
+        "needs_revision": 2
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {
+        "accepted": 1
+      },
+      "drifted_tutorials": [
+        "Shader_12_PinkExtravaganza"
+      ]
+    },
+    {
+      "id": "cellularautomata",
+      "order": 13,
+      "title": "Cellular Automata: Local Rules, Global Patterns",
+      "halls": 8,
+      "rungs": {
+        "written": 8
+      },
+      "lineage": {
+        "needs_revision": 8
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "CA_Introduction",
+        "CA_ElementaryRules",
+        "CA_GameOfLife",
+        "CA_BeyondBinary",
+        "CA_ExpandingSpace",
+        "CA_SoftRules",
+        "CA_AgentsCircuits",
+        "CA_EdgeOfChaos"
+      ]
+    },
+    {
+      "id": "fractals",
+      "order": 14,
+      "title": "Fractals: Rules, Scale and Room to Move",
+      "halls": 7,
+      "rungs": {
+        "written": 6,
+        "focused": 1
+      },
+      "lineage": {
+        "needs_revision": 6,
+        "aligned": 1
+      },
+      "curriculum_nodes": 1,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Fractal_Recursion",
+        "Fractal_RecursiveTrees",
+        "Fractal_CantorSet",
+        "Fractal_KochSierpinski",
+        "Fractal_MengerSponge",
+        "Fractal_GoldenSpiral",
+        "Fractal_Synthesis"
+      ]
+    },
+    {
+      "id": "lsystems",
+      "order": 15,
+      "title": "L-Systems: Rules Grow Structure",
+      "halls": 8,
+      "rungs": {
+        "written": 5,
+        "focused": 2,
+        "none": 1
+      },
+      "lineage": {
+        "needs_revision": 5,
+        "aligned": 2,
+        "missing": 1
+      },
+      "curriculum_nodes": 3,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "LSystems_Grammar_Lab"
+      ]
+    },
+    {
+      "id": "proceduralgeneration",
+      "order": 16,
+      "title": "Procedural Generation: Rules Build Worlds",
+      "halls": 7,
+      "rungs": {
+        "written": 7
+      },
+      "lineage": {
+        "needs_revision": 7
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "softbodies",
+      "order": 17,
+      "title": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+      "halls": 9,
+      "rungs": {
+        "written": 4,
+        "focused": 5
+      },
+      "lineage": {
+        "needs_revision": 4,
+        "aligned": 5
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "isosurfaces",
+      "order": 18,
+      "title": "Isosurfaces: Implicit to Explicit",
+      "halls": 13,
+      "rungs": {
+        "focused": 7,
+        "written": 5,
+        "none": 1
+      },
+      "lineage": {
+        "aligned": 7,
+        "needs_revision": 5,
+        "missing": 1
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "boolean_surfaces",
+      "order": 19,
+      "title": "Boolean Surfaces: CSG as Composition",
+      "halls": 3,
+      "rungs": {
+        "focused": 2,
+        "written": 1
+      },
+      "lineage": {
+        "aligned": 2,
+        "needs_revision": 1
+      },
+      "curriculum_nodes": 1,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Boolean_Gallery"
+      ]
+    },
+    {
+      "id": "swarmintelligence",
+      "order": 20,
+      "title": "Swarm Intelligence: Where Coordination Lives",
+      "halls": 7,
+      "rungs": {
+        "written": 5,
+        "focused": 2
+      },
+      "lineage": {
+        "needs_revision": 5,
+        "aligned": 2
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "machinelearning",
+      "order": 21,
+      "title": "Machine Learning: What Changes, and Why?",
+      "halls": 8,
+      "rungs": {
+        "written": 6,
+        "focused": 2
+      },
+      "lineage": {
+        "needs_revision": 6,
+        "aligned": 2
+      },
+      "curriculum_nodes": 3,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "graphtheory",
+      "order": 22,
+      "title": "Graph Theory: What Connections Permit",
+      "halls": 8,
+      "rungs": {
+        "written": 6,
+        "focused": 2
+      },
+      "lineage": {
+        "needs_revision": 6,
+        "aligned": 2
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "foundationscrisis",
+      "order": 23,
+      "title": "Foundations Crisis: The Limits of Formalization",
+      "halls": 8,
+      "rungs": {
+        "written": 7,
+        "focused": 1
+      },
+      "lineage": {
+        "needs_revision": 7,
+        "aligned": 1
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": [
+        "Euclid_Parallel",
+        "NonEuclidean_Spaces",
+        "Russell_Paradox",
+        "Godel_Incompleteness",
+        "Escher_Impossible",
+        "Brouwer_Intuitionism",
+        "Florensky_Paraconsistent",
+        "Crisis_Synthesis"
+      ]
+    },
+    {
+      "id": "qfeplaboratory",
+      "order": 24,
+      "title": "QFEP Laboratory: The Formula Made Interactive",
+      "halls": 8,
+      "rungs": {
+        "written": 6,
+        "focused": 2
+      },
+      "lineage": {
+        "needs_revision": 6,
+        "aligned": 2
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    },
+    {
+      "id": "postfoundationscrisis",
+      "order": 25,
+      "title": "Post-Crisis: Applied Limits",
+      "halls": 8,
+      "rungs": {
+        "focused": 5,
+        "written": 3
+      },
+      "lineage": {
+        "aligned": 5,
+        "needs_revision": 3
+      },
+      "curriculum_nodes": 2,
+      "memory_findings": {},
+      "drifted_tutorials": []
+    }
+  ],
+  "halls": [
+    {
+      "map": "Point_Zero",
+      "sequence": "primitives",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "loop",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Point_One",
+      "sequence": "primitives",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": {
+        "id": "point-one",
+        "evidence": "current",
+        "checks": 60
+      },
+      "curriculum_nodes": [
+        {
+          "id": "point",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "runs"
+    },
+    {
+      "map": "Point_Coordinates",
+      "sequence": "primitives",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": {
+        "id": "point-coordinates",
+        "evidence": "current",
+        "checks": 46
+      },
+      "curriculum_nodes": [
+        {
+          "id": "coordinates",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "runs"
+    },
+    {
+      "map": "Point_Lines",
+      "sequence": "primitives",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": {
+        "id": "point-lines",
+        "evidence": "current",
+        "checks": 170
+      },
+      "curriculum_nodes": [
+        {
+          "id": "line",
+          "status": "desktop-tested",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "runs"
+    },
+    {
+      "map": "Point_Trace",
+      "sequence": "primitives",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": {
+        "id": "point-trace",
+        "evidence": "current",
+        "checks": 134
+      },
+      "curriculum_nodes": [
+        {
+          "id": "trace",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 2
+      },
+      "rung": "runs"
+    },
+    {
+      "map": "Point_Line_Grid",
+      "sequence": "primitives",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": {
+        "id": "point-grid",
+        "evidence": "current",
+        "checks": 53
+      },
+      "curriculum_nodes": [
+        {
+          "id": "grid",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 2,
+        "proposed": 1
+      },
+      "rung": "runs"
+    },
+    {
+      "map": "Point_Triangle_Context",
+      "sequence": "primitives",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "face",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Polythedra",
+      "sequence": "primitives",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "enclosure",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Point_Animatedcube",
+      "sequence": "primitives",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "mesh",
+          "status": "proposed",
+          "kind": "build"
+        },
+        {
+          "id": "instances",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Ignorance",
+      "sequence": "primitives",
+      "index": 10,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "primitive",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Godot",
+      "sequence": "primitives",
+      "index": 11,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Columns",
+      "sequence": "primitives",
+      "index": 12,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Profiles",
+      "sequence": "primitives",
+      "index": 13,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Portals",
+      "sequence": "primitives",
+      "index": 14,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "refinement",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Primitives_Melencolia",
+      "sequence": "primitives",
+      "index": 15,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "geometry_return",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Trans_Pre",
+      "sequence": "transformation",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": true,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "transform",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Trans_Introduction",
+      "sequence": "transformation",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "transform",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Trans_Translation",
+      "sequence": "transformation",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "transform",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Trans_Rotation",
+      "sequence": "transformation",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "rotation",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "hinge_release"
+      ],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Trans_Scale",
+      "sequence": "transformation",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "scale",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [
+        "reference_passage"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Trans_Body",
+      "sequence": "transformation",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "threshold",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Trans_Pit",
+      "sequence": "transformation",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "threshold",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Array",
+      "sequence": "array_tutorial",
+      "index": 1,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "array",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "Tutorial_3D",
+      "sequence": "array_tutorial",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "array",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "open_structures",
+        "reference_suspension"
+      ],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Tutorial_Tiling_Floor",
+      "sequence": "array_tutorial",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "tile",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Tutorial_Tiling_Walls",
+      "sequence": "array_tutorial",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "tile",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Tutorial_Disco",
+      "sequence": "array_tutorial",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "clock_pattern",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Color_Context_Placed",
+      "sequence": "color",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "colour",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "reference_landscape"
+      ],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Color_Flashlight",
+      "sequence": "color",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "light",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [
+        "sphere_in_pink"
+      ],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Color_Nails",
+      "sequence": "color",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "colour_space",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Color_Rainbow",
+      "sequence": "color",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "colour_space",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Color_Pillar",
+      "sequence": "color",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "colour_space",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Color_Grid_Pallet",
+      "sequence": "color",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "colour_space",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Color_Paint",
+      "sequence": "color",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "inscription",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Color_Walls",
+      "sequence": "color",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "inscription",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [
+        "colour_assembly",
+        "colour_wall_studies"
+      ],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Pattern_Disco",
+      "sequence": "tiling",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "pattern",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Pattern_Foundry",
+      "sequence": "tiling",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "pattern",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Tutorial_Pattern",
+      "sequence": "tiling",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "pattern",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Array_Patterns",
+      "sequence": "tiling",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "pattern",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Symmetry_Seventeen",
+      "sequence": "tiling",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "symmetry",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "Pattern_Temple",
+      "sequence": "tiling",
+      "index": 6,
+      "tutorial_present": false,
+      "lineage_status": null,
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "Ribbon_Patterns_01",
+      "sequence": "tiling",
+      "index": 7,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "symmetry",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "none"
+    },
+    {
+      "map": "Ribbon_Patterns_02",
+      "sequence": "tiling",
+      "index": 8,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "symmetry",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "none"
+    },
+    {
+      "map": "Ribbon_Patterns_03",
+      "sequence": "tiling",
+      "index": 9,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "symmetry",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "accepted": 1
+      },
+      "rung": "none"
+    },
+    {
+      "map": "Change_Intro",
+      "sequence": "change",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "rate",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "proposed": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Flow_Field",
+      "sequence": "change",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "field",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "proposed": 1,
+        "accepted": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "sequence": "forces",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "vector",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "proposed": 1
+      },
+      "rung": "written"
+    },
+    {
+      "map": "VFM_05_Launch",
+      "sequence": "forces",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "motion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {
+        "proposed": 1
+      },
+      "rung": "focused"
+    },
+    {
+      "map": "VFM_03_Motion",
+      "sequence": "forces",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "motion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "sequence": "forces",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Vectors_Act4a_KineticForces",
+      "sequence": "forces",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Vectors_Act4b_Oscillation",
+      "sequence": "forces",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Change_Choreography",
+      "sequence": "forces",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [
+        "paired_time"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "VFM_07_Gravity",
+      "sequence": "forces",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "VFM_09_Legs",
+      "sequence": "forces",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "VFM_08_Arena",
+      "sequence": "forces",
+      "index": 10,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Vectors_Act5_ForceAsPlace",
+      "sequence": "forces",
+      "index": 11,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "force",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "FormFinding_Descent",
+      "sequence": "formfinding",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "descent",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "FormFinding_Catenary",
+      "sequence": "formfinding",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "constraint",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "FormFinding_Relaxation",
+      "sequence": "formfinding",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "constraint",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "FormFinding_Equilibrium",
+      "sequence": "formfinding",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "constraint",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "FormFinding_Annealing",
+      "sequence": "formfinding",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "search_cost",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "FormFinding_Forge",
+      "sequence": "formfinding",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "search_cost",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_Intro",
+      "sequence": "wavefunctions",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "oscillation",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "WaveFunctions_Pendulum",
+      "sequence": "wavefunctions",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "oscillation",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_Sine_Space",
+      "sequence": "wavefunctions",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "oscillation",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_Unit_Circle",
+      "sequence": "wavefunctions",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "oscillation",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "sequence": "wavefunctions",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "wave",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_Effect_Sound",
+      "sequence": "wavefunctions",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "wave",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Wavefunctions_Bernini",
+      "sequence": "wavefunctions",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "wave",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_John_Cage",
+      "sequence": "wavefunctions",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "sound",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_AirMusic",
+      "sequence": "wavefunctions",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "sound",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Wavefunctions_Sky_Stairs",
+      "sequence": "wavefunctions",
+      "index": 10,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "sound",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_TrigWalkingPath",
+      "sequence": "wavefunctions",
+      "index": 11,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "synthesis",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "WaveFunctions_Synthesis_Lab",
+      "sequence": "wavefunctions",
+      "index": 12,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "synthesis",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Definition",
+      "sequence": "randomness",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Entropy",
+      "sequence": "randomness",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "signal_room"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Remove",
+      "sequence": "randomness",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Randomness_10_PRINT_Algorithm",
+      "sequence": "randomness",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Cubes",
+      "sequence": "randomness",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Random_Rotate_Random_XYZ",
+      "sequence": "randomness",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Random_Walk",
+      "sequence": "randomness",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "random",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Gaussian",
+      "sequence": "randomness",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Mushrooms",
+      "sequence": "randomness",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Random_Space_Geometry",
+      "sequence": "randomness",
+      "index": 10,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Randomness_Examples_of_Randomness",
+      "sequence": "randomness",
+      "index": 11,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Random_Pheromone",
+      "sequence": "randomness",
+      "index": 12,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Random_Space",
+      "sequence": "randomness",
+      "index": 13,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Random_Game",
+      "sequence": "randomness",
+      "index": 14,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "distribution",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Random_Noise_Types",
+      "sequence": "noise",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "noise",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Noise_Columns",
+      "sequence": "noise",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "noise",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Noise_One",
+      "sequence": "noise",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "noise",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Noise_Voxel",
+      "sequence": "noise",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "noise",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Noise_6_Wall",
+      "sequence": "noise",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "noise",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Noise_Inside_Noise",
+      "sequence": "noise",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "noise",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Noise_Space_10",
+      "sequence": "noise",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "field_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Noise_Perlin_Simplex",
+      "sequence": "noise",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "field_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Lab_Path",
+      "sequence": "noise",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "field_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Shader_01_Shaping",
+      "sequence": "shaders",
+      "index": 1,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "shader",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "Shader_05_Patterns",
+      "sequence": "shaders",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "shader",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "reference_pattern_garden"
+      ],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Shader_11_QueerRubber",
+      "sequence": "shaders",
+      "index": 3,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "shader_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "Shader_09_FBM",
+      "sequence": "shaders",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "shader_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Shader_12_PinkExtravaganza",
+      "sequence": "shaders",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "shader_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [
+        "reference_plural_body"
+      ],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Shader_10_ReactionDiffusion",
+      "sequence": "shaders",
+      "index": 6,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "shader_body",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "CA_Introduction",
+      "sequence": "cellularautomata",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_ElementaryRules",
+      "sequence": "cellularautomata",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_GameOfLife",
+      "sequence": "cellularautomata",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_BeyondBinary",
+      "sequence": "cellularautomata",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_ExpandingSpace",
+      "sequence": "cellularautomata",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell_field",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_SoftRules",
+      "sequence": "cellularautomata",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell_field",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_AgentsCircuits",
+      "sequence": "cellularautomata",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell_field",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "CA_EdgeOfChaos",
+      "sequence": "cellularautomata",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "cell_field",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_Recursion",
+      "sequence": "fractals",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_RecursiveTrees",
+      "sequence": "fractals",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_CantorSet",
+      "sequence": "fractals",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_KochSierpinski",
+      "sequence": "fractals",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_MengerSponge",
+      "sequence": "fractals",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_GoldenSpiral",
+      "sequence": "fractals",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Fractal_Synthesis",
+      "sequence": "fractals",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "recursion",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "LSystems_Grammar_Lab",
+      "sequence": "lsystems",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "LSystems_Growth",
+      "sequence": "lsystems",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "LSystems_Grammars_And_Curves",
+      "sequence": "lsystems",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar",
+          "status": "proposed",
+          "kind": "build"
+        },
+        {
+          "id": "sweep",
+          "status": "implemented_unverified_learner",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "tube_painting"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "LSystems_Architecture",
+      "sequence": "lsystems",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar_space",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "LSystems_Competition",
+      "sequence": "lsystems",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar_space",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "LSystems_Living",
+      "sequence": "lsystems",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar_space",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "LSystems_Shape_Grammars",
+      "sequence": "lsystems",
+      "index": 7,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar_space",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "Assemblage_Same_Desire",
+      "sequence": "lsystems",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "grammar_space",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "PG_Genetic_Evolution",
+      "sequence": "proceduralgeneration",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "selection",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PG_Space_Colonization",
+      "sequence": "proceduralgeneration",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "growth",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PG_Branching_Growth",
+      "sequence": "proceduralgeneration",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "growth",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PG_Percolation_Network",
+      "sequence": "proceduralgeneration",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "growth",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PG_Caves_Mazes",
+      "sequence": "proceduralgeneration",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "growth",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PG_Sculpted_Forms",
+      "sequence": "proceduralgeneration",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "growth",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PG_Mirrored_Patterns",
+      "sequence": "proceduralgeneration",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "growth",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "sequence": "softbodies",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SoftBodies_Cloth_Physics",
+      "sequence": "softbodies",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [
+        "tension_membrane"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SoftBodies_Carusell",
+      "sequence": "softbodies",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SoftBodies_Obsticals",
+      "sequence": "softbodies",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SoftBodies_Obsticals_Part2",
+      "sequence": "softbodies",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SoftBodies_Playground_of_Joy",
+      "sequence": "softbodies",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "sequence": "softbodies",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "soft",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "sequence": "softbodies",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "reaction",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Topology_Entropy_Morphogenesis",
+      "sequence": "softbodies",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "reaction",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_Introduction",
+      "sequence": "isosurfaces",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "iso",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_LookupTable",
+      "sequence": "isosurfaces",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "iso",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_ShapesGallery",
+      "sequence": "isosurfaces",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "iso",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_TorusGyroid",
+      "sequence": "isosurfaces",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "iso",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_Sculpting",
+      "sequence": "isosurfaces",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_FlatTerrain",
+      "sequence": "isosurfaces",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_PortalLandscape",
+      "sequence": "isosurfaces",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ISO_Caves",
+      "sequence": "isosurfaces",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ISO_CaveGeneration",
+      "sequence": "isosurfaces",
+      "index": 9,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ISO_AnimatedNoise",
+      "sequence": "isosurfaces",
+      "index": 10,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ISO_Metaballs",
+      "sequence": "isosurfaces",
+      "index": 11,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ISO_ImplicitModeling",
+      "sequence": "isosurfaces",
+      "index": 12,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "raw",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ISO_RhizomeBody",
+      "sequence": "isosurfaces",
+      "index": 13,
+      "tutorial_present": false,
+      "lineage_status": "missing",
+      "lineage_drifted": false,
+      "lineage_fingerprint": null,
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "implicit",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "none"
+    },
+    {
+      "map": "Boolean_Verbs",
+      "sequence": "boolean_surfaces",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "boolean",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "Boolean_Gallery",
+      "sequence": "boolean_surfaces",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "boolean",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Boolean_Works",
+      "sequence": "boolean_surfaces",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "boolean",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "conical_sightline",
+        "kapoor_void_studies"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SwarmIntelligence_PhysarumColony",
+      "sequence": "swarmintelligence",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "agent",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SwarmIntelligence_FlowFields",
+      "sequence": "swarmintelligence",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "agent",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "sequence": "swarmintelligence",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "agent",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "sequence": "swarmintelligence",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "agent",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "sequence": "swarmintelligence",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "collective_search",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "sequence": "swarmintelligence",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "collective_search",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "sequence": "swarmintelligence",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "collective_search",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ML_Evolution",
+      "sequence": "machinelearning",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "learning",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ML_Gradient_Landscape",
+      "sequence": "machinelearning",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "learning",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ML_Classification",
+      "sequence": "machinelearning",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "learning",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ML_Neural_Networks",
+      "sequence": "machinelearning",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "network",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ML_Perception",
+      "sequence": "machinelearning",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "network",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "ML_Sequence_Memory",
+      "sequence": "machinelearning",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "learned_memory",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ML_Generative",
+      "sequence": "machinelearning",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "learned_memory",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "ML_Synthesis",
+      "sequence": "machinelearning",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "learned_memory",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "GT_Foundations",
+      "sequence": "graphtheory",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "graph",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "GT_Layout",
+      "sequence": "graphtheory",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "graph",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "GT_Pathfinding",
+      "sequence": "graphtheory",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "path",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "GT_Network_Analysis",
+      "sequence": "graphtheory",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "path",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [
+        "evidence_network"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "GT_Connectivity",
+      "sequence": "graphtheory",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "path",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "GT_Spanning_Trees",
+      "sequence": "graphtheory",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "path",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "GT_Flow",
+      "sequence": "graphtheory",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "path",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "GT_Matching",
+      "sequence": "graphtheory",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "path",
+          "status": "proposed",
+          "kind": "build"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Euclid_Parallel",
+      "sequence": "foundationscrisis",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "assumption",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "NonEuclidean_Spaces",
+      "sequence": "foundationscrisis",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "assumption",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Russell_Paradox",
+      "sequence": "foundationscrisis",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "limit",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Godel_Incompleteness",
+      "sequence": "foundationscrisis",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "limit",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Escher_Impossible",
+      "sequence": "foundationscrisis",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "limit",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Brouwer_Intuitionism",
+      "sequence": "foundationscrisis",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "limit",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Florensky_Paraconsistent",
+      "sequence": "foundationscrisis",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "limit",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "Crisis_Synthesis",
+      "sequence": "foundationscrisis",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": true,
+      "lineage_fingerprint": "none",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "limit",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [
+        "sentence_authority"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "QFEP_Introduction",
+      "sequence": "qfeplaboratory",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "proxy",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "QFEP_F_Term",
+      "sequence": "qfeplaboratory",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "proxy",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "QFEP_E_Term",
+      "sequence": "qfeplaboratory",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "proxy",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "QFEP_Lambda_Spectrum",
+      "sequence": "qfeplaboratory",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "proxy",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "QFEP_Phi_Term",
+      "sequence": "qfeplaboratory",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "proxy",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "QFEP_Edge_Of_Chaos",
+      "sequence": "qfeplaboratory",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "proxy",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "QFEP_Sandbox",
+      "sequence": "qfeplaboratory",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "coupling",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "QFEP_Synthesis",
+      "sequence": "qfeplaboratory",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "coupling",
+          "status": "proposed",
+          "kind": "compare"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "sequence": "postfoundationscrisis",
+      "index": 1,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "situation",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "sequence": "postfoundationscrisis",
+      "index": 2,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "situation",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "sequence": "postfoundationscrisis",
+      "index": 3,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "situation",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "SpeculativeComputation_Situated_Computation",
+      "sequence": "postfoundationscrisis",
+      "index": 4,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "situation",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [
+        "museum_witnesses"
+      ],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "sequence": "postfoundationscrisis",
+      "index": 5,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "situation",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "sequence": "postfoundationscrisis",
+      "index": 6,
+      "tutorial_present": true,
+      "lineage_status": "aligned",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "assembly",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "focused"
+    },
+    {
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "sequence": "postfoundationscrisis",
+      "index": 7,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "assembly",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    },
+    {
+      "map": "PostCrisis_Synthesis",
+      "sequence": "postfoundationscrisis",
+      "index": 8,
+      "tutorial_present": true,
+      "lineage_status": "needs_revision",
+      "lineage_drifted": false,
+      "lineage_fingerprint": "crlf",
+      "saved_focus": false,
+      "plan_choice": null,
+      "contracted": null,
+      "ghost_state": null,
+      "curriculum_nodes": [
+        {
+          "id": "assembly",
+          "status": "proposed",
+          "kind": "reflect"
+        }
+      ],
+      "installed_studies": [],
+      "memory_findings": {},
+      "rung": "written"
+    }
+  ]
+}

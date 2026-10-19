@@ -828,6 +828,17 @@
       "topic": "stranded-work",
       "insight": "gate M claim reader is first-person by design: a third-party-published opening post's prose ownership (Codex's biome ladder) left 29 construction-site files printing landable for two days; the escape hatch is a claims-bearing forum answer registering the ownership as data - applied 10-15 on 261013-eihks, landable 34 -> 9",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-10-19T13:12:34.313555+00:00",
+      "topic": "capacity tree",
+      "insight": "2026-10-19: /capacity-tree draws five layers written 29 Sep-6 Oct (ladder, memory, whole-spine review, hall lineage, execution plan) that each use a different word for done; tools/capacity_progress.py reduces them to one evidence rung per hall against the live spine (206 halls: 10 none, 122 written, 69 focused, 5 runs, 0 learner). plan.json, memory/state.json and the early/growth/later storyboards are authoritative and NOT in git; the encyclopedia GitHub copy stops 2026-07-25 with none of the October pages. Fingerprints in lineage-*.json and protected-sources.json are CRLF: on an LF clone compare raw/CRLF/LF or a freshness badge over-reports drift (177 vs 76 real).",
+      "lod": 2,
+      "refs": [
+        "doc/book/course/CAPACITY_TREE_REVIEW.md",
+        "tools/capacity_progress.py",
+        "doc/reports/capacity_progress.json"
+      ]
     }
   ]
 }
