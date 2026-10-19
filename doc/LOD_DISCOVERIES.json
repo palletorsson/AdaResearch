@@ -840,6 +840,12 @@
       "topic": "gates",
       "insight": "2026-10-17: em_autopilot's interlock recognised a contender only by the repo path in its command line; a Godot launched as '--path .' from the repo passed as an all-clear and gate F walked beside it (0xC0000005). Whether an interlock fires must not depend on how the contender was launched - resolve relative paths against the process cwd, count the unreadable.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-10-19T13:06:08.773334+00:00",
+      "topic": "gate-m",
+      "insight": "landable needs three exclusions, not one: claimed in the forum, clocked live by its folder, and beside an uncommitted TRACKED file - the third was 16 of 25 on 2026-10-19 (git diff --name-only HEAD per folder)",
+      "lod": 3
     }
   ]
 }
