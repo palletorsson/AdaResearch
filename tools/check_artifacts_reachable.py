@@ -337,6 +337,36 @@ def git_ignored(paths):
     return {line.strip() for line in text.splitlines() if line.strip()}
 
 
+def dirty_tracked():
+    """Tracked files with uncommitted edits (working tree or index vs HEAD).
+
+    The third cause of the landable over-promise (prop-056): on 2026-10-19
+    16 of 25 'landable' rows sat in a folder whose TRACKED script -- the one
+    that loads them -- carried an uncommitted hunk. Untracked files there are
+    that hunk's other half; landing them alone greens this gate over a pass
+    nobody committed. Seen 10-18 (seed_replay), 10-19 (three folders)."""
+    out = subprocess.run(["git", "diff", "--name-only", "HEAD"], cwd=ROOT,
+                         capture_output=True)
+    text = out.stdout.decode("utf-8", errors="replace")
+    return {line.strip() for line in text.splitlines() if line.strip()}
+
+
+def beside_dirty(rows, dirty):
+    """Mark each row whose folder holds a dirty tracked file: beside_dirty=[names].
+
+    Pure, so the selftest feeds it. Marks, never drops: the row stays where
+    reading() put it; only the landable count reads the mark."""
+    by_folder = {}
+    for rel in dirty:
+        by_folder.setdefault(str(Path(rel).parent).replace("\\", "/"), []
+                             ).append(Path(rel).name)
+    for r in rows:
+        names = by_folder.get(str(Path(r["path"]).parent).replace("\\", "/"))
+        if names:
+            r["beside_dirty"] = sorted(names)
+    return rows
+
+
 def read_file(rel):
     try:
         return (ROOT / rel).read_text(encoding="utf-8", errors="replace")
@@ -471,6 +501,15 @@ def selftest():
     cases.append(("an older folder never ages a younger file",
                   all("file_age_hours" not in r for v in split.values() for r in v)))
 
+    # 10. The dirty sibling (prop-056, third cause). m/old.gd is untracked and
+    #     stranded, but m/loader.gd is tracked and carries an uncommitted hunk:
+    #     marked, not dropped. A dirty file in another folder marks nothing.
+    rows = [{"token": "t", "registry": "r", "path": p} for p in ("m/old.gd", "n/lone.gd")]
+    beside_dirty(rows, {"m/loader.gd", "z/elsewhere.gd"})
+    cases.append(("marks a row beside an uncommitted tracked file",
+                  rows[0].get("beside_dirty") == ["loader.gd"]
+                  and "beside_dirty" not in rows[1] and len(rows) == 2))
+
     bad =[name for name, ok in cases if not ok]
     for name, ok in cases:
         print("  %-52s %s" % (name, "ok" if ok else "FAIL"))
@@ -518,12 +557,16 @@ def main():
         for r in rows:
             if r["path"] in claimed:
                 r["claimed_by"] = claimed[r["path"]]
-    free = [r for r in split["stranded"] if "claimed_by" not in r]
+    beside_dirty(split["stranded"], dirty_tracked() if paths else set())
+    unclaimed = [r for r in split["stranded"] if "claimed_by" not in r]
+    free = [r for r in unclaimed if "beside_dirty" not in r]
     floor = ("%d gitignored on purpose (a rule decides them, not a commit), "
              "%d touched within %dh (somebody's open buffer), %d stranded "
-             "(%d of them claimed in the forum). Landable by an agent today: %d."
+             "(%d of them claimed in the forum, %d more beside an uncommitted "
+             "tracked file). Landable by an agent today: %d."
              % (len(split["ignored"]), len(split["live"]), int(HOLD_HOURS),
-                len(split["stranded"]), len(split["stranded"]) - len(free), len(free)))
+                len(split["stranded"]), len(split["stranded"]) - len(unclaimed),
+                len(unclaimed) - len(free), len(free)))
 
     report = {
         "registries_in_head": sum(1 for p in in_head
@@ -538,6 +581,7 @@ def main():
         "live_under_hold": len(split["live"]),
         "stranded": len(split["stranded"]),
         "claimed_in_the_forum": len(claimed),
+        "beside_uncommitted_tracked": len(unclaimed) - len(free),
         "landable_today": len(free),
         "floor_reading": floor,
         "split": split,
@@ -554,10 +598,15 @@ def main():
         print("UNREACHABLE FROM A CLONE                 : %d" % report["unreachable_from_a_clone"])
         for kind in ("stranded", "live", "ignored"):
             for u in split[kind]:
-                print("   %-34s %-8s %6.1fh%s %s%s" % (
+                print("   %-34s %-8s %6.1fh%s%s %s%s%s" % (
                     u["token"], kind, u["age_hours"],
-                    "f" if u.get("clocked_by") == "folder" else " ", u["path"],
-                    ("   <- " + u["claimed_by"]) if u.get("claimed_by") else ""))
+                    "f" if u.get("clocked_by") == "folder" else " ",
+                    "d" if u.get("beside_dirty") else " ", u["path"],
+                    ("   <- " + u["claimed_by"]) if u.get("claimed_by") else "",
+                    ("   beside uncommitted " + ", ".join(u["beside_dirty"][:3])
+                     + (" +%d" % (len(u["beside_dirty"]) - 3)
+                        if len(u["beside_dirty"]) > 3 else ""))
+                    if u.get("beside_dirty") else ""))
         print("  reading: %s" % floor)
         print("absent from every tree (gate B's)        : %d" % report["absent_from_every_tree"])
         for a in absent:
