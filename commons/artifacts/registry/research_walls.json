@@ -1,0 +1,48 @@
+{
+  "id": "research_walls",
+  "name": "Research walls",
+  "artifacts": {
+    "research_info_wall": {
+      "lookup_name": "research_info_wall",
+      "name": "Research information wall",
+      "scene": "res://commons/artifacts/research_info_wall/research_info_wall.tscn",
+      "description": "A full-height partition with framed text, a replaceable illustration, a working whiteboard, two markers, eraser and three movable writable sticky notes. Local automatic persistence; gallery, workshop and night styles.",
+      "category": "laboratory",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "wall",
+        "whiteboard",
+        "notes",
+        "partition",
+        "research",
+        "illustration"
+      ],
+      "parameters": {
+        "footprint": [
+          7,
+          3,
+          2
+        ],
+        "size_group": "environmental",
+        "style": "gallery",
+        "drawing_enabled": true,
+        "notes_enabled": true,
+        "illustration_enabled": true,
+        "storage_key": "",
+        "illustration_path": "res://doc/book/iterations/2026-10-16-entropy-visible-states/aerial.png"
+      },
+      "interactions": [
+        "Grab a marker and touch the whiteboard or a sticky note to write.",
+        "Use the eraser to remove local ink.",
+        "Grab a sticky note and release it near the wall to pin it.",
+        "Ink and note positions persist locally without a save button."
+      ],
+      "qfep_connection": "A shared surface lets observations persist beside the claims and arrangements that provoked them; visitors can leave a different question without changing the apparatus."
+    }
+  }
+}

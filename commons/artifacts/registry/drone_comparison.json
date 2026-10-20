@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "drone_comparison": {
+      "lookup_name": "drone_comparison",
+      "name": "Two kinds of guidance",
+      "scene": "res://commons/artifacts/drone_comparison/drone_comparison.tscn",
+      "description": "Two flights of twelve point-bodied drones start alike. One seeks assigned slots; the other combines neighbour rules and a common target. Carry a PointBody to shift both targets; trigger toggles visible guidance. A physical selector shows the same agents as drones, points or lights without changing their movement.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [13, 4, 11],
+      "size_group": "world_scale",
+      "map_sequences": ["swarmintelligence"],
+      "tags": ["drone", "formation", "boids", "grabbable", "steering"],
+      "qfep_connection": "Coordinated appearance does not reveal which instructions are shared or imposed. Both controllers expose their destination source and retained constraints. Changing the representation while retaining agent state lets the visitor examine what display contributes to their reading of a collective.",
+      "parameters": {"footprint": [13, 4, 11], "size_group": "world_scale"}
+    }
+  }
+}

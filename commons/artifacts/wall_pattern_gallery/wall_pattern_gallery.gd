@@ -52,14 +52,10 @@ class_name WallPatternGallery
 #   artifacts will not measure alike in magnitude even though they measure alike in
 #   kind.
 #
-# WHAT IS DECLINED. A `surface` or coverage axis — walls only against the shipped
-# walls + ceiling + floor enclosure — is a real question this artifact could argue
-# and is not shipped: from one fixed camera, removing surfaces mostly changes how
-# much of the FRAME is lit, and the critic would read a fact about the camera as a
-# verdict on the design. tile_scale, emission_strength and grout_width are size and
-# palette knobs; cluster_size is the declared critical_parameter and stays a plain
-# named float rather than a vocabulary, because "how much space a symmetry occupies"
-# is a continuum and not a set of names.
+# Museum placement (2026-10-09) adds opt-in `surfaces:walls`: keep the floor
+# and roof clear when this shares a hall with individual pattern studies. The
+# default enclosure and its census remain unchanged. Coverage is a display
+# choice, not evidence that one wallpaper group is better than another.
 const CENSUS: PackedStringArray = ["one", "pair", "triad", "chorus"]
 
 @export_enum("one", "pair", "triad", "chorus") var census: String = "chorus"
@@ -67,6 +63,8 @@ const CENSUS: PackedStringArray = ["one", "pair", "triad", "chorus"]
 @export var tile_scale: float = 4.0
 @export var emission_strength: float = 0.8
 @export var grout_width: float = 0.02
+## The same pattern rules can dress just the walls of an open museum hall.
+@export_enum("enclosure", "walls") var surfaces: String = "enclosure"
 
 # All 17 wallpaper groups
 const GROUP_NAMES: Array = [
@@ -103,6 +101,8 @@ func _ready() -> void:
 ## nothing. An unrecognised census word is ignored rather than assigned, so a
 ## typo falls back to the shipped chorus instead of silently rendering group 0.
 func apply_grid_config(config_data: Dictionary) -> void:
+	if str(config_data.get("surfaces", "")) in ["enclosure", "walls"]:
+		surfaces = str(config_data["surfaces"])
 	if config_data.has("census"):
 		var c: String = str(config_data["census"]).strip_edges().to_lower()
 		if CENSUS.has(c):
@@ -207,6 +207,8 @@ func _build_gallery() -> void:
 		# Place overlay on each wall cube in this Z row
 		for cube_data in z_groups[z_val]:
 			var gp: Vector3i = cube_data["pos"]
+			if surfaces == "walls" and gp.y == 0:
+				continue
 			var world_pos := grid_origin + Vector3(gp.x, gp.y, gp.z) * total_size
 			_add_overlay(world_pos, cs, mat, gp)
 
@@ -216,7 +218,8 @@ func _build_gallery() -> void:
 			group_index += 1
 
 	# Build ceiling cubes to close the tunnel
-	_build_ceiling(grid_origin, positions, z_values, z_groups, cs, total_size)
+	if surfaces == "enclosure":
+		_build_ceiling(grid_origin, positions, z_values, z_groups, cs, total_size)
 
 	# Add lights inside the tunnel
 	_add_lights(grid_origin, z_values, total_size)
@@ -302,6 +305,11 @@ func _add_overlay(world_pos: Vector3, cube_size: float, material: ShaderMaterial
 	overlay_top.material_override = material
 	add_child(overlay_top)
 	overlay_top.global_position = world_pos + Vector3(0, cube_size * 0.51, 0)
+	if surfaces == "walls":
+		# These faces are positioned in host-grid world axes. A rotated controller
+		# must not turn each thin wall face into a fin sticking into the walkway.
+		for face in [overlay, overlay_back, overlay_left, overlay_right, overlay_top]:
+			face.global_basis = Basis.IDENTITY
 
 func _create_wallpaper_material(group_id: int, palette_id: int, seed_val: int) -> ShaderMaterial:
 	var mat := ShaderMaterial.new()

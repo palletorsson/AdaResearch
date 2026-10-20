@@ -111,4 +111,21 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("setting","")) != "wall": return
+	# Opt-in staging of the existing counterexamples. Their rules remain unchanged.
+	for child in get_children():
+		if child is MeshInstance3D and child.name.begins_with("Display_"):
+			var quad:=QuadMesh.new();quad.size=Vector2(DISPLAY_SIZE.x,DISPLAY_SIZE.y)
+			child.mesh=quad;child.position.y=2.1
+		elif child is Label3D:
+			child.hide()
+	if not has_node("ComparisonTitles"):
+		var titles:=Node3D.new();titles.name="ComparisonTitles";add_child(titles)
+		for side in [-1,1]:
+			var backing:=MeshInstance3D.new();var plate:=BoxMesh.new();plate.size=Vector3(2.6,.45,.04);backing.mesh=plate
+			backing.position=Vector3(side*DISPLAY_GAP*.5,3.65,0)
+			var ink:=StandardMaterial3D.new();ink.albedo_color=Color("242c2d");backing.material_override=ink;titles.add_child(backing)
+			var caption:=Label3D.new();caption.font_size=44;caption.pixel_size=.003;caption.outline_size=0
+			caption.text="UNBOUND\nOne step repeated" if side<0 else "FROST\nAppearance of growth"
+			caption.position=backing.position+Vector3(0,0,.03);titles.add_child(caption)
+	for panel in panels:panel.position.y=1.03

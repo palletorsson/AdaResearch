@@ -1,0 +1,84 @@
+{
+  "artifacts": {
+    "markov_blanket_room": {
+      "lookup_name": "markov_blanket_room",
+      "name": "Markov Blanket Room",
+      "class_name": "MarkovBlanketRoom",
+      "scene": "res://commons/artifacts/markov_blanket_room/markov_blanket_room.tscn",
+      "category": "qfeplaboratory",
+      "artifact_type": "synthesis",
+      "complexity": "intermediate",
+      "description": "A cubic lattice classified into internal cells, blanket cells and external cells, built at room scale so a body stands inside the interior. It does not draw a membrane and call it a boundary: a breadth-first search runs from the centre, blocked by blanket cells only, and asks whether any path reaches the rim. The verdict plate reports SEPARATED or REACHED, and when a path exists it is drawn in full. leak removes blanket cells (sealed, pinhole, breach, dissolved) and shell decides how the boundary was built at all (shell, patchy, double, none). patchy is the instructive value: a boundary with a third of its cells missing usually still separates, because separation is about paths and not about coverage. The search result is readable from code via is_separated() and escape_path_length(), so the claim can be checked without reading pixels.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "environment",
+      "footprint": [
+        6,
+        5,
+        6
+      ],
+      "map_sequences": [
+        "qfeplaboratory",
+        "postfoundationscrisis"
+      ],
+      "tags": [
+        "qfep",
+        "boundary",
+        "markov-blanket",
+        "free-energy",
+        "connectivity",
+        "separator",
+        "immersive"
+      ],
+      "parameters": {
+        "footprint": [
+          6,
+          5,
+          6
+        ],
+        "size_group": "environment"
+      },
+      "dna": {
+        "axes": {
+          "leak": [
+            "sealed",
+            "pinhole",
+            "breach",
+            "dissolved"
+          ],
+          "shell": [
+            "shell",
+            "patchy",
+            "double",
+            "none"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "leak: sealed <-> pinhole, at shell=shell",
+          "predicted_bite_pct": 0.9,
+          "basis": "LOWER BOUND, as every prediction measured in this corpus has been, by 1.5x to 6.7x. A pinhole removes the blanket cells within radius 1.9 of one picked cell: about 25 of roughly 1100 blanket cells, 2.3% of the shell. Those cells are orange cubes at 0.78 of cell size; the shell occupies perhaps 38% of the subject's projected area, so the removed cells are 0.023 x 0.38 = 0.9% of subject. The verdict plate also changes colour and wording, but it is small in frame and the arithmetic deliberately ignores it.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below ~0.9% the likely causes in order are (a) the pinhole falling on the far side of the shell and being occluded by the near side, which is a FIXTURE problem and not an axis problem -- change the standpoint, not the design; (b) the Label3D not rendering headless, so the verdict change is invisible; (c) the sweep setting leak to a value the enum does not carry, which fails in silence. Read <out>/_rejects.json before writing anything down.",
+          "note": "sealed <-> pinhole is the smallest pair BY DESIGN and it is the pair that carries the argument: both still report SEPARATED, so the picture barely changes while the question does not change at all. The honest risk is that this reads as INERT when it is merely SMALL. Do not record a dead verdict without running probe_anamorphic.py -- five of seven dead verdicts in this corpus were false, and a shell is exactly the kind of subject whose far side is invisible from one standpoint. By contrast leak sealed <-> dissolved should be enormous: most of the shell gone plus a drawn yellow path plus a recoloured plate.",
+          "measured_2026_10_13": "SWEPT. shell BITES at 5.38% frame / 58.88% focus. leak is CONDITIONAL, and the prediction above named the WRONG DEGENERACY -- which is the only reason the pass was worth running. I predicted the closest pair would be sealed<->pinhole at 0.9%; it measured 23.49%, twenty-six times higher, consistent with every prediction in this corpus being a lower bound. The real degeneracy is STRUCTURAL and I did not foresee it: at shell=none there is no blanket, so removing blanket cells changes nothing and every leak pair measures exactly 0.00%. Wherever a blanket exists, leak measures 23-52% (dissolved vs sealed 52.58% at shell=patchy). That is correct behaviour, not a dead axis -- leak is only defined where there is something to leak from -- so read the per-pair rows grouped by shell, never the axis mean. No rejects file was written, so no value was refused on assignment."
+        },
+        "fixture": {
+          "generation_seed": 20261013
+        }
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 6,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "inside",
+        "wall_backing": false,
+        "orientation": "any",
+        "isolation": "high"
+      }
+    }
+  }
+}

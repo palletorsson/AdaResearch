@@ -19,6 +19,7 @@ const PANEL_OFFSET := Vector3(0.0, 0.0, 1.2)
 
 var panels: Array[ShaderRackPanel] = []
 var materials: Array[ShaderMaterial] = []
+var wall_setting := false
 
 # Shader definitions: [path, title, code_snippet, sliders: [[name, min, max, default, step]]]
 var shader_defs := [
@@ -134,4 +135,30 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if str(config.get("setting", "")) != "wall" or wall_setting:
+		return
+	# Opt-in museum mounting; older placements retain their layout.
+	wall_setting = true
+	if panels.is_empty():
+		await ready
+	var G = preload("res://commons/artifacts/jacquard_weaver/weave_geometry.gd")
+	var ivory: StandardMaterial3D = G.material("e5ded0")
+	var dark: StandardMaterial3D = G.material("252a2c")
+	for i in range(panels.size()):
+		var display: MeshInstance3D = get_node("Display_%d" % i)
+		# A graph uses the complete square UV domain, not one BoxMesh atlas face.
+		var square := QuadMesh.new(); square.size = Vector2(2,2)
+		display.mesh = square
+		display.position.y = 2.1
+		panels[i].position.y = 1.02
+		G.box(self,Vector3(display.position.x,2.1,-.07),Vector3(2.10,2.10,.08),dark)
+		G.box(self,Vector3(display.position.x,.92,1.20),Vector3(1.5,.12,.72),ivory,true)
+		for side in [-.57,.57]:
+			G.box(self,Vector3(display.position.x+side,.43,1.2),Vector3(.065,.86,.52),dark,true)
+	for child in get_children():
+		if child is Label3D:
+			child.position.y = 3.35
+			child.font_size = 54
+			child.pixel_size = .002
+			child.modulate = Color("272b2d")
+			child.outline_size = 0

@@ -6,15 +6,17 @@ var viewport: SubViewport
 var _image: Image
 var _texture: ImageTexture
 var _dirty := false
+var transparent_ink := false
 
 func _ready() -> void:
 	_image = Image.create(texture_size.x, texture_size.y, false, Image.FORMAT_RGBA8)
-	_image.fill(Color.WHITE)
+	_image.fill(Color.TRANSPARENT if transparent_ink else Color.WHITE)
 	_texture = ImageTexture.create_from_image(_image)
 	viewport = SubViewport.new()
 	viewport.name = "DryInkCanvas"
 	viewport.size = texture_size
 	viewport.disable_3d = true
+	viewport.transparent_bg = transparent_ink
 	viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 	add_child(viewport)
 	var paper := TextureRect.new()
@@ -24,6 +26,10 @@ func _ready() -> void:
 	var material := StandardMaterial3D.new()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	material.albedo_texture = viewport.get_texture()
+	if transparent_ink:
+		material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		material.cull_mode = BaseMaterial3D.CULL_DISABLED
+		material.render_priority = 1
 	material_override = material
 
 func _process(_delta: float) -> void:
@@ -33,7 +39,7 @@ func _process(_delta: float) -> void:
 	_dirty = false
 
 func reset_canvas() -> void:
-	_image.fill(Color.WHITE)
+	_image.fill(Color.TRANSPARENT if transparent_ink else Color.WHITE)
 	_dirty = true
 
 func draw_point(uv: Vector2, color: Color, radius: int = 3, _snap_size: int = -1) -> void:

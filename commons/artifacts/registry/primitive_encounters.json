@@ -1,0 +1,220 @@
+{
+  "artifacts": {
+    "pairing_point_field": {
+      "lookup_name": "pairing_point_field",
+      "name": "Twelve points / many lines",
+      "scene": "res://commons/artifacts/primitive_encounters/pairing_point_field.tscn",
+      "map_ready": true,
+      "description": "Twelve points / many lines. A primitive changes what a hand or a walking body can do.",
+      "category": "primitives",
+      "tags": [
+        "points",
+        "lines",
+        "surfaces",
+        "construction"
+      ],
+      "complexity": "beginner"
+    },
+    "triangle_assembly_table": {
+      "lookup_name": "triangle_assembly_table",
+      "name": "Twelve triangles / open assembly",
+      "scene": "res://commons/artifacts/primitive_encounters/triangle_assembly_table.tscn",
+      "map_ready": true,
+      "description": "Twelve triangles / open assembly. A primitive changes what a hand or a walking body can do.",
+      "category": "primitives",
+      "tags": [
+        "points",
+        "lines",
+        "surfaces",
+        "construction"
+      ],
+      "complexity": "beginner"
+    },
+    "align_tetrahedron": {
+      "lookup_name": "align_tetrahedron",
+      "name": "Align the tetrahedron",
+      "scene": "res://commons/artifacts/primitive_encounters/align_tetrahedron.tscn",
+      "map_ready": true,
+      "description": "Move the pink fourth vertex to its ring and release. Four faces become a grabbable striped solid; its enlarged recipe becomes the tetrahedron blocker.",
+      "category": "primitives",
+      "tags": [
+        "points",
+        "lines",
+        "surfaces",
+        "construction"
+      ],
+      "complexity": "beginner"
+    },
+    "align_wedge": {
+      "lookup_name": "align_wedge",
+      "name": "Align the wedge",
+      "scene": "res://commons/artifacts/primitive_encounters/align_wedge.tscn",
+      "map_ready": true,
+      "description": "Move the pink sixth vertex to its ring and release. The closed prism is a handheld 55-percent version of the 1:1:2 wp profile; its larger version can block or support a path.",
+      "category": "primitives",
+      "tags": [
+        "points",
+        "lines",
+        "surfaces",
+        "construction"
+      ],
+      "complexity": "beginner"
+    },
+    "wedge_palace": {
+      "lookup_name": "wedge_palace",
+      "name": "Two approaches / one platform",
+      "scene": "res://commons/artifacts/primitive_encounters/wedge_palace.tscn",
+      "map_ready": true,
+      "description": "Two approaches / one platform. A primitive changes what a hand or a walking body can do.",
+      "category": "primitives",
+      "tags": [
+        "points",
+        "lines",
+        "surfaces",
+        "construction"
+      ],
+      "complexity": "beginner"
+    },
+    "corner_tetrahedron": {
+      "lookup_name": "corner_tetrahedron",
+      "name": "A tetrahedron changes the corner",
+      "scene": "res://commons/artifacts/primitive_encounters/corner_tetrahedron.tscn",
+      "map_ready": true,
+      "description": "A tetrahedron changes the corner. A primitive changes what a hand or a walking body can do.",
+      "category": "primitives",
+      "tags": [
+        "points",
+        "lines",
+        "surfaces",
+        "construction"
+      ],
+      "complexity": "beginner"
+    },
+    "wedge_column": {
+      "lookup_name": "wedge_column",
+      "name": "Same wedges / sculptural column",
+      "scene": "res://commons/artifacts/primitive_encounters/wedge_column.tscn",
+      "map_ready": true,
+      "description": "Six original prism_block scenes paired into three diamond modules. Fixed joints let the same geometry become sculpture after obstruction and ascent.",
+      "category": "primitives",
+      "tags": [
+        "wedge",
+        "configuration",
+        "sculpture",
+        "support",
+        "path"
+      ],
+      "complexity": "beginner",
+      "qfep_connection": "A form acquires capacities through arrangement and its relation to another body: obstruction, support, silhouette and access."
+    },
+    "wedge_mouse_model": {
+      "lookup_name": "wedge_mouse_model",
+      "name": "Wedge mouse / a small labyrinth",
+      "scene": "res://commons/artifacts/primitive_encounters/wedge_mouse_model.tscn",
+      "map_ready": true,
+      "description": "Steer a bare brown wedge mouse through a small maze of 23 upright movable wedge walls to symmetric cheese at the far end. One joystick stands behind the mouse. Move a wall to change the route; a fallen mouse returns automatically without resetting the walls.",
+      "category": "primitives",
+      "tags": [
+        "wedge",
+        "configuration",
+        "sculpture",
+        "support",
+        "path"
+      ],
+      "complexity": "beginner",
+      "qfep_connection": "A form acquires capacities through arrangement and its relation to another body: obstruction, support, silhouette and access."
+    },
+    "tetrahedron_blocker": {
+      "lookup_name": "tetrahedron_blocker",
+      "name": "Striped tetrahedron blocker",
+      "scene": "res://commons/artifacts/primitive_encounters/tetrahedron_blocker.tscn",
+      "map_ready": true,
+      "description": "Four triangular faces close a tetrahedron. The enlarged alignment recipe becomes a solid obstruction.",
+      "category": "primitives",
+      "tags": [
+        "construction",
+        "collision",
+        "solid",
+        "reusable"
+      ],
+      "complexity": "beginner",
+      "qfep_connection": "The same closed form changes bodily access: obstruction or support depends on placement and orientation."
+    },
+    "pyramid_blocker": {
+      "lookup_name": "pyramid_blocker",
+      "name": "Striped pyramid blocker",
+      "scene": "res://commons/artifacts/primitive_encounters/pyramid_blocker.tscn",
+      "map_ready": true,
+      "description": "Four triangular sides meet above a square base. Five faces enclose a blocking volume.",
+      "category": "primitives",
+      "tags": [
+        "construction",
+        "collision",
+        "solid",
+        "reusable"
+      ],
+      "complexity": "beginner",
+      "qfep_connection": "The same closed form changes bodily access: obstruction or support depends on placement and orientation."
+    },
+    "wedge_blocker": {
+      "lookup_name": "wedge_blocker",
+      "name": "Striped wedge / wp ramp",
+      "scene": "res://commons/artifacts/primitive_encounters/wedge_blocker.tscn",
+      "map_ready": true,
+      "description": "The original wp prism and collider. One metre wide, one metre high, two-metre run; floor-centred, rises towards +Z at facing zero.",
+      "category": "primitives",
+      "tags": [
+        "construction",
+        "collision",
+        "solid",
+        "reusable"
+      ],
+      "complexity": "beginner",
+      "qfep_connection": "The same closed form changes bodily access: obstruction or support depends on placement and orientation."
+    },
+    "platform_block": {
+      "lookup_name": "platform_block",
+      "name": "One-metre platform / structure 2",
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn",
+      "map_ready": true,
+      "description": "A supporting cube above the existing slab. Adjacent copies make a larger platform; the wp high edge joins its top.",
+      "category": "primitives",
+      "tags": [
+        "construction",
+        "collision",
+        "solid",
+        "reusable"
+      ],
+      "complexity": "beginner",
+      "qfep_connection": "The same closed form changes bodily access: obstruction or support depends on placement and orientation."
+    },
+    "void_cube_walkway": {
+      "lookup_name": "void_cube_walkway",
+      "name": "Cube + wedges / carried walk-up",
+      "scene": "res://commons/void/cube_walkway.tscn",
+      "description": "Thirty one-metre cubes and six original wp ramps form a walkable two-metre platform. Named pieces remain editable; Cube and Transformation instantiate the same construction recipe.",
+      "category": "primitives",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "beginner",
+      "map_sequences": [
+        "primitives",
+        "transformation"
+      ],
+      "tags": [
+        "cube",
+        "wedge",
+        "wp",
+        "building",
+        "platform",
+        "lineage"
+      ],
+      "interactions": [
+        "Walk up two connected rises and return",
+        "Move or copy individual members in the lab editor",
+        "Reuse the complete construction as a prefab"
+      ],
+      "qfep_connection": "Access is produced by the relation between exact solids: the same cube blocks a path or supports it according to its placement."
+    }
+  }
+}

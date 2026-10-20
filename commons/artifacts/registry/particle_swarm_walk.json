@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "particle_swarm_walk": {
+      "lookup_name": "particle_swarm_walk",
+      "name": "A place remembered",
+      "scene": "res://commons/artifacts/particle_swarm_walk/particle_swarm_walk.tscn",
+      "description": "Walk among 24 grabbable PointBodies on a12m score field. See personal and shared best positions. Change the objective while preserving current bodies and motion.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "footprint": [
+        13,
+        4,
+        14
+      ],
+      "size_group": "world_scale",
+      "tags": [
+        "pso",
+        "memory",
+        "objective",
+        "grabbable",
+        "walk-in"
+      ],
+      "qfep_connection": "A remembered score is accountable to the rule that produced it. Shared success can gather bodies without rewarding diversity.",
+      "parameters": {
+        "footprint": [
+          13,
+          4,
+          14
+        ],
+        "size_group": "world_scale"
+      }
+    }
+  }
+}

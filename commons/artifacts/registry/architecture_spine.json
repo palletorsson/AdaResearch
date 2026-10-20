@@ -1,0 +1,30 @@
+{
+  "id": "architecture_spine",
+  "name": "Architecture with joints",
+  "artifacts": {
+    "architecture_spine": {
+      "lookup_name": "architecture_spine",
+      "name": "The Corridor Has a Spine",
+      "scene": "res://commons/artifacts/architecture_spine/architecture_spine.tscn",
+      "description": "A research model of eight procedural architectural bays. Lift the pink handle to move all hinges from floor to roof; dials bend the hierarchy, separate its connections, and compound a scale ratio. Same rigid parts, different assembly. Model only: moving structure has no collision, gravity, portals or navigation. Use its separate preview.tscn review room.",
+      "category": "transforms",
+      "dev_category": "research",
+      "dev_themes": ["hierarchy", "architecture", "pivots", "local and global transforms"],
+      "tags": ["architecture", "pivot", "rigid assembly", "game spaces", "research"],
+      "complexity": "intermediate",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "map_sequences": [],
+      "interactions": [
+        "Lift the pink handle to move the shared hinge height from floor to roof.",
+        "BEND changes each joint angle; SEPARATE deliberately disconnects them.",
+        "EACH BAY compounds uniform scale through the hierarchy.",
+        "PASSAGE, FOLD and SLIP compare presets; RESET restores the original assembly."
+      ],
+      "qfep_connection": "A valid transform can retain every architectural part while destroying the route between them. Chosen centres determine which boundary stays connected; attachment alone does not establish an inhabitable space.",
+      "status": "research prototype; standalone controls tested, physical headset and walkable conversion pending",
+      "preview_scene": "res://commons/artifacts/architecture_spine/preview.tscn",
+      "report": "doc/book/iterations/2026-10-09-the-corridor-has-a-spine/index.html"
+    }
+  }
+}

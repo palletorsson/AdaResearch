@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "flow_crowd": {
+      "lookup_name": "flow_crowd",
+      "name": "A direction in common",
+      "scene": "res://commons/artifacts/flow_crowd/flow_crowd.tscn",
+      "description": "A walk-in crowd follows a shared route field around an island. Carry the familiar point toward A or B; trigger shows or hides floor arrows; release returns the same 24 bodies. Each body reads the field, not its neighbours.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [18,4,12],
+      "size_group": "world_scale",
+      "map_sequences": ["swarmintelligence"],
+      "tags": ["flow field","crowd","route","grabbable","shared guidance"],
+      "qfep_connection": "A collective turn can come from a prepared field without agreement between individuals. Visible directions expose that shared arrangement; the assigned parking places expose another supplied choice.",
+      "parameters": {"footprint": [18,4,12],"size_group":"world_scale"}
+    }
+  }
+}

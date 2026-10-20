@@ -229,6 +229,7 @@ func _receiver(surface: int, mesh: MeshInstance3D, extent: Vector2) -> void:
 
 func _build_desk() -> void:
 	var p := Kit.panel(self, "DRESS THE TEMPLE", Vector3(0, 1.2, -2.6), 0.0)
+	p.position.y += 0.2 # Keep the second row and its labels above the support.
 	p.layout_columns = 4
 	p.add_button("TARGET").pressed.connect(next_target)
 	p.add_button("SOURCE").pressed.connect(_step.bind("source", 0))

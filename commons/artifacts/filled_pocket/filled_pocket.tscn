@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/filled_pocket/filled_pocket.gd" id="1_script"]
+
+[node name="FilledPocket" type="Node3D"]
+script = ExtResource("1_script")
+wall = "ring"
+door = "sealed"
+show_readout = true

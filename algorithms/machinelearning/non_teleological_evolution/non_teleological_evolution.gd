@@ -1,5 +1,5 @@
 # non_teleological_evolution.gd
-# Bodies exist in a space. No fitness function. No selection pressure.
+# Bodies exist in a space. No explicit fitness ranking; energy still selects.
 # They reproduce based on proximity and energy (gained by moving to
 # unvisited areas, lost by existing). Over generations, forms diversify —
 # not toward any goal, just expanding possibility space.
@@ -25,8 +25,8 @@
 # means the claim was asserted rather than demonstrated — a map could not stand
 # the goal-less field next to a field that had a goal imposed on it.
 #
-# `drift` is the default and is the shipped look, byte for byte: the live
-# simulation, the same `hash("non_teleological")` seed, the same 30 mixed bodies.
+# `drift` retains the seeded opening and live energy economy. Since 11 October
+# 2026 it advances at 60 fixed simulation ticks/second, independent of rendering.
 # The other four values are what naming a goal COSTS — uniformity, a cull, a
 # paved field, a schism.
 #
@@ -128,6 +128,10 @@ var _no_fitness_label: Label3D
 
 var _creature_mesh: SphereMesh
 var _time_elapsed: float = 0.0
+const SIMULATION_DT: float = 1.0 / 60.0
+const RENEWAL_TICKS: int = 120 # One random cell becomes available every 2 simulated seconds.
+var _simulation_ticks: int = 0
+var _simulation_accumulator: float = 0.0
 var _rng := RandomNumberGenerator.new()
 
 ## Non-geometry key from curation_station.gd:367-372, which hands EVERY artifact
@@ -162,6 +166,8 @@ func _build_all() -> void:
 	_total_died = 0
 	_max_species_diversity = 0.0
 	_time_elapsed = 0.0
+	_simulation_ticks = 0
+	_simulation_accumulator = 0.0
 
 	_init_visited_grid()
 	_create_creature_mesh()
@@ -171,8 +177,7 @@ func _build_all() -> void:
 	_create_ground_plane()
 
 	# Push the seeded field into the MultiMesh immediately. Shipped code only did
-	# this from _process, so frame zero was a bare plane — a still taken at spawn
-	# read INERT. Every later frame is unchanged by this call.
+	# this from _process, so frame zero was a bare plane.
 	_update_multimesh()
 	_update_stats()
 
@@ -402,7 +407,7 @@ func _create_labels() -> void:
 	_track(_title_label)
 
 	_no_fitness_label = Label3D.new()
-	_no_fitness_label.text = "No fitness function. No goal. Just drift."
+	_no_fitness_label.text = "No fitness ranking. Energy selects."
 	_no_fitness_label.font_size = 14
 	_no_fitness_label.modulate = Color(0.7, 0.6, 0.5, 0.8)
 	_no_fitness_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -476,7 +481,20 @@ func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> St
 # ------------------------------------------------------------------
 
 func _process(delta: float) -> void:
-	_time_elapsed += delta
+	if selection != "drift" or not is_finite(delta) or delta <= 0.0:
+		return
+	_simulation_accumulator += delta
+	while _simulation_accumulator + 1e-10 >= SIMULATION_DT:
+		_simulation_accumulator -= SIMULATION_DT
+		_simulate_step(SIMULATION_DT)
+	_update_multimesh()
+	_update_stats()
+
+
+## Movement, random turns and renewal share this simulation clock, not drawn frames.
+func _simulate_step(delta: float) -> void:
+	_simulation_ticks += 1
+	_time_elapsed = _simulation_ticks * SIMULATION_DT
 
 	# Update each creature
 	var to_remove: Array[int] = []
@@ -557,15 +575,10 @@ func _process(delta: float) -> void:
 		)
 
 	# Slowly regenerate visited grid (areas become explorable again)
-	if Engine.get_frames_drawn() % 120 == 0:
+	if _simulation_ticks % RENEWAL_TICKS == 0:
 		var rx := _rng.randi_range(0, grid_resolution - 1)
 		var rz := _rng.randi_range(0, grid_resolution - 1)
 		_visited_grid[rx][rz] = false
-
-	# Update visuals
-	_update_multimesh()
-	_update_stats()
-
 
 func _update_multimesh() -> void:
 	if _multimesh == null:
@@ -603,3 +616,4 @@ func _update_stats() -> void:
 	_stats_label.text = "Pop: %d  |  Diversity: %d  |  Born: %d  |  Died: %d  |  Gen: %d" % [
 		_creatures.size(), diversity, _total_born, _total_died, _generation_count
 	]
+	_stats_label.text += "\nRenewal: 1 random cell / 2 simulated seconds" if selection == "drift" else "\nComposed arrangement / simulation stopped"

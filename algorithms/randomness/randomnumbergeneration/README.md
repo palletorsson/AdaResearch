@@ -30,3 +30,24 @@ The same grid concept but with color blocks — each cell maps a random number t
 - `scenes/random_number_book_page_collection.tscn` — Multi-page number layout.
 - `scenes/random_color_book_page_1955.tscn` — Color page scene.
 - `scenes/random_color_book_page_collection.tscn` — Multi-page color layout.
+
+## Number-page regression checks
+
+Run from the project root with Godot 4.6 (use your Godot executable path):
+
+```powershell
+godot --headless --path . --xr-mode off --audio-driver Dummy --script res://tests/test_rand_row_stream.gd
+godot --headless --path . --xr-mode off --audio-driver Dummy --script res://tests/test_rand_page_lifecycle.gd
+```
+
+The first check covers row timing, motion, touch selection and reprinting. The
+second runs the actual museum cartridge compiler while a row is moving, then
+checks retained digits, touch areas, continued animation and final cleanup.
+It also checks delayed reattachment, tally furniture, the legacy cascade and
+seeded pages. These are native scene checks, not physical headset tests.
+
+Temporary tree removal must preserve the page's generated children: museum
+packaging removes and reattaches the same artifact. Deleting those children in
+`_exit_tree()` left stale cell references and broke `_advance_stream()`. The
+parent node already frees its children when actually deleted; `_reprint()`
+handles deliberate replacement separately.

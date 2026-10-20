@@ -1,0 +1,594 @@
+{
+	"display_scale": "uniform: 1.2 / world_size",
+	"items": [
+		{
+			"config": {
+				"camera_pitch": 0.5,
+				"camera_yaw": 0.5,
+				"color_hi": [
+					0.95,
+					0.75,
+					0.3
+				],
+				"color_lo": [
+					0.2,
+					0.15,
+					0.25
+				],
+				"grid_size": 96.0,
+				"height_amp": 0.9,
+				"id": "rd01_spots_heightmap",
+				"iterations": 3000.0,
+				"layout": "rd_field",
+				"notes": "Classic Gray-Scott spots pattern (F=0.037, K=0.06). Heightmap render — V concentration lifts to form dome-islands. Reads as an atoll field.",
+				"preset": "spots",
+				"render_mode": "heightmap",
+				"seed": 7.0
+			},
+			"id": "rd01_spots_heightmap",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				0.0
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd01_spots_heightmap.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 0.6,
+				"camera_yaw": 0.4,
+				"color_hi": [
+					0.85,
+					0.9,
+					0.4
+				],
+				"color_lo": [
+					0.15,
+					0.25,
+					0.35
+				],
+				"grid_size": 96.0,
+				"height_amp": 0.7,
+				"id": "rd02_stripes_heightmap",
+				"iterations": 3500.0,
+				"layout": "rd_field",
+				"notes": "Stripes pattern (F=0.022, K=0.051). Long winding ridges — fingerprint, brain, reef aesthetic.",
+				"preset": "stripes",
+				"render_mode": "heightmap",
+				"seed": 3.0
+			},
+			"id": "rd02_stripes_heightmap",
+			"position": [
+				2.20000004768372,
+				0.0,
+				0.0
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd02_stripes_heightmap.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 0.55,
+				"camera_yaw": 0.4,
+				"color_hi": [
+					0.4,
+					0.85,
+					0.7
+				],
+				"color_lo": [
+					0.2,
+					0.2,
+					0.35
+				],
+				"grid_size": 96.0,
+				"height_amp": 0.9,
+				"id": "rd03_mazes_heightmap",
+				"iterations": 3500.0,
+				"layout": "rd_field",
+				"notes": "Maze pattern (F=0.029, K=0.057). Interconnected channels and walls — coral labyrinth.",
+				"preset": "mazes",
+				"render_mode": "heightmap",
+				"seed": 11.0
+			},
+			"id": "rd03_mazes_heightmap",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				3.40000009536743
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd03_mazes_heightmap.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 0.55,
+				"camera_yaw": 0.5,
+				"color_hi": [
+					0.95,
+					0.5,
+					0.35
+				],
+				"color_lo": [
+					0.25,
+					0.15,
+					0.15
+				],
+				"grid_size": 96.0,
+				"height_amp": 1.0,
+				"id": "rd04_coral_heightmap",
+				"iterations": 4000.0,
+				"layout": "rd_field",
+				"notes": "Coral pattern (F=0.062, K=0.061). Branching organic growth — bleached-coral aesthetic.",
+				"preset": "coral",
+				"render_mode": "heightmap",
+				"seed": 17.0
+			},
+			"id": "rd04_coral_heightmap",
+			"position": [
+				2.20000004768372,
+				0.0,
+				3.40000009536743
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd04_coral_heightmap.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 0.55,
+				"camera_yaw": 0.5,
+				"color_hi": [
+					0.7,
+					0.95,
+					0.9
+				],
+				"color_lo": [
+					0.1,
+					0.2,
+					0.25
+				],
+				"grid_size": 96.0,
+				"height_amp": 0.8,
+				"id": "rd05_mitosis_heightmap",
+				"iterations": 3500.0,
+				"layout": "rd_field",
+				"notes": "Mitosis pattern (F=0.0367, K=0.0649). Cells split and self-replicate — biology from two constants.",
+				"preset": "mitosis",
+				"render_mode": "heightmap",
+				"seed": 5.0
+			},
+			"id": "rd05_mitosis_heightmap",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				6.80000019073486
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd05_mitosis_heightmap.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 0.4,
+				"camera_yaw": 0.5,
+				"color_hi": [
+					0.95,
+					0.55,
+					0.3
+				],
+				"color_lo": [
+					0.4,
+					0.2,
+					0.15
+				],
+				"grid_size": 72.0,
+				"id": "rd06_coral_pillars",
+				"iterations": 4000.0,
+				"layout": "rd_pillars",
+				"notes": "Coral pattern rendered as pillars — 3D forest of polyps. Above-threshold cells become stubby columns, V concentration drives height.",
+				"preset": "coral",
+				"render_mode": "pillars",
+				"seed": 21.0,
+				"threshold": 0.22
+			},
+			"id": "rd06_coral_pillars",
+			"position": [
+				2.20000004768372,
+				0.0,
+				6.80000019073486
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd06_coral_pillars.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 1.3,
+				"camera_yaw": 0.001,
+				"color_hi": [
+					0.95,
+					0.85,
+					0.35
+				],
+				"color_lo": [
+					0.12,
+					0.15,
+					0.25
+				],
+				"grid_size": 128.0,
+				"id": "rd07_stripes_plate",
+				"iterations": 5000.0,
+				"layout": "rd_plate",
+				"notes": "High-res stripes pattern rendered as a flat textured plate viewed from above. Pure pattern, no geometry — the V field as image.",
+				"preset": "stripes",
+				"render_mode": "plate",
+				"seed": 9.0,
+				"world_size": 2.0
+			},
+			"id": "rd07_stripes_plate",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				10.1999998092651
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd07_stripes_plate.scn"
+		},
+		{
+			"config": {
+				"camera_pitch": 0.5,
+				"camera_yaw": 0.5,
+				"color_hi": [
+					1.0,
+					0.65,
+					0.3
+				],
+				"color_lo": [
+					0.15,
+					0.1,
+					0.2
+				],
+				"grid_size": 96.0,
+				"height_amp": 0.9,
+				"id": "rd08_chaos_heightmap",
+				"iterations": 5000.0,
+				"layout": "rd_field",
+				"notes": "Chaotic parameters never reach equilibrium. Field evolves continuously — 5000 iterations produces a perpetually-morphing ridge landscape.",
+				"preset": "chaos",
+				"render_mode": "heightmap",
+				"seed": 13.0
+			},
+			"id": "rd08_chaos_heightmap",
+			"position": [
+				2.20000004768372,
+				0.0,
+				10.1999998092651
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd08_chaos_heightmap.scn"
+		},
+		{
+			"config": {
+				"F": 0.03,
+				"K": 0.055,
+				"camera_pitch": 1.28,
+				"camera_yaw": 0.001,
+				"color_hi": [
+					0.96,
+					0.84,
+					0.42
+				],
+				"color_lo": [
+					0.08,
+					0.14,
+					0.24
+				],
+				"grid_size": 128.0,
+				"id": "rd09_delta_turing_plate",
+				"iterations": 6000.0,
+				"layout": "rd_plate",
+				"notes": "Munafo/Pearson δ-class region (F=0.030, K=0.055): Turing-like hexagonal negatons and grain boundaries, rendered top-down so the lattice reads clearly.",
+				"render_mode": "plate",
+				"seed": 23.0,
+				"world_size": 2.1
+			},
+			"id": "rd09_delta_turing_plate",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				13.6000003814697
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd09_delta_turing_plate.scn"
+		},
+		{
+			"config": {
+				"F": 0.03,
+				"K": 0.057,
+				"camera_pitch": 0.58,
+				"camera_yaw": 0.42,
+				"color_hi": [
+					0.52,
+					0.88,
+					0.82
+				],
+				"color_lo": [
+					0.12,
+					0.16,
+					0.28
+				],
+				"grid_size": 112.0,
+				"height_amp": 0.82,
+				"id": "rd10_theta_ring_heightmap",
+				"iterations": 5200.0,
+				"layout": "rd_field",
+				"notes": "θ-class ring-growing regime (F=0.030, K=0.057): blue spots swell into concentric rings and joining stripe networks.",
+				"render_mode": "heightmap",
+				"seed": 29.0
+			},
+			"id": "rd10_theta_ring_heightmap",
+			"position": [
+				2.20000004768372,
+				0.0,
+				13.6000003814697
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd10_theta_ring_heightmap.scn"
+		},
+		{
+			"config": {
+				"F": 0.046,
+				"K": 0.0594,
+				"camera_pitch": 1.28,
+				"camera_yaw": 0.001,
+				"color_hi": [
+					0.92,
+					0.54,
+					0.3
+				],
+				"color_lo": [
+					0.1,
+					0.12,
+					0.2
+				],
+				"grid_size": 128.0,
+				"id": "rd11_iota_negaton_plate",
+				"iterations": 5800.0,
+				"layout": "rd_plate",
+				"notes": "ι-class molecule regime (F=0.046, K=0.0594): negatons interact like clustered molecules, a useful bridge between spots and stripe-bearing classes.",
+				"render_mode": "plate",
+				"seed": 31.0,
+				"world_size": 2.1
+			},
+			"id": "rd11_iota_negaton_plate",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				17.0
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd11_iota_negaton_plate.scn"
+		},
+		{
+			"config": {
+				"F": 0.05,
+				"K": 0.063,
+				"camera_pitch": 0.42,
+				"camera_yaw": 0.52,
+				"color_hi": [
+					0.84,
+					0.74,
+					0.46
+				],
+				"color_lo": [
+					0.18,
+					0.18,
+					0.16
+				],
+				"grid_size": 80.0,
+				"id": "rd12_kappa_hedgerow_pillars",
+				"iterations": 5200.0,
+				"layout": "rd_pillars",
+				"notes": "κ-class hedgerow maze (F=0.050, K=0.063): width-wise growing stripes and coral-like irregular shapes, rendered as a low architectural pillar field.",
+				"render_mode": "pillars",
+				"seed": 37.0,
+				"threshold": 0.2
+			},
+			"id": "rd12_kappa_hedgerow_pillars",
+			"position": [
+				2.20000004768372,
+				0.0,
+				17.0
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd12_kappa_hedgerow_pillars.scn"
+		},
+		{
+			"config": {
+				"F": 0.026,
+				"K": 0.061,
+				"camera_pitch": 0.56,
+				"camera_yaw": 0.48,
+				"color_hi": [
+					0.88,
+					0.92,
+					0.66
+				],
+				"color_lo": [
+					0.12,
+					0.18,
+					0.24
+				],
+				"grid_size": 112.0,
+				"height_amp": 0.76,
+				"id": "rd13_lambda_hex_heightmap",
+				"iterations": 5600.0,
+				"layout": "rd_field",
+				"notes": "λ-class mitosis field (F=0.026, K=0.061): self-dividing solitons settle into a quasi-hexagonal packing rather than endless die-out.",
+				"render_mode": "heightmap",
+				"seed": 41.0
+			},
+			"id": "rd13_lambda_hex_heightmap",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				20.3999996185303
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd13_lambda_hex_heightmap.scn"
+		},
+		{
+			"config": {
+				"F": 0.022,
+				"K": 0.059,
+				"camera_pitch": 1.3,
+				"camera_yaw": 0.001,
+				"color_hi": [
+					0.98,
+					0.72,
+					0.44
+				],
+				"color_lo": [
+					0.08,
+					0.1,
+					0.16
+				],
+				"grid_size": 128.0,
+				"id": "rd14_epsilon_overcrowd_plate",
+				"iterations": 5600.0,
+				"layout": "rd_plate",
+				"notes": "ε-class overcrowding field (F=0.022, K=0.059): unstable spots, ring growth, die-outs, and refilling make a more turbulent companion to the steadier λ-class outputs.",
+				"render_mode": "plate",
+				"seed": 43.0,
+				"world_size": 2.05
+			},
+			"id": "rd14_epsilon_overcrowd_plate",
+			"position": [
+				2.20000004768372,
+				0.0,
+				20.3999996185303
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd14_epsilon_overcrowd_plate.scn"
+		},
+		{
+			"config": {
+				"F": 0.046,
+				"K": 0.065,
+				"camera_pitch": 0.58,
+				"camera_yaw": 0.46,
+				"color_hi": [
+					0.9,
+					0.68,
+					0.42
+				],
+				"color_lo": [
+					0.14,
+					0.16,
+					0.2
+				],
+				"grid_size": 112.0,
+				"height_amp": 0.8,
+				"id": "rd15_mu_worm_heightmap",
+				"iterations": 5600.0,
+				"layout": "rd_field",
+				"notes": "μ-class worm regime (F=0.046, K=0.065): stripes elongate from their ends and reorganize into disconnected lane systems.",
+				"render_mode": "heightmap",
+				"seed": 47.0
+			},
+			"id": "rd15_mu_worm_heightmap",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				23.7999992370605
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd15_mu_worm_heightmap.scn"
+		},
+		{
+			"config": {
+				"F": 0.026,
+				"K": 0.059,
+				"camera_pitch": 0.57,
+				"camera_yaw": 0.46,
+				"color_hi": [
+					0.8,
+					0.92,
+					0.78
+				],
+				"color_lo": [
+					0.14,
+					0.16,
+					0.22
+				],
+				"grid_size": 112.0,
+				"height_amp": 0.74,
+				"id": "rd16_zeta_stable_heightmap",
+				"iterations": 5600.0,
+				"layout": "rd_field",
+				"notes": "ζ-class stable-spot terrain (F=0.026, K=0.059): still lively, but calmer and more symmetric than ε, with longer-lived spot clusters.",
+				"render_mode": "heightmap",
+				"seed": 53.0
+			},
+			"id": "rd16_zeta_stable_heightmap",
+			"position": [
+				2.20000004768372,
+				0.0,
+				23.7999992370605
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd16_zeta_stable_heightmap.scn"
+		},
+		{
+			"config": {
+				"F": 0.034,
+				"K": 0.063,
+				"camera_pitch": 0.57,
+				"camera_yaw": 0.44,
+				"color_hi": [
+					0.94,
+					0.7,
+					0.36
+				],
+				"color_lo": [
+					0.16,
+					0.14,
+					0.24
+				],
+				"grid_size": 112.0,
+				"height_amp": 0.78,
+				"id": "rd17_eta_spotworm_heightmap",
+				"iterations": 5600.0,
+				"layout": "rd_field",
+				"notes": "η-class spot-and-worm mixture (F=0.034, K=0.063): short worms, spots, and low-level ongoing activity between pure stripe and pure mitosis regimes.",
+				"render_mode": "heightmap",
+				"seed": 59.0
+			},
+			"id": "rd17_eta_spotworm_heightmap",
+			"position": [
+				-2.20000004768372,
+				0.0,
+				27.2000007629395
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd17_eta_spotworm_heightmap.scn"
+		},
+		{
+			"config": {
+				"F": 0.026,
+				"K": 0.055,
+				"camera_pitch": 0.57,
+				"camera_yaw": 0.45,
+				"color_hi": [
+					0.84,
+					0.86,
+					0.48
+				],
+				"color_lo": [
+					0.12,
+					0.14,
+					0.22
+				],
+				"grid_size": 112.0,
+				"height_amp": 0.82,
+				"id": "rd18_gamma_branch_heightmap",
+				"iterations": 5600.0,
+				"layout": "rd_field",
+				"notes": "γ-class unstable stripe field (F=0.026, K=0.055): branching worms and occasional local instabilities, sitting between the calmer stripe regimes and the more volatile ε territory.",
+				"render_mode": "heightmap",
+				"seed": 61.0
+			},
+			"id": "rd18_gamma_branch_heightmap",
+			"position": [
+				2.20000004768372,
+				0.0,
+				27.2000007629395
+			],
+			"scene": "res://commons/artifacts/rd_museum_gallery/rd18_gamma_branch_heightmap.scn"
+		}
+	],
+	"snapshot": true,
+	"source": "res://commons/rd_grammar/research_configs.json",
+	"source_sha256": "4c6f8d752b54580f1722865c87f200860d23577c1346cd0422ae5c5371250960"
+}

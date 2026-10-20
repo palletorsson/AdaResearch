@@ -1,0 +1,15 @@
+{
+  "registry_info": {"name": "Shader retained-state chamber", "category": "shaders"},
+  "artifacts": {
+    "shader_state_chamber": {
+      "lookup_name": "shader_state_chamber",
+      "scene": "res://commons/artifacts/shader_state_chamber/shader_state_chamber.tscn",
+      "name": "What stays when you let go?",
+      "description": "Draw a retained concentration on a wall, hold it, advance one Gray–Scott update, or run. The same stored field dresses a sphere and cube; nearby Memory Skin is a moving-noise counterexample.",
+      "category": "shaders", "complexity": "advanced", "map_ready": true,
+      "interactions": ["Touch the wall or point and press to mark", "RUN/HOLD or one STEP", "RESET the three seeds or CLEAR the field", "FEED / LOSS change future updates", "INK changes display colour only"],
+      "tags": ["reaction-diffusion", "retained-state", "feedback", "gpu", "surface-painting"],
+      "qfep_connection": "A surface can look marked without retaining an encounter. Here input, retained concentrations, update rule and colour interpretation have distinct owners. Uniformity needs an introduced difference before a pattern can spread."
+    }
+  }
+}

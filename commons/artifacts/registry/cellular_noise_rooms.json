@@ -1,0 +1,208 @@
+{
+  "artifacts": {
+    "cellular_womb_space": {
+      "lookup_name": "cellular_womb_space",
+      "name": "Cellular Womb Space",
+      "scene": "res://commons/context/cellular_spaces/cellular_womb_space.tscn",
+      "description": "A curved pink cellular enclosure with a continuous rounded ceiling, level floor and wide entrance.",
+      "qfep_connection": "Compare a distance boundary with the walls, openings and shared rooms built from it.",
+      "category": "procedural",
+      "dev_category": "noise",
+      "complexity": "intermediate",
+      "tags": [
+        "cellular",
+        "voronoi",
+        "walkable",
+        "3d"
+      ],
+      "parameters": {
+        "footprint": [
+          28,
+          11,
+          29
+        ],
+        "size_group": "room_scale",
+        "seed": "Reproducible cellular seed",
+        "softness": "Shell deformation from 0 to 0.9",
+        "clearing_radius": "Central opening radius from 3.5 to 5.5 metres"
+      },
+      "interactions": [
+        "Walk through the entrance",
+        "Compare the enclosure with the open central space"
+      ],
+      "sequence": "noise",
+      "map_sequences": [
+        "noise"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false
+    },
+    "cellular_atrium_space": {
+      "lookup_name": "cellular_atrium_space",
+      "name": "Cellular Open Centre",
+      "scene": "res://commons/context/cellular_spaces/cellular_atrium_space.tscn",
+      "description": "Sixteen enterable ground-level Voronoi cells with arched passages and central wall portions removed to create a larger common room.",
+      "qfep_connection": "Compare a distance boundary with the walls, openings and shared rooms built from it.",
+      "category": "procedural",
+      "dev_category": "noise",
+      "complexity": "intermediate",
+      "tags": [
+        "cellular",
+        "voronoi",
+        "walkable",
+        "3d"
+      ],
+      "parameters": {
+        "footprint": [
+          28,
+          11,
+          29
+        ],
+        "size_group": "room_scale",
+        "seed": "Reproducible cellular seed",
+        "softness": "Shell deformation from 0 to 0.9",
+        "clearing_radius": "Central opening radius from 3.5 to 5.5 metres"
+      },
+      "interactions": [
+        "Walk through the entrance",
+        "Compare the enclosure with the open central space"
+      ],
+      "sequence": "noise",
+      "map_sequences": [
+        "noise"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false
+    },
+    "box_shell_space": {
+      "lookup_name": "box_shell_space",
+      "name": "Box Noise Shell",
+      "scene": "res://commons/context/cellular_spaces/box_shell_space.tscn",
+      "description": "A box-sampled version of the cellular space, with axis-aligned exposed faces, stepped walls and ceilings, level floor and standing-height openings.",
+      "qfep_connection": "Compare a distance boundary with the walls, openings and shared rooms built from it.",
+      "category": "procedural",
+      "dev_category": "noise",
+      "complexity": "intermediate",
+      "tags": [
+        "cellular",
+        "voronoi",
+        "walkable",
+        "3d",
+        "box",
+        "voxel"
+      ],
+      "parameters": {
+        "footprint": [
+          28,
+          11,
+          29
+        ],
+        "size_group": "room_scale",
+        "seed": "Reproducible cellular seed",
+        "softness": "Shell deformation from 0 to 0.9",
+        "clearing_radius": "Central opening radius from 3.5 to 5.5 metres",
+        "box_size": "Target box side in metres, 0.4 to 0.75"
+      },
+      "interactions": [
+        "Walk through the entrance",
+        "Compare the enclosure with the open central space"
+      ],
+      "sequence": "noise",
+      "map_sequences": [
+        "noise"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false
+    },
+    "box_atrium_space": {
+      "lookup_name": "box_atrium_space",
+      "name": "Box Noise Open Centre",
+      "scene": "res://commons/context/cellular_spaces/box_atrium_space.tscn",
+      "description": "A box-sampled version of the cellular space, with axis-aligned exposed faces, stepped walls and ceilings, level floor and standing-height openings.",
+      "qfep_connection": "Compare a distance boundary with the walls, openings and shared rooms built from it.",
+      "category": "procedural",
+      "dev_category": "noise",
+      "complexity": "intermediate",
+      "tags": [
+        "cellular",
+        "voronoi",
+        "walkable",
+        "3d",
+        "box",
+        "voxel"
+      ],
+      "parameters": {
+        "footprint": [
+          28,
+          11,
+          29
+        ],
+        "size_group": "room_scale",
+        "seed": "Reproducible cellular seed",
+        "softness": "Shell deformation from 0 to 0.9",
+        "clearing_radius": "Central opening radius from 3.5 to 5.5 metres",
+        "box_size": "Target box side in metres, 0.4 to 0.75"
+      },
+      "interactions": [
+        "Walk through the entrance",
+        "Compare the enclosure with the open central space"
+      ],
+      "sequence": "noise",
+      "map_sequences": [
+        "noise"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false
+    },
+    "voronoi_strands": {
+      "lookup_name": "voronoi_strands",
+      "auto_ground": false,
+      "name": "Voronoi Strands",
+      "scene": "res://commons/context/cellular_spaces/voronoi_strands.tscn",
+      "description": "An open three-dimensional Voronoi edge skeleton drawn in thin charcoal tubes, with shared junctions and cords anchored directly to surrounding floors, walls and ceilings. Seeded sites define the cell geometry. No opaque cell faces or line collision. An enlarged eight-legged spider lays the lines progressively, tracing the mathematical graph as an artwork rather than simulating natural web growth. All strands belong to one connected graph with shared 3D junctions and explicit attachments to room surfaces. The completed net relaxes under gravity with tension-only cables, fixed room anchors and unbreakable shared knots.",
+      "qfep_connection": "A partition remains legible as lines while its faces no longer bar passage. The attachment cords depend on the host architecture. Releasing the net distinguishes its distance construction from its shape under load: shared knots transmit a pull while fixed room anchors carry it.",
+      "category": "procedural",
+      "dev_category": "noise",
+      "complexity": "intermediate",
+      "tags": [
+        "voronoi",
+        "cellular",
+        "3d",
+        "lines",
+        "strands",
+        "suspension",
+        "spider"
+      ],
+      "parameters": {
+        "footprint": [
+          10.2,
+          8.7,
+          9.4
+        ],
+        "size_group": "room_scale",
+        "seed": "Deterministic seed",
+        "cells": "32–240 feature points",
+        "thickness": "Strand radius in metres",
+        "anchors": "0–64 tethers to existing floors, walls and ceilings", "surface_reach": "Maximum surface search distance in metres, 5 to 100", "wall_reach": "Legacy grid alias for surface_reach",
+        "weave": "Build progressively with a spider; false immediately releases the complete net",
+        "weave_speed": "Spider travel speed in metres per second, 0.1 to 20", "tension": "Release the completed net under gravity; false preserves the Voronoi construction", "compliance": "Cable stretch per newton, 0.000001 to 0.001 m/N", "knot_mass": "Mass per free shared knot, 0.001 to 0.1 kg"
+      },
+      "interactions": [
+        "Walk around and through the open structure",
+        "Inspect the polygon edges from different viewpoints",
+        "Watch the spider lay strands and retrace completed branches",
+        "Highlight shared junctions with Space in the standalone preview", "F finishes and releases the net; G tugs a knot; P pauses forces"
+      ],
+      "sequence": "noise",
+      "map_sequences": [
+        "noise"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true
+    }
+  }
+}

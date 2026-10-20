@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "forbidden_bands": {
+      "lookup_name": "forbidden_bands",
+      "name": "Forbidden Bands",
+      "class_name": "ForbiddenBands",
+      "scene": "res://commons/artifacts/forbidden_bands/forbidden_bands.tscn",
+      "category": "softbodies",
+      "artifact_type": "demonstration",
+      "complexity": "intermediate",
+      "description": "A tilted dish whose rim carries raised red walls, and a soft ball that rolls downhill and settles wherever the bands leave open - the resting azimuth is the artifact's answer, measured off the settled body. With no bands the ball rests straight downhill at azimuth zero: the control that makes every later deflection attributable. A pair of bands straddling downhill sends it to minus thirty degrees, sixteen past the band's edge - refusal measured as an angle. A belt leaves no clear arc and the ball rests ON the forbidden: when everything is foreclosed, refusal has nowhere to send you. On a level dish the rim is never consulted and the bands are honestly scenery. Gated at 60 and 90 Hz. Three findings are built into the geometry and documented in the script: the minimum of a tilted bowl is interior (early leans parked the ball 45 mm out and the bands were never met), a curved bumper exerts zero tangential force at azimuth zero so nothing ever deflected off it (the bands are FLAT chord walls now, like the source figure's straight cuts, and the slide to the edge falls out of the plane projection), and droplet_cusp's wedge-grip acted as static friction here, so the dish runs slick at 0.12. The ball is the family's owned verlet pressure shell; resting ON a band means the body's centroid stands in its sector while the shell leans on its wall - a point grazing a band's end corner on the way past is a clear rest. The Q at the blanket's edge made physical: where you come to rest is the shape of what refused you. Readable via rest_azimuth_deg(), on_band(), at_rim(), nearest_band_edge_deg().",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [1, 1, 1],
+      "map_sequences": ["softbodies", "qfeplaboratory", "postfoundationscrisis"],
+      "tags": ["constraint", "foreclosure", "settling", "verlet", "deflection", "qfep", "hand"],
+      "parameters": {
+        "footprint": [1, 1, 1],
+        "size_group": "compact"
+      },
+      "dna": {
+        "axes": {
+          "bands": ["none", "pair", "quartet", "belt"],
+          "lean": ["level", "faint", "firm", "steep"]
+        },
+        "predicted_degeneracy": {
+          "pair": "bands: pair <-> quartet, at lean=level",
+          "predicted_bite_pct": 3.5,
+          "basis": "LOWER BOUND, as every prediction in this corpus has been, by 1.5x to 6.7x. At level the ball sits centered and identical in both frames, so the only difference is scenery: two extra red walls of roughly 110 x 50 mm on a dish that fills perhaps 35 percent of frame. Two walls are about 10 percent of the dish's projected area at an oblique view. FRAME = 0.35 * 0.10 = 3.5 percent.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below about 3.5 percent the likely causes in order are (a) the capture standpoint putting the two extra quartet walls at 90 and 284 degrees behind the dish's near rim, which is occlusion, not inertness - probe_anamorphic before any verdict; (b) the ball not yet settled when the frame was shot, adding noise that masks the walls (is_settled is readable); (c) a bands value BANDS_SET does not carry, failing silently to pair.",
+          "structural_degeneracy_predicted": "SAID BEFORE THE SWEEP, seventh artifact running. Expect lean to be CONDITIONAL on bands only weakly (the ball's rest moves at every lean), but expect bands to be CONDITIONAL on lean STRONGLY: at level all four band values hold the ball at dead centre and differ only as furniture, and at faint the interior minimum keeps the rim out of reach, so the axis argues only at firm and steep. Read per-pair rows grouped by lean. The verdict plate changes text in nearly every cell, which is honest here because the azimuth it prints is measured off the settled body, not captioned."
+        }
+      },
+      "spatial_needs": {
+        "platform": "plinth",
+        "footprint_cells": 1,
+        "clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

@@ -1,12 +1,35 @@
 extends Node3D
+class_name PulsMarkov
+
+## A Markov blanket as a PULSING MEMBRANE: an inner sphere, an outer sphere, a
+## membrane between them, and information hotspots crossing it. It shows that a
+## blanket exists and that it is never still.
+##
+## It does not test whether the blanket separates anything. For the falsifiable
+## version -- a lattice with a search that reports SEPARATED or REACHED, and
+## draws the path when it fails -- see markov_blanket_room. The two are meant to
+## stand together: this one is the membrane, that one is the claim.
+##
+## Repaired 2026-10-13: it installed a camera, an environment and a light, and
+## had no exports and an empty apply_grid_config, so no map could place it or
+## configure it. See _setup_scene.
 
 # Parameters for the cell
 var center = Vector3(0, 0, 0)
-var base_radius = 1.0
-var sphere_resolution = 32  # Resolution for the sphere mesh
-var noise_scale = 0.3
-var pulse_speed = 1.0
-var max_amplitude = 0.3
+
+## Seeded, so two placements of this token are the same organism. Until
+## 2026-10-13 _ready called randomize(), which meant every placement was a
+## different object and any verdict recorded about it was a fact about the dice.
+@export var generation_seed: int = 20261013
+
+@export var base_radius: float = 1.0
+@export_range(8, 48, 1) var sphere_resolution: int = 32
+@export var noise_scale: float = 0.3
+@export var pulse_speed: float = 1.0
+@export var max_amplitude: float = 0.3
+## Draw the two entropy readouts. Off in a museum hall, where the labels read as
+## instrument chrome beside works that carry no numbers.
+@export var show_readout: bool = true
 
 # Information and entropy variables
 var inner_entropy = 0.5
@@ -36,11 +59,15 @@ var hotspot_parent
 var inner_entropy_label
 var outer_entropy_label
 
+var _rng := RandomNumberGenerator.new()
+
+
 func _ready() -> void:
-	randomize()
-	
+	_rng.seed = generation_seed
+	seed(generation_seed)              # the file's bare randf()/randi() calls
+
 	# Configure noise with FastNoiseLite
-	noise.seed = randi()
+	noise.seed = generation_seed
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX
 	noise.fractal_type = FastNoiseLite.FRACTAL_FBM
 	noise.fractal_octaves = 4
@@ -55,31 +82,18 @@ func _ready() -> void:
 		_generate_hotspot()
 
 func _setup_scene() -> void:
-	# Setup camera
-	var camera = Camera3D.new()
-	camera.position = Vector3(0, 0, 5)
-	camera.current = true
-	add_child(camera)
-	
-	# Add environment
-	var environment = WorldEnvironment.new()
-	var env = Environment.new()
-	env.background_mode = Environment.BG_COLOR
-	env.background_color = Color(0.05, 0.05, 0.1)
-	env.ambient_light_color = Color(0.2, 0.2, 0.3)
-	env.fog_enabled = true
-	#env.fog_color = Color(0.05, 0.05, 0.1)
-	env.fog_depth_begin = 10.0
-	env.fog_depth_end = 30.0
-	environment.environment = env
-	add_child(environment)
-	
-	# Add lighting
-	var light = DirectionalLight3D.new()
-	light.position = Vector3(10, 10, 10)
-	light.look_at_from_position(light.position, Vector3.ZERO, Vector3.UP)
-	add_child(light)
-	
+	# 2026-10-13: THE CAMERA, THE WorldEnvironment AND THE LIGHT WERE REMOVED.
+	#
+	# This scene installed a Camera3D with `current = true`, a WorldEnvironment
+	# with its own background and fog, and a DirectionalLight3D. Dropped into a
+	# map that takes the player's eyes, repaints the hall's sky and relights
+	# everything around it -- which is why this artifact carried
+	# `map_sequences: []` and stood in no sequence for its whole life, while
+	# sitting in Gallery_Neuroscience hijacking it.
+	#
+	# An artifact lights nothing but itself and frames nothing at all. A demo
+	# that wants a camera is a scene you run directly, not an artifact.
+
 	# Create inner cell mesh
 	inner_mesh_instance = MeshInstance3D.new()
 	inner_mesh_instance.mesh = SphereMesh.new()
@@ -137,19 +151,29 @@ func _setup_scene() -> void:
 	hotspot_parent.name = "Hotspots"
 	add_child(hotspot_parent)
 	
-	# Add UI for entropy values
-	var canvas_layer = CanvasLayer.new()
-	add_child(canvas_layer)
-	
-	inner_entropy_label = Label.new()
-	inner_entropy_label.position = Vector2(20, 20)
-	inner_entropy_label.text = "Inner Entropy: 0.5"
-	canvas_layer.add_child(inner_entropy_label)
-	
-	outer_entropy_label = Label.new()
-	outer_entropy_label.position = Vector2(20, 60)
-	outer_entropy_label.text = "Outer Entropy: 0.5"
-	canvas_layer.add_child(outer_entropy_label)
+	# THE READOUT IS IN THE WORLD, NOT ON THE SCREEN. This was a CanvasLayer
+	# holding two 2D Labels, which in a map paints text across the player's
+	# whole view from wherever the artifact happens to stand -- the same class
+	# of theft as the camera. Label3D sits on the object and is read by walking
+	# up to it, which is how every other readout in this museum works.
+	if show_readout:
+		inner_entropy_label = Label3D.new()
+		inner_entropy_label.text = "Inner Entropy: 0.5"
+		inner_entropy_label.font_size = 42
+		inner_entropy_label.pixel_size = 0.0022
+		inner_entropy_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		inner_entropy_label.position = Vector3(0, base_radius * 2.1, 0)
+		inner_entropy_label.modulate = inner_color
+		add_child(inner_entropy_label)
+
+		outer_entropy_label = Label3D.new()
+		outer_entropy_label.text = "Outer Entropy: 0.5"
+		outer_entropy_label.font_size = 42
+		outer_entropy_label.pixel_size = 0.0022
+		outer_entropy_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		outer_entropy_label.position = Vector3(0, base_radius * 1.85, 0)
+		outer_entropy_label.modulate = outer_color
+		add_child(outer_entropy_label)
 
 func _process(delta: float) -> void:
 	time_passed += delta
@@ -429,5 +453,26 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Was a bare `pass`, so a map token could name this artifact but never change
+## anything about it. All four keys below are WORD- or NUMBER-valued; the three
+## numeric ones are listed in GridInteractablesComponent.CONFIG_PARAM_NAMES, so
+## `#pulse_speed:2.0` reaches this method instead of being read as the
+## positional rotation shorthand.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("generation_seed"):
+		generation_seed = int(config["generation_seed"])
+		_rng.seed = generation_seed
+		seed(generation_seed)
+		noise.seed = generation_seed
+	if config.has("pulse_speed"):
+		pulse_speed = maxf(0.0, float(config["pulse_speed"]))
+	if config.has("noise_scale"):
+		noise_scale = maxf(0.0, float(config["noise_scale"]))
+	if config.has("max_amplitude"):
+		max_amplitude = clampf(float(config["max_amplitude"]), 0.0, 2.0)
+	if config.has("show_readout"):
+		show_readout = bool(config["show_readout"])
+		if not show_readout:
+			for l in [inner_entropy_label, outer_entropy_label]:
+				if is_instance_valid(l):
+					l.visible = false

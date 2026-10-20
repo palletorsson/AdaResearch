@@ -1,0 +1,41 @@
+{
+  "id": "fuzzy_doorway",
+  "name": "A doorway reads your approach",
+  "artifacts": {
+    "fuzzy_doorway": {
+      "lookup_name": "fuzzy_doorway",
+      "name": "A doorway reads your approach",
+      "scene": "res://commons/artifacts/fuzzy_doorway/fuzzy_doorway.tscn",
+      "preview_scene": "res://commons/artifacts/fuzzy_doorway/museum.tscn",
+      "description": "Walk slowly or quickly toward a fourteen-rib arch. Fuzzy near/slow/fast rules open, curl or rest its geometry. Live museum body/XR-head input; visible rule weights, native reach/pace controls and separately labelled demonstrations.",
+      "category": "transforms",
+      "dev_category": "research",
+      "dev_themes": [
+        "fuzzy rules",
+        "embodied input",
+        "architecture"
+      ],
+      "tags": [
+        "fuzzy",
+        "doorway",
+        "approach",
+        "speed"
+      ],
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "shaders"
+      ],
+      "interactions": [
+        "Walk toward and through the opening; retreat and return.",
+        "Turn REACH and PACE to change the definitions of near and fast.",
+        "LIVE reads the visitor; DEMO SLOW/FAST supplies declared distance/speed; RESET restores defaults.",
+        "SWAP RULES reverses which approach opens the ribs; the displayed rule labels change with it."
+      ],
+      "qfep_connection": "A responsive doorway classifies an approach according to authored distances and paces. Graded rules make its terms adjustable; they do not infer the visitor's intent or identity.",
+      "status": "Installed after fuzzy_body in rear Shader_05_Patterns gallery",
+      "report": "doc/book/iterations/2026-10-09-a-doorway-reads-your-approach/index.html"
+    }
+  }
+}

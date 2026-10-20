@@ -1,5 +1,39 @@
 {
 	"artifacts": {
+		"camera_glitch_study": {
+			"name": "Camera image becomes body",
+			"lookup_name": "camera_glitch_study",
+			"category": "shaders",
+			"complexity": "intermediate",
+			"description": "One actual museum camera: ten spatial forms and ten flat pixel operations. Pick up the camera; compare the source with chopped rows, wrong row widths, exchanged blocks and displaced colour channels.",
+			"scene": "res://commons/artifacts/camera_glitch_study/CameraGlitchStudy.tscn",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": [
+				"shaders"
+			],
+			"footprint": [
+				6.4,
+				4.2,
+				4.5
+			],
+			"parameters": {
+				"size_group": "large",
+				"footprint": [
+					6.4,
+					4.2,
+					4.5
+				]
+			},
+			"dev_themes": [
+				"UV",
+				"camera",
+				"sampling",
+				"glitch",
+				"geometry"
+			],
+			"qfep_connection": "An observation acquires a body through a chosen mapping. Brightness is not depth; display deformation does not move the observed room."
+		},
 		"Shader_Gallery": {
 			"category": "unknown",
 			"complexity": "beginner",

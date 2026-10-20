@@ -1,43 +1,32 @@
-# Omoss -- Liquid Fabric Composition
+# Move the Centre
 
-A procedural 3D composition inspired by the digital art style of Albert Omoss, blending glossy liquid surfaces with fabric-like textures. This artifact teaches the concept that **randomness combined with material variety produces organic, tactile compositions** -- demonstrating how surface properties (roughness, clearcoat, refraction, normal maps) interact with random geometry to create visual richness.
+The registry key `omoss` now creates a six-limbed creature with three eyes and a tail. All geometry, bones and skin weights are generated in Godot. This is an experiment prompted by Albert Omoss's transforming bodies, not a reconstruction of his technique or a copy of his figures.
 
-## How It Works
+## Run
 
-1. **Environment setup** -- A soft pink background with SSAO (depth), SSR (reflections), and glow. Three lights (key, rim, fill) provide cinematic illumination.
+Open `preview.tscn` in this folder and press F6 for a quiet museum review room with the project's desktop player. The artifact itself is `omoss.tscn`; it is also placed in `Ribbon_Randomness_02`. That gallery is outside the current curriculum spine. Neither the spine order nor the Randomness lessons were changed.
 
-2. **Material creation** -- Eight materials are generated procedurally:
-   - **Glossy purple/red** -- Low roughness with clearcoat for a wet, liquid look.
-   - **Glossy clear** -- Transparent with refraction for drip elements.
-   - **Fabric pink/yellow/purple** -- High roughness with noise-based normal maps to simulate woven texture.
-   - **Granular orange** -- Cellular noise normal map for a bumpy, organic surface.
-   - **Bubble material** -- Transparent, refractive, low-roughness spheres.
+## Touch
 
-3. **Composition assembly**:
-   - A base purple fluid mass is built from a sphere surrounded by randomly placed deformation spheres.
-   - Three fabric layers are generated using ImmediateMesh with procedural triangle geometry, noise-displaced vertices, and computed normals.
-   - A red glossy blob and a granular orange sphere (with 40 surface bumps) are stacked on top.
-   - 15 drip elements (droplets, elongated capsules, flat puddles) are scattered around.
-   - 8 bubble extensions -- chains of shrinking spheres radiating outward with noisy direction changes -- extend from the top.
+- Grab the pink sphere. It is a reachable proxy for the pink pivot inside/near the creature. One metre of proxy movement represents 1/0.7 metres of pivot movement; the result is limited to a 0.65 m radius.
+- ROTATION turns the whole creature around that centre. RUN adds a slow turn and animates the limbs.
+- SCALE changes the whole body's size around the same point.
+- LIMBS changes local bone rotation, scale and displaced centres. At zero the generated rest body is retained.
+- BONES exposes the actual hierarchy through a translucent skin.
+- CENTRE returns the pivot. RESET stops motion and restores every bone, scale and control.
 
-4. The composition rotates slowly each frame.
+The controls use existing XRTools dial/button scenes. The pink sphere uses XRToolsPickable with a frozen release and a desktop pointer-drag path. All controls are close together. The sphere is a proxy, not a physics constraint on the body.
 
-## Parameters
+## Construction
 
-No exported parameters. Internal constants control composition size and element counts.
+`pivot_creature.gd` builds a Skeleton3D with 25 bones: root, chest, neck, head, six three-bone limbs and a three-bone tail. Two ellipsoids and seven tapered tubes form one ArrayMesh: 3,344 vertices, 6,400 triangles. Tube roots overlap the torso; this is not a watertight single surface. Up to two bone influences blend each vertex. Inverse bind transforms preserve the original rest geometry.
 
-## Features
+The source mesh is created once. Skeleton poses deform it thereafter. The whole-body transform is `p' = origin + pivot + R*S*(p-pivot)`. Local limb transforms use the same change-of-centre relation in their parent bone frames. Limb scale is a deliberate geometric distortion; it does not represent conserved volume or biological motion.
 
-- ImmediateMesh fabric generation with per-vertex noise displacement and computed normals
-- Clearcoat materials for wet/liquid appearance
-- Cellular noise normal maps for granular surface texture
-- Transparent refractive materials for glass and drip effects
-- Multi-sphere deformation for organic fluid shapes
-- Procedural bubble extensions with direction noise
+This version is skeletal animation, not a physical ragdoll. It has no joint forces or skin collision. The room and console have colliders; the creature is a visual study. No imported model, animation clip or texture is required. The artifact does not install a camera, sky or WorldEnvironment into a containing hall. `preview.gd` owns those only for its separate review room.
 
-## Files
+## Verification
 
-| File | Description |
-|------|-------------|
-| `omoss.gd` | Liquid fabric composition generator |
-| `omoss.tscn` | Scene file for the composition |
+Run `tools/probes/pivot_body.gd` in Godot with `--xr-mode off --no-window --rendering-method gl_compatibility -- --capture-pivot`. The probe loads the existing gallery through GridSystem and its registry, checks weights/bind transforms, shape preservation, actual deformation, reset, native controls, pointer buttons and simulated XRTools grip/release. All 28 checks pass. Separately, `tools/probes/pivot_preview.gd` photographs the same production artifact in the optional review room; add `--no-bridges` after `--` to keep ecosystem modulation out of those comparison images. Receipts are in `ada_run/pivot_body`; the report is in `doc/book/iterations/2026-10-09-move-the-centre`.
+
+A physical headset and Quest performance still need testing. References: [Godot Skeleton3D](https://docs.godotengine.org/en/stable/classes/class_skeleton3d.html), [Omoss: Forms](https://omoss.io/work/forms).

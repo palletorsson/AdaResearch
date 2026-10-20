@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/boolean_neck/boolean_neck.gd" id="1_script"]
+
+[node name="BooleanNeck" type="Node3D"]
+script = ExtResource("1_script")
+gap = "narrow"
+row = "even"
+show_readout = true

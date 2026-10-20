@@ -475,7 +475,9 @@ func _update_readout() -> void:
 	var ln_w: float = _log10_w * log(10.0)
 	var s: float = k * ln_w
 	var w_text: String = "W ~ 10^%d microstates" % int(round(_log10_w))
-	var s_text: String = "= %.2e J/K" % s
+	# GDScript's format operator has no %e conversion.
+	var exponent: int = int(floor(log(s) / log(10.0))) if s > 0.0 else 0
+	var s_text: String = "= %.2f x 10^%d J/K" % [s / pow(10.0, exponent), exponent]
 	var tail: String = "(one macrostate, all of these)"
 	if macrostate == "spilled":
 		w_text = "W ~ unbounded"

@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "population_account_walk": {
+      "lookup_name": "population_account_walk",
+      "name": "Who keeps the count?",
+      "scene": "res://commons/artifacts/population_account_walk/population_account_walk.tscn",
+      "description": "A12m ecosystem of grabbable PointBodies. Births, losses and supplied bodies are counted separately; gold rings identify supplied organisms. Filter the account without removing actual support.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "footprint": [
+        13,
+        4,
+        15
+      ],
+      "size_group": "world_scale",
+      "tags": [
+        "ecosystem",
+        "event-provenance",
+        "support",
+        "grabbable",
+        "walk-in"
+      ],
+      "qfep_connection": "An apparent recovery has conditions. The account names supplied bodies without treating care as a failure of autonomy.",
+      "parameters": {
+        "footprint": [
+          13,
+          4,
+          15
+        ],
+        "size_group": "world_scale"
+      }
+    }
+  }
+}

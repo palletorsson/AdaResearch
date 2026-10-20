@@ -1,0 +1,29 @@
+{
+  "artifacts": {
+    "trace_paint_box": {
+      "lookup_name": "trace_paint_box",
+      "name": "Hand in / paint kept",
+      "description": "A 60 x 60 x 140 cm drawing volume on a 60 cm plinth. Each tracked hand draws on entry. Tube, ribbon, beads or grid strokes remain after leaving; a dedicated button clears this box.",
+      "scene": "res://commons/artifacts/trace_paint_box/trace_paint_box.tscn",
+      "category": "drawing",
+      "map_ready": true,
+      "configure_before_ready": true,
+      "museum_import": true,
+      "group": true,
+      "complexity": "beginner",
+      "tags": ["trace", "drawing", "sampling", "XR", "retention"],
+      "footprint": [0.6, 2.0, 0.6],
+      "parameters": {
+        "brush": {
+          "type": "enum",
+          "values": ["tube", "ribbon", "beads", "grid"],
+          "default": "tube"
+        }
+      },
+      "qfep": {
+        "focus": "A boundary gates recording without erasing its history.",
+        "encounter": "The same hand movement becomes different material under four sampling and surface rules."
+      }
+    }
+  }
+}

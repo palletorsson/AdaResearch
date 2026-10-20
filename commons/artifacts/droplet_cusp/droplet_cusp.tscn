@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/droplet_cusp/droplet_cusp.gd" id="1_script"]
+
+[node name="DropletCusp" type="Node3D"]
+script = ExtResource("1_script")
+waist = "tight"
+flesh = "firm"
+ball_radius = 0.075
+show_readout = true

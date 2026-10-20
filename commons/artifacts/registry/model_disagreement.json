@@ -1,0 +1,42 @@
+{
+  "id": "model_disagreement",
+  "name": "Precision, time and model feedback",
+  "artifacts": {
+    "model_disagreement": {
+      "lookup_name": "model_disagreement",
+      "name": "When Parts Stop Agreeing",
+      "scene": "res://commons/artifacts/model_disagreement/model_disagreement.tscn",
+      "preview_scene": "res://commons/artifacts/model_disagreement/preview.tscn",
+      "description": "A live Godot model study inside the Endless Museum. Turn native dials to change precision, part timestamps and deformation feedback; compare the original and corrected control. Display mesh scaled to fit the gallery; numerical values remain in source model metres.",
+      "category": "transforms",
+      "dev_category": "research",
+      "dev_themes": [
+        "precision",
+        "time",
+        "feedback",
+        "glitch"
+      ],
+      "tags": [
+        "architecture",
+        "glitch",
+        "model",
+        "research"
+      ],
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "shaders"
+      ],
+      "interactions": [
+        "Select PRECISION, CLOCKS or FEEDBACK.",
+        "Turn CONDITION and STEPS; STEP or PLAY / HOLD advances logical time.",
+        "CONTROL compares local coordinates, shared time or reading the original each pass.",
+        "SOURCE displays the retained original."
+      ],
+      "qfep_connection": "A stable-looking body depends on compatible coordinates, timestamps and data dependencies. Changing one condition reveals a specific disagreement; it does not by itself establish a political meaning.",
+      "status": "Installed in Shader_05_Patterns, rear model gallery",
+      "report": "doc/book/iterations/2026-10-09-glitch-inside-the-museum/index.html"
+    }
+  }
+}

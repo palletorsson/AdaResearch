@@ -1,0 +1,25 @@
+{
+  "id": "architecture_variations",
+  "name": "Architecture variations",
+  "artifacts": {
+    "architecture_variations": {
+      "lookup_name": "architecture_variations",
+      "name": "One Arcade, Four Operations",
+      "scene": "res://commons/artifacts/architecture_variations/architecture_variations.tscn",
+      "preview_scene": "res://commons/artifacts/architecture_variations/preview.tscn",
+      "description": "Curve, hinge, repeat and stretch the earlier arcade. Compare with a fixed miniature; turn two native dials and move the pink point. Visual study on a fixed courtyard floor; changing architecture has no collision.",
+      "category": "transforms",
+      "dev_category": "research",
+      "dev_themes": ["architecture", "pivots", "repetition", "vertex deformation"],
+      "tags": ["architecture", "glitch", "canopy", "research"],
+      "complexity": "intermediate",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "map_sequences": [],
+      "interactions": ["Choose Source, Curve, Hinge, Field or Stretch.", "Turn CHANGE and BAYS.", "Drag the pink point to move the hinge or canopy attachment."],
+      "qfep_connection": "A familiar assembly can retain its parts while its spatial relationships become unfamiliar. Geometric continuity does not itself establish a habitable or physically stable building.",
+      "status": "research prototype; desktop and supplied XRTools poses tested; no headset or structural simulation claim",
+      "report": "doc/book/iterations/2026-10-09-one-arcade-four-operations/index.html"
+    }
+  }
+}

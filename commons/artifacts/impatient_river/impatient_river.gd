@@ -1,23 +1,19 @@
 extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name ImpatientRiver
 
-## @identity
-## lineage: the graph taxonomy's rung 10 — stepping stones scattered across dark
-##   water, and a spark that commutes bank to bank forever along the CURRENT shortest
-##   path, computed by the engine's own AStar3D. Press the button and one stone on
-##   its route sinks; next crossing, the spark has already learned a new river.
-##   Sunk stones resurface in order after three more sinkings — a pool, never a grave.
-## essence: shortest is a fact about the WHOLE graph, not about any stone. The spark
-##   holds no route in its pocket; it asks AStar3D again each bank, and the answer is
-##   whatever the graph has become. This is the engine's literal pathfinding class,
-##   not an imitation of one.
-## truth: sink one stone and the spark learns a new river. The path lives in the
-##   graph, not in the walker.
-##
-## The 2026-08-27 graph taxonomy (doc/GRAPHTHEORY_TAXONOMY.md), rung 10 of 13.
+## Same banks, stones and spark. Compare BFS, Dijkstra and A* using the
+## tutorial's printed search code. AStar3D retains topology and availability;
+## its native path remains an independent distance-cost oracle in the tests.
+## Sinking replans immediately. Changing search rule preserves disabled stones.
 
 const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 const BUTTON_SCENE := preload("res://commons/interactables/push_button.tscn")
+const Search := preload("res://doc/book/studies/graphs-through-the-hands/GT_Pathfinding/weighted_route.gd")
+const MODES := ["BFS", "DIJKSTRA", "A*"]
+var search_mode := 0
+var _search = Search.new()
+var _route_ids: Array[int] = []
+var _places: Array[Vector3] = []
 
 @export var seed: int = 47
 @export var pace: float = 0.9           # spark metres per second
@@ -90,6 +86,7 @@ func _build_stones() -> void:
 		add_child(stone)
 		_stones.append({"pos": p, "mesh": stone, "mat": mat, "sunk": false})
 		_astar.add_point(i, p)
+		_places.append(p)
 	_bank_a = 0
 	_bank_b = 1
 	for i in range(pts.size()):
@@ -124,14 +121,31 @@ func _build_spark() -> void:
 func _replan() -> void:
 	var from := _bank_a if _going else _bank_b
 	var to := _bank_b if _going else _bank_a
-	_route = _astar.get_point_path(from, to)
+	# Reuse exactly the same stones, links and disabled flags for every rule.
+	_search.neighbours.clear()
+	var blocked: Array[int] = []
+	for id in range(_places.size()):
+		_search.neighbours.append(Array(_astar.get_point_connections(id)))
+		if _astar.is_point_disabled(id):
+			blocked.append(id)
+	_route_ids = _search.find_path(from, to, blocked) if search_mode == 0 else _search.find_weighted_path(from, to, blocked, _places, search_mode == 2)
+	_route.clear()
+	for id in _route_ids:
+		_route.append(_places[id])
 	_leg = 0
 	_t = 0.0
 	if _route.size() > 0:
 		_spark.position = _route[0] + Vector3(0.0, 0.16, 0.0)
 	if _readout and _readout.has_method("set_text"):
-		_readout.set_text("route: %d stones" % maxi(_route.size() - 2, 0),
-			"asked AStar3D again at the bank" if _route.size() > 0 else "NO ROUTE - the river won; raise a stone")
+		var distance := 0.0
+		for i in range(_route.size() - 1):
+			distance += _route[i].distance_to(_route[i + 1])
+		_readout.set_text(MODES[search_mode],
+			"%d edges / %.2f m\nexpanded: %s" % [_route.size() - 1, distance, str(_search.visited)] if not _route.is_empty() else "NO ROUTE - restore a stone")
+
+func _on_search_rule() -> void:
+	search_mode = (search_mode + 1) % 3
+	_replan()
 
 func _process(delta: float) -> void:
 	if _route.size() < 2:
@@ -156,7 +170,8 @@ func _process(delta: float) -> void:
 
 func _build_button() -> void:
 	var btn := BUTTON_SCENE.instantiate()
-	btn.position = Vector3(0.0, 0.85, 1.6)
+	btn.name = "SinkStone"
+	btn.position = Vector3(-0.38, 0.85, 1.6)
 	btn.rotation = Vector3(deg_to_rad(-25.0), 0.0, 0.0)
 	btn.set("pressed_color", Color(0.2, 0.5, 0.9))
 	btn.set("released_color", Color(0.3, 0.35, 0.4))
@@ -170,12 +185,32 @@ func _build_button() -> void:
 	stem.position = Vector3(0.0, 0.4, 1.6)
 	stem.material_override = _steel_mat(Color(0.3, 0.3, 0.33))
 	add_child(stem)
+	var shelf := MeshInstance3D.new()
+	var shelf_mesh := BoxMesh.new()
+	shelf_mesh.size = Vector3(0.95, 0.05, 0.24)
+	shelf.mesh = shelf_mesh
+	shelf.position = Vector3(0.0, 0.79, 1.6)
+	shelf.material_override = stem.material_override
+	add_child(shelf)
 	if btn.has_signal("pressed"):
 		btn.connect("pressed", Callable(self, "_on_sink"))
 	else:
 		var inner := btn.get_node_or_null("InteractableAreaButton")
 		if inner and inner.has_signal("button_pressed"):
 			inner.connect("button_pressed", Callable(self, "_on_sink"))
+	var rule := BUTTON_SCENE.instantiate()
+	rule.name = "SearchRule"
+	rule.position = Vector3(0.38, 0.85, 1.6)
+	rule.rotation.x = deg_to_rad(-25.0)
+	add_child(rule)
+	rule.pressed.connect(_on_search_rule)
+	for pair in [["SINK STONE", -0.38], ["SEARCH RULE", 0.38]]:
+		var label := Label3D.new()
+		label.text = pair[0]
+		label.position = Vector3(pair[1], 1.05, 1.6)
+		label.font_size = 28
+		label.pixel_size = 0.002
+		add_child(label)
 
 func _on_sink() -> void:
 	# sink a stone ON the current route (never a bank) — the cruellest honest choice
@@ -219,7 +254,7 @@ func _build_plaque() -> void:
 	add_child(ts)
 	if ts.has_method("set_text"):
 		ts.set_text("IMPATIENT RIVER",
-			"AStar3D, the engine's own: the spark asks again at every bank and walks\nwhatever the graph has become. Press - a stone on its route sinks, and next\ncrossing it has learned a new river. Shortest lives in the graph, not the walker.")
+			"Same river, three questions. BFS counts crossings. Dijkstra counts\ndistance. A* adds an estimate toward the bank. SEARCH RULE compares them.\nSINK STONE changes availability. Replanning does not train a model.")
 	_readout = TextScreenScript.new()
 	_readout.mode = 2
 	_readout.width_m = 0.32

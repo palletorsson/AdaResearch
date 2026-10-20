@@ -25,6 +25,9 @@ class_name DragPointTarget
 ## so that is the contract this reads.
 
 const PBR := preload("res://commons/render/pbr_kit.gd")
+const FIRST_FIELD := preload("res://commons/artifacts/drag_point_target/first_catalyst_field.gd")
+@export_enum("arrows", "catalyst") var encounter: String = "arrows"
+var _first_field: Node3D
 
 ## What the sign says. Kept as text rather than a texture so a map can change the
 ## instruction without a re-bake.
@@ -100,6 +103,8 @@ func _ready() -> void:
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	if config_data.has("encounter"):
+		encounter = str(config_data["encounter"])
 	# Every key optional; a map that sets none still gets a working target.
 	if config_data.has("text"):
 		text = str(config_data["text"])
@@ -157,6 +162,15 @@ func _as_color(v: Variant, fallback: Color) -> Color:
 
 
 func _rebuild() -> void:
+	if encounter == "catalyst" and is_instance_valid(_balls):
+		remove_child(_balls)
+		_balls.queue_free()
+		_balls = null
+		_tags.clear()
+	if is_instance_valid(_first_field):
+		remove_child(_first_field)
+		_first_field.queue_free()
+		_first_field = null
 	for c in [_arrow, _ring, _label, _stem]:
 		if is_instance_valid(c):
 			c.queue_free()
@@ -169,6 +183,10 @@ func _rebuild() -> void:
 
 # ── the sign ──────────────────────────────────────────────────────────────────
 func _build() -> void:
+	if encounter == "catalyst":
+		_first_field = FIRST_FIELD.new()
+		add_child(_first_field)
+		return
 	var mat := PBR.hard_plastic(arrow_color, 0.66, 0.04)
 	mat.emission_enabled = true
 	mat.emission = arrow_color
@@ -262,6 +280,8 @@ func _build() -> void:
 
 
 func _process(delta: float) -> void:
+	if encounter == "catalyst":
+		return
 	if Engine.is_editor_hint():
 		return
 	_t += delta

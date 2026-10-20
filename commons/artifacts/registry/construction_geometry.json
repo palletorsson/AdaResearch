@@ -1,0 +1,49 @@
+{
+  "artifacts": {
+    "pythagoras_cubicle": {
+      "lookup_name": "pythagoras_cubicle",
+      "scene": "res://commons/artifacts/pythagoras_cubicle/pythagoras_cubicle.tscn",
+      "name": "Pythagoras / walls made of proofs",
+      "description": "Open-front 7 × 7 metre cubicle. Each of three walls pairs two square diagrams: c² and a²+b². Leg ratios 3:4, 2:5 and 1:6. The existing rearrangement geometry forms the wall surfaces. Swap animates the same triangles; reset restores the pairs. Displayed values are diagram units, not physical metres.",
+      "interactions": ["Swap paired arrangements", "Reset the three comparisons"],
+      "category": "mathematics",
+      "complexity": "beginner",
+      "tags": ["triangle", "Pythagoras", "proof", "wall", "cubicle", "void"]
+    },
+    "triangle_direction_sign": {
+      "lookup_name": "triangle_direction_sign",
+      "scene": "res://commons/artifacts/triangle_direction_sign/triangle_direction_sign.tscn",
+      "name": "Pink triangle / four directions",
+      "description": "A pink triangle on a one-metre round black plate with a metal post and weighted base. A hand/ray button turns only the symbol through up, right, down and left. Floor-origin prefab; front faces +Z.",
+      "parameters": {"direction": "0 up, 1 right, 2 down, 3 left"},
+      "signals": ["direction_changed"],
+      "interactions": ["Turn the triangle by a quarter turn"],
+      "category": "construction",
+      "complexity": "beginner",
+      "tags": ["triangle", "sign", "pink", "orientation", "void"]
+    },
+    "construction_triangle_brace": {
+      "lookup_name": "construction_triangle_brace",
+      "scene": "res://commons/artifacts/construction_triangle_brace/construction_triangle_brace.tscn",
+      "name": "Temporary triangular steel bracing",
+      "description": "Bolted chevron bay of I-section steel between columns. A reusable construction triangle; geometry and collision, without structural-load simulation.",
+      "qfep_connection": "A triangle becomes part of the structure that holds a space open.",
+      "parameters": {"span": "Width between inner column faces, metres", "rise": "Height above the lower chord, metres"},
+      "category": "construction",
+      "complexity": "beginner",
+      "tags": ["triangle", "steel", "bracing", "void"]
+    },
+    "pythagoras_floor": {
+      "lookup_name": "pythagoras_floor",
+      "scene": "res://commons/artifacts/pythagoras_floor/pythagoras_floor.tscn",
+      "name": "Pythagoras / the same four panels",
+      "description": "Seven-metre floor rearrangement proof. Four congruent right triangles translate inside the same square, leaving c² or a²+b². Compare 3/4 and 2/5 legs. Uses the existing hand/ray push buttons.",
+      "qfep_connection": "A change of arrangement preserves area: what changes and what remains are separately visible.",
+      "signals": ["arrangement_changed"],
+      "interactions": ["Rearrange four panels", "Try another right triangle", "Reset the 3/4/5 example"],
+      "category": "mathematics",
+      "complexity": "beginner",
+      "tags": ["triangle", "Pythagoras", "area", "proof", "construction", "void"]
+    }
+  }
+}

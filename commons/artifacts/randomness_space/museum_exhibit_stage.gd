@@ -89,6 +89,7 @@ static func glass_box(parent: Node3D, width: float, depth: float, height: float,
 func _compact_controls() -> void:
 	var panels: Array[Node3D] = []
 	for node in host.find_children("*", "Node3D", true, false):
+		if bool(node.get_meta("em_embedded_control",false)): continue
 		if node.has_meta("panel_w") and node.has_meta("panel_h"):
 			panels.append(node)
 	if panels.is_empty(): return

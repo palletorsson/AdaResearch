@@ -1,0 +1,17 @@
+{
+  "registry_info": {"name": "Shader composition stage", "category": "shaders"},
+  "artifacts": {
+    "shader_composition_stage": {
+      "lookup_name": "shader_composition_stage",
+      "scene": "res://commons/artifacts/shader_composition_stage/shader_composition_stage.tscn",
+      "name": "The room can be otherwise",
+      "description": "One material on the familiar sphere, cube and sofa. Compose the repeated circle, rim and emission, then change the surrounding setting while keeping the material, bodies and lights fixed.",
+      "map_ready": true,
+      "category": "shaders",
+      "complexity": "intermediate",
+      "tags": ["composition", "mask", "rim", "emission", "prefab", "surreal"],
+      "interactions": ["Grab or point-drag DOTS / RIM / GLOW", "Compare PALE and LAYERED", "SETTING changes only the surroundings", "RESET restores the initial composition"],
+      "qfep_connection": "A body can keep its geometry while its material and surroundings change how it is read. The supplied library sets limits on what remains recognizable."
+    }
+  }
+}

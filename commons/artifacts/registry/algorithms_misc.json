@@ -8842,6 +8842,141 @@
       },
       "content": "text",
       "qfep_connection": "A visible address makes an assertion traceable without making it true. Comparing the unchanged claim under covered and embodied presentation asks how authority is staged; the symbolic eye performs no measurement."
+    },
+    "flow_field_table": {
+      "category": "swarmintelligence",
+      "complexity": "beginner",
+      "dna": {
+        "promoted": "2026-07-29",
+        "stage": "2 - variation",
+        "axes": {
+          "scenario": [
+            "tour",
+            "open",
+            "block",
+            "u_wall",
+            "zigzag",
+            "wind",
+            "noise"
+          ],
+          "field_display": [
+            "arrows",
+            "hidden"
+          ]
+        },
+        "default": "scenario=tour, field_display=arrows: original simulation viewed on a bounded table. Existing full-size FlowFieldMain token is preserved.",
+        "was": "sequence_mode was a private int the artifact declared as its own critical_parameter, driven only by a hard-coded DURATION=10.0 timer; every placement showed the same six-scenario carousel and no map could hold one field topology. The arrows were unconditionally drawn, so the piece could only ever be read as a diagram of its own cause. apply_grid_config() was an empty pass.",
+        "note": "field_display is the argument axis: hiding the arrows leaves the same 200 agents moving with no visible cause, which is the artifact's own truth line (purpose lives in the field, not the agent) staged as a question rather than answered by a picture."
+      },
+      "description": "Live overhead view of the existing 200-agent, 40 by 40 flow field on a bounded 2.95 metre museum table. The original route, wind and noise tour runs in a private physics world.",
+      "dev_themes": [
+        "algorithms",
+        "misc"
+      ],
+      "footprint": [
+        3,
+        2,
+        3
+      ],
+      "include_in_map_data": true,
+      "lookup_name": "flow_field_table",
+      "map_ready": true,
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "name": "Flow field / live museum table",
+      "parameters": {
+        "footprint": [
+          3,
+          2,
+          3
+        ],
+        "size_group": "medium"
+      },
+      "scene": "res://commons/artifacts/flow_museum/flow_museum.tscn",
+      "size_group": "medium",
+      "tags": [
+        "algorithm"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "live_viewport",
+          "driven_by": "original flow-field simulation",
+          "affects": [
+            "display_texture"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 0,
+          "left": 0,
+          "right": 0
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "foundation",
+          "pheromone",
+          "fields",
+          "contrasts",
+          "boid_flocking"
+        ],
+        "preferred_zone": "teaching",
+        "measured_footprint_cells": 9,
+        "footprint_source": "table_adapter_geometry"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.95,
+          1.7,
+          2.95
+        ],
+        "aabb_center": [
+          0,
+          0.85,
+          0
+        ],
+        "grid_cells": [
+          3,
+          3
+        ],
+        "max_dimension_m": 2.95,
+        "source": "Outer table; private full-size simulation excluded."
+      },
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 3,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-10-10",
+        "derived_from": "bounded outer table; private simulation excluded"
+      }
     }
   },
   "registry_info": {

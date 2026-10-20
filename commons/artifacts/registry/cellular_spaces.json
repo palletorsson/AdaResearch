@@ -1,0 +1,24 @@
+{
+  "version": "1.0",
+  "format": "lab_artifacts",
+  "description": "Walkable spatial studies of cellular fields.",
+  "artifacts": {
+    "cellular_space": {
+      "lookup_name": "cellular_space",
+      "name": "Cellular Space",
+      "scene": "res://commons/artifacts/cellular_spaces/cellular_space.tscn",
+      "category": "noise",
+      "sequence": "noise",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "description": "Two real walkable enclosures. form=womb is a curved cavity moulded by 3D feature distances. form=commons is a 3D Voronoi partition with arched passages and six omitted walls joining four central cells. Mesh collision matches the visible boundary. Surface shading samples a separate 3D cellular field.",
+      "parameters": {"form": "womb | commons"},
+      "interactions": ["Walk through the rounded throat", "Pass through cell walls at the arches", "Find the four floor centres sharing the large middle room"],
+      "qfep_connection": "A nearest-site boundary need not remain a barrier. The central sites keep their identities while their shared walls are omitted, allowing a common interior.",
+      "tags": ["cellular", "voronoi", "worley", "walkable", "enclosure", "womb", "architecture"],
+      "footprint_measured": [15.2,6.3,17.0],
+      "spatial_needs": {"platform": "floor", "footprint_cells": 17, "player_position": "inside", "wall_backing": false}
+    }
+  }
+}

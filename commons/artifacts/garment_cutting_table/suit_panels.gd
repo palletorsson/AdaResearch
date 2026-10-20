@@ -14,14 +14,15 @@ static func panel_name(i: int, style: String = "suit") -> String:
 	if style=="suit" or i<6:return NAMES[i]
 	return ["SKIRT FRONT L","SKIRT FRONT R","SKIRT BACK L","SKIRT BACK R"][i-6]
 
-static func hem(style: String) -> float:
-	return -1.40 if style=="gown" else (-1.18 if style=="pleated" else -1.02)
+static func hem(_style: String) -> float:
+	# All dresses reach the floor; their flare, pleats and sleeves distinguish them.
+	return -1.52
 
 static func dimensions(i: int, style: String = "suit") -> Vector2:
 	if style!="suit":
 		if i<4:return Vector2(.39,.57)
 		if i<6:return Vector2(.38,.23 if style!="gown" else .45)
-		return Vector2(.46,.78 if style=="gown" else (.64 if style=="pleated" else .48))
+		return Vector2(.46,.88)
 	return Vector2(.39,.65) if i<4 else (Vector2(.42,.53) if i<6 else Vector2(.34,.78))
 
 static func flat_point(i: int, u: float, v: float, style: String = "suit") -> Vector3:

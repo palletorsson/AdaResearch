@@ -25,6 +25,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export_group("Dimensions")
 @export var board_width: float = 2.4
 @export var board_height: float = 1.2
+@export var glass_surface: bool = false
 
 @export_group("Color")
 @export var frame_color: Color = Color(0.18, 0.18, 0.20)
@@ -92,6 +93,8 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
+	if has_meta("config_glass"):
+		glass_surface = str(get_meta("config_glass")) in ["1", "true"]
 	if has_meta("config_pen_style"):
 		simple_pens = str(get_meta("config_pen_style")) == "simple"
 	if has_meta("config_pen_shelf"):
@@ -139,6 +142,7 @@ func _build_board() -> void:
 		drawing.board_height = board_height
 		drawing.shelf_enabled = pen_shelf
 		drawing.simple_pens = simple_pens
+		drawing.transparent_ink = glass_surface
 		add_child(drawing)
 
 
@@ -154,6 +158,11 @@ func _build_surface() -> void:
 	mat.albedo_color = board_color
 	mat.roughness = 0.25
 	mat.metallic = 0.0
+	if glass_surface:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat.albedo_color = Color(0.65, 0.84, 0.86, 0.10)
+		mat.roughness = 0.13
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	surf.material_override = mat
 	surf.position = Vector3(0.0, board_height * 0.5, SURFACE_THICKNESS * 0.5)
 	add_child(surf)

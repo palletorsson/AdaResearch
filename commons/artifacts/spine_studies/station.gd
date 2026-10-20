@@ -81,7 +81,7 @@ func _ready() -> void:
 		"passage": console_z = 5.5; guard_rect = Rect2(-3,-1,6,2)
 	# Neutral receiving surfaces belong to the installation. They let the repeated
 	# parts read against the museum's existing grid rather than competing with it.
-	if study in ["assembly","wall","suspension","open","hinge","passage","body","void","network","sentence","witness","tension","paired_time","tube"]:
+	if study in ["assembly","wall","suspension","open","hinge","passage","body","void","network","sentence","witness","tension","paired_time","tube"] and not (study == "hinge" and bool(get_meta("config_tower_floor", false))):
 		var width := 19.0 if study in ["wall","void"] else 14.0
 		box(Vector3(0,0.004,0),Vector3(width,0.008,12.5))
 		if study in ["open","suspension","body"]:

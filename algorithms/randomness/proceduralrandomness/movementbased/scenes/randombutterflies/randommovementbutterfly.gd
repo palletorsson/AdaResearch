@@ -369,8 +369,12 @@ func stay_within_bounds() -> void:
 
 
 func point_in_direction(direction: Vector3) -> void:
-	if direction.length() > 0:
-		look_at(position + direction, Vector3(0, 1, 0))
+	if direction.length_squared() > 0.000001:
+		# Direction and movement are parent-local. look_at expects a world point;
+		# passing position + direction tipped translated/rotated swarms towards origin.
+		var local_up:=Vector3.UP
+		if absf(direction.normalized().dot(local_up))>0.99: local_up=Vector3.FORWARD
+		basis=Basis.looking_at(direction,local_up)*Basis.from_scale(scale)
 
 
 func _physics_process(_delta: float) -> void:

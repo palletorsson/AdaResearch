@@ -17,9 +17,12 @@ func _ready() -> void:
 	body_size = Vector3(span,0.055,0.055)
 	match skin:
 		"plank":
-			body_size = Vector3(span,0.12,0.25)
+			body_size = Vector3(span,0.06,0.25)
 			mat.albedo_color = Color("a97a49")
-		"beam": body_size = Vector3(span,0.14,0.14)
+		"beam":
+			body_size = Vector3(span,0.14,0.14)
+			mat.metallic = 0.65
+			mat.roughness = 0.4
 		"measure":
 			body_size = Vector3(span,0.16,0.045)
 			mat.albedo_color = Color("e5daca")
@@ -48,7 +51,7 @@ func _ready() -> void:
 	mesh.material_override=mat;add_child(mesh)
 	var col := CollisionShape3D.new();col.name="PickupBody"
 	var shape := BoxShape3D.new()
-	shape.size=Vector3(span,maxf(body_size.y,0.07),maxf(body_size.z,0.07))
+	shape.size=body_size if skin=="plank" else Vector3(span,maxf(body_size.y,0.07),maxf(body_size.z,0.07))
 	col.shape=shape;add_child(col)
 	if skin == "point_line":
 		var white := StandardMaterial3D.new()

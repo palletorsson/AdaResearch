@@ -1,0 +1,78 @@
+{
+  "artifacts": {
+    "flex_connector": {
+      "lookup_name": "flex_connector",
+      "name": "Flex Connector",
+      "class_name": "FlexConnector",
+      "scene": "res://commons/artifacts/flex_connector/flex_connector.tscn",
+      "category": "graphtheory",
+      "artifact_type": "demonstration",
+      "complexity": "beginner",
+      "description": "Two rigid poles anchored in grey side walls run into a bounded region and stop on its boundary. A red flexible cord joins their ends, and the piece asks whether the join can be made without leaving the region. approach sets where the poles arrive from, different sides or the same side; slack sets how much cord there is, from taut to a little over twice the straight-line distance. The cord is solved by bisection to the requested length, sampled, and every sample tested against the region; the part that leaves is drawn in amber and the plate reports FITS INSIDE or ESCAPES with the count. The two approaches are not two decorations of one situation: at the same relative slack, a cord fits easily when the poles arrive from opposite sides and escapes immediately when they arrive from the same side, because the chord is short and a small proportional bulge is a large absolute one. Readable in code via fits_inside(), samples_outside() and cord_ratio().",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [
+        2,
+        1,
+        1
+      ],
+      "map_sequences": [
+        "graphtheory",
+        "softbodies",
+        "postfoundationscrisis"
+      ],
+      "tags": [
+        "connectivity",
+        "containment",
+        "boundary",
+        "flexible",
+        "constraint",
+        "hand"
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "dna": {
+        "axes": {
+          "approach": [
+            "different",
+            "same"
+          ],
+          "slack": [
+            "taut",
+            "easy",
+            "loose",
+            "coiled"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "slack: loose <-> coiled, at approach=same",
+          "predicted_bite_pct": 1.4,
+          "basis": "GROUNDED IN THE PROBE, not forecast blind, and said before any pixel was measured. probe_flex_connector reports samples-outside of taut=0 easy=47 loose=47 coiled=47 at approach=same. Those last three have IDENTICAL containment verdicts and identical plate wording except the ratio figure, so they differ only in how far the amber bulge reaches: the cord is 1.55x against 2.1x the chord, a bulge roughly 35% longer. The cord is a thin tube, maybe 4% of the subject's projected area, and the differing portion is perhaps a third of it. FRAME = 0.04 * 0.35 = 1.4%. It is a LOWER BOUND like every prediction in this corpus, which have under-predicted by 1.5x to 6.7x.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below ~1.4% the likely causes in order are (a) the bisection converging to the same control point for both values, which would be a real bug and is checkable by printing cord_ratio() -- the probe already reports it; (b) the escaped cord being drawn outside the capture crop, since the bulge leaves the region by design and the AABB anchor is sized to the walls, not the bulge; (c) a slack value the SLACKS dictionary does not carry, which fails in silence and leaves the default. Read <out>/_rejects.json and open the PNGs.",
+          "structural_degeneracy_predicted": "SAID BEFORE THE SWEEP, and this is the third time of asking -- the two artifacts before this one both had a structural degeneracy I failed to name, so the habit is now to look for one first. Expect slack to be CONDITIONAL on approach, in the opposite direction to the obvious: at approach=different the axis has room to work across all four values because the chord is long, while at approach=same it saturates after the first step and three of its four values are near-twins. A mean over the cross product will therefore understate it. Read the per-pair rows grouped by approach, never the axis mean."
+        }
+      },
+      "spatial_needs": {
+        "platform": "plinth",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

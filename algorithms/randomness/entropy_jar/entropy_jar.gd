@@ -1,20 +1,9 @@
-# entropy_jar.gd
-# Entropy Jar — VR grabbable jar of colored particles.
-# Grab + shake → particles mix. Set down → they never unmix.
-# Second law of thermodynamics felt physically.
-#
-# QFEP: Irreversibility — mixing is easy, unmixing is impossible.
-# The arrow of time made tangible through embodied interaction.
-#
-# @identity
-# essence: dS/dt >= 0 — the second law of thermodynamics
-# desire: shake the jar and feel time's arrow in your hand — red and blue never separate again
-# critical_parameter: shake_threshold — the velocity at which your hand movement registers as agitation
-# triggers: _agitate_particles() on shake detection via accelerometer-derived velocity
-# emerges: Shannon entropy measured across vertical bins converges to maximum and stays there
-# needs: VR grab + shake [has], XRToolsPickable [has], haptic feedback [missing]
-# relationships: depends on entropy_axiom (conceptual gradient); contrasts with prng_crank_machine (reversible vs irreversible)
-# truth: The second law is not a prohibition — it is the statistical certainty that mixed states outnumber ordered ones.
+# Entropy Jar: a pickable colour/height comparison.
+# H(colour | height band), weighted across six local-Y bands, in bits per bead.
+# Whole-population colour shares remain 40/40. Shaking can change local shares.
+# This is not a thermodynamic solver or a guarantee of monotonic increase.
+# RESET restores the authored specimen; it is an external intervention.
+# QFEP question: what differences does this spatial partition retain or miss?
 
 extends Node3D
 
@@ -58,20 +47,19 @@ class_name EntropyJar
 ##
 ##   sorted   red below, blue above. The beginning. Nothing has happened yet.
 ##   stirred  the two bodies interpenetrating at the interface. Mid-sentence.
-##   mixed    uniform. You arrived too late; the arrow already ran, and the
-##            jar's whole point is that you cannot put it back.
+##   mixed    the initial colours share the bands. RESET can restore them.
 ##   shelled  sorted RADIALLY — a red core inside a blue shell. Visibly as
-##            ordered as `sorted`, and the readout says MAXIMUM ENTROPY,
+##            ordered as `sorted`, while the colour reading can be high,
 ##            because the measurement bins VERTICALLY. The order is real and
 ##            the instrument cannot see it. Entropy is relative to the
 ##            coarse-graining you happened to choose.
 @export_enum("sorted", "stirred", "mixed", "shelled") var found_state: String = "sorted"
 
-## And the second argument: whether the second law arrives as a measured
+## And the second argument: whether the conditional colour measure arrives as a
 ## number, as a verdict in words, or as nothing but the jar.
-##   figures  S = 0.00 and the shake/status block (shipped)
+##   figures  H(C|Y) in bits and the shake/status block (shipped)
 ##   number   the bare figure, no commentary
-##   verdict  the words only — the law stated, not computed
+##   verdict  the descriptive band-sharing words only
 ##   none     no instrument at all; the jar has to carry it alone
 @export_enum("figures", "number", "verdict", "none") var readout: String = "figures"
 
@@ -483,7 +471,8 @@ func _create_labels() -> void:
 
 	# Subtitle
 	var sub := Label3D.new()
-	sub.text = "Second Law of Thermodynamics"
+	sub.name = "SubtitleLabel"
+	sub.text = "Colour within six height bands"
 	sub.pixel_size = 0.0014
 	sub.font_size = 10
 	sub.modulate = Color(0.6, 0.6, 0.7)
@@ -494,7 +483,7 @@ func _create_labels() -> void:
 	# Entropy display
 	_entropy_label = Label3D.new()
 	_entropy_label.name = "EntropyLabel"
-	_entropy_label.text = "S = 0.00"
+	_entropy_label.text = "H(C|Y) = 0.000 bit"
 	_entropy_label.pixel_size = 0.003
 	_entropy_label.font_size = 24
 	_entropy_label.modulate = Color(1.0, 0.85, 0.3)
@@ -516,53 +505,21 @@ func _create_labels() -> void:
 
 ## The second axis: whether the law arrives as a measured number, as a verdict
 ## in words, or as nothing but the jar. At the default "figures" both labels are
-## visible and both carry the shipped text, so this is a no-op for every map.
+## visible; all modes describe the same conditional colour measurement.
 func _update_display() -> void:
 	var show_number: bool = (readout == "figures" or readout == "number")
 	var show_words: bool = (readout == "figures" or readout == "verdict")
-
 	if _entropy_label:
 		_entropy_label.visible = show_number
+		_entropy_label.text = "H(C|Y) = %.3f bit" % _current_entropy
+		var t: float = clamp(_current_entropy, 0.0, 1.0)
+		_entropy_label.modulate = Color(lerp(0.3,1.0,t),lerp(0.7,0.2,t),lerp(1.0,0.1,t))
 	if _stats_label:
 		_stats_label.visible = show_words
-
-	if _stats_label and readout == "verdict":
-		# The law stated, not computed — no figure anywhere on the plinth.
-		if _current_entropy > 0.85:
-			_stats_label.text = "MAXIMUM ENTROPY\n\nCannot unmix"
-		elif _current_entropy > 0.5:
-			_stats_label.text = "MIXING\n\nKeep shaking"
-		else:
-			_stats_label.text = "ORDERED\n\nGrab & shake\nthe jar!"
-		if _entropy_label:
-			_entropy_label.text = "S = %.2f" % _current_entropy
-		return
-
-	if _entropy_label:
-		_entropy_label.text = "S = %.2f" % _current_entropy
-		# Color shifts from cool blue (ordered) to warm red (mixed)
-		var t: float = clamp(_current_entropy, 0.0, 1.0)
-		_entropy_label.modulate = Color(
-			lerp(0.3, 1.0, t),
-			lerp(0.7, 0.4, t),
-			lerp(1.0, 0.2, t)
-		)
-
-	if _stats_label:
-		var lines := "Shakes: %d\n" % _shake_count
-		if _shake_count > 0:
-			lines += "Entropy: %.3f bit\n" % _current_entropy
-			if _current_entropy > 0.85:
-				lines += "MAXIMUM ENTROPY\n"
-				lines += "Cannot unmix!"
-			elif _current_entropy > 0.5:
-				lines += "Mixing...\n"
-				lines += "Keep shaking!"
-			else:
-				lines += "Partially ordered\n"
-		else:
-			lines += "\nGrab & shake\nthe jar!"
-		_stats_label.text = lines
+		var description := "Colours mostly separated by height"
+		if _current_entropy > 0.85: description = "Colours share the height bands"
+		elif _current_entropy > 0.5: description = "Some bands contain both colours"
+		_stats_label.text = "C: colour | Y: 6 height bands\nRange: 0 to 1 bit per bead\n%s\nShakes: %d | RESET restores specimen" % [description, _shake_count]
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -611,14 +568,14 @@ func _place_particles() -> void:
 			_scatter(_particles_a, -half_h, half_h * 0.35, 0.0, inner_r)
 			_scatter(_particles_b, -half_h * 0.35, half_h, 0.0, inner_r)
 		"mixed":
-			# Uniform. You arrived too late; the arrow already ran.
+			# Both colours are scattered across the full height.
 			_scatter(_particles_a, -half_h, half_h, 0.0, inner_r)
 			_scatter(_particles_b, -half_h, half_h, 0.0, inner_r)
 		"shelled":
 			# Sorted RADIALLY: a red core inside a blue shell. Both groups span
-			# the full height, so every vertical bin reads 50/50 and
+			# the full height, so vertical bins can contain both colours and
 			# _measure_entropy() — which coarse-grains along Y and only along Y —
-			# reports MAXIMUM ENTROPY at a jar that is visibly, obviously sorted.
+			# can report a high value despite radial separation.
 			# The order is real. The instrument cannot see it.
 			_scatter(_particles_a, -half_h, half_h, 0.0, inner_r * 0.46)
 			_scatter(_particles_b, -half_h, half_h, inner_r * 0.74, inner_r)
@@ -770,13 +727,10 @@ func _create_dock() -> void:
 				c.queue_free()          # keep the collider, drop the plain cylinder
 
 	# retire the floating title/subtitle — the base plate carries the name
-	for n in ["TitleLabel"]:
+	for n in ["TitleLabel", "SubtitleLabel"]:
 		var t: Node = get_node_or_null(n)
 		if t != null:
 			t.queue_free()
-	for c in get_children():
-		if c is Label3D and str((c as Label3D).text).begins_with("Second Law"):
-			c.queue_free()
 
 	# the live figures move onto the dock's readout screen
 	var panel: Node3D = dock.get_node_or_null("DockReadout")

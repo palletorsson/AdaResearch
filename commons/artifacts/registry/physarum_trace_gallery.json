@@ -1,0 +1,39 @@
+{
+  "artifacts": {
+    "physarum_trace_gallery": {
+      "lookup_name": "physarum_trace_gallery",
+      "name": "A mark left behind",
+      "scene": "res://commons/artifacts/physarum_trace_gallery/physarum_trace_gallery.tscn",
+      "description": "The existing 300-agent Physarum table, a six-metre wall and a 1.2m hand surface share one colony. Carry the point and hold its action to deposit a trace.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        10,
+        8,
+        9
+      ],
+      "size_group": "world_scale",
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "tags": [
+        "physarum",
+        "trace",
+        "hand",
+        "shared field",
+        "grabbable"
+      ],
+      "qfep_connection": "A hand leaves a mark that later bodies can sense. Its persistence depends on deposition, diffusion and decay, not on its author remaining present.",
+      "parameters": {
+        "footprint": [
+          10,
+          8,
+          9
+        ],
+        "size_group": "world_scale"
+      }
+    }
+  }
+}

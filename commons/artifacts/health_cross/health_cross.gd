@@ -33,6 +33,8 @@ class_name HealthCross
 const PLAYER_LAYER := 524288          # physics layer 20 — the grid's player body
 const WALKER_LAYER := 1               # physics layer 1  — the museum's Walker
 const HealthGroup := "health_provider"
+## A host may supply its health without changing the museum fallback.
+var health_provider: Node
 
 ## 2026-09-09, Palle: "like the pick_up_cube when we walk in health_cross we
 ## should pick it up if our heath is low."
@@ -332,6 +334,7 @@ func _respawn() -> void:
 ## Health is reached by CAPABILITY, not by name — the same lookup
 ## wall_health_station uses, so a hall with both has one idea of what health is.
 func _health_node() -> Node:
+	if is_instance_valid(health_provider): return health_provider
 	var gm := get_node_or_null("/root/GameManager")
 	if gm != null:
 		return gm

@@ -18,6 +18,8 @@ class_name TopologyManager
 # ── Cellular / Emergent ──────────────────────────────────────
 @export_group("Cellular & Emergent")
 @export var create_worley_space: bool = false
+@export var create_cellular_womb_space: bool = false
+@export var create_cellular_atrium_space: bool = false
 @export var create_cellular_automata_space: bool = false
 @export var create_reaction_diffusion_space: bool = false
 
@@ -50,6 +52,8 @@ var current_space_index: int = 0
 
 # Registry of all space types for dynamic creation
 const SPACE_REGISTRY = {
+	"cellular_womb": ["res://commons/context/cellular_spaces/cellular_womb_space.gd", "CellularWombSpace"],
+	"cellular_atrium": ["res://commons/context/cellular_spaces/cellular_atrium_space.gd", "CellularAtriumSpace"],
 	# [flag_name, script_path, display_name]
 	"sine":                 ["res://commons/context/walkgrids/SineSpace.gd",                "SineSpace"],
 	"noise":                ["res://commons/context/walkgrids/NoiseSpace.gd",               "NoiseSpace"],
@@ -82,6 +86,8 @@ func create_selected_topology_spaces():
 
 	# Map export flags to registry keys
 	var flag_map = {
+		"cellular_womb": create_cellular_womb_space,
+		"cellular_atrium": create_cellular_atrium_space,
 		"sine": create_sine_space,
 		"noise": create_noise_space,
 		"voronoi": create_voronoi_space,
@@ -167,6 +173,8 @@ func teleport_to_space(index: int) -> Vector3:
 		return Vector3.ZERO
 	current_space_index = index
 	var space = spaces[index]
+	if space.has_method("get_spawn_position"):
+		return space.get_spawn_position()
 	return space.global_position + Vector3(0, teleport_height, 0)
 
 func teleport_to_space_by_name(space_name: String) -> Vector3:

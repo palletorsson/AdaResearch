@@ -2124,6 +2124,38 @@
         "derived_from": "aabb_size + category"
       },
       "qfep_connection": "Drag two lattice vectors on the floor and the label recomputes τ = ω₂/ω₁ live: every torus is the same plane under a different quotient, and the shape you took for a doughnut turns out to be the ratio of two arrows."
+    },
+    "noneuclidean_wing": {
+      "lookup_name": "noneuclidean_wing",
+      "name": "Seven Spaces — the Non-Euclidean Wing",
+      "scene": "res://commons/artifacts/noneuclidean_wing/noneuclidean_wing.tscn",
+      "category": "geometry",
+      "complexity": "advanced",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        2.5,
+        3.8,
+        2.5
+      ],
+      "size_group": "large",
+      "description": "An installed walk-through portal to seven full-scale chambers. One carried PointBody links topology, spherical transport, H2, H2 x R, H3 and metric aiming.",
+      "interactions": [
+        "walk through the door",
+        "carry the point",
+        "move the held point to change the experiment",
+        "hold trigger to navigate metric architecture",
+        "launch along a geodesic",
+        "nearby next, previous and museum controls"
+      ],
+      "capacity": "Distinguish changed connections, curved surfaces and curved three-dimensional space by walking, carrying and measuring.",
+      "spatial_needs": {
+        "placement_type": "floor",
+        "min_clearance": 0.5
+      },
+      "map_sequences": [
+        "foundationscrisis"
+      ]
     }
   },
   "registry_info": {

@@ -1,0 +1,42 @@
+{
+  "id": "fuzzy_body",
+  "name": "Two rooms claim one body",
+  "artifacts": {
+    "fuzzy_body": {
+      "lookup_name": "fuzzy_body",
+      "name": "Two rooms claim one body",
+      "scene": "res://commons/artifacts/fuzzy_body/fuzzy_body.tscn",
+      "preview_scene": "res://commons/artifacts/fuzzy_body/museum.tscn",
+      "description": "Move the black hand point. Inspect overlapping memberships on a sphere, blend lift/fold/twist rules, then select faces by an adjustable threshold. Original positions retained. Native Godot installation in the rear gallery of Shaders / Patterns.",
+      "category": "transforms",
+      "dev_category": "research",
+      "dev_themes": [
+        "fuzzy sets",
+        "rules",
+        "threshold",
+        "geometry"
+      ],
+      "tags": [
+        "fuzzy",
+        "sphere",
+        "glitch",
+        "membership",
+        "hands"
+      ],
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "shaders"
+      ],
+      "interactions": [
+        "Grab the black point and move left/right. Desktop can also use LEFT / CENTRE / RIGHT.",
+        "FIELDS shows degrees, RULES blends three transformations, CUT selects triangle centres by min(left,right).",
+        "Turn WIDTH, STRENGTH, THRESHOLD on the native console."
+      ],
+      "qfep_connection": "Making degrees of membership visible exposes the authored field, aggregation rule and threshold. A softened boundary still depends on decisions; no claim that mathematical membership models social identity.",
+      "status": "Installed in Shader_05_Patterns alongside model_disagreement",
+      "report": "doc/book/iterations/2026-10-09-two-rooms-one-body/index.html"
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "artifacts": {
+    "soft_capture_times": {
+      "lookup_name": "soft_capture_times",
+      "name": "Four moments, one recipe",
+      "scene": "res://commons/artifacts/soft_snapshot_gallery/soft_capture_times.tscn",
+      "category": "soft_bodies",
+      "dev_category": "softbodies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "description": "Four captures from the existing vessel simulation. Trigger the black point or CHANGE to compare another set of stop times.",
+      "interactions": [
+        "Nearby CHANGE and RESET push buttons",
+        "Grabbable black PointBody; trigger or drag as labelled"
+      ],
+      "qfep_connection": "The retained shape depends on the sampling decision; display and force conditions are made separately adjustable.",
+      "parameters": {
+        "footprint": [
+          9,
+          3.6,
+          4
+        ],
+        "size_group": "environment"
+      },
+      "tags": [
+        "sampling",
+        "snapshot",
+        "softbody",
+        "comparison"
+      ]
+    },
+    "soft_capture_gravity": {
+      "lookup_name": "soft_capture_gravity",
+      "name": "The same stop, another pull",
+      "scene": "res://commons/artifacts/soft_snapshot_gallery/soft_capture_gravity.tscn",
+      "category": "soft_bodies",
+      "dev_category": "softbodies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "description": "Three matching step200 vessels with opposite lateral gravity. Drag the black point sideways and release to change pull strength.",
+      "interactions": [
+        "Nearby CHANGE and RESET push buttons",
+        "Grabbable black PointBody; trigger or drag as labelled"
+      ],
+      "qfep_connection": "The retained shape depends on the sampling decision; display and force conditions are made separately adjustable.",
+      "parameters": {
+        "footprint": [
+          7,
+          3.6,
+          4
+        ],
+        "size_group": "environment"
+      },
+      "tags": [
+        "sampling",
+        "snapshot",
+        "softbody",
+        "comparison"
+      ]
+    },
+    "soft_capture_skin": {
+      "lookup_name": "soft_capture_skin",
+      "name": "One surface, two readings",
+      "scene": "res://commons/artifacts/soft_snapshot_gallery/soft_capture_skin.tscn",
+      "category": "soft_bodies",
+      "dev_category": "softbodies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "description": "Two copies of one captured surface. Toggle its true triangle edges without changing geometry or the retained contact skin.",
+      "interactions": [
+        "Nearby CHANGE and RESET push buttons",
+        "Grabbable black PointBody; trigger or drag as labelled"
+      ],
+      "qfep_connection": "The retained shape depends on the sampling decision; display and force conditions are made separately adjustable.",
+      "parameters": {
+        "footprint": [
+          7,
+          3.6,
+          4
+        ],
+        "size_group": "environment"
+      },
+      "tags": [
+        "sampling",
+        "snapshot",
+        "softbody",
+        "comparison"
+      ]
+    },
+    "soft_sampled_gallery": {
+      "lookup_name": "soft_sampled_gallery",
+      "name": "From the soft body gallery",
+      "scene": "res://commons/artifacts/soft_snapshot_gallery/soft_sampled_gallery.tscn",
+      "category": "soft_bodies",
+      "dev_category": "softbodies",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "description": "Six actual gallery configurations, three at a time. Compare starting and captured geometry with the same framing. Cloth, lattice, branch, CA threads and two mould experiments.",
+      "interactions": [
+        "NEXT switches the three examples",
+        "POSE or held PointBody trigger switches start / captured geometry"
+      ],
+      "parameters": {
+        "footprint": [
+          9,
+          3.8,
+          4
+        ],
+        "size_group": "environment"
+      },
+      "tags": [
+        "sampling",
+        "snapshot",
+        "gallery",
+        "softbody"
+      ],
+      "qfep_connection": "Conditions and the sampling moment leave a shape; the saved sculpture does not retain the capacity to resume the process."
+    }
+  }
+}

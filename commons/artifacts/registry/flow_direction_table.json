@@ -1,0 +1,39 @@
+{
+  "artifacts": {
+    "flow_direction_table": {
+      "lookup_name": "flow_direction_table",
+      "name": "Leave a direction",
+      "scene": "res://commons/artifacts/flow_direction_table/flow_direction_table.tscn",
+      "description": "The existing flow table with a small hand surface. Hold the carried point action and draw directions into its field; the original agents read the result.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        3,
+        3,
+        5
+      ],
+      "size_group": "medium",
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "tags": [
+        "flow field",
+        "hand",
+        "direction",
+        "grabbable",
+        "editing"
+      ],
+      "qfep_connection": "A collective turn can follow a direction written into the environment. The bodies keep moving after the author releases the point; the field retains the instruction.",
+      "parameters": {
+        "footprint": [
+          3,
+          3,
+          5
+        ],
+        "size_group": "medium"
+      }
+    }
+  }
+}

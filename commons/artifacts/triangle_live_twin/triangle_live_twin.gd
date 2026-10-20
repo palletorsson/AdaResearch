@@ -6,6 +6,7 @@ const CENTRE := Vector3(0,1.8,0)
 const STYLE = preload("res://commons/primitives/line/museum_line_style.gd")
 var pink: StandardMaterial3D
 var fill: StandardMaterial3D
+var source_fill: StandardMaterial3D
 var source: Node3D
 var white: StandardMaterial3D
 var black: StandardMaterial3D
@@ -24,6 +25,7 @@ var _source_transform := Transform3D.IDENTITY
 func _ready() -> void:
 	add_to_group("triangle_live_twins")
 	white=STYLE.white();pink=STYLE.pink();fill=STYLE.face()
+	source_fill=STYLE.face();source_fill.cull_mode=BaseMaterial3D.CULL_BACK
 	black=StandardMaterial3D.new();black.albedo_color=Color(0.008,0.009,0.012);black.roughness=0.3
 	faces=MeshInstance3D.new();faces.name="SameFacesEnlarged";faces.material_override=fill;add_child(faces)
 	large_edges=edges("LargePinkEdges",0.018)
@@ -139,8 +141,9 @@ func refresh(force: bool=false) -> void:
 	triangle_count=0
 	var visible_triangles := 0
 	for face in source.completed_triangles:
-		face.mesh.material_override=fill
-		if source.museum_style:face.mesh.visible=false
+		face.mesh.material_override=source_fill if source.museum_style else fill
+		if source.museum_style:
+			face.mesh.visible=source.fills_visible and bool(source.get_meta("config_show_local_fill",false))
 		var loop: Array=face.points
 		for i in range(1,loop.size()-1):
 			var indices := [loop[0],loop[i],loop[i+1]]

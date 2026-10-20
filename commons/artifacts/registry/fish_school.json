@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "fish_school": {
+      "lookup_name": "fish_school",
+      "name": "A school within reach",
+      "scene": "res://commons/artifacts/fish_school/fish_school.tscn",
+      "description": "72 fish on the observation balcony. Hold the carried PointBody to gather; hold its action to scatter. The hand term, its eight-metre range and one fish's response are visible.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": ["swarmintelligence"],
+      "footprint": [12,5,11],
+      "size_group": "world_scale",
+      "tags": ["boids","fish","steering","grabbable","balcony"],
+      "qfep_connection": "The sphere adds a declared influence. The school still follows its neighbours; turning toward a hand is not a model of consent.",
+      "parameters": {"footprint": [12,5,11], "size_group": "world_scale"}
+    }
+  }
+}

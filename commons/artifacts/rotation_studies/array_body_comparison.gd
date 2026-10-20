@@ -94,12 +94,12 @@ func _begin_pass(index: int) -> void:
 	pass_index = index
 	elapsed = 0.0
 	phase = "running"
-	var target_distance: float = subject.rows * subject.SPACING + 2.0
 	var ignored_bodies: Array[Node] = []
 	for other in get_tree().root.find_children("*", "CharacterBody3D", true, false):
 		if not other.is_queued_for_deletion() and (other.collision_layer & 1) != 0:
 			ignored_bodies.append(other)
 	for band: Dictionary in subject.bands:
+		var target_distance: float = subject.rows * subject.SPACING * band.node.global_basis.z.length() + 2.0
 		var body := CharacterBody3D.new()
 		body.name = WIDTH_IDS[index] + "_" + str(band.id)
 		# Layer zero makes the visible witnesses ghosts to every other mover.

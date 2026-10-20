@@ -16156,6 +16156,47 @@
 		"footprint_cells": 4,
 		"clearance_m": 0.6
 	  }
-	}
+	},
+  "pendulum_noise": {
+	"lookup_name": "pendulum_noise",
+	"name": "The Same Release / A Recorded Push",
+	"scene": "res://commons/artifacts/pendulum_noise/PendulumNoise.tscn",
+	"description": "Pull either familiar point to set both releases. Compare a recorded four-second horizontal force off/on, then the same input with different damping. Local controls,20s clock,angles,peaks and terminal settling tolerance. Angular model; not a contact or Jolt hinge simulation.",
+	"category": "physics",
+	"complexity": "intermediate",
+	"map_sequences": [
+	  "forces",
+      "wavefunctions"
+	],
+	"map_ready": true,
+	"include_in_map_data": true,
+	"parameters": {
+	  "footprint": [
+		6.6,
+		3.5,
+		4.9
+	  ],
+	  "size_group": "room_scale"
+	},
+	"interactions": [
+	  "Pull either point; release both",
+	  "Force strength",
+	  "Comparison damping",
+	  "Run/pause",
+	  "Replay",
+	  "Switch comparison",
+	  "Next seed",
+      "Reset"
+	],
+	"qfep_connection": "Separate a retained disturbance from its receiver. A changed response need not imply a changed rule or adaptive controller.",
+	"tags": [
+	  "pendulum",
+	  "force",
+	  "noise",
+	  "damping",
+	  "paired comparison",
+      "point lineage"
+	]
+  }
   }
 }

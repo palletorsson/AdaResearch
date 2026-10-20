@@ -6,6 +6,11 @@
 
 ## The System
 
+For enclosed **3D cellular interiors**, see [Cellular interiors](../cellular_spaces/README.md):
+a curved womb space and connected Voronoi cells with an open central room.
+Run `../cellular_spaces/cellular_spaces_preview.tscn` to walk through both.
+TopologyManager keys: `cellular_womb` and `cellular_atrium`.
+
 `TopologyManager` orchestrates a library of **20 walkable mathematical surfaces**, each generated procedurally from a different algorithm. All extend `TopologySpace` — the base class that handles mesh generation, collision, and material.
 
 Toggle spaces on/off in the Inspector. They line up along the X axis, `space_separation` apart. Add more at runtime with `add_space_at_runtime("key")`.

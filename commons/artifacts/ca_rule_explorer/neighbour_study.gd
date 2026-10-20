@@ -62,6 +62,7 @@ func _ready() -> void:
 		floor_history = load("res://commons/artifacts/ca_rule_explorer/comparison_floor.gd").new()
 		add_child(floor_history)
 		floor_history.build(work)
+		add_child(load("res://commons/artifacts/ca_rule_explorer/hand_point.gd").new())
 	refresh()
 
 func next_cell() -> void:

@@ -137,9 +137,9 @@ var harmonic_colors: Array[Color] = [
 ]
 
 # ── the bench (stand:bench only) ────────────────────────────────────────────
-## The display's origin above the deck: rows at LIFT - 0.35 - h*0.15 (1.40 … 0.80 m),
-## which clears the bench's back edge and the readout's top edge from a standing eye.
-const LIFT: float = 1.75
+## The display's origin above the deck: rows at LIFT - 0.35 - h*0.15 (1.80 … 1.20 m).
+## Keep even the fifth row above the bench and housed readout.
+const LIFT: float = 2.15
 const BENCH_H: float = 0.92
 const BENCH_W: float = 2.90
 const BENCH_D: float = 0.50

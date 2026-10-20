@@ -10,6 +10,12 @@ var lesson_time := 0.0
 var lesson_hall: Node
 
 func _process(delta: float) -> void:
+	# The demo rotates its own camera. In the museum ROTATION turns the specimens.
+	if chapter == "affect" and ready_for_input and is_instance_valid(model) and model.enable_rotation:
+		var forms:Node3D = model.get_node_or_null("BiologicalForms")
+		if forms != null:
+			for form in forms.get_children():
+				if form is Node3D: form.rotate_y(model.rotation_speed * delta)
 	lesson_time+=delta
 	if lesson_time<0.5 or not is_instance_valid(lesson_hall):return
 	lesson_time=0.0
@@ -48,6 +54,7 @@ func _bind() -> void:
 	model=works[spec.primary[0]]
 	if spec.primary.size()>1:other=works[spec.primary[1]]
 	match chapter:
+		"affect": _install_affect_stage()
 		"cloth": _cloth_pins(0)
 		"contact":model.set_process(false)
 		"sampling":model=works.rounded_softbody_test.get_node("RoundedSoftBody")
@@ -60,6 +67,7 @@ func _bind() -> void:
 				model._texture=ImageTexture.create_from_image(model._image)
 				model._material.albedo_texture=model._texture
 			model._init_simulation();model._update_texture()
+			_install_reaction_stage()
 		"morphogenesis":model.regenerate_at_entropy=false
 	# The original local controls remain available unless a screen covers the hall.
 	for ui in hall.find_children("*","CanvasLayer",true,false):
@@ -79,6 +87,40 @@ func _bind() -> void:
 		for x in [int(dims.width)*0.3,int(dims.width)*0.7]:
 			var light:=OmniLight3D.new();light.position=Vector3(x,7,z+int(em.get("VESTIBULE_H")));light.omni_range=18;light.light_energy=4;hall.add_child(light)
 	ready_for_input=true;refresh()
+
+func _install_affect_stage() -> void:
+	# Museum-only display placement; no change to the generator's recipes.
+	model.position.y += 2.2
+	model.apply_grid_config({"generation_seed":1337,"spacing":4.0})
+	model.regenerate_forms()
+	var stage:=Node3D.new();stage.name="SpecimenCourt";model.add_child(stage);stage.position.y=-2.2
+	box(Vector3(0,.015,0),Vector3(12,.025,12),material("e1d0d6"),false,stage)
+	for z in model.grid_size:
+		for x in model.grid_size:
+			var number:int=z*model.grid_size+x
+			if number>=model.number_of_forms:continue
+			var at:=Vector3((x-(model.grid_size-1)*.5)*model.spacing,0,(z-(model.grid_size-1)*.5)*model.spacing)
+			box(at+Vector3(0,.25,0),Vector3(1.8,.5,1.8),material("38323e"),true,stage)
+			var tag:=label("FORM %02d"%(number+1),at+Vector3(0,.34,-.93),.0015)
+			tag.rotation.y=PI;tag.reparent(stage,false)
+
+func _install_reaction_stage() -> void:
+	# Enlarge the existing live texture; the numerical field and clock stay supplied.
+	var stage:=Node3D.new();stage.name="ReactionWall";model.add_child(stage)
+	box(Vector3(0,2.2,-2.3),Vector3(4.0,4.0,.16),material("22333e"),true,stage)
+	var screen:=MeshInstance3D.new();screen.name="LiveField"
+	var quad:=QuadMesh.new();quad.size=Vector2(3.7,3.7);screen.mesh=quad
+	screen.position=Vector3(0,2.2,-2.2)
+	var finish:=StandardMaterial3D.new();finish.albedo_texture=model._texture
+	finish.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED
+	finish.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	screen.material_override=finish;stage.add_child(screen)
+	box(Vector3(0,-.5,0),Vector3(1.05,1.0,1.05),material("22333e"),true,stage)
+	var caption:=label("ONE FIELD / TWO DISPLAYS",Vector3(0,4.45,-2.16),.0018)
+	caption.reparent(stage,false)
+	# A solid panel hangs from two uprights; each meets the hall floor one metre below the artifact.
+	for x in [-1.8,1.8]:box(Vector3(x,1.6,-2.3),Vector3(.13,5.2,.22),material("22333e"),true,stage)
+	var fill:=OmniLight3D.new();fill.position=Vector3(0,2.4,2.5);fill.omni_range=8;fill.light_energy=3;stage.add_child(fill)
 
 func _bodies(n: Node) -> Array:
 	var out: Array=[]
@@ -105,13 +147,35 @@ func _cloth_pins(mode: int) -> void:
 
 func _hold_bodies(n: Node, freeze_now: bool) -> void:
 	for sb in _bodies(n):
-		var count: int=sb.mesh.surface_get_array_len(0)
+		var body_id: int=sb.get_instance_id()
 		if freeze_now:
+			if saved_pins.has(body_id):continue
+			# Jolt omits mesh entries that no triangle references. Pinning those
+			# entries is invalid. An attachment also keeps the *current* shape,
+			# rather than retaining the vertices' previous motion after pinning.
+			var used: Dictionary={}
+			for index in sb.mesh.surface_get_arrays(0)[Mesh.ARRAY_INDEX]:used[index]=true
 			var pins: Array=[]
-			for i in count:
-				if sb.is_point_pinned(i):pins.append(i)
-			saved_pins[sb.get_instance_id()]=pins
-		for i in count:sb.set_point_pinned(i,freeze_now or i in saved_pins.get(sb.get_instance_id(),[]))
+			var old: Array=sb.get("pinned_points")
+			for slot in old.size():
+				pins.append({"index":old[slot],"path":sb.get("attachments/%d/spatial_attachment_path"%slot),"offset":sb.get("attachments/%d/offset"%slot)})
+			for index in old:sb.set_point_pinned(index,false)
+			var anchor:=Node3D.new();add_child(anchor)
+			for index in used:sb.set_point_pinned(index,true,sb.get_path_to(anchor))
+			saved_pins[body_id]={"pins":pins,"indices":used.keys(),"anchor":anchor}
+		elif saved_pins.has(body_id):
+			var saved: Dictionary=saved_pins[body_id]
+			for index in saved.indices:sb.set_point_pinned(index,false)
+			for slot in saved.pins.size():
+				var pin: Dictionary=saved.pins[slot]
+				sb.set_point_pinned(pin.index,true,pin.path)
+				sb.set("attachments/%d/offset"%slot,pin.offset)
+			saved.anchor.queue_free()
+			saved_pins.erase(body_id)
+
+func _release_contact_hold() -> void:
+	if drive_held:_hold_bodies(model,false)
+	drive_held=false
 
 func act(id: String) -> void:
 	if not ready_for_input or busy:return
@@ -165,13 +229,19 @@ func act(id: String) -> void:
 				"RESET PHASE":model._time=0.0;model._process(0.0)
 		"contact":
 			match id:
-				"REPLAY":model.apply_grid_config({"seed_value":1337,"respawn":false})
-				"VARIATION":model.lesson_variation=not model.lesson_variation;model.apply_grid_config({"seed_value":1337})
-				"GROUP":model.apply_grid_config({"gallery_part":[2,3,1][_next(id,3)],"respawn":false})
+				"REPLAY":
+					_release_contact_hold()
+					model.apply_grid_config({"seed_value":1337,"respawn":false})
+				"VARIATION":
+					_release_contact_hold()
+					model.lesson_variation=not model.lesson_variation;model.apply_grid_config({"seed_value":1337})
+				"GROUP":
+					_release_contact_hold()
+					model.apply_grid_config({"gallery_part":[2,3,1][_next(id,3)],"respawn":false})
 				"HOLD":
 					if not drive_held:_hold_bodies(model,true)
 					drive_held=true
-				"RELEASE":_hold_bodies(model,false);drive_held=false
+				"RELEASE":_release_contact_hold()
 		"sampling":
 			match id:
 				"MEASURE":model._cycle_mode()

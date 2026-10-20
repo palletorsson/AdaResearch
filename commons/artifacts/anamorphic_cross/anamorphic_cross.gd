@@ -34,6 +34,7 @@ extends Node3D
 const DangerZoneScript = preload("res://commons/hazards/DangerZone.gd")
 
 class PassageZone extends "res://commons/hazards/DangerZone.gd":
+	var health_provider: Node
 	func _setup_collision() -> void:
 		super._setup_collision()
 		collision_mask |= 1 # museum Walker, alongside the layer-20 XR body
@@ -46,14 +47,14 @@ class PassageZone extends "res://commons/hazards/DangerZone.gd":
 		return super._is_player(body)
 	func _deal_damage(amount: float) -> void:
 		if _neutralized: return
-		var gm := get_node_or_null("/root/GameManager")
+		var gm := health_provider if is_instance_valid(health_provider) else get_node_or_null("/root/GameManager")
 		# The museum's generic damage route turns every hit into a 33-point
 		# creature bite with a shared cooldown. These gates own their own ticks.
 		if gm != null and gm.has_method("apply_bite_damage"):
 			gm.apply_bite_damage(amount)
 		elif gm != null and gm.has_method("apply_health_damage"):
 			gm.apply_health_damage(amount)
-		if flash_on_damage: _flash_screen(Color.RED)
+		if flash_on_damage and not is_instance_valid(health_provider): _flash_screen(Color.RED)
 		damage_dealt.emit(amount,danger_type)
 
 @export var bar_len_m: float = 3.4
@@ -68,6 +69,8 @@ class PassageZone extends "res://commons/hazards/DangerZone.gd":
 @export var damage_per_tick: float = 7.0
 @export var tick_interval: float = 0.45
 @export var passage: bool = false
+## Optional host-owned health; absent in the original museum.
+var health_provider: Node
 
 signal entered()
 signal left()
@@ -109,6 +112,7 @@ func _build() -> void:
 
 	var dz = PassageZone.new() if passage else DangerZoneScript.new()
 	dz.name = "DangerZone"
+	if passage: dz.health_provider = health_provider
 	dz.damage_per_tick = damage_per_tick
 	dz.tick_interval = tick_interval
 	dz.flash_on_damage = true

@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="res://commons/artifacts/construction_triangle_brace/construction_triangle_brace.gd" id="1"]
+[node name="ConstructionTriangleBrace" type="Node3D"]
+script = ExtResource("1")

@@ -1,4 +1,6 @@
 extends Node3D
+const HallSeed = preload("res://commons/artifacts/randomness_space/hall_seed.gd")
+var _hall_rng := RandomNumberGenerator.new()
 
 # TRNG vs PRNG Comparison
 # Demonstrates true vs pseudo-random number generation
@@ -150,7 +152,11 @@ func _ready() -> void:
 	# BEFORE the first draw of any kind. seed() replaces the OS entropy Godot
 	# starts the global generator with; at the default (-1) this line does nothing
 	# and the stream is exactly what it always was.
-	if stream_seed >= 0:
+	if HallSeed.enabled(self):
+		stream_seed = HallSeed.current(self)
+		prng_seed = stream_seed
+		_hall_rng.seed = stream_seed
+	elif stream_seed >= 0:
 		seed(stream_seed)
 	initialize_generators()
 	_setup_visual_frames()
@@ -161,6 +167,23 @@ func _ready() -> void:
 	_apply_disclosure()
 	if stream_seed >= 0:
 		_prime_pinned()
+	HallSeed.bind(self)
+
+func _apply_hall_seed(value: int, _receipt: Dictionary) -> void:
+	stream_seed = value
+	prng_seed = value
+	_hall_rng.seed = value
+	time = 0.0
+	sample_timer = 0.0
+	entropy_history.clear()
+	initialize_generators()
+	_prime_pinned()
+	if is_instance_valid(_register_root):
+		remove_child(_register_root)
+		_register_root.queue_free()
+		_register_root = null
+	_build_origin_register()
+	_apply_disclosure()
 
 func _use_museum_lighting() -> void:
 	# This scene's sun belongs to its standalone demonstration. Inside the
@@ -235,14 +258,15 @@ func simulate_true_random() -> float:
 	return fmod(combined_entropy * 1000000.0, 1.0)
 
 func quantum_fluctuation() -> float:
-	return randf()
+	return _hall_rng.randf() if HallSeed.enabled(self) else randf()
 
 func thermal_fluctuation() -> float:
 	var thermal_energy = sin(time * 137.3) + cos(time * 241.7) + sin(time * 383.1)
 	return fmod(abs(thermal_energy), 1.0)
 
 func atmospheric_fluctuation() -> float:
-	return fmod(sin(time * 1000.0 + randf() * 100.0), 1.0)
+	var draw := _hall_rng.randf() if HallSeed.enabled(self) else randf()
+	return fmod(sin(time * 1000.0 + draw * 100.0), 1.0)
 
 func system_timing_jitter() -> float:
 	if _pinned:
@@ -392,7 +416,8 @@ func _setup_explanation_labels() -> void:
 	# TRNG explanation label
 	var trng_label := Label3D.new()
 	trng_label.name = "TrngExplanation"
-	trng_label.text = "TRUE RANDOM (TRNG)\nUnpredictable — Uses physical entropy\n(thermal noise, radioactive decay,\nquantum fluctuations)\n\nEach number is fundamentally\nunreproducible"
+	trng_label.text = "MODELS OF PHYSICAL SOURCES\nReal TRNGs measure physical processes.\nThese signals are calculated illustrations,\nnot measurements from attached sensors."
+	if HallSeed.enabled(self): trng_label.text += "\n\nBoth panels repeat from the hall seed."
 	trng_label.font_size = 48
 	trng_label.position = Vector3(0, 3.8, 0.1)
 	trng_label.modulate = Color(0.3, 1.0, 0.4)
@@ -725,7 +750,7 @@ func apply_grid_config(config: Dictionary) -> void:
 func _read_meta_overrides() -> void:
 	if has_meta("config_disclosure"):
 		disclosure = Disclosure.disclosure_name(str(get_meta("config_disclosure")))
-	if has_meta("config_stream_seed"):
+	if has_meta("config_stream_seed") and not HallSeed.enabled(self):
 		stream_seed = int(str(get_meta("config_stream_seed")))
 
 
@@ -823,6 +848,8 @@ func _mask(n: Node, on: bool) -> void:
 ## The asymmetry is the whole teaching, and it is the one thing the legacy rig
 ## never says out loud: both panels currently show twenty bars each and the
 ## captions assert a difference the geometry does not draw.
+## Random Definition overrides this illustration: both calculated panels display
+## their actual shared seed. Empty sockets must not imply a physical sensor exists.
 func _build_origin_register() -> void:
 	if _rung() < 4:
 		return
@@ -873,7 +900,7 @@ func _build_origin_register() -> void:
 			# The socket: identical on both sides. What differs is what is in it.
 			rail.add_child(_reg_box(Vector3(x, base_y - 0.01, -0.12),
 				Vector3(0.13, 0.07, 0.13), dark))
-			if side == 1:
+			if side == 1 and not HallSeed.enabled(self):
 				continue                     # the true source has no seed to show
 			# MSB left. A pinned rig shows its actual seed; an unpinned one has no
 			# recorded seed at all and stands its lamps down — the honest picture,
@@ -887,7 +914,7 @@ func _build_origin_register() -> void:
 			else:
 				rail.add_child(_reg_box(Vector3(x, base_y + 0.09, -0.12),
 					Vector3(0.11, 0.14, 0.11), dark))
-		if side == 1:
+		if side == 1 and not HallSeed.enabled(self):
 			# A struck-through bar across the empty register: the row is not merely
 			# empty, it is CLOSED. Nothing will ever be written there.
 			rail.add_child(_reg_box(Vector3(0, base_y + 0.16, -0.11),

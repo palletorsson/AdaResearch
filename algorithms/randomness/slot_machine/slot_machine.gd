@@ -19,6 +19,7 @@
 extends Node3D
 
 class_name SlotMachine
+const HallSeed = preload("res://commons/artifacts/randomness_space/hall_seed.gd")
 
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
@@ -168,9 +169,10 @@ var _built: bool = false    # _ready has run once; guards the config rebuild
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	if HallSeed.enabled(self): spin_seed = HallSeed.current(self)
 	_symbol_counts.resize(symbols_per_reel)
 	_symbol_counts.fill(0)
-	if spin_seed != 0:
+	if spin_seed != 0 or HallSeed.enabled(self):
 		_rng = RandomNumberGenerator.new()
 		_rng.seed = spin_seed
 
@@ -183,6 +185,16 @@ func _ready() -> void:
 	_create_vr_controls()
 	_face_forward()
 	_built = true
+	HallSeed.bind(self)
+
+func can_apply_hall_seed() -> bool:
+	return not _is_spinning
+
+func _apply_hall_seed(value: int, _receipt: Dictionary) -> void:
+	spin_seed = value
+	if _rng == null: _rng = RandomNumberGenerator.new()
+	_rng.seed = value
+	_reset_stats()
 
 
 ## This machine was authored facing -Z while every other member of the family faces
@@ -963,7 +975,7 @@ func apply_grid_config(config: Dictionary) -> void:
 		if d != disclosure:
 			disclosure = d
 			rebuild = true
-	if config.has("spin_seed"):
+	if config.has("spin_seed") and not HallSeed.enabled(self):
 		var s: int = int(str(config["spin_seed"]))
 		if s != spin_seed:
 			spin_seed = s

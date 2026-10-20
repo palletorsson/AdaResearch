@@ -54,6 +54,8 @@ var _gallery_clean := false
 @export var segments_increment: int = 2
 @export var base_rotation_speed: float = 0.5
 @export var rotation_speed_multiplier: float = 1.2  # Each layer spins faster
+var alternate_direction := false
+var motion_caption := "SAME EIGHT LAYERS / SAME SPEED RULE"
 @export_group("Colliders")
 @export var enable_colliders: bool = true
 @export var collision_layer: int = 1
@@ -206,7 +208,10 @@ func generate_carousel() -> void:
 			label.pixel_size=0.01
 			label.outline_size=8
 			add_child(label)
-		label.text=profile.to_upper()+"\nSAME EIGHT LAYERS / SAME SPEED RULE"
+		label.text=profile.to_upper()+"\n"+motion_caption
+
+func _layer_speed(index: int) -> float:
+	return base_rotation_speed * pow(rotation_speed_multiplier, float(index)) * (-1.0 if alternate_direction and index % 2 == 1 else 1.0)
 
 func update_carousel_rotation() -> void:
 	# mm_inst is built in code and added as an OWNERLESS child, which is exactly what
@@ -225,7 +230,7 @@ func update_carousel_rotation() -> void:
 
 	for i in range(mm.instance_count):
 		# Each layer rotates at different speed (faster as you go up)
-		var layer_speed: float = base_rotation_speed * pow(rotation_speed_multiplier, float(i))
+		var layer_speed: float = _layer_speed(i)
 		var angle: float = _rotation_angle * layer_speed
 
 		var current_radius: float = _vis_radii[i] if i < _vis_radii.size() else 1.0
@@ -285,7 +290,7 @@ func _update_colliders_rotation() -> void:
 			continue
 
 		# Each layer rotates at different speed
-		var layer_speed: float = base_rotation_speed * pow(rotation_speed_multiplier, float(i))
+		var layer_speed: float = _layer_speed(i)
 		var angle: float = _rotation_angle * layer_speed
 
 		body.rotation.y = angle
@@ -313,8 +318,9 @@ func apply_grid_config(config: Dictionary) -> void:
 		set_meta("config_%s" % str(k), config[k])
 	var was_profile: String = profile
 	var was_clean := _gallery_clean
+	var was_caption := motion_caption
 	_read_dna()
-	if profile != was_profile or was_clean != _gallery_clean:
+	if profile != was_profile or was_clean != _gallery_clean or was_caption != motion_caption:
 		generate_carousel()
 
 
@@ -323,6 +329,10 @@ func apply_grid_config(config: Dictionary) -> void:
 # default rather than silently rendering as one.
 func _read_dna() -> void:
 	_gallery_clean = str(get_meta("config_gallery", "")) == "clean"
+	base_rotation_speed = clampf(float(get_meta("config_base_speed", base_rotation_speed)), -1.0, 1.0)
+	rotation_speed_multiplier = clampf(float(get_meta("config_speed_multiplier", rotation_speed_multiplier)), 0.5, 1.5)
+	alternate_direction = bool(get_meta("config_alternate_direction", alternate_direction))
+	motion_caption = str(get_meta("config_motion_caption", motion_caption))
 	if has_meta("config_profile"):
 		var p: String = str(get_meta("config_profile")).strip_edges().to_lower()
 		profile = p if PROFILES.has(p) else profile

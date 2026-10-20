@@ -4,6 +4,7 @@
 
 [node name="pulsMarkov" type="Node3D"]
 script = ExtResource("1_45qhf")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.31397)
+generation_seed = 20261013
+base_radius = 1.0
+sphere_resolution = 32
+show_readout = true

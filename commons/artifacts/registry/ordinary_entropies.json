@@ -1,0 +1,299 @@
+{
+  "id": "ordinary_entropies",
+  "name": "Different entropies, ordinary objects",
+  "artifacts": {
+    "entropy_chairs_shannon": {
+      "lookup_name": "entropy_chairs_shannon",
+      "name": "Shannon: a chair colour",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_chairs_shannon.tscn",
+      "description": "Shannon: a chair colour. Simultaneous versions at everyday scale, with a compact explanation mounted on the wall and no interface.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          8,
+          3,
+          7
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "Walk between the versions and compare what differs with what remains fixed.",
+        "Compare four visible inventories: 4/4, the same counts rearranged, 7/1 and 8/0. Predict uncertainty in a hypothetical equal-ID colour draw; reconstruct the colour-count function."
+      ]
+    },
+    "entropy_chairs_boltzmann": {
+      "lookup_name": "entropy_chairs_boltzmann",
+      "name": "Boltzmann: how many arrangements",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_chairs_boltzmann.tscn",
+      "description": "Boltzmann: how many arrangements. Simultaneous versions at everyday scale, with a compact explanation mounted on the wall and no interface.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          9,
+          3,
+          7
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "Walk between the versions and compare what differs with what remains fixed.",
+        "Compare sorted, mixed and a second arrangement with the same count. Enumerate assignments: Omega=1 versus 36; colour H stays one bit."
+      ]
+    },
+    "entropy_chairs_description": {
+      "lookup_name": "entropy_chairs_description",
+      "name": "Algorithmic complexity: describe these chairs",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_chairs_description.tscn",
+      "description": "Algorithmic complexity: describe these chairs. Simultaneous versions at everyday scale, with a compact explanation mounted on the wall and no interface.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          17,
+          3,
+          4
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "Walk between the versions and compare what differs with what remains fixed.",
+        "Four chair groups and their candidate recipes remain visible together. Reconstruct seed 435 with the shared generator; do not infer shortest-program length from appearance."
+      ]
+    },
+    "entropy_door_dynamics": {
+      "lookup_name": "entropy_door_dynamics",
+      "name": "Dynamical entropy: two starts, two rules",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_door_dynamics.tscn",
+      "description": "Two door pairs in one wall use x/2 and (2x) mod 1. Shared STEP, RESET and starting GAP; separate LOW/HIGH histories and finite ensemble readings. Central passage stays open. No random input or thermal claim.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          18,
+          3,
+          5
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "STEP advances both pairs; RESET and GAP restore a controlled beginning. Read both LOW/HIGH traces separately from the 1024-start ensemble. Eight symbols give 1 versus 8 bits; finite starts cap doubling records at 10. Reconstruct the rejoining pair.",
+        "Which initial differences disappear, grow or survive only in the record?"
+      ]
+    },
+    "entropy_cooling_cup": {
+      "lookup_name": "entropy_cooling_cup",
+      "name": "Thermodynamic entropy: a cooling cup",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_cooling_cup.tscn",
+      "description": "Thermodynamic entropy: a cooling cup. Simultaneous versions at everyday scale, with a compact explanation mounted on the wall and no interface.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          12,
+          3,
+          4
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "Walk between the versions and compare what differs with what remains fixed.",
+        "Compare five cups on one table, with a donut and plate: fixed 25% milk, different mixing stages. Reconstruct the separate heat model at 0, 5, 15, 30, 60 seconds; neither swirl nor steam measures entropy."
+      ]
+    },
+    "entropy_frosted_chair": {
+      "lookup_name": "entropy_frosted_chair",
+      "name": "Conditional entropy: the frosted chair",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_frosted_chair.tscn",
+      "description": "Conditional entropy: the frosted chair. Simultaneous versions at everyday scale, with a compact explanation mounted on the wall and no interface.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          18,
+          3,
+          4
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "Walk between the versions and compare what differs with what remains fixed.",
+        "Compare five panes over one chair: identity, colour plus arms, colour, colour, no detail. Reconstruct 0, 1, 2, 2, 3 unresolved bits from eight identities. Stronger blur does not necessarily change the record."
+      ]
+    },
+    "entropy_ball_pit": {
+      "lookup_name": "entropy_ball_pit",
+      "name": "Min-entropy: one guess",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_ball_pit.tscn",
+      "description": "Min-entropy: four physical pyramids of sixteen full-size chairs (9 + 4 + 2 + 1). Grab, stack, release or walk into them; gravity and contacts determine what falls. Groups compare 8/8, 8/4/4 types, 12/4 and all pink. Group letters and IDs stay with the chairs. Uniform ID draws with replacement use private seed 435; spatial rearrangement does not alter the category probabilities. CHANGE ONE changes a type and RESET rebuilds a pyramid.",
+      "category": "randomness",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "everyday objects",
+        "experiment",
+        "simultaneous comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          17,
+          3,
+          10
+        ],
+        "size_group": "floor_display"
+      },
+      "qfep_connection": "Changing the measurement, grouping or update rule changes which differences can matter. No single disorder gauge substitutes for these distinct contracts.",
+      "interactions": [
+        "Grip and release a chair in VR; desktop right-click carries/drops and wheel changes distance. Walking nudges the physical stack.",
+        "Choose a type before DRAW. All 16 group IDs remain equally likely wherever the chairs move. CHANGE ONE alters a category; RESET rebuilds after held chairs are released.",
+        "Compare A/B at the same 50% best guess but different Shannon entropy. At all-pink D, observe what collapses while the colour answer stays certain.",
+        "Research floor receipts retain full pose, velocity and generator state; no promise of identical future collisions."
+      ]
+    },
+    "entropy_chair_reference": {
+      "lookup_name": "entropy_chair_reference",
+      "name": "One chair, two questions",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_chair_reference.tscn",
+      "description": "A full-size pink chair on the visitor floor, in front of a wall label. Pick it up or nudge it by walking; release resumes gravity. It introduces colour versus arrangement before the prepared Shannon/Boltzmann comparisons.",
+      "category": "randomness",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          3,
+          3,
+          2
+        ],
+        "size_group": "floor_display"
+      },
+      "interactions": [
+        "Walk around the prepared specimens and compare the declared observations."
+      ]
+    },
+    "entropy_jar_states": {
+      "lookup_name": "entropy_jar_states",
+      "name": "Four columns: different beginnings, continuing mixing",
+      "scene": "res://commons/artifacts/ordinary_entropies/entropy_jar_states.tscn",
+      "description": "Four broad glass jars on a shared limestone-coloured plinth: 1.04 m diameter and 2.30 m glass height, rounded shoulders, clear outward-facing skins and ceramic lids. Forty lavender and forty coral beads per jar retain the slow seed-435 paths. Eight-second inspection hold, live height/core-rim readings, PAUSE and RESTART on a side panel.",
+      "category": "randomness",
+      "complexity": "beginner",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "randomness"
+      ],
+      "tags": [
+        "entropy",
+        "comparison",
+        "wall text"
+      ],
+      "parameters": {
+        "footprint": [
+          7.2,
+          3.2,
+          4
+        ],
+        "size_group": "floor_display"
+      },
+      "interactions": [
+        "Approach and watch all four starting arrangements mix.",
+        "PAUSE / RESUME freezes or continues the current comparison.",
+        "RESTART restores the starting records and seeded motion."
+      ]
+    }
+  }
+}

@@ -1,0 +1,123 @@
+[
+  {
+    "id": "visit",
+    "hall": "GT_Foundations",
+    "title": "A visitor makes the rounds",
+    "era": "Present / invented museum",
+    "kind": "person",
+    "mode": "visit",
+    "action": "Visit each room once; follow the queue.",
+    "limit": "Vertices are rooms; links are passages. Visiting a room is not walking each passage once.",
+    "source": ""
+  },
+  {
+    "id": "ants",
+    "hall": "GT_Layout",
+    "title": "An ant trail, drawn twice",
+    "era": "Present / simplified animal habitat",
+    "kind": "ant",
+    "mode": "layout",
+    "action": "Rearrange the drawing; keep every trail.",
+    "limit": "Vertices are junctions, not individual ants. No pheromone or foraging behaviour is simulated.",
+    "source": "https://arxiv.org/abs/1103.1612"
+  },
+  {
+    "id": "bridges",
+    "hall": "GT_Pathfinding",
+    "title": "The closed footbridge",
+    "era": "Present / invented riverside town",
+    "kind": "house",
+    "mode": "path",
+    "action": "Close one bridge; find the fewest-crossings detour.",
+    "limit": "Passages have equal cost. A shortest graph route need not be the fastest or most accessible walk.",
+    "source": ""
+  },
+  {
+    "id": "shares",
+    "hall": "GT_Network_Analysis",
+    "title": "The post that gets copied",
+    "era": "Present / invented social network",
+    "kind": "phone",
+    "mode": "counts",
+    "action": "Omit one recorded share; recount incoming events.",
+    "limit": "Vertices are accounts. Arrows are recorded shares, not friendships, impressions, agreement or trust.",
+    "source": "https://bsky.social/about/blog/7-27-2023-custom-feeds"
+  },
+  {
+    "id": "ferry",
+    "hall": "GT_Connectivity",
+    "title": "An island with no return boat",
+    "era": "Present / invented ferry service",
+    "kind": "boat",
+    "mode": "return",
+    "action": "Add a return crossing; compare the mutually reachable islands.",
+    "limit": "A directed link is a scheduled service in this simplified model. Timetables and missed boats are omitted.",
+    "source": ""
+  },
+  {
+    "id": "pipes",
+    "hall": "GT_Spanning_Trees",
+    "title": "Water pipes between homes",
+    "era": "Present / invented village plan",
+    "kind": "house",
+    "mode": "tree",
+    "action": "Select cheap connections; break one; add a spare.",
+    "limit": "Weights are assigned construction costs. This is connectivity planning, not water pressure or hydraulic flow.",
+    "source": ""
+  },
+  {
+    "id": "harbour",
+    "hall": "GT_Flow",
+    "title": "Room for another delivery",
+    "era": "Present / invented harbour plan",
+    "kind": "depot",
+    "mode": "flow",
+    "action": "Allocate two deliveries; notice the cancelled commitment.",
+    "limit": "Capacities count crate slots in one interval. Reverse residual steps revise the plan before dispatch.",
+    "source": "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.maximum_flow.html"
+  },
+  {
+    "id": "tools",
+    "hall": "GT_Matching",
+    "title": "Two makers, two tools",
+    "era": "Present / invented shared workshop",
+    "kind": "person",
+    "mode": "matching",
+    "action": "Revise the first pairing so both people can work.",
+    "limit": "Links encode declared task compatibility. One tool per person; preferences, skill and fairness are not computed.",
+    "source": ""
+  },
+  {
+    "id": "contact",
+    "hall": "GT_Network_Analysis",
+    "title": "A contact is not an infection",
+    "era": "Present / fictional contact experiment",
+    "kind": "person",
+    "mode": "disease",
+    "action": "Advance one contact round; new infections wait until the next round.",
+    "limit": "Toy SI process: probability0.35 per infectious-susceptible edge per round; no recovery, duration or biology. Not an epidemic forecast.",
+    "source": "https://www.nature.com/articles/s41586-021-03694-x"
+  },
+  {
+    "id": "euler",
+    "hall": "GT_Foundations",
+    "title": "Seven bridges, four shores",
+    "era": "Historical / topological reconstruction",
+    "kind": "house",
+    "mode": "euler",
+    "action": "Count odd degrees before attempting to use every bridge once.",
+    "limit": "The seven-edge multigraph follows Euler's bridge problem. This is not a geographical reconstruction or the hall's vertex-visit lesson.",
+    "source": "https://eulerarchive.maa.org/"
+  },
+  {
+    "id": "future",
+    "hall": "GT_Connectivity",
+    "title": "A neighbourhood after the relay fails",
+    "era": "Future / invented scenario, not a forecast",
+    "kind": "relay",
+    "mode": "future",
+    "action": "Lose a central link; switch on the spare connection.",
+    "limit": "Links are permitted communication paths, not guaranteed power, bandwidth, safety or equitable access.",
+    "source": ""
+  }
+]

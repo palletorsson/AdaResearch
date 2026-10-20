@@ -117,6 +117,8 @@ var _panels: Array = []
 var _materials: Array[ShaderMaterial] = []
 var _displays: Array[MeshInstance3D] = []
 var _titles: Array[Label3D] = []
+var wall_setting := false
+var _mounts: Node3D
 
 # ─── Labels ───
 var _label_mode: Label3D
@@ -208,6 +210,11 @@ func _build_mode() -> void:
 
 	var defs := _get_defs()
 	_label_mode.text = MODE_NAMES[_mode]
+	if wall_setting:
+		_label_mode.position.y = 3.7
+		_button_panel.position = Vector3(-5.6, 1.05, PANEL_OFFSET_Z)
+		_mounts = Node3D.new()
+		add_child(_mounts)
 
 	var start_x := -(float(defs.size()) - 1.0) * DISPLAY_GAP * 0.5
 	for i in range(defs.size()):
@@ -265,9 +272,22 @@ func _build_mode() -> void:
 		panel.rotation_degrees = Vector3(-15, 0, 0)
 		add_child(panel)
 		_panels.append(panel)
+		if wall_setting:
+			var quad := QuadMesh.new(); quad.size = Vector2(2, 2); display.mesh = quad
+			display.position.y = 2.1; panel.position.y = 1.02
+			title.position.y = 3.28; title.font_size = 44; title.pixel_size = .002
+			code_label.position = Vector3(x_pos, .77, .06); code_label.font_size = 26; code_label.pixel_size = .002
+			var geo = preload("res://commons/artifacts/jacquard_weaver/weave_geometry.gd")
+			var frame := geo.material("29252c"); var top := geo.material("e4d9c8")
+			geo.box(_mounts, Vector3(x_pos, 2.1, -.065), Vector3(2.13, 2.13, .08), frame)
+			geo.box(_mounts, Vector3(x_pos, .92, 1.2), Vector3(1.65, .10, .65), top, true)
+			for dx in [-.65, .65]: geo.box(_mounts, Vector3(x_pos + dx, .44, 1.2), Vector3(.10, .88, .42), frame, true)
 
 
 func _clear_displays() -> void:
+	if is_instance_valid(_mounts):
+		_mounts.queue_free()
+		_mounts = null
 	for d in _displays:
 		if is_instance_valid(d):
 			d.queue_free()
@@ -304,6 +324,8 @@ func _exit_tree() -> void:
 # ─── apply_grid_config ───
 
 func apply_grid_config(config: Dictionary) -> void:
+	if str(config.get("setting", "")) == "wall": wall_setting = true
+	if not is_node_ready(): await ready
 	if config.has("mode"):
 		var m := str(config["mode"]).to_upper()
 		match m:

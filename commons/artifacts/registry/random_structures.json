@@ -1,0 +1,68 @@
+{
+  "artifacts": {
+    "random_structure_columns": {
+      "lookup_name": "random_structure_columns",
+      "name": "Random Structures — Cylinder Field",
+      "scene": "res://commons/artifacts/random_structure_studies/columns.tscn",
+      "category": "randomness",
+      "sequence": "randomness",
+      "map_sequences": ["randomness"],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "beginner",
+      "description": "A 10 by 10 cylinder field adapted from Palle's Rhino example. Retained draws control height, radius or both while every base stays on the grid. BASELINE, RANGE, SEED +1, TARGET, KEEP and REPLAY expose the assignment and preserve it.",
+      "qfep_connection": "A regular address system stays while chosen dimensions vary. The experiment can revise which property receives the draw rather than equating more variation with a better form.",
+      "tags": ["randomness", "cylinder", "height", "radius", "rhino", "seed", "record"],
+      "spatial_needs": {"footprint_cells": 2, "clearance": {"front": 1, "back": 0, "left": 0, "right": 0}, "preferred_zone": "interior"},
+      "parameters": {"footprint": [1.54, 2.22, 1.9], "study_seed": 435, "variation": 1.0, "column_target": "0 height, 1 radius, 2 both"}
+    },
+    "random_structure_spheres": {
+      "lookup_name": "random_structure_spheres",
+      "name": "Random Structures — Raised Sphere Grid",
+      "scene": "res://commons/artifacts/random_structure_studies/spheres.tscn",
+      "category": "randomness",
+      "sequence": "randomness",
+      "map_sequences": ["randomness"],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "beginner",
+      "description": "One hundred spheres keep their horizontal grid and radius while retained random values change their height. The overlapping surfaces echo the Rhino example; this is a mesh assembly, not a Boolean solid union. BASELINE, RANGE, SEED +1, RESET, KEEP and REPLAY support comparison.",
+      "qfep_connection": "The same grid becomes a spatial field when one coordinate is permitted to vary. Overlap exposes a separate choice about the relation between radius and spacing.",
+      "tags": ["randomness", "sphere", "grid", "height", "rhino", "seed", "record"],
+      "spatial_needs": {"footprint_cells": 2, "clearance": {"front": 1, "back": 0, "left": 0, "right": 0}, "preferred_zone": "interior"},
+      "parameters": {"footprint": [1.54, 2.22, 1.9], "study_seed": 435, "variation": 1.0}
+    },
+    "random_structure_lattice": {
+      "lookup_name": "random_structure_lattice",
+      "name": "Random Structures — Pipe Lattice",
+      "scene": "res://commons/artifacts/random_structure_studies/lattice.tscn",
+      "category": "randomness",
+      "sequence": "randomness",
+      "map_sequences": ["randomness"],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "description": "Four 7 by 7 node levels retain 147 direct posts. Seeded threshold choices add connections to legal neighbours on the next level; a separate range displaces upper nodes. LINKS changes connection probability without moving the nodes. KEEP/REPLAY retains the draws and settings. This is geometry, not an engineered load-bearing structure.",
+      "qfep_connection": "A boundary decides which connections are admissible before chance chooses among them. Geometry and connectivity can be varied separately, making that boundary inspectable.",
+      "tags": ["randomness", "pipes", "lattice", "graph", "probability", "rhino", "record"],
+      "spatial_needs": {"footprint_cells": 2, "clearance": {"front": 1, "back": 0, "left": 0, "right": 0}, "preferred_zone": "interior"},
+      "parameters": {"footprint": [1.54, 2.22, 1.9], "study_seed": 435, "variation": 1.0, "link_probability": 0.4}
+    },
+    "random_structure_tree": {
+      "lookup_name": "random_structure_tree",
+      "name": "Random Structures — Branching Tree",
+      "scene": "res://commons/artifacts/random_structure_studies/tree.tscn",
+      "category": "randomness",
+      "sequence": "randomness",
+      "map_sequences": ["randomness"],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "intermediate",
+      "description": "A trunk divides into three, then nine, then twenty-seven tips. Forty branches retain their parent-child structure while seeded offsets vary the endpoints. Radius follows depth rather than the traversal counter. BASELINE, RANGE, SEED +1, RESET, KEEP and REPLAY compare the same branching rule.",
+      "qfep_connection": "The rule fixes who may branch and how often; the draw changes where each branch arrives. Revising the branching rule would be a different intervention from changing its seed.",
+      "tags": ["randomness", "tree", "branching", "recursion", "rhino", "seed", "record"],
+      "spatial_needs": {"footprint_cells": 2, "clearance": {"front": 1, "back": 0, "left": 0, "right": 0}, "preferred_zone": "interior"},
+      "parameters": {"footprint": [1.54, 2.22, 1.9], "study_seed": 435, "variation": 1.0}
+    }
+  }
+}

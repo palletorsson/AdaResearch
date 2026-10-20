@@ -8577,6 +8577,29 @@
       },
       "map_ready": true,
       "lookup_name": "the_clockmaker_of_rules"
+    },
+    "rd_museum_gallery": {
+      "lookup_name": "rd_museum_gallery",
+      "name": "Reaction / Diffusion — Eighteen Kept Fields",
+      "scene": "res://commons/artifacts/rd_museum_gallery/rd_museum_gallery.tscn",
+      "description": "All 18 rd-gallery configurations as baked Gray–Scott reliefs, colour plates and pillar fields. Two rows of off-white plinths; each names F, K, steps and seed. Saved simulations, alongside the hall’s live experiments.",
+      "category": "cellular_automata",
+      "tags": [
+        "reaction_diffusion",
+        "gray_scott",
+        "gallery",
+        "saved_field"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        7.1,
+        2.5,
+        30.6
+      ],
+      "interactions": [
+        "Walk between the studies; compare the parameters and spatial renderings."
+      ]
     }
   }
 }

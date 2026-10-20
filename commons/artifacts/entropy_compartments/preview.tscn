@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="entropy_compartments.tscn" id="1"]
+[sub_resource type="Environment" id="Environment"]
+background_mode = 1
+background_color = Color(0.035, 0.055, 0.065, 1)
+ambient_light_source = 3
+ambient_light_color = Color(0.8, 0.85, 0.9, 1)
+ambient_light_energy = 0.75
+tonemap_mode = 0
+[sub_resource type="PlaneMesh" id="FloorMesh"]
+size = Vector2(20,20)
+[sub_resource type="StandardMaterial3D" id="FloorMat"]
+albedo_color = Color(0.12, 0.16, 0.17, 1)
+roughness = 0.9
+[node name="EntropyPreview" type="Node3D"]
+[node name="Bench" parent="." instance=ExtResource("1")]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment")
+[node name="Light" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-40,-25,0)
+light_energy = 1.1
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("FloorMesh")
+material_override = SubResource("FloorMat")
+[node name="Camera" type="Camera3D" parent="."]
+position = Vector3(0,2.5,4.5)
+rotation_degrees = Vector3(-16,0,0)
+current = true
+fov = 40.0
+[node name="UI" type="CanvasLayer" parent="."]
+[node name="Bar" type="HBoxContainer" parent="UI"]
+offset_left = 20.0
+offset_top = 20.0
+theme_override_constants/separation = 8
+
+[node name="Minus" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "A LEFT -"
+
+[node name="Plus" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "A LEFT +"
+
+[node name="Same" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "SAME k"
+
+[node name="Swap" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "ONE SWAP"
+
+[node name="Run" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "RUN / PAUSE"
+
+[node name="Reset" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "RESET"
+
+[node name="Keep" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "KEEP"
+
+[node name="Replay" type="Button" parent="UI/Bar"]
+custom_minimum_size = Vector2(110,44)
+text = "REPLAY"
+
+[connection signal="pressed" from="UI/Bar/Minus" to="Bench" method="change_left" binds= [-1]]
+[connection signal="pressed" from="UI/Bar/Plus" to="Bench" method="change_left" binds= [1]]
+[connection signal="pressed" from="UI/Bar/Same" to="Bench" method="same_k" ]
+[connection signal="pressed" from="UI/Bar/Swap" to="Bench" method="random_swap" ]
+[connection signal="pressed" from="UI/Bar/Run" to="Bench" method="toggle_run" ]
+[connection signal="pressed" from="UI/Bar/Reset" to="Bench" method="reset" ]
+[connection signal="pressed" from="UI/Bar/Keep" to="Bench" method="keep" ]
+[connection signal="pressed" from="UI/Bar/Replay" to="Bench" method="replay_saved" ]

@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "listening_horde": {
+      "lookup_name": "listening_horde",
+      "name": "They heard you there",
+      "scene": "res://commons/artifacts/listening_horde/listening_horde.tscn",
+      "description": "Twenty full-size listeners investigate the recorded position of a PointBody pulse, then return to rest. A single passage makes the movement legible.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": ["swarmintelligence"],
+      "footprint": [9, 3, 8],
+      "size_group": "world_scale",
+      "tags": ["agent-state", "memory", "hearing", "horde", "grabbable"],
+      "qfep_connection": "A recorded cue keeps directing bodies after its source has moved. Remembering a position is not understanding a person; the programmed categories and their limits remain visible.",
+      "parameters": {"footprint": [9, 3, 8], "size_group": "world_scale"}
+    }
+  }
+}

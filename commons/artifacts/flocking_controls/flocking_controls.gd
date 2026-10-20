@@ -230,9 +230,12 @@ func _update_force_arrows() -> void:
 	var origin = boid.position
 
 	var im = ImmediateMesh.new()
+	var arrow_scale = 0.3  # Visual amplification; match _draw_arrow's threshold.
+	if (boid.f_sep * arrow_scale).length() < 0.001 and (boid.f_align * arrow_scale).length() < 0.001 and (boid.f_coh * arrow_scale).length() < 0.001:
+		_force_mesh.mesh = im
+		return
 	im.surface_begin(Mesh.PRIMITIVE_LINES)
 
-	var arrow_scale = 0.3  # Visual amplification
 	_draw_arrow(im, origin, boid.f_sep * arrow_scale, color_sep)
 	_draw_arrow(im, origin, boid.f_align * arrow_scale, color_align)
 	_draw_arrow(im, origin, boid.f_coh * arrow_scale, color_coh)

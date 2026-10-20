@@ -1,99 +1,91 @@
 {
- "lookup_name": "omoss",
- "footprint": [
-  5,
-  5,
-  1
- ],
- "rotations": [
-  "0",
-  "90",
-  "180",
-  "270"
- ],
- "approach": "south",
- "exit": "north",
- "footing": {
-  "anchor": [
-   3,
-   3
+  "lookup_name": "omoss",
+  "footprint": [
+    7,
+    6,
+    6
   ],
-  "tiles": [
-   [
-    1,
-    1,
-    1,
-    1,
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "approach": "south",
+  "exit": "north",
+  "footing": {
+    "anchor": [
+      3,
+      3
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "extras": [],
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
     1,
     1,
     1
-   ],
-   [
-    1,
-    2,
-    2,
-    2,
-    2,
-    2,
-    1
-   ],
-   [
-    1,
-    2,
-    2,
-    2,
-    2,
-    2,
-    1
-   ],
-   [
-    1,
-    2,
-    2,
-    2,
-    2,
-    2,
-    1
-   ],
-   [
-    1,
-    2,
-    2,
-    2,
-    2,
-    2,
-    1
-   ],
-   [
-    1,
-    2,
-    2,
-    2,
-    2,
-    2,
-    1
-   ],
-   [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1
-   ]
-  ]
- },
- "extras": [],
- "artifact_offset": [
-  0.0,
-  0.0,
-  0.0
- ],
- "clearance": [
-  3,
-  3,
-  3
- ],
- "posture": "platform"
+  ],
+  "posture": "floor",
+  "note": "2026-10-09: the creature owns its low stage and reachable console. Floor staging; no raised plinth. Conservative animated envelope."
 }

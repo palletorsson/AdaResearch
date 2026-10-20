@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "glass_paint_wall": {
+      "lookup_name": "glass_paint_wall",
+      "name": "Pens on glass / marks on a surface",
+      "scene": "res://commons/artifacts/primitive_encounters/glass_paint_wall.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Pens on glass / marks on a surface",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "gesture",
+        "surface",
+        "comparison"
+      ]
+    },
+    "paired_cube_diagonals": {
+      "lookup_name": "paired_cube_diagonals",
+      "name": "Same corners / different surfaces",
+      "scene": "res://commons/artifacts/primitive_encounters/paired_cube_diagonals.tscn",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Same corners / different surfaces",
+      "map_sequences": [
+        "primitives"
+      ],
+      "tags": [
+        "gesture",
+        "surface",
+        "comparison"
+      ]
+    }
+  }
+}

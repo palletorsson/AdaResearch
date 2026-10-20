@@ -200,7 +200,8 @@ func wear() -> bool:
 func refresh() -> void:
 	if not status:return
 	status.text=("PAUSED / " if paused else "")+phase.to_upper()+" · "+str(completed)+" / 10\n"+notices
-	source_label.text=str(record.get("name","LOOM CLOTH"))+" · "+str(record.picks.size())+" RECORDED PICKS → TEN PANELS"
+	var source := "252 STORED DRAWS" if record.get("kind") == "ten_print" else str(record.picks.size())+" RECORDED PICKS"
+	source_label.text=str(record.get("name","LOOM CLOTH"))+" · "+source+" → TEN PANELS"
 	fitting_label.text=Panels.title(style)+(" / FITTED" if phase=="ready" else " / PREVIEW")
 	for key in choice_labels:choice_labels[key].text=("> " if key==Panels.title(style) else "")+key
 

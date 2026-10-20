@@ -1,0 +1,67 @@
+{
+  "artifacts": {
+    "site_striped_barricade": {
+      "lookup_name": "site_striped_barricade",
+      "scene": "res://commons/artifacts/construction_site/striped_barricade.tscn",
+      "name": "Striped folding barricade",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Godot-built timber A-frame with orange-white rails on both sides, hinges and weathered paint. Inspired by props_wasteland/barricade001a; no Source assets required.",
+      "tags": ["construction", "void", "barrier", "reusable", "scenery"]
+    },
+    "site_chainlink_panel": {
+      "lookup_name": "site_chainlink_panel",
+      "scene": "res://commons/artifacts/construction_site/chainlink_panel.tscn",
+      "name": "Chain-link fence panel",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Godot-built galvanized frame with diamond wire geometry, centre rail and brace. Inspired by props_c17/fence01a. Thin solid web collision; floor origin.",
+      "tags": ["construction", "void", "fence", "reusable", "scenery"]
+    },
+    "site_work_light": {
+      "lookup_name": "site_work_light",
+      "scene": "res://commons/artifacts/construction_site/work_light.tscn",
+      "name": "Tripod work light",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Twin-head tripod light, warm bounded spotlight, coiled lead kept off the route. Floor origin; front -Z.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_scaffold_tarp": {
+      "lookup_name": "site_scaffold_tarp",
+      "scene": "res://commons/artifacts/construction_site/scaffold_tarp.tscn",
+      "name": "Scaffold with blue tarp",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Open-front single scaffold bay with planked deck, side braces and rear tarp. Small shader-driven breeze; collision follows the solids.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "reusable",
+        "scenery"
+      ]
+    },
+    "site_unfinished_wall": {
+      "lookup_name": "site_unfinished_wall",
+      "scene": "res://commons/artifacts/construction_site/unfinished_wall.tscn",
+      "name": "Unfinished stud wall",
+      "category": "construction",
+      "complexity": "environment",
+      "description": "Partial plasterboard sheets on exposed metal studs, support feet and leaning offcut. Move or duplicate the complete bay.",
+      "qfep_connection": "The support structures and working conditions of the exhibit remain visible.",
+      "tags": [
+        "construction",
+        "void",
+        "reusable",
+        "scenery"
+      ]
+    }
+  }
+}

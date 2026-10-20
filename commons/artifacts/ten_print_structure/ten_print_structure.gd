@@ -38,9 +38,9 @@ class_name TenPrintStructure
 ## beyond the field's far edge (row 0): then a visitor at the plate faces the screen's front.
 ##
 ## FORM (the DNA axis, words):
-##   floor     ridges on the floor, 0.25 m tall but never taller than half a cell
-##             (min(0.25, size / 2): 0.25 m at the default 0.5 m cell, 0.1 m at #size:0.2), so
-##             a small field still shows its floor between the ridges. You step among them and
+##   floor     low broad strokes, min(0.045, size * 0.18) metres tall, on individual
+##             dark cell beds. The thin gutters expose each address; low strokes let
+##             a standing visitor see subsequent rows. You step among them and
 ##             read them standing; the next-cell tile lies on the ridge tops
 ##   wall      slabs 2.4 m tall: a maze to walk in. The corridor between two parallel slabs in
 ##             neighbouring cells is size / sqrt 2 minus the slab, so walking wants size >= 1.0
@@ -132,9 +132,9 @@ const BACKWARD := 2
 
 const SLAB_T := 0.06
 const FORM_BASE := {"floor": 0.0, "wall": 0.0, "overhead": 2.9}
-const FORM_HEIGHT := {"floor": 0.25, "wall": 2.4, "overhead": 0.2}
+const FORM_HEIGHT := {"floor": 0.045, "wall": 2.4, "overhead": 0.2}
 ## A floor ridge is never taller than this share of its cell.
-const FLOOR_HEIGHT_PER_CELL := 0.5
+const FLOOR_HEIGHT_PER_CELL := 0.18
 const MARK_THICK := 0.02
 const MARK_LIFT := 0.012
 
@@ -305,12 +305,13 @@ func slab_base() -> float:
 func slab_height() -> float:
 	var h: float = float(FORM_HEIGHT.get(form, 0.25))
 	if form == "floor":
-		# never taller than half a cell: at #size:0.2 a 0.25 m fin would hide the floor behind it
+		# A low, broad inlaid stroke keeps the following rows visible from standing height.
 		h = minf(h, size * FLOOR_HEIGHT_PER_CELL)
 	return h
 
 
 func slab_thickness() -> float:
+	if form == "floor": return minf(0.09, size * 0.18)
 	return minf(SLAB_T, size * 0.3)
 
 
@@ -356,6 +357,20 @@ func _build_nodes() -> void:
 	_slabs.multimesh = _mm
 	_slabs.material_override = mat
 	_own(_slabs)
+	if form == "floor":
+		# One inexpensive instanced tile per address. The narrow gutters reveal where
+		# one choice ends without altering a diagonal, its seed or its screen link.
+		var tiles := MultiMesh.new()
+		tiles.transform_format=MultiMesh.TRANSFORM_3D;tiles.use_colors=true
+		var tile := BoxMesh.new();tile.size=Vector3(size*.95,.008,size*.95)
+		tiles.mesh=tile;tiles.instance_count=n
+		for i in range(n):
+			var c:=i%_cols;var r:int=i/_cols
+			tiles.set_instance_transform(i,Transform3D(Basis.IDENTITY,Vector3((c+.5)*size,.004,(r+.5)*size)))
+			tiles.set_instance_color(i,Color("292d3b") if (c+r)%2==0 else Color("353b49"))
+		var bed := MultiMeshInstance3D.new();bed.name="CellBeds";bed.multimesh=tiles
+		var tm:=StandardMaterial3D.new();tm.vertex_color_use_as_albedo=true;tm.roughness=.9
+		bed.material_override=tm;_own(bed)
 
 	# The capture AABB counts MeshInstance3D only: this invisible box is the field's extent.
 	_anchor = MeshInstance3D.new()
@@ -427,8 +442,8 @@ func _build_nodes() -> void:
 		_own(_solid_body)
 
 
-## Where the next-cell tile's centre stands: on the ridge tops for floor (among 0.25 m ridges a
-## tile on the ground is hidden from a standing eye), on the ground inside a wall maze, just
+## Where the next-cell tile's centre stands: above the low strokes for floor,
+## on the ground inside a wall maze, just
 ## under the slabs overhead.
 func marker_y() -> float:
 	match form:

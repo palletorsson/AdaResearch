@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/artifacts/rd_museum_gallery/rd_museum_gallery.scn" id="1_gallery"]
+
+[node name="ReactionDiffusionGallery" instance=ExtResource("1_gallery")]

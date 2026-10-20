@@ -33,10 +33,7 @@ func _ready() -> void:
 		stone.roughness = 1.0; stone_materials.append(stone)
 		var brick := Stage.material(Color(0.36,0.24,0.17).lerp(Color(0.67,0.48,0.31),float(i)/6.0))
 		brick.roughness = 1.0; brick_materials.append(brick)
-	# Shallow archaeological bed contains the fallen stones. The museum floor stays intact.
-	Stage.box(self,Vector3(0,0.04,0),Vector3(6.2,0.08,2.8),Color(0.39,0.35,0.27),true)
-	for x in [-3.05,3.05]:
-		Stage.box(self,Vector3(x,0.11,0),Vector3(0.1,0.22,2.8),Color(0.62,0.58,0.48),true)
+	_create_bed()
 	# Twelve masonry stacks behind the colonnade. Removing top courses exposes a jagged wall.
 	for col in range(12):
 		var stack: Array[int] = []
@@ -74,6 +71,11 @@ func _ready() -> void:
 func _block(size: Vector3) -> BoxMesh:
 	var mesh := BoxMesh.new(); mesh.size=size; return mesh
 
+func _create_bed() -> void:
+	Stage.box(self,Vector3(0,0.04,0),Vector3(6.2,0.08,2.8),Color(0.39,0.35,0.27),true)
+	for x in [-3.05,3.05]:
+		Stage.box(self,Vector3(x,0.11,0),Vector3(0.1,0.22,2.8),Color(0.62,0.58,0.48),true)
+
 func _drum(radius: float, height: float, salt: int) -> ArrayMesh:
 	# Alternating radii cut shallow flutes into the real silhouette, with small chips.
 	var mesh := SurfaceTool.new(); mesh.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -86,7 +88,10 @@ func _drum(radius: float, height: float, salt: int) -> ArrayMesh:
 		var a:=Vector3(cos(i*TAU/48)*ra,-height/2,sin(i*TAU/48)*ra)
 		var b:=Vector3(cos(j*TAU/48)*rb,-height/2,sin(j*TAU/48)*rb)
 		var at:=a+Vector3.UP*height; var bt:=b+Vector3.UP*height
-		for v in [a,at,b,b,at,bt,Vector3(0,height/2,0),bt,at,Vector3(0,-height/2,0),a,b]: mesh.add_vertex(v)
+		# Clockwise outward faces: the previous order exposed the inside faces.
+		# Keep separate flat faces at the flutes and end caps.
+		mesh.set_smooth_group(-1)
+		for v in [a,b,at,b,bt,at,Vector3(0,height/2,0),at,bt,Vector3(0,-height/2,0),b,a]: mesh.add_vertex(v)
 	mesh.generate_normals(); return mesh.commit()
 
 func _piece(mesh: Mesh, pos: Vector3, mat: Material, size: Vector3) -> int:

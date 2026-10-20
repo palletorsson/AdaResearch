@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "ant_colony_walk": {
+      "lookup_name": "ant_colony_walk",
+      "name": "Two trails underfoot",
+      "scene": "res://commons/artifacts/ant_colony_walk/ant_colony_walk.tscn",
+      "description": "Walk among24 carried PointBody spheres. Searching reads food/leaves home; returning reverses channels. Hold to pause and move. Two control banks.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "footprint": [
+        13,
+        4,
+        13
+      ],
+      "size_group": "world_scale",
+      "qfep_connection": "Different states read and sustain different shared traces. Replacement preserves inherited marks; clearing removes them. Brightness alone establishes no optimality.",
+      "tags": [
+        "swarm",
+        "pheromone",
+        "walk-in",
+        "grabbable",
+        "two-channel"
+      ],
+      "parameters": {
+        "footprint": [
+          13,
+          4,
+          13
+        ],
+        "size_group": "world_scale"
+      }
+    }
+  }
+}

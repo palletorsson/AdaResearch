@@ -1,4 +1,5 @@
 extends Node3D
+const HallSeed = preload("res://commons/artifacts/randomness_space/hall_seed.gd")
 
 ## Live-cascading random number page inspired by the RAND Corporation's
 ## "A Million Random Digits" (1955).  Numbers scroll top-to-bottom like a
@@ -80,6 +81,8 @@ const Disclosure = preload("res://algorithms/randomness/prng_crank_machine/prng_
 @export var grid_height: int = 28  ## visible rows
 @export var number_spacing_y: float = 0.15
 @export var cascade_speed: float = 1.0  ## rows per second (adjustable)
+@export var row_stream: bool = false  ## Live rows enter an empty page from the top, with visible downward motion.
+@export_range(0, 100, 1) var initial_rows: int = 0  ## Prefill from the same stream, oldest row below the newest.
 
 ## THE AXIS — how much this page admits about where its digits came from. Same
 ## five rungs, same order, same spellings as prng_crank_machine and coin_toss.
@@ -100,6 +103,10 @@ const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "o
 ## on an unseeded page would measure the digits and report a confident bite that
 ## is entirely about noise. The DNA fixture must set it.
 @export var page_seed: int = -1
+
+## Folio is an address, never a draw from the number stream. Changing it does
+## not skip values or turn a page into a different seeded sequence.
+@export_range(1, 999999, 1) var page_number: int = 1
 
 ## Extra yaw, in degrees, applied to the whole sheet at build.
 ##
@@ -124,6 +131,9 @@ var _cell_areas: Array = []      # Array[Array[Area3D]]  (VR touch zones)
 
 # Cascade timing
 var _cascade_timer: float = 0.0
+var _stream_moves: Array = []
+var _stream_elapsed: float = 0.0
+var _stream_duration: float = 0.9
 
 # Colors
 const COLOR_NORMAL := Color(0, 0, 0)
@@ -159,6 +169,9 @@ var start_index: int
 ## Everything THIS script added to the sheet. A rung change frees exactly these
 ## and rebuilds — get_children() would also destroy the scene's own paper, its
 ## running head and the folio, which are .tscn nodes this script only dims.
+## Keep these children on tree exit: museum cartridge compilation temporarily
+## detaches and reattaches the page. Godot frees them when the page is deleted;
+## _reprint() explicitly replaces them when the page's configuration changes.
 var _owned: Array[Node] = []
 var _built: bool = false
 var _built_rows: int = 0
@@ -263,34 +276,96 @@ func _ready() -> void:
 	if page_seed >= 0:
 		_rng.seed = page_seed
 		_pinned = true
+	if HallSeed.enabled(self):
+		page_seed = HallSeed.current(self)
+		_rng.seed = page_seed
+		_pinned = false # A seeded, flowing page; pinning is a separate display mode.
 
-	side_number = _rng.randi_range(100, 999) if _pinned else randi_range(100, 999)
-	label3D_side_number.text = str(side_number)
-	start_index = int(side_number * (17600.0 / 353.0))
+	_update_page_address()
 
 	_apply_head_visibility()
 	_create_cell_grid()
 	_build_page_furniture()
 	_built = true
+	_ensure_select_sign()
+	if row_stream and not _pinned:
+		_cascade_timer = 1.0 if initial_rows == 0 else 0.0 # A prefilled page waits one cadence before its next row.
+	HallSeed.bind(self)
+
+func _apply_hall_seed(value: int, _receipt: Dictionary) -> void:
+	page_seed = value
+	_rng.seed = value
+	_pinned = false
+	_update_page_address()
+	_reprint()
+
+func _update_page_address() -> void:
+	page_number = maxi(1, page_number)
+	side_number = page_number
+	label3D_side_number.text = str(side_number)
+	start_index = (page_number - 1) * _rows()
+	for row in range(_built_rows):
+		var label := get_node_or_null("RowIdx_%d" % row) as Label3D
+		if label != null: label.text = str(start_index + row)
 
 func _process(delta: float) -> void:
-	if _pinned:
+	if _pinned or not _built:
 		return   # a seeded page is a PRINTED page: it does not flow
+	if row_stream:
+		_advance_stream(delta)
 	_cascade_timer += delta * cascade_speed
-	if _cascade_timer >= 1.0:
-		_cascade_timer -= 1.0
+	if _cascade_timer >= 1.0 and _stream_moves.is_empty():
+		# Never turn a long frame into a burst of unreadably fast rows.
+		_cascade_timer = 0.0 if row_stream else _cascade_timer - 1.0
 		_cascade_step()
+
+func _ensure_select_sign() -> void:
+	var existing := get_node_or_null("SelectStand")
+	if not row_stream or _pinned:
+		if existing != null:
+			remove_child(existing)
+			existing.queue_free()
+		return
+	if existing != null: return
+	var sign = preload("res://commons/artifacts/randomness_space/select_sign.gd").new()
+	sign.name = "SelectStand"
+	# Page is six metres tall, centred on its origin and facing local -Z.
+	sign.position = Vector3(0,-3.0,-0.65)
+	sign.rotation.y = PI
+	add_child(sign)
 
 # ═══════════════════════════════════════════════════════════════════════
 # GRID CREATION
 # ═══════════════════════════════════════════════════════════════════════
 
-## One five-digit number. The seeded path is a private stream; the default path
-## is the shared helper, unchanged, so the global rng sequence is identical to
-## the day this artifact shipped.
+## The seeded page reads the same randf() sequence as the colour window's
+## baseline. Each RGB channel there becomes one five-digit group here.
+## Truncate the full value, not a rounded display string; retain leading zeros.
+static func five_digits_from_value(value: float) -> String:
+	return str(clampi(int(floor(value * 100000.0)), 0, 99999)).pad_zeros(5)
+
+func book_capture_ready() -> bool:
+	# Photograph the first full, settled page; observing readiness changes no draws.
+	if not _built or _built_rows == 0 or not _stream_moves.is_empty(): return false
+	for row in _cells:
+		for cell in row:
+			if cell.text.is_empty() or cell.modulate.a < 0.999: return false
+	return true
+
+func capture_book_state() -> Dictionary:
+	var digits: Array = []
+	for row in _cells:
+		var values: Array = []
+		for cell in row: values.append(cell.text)
+		digits.append(values)
+	return {"seed":page_seed,"rng_state":str(_rng.state),"page_number":page_number,
+		"digits":digits,"frozen":_frozen.duplicate(true),"row_stream":row_stream,
+		"cascade_speed":cascade_speed,"stream_elapsed":_stream_elapsed,
+		"full_and_settled":book_capture_ready(),"rows":_built_rows,"columns":_built_cols,"initial_rows":initial_rows}
+
 func _five_digits() -> String:
-	if _pinned:
-		return str(_rng.randi() % 100000).pad_zeros(5)
+	if _pinned or HallSeed.enabled(self):
+		return five_digits_from_value(_rng.randf())
 	return NumberHelper.random_5_digit_number()
 
 
@@ -320,7 +395,7 @@ func _create_cell_grid() -> void:
 			var x_pos := _col_x_position(col)
 			var cell_label := Label3D.new()
 			cell_label.name = "Cell_%d_%d" % [row, col]
-			cell_label.text = _five_digits()
+			cell_label.text = "" if row_stream and not _pinned else _five_digits()
 			cell_label.font = font_file
 			cell_label.font_size = 16
 			cell_label.outline_size = 3
@@ -350,6 +425,17 @@ func _create_cell_grid() -> void:
 			idx_label.rotate(Vector3(0, 1, 0), PI)
 			add_child(idx_label)
 			_owned.append(idx_label)
+	_prime_stream_rows()
+
+func _prime_stream_rows() -> void:
+	if not row_stream or _pinned: return
+	# Match the natural downward stream: the first ten draws are the lowest
+	# seeded row, later groups sit above them, and the next draw continues it.
+	for row in range(clampi(initial_rows,0,_built_rows)-1,-1,-1):
+		for col in _built_cols:
+			var cell: Label3D = _cells[row][col]
+			cell.text = _five_digits()
+			cell.modulate = COLOR_NORMAL
 
 func _col_x_position(col: int) -> float:
 	## Map column index to X position, with cluster gaps every 2 columns.
@@ -388,9 +474,15 @@ func _create_touch_area(cell_label: Label3D, row: int, col: int) -> Area3D:
 	return area
 
 func _on_cell_touched(_body: Node3D, row: int, col: int) -> void:
+	var cell: Label3D = _cells[row][col]
+	if cell.text.is_empty():
+		return
 	# Toggle freeze state
 	var is_frozen: bool = _frozen[row][col]
 	_frozen[row][col] = not is_frozen
+	# A selected number occupies its row address, even if touched mid-slide.
+	cell.position.y = _row_y(row)
+	_stream_moves = _stream_moves.filter(func(move: Dictionary) -> bool: return move.row != row or move.col != col)
 	_update_cell_visual(row, col)
 
 func _update_cell_visual(row: int, col: int) -> void:
@@ -409,6 +501,9 @@ func _update_cell_visual(row: int, col: int) -> void:
 # ═══════════════════════════════════════════════════════════════════════
 
 func _cascade_step() -> void:
+	if row_stream and not _pinned:
+		_stream_step()
+		return
 	## Shift numbers down one row per column. Frozen cells stay put.
 	## New random number appears at top of each column.
 	for col in range(_built_cols):
@@ -439,6 +534,47 @@ func _cascade_step() -> void:
 				if flow_idx < flowing.size():
 					(_cells[row][col] as Label3D).text = flowing[flow_idx]
 					flow_idx += 1
+
+
+## One new row per cadence. Values descend into free row addresses; amber
+## selections remain in place. Pinned/seeded printed pages never use this path.
+func _stream_step() -> void:
+	_stream_moves.clear()
+	_stream_elapsed = 0.0
+	_stream_duration = minf(0.9, 0.55 / maxf(0.05, cascade_speed))
+	for col in range(_built_cols):
+		var free_rows: Array[int] = []
+		for row in range(_built_rows):
+			if not _frozen[row][col]: free_rows.append(row)
+		# Bottom-up preserves each source until its destination has read it.
+		for i in range(free_rows.size() - 1, -1, -1):
+			var row: int = free_rows[i]
+			var cell: Label3D = _cells[row][col]
+			var source_row: int = free_rows[i - 1] if i > 0 else -1
+			cell.text = (_cells[source_row][col] as Label3D).text if i > 0 else _five_digits()
+			var destination: float = _row_y(row)
+			cell.position.y = destination
+			if cell.text.is_empty(): continue
+			# Fade into view at the top, or after skipping a held address.
+			# Do not slide a moving label through a selected amber number.
+			var fade: bool = source_row < 0 or row - source_row > 1
+			var origin: float = destination if fade else _row_y(source_row)
+			cell.position.y = origin
+			cell.modulate = Color(0, 0, 0, 0.0 if fade else 1.0)
+			_stream_moves.append({"row":row,"col":col,"from_y":origin,"to_y":destination,"fade":fade})
+	if _rung() == 1: _build_page_furniture() # Keep live frequency counts current.
+
+
+func _advance_stream(delta: float) -> void:
+	if _stream_moves.is_empty(): return
+	_stream_elapsed += maxf(0.0, delta)
+	var progress: float = clampf(_stream_elapsed / _stream_duration, 0.0, 1.0)
+	var eased: float = progress * progress * (3.0 - 2.0 * progress)
+	for move in _stream_moves:
+		var cell: Label3D = _cells[move.row][move.col]
+		cell.position.y = lerpf(move.from_y, move.to_y, eased)
+		if move.fade: cell.modulate.a = eased
+	if progress >= 1.0: _stream_moves.clear()
 
 # ═══════════════════════════════════════════════════════════════════════
 # THE APPARATUS — what the page admits, printed
@@ -599,12 +735,6 @@ func _build_imprint_block() -> void:
 # GRID CONFIG
 # ═══════════════════════════════════════════════════════════════════════
 
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
-
-
 ## LATENT BUG PAID as part of this promotion: this method was `pass`. Every
 ## `#token: value` a map put on a random_number_book_page_1955 placement was
 ## parsed, logged by GridInteractablesComponent, stashed as metadata — and then
@@ -618,12 +748,18 @@ func _exit_tree() -> void:
 ## rung means touch nothing.
 func apply_grid_config(config: Dictionary) -> void:
 	var before: String = disclosure
+	var stream_before: bool = row_stream
+	var initial_before: int = initial_rows
+	var page_before: int = page_number
 	for k in config.keys():
 		set_meta("config_%s" % str(k), config[k])
 	_read_meta_overrides()
 	if not _built:
 		return                       # nothing built yet; _ready will use these values
-	if disclosure == before:
+	if page_before != page_number:
+		_update_page_address()
+		_build_page_furniture() # Preserve digits, held cells and generator state.
+	if disclosure == before and stream_before == row_stream and initial_before == initial_rows:
 		return                       # curation_station's {"emissive": false} lands here
 	_reprint()
 
@@ -632,6 +768,10 @@ func apply_grid_config(config: Dictionary) -> void:
 ## this script added are freed; the QuadMesh, the running head and the folio are
 ## .tscn nodes and are dimmed, never destroyed.
 func _reprint() -> void:
+	_ensure_select_sign()
+	_stream_moves.clear()
+	_stream_elapsed = 0.0
+	_cascade_timer = 1.0 if row_stream and not _pinned and initial_rows == 0 else 0.0
 	for n in _owned:
 		if is_instance_valid(n):
 			remove_child(n)
@@ -647,11 +787,22 @@ func _reprint() -> void:
 
 
 func _read_meta_overrides() -> void:
+	if has_meta("config_row_stream"):
+		row_stream = str(get_meta("config_row_stream")).to_lower() == "true"
+	if has_meta("config_initial_rows"):
+		initial_rows = clampi(int(str(get_meta("config_initial_rows"))),0,100)
+	if has_meta("config_cascade_speed"):
+		var speed_text: String = str(get_meta("config_cascade_speed"))
+		if speed_text.is_valid_float():
+			var requested: float = float(speed_text)
+			if is_finite(requested): cascade_speed = clampf(requested, 0.05, 10.0)
 	if has_meta("config_disclosure"):
 		# Read through the family's one reader, so a typo falls back to the legacy
 		# page rather than quietly stripping ten rooms' worth of attribution.
 		disclosure = Disclosure.disclosure_name(str(get_meta("config_disclosure")))
 	if has_meta("config_page_seed"):
 		page_seed = int(str(get_meta("config_page_seed")))
+	if has_meta("config_page_number"):
+		page_number = maxi(1, int(str(get_meta("config_page_number"))))
 	if has_meta("config_page_yaw_deg"):
 		page_yaw_deg = float(str(get_meta("config_page_yaw_deg")))

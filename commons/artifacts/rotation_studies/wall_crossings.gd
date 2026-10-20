@@ -14,15 +14,30 @@ var elapsed := 0.0
 var angle := 0.0
 var manual_pose := false
 var ride_progress := 0.0
+var ride_rise := RISE
+var ride_run := RUN
 
 func _ready() -> void:
 	process_physics_priority = -110 # Carry before XRTools' -100 body update.
-	# The upper face meets y=0 and y=3 at z/x = -3.5 and +3.5.
-	var axle_y := RISE/2.0 - THICKNESS/(2.0*cos(deg_to_rad(CLIMB_ANGLE)))
-	build_station("Y",Vector3(-12,0,0),Vector3.UP,1.0,Vector3(0,-0.1,0),Vector3(8.4,0.2,2.4),90.0,"CENTRE SWING / LEVEL CROSSING",Color(0.36,0.77,0.5))
-	build_station("X",Vector3.ZERO,Vector3.RIGHT,-1.0,Vector3(0,axle_y,0),Vector3(2.4,0.2,8.4),CLIMB_ANGLE,"CENTRE PADDLE / CLIMB FORWARD +3 m",Color(0.93,0.43,0.24))
-	build_station("Z",Vector3(12,0,0),Vector3.BACK,1.0,Vector3(0,axle_y,0),Vector3(8.4,0.2,2.4),CLIMB_ANGLE,"CENTRE PADDLE / CLIMB SIDEWAYS +3 m",Color(0.34,0.59,0.95))
-	Parts.label(self,"TURN AROUND THE MIDDLE\n8.4 m blades / landings made from the grid",Vector3(0,3.8,-7.5),36)
+	# A tower can place the same rides independently. Defaults keep the museum.
+	var single_axis := str(get_meta("config_single_axis", ""))
+	ride_rise = clampf(float(get_meta("config_ride_rise", RISE)), 1.0, RISE)
+	ride_run = clampf(float(get_meta("config_ride_run", RUN)), 3.0, RUN)
+	var climb := rad_to_deg(atan2(ride_rise, ride_run))
+	var length := sqrt(ride_rise*ride_rise+ride_run*ride_run)+0.78
+	var axle_y := ride_rise/2.0 - THICKNESS/(2.0*cos(deg_to_rad(climb)))
+	if single_axis.is_empty() or single_axis == "Y":
+		build_station("Y",Vector3(-12,0,0) if single_axis.is_empty() else Vector3.ZERO,Vector3.UP,1.0,Vector3(0,-0.1,0),Vector3(8.4,0.2,2.4),90.0,"CENTRE SWING / LEVEL CROSSING",Color(0.36,0.77,0.5))
+	if single_axis.is_empty() or single_axis == "X":
+		build_station("X",Vector3.ZERO,Vector3.RIGHT,-1.0,Vector3(0,axle_y,0),Vector3(2.4,0.2,length if not single_axis.is_empty() else 8.4),climb,"CENTRE PADDLE / CLIMB FORWARD",Color(0.93,0.43,0.24))
+	if single_axis.is_empty() or single_axis == "Z":
+		build_station("Z",Vector3(12,0,0) if single_axis.is_empty() else Vector3.ZERO,Vector3.BACK,1.0,Vector3(0,axle_y,0),Vector3(length if not single_axis.is_empty() else 8.4,0.2,2.4),climb,"CENTRE PADDLE / CLIMB SIDEWAYS",Color(0.34,0.59,0.95))
+	if single_axis.is_empty():
+		Parts.label(self,"TURN AROUND THE MIDDLE\n8.4 m blades / landings made from the grid",Vector3(0,3.8,-7.5),36)
+	else:
+		for station in stations:
+			station.label.position = Vector3(0,1.6,-ride_run/2.0-1.4)
+			station.label.font_size = 23
 	for station in stations:
 		if station.id == "Y": continue
 		var deck = RideDeck.new()
@@ -84,7 +99,8 @@ func _physics_process(delta: float) -> void:
 	var phase := fposmod(elapsed,period)
 	var y_degrees := 90.0+turn_direction*180.0*half_turn
 	if phase>crossing_hold: y_degrees+=turn_direction*(phase-crossing_hold)*turn_speed
-	_apply(stations[0],y_degrees)
+	for station in stations:
+		if station.id == "Y": _apply(station,y_degrees)
 	# The occupied end traverses the upper arc and retraces it. It never
 	# continues around through the basin on the return journey.
 	var leg := floori(elapsed/period)
@@ -99,13 +115,16 @@ func _place_decks(progress: float) -> void:
 	for station in stations:
 		if not station.has("ride_deck"): continue
 		var forward: bool = station.id == "X"
-		var radial := Vector3(0,-1.5,-3.5) if forward else Vector3(-3.5,-1.5,0)
+		var radial := Vector3(0,-ride_rise/2.0,-ride_run/2.0) if forward else Vector3(-ride_run/2.0,-ride_rise/2.0,0)
 		var orbit := Basis(station.axis,PI*progress*(1.0 if forward else -1.0))*radial
 		# The upright bracket offsets the old thickness-compensated blade axle.
-		var endpoint := Vector3(0,1.5,0)+orbit
+		var endpoint := Vector3(0,ride_rise/2.0,0)+orbit
 		var offset := Vector3(-2.2,0,0) if forward else Vector3(0,0,-2.2)
 		station.ride_deck.transport_to(endpoint+offset)
 		station.arm.position = endpoint+offset*0.5+Vector3(0,-0.15,0)
 		var remaining := maxf(0.0,crossing_hold-fposmod(elapsed,180.0/turn_speed+crossing_hold))
 		var at_dock := is_zero_approx(progress) or is_equal_approx(progress,1.0)
-		station.label.text = "%s / LEVEL END-PLATFORM\n%s\n%s" % [station.id,"BOARD LEFT / FORWARD +Z, UP 3 m" if forward else "BOARD FROM LEFT / SIDEWAYS +X, UP 3 m",("DOCK / %.0f seconds" % remaining) if remaining>0 and at_dock else "HALF-TURN / STAY ON THE LEVEL DECK"]
+		station.label.text = "%s / LEVEL END-PLATFORM\n%s / UP %.1f m\n%s" % [station.id,"FORWARD +Z" if forward else "SIDEWAYS +X",ride_rise,("DOCK / %.0f seconds" % remaining) if remaining>0 and at_dock else "HALF-TURN / STAY ON THE LEVEL DECK"]
+
+func prepare_editor_preview() -> void:
+	set_crossing_pose()

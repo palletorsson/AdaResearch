@@ -1,0 +1,25 @@
+{
+  "id": "model_overflow",
+  "name": "Model-level overflow studies",
+  "artifacts": {
+    "model_overflow": {
+      "lookup_name": "model_overflow",
+      "name": "The Model Calls Itself",
+      "scene": "res://commons/artifacts/model_overflow/model_overflow.tscn",
+      "preview_scene": "res://commons/artifacts/model_overflow/preview.tscn",
+      "description": "Step through bounded calls without a base case, a forgotten transform restore, and wrapped vertex writes. The earlier arcade supplies the first two models; a retained indexed skin shows wrong data at valid addresses. Explicit simulations, no native memory fault.",
+      "category": "transforms",
+      "dev_category": "research",
+      "dev_themes": ["recursion", "call stack", "transform stack", "vertex buffers"],
+      "tags": ["glitch", "architecture", "overflow", "model", "research"],
+      "complexity": "intermediate",
+      "include_in_map_data": false,
+      "map_ready": false,
+      "map_sequences": [],
+      "interactions": ["Select SOURCE, CALLS, LEAK or WRAP.", "Turn STEPS and CAPACITY; press STEP or PLAY / HOLD. CAPACITY applies to CALLS and LEAK.", "RESET restores the source data."],
+      "qfep_connection": "A bounded generator makes visible what must be retained, restored or refused. The location and meaning of a limit differ between stack frames and model data; computational fault and aesthetic interpretation remain distinct.",
+      "status": "preview only; not placed on the museum route",
+      "report": "doc/book/iterations/2026-10-09-the-model-calls-itself/index.html"
+    }
+  }
+}

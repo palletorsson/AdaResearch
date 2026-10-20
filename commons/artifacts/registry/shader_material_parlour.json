@@ -1,0 +1,17 @@
+{
+  "registry_info": {"name": "Material parlour", "category": "shaders"},
+  "artifacts": {
+    "shader_material_parlour": {
+      "lookup_name": "shader_material_parlour",
+      "scene": "res://commons/artifacts/shader_material_parlour/shader_material_parlour.tscn",
+      "name": "What a surface returns",
+      "description": "The same material on sphere, cube, sofa, chair and vase. Begin with roughness and a normal/view rim. Compare the existing Plastic, Velvet and Oil shaders using nearby buttons. Bodies and lights stay fixed.",
+      "map_ready": true,
+      "category": "shaders",
+      "complexity": "intermediate",
+      "tags": ["material", "rim", "normal", "view", "roughness", "furniture"],
+      "interactions": ["Grab or point-drag ROUGH", "Change RIM in STUDY", "Choose STUDY / PLASTIC / VELVET / OIL", "RESET nearby"],
+      "qfep_connection": "A surface suggests softness or gloss while the supporting body stays rigid. Its response depends on the viewer without remembering the encounter."
+    }
+  }
+}

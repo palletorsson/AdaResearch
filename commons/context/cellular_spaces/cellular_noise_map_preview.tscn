@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/desktop_map_tester.tscn" id="1"]
+
+[node name="CellularNoiseMapPreview" instance=ExtResource("1")]
+start_map = ""
+start_sequence = "noise"
+start_map_index = 6

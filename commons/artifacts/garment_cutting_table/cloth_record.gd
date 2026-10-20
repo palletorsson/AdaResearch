@@ -1,10 +1,12 @@
 extends RefCounted
-## A snapshot of committed loom crossings, shared by table, fitting and wardrobe.
+## Recorded loom crossings or printed samples, shared by table, fitting and wardrobe.
 const Program = preload("res://commons/artifacts/jacquard_weaver/weave_program.gd")
 const Samples = preload("res://commons/artifacts/jacquard_weaver/weave_samples.gd")
 const SAVE_PATH := "user://ada_tailor_cloth.json"
+const PrintRecord = preload("res://commons/artifacts/ten_print_textile/print_record.gd")
 
 static func valid(data: Dictionary) -> bool:
+	if data.get("kind") == "ten_print": return PrintRecord.valid(data)
 	if data.get("version") != 1 or not data.get("picks") is Array: return false
 	if data.picks.size() < 2 or data.picks.size() > 128: return false
 	for pick in data.picks:
@@ -29,7 +31,7 @@ static func save_record(data: Dictionary, path: String = SAVE_PATH) -> bool:
 	if not valid(data): return false
 	var file := FileAccess.open(path,FileAccess.WRITE)
 	if not file: return false
-	file.store_string(JSON.stringify(data)); file.close()
+	file.store_string(JSON.stringify(data,"",true,true)); file.close()
 	return true
 
 static func load_record(path: String = SAVE_PATH) -> Dictionary:
@@ -37,6 +39,10 @@ static func load_record(path: String = SAVE_PATH) -> Dictionary:
 	if not file or file.get_length() > 1048576: return {}
 	var data: Variant = JSON.parse_string(file.get_as_text())
 	if not data is Dictionary or not valid(data):return {}
+	if data.get("kind") == "ten_print":
+		for key in ["version","columns","rows","seed","mark","palette","repeat"]: data[key]=int(data[key])
+		for i in range(data.samples.size()): data.samples[i]=int(data.samples[i])
+		return data
 	# JSON numbers arrive as floats; restore the loom's discrete record types.
 	data.version=1
 	for pick in data.picks:
@@ -45,7 +51,10 @@ static func load_record(path: String = SAVE_PATH) -> Dictionary:
 			if pick.has(key):pick[key]=int(pick[key])
 	return data
 
+## Invalid or incomplete records have no image; never assume they contain loom picks.
 static func image(data: Dictionary) -> Image:
+	if not valid(data): return null
+	if data.get("kind") == "ten_print": return PrintRecord.image(data)
 	# This is the surface of the recorded weave, not a cloth simulation.
 	var result := Image.create(576,data.picks.size()*6,false,Image.FORMAT_RGB8)
 	for row in range(data.picks.size()):
@@ -62,9 +71,14 @@ static func image(data: Dictionary) -> Image:
 	result.generate_mipmaps()
 	return result
 
+## Returns null for invalid cloth, matching image() and the save/load validation boundary.
 static func material(data: Dictionary) -> StandardMaterial3D:
+	var cloth_image := image(data)
+	if cloth_image == null: return null
 	var m := StandardMaterial3D.new()
-	m.albedo_texture = ImageTexture.create_from_image(image(data))
+	m.albedo_texture = ImageTexture.create_from_image(cloth_image)
 	m.roughness = .92; m.cull_mode = BaseMaterial3D.CULL_DISABLED
 	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	if data.get("kind") == "ten_print":
+		m.uv1_scale = Vector3(float(data.repeat),float(data.repeat),1)
 	return m

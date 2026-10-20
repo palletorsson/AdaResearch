@@ -19,6 +19,7 @@
 extends Node3D
 
 class_name PrngCrankMachine
+const HallSeed = preload("res://commons/artifacts/randomness_space/hall_seed.gd")
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
@@ -236,8 +237,16 @@ func _ready() -> void:
 	# arrives call_deferred — i.e. after this — and is a re-read, not the read.
 	_read_meta_overrides()
 	_state = initial_seed
+	if HallSeed.enabled(self):
+		initial_seed = HallSeed.current(self)
+		_state = initial_seed
 	_build_all()
 	_built = true
+	HallSeed.bind(self)
+
+func _apply_hall_seed(value: int, _receipt: Dictionary) -> void:
+	initial_seed = value
+	_reset()
 
 
 ## The whole machine, SYNCHRONOUSLY. Every child this script owns exists by the time
@@ -880,7 +889,7 @@ func _create_vr_controls() -> void:
 		[
 			{"type": "button", "label": "CRANK"},
 			{"type": "button", "label": "RESET"},
-			{"type": "button", "label": "SEED"},
+			{"type": "button", "label": "SEED +1" if HallSeed.enabled(self) else "SEED"},
 		],
 	], true)
 	# Seated ON the wedge's sloped top face, tilted to match its rake.
@@ -925,6 +934,8 @@ func _reset() -> void:
 
 
 func _randomize_seed() -> void:
+	if HallSeed.enabled(self):
+		HallSeed.next(self); return
 	initial_seed = randi() & 0xFFFFFFFF
 	_state = initial_seed
 	_step_count = 0

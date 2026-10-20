@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "boolean_neck": {
+      "lookup_name": "boolean_neck",
+      "name": "Boolean Neck",
+      "class_name": "BooleanNeck",
+      "scene": "res://commons/artifacts/boolean_neck/boolean_neck.tscn",
+      "category": "boolean_surfaces",
+      "artifact_type": "demonstration",
+      "complexity": "beginner",
+      "description": "A bar with a row of spheres subtracted from it, biting in from above and below so the material narrows to a neck at each bite. It is genuinely CSG: a CSGCombiner3D holding a CSGBox3D with CSGSphere3D cutters in subtraction mode, with the cutters drawn again as faint ghosts so the operation stays legible and not only its result. gap sets how deep the bites go and row how they are arranged. The claim is that a difference operation is also a connectivity operation: nobody cuts the bar in two, they only make a hole slightly too big. Measured along the bar, the remaining half-thickness gives the thinnest neck and the number of pieces, so the threshold can be read rather than guessed: open 40.5 mm, narrow 14.4, pinched 1.35, then severed into five. Godot will not report the component count of a CSG result, so that number is derived analytically from the same cutter array that positions the spheres. One source, two readings, which is noted in the script as the known drift risk it is.",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [
+        2,
+        1,
+        1
+      ],
+      "map_sequences": [
+        "boolean_surfaces",
+        "graphtheory",
+        "postfoundationscrisis"
+      ],
+      "tags": [
+        "boolean",
+        "csg",
+        "subtraction",
+        "connectivity",
+        "neck",
+        "threshold",
+        "hand"
+      ],
+      "parameters": {
+        "footprint": [
+          2,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "dna": {
+        "axes": {
+          "gap": [
+            "open",
+            "narrow",
+            "pinched",
+            "severed"
+          ],
+          "row": [
+            "even",
+            "staggered",
+            "paired",
+            "single"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "row: even <-> paired, at gap=open",
+          "predicted_bite_pct": 2.0,
+          "basis": "LOWER BOUND, as every prediction in this corpus has been, by 1.5x to 6.7x. Both values place eight cutters in two opposed rows; only the spacing along the bar differs, four evenly spread against two tight couples. At gap=open the bites are shallow (measured thinnest neck 40.5 mm of a 90 mm bar) so the silhouette barely moves and the change is in where the scallops sit, not how deep. Scallop edges are maybe 12 percent of the bar's projected area and about a sixth of that area shifts. FRAME = 0.12 * 0.17 = 2.0 percent.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below about 2 percent the likely causes in order are (a) CSG failing to rebuild between variants, which would make every frame the default -- check that the bar is not identical across ALL values, not just this pair; (b) the ghost spheres at alpha 0.12 washing out the scallops they are meant to explain; (c) a row value ROWS does not contain, which fails in silence. Read the rejects file and open the PNGs.",
+          "structural_degeneracy_predicted": "SAID BEFORE THE SWEEP, because the two artifacts before this one both had one I failed to name. Expect row to be CONDITIONAL on gap, and in a way that cuts against intuition: at gap=severed the bar changes COLOUR, turning amber the moment it is in pieces, so every row value shares that flip and the axis mean will be inflated by a difference that is not row's doing. Conversely at gap=severed the piece COUNT differs sharply by row -- measured 5 for even against 2 for single -- so the plate text differs while the silhouette may not. Read the per-pair rows grouped by gap, never the axis mean."
+        },
+        "framing": 0.46
+      },
+      "spatial_needs": {
+        "platform": "plinth",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

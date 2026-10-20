@@ -65,8 +65,8 @@ enum ActivationType { SIGMOID, RELU, TANH }
 # never once shown.
 #
 # `flat` is the value that earns the axis: a network wired straight from input to
-# output, standing in front of the XOR data generate_training_data() writes four
-# lines later, provably unable to learn it. A picture of foreclosure.
+# output. The shipped extra inputs leak the answers, so this is NOT a test of
+# whether a flat network can solve XOR from its two original inputs alone.
 #
 # Shared verbatim with neural_networks_vr, which asks the identical question at
 # building scale. The two defaults differ because each artifact's shipped stack is
@@ -86,8 +86,8 @@ enum ActivationType { SIGMOID, RELU, TANH }
 ##            16 neurons at 0.3 m radius, 56 weight cylinders at 0.02 m. The shipped
 ##            diagram, roughly as wide as it is tall.
 ##   flat     4-2, no hidden layer at all. Two columns 3.0 m apart, 8 cylinders,
-##            body 3.0 x 4.5 m. The architecture that provably cannot learn the XOR
-##            data this artifact generates, standing in the room being unable to.
+##            body 3.0 x 4.5 m. Because the shipped inputs include the answers,
+##            this flat network is not an XOR-capacity counterexample.
 ##   deep     4-3-3-3-3-3-2. Seven columns across 18.0 m, none taller than 4.5 m,
 ##            54 cylinders in near-identical bays. A corridor rather than a diagram,
 ##            and the same 4-sample problem.
@@ -315,7 +315,9 @@ func build_network() -> void:
 		biases.append(b_vector)
 
 func generate_training_data() -> void:
-	"""Generate XOR training data as a classic neural network problem."""
+	# Legacy answer-leaking fixture, retained as an explicitly labelled comparison.
+	# Inputs 3/4 equal target 2/1. Low error here is not evidence of solving XOR
+	# from two coordinates. The printed tutorial study uses only those coordinates.
 	training_data = [
 		[0.0, 0.0, 0.0, 1.0],
 		[0.0, 1.0, 1.0, 0.0],
@@ -338,7 +340,7 @@ func create_visualization() -> void:
 		if not is_instance_valid(child):
 			_owned.erase(child)
 			continue
-		if child is MeshInstance3D or child.name == "ErrorGraph" or child is Label3D or child is WorldEnvironment or child is DirectionalLight3D or child.name == "CameraPivot":
+		if child is MeshInstance3D or child.name == "ErrorGraph" or child.name == "InputAudit" or child is Label3D or child is WorldEnvironment or child is DirectionalLight3D or child.name == "CameraPivot":
 			_owned.erase(child)
 			if child.get_parent() == self:
 				remove_child(child)
@@ -362,6 +364,7 @@ func create_visualization() -> void:
 		create_weight_lines()
 	
 	create_info_display()
+	create_input_audit()
 	create_error_graph()
 	# Re-setup environment and camera after clearing
 	setup_camera()
@@ -566,6 +569,29 @@ func create_info_display() -> void:
 	update_info_display()
 
 ## Neurons in the tallest column, whichever column that is.
+func create_input_audit() -> void:
+	# Repeat the disclosure low on the body, where a visitor can read it without
+	# looking at the overhead telemetry. It survives training and topology rebuilds.
+	var panel := Node3D.new()
+	panel.name = "InputAudit"
+	# The museum mounts this artifact's origin on its floor. Its large network
+	# extends below that origin; following the lowest neuron would bury the sign.
+	# Keep the disclosure beside the input column: the wide legacy diagram's centre
+	# crosses the museum wall, so centring the sign there would hide its right half.
+	panel.position = Vector3(1.5, 1.4, 1.2)
+	var backing := MeshInstance3D.new()
+	var box := BoxMesh.new(); box.size = Vector3(3.5, 1.15, 0.04)
+	backing.mesh = box
+	var ink := StandardMaterial3D.new(); ink.albedo_color = Color("171f2b")
+	ink.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	backing.material_override = ink; panel.add_child(backing)
+	var label := Label3D.new(); label.name = "Disclosure"
+	label.position.z = 0.025; label.font_size = 32; label.pixel_size = 0.003
+	label.outline_size = 0; label.modulate = Color("ffe1aa")
+	label.text = "ANSWER ALREADY IN THE INPUT\nInput 3 = target 2\nInput 4 = target 1\nLow error does not establish two-input XOR.\nCompare the tutorial's two-coordinate sphere."
+	panel.add_child(label); _own(panel)
+
+
 func _tallest_layer_size() -> int:
 	var tallest: int = input_layer_size
 	if output_layer_size > tallest:
@@ -824,7 +850,11 @@ func update_visualization() -> void:
 
 func update_info_display() -> void:
 	if info_display:
-		info_display.text = "Epoch: %d / %d\n" % [current_epoch, training_iterations]
+		info_display.text = "ANSWER ALREADY IN THE INPUT\n"
+		info_display.text += "Input 3 = target 2 / input 4 = target 1\n"
+		info_display.text += "Real weight updates; answer leakage makes the task easier.\n"
+		info_display.text += "Compare the two-coordinate tutorial study.\n"
+		info_display.text += "Epoch: %d / %d\n" % [current_epoch, training_iterations]
 		info_display.text += "Error: %.5f\n" % current_error
 		info_display.text += "Activation: %s" % [ "Sigmoid", "ReLU", "Tanh" ][activation_function]
 

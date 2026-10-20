@@ -1,0 +1,81 @@
+{
+  "artifacts": {
+    "graph_worlds": {
+      "lookup_name": "graph_worlds",
+      "scene": "res://commons/artifacts/graph_worlds/graph_worlds.tscn",
+      "name": "Graph worlds: what a connection means",
+      "description": "Eleven concrete tabletop comparisons for the eight Graph Theory halls. Previous/Next selects; Try It changes a relation or allocation; Reset restores. Defaults to the harbour. Fictional datasets and limits are stated on the model.",
+      "qfep_connection": "Keep represented relations exact while exposing the limits of transferring a graph operation between material and social situations.",
+      "category": "graphtheory",
+      "dev_category": "graphtheory",
+      "complexity": "intermediate",
+      "tags": [
+        "graph",
+        "capacity",
+        "society",
+        "animal",
+        "disease",
+        "history",
+        "future"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        4,
+        3,
+        4
+      ],
+      "interactions": [
+        "Select a context with Previous or Next",
+        "Try It changes the example",
+        "Reset restores the declared starting conditions"
+      ]
+    },
+    "matching_workshop": {
+      "lookup_name": "matching_workshop",
+      "name": "Two makers, two tools",
+      "scene": "res://commons/artifacts/matching_workshop/matching_workshop.tscn",
+      "description": "The exact printed learner workshop. NEXT scans greedily then revises along an alternating path. ORDER compares edge orders. The carried point moves the figure without changing compatibility.",
+      "footprint": [
+        4,
+        3,
+        4
+      ],
+      "category": "graphtheory",
+      "dev_category": "graphtheory",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "qfep_connection": "Distinguish the represented relation, what its operation permits and what its evidence leaves out.",
+      "tags": [
+        "graph",
+        "matching",
+        "project",
+        "relation"
+      ]
+    },
+    "ada_relations": {
+      "lookup_name": "ada_relations",
+      "name": "Ada: what connects the work",
+      "scene": "res://commons/artifacts/ada_relations/ada_relations.tscn",
+      "description": "Sourced read-only spatial atlas: recommended spine, planned dependencies, concept returns, shared placement tokens and dated review milestones. VIEW, PREVIOUS, NEXT and HALLS/ALL.",
+      "footprint": [
+        6,
+        4,
+        5
+      ],
+      "category": "graphtheory",
+      "dev_category": "graphtheory",
+      "complexity": "intermediate",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "qfep_connection": "Distinguish the represented relation, what its operation permits and what its evidence leaves out.",
+      "tags": [
+        "graph",
+        "matching",
+        "project",
+        "relation"
+      ]
+    }
+  }
+}

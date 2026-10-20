@@ -11,9 +11,11 @@ var pens: Array[XRToolsPickable] = []
 var stroke_events: int = 0
 var shelf_enabled := false
 var simple_pens := false
+var transparent_ink := false
 
 func _ready() -> void:
 	canvas = Paper.new()
+	canvas.transparent_ink = transparent_ink
 	canvas.name = "WritingSurface"
 	var quad := QuadMesh.new()
 	quad.size = Vector2(board_width, board_height)
@@ -113,6 +115,7 @@ func sample_uv(world_tip: Vector3, grid_mm: float) -> Vector2:
 	return Vector2(clampf(xy.x / board_width + 0.5,0,1), clampf(0.5 - xy.y / board_height,0,1))
 
 func paint(previous: Vector2, uv: Vector2, ink: Color, erase: bool) -> void:
+	if erase and transparent_ink: ink = Color.TRANSPARENT
 	var radius: int = 22 if erase else 3
 	# Board-space quantization already happened. Use a negligible UV snap here,
 	# and pass Color explicitly: the old controller passed brush size in its slot.

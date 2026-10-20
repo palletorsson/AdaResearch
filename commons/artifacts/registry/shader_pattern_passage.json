@@ -1,0 +1,17 @@
+{
+  "registry_info": {"name": "Patterned passage", "category": "shaders"},
+  "artifacts": {
+    "shader_pattern_passage": {
+      "lookup_name": "shader_pattern_passage",
+      "scene": "res://commons/artifacts/shader_pattern_passage/shader_pattern_passage.tscn",
+      "name": "The image leaves its frame",
+      "description": "The carried circle repeats across a square, floor, walls, column, cube and an existing chair prefab. Nearby controls shift the pattern, change density and move the chair. Compare a room-anchored projection with one attached to the chair.",
+      "map_ready": true,
+      "category": "shaders",
+      "complexity": "intermediate",
+      "tags": ["shaders", "patterns", "fract", "coordinates", "prefab", "museum"],
+      "interactions": ["Grab or point-drag DENSITY / SHIFT / CHAIR", "Press ATTACH to compare chair and room coordinates", "RESET nearby"],
+      "qfep_connection": "A shared surface can visually unite separate bodies; moving the receiver exposes whether the pattern belongs to the object or to the room."
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "ant_scale_atlas": {
+      "lookup_name": "ant_scale_atlas",
+      "name": "One pattern, three sizes",
+      "scene": "res://commons/artifacts/ant_scale_atlas/ant_scale_atlas.tscn",
+      "description": "Original pheromone-grid, turmite and Ant Colony V2 simulations at 45 cm, 1.8 m and 8 m. Carry the same PointBody; pause, compare and restart explicitly.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        15,
+        4,
+        12
+      ],
+      "size_group": "world_scale",
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "tags": [
+        "ants",
+        "stigmergy",
+        "turmites",
+        "three scales",
+        "grabbable",
+        "Ant Colony V2"
+      ],
+      "qfep_connection": "A shared pattern can become a thing held or a ground crossed. Scale changes the encounter; it does not establish that two different rules describe the same organism.",
+      "parameters": {
+        "footprint": [
+          15,
+          4,
+          12
+        ],
+        "size_group": "world_scale"
+      }
+    }
+  }
+}

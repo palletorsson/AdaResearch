@@ -11,6 +11,14 @@ func _taken_in_vr(_pickable: Variant) -> void:
 	var controller := get_picked_up_by_controller()
 	if controller:
 		_take.call_deferred(XRToolsPlayerBody.find_instance(controller), null)
+	else:
+		# The Void desktop hand uses the same XRTools grab driver, with a
+		# MouseGrip under its camera instead of a tracked controller.
+		var actor: Node = get_picked_up_by()
+		while actor != null and not actor is CharacterBody3D:
+			actor=actor.get_parent()
+		if actor != null and actor.get("desktop_pointer") != null:
+			_take.call_deferred(actor, actor.get("desktop_pointer"))
 
 func on_desktop_grab(pointer: Node) -> void:
 	var actor := pointer.get_parent()

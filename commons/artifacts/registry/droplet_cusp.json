@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "droplet_cusp": {
+      "lookup_name": "droplet_cusp",
+      "name": "Droplet Cusp",
+      "class_name": "DropletCusp",
+      "scene": "res://commons/artifacts/droplet_cusp/droplet_cusp.tscn",
+      "category": "softbodies",
+      "artifact_type": "demonstration",
+      "complexity": "intermediate",
+      "description": "A boolean funnel and a soft ball, and the question of whether they can fit. Rebuilt 2026-10-13 at Palle's instruction from a posed surface of revolution into a physics experiment: the block, flare, bore and waist washer are genuine CSG subtractions, sectioned so the interior argues in public behind a glass pane, and a soft sphere is dropped on the mouth. The settled pose is the verdict, printed on the plate: PASSED (through to the tray), HANGS IN THE WAIST (the droplet forms, bulged below and necked above - nobody drew that teardrop, the waist makes it), or RESTS PROUD. waist sets the washer hole as a fraction of the ball's rest radius; flesh sets what the ball negotiates with - firm bites where it touches, jelly lubricates, balloon insists on volume. Measured at both 60 and 90 Hz: snug/firm passes, scant/firm never passes, and at the tight waist firm hangs at -91 mm while jelly drips clean through to the tray - softness measurably buys passage. The ball is the artifact's OWN verlet pressure shell (42 points, 80 faces, per-flesh grip) colliding analytically against the same flare/bore/washer numbers the CSG draws, because four engine substrates failed measurably first: CSG trimesh let jelly tunnel 4.3 km, sphere and capsule colliders generate no soft contacts at all in this engine (probe_softbody_shapes), a box ring fed the solver contradictory push-outs, and a post-and-collar deck ejected the ball off its edges. GodotPhysics SoftBody3D cannot do squeeze-through-aperture; owning the sim gives one source of truth and determinism without a seed. Readable in code via verdict_word(), ball_top_m(), ball_bottom_m(), is_settled().",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [1, 1, 1],
+      "map_sequences": ["softbodies", "boolean_surfaces", "qfeplaboratory"],
+      "tags": ["softbody", "boolean", "csg", "fit", "aperture", "threshold", "droplet", "verlet", "hand"],
+      "parameters": {
+        "footprint": [1, 1, 1],
+        "size_group": "compact"
+      },
+      "dna": {
+        "axes": {
+          "waist": ["snug", "tight", "narrow", "scant"],
+          "flesh": ["firm", "pliant", "jelly", "balloon"]
+        },
+        "predicted_degeneracy": {
+          "pair": "flesh: firm <-> pliant, at waist=snug",
+          "predicted_bite_pct": 1.0,
+          "basis": "LOWER BOUND, as every prediction in this corpus has been, by 1.5x to 6.7x. At snug the hole is wider than the ball, so every flesh value PASSES and settles in the same tray; firm and pliant differ only in how much the resting shell slumps (12 vs 6 constraint iterations), a few millimetres across a ball that is maybe 15 percent of frame behind the section cut. FRAME = 0.15 * 0.07 = 1.0 percent.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below about 1 percent the likely causes in order are (a) the capture shooting before the ball settles - the pose IS the verdict and a mid-fall frame is a verdict about nothing; is_settled() is readable and the plate says SETTLING; (b) the passed ball sitting so low in the tray that the section lip hides it from the canonical standpoint, which is a fixture problem; (c) a flesh value the recipe match does not carry, which silently returns the firm default. Open the PNGs.",
+          "structural_degeneracy_predicted": "SAID BEFORE THE SWEEP, fourth artifact running, because every one so far had a structural pair I either missed or half-named: expect flesh to be CONDITIONAL on waist at BOTH ENDS - at snug all four fleshes pass (the hole outruns the material), at scant none pass (geometry outruns it again), and the axis only argues in the middle two values. Equally expect waist to look alive everywhere, since the drawn washer hole changes even when the outcome does not. Read the per-pair rows grouped by waist, never the axis mean, and read the 60-versus-90 Hz question as settled: the probe gates both."
+        }
+      },
+      "spatial_needs": {
+        "platform": "plinth",
+        "footprint_cells": 1,
+        "clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

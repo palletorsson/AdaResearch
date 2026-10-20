@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "filled_pocket": {
+      "lookup_name": "filled_pocket",
+      "name": "Filled Pocket",
+      "class_name": "FilledPocket",
+      "scene": "res://commons/artifacts/filled_pocket/filled_pocket.tscn",
+      "category": "graphtheory",
+      "artifact_type": "demonstration",
+      "complexity": "beginner",
+      "description": "A tabletop grid from the source figure, kept faithful: bad cells grey, the route from x to y in blue through the good cells, and every free cell the flood cannot reach drawn FILLED in amber - open floor absorbed into the walls, because reachability, not occupancy, is what a map answers to. The pocket is discovered, never authored: a flood fill runs from x, the route is its parent chain to y, and the layouts are hand-written character maps with no RNG. wall sets what the bad cells form (open / u_bend / ring / split) and door removes one or two named wall cells. Measured: the open field routes in 12 steps with nothing sealed; the U costs 14 and seals nothing, because a trap with an open mouth is reachable; the ring seals exactly 9 cells of perfectly good floor and one door drains all 9; the split kills the route outright, stranding 45 cells, and a mid-wall door restores it at 10 steps. Where the door names a cell that was never wall, the plate says so - an artifact whose answer to an undefined question is to look unchanged cannot be told apart from a broken one. Readable in code via route_steps(), pocket_cells(), reachable_cells().",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [1, 1, 1],
+      "map_sequences": ["graphtheory", "proceduralgeneration", "postfoundationscrisis"],
+      "tags": ["pathfinding", "reachability", "flood-fill", "pocket", "route", "grid", "hand"],
+      "parameters": {
+        "footprint": [1, 1, 1],
+        "size_group": "compact"
+      },
+      "dna": {
+        "axes": {
+          "wall": ["open", "u_bend", "ring", "split"],
+          "door": ["sealed", "single", "double"]
+        },
+        "predicted_degeneracy": {
+          "pair": "door: single <-> double, at wall=split",
+          "predicted_bite_pct": 1.8,
+          "basis": "LOWER BOUND, as every prediction in this corpus has been, by 1.5x to 6.7x. Both doors reconnect the halves, so the route threads the wall either way and the plate prints the same verdict shape; the differences are one extra opened cell in a nine-row wall and possibly a shorter thread for double. One cell of eleven-by-nine is 1 percent of the board; the route shift adds a little. FRAME = 1.8 percent.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below about 1.8 percent the likely causes in order are (a) the sweep setting door before wall so the setter rebuild order masks one value - both setters rebuild, so this should not happen, but check _rejects.json first; (b) the route choosing the same thread through either door so only the second opened cell differs - that is a genuine 1 percent and the floor of this prediction; (c) a door value DOORS does not carry, failing silently to sealed.",
+          "structural_degeneracy_predicted": "SAID BEFORE THE SWEEP, sixth artifact running. door at wall=open and wall=u_bend names cells that are ALREADY FLOOR: nothing changes but one plate line - the artifact says '(the door names open floor)' precisely so these near-twins are declared rather than discovered, bridge_cut's lesson applied in advance. Expect door to be CONDITIONAL on wall, alive only at ring and split; read the per-pair rows grouped by wall, never the axis mean."
+        }
+      },
+      "spatial_needs": {
+        "platform": "plinth",
+        "footprint_cells": 1,
+        "clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

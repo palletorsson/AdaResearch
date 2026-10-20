@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "planar_lift": {
+      "lookup_name": "planar_lift",
+      "name": "Planar Lift",
+      "class_name": "PlanarLift",
+      "scene": "res://commons/artifacts/planar_lift/planar_lift.tscn",
+      "category": "graphtheory",
+      "artifact_type": "demonstration",
+      "complexity": "intermediate",
+      "description": "A graph on a table. Flat, its edges collide where they must cross, drawn red; lifted, the edges arc into the third dimension and every collision dissolves while the crossings in the plane stay exactly where they were. Two numbers are computed from the geometry on display and printed together, because the gap between them is the artifact: crossings in the plane (pairs of chords whose shadows intersect - the lift never changes this) and collisions in space (non-adjacent tubes that actually touch, by exact segment-to-segment distance; point sampling was tried first and read two intersecting chords as 10 mm apart). Measured: k5 flat has exactly 5 crossings and 5 collisions, k33 flat exactly 9 and 9, and lifted both drop to 0 collisions with real clearance while the plane's count stands. wheel is the control - planar, zero crossings even flat, so the red marks are facts about k5 and not about flatness. What the artifact shows is this drawing; what Kuratowski's theorem adds is that for k5 and k33 no flat drawing avoids it - these two are the obstructions all non-planarity reduces to. The lift that works is found, not asserted: arc peaks start on a ladder and a capped resolve pass raises touching pairs until space is clear, never at lift=flat, where the plane keeps its verdict. Palle's reading of the source figure: 2d forced into 3d. Readable in code via crossings_in_plane(), collisions_in_space(), min_clearance_m().",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "size_group": "compact",
+      "footprint": [1, 1, 1],
+      "map_sequences": ["graphtheory", "foundationscrisis", "postfoundationscrisis"],
+      "tags": ["graph", "planarity", "kuratowski", "crossing", "dimension", "impossibility", "hand"],
+      "parameters": {
+        "footprint": [1, 1, 1],
+        "size_group": "compact"
+      },
+      "dna": {
+        "axes": {
+          "graph": ["k5", "k33", "wheel", "chain"],
+          "lift": ["flat", "slight", "lifted", "spread"]
+        },
+        "predicted_degeneracy": {
+          "pair": "lift: flat <-> slight, at graph=wheel",
+          "predicted_bite_pct": 1.5,
+          "basis": "LOWER BOUND, as every prediction in this corpus has been, by 1.5x to 6.7x. The wheel is planar, so nothing changes colour at any lift - the only difference between flat and slight is twelve edges bowing up by at most 2 cm on a piece that is maybe 30 percent of frame, seen from a high oblique angle that forestshortens vertical arcs. Arc displacement is perhaps 5 percent of the subject's projected area. FRAME = 0.30 * 0.05 = 1.5 percent.",
+          "what_to_do_if_it_measures_lower": "STOP AND TEST THE HARNESS. Below about 1.5 percent the likely causes in order are (a) the resolve pass having raised slight's arcs at some OTHER graph value but the fixture pinning wheel, where it never fires - check which graph the sweep actually set; (b) the camera standpoint looking straight down, where a vertical arc moves pixels the least - an anamorphic case, run probe_anamorphic before any verdict; (c) a lift value the LIFTS dictionary does not carry, failing silently to flat. Open the PNGs.",
+          "structural_degeneracy_predicted": "SAID BEFORE THE SWEEP, fifth artifact running. Expect lift to be CONDITIONAL on graph exactly as leak was on shell and flesh was on waist: at graph=wheel and graph=chain there are no crossings, so no red anywhere and the four lift values differ only by geometry, while at k5 and k33 the flat value stands alone in red and the axis carries colour, number and shape at once. The mean over the cross product will understate the axis; read the per-pair rows grouped by graph. Expect graph to bite hugely everywhere - different node counts, different silhouettes - and expect the plate TEXT to change at every cell, which is honest here because the numbers it prints are measured, not captions."
+        }
+      },
+      "spatial_needs": {
+        "platform": "plinth",
+        "footprint_cells": 1,
+        "clearance": { "front": 1, "back": 1, "left": 1, "right": 1 },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": "none"
+      }
+    }
+  }
+}

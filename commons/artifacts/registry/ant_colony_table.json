@@ -1,0 +1,62 @@
+{
+  "artifacts": {
+    "ant_colony_table": {
+      "lookup_name": "ant_colony_table",
+      "name": "Ant Colony V2 — a trail comparison",
+      "scene": "res://commons/artifacts/ant_colony_table/ant_colony_table.tscn",
+      "description": "The original 50 m Ant Colony V2 simulation viewed on a 1.8 m table, with a nearby pause/play button. Private physics retains its original scale.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "map_sequences": [
+        "swarmintelligence"
+      ],
+      "footprint": [
+        2,
+        2,
+        2.4
+      ],
+      "size_group": "medium",
+      "parameters": {
+        "footprint": [
+          2,
+          2,
+          2.4
+        ],
+        "size_group": "medium"
+      },
+      "tags": [
+        "ants",
+        "comparison",
+        "field",
+        "table"
+      ],
+      "qfep_connection": "The colony changes the field it reads. Beside a hand-authored direction field, this comparison makes the source of an instruction visible."
+    },
+    "flow_ecosystem_stand": {
+      "lookup_name": "flow_ecosystem_stand",
+      "name": "Ecosystem - a supported comparison",
+      "scene": "res://commons/artifacts/flow_comparison_stands/ecosystem_stand.tscn",
+      "description": "The existing ecosystem, unchanged on an 80 cm solid plinth.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "footprint": [
+        1,
+        1.5,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          1,
+          1.5,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "qfep_connection": "An existing comparison of local encounters and population-level support, given space beside the supplied direction field."
+    }
+  }
+}

@@ -33,6 +33,11 @@ var vr_player = null
 # Used for optimized boid detection
 var boid_manager = null
 
+# Optional encounter adapters. Unassigned on all original boid scenes.
+var boundary_frame: Node3D
+var boundary_margin: float = 5.0
+var steering_source: Node3D
+
 
 func _ready() -> void:
 	# Initialize with random velocity
@@ -136,20 +141,23 @@ func _physics_process(delta: float) -> void:
 				vr_influence *= vr_attraction_weight
 	
 	# Boundary avoidance
-	var pos = global_position
+	var pos = boundary_frame.to_local(global_position) if is_instance_valid(boundary_frame) else global_position
 	var half_size = boundary_size / 2
+	var margin = maxf(boundary_margin, 0.01)
 	
 	# X boundaries
-	if abs(pos.x) > half_size.x - 5:
-		boundary_influence.x = -sign(pos.x) * boundary_force * (abs(pos.x) - (half_size.x - 5)) / 5
+	if abs(pos.x) > half_size.x - margin:
+		boundary_influence.x = -sign(pos.x) * boundary_force * (abs(pos.x) - (half_size.x - margin)) / margin
 	
 	# Y boundaries
-	if abs(pos.y) > half_size.y - 5:
-		boundary_influence.y = -sign(pos.y) * boundary_force * (abs(pos.y) - (half_size.y - 5)) / 5
+	if abs(pos.y) > half_size.y - margin:
+		boundary_influence.y = -sign(pos.y) * boundary_force * (abs(pos.y) - (half_size.y - margin)) / margin
 	
 	# Z boundaries
-	if abs(pos.z) > half_size.z - 5:
-		boundary_influence.z = -sign(pos.z) * boundary_force * (abs(pos.z) - (half_size.z - 5)) / 5
+	if abs(pos.z) > half_size.z - margin:
+		boundary_influence.z = -sign(pos.z) * boundary_force * (abs(pos.z) - (half_size.z - margin)) / margin
+	if is_instance_valid(boundary_frame):
+		boundary_influence = boundary_frame.global_basis.orthonormalized() * boundary_influence
 	
 	# Apply all forces with weights
 	acceleration = Vector3.ZERO
@@ -158,6 +166,8 @@ func _physics_process(delta: float) -> void:
 	acceleration += separation * separation_weight
 	acceleration += vr_influence
 	acceleration += boundary_influence * boundary_weight
+	if is_instance_valid(steering_source):
+		acceleration += steering_source.steering_at(global_position, velocity)
 	
 	# Update velocity and position
 	velocity += acceleration * delta
@@ -172,7 +182,8 @@ func _physics_process(delta: float) -> void:
 	
 	# Look in the direction of movement
 	if velocity.length_squared() > 0.01:
-		look_at(global_position + velocity, Vector3.UP)
+		var up = Vector3.FORWARD if absf(velocity.normalized().dot(Vector3.UP)) > 0.99 else Vector3.UP
+		look_at(global_position + velocity, up)
 
 
 # This method can be called from outside to temporarily attract or repel the boid

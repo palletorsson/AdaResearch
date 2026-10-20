@@ -146,6 +146,11 @@ var visited: Dictionary = {}
 # Wall movement
 var wall_timer: Timer
 var wall_nodes: Array[Node3D] = []
+## One draw batch for every character cell frame, instead of four mesh nodes per cell.
+var character_frames: MultiMeshInstance3D
+var _frame_index := 0
+var _character_glyph_mesh: BoxMesh
+var _character_glyph_material: StandardMaterial3D
 
 ## True once _ready has built once. apply_grid_config arriving before that is a value
 ## change with no geometry to answer it — _ready will use the new value.
@@ -226,6 +231,7 @@ func build_navigation_grid() -> void:
 func create_3d_maze() -> void:
 	# Clear existing wall nodes
 	wall_nodes.clear()
+	_prepare_character_meshes()
 
 	# Create maze walls (in ZY plane)
 	for z in range(grid_depth):
@@ -567,27 +573,42 @@ func _slab(size: Vector3, pos: Vector3, mat: Material) -> MeshInstance3D:
 ## emission so the character stays the figure and the grid stays the ground.
 func _impress_character(wall_node: Node3D, is_forward_slash: bool) -> void:
 	var basis_data: Dictionary = _stroke_basis()
-	var length: float = float(basis_data["length"])
 	var centre: Vector3 = basis_data["centre"]
-	var t: float = maxf(cell_size * 0.09, 0.02)
 
 	# child 0 — the glyph stroke, a bar along local Z, rotated onto the diagonal.
-	var glyph: MeshInstance3D = _slab(
-		Vector3(t, t, length), Vector3.ZERO, _unshaded(wall_color, 0.6))
+	var glyph := MeshInstance3D.new()
+	glyph.mesh=_character_glyph_mesh;glyph.material_override=_character_glyph_material
 	glyph.position = centre
 	glyph.rotation = Vector3((-PI / 4.0) if is_forward_slash else (PI / 4.0), 0, 0)
 	wall_node.add_child(glyph)
 
 	# the character cell — four thin rails on the cell boundary, dimmer than the glyph
-	var rail: StandardMaterial3D = _unshaded(wall_color.darkened(0.45), 0.18)
 	var r: float = maxf(cell_size * 0.035, 0.01)
 	var h: float = cell_size * 0.5
 	for sy in [-1.0, 1.0]:
-		wall_node.add_child(_slab(Vector3(r, r, cell_size),
-			centre + Vector3(0, sy * h, 0), rail))
+		_character_rail(Vector3(r,r,cell_size),wall_node.position+centre+Vector3(0,sy*h,0))
 	for sz in [-1.0, 1.0]:
-		wall_node.add_child(_slab(Vector3(r, cell_size, r),
-			centre + Vector3(0, 0, sz * h), rail))
+		_character_rail(Vector3(r,cell_size,r),wall_node.position+centre+Vector3(0,0,sz*h))
+
+func _prepare_character_meshes() -> void:
+	if is_instance_valid(character_frames):
+		remove_child(character_frames);character_frames.queue_free();character_frames=null
+	_frame_index=0
+	if impression!="character":return
+	var t:=maxf(cell_size*.09,.02)
+	_character_glyph_mesh=BoxMesh.new();_character_glyph_mesh.size=Vector3(t,t,cell_size*sqrt(2.0))
+	_character_glyph_material=_unshaded(wall_color,.6)
+	var mm:=MultiMesh.new();mm.transform_format=MultiMesh.TRANSFORM_3D
+	var unit:=BoxMesh.new();unit.size=Vector3.ONE;mm.mesh=unit
+	mm.instance_count=grid_width*grid_depth*4
+	character_frames=MultiMeshInstance3D.new();character_frames.name="CharacterCellFrames"
+	character_frames.multimesh=mm
+	character_frames.material_override=_unshaded(wall_color.darkened(.65),.08)
+	add_child(character_frames)
+
+func _character_rail(size: Vector3, at: Vector3) -> void:
+	character_frames.multimesh.set_instance_transform(_frame_index,Transform3D(Basis.from_scale(size),at))
+	_frame_index+=1
 
 
 ## WALL — the maze reading made literal. The stroke leaves the plane: a slab with
@@ -716,6 +737,7 @@ func _reimpress() -> void:
 			remove_child(w)         # leaves the tree synchronously — no double-render
 			w.queue_free()
 	wall_nodes.clear()
+	_prepare_character_meshes()
 	for z in range(grid_depth):
 		for x in range(grid_width):
 			var wall_position := Vector3(0, z * cell_size, x * cell_size)

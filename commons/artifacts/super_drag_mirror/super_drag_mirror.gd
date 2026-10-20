@@ -10,6 +10,8 @@ const MIRROR_LAYER := 1 << 19
 @export var wardrobe_path: NodePath
 @export var resolution: int = 768
 @export var active_distance: float = 7.0
+## A textile studio supplies its own dress controls; other mirrors keep theirs.
+@export var show_wardrobe_controls: bool = true
 var viewer: Camera3D
 var reflection: Camera3D
 var viewport: SubViewport
@@ -107,6 +109,12 @@ func _build() -> void:
 			button.pressed.connect(cycle_outfit.bind(int(spec[1])))
 	_box("ConsoleStand", Vector3(1.62, 0.51, 0.28), Vector3(0.10, 1.02, 0.15), frame)
 	_box("ConsoleFoot", Vector3(1.62, 0.035, 0.28), Vector3(0.80, 0.07, 0.60), frame)
+	if not show_wardrobe_controls:
+		panel.visible = false
+		panel.process_mode = Node.PROCESS_MODE_DISABLED
+		for shape in panel.find_children("*", "CollisionShape3D", true, false): shape.disabled = true
+		for part in get_children():
+			if str(part.name).begins_with("Console"): part.visible = false
 	for side in [-1.0, 1.0]:
 		var light := OmniLight3D.new()
 		light.position = Vector3(side * 0.92, 2.1, 0.6)

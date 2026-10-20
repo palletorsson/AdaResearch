@@ -49,6 +49,12 @@ func _ready() -> void:
 		witnesses.name = "FaceWitnesses"
 		band.add_child(witnesses)
 		bands.append({"id":spec[0],"node":band,"axis":spec[2],"sign":spec[3],"cubes":cubes,"label":heading,"row_labels":row_labels,"edges":edges,"witnesses":witnesses,"title":spec[5]})
+	# Compact the cubes, never the two differently sized test bodies.
+	# Their world-space collision capsules remain 0.44 m and 1.2 m wide.
+	if bool(get_meta("config_tower_bands", false)):
+		for i in range(bands.size()):
+			bands[i].node.scale = Vector3.ONE*0.5
+			bands[i].node.position = Vector3((i-1.5)*2.7,2.0,0)
 	apply_gradient()
 	if show_body_comparison:
 		body_comparison = BodyComparison.new()

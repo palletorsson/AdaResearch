@@ -16,6 +16,9 @@ var elapsed := 0.0
 var built := false
 
 func _ready() -> void:
+	# A neutral floor makes the separate sample carpets readable on arrival.
+	# This is an initial display choice; the existing target control stays available.
+	if str(get_meta("config_target", "")) == "walls": target = 1
 	var p := Kit.panel(self,"DRESS THE ARCHITECTURE",Vector3(0,1.2,0))
 	p.add_button("SOURCE").pressed.connect(cycle_source)
 	p.add_button("TARGET").pressed.connect(cycle_target)

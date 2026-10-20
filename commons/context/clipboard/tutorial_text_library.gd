@@ -126,13 +126,16 @@ func _load_text_from_file(file_path: String) -> String:
 		# Try to get the text variable
 		if "text" in instance:
 			var content = instance.text
+			if instance is Node: instance.free()
 			print("TutorialTextLibrary: Successfully loaded %d characters from .gd file" % content.length())
 			return content
 		elif instance.has_method("get_content"):
 			var content = instance.get_content()
+			if instance is Node: instance.free()
 			print("TutorialTextLibrary: Successfully loaded %d characters via get_content()" % content.length())
 			return content
 		else:
+			if instance is Node: instance.free()
 			print("TutorialTextLibrary: ERROR - Script has no 'text' variable or 'get_content()' method")
 			return ""
 

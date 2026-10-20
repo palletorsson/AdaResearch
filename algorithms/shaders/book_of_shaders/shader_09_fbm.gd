@@ -19,6 +19,10 @@ const PANEL_OFFSET_Z := 1.2
 
 var panels: Array[ShaderRackPanel] = []
 var materials: Array[ShaderMaterial] = []
+var _wall_setting := false
+var _displays: Array[MeshInstance3D] = []
+var _titles: Array[Label3D] = []
+var _mounts: Node3D
 
 var shader_defs := [
 	{
@@ -67,6 +71,7 @@ func _ready() -> void:
 		display.material_override = mat
 		display.position = Vector3(x_pos, 1.5, 0.0)
 		add_child(display)
+		_displays.append(display)
 		materials.append(mat)
 
 		var title := Label3D.new()
@@ -77,6 +82,7 @@ func _ready() -> void:
 		title.position = Vector3(x_pos, 2.7, 0.01)
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		add_child(title)
+		_titles.append(title)
 
 		var slider_count: int = def["sliders"].size()
 		var panel := ShaderRackPanel.new()
@@ -88,6 +94,7 @@ func _ready() -> void:
 		panel.rotation_degrees = Vector3(-15, 0, 0)
 		add_child(panel)
 		panels.append(panel)
+	_apply_setting()
 
 
 func _process(_delta: float) -> void:
@@ -107,4 +114,24 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("setting"):
+		_wall_setting = str(config["setting"]) == "wall"
+		_apply_setting()
+
+func _apply_setting() -> void:
+	if _displays.is_empty(): return
+	if is_instance_valid(_mounts): _mounts.queue_free()
+	_mounts = Node3D.new(); add_child(_mounts)
+	var geo = preload("res://commons/artifacts/jacquard_weaver/weave_geometry.gd")
+	for i in range(_displays.size()):
+		var display := _displays[i]; var title := _titles[i]; var panel := panels[i]
+		if _wall_setting:
+			var quad := QuadMesh.new(); quad.size=Vector2(2,2); display.mesh=quad; display.position.y=2.1
+			title.position.y=3.28; title.font_size=44; title.pixel_size=.002; panel.position.y=1.02
+			var x := display.position.x
+			geo.box(_mounts,Vector3(x,2.1,-.065),Vector3(2.13,2.13,.08),geo.material("25383d"))
+			geo.box(_mounts,Vector3(x,.92,1.2),Vector3(1.65,.1,.65),geo.material("d5d2bd"),true)
+			for dx in [-.65,.65]: geo.box(_mounts,Vector3(x+dx,.44,1.2),Vector3(.10,.88,.42),geo.material("25383d"),true)
+		else:
+			var box := BoxMesh.new(); box.size=DISPLAY_SIZE; display.mesh=box; display.position.y=1.5
+			title.position.y=2.7; title.font_size=18; title.pixel_size=.001; panel.position.y=.5

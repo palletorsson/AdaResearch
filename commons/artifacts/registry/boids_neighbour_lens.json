@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "boids_neighbour_lens": {
+      "lookup_name": "boids_neighbour_lens",
+      "name": "Boids: who enters the radius?",
+      "scene": "res://commons/artifacts/boids_neighbour_lens/boids_neighbour_lens.tscn",
+      "description": "The original FlockingControls simulation in a clear bay. The carried point adjusts perception radius. Pause, compare the selected neighbours, and read the three requests for the gold body.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        1.8,
+        2.2,
+        1.8
+      ],
+      "size_group": "medium",
+      "parameters": {
+        "footprint": [
+          1.8,
+          2.2,
+          1.8
+        ]
+      },
+      "qfep_connection": "A change in who can count as a neighbour changes the requests, even when the weights and positions stay the same. The visible radius declares the inclusion rule."
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "prefab_disorder": {
+      "lookup_name": "prefab_disorder",
+      "name": "Disorder — Originals / Parts / Hybrids",
+      "scene": "res://commons/artifacts/prefab_disorder/prefab_disorder.tscn",
+      "category": "randomness",
+      "sequence": "randomness",
+      "map_sequences": [
+        "randomness"
+      ],
+      "map_ready": true,
+      "include_in_map_data": true,
+      "complexity": "beginner",
+      "description": "A reversible slider compares four gallery prefabs: box, CRT monitor, stool and microscope. At 0: original objects; 0.5: scattered whole objects beside separated mesh parts; 1: intact originals beside four seeded hybrids. All fifty parts are retained once on each side; every hybrid combines at least three sources. Original materials remain; hybrids are uniformly fitted to their pads. KEEP/REPLAY stores raw draws, membership, target poses and slider. A geometric study, not an entropy meter. SEED +1 changes memberships, joining order, faces and turns; the same seed reconstructs the same form. Older fixed-hybrid records still replay. KEEP adds each arrangement to a persistent gallery. Compare four saved sets at a time, labelled by seed and stage, and replay any entry.",
+      "qfep_connection": "Loosening an assembly exposes parts to other relationships. Seeded regrouping can suggest different forms or uses, while the chosen bundles and joining rules delimit what becomes possible. Kept targets let the experiment return to a particular relation.",
+      "parameters": {
+        "footprint": [
+          4.8,
+          2.8,
+          3.1
+        ],
+        "size_group": "floor_display",
+        "experiment_seed": 435,
+        "disorder": "0 originals; 0.5 separation; 1 hybrids; reversible",
+        "butterflies": "Optional 0–32 local butterflies; Entropy Workshop uses 16. Confined to the tables, hidden and paused in GALLERY."
+      },
+      "interactions": [
+        "STAGE slider moves originals through separation into hybrids and back",
+        "ORIGINAL, PARTS and HYBRIDS select the three landmarks",
+        "SEED +1 regenerates separation offsets and hybrid groupings, joins and orientations",
+        "KEEP stores full arrangement; REPLAY restores it, including earlier separation records",
+        "GALLERY compares four kept sets side by side; PREVIOUS/NEXT browse more; REPLAY 1-4 restores a selection; BACK leaves the live experiment unchanged",
+        "FOLLOW PART toggles an identity frame around the CRT screen on both tables without changing the experiment",
+        "WATCH compares both tables, follows the screen into a hybrid and records paired eye/outside observations with tutorial/final excerpts and scripted questions",
+        "After successful WATCH the ghost restores the starting state and walks on checked floor to the installed Shannon ledger; other controls take over immediately"
+      ],
+      "tags": [
+        "entropy",
+        "disorder",
+        "prefab",
+        "assembly",
+        "mesh",
+        "seed",
+        "replay",
+        "comparison",
+        "hybrid",
+        "recombination"
+      ]
+    }
+  }
+}

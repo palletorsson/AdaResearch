@@ -1,0 +1,17 @@
+{
+  "registry_info": {"name": "Shader shaping wall", "category": "shaders"},
+  "artifacts": {
+    "shader_shaping_wall": {
+      "lookup_name": "shader_shaping_wall",
+      "scene": "res://commons/artifacts/shader_shaping_wall/shader_shaping_wall.tscn",
+      "name": "One rule, two receivers",
+      "description": "A large circle mask and the same material on a cube's front. Grab the radius control, compare hard and soft edges, reset nearby. The backing remains solid.",
+      "map_ready": true,
+      "category": "shaders",
+      "complexity": "beginner",
+      "tags": ["shaders", "distance", "mask", "surface", "museum"],
+      "interactions": ["Grab or point-drag RADIUS", "Press EDGE for hard/soft", "Press RESET"],
+      "qfep_connection": "A boundary in an image changes while the supporting physical surface remains."
+    }
+  }
+}

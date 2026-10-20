@@ -1,0 +1,23 @@
+{
+  "id": "thread_loom",
+  "name": "Follow the Thread — hand loom",
+  "description": "A geometric loom: twelve warp threads, a four-by-four lift draft, a pickable shuttle and a reed. A complete shuttle pass through the shed can be beaten into a continuous weft. Each pick keeps the draft used when it was made.",
+  "artifacts": {
+    "thread_loom": {
+      "lookup_name": "thread_loom",
+      "name": "Follow the Thread — hand loom",
+      "scene": "res://commons/artifacts/thread_loom/thread_loom.tscn",
+      "description": "Take the shuttle from the lit side, carry it through the opening, then press its trigger or BEAT. PLAIN/TWILL and the lift buttons affect future passes. PASS supplies a guided desktop alternative. UNDO removes one pass; RESET clears the sample. Geometry represents interlacement; yarn tension and friction are not simulated.",
+      "category": "patterns",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": ["tiling"],
+      "footprint": [3, 2, 3],
+      "size_group": "medium",
+      "parameters": {},
+      "tags": ["loom", "weaving", "warp", "weft", "handwork", "draft", "array", "thread", "pickable"],
+      "spatial_profile": {"dir_group": "front", "range": 3, "density": "medium", "reading_radius": 1.5, "derived_from": "authored"}
+    }
+  }
+}

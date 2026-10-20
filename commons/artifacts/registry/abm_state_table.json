@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "abm_state_table": {
+      "lookup_name": "abm_state_table",
+      "name": "ABM: what the point carries",
+      "scene": "res://commons/artifacts/abm_state_table/abm_state_table.tscn",
+      "description": "The complete printed six-point foraging lesson, permanently in the museum. Hold, move, release and step to see a state change. Replace agents keeps the trace; Clear All erases both.",
+      "category": "swarmintelligence",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        2.7,
+        2.4,
+        3.2
+      ],
+      "size_group": "large",
+      "parameters": {
+        "footprint": [
+          2.7,
+          2.4,
+          3.2
+        ]
+      },
+      "qfep_connection": "The same body responds differently when it carries food. Replacing individual records need not erase the shared history they inherit."
+    }
+  }
+}

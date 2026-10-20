@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn" id="1"]
+[sub_resource type="StandardMaterial3D" id="material"]
+albedo_color = Color(0.89, 0.87, 0.84, 1)
+[sub_resource type="BoxMesh" id="mesh"]
+size = Vector3(0.95, 0.8, 0.95)
+material = SubResource("material")
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(0.95, 0.8, 0.95)
+
+[node name="EcosystemStand" type="Node3D"]
+[node name="Support" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.4, 0)
+[node name="Surface" type="MeshInstance3D" parent="Support"]
+mesh = SubResource("mesh")
+[node name="Collision" type="CollisionShape3D" parent="Support"]
+shape = SubResource("shape")
+[node name="Ecosystem" parent="." instance=ExtResource("1")]
+position = Vector3(0, 0.8, 0)
