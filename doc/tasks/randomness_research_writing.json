@@ -17,14 +17,14 @@
       "title": "Bind tutorial and final questions to the first experiment",
       "skill": "edit",
       "effort": "half-day",
-      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read TEXT_SIMULATION.md, RESEARCH_RECORD.md and text_experiments.json. Either tutorial.md or final.md can initiate an experiment; bind both exact source passages for the selected seed-bench pilot and preserve the distinct questions they contribute. Retain source versions, text roles and companion IDs. Extend the existing record with separate interpretation IDs, assumptions, omitted meanings, apparatus versions, evidence and revision links. Permit several worlds per passage and competing accounts per world. Distinguish unverified claims, unfamiliar mechanisms and unresolved interpretations; retain known contributors, uncertain origins and the person responsible for publication. Neither text must explain everything in the other, and not every passage needs an experiment. Start with the authored seed-bench companion and both archived source bindings; verify rather than duplicate them. Keep the six components, separate IDs and Read/Reconstruct/Investigate links. Tutorial builds construction and inquiry; final develops encounter and possibility; either can originate later research alone. New source versions retain predecessors. The existing sleeve and wall records remain separate design branches. Record source ownership and unknown model/version information honestly. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Read TEXT_SIMULATION.md, RESEARCH_RECORD.md and text_experiments.json. Either tutorial.md or final.md can initiate an experiment; bind both exact source passages for the selected seed-bench pilot and preserve the distinct questions they contribute. Retain source versions, text roles and companion IDs. Extend the existing record with separate interpretation IDs, assumptions, omitted meanings, apparatus versions, evidence and revision links. Permit several worlds per passage and competing accounts per world. Distinguish unverified claims, unfamiliar mechanisms and unresolved interpretations; retain known contributors, uncertain origins and the person responsible for publication. Neither text must explain everything in the other, and not every passage needs an experiment. Start with the authored seed-bench companion and both archived source bindings; verify rather than duplicate them. Keep the six components, separate IDs and Read/Reconstruct/Investigate links. Tutorial builds construction and inquiry; final develops encounter and possibility; either can originate later research alone. New source versions retain predecessors. The existing sleeve and wall records remain separate design branches. Record source ownership and unknown model/version information honestly. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/001/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
       "depends_on": [
         "randomness_research.002"
       ],
-      "status": "blocked",
+      "status": "done",
       "claimed_by": null,
-      "done_at": null,
-      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "done_at": "2026-10-14",
+      "blocked_reason": null,
       "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\001\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\001\\ledger.json",
       "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
       "acceptance": "Both source texts can be recovered and initiate explicit questions; two interpretations coexist without overwriting them. Unbuilt variants have no invented apparatus path or observation. State what could change the interpretation or planned work; known contributions and missing understanding are explicit.",
@@ -64,14 +64,19 @@
         "performance",
         "physical_VR",
         "independent_learner"
-      ]
+      ],
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md"
+      ],
+      "notes": "User authorized the first experiment loop. Bounded seed bench selected; both exact source questions bound. Broader route/Source Lab/sleeve deployment not selected."
     },
     {
       "id": "randomness_research_writing.002",
       "title": "Run a bounded Text Simulation Loop beside the seed-bench pilot",
       "skill": "edit",
       "effort": "half-day",
-      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Coordinate with main .003 using the selected scope from .002. Let one passage initiate an explicit bounded interpretation; preserve at least one alternative. Build a small experimental variant and native probe under this task's directory when runtime work is authorized. Compare the source-oriented and Entropy-oriented openings at the available evidence level, without building a Source Lab. Keep apparatus A/B and passage A/B with actual evidence. Return the observation to the writing and propose a further apparatus or task change. A textual simulation is a thought experiment, not executed or headset evidence. Do not wait for the whole noise route or force a sleeve implementation. Preserve failures, rival accounts and noncanonical worlds. Use the companion's text-simulation.md as an explicit prediction and compare it with an actual selected execution. Fill observations.md and experiment.json only from scoped evidence, then revision.md and text_reviews from independent tutorial/final decisions. A tutorial-origin question can change the final; a final-origin question can change the tutorial. Reasoned retention or an open question is valid. Use the same 48 values for RGB and height, with RGB unchanged in both modes. Keep mapping A/B distinct from the source-versus-Entropy opening trial. Neither a hypothetical trace nor these authored companion documents completes this task. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Coordinate with main .003 using the selected scope from .002. Let one passage initiate an explicit bounded interpretation; preserve at least one alternative. Build a small experimental variant and native probe under this task's directory when runtime work is authorized. Compare the source-oriented and Entropy-oriented openings at the available evidence level, without building a Source Lab. Keep apparatus A/B and passage A/B with actual evidence. Return the observation to the writing and propose a further apparatus or task change. A textual simulation is a thought experiment, not executed or headset evidence. Do not wait for the whole noise route or force a sleeve implementation. Preserve failures, rival accounts and noncanonical worlds. Use the companion's text-simulation.md as an explicit prediction and compare it with an actual selected execution. Fill observations.md and experiment.json only from scoped evidence, then revision.md and text_reviews from independent tutorial/final decisions. A tutorial-origin question can change the final; a final-origin question can change the tutorial. Reasoned retention or an open question is valid. Use the same 48 values for RGB and height, with RGB unchanged in both modes. Keep mapping A/B distinct from the source-versus-Entropy opening trial. Neither a hypothetical trace nor these authored companion documents completes this task. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/002/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
       "depends_on": [
         "randomness_research_writing.001",
         "randomness_research.003"
@@ -79,7 +84,7 @@
       "status": "blocked",
       "claimed_by": null,
       "done_at": null,
-      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "blocked_reason": "Five-view comparison ready for human interpretation, physical headset assessment and independent reconstruction; separate opening-order trial remains unperformed.",
       "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\002\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\002\\ledger.json; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\002\\probe.gd",
       "verification": "& 'C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe' --headless --path 'C:/Users/palle/Documents/GitHub/AdaResearch_46' --script 'res://doc/book/course/randomness-research-2026-10-14/implementation/writing/002/probe.gd'; then inspect the linked passage and scoped observation in REPORT.md; record human/headset evidence separately",
       "acceptance": "Completion requires source question(s) from tutorial/final → interpretation → apparatus → scoped observation → independent review of both texts → next-change record. Each text receives revise, retain_with_reason or open_question with evidence and reasons; revision includes a recoverable successor. Both rewrites are not compulsory. A missing review or other required stage leaves this task incomplete. A model's imagined outcome cannot close execution or human encounter gates.",
@@ -119,6 +124,15 @@
         "performance",
         "physical_VR",
         "independent_learner"
+      ],
+      "progress": "O11/O12: five simultaneous spatial assignments and broader frames implemented. Native/printed 66 each, replay 3, museum 22, five faults detected. Same retained triples drive colour/height/scale/turn; earlier layouts replay. Human interpretation, physical VR and independent reconstruction remain open.",
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md",
+        "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md"
       ]
     },
     {
@@ -126,7 +140,7 @@
       "title": "Audit reciprocal claims and the five reconstructed lessons",
       "skill": "verify",
       "effort": "half-day",
-      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Audit proposed passages, interpretation records and five particle lessons: source/PRNG/hash, distribution/correlation, memory, entropy, chaos and variational free energy remain distinct. Keep source/license notices. Hard claims use primary sources or scoped tests, otherwise unverified labels. Compare the original proposition with the operational assumptions and actual evidence; do not infer one definitive literary meaning from a passing program. Separate code inspection, thought experiment, executed desktop simulation, AI image interpretation, human desktop/VR and independent reconstruction. Check all three reader entry modes, both initiating roles and both review targets, source recovery after later edits, and the separation of prediction from observation. Review the blog draft against actual implementation status; not every hall yet has its proposed tutorial. A proposed contribution must carry its source version, method, assistance and limits before editorial acceptance. Preserve contradictory accounts; code correctness, learner reconstruction and a meaningful encounter require different evidence. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/003/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Audit proposed passages, interpretation records and five particle lessons: source/PRNG/hash, distribution/correlation, memory, entropy, chaos and variational free energy remain distinct. Keep source/license notices. Hard claims use primary sources or scoped tests, otherwise unverified labels. Compare the original proposition with the operational assumptions and actual evidence; do not infer one definitive literary meaning from a passing program. Separate code inspection, thought experiment, executed desktop simulation, AI image interpretation, human desktop/VR and independent reconstruction. Check all three reader entry modes, both initiating roles and both review targets, source recovery after later edits, and the separation of prediction from observation. Review the blog draft against actual implementation status; not every hall yet has its proposed tutorial. A proposed contribution must carry its source version, method, assistance and limits before editorial acceptance. Preserve contradictory accounts; code correctness, learner reconstruction and a meaningful encounter require different evidence. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/003/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
       "depends_on": [
         "randomness_research_writing.002",
         "randomness_research.013"
@@ -180,10 +194,11 @@
       "title": "Record editorial choices across passages and possible worlds",
       "skill": "verify",
       "effort": "half-day",
-      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Review concrete versioned passages, observations, competing interpretations, contributions and remaining learning debt. Record accept/revise/defer/abandon decisions with the responsible reviewer and reasons. Preserve predecessor text and noncanonical variants rather than smoothing them into a progress narrative. This is the delivery review; the earlier pilot review in .005 has already made the next work revisable. Do not claim current specification approval establishes runtime findings or publication approval. Prepare a frozen local edition candidate only from the selected, reviewed material: unique edition/parent IDs, ordered chapter and tutorial versions, recoverable snapshots or Git objects with hashes, code/build and asset provenance, contributor decisions, evidence/debt scope, readable output hash and change record. Confirm the readable artifact before freezing. Later corrections create a new edition; model or script updates never silently alter an old one. Draft/frozen/published remain separate. Publication requires its actual decision and is not implied by freezing. Keep open branches navigable outside the curated route. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/004/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Review concrete versioned passages, observations, competing interpretations, contributions and remaining learning debt. Record accept/revise/defer/abandon decisions with the responsible reviewer and reasons. Preserve predecessor text and noncanonical variants rather than smoothing them into a progress narrative. This is the delivery review; the earlier pilot review in .005 has already made the next work revisable. Do not claim current specification approval establishes runtime findings or publication approval. Prepare a frozen local edition candidate only from the selected, reviewed material: unique edition/parent IDs, ordered chapter and tutorial versions, recoverable snapshots or Git objects with hashes, code/build and asset provenance, contributor decisions, evidence/debt scope, readable output hash and change record. Confirm the readable artifact before freezing. Later corrections create a new edition; model or script updates never silently alter an old one. Draft/frozen/published remain separate. Publication requires its actual decision and is not implied by freezing. Keep open branches navigable outside the curated route. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/004/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
       "depends_on": [
         "randomness_research_writing.003",
-        "randomness_research_writing.005"
+        "randomness_research_writing.005",
+        "randomness_research_writing.010"
       ],
       "status": "blocked",
       "claimed_by": null,
@@ -234,17 +249,283 @@
       "title": "Let the pilot revise the future task graph",
       "skill": "verify",
       "effort": "half-day",
-      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Use the pilot observation and reciprocal record to propose continuing, branching, reprioritizing, replacing or abandoning the next planned work. Preserve the predecessor route/task files and hashes; record affected stable IDs, dependencies, alternatives, trigger evidence and the selection decision in plan_revisions.json. Keep completed/claimed evidence and coordinate any changed active scope. Cancel superseded tasks with a reason; never reuse IDs for unrelated work. For selected changes update both build_plan.py and canonical JSON so regeneration cannot restore a discarded plan. Existing user authorization may cover the change; only genuinely new scope needs another decision. Validate the graph and retain an explicit continue-unchanged decision if warranted. Link the companion's actual observations, tutorial/final reviews and reconstruction difficulties to the next-work decision; the current architecture clarification is not pilot evidence. Select any next experiment from what happened, or record a reasoned defer/stop decision. Do not automatically advance to a sleeve, new hall or larger apparatus. The mostly predictable first mapping tests the method; it does not need to manufacture novelty. The supplied texts and historical plan must remain recoverable. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json for before/after task evidence; this pass has not executed these experiments.",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Use the pilot observation and reciprocal record to propose continuing, branching, reprioritizing, replacing or abandoning the next planned work. Preserve the predecessor route/task files and hashes; record affected stable IDs, dependencies, alternatives, trigger evidence and the selection decision in plan_revisions.json. Keep completed/claimed evidence and coordinate any changed active scope. Cancel superseded tasks with a reason; never reuse IDs for unrelated work. For selected changes update both build_plan.py and canonical JSON so regeneration cannot restore a discarded plan. Existing user authorization may cover the change; only genuinely new scope needs another decision. Validate the graph and retain an explicit continue-unchanged decision if warranted. Link the companion's actual observations, tutorial/final reviews and reconstruction difficulties to the next-work decision; the current architecture clarification is not pilot evidence. Select any next experiment from what happened, or record a reasoned defer/stop decision. Do not automatically advance to a sleeve, new hall or larger apparatus. The mostly predictable first mapping tests the method; it does not need to manufacture novelty. The supplied texts and historical plan must remain recoverable. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/005/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
       "depends_on": [
         "randomness_research_writing.002"
       ],
       "status": "blocked",
       "claimed_by": null,
       "done_at": null,
-      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "blocked_reason": "Five-view comparison ready for human interpretation, physical headset assessment and independent reconstruction; separate opening-order trial remains unperformed.",
       "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\005\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\005\\ledger.json",
       "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
       "acceptance": "Actual observations or reconstruction difficulties support a continue, redirect, defer or stop decision before source/distribution expansion. Any next experiment names that evidence; a predetermined sleeve is insufficient. Both text reviews remain linked. The prior graph survives, changes or continuation have reasons, dependencies resolve without cycles, and a proposed change is not falsely marked applied.",
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "initiating_text_roles": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_targets": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_decisions": [
+        "revise",
+        "retain_with_reason",
+        "open_question"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ],
+      "progress": "O11/O12: five simultaneous spatial assignments and broader frames implemented. Native/printed 66 each, replay 3, museum 22, five faults detected. Same retained triples drive colour/height/scale/turn; earlier layouts replay. Human interpretation, physical VR and independent reconstruction remain open.",
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md",
+        "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.006",
+      "title": "Build the Random Definition research pool and selection rationale",
+      "skill": "edit",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Use WRITING_SPEC.md, WRITING_PILOT.md and writing_pilot.json as the planning scaffold. Inspect the actual sources and enrich a pool larger than the chapter: claims/questions, recoverable versions, evidence kind/status, relations, uncertainty, contributors and reader questions. Recheck selected historical/runtime claims; existing prose is not independent verification. Separate user feedback from visitor outcomes. Explain why selected knowledge is wanted here; park unused connections without deleting them. Situated, desired, transformative and generative are editorial questions, not scores. Keep the 48-value pilot first. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/006/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
+      "depends_on": [
+        "randomness_research_writing.001"
+      ],
+      "status": "open",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": null,
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\006\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\006\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
+      "acceptance": "Selected candidates have checked source/evidence scope and selection reasons; unsupported claims are qualified or parked. Unused material remains retrievable. The pool does not invent reader responses or close the existing human reconstruction gate.",
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "initiating_text_roles": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_targets": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_decisions": [
+        "revise",
+        "retain_with_reason",
+        "open_question"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.007",
+      "title": "Compose paragraph cards and competing literary routes",
+      "skill": "edit",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Create versioned paragraph cards with information, job, attitude, reader gain, bridge and size; add nullable critical pressure and experimental potential. Compare consequence-first and history-braided routes through the same pool, retaining a candidate hybrid. Record changing reader questions and deliberate friction. The four critical lenses are optional, never a quota. The supplied report of an earlier hybrid preference is a precedent, not evidence that this trial ran. Keep literary A/B separate from physical hall-order and mapping A/B. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/007/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
+      "depends_on": [
+        "randomness_research_writing.006"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\007\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\007\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
+      "acceptance": "Each card references pool items and has a specific job. At least two routes order cards with a rationale and preserve unused candidates. A hybrid is optional; selection remains pending until an actual editorial decision.",
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "initiating_text_roles": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_targets": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_decisions": [
+        "revise",
+        "retain_with_reason",
+        "open_question"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.008",
+      "title": "Draft and test literary movement with a ghost reader",
+      "skill": "edit",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Draft recoverable versions for the selected route comparison. Use a fresh model context per route and expose only the current paragraph prefix; retain each response before revealing more. Record understanding, expectations, unanswered questions, changed understanding of earlier encounters and unmotivated transitions. Log exact inputs, assistance, model identity when known and exposure limitations. A reader previously shown the ending cannot be called blind. Preserve comparable scope and document wording/content differences. AI coherence reports cannot certify human desire, pleasure, strangeness or memorable discovery. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/008/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
+      "depends_on": [
+        "randomness_research_writing.007"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\008\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\008\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
+      "acceptance": "Actual draft versions, exposed prefixes and unedited step responses exist with honest exposure limits. Reports identify concrete passages and distinguish model simulation from human response. An unrun prompt is not a completed ghost-reading test.",
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "initiating_text_roles": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_targets": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_decisions": [
+        "revise",
+        "retain_with_reason",
+        "open_question"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.009",
+      "title": "Test a technically grounded critical association and its rival",
+      "skill": "verify",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Choose a consequential edge, leak, technical bias or attachment from the existing pilot. Name its exact technical anchor, interpretation, alternative, single intervention, comparison and advance condition for weakening or abandoning the association. The equal-mean/first-channel example is a proposed arithmetic fixture, not an observation. Use the existing passage–encounter record and approved seven-step cycle for selected runtime work; record missing human stages. Let a failed, unhelpful or contradictory result revise the critique. Review tutorial and final independently; retain competing readings and the next question. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/009/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
+      "depends_on": [
+        "randomness_research_writing.007",
+        "randomness_research_writing.002"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\009\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\009\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
+      "acceptance": "A recoverable interpretation and rival are linked to scoped comparison evidence or an explicitly reasoned deferral. Results are not promoted into proof of a political theory; neither failed execution nor missing human reconstruction is marked complete. Both texts receive an evidence-linked review and a next-work decision.",
+      "map_refs": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Space",
+        "Noise_Space_10",
+        "Particles_Collision"
+      ],
+      "artifact_refs": [],
+      "imported_task_refs": [],
+      "verification_levels": [
+        "artifact",
+        "experiment_cycle",
+        "specified_cross_hall"
+      ],
+      "initiating_text_roles": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_targets": [
+        "tutorial",
+        "final"
+      ],
+      "text_review_decisions": [
+        "revise",
+        "retain_with_reason",
+        "open_question"
+      ],
+      "separate_evidence": [
+        "scene_loading",
+        "runtime_stability",
+        "performance",
+        "physical_VR",
+        "independent_learner"
+      ]
+    },
+    {
+      "id": "randomness_research_writing.010",
+      "title": "Select the reading route through editorial and human review",
+      "skill": "edit",
+      "effort": "half-day",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, RESEARCH_RECORD.md, COMPARISON.md, TEXT_SIMULATION.md, text_experiments.json, FINAL.md and PARTICLE_PATH.md. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/experiment.json. Preserve unrelated and current hall prose. Read WRITING_SPEC.md for critical composition and separate ghost-reader review. Review concrete drafts, ghost-reader reports, critical returns and actual human reading evidence. Record who selects, combines, revises, defers or rejects a route and why. Human review remains pending until received; do not impersonate the author or turn a model ranking into approval. Retain deliberate difficulty or unresolved contradiction with reasons, even against an AI preference. Check that the prose works without Godot and that a later encounter changes an earlier question. Preserve source versions and rejected routes, independently review both texts, and pass the chosen draft or defer decision to W004. Publication is separate. Write Markdown/JSON evidence to C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/writing/010/REPORT.md and ledger.json; reference the companion's canonical run/evidence records instead of duplicating them. Source paths and versions must be named. Follow plan_revisions.json and the companion for before/after task evidence and actual execution status; do not infer human or headset evidence from scripted runs.",
+      "depends_on": [
+        "randomness_research_writing.008",
+        "randomness_research_writing.009"
+      ],
+      "status": "blocked",
+      "claimed_by": null,
+      "done_at": null,
+      "blocked_reason": "Depends on selected scope and versioned evidence; implementation has not begun.",
+      "output": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\010\\REPORT.md; C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\implementation\\writing\\010\\ledger.json",
+      "verification": "python -X utf8 'C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/validate_plan.py'; then verify each passage/interpretation/evidence/version link against its actual source and record the plan or editorial decision",
+      "acceptance": "The editorial decision names versions, responsible reviewer, reasons, human evidence and limits. No desire or pleasure claim is certified by AI. Selection and unresolved research questions are recorded; edition review cannot silently bypass this decision.",
       "map_refs": [
         "Random_Definition",
         "Random_Entropy",
@@ -286,6 +567,10 @@
     "Claims match versioned evidence",
     "Writing can initiate apparatus variants and observations can change the book and task plan",
     "Unresolved findings lead to a next test",
-    "Contributions and editorial decisions are accountable"
-  ]
+    "Contributions and editorial decisions are accountable",
+    "Research pool, paragraph cards and reading routes retain evidence and selection reasons",
+    "Critical interpretations can be revised by experiments; ghost reading is not human response"
+  ],
+  "composition_specification": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\WRITING_SPEC.md",
+  "composition_pilot": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\doc\\book\\course\\randomness-research-2026-10-14\\writing_pilot.json"
 }

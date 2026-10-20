@@ -1,0 +1,48 @@
+{
+  "iteration": "B19",
+  "date": "2026-10-13",
+  "sources": {
+    "commons/hazards/biome_ladder/ladder_encounter.gd": "c0a18d824f8a5ca5bf84c2f333d76395f3699e854d3cbfa567d00b6beb6e1fe0",
+    "commons/hazards/biome_ladder/ladder_skull.gd": "679bb627afb526a63ce2ddfdc409c69dcecf72cb0282c6f9fa134d15a18a20f8",
+    "commons/hazards/biome_ladder/ladder_ball.gd": "584f5ec929c444c56703db9f6086cd9d45bde819171b5f92e69e83a271af69fa",
+    "commons/hazards/biome_ladder/array_path.gd": "8a8fb7543fac82f57eb49bbc29d4fc888d0378852558d08467f6543699fd3ea0",
+    "tools/probes/biome_ladder_arrays.gd": "8434da8820960c9929bd3a49307f172024d106e033fb7e006a063d27069f6b6e",
+    "tools/probes/biome_ladder.gd": "d5ddc437dea554ab0c31269fadb08ae64b93ebc2174392bf952533fc9beeb14c",
+    "tools/probes/biome_tiling_floor.gd": "0a8df9a05a6ec26133257282275617d2175627177ec1b449cc631f626ceb3d1e",
+    "tools/probes/desktop_biome_catalyst.gd": "d3c29eccd71d955816ca13890fb653b22fdf57673f7b5f12c514438846f06b0a",
+    "tools/probes/biome_ladder_skull_hits.gd": "d0ff15cc390ecfda74f4f054143ddff710855884b84a6149748e5f562ec95a94"
+  },
+  "checks": [
+    {
+      "name": "Array, addresses, volleys, paths and cover",
+      "passed": 140,
+      "total": 140,
+      "report": "arrays-checks.json"
+    },
+    {
+      "name": "Five-stage behaviour",
+      "passed": 67,
+      "total": 67,
+      "report": "arrays-stage-checks.json"
+    },
+    {
+      "name": "Desktop input and projectile physics",
+      "passed": 54,
+      "total": 54,
+      "report": "arrays-desktop-checks.json"
+    },
+    {
+      "name": "Tiling and floor collision",
+      "passed": 33,
+      "total": 33,
+      "report": "arrays-tiling-checks.json"
+    },
+    {
+      "name": "Controlled XR input, skull hit and fall",
+      "passed": 106,
+      "total": 106,
+      "report": "arrays-xr-checks.json"
+    }
+  ],
+  "limits": "Controlled Godot runs, not a physical headset or frame-rate test. Existing cleanup warnings remain."
+}

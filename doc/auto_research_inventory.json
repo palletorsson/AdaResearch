@@ -2,101 +2,110 @@
   "schema_version": 1,
   "generated_by": "tools/auto_research_inventory.py",
   "totals": {
-    "artifacts": 486,
-    "topics": 53,
-    "with_essence": 231,
-    "with_scene": 476,
-    "galleried": 473
+    "artifacts": 519,
+    "topics": 61,
+    "with_essence": 267,
+    "with_scene": 509,
+    "galleried": 474
   },
   "by_principle": {
-    "geometric": 164,
-    "stochastic": 112,
-    "field": 69,
-    "optimization": 49,
-    "boolean": 47,
-    "grammatical": 33,
-    "iterative": 8,
-    "composition": 4
+    "geometric": 170,
+    "stochastic": 120,
+    "field": 72,
+    "boolean": 48,
+    "optimization": 47,
+    "grammatical": 46,
+    "iterative": 10,
+    "composition": 6
   },
   "by_time": {
-    "animated": 293,
-    "interactive": 98,
-    "static": 94,
-    "stateful": 1
+    "animated": 300,
+    "static": 112,
+    "interactive": 104,
+    "stateful": 3
   },
   "by_scale": {
-    "object": 204,
-    "specimen": 124,
-    "room": 73,
-    "surface": 53,
-    "architecture": 21,
-    "field": 11
+    "object": 185,
+    "room": 130,
+    "specimen": 104,
+    "surface": 55,
+    "architecture": 35,
+    "field": 10
   },
   "by_tier": {
-    "B": 456,
-    "A": 20,
-    "E": 10
+    "B": 489,
+    "A": 19,
+    "E": 10,
+    "C": 1
   },
   "by_state": {
-    "galleried": 473,
-    "folder-only": 10,
-    "scene-only": 2,
-    "identified": 1
+    "galleried": 474,
+    "scene-only": 29,
+    "identified": 8,
+    "folder-only": 8
   },
   "by_topic": {
-    "wavefunctions": 54,
-    "randomness": 50,
-    "machinelearning": 44,
+    "wavefunctions": 55,
+    "randomness": 51,
+    "machinelearning": 46,
     "physicssimulation": 34,
-    "color": 26,
-    "cellularautomata": 21,
-    "fractals": 21,
+    "color": 27,
+    "cellularautomata": 22,
+    "fractals": 22,
     "vectors": 20,
+    "graphtheory": 17,
+    "primitives": 17,
     "datastructures": 16,
-    "graphtheory": 16,
-    "primitives": 16,
     "joint": 12,
+    "transformation": 11,
     "statistics": 10,
-    "transformation": 10,
     "computationalbiology": 9,
     "patterngeneration": 9,
     "proceduralaudio": 9,
     "shaders": 9,
+    "arrays": 8,
     "criticaltheory": 8,
     "spacetopology": 8,
-    "arrays": 7,
+    "lsystems": 7,
+    "nature_system": 7,
+    "softbodies": 7,
+    "swarmintelligence": 7,
     "alternativegeometries": 6,
     "computationalgeometry": 6,
-    "lsystems": 6,
-    "nature_system": 6,
-    "swarmintelligence": 6,
-    "softbodies": 5,
+    "resourcemanagement": 6,
     "emergentsystems": 4,
     "postprocessing": 4,
     "particles": 3,
+    "qfeplaboratory": 3,
     "chaos": 2,
     "criticalalgorithms": 2,
+    "forces": 2,
     "misc": 2,
     "neuroscience": 2,
     "numericalmethods": 2,
+    "proceduralgeneration": 2,
     "searchpathfinding": 2,
     "stringalgorithms": 2,
     "transforms": 2,
     "advancedlaboratory": 1,
+    "booleansurfaces": 1,
+    "change": 1,
     "cryptography": 1,
     "effects": 1,
-    "forces": 1,
+    "formfinding": 1,
     "geometry": 1,
+    "isosurfaces": 1,
     "marchingcubes": 1,
     "neuralnetworks": 1,
     "neuroevolution": 1,
+    "noise": 1,
     "optimization": 1,
     "oscillation": 1,
     "pathfinding": 1,
-    "qfeplaboratory": 1,
     "quantumalgorithms": 1,
     "speech": 1,
-    "steering": 1
+    "steering": 1,
+    "symmetry": 1
   },
   "rows": [
     {
@@ -156,7 +165,7 @@
       "topic": "alternativegeometries",
       "artifact": "mobiusstrip",
       "scene": "algorithms\\alternativegeometries\\mobiusstrip\\mobius_strip.tscn",
-      "essence": "p(u,v) = (R + v*w*cos(u/2))*cos(u), sin), v*w*sin(u/2) — the half-twist parametric surface",
+      "essence": "a procedurally generated Möbius strip — a 2D ribbon swept around a circle while its width axis rotates by half-turn(s) per loop, so the surface has only one side and one edge; a closed loop that lies about being closed",
       "principle": "field",
       "principle_matches": [
         "field",
@@ -235,12 +244,12 @@
         "geometric"
       ],
       "principle_scores": {
-        "boolean": 180,
+        "boolean": 220,
         "grammatical": 50,
-        "stochastic": 123,
+        "stochastic": 129,
         "geometric": 3
       },
-      "confidence": 0.317,
+      "confidence": 0.414,
       "time": "static",
       "scale": "room",
       "tier": "B",
@@ -254,7 +263,8 @@
         "detail_level",
         "organic_strength",
         "tunnel_complexity",
-        "material_variety"
+        "material_variety",
+        "form_seed"
       ]
     },
     {
@@ -268,16 +278,18 @@
         "optimization",
         "stochastic",
         "boolean",
+        "field",
         "geometric"
       ],
       "principle_scores": {
         "boolean": 72,
-        "grammatical": 210,
-        "stochastic": 84,
-        "optimization": 168,
+        "grammatical": 250,
+        "stochastic": 87,
+        "optimization": 228,
+        "field": 8,
         "geometric": 3
       },
-      "confidence": 0.2,
+      "confidence": 0.088,
       "time": "static",
       "scale": "room",
       "tier": "B",
@@ -309,13 +321,13 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 6,
+        "stochastic": 3,
         "optimization": 12,
         "geometric": 10
       },
       "confidence": 0.167,
-      "time": "static",
-      "scale": "specimen",
+      "time": "stateful",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -454,6 +466,29 @@
     },
     {
       "topic": "arrays",
+      "artifact": "lattice_walk",
+      "scene": "algorithms\\arrays\\lattice_walk\\lattice_walk.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "cols",
+        "rows",
+        "cell",
+        "color_true",
+        "color_step"
+      ]
+    },
+    {
+      "topic": "arrays",
       "artifact": "mondrian_grid",
       "scene": "algorithms\\arrays\\mondrian_grid\\mondrian_run.tscn",
       "essence": null,
@@ -540,6 +575,26 @@
       "exports": []
     },
     {
+      "topic": "booleansurfaces",
+      "artifact": "coincident_face",
+      "scene": "algorithms\\booleansurfaces\\coincident_face\\coincident_face.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "color_a",
+        "color_b"
+      ]
+    },
+    {
       "topic": "cellularautomata",
       "artifact": "ca_bridge",
       "scene": "algorithms\\cellularautomata\\ca_bridge\\ca_bridge.tscn",
@@ -549,7 +604,7 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 3
+        "stochastic": 6
       },
       "confidence": 1.0,
       "time": "animated",
@@ -688,7 +743,6 @@
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "artifact-gallery",
         "principle-stochastic-gallery"
       ],
       "registered": true,
@@ -824,14 +878,16 @@
         "grammatical",
         "iterative",
         "optimization",
+        "stochastic",
         "geometric",
-        "stochastic"
+        "composition"
       ],
       "principle_scores": {
         "grammatical": 200,
         "iterative": 60,
-        "stochastic": 18,
-        "optimization": 40,
+        "stochastic": 27,
+        "optimization": 52,
+        "composition": 10,
         "geometric": 27
       },
       "confidence": 0.7,
@@ -928,8 +984,10 @@
       "time": "static",
       "scale": "specimen",
       "tier": "E",
-      "state": "folder-only",
-      "in_galleries": [],
+      "state": "galleried",
+      "in_galleries": [
+        "sequence-cards-gallery"
+      ],
       "registered": false,
       "exports": []
     },
@@ -1058,20 +1116,21 @@
       "principle_matches": [
         "iterative",
         "optimization",
+        "field",
         "stochastic"
       ],
       "principle_scores": {
-        "iterative": 20,
-        "stochastic": 3,
-        "optimization": 20
+        "iterative": 80,
+        "stochastic": 6,
+        "optimization": 20,
+        "field": 8
       },
-      "confidence": 0.0,
+      "confidence": 0.75,
       "time": "animated",
       "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "artifact-gallery",
         "principle-iterative-gallery"
       ],
       "registered": true,
@@ -1084,6 +1143,33 @@
         "step_interval",
         "random_seed",
         "performance_mode"
+      ]
+    },
+    {
+      "topic": "cellularautomata",
+      "artifact": "rule30_random",
+      "scene": "algorithms\\cellularautomata\\rule30_random\\rule30_random.tscn",
+      "essence": null,
+      "principle": "grammatical",
+      "principle_matches": [
+        "grammatical"
+      ],
+      "principle_scores": {
+        "grammatical": 20
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "rows",
+        "cell",
+        "color_on",
+        "color_col",
+        "color_off"
       ]
     },
     {
@@ -1168,6 +1254,30 @@
       ]
     },
     {
+      "topic": "change",
+      "artifact": "zeno_staircase",
+      "scene": "algorithms\\change\\zeno_staircase\\zeno_staircase.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "room",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "samples",
+        "span",
+        "amp",
+        "color_true",
+        "color_step",
+        "color_secant"
+      ]
+    },
+    {
       "topic": "chaos",
       "artifact": "lyapunovexponents",
       "scene": "algorithms\\chaos\\lyapunovexponents\\lyapunov_exponents.tscn",
@@ -1201,7 +1311,7 @@
       "topic": "chaos",
       "artifact": "strangeattractors",
       "scene": "algorithms\\chaos\\strangeattractors\\2d_to_3d_strange_attractors.tscn",
-      "essence": null,
+      "essence": "x_{n+1} = f(x_n, params); for Lorenz/Clifford/De Jong/Bedhead/Svensson/Ikeda, iterate a nonlinear map. The trajectory is bounded but never repeats — a structure that exists without converging.",
       "principle": "geometric",
       "principle_matches": [
         "geometric"
@@ -1257,6 +1367,29 @@
     },
     {
       "topic": "color",
+      "artifact": "banding_gradient",
+      "scene": "algorithms\\color\\banding_gradient\\banding_gradient.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "width",
+        "row_h",
+        "c0",
+        "c1",
+        "levels"
+      ]
+    },
+    {
+      "topic": "color",
       "artifact": "brick_wall_factory",
       "scene": "algorithms\\color\\brick_wall_factory\\brick_wall_factory.tscn",
       "essence": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern",
@@ -1286,9 +1419,13 @@
       "artifact": "color_mixing",
       "scene": "algorithms\\color\\color_mixing\\advanced_mixing_examples.tscn",
       "essence": "RGB/CMY glass walls at angles — additive color mixing through transparency and emitted light overlap",
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "principle": "optimization",
+      "principle_matches": [
+        "optimization"
+      ],
+      "principle_scores": {
+        "optimization": 6
+      },
       "confidence": 1.0,
       "time": "animated",
       "scale": "room",
@@ -1357,7 +1494,6 @@
       "tier": "A",
       "state": "galleried",
       "in_galleries": [
-        "artifact-gallery",
         "principle-geometric-gallery"
       ],
       "registered": false,
@@ -1383,7 +1519,6 @@
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "artifact-gallery",
         "principle-stochastic-gallery"
       ],
       "registered": true,
@@ -3248,20 +3383,20 @@
       "artifact": "boidflocking",
       "scene": "algorithms\\emergentsystems\\boidflocking\\boid.tscn",
       "essence": "documentation panel for Reynolds' 1987 boids algorithm — separation + alignment + cohesion described in text and connected to a live BoidManager instance",
-      "principle": "optimization",
+      "principle": "stochastic",
       "principle_matches": [
+        "stochastic",
         "optimization",
-        "geometric",
-        "stochastic"
+        "geometric"
       ],
       "principle_scores": {
-        "stochastic": 8,
+        "stochastic": 23,
         "optimization": 20,
         "geometric": 18
       },
-      "confidence": 0.1,
+      "confidence": 0.13,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3291,13 +3426,13 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 15,
+        "stochastic": 27,
         "optimization": 70,
         "geometric": 33
       },
       "confidence": 0.529,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3347,20 +3482,20 @@
       "artifact": "selforganizingpatterns",
       "scene": "algorithms\\emergentsystems\\selforganizingpatterns\\self_organization_principles.tscn",
       "essence": "three modes — stigmergy (deposit/evaporate field), Ising phase transition (spin flip via Metropolis), attractor basins (gradient descent on potential landscape)",
-      "principle": "stochastic",
+      "principle": "field",
       "principle_matches": [
+        "field",
         "stochastic",
         "geometric",
-        "field",
         "optimization"
       ],
       "principle_scores": {
-        "stochastic": 24,
+        "stochastic": 33,
         "optimization": 12,
-        "field": 20,
+        "field": 40,
         "geometric": 24
       },
-      "confidence": 0.0,
+      "confidence": 0.175,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -3382,9 +3517,34 @@
     },
     {
       "topic": "forces",
+      "artifact": "euler_drift",
+      "scene": "algorithms\\forces\\euler_drift\\euler_drift.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "room",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "start",
+        "v0",
+        "grav",
+        "euler_steps",
+        "color_true",
+        "color_euler",
+        "color_wall"
+      ]
+    },
+    {
+      "topic": "forces",
       "artifact": "games",
       "scene": null,
-      "essence": null,
+      "essence": "A bowling game where pins of different mass respond differently to the same impact, making F=ma playable",
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
@@ -3400,35 +3560,66 @@
       "time": "interactive",
       "scale": "room",
       "tier": "E",
-      "state": "folder-only",
+      "state": "identified",
       "in_galleries": [],
       "registered": false,
       "exports": []
+    },
+    {
+      "topic": "formfinding",
+      "artifact": "settling_tremble",
+      "scene": "algorithms\\formfinding\\settling_tremble\\settling_tremble.tscn",
+      "essence": null,
+      "principle": "stochastic",
+      "principle_matches": [
+        "stochastic"
+      ],
+      "principle_scores": {
+        "stochastic": 6
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "epsilon",
+        "nodes",
+        "color_true",
+        "color_node"
+      ]
     },
     {
       "topic": "fractals",
       "artifact": "box_counting_dimension",
       "scene": "algorithms\\fractals\\box_counting_dimension\\box_counting_dimension.tscn",
       "essence": "D = lim(log N(e) / log(1/e)). Cover the shape with boxes. Count. Shrink. Count again. The slope IS the dimension.",
-      "principle": "geometric",
+      "principle": "grammatical",
       "principle_matches": [
-        "geometric",
-        "stochastic"
+        "grammatical",
+        "stochastic",
+        "geometric"
       ],
       "principle_scores": {
-        "stochastic": 6,
-        "geometric": 21
+        "grammatical": 56,
+        "stochastic": 33,
+        "geometric": 27
       },
-      "confidence": 0.714,
+      "confidence": 0.411,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "object",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-geometric-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "shape_seed",
+        "capture_anchor"
+      ]
     },
     {
       "topic": "fractals",
@@ -3461,18 +3652,18 @@
       "artifact": "cubesubdivision",
       "scene": "algorithms\\fractals\\cubesubdivision\\cube_bookshelf.tscn",
       "essence": "bookshelf = frame + horizontal_shelves(rows) + vertical_dividers(cols) + trim, uniform grid subdivision",
-      "principle": "grammatical",
+      "principle": "composition",
       "principle_matches": [
-        "grammatical",
         "composition",
-        "stochastic"
+        "stochastic",
+        "grammatical"
       ],
       "principle_scores": {
         "grammatical": 10,
-        "stochastic": 3,
-        "composition": 8
+        "stochastic": 21,
+        "composition": 192
       },
-      "confidence": 0.2,
+      "confidence": 0.891,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -3490,6 +3681,28 @@
         "cabin_size",
         "show_construction",
         "step_delay"
+      ]
+    },
+    {
+      "topic": "fractals",
+      "artifact": "depth_cap",
+      "scene": "algorithms\\fractals\\depth_cap\\depth_cap.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "depth",
+        "width",
+        "color_curve",
+        "color_floor"
       ]
     },
     {
@@ -3631,7 +3844,7 @@
       },
       "confidence": 0.63,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3657,15 +3870,17 @@
       "principle": "optimization",
       "principle_matches": [
         "optimization",
+        "grammatical",
         "geometric"
       ],
       "principle_scores": {
+        "grammatical": 40,
         "optimization": 80,
-        "geometric": 3
+        "geometric": 6
       },
-      "confidence": 0.963,
+      "confidence": 0.5,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "surface",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3678,17 +3893,17 @@
       "topic": "fractals",
       "artifact": "koch_curve_1",
       "scene": "algorithms\\fractals\\koch_curve_1\\koch_curve.tscn",
-      "essence": null,
+      "essence": "koch(seg) = [seg[0..1/3], seg[1/3..1/3 + bump], seg[2/3..1/3 + bump], seg[2/3..1]]; replace each segment with four shorter ones at 60° kink. Length × 4/3 per iteration, area finite.",
       "principle": "optimization",
       "principle_matches": [
         "optimization",
         "geometric"
       ],
       "principle_scores": {
-        "optimization": 70,
+        "optimization": 80,
         "geometric": 3
       },
-      "confidence": 0.957,
+      "confidence": 0.963,
       "time": "animated",
       "scale": "specimen",
       "tier": "B",
@@ -3713,7 +3928,7 @@
       },
       "confidence": 1.0,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3772,20 +3987,20 @@
       "artifact": "mandelbrot_set",
       "scene": "algorithms\\fractals\\mandelbrot_set\\mandelbrot_set.tscn",
       "essence": "z_{n+1} = z_n^2 + c, z_0 = 0. Each pixel is c; color = escape time. The set is the catalog of all Julia sets.",
-      "principle": "optimization",
+      "principle": "geometric",
       "principle_matches": [
-        "optimization",
         "geometric",
+        "optimization",
         "stochastic"
       ],
       "principle_scores": {
         "stochastic": 9,
         "optimization": 20,
-        "geometric": 11
+        "geometric": 22
       },
-      "confidence": 0.45,
+      "confidence": 0.091,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3799,7 +4014,8 @@
         "center",
         "point_size",
         "height_scale",
-        "use_3d_height"
+        "use_3d_height",
+        "capture_anchor"
       ]
     },
     {
@@ -3868,7 +4084,7 @@
       "principle_scores": {},
       "confidence": 1.0,
       "time": "static",
-      "scale": "field",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -3880,7 +4096,8 @@
         "base_scale",
         "tier_height",
         "roof_overhang",
-        "use_golden_ratio"
+        "use_golden_ratio",
+        "capture_anchor"
       ]
     },
     {
@@ -3891,15 +4108,17 @@
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
-        "geometric"
+        "geometric",
+        "grammatical"
       ],
       "principle_scores": {
-        "stochastic": 90,
-        "geometric": 10
+        "grammatical": 10,
+        "stochastic": 102,
+        "geometric": 16
       },
-      "confidence": 0.889,
+      "confidence": 0.843,
       "time": "interactive",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4060,16 +4279,18 @@
       "artifact": "edmonds_algorithm",
       "scene": "algorithms\\graphtheory\\edmonds_algorithm\\edmonds_algorithm.tscn",
       "essence": "greedy maximum matching — iterate edges in order; if both endpoints are unmatched, add the edge to the matching; matched vertices turn green, matching edges turn red",
-      "principle": "stochastic",
+      "principle": "geometric",
       "principle_matches": [
+        "geometric",
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 3
+        "stochastic": 15,
+        "geometric": 20
       },
-      "confidence": 1.0,
+      "confidence": 0.25,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4099,9 +4320,9 @@
       ],
       "principle_scores": {
         "boolean": 104,
-        "stochastic": 6
+        "stochastic": 21
       },
-      "confidence": 0.942,
+      "confidence": 0.798,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -4110,7 +4331,11 @@
         "principle-boolean-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "layout_seed",
+        "warmup_steps",
+        "time_scale"
+      ]
     },
     {
       "topic": "graphtheory",
@@ -4126,7 +4351,7 @@
       ],
       "principle_scores": {
         "iterative": 12,
-        "stochastic": 17,
+        "stochastic": 26,
         "optimization": 30,
         "geometric": 89
       },
@@ -4140,14 +4365,14 @@
       ],
       "registered": true,
       "exports": [
+        "layout_seed",
         "node_count",
         "edge_probability",
         "layout_bounds",
         "initial_distribution",
         "repulsion_strength",
         "spring_constant",
-        "rest_length",
-        "damping_factor"
+        "rest_length"
       ]
     },
     {
@@ -4165,10 +4390,10 @@
       "principle_scores": {
         "boolean": 84,
         "stochastic": 51,
-        "optimization": 28,
-        "geometric": 65
+        "optimization": 36,
+        "geometric": 70
       },
-      "confidence": 0.226,
+      "confidence": 0.167,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -4200,11 +4425,11 @@
         "stochastic"
       ],
       "principle_scores": {
-        "boolean": 208,
+        "boolean": 216,
         "stochastic": 39,
         "geometric": 105
       },
-      "confidence": 0.495,
+      "confidence": 0.514,
       "time": "static",
       "scale": "room",
       "tier": "B",
@@ -4235,12 +4460,12 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 3,
-        "geometric": 24
+        "stochastic": 15,
+        "geometric": 30
       },
-      "confidence": 0.875,
+      "confidence": 0.5,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4264,12 +4489,12 @@
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 3,
+        "stochastic": 12,
         "geometric": 3
       },
-      "confidence": 0.0,
+      "confidence": 0.75,
       "time": "static",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4296,16 +4521,18 @@
       "principle_matches": [
         "optimization",
         "stochastic",
+        "grammatical",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 6,
-        "optimization": 56,
+        "grammatical": 10,
+        "stochastic": 27,
+        "optimization": 68,
         "geometric": 3
       },
-      "confidence": 0.893,
+      "confidence": 0.603,
       "time": "animated",
-      "scale": "surface",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4334,10 +4561,10 @@
         "optimization"
       ],
       "principle_scores": {
-        "stochastic": 155,
-        "optimization": 120
+        "stochastic": 184,
+        "optimization": 180
       },
-      "confidence": 0.226,
+      "confidence": 0.022,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -4346,7 +4573,9 @@
         "principle-stochastic-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "graph_seed"
+      ]
     },
     {
       "topic": "graphtheory",
@@ -4389,18 +4618,18 @@
       "artifact": "networkflow3d",
       "scene": "algorithms\\graphtheory\\networkflow3d\\networkflow3d.tscn",
       "essence": "Edmonds-Karp max flow via BFS augmenting paths on a 3D spatial network — residual_capacity tracks remaining edge capacity, particles visualize flow along saturated edges",
-      "principle": "stochastic",
+      "principle": "optimization",
       "principle_matches": [
-        "stochastic",
-        "optimization"
+        "optimization",
+        "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 243,
-        "optimization": 240
+        "stochastic": 258,
+        "optimization": 336
       },
-      "confidence": 0.012,
+      "confidence": 0.232,
       "time": "animated",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4416,6 +4645,27 @@
         "max_capacity",
         "min_capacity",
         "flow_algorithm"
+      ]
+    },
+    {
+      "topic": "graphtheory",
+      "artifact": "node_snap",
+      "scene": "algorithms\\graphtheory\\node_snap\\node_snap.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "color_true",
+        "color_path",
+        "color_node"
       ]
     },
     {
@@ -4466,11 +4716,11 @@
       ],
       "principle_scores": {
         "boolean": 4,
-        "grammatical": 80,
-        "stochastic": 12,
-        "optimization": 458
+        "grammatical": 90,
+        "stochastic": 24,
+        "optimization": 578
       },
-      "confidence": 0.825,
+      "confidence": 0.844,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -4502,13 +4752,13 @@
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 6,
-        "optimization": 12,
-        "geometric": 3
+        "stochastic": 18,
+        "optimization": 36,
+        "geometric": 11
       },
       "confidence": 0.5,
       "time": "static",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4533,14 +4783,16 @@
       "essence": "single-pass DFS with a stack — each vertex gets discovery_time and low_link; low_link[v] = min(low_link[v], discovery_time[w]) for back edges; when low_link[v] == discovery_time[v], pop the stack to extract an SCC",
       "principle": "stochastic",
       "principle_matches": [
-        "stochastic"
+        "stochastic",
+        "geometric"
       ],
       "principle_scores": {
-        "stochastic": 3
+        "stochastic": 15,
+        "geometric": 15
       },
-      "confidence": 1.0,
+      "confidence": 0.0,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4569,12 +4821,12 @@
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 9,
+        "stochastic": 15,
         "geometric": 6
       },
-      "confidence": 0.333,
+      "confidence": 0.6,
       "time": "static",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4590,6 +4842,33 @@
         "show_in_degrees",
         "show_queue_state",
         "highlight_current_vertex"
+      ]
+    },
+    {
+      "topic": "isosurfaces",
+      "artifact": "marching_squares",
+      "scene": "algorithms\\isosurfaces\\marching_squares\\marching_squares.tscn",
+      "essence": null,
+      "principle": "field",
+      "principle_matches": [
+        "field"
+      ],
+      "principle_scores": {
+        "field": 20
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "radius",
+        "grid_h",
+        "color_true",
+        "color_cell",
+        "color_grid"
       ]
     },
     {
@@ -4895,17 +5174,19 @@
       "principle": "grammatical",
       "principle_matches": [
         "grammatical",
+        "composition",
         "geometric",
         "stochastic"
       ],
       "principle_scores": {
-        "grammatical": 225,
+        "grammatical": 315,
         "stochastic": 3,
+        "composition": 16,
         "geometric": 15
       },
-      "confidence": 0.933,
+      "confidence": 0.949,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -4916,7 +5197,11 @@
         "display_size",
         "auto_play",
         "speed",
-        "max_derivation_depth"
+        "max_derivation_depth",
+        "show_case",
+        "finish",
+        "wear",
+        "unit_code"
       ]
     },
     {
@@ -4982,6 +5267,32 @@
         "nutrient_supply",
         "season_speed",
         "competition_radius"
+      ]
+    },
+    {
+      "topic": "lsystems",
+      "artifact": "grammar_seed",
+      "scene": "algorithms\\lsystems\\grammar_seed\\grammar_seed.tscn",
+      "essence": null,
+      "principle": "grammatical",
+      "principle_matches": [
+        "grammatical"
+      ],
+      "principle_scores": {
+        "grammatical": 82
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "iterations",
+        "angle_deg",
+        "step",
+        "color_plant"
       ]
     },
     {
@@ -5078,6 +5389,37 @@
     },
     {
       "topic": "machinelearning",
+      "artifact": "affordance_demos",
+      "scene": "algorithms\\machinelearning\\affordance_demos\\learn_input_pair_stand.tscn",
+      "essence": null,
+      "principle": "iterative",
+      "principle_matches": [
+        "iterative",
+        "geometric"
+      ],
+      "principle_scores": {
+        "iterative": 12,
+        "geometric": 3
+      },
+      "confidence": 0.75,
+      "time": "animated",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": false,
+      "exports": [
+        "input_color",
+        "output_color",
+        "connection_color",
+        "glyph_color",
+        "n_pairs",
+        "pillar_spacing",
+        "learn_rate"
+      ]
+    },
+    {
+      "topic": "machinelearning",
       "artifact": "anomaly_detection",
       "scene": "algorithms\\machinelearning\\anomaly_detection\\anomaly_detection.tscn",
       "essence": "score(x) > threshold → anomaly; three heuristics: z-score, isolation radius, autoencoder error",
@@ -5145,10 +5487,10 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 33,
-        "optimization": 470
+        "stochastic": 39,
+        "optimization": 720
       },
-      "confidence": 0.93,
+      "confidence": 0.946,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -5205,10 +5547,10 @@
       ],
       "principle_scores": {
         "boolean": 64,
-        "stochastic": 1424,
+        "stochastic": 1427,
         "optimization": 72
       },
-      "confidence": 0.949,
+      "confidence": 0.95,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -5392,14 +5734,14 @@
         "geometric"
       ],
       "principle_scores": {
-        "grammatical": 300,
-        "stochastic": 114,
-        "optimization": 814,
+        "grammatical": 415,
+        "stochastic": 123,
+        "optimization": 934,
         "geometric": 6
       },
-      "confidence": 0.631,
+      "confidence": 0.556,
       "time": "animated",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -5648,19 +5990,19 @@
       "principle": "field",
       "principle_matches": [
         "field",
-        "optimization",
         "stochastic",
+        "optimization",
         "geometric",
         "composition"
       ],
       "principle_scores": {
-        "stochastic": 36,
+        "stochastic": 66,
         "optimization": 60,
-        "field": 70,
+        "field": 80,
         "composition": 8,
         "geometric": 18
       },
-      "confidence": 0.143,
+      "confidence": 0.175,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -5685,20 +6027,20 @@
       "artifact": "loss_function_comparator",
       "scene": "algorithms\\machinelearning\\loss_function_comparator\\loss_function_comparator.tscn",
       "essence": null,
-      "principle": "optimization",
+      "principle": "stochastic",
       "principle_matches": [
-        "optimization",
         "stochastic",
+        "optimization",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 12,
+        "stochastic": 48,
         "optimization": 45,
         "geometric": 3
       },
-      "confidence": 0.733,
+      "confidence": 0.062,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -5753,6 +6095,35 @@
     },
     {
       "topic": "machinelearning",
+      "artifact": "model_seam",
+      "scene": "algorithms\\machinelearning\\model_seam\\model_seam.tscn",
+      "essence": null,
+      "principle": "optimization",
+      "principle_matches": [
+        "optimization"
+      ],
+      "principle_scores": {
+        "optimization": 36
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "amp",
+        "freq",
+        "data_reach",
+        "span",
+        "color_true",
+        "color_model",
+        "color_data"
+      ]
+    },
+    {
+      "topic": "machinelearning",
       "artifact": "natural_language_processing_NLP",
       "scene": "algorithms\\machinelearning\\natural_language_processing_NLP\\natural_language_processing_NLP.tscn",
       "essence": null,
@@ -5792,11 +6163,11 @@
       ],
       "principle_scores": {
         "boolean": 8,
-        "stochastic": 97,
-        "optimization": 583,
+        "stochastic": 169,
+        "optimization": 673,
         "geometric": 51
       },
-      "confidence": 0.834,
+      "confidence": 0.749,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -5828,13 +6199,13 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 6,
-        "optimization": 483,
+        "stochastic": 18,
+        "optimization": 603,
         "geometric": 25
       },
-      "confidence": 0.948,
+      "confidence": 0.959,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -5903,12 +6274,12 @@
       ],
       "principle_scores": {
         "stochastic": 6,
-        "optimization": 50,
+        "optimization": 60,
         "geometric": 6
       },
-      "confidence": 0.88,
+      "confidence": 0.9,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -5962,16 +6333,20 @@
       "artifact": "pca",
       "scene": "algorithms\\machinelearning\\pca\\pca_visualization.tscn",
       "essence": "X_centered → covariance → eigenvectors → project onto top-k components; maximize preserved variance",
-      "principle": "optimization",
+      "principle": "stochastic",
       "principle_matches": [
+        "stochastic",
+        "geometric",
         "optimization"
       ],
       "principle_scores": {
-        "optimization": 25
+        "stochastic": 66,
+        "optimization": 25,
+        "geometric": 35
       },
-      "confidence": 1.0,
+      "confidence": 0.47,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -6027,12 +6402,12 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 3,
-        "composition": 32
+        "stochastic": 39,
+        "composition": 48
       },
-      "confidence": 0.906,
+      "confidence": 0.188,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -6259,17 +6634,19 @@
       "principle": "optimization",
       "principle_matches": [
         "optimization",
+        "stochastic",
         "composition",
         "geometric"
       ],
       "principle_scores": {
-        "optimization": 140,
+        "stochastic": 15,
+        "optimization": 210,
         "composition": 8,
         "geometric": 3
       },
-      "confidence": 0.943,
+      "confidence": 0.929,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -6628,20 +7005,20 @@
         "grammatical",
         "geometric",
         "stochastic",
-        "composition",
-        "boolean"
+        "boolean",
+        "composition"
       ],
       "principle_scores": {
-        "boolean": 4,
+        "boolean": 16,
         "grammatical": 325,
-        "stochastic": 155,
-        "field": 748,
+        "stochastic": 167,
+        "field": 1048,
         "composition": 10,
-        "geometric": 285
+        "geometric": 294
       },
-      "confidence": 0.566,
+      "confidence": 0.69,
       "time": "animated",
-      "scale": "architecture",
+      "scale": "room",
       "tier": "E",
       "state": "folder-only",
       "in_galleries": [],
@@ -6655,6 +7032,42 @@
         "spine_length",
         "sides",
         "start_radius"
+      ]
+    },
+    {
+      "topic": "nature_system",
+      "artifact": "mycelium",
+      "scene": "algorithms\\nature_system\\mycelium\\mycelium_colony.tscn",
+      "essence": null,
+      "principle": "grammatical",
+      "principle_matches": [
+        "grammatical",
+        "stochastic",
+        "optimization",
+        "geometric"
+      ],
+      "principle_scores": {
+        "grammatical": 116,
+        "stochastic": 12,
+        "optimization": 12,
+        "geometric": 9
+      },
+      "confidence": 0.897,
+      "time": "static",
+      "scale": "object",
+      "tier": "A",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": false,
+      "exports": [
+        "colony_radius",
+        "attractor_count",
+        "influence_radius",
+        "kill_radius",
+        "step_length",
+        "max_steps",
+        "max_nodes",
+        "flatten"
       ]
     },
     {
@@ -6707,9 +7120,11 @@
         "optimization",
         "stochastic",
         "grammatical",
-        "field"
+        "field",
+        "boolean"
       ],
       "principle_scores": {
+        "boolean": 12,
         "grammatical": 90,
         "stochastic": 99,
         "optimization": 296,
@@ -6851,6 +7266,32 @@
       ]
     },
     {
+      "topic": "noise",
+      "artifact": "noise_floor",
+      "scene": "algorithms\\noise\\noise_floor\\noise_floor.tscn",
+      "essence": null,
+      "principle": "stochastic",
+      "principle_matches": [
+        "stochastic"
+      ],
+      "principle_scores": {
+        "stochastic": 53
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "cols",
+        "rows",
+        "cell",
+        "noise_seed"
+      ]
+    },
+    {
       "topic": "numericalmethods",
       "artifact": "gradientdescent",
       "scene": "algorithms\\numericalmethods\\gradientdescent\\gradient_descent_visualization.tscn",
@@ -6858,15 +7299,17 @@
       "principle": "optimization",
       "principle_matches": [
         "optimization",
+        "grammatical",
         "geometric"
       ],
       "principle_scores": {
-        "optimization": 162,
-        "geometric": 27
+        "grammatical": 179,
+        "optimization": 232,
+        "geometric": 35
       },
-      "confidence": 0.833,
+      "confidence": 0.228,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -6879,7 +7322,9 @@
         "momentum_beta",
         "adam_beta1",
         "adam_beta2",
-        "step_speed"
+        "step_speed",
+        "show_console",
+        "finish"
       ]
     },
     {
@@ -6922,17 +7367,19 @@
       "principle": "optimization",
       "principle_matches": [
         "optimization",
+        "grammatical",
         "geometric",
         "stochastic"
       ],
       "principle_scores": {
+        "grammatical": 118,
         "stochastic": 3,
-        "optimization": 180,
-        "geometric": 9
+        "optimization": 269,
+        "geometric": 12
       },
-      "confidence": 0.95,
+      "confidence": 0.561,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -6940,14 +7387,14 @@
       ],
       "registered": false,
       "exports": [
+        "finish",
+        "wear",
+        "unit_code",
+        "show_console",
+        "deck_height",
+        "prob_gauge_depth",
         "initial_temperature",
-        "final_temperature",
-        "cooling_rate",
-        "cooling_schedule",
-        "max_iterations",
-        "equilibrium_steps",
-        "adaptive_enabled",
-        "target_acceptance_rate"
+        "final_temperature"
       ]
     },
     {
@@ -6958,15 +7405,17 @@
       "principle": "geometric",
       "principle_matches": [
         "geometric",
+        "grammatical",
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 9,
-        "geometric": 91
+        "grammatical": 66,
+        "stochastic": 27,
+        "geometric": 134
       },
-      "confidence": 0.901,
+      "confidence": 0.507,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -7343,9 +7792,9 @@
       ],
       "principle_scores": {
         "boolean": 48,
-        "stochastic": 126
+        "stochastic": 134
       },
-      "confidence": 0.619,
+      "confidence": 0.642,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -7354,34 +7803,43 @@
         "principle-stochastic-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "rng_seed",
+        "capture_anchor"
+      ]
     },
     {
       "topic": "physicssimulation",
       "artifact": "bouncingball",
       "scene": "algorithms\\physicssimulation\\bouncingball\\bouncingball.tscn",
       "essence": "Bounded chamber of bouncing balls — physics engine handles gravity, collision, restitution; we only set initial conditions",
-      "principle": "geometric",
+      "principle": "grammatical",
       "principle_matches": [
-        "geometric"
+        "grammatical",
+        "geometric",
+        "stochastic"
       ],
       "principle_scores": {
-        "geometric": 15
+        "grammatical": 48,
+        "stochastic": 12,
+        "geometric": 18
       },
-      "confidence": 1.0,
+      "confidence": 0.625,
       "time": "static",
       "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "principle-geometric-gallery"
+        "principle-geometric-gallery",
+        "vector-toys-gallery"
       ],
       "registered": false,
       "exports": [
         "ball_count",
         "spawn_height",
         "edge_color",
-        "edge_thickness"
+        "edge_thickness",
+        "ball_seed"
       ]
     },
     {
@@ -7419,7 +7877,7 @@
       "topic": "physicssimulation",
       "artifact": "collisiondetection",
       "scene": "algorithms\\physicssimulation\\collisiondetection\\collisiondetection.tscn",
-      "essence": null,
+      "essence": "a small zoo of collision shapes — boxes, spheres, capsules — that flash colour when they touch",
       "principle": "geometric",
       "principle_matches": [],
       "principle_scores": {},
@@ -7497,12 +7955,12 @@
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 168,
+        "stochastic": 194,
         "geometric": 3
       },
-      "confidence": 0.982,
+      "confidence": 0.985,
       "time": "interactive",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -7510,14 +7968,14 @@
       ],
       "registered": false,
       "exports": [
+        "burst_seed",
+        "bench_moment",
         "particle_count_per_burst",
         "burst_force",
         "gravity_strength",
         "drag",
         "particle_lifetime",
-        "launch_speed",
-        "launch_height",
-        "trail_enabled"
+        "launch_speed"
       ]
     },
     {
@@ -7587,19 +8045,19 @@
       "topic": "physicssimulation",
       "artifact": "gravitywell",
       "scene": "algorithms\\physicssimulation\\gravitywell\\gravitywell.tscn",
-      "essence": null,
+      "essence": "A deformable grid sheet warps around a movable mass while test particles roll into the depression — Einstein's rubber-sheet metaphor made grabbable",
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 22,
+        "stochastic": 78,
         "geometric": 3
       },
-      "confidence": 0.864,
+      "confidence": 0.962,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -7659,9 +8117,9 @@
       ],
       "principle_scores": {
         "boolean": 32,
-        "optimization": 12
+        "optimization": 30
       },
-      "confidence": 0.625,
+      "confidence": 0.062,
       "time": "interactive",
       "scale": "specimen",
       "tier": "B",
@@ -7670,7 +8128,10 @@
         "principle-boolean-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "spread",
+        "regime"
+      ]
     },
     {
       "topic": "physicssimulation",
@@ -7700,18 +8161,22 @@
       "artifact": "nbodysimulation",
       "scene": "algorithms\\physicssimulation\\nbodysimulation\\nbody_problem.tscn",
       "essence": "F = G*m1*m2/r^2 for all pairs. O(n^2) pairwise gravity. Every body pulls every other. The computational cost of democracy.",
-      "principle": "optimization",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "optimization",
-        "geometric"
+        "geometric",
+        "stochastic"
       ],
       "principle_scores": {
+        "grammatical": 32,
+        "stochastic": 12,
         "optimization": 22,
-        "geometric": 9
+        "geometric": 15
       },
-      "confidence": 0.591,
+      "confidence": 0.312,
       "time": "animated",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -7724,20 +8189,21 @@
         "spawn_radius",
         "min_mass",
         "max_mass",
-        "g_constant"
+        "g_constant",
+        "spawn_seed"
       ]
     },
     {
       "topic": "physicssimulation",
       "artifact": "newtoncradle",
       "scene": "algorithms\\physicssimulation\\newtoncradle\\newtoncradle.tscn",
-      "essence": null,
+      "essence": "Five suspended balls trade momentum through elastic collisions — lift one, release it, and exactly one leaves the far end",
       "principle": "geometric",
       "principle_matches": [
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 10
+        "geometric": 20
       },
       "confidence": 1.0,
       "time": "interactive",
@@ -7745,7 +8211,8 @@
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "principle-geometric-gallery"
+        "principle-geometric-gallery",
+        "vector-toys-gallery"
       ],
       "registered": false,
       "exports": [
@@ -7763,10 +8230,14 @@
       "topic": "physicssimulation",
       "artifact": "newtonslaws",
       "scene": "algorithms\\physicssimulation\\newtonslaws\\newtonslaws.tscn",
-      "essence": "Side-by-side comparison of three rigid bodies under different applied forces — gravity-only, lateral push, oscillating force",
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "essence": "Rigid bodies arranged to enact one named law at a time — no net force, one force across three masses, or two bodies exchanging an equal and opposite pair",
+      "principle": "grammatical",
+      "principle_matches": [
+        "grammatical"
+      ],
+      "principle_scores": {
+        "grammatical": 32
+      },
       "confidence": 1.0,
       "time": "animated",
       "scale": "room",
@@ -7788,7 +8259,7 @@
       "topic": "physicssimulation",
       "artifact": "numericalintegration",
       "scene": "algorithms\\physicssimulation\\numericalintegration\\numericalintegration.tscn",
-      "essence": null,
+      "essence": "three integrators racing the same trajectory — Euler, RK4, and Godot's ground-truth physics — visualized side by side",
       "principle": "geometric",
       "principle_matches": [
         "geometric"
@@ -7817,12 +8288,14 @@
       "essence": "emit(position, velocity, lifetime). Each particle: born, forced, aged, dead. The system is the population, not the individual.",
       "principle": "stochastic",
       "principle_matches": [
-        "stochastic"
+        "stochastic",
+        "grammatical"
       ],
       "principle_scores": {
-        "stochastic": 432
+        "grammatical": 20,
+        "stochastic": 464
       },
-      "confidence": 1.0,
+      "confidence": 0.957,
       "time": "static",
       "scale": "specimen",
       "tier": "B",
@@ -7831,7 +8304,10 @@
         "principle-stochastic-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "cast",
+        "arrangement"
+      ]
     },
     {
       "topic": "physicssimulation",
@@ -7909,7 +8385,8 @@
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "principle-boolean-gallery"
+        "principle-boolean-gallery",
+        "vector-toys-gallery"
       ],
       "registered": false,
       "exports": []
@@ -7941,7 +8418,7 @@
       "topic": "physicssimulation",
       "artifact": "slingshotlauncher",
       "scene": "algorithms\\physicssimulation\\slingshotlauncher\\slingshotlauncher.tscn",
-      "essence": null,
+      "essence": "A charging platform detects a body standing on it, builds power, then catapults it along a parabolic arc — impulse you feel in your own trajectory",
       "principle": "geometric",
       "principle_matches": [
         "geometric"
@@ -7973,16 +8450,21 @@
       "topic": "physicssimulation",
       "artifact": "softbodies",
       "scene": "algorithms\\physicssimulation\\softbodies\\softbodies.tscn",
-      "essence": null,
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "essence": "three Godot-native soft bodies side by side — jelly cube, rubber ball, inflated balloon — same primitive, different parameter family",
+      "principle": "stochastic",
+      "principle_matches": [
+        "stochastic"
+      ],
+      "principle_scores": {
+        "stochastic": 8
+      },
       "confidence": 1.0,
       "time": "static",
       "scale": "specimen",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
+        "sequence-cards-gallery",
         "principle-geometric-gallery"
       ],
       "registered": false,
@@ -8019,7 +8501,7 @@
       "topic": "physicssimulation",
       "artifact": "springmass",
       "scene": "algorithms\\physicssimulation\\springmass\\springmass.tscn",
-      "essence": null,
+      "essence": "point masses connected by springs — the canonical soft-body precursor — manual integration, no Godot physics",
       "principle": "optimization",
       "principle_matches": [
         "optimization",
@@ -8027,9 +8509,9 @@
       ],
       "principle_scores": {
         "boolean": 16,
-        "optimization": 40
+        "optimization": 52
       },
-      "confidence": 0.6,
+      "confidence": 0.692,
       "time": "animated",
       "scale": "specimen",
       "tier": "B",
@@ -8052,13 +8534,13 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 6,
-        "optimization": 120,
-        "geometric": 42
+        "stochastic": 12,
+        "optimization": 156,
+        "geometric": 52
       },
-      "confidence": 0.65,
+      "confidence": 0.667,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -8080,7 +8562,7 @@
       "topic": "physicssimulation",
       "artifact": "surrealkineticsculpture",
       "scene": "algorithms\\physicssimulation\\surrealkineticsculpture\\SurrealKineticSculpture.tscn",
-      "essence": null,
+      "essence": "a kinetic sculpture — three black Tanguy pistons driving colorful Niki de Saint Phalle organic forms — physics as choreography",
       "principle": "grammatical",
       "principle_matches": [
         "grammatical",
@@ -8094,7 +8576,7 @@
       },
       "confidence": 0.6,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -8117,16 +8599,18 @@
       "artifact": "threebodyproblem",
       "scene": "algorithms\\physicssimulation\\threebodyproblem\\threebodyproblem.tscn",
       "essence": "F_ij = G*m_i*m_j/r^2. Three bodies, three mutual attractions, no closed-form solution. Deterministic rules, unpredictable trajectories.",
-      "principle": "boolean",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "boolean",
         "geometric"
       ],
       "principle_scores": {
         "boolean": 24,
-        "geometric": 14
+        "grammatical": 64,
+        "geometric": 17
       },
-      "confidence": 0.417,
+      "confidence": 0.625,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -8154,10 +8638,10 @@
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 128,
-        "geometric": 31
+        "stochastic": 158,
+        "geometric": 34
       },
-      "confidence": 0.758,
+      "confidence": 0.785,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -8170,7 +8654,8 @@
         "grid_resolution",
         "grid_spacing",
         "arrow_scale",
-        "particle_count"
+        "particle_count",
+        "seed_value"
       ]
     },
     {
@@ -8217,7 +8702,8 @@
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
-        "principle-geometric-gallery"
+        "principle-geometric-gallery",
+        "vector-toys-gallery"
       ],
       "registered": false,
       "exports": [
@@ -8388,9 +8874,13 @@
       "artifact": "flashlight_demo",
       "scene": "algorithms\\postprocessing\\flashlight_demo\\flashlight.tscn",
       "essence": "SpotLight3D.light_color = exported color — tints a flashlight beam and its lens mesh to match",
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "principle": "boolean",
+      "principle_matches": [
+        "boolean"
+      ],
+      "principle_scores": {
+        "boolean": 80
+      },
       "confidence": 1.0,
       "time": "static",
       "scale": "room",
@@ -8402,7 +8892,32 @@
       "registered": true,
       "exports": [
         "light_color",
-        "target_path"
+        "target_path",
+        "capture_anchor"
+      ]
+    },
+    {
+      "topic": "primitives",
+      "artifact": "archimedean_tunnel",
+      "scene": "algorithms\\primitives\\archimedean_tunnel\\archimedean_tunnel.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "samples",
+        "width",
+        "amp",
+        "color_true",
+        "color_sample",
+        "color_digital"
       ]
     },
     {
@@ -8565,11 +9080,11 @@
       ],
       "principle_scores": {
         "composition": 10,
-        "geometric": 35
+        "geometric": 66
       },
-      "confidence": 0.714,
+      "confidence": 0.848,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "object",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9069,6 +9584,111 @@
       "exports": []
     },
     {
+      "topic": "proceduralgeneration",
+      "artifact": "affordance_demos",
+      "scene": "algorithms\\proceduralgeneration\\affordance_demos\\seed_orb.tscn",
+      "essence": null,
+      "principle": "grammatical",
+      "principle_matches": [
+        "grammatical"
+      ],
+      "principle_scores": {
+        "grammatical": 35
+      },
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "field",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": false,
+      "exports": [
+        "seed_color",
+        "glow_color",
+        "pedestal_color",
+        "orb_radius",
+        "pedestal_height",
+        "growth_clusters",
+        "growth_radius"
+      ]
+    },
+    {
+      "topic": "proceduralgeneration",
+      "artifact": "seed_world",
+      "scene": "algorithms\\proceduralgeneration\\seed_world\\seed_world.tscn",
+      "essence": null,
+      "principle": "stochastic",
+      "principle_matches": [
+        "stochastic",
+        "grammatical"
+      ],
+      "principle_scores": {
+        "grammatical": 10,
+        "stochastic": 20
+      },
+      "confidence": 0.5,
+      "time": "static",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "world_seed",
+        "samples",
+        "color_world",
+        "color_seed"
+      ]
+    },
+    {
+      "topic": "qfeplaboratory",
+      "artifact": "affordance_demos",
+      "scene": "algorithms\\qfeplaboratory\\affordance_demos\\qfep_term_compass.tscn",
+      "essence": null,
+      "principle": "iterative",
+      "principle_matches": [
+        "iterative"
+      ],
+      "principle_scores": {
+        "iterative": 40
+      },
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "architecture",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": false,
+      "exports": [
+        "disc_color",
+        "node_radius",
+        "ring_radius",
+        "center_height",
+        "label_height"
+      ]
+    },
+    {
+      "topic": "qfeplaboratory",
+      "artifact": "entropy_ceiling",
+      "scene": "algorithms\\qfeplaboratory\\entropy_ceiling\\entropy_ceiling.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "room",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "ticks",
+        "color_meter",
+        "color_true"
+      ]
+    },
+    {
       "topic": "qfeplaboratory",
       "artifact": "fold_theatre_runner",
       "scene": "algorithms\\qfeplaboratory\\fold_theatre_runner\\fold_theatre_runner.tscn",
@@ -9158,7 +9778,7 @@
       "topic": "randomness",
       "artifact": "blue_noise",
       "scene": "algorithms\\randomness\\blue_noise\\blue_noise.tscn",
-      "essence": null,
+      "essence": "random sampling that refuses clusters — Poisson-disk by construction",
       "principle": "field",
       "principle_matches": [
         "field",
@@ -9169,10 +9789,10 @@
       "principle_scores": {
         "boolean": 24,
         "stochastic": 9,
-        "field": 170,
+        "field": 180,
         "geometric": 10
       },
-      "confidence": 0.859,
+      "confidence": 0.867,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -9188,16 +9808,18 @@
       "artifact": "coin_toss",
       "scene": "algorithms\\randomness\\coin_toss\\coin_toss.tscn",
       "essence": "X ~ Bernoulli(0.5) — the atom of all probability",
-      "principle": "geometric",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 10
+        "grammatical": 30,
+        "geometric": 18
       },
-      "confidence": 1.0,
+      "confidence": 0.4,
       "time": "interactive",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9205,14 +9827,14 @@
       ],
       "registered": true,
       "exports": [
+        "finish",
+        "wear",
+        "unit_code",
         "coin_radius",
         "coin_thickness",
         "coin_mass",
         "coin_bounce",
-        "color_heads",
-        "color_tails",
-        "tray_radius",
-        "tray_height"
+        "color_heads"
       ]
     },
     {
@@ -9220,14 +9842,16 @@
       "artifact": "dice_throw",
       "scene": "algorithms\\randomness\\dice_throw\\dice_throw.tscn",
       "essence": "P(X=k) = 1/6 for k ∈ {1,...,6} — discrete uniform distribution",
-      "principle": "geometric",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "geometric"
       ],
       "principle_scores": {
+        "grammatical": 15,
         "geometric": 5
       },
-      "confidence": 1.0,
+      "confidence": 0.667,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -9237,21 +9861,21 @@
       ],
       "registered": true,
       "exports": [
+        "finish",
+        "wear",
+        "unit_code",
         "dice_size",
         "dice_mass",
         "dice_bounce",
         "dice_color",
-        "pip_color",
-        "ball_radius",
-        "ball_drop_height",
-        "ball_color"
+        "pip_color"
       ]
     },
     {
       "topic": "randomness",
       "artifact": "digital_materiality_glitch",
       "scene": "algorithms\\randomness\\digital_materiality_glitch\\digital_materiality_glitch.tscn",
-      "essence": null,
+      "essence": "error as aesthetic — corruption rendered as form",
       "principle": "geometric",
       "principle_matches": [
         "geometric",
@@ -9259,20 +9883,22 @@
         "optimization"
       ],
       "principle_scores": {
-        "stochastic": 36,
+        "stochastic": 48,
         "optimization": 10,
         "geometric": 96
       },
-      "confidence": 0.625,
+      "confidence": 0.5,
       "time": "animated",
-      "scale": "object",
-      "tier": "B",
+      "scale": "room",
+      "tier": "C",
       "state": "galleried",
       "in_galleries": [
         "principle-geometric-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "dna_seed"
+      ]
     },
     {
       "topic": "randomness",
@@ -9281,21 +9907,33 @@
       "essence": "shape is statistics made visible — three distributions from one source",
       "principle": "stochastic",
       "principle_matches": [
-        "stochastic"
+        "stochastic",
+        "grammatical",
+        "composition",
+        "geometric"
       ],
       "principle_scores": {
-        "stochastic": 15
+        "grammatical": 15,
+        "stochastic": 24,
+        "composition": 8,
+        "geometric": 3
       },
-      "confidence": 1.0,
+      "confidence": 0.375,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-stochastic-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "finish",
+        "wear",
+        "unit_code",
+        "plinth_height",
+        "evidence_seed"
+      ]
     },
     {
       "topic": "randomness",
@@ -9305,36 +9943,44 @@
       "principle": "boolean",
       "principle_matches": [
         "boolean",
-        "stochastic"
+        "stochastic",
+        "grammatical"
       ],
       "principle_scores": {
         "boolean": 56,
+        "grammatical": 15,
         "stochastic": 33
       },
       "confidence": 0.411,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-boolean-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "finish",
+        "wear",
+        "unit_code"
+      ]
     },
     {
       "topic": "randomness",
       "artifact": "distributions",
       "scene": "algorithms\\randomness\\distributions\\ProbabilityDistributions3D.tscn",
-      "essence": null,
-      "principle": "geometric",
+      "essence": "four distributions side by side — Gaussian, Exponential, Uniform, Multimodal — as 3D landscapes of likelihood",
+      "principle": "stochastic",
       "principle_matches": [
+        "stochastic",
         "geometric"
       ],
       "principle_scores": {
+        "stochastic": 28,
         "geometric": 3
       },
-      "confidence": 1.0,
+      "confidence": 0.893,
       "time": "animated",
       "scale": "architecture",
       "tier": "B",
@@ -9358,17 +10004,21 @@
       "topic": "randomness",
       "artifact": "entropy_axiom",
       "scene": "algorithms\\randomness\\entropy_axiom\\entropy_axiom.tscn",
-      "essence": "S = -Σ p_i log p_i — Shannon entropy as spatial gradient",
+      "essence": "a corridor of points that begins as a perfect grid and ends as a cloud — entropy as a walk",
       "principle": "geometric",
       "principle_matches": [
-        "geometric"
+        "geometric",
+        "grammatical",
+        "stochastic"
       ],
       "principle_scores": {
+        "grammatical": 8,
+        "stochastic": 6,
         "geometric": 9
       },
-      "confidence": 1.0,
+      "confidence": 0.111,
       "time": "static",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9393,12 +10043,14 @@
       "essence": "dS/dt >= 0 — the second law of thermodynamics",
       "principle": "stochastic",
       "principle_matches": [
-        "stochastic"
+        "stochastic",
+        "grammatical"
       ],
       "principle_scores": {
-        "stochastic": 72
+        "grammatical": 15,
+        "stochastic": 122
       },
-      "confidence": 1.0,
+      "confidence": 0.877,
       "time": "interactive",
       "scale": "room",
       "tier": "B",
@@ -9425,12 +10077,18 @@
       "essence": "Binomial(n, 0.5) → N(n/2, n/4) as n → ∞ — the Central Limit Theorem",
       "principle": "geometric",
       "principle_matches": [
-        "geometric"
+        "geometric",
+        "stochastic",
+        "grammatical",
+        "composition"
       ],
       "principle_scores": {
-        "geometric": 19
+        "grammatical": 15,
+        "stochastic": 18,
+        "composition": 8,
+        "geometric": 25
       },
-      "confidence": 1.0,
+      "confidence": 0.28,
       "time": "interactive",
       "scale": "room",
       "tier": "B",
@@ -9440,14 +10098,46 @@
       ],
       "registered": true,
       "exports": [
+        "evidence_seed",
+        "finish",
+        "wear",
+        "unit_code",
+        "show_cabinet",
+        "plinth_height",
         "board_width",
-        "board_height",
-        "board_depth",
-        "peg_rows",
-        "peg_radius",
-        "peg_spacing",
-        "ball_radius",
-        "ball_mass"
+        "board_height"
+      ]
+    },
+    {
+      "topic": "randomness",
+      "artifact": "galton_friction",
+      "scene": "algorithms\\randomness\\galton_friction\\galton_friction.tscn",
+      "essence": null,
+      "principle": "grammatical",
+      "principle_matches": [
+        "grammatical",
+        "stochastic"
+      ],
+      "principle_scores": {
+        "grammatical": 15,
+        "stochastic": 15
+      },
+      "confidence": 0.0,
+      "time": "animated",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "finish",
+        "wear",
+        "unit_code",
+        "plinth_height",
+        "rows",
+        "rng_seed",
+        "balls_per_second",
+        "bin_width"
       ]
     },
     {
@@ -9458,15 +10148,19 @@
       "principle": "field",
       "principle_matches": [
         "field",
-        "geometric"
+        "grammatical",
+        "geometric",
+        "stochastic"
       ],
       "principle_scores": {
-        "field": 171,
+        "grammatical": 45,
+        "stochastic": 3,
+        "field": 239,
         "geometric": 15
       },
-      "confidence": 0.912,
+      "confidence": 0.812,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9480,8 +10174,8 @@
         "passive_decay_rate",
         "interaction_decay_boost",
         "decay_smoothing",
-        "panel_count",
-        "panel_spacing"
+        "entropy_seed",
+        "panel_count"
       ]
     },
     {
@@ -9489,18 +10183,22 @@
       "artifact": "monte_carlo_dartboard",
       "scene": "algorithms\\randomness\\monte_carlo_dartboard\\monte_carlo_dartboard.tscn",
       "essence": "π ≈ 4 · (points inside circle / total points) — Monte Carlo integration",
-      "principle": "stochastic",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "stochastic",
+        "composition",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 6,
-        "geometric": 3
+        "grammatical": 45,
+        "stochastic": 36,
+        "composition": 8,
+        "geometric": 6
       },
-      "confidence": 0.5,
+      "confidence": 0.2,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9508,14 +10206,14 @@
       ],
       "registered": true,
       "exports": [
+        "finish",
+        "wear",
+        "unit_code",
+        "plinth_height",
         "board_size",
         "board_thickness",
         "board_height",
-        "dart_radius",
-        "dart_length",
-        "max_darts",
-        "auto_throw",
-        "darts_per_second"
+        "dart_radius"
       ]
     },
     {
@@ -9558,38 +10256,45 @@
       "topic": "randomness",
       "artifact": "noisesphere",
       "scene": "algorithms\\randomness\\noisesphere\\noisesphere.tscn",
-      "essence": null,
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "essence": "VERTEX = object_pos + NORMAL * noise(object_pos.xz * noise_scale + t) *",
+      "principle": "field",
+      "principle_matches": [
+        "field"
+      ],
+      "principle_scores": {
+        "field": 140
+      },
       "confidence": 1.0,
       "time": "static",
-      "scale": "specimen",
-      "tier": "A",
+      "scale": "room",
+      "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-geometric-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "noise_speed",
+        "hue_shift_speed"
+      ]
     },
     {
       "topic": "randomness",
       "artifact": "noiseterrain",
       "scene": "algorithms\\randomness\\noiseterrain\\noiseterrain.tscn",
       "essence": "height(x,z) = (primary_simplex + detail_perlin × 0.2 + cellular_warp × bulginess × 0.3) × height_multiplier — three noise layers where cellular noise warps the sample coordinates of the primary noise (domain warping)",
-      "principle": "field",
+      "principle": "stochastic",
       "principle_matches": [
-        "field",
         "stochastic",
+        "field",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 151,
-        "field": 301,
-        "geometric": 3
+        "stochastic": 311,
+        "field": 311,
+        "geometric": 13
       },
-      "confidence": 0.498,
+      "confidence": 0.0,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -9599,14 +10304,14 @@
       ],
       "registered": false,
       "exports": [
+        "noise_seed",
         "terrain_size",
         "terrain_resolution",
         "noise_scale",
         "height_multiplier",
         "bulginess",
         "octaves",
-        "color_shift",
-        "blob_count"
+        "color_shift"
       ]
     },
     {
@@ -9632,20 +10337,27 @@
       "topic": "randomness",
       "artifact": "noisetorus",
       "scene": "algorithms\\randomness\\noisetorus\\noisetorus.tscn",
-      "essence": null,
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "essence": "VERTEX = object_pos + NORMAL * noise(object_pos.xz * noise_scale + t) *",
+      "principle": "field",
+      "principle_matches": [
+        "field"
+      ],
+      "principle_scores": {
+        "field": 130
+      },
       "confidence": 1.0,
       "time": "static",
-      "scale": "specimen",
-      "tier": "A",
+      "scale": "room",
+      "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-geometric-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "noise_speed",
+        "hue_shift_speed"
+      ]
     },
     {
       "topic": "randomness",
@@ -9679,14 +10391,16 @@
       "principle_matches": [
         "stochastic",
         "boolean",
-        "geometric"
+        "geometric",
+        "optimization"
       ],
       "principle_scores": {
-        "boolean": 16,
-        "stochastic": 120,
-        "geometric": 5
+        "boolean": 32,
+        "stochastic": 328,
+        "optimization": 6,
+        "geometric": 25
       },
-      "confidence": 0.867,
+      "confidence": 0.902,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -9699,7 +10413,11 @@
         "frequency",
         "amplitude",
         "octaves",
-        "animation_offset"
+        "animation_offset",
+        "generator",
+        "readout",
+        "generator",
+        "readout"
       ]
     },
     {
@@ -9743,18 +10461,18 @@
       "artifact": "pheromone_terrain",
       "scene": "algorithms\\randomness\\pheromone_terrain\\pheromone_terrain.tscn",
       "essence": "trail(x,y) += deposit; next = argmax(pheromone[neighbors]) with P(random) = 1 - attraction — stigmergy",
-      "principle": "geometric",
+      "principle": "stochastic",
       "principle_matches": [
-        "geometric",
-        "stochastic"
+        "stochastic",
+        "geometric"
       ],
       "principle_scores": {
-        "stochastic": 6,
+        "stochastic": 27,
         "geometric": 15
       },
-      "confidence": 0.6,
+      "confidence": 0.444,
       "time": "animated",
-      "scale": "architecture",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9776,20 +10494,22 @@
       "topic": "randomness",
       "artifact": "pipedream",
       "scene": "algorithms\\randomness\\pipedream\\pipe_dream.tscn",
-      "essence": null,
-      "principle": "grammatical",
+      "essence": "a 3D random walk that rounds its corners — the screensaver as memory of childhood computers",
+      "principle": "stochastic",
       "principle_matches": [
-        "grammatical",
+        "stochastic",
+        "composition",
         "geometric",
-        "stochastic"
+        "grammatical"
       ],
       "principle_scores": {
-        "grammatical": 10,
-        "stochastic": 9,
-        "geometric": 10
+        "grammatical": 20,
+        "stochastic": 156,
+        "composition": 88,
+        "geometric": 26
       },
-      "confidence": 0.0,
-      "time": "animated",
+      "confidence": 0.436,
+      "time": "interactive",
       "scale": "object",
       "tier": "B",
       "state": "galleried",
@@ -9798,14 +10518,14 @@
       ],
       "registered": false,
       "exports": [
+        "walk_seed",
         "pipe_radius",
         "segment_length",
         "max_segments",
         "bounds_extent",
         "turn_interval",
         "growth_tween_time",
-        "base_color",
-        "accent_color"
+        "base_color"
       ]
     },
     {
@@ -9815,14 +10535,20 @@
       "essence": "SAW(n) — self-avoiding walk with upward bias on a 3D integer lattice",
       "principle": "stochastic",
       "principle_matches": [
-        "stochastic"
+        "stochastic",
+        "field",
+        "grammatical",
+        "optimization"
       ],
       "principle_scores": {
-        "stochastic": 33
+        "grammatical": 32,
+        "stochastic": 84,
+        "optimization": 15,
+        "field": 70
       },
-      "confidence": 1.0,
+      "confidence": 0.167,
       "time": "static",
-      "scale": "specimen",
+      "scale": "surface",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -9833,7 +10559,8 @@
         "grid_size",
         "num_cubes",
         "cube_spacing",
-        "upward_bias"
+        "upward_bias",
+        "walk_seed"
       ]
     },
     {
@@ -9901,14 +10628,16 @@
       "artifact": "prng_crank_machine",
       "scene": "algorithms\\randomness\\prng_crank_machine\\prng_crank_machine.tscn",
       "essence": "x_{n+1} = (a·x_n + c) mod m — linear congruential generator",
-      "principle": "stochastic",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 3
+        "grammatical": 15,
+        "stochastic": 6
       },
-      "confidence": 1.0,
+      "confidence": 0.6,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -9921,28 +10650,28 @@
         "body_width",
         "body_height",
         "body_depth",
-        "pedestal_height",
-        "lcg_multiplier",
-        "lcg_increment",
-        "lcg_modulus",
-        "initial_seed"
+        "plinth_height",
+        "finish",
+        "wear",
+        "unit_code",
+        "lcg_multiplier"
       ]
     },
     {
       "topic": "randomness",
       "artifact": "random_bubbles",
       "scene": "algorithms\\randomness\\random_bubbles\\bubbles_random.tscn",
-      "essence": null,
+      "essence": "random ascent in a contained bowl — bubbles spawn, rise, fade, sometimes carry a soft pink light",
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
         "optimization"
       ],
       "principle_scores": {
-        "stochastic": 20,
+        "stochastic": 44,
         "optimization": 10
       },
-      "confidence": 0.5,
+      "confidence": 0.773,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -9997,15 +10726,19 @@
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
+        "composition",
+        "grammatical",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 30,
-        "geometric": 6
+        "grammatical": 45,
+        "stochastic": 147,
+        "composition": 80,
+        "geometric": 9
       },
-      "confidence": 0.8,
+      "confidence": 0.456,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -10050,21 +10783,21 @@
       "topic": "randomness",
       "artifact": "randombellcurve",
       "scene": "algorithms\\randomness\\randombellcurve\\random_bell_curve.tscn",
-      "essence": null,
+      "essence": "a Gaussian made walkable — the central limit theorem as terrain you climb",
       "principle": "field",
       "principle_matches": [
         "field",
-        "stochastic",
-        "geometric"
+        "geometric",
+        "stochastic"
       ],
       "principle_scores": {
         "stochastic": 6,
         "field": 18,
-        "geometric": 3
+        "geometric": 12
       },
-      "confidence": 0.667,
+      "confidence": 0.333,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -10078,7 +10811,8 @@
         "randomize_on_ready",
         "update_interval",
         "add_noise",
-        "noise_strength"
+        "noise_strength",
+        "rng_seed"
       ]
     },
     {
@@ -10211,10 +10945,10 @@
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 61,
+        "stochastic": 73,
         "geometric": 55
       },
-      "confidence": 0.098,
+      "confidence": 0.247,
       "time": "animated",
       "scale": "specimen",
       "tier": "B",
@@ -10226,12 +10960,12 @@
       "exports": [
         "multimesh_path",
         "selection_mode",
+        "rotate_seed",
+        "warmup_steps",
         "bell_center",
         "bell_radius",
         "noise_source",
-        "noise_scale",
-        "noise_threshold",
-        "noise_scroll_speed"
+        "noise_scale"
       ]
     },
     {
@@ -10347,7 +11081,9 @@
         "grid_cols",
         "grid_rows",
         "cube_size",
-        "cube_gap"
+        "cube_gap",
+        "seed_value",
+        "contrast_seed"
       ]
     },
     {
@@ -10357,12 +11093,16 @@
       "essence": "GPU computes noise per-fragment in parallel — the room sphere and walls run independent shader noise loops animated by a time uniform, cycling color and density in real-time",
       "principle": "field",
       "principle_matches": [
-        "field"
+        "field",
+        "stochastic",
+        "geometric"
       ],
       "principle_scores": {
-        "field": 320
+        "stochastic": 156,
+        "field": 348,
+        "geometric": 35
       },
-      "confidence": 1.0,
+      "confidence": 0.552,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -10392,12 +11132,12 @@
         "boolean"
       ],
       "principle_scores": {
-        "boolean": 16,
-        "stochastic": 298
+        "boolean": 24,
+        "stochastic": 337
       },
-      "confidence": 0.946,
+      "confidence": 0.929,
       "time": "static",
-      "scale": "specimen",
+      "scale": "surface",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -10407,7 +11147,9 @@
       "exports": [
         "frequency",
         "amplitude",
-        "persistence"
+        "persistence",
+        "readout",
+        "octaves"
       ]
     },
     {
@@ -10418,13 +11160,17 @@
       "principle": "geometric",
       "principle_matches": [
         "geometric",
-        "stochastic"
+        "stochastic",
+        "composition",
+        "grammatical"
       ],
       "principle_scores": {
-        "stochastic": 3,
+        "grammatical": 15,
+        "stochastic": 24,
+        "composition": 24,
         "geometric": 32
       },
-      "confidence": 0.906,
+      "confidence": 0.25,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -10434,14 +11180,14 @@
       ],
       "registered": true,
       "exports": [
+        "spin_seed",
+        "finish",
+        "wear",
+        "unit_code",
         "cabinet_width",
         "cabinet_height",
         "cabinet_depth",
-        "cabinet_color",
-        "trim_color",
-        "reel_count",
-        "symbols_per_reel",
-        "reel_radius"
+        "reel_count"
       ]
     },
     {
@@ -10473,19 +11219,19 @@
       "topic": "randomness",
       "artifact": "trng_vs_prng",
       "scene": "algorithms\\randomness\\trng_vs_prng\\trng_vs_prng.tscn",
-      "essence": null,
+      "essence": "two parallel machines side by side — one harvesting physical noise, one running an algorithm — both pretending to be random",
       "principle": "geometric",
       "principle_matches": [
         "geometric",
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 6,
+        "stochastic": 9,
         "geometric": 86
       },
-      "confidence": 0.93,
+      "confidence": 0.895,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -10493,6 +11239,7 @@
       ],
       "registered": true,
       "exports": [
+        "stream_seed",
         "show_visual_frames",
         "frame_back_color",
         "frame_border_color",
@@ -10542,12 +11289,12 @@
       ],
       "principle_scores": {
         "grammatical": 10,
-        "stochastic": 212,
+        "stochastic": 224,
         "optimization": 56,
         "field": 98,
         "geometric": 11
       },
-      "confidence": 0.538,
+      "confidence": 0.562,
       "time": "static",
       "scale": "object",
       "tier": "B",
@@ -10637,6 +11384,151 @@
         "seed_value",
         "show_all_types",
         "audio_gain"
+      ]
+    },
+    {
+      "topic": "resourcemanagement",
+      "artifact": "big_o_complexity",
+      "scene": "algorithms\\resourcemanagement\\big_o_complexity\\big_o_complexity.tscn",
+      "essence": "the COMPLEXITY RACE — six bars, one per Big-O class (O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ)), that grow as the input size n sweeps up. At small n they stand nearly level; at large n they diverge violently — the cheap ones barely move, the quadratic and exponential peg the ceiling and flash OFF CHART. The same problem solved six ways, become six different worlds at scale.",
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "architecture",
+      "tier": "B",
+      "state": "identified",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "n_max",
+        "max_height",
+        "bar_w",
+        "spacing",
+        "sweep_seconds",
+        "animate",
+        "freeze_n",
+        "emissive"
+      ]
+    },
+    {
+      "topic": "resourcemanagement",
+      "artifact": "data_locality_caching",
+      "scene": "algorithms\\resourcemanagement\\data_locality_caching\\data_locality_caching.tscn",
+      "essence": "the MEMORY HIERARCHY LADDER — six platforms stacked vertically (Registers, L1, L2, L3, RAM, Disk), the gap above each proportional to log(latency) so the climb to far memory is a literal chasm. A glowing probe token climbs from the bottom to a target level and back; because its speed is constant, the height it must climb IS the time it takes IS the cost. Reaching a near level reads HIT in green; reaching far memory reads MISS in red after a long, punishing climb. Where a thing IS costs more than what it is.",
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "architecture",
+      "tier": "B",
+      "state": "identified",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "level_count",
+        "cycle_seconds",
+        "animate",
+        "freeze_level",
+        "emissive"
+      ]
+    },
+    {
+      "topic": "resourcemanagement",
+      "artifact": "hardware_cross_section",
+      "scene": "algorithms\\resourcemanagement\\hardware_cross_section\\hardware_cross_section.tscn",
+      "essence": "the MACHINE CROSS-SECTION — a stylised cutaway of a computer laid open on a board: CPU, GPU, RAM, CACHE, DISK, each a labelled box wired to a single glowing BUS spine. Data travels the bus as small emissive cubes, and each component breathes them at its own rate — CACHE a bright fast swarm, DISK a rare crawling ember. The algorithm does not run in the abstract; it runs HERE, on parts that move bytes at wildly different speeds.",
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "object",
+      "tier": "B",
+      "state": "identified",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "bus_length",
+        "token_count",
+        "flow_speed",
+        "animate",
+        "freeze",
+        "emissive"
+      ]
+    },
+    {
+      "topic": "resourcemanagement",
+      "artifact": "realtime_vs_offline",
+      "scene": "algorithms\\resourcemanagement\\realtime_vs_offline\\realtime_vs_offline.tscn",
+      "essence": "TWIN PIPELINES, one problem, two clocks. Two conveyor lanes run side by side along +X. The TOP lane is REAL-TIME: work items flow toward a glowing red deadline line, and any item that hasn't finished processing by the time it reaches the line is DROPPED — it flashes red and falls away below the belt. The BOTTOM lane is OFFLINE: the same items, no deadline, each given the time it actually needs — every one completes and exits whole. The deadline does not change the work; it changes which answers you are allowed to keep.",
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "object",
+      "tier": "B",
+      "state": "identified",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "item_rate",
+        "realtime_budget",
+        "animate",
+        "freeze",
+        "emissive"
+      ]
+    },
+    {
+      "topic": "resourcemanagement",
+      "artifact": "test_harness",
+      "scene": "algorithms\\resourcemanagement\\test_harness\\test_harness.tscn",
+      "essence": "the TEST SUITE as a wall of small lights — a grid of test cases (default 5x4 = 20) that glow GREEN when they pass and RED when they fail. A function f(x) feeds the board. It runs three acts on a loop: all green (everything works), a BUG INTRODUCED (a deterministic band of cells flips red), then FIXED (the reds heal back to green one by one, left to right). A test is a claim about the future; the board is that claim made visible the instant it breaks.",
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "room",
+      "tier": "B",
+      "state": "identified",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "cols",
+        "rows",
+        "cycle_seconds",
+        "bug_fraction",
+        "animate",
+        "freeze_phase",
+        "emissive"
+      ]
+    },
+    {
+      "topic": "resourcemanagement",
+      "artifact": "version_control_tree",
+      "scene": "algorithms\\resourcemanagement\\version_control_tree\\version_control_tree.tscn",
+      "essence": "the COMMIT TREE — history drawn not as a line but as a navigable branching SHAPE. A main branch of commit nodes marches left→right along +X (time); a feature branch peels UP (+Z) at an early commit, runs parallel for a few commits, then MERGES back DOWN into main — closing a diamond. A HEAD ring glides commit-by-commit along main, the moving \"you are here\" of a repository.",
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "object",
+      "tier": "B",
+      "state": "identified",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "main_commits",
+        "feature_commits",
+        "step_seconds",
+        "animate",
+        "freeze_head",
+        "emissive"
       ]
     },
     {
@@ -10995,19 +11887,51 @@
     },
     {
       "topic": "softbodies",
+      "artifact": "affordance_demos",
+      "scene": "algorithms\\softbodies\\affordance_demos\\flex_cloth_pad.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [
+        "geometric"
+      ],
+      "principle_scores": {
+        "geometric": 3
+      },
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "specimen",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": false,
+      "exports": [
+        "cloth_color",
+        "anchor_color",
+        "grid_cols",
+        "grid_rows",
+        "cloth_width",
+        "cloth_height",
+        "stiffness",
+        "damping"
+      ]
+    },
+    {
+      "topic": "softbodies",
       "artifact": "cloth_straps",
       "scene": "algorithms\\softbodies\\cloth_straps\\cloth_straps.tscn",
       "essence": "N parallel SoftBody3D strips pinned to a frame top bar — each strap is a foil-shader cloth that hangs under gravity and collides with player hands",
       "principle": "field",
       "principle_matches": [
-        "field"
+        "field",
+        "geometric"
       ],
       "principle_scores": {
-        "field": 18
+        "field": 18,
+        "geometric": 15
       },
-      "confidence": 1.0,
+      "confidence": 0.167,
       "time": "static",
-      "scale": "field",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -11028,14 +11952,16 @@
       "essence": "RigidBody3D hub rotating at ride_speed, with PinJoint3D chains suspending SoftBody3D spheres — centripetal force stretches the soft bodies outward while gravity pulls them down",
       "principle": "field",
       "principle_matches": [
-        "field"
+        "field",
+        "geometric"
       ],
       "principle_scores": {
-        "field": 62
+        "field": 62,
+        "geometric": 10
       },
-      "confidence": 1.0,
+      "confidence": 0.839,
       "time": "animated",
-      "scale": "surface",
+      "scale": "field",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -11063,10 +11989,10 @@
         "stochastic"
       ],
       "principle_scores": {
-        "stochastic": 3,
+        "stochastic": 18,
         "field": 58
       },
-      "confidence": 0.948,
+      "confidence": 0.69,
       "time": "static",
       "scale": "surface",
       "tier": "B",
@@ -11080,7 +12006,9 @@
         "spawn_area_size",
         "stem_height_range",
         "stem_radius",
-        "cap_radius_range"
+        "cap_radius_range",
+        "rng_seed",
+        "spawn_span"
       ]
     },
     {
@@ -11105,6 +12033,29 @@
         "arm_length",
         "soft_body_pressure",
         "slap_force"
+      ]
+    },
+    {
+      "topic": "softbodies",
+      "artifact": "spring_lattice",
+      "scene": "algorithms\\softbodies\\spring_lattice\\spring_lattice.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "radius",
+        "node_h",
+        "color_true",
+        "color_node",
+        "color_spring"
       ]
     },
     {
@@ -11143,13 +12094,15 @@
       "essence": "entropy parameter S in [0,1] maps to gyroid field parameters — frequency = lerp(0.9, 1.6, S), noise_amp = lerp(0.05, 0.20, S), threshold = center + wobble*(S-0.5)*2 — then marching cubes generates the mesh",
       "principle": "field",
       "principle_matches": [
-        "field"
+        "field",
+        "stochastic"
       ],
       "principle_scores": {
+        "stochastic": 9,
         "field": 50
       },
-      "confidence": 1.0,
-      "time": "static",
+      "confidence": 0.82,
+      "time": "stateful",
       "scale": "room",
       "tier": "B",
       "state": "galleried",
@@ -11158,14 +12111,14 @@
       ],
       "registered": true,
       "exports": [
+        "field_seed",
         "S",
         "base_frequency",
         "high_frequency",
         "base_noise_amp",
         "high_noise_amp",
         "threshold_center",
-        "threshold_wobble",
-        "box_size"
+        "threshold_wobble"
       ]
     },
     {
@@ -11256,9 +12209,9 @@
       ],
       "principle_scores": {
         "field": 93,
-        "geometric": 14
+        "geometric": 20
       },
-      "confidence": 0.849,
+      "confidence": 0.785,
       "time": "animated",
       "scale": "surface",
       "tier": "B",
@@ -11389,9 +12342,9 @@
       ],
       "principle_scores": {
         "stochastic": 15,
-        "geometric": 5
+        "geometric": 15
       },
-      "confidence": 0.667,
+      "confidence": 0.0,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -11769,9 +12722,9 @@
       "principle_scores": {
         "grammatical": 10,
         "stochastic": 107,
-        "geometric": 60
+        "geometric": 66
       },
-      "confidence": 0.439,
+      "confidence": 0.383,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -11930,20 +12883,22 @@
       "artifact": "ants_v2",
       "scene": "algorithms\\swarmintelligence\\ants_v2\\AntColonyV2.tscn",
       "essence": "ant.move() = gradient_ascent(pheromone_grid) + wander; pheromone_grid *= decay + diffuse — ant and environment co-evolve",
-      "principle": "optimization",
+      "principle": "stochastic",
       "principle_matches": [
-        "optimization",
-        "field",
         "stochastic",
+        "field",
+        "grammatical",
+        "optimization",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 18,
+        "grammatical": 20,
+        "stochastic": 54,
         "optimization": 20,
-        "field": 20,
+        "field": 30,
         "geometric": 15
       },
-      "confidence": 0.0,
+      "confidence": 0.444,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -11953,14 +12908,14 @@
       ],
       "registered": false,
       "exports": [
+        "emissive",
         "num_ants",
         "terrain_size",
         "grid_resolution",
         "ant_scene",
         "speed",
         "steer_strength",
-        "sensor_angle",
-        "sensor_dist"
+        "sensor_angle"
       ]
     },
     {
@@ -12029,20 +12984,20 @@
       "artifact": "physarum",
       "scene": "algorithms\\swarmintelligence\\physarum\\PhysarumAgent.tscn",
       "essence": "trail(x,y) = deposit(agent_positions) * diffuse - evaporate — no neurons, no memory, just chemistry",
-      "principle": "optimization",
+      "principle": "stochastic",
       "principle_matches": [
-        "optimization",
         "stochastic",
+        "optimization",
         "field",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 24,
+        "stochastic": 51,
         "optimization": 48,
         "field": 20,
         "geometric": 15
       },
-      "confidence": 0.5,
+      "confidence": 0.059,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -12063,6 +13018,53 @@
       ]
     },
     {
+      "topic": "swarmintelligence",
+      "artifact": "tick_flock",
+      "scene": "algorithms\\swarmintelligence\\tick_flock\\tick_flock.tscn",
+      "essence": null,
+      "principle": "stochastic",
+      "principle_matches": [
+        "stochastic"
+      ],
+      "principle_scores": {
+        "stochastic": 6
+      },
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "count",
+        "color_boid",
+        "color_true"
+      ]
+    },
+    {
+      "topic": "symmetry",
+      "artifact": "wallpaper_cage",
+      "scene": "algorithms\\symmetry\\wallpaper_cage\\wallpaper_cage.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "room",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "radius",
+        "color_cont",
+        "color_ok",
+        "color_no"
+      ]
+    },
+    {
       "topic": "transformation",
       "artifact": "booleanTunnel",
       "scene": "algorithms\\transformation\\booleanTunnel\\boolean_tunnel.tscn",
@@ -12070,9 +13072,11 @@
       "principle": "geometric",
       "principle_matches": [
         "geometric",
-        "grammatical"
+        "grammatical",
+        "boolean"
       ],
       "principle_scores": {
+        "boolean": 8,
         "grammatical": 15,
         "geometric": 21
       },
@@ -12104,15 +13108,17 @@
       "principle": "field",
       "principle_matches": [
         "field",
-        "geometric"
+        "geometric",
+        "grammatical"
       ],
       "principle_scores": {
+        "grammatical": 10,
         "field": 88,
-        "geometric": 36
+        "geometric": 46
       },
-      "confidence": 0.591,
+      "confidence": 0.477,
       "time": "animated",
-      "scale": "surface",
+      "scale": "object",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -12254,6 +13260,27 @@
     },
     {
       "topic": "transformation",
+      "artifact": "stepped_transform",
+      "scene": "algorithms\\transformation\\stepped_transform\\stepped_transform.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "static",
+      "scale": "object",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "color_true",
+        "color_step",
+        "steps"
+      ]
+    },
+    {
+      "topic": "transformation",
       "artifact": "surreal_machines",
       "scene": "algorithms\\transformation\\surreal_machines\\surreal_machines.tscn",
       "essence": null,
@@ -12350,7 +13377,7 @@
       "topic": "transformation",
       "artifact": "vector_field",
       "scene": "algorithms\\transformation\\vector_field\\vector_field.tscn",
-      "essence": null,
+      "essence": "A 3D lattice of arrows that each point the way the field flows at that location, with particles advected through it — a function from space to direction, made walkable",
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
@@ -12359,10 +13386,10 @@
       ],
       "principle_scores": {
         "iterative": 6,
-        "stochastic": 344,
+        "stochastic": 400,
         "geometric": 64
       },
-      "confidence": 0.814,
+      "confidence": 0.84,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -12386,17 +13413,19 @@
       "topic": "transforms",
       "artifact": "invariants",
       "scene": "algorithms\\transforms\\invariants\\invariants_demo.tscn",
-      "essence": "invariants are the fingerprint of a transformation — what survives tells you what the transform truly is",
+      "essence": "an invariant is identity-under-motion — the property a transformation cannot touch. What SURVIVES the move tells you what the move truly is; the thing that holds while everything shifts is where the object keeps its name. This is the QFEP core of transformation: identity is not the frozen shape but the pattern that persists across the whole orbit of a transform.",
       "principle": "geometric",
       "principle_matches": [
-        "geometric"
+        "geometric",
+        "grammatical"
       ],
       "principle_scores": {
+        "grammatical": 10,
         "geometric": 30
       },
-      "confidence": 1.0,
+      "confidence": 0.667,
       "time": "interactive",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -12412,33 +13441,42 @@
       "essence": "the matrix is the truth of the transform — numbers become geometry",
       "principle": "geometric",
       "principle_matches": [
-        "geometric"
+        "geometric",
+        "grammatical",
+        "composition"
       ],
       "principle_scores": {
-        "geometric": 83
+        "grammatical": 45,
+        "composition": 8,
+        "geometric": 106
       },
-      "confidence": 1.0,
+      "confidence": 0.575,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-geometric-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "finish",
+        "wear",
+        "unit_code",
+        "plinth_height"
+      ]
     },
     {
       "topic": "vectors",
       "artifact": "00_coordinates",
       "scene": "algorithms\\vectors\\00_coordinates\\CoordinateSystem3M.tscn",
-      "essence": "X=red, Y=green, Z=blue axes at 3m length — the standard right-handed coordinate frame made visible",
+      "essence": "X=red, Y=green, Z=blue axes at 3m length — the standard right-handed coordinate frame made visible, now built from the CoordinateLine primitive so every axis carries the same tick-mark ruler vocabulary",
       "principle": "geometric",
       "principle_matches": [],
       "principle_scores": {},
       "confidence": 1.0,
       "time": "static",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -12447,7 +13485,9 @@
       "registered": false,
       "exports": [
         "axis_length",
-        "axis_thickness"
+        "axis_thickness",
+        "tick_step",
+        "display_scale"
       ]
     },
     {
@@ -12460,11 +13500,11 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 44
+        "geometric": 74
       },
       "confidence": 1.0,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -12480,18 +13520,18 @@
       "artifact": "02_vector_addition",
       "scene": "algorithms\\vectors\\02_vector_addition\\CombinedForcesDemo.tscn",
       "essence": "F_net = F1 + F2. Superposition. Forces add as vectors. The ball feels only the sum.",
-      "principle": "geometric",
+      "principle": "optimization",
       "principle_matches": [
-        "geometric",
-        "optimization"
+        "optimization",
+        "geometric"
       ],
       "principle_scores": {
-        "optimization": 10,
-        "geometric": 41
+        "optimization": 66,
+        "geometric": 53
       },
-      "confidence": 0.756,
-      "time": "animated",
-      "scale": "field",
+      "confidence": 0.197,
+      "time": "interactive",
+      "scale": "object",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -12510,10 +13550,10 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 53
+        "geometric": 59
       },
       "confidence": 1.0,
-      "time": "animated",
+      "time": "interactive",
       "scale": "object",
       "tier": "B",
       "state": "galleried",
@@ -12533,7 +13573,7 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 38
+        "geometric": 41
       },
       "confidence": 1.0,
       "time": "animated",
@@ -12567,7 +13607,10 @@
         "principle-geometric-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "regime",
+        "diagram"
+      ]
     },
     {
       "topic": "vectors",
@@ -12579,11 +13622,11 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 36
+        "geometric": 45
       },
       "confidence": 1.0,
-      "time": "animated",
-      "scale": "object",
+      "time": "interactive",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -12602,24 +13645,27 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 34
+        "geometric": 39
       },
       "confidence": 1.0,
-      "time": "animated",
-      "scale": "object",
+      "time": "interactive",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-geometric-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "incline",
+        "surface"
+      ]
     },
     {
       "topic": "vectors",
       "artifact": "08_vector_motion",
       "scene": "algorithms\\vectors\\08_vector_motion\\VectorMotion.tscn",
-      "essence": null,
+      "essence": "A moving ball carrying three live arrows — position, velocity, and acceleration — plus a fading trail, so the calculus of motion is shown as nested vectors",
       "principle": "grammatical",
       "principle_matches": [
         "grammatical",
@@ -12627,9 +13673,9 @@
       ],
       "principle_scores": {
         "grammatical": 40,
-        "geometric": 6
+        "geometric": 9
       },
-      "confidence": 0.85,
+      "confidence": 0.775,
       "time": "animated",
       "scale": "surface",
       "tier": "B",
@@ -12649,16 +13695,16 @@
       "principle_matches": [
         "field",
         "optimization",
-        "stochastic",
-        "geometric"
+        "geometric",
+        "stochastic"
       ],
       "principle_scores": {
         "stochastic": 21,
         "optimization": 40,
-        "field": 216,
-        "geometric": 20
+        "field": 266,
+        "geometric": 35
       },
-      "confidence": 0.815,
+      "confidence": 0.85,
       "time": "interactive",
       "scale": "room",
       "tier": "B",
@@ -12709,13 +13755,15 @@
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
-        "geometric"
+        "geometric",
+        "optimization"
       ],
       "principle_scores": {
-        "stochastic": 128,
+        "stochastic": 136,
+        "optimization": 6,
         "geometric": 35
       },
-      "confidence": 0.727,
+      "confidence": 0.743,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -12724,7 +13772,10 @@
         "principle-stochastic-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "field",
+        "lattice"
+      ]
     },
     {
       "topic": "vectors",
@@ -12764,15 +13815,21 @@
       "topic": "vectors",
       "artifact": "noc_ch01",
       "scene": "algorithms\\vectors\\noc_ch01\\example_1_1_bouncing_ball_with_no_vectors_vr.tscn",
-      "essence": "p += v; v += g; if(wall) v *= -e. Position accumulates velocity, velocity accumulates gravity, walls reverse and damp.",
-      "principle": "geometric",
+      "essence": "A ball whose acceleration is redrawn from a uniform box every frame, integrated into velocity and position",
+      "principle": "grammatical",
       "principle_matches": [
-        "geometric"
+        "grammatical",
+        "geometric",
+        "stochastic",
+        "iterative"
       ],
       "principle_scores": {
-        "geometric": 73
+        "grammatical": 404,
+        "iterative": 6,
+        "stochastic": 27,
+        "geometric": 194
       },
-      "confidence": 1.0,
+      "confidence": 0.52,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -12828,13 +13885,16 @@
         "geometric": 47
       },
       "confidence": 1.0,
-      "time": "static",
+      "time": "interactive",
       "scale": "room",
       "tier": "E",
       "state": "folder-only",
       "in_galleries": [],
       "registered": false,
-      "exports": []
+      "exports": [
+        "scale_multiplier",
+        "laser_endpoints"
+      ]
     },
     {
       "topic": "vectors",
@@ -12895,7 +13955,7 @@
       "topic": "vectors",
       "artifact": "vectorline",
       "scene": "algorithms\\vectors\\vectorline\\vectorline.tscn",
-      "essence": null,
+      "essence": "two grab-spheres with a line drawn between them — the most concrete vector you can hold",
       "principle": "geometric",
       "principle_matches": [
         "geometric"
@@ -12924,32 +13984,63 @@
       "topic": "vectors",
       "artifact": "weather_vector_field",
       "scene": "algorithms\\vectors\\weather_vector_field\\weather_vector_field.tscn",
-      "essence": "R = A + B; F_rain = gravity + wind. Vector addition drives both the field and the particles. Superposition made meteorological.",
+      "essence": "R = A + B; F_rain = gravity + wind. Vector addition drives the field, the instruments, and every GPU particle system at once. Superposition made meteorological — a whole storm chamber that agrees on one vector.",
       "principle": "stochastic",
       "principle_matches": [
         "stochastic",
         "geometric"
       ],
       "principle_scores": {
-        "stochastic": 112,
-        "geometric": 35
+        "stochastic": 192,
+        "geometric": 109
       },
-      "confidence": 0.688,
+      "confidence": 0.432,
       "time": "interactive",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
         "principle-stochastic-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "world_size",
+        "arrow_grid_size",
+        "rain_count",
+        "cloud_count"
+      ]
+    },
+    {
+      "topic": "wavefunctions",
+      "artifact": "aliasing_wave",
+      "scene": "algorithms\\wavefunctions\\aliasing_wave\\aliasing_wave.tscn",
+      "essence": null,
+      "principle": "geometric",
+      "principle_matches": [],
+      "principle_scores": {},
+      "confidence": 1.0,
+      "time": "animated",
+      "scale": "surface",
+      "tier": "B",
+      "state": "scene-only",
+      "in_galleries": [],
+      "registered": true,
+      "exports": [
+        "true_cycles",
+        "samples",
+        "width",
+        "amp",
+        "wheel_spokes",
+        "wheel_rpm",
+        "color_true",
+        "color_sample"
+      ]
     },
     {
       "topic": "wavefunctions",
       "artifact": "beat_frequencies",
       "scene": "algorithms\\wavefunctions\\beat_frequencies\\BeatFrequencies.tscn",
-      "essence": null,
+      "essence": "two sine waves at neighboring frequencies become a third wave that pulses — interference made audible",
       "principle": "geometric",
       "principle_matches": [
         "geometric",
@@ -13016,7 +14107,7 @@
       },
       "confidence": 1.0,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13038,15 +14129,19 @@
       "topic": "wavefunctions",
       "artifact": "big_pipe_system",
       "scene": "algorithms\\wavefunctions\\big_pipe_system\\BigPipeSystem.tscn",
-      "essence": null,
-      "principle": "geometric",
+      "essence": "a turtle-graphics pipe network grown from string commands — `f` adds anchors, `r`/`l` bend bezier handles, `t`/`x` branch into independent curves; SurfaceTool extrudes one continuous mesh along the path",
+      "principle": "optimization",
       "principle_matches": [
-        "geometric"
+        "optimization",
+        "geometric",
+        "grammatical"
       ],
       "principle_scores": {
-        "geometric": 18
+        "grammatical": 15,
+        "optimization": 48,
+        "geometric": 21
       },
-      "confidence": 1.0,
+      "confidence": 0.562,
       "time": "static",
       "scale": "architecture",
       "tier": "B",
@@ -13129,19 +14224,21 @@
       "topic": "wavefunctions",
       "artifact": "coupled_oscillator_lattice",
       "scene": "algorithms\\wavefunctions\\coupled_oscillator_lattice\\coupled_oscillator_lattice.tscn",
-      "essence": null,
-      "principle": "grammatical",
+      "essence": "a 2D grid of mass-spring oscillators where each cell nudges its neighbors via configurable coupling — independent at coupling=0, lattice-locked at high values, with central excitation driving the spectrum",
+      "principle": "geometric",
       "principle_matches": [
-        "grammatical",
-        "stochastic"
+        "geometric",
+        "stochastic",
+        "grammatical"
       ],
       "principle_scores": {
         "grammatical": 10,
-        "stochastic": 6
+        "stochastic": 22,
+        "geometric": 45
       },
-      "confidence": 0.4,
+      "confidence": 0.511,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13167,15 +14264,17 @@
       "principle": "field",
       "principle_matches": [
         "field",
-        "geometric"
+        "geometric",
+        "stochastic"
       ],
       "principle_scores": {
+        "stochastic": 3,
         "field": 149,
         "geometric": 27
       },
       "confidence": 0.819,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13293,15 +14392,17 @@
       "principle": "boolean",
       "principle_matches": [
         "boolean",
+        "stochastic",
         "geometric"
       ],
       "principle_scores": {
         "boolean": 32,
-        "geometric": 6
+        "stochastic": 9,
+        "geometric": 9
       },
-      "confidence": 0.812,
+      "confidence": 0.719,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "object",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13376,7 +14477,7 @@
       "topic": "wavefunctions",
       "artifact": "harmonic_builder",
       "scene": "algorithms\\wavefunctions\\harmonic_builder\\HarmonicBuilder.tscn",
-      "essence": null,
+      "essence": "Fourier synthesis as instrument — any periodic sound is a sum of integer harmonics",
       "principle": "geometric",
       "principle_matches": [],
       "principle_scores": {},
@@ -13405,11 +14506,11 @@
       ],
       "principle_scores": {
         "grammatical": 60,
-        "stochastic": 8,
+        "stochastic": 11,
         "field": 73,
-        "geometric": 138
+        "geometric": 154
       },
-      "confidence": 0.471,
+      "confidence": 0.526,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -13438,16 +14539,18 @@
       "principle_matches": [
         "field",
         "geometric",
-        "grammatical"
+        "grammatical",
+        "stochastic"
       ],
       "principle_scores": {
         "grammatical": 10,
-        "field": 340,
-        "geometric": 18
+        "stochastic": 3,
+        "field": 390,
+        "geometric": 27
       },
-      "confidence": 0.947,
+      "confidence": 0.931,
       "time": "animated",
-      "scale": "surface",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13470,16 +14573,18 @@
       "artifact": "lissajous_curves",
       "scene": "algorithms\\wavefunctions\\lissajous_curves\\lissajous_curves.tscn",
       "essence": "(x,y,z) = (A_x*sin(a*t+delta), A_y*sin(b*t), A_z*sin(c*t)) — parametric Lissajous",
-      "principle": "stochastic",
+      "principle": "grammatical",
       "principle_matches": [
+        "grammatical",
         "stochastic",
         "geometric"
       ],
       "principle_scores": {
+        "grammatical": 64,
         "stochastic": 40,
-        "geometric": 3
+        "geometric": 6
       },
-      "confidence": 0.925,
+      "confidence": 0.375,
       "time": "animated",
       "scale": "specimen",
       "tier": "B",
@@ -13542,7 +14647,7 @@
         "grammatical": 40,
         "iterative": 20,
         "stochastic": 24,
-        "geometric": 15
+        "geometric": 18
       },
       "confidence": 0.4,
       "time": "interactive",
@@ -13554,14 +14659,14 @@
       ],
       "registered": false,
       "exports": [
+        "evidence",
+        "regime",
         "mode",
         "beat_interval",
         "proximity_threshold",
         "base_octave",
         "hardness",
-        "ring_time",
-        "leader_ahead_beats",
-        "layout_radius"
+        "ring_time"
       ]
     },
     {
@@ -13591,7 +14696,7 @@
       "topic": "wavefunctions",
       "artifact": "oscillating_wave",
       "scene": "algorithms\\wavefunctions\\oscillating_wave\\OscillatingWave.tscn",
-      "essence": null,
+      "essence": "a single sine made walkable — vertical motion becomes a curve in space and a tone in air",
       "principle": "optimization",
       "principle_matches": [
         "optimization",
@@ -13626,11 +14731,11 @@
       "principle_scores": {
         "field": 10,
         "composition": 8,
-        "geometric": 30
+        "geometric": 35
       },
-      "confidence": 0.667,
+      "confidence": 0.714,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13653,12 +14758,16 @@
       "artifact": "parametric_pendulum_waves",
       "scene": "algorithms\\wavefunctions\\parametric_pendulum_waves\\parametric_pendulum_waves.tscn",
       "essence": null,
-      "principle": "geometric",
-      "principle_matches": [],
-      "principle_scores": {},
+      "principle": "composition",
+      "principle_matches": [
+        "composition"
+      ],
+      "principle_scores": {
+        "composition": 24
+      },
       "confidence": 1.0,
       "time": "animated",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13710,10 +14819,10 @@
         "boolean"
       ],
       "principle_scores": {
-        "boolean": 52,
-        "field": 136
+        "boolean": 68,
+        "field": 152
       },
-      "confidence": 0.618,
+      "confidence": 0.553,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -13723,14 +14832,14 @@
       ],
       "registered": true,
       "exports": [
+        "capture_anchor",
         "animation_speed",
         "gradient_offset",
         "glow_intensity",
         "emission_strength",
         "cone_mode",
         "start_radius",
-        "end_radius",
-        "num_segments"
+        "end_radius"
       ]
     },
     {
@@ -13811,11 +14920,11 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 12
+        "geometric": 18
       },
       "confidence": 1.0,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13868,11 +14977,11 @@
         "geometric"
       ],
       "principle_scores": {
-        "geometric": 33
+        "geometric": 38
       },
       "confidence": 1.0,
       "time": "static",
-      "scale": "specimen",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -13904,7 +15013,7 @@
       },
       "confidence": 1.0,
       "time": "animated",
-      "scale": "specimen",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -14011,7 +15120,7 @@
       "topic": "wavefunctions",
       "artifact": "sineoscillation",
       "scene": "algorithms\\wavefunctions\\sineoscillation\\sine_oscillation.tscn",
-      "essence": null,
+      "essence": "a unit circle and its shadow — rotation projected onto a line is the sine wave itself",
       "principle": "geometric",
       "principle_matches": [
         "geometric"
@@ -14109,21 +15218,21 @@
       "topic": "wavefunctions",
       "artifact": "spectralanalysis",
       "scene": "algorithms\\wavefunctions\\spectralanalysis\\dual_display_test.tscn",
-      "essence": "FFT(audio_bus) -> frequency_bins[] -> bar_heights[] or waveform display",
+      "essence": "two panes of one signal — magnitude against frequency on the left, amplitude against time on the right",
       "principle": "geometric",
       "principle_matches": [
         "geometric",
-        "grammatical",
-        "optimization"
+        "optimization",
+        "grammatical"
       ],
       "principle_scores": {
-        "grammatical": 40,
+        "grammatical": 10,
         "optimization": 40,
         "geometric": 45
       },
       "confidence": 0.111,
       "time": "animated",
-      "scale": "object",
+      "scale": "room",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [
@@ -14153,9 +15262,9 @@
       ],
       "principle_scores": {
         "optimization": 40,
-        "geometric": 16
+        "geometric": 22
       },
-      "confidence": 0.6,
+      "confidence": 0.45,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -14164,7 +15273,10 @@
         "principle-optimization-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "harmonic_l",
+        "harmonic_m"
+      ]
     },
     {
       "topic": "wavefunctions",
@@ -14260,12 +15372,14 @@
       "essence": "ambient(t) = drone(t) + sum(random_effect_i(t)) with stochastic scheduling",
       "principle": "stochastic",
       "principle_matches": [
-        "stochastic"
+        "stochastic",
+        "composition"
       ],
       "principle_scores": {
-        "stochastic": 192
+        "stochastic": 229,
+        "composition": 72
       },
-      "confidence": 1.0,
+      "confidence": 0.686,
       "time": "animated",
       "scale": "room",
       "tier": "B",
@@ -14274,7 +15388,9 @@
         "principle-stochastic-gallery"
       ],
       "registered": false,
-      "exports": []
+      "exports": [
+        "chance_seed"
+      ]
     },
     {
       "topic": "wavefunctions",
@@ -14480,15 +15596,17 @@
       "topic": "wavefunctions",
       "artifact": "wave_interference",
       "scene": "algorithms\\wavefunctions\\wave_interference\\wave_interference.tscn",
-      "essence": null,
+      "essence": "two wave sources whose ripples meet — the interference field between them is the truth of wave addition",
       "principle": "boolean",
       "principle_matches": [
-        "boolean"
+        "boolean",
+        "geometric"
       ],
       "principle_scores": {
-        "boolean": 40
+        "boolean": 64,
+        "geometric": 6
       },
-      "confidence": 1.0,
+      "confidence": 0.906,
       "time": "animated",
       "scale": "object",
       "tier": "B",
@@ -14506,12 +15624,14 @@
       "essence": "two simple waves create a complex pattern — superposition is the grammar of interference",
       "principle": "grammatical",
       "principle_matches": [
-        "grammatical"
+        "grammatical",
+        "geometric"
       ],
       "principle_scores": {
-        "grammatical": 60
+        "grammatical": 60,
+        "geometric": 9
       },
-      "confidence": 1.0,
+      "confidence": 0.85,
       "time": "interactive",
       "scale": "object",
       "tier": "B",
@@ -14520,25 +15640,27 @@
         "principle-grammatical-gallery"
       ],
       "registered": true,
-      "exports": []
+      "exports": [
+        "evidence"
+      ]
     },
     {
       "topic": "wavefunctions",
       "artifact": "wave_propagation_3d",
       "scene": "algorithms\\wavefunctions\\wave_propagation_3d\\wave_propagation_3d.tscn",
       "essence": "height(x,z,t) = sum(A_ring * sin(omega*t - k*distance(x,z,center))) — expanding ring waves",
-      "principle": "geometric",
+      "principle": "boolean",
       "principle_matches": [
-        "geometric",
-        "boolean"
+        "boolean",
+        "geometric"
       ],
       "principle_scores": {
-        "boolean": 8,
+        "boolean": 32,
         "geometric": 16
       },
       "confidence": 0.5,
       "time": "animated",
-      "scale": "object",
+      "scale": "architecture",
       "tier": "B",
       "state": "galleried",
       "in_galleries": [

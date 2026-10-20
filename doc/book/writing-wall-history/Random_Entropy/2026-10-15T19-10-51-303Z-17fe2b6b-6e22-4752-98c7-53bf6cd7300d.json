@@ -1,0 +1,134 @@
+{
+  "at": "2026-10-15T19:10:51.308Z",
+  "previous": null,
+  "next": {
+    "schema": "writing-wall/1",
+    "map": "Random_Entropy",
+    "order": [
+      "shannon_entropy_meter",
+      "entropy_jar",
+      "entropy_compartments",
+      "entropy_axiom",
+      "entropy_ruin",
+      "signal_room",
+      "random_butterflies",
+      "hardware_entropy_decay"
+    ],
+    "magnets": [
+      {
+        "id": "entropy_jar",
+        "x": 55,
+        "y": 65,
+        "brief": "H(colour | six height bands); whole-jar colour entropy remains one bit.",
+        "question": "Which differences does this account retain, and what would another account need?",
+        "theme": "experience",
+        "tutorial": "Compare the conditioning variable with the whole-board count. Editable radial partitions remain proposed.",
+        "final": "Height gives where a particular meaning; then count how many configurations fit a description.",
+        "proposal": "",
+        "tags": [
+          "tutorial",
+          "final"
+        ]
+      },
+      {
+        "id": "shannon_entropy_meter",
+        "x": 355,
+        "y": 65,
+        "brief": "A pair separates while the marginal colour reading stays.",
+        "question": "Which differences does this account retain, and what would another account need?",
+        "theme": "experience",
+        "tutorial": "Preparatory counts-and-neighbours.md build: preserve a list before sorting its copy.",
+        "final": "The unchanged gauge creates a need to ask what where means.",
+        "proposal": "",
+        "tags": [
+          "tutorial",
+          "final"
+        ]
+      },
+      {
+        "id": "random_butterflies",
+        "x": 655,
+        "y": 65,
+        "brief": "Entropy-seeking butterfly swarm: wander randomly then land on entropy_axiom grid points, wings tinting blue-to-red along the order-chaos gradient. Grab and release to send to a new entropy point.",
+        "question": "What question can this encounter test?",
+        "theme": "experience",
+        "tutorial": "",
+        "final": "",
+        "proposal": "Optional encounter; not a required step in the adopted final.",
+        "tags": []
+      },
+      {
+        "id": "hardware_entropy_decay",
+        "x": 955,
+        "y": 65,
+        "brief": "Your VR movements become entropy. Controller velocity drives scratches, grip pressure accumulates grime, head rotation feeds weathering rate. Three display surfaces (cube, sphere, cylinder) decay in real-time from your hardware inputs via a custom procedural shader.",
+        "question": "What question can this encounter test?",
+        "theme": "experience",
+        "tutorial": "",
+        "final": "",
+        "proposal": "Optional encounter; not a required step in the adopted final.",
+        "tags": []
+      },
+      {
+        "id": "entropy_compartments",
+        "x": 55,
+        "y": 305,
+        "brief": "16 sites, 8 A and 8 B. One-bit colour reading beside S_B/k_B = ln Omega.",
+        "question": "Which differences does this account retain, and what would another account need?",
+        "theme": "experience",
+        "tutorial": "Build the 25-line model; exchange, compare, KEEP, REPLAY, reconstruct and propose a further measure.",
+        "final": "At balance 4900 arrangements fit. SAME k moves colours without moving either gauge. A record needs more than its numbers.",
+        "proposal": "",
+        "tags": [
+          "tutorial",
+          "final"
+        ]
+      },
+      {
+        "id": "entropy_axiom",
+        "x": 355,
+        "y": 305,
+        "brief": "Displacement and viewing direction affect visible irregularity.",
+        "question": "Which differences does this account retain, and what would another account need?",
+        "theme": "experience",
+        "tutorial": "Optional comparison: no entropy calculation in this enclosure.",
+        "final": "Leave the gauges and test what a change of viewpoint makes visible.",
+        "proposal": "",
+        "tags": [
+          "final"
+        ]
+      },
+      {
+        "id": "entropy_ruin",
+        "x": 655,
+        "y": 305,
+        "brief": "116 retained stones can admit different supports and openings.",
+        "question": "Which differences does this account retain, and what would another account need?",
+        "theme": "experience",
+        "tutorial": "Optional return: inventory alone cannot restore arrangement or collision.",
+        "final": "An unchanged inventory cannot say which passage might open.",
+        "proposal": "",
+        "tags": [
+          "final"
+        ]
+      },
+      {
+        "id": "signal_room",
+        "x": 955,
+        "y": 305,
+        "brief": "Same binary counts, different neighbours in a room.",
+        "question": "Which differences does this account retain, and what would another account need?",
+        "theme": "experience",
+        "tutorial": "Optional extension: compare adjacency, then define a conditional predictor.",
+        "final": "Return to the same omission at the scale of a room.",
+        "proposal": "",
+        "tags": [
+          "final"
+        ]
+      }
+    ],
+    "notes": [],
+    "edges": []
+  },
+  "sourceVersion": "be7f42cb4532d11c7311f71b2131070e4506e21c3360a485d245f278b76430ab"
+}

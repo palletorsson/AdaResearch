@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-13",
+  "iteration": "B20/B21",
+  "source_sha256": {
+    "commons/hazards/biome_ladder/route.gd": "6cc3a41467b76e764c98c4c5725096765353230504f42e27241501f408534d67",
+    "commons/hazards/biome_ladder/ladder_world.gd": "cd8882f23946e2b129af00c202dd09123fea50932e4eca41e281c3bbb2314672",
+    "commons/hazards/biome_ladder/ladder_encounter.gd": "256f1ec3f7e8b8a707a4a4c7ecb0624abcdc33837dbf73f01d61bc37f1051fa6",
+    "commons/hazards/biome_ladder/ladder_skull.gd": "8f55ff968eed144a9e349e8e084948815bc86fbddd7f744211d66cb73f00be52",
+    "commons/hazards/biome_ladder/ladder_ball.gd": "e96df4d280efb9ee1600647f139503365294594d1a6d219db2f7949f22f063cb",
+    "commons/hazards/biome_ladder/change_ball.gd": "8fb532c142a509cee32f7ba949afe372c04c497767a6b245902250da15148cf7",
+    "commons/hazards/biome_ladder/direction_field.gd": "efeb3a3a029679d1771ad2a74e53971a94529434b2a08e75d4f478f3761aa8a2",
+    "commons/hazards/biome_ladder/pattern_flash.gdshader": "00fa338f39624849d0e62bdcfbffc288d005033593b54d53ad9ea8b517ccd5b4",
+    "tools/probes/biome_tiling_feedback.gd": "25a765c98de15aea1e481a8fe018fabb211dd622cb4c28891afce89e7c45f997",
+    "tools/probes/biome_change.gd": "676969878cf97154153dc8fa58b0d0e37b9bdd6f9c0f066fa79ef3c15418bf5d"
+  },
+  "checks": [
+    {
+      "name": "Tiling access and simultaneous feedback",
+      "passed": 25,
+      "total": 25,
+      "report": "feedback-checks.json"
+    },
+    {
+      "name": "Change input, field, turn and collision",
+      "passed": 36,
+      "total": 36,
+      "report": "change-checks.json"
+    },
+    {
+      "name": "Six-stage behaviour",
+      "passed": 80,
+      "total": 80,
+      "report": "change-stages-checks.json"
+    },
+    {
+      "name": "Arrays regression",
+      "passed": 140,
+      "total": 140,
+      "report": "change-arrays-checks.json"
+    },
+    {
+      "name": "Tiling impacts regression",
+      "passed": 33,
+      "total": 33,
+      "report": "change-tiling-checks.json"
+    },
+    {
+      "name": "Desktop input through all stages",
+      "passed": 61,
+      "total": 61,
+      "report": "change-desktop-checks.json"
+    },
+    {
+      "name": "Controlled XR input and falling skulls",
+      "passed": 127,
+      "total": 127,
+      "report": "change-xr-checks.json"
+    }
+  ],
+  "museum": "8/8 entry/dispatch checks pass, exit 0. The existing Flow_Field NOC artifact emits freed-object errors during probe cleanup; not a clean museum teardown.",
+  "scope": "Godot desktop and controlled XR input/physics. No physical headset or Quest performance acceptance."
+}

@@ -1,0 +1,144 @@
+{
+	"checks": [
+		{
+			"label": "Primitives standalone scene is ready",
+			"pass": true
+		},
+		{
+			"label": "Head 0 is visible from the centre at standing height",
+			"pass": true
+		},
+		{
+			"label": "Head 1 is visible from the centre at standing height",
+			"pass": true
+		},
+		{
+			"label": "Head 2 is visible from the centre at standing height",
+			"pass": true
+		},
+		{
+			"label": "Player capsule has a clear central route through architecture",
+			"pass": true
+		},
+		{
+			"label": "Primitives retain the outlined white floor",
+			"pass": true
+		},
+		{
+			"label": "Cover stays static in Primitives",
+			"pass": true
+		},
+		{
+			"label": "box-protected: line of fire matches cover",
+			"pass": true
+		},
+		{
+			"label": "box-protected: skull launches its actual ball",
+			"pass": true
+		},
+		{
+			"label": "box-protected: shot reaches a real collision",
+			"pass": true
+		},
+		{
+			"label": "box-protected: cover stops damage",
+			"pass": true
+		},
+		{
+			"label": "box-step-out: line of fire matches cover",
+			"pass": true
+		},
+		{
+			"label": "box-step-out: skull launches its actual ball",
+			"pass": true
+		},
+		{
+			"label": "box-step-out: shot reaches a real collision",
+			"pass": true
+		},
+		{
+			"label": "box-step-out: exposed player is hit once",
+			"pass": true
+		},
+		{
+			"label": "cylinder-protected: line of fire matches cover",
+			"pass": true
+		},
+		{
+			"label": "cylinder-protected: skull launches its actual ball",
+			"pass": true
+		},
+		{
+			"label": "cylinder-protected: shot reaches a real collision",
+			"pass": true
+		},
+		{
+			"label": "cylinder-protected: cover stops damage",
+			"pass": true
+		},
+		{
+			"label": "cylinder-step-out: line of fire matches cover",
+			"pass": true
+		},
+		{
+			"label": "cylinder-step-out: skull launches its actual ball",
+			"pass": true
+		},
+		{
+			"label": "cylinder-step-out: shot reaches a real collision",
+			"pass": true
+		},
+		{
+			"label": "cylinder-step-out: exposed player is hit once",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 inherits six Primitives shelters",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 inherits six Primitives shelters",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 inherits six Primitives shelters",
+			"pass": true
+		},
+		{
+			"label": "Practice did not earn the museum ability",
+			"pass": true
+		}
+	],
+	"passed": 27,
+	"total": 27,
+	"trials": [
+		{
+			"collided": true,
+			"impact": "(-2.534563, 1.421838, 5.734387)",
+			"label": "box-protected",
+			"player_hits": 0,
+			"protected": true
+		},
+		{
+			"collided": true,
+			"impact": "(-0.494791, 1.196892, 7.360948)",
+			"label": "box-step-out",
+			"player_hits": 1,
+			"protected": false
+		},
+		{
+			"collided": true,
+			"impact": "(2.141916, 1.4514, 0.162543)",
+			"label": "cylinder-protected",
+			"player_hits": 0,
+			"protected": true
+		},
+		{
+			"collided": true,
+			"impact": "(2.912603, 1.231969, 1.209085)",
+			"label": "cylinder-step-out",
+			"player_hits": 1,
+			"protected": false
+		}
+	]
+}

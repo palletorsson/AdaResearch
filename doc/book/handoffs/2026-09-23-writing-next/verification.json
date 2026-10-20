@@ -1,0 +1,4758 @@
+{
+  "created_at": "2026-09-23T15:57:58.493897+00:00",
+  "scope": "Frozen package and ZIP hashes, exact canonical source copies, reference chapter text equality with normalized newlines, reading mirror and HTTP availability. No new Godot runtime, browser interaction, headset or learner test.",
+  "delivery": "Complete packages and ZIPs remain in doc/book/handoffs/2026-09-23-writing-next. HTTP reading mirror is under doc/book/iterations/2026-09-23-writing-next. Upload the ZIP using its local path.",
+  "initial_check_resolutions": [
+    "Two reference chapters had only normalized newlines; original source copies remain byte-exact.",
+    "The server does not serve handoffs paths; a reading mirror was created under its existing iterations path without changing the server."
+  ],
+  "total_checks": 1186,
+  "passed": 1186,
+  "failed": [],
+  "checks": [
+    {
+      "check": "softbodies: archive hash",
+      "passed": true
+    },
+    {
+      "check": "softbodies: ZIP integrity",
+      "passed": true
+    },
+    {
+      "check": "softbodies: .gdignore",
+      "passed": true
+    },
+    {
+      "check": "softbodies: artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: book.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: evidence/README.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: evidence/supplement/doc/book/iterations/2026-09-20-softbodies-review/review-report.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: evidence/supplement/doc/book/iterations/2026-09-20-softbodies-review/SUMMARY.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: image-index.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: PROJECT_CONTEXT.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: review.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: REVIEW_PRINCIPLES.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sequence.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: SOURCE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.tres",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/addons/godot-xr-tools/objects/pickable.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/addons/godot-xr-tools/objects/pickable.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/computationalbiology/radiolaria2/radiolaria.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/computationalbiology/radiolaria2/radiolaria.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/flagdancer/flagdancer.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/flagdancer/flagdancer.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softbodystop/fourstopsoftbody.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softbodystop/softbodybody.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softmill/rotatingarm.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softmill/RotatingArmWithStand.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softmill/softmill.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbodies/softmill/softmill.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/physicssimulation/softbody3d/softbody3d.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/branching_growth_algorithm.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingUI.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/proceduralgeneration/growth_systems/reactiondiffusion/2d_in_3d_turing_pattern_reaction_diffusion.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/advanced_concepts/breathing_room.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/advanced_concepts/breathing_room_scene.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/affordance_demos/flex_cloth_pad.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/affordance_demos/flex_cloth_pad.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/cloth_straps/cloth_straps.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/cloth_straps/cloth_straps.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/joyride/revolving_joy_ride.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/joyride/revolving_joy_ride.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/mushrooms/soft_mushrooms.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/mushrooms/soft_mushrooms.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/rounded_softbody.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/rounded_softbody.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/rounded_softbody_test.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/rounded_softbody_test.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/softbody_gallery_part2.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/softbodies/softbody_test_gallery.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/_embodied/embodied_prop.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/_hangar/hangar_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/jelly_cube/jelly_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/jelly_cube/jelly_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/jelly_cube/jelly_variants.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/science_screen/science_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/science_screen/science_screen.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/synthesis/synthesis_stand.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/synthesis/synthesis_stand.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/the_confessing_body/the_confessing_body.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/the_confessing_body/the_confessing_body.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/timing_machines/pg_workshop.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/timing_machines/soft_workshop.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/timing_machines/soft_workshop.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/turing_pattern_generator/turing_pattern_generator.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/audio/rack_templates/RackTemplates.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/audio/runtime/CubeAudioPlayer.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/grid/artifact_identity.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/grid/GridCommon.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/grid/GridStructureComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/grid/GridUtilitiesComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/grid/UtilityRegistry.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/hazards/gridagent/grid_agent_base.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/hazards/gridagent/grid_agent_base.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ISO_Introduction/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/PG_Mirrored_Patterns/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Affect_Theory_Visualization/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Carusell/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Cloth_Physics/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Obsticals_Part2/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Playground_of_Joy/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/SoftBodies_Soft_Body_Deformation/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/critical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/final.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/intent.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/summary.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/technical.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/maps/Topology_Entropy_Morphogenesis/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/mesh_grammar/mesh_grammar_node.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/mesh_grammar/mesh_grammar_node.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/capsule/capsule.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/cubes/cube_scene.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/cubes/cube_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/cubes/grab_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/cubes/grab_long_stick.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/cubes/grab_rod.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/cubes/text_node.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/prismes/prism_block.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/shared/grid_material_factory.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/sphere/sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/primitives/trails/mesmerizing_trail.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/render/mesh_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/render/pbr_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/discoLights.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/displayobjectposition/displayobjectposition.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/displayobjectposition/displayobjectposition.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/foil_paper.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/frosted_glass.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/Grid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/long_cloth.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/mushroom_dots.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/pearlescent.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/pinktartan.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/PinkTeleport.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/rothko4.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/resourses/shaders/SimpleGrid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/AnnotationInfoBoard.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/info_board.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/pick_up_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/pick_up_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/teleport.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/teleport_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/scenes/mapobjects/walkableprism.tscn",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/soft_body/soft_body_sim.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/ui/text_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/commons/utils/baked_text_albedo.gd",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/afterword-qfep.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/BOOK_FRAME.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/ENCOUNTER_STATUS.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/iterations/QFEP_READING.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/book/preface.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/ENTRY.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/research/qfep/entropic-morality.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: sources/doc/research/qfep/README.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/ProceduralGeneration_Reaction_Diffusion_Systems.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/ProceduralGeneration_Reaction_Diffusion_Systems.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Affect_Theory_Visualization.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Affect_Theory_Visualization.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Carusell.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Carusell.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Cloth_Physics.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Cloth_Physics.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Obsticals.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Obsticals.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Obsticals_Part2.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Obsticals_Part2.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Playground_of_Joy.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Playground_of_Joy.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Soft_Body_Deformation.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/SoftBodies_Soft_Body_Deformation.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/Topology_Entropy_Morphogenesis.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space/Topology_Entropy_Morphogenesis.svg",
+      "passed": true
+    },
+    {
+      "check": "softbodies: space.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: START_HERE.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: state.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: utility-index.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: voice-examples/Point_One.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: voice-examples/SpeculativeComputation_Rhizome_Network.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: voice-examples/Trans_Scale.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: voice-examples/Tutorial_Tiling_Walls.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: VOICE_EXAMPLES.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: manifest",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Soft_Body_Deformation",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Cloth_Physics",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Carusell",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Obsticals",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Obsticals_Part2",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Playground_of_Joy",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current SoftBodies_Affect_Theory_Visualization",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current ProceduralGeneration_Reaction_Diffusion_Systems",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current Topology_Entropy_Morphogenesis",
+      "passed": true
+    },
+    {
+      "check": "softbodies: shared WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: shared ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current voice Point_One",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current voice SpeculativeComputation_Rhizome_Network",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current voice Trans_Scale",
+      "passed": true
+    },
+    {
+      "check": "softbodies: current voice Tutorial_Tiling_Walls",
+      "passed": true
+    },
+    {
+      "check": "softbodies: includes NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "softbodies: includes placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: includes space.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: includes artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "softbodies: includes .gdignore",
+      "passed": true
+    },
+    {
+      "check": "softbodies: one-hall writing assignment",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: archive hash",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: ZIP integrity",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: .gdignore",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: book.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: evidence/README.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: evidence/supplement/doc/book/iterations/2026-09-20-machinelearning-review/model-checks.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: evidence/supplement/doc/book/iterations/2026-09-20-machinelearning-review/SUMMARY.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: image-index.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: PROJECT_CONTEXT.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: review.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: REVIEW_PRINCIPLES.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sequence.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: SOURCE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/addons/godot-xr-tools/effects/fade.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/addons/godot-xr-tools/player/player_body.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/addons/godot-xr-tools/player/player_body.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/anomaly_detection/AnomalyDetection.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/carlsims/evolvedcreatures.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/carlsims/evolvedcreatures.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/computer_vision/ComputerVision_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/computer_vision/ComputerVision_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/evolvingflowers/evolvingflowers.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/evolvingflowers/evolvingflowers.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/fine_tuning/FineTuning_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/fine_tuning/FineTuning_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/kmeansclustering/enhanced_kmeans.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/loss_function_comparator/loss_function_comparator.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/loss_function_comparator/loss_function_comparator.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/LSTMs/LSTMs_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/LSTMs/LSTMs_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/neural_networks/NeuralNetworks_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/non_teleological_evolution/non_teleological_evolution.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/pca/pca_visualization.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/pca/pca_visualization.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/randomforest/random_forest_visualization.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/randomforest/random_forest_visualization.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/reinforcementlearning/joint_learn_walk.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/supportvectormachine/svm_visualization.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/transformers/Transformers_VR.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/machinelearning/transformers/Transformers_VR.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/artifacts/_hangar/hangar_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/artifacts/science_screen/science_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/artifacts/science_screen/science_screen.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/audio/rack_templates/RackTemplates.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/audio/runtime/CubeAudioPlayer.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/grid/GridCommon.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/grid/GridStructureComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/grid/GridUtilitiesComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/grid/UtilityRegistry.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/interactables/push_button.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/interactables/slider_horizontal.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/GT_Foundations/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Classification/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Evolution/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Generative/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Gradient_Landscape/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Neural_Networks/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Perception/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Sequence_Memory/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/critical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/intent.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/summary.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/technical.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/ML_Synthesis/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/primitives/cubes/cube_scene.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/primitives/cubes/cube_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/render/pbr_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/resourses/shaders/Grid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/resourses/shaders/PinkTeleport.gdshader",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/resourses/shaders/SimpleGrid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/AnnotationInfoBoard.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/info_board.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/score_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/ScoreCubeController.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/teleport.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/teleport_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/transport_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/transport_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/scenes/mapobjects/walkableprism.tscn",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/commons/utils/baked_text_albedo.gd",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/afterword-qfep.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/BOOK_FRAME.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/ENCOUNTER_STATUS.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/iterations/QFEP_READING.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/book/preface.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/ENTRY.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/research/qfep/entropic-morality.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: sources/doc/research/qfep/README.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Classification.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Classification.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Evolution.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Evolution.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Generative.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Generative.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Gradient_Landscape.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Gradient_Landscape.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Neural_Networks.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Neural_Networks.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Perception.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Perception.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Sequence_Memory.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Sequence_Memory.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Synthesis.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space/ML_Synthesis.svg",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: space.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: START_HERE.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: state.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: utility-index.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: voice-examples/Point_One.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: voice-examples/SpeculativeComputation_Rhizome_Network.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: voice-examples/Trans_Scale.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: voice-examples/Tutorial_Tiling_Walls.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: VOICE_EXAMPLES.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: manifest",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Evolution",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Gradient_Landscape",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Classification",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Neural_Networks",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Perception",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Sequence_Memory",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Generative",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current ML_Synthesis",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: shared WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: shared ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current voice Point_One",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current voice SpeculativeComputation_Rhizome_Network",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current voice Trans_Scale",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: current voice Tutorial_Tiling_Walls",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: includes NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: includes placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: includes space.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: includes artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: includes .gdignore",
+      "passed": true
+    },
+    {
+      "check": "machinelearning: one-hall writing assignment",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: archive hash",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: ZIP integrity",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: .gdignore",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: book.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: evidence/README.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: evidence/supplement/doc/book/iterations/2026-09-20-graphtheory-review/model-checks.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: evidence/supplement/doc/book/iterations/2026-09-20-graphtheory-review/SUMMARY.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: image-index.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: PROJECT_CONTEXT.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: review.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: REVIEW_PRINCIPLES.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sequence.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: SOURCE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/addons/godot-xr-tools/effects/fade.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/addons/godot-xr-tools/objects/pickable.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/addons/godot-xr-tools/player/player_body.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/addons/godot-xr-tools/player/player_body.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/edmonds_algorithm/edmonds_algorithm.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/force_directed_layout/force_directed_layout.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/force_directed_layout/ForceDirectedLayout.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/forcedirected3d/forcedirected3d.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/forcedirected3d/forcedirected3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace/graphspace.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace/graphspace.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace/portal.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace/portal.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace/room.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace3d/graphspace3d.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace3d/graphspace3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace3d/konigsberg3d.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/graphspace3d/konigsberg3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/karger_algorithm/karger_algorithm.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/karger_algorithm/karger_algorithm.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/kosaraju_algorithm/kosaraju_algorithm.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/minimumspanningtree/mst_visualization.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/minimumspanningtree/mst_visualization.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/network_analysis/network_analysis.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/network_analysis/NetworkAnalysis.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/networkflow3d/networkflow3d.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/networkflow3d/networkflow3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/pathfinding3d/pathfinding3d.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/push_relabel/push_relabel.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/push_relabel/push_relabel.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/tarjan_algorithm/tarjan_algorithm.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/topological_sort/topological_sort.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/algorithms/graphtheory/topological_sort/topological_sort.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/_embodied/embodied_prop.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/_hangar/hangar_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/family_chandelier/family_chandelier.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/family_chandelier/family_chandelier.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/graph_basilica/graph_basilica.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/graph_basilica/graph_basilica.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/impatient_river/impatient_river.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/impatient_river/impatient_river.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/salesman_knot/salesman_knot.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/salesman_knot/salesman_knot.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/synthesis/synthesis_stand.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/synthesis/synthesis_stand.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/two_travelers/two_travelers.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/artifacts/two_travelers/two_travelers.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/audio/runtime/CubeAudioPlayer.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/artifact_identity.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/GridCommon.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/GridStructureComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/GridUtilitiesComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/LabelFramer.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_color_mutator.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_glyph_expressions.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_glyph_mutator.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_map_aware_expressions.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_part_expressions.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_part_mutator.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_substrate_runner.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_substrate_runner.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_visibility_expressions.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_visibility_expressions_3d.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/mutators/grid_visibility_mutator.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/grid/UtilityRegistry.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/interactables/push_button.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/Euclid_Parallel/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Connectivity/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Flow/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Foundations/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Layout/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Matching/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Network_Analysis/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Pathfinding/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/critical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/intent.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/summary.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/technical.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/GT_Spanning_Trees/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/maps/ML_Synthesis/final.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/primitives/cubes/cube_scene.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/primitives/cubes/cube_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/primitives/cubes/grab_cube_grid_snap.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/primitives/panels/DigitalPaper/grab_paper.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/render/pbr_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/resourses/shaders/Grid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/resourses/shaders/PinkTeleport.gdshader",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/resourses/shaders/SimpleGrid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/AnnotationInfoBoard.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/info_board.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/score_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/ScoreCubeController.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/teleport.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/teleport_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/transport_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/transport_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/scenes/mapobjects/walkableprism.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_bfs_graph.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_dfs_graph.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_dijkstra.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_entropy_field.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_force_directed.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_kruskal_mst.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_prim_mst.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/cartridges/cartridge_random_graph.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/grid3d_edge.gdshader",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/grid3d_node.gdshader",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/grid3d_renderer.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/grid3d_substrate.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/grid3d/grid3d_substrate.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/living_paper/living_paper.tscn",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/substrates/living_paper/living_paper_manager.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/commons/ui/text_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/afterword-qfep.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/BOOK_FRAME.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/ENCOUNTER_STATUS.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/iterations/QFEP_READING.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/book/preface.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/ENTRY.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/research/qfep/entropic-morality.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: sources/doc/research/qfep/README.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Connectivity.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Connectivity.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Flow.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Flow.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Foundations.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Foundations.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Layout.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Layout.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Matching.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Matching.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Network_Analysis.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Network_Analysis.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Pathfinding.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Pathfinding.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Spanning_Trees.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space/GT_Spanning_Trees.svg",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: space.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: START_HERE.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: state.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: utility-index.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: voice-examples/Point_One.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: voice-examples/SpeculativeComputation_Rhizome_Network.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: voice-examples/Trans_Scale.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: voice-examples/Tutorial_Tiling_Walls.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: VOICE_EXAMPLES.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: manifest",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Foundations",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Layout",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Pathfinding",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Network_Analysis",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Connectivity",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Spanning_Trees",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Flow",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current GT_Matching",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: shared WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: shared ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current voice Point_One",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current voice SpeculativeComputation_Rhizome_Network",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current voice Trans_Scale",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: current voice Tutorial_Tiling_Walls",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: includes NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: includes placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: includes space.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: includes artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: includes .gdignore",
+      "passed": true
+    },
+    {
+      "check": "graphtheory: one-hall writing assignment",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: archive hash",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: ZIP integrity",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: .gdignore",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: book.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: evidence/README.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: evidence/supplement/doc/book/iterations/2026-09-20-qfep-phi-review/SUMMARY.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: image-index.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: PROJECT_CONTEXT.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: review.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: REVIEW_PRINCIPLES.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sequence.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: SOURCE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/hands/poses/hand_pose_settings.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/hands/poses/pose_point_left.tres",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/hands/poses/pose_point_right.tres",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/hand_pose_area.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/hand_pose_area.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.tres",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/highlight/highlight_ring.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/pickable.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/pickable.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/viewport_2d_in_3d.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/addons/godot-xr-tools/objects/viewport_2d_in_3d_body.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/_embodied/embodied_prop.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/_hangar/hangar_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/bifurcation_walkway/bifurcation_walkway.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/dark_sphere/dark_sphere.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/dark_sphere/dark_sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/dark_sphere/gest_triangle_weaver.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/edge_of_chaos_unlocked/edge_of_chaos_unlocked.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/entropy_fan/entropy_fan.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/entropy_fan/entropy_fan.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/grasp_cabinet/grasp_cabinet.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/grasp_cabinet/grasp_cabinet.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/lambda_hall/lambda_hall.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/lambda_hall/lambda_hall.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/microstate_counter/microstate_counter.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/microstate_counter/microstate_counter.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/orange_and_apples/orange_and_apples.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/orange_and_apples/orange_and_apples.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/possibility_space_cloud/possibility_space_cloud.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/possibility_space_cloud/possibility_space_cloud.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/qfep_balance_workbench/qfep_balance_workbench.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/science_screen/science_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/science_screen/science_screen.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/shannon_workbench/shannon_workbench.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/shannon_workbench/shannon_workbench.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/synthesis/synthesis_stand.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/artifacts/synthesis/synthesis_stand.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/audio/rack_templates/RackTemplates.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/audio/runtime/CubeAudioPlayer.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/context/clipboard/codeDisplay.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/context/clipboard/codeDisplay.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/context/clipboard/tutorial_text_library.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/grid/artifact_identity.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/grid/GridCommon.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/grid/GridStructureComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/grid/GridUtilitiesComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/grid/UtilityRegistry.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/hazards/head_crab/head_crab.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interactables/push_button.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interactables/slider_horizontal.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/bifurcation_walkway.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/bifurcation_walkway.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/chaos_particles.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/chaos_particles.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/complexity_pattern.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/complexity_pattern.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/dissolving_form.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/dissolving_form.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/edge_core.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/edge_core.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/entropy_meter.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/entropy_meter.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/fluid_form.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/fluid_form.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/formula_display/qfep_formula_3d.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/formula_display/qfep_formula_3d.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/formula_display/synthesis_reading_study.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/lambda_promenade.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/lambda_promenade.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/lambda_slider.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/lambda_slider.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/ordered_grid.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/ordered_grid.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/particle_chaos.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/particle_chaos.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/phase_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/phase_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/phi_slider.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/phi_slider.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/preserved_pattern.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/preserved_pattern.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/qfep_reactor.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/qfep_reactor.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/random_cubes.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/random_cubes.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/reactive_particle_field.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/reactive_particle_field.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/rigid_sculpture.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/rigid_sculpture.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/sandbox_wiring_study.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/transforming_pattern.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/transforming_pattern.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/turing_pattern.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/interfaces/qfep/turing_pattern.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/Crisis_Synthesis/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_E_Term/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Edge_Of_Chaos/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_F_Term/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Introduction/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Lambda_Spectrum/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Phi_Term/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Sandbox/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/critical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/final.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/intent.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/summary.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/technical.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/maps/QFEP_Synthesis/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/chalkboard/chalkboard.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/crystalcluster/crystalcluster.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/crystalcluster/crystalcluster.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/logic_display/category_logic_display.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/logic_display/CategoryLogicDisplay.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/logic_display/CategoryLogicDisplayUI.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/panels/DigitalPaper/TextUIControl.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/panels/DigitalPaper/TouchScrollContainer.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/point/grab_sphere.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/point/grab_sphere_point.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/point/grab_sphere_point_with_color.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/point/point_color.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/point/point_mesh.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/point/qfep_term_grasp.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/qfep_chalkboard/qfep_chalkboard.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/qfep_chalkboard/qfep_chalkboard.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/puzzles/snap_octahedron_puzzle.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/puzzles/snap_tetrahedron_puzzle.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/snap_connection_manager.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/snap_line.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/snap_point.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/snap_point.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/snap_tetrahedron.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/primitives/snappoint/snap_triangle.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/render/pbr_kit.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/resourses/shaders/PinkTeleport.gdshader",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/resourses/shaders/SimpleGrid.gdshader",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/main_menu/components/linear_progress.gdshader",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/overhead_light.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/overhead_light.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/subtitle_trigger.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/subtitle_trigger.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/teleport.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/teleport_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/word_is.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/scenes/mapobjects/word_is.tscn",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/control_panel.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/control_value_surface.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/display_mount.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/exhibit_control_mount.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/interface_presets.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/physical_parameter_console.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/ui/text_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/commons/utils/baked_text_albedo.gd",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/afterword-qfep.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/BOOK_FRAME.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/ENCOUNTER_STATUS.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/iterations/QFEP_READING.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/book/preface.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/ENTRY.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/research/qfep/entropic-morality.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: sources/doc/research/qfep/README.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_E_Term.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_E_Term.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Edge_Of_Chaos.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Edge_Of_Chaos.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_F_Term.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_F_Term.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Introduction.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Introduction.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Lambda_Spectrum.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Lambda_Spectrum.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Phi_Term.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Phi_Term.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Sandbox.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Sandbox.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Synthesis.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space/QFEP_Synthesis.svg",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: space.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: START_HERE.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: state.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: utility-index.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: voice-examples/Point_One.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: voice-examples/SpeculativeComputation_Rhizome_Network.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: voice-examples/Trans_Scale.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: voice-examples/Tutorial_Tiling_Walls.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: VOICE_EXAMPLES.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: manifest",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_Introduction",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_F_Term",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_E_Term",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_Lambda_Spectrum",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_Phi_Term",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_Edge_Of_Chaos",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_Sandbox",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current QFEP_Synthesis",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: shared WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: shared ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current voice Point_One",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current voice SpeculativeComputation_Rhizome_Network",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current voice Trans_Scale",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: current voice Tutorial_Tiling_Walls",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: includes NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: includes placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: includes space.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: includes artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: includes .gdignore",
+      "passed": true
+    },
+    {
+      "check": "qfeplaboratory: one-hall writing assignment",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: archive hash",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: ZIP integrity",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: .gdignore",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: book.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: evidence/README.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: evidence/supplement/doc/book/iterations/2026-09-20-boolean-review/SUMMARY.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: image-index.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: PROJECT_CONTEXT.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: review.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: REVIEW_PRINCIPLES.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sequence.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: SOURCE_GUIDE.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_architecture_cavity.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_architecture_cavity.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_compose_workbench.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_compose_workbench.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_difference_demo.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_difference_demo.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_intersection_demo.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_intersection_demo.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_union_demo.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/boolean_surfaces/csg_union_demo.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/booleansurfaces/coincident_face/coincident_face.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/booleansurfaces/coincident_face/coincident_face.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/fractals/cantorset/cantor_set.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/fractals/recursive_boolean_cube.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/fractals/recursive_boolean_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/primitives/booleans/booleanvariations.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/primitives/booleans/booleanvariations.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/destructibles/csg_cut_sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/destructibles/octree_sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/destructibles/planar_cut_sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/destructibles/sectored_sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/destructibles/segmented_sphere.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/sphere_splitting_showcase.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/algorithms/vectors/08_vector_throwing/throw_ball.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/_embodied/embodied_prop.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/boolean_burrow/boolean_burrow.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/boolean_burrow/boolean_burrow.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/removal_room/removal_room.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/removal_room/removal_room.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/sdf_cavern_room/sdf_cavern_room.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/sdf_cavern_room/sdf_cavern_room.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/subtraction_suite/subtraction_suite.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/subtraction_suite/subtraction_suite.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/the_argument_of_solids/the_argument_of_solids.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/artifacts/the_argument_of_solids/the_argument_of_solids.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/audio/runtime/CubeAudioPlayer.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/grid/GridCommon.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/grid/GridStructureComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/grid/GridUtilitiesComponent.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/grid/UtilityRegistry.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/critical.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/final.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/intent.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/technical.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Gallery/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/critical.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/final.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/intent.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/technical.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Verbs/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/blurb.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/critical.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/final.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/intent.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/map_data.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/technical.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/Boolean_Works/tutorial.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/ISO_RhizomeBody/final.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/maps/SwarmIntelligence_PhysarumColony/final.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/primitives/cubes/grab_cube.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/primitives/fontana_puncture/fontana_puncture.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/resourses/shaders/PinkTeleport.gdshader",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/scenes/endless_museum.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/scenes/mapobjects/spawn_point_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/scenes/mapobjects/teleport.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/scenes/mapobjects/teleport_scene.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/scenes/mapobjects/word_is.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/scenes/mapobjects/word_is.tscn",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/commons/ui/text_screen.gd",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/afterword-qfep.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/BOOK_FRAME.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/ENCOUNTER_STATUS.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/iterations/2026-09-23-scale-door-and-body/door-and-body.png",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/iterations/2026-09-23-tiling-wall-and-outside/two-turns.png",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/iterations/QFEP_READING.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/book/preface.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/ENTRY.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/research/qfep/entropic-morality.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: sources/doc/research/qfep/README.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space/Boolean_Gallery.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space/Boolean_Gallery.svg",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space/Boolean_Verbs.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space/Boolean_Verbs.svg",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space/Boolean_Works.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space/Boolean_Works.svg",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: space.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: START_HERE.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: state.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: utility-index.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: voice-examples/Point_One.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: voice-examples/SpeculativeComputation_Rhizome_Network.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: voice-examples/Trans_Scale.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: voice-examples/Tutorial_Tiling_Walls.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: VOICE_EXAMPLES.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: manifest",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current Boolean_Verbs",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current Boolean_Gallery",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current Boolean_Works",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: shared WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: shared ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current voice Point_One",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current voice SpeculativeComputation_Rhizome_Network",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current voice Trans_Scale",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: current voice Tutorial_Tiling_Walls",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: includes NEIGHBOURS.md",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: includes placed-source-snapshot.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: includes space.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: includes artifact-index.json",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: includes .gdignore",
+      "passed": true
+    },
+    {
+      "check": "boolean_surfaces: one-hall writing assignment",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror .gdignore",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror index.html",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/boolean_surfaces/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/boolean_surfaces/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/boolean_surfaces/review.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/graphtheory/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/graphtheory/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/graphtheory/review.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/machinelearning/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/machinelearning/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/machinelearning/review.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/qfeplaboratory/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/qfeplaboratory/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/qfeplaboratory/review.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/softbodies/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/softbodies/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "Reading mirror packages/softbodies/review.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP ASSESSMENT.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP WRITING_BRIEF.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP index.html",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/boolean_surfaces/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/boolean_surfaces/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/boolean_surfaces/review.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/graphtheory/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/graphtheory/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/graphtheory/review.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/machinelearning/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/machinelearning/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/machinelearning/review.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/qfeplaboratory/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/qfeplaboratory/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/qfeplaboratory/review.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/softbodies/ASSIGNMENT.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/softbodies/COPY_TO_CLAUDE.md",
+      "passed": true
+    },
+    {
+      "check": "HTTP packages/softbodies/review.md",
+      "passed": true
+    }
+  ]
+}

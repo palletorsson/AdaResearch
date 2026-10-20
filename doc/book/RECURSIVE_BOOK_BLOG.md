@@ -1,6 +1,6 @@
 # The architecture of a book that can simulate itself
 
-Draft · 14 October 2026. The linked companion records exist; the proposed height comparison has not run in Godot.
+Draft · 14 October 2026. The height comparison now runs in Godot, with scoped observations and independent text reviews. A human encounter and independent reconstruction remain unrecorded.
 
 The Ada Research book brings passages into relation with computational artifacts, programming lessons and records of observation. A reader can follow its literary sequence without installing the museum. They can also reconstruct a selected mechanism or follow an unfinished question into the research behind the chapter.
 
@@ -24,6 +24,6 @@ The readable book need not display this history after every sentence. A companio
 
 The book can therefore help produce knowledge that was unavailable when its writing began. Its sentences can initiate experiments; their consequences can redirect its future work. For this to happen, proposition, simulation, execution, observation and interpretation must remain distinguishable. A plausible account of software cannot stand in for an encounter with it.
 
-The next step is small: one retained set of values, two explicit interpretations, an actual comparison and a passage willing to change.
+The first scripted comparison found a small but consequential problem: a record could look unchanged while its decimal values had shifted. The tutorial now makes exact preservation part of reconstruction. The final keeps its question open. The next step is a person returning to these values, testing the continuation and deciding whether the changed arrangement warrants another experiment.
 
 [Architecture and proposed work](RECURSIVE_ARCHITECTURE.md) · [First experiment proposition](experiments/random-definition/seed-bench-001/proposition.md)

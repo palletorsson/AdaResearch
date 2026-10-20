@@ -1,0 +1,4753 @@
+{
+  "meta": {
+    "date": "2026-10-02",
+    "scope": "Source-audited planning atlas; no game or spine edits.",
+    "entries": 100,
+    "distinct_artist_labels": 99,
+    "categories": 12,
+    "profiles": 24,
+    "candidate_artifacts": 37,
+    "candidate_artifacts_with_direct_spine_tokens": 19,
+    "maps_scanned": 204,
+    "sequences_scanned": 25,
+    "judgements": {
+      "reuse": 10,
+      "compose": 38,
+      "develop": 32,
+      "research": 20
+    },
+    "artist_evidence": "Descriptions and search URLs supplied by the user; not independently verified art history.",
+    "placement_scope": "Exact registry key in layers.interactables in current active-spine map_data.json files. No direct token does not exclude generated, nested, branch or dynamic placement.",
+    "readiness_scope": "Capability gates use the declared ladder, whose nodes currently have proposed status. They do not prove a finished tutorial, student competence or artifact runtime health."
+  },
+  "profiles": {
+    "hinge": {
+      "id": "hinge",
+      "title": "Articulate joined planes",
+      "artifacts": [
+        "bicho_hinge"
+      ],
+      "capabilities": [
+        "face",
+        "rotation",
+        "constraint"
+      ],
+      "proposed_home": "Transformation → Form Finding",
+      "operation": "Nested plate transforms, bounded hinge angles and XR hinge/handle wiring.",
+      "limit": "An articulated construction with a fixed root. The hinge-and-return companion now tests desktop dragging and release. No physical XR trial, gravity settling or plate-collision rejection is established.",
+      "probe": "Change one hinge limit; release a plate and check which poses remain reachable.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "constraint",
+        "coordinates",
+        "descent",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "point",
+        "rate",
+        "rotation",
+        "trace",
+        "transform",
+        "vector",
+        "xr"
+      ],
+      "build_gate_sequence": "formfinding",
+      "build_gate_order": 8,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "bend": {
+      "id": "bend",
+      "title": "Bend a surface without changing its connections",
+      "artifacts": [
+        "fold_wall"
+      ],
+      "capabilities": [
+        "mesh",
+        "rotation"
+      ],
+      "proposed_home": "Primitives mesh → Transformation; return in Form Finding",
+      "operation": "Fixed triangle connectivity; vertex positions rotate in a cascade with an authored sine billow.",
+      "limit": "The inspected fold wall is a set of built stages. Its drape is a formula, not cloth settling under force.",
+      "probe": "Hold vertices and faces fixed; vary fold amount and compare the silhouette and passage.",
+      "prerequisite_closure": [
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "rotation",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "transformation",
+      "build_gate_order": 2,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "cloth": {
+      "id": "cloth",
+      "title": "Hang and settle a connected sheet",
+      "artifacts": [
+        "cloth_simulation",
+        "cloth_loom",
+        "cloth_straps"
+      ],
+      "capabilities": [
+        "array",
+        "force",
+        "constraint",
+        "soft"
+      ],
+      "proposed_home": "Soft Bodies",
+      "operation": "Spring-grid cloth, pinned points, gravity, wind and hanging SoftBody strips.",
+      "limit": "Different solvers and collision models. Self-contact, tearing and material accuracy require separate checks.",
+      "probe": "Move one pin or change stiffness; compare the settled shape with the same gravity.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "constraint",
+        "coordinates",
+        "descent",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "point",
+        "rate",
+        "soft",
+        "trace",
+        "transform",
+        "vector",
+        "xr"
+      ],
+      "build_gate_sequence": "softbodies",
+      "build_gate_order": 17,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "soft": {
+      "id": "soft",
+      "title": "Let a body deform or retain a settled form",
+      "artifacts": [
+        "rounded_softbody",
+        "frozen_glass_vessel"
+      ],
+      "capabilities": [
+        "mesh",
+        "force",
+        "constraint",
+        "soft"
+      ],
+      "proposed_home": "Soft Bodies / Form Finding",
+      "operation": "Deformation with pressure/strain readouts; a vessel built by a finite settling pass.",
+      "limit": "A bounding-box volume proxy is not enclosed volume. A frozen settled mesh is not a continuously live body.",
+      "probe": "Keep the mesh and loading fixed; compare pressure feedback on and off.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "constraint",
+        "coordinates",
+        "descent",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "point",
+        "rate",
+        "soft",
+        "trace",
+        "transform",
+        "vector",
+        "xr"
+      ],
+      "build_gate_sequence": "softbodies",
+      "build_gate_order": 17,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "repeat": {
+      "id": "repeat",
+      "title": "Repeat an element and expose a small deviation",
+      "artifacts": [
+        "molnar_cube_study",
+        "agnes_martin_grid_painting"
+      ],
+      "capabilities": [
+        "array",
+        "transform"
+      ],
+      "proposed_home": "Arrays / Tiling",
+      "operation": "Fixed indexed frame sites with repeatable deviations; a separate low-contrast procedural line grid.",
+      "limit": "A resemblance to a grid does not establish the historical work’s actual score or material procedure.",
+      "probe": "Hold every address fixed; change one offset or the line contrast.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "trace",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "array_tutorial",
+      "build_gate_order": 3,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "suspend": {
+      "id": "suspend",
+      "title": "Keep addresses while fragments change",
+      "artifacts": [
+        "reference_suspension"
+      ],
+      "capabilities": [
+        "array",
+        "mesh"
+      ],
+      "proposed_home": "Arrays → a return through Randomness",
+      "operation": "75 generated fragments at retained positions, with vertical rods and a variation control.",
+      "limit": "A verified standalone geometry study; no fracture history, dynamic suspension or installed spine placement.",
+      "probe": "Change the fragments and verify that every centre stays put.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "trace",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "array_tutorial",
+      "build_gate_order": 3,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "assemble": {
+      "id": "assemble",
+      "title": "Pick up parts and compose an arrangement",
+      "artifacts": [
+        "found_object_assembler"
+      ],
+      "capabilities": [
+        "instances",
+        "transform",
+        "xr"
+      ],
+      "proposed_home": "Colour / composition",
+      "operation": "XR-pickable primitive offcuts and an assembly table that claims and snaps resting fragments.",
+      "limit": "Parts are generated offcuts, not an arbitrary archive importer or automatic Boolean union.",
+      "probe": "Place the same seven pieces twice; change only one placement constraint.",
+      "prerequisite_closure": [
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "instances",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "transformation",
+      "build_gate_order": 2,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "network": {
+      "id": "network",
+      "title": "Grow or reconnect a spatial graph",
+      "artifacts": [
+        "rhizomatic_structure"
+      ],
+      "capabilities": [
+        "line",
+        "array",
+        "growth",
+        "graph"
+      ],
+      "proposed_home": "Procedural Generation / Graphs",
+      "operation": "Seeded node positions, branching and optional lateral reconnections drawn as branches.",
+      "limit": "Drawn edges do not provide tensile mechanics, knots, provenance or navigable clearance by themselves.",
+      "probe": "Keep the nodes; remove lateral links and compare connected routes.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "coordinates",
+        "distribution",
+        "enclosure",
+        "face",
+        "field",
+        "field_body",
+        "force",
+        "grammar",
+        "grammar_space",
+        "graph",
+        "growth",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "noise",
+        "oscillation",
+        "point",
+        "random",
+        "rate",
+        "recursion",
+        "rotation",
+        "scale",
+        "threshold",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "graphtheory",
+      "build_gate_order": 22,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "void": {
+      "id": "void",
+      "title": "Use one void to make a room and a positive",
+      "artifacts": [
+        "facade_room_cast"
+      ],
+      "capabilities": [
+        "enclosure",
+        "boolean"
+      ],
+      "proposed_home": "Boolean Surfaces",
+      "operation": "One interior definition feeds CSG subtraction and intersection, with collision enabled.",
+      "limit": "A digital positive from a shared volume; physical casting, demolition and the history of a dwelling are not simulated.",
+      "probe": "Move one opening and check that both the room and positive retain its trace.",
+      "prerequisite_closure": [
+        "base",
+        "boolean",
+        "coordinates",
+        "enclosure",
+        "face",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "scale",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "boolean_surfaces",
+      "build_gate_order": 19,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "reflection": {
+      "id": "reflection",
+      "title": "Return the actual viewer through a surface",
+      "artifacts": [
+        "super_drag_mirror",
+        "mirror"
+      ],
+      "capabilities": [
+        "transform",
+        "light",
+        "shader"
+      ],
+      "proposed_home": "Colour for appearance; Shaders for the rendering apparatus",
+      "operation": "The wardrobe mirror uses a reflected camera and off-axis frustum in a shared-world viewport.",
+      "limit": "The generic mirror prop only assigns a metallic material. The working planar camera does not supply curved or recursive mirrors, or stereo-per-eye XR reflections.",
+      "probe": "Move the actual camera sideways and check reflected parallax before multiplying mirrors.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "colour",
+        "colour_space",
+        "coordinates",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "inscription",
+        "light",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "noise",
+        "oscillation",
+        "pattern",
+        "point",
+        "primitive",
+        "random",
+        "rate",
+        "rotation",
+        "shader",
+        "tile",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "shaders",
+      "build_gate_order": 12,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "planes": {
+      "id": "planes",
+      "title": "Make overlap and passage through coloured planes",
+      "artifacts": [
+        "color_constellation_office"
+      ],
+      "capabilities": [
+        "colour",
+        "light",
+        "transform"
+      ],
+      "proposed_home": "Colour / Color_Walls",
+      "operation": "The planes layout separates coloured sheets, routes and work positions; filter/opaque comparison retains geometry.",
+      "limit": "Layered alpha tint, not spectral transmission or an optically accurate two-way mirror.",
+      "probe": "Take one sideways step, then switch opacity without moving the partitions.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "colour",
+        "coordinates",
+        "enclosure",
+        "face",
+        "light",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "primitive",
+        "trace",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "color",
+      "build_gate_order": 4,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "light": {
+      "id": "light",
+      "title": "Build a room around changing illumination",
+      "artifacts": [
+        "colour_light_rooms"
+      ],
+      "capabilities": [
+        "light",
+        "colour_space"
+      ],
+      "proposed_home": "Colour",
+      "operation": "A white chamber with a central changing light; connected apertures with luminous rims, lights and a ramp.",
+      "limit": "Rendered illumination and open geometry, not a measured psychophysical Ganzfeld or a volumetric mist model.",
+      "probe": "Hold surface colour fixed while changing the source; compare at two eye heights.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "colour",
+        "colour_space",
+        "coordinates",
+        "enclosure",
+        "face",
+        "light",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "primitive",
+        "trace",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "color",
+      "build_gate_order": 4,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "trace": {
+      "id": "trace",
+      "title": "Retain the movement of a specific input",
+      "artifacts": [
+        "head_trace_projection"
+      ],
+      "capabilities": [
+        "coordinates",
+        "trace"
+      ],
+      "proposed_home": "Primitives / Point Trace",
+      "operation": "Headset or labelled desktop-camera samples retained as a spatial path and floor projection.",
+      "limit": "Head/camera position includes locomotion. It is not foot tracking, mocap, biometric sensing or evidence of lived experience.",
+      "probe": "Repeat a walk; distinguish measured position, projection and the gaps in sampling.",
+      "prerequisite_closure": [
+        "base",
+        "coordinates",
+        "line",
+        "loop",
+        "point",
+        "trace",
+        "xr"
+      ],
+      "build_gate_sequence": "primitives",
+      "build_gate_order": 1,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "passage": {
+      "id": "passage",
+      "title": "Make a dimension into a condition of passage",
+      "artifacts": [
+        "reference_passage",
+        "scale_me"
+      ],
+      "capabilities": [
+        "scale",
+        "threshold",
+        "xr"
+      ],
+      "proposed_home": "Transformation / Scale and Body",
+      "operation": "A variable opening tested against a fixed capsule; scaling an authored furnished room.",
+      "limit": "One chosen collider is not a universal body. An opening-width test cannot stand in for a real social border.",
+      "probe": "Keep the visitor collider fixed; find the smallest opening it can cross.",
+      "prerequisite_closure": [
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "rotation",
+        "scale",
+        "threshold",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "transformation",
+      "build_gate_order": 2,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "body": {
+      "id": "body",
+      "title": "Assemble a synthetic body and change its pose",
+      "artifacts": [
+        "reference_plural_body",
+        "super_drag_mirror"
+      ],
+      "capabilities": [
+        "instances",
+        "transform",
+        "shader_body"
+      ],
+      "proposed_home": "Primitives as parts → Shaders / Queer Rubber",
+      "operation": "A six-arm, three-head primitive construction with an unfolding parameter; a separate actual-player wardrobe.",
+      "limit": "The plural body is a geometric pose, not a rigged avatar, face scan, soft-body solver or authored choreography.",
+      "probe": "Keep the parts; alter their attachment or pose and identify what must become jointed.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "colour",
+        "colour_space",
+        "coordinates",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "inscription",
+        "instances",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "noise",
+        "oscillation",
+        "pattern",
+        "point",
+        "primitive",
+        "random",
+        "rate",
+        "rotation",
+        "shader",
+        "shader_body",
+        "tile",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "shaders",
+      "build_gate_order": 12,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "surface": {
+      "id": "surface",
+      "title": "Let a rule move across surfaces",
+      "artifacts": [
+        "reference_pattern_garden",
+        "glitch_mirror"
+      ],
+      "capabilities": [
+        "pattern",
+        "shader",
+        "shader_body"
+      ],
+      "proposed_home": "Shaders",
+      "operation": "Shared pattern coordinates across room and flowers; a procedural RGB-triad/banding display.",
+      "limit": "A generated glitch image is not actual codec corruption; a surface effect need not change collision.",
+      "probe": "Freeze geometry; move the shared pattern and follow one boundary between objects.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "colour",
+        "colour_space",
+        "coordinates",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "inscription",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "noise",
+        "oscillation",
+        "pattern",
+        "point",
+        "primitive",
+        "random",
+        "rate",
+        "rotation",
+        "shader",
+        "shader_body",
+        "tile",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "shaders",
+      "build_gate_order": 12,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "agents": {
+      "id": "agents",
+      "title": "Let local state continue to change a world",
+      "artifacts": [
+        "ecosystem_simulation",
+        "boid_manager"
+      ],
+      "capabilities": [
+        "motion",
+        "array",
+        "agent"
+      ],
+      "proposed_home": "Swarm Intelligence; broader ecology in Procedural Generation",
+      "operation": "Predator/prey/food updates and local flocking rules, with authored configuration and population controls.",
+      "limit": "Simplified agent rules and sometimes a stabilising restock policy; not an open-ended trained-agent world.",
+      "probe": "Hold the seed; disable one stabiliser or local rule and compare population history.",
+      "prerequisite_closure": [
+        "agent",
+        "array",
+        "base",
+        "cell",
+        "colour",
+        "colour_space",
+        "coordinates",
+        "enclosure",
+        "face",
+        "field",
+        "inscription",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "pattern",
+        "point",
+        "primitive",
+        "random",
+        "rate",
+        "rotation",
+        "tile",
+        "trace",
+        "transform",
+        "vector",
+        "xr"
+      ],
+      "build_gate_sequence": "swarmintelligence",
+      "build_gate_order": 20,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "learning": {
+      "id": "learning",
+      "title": "Distinguish a learning diagram from a trained model",
+      "artifacts": [
+        "neural_networks_vr",
+        "generative_adversarial_networks_gans_vr"
+      ],
+      "capabilities": [
+        "learning",
+        "network",
+        "learned_memory"
+      ],
+      "proposed_home": "Machine Learning",
+      "operation": "Spatial network and GAN-role diagrams are present; their construction and animated metrics can be inspected.",
+      "limit": "The inspected GAN code advances illustrative losses with time and trains no model. A dataset-to-generative-image pipeline is not established by these artifacts.",
+      "probe": "Demand a real input, saved weights, a computed loss and a held-out output before calling it training.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "coordinates",
+        "descent",
+        "distribution",
+        "enclosure",
+        "face",
+        "field",
+        "grammar",
+        "grammar_space",
+        "learned_memory",
+        "learning",
+        "line",
+        "loop",
+        "mesh",
+        "network",
+        "point",
+        "random",
+        "rate",
+        "recursion",
+        "rotation",
+        "scale",
+        "selection",
+        "threshold",
+        "trace",
+        "transform",
+        "vector",
+        "xr"
+      ],
+      "build_gate_sequence": "machinelearning",
+      "build_gate_order": 21,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "signals": {
+      "id": "signals",
+      "title": "Put a retained record or live view on displays",
+      "artifacts": [
+        "signal_room",
+        "monitorsystem"
+      ],
+      "capabilities": [
+        "array",
+        "tile",
+        "clock_pattern",
+        "random"
+      ],
+      "proposed_home": "Arrays → Randomness; monitor rendering is borrowed",
+      "operation": "A verified whole-room binary-array study; a separate multi-camera viewport monitor system.",
+      "limit": "The signal room contains a synthetic balanced inventory, not Ikeda’s encoded source data. Neither is a video editor or a biometric input device.",
+      "probe": "Keep the inventory, change neighbours, then state which display pixels came from which source.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "clock_pattern",
+        "coordinates",
+        "enclosure",
+        "face",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "random",
+        "rotation",
+        "tile",
+        "trace",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "randomness",
+      "build_gate_order": 10,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "inscribe": {
+      "id": "inscribe",
+      "title": "Make a mark or a text field persist",
+      "artifacts": [
+        "ball_painting_demo",
+        "running_text_display"
+      ],
+      "capabilities": [
+        "trace",
+        "inscription"
+      ],
+      "proposed_home": "Primitives trace → Colour / Paint",
+      "operation": "A paint surface with explicit world-to-UV mapping and spray marks; a scrolling text viewport.",
+      "limit": "A visible mark is not an authenticated archive, and a scrolling string is not a spatial narrative editor.",
+      "probe": "Retain one mark; move the surface or viewer and check what coordinate system owns it.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "colour",
+        "colour_space",
+        "coordinates",
+        "enclosure",
+        "face",
+        "inscription",
+        "line",
+        "loop",
+        "mesh",
+        "point",
+        "primitive",
+        "trace",
+        "transform",
+        "xr"
+      ],
+      "build_gate_sequence": "color",
+      "build_gate_order": 4,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "sound": {
+      "id": "sound",
+      "title": "Play a spatial sound and inspect a captured signal",
+      "artifacts": [
+        "soundboxes",
+        "sound_timeline"
+      ],
+      "capabilities": [
+        "loop",
+        "sound",
+        "trace"
+      ],
+      "proposed_home": "Wave Functions / Sound",
+      "operation": "SoundBox requests a stream from SoundBank and plays it through AudioStreamPlayer3D. The timeline separately captures the Master bus and draws a retained sample buffer.",
+      "limit": "SoundBox needs the SoundBank autoload and a valid collection. The timeline playback flag only advances its display: no captured-audio replay is wired. Its function named FFT averages time-domain samples, not spectral bins. Recording provenance and testimony are additional work.",
+      "probe": "Trigger a known SoundBank sound and compare its spatial playback with captured samples; implement and verify replay before describing the timeline as a recorder.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "oscillation",
+        "point",
+        "rate",
+        "rotation",
+        "sound",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "wavefunctions",
+      "build_gate_order": 9,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "power": {
+      "id": "power",
+      "title": "Expose an authored rule of seeing or refusal",
+      "artifacts": [
+        "surveillance_panopticon",
+        "refusal_booth"
+      ],
+      "capabilities": [
+        "threshold",
+        "proxy",
+        "situation"
+      ],
+      "proposed_home": "Critical returns; main placement must follow verified hosts",
+      "operation": "An asymmetrical tower/cell arrangement with changing cone emphasis; a refusal record display.",
+      "limit": "The inspected cones are visual apparatus, not proof of actual surveillance detection. A staged rule does not recreate labour, violence, ownership or collective politics.",
+      "probe": "Name the actual rule, the person or object it acts on, and the evidence the apparatus records.",
+      "prerequisite_closure": [
+        "agent",
+        "array",
+        "assumption",
+        "base",
+        "cell",
+        "cell_field",
+        "collective_search",
+        "colour",
+        "colour_space",
+        "constraint",
+        "coordinates",
+        "coupling",
+        "descent",
+        "distribution",
+        "enclosure",
+        "face",
+        "field",
+        "field_body",
+        "force",
+        "geometry_return",
+        "grammar",
+        "grammar_space",
+        "graph",
+        "growth",
+        "inscription",
+        "instances",
+        "learning",
+        "limit",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "noise",
+        "oscillation",
+        "path",
+        "pattern",
+        "point",
+        "primitive",
+        "proxy",
+        "random",
+        "rate",
+        "recursion",
+        "refinement",
+        "rotation",
+        "scale",
+        "selection",
+        "situation",
+        "soft",
+        "threshold",
+        "tile",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "postfoundationscrisis",
+      "build_gate_order": 25,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "terrain": {
+      "id": "terrain",
+      "title": "Turn a sampled field into a surface",
+      "artifacts": [
+        "noise_terrain"
+      ],
+      "capabilities": [
+        "noise",
+        "field_body"
+      ],
+      "proposed_home": "Noise → Procedural Generation",
+      "operation": "Seeded noise is sampled as mesh height with a terrain-collision construction path.",
+      "limit": "Generated topography is not a surveyed site or a landscape’s social/ecological history.",
+      "probe": "Change one field parameter while retaining the seed and compare visible height with support.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "coordinates",
+        "enclosure",
+        "face",
+        "field",
+        "field_body",
+        "force",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "noise",
+        "oscillation",
+        "point",
+        "random",
+        "rate",
+        "rotation",
+        "scale",
+        "threshold",
+        "trace",
+        "transform",
+        "vector",
+        "wave",
+        "xr"
+      ],
+      "build_gate_sequence": "noise",
+      "build_gate_order": 11,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    },
+    "gravity": {
+      "id": "gravity",
+      "title": "Make a force assumption visible",
+      "artifacts": [
+        "gravity_well",
+        "cloth_simulation"
+      ],
+      "capabilities": [
+        "force",
+        "motion",
+        "constraint"
+      ],
+      "proposed_home": "Forces → Form Finding → Soft Bodies",
+      "operation": "Particles accelerate along an authored surface gradient; cloth has explicit gravity and constraints.",
+      "limit": "The well is a force analogy, not general relativity. Buoyancy, tensile architecture and a traversable slide need their own mechanics and tests.",
+      "probe": "Hold initial state; vary one force and record both motion and its retained path.",
+      "prerequisite_closure": [
+        "array",
+        "base",
+        "constraint",
+        "coordinates",
+        "descent",
+        "enclosure",
+        "face",
+        "field",
+        "force",
+        "line",
+        "loop",
+        "mesh",
+        "motion",
+        "point",
+        "rate",
+        "trace",
+        "transform",
+        "vector",
+        "xr"
+      ],
+      "build_gate_sequence": "formfinding",
+      "build_gate_order": 8,
+      "gate_basis": "Declared capability requirements and their transitive prerequisites. This is a proposed making gate, not a runtime or learner certification."
+    }
+  },
+  "artifacts": {
+    "agnes_martin_grid_painting": {
+      "id": "agnes_martin_grid_painting",
+      "name": "Agnes Martin Grid Painting",
+      "scene": "commons/context/agnesnatringrid/agnes_grid_3d.tscn",
+      "registries": [
+        "commons/artifacts/registry/commons_artifacts.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/context/agnesnatringrid/agnes_grid.gd",
+          "line": 15,
+          "marker": "func _draw",
+          "sha256": "c819533be9ae96e8804646cb47c1dda506dc83f50f6c9e07e27a07b24b689551",
+          "snapshot": "sources/commons_context_agnesnatringrid_agnes_grid.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "ball_painting_demo": {
+      "id": "ball_painting_demo",
+      "name": "ball_painting_demo",
+      "scene": "commons/context/drawingboard/ball_painting_demo_v2.tscn",
+      "registries": [
+        "commons/artifacts/registry/commons_artifacts.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "color",
+          "map": "Color_Paint",
+          "path": "commons/maps/Color_Paint/map_data.json",
+          "address": [
+            15,
+            12
+          ],
+          "token": "ball_painting_demo:0:0.5#automated:true#tools:spray"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/context/drawingboard/paper_draw_surface.gd",
+          "line": 85,
+          "marker": "func ",
+          "sha256": "cc516fd4220831de470928aa64119ebbb0d653e540008b4d2356ec16bbc5ded8",
+          "snapshot": "sources/commons_context_drawingboard_paper_draw_surface.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "bicho_hinge": {
+      "id": "bicho_hinge",
+      "name": "Hinged plates — after Clark",
+      "scene": "commons/artifacts/bicho_hinge/bicho_hinge.tscn",
+      "registries": [
+        "commons/artifacts/registry/bicho_hinge.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/bicho_hinge/bicho_hinge.gd",
+          "line": 349,
+          "marker": "func _build_hinge",
+          "sha256": "5ab93ba2e0813fc566e9d495c7b7b729549a6d30186467ebd3087a984cddb780",
+          "snapshot": "sources/commons_artifacts_bicho_hinge_bicho_hinge.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "boid_manager": {
+      "id": "boid_manager",
+      "name": "boid_manager",
+      "scene": "algorithms/emergentsystems/boidflocking/boid_manager.tscn",
+      "registries": [
+        "commons/artifacts/registry/algorithms_misc.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "swarmintelligence",
+          "map": "SwarmIntelligence_Boids_Algorithm",
+          "path": "commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json",
+          "address": [
+            8,
+            5
+          ],
+          "token": "boid_manager"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/emergentsystems/boidflocking/boid_manager.gd",
+          "line": 135,
+          "marker": "func ",
+          "sha256": "bec64516299de374fd6c1de5d7cac2c92ff0d11c585e0d6776bfd7d75b158d44",
+          "snapshot": "sources/algorithms_emergentsystems_boidflocking_boid_manager.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "cloth_loom": {
+      "id": "cloth_loom",
+      "name": "Cloth Loom (all surface, no inside)",
+      "scene": "commons/artifacts/cloth_loom/cloth_loom.tscn",
+      "registries": [
+        "commons/artifacts/registry/soft_bodies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/cloth_loom/cloth_loom.gd",
+          "line": 35,
+          "marker": "func ",
+          "sha256": "39826d7a53faa9ceae09a45628f3c6c55024be260d5fe716197f32fbbc0f1b85",
+          "snapshot": "sources/commons_artifacts_cloth_loom_cloth_loom.gd.html"
+        },
+        {
+          "path": "commons/soft_body/soft_body_shapes.gd",
+          "line": 24,
+          "marker": "static func make_cloth",
+          "sha256": "4e8eddb6a7991c1fa2ca92d5279f0056ac380971170af474e61fc452dd668ac7",
+          "snapshot": "sources/commons_soft_body_soft_body_shapes.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "cloth_simulation": {
+      "id": "cloth_simulation",
+      "name": "Cloth Simulation",
+      "scene": "algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
+      "registries": [
+        "commons/artifacts/registry/physics_simulation.json",
+        "commons/artifacts/registry/soft_bodies.json"
+      ],
+      "duplicate_note": "Two registry definitions share the same scene; metadata may differ.",
+      "declared_map_ready": [
+        true,
+        true
+      ],
+      "declared_include_in_map_data": [
+        true,
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "algorithms/physicssimulation/clothsimulation/ClothSimulation.gd",
+          "line": 111,
+          "marker": "func ",
+          "sha256": "671e1261956e0de0cefbf6ad420c91e05f967dbbcb2754bffc4ed53e27dc8b05",
+          "snapshot": "sources/algorithms_physicssimulation_clothsimulation_ClothSimulation.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "cloth_straps": {
+      "id": "cloth_straps",
+      "name": "Cloth Straps",
+      "scene": "algorithms/softbodies/cloth_straps/cloth_straps.tscn",
+      "registries": [
+        "commons/artifacts/registry/soft_bodies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "softbodies",
+          "map": "SoftBodies_Cloth_Physics",
+          "path": "commons/maps/SoftBodies_Cloth_Physics/map_data.json",
+          "address": [
+            10,
+            8
+          ],
+          "token": "cloth_straps#lesson:true"
+        },
+        {
+          "sequence": "softbodies",
+          "map": "SoftBodies_Carusell",
+          "path": "commons/maps/SoftBodies_Carusell/map_data.json",
+          "address": [
+            23,
+            7
+          ],
+          "token": "cloth_straps"
+        },
+        {
+          "sequence": "softbodies",
+          "map": "SoftBodies_Carusell",
+          "path": "commons/maps/SoftBodies_Carusell/map_data.json",
+          "address": [
+            39,
+            7
+          ],
+          "token": "cloth_straps:0:-0.5"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/softbodies/cloth_straps/cloth_straps.gd",
+          "line": 108,
+          "marker": "func ",
+          "sha256": "874be7113ef10a7dd72ac565ce468a1aa1e4c79e1436cfe896cc3dc55890c1ff",
+          "snapshot": "sources/algorithms_softbodies_cloth_straps_cloth_straps.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "color_constellation_office": {
+      "id": "color_constellation_office",
+      "name": "color_constellation_office",
+      "scene": "algorithms/color/color_mixing/color_constellation_office.tscn",
+      "registries": [
+        "commons/artifacts/registry/color.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "color",
+          "map": "Color_Walls",
+          "path": "commons/maps/Color_Walls/map_data.json",
+          "address": [
+            20,
+            23
+          ],
+          "token": "color_constellation_office:0:0:1#layout:planes#compare:visibility#plinth:0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/color/color_mixing/color_constellation_office.gd",
+          "line": 75,
+          "marker": "func ",
+          "sha256": "5ec0093334b09565d2f59034e7d75ebddae90c24699a3230c641ea14bf768bf1",
+          "snapshot": "sources/algorithms_color_color_mixing_color_constellation_office.gd.html"
+        },
+        {
+          "path": "algorithms/color/color_mixing/office_planes.gd",
+          "line": 22,
+          "marker": "func ",
+          "sha256": "7ca55e0805af4a8d4188c78412447ff6bc2036a792a364b203dd195d6e27e0f9",
+          "snapshot": "sources/algorithms_color_color_mixing_office_planes.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "colour_light_rooms": {
+      "id": "colour_light_rooms",
+      "name": "White room / open light",
+      "scene": "commons/artifacts/colour_light_rooms/colour_light_rooms.tscn",
+      "registries": [
+        "commons/artifacts/registry/commons_artifacts.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        null
+      ],
+      "declared_include_in_map_data": [
+        null
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "color",
+          "map": "Color_Flashlight",
+          "path": "commons/maps/Color_Flashlight/map_data.json",
+          "address": [
+            10,
+            25
+          ],
+          "token": "colour_light_rooms:0:0:1#plinth:0#pin:1#offset:-0.50,0.00,-0.50"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/colour_light_rooms/colour_light_rooms.gd",
+          "line": 20,
+          "marker": "func ",
+          "sha256": "8d7e72fce2e4ecc0368106008a25078b880937f53bbf41ab9ab7107a3cbf8940",
+          "snapshot": "sources/commons_artifacts_colour_light_rooms_colour_light_rooms.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "ecosystem_simulation": {
+      "id": "ecosystem_simulation",
+      "name": "Ecosystem Simulation",
+      "scene": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.tscn",
+      "registries": [
+        "commons/artifacts/registry/algorithms_misc.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "swarmintelligence",
+          "map": "SwarmIntelligence_FlowFields",
+          "path": "commons/maps/SwarmIntelligence_FlowFields/map_data.json",
+          "address": [
+            6,
+            1
+          ],
+          "token": "ecosystem_simulation"
+        },
+        {
+          "sequence": "swarmintelligence",
+          "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+          "path": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/map_data.json",
+          "address": [
+            6,
+            5
+          ],
+          "token": "ecosystem_simulation:0:0:2#plinth:0.8#show_care_log:on"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd",
+          "line": 454,
+          "marker": "func balance_ecosystem",
+          "sha256": "a87b095424fa6028796e3f22a0994006128da773c34cea14bac6c1d421acc560",
+          "snapshot": "sources/algorithms_emergentsystems_ecosystemsimulation_ecosystem.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "facade_room_cast": {
+      "id": "facade_room_cast",
+      "name": "The Room and Its Volume",
+      "scene": "commons/artifacts/facade_room_cast/facade_room_cast.tscn",
+      "registries": [
+        "commons/artifacts/registry/facade_room_cast.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/facade_room_cast/facade_room_cast.gd",
+          "line": 48,
+          "marker": "func _interior",
+          "sha256": "910581da5a3695d645214fe4920ff62797189137d23054effd7c8c13db3aeb87",
+          "snapshot": "sources/commons_artifacts_facade_room_cast_facade_room_cast.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "fold_wall": {
+      "id": "fold_wall",
+      "name": "Fold Wall / Curtain",
+      "scene": "commons/fold_system/fold_wall.tscn",
+      "registries": [
+        "commons/artifacts/registry/hazards.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/fold_system/fold_wall.gd",
+          "line": 75,
+          "marker": "func _build_stages",
+          "sha256": "45c8c734fa05ee82d89cfcc5ff7eff2fcf76dc6b586e589f28fa59bb271227dd",
+          "snapshot": "sources/commons_fold_system_fold_wall.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "found_object_assembler": {
+      "id": "found_object_assembler",
+      "name": "Found Object Assembler",
+      "scene": "commons/artifacts/found_object_assembler/found_object_assembler.tscn",
+      "registries": [
+        "commons/artifacts/registry/commons_artifacts.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/found_object_assembler/found_object_assembler.gd",
+          "line": 416,
+          "marker": "func _seat",
+          "sha256": "c5d38ba39487225e65b63858f21b7e6d8c1144c93b52786ff11ebd533500f7c6",
+          "snapshot": "sources/commons_artifacts_found_object_assembler_found_object_assembler.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "frozen_glass_vessel": {
+      "id": "frozen_glass_vessel",
+      "name": "Frozen Glass Vessel",
+      "scene": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.tscn",
+      "registries": [
+        "commons/artifacts/registry/soft_bodies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "formfinding",
+          "map": "FormFinding_Relaxation",
+          "path": "commons/maps/FormFinding_Relaxation/map_data.json",
+          "address": [
+            2,
+            9
+          ],
+          "token": "frozen_glass_vessel:90"
+        },
+        {
+          "sequence": "softbodies",
+          "map": "SoftBodies_Playground_of_Joy",
+          "path": "commons/maps/SoftBodies_Playground_of_Joy/map_data.json",
+          "address": [
+            13,
+            20
+          ],
+          "token": "frozen_glass_vessel"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd",
+          "line": 55,
+          "marker": "func ",
+          "sha256": "cac707219105508095ad4679f9bd80ab66eb74c6c32f3e1cea61cc9de7693c02",
+          "snapshot": "sources/commons_artifacts_frozen_glass_vessel_frozen_glass_vessel.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "generative_adversarial_networks_gans_vr": {
+      "id": "generative_adversarial_networks_gans_vr",
+      "name": "GenerativeAdversarialNetworksGANs_VR",
+      "scene": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.tscn",
+      "registries": [
+        "commons/artifacts/registry/machinelearning.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "machinelearning",
+          "map": "ML_Generative",
+          "path": "commons/maps/ML_Generative/map_data.json",
+          "address": [
+            11,
+            9
+          ],
+          "token": "generative_adversarial_networks_gans_vr:0:0:0.65"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd",
+          "line": 63,
+          "marker": "func _process",
+          "sha256": "a38673e26a0afa689ae0ae370150f1d41ef3e61ac79c50de5ca69f51c62dc238",
+          "snapshot": "sources/algorithms_machinelearning_generative_adversarial_networks_GANs_GenerativeAdversarialNetworksGANs_VR.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "glitch_mirror": {
+      "id": "glitch_mirror",
+      "name": "Glitch Mirror",
+      "scene": "commons/artifacts/glitch_mirror/glitch_mirror.tscn",
+      "registries": [
+        "commons/artifacts/registry/color.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        null
+      ],
+      "declared_include_in_map_data": [
+        null
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/glitch_mirror/glitch_mirror.gd",
+          "line": 28,
+          "marker": "func ",
+          "sha256": "2a4fc86c54171e42916aa38e6a97c77725728c17d43d918d27832c4f289de110",
+          "snapshot": "sources/commons_artifacts_glitch_mirror_glitch_mirror.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "gravity_well": {
+      "id": "gravity_well",
+      "name": "Gravity Well",
+      "scene": "algorithms/physicssimulation/gravitywell/gravitywell.tscn",
+      "registries": [
+        "commons/artifacts/registry/physics_simulation.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "forces",
+          "map": "VFM_07_Gravity",
+          "path": "commons/maps/VFM_07_Gravity/map_data.json",
+          "address": [
+            43,
+            4
+          ],
+          "token": "gravity_well"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/physicssimulation/gravitywell/gravitywell.gd",
+          "line": 205,
+          "marker": "func _physics_process",
+          "sha256": "a3de00ff87ffdb7ef3c974633b350ccbbee372b1ae57c57630c3c664dd8d06e0",
+          "snapshot": "sources/algorithms_physicssimulation_gravitywell_gravitywell.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "head_trace_projection": {
+      "id": "head_trace_projection",
+      "name": "A line you did not hold",
+      "scene": "commons/artifacts/head_trace_projection/head_trace_projection.tscn",
+      "registries": [
+        "commons/artifacts/registry/primitives.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/head_trace_projection/head_trace_projection.gd",
+          "line": 58,
+          "marker": "func _accept_position",
+          "sha256": "3a10a5c95c2e5437ad47b385e50a553c150f48616897a43f1971bbbb3f2954bf",
+          "snapshot": "sources/commons_artifacts_head_trace_projection_head_trace_projection.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "mirror": {
+      "id": "mirror",
+      "name": "Mirror",
+      "scene": "commons/artifacts/mirror/mirror.tscn",
+      "registries": [
+        "commons/artifacts/registry/lab.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/mirror/mirror.gd",
+          "line": 89,
+          "marker": "func ",
+          "sha256": "1baf8b5eaa769c10c9f56723d5cf426ba4e577a6aa5fb5de0d3c6aef492def1c",
+          "snapshot": "sources/commons_artifacts_mirror_mirror.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "molnar_cube_study": {
+      "id": "molnar_cube_study",
+      "name": "At each address, a decision - after Molnar",
+      "scene": "commons/artifacts/molnar_cube_study/molnar_cube_study.tscn",
+      "registries": [
+        "commons/artifacts/registry/molnar_cube_study.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "array_tutorial",
+          "map": "Array",
+          "path": "commons/maps/Array/map_data.json",
+          "address": [
+            16,
+            10
+          ],
+          "token": "molnar_cube_study:180:0#plinth:0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/molnar_cube_study/molnar_cube_study.gd",
+          "line": 45,
+          "marker": "func frame_pose",
+          "sha256": "767dda480e30a02692f240fbb9b71d5ccc042dc68dd371a314faab2138b1d3ae",
+          "snapshot": "sources/commons_artifacts_molnar_cube_study_molnar_cube_study.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "monitorsystem": {
+      "id": "monitorsystem",
+      "name": "monitorsystem",
+      "scene": "commons/monitor/monitorsystem.tscn",
+      "registries": [
+        "commons/artifacts/registry/commons_artifacts.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/monitor/monitorsystem.gd",
+          "line": 28,
+          "marker": "func ",
+          "sha256": "63559fab0f24f31010d03522be0589231d1f82e7b4f545e24ea381057dcf6832",
+          "snapshot": "sources/commons_monitor_monitorsystem.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "neural_networks_vr": {
+      "id": "neural_networks_vr",
+      "name": "NeuralNetworks_VR",
+      "scene": "algorithms/machinelearning/neural_networks/NeuralNetworks_VR.tscn",
+      "registries": [
+        "commons/artifacts/registry/machinelearning.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "machinelearning",
+          "map": "ML_Neural_Networks",
+          "path": "commons/maps/ML_Neural_Networks/map_data.json",
+          "address": [
+            8,
+            2
+          ],
+          "token": "neural_networks_vr:0:0:0.6"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/machinelearning/neural_networks/NeuralNetworks_VR.gd",
+          "line": 134,
+          "marker": "func ",
+          "sha256": "457f5fd276bb404d2c75ec3f1bd3b383676896dbf13d7a4d49a7fa1e43a63efb",
+          "snapshot": "sources/algorithms_machinelearning_neural_networks_NeuralNetworks_VR.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "noise_terrain": {
+      "id": "noise_terrain",
+      "name": "Noise Terrain",
+      "scene": "algorithms/randomness/noiseterrain/noiseterrain.tscn",
+      "registries": [
+        "commons/artifacts/registry/randomness.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "algorithms/randomness/noiseterrain/noiseterrain.gd",
+          "line": 430,
+          "marker": "func create_terrain_collision",
+          "sha256": "dc3d9a9b2ca0b972a01692c4bddf8fa078597dbba4940a1dcf85502dbe461876",
+          "snapshot": "sources/algorithms_randomness_noiseterrain_noiseterrain.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "reference_passage": {
+      "id": "reference_passage",
+      "name": "Who fits through?",
+      "scene": "commons/artifacts/spine_studies/passage.tscn",
+      "registries": [
+        "commons/artifacts/registry/reference_studies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "transformation",
+          "map": "Trans_Scale",
+          "path": "commons/maps/Trans_Scale/map_data.json",
+          "address": [
+            30,
+            10
+          ],
+          "token": "reference_passage:180:0#plinth:0#pin:1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/spine_studies/station.gd",
+          "line": 22,
+          "marker": "func ",
+          "sha256": "ac079150948d94be6cb268262bf9bdead9aa0d3c3b97fa0e567bdf22e7e4d51b",
+          "snapshot": "sources/commons_artifacts_spine_studies_station.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "reference_pattern_garden": {
+      "id": "reference_pattern_garden",
+      "name": "The pattern crosses over",
+      "scene": "commons/artifacts/spine_studies/garden.tscn",
+      "registries": [
+        "commons/artifacts/registry/reference_studies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "shaders",
+          "map": "Shader_05_Patterns",
+          "path": "commons/maps/Shader_05_Patterns/map_data.json",
+          "address": [
+            20,
+            10
+          ],
+          "token": "reference_pattern_garden:180:0#plinth:0#pin:1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/spine_studies/station.gd",
+          "line": 22,
+          "marker": "func ",
+          "sha256": "ac079150948d94be6cb268262bf9bdead9aa0d3c3b97fa0e567bdf22e7e4d51b",
+          "snapshot": "sources/commons_artifacts_spine_studies_station.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "reference_plural_body": {
+      "id": "reference_plural_body",
+      "name": "A body in the plural",
+      "scene": "commons/artifacts/spine_studies/body.tscn",
+      "registries": [
+        "commons/artifacts/registry/reference_studies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "shaders",
+          "map": "Shader_12_PinkExtravaganza",
+          "path": "commons/maps/Shader_12_PinkExtravaganza/map_data.json",
+          "address": [
+            26,
+            10
+          ],
+          "token": "reference_plural_body:180:0#plinth:0#pin:1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/spine_studies/station.gd",
+          "line": 22,
+          "marker": "func ",
+          "sha256": "ac079150948d94be6cb268262bf9bdead9aa0d3c3b97fa0e567bdf22e7e4d51b",
+          "snapshot": "sources/commons_artifacts_spine_studies_station.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "reference_suspension": {
+      "id": "reference_suspension",
+      "name": "A place still held",
+      "scene": "commons/artifacts/spine_studies/suspension.tscn",
+      "registries": [
+        "commons/artifacts/registry/reference_studies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "array_tutorial",
+          "map": "Tutorial_3D",
+          "path": "commons/maps/Tutorial_3D/map_data.json",
+          "address": [
+            56,
+            10
+          ],
+          "token": "reference_suspension:180:0#plinth:0#pin:1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/spine_studies/station.gd",
+          "line": 22,
+          "marker": "func ",
+          "sha256": "ac079150948d94be6cb268262bf9bdead9aa0d3c3b97fa0e567bdf22e7e4d51b",
+          "snapshot": "sources/commons_artifacts_spine_studies_station.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "refusal_booth": {
+      "id": "refusal_booth",
+      "name": "Refusal Booth",
+      "scene": "commons/artifacts/refusal_booth/refusal_booth.tscn",
+      "registries": [
+        "commons/artifacts/registry/refusal_booth.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/refusal_booth/refusal_booth.gd",
+          "line": 240,
+          "marker": "func ",
+          "sha256": "39dc5aea15683ef34fb12b52e1fc78b3d858ed5fb1deb89d7c6a1cbced1a7658",
+          "snapshot": "sources/commons_artifacts_refusal_booth_refusal_booth.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "rhizomatic_structure": {
+      "id": "rhizomatic_structure",
+      "name": "Rhizomatic Structure",
+      "scene": "algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+      "registries": [
+        "commons/artifacts/registry/alternative_geometries.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "graphtheory",
+          "map": "GT_Network_Analysis",
+          "path": "commons/maps/GT_Network_Analysis/map_data.json",
+          "address": [
+            2,
+            2
+          ],
+          "token": "rhizomatic_structure:0:0:0.6"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.gd",
+          "line": 148,
+          "marker": "func generate",
+          "sha256": "6306347f88c1c5a9c6dec1b4df474bc9ef6e588d0d0127fb88d9a7b62b004f94",
+          "snapshot": "sources/algorithms_alternativegeometries_rhizomaticstructure_rhizomatic_structure.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "rounded_softbody": {
+      "id": "rounded_softbody",
+      "name": "Rounded SoftBody — Compression Bench",
+      "scene": "algorithms/softbodies/rounded_softbody.tscn",
+      "registries": [
+        "commons/artifacts/registry/soft_bodies.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "algorithms/softbodies/rounded_softbody.gd",
+          "line": 169,
+          "marker": "func ",
+          "sha256": "d3366b148790829c500db50669a6988c18fcfcce0f3590e5986357ddb8b78542",
+          "snapshot": "sources/algorithms_softbodies_rounded_softbody.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "running_text_display": {
+      "id": "running_text_display",
+      "name": "Running Text Display",
+      "scene": "algorithms/criticaltheory/runningtextdisplay/RunningTextDisplay.tscn",
+      "registries": [
+        "commons/artifacts/registry/algorithms_misc.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "algorithms/criticaltheory/runningtextdisplay/running_text_display.gd",
+          "line": 34,
+          "marker": "func ",
+          "sha256": "e34b5813ed84b0f70eee3ee7eafc959250b49f0502890ec0b5f207174266c389",
+          "snapshot": "sources/algorithms_criticaltheory_runningtextdisplay_running_text_display.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "scale_me": {
+      "id": "scale_me",
+      "name": "scale_me",
+      "scene": "algorithms/primitives/scaleme/scale_me.tscn",
+      "registries": [
+        "commons/artifacts/registry/algorithms_misc.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "transformation",
+          "map": "Trans_Scale",
+          "path": "commons/maps/Trans_Scale/map_data.json",
+          "address": [
+            2,
+            10
+          ],
+          "token": "scale_me:0:0:1#encounter:drink_me#plinth:0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "addons/godot-xr-tools/objects/pickable.gd",
+          "line": 120,
+          "marker": "func ",
+          "sha256": "7dbcfb7071722f23649c80e65edeb9773626c86b47f9b7e6af42bcd884fbcde7",
+          "snapshot": "sources/addons_godot-xr-tools_objects_pickable.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "signal_room": {
+      "id": "signal_room",
+      "name": "Different neighbours",
+      "scene": "commons/artifacts/spine_studies/signal.tscn",
+      "registries": [
+        "commons/artifacts/registry/signal_room.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "randomness",
+          "map": "Random_Entropy",
+          "path": "commons/maps/Random_Entropy/map_data.json",
+          "address": [
+            48,
+            12
+          ],
+          "token": "signal_room:180:0#plinth:0#pin:1"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/spine_studies/station.gd",
+          "line": 22,
+          "marker": "func ",
+          "sha256": "ac079150948d94be6cb268262bf9bdead9aa0d3c3b97fa0e567bdf22e7e4d51b",
+          "snapshot": "sources/commons_artifacts_spine_studies_station.gd.html"
+        },
+        {
+          "path": "commons/artifacts/signal_room/score.gd",
+          "line": 8,
+          "marker": "static func make_values",
+          "sha256": "8865ede4ccdaeb2a1f7bf1d227f155daa91e42021d7ed1d23f034abdd83c1afc",
+          "snapshot": "sources/commons_artifacts_signal_room_score.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "sound_timeline": {
+      "id": "sound_timeline",
+      "name": "Sound Timeline",
+      "scene": "algorithms/wavefunctions/soundtimeline/sound_timeline.tscn",
+      "registries": [
+        "commons/artifacts/registry/wavefunctions_extra.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "algorithms/wavefunctions/soundtimeline/TimelineController.gd",
+          "line": 17,
+          "marker": "func ",
+          "sha256": "f9198cb7e2687065fad4bbc02510c1b4b4eb0d8678bff0eeab1e1e7b5437c4f9",
+          "snapshot": "sources/algorithms_wavefunctions_soundtimeline_TimelineController.gd.html"
+        },
+        {
+          "path": "algorithms/wavefunctions/soundtimeline/SoundTimelineVisualizer.gd",
+          "line": 73,
+          "marker": "func setup_audio_system",
+          "sha256": "7f6d0cca57f4d86c11b65dcbe92f511dda3b2b7065ec57fae698810870528f51",
+          "snapshot": "sources/algorithms_wavefunctions_soundtimeline_SoundTimelineVisualizer.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "soundboxes": {
+      "id": "soundboxes",
+      "name": "Dynamic Sound Box",
+      "scene": "algorithms/wavefunctions/sound_box/SoundBox.tscn",
+      "registries": [
+        "commons/artifacts/registry/wavefunctions.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "algorithms/wavefunctions/sound_box/SoundBox.gd",
+          "line": 141,
+          "marker": "func _on_button_triggered",
+          "sha256": "471ad1c9fe449ba3412e35ce2a8299a46b87f70140b47b0ecb07f85c70c6eeb6",
+          "snapshot": "sources/algorithms_wavefunctions_sound_box_SoundBox.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "super_drag_mirror": {
+      "id": "super_drag_mirror",
+      "name": "Super Drag Looking Glass",
+      "scene": "commons/artifacts/super_drag_mirror/super_drag_mirror.tscn",
+      "registries": [
+        "commons/artifacts/registry/super_drag_mirror.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [
+        {
+          "sequence": "tiling",
+          "map": "Pattern_Foundry",
+          "path": "commons/maps/Pattern_Foundry/map_data.json",
+          "address": [
+            35,
+            30
+          ],
+          "token": "super_drag_mirror:180:0"
+        },
+        {
+          "sequence": "tiling",
+          "map": "Ribbon_Patterns_03",
+          "path": "commons/maps/Ribbon_Patterns_03/map_data.json",
+          "address": [
+            7,
+            12
+          ],
+          "token": "super_drag_mirror:0#pin:1#plinth:0"
+        }
+      ],
+      "evidence": [
+        {
+          "path": "commons/artifacts/super_drag_mirror/super_drag_mirror.gd",
+          "line": 130,
+          "marker": "func update_reflection",
+          "sha256": "da5abaf7bdd7ac941fc316f14e4605375f095e8404fda718d3d24cc3e73bfc12",
+          "snapshot": "sources/commons_artifacts_super_drag_mirror_super_drag_mirror.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    },
+    "surveillance_panopticon": {
+      "id": "surveillance_panopticon",
+      "name": "Surveillance Panopticon",
+      "scene": "commons/artifacts/surveillance_panopticon/surveillance_panopticon.tscn",
+      "registries": [
+        "commons/artifacts/registry/commons_artifacts.json"
+      ],
+      "duplicate_note": null,
+      "declared_map_ready": [
+        true
+      ],
+      "declared_include_in_map_data": [
+        true
+      ],
+      "direct_spine_placements": [],
+      "evidence": [
+        {
+          "path": "commons/artifacts/surveillance_panopticon/surveillance_panopticon.gd",
+          "line": 52,
+          "marker": "func ",
+          "sha256": "ac1700ee54df1d6848ea5a2e587c0e617dc2ad7ff8d881dc3b7a7d43b7fa6292",
+          "snapshot": "sources/commons_artifacts_surveillance_panopticon_surveillance_panopticon.gd.html"
+        }
+      ],
+      "evidence_level": "source inspected; no fresh runtime test in this audit"
+    }
+  },
+  "capability_nodes": {
+    "base": {
+      "id": "base",
+      "sequence": "preparation",
+      "label": "A place to run",
+      "requires": [],
+      "kind": "borrow",
+      "learn": "Open, edit, run and stop a supplied scene.",
+      "make": "Change a greeting in the prepared room.",
+      "transfer": "Change a different property and find the result.",
+      "borrow": "Camera, floor, light and editor setup.",
+      "status": "proposed",
+      "halls": []
+    },
+    "xr": {
+      "id": "xr",
+      "sequence": "preparation",
+      "label": "A body and a hand",
+      "requires": [
+        "base"
+      ],
+      "kind": "borrow",
+      "learn": "Use a prepared XR player and controller pickup route.",
+      "make": "A scene in which a supplied object can be held.",
+      "transfer": "Take another prepared object in the same scene.",
+      "borrow": "XR Tools, controller bindings and Quest deployment; portable starter pending.",
+      "status": "proposed",
+      "halls": []
+    },
+    "loop": {
+      "id": "loop",
+      "sequence": "primitives",
+      "label": "Begin once, continue",
+      "requires": [
+        "base"
+      ],
+      "kind": "build",
+      "learn": "Initialise, retain a value and update it.",
+      "make": "A greeting and a changing count.",
+      "transfer": "Change the increment without changing the display machinery.",
+      "borrow": "Prepared labels; engine scheduling.",
+      "status": "proposed",
+      "halls": [
+        "Point_Zero"
+      ]
+    },
+    "point": {
+      "id": "point",
+      "sequence": "primitives",
+      "label": "Give a position a body",
+      "requires": [
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Separate a position, its visible surface, collision and illumination.",
+      "make": "A point whose appearance and physical boundary can differ.",
+      "transfer": "Change the sphere radius while keeping the boundary, or the reverse.",
+      "borrow": "Sphere construction; supplied light and switch. Coordinate reading and pickup follow in their own hall.",
+      "status": "proposed",
+      "halls": [
+        "Point_One"
+      ]
+    },
+    "coordinates": {
+      "id": "coordinates",
+      "sequence": "primitives",
+      "label": "Hold a point, name its reference",
+      "requires": [
+        "point",
+        "xr"
+      ],
+      "kind": "build",
+      "learn": "Use the supplied pickup; read and set X, Y and Z; distinguish local and world positions.",
+      "make": "Two independently positioned markers, ready to become endpoints.",
+      "transfer": "Move one marker in a translated parent; explain why the world address changes.",
+      "borrow": "Production XR pickable, guides and cards. Portable XR starter is still pending.",
+      "status": "proposed",
+      "halls": [
+        "Point_Coordinates"
+      ]
+    },
+    "line": {
+      "id": "line",
+      "sequence": "primitives",
+      "label": "Connect and measure",
+      "requires": [
+        "coordinates",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Relate two positions in one reference frame; measure separation.",
+      "make": "A segment that follows two movable endpoints.",
+      "transfer": "Connect two different objects and preserve its measurement.",
+      "borrow": "Prepared A/B markers, segment.gd cylinder renderer and readout. XR hold remains supplied by the museum.",
+      "status": "desktop-tested",
+      "halls": [
+        "Point_Lines"
+      ]
+    },
+    "trace": {
+      "id": "trace",
+      "sequence": "primitives",
+      "label": "Keep movement",
+      "requires": [
+        "line",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Introduce an ordered list and a condition for retaining a sample.",
+      "make": "A path made from selected positions.",
+      "transfer": "Record a different moving point and compare what is lost.",
+      "borrow": "Input receiver and line-strip rendering.",
+      "status": "proposed",
+      "halls": [
+        "Point_Trace"
+      ]
+    },
+    "grid": {
+      "id": "grid",
+      "sequence": "primitives",
+      "label": "Choose an address",
+      "requires": [
+        "trace"
+      ],
+      "kind": "compare",
+      "learn": "Separate a measured position from a snapped address.",
+      "make": "A retained path and a snapped comparison.",
+      "transfer": "Change spacing while preserving the original trace.",
+      "borrow": "Grid drawing and readouts.",
+      "status": "proposed",
+      "halls": [
+        "Point_Line_Grid"
+      ]
+    },
+    "face": {
+      "id": "face",
+      "sequence": "primitives",
+      "label": "Close edges, give a face",
+      "requires": [
+        "line"
+      ],
+      "kind": "build",
+      "learn": "Close three edges between non-collinear points, then add a face and read its vertex order. Snapping and the carried trace return as further comparisons, not requirements for the first face.",
+      "make": "An editable triangular surface with a visible boundary.",
+      "transfer": "Move a corner; compare a collapsed triangle with a filled one.",
+      "borrow": "Mesh display; the first face needs neither a grid nor the six-corner fan experiment.",
+      "status": "proposed",
+      "halls": [
+        "Point_Triangle_Context"
+      ]
+    },
+    "enclosure": {
+      "id": "enclosure",
+      "sequence": "primitives",
+      "label": "Let faces enclose a region",
+      "requires": [
+        "face"
+      ],
+      "kind": "build",
+      "learn": "Join triangular faces into an open corner; add the missing base to close a tetrahedral surface. Separate enclosure from collision and entry.",
+      "make": "An open and a closed surface using the same four non-coplanar positions.",
+      "transfer": "Remove a different face; compare the visible opening with the supplied convex collision hull.",
+      "borrow": "Preview, face renderer and collision comparison. A single triangle was already a mesh.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Polythedra"
+      ]
+    },
+    "mesh": {
+      "id": "mesh",
+      "sequence": "primitives",
+      "label": "Keep connections, move a corner",
+      "requires": [
+        "enclosure"
+      ],
+      "kind": "build",
+      "learn": "Keep the triangle indices while changing vertex positions; locate the shared diagonal inside a square-looking cube face.",
+      "make": "A cube whose corner can move while its face connections remain.",
+      "transfer": "Change a different corner and predict which faces follow; compare with a rigidly folding net.",
+      "borrow": "Prepared cube indices and the face renderer already used for the enclosure.",
+      "status": "proposed",
+      "halls": [
+        "Point_Animatedcube"
+      ]
+    },
+    "instances": {
+      "id": "instances",
+      "sequence": "primitives",
+      "label": "Reuse a made object",
+      "requires": [
+        "mesh"
+      ],
+      "kind": "build",
+      "learn": "Distinguish a mesh resource, a reusable scene and its placed instances. Arrange familiar parts without rebuilding them.",
+      "make": "An arrangement of two instances of a supplied box scene.",
+      "transfer": "Move one instance while keeping the other in place; then compare changing a shared resource.",
+      "borrow": "Box scene, material and pickup component; explain whether edited resources are shared.",
+      "status": "proposed",
+      "halls": [
+        "Point_Animatedcube"
+      ]
+    },
+    "primitive": {
+      "id": "primitive",
+      "sequence": "primitives",
+      "label": "Inspect the prepared form",
+      "requires": [
+        "mesh"
+      ],
+      "kind": "compare",
+      "learn": "Configure a generated mesh; distinguish a fixed polyhedron from a polygonal approximation of a curved surface.",
+      "make": "A configurable sphere, capsule or ring.",
+      "transfer": "Hold size constant while changing its construction density.",
+      "borrow": "Godot primitive classes and renderer.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Ignorance"
+      ]
+    },
+    "refinement": {
+      "id": "refinement",
+      "sequence": "primitives",
+      "label": "Choose where to stop",
+      "requires": [
+        "primitive",
+        "line"
+      ],
+      "kind": "compare",
+      "learn": "Follow a subdivision rule and compare a finite approximation with a mathematical limit. A tolerance and the last displayed example have different meanings.",
+      "make": "A polygon comparison with a chosen side count and perimeter gap.",
+      "transfer": "Choose a positive tolerance; find a member that meets it without claiming exact equality.",
+      "borrow": "Circle reference, display and subdivision helper; numerical error analysis can wait.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Portals"
+      ]
+    },
+    "geometry_return": {
+      "id": "geometry_return",
+      "sequence": "primitives",
+      "label": "What geometry promises",
+      "requires": [
+        "refinement",
+        "instances"
+      ],
+      "kind": "reflect",
+      "learn": "Recognise familiar operations in an authored arrangement.",
+      "make": "An arrangement whose geometry can be questioned.",
+      "transfer": "Change one relation while preserving a recognisable reference.",
+      "borrow": "Historical context and existing sculptures.",
+      "status": "proposed",
+      "halls": [
+        "Primitives_Melencolia"
+      ]
+    },
+    "transform": {
+      "id": "transform",
+      "sequence": "transformation",
+      "label": "Give a form a changing pose",
+      "requires": [
+        "mesh",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Translate a familiar object; distinguish assignment, interpolation and carrying.",
+      "make": "A moving object with a chosen start and destination.",
+      "transfer": "Move another object along the same route with different timing.",
+      "borrow": "Pickup base, player transport and safe reset.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Pre",
+        "Trans_Introduction",
+        "Trans_Translation"
+      ]
+    },
+    "rotation": {
+      "id": "rotation",
+      "sequence": "transformation",
+      "label": "Turn around a reference",
+      "requires": [
+        "transform"
+      ],
+      "kind": "build",
+      "learn": "Choose a pivot and axis; compare orientation and swept space.",
+      "make": "A rotating form with an observable return.",
+      "transfer": "Move the pivot while keeping the angular change.",
+      "borrow": "Quaternion and collision machinery until required.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Rotation"
+      ]
+    },
+    "scale": {
+      "id": "scale",
+      "sequence": "transformation",
+      "label": "Scale meets a body",
+      "requires": [
+        "transform"
+      ],
+      "kind": "compare",
+      "learn": "Change size relative to a reference and a receiving body.",
+      "make": "A size comparison that changes possible passage.",
+      "transfer": "Change the receiver instead of repeating the same enlargement.",
+      "borrow": "Player scaling infrastructure and safe reset.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Scale"
+      ]
+    },
+    "threshold": {
+      "id": "threshold",
+      "sequence": "transformation",
+      "label": "A changing boundary",
+      "requires": [
+        "rotation",
+        "scale"
+      ],
+      "kind": "compare",
+      "learn": "Combine transforms, proximity and timing; distinguish restoration from memory.",
+      "make": "A boundary that changes what can pass.",
+      "transfer": "Give the same transform a different trigger or return rule.",
+      "borrow": "Detection, door and reset components.",
+      "status": "proposed",
+      "halls": [
+        "Trans_Body",
+        "Trans_Pit"
+      ]
+    },
+    "array": {
+      "id": "array",
+      "sequence": "array_tutorial",
+      "label": "Keep many addresses",
+      "requires": [
+        "transform",
+        "trace"
+      ],
+      "kind": "build",
+      "learn": "Introduce indexing and loops explicitly; distinguish an address from its occupant.",
+      "make": "A row, plane and volume of independently addressable instances.",
+      "transfer": "Remove an occupant without moving the other addresses.",
+      "borrow": "Instancing helper and flight enclosure.",
+      "status": "proposed",
+      "halls": [
+        "Array",
+        "Tutorial_3D"
+      ]
+    },
+    "tile": {
+      "id": "tile",
+      "sequence": "array_tutorial",
+      "label": "A local rule covers a surface",
+      "requires": [
+        "array",
+        "rotation"
+      ],
+      "kind": "build",
+      "learn": "Map a small motif by index; change a rule and one exception separately.",
+      "make": "A small tile study and a larger receiving surface.",
+      "transfer": "Move the same rule from floor to wall.",
+      "borrow": "Tile geometry and display controls.",
+      "status": "proposed",
+      "halls": [
+        "Tutorial_Tiling_Floor",
+        "Tutorial_Tiling_Walls"
+      ]
+    },
+    "clock_pattern": {
+      "id": "clock_pattern",
+      "sequence": "array_tutorial",
+      "label": "Give a pattern time",
+      "requires": [
+        "tile",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Separate stored pattern, step index and playback clock.",
+      "make": "A monochrome floor with a repeatable temporal pattern.",
+      "transfer": "Change timing without changing the stored pattern.",
+      "borrow": "Contact input and sound playback.",
+      "status": "proposed",
+      "halls": [
+        "Tutorial_Disco"
+      ]
+    },
+    "colour": {
+      "id": "colour",
+      "sequence": "color",
+      "label": "Add an attribute",
+      "requires": [
+        "array",
+        "primitive",
+        "transform"
+      ],
+      "kind": "build",
+      "learn": "Attach colour to existing construction without changing its geometry.",
+      "make": "An arrangement whose parts carry chosen colours.",
+      "transfer": "Keep poses fixed while regrouping by colour.",
+      "borrow": "Materials and neutral scene lighting.",
+      "status": "proposed",
+      "halls": [
+        "Color_Context_Placed"
+      ]
+    },
+    "light": {
+      "id": "light",
+      "sequence": "color",
+      "label": "A colour between things",
+      "requires": [
+        "colour"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish surface colour, illumination and appearance.",
+      "make": "A white receiver under a changeable light.",
+      "transfer": "Change the receiver while keeping the light.",
+      "borrow": "Renderer, exposure and material setup.",
+      "status": "proposed",
+      "halls": [
+        "Color_Flashlight"
+      ]
+    },
+    "colour_space": {
+      "id": "colour_space",
+      "sequence": "color",
+      "label": "Navigate a colour choice",
+      "requires": [
+        "colour",
+        "point",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Map a gesture or address to channels; distinguish RGB from HSV.",
+      "make": "A palette that selects and recalls a colour.",
+      "transfer": "Give the same input range a different channel mapping.",
+      "borrow": "Hand receiver and prepared palette display.",
+      "status": "proposed",
+      "halls": [
+        "Color_Nails",
+        "Color_Rainbow",
+        "Color_Pillar",
+        "Color_Grid_Pallet"
+      ]
+    },
+    "inscription": {
+      "id": "inscription",
+      "sequence": "color",
+      "label": "Leave colour somewhere",
+      "requires": [
+        "colour_space",
+        "trace"
+      ],
+      "kind": "compare",
+      "learn": "Separate input, surface contact, persistent mark and visual access.",
+      "make": "A supplied painting surface that retains a chosen mark.",
+      "transfer": "Change the receiving surface and ask what can still be reached.",
+      "borrow": "Spray, texture storage and transparency implementation.",
+      "status": "proposed",
+      "halls": [
+        "Color_Paint",
+        "Color_Walls"
+      ]
+    },
+    "pattern": {
+      "id": "pattern",
+      "sequence": "tiling",
+      "label": "Author a source, repeat it",
+      "requires": [
+        "tile",
+        "colour_space",
+        "inscription"
+      ],
+      "kind": "build",
+      "learn": "Separate source motif, palette, index rule and output surface.",
+      "make": "A pattern made from an authored motif.",
+      "transfer": "Change only the source, then only its repetition rule.",
+      "borrow": "Pattern editor and output preview.",
+      "status": "proposed",
+      "halls": [
+        "Pattern_Disco",
+        "Pattern_Foundry",
+        "Tutorial_Pattern",
+        "Array_Patterns"
+      ]
+    },
+    "symmetry": {
+      "id": "symmetry",
+      "sequence": "tiling",
+      "label": "Transform the repetition",
+      "requires": [
+        "pattern",
+        "rotation"
+      ],
+      "kind": "compare",
+      "learn": "Compose translations, reflections and glides; follow an address across a repeat.",
+      "make": "A controlled comparison of pattern families.",
+      "transfer": "Retain the motif while changing the symmetry rule.",
+      "borrow": "Symmetry catalogue, ribbon mesh and viewing controls.",
+      "status": "proposed",
+      "halls": [
+        "Symmetry_Seventeen",
+        "Ribbon_Patterns_01",
+        "Ribbon_Patterns_02",
+        "Ribbon_Patterns_03"
+      ]
+    },
+    "rate": {
+      "id": "rate",
+      "sequence": "change",
+      "label": "Compare change, accumulate",
+      "requires": [
+        "line",
+        "trace",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Define an independent variable, difference quotient and finite accumulation.",
+      "make": "A small slope and accumulated-area study.",
+      "transfer": "Change the sampling interval and compare its effect.",
+      "borrow": "Plotting and prepared function receiver.",
+      "status": "proposed",
+      "halls": [
+        "Change_Intro"
+      ]
+    },
+    "field": {
+      "id": "field",
+      "sequence": "change",
+      "label": "A rule at every position",
+      "requires": [
+        "rate",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Read a vector-valued rule at a position and define how a receiver uses it.",
+      "make": "A path following samples of a field.",
+      "transfer": "Feed the same field to another receiving rule.",
+      "borrow": "Field display and particle drawing.",
+      "status": "proposed",
+      "halls": [
+        "Flow_Field"
+      ]
+    },
+    "vector": {
+      "id": "vector",
+      "sequence": "forces",
+      "label": "Combine contributions",
+      "requires": [
+        "line",
+        "field"
+      ],
+      "kind": "build",
+      "learn": "Add and subtract displacements; introduce projection when needed.",
+      "make": "An endpoint composed from named contributions.",
+      "transfer": "Translate the construction without changing its vector relation.",
+      "borrow": "Arrow rendering and coordinate guides.",
+      "status": "proposed",
+      "halls": [
+        "Vectors_Act1_WhatAVectorIs",
+        "VFM_02_Operations",
+        "Vectors_Act2_VectorArithmetic"
+      ]
+    },
+    "motion": {
+      "id": "motion",
+      "sequence": "forces",
+      "label": "Let state carry motion",
+      "requires": [
+        "vector",
+        "rate",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Separate position, velocity and acceleration; identify the time step.",
+      "make": "A moving body whose previous velocity matters.",
+      "transfer": "Apply equal commands to bodies with different stored velocities.",
+      "borrow": "Physics engine or a clearly identified integration helper.",
+      "status": "proposed",
+      "halls": [
+        "VFM_05_Launch",
+        "VFM_03_Motion"
+      ]
+    },
+    "force": {
+      "id": "force",
+      "sequence": "forces",
+      "label": "A law and its receiver",
+      "requires": [
+        "motion",
+        "field"
+      ],
+      "kind": "compare",
+      "learn": "Relate force, restoring response, drag, mass and support to a particular receiver.",
+      "make": "A small force study with a held reference condition.",
+      "transfer": "Apply one field to two differently configured bodies.",
+      "borrow": "Collision solver, contact and support instruments.",
+      "status": "proposed",
+      "halls": [
+        "Vectors_Act3_FieldsAndMotion",
+        "Vectors_Act4a_KineticForces",
+        "Vectors_Act4b_Oscillation",
+        "Change_Choreography",
+        "VFM_07_Gravity",
+        "VFM_09_Legs",
+        "VFM_08_Arena",
+        "Vectors_Act5_ForceAsPlace"
+      ]
+    },
+    "descent": {
+      "id": "descent",
+      "sequence": "formfinding",
+      "label": "Follow a criterion",
+      "requires": [
+        "rate",
+        "vector"
+      ],
+      "kind": "build",
+      "learn": "Define a cost, estimate a slope and choose a step.",
+      "make": "A descent that can reach different local endings.",
+      "transfer": "Keep the cost while changing the start or step size.",
+      "borrow": "Landscape display; derivative helper only if explained.",
+      "status": "proposed",
+      "halls": [
+        "FormFinding_Descent"
+      ]
+    },
+    "constraint": {
+      "id": "constraint",
+      "sequence": "formfinding",
+      "label": "Let relations hold a form",
+      "requires": [
+        "force",
+        "mesh",
+        "descent"
+      ],
+      "kind": "build",
+      "learn": "Introduce anchors, rest lengths and iterative relaxation.",
+      "make": "A hanging or relaxed form whose boundary can be edited.",
+      "transfer": "Move an anchor instead of specifying the final shape.",
+      "borrow": "Solver and stable time step.",
+      "status": "proposed",
+      "halls": [
+        "FormFinding_Catenary",
+        "FormFinding_Relaxation",
+        "FormFinding_Equilibrium"
+      ]
+    },
+    "search_cost": {
+      "id": "search_cost",
+      "sequence": "formfinding",
+      "label": "Permit another ending",
+      "requires": [
+        "descent",
+        "constraint"
+      ],
+      "kind": "compare",
+      "learn": "Compare greedy descent with an explicitly supplied random proposal.",
+      "make": "A search whose acceptance rule can be changed.",
+      "transfer": "Keep the proposal stream while changing the criterion.",
+      "borrow": "Seeded proposals before the full Randomness lesson.",
+      "status": "proposed",
+      "halls": [
+        "FormFinding_Annealing",
+        "FormFinding_Forge"
+      ]
+    },
+    "oscillation": {
+      "id": "oscillation",
+      "sequence": "wavefunctions",
+      "label": "A phase gives a return",
+      "requires": [
+        "rotation",
+        "force",
+        "trace"
+      ],
+      "kind": "build",
+      "learn": "Relate a phase and amplitude to position; compare prescribed motion and dynamics.",
+      "make": "A repeated movement and its recorded projection.",
+      "transfer": "Change phase independently of amplitude or rate.",
+      "borrow": "Trigonometric function and drawing helpers.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_Intro",
+        "WaveFunctions_Pendulum",
+        "WaveFunctions_Sine_Space",
+        "WaveFunctions_Unit_Circle"
+      ]
+    },
+    "wave": {
+      "id": "wave",
+      "sequence": "wavefunctions",
+      "label": "Send and combine a wave",
+      "requires": [
+        "oscillation",
+        "field"
+      ],
+      "kind": "build",
+      "learn": "Use position and time in a wave rule; add contributions or modulate a parameter.",
+      "make": "A wave field or displaced column.",
+      "transfer": "Use the same values for a different receiver.",
+      "borrow": "Surface construction and audio buffer when needed.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_3D_Wave_Propagation",
+        "WaveFunctions_Effect_Sound",
+        "Wavefunctions_Bernini"
+      ]
+    },
+    "sound": {
+      "id": "sound",
+      "sequence": "wavefunctions",
+      "label": "An event gives sound a beginning",
+      "requires": [
+        "wave",
+        "loop"
+      ],
+      "kind": "compare",
+      "learn": "Separate sampled signal, trigger, envelope and captured silence.",
+      "make": "A prepared voice with controllable onset and duration.",
+      "transfer": "Trigger the same voice twice and compare independent state.",
+      "borrow": "Audio device, buffers and microphone permissions.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_John_Cage",
+        "WaveFunctions_AirMusic",
+        "Wavefunctions_Sky_Stairs"
+      ]
+    },
+    "synthesis": {
+      "id": "synthesis",
+      "sequence": "wavefunctions",
+      "label": "Many components, one result",
+      "requires": [
+        "wave",
+        "sound",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Sum known components while keeping their amounts and shared phase.",
+      "make": "A small additive instrument.",
+      "transfer": "Remove one component and locate its consequence.",
+      "borrow": "Signal display and audio output.",
+      "status": "proposed",
+      "halls": [
+        "WaveFunctions_TrigWalkingPath",
+        "WaveFunctions_Synthesis_Lab"
+      ]
+    },
+    "random": {
+      "id": "random",
+      "sequence": "randomness",
+      "label": "Keep a procedure, vary a draw",
+      "requires": [
+        "array",
+        "transform",
+        "loop"
+      ],
+      "kind": "build",
+      "learn": "Introduce seed, sample and eligibility; use a draw in an existing operation.",
+      "make": "A repeatable random arrangement or walk.",
+      "transfer": "Keep the draws while changing how they are interpreted.",
+      "borrow": "Random generator implementation.",
+      "status": "proposed",
+      "halls": [
+        "Random_Definition",
+        "Random_Entropy",
+        "Random_Remove",
+        "Randomness_10_PRINT_Algorithm",
+        "Random_Cubes",
+        "Random_Rotate_Random_XYZ",
+        "Random_Walk"
+      ]
+    },
+    "distribution": {
+      "id": "distribution",
+      "sequence": "randomness",
+      "label": "A sample has an account",
+      "requires": [
+        "random",
+        "trace",
+        "field"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish distribution, sample, boundary and record; follow a draw into a consequence.",
+      "make": "A sampled population and its histogram or path.",
+      "transfer": "Change the admissible set without changing the sampling method.",
+      "borrow": "Histogram, trail display and game receiver.",
+      "status": "proposed",
+      "halls": [
+        "Random_Gaussian",
+        "Random_Mushrooms",
+        "Random_Space_Geometry",
+        "Randomness_Examples_of_Randomness",
+        "Random_Pheromone",
+        "Random_Space",
+        "Random_Game"
+      ]
+    },
+    "noise": {
+      "id": "noise",
+      "sequence": "noise",
+      "label": "Sample a related field",
+      "requires": [
+        "random",
+        "field",
+        "wave"
+      ],
+      "kind": "build",
+      "learn": "Distinguish independent draws from spatially related samples; scale the input domain.",
+      "make": "A field mapped to height or colour.",
+      "transfer": "Feed the same sample values into another mapping.",
+      "borrow": "Noise algorithm implementation and mesh receiver.",
+      "status": "proposed",
+      "halls": [
+        "Random_Noise_Types",
+        "Noise_Columns",
+        "Noise_One",
+        "Noise_Voxel",
+        "Noise_6_Wall",
+        "Noise_Inside_Noise"
+      ]
+    },
+    "field_body": {
+      "id": "field_body",
+      "sequence": "noise",
+      "label": "A field becomes support",
+      "requires": [
+        "noise",
+        "mesh",
+        "threshold"
+      ],
+      "kind": "compare",
+      "learn": "Separate a scalar value, a threshold, a visible surface and a collider.",
+      "make": "A terrain comparison with explicit support.",
+      "transfer": "Keep the field while changing height or passage threshold.",
+      "borrow": "Terrain meshing and safe walking support.",
+      "status": "proposed",
+      "halls": [
+        "Noise_Space_10",
+        "Noise_Perlin_Simplex",
+        "Lab_Path"
+      ]
+    },
+    "shader": {
+      "id": "shader",
+      "sequence": "shaders",
+      "label": "A rule for a surface sample",
+      "requires": [
+        "noise",
+        "colour",
+        "pattern"
+      ],
+      "kind": "build",
+      "learn": "Introduce shader input coordinates and output colour before complex effects.",
+      "make": "A small material with a controllable pattern.",
+      "transfer": "Apply the same rule to a second mesh.",
+      "borrow": "ShaderMaterial setup and rendering pipeline.",
+      "status": "proposed",
+      "halls": [
+        "Shader_01_Shaping",
+        "Shader_05_Patterns"
+      ]
+    },
+    "shader_body": {
+      "id": "shader_body",
+      "sequence": "shaders",
+      "label": "Displace, layer, remember",
+      "requires": [
+        "shader",
+        "mesh",
+        "wave"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish vertex displacement, layered fields and persistent texture state.",
+      "make": "A material study whose visible and physical boundaries can differ.",
+      "transfer": "Keep geometry fixed while changing the shading rule.",
+      "borrow": "Collision remains separate; reaction-diffusion feedback supplied before CA.",
+      "status": "proposed",
+      "halls": [
+        "Shader_11_QueerRubber",
+        "Shader_09_FBM",
+        "Shader_12_PinkExtravaganza",
+        "Shader_10_ReactionDiffusion"
+      ]
+    },
+    "cell": {
+      "id": "cell",
+      "sequence": "cellularautomata",
+      "label": "A local rule remembers",
+      "requires": [
+        "array",
+        "loop",
+        "pattern"
+      ],
+      "kind": "build",
+      "learn": "Introduce neighbours, discrete state and separate current/next buffers.",
+      "make": "A small grid that steps one generation at a time.",
+      "transfer": "Change one neighbourhood rule and inspect the global pattern.",
+      "borrow": "Display and neighbour-boundary policy made explicit.",
+      "status": "proposed",
+      "halls": [
+        "CA_Introduction",
+        "CA_ElementaryRules",
+        "CA_GameOfLife",
+        "CA_BeyondBinary"
+      ]
+    },
+    "cell_field": {
+      "id": "cell_field",
+      "sequence": "cellularautomata",
+      "label": "Change what a state can be",
+      "requires": [
+        "cell",
+        "field",
+        "distribution"
+      ],
+      "kind": "compare",
+      "learn": "Extend binary state to graded values; compare inputs and paired histories.",
+      "make": "A local update with a readable difference between two runs.",
+      "transfer": "Keep the initial state while changing one coupling.",
+      "borrow": "Display; graded-field and multi-state examples.",
+      "status": "proposed",
+      "halls": [
+        "CA_ExpandingSpace",
+        "CA_SoftRules",
+        "CA_AgentsCircuits",
+        "CA_EdgeOfChaos"
+      ]
+    },
+    "recursion": {
+      "id": "recursion",
+      "sequence": "fractals",
+      "label": "Replace a part with a rule",
+      "requires": [
+        "mesh",
+        "transform",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Introduce a terminating recursive step and a depth budget.",
+      "make": "A bounded recursively constructed curve or volume.",
+      "transfer": "Keep endpoints while replacing what lies between them.",
+      "borrow": "Mesh batching and safe geometry budget.",
+      "status": "proposed",
+      "halls": [
+        "Fractal_Recursion",
+        "Fractal_RecursiveTrees",
+        "Fractal_CantorSet",
+        "Fractal_KochSierpinski",
+        "Fractal_MengerSponge",
+        "Fractal_GoldenSpiral",
+        "Fractal_Synthesis"
+      ]
+    },
+    "grammar": {
+      "id": "grammar",
+      "sequence": "lsystems",
+      "label": "Rewrite, then interpret",
+      "requires": [
+        "recursion",
+        "line",
+        "rotation"
+      ],
+      "kind": "build",
+      "learn": "Separate a symbol sequence from its geometric reading; introduce a state stack.",
+      "make": "A rewritten sentence read by a moving point.",
+      "transfer": "Read the same sentence with another angle or interpretation.",
+      "borrow": "Turtle drawing and stack preview.",
+      "status": "proposed",
+      "halls": [
+        "LSystems_Grammar_Lab",
+        "LSystems_Growth",
+        "LSystems_Grammars_And_Curves"
+      ]
+    },
+    "grammar_space": {
+      "id": "grammar_space",
+      "sequence": "lsystems",
+      "label": "A rule becomes a place",
+      "requires": [
+        "grammar",
+        "mesh",
+        "threshold"
+      ],
+      "kind": "compare",
+      "learn": "Carry a grammar into width, support, competition and face operations.",
+      "make": "An architectural or form-grammar variant.",
+      "transfer": "Preserve the rule while changing which faces or resources qualify.",
+      "borrow": "Generation budgets and full-scale support.",
+      "status": "proposed",
+      "halls": [
+        "LSystems_Architecture",
+        "LSystems_Competition",
+        "LSystems_Living",
+        "LSystems_Shape_Grammars",
+        "Assemblage_Same_Desire"
+      ]
+    },
+    "selection": {
+      "id": "selection",
+      "sequence": "proceduralgeneration",
+      "label": "Build, score, choose",
+      "requires": [
+        "grammar_space",
+        "random",
+        "descent"
+      ],
+      "kind": "build",
+      "learn": "Separate a genome, its constructed body and the criterion that selects it.",
+      "make": "A small population with inspectable selection.",
+      "transfer": "Use another score on the same candidates.",
+      "borrow": "Population display and mutation source.",
+      "status": "proposed",
+      "halls": [
+        "PG_Genetic_Evolution"
+      ]
+    },
+    "growth": {
+      "id": "growth",
+      "sequence": "proceduralgeneration",
+      "label": "A connection needs room",
+      "requires": [
+        "grammar_space",
+        "field_body",
+        "distribution"
+      ],
+      "kind": "build",
+      "learn": "Choose a local growth/connection rule; distinguish connectivity from bodily clearance.",
+      "make": "A growing network and a carved route.",
+      "transfer": "Change eligibility or width while keeping the initial points.",
+      "borrow": "Neighbour search and carving/meshing; graph vocabulary returns later.",
+      "status": "proposed",
+      "halls": [
+        "PG_Space_Colonization",
+        "PG_Branching_Growth",
+        "PG_Percolation_Network",
+        "PG_Caves_Mazes",
+        "PG_Sculpted_Forms",
+        "PG_Mirrored_Patterns"
+      ]
+    },
+    "soft": {
+      "id": "soft",
+      "sequence": "softbodies",
+      "label": "Keep a body in relation",
+      "requires": [
+        "constraint",
+        "mesh",
+        "force"
+      ],
+      "kind": "compare",
+      "learn": "Vary pins, pressure and constitutive settings independently of presentation.",
+      "make": "A supplied deformable body with an authored boundary condition.",
+      "transfer": "Change an attachment rather than its visible form.",
+      "borrow": "Soft-body solver, stable mesh and collision setup.",
+      "status": "proposed",
+      "halls": [
+        "SoftBodies_Soft_Body_Deformation",
+        "SoftBodies_Cloth_Physics",
+        "SoftBodies_Carusell",
+        "SoftBodies_Obsticals",
+        "SoftBodies_Obsticals_Part2",
+        "SoftBodies_Playground_of_Joy",
+        "SoftBodies_Affect_Theory_Visualization"
+      ]
+    },
+    "reaction": {
+      "id": "reaction",
+      "sequence": "softbodies",
+      "label": "Two fields change each other",
+      "requires": [
+        "cell_field",
+        "noise",
+        "rate"
+      ],
+      "kind": "build",
+      "learn": "Separate local reaction, diffusion, update step and display.",
+      "make": "A small two-field update with controllable coupling.",
+      "transfer": "Hold the start and change one response term.",
+      "borrow": "Field storage and surface extraction where used.",
+      "status": "proposed",
+      "halls": [
+        "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "Topology_Entropy_Morphogenesis"
+      ]
+    },
+    "iso": {
+      "id": "iso",
+      "sequence": "isosurfaces",
+      "label": "Extract a boundary",
+      "requires": [
+        "field_body",
+        "face",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Sample a scalar field; choose a level; interpolate crossings before assembling faces.",
+      "make": "A small sampled volume with an inspectable surface.",
+      "transfer": "Change threshold without changing the source field.",
+      "borrow": "Marching-cubes case table and mesh plumbing.",
+      "status": "proposed",
+      "halls": [
+        "ISO_Introduction",
+        "ISO_LookupTable",
+        "ISO_ShapesGallery",
+        "ISO_TorusGyroid"
+      ]
+    },
+    "implicit": {
+      "id": "implicit",
+      "sequence": "isosurfaces",
+      "label": "Compose the condition",
+      "requires": [
+        "iso",
+        "noise",
+        "trace"
+      ],
+      "kind": "compare",
+      "learn": "Edit contributions and domains; distinguish a height map from a volume.",
+      "make": "A cavity, terrain or joined field surface.",
+      "transfer": "Keep the extractor and replace the field.",
+      "borrow": "Meshing, collision and rebuild scheduling.",
+      "status": "proposed",
+      "halls": [
+        "ISO_Sculpting",
+        "ISO_FlatTerrain",
+        "ISO_PortalLandscape",
+        "ISO_Caves",
+        "ISO_CaveGeneration",
+        "ISO_AnimatedNoise",
+        "ISO_Metaballs",
+        "ISO_ImplicitModeling",
+        "ISO_RhizomeBody"
+      ]
+    },
+    "boolean": {
+      "id": "boolean",
+      "sequence": "boolean_surfaces",
+      "label": "Make room by subtraction",
+      "requires": [
+        "mesh",
+        "scale"
+      ],
+      "kind": "build",
+      "learn": "Define union, intersection and ordered difference of solids.",
+      "make": "A cavity or room whose operands can be repositioned.",
+      "transfer": "Swap operand order, then scale the resulting negative space.",
+      "borrow": "CSG engine; does not require implementing marching cubes.",
+      "status": "proposed",
+      "halls": [
+        "Boolean_Verbs",
+        "Boolean_Gallery",
+        "Boolean_Works"
+      ]
+    },
+    "agent": {
+      "id": "agent",
+      "sequence": "swarmintelligence",
+      "label": "A local view of others",
+      "requires": [
+        "motion",
+        "field",
+        "random",
+        "cell"
+      ],
+      "kind": "build",
+      "learn": "Give an agent state, a sensing neighbourhood and an update policy.",
+      "make": "A small group responding to neighbours or a shared trail.",
+      "transfer": "Change perception while keeping the response rule.",
+      "borrow": "Neighbour lookup and trail diffusion.",
+      "status": "proposed",
+      "halls": [
+        "SwarmIntelligence_PhysarumColony",
+        "SwarmIntelligence_FlowFields",
+        "SwarmIntelligence_Boids_Algorithm",
+        "SwarmIntelligence_Agent_Based_Modeling_ABM"
+      ]
+    },
+    "collective_search": {
+      "id": "collective_search",
+      "sequence": "swarmintelligence",
+      "label": "Remember and compare routes",
+      "requires": [
+        "agent",
+        "descent",
+        "growth"
+      ],
+      "kind": "compare",
+      "learn": "Separate personal memory, shared signal and optimisation criterion.",
+      "make": "A route or position search with inspectable memory.",
+      "transfer": "Keep the candidates while changing who can share a result.",
+      "borrow": "Graph storage before its formal chapter.",
+      "status": "proposed",
+      "halls": [
+        "SwarmIntelligence_Ant_Colony_Optimization",
+        "SwarmIntelligence_Particle_Swarm_Optimization",
+        "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+      ]
+    },
+    "learning": {
+      "id": "learning",
+      "sequence": "machinelearning",
+      "label": "Choose what improvement means",
+      "requires": [
+        "selection",
+        "descent",
+        "distribution"
+      ],
+      "kind": "build",
+      "learn": "Define data, features, labels and an objective; distinguish clustering from classification.",
+      "make": "A small classifier or optimiser with a visible criterion.",
+      "transfer": "Change labels or the cost while preserving the observations.",
+      "borrow": "Dataset display and training helpers.",
+      "status": "proposed",
+      "halls": [
+        "ML_Evolution",
+        "ML_Gradient_Landscape",
+        "ML_Classification"
+      ]
+    },
+    "network": {
+      "id": "network",
+      "sequence": "machinelearning",
+      "label": "Compose a learned mapping",
+      "requires": [
+        "learning",
+        "vector",
+        "array"
+      ],
+      "kind": "build",
+      "learn": "Use a supplied layer, then inspect one weighted sum, bias and activation.",
+      "make": "A small mapping with editable weights.",
+      "transfer": "Compare a single unit with a layered response.",
+      "borrow": "Network first as a supplied component; single-unit inspection follows.",
+      "status": "proposed",
+      "halls": [
+        "ML_Neural_Networks",
+        "ML_Perception"
+      ]
+    },
+    "learned_memory": {
+      "id": "learned_memory",
+      "sequence": "machinelearning",
+      "label": "A mapping retains or generates",
+      "requires": [
+        "network",
+        "trace",
+        "random"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish hidden state, generated sample and learned parameters.",
+      "make": "A prepared model whose state or input can be changed separately.",
+      "transfer": "Reset state without replacing weights.",
+      "borrow": "Trained models and training machinery; not a one-chapter GAN implementation.",
+      "status": "proposed",
+      "halls": [
+        "ML_Sequence_Memory",
+        "ML_Generative",
+        "ML_Synthesis"
+      ]
+    },
+    "graph": {
+      "id": "graph",
+      "sequence": "graphtheory",
+      "label": "Name the relations",
+      "requires": [
+        "line",
+        "array",
+        "force"
+      ],
+      "kind": "build",
+      "learn": "Separate node identity, edge relation and drawing position.",
+      "make": "An explicit graph with an independent layout.",
+      "transfer": "Move the drawing without changing the adjacency.",
+      "borrow": "Layout solver; returns to earlier networks.",
+      "status": "proposed",
+      "halls": [
+        "GT_Foundations",
+        "GT_Layout"
+      ]
+    },
+    "path": {
+      "id": "path",
+      "sequence": "graphtheory",
+      "label": "Choose a route or allocation",
+      "requires": [
+        "graph",
+        "growth",
+        "collective_search"
+      ],
+      "kind": "build",
+      "learn": "Introduce queues/stacks when used; compare reachability, cost, capacity and matching.",
+      "make": "A small path or allocation experiment.",
+      "transfer": "Keep the graph and change the question asked of it.",
+      "borrow": "Algorithm implementations beyond the first taught traversal.",
+      "status": "proposed",
+      "halls": [
+        "GT_Pathfinding",
+        "GT_Network_Analysis",
+        "GT_Connectivity",
+        "GT_Spanning_Trees",
+        "GT_Flow",
+        "GT_Matching"
+      ]
+    },
+    "assumption": {
+      "id": "assumption",
+      "sequence": "foundationscrisis",
+      "label": "A model has conditions",
+      "requires": [
+        "geometry_return",
+        "rotation",
+        "graph"
+      ],
+      "kind": "reflect",
+      "learn": "Identify a geometric assumption and a changed interpretation.",
+      "make": "A controlled comparison of models.",
+      "transfer": "Hold an observation while changing the model's premise.",
+      "borrow": "Geometry renderers; no theorem proved by the display.",
+      "status": "proposed",
+      "halls": [
+        "Euclid_Parallel",
+        "NonEuclidean_Spaces"
+      ]
+    },
+    "limit": {
+      "id": "limit",
+      "sequence": "foundationscrisis",
+      "label": "A claim and its warrant",
+      "requires": [
+        "assumption",
+        "cell",
+        "recursion",
+        "path"
+      ],
+      "kind": "reflect",
+      "learn": "Distinguish construction, consistency, proof, projection and toy demonstration.",
+      "make": "A small explicit rule system with declared limits.",
+      "transfer": "Find a claim the demonstration cannot establish.",
+      "borrow": "Formal results require their own arguments; no forced coding quota.",
+      "status": "proposed",
+      "halls": [
+        "Russell_Paradox",
+        "Godel_Incompleteness",
+        "Escher_Impossible",
+        "Brouwer_Intuitionism",
+        "Florensky_Paraconsistent",
+        "Crisis_Synthesis"
+      ]
+    },
+    "proxy": {
+      "id": "proxy",
+      "sequence": "qfeplaboratory",
+      "label": "Read what a measure measures",
+      "requires": [
+        "limit",
+        "distribution",
+        "descent",
+        "cell_field"
+      ],
+      "kind": "reflect",
+      "learn": "Give each project term a stated operational measure and scope.",
+      "make": "A comparison of order, variation and response under declared rules.",
+      "transfer": "Replace one proxy while keeping the physical arrangement.",
+      "borrow": "QFEP as the project's research framing; entropy and spread are not interchangeable.",
+      "status": "proposed",
+      "halls": [
+        "QFEP_Introduction",
+        "QFEP_F_Term",
+        "QFEP_E_Term",
+        "QFEP_Lambda_Spectrum",
+        "QFEP_Phi_Term",
+        "QFEP_Edge_Of_Chaos"
+      ]
+    },
+    "coupling": {
+      "id": "coupling",
+      "sequence": "qfeplaboratory",
+      "label": "Connect an intervention",
+      "requires": [
+        "proxy",
+        "field",
+        "soft"
+      ],
+      "kind": "compare",
+      "learn": "Distinguish a control value, a connection and the receiver's used value.",
+      "make": "An intervention that can be connected, cut and compared.",
+      "transfer": "Cut a route without assuming its previous effect is undone.",
+      "borrow": "Receiver models and UI; verify each coupling.",
+      "status": "proposed",
+      "halls": [
+        "QFEP_Sandbox",
+        "QFEP_Synthesis"
+      ]
+    },
+    "situation": {
+      "id": "situation",
+      "sequence": "postfoundationscrisis",
+      "label": "Keep the source with the judgement",
+      "requires": [
+        "coupling",
+        "learning",
+        "graph",
+        "inscription"
+      ],
+      "kind": "reflect",
+      "learn": "Retain provenance, competing requirements and contributors rather than only a verdict.",
+      "make": "An arrangement that exposes who or what its rule admits.",
+      "transfer": "Change a rule while keeping the excluded case visible.",
+      "borrow": "Authored scenarios and provenance display.",
+      "status": "proposed",
+      "halls": [
+        "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "CriticalAlgorithms_Applied_Ethics",
+        "SpeculativeComputation_Paraconsistent_Engineering",
+        "SpeculativeComputation_Situated_Computation",
+        "SpeculativeComputation_Collective_Knowledge"
+      ]
+    },
+    "assembly": {
+      "id": "assembly",
+      "sequence": "postfoundationscrisis",
+      "label": "Make a work answer back",
+      "requires": [
+        "situation",
+        "growth",
+        "boolean",
+        "constraint"
+      ],
+      "kind": "reflect",
+      "learn": "Combine routes, assemblies and records into a situated work.",
+      "make": "A first independent work built from selected earlier capabilities.",
+      "transfer": "Name one promise, test it bodily, and revise the responsible operation.",
+      "borrow": "Only the infrastructure the chosen work needs.",
+      "status": "proposed",
+      "halls": [
+        "SpeculativeComputation_Rhizome_Network",
+        "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "PostCrisis_Synthesis"
+      ]
+    }
+  },
+  "scanned_maps": [
+    {
+      "sequence": "primitives",
+      "map": "Point_Zero",
+      "path": "commons/maps/Point_Zero/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_One",
+      "path": "commons/maps/Point_One/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Coordinates",
+      "path": "commons/maps/Point_Coordinates/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Lines",
+      "path": "commons/maps/Point_Lines/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Trace",
+      "path": "commons/maps/Point_Trace/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Line_Grid",
+      "path": "commons/maps/Point_Line_Grid/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Triangle_Context",
+      "path": "commons/maps/Point_Triangle_Context/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Polythedra",
+      "path": "commons/maps/Primitives_Polythedra/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Point_Animatedcube",
+      "path": "commons/maps/Point_Animatedcube/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Ignorance",
+      "path": "commons/maps/Primitives_Ignorance/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Portals",
+      "path": "commons/maps/Primitives_Portals/map_data.json"
+    },
+    {
+      "sequence": "primitives",
+      "map": "Primitives_Melencolia",
+      "path": "commons/maps/Primitives_Melencolia/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Pre",
+      "path": "commons/maps/Trans_Pre/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Introduction",
+      "path": "commons/maps/Trans_Introduction/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Translation",
+      "path": "commons/maps/Trans_Translation/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Rotation",
+      "path": "commons/maps/Trans_Rotation/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Scale",
+      "path": "commons/maps/Trans_Scale/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Body",
+      "path": "commons/maps/Trans_Body/map_data.json"
+    },
+    {
+      "sequence": "transformation",
+      "map": "Trans_Pit",
+      "path": "commons/maps/Trans_Pit/map_data.json"
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Array",
+      "path": "commons/maps/Array/map_data.json"
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_3D",
+      "path": "commons/maps/Tutorial_3D/map_data.json"
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Tiling_Floor",
+      "path": "commons/maps/Tutorial_Tiling_Floor/map_data.json"
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Tiling_Walls",
+      "path": "commons/maps/Tutorial_Tiling_Walls/map_data.json"
+    },
+    {
+      "sequence": "array_tutorial",
+      "map": "Tutorial_Disco",
+      "path": "commons/maps/Tutorial_Disco/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Context_Placed",
+      "path": "commons/maps/Color_Context_Placed/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Flashlight",
+      "path": "commons/maps/Color_Flashlight/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Nails",
+      "path": "commons/maps/Color_Nails/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Rainbow",
+      "path": "commons/maps/Color_Rainbow/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Pillar",
+      "path": "commons/maps/Color_Pillar/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Grid_Pallet",
+      "path": "commons/maps/Color_Grid_Pallet/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Paint",
+      "path": "commons/maps/Color_Paint/map_data.json"
+    },
+    {
+      "sequence": "color",
+      "map": "Color_Walls",
+      "path": "commons/maps/Color_Walls/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Pattern_Disco",
+      "path": "commons/maps/Pattern_Disco/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Pattern_Foundry",
+      "path": "commons/maps/Pattern_Foundry/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Tutorial_Pattern",
+      "path": "commons/maps/Tutorial_Pattern/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Array_Patterns",
+      "path": "commons/maps/Array_Patterns/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Symmetry_Seventeen",
+      "path": "commons/maps/Symmetry_Seventeen/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_01",
+      "path": "commons/maps/Ribbon_Patterns_01/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_02",
+      "path": "commons/maps/Ribbon_Patterns_02/map_data.json"
+    },
+    {
+      "sequence": "tiling",
+      "map": "Ribbon_Patterns_03",
+      "path": "commons/maps/Ribbon_Patterns_03/map_data.json"
+    },
+    {
+      "sequence": "change",
+      "map": "Change_Intro",
+      "path": "commons/maps/Change_Intro/map_data.json"
+    },
+    {
+      "sequence": "change",
+      "map": "Flow_Field",
+      "path": "commons/maps/Flow_Field/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Vectors_Act1_WhatAVectorIs",
+      "path": "commons/maps/Vectors_Act1_WhatAVectorIs/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "VFM_02_Operations",
+      "path": "commons/maps/VFM_02_Operations/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Vectors_Act2_VectorArithmetic",
+      "path": "commons/maps/Vectors_Act2_VectorArithmetic/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "VFM_05_Launch",
+      "path": "commons/maps/VFM_05_Launch/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "VFM_03_Motion",
+      "path": "commons/maps/VFM_03_Motion/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Vectors_Act3_FieldsAndMotion",
+      "path": "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Vectors_Act4a_KineticForces",
+      "path": "commons/maps/Vectors_Act4a_KineticForces/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Vectors_Act4b_Oscillation",
+      "path": "commons/maps/Vectors_Act4b_Oscillation/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Change_Choreography",
+      "path": "commons/maps/Change_Choreography/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "VFM_07_Gravity",
+      "path": "commons/maps/VFM_07_Gravity/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "VFM_09_Legs",
+      "path": "commons/maps/VFM_09_Legs/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "VFM_08_Arena",
+      "path": "commons/maps/VFM_08_Arena/map_data.json"
+    },
+    {
+      "sequence": "forces",
+      "map": "Vectors_Act5_ForceAsPlace",
+      "path": "commons/maps/Vectors_Act5_ForceAsPlace/map_data.json"
+    },
+    {
+      "sequence": "formfinding",
+      "map": "FormFinding_Descent",
+      "path": "commons/maps/FormFinding_Descent/map_data.json"
+    },
+    {
+      "sequence": "formfinding",
+      "map": "FormFinding_Catenary",
+      "path": "commons/maps/FormFinding_Catenary/map_data.json"
+    },
+    {
+      "sequence": "formfinding",
+      "map": "FormFinding_Relaxation",
+      "path": "commons/maps/FormFinding_Relaxation/map_data.json"
+    },
+    {
+      "sequence": "formfinding",
+      "map": "FormFinding_Equilibrium",
+      "path": "commons/maps/FormFinding_Equilibrium/map_data.json"
+    },
+    {
+      "sequence": "formfinding",
+      "map": "FormFinding_Annealing",
+      "path": "commons/maps/FormFinding_Annealing/map_data.json"
+    },
+    {
+      "sequence": "formfinding",
+      "map": "FormFinding_Forge",
+      "path": "commons/maps/FormFinding_Forge/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Intro",
+      "path": "commons/maps/WaveFunctions_Intro/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Pendulum",
+      "path": "commons/maps/WaveFunctions_Pendulum/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Sine_Space",
+      "path": "commons/maps/WaveFunctions_Sine_Space/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Unit_Circle",
+      "path": "commons/maps/WaveFunctions_Unit_Circle/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_3D_Wave_Propagation",
+      "path": "commons/maps/WaveFunctions_3D_Wave_Propagation/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Effect_Sound",
+      "path": "commons/maps/WaveFunctions_Effect_Sound/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Bernini",
+      "path": "commons/maps/Wavefunctions_Bernini/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_John_Cage",
+      "path": "commons/maps/WaveFunctions_John_Cage/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_AirMusic",
+      "path": "commons/maps/WaveFunctions_AirMusic/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "Wavefunctions_Sky_Stairs",
+      "path": "commons/maps/Wavefunctions_Sky_Stairs/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_TrigWalkingPath",
+      "path": "commons/maps/WaveFunctions_TrigWalkingPath/map_data.json"
+    },
+    {
+      "sequence": "wavefunctions",
+      "map": "WaveFunctions_Synthesis_Lab",
+      "path": "commons/maps/WaveFunctions_Synthesis_Lab/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Definition",
+      "path": "commons/maps/Random_Definition/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Entropy",
+      "path": "commons/maps/Random_Entropy/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Remove",
+      "path": "commons/maps/Random_Remove/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Randomness_10_PRINT_Algorithm",
+      "path": "commons/maps/Randomness_10_PRINT_Algorithm/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Cubes",
+      "path": "commons/maps/Random_Cubes/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Rotate_Random_XYZ",
+      "path": "commons/maps/Random_Rotate_Random_XYZ/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Walk",
+      "path": "commons/maps/Random_Walk/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Gaussian",
+      "path": "commons/maps/Random_Gaussian/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Mushrooms",
+      "path": "commons/maps/Random_Mushrooms/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Space_Geometry",
+      "path": "commons/maps/Random_Space_Geometry/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Randomness_Examples_of_Randomness",
+      "path": "commons/maps/Randomness_Examples_of_Randomness/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Pheromone",
+      "path": "commons/maps/Random_Pheromone/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Space",
+      "path": "commons/maps/Random_Space/map_data.json"
+    },
+    {
+      "sequence": "randomness",
+      "map": "Random_Game",
+      "path": "commons/maps/Random_Game/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Random_Noise_Types",
+      "path": "commons/maps/Random_Noise_Types/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Columns",
+      "path": "commons/maps/Noise_Columns/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_One",
+      "path": "commons/maps/Noise_One/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Voxel",
+      "path": "commons/maps/Noise_Voxel/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_6_Wall",
+      "path": "commons/maps/Noise_6_Wall/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Inside_Noise",
+      "path": "commons/maps/Noise_Inside_Noise/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Space_10",
+      "path": "commons/maps/Noise_Space_10/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Noise_Perlin_Simplex",
+      "path": "commons/maps/Noise_Perlin_Simplex/map_data.json"
+    },
+    {
+      "sequence": "noise",
+      "map": "Lab_Path",
+      "path": "commons/maps/Lab_Path/map_data.json"
+    },
+    {
+      "sequence": "shaders",
+      "map": "Shader_01_Shaping",
+      "path": "commons/maps/Shader_01_Shaping/map_data.json"
+    },
+    {
+      "sequence": "shaders",
+      "map": "Shader_05_Patterns",
+      "path": "commons/maps/Shader_05_Patterns/map_data.json"
+    },
+    {
+      "sequence": "shaders",
+      "map": "Shader_11_QueerRubber",
+      "path": "commons/maps/Shader_11_QueerRubber/map_data.json"
+    },
+    {
+      "sequence": "shaders",
+      "map": "Shader_09_FBM",
+      "path": "commons/maps/Shader_09_FBM/map_data.json"
+    },
+    {
+      "sequence": "shaders",
+      "map": "Shader_12_PinkExtravaganza",
+      "path": "commons/maps/Shader_12_PinkExtravaganza/map_data.json"
+    },
+    {
+      "sequence": "shaders",
+      "map": "Shader_10_ReactionDiffusion",
+      "path": "commons/maps/Shader_10_ReactionDiffusion/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_Introduction",
+      "path": "commons/maps/CA_Introduction/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_ElementaryRules",
+      "path": "commons/maps/CA_ElementaryRules/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_GameOfLife",
+      "path": "commons/maps/CA_GameOfLife/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_BeyondBinary",
+      "path": "commons/maps/CA_BeyondBinary/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_ExpandingSpace",
+      "path": "commons/maps/CA_ExpandingSpace/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_SoftRules",
+      "path": "commons/maps/CA_SoftRules/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_AgentsCircuits",
+      "path": "commons/maps/CA_AgentsCircuits/map_data.json"
+    },
+    {
+      "sequence": "cellularautomata",
+      "map": "CA_EdgeOfChaos",
+      "path": "commons/maps/CA_EdgeOfChaos/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_Recursion",
+      "path": "commons/maps/Fractal_Recursion/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_RecursiveTrees",
+      "path": "commons/maps/Fractal_RecursiveTrees/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_CantorSet",
+      "path": "commons/maps/Fractal_CantorSet/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_KochSierpinski",
+      "path": "commons/maps/Fractal_KochSierpinski/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_MengerSponge",
+      "path": "commons/maps/Fractal_MengerSponge/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_GoldenSpiral",
+      "path": "commons/maps/Fractal_GoldenSpiral/map_data.json"
+    },
+    {
+      "sequence": "fractals",
+      "map": "Fractal_Synthesis",
+      "path": "commons/maps/Fractal_Synthesis/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Grammar_Lab",
+      "path": "commons/maps/LSystems_Grammar_Lab/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Growth",
+      "path": "commons/maps/LSystems_Growth/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Grammars_And_Curves",
+      "path": "commons/maps/LSystems_Grammars_And_Curves/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Architecture",
+      "path": "commons/maps/LSystems_Architecture/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Competition",
+      "path": "commons/maps/LSystems_Competition/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Living",
+      "path": "commons/maps/LSystems_Living/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "LSystems_Shape_Grammars",
+      "path": "commons/maps/LSystems_Shape_Grammars/map_data.json"
+    },
+    {
+      "sequence": "lsystems",
+      "map": "Assemblage_Same_Desire",
+      "path": "commons/maps/Assemblage_Same_Desire/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Genetic_Evolution",
+      "path": "commons/maps/PG_Genetic_Evolution/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Space_Colonization",
+      "path": "commons/maps/PG_Space_Colonization/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Branching_Growth",
+      "path": "commons/maps/PG_Branching_Growth/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Percolation_Network",
+      "path": "commons/maps/PG_Percolation_Network/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Caves_Mazes",
+      "path": "commons/maps/PG_Caves_Mazes/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Sculpted_Forms",
+      "path": "commons/maps/PG_Sculpted_Forms/map_data.json"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "map": "PG_Mirrored_Patterns",
+      "path": "commons/maps/PG_Mirrored_Patterns/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Soft_Body_Deformation",
+      "path": "commons/maps/SoftBodies_Soft_Body_Deformation/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Cloth_Physics",
+      "path": "commons/maps/SoftBodies_Cloth_Physics/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Carusell",
+      "path": "commons/maps/SoftBodies_Carusell/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals",
+      "path": "commons/maps/SoftBodies_Obsticals/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Obsticals_Part2",
+      "path": "commons/maps/SoftBodies_Obsticals_Part2/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Playground_of_Joy",
+      "path": "commons/maps/SoftBodies_Playground_of_Joy/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "SoftBodies_Affect_Theory_Visualization",
+      "path": "commons/maps/SoftBodies_Affect_Theory_Visualization/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+      "path": "commons/maps/ProceduralGeneration_Reaction_Diffusion_Systems/map_data.json"
+    },
+    {
+      "sequence": "softbodies",
+      "map": "Topology_Entropy_Morphogenesis",
+      "path": "commons/maps/Topology_Entropy_Morphogenesis/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_Introduction",
+      "path": "commons/maps/ISO_Introduction/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_LookupTable",
+      "path": "commons/maps/ISO_LookupTable/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_ShapesGallery",
+      "path": "commons/maps/ISO_ShapesGallery/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_TorusGyroid",
+      "path": "commons/maps/ISO_TorusGyroid/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_Sculpting",
+      "path": "commons/maps/ISO_Sculpting/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_FlatTerrain",
+      "path": "commons/maps/ISO_FlatTerrain/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_PortalLandscape",
+      "path": "commons/maps/ISO_PortalLandscape/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_Caves",
+      "path": "commons/maps/ISO_Caves/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_CaveGeneration",
+      "path": "commons/maps/ISO_CaveGeneration/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_AnimatedNoise",
+      "path": "commons/maps/ISO_AnimatedNoise/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_Metaballs",
+      "path": "commons/maps/ISO_Metaballs/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_ImplicitModeling",
+      "path": "commons/maps/ISO_ImplicitModeling/map_data.json"
+    },
+    {
+      "sequence": "isosurfaces",
+      "map": "ISO_RhizomeBody",
+      "path": "commons/maps/ISO_RhizomeBody/map_data.json"
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Verbs",
+      "path": "commons/maps/Boolean_Verbs/map_data.json"
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Gallery",
+      "path": "commons/maps/Boolean_Gallery/map_data.json"
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "map": "Boolean_Works",
+      "path": "commons/maps/Boolean_Works/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_PhysarumColony",
+      "path": "commons/maps/SwarmIntelligence_PhysarumColony/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_FlowFields",
+      "path": "commons/maps/SwarmIntelligence_FlowFields/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Boids_Algorithm",
+      "path": "commons/maps/SwarmIntelligence_Boids_Algorithm/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "path": "commons/maps/SwarmIntelligence_Agent_Based_Modeling_ABM/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Ant_Colony_Optimization",
+      "path": "commons/maps/SwarmIntelligence_Ant_Colony_Optimization/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+      "path": "commons/maps/SwarmIntelligence_Particle_Swarm_Optimization/map_data.json"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "path": "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Evolution",
+      "path": "commons/maps/ML_Evolution/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Gradient_Landscape",
+      "path": "commons/maps/ML_Gradient_Landscape/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Classification",
+      "path": "commons/maps/ML_Classification/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Neural_Networks",
+      "path": "commons/maps/ML_Neural_Networks/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Perception",
+      "path": "commons/maps/ML_Perception/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Sequence_Memory",
+      "path": "commons/maps/ML_Sequence_Memory/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Generative",
+      "path": "commons/maps/ML_Generative/map_data.json"
+    },
+    {
+      "sequence": "machinelearning",
+      "map": "ML_Synthesis",
+      "path": "commons/maps/ML_Synthesis/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Foundations",
+      "path": "commons/maps/GT_Foundations/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Layout",
+      "path": "commons/maps/GT_Layout/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Pathfinding",
+      "path": "commons/maps/GT_Pathfinding/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Network_Analysis",
+      "path": "commons/maps/GT_Network_Analysis/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Connectivity",
+      "path": "commons/maps/GT_Connectivity/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Spanning_Trees",
+      "path": "commons/maps/GT_Spanning_Trees/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Flow",
+      "path": "commons/maps/GT_Flow/map_data.json"
+    },
+    {
+      "sequence": "graphtheory",
+      "map": "GT_Matching",
+      "path": "commons/maps/GT_Matching/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Euclid_Parallel",
+      "path": "commons/maps/Euclid_Parallel/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "NonEuclidean_Spaces",
+      "path": "commons/maps/NonEuclidean_Spaces/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Russell_Paradox",
+      "path": "commons/maps/Russell_Paradox/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Godel_Incompleteness",
+      "path": "commons/maps/Godel_Incompleteness/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Escher_Impossible",
+      "path": "commons/maps/Escher_Impossible/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Brouwer_Intuitionism",
+      "path": "commons/maps/Brouwer_Intuitionism/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Florensky_Paraconsistent",
+      "path": "commons/maps/Florensky_Paraconsistent/map_data.json"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "map": "Crisis_Synthesis",
+      "path": "commons/maps/Crisis_Synthesis/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Introduction",
+      "path": "commons/maps/QFEP_Introduction/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_F_Term",
+      "path": "commons/maps/QFEP_F_Term/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_E_Term",
+      "path": "commons/maps/QFEP_E_Term/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Lambda_Spectrum",
+      "path": "commons/maps/QFEP_Lambda_Spectrum/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Phi_Term",
+      "path": "commons/maps/QFEP_Phi_Term/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Edge_Of_Chaos",
+      "path": "commons/maps/QFEP_Edge_Of_Chaos/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Sandbox",
+      "path": "commons/maps/QFEP_Sandbox/map_data.json"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "map": "QFEP_Synthesis",
+      "path": "commons/maps/QFEP_Synthesis/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "path": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "CriticalAlgorithms_Applied_Ethics",
+      "path": "commons/maps/CriticalAlgorithms_Applied_Ethics/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Paraconsistent_Engineering",
+      "path": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Situated_Computation",
+      "path": "commons/maps/SpeculativeComputation_Situated_Computation/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Collective_Knowledge",
+      "path": "commons/maps/SpeculativeComputation_Collective_Knowledge/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "SpeculativeComputation_Rhizome_Network",
+      "path": "commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "path": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "map": "PostCrisis_Synthesis",
+      "path": "commons/maps/PostCrisis_Synthesis/map_data.json"
+    }
+  ]
+}

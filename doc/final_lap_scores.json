@@ -1,13 +1,13 @@
 {
   "_meta": {
     "description": "Hand/AI-maintained quality signals for final-arc maps. Read by ada_encyclopedia /api/final-lap. Scores are 0-5 or null=unknown.",
-    "updated": "2026-10-11: foundationscrisis records reconciled with the eight current map/plan inventories and active source branches; no new spatial or headset scores.",
+    "updated": "2026-10-12: four postfoundationscrisis source notes reconciled with current controls and the saved-pose handoff. Numeric ratings retained; no new spatial or headset scores.",
     "rubric": {
       "thesis": "Does blurb + intent + artifacts land the sequence's truth statement? 0=off, 5=lands",
       "helper": "Hub present? Close-body text? Readable cues? 0=bare grid, 5=full",
       "aesthetic": "Substrate/biome applied and appropriate to sequence stage? 0=grey, 5=full"
     },
-    "source_review": "2026-10-11: foundationscrisis source and text review only. Prior thesis ratings retained; helper/aesthetic are unassessed for the current halls. Earlier numeric helper/aesthetic values are preserved as historical records. Other sequences are unchanged.",
+    "source_review": "2026-10-11: foundationscrisis source and text review only. Prior thesis ratings retained; helper/aesthetic are unassessed for the current halls. Earlier numeric helper/aesthetic values are preserved as historical records. The 12 October postfoundationscrisis source reconciliation is recorded separately below; remaining sequence entries are unchanged.",
     "foundationscrisis_review": {
       "date": "2026-10-11",
       "basis": "Current sequence, map tokens/configuration, museum plan, registry scenes and active scripts; mathematical sources cited in the texts.",
@@ -19,6 +19,15 @@
     "prior_record_metadata": {
       "updated": "2026-04-19 (phase 2c — helper-layer lift on 4 under-developed maps: Russell, Gödel, Rhizome, Lab. Under-developed count: 4 → 2. Russell + Gödel cleared (T=3→4). Rhizome + Lab remain flagged — well-scaffolded now but still only 1 artifact each at T=3; honest signal that they'd benefit from a second artifact or a content pass.)",
       "source_review": "2026-09-15: final eight halls reconciled with primary source. Historical numeric aesthetic/helper scores retained; no new headset walk claimed."
+    },
+    "postfoundationscrisis_review": {
+      "date": "2026-10-12",
+      "basis": "Eight current finals read; candidate claims checked against current scripts, map configuration, existing tutorials/technical pages and museum plan order.",
+      "scope": "Two reflective additions, two stale tutorial passages aligned, four source notes refreshed. Existing numeric scores retain their earlier review date.",
+      "runtime": "Not rerun: this pass changes prose and review metadata only.",
+      "headset": "Not tested in this pass.",
+      "tutorials": "Current source-reading excerpts, not complete independently reconstructed lessons. Assembly and Synthesis walkthroughs now follow the built pose editor and saved record.",
+      "receipt": "doc/book/iterations/2026-10-12-postcrisis-reading-reconciliation/REPORT.md"
     }
   },
   "focus_sequences": [
@@ -269,56 +278,162 @@
       "helper": null,
       "aesthetic": null,
       "note": "Book, tutorial and technical grounded in bias_from_inside. Next test: Compare a named pair at three slider positions from the same viewing distance, then ask whether the labels remain distinguishable from the intended approach. Record the pair and viewpoint before generalising this to other dense displays.",
-      "source_review": "2026-09-15"
+      "source_review": "2026-09-15",
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/bias.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/CriticalAlgorithms_Algorithmic_Bias_Visualization/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "CriticalAlgorithms_Applied_Ethics": {
       "thesis": 3,
       "helper": 3,
       "aesthetic": 2,
       "note": "Book, tutorial and technical grounded in room_shape_demonstrator. Next test: Build a comparison with equal chair count, scale and colour, changing only the arrangement. Test sightlines and approach routes before claiming the circle is more accessible. Keep the present pair as the openly persuasive first example.",
-      "source_review": "2026-09-15"
+      "source_review": "2026-09-15",
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/CriticalAlgorithms_Applied_Ethics/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/ethics.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/CriticalAlgorithms_Applied_Ethics/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "SpeculativeComputation_Paraconsistent_Engineering": {
       "thesis": 3,
       "helper": 3,
       "aesthetic": 2,
       "note": "Book, tutorial and technical grounded in merge_conflict_visualizer. Next test: Add a small inspectable inference table with a contradictory pair and an unrelated proposition. Require the visitor to predict which consequences follow. Compare that with preserving two source-tagged reports, so storage and inference remain distinct lessons.",
-      "source_review": "2026-09-15"
+      "source_review": "2026-09-15",
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/SpeculativeComputation_Paraconsistent_Engineering/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/conflict.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/SpeculativeComputation_Paraconsistent_Engineering/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "SpeculativeComputation_Situated_Computation": {
       "thesis": 4,
       "helper": 3,
       "aesthetic": 3,
       "note": "Book, tutorial and technical grounded in situated_readout. Next test: Give each panel an inspectable criterion and the evidence used. Compare disagreement caused by different criteria with disagreement caused by different observations. First verify that all four small panels can be read without losing their footers.",
-      "source_review": "2026-09-15"
+      "source_review": "2026-09-15",
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/SpeculativeComputation_Situated_Computation/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/situated.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/SpeculativeComputation_Situated_Computation/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "SpeculativeComputation_Collective_Knowledge": {
       "thesis": 4,
       "helper": 3,
       "aesthetic": 3,
-      "note": "Book, tutorial and technical grounded in peer_production_tool. Next test: Separate lifetime edits, distinct sources in this version, and lifetime distinct sources in the readout. Check two complete cycles with a repeated source. Then add one disputed contribution whose revision changes an existing facet rather than increasing the pile.",
-      "source_review": "2026-09-15"
+      "note": "SOURCES counts distinct sources in the current version; EVER counts distinct sources across versions; ADDITIONS, PARTICIPATIONS and REVISIONS have separate labels. DISPUTE and REVISE already operate on an existing piece without adding a facet. VERSION keeps only one previous version in memory. Next check: repeat a source across two versions, then dispute and revise a piece while comparing counters, provenance and retained poses. Durable history and evidence-based settlement are further work.",
+      "source_review": "2026-10-12",
+      "score_review": "2026-09-15",
+      "score_status": "Historical numeric ratings retained; current source reconciliation is not a new spatial or headset assessment.",
+      "source_evidence": [
+        "commons/artifacts/peer_production_tool/peer_production_tool.gd"
+      ],
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/SpeculativeComputation_Collective_Knowledge/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/collective.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/SpeculativeComputation_Collective_Knowledge/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "SpeculativeComputation_Rhizome_Network": {
       "thesis": 3,
       "helper": 3,
       "aesthetic": 2,
-      "note": "Book, tutorial and technical grounded in rhizome_grower. Next test: Expose a selectable node and removal operation, then show connected components before and after deletion. Compare nearest-only growth with one distant connection per shoot. The current exhibit has neither deletion nor automatic repair.",
-      "source_review": "2026-09-15"
+      "note": "The interactive grower already has NODE, CUT, COMPONENTS, LINKS and seeded REPLAY. With all points present, one-link growth leaves two trees; three-link growth joins the seeds and later introduces circuits. CUT restores stored relations when toggled back; it does not invent repairs. The walkable cave uses a separate authored graph. Next check: compare removal of the same busy node under both link rules at the same saved positions, then inspect reach and readability in-headset. New distant links and live cave editing remain proposals.",
+      "source_review": "2026-10-12",
+      "score_review": "2026-09-15",
+      "score_status": "Historical numeric ratings retained; current source reconciliation is not a new spatial or headset assessment.",
+      "source_evidence": [
+        "commons/artifacts/rhizome_grower/rhizome_grower.gd",
+        "commons/maps/SpeculativeComputation_Rhizome_Network/map_data.json"
+      ],
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/SpeculativeComputation_Rhizome_Network/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/rhizome.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/SpeculativeComputation_Rhizome_Network/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "AdvancedLaboratory_Lab_Equipment_Simulation": {
       "thesis": 3,
       "helper": 3,
       "aesthetic": 2,
-      "note": "Book, tutorial and technical grounded in MolecularDesigner. Next test: Expose one editable target with a visible link to its source assembly. Compare the same docking motion at two fixed update rates before changing damping. Let a visitor alter one relation and keep the resulting body beside the original.",
-      "source_review": "2026-09-15"
+      "note": "The configured MolecularDesigner already supplies a gold body workshop, editable joint positions and both endpoints of one reroutable connection. A changed release saves a local pose with original and current connectivity; Synthesis reconstructs it beside its starting body. Separate physical ragdoll and furniture do not enter that record. Next check: move a joint, change a relation without moving a joint, revisit and compare the returned body; evaluate two-hand reach in-headset. Frame-rate comparison of the automatic catalogue spring remains a separate experiment.",
+      "source_review": "2026-10-12",
+      "score_review": "2026-09-15",
+      "score_status": "Historical numeric ratings retained; current source reconciliation is not a new spatial or headset assessment.",
+      "source_evidence": [
+        "algorithms/computationalbiology/molecular_framework/AssemblyBodyStudy.gd",
+        "algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd",
+        "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/map_data.json"
+      ],
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/AdvancedLaboratory_Lab_Equipment_Simulation/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/assembly.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/AdvancedLaboratory_Lab_Equipment_Simulation/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     },
     "PostCrisis_Synthesis": {
       "thesis": 4,
       "helper": 4,
       "aesthetic": 3,
-      "note": "Book, tutorial and technical grounded in accountability_ledger. Next test: Make the ledger accept a real museum observation with hall, affected activity, proposed change and later result. Preserve unresolved entries across visits. Begin with the contributor-counter ambiguity or a control whose reach has actually been tested.",
-      "source_review": "2026-09-15"
+      "note": "visitor_record:true selects the real Assembly record; the illustrative six-second ledger branch is inactive here. The ledger and assembly_return share the latest saved pose, original/current connections and completed-release count. This is a record of an alteration, not an evidence-based account of whom it helped. Next work: retain alternatives and connect a proposed change, affected activity, observed consequence and someone able to revisit it. No visitor-identity, gesture-path or complete version-history claim is warranted.",
+      "source_review": "2026-10-12",
+      "score_review": "2026-09-15",
+      "score_status": "Historical numeric ratings retained; current source reconciliation is not a new spatial or headset assessment.",
+      "source_evidence": [
+        "commons/artifacts/accountability_ledger/accountability_ledger.gd",
+        "commons/artifacts/assembly_return/assembly_return.gd",
+        "algorithms/computationalbiology/molecular_framework/AssemblyPoseRecord.gd",
+        "commons/maps/PostCrisis_Synthesis/map_data.json"
+      ],
+      "tutorial_review": {
+        "date": "2026-10-12",
+        "status": "External feedback applied; 141 printed-code and interaction checks plus 117 native checks passed.",
+        "scope": "Author-operated exact-code reconstruction and isolated museum studies with synthetic controls; no independent learner or headset assessment.",
+        "report": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/ghost.html",
+        "tutorial": "commons/maps/PostCrisis_Synthesis/tutorial.md",
+        "student_scene": "doc/book/studies/postcrisis-lineage/synthesis.tscn",
+        "evidence": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/evidence/PostCrisis_Synthesis/report.json",
+        "feedback": "doc/book/iterations/2026-10-12-postcrisis-reconstruction/feedback.html"
+      }
     }
   }
 }

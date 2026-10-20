@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "name": "fresh-save arena supplies the hand ability for practice",
+      "passed": true
+    },
+    {
+      "name": "formed ball is a real projectile 1",
+      "passed": true
+    },
+    {
+      "name": "one projectile counts one skull hit 1",
+      "passed": true
+    },
+    {
+      "name": "one sphere drops the skull without leaving a blocker",
+      "passed": true
+    },
+    {
+      "name": "reset restores the head with zero damage",
+      "passed": true
+    },
+    {
+      "name": "warning completes and skull fires autonomously 1",
+      "passed": true
+    },
+    {
+      "name": "player registers exactly one hit 1",
+      "passed": true
+    },
+    {
+      "name": "player survives hit 1",
+      "passed": true
+    },
+    {
+      "name": "warning completes and skull fires autonomously 2",
+      "passed": true
+    },
+    {
+      "name": "player registers exactly one hit 2",
+      "passed": true
+    },
+    {
+      "name": "player survives hit 2",
+      "passed": true
+    },
+    {
+      "name": "warning completes and skull fires autonomously 3",
+      "passed": true
+    },
+    {
+      "name": "player registers exactly one hit 3",
+      "passed": true
+    },
+    {
+      "name": "third hit reaches the real death system once",
+      "passed": true
+    },
+    {
+      "name": "death remembers this encounter destination",
+      "passed": true
+    },
+    {
+      "name": "death effect reaches the staged death scene",
+      "passed": true
+    },
+    {
+      "name": "continue returns to the same biome through staging",
+      "passed": true
+    },
+    {
+      "name": "practice hand ability returns after death without earning museum progression",
+      "passed": true
+    },
+    {
+      "name": "return restores full health and consumes return address",
+      "passed": true
+    },
+    {
+      "name": "new round begins safe with intact head",
+      "passed": true
+    },
+    {
+      "name": "menu is still usable after death roundtrip",
+      "passed": true
+    },
+    {
+      "name": "leaving practice restores the unearned museum ability state",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true
+}

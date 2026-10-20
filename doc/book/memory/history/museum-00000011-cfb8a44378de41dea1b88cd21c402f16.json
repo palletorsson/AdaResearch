@@ -1,0 +1,1546 @@
+{
+  "schema": "museum-connections/1",
+  "revision": 11,
+  "updated_at": "2026-10-12T07:50:13.493314Z",
+  "scope": "Editorial sequence summaries and typed cross-domain connections. Source-linked readings, interpretations and proposals; no runtime or learner certification.",
+  "summaries": {
+    "sequence:primitives": {
+      "summary": "A point acquires a surface, collision and a place in a frame. Relations become lines, gestures become records, and faces become bodies. Generated forms meet engine primitives, profiles and finite resolution; Melencolia gives the constructions a cultural and emotional limit.",
+      "carry": "Point and cube constructions; local/world frames, ordered records, faces and finite choices.",
+      "question": "What do we want a perfect form to give us?",
+      "sources": {
+        "commons/maps/sequences/primitives.json": "8f178191a3c971cccee8d18c9a067690c73f594db2dadb5150eb20995d7a410c",
+        "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38",
+        "commons/maps/Primitives_Melencolia/final.md": "251ac7cad9855a63e06c84907c5b0d6cd5e7a2531b0f5803ca3cef282937b28e"
+      },
+      "updated_at": "2026-10-11T20:43:12.016854Z",
+      "edited_by": "user"
+    },
+    "sequence:transformation": {
+      "summary": "The familiar cube moves, turns and changes size. Those operations return through collection, crossings, paths, altered architecture and bodily scale. The sequence shifts attention from constructing a shape to the conditions under which a body can move and enter.",
+      "carry": "Transforms through time; a reference frame, an input and a receiver.",
+      "question": "When does changing an object change what someone can do?",
+      "sources": {
+        "commons/maps/sequences/transformation.json": "672617397093b16191845c580a550f2b59ba6db9a180ffe4f93f3684643ac3f3",
+        "commons/maps/Trans_Pre/final.md": "6104f9fd54b124d362575e40411183f975cf32b7bec8de5a2c52d45d29f4e7be",
+        "commons/maps/Trans_Pit/final.md": "379dac53cacd7618c453bca1d9aba66061422391136a22908dd1fe68b0b36454"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:array_tutorial": {
+      "summary": "One cube gains company and an address. A row becomes a plane and volume; a rule assigns turns; the learner's saved image stands up; a separate clock reads a score. Five complete canonical tutorials, 12 October. Occupancy, orientation and events remain distinct.",
+      "carry": "Independent instances, indexed values/references, explicit storage frames, a recipe and its saved result, and independently timed readers. Colour reuses these capacities with material values.",
+      "question": "What stays available when an occupant leaves, and what changes when the reader changes? Assess the teaching pace at the 3D storage conversion and the two readings in Disco.",
+      "sources": {
+        "commons/maps/sequences/array_tutorial.json": "26d3c629bf7d0e0af4cb3310d06f0da883d330f2db41e691cbc123c50fe29281",
+        "commons/maps/Array/final.md": "59e9405d3f2cbc843a2f40f6079683a7d2fac17324f15eedb88dd64e2bc7d4b0",
+        "commons/maps/Tutorial_Disco/final.md": "8ecb5382374e5d4a8b5b4f50a2734744e9e55fab5674f98078d38ae9d3f593c0",
+        "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce",
+        "commons/maps/Tutorial_3D/tutorial.md": "f3c89d5a0100d8fe716e1ac6221779d23f01839464beab994e9abfac5284aa41",
+        "commons/maps/Tutorial_Tiling_Floor/tutorial.md": "c9834959b295ac8cb6101a4ac520c4fb97307053c9a47714471c6be00ee5cd67",
+        "commons/maps/Tutorial_Tiling_Walls/tutorial.md": "eee1f3658ca7cc8c84d459ce9f8b58f1e21c965490a3ad9f4fe825b5b9109fbf",
+        "commons/maps/Tutorial_Disco/tutorial.md": "361778bf7dc23c58c63216194e9166ec7eae1802cbab15b61adf1dc69a462925"
+      },
+      "updated_at": "2026-10-12T07:06:50.320757Z",
+      "edited_by": "user"
+    },
+    "sequence:color": {
+      "summary": "Known forms and addressed arrays acquire different colour relations: material assignment, illumination, RGB choice, ordered bands, sampled HSV, retained cell colours, accumulated marks and layered views. Eight canonical full-code tutorials now use the reviewed drafts; current reflections preserve composition, pleasure and the politics of choosing appearances.",
+      "carry": "Same PointBody returns in Nails, Pillar and Paint; Grid Palette returns unchanged in Walls. Recorded RGB values move by explicit copy. The next disco can keep its pattern while changing its palette. Fresh 12 October teacher-authored evidence; no live study installation or headset claim.",
+      "question": "Where is the colour kept, what receives it, and what does that value leave undecided? Keep Paint manageable; review physical controls with a reader.",
+      "sources": {
+        "commons/maps/sequences/color.json": "127f8c137f75787643033a3d05b882767e887b6297f22eb81a33c1a0ea6a1ae7",
+        "commons/maps/Color_Context_Placed/final.md": "afea993603bb264edd08c8939035abe2b16f1b94436c820ba356d796ab81ed97",
+        "commons/maps/Color_Walls/final.md": "1e9f7699714af90244135ed04e7f704fd1a69e9f22211073db52533c3087d7c7",
+        "commons/maps/Color_Context_Placed/tutorial.md": "fb57666e4c90dc85d4e21217ff932c03d2b678b1aff7de31b4f956ed191487b2",
+        "commons/maps/Color_Flashlight/tutorial.md": "df875056a0289511e5fea53cdf4362fe1230d9abb97b01b65cbe421eb79b0bbe",
+        "commons/maps/Color_Nails/tutorial.md": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+        "commons/maps/Color_Rainbow/tutorial.md": "607da8bc094a5679b90d849790d114f452a4a954cf3efb55d5d68063c370ce87",
+        "commons/maps/Color_Pillar/tutorial.md": "4fc28b94df951e1b354a5787d62132cb56dc4d79a0a483671a5c638ae50183fd",
+        "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+        "commons/maps/Color_Paint/tutorial.md": "014414125e8be53dfc5419263444de3212dbf6547b92c37e9120e0da6eb0bcfd",
+        "commons/maps/Color_Walls/tutorial.md": "8136a7ee45f653678539ff1bca32d83f9403dc3049cbacd27e2e011c3cc910d4",
+        "doc/book/iterations/2026-10-12-colour-in-the-book/sequence-verification.json": "525f5e46a6d617ebd9ac43ebc73f9eb86571c20095c9b69e839b3a0c85b3dd3b",
+        "doc/book/iterations/2026-10-12-colour-in-the-book/lineage.json": "35f0b8da0a5d076e50b5795093106b0fb5eeb58abe3528a48d4b8f6327e3e593"
+      },
+      "updated_at": "2026-10-12T07:30:31.208771Z",
+      "edited_by": "user"
+    },
+    "sequence:tiling": {
+      "summary": "Colour’s familiar point, palette and addressed cubes return. One source reaches many places through wrapped, reflected and glided readings; physical frames give addresses a place, and copied recipes can diverge. Volume is a branch, perception a pause, and UV sampling puts a known operation on a garment. The newer optional loom and cutting encounters remain.",
+      "carry": "Exact PointBody, Palette and GridSurface source reuse from Colour; explicitly copied records in Temple. Most study states initialize afresh. SAVE CLOTH → LOAD LOOM is a separate saved record from the fabric studio recipe; the latter does not save a changed shader. 647 native assertions + 12 transfer checks, 12 October.",
+      "question": "What stays fixed when the pattern changes, and what survives the next room? Keep the incomplete six-column period visible as a limitation of the small five-column receiver.",
+      "sources": {
+        "commons/maps/sequences/tiling.json": "74ebf90a99763e061f189097960eb2026fa428c2b201bbf1f4bb25cbab0455e1",
+        "commons/maps/Pattern_Disco/final.md": "bf123b5a24009b9fc963f0ef0cf111c9a9d9f5f0dc57210e8ed81ceac01fc18f",
+        "commons/maps/Ribbon_Patterns_03/final.md": "ffe4622d0a32e29a9ae5d7e40170bb5b1897febea0653cd59afed5a8cd5da99f",
+        "commons/maps/Pattern_Disco/tutorial.md": "5cf940a83bc935817ee9d08db598b3e1398a1782ec71a3ceb03b4b04b13a2b04",
+        "commons/maps/Pattern_Foundry/tutorial.md": "46c6f7f148bf27ab90daaafd82d2a8440c7ebddd8540d82287ffef8e795fc29c",
+        "commons/maps/Tutorial_Pattern/tutorial.md": "104a0dd6a70b22ad90a1523637fd2cffe16dfc185384ecfed749f580cd45040a",
+        "commons/maps/Array_Patterns/tutorial.md": "04259520cb965587c974658a0e4f4e58a0368e45f862481e94d3eee14bc265b7",
+        "commons/maps/Symmetry_Seventeen/tutorial.md": "017f0e7758a3adac6d1193332000709849ff4ec376680762124f45be8704c304",
+        "commons/maps/Pattern_Temple/tutorial.md": "cb17733657ea6ebb8bce52eb58d11fb4d63d99553126556bd5353f6ff2125b0f",
+        "commons/maps/Ribbon_Patterns_01/tutorial.md": "9777749c2d86c8d37a152e78727e14086b0cac9219e4333461c88f6053247cb9",
+        "commons/maps/Ribbon_Patterns_02/tutorial.md": "a784745888204dd1ba7f86f6f5c72ba045b78d1a9030f35f4c8526566064622a",
+        "commons/maps/Ribbon_Patterns_03/tutorial.md": "0f9971dced523cb454d45e9de48c6629f639a7ab2b928debf461b51d4cd448e9",
+        "doc/book/iterations/2026-10-12-tiling-in-the-book/sequence-verification.json": "dc8fa8ed623a1abc2c816f398c3d90412cd6bf6b8d94f1005b7b618a37622297",
+        "doc/book/iterations/2026-10-12-tiling-in-the-book/lineage.json": "201453037831c0dfbb6878a639cf6095f194ad1994704a46ea251500d6fc2007"
+      },
+      "updated_at": "2026-10-12T07:50:13.461860Z",
+      "edited_by": "user"
+    },
+    "sequence:change": {
+      "summary": "A line between samples can disagree with the curve near one sample. Rates and sums make change inspectable; a flow then lets the previous position determine the next sample. Assigned direction is kept distinct from accumulated velocity.",
+      "carry": "Finite differences, accumulation, units and a state-dependent path.",
+      "question": "What did sampling miss between the observations?",
+      "sources": {
+        "commons/maps/sequences/change.json": "00c03e77b96aad6c6d199d5000762ffa8e4fc41c7bfed45864926dfe2be6219b",
+        "commons/maps/Change_Intro/final.md": "29f727aebb05dee07e77c32cbeea9f4beff3ded83534d571dd6fef05d5c39dd3",
+        "commons/maps/Flow_Field/final.md": "f725663420da25ff97aa61743f4d149d169ebe6f3505cf0dff8b58aa973b1bb0"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:forces": {
+      "summary": "A direction becomes consequential through the operation receiving it. Moving points, launches, fields, springs, gravity and bodily passages distinguish velocity assignment from accumulated acceleration. A visitor and a cube can respond to related calculations through different receivers.",
+      "carry": "Retained motion, force updates and attention to the receiver.",
+      "question": "Where does an instruction become a consequence?",
+      "sources": {
+        "commons/maps/sequences/forces.json": "87761d6cab136c77872f70c4fd174d270b4eed7a7ce86f97580f1bd968572ef2",
+        "commons/maps/Vectors_Act1_WhatAVectorIs/final.md": "5b6ac96938df17e18a9713ec383517bdd44b7fc23c8ad9cb346846c13573dcf5",
+        "commons/maps/Vectors_Act5_ForceAsPlace/final.md": "a7d77489a99feedcfbae6eda9fee0885641121a6859d1a10faad1646437fe630"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:formfinding": {
+      "summary": "A point descends, a cable hangs, constraints relax and a search permits a worse step. Similar arrivals emerge from different procedures. The forge makes its criterion visible: a form can stand while failing the authored test for what counts as finished.",
+      "carry": "An objective, allowed changes, iterative correction and stopping criteria.",
+      "question": "Who decides when a form has arrived?",
+      "sources": {
+        "commons/maps/sequences/formfinding.json": "348678399e5d4091664db3d4608e38d1401997788838be8d3dd05e6ff73b8d7b",
+        "commons/maps/FormFinding_Descent/final.md": "f0e55a23a7fd05609ef5aac713651a751a418403137c1d203a3e064794763016",
+        "commons/maps/FormFinding_Forge/final.md": "befab20a39a40fa63ba2f518fe778bc1c3ca1e6819b831348696107f8ca66f48"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:wavefunctions": {
+      "summary": "Returning to a position need not return a body to the same state. Phase, frequency, coupling, sampling and addition become visible and audible. A retained recipe and a held instant provide different ways of returning to an experience.",
+      "carry": "Periodic state, sampled waves and composable signal recipes.",
+      "question": "What must be kept to repeat a moment?",
+      "sources": {
+        "commons/maps/sequences/wavefunctions.json": "003714a465cca642c9652cb2e6d982292166cf6c1501bedbbebe5df3826fdaf0",
+        "commons/maps/WaveFunctions_Intro/final.md": "43fe453f8a5e3491ba4904061dc02f295f5cce051a5a3bf20d985522d21c4676",
+        "commons/maps/WaveFunctions_Synthesis_Lab/final.md": "7b9b37b353c3bbf36fb9e7b7dcb9fbe218d96317e5fac151b613539f1538e1be"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:randomness": {
+      "summary": "An unfamiliar result asks what could bring it back. Seeds, draw order, distributions, walks and staged choices expose different kinds of uncertainty. Random selection enters authored arrangements whose rules still determine what can happen and what is revealed.",
+      "carry": "Reproducible choices, distributions and explicit sampling policies.",
+      "question": "Which decisions are already made, and what tells us?",
+      "sources": {
+        "commons/maps/sequences/randomness.json": "5e3456596d4ef6721cab71d3f456e40a886009408ff3a023894d9d964b920e1a",
+        "commons/maps/Random_Definition/final.md": "be1b6f38ba2145455168197560b622caf8671d1025fb2dff47ac0412815ae94f",
+        "commons/maps/Random_Game/final.md": "ce4c5ac80455f73ef0bbe58a4c789f67a221e93f90a52e47251b33fc9cc14d75"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:noise": {
+      "summary": "Neighbouring samples have relationships. Fields become columns, surfaces, volumes and paths; thresholds and mappings turn values into different bodies. A smooth appearance does not settle the sampling rule or the physical support supplied by the room.",
+      "carry": "Correlated fields and the distinction between a value and its interpretation.",
+      "question": "What continuity belongs to the field, and what was added by its display?",
+      "sources": {
+        "commons/maps/sequences/noise.json": "8470c73f6617d144a1dfb7c7a3c3331a43465c5ae4b774cd05645c6c7b1c6fa7",
+        "commons/maps/Random_Noise_Types/final.md": "31c1811ed02302b3f170c44a1186fde06538cb66a1c5e672138c98746197377a",
+        "commons/maps/Lab_Path/final.md": "1cb3de387d1130950f1f1368f70478a1c6339e75484a31af66fe16082b73ff5f"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:shaders": {
+      "summary": "A circle rule appears on familiar surfaces. Repetition, apparent relief, displaced vertices and composed materials alter what light and position reveal. Retained reaction–diffusion then adds a completed past to the next update, separating changing appearance from actual state.",
+      "carry": "Surface evaluation, coordinate mappings and explicit feedback.",
+      "question": "What can a surface change, and what still requires another system?",
+      "sources": {
+        "commons/maps/sequences/shaders.json": "7e3f3c83ca9ba0ea0b001c261ed1216a98c826bb18cdb145ce645130541cb161",
+        "commons/maps/Shader_01_Shaping/final.md": "e8e2b4a399d24464207e649eecb3d0cd71dc3419a34cda83130f14922cf996c1",
+        "commons/maps/Shader_10_ReactionDiffusion/final.md": "f0cc72fb6955d9deda0af840baea3eb7efa16766bde1d588bd1341dea714ef24"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:cellularautomata": {
+      "summary": "A neighbourhood answers from a previous state. Clocks, histories, more than two states, bodily input and exchange make local updates inspectable. Different rules can produce related appearances; the next construction must explain how its resemblance was made.",
+      "carry": "Neighbourhood rules, snapshots, updates and retained histories.",
+      "question": "How can a local answer change the conditions of the next encounter?",
+      "sources": {
+        "commons/maps/sequences/cellularautomata.json": "1be0af8a2d8b8648234f964ee89ce5b284cef016489794f8addc5a422a7d154c",
+        "commons/maps/CA_Introduction/final.md": "eac130904ede6310bcc3ed07d2633c8ca2cf8f3bcfe42be9ff3b4d2a98d67459",
+        "commons/maps/CA_EdgeOfChaos/final.md": "6239b168abb0d9eaff15cd81e62b5797ab178c9edace94227d3dc96eb5ff65bc"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:fractals": {
+      "summary": "A procedure asks for another instance of itself. Repetition at changing scales builds branches, removals, curves and porous volumes. Finite construction and visibility stay separate from mathematical continuation; an explicit rule prepares the move into rewritten sentences.",
+      "carry": "Recursion, scale, termination and an explicit repeatable rule.",
+      "question": "How much of a repeated structure can a finite body encounter?",
+      "sources": {
+        "commons/maps/sequences/fractals.json": "98fc39595025112a2e130e6829c08efdf0558957d90d6794924ea33650925deb",
+        "commons/maps/Fractal_Recursion/final.md": "b7d53ea22be93d060dfb516ab08224391fc03f826b0e8cb67badae8faca73421",
+        "commons/maps/Fractal_Synthesis/final.md": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:lsystems": {
+      "summary": "A sentence is rewritten and then interpreted as movement. The same symbols can yield different bodies when their reading changes. Growth, architecture, competition and specimen families lead from a grammar to the desires and selections it does not contain.",
+      "carry": "Separate description, rewriting and geometric interpretation.",
+      "question": "Can one sentence have two bodies, or a body exceed its description?",
+      "sources": {
+        "commons/maps/sequences/lsystems.json": "4eafb0cbd1069705599dc7dce487791f898537a60f3a394b98255a1477c06364",
+        "commons/maps/LSystems_Grammar_Lab/final.md": "df55bcf2fe786cd4094ed3c7e0226cc88864fab1947bc2787896aba52e395c22",
+        "commons/maps/Assemblage_Same_Desire/final.md": "8ad89175401115f38e8cc055de8c126f73a7be3325b06a790742df876e0cb837"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:proceduralgeneration": {
+      "summary": "Descriptions and rules now generate candidates, branches, connections, interiors and sampled forms. A builder and an evaluator can read the same description for different purposes. Selection makes the chosen measure part of what survives.",
+      "carry": "Generation, evaluation and composition with explicit conditions.",
+      "question": "What would a score need to know about the form you want to keep?",
+      "sources": {
+        "commons/maps/sequences/proceduralgeneration.json": "4ef7fd9ed1f5e20216f46c486559d68eef1a20094b4fda84d41132be3b3f37d5",
+        "commons/maps/PG_Genetic_Evolution/final.md": "1504367729c976d6623d89fe673aaee96d39144f2a9847d363e54537f4e55897",
+        "commons/maps/PG_Mirrored_Patterns/final.md": "b7e46b917779b6c1f3e41d55bc6a70d1b09d4a0af28226505e5d7fbcfcb00805"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:softbodies": {
+      "summary": "A familiar body keeps connections while its positions yield. Constraints, supports, contact and recorded shapes expose conditions behind an apparently lively surface. Morphogenesis extends the inquiry into continuing exchanges and authored fields.",
+      "carry": "Deformation, constraints, boundary conditions and saved configurations.",
+      "question": "Which part of a body are we willing to let change?",
+      "sources": {
+        "commons/maps/sequences/softbodies.json": "4d7e7bfc865ab063f0bcc0568e5f7d86b9e26731da4ce14e35e3d8e9d1ccb8d1",
+        "commons/maps/SoftBodies_Soft_Body_Deformation/final.md": "8683f65e194b1aa0e8c3f89fd6079d36ac053b9a99bfb959473dcdb2f966fa14",
+        "commons/maps/Topology_Entropy_Morphogenesis/final.md": "2b6bef5bd1d7e6234dc8c8a8a077a0ba70f286d9d6438c0fc07d7081ed0f6a4c"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:isosurfaces": {
+      "summary": "A sampled field supplies values from which a boundary is extracted. Shapes, sculpting, terrain, caves and joined chambers make the relation between field, mesh and usable passage inspectable. The final walk asks which drawn connections a body can actually use.",
+      "carry": "Field-to-surface construction and separate checks for geometry and access.",
+      "question": "What makes a calculated boundary inhabitable?",
+      "sources": {
+        "commons/maps/sequences/isosurfaces.json": "e0724f16ba868f9b81c96626ca9ec85f3d1b67ebd25f3b47522ab0127b7ac58b",
+        "commons/maps/ISO_Introduction/final.md": "7e06893df3e41621612058768f90b3aa3f24e059425244c454ed5f1c30707fcf",
+        "commons/maps/ISO_RhizomeBody/final.md": "9432a24211548d64a8d643bac1badac22637cd54233b32f0c3a4cd75e3d7420b"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:boolean_surfaces": {
+      "summary": "Union, intersection and difference compose regions. Familiar solids give shape to a hollow; a gallery and individual works place the operations in material and artistic encounters. The evidence of an opening and permission to enter it remain different.",
+      "carry": "Explicit solid operations and attention to the resulting void.",
+      "question": "What does a hollow permit a body to imagine or do?",
+      "sources": {
+        "commons/maps/sequences/boolean_surfaces.json": "5ada6cf45cb861263150941643dff787ffc832f34d3b06ce104a6387d8d984ea",
+        "commons/maps/Boolean_Verbs/final.md": "e73506970c2a570db6668f4f1a39f464370341351e934593d549b327339fc6ac",
+        "commons/maps/Boolean_Works/final.md": "b46ac8661801f9d30fcef3b9403f69c1d8b32cec88419daaf9f0751681543abe"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:swarmintelligence": {
+      "summary": "Many bodies respond to traces, supplied fields, neighbours and retained experiences. Similar collective images can arise from different kinds of information exchange. Holding the familiar sphere makes the observer's intervention part of what must be accounted for.",
+      "carry": "Local rules, shared environments and several locations for memory.",
+      "question": "Which relations sustain a collective, and who can alter them?",
+      "sources": {
+        "commons/maps/sequences/swarmintelligence.json": "59beb4d4142e9189fe4b0ec9de1d4bc6cfb89edb9360e63e8ba618f6a0b021e0",
+        "commons/maps/SwarmIntelligence_PhysarumColony/final.md": "ba78a034771ed4401f7120b8df923397a593f11a883fec3ec011c4ba650907f7",
+        "commons/maps/SwarmIntelligence_Swarm_Intelligence_Algorithms/final.md": "e0d6872ef710f7ba200d5554ab1dea11a65800620269c7d92929c7c3e9bdec89"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:graphtheory": {
+      "summary": "Connections become explicit records. Traversal, layout, routes, measures, spanning structures, flow and matching distinguish the graph from each operation performed on it. The closing comparison asks which possibilities an arrangement leaves unused.",
+      "carry": "Nodes, edges and operations with distinct objectives.",
+      "question": "Which relation did we draw, and which did we leave out?",
+      "sources": {
+        "commons/maps/sequences/graphtheory.json": "800893915fe4027ed87e64988849a6156fa740e9728047443bf3f7480112e74d",
+        "commons/maps/GT_Foundations/final.md": "067eaa8736f8f1a56c2151671479b38693134a127f4f6572f1679dd402d65bf3",
+        "commons/maps/GT_Matching/final.md": "b7dcc7a016d46d5e2124ccd4a25d405ec21e4f854756e3f3117c2215d2809bff"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:machinelearning": {
+      "summary": "A familiar sphere meets examples, objectives and fitted parameters. Grouping, prediction, two-hand phrases and generation lead to a journal that keeps intention, performance and model answer separate. A changed model receives a history rather than erasing earlier disagreements.",
+      "carry": "Examples, fitting, held-out checks and versioned evidence.",
+      "question": "What can a working answer establish about what someone meant?",
+      "sources": {
+        "commons/maps/sequences/machinelearning.json": "fc25a24c6450c7915c8dee4ab369a83d376aed023c80d321c7f0c8379681eb62",
+        "commons/maps/ML_Evolution/final.md": "af26568da0f032973bc21895f7e22f5184c85c6ad7b0f001aaa8e8fe98d92657",
+        "commons/maps/ML_Synthesis/final.md": "eb57a2a62c712c122353ba7f6264ac6af6f48c359d57c2b02fb1a03b6ad35e92"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:foundationscrisis": {
+      "summary": "The point and triangle return as assumptions to investigate. Geometry, membership, proof, construction and conflicting reports expose differences between an instrument's answer and its warrant. The sequence prepares a proposed framework to be questioned rather than exempted.",
+      "carry": "Explicit assumptions, bounded claims and competing accounts.",
+      "question": "What has a construction established, and what remains unaccounted for?",
+      "sources": {
+        "commons/maps/sequences/foundationscrisis.json": "2a3c431fd24704b951f7aa891c0706ac44b05886649a9b6c263a38b1860d536a",
+        "commons/maps/Euclid_Parallel/final.md": "9efa7a337274af60f261b9d258c861519b8d0d6be4a6d3ed02d431f708ab9be1",
+        "commons/maps/Crisis_Synthesis/final.md": "c7a82a96ccb364f293be4c006e673908de830bea9b87e52ece7755b8975c4d5e"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:qfeplaboratory": {
+      "summary": "Ada's proposed QFEP framework becomes particular calculations and adjustable relations. Terms, combinations and a sandbox make the proposal available for investigation. Supplied, measured and omitted quantities must remain distinguishable while the maker becomes part of the question.",
+      "carry": "A revisable research proposal and inspectable modeling choices.",
+      "question": "What does this model preserve, and what would we change next?",
+      "sources": {
+        "commons/maps/sequences/qfeplaboratory.json": "0424d1a366076c798f26f5f67ca46d26858e55f15b02090df5017d942d0faf9f",
+        "commons/maps/QFEP_Introduction/final.md": "b599c5e323e35e4849feba90644d5fabd31f65967dbcaff718c991b75b91a529",
+        "commons/maps/QFEP_Synthesis/final.md": "13cdc7c30465af10627618dacb4d92d2172dc2689b4583642c9e2f2a576ceda9"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    },
+    "sequence:postfoundationscrisis": {
+      "summary": "The inquiry turns toward representation, participation, disagreement and the museum's own construction. Distinctions, records and connections give the maker something to revise. The clock is still running, but the visitor now has more means to ask the world to become otherwise.",
+      "carry": "An accountable record, usable constructions and an open next work.",
+      "question": "What did you want to make that this world cannot yet accommodate?",
+      "sources": {
+        "commons/maps/sequences/postfoundationscrisis.json": "d66ea69597eeabb838789ca9c672dc23da12161276e1ccad8125dadc7251405a",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b",
+        "commons/maps/PostCrisis_Synthesis/final.md": "3dc78f30cf40765da0ecc13839996af929681c676b574b3c511c00520de87ce0"
+      },
+      "edited_by": "editorial draft",
+      "updated_at": "2026-10-11"
+    }
+  },
+  "threads": {
+    "body": {
+      "title": "A body, new capacities",
+      "summary": "Follow familiar bodies as construction, movement, interaction and learning change. Shared appearance alone does not establish shared code or persistent identity.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "trace": {
+      "title": "Trace and memory",
+      "summary": "Follow what is retained, where it is kept, who reads it and what cannot be recovered. A drawing, previous state and training example are different records.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "frame": {
+      "title": "Frames and representations",
+      "summary": "Follow the gap between a value, its reference frame, its display and the claims made from it.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "rule": {
+      "title": "Rules and variation",
+      "summary": "Follow how a compact instruction permits families of outcomes, and how construction, sampling and interpretation alter those families.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "boundary": {
+      "title": "Boundaries and access",
+      "summary": "Follow the differences between an outline, a surface, a collider, a hollow and a usable passage.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "selection": {
+      "title": "Selection and value",
+      "summary": "Follow criteria for keeping, improving or recognising a result, alongside the reasons a participant might disagree.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "time": {
+      "title": "Time and return",
+      "summary": "Follow initialization, change, recurrence and history. Repeating a recipe is different from recovering a state.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "authorship": {
+      "title": "Authorship and revision",
+      "summary": "Follow the ability to change a rule, contest a description and revise the museum itself. These are editorial connections, not automatic software transfers.",
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    }
+  },
+  "connections": {
+    "connection-001": {
+      "thread": "body",
+      "from": "map:Point_One",
+      "to": "map:Point_Coordinates",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "Continue the point construction; add pickup and read its local and world positions.",
+      "sources": {
+        "commons/maps/Point_One/tutorial.md": "48380c6369594e603a34ebfdda5192672987e46c384c671e11b2029ec8a59c31",
+        "commons/maps/Point_One/final.md": "5ff4d712b9bcc4b614daefb03f56a4504a26d636632dcfbb53c9ce0d2a4658d3",
+        "commons/maps/Point_Coordinates/tutorial.md": "bf928382c9b75738b8eccf17f2f5b5552476b9a401bf1cb94c70bbe5b2cfccb8",
+        "commons/maps/Point_Coordinates/final.md": "de833bd8680b372c552020b8b9189de03f2b8df0d1a78d7cc035a1351deccad0"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-002": {
+      "thread": "body",
+      "from": "map:Point_Coordinates",
+      "to": "map:Point_Lines",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "Extract the familiar point into PointBody and instantiate two endpoints.",
+      "sources": {
+        "commons/maps/Point_Coordinates/tutorial.md": "bf928382c9b75738b8eccf17f2f5b5552476b9a401bf1cb94c70bbe5b2cfccb8",
+        "commons/maps/Point_Coordinates/final.md": "de833bd8680b372c552020b8b9189de03f2b8df0d1a78d7cc035a1351deccad0",
+        "commons/maps/Point_Lines/tutorial.md": "cad7e95a0e3f3a6a67bc3746c353076f8b67604370fbea9a4c01b9edbfcc0550",
+        "commons/maps/Point_Lines/final.md": "8e38115fd7eb15593a9c9940668aa4b037a77434b8050a38851ad0908d1dd197"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-003": {
+      "thread": "body",
+      "from": "map:Point_Lines",
+      "to": "map:Point_Trace",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "PointBody and LineSkin return; recorded neighbours replace the live pair.",
+      "sources": {
+        "commons/maps/Point_Lines/tutorial.md": "cad7e95a0e3f3a6a67bc3746c353076f8b67604370fbea9a4c01b9edbfcc0550",
+        "commons/maps/Point_Lines/final.md": "8e38115fd7eb15593a9c9940668aa4b037a77434b8050a38851ad0908d1dd197",
+        "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+        "commons/maps/Point_Trace/final.md": "1f2044371946904df29a1512b79394665b006365f147a53901c5db00c0185a64"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-004": {
+      "thread": "body",
+      "from": "map:Trans_Pre",
+      "to": "map:Array",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The reflective opening explicitly brings back the cube from Transformation, now with companions and addresses.",
+      "sources": {
+        "commons/maps/Trans_Pre/tutorial.md": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71",
+        "commons/maps/Trans_Pre/final.md": "6104f9fd54b124d362575e40411183f975cf32b7bec8de5a2c52d45d29f4e7be",
+        "commons/maps/Array/final.md": "59e9405d3f2cbc843a2f40f6079683a7d2fac17324f15eedb88dd64e2bc7d4b0"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-005": {
+      "thread": "body",
+      "from": "map:ML_Perception",
+      "to": "map:ML_Sequence_Memory",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "The learner sphere and hand capture gain an ordered, timed phrase.",
+      "sources": {
+        "commons/maps/ML_Perception/tutorial.md": "5bdaebf4949c11a46abc76bfb120f220ab455182af9c1a877587e4b9420cf052",
+        "commons/maps/ML_Perception/final.md": "ea1137fe4933ee7e754028a591aa322690f5b8b1179a47fab22e452ec2bae963",
+        "commons/maps/ML_Sequence_Memory/tutorial.md": "a952ecdf077e7d439d77a0722c5b10054e7cfdf036e076f1afc037f2af37af18",
+        "commons/maps/ML_Sequence_Memory/final.md": "9f66add70067c469f3e708ff344eb3077a01381a6f1dd365e5044d62f12489f4"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-006": {
+      "thread": "body",
+      "from": "map:ML_Sequence_Memory",
+      "to": "map:ML_Synthesis",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "The A/B recogniser returns with intention and a journal; generated examples do not become validation data.",
+      "sources": {
+        "commons/maps/ML_Sequence_Memory/tutorial.md": "a952ecdf077e7d439d77a0722c5b10054e7cfdf036e076f1afc037f2af37af18",
+        "commons/maps/ML_Sequence_Memory/final.md": "9f66add70067c469f3e708ff344eb3077a01381a6f1dd365e5044d62f12489f4",
+        "commons/maps/ML_Synthesis/tutorial.md": "1efae5550aff6a3f1d8352e4cb5e57c7b6648646fdf1134bcd25c1056e0753ce",
+        "commons/maps/ML_Synthesis/final.md": "eb57a2a62c712c122353ba7f6264ac6af6f48c359d57c2b02fb1a03b6ad35e92"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-007": {
+      "thread": "body",
+      "from": "sequence:primitives",
+      "to": "sequence:forces",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "A familiar small body makes the difference between position and accumulated motion easier to follow.",
+      "sources": {
+        "commons/maps/sequences/primitives.json": "8f178191a3c971cccee8d18c9a067690c73f594db2dadb5150eb20995d7a410c",
+        "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38",
+        "commons/maps/Primitives_Melencolia/final.md": "251ac7cad9855a63e06c84907c5b0d6cd5e7a2531b0f5803ca3cef282937b28e",
+        "commons/maps/sequences/forces.json": "87761d6cab136c77872f70c4fd174d270b4eed7a7ce86f97580f1bd968572ef2",
+        "commons/maps/Vectors_Act1_WhatAVectorIs/final.md": "5b6ac96938df17e18a9713ec383517bdd44b7fc23c8ad9cb346846c13573dcf5",
+        "commons/maps/Vectors_Act5_ForceAsPlace/final.md": "a7d77489a99feedcfbae6eda9fee0885641121a6859d1a10faad1646437fe630"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-008": {
+      "thread": "trace",
+      "from": "map:Point_Trace",
+      "to": "map:Point_Line_Grid",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "The tutorial saves the drawing and loads its existing sculpture; the original is retained beside a quantised copy.",
+      "sources": {
+        "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+        "commons/maps/Point_Trace/final.md": "1f2044371946904df29a1512b79394665b006365f147a53901c5db00c0185a64",
+        "commons/maps/Point_Line_Grid/tutorial.md": "9f97d12c38c7138758cff138e61b031878f1a2fc18c3a42be1143190f62a2c3c",
+        "commons/maps/Point_Line_Grid/final.md": "86f9d4cc034ca15db03657179c65cdc18280a0ef73cdb8549f3b60ffd05759c8"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-009": {
+      "thread": "trace",
+      "from": "map:Point_Trace",
+      "to": "map:ML_Sequence_Memory",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "The opening position record has no timestamps; later movement recognition depends on timed two-hand samples.",
+      "sources": {
+        "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+        "commons/maps/Point_Trace/final.md": "1f2044371946904df29a1512b79394665b006365f147a53901c5db00c0185a64",
+        "commons/maps/ML_Sequence_Memory/tutorial.md": "a952ecdf077e7d439d77a0722c5b10054e7cfdf036e076f1afc037f2af37af18",
+        "commons/maps/ML_Sequence_Memory/final.md": "9f66add70067c469f3e708ff344eb3077a01381a6f1dd365e5044d62f12489f4"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-010": {
+      "thread": "trace",
+      "from": "map:Shader_10_ReactionDiffusion",
+      "to": "map:CA_Introduction",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The opening CA text carries the shader question of which completed past each update receives.",
+      "sources": {
+        "commons/maps/Shader_10_ReactionDiffusion/tutorial.md": "0aa333032cfac23b26e5380f59a186751c49773eec5668f2552a78bdbd6def29",
+        "commons/maps/Shader_10_ReactionDiffusion/final.md": "f0cc72fb6955d9deda0af840baea3eb7efa16766bde1d588bd1341dea714ef24",
+        "commons/maps/CA_Introduction/tutorial.md": "9c2ed887c689386b81e1dc3f7aacbf94c995eaaa1c3a4cf069c48e0890b3e300",
+        "commons/maps/CA_Introduction/final.md": "eac130904ede6310bcc3ed07d2633c8ca2cf8f3bcfe42be9ff3b4d2a98d67459"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-011": {
+      "thread": "trace",
+      "from": "map:Point_Trace",
+      "to": "map:SwarmIntelligence_PhysarumColony",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "A remembered gesture and an environmental trail ask different questions about who keeps and reads a trace.",
+      "sources": {
+        "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+        "commons/maps/Point_Trace/final.md": "1f2044371946904df29a1512b79394665b006365f147a53901c5db00c0185a64",
+        "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md": "2fa70f39d1f793e4d240b1d8c5c9fb1ab42f5dae7775a050ae841a97044f1860",
+        "commons/maps/SwarmIntelligence_PhysarumColony/final.md": "ba78a034771ed4401f7120b8df923397a593f11a883fec3ec011c4ba650907f7"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-012": {
+      "thread": "trace",
+      "from": "map:SwarmIntelligence_PhysarumColony",
+      "to": "map:ML_Sequence_Memory",
+      "relation": "resembles",
+      "status": "interpretation",
+      "reason": "Earlier events influence later behaviour through very different stores: a shared field and recorded examples.",
+      "sources": {
+        "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md": "2fa70f39d1f793e4d240b1d8c5c9fb1ab42f5dae7775a050ae841a97044f1860",
+        "commons/maps/SwarmIntelligence_PhysarumColony/final.md": "ba78a034771ed4401f7120b8df923397a593f11a883fec3ec011c4ba650907f7",
+        "commons/maps/ML_Sequence_Memory/tutorial.md": "a952ecdf077e7d439d77a0722c5b10054e7cfdf036e076f1afc037f2af37af18",
+        "commons/maps/ML_Sequence_Memory/final.md": "9f66add70067c469f3e708ff344eb3077a01381a6f1dd365e5044d62f12489f4"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-013": {
+      "thread": "trace",
+      "from": "map:ML_Synthesis",
+      "to": "sequence:postfoundationscrisis",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Keeping disagreement beside the model that produced it supports the later inquiry into provenance and revision.",
+      "sources": {
+        "commons/maps/ML_Synthesis/tutorial.md": "1efae5550aff6a3f1d8352e4cb5e57c7b6648646fdf1134bcd25c1056e0753ce",
+        "commons/maps/ML_Synthesis/final.md": "eb57a2a62c712c122353ba7f6264ac6af6f48c359d57c2b02fb1a03b6ad35e92",
+        "commons/maps/sequences/postfoundationscrisis.json": "d66ea69597eeabb838789ca9c672dc23da12161276e1ccad8125dadc7251405a",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b",
+        "commons/maps/PostCrisis_Synthesis/final.md": "3dc78f30cf40765da0ecc13839996af929681c676b574b3c511c00520de87ce0"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-014": {
+      "thread": "trace",
+      "from": "map:Point_Line_Grid",
+      "to": "map:ISO_RhizomeBody",
+      "relation": "revisits",
+      "status": "proposed",
+      "reason": "Return explicitly to the preserved drawing when comparing a chamber graph with the route actually walked.",
+      "sources": {
+        "commons/maps/Point_Line_Grid/tutorial.md": "9f97d12c38c7138758cff138e61b031878f1a2fc18c3a42be1143190f62a2c3c",
+        "commons/maps/Point_Line_Grid/final.md": "86f9d4cc034ca15db03657179c65cdc18280a0ef73cdb8549f3b60ffd05759c8",
+        "commons/maps/ISO_RhizomeBody/final.md": "9432a24211548d64a8d643bac1badac22637cd54233b32f0c3a4cd75e3d7420b"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-015": {
+      "thread": "frame",
+      "from": "map:Point_Coordinates",
+      "to": "map:Color_Pillar",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Coordinates that located a held point now provide addresses for a colour mapping.",
+      "sources": {
+        "commons/maps/Point_Coordinates/tutorial.md": "bf928382c9b75738b8eccf17f2f5b5552476b9a401bf1cb94c70bbe5b2cfccb8",
+        "commons/maps/Point_Coordinates/final.md": "de833bd8680b372c552020b8b9189de03f2b8df0d1a78d7cc035a1351deccad0",
+        "commons/maps/Color_Pillar/tutorial.md": "429592b24cba12d3e9e3f64add39509f1c5c00e7b261e9725d174d99ed589ad4",
+        "commons/maps/Color_Pillar/final.md": "4a9fcbbcecb7ba17ddd79724d26894844ec7bc2fd69295ada45e645c536cb495"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-016": {
+      "thread": "frame",
+      "from": "map:Tutorial_Tiling_Walls",
+      "to": "map:Shader_05_Patterns",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Changing a carrier and changing the coordinates used to read its image remain different operations.",
+      "sources": {
+        "commons/maps/Tutorial_Tiling_Walls/tutorial.md": "8c91e1c2e14ab36e2cf006b586bac18c815c0d88c6721bca7759e3c2fdbaf0a7",
+        "commons/maps/Tutorial_Tiling_Walls/final.md": "dab34aeb426d222f8d613fac52567774f03b1c0f55bee9f18a0b1bf4f46de888",
+        "commons/maps/Shader_05_Patterns/tutorial.md": "efeeb0ecaf786496f7b0bb3d0a8795f713fb9eb53b97011850b5ace8fd588eb2",
+        "commons/maps/Shader_05_Patterns/final.md": "7ac5a4bbfe7247cc9605a676c7d13ad59b6640a00823590d45f0c777ff17e1d5"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-017": {
+      "thread": "frame",
+      "from": "map:GT_Layout",
+      "to": "map:GT_Pathfinding",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "A graph's drawing can suggest a route; connectivity and edge costs determine the search.",
+      "sources": {
+        "commons/maps/GT_Layout/tutorial.md": "ddf683e146bc9c5283cb1791dffaaf61cc353f6d68a3f56a4ee056e63ef08f77",
+        "commons/maps/GT_Layout/final.md": "bdcb8685762287f2983907d876a5ff82044d5f9e1202053462b5b994fbcd9740",
+        "commons/maps/GT_Pathfinding/tutorial.md": "1f6d1c422e7d4b17090ecebc5fb4b64356c56955bc5daa9f95384a41e60a4340",
+        "commons/maps/GT_Pathfinding/final.md": "8ec714dfad41f66928dd176277ce563114b22eba647e5b3bbbd82db9141905ed"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-018": {
+      "thread": "frame",
+      "from": "map:Point_One",
+      "to": "map:Euclid_Parallel",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The familiar point and triangle return to make inherited geometric assumptions conspicuous.",
+      "sources": {
+        "commons/maps/Point_One/tutorial.md": "48380c6369594e603a34ebfdda5192672987e46c384c671e11b2029ec8a59c31",
+        "commons/maps/Point_One/final.md": "5ff4d712b9bcc4b614daefb03f56a4504a26d636632dcfbb53c9ce0d2a4658d3",
+        "commons/maps/Euclid_Parallel/tutorial.md": "fdd920b6ce166c24dd8a45d111cf403a4e342fde4e51a75b561035da71027cfd",
+        "commons/maps/Euclid_Parallel/final.md": "9efa7a337274af60f261b9d258c861519b8d0d6be4a6d3ed02d431f708ab9be1"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-019": {
+      "thread": "frame",
+      "from": "map:Point_Line_Grid",
+      "to": "map:CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Lost positional distinctions open a later question about which distinctions a representation makes legible.",
+      "sources": {
+        "commons/maps/Point_Line_Grid/tutorial.md": "9f97d12c38c7138758cff138e61b031878f1a2fc18c3a42be1143190f62a2c3c",
+        "commons/maps/Point_Line_Grid/final.md": "86f9d4cc034ca15db03657179c65cdc18280a0ef73cdb8549f3b60ffd05759c8",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md": "7bbaa772e3de614cfb72a416cb1f791ebe1455924dbcb8391b26feb17007c357",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-020": {
+      "thread": "rule",
+      "from": "map:Color_Walls",
+      "to": "map:Pattern_Disco",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The final colour passage invites the familiar disco floor to return with another palette.",
+      "sources": {
+        "commons/maps/Color_Walls/tutorial.md": "9aecf5086e09dc5edd8196d13f2b9e48e211469c9dfc65ea7cf4a864384baad7",
+        "commons/maps/Color_Walls/final.md": "1e9f7699714af90244135ed04e7f704fd1a69e9f22211073db52533c3087d7c7",
+        "commons/maps/Pattern_Disco/tutorial.md": "e3b0fb7d816aa966002c0d12296d1960dcf662c9e90a00254524df924b49fedc",
+        "commons/maps/Pattern_Disco/final.md": "bf123b5a24009b9fc963f0ef0cf111c9a9d9f5f0dc57210e8ed81ceac01fc18f"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-021": {
+      "thread": "rule",
+      "from": "map:Fractal_Synthesis",
+      "to": "map:LSystems_Grammar_Lab",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The closing passage carries an explicit repeated rule into a rewritten sentence and its interpretation.",
+      "sources": {
+        "commons/maps/Fractal_Synthesis/tutorial.md": "24e259387c07611b41324100e1403fb26cec925fa97ea96d567c87fd9fae40e8",
+        "commons/maps/Fractal_Synthesis/final.md": "287eccbf26399528d9265701218ea50dfed57b84c324d5db2b57c1672fa32856",
+        "commons/maps/LSystems_Grammar_Lab/tutorial.md": "c390c82fc2625286ece1562f4fb25a66bffcfca4eb48d11bb00283ba7f264210",
+        "commons/maps/LSystems_Grammar_Lab/final.md": "df55bcf2fe786cd4094ed3c7e0226cc88864fab1947bc2787896aba52e395c22"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-022": {
+      "thread": "rule",
+      "from": "map:LSystems_Shape_Grammars",
+      "to": "map:PG_Genetic_Evolution",
+      "relation": "complicates",
+      "status": "documented",
+      "reason": "A generated specimen family gains a separate evaluator that decides which descriptions continue.",
+      "sources": {
+        "commons/maps/LSystems_Shape_Grammars/tutorial.md": "056891f6bfe08e25ebb2b3849f5b1485daee875303ce991925e3e2ee649dd7f3",
+        "commons/maps/LSystems_Shape_Grammars/final.md": "e3972307153c440a77fc5c6c2363cc5fa8171b5fa02add4cbd2e318d25c8edcc",
+        "commons/maps/PG_Genetic_Evolution/tutorial.md": "c95ee2fac28a527aa0caa249a5e888006dc6775ebc5dc38c8af55c4c5fb0b7a0",
+        "commons/maps/PG_Genetic_Evolution/final.md": "1504367729c976d6623d89fe673aaee96d39144f2a9847d363e54537f4e55897"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-023": {
+      "thread": "rule",
+      "from": "map:Primitives_Columns",
+      "to": "map:LSystems_Grammar_Lab",
+      "relation": "resembles",
+      "status": "interpretation",
+      "reason": "A profile and a sentence both separate a retained description from choices made while giving it a body.",
+      "sources": {
+        "commons/maps/Primitives_Columns/tutorial.md": "815d26e26d8dc3eb955e4a4431e51d6e30f8989ea5886f4f1479e4cc509afa6f",
+        "commons/maps/Primitives_Columns/final.md": "07ef703e70d6e3c3c14c991de4d5f6be50162d9efc1572aac43fcf2a522ba2db",
+        "commons/maps/LSystems_Grammar_Lab/tutorial.md": "c390c82fc2625286ece1562f4fb25a66bffcfca4eb48d11bb00283ba7f264210",
+        "commons/maps/LSystems_Grammar_Lab/final.md": "df55bcf2fe786cd4094ed3c7e0226cc88864fab1947bc2787896aba52e395c22"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-024": {
+      "thread": "rule",
+      "from": "map:Random_Game",
+      "to": "map:Random_Noise_Types",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "Uncertain choices gain spatial relationships; independent draws and correlated samples must stay distinct.",
+      "sources": {
+        "commons/maps/Random_Game/tutorial.md": "a29f001a62c8a76896c6dcdef5bf57c0d898e374657654f7bd63602f1c0f6836",
+        "commons/maps/Random_Game/final.md": "ce4c5ac80455f73ef0bbe58a4c789f67a221e93f90a52e47251b33fc9cc14d75",
+        "commons/maps/Random_Noise_Types/tutorial.md": "766b26865fd6bae307d112cddb142e1c5517ae0f86773d9aefb086584cd53e85",
+        "commons/maps/Random_Noise_Types/final.md": "31c1811ed02302b3f170c44a1186fde06538cb66a1c5e672138c98746197377a"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-025": {
+      "thread": "rule",
+      "from": "map:Shader_05_Patterns",
+      "to": "map:CA_Introduction",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "Repeated surface evaluation becomes a useful comparison when a rule explicitly receives retained state.",
+      "sources": {
+        "commons/maps/Shader_05_Patterns/tutorial.md": "efeeb0ecaf786496f7b0bb3d0a8795f713fb9eb53b97011850b5ace8fd588eb2",
+        "commons/maps/Shader_05_Patterns/final.md": "7ac5a4bbfe7247cc9605a676c7d13ad59b6640a00823590d45f0c777ff17e1d5",
+        "commons/maps/CA_Introduction/tutorial.md": "9c2ed887c689386b81e1dc3f7aacbf94c995eaaa1c3a4cf069c48e0890b3e300",
+        "commons/maps/CA_Introduction/final.md": "eac130904ede6310bcc3ed07d2633c8ca2cf8f3bcfe42be9ff3b4d2a98d67459"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-026": {
+      "thread": "boundary",
+      "from": "map:Point_One",
+      "to": "map:Point_Triangle_Context",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "A visible body and collider prepare the distinction between a closed drawn boundary and a filled face.",
+      "sources": {
+        "commons/maps/Point_One/tutorial.md": "48380c6369594e603a34ebfdda5192672987e46c384c671e11b2029ec8a59c31",
+        "commons/maps/Point_One/final.md": "5ff4d712b9bcc4b614daefb03f56a4504a26d636632dcfbb53c9ce0d2a4658d3",
+        "commons/maps/Point_Triangle_Context/tutorial.md": "b28ba3b36eec2b345756cefcfd5606d72eb32f548c2de2711ddb0a6f96ee53c5",
+        "commons/maps/Point_Triangle_Context/final.md": "4a71242e429693455babc420f82fc0f49530508979f8db2895f0c6aff2bd6cdb"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-027": {
+      "thread": "boundary",
+      "from": "map:Trans_Pre",
+      "to": "map:Trans_Pit",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The final hall explicitly returns to the three transforms, now making room for the visitor.",
+      "sources": {
+        "commons/maps/Trans_Pre/tutorial.md": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71",
+        "commons/maps/Trans_Pre/final.md": "6104f9fd54b124d362575e40411183f975cf32b7bec8de5a2c52d45d29f4e7be",
+        "commons/maps/Trans_Pit/tutorial.md": "4833b8e82b40eb447a0917b2f67dbbe5178acf02fb3e7a18c310b041be1b855e",
+        "commons/maps/Trans_Pit/final.md": "379dac53cacd7618c453bca1d9aba66061422391136a22908dd1fe68b0b36454"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-028": {
+      "thread": "boundary",
+      "from": "map:Color_Walls",
+      "to": "map:Shader_01_Shaping",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Seeing a passage and being allowed through it remain separate even when an edge softens.",
+      "sources": {
+        "commons/maps/Color_Walls/tutorial.md": "9aecf5086e09dc5edd8196d13f2b9e48e211469c9dfc65ea7cf4a864384baad7",
+        "commons/maps/Color_Walls/final.md": "1e9f7699714af90244135ed04e7f704fd1a69e9f22211073db52533c3087d7c7",
+        "commons/maps/Shader_01_Shaping/tutorial.md": "1729fb3ba4e4bb28cf3ca626161bf71f14c74b2164df72eef92ee6315163eb08",
+        "commons/maps/Shader_01_Shaping/final.md": "e8e2b4a399d24464207e649eecb3d0cd71dc3419a34cda83130f14922cf996c1"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-029": {
+      "thread": "boundary",
+      "from": "map:ISO_RhizomeBody",
+      "to": "map:Boolean_Verbs",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The last isosurface passage names joined chambers and cut entrances before introducing the three solid operations.",
+      "sources": {
+        "commons/maps/ISO_RhizomeBody/final.md": "9432a24211548d64a8d643bac1badac22637cd54233b32f0c3a4cd75e3d7420b",
+        "commons/maps/Boolean_Verbs/tutorial.md": "2d2d978ad763ac836bec07bf8a77c0b70c9e938d43996aebc50ae4bdb7614869",
+        "commons/maps/Boolean_Verbs/final.md": "e73506970c2a570db6668f4f1a39f464370341351e934593d549b327339fc6ac"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-030": {
+      "thread": "boundary",
+      "from": "map:Boolean_Works",
+      "to": "map:SwarmIntelligence_PhysarumColony",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The closing text moves from what a hollow permits one body to what shared ground permits many.",
+      "sources": {
+        "commons/maps/Boolean_Works/tutorial.md": "be6ccb51476738d4281889f47757810407c4cde52c80e540d30ef0c2309976eb",
+        "commons/maps/Boolean_Works/final.md": "b46ac8661801f9d30fcef3b9403f69c1d8b32cec88419daaf9f0751681543abe",
+        "commons/maps/SwarmIntelligence_PhysarumColony/tutorial.md": "2fa70f39d1f793e4d240b1d8c5c9fb1ab42f5dae7775a050ae841a97044f1860",
+        "commons/maps/SwarmIntelligence_PhysarumColony/final.md": "ba78a034771ed4401f7120b8df923397a593f11a883fec3ec011c4ba650907f7"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-031": {
+      "thread": "boundary",
+      "from": "sequence:softbodies",
+      "to": "sequence:isosurfaces",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "Moving connected surface points and extracting a boundary from a field are different constructions of a changing body.",
+      "sources": {
+        "commons/maps/sequences/softbodies.json": "4d7e7bfc865ab063f0bcc0568e5f7d86b9e26731da4ce14e35e3d8e9d1ccb8d1",
+        "commons/maps/SoftBodies_Soft_Body_Deformation/final.md": "8683f65e194b1aa0e8c3f89fd6079d36ac053b9a99bfb959473dcdb2f966fa14",
+        "commons/maps/Topology_Entropy_Morphogenesis/final.md": "2b6bef5bd1d7e6234dc8c8a8a077a0ba70f286d9d6438c0fc07d7081ed0f6a4c",
+        "commons/maps/sequences/isosurfaces.json": "e0724f16ba868f9b81c96626ca9ec85f3d1b67ebd25f3b47522ab0127b7ac58b",
+        "commons/maps/ISO_Introduction/final.md": "7e06893df3e41621612058768f90b3aa3f24e059425244c454ed5f1c30707fcf",
+        "commons/maps/ISO_RhizomeBody/final.md": "9432a24211548d64a8d643bac1badac22637cd54233b32f0c3a4cd75e3d7420b"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-032": {
+      "thread": "selection",
+      "from": "map:Primitives_Melencolia",
+      "to": "map:FormFinding_Forge",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "A desired form and a supplied criterion for completion need not agree.",
+      "sources": {
+        "commons/maps/Primitives_Melencolia/tutorial.md": "db6599ce44769b7304445b99e0c06323713eeda78a7b4546eeeaf9dc0155ca51",
+        "commons/maps/Primitives_Melencolia/final.md": "251ac7cad9855a63e06c84907c5b0d6cd5e7a2531b0f5803ca3cef282937b28e",
+        "commons/maps/FormFinding_Forge/tutorial.md": "5d46ccea4151e6f1a793fa4f713e8234960fb97945bb01ca4d669bdee61bf863",
+        "commons/maps/FormFinding_Forge/final.md": "befab20a39a40fa63ba2f518fe778bc1c3ca1e6819b831348696107f8ca66f48"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-033": {
+      "thread": "selection",
+      "from": "map:FormFinding_Descent",
+      "to": "map:ML_Gradient_Landscape",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Descent returns, but a supplied geometric landscape and a data-derived loss must not be treated as the same learning task.",
+      "sources": {
+        "commons/maps/FormFinding_Descent/tutorial.md": "fb78d5c27072f533e8afc85dc0b9b0f43cf631276f96ef637988516f72b6fc29",
+        "commons/maps/FormFinding_Descent/final.md": "f0e55a23a7fd05609ef5aac713651a751a418403137c1d203a3e064794763016",
+        "commons/maps/ML_Gradient_Landscape/tutorial.md": "e78b0cd2517e82ca9f58a6a8ecf77675df541529634fce3fc790af7a17006991",
+        "commons/maps/ML_Gradient_Landscape/final.md": "97824961389c602474c99f5ffa746aa653e9e27c365c7938d51b67047e90959f"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-034": {
+      "thread": "selection",
+      "from": "map:PG_Genetic_Evolution",
+      "to": "map:ML_Evolution",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "Explicit ranking can be compared with survival conditions; the absence of a judge does not remove selection.",
+      "sources": {
+        "commons/maps/PG_Genetic_Evolution/tutorial.md": "c95ee2fac28a527aa0caa249a5e888006dc6775ebc5dc38c8af55c4c5fb0b7a0",
+        "commons/maps/PG_Genetic_Evolution/final.md": "1504367729c976d6623d89fe673aaee96d39144f2a9847d363e54537f4e55897",
+        "commons/maps/ML_Evolution/tutorial.md": "f05813cff4f72c1b7d89a3ba1c29977bf8a9c567fb37c847a0031db7e0588753",
+        "commons/maps/ML_Evolution/final.md": "af26568da0f032973bc21895f7e22f5184c85c6ad7b0f001aaa8e8fe98d92657"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-035": {
+      "thread": "selection",
+      "from": "map:GT_Matching",
+      "to": "map:ML_Evolution",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The closing graph passage asks what a system changing its arrangement will count as improvement.",
+      "sources": {
+        "commons/maps/GT_Matching/tutorial.md": "803cd821f8b2cdd7e5c4b7347645a88cbb615cfda2a8820cfeafb837fd3fc858",
+        "commons/maps/GT_Matching/final.md": "b7dcc7a016d46d5e2124ccd4a25d405ec21e4f854756e3f3117c2215d2809bff",
+        "commons/maps/ML_Evolution/tutorial.md": "f05813cff4f72c1b7d89a3ba1c29977bf8a9c567fb37c847a0031db7e0588753",
+        "commons/maps/ML_Evolution/final.md": "af26568da0f032973bc21895f7e22f5184c85c6ad7b0f001aaa8e8fe98d92657"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-036": {
+      "thread": "selection",
+      "from": "map:ML_Synthesis",
+      "to": "map:Crisis_Synthesis",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "A working answer and its available evidence remain separate as the inquiry turns toward foundations.",
+      "sources": {
+        "commons/maps/ML_Synthesis/tutorial.md": "1efae5550aff6a3f1d8352e4cb5e57c7b6648646fdf1134bcd25c1056e0753ce",
+        "commons/maps/ML_Synthesis/final.md": "eb57a2a62c712c122353ba7f6264ac6af6f48c359d57c2b02fb1a03b6ad35e92",
+        "commons/maps/Crisis_Synthesis/tutorial.md": "c706b9792b6e97046c5ad7ae685c3b38e0444608b668eb6d805f38c7be45fd78",
+        "commons/maps/Crisis_Synthesis/final.md": "c7a82a96ccb364f293be4c006e673908de830bea9b87e52ece7755b8975c4d5e"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-037": {
+      "thread": "selection",
+      "from": "sequence:qfeplaboratory",
+      "to": "sequence:postfoundationscrisis",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "An inspectable model is still answerable to the distinctions and participants its representation excludes.",
+      "sources": {
+        "commons/maps/sequences/qfeplaboratory.json": "0424d1a366076c798f26f5f67ca46d26858e55f15b02090df5017d942d0faf9f",
+        "commons/maps/QFEP_Introduction/final.md": "b599c5e323e35e4849feba90644d5fabd31f65967dbcaff718c991b75b91a529",
+        "commons/maps/QFEP_Synthesis/final.md": "13cdc7c30465af10627618dacb4d92d2172dc2689b4583642c9e2f2a576ceda9",
+        "commons/maps/sequences/postfoundationscrisis.json": "d66ea69597eeabb838789ca9c672dc23da12161276e1ccad8125dadc7251405a",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b",
+        "commons/maps/PostCrisis_Synthesis/final.md": "3dc78f30cf40765da0ecc13839996af929681c676b574b3c511c00520de87ce0"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-038": {
+      "thread": "time",
+      "from": "map:Point_Zero",
+      "to": "map:Trans_Pre",
+      "relation": "depends-on",
+      "status": "interpretation",
+      "reason": "Initialization and repeated updates enable a familiar body to change through time.",
+      "sources": {
+        "commons/maps/Point_Zero/tutorial.md": "81b3b9f824e468f7b73605fb49d1c057dd73ade026b31114e99bec9b206230f7",
+        "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38",
+        "commons/maps/Trans_Pre/tutorial.md": "c774efa5865ce8b13f04cc3efa00b7a10b0670fb4a7ae4c6a046fc11ec3cfa71",
+        "commons/maps/Trans_Pre/final.md": "6104f9fd54b124d362575e40411183f975cf32b7bec8de5a2c52d45d29f4e7be"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-039": {
+      "thread": "time",
+      "from": "map:Flow_Field",
+      "to": "map:Vectors_Act3_FieldsAndMotion",
+      "relation": "complicates",
+      "status": "interpretation",
+      "reason": "Assigned direction can be compared with accumulated acceleration and retained velocity.",
+      "sources": {
+        "commons/maps/Flow_Field/tutorial.md": "fce7667d7cca09ce7d14efa6a953c170f7914945894f1296c99e07fca815246c",
+        "commons/maps/Flow_Field/final.md": "f725663420da25ff97aa61743f4d149d169ebe6f3505cf0dff8b58aa973b1bb0",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md": "93bffa25476926c2edcf1d88a8968ab6b61169c69e9263b19c85135badbda6e7",
+        "commons/maps/Vectors_Act3_FieldsAndMotion/final.md": "6c162dfe2f0d58263671a13fc8cfc53df3e658710800eb261769763b2da419e7"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-040": {
+      "thread": "time",
+      "from": "map:FormFinding_Forge",
+      "to": "map:WaveFunctions_Intro",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The final form-finding passage proposes returning motion as another way for a form to persist.",
+      "sources": {
+        "commons/maps/FormFinding_Forge/tutorial.md": "5d46ccea4151e6f1a793fa4f713e8234960fb97945bb01ca4d669bdee61bf863",
+        "commons/maps/FormFinding_Forge/final.md": "befab20a39a40fa63ba2f518fe778bc1c3ca1e6819b831348696107f8ca66f48",
+        "commons/maps/WaveFunctions_Intro/tutorial.md": "c1c1fb9c2df381af68a499110b9249127ef1f80962807019f08962393e46ded9",
+        "commons/maps/WaveFunctions_Intro/final.md": "43fe453f8a5e3491ba4904061dc02f295f5cce051a5a3bf20d985522d21c4676"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-041": {
+      "thread": "time",
+      "from": "map:WaveFunctions_Synthesis_Lab",
+      "to": "map:Random_Definition",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "A repeatable recipe leads directly to the question of recovering an unfamiliar result.",
+      "sources": {
+        "commons/maps/WaveFunctions_Synthesis_Lab/tutorial.md": "cc36fed0c034c378644ea76a8d0d75db1695a1602ecfa7789e3818595ffb7c2b",
+        "commons/maps/WaveFunctions_Synthesis_Lab/final.md": "7b9b37b353c3bbf36fb9e7b7dcb9fbe218d96317e5fac151b613539f1538e1be",
+        "commons/maps/Random_Definition/tutorial.md": "1c90a2d074b2658f519455d67db281f0369ed9865b82e23ab60f0e8e155cdd06",
+        "commons/maps/Random_Definition/final.md": "be1b6f38ba2145455168197560b622caf8671d1025fb2dff47ac0412815ae94f"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-042": {
+      "thread": "time",
+      "from": "map:Point_Zero",
+      "to": "map:PostCrisis_Synthesis",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The final text returns to the running clock while leaving the next work open.",
+      "sources": {
+        "commons/maps/Point_Zero/tutorial.md": "81b3b9f824e468f7b73605fb49d1c057dd73ade026b31114e99bec9b206230f7",
+        "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38",
+        "commons/maps/PostCrisis_Synthesis/tutorial.md": "c98b768394fbef0ea9b63e1b37e695ed1e08570840e69cdda060846b44c165ac",
+        "commons/maps/PostCrisis_Synthesis/final.md": "3dc78f30cf40765da0ecc13839996af929681c676b574b3c511c00520de87ce0"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-043": {
+      "thread": "authorship",
+      "from": "map:Point_Triangle_Context",
+      "to": "sequence:machinelearning",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "Making a room and writing about it in parallel becomes part of the later inquiry into AI-assisted production.",
+      "sources": {
+        "commons/maps/Point_Triangle_Context/tutorial.md": "b28ba3b36eec2b345756cefcfd5606d72eb32f548c2de2711ddb0a6f96ee53c5",
+        "commons/maps/Point_Triangle_Context/final.md": "4a71242e429693455babc420f82fc0f49530508979f8db2895f0c6aff2bd6cdb",
+        "commons/maps/sequences/machinelearning.json": "fc25a24c6450c7915c8dee4ab369a83d376aed023c80d321c7f0c8379681eb62",
+        "commons/maps/ML_Evolution/final.md": "af26568da0f032973bc21895f7e22f5184c85c6ad7b0f001aaa8e8fe98d92657",
+        "commons/maps/ML_Synthesis/final.md": "eb57a2a62c712c122353ba7f6264ac6af6f48c359d57c2b02fb1a03b6ad35e92"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-044": {
+      "thread": "authorship",
+      "from": "map:Primitives_Melencolia",
+      "to": "map:PostCrisis_Synthesis",
+      "relation": "revisits",
+      "status": "interpretation",
+      "reason": "The desire to compose with finite tools returns as the ability to ask the museum for a different future.",
+      "sources": {
+        "commons/maps/Primitives_Melencolia/tutorial.md": "db6599ce44769b7304445b99e0c06323713eeda78a7b4546eeeaf9dc0155ca51",
+        "commons/maps/Primitives_Melencolia/final.md": "251ac7cad9855a63e06c84907c5b0d6cd5e7a2531b0f5803ca3cef282937b28e",
+        "commons/maps/PostCrisis_Synthesis/tutorial.md": "c98b768394fbef0ea9b63e1b37e695ed1e08570840e69cdda060846b44c165ac",
+        "commons/maps/PostCrisis_Synthesis/final.md": "3dc78f30cf40765da0ecc13839996af929681c676b574b3c511c00520de87ce0"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-045": {
+      "thread": "authorship",
+      "from": "map:ML_Synthesis",
+      "to": "map:Euclid_Parallel",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "The closing ML text hands unresolved disagreement and its evidence to an examination of foundations.",
+      "sources": {
+        "commons/maps/ML_Synthesis/tutorial.md": "1efae5550aff6a3f1d8352e4cb5e57c7b6648646fdf1134bcd25c1056e0753ce",
+        "commons/maps/ML_Synthesis/final.md": "eb57a2a62c712c122353ba7f6264ac6af6f48c359d57c2b02fb1a03b6ad35e92",
+        "commons/maps/Euclid_Parallel/tutorial.md": "fdd920b6ce166c24dd8a45d111cf403a4e342fde4e51a75b561035da71027cfd",
+        "commons/maps/Euclid_Parallel/final.md": "9efa7a337274af60f261b9d258c861519b8d0d6be4a6d3ed02d431f708ab9be1"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-046": {
+      "thread": "authorship",
+      "from": "map:Crisis_Synthesis",
+      "to": "map:QFEP_Introduction",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "A formula waiting to be questioned becomes a specific calculation, still open to examination.",
+      "sources": {
+        "commons/maps/Crisis_Synthesis/tutorial.md": "c706b9792b6e97046c5ad7ae685c3b38e0444608b668eb6d805f38c7be45fd78",
+        "commons/maps/Crisis_Synthesis/final.md": "c7a82a96ccb364f293be4c006e673908de830bea9b87e52ece7755b8975c4d5e",
+        "commons/maps/QFEP_Introduction/tutorial.md": "9b43af36e69e9a615c04e83cd04165bcabd74383facebef80b8789d97abdf278",
+        "commons/maps/QFEP_Introduction/final.md": "b599c5e323e35e4849feba90644d5fabd31f65967dbcaff718c991b75b91a529"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "connection-047": {
+      "thread": "authorship",
+      "from": "map:QFEP_Synthesis",
+      "to": "map:CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "relation": "revisits",
+      "status": "documented",
+      "reason": "Self-Q turns toward the maker; the next room asks whose distinctions a representation compresses.",
+      "sources": {
+        "commons/maps/QFEP_Synthesis/tutorial.md": "bebd2de7fbd8bf1694c4ce01864219de59df33e06dfa114ea07fbd9daabc71b8",
+        "commons/maps/QFEP_Synthesis/final.md": "13cdc7c30465af10627618dacb4d92d2172dc2689b4583642c9e2f2a576ceda9",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md": "7bbaa772e3de614cfb72a416cb1f791ebe1455924dbcb8391b26feb17007c357",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/final.md": "093673aa8e91abac1d3377deeafe9f374e381376d5a9f3ae36d0afa105d9230b"
+      },
+      "updated_at": "2026-10-11",
+      "edited_by": "editorial draft"
+    },
+    "link-ffb2c00f022e": {
+      "from": "map:Point_Trace",
+      "to": "map:Shader_10_ReactionDiffusion",
+      "thread": "trace",
+      "relation": "complicates",
+      "status": "proposed",
+      "reason": "Compare a preserved gesture with a field that rewrites its next state. Return to the original trace to ask what memory keeps unchanged and what feedback transforms.",
+      "sources": {
+        "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+        "commons/maps/Shader_10_ReactionDiffusion/tutorial.md": "0aa333032cfac23b26e5380f59a186751c49773eec5668f2552a78bdbd6def29"
+      },
+      "updated_at": "2026-10-11T20:48:15.740405Z",
+      "edited_by": "user"
+    },
+    "arrays-cube-construction": {
+      "from": "map:Trans_Pre",
+      "to": "map:Array",
+      "thread": "body",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "Array reuses Trans_Pre's whole BoxMesh and overlap sensor construction, makes independent instances and writes occupancy at bound addresses. This is code/shape continuity, not transport of one live cube.",
+      "sources": {
+        "commons/maps/Trans_Pre/tutorial.md": "4b258f80b2620c3719b6143ed311f3609804411360ebd2b4e6bc34bb4d8c97dc",
+        "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce"
+      },
+      "updated_at": "2026-10-12T07:06:50.343579Z",
+      "edited_by": "user"
+    },
+    "arrays-saved-image": {
+      "from": "map:Tutorial_Tiling_Floor",
+      "to": "map:Tutorial_Tiling_Walls",
+      "thread": "frame",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "Walls loads the actual PNG saved by the learner's Floor program. Recipe, saved pixels and receiver remain distinct. Exact pixel transfer was tested in a separate engine process; this does not claim automatic live hall transport.",
+      "sources": {
+        "commons/maps/Tutorial_Tiling_Floor/tutorial.md": "c9834959b295ac8cb6101a4ac520c4fb97307053c9a47714471c6be00ee5cd67",
+        "commons/maps/Tutorial_Tiling_Walls/tutorial.md": "eee1f3658ca7cc8c84d459ce9f8b58f1e21c965490a3ad9f4fe825b5b9109fbf",
+        "doc/book/iterations/2026-10-12-arrays-in-the-book/verification.json": "fa8d76283fbe8c78876814e730af9904eefc6b5928209ebdcecbf091d2f7c23d"
+      },
+      "updated_at": "2026-10-12T07:06:50.365103Z",
+      "edited_by": "user"
+    },
+    "colour-inherited-point": {
+      "from": "map:Point_Lines",
+      "to": "map:Color_Nails",
+      "thread": "body",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "The exact inherited PointBody and LineSkin files are printed again. The carried point now supplies input to a colour function; construction is reused, not a persisted runtime node.",
+      "sources": {
+        "commons/maps/Point_Lines/tutorial.md": "cad7e95a0e3f3a6a67bc3746c353076f8b67604370fbea9a4c01b9edbfcc0550",
+        "commons/maps/Color_Nails/tutorial.md": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+        "doc/book/iterations/2026-10-12-colour-in-the-book/sequence-verification.json": "525f5e46a6d617ebd9ac43ebc73f9eb86571c20095c9b69e839b3a0c85b3dd3b"
+      },
+      "updated_at": "2026-10-12T07:30:31.236339Z",
+      "edited_by": "user"
+    },
+    "colour-owned-palette": {
+      "from": "map:Color_Grid_Pallet",
+      "to": "map:Color_Walls",
+      "thread": "selection",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "Walls uses the exact Palette class taught in Grid; two instances own separate indices and colour lists. The reuse is source code, not automatic transfer of a running palette.",
+      "sources": {
+        "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+        "commons/maps/Color_Walls/tutorial.md": "8136a7ee45f653678539ff1bca32d83f9403dc3049cbacd27e2e011c3cc910d4",
+        "doc/book/iterations/2026-10-12-colour-in-the-book/sequence-verification.json": "525f5e46a6d617ebd9ac43ebc73f9eb86571c20095c9b69e839b3a0c85b3dd3b"
+      },
+      "updated_at": "2026-10-12T07:30:31.269169Z",
+      "edited_by": "user"
+    },
+    "colour-address-receiver": {
+      "from": "map:Array",
+      "to": "map:Color_Grid_Pallet",
+      "thread": "trace",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "An address that retained presence now retains a colour after selection moves. The grid is newly constructed; this is a reused addressing capacity, not a shared runtime record.",
+      "sources": {
+        "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce",
+        "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd"
+      },
+      "updated_at": "2026-10-12T07:30:31.291827Z",
+      "edited_by": "user"
+    },
+    "tiling-colour-helpers": {
+      "from": "map:Color_Grid_Pallet",
+      "to": "map:Pattern_Disco",
+      "thread": "rule",
+      "relation": "reuses",
+      "status": "documented",
+      "reason": "Disco prints the exact current Colour Palette and GridSurface helpers; PointBody also matches Colour Nails. A new calculated checker separates phase from palette while the receiver stays fixed. This is class reuse, not transfer of a running palette or saved edit.",
+      "sources": {
+        "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+        "commons/maps/Color_Nails/tutorial.md": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+        "commons/maps/Pattern_Disco/tutorial.md": "5cf940a83bc935817ee9d08db598b3e1398a1782ec71a3ceb03b4b04b13a2b04",
+        "doc/book/iterations/2026-10-12-tiling-in-the-book/sequence-verification.json": "dc8fa8ed623a1abc2c816f398c3d90412cd6bf6b8d94f1005b7b618a37622297"
+      },
+      "updated_at": "2026-10-12T07:50:13.493314Z",
+      "edited_by": "user"
+    }
+  },
+  "journal": [
+    {
+      "revision": 1,
+      "at": "2026-10-11T20:43:12.016854Z",
+      "action": "summary",
+      "id": "sequence:primitives",
+      "before": {
+        "summary": "A point acquires a surface, collision and a place in a frame. Relations become lines, gestures become records, and faces become bodies. Generated forms meet engine primitives, profiles and finite resolution; Melencolia gives the constructions a cultural and emotional limit.",
+        "carry": "Point and cube constructions; frames, ordered records, faces and finite choices.",
+        "question": "What do we want a perfect form to give us?",
+        "sources": {
+          "commons/maps/sequences/primitives.json": "8f178191a3c971cccee8d18c9a067690c73f594db2dadb5150eb20995d7a410c",
+          "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38",
+          "commons/maps/Primitives_Melencolia/final.md": "251ac7cad9855a63e06c84907c5b0d6cd5e7a2531b0f5803ca3cef282937b28e"
+        },
+        "edited_by": "editorial draft",
+        "updated_at": "2026-10-11"
+      },
+      "after": {
+        "summary": "A point acquires a surface, collision and a place in a frame. Relations become lines, gestures become records, and faces become bodies. Generated forms meet engine primitives, profiles and finite resolution; Melencolia gives the constructions a cultural and emotional limit.",
+        "carry": "Point and cube constructions; local/world frames, ordered records, faces and finite choices.",
+        "question": "What do we want a perfect form to give us?",
+        "sources": {
+          "commons/maps/sequences/primitives.json": "8f178191a3c971cccee8d18c9a067690c73f594db2dadb5150eb20995d7a410c",
+          "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38",
+          "commons/maps/Primitives_Melencolia/final.md": "251ac7cad9855a63e06c84907c5b0d6cd5e7a2531b0f5803ca3cef282937b28e"
+        },
+        "updated_at": "2026-10-11T20:43:12.016854Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 2,
+      "at": "2026-10-11T20:48:15.740405Z",
+      "action": "connection",
+      "id": "link-ffb2c00f022e",
+      "before": null,
+      "after": {
+        "from": "map:Point_Trace",
+        "to": "map:Shader_10_ReactionDiffusion",
+        "thread": "trace",
+        "relation": "complicates",
+        "status": "proposed",
+        "reason": "Compare a preserved gesture with a field that rewrites its next state. Return to the original trace to ask what memory keeps unchanged and what feedback transforms.",
+        "sources": {
+          "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+          "commons/maps/Shader_10_ReactionDiffusion/tutorial.md": "0aa333032cfac23b26e5380f59a186751c49773eec5668f2552a78bdbd6def29"
+        },
+        "updated_at": "2026-10-11T20:48:15.740405Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 3,
+      "at": "2026-10-12T07:06:50.320757Z",
+      "action": "summary",
+      "id": "sequence:array_tutorial",
+      "before": {
+        "summary": "One cube gains company and an address. A row becomes a plane and a volume; floor, wall and score read arrangements differently. Occupant, address and reader remain distinct, including when a body disappears or a clock advances.",
+        "carry": "Indexed collections and the distinction between stored value and its reading.",
+        "question": "What stays available when an occupant has gone?",
+        "sources": {
+          "commons/maps/sequences/array_tutorial.json": "26d3c629bf7d0e0af4cb3310d06f0da883d330f2db41e691cbc123c50fe29281",
+          "commons/maps/Array/final.md": "59e9405d3f2cbc843a2f40f6079683a7d2fac17324f15eedb88dd64e2bc7d4b0",
+          "commons/maps/Tutorial_Disco/final.md": "8ecb5382374e5d4a8b5b4f50a2734744e9e55fab5674f98078d38ae9d3f593c0"
+        },
+        "edited_by": "editorial draft",
+        "updated_at": "2026-10-11"
+      },
+      "after": {
+        "summary": "One cube gains company and an address. A row becomes a plane and volume; a rule assigns turns; the learner's saved image stands up; a separate clock reads a score. Five complete canonical tutorials, 12 October. Occupancy, orientation and events remain distinct.",
+        "carry": "Independent instances, indexed values/references, explicit storage frames, a recipe and its saved result, and independently timed readers. Colour reuses these capacities with material values.",
+        "question": "What stays available when an occupant leaves, and what changes when the reader changes? Assess the teaching pace at the 3D storage conversion and the two readings in Disco.",
+        "sources": {
+          "commons/maps/sequences/array_tutorial.json": "26d3c629bf7d0e0af4cb3310d06f0da883d330f2db41e691cbc123c50fe29281",
+          "commons/maps/Array/final.md": "59e9405d3f2cbc843a2f40f6079683a7d2fac17324f15eedb88dd64e2bc7d4b0",
+          "commons/maps/Tutorial_Disco/final.md": "8ecb5382374e5d4a8b5b4f50a2734744e9e55fab5674f98078d38ae9d3f593c0",
+          "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce",
+          "commons/maps/Tutorial_3D/tutorial.md": "f3c89d5a0100d8fe716e1ac6221779d23f01839464beab994e9abfac5284aa41",
+          "commons/maps/Tutorial_Tiling_Floor/tutorial.md": "c9834959b295ac8cb6101a4ac520c4fb97307053c9a47714471c6be00ee5cd67",
+          "commons/maps/Tutorial_Tiling_Walls/tutorial.md": "eee1f3658ca7cc8c84d459ce9f8b58f1e21c965490a3ad9f4fe825b5b9109fbf",
+          "commons/maps/Tutorial_Disco/tutorial.md": "361778bf7dc23c58c63216194e9166ec7eae1802cbab15b61adf1dc69a462925"
+        },
+        "updated_at": "2026-10-12T07:06:50.320757Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 4,
+      "at": "2026-10-12T07:06:50.343579Z",
+      "action": "connection",
+      "id": "arrays-cube-construction",
+      "before": null,
+      "after": {
+        "from": "map:Trans_Pre",
+        "to": "map:Array",
+        "thread": "body",
+        "relation": "reuses",
+        "status": "documented",
+        "reason": "Array reuses Trans_Pre's whole BoxMesh and overlap sensor construction, makes independent instances and writes occupancy at bound addresses. This is code/shape continuity, not transport of one live cube.",
+        "sources": {
+          "commons/maps/Trans_Pre/tutorial.md": "4b258f80b2620c3719b6143ed311f3609804411360ebd2b4e6bc34bb4d8c97dc",
+          "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce"
+        },
+        "updated_at": "2026-10-12T07:06:50.343579Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 5,
+      "at": "2026-10-12T07:06:50.365103Z",
+      "action": "connection",
+      "id": "arrays-saved-image",
+      "before": null,
+      "after": {
+        "from": "map:Tutorial_Tiling_Floor",
+        "to": "map:Tutorial_Tiling_Walls",
+        "thread": "frame",
+        "relation": "reuses",
+        "status": "documented",
+        "reason": "Walls loads the actual PNG saved by the learner's Floor program. Recipe, saved pixels and receiver remain distinct. Exact pixel transfer was tested in a separate engine process; this does not claim automatic live hall transport.",
+        "sources": {
+          "commons/maps/Tutorial_Tiling_Floor/tutorial.md": "c9834959b295ac8cb6101a4ac520c4fb97307053c9a47714471c6be00ee5cd67",
+          "commons/maps/Tutorial_Tiling_Walls/tutorial.md": "eee1f3658ca7cc8c84d459ce9f8b58f1e21c965490a3ad9f4fe825b5b9109fbf",
+          "doc/book/iterations/2026-10-12-arrays-in-the-book/verification.json": "fa8d76283fbe8c78876814e730af9904eefc6b5928209ebdcecbf091d2f7c23d"
+        },
+        "updated_at": "2026-10-12T07:06:50.365103Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 6,
+      "at": "2026-10-12T07:30:31.208771Z",
+      "action": "summary",
+      "id": "sequence:color",
+      "before": {
+        "summary": "Known forms, transforms and arrays become relationships of colour. Light, a chosen surface, the choosing body, a spatial palette and an accumulated mark each change the encounter differently. The room offers composition and pleasure as well as functions to inspect.",
+        "carry": "Colour assignment, mapping, material receivers and retained marks.",
+        "question": "How do colour and context change permission, appearance and desire?",
+        "sources": {
+          "commons/maps/sequences/color.json": "127f8c137f75787643033a3d05b882767e887b6297f22eb81a33c1a0ea6a1ae7",
+          "commons/maps/Color_Context_Placed/final.md": "afea993603bb264edd08c8939035abe2b16f1b94436c820ba356d796ab81ed97",
+          "commons/maps/Color_Walls/final.md": "1e9f7699714af90244135ed04e7f704fd1a69e9f22211073db52533c3087d7c7"
+        },
+        "edited_by": "editorial draft",
+        "updated_at": "2026-10-11"
+      },
+      "after": {
+        "summary": "Known forms and addressed arrays acquire different colour relations: material assignment, illumination, RGB choice, ordered bands, sampled HSV, retained cell colours, accumulated marks and layered views. Eight canonical full-code tutorials now use the reviewed drafts; current reflections preserve composition, pleasure and the politics of choosing appearances.",
+        "carry": "Same PointBody returns in Nails, Pillar and Paint; Grid Palette returns unchanged in Walls. Recorded RGB values move by explicit copy. The next disco can keep its pattern while changing its palette. Fresh 12 October teacher-authored evidence; no live study installation or headset claim.",
+        "question": "Where is the colour kept, what receives it, and what does that value leave undecided? Keep Paint manageable; review physical controls with a reader.",
+        "sources": {
+          "commons/maps/sequences/color.json": "127f8c137f75787643033a3d05b882767e887b6297f22eb81a33c1a0ea6a1ae7",
+          "commons/maps/Color_Context_Placed/final.md": "afea993603bb264edd08c8939035abe2b16f1b94436c820ba356d796ab81ed97",
+          "commons/maps/Color_Walls/final.md": "1e9f7699714af90244135ed04e7f704fd1a69e9f22211073db52533c3087d7c7",
+          "commons/maps/Color_Context_Placed/tutorial.md": "fb57666e4c90dc85d4e21217ff932c03d2b678b1aff7de31b4f956ed191487b2",
+          "commons/maps/Color_Flashlight/tutorial.md": "df875056a0289511e5fea53cdf4362fe1230d9abb97b01b65cbe421eb79b0bbe",
+          "commons/maps/Color_Nails/tutorial.md": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+          "commons/maps/Color_Rainbow/tutorial.md": "607da8bc094a5679b90d849790d114f452a4a954cf3efb55d5d68063c370ce87",
+          "commons/maps/Color_Pillar/tutorial.md": "4fc28b94df951e1b354a5787d62132cb56dc4d79a0a483671a5c638ae50183fd",
+          "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+          "commons/maps/Color_Paint/tutorial.md": "014414125e8be53dfc5419263444de3212dbf6547b92c37e9120e0da6eb0bcfd",
+          "commons/maps/Color_Walls/tutorial.md": "8136a7ee45f653678539ff1bca32d83f9403dc3049cbacd27e2e011c3cc910d4",
+          "doc/book/iterations/2026-10-12-colour-in-the-book/sequence-verification.json": "525f5e46a6d617ebd9ac43ebc73f9eb86571c20095c9b69e839b3a0c85b3dd3b",
+          "doc/book/iterations/2026-10-12-colour-in-the-book/lineage.json": "35f0b8da0a5d076e50b5795093106b0fb5eeb58abe3528a48d4b8f6327e3e593"
+        },
+        "updated_at": "2026-10-12T07:30:31.208771Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 7,
+      "at": "2026-10-12T07:30:31.236339Z",
+      "action": "connection",
+      "id": "colour-inherited-point",
+      "before": null,
+      "after": {
+        "from": "map:Point_Lines",
+        "to": "map:Color_Nails",
+        "thread": "body",
+        "relation": "reuses",
+        "status": "documented",
+        "reason": "The exact inherited PointBody and LineSkin files are printed again. The carried point now supplies input to a colour function; construction is reused, not a persisted runtime node.",
+        "sources": {
+          "commons/maps/Point_Lines/tutorial.md": "cad7e95a0e3f3a6a67bc3746c353076f8b67604370fbea9a4c01b9edbfcc0550",
+          "commons/maps/Color_Nails/tutorial.md": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+          "doc/book/iterations/2026-10-12-colour-in-the-book/sequence-verification.json": "525f5e46a6d617ebd9ac43ebc73f9eb86571c20095c9b69e839b3a0c85b3dd3b"
+        },
+        "updated_at": "2026-10-12T07:30:31.236339Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 8,
+      "at": "2026-10-12T07:30:31.269169Z",
+      "action": "connection",
+      "id": "colour-owned-palette",
+      "before": null,
+      "after": {
+        "from": "map:Color_Grid_Pallet",
+        "to": "map:Color_Walls",
+        "thread": "selection",
+        "relation": "reuses",
+        "status": "documented",
+        "reason": "Walls uses the exact Palette class taught in Grid; two instances own separate indices and colour lists. The reuse is source code, not automatic transfer of a running palette.",
+        "sources": {
+          "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+          "commons/maps/Color_Walls/tutorial.md": "8136a7ee45f653678539ff1bca32d83f9403dc3049cbacd27e2e011c3cc910d4",
+          "doc/book/iterations/2026-10-12-colour-in-the-book/sequence-verification.json": "525f5e46a6d617ebd9ac43ebc73f9eb86571c20095c9b69e839b3a0c85b3dd3b"
+        },
+        "updated_at": "2026-10-12T07:30:31.269169Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 9,
+      "at": "2026-10-12T07:30:31.291827Z",
+      "action": "connection",
+      "id": "colour-address-receiver",
+      "before": null,
+      "after": {
+        "from": "map:Array",
+        "to": "map:Color_Grid_Pallet",
+        "thread": "trace",
+        "relation": "reuses",
+        "status": "documented",
+        "reason": "An address that retained presence now retains a colour after selection moves. The grid is newly constructed; this is a reused addressing capacity, not a shared runtime record.",
+        "sources": {
+          "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce",
+          "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd"
+        },
+        "updated_at": "2026-10-12T07:30:31.291827Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 10,
+      "at": "2026-10-12T07:50:13.461860Z",
+      "action": "summary",
+      "id": "sequence:tiling",
+      "before": {
+        "summary": "A familiar floor returns in colour. A motif becomes a source that can be sampled, repeated, turned and placed on architecture or clothing. Symmetry and composition expose decisions between the source values, their reading and the surface that receives them.",
+        "carry": "Reusable sources, coordinate lookups, symmetry and appearance recipes.",
+        "question": "What did we hope a pattern would change?",
+        "sources": {
+          "commons/maps/sequences/tiling.json": "74ebf90a99763e061f189097960eb2026fa428c2b201bbf1f4bb25cbab0455e1",
+          "commons/maps/Pattern_Disco/final.md": "bf123b5a24009b9fc963f0ef0cf111c9a9d9f5f0dc57210e8ed81ceac01fc18f",
+          "commons/maps/Ribbon_Patterns_03/final.md": "ffe4622d0a32e29a9ae5d7e40170bb5b1897febea0653cd59afed5a8cd5da99f"
+        },
+        "edited_by": "editorial draft",
+        "updated_at": "2026-10-11"
+      },
+      "after": {
+        "summary": "Colour’s familiar point, palette and addressed cubes return. One source reaches many places through wrapped, reflected and glided readings; physical frames give addresses a place, and copied recipes can diverge. Volume is a branch, perception a pause, and UV sampling puts a known operation on a garment. The newer optional loom and cutting encounters remain.",
+        "carry": "Exact PointBody, Palette and GridSurface source reuse from Colour; explicitly copied records in Temple. Most study states initialize afresh. SAVE CLOTH → LOAD LOOM is a separate saved record from the fabric studio recipe; the latter does not save a changed shader. 647 native assertions + 12 transfer checks, 12 October.",
+        "question": "What stays fixed when the pattern changes, and what survives the next room? Keep the incomplete six-column period visible as a limitation of the small five-column receiver.",
+        "sources": {
+          "commons/maps/sequences/tiling.json": "74ebf90a99763e061f189097960eb2026fa428c2b201bbf1f4bb25cbab0455e1",
+          "commons/maps/Pattern_Disco/final.md": "bf123b5a24009b9fc963f0ef0cf111c9a9d9f5f0dc57210e8ed81ceac01fc18f",
+          "commons/maps/Ribbon_Patterns_03/final.md": "ffe4622d0a32e29a9ae5d7e40170bb5b1897febea0653cd59afed5a8cd5da99f",
+          "commons/maps/Pattern_Disco/tutorial.md": "5cf940a83bc935817ee9d08db598b3e1398a1782ec71a3ceb03b4b04b13a2b04",
+          "commons/maps/Pattern_Foundry/tutorial.md": "46c6f7f148bf27ab90daaafd82d2a8440c7ebddd8540d82287ffef8e795fc29c",
+          "commons/maps/Tutorial_Pattern/tutorial.md": "104a0dd6a70b22ad90a1523637fd2cffe16dfc185384ecfed749f580cd45040a",
+          "commons/maps/Array_Patterns/tutorial.md": "04259520cb965587c974658a0e4f4e58a0368e45f862481e94d3eee14bc265b7",
+          "commons/maps/Symmetry_Seventeen/tutorial.md": "017f0e7758a3adac6d1193332000709849ff4ec376680762124f45be8704c304",
+          "commons/maps/Pattern_Temple/tutorial.md": "cb17733657ea6ebb8bce52eb58d11fb4d63d99553126556bd5353f6ff2125b0f",
+          "commons/maps/Ribbon_Patterns_01/tutorial.md": "9777749c2d86c8d37a152e78727e14086b0cac9219e4333461c88f6053247cb9",
+          "commons/maps/Ribbon_Patterns_02/tutorial.md": "a784745888204dd1ba7f86f6f5c72ba045b78d1a9030f35f4c8526566064622a",
+          "commons/maps/Ribbon_Patterns_03/tutorial.md": "0f9971dced523cb454d45e9de48c6629f639a7ab2b928debf461b51d4cd448e9",
+          "doc/book/iterations/2026-10-12-tiling-in-the-book/sequence-verification.json": "dc8fa8ed623a1abc2c816f398c3d90412cd6bf6b8d94f1005b7b618a37622297",
+          "doc/book/iterations/2026-10-12-tiling-in-the-book/lineage.json": "201453037831c0dfbb6878a639cf6095f194ad1994704a46ea251500d6fc2007"
+        },
+        "updated_at": "2026-10-12T07:50:13.461860Z",
+        "edited_by": "user"
+      }
+    },
+    {
+      "revision": 11,
+      "at": "2026-10-12T07:50:13.493314Z",
+      "action": "connection",
+      "id": "tiling-colour-helpers",
+      "before": null,
+      "after": {
+        "from": "map:Color_Grid_Pallet",
+        "to": "map:Pattern_Disco",
+        "thread": "rule",
+        "relation": "reuses",
+        "status": "documented",
+        "reason": "Disco prints the exact current Colour Palette and GridSurface helpers; PointBody also matches Colour Nails. A new calculated checker separates phase from palette while the receiver stays fixed. This is class reuse, not transfer of a running palette or saved edit.",
+        "sources": {
+          "commons/maps/Color_Grid_Pallet/tutorial.md": "b1ccaf2bc53d0ffa89674a186aaf21959f45b3447fcf2f77ca9c51cefbd48bbd",
+          "commons/maps/Color_Nails/tutorial.md": "18f590741d81314719e7ee25834d8c72aaea0db7ffd593f06cd107b6c3e31e3b",
+          "commons/maps/Pattern_Disco/tutorial.md": "5cf940a83bc935817ee9d08db598b3e1398a1782ec71a3ceb03b4b04b13a2b04",
+          "doc/book/iterations/2026-10-12-tiling-in-the-book/sequence-verification.json": "dc8fa8ed623a1abc2c816f398c3d90412cd6bf6b8d94f1005b7b618a37622297"
+        },
+        "updated_at": "2026-10-12T07:50:13.493314Z",
+        "edited_by": "user"
+      }
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+	"checks": [
+		{
+			"label": "World ready with actual desktop adapter",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Stage 0 floor hit has no colour mark",
+			"pass": true
+		},
+		{
+			"label": "Stage 0 projectile remains monochrome",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 floor hit has no colour mark",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 projectile remains monochrome",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 floor hit has no colour mark",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 projectile remains monochrome",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Hand ball paints exactly its receiving tile",
+			"pass": true
+		},
+		{
+			"label": "Floor matches the ball's visible colour",
+			"pass": true
+		},
+		{
+			"label": "Another tile sharing the disco palette remains unmarked",
+			"pass": true
+		},
+		{
+			"label": "Untouched disco continues to change",
+			"pass": true
+		},
+		{
+			"label": "Marked tile keeps its colour through disco cycles",
+			"pass": true
+		},
+		{
+			"label": "REST retains the mark",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "A later real hit recolours the same tile",
+			"pass": true
+		},
+		{
+			"label": "A cover hit does not paint the floor below",
+			"pass": true
+		},
+		{
+			"label": "Existing sphere can be picked up",
+			"pass": true
+		},
+		{
+			"label": "Held sphere emits its real projectile",
+			"pass": true
+		},
+		{
+			"label": "Held sphere floor hit also leaves colour",
+			"pass": true
+		},
+		{
+			"label": "START keeps previous marks",
+			"pass": true
+		},
+		{
+			"label": "A real skull ball paints its announced floor landing",
+			"pass": true
+		},
+		{
+			"label": "Skull mark matches that ball's tint",
+			"pass": true
+		},
+		{
+			"label": "Catalyst still defeats an active head",
+			"pass": true
+		},
+		{
+			"label": "Head impact leaves the floor unchanged",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "Mouse sends a real hand projectile",
+			"pass": true
+		},
+		{
+			"label": "All marks survive REST and projectile cleanup",
+			"pass": true
+		},
+		{
+			"label": "Translated arena marks the correct local tile",
+			"pass": true
+		},
+		{
+			"label": "RESET clears every mark",
+			"pass": true
+		},
+		{
+			"label": "RESET restores original shared palette materials",
+			"pass": true
+		},
+		{
+			"label": "Leaving Colour removes the ability's colour callback",
+			"pass": true
+		},
+		{
+			"label": "Re-entering Colour starts with a clean floor",
+			"pass": true
+		},
+		{
+			"label": "Exit restores saved museum ability",
+			"pass": true
+		},
+		{
+			"label": "Exit releases colour callback",
+			"pass": true
+		}
+	],
+	"passed": 40,
+	"rendered": true,
+	"source_sha256": "f05e21cd6900f071d1b27a1c1c6b8bb044fe69e6777434f8e48c71f8ef3a1875",
+	"total": 40
+}

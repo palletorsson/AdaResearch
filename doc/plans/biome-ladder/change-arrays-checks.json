@@ -1,0 +1,567 @@
+{
+	"checks": [
+		{
+			"label": "Ladder ready",
+			"pass": true
+		},
+		{
+			"label": "Nine skulls and nine persistent labels",
+			"pass": true
+		},
+		{
+			"label": "Slot 0 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 0 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 1 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 1 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 2 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 2 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 3 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 3 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 4 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 4 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 5 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 5 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 6 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 6 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 7 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 7 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Slot 8 has stable address",
+			"pass": true
+		},
+		{
+			"label": "Slot 8 visible from arrival",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 addresses the expected row or column",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 0 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 0 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 1 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 1 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 2 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 2 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 3 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 4 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 5 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 6 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 7 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 0 selects slot 8 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 addresses the expected row or column",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 0 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 1 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 2 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 3 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 3 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 4 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 4 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 5 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 5 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 6 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 7 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 1 selects slot 8 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 addresses the expected row or column",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 0 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 1 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 2 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 3 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 4 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 5 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 6 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 6 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 7 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 7 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 2 selects slot 8 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 8 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 addresses the expected row or column",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 0 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 0 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 1 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 2 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 3 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 3 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 4 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 5 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 6 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 6 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 7 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 3 selects slot 8 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 addresses the expected row or column",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 0 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 1 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 1 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 2 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 3 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 4 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 4 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 5 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 6 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 7 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 7 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 4 selects slot 8 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 addresses the expected row or column",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 0 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 1 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 2 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 2 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 3 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 4 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 5 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 5 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 6 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 7 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Volley 5 selects slot 8 only when addressed",
+			"pass": true
+		},
+		{
+			"label": "Slot 8 fires its previewed ordered path",
+			"pass": true
+		},
+		{
+			"label": "Path ball retains growth",
+			"pass": true
+		},
+		{
+			"label": "REST clears shots and path previews",
+			"pass": true
+		},
+		{
+			"label": "Actual catalyst collision empties the middle slot",
+			"pass": true
+		},
+		{
+			"label": "Defeated skull physically falls",
+			"pass": true
+		},
+		{
+			"label": "Vacancy does not remove or renumber neighbours",
+			"pass": true
+		},
+		{
+			"label": "Row volley skips the vacant slot",
+			"pass": true
+		},
+		{
+			"label": "RESET restores all nine occupants and labels",
+			"pass": true
+		},
+		{
+			"label": "Normal game loop fires only the first row after its warning",
+			"pass": true
+		},
+		{
+			"label": "Normal game loop advances to the second row",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 0",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 1",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 2",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 3",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 4",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 5",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 6",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 7",
+			"pass": true
+		},
+		{
+			"label": "Refuge stops a real zigzag from slot 8",
+			"pass": true
+		},
+		{
+			"label": "A long tick traverses corners without cutting them",
+			"pass": true
+		},
+		{
+			"label": "Swept zigzag hits cover on its second edge",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 inherits nine addressed skulls",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 keeps scaling, turning and colour",
+			"pass": true
+		},
+		{
+			"label": "Stage 4 inherits nine addressed skulls",
+			"pass": true
+		},
+		{
+			"label": "Stage 4 keeps scaling, turning and colour",
+			"pass": true
+		},
+		{
+			"label": "Tiling retains eighteen matching cells",
+			"pass": true
+		}
+	],
+	"passed": 140,
+	"rendered": true,
+	"total": 140
+}

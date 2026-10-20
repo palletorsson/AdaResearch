@@ -1,0 +1,539 @@
+{
+  "schema": "ada.biome-play-scaffold.v1",
+  "date": "2026-10-13",
+  "scope": "Reviewable plan, not runtime configuration. Five playable stages exist. Later entries are proposals unless marked user-direction; that status approves the direction, not its implementation.",
+  "order_source": "commons/maps/curriculum_spine.json",
+  "inheritance": "Keep earlier capacities available. Each encounter foregrounds one new operation; bounded modules and quiet areas prevent every accumulated effect running everywhere. Object IDs, seed, coordinate frame and state ownership must be explicit.",
+  "stages": [
+    {
+      "sequence": "primitives",
+      "title": "Primitives",
+      "status": "playable",
+      "batch": "A",
+      "operation": "Form shelters a body.",
+      "world": "White ground, thin black outlines, six tall shelters and a clear route. Static heads stand on poles.",
+      "catalyst": "The carried sphere and hand form fire small balls. A ladder skull falls after one hit.",
+      "counterpart": "Slow straight shots; the player can step behind a solid form.",
+      "reuse": "Keep the current cover and hit path. Earlier biome_primitives records offer stable identities for a later bridge into the habitat.",
+      "sources": [
+        "commons/hazards/biome_ladder/ladder_encounter.gd",
+        "commons/hazards/biome_ladder/ladder_skull.gd",
+        "commons/artifacts/biome_primitives/encounter_model.gd"
+      ],
+      "next_work": "Retest the B16 skull fix in the headset; retain one-hit ladder defeat and three-hit player health.",
+      "acceptance": "A real shot defeats a visible skull in READY, PLAY and REST; the skull physically falls. Cover blocks an incoming shot; the open lane does not.",
+      "changes": [
+        "Check in VR that a hit skull falls and cover blocks its shots."
+      ]
+    },
+    {
+      "sequence": "transformation",
+      "title": "Transformation",
+      "status": "playable",
+      "batch": "A",
+      "operation": "The same form moves, turns and scales.",
+      "world": "Keep the fixed entrance refuge; other cover translates, rotates or grows from the ground. Pickups remain reachable.",
+      "catalyst": "A tile hit multiplies scale by 0.8 and turns it 22.5 degrees around Y.",
+      "counterpart": "Heads move and turn; their slow balls grow within a fixed bound.",
+      "reuse": "Current motion records and collision-following bodies; rising_banners shows how the very same panels can retain identity through transforms.",
+      "sources": [
+        "commons/hazards/biome_ladder/ladder_encounter.gd",
+        "commons/hazards/biome_ladder/ladder_ball.gd",
+        "commons/artifacts/biome_inheritance/rising_banners.gd"
+      ],
+      "next_work": "Make each operation readable in play with a short label or motion cue, while leaving the refuge fixed.",
+      "acceptance": "Sample moving cover over a full cycle: refuge, collision and route remain usable; tile impacts retain their measured scale and turn.",
+      "changes": [
+        "Make moving, rotating and scaling cover easier to read. Keep the entrance refuge still."
+      ]
+    },
+    {
+      "sequence": "array_tutorial",
+      "title": "Arrays",
+      "status": "playable",
+      "batch": "A",
+      "operation": "A slot remains when its occupant falls.",
+      "world": "Black-and-white addressed floor; three indexed heads, with inherited transformations and cover.",
+      "catalyst": "Choose one occupant; preserve the other slots and all earlier tile responses.",
+      "counterpart": "A small ordered row; a defeated head leaves a legible vacancy.",
+      "reuse": "The current row and tile address arrays. Keep indices independent of world position and live body references.",
+      "sources": [
+        "commons/hazards/biome_ladder/ladder_encounter.gd",
+        "commons/maps/Array/tutorial.md"
+      ],
+      "next_work": "Expose the row from arrival: Claude's capture review found the cylinders hide it and the labels are too far away.",
+      "acceptance": "Removing the middle occupant leaves the first and third addresses unchanged; all three slots are legible from the entrance.",
+      "changes": [
+        "Reveal all nine numbered places from the entrance. Leave a visible empty place when a skull falls.",
+        "Make a standing 3 × 3 array of skulls with stable row and column addresses. Fire by row or column.",
+        "Make balls zigzag through an ordered list of positions. Keep smooth oscillation for Waves."
+      ]
+    },
+    {
+      "sequence": "color",
+      "title": "Colour",
+      "status": "playable",
+      "batch": "A",
+      "operation": "An impact leaves a colour.",
+      "world": "Colour enters the forms and disco grid; the skulls remain black and white.",
+      "catalyst": "Hits still shrink and turn a tile, now also colouring that same tile.",
+      "counterpart": "Coloured balls and trails; a hostile ground impact colours its local receiver.",
+      "reuse": "Current per-tile marks and individual materials, plus the existing biome paint texture for later terrain.",
+      "sources": [
+        "commons/hazards/biome_ladder/ladder_encounter.gd",
+        "commons/biome_layers/biome_ground_substrate.gd"
+      ],
+      "next_work": "Carry the colour record by surface address when flat tiles later become a height field.",
+      "acceptance": "Only the actual receiver is coloured. REST retains the mark; RESET restores the declared baseline.",
+      "changes": [
+        "Carry floor colours into later terrain, together with tile scaling and rotation.",
+        "Burst intense colour from a hit skull and leave colour on nearby surfaces. Keep the skull silhouette readable."
+      ]
+    },
+    {
+      "sequence": "tiling",
+      "title": "Tiling",
+      "status": "playable",
+      "batch": "A",
+      "operation": "One impact changes a repeated address.",
+      "world": "A 2 by 2 motif repeats across the 6 by 12 floor. The same shelters and route remain.",
+      "catalyst": "A hit repeats scale, turn and colour on 18 matching tiles. Any copy can edit that motif address.",
+      "counterpart": "Its ground marks stay local, distinguishing a local event from the player's repeated rule.",
+      "reuse": "Current modulo address mapping and per-address hit counts; inherited banner patterns are an optional later surface receiver.",
+      "sources": [
+        "commons/hazards/biome_ladder/ladder_encounter.gd",
+        "commons/artifacts/biome_inheritance/banner_pattern.gdshader"
+      ],
+      "next_work": "Fix the reported post-hit console obstruction, then flash all responding copies briefly so repetition reads from standing height.",
+      "acceptance": "One shot changes exactly 18 copies; four motif addresses remain independent. All 13 controls stay reachable after the shot.",
+      "changes": [
+        "Keep the console reachable after tiles turn and shrink.",
+        "Flash all matching pattern tiles together when one is hit."
+      ]
+    },
+    {
+      "sequence": "change",
+      "title": "Change",
+      "status": "playable",
+      "batch": "B",
+      "operation": "A local rate accumulates into a path.",
+      "world": "The inherited tiles carry arrows; their rotations supply the field sampled by the centre-column balls.",
+      "catalyst": "The existing shot turns, shrinks and colours the matching tiles, changing their arrows. The player projectile retains its earlier flight.",
+      "counterpart": "Centre-column shots follow the local field for 1.4 seconds, sample one target, pause with a 0.9-second signal, then commit to a straight line. Outer columns retain the Arrays zigzag.",
+      "reuse": "The Flow_Field hall's shared-sampler and trail pattern; current tile turns and hit records. This adapts Claude's floor-steers proposal to the hall's prescribed-velocity subject.",
+      "sources": [
+        "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+        "commons/artifacts/flow_field_painter/shared_field_lesson.gd",
+        "commons/maps/sequences/change.json",
+        "commons/hazards/biome_ladder/direction_field.gd",
+        "commons/hazards/biome_ladder/change_ball.gd"
+      ],
+      "next_work": "Physical headset review of field readability and the one-turn cue. Independent route review. Forces comes next; exact personal floor edits still reset on stage changes.",
+      "acceptance": "Implemented checks cover shared arrow/sampler transforms, real input, prescribed speed, one interval versus two halves, one target sample, warning, committed collision and resets. See CHANGE.md; no headset acceptance claimed.",
+      "changes": [
+        "Let a shot change the local direction field. The same arrows guide moving balls.",
+        "Let a projectile sample the player’s position once, signal its turn, then continue straight toward that sampled position."
+      ]
+    },
+    {
+      "sequence": "forces",
+      "title": "Forces",
+      "status": "proposal",
+      "batch": "B",
+      "operation": "A push changes carried velocity.",
+      "world": "Add one movable barrier or receiver beside fixed refuge. Mass and momentum now affect how it responds.",
+      "catalyst": "A shot imparts an impulse; the body continues after contact and can be pushed back.",
+      "counterpart": "Its projectiles can push that same receiver, using the same physical rule.",
+      "reuse": "The existing sphere force lineage and impulse study; shared projectile collision. The legacy force_field layer only draws arrows and is not a force solver.",
+      "sources": [
+        "doc/book/studies/forces-point-lineage/03_mass.gd",
+        "doc/book/studies/forces-point-lineage/10_impulse.gd",
+        "commons/biome_layers/force_field.gd"
+      ],
+      "next_work": "Choose one receiver with explicit mass and bounded travel; adapt the existing rigid-body interaction without replacing the player's locomotion.",
+      "acceptance": "Equal impulses on two declared masses produce different velocity changes; the refuge remains fixed and usable.",
+      "changes": [
+        "Let shots push movable cover. Mass changes how strongly it responds.",
+        "Boost balls away from skulls with a short acceleration, then let them coast.",
+        "Add mortar shots: a launch impulse followed by gravity makes an arc. Signal the landing area."
+      ]
+    },
+    {
+      "sequence": "formfinding",
+      "title": "Form-finding",
+      "status": "proposal",
+      "batch": "B",
+      "operation": "An update searches for a lower cost.",
+      "world": "A cover arrangement adjusts toward an explicit objective, with a visible stopping condition.",
+      "catalyst": "Move an anchor or start point; observe a different settled arrangement.",
+      "counterpart": "It has to navigate the resulting arrangement; do not give it a second unrelated new ability here.",
+      "reuse": "descent_landscape_lab has real cost, finite differences and stop reasons. Its display is not a walkable or physical terrain; use its update logic, not an assumed collider.",
+      "sources": [
+        "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd",
+        "commons/maps/FormFinding_Descent/tutorial.md"
+      ],
+      "next_work": "Map one small optimisation variable to a barrier pose, preserve a safe path, and distinguish optimisation steps from elapsed physical time.",
+      "acceptance": "For a declared stable step setting the measured cost decreases; SMALL SLOPE, STEP LIMIT and leaving the allowed domain remain distinguishable.",
+      "changes": [
+        "Let a cover arrangement settle through small steps toward a visible goal.",
+        "Allow up to three visible course corrections. Each evaluates candidate directions for approaching the player while avoiding cover."
+      ]
+    },
+    {
+      "sequence": "wavefunctions",
+      "title": "Waves",
+      "status": "user-direction",
+      "batch": "B",
+      "operation": "Periodicity becomes walkable relief.",
+      "world": "The existing floor becomes a shallow sine surface; landmarks and earlier surface addresses remain identifiable.",
+      "catalyst": "Earlier transform, paint and motif effects remain available on the shaped surface. A later optional control can change amplitude or phase.",
+      "counterpart": "Crests interrupt sight lines; optionally phase its movement against the same period after the floor is readable.",
+      "reuse": "SineSpace builds a height mesh and matching trimesh collision through TopologySpace. Use its actual equation and sampler.",
+      "sources": [
+        "commons/context/walkgrids/SineSpace.gd",
+        "commons/context/walkgrids/TopologySpace.gd",
+        "commons/biome_layers/biome_ground_substrate.gd"
+      ],
+      "next_work": "Adapt the surface to the 12 by 24 arena, shallow enough for locomotion; keep it static initially and fit cover, spawn and controls to sampled height.",
+      "acceptance": "Ray hits match visible crests and troughs; the route is traversable; motif addresses and colour marks survive the surface change.",
+      "changes": [
+        "Make a shallow sine-wave floor that can be walked on. Keep earlier shot effects.",
+        "Send an array of balls in a wave volley. Different phases shift each ball’s oscillation."
+      ]
+    },
+    {
+      "sequence": "randomness",
+      "title": "Randomness",
+      "status": "user-direction",
+      "batch": "B",
+      "operation": "A seed chooses independent heights.",
+      "world": "The floor becomes irregular and harder to walk, within a measured slope and height budget.",
+      "catalyst": "Keep earlier actions while learning a new route through a reproducible uneven floor.",
+      "counterpart": "A proposed bounded seeded variation in shot timing can follow; first isolate the floor so difficulty does not change in two unexplained ways.",
+      "reuse": "RandomSpace already has a seed and distribution laws. Disable animation and retain the same draw record throughout the attempt.",
+      "sources": [
+        "commons/context/walkgrids/RandomSpace.gd",
+        "commons/context/walkgrids/random_space.tscn"
+      ],
+      "next_work": "Build a fixed sampled height field, with a traversable corridor and cover clearances. Reset reuses the seed; reroll must be an explicit different action.",
+      "acceptance": "Same seed and law reproduce the heights; the field does not resample while walking. The route and all controls remain reachable.",
+      "changes": [
+        "Add uneven, randomly raised ground. Keep the same seed when restarting.",
+        "Vary each shot’s launch angle independently within a fixed spread. Keep speed and timing fixed at first."
+      ]
+    },
+    {
+      "sequence": "noise",
+      "title": "Noise",
+      "status": "user-direction",
+      "batch": "B",
+      "operation": "Neighbouring heights become correlated.",
+      "world": "Compare smoother coherent terrain with the preceding independent random floor using the same footprint and a controlled height range.",
+      "catalyst": "Earlier marks and motif addresses remain. A later field brush can be added once the terrain comparison is clear.",
+      "counterpart": "Use the landform as cover. A coherent wandering path is an optional next addition, not needed to establish the floor difference.",
+      "reuse": "NoiseSpace and the generation-17 biome's sampled ground and ecological placement. Reuse the landscape's placement logic progressively, not its full population at once.",
+      "sources": [
+        "commons/context/walkgrids/NoiseSpace.gd",
+        "commons/artifacts/biome_object/biome_object.gd",
+        "commons/hazards/catalyst_counterpart/terrain_arena.gd"
+      ],
+      "next_work": "Configure noise frequency and octaves for demonstrably lower neighbouring height differences; equal height range alone does not guarantee smoothness.",
+      "acceptance": "With recorded settings, neighbouring differences are lower than the random comparison; renderer, collision and object feet use the same field.",
+      "changes": [
+        "Smooth the abrupt ground into connected hills using noise. Keep the same overall height range.",
+        "Use the same volley and spread, but correlate successive launch angles with noise so the aim drifts smoothly."
+      ]
+    },
+    {
+      "sequence": "shaders",
+      "title": "Shaders",
+      "status": "proposal",
+      "batch": "C",
+      "operation": "One surface rule runs at every sample.",
+      "world": "Earlier colour and pattern fields become continuous surface responses, with one readable travelling mark or ripple.",
+      "catalyst": "A hit supplies position, colour and time to the material; it does not secretly change the collider.",
+      "counterpart": "Its impact is another input to the same material rule.",
+      "reuse": "Existing shaping and pattern shaders, banner materials and biome paint texture. Shaders is currently missing from biome_vocabulary.json.",
+      "sources": [
+        "algorithms/shaders/book_of_shaders/shader_01_shaping.gd",
+        "algorithms/shaders/book_of_shaders/shader_05_patterns.gd",
+        "commons/biome_layers/biome_ground.gdshader"
+      ],
+      "next_work": "Add a deliberate capability entry and a bounded hit-data adapter to one existing shader. Keep material effects distinct from physical terrain.",
+      "acceptance": "Known hit inputs produce the intended pixel response while terrain ray hits remain unchanged. No shader-specific feature appears before this stage.",
+      "changes": [
+        "Let impacts create surface ripples and patterns on familiar forms.",
+        "Give familiar balls strange animated surfaces, glow and patterns. Keep their trajectory unchanged so the shader effect is clear."
+      ]
+    },
+    {
+      "sequence": "cellularautomata",
+      "title": "Cellular automata",
+      "status": "proposal",
+      "batch": "C",
+      "operation": "A painted cell becomes a changing neighbourhood.",
+      "world": "The addressed floor can advance a local rule in discrete generations; keep a permanent traversable base underneath.",
+      "catalyst": "Seed or erase cells, then observe their next generation rather than immediately replacing an entire pattern.",
+      "counterpart": "Its hits can seed the same rule, making local interventions share consequences.",
+      "reuse": "Grid2D Game of Life cartridge and the batched ca_surface renderer. The old ca_surface runs several steps during construction only; it is not yet a live arena simulation.",
+      "sources": [
+        "commons/substrates/grid2d/cartridges/cartridge_game_of_life.gd",
+        "commons/biome_layers/ca_surface.gd"
+      ],
+      "next_work": "Separate cell state from draw buffers and use one bounded update clock, with pause, step and reset.",
+      "acceptance": "A known oscillator alternates correctly without in-place update bias; a shot edits one seed cell; earlier movement and surface actions remain usable.",
+      "changes": [
+        "Let a shot seed cells in the floor. Neighbour rules spread the pattern over time.",
+        "Let impacts seed floor cells. Expand the pattern in discrete steps using a visible neighbour rule."
+      ]
+    },
+    {
+      "sequence": "fractals",
+      "title": "Fractals",
+      "status": "proposal",
+      "batch": "C",
+      "operation": "A form repeats at another scale.",
+      "world": "Use bounded recursive structures as recognisable descendants of earlier cover.",
+      "catalyst": "Select one branch or depth to unfold; preserve a parent-child record.",
+      "counterpart": "An optional finite split creates smaller descendants; never unbounded head multiplication.",
+      "reuse": "fractal_bloom actually builds recursive branching geometry. It needs a collider and interaction budget before it can provide shelter.",
+      "sources": [
+        "commons/biome_layers/fractal_bloom.gd",
+        "commons/context/walkgrids/FractalSpace.gd"
+      ],
+      "next_work": "Reuse the recursive builder with depth and instance caps; make selected branches collidable and others visual.",
+      "acceptance": "Expected child counts and parent IDs hold at each depth; maximum instances are enforced and the exit remains clear.",
+      "changes": [
+        "Build cover that repeats at smaller scales. Limit how many levels can grow."
+      ]
+    },
+    {
+      "sequence": "lsystems",
+      "title": "L-systems",
+      "status": "proposal",
+      "batch": "C",
+      "operation": "A rewritten instruction grows a branch.",
+      "world": "Earlier line segments become branching structures placed within the existing habitat and clearances.",
+      "catalyst": "Seed a short grammar or prune a branch; the next bounded rewrite changes the structure.",
+      "counterpart": "Its route or shelter can grow through the same grammar; a new skin alone does not demonstrate rewriting.",
+      "reuse": "Existing L-system trees, spawn service and the mature biome's tree placement. Retain earlier sculpture and cover candidates through biome_inheritance.",
+      "sources": [
+        "commons/biome_layers/lsystem_trees.gd",
+        "commons/biome_layers/spawn_service.gd",
+        "commons/artifacts/biome_inheritance/biome_inheritance.gd"
+      ],
+      "next_work": "Expose one production and its interpreted branch record; attach geometry and collision incrementally within a budget.",
+      "acceptance": "The produced instruction and branch count match the rule; a retained panel is not replaced when vegetation arrives.",
+      "changes": [
+        "Grow branching structures from a rule. Let shots seed or prune them."
+      ]
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "title": "Procedural generation",
+      "status": "proposal",
+      "batch": "C",
+      "operation": "Candidate arrangements meet explicit constraints.",
+      "world": "Seeded cover and habitat parts form a route under declared adjacency, clearance and occupancy rules.",
+      "catalyst": "Commit a local choice or regenerate a bounded region while keeping its unaffected neighbours.",
+      "counterpart": "It occupies the generated route, subject to the same placement constraints.",
+      "reuse": "The mature biome already retains seed, cells and ecological relationships; inherited_form_clearance checks the space around retained forms.",
+      "sources": [
+        "commons/artifacts/biome_object/biome_object.gd",
+        "commons/biome_layers/inherited_form_clearance.gd",
+        "commons/biome_layers/dna_creatures.gd"
+      ],
+      "next_work": "Add explicit route constraints and a rejection record; ecological proximity alone does not guarantee playable navigation.",
+      "acceptance": "A fixed seed reproduces the composition. Rejected candidates state the failed constraint; start, refuge and exit remain connected.",
+      "changes": [
+        "Generate different arrangements from a seed while keeping a walkable route."
+      ]
+    },
+    {
+      "sequence": "softbodies",
+      "title": "Soft bodies",
+      "status": "proposal",
+      "batch": "D",
+      "operation": "An impact changes a body's internal shape.",
+      "world": "One yielding barrier returns from earlier rigid cover, while a fixed refuge remains.",
+      "catalyst": "Push or pull the specimen; distinguish elastic recovery from a lasting edit.",
+      "counterpart": "Its balls deform the same receiver, with contact following the real simulation.",
+      "reuse": "The existing yielding-cube lesson and spring lattice are candidates. The legacy softbody_flora population is not proof of deformable collision.",
+      "sources": [
+        "doc/book/studies/soft-bodies-through-the-hands/SoftBodies_Soft_Body_Deformation/yielding_cube.gd",
+        "algorithms/softbodies/spring_lattice/spring_lattice.gd",
+        "commons/biome_layers/softbody_flora.gd"
+      ],
+      "next_work": "Adapt one tested body, pin its boundary and measure contact cost before enabling multiple deformable objects.",
+      "acceptance": "A real impact changes vertices and subsequent contact; recovery and reset are measured; rigid cover remains available.",
+      "changes": [
+        "Let cover bend under impact and recover its shape."
+      ]
+    },
+    {
+      "sequence": "isosurfaces",
+      "title": "Isosurfaces",
+      "status": "proposal",
+      "batch": "D",
+      "operation": "A field edit changes a surface boundary.",
+      "world": "An earlier solid or terrain patch is reconstructed from a scalar field at a declared threshold.",
+      "catalyst": "Add or remove field locally through the existing sculpture brush idiom.",
+      "counterpart": "Later it may edit the same limited patch; first verify the player's operation and escape route.",
+      "reuse": "The ISO sculpture workshop already binds to the museum's mc_sculpt_vr artifact and retains a field history. Its scene binding needs an arena adapter.",
+      "sources": [
+        "commons/artifacts/timing_machines/iso_sculpt_workshop.gd",
+        "commons/artifacts/timing_machines/iso_terrain_workshop.gd"
+      ],
+      "next_work": "Reuse field history and meshing through a declared receiver; synchronize collider updates and retain immutable route boundaries.",
+      "acceptance": "Repeated brush edits produce the recorded field, mesh and collision revision; the player never stands on a visual-only replacement.",
+      "changes": [
+        "Let shots add or remove field material. Update the visible surface and its collision."
+      ]
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "title": "Boolean surfaces",
+      "status": "proposal",
+      "batch": "D",
+      "operation": "Two solids define union, intersection or difference.",
+      "world": "A bounded obstacle can acquire a tunnel, a joined volume or an overlap from explicit operands.",
+      "catalyst": "Place a sphere operand and choose the operation; preserve both inputs so the change can be read or undone.",
+      "counterpart": "It uses the resulting opening; attack-driven subtraction is a later option, not needed for the first comparison.",
+      "reuse": "The current Boolean_Verbs hall compares the same two operands. Reuse that contract rather than labelling an alpha fade as subtraction.",
+      "sources": [
+        "commons/maps/Boolean_Verbs/tutorial.md",
+        "commons/maps/Boolean_Verbs/map_data.json"
+      ],
+      "next_work": "Select the existing hall's solid builder after inspecting its receiver; bound geometry cost and refresh collision.",
+      "acceptance": "Difference opens a real passage; disjoint intersection is empty; the same operand record can reproduce or restore the result.",
+      "changes": [
+        "Use the sphere to cut, join or intersect solid obstacles."
+      ]
+    },
+    {
+      "sequence": "swarmintelligence",
+      "title": "Swarm intelligence",
+      "status": "proposal",
+      "batch": "D",
+      "operation": "Neighbours change one another's motion.",
+      "world": "A small group moves through the retained terrain and cover using local rules.",
+      "catalyst": "Disturb the group or leave a local attractor, then observe its response.",
+      "counterpart": "Heads now negotiate neighbours rather than merely occupying indexed slots or prescribed orbits.",
+      "reuse": "Use the actual boid implementation as a candidate. The old swarm_creatures layer only animates phase-offset orbits.",
+      "sources": [
+        "algorithms/emergentsystems/boidflocking/Boid.gd",
+        "commons/biome_layers/swarm_creatures.gd"
+      ],
+      "next_work": "Adapt separation, alignment and cohesion to a capped head group; share avoidance and neighbour-query budget.",
+      "acceptance": "Changing one neighbour changes a focal head's trajectory. Disabling neighbour coupling removes that effect under the same initial state.",
+      "changes": [
+        "Let skulls coordinate through local neighbour rules. Use the catalyst to disturb the group."
+      ]
+    },
+    {
+      "sequence": "graphtheory",
+      "title": "Graph theory",
+      "status": "proposal",
+      "batch": "E",
+      "operation": "An edge changes what can reach what.",
+      "world": "Earlier landmarks become nodes in an explicit traversable or signal network.",
+      "catalyst": "Connect or disconnect a declared edge; observe the changed route or reachable set.",
+      "counterpart": "It follows the same graph; a connection can provide a detour rather than simply increase attack power.",
+      "reuse": "The actual pathfinding artifact is a candidate. graph_connections draws proximity edges only; it does not implement traversal or alter the arena.",
+      "sources": [
+        "algorithms/graphtheory/pathfinding3d/pathfinding3d.gd",
+        "commons/biome_layers/graph_connections.gd"
+      ],
+      "next_work": "Give edges real receiver semantics, stable node IDs and a route query. Current spine places Graph Theory before Machine Learning.",
+      "acceptance": "Removing one bridge edge changes the computed reachable set; drawn edges match the graph actually used by movement.",
+      "changes": [
+        "Let changing a connection open or close a route between objects."
+      ]
+    },
+    {
+      "sequence": "machinelearning",
+      "title": "Machine learning",
+      "status": "proposal",
+      "batch": "E",
+      "operation": "Measured experience changes a parameter or policy.",
+      "world": "Keep the same arena for a controlled comparison before and after learning or selection.",
+      "catalyst": "Provide examples or alter an explicit objective; replay the same test conditions.",
+      "counterpart": "A recorded policy changes one response, with its training evidence inspectable. More aggression is not the definition of learning.",
+      "reuse": "The nature system's EvolutionSystem and current ML lessons are candidates. adaptive_behavior's pulsing halo is not a learning implementation.",
+      "sources": [
+        "algorithms/nature_system/systems/evolution_system.gd",
+        "commons/maps/ML_Evolution/tutorial.md",
+        "commons/biome_layers/adaptive_behavior.gd"
+      ],
+      "next_work": "Choose one actual learning/selection model, specify data and objective, then expose its changed parameter beside an untrained baseline.",
+      "acceptance": "A saved update changes held-out behaviour under fixed conditions; resetting learning restores the baseline. A glow alone cannot pass.",
+      "changes": [
+        "Let a skull learn a response from examples. Compare it with an unchanged skull."
+      ]
+    },
+    {
+      "sequence": "foundationscrisis",
+      "title": "Foundations crisis",
+      "status": "proposal",
+      "batch": "E",
+      "operation": "A claim carries the conditions of its test.",
+      "world": "Return to an earlier apparently reliable arena rule and expose its domain, budget or counterexample.",
+      "catalyst": "Inspect and challenge one claim through a finite, reproducible encounter.",
+      "counterpart": "It need not gain another weapon; an unresolved or limited prediction can become the encounter.",
+      "reuse": "Crisis_Synthesis already carries recorded trials, model identifiers, source hashes and checker results. The old paradox layer is rotating geometry, not a proof of undecidability.",
+      "sources": [
+        "commons/maps/Crisis_Synthesis/tutorial.md",
+        "commons/biome_layers/paradox_zones.gd"
+      ],
+      "next_work": "Select one bounded rule and preserve the evidence record; distinguish failed search from disproven claim and unknown from false.",
+      "acceptance": "The display never upgrades a bounded search outcome into a universal claim; replay retains model and source identity.",
+      "changes": [
+        "Expose a limit of an earlier rule. Let the player inspect what the rule leaves out."
+      ]
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "title": "QFEP laboratory",
+      "status": "proposal",
+      "batch": "E",
+      "operation": "An explicit control reaches an actual receiver.",
+      "world": "Expose a few measured parameters of the accumulated world without resetting its moving bodies.",
+      "catalyst": "Use the sphere as a control source; read both requested and received values.",
+      "counterpart": "Share a parameter that changes a concrete behaviour, keeping its effect observable rather than merely increasing difficulty.",
+      "reuse": "QFEP Synthesis already maps controls to a SoftBody3D specimen and distinguishes settings from interpretation. tunable_field contains static indicators only.",
+      "sources": [
+        "doc/book/studies/qfep-lineage/synthesis_study.gd",
+        "commons/maps/QFEP_Synthesis/tutorial.md",
+        "commons/biome_layers/tunable_field.gd"
+      ],
+      "next_work": "Reuse one explicit source-to-receiver mapping, then add telemetry for the actual object. Do not claim the dials measure a universal QFEP quantity.",
+      "acceptance": "The receiver reports the changed coefficient and retains the same body/state; stopping a modulation does not falsely imply stopping all motion.",
+      "changes": [
+        "Connect the catalyst to a real adjustable system. Show how its response changes."
+      ]
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "title": "After the foundations",
+      "status": "proposal",
+      "batch": "E",
+      "operation": "Recompose the world and inspect what the rule excludes.",
+      "world": "A small authored combination of earlier systems, with an editable route and an account of its choices.",
+      "catalyst": "Build, connect, protect or transform using capacities already acquired; combat can be optional.",
+      "counterpart": "A former opponent can become a moving force, collaborator or source in the composition.",
+      "reuse": "The mature biome's seed and community records, inherited form clearances, and current critical lessons. critical_overlay's tinted dome is not evidence of measured bias.",
+      "sources": [
+        "commons/artifacts/biome_object/biome_object.gd",
+        "commons/artifacts/biome_inheritance/biome_inheritance.gd",
+        "commons/biome_layers/critical_overlay.gd",
+        "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md"
+      ],
+      "next_work": "Choose one inspectable composition and one exclusion question; retain the source record and alternative instead of switching on every system.",
+      "acceptance": "A changed rule yields a traceable changed arrangement; earlier object identities and earned capacities remain available; exit and replay stay usable.",
+      "changes": [
+        "Combine earlier abilities into a living biome. Let a former opponent become a source or companion."
+      ]
+    }
+  ],
+  "changes_note": "The changes arrays are the editable working plan. Preserve user edits when regenerating reports. Detailed fields remain background proposals; changes are not evidence of implemented behavior."
+}

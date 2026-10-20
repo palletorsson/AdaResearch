@@ -1,0 +1,140 @@
+{
+  "checks": [
+    {
+      "name": "New paper trace produces F then FfF then FfFfffFfF",
+      "passed": true
+    },
+    {
+      "name": "New trace draws four intervals across nine unit advances",
+      "passed": true
+    },
+    {
+      "name": "Printed complete program constructs both lines and carried point",
+      "passed": true
+    },
+    {
+      "name": "Simultaneous pass reads only old F",
+      "passed": true
+    },
+    {
+      "name": "Unmatched symbols pass through and inputs stay unchanged",
+      "passed": true
+    },
+    {
+      "name": "Different rules act on old AB together",
+      "passed": true
+    },
+    {
+      "name": "An explicit empty production erases its symbol",
+      "passed": true
+    },
+    {
+      "name": "Empty sentence stays valid and draws nothing",
+      "passed": true
+    },
+    {
+      "name": "Undrawn X is still rewritten",
+      "passed": true
+    },
+    {
+      "name": "Budget permits exactly4096 symbols",
+      "passed": true
+    },
+    {
+      "name": "Budget rejects whole generation retaining original",
+      "passed": true
+    },
+    {
+      "name": "Generation0 count and retained signs",
+      "passed": true
+    },
+    {
+      "name": "Generation1 count and retained signs",
+      "passed": true
+    },
+    {
+      "name": "Generation2 count and retained signs",
+      "passed": true
+    },
+    {
+      "name": "Generation3 count and retained signs",
+      "passed": true
+    },
+    {
+      "name": "Generation4 count and retained signs",
+      "passed": true
+    },
+    {
+      "name": "Four generation cap holds data and counter",
+      "passed": true
+    },
+    {
+      "name": "Turn changes endpoints without changing sentence or held reading",
+      "passed": true
+    },
+    {
+      "name": "Both visual views reconstruct five finite cylinders",
+      "passed": true
+    },
+    {
+      "name": "Next can change live while held remains",
+      "passed": true
+    },
+    {
+      "name": "Reset restarts live while retaining angle and kept reading",
+      "passed": true
+    },
+    {
+      "name": "Cantor three generations27 advances8 intervals",
+      "passed": true
+    },
+    {
+      "name": "Cantor addresses match the previous thirds construction",
+      "passed": true
+    },
+    {
+      "name": "No turn commands makes the angle idle",
+      "passed": true
+    },
+    {
+      "name": "H stores current sentence and reading",
+      "passed": true
+    },
+    {
+      "name": "Enter adds one Cantor generation",
+      "passed": true
+    },
+    {
+      "name": "Forty rule-depth-angle readings match production endpoints after fitting",
+      "passed": true
+    },
+    {
+      "name": "Independent printed edit FplusF makes four sides",
+      "passed": true
+    },
+    {
+      "name": "Same altered sentence need not close at120",
+      "passed": true
+    },
+    {
+      "name": "XR hand chooses120 in rotated translated study",
+      "passed": true
+    },
+    {
+      "name": "Actual held action rewrites once",
+      "passed": true
+    },
+    {
+      "name": "Release parks point and keeps sentence",
+      "passed": true
+    },
+    {
+      "name": "Rejected construction preserves generation and names limit",
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "passed": true,
+  "production_comparisons": 40,
+  "scope": "Author-led native reconstruction of exact printed files; artificial XR poses, no headset or independent student."
+}

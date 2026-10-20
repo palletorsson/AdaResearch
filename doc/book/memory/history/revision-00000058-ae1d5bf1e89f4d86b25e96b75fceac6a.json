@@ -1,0 +1,1852 @@
+{
+  "schema_version": 1,
+  "revision": 58,
+  "updated_at": "2026-10-04T18:29:11.737991Z",
+  "core": {
+    "text": "Host: the existing Endless Museum. Keep museum encounters, tutorial learning and critical-poetic writing as overlapping sets. Teach selected reusable operations; name supplied support. Keep decisions, proposals, evidence and unknowns distinct. Preserve why a choice was made. Move project → sequence → hall → source → sequence → project. Keep summary work separate from explicitly authorized museum implementation. A summary alone does not authorize code, hall-order or full-lesson edits. The memory interface is a tool for this work.",
+    "reason": "Repeated local rewrites lost the museum setting and prior author decisions. Compact instructions should preserve intent and support changes without flattening artistic differences.",
+    "open_question": "Which sequence boundary should receive the next deliberate reading? Preserve mature sequences unless evidence gives a reason to reopen them."
+  },
+  "notes": {
+    "sequence:primitives": {
+      "summary": "Arrival -> point -> coordinates -> line -> trace -> grid -> triangle -> polyhedra -> cube -> generated form -> Godot forms -> Columns -> Profiles -> Portals -> Melencolia. Museum retains its existing biome interlude after Portals.",
+      "reason": "Separate construction, inherited engine forms and artistic exploration. Preserve older comparisons while letting the column court and glyph architecture occupy their own spaces.",
+      "open_question": "How do the three added halls feel in the headset: pace, readable labels and bodily scale? Later, choose the bounded learner edit host before expanding their tutorial summaries.",
+      "updated_at": "2026-10-04T14:02:19.885202Z"
+    },
+    "map:Point_Line_Grid": {
+      "summary": "Fit the accepted drawing, then round display positions. Keep source data separate.",
+      "reason": "This is the concrete return from a recorded list to lattice addresses; it also constrains the later Array analogy.",
+      "open_question": "How should the lesson make source position and displayed address visible without overloading the learner?",
+      "updated_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    "project": {
+      "summary": "Keep the whole in view while reading one hall closely.",
+      "reason": "A local finding should return with its consequence for the sequence and the project.",
+      "open_question": "Does each sequence make its entry, carry and unresolved question clear?",
+      "updated_at": "2026-10-04T11:45:53.261250Z"
+    }
+  },
+  "findings": [
+    {
+      "id": "counter-exists",
+      "scope": "map:Point_Zero",
+      "kind": "source",
+      "text": "Point Zero already places the counter. Its _ready records arrival; _process updates the count.",
+      "reason": "The tutorial begins from existing museum material; avoid substituting a new starting environment.",
+      "sources": [
+        {
+          "path": "commons/maps/Point_Zero/map_data.json",
+          "sha256": "52970e1406a0a36101c3e43f9ca369c93878881f1660fd30e3e0efad2b34782d"
+        },
+        {
+          "path": "commons/visualaid/frame_counter/frame_counter_display.gd",
+          "sha256": "497d4e910962107d9053f0dcdd0e81d0fd1af6b2bbc7aa5fb5c591bacdf0e162"
+        }
+      ],
+      "sequence_effect": "Use the existing counter for initialization and repeated processing.",
+      "project_effect": "Supplied material is not evidence of a skill already learned.",
+      "related_scopes": [
+        "sequence:primitives",
+        "project"
+      ],
+      "status": "accepted",
+      "method": "Static inspection of thirteen frozen files; see doc/book/iterations/2026-10-04-context-roundtrip-test/SOURCE_REVIEW.md. No runtime test.",
+      "created_by": "Codex pilot source review",
+      "created_at": "2026-10-04T11:38:15.539319+00:00",
+      "review_note": "Imported from the completed bounded source audit. Acceptance records this scoped finding, not a whole-project guarantee.",
+      "reviewed_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    {
+      "id": "trace-accepted-record",
+      "scope": "map:Point_Trace",
+      "kind": "source",
+      "text": "Release stores the pen’s accepted position list. Script defaults allow that record to span pickups; accepted samples can already be projected, quantized or filtered.",
+      "reason": "A retained record is not automatically a fresh stroke or raw hand motion. Scene overrides outside the pilot remain unverified.",
+      "sources": [
+        {
+          "path": "commons/primitives/point/draw_dot.gd",
+          "sha256": "ec471ea3fa8df011a4c9c88205dee5ae1c23694c3172d8887c9371509b559de2"
+        },
+        {
+          "path": "commons/globals/trace_data.gd",
+          "sha256": "fafdfa6fc3ace5c45cd30e74cdaf5a590cd19581aaf245226e81dc7c15ecb3f1"
+        }
+      ],
+      "sequence_effect": "Carry the accepted record into Grid, with its sampling conditions explicit.",
+      "project_effect": "Keep the kind of data explicit when reusing an artifact.",
+      "related_scopes": [
+        "map:Point_Line_Grid",
+        "sequence:primitives"
+      ],
+      "status": "accepted",
+      "method": "Static inspection of thirteen frozen files; see doc/book/iterations/2026-10-04-context-roundtrip-test/SOURCE_REVIEW.md. No runtime test.",
+      "created_by": "Codex pilot source review",
+      "created_at": "2026-10-04T11:38:15.539319+00:00",
+      "review_note": "Imported from the completed bounded source audit. Acceptance records this scoped finding, not a whole-project guarantee.",
+      "reviewed_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    {
+      "id": "grid-fit-before-round",
+      "scope": "map:Point_Line_Grid",
+      "kind": "source",
+      "text": "Grid centres and fits the accepted record, then rounds display positions in XYZ. Source data is retained separately.",
+      "reason": "List index, source position and rounded display address are distinct.",
+      "sources": [
+        {
+          "path": "commons/primitives/line/grid_lines.gd",
+          "sha256": "6526b7df72484b1d09dd79b4c8fdd52e9ccca75e852300add2b13ec320b31a08"
+        }
+      ],
+      "sequence_effect": "Arrays may generate positions from indices; that does not undo Grid’s information loss.",
+      "project_effect": "A local implementation fact can change the teaching handoff without requiring a new hall order.",
+      "related_scopes": [
+        "map:Array",
+        "sequence:array_tutorial",
+        "sequence:primitives",
+        "project"
+      ],
+      "status": "accepted",
+      "method": "Static inspection of thirteen frozen files; see doc/book/iterations/2026-10-04-context-roundtrip-test/SOURCE_REVIEW.md. No runtime test.",
+      "created_by": "Codex pilot source review",
+      "created_at": "2026-10-04T11:38:15.539319+00:00",
+      "review_note": "Imported from the completed bounded source audit. Acceptance records this scoped finding, not a whole-project guarantee.",
+      "reviewed_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    {
+      "id": "rounding-is-lossy",
+      "scope": "map:Point_Line_Grid",
+      "kind": "source",
+      "text": "Rounding is many-to-one; adjacent snapped duplicates can also disappear. An address cannot recover arbitrary original positions.",
+      "reason": "Preserved source data is a separate resource, not proof that snapping is invertible.",
+      "sources": [
+        {
+          "path": "commons/primitives/line/grid_lines.gd",
+          "sha256": "6526b7df72484b1d09dd79b4c8fdd52e9ccca75e852300add2b13ec320b31a08"
+        },
+        {
+          "path": "commons/maps/Point_Line_Grid/final.md",
+          "sha256": "fd1a7c35598c66b1053c921494121a2906f5716e5f950bb5d2c683f9007b6646"
+        }
+      ],
+      "sequence_effect": "Qualify the later Array return as generating positions, not recovering lost inputs.",
+      "project_effect": "Keep source-supported claims and pedagogical analogies distinct.",
+      "related_scopes": [
+        "map:Array",
+        "sequence:array_tutorial"
+      ],
+      "status": "accepted",
+      "method": "Static inspection of thirteen frozen files; see doc/book/iterations/2026-10-04-context-roundtrip-test/SOURCE_REVIEW.md. No runtime test.",
+      "created_by": "Codex pilot source review",
+      "created_at": "2026-10-04T11:38:15.539319+00:00",
+      "review_note": "Imported from the completed bounded source audit. Acceptance records this scoped finding, not a whole-project guarantee.",
+      "reviewed_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    {
+      "id": "session-not-restart",
+      "scope": "map:Point_Trace",
+      "kind": "source",
+      "text": "The selected TraceData autoload retains copied records in memory. This path does not establish survival through restart.",
+      "reason": "No disk save/reload occurs in the inspected store; uninspected project mechanisms remain unknown.",
+      "sources": [
+        {
+          "path": "commons/globals/trace_data.gd",
+          "sha256": "fafdfa6fc3ace5c45cd30e74cdaf5a590cd19581aaf245226e81dc7c15ecb3f1"
+        },
+        {
+          "path": "project.godot",
+          "sha256": "a9a752c9913d2a6efc4678395a5a40a8faa1939da83fee5341f44cee499348b1"
+        },
+        {
+          "path": "commons/primitives/line/grid_lines.gd",
+          "sha256": "6526b7df72484b1d09dd79b4c8fdd52e9ccca75e852300add2b13ec320b31a08"
+        }
+      ],
+      "sequence_effect": "Do not promise restart persistence in Trace → Grid summaries.",
+      "project_effect": "Scope a claim to inspected evidence. A successful source check is not a headset trial.",
+      "related_scopes": [
+        "map:Point_Line_Grid",
+        "sequence:primitives"
+      ],
+      "status": "accepted",
+      "method": "Static inspection of thirteen frozen files; see doc/book/iterations/2026-10-04-context-roundtrip-test/SOURCE_REVIEW.md. No runtime test.",
+      "created_by": "Codex pilot source review",
+      "created_at": "2026-10-04T11:38:15.539319+00:00",
+      "review_note": "Imported from the completed bounded source audit. Acceptance records this scoped finding, not a whole-project guarantee.",
+      "reviewed_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    {
+      "id": "register-reconciliation",
+      "scope": "sequence:primitives",
+      "kind": "proposal",
+      "text": "Reconcile the older counter-building exercise and the phrase “reversing the earlier mapping” in the subject register.",
+      "reason": "Current storyboards use an existing counter and explicitly distinguish lossy rounding.",
+      "sources": [
+        {
+          "path": "doc/book/course/sketch/SUBJECT_REGISTER.md",
+          "sha256": "167a0f8f8bc42b94ac26e5129f3d7da3d2cca5cd36fa5ed7a3af0b8be9ac0f73"
+        },
+        {
+          "path": "doc/book/course/storyboards/opening.json",
+          "sha256": "41941024026cdff5ec8dde172bca2b3128ebb5457ad6422a447bc56f429fbde8"
+        }
+      ],
+      "sequence_effect": "Preserve the current selected lineage while clarifying the earlier planning register.",
+      "project_effect": "Resolve the documentary conflict without changing the museum to fit it.",
+      "related_scopes": [
+        "sequence:array_tutorial",
+        "map:Point_Zero",
+        "map:Point_Line_Grid"
+      ],
+      "status": "proposed",
+      "method": "Static inspection of thirteen frozen files; see doc/book/iterations/2026-10-04-context-roundtrip-test/SOURCE_REVIEW.md. No runtime test.",
+      "created_by": "Codex pilot source review",
+      "created_at": "2026-10-04T11:38:15.539319+00:00",
+      "review_note": "Imported from the completed bounded source audit. Acceptance records this scoped finding, not a whole-project guarantee.",
+      "reviewed_at": "2026-10-04T11:38:15.539319+00:00"
+    },
+    {
+      "text": "Can a learner explain why two source positions can share one displayed address, while still finding the untouched source record?",
+      "reason": "The source audit establishes the operation, but not whether the distinction is legible to a beginner.",
+      "sequence_effect": "Keep the Trace → Grid → Array teaching handoff open until source position and display address can be distinguished.",
+      "project_effect": "A correct reading of the code and a successful learning encounter require different evidence.",
+      "method": "Question raised by the bounded source audit; no learner trial.",
+      "created_by": "Codex",
+      "id": "finding-2a023aa8049149278b3be5f1a86433c3",
+      "scope": "map:Point_Line_Grid",
+      "kind": "question",
+      "related_scopes": [],
+      "sources": [
+        {
+          "path": "commons/primitives/line/grid_lines.gd",
+          "sha256": "6526b7df72484b1d09dd79b4c8fdd52e9ccca75e852300add2b13ec320b31a08"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-context-roundtrip-test/REPORT.md",
+          "sha256": "a27598eee2790280cd280bc793cdd6ad17830d1a4e9c29d8608e332bf0163676"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T11:48:17.146714Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Keep the lineage open to change. Show the current order and complete summaries together, while preserving alternatives, reasons and open questions. A hall may contribute through reflection or an encounter without introducing a new programming step.",
+      "reason": "Palle approved the continuous outline on 4 October 2026 with the instruction: “keep the freedom of change.” The interface should support reconsideration as the project evolves.",
+      "sequence_effect": "Compare neighbouring halls and question their order or teaching selection without silently rewriting the authored route.",
+      "project_effect": "Keep museum, tutorial and critical writing as overlapping sets. A memory structure is an aid to judgment, not a fixed curriculum.",
+      "method": "Explicit author instruction in this conversation, 4 October 2026; a design decision, not a source or runtime observation.",
+      "created_by": "Palle / recorded by Codex",
+      "id": "finding-78940f17e9474088b8445afaadb97f90",
+      "scope": "project",
+      "kind": "decision",
+      "related_scopes": [],
+      "sources": [],
+      "status": "accepted",
+      "created_at": "2026-10-04T12:22:18.074497Z",
+      "review_note": "Retained as an explicit author instruction for the memory interface. This records the requested freedom to reconsider choices; it makes no runtime or whole-curriculum claim.",
+      "reviewed_at": "2026-10-04T12:23:03.958538Z"
+    },
+    {
+      "text": "Separate the closing Primitives encounters: generated forms / tighter Ignorance -> Godot's supplied mesh forms -> exploration with columns and letter profiles -> Portals (finite approximations and chosen tolerance) -> Melencolia. Retain Coordinates, Trace and Grid in the opening lineage. Give exploration distinct space: first compare one profile at 4, 6, 8, 12 and 16 radial segments, then vary outline and height; use letter profiles to expose inherited outlines, holes and new bodily uses. This is a route proposal, not a changed sequence.",
+      "reason": "Palle identifies Ignorance as too dense and asks for a clearer exploratory direction. Its current manuscript and map combine the Platonic courtyard, sphere comparisons, cost display, capsule and engine mesh library. The existing Primitives_Godot map is outside the authored sequence. Columns and glyph studies provide concrete material for a separate exploration encounter.",
+      "sequence_effect": "Let construction, borrowed engine forms, artistic choices, limits and meaning have distinct moments. The column lesson can reuse lists, loops and a supplied sampler; the glyph geometry builder can remain supplied. Do not imply that arbitrary profile sweeps are built-in PrimitiveMesh types. Pi is finite; an endless decimal expansion, polygon convergence and a philosophical ideal are distinct. Do not turn Melencolia into another syntax lesson.",
+      "project_effect": "Use sequence review to redistribute attention while preserving the wider artifact ecology. Keep the source-supported inventory separate from the curatorial judgment and a future VR assessment. Do not force every object into a tutorial or remove older works just to match a reduced summary.",
+      "method": "Author proposal plus parallel read-only review of authored route, selected texts and placement data; visual inspection of earlier native Godot captures. Column gallery is marked standalone/not map-ready; glyph gallery is isolated with a non-colliding camera. No new runtime or headset test. Museum hosting, passages and comfort remain to be checked before VR delivery.",
+      "created_by": "Palle proposal / Codex synthesis",
+      "id": "finding-b4c1d3c3768e4db59181ad1678805f1b",
+      "scope": "sequence:primitives",
+      "kind": "proposal",
+      "related_scopes": [
+        "map:Primitives_Ignorance",
+        "map:Primitives_Portals",
+        "map:Primitives_Melencolia"
+      ],
+      "sources": [
+        {
+          "path": "commons/maps/sequences/primitives.json",
+          "sha256": "191cdf573ed7f334008440d9bd640ecd378f01180ef5f39c44bd949907d9fc7e"
+        },
+        {
+          "path": "commons/maps/Primitives_Ignorance/map_data.json",
+          "sha256": "9ab163a611b49ffb209078737c65151b26b2e21304c61b09c7a7335a63dc596e"
+        },
+        {
+          "path": "commons/maps/Primitives_Ignorance/final.md",
+          "sha256": "4c66385ae7040be918de5da7bfb4dbd8681df31c4da2051a502d312add97bf3c"
+        },
+        {
+          "path": "commons/maps/Primitives_Godot/map_data.json",
+          "sha256": "19289a446d9ca288fc80697c05bc25019ec7b8947712bb6afa0d1e9b18d6b8d7"
+        },
+        {
+          "path": "commons/artifacts/registry/resolution_colonnade.json",
+          "sha256": "8240bc41527b58fd6b779b489d8e50b970c19828475ba4cc61a022f66c6f71d5"
+        },
+        {
+          "path": "doc/book/studies/glyph-form-atlas/README.md",
+          "sha256": "7c7e02409a48e281b325242e7efe42ec3059bf7d5e2ce8b0a2c7ecb497995711"
+        },
+        {
+          "path": "commons/maps/Primitives_Portals/final.md",
+          "sha256": "6b482e1483ed32d10461a151ffdcf435e712f8720551718de6d33fb72fd1116e"
+        },
+        {
+          "path": "doc/book/course/storyboards/opening.json",
+          "sha256": "41941024026cdff5ec8dde172bca2b3128ebb5457ad6422a447bc56f429fbde8"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T13:34:51.346769Z",
+      "review_note": "Palle explicitly approved expanding the sequence with these maps on 4 October 2026. This accepts the direction; the original source hashes remain as the proposal evidence. Implementation and checks are recorded separately.",
+      "reviewed_at": "2026-10-04T14:02:12.423862Z"
+    },
+    {
+      "text": "Installed Primitives_Godot, Primitives_Columns and Primitives_Profiles between Ignorance and Portals. Library and seven-form choir move from Ignorance; its other 26 placements remain. Columns: five controlled specimens then twenty varied bodies. Profiles: six original glyph forms with source outlines. Preserve the existing museum-only biome stop after Portals. Fifteen book halls; sixteen museum stops. Full tutorial development remains separate.",
+      "reason": "Author approved the proposed split so engine vocabulary and exploration have their own spatial attention instead of further densifying Ignorance.",
+      "sequence_effect": "Generated form -> supplied engine forms -> column choices -> borrowed outlines -> finite refinement -> composition. Earlier Coordinates, Trace and Grid retain their places.",
+      "project_effect": "Source-backed plan, actual museum placement and current summaries agree for the added halls. The wider collection is retained. Native checks do not establish headset comfort or learning.",
+      "method": "26 source-chain/preservation checks; native Godot room loads, central player walks and floor rays in all three new halls; 63 checks across four production portal transitions using explicit crossing requests. Original artifact mesher/recipes retained. No headset or learner trial.",
+      "created_by": "Palle authorization / Codex implementation",
+      "id": "finding-e6898c7430834c7fb2faee92b30c7665",
+      "scope": "sequence:primitives",
+      "kind": "decision",
+      "related_scopes": [
+        "map:Primitives_Ignorance",
+        "map:Primitives_Godot",
+        "map:Primitives_Columns",
+        "map:Primitives_Profiles",
+        "map:Primitives_Portals"
+      ],
+      "sources": [
+        {
+          "path": "commons/maps/sequences/primitives.json",
+          "sha256": "53863589fd4848ce3cf715e1f97af503ad4cfb8ad2fb601dd8424e1d053306dc"
+        },
+        {
+          "path": "commons/maps/Primitives_Ignorance/map_data.json",
+          "sha256": "16cefba073bc36228c2e75d2e5cea0ce20ee2e8103509108e35c95695f58b0be"
+        },
+        {
+          "path": "commons/maps/Primitives_Godot/map_data.json",
+          "sha256": "1bad1f0c36cafaa1b7b87542f1f42a8d811f5698f795a2f875a1a3377bbd7c0d"
+        },
+        {
+          "path": "commons/maps/Primitives_Columns/map_data.json",
+          "sha256": "67d0e99d831987e926f1d6881f43738d32dcf3a8392d220b12928d5d37f006e0"
+        },
+        {
+          "path": "commons/maps/Primitives_Profiles/map_data.json",
+          "sha256": "a0b01d5548c82ea2dd99c4d3c6c5760e7555744f69834f679b8c633ff3449684"
+        },
+        {
+          "path": "doc/book/course/storyboards/opening.json",
+          "sha256": "ea23743471363674595303cff9f98319b6b5fb8ed9358e226fcf8891dd748285"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-primitives-expanded/integration-verification.json",
+          "sha256": "4a43466cd8fe63185b479f40de15a8ebc0d5a4295f50b5893b574bdef379db64"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-primitives-expanded/passages/report.json",
+          "sha256": "417aa27092ef5dec52fa22d81551acb26905754bef56b566338841cd0f54c691"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T14:02:14.945623Z",
+      "review_note": "Recorded the authorized implementation and its bounded native evidence. Remaining VR comfort and learner edit-host questions stay open.",
+      "reviewed_at": "2026-10-04T14:02:17.412849Z"
+    },
+    {
+      "text": "Whole-spine capacity review, 4 October: the 24 sequences after Primitives largely hold as an authored museum/book journey. Perceptual and critical capacity accumulate more consistently than independent making. Preserve most current final.md and broad order. Repair contradictory tutorials first (notably Godel_Incompleteness, GT_Matching, FormFinding_Forge, Tutorial_Disco, Random_Rotate_Random_XYZ and CA_AgentsCircuits); establish the missing Array and first shader making lessons; then prove a few selected returns. Full per-sequence report: doc/book/iterations/2026-10-04-whole-spine-capacity/REPORT.md.",
+      "reason": "Three parallel readers covered all 192 main texts after Primitives and authored storyboards, with selected tutorials/source checks; coordinator read boundaries, register and saved plans. The revised finals often explicitly correct claims still made by older tutorials. File presence and storyboards do not establish a working course.",
+      "sequence_effect": "Unequal priorities recorded for all 24 sequences. Shape Grammars is absent from saved museum plans although PG recalls its forms; verify runtime fallback before a route edit. Lab_Path is explicitly optional, so its omission may be intended. Preserve actual Trace/Grid and Assembly/final-return examples; new intermediate material reuse remains a proposal.",
+      "project_effect": "Keep museum, tutorial and reflection as overlapping sets. Use a scoped storyboard to name prior ability, one new operation, supplied support, independent variation and carry-forward use. Do not turn the review into a blanket rewrite or automatic sequence reorder.",
+      "method": "Editorial/source review and saved-plan inventory. No new Godot, Quest, learner, all-code execution or external historical citation validation. Proposed priorities only; no manuscript/artifact/order changes.",
+      "created_by": "Codex coordinator with three parallel readers",
+      "id": "finding-c8013843442c49a28457bc2721b56293",
+      "scope": "project",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:array_tutorial",
+        "sequence:shaders",
+        "sequence:formfinding",
+        "sequence:machinelearning",
+        "sequence:graphtheory",
+        "sequence:foundationscrisis",
+        "sequence:postfoundationscrisis"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-whole-spine-capacity/REPORT.md",
+          "sha256": "a1d7a3ed3ccbbf48e6262f6e5b724b55b8cfccb6e165c5443a1d4ad2ac1a2ae7"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-whole-spine-capacity/inventory.json",
+          "sha256": "7e09f1e268ba113fc80b092302822208ea787e617ff3c83d1bc9a402b63672a2"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-whole-spine-capacity/route-check.json",
+          "sha256": "88d5c474d7942a72590dba5adc796bf4356cab2fd34cac57d504592500b7347f"
+        },
+        {
+          "path": "commons/maps/Godel_Incompleteness/tutorial.md",
+          "sha256": "5b6a407cb3d5f8f73d37dbacd3e118180758d3f562f52980d0d5d5365883118c"
+        },
+        {
+          "path": "commons/maps/GT_Matching/tutorial.md",
+          "sha256": "33188cf04180e47d581e305716bf8f0bb68e6548a546278c62329a92dd26a67f"
+        },
+        {
+          "path": "commons/maps/FormFinding_Forge/tutorial.md",
+          "sha256": "b1dbf107f0d779379783353f150b1536834dd31b662521b4eaae30162f3ae423"
+        },
+        {
+          "path": "commons/maps/Tutorial_Disco/tutorial.md",
+          "sha256": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e"
+        },
+        {
+          "path": "doc/book/course/sketch/subject_lineage.json",
+          "sha256": "92d3abe9d5cc599a605b5e5ff080ea16933557003b62efd6d49ff56fca13025a"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T14:44:11.585797Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Six Shader full/short summaries now carry a familiar form: distance mask → transformed/repeated motif → material on primitive bodies → field-disturbed boundary → deliberate composition → retained-state question. Reference guide: doc/book/course/storyboards/SHADERS.md. Preview: doc/book/iterations/2026-10-04-shaders-form-and-surface/index.html.",
+      "reason": "Author requested stronger continuity from earlier sequences and The Book of Shaders as tutorial inspiration. The garment studio already uses UVs and materials; Shapes and Matrices can return inside existing halls instead of becoming another gallery. Each hall now has an independent learning check.",
+      "sequence_effect": "Preserve six halls and images → bodies → rooms. Teaching connections remain proposed: host binding, shared material comparison and retained recipe transfer are not implemented by this pass. Garden world projection must not be confused with garment UVs; the final panel still lacks previous-frame feedback.",
+      "project_effect": "Earlier competence deepens rather than restarting. Keep surface appearance, geometry, collision and history distinct. Other 201 route halls and all ordering preserved. Full tutorial.md/final.md and Godot logic were not edited.",
+      "method": "Two parallel source/lineage reviews, coordinator source inspection, official Book of Shaders/Godot reference reading, structural consistency and browser review. No new Godot, headset or learner test.",
+      "created_by": "Codex",
+      "id": "finding-df4629a0663f45a3b3ad16cd03ec889a",
+      "scope": "sequence:shaders",
+      "kind": "decision",
+      "related_scopes": [
+        "sequence:primitives",
+        "sequence:transformation",
+        "sequence:array_tutorial",
+        "sequence:color",
+        "sequence:tiling",
+        "sequence:noise",
+        "sequence:cellularautomata"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/course/storyboards/growth.json",
+          "sha256": "3632e0c4bc97417ba50d602f9b8139d24804ea8c3fd3eaa73090f8882b2b692f"
+        },
+        {
+          "path": "doc/book/course/storyboards/SHADERS.md",
+          "sha256": "547f5dfd899708a408914afbf352c025923a312b893d023478241fcbc5bf2b10"
+        },
+        {
+          "path": "commons/maps/sequences/shaders.json",
+          "sha256": "524828e8faede684aa46fb29b9549e4ddbfaab008c4beba5db441606ae16e2e3"
+        },
+        {
+          "path": "commons/artifacts/fabric_shader_studio/fabric.gdshader",
+          "sha256": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35"
+        },
+        {
+          "path": "commons/artifacts/reference_studies/pattern.gdshader",
+          "sha256": "7c10918512d44ecde71a478c027beda2ecc2b4390e240f8f766c13ec0f362390"
+        },
+        {
+          "path": "algorithms/shaders/book_of_shaders/patterns_tile.gdshader",
+          "sha256": "8d8a007b1807686f4fd56cddcc77ea1d44a0706ec9cc84fa90e9d3bd2be09c89"
+        },
+        {
+          "path": "algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.gd",
+          "sha256": "831c2c74b1783e7119549714d5193384173e1418f09d3987ec315734eab2e74c"
+        },
+        {
+          "path": "commons/resourses/shaders/reaction_diffusion.gdshader",
+          "sha256": "264b4fb75bcd6d1bdbbd2ea4fade3a17e8e60e822fd6e9ea67b1d6f11960ef83"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-shaders-form-and-surface/checks.json",
+          "sha256": "8f40a9d8409f8488d62f1daaa7123e8d845dee397eaf9ebd304f2436396765f3"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T15:16:40.405040Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:34.181836Z"
+    },
+    {
+      "text": "Updated all five Arrays full/short teaching summaries and sequence metadata. Addressing is the main opening; retained Molnar departures are optional. Teach grid[x][z] to volume[y][z][x] explicitly; distinguish occupancy, quarter-turns and score events. Review: doc/book/iterations/2026-10-04-arrays-capacity-return/index.html. Guide: doc/book/course/storyboards/ARRAYS.md.",
+      "reason": "User requested report-led improvements one sequence at a time with before/after text and museum images. Arrays is an early capacity gap and has a concrete companion contradiction. Keep its strong main text and reflective wall passage.",
+      "sequence_effect": "Carry a read/write operation with explicitly named records and readers. Independent variations expose understanding of addresses, spacing, transpose, orientation and timing. Reduced display/geometry bindings and record transfer remain proposed. All five halls and ordering preserved.",
+      "project_effect": "Colour and Tiling can reuse addressed assignment and cyclic reading without pretending all stored values share a meaning. 202 other route halls and full tutorial/final/map files unchanged. Disco old full companion still needs rewriting; summary edits do not resolve it.",
+      "method": "Parallel text/lineage and implementation source review; before/after snapshots, scope/hash and generated-route checks; illustrated browser review. Reused dated museum captures. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-cb9118e955504b82a99515fafdd46bab",
+      "scope": "sequence:array_tutorial",
+      "kind": "decision",
+      "related_scopes": [
+        "sequence:primitives",
+        "sequence:transformation",
+        "sequence:color",
+        "sequence:tiling",
+        "sequence:wavefunctions"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/course/storyboards/early.json",
+          "sha256": "f17bbc4438553ffae3c3ea3c5fff5bcc45a1b3cd9eeb6039187b41ca87160677"
+        },
+        {
+          "path": "doc/book/course/storyboards/ARRAYS.md",
+          "sha256": "35cbe7bef0f2a93e5445e586e98001aa145db96b2788141ab1c74a248a23a37b"
+        },
+        {
+          "path": "commons/maps/sequences/array_tutorial.json",
+          "sha256": "b348c9466224ea96e8072f812b40aa8db50026b8970b05ecd265c10c52f5b70a"
+        },
+        {
+          "path": "algorithms/arrays/grid_2d_4x4.gd",
+          "sha256": "4039e424056bffdb6732ce678863681ab4cace2c13ed78d7327769a61c5e48b6"
+        },
+        {
+          "path": "commons/artifacts/regularity/array_flight_lab.gd",
+          "sha256": "c36f5318c175db1f7b0eef9d2db9f8b716b0506910a2f88ec320dd888bb17562"
+        },
+        {
+          "path": "commons/artifacts/regularity/tiling_pattern.gd",
+          "sha256": "27a317a8a7fcf8b551545739026ee3660f2dbf07192d11055e1a96138f836558"
+        },
+        {
+          "path": "commons/audio/sequencer/sequencer_ui.gd",
+          "sha256": "f39b128c1223ea0bd4c6932b9fe69dc32dd3be6d424644e31bec8fac65826a89"
+        },
+        {
+          "path": "commons/context/discofloor/DiscoSequencerBridge.gd",
+          "sha256": "934419e460b521f8a7e6f3ca8132e6c4454553cd15f8763ccf00e8863b59334f"
+        },
+        {
+          "path": "commons/maps/Tutorial_Disco/tutorial.md",
+          "sha256": "8ab1abe1a9a0f8961f5359edf436f31813ee6ffa864a700783db3f08c7874e6e"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-arrays-capacity-return/REPORT.md",
+          "sha256": "676b868a38bc79e22f2fdd9ed77a43593188dc5042714038c56fb2a722655379"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T15:49:53.127088Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:36.611221Z"
+    },
+    {
+      "text": "Colour revision — Color_Context_Placed: Use the existing forms; change their palette rule. Begin with list position and make shape categories a small optional return.",
+      "reason": "Keep the opening focused on how colour regroups familiar parts.",
+      "sequence_effect": "A palette and a selection rule, with a declared material receiver.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-9dfcf0a898e7494e857c505bdceab1e9",
+      "scope": "map:Color_Context_Placed",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Context_Placed.json",
+          "sha256": "5fafb3c726e5a957e5ca8c3165744c8653e39ab40418478295ee60a2cdb2468c"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Context_Placed/final.md",
+          "sha256": "80873d7a9e82bbe459fc8c9d20e89e0536e29e38e1ad92e8e0749bf57a0f8c2d"
+        },
+        {
+          "path": "commons/artifacts/chroma_stack/chroma_stack.gd",
+          "sha256": "283829b068d24c7397d47c805701df15328250bfaf992095f176ece5600643a0"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:04.826334Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:39.031486Z"
+    },
+    {
+      "text": "Colour revision — Color_Flashlight: Use the museum lamp and the small source edit already taught here. Change colour and aim separately.",
+      "reason": "The existing encounter already provides the necessary experiment.",
+      "sequence_effect": "An explained existing light reference and a controlled comparison of receiving conditions.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-2fc148e171ab425bb2eb88141beb3837",
+      "scope": "map:Color_Flashlight",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Flashlight.json",
+          "sha256": "d8691c6455a7b21f84c851dc7cde17597b3fc00301c3bfa9c59162a35622469d"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Flashlight/final.md",
+          "sha256": "408b58ceecf5b96bffe4abe3444666526bea88644994f1cd485c30d6d6012a8f"
+        },
+        {
+          "path": "algorithms/postprocessing/flashlight_demo/flashlight_color.gd",
+          "sha256": "aed0d06589136ac6b0caebe0c75eb4f59013dcbf6a92b5ab352a4eb58bd1b058"
+        },
+        {
+          "path": "commons/artifacts/colour_light_rooms/colour_light_rooms.gd",
+          "sha256": "8d7e72fce2e4ecc0368106008a25078b880937f53bbf41ab9ab7107a3cbf8940"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:07.298211Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:41.457810Z"
+    },
+    {
+      "text": "Colour revision — Color_Nails: Specify one small local-position → RGB function and one preview material. Keep the hand system supplied and preserve the critical skin/polish passage.",
+      "reason": "Give the student a reusable operation without making the salon a wiring lesson.",
+      "sequence_effect": "A bounded RGB function and a recorded result that can be reused deliberately.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-3fc1975f871d46379dd912594beb2b85",
+      "scope": "map:Color_Nails",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Nails.json",
+          "sha256": "e4214933db4864b909abb02f0eae80ac5b2e7ece4a1374aafbe2cb957073868a"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Nails/final.md",
+          "sha256": "227dd0299c9386774b4593bce2ca02e10e62f020a19757941f36ef1962389208"
+        },
+        {
+          "path": "commons/interfaces/value_mapper_3d.gd",
+          "sha256": "23c2772376dedbaeced32274ff0af7af20edc0b7f76d8f0dce32702bd711d265"
+        },
+        {
+          "path": "commons/interfaces/nail_color_controller.gd",
+          "sha256": "90a30fe1d07c80845f00591ac3df5360295b935c74c4b1a232239ddb95ffeffa"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:09.763217Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:43.905691Z"
+    },
+    {
+      "text": "Colour revision — Color_Rainbow: Make palette substitution and fixed-width partitioning optional. A chosen Nails colour can return through a recorded value; celebration needs no task.",
+      "reason": "Preserve the room’s generosity and avoid treating every artwork as homework.",
+      "sequence_effect": "A chosen palette and an understanding of what its partition preserves.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-cfe84becd1f049879927681f0a63c448",
+      "scope": "map:Color_Rainbow",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Rainbow.json",
+          "sha256": "847442f5a296fc4316f4d68503ab14850a6ff026a7e19bc8b16fb3177d268230"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Rainbow/final.md",
+          "sha256": "77dbc7243fa7f6f351dfe770b031e008463980004015cb0c4f3e3e08b7956557"
+        },
+        {
+          "path": "algorithms/primitives/rainbow/rainbow.gd",
+          "sha256": "efe38d72f1b16020871874b3a6559d5b015cf30edf48dd0826df1c4c3e04a048"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:12.238236Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:46.397735Z"
+    },
+    {
+      "text": "Colour revision — Color_Pillar: Return to Nails’ function with explicit HSV coordinates and height conversion. Keep one sample for the next hall; preserve the fog-like ceiling encounter.",
+      "reason": "Make the change of representation teachable without claiming one formula serves both rooms unchanged.",
+      "sequence_effect": "A stated colour-field function and one recorded sample for an addressed write.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-a9334f1f11b34735830c73920a60b651",
+      "scope": "map:Color_Pillar",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Pillar.json",
+          "sha256": "82f7cc215b305c707b6d38a14faee9d4c088955630f76062cd930f79c14dbad6"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Pillar/final.md",
+          "sha256": "c6aa32e8905dad3780321b0d8f70b5ea9356d77236b743c06eb81d3b273472c6"
+        },
+        {
+          "path": "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd",
+          "sha256": "92e2d161ec632f730f3954d736a50821de89b72ac0ec68dc6aef4e67594f3b7d"
+        },
+        {
+          "path": "algorithms/color/pillarcolorcollection/field_sampler.gd",
+          "sha256": "fb26c2bea40a85366b5241d1009a8d48a60bb7a6ec23c9fb2c00e099761bca43"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:14.737045Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:48.909224Z"
+    },
+    {
+      "text": "Colour revision — Color_Grid_Pallet: Keep a colour from Nails or Pillar at one address using the existing instance model. Teach leaving, returning and overwriting; protection becomes optional.",
+      "reason": "Make the strongest sequence handoff concrete while distinguishing the proposed input from the installed four inks.",
+      "sequence_effect": "A colour value stored at an address and a known rule for replacing it.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-b698b03fd5314872adfe33b14727aebf",
+      "scope": "map:Color_Grid_Pallet",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Grid_Pallet.json",
+          "sha256": "293d59f239459d5a07ff0c310d0ce316505fdb8f5585b871a074486f6b9d2860"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Grid_Pallet/final.md",
+          "sha256": "d0f6450eec39f30f119c0e613729dc3e5047dd6f47c07b63260f0f03783b7bc8"
+        },
+        {
+          "path": "algorithms/color/gridcolorizer/address_lesson.gd",
+          "sha256": "4669b301b83240170a4193a38ab9b5231f9f168dbb066100feb1c773e8527e4d"
+        },
+        {
+          "path": "algorithms/color/gridcolorizer/gridcolorizer.gd",
+          "sha256": "5e8a909c74cc235725da6e4b287a83ef5764a61681b6676eeeffb75aa12612b5"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:17.185486Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:51.373184Z"
+    },
+    {
+      "text": "Colour revision — Color_Paint: Edit the existing automatic path. Both painters already use the same spray operation; distinguish accumulating, fading paint from a saved trace.",
+      "reason": "Use the implemented encounter to teach one meaningful change, with less machinery.",
+      "sequence_effect": "An editable path and an explicit account of what the canvas keeps and changes.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-00336c827779429e906873442bb62470",
+      "scope": "map:Color_Paint",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Paint.json",
+          "sha256": "18fac855614c2f6a1501d2dcfb8d5d97d0d023541b4e3dc0b43097c8425cba74"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Paint/final.md",
+          "sha256": "edff4b9dba229c9b05da869930311d6bd569ed683d2f7e7579b13de93bd999c9"
+        },
+        {
+          "path": "commons/context/drawingboard/ball_painting_automation.gd",
+          "sha256": "31a8490f7fc794a481ccb8cb3679e6ab14c38172c17b00f0cd8eaf8ed0133b3e"
+        },
+        {
+          "path": "commons/context/drawingboard/paper_draw_surface.gd",
+          "sha256": "cc516fd4220831de470928aa64119ebbb0d653e540008b4d2356ec16bbc5ded8"
+        },
+        {
+          "path": "commons/context/drawingboard/spray_can.gd",
+          "sha256": "90e380df2b81872780c5e279727c83b0dc8b07258d178a5a477d8afaca5dac6c"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:19.640455Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:53.844477Z"
+    },
+    {
+      "text": "Colour revision — Color_Walls: Use an existing pane or palette edit. Keep view versus passage central and carry palette-versus-arrangement into Tiling.",
+      "reason": "Preserve an accomplished ending without adding another required construction.",
+      "sequence_effect": "A palette and arrangement that can be varied independently in the returning disco floor.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-45925d8236ec4754ac04ed8b139c43ee",
+      "scope": "map:Color_Walls",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:color"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-colour-capacity-return/proposals/Color_Walls.json",
+          "sha256": "0716e49a32023032e499a15d88bb895f3a57baf13d555d4ef9a3ff8fc4450553"
+        },
+        {
+          "path": "doc/book/course/storyboards/COLOUR.md",
+          "sha256": "ecac763a208ecd33948459994414d62fdbf165f7fbe57614cc5bc4bf26795edc"
+        },
+        {
+          "path": "commons/maps/Color_Walls/final.md",
+          "sha256": "a23859b02167d18b93ad3b8384a42096cdbf0b61c1ffc2c67331c4e55fa3d15b"
+        },
+        {
+          "path": "algorithms/color/color_mixing/color_constellation_office.gd",
+          "sha256": "5ec0093334b09565d2f59034e7d75ebddae90c24699a3230c641ea14bf768bf1"
+        },
+        {
+          "path": "commons/artifacts/colour_wall_studies/study.gd",
+          "sha256": "89c1f58fce7efa901dd0413d3fc3382dd3dbef5fd52e28acfa2b9b53cccfe205"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:10:22.123076Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:56.319958Z"
+    },
+    {
+      "text": "Tiling revision — Pattern_Disco: Reuse the existing floor rule. Change palette and phase separately; keep the triangle shader an optional comparison.",
+      "reason": "Let Colour return through an operation the student already knows.",
+      "sequence_effect": "A known address rule with an independently chosen two-colour palette.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-c59e24a51b484de0a4a7c099d98bd9db",
+      "scope": "map:Pattern_Disco",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Pattern_Disco.json",
+          "sha256": "8328571a007ccd7f1791c48accaf297d67e33f29a9ac9e20003312c000ba398f"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Pattern_Disco/final.md",
+          "sha256": "2709b2bf527be6a4534f730b92212e9c86e2e6d361eb08a86e1ab07233ec3987"
+        },
+        {
+          "path": "commons/artifacts/regularity/disco_controls.gd",
+          "sha256": "3265cadb228731cc8f1db786e18bfb39b66b4498e06375788ec6b21030ee471d"
+        },
+        {
+          "path": "commons/context/discofloor/StandaloneDiscoFloor.gd",
+          "sha256": "d10c5cb9106a6f7e47156dc21a8f4fa629cac1819ece5dad40d66cd52d8bfe1f"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:42.769716Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:48:58.765015Z"
+    },
+    {
+      "text": "Tiling revision — Pattern_Foundry: Start with one small motif and wrapping lookup. Move copying to a return visit; distinguish the tile, loom and held images.",
+      "reason": "Reduce first-visit load without losing the richer questions of sharing and keeping.",
+      "sequence_effect": "A small indexed motif and its reader; an optional separately retained source copy.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-8f9459c2892b4aef9610e379945132c1",
+      "scope": "map:Pattern_Foundry",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Pattern_Foundry.json",
+          "sha256": "7c6d6331ed6dced4d8ef8e11280582535525fc5347d5453fa1ef9765b80d5936"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Pattern_Foundry/final.md",
+          "sha256": "7f2c0efaa50505edb75c5d53c9ae6d7611119468e749f5574e38387662d499cb"
+        },
+        {
+          "path": "commons/primitives/arrays/pattern_tile_puzzle.gd",
+          "sha256": "7e122673f036e21b6d7a69371a4d057ec553c0b5204b7bcd689241a0e4cc0169"
+        },
+        {
+          "path": "commons/artifacts/pattern_machine_a/recipe_study.gd",
+          "sha256": "9380d8708184e8cf00cd8c83c8f610d52221b455278d9e2038a831944ea5c8ea"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:45.234534Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:01.235228Z"
+    },
+    {
+      "text": "Tiling revision — Tutorial_Pattern: Make horizontal reversal explicit: read columns backwards, or reverse entries within each row. Check which operation actually changes the source.",
+      "reason": "Keep a visually similar result from concealing two different operations.",
+      "sequence_effect": "Separate read-address and source-edit functions with a revealing test motif.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-9dda475ee95d4586af500b9054fb8017",
+      "scope": "map:Tutorial_Pattern",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Tutorial_Pattern.json",
+          "sha256": "ad58956041e147f0b17d5ab30fbef33cb606f11a326e1bc5eba1e0424c75146e"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Tutorial_Pattern/final.md",
+          "sha256": "6bc8163b46ff43d54a1b1ade2f9bc1fbce69542212d1e990274f4625ab495f03"
+        },
+        {
+          "path": "commons/artifacts/pattern_maker_station/fixed_motif_lesson.gd",
+          "sha256": "11b9830aa47d0af0b9a55526bde870fc4054d955eb8757e9e247ab6ce1a1411d"
+        },
+        {
+          "path": "commons/maps/Tutorial_Pattern/tutorial.md",
+          "sha256": "af1a5a95aa00bc6116196784b3276eb2e8a30a9bf9640b20f14974f804cdca0f"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:47.663918Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:03.678889Z"
+    },
+    {
+      "text": "Tiling revision — Array_Patterns: Use the installed fixed motif and name each face’s directions. Distinguish one cell’s width from the width of the complete repeat.",
+      "reason": "Give the same number an unambiguous unit and meaning.",
+      "sequence_effect": "A position-to-address conversion with explicit origin, axes and metre units.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-ce06f2623b514a428b59ab3e04c6eb64",
+      "scope": "map:Array_Patterns",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Array_Patterns.json",
+          "sha256": "15ebacd7ece8dd5916745be19730f09c2a21fbe298939c5a82b29d98cb4968c2"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Array_Patterns/final.md",
+          "sha256": "33966c7f2b3842b9b9f5eb060fa3c1427f4001affdf8aa9a67a37192764b5e84"
+        },
+        {
+          "path": "commons/artifacts/pattern_tunnel/tunnel_address_lesson.gd",
+          "sha256": "a6874fd40988cc6dca9f94d41abada5d7549dca09b65cc645253dd75f9eb0bcf"
+        },
+        {
+          "path": "commons/artifacts/pattern_tunnel/pattern_tunnel.gdshader",
+          "sha256": "24103a2b2cd81f32a52164401273c6eb5d103e05b95bb1be628685ccb86a39ae"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:50.104375Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:06.137576Z"
+    },
+    {
+      "text": "Tiling revision — Symmetry_Seventeen: Inspect two neighbouring blocks and test the translation period. Keep the seventeen-group claim separate from this bounded comparison.",
+      "reason": "Make the limit of the demonstrated rule as clear as its visible effect.",
+      "sequence_effect": "A diagnostic motif and a repeating unit checked against more than one source block.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-ff1b113d61064e2cb63f6961d917e25d",
+      "scope": "map:Symmetry_Seventeen",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Symmetry_Seventeen.json",
+          "sha256": "3ade0e52f050ad2fed4d456511f61898891839753f9c3b60932a6e57ea587f04"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Symmetry_Seventeen/final.md",
+          "sha256": "79bd5b7f9f75f06ac3524e0c4c2cb7ed928e34c0b55bf27c27be7ffe6de2aeb6"
+        },
+        {
+          "path": "commons/primitives/arrays/wallpaper_groups.gd",
+          "sha256": "5ddc7d3bb0a4ac5bf5e5ddea6405f060d2e37a86f08ca0ac7e3840c9c829c6a3"
+        },
+        {
+          "path": "commons/primitives/arrays/symmetry_compare_lesson.gd",
+          "sha256": "55908f7bb4084adade667df732c63ffdc74370615973d7019b7aac9d3c2228fc"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:52.741957Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:08.586672Z"
+    },
+    {
+      "text": "Tiling revision — Ribbon_Patterns_01: Name source [z][x] and volume [y][z][x], then predict one shifted lookup. Keep zero-as-colour distinct from earlier occupancy.",
+      "reason": "Reuse the earlier volume knowledge without silently changing what its values mean.",
+      "sequence_effect": "A volume reader with declared palette-index values and nondestructive slice views.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-20f7d1f5c57f4cf596a7a9a50ea46942",
+      "scope": "map:Ribbon_Patterns_01",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Ribbon_Patterns_01.json",
+          "sha256": "c6930cb523314b0d8897e22ad0a5c3f953bf690e4a4260f46bf4a045613120a7"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Ribbon_Patterns_01/final.md",
+          "sha256": "aa0cb6505f1fdc68983aa2e3b243b59a299d7ada2551e99d1a3acfab4b6f949e"
+        },
+        {
+          "path": "algorithms/arrays/layer_pattern_lesson.gd",
+          "sha256": "e5b55774f2c544a3152c972c5fa6cf75847135397845d902bd5aec24ddc56a02"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:55.156078Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:11.046660Z"
+    },
+    {
+      "text": "Tiling revision — Ribbon_Patterns_02: Keep it. Clarify equal surface distance versus apparent width; leave the lighting calculation supplied and require no perceptual answer.",
+      "reason": "Allow the sequence to deepen attention without adding more programming.",
+      "sequence_effect": "A comparison that separates stored equality, surface distance and viewed appearance.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-f09de65348714399ad83476e00e1ccb0",
+      "scope": "map:Ribbon_Patterns_02",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Ribbon_Patterns_02.json",
+          "sha256": "b5fac2a6afa4ed2917902fabd70683e2115e8207353f6c7a249c2be041ce48e2"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Ribbon_Patterns_02/final.md",
+          "sha256": "c64ef238cddf350cf9c3207dc7e04df9a6f16899722a7453837b7ace8fb0b4af"
+        },
+        {
+          "path": "algorithms/color/carrier_comparison.gd",
+          "sha256": "e713b9191c18dd0ac046c6d0efa34375a6ec041833a4f7a5bda387944d3f5710"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:19:57.588995Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:13.548733Z"
+    },
+    {
+      "text": "Tiling revision — Ribbon_Patterns_03: Name the existing texture/material host. Teach repeat, offset and sampling only; distinguish saved recipe data from shader code and metre spacing.",
+      "reason": "Give the sequence a small, usable shader ending without implying the whole studio must be rebuilt.",
+      "sequence_effect": "A small repeat-and-offset sampling operation plus a clearly bounded saved appearance recipe.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lesson/binding remains a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-3ab1d99e8dd14d739a9c587b111f0e6f",
+      "scope": "map:Ribbon_Patterns_03",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:tiling"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-tiling-capacity-return/proposals/Ribbon_Patterns_03.json",
+          "sha256": "ba7e0e40dc4857116c415ae6c7c5d4ea204d74437aafa5e013982f87da25910e"
+        },
+        {
+          "path": "doc/book/course/storyboards/TILING.md",
+          "sha256": "a8fcf5d2b262b41f26127dfbe6a0fb3a199e84e2109ad2e2d6ff4272f7b970b1"
+        },
+        {
+          "path": "commons/maps/Ribbon_Patterns_03/final.md",
+          "sha256": "940c27a3b4056c863e7ffb2e561331aa1e7dd65b292a2bd4cf7664ca49fb19e4"
+        },
+        {
+          "path": "commons/artifacts/fabric_shader_studio/fabric.gdshader",
+          "sha256": "5ea904a1e3982c7da94e83c9fc521c76c4619e42b7e34d66373f064d5d528e35"
+        },
+        {
+          "path": "commons/artifacts/fabric_shader_studio/fabric_recipe.gd",
+          "sha256": "21d87aeb495047a3eb93bc523686a317e7c645a102b28e9548922a6c5c8f844f"
+        },
+        {
+          "path": "commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd",
+          "sha256": "2bcf724239b1e6178fb4e0b4f87aaf98ba38327cba1dfaa3d0fde83da1c05e18"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T17:20:00.016904Z",
+      "review_note": "Palle explicitly accepted all completed teaching-plan proposals on 4 October 2026 (ACCEPT ALL): Shaders, Arrays, Colour and Tiling. Retain this teaching selection. This acceptance does not claim runtime verification or authorize expanding code/full lessons in this status update; preserve the recorded evidence hashes.",
+      "reviewed_at": "2026-10-04T17:49:16.021173Z"
+    },
+    {
+      "text": "Change revision — Change_Intro: Teach a small rate function, then a separate sum using the same curve. Keep the bridge as a return with a different arch and signed-change question.",
+      "reason": "Give each new operation room to become usable without turning the hall into a calculus survey.",
+      "sequence_effect": "Two reusable finite calculation functions with explicit interval, sampling rule and units; signed change distinct from total travel.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-cab431a6ea064f60bd5a169d973d98c1",
+      "scope": "map:Change_Intro",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:change"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-change-capacity-return/proposals/Change_Intro.json",
+          "sha256": "e83c0939ffde2069973023efbb8b3cb962dd85f05e9ce3a27fff988d89dc2a79"
+        },
+        {
+          "path": "doc/book/course/storyboards/CHANGE.md",
+          "sha256": "2d0f23290c69ac270b32f611ba26cb8cec68cd244fecd4a7e8a0f11363f1f7f0"
+        },
+        {
+          "path": "commons/maps/Change_Intro/final.md",
+          "sha256": "603a98e70b26c070df203cbe77324bf203ec24313f12593d8e7ca673d5833873"
+        },
+        {
+          "path": "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd",
+          "sha256": "63a88d915ee07eac6680993c303827c2bd238e2773b3217cac531b60dfced0cc"
+        },
+        {
+          "path": "commons/artifacts/tangent_slope_workbench/rate_comparison.gd",
+          "sha256": "f9c0e715cf8b39193fb78d51c100f9c73667beba6304a9433cda427937e24717"
+        },
+        {
+          "path": "commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.gd",
+          "sha256": "2eb0c23d0ffa4e997935eb721606e5cd0e495c270476d6b6440ceff5cc2f5904"
+        },
+        {
+          "path": "commons/artifacts/riemann_sum_workbench/accumulation_comparison.gd",
+          "sha256": "8db1918813ba9550664577af72d52c7dd4bcb3d5b52f37e11c704594e47d4454"
+        },
+        {
+          "path": "algorithms/change/ftc_bridge.gd",
+          "sha256": "4ae8ed0dcecf30d0905461ae4c55f6c5e954388963ff3382fc8b8aa4eda386b3"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T17:58:29.288065Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Change revision — Flow_Field: Start with two predicted field-following updates. Put the controlled step comparison on a return; identify the current wrap line honestly.",
+      "reason": "Teach the feedback in the path before adding a numerical experiment or an unbuilt trail repair.",
+      "sequence_effect": "A repeated field-sampling update and retained path; a clear distinction between prescribed velocity and carried velocity state.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-258135d1f97c4026a74bf439aed4243b",
+      "scope": "map:Flow_Field",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:change"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-change-capacity-return/proposals/Flow_Field.json",
+          "sha256": "1bb2612572ccdd9c5f17df983392832a4f447484b8503ea3b62f357d9c839e9a"
+        },
+        {
+          "path": "doc/book/course/storyboards/CHANGE.md",
+          "sha256": "2d0f23290c69ac270b32f611ba26cb8cec68cd244fecd4a7e8a0f11363f1f7f0"
+        },
+        {
+          "path": "commons/maps/Flow_Field/final.md",
+          "sha256": "fdb785529330954c28f55e95165fc6152eba8cce048dbb58db796fde5fd2ee29"
+        },
+        {
+          "path": "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+          "sha256": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2"
+        },
+        {
+          "path": "commons/artifacts/flow_field_painter/shared_field_lesson.gd",
+          "sha256": "a075593e7ee928e14bff79319cf92a950f7e9dc62210f3a2e83bf070b8d6daba"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T17:58:31.787002Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Flow_Field is now a 4.8 × 3.2 metre wall monitor with a separate waist-height console, as requested by Palle.",
+      "reason": "Make the field readable across the hall while keeping controls reachable.",
+      "sequence_effect": "Same field sampler, particle update, 80-particle lesson and trails; only the display mount and control placement change.",
+      "project_effect": "Actual museum staging change, separate from the two pending Change teaching proposals. Current museum route and book image now show the wall monitor.",
+      "method": "Current Endless Museum before/after rendered desktop runs. 45 after checks passed, standing pointer rays and callbacks checked, seeded local particle records identical. No headset test.",
+      "created_by": "Codex",
+      "id": "finding-cc65e63e98074229964d62e8cdcfd27f",
+      "scope": "map:Flow_Field",
+      "kind": "decision",
+      "related_scopes": [
+        "sequence:change"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-flow-wall-monitor/README.md",
+          "sha256": "af6ca20afdbe13fe82eca722e88fcff8a4ae83bec0e77c06d69eb6754a50995b"
+        },
+        {
+          "path": "commons/maps/Flow_Field/map_data.json",
+          "sha256": "d0bdb0cc19c67bbf9753a88611c36dea9b36d22c81e35281879aee5571bf9835"
+        },
+        {
+          "path": "commons/artifacts/flow_field_painter/wall_monitor.gd",
+          "sha256": "d6cb48fe3caed8ca1ab81d70fd1010dd33e641240905b32bbcdd6dcebd93accb"
+        },
+        {
+          "path": "commons/artifacts/flow_field_painter/shared_field_lesson.gd",
+          "sha256": "e16f3e875ead31ac3c1e99f8c3f0e22ad4f802edc3553323f3a8fd79c2327b66"
+        },
+        {
+          "path": "commons/artifacts/flow_field_painter/flow_field_painter.gd",
+          "sha256": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-flow-wall-monitor/after/checks.json",
+          "sha256": "f761096cc4ac4ad8e697d63b556342c8f970994ed0352618d5a01f3efcef5c20"
+        },
+        {
+          "path": "doc/book/iterations/2026-10-04-flow-wall-monitor/after/particle-parity.json",
+          "sha256": "45d9cdabdf6db85f48dfcf5b1aa314af967f1f6c49c07a63826885ac9e55d6aa"
+        }
+      ],
+      "status": "accepted",
+      "created_at": "2026-10-04T18:12:36.160775Z",
+      "review_note": "Implements Palle’s explicit request: make the flow field a big wall monitor. Verified the museum installation; this does not accept the separate teaching proposals.",
+      "reviewed_at": "2026-10-04T18:12:39.076082Z"
+    },
+    {
+      "text": "Forces revision — Vectors_Act1_WhatAVectorIs: Read and predict the existing displacement measurement; use a brief normalization return with its explicit threshold.",
+      "reason": "The learner already has positions and translation. A lighter return establishes what an arrow measures without delaying the later retained-state hinge.",
+      "sequence_effect": "A displacement measurement with its frame and display scale stated; direction and magnitude remain distinct.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-1526c5f0865e42f6b9ac101aa6a1e2f1",
+      "scope": "map:Vectors_Act1_WhatAVectorIs",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:forces"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-forces-capacity-return/proposals/Vectors_Act1_WhatAVectorIs.json",
+          "sha256": "e519eb0f241b736623667e02b2c1ed05c6420e355f3d42d20226c8c1ef4a604c"
+        },
+        {
+          "path": "doc/book/course/storyboards/FORCES.md",
+          "sha256": "3a8dedc1272845ef872ab6aac432172946d6a32ea6c33fadc96a88b2b392080f"
+        },
+        {
+          "path": "commons/maps/Vectors_Act1_WhatAVectorIs/final.md",
+          "sha256": "ca8fea625467648ac58d714696e5331a0d4eb320abb36e38eeb14940a143284c"
+        },
+        {
+          "path": "algorithms/vectors/01_vector_basics/room_reading.gd",
+          "sha256": "bcaf25144d84ee905cf050be321db633e0c5e9588e8bef3460506103faa32488"
+        },
+        {
+          "path": "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd",
+          "sha256": "e18eb3b2bb1f7d31edaabcbf78872fa6973b5ef77f35da27e95db132c5b8ae4a"
+        },
+        {
+          "path": "commons/maps/Vectors_Act1_WhatAVectorIs/tutorial.md",
+          "sha256": "b368f48852f57b52bc2fd595379995e075c088e535ce0137ec080f7e8fb03abe"
+        },
+        {
+          "path": "commons/maps/Trans_Translation/final.md",
+          "sha256": "ff9d5754996fc1089cceb6733a5ec329b2f8a081306a0aa40744736c749b9a33"
+        },
+        {
+          "path": "commons/maps/Trans_Translation/tutorial.md",
+          "sha256": "c881a66a286d48ca60c21afe3878037ec2dba8e67fb53b40e0da7ba3ab23f6db"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T18:28:56.643260Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Forces revision — VFM_02_Operations: Use the installed result calculation, compare route lengths, and inspect the existing counter with the same carriage and drawings.",
+      "reason": "The current instrument already makes the distinction tangible. A bounded arithmetic edit avoids adding a second route system before Motion.",
+      "sequence_effect": "Two explicit accounts of a route: net displacement and accumulated distance.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-adbe86d02797464886291e1cbc37cc5d",
+      "scope": "map:VFM_02_Operations",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:forces"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-forces-capacity-return/proposals/VFM_02_Operations.json",
+          "sha256": "83cdbeda8811464d5b80deadaf5a5337977bf98a518307345e32b6fda3f82b97"
+        },
+        {
+          "path": "doc/book/course/storyboards/FORCES.md",
+          "sha256": "3a8dedc1272845ef872ab6aac432172946d6a32ea6c33fadc96a88b2b392080f"
+        },
+        {
+          "path": "commons/maps/VFM_02_Operations/final.md",
+          "sha256": "06b431a956fc2407115ffff3432b8e1b282983cb0be4bb30a7f82b8499d7da1d"
+        },
+        {
+          "path": "commons/artifacts/adder_board/room_sum.gd",
+          "sha256": "fe49b22259d59a47ba8e41a12f355af5b8502440bc9cc3d65f640df3b1a3a5bf"
+        },
+        {
+          "path": "commons/artifacts/adder_board/adder_board.gd",
+          "sha256": "a4c49975675a1cc5396459900ab08debe2d67312c48f3ebf8ec882127af6106f"
+        },
+        {
+          "path": "commons/maps/VFM_02_Operations/tutorial.md",
+          "sha256": "0b080b8614d41adfd9595d10e097c3ab71e8b95e3a07b8fe4fea66467de2154b"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T18:29:00.738331Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Forces revision — Vectors_Act2_VectorArithmetic: Make the connected gap/projection pair the core, with recombination as its check and the other operations as short returns.",
+      "reason": "A single live relation supports reuse and an independent check. The critical questions survive without requiring mastery of every nearby instrument.",
+      "sequence_effect": "An along-axis scalar and projection/remainder pair that reconstruct the input.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-3aac9c35f3b5468ba0f64e3e3062867d",
+      "scope": "map:Vectors_Act2_VectorArithmetic",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:forces"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-forces-capacity-return/proposals/Vectors_Act2_VectorArithmetic.json",
+          "sha256": "88249a84ea32165a00e7a263e0b9e78d44aeb1ee0da867b60a6e25ec9f3f6754"
+        },
+        {
+          "path": "doc/book/course/storyboards/FORCES.md",
+          "sha256": "3a8dedc1272845ef872ab6aac432172946d6a32ea6c33fadc96a88b2b392080f"
+        },
+        {
+          "path": "commons/maps/Vectors_Act2_VectorArithmetic/final.md",
+          "sha256": "99e94eb254e4904782736aae875727b93f961f0c76bba2e85c8b8eea74dd97c5"
+        },
+        {
+          "path": "commons/artifacts/vector_op_console/gap_projection_room.gd",
+          "sha256": "a5060d3e5d900e33db14ed2c87f0f3cdcc70e95f3ab1674d6dd34755136df026"
+        },
+        {
+          "path": "commons/artifacts/vector_op_console/vector_op_console.gd",
+          "sha256": "c12cff5b425800f96a04a42137fed947964965b5f5cf04f72f86539cae26e6db"
+        },
+        {
+          "path": "commons/artifacts/projection_shadow/projection_shadow.gd",
+          "sha256": "beda3683fe26275e49ed220538e238fdaed05235c46f5276e6444f735f16f280"
+        },
+        {
+          "path": "commons/artifacts/dot_aligner/dot_aligner.gd",
+          "sha256": "02ba7e44404e0c10db06ce941cd63188576de1826f19a3f45e6ec2b603ab92cf"
+        },
+        {
+          "path": "commons/artifacts/torque_crank/torque_crank.gd",
+          "sha256": "dab279e56daa0a68b63e4c9bdb72edcc8b3f270c5e33203815059d541615563e"
+        },
+        {
+          "path": "commons/maps/Vectors_Act2_VectorArithmetic/tutorial.md",
+          "sha256": "eba407a6dbff63d05af16d4cbfda0f4c44588a0e8e14b7579d103d9f9ca2fbbe"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T18:29:03.577255Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Forces revision — VFM_05_Launch: Read, evaluate and vary the supplied analytic path, using the existing chamber to check one prediction at a time.",
+      "reason": "The strong spatial encounter can introduce acceleration without consuming the numerical-state lesson that belongs to Motion next.",
+      "sequence_effect": "A supplied analytic path the learner can evaluate and vary under stated gravity, drag and endpoint assumptions.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-a655f149bc53423497e33dbce6731313",
+      "scope": "map:VFM_05_Launch",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:forces"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-forces-capacity-return/proposals/VFM_05_Launch.json",
+          "sha256": "0f33233e2edb0babb37d44946f98d0ea13252b3527f709d1b97c8a273a23beea"
+        },
+        {
+          "path": "doc/book/course/storyboards/FORCES.md",
+          "sha256": "3a8dedc1272845ef872ab6aac432172946d6a32ea6c33fadc96a88b2b392080f"
+        },
+        {
+          "path": "commons/maps/VFM_05_Launch/final.md",
+          "sha256": "b8c2e03ed1ee3c8b4e63fe3647056c65d03cacc4658e84591c32ef4ede4f22dd"
+        },
+        {
+          "path": "commons/artifacts/launch_arc/launch_chamber.gd",
+          "sha256": "b152e1b28efae968b7565986a60f21cc180da18a9352d0d71173500bac5627c7"
+        },
+        {
+          "path": "commons/artifacts/launch_arc/launch_arc.gd",
+          "sha256": "ee4117ff9841ac2471c6a486f46968fc8ed4f8461da3f0122ea2b7a492e25f6e"
+        },
+        {
+          "path": "commons/maps/VFM_05_Launch/tutorial.md",
+          "sha256": "829513da55c12ee2399d84860e0f8361b551417979d6451f457fd1a3086d3a57"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T18:29:06.293092Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Forces revision — VFM_03_Motion: Make one mass-and-duration prediction before contact, keep drag off for the comparison, and carry the force schedule and observed retained velocity into Fields.",
+      "reason": "A controlled beginning makes the new idea available for reuse without asking the learner to rebuild the engine’s integrator or turning the friction ramp into another required lesson.",
+      "sequence_effect": "A small force schedule, its declared units and a predicted change in velocity, kept in the learner’s own study or notes for the Fields comparison.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-f13893269ae242699628e3be726b011c",
+      "scope": "map:VFM_03_Motion",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:forces"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-forces-capacity-return/proposals/VFM_03_Motion.json",
+          "sha256": "96aff6791f0cac39cf5882536e9d6c09fb66d974235ecd6ce9eaeb6a03b44733"
+        },
+        {
+          "path": "doc/book/course/storyboards/FORCES.md",
+          "sha256": "3a8dedc1272845ef872ab6aac432172946d6a32ea6c33fadc96a88b2b392080f"
+        },
+        {
+          "path": "commons/maps/VFM_03_Motion/final.md",
+          "sha256": "5c26fa4807d44fb4ee645cdae9f33e8f9a551506755fe30235b729af83679f9b"
+        },
+        {
+          "path": "commons/maps/VFM_03_Motion/tutorial.md",
+          "sha256": "356bae8ebb7f7ec4b699bc0782292c1b14586200c5e064a010edfe6d6c75c336"
+        },
+        {
+          "path": "commons/maps/VFM_03_Motion/map_data.json",
+          "sha256": "0928dafc203ef7f18bbbabc049d91e4e4eca1e302e30f2452fada04b0d43d924"
+        },
+        {
+          "path": "algorithms/vectors/08_vector_motion/VectorMotion.gd",
+          "sha256": "96fd719474894fae0e984a16becd16c150f7a2bf4b304f4536101e7c1fed66c8"
+        },
+        {
+          "path": "algorithms/vectors/08_vector_motion/motion_chamber.gd",
+          "sha256": "a5e30bcd9561d677d7fcb6dc536b0203a3a2480daf63b5e1b2c0823bf98f8043"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T18:29:09.044641Z",
+      "review_note": "",
+      "reviewed_at": ""
+    },
+    {
+      "text": "Forces revision — Vectors_Act3_FieldsAndMotion: Name position and velocity as the common study state, predict two uniform-field steps, and keep that update convention for the later spring model.",
+      "reason": "Assignment versus accumulation becomes something the learner can change and predict, while the runner and display remain supplied and museum state stays honestly separate.",
+      "sequence_effect": "One declared position/velocity update convention and a prediction table, manually retained in a companion study or notes and adapted to one dimension in Oscillation.",
+      "project_effect": "One-map teaching selection; summaries only. Preserve the existing museum, critical text and room order. Full lessons and reduced learner edit locations remain a separate pass.",
+      "method": "Static source and editorial review; compact before/after summary with dated museum image. No new runtime or learner test.",
+      "created_by": "Codex",
+      "id": "finding-d57174af0fba47fc9bbafad0d42d4f5d",
+      "scope": "map:Vectors_Act3_FieldsAndMotion",
+      "kind": "proposal",
+      "related_scopes": [
+        "sequence:forces"
+      ],
+      "sources": [
+        {
+          "path": "doc/book/iterations/2026-10-04-forces-capacity-return/proposals/Vectors_Act3_FieldsAndMotion.json",
+          "sha256": "41939a9c2de37f34264f5ce960522357c1b9c25bd4314fe0f86557bc0812f8ad"
+        },
+        {
+          "path": "doc/book/course/storyboards/FORCES.md",
+          "sha256": "3a8dedc1272845ef872ab6aac432172946d6a32ea6c33fadc96a88b2b392080f"
+        },
+        {
+          "path": "commons/maps/Vectors_Act3_FieldsAndMotion/final.md",
+          "sha256": "9b080531fb62be6f8344fff1055290e3043e488bcbc1364105ae90ad0852c53b"
+        },
+        {
+          "path": "commons/maps/Vectors_Act3_FieldsAndMotion/tutorial.md",
+          "sha256": "3149384db6890fd55f649be165450c18fecd41fe76b0cd02de528774b691f6e0"
+        },
+        {
+          "path": "commons/maps/Vectors_Act3_FieldsAndMotion/map_data.json",
+          "sha256": "955632fac9af336b93216f9ba6b7b559d2f781f9da26e569e66cc9b2e7a2f480"
+        },
+        {
+          "path": "algorithms/vectors/10_vector_field_flow/VectorFieldFlow.gd",
+          "sha256": "bbf61176c0b97a93510c915fab2195148e8835e538f8cadc9877059f50f13646"
+        },
+        {
+          "path": "algorithms/vectors/10_vector_field_flow/field_receivers.gd",
+          "sha256": "0ab725762c7088001090a1cdb1e7c8416144822652dd4c8e876b3ab597d6b524"
+        }
+      ],
+      "status": "proposed",
+      "created_at": "2026-10-04T18:29:11.737991Z",
+      "review_note": "",
+      "reviewed_at": ""
+    }
+  ],
+  "journal": [
+    {
+      "at": "2026-10-04T17:10:14.737045Z",
+      "action": "finding",
+      "scope": "map:Color_Pillar",
+      "summary": "Added proposed proposal: Colour revision — Color_Pillar: Return to Nails’ function with explicit HSV coordinates and height conversion. Keep one sample for the next hall; preserve the f"
+    },
+    {
+      "at": "2026-10-04T17:10:17.185486Z",
+      "action": "finding",
+      "scope": "map:Color_Grid_Pallet",
+      "summary": "Added proposed proposal: Colour revision — Color_Grid_Pallet: Keep a colour from Nails or Pillar at one address using the existing instance model. Teach leaving, returning and overwriti"
+    },
+    {
+      "at": "2026-10-04T17:10:19.640455Z",
+      "action": "finding",
+      "scope": "map:Color_Paint",
+      "summary": "Added proposed proposal: Colour revision — Color_Paint: Edit the existing automatic path. Both painters already use the same spray operation; distinguish accumulating, fading paint from"
+    },
+    {
+      "at": "2026-10-04T17:10:22.123076Z",
+      "action": "finding",
+      "scope": "map:Color_Walls",
+      "summary": "Added proposed proposal: Colour revision — Color_Walls: Use an existing pane or palette edit. Keep view versus passage central and carry palette-versus-arrangement into Tiling."
+    },
+    {
+      "at": "2026-10-04T17:19:42.769716Z",
+      "action": "finding",
+      "scope": "map:Pattern_Disco",
+      "summary": "Added proposed proposal: Tiling revision — Pattern_Disco: Reuse the existing floor rule. Change palette and phase separately; keep the triangle shader an optional comparison."
+    },
+    {
+      "at": "2026-10-04T17:19:45.234534Z",
+      "action": "finding",
+      "scope": "map:Pattern_Foundry",
+      "summary": "Added proposed proposal: Tiling revision — Pattern_Foundry: Start with one small motif and wrapping lookup. Move copying to a return visit; distinguish the tile, loom and held images."
+    },
+    {
+      "at": "2026-10-04T17:19:47.663918Z",
+      "action": "finding",
+      "scope": "map:Tutorial_Pattern",
+      "summary": "Added proposed proposal: Tiling revision — Tutorial_Pattern: Make horizontal reversal explicit: read columns backwards, or reverse entries within each row. Check which operation actuall"
+    },
+    {
+      "at": "2026-10-04T17:19:50.104375Z",
+      "action": "finding",
+      "scope": "map:Array_Patterns",
+      "summary": "Added proposed proposal: Tiling revision — Array_Patterns: Use the installed fixed motif and name each face’s directions. Distinguish one cell’s width from the width of the complete rep"
+    },
+    {
+      "at": "2026-10-04T17:19:52.741957Z",
+      "action": "finding",
+      "scope": "map:Symmetry_Seventeen",
+      "summary": "Added proposed proposal: Tiling revision — Symmetry_Seventeen: Inspect two neighbouring blocks and test the translation period. Keep the seventeen-group claim separate from this bounded"
+    },
+    {
+      "at": "2026-10-04T17:19:55.156078Z",
+      "action": "finding",
+      "scope": "map:Ribbon_Patterns_01",
+      "summary": "Added proposed proposal: Tiling revision — Ribbon_Patterns_01: Name source [z][x] and volume [y][z][x], then predict one shifted lookup. Keep zero-as-colour distinct from earlier occupa"
+    },
+    {
+      "at": "2026-10-04T17:19:57.588995Z",
+      "action": "finding",
+      "scope": "map:Ribbon_Patterns_02",
+      "summary": "Added proposed proposal: Tiling revision — Ribbon_Patterns_02: Keep it. Clarify equal surface distance versus apparent width; leave the lighting calculation supplied and require no perc"
+    },
+    {
+      "at": "2026-10-04T17:20:00.016904Z",
+      "action": "finding",
+      "scope": "map:Ribbon_Patterns_03",
+      "summary": "Added proposed proposal: Tiling revision — Ribbon_Patterns_03: Name the existing texture/material host. Teach repeat, offset and sampling only; distinguish saved recipe data from shader"
+    },
+    {
+      "at": "2026-10-04T17:48:34.181836Z",
+      "action": "review",
+      "scope": "sequence:shaders",
+      "summary": "Marked finding-df4629a0663f45a3b3ad16cd03ec889a accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:36.611221Z",
+      "action": "review",
+      "scope": "sequence:array_tutorial",
+      "summary": "Marked finding-cb9118e955504b82a99515fafdd46bab accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:39.031486Z",
+      "action": "review",
+      "scope": "map:Color_Context_Placed",
+      "summary": "Marked finding-9dfcf0a898e7494e857c505bdceab1e9 accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:41.457810Z",
+      "action": "review",
+      "scope": "map:Color_Flashlight",
+      "summary": "Marked finding-2fc148e171ab425bb2eb88141beb3837 accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:43.905691Z",
+      "action": "review",
+      "scope": "map:Color_Nails",
+      "summary": "Marked finding-3fc1975f871d46379dd912594beb2b85 accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:46.397735Z",
+      "action": "review",
+      "scope": "map:Color_Rainbow",
+      "summary": "Marked finding-cfe84becd1f049879927681f0a63c448 accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:48.909224Z",
+      "action": "review",
+      "scope": "map:Color_Pillar",
+      "summary": "Marked finding-a9334f1f11b34735830c73920a60b651 accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:51.373184Z",
+      "action": "review",
+      "scope": "map:Color_Grid_Pallet",
+      "summary": "Marked finding-b698b03fd5314872adfe33b14727aebf accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:53.844477Z",
+      "action": "review",
+      "scope": "map:Color_Paint",
+      "summary": "Marked finding-00336c827779429e906873442bb62470 accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:56.319958Z",
+      "action": "review",
+      "scope": "map:Color_Walls",
+      "summary": "Marked finding-45925d8236ec4754ac04ed8b139c43ee accepted"
+    },
+    {
+      "at": "2026-10-04T17:48:58.765015Z",
+      "action": "review",
+      "scope": "map:Pattern_Disco",
+      "summary": "Marked finding-c59e24a51b484de0a4a7c099d98bd9db accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:01.235228Z",
+      "action": "review",
+      "scope": "map:Pattern_Foundry",
+      "summary": "Marked finding-8f9459c2892b4aef9610e379945132c1 accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:03.678889Z",
+      "action": "review",
+      "scope": "map:Tutorial_Pattern",
+      "summary": "Marked finding-9dda475ee95d4586af500b9054fb8017 accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:06.137576Z",
+      "action": "review",
+      "scope": "map:Array_Patterns",
+      "summary": "Marked finding-ce06f2623b514a428b59ab3e04c6eb64 accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:08.586672Z",
+      "action": "review",
+      "scope": "map:Symmetry_Seventeen",
+      "summary": "Marked finding-ff1b113d61064e2cb63f6961d917e25d accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:11.046660Z",
+      "action": "review",
+      "scope": "map:Ribbon_Patterns_01",
+      "summary": "Marked finding-20f7d1f5c57f4cf596a7a9a50ea46942 accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:13.548733Z",
+      "action": "review",
+      "scope": "map:Ribbon_Patterns_02",
+      "summary": "Marked finding-f09de65348714399ad83476e00e1ccb0 accepted"
+    },
+    {
+      "at": "2026-10-04T17:49:16.021173Z",
+      "action": "review",
+      "scope": "map:Ribbon_Patterns_03",
+      "summary": "Marked finding-3ab1d99e8dd14d739a9c587b111f0e6f accepted"
+    },
+    {
+      "at": "2026-10-04T17:58:29.288065Z",
+      "action": "finding",
+      "scope": "map:Change_Intro",
+      "summary": "Added proposed proposal: Change revision — Change_Intro: Teach a small rate function, then a separate sum using the same curve. Keep the bridge as a return with a different arch and sig"
+    },
+    {
+      "at": "2026-10-04T17:58:31.787002Z",
+      "action": "finding",
+      "scope": "map:Flow_Field",
+      "summary": "Added proposed proposal: Change revision — Flow_Field: Start with two predicted field-following updates. Put the controlled step comparison on a return; identify the current wrap line h"
+    },
+    {
+      "at": "2026-10-04T18:12:36.160775Z",
+      "action": "finding",
+      "scope": "map:Flow_Field",
+      "summary": "Added proposed decision: Flow_Field is now a 4.8 × 3.2 metre wall monitor with a separate waist-height console, as requested by Palle."
+    },
+    {
+      "at": "2026-10-04T18:12:39.076082Z",
+      "action": "review",
+      "scope": "map:Flow_Field",
+      "summary": "Marked finding-cc65e63e98074229964d62e8cdcfd27f accepted"
+    },
+    {
+      "at": "2026-10-04T18:28:56.643260Z",
+      "action": "finding",
+      "scope": "map:Vectors_Act1_WhatAVectorIs",
+      "summary": "Added proposed proposal: Forces revision — Vectors_Act1_WhatAVectorIs: Read and predict the existing displacement measurement; use a brief normalization return with its explicit thresho"
+    },
+    {
+      "at": "2026-10-04T18:29:00.738331Z",
+      "action": "finding",
+      "scope": "map:VFM_02_Operations",
+      "summary": "Added proposed proposal: Forces revision — VFM_02_Operations: Use the installed result calculation, compare route lengths, and inspect the existing counter with the same carriage and dr"
+    },
+    {
+      "at": "2026-10-04T18:29:03.577255Z",
+      "action": "finding",
+      "scope": "map:Vectors_Act2_VectorArithmetic",
+      "summary": "Added proposed proposal: Forces revision — Vectors_Act2_VectorArithmetic: Make the connected gap/projection pair the core, with recombination as its check and the other operations as sh"
+    },
+    {
+      "at": "2026-10-04T18:29:06.293092Z",
+      "action": "finding",
+      "scope": "map:VFM_05_Launch",
+      "summary": "Added proposed proposal: Forces revision — VFM_05_Launch: Read, evaluate and vary the supplied analytic path, using the existing chamber to check one prediction at a time."
+    },
+    {
+      "at": "2026-10-04T18:29:09.044641Z",
+      "action": "finding",
+      "scope": "map:VFM_03_Motion",
+      "summary": "Added proposed proposal: Forces revision — VFM_03_Motion: Make one mass-and-duration prediction before contact, keep drag off for the comparison, and carry the force schedule and observ"
+    },
+    {
+      "at": "2026-10-04T18:29:11.737991Z",
+      "action": "finding",
+      "scope": "map:Vectors_Act3_FieldsAndMotion",
+      "summary": "Added proposed proposal: Forces revision — Vectors_Act3_FieldsAndMotion: Name position and velocity as the common study state, predict two uniform-field steps, and keep that update conv"
+    }
+  ]
+}

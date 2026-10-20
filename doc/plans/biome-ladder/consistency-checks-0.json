@@ -1,0 +1,422 @@
+{
+	"checks": [
+		{
+			"label": "World ready",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: START preserves the prepared floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: REST removes all shots and warnings",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: REST keeps floor, vacancy, health and pickups",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: resting button says RESUME",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: RESUME retains work and earned round state",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: resume does not heal through GameManager",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: CLEAR cannot silently respawn heads",
+			"pass": true
+		},
+		{
+			"label": "Stage 0: RESET restores fresh state",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: actual desktop shot prepares the floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: START preserves the prepared floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: REST removes all shots and warnings",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: REST keeps floor, vacancy, health and pickups",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: resting button says RESUME",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: RESUME retains work and earned round state",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: resume does not heal through GameManager",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: CLEAR cannot silently respawn heads",
+			"pass": true
+		},
+		{
+			"label": "Stage 1: RESET restores fresh state",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: actual desktop shot prepares the floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: START preserves the prepared floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: REST removes all shots and warnings",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: REST keeps floor, vacancy, health and pickups",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: resting button says RESUME",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: RESUME retains work and earned round state",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: resume does not heal through GameManager",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: CLEAR cannot silently respawn heads",
+			"pass": true
+		},
+		{
+			"label": "Stage 2: RESET restores fresh state",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: actual desktop shot prepares the floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: START preserves the prepared floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: REST removes all shots and warnings",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: REST keeps floor, vacancy, health and pickups",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: resting button says RESUME",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: RESUME retains work and earned round state",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: resume does not heal through GameManager",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: CLEAR cannot silently respawn heads",
+			"pass": true
+		},
+		{
+			"label": "Stage 3: RESET restores fresh state",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: actual desktop shot prepares the floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: START preserves the prepared floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: REST removes all shots and warnings",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: REST keeps floor, vacancy, health and pickups",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: resting button says RESUME",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: RESUME retains work and earned round state",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: resume does not heal through GameManager",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: CLEAR cannot silently respawn heads",
+			"pass": true
+		},
+		{
+			"label": "Stage 4: RESET restores fresh state",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: actual desktop shot prepares the floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: START preserves the prepared floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: REST removes all shots and warnings",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: REST keeps floor, vacancy, health and pickups",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: resting button says RESUME",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: RESUME retains work and earned round state",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: resume does not heal through GameManager",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: CLEAR cannot silently respawn heads",
+			"pass": true
+		},
+		{
+			"label": "Stage 5: RESET restores fresh state",
+			"pass": true
+		},
+		{
+			"label": "Slot 0: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 0: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 0: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 0: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 0: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 1: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 1: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 1: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 1: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 1: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 2: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 2: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 2: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 2: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 2: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 3: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 3: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 3: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 3: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 3: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 4: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 4: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 4: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 4: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 4: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 5: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 5: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 5: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 5: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 5: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 6: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 6: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 6: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 6: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 6: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 7: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 7: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 7: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 7: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 7: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Slot 8: warning includes target then floor landing",
+			"pass": true
+		},
+		{
+			"label": "Slot 8: warning is a world-width mesh",
+			"pass": true
+		},
+		{
+			"label": "Slot 8: flight follows the exact announced list",
+			"pass": true
+		},
+		{
+			"label": "Slot 8: missed shot hits an actual floor tile",
+			"pass": true
+		},
+		{
+			"label": "Slot 8: impact removes ball and drawing together",
+			"pass": true
+		},
+		{
+			"label": "Skull impacts leave coloured floor marks",
+			"pass": true
+		},
+		{
+			"label": "Miss leaving transformed arena bounds is spent",
+			"pass": true
+		},
+		{
+			"label": "Finite path ends without extrapolating beyond final position",
+			"pass": true
+		},
+		{
+			"label": "Normal volleys continue while misses resolve",
+			"pass": true
+		},
+		{
+			"label": "Misses no longer accumulate three generations of guides",
+			"pass": true
+		}
+	],
+	"passed": 104,
+	"total": 104
+}

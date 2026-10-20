@@ -1,0 +1,4146 @@
+{
+	"aim_rule": "flying_skull.target_position(): target_override else the viewport camera (the walker's head)",
+	"behind_m": 1.35,
+	"crouch_height_m": 1.0,
+	"failures": [
+		"stage 1: no form stopped a shot at a standing walker",
+		"stage 2: no form stopped a shot at a standing walker",
+		"stage 3: no form stopped a shot at a standing walker"
+	],
+	"forms": {
+		"0": [
+			{
+				"at": [
+					-2.2,
+					1.0,
+					6.5
+				],
+				"index": 0,
+				"mesh": "BoxMesh",
+				"name": "PrimitiveCover_0_Left",
+				"size": [
+					1.35,
+					2.0,
+					1.35
+				],
+				"top": 2.0
+			},
+			{
+				"at": [
+					2.2,
+					1.0,
+					6.5
+				],
+				"index": 1,
+				"mesh": "BoxMesh",
+				"name": "PrimitiveCover_0_Right",
+				"size": [
+					1.35,
+					2.0,
+					1.35
+				],
+				"top": 2.0
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					3.5
+				],
+				"index": 2,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@235",
+				"size": [
+					1.27,
+					1.3,
+					1.27
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					3.5
+				],
+				"index": 3,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@238",
+				"size": [
+					1.27,
+					1.3,
+					1.27
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-1.6,
+					1.0,
+					0.5
+				],
+				"index": 4,
+				"mesh": "CylinderMesh",
+				"name": "PrimitiveCover_2_Left",
+				"size": [
+					1.1,
+					2.0,
+					1.1
+				],
+				"top": 2.0
+			},
+			{
+				"at": [
+					1.6,
+					1.0,
+					0.5
+				],
+				"index": 5,
+				"mesh": "CylinderMesh",
+				"name": "PrimitiveCover_2_Right",
+				"size": [
+					1.1,
+					2.0,
+					1.1
+				],
+				"top": 2.0
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-2.5
+				],
+				"index": 6,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@245",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-2.5
+				],
+				"index": 7,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@248",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-2.2,
+					1.0,
+					-5.5
+				],
+				"index": 8,
+				"mesh": "BoxMesh",
+				"name": "PrimitiveCover_4_Left",
+				"size": [
+					1.35,
+					2.0,
+					1.35
+				],
+				"top": 2.0
+			},
+			{
+				"at": [
+					2.2,
+					1.0,
+					-5.5
+				],
+				"index": 9,
+				"mesh": "BoxMesh",
+				"name": "PrimitiveCover_4_Right",
+				"size": [
+					1.35,
+					2.0,
+					1.35
+				],
+				"top": 2.0
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-8.5
+				],
+				"index": 10,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@255",
+				"size": [
+					1.27,
+					1.3,
+					1.27
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-8.5
+				],
+				"index": 11,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@258",
+				"size": [
+					1.27,
+					1.3,
+					1.27
+				],
+				"top": 1.3
+			}
+		],
+		"1": [
+			{
+				"at": [
+					-4.6,
+					0.65,
+					6.51
+				],
+				"index": 0,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@640",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					6.51
+				],
+				"index": 1,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@643",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					3.5
+				],
+				"index": 2,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@646",
+				"size": [
+					1.76,
+					1.3,
+					1.76
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					3.5
+				],
+				"index": 3,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@649",
+				"size": [
+					1.76,
+					1.3,
+					1.76
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					0.5
+				],
+				"index": 4,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@652",
+				"size": [
+					1.2,
+					1.42,
+					1.2
+				],
+				"top": 1.36
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					0.5
+				],
+				"index": 5,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@655",
+				"size": [
+					1.2,
+					1.42,
+					1.2
+				],
+				"top": 1.36
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-1.92
+				],
+				"index": 6,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@658",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-1.92
+				],
+				"index": 7,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@661",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-5.5
+				],
+				"index": 8,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@664",
+				"size": [
+					1.55,
+					1.3,
+					1.55
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-5.5
+				],
+				"index": 9,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@667",
+				"size": [
+					1.55,
+					1.3,
+					1.55
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-8.5
+				],
+				"index": 10,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@670",
+				"size": [
+					1.23,
+					1.26,
+					1.23
+				],
+				"top": 1.28
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-8.5
+				],
+				"index": 11,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@673",
+				"size": [
+					1.23,
+					1.26,
+					1.23
+				],
+				"top": 1.28
+			}
+		],
+		"2": [
+			{
+				"at": [
+					-4.6,
+					0.65,
+					6.51
+				],
+				"index": 0,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1027",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					6.51
+				],
+				"index": 1,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1030",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					3.5
+				],
+				"index": 2,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1033",
+				"size": [
+					1.76,
+					1.3,
+					1.76
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					3.5
+				],
+				"index": 3,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1036",
+				"size": [
+					1.76,
+					1.3,
+					1.76
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					0.5
+				],
+				"index": 4,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1039",
+				"size": [
+					1.2,
+					1.42,
+					1.2
+				],
+				"top": 1.36
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					0.5
+				],
+				"index": 5,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1042",
+				"size": [
+					1.2,
+					1.42,
+					1.2
+				],
+				"top": 1.36
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-1.92
+				],
+				"index": 6,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1045",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-1.92
+				],
+				"index": 7,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1048",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-5.5
+				],
+				"index": 8,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1051",
+				"size": [
+					1.55,
+					1.3,
+					1.55
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-5.5
+				],
+				"index": 9,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1054",
+				"size": [
+					1.55,
+					1.3,
+					1.55
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-8.5
+				],
+				"index": 10,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1057",
+				"size": [
+					1.23,
+					1.26,
+					1.23
+				],
+				"top": 1.28
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-8.5
+				],
+				"index": 11,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1060",
+				"size": [
+					1.23,
+					1.26,
+					1.23
+				],
+				"top": 1.28
+			}
+		],
+		"3": [
+			{
+				"at": [
+					-4.6,
+					0.65,
+					6.51
+				],
+				"index": 0,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1409",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					6.51
+				],
+				"index": 1,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1412",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					3.5
+				],
+				"index": 2,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1415",
+				"size": [
+					1.76,
+					1.3,
+					1.76
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					3.5
+				],
+				"index": 3,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1418",
+				"size": [
+					1.76,
+					1.3,
+					1.76
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					0.5
+				],
+				"index": 4,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1421",
+				"size": [
+					1.2,
+					1.42,
+					1.2
+				],
+				"top": 1.36
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					0.5
+				],
+				"index": 5,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1424",
+				"size": [
+					1.2,
+					1.42,
+					1.2
+				],
+				"top": 1.36
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-1.92
+				],
+				"index": 6,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1427",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-1.92
+				],
+				"index": 7,
+				"mesh": "CylinderMesh",
+				"name": "@AnimatableBody3D@1430",
+				"size": [
+					1.1,
+					1.3,
+					1.1
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-5.5
+				],
+				"index": 8,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1433",
+				"size": [
+					1.55,
+					1.3,
+					1.55
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-5.5
+				],
+				"index": 9,
+				"mesh": "BoxMesh",
+				"name": "@AnimatableBody3D@1436",
+				"size": [
+					1.55,
+					1.3,
+					1.55
+				],
+				"top": 1.3
+			},
+			{
+				"at": [
+					-4.6,
+					0.65,
+					-8.5
+				],
+				"index": 10,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1439",
+				"size": [
+					1.23,
+					1.26,
+					1.23
+				],
+				"top": 1.28
+			},
+			{
+				"at": [
+					4.6,
+					0.65,
+					-8.5
+				],
+				"index": 11,
+				"mesh": "SphereMesh",
+				"name": "@AnimatableBody3D@1442",
+				"size": [
+					1.23,
+					1.26,
+					1.23
+				],
+				"top": 1.28
+			}
+		]
+	},
+	"shots": [
+		{
+			"aim": [
+				0.0,
+				1.72,
+				10.5
+			],
+			"form": -1,
+			"frames": 43,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "screened",
+			"predicted": "form#0",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-1.91,
+				1.77,
+				5.73
+			],
+			"travelled": 2.52,
+			"walker": [
+				0.0,
+				0.12,
+				10.5
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				8.0
+			],
+			"form": -1,
+			"frames": 84,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-0.22,
+				1.73,
+				7.63
+			],
+			"travelled": 4.98,
+			"walker": [
+				0.0,
+				0.12,
+				8.0
+			]
+		},
+		{
+			"aim": [
+				-2.0,
+				1.72,
+				7.0
+			],
+			"form": -1,
+			"frames": 40,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "screened",
+			"predicted": "form#0",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-2.33,
+				1.75,
+				5.68
+			],
+			"travelled": 2.34,
+			"walker": [
+				-2.0,
+				0.12,
+				7.0
+			]
+		},
+		{
+			"aim": [
+				2.0,
+				1.72,
+				5.0
+			],
+			"form": -1,
+			"frames": 77,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				1.62,
+				1.73,
+				4.85
+			],
+			"travelled": 4.56,
+			"walker": [
+				2.0,
+				0.12,
+				5.0
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				0.0
+			],
+			"form": -1,
+			"frames": 43,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				0.37,
+				1.73,
+				-0.19
+			],
+			"travelled": 2.52,
+			"walker": [
+				0.0,
+				0.12,
+				0.0
+			]
+		},
+		{
+			"aim": [
+				-1.9,
+				1.72,
+				7.82
+			],
+			"form": 0,
+			"frames": 40,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "covered",
+			"predicted": "form#0",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-2.39,
+				1.76,
+				5.69
+			],
+			"travelled": 2.34,
+			"walker": [
+				-1.9,
+				0.12,
+				7.82
+			]
+		},
+		{
+			"aim": [
+				-1.9,
+				1.12,
+				7.82
+			],
+			"form": 0,
+			"frames": 41,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "covered",
+			"predicted": "form#0",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				-2.38,
+				1.42,
+				5.72
+			],
+			"travelled": 2.4,
+			"walker": [
+				-1.9,
+				0.12,
+				7.82
+			]
+		},
+		{
+			"aim": [
+				3.32,
+				1.72,
+				7.25
+			],
+			"form": 1,
+			"frames": 83,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#1",
+			"place": "covered",
+			"predicted": "form#1",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				1.43,
+				1.74,
+				5.98
+			],
+			"travelled": 4.92,
+			"walker": [
+				3.32,
+				0.12,
+				7.25
+			]
+		},
+		{
+			"aim": [
+				3.32,
+				1.12,
+				7.25
+			],
+			"form": 1,
+			"frames": 83,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#1",
+			"place": "covered",
+			"predicted": "form#1",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				1.41,
+				1.33,
+				5.97
+			],
+			"travelled": 4.92,
+			"walker": [
+				3.32,
+				0.12,
+				7.25
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.72,
+				3.9
+			],
+			"form": 2,
+			"frames": 32,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-5.08,
+				1.72,
+				3.94
+			],
+			"travelled": 1.86,
+			"walker": [
+				-5.5,
+				0.12,
+				3.9
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.12,
+				3.9
+			],
+			"form": 2,
+			"frames": 20,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:SphereMesh#2",
+			"place": "covered",
+			"predicted": "form#2",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.36,
+				1.34,
+				3.61
+			],
+			"travelled": 1.14,
+			"walker": [
+				-5.5,
+				0.12,
+				3.9
+			]
+		},
+		{
+			"aim": [
+				5.01,
+				1.72,
+				4.79
+			],
+			"form": 3,
+			"frames": 97,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				4.87,
+				1.73,
+				4.39
+			],
+			"travelled": 5.76,
+			"walker": [
+				5.01,
+				0.12,
+				4.79
+			]
+		},
+		{
+			"aim": [
+				5.01,
+				1.12,
+				4.79
+			],
+			"form": 3,
+			"frames": 76,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:SphereMesh#3",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				4.48,
+				1.3,
+				3.16
+			],
+			"travelled": 4.5,
+			"walker": [
+				5.01,
+				0.12,
+				4.79
+			]
+		},
+		{
+			"aim": [
+				-0.94,
+				1.72,
+				-0.68
+			],
+			"form": 4,
+			"frames": 31,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:CylinderMesh#4",
+			"place": "covered",
+			"predicted": "form#4",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-1.92,
+				1.76,
+				1.06
+			],
+			"travelled": 1.8,
+			"walker": [
+				-0.94,
+				0.12,
+				-0.68
+			]
+		},
+		{
+			"aim": [
+				-0.94,
+				1.12,
+				-0.68
+			],
+			"form": 4,
+			"frames": 31,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:CylinderMesh#4",
+			"place": "covered",
+			"predicted": "form#4",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				-1.93,
+				1.45,
+				1.09
+			],
+			"travelled": 1.8,
+			"walker": [
+				-0.94,
+				0.12,
+				-0.68
+			]
+		},
+		{
+			"aim": [
+				0.83,
+				1.72,
+				1.61
+			],
+			"form": 5,
+			"frames": 24,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:CylinderMesh#5",
+			"place": "covered",
+			"predicted": "form#5",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				1.97,
+				1.76,
+				-0.03
+			],
+			"travelled": 1.38,
+			"walker": [
+				0.83,
+				0.12,
+				1.61
+			]
+		},
+		{
+			"aim": [
+				0.83,
+				1.12,
+				1.61
+			],
+			"form": 5,
+			"frames": 24,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:CylinderMesh#5",
+			"place": "covered",
+			"predicted": "form#5",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				1.98,
+				1.48,
+				-0.05
+			],
+			"travelled": 1.38,
+			"walker": [
+				0.83,
+				0.12,
+				1.61
+			]
+		},
+		{
+			"aim": [
+				-4.98,
+				1.72,
+				-3.8
+			],
+			"form": 6,
+			"frames": 105,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-4.86,
+				1.72,
+				-3.39
+			],
+			"travelled": 6.24,
+			"walker": [
+				-4.98,
+				0.12,
+				-3.8
+			]
+		},
+		{
+			"aim": [
+				-4.98,
+				1.12,
+				-3.8
+			],
+			"form": 6,
+			"frames": 88,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:CylinderMesh#6",
+			"place": "covered",
+			"predicted": "form#6",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.57,
+				1.26,
+				-2.39
+			],
+			"travelled": 5.22,
+			"walker": [
+				-4.98,
+				0.12,
+				-3.8
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.72,
+				-3.22
+			],
+			"form": 7,
+			"frames": 41,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				5.14,
+				1.71,
+				-3.34
+			],
+			"travelled": 2.4,
+			"walker": [
+				5.5,
+				0.12,
+				-3.22
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.12,
+				-3.22
+			],
+			"form": 7,
+			"frames": 42,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "form#7",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				5.12,
+				1.08,
+				-3.32
+			],
+			"travelled": 2.46,
+			"walker": [
+				5.5,
+				0.12,
+				-3.22
+			]
+		},
+		{
+			"aim": [
+				-3.52,
+				1.72,
+				-5.2
+			],
+			"form": 8,
+			"frames": 18,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:BoxMesh#8",
+			"place": "covered",
+			"predicted": "form#8",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-1.4,
+				1.77,
+				-5.68
+			],
+			"travelled": 1.02,
+			"walker": [
+				-3.52,
+				0.12,
+				-5.2
+			]
+		},
+		{
+			"aim": [
+				-3.52,
+				1.12,
+				-5.2
+			],
+			"form": 8,
+			"frames": 18,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:BoxMesh#8",
+			"place": "covered",
+			"predicted": "form#8",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				-1.38,
+				1.53,
+				-5.69
+			],
+			"travelled": 1.02,
+			"walker": [
+				-3.52,
+				0.12,
+				-5.2
+			]
+		},
+		{
+			"aim": [
+				3.52,
+				1.72,
+				-5.2
+			],
+			"form": 9,
+			"frames": 18,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:BoxMesh#9",
+			"place": "covered",
+			"predicted": "form#9",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				1.4,
+				1.77,
+				-5.68
+			],
+			"travelled": 1.02,
+			"walker": [
+				3.52,
+				0.12,
+				-5.2
+			]
+		},
+		{
+			"aim": [
+				3.52,
+				1.12,
+				-5.2
+			],
+			"form": 9,
+			"frames": 18,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:BoxMesh#9",
+			"place": "covered",
+			"predicted": "form#9",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				1.38,
+				1.53,
+				-5.69
+			],
+			"travelled": 1.02,
+			"walker": [
+				3.52,
+				0.12,
+				-5.2
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.72,
+				-9.14
+			],
+			"form": 10,
+			"frames": 95,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				-5.13,
+				1.72,
+				-9.23
+			],
+			"travelled": 5.64,
+			"walker": [
+				-5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.12,
+				-9.14
+			],
+			"form": 10,
+			"frames": 77,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:SphereMesh#10",
+			"place": "covered",
+			"predicted": "form#10",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.19,
+				1.23,
+				-8.63
+			],
+			"travelled": 4.56,
+			"walker": [
+				-5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.72,
+				-9.14
+			],
+			"form": 11,
+			"frames": 95,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 0,
+			"stance": "standing",
+			"stopped_at": [
+				5.13,
+				1.72,
+				-9.23
+			],
+			"travelled": 5.64,
+			"walker": [
+				5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.12,
+				-9.14
+			],
+			"form": 11,
+			"frames": 77,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:SphereMesh#11",
+			"place": "covered",
+			"predicted": "form#11",
+			"stage": 0,
+			"stance": "crouched",
+			"stopped_at": [
+				4.19,
+				1.23,
+				-8.63
+			],
+			"travelled": 4.56,
+			"walker": [
+				5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				10.5
+			],
+			"form": -1,
+			"frames": 121,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-0.17,
+				1.72,
+				10.07
+			],
+			"travelled": 7.2,
+			"walker": [
+				0.0,
+				0.12,
+				10.5
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				8.0
+			],
+			"form": -1,
+			"frames": 83,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-0.25,
+				1.73,
+				7.58
+			],
+			"travelled": 4.92,
+			"walker": [
+				0.0,
+				0.12,
+				8.0
+			]
+		},
+		{
+			"aim": [
+				-2.0,
+				1.72,
+				7.0
+			],
+			"form": -1,
+			"frames": 55,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-2.11,
+				1.73,
+				6.55
+			],
+			"travelled": 3.24,
+			"walker": [
+				-2.0,
+				0.12,
+				7.0
+			]
+		},
+		{
+			"aim": [
+				2.0,
+				1.72,
+				5.0
+			],
+			"form": -1,
+			"frames": 76,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				1.57,
+				1.73,
+				4.83
+			],
+			"travelled": 4.5,
+			"walker": [
+				2.0,
+				0.12,
+				5.0
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				0.0
+			],
+			"form": -1,
+			"frames": 43,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				0.37,
+				1.73,
+				-0.19
+			],
+			"travelled": 2.52,
+			"walker": [
+				0.0,
+				0.12,
+				0.0
+			]
+		},
+		{
+			"aim": [
+				-5.09,
+				1.72,
+				8.36
+			],
+			"form": 0,
+			"frames": 82,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-4.85,
+				1.73,
+				7.95
+			],
+			"travelled": 4.86,
+			"walker": [
+				-5.09,
+				0.12,
+				8.36
+			]
+		},
+		{
+			"aim": [
+				-5.09,
+				1.12,
+				8.36
+			],
+			"form": 0,
+			"frames": 47,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "covered",
+			"predicted": "form#0",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.1,
+				1.42,
+				5.96
+			],
+			"travelled": 2.76,
+			"walker": [
+				-5.09,
+				0.12,
+				8.36
+			]
+		},
+		{
+			"aim": [
+				4.88,
+				1.72,
+				7.28
+			],
+			"form": 1,
+			"frames": 135,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				4.77,
+				1.72,
+				6.77
+			],
+			"travelled": 8.04,
+			"walker": [
+				4.88,
+				0.12,
+				7.28
+			]
+		},
+		{
+			"aim": [
+				4.88,
+				1.12,
+				7.28
+			],
+			"form": 1,
+			"frames": 119,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:BoxMesh#1",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				4.57,
+				1.23,
+				5.81
+			],
+			"travelled": 7.08,
+			"walker": [
+				4.88,
+				0.12,
+				7.28
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.72,
+				3.9
+			],
+			"form": 2,
+			"frames": 32,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-5.08,
+				1.72,
+				3.94
+			],
+			"travelled": 1.86,
+			"walker": [
+				-5.5,
+				0.12,
+				3.9
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.12,
+				3.9
+			],
+			"form": 2,
+			"frames": 19,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:SphereMesh#2",
+			"place": "covered",
+			"predicted": "form#2",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.31,
+				1.36,
+				3.59
+			],
+			"travelled": 1.08,
+			"walker": [
+				-5.5,
+				0.12,
+				3.9
+			]
+		},
+		{
+			"aim": [
+				5.01,
+				1.72,
+				4.79
+			],
+			"form": 3,
+			"frames": 96,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				4.86,
+				1.73,
+				4.33
+			],
+			"travelled": 5.7,
+			"walker": [
+				5.01,
+				0.12,
+				4.79
+			]
+		},
+		{
+			"aim": [
+				5.01,
+				1.12,
+				4.79
+			],
+			"form": 3,
+			"frames": 74,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:SphereMesh#3",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				4.45,
+				1.31,
+				3.05
+			],
+			"travelled": 4.38,
+			"walker": [
+				5.01,
+				0.12,
+				4.79
+			]
+		},
+		{
+			"aim": [
+				-5.33,
+				1.72,
+				-0.64
+			],
+			"form": 4,
+			"frames": 60,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-4.91,
+				1.72,
+				-0.47
+			],
+			"travelled": 3.54,
+			"walker": [
+				-5.33,
+				0.12,
+				-0.64
+			]
+		},
+		{
+			"aim": [
+				-5.33,
+				1.12,
+				-0.64
+			],
+			"form": 4,
+			"frames": 46,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "form:CylinderMesh#4",
+			"place": "covered",
+			"predicted": "form#4",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.48,
+				1.3,
+				0.3
+			],
+			"travelled": 2.7,
+			"walker": [
+				-5.33,
+				0.12,
+				-0.64
+			]
+		},
+		{
+			"aim": [
+				5.44,
+				1.72,
+				1.55
+			],
+			"form": 5,
+			"frames": 55,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				5.0,
+				1.72,
+				1.56
+			],
+			"travelled": 3.24,
+			"walker": [
+				5.44,
+				0.12,
+				1.55
+			]
+		},
+		{
+			"aim": [
+				5.44,
+				1.12,
+				1.55
+			],
+			"form": 5,
+			"frames": 30,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:CylinderMesh#5",
+			"place": "covered",
+			"predicted": "form#5",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				4.16,
+				1.4,
+				0.28
+			],
+			"travelled": 1.74,
+			"walker": [
+				5.44,
+				0.12,
+				1.55
+			]
+		},
+		{
+			"aim": [
+				-5.01,
+				1.72,
+				-3.31
+			],
+			"form": 6,
+			"frames": 97,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-4.87,
+				1.73,
+				-2.89
+			],
+			"travelled": 5.76,
+			"walker": [
+				-5.01,
+				0.12,
+				-3.31
+			]
+		},
+		{
+			"aim": [
+				-5.01,
+				1.12,
+				-3.31
+			],
+			"form": 6,
+			"frames": 97,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "form#4",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.86,
+				1.17,
+				-2.86
+			],
+			"travelled": 5.76,
+			"walker": [
+				-5.01,
+				0.12,
+				-3.31
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.72,
+				-4.04
+			],
+			"form": 7,
+			"frames": 51,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				5.11,
+				1.72,
+				-4.19
+			],
+			"travelled": 3.0,
+			"walker": [
+				5.5,
+				0.12,
+				-4.04
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.12,
+				-4.04
+			],
+			"form": 7,
+			"frames": 51,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "form#7",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				5.07,
+				1.1,
+				-4.13
+			],
+			"travelled": 3.0,
+			"walker": [
+				5.5,
+				0.12,
+				-4.04
+			]
+		},
+		{
+			"aim": [
+				5.1,
+				1.72,
+				-6.75
+			],
+			"form": 9,
+			"frames": 81,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				4.86,
+				1.73,
+				-6.38
+			],
+			"travelled": 4.8,
+			"walker": [
+				5.1,
+				0.12,
+				-6.75
+			]
+		},
+		{
+			"aim": [
+				5.1,
+				1.12,
+				-6.75
+			],
+			"form": 9,
+			"frames": 55,
+			"head": 1,
+			"head_at": [
+				3.0,
+				1.8,
+				-1.5
+			],
+			"outcome": "form:BoxMesh#9",
+			"place": "covered",
+			"predicted": "form#9",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				4.29,
+				1.36,
+				-4.9
+			],
+			"travelled": 3.24,
+			"walker": [
+				5.1,
+				0.12,
+				-6.75
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.72,
+				-9.14
+			],
+			"form": 10,
+			"frames": 93,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				-5.03,
+				1.72,
+				-9.16
+			],
+			"travelled": 5.52,
+			"walker": [
+				-5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				-5.5,
+				1.12,
+				-9.14
+			],
+			"form": 10,
+			"frames": 73,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:SphereMesh#10",
+			"place": "covered",
+			"predicted": "form#10",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				-3.99,
+				1.26,
+				-8.51
+			],
+			"travelled": 4.32,
+			"walker": [
+				-5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.72,
+				-9.14
+			],
+			"form": 11,
+			"frames": 93,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 1,
+			"stance": "standing",
+			"stopped_at": [
+				5.03,
+				1.72,
+				-9.16
+			],
+			"travelled": 5.52,
+			"walker": [
+				5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				5.5,
+				1.12,
+				-9.14
+			],
+			"form": 11,
+			"frames": 79,
+			"head": 2,
+			"head_at": [
+				0.0,
+				1.8,
+				-6.0
+			],
+			"outcome": "form:SphereMesh#11",
+			"place": "covered",
+			"predicted": "form#11",
+			"stage": 1,
+			"stance": "crouched",
+			"stopped_at": [
+				4.29,
+				1.22,
+				-8.7
+			],
+			"travelled": 4.68,
+			"walker": [
+				5.5,
+				0.12,
+				-9.14
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				10.5
+			],
+			"form": -1,
+			"frames": 210,
+			"head": 1,
+			"head_at": [
+				0.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				0.0,
+				1.72,
+				9.96
+			],
+			"travelled": 12.54,
+			"walker": [
+				0.0,
+				0.12,
+				10.5
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				8.0
+			],
+			"form": -1,
+			"frames": 169,
+			"head": 1,
+			"head_at": [
+				0.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				0.0,
+				1.72,
+				7.5
+			],
+			"travelled": 10.08,
+			"walker": [
+				0.0,
+				0.12,
+				8.0
+			]
+		},
+		{
+			"aim": [
+				-2.0,
+				1.72,
+				7.0
+			],
+			"form": -1,
+			"frames": 153,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				-2.05,
+				1.72,
+				6.49
+			],
+			"travelled": 9.12,
+			"walker": [
+				-2.0,
+				0.12,
+				7.0
+			]
+		},
+		{
+			"aim": [
+				2.0,
+				1.72,
+				5.0
+			],
+			"form": -1,
+			"frames": 120,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				2.06,
+				1.72,
+				4.5
+			],
+			"travelled": 7.14,
+			"walker": [
+				2.0,
+				0.12,
+				5.0
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				0.0
+			],
+			"form": -1,
+			"frames": 37,
+			"head": 1,
+			"head_at": [
+				0.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				0.0,
+				1.73,
+				-0.42
+			],
+			"travelled": 2.16,
+			"walker": [
+				0.0,
+				0.12,
+				0.0
+			]
+		},
+		{
+			"aim": [
+				-4.81,
+				1.72,
+				8.43
+			],
+			"form": 0,
+			"frames": 178,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				-4.73,
+				1.72,
+				7.9
+			],
+			"travelled": 10.62,
+			"walker": [
+				-4.81,
+				0.12,
+				8.43
+			]
+		},
+		{
+			"aim": [
+				-4.81,
+				1.12,
+				8.43
+			],
+			"form": 0,
+			"frames": 151,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "covered",
+			"predicted": "form#2",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.47,
+				1.25,
+				6.29
+			],
+			"travelled": 9.0,
+			"walker": [
+				-4.81,
+				0.12,
+				8.43
+			]
+		},
+		{
+			"aim": [
+				4.81,
+				1.72,
+				8.4
+			],
+			"form": 1,
+			"frames": 178,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				4.73,
+				1.72,
+				7.9
+			],
+			"travelled": 10.62,
+			"walker": [
+				4.81,
+				0.12,
+				8.4
+			]
+		},
+		{
+			"aim": [
+				4.81,
+				1.12,
+				8.4
+			],
+			"form": 1,
+			"frames": 150,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#1",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				4.47,
+				1.25,
+				6.23
+			],
+			"travelled": 8.94,
+			"walker": [
+				4.81,
+				0.12,
+				8.4
+			]
+		},
+		{
+			"aim": [
+				-4.92,
+				1.72,
+				4.81
+			],
+			"form": 2,
+			"frames": 120,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				-4.81,
+				1.72,
+				4.34
+			],
+			"travelled": 7.14,
+			"walker": [
+				-4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				-4.92,
+				1.12,
+				4.81
+			],
+			"form": 2,
+			"frames": 98,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#2",
+			"place": "covered",
+			"predicted": "form#2",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.49,
+				1.27,
+				3.04
+			],
+			"travelled": 5.82,
+			"walker": [
+				-4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				4.92,
+				1.72,
+				4.81
+			],
+			"form": 3,
+			"frames": 120,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				4.81,
+				1.72,
+				4.34
+			],
+			"travelled": 7.14,
+			"walker": [
+				4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				4.92,
+				1.12,
+				4.81
+			],
+			"form": 3,
+			"frames": 97,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#3",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				4.47,
+				1.28,
+				2.98
+			],
+			"travelled": 5.76,
+			"walker": [
+				4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				-5.16,
+				1.72,
+				1.73
+			],
+			"form": 4,
+			"frames": 73,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				-4.85,
+				1.73,
+				1.36
+			],
+			"travelled": 4.32,
+			"walker": [
+				-5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				-5.16,
+				1.12,
+				1.73
+			],
+			"form": 4,
+			"frames": 47,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:CylinderMesh#4",
+			"place": "covered",
+			"predicted": "form#4",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.23,
+				1.38,
+				-0.1
+			],
+			"travelled": 2.76,
+			"walker": [
+				-5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				5.16,
+				1.72,
+				1.73
+			],
+			"form": 5,
+			"frames": 73,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				4.85,
+				1.73,
+				1.36
+			],
+			"travelled": 4.32,
+			"walker": [
+				5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				5.16,
+				1.12,
+				1.73
+			],
+			"form": 5,
+			"frames": 57,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:CylinderMesh#5",
+			"place": "covered",
+			"predicted": "form#5",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				4.46,
+				1.3,
+				0.45
+			],
+			"travelled": 3.36,
+			"walker": [
+				5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				-5.33,
+				1.72,
+				-6.64
+			],
+			"form": 8,
+			"frames": 60,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				-4.91,
+				1.72,
+				-6.47
+			],
+			"travelled": 3.54,
+			"walker": [
+				-5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				-5.33,
+				1.12,
+				-6.64
+			],
+			"form": 8,
+			"frames": 34,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#8",
+			"place": "covered",
+			"predicted": "form#8",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.14,
+				1.41,
+				-5.08
+			],
+			"travelled": 1.98,
+			"walker": [
+				-5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				5.33,
+				1.72,
+				-6.64
+			],
+			"form": 9,
+			"frames": 60,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				4.91,
+				1.72,
+				-6.47
+			],
+			"travelled": 3.54,
+			"walker": [
+				5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				5.33,
+				1.12,
+				-6.64
+			],
+			"form": 9,
+			"frames": 35,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#9",
+			"place": "covered",
+			"predicted": "form#9",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				4.17,
+				1.4,
+				-5.13
+			],
+			"travelled": 2.04,
+			"walker": [
+				5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				-4.98,
+				1.72,
+				-9.8
+			],
+			"form": 10,
+			"frames": 104,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				-4.84,
+				1.73,
+				-9.34
+			],
+			"travelled": 6.18,
+			"walker": [
+				-4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				-4.98,
+				1.12,
+				-9.8
+			],
+			"form": 10,
+			"frames": 81,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#10",
+			"place": "covered",
+			"predicted": "form#10",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.45,
+				1.3,
+				-7.99
+			],
+			"travelled": 4.8,
+			"walker": [
+				-4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				4.98,
+				1.72,
+				-9.8
+			],
+			"form": 11,
+			"frames": 104,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 2,
+			"stance": "standing",
+			"stopped_at": [
+				4.84,
+				1.73,
+				-9.34
+			],
+			"travelled": 6.18,
+			"walker": [
+				4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				4.98,
+				1.12,
+				-9.8
+			],
+			"form": 11,
+			"frames": 84,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#11",
+			"place": "covered",
+			"predicted": "form#11",
+			"stage": 2,
+			"stance": "crouched",
+			"stopped_at": [
+				4.5,
+				1.28,
+				-8.16
+			],
+			"travelled": 4.98,
+			"walker": [
+				4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				10.5
+			],
+			"form": -1,
+			"frames": 210,
+			"head": 1,
+			"head_at": [
+				0.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				0.0,
+				1.72,
+				9.96
+			],
+			"travelled": 12.54,
+			"walker": [
+				0.0,
+				0.12,
+				10.5
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				8.0
+			],
+			"form": -1,
+			"frames": 169,
+			"head": 1,
+			"head_at": [
+				0.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				0.0,
+				1.72,
+				7.5
+			],
+			"travelled": 10.08,
+			"walker": [
+				0.0,
+				0.12,
+				8.0
+			]
+		},
+		{
+			"aim": [
+				-2.0,
+				1.72,
+				7.0
+			],
+			"form": -1,
+			"frames": 153,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				-2.05,
+				1.72,
+				6.49
+			],
+			"travelled": 9.12,
+			"walker": [
+				-2.0,
+				0.12,
+				7.0
+			]
+		},
+		{
+			"aim": [
+				2.0,
+				1.72,
+				5.0
+			],
+			"form": -1,
+			"frames": 120,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				2.06,
+				1.72,
+				4.5
+			],
+			"travelled": 7.14,
+			"walker": [
+				2.0,
+				0.12,
+				5.0
+			]
+		},
+		{
+			"aim": [
+				0.0,
+				1.72,
+				0.0
+			],
+			"form": -1,
+			"frames": 37,
+			"head": 1,
+			"head_at": [
+				0.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "exposed",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				0.0,
+				1.73,
+				-0.42
+			],
+			"travelled": 2.16,
+			"walker": [
+				0.0,
+				0.12,
+				0.0
+			]
+		},
+		{
+			"aim": [
+				-4.81,
+				1.72,
+				8.43
+			],
+			"form": 0,
+			"frames": 178,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				-4.73,
+				1.72,
+				7.9
+			],
+			"travelled": 10.62,
+			"walker": [
+				-4.81,
+				0.12,
+				8.43
+			]
+		},
+		{
+			"aim": [
+				-4.81,
+				1.12,
+				8.43
+			],
+			"form": 0,
+			"frames": 151,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#0",
+			"place": "covered",
+			"predicted": "form#2",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.47,
+				1.25,
+				6.29
+			],
+			"travelled": 9.0,
+			"walker": [
+				-4.81,
+				0.12,
+				8.43
+			]
+		},
+		{
+			"aim": [
+				4.81,
+				1.72,
+				8.4
+			],
+			"form": 1,
+			"frames": 178,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				4.73,
+				1.72,
+				7.9
+			],
+			"travelled": 10.62,
+			"walker": [
+				4.81,
+				0.12,
+				8.4
+			]
+		},
+		{
+			"aim": [
+				4.81,
+				1.12,
+				8.4
+			],
+			"form": 1,
+			"frames": 150,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#1",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				4.47,
+				1.25,
+				6.23
+			],
+			"travelled": 8.94,
+			"walker": [
+				4.81,
+				0.12,
+				8.4
+			]
+		},
+		{
+			"aim": [
+				-4.92,
+				1.72,
+				4.81
+			],
+			"form": 2,
+			"frames": 120,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				-4.81,
+				1.72,
+				4.34
+			],
+			"travelled": 7.14,
+			"walker": [
+				-4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				-4.92,
+				1.12,
+				4.81
+			],
+			"form": 2,
+			"frames": 98,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#2",
+			"place": "covered",
+			"predicted": "form#2",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.49,
+				1.27,
+				3.04
+			],
+			"travelled": 5.82,
+			"walker": [
+				-4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				4.92,
+				1.72,
+				4.81
+			],
+			"form": 3,
+			"frames": 120,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				4.81,
+				1.72,
+				4.34
+			],
+			"travelled": 7.14,
+			"walker": [
+				4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				4.92,
+				1.12,
+				4.81
+			],
+			"form": 3,
+			"frames": 98,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#3",
+			"place": "covered",
+			"predicted": "form#3",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				4.49,
+				1.27,
+				3.04
+			],
+			"travelled": 5.82,
+			"walker": [
+				4.92,
+				0.12,
+				4.81
+			]
+		},
+		{
+			"aim": [
+				-5.16,
+				1.72,
+				1.73
+			],
+			"form": 4,
+			"frames": 73,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				-4.85,
+				1.73,
+				1.36
+			],
+			"travelled": 4.32,
+			"walker": [
+				-5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				-5.16,
+				1.12,
+				1.73
+			],
+			"form": 4,
+			"frames": 47,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:CylinderMesh#4",
+			"place": "covered",
+			"predicted": "form#4",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.23,
+				1.38,
+				-0.1
+			],
+			"travelled": 2.76,
+			"walker": [
+				-5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				5.16,
+				1.72,
+				1.73
+			],
+			"form": 5,
+			"frames": 73,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				4.85,
+				1.73,
+				1.36
+			],
+			"travelled": 4.32,
+			"walker": [
+				5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				5.16,
+				1.12,
+				1.73
+			],
+			"form": 5,
+			"frames": 57,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:CylinderMesh#5",
+			"place": "covered",
+			"predicted": "form#5",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				4.46,
+				1.3,
+				0.45
+			],
+			"travelled": 3.36,
+			"walker": [
+				5.16,
+				0.12,
+				1.73
+			]
+		},
+		{
+			"aim": [
+				-5.33,
+				1.72,
+				-6.64
+			],
+			"form": 8,
+			"frames": 60,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				-4.91,
+				1.72,
+				-6.47
+			],
+			"travelled": 3.54,
+			"walker": [
+				-5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				-5.33,
+				1.12,
+				-6.64
+			],
+			"form": 8,
+			"frames": 34,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#8",
+			"place": "covered",
+			"predicted": "form#8",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.14,
+				1.41,
+				-5.08
+			],
+			"travelled": 1.98,
+			"walker": [
+				-5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				5.33,
+				1.72,
+				-6.64
+			],
+			"form": 9,
+			"frames": 60,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				4.91,
+				1.72,
+				-6.47
+			],
+			"travelled": 3.54,
+			"walker": [
+				5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				5.33,
+				1.12,
+				-6.64
+			],
+			"form": 9,
+			"frames": 35,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:BoxMesh#9",
+			"place": "covered",
+			"predicted": "form#9",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				4.17,
+				1.4,
+				-5.13
+			],
+			"travelled": 2.04,
+			"walker": [
+				5.33,
+				0.12,
+				-6.64
+			]
+		},
+		{
+			"aim": [
+				-4.98,
+				1.72,
+				-9.8
+			],
+			"form": 10,
+			"frames": 104,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				-4.84,
+				1.73,
+				-9.34
+			],
+			"travelled": 6.18,
+			"walker": [
+				-4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				-4.98,
+				1.12,
+				-9.8
+			],
+			"form": 10,
+			"frames": 81,
+			"head": 0,
+			"head_at": [
+				-3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#10",
+			"place": "covered",
+			"predicted": "form#10",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				-4.45,
+				1.3,
+				-7.99
+			],
+			"travelled": 4.8,
+			"walker": [
+				-4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				4.98,
+				1.72,
+				-9.8
+			],
+			"form": 11,
+			"frames": 104,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "player",
+			"place": "covered",
+			"predicted": "player",
+			"stage": 3,
+			"stance": "standing",
+			"stopped_at": [
+				4.84,
+				1.73,
+				-9.34
+			],
+			"travelled": 6.18,
+			"walker": [
+				4.98,
+				0.12,
+				-9.8
+			]
+		},
+		{
+			"aim": [
+				4.98,
+				1.12,
+				-9.8
+			],
+			"form": 11,
+			"frames": 84,
+			"head": 2,
+			"head_at": [
+				3.0,
+				1.8,
+				-3.0
+			],
+			"outcome": "form:SphereMesh#11",
+			"place": "covered",
+			"predicted": "form#11",
+			"stage": 3,
+			"stance": "crouched",
+			"stopped_at": [
+				4.5,
+				1.28,
+				-8.16
+			],
+			"travelled": 4.98,
+			"walker": [
+				4.98,
+				0.12,
+				-9.8
+			]
+		}
+	],
+	"source": {
+		"flying_skull.gd": {
+			"modified_unix": 1791828478,
+			"sha256": "82460c58dde76e09876f8dfcd9b4463a4de464ba5f71d13950c02b51985047c2"
+		},
+		"ladder_ball.gd": {
+			"modified_unix": 1791870253,
+			"sha256": "fd330ae3dd20a6ad72561020ce783ea6be0d4670d208aaecc42fee80c420eb4a"
+		},
+		"ladder_encounter.gd": {
+			"modified_unix": 1791878282,
+			"sha256": "cbc4469d8cd778ca790f6e7aa6139e5e0e82c2adeb589156ba25b6a420d40d1a"
+		},
+		"ladder_skull.gd": {
+			"modified_unix": 1791870253,
+			"sha256": "1e1e5b55906a819b52d26913131fbc8b49ae327974fc9d564da3f170ba3002f8"
+		}
+	},
+	"summary": {
+		"0": {
+			"crouched": 12,
+			"crouched_stopped": 11,
+			"exposed": 3,
+			"exposed_hit": 3,
+			"predicted": 29,
+			"prediction_agrees": 28,
+			"screened": 2,
+			"screened_stopped": 2,
+			"standing": 12,
+			"standing_stopped": 6
+		},
+		"1": {
+			"crouched": 11,
+			"crouched_stopped": 9,
+			"exposed": 5,
+			"exposed_hit": 5,
+			"predicted": 27,
+			"prediction_agrees": 25,
+			"screened": 0,
+			"screened_stopped": 0,
+			"standing": 11,
+			"standing_stopped": 0
+		},
+		"2": {
+			"crouched": 10,
+			"crouched_stopped": 10,
+			"exposed": 5,
+			"exposed_hit": 5,
+			"predicted": 25,
+			"prediction_agrees": 25,
+			"screened": 0,
+			"screened_stopped": 0,
+			"standing": 10,
+			"standing_stopped": 0
+		},
+		"3": {
+			"crouched": 10,
+			"crouched_stopped": 10,
+			"exposed": 5,
+			"exposed_hit": 5,
+			"predicted": 25,
+			"prediction_agrees": 25,
+			"screened": 0,
+			"screened_stopped": 0,
+			"standing": 10,
+			"standing_stopped": 0
+		}
+	},
+	"time_scale": 2.0,
+	"written": "2026-10-13T10:05:38"
+}

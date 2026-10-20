@@ -1,0 +1,125 @@
+--- commons/maps/Fractal_Recursion/tutorial.md (before)
++++ commons/maps/Fractal_Recursion/tutorial.md (after)
+@@ -11,6 +11,8 @@
+ ## Continue with the line
+ 
+ You bring positions, lists, loops and functions from earlier halls. Keep the `LineSkin` supplied in Point Lines. Four segments make one square. The new operation is to call the square-making function again with a smaller size and one fewer step available.
++
++Recursion lets us describe a construction in terms of smaller constructions of the same kind. We write what one frame does and how it asks for the next; we do not write a separate function for every size. This row of nested frames could also be made with a loop. It is our first, simple self-call. In the next hall, one call will ask for two whole subtrees: the same short recipe will organise a branching family. That is the power we are learning to use.
+ 
+ Keep your previous study as a working version. Save `frames.gd` and `line_skin.gd` together and attach `frames.gd` to your existing, empty `PointStudy` Node3D in the prepared museum workspace. Use unit scale; position and rotate the station to face you. The museum supplies the camera, lights and player. This script creates only the study. Do not attach it to the museum's generator or remove the room's existing artifact.
+ 
+@@ -69,6 +71,17 @@
+ 
+ Otherwise it draws one frame. The last line calls the same function with the same centre, a smaller size and `remaining - 1`. With the default values, the sizes are 1.8, 1.17 and 0.7605 metres. The next call receives zero remaining steps and returns. Each earlier call then finishes.
+ 
++Trace those calls before changing the code. Each call has its own parameter values; making a child call does not overwrite its parent's `size` or `remaining`.
++
++| Call | Size in metres | Steps remaining | What it does |
++| --- | --- | --- | --- |
++| First | 1.8 | 3 | Draw; call again with smaller arguments |
++| Second | 1.17 | 2 | Draw; call again |
++| Third | 0.7605 | 1 | Draw; call again |
++| Fourth | 0.494325 | 0 | Return without drawing |
++
++While a child runs, its caller waits at the call. When the fourth returns, the third resumes just after its self-call and finishes; then the second and first finish. The engine keeps these unfinished calls on a **call stack**. A short recipe can therefore require many calls and much geometry. The stopping condition makes the job finite; it does not make that work free.
++
+ Either test can stop this example. If one remains reachable, the calls can still finish. If both tests are removed, each call proceeds into another with no programmed end to the chain. The depth clamp only limits the starting value; counting down does not stop a self-call unless the function checks that count.
+ 
+ The loop in `draw_frame()` constructs four sides. Recursion repeats the whole construction. `(i + 1) % 4` returns to the first corner after the fourth; the last line closes the square.
+--- commons/maps/Fractal_RecursiveTrees/tutorial.md (before)
++++ commons/maps/Fractal_RecursiveTrees/tutorial.md (after)
+@@ -92,6 +92,10 @@
+ `branch()` makes a joint and draws one line upwards from it. It returns that joint, including anything attached below it. When `remaining` is zero, the visible branch is the last one: it gets no children. Here `generations` counts the generations **after the trunk**. Three gives 1 + 2 + 4 + 8 = 15 segments; four gives 31.
+ 
+ The two loop values give opposite turns. Each loop iteration calls `branch()` again with a shorter length and one fewer generation. The returned child is placed at the parent's tip, turned, then attached to that parent. Its children have already been made by the same rule. This is a depth-first construction: finish one subtree, then make its sibling.
++
++Follow the smallest fork with `generations = 1`. The first call, `branch(0.7, 1)`, makes the trunk. It calls `branch(0.49, 0)` for its first child. That child draws one segment and returns its joint. The parent attaches it, then makes a second, separate `branch(0.49, 0)` call for the other child. Finally the parent returns a joint carrying all three segments. Equal arguments give the two children equal lengths; each call still creates its own node.
++
++With more generations, either child can return a whole subtree. We never need separate recipes for a trunk, a branch and a twig: each builds one part and delegates the smaller versions to the same function. The count doubles at each new level, so this economy in writing can produce expensive work. Before restoring three generations, explain why one generation makes three segments rather than two, and why a leaf is drawn here although the zero-step frame in the previous lesson drew nothing. Look at where each function places its stopping test.
+ 
+ Earlier, local and world coordinates described a point relative to a room. Here every child has a local position relative to its parent branch. `child.position = Vector3.UP * length` puts its origin at that parent's end. Moving or turning the parent carries the children through their existing attachments. The scene tree performs that inheritance; we do not recalculate every descendant in `_process()`.
+ 
+@@ -200,4 +204,4 @@
+ 
+ The small museum model and large canopy, however, really do share the source's branch records. Their scale differs; their branching decisions do not. ANGLE and LENGTH on the original desk change the whole rule and rebuild the specimen. The point grips make a local edit. Release both before using those controls or RESET.
+ 
+-Carry the bounded self-call onward. In Cantor Set, the next decision will be which part of an interval is retained, removed and passed to another call.
++Carry the branching rule onward. In Cantor Set, the next decision will be which part of an interval is retained, removed and passed to the next generation. We will keep that generation in an array so the hand can advance it one step at a time.
+--- commons/maps/Fractal_CantorSet/final.md (before)
++++ commons/maps/Fractal_CantorSet/final.md (after)
+@@ -33,6 +33,10 @@
+ 
+ The screen stops at five. Its smallest pieces still have width, height and depth. The mathematical construction asks us to continue without a last cut.[^1] Its limiting set has zero total length and uncountably many points. We have not displayed that limit. We have made a finite instrument for approaching its rule.
+ 
++Georg Cantor (1845–1918) was a mathematician whose work helped establish set theory: the study of collections and their members. He showed that infinite collections need not have the same size. To call a set countable is to say that its members can be listed in an order that eventually reaches each one; the points in this limiting set cannot all be listed that way.[^2] Zero length has not made it empty. Counting its points and measuring its length answer different questions.
++
++That difference matters here in Ada. We began with a point we could hold, then gave many points a rule. Now the rule asks us to distinguish what exists mathematically, what our finite drawing shows, and what a body can enter. No single count settles all three. Later, the foundations-crisis halls will ask what our systems can establish about their objects. Here that question begins with a bar, a gap and our wish to pass through.
++
+ From here the gaps can look generous. Carry that impression up the ramp.
+ 
+ <!-- @example_8_4_cantor_pagoda_vr -->
+@@ -60,3 +64,5 @@
+ The smaller Cantor drawing, the cloud and the dark sphere remain around the experiment as well. Their kinds of repetition do not have to resolve into one shape. Further on, Koch will put a detour into a line; Sierpinski will carry removal into a triangle. We have learned to lose length while multiplying pieces. What happens when the next rule makes the boundary grow instead?
+ 
+ [^1]: Georg Cantor published the set in 1883, in the fifth of his papers “Über unendliche, lineare Punktmannichfaltigkeiten” (*Mathematische Annalen* 21); Henry J. S. Smith had described the same construction nine years earlier. The pagoda is built on Daniel Shiffman's Example 8.4 in *The Nature of Code*.
++
++[^2]: J. J. O'Connor and E. F. Robertson, [“Georg Cantor,” MacTutor History of Mathematics](https://mathshistory.st-andrews.ac.uk/Biographies/Cantor/), on Cantor's work on sets, countability and different infinite cardinalities. The museum's five cuts remain finite approximations.
+--- commons/maps/LSystems_Grammar_Lab/tutorial.md (before)
++++ commons/maps/LSystems_Grammar_Lab/tutorial.md (after)
+@@ -25,6 +25,26 @@
+ ## Continue from the recipe
+ 
+ In Fractal Synthesis, a recipe named the seed, operation and stopping depth. Here a **string** records the intermediate result. A **dictionary** says which string replaces each symbol. We reuse loops, functions, independent old/next data, PointBody and the cylinder that gives a line its thickness.
++
++## What an L-system is
++
++An **L-system**, short for Lindenmayer system, repeatedly rewrites a string according to rules. Aristid Lindenmayer introduced these systems in 1968 to model biological development.[^1] We will use one to describe a familiar construction before drawing it. These are its building blocks, using the Cantor preset we will try below:
++
++| Part | Meaning | Our Cantor example |
++| --- | --- | --- |
++| Alphabet | The symbols the description uses | `F` and `f` |
++| Axiom | The starting string, generation zero | `F` |
++| Productions | Rules replacing old symbols with new strings | `F → FfF`; `f → fff` |
++| Generation | One complete rewrite of the previous string | `F` becomes `FfF` |
++| Drawing interpretation | The actions we give the symbols afterwards | `F` moves and draws; `f` moves without drawing |
++
++The drawing interpretation is an extra agreement: the rewriting rules alone do not say what a line looks like. A **turtle** is our name for the reader that keeps a position and heading as it follows the string; no animal model is required.
++
++Work through two generations on paper. Start with `F`. The first rewrite gives `FfF`. For the second, replace its three old symbols separately: `FfF`, then `fff`, then `FfF`. Join those results to get `FfFfffFfF`. Read it as movement: four drawn intervals separated by gaps, across nine equal steps. Divide the step length by nine to compare this row with the original unit interval. The old gap expands to three symbols so it keeps its share of that interval.
++
++This carries the branching construction forward through stored descriptions. Our `rewrite()` uses loops, not a function calling itself. It lets us keep, inspect and reinterpret each generation. The desk opens with the turning curve instead: its alphabet is `F`, `+` and `-`; its starting axiom is still `F`. Follow the same rewriting process with the production printed above.
++
++## Set up the study
+ 
+ Use the prepared Endless Museum workspace. Place the four complete files below together. Attach `sentence.gd` to an empty, unit-scale Node3D on its floor, facing local +Z. The museum supplies the player, camera, lighting and installed XRTools. The script creates its own point, drawings and labels; there are no named scene children to prepare. This is a compact reconstruction of the existing desk's opening interaction, beside which you can compare your result.
+ 
+@@ -318,3 +338,5 @@
+ Find the same preset at the museum desk: RESET, then PRESET seven times. The first seven named presets still occupy their previous positions; Cantor is now reachable as the eighth. This connects two implementations of one construction. The table's quarters and two-fifths recipes require different rules or step lengths; they are not produced by these F/f rules.
+ 
+ Carry the sentence and reader into **Growth**. At present the turtle has one position and one heading. A branch needs somewhere to keep those values while another line continues.
++
++[^1]: Daniel Shiffman, [*The Nature of Code*, “L-systems”](https://natureofcode.com/fractals/#l-systems). For the original modelling tradition, see Przemyslaw Prusinkiewicz and Aristid Lindenmayer, [*The Algorithmic Beauty of Plants*](https://algorithmicbotany.org/papers/#abop), chapter 1.
+--- commons/maps/LSystems_Grammar_Lab/final.md (before)
++++ commons/maps/LSystems_Grammar_Lab/final.md (after)
+@@ -7,6 +7,8 @@
+ Advance the live drawing once and hold a copy. Then take the small black point and change the angle. Follow the first bend across the two drawings. Their letters have not changed. Each still carries five drawing instructions, yet the same route through the symbols takes another route through space. Some segments overlap. The outline alone cannot tell us how many movements made it.
+ 
+ We brought a construction out of the fractal halls. Here a rule leaves a description we can keep before giving it a body. Making the sentence and reading it as movement become separate acts. The held drawing gives us somewhere to look back while the live one changes. The point has acquired another task in the hand.
++
++The L belongs to Aristid Lindenmayer, a biologist who introduced these systems in 1968 to study development.[^1] A description could change through successive generations as its parts followed replacement rules. That origin gives our desk a question beyond resemblance: how might a form come into being? Here we can hold one description and give it different bodies by changing how it is read. Ada makes those choices available to the hand. The resulting plant-like outline does not, by itself, tell us how a living plant grows.
+ 
+ Advance again. More letters appear; the held drawing stays. Each F has become a short sequence of movements and turns. The turning signs also occupy places in the sentence without leaving segments. A symbol without a replacement passes through unchanged. The new letters wait for the next generation before they too can be replaced. A small loop has a rhythm, and a place where its repetition must stop.
+ 
+@@ -18,8 +20,10 @@
+ 
+ The desk also has a limit. When another complete generation would exceed its symbol budget, the previous one remains. The readout tells us where construction stopped. A long sentence may be abbreviated on the label too. One limit changes what was made; the other changes how much of its record we can see.
+ 
+-Eight presets give us places to begin. Cantor carries the thirds from the previous hall into letters: one leaves a line, another crosses a gap without leaving one. These presets are a selection from what we could write. The desire for another body may lead us to change the rule; the desire to inhabit it asks for more than these thin, non-colliding drawings provide.
++Eight presets give us places to begin. Cantor carries the thirds from the previous hall into letters: one leaves a line, another crosses a gap without leaving one. The name recalls Georg Cantor and the distinction we met between the number of points and the length they occupy. Here his construction returns as a sentence we can change before drawing it. These presets are a selection from what we could write. The desire for another body may lead us to change the rule; the desire to inhabit it asks for more than these thin, non-colliding drawings provide.
+ 
+ <!-- @ -->
+ 
+ The earlier trees, string study and city grammar remain beyond the desk. Three trees grown from three traditions’ axioms ask whose grammar a rule is. Resemblance invites comparison without establishing a shared procedure. Carry the bracket into Growth: what must a branch remember so that another branch can begin?
++
++[^1]: Przemyslaw Prusinkiewicz and Aristid Lindenmayer, [*The Algorithmic Beauty of Plants*](https://algorithmicbotany.org/papers/#abop), chapter 1, on the biological origins of L-systems and their graphical interpretation. Daniel Shiffman's [*The Nature of Code*](https://natureofcode.com/fractals/#l-systems) introduces the same separation through a turtle reader.

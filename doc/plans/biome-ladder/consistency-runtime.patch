@@ -1,0 +1,237 @@
+--- before/commons/hazards/biome_ladder/ladder_encounter.gd
++++ after/commons/hazards/biome_ladder/ladder_encounter.gd
+@@ -35,6 +35,7 @@
+ var volley_step := 0
+ var volley_timer := 0.0
+ var last_volley: Array[int] = []
++var has_started := false
+ const VOLLEY_INTERVAL := 4.8
+ 
+ func _ready() -> void:
+@@ -96,7 +97,7 @@
+ 	for y in [0.65, 1.95, 3.25, 4.55]:
+ 		_surface(Vector3(0, y, 3.27), Vector3(7.2, 0.018, 0.018), Color(0.12, 0.12, 0.12))
+ 	volley_label = _label("3 ROWS / 3 COLUMNS", Vector3(0, 4.95, 3.5), 40, 0.004)
+-	_label("One place stays empty when a skull falls.\nRead the line before the ball follows it.", Vector3(0, 4.64, 3.5), 26, 0.0022)
++	_label("A FALL LEAVES AN EMPTY PLACE", Vector3(0, 4.69, 3.5), 30, 0.004)
+ 	if stage >= 5:
+ 		_label("CENTRE COLUMN\nARROWS > SIGNAL > ONE TURN", Vector3(0, 5.55, 3.5), 34, 0.0035)
+ 
+@@ -243,6 +244,9 @@
+ 	_small_button("FULL BIOME", Vector3(2.2, 0.85, 9.6), mature_action)
+ 	_small_button("MENU", Vector3(3.25, 0.85, 9.6), menu_action)
+ 	_label("A hit drops a head. Three hits end your life.\nSmall cubes restore one hit.", Vector3(2.2, 0.54, 9.56), 23, 0.0015)
++	_label("START / RESUME keeps your work. RESET restores it.", Vector3(2.2, 0.37, 9.56), 23, 0.0015)
++	if stage >= 2:
++		_label("READ THE BRIGHT PATH.\nSTEP ASIDE. USE THE COVER.", Vector3(4.35, 2.60, 7.52), 30, 0.0035)
+ 	if stage >= 4:
+ 		var hint := "Shoot one tile. Watch all its copies flash."
+ 		if stage >= 5: hint = "Shoot a tile to turn its arrows.\nThe centre balls follow, signal, then turn once."
+@@ -382,8 +386,11 @@
+ 	floor_marks.clear()
+ 
+ func start_round() -> void:
+-	if running or player_dead: return
+-	reset_round(); running = true
++	# Resume this encounter: no erasing paint, restoring heads, healing or replenishing pickups.
++	if running or player_dead or completed: return
++	running = true; has_started = true
++	# A cancelled windup gets a fresh warning for the next group on resume.
++	volley_timer = 0.0
+ 	for head in heads: head.set_active(true)
+ 	_update_readout()
+ 
+@@ -396,6 +403,7 @@
+ func reset_round() -> void:
+ 	if player_dead: return
+ 	rest(); completed = false; player_hits = 0; collected = 0; hit_cooldown = 0
++	has_started = false
+ 	_clear_floor_marks()
+ 	_reset_floor_tiles()
+ 	volley_step = 0; volley_timer = 0; last_volley.clear()
+@@ -418,7 +426,11 @@
+ func _update_readout() -> void:
+ 	if not is_instance_valid(readout): return
+ 	var down := heads.filter(func(head): return head.destroyed).size()
+-	readout.text = "%s / %d OF %d DOWN / YOU %d OF 3" % ["CLEAR" if completed else "PLAY" if running else "READY", down, heads.size(), player_hits]
++	var caption := "RESUME" if has_started and not running else "START"
++	start_button.label = caption
++	for child in start_button.get_children():
++		if child is Label3D: child.text = caption
++	readout.text = "%s / %d OF %d DOWN / YOU %d OF 3" % ["CLEAR - RESET TO REPLAY" if completed else "PLAY" if running else "REST" if has_started else "READY", down, heads.size(), player_hits]
+ 	for i in range(address_labels.size()):
+ 		@warning_ignore("integer_division")
+ 		var row := i / 3
+--- before/commons/hazards/biome_ladder/ladder_skull.gd
++++ after/commons/hazards/biome_ladder/ladder_skull.gd
+@@ -57,6 +57,7 @@
+ 	var target := (get_parent() as Node3D).to_global(destination)
+ 	var start := global_position + global_position.direction_to(target) * 0.42
+ 	pending_path = ArrayPath.positions(start, target, 1.0 if slot % 2 == 0 else -1.0)
++	pending_path = ArrayPath.ending_on_floor(pending_path, get_parent().global_transform)
+ 	if uses_field():
+ 		start = global_position + Vector3.BACK * 0.42
+ 		pending_path = get_parent().direction_field.preview(start, ChangeBall.FIELD_SECONDS, 1.8)
+@@ -72,6 +73,7 @@
+ 	if not active or destroyed: return null
+ 	var shot: Node3D = ChangeBall.new() if uses_field() else LadderBall.new()
+ 	shot.stage = stage
++	shot.arena_frame = get_parent()
+ 	shot.tint = Color.from_hsv(fposmod(slot * 0.27 + phase * 0.025, 1), 0.65, 0.95) if stage >= 3 else Color(0.85, 0.85, 0.85)
+ 	shot.direction = global_position.direction_to((get_parent() as Node3D).to_global(destination))
+ 	shot.position = position + shot.direction * 0.42
+@@ -84,6 +86,7 @@
+ 		if pending_path.is_empty():
+ 			var target := (get_parent() as Node3D).to_global(destination)
+ 			pending_path = ArrayPath.positions(global_position + shot.direction * 0.42, target, 1.0 if slot % 2 == 0 else -1.0)
++			pending_path = ArrayPath.ending_on_floor(pending_path, get_parent().global_transform)
+ 		shot.waypoints = pending_path.duplicate()
+ 		shot.position = (get_parent() as Node3D).to_local(shot.waypoints[0])
+ 		pending_path.clear(); _clear_path_preview()
+--- before/commons/hazards/biome_ladder/ladder_ball.gd
++++ after/commons/hazards/biome_ladder/ladder_ball.gd
+@@ -7,6 +7,7 @@
+ var trail: CPUParticles3D
+ var waypoints := PackedVector3Array()
+ var waypoint_index := 1
++var arena_frame: Node3D
+ const ArrayPath := preload("res://commons/hazards/biome_ladder/array_path.gd")
+ 
+ func _ready() -> void:
+@@ -15,7 +16,7 @@
+ 	get_child(1).material_override.albedo_color = tint
+ 	get_child(2).material_override.set_shader_parameter("glow_colour", tint)
+ 	if waypoints.size() > 1:
+-		var drawing := ArrayPath.drawing(waypoints)
++		var drawing := ArrayPath.drawing(waypoints, false)
+ 		add_child(drawing); drawing.global_transform = Transform3D.IDENTITY
+ 	if stage >= 3:
+ 		trail = CPUParticles3D.new()
+@@ -30,12 +31,25 @@
+ 		add_child(trail)
+ 
+ func _physics_process(delta: float) -> void:
++	if spent: return
++	if _outside_arena():
++		_finish(); return
+ 	age += delta
+ 	radius_factor = minf(2.2, 1.0 + age * 0.22) if stage >= 1 else 1.0
+ 	get_child(0).shape.radius = 0.09 * radius_factor
+ 	get_child(1).scale = Vector3.ONE * radius_factor
+ 	get_child(2).scale = Vector3.ONE * radius_factor
+ 	_advance_motion(delta)
++	if not spent and _outside_arena(): _finish()
++
++func _outside_arena() -> bool:
++	if not is_instance_valid(arena_frame): return false
++	var local := arena_frame.to_local(global_position)
++	return absf(local.x) > 6.5 or absf(local.z) > 12.5 or local.y < -1.0
++
++func _finish() -> void:
++	spent = true
++	queue_free() # The shot owns its drawing; both leave together.
+ 
+ func _advance_motion(delta: float) -> void:
+ 	if waypoints.size() > 1:
+@@ -51,6 +65,8 @@
+ 	# Clamp to each waypoint, then spend the rest of this frame on the next edge.
+ 	# Sweeping every edge prevents cutting across a corner or skipping cover.
+ 	while remaining > 0.00001:
++		if waypoint_index >= waypoints.size():
++			_finish(); return
+ 		var distance := remaining
+ 		if waypoint_index < waypoints.size():
+ 			var offset := waypoints[waypoint_index] - global_position
+--- before/commons/hazards/biome_ladder/array_path.gd
++++ after/commons/hazards/biome_ladder/array_path.gd
+@@ -1,5 +1,6 @@
+ extends RefCounted
+ ## An ordered position list, shared by the warning, projectile and its route drawing.
++const CUE_SHADER := preload("res://commons/hazards/biome_ladder/path_cue.gdshader")
+ 
+ static func positions(start: Vector3, target: Vector3, handedness: float) -> PackedVector3Array:
+ 	var forward := start.direction_to(target)
+@@ -12,19 +13,49 @@
+ 		start.lerp(target, 0.75) + side * width * handedness,
+ 		target])
+ 
+-static func drawing(points: PackedVector3Array) -> MeshInstance3D:
++static func ending_on_floor(points: PackedVector3Array, frame: Transform3D) -> PackedVector3Array:
++	# Preserve the five learned positions. One final, visible entry ends the miss on a tile.
++	var result := points.duplicate()
++	var target := frame.affine_inverse() * points[-1]
++	if absf(target.x) > 5.5 or absf(target.z) > 10.8: return result
++	var forward := target - frame.affine_inverse() * points[0]
++	forward.y = 0
++	var landing := target + forward.normalized() * 1.25
++	# Address a cell centre, not a grout seam. Exact tile collision still decides whether it paints.
++	landing.x = clampf(floor((landing.x + 6.0) / 2.0) * 2.0 - 5.0, -5.0, 5.0)
++	landing.z = clampf(floor((landing.z + 12.0) / 2.0) * 2.0 - 11.0, -11.0, 11.0)
++	landing.y = -0.12
++	result.append(frame * landing)
++	return result
++
++static func drawing(points: PackedVector3Array, warning: bool = true) -> MeshInstance3D:
+ 	var line := MeshInstance3D.new()
+ 	line.name = "StoredPositionPath"
+ 	line.top_level = true # Points are in world space; the drawing must not follow the ball.
+ 	var mesh := ImmediateMesh.new()
+-	mesh.surface_begin(Mesh.PRIMITIVE_LINES)
++	# A physical width survives distance and oblique views. Build once per warning/shot.
++	mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
++	var radius := 0.02 if warning else 0.009
+ 	for i in range(1, points.size()):
+-		mesh.surface_add_vertex(points[i - 1]); mesh.surface_add_vertex(points[i])
++		var axis := points[i] - points[i - 1]
++		if axis.length_squared() < 0.000001: continue
++		axis = axis.normalized()
++		var side := axis.cross(Vector3.UP).normalized()
++		if side.length_squared() < 0.01: side = axis.cross(Vector3.RIGHT).normalized()
++		var up := axis.cross(side).normalized()
++		for j in range(8):
++			var a := side * cos(TAU * j / 8.0) + up * sin(TAU * j / 8.0)
++			var b := side * cos(TAU * (j + 1) / 8.0) + up * sin(TAU * (j + 1) / 8.0)
++			var normals := [a, b, b, a, b, a]
++			var centres := [points[i - 1], points[i - 1], points[i], points[i - 1], points[i], points[i]]
++			for v in range(6):
++				mesh.surface_set_normal(normals[v])
++				mesh.surface_add_vertex(centres[v] + normals[v] * radius)
+ 	mesh.surface_end()
+ 	line.mesh = mesh
+-	var material := StandardMaterial3D.new()
+-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+-	material.albedo_color = Color(0.12, 0.12, 0.12)
++	var material := ShaderMaterial.new()
++	material.shader = CUE_SHADER
++	material.set_shader_parameter("cue_colour", Color.WHITE if warning else Color(0.50, 0.50, 0.50))
+ 	line.material_override = material
+ 	line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+ 	return line
+--- before/commons/hazards/biome_ladder/path_cue.gdshader
++++ after/commons/hazards/biome_ladder/path_cue.gdshader
+@@ -0,0 +1,11 @@
++shader_type spatial;
++render_mode unshaded, cull_disabled, shadows_disabled;
++// A bright core and dark silhouette remain distinct over the pale floor and grey sky.
++uniform vec4 cue_colour : source_color = vec4(1.0);
++void fragment() {
++	// The announced target can be the eye itself. Never fill the visitor's near view.
++	if (length(VERTEX) < 0.7) { discard; }
++	float facing = abs(dot(normalize(NORMAL), normalize(VIEW)));
++	ALBEDO = mix(vec3(0.025), cue_colour.rgb, smoothstep(0.25, 0.70, facing));
++	ALPHA = smoothstep(0.7, 1.5, length(VERTEX));
++}
+--- before/commons/hazards/biome_ladder/path_cue.gdshader.uid
++++ after/commons/hazards/biome_ladder/path_cue.gdshader.uid
+@@ -0,0 +1 @@
++uid://qeihjp5ffbca
+--- before/commons/hazards/biome_ladder/change_ball.gd
++++ after/commons/hazards/biome_ladder/change_ball.gd
+@@ -47,7 +47,6 @@
+ 	sampled_target = target_sampler.call() if target_sampler.is_valid() else global_position + direction * 4.0
+ 	target_sample_count += 1
+ 	turn_line = ArrayPath.drawing(PackedVector3Array([global_position, sampled_target]))
+-	turn_line.material_override.albedo_color = Color.WHITE
+ 	add_child(turn_line); turn_line.global_transform = Transform3D.IDENTITY
+ 	get_child(1).material_override.albedo_color = Color.WHITE
+ 	get_child(2).material_override.set_shader_parameter("strength", 1.7)

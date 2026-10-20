@@ -1,0 +1,368 @@
+{
+	"checks": [
+		{
+			"label": "Stage 0 / World and desktop adapter ready",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / 72 individually colliding tiles persist",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Original tile surface and collider agree",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / First impact changes only the hit tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / First impact scales to 0.8",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / First impact turns 22.5 degrees around Y",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Projectile remains black and white",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Scaled collider follows the drawn surface",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Neighbour tile stays unchanged",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Repeated hit multiplies scale again (0.64)",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Repeated hit adds another turn (45 degrees)",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Revealed gap has solid backing at floor level",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / A backing hit cannot recolour a tile through the gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / A shot into the gap cannot hit the old invisible tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Cover impacts do not transform tiles beneath them",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / REST keeps the transformed tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Player can stand in the revealed gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Existing catalyst can still be grabbed",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Held catalyst also transforms the tile it hits",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / RESET clears tile hit history and marks",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / RESET restores all tile poses",
+			"pass": true
+		},
+		{
+			"label": "Stage 1 / RESET restores the tile collider over the former gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / 72 individually colliding tiles persist",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Original tile surface and collider agree",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / First impact changes only the hit tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / First impact scales to 0.8",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / First impact turns 22.5 degrees around Y",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Projectile remains black and white",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Scaled collider follows the drawn surface",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Neighbour tile stays unchanged",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Repeated hit multiplies scale again (0.64)",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Repeated hit adds another turn (45 degrees)",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Revealed gap has solid backing at floor level",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / A backing hit cannot recolour a tile through the gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / A shot into the gap cannot hit the old invisible tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Cover impacts do not transform tiles beneath them",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / REST keeps the transformed tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Player can stand in the revealed gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Existing catalyst can still be grabbed",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Held catalyst also transforms the tile it hits",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / RESET clears tile hit history and marks",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / RESET restores all tile poses",
+			"pass": true
+		},
+		{
+			"label": "Stage 2 / RESET restores the tile collider over the former gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / 72 individually colliding tiles persist",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Original tile surface and collider agree",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / First impact changes only the hit tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / First impact scales to 0.8",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / First impact turns 22.5 degrees around Y",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Same hit also paints the transformed tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Scaled collider follows the drawn surface",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Neighbour tile stays unchanged",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Repeated hit recolours the same rotating tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Repeated hit multiplies scale again (0.64)",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Repeated hit adds another turn (45 degrees)",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Revealed gap has solid backing at floor level",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / A backing hit cannot recolour a tile through the gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / A shot into the gap cannot hit the old invisible tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Cover impacts do not transform tiles beneath them",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / REST keeps the transformed tile",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Player can stand in the revealed gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Existing catalyst can still be grabbed",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Held catalyst also transforms the tile it hits",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / RESET clears tile hit history and marks",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / RESET restores all tile poses",
+			"pass": true
+		},
+		{
+			"label": "Stage 3 / RESET restores the tile collider over the former gap",
+			"pass": true
+		},
+		{
+			"label": "Stage 0 / Real input sends a ball",
+			"pass": true
+		},
+		{
+			"label": "Stage 0 / Primitives retains its original unchanging floor",
+			"pass": true
+		},
+		{
+			"label": "Stage 0 / Exit restores saved museum unlock",
+			"pass": true
+		},
+		{
+			"label": "Stage 0 / Exit removes the local ability callback",
+			"pass": true
+		}
+	],
+	"passed": 90,
+	"rendered": true,
+	"source_sha256": "887d00eafa9e5e620be66dbc12c8a4ab70796d6ec434410b94c31c615820ef7a",
+	"total": 90
+}

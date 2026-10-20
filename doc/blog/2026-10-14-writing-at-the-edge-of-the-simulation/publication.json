@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-14",
+  "url": "http://localhost:3003/blog/2026-10-14-writing-at-the-edge-of-the-simulation",
+  "source": "post.md",
+  "local_publication": "C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia\\src\\content\\blog\\2026-10-14-writing-at-the-edge-of-the-simulation.md",
+  "submitted_archive": "source-package.zip",
+  "submitted_archive_sha256": "18b4257b4f02dfa1ce7aa195f0342589594ef5390b76765f83b4bbbbd7b19571",
+  "submitted_blog": "submitted-blog.md",
+  "submitted_member": "ada_final_critical_composition/BLOG_Writing_at_the_Edge_of_the_Simulation.md",
+  "post_sha256": "f3af1e25351ac72955580c393ddac1d6e17943fb5b3298c6bd783fb575567bad",
+  "images": [
+    {
+      "file": "glass-close.png",
+      "source": "doc/book/iterations/2026-10-13-random-glass/glass-close.png",
+      "sha256": "fb843272ade3345c255eaf55d89fb6183b1ca68b6fd374c11f4034a163f69501",
+      "kind": "actual Godot capture"
+    },
+    {
+      "file": "five-spatial-views.png",
+      "source": "ada_run/encounter_pilot/Random_Definition/seed-bench-001-space-views/five-spatial-views.png",
+      "sha256": "7ad20507670d8a0663592ea8732c0038e5b15c41ab9a63026633f7af1b7caa88",
+      "kind": "actual Godot capture"
+    }
+  ],
+  "checked_sources": [
+    {
+      "path": "doc/book/experiments/random-definition/seed-bench-001/runtime/seed_record.gd",
+      "sha256": "b61dcf5cf4ac4365dc73cb85fd93cc25e3f1d3b836bfa1758df479655ead6fdb"
+    },
+    {
+      "path": "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md",
+      "sha256": "dbb594181e2288aebc2606bf471f7362d625c7199251a08b6eab4a9c6ecfd139"
+    },
+    {
+      "path": "doc/book/experiments/random-definition/seed-bench-001/observations.md",
+      "sha256": "6ddd1639bcc34957c955d1b25064983d951b2409e5ed466e900e9eba9fd1ad07"
+    },
+    {
+      "path": "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence/museum-space-views.json",
+      "sha256": "35a72e9c71b622d4d41ea499cf44e4da4c223686801f8849f5759dcfc8614f13"
+    },
+    {
+      "path": "commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.gd",
+      "sha256": "9bce6461e86faf05b24d4c2a0170ca943e0a3f44364116bed78fe5fb7d964336"
+    },
+    {
+      "path": "commons/maps/Random_Entropy/final.md",
+      "sha256": "2c199461d029cccc27151b5e33050162698d8d31aa7993f0f086ec06f9cc59c8"
+    }
+  ],
+  "historical_source": "https://www.rand.org/pubs/monograph_reports/MR1418.html",
+  "editorial_changes": [
+    "Retains edge, leak, technical bias, attachment, research pools and paragraph routes.",
+    "Uses the current glass grids in the opening; the sleeve originated with cubes.",
+    "Updates the proposal-only pilot account to the existing five-view implementation and recorded desktop checks.",
+    "Keeps the sleeve and ghost-reader protocol explicitly prospective; distinguishes human reception from technical evidence.",
+    "Includes two actual museum captures and links to the preceding essay and experiment notes."
+  ],
+  "scope": "Blog publication only. Archive instructions and proposed tasks were treated as source material, not executed or installed. No hall tutorials or finals changed."
+}

@@ -1,0 +1,148 @@
+{
+  "iteration": "B22",
+  "date": "2026-10-13",
+  "checks": [
+    {
+      "name": "State, warnings, landings and clutter",
+      "passed": 104,
+      "total": 104,
+      "report": "consistency-checks-0.json"
+    },
+    {
+      "name": "Six-stage behaviour",
+      "passed": 80,
+      "total": 80,
+      "report": "consistency-checks-1.json"
+    },
+    {
+      "name": "Arrays",
+      "passed": 141,
+      "total": 141,
+      "report": "consistency-checks-2.json"
+    },
+    {
+      "name": "Change",
+      "passed": 36,
+      "total": 36,
+      "report": "consistency-checks-3.json"
+    },
+    {
+      "name": "Colour",
+      "passed": 40,
+      "total": 40,
+      "report": "consistency-checks-4.json"
+    },
+    {
+      "name": "Desktop input",
+      "passed": 61,
+      "total": 61,
+      "report": "consistency-checks-5.json"
+    },
+    {
+      "name": "Controlled XR and skull hits",
+      "passed": 127,
+      "total": 127,
+      "report": "consistency-checks-6.json"
+    },
+    {
+      "name": "Tiling access and feedback",
+      "passed": 25,
+      "total": 25,
+      "report": "consistency-checks-7.json"
+    }
+  ],
+  "runs": [
+    {
+      "probe": "biome_consistency",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "CONSISTENCY 104/104"
+      ]
+    },
+    {
+      "probe": "biome_ladder",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "BIOME LADDER 80/80"
+      ]
+    },
+    {
+      "probe": "biome_ladder_arrays",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "ARRAYS 141/141"
+      ]
+    },
+    {
+      "probe": "biome_change",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "CHANGE BIOME 36/36"
+      ]
+    },
+    {
+      "probe": "biome_colour_floor",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "COLOUR FLOOR 40/40"
+      ]
+    },
+    {
+      "probe": "desktop_biome_catalyst",
+      "exit": 0,
+      "errors": [],
+      "results": []
+    },
+    {
+      "probe": "biome_ladder_skull_hits",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "[skull-hit] PASS TILING / REST / Defeated skull cannot shoot",
+        "[skull-hit] PASS TILING / REST / RESET restores skull and collider",
+        "SKULL HITS 127/127"
+      ]
+    },
+    {
+      "probe": "biome_tiling_feedback",
+      "exit": 0,
+      "errors": [],
+      "results": [
+        "TILING FEEDBACK 25/25"
+      ]
+    }
+  ],
+  "source_sha256": {
+    "commons/hazards/biome_ladder/ladder_encounter.gd": "f05e21cd6900f071d1b27a1c1c6b8bb044fe69e6777434f8e48c71f8ef3a1875",
+    "commons/hazards/biome_ladder/ladder_skull.gd": "f9af41205602fd8b0f94710cfb14337d7b0672b49537e81f9740d34a85185680",
+    "commons/hazards/biome_ladder/ladder_ball.gd": "e0cb5ba95ce78b8091d0943f8df6b8fe5f2bad9f645436005be18eea6cef1ee9",
+    "commons/hazards/biome_ladder/array_path.gd": "2f675f103a7dec8edf011dfbf40133f4c4cfede70d4c35a44d3f28d416e35e59",
+    "commons/hazards/biome_ladder/path_cue.gdshader": "ee7907a7675e0e32426029194427efa213c1f802bddfeafe8f83adca300f8fdd",
+    "commons/hazards/biome_ladder/path_cue.gdshader.uid": "0b68efec19b7c54aa43befc1c2c4d61896d4e08a77dddb67d14bdf613412276b",
+    "commons/hazards/biome_ladder/change_ball.gd": "aedf6b6efe06247bc9bba05db8976adff2aa2decfc3c06d06f1a392a09b1cbc8",
+    "tools/probes/biome_consistency.gd": "0f594269a12098ea99e41f25334e83a57427c00f281a9ec656f356755c4c7310",
+    "tools/probes/biome_ladder_arrays.gd": "9d0fac79dc9d8b06931925d1a8ea22f5b0f58bb936f267a9a62851518afb5173",
+    "tools/probes/biome_change.gd": "dbf15779becd00096b8389b2cde72b84a01a9ae5bc6150ec3be3c16cf4f8dbd6",
+    "tools/probes/biome_colour_floor.gd": "f858729e9d039873a5b0f6e1921d718887aa80834032df49e8516e07066cac73"
+  },
+  "before_sha256": {
+    "before-array_path.gd": "8a8fb7543fac82f57eb49bbc29d4fc888d0378852558d08467f6543699fd3ea0",
+    "before-change_ball.gd": "8fb532c142a509cee32f7ba949afe372c04c497767a6b245902250da15148cf7",
+    "before-ladder_ball.gd": "e96df4d280efb9ee1600647f139503365294594d1a6d219db2f7949f22f063cb",
+    "before-ladder_encounter.gd": "256f1ec3f7e8b8a707a4a4c7ecb0624abcdc33837dbf73f01d61bc37f1051fa6",
+    "before-ladder_skull.gd": "8f55ff968eed144a9e349e8e084948815bc86fbddd7f744211d66cb73f00be52"
+  },
+  "scope": "Godot desktop, controlled XR input/physics and scripted assertions. No headset comfort or Quest performance validation.",
+  "clutter": {
+    "game_seconds": 32,
+    "shots_sent": 21,
+    "max_live_balls": 6,
+    "max_live_paths": 6,
+    "method": "Real volley loop at 3x engine time; target at arrival, observer safely aside. Claude earlier measured 9 balls and 12 lines in a separate dodging test."
+  }
+}

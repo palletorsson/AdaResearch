@@ -1,0 +1,21 @@
+{
+  "url": "http://localhost:3003/blog/2026-10-14-writing-at-the-edge-of-the-simulation",
+  "checks": [
+    "Blog route returns HTTP 200",
+    "Title and central passages render; unsupported reading link removed",
+    "Both image URLs serve the inspected source bytes",
+    "Post appears in the blog index",
+    "Previous essay link returns HTTP 200"
+  ],
+  "images": [
+    {
+      "file": "glass-close.png",
+      "sha256": "fb843272ade3345c255eaf55d89fb6183b1ca68b6fd374c11f4034a163f69501"
+    },
+    {
+      "file": "five-spatial-views.png",
+      "sha256": "7ad20507670d8a0663592ea8732c0038e5b15c41ab9a63026633f7af1b7caa88"
+    }
+  ],
+  "word_count": 1980
+}

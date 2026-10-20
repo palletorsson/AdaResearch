@@ -156,9 +156,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_GameOfLife"
       ],
@@ -173,9 +173,12 @@
       "proposal": "Edit the lab_room token's signage_top / signage_sub / annotation_top in the map to what the sequence can back (e.g. 'RULE 110 / a claim to test' and drop 'Game of Life is Turing complete'), or remove the two annotation keys; alternatively give the lab one sentence in the chapter that names the claim as the room's, not the book's.",
       "evidence": "commons/maps/CA_GameOfLife/map_data.json:1740 (lab_room#...#signage_top:TURING MACHINE LAB#signage_sub:Rule 110 → universal computation#annotation_top:... Game of Life is Turing complete); structure layer rows z19-z35 are a second room reached through the z19 opening; commons/maps/CA_AgentsCircuits/final.md:27 (footnote ca-resemblance); the museum prints no labels of its own (commons/scenes/endless_museum.gd:9946-9947) so this signage is the only text in the room.",
       "review": "kept: Quote exact at commons/maps/CA_GameOfLife/final.md:38. Signage confirmed at map_data.json:1740 (signage_top:TURING MACHINE LAB / signage_sub:Rule 110 → universal computation / annotation_top:'M = (Q, Σ, Γ, δ, q0, F) — Game of Life is Turing complete'); lab_room.gd:686-693 reads config_signage_top/_sub/annotation_top and renders them at :3746 (SignageTop, font 72, white), :3757 (sub) and :3784 (east-wall annotation). Structure layer: row z19 opens at x5-7; rows z20-z35 are the 16-row rear room; the exit teleporter sits at z35 x6, so the rear room is on the way OUT, not a side gallery. A VR visitor does meet it: commons/data/map_authored.json lists all eight CA maps, em_plan.json row 88 is authored:'map' with the 37x15 map tile, and the bake row cellularautomata|ca gameoflife stands lab_room at [6,26] (map (6,22) + 4 apron rows). _speak_plaque retired at endless_museum.gd:9946-9947, so this signage is the only text in the room. Footnote at CA_AgentsCircuits/final.md:27 as cited. Note the annotation also prints the Turing 7-tuple; the proposal's 'drop the annotation keys' covers it. Overlaps index 9 (same sentence, same hall) — do them together.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe retained lab now asks WHAT COUNTS AS COMPUTATION? and names its tape/head/states model. The unsupported universality assertion and side annotations are removed from this placement. Native photographs exposed occlusion by the apparatus and exit light; the sign uses the existing rear-wall option plus a new optional -0.55 m height offset. Other labs default to offset zero. All five artifacts stay.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.241Z"
     },
     {
       "id": "book_cellularautomata.002",
@@ -212,9 +215,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_EdgeOfChaos"
       ],
@@ -229,9 +232,12 @@
       "proposal": "'The next hall, the first of Fractals, changes the instruction.'",
       "evidence": "commons/maps/CA_EdgeOfChaos/final.md:44; commons/maps/CA_AgentsCircuits/final.md:25 ('in Fractals'); commons/scenes/endless_museum.gd:9946-9947 (_speak_plaque: 'retired 2026-08-19: no labels in space').",
       "review": "kept: Quote exact at commons/maps/CA_EdgeOfChaos/final.md:44. The fact is right — curriculum_spine.json spine.sequences puts fractals after cellularautomata, em_plan.json row 94 is fractals | fractal recursion | Fractal_Recursion, and fractals.json maps[0] is Fractal_Recursion — but the visitor never sees a map id: _speak_plaque is retired (endless_museum.gd:9946-9947), the standing number plaque too (:10070-10073), and the wall carries one book line per body. CA_AgentsCircuits/final.md:25 already uses 'in Fractals'. Clear prose defect, S fix.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nAlready corrected in the current chapter: The next hall, the first of Fractals, changes the instruction. Verified against the current opening of Fractal_Recursion and preserved this paragraph verbatim. No duplicate rewrite needed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-ending-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T13:24:27.103Z"
     },
     {
       "id": "book_cellularautomata.004",
@@ -240,9 +246,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_Introduction"
       ],
@@ -257,9 +263,12 @@
       "proposal": "At the first rule change (line 13): 'Two panels face you: the study buttons, and behind them, nearer the board, a smaller CA RULES panel. Press 90 there — its sliders can stay where they are — and keep the single seed.' Then at line 27: 'Press 30 on the rule panel and keep the single seed.' In CA_AgentsCircuits line 7: 'Press 90 on the explorer's CA RULES panel and RST to return to the central seed.'",
       "evidence": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:117 (unconditional _create_vr_controls), :249-261 (panel 'CA RULES': sliders RULE, SPEED; buttons '30','90','110','184','RST'), :283 (panel z 0.95), :335-339 (preset → rule setter, RST → _reset); commons/artifacts/ca_rule_explorer/neighbour_study.gd:30-34 (panel 'NEXT GENERATION' STEP/RUN/SEED/CELL at z 1.22); CA_Introduction/final.md:13, :27; CA_AgentsCircuits/final.md:7.",
       "review": "amended: Quote exact at commons/maps/CA_Introduction/final.md:27 (also :13 and CA_AgentsCircuits/final.md:7). Confirmed: ca_rule_explorer.gd:249-261 builds the 'CA RULES' panel (RULE and SPEED sliders; buttons labelled 30, 90, 110, 184, RST), and _create_vr_controls() is called unconditionally at :117 so it exists in the neighbour-study configuration; neighbour_study.gd:30-32 builds 'NEXT GENERATION' (STEP RUN SEED CELL). Geometry: the CA RULES panel sits at z = board_size/2 + 0.15 = 0.95 (:283) and the study panel at z 1.22 (neighbour_study.gd:34), so the rule panel is BETWEEN the study buttons and the board, not simply beside them — the proposal should say so. Pressing 30 runs the rule setter's _reset() (:35-41, :352-364), which keeps seed_pair, so 'keep the single seed' stays true.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe opening now locates the smaller CA RULES panel between the study buttons and board and names its actual 90 and 30 buttons. Agents/Circuits makes the same one-sentence correction, naming 90 then RST. Native signals verify preset selection, reset and held STEP in the opening; headset reach/readability remain unverified.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.265Z"
     },
     {
       "id": "book_cellularautomata.005",
@@ -296,9 +305,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_EdgeOfChaos"
       ],
@@ -313,9 +322,12 @@
       "proposal": "'This hall was built under the name Edge of Chaos; let the name remain a question.'",
       "evidence": "commons/scenes/endless_museum.gd:9946-9947 (_speak_plaque retired, 'no labels in space'); commons/maps/CA_EdgeOfChaos/final.md:1 (H1) and :38; algorithms/cellularautomata/ca_showcase/difference_model.gd:2-3 ('No measured critical point, Lyapunov exponent or rule-table lambda').",
       "review": "kept: Quote exact at commons/maps/CA_EdgeOfChaos/final.md:38. Confirmed the museum prints no hall name: _speak_plaque retired (endless_museum.gd:9946-9947), the standing number plaque retired (:10070-10073), and what a showing card carries is 'cellularautomata:00NN' (:10054) — the chapter id and a number. Wall text is one book line per body via _speak_lines (:9957) from commons/data/book/cellularautomata.json (self_organization_ca: 'Change one address…'), which contains no 'Edge of Chaos'. The map's own title is the H1 'How far does one difference go?' (map_info.title), so even a grid-mode 'an' board (GridUtilitiesComponent.gd:680) would not print 'Edge of Chaos'; the phrase exists only in the map id and desktop dev overlays (:17626 spine picker). difference_model.gd:2-3 as cited. The proposal keeps the deflation and stops asserting a sign the reader never saw.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe chapter now says the hall was conceived under the name Edge of Chaos, rather than implying the visitor has seen that title in the room. Langton remains a question about retaining, transmitting and changing information. Corrected the lambda footnote: non-quiescent rule-table outputs, not living cells in a field. Removed the overgeneralisation that every image filter is a cellular automaton run once; retained the concrete blur comparison and critical ending.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-ending-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T13:24:27.148Z"
     },
     {
       "id": "book_cellularautomata.007",
@@ -324,9 +336,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_Introduction"
       ],
@@ -341,9 +353,12 @@
       "proposal": "Cut the second paragraph to its last two sentences ('Keep the pleasure of the blob. Bring an unfinished question with it.') and attach them to the first, so 'The board waits in the left-hand corridor near the entrance' is the fourth sentence; if the recap is wanted, move it to the closing region beside 'carry three choices'.",
       "evidence": "Word counts (prose, code and anchors excluded): CA_Introduction 1,262; the other seven 537-874; commons/maps/Lab_Path/final.md:21-23 already carries the previous-step framing and 'Bring one of your unfinished questions with you'; CA_Introduction/final.md:3-5.",
       "review": "kept: Quote exact at commons/maps/CA_Introduction/final.md:5. My own count (code blocks, anchors and comments excluded) gives 1,260 for CA_Introduction against 537-871 for the other seven — the same picture as the task's 1,262 / 537-874. Lab_Path/final.md:21-23 does carry the framing ('a cell's next state will depend on what its neighbours were doing in the previous step') and 'Bring one of your unfinished questions with you', so the second paragraph's recap is a second pause. One qualification: Lab_Path is the last map of the noise sequence (noise.json maps[49]) and precedes CA_Introduction in the book, but it is not a dealt museum hall (em_plan.json mentions it only as an inactive teleporter 'Lab Path - not connected' in Noise_Perlin_Simplex's row), so the museum walker arrives from Noise_Perlin_Simplex — which if anything strengthens the case for reaching the board sooner. A pacing judgment, but a defensible one at M.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nShortened the Noise recap to Keep the pleasure of the blob. Bring an unfinished question with it. The board and its invitation to predict arrive sooner; the earlier Noise ending already carries the fuller critique.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.282Z"
     },
     {
       "id": "book_cellularautomata.008",
@@ -352,9 +367,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_SoftRules"
       ],
@@ -369,9 +384,12 @@
       "proposal": "'Find the small gold cross W on either table, just outside the seeded square; the side desk reads its values. In both fields V is zero there.'",
       "evidence": "commons/artifacts/rd_artifact/exchange_study.gd:126-130 (WitnessX/WitnessZ boxes at the table coordinates of (12,15)), :88 (desk readout 'W (12,15) U V'), :139-141 (console at x -4.5); commons/artifacts/rd_artifact/live_field.gd:21-23 (seeded square x,y in 13..18).",
       "review": "kept: Quote exact at commons/maps/CA_SoftRules/final.md:7. Confirmed: exchange_study.gd:126-130 builds the gold WitnessX/WitnessZ cross ON each table at the table coordinates of (12,15) (wx from 12.5/32, wz from 15.5/32, centred on cx = ±2.45); WITNESS = 15*32+12 at :5 is that address; :88 prints 'W (12,15)  U  V' on the desk readout; :139-141 puts the console at x -4.5, z -1.7 — about 2.9 m from B's cross and 7.1 m from A's. live_field.gd:21-23 seeds x,y in 13..18, so (12,15) is the first unseeded cell beside the square with V = 0 in both fields; one step with exchange gives lap_v = 0.25 → v = 0.02 ('a little arrives'), zero without. The sentence sends the reader to the console for a mark that is on the tables; the proposal fixes it.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe text now sends the reader to the small gold frame on either table and names the side desk as its readout. The native geometry is a square frame, not a cross. W starts outside the seed with V=0 in both fields; one STEP brings V only to the field with exchange. The existing body-seeding encounter and clockmaker remain word for word.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:43:59.663Z"
     },
     {
       "id": "book_cellularautomata.009",
@@ -408,9 +426,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_GameOfLife"
       ],
@@ -425,9 +443,12 @@
       "proposal": "One sentence before the handover, in the sequence's own form: 'Beyond the basin the hall goes on — a stack of columns, the orb again, a lab, a mirrored automaton — further encounters this history does not need to explain.'",
       "evidence": "commons/maps/CA_GameOfLife/map_data.json interactables: ca_columns (5,26), dark_sphere (5,25), lab_room (6,22), mirrored_cellular_automata (6,32); structure rows z19-z35; CA_GameOfLife/final.md:40 (empty '<!-- @ -->' region); CA_Introduction/final.md:79 and CA_EdgeOfChaos/final.md:40 for the convention.",
       "review": "kept: Quote exact at commons/maps/CA_GameOfLife/final.md:38 and the closing anchor at :40 is empty. Map interactables confirmed: lab_room (6,22), dark_sphere (5,25), ca_columns (5,26), mirrored_cellular_automata (6,32); structure row z19 opens at x5-7 and rows z20-z35 form the rear room; the exit teleporter is at z35 x6, so the visitor walks the length of it to leave. The map's own description says 'The existing lab, columns, mirrored work and orb remain in the rear gallery.' Convention confirmed at CA_Introduction/final.md:79 and CA_EdgeOfChaos/final.md:40. The museum builds this hall from the map (map_authored.json; em_plan row 88 authored:'map'; bake stands the four rear works). Do together with index 0 — one sentence can name the lab and own its claim.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe chapter now notices the rear columns, orb, lab and mirrored automaton. It distinguishes the apparatus model from a proof, without inventing a new primary lesson or removing the supporting collection.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.323Z"
     },
     {
       "id": "book_cellularautomata.011",
@@ -436,9 +457,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_ExpandingSpace"
       ],
@@ -453,9 +474,12 @@
       "proposal": "'Press SOURCE once, until the readout shows PROBE / NEAR, then press RUN.'",
       "evidence": "algorithms/cellularautomata/living_architecture/proximity_study.gd:9 (source_mode = 0, VISITOR), :45-46 (next_source cycles VISITOR→PROBE→NONE), :63-65 (readout text), :134-136 (desk at x -2.7, z -1.6); decaying_bridge.gd:41 (decay_radius 1.35), :77 (cell (0,0) at x -1.2, z 0).",
       "review": "kept: Quote exact at commons/maps/CA_ExpandingSpace/final.md:7. Confirmed: proximity_study.gd:9 source_mode = 0 (VISITOR) and :10 probe_near = true, so ONE press of SOURCE (:45-46 cycles VISITOR→PROBE→NONE) yields 'PROBE / NEAR' (:63-64); desk at x -2.7, z -1.6 (:134-136); decaying_bridge.gd:41 decay_radius 1.35 and :77 puts cell (0,0) at x -1.2, z 0 — 2.19 m from the console, further from a body standing in front of it, so RUN from the desk in VISITOR mode decays nothing and 'The number falls' does not happen. In PROBE/NEAR the probe (0, 3.6) is 0.15 m from W (2,6) at (0, 3.6), so the witness does fall. A real VR trap, S fix.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe opening now says to press SOURCE once, read PROBE / NEAR, then press RUN. Native console signals confirm the initial VISITOR state, the single press selecting the near probe, RUN/hold and the witness losing health.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:43:59.696Z"
     },
     {
       "id": "book_cellularautomata.012",
@@ -492,9 +516,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_GameOfLife"
       ],
@@ -509,9 +533,12 @@
       "proposal": "Keep line 13 and the `var index` excerpt. Replace the first two sentences of line 19 with a back-reference so the paragraph reads: 'Here `a`, `b` and `c` are the three states, read into one index as the board in the first hall did. The bridge's `_apply_rule` reads bit `index` from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.'",
       "evidence": "commons/maps/CA_GameOfLife/final.md:13-19; commons/maps/CA_Introduction/final.md:23-25 (same lesson, `100` vs `010`); algorithms/cellularautomata/ca_bridge/ca_bridge.gd:229-231 (_apply_rule, index).",
       "review": "amended: Quote exact at commons/maps/CA_GameOfLife/final.md:19; the repeat against CA_Introduction/final.md:23-25 is real and ca_bridge.gd:229-231 is the cited _apply_rule. But the proposal cuts too wide: line 13 is only the lead-in to the excerpt, and of line 19 only the first two sentences repeat the lesson; the last two ('The bridge's _apply_rule reads bit index from the number 30. Each answer is written into a new row while the old row remains available to its other neighbours.') are this hall's own facts and should stay. Narrow the cut and the effort drops to S.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKept the bridge index excerpt and solver explanation; replaced the repeated bit-weight lesson with a return to the board in the first hall. The new walking-history paragraphs stay word for word.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.356Z"
     },
     {
       "id": "book_cellularautomata.014",
@@ -520,9 +547,9 @@
       "effort": "10min",
       "skill": "design",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_Introduction"
       ],
@@ -537,9 +564,12 @@
       "proposal": "After the `_apply_rule` excerpt, one sentence: 'Rule 90 answers the eight arrangements 111, 110, 101, 100, 011, 010, 001, 000 with 0, 1, 0, 1, 1, 0, 1, 0 — the byte 01011010 read from its top bit down — so `100` becomes occupied and `010` does not.' Optionally (L, web only) the PNG as first proposed, in the block's folder referenced like the illustrated chapters.",
       "evidence": "commons/artifacts/ca_rule_explorer/ca_rule_explorer.gd:368-370 (index = L<<2|C<<1|R, bit of rule; 90 = 0b01011010); neighbour_study.gd:61 (plate shows one cell's LEFT SELF RIGHT and NEXT); commons/scenes/endless_museum.gd:9957-9990 (_speak_lines: one line per body from the book JSON, no images); grep '![' over commons/maps/*/final.md: 28 chapters, none CA.",
       "review": "amended: Quote exact at commons/maps/CA_Introduction/final.md:25; grep confirms 28 chapters carry images and none of the eight CA chapters do; ca_rule_explorer.gd:368-370 and neighbour_study.gd:61 as cited. But a PNG never reaches the headset: the museum hangs one book line per body (endless_museum.gd:9957 _speak_lines from commons/data/book/cellularautomata.json) and neither endless_museum.gd nor tools/book.py handles images, so the figure is a web-page improvement only — and in the hall the plate plus CELL already walks the ring one neighbourhood at a time. The eight answers fit in one sentence that reaches every reader; the PNG can stay as an optional web extra rather than an L task.",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nMade the two contrasting outcomes explicit: 100 yields an occupied cell, 010 an empty one. The existing Wolfram footnote now gives all eight ordered inputs and answers, keeping the main encounter moving. Native evaluation confirms 111 through 000 maps to 0,1,0,1,1,0,1,0. No new claim that all eight answers appear together in VR.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "one reader + one skeptic (Claude workflow)",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.374Z"
     },
     {
       "id": "book_cellularautomata.015",
@@ -548,9 +578,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_Introduction"
       ],
@@ -565,9 +595,12 @@
       "proposal": "Compare CA_Introduction/after.md with the live final.md and choose; keep #size:2.0 on the network token either way.",
       "evidence": "CA_Introduction/HASHES.txt LIVE lines; forum 260924-zgl38",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nCompared the audited opening with the newer chapter. Keep the current version: it corrects NEXT to STEP, names the saved arrival history, includes the supported surrounding ring and retains the historical references. All audited code excerpts and the existing size:2.0 network placement remain. This review makes only targeted opening/orientation/precision edits.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.416Z"
     },
     {
       "id": "book_cellularautomata.016",
@@ -604,9 +637,9 @@
       "effort": "10min",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_Introduction"
       ],
@@ -621,9 +654,12 @@
       "proposal": "Decide whether either does work here; if the runner builds nothing, remove it.",
       "evidence": "CA_Introduction/DECISIONS.md Left alone",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nFresh native inspection finds no GridMultiMesh target and no rendered geometry for grid_substrate_runner. Removed that one hall placement; its implementation and registry remain. The synthesis stand builds visible geometry around its dark_sphere subject, so it stays secondary and is briefly acknowledged in the chapter. No whole-floor CA claim is made.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:06:18.438Z"
     },
     {
       "id": "book_cellularautomata.018",
@@ -660,9 +696,9 @@
       "effort": "1h",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_EdgeOfChaos"
       ],
@@ -677,9 +713,12 @@
       "proposal": "Re-run tools/em_map_halls.py --apply (Astra), then boot the hall.",
       "evidence": "CA_EdgeOfChaos/map.diff; em_plan.json 'piers: template colonnade x28'",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe old plan row does contain 28 piers, but the current museum replaces an authored row with _derive_map_row at build time (endless_museum.gd around 8048). Native queries at the changed cell and across the full B volume find no collider; interior images agree. The old claim that a plan re-apply is required is stale. Kept both failed obstruction hypotheses as diagnostics. No live plan/bake or map rewrite was needed.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-ending-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T13:24:27.190Z"
     },
     {
       "id": "book_cellularautomata.020",
@@ -716,9 +755,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_ExpandingSpace"
       ],
@@ -733,9 +772,12 @@
       "proposal": "Re-text and re-orient both labels in proximity_study.gd.",
       "evidence": "proximity_study.gd:123-131",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nBasinNote now points RIGHT / DESK SIDE, matching the actual recovery ramps when arriving along local +Z. BasinNote and WitnessTag are rotated toward arrival, darkened against the pale floor and enlarged. Matching native before/after photographs verify orientation and contrast; no headset legibility claim.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:43:59.725Z"
     },
     {
       "id": "book_cellularautomata.022",
@@ -744,9 +786,9 @@
       "effort": "10min",
       "skill": "build",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_ExpandingSpace"
       ],
@@ -761,9 +803,12 @@
       "proposal": "Decide, and add a collider if it should block.",
       "evidence": "CA_ExpandingSpace/DECISIONS.md Limits",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nMade the visible frieze backing consistently solid, like its posts. Its colour panels still share the floor materials and have no individual/state-dependent collision. A native body and body-layer rays stop at the fixed backing, including when all bridge cells are depleted. The manuscript now distinguishes the wall that remains from the tile that loses support. No solver, ramp, map placement or role changes.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:43:59.758Z"
     },
     {
       "id": "book_cellularautomata.023",
@@ -773,7 +818,7 @@
       "skill": "build",
       "depends_on": [],
       "status": "open",
-      "claimed_by": null,
+      "claimed_by": "codex",
       "done_at": null,
       "map_refs": [
         "CA_SoftRules"
@@ -789,9 +834,12 @@
       "proposal": "Press EXCHANGE B in the headset and read the labels.",
       "evidence": "CA_SoftRules/DECISIONS.md Limits",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nFresh native console signals and photographs confirm that A/B initially withhold the exchange answer, EXCHANGE B reveals the actual visible EXCHANGE ON titles and resets both fields, and REPLAY retains the reveal. Kept open because the requested worn-headset readability check has not been performed. The earlier seed-crossing mouse-ray/body evidence remains linked and its implementation hashes still match.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:43:59.787Z"
     },
     {
       "id": "book_cellularautomata.024",
@@ -801,7 +849,7 @@
       "skill": "build",
       "depends_on": [],
       "status": "open",
-      "claimed_by": null,
+      "claimed_by": "codex",
       "done_at": null,
       "map_refs": [
         "CA_SoftRules"
@@ -817,9 +865,12 @@
       "proposal": "Profile in the headset.",
       "evidence": "_frame_cost/sc_ca_now.out.txt",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nKept open. The reported crack_propagation_ca cost still needs headset/Quest profiling. This focused desktop pass neither profiles that rear artifact nor changes its update rate. No performance acceptance is inferred from a passing functional test.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-body-and-exchange-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "comment",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T12:43:59.815Z"
     },
     {
       "id": "book_cellularautomata.025",
@@ -828,9 +879,9 @@
       "effort": "1h",
       "skill": "edit",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_AgentsCircuits"
       ],
@@ -845,9 +896,12 @@
       "proposal": "Rewrite the companions to the placed works; trim the registry description.",
       "evidence": "CA_AgentsCircuits/DECISIONS.md Limits",
       "review": "from the block handback of 24 Sept; not re-checked by the skeptic",
-      "notes": "",
+      "notes": "Codex review — 25 September 2026\nThe newer technical/intent/inventory documents already describe the installed comparison. Archived the remaining older critical essay verbatim in wireworld-proposal.md with an explicit speculative status; current critical.md follows the floor image, recursive volume, recognition, failed correspondence and bodily support. It no longer presents code as verification of philosophical theories. Corrected only the explorer registry description and QFEP connection, which had promised unimplemented custom neighbourhood tables and universal computation visible at an edge. Existing Wireworld material and both primary works remain.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-ending-review/index.html",
       "source": "the block handback of 24 Sept",
-      "created_at": "2026-09-24"
+      "created_at": "2026-09-24",
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "updated_at": "2026-09-25T13:24:27.208Z"
     },
     {
       "id": "book_cellularautomata.026",
@@ -1075,9 +1129,9 @@
       "effort": "half-day",
       "skill": "ada-humanizer",
       "depends_on": [],
-      "status": "open",
-      "claimed_by": null,
-      "done_at": null,
+      "status": "done",
+      "claimed_by": "codex",
+      "done_at": "2026-09-25",
       "map_refs": [
         "CA_ElementaryRules"
       ],
@@ -1092,12 +1146,13 @@
       "proposal": "A sequence decision for Palle/Astra, not prose: rename the three pearls to what stands in them (e.g. 'a cell with a past', 'a history you can inhabit', 'a pattern visits an address' - the chapters' own titles), or re-deal the contents to the names. Until then the chapters' titles carry the truth and the wall names carry the promise.",
       "evidence": "commons/data/book/cellularautomata.json pearls; commons/maps/sequences/cellularautomata.json; the three final.md titles",
       "review": "by hand: NOC chapter read in full; cited files read",
-      "notes": "NOT applied: a rename of the three pearls or a re-deal of their contents is a sequence decision. The chapters' own titles carry the truth meanwhile.",
+      "notes": "NOT applied: a rename of the three pearls or a re-deal of their contents is a sequence decision. The chapters' own titles carry the truth meanwhile.\n\nCodex review — 25 September 2026\nAligned the three visitor-facing pearl/hall titles with their current chapters: A cell with a past; A history you can inhabit; A pattern visits an address. The corresponding sequence content labels agree. Historical map IDs, order, placements, artifact roles and routes remain; this is a naming repair, not a redeal.\n\nDetails and exact diffs: /book-review/doc/book/iterations/2026-09-25-ca-opening-review/index.html",
       "source": "Nature of Code ch. 7 reading, 25 Sept (doc/book/readings/NOC_cellular_automata_2026-09-25.md)",
       "created_at": "2026-09-25",
-      "triage": null,
-      "triaged_at": null,
-      "stale": false
+      "triage": "fix",
+      "triaged_at": "2026-09-25",
+      "stale": false,
+      "updated_at": "2026-09-25T12:06:18.458Z"
     }
   ]
 }

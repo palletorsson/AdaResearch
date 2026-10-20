@@ -1,0 +1,447 @@
+{
+  "date": "2026-10-13",
+  "evidence_level": "Source inspection and structural checks only. No new arena runtime or headset tests in this planning pass.",
+  "sequence_count": 25,
+  "playable_sequences": [
+    "primitives",
+    "transformation",
+    "array_tutorial",
+    "color",
+    "tiling",
+    "change"
+  ],
+  "referenced_source_count": 58,
+  "missing_sequence_vocabulary": [
+    "shaders"
+  ],
+  "vocabulary_halls_outside_current_authored_spine": [],
+  "soft_stage_order_differences": [
+    {
+      "sequence": "tiling",
+      "spine": 5,
+      "soft_stages": null
+    },
+    {
+      "sequence": "change",
+      "spine": 6,
+      "soft_stages": 4.5
+    },
+    {
+      "sequence": "forces",
+      "spine": 7,
+      "soft_stages": 5
+    },
+    {
+      "sequence": "formfinding",
+      "spine": 8,
+      "soft_stages": null
+    },
+    {
+      "sequence": "wavefunctions",
+      "spine": 9,
+      "soft_stages": 6
+    },
+    {
+      "sequence": "randomness",
+      "spine": 10,
+      "soft_stages": 7
+    },
+    {
+      "sequence": "noise",
+      "spine": 11,
+      "soft_stages": 8
+    },
+    {
+      "sequence": "shaders",
+      "spine": 12,
+      "soft_stages": 8.5
+    },
+    {
+      "sequence": "cellularautomata",
+      "spine": 13,
+      "soft_stages": 9
+    },
+    {
+      "sequence": "fractals",
+      "spine": 14,
+      "soft_stages": 10
+    },
+    {
+      "sequence": "lsystems",
+      "spine": 15,
+      "soft_stages": 11
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "spine": 16,
+      "soft_stages": 12
+    },
+    {
+      "sequence": "softbodies",
+      "spine": 17,
+      "soft_stages": 14
+    },
+    {
+      "sequence": "isosurfaces",
+      "spine": 18,
+      "soft_stages": 4.6
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "spine": 19,
+      "soft_stages": 4.7
+    },
+    {
+      "sequence": "swarmintelligence",
+      "spine": 20,
+      "soft_stages": 13
+    },
+    {
+      "sequence": "graphtheory",
+      "spine": 21,
+      "soft_stages": 16
+    },
+    {
+      "sequence": "machinelearning",
+      "spine": 22,
+      "soft_stages": 15
+    },
+    {
+      "sequence": "foundationscrisis",
+      "spine": 23,
+      "soft_stages": 17
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "spine": 24,
+      "soft_stages": 18
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "spine": 25,
+      "soft_stages": 19
+    }
+  ],
+  "contribution_orders": [
+    {
+      "sequence": "primitives",
+      "kind": "ground_ring",
+      "legacy_order": 1,
+      "spine_order": 1
+    },
+    {
+      "sequence": "primitives",
+      "kind": "ground_substrate",
+      "legacy_order": 1,
+      "spine_order": 1
+    },
+    {
+      "sequence": "primitives",
+      "kind": "ambient_particles",
+      "legacy_order": 1,
+      "spine_order": 1
+    },
+    {
+      "sequence": "primitives",
+      "kind": "object_scatter",
+      "legacy_order": 1,
+      "spine_order": 1
+    },
+    {
+      "sequence": "noise",
+      "kind": "noise_dust",
+      "legacy_order": 8,
+      "spine_order": 11
+    },
+    {
+      "sequence": "cellularautomata",
+      "kind": "ca_surface",
+      "legacy_order": 9,
+      "spine_order": 13
+    },
+    {
+      "sequence": "fractals",
+      "kind": "fractal_bloom",
+      "legacy_order": 10,
+      "spine_order": 14
+    },
+    {
+      "sequence": "lsystems",
+      "kind": "lsystem_trees",
+      "legacy_order": 11,
+      "spine_order": 15
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "kind": "dna_creatures",
+      "legacy_order": 12,
+      "spine_order": 16
+    },
+    {
+      "sequence": "softbodies",
+      "kind": "softbody_flora",
+      "legacy_order": 13,
+      "spine_order": 17
+    },
+    {
+      "sequence": "swarmintelligence",
+      "kind": "swarm_creatures",
+      "legacy_order": 14,
+      "spine_order": 20
+    },
+    {
+      "sequence": "machinelearning",
+      "kind": "adaptive_behavior",
+      "legacy_order": 15,
+      "spine_order": 22
+    },
+    {
+      "sequence": "foundationscrisis",
+      "kind": "paradox_zones",
+      "legacy_order": 16,
+      "spine_order": 23
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "kind": "tunable_field",
+      "legacy_order": 17,
+      "spine_order": 24
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "kind": "critical_overlay",
+      "legacy_order": 18,
+      "spine_order": 25
+    },
+    {
+      "sequence": "graphtheory",
+      "kind": "graph_connections",
+      "legacy_order": 19,
+      "spine_order": 21
+    },
+    {
+      "sequence": "biome_lab",
+      "kind": "biome_paint_dispatcher",
+      "legacy_order": 99,
+      "spine_order": null
+    }
+  ],
+  "boundaries_for_review_not_automatic_route_changes": [
+    {
+      "sequence": "primitives",
+      "sequence_first": "Point_Zero",
+      "sequence_last": "Primitives_Melencolia",
+      "authored_last": "Primitives_Melencolia"
+    },
+    {
+      "sequence": "transformation",
+      "sequence_first": "Trans_Pre",
+      "sequence_last": "Trans_Pit",
+      "authored_last": "Biome_Ladder_Transformation"
+    },
+    {
+      "sequence": "array_tutorial",
+      "sequence_first": "Array",
+      "sequence_last": "Tutorial_Disco",
+      "authored_last": "Tutorial_Disco"
+    },
+    {
+      "sequence": "color",
+      "sequence_first": "Color_Context_Placed",
+      "sequence_last": "Color_Walls",
+      "authored_last": "Biome_Ladder_Color"
+    },
+    {
+      "sequence": "tiling",
+      "sequence_first": "Pattern_Disco",
+      "sequence_last": "Ribbon_Patterns_03",
+      "authored_last": "Ribbon_Patterns_03"
+    },
+    {
+      "sequence": "change",
+      "sequence_first": "Change_Intro",
+      "sequence_last": "Flow_Field",
+      "authored_last": "Flow_Field"
+    },
+    {
+      "sequence": "forces",
+      "sequence_first": "Vectors_Act1_WhatAVectorIs",
+      "sequence_last": "Vectors_Act5_ForceAsPlace",
+      "authored_last": "Vectors_Act5_ForceAsPlace"
+    },
+    {
+      "sequence": "formfinding",
+      "sequence_first": "FormFinding_Descent",
+      "sequence_last": "FormFinding_Forge",
+      "authored_last": "FormFinding_Forge"
+    },
+    {
+      "sequence": "wavefunctions",
+      "sequence_first": "WaveFunctions_Intro",
+      "sequence_last": "WaveFunctions_Synthesis_Lab",
+      "authored_last": "WaveFunctions_Synthesis_Lab"
+    },
+    {
+      "sequence": "randomness",
+      "sequence_first": "Random_Definition",
+      "sequence_last": "Random_Game",
+      "authored_last": "Random_Game"
+    },
+    {
+      "sequence": "noise",
+      "sequence_first": "Random_Noise_Types",
+      "sequence_last": "Lab_Path",
+      "authored_last": "Noise_Perlin_Simplex"
+    },
+    {
+      "sequence": "shaders",
+      "sequence_first": "Shader_01_Shaping",
+      "sequence_last": "Shader_10_ReactionDiffusion",
+      "authored_last": "Shader_10_ReactionDiffusion"
+    },
+    {
+      "sequence": "cellularautomata",
+      "sequence_first": "CA_Introduction",
+      "sequence_last": "CA_EdgeOfChaos",
+      "authored_last": "CA_EdgeOfChaos"
+    },
+    {
+      "sequence": "fractals",
+      "sequence_first": "Fractal_Recursion",
+      "sequence_last": "Fractal_Synthesis",
+      "authored_last": "Fractal_Synthesis"
+    },
+    {
+      "sequence": "lsystems",
+      "sequence_first": "LSystems_Grammar_Lab",
+      "sequence_last": "Assemblage_Same_Desire",
+      "authored_last": "Assemblage_Same_Desire"
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "sequence_first": "PG_Genetic_Evolution",
+      "sequence_last": "PG_Mirrored_Patterns",
+      "authored_last": "PG_Mirrored_Patterns"
+    },
+    {
+      "sequence": "softbodies",
+      "sequence_first": "SoftBodies_Soft_Body_Deformation",
+      "sequence_last": "Topology_Entropy_Morphogenesis",
+      "authored_last": "Topology_Entropy_Morphogenesis"
+    },
+    {
+      "sequence": "isosurfaces",
+      "sequence_first": "ISO_Introduction",
+      "sequence_last": "ISO_RhizomeBody",
+      "authored_last": "ISO_RhizomeBody"
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "sequence_first": "Boolean_Verbs",
+      "sequence_last": "Boolean_Works",
+      "authored_last": "Boolean_Works"
+    },
+    {
+      "sequence": "swarmintelligence",
+      "sequence_first": "SwarmIntelligence_PhysarumColony",
+      "sequence_last": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+      "authored_last": "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+    },
+    {
+      "sequence": "graphtheory",
+      "sequence_first": "GT_Foundations",
+      "sequence_last": "GT_Matching",
+      "authored_last": "GT_Matching"
+    },
+    {
+      "sequence": "machinelearning",
+      "sequence_first": "ML_Evolution",
+      "sequence_last": "ML_Synthesis",
+      "authored_last": "ML_Synthesis"
+    },
+    {
+      "sequence": "foundationscrisis",
+      "sequence_first": "Euclid_Parallel",
+      "sequence_last": "Crisis_Synthesis",
+      "authored_last": "Crisis_Synthesis"
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "sequence_first": "QFEP_Introduction",
+      "sequence_last": "QFEP_Synthesis",
+      "authored_last": "QFEP_Synthesis"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "sequence_first": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+      "sequence_last": "PostCrisis_Synthesis",
+      "authored_last": "PostCrisis_Synthesis"
+    }
+  ],
+  "source_sha256": {
+    "algorithms/emergentsystems/boidflocking/Boid.gd": "a218eb65b263a0a7c33dbf51182f215f677c20ab0b8643d6739a5d17a38cad8c",
+    "algorithms/graphtheory/pathfinding3d/pathfinding3d.gd": "a6df0cd2dec2f2918ed2f91090e5ad0313b101bf9f773bc4676655c3f26c4d41",
+    "algorithms/nature_system/systems/evolution_system.gd": "eae2b24c7d67ce387774f3638020e26c2ed249d2c760e62592328e0c753fe560",
+    "algorithms/shaders/book_of_shaders/shader_01_shaping.gd": "218f69980fa5341f3c4153eb4f2c1e3410ef5ec1ced4631192b47a574f6284c6",
+    "algorithms/shaders/book_of_shaders/shader_05_patterns.gd": "133042bbcb1b2b8838aba8b67c49955bb65444277f85bbd6952d3c08caa5d541",
+    "algorithms/softbodies/spring_lattice/spring_lattice.gd": "edc85cb0342e88ceb0eca441f9fe9276a34455d80fe5ad2a778e900df4478562",
+    "commons/artifacts/biome_inheritance/banner_pattern.gdshader": "aec4de23bb171579347416e15112fa5364c42d5f9ccabf29c06328e26a7d3c52",
+    "commons/artifacts/biome_inheritance/biome_inheritance.gd": "6aa80d6f04b2b91704d8a35a7a6d8c1f18a38dbae797985694c3da96daa78c9c",
+    "commons/artifacts/biome_inheritance/rising_banners.gd": "9d95a7e81109a6820c80e36ba3b33c92d817977def206824fe24596bf939b584",
+    "commons/artifacts/biome_object/biome_object.gd": "272762bd03d287d8a498ad82c0b203321b5fc0f03cb628047569042c5614330d",
+    "commons/artifacts/biome_primitives/encounter_model.gd": "00a2030c9559a0c6dbe12cec36c2494b07174a2c0af7691b3e2cc4e8a9d9d602",
+    "commons/artifacts/descent_landscape_lab/descent_landscape_lab.gd": "4ed2a1bd29631287dad2a1c78081fbd6a7ee318d0889b04d525730e3f6f71102",
+    "commons/artifacts/flow_field_painter/flow_field_painter.gd": "d0fa072e856131d1295ee3fdcf3850d8a391b53e9fd19c5cf7844cc673bbf4f2",
+    "commons/artifacts/flow_field_painter/shared_field_lesson.gd": "e16f3e875ead31ac3c1e99f8c3f0e22ad4f802edc3553323f3a8fd79c2327b66",
+    "commons/artifacts/timing_machines/iso_sculpt_workshop.gd": "daca632facd1081062d3c524bbd7c90ec95188bd6b195282b4e839f7c3416ad4",
+    "commons/artifacts/timing_machines/iso_terrain_workshop.gd": "a22f00e50439fe691c7e56d589c52afee5a851b1376fdeda3d4effd81348a8ed",
+    "commons/biome_layers/adaptive_behavior.gd": "d8994dd4209a9f7a54c956047d570219cf3ab72457f6652121a28f0a5d1610ab",
+    "commons/biome_layers/biome_ground.gdshader": "ae1a1cf1bb0808d18061510868d9bd79a3c0a29a38887fdcc357ba674aca69f8",
+    "commons/biome_layers/biome_ground_substrate.gd": "65e0dcc47c69e90590a3ee30cf385001eba5e06bbfdcfb9a6337c151df0d4a19",
+    "commons/biome_layers/ca_surface.gd": "0b0b42b36986a7c8aa07f2cab2b83eec928175e1f33e98ce931efb4ead073960",
+    "commons/biome_layers/critical_overlay.gd": "f91facbabb27fa88d4cb368ee895f5d35d406ec7f24cb778a7b310e4ccdb520b",
+    "commons/biome_layers/dna_creatures.gd": "b668c36ad769095a3d72a1d0d48c8de75e0f9a182323bbdeaac0edf09d3dc5a2",
+    "commons/biome_layers/force_field.gd": "f777da7fbfe00628011de4fc8fa092d926b0b885f7fbbc6eba115e3ca435ad80",
+    "commons/biome_layers/fractal_bloom.gd": "dbf87d54cfbebb456946143d6124e516c44e7b97c2301c5f33fbc9a8e6e4e95d",
+    "commons/biome_layers/graph_connections.gd": "1171893714c2af17b5715608568289db6ebe3a0643612de19950b211ad5deb63",
+    "commons/biome_layers/inherited_form_clearance.gd": "efcca918ea4b18f209a2dd0cc343fd36742e9fc3f9f3465a8ce166394447911f",
+    "commons/biome_layers/lsystem_trees.gd": "8f3212529a05152f0ab05361f3dca16c3a3cc9774434b2daa55c653e8a1d77f9",
+    "commons/biome_layers/paradox_zones.gd": "3214475e4b7ea097b13d42765242666af43ce66bdabcc57926fe2e40d4f5ba81",
+    "commons/biome_layers/softbody_flora.gd": "ba9d6e3f8bc8188af451fa29405ec878a22c06b1ac08d7f13602973674d9a9ab",
+    "commons/biome_layers/spawn_service.gd": "d0a7e92b5c1474f22ba8b0c4e094c1568502cfb8f3f2011a2470128fc019d552",
+    "commons/biome_layers/swarm_creatures.gd": "5a0af059fcc0e45cc2fd1c519c136d2cf5a380c64b5dc84c0d233c2eaec5a2fe",
+    "commons/biome_layers/tunable_field.gd": "7665f2b096701fadd20c02fad0070100300a471a4adbae521e03371313e0511f",
+    "commons/context/walkgrids/FractalSpace.gd": "5c4b5072f3a80cc039065ad35c9cedf7f13171c57ef2b99611fb015cd798386f",
+    "commons/context/walkgrids/NoiseSpace.gd": "3378d9c4732c873b4656c1694a1f3cd00cf57082136139224743750709730c68",
+    "commons/context/walkgrids/RandomSpace.gd": "5feb4754bbc4f3d6c4750f8a2438c7e41ed824e88affbeda1266a87aba964354",
+    "commons/context/walkgrids/SineSpace.gd": "20bf0252605979ae880f9b2bcc71fa2c832a37638221102e99fc6f51c9b4b79d",
+    "commons/context/walkgrids/TopologySpace.gd": "303bf78154c5994d12b02ec6eead5ea0685c0afe884d374c37834e870588d297",
+    "commons/context/walkgrids/random_space.tscn": "3ed066c5e0de090fd6de8f00cbaa238b4a0505b4af9fa00895b8022114e02d62",
+    "commons/hazards/biome_ladder/change_ball.gd": "8fb532c142a509cee32f7ba949afe372c04c497767a6b245902250da15148cf7",
+    "commons/hazards/biome_ladder/direction_field.gd": "efeb3a3a029679d1771ad2a74e53971a94529434b2a08e75d4f478f3761aa8a2",
+    "commons/hazards/biome_ladder/ladder_ball.gd": "e96df4d280efb9ee1600647f139503365294594d1a6d219db2f7949f22f063cb",
+    "commons/hazards/biome_ladder/ladder_encounter.gd": "256f1ec3f7e8b8a707a4a4c7ecb0624abcdc33837dbf73f01d61bc37f1051fa6",
+    "commons/hazards/biome_ladder/ladder_skull.gd": "8f55ff968eed144a9e349e8e084948815bc86fbddd7f744211d66cb73f00be52",
+    "commons/hazards/catalyst_counterpart/terrain_arena.gd": "8f9784e08f7b2c8484c44ef4a57d8335133dcc000963843600740efb1aacad0c",
+    "commons/maps/Array/tutorial.md": "48fb8b1098b3c815c47dfa01621eba56677b9da389bba9fc4abc0db7388a8fce",
+    "commons/maps/Boolean_Verbs/map_data.json": "7eb40c012e8c911b7d5534313f5cb1d12cbaca80cad9d26affc819809315a178",
+    "commons/maps/Boolean_Verbs/tutorial.md": "2d2d978ad763ac836bec07bf8a77c0b70c9e938d43996aebc50ae4bdb7614869",
+    "commons/maps/Crisis_Synthesis/tutorial.md": "f49e06bf2c206a5494a2b2c22a1b8945a19e5faf4a4368dec91c4efe8ed2cbb6",
+    "commons/maps/CriticalAlgorithms_Algorithmic_Bias_Visualization/tutorial.md": "0a9a585ea816c45fda90be31921513fa5f160bb2f8ed71030dd1c9f7ace0038b",
+    "commons/maps/FormFinding_Descent/tutorial.md": "fb78d5c27072f533e8afc85dc0b9b0f43cf631276f96ef637988516f72b6fc29",
+    "commons/maps/ML_Evolution/tutorial.md": "f05813cff4f72c1b7d89a3ba1c29977bf8a9c567fb37c847a0031db7e0588753",
+    "commons/maps/QFEP_Synthesis/tutorial.md": "42039fea770136bf6720a76aea7dc4093fd8008eefe656a2fc0a0ad3867a53b9",
+    "commons/maps/sequences/change.json": "00c03e77b96aad6c6d199d5000762ffa8e4fc41c7bfed45864926dfe2be6219b",
+    "commons/substrates/grid2d/cartridges/cartridge_game_of_life.gd": "6e7bc96ff060c45c5e2f6cf095f3e8105e4253fe8f186dda273a31823aed8c4c",
+    "doc/book/studies/forces-point-lineage/03_mass.gd": "14f1bb2aa82b29b9e6d34894e5c613764789ee89a4a86e18485c277f6fa4ad18",
+    "doc/book/studies/forces-point-lineage/10_impulse.gd": "5d70a7e6dacd991a8e6fd3a59cde3221e16c27563abfd8b0027691dc19acb6d7",
+    "doc/book/studies/qfep-lineage/synthesis_study.gd": "8df142b404e6bf203c7e0022f357dc7891c6fbce6db18fa0b3ac0305814889f2",
+    "doc/book/studies/soft-bodies-through-the-hands/SoftBodies_Soft_Body_Deformation/yielding_cube.gd": "14dec0f63ecfbba80ca45a4d90569fe29615f2c8d0f4d68fa5b11353c5fe114c"
+  },
+  "checks": [
+    "All 25 canonical sequence keys appear once, in current order.",
+    "Every source reference exists.",
+    "All required proposal fields are nonempty.",
+    "Only stages present in the actual route are labelled playable."
+  ]
+}

@@ -63,10 +63,10 @@
       "depends_on": [
         "randomness_research.001"
       ],
-      "status": "open",
+      "status": "done",
       "blocked_reason": null,
       "claimed_by": null,
-      "done_at": null,
+      "done_at": "2026-10-14",
       "map_refs": [],
       "artifact_refs": [],
       "sequence_refs": [
@@ -95,19 +95,24 @@
         "performance",
         "physical_VR",
         "independent_learner"
-      ]
+      ],
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/DECISIONS.md"
+      ],
+      "notes": "User authorized the first experiment loop. Bounded seed bench selected; both exact source questions bound. Broader route/Source Lab/sleeve deployment not selected."
     },
     {
       "id": "randomness_research.003",
       "title": "Complete one seed-bench experiment cycle and record adapter",
-      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/proposition.md. Record accepted implementation scope in randomness_research.002 before this work. Extend the accepted pilot with baseline, one interpretation change, an independent kept result, replay and a small complete tutorial reconstruction. SAME RECORD changes colour/height interpretation without drawing again. Record draw roles/order, seed/captured state, values, procedure version, observation and next-change proposal. Build only record fields needed now. Preserve the atmospheric record, sphere and +1 DRAW encounter. Supply a native behaviour probe and exact printed-code reconstruction. Use RESEARCH_RECORD.md: explicit export/import/clear, parent lineage, replay scope, observation and next change. Every destination must retain a local baseline. Capture no raw headset/audio stream by default; minimum relevant target input is separately chosen. Reject invalid/oversized/unknown-version imports without silently replacing them. Bind a selected passage/interpretation record to this pilot; keep sampled variation, changed interpretation and revised relation rules distinct. Coordinate with writing .001-.002 so a passage can initiate a bounded variant and its observation can revise the passage. A speculative sleeve is not a mandatory pilot. Use the existing local baseline and record what the new observation proposes to change in the task plan. Use doc/book/experiments/random-definition/seed-bench-001 as the companion. Retain sixteen ordered triples (48 scalar values); compare fixed local centre height with 0.10 m + 0.30 m * the triple mean. Keep RGB visible, XZ layout, dimensions, host and lighting fixed; switch only the height rule with no new draws. Read proposition.md for the exact proposed layout and independently calculated fixture. Preserve the shipped vertical grids. The authored text simulation is a hypothesis; attach actual scene/build/run records only when they exist. Prove kept-copy independence and no draw on switching, then supply the exact printed continuation and independent reconstruction evidence. Both tutorial and final initiate this pilot; preserve their distinct source questions and review each after execution. Record what would change the interpretation before testing. W005 selects later experiments from actual evidence, including a reason to defer or stop. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Definition/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/003. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
+      "spec": "Work in C:/Users/palle/Documents/GitHub/AdaResearch_46. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/SPEC.md, HALLS.md, PARTICLE_PATH.md, FINDINGS.md, COMPARISON.md, RESEARCH_RECORD.md, TEXT_SIMULATION.md and DECISIONS.md. Preserve unrelated working-tree changes. Read inventory.json and comparison.json for exact sources/hashes; reread changed evidence. Read C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/RECURSIVE_ARCHITECTURE.md and C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/experiments/random-definition/seed-bench-001/proposition.md. Record accepted implementation scope in randomness_research.002 before this work. Extend the accepted pilot with baseline, one interpretation change, an independent kept result, replay and a small complete tutorial reconstruction. SAME RECORD changes colour/height interpretation without drawing again. Record draw roles/order, seed/captured state, values, procedure version, observation and next-change proposal. Build only record fields needed now. Preserve the atmospheric record, sphere and +1 DRAW encounter. Supply a native behaviour probe and exact printed-code reconstruction. Use RESEARCH_RECORD.md: explicit export/import/clear, parent lineage, replay scope, observation and next change. Every destination must retain a local baseline. Capture no raw headset/audio stream by default; minimum relevant target input is separately chosen. Reject invalid/oversized/unknown-version imports without silently replacing them. Bind a selected passage/interpretation record to this pilot; keep sampled variation, changed interpretation and revised relation rules distinct. Coordinate with writing .001-.002 so a passage can initiate a bounded variant and its observation can revise the passage. A speculative sleeve is not a mandatory pilot. Use the existing local baseline and record what the new observation proposes to change in the task plan. Use doc/book/experiments/random-definition/seed-bench-001 as the companion. Retain sixteen ordered triples (48 scalar values); show FLAT RGB, neutral BARS, COMBO RGB+height, SCALE and ROTATE together. Spatial views use the triple mean; colour uses the channels directly. Bar height is 0.04+0.12*u metres, bottom 0.08 m; scale side is 0.09*(0.35+0.65*u) m; yaw is 360*u degrees on a bounded rectangular piece. Keep the 1.5 cm gutters for the first three grids; use 54 cm frames with 46 cm dark insets. Read SPATIAL_VIEWS.md for the current recipe and preserve earlier propositions and saved v1/v2 outcomes. Current schema v3 must reuse the same stored values across all five assignments. Preserve the shipped vertical grids. The authored text simulation is a hypothesis; attach actual scene/build/run records only when they exist. Prove kept-copy independence and no draw on switching, then supply the exact printed continuation and independent reconstruction evidence. Both tutorial and final initiate this pilot; preserve their distinct source questions and review each after execution. Record what would change the interpretation before testing. W005 selects later experiments from actual evidence, including a reason to defer or stop. The first human return redirected the pilot toward a grouped rectangular VR control board with CLOSE/reopen; that interface is implemented, with physical headset assessment still open. The next human return selects gentler bars with fixed bottoms and smaller cube/bar gutters, followed by wider cells to fill each tray; keep button spacing unchanged and assess this geometry before further expansion. Source references: C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/maps/Random_Definition/map_data.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/randomness.json; C:/Users/palle/Documents/GitHub/AdaResearch_46/commons/artifacts/registry/physics_simulation.json. Write Markdown and JSON evidence under C:/Users/palle/Documents/GitHub/AdaResearch_46/doc/book/course/randomness-research-2026-10-14/implementation/003. Create the named native SceneTree probe as part of this task; this command is not a claim it already exists.",
       "effort": "multi-day",
       "skill": "build",
       "depends_on": [
         "randomness_research.002"
       ],
       "status": "blocked",
-      "blocked_reason": "Depends on route/scope decision and preceding evidence; implementation has not begun.",
+      "blocked_reason": "Five-view comparison ready for human interpretation, physical headset assessment and independent reconstruction; separate opening-order trial remains unperformed.",
       "claimed_by": null,
       "done_at": null,
       "map_refs": [
@@ -142,6 +147,15 @@
         "performance",
         "physical_VR",
         "independent_learner"
+      ],
+      "progress": "O11/O12: five simultaneous spatial assignments and broader frames implemented. Native/printed 66 each, replay 3, museum 22, five faults detected. Same retained triples drive colour/height/scale/turn; earlier layouts replay. Human interpretation, physical VR and independent reconstruction remain open.",
+      "evidence": [
+        "doc/book/experiments/random-definition/seed-bench-001/experiment.json",
+        "doc/book/course/randomness-research-2026-10-14/implementation/003/evidence.json",
+        "doc/book/experiments/random-definition/seed-bench-001/HUMAN_TRIAL.md",
+        "doc/book/experiments/random-definition/seed-bench-001/VR_BOARD.md",
+        "doc/book/experiments/random-definition/seed-bench-001/ANCHORED_BARS.md",
+        "doc/book/experiments/random-definition/seed-bench-001/SPATIAL_VIEWS.md"
       ]
     },
     {

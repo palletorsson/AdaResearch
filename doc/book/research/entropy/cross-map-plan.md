@@ -1,0 +1,36 @@
+# Entropy across the maps: staged work
+
+15 October 2026 · Linked to the [framework](README.md) and the [Entropy hall's E0–E6 plan](../../course/text-plans/Random_Entropy/research-brief.md).
+
+The nine map IDs below have current authored map files and generated museum-plan entries. That source check is recorded in the [audit](../../iterations/2026-10-15-entropy-across-maps/source-audit.json); it is not a new runtime test. Proposed measurements remain proposals even when their host artifact is installed.
+
+| Map | Existing encounter and productive tension | Bounded next experiment | Evidence still needed |
+| --- | --- | --- | --- |
+| `Random_Definition` | The carried sphere returns; the movement record becomes a small seed. | Compare two distinct retained recordings that map to the same seed, with the same generator/reset state. Then distinguish a seed change from a return-rule change. | Synthetic collision fixture is available. Actual recording/receiver replay and a participant's response remain open. |
+| `Random_Entropy` | Counts, conditional jar reading, multiplicity, displaced assemblies. | First keep the sixteen-site board fixed and ask what another account would notice. Use the prefab comparison to investigate which relationships preserve recognition. | Bench native evidence exists. A controlled prefab grouping trial needs matched base motion; human recognition remains open. |
+| `Noise_One` | The paired rings retain a signed value while CLIP and REMAP differ. | Freeze field/time/frequency; capture raw and displayed values at the same addresses. Compare clipping with remapping from raw values, and with processing only clipped values. | Exact four-value fixture exists; a joint-distribution measurement for the installed rings is not built. |
+| `Point_Trace` | Kept positions are joined; unrecorded bends are not recovered. | Replay one source trajectory through two acceptance thresholds, preserving its actual timestamps. Compare accepted positions and declared reconstruction errors. | A matched source recording and an explicit comparison method; no entropy value inferred from point count alone. |
+| `WaveFunctions_Pendulum` | Motion continues between retained observations; STROBE can make marks nearly coincide. | Reuse one source motion with different schedules, separating requested intervals from actual timestamps and history limits. | Existing sampling lesson supplies the mechanism. New prediction/error claims need their own record. |
+| `CA_ExpandingSpace` | Cell state and bodily support can diverge. | Keep a CA state fixed; alter the declared support threshold or readout, then test passage/recovery. | Audit the active collision/update branch before adding this control. Measure support/reachability as such, not automatically entropy. |
+| `SwarmIntelligence_Boids_Algorithm` | Neighbours and updates shape trajectories. | Same initial state, same fixed schedule, then one documented perturbation. Record separation over simulated time and boundary effects. | Replayable scheduler, correspondence between agents and repeated baseline; no KS-entropy or Lyapunov estimate from one diverging pair. |
+| `ProceduralGeneration_Reaction_Diffusion_Systems` | Patterns depend on continuing update/feed/kill rules. | Freeze initial field and schedule; change one sustaining parameter, recording persistence and recovery. | Declare the simulated equation and boundary conditions. Heat and entropy production need a separate physical model. |
+| `ML_Evolution` | Candidate variation and selection can have different consequences. | Preserve one candidate population; compare two declared selection criteria and retained alternatives. | Audit active selection branch, define categories and sample probabilities before an entropy/diversity estimate. Cultural meaning requires more than those categories. |
+
+Fractals and L-systems are later connecting sites for description length; a particular hall and its active generator must be selected before promising an implementation. Min-entropy is an optional source comparison; KL/cross-entropy belong to an explicitly specified prediction task. None needs to be added to all maps.
+
+## Task order and acceptance
+
+| ID | Action | Completion condition | Status |
+| --- | --- | --- | --- |
+| ER0 | Preserve proposal; distinguish quantities, source claims and implemented behavior. | Framework, original proposal, source audit and calculation receipt are linked. | Complete for documentation and calculation. |
+| ER1 | Attach an optional observation card to the existing research process. | A reader can distinguish baseline, variable/ensemble, intervention, evidence and next decision without adding a compulsory meter. | Template and two worked cards ready; UI unchanged. |
+| ER2 | Trial the already installed Entropy comparisons. | Baseline → one change → observation → KEEP → replay → independent reconstruction → next change. Record an unhelpful result if that is what occurs. | Native bench and reversible prefab hybrid evidence exist; human trial pending. One changed-graft trial is now possible. The matched grouping refinement below remains proposed. |
+| ER3 | Give the signal witness a short history. | Cyclic `01010101` and `00110011` retain their marginal counts while one- and two-symbol conditionals differ as specified in E2. Saved history/record supports replay. | Mathematical fixtures already exist; apparatus pending. First new information-measure implementation. |
+| ER4 | Test what a record passes onward. | Noise raw/clip/remap or movement-record/seed comparison uses an explicit joint sample and retained source. Receiver inputs and reconstruction limitations are demonstrated. | Synthetic fixtures ready; no cross-hall transfer claimed. |
+| ER5 | Study prediction over time. | Trace/Pendulum or Swarm comparison keeps initial conditions and schedules recoverable; reports finite-horizon results and estimation limits. | Select one after ER2–ER4 evidence. |
+| ER6 | Model sustaining conditions and physical costs. | A separate model declares energy, temperature, reservoirs and entropy balance, or external measurement declares a calibrated power protocol. | Future branch; not inferred from shader motion, damping or CPU time. |
+| ER7 | Revisit descriptions, selection and variety. | A particular generator/regulator is named; changing a rule is distinguished from sampling more outcomes under it. | Future branches selected by an observed question. |
+
+For the prefab refinement, apply a shared base transform to each complete object on both sides. At zero relative separation the sides must match. Hold base transforms fixed; introduce retained per-part residual transforms on one side only. Declare the tray-floor correction and any resulting differences. This is a proposed change to the apparatus; the current shared-slider comparison remains valid as an exploratory visual study with its known confound.
+
+Keep the 48-value seed bench as the first research pilot. Do not replace the adopted six-stop Entropy room/final order with a sequence of definitions. Let a measured or encountered limit create the need for the next stop. Tutorial and final can each initiate a revision; neither should narrate these pending experiments as accomplished.

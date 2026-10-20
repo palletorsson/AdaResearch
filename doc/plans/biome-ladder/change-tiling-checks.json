@@ -1,0 +1,140 @@
+{
+	"checks": [
+		{
+			"label": "World and desktop adapter ready",
+			"pass": true
+		},
+		{
+			"label": "Desktop pointer reaches stage 5 control",
+			"pass": true
+		},
+		{
+			"label": "Stage control loads Tiling without firing",
+			"pass": true
+		},
+		{
+			"label": "Tiling inherits 72 colliding tiles and moving cover",
+			"pass": true
+		},
+		{
+			"label": "Input sends exactly one real ball",
+			"pass": true
+		},
+		{
+			"label": "One impact repeats onto exactly 18 tiles",
+			"pass": true
+		},
+		{
+			"label": "Copies occupy the same address in every 2 x 2 group",
+			"pass": true
+		},
+		{
+			"label": "Every copy inherits scale, rotation and the ball colour",
+			"pass": true
+		},
+		{
+			"label": "Other motif addresses remain unchanged",
+			"pass": true
+		},
+		{
+			"label": "A distant copy collider follows its 0.8 scale",
+			"pass": true
+		},
+		{
+			"label": "Input sends exactly one real ball",
+			"pass": true
+		},
+		{
+			"label": "Hitting another copy updates the same motif once",
+			"pass": true
+		},
+		{
+			"label": "All copies reach 0.64 scale, 45 degrees and the new colour",
+			"pass": true
+		},
+		{
+			"label": "Pattern gaps retain solid backing",
+			"pass": true
+		},
+		{
+			"label": "Input sends exactly one real ball",
+			"pass": true
+		},
+		{
+			"label": "Backing impact cannot create a hidden pattern",
+			"pass": true
+		},
+		{
+			"label": "Cover impact does not repeat through the floor",
+			"pass": true
+		},
+		{
+			"label": "REST keeps the repeated pattern",
+			"pass": true
+		},
+		{
+			"label": "Real player can stand between pattern tiles",
+			"pass": true
+		},
+		{
+			"label": "Existing sphere can still be picked up",
+			"pass": true
+		},
+		{
+			"label": "Input sends exactly one real ball",
+			"pass": true
+		},
+		{
+			"label": "Held sphere adds a second independent motif address",
+			"pass": true
+		},
+		{
+			"label": "Second address uses its own colour",
+			"pass": true
+		},
+		{
+			"label": "RESET clears every copied hit and mark",
+			"pass": true
+		},
+		{
+			"label": "RESET restores all poses",
+			"pass": true
+		},
+		{
+			"label": "RESET restores collider over former gap",
+			"pass": true
+		},
+		{
+			"label": "Skull impact retains local colour without triggering player pattern",
+			"pass": true
+		},
+		{
+			"label": "Input sends exactly one real ball",
+			"pass": true
+		},
+		{
+			"label": "New START also restores the floor",
+			"pass": true
+		},
+		{
+			"label": "Input sends exactly one real ball",
+			"pass": true
+		},
+		{
+			"label": "Colour remains local: one hit, one tile",
+			"pass": true
+		},
+		{
+			"label": "Exit restores saved museum unlock",
+			"pass": true
+		},
+		{
+			"label": "Exit removes encounter callback",
+			"pass": true
+		}
+	],
+	"passed": 33,
+	"rendered": true,
+	"source_sha256": "256f1ec3f7e8b8a707a4a4c7ecb0624abcdc33837dbf73f01d61bc37f1051fa6",
+	"total": 33
+}

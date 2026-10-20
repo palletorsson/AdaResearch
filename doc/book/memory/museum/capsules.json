@@ -1,0 +1,112 @@
+{
+  "schema": "museum-memory-capsules/1",
+  "captured_at": "2026-10-11",
+  "rules": [
+    "HOST existing Endless Museum; Day Zero supplies room/view/XR hands.",
+    "Tutorial teaches selected constructions; final.md reflects; exhibits may belong to neither.",
+    "Print complete minimal learner code once; carry actual predecessor; declare support; test exact code and meaningful variations.",
+    "Preserve author choices and reasons. A capsule is navigation, not implementation permission.",
+    "Separate proposal, source inspection, runtime evidence, headset experience and human learning.",
+    "Keep originals. A changed hash asks for reinspection; it does not prove a claim false."
+  ],
+  "rule_sources": {
+    "doc/book/course/storyboards/BRIEF.md": "7b395e54480b2bc7f384a5d8417504c92c680c56010e508fce55052b023defb1"
+  },
+  "limits": [
+    "The route is a memory address system, not a literal architectural floor plan.",
+    "Six opening capsules were compared with selected current tutorial passages. Other halls expose current subject labels only.",
+    "Images are dated museum photographs. They are retrieval cues, not current runtime evidence.",
+    "This prototype does not run DeepSeek-OCR or measure model tokens, reasoning retention, headset behaviour or human learning.",
+    "A future AI must load the packet and fetch its sources; the atlas does not change model weights or provide automatic permanent memory."
+  ],
+  "links": [
+    {
+      "label": "DeepSeek-OCR: official implementation",
+      "url": "https://github.com/deepseek-ai/DeepSeek-OCR"
+    },
+    {
+      "label": "Contexts Optical Compression: paper",
+      "url": "https://arxiv.org/abs/2510.18234"
+    }
+  ],
+  "halls": {
+    "Point_Zero": {
+      "object": "Counter → execution timing",
+      "bring": "Prepared running museum; counter already encountered.",
+      "change": "Minimal counter.gd creates Label3D in _ready; _process reads Engine frames. Move reading to _ready for once-only comparison.",
+      "keep": "Declare reference ≠ create label ≠ attach label. Engine frame count ≠ elapsed seconds.",
+      "carry": "Initialization and repeated execution → Point One.",
+      "do_not_infer": "Do not supply the lesson label secretly or rebuild the museum. Passing code is not evidence of learning.",
+      "sources": {
+        "commons/maps/Point_Zero/tutorial.md": "81b3b9f824e468f7b73605fb49d1c057dd73ade026b31114e99bec9b206230f7",
+        "commons/maps/Point_Zero/final.md": "4a76ac0a6a9339241a3e118762cb05f710925da4ec0d38d5528bc9879cf79e38"
+      },
+      "question": "What does arriving in an already-running world ask us to borrow?"
+    },
+    "Point_One": {
+      "object": "Position → visible, solid point",
+      "bring": "_ready and prepared room/view/player.",
+      "change": "point.gd creates StaticBody3D, SphereMesh and SphereShape3D; named centre/radius drive construction.",
+      "keep": "Position, visible surface and physical boundary are separate. Shared radius keeps the two boundaries aligned.",
+      "carry": "Same authored point construction → Coordinates.",
+      "do_not_infer": "The supplied room does not supply the learner's point. The initial point is not yet pickable.",
+      "sources": {
+        "commons/maps/Point_One/tutorial.md": "48380c6369594e603a34ebfdda5192672987e46c384c671e11b2029ec8a59c31",
+        "commons/maps/Point_One/final.md": "5ff4d712b9bcc4b614daefb03f56a4504a26d636632dcfbb53c9ce0d2a4658d3"
+      },
+      "question": "What has a visible surface added to a mathematical point?"
+    },
+    "Point_Coordinates": {
+      "object": "Same point → held position",
+      "bring": "Point One construction: centre, radius, mesh and collider; configured XR hands/library supplied.",
+      "change": "Replace body with XRToolsPickable; set pickup/release; create readout. Compare global_position with PointStudy.to_local.",
+      "keep": "Continue the point; name both frames. LOCAL and WORLD can differ without moving the point in the world.",
+      "carry": "Pickable, readable point → Lines.",
+      "do_not_infer": "Distance is the next hall's subject. Construction continuity does not mean automatic runtime object transport.",
+      "sources": {
+        "commons/maps/Point_Coordinates/tutorial.md": "bf928382c9b75738b8eccf17f2f5b5552476b9a401bf1cb94c70bbe5b2cfccb8",
+        "commons/maps/Point_Coordinates/final.md": "de833bd8680b372c552020b8b9189de03f2b8df0d1a78d7cc035a1351deccad0"
+      },
+      "question": "Does the name belong to the position, sphere or permission to hold it?"
+    },
+    "Point_Lines": {
+      "object": "Two points → relation",
+      "bring": "Coordinates' pickable construction and readout.",
+      "change": "Extract PointBody class; instantiate endpoints. displacement = B - A; length gives distance. LineSkin draws span. Compare parallel, plus and X.",
+      "keep": "Displacement has direction; length does not. Endpoint positions use one unit-scale study frame.",
+      "carry": "Unchanged PointBody and LineSkin → Trace; replace live pair with recorded neighbours.",
+      "do_not_infer": "A live segment retains no journey. The line's social associations belong to final.md, not extra implementation obligations.",
+      "sources": {
+        "commons/maps/Point_Lines/tutorial.md": "cad7e95a0e3f3a6a67bc3746c353076f8b67604370fbea9a4c01b9edbfcc0550",
+        "commons/maps/Point_Lines/final.md": "8e38115fd7eb15593a9c9940668aa4b037a77434b8050a38851ad0908d1dd197"
+      },
+      "question": "What does measurement keep, and when does a line become an instruction?"
+    },
+    "Point_Trace": {
+      "object": "Held point → retained gesture",
+      "bring": "PointBody + LineSkin from Lines; unit-scale PointStudy.",
+      "change": "Array[Vector3] stores local metre positions; append/index; distance IF >= 0.05; neighbour FOR draws segments. Intentional release saves via supplied TraceArchive.",
+      "keep": "Sampled positions + existing segment sculpture; order retained; no timestamps. Pause need not append. Cleanup must not overwrite an intentional save.",
+      "carry": "user://ada_student_trace.scn in same project → Grid. A later valid release replaces the saved work.",
+      "do_not_infer": "This is not every hand sample or a timed replay. October 4 session-only evidence cannot describe the later saved tutorial handoff.",
+      "sources": {
+        "commons/maps/Point_Trace/tutorial.md": "dcf7cc4f3db777bc05056823f2c7759b8667feca6fb6e545ae1e4321449e4d35",
+        "commons/maps/Point_Trace/final.md": "1f2044371946904df29a1512b79394665b006365f147a53901c5db00c0185a64"
+      },
+      "question": "What of a gesture remains when the record has no time?"
+    },
+    "Point_Line_Grid": {
+      "object": "Saved gesture → sculpture + addresses",
+      "bring": "Load Trace's positions and existing segments from user://ada_student_trace.scn in the same project.",
+      "change": "Keep pink original; duplicate nodes, meshes and materials for green copy. Round XYZ / grid_step into integer addresses; place at address * grid_step.",
+      "keep": "Original positions and archive unchanged. Display offsets do not enter quantization. No save means ask for Trace, not invent a drawing.",
+      "carry": "Preserved source positions → Triangle; record and representation remain distinct.",
+      "do_not_infer": "Rounding loses distinctions and cannot recover an arbitrary original. The museum exhibit and reduced learner study need not use identical frames or spacing.",
+      "sources": {
+        "commons/maps/Point_Line_Grid/tutorial.md": "9f97d12c38c7138758cff138e61b031878f1a2fc18c3a42be1143190f62a2c3c",
+        "commons/maps/Point_Line_Grid/final.md": "86f9d4cc034ca15db03657179c65cdc18280a0ef73cdb8549f3b60ffd05759c8"
+      },
+      "question": "What distinctions disappear when several positions share an address?"
+    }
+  }
+}

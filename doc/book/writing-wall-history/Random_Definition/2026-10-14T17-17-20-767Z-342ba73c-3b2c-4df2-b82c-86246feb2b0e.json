@@ -1,0 +1,253 @@
+{
+  "at": "2026-10-14T17:17:20.767Z",
+  "previous": "{\n  \"schema\": \"writing-wall/1\",\n  \"map\": \"Random_Definition\",\n  \"order\": [\n    \"seed_study\",\n    \"seed_replay_demo\",\n    \"seed_replay_demo/movement_sampler\",\n    \"random_return\",\n    \"random_number_book_page_1955\",\n    \"trng_vs_prng\",\n    \"prng_crank_machine\",\n    \"film_prng_register\",\n    \"seed_replay_demo/frame_timing\",\n    \"seed_replay_demo/source_console\",\n    \"lava_entropy_wall\",\n    \"geiger_counter\",\n    \"slot_machine\"\n  ],\n  \"magnets\": [\n    {\n      \"id\": \"seed_study\",\n      \"x\": 55,\n      \"y\": 65,\n      \"brief\": \"48 stored values become colour, bars, colour + height, size and rotation.\",\n      \"question\": \"What is allowed to change when the numbers stay?\",\n      \"theme\": \"assignment\",\n      \"tutorial\": \"Reconstruct the five assignments from one stored sample. Compare one cell; preserve the mapping and version.\",\n      \"final\": \"Follow one cell between surfaces. Describe what becomes perceptible and what gets lost.\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"seed_replay_demo\",\n      \"x\": 355,\n      \"y\": 65,\n      \"brief\": \"Paired colour windows replay a seeded stream. The right window can change RGB assignment and output range while the left remains a baseline. Discarding one draw is a separate intervention.\",\n      \"question\": \"Where do the numbers act, and within which range?\",\n      \"theme\": \"assignment\",\n      \"tutorial\": \"Keep the left window as baseline. Compare RGB / red-only / swapped channels and full / narrow range on the right. Keep the seed and draw count fixed.\",\n      \"final\": \"A number has no colour until we assign one. Compare this bounded colour space with the sphere’s bounded travel.\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"random_return\",\n      \"x\": 655,\n      \"y\": 65,\n      \"brief\": \"Hold the sphere to travel out and back. Direction and distance are sampled; returning is prescribed.\",\n      \"question\": \"How much freedom does the rule permit?\",\n      \"theme\": \"experience\",\n      \"tutorial\": \"Trace two draws into angle and distance; distinguish a sampled destination from the authored return.\",\n      \"final\": \"The same rule carries a body. What changes when uncertainty becomes a journey?\",\n      \"proposal\": \"Compare ranges or direction sectors while preserving the same draws; retain collision-aware carrying.\"\n    },\n    {\n      \"id\": \"prng_crank_machine\",\n      \"x\": 955,\n      \"y\": 65,\n      \"brief\": \"Each crank advances a visible deterministic state.\",\n      \"question\": \"What must we know to predict the next value?\",\n      \"theme\": \"procedure\",\n      \"tutorial\": \"Step, reset and reproduce the state transition. Separate seed, state and output.\",\n      \"final\": \"A surprising sequence can have an entirely repeatable construction.\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"film_prng_register\",\n      \"x\": 55,\n      \"y\": 305,\n      \"brief\": \"A supporting view of a pseudorandom procedure.\",\n      \"question\": \"Which hidden step becomes visible here?\",\n      \"theme\": \"procedure\",\n      \"tutorial\": \"Use beside the crank as a closer examination of the implementation.\",\n      \"final\": \"What does revealing the mechanism change about surprise?\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"seed_replay_demo/frame_timing\",\n      \"x\": 355,\n      \"y\": 305,\n      \"brief\": \"Measures application frame intervals. Irregular timing is not an entropy estimate.\",\n      \"question\": \"Does looking irregular tell us where uncertainty came from?\",\n      \"theme\": \"measurement\",\n      \"tutorial\": \"Hold a trace, change display range, and distinguish recorded timing from a seeded sequence.\",\n      \"final\": \"An uneven line invites a claim of randomness. What evidence would support that claim?\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"seed_replay_demo/movement_sampler\",\n      \"x\": 655,\n      \"y\": 305,\n      \"brief\": \"Records movement and derives a seed from the recording.\",\n      \"question\": \"What survives when a gesture becomes an integer?\",\n      \"theme\": \"source\",\n      \"tutorial\": \"Capture, retain the receipt, replay. Separate fresh movement from reuse of its derived seed.\",\n      \"final\": \"A hand participates in choosing a world; the encoding decides what of it remains.\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"seed_replay_demo/source_console\",\n      \"x\": 955,\n      \"y\": 305,\n      \"brief\": \"Chooses among a number, hand recording, clock snapshot, frame intervals, system random and saved atmospheric input.\",\n      \"question\": \"What changed: source, record, seed or use?\",\n      \"theme\": \"source\",\n      \"tutorial\": \"Trace the provenance of one kept seed into separate colour and journey generators.\",\n      \"final\": \"An arrival becomes something we can return to. Keeping it does not ask the source again.\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"random_number_book_page_1955\",\n      \"x\": 55,\n      \"y\": 545,\n      \"brief\": \"Recalls RAND’s published random-number table through an authored page of falling digits.\",\n      \"question\": \"How can chance become addressable and reusable?\",\n      \"theme\": \"record\",\n      \"tutorial\": \"Distinguish stored outcomes from regenerated ones. Record where reading begins.\",\n      \"final\": \"The page looks like a book until a line falls away. What does preservation require?\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"trng_vs_prng\",\n      \"x\": 361.88159258612274,\n      \"y\": 663.4484084556842,\n      \"brief\": \"A comparison exhibit about physical sources and deterministic generation.\",\n      \"question\": \"What evidence distinguishes origins, beyond appearance?\",\n      \"theme\": \"source\",\n      \"tutorial\": \"Compare the declared source and generation procedure. Inspect implementation before treating any simulated stream as physical entropy.\",\n      \"final\": \"Repeatability and fresh uncertainty serve different purposes. Who needs to predict what?\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"lava_entropy_wall\",\n      \"x\": 655,\n      \"y\": 545,\n      \"brief\": \"Virtual lamps, a synthetic sensor and processing produce a repeatable record. This is a simulation.\",\n      \"question\": \"How does the observation rule participate in the result?\",\n      \"theme\": \"measurement\",\n      \"tutorial\": \"Hold the lamp model fixed; change the sensor mask; keep and replay the receipt.\",\n      \"final\": \"A moving surface is not itself proof of entropy. Where does the apparatus make its choices?\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"geiger_counter\",\n      \"x\": 955,\n      \"y\": 545,\n      \"brief\": \"Simulated detection times become electronic clicks and interval-comparison bits.\",\n      \"question\": \"Can the same events say something different through a different clock?\",\n      \"theme\": \"measurement\",\n      \"tutorial\": \"Compare 1 ms and 100 ms clocks on one trace; reconstruct the extracted bits.\",\n      \"final\": \"Hear clusters and silences. Change measurement while keeping the sound. What deserves another experiment?\",\n      \"proposal\": \"\"\n    },\n    {\n      \"id\": \"slot_machine\",\n      \"x\": 55,\n      \"y\": 785,\n      \"brief\": \"A familiar lever turns sampled symbols into anticipation and counts.\",\n      \"question\": \"What do counts retain of an individual encounter?\",\n      \"theme\": \"experience\",\n      \"tutorial\": \"Separate an outcome, its mapping and a histogram. Continue into Random Entropy.\",\n      \"final\": \"Expectation can make a repeated pattern feel significant. Record the experience before interpreting it.\",\n      \"proposal\": \"\"\n    }\n  ],\n  \"notes\": [\n    {\n      \"id\": \"note-range\",\n      \"x\": 410,\n      \"y\": 990,\n      \"layer\": \"final\",\n      \"text\": \"Palle: the window and the moving sphere ask the same question. Within what range, and towards what, is randomness directed?\",\n      \"attachedTo\": \"random_return\"\n    },\n    {\n      \"id\": \"note-source\",\n      \"x\": 730,\n      \"y\": 990,\n      \"layer\": \"tutorial\",\n      \"text\": \"Distinguish a changing display, an irregular measurement, a seed, a PRNG sequence and a physical entropy source. The frame monitor measures variation; it does not establish entropy.\",\n      \"attachedTo\": \"seed_replay_demo/frame_timing\"\n    },\n    {\n      \"id\": \"note-return\",\n      \"x\": 1010,\n      \"y\": 990,\n      \"layer\": \"final\",\n      \"text\": \"Return to one cell. What did a mapping reveal or obscure? Keep the comparison and let the observation change the text or apparatus.\",\n      \"attachedTo\": \"seed_study\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"id\": \"edge-opening-0\",\n      \"from\": \"seed_study\",\n      \"to\": \"seed_replay_demo\",\n      \"layer\": \"tutorial\",\n      \"directed\": true,\n      \"label\": \"same values, another assignment\"\n    },\n    {\n      \"id\": \"edge-opening-1\",\n      \"from\": \"seed_replay_demo\",\n      \"to\": \"random_return\",\n      \"layer\": \"final\",\n      \"directed\": true,\n      \"label\": \"where randomness is allowed to act\"\n    },\n    {\n      \"id\": \"edge-opening-2\",\n      \"from\": \"seed_replay_demo\",\n      \"to\": \"prng_crank_machine\",\n      \"layer\": \"tutorial\",\n      \"directed\": true,\n      \"label\": \"open the procedure\"\n    },\n    {\n      \"id\": \"edge-opening-3\",\n      \"from\": \"seed_replay_demo/frame_timing\",\n      \"to\": \"seed_replay_demo/source_console\",\n      \"layer\": \"tutorial\",\n      \"directed\": true,\n      \"label\": \"irregular is not certified entropy\"\n    },\n    {\n      \"id\": \"edge-opening-4\",\n      \"from\": \"seed_replay_demo/source_console\",\n      \"to\": \"seed_replay_demo\",\n      \"layer\": \"shared\",\n      \"directed\": true,\n      \"label\": \"a kept number becomes a seed\"\n    },\n    {\n      \"id\": \"edge-opening-5\",\n      \"from\": \"lava_entropy_wall\",\n      \"to\": \"geiger_counter\",\n      \"layer\": \"tutorial\",\n      \"directed\": true,\n      \"label\": \"change measurement; preserve events\"\n    },\n    {\n      \"id\": \"edge-opening-6\",\n      \"from\": \"geiger_counter\",\n      \"to\": \"seed_study\",\n      \"layer\": \"final\",\n      \"directed\": true,\n      \"label\": \"return with a different question\"\n    }\n  ]\n}\n",
+  "next": {
+    "schema": "writing-wall/1",
+    "map": "Random_Definition",
+    "order": [
+      "lava_entropy_wall",
+      "seed_replay_demo/source_console",
+      "seed_replay_demo/frame_timing",
+      "film_prng_register",
+      "geiger_counter",
+      "slot_machine",
+      "prng_crank_machine",
+      "trng_vs_prng",
+      "random_return",
+      "seed_replay_demo/movement_sampler",
+      "random_number_book_page_1955",
+      "seed_study",
+      "seed_replay_demo"
+    ],
+    "magnets": [
+      {
+        "id": "seed_study",
+        "x": 55,
+        "y": 65,
+        "brief": "48 stored values become colour, bars, colour + height, size and rotation.",
+        "question": "What is allowed to change when the numbers stay?",
+        "theme": "assignment",
+        "tutorial": "Reconstruct the five assignments from one stored sample. Compare one cell; preserve the mapping and version.",
+        "final": "Follow one cell between surfaces. Describe what becomes perceptible and what gets lost.",
+        "proposal": ""
+      },
+      {
+        "id": "seed_replay_demo",
+        "x": 355,
+        "y": 65,
+        "brief": "Paired colour windows replay a seeded stream. The right window can change RGB assignment and output range while the left remains a baseline. Discarding one draw is a separate intervention.",
+        "question": "Where do the numbers act, and within which range?",
+        "theme": "assignment",
+        "tutorial": "Keep the left window as baseline. Compare RGB / red-only / swapped channels and full / narrow range on the right. Keep the seed and draw count fixed.",
+        "final": "A number has no colour until we assign one. Compare this bounded colour space with the sphere’s bounded travel.",
+        "proposal": ""
+      },
+      {
+        "id": "random_return",
+        "x": 655,
+        "y": 65,
+        "brief": "Hold the sphere to travel out and back. Direction and distance are sampled; returning is prescribed.",
+        "question": "How much freedom does the rule permit?",
+        "theme": "experience",
+        "tutorial": "Trace two draws into angle and distance; distinguish a sampled destination from the authored return.",
+        "final": "The same rule carries a body. What changes when uncertainty becomes a journey?",
+        "proposal": "Compare ranges or direction sectors while preserving the same draws; retain collision-aware carrying."
+      },
+      {
+        "id": "prng_crank_machine",
+        "x": 955,
+        "y": 65,
+        "brief": "Each crank advances a visible deterministic state.",
+        "question": "What must we know to predict the next value?",
+        "theme": "procedure",
+        "tutorial": "Step, reset and reproduce the state transition. Separate seed, state and output.",
+        "final": "A surprising sequence can have an entirely repeatable construction.",
+        "proposal": ""
+      },
+      {
+        "id": "film_prng_register",
+        "x": 55,
+        "y": 305,
+        "brief": "A supporting view of a pseudorandom procedure.",
+        "question": "Which hidden step becomes visible here?",
+        "theme": "procedure",
+        "tutorial": "Use beside the crank as a closer examination of the implementation.",
+        "final": "What does revealing the mechanism change about surprise?",
+        "proposal": ""
+      },
+      {
+        "id": "seed_replay_demo/frame_timing",
+        "x": 355,
+        "y": 305,
+        "brief": "Measures application frame intervals. Irregular timing is not an entropy estimate.",
+        "question": "Does looking irregular tell us where uncertainty came from?",
+        "theme": "measurement",
+        "tutorial": "Hold a trace, change display range, and distinguish recorded timing from a seeded sequence.",
+        "final": "An uneven line invites a claim of randomness. What evidence would support that claim?",
+        "proposal": ""
+      },
+      {
+        "id": "seed_replay_demo/movement_sampler",
+        "x": 655,
+        "y": 305,
+        "brief": "Records movement and derives a seed from the recording.",
+        "question": "What survives when a gesture becomes an integer?",
+        "theme": "source",
+        "tutorial": "Capture, retain the receipt, replay. Separate fresh movement from reuse of its derived seed.",
+        "final": "A hand participates in choosing a world; the encoding decides what of it remains.",
+        "proposal": ""
+      },
+      {
+        "id": "seed_replay_demo/source_console",
+        "x": 955,
+        "y": 305,
+        "brief": "Chooses among a number, hand recording, clock snapshot, frame intervals, system random and saved atmospheric input.",
+        "question": "What changed: source, record, seed or use?",
+        "theme": "source",
+        "tutorial": "Trace the provenance of one kept seed into separate colour and journey generators.",
+        "final": "An arrival becomes something we can return to. Keeping it does not ask the source again.",
+        "proposal": ""
+      },
+      {
+        "id": "random_number_book_page_1955",
+        "x": 55,
+        "y": 545,
+        "brief": "Recalls RAND’s published random-number table through an authored page of falling digits.",
+        "question": "How can chance become addressable and reusable?",
+        "theme": "record",
+        "tutorial": "Distinguish stored outcomes from regenerated ones. Record where reading begins.",
+        "final": "The page looks like a book until a line falls away. What does preservation require?",
+        "proposal": ""
+      },
+      {
+        "id": "trng_vs_prng",
+        "x": 361.88159258612274,
+        "y": 663.4484084556842,
+        "brief": "A comparison exhibit about physical sources and deterministic generation.",
+        "question": "What evidence distinguishes origins, beyond appearance?",
+        "theme": "source",
+        "tutorial": "Compare the declared source and generation procedure. Inspect implementation before treating any simulated stream as physical entropy.",
+        "final": "Repeatability and fresh uncertainty serve different purposes. Who needs to predict what?",
+        "proposal": ""
+      },
+      {
+        "id": "lava_entropy_wall",
+        "x": 655,
+        "y": 545,
+        "brief": "Virtual lamps, a synthetic sensor and processing produce a repeatable record. This is a simulation.",
+        "question": "How does the observation rule participate in the result?",
+        "theme": "measurement",
+        "tutorial": "Hold the lamp model fixed; change the sensor mask; keep and replay the receipt.",
+        "final": "A moving surface is not itself proof of entropy. Where does the apparatus make its choices?",
+        "proposal": ""
+      },
+      {
+        "id": "geiger_counter",
+        "x": 955,
+        "y": 545,
+        "brief": "Simulated detection times become electronic clicks and interval-comparison bits.",
+        "question": "Can the same events say something different through a different clock?",
+        "theme": "measurement",
+        "tutorial": "Compare 1 ms and 100 ms clocks on one trace; reconstruct the extracted bits.",
+        "final": "Hear clusters and silences. Change measurement while keeping the sound. What deserves another experiment?",
+        "proposal": ""
+      },
+      {
+        "id": "slot_machine",
+        "x": 55,
+        "y": 785,
+        "brief": "A familiar lever turns sampled symbols into anticipation and counts.",
+        "question": "What do counts retain of an individual encounter?",
+        "theme": "experience",
+        "tutorial": "Separate an outcome, its mapping and a histogram. Continue into Random Entropy.",
+        "final": "Expectation can make a repeated pattern feel significant. Record the experience before interpreting it.",
+        "proposal": ""
+      }
+    ],
+    "notes": [
+      {
+        "id": "note-range",
+        "x": 410,
+        "y": 990,
+        "layer": "final",
+        "text": "Palle: the window and the moving sphere ask the same question. Within what range, and towards what, is randomness directed?",
+        "attachedTo": "random_return"
+      },
+      {
+        "id": "note-source",
+        "x": 730,
+        "y": 990,
+        "layer": "tutorial",
+        "text": "Distinguish a changing display, an irregular measurement, a seed, a PRNG sequence and a physical entropy source. The frame monitor measures variation; it does not establish entropy.",
+        "attachedTo": "seed_replay_demo/frame_timing"
+      },
+      {
+        "id": "note-return",
+        "x": 1010,
+        "y": 990,
+        "layer": "final",
+        "text": "Return to one cell. What did a mapping reveal or obscure? Keep the comparison and let the observation change the text or apparatus.",
+        "attachedTo": "seed_study"
+      }
+    ],
+    "edges": [
+      {
+        "id": "edge-opening-0",
+        "from": "seed_study",
+        "to": "seed_replay_demo",
+        "layer": "tutorial",
+        "directed": true,
+        "label": "same values, another assignment"
+      },
+      {
+        "id": "edge-opening-1",
+        "from": "seed_replay_demo",
+        "to": "random_return",
+        "layer": "final",
+        "directed": true,
+        "label": "where randomness is allowed to act"
+      },
+      {
+        "id": "edge-opening-2",
+        "from": "seed_replay_demo",
+        "to": "prng_crank_machine",
+        "layer": "tutorial",
+        "directed": true,
+        "label": "open the procedure"
+      },
+      {
+        "id": "edge-opening-3",
+        "from": "seed_replay_demo/frame_timing",
+        "to": "seed_replay_demo/source_console",
+        "layer": "tutorial",
+        "directed": true,
+        "label": "irregular is not certified entropy"
+      },
+      {
+        "id": "edge-opening-4",
+        "from": "seed_replay_demo/source_console",
+        "to": "seed_replay_demo",
+        "layer": "shared",
+        "directed": true,
+        "label": "a kept number becomes a seed"
+      },
+      {
+        "id": "edge-opening-5",
+        "from": "lava_entropy_wall",
+        "to": "geiger_counter",
+        "layer": "tutorial",
+        "directed": true,
+        "label": "change measurement; preserve events"
+      },
+      {
+        "id": "edge-opening-6",
+        "from": "geiger_counter",
+        "to": "seed_study",
+        "layer": "final",
+        "directed": true,
+        "label": "return with a different question"
+      }
+    ]
+  },
+  "sourceVersion": "2fdd6eab0c297a9a8615c706024a0303a82baed0e0ac3ade70390be95fd73951"
+}

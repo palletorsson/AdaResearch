@@ -1,0 +1,106 @@
+{
+	"checks": [
+		{
+			"label": "World ready",
+			"pass": true
+		},
+		{
+			"label": "Desktop ignores only paint tiles",
+			"pass": true
+		},
+		{
+			"label": "XR body shares the same walking floor",
+			"pass": true
+		},
+		{
+			"label": "Real desktop shot repeats the tile operation",
+			"pass": true
+		},
+		{
+			"label": "All 18 copies flash in the same frame",
+			"pass": true
+		},
+		{
+			"label": "Other motif addresses do not flash",
+			"pass": true
+		},
+		{
+			"label": "Flash fades without losing paint or transforms",
+			"pass": true
+		},
+		{
+			"label": "Old tile-edge obstruction reproduced",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches START",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches REST",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches RESET",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches 1 FORM",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches 2 MOVE",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches 3 ARRAY",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches 4 COLOUR",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches 5 TILE",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches 6 CHANGE",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches MUSEUM >",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches FULL BIOME",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches MENU",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches NEXT STAGE",
+			"pass": true
+		},
+		{
+			"label": "Walk reaches MUSEUM >",
+			"pass": true
+		},
+		{
+			"label": "Projectile mask still sees a changed tile",
+			"pass": true
+		},
+		{
+			"label": "RESET clears flash and marks",
+			"pass": true
+		},
+		{
+			"label": "Next stage binds its new tile colliders",
+			"pass": true
+		}
+	],
+	"passed": 25,
+	"total": 25
+}
