@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://jefcxemsx5kg"]
+
+[ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1"]
+[ext_resource type="Script" uid="uid://br0tj7glfgtiv" path="res://commons/museum_runner/game.gd" id="2"]
+
+[node name="MuseumRunner" unique_id=1757298550 instance=ExtResource("1")]
+script = ExtResource("2")
+save_path = "user://museum-runner/best.cfg"

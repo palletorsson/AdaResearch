@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://commons/shadow_game/world.gd" id="2_world"]
+
+[node name="ShadowGame" instance=ExtResource("1_base")]
+script = ExtResource("2_world")
+
+[node name="Label3D" parent="." index="2"]
+visible = false
+
+[node name="env" parent="." index="4"]
+process_mode = 4
+
+[node name="PlayerBoundsCheck" parent="." index="6"]
+active = false

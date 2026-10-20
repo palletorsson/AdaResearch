@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/museum_runner/runner_map.gd" id="1"]
+
+[node name="PointLine" type="Node3D"]
+script = ExtResource("1")
+title = "POINT / LINE"
+chapter = 0
+sections = 3
+course_seed = 17
+start_speed = 5.5

@@ -1,0 +1,768 @@
+{
+  "version": 1,
+  "title": "From a point, a world",
+  "scope": "An authored capacity tree for Primitives → Transformation, with two later returns. This is a revisable route through existing material, not a prerequisite order for every artifact in the museum.",
+  "updated": "2026-10-19",
+  "rules": [
+    "Keep understanding, usable construction and cultural association distinct.",
+    "An edge proposes a specific relationship, not documented code inheritance or universal historical descent.",
+    "In Void means an implementation is placed; it does not certify every interaction or headset performance.",
+    "A source in the museum is not automatically a reusable Void building piece.",
+    "Keep the recipe and stable identity when carrying an object forward."
+  ],
+  "states": {
+    "placed": "In Void",
+    "source": "Source exists",
+    "proposed": "Connection to build"
+  },
+  "edgeKinds": {
+    "learn": "Learning route",
+    "associate": "Association",
+    "combine": "Combine / carry"
+  },
+  "nodes": [
+    {
+      "id": "clock",
+      "title": "A running world",
+      "subtitle": "Time / update",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 100,
+      "y": 120,
+      "understand": "Initialization creates the object; repeated updates change its state.",
+      "build": "A counter; later, time-driven movement.",
+      "gap": "A clock supplies time. It does not itself supply a movement rule.",
+      "sources": [
+        "commons/visualaid/frame_counter/frame_counter_display.tscn",
+        "commons/maps/Point_Zero/tutorial.md"
+      ],
+      "hall": "Point_Zero",
+      "floor": 0,
+      "icon": "clock"
+    },
+    {
+      "id": "point",
+      "title": "Point",
+      "subtitle": "Position / variable",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 100,
+      "y": 400,
+      "understand": "Give one position a name. A visible sphere represents the point; it has a size that the mathematical point does not.",
+      "build": "One visible body that later receives interaction.",
+      "gap": "Keep the same learner object across the lesson handoff.",
+      "sources": [
+        "commons/maps/Point_One/tutorial.md",
+        "commons/primitives/point/point_solid.tscn"
+      ],
+      "hall": "Point_One",
+      "floor": 1,
+      "icon": "point"
+    },
+    {
+      "id": "held",
+      "title": "A point in the hand",
+      "subtitle": "Local / world coordinates",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 100,
+      "y": 650,
+      "understand": "Pickup changes who controls the body. Read its position relative to its parent and to the world.",
+      "build": "A movable endpoint and a spatial control.",
+      "gap": "This lesson focuses on pickup and reference frames, not distance calculation.",
+      "sources": [
+        "commons/primitives/point/point_held.tscn",
+        "commons/maps/Point_Coordinates/tutorial.md"
+      ],
+      "hall": "Point_Coordinates",
+      "floor": 2,
+      "icon": "hand"
+    },
+    {
+      "id": "line",
+      "title": "Line",
+      "subtitle": "Two endpoints / relation",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 400,
+      "y": 400,
+      "understand": "Two positions define a finite segment. Their difference gives displacement; its length gives distance.",
+      "build": "Connect, measure, align, cross or follow.",
+      "gap": "A visible segment only becomes a physical beam when width and collision are supplied.",
+      "sources": [
+        "commons/maps/Point_Lines/tutorial.md",
+        "commons/artifacts/line_relations_gallery/line_body.gd"
+      ],
+      "hall": "Point_Lines",
+      "floor": 3,
+      "icon": "line"
+    },
+    {
+      "id": "trace",
+      "title": "Trace",
+      "subtitle": "Array / loop / condition",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 400,
+      "y": 120,
+      "understand": "Keep sampled positions in order. Accept a new entry when it is far enough from the last; connect neighbours.",
+      "build": "A drawn path that can be kept and used again.",
+      "gap": "Separate the original record from a transformed or snapped result.",
+      "sources": [
+        "commons/maps/Point_Trace/tutorial.md",
+        "commons/globals/trace_data.gd",
+        "commons/void/trace_area.gd"
+      ],
+      "hall": "Point_Trace",
+      "floor": 4,
+      "icon": "trace"
+    },
+    {
+      "id": "grid",
+      "title": "Grid",
+      "subtitle": "Address / quantization",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 700,
+      "y": 120,
+      "understand": "Assign sampled positions to cells; compare an address with a continuous position.",
+      "build": "Replay the retained trace in the shaft grid.",
+      "gap": "A grid address is not yet a construction joint or a walkable block.",
+      "sources": [
+        "commons/void/grid_area.gd",
+        "commons/void/grid_replay.tscn",
+        "commons/maps/Point_Line_Grid/tutorial.md"
+      ],
+      "hall": "Point_Line_Grid",
+      "floor": 4,
+      "icon": "grid"
+    },
+    {
+      "id": "triangle",
+      "title": "Triangle",
+      "subtitle": "Three corners / one face",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 700,
+      "y": 400,
+      "understand": "Three non-collinear positions define a planar triangle; index order determines its facing.",
+      "build": "An explicit surface and a component of a larger mesh.",
+      "gap": "A triangle mesh is not automatically a physical support.",
+      "sources": [
+        "commons/maps/Point_Triangle_Context/tutorial.md",
+        "commons/void/triangle_area.gd"
+      ],
+      "hall": "Point_Triangle_Context",
+      "floor": 5,
+      "icon": "triangle"
+    },
+    {
+      "id": "body",
+      "title": "Closed body",
+      "subtitle": "Shared vertices / face list",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 1000,
+      "y": 400,
+      "understand": "Join faces through shared corner indices to enclose a volume.",
+      "build": "Tetrahedra, prisms and other bodies made from known faces.",
+      "gap": "Closure, outward normals and collision are separate things to check.",
+      "sources": [
+        "commons/maps/Primitives_Polythedra/tutorial.md",
+        "commons/artifacts/primitive_encounters/align_solid.gd"
+      ],
+      "hall": "Primitives_Polythedra",
+      "floor": 6,
+      "icon": "body"
+    },
+    {
+      "id": "wedge",
+      "title": "Walkable wedge",
+      "subtitle": "wp / support / ascent",
+      "kind": "capacity",
+      "state": "source",
+      "x": 1250,
+      "y": 280,
+      "understand": "An inclined surface connects two heights. The original wp rises 1 m over a 2 m run.",
+      "build": "A slope joining ordinary floor to a raised landing.",
+      "gap": "Restore this exact module in the Void kit; preserve its footprint, origin and collision.",
+      "sources": [
+        "commons/scenes/mapobjects/walkableprism.tscn",
+        "commons/grid/GridUtilitiesComponent.gd",
+        "commons/maps/Primitives_Polythedra/tutorial.md"
+      ],
+      "hall": "Primitives_Polythedra",
+      "floor": 6,
+      "icon": "wedge"
+    },
+    {
+      "id": "cube",
+      "title": "Cube",
+      "subtitle": "Eight corners / reusable body",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 1250,
+      "y": 520,
+      "understand": "The same eight corner positions support twelve surface triangles. Place an instance without changing those local positions.",
+      "build": "A candidate one-metre landing, block or support.",
+      "gap": "The tutorial CubeBody currently has no collider. The reusable walkable variant still needs one.",
+      "sources": [
+        "commons/maps/Point_Animatedcube/tutorial.md",
+        "commons/void/primitive_cube.tscn"
+      ],
+      "hall": "Point_Animatedcube",
+      "floor": 7,
+      "icon": "cube"
+    },
+    {
+      "id": "assembly",
+      "title": "Walkable construction",
+      "subtitle": "Wedge + cube + valid joins",
+      "kind": "assembly",
+      "state": "proposed",
+      "x": 1540,
+      "y": 400,
+      "understand": "A relation between bodies creates a continuous route. Test the joins at the scale of the player.",
+      "build": "A slope leading onto a one-metre landing, then a longer crossing.",
+      "gap": "Missing link: shared buildable modules with consistent dimensions, collision and editor connections.",
+      "sources": [
+        "commons/scenes/mapobjects/walkableprism.tscn",
+        "commons/maps/Point_Animatedcube/tutorial.md",
+        "commons/void/rooms.schema.json"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "assembly"
+    },
+    {
+      "id": "transform",
+      "title": "Transformation",
+      "subtitle": "Position / rotation / scale",
+      "kind": "capacity",
+      "state": "placed",
+      "x": 1840,
+      "y": 400,
+      "understand": "Change a whole body through time while retaining its identity and local shape recipe.",
+      "build": "The existing still, rise, turn and pulse demonstrations in Trans_Pre.",
+      "gap": "The trial demonstrates transforms. Passenger-carrying moving architecture is a separate, unbuilt connection.",
+      "sources": [
+        "commons/void/trials/transformation/rooms.json",
+        "commons/maps/Trans_Pre/tutorial.md",
+        "doc/book/iterations/2026-10-19-void-separate-trials/verification.json"
+      ],
+      "hall": "Trans_Pre",
+      "floor": null,
+      "icon": "transform"
+    },
+    {
+      "id": "beacon",
+      "title": "Carried light",
+      "subtitle": "Point → beacon",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 100,
+      "y": 870,
+      "understand": "A small source can alter the visible space around a moving body.",
+      "build": "The shiny black point lights the basin while held.",
+      "gap": "Association gives the object another use; lighting is not a mathematical property of a point.",
+      "sources": [
+        "commons/void/carried_point_light.gd"
+      ],
+      "hall": "Point_Coordinates",
+      "floor": 2,
+      "icon": "lamp"
+    },
+    {
+      "id": "ruler",
+      "title": "Ruler",
+      "subtitle": "Line → measure",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 400,
+      "y": 650,
+      "understand": "Read an endpoint displacement using declared units and drawing scale.",
+      "build": "The 1:10 plan measure and 1:1 full-size ruler.",
+      "gap": "Keep scale and units visible; a short representation can refer to a much larger distance.",
+      "sources": [
+        "commons/void/lines_survey.gd",
+        "commons/artifacts/two_point_ruler/two_point_ruler.tscn"
+      ],
+      "hall": "Point_Lines",
+      "floor": 3,
+      "icon": "ruler"
+    },
+    {
+      "id": "boundary",
+      "title": "DO NOT CROSS",
+      "subtitle": "Line → boundary",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 400,
+      "y": 870,
+      "understand": "A line can carry an instruction. Its meaning and its physical obstruction are distinct.",
+      "build": "Blue wooden barricade, tape and construction fence.",
+      "gap": "These are authored associations, not geometric consequences of having two endpoints.",
+      "sources": [
+        "commons/void/catalog.json",
+        "commons/void/set_dressing.gd"
+      ],
+      "hall": "Point_Lines",
+      "floor": 3,
+      "icon": "fence"
+    },
+    {
+      "id": "beam",
+      "title": "Beam / plank",
+      "subtitle": "Line → thickness + support",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 700,
+      "y": 650,
+      "understand": "Give a segment a section and a physical surface; now a body can rest on or cross it.",
+      "build": "Existing timber and black steel pieces in the tower.",
+      "gap": "Pieces exist; a common snapped construction recipe and connection rules still need adding.",
+      "sources": [
+        "commons/void/lines_area.gd",
+        "commons/void/trace_descent.tscn"
+      ],
+      "hall": "Point_Lines",
+      "floor": 3,
+      "icon": "beam"
+    },
+    {
+      "id": "gate",
+      "title": "A line opens a door",
+      "subtitle": "Relation → condition → action",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 700,
+      "y": 870,
+      "understand": "A chosen relation between two held points can trigger an event.",
+      "build": "The two-point puzzle and construction-fence door.",
+      "gap": "The opening condition is an authored game rule, not the definition of every line.",
+      "sources": [
+        "commons/void/lines_entry_gate.gd"
+      ],
+      "hall": "Point_Lines",
+      "floor": 3,
+      "icon": "gate"
+    },
+    {
+      "id": "trace-light",
+      "title": "Drawn light",
+      "subtitle": "Trace → luminous path",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 700,
+      "y": -100,
+      "understand": "A saved path can drive a mesh and a bounded lighting response.",
+      "build": "The trace illuminates the drawing area.",
+      "gap": "Emission and illumination are different. Avoid one live light for every recorded point.",
+      "sources": [
+        "commons/void/trace_light.gd",
+        "commons/void/trace_area.gd"
+      ],
+      "hall": "Point_Trace",
+      "floor": 4,
+      "icon": "trace"
+    },
+    {
+      "id": "brace",
+      "title": "Brace / truss",
+      "subtitle": "Triangle → construction frame",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 1000,
+      "y": 650,
+      "understand": "A triangular arrangement makes edges and joins legible at architectural scale.",
+      "build": "The large construction triangles and folded strip.",
+      "gap": "These authored frames do not simulate structural engineering; do not claim tested load capacity.",
+      "sources": [
+        "commons/void/triangle_area.gd"
+      ],
+      "hall": "Point_Triangle_Context",
+      "floor": 5,
+      "icon": "brace"
+    },
+    {
+      "id": "sign",
+      "title": "Directional sign",
+      "subtitle": "Triangle → orientation / meaning",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 1000,
+      "y": 870,
+      "understand": "The same outline can face up, down, left or right and acquire a different reading.",
+      "build": "The triangle signs on round plates.",
+      "gap": "Distinguish rotating the shape from the cultural instruction it carries.",
+      "sources": [
+        "commons/void/triangle_area.gd"
+      ],
+      "hall": "Point_Triangle_Context",
+      "floor": 5,
+      "icon": "sign"
+    },
+    {
+      "id": "columns",
+      "title": "Column family",
+      "subtitle": "Profile / height / resolution",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 1000,
+      "y": 120,
+      "understand": "Separate outline, height and angular sampling. More segments do not guarantee a better sculpture.",
+      "build": "Columns at different heights, outlines and resolutions.",
+      "gap": "A standing mesh is not automatically an engineering support.",
+      "sources": [
+        "commons/void/primitive_columns.tscn",
+        "commons/maps/Primitives_Columns/tutorial.md"
+      ],
+      "hall": "Primitives_Columns",
+      "floor": 9,
+      "icon": "columns"
+    },
+    {
+      "id": "profiles",
+      "title": "Letters become space",
+      "subtitle": "Outline → passage / vessel",
+      "kind": "prefab",
+      "state": "placed",
+      "x": 1250,
+      "y": -100,
+      "understand": "An outline and its holes can be carried through depth to form a body or passage.",
+      "build": "Existing letter-profile architecture.",
+      "gap": "Preserve counters (holes); collision and walkable clearance need checking for each variant.",
+      "sources": [
+        "commons/void/primitive_profiles.tscn",
+        "commons/maps/Primitives_Profiles/tutorial.md"
+      ],
+      "hall": "Primitives_Profiles",
+      "floor": 10,
+      "icon": "profile"
+    },
+    {
+      "id": "bridge",
+      "title": "Bridge / landing",
+      "subtitle": "Construction → crossing",
+      "kind": "prefab",
+      "state": "proposed",
+      "x": 1540,
+      "y": 650,
+      "understand": "Combine known support surfaces into a route with a readable beginning and end.",
+      "build": "A reusable wedge–landing–beam assembly over the Void.",
+      "gap": "Existing planks are not yet this shared assembly. Test gaps, head clearance and approach in both player modes.",
+      "sources": [
+        "commons/void/trials/raised_route.gd",
+        "commons/void/rooms.schema.json"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "bridge"
+    },
+    {
+      "id": "recipe",
+      "title": "Saved assembly",
+      "subtitle": "Parts / identity / placement",
+      "kind": "assembly",
+      "state": "proposed",
+      "x": 1540,
+      "y": 870,
+      "understand": "Keep the recipe so a construction can be reopened, edited and reused.",
+      "build": "Named sets of typed pieces, XYZ positions, dimensions, joints and behaviour.",
+      "gap": "The editor saves individual objects today. A reusable assembly definition with typed joints is still proposed.",
+      "sources": [
+        "commons/void/rooms.schema.json"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "grid"
+    },
+    {
+      "id": "lift",
+      "title": "Moving landing",
+      "subtitle": "Translate the construction",
+      "kind": "prefab",
+      "state": "proposed",
+      "x": 1840,
+      "y": 120,
+      "understand": "Position changes through time; a supported player must travel with the surface.",
+      "build": "A lift that reconnects two heights.",
+      "gap": "Original lift code exists, but the shared wedge/cube assembly and Void passenger behaviour are not established.",
+      "sources": [
+        "commons/grid/UtilityRegistry.gd",
+        "commons/void/trials/README.md"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "lift"
+    },
+    {
+      "id": "hinge",
+      "title": "Turning bridge",
+      "subtitle": "Rotate around a pivot",
+      "kind": "prefab",
+      "state": "proposed",
+      "x": 1840,
+      "y": 650,
+      "understand": "The pivot determines the swept path and which end remains attached.",
+      "build": "A bridge that opens a gap or reconnects a route.",
+      "gap": "Test passenger motion, swept collision and safe restart; an animated display is insufficient.",
+      "sources": [
+        "commons/maps/Trans_Rotation/tutorial.md",
+        "commons/void/trials/README.md"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "hinge"
+    },
+    {
+      "id": "stretch",
+      "title": "Changing span",
+      "subtitle": "Scale / available clearance",
+      "kind": "prefab",
+      "state": "proposed",
+      "x": 1840,
+      "y": 870,
+      "understand": "Changing dimensions changes reach and clearance as well as appearance.",
+      "build": "A crossing that extends or a passage whose width changes.",
+      "gap": "A scaled collider and a player standing on it need their own contract and test.",
+      "sources": [
+        "commons/maps/Trans_Scale/tutorial.md",
+        "commons/void/trials/README.md"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "stretch"
+    },
+    {
+      "id": "repeat",
+      "title": "Repeat a recipe",
+      "subtitle": "Arrays / tiling",
+      "kind": "capacity",
+      "state": "source",
+      "x": 1540,
+      "y": -100,
+      "understand": "Keep a source and produce multiple placed instances with a rule.",
+      "build": "Later repeated supports, modules and surface patterns.",
+      "gap": "Existing museum lessons; carrying this proposed Void construction kit into them still needs a trial.",
+      "sources": [
+        "commons/void/trials/briefs.json"
+      ],
+      "hall": "Array_Patterns",
+      "floor": null,
+      "icon": "repeat"
+    },
+    {
+      "id": "surface",
+      "title": "Give form a surface",
+      "subtitle": "Colour / shaders",
+      "kind": "capacity",
+      "state": "source",
+      "x": 1840,
+      "y": -100,
+      "understand": "Evaluate colour or a surface response from declared inputs.",
+      "build": "Later materials, signals and spatially varying surfaces on the same bodies.",
+      "gap": "Existing museum capacities; this tree proposes their return to the building kit, not a completed integration.",
+      "sources": [
+        "commons/void/trials/briefs.json"
+      ],
+      "hall": null,
+      "floor": null,
+      "icon": "surface"
+    }
+  ],
+  "edges": [
+    {
+      "source": "point",
+      "target": "line",
+      "kind": "learn",
+      "label": "relate two positions"
+    },
+    {
+      "source": "point",
+      "target": "held",
+      "kind": "learn",
+      "label": "add pickup and a reference frame"
+    },
+    {
+      "source": "line",
+      "target": "trace",
+      "kind": "learn",
+      "label": "keep successive endpoints"
+    },
+    {
+      "source": "trace",
+      "target": "grid",
+      "kind": "learn",
+      "label": "address the same retained positions"
+    },
+    {
+      "source": "line",
+      "target": "triangle",
+      "kind": "learn",
+      "label": "close three edges into a face"
+    },
+    {
+      "source": "grid",
+      "target": "triangle",
+      "kind": "learn",
+      "label": "choose corners from the carried record"
+    },
+    {
+      "source": "triangle",
+      "target": "body",
+      "kind": "learn",
+      "label": "join faces through shared vertices"
+    },
+    {
+      "source": "body",
+      "target": "wedge",
+      "kind": "learn",
+      "label": "choose the inclined prism"
+    },
+    {
+      "source": "body",
+      "target": "cube",
+      "kind": "learn",
+      "label": "choose eight corners and twelve triangles"
+    },
+    {
+      "source": "clock",
+      "target": "point",
+      "kind": "learn",
+      "label": "initialize a body in the running world"
+    },
+    {
+      "source": "cube",
+      "target": "transform",
+      "kind": "learn",
+      "label": "change a whole body"
+    },
+    {
+      "source": "held",
+      "target": "beacon",
+      "kind": "associate",
+      "label": "carry a local light"
+    },
+    {
+      "source": "line",
+      "target": "ruler",
+      "kind": "associate",
+      "label": "read a distance"
+    },
+    {
+      "source": "line",
+      "target": "boundary",
+      "kind": "associate",
+      "label": "give a line an instruction"
+    },
+    {
+      "source": "line",
+      "target": "beam",
+      "kind": "associate",
+      "label": "give the segment thickness and collision"
+    },
+    {
+      "source": "line",
+      "target": "gate",
+      "kind": "associate",
+      "label": "use an endpoint relation as a condition"
+    },
+    {
+      "source": "trace",
+      "target": "trace-light",
+      "kind": "associate",
+      "label": "make the kept path luminous"
+    },
+    {
+      "source": "triangle",
+      "target": "brace",
+      "kind": "associate",
+      "label": "make its edges architectural"
+    },
+    {
+      "source": "triangle",
+      "target": "sign",
+      "kind": "associate",
+      "label": "give orientation a meaning"
+    },
+    {
+      "source": "body",
+      "target": "columns",
+      "kind": "associate",
+      "label": "generate a family of bodies"
+    },
+    {
+      "source": "body",
+      "target": "profiles",
+      "kind": "associate",
+      "label": "let an outline organise a space"
+    },
+    {
+      "source": "assembly",
+      "target": "bridge",
+      "kind": "associate",
+      "label": "use the construction to cross"
+    },
+    {
+      "source": "transform",
+      "target": "lift",
+      "kind": "associate",
+      "label": "translation becomes access"
+    },
+    {
+      "source": "transform",
+      "target": "hinge",
+      "kind": "associate",
+      "label": "rotation reconnects a route"
+    },
+    {
+      "source": "transform",
+      "target": "stretch",
+      "kind": "associate",
+      "label": "size changes reach"
+    },
+    {
+      "source": "wedge",
+      "target": "assembly",
+      "kind": "combine",
+      "label": "join low and high walking surfaces"
+    },
+    {
+      "source": "cube",
+      "target": "assembly",
+      "kind": "combine",
+      "label": "supply the one-metre landing"
+    },
+    {
+      "source": "beam",
+      "target": "bridge",
+      "kind": "combine",
+      "label": "span between supports"
+    },
+    {
+      "source": "assembly",
+      "target": "recipe",
+      "kind": "combine",
+      "label": "save the editable parts and relations"
+    },
+    {
+      "source": "assembly",
+      "target": "transform",
+      "kind": "combine",
+      "label": "carry this same construction into motion"
+    },
+    {
+      "source": "recipe",
+      "target": "repeat",
+      "kind": "combine",
+      "label": "repeat a saved source"
+    },
+    {
+      "source": "repeat",
+      "target": "surface",
+      "kind": "combine",
+      "label": "vary surfaces across repeated bodies"
+    }
+  ]
+}

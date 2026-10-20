@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://1ls7m1txs5ur"]
+
+[ext_resource type="PackedScene" uid="uid://qbmx03iibuuu" path="res://addons/godot-xr-tools/staging/scene_base.tscn" id="1"]
+[ext_resource type="Script" uid="uid://deg0gluygmkem" path="res://commons/void/game.gd" id="2"]
+
+[node name="TheVoid" unique_id=555733517 instance=ExtResource("1")]
+script = ExtResource("2")
+stream_floors = true

@@ -1,0 +1,328 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure above",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "B / LAND ON THE TWO MARKED BOARDS",
+          "position": [
+            11.7,
+            4.2
+          ]
+        }
+      ]
+    },
+    {
+      "map": "Random_Noise_Types",
+      "title": "Noise / Which rules keep acting?",
+      "origin": false,
+      "walls": [
+        {
+          "id": "controls-backdrop",
+          "from": [
+            -3.4,
+            -7.6
+          ],
+          "to": [
+            1.4,
+            -7.6
+          ],
+          "height": 3.2,
+          "finish": "unfinished"
+        }
+      ],
+      "artifacts": [
+        {
+          "id": "point",
+          "artifact": "randompoint",
+          "position": [
+            14,
+            -1.2
+          ],
+          "station": "NE",
+          "height": 1.25,
+          "facing": 180,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Random_Noise_Types:3,2",
+            "museum_yaw": 90,
+            "editor_label": "single point / a plane kept by clipping",
+            "stand": "bounds",
+            "size": 0.6
+          }
+        },
+        {
+          "id": "bench",
+          "artifact": "randompoints",
+          "position": [
+            17.6,
+            -0.3
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 90,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Random_Noise_Types:10,3",
+            "museum_yaw": 180,
+            "editor_label": "sampling bench / REDRAW, NEW SEED, RULE, RESTORE, LOAD",
+            "stand": "compare",
+            "count": 24,
+            "size": 0.9,
+            "seed": 31415
+          }
+        },
+        {
+          "id": "surface",
+          "artifact": "geometry_noise",
+          "position": [
+            17,
+            -5.3
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 270,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Random_Noise_Types:3,11",
+            "museum_yaw": 90,
+            "editor_label": "the uncertain surface / optional comparison"
+          }
+        },
+        {
+          "id": "field",
+          "artifact": "WhiteNoiseGallery",
+          "position": [
+            15.5,
+            5.5
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 0.05,
+          "config": {
+            "museum_origin": "Random_Noise_Types:4,4",
+            "museum_yaw": 180,
+            "editor_label": "needle field / ten thousand independent draws",
+            "stand": "gallery",
+            "seed": 31415
+          }
+        },
+        {
+          "id": "spectrum",
+          "artifact": "NoiseColors3D",
+          "position": [
+            19,
+            5.5
+          ],
+          "station": "SE",
+          "height": 1,
+          "facing": 0,
+          "scale": 0.1,
+          "config": {
+            "museum_origin": "Random_Noise_Types:6,4",
+            "museum_yaw": 180,
+            "editor_label": "five noise colours / illustrated spectra, separate sound",
+            "stand": "gallery",
+            "seed": 31415
+          }
+        },
+        {
+          "id": "weather",
+          "artifact": "related_weather",
+          "position": [
+            -1,
+            0
+          ],
+          "station": "NW",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Random_Noise_Types:6,18",
+            "museum_yaw": 0,
+            "editor_label": "related weather / three glazed walls as partitions"
+          }
+        }
+      ],
+      "props": [
+        {
+          "id": "bench-light",
+          "kind": "work_light",
+          "position": [
+            15.2,
+            -2.9
+          ],
+          "facing": 90,
+          "scale": 1
+        },
+        {
+          "id": "gallery-light",
+          "kind": "work_light",
+          "position": [
+            17.2,
+            8.2
+          ],
+          "facing": 180,
+          "scale": 1
+        },
+        {
+          "id": "controls-light",
+          "kind": "work_light",
+          "position": [
+            -5.2,
+            -5.9
+          ],
+          "facing": 90,
+          "scale": 1
+        },
+        {
+          "id": "wing-scaffold",
+          "kind": "scaffold_tarp",
+          "position": [
+            17,
+            -8.1
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "bench-console",
+          "kind": "interface_floor",
+          "position": [
+            18.5,
+            1.5
+          ],
+          "facing": 270,
+          "scale": 1,
+          "target": "bench"
+        },
+        {
+          "id": "weather-console",
+          "kind": "interface_wall",
+          "position": [
+            -1,
+            -6.85
+          ],
+          "facing": 0,
+          "scale": 1,
+          "target": "weather"
+        }
+      ],
+      "construction": [
+        {
+          "id": "FieldPedestal",
+          "kind": "cube",
+          "position": [
+            15.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "SpectrumPedestal",
+          "kind": "cube",
+          "position": [
+            19,
+            0,
+            5.5
+          ],
+          "facing": 0
+        }
+      ],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "B / ARRIVAL",
+          "position": [
+            12.6,
+            3.4
+          ]
+        },
+        {
+          "label": "01 / A POINT KEEPS ITS PLANE",
+          "position": [
+            13.6,
+            0.6
+          ]
+        },
+        {
+          "label": "02 / REDRAW, THEN LOAD / ONE SEED, TWO RULES",
+          "position": [
+            16,
+            -0.3
+          ]
+        },
+        {
+          "label": "03 / THE UNCERTAIN SURFACE",
+          "position": [
+            17,
+            -2.6
+          ]
+        },
+        {
+          "label": "04 / TEN THOUSAND ADDRESSES / FIVE COLOURS",
+          "position": [
+            17.2,
+            3.9
+          ]
+        },
+        {
+          "label": "AROUND B / SOUTH STRIP",
+          "position": [
+            9.8,
+            5.2
+          ]
+        },
+        {
+          "label": "05 / START THE CLOCK / THREE WALLS",
+          "position": [
+            0.4,
+            -6.3
+          ]
+        },
+        {
+          "label": "WALK ALONGSIDE / LOOK THROUGH THE SLITS",
+          "position": [
+            5.2,
+            1.4
+          ]
+        },
+        {
+          "label": "A / DESCENT AFTER THE WALLS",
+          "position": [
+            -6.9,
+            -3.9
+          ]
+        }
+      ]
+    },
+    {
+      "map": "",
+      "title": "Noise Types / catch floor",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "NOISE TYPES COMPLETE / R OR B TO REPEAT",
+          "position": [
+            -8.3,
+            -4.6
+          ]
+        }
+      ]
+    }
+  ]
+}

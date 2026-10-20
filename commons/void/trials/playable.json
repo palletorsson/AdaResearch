@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "trials": {
+    "transformation": {
+      "title": "Transformation / Pre to Translation",
+      "map": "Trans_Pre",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/transformation/rooms.json",
+      "layout": "res://commons/void/trials/transformation/layout.json",
+      "scene": "res://commons/void/trials/transformation/trial.tscn",
+      "models": "/void-trials/transformation/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 2,
+        "3": 3,
+        "4": 3
+      },
+      "spawn_points": {
+        "2": [
+          18.5,
+          0.06,
+          -4.5
+        ],
+        "3": [
+          -11.7,
+          0.06,
+          1.9
+        ]
+      }
+    },
+    "noise": {
+      "title": "Noise / Random Noise Types",
+      "label": "RANDOM NOISE TYPES",
+      "notice": "Point, bench, galleries in the east wing. Then walk alongside three glazed walls.\nR or B: reset the encounter. M or left X: menu.",
+      "map": "Random_Noise_Types",
+      "start_floor": 1,
+      "rooms": "res://commons/void/trials/noise/rooms.json",
+      "layout": "res://commons/void/trials/noise/layout.json",
+      "scene": "res://commons/void/trials/noise/trial.tscn",
+      "models": "/void-trials/noise/manifest.json",
+      "retry_floors": {
+        "0": 1,
+        "1": 1,
+        "2": 1
+      },
+      "spawn_points": {
+        "1": [
+          13.4,
+          0.06,
+          1.9
+        ]
+      }
+    }
+  }
+}

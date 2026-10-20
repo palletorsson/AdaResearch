@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "scope": "Whole current spine. Teaching choices and topic placements come from the existing plan and hall cards; this file supplies only the global visual arrangement and proposed building associations.",
+  "sequences": [
+    {
+      "id": "primitives",
+      "label": "Primitives",
+      "cue": "Position · relation · body",
+      "parent": null,
+      "relation": "Begin with a point and construct a body.",
+      "x": 0,
+      "y": 400,
+      "build": "A reusable wedge and cube construction kit.",
+      "association": {
+        "title": "Buildable forms",
+        "description": "Turn the familiar wedge and cube into joined, walkable modules; preserve the geometry recipe.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "transformation",
+      "label": "Transformation",
+      "cue": "Pose · frame · time",
+      "parent": "primitives",
+      "relation": "Change a familiar whole body.",
+      "x": 300,
+      "y": 0,
+      "build": "Move, turn and resize a constructed body.",
+      "association": {
+        "title": "Moving crossing",
+        "description": "Give the same landing or bridge a time-driven pose; establish passenger collision before using it as a route.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "array_tutorial",
+      "label": "Arrays",
+      "cue": "Address · copy · ownership",
+      "parent": "primitives",
+      "relation": "Return to the lists first used in Trace.",
+      "x": 300,
+      "y": 400,
+      "build": "Address many independent modules and distinguish copies from shared references.",
+      "association": {
+        "title": "Module field",
+        "description": "Arrange known cubes and wedges through stored addresses. Static placement can be an early bridge into this sequence.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "color",
+      "label": "Colour",
+      "cue": "Value · material · receiver",
+      "parent": "array_tutorial",
+      "relation": "Give addressed bodies independent materials.",
+      "x": 300,
+      "y": 800,
+      "build": "Keep a palette separate from the objects receiving it.",
+      "association": {
+        "title": "Signal panels",
+        "description": "Reuse a palette across lights, panels and signs while preserving each receiver’s state.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "tiling",
+      "label": "Tiling",
+      "cue": "Source · repeat · transform",
+      "parent": "array_tutorial",
+      "relation": "Read one source through repeated interpretations.",
+      "x": 600,
+      "y": 600,
+      "build": "Repeat a source across surfaces and frames.",
+      "association": {
+        "title": "Patterned screen",
+        "description": "Make a screen, facade or garment from the same source and declared repeat operation.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "change",
+      "label": "Change",
+      "cue": "Difference · rate · sum",
+      "parent": "transformation",
+      "relation": "Measure the motion instead of only prescribing it.",
+      "x": 600,
+      "y": 0,
+      "build": "Read and accumulate changes in a position or field.",
+      "association": {
+        "title": "Flow channel",
+        "description": "A marked route makes the difference between direction, speed and accumulated distance visible.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "forces",
+      "label": "Forces",
+      "cue": "Velocity · force · response",
+      "parent": "change",
+      "relation": "Retain velocity and change it through acceleration.",
+      "x": 900,
+      "y": 0,
+      "build": "Let a familiar body respond to forces and constraints.",
+      "association": {
+        "title": "Force apparatus",
+        "description": "Build a launcher or spring-supported platform with a bounded, measurable response.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "formfinding",
+      "label": "Form finding",
+      "cue": "Criterion · constraint · search",
+      "parent": "forces",
+      "relation": "Seek an arrangement under declared constraints.",
+      "x": 1200,
+      "y": 0,
+      "build": "Find a candidate form instead of prescribing every position.",
+      "association": {
+        "title": "Tension canopy",
+        "description": "Use supports and load constraints to explore a cable or canopy form; appearance is not a load certification.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "wavefunctions",
+      "label": "Waves",
+      "cue": "Period · phase · coupling",
+      "parent": "change",
+      "relation": "Deepen the periodic motion preview.",
+      "x": 600,
+      "y": 200,
+      "build": "Drive familiar forms with periodic values and compare phase.",
+      "association": {
+        "title": "Wave passage",
+        "description": "A row of familiar bodies becomes a phase-controlled passage; sound and walkable motion need distinct receivers.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "randomness",
+      "label": "Randomness",
+      "cue": "Seed · draw order · distribution",
+      "parent": "array_tutorial",
+      "relation": "Choose values for an addressed population and retain the recipe.",
+      "x": 600,
+      "y": 400,
+      "build": "Generate repeatable samples, placements and walks.",
+      "association": {
+        "title": "Seeded encounter",
+        "description": "Keep a seed and draw policy so an obstacle arrangement can be replayed and compared.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "noise",
+      "label": "Noise",
+      "cue": "Sample · field · threshold",
+      "parent": "randomness",
+      "relation": "Compare related samples with independent draws.",
+      "x": 900,
+      "y": 400,
+      "build": "Use a field to drive positions, occupancy or a surface.",
+      "association": {
+        "title": "Field landscape",
+        "description": "Drive terrain or a wind-like influence from the same sampled field; declare the receiver and threshold.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "shaders",
+      "label": "Shaders",
+      "cue": "Coordinates · parallel surface rule",
+      "parent": "color",
+      "relation": "Move known rules onto a surface.",
+      "x": 900,
+      "y": 800,
+      "build": "Evaluate known distance, colour, tiling and noise operations per fragment.",
+      "association": {
+        "title": "Responsive skin",
+        "description": "Let a familiar body carry a surface rule. Stored simulation feedback requires explicit previous-state buffers.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "cellularautomata",
+      "label": "Cellular automata",
+      "cue": "Neighbour · buffer · generation",
+      "parent": "array_tutorial",
+      "relation": "Give an addressed grid current and next state.",
+      "x": 1200,
+      "y": 600,
+      "build": "Step a local rule without mixing old and new state.",
+      "association": {
+        "title": "Living light wall",
+        "description": "Use cell state to drive an architectural light wall; keep a small hand-checkable generation visible.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "fractals",
+      "label": "Fractals",
+      "cue": "Recursion · scale · stop",
+      "parent": "primitives",
+      "relation": "Repeat a known construction with a stopping rule.",
+      "x": 600,
+      "y": 800,
+      "build": "Generate nested structure under a finite budget.",
+      "association": {
+        "title": "Branching scaffold",
+        "description": "Repeat a construction at smaller scales; budget depth, pieces and collision explicitly.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "lsystems",
+      "label": "L-systems",
+      "cue": "Rewrite · interpret · branch",
+      "parent": "fractals",
+      "relation": "Separate a description from its spatial interpretation.",
+      "x": 900,
+      "y": 600,
+      "build": "Build a branching body from a rewritten word and saved turtle state.",
+      "association": {
+        "title": "Rule-grown frame",
+        "description": "Use a grammar to describe a plant-like scaffold or passage; preserve both word and interpretation.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "proceduralgeneration",
+      "label": "Generated worlds",
+      "cue": "Representation · rule · evaluation",
+      "parent": "lsystems",
+      "relation": "Combine construction rules with candidate records and criteria.",
+      "x": 1200,
+      "y": 800,
+      "build": "Generate bounded candidates and compare what a criterion selects.",
+      "association": {
+        "title": "Recoverable maze",
+        "description": "Keep the seed, connections and construction recipe for a generated maze or room assembly.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "softbodies",
+      "label": "Soft bodies",
+      "cue": "Deformation · boundary · constraint",
+      "parent": "forces",
+      "relation": "Let a body’s vertices move under constraints.",
+      "x": 1500,
+      "y": 0,
+      "build": "Compare a deformable sheet or body under declared pinned boundaries.",
+      "association": {
+        "title": "Working tarp",
+        "description": "Use a hanging tarp or flexible bridge as a controlled constraint study; test its physical role separately.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "isosurfaces",
+      "label": "Isosurfaces",
+      "cue": "Scalar field · level · boundary",
+      "parent": "noise",
+      "relation": "Extract a boundary from sampled values.",
+      "x": 1200,
+      "y": 400,
+      "build": "Turn scalar samples into a finite explicit surface.",
+      "association": {
+        "title": "Field-carved passage",
+        "description": "Generate a cave or passage from a field and threshold; collision is a separate output to validate.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "boolean_surfaces",
+      "label": "Solid operations",
+      "cue": "Union · intersection · difference",
+      "parent": "primitives",
+      "relation": "Use familiar bodies as ordered operands.",
+      "x": 1200,
+      "y": 200,
+      "build": "Compose solids and compare A minus B with B minus A.",
+      "association": {
+        "title": "Cut doorway",
+        "description": "Cut an inhabitable opening from known solids and inspect the visible and physical boundaries.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "swarmintelligence",
+      "label": "Swarms",
+      "cue": "Local rule · shared trace · population",
+      "parent": "cellularautomata",
+      "relation": "Return to local rules with moving agents and different forms of coordination.",
+      "x": 1500,
+      "y": 600,
+      "build": "Let many points act through neighbours, fields or retained traces.",
+      "association": {
+        "title": "Guiding swarm",
+        "description": "Explore lights or agents that reveal a route through local rules; navigation remains a distinct game contract.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "graphtheory",
+      "label": "Graphs",
+      "cue": "Identity · connection · traversal",
+      "parent": "swarmintelligence",
+      "relation": "Make the relation records explicit and independent of their drawing.",
+      "x": 1500,
+      "y": 400,
+      "build": "Keep connectivity while changing layout; search or allocate over it.",
+      "association": {
+        "title": "Route switchboard",
+        "description": "Use a saved connection graph to change which passages link, then test reachability.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "machinelearning",
+      "label": "Learning systems",
+      "cue": "Data · loss · update · evaluation",
+      "parent": "graphtheory",
+      "relation": "Separate a computation’s connections from weights that change.",
+      "x": 1500,
+      "y": 200,
+      "build": "Fit or evaluate a model using declared data and retained comparisons.",
+      "association": {
+        "title": "Taught controller",
+        "description": "Explore a gate or body controlled by a learned mapping; compare held-out cases and retain a manual fallback.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "foundationscrisis",
+      "label": "Foundations / limits",
+      "cue": "Assumption · witness · proof",
+      "parent": "graphtheory",
+      "relation": "Return to what a construction can and cannot establish.",
+      "x": 1800,
+      "y": 200,
+      "build": "Build bounded witnesses while keeping interpretation and proof distinct.",
+      "association": {
+        "title": "Assumption room",
+        "description": "Return to lines, geometry and connection rules; change one stated assumption and delimit the claim.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "qfeplaboratory",
+      "label": "QFEP laboratory",
+      "cue": "Model · retained input · comparison",
+      "parent": "foundationscrisis",
+      "relation": "Make model terms and their limits available for controlled comparison.",
+      "x": 1800,
+      "y": 400,
+      "build": "Keep inputs beside a calculated result and compare different arrangements.",
+      "association": {
+        "title": "Comparison bench",
+        "description": "A configurable bench preserves arrangements, totals and model assumptions without treating them as a universal physical law.",
+        "state": "proposed"
+      }
+    },
+    {
+      "id": "postfoundationscrisis",
+      "label": "After the crisis",
+      "cue": "Situated choice · revision · memory",
+      "parent": "qfeplaboratory",
+      "relation": "Carry revised constructions and explicit limits into another encounter.",
+      "x": 1800,
+      "y": 600,
+      "build": "Retain alternative arrangements and explain what the record preserves or omits.",
+      "association": {
+        "title": "Revision room",
+        "description": "Reopen two versions of a construction and keep the differences legible; the recoverable assembly remains a proposal where no code exists.",
+        "state": "proposed"
+      }
+    }
+  ],
+  "orderQuestion": {
+    "title": "Could Arrays come before Transformation?",
+    "note": "Basic arrays and loops already enter in Trace. Early static repetition could strengthen construction. Moving the complete Arrays sequence requires reconciling its declared Transformation dependencies; compare before changing the spine.",
+    "candidate": [
+      "primitives",
+      "array_tutorial",
+      "transformation"
+    ],
+    "action": "Preview only. No curriculum, map layout, lesson or review state is written by this graph."
+  }
+}

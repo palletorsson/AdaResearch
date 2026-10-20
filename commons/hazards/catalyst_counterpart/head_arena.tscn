@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/base.tscn" id="1_base"]
+[ext_resource type="Script" path="res://commons/hazards/catalyst_counterpart/head_arena_scene.gd" id="2_scene"]
+[ext_resource type="Script" path="res://commons/hazards/catalyst_counterpart/head_arena_museum.gd" id="3_museum"]
+
+[node name="HeadArena" instance=ExtResource("1_base")]
+script = ExtResource("2_scene")
+
+[node name="XROrigin3D" parent="." index="2"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 8.5, 0.1, 1.5)
+
+[node name="Museum" type="Node3D" parent="."]
+script = ExtResource("3_museum")

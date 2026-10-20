@@ -1,0 +1,88 @@
+{
+  "id": "translation-single-shaft-crossing",
+  "units": "metres",
+  "source": "Point_Animatedcube / void_cube_walkway: the same one-metre blocks and 1 x 1 x 2 m wp wedges",
+  "members": [
+    {
+      "id": "NearCube1",
+      "kind": "cube",
+      "position": [
+        -10.5,
+        0,
+        5.5
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearWedge1",
+      "kind": "wedge",
+      "position": [
+        -10.5,
+        0,
+        7
+      ],
+      "facing": 180
+    },
+    {
+      "id": "NearCube2",
+      "kind": "cube",
+      "position": [
+        -9.5,
+        0,
+        5.5
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearWedge2",
+      "kind": "wedge",
+      "position": [
+        -9.5,
+        0,
+        7
+      ],
+      "facing": 180
+    },
+    {
+      "id": "FarCube1",
+      "kind": "cube",
+      "position": [
+        -10.5,
+        0,
+        -5.5
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarWedge1",
+      "kind": "wedge",
+      "position": [
+        -10.5,
+        0,
+        -7
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube2",
+      "kind": "cube",
+      "position": [
+        -9.5,
+        0,
+        -5.5
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarWedge2",
+      "kind": "wedge",
+      "position": [
+        -9.5,
+        0,
+        -7
+      ],
+      "facing": 0
+    }
+  ],
+  "signs": []
+}

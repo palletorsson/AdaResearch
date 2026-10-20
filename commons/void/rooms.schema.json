@@ -1,0 +1,525 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "The Void \u2014 floor content",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "floors"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "const": 1
+    },
+    "floors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/floor"
+      }
+    }
+  },
+  "definitions": {
+    "pair": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "floor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "map",
+        "title",
+        "origin",
+        "walls",
+        "artifacts",
+        "impact_cells"
+      ],
+      "properties": {
+        "map": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "origin": {
+          "type": "boolean"
+        },
+        "walls": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "from",
+              "to",
+              "height"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              "from": {
+                "$ref": "#/definitions/pair"
+              },
+              "to": {
+                "$ref": "#/definitions/pair"
+              },
+              "height": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 4.5
+              },
+              "base": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 3.5
+              },
+              "finish": {
+                "enum": [
+                  "concrete",
+                  "unfinished"
+                ]
+              }
+            }
+          }
+        },
+        "copies": {
+          "description": "Independent pasted instances; may share an existing supply station.",
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "$ref": "#/definitions/floor/properties/artifacts/items"
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "artifact",
+              "station",
+              "facing",
+              "height",
+              "scale"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              "artifact": {
+                "type": "string"
+              },
+              "station": {
+                "enum": [
+                  "NW",
+                  "NE",
+                  "SW",
+                  "SE"
+                ]
+              },
+              "facing": {
+                "enum": [
+                  0,
+                  90,
+                  180,
+                  270
+                ]
+              },
+              "height": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 2.5
+              },
+              "scale": {
+                "type": "number",
+                "minimum": 0.05,
+                "maximum": 4
+              },
+              "config": {
+                "type": "object",
+                "maxProperties": 50,
+                "properties": {
+                  "editor_source": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "floor",
+                      "id"
+                    ],
+                    "properties": {
+                      "floor": {
+                        "type": "integer",
+                        "minimum": 0
+                      },
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]+$"
+                      }
+                    }
+                  },
+                  "editor_label": {
+                    "type": "string",
+                    "maxLength": 200
+                  },
+                  "only_parts": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9_]+$"
+                    }
+                  },
+                  "parts": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "minProperties": 1,
+                      "properties": {
+                        "position": {
+                          "type": "array",
+                          "minItems": 3,
+                          "maxItems": 3,
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "rotation": {
+                          "type": "array",
+                          "minItems": 3,
+                          "maxItems": 3,
+                          "items": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "position": {
+                "$ref": "#/definitions/pair"
+              }
+            }
+          }
+        },
+        "impact_cells": {
+          "type": "array",
+          "maxItems": 64,
+          "uniqueItems": true,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "integer",
+              "minimum": -3,
+              "maximum": 2
+            }
+          }
+        },
+        "props": {
+          "type": "array",
+          "maxItems": 24,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "position",
+              "facing",
+              "scale"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              "kind": {
+                "enum": [
+                  "container",
+                  "crate",
+                  "pallet",
+                  "barrier",
+                  "fence",
+                  "work_light",
+                  "scaffold_tarp",
+                  "unfinished_wall",
+                  "point_light_switch",
+                  "striped_barricade",
+                  "chainlink_panel",
+                  "blue_barricade",
+                  "warning_tape",
+                  "steel_barrier",
+                  "traffic_cone",
+                  "workbench",
+                  "tetrahedron_blocker",
+                  "pyramid_blocker",
+                  "wedge_blocker",
+                  "platform_block",
+                  "cube_walkway",
+                  "portal_ferry",
+                  "portal_span",
+                  "arrival_crate",
+                  "wall_charger",
+                    "live_junction",
+                  "interface_floor",
+                  "interface_wall",
+                  "interface_pillar",
+                  "interface_ceiling_l",
+                  "interface_ceiling_j"
+                ]
+              },
+              "position": {
+                "$ref": "#/definitions/pair"
+              },
+              "facing": {
+                "enum": [
+                  0,
+                  90,
+                  180,
+                  270
+                ]
+              },
+              "scale": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 1.5
+              },
+              "color": {
+                "type": "string",
+                "pattern": "^#[0-9a-fA-F]{6}$"
+              },
+              "target": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]*$",
+                "description": "Same-floor artifact ID; empty means unassigned."
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "container"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "scale": {
+                      "const": 1
+                    }
+                  },
+                  "description": "Standard shipping containers retain real external dimensions."
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "kind": {
+                      "const": "arrival_crate"
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "scale": {
+                      "minimum": 1
+                    }
+                  },
+                  "description": "The arrival enclosure must retain room for the player body."
+                }
+              }
+            ]
+          }
+        },
+        "basin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "depth",
+            "rects"
+          ],
+          "properties": {
+            "depth": {
+              "type": "number",
+              "minimum": 0.3,
+              "maximum": 3
+            },
+            "rects": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 8,
+              "items": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                ]
+              }
+            },
+            "glass": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "route": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "position"
+            ],
+            "properties": {
+              "label": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "position": {
+                "$ref": "#/definitions/pair"
+              },
+              "height": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 5.5
+              }
+            }
+          }
+        },
+        "construction": {
+          "type": "array",
+          "maxItems": 4096,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "kind",
+              "position",
+              "facing"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              "kind": {
+                "enum": [
+                  "cube",
+                  "slab",
+                  "wedge",
+                  "truss",
+                  "deck",
+                  "support",
+                  "collar",
+                  "platform",
+                  "rotating_platform"
+                ]
+              },
+              "position": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": -100,
+                  "maximum": 100
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "facing": {
+                "enum": [
+                  0,
+                  90,
+                  180,
+                  270
+                ]
+              },
+              "travel": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": -40,
+                  "maximum": 40
+                },
+                "minItems": 3,
+                "maxItems": 3
+              },
+              "speed": {
+                "type": "number",
+                "minimum": 0.1,
+                "maximum": 5
+              },
+              "pause": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 30
+              },
+              "angle": {
+                "type": "number",
+                "minimum": -180,
+                "maximum": 180,
+                "not": {
+                  "const": 0
+                }
+              },
+              "turn_speed": {
+                "type": "number",
+                "minimum": 3,
+                "maximum": 45
+              },
+              "length": {
+                "type": "number",
+                "minimum": 2,
+                "maximum": 10
+              }
+            }
+          }
+        },
+        "supply_leads": {
+          "type": "boolean",
+          "description": "Show decorative pink extensions between the ceiling supply and artifacts."
+        }
+      }
+    }
+  }
+}

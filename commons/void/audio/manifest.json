@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "status": "Original provisional synthesis. Replace these sounds after listening in the tower.",
+  "mix_db": {"ambience": 0, "music": -16, "effects": -8},
+  "bird_interval_seconds": [50, 110],
+  "siren_interval_seconds": [120, 240],
+  "music": [],
+  "sounds": {
+    "wind": {"path": "res://commons/void/audio/wind.wav", "db": -28},
+    "city": {"path": "res://commons/void/audio/city.wav", "db": -28},
+    "bird1": {"path": "res://commons/void/audio/bird1.wav", "db": -22},
+    "bird2": {"path": "res://commons/void/audio/bird2.wav", "db": -22},
+    "siren": {"path": "res://commons/void/audio/siren.wav", "db": -22},
+    "grab": {"path": "res://commons/void/audio/grab.wav", "db": -2},
+    "release": {"path": "res://commons/void/audio/release.wav", "db": -4},
+    "click": {"path": "res://commons/void/audio/click.wav", "db": -2},
+    "activate": {"path": "res://commons/void/audio/activate.wav", "db": -4},
+    "reject": {"path": "res://commons/void/audio/reject.wav", "db": -4},
+    "grunt": {"path": "res://commons/void/audio/grunt.wav", "db": -2}
+  }
+}

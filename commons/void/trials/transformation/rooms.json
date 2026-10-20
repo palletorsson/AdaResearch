@@ -1,0 +1,5468 @@
+{
+  "$schema": "../../rooms.schema.json",
+  "version": 1,
+  "floors": [
+    {
+      "map": "",
+      "title": "Open structure above",
+      "origin": false,
+      "walls": [],
+      "artifacts": [],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "A / LAND ON THE TWO MARKED BOARDS",
+          "position": [
+            -8.3,
+            4.2
+          ]
+        }
+      ]
+    },
+    {
+      "map": "Trans_Pre",
+      "title": "Transformation / A body gains movement",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "still",
+          "artifact": "pick_up_cube",
+          "position": [
+            -5,
+            -2
+          ],
+          "station": "NW",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "still",
+            "motion": "still",
+            "hold": "collect",
+            "motion_curve": "lerp"
+          }
+        },
+        {
+          "id": "rise",
+          "artifact": "pick_up_cube",
+          "position": [
+            -1.5,
+            -2
+          ],
+          "station": "NW",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "rise",
+            "motion": "slide",
+            "hold": "demo",
+            "motion_curve": "lerp"
+          }
+        },
+        {
+          "id": "turn",
+          "artifact": "pick_up_cube",
+          "position": [
+            2,
+            -2
+          ],
+          "station": "NE",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "turn",
+            "motion": "idle",
+            "hold": "demo",
+            "motion_curve": "lerp"
+          }
+        },
+        {
+          "id": "swell",
+          "artifact": "pick_up_cube",
+          "position": [
+            5.5,
+            -2
+          ],
+          "station": "NE",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "swell",
+            "motion": "all",
+            "hold": "demo",
+            "motion_curve": "lerp"
+          }
+        },
+        {
+          "id": "translation-marker",
+          "artifact": "y_translation_cube",
+          "position": [
+            -1.5,
+            -3.7
+          ],
+          "station": "NW",
+          "height": 1.7,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "translation marker"
+          }
+        },
+        {
+          "id": "rotation-marker",
+          "artifact": "rotation_oscillation_cube",
+          "position": [
+            2,
+            -3.7
+          ],
+          "station": "NE",
+          "height": 1.7,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "rotation marker",
+            "mode": "continuous"
+          }
+        },
+        {
+          "id": "scale-marker",
+          "artifact": "uniform_scale_marker",
+          "position": [
+            5.5,
+            -3.7
+          ],
+          "station": "NE",
+          "height": 1.7,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "scale marker",
+            "motion_curve": "lerp"
+          }
+        },
+        {
+          "id": "pickup-1",
+          "artifact": "pick_up_cube",
+          "position": [
+            16,
+            -3
+          ],
+          "station": "NE",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "pickup 1",
+            "motion": "all",
+            "motion_curve": "lerp",
+            "hold": "collect"
+          }
+        },
+        {
+          "id": "pickup-2",
+          "artifact": "pick_up_cube",
+          "position": [
+            16,
+            -1
+          ],
+          "station": "NE",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "pickup 2",
+            "motion": "all",
+            "motion_curve": "lerp",
+            "hold": "collect"
+          }
+        },
+        {
+          "id": "pickup-3",
+          "artifact": "pick_up_cube",
+          "position": [
+            16,
+            1
+          ],
+          "station": "NE",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "pickup 3",
+            "motion": "all",
+            "motion_curve": "lerp",
+            "hold": "collect"
+          }
+        },
+        {
+          "id": "pickup-4",
+          "artifact": "pick_up_cube",
+          "position": [
+            16,
+            3
+          ],
+          "station": "NE",
+          "height": 2,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "pickup 4",
+            "motion": "all",
+            "motion_curve": "lerp",
+            "hold": "collect"
+          }
+        },
+        {
+          "id": "health-1",
+          "artifact": "health_cross",
+          "position": [
+            18.4,
+            -4.8
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "health 1",
+            "take_below": 1
+          }
+        },
+        {
+          "id": "health-2",
+          "artifact": "health_cross",
+          "position": [
+            18.4,
+            4.5
+          ],
+          "station": "NE",
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "museum_origin": "Trans_Pre",
+            "editor_label": "health 2",
+            "take_below": 1
+          }
+        },
+        {
+          "id": "first-health",
+          "artifact": "void_step_health_box",
+          "station": "SW",
+          "position": [
+            -3,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Step box / health +25",
+            "contents": "health",
+            "boost": 25
+          }
+        },
+        {
+          "id": "found-solid",
+          "artifact": "void_step_prefab_box",
+          "station": "SE",
+          "position": [
+            8,
+            4
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Step box / random familiar solid",
+            "contents": "prefab",
+            "boost": 25
+          }
+        },
+        {
+          "id": "last-health",
+          "artifact": "void_step_health_box",
+          "station": "SE",
+          "position": [
+            13,
+            4
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Step box / health +25",
+            "contents": "health",
+            "boost": 25
+          }
+        }
+      ],
+      "props": [
+        {
+          "id": "demo-work-light",
+          "kind": "work_light",
+          "position": [
+            -4.8,
+            -4.6
+          ],
+          "facing": 0,
+          "scale": 1
+        },
+        {
+          "id": "route-work-light",
+          "kind": "work_light",
+          "position": [
+            18.6,
+            6.5
+          ],
+          "facing": 180,
+          "scale": 1
+        },
+        {
+          "id": "back-scaffold",
+          "kind": "scaffold_tarp",
+          "position": [
+            -17,
+            -6
+          ],
+          "facing": 0,
+          "scale": 1
+        }
+      ],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "WALK UP / THE SAME BUILDING PIECES",
+          "position": [
+            -6,
+            4.2
+          ],
+          "height": 0
+        },
+        {
+          "label": "01 / STILL",
+          "position": [
+            -5,
+            0.85
+          ],
+          "height": 1
+        },
+        {
+          "label": "02 / RISE",
+          "position": [
+            -1.5,
+            0.85
+          ],
+          "height": 1
+        },
+        {
+          "label": "03 / TURN",
+          "position": [
+            2,
+            0.85
+          ],
+          "height": 1
+        },
+        {
+          "label": "04 / SCALE",
+          "position": [
+            5.5,
+            0.85
+          ],
+          "height": 1
+        },
+        {
+          "label": "FOLLOW THE BOXES",
+          "position": [
+            6,
+            3
+          ],
+          "height": 1
+        },
+        {
+          "label": "STEP / SOMETHING INSIDE",
+          "position": [
+            10,
+            5
+          ],
+          "height": 1
+        },
+        {
+          "label": "NOW COLLECT THE MOVEMENT",
+          "position": [
+            16,
+            4.7
+          ],
+          "height": 1
+        },
+        {
+          "label": "B / NEXT FLOOR",
+          "position": [
+            16,
+            -6.2
+          ],
+          "height": 0
+        }
+      ],
+      "construction": [
+        {
+          "id": "Pre-cube-000",
+          "kind": "cube",
+          "position": [
+            -6,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-001",
+          "kind": "cube",
+          "position": [
+            -6,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-002",
+          "kind": "cube",
+          "position": [
+            -5,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-003",
+          "kind": "cube",
+          "position": [
+            -5,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-004",
+          "kind": "cube",
+          "position": [
+            -4,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-005",
+          "kind": "cube",
+          "position": [
+            -4,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-007",
+          "kind": "cube",
+          "position": [
+            -3,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-008",
+          "kind": "cube",
+          "position": [
+            -2,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-009",
+          "kind": "cube",
+          "position": [
+            -2,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-010",
+          "kind": "cube",
+          "position": [
+            -1,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-011",
+          "kind": "cube",
+          "position": [
+            -1,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-012",
+          "kind": "cube",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-013",
+          "kind": "cube",
+          "position": [
+            0,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-014",
+          "kind": "cube",
+          "position": [
+            1,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-015",
+          "kind": "cube",
+          "position": [
+            1,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-016",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-017",
+          "kind": "cube",
+          "position": [
+            2,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-018",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-019",
+          "kind": "cube",
+          "position": [
+            3,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-020",
+          "kind": "cube",
+          "position": [
+            4,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-021",
+          "kind": "cube",
+          "position": [
+            4,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-022",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-023",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-024",
+          "kind": "cube",
+          "position": [
+            6,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-025",
+          "kind": "cube",
+          "position": [
+            6,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-026",
+          "kind": "slab",
+          "position": [
+            -6,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-027",
+          "kind": "slab",
+          "position": [
+            -6,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-028",
+          "kind": "slab",
+          "position": [
+            -6,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-029",
+          "kind": "slab",
+          "position": [
+            -6,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-030",
+          "kind": "slab",
+          "position": [
+            -6,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-031",
+          "kind": "slab",
+          "position": [
+            -6,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-032",
+          "kind": "slab",
+          "position": [
+            -6,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-033",
+          "kind": "slab",
+          "position": [
+            -6,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-034",
+          "kind": "slab",
+          "position": [
+            -5,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-035",
+          "kind": "slab",
+          "position": [
+            -5,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-036",
+          "kind": "slab",
+          "position": [
+            -5,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-037",
+          "kind": "slab",
+          "position": [
+            -5,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-038",
+          "kind": "slab",
+          "position": [
+            -5,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-039",
+          "kind": "slab",
+          "position": [
+            -5,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-040",
+          "kind": "slab",
+          "position": [
+            -5,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-041",
+          "kind": "slab",
+          "position": [
+            -5,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-042",
+          "kind": "slab",
+          "position": [
+            -4,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-043",
+          "kind": "slab",
+          "position": [
+            -4,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-044",
+          "kind": "slab",
+          "position": [
+            -4,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-045",
+          "kind": "slab",
+          "position": [
+            -4,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-046",
+          "kind": "slab",
+          "position": [
+            -4,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-047",
+          "kind": "slab",
+          "position": [
+            -4,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-048",
+          "kind": "slab",
+          "position": [
+            -4,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-049",
+          "kind": "slab",
+          "position": [
+            -4,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-050",
+          "kind": "slab",
+          "position": [
+            -2,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-051",
+          "kind": "slab",
+          "position": [
+            -2,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-052",
+          "kind": "slab",
+          "position": [
+            -2,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-053",
+          "kind": "slab",
+          "position": [
+            -2,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-054",
+          "kind": "slab",
+          "position": [
+            -2,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-055",
+          "kind": "slab",
+          "position": [
+            -2,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-056",
+          "kind": "slab",
+          "position": [
+            -2,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-057",
+          "kind": "slab",
+          "position": [
+            -2,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-058",
+          "kind": "slab",
+          "position": [
+            -1,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-059",
+          "kind": "slab",
+          "position": [
+            -1,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-060",
+          "kind": "slab",
+          "position": [
+            -1,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-061",
+          "kind": "slab",
+          "position": [
+            -1,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-062",
+          "kind": "slab",
+          "position": [
+            -1,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-063",
+          "kind": "slab",
+          "position": [
+            -1,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-064",
+          "kind": "slab",
+          "position": [
+            -1,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-065",
+          "kind": "slab",
+          "position": [
+            -1,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-066",
+          "kind": "slab",
+          "position": [
+            0,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-067",
+          "kind": "slab",
+          "position": [
+            0,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-068",
+          "kind": "slab",
+          "position": [
+            0,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-069",
+          "kind": "slab",
+          "position": [
+            0,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-070",
+          "kind": "slab",
+          "position": [
+            0,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-071",
+          "kind": "slab",
+          "position": [
+            0,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-072",
+          "kind": "slab",
+          "position": [
+            0,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-073",
+          "kind": "slab",
+          "position": [
+            0,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-074",
+          "kind": "slab",
+          "position": [
+            1,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-075",
+          "kind": "slab",
+          "position": [
+            1,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-076",
+          "kind": "slab",
+          "position": [
+            1,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-077",
+          "kind": "slab",
+          "position": [
+            1,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-078",
+          "kind": "slab",
+          "position": [
+            1,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-079",
+          "kind": "slab",
+          "position": [
+            1,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-080",
+          "kind": "slab",
+          "position": [
+            1,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-081",
+          "kind": "slab",
+          "position": [
+            1,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-082",
+          "kind": "slab",
+          "position": [
+            2,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-083",
+          "kind": "slab",
+          "position": [
+            2,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-084",
+          "kind": "slab",
+          "position": [
+            2,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-085",
+          "kind": "slab",
+          "position": [
+            2,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-086",
+          "kind": "slab",
+          "position": [
+            2,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-087",
+          "kind": "slab",
+          "position": [
+            2,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-088",
+          "kind": "slab",
+          "position": [
+            2,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-089",
+          "kind": "slab",
+          "position": [
+            2,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-090",
+          "kind": "slab",
+          "position": [
+            3,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-091",
+          "kind": "slab",
+          "position": [
+            3,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-092",
+          "kind": "slab",
+          "position": [
+            3,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-093",
+          "kind": "slab",
+          "position": [
+            3,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-094",
+          "kind": "slab",
+          "position": [
+            3,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-095",
+          "kind": "slab",
+          "position": [
+            3,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-096",
+          "kind": "slab",
+          "position": [
+            3,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-097",
+          "kind": "slab",
+          "position": [
+            3,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-098",
+          "kind": "slab",
+          "position": [
+            4,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-099",
+          "kind": "slab",
+          "position": [
+            4,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-100",
+          "kind": "slab",
+          "position": [
+            4,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-101",
+          "kind": "slab",
+          "position": [
+            4,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-102",
+          "kind": "slab",
+          "position": [
+            4,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-103",
+          "kind": "slab",
+          "position": [
+            4,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-104",
+          "kind": "slab",
+          "position": [
+            4,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-105",
+          "kind": "slab",
+          "position": [
+            4,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-106",
+          "kind": "slab",
+          "position": [
+            5,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-107",
+          "kind": "slab",
+          "position": [
+            5,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-108",
+          "kind": "slab",
+          "position": [
+            5,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-109",
+          "kind": "slab",
+          "position": [
+            5,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-110",
+          "kind": "slab",
+          "position": [
+            5,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-111",
+          "kind": "slab",
+          "position": [
+            5,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-112",
+          "kind": "slab",
+          "position": [
+            5,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-113",
+          "kind": "slab",
+          "position": [
+            5,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-114",
+          "kind": "slab",
+          "position": [
+            6,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-115",
+          "kind": "slab",
+          "position": [
+            6,
+            0.25,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-116",
+          "kind": "slab",
+          "position": [
+            6,
+            0.5,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-117",
+          "kind": "slab",
+          "position": [
+            6,
+            0.75,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-118",
+          "kind": "slab",
+          "position": [
+            6,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-119",
+          "kind": "slab",
+          "position": [
+            6,
+            0.25,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-120",
+          "kind": "slab",
+          "position": [
+            6,
+            0.5,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-slab-121",
+          "kind": "slab",
+          "position": [
+            6,
+            0.75,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-wedge-122",
+          "kind": "wedge",
+          "position": [
+            -6,
+            0,
+            2.5
+          ],
+          "facing": 180
+        },
+        {
+          "id": "Pre-wedge-123",
+          "kind": "wedge",
+          "position": [
+            -5,
+            0,
+            2.5
+          ],
+          "facing": 180
+        },
+        {
+          "id": "Pre-cube-124",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-125",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-126",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-127",
+          "kind": "cube",
+          "position": [
+            5,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-128",
+          "kind": "cube",
+          "position": [
+            6,
+            0,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-129",
+          "kind": "cube",
+          "position": [
+            6,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-130",
+          "kind": "cube",
+          "position": [
+            6,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-131",
+          "kind": "cube",
+          "position": [
+            6,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-132",
+          "kind": "cube",
+          "position": [
+            7,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-133",
+          "kind": "cube",
+          "position": [
+            7,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-135",
+          "kind": "cube",
+          "position": [
+            8,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-136",
+          "kind": "cube",
+          "position": [
+            9,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-137",
+          "kind": "cube",
+          "position": [
+            9,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-138",
+          "kind": "cube",
+          "position": [
+            10,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-139",
+          "kind": "cube",
+          "position": [
+            10,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-140",
+          "kind": "cube",
+          "position": [
+            11,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-141",
+          "kind": "cube",
+          "position": [
+            11,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-142",
+          "kind": "cube",
+          "position": [
+            12,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-143",
+          "kind": "cube",
+          "position": [
+            12,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-145",
+          "kind": "cube",
+          "position": [
+            13,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-146",
+          "kind": "cube",
+          "position": [
+            14,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-147",
+          "kind": "cube",
+          "position": [
+            14,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-148",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-149",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-150",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-151",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-152",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-153",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-154",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            -3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-155",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-156",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-157",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-158",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-159",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-160",
+          "kind": "cube",
+          "position": [
+            15,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-wedge-161",
+          "kind": "wedge",
+          "position": [
+            15,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-162",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-163",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-164",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-165",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-166",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-167",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-168",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-wedge-169",
+          "kind": "wedge",
+          "position": [
+            16,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-170",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            -3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-171",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            -2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-172",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            -1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-173",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            0
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-174",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-175",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-cube-176",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "Pre-wedge-177",
+          "kind": "wedge",
+          "position": [
+            17,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        }
+      ],
+      "supply_leads": false
+    },
+    {
+      "map": "Trans_Introduction",
+      "title": "Introduction / translate, rotate, scale",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "sequence",
+          "artifact": "void_trial_introduction_mezzanine",
+          "position": [
+            0,
+            0
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "station": "NW",
+          "config": {
+            "museum_origin": "Trans_Introduction",
+            "editor_label": "Translate, rotate, scale / original mechanisms"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "B ARRIVAL / RAMP TO THE STEEL DECK",
+          "position": [
+            17.5,
+            -8.2
+          ]
+        },
+        {
+          "label": "01 MOVE",
+          "position": [
+            15,
+            0
+          ]
+        },
+        {
+          "label": "02 ROTATE",
+          "position": [
+            4,
+            0
+          ]
+        },
+        {
+          "label": "03 SCALE",
+          "position": [
+            -5,
+            0
+          ]
+        },
+        {
+          "label": "DOWN THE RAMP / A SOUTH-WEST",
+          "position": [
+            -17,
+            7.9
+          ]
+        }
+      ],
+      "construction": [
+        {
+          "id": "StartDeck14_m0p5",
+          "kind": "deck",
+          "position": [
+            14,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck14_0p5",
+          "kind": "deck",
+          "position": [
+            14,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge14_m1p5",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge14_1p5",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck15_m0p5",
+          "kind": "deck",
+          "position": [
+            15,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck15_0p5",
+          "kind": "deck",
+          "position": [
+            15,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge15_m1p5",
+          "kind": "truss",
+          "position": [
+            15,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge15_1p5",
+          "kind": "truss",
+          "position": [
+            15,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck16_m1p5",
+          "kind": "deck",
+          "position": [
+            16,
+            2.88,
+            -1.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck16_m0p5",
+          "kind": "deck",
+          "position": [
+            16,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck16_0p5",
+          "kind": "deck",
+          "position": [
+            16,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge16_m1p5",
+          "kind": "truss",
+          "position": [
+            16,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge16_1p5",
+          "kind": "truss",
+          "position": [
+            16,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck17_m1p5",
+          "kind": "deck",
+          "position": [
+            17,
+            2.88,
+            -1.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck17_m0p5",
+          "kind": "deck",
+          "position": [
+            17,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck17_0p5",
+          "kind": "deck",
+          "position": [
+            17,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge17_m1p5",
+          "kind": "truss",
+          "position": [
+            17,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge17_1p5",
+          "kind": "truss",
+          "position": [
+            17,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck18_m0p5",
+          "kind": "deck",
+          "position": [
+            18,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartDeck18_0p5",
+          "kind": "deck",
+          "position": [
+            18,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge18_m1p5",
+          "kind": "truss",
+          "position": [
+            18,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartEdge18_1p5",
+          "kind": "truss",
+          "position": [
+            18,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "StartSpine0",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine1",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine2",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine3",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine4",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine5",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine6",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            -0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine7",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine8",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine9",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine10",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine11",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine12",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartSpine13",
+          "kind": "truss",
+          "position": [
+            14,
+            2.38,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartCollarm7",
+          "kind": "collar",
+          "position": [
+            14,
+            2.38,
+            -7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "StartCollar7",
+          "kind": "collar",
+          "position": [
+            14,
+            2.38,
+            7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleDeck3_m0p5",
+          "kind": "deck",
+          "position": [
+            3,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck3_0p5",
+          "kind": "deck",
+          "position": [
+            3,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge3_m1p5",
+          "kind": "truss",
+          "position": [
+            3,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge3_1p5",
+          "kind": "truss",
+          "position": [
+            3,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck4_m0p5",
+          "kind": "deck",
+          "position": [
+            4,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck4_0p5",
+          "kind": "deck",
+          "position": [
+            4,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge4_m1p5",
+          "kind": "truss",
+          "position": [
+            4,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge4_1p5",
+          "kind": "truss",
+          "position": [
+            4,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck5_m0p5",
+          "kind": "deck",
+          "position": [
+            5,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck5_0p5",
+          "kind": "deck",
+          "position": [
+            5,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge5_m1p5",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge5_1p5",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck6_m0p5",
+          "kind": "deck",
+          "position": [
+            6,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleDeck6_0p5",
+          "kind": "deck",
+          "position": [
+            6,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge6_m1p5",
+          "kind": "truss",
+          "position": [
+            6,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleEdge6_1p5",
+          "kind": "truss",
+          "position": [
+            6,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ScaleSpine0",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine1",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine2",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine3",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine4",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine5",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine6",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            -0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine7",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine8",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine9",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine10",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine11",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine12",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleSpine13",
+          "kind": "truss",
+          "position": [
+            5,
+            2.38,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleCollarm7",
+          "kind": "collar",
+          "position": [
+            5,
+            2.38,
+            -7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ScaleCollar7",
+          "kind": "collar",
+          "position": [
+            5,
+            2.38,
+            7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnDeckm7_m0p5",
+          "kind": "deck",
+          "position": [
+            -7,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm7_0p5",
+          "kind": "deck",
+          "position": [
+            -7,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem7_m1p5",
+          "kind": "truss",
+          "position": [
+            -7,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem7_1p5",
+          "kind": "truss",
+          "position": [
+            -7,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm6_m0p5",
+          "kind": "deck",
+          "position": [
+            -6,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm6_0p5",
+          "kind": "deck",
+          "position": [
+            -6,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem6_m1p5",
+          "kind": "truss",
+          "position": [
+            -6,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem6_1p5",
+          "kind": "truss",
+          "position": [
+            -6,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm5_m0p5",
+          "kind": "deck",
+          "position": [
+            -5,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm5_0p5",
+          "kind": "deck",
+          "position": [
+            -5,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem5_m1p5",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem5_1p5",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm4_m0p5",
+          "kind": "deck",
+          "position": [
+            -4,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnDeckm4_0p5",
+          "kind": "deck",
+          "position": [
+            -4,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem4_m1p5",
+          "kind": "truss",
+          "position": [
+            -4,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnEdgem4_1p5",
+          "kind": "truss",
+          "position": [
+            -4,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "TurnSpine0",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine1",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine2",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine3",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine4",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine5",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine6",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            -0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine7",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine8",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine9",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine10",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine11",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine12",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnSpine13",
+          "kind": "truss",
+          "position": [
+            -5,
+            2.38,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnCollarm7",
+          "kind": "collar",
+          "position": [
+            -5,
+            2.38,
+            -7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "TurnCollar7",
+          "kind": "collar",
+          "position": [
+            -5,
+            2.38,
+            7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitDeckm18_m0p5",
+          "kind": "deck",
+          "position": [
+            -18,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm18_0p5",
+          "kind": "deck",
+          "position": [
+            -18,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem18_m1p5",
+          "kind": "truss",
+          "position": [
+            -18,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem18_1p5",
+          "kind": "truss",
+          "position": [
+            -18,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm17_m0p5",
+          "kind": "deck",
+          "position": [
+            -17,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm17_0p5",
+          "kind": "deck",
+          "position": [
+            -17,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm17_1p5",
+          "kind": "deck",
+          "position": [
+            -17,
+            2.88,
+            1.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem17_m1p5",
+          "kind": "truss",
+          "position": [
+            -17,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem17_1p5",
+          "kind": "truss",
+          "position": [
+            -17,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm16_m0p5",
+          "kind": "deck",
+          "position": [
+            -16,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm16_0p5",
+          "kind": "deck",
+          "position": [
+            -16,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm16_1p5",
+          "kind": "deck",
+          "position": [
+            -16,
+            2.88,
+            1.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem16_m1p5",
+          "kind": "truss",
+          "position": [
+            -16,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem16_1p5",
+          "kind": "truss",
+          "position": [
+            -16,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm15_m0p5",
+          "kind": "deck",
+          "position": [
+            -15,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitDeckm15_0p5",
+          "kind": "deck",
+          "position": [
+            -15,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem15_m1p5",
+          "kind": "truss",
+          "position": [
+            -15,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitEdgem15_1p5",
+          "kind": "truss",
+          "position": [
+            -15,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitSpine0",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine1",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine2",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine3",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine4",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine5",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine6",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine7",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            0.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine8",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            1.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine9",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            2.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine10",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            3.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine11",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            4.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine12",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitSpine13",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitCollarm7",
+          "kind": "collar",
+          "position": [
+            -14,
+            2.38,
+            -7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "ExitCollar7",
+          "kind": "collar",
+          "position": [
+            -14,
+            2.38,
+            7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "EntryRamp0_m0p5",
+          "kind": "wedge",
+          "position": [
+            16,
+            0,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryRamp0_0p5",
+          "kind": "wedge",
+          "position": [
+            17,
+            0,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryRamp1_m0p5",
+          "kind": "wedge",
+          "position": [
+            16,
+            1,
+            -5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase1_m0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase1_m0p5_0_0p5",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase1_0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase1_0p5_0_0p5",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            -4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryRamp2_m0p5",
+          "kind": "wedge",
+          "position": [
+            16,
+            2,
+            -3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase2_m0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase2_m0p5_0_0p5",
+          "kind": "cube",
+          "position": [
+            16,
+            0,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase2_m0p5_1_m0p5",
+          "kind": "cube",
+          "position": [
+            16,
+            1,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase2_m0p5_1_0p5",
+          "kind": "cube",
+          "position": [
+            16,
+            1,
+            -2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase2_0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            17,
+            0,
+            -3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "EntryBase2_0p5_1_m0p5",
+          "kind": "cube",
+          "position": [
+            17,
+            0.9999999999999996,
+            -4
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveRamp0_m0p5",
+          "kind": "wedge",
+          "position": [
+            -17,
+            0,
+            7
+          ],
+          "facing": 180
+        },
+        {
+          "id": "LeaveRamp0_0p5",
+          "kind": "wedge",
+          "position": [
+            -16,
+            0,
+            7
+          ],
+          "facing": 180
+        },
+        {
+          "id": "LeaveBase1_m0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            -17,
+            0,
+            4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveBase1_m0p5_0_0p5",
+          "kind": "cube",
+          "position": [
+            -17,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveRamp1_0p5",
+          "kind": "wedge",
+          "position": [
+            -16,
+            1,
+            5
+          ],
+          "facing": 180
+        },
+        {
+          "id": "LeaveBase1_0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            -16,
+            0,
+            4.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveBase1_0p5_0_0p5",
+          "kind": "cube",
+          "position": [
+            -16,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveBase2_m0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            -17,
+            0,
+            2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveRamp2_0p5",
+          "kind": "wedge",
+          "position": [
+            -16,
+            2,
+            3
+          ],
+          "facing": 180
+        },
+        {
+          "id": "LeaveBase2_0p5_0_m0p5",
+          "kind": "cube",
+          "position": [
+            -16,
+            0,
+            2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveBase2_0p5_0_0p5",
+          "kind": "cube",
+          "position": [
+            -16,
+            0,
+            3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveBase2_0p5_1_m0p5",
+          "kind": "cube",
+          "position": [
+            -16,
+            1,
+            2.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "LeaveBase2_0p5_1_0p5",
+          "kind": "cube",
+          "position": [
+            -16,
+            1,
+            3.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "SuspendedPlatform",
+          "kind": "platform",
+          "position": [
+            12.5,
+            3,
+            0
+          ],
+          "facing": 0,
+          "travel": [
+            -5,
+            0,
+            0
+          ],
+          "speed": 1,
+          "pause": 5
+        },
+        {
+          "id": "ExitTiem1p5",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "ExitTie1p5",
+          "kind": "truss",
+          "position": [
+            -14,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FinalDeck14_N",
+          "kind": "deck",
+          "position": [
+            -14,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FinalDeck14_S",
+          "kind": "deck",
+          "position": [
+            -14,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FinalDeck13_N",
+          "kind": "deck",
+          "position": [
+            -13,
+            2.88,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FinalDeck13_S",
+          "kind": "deck",
+          "position": [
+            -13,
+            2.88,
+            0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FinalEdge13_N",
+          "kind": "truss",
+          "position": [
+            -13,
+            2.38,
+            -0.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FinalEdge13_S",
+          "kind": "truss",
+          "position": [
+            -13,
+            2.38,
+            0.5
+          ],
+          "facing": 0
+        }
+      ]
+    },
+    {
+      "map": "Trans_Translation",
+      "title": "Translation / pillar-mounted mezzanine",
+      "origin": false,
+      "artifacts": [],
+      "props": [],
+      "walls": [],
+      "impact_cells": [],
+      "route": [],
+      "construction": [
+        {
+          "id": "NearDeck0-0",
+          "kind": "deck",
+          "position": [
+            -12.5,
+            2.88,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck0-1",
+          "kind": "deck",
+          "position": [
+            -12.5,
+            2.88,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck0-2",
+          "kind": "deck",
+          "position": [
+            -12.5,
+            2.88,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss0-0",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss0-2",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck1-0",
+          "kind": "deck",
+          "position": [
+            -11.5,
+            2.88,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck1-1",
+          "kind": "deck",
+          "position": [
+            -11.5,
+            2.88,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck1-2",
+          "kind": "deck",
+          "position": [
+            -11.5,
+            2.88,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss1-0",
+          "kind": "truss",
+          "position": [
+            -11.5,
+            2.38,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss1-2",
+          "kind": "truss",
+          "position": [
+            -11.5,
+            2.38,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck2-0",
+          "kind": "deck",
+          "position": [
+            -10.5,
+            2.88,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck2-1",
+          "kind": "deck",
+          "position": [
+            -10.5,
+            2.88,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck2-2",
+          "kind": "deck",
+          "position": [
+            -10.5,
+            2.88,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss2-0",
+          "kind": "truss",
+          "position": [
+            -10.5,
+            2.38,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss2-2",
+          "kind": "truss",
+          "position": [
+            -10.5,
+            2.38,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck3-0",
+          "kind": "deck",
+          "position": [
+            -9.5,
+            2.88,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck3-1",
+          "kind": "deck",
+          "position": [
+            -9.5,
+            2.88,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck3-2",
+          "kind": "deck",
+          "position": [
+            -9.5,
+            2.88,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss3-0",
+          "kind": "truss",
+          "position": [
+            -9.5,
+            2.38,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss3-2",
+          "kind": "truss",
+          "position": [
+            -9.5,
+            2.38,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck4-0",
+          "kind": "deck",
+          "position": [
+            -8.5,
+            2.88,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck4-1",
+          "kind": "deck",
+          "position": [
+            -8.5,
+            2.88,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck4-2",
+          "kind": "deck",
+          "position": [
+            -8.5,
+            2.88,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss4-0",
+          "kind": "truss",
+          "position": [
+            -8.5,
+            2.38,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss4-2",
+          "kind": "truss",
+          "position": [
+            -8.5,
+            2.38,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck5-0",
+          "kind": "deck",
+          "position": [
+            -7.5,
+            2.88,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck5-1",
+          "kind": "deck",
+          "position": [
+            -7.5,
+            2.88,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearDeck5-2",
+          "kind": "deck",
+          "position": [
+            -7.5,
+            2.88,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss5-0",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearTruss5-2",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRamp0-0",
+          "kind": "wedge",
+          "position": [
+            -19,
+            0,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearRamp1-0",
+          "kind": "wedge",
+          "position": [
+            -17,
+            1,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearRampBase1-0-0--0p5",
+          "kind": "cube",
+          "position": [
+            -17.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase1-0-0-0p5",
+          "kind": "cube",
+          "position": [
+            -16.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRamp2-0",
+          "kind": "wedge",
+          "position": [
+            -15,
+            2,
+            5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearRampBase2-0-0--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase2-0-0-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase2-0-1--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            1,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase2-0-1-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            1,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLanding0-0",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            0,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLanding0-1",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            1,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLanding0-2",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            2,
+            5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRamp0-1",
+          "kind": "wedge",
+          "position": [
+            -19,
+            0,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearRamp1-1",
+          "kind": "wedge",
+          "position": [
+            -17,
+            1,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearRampBase1-1-0--0p5",
+          "kind": "cube",
+          "position": [
+            -17.5,
+            0,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase1-1-0-0p5",
+          "kind": "cube",
+          "position": [
+            -16.5,
+            0,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRamp2-1",
+          "kind": "wedge",
+          "position": [
+            -15,
+            2,
+            6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearRampBase2-1-0--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            0,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase2-1-0-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            0,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase2-1-1--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            1,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearRampBase2-1-1-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            1,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLanding1-0",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            0,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLanding1-1",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            1,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLanding1-2",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            2,
+            6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck0-0",
+          "kind": "deck",
+          "position": [
+            -12.5,
+            2.88,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck0-1",
+          "kind": "deck",
+          "position": [
+            -12.5,
+            2.88,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck0-2",
+          "kind": "deck",
+          "position": [
+            -12.5,
+            2.88,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss0-0",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss0-2",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck1-0",
+          "kind": "deck",
+          "position": [
+            -11.5,
+            2.88,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck1-1",
+          "kind": "deck",
+          "position": [
+            -11.5,
+            2.88,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck1-2",
+          "kind": "deck",
+          "position": [
+            -11.5,
+            2.88,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss1-0",
+          "kind": "truss",
+          "position": [
+            -11.5,
+            2.38,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss1-2",
+          "kind": "truss",
+          "position": [
+            -11.5,
+            2.38,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck2-0",
+          "kind": "deck",
+          "position": [
+            -10.5,
+            2.88,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck2-1",
+          "kind": "deck",
+          "position": [
+            -10.5,
+            2.88,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck2-2",
+          "kind": "deck",
+          "position": [
+            -10.5,
+            2.88,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss2-0",
+          "kind": "truss",
+          "position": [
+            -10.5,
+            2.38,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss2-2",
+          "kind": "truss",
+          "position": [
+            -10.5,
+            2.38,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck3-0",
+          "kind": "deck",
+          "position": [
+            -9.5,
+            2.88,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck3-1",
+          "kind": "deck",
+          "position": [
+            -9.5,
+            2.88,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck3-2",
+          "kind": "deck",
+          "position": [
+            -9.5,
+            2.88,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss3-0",
+          "kind": "truss",
+          "position": [
+            -9.5,
+            2.38,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss3-2",
+          "kind": "truss",
+          "position": [
+            -9.5,
+            2.38,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck4-0",
+          "kind": "deck",
+          "position": [
+            -8.5,
+            2.88,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck4-1",
+          "kind": "deck",
+          "position": [
+            -8.5,
+            2.88,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck4-2",
+          "kind": "deck",
+          "position": [
+            -8.5,
+            2.88,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss4-0",
+          "kind": "truss",
+          "position": [
+            -8.5,
+            2.38,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss4-2",
+          "kind": "truss",
+          "position": [
+            -8.5,
+            2.38,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck5-0",
+          "kind": "deck",
+          "position": [
+            -7.5,
+            2.88,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck5-1",
+          "kind": "deck",
+          "position": [
+            -7.5,
+            2.88,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarDeck5-2",
+          "kind": "deck",
+          "position": [
+            -7.5,
+            2.88,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss5-0",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarTruss5-2",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            -7.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRamp0-0",
+          "kind": "wedge",
+          "position": [
+            -19,
+            0,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarRamp1-0",
+          "kind": "wedge",
+          "position": [
+            -17,
+            1,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarRampBase1-0-0--0p5",
+          "kind": "cube",
+          "position": [
+            -17.5,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase1-0-0-0p5",
+          "kind": "cube",
+          "position": [
+            -16.5,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRamp2-0",
+          "kind": "wedge",
+          "position": [
+            -15,
+            2,
+            -5.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarRampBase2-0-0--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase2-0-0-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase2-0-1--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            1,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase2-0-1-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            1,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLanding0-0",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            0,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLanding0-1",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            1,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLanding0-2",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            2,
+            -5.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRamp0-1",
+          "kind": "wedge",
+          "position": [
+            -19,
+            0,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarRamp1-1",
+          "kind": "wedge",
+          "position": [
+            -17,
+            1,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarRampBase1-1-0--0p5",
+          "kind": "cube",
+          "position": [
+            -17.5,
+            0,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase1-1-0-0p5",
+          "kind": "cube",
+          "position": [
+            -16.5,
+            0,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRamp2-1",
+          "kind": "wedge",
+          "position": [
+            -15,
+            2,
+            -6.5
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarRampBase2-1-0--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            0,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase2-1-0-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            0,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase2-1-1--0p5",
+          "kind": "cube",
+          "position": [
+            -15.5,
+            1,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarRampBase2-1-1-0p5",
+          "kind": "cube",
+          "position": [
+            -14.5,
+            1,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLanding1-0",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            0,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLanding1-1",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            1,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLanding1-2",
+          "kind": "cube",
+          "position": [
+            -13.5,
+            2,
+            -6.5
+          ],
+          "facing": 0
+        },
+        {
+          "id": "SuspendedPlatform",
+          "kind": "platform",
+          "position": [
+            -10,
+            3,
+            4
+          ],
+          "facing": 0,
+          "travel": [
+            0,
+            0,
+            -8
+          ],
+          "speed": 1,
+          "pause": 4
+        },
+        {
+          "id": "cube-1",
+          "kind": "cube",
+          "position": [
+            -4,
+            2.88,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "cube-2",
+          "kind": "cube",
+          "position": [
+            -4,
+            2.88,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "cube-3",
+          "kind": "cube",
+          "position": [
+            -4,
+            2.88,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "slab-1",
+          "kind": "slab",
+          "position": [
+            -3,
+            2.88,
+            3
+          ],
+          "facing": 0
+        },
+        {
+          "id": "wedge-1",
+          "kind": "wedge",
+          "position": [
+            -3,
+            2.88,
+            2
+          ],
+          "facing": 0
+        },
+        {
+          "id": "slab-3",
+          "kind": "slab",
+          "position": [
+            -3,
+            2.88,
+            1
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger0",
+          "kind": "truss",
+          "position": [
+            -13.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger1",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger2",
+          "kind": "truss",
+          "position": [
+            -11.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger3",
+          "kind": "truss",
+          "position": [
+            -10.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger4",
+          "kind": "truss",
+          "position": [
+            -9.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger5",
+          "kind": "truss",
+          "position": [
+            -8.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger6",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger7",
+          "kind": "truss",
+          "position": [
+            -6.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearLedger8",
+          "kind": "truss",
+          "position": [
+            -5.5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearCross-12p5-6",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            6
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearCross-12p5-7",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearCross-7p5-6",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            6
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearCross-7p5-7",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "NearPillar-14",
+          "kind": "collar",
+          "position": [
+            -14,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "NearPillar-5",
+          "kind": "collar",
+          "position": [
+            -5,
+            2.38,
+            7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger0",
+          "kind": "truss",
+          "position": [
+            -13.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger1",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger2",
+          "kind": "truss",
+          "position": [
+            -11.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger3",
+          "kind": "truss",
+          "position": [
+            -10.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger4",
+          "kind": "truss",
+          "position": [
+            -9.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger5",
+          "kind": "truss",
+          "position": [
+            -8.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger6",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger7",
+          "kind": "truss",
+          "position": [
+            -6.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarLedger8",
+          "kind": "truss",
+          "position": [
+            -5.5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarCross-12p5-6",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            -6
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarCross-12p5-7",
+          "kind": "truss",
+          "position": [
+            -12.5,
+            2.38,
+            -7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarCross-7p5-6",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            -6
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarCross-7p5-7",
+          "kind": "truss",
+          "position": [
+            -7.5,
+            2.38,
+            -7
+          ],
+          "facing": 90
+        },
+        {
+          "id": "FarPillar-14",
+          "kind": "collar",
+          "position": [
+            -14,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "FarPillar-5",
+          "kind": "collar",
+          "position": [
+            -5,
+            2.38,
+            -7
+          ],
+          "facing": 0
+        },
+        {
+          "id": "support-1",
+          "kind": "support",
+          "position": [
+            -3,
+            2.88,
+            0
+          ],
+          "facing": 0
+        }
+      ]
+    },
+    {
+      "map": "",
+      "title": "Translation / catch floor",
+      "origin": false,
+      "artifacts": [],
+      "props": [],
+      "walls": [],
+      "impact_cells": [],
+      "route": [
+        {
+          "label": "TRANSLATION COMPLETE / R OR B TO REPEAT",
+          "position": [
+            14,
+            -4
+          ]
+        }
+      ]
+    }
+  ]
+}

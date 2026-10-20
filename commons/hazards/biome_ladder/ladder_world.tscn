@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bd4n7248bjdvu"]
+
+[ext_resource type="PackedScene" path="res://commons/hazards/catalyst_counterpart/biome_arena.tscn" id="1"]
+[ext_resource type="Script" uid="uid://cmy5tsn47tj1r" path="res://commons/hazards/biome_ladder/ladder_world.gd" id="2"]
+
+[node name="BiomeLadder" unique_id=1566147712 instance=ExtResource("1")]
+script = ExtResource("2")
+
+[node name="XROrigin3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 4.5)
+
+[node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" parent_id_path=PackedInt32Array(1055388144) index="6" unique_id=1913051319]
+surface_grip_enabled = true
+surface_grip_max_distance = 0.35

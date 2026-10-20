@@ -1,0 +1,432 @@
+{
+  "id": "cube_wedge_walkway_v1",
+  "units": "metres",
+  "cube_size": [
+    1,
+    1,
+    1
+  ],
+  "wedge_size": [
+    1,
+    1,
+    2
+  ],
+  "members": [
+    {
+      "id": "EntryWedge1",
+      "kind": "wedge",
+      "position": [
+        -4,
+        0,
+        -1
+      ],
+      "facing": 90
+    },
+    {
+      "id": "EntryWedge2",
+      "kind": "wedge",
+      "position": [
+        -4,
+        0,
+        0
+      ],
+      "facing": 90
+    },
+    {
+      "id": "EntryWedge3",
+      "kind": "wedge",
+      "position": [
+        -4,
+        0,
+        1
+      ],
+      "facing": 90
+    },
+    {
+      "id": "UpperWedge1",
+      "kind": "wedge",
+      "position": [
+        0,
+        1,
+        -1
+      ],
+      "facing": 90
+    },
+    {
+      "id": "UpperWedge2",
+      "kind": "wedge",
+      "position": [
+        0,
+        1,
+        0
+      ],
+      "facing": 90
+    },
+    {
+      "id": "UpperWedge3",
+      "kind": "wedge",
+      "position": [
+        0,
+        1,
+        1
+      ],
+      "facing": 90
+    },
+    {
+      "id": "LandingCube1_1_1",
+      "kind": "cube",
+      "position": [
+        -2.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LandingCube1_1_2",
+      "kind": "cube",
+      "position": [
+        -2.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LandingCube1_1_3",
+      "kind": "cube",
+      "position": [
+        -2.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LandingCube1_2_1",
+      "kind": "cube",
+      "position": [
+        -1.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LandingCube1_2_2",
+      "kind": "cube",
+      "position": [
+        -1.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LandingCube1_2_3",
+      "kind": "cube",
+      "position": [
+        -1.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FoundationCube1_1_1",
+      "kind": "cube",
+      "position": [
+        -0.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FoundationCube1_1_2",
+      "kind": "cube",
+      "position": [
+        -0.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FoundationCube1_1_3",
+      "kind": "cube",
+      "position": [
+        -0.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FoundationCube1_2_1",
+      "kind": "cube",
+      "position": [
+        0.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FoundationCube1_2_2",
+      "kind": "cube",
+      "position": [
+        0.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FoundationCube1_2_3",
+      "kind": "cube",
+      "position": [
+        0.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_1_1",
+      "kind": "cube",
+      "position": [
+        1.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_1_2",
+      "kind": "cube",
+      "position": [
+        1.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_1_3",
+      "kind": "cube",
+      "position": [
+        1.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_2_1",
+      "kind": "cube",
+      "position": [
+        2.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_2_2",
+      "kind": "cube",
+      "position": [
+        2.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_2_3",
+      "kind": "cube",
+      "position": [
+        2.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_3_1",
+      "kind": "cube",
+      "position": [
+        3.5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_3_2",
+      "kind": "cube",
+      "position": [
+        3.5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube1_3_3",
+      "kind": "cube",
+      "position": [
+        3.5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_1_1",
+      "kind": "cube",
+      "position": [
+        1.5,
+        1,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_1_2",
+      "kind": "cube",
+      "position": [
+        1.5,
+        1,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_1_3",
+      "kind": "cube",
+      "position": [
+        1.5,
+        1,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_2_1",
+      "kind": "cube",
+      "position": [
+        2.5,
+        1,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_2_2",
+      "kind": "cube",
+      "position": [
+        2.5,
+        1,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_2_3",
+      "kind": "cube",
+      "position": [
+        2.5,
+        1,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_3_1",
+      "kind": "cube",
+      "position": [
+        3.5,
+        1,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_3_2",
+      "kind": "cube",
+      "position": [
+        3.5,
+        1,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "PlatformCube2_3_3",
+      "kind": "cube",
+      "position": [
+        3.5,
+        1,
+        1
+      ],
+      "facing": 0
+    }
+  ],
+  "signs": [
+    {
+      "id": "EntryLabel",
+      "text": "SIX VERTICES / A WEDGE\nEIGHT CORNERS / A CUBE",
+      "position": [
+        -3.8,
+        0.025,
+        2.05
+      ]
+    },
+    {
+      "id": "LandingLabel",
+      "text": "ONE METRE",
+      "position": [
+        -2,
+        1.012,
+        0
+      ]
+    },
+    {
+      "id": "PlatformLabel",
+      "text": "SAME CUBES / ANOTHER METRE",
+      "position": [
+        2.5,
+        2.012,
+        0
+      ]
+    }
+  ],
+  "walk_route": [
+    [
+      -5.6,
+      0,
+      0
+    ],
+    [
+      -2.4,
+      1,
+      0
+    ],
+    [
+      -1.2,
+      1,
+      0
+    ],
+    [
+      1.5,
+      2,
+      0
+    ],
+    [
+      3.3,
+      2,
+      0
+    ]
+  ]
+}

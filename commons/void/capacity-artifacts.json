@@ -1,0 +1,1780 @@
+{
+  "version": 1,
+  "updated": "2026-10-19",
+  "scope": "Concrete artifacts across the whole live spine. Authored operation, combination and association edges; live placement and shared scenes are separate evidence.",
+  "rules": [
+    "Nodes are artifacts or explicitly proposed assemblies, not halls or abstract subjects.",
+    "A relationship is an editorial learning or creative choice, not proof of code inheritance.",
+    "Museum placement is not proof of a reusable Void prefab or a tested lesson.",
+    "All other registered map objects remain accessible without inventing a tutorial role."
+  ],
+  "nodes": [
+    {
+      "id": "frame_counter_display",
+      "title": "Frame counter",
+      "sequence": "primitives",
+      "learn": "A repeated update makes elapsed activity visible.",
+      "use": "Supply time to a changing object.",
+      "icon": "clock"
+    },
+    {
+      "id": "point_solid",
+      "title": "Solid point",
+      "sequence": "primitives",
+      "learn": "Position, visible size and collision are separate decisions.",
+      "use": "Keep one body as the learner's starting object.",
+      "icon": "point"
+    },
+    {
+      "id": "point_held",
+      "title": "Held point",
+      "sequence": "primitives",
+      "learn": "Pickup changes control; local and world coordinates use different frames.",
+      "use": "Make an endpoint that the hand can move.",
+      "icon": "hand"
+    },
+    {
+      "id": "line",
+      "title": "Measuring line",
+      "sequence": "primitives",
+      "learn": "Two endpoints define a segment; their difference gives displacement.",
+      "use": "Connect, align and measure two positions.",
+      "icon": "line"
+    },
+    {
+      "id": "draw_dot",
+      "title": "Drawn trace",
+      "sequence": "primitives",
+      "learn": "Store ordered positions; sample by a distance condition; connect neighbours.",
+      "use": "Keep a gesture as reusable spatial data.",
+      "icon": "trace"
+    },
+    {
+      "id": "player_trace",
+      "title": "Walking trace",
+      "sequence": "primitives",
+      "learn": "Repeated samples turn the player's motion into a record.",
+      "use": "Compare bodily movement with the path it leaves.",
+      "icon": "trace"
+    },
+    {
+      "id": "grid_lines",
+      "title": "Trace grid",
+      "sequence": "primitives",
+      "learn": "A lattice address and a continuous position are different descriptions.",
+      "use": "Replay or snap a retained trace without losing its original.",
+      "icon": "grid"
+    },
+    {
+      "id": "draw_triangle_faces",
+      "title": "Drawn face",
+      "sequence": "primitives",
+      "learn": "Three non-collinear positions close a face; corner order controls its facing.",
+      "use": "Make a surface from a chosen part of the trace.",
+      "icon": "triangle"
+    },
+    {
+      "id": "grab_trihedron",
+      "title": "Trihedron",
+      "sequence": "primitives",
+      "learn": "Three meeting faces introduce a corner and orientation; this open trihedron does not yet enclose a volume.",
+      "use": "Compare an open corner with a completed tetrahedron.",
+      "icon": "body"
+    },
+    {
+      "id": "wp",
+      "title": "Walkable wedge",
+      "sequence": "primitives",
+      "learn": "A sloped collider gives the surface a physical use.",
+      "use": "Rise one metre over a two-metre run; join a platform.",
+      "icon": "wedge",
+      "carry": {
+        "identity": "commons/scenes/mapobjects/walkableprism.tscn",
+        "keeps": "Existing six-vertex prism geometry and matching collider.",
+        "adds": "Floor-centred striped adapter in wedge_blocker.tscn; low/high joins at (0,0,-1) and (0,1,1).",
+        "check": "Original scene preserved; one-metre width/rise and two-metre run. Nine oriented joins and actual player traversal passed."
+      }
+    },
+    {
+      "id": "polyhedron_nets_cube",
+      "title": "Folding cube net",
+      "sequence": "primitives",
+      "learn": "Connected faces fold into a cube; the same faces can be laid flat.",
+      "use": "Build a closed body from an arrangement of faces; compare net and solid.",
+      "icon": "cube"
+    },
+    {
+      "id": "laser_measure",
+      "title": "Laser ruler",
+      "sequence": "primitives",
+      "learn": "A ray intersection supplies a measurable endpoint.",
+      "use": "Measure an accessible gap in the world.",
+      "icon": "ruler"
+    },
+    {
+      "id": "lightrod",
+      "title": "Light rod",
+      "sequence": "primitives",
+      "learn": "A segment can also orient the hand and mark a route.",
+      "use": "Carry a light through a dark passage.",
+      "icon": "lamp"
+    },
+    {
+      "id": "primitive_pillar",
+      "title": "Stacked pillar",
+      "sequence": "primitives",
+      "learn": "A repeated primitive builds a column course by course.",
+      "use": "Compose a support from a small vocabulary of pieces.",
+      "icon": "columns"
+    },
+    {
+      "id": "resolution_colonnade_museum",
+      "title": "Profile columns",
+      "sequence": "primitives",
+      "learn": "Profile, height and angular resolution are independent choices.",
+      "use": "Make a related family of sculptural columns.",
+      "icon": "columns"
+    },
+    {
+      "id": "glyph_profile_gallery",
+      "title": "Letter vessels",
+      "sequence": "primitives",
+      "learn": "An outline and its holes can become spatial boundaries.",
+      "use": "Borrow a letter to make a vessel, channel or passage.",
+      "icon": "profile"
+    },
+    {
+      "id": "achilles_tortoise",
+      "title": "Achilles and tortoise",
+      "sequence": "primitives",
+      "learn": "A finite sequence of refinements is not the infinite limit.",
+      "use": "Inspect how tolerance changes a chase or convergence.",
+      "icon": "trace"
+    },
+    {
+      "id": "durer_scene",
+      "title": "Melencolia scene",
+      "sequence": "primitives",
+      "learn": "Tools and solids can be composed into an encounter about making and limits.",
+      "use": "Place learned bodies together; keep reflection distinct from proof.",
+      "icon": "body"
+    },
+    {
+      "id": "pick_up_cube",
+      "title": "Pickup cube",
+      "sequence": "transformation",
+      "learn": "The same body can receive new control and behaviour.",
+      "use": "Manipulate a piece before assembling it with others.",
+      "icon": "cube"
+    },
+    {
+      "id": "tc",
+      "title": "Transport cube",
+      "sequence": "transformation",
+      "learn": "Translation changes position over time.",
+      "use": "Carry a rider or bridge a changing gap.",
+      "icon": "transform"
+    },
+    {
+      "id": "rc",
+      "title": "Rotating bridge",
+      "sequence": "transformation",
+      "learn": "A pivot and a reference frame determine a turn.",
+      "use": "Make a hinge, carousel or turning walkway.",
+      "icon": "hinge"
+    },
+    {
+      "id": "sc",
+      "title": "Growing cube",
+      "sequence": "transformation",
+      "learn": "Scale changes dimensions relative to a frame.",
+      "use": "Resize a passage or support while considering collision.",
+      "icon": "stretch"
+    },
+    {
+      "id": "row_3_x",
+      "title": "Row of cubes",
+      "sequence": "array_tutorial",
+      "learn": "An index places repeated instances with a shared rule.",
+      "use": "Make a short repeated structure from one piece.",
+      "icon": "repeat"
+    },
+    {
+      "id": "grid_2d_4x4",
+      "title": "Cube grid",
+      "sequence": "array_tutorial",
+      "learn": "Two indices address a two-dimensional arrangement.",
+      "use": "Build a floor whose cells can be selected independently.",
+      "icon": "grid"
+    },
+    {
+      "id": "reference_suspension",
+      "title": "Suspended field",
+      "sequence": "array_tutorial",
+      "learn": "A repeated arrangement can preserve an absence as well as a presence.",
+      "use": "Use spacing and omission to make a spatial composition.",
+      "icon": "grid"
+    },
+    {
+      "id": "colorballs",
+      "title": "Colour balls",
+      "sequence": "color",
+      "learn": "A body carries values that can change its appearance.",
+      "use": "Give reused points a palette and a visible state.",
+      "icon": "point"
+    },
+    {
+      "id": "gridcolorizer",
+      "title": "Coloured grid",
+      "sequence": "color",
+      "learn": "A cell address can select a colour by a rule.",
+      "use": "Return to the same grid with a new attribute.",
+      "icon": "grid"
+    },
+    {
+      "id": "ball_painting_demo",
+      "title": "Painting ball",
+      "sequence": "color",
+      "learn": "Contact, position and colour combine into a mark.",
+      "use": "Use the carried point as a painting tool.",
+      "icon": "hand"
+    },
+    {
+      "id": "gradient_interpolator",
+      "title": "Gradient instrument",
+      "sequence": "color",
+      "learn": "Interpolation produces intermediate values between chosen endpoints.",
+      "use": "Make a continuous transition across an object or wall.",
+      "icon": "ruler"
+    },
+    {
+      "id": "pattern_tile_4x4",
+      "title": "Pattern tile",
+      "sequence": "tiling",
+      "learn": "A small arrangement can become the source for a larger field.",
+      "use": "Save a tile and repeat it.",
+      "icon": "grid"
+    },
+    {
+      "id": "pattern_tile_mirror",
+      "title": "Mirrored tile",
+      "sequence": "tiling",
+      "learn": "Reflection changes orientation while preserving a chosen motif.",
+      "use": "Build borders and paired patterns.",
+      "icon": "repeat"
+    },
+    {
+      "id": "pattern_temple",
+      "title": "Pattern temple",
+      "sequence": "tiling",
+      "learn": "Repeated cells can organise a spatial enclosure.",
+      "use": "Turn a pattern into a room-scale composition.",
+      "icon": "columns"
+    },
+    {
+      "id": "tangent_slope_workbench",
+      "title": "Tangent workbench",
+      "sequence": "change",
+      "learn": "A local change in height relates to a local change in position.",
+      "use": "Read slope as a changing quantity.",
+      "icon": "wedge"
+    },
+    {
+      "id": "riemann_sum_workbench",
+      "title": "Accumulating columns",
+      "sequence": "change",
+      "learn": "Finite slices approximate an accumulated quantity.",
+      "use": "Compare a field of columns with the area it estimates.",
+      "icon": "columns"
+    },
+    {
+      "id": "flow_field_painter",
+      "title": "Painted flow field",
+      "sequence": "change",
+      "learn": "A vector can be assigned to each sampled location.",
+      "use": "Draw a field that can later guide moving bodies.",
+      "icon": "trace"
+    },
+    {
+      "id": "force_point_addition",
+      "title": "Vector addition rig",
+      "sequence": "forces",
+      "learn": "Displacements or forces combine component by component.",
+      "use": "Combine several influences on one body.",
+      "icon": "line"
+    },
+    {
+      "id": "momentum_cradle",
+      "title": "Momentum cradle",
+      "sequence": "forces",
+      "learn": "Mass and velocity matter to a collision; a chain makes transfer visible.",
+      "use": "Release an end ball and compare the resulting motion.",
+      "icon": "point"
+    },
+    {
+      "id": "force_play_springs",
+      "title": "Spring-linked points",
+      "sequence": "forces",
+      "learn": "Displacement and restoring forces couple the movements of several hanging points.",
+      "use": "Pull one familiar point and disturb the row.",
+      "icon": "line"
+    },
+    {
+      "id": "force_play_mutual",
+      "title": "Orbiting points",
+      "sequence": "forces",
+      "learn": "Each source changes the attraction experienced by the others.",
+      "use": "Enter a coupled field as another source.",
+      "icon": "point"
+    },
+    {
+      "id": "descent_landscape_lab",
+      "title": "Descent landscape",
+      "sequence": "formfinding",
+      "learn": "A local slope can guide a search toward a lower value.",
+      "use": "Let a body search a shaped landscape.",
+      "icon": "wedge"
+    },
+    {
+      "id": "cable_builder",
+      "title": "Hanging cable",
+      "sequence": "formfinding",
+      "learn": "A flexible connection settles under its constraints.",
+      "use": "Turn a line into a hanging span.",
+      "icon": "trace"
+    },
+    {
+      "id": "tensegrity_triangle",
+      "title": "Tensegrity frame",
+      "sequence": "formfinding",
+      "learn": "Compression and tension hold a spatial relationship.",
+      "use": "Combine struts and cables into a stable frame.",
+      "icon": "brace"
+    },
+    {
+      "id": "control_pendulum",
+      "title": "Controlled pendulum",
+      "sequence": "wavefunctions",
+      "learn": "A swinging body returns through related states.",
+      "use": "Use period, phase and amplitude to compare motion.",
+      "icon": "clock"
+    },
+    {
+      "id": "PendulumWave",
+      "title": "Pendulum wave",
+      "sequence": "wavefunctions",
+      "learn": "Different periods build and undo a visible collective pattern.",
+      "use": "Choreograph a repeated field without giving every body the same phase.",
+      "icon": "repeat"
+    },
+    {
+      "id": "unit_circle_advanced",
+      "title": "Unit-circle instrument",
+      "sequence": "wavefunctions",
+      "learn": "A rotating point projects into periodic coordinates.",
+      "use": "Make oscillation from circular motion.",
+      "icon": "point"
+    },
+    {
+      "id": "chladni_plate",
+      "title": "Chladni plate",
+      "sequence": "wavefunctions",
+      "learn": "A driven surface can reveal different standing patterns.",
+      "use": "Inspect how excitation changes a spatial pattern.",
+      "icon": "grid"
+    },
+    {
+      "id": "seed_replay_demo",
+      "title": "Seed replay machine",
+      "sequence": "randomness",
+      "learn": "A seed can reproduce a pseudorandom sequence.",
+      "use": "Replay a world-generation decision.",
+      "icon": "clock"
+    },
+    {
+      "id": "random_walk_terrarium",
+      "title": "Random-walk terrarium",
+      "sequence": "randomness",
+      "learn": "Repeated local choices accumulate into a path.",
+      "use": "Keep a random path as a trace.",
+      "icon": "trace"
+    },
+    {
+      "id": "galton_board",
+      "title": "Galton board",
+      "sequence": "randomness",
+      "learn": "Many small branch decisions produce a distribution of arrivals.",
+      "use": "Compare individual unpredictability with aggregate shape.",
+      "icon": "triangle"
+    },
+    {
+      "id": "perlin_noise_terrain",
+      "title": "Noise terrain",
+      "sequence": "noise",
+      "learn": "Nearby samples of a coherent field tend to be related.",
+      "use": "Build a continuous-looking landscape from samples.",
+      "icon": "wedge"
+    },
+    {
+      "id": "noisetorus",
+      "title": "Noise torus",
+      "sequence": "noise",
+      "learn": "A field can modulate an existing body's surface.",
+      "use": "Give a known form a varying skin.",
+      "icon": "body"
+    },
+    {
+      "id": "voronoi_strands",
+      "title": "Voronoi strands",
+      "sequence": "noise",
+      "learn": "Nearest-site regions divide space around a set of positions.",
+      "use": "Turn a point field into a cellular scaffold.",
+      "icon": "line"
+    },
+    {
+      "id": "shader_01_shaping",
+      "title": "Shaping surface",
+      "sequence": "shaders",
+      "learn": "A fragment computes an appearance from coordinates and parameters.",
+      "use": "Rebuild a familiar shape as a field on a surface.",
+      "icon": "triangle"
+    },
+    {
+      "id": "shader_05_patterns",
+      "title": "Pattern surface",
+      "sequence": "shaders",
+      "learn": "Repeated coordinates can generate a pattern per fragment.",
+      "use": "Return a tiling operation as material behaviour.",
+      "icon": "grid"
+    },
+    {
+      "id": "shader_09_fbm",
+      "title": "Layered-noise surface",
+      "sequence": "shaders",
+      "learn": "Several noise scales combine into a field.",
+      "use": "Give an existing body a richer surface.",
+      "icon": "body"
+    },
+    {
+      "id": "shader_10_reactiondiffusion",
+      "title": "Reaction-diffusion surface",
+      "sequence": "shaders",
+      "learn": "Repeated local updates can create evolving patterns.",
+      "use": "Use a surface as a visible simulation.",
+      "icon": "grid"
+    },
+    {
+      "id": "ca_rule_explorer",
+      "title": "Rule explorer",
+      "sequence": "cellularautomata",
+      "learn": "A cell reads a neighbourhood to choose its next state.",
+      "use": "Make a grid change by a local rule.",
+      "icon": "grid"
+    },
+    {
+      "id": "game_of_life_petri",
+      "title": "Life dish",
+      "sequence": "cellularautomata",
+      "learn": "A population can change through a small shared transition rule.",
+      "use": "Watch local decisions make persistent patterns.",
+      "icon": "point"
+    },
+    {
+      "id": "ca_growth_network",
+      "title": "Growing cell network",
+      "sequence": "cellularautomata",
+      "learn": "Repeated local changes can extend a connected structure.",
+      "use": "Let a network emerge from neighbourhood relations.",
+      "icon": "branch"
+    },
+    {
+      "id": "cube_subdivision",
+      "title": "Subdividing cube",
+      "sequence": "fractals",
+      "learn": "A rule can return to smaller versions of its own input.",
+      "use": "Refine one body recursively.",
+      "icon": "cube"
+    },
+    {
+      "id": "koch_curve_3d",
+      "title": "Koch curve",
+      "sequence": "fractals",
+      "learn": "Replacing each segment with a smaller construction changes the whole boundary.",
+      "use": "Make a line grow by repeated substitution.",
+      "icon": "trace"
+    },
+    {
+      "id": "menger_sponge",
+      "title": "Menger sponge",
+      "sequence": "fractals",
+      "learn": "Repeated subdivision and removal make a porous body.",
+      "use": "Build an intricate enclosure with a compact rule.",
+      "icon": "cube"
+    },
+    {
+      "id": "lsystem_editor",
+      "title": "Grammar instrument",
+      "sequence": "lsystems",
+      "learn": "Rewrite symbols, then interpret them as spatial actions.",
+      "use": "Edit a generative recipe before drawing it.",
+      "icon": "branch"
+    },
+    {
+      "id": "lsystem_tree",
+      "title": "Grammar tree",
+      "sequence": "lsystems",
+      "learn": "A turtle follows turns, advances and saved branch states.",
+      "use": "Make a branching body from a sentence.",
+      "icon": "branch"
+    },
+    {
+      "id": "form_grammar_canopy",
+      "title": "Grammar canopy",
+      "sequence": "lsystems",
+      "learn": "A rule vocabulary can produce architectural members.",
+      "use": "Compose a canopy from generated parts.",
+      "icon": "brace"
+    },
+    {
+      "id": "space_colonization_algorithm",
+      "title": "Colonising branches",
+      "sequence": "proceduralgeneration",
+      "learn": "Growth responds to nearby attractors and existing branches.",
+      "use": "Grow a structure toward a distribution of targets.",
+      "icon": "branch"
+    },
+    {
+      "id": "maze_generation",
+      "title": "Maze generator",
+      "sequence": "proceduralgeneration",
+      "learn": "A connection rule makes some routes possible and others unavailable.",
+      "use": "Construct a navigable arrangement.",
+      "icon": "grid"
+    },
+    {
+      "id": "GeneticProgramming",
+      "title": "Evolving programs",
+      "sequence": "proceduralgeneration",
+      "learn": "Candidate recipes can be varied and selected by an explicit criterion.",
+      "use": "Search a family of constructions; inspect the criterion.",
+      "icon": "branch"
+    },
+    {
+      "id": "jelly_cube",
+      "title": "Jelly cube",
+      "sequence": "softbodies",
+      "learn": "A body can deform while retaining constraints between its parts.",
+      "use": "Give the familiar cube a yielding response.",
+      "icon": "cube"
+    },
+    {
+      "id": "tension_membrane",
+      "title": "Tension membrane",
+      "sequence": "softbodies",
+      "learn": "A surface's shape depends on its supports and tension.",
+      "use": "Make a flexible roof or barrier.",
+      "icon": "profile"
+    },
+    {
+      "id": "reaction_diffusion",
+      "title": "Reaction-diffusion body",
+      "sequence": "softbodies",
+      "learn": "Reaction and diffusion update coupled quantities locally.",
+      "use": "Compare an evolving material pattern with its surface representation.",
+      "icon": "body"
+    },
+    {
+      "id": "voxel_noise_demo",
+      "title": "Voxel field",
+      "sequence": "isosurfaces",
+      "learn": "A scalar sample stores a value, not a mesh vertex.",
+      "use": "Sample a volume before deciding where its surface lies.",
+      "icon": "grid"
+    },
+    {
+      "id": "fifteen_cases_demo",
+      "title": "Surface cases",
+      "sequence": "isosurfaces",
+      "learn": "A cell's corner values select local surface configurations.",
+      "use": "Extract triangles from a sampled field.",
+      "icon": "triangle"
+    },
+    {
+      "id": "metaballs",
+      "title": "Merging metaballs",
+      "sequence": "isosurfaces",
+      "learn": "Several scalar contributions can share one threshold surface.",
+      "use": "Make separate influences appear as one continuous body.",
+      "icon": "point"
+    },
+    {
+      "id": "csg_compose_workbench",
+      "title": "Solid-composition bench",
+      "sequence": "boolean_surfaces",
+      "learn": "Union, intersection and difference combine volumes differently.",
+      "use": "Compose a solid or carve a void.",
+      "icon": "body"
+    },
+    {
+      "id": "recursive_boolean_cube",
+      "title": "Carved recursive cube",
+      "sequence": "boolean_surfaces",
+      "learn": "A geometric operation can repeat on its own result.",
+      "use": "Build a porous structure from a small operation sequence.",
+      "icon": "cube"
+    },
+    {
+      "id": "kapoor_void_studies",
+      "title": "Void studies",
+      "sequence": "boolean_surfaces",
+      "learn": "Removal changes a body's interior and the encounter with it.",
+      "use": "Make a cavity whose appearance and accessibility differ.",
+      "icon": "body"
+    },
+    {
+      "id": "boids_neighbour_lens",
+      "title": "Flock neighbour lens",
+      "sequence": "swarmintelligence",
+      "learn": "Each agent reacts to nearby agents using local rules.",
+      "use": "Use the carried point to change which neighbours an agent can sense.",
+      "icon": "point"
+    },
+    {
+      "id": "physarum_trace_gallery",
+      "title": "Physarum trails",
+      "sequence": "swarmintelligence",
+      "learn": "Agents sense and alter a shared field.",
+      "use": "Let a trail become a signal for later movement.",
+      "icon": "trace"
+    },
+    {
+      "id": "ant_colony_table",
+      "title": "Ant trail table",
+      "sequence": "swarmintelligence",
+      "learn": "Agents can use a trace in their shared environment to guide later choices.",
+      "use": "Compare persistent paths and the agents using them.",
+      "icon": "grid"
+    },
+    {
+      "id": "two_travelers",
+      "title": "Two travellers",
+      "sequence": "graphtheory",
+      "learn": "The same connections permit different traversal orders.",
+      "use": "Compare breadth-first and depth-first visits.",
+      "icon": "branch"
+    },
+    {
+      "id": "force_directed_layout",
+      "title": "Spring graph",
+      "sequence": "graphtheory",
+      "learn": "Connectivity and spatial arrangement are separate data.",
+      "use": "Arrange a network using a force model.",
+      "icon": "line"
+    },
+    {
+      "id": "mst_visualization",
+      "title": "Spanning tree",
+      "sequence": "graphtheory",
+      "learn": "A selection of edges can connect vertices without cycles.",
+      "use": "Compare connection cost with the connections retained.",
+      "icon": "branch"
+    },
+    {
+      "id": "loss_function_comparator",
+      "title": "Loss landscapes",
+      "sequence": "machinelearning",
+      "learn": "A chosen error measure changes which result counts as better.",
+      "use": "Compare objectives before optimising a model.",
+      "icon": "wedge"
+    },
+    {
+      "id": "enhanced_kmeans",
+      "title": "Cluster field",
+      "sequence": "machinelearning",
+      "learn": "A rule groups samples around changing representatives.",
+      "use": "See which distinctions a grouping preserves or loses.",
+      "icon": "point"
+    },
+    {
+      "id": "neural_network_visualization",
+      "title": "Network learner",
+      "sequence": "machinelearning",
+      "learn": "Weighted connections transform values through a model.",
+      "use": "Inspect parameters, inputs and outputs as different roles.",
+      "icon": "branch"
+    },
+    {
+      "id": "triangle_curvature_workbench",
+      "title": "Curved triangle",
+      "sequence": "foundationscrisis",
+      "learn": "A geometry's assumptions change the relations a triangle satisfies.",
+      "use": "Return to the triangle and question the space it inhabits.",
+      "icon": "triangle"
+    },
+    {
+      "id": "russell_paradox_workbench",
+      "title": "Set paradox bench",
+      "sequence": "foundationscrisis",
+      "learn": "A self-referential classification rule can defeat its own boundary.",
+      "use": "Inspect what a rule cannot consistently include.",
+      "icon": "body"
+    },
+    {
+      "id": "godel_sentence_machine",
+      "title": "Sentence machine",
+      "sequence": "foundationscrisis",
+      "learn": "Encoding and formal proof have different limits from everyday assertion.",
+      "use": "Explore a model of provability without treating an animation as a proof.",
+      "icon": "branch"
+    },
+    {
+      "id": "qfep_balance_workbench",
+      "title": "Balance workbench",
+      "sequence": "qfeplaboratory",
+      "learn": "The project's chosen measures make a particular comparison possible.",
+      "use": "Compare parameter settings and inspect what the measures omit.",
+      "icon": "ruler"
+    },
+    {
+      "id": "microstate_counter",
+      "title": "Microstate counter",
+      "sequence": "qfeplaboratory",
+      "learn": "The count depends on which distinguishable states the model permits.",
+      "use": "Make the modelling boundary explicit.",
+      "icon": "clock"
+    },
+    {
+      "id": "qfep_reactor",
+      "title": "QFEP reactor",
+      "sequence": "qfeplaboratory",
+      "learn": "Changing coupled parameters changes a model's response.",
+      "use": "Experiment with the project's framework as a model, not a universal law.",
+      "icon": "body"
+    },
+    {
+      "id": "bias_visualizer",
+      "title": "Bias instrument",
+      "sequence": "postfoundationscrisis",
+      "learn": "A classification or selection rule distributes outcomes unevenly.",
+      "use": "Inspect a model's choices and their consequences.",
+      "icon": "grid"
+    },
+    {
+      "id": "accountability_ledger",
+      "title": "Accountability ledger",
+      "sequence": "postfoundationscrisis",
+      "learn": "A recorded decision can preserve its reason and affected parties.",
+      "use": "Make a construction's choices reviewable.",
+      "icon": "ruler"
+    },
+    {
+      "id": "the_commons_table",
+      "title": "Commons table",
+      "sequence": "postfoundationscrisis",
+      "learn": "Different partial instruments can coexist without becoming one complete view.",
+      "use": "Compose a shared encounter that preserves disagreement.",
+      "icon": "assembly"
+    },
+    {
+      "id": "wedge_cube_route",
+      "title": "Wedge + cube route",
+      "sequence": "primitives",
+      "learn": "Joined surfaces can preserve one continuous walking route.",
+      "use": "Save a reusable ramp-and-platform assembly, then apply a controller to the same construction in Transformation.",
+      "icon": "assembly",
+      "proposed": false,
+      "note": "Built on Cube: thirty one-metre cubes and six original wp wedges form two rises and a three-metre-wide route. The same recipe is mounted in the separate Transformation trial. Each member is editable; motion remains the next trial.",
+      "carry": {
+        "identity": "cube_walkway.tscn / cube_walkway.json / cube_wedge_walkway_v1",
+        "keeps": "Original six-vertex wp profile and collider; one-metre cube units; named member positions.",
+        "adds": "Two joined rises, metre joints, independently editable members and a reusable complete assembly.",
+        "check": "Independent support-ray samples, real desktop/synthetic XR traversal and editor copy/pose tests in Cube and Transformation."
+      },
+      "scene": "res://commons/void/cube_walkway.tscn"
+    },
+    {
+      "id": "void_beam",
+      "title": "Beam / plank",
+      "sequence": "primitives",
+      "learn": "Give a segment thickness and collision so it can support a body.",
+      "use": "Cross a gap or make a landing.",
+      "icon": "beam",
+      "note": "Source is the existing Void descent assembly; extracting a standard snapped beam remains a design choice.",
+      "scene": "commons/void/trace_descent.tscn"
+    },
+    {
+      "id": "void_line_gate",
+      "title": "Two-point gate",
+      "sequence": "primitives",
+      "learn": "An authored relation between two held points triggers an opening.",
+      "use": "Make an interaction condition change access.",
+      "icon": "gate",
+      "note": "Existing Void component, not a standalone registry token. The opening rule is not the definition of a line.",
+      "scene": "commons/void/lines_entry_gate.gd"
+    },
+    {
+      "id": "void_triangle_brace",
+      "title": "Construction brace",
+      "sequence": "primitives",
+      "learn": "A triangular arrangement makes edges and joints legible at architectural scale.",
+      "use": "Frame an encounter with a full-height triangle.",
+      "icon": "brace",
+      "note": "Existing Void area component; it does not certify engineering load capacity.",
+      "scene": "commons/void/triangle_area.gd"
+    },
+    {
+      "id": "do_not_cross_barrier",
+      "title": "Do not cross",
+      "sequence": "primitives",
+      "learn": "A visible boundary can acquire an instruction and a social meaning.",
+      "use": "Guide, prohibit or invite the player to question a boundary.",
+      "icon": "fence",
+      "note": "The interpretation is an association, not a geometric property."
+    },
+    {
+      "id": "align_tetrahedron",
+      "title": "Completed tetrahedron",
+      "sequence": "primitives",
+      "learn": "Four shared vertices and four triangular faces enclose a body; collision is an additional construction.",
+      "use": "Complete the solid, pick it up, and retain its geometry recipe for a physical obstruction.",
+      "icon": "body",
+      "carry": {
+        "identity": "geometry.gd: tetra() + tetra_faces()",
+        "keeps": "The same four positions and face connections.",
+        "adds": "Matched convex collision and pickup already exist in align_solid.gd.",
+        "check": "Completion, outward faces, matching collision, pickup and reset."
+      }
+    },
+    {
+      "id": "tetra_blocker",
+      "title": "Striped tetrahedron blocker",
+      "sequence": "primitives",
+      "learn": "A closed geometric body can refuse a route when it has collision.",
+      "use": "A freestanding concrete obstruction using the completed tetrahedron recipe.",
+      "icon": "body",
+      "proposed": false,
+      "note": "Built in the Void Polyhedra obstruction area and reusable in the lab editor. Uses the alignment tetrahedron recipe at 1.8 scale with static collision.",
+      "carry": {
+        "identity": "tetrahedron_blocker.tscn / construction_blocker.gd",
+        "keeps": "Tetrahedron vertices and connectivity, at a declared scale.",
+        "adds": "Striped finish, floor-centred placement and static collision.",
+        "check": "Native desktop and synthetic XR checks: closed collider, blocking contact and matching striped geometry."
+      },
+      "scene": "res://commons/artifacts/primitive_encounters/tetrahedron_blocker.tscn"
+    },
+    {
+      "id": "align_wedge",
+      "title": "Completed prism wedge",
+      "sequence": "primitives",
+      "learn": "Two triangular ends and three connecting sides form a prism with six shared vertices.",
+      "use": "Build the triangular-prism form before giving it the proportions of a walkable ramp.",
+      "icon": "wedge",
+      "note": "A fifth point added to a tetrahedron does not automatically make this wedge. Arrangement and face connectivity are part of the construction.",
+      "carry": {
+        "identity": "geometry.gd: wedge() + wedge_faces()",
+        "keeps": "Shared-position and face-list construction.",
+        "adds": "Six vertices, five polygonal faces and the matching convex collider.",
+        "check": "Both end faces and all connecting faces close; the visible and physical boundaries agree."
+      }
+    },
+    {
+      "id": "construction_cube",
+      "title": "One-metre building cube",
+      "sequence": "primitives",
+      "learn": "The cube becomes a support when its visible body, origin and collision agree.",
+      "use": "A standard one-metre platform that joins the original wp.",
+      "icon": "cube",
+      "proposed": false,
+      "note": "Introduced on Cube, after the six-vertex wedge in Polyhedra. Exact one-metre support prefab with matching collision and visible metre joints; not a migration of the tutorial CubeBody class.",
+      "carry": {
+        "identity": "platform_block.tscn / structure_2",
+        "keeps": "One-metre cube dimensions and the old grid platform-height rule.",
+        "adds": "Floor-relative origin and matching support collider; reusable editor prop.",
+        "check": "One-metre mesh and collision; walk from the original wp to the cube landing in desktop and synthetic XR."
+      },
+      "scene": "res://commons/artifacts/primitive_encounters/platform_block.tscn"
+    },
+    {
+      "id": "transformation_bay",
+      "title": "A route that changes",
+      "sequence": "transformation",
+      "learn": "A transform changes access when it acts on the same structure the player can walk on.",
+      "use": "A raised ramp-and-cube route over a bounded hazard bed inside the existing tower frame.",
+      "icon": "assembly",
+      "proposed": true,
+      "note": "The static Cube construction is now present in the separate Transformation trial. Moving parts, hazard bed and passenger-motion tests remain proposed.",
+      "carry": {
+        "identity": "Saved wedge + cube assembly, with a movement controller",
+        "keeps": "Member definitions, local joins, colliders and saved arrangement.",
+        "adds": "One controlled transform, a bounded hazard and a local checkpoint.",
+        "check": "Static traversal first; then passenger movement, reset, hazard/respawn and desktop/VR parity."
+      }
+    },
+    {
+      "id": "pyramid_blocker",
+      "title": "Striped pyramid blocker",
+      "sequence": "primitives",
+      "learn": "Four triangular sides and a square base enclose a five-faced solid.",
+      "use": "Use its collision and footprint to divert a route.",
+      "icon": "body",
+      "note": "Built in Void Polyhedra and available under Building solids in the lab editor."
+    },
+    {
+      "id": "wedge_blocker",
+      "title": "Striped wedge / wp",
+      "sequence": "primitives",
+      "learn": "The vertical face blocks; the sloped face supports ascent.",
+      "use": "Rotate the same original wp to join a one-metre platform.",
+      "icon": "wedge",
+      "note": "Built in Void Polyhedra and available under Building solids in the lab editor."
+    }
+  ],
+  "edges": [
+    {
+      "source": "frame_counter_display",
+      "target": "draw_dot",
+      "kind": "develop",
+      "label": "A repeated update can decide when to keep another position."
+    },
+    {
+      "source": "point_solid",
+      "target": "point_held",
+      "kind": "develop",
+      "label": "Give the visible point pickup behaviour and a reference frame."
+    },
+    {
+      "source": "point_held",
+      "target": "line",
+      "kind": "combine",
+      "label": "Use two movable points as the endpoints of one relation."
+    },
+    {
+      "source": "point_held",
+      "target": "draw_dot",
+      "kind": "develop",
+      "label": "Keep successive positions of the carried point."
+    },
+    {
+      "source": "draw_dot",
+      "target": "player_trace",
+      "kind": "associate",
+      "label": "A hand gesture and a walked path can both leave records."
+    },
+    {
+      "source": "draw_dot",
+      "target": "grid_lines",
+      "kind": "develop",
+      "label": "Return to the recorded positions through lattice addresses."
+    },
+    {
+      "source": "draw_dot",
+      "target": "draw_triangle_faces",
+      "kind": "develop",
+      "label": "Choose corners from the retained drawing and add a face."
+    },
+    {
+      "source": "line",
+      "target": "draw_triangle_faces",
+      "kind": "combine",
+      "label": "Three boundary segments can frame one triangular face."
+    },
+    {
+      "source": "draw_triangle_faces",
+      "target": "grab_trihedron",
+      "kind": "combine",
+      "label": "Several oriented faces meet to form a body."
+    },
+    {
+      "source": "grab_trihedron",
+      "target": "polyhedron_nets_cube",
+      "kind": "develop",
+      "label": "Compare a first enclosure with six connected faces that fold into a cube."
+    },
+    {
+      "source": "line",
+      "target": "laser_measure",
+      "kind": "associate",
+      "label": "A line becomes an instrument for measuring a gap."
+    },
+    {
+      "source": "line",
+      "target": "lightrod",
+      "kind": "associate",
+      "label": "A visible segment becomes a carried guide through darkness."
+    },
+    {
+      "source": "wp",
+      "target": "wedge_cube_route",
+      "kind": "combine",
+      "label": "Supply the slope; preserve its low and high joins."
+    },
+    {
+      "source": "polyhedron_nets_cube",
+      "target": "primitive_pillar",
+      "kind": "combine",
+      "label": "Stack repeated bodies into a column."
+    },
+    {
+      "source": "primitive_pillar",
+      "target": "resolution_colonnade_museum",
+      "kind": "develop",
+      "label": "Replace a stack with a sampled profile; compare resolution and height."
+    },
+    {
+      "source": "resolution_colonnade_museum",
+      "target": "glyph_profile_gallery",
+      "kind": "associate",
+      "label": "Borrow a letter outline as another source for a profile."
+    },
+    {
+      "source": "resolution_colonnade_museum",
+      "target": "achilles_tortoise",
+      "kind": "associate",
+      "label": "Finite refinement raises the question of a limit."
+    },
+    {
+      "source": "polyhedron_nets_cube",
+      "target": "durer_scene",
+      "kind": "associate",
+      "label": "A geometric body becomes part of a scene about tools and making."
+    },
+    {
+      "source": "glyph_profile_gallery",
+      "target": "durer_scene",
+      "kind": "associate",
+      "label": "Compose forms with desires and associations beyond their geometry."
+    },
+    {
+      "source": "polyhedron_nets_cube",
+      "target": "pick_up_cube",
+      "kind": "develop",
+      "label": "Give the built body an interaction role; this is a learning connection, not shared code."
+    },
+    {
+      "source": "pick_up_cube",
+      "target": "tc",
+      "kind": "develop",
+      "label": "Change a body's position according to time and a route."
+    },
+    {
+      "source": "tc",
+      "target": "rc",
+      "kind": "develop",
+      "label": "Return to the body with a pivot and angular motion."
+    },
+    {
+      "source": "rc",
+      "target": "sc",
+      "kind": "develop",
+      "label": "Return to the parent-child frame with changing dimensions."
+    },
+    {
+      "source": "frame_counter_display",
+      "target": "tc",
+      "kind": "combine",
+      "label": "An update supplies time; the route supplies the movement rule."
+    },
+    {
+      "source": "pick_up_cube",
+      "target": "row_3_x",
+      "kind": "combine",
+      "label": "Repeat one kind of interactive body at indexed positions."
+    },
+    {
+      "source": "grid_lines",
+      "target": "grid_2d_4x4",
+      "kind": "develop",
+      "label": "Use lattice addresses to place bodies, not just display a record."
+    },
+    {
+      "source": "row_3_x",
+      "target": "grid_2d_4x4",
+      "kind": "develop",
+      "label": "Add a second index to the row."
+    },
+    {
+      "source": "grid_2d_4x4",
+      "target": "reference_suspension",
+      "kind": "associate",
+      "label": "A regular field can make absence and suspension legible."
+    },
+    {
+      "source": "point_solid",
+      "target": "colorballs",
+      "kind": "develop",
+      "label": "Give a known body a changeable appearance."
+    },
+    {
+      "source": "grid_2d_4x4",
+      "target": "gridcolorizer",
+      "kind": "develop",
+      "label": "Retain the arrangement; vary the attribute at each address."
+    },
+    {
+      "source": "point_held",
+      "target": "ball_painting_demo",
+      "kind": "combine",
+      "label": "Use the held point as the site of contact and painting."
+    },
+    {
+      "source": "colorballs",
+      "target": "ball_painting_demo",
+      "kind": "combine",
+      "label": "Carry colour into a physical gesture."
+    },
+    {
+      "source": "colorballs",
+      "target": "gradient_interpolator",
+      "kind": "develop",
+      "label": "Compare endpoints and the values interpolated between them."
+    },
+    {
+      "source": "gridcolorizer",
+      "target": "pattern_tile_4x4",
+      "kind": "combine",
+      "label": "A coloured arrangement becomes the source tile."
+    },
+    {
+      "source": "pattern_tile_4x4",
+      "target": "pattern_tile_mirror",
+      "kind": "develop",
+      "label": "Reflect the source while preserving its contents."
+    },
+    {
+      "source": "pattern_tile_mirror",
+      "target": "pattern_temple",
+      "kind": "combine",
+      "label": "Compose repeated transformed tiles into an enclosure."
+    },
+    {
+      "source": "wp",
+      "target": "tangent_slope_workbench",
+      "kind": "associate",
+      "label": "Return from a built slope to slope as a local relation."
+    },
+    {
+      "source": "primitive_pillar",
+      "target": "riemann_sum_workbench",
+      "kind": "associate",
+      "label": "Columns can represent sampled contributions to an area."
+    },
+    {
+      "source": "tangent_slope_workbench",
+      "target": "riemann_sum_workbench",
+      "kind": "develop",
+      "label": "Compare local rate with accumulation; the workbenches show different operations."
+    },
+    {
+      "source": "grid_lines",
+      "target": "flow_field_painter",
+      "kind": "combine",
+      "label": "Assign a vector to each sampled address."
+    },
+    {
+      "source": "draw_dot",
+      "target": "flow_field_painter",
+      "kind": "associate",
+      "label": "A drawing gesture can write a field as well as leave a trace."
+    },
+    {
+      "source": "line",
+      "target": "force_point_addition",
+      "kind": "develop",
+      "label": "Read a segment's displacement as a vector that can be combined."
+    },
+    {
+      "source": "force_point_addition",
+      "target": "momentum_cradle",
+      "kind": "develop",
+      "label": "Vectors return as velocities and momentum in a collision model."
+    },
+    {
+      "source": "force_point_addition",
+      "target": "force_play_springs",
+      "kind": "develop",
+      "label": "A displacement can determine a restoring force."
+    },
+    {
+      "source": "momentum_cradle",
+      "target": "force_play_mutual",
+      "kind": "associate",
+      "label": "Compare local contact with continuous mutual attraction."
+    },
+    {
+      "source": "flow_field_painter",
+      "target": "force_play_mutual",
+      "kind": "associate",
+      "label": "Compare a prescribed field with a field changed by moving bodies."
+    },
+    {
+      "source": "tangent_slope_workbench",
+      "target": "descent_landscape_lab",
+      "kind": "develop",
+      "label": "Use the local slope to choose the next search step."
+    },
+    {
+      "source": "force_play_springs",
+      "target": "cable_builder",
+      "kind": "combine",
+      "label": "Coupled constraints turn a line into a settling chain."
+    },
+    {
+      "source": "cable_builder",
+      "target": "tensegrity_triangle",
+      "kind": "combine",
+      "label": "Combine tension members with compression members."
+    },
+    {
+      "source": "draw_triangle_faces",
+      "target": "tensegrity_triangle",
+      "kind": "associate",
+      "label": "A triangular relation becomes a structural frame."
+    },
+    {
+      "source": "force_play_springs",
+      "target": "control_pendulum",
+      "kind": "associate",
+      "label": "Compare restoring forces in a hanging row and a swinging body."
+    },
+    {
+      "source": "control_pendulum",
+      "target": "PendulumWave",
+      "kind": "combine",
+      "label": "Arrange many pendulums with deliberately different periods."
+    },
+    {
+      "source": "row_3_x",
+      "target": "PendulumWave",
+      "kind": "combine",
+      "label": "Reuse indexed arrangement for a field of moving bodies."
+    },
+    {
+      "source": "rc",
+      "target": "unit_circle_advanced",
+      "kind": "develop",
+      "label": "Project a rotating point onto coordinate axes."
+    },
+    {
+      "source": "unit_circle_advanced",
+      "target": "control_pendulum",
+      "kind": "associate",
+      "label": "Relate periodic coordinates to a swinging body; their dynamics differ."
+    },
+    {
+      "source": "PendulumWave",
+      "target": "chladni_plate",
+      "kind": "associate",
+      "label": "Compare collective temporal patterns with standing surface patterns."
+    },
+    {
+      "source": "frame_counter_display",
+      "target": "seed_replay_demo",
+      "kind": "associate",
+      "label": "Keep a reproducible sequence of decisions, not just a count of updates."
+    },
+    {
+      "source": "seed_replay_demo",
+      "target": "random_walk_terrarium",
+      "kind": "combine",
+      "label": "A sequence of choices supplies steps for a recorded walk."
+    },
+    {
+      "source": "draw_dot",
+      "target": "random_walk_terrarium",
+      "kind": "develop",
+      "label": "Change how the next position is chosen; retain the path representation."
+    },
+    {
+      "source": "random_walk_terrarium",
+      "target": "galton_board",
+      "kind": "associate",
+      "label": "Many small choices accumulate into a distribution of endpoints."
+    },
+    {
+      "source": "random_walk_terrarium",
+      "target": "perlin_noise_terrain",
+      "kind": "develop",
+      "label": "Compare independent choices with spatially correlated samples."
+    },
+    {
+      "source": "grid_lines",
+      "target": "perlin_noise_terrain",
+      "kind": "combine",
+      "label": "Sample a height field at repeatable addresses."
+    },
+    {
+      "source": "perlin_noise_terrain",
+      "target": "noisetorus",
+      "kind": "associate",
+      "label": "Apply a varying field to a closed form instead of a ground plane."
+    },
+    {
+      "source": "point_solid",
+      "target": "voronoi_strands",
+      "kind": "combine",
+      "label": "Many sites partition nearby space into regions."
+    },
+    {
+      "source": "draw_triangle_faces",
+      "target": "shader_01_shaping",
+      "kind": "develop",
+      "label": "Return to a known shape as a coordinate-dependent surface calculation."
+    },
+    {
+      "source": "pattern_tile_4x4",
+      "target": "shader_05_patterns",
+      "kind": "develop",
+      "label": "Move coordinate repetition into the surface calculation."
+    },
+    {
+      "source": "shader_01_shaping",
+      "target": "shader_05_patterns",
+      "kind": "combine",
+      "label": "Repeat a shaped motif in material coordinates."
+    },
+    {
+      "source": "noisetorus",
+      "target": "shader_09_fbm",
+      "kind": "associate",
+      "label": "A field can change geometry or appearance; keep those roles distinct."
+    },
+    {
+      "source": "shader_05_patterns",
+      "target": "shader_09_fbm",
+      "kind": "develop",
+      "label": "Compare exact repetition with layered variation."
+    },
+    {
+      "source": "shader_09_fbm",
+      "target": "shader_10_reactiondiffusion",
+      "kind": "develop",
+      "label": "Move from evaluating a field to updating a persistent field."
+    },
+    {
+      "source": "grid_2d_4x4",
+      "target": "ca_rule_explorer",
+      "kind": "develop",
+      "label": "Let each addressed cell keep a state and read its neighbours."
+    },
+    {
+      "source": "ca_rule_explorer",
+      "target": "game_of_life_petri",
+      "kind": "develop",
+      "label": "Explore a particular binary neighbourhood rule."
+    },
+    {
+      "source": "game_of_life_petri",
+      "target": "ca_growth_network",
+      "kind": "develop",
+      "label": "Compare persistent patterns with rules that extend a structure."
+    },
+    {
+      "source": "shader_10_reactiondiffusion",
+      "target": "ca_rule_explorer",
+      "kind": "associate",
+      "label": "Both use local updates; continuous concentrations and discrete states differ."
+    },
+    {
+      "source": "polyhedron_nets_cube",
+      "target": "cube_subdivision",
+      "kind": "develop",
+      "label": "Apply a construction rule again inside a smaller body."
+    },
+    {
+      "source": "cube_subdivision",
+      "target": "menger_sponge",
+      "kind": "combine",
+      "label": "Combine recursive subdivision with selected removal."
+    },
+    {
+      "source": "line",
+      "target": "koch_curve_3d",
+      "kind": "develop",
+      "label": "Replace each segment with a smaller sequence of segments."
+    },
+    {
+      "source": "koch_curve_3d",
+      "target": "lsystem_editor",
+      "kind": "develop",
+      "label": "Make the replacement recipe explicit as rewritten symbols."
+    },
+    {
+      "source": "lsystem_editor",
+      "target": "lsystem_tree",
+      "kind": "develop",
+      "label": "Interpret a sentence as movement, turns and stored branch states."
+    },
+    {
+      "source": "lsystem_tree",
+      "target": "form_grammar_canopy",
+      "kind": "associate",
+      "label": "A branching grammar suggests a canopy of structural members."
+    },
+    {
+      "source": "tensegrity_triangle",
+      "target": "form_grammar_canopy",
+      "kind": "combine",
+      "label": "Bring structural members to a generated arrangement; support still needs testing."
+    },
+    {
+      "source": "lsystem_tree",
+      "target": "space_colonization_algorithm",
+      "kind": "develop",
+      "label": "Let growth respond to nearby targets instead of only rewriting a sentence."
+    },
+    {
+      "source": "grid_2d_4x4",
+      "target": "maze_generation",
+      "kind": "develop",
+      "label": "Treat neighbours as possible connections and choose which passages remain."
+    },
+    {
+      "source": "lsystem_editor",
+      "target": "GeneticProgramming",
+      "kind": "develop",
+      "label": "Vary candidate recipes and inspect the criterion selecting them."
+    },
+    {
+      "source": "seed_replay_demo",
+      "target": "GeneticProgramming",
+      "kind": "combine",
+      "label": "Reproducible choices make candidate changes comparable."
+    },
+    {
+      "source": "pick_up_cube",
+      "target": "jelly_cube",
+      "kind": "develop",
+      "label": "Return to the cube with internal deformation instead of only rigid motion."
+    },
+    {
+      "source": "force_play_springs",
+      "target": "jelly_cube",
+      "kind": "associate",
+      "label": "A coupled spring model offers one way to think about a yielding body."
+    },
+    {
+      "source": "cable_builder",
+      "target": "tension_membrane",
+      "kind": "combine",
+      "label": "Extend constrained connections into a supported surface."
+    },
+    {
+      "source": "shader_10_reactiondiffusion",
+      "target": "reaction_diffusion",
+      "kind": "associate",
+      "label": "Compare an evolving surface field with a spatial material interpretation."
+    },
+    {
+      "source": "grid_2d_4x4",
+      "target": "voxel_noise_demo",
+      "kind": "develop",
+      "label": "Add a third address and store a scalar value at each sample."
+    },
+    {
+      "source": "perlin_noise_terrain",
+      "target": "voxel_noise_demo",
+      "kind": "develop",
+      "label": "Extend a sampled height field into a sampled volume."
+    },
+    {
+      "source": "voxel_noise_demo",
+      "target": "fifteen_cases_demo",
+      "kind": "develop",
+      "label": "Use corner values to choose local surface triangles."
+    },
+    {
+      "source": "draw_triangle_faces",
+      "target": "fifteen_cases_demo",
+      "kind": "combine",
+      "label": "The extracted result returns to explicit triangular faces."
+    },
+    {
+      "source": "fifteen_cases_demo",
+      "target": "metaballs",
+      "kind": "develop",
+      "label": "Extract a shared threshold surface from several scalar contributions."
+    },
+    {
+      "source": "point_solid",
+      "target": "metaballs",
+      "kind": "associate",
+      "label": "A point becomes a source of influence rather than an independent visible sphere."
+    },
+    {
+      "source": "polyhedron_nets_cube",
+      "target": "csg_compose_workbench",
+      "kind": "combine",
+      "label": "Use known solids as operands in spatial operations."
+    },
+    {
+      "source": "csg_compose_workbench",
+      "target": "recursive_boolean_cube",
+      "kind": "develop",
+      "label": "Repeat a chosen operation on the resulting body."
+    },
+    {
+      "source": "cube_subdivision",
+      "target": "recursive_boolean_cube",
+      "kind": "combine",
+      "label": "Recursion supplies the repeated construction pattern."
+    },
+    {
+      "source": "csg_compose_workbench",
+      "target": "kapoor_void_studies",
+      "kind": "associate",
+      "label": "Subtraction becomes an encounter with a cavity and an interior."
+    },
+    {
+      "source": "point_solid",
+      "target": "boids_neighbour_lens",
+      "kind": "develop",
+      "label": "Give each repeated body state and a rule for responding to nearby bodies."
+    },
+    {
+      "source": "flow_field_painter",
+      "target": "boids_neighbour_lens",
+      "kind": "associate",
+      "label": "Compare motion guided by a supplied field with motion guided by neighbours."
+    },
+    {
+      "source": "boids_neighbour_lens",
+      "target": "physarum_trace_gallery",
+      "kind": "develop",
+      "label": "Let agents also leave a signal in their shared environment."
+    },
+    {
+      "source": "draw_dot",
+      "target": "physarum_trace_gallery",
+      "kind": "associate",
+      "label": "A retained trace becomes a cue for later movement."
+    },
+    {
+      "source": "physarum_trace_gallery",
+      "target": "ant_colony_table",
+      "kind": "develop",
+      "label": "Make the environment's memory and its local addresses explicit."
+    },
+    {
+      "source": "maze_generation",
+      "target": "two_travelers",
+      "kind": "develop",
+      "label": "Keep the same connections and compare two visiting strategies."
+    },
+    {
+      "source": "line",
+      "target": "two_travelers",
+      "kind": "associate",
+      "label": "A visible link becomes an edge in an abstract connection structure."
+    },
+    {
+      "source": "two_travelers",
+      "target": "force_directed_layout",
+      "kind": "develop",
+      "label": "Keep connectivity while allowing the spatial drawing to change."
+    },
+    {
+      "source": "force_play_springs",
+      "target": "force_directed_layout",
+      "kind": "combine",
+      "label": "A force model can arrange the drawing of a network."
+    },
+    {
+      "source": "two_travelers",
+      "target": "mst_visualization",
+      "kind": "develop",
+      "label": "Select connecting edges by cost rather than only selecting a visit order."
+    },
+    {
+      "source": "descent_landscape_lab",
+      "target": "loss_function_comparator",
+      "kind": "develop",
+      "label": "Return to descent with an explicit, contestable objective."
+    },
+    {
+      "source": "loss_function_comparator",
+      "target": "enhanced_kmeans",
+      "kind": "develop",
+      "label": "Examine one objective that moves cluster representatives."
+    },
+    {
+      "source": "force_directed_layout",
+      "target": "neural_network_visualization",
+      "kind": "associate",
+      "label": "A connection drawing returns with weights and a different computational role."
+    },
+    {
+      "source": "loss_function_comparator",
+      "target": "neural_network_visualization",
+      "kind": "combine",
+      "label": "An objective gives parameter updates a direction."
+    },
+    {
+      "source": "draw_triangle_faces",
+      "target": "triangle_curvature_workbench",
+      "kind": "develop",
+      "label": "Return to the triangle while changing the assumptions about its space."
+    },
+    {
+      "source": "enhanced_kmeans",
+      "target": "russell_paradox_workbench",
+      "kind": "associate",
+      "label": "Classification invites questions about the boundary of a category; this is not a shared algorithm."
+    },
+    {
+      "source": "russell_paradox_workbench",
+      "target": "godel_sentence_machine",
+      "kind": "associate",
+      "label": "Compare self-reference in different formal settings without equating the results."
+    },
+    {
+      "source": "loss_function_comparator",
+      "target": "qfep_balance_workbench",
+      "kind": "associate",
+      "label": "Ask which selected measures are being balanced and why."
+    },
+    {
+      "source": "galton_board",
+      "target": "microstate_counter",
+      "kind": "associate",
+      "label": "Distinguish a visible distribution from the states and counting rule behind it."
+    },
+    {
+      "source": "qfep_balance_workbench",
+      "target": "qfep_reactor",
+      "kind": "combine",
+      "label": "Bring the chosen measures into a coupled parameter experiment."
+    },
+    {
+      "source": "microstate_counter",
+      "target": "qfep_reactor",
+      "kind": "combine",
+      "label": "Make the permitted states part of the model under examination."
+    },
+    {
+      "source": "enhanced_kmeans",
+      "target": "bias_visualizer",
+      "kind": "develop",
+      "label": "Inspect what a grouping preserves, omits and distributes."
+    },
+    {
+      "source": "bias_visualizer",
+      "target": "accountability_ledger",
+      "kind": "develop",
+      "label": "Record the choice, its reason and who can contest it."
+    },
+    {
+      "source": "qfep_reactor",
+      "target": "the_commons_table",
+      "kind": "associate",
+      "label": "A model becomes one partial instrument among others."
+    },
+    {
+      "source": "accountability_ledger",
+      "target": "the_commons_table",
+      "kind": "combine",
+      "label": "Carry the record of decisions into shared interpretation."
+    },
+    {
+      "source": "durer_scene",
+      "target": "the_commons_table",
+      "kind": "associate",
+      "label": "Return to the composition of tools, limits and possible ways of making together."
+    },
+    {
+      "source": "line",
+      "target": "void_beam",
+      "kind": "associate",
+      "label": "Give a segment thickness and collision so it can support a body."
+    },
+    {
+      "source": "line",
+      "target": "void_line_gate",
+      "kind": "associate",
+      "label": "An authored relation between two held points triggers an opening."
+    },
+    {
+      "source": "draw_triangle_faces",
+      "target": "void_triangle_brace",
+      "kind": "associate",
+      "label": "A triangular arrangement makes edges and joints legible at architectural scale."
+    },
+    {
+      "source": "line",
+      "target": "do_not_cross_barrier",
+      "kind": "associate",
+      "label": "A visible boundary can acquire an instruction and a social meaning."
+    },
+    {
+      "source": "void_beam",
+      "target": "wedge_cube_route",
+      "kind": "combine",
+      "label": "Join a beam to the ramp and platform as another walking surface."
+    },
+    {
+      "source": "grab_trihedron",
+      "target": "align_tetrahedron",
+      "kind": "develop",
+      "label": "Close the corner with a fourth triangular face; keep enclosure distinct from collision."
+    },
+    {
+      "source": "align_tetrahedron",
+      "target": "tetra_blocker",
+      "kind": "associate",
+      "label": "Retain the completed solid as a concrete obstruction in the route."
+    },
+    {
+      "source": "align_tetrahedron",
+      "target": "align_wedge",
+      "kind": "develop",
+      "label": "Reuse the vertex/face construction method; change the recipe to a six-vertex triangular prism."
+    },
+    {
+      "source": "align_wedge",
+      "target": "wp",
+      "kind": "develop",
+      "label": "Use the prism form with the existing ramp dimensions and supporting collision."
+    },
+    {
+      "source": "polyhedron_nets_cube",
+      "target": "construction_cube",
+      "kind": "develop",
+      "label": "Carry the closed cube into a one-metre construction piece with matching collision."
+    },
+    {
+      "source": "construction_cube",
+      "target": "wedge_cube_route",
+      "kind": "combine",
+      "label": "The cube supplies the one-metre platform that meets the high end of wp."
+    },
+    {
+      "source": "wedge_cube_route",
+      "target": "transformation_bay",
+      "kind": "combine",
+      "label": "Build the trial route from the saved assembly, preserving the tower frame."
+    },
+    {
+      "source": "transformation_bay",
+      "target": "tc",
+      "kind": "develop",
+      "label": "Translate one part of the retained route; verify the platform carries its passenger."
+    },
+    {
+      "source": "align_wedge",
+      "target": "wedge_blocker",
+      "kind": "develop",
+      "label": "Give the completed prism its full-size wp proportions"
+    },
+    {
+      "source": "wedge_blocker",
+      "target": "wp",
+      "kind": "associate",
+      "label": "The same prism serves as obstruction or ramp"
+    },
+    {
+      "source": "tetra_blocker",
+      "target": "pyramid_blocker",
+      "kind": "associate",
+      "label": "Compare a triangular base with a square base"
+    }
+  ]
+}

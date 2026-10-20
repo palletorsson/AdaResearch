@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/museum_runner/runner_map.gd" id="1"]
+
+[node name="ArrayColour" type="Node3D"]
+script = ExtResource("1")
+title = "ARRAY / COLOUR"
+chapter = 3
+sections = 5
+course_seed = 307
+start_speed = 6.2

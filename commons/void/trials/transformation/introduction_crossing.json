@@ -1,0 +1,397 @@
+{
+  "id": "trans_introduction_crossing_v1",
+  "source_lessons": [
+    "Primitives_Polythedra",
+    "Point_Animatedcube",
+    "Trans_Pre"
+  ],
+  "members": [
+    {
+      "id": "NearCube1_1",
+      "kind": "cube",
+      "position": [
+        3,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube1_2",
+      "kind": "cube",
+      "position": [
+        3,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube1_3",
+      "kind": "cube",
+      "position": [
+        3,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube2_1",
+      "kind": "cube",
+      "position": [
+        4,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube2_2",
+      "kind": "cube",
+      "position": [
+        4,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube2_3",
+      "kind": "cube",
+      "position": [
+        4,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube3_1",
+      "kind": "cube",
+      "position": [
+        5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube3_2",
+      "kind": "cube",
+      "position": [
+        5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearCube3_3",
+      "kind": "cube",
+      "position": [
+        5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "NearWedge1",
+      "kind": "wedge",
+      "position": [
+        6.5,
+        0,
+        -1
+      ],
+      "facing": 270
+    },
+    {
+      "id": "NearWedge2",
+      "kind": "wedge",
+      "position": [
+        6.5,
+        0,
+        0
+      ],
+      "facing": 270
+    },
+    {
+      "id": "NearWedge3",
+      "kind": "wedge",
+      "position": [
+        6.5,
+        0,
+        1
+      ],
+      "facing": 270
+    },
+    {
+      "id": "FarCube1_1",
+      "kind": "cube",
+      "position": [
+        -3,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube1_2",
+      "kind": "cube",
+      "position": [
+        -3,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube1_3",
+      "kind": "cube",
+      "position": [
+        -3,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube2_1",
+      "kind": "cube",
+      "position": [
+        -4,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube2_2",
+      "kind": "cube",
+      "position": [
+        -4,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube2_3",
+      "kind": "cube",
+      "position": [
+        -4,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube3_1",
+      "kind": "cube",
+      "position": [
+        -5,
+        0,
+        -1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube3_2",
+      "kind": "cube",
+      "position": [
+        -5,
+        0,
+        0
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarCube3_3",
+      "kind": "cube",
+      "position": [
+        -5,
+        0,
+        1
+      ],
+      "facing": 0
+    },
+    {
+      "id": "FarWedge1",
+      "kind": "wedge",
+      "position": [
+        -6.5,
+        0,
+        -1
+      ],
+      "facing": 90
+    },
+    {
+      "id": "FarWedge2",
+      "kind": "wedge",
+      "position": [
+        -6.5,
+        0,
+        0
+      ],
+      "facing": 90
+    },
+    {
+      "id": "FarWedge3",
+      "kind": "wedge",
+      "position": [
+        -6.5,
+        0,
+        1
+      ],
+      "facing": 90
+    },
+    {
+      "id": "LeftRimCube1",
+      "kind": "cube",
+      "position": [
+        -2,
+        0,
+        -2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LeftRimCube2",
+      "kind": "cube",
+      "position": [
+        -1,
+        0,
+        -2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LeftRimCube3",
+      "kind": "cube",
+      "position": [
+        0,
+        0,
+        -2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LeftRimCube4",
+      "kind": "cube",
+      "position": [
+        1,
+        0,
+        -2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "LeftRimCube5",
+      "kind": "cube",
+      "position": [
+        2,
+        0,
+        -2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "RightRimCube1",
+      "kind": "cube",
+      "position": [
+        -2,
+        0,
+        2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "RightRimCube2",
+      "kind": "cube",
+      "position": [
+        -1,
+        0,
+        2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "RightRimCube3",
+      "kind": "cube",
+      "position": [
+        0,
+        0,
+        2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "RightRimCube4",
+      "kind": "cube",
+      "position": [
+        1,
+        0,
+        2
+      ],
+      "facing": 0
+    },
+    {
+      "id": "RightRimCube5",
+      "kind": "cube",
+      "position": [
+        2,
+        0,
+        2
+      ],
+      "facing": 0
+    }
+  ],
+  "signs": [
+    {
+      "id": "ApproachLabel",
+      "position": [
+        8.2,
+        0.025,
+        0
+      ],
+      "text": "SAME CUBES + WEDGES\nNOW THE FLOOR MOVES"
+    },
+    {
+      "id": "NearLabel",
+      "position": [
+        3.6,
+        1.016,
+        0
+      ],
+      "text": "WAIT / STEP ON\nFALLING IN IS FATAL"
+    },
+    {
+      "id": "FarLabel",
+      "position": [
+        -3.6,
+        1.016,
+        0
+      ],
+      "text": "STEP OFF / LOOK BACK\nSAME SIZE AND FACING"
+    },
+    {
+      "id": "ReturnLabel",
+      "position": [
+        -8.2,
+        0.025,
+        0
+      ],
+      "text": "THE PLATFORM RETURNS\nYOU CAN RIDE BACK"
+    },
+    {
+      "id": "GapLabel",
+      "position": [
+        0,
+        0.025,
+        3.1
+      ],
+      "text": "LETHAL PIT / WAIT FOR THE PLATFORM"
+    }
+  ]
+}
