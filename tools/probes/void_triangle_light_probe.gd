@@ -1,0 +1,138 @@
+extends "res://tools/probes/void_evening_probe.gd"
+
+func run() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--out="): out=arg.trim_prefix("--out=")
+	await start(true)
+	game.atmosphere.animate_sky=false; game.atmosphere.set_sky_time(180)
+	await visit(0)
+	var clock: Node3D = game.building.content.exhibits["0/clock"].get_node("Artifact")
+	check("Rooftop keeps the live source counter at 3.5x scale",clock.get_script().resource_path.ends_with("frame_counter_display.gd") and clock.scale.is_equal_approx(Vector3.ONE*3.5))
+	var reading: String = clock.label.text
+	await frames(5)
+	check("The larger counter still advances",clock.label.text!=reading)
+	var letters: MeshInstance3D = game.building.content.exhibits["0/roof-letters"].get_node("Artifact/ADA_RESEARCH")
+	check("Roof title is extruded geometry, 9.6 metres wide",letters.mesh is TextMesh and letters.mesh.text=="ADA RESEARCH" and letters.mesh.depth>0 and is_equal_approx(letters.mesh.get_aabb().size.x*letters.scale.x,9.6))
+	check("Rooftop letters clear the ceiling supply line",letters.position.y+letters.mesh.get_aabb().position.y*letters.scale.y>4.8)
+	await photograph("roof.png",Vector3(4,1.7,5.8),Vector3(-.5,3.8,-6.3),76)
+	await point_one()
+	var palette_switch: Node3D = load("res://commons/void/point_light_switch.tscn").instantiate()
+	root.add_child(palette_switch)
+	await frames(3)
+	check("Standalone switch palette preview tolerates having no floor",palette_switch._hall==null and palette_switch.sun==null)
+	palette_switch.queue_free(); await frames(2)
+	await triangle_lights()
+	game.queue_free(); await frames(20)
+	for tracker in [head,left,right]: XRServer.remove_tracker(tracker)
+	OS.delay_msec(200); await frames(10)
+	FileAccess.open(out.path_join("checks.json"),FileAccess.WRITE).store_string(JSON.stringify({"passed":failed.is_empty(),"checks":checks,"failed":failed,"scope":"Native Mobile-rendered tower; real XRTools with simulated controller input and pointer events. No physical headset performance claim."},"\t"))
+	quit(0 if failed.is_empty() else 1)
+
+func point_one() -> void:
+	await visit(1)
+	var content: Node3D=game.building.content
+	for id in ["absence","surface","solid"]:
+		var item: Node3D=content.exhibits["1/"+id].get_node("Artifact")
+		check(id+": study pedestal and its collider removed",not item.has_node("PointPlinth") and not item.has_node("PlinthCollision"))
+		check(id+": floor label remains",item.get_node("PointOneLabel").position.y<.02)
+	var future: Node3D=content.exhibits["1/future"].get_node("Artifact")
+	check("Large black glossy future sphere keeps its base",future.has_node("Pedestal") and future.point.material_override.albedo_color.r<.02 and future.point.material_override.roughness<.1)
+	check("Future sphere lamp clears its glossy surface",future.get_node("RodTerminalLamp").position.y>2.2)
+	var switch: Node3D=content.props["1/point-light-switch"].get_node("Prefab")
+	var rods: Array = content.roots[1].find_children("RodTerminalLamp","Node3D",true,false)
+	check("Four small downward rod lamps",rods.size()==4 and rods.all(func(lamp): return lamp.beam.visible and lamp.beam.global_basis.z.dot(Vector3.UP)>.99))
+	check("Switch reuses the real hand/pointer button without adding another sun",switch.button.get_script().resource_path.ends_with("interactable_area_button_pointer.gd") and switch.sun==null and switch.fill==null)
+	var sun: Light3D=game.atmosphere.get_node("WarmSun")
+	var sun_energy: float=sun.light_energy
+	var eye:=Vector3(.4,-4.35,6.5); var aim:=Vector3(0,-4.75,-1.6)
+	await photograph("point-one-on.png",eye,aim,78)
+	var pointer:=Node3D.new(); game.add_child(pointer)
+	XRToolsPointerEvent.pressed(pointer,switch.button,switch.button.global_position)
+	XRToolsPointerEvent.released(pointer,switch.button,switch.button.global_position)
+	await frames(16)
+	check("Real pointer press switches every rod lamp off",not switch.enabled and rods.all(func(lamp): return not lamp.beam.visible and not lamp.finish.emission_enabled))
+	check("Point switch leaves the sky and global sun alone",is_equal_approx(sun.light_energy,sun_energy) and sun.visible)
+	await photograph("point-one-off.png",eye,aim,78)
+	await visit(2); await visit(1)
+	check("Off state survives leaving and returning to the floor",not switch.enabled and rods.all(func(lamp): return not lamp.beam.visible))
+	XRToolsPointerEvent.pressed(pointer,switch.button,switch.button.global_position)
+	XRToolsPointerEvent.released(pointer,switch.button,switch.button.global_position)
+	await frames(10)
+	check("A second press restores all four lights",switch.enabled and rods.all(func(lamp): return lamp.beam.visible))
+	pointer.queue_free()
+	await photograph("point-switch.png",Vector3(-2.8,-4.35,4.9),Vector3(-4.5,-4.65,4.5),70)
+
+func grip_handle(handle: Node3D) -> void:
+	game._set_enabled(true)
+	game.place_player(Vector3(handle.global_position.x,-29.94,handle.global_position.z+1.25))
+	await frames(12)
+	hand_at(right,handle.global_position); await frames(14)
+	right.set_input("grip",1.0); await frames(15)
+	check(str(handle.get_parent().name)+": actual XRTools pickup succeeds",game.pickups[1].picked_up_object==handle)
+
+func release_handle() -> void:
+	right.set_input("grip",0.0); await frames(10)
+
+func triangle_lights() -> void:
+	await visit(5)
+	var content: Node3D=game.building.content
+	for prop in content.data.floors[5].props:
+		if prop.kind=="work_light": check("Triangle work light reduced: "+str(prop.id),is_equal_approx(content.props["5/"+str(prop.id)].get_node("Prefab").beam_energy,1.2))
+	var puzzle: Node3D=content.exhibits["5/arrival"].get_node("Artifact/ThreeEdges")
+	var light: Node3D=puzzle.get_node("EdgeIllumination")
+	check("Existing three-edge puzzle begins with interaction lamps off",puzzle.snap_lines.size()==3 and light.lamps.all(func(lamp): return not lamp.visible))
+	await grip_handle(puzzle.snap_lines[0].endpoint_a)
+	check("Grabbing a triangle corner lights the real three edges",light.tubes.multimesh.visible_instance_count==3 and light.lamps.all(func(lamp): return lamp.visible and not lamp.shadow_enabled))
+	var old: Vector3=puzzle.snap_lines[0].endpoint_a.global_position
+	hand_at(right,old+Vector3(.08,.12,0)); await frames(12)
+	check("Light geometry follows the moved endpoint",light.segments[0].distance_to(puzzle.snap_lines[0].endpoint_a.global_position)<.01)
+	var at:=puzzle.global_position+Vector3(1.7,.6,2.5)
+	await photograph("triangle-lit.png",at,puzzle.global_position,74)
+	# Freeze only the light observer; keep its luminous mesh identical in both images.
+	light.set_process(false)
+	for lamp in light.lamps: lamp.hide()
+	await photograph("triangle-light-off.png",at,puzzle.global_position,74)
+	light.set_process(true); light.refresh(); await frames(4)
+	await release_handle(); await frames(145)
+	check("Release fades the lamps and restores the original unmodified edges",light.tubes.multimesh.visible_instance_count==0 and light.lamps.all(func(lamp): return not lamp.visible) and not puzzle.is_completed)
+	var surfaces: Node3D=content.exhibits["5/surfaces"].get_node("Artifact")
+	for entry in [[surfaces.get_node("SharedDiagonal"),"quad"],[surfaces.get_node("FoldedStrip"),"strip"]]:
+		var item: Node3D=entry[0]
+		var view: Node3D=item.get_node("EdgeIllumination")
+		await grip_handle(item.drag_points.get_sphere(0))
+		check(str(entry[1])+": shared triangle edges light during manipulation",view.tubes.multimesh.visible_instance_count>=5 and view.lamps[0].visible)
+		if entry[1]=="strip": await photograph("folded-strip.png",item.global_position+Vector3(2,1.5,4.0),item.global_position+Vector3(0,.5,0),78)
+		await release_handle()
+	var drawing: Node3D=content.exhibits["5/drawing"].get_node("Artifact/Drawing")
+	var before: Array=drawing.placed_points.duplicate()
+	await grip_handle(drawing.point_indicators[0])
+	var drawing_light: Node3D=drawing.get_node("EdgeIllumination")
+	check("Existing drawing exposes illuminated triangular edges",drawing_light.segments.size()>=6 and drawing_light.lamps[0].visible)
+	check("Lighting does not replace the drawing or face data",drawing.placed_points.size()==before.size() and not drawing.completed_triangles.is_empty())
+	await release_handle()
+	var table: Node3D=content.exhibits["5/assembly"].get_node("Artifact/TriangleTable")
+	await grip_handle(table.pieces[0])
+	hand_at(right,table.pieces[0].global_position+Vector3(0,.55,.1)); await frames(12)
+	check("Only the picked-up table triangle gains three luminous edges",table.get_node("EdgeIllumination").tubes.multimesh.visible_instance_count==3 and table.pieces.size()==12)
+	await photograph("triangle-table.png",table.global_position+Vector3(2,1.7,2.5),table.global_position+Vector3(0,1,0),73)
+	await release_handle()
+	var identity:=puzzle.get_instance_id()
+	await visit(3)
+	check("Sleeping Triangle emits no interactive light",content.roots[5].find_children("EdgeLight*","OmniLight3D",true,false).all(func(lamp): return not lamp.is_visible_in_tree()))
+	await visit(5)
+	check("Returning preserves the same editable puzzle",content.exhibits["5/arrival"].get_node("Artifact/ThreeEdges").get_instance_id()==identity)
+	await photograph("triangle-route.png",Vector3(13.5,-28.35,6.5),Vector3(18.1,-27.8,-.5),86)
+	await photograph("proof-walls.png",Vector3(3,-28.35,-3.8),Vector3(-3.5,-27.5,-7.7),80)
+	var copy: Node3D=load("res://commons/void/triangle_surfaces.tscn").instantiate()
+	game.add_child(copy)
+	copy.apply_grid_config({"only_parts":["FoldedStrip"],"parts":{"FoldedStrip":{"position":[0,-29,6],"rotation":[0,90,0]}}})
+	await frames(8)
+	check("Editor copy retains its own independent edge-light component",copy.get_child_count()==1 and copy.get_node("FoldedStrip/EdgeIllumination").lamps[0]!=surfaces.get_node("FoldedStrip/EdgeIllumination").lamps[0])
+	copy.queue_free(); await frames(10)
+
+func photograph(filename: String, at: Vector3, target: Vector3, field_of_view := 75.0) -> void:
+	var rig: Node3D=game.get_node("XROrigin3D")
+	var shown: bool=rig.visible
+	rig.hide()
+	await super.photograph(filename,at,target,field_of_view)
+	rig.visible=shown

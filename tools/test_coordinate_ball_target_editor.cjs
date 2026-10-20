@@ -1,0 +1,42 @@
+// Exercise production editor operations without saving any test arrangement.
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),web=path.resolve(root,'../ada_encyclopedia');
+const out=path.join(root,'doc/book/iterations/2026-10-19-coordinate-ball-target');
+const ts=require(path.join(web,'node_modules/typescript')),context={exports:{},require,structuredClone};
+vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(web,'src/components/lab-editor/void-model.ts'),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020}}).outputText,context);
+const {listEntries,copyObject,pasteObject,place,turn}=context.exports;
+async function main(){
+  const endpoint='http://localhost:3003/api/void-layout',payload=await(await fetch(endpoint)).json();
+  const models=JSON.parse(fs.readFileSync(path.join(web,'public/void-models/manifest.json'),'utf8'));
+  const checks=[],id='museum-point_coordinates-10-6',floor=payload.rooms.floors[2];
+  const target=floor.artifacts.find(a=>a.id===id),model=models.floors['2'].artifacts[id];
+  assert.equal(target.config.encounter,'arrows');assert.equal(model.config.encounter,'arrows');
+  assert.ok(model.model.labels.some(l=>l.text==='DRAG POINT HERE'));
+  assert.equal(fs.readFileSync(path.join(web,'public',model.model.url)).readUInt32LE(0),0x46546c67);
+  checks.push({name:'Original red target geometry and instruction exported to the editor',passed:true});
+  const entry=listEntries(floor,payload,models,2).find(e=>e.id===id);
+  assert.ok(entry);
+  const rooms=structuredClone(payload.rooms),destination=rooms.floors[2];
+  const key=pasteObject(destination,copyObject(floor,entry,payload,2),2);
+  let copy=listEntries(destination,payload,models,2).find(e=>e.key===key);
+  assert.equal(copy.model.url,entry.model.url);
+  place(destination,copy,[16,0.035,3],payload);turn(destination,copy);
+  copy=listEntries(destination,payload,models,2).find(e=>e.key===key);
+  assert.equal(copy.position[0],16);assert.equal(copy.position[2],3);
+  assert.equal(copy.rotation[1],(entry.rotation[1]+90)%360);
+  const receipt=await(await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({rooms,validateOnly:true})})).json();
+  assert.ok(receipt.valid,JSON.stringify(receipt));
+  checks.push({name:'Target can be copied, moved, turned and validated using production editor code',passed:true});
+  const history=JSON.parse(fs.readFileSync(path.join(out,'layout-change.json'),'utf8'));
+  const expected=structuredClone(history.before);
+  expected.floors[2].artifacts.find(a=>a.id===id).config=target.config;
+  assert.deepEqual(payload.rooms,expected);
+  checks.push({name:'All other saved artifact positions, frame, props and floors preserved',passed:true});
+  const project=JSON.parse(fs.readFileSync(path.join(root,'commons/void/rooms.json'),'utf8'));
+  const desktop=JSON.parse(fs.readFileSync('C:/Users/palle/Desktop/Ada Void/rooms.json','utf8'));
+  assert.deepEqual(payload.rooms,project);assert.deepEqual(project,desktop);
+  checks.push({name:'Editor, desktop, VR and Desktop backup use the same layout',passed:true});
+  fs.writeFileSync(path.join(out,'editor-checks.json'),JSON.stringify({passed:true,checks,scope:'Production editor operations and actual GLB. Test copies validated only, never saved.'},null,2)+'\n');
+  console.log(`${checks.length} editor checks passed`);
+}
+main().catch(e=>{console.error(e);process.exitCode=1;});

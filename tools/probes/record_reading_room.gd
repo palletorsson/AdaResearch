@@ -1,0 +1,66 @@
+extends "res://tools/probes/camera_glitch_controls.gd"
+func landing_checks()->void:
+	await super.landing_checks()
+	var work:=find_scene("/camera_glitch_study/CameraGlitchStudy.gd")
+	if work==null:return
+	check("optional saved-record study installed",work.record_reading!=null and work.buttons.has("READ RECORD"))
+	if work.record_reading==null:return
+	var view:Node3D=work.record_reading
+	var stand:=work.to_global(Vector3(.2,0,3.0))
+	var driver=load("res://commons/testing/wcn_desktop_driver.gd").new();museum.add_child(driver);driver.spawn(stand,museum)
+	await create_timer(.2).timeout
+	observations.record_button=await driver.press(work.buttons["READ RECORD"],stand);await tick()
+	check("pointer opens record bank",work.record_active and view.visible)
+	check("camera produces 192 retained bytes",view.record.bytes().size()==192 and view.origin_note.begins_with("CAMERA"))
+	var camera_bytes:PackedByteArray=view.record.bytes()
+	var expected=load("res://commons/artifacts/camera_glitch_study/saved_record.gd").new()
+	expected.capture(work.held_texture.get_image())
+	check("installed record matches camera centre samples",camera_bytes==expected.bytes())
+	view.record.colour_image().save_png(ProjectSettings.globalize_path(folder+"record-camera-source.png"))
+	await snapshot("record-camera",work.to_global(Vector3(-1.6,1.65,4.8)),work.to_global(Vector3(-.3,2,0)),74)
+	observations.fixture_button=await driver.press(work.buttons["HOME"],stand);await tick()
+	check("pointer selects declared known fixture",view.origin_note=="KNOWN BYTE FIXTURE" and view.record.bytes()[12]==128)
+	var original:String=view.record.digest();observations.fixture_sha256=original
+	view.record.colour_image().save_png(ProjectSettings.globalize_path(folder+"record-fixture.png"))
+	for i in 5:
+		if i>0:observations["record_next_"+str(i)]=await driver.press(work.buttons["NEXT"],stand);await tick()
+		check("pointer selects reading "+str(i),view.mode==i)
+		check("reading preserves exact source "+str(i),view.record.digest()==original)
+		check("reference retains exact RGB8 image "+str(i),work.reference.material_override.albedo_texture.get_image().get_data()==view.record.bytes())
+		if i==4:check("bad layout returns invalid result in real exhibit",not view.last_decode.valid and view.last_decode.values.is_empty())
+		await snapshot("record-%d"%i,work.to_global(Vector3(-1.6,3.7 if i in [2,3] else 1.65,4.8)),work.to_global(Vector3(-.3,2,0)),74)
+	observations.record_reset=await driver.press(work.buttons["RESET"],stand);await tick()
+	check("reset changes receiver not saved record",view.mode==0 and view.channel==0 and view.record.digest()==original)
+	observations.record_channel=await driver.press(work.buttons["LIVE / HOLD"],stand);await tick()
+	check("channel button selects G",view.channel==1)
+	var selector=work.effect_dial.get_node("DialOrigin/InteractableHinge")
+	var reached:Array[int]=[]
+	for i in 5:selector.move_hinge(deg_to_rad(67.5*i));await tick();reached.append(view.mode)
+	check("native selector has exactly five readings",reached==[0,1,2,3,4])
+	view.select(3)
+	# Physically hold and rotate the existing strength dial in the new bank.
+	var origin:=XROrigin3D.new();root.add_child(origin);var controller:=XRController3D.new();origin.add_child(controller)
+	var pickup=load("res://addons/godot-xr-tools/functions/function_pickup.tscn").instantiate();controller.add_child(pickup)
+	var joint:Node3D=work.amount_dial.get_node("DialOrigin/InteractableHinge")
+	var knob=joint.get_node("Handles/Handle1/InteractableHandle")
+	controller.global_transform=knob.global_transform;knob.pick_up(pickup);await tick();await tick()
+	controller.global_position=joint.global_position+(controller.global_position-joint.global_position).rotated(joint.global_basis.x.normalized(),-.75)
+	for i in 6:await tick()
+	check("held dial changes gain without changing record",view.gain<.75 and view.record.digest()==original)
+	knob.let_go(pickup,Vector3.ZERO,Vector3.ZERO);await tick();await tick()
+	check("record strength dial releases",not knob.is_picked_up())
+	origin.queue_free()
+	work.paused=false;work.parked=false;work.handle.rotate_y(.35);await create_timer(.3).timeout
+	check("live movement leaves record unchanged",view.record.digest()==original)
+	observations.record_capture=await driver.press(work.buttons["SNAP"],stand);await create_timer(.3).timeout
+	check("save explicitly replaces fixture with camera record",view.origin_note.begins_with("CAMERA") and view.record.digest()!=original and not view.busy)
+	var new_hash:String=view.record.digest()
+	await driver.press(work.buttons["READ RECORD"],stand);await tick()
+	check("exit restores original bank and ten dial positions",not work.record_active and not view.visible and is_equal_approx(selector.hinge_steps,30))
+	check("original receiver visible after returning",work.receivers.size()>0 and work.receivers[0].visible and work.buttons["HOME"].get_node("Button/Legend").text=="HOME")
+	await driver.press(work.buttons["READ RECORD"],stand);await tick()
+	check("return preserves chosen saved record",work.record_active and view.record.digest()==new_hash)
+	view.act("HOME");view.channel=0;view.gain=.8;view.select(3)
+	await snapshot("record-console",work.to_global(Vector3(.15,1.65,2.8)),work.panel.face.global_position,66)
+	await snapshot("record-raised",work.to_global(Vector3(-4,5.5,5.5)),work.to_global(Vector3(-.3,1.8,0)),68)
+	driver.teardown();driver.queue_free()

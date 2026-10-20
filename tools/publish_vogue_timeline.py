@@ -1,0 +1,55 @@
+"""Publish actual museum images and bounded validation, no generated image claims."""
+from pathlib import Path
+import hashlib, html, json, shutil
+ROOT=Path(__file__).resolve().parents[1]
+OUT=ROOT/'doc/book/iterations/2026-10-11-vogue-a-phrase-of-your-own'
+RUN=ROOT/'ada_run/encounter_pilot/ML_Perception/vogue_timeline'
+def main():
+    tests=json.loads((OUT/'tests.json').read_text(encoding='utf-8'))
+    museum=json.loads((RUN/'report.json').read_text(encoding='utf-8'))
+    assert not tests['failures'] and not museum['failures']
+    for name in ['museum-wide.png','dance-timeline.png','open-phrase.png','nearby-controls.png','airborne-hands.png'] + [f'phrase-{i}.png' for i in range(1,5)]:
+        shutil.copy2(RUN/name,OUT/name)
+    shutil.copy2(RUN/'report.json',OUT/'museum-tests.json')
+    shutil.copy2(RUN/'stdout.log',OUT/'museum-engine.log')
+    shutil.copy2(ROOT/'commons/artifacts/vogue_timeline/README.md',OUT/'notes.md')
+    # Known surrounding exhibit errors remain visible as diagnostics, not hidden by passes.
+    diagnostic=[line for line in (RUN/'stdout.log').read_text(encoding='utf-8',errors='replace').splitlines() if line.startswith(('ERROR:','SCRIPT ERROR:','WARNING:'))]
+    (OUT/'museum-diagnostics.json').write_text(json.dumps(diagnostic,indent=2),encoding='utf-8')
+    count=len(tests['checks']); spatial=len(museum['checks'])
+    body=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vogue — a phrase of your own</title><style>
+    :root{{color-scheme:dark}}*{{box-sizing:border-box}}body{{margin:0;background:#11121b;color:#f5edf5;font:18px/1.65 system-ui,sans-serif}}main{{max-width:1180px;margin:auto;padding:44px 28px 90px}}h1{{font-size:clamp(36px,6vw,76px);line-height:1.05;max-width:850px;margin:15px 0 24px}}h2{{font-size:28px;margin-top:44px}}.kicker{{color:#6eddec;letter-spacing:.13em;text-transform:uppercase;font-size:13px}}p{{max-width:850px}}.lead{{font-size:24px;color:#efb2d2}}img{{width:100%;border-radius:6px;display:block}}figure{{margin:28px 0}}figcaption{{font-size:14px;color:#abb2c4;margin-top:10px}}a{{color:#75e0ed}}.grid{{display:grid;grid-template-columns:1fr 1fr;gap:22px}}.card{{padding:24px;background:#1c1e2c;border-top:3px solid #eb559e}}.card h2{{margin:0 0 10px}}table{{width:100%;border-collapse:collapse;font-size:16px}}th,td{{text-align:left;padding:13px;border-bottom:1px solid #44495c}}.stamp{{display:inline-block;border:1px solid #525b75;padding:8px 14px;font-size:14px;border-radius:20px}}audio{{width:min(100%,500px)}}@media(max-width:700px){{.grid{{grid-template-columns:1fr}}main{{padding:26px 16px}}}}
+    </style></head><body><main><div class="kicker">Endless Museum · Perception hall · 11 October 2026</div>
+    <h1>Vogue — a phrase of your own.</h1><p class="lead">32 beats. Sixteen poses. Two flowing paths through the air: frame, sweep, weave, return.</p>
+    <span class="stamp">Built in Godot · {count} algorithm/interaction checks + {spatial} museum checks pass</span>
+    <figure><img src="airborne-hands.png" alt="Pink and cyan hand paths floating in three dimensions inside the Perception hall"><figcaption>Actual Godot museum capture. Both hand paths float in the air. Their beads travel through height and depth; the wall figures provide an overview. This is the labelled guide preview, not tracked dancing.</figcaption></figure>
+    <div class="grid"><section class="card"><h2>Follow the phrase</h2><p>Press PLAY while facing the stage. Four beats give you time to get ready. Pink follows your left hand; cyan follows your right. Follow each large moving point along its curve. It pulses on the beat and reaches the smaller markers in time.</p><p>Each line reveals the next eight beats. Most poses carry the movement onward; four brief holds let it settle. The 32-beat dance lasts about 17 seconds at 112 BPM, then loops. Matching a pose gives a brief pulse; the phrase continues even when you miss.</p></section>
+    <section class="card"><h2>Make the reference yours</h2><p>RECORD keeps 32 beats of your own head-relative hand movement, then starts a replay count-in. Dance that phrase again. MINE returns to it; GUIDE returns to the supplied phrase.</p><p>Your samples keep their original timing and depth. They are held only in the running artifact. CLEAR removes them. Reach, tolerance and tempo remain adjustable.</p></section></div>
+    <h2>Know which way to move</h2><p>Small arrows point forward along each hand's curve. Your target ring brightens when that hand is in place. Separate LEFT and RIGHT indicators beside the controls show IN PLACE or FOLLOW. The arrows disappear where a recorded hand is stationary.</p><p>A pose is accepted only when both hands are within tolerance together for long enough around the cue. A brief pulse confirms it. One hand cannot compensate for the other. The dance keeps going when you miss.</p>
+    <h2>Four movements</h2><div class="grid">
+    <figure><img src="phrase-1.png" alt="Frame section: upward and outward hand curves"><figcaption><strong>1–8 · FRAME.</strong> Frame the face, lift, curve above the head, fan outward.</figcaption></figure>
+    <figure><img src="phrase-2.png" alt="Sweep section: low scoops moving forward and up"><figcaption><strong>9–16 · SWEEP.</strong> Open, scoop low, offer forward, rise.</figcaption></figure>
+    <figure><img src="phrase-3.png" alt="Weave section: asymmetric hand paths at different depths"><figcaption><strong>17–24 · WEAVE.</strong> Diagonal, ribbons, crossing paths at different heights and depths, unfold.</figcaption></figure>
+    <figure><img src="phrase-4.png" alt="Return section: broad arcs back to the opening frame"><figcaption><strong>25–32 · RETURN.</strong> Crown, wide arcs, gather, return to the frame.</figcaption></figure>
+    </div>
+    <figure><img src="museum-wide.png" alt="Overhead angle showing the dance floor within the museum"><figcaption>The eastern gallery is wider, with a clear floor in front of the display. The older vision panorama was reduced to fit its own area; both earlier perception exhibits remain.</figcaption></figure>
+    <h2>A dancing timeline in the air</h2><p>The 32-beat phrase carries two paths through time. Each curve preserves the hand's x, y and z coordinates. Cubic curves make the transitions flow through the intermediate poses, with a brief hold at each section's opening. The eight-beat backing repeats four times, using the same beat clock as both hands.</p><p>Your movement leaves a brighter short trail in the same space. Recording hides the reference; replay draws your own two paths with their original depth. This returns to Point, Trace, coordinates and Wavefunctions with another purpose.</p>
+    <figure><img src="dance-timeline.png" alt="Front view of both floating hand paths and the dance controls"><figcaption>The paths sit at hand height. REACH resizes them with the target rings. During tracked play their origin follows your head, with facing fixed at the start of the phrase.</figcaption></figure>
+    <table><thead><tr><th>Control</th><th>What it changes</th></tr></thead><tbody>
+    <tr><td>PLAY / RECORD</td><td>Follow the reference, or capture 32 beats after a count-in.</td></tr><tr><td>MINE / GUIDE / CLEAR</td><td>Choose the recorded or authored phrase; clear your samples.</td></tr><tr><td>REACH / EASE</td><td>Change reach (0.45, 0.65, 0.85 m) and distance tolerance.</td></tr><tr><td>TEMPO / SOUND</td><td>96, 112 or 128 BPM; restart in time or mute the practice beat.</td></tr></tbody></table>
+    <figure><img src="nearby-controls.png" alt="Nine nearby dance controls with separate left and right feedback"><figcaption>LEFT and RIGHT feedback stays beside the controls. This capture is an untracked preview. Tracked play reports each hand separately; recognition needs a headset and two controllers.</figcaption></figure>
+    <h2>Celebration and a question</h2><p>Voguing belongs to Black and Latino LGBTQ ballroom histories. The <a href="https://nmaahc.si.edu/explore/stories/brief-history-voguing">Smithsonian account</a> provides context. These original hand prompts celebrate the invitation to pose and move; they do not represent a complete vogue vocabulary. A dancer collaboration should shape that next stage.</p>
+    <p>What does a system see when you dance? Here it sees two hand positions relative to the head, in a facing frame you establish. It compares those positions with a timed reference. You can change that reference. The pleasure, gesture and significance of the dance exceed those coordinates.</p>
+    <p>This is template matching, not trained machine learning. The elbows and legs are a diagram. Wrist orientation, fingers, hips and footwork are not measured. The flow percentage expresses distance similarity, not artistic worth or a probability of recognition.</p>
+    <figure><img src="open-phrase.png" alt="The open hand phrase on the museum dance display"><figcaption>OPEN begins the second section. Recording accepts your own movement instead of requiring the authored poses.</figcaption></figure>
+    <h2>What was tested</h2><p>{count} native Godot checks cover all sixteen cues at 96, 112 and 128 BPM, continuous curves, held poses, full-length record/replay, wrong/swapped hands, tracking loss, actual controls, PCM audio loading and supplied native XR tracker poses. They also verify both 3D paths, future beat markers, direction arrows, independent hand feedback, rejection when only one hand matches, recorded depth, stationary hands and alignment with target rings after turning, translation and reach changes. {spatial} checks cover real museum loading, the existing exhibit, metre scale, floor support and camera captures.</p>
+    <p>Physical headset timing, dance comfort, sound latency and the quality of the invitation still need playing. Museum logs also retain older computer-vision startup errors, an unresolved project audio-bus UID and portal fallback diagnostics. The new artifact tests pass; this is not a claim that the whole hall has a clean engine log.</p>
+    <p><a href="tests.json">Algorithm and XR receipts</a> · <a href="museum-tests.json">Museum receipts</a> · <a href="museum-diagnostics.json">Surrounding diagnostics</a> · <a href="notes.md">Full implementation notes</a></p>
+    </main></body></html>'''
+    (OUT/'index.html').write_text(body,encoding='utf-8')
+    manifest={}
+    for rel in ['commons/artifacts/vogue_timeline/dance_phrase.gd','commons/artifacts/vogue_timeline/vogue_timeline.gd','commons/artifacts/vogue_timeline/vogue_timeline.tscn','commons/artifacts/vogue_timeline/phrase_112.wav','commons/maps/ML_Perception/map_data.json','tools/probes/vogue_timeline_test.gd','tools/probes/vogue_museum.gd']:
+        manifest[rel]=hashlib.sha256((ROOT/rel).read_bytes()).hexdigest()
+    (OUT/'source-register.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    print(f'Published {count}+{spatial} checks and nine museum captures: {OUT}')
+if __name__=='__main__':main()

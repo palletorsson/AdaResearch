@@ -22,8 +22,11 @@ def main():
     parser.add_argument('room')
     parser.add_argument('--sequence', default='array_tutorial')
     parser.add_argument('--render', action='store_true')
+    parser.add_argument('--prepare-only', action='store_true', help='Write isolated snapshot and command.json without starting Godot')
+    parser.add_argument('--no-bridges', action='store_true', help='Keep live command bridges from replacing the isolated capture scene')
     parser.add_argument('--rendering-method', choices=['gl_compatibility', 'mobile', 'forward_plus'], default='gl_compatibility')
     parser.add_argument('--spec', type=Path)
+    parser.add_argument('--output-tag', help='Separate receipts for concurrent studies of the same hall')
     parser.add_argument('--probe', type=Path, default=ROOT / 'tools/probes/museum_encounter.gd')
     args = parser.parse_args()
     probe = args.probe.resolve()
@@ -32,6 +35,10 @@ def main():
     if not re.fullmatch(r'[A-Za-z0-9_]+', args.room):
         parser.error('room must be a map folder name')
     run = ROOT / 'ada_run/encounter_pilot' / args.room
+    if args.output_tag:
+        if not re.fullmatch(r'[A-Za-z0-9_-]+', args.output_tag):
+            parser.error('output tag must contain only letters, numbers, underscores or hyphens')
+        run = run / args.output_tag
     run.mkdir(parents=True, exist_ok=True)
     # A failed launch must not leave a previous passing report as its result.
     if (run / 'report.json').exists():
@@ -75,7 +82,7 @@ def main():
     spec = json.loads(args.spec.read_text(encoding='utf-8-sig')) if args.spec else {}
     spec.update(room=args.room, sequence=args.sequence, run=prefix)
     (run / 'spec.json').write_text(json.dumps(spec, indent=2), encoding='utf-8')
-    manifest = {'room': args.room, 'replacements': replacements,
+    manifest = {'room': args.room, 'replacements': replacements, 'no_bridges': args.no_bridges,
                 'scope': 'Live museum code; only output paths replaced. Headset and learner checks remain open.',
                 'sources': {}}
     for path in [source_path, ROOT / f'commons/maps/{args.room}/map_data.json',
@@ -99,6 +106,12 @@ def main():
                '--script', 'res://' + probe.relative_to(ROOT).as_posix()]
     command += ['--no-window', '--rendering-method', args.rendering_method] if args.render else ['--headless']
     command += ['--', prefix + 'spec.json']
+    if args.no_bridges:
+        command += ['--no-bridges']
+    (run / 'command.json').write_text(json.dumps(command, indent=2), encoding='utf-8')
+    if args.prepare_only:
+        print(f'{args.room}: snapshot prepared; no engine execution: {run}')
+        return 0
     with (run / 'stdout.log').open('w', encoding='utf-8') as log:
         process = subprocess.Popen(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT,
                                    creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)

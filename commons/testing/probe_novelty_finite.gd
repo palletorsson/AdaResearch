@@ -1,5 +1,8 @@
 extends SceneTree
 ## probe_novelty_finite.gd — book_machinelearning.016, 2026-09-25.
+## ARCHIVE NOTE 2026-10-11: the live artifact now uses fixed simulation ticks.
+## Running this against current source is a new experiment, not reproduction of
+## the historical 35.8-second trace. See the saved source in the ML feedback report.
 ##
 ## Prediction: non_teleological_evolution pays energy only for UNVISITED cells of a
 ## 20 x 20 grid, so fresh ground is finite (400 cells x 0.8) against a drain of 0.15 a

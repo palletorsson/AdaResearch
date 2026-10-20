@@ -1,6 +1,6 @@
 {
  "_readme": "Placements where the artifact's declared axis and the room's own argument rhyme. Each row is a rulable line: choose a value or keep the default deliberately. PROPOSES; nothing is written to the corpus.",
- "band_total": 550,
+ "band_total": 545,
  "rows": [
   {
    "seq": "forces",
@@ -27,80 +27,6 @@
    "n": 6,
    "note": "THE AXIS IS THE SPECIMENS, NOT THE BREAKING, and that is deliberate. Every destruction path in the eight destructible scripts is a body-entered handler that spawns RigidBody3D fragments with impulses and schedules them to fade and free; a still of any of it is an arbitrary instant of a physics run, ",
    "default": "method=all - _shows() returns true for every kind when method is \"all\", so all nine instantiate calls run at their nine unchanged positions with their unchanged"
-  },
-  {
-   "seq": "lsystems",
-   "map": "LSystems_Grammar_Lab",
-   "artifact": "lsystem_editor",
-   "axis": "grammar",
-   "values": [
-    "koch",
-    "sierpinski",
-    "dragon",
-    "plant",
-    "bush",
-    "fern",
-    "binary_tree"
-   ],
-   "rhyme": [
-    "koch",
-    "sierpinski",
-    "dragon",
-    "plant",
-    "bush",
-    "fern"
-   ],
-   "n": 6,
-   "note": "hand promotion 2026-08-03, the botanical_flower case: the runner refused this token for NO TURNABLE KNOBS and the axis was already sitting in the source. Derived from PRESETS, not transcribed - the seven names are the preset labels lowercased with the spaces closed up. `preset` is deliberately NOT d",
-   "default": "grammar=plant, depth=0 - plant is PRESETS index 3, which is the value lsystem_editor.tscn has always written on the root, and depth 0 means 'use the grammar's o"
-  },
-  {
-   "seq": "transformation",
-   "map": "Trans_Introduction",
-   "artifact": "invariants_demo",
-   "axis": "pose",
-   "values": [
-    "none",
-    "translate",
-    "rotate",
-    "scale",
-    "shear",
-    "project"
-   ],
-   "rhyme": [
-    "none",
-    "translate",
-    "rotate",
-    "scale",
-    "shear"
-   ],
-   "n": 5,
-   "note": "",
-   "default": "figure=equilateral, pose=none - the equilateral triangle sitting untransformed with the panel unpressed is exactly the pre-promotion build, so all 10 existing p"
-  },
-  {
-   "seq": "transformation",
-   "map": "Trans_Introduction",
-   "artifact": "matrix_4x4_viewer",
-   "axis": "pose",
-   "values": [
-    "none",
-    "translate",
-    "rotate",
-    "scale",
-    "shear",
-    "project"
-   ],
-   "rhyme": [
-    "none",
-    "translate",
-    "rotate",
-    "scale",
-    "shear"
-   ],
-   "n": 5,
-   "note": "The bottom row was hard-coded 0.0, 0.0, 0.0, 1.0 in the values array, which made the gray row decoration - a fourth row that could only ever say the same thing is not a fourth row. `project` is the value that pays for it: Godot's Transform3D cannot hold a projective bottom row, so the divide is done",
-   "default": "pose=none - the identity. _translate stays Vector3.ZERO, _rotate_y 0.0, _scale_uniform 1.0, and the two new cells _shear and _perspective are both 0.0, so every"
   },
   {
    "seq": "softbodies",
@@ -147,50 +73,6 @@
    "n": 4,
    "note": "",
    "default": ""
-  },
-  {
-   "seq": "wavefunctions",
-   "map": "WaveFunctions_Effect_Sound",
-   "artifact": "timbre_sculptor",
-   "axis": "waveform",
-   "values": [
-    "sine",
-    "square",
-    "sawtooth",
-    "triangle",
-    "formant"
-   ],
-   "rhyme": [
-    "sine",
-    "square",
-    "sawtooth",
-    "triangle"
-   ],
-   "n": 4,
-   "note": "",
-   "default": "waveform=sine, machinery=none - sine resolves through WAVEFORM_PRESET to PRESETS[\"SINE\"], which is the literal array the replaced line named, so the panel still"
-  },
-  {
-   "seq": "wavefunctions",
-   "map": "WaveFunctions_Synthesis_Lab",
-   "artifact": "additive_wave_demo",
-   "axis": "waveform",
-   "values": [
-    "sine",
-    "square",
-    "sawtooth",
-    "triangle",
-    "clear"
-   ],
-   "rhyme": [
-    "sine",
-    "square",
-    "sawtooth",
-    "triangle"
-   ],
-   "n": 4,
-   "note": "",
-   "default": "waveform=sine, components=ladder - sine writes the same [1,0,0,0,0] amplitudes the sliders were already initialised with, and ladder is the legacy -0.35 - h*0.1"
   },
   {
    "seq": "randomness",

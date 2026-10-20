@@ -22,7 +22,7 @@ Use the cube from Transformation, the grid and list from Arrays, and a separate 
 
 In Cage we sampled a score once and replayed the stored events. Here we reconstruct a picture by resetting a generator and repeating its requests. Synthesis kept the amounts in a recipe; this recipe also needs the order in which values are requested and used.
 
-**Build:** two four-by-four grids coloured by one local generator, reset before each grid.
+**Build:** two eight-by-eight grids coloured by one local generator, reset before each grid.
 
 **Investigate:** keep the seed and discard one draw before colouring the right grid. Predict where its first red, green and blue values will come from.
 
@@ -30,13 +30,13 @@ In Cage we sampled a score once and replayed the stored events. Here we reconstr
 
 Use an upright `PointStudy` Node3D at unit scale in Random Definition. A tested working bay is hall-local `(10.5, 0, 18.5)` metres, beyond the textile panels, with Y rotation −90 degrees. The museum supplies floor, camera, lighting, player and XR Tools. The study's front is its local +Z side; this placement faces it into the room with the east wall behind it. This is a small reconstruction beside existing work; it does not replace the installed table or the room.
 
-Save `01_seed_picture.gd` beside the unchanged `point_body.gd` carried from Wavefunctions. Attach the first file to the study. Both files are printed below. No named mesh child, `$Display`, prefab grid or separate scene is required.
+Save `01_seed_picture.gd` beside the unchanged `point_body.gd` carried from Wavefunctions. Attach the first file to the study. All three files, including `matrix_slider.gd`, are printed below. No named mesh child, `$Display`, prefab grid or separate scene is required.
 
 In VR, hold the black point above REPLAY, +1 DRAW or NEXT SEED and press its action trigger. The existing desktop pickup/action controls can operate the same point. The choice uses the point's X coordinate relative to the study, as in Cage. Merely moving the point does not draw a number. NEXT SEED adds one to the integer; it is deliberately simpler than the installed table's RANDOM button.
 
 ## Complete code — 01_seed_picture.gd
 
-Read `colour_grid` and `replay` first. The construction in `_ready` reuses the cube/material/grid pattern. The final function reuses the held-point action.
+Read `colour_grid` and `replay` first. The construction in `build_grids` reuses the cube/material/grid pattern. The final function reuses the held-point action.
 
 '''
 
@@ -47,11 +47,19 @@ EXPLANATION='''
 
 `rng.seed = seed_value` puts it back at the beginning associated with that seed. We do this once before each grid, not once before each cube. Then `randf()` requests values from zero to one. Three successive requests become the red, green and blue channels of one material. Each cube owns its material, so changing one does not repaint them all.
 
-There are sixteen cubes per grid. Each needs three draws: forty-eight in all. The loops store row zero first, left to right, then the next row. Row zero is the bottom row in this vertical display. The seed can only reproduce the assignment while that order and the use of the values remain the same.
+At eight by eight there are sixty-four cubes per grid. Each needs three draws: 192 in all. The loops store row zero first, left to right, then the next row. Row zero is the bottom row in this vertical display. The seed can only reproduce the assignment while that order and the use of the values remain the same.
 
-`skip` requests one value without using it. It happens before the colour loop. The shifted grid still displays forty-eight channel values, but consumes forty-nine draws. Think of the first six values as `a, b, c, d, e, f`: the unshifted first two cubes use `(a, b, c)` and `(d, e, f)`. Predict the shifted first cube before you press the trigger.
+`skip` requests one value without using it. It happens before the colour loop. The shifted grid still displays 192 channel values, but consumes 193 draws. Think of the first six values as `a, b, c, d, e, f`: the unshifted first two cubes use `(a, b, c)` and `(d, e, f)`. Predict the shifted first cube before you press the trigger.
 
 The two calls to `colour_grid` return colour lists. `samples[0]` and `samples[1]` keep the values assigned to the left and right grids. The record and the picture can now be inspected separately. These lists live in this study's memory; this lesson does not save them to disk or automatically carry them through a portal.
+
+## Change the matrix, keep the recipe
+
+Drag the pink MATRIX handle. The number of rows and columns changes together, from 2 × 2 to 16 × 16. The panel keeps its place and its one-metre design area. The seed and +1 DRAW setting stay; the readout recomputes `side * side * 3` requests, plus the optional discard. At 16 × 16 that is 768 or 769 requests per grid.
+
+The slider calls `set_side`. It rebuilds only the cube grids, then replays the current recipe. The held point and slider stay available. Returning to 8 × 8 restores its previous colours. A larger grid keeps the same prefix of the colour list, but a different row width puts some entries at different spatial addresses. It is not a zoom into the old picture.
+
+The slider is supplied interaction code, printed below so the example has no hidden scene dependency. Read its wiring here; the new randomness concepts remain seed, request order and assignment.
 
 ## Three short investigations
 
@@ -75,10 +83,17 @@ This is the same frozen pickable sphere used in Wavefunctions. Its parent class 
 
 '''
 
+SLIDER='''
+## The resolution control — matrix_slider.gd
+
+This helper builds its rail, handle collision and label in code. XR Tools supplies the same grab mechanism already installed on Day Zero. The visible handle follows a constrained track; it stays where released. Fourteen intervals join the fifteen choices from 2 to 16. `side_changed` hands the chosen integer to the study. No new random value is requested by the control itself.
+
+'''
+
 ENDING='''
 ## Compare with the installed work
 
-The hall's `seed_replay_demo` has two eight-by-eight grids, a seed slider, RANDOM and draw strips. It uses the same three-requests-per-colour operation: 192 draws per grid, or 193 when the extra request is enabled. Our four-by-four study keeps the operation and reduces the amount to inspect. The black point is our familiar input; the installed instrument uses its own panel.
+The hall's `seed_replay_demo` has two eight-by-eight grids, a seed slider, a MATRIX slider, RANDOM and draw strips. It uses the same three-requests-per-colour operation: 192 draws per grid, or 193 when the extra request is enabled. Both displays start at eight by eight and have a MATRIX slider for two through sixteen rows and columns. The larger panel keeps its footprint; the cells get smaller as the count increases. The black point is our familiar input; the installed instrument uses its own panel.
 
 In the small study, generator state and the picture's recipe are different things. `seed_value` says where to begin. After colouring, `rng.state` is already further along. REPLAY resets the generator before making each list. Cage instead replayed an already retained list without asking the generator again. Both can repeat a result, by different procedures.
 
@@ -95,7 +110,7 @@ def listing(name):
 def main():
     inherited=ROOT/'doc/book/studies/wavefunctions-lineage/point_body.gd'
     assert inherited.read_bytes()==(STUDY/'point_body.gd').read_bytes()
-    text=INTRO+listing('01_seed_picture.gd')+EXPLANATION+listing('point_body.gd')+ENDING
+    text=INTRO+listing('01_seed_picture.gd')+EXPLANATION+listing('point_body.gd')+SLIDER+listing('matrix_slider.gd')+ENDING
     (ROOT/'commons/maps/Random_Definition/tutorial.md').write_text(text,encoding='utf8')
 
 if __name__=='__main__':main()

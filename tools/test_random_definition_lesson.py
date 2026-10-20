@@ -1,9 +1,10 @@
 """Extract the printed lesson, run edits and reject relevant broken variants."""
 from pathlib import Path
-import hashlib,json,re,subprocess
+import argparse,hashlib,json,re,subprocess
+from student_lesson_sources import lesson_files
 
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'doc/book/iterations/2026-10-09-randomness-revision/Random_Definition'
+OUT=ROOT/'doc/book/iterations/2026-10-13-four-by-four-seed/student'
 ENGINE='C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe'
 
 def run(source,name,mode='rgb'):
@@ -18,10 +19,16 @@ def run(source,name,mode='rgb'):
     return result.returncode,json.loads(target.read_text())
 
 def main():
+    global OUT
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output',type=Path,default=OUT)
+    args=parser.parse_args()
+    OUT=args.output.resolve()
+    assert OUT.is_relative_to(ROOT), 'Output must stay inside the project'
     OUT.mkdir(exist_ok=True,parents=True)
     text=(ROOT/'commons/maps/Random_Definition/tutorial.md').read_text(encoding='utf8')
-    blocks=dict(re.findall(r'<!-- student-code:([^ ]+) -->\s*```gdscript\n(.*?)\n```',text,re.S))
-    assert set(blocks)=={'01_seed_picture.gd','point_body.gd'}
+    blocks=lesson_files(ROOT/'commons/maps/Random_Definition/tutorial.md')
+    assert set(blocks)=={'01_seed_picture.gd','point_body.gd','matrix_slider.gd'}
     dest=OUT/'extracted';dest.mkdir(exist_ok=True)
     for name,code in blocks.items():
         (dest/name).write_text(code+'\n',encoding='utf8')

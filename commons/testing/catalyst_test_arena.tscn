@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/testing/catalyst_counterpart_trial.gd" id="1"]
+
+[node name="CatalystTestArena" type="Node3D"]
+script = ExtResource("1")
+trial_sequence = "transformation"
+trial_map = "Catalyst_Test_Arena"
+trial_plan = "res://commons/testing/catalyst_test_arena_plan.json"
+run_directory = "user://catalyst-test-arena/"

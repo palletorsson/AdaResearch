@@ -1,47 +1,58 @@
 extends SceneTree
-var failures: Array[String]=[]
-var checks: int=0
-func check(ok: bool, description: String) -> void:
-	checks+=1
-	if not ok: failures.append(description)
-func _initialize() -> void: call_deferred("run")
+var checks: Array=[]
+var failures: Array=[]
+var observations: Dictionary={}
+var report_path="res://ada_run/entropy_ruin_checks.json"
+func _initialize() -> void:run.call_deferred()
+func check(title: String,passed: bool) -> void:
+	checks.append({"name":title,"passed":passed})
+	if not passed:failures.append(title);print("FAIL ",title)
 func run() -> void:
-	var ruin=load("res://commons/artifacts/randomness_space/entropy_ruin.tscn").instantiate()
-	root.add_child(ruin); ruin.set_process(false)
-	check(ruin.pieces.size()==116,"116 retained pieces")
+	await verify_ruin()
+	finish()
+func verify_ruin() -> void:
+	var ruin=load("res://commons/artifacts/randomness_space/entropy_ruin.tscn").instantiate();ruin.autostart=false;root.add_child(ruin)
+	check("116 rigid stones",ruin.pieces.size()==116 and ruin.pieces.all(func(p):return p.body is RigidBody3D))
+	check("32 foundations fixed, 84 loose",ruin.pieces.filter(func(p):return p.anchor).size()==32 and ruin.pieces.filter(func(p):return not p.anchor and not p.body.freeze).size()==84)
+	var mesh: ArrayMesh=ruin._drum(0.3,0.31,0);var arrays: Array=mesh.surface_get_arrays(0)
+	var outward:=true;var caps:=true
+	for i in arrays[Mesh.ARRAY_VERTEX].size():
+		var p: Vector3=arrays[Mesh.ARRAY_VERTEX][i];var n: Vector3=arrays[Mesh.ARRAY_NORMAL][i]
+		if absf(n.y)>0.99:caps=caps and n.y*p.y>0
+		else:outward=outward and n.dot(Vector3(p.x,0,p.z).normalized())>0.5
+	check("stone side faces point outward",outward);check("stone end caps point outward",caps)
+	await create_timer(3.0).timeout
+	var upper: RigidBody3D=ruin.pieces[86].body
+	var before:=upper.position
+	check("column stands before intervention",ruin.pieces[93].body.position.y>3.0)
+	check("support can be extracted",ruin.pull_and_drop(85))
+	await create_timer(0.25).timeout
+	check("support moves outward before release",ruin.pieces[85].body.position.z< -0.3 and ruin.pieces[85].body.freeze)
+	check("supported stone is a live colliding body",not upper.freeze and upper.collision_layer==4 and upper.collision_mask==5)
+	await create_timer(3.5).timeout
+	check("released support falls under gravity",ruin.extracting==-1 and not ruin.pieces[85].body.freeze and ruin.pieces[85].body.position.y<0.55)
+	check("unselected upper stone falls when support is removed",upper.position.y<before.y-0.18)
+	check("one extraction, multiple moved stones",ruin.history==[85] and ruin.pieces.filter(func(p):return p.body.position.distance_to(p.home.origin)>0.18).size()>1)
+	check("all stones retained after contact",ruin.pieces.size()==116)
+	observations.upper_before_y=before.y;observations.upper_after_y=upper.position.y
+	observations.removed_after_y=ruin.pieces[85].body.position.y
 	ruin.restore()
-	for i in range(32): ruin.weather_one()
-	var first: Array=ruin.history.duplicate()
-	check(first.size()==32,"Single steps select unique exposed pieces")
-	check(ruin.pieces.size()==116,"No stones deleted")
-	var transforms: Array=[]
-	for piece in ruin.pieces: transforms.append(piece.node.transform)
-	ruin.restore()
-	for piece in ruin.pieces:
-		check(piece.node.transform.is_equal_approx(piece.home),"Restore recovers piece transform")
-	check(ruin.history.is_empty() and not ruin.running,"Restore waits in intact state")
-	for i in range(32): ruin.weather_one()
-	check(ruin.history==first,"Seed repeats selection order")
-	for i in range(116): check(ruin.pieces[i].node.transform.is_equal_approx(transforms[i]),"Seed repeats landing")
-	for i in range(100): ruin.weather_one()
-	check(ruin.history.size()==84,"Finite loss stops with 32 pieces in their original positions")
-	for stack in ruin.stacks: check(stack.size()==2,"Two foundation courses retained")
-	for piece in ruin.pieces:
-		if not piece.fallen: continue
-		var box: AABB=piece.node.transform*piece.node.get_aabb()
-		check(box.position.x>=-3.01 and box.end.x<=3.01 and box.position.z>=-1.36 and box.end.z<=1.36 and box.position.y>=0.079,"Rubble stays in bed above floor")
-	ruin.restore(); ruin.running=true; ruin.weather_one()
-	var falling=ruin.pieces[ruin.history[0]]
-	check(falling.body.collision_layer==0,"Moving stone collider disabled")
-	ruin.running=false; var pos: Vector3=falling.node.position; ruin._process(0.1)
-	check(falling.node.position==pos,"Pause freezes descent")
-	for i in range(9): ruin._animate(0.1)
-	check(falling.body.collision_layer==1 and falling.age<0,"Landed stone regains collider")
-	ruin.restore(); ruin.running=true
-	for i in range(800): ruin._process(0.1)
-	check(ruin.history.size()==84 and not ruin.running,"Automatic run completes all eligible pieces")
-	for piece in ruin.pieces: check(piece.age<0 and piece.body.collision_layer==1,"Automatic run leaves no frozen airborne piece")
-	print("ENTROPY RUIN: ",checks," checks; failures=",failures)
-	var file:=FileAccess.open("res://doc/space/entropy-ruin-2026-09-16/unit.json",FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures})); file.close()
-	quit(0 if failures.is_empty() else 1)
+	check("restore returns authored transforms",ruin.pieces.all(func(p):return p.body.transform.is_equal_approx(p.home)))
+	check("restore clears extraction and selection",ruin.history.is_empty() and ruin.extracting==-1 and not ruin.running)
+	await create_timer(0.1).timeout
+	ruin.weather_one()
+	var first: int=ruin.history[0]
+	observations.first_choice=first
+	check("seeded first action removes a supporting drum",first>=72 and (first-72)%11==2)
+	ruin.restore();await create_timer(0.1).timeout;ruin.weather_one()
+	observations.repeat_choice=ruin.history.duplicate()
+	observations.repeat_candidates=ruin._candidates(12,16)
+	observations.drum_positions=[]
+	for id in [74,85,96,107]:observations.drum_positions.append(str(ruin.pieces[id].body.position))
+	check("restore repeats the choice without promising an identical landing",ruin.history==[first])
+	ruin.free()
+
+func finish() -> void:
+	var file:=FileAccess.open(report_path,FileAccess.WRITE)
+	file.store_string(JSON.stringify({"passed":failures.is_empty(),"checks":checks,"failures":failures,"observations":observations},"\t"));file.close()
+	print("Checks: ",checks.size()," failures: ",failures.size());quit(0 if failures.is_empty() else 1)

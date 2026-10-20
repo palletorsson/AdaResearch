@@ -1,0 +1,26 @@
+// The review store must preserve other observations and reject stale writes.
+const fs=require('fs'),path=require('path'),os=require('os'),assert=require('assert');
+const root=path.resolve(__dirname,'..'),web=path.resolve(root,'../ada_encyclopedia');
+const ts=require(path.join(web,'node_modules/typescript'));
+const file=path.join(web,'src/lib/void-trial-store.ts');
+const output=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,esModuleInterop:true,target:ts.ScriptTarget.ES2022}}).outputText;
+const m={exports:{}};new Function('require','module','exports',output)(require,m,m.exports);
+const {readTrialReviews,saveTrialReview,TrialConflict}=m.exports;
+const repo=fs.mkdtempSync(path.join(os.tmpdir(),'ada-void-trials-'));
+const dir=path.join(repo,'commons/void/trials');fs.mkdirSync(dir,{recursive:true});
+fs.writeFileSync(path.join(dir,'briefs.json'),JSON.stringify({trials:[{sequence:'transformation'},{sequence:'color'}]}));
+fs.writeFileSync(path.join(dir,'reviews.json'),JSON.stringify({version:1,reviews:{color:{observation:'Keep this other review'}}}));
+const first=readTrialReviews(repo);
+const input={sequence:'transformation',revision:first.revision,stage:'adapting',observation:'Native pickup test pending; source reviewed.',capacity:'Existing pickup modes',next:'Check both input adapters',evidence:'',fingerprint:'a'.repeat(64)};
+const saved=saveTrialReview(repo,input);
+assert.equal(readTrialReviews(repo).document.reviews.transformation.observation,input.observation);
+assert.equal(readTrialReviews(repo).document.reviews.color.observation,'Keep this other review');
+assert.notEqual(saved.revision,first.revision);
+assert.throws(()=>saveTrialReview(repo,input),TrialConflict);
+assert.throws(()=>saveTrialReview(repo,{...input,revision:saved.revision,sequence:'../../rooms'}),/Unknown sequence/);
+assert.throws(()=>saveTrialReview(repo,{...input,revision:saved.revision,stage:'vr-reviewed'}),/evidence/);
+assert.throws(()=>saveTrialReview(repo,{...input,revision:saved.revision,observation:''}),/Describe/);
+assert.equal(fs.readdirSync(path.join(repo,'ada_run/void-trial-backups')).length,1);
+assert.equal(fs.readdirSync(dir).filter(x=>x.endsWith('.tmp')).length,0);
+assert.equal(readTrialReviews(repo).revision,saved.revision);
+console.log(JSON.stringify({checks:10,status:'passed',fixture:repo}));

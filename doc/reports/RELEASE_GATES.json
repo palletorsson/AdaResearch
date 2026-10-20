@@ -1,17 +1,17 @@
 {
   "measurement": {
-    "measured_at": "2026-10-08T09:23:11+02:00",
+    "measured_at": "2026-10-19T15:03:37+02:00",
     "measured_by": "tools/run_release_gates.py",
-    "head": "afa79864cb9f542ad3a045fff145f9ecc738fd23",
-    "head_subject": "chore(gates): land 80 stranded files for gates L, M, N - pure additions (idle 38-237h, unclaimed, all compile)",
-    "tree_dirty": 2173,
-    "tree_untracked": 4191,
+    "head": "4440d7a0b875cf9965515bf6fe8032646411c20a",
+    "head_subject": "fix(gates): gate M clocks a stranded row by its folder's newest file, not its own (prop-056 clause 1)",
+    "tree_dirty": 652,
+    "tree_untracked": 3782,
     "tree_state_detector": "PASS"
   },
   "overall_pass": false,
   "overall_status": "FAIL",
   "enabled_gate_count": 15,
-  "passing_enabled_gate_count": 9,
+  "passing_enabled_gate_count": 7,
   "total_gate_count": 15,
   "command_exit_codes": {
     "sequence_contract": 0,
@@ -21,10 +21,10 @@
     "validate_museum_templates": 0,
     "em_autopilot": 3,
     "check_map_tokens": 0,
-    "check_prose_reachable": 4,
-    "check_artifacts_reachable": 52,
-    "check_tools_reachable": 0,
-    "check_cell_types": 0
+    "check_prose_reachable": 1,
+    "check_artifacts_reachable": 102,
+    "check_tools_reachable": 250,
+    "check_cell_types": 1
   },
   "gates": [
     {
@@ -34,7 +34,7 @@
       "metrics": {
         "missing_declared_maps": 0,
         "duplicate_entries_within_sequence": 0,
-        "undeclared_map_folders": 1870
+        "undeclared_map_folders": 1873
       },
       "enabled": true
     },
@@ -47,8 +47,8 @@
         "missing_scene_path": 0,
         "invalid_biome_token": 0,
         "unsupported_scene_path": 0,
-        "missing_map_ready": 102,
-        "missing_include_in_map_data": 107
+        "missing_map_ready": 109,
+        "missing_include_in_map_data": 133
       },
       "enabled": true
     },
@@ -57,9 +57,9 @@
       "name": "Map Validation",
       "pass": true,
       "metrics": {
-        "grade_A": 2306,
-        "grade_B": 369,
-        "grade_C": 149,
+        "grade_A": 2327,
+        "grade_B": 359,
+        "grade_C": 147,
         "grade_F": 0,
         "max_grade_c": null,
         "grade_c_blocking": false,
@@ -118,7 +118,7 @@
         "stall_events": -1,
         "frontier_z": -1,
         "reason": "contended_builder",
-        "autopilot_says": "autopilot: REFUSED - 1 Godot instance(s) already hold this project (detector=psutil). A second boot either dies on the user:// lock or walks a tree the resident session is still saving into, and its verdict then reads as a fact about the corridor. | pid 38608: C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46 --editor --rendering-driver vulkan",
+        "autopilot_says": "pid 40052: C:\\Users\\palle\\Desktop\\Godot_v4.6-stable_win64.exe --path C:/Users/palle/Documents/GitHub/AdaResearch_46 --remote-debug tcp://127.0.0.1:6007 --editor-pid 14540 --scene res://commons/void/void.tscn --x | pid 44328: C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe --headless --path C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\ada_run\\void-game-test\\run-4f5tvj8w\\source --editor --impor",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -129,10 +129,10 @@
       "pass": true,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 205,
-        "maps_named": 205,
+        "maps_scanned": 209,
+        "maps_named": 209,
         "maps_without_data": "none",
-        "placements": 1461,
+        "placements": 1520,
         "unresolved_placements": 0,
         "unresolved_tokens": "",
         "malformed_empty_cells": 0
@@ -157,14 +157,14 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "edges": 145,
+        "edges": 144,
         "held": 120,
         "near": 3,
-        "lost": 16,
+        "lost": 15,
         "ungrounded": 6,
-        "lost_rooms": "Point_Trace, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Primitives_Melencolia, Array_Patterns, Color_Flashlight, Chamber_Color, Vectors_Act1_WhatAVectorIs, FormFinding_Catenary, FormFinding_Equilibrium, CA_AgentsCircuits, SoftBodies_Playground_of_Joy",
-        "lost_files": "commons/maps/Point_Trace/critical.md, commons/maps/Point_Line_Grid/critical.md, commons/maps/Point_Triangle_Context/critical.md, commons/maps/Primitives_Polythedra/critical.md, commons/maps/Point_Animatedcube/critical.md, commons/maps/Primitives_Ignorance/critical.md, commons/maps/Primitives_Portals/critical.md, commons/maps/Primitives_Melencolia/critical.md, commons/maps/Array_Patterns/critical.md, algorithms/postprocessing/flashlight_demo/flashlight_demo.gd, commons/maps/Chamber_Color/intent.md, commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd, algorithms/wavefunctions/line_builder_3d/cable_builder.gd, commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd, commons/maps/CA_AgentsCircuits/critical.md, commons/maps/SoftBodies_Playground_of_Joy/critical.md",
-        "tree_state": "tracked-clean 5 | tracked-modified 11  [tracked-modified: commons/maps/Point_Trace/critical.md, commons/maps/Point_Animatedcube/critical.md, commons/maps/Primitives_Melencolia/critical.md, commons/maps/Array_Patterns/critical.md]"
+        "lost_rooms": "Point_Trace, Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra, Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Primitives_Melencolia, Array_Patterns, Color_Flashlight, Chamber_Color, Vectors_Act1_WhatAVectorIs, FormFinding_Catenary, FormFinding_Equilibrium, SoftBodies_Playground_of_Joy",
+        "lost_files": "commons/maps/Point_Trace/critical.md, commons/maps/Point_Line_Grid/critical.md, commons/maps/Point_Triangle_Context/critical.md, commons/maps/Primitives_Polythedra/critical.md, commons/maps/Point_Animatedcube/critical.md, commons/maps/Primitives_Ignorance/critical.md, commons/maps/Primitives_Portals/critical.md, commons/maps/Primitives_Melencolia/critical.md, commons/maps/Array_Patterns/critical.md, algorithms/postprocessing/flashlight_demo/flashlight_demo.gd, commons/maps/Chamber_Color/intent.md, commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd, algorithms/wavefunctions/line_builder_3d/cable_builder.gd, commons/artifacts/fractal_truss_tower/fractal_truss_tower.gd, commons/maps/SoftBodies_Playground_of_Joy/critical.md",
+        "tree_state": "tracked-clean 15"
       },
       "enabled": true
     },
@@ -173,11 +173,11 @@
       "name": "Artifact Citations",
       "pass": false,
       "metrics": {
-        "citations": 94,
-        "held": 75,
+        "citations": 93,
+        "held": 73,
         "near": 2,
-        "lost": 16,
-        "elsewhere": 1,
+        "lost": 15,
+        "elsewhere": 3,
         "no_such_work": 0,
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
@@ -189,14 +189,14 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "token_lines": 713,
+        "token_lines": 723,
         "closed_dishonestly": 18,
         "ghost": 0,
         "echo": 18,
         "no_registry": 0,
         "broken_body": 0,
         "hero_ghost": 0,
-        "open_not_counted": "empty 117 · stub 60 · elsewhere 63 · no_body 6 · no_subject 48",
+        "open_not_counted": "empty 117 · stub 62 · elsewhere 82 · no_body 6 · no_subject 48",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -207,19 +207,19 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "rooms_declared": 1017,
-        "rooms_resolved": 937,
-        "prose_files": 1477,
-        "prose_tracked": 1473,
-        "unreachable_from_a_clone": 4,
-        "stranded_words": 1978,
-        "age_reading": "every one of these has lain untouched for over 24h (oldest 237.4h). Nobody is mid-sentence: this is finished writing sitting outside the repository.",
-        "claimed_in_the_forum": 4,
-        "claimed_reading": "4 of 4 claimed in writing by claude-opus-artifacts -- leave those alone. The other 0 are nobody's: no open thread names them.",
-        "claimed_by": "commons/maps/Color_Context_Placed/critical.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d), commons/maps/Color_Context_Placed/field_notes.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d), commons/maps/Color_Context_Placed/final.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d), commons/maps/Color_Context_Placed/technical.md -> claude-opus-artifacts (260909-onegs, 28.8d), claude-chroma (260917-q1h14, 21d), claude-chroma (260917-13jf7, 20.9d)",
-        "unreachable": "commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/technical.md, commons/maps/Color_Context_Placed/critical.md, commons/maps/Color_Context_Placed/field_notes.md",
+        "rooms_declared": 1026,
+        "rooms_resolved": 953,
+        "prose_files": 1520,
+        "prose_tracked": 1519,
+        "unreachable_from_a_clone": 1,
+        "stranded_words": 338,
+        "age_reading": "every one of these has lain untouched for over 24h (oldest 233.8h). Nobody is mid-sentence: this is finished writing sitting outside the repository.",
+        "claimed_in_the_forum": 1,
+        "claimed_reading": "1 of 1 claimed in writing by claude-edges-pilot -- leave those alone. The other 0 are nobody's: no open thread names them.",
+        "claimed_by": "commons/maps/Pattern_Temple/final.md -> claude-edges-pilot (261009-2fany, 10d)",
+        "unreachable": "commons/maps/Pattern_Temple/final.md",
         "declared_case_mismatch": "none",
-        "tree_state": "untracked 4  [untracked: commons/maps/Color_Context_Placed/final.md, commons/maps/Color_Context_Placed/technical.md, commons/maps/Color_Context_Placed/critical.md, commons/maps/Color_Context_Placed/field_notes.md]"
+        "tree_state": "untracked 1  [untracked: commons/maps/Pattern_Temple/final.md]"
       },
       "enabled": true
     },
@@ -229,17 +229,17 @@
       "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "artifacts_declared": 2890,
-        "files_checked": 6406,
-        "unreachable_from_a_clone": 52,
-        "rooms_affected": 82,
-        "absent_from_every_tree": 81,
-        "vendored_not_in_repo": 102,
+        "artifacts_declared": 3167,
+        "files_checked": 7289,
+        "unreachable_from_a_clone": 102,
+        "rooms_affected": 105,
+        "absent_from_every_tree": 84,
+        "vendored_not_in_repo": 121,
         "ignored_on_purpose": 31,
         "live_under_24h": 21,
-        "stranded": 0,
-        "landable_today": 0,
-        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 21 touched within 24h (somebody's open buffer), 0 stranded (0 of them claimed in the forum). Landable by an agent today: 0.",
+        "stranded": 50,
+        "landable_today": 25,
+        "floor_reading": "31 gitignored on purpose (a rule decides them, not a commit), 21 touched within 24h (somebody's open buffer), 50 stranded (25 of them claimed in the forum). Landable by an agent today: 25.",
         "tree_state": "named_subjects 0 - this row cannot be attributed to a tree"
       },
       "enabled": true
@@ -247,51 +247,53 @@
     {
       "id": "N",
       "name": "Tools Reachable From A Clone",
-      "pass": true,
+      "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "tools_on_disk": 1113,
-        "tools_tracked": 1030,
-        "unreachable_from_a_clone": 0,
-        "live_uncommitted": 83,
+        "tools_on_disk": 2338,
+        "tools_tracked": 1327,
+        "unreachable_from_a_clone": 906,
+        "live_uncommitted": 105,
         "ignored_on_purpose": 0,
-        "stranded": "none"
+        "stranded": "tools/align_graph_flow_wall.py (218h), tools/align_graph_matching_wall.py (218h), tools/align_graph_search_order.py (213h), tools/bake_rd_museum_gallery.gd (88h), tools/book_image_filter.gd (75h), tools/build_ada_relations.py (216h), tools/build_catalyst_test_plan.py (166h), tools/build_cellular_spaces.py (138h), tools/build_foundations_launchers.py (175h), tools/build_graph_worlds.py (218h), tools/build_qfep_e_term.py (171h), tools/build_qfep_edge.py (170h), tools/build_qfep_f_term.py (172h), tools/build_qfep_introduction.py (172h), tools/build_qfep_lambda.py (171h), tools/build_qfep_phi.py (171h), tools/build_qfep_sandbox.py (170h), tools/build_qfep_synthesis.py (170h), tools/build_tiling_placement_report.py (237h), tools/build_vogue_timeline.py (193h), tools/capture_swarm_artifact_gallery.py (209h), tools/check_ada_atlas.py (215h), tools/check_randomness_entries.py (240h), tools/check_randomness_review.py (241h), tools/clarify_soft_bodies_handoffs.py (232h), tools/collect_swarm_readings.py (208h), tools/configure_shader_pink_setting.py (211h), tools/configure_shader_state_setting.py (211h), tools/configure_shader_water_setting.py (212h), tools/defer_randomness_ladder.py (241h), tools/fix_procedural_placements.py (240h), tools/install_cellular_noise_maps.py (136h), tools/install_entropy_sorting_table.py (72h), tools/install_fuzzy_body.py (236h), tools/install_fuzzy_doorway.py (236h), tools/install_geometry_noise.py (247h), tools/install_model_disagreement.py (238h), tools/install_navigator_noise.py (245h), tools/install_noneuclidean_wing.py (184h), tools/install_ordinary_entropies.py (73h), tools/install_pendulum_noise.py (246h), tools/museum_connections.py (184h), tools/museum_memory.py (184h), tools/museum_placement_status.py (239h), tools/package_tiling_review.py (232h), tools/place_abm_state_table.py (191h), tools/place_affect_court.py (234h), tools/place_ant_scale_atlas.py (194h), tools/place_boids_lens.py (192h), tools/place_contact_desk.py (236h), tools/place_flow_field_painter.py (193h), tools/place_flow_room.py (192h), tools/place_graph_connectivity.py (219h), tools/place_graph_flow.py (218h), tools/place_graph_foundations.py (222h), tools/place_graph_layout.py (221h), tools/place_graph_network.py (220h), tools/place_graph_pathfinding.py (220h), tools/place_graph_spanning.py (218h), tools/place_morphogenesis_desk.py (233h), tools/place_physarum_trace_gallery.py (194h), tools/place_rd_museum_gallery.py (88h), tools/place_reaction_desk.py (234h), tools/place_sampling_desk.py (236h), tools/place_sampling_gallery.py (235h), tools/place_snapshot_examples.py (235h), tools/place_swarm_account.py (210h), tools/place_swarm_aco.py (210h), tools/place_swarm_pso.py (210h), tools/place_tiling_studies.py (237h), tools/prepare_architecture_passage.py (246h), tools/prepare_competition_turns.py (246h), tools/prepare_curves_reader_review.py (246h), tools/prepare_graph_network_publisher.py (219h), tools/prepare_graph_pathfinding_publisher.py (220h), tools/prepare_growth_branch_review.py (247h), tools/prepare_navigator_noise.py (246h), tools/prepare_qfep_e_support.py (171h), tools/prepare_qfep_lambda_support.py (171h), tools/prepare_swarm_fresh_ghost.py (187h), tools/probes/abm_table_before.gd (191h), tools/probes/abm_table_museum.gd (191h), tools/probes/abm_table_portals.gd (191h), tools/probes/account_hand_before.gd (190h), tools/probes/account_hand_museum.gd (190h), tools/probes/account_hand_portals.gd (190h), tools/probes/affect_room.gd (234h), tools/probes/affect_student.gd (234h), tools/probes/ant_gallery_capture.gd (195h), tools/probes/ant_scale_checks.gd (194h), tools/probes/ant_scale_museum.gd (195h), tools/probes/ant_v2_museum.gd (194h), tools/probes/architecture_passage_before.gd (246h), tools/probes/architecture_passage_lesson.gd (246h), tools/probes/architecture_passage_room.gd (246h), tools/probes/architecture_spine.gd (240h), tools/probes/architecture_variations.gd (240h), tools/probes/assemblage_choices_before.gd (244h), tools/probes/assemblage_choices_lesson.gd (244h), tools/probes/assemblage_choices_room.gd (244h), tools/probes/bake_sampling_gallery.gd (235h), tools/probes/biome_change.gd (142h), tools/probes/biome_colour_floor.gd (142h), tools/probes/biome_consistency.gd (142h), tools/probes/biome_ladder.gd (144h), tools/probes/biome_ladder_arrays.gd (142h), tools/probes/biome_ladder_arrays_review.gd (143h), tools/probes/biome_ladder_cover.gd (148h), tools/probes/biome_ladder_entry.gd (151h), tools/probes/biome_ladder_roundtrip.gd (151h), tools/probes/biome_ladder_route.gd (143h), tools/probes/biome_ladder_six_review.gd (142h), tools/probes/biome_ladder_skull_hits.gd (146h), tools/probes/biome_primitives_cover.gd (149h), tools/probes/biome_tiling_feedback.gd (144h), tools/probes/biome_tiling_floor.gd (144h), tools/probes/biome_transform_tiles.gd (148h), tools/probes/biome_transformation_cover.gd (148h), tools/probes/boids_balcony.gd (211h), tools/probes/boids_lens_before.gd (192h), tools/probes/boids_lens_checks.gd (192h), tools/probes/boids_lens_museum.gd (192h), tools/probes/boids_lens_portals.gd (192h), tools/probes/branching_place_before.gd (243h), tools/probes/branching_place_lesson.gd (243h), tools/probes/branching_place_room.gd (243h), tools/probes/camera_glitch_controls.gd (241h), tools/probes/camera_glitch_gpu.gd (244h), tools/probes/camera_glitch_room.gd (244h), tools/probes/camera_glitch_test.gd (244h), tools/probes/camera_pixels_gpu.gd (244h), tools/probes/camera_pixels_room.gd (244h), tools/probes/carousel_lesson.gd (238h), tools/probes/carousel_room.gd (238h), tools/probes/catalyst_combat.gd (163h), tools/probes/catalyst_counterpart.gd (167h), tools/probes/catalyst_first_abilities.gd (167h), tools/probes/catalyst_load_check.gd (162h), tools/probes/catalyst_opening_progression.gd (166h), tools/probes/catalyst_test_arena.gd (166h), tools/probes/catalyst_trial_boot.gd (167h), tools/probes/caves_room_before.gd (242h), tools/probes/caves_room_lesson.gd (242h), tools/probes/caves_room_museum.gd (242h), tools/probes/cellular_noise_maps_test.gd (136h), tools/probes/cellular_spaces_test.gd (139h), tools/probes/cloth_boundary_lesson.gd (238h), tools/probes/cloth_boundary_room.gd (238h), tools/probes/cloth_record_regression.gd (46h), tools/probes/colonization_answer_before.gd (243h), tools/probes/colonization_answer_lesson.gd (243h), tools/probes/colonization_answer_room.gd (243h), tools/probes/colony_hand_before.gd (191h), tools/probes/colony_hand_museum.gd (191h), tools/probes/colony_hand_portals.gd (191h), tools/probes/column_forest.gd (175h), tools/probes/competition_turns_before.gd (246h), tools/probes/competition_turns_lesson.gd (245h), tools/probes/competition_turns_room.gd (245h), tools/probes/contact_lesson.gd (236h), tools/probes/contact_room.gd (236h), tools/probes/corner_rooms.gd (184h), tools/probes/curtain_walkway.gd (237h), tools/probes/curves_reader_before.gd (246h), tools/probes/curves_reader_lesson.gd (246h), tools/probes/curves_reader_room.gd (246h), tools/probes/desktop_biome_catalyst.gd (147h), tools/probes/drone_comparison_checks.gd (206h), tools/probes/drone_comparison_museum.gd (206h), tools/probes/euclid_lesson_museum.gd (186h), tools/probes/euclid_lesson_test.gd (186h), tools/probes/euler_step_room.gd (245h), tools/probes/euler_step_test.gd (148h), tools/probes/evolution_score_before.gd (244h), tools/probes/evolution_score_lesson.gd (244h), tools/probes/evolution_score_room.gd (244h), tools/probes/first_catalyst.gd (163h), tools/probes/fish_school_checks.gd (207h), tools/probes/fish_school_museum.gd (207h), tools/probes/flow_crowd_checks.gd (195h), tools/probes/flow_crowd_museum.gd (195h), tools/probes/flow_painter_checks.gd (193h), tools/probes/flow_painter_museum.gd (193h), tools/probes/flow_room_after.gd (193h), tools/probes/flow_room_before.gd (193h), tools/probes/flow_room_portals.gd (192h), tools/probes/foundations_reconstruction_museum.gd (175h), tools/probes/foundations_student.gd (175h), tools/probes/foundations_surface_museum.gd (184h), tools/probes/fuzzy_body_museum.gd (236h), tools/probes/fuzzy_doorway_museum.gd (236h), tools/probes/garment_dresses_museum.gd (215h), tools/probes/garment_dresses_test.gd (46h), tools/probes/garment_tailor_museum.gd (216h), tools/probes/garment_tailor_test.gd (216h), tools/probes/garment_vr_player_test.gd (215h), tools/probes/geometry_noise_room.gd (247h), tools/probes/geometry_noise_test.gd (247h), tools/probes/geometry_seed_controls.gd (243h), tools/probes/glitch_console_smoke.gd (243h), tools/probes/graph_connectivity_room.gd (219h), tools/probes/graph_connectivity_student.gd (219h), tools/probes/graph_flow_room.gd (218h), tools/probes/graph_flow_student.gd (218h), tools/probes/graph_foundations_room.gd (222h), tools/probes/graph_foundations_student.gd (222h), tools/probes/graph_layout_room.gd (221h), tools/probes/graph_layout_student.gd (221h), tools/probes/graph_matching_room.gd (218h), tools/probes/graph_matching_student.gd (218h), tools/probes/graph_network_room.gd (219h), tools/probes/graph_network_student.gd (219h), tools/probes/graph_pathfinding_room.gd (220h), tools/probes/graph_pathfinding_student.gd (214h), tools/probes/graph_search_room.gd (213h), tools/probes/graph_spanning_room.gd (218h), tools/probes/graph_spanning_student.gd (218h), tools/probes/growth_branch_before.gd (247h), tools/probes/growth_branch_lesson.gd (247h), tools/probes/growth_branch_room.gd (247h), tools/probes/head_arena_menu.gd (163h), tools/probes/height_learning_museum.gd (195h), tools/probes/height_learning_test.gd (194h), tools/probes/jacquard_museum_test.gd (216h), tools/probes/jacquard_samples_test.gd (216h), tools/probes/jacquard_weaver_test.gd (216h), tools/probes/labyrinth.gd (175h), tools/probes/listening_horde_checks.gd (207h), tools/probes/listening_horde_museum.gd (207h), tools/probes/living_design_before.gd (245h), tools/probes/living_design_lesson.gd (245h), tools/probes/living_design_room.gd (245h), tools/probes/lsystems_ghost_museum.gd (240h), tools/probes/lsystems_ghost_variation.gd (240h), tools/probes/lsystems_review_variation.gd (241h), tools/probes/melencolia_counterpart.gd (167h), tools/probes/mirrored_copy_before.gd (242h), tools/probes/mirrored_copy_lesson.gd (242h), tools/probes/mirrored_copy_room.gd (242h), tools/probes/ml_classification_lesson_museum.gd (189h), tools/probes/ml_classification_lesson_test.gd (189h), tools/probes/ml_evolution_lesson_museum.gd (186h), tools/probes/ml_evolution_lesson_test.gd (190h), tools/probes/ml_feedback_artifacts_test.gd (186h), tools/probes/ml_generative_lesson_museum.gd (191h), tools/probes/ml_generative_lesson_test.gd (186h), tools/probes/ml_gradient_lesson_museum.gd (186h), tools/probes/ml_gradient_lesson_test.gd (187h), tools/probes/ml_learning_spaces.gd (193h), tools/probes/ml_network_lesson_museum.gd (186h), tools/probes/ml_network_lesson_test.gd (188h), tools/probes/ml_perception_large.gd (193h), tools/probes/ml_pose_lesson_museum.gd (192h), tools/probes/ml_pose_lesson_test.gd (192h), tools/probes/ml_sequence_handoff_test.gd (186h), tools/probes/ml_sequence_lesson_museum.gd (191h), tools/probes/ml_sequence_lesson_test.gd (191h), tools/probes/ml_spaces_before.gd (193h), tools/probes/ml_synthesis_lesson_museum.gd (190h), tools/probes/ml_synthesis_lesson_test.gd (191h), tools/probes/model_disagreement.gd (238h), tools/probes/model_disagreement_museum.gd (238h), tools/probes/model_gallery_access.gd (238h), tools/probes/model_overflow.gd (239h), tools/probes/morphogenesis_room.gd (233h), tools/probes/morphogenesis_student.gd (233h), tools/probes/movement_fixture.gd (194h), tools/probes/movement_learning_museum.gd (194h), tools/probes/movement_learning_test.gd (194h), tools/probes/museum_runner_xr_input.gd (24h), tools/probes/navigator_noise_room.gd (245h), tools/probes/navigator_noise_test.gd (245h), tools/probes/noise_columns_room.gd (239h), tools/probes/noise_columns_student.gd (239h), tools/probes/noise_opening_room.gd (239h), tools/probes/noise_opening_student.gd (239h), tools/probes/noneuclid_lesson_museum.gd (186h), tools/probes/noneuclid_lesson_test.gd (186h), tools/probes/noneuclidean_wing.gd (184h), tools/probes/overlapping_rooms.gd (184h), tools/probes/pendulum_noise_room.gd (246h), tools/probes/pendulum_noise_test.gd (246h), tools/probes/percolation_contact_before.gd (243h), tools/probes/percolation_contact_lesson.gd (243h), tools/probes/percolation_contact_room.gd (243h), tools/probes/perspective_corridor.gd (176h), tools/probes/pg_review_passages.gd (240h), tools/probes/pg_review_walkthrough.gd (240h), tools/probes/phrase_check_museum.gd (193h), tools/probes/phrase_check_test.gd (193h), tools/probes/phrase_library_museum.gd (194h), tools/probes/phrase_library_test.gd (194h), tools/probes/physarum_trace_checks.gd (194h), tools/probes/physarum_trace_museum.gd (194h), tools/probes/pivot_body.gd (241h), tools/probes/pivot_preview.gd (241h), tools/probes/pivot_smoke.gd (241h), tools/probes/player_costume_gallery.gd (215h), tools/probes/pose_learning_museum.gd (195h), tools/probes/pose_learning_test.gd (194h), tools/probes/postcrisis_museum.gd (173h), tools/probes/postcrisis_student.gd (173h), tools/probes/pressure_lesson.gd (237h), tools/probes/pressure_room.gd (237h), tools/probes/pso_hand_before.gd (190h), tools/probes/pso_hand_museum.gd (190h), tools/probes/pso_hand_portals.gd (190h), tools/probes/qfep_e_discovery.gd (171h), tools/probes/qfep_e_museum.gd (171h), tools/probes/qfep_e_student.gd (171h), tools/probes/qfep_edge_discovery.gd (170h), tools/probes/qfep_edge_museum.gd (170h), tools/probes/qfep_edge_student.gd (170h), tools/probes/qfep_f_discovery.gd (172h), tools/probes/qfep_f_museum.gd (172h), tools/probes/qfep_f_student.gd (172h), tools/probes/qfep_introduction_discovery.gd (172h), tools/probes/qfep_introduction_museum.gd (172h), tools/probes/qfep_introduction_student.gd (172h), tools/probes/qfep_lambda_discovery.gd (171h), tools/probes/qfep_lambda_museum.gd (171h), tools/probes/qfep_lambda_student.gd (171h), tools/probes/qfep_phi_discovery.gd (171h), tools/probes/qfep_phi_museum.gd (171h), tools/probes/qfep_phi_student.gd (171h), tools/probes/qfep_sandbox_discovery.gd (170h), tools/probes/qfep_sandbox_museum.gd (170h), tools/probes/qfep_sandbox_student.gd (170h), tools/probes/qfep_synthesis_museum.gd (170h), tools/probes/qfep_synthesis_placement.gd (170h), tools/probes/qfep_synthesis_student.gd (170h), tools/probes/random_cubes_museum.gd (245h), tools/probes/random_cubes_student.gd (245h), tools/probes/random_entropy_museum.gd (247h), tools/probes/random_entropy_student.gd (247h), tools/probes/random_examples_museum.gd (243h), tools/probes/random_examples_student.gd (243h), tools/probes/random_game_before.gd (242h), tools/probes/random_game_museum.gd (242h), tools/probes/random_game_student.gd (242h), tools/probes/random_gaussian_museum.gd (244h), tools/probes/random_gaussian_student.gd (244h), tools/probes/random_geometry_student.gd (244h), tools/probes/random_mushrooms_museum.gd (244h), tools/probes/random_mushrooms_student.gd (244h), tools/probes/random_pheromone_museum.gd (242h), tools/probes/random_pheromone_student.gd (243h), tools/probes/random_remove_museum.gd (246h), tools/probes/random_remove_student.gd (246h), tools/probes/random_rotate_museum.gd (245h), tools/probes/random_rotate_student.gd (245h), tools/probes/random_space_before.gd (242h), tools/probes/random_space_exit.gd (240h), tools/probes/random_space_geometry_museum.gd (244h), tools/probes/random_space_museum.gd (242h), tools/probes/random_space_passage.gd (240h), tools/probes/random_space_student.gd (242h), tools/probes/random_walk_museum.gd (244h), tools/probes/random_walk_student.gd (244h), tools/probes/randomness_entries.gd (240h), tools/probes/randomness_ghost_transfer.gd (240h), tools/probes/rd_gallery_room.gd (88h), tools/probes/reaction_room.gd (234h), tools/probes/reaction_student.gd (234h), tools/probes/record_reading_before.gd (241h), tools/probes/record_reading_core.gd (241h), tools/probes/record_reading_room.gd (241h), tools/probes/repeating_gallery.gd (175h), tools/probes/sample_budget_room.gd (243h), tools/probes/sample_budget_test.gd (243h), tools/probes/sampling_gallery_room.gd (235h), tools/probes/sampling_lesson.gd (236h), tools/probes/sampling_room.gd (236h), tools/probes/sculpted_sample_before.gd (242h), tools/probes/sculpted_sample_lesson.gd (242h), tools/probes/sculpted_sample_room.gd (242h), tools/probes/seed_matrix_museum.gd (246h), tools/probes/shader_materials_lesson_museum.gd (210h), tools/probes/shader_materials_museum.gd (213h), tools/probes/shader_materials_student.gd (210h), tools/probes/shader_patterns_lesson_museum.gd (210h), tools/probes/shader_patterns_museum.gd (213h), tools/probes/shader_patterns_student.gd (210h), tools/probes/shader_pink_lesson_museum.gd (209h), tools/probes/shader_pink_museum.gd (211h), tools/probes/shader_pink_student.gd (209h), tools/probes/shader_shaping_lesson_museum.gd (210h), tools/probes/shader_shaping_museum.gd (214h), tools/probes/shader_shaping_student.gd (211h), tools/probes/shader_state_field.gd (211h), tools/probes/shader_state_lesson_museum.gd (209h), tools/probes/shader_state_museum.gd (211h), tools/probes/shader_state_student.gd (209h), tools/probes/shader_water_floaters.gd (209h), tools/probes/shader_water_lesson_museum.gd (210h), tools/probes/shader_water_museum.gd (212h), tools/probes/shader_water_student.gd (210h), tools/probes/shape_family_before.gd (245h), tools/probes/shape_family_lesson.gd (245h), tools/probes/shape_family_room.gd (244h), tools/probes/snapshot_examples.gd (235h), tools/probes/soft_three_attachments.gd (232h), tools/probes/soft_yield_lesson.gd (239h), tools/probes/soft_yield_room.gd (239h), tools/probes/strand_dynamics_checks.gd (136h), tools/probes/swarm_abm_before.gd (211h), tools/probes/swarm_abm_room.gd (211h), tools/probes/swarm_abm_student.gd (211h), tools/probes/swarm_account_before.gd (210h), tools/probes/swarm_account_room.gd (210h), tools/probes/swarm_account_student.gd (210h), tools/probes/swarm_aco_before.gd (210h), tools/probes/swarm_aco_room.gd (210h), tools/probes/swarm_aco_student.gd (210h), tools/probes/swarm_appearance_checks.gd (196h), tools/probes/swarm_appearance_museum.gd (196h), tools/probes/swarm_artifact_gallery.gd (209h), tools/probes/swarm_boids_room.gd (211h), tools/probes/swarm_boids_student.gd (211h), tools/probes/swarm_flow_room.gd (212h), tools/probes/swarm_flow_student.gd (213h), tools/probes/swarm_ghost_ridge_museum.gd (208h), tools/probes/swarm_ghost_transfer.gd (208h), tools/probes/swarm_library_gallery.gd (209h), tools/probes/swarm_physarum_room.gd (213h), tools/probes/swarm_physarum_student.gd (213h), tools/probes/swarm_pso_before.gd (210h), tools/probes/swarm_pso_room.gd (210h), tools/probes/swarm_pso_student.gd (210h), tools/probes/ten_print_museum.gd (246h), tools/probes/ten_print_student.gd (246h), tools/probes/thread_loom_museum.gd (233h), tools/probes/thread_loom_test.gd (233h), tools/probes/tiling_disco_room.gd (239h), tools/probes/tiling_disco_student.gd (239h), tools/probes/tiling_foundry_room.gd (238h), tools/probes/tiling_foundry_student.gd (238h), tools/probes/tiling_ghost_transfer.gd (232h), tools/probes/tiling_pattern_room.gd (237h), tools/probes/tiling_pattern_student.gd (237h), tools/probes/tiling_placement.gd (237h), tools/probes/tiling_ribbon01_room.gd (235h), tools/probes/tiling_ribbon01_student.gd (235h), tools/probes/tiling_ribbon02_room.gd (235h), tools/probes/tiling_ribbon02_student.gd (235h), tools/probes/tiling_ribbon03_room.gd (235h), tools/probes/tiling_ribbon03_student.gd (235h), tools/probes/tiling_surface_room.gd (236h), tools/probes/tiling_surface_student.gd (236h), tools/probes/tiling_symmetry_room.gd (236h), tools/probes/tiling_symmetry_student.gd (236h), tools/probes/tiling_temple_room.gd (236h), tools/probes/tiling_temple_student.gd (236h), tools/probes/vogue_museum.gd (196h), tools/probes/vogue_timeline_test.gd (196h), tools/probes/void_floor_editor_probe.gd (25h), tools/probes/void_layout_probe.gd (28h), tools/probes/void_web_editor_probe.gd (24h), tools/probes/voronoi_strands_test.gd (136h), tools/publish_abm_state_table.py (191h), tools/publish_account_hand.py (190h), tools/publish_ada_atlas.py (215h), tools/publish_affect_lesson.py (234h), tools/publish_ai_critical_thread.py (207h), tools/publish_ant_gallery.py (195h), tools/publish_ant_scale_atlas.py (194h), tools/publish_architecture_passage.py (246h), tools/publish_architecture_spine.py (239h), tools/publish_architecture_variations.py (239h), tools/publish_assemblage_choices.py (244h), tools/publish_biome_arrays.py (144h), tools/publish_biome_change.py (142h), tools/publish_biome_consistency.py (142h), tools/publish_biome_ladder_play.py (143h), tools/publish_biome_scaffold.py (143h), tools/publish_boids_balcony.py (211h), tools/publish_boids_lens.py (192h), tools/publish_branching_place.py (243h), tools/publish_ca_current_pass.py (207h), tools/publish_camera_glitch.py (244h), tools/publish_camera_pixels.py (244h), tools/publish_carousel_lesson.py (238h), tools/publish_caves_room.py (242h), tools/publish_cloth_boundary.py (238h), tools/publish_colonization_answer.py (243h), tools/publish_colony_hand.py (191h), tools/publish_column_forest.py (175h), tools/publish_competition_turns.py (245h), tools/publish_contact_lesson.py (236h), tools/publish_corner_rooms.py (184h), tools/publish_curtain_walkway.py (237h), tools/publish_curves_reader_lesson.py (246h), tools/publish_drone_comparison.py (206h), tools/publish_euclid_lesson.py (186h), tools/publish_euler_step.py (245h), tools/publish_evolution_score.py (244h), tools/publish_fish_school.py (207h), tools/publish_flow_crowd.py (195h), tools/publish_flow_direction_table.py (193h), tools/publish_flow_room.py (192h), tools/publish_foundations_reconstruction.py (175h), tools/publish_fuzzy_body.py (236h), tools/publish_fuzzy_doorway.py (236h), tools/publish_garment_dresses_review.py (215h), tools/publish_garment_tailor_review.py (215h), tools/publish_geometry_noise.py (247h), tools/publish_glitch_controls.py (243h), tools/publish_graph_connectivity.py (219h), tools/publish_graph_flow.py (218h), tools/publish_graph_foundations.py (222h), tools/publish_graph_layout.py (221h), tools/publish_graph_matching.py (216h), tools/publish_graph_network.py (219h), tools/publish_graph_pathfinding.py (220h), tools/publish_graph_search.py (213h), tools/publish_graph_spanning.py (218h), tools/publish_growth_branch_lesson.py (247h), tools/publish_height_learning.py (194h), tools/publish_jacquard_chain.py (218h), tools/publish_jacquard_optical.py (216h), tools/publish_jacquard_review.py (219h), tools/publish_jacquard_samples.py (217h), tools/publish_labyrinth.py (175h), tools/publish_listening_horde.py (207h), tools/publish_living_design.py (245h), tools/publish_loom_blog.py (218h), tools/publish_lsystems_complete.py (240h), tools/publish_lsystems_ghost_student.py (240h), tools/publish_mirrored_copy.py (242h), tools/publish_ml_classification_lesson.py (189h), tools/publish_ml_evolution_lesson.py (190h), tools/publish_ml_feedback.py (186h), tools/publish_ml_generative_lesson.py (191h), tools/publish_ml_gradient_lesson.py (186h), tools/publish_ml_learning_spaces.py (193h), tools/publish_ml_network_lesson.py (188h), tools/publish_ml_pose_lesson.py (192h), tools/publish_ml_sequence_lesson.py (191h), tools/publish_ml_sequence_review.py (186h), tools/publish_ml_synthesis_lesson.py (190h), tools/publish_model_disagreement.py (238h), tools/publish_model_disagreement_museum.py (238h), tools/publish_model_overflow.py (239h), tools/publish_morphogenesis_lesson.py (233h), tools/publish_movement_learning.py (194h), tools/publish_navigator_noise.py (245h), tools/publish_noise_columns.py (239h), tools/publish_noise_opening.py (239h), tools/publish_noneuclid_lesson.py (186h), tools/publish_noneuclid_research.py (185h), tools/publish_noneuclidean_wing.py (185h), tools/publish_overlapping_rooms.py (184h), tools/publish_pendulum_noise.py (246h), tools/publish_percolation_contact.py (243h), tools/publish_perspective_corridor.py (175h), tools/publish_phrase_check.py (193h), tools/publish_phrase_library.py (194h), tools/publish_physarum_trace_gallery.py (194h), tools/publish_pivot_creature.py (239h), tools/publish_player_costume_gallery.py (215h), tools/publish_pose_learning.py (195h), tools/publish_postcrisis_reconstruction.py (172h), tools/publish_pressure_lesson.py (237h), tools/publish_procedural_complete.py (240h), tools/publish_procedural_revision.py (240h), tools/publish_pso_hand.py (190h), tools/publish_qfep_e_term.py (171h), tools/publish_qfep_edge.py (170h), tools/publish_qfep_f_term.py (172h), tools/publish_qfep_introduction.py (172h), tools/publish_qfep_lambda.py (171h), tools/publish_qfep_phi.py (171h), tools/publish_qfep_sandbox.py (170h), tools/publish_qfep_synthesis.py (170h), tools/publish_random_cubes_lesson.py (245h), tools/publish_random_entropy_lesson.py (247h), tools/publish_random_examples_lesson.py (243h), tools/publish_random_game_lesson.py (242h), tools/publish_random_gaussian_lesson.py (244h), tools/publish_random_geometry_lesson.py (244h), tools/publish_random_mushrooms_lesson.py (244h), tools/publish_random_pheromone_lesson.py (242h), tools/publish_random_remove_lesson.py (246h), tools/publish_random_rotate_lesson.py (245h), tools/publish_random_space_exit.py (240h), tools/publish_random_space_lesson.py (242h), tools/publish_random_walk_lesson.py (244h), tools/publish_randomness_ghost.py (240h), tools/publish_randomness_reading.py (241h), tools/publish_randomness_review_ready.py (241h), tools/publish_rd_museum_gallery.py (88h), tools/publish_reaction_lesson.py (233h), tools/publish_record_reading.py (241h), tools/publish_repeating_gallery.py (175h), tools/publish_russell_focus.py (174h), tools/publish_sample_budget.py (243h), tools/publish_sampling_examples.py (235h), tools/publish_sampling_lesson.py (236h), tools/publish_sculpted_sample.py (242h), tools/publish_seed_matrix_size.py (246h), tools/publish_shader_ghost_student.py (208h), tools/publish_shader_materials_lesson.py (210h), tools/publish_shader_materials_setting.py (213h), tools/publish_shader_pattern_gallery.py (220h), tools/publish_shader_pattern_survey.py (222h), tools/publish_shader_patterns_lesson.py (210h), tools/publish_shader_patterns_setting.py (213h), tools/publish_shader_pink_lesson.py (209h), tools/publish_shader_pink_setting.py (211h), tools/publish_shader_sequence_reading.py (208h), tools/publish_shader_settings_plan.py (215h), tools/publish_shader_shaping_lesson.py (210h), tools/publish_shader_shaping_setting.py (214h), tools/publish_shader_state_lesson.py (209h), tools/publish_shader_state_setting.py (211h), tools/publish_shader_water_lesson.py (210h), tools/publish_shader_water_setting.py (212h), tools/publish_shape_family.py (244h), tools/publish_soft_bodies_blog.py (232h), tools/publish_soft_ghost_rerun.py (232h), tools/publish_soft_sequence_readings.py (232h), tools/publish_soft_yield.py (239h), tools/publish_spatial_route.py (174h), tools/publish_swarm_abm.py (211h), tools/publish_swarm_account.py (209h), tools/publish_swarm_aco.py (209h), tools/publish_swarm_appearance.py (196h), tools/publish_swarm_artifact_gallery.py (209h), tools/publish_swarm_boids.py (209h), tools/publish_swarm_contexts.py (208h), tools/publish_swarm_feedback.py (208h), tools/publish_swarm_flow.py (212h), tools/publish_swarm_fresh_ghost.py (186h), tools/publish_swarm_ghost_student.py (208h), tools/publish_swarm_physarum.py (213h), tools/publish_swarm_pso.py (209h), tools/publish_swarm_sequence_review.py (208h), tools/publish_swarm_tightened_readings.py (189h), tools/publish_ten_print_lesson.py (246h), tools/publish_thread_loom.py (232h), tools/publish_tiling_cards_and_cloth.py (217h), tools/publish_tiling_disco.py (239h), tools/publish_tiling_distinctions.py (234h), tools/publish_tiling_feedback.py (232h), tools/publish_tiling_foundry.py (238h), tools/publish_tiling_ghost_student.py (232h), tools/publish_tiling_making_and_wearing.py (232h), tools/publish_tiling_optical_cloth.py (216h), tools/publish_tiling_pattern.py (237h), tools/publish_tiling_ribbon01.py (235h), tools/publish_tiling_ribbon02.py (235h), tools/publish_tiling_ribbon03.py (235h), tools/publish_tiling_surface.py (236h), tools/publish_tiling_symmetry.py (236h), tools/publish_tiling_temple.py (236h), tools/publish_vogue_timeline.py (196h), tools/record_ca_review_completion.py (207h), tools/refresh_carousel_curtain_view.py (236h), tools/repair_ant_capture_receipts.py (194h), tools/review_ca_current_halls.py (207h), tools/review_ml_sequence.py (186h), tools/revise_ca_current_reading.py (207h), tools/revise_foundations_reflections.py (184h), tools/revise_noise_columns.py (239h), tools/revise_noise_opening.py (239h), tools/revise_procedural_readings.py (240h), tools/revise_random_cubes_lesson.py (245h), tools/revise_random_entropy.py (90h), tools/revise_random_examples_lesson.py (243h), tools/revise_random_game_lesson.py (241h), tools/revise_random_gaussian_lesson.py (244h), tools/revise_random_geometry_lesson.py (244h), tools/revise_random_mushrooms_lesson.py (244h), tools/revise_random_pheromone_lesson.py (242h), tools/revise_random_remove.py (246h), tools/revise_random_rotate_lesson.py (245h), tools/revise_random_space_lesson.py (242h), tools/revise_random_walk_lesson.py (244h), tools/revise_shader_materials.py (210h), tools/revise_shader_patterns.py (210h), tools/revise_shader_pink_lesson.py (209h), tools/revise_shader_sequence_reading.py (208h), tools/revise_shader_shaping.py (211h), tools/revise_shader_state_lesson.py (209h), tools/revise_shader_water_lesson.py (210h), tools/revise_ten_print_lesson.py (246h), tools/revise_tiling_disco.py (239h), tools/revise_tiling_foundry.py (238h), tools/revise_tiling_pattern.py (237h), tools/revise_tiling_ribbon01.py (236h), tools/revise_tiling_ribbon02.py (235h), tools/revise_tiling_ribbon03.py (235h), tools/revise_tiling_surface.py (236h), tools/revise_tiling_symmetry.py (236h), tools/revise_tiling_temple.py (236h), tools/run_foundations_rooms.py (184h), tools/run_garment_dresses_review.py (215h), tools/run_garment_tailor_review.py (216h), tools/run_garment_vr_player_test.py (215h), tools/run_jacquard_review.py (216h), tools/run_player_costume_gallery.py (215h), tools/run_postcrisis_rooms.py (173h), tools/run_randomness_ghost_student.py (148h), tools/run_swarm_ghost_student.py (208h), tools/seat_swarm_boids.py (211h), tools/seat_swarm_flow.py (212h), tools/seat_swarm_physarum.py (213h), tools/shader_pattern_principles.py (220h), tools/start_affect_lesson.py (234h), tools/start_graph_connectivity.py (219h), tools/start_graph_flow.py (218h), tools/start_graph_layout.py (221h), tools/start_graph_network.py (220h), tools/start_graph_pathfinding.py (220h), tools/start_graph_spanning.py (218h), tools/start_morphogenesis_lesson.py (233h), tools/start_reaction_lesson.py (234h), tools/start_sampling_lesson.py (236h), tools/student_lesson_sources.py (148h), tools/survey_tiling_placement.py (237h), tools/test_affect_lesson.py (234h), tools/test_architecture_passage.py (246h), tools/test_architecture_variations.py (240h), tools/test_assemblage_choices.py (244h), tools/test_branching_place.py (243h), tools/test_camera_glitch.py (244h), tools/test_camera_pixels.py (244h), tools/test_carousel_lesson.py (238h), tools/test_catalyst_first_abilities.py (163h), tools/test_caves_room.py (242h), tools/test_cellular_spaces.py (138h), tools/test_cloth_boundary.py (238h), tools/test_colonization_answer.py (243h), tools/test_competition_turns.py (245h), tools/test_contact_lesson.py (236h), tools/test_curves_reader_lesson.py (246h), tools/test_euclid_lesson.py (186h), tools/test_euler_printed.py (245h), tools/test_euler_step.py (245h), tools/test_evolution_score.py (244h), tools/test_foundations_reconstruction.py (175h), tools/test_geometry_noise.py (247h), tools/test_graph_connectivity.py (219h), tools/test_graph_flow.py (218h), tools/test_graph_foundations.py (222h), tools/test_graph_layout.py (221h), tools/test_graph_matching.py (218h), tools/test_graph_network.py (220h), tools/test_graph_pathfinding.py (214h), tools/test_graph_spanning.py (218h), tools/test_growth_branch_lesson.py (247h), tools/test_height_learning.py (195h), tools/test_living_design.py (245h), tools/test_lsystems_ghost_student.py (240h), tools/test_lsystems_ghost_variation.py (240h), tools/test_lsystems_review_variation.py (241h), tools/test_mirrored_copy.py (242h), tools/test_ml_classification_lesson.py (189h), tools/test_ml_evolution_lesson.py (190h), tools/test_ml_feedback_artifacts.py (186h), tools/test_ml_generative_lesson.py (191h), tools/test_ml_gradient_lesson.py (189h), tools/test_ml_network_lesson.py (188h), tools/test_ml_pose_lesson.py (192h), tools/test_ml_sequence_lesson.py (192h), tools/test_ml_synthesis_lesson.py (191h), tools/test_model_disagreement.py (238h), tools/test_model_overflow.py (239h), tools/test_morphogenesis_lesson.py (233h), tools/test_movement_learning.py (194h), tools/test_navigator_noise.py (246h), tools/test_navigator_printed.py (245h), tools/test_noise_columns.py (239h), tools/test_noise_opening.py (239h), tools/test_noise_space_maps.py (136h), tools/test_noneuclid_lesson.py (186h), tools/test_noneuclid_research.py (185h), tools/test_packaged_museum.py (76h), tools/test_pendulum_noise.py (246h), tools/test_percolation_contact.py (243h), tools/test_phrase_check.py (193h), tools/test_phrase_library.py (194h), tools/test_pose_learning.py (195h), tools/test_postcrisis_reconstruction.py (173h), tools/test_pressure_lesson.py (237h), tools/test_procedural_sequence.py (240h), tools/test_qfep_e_term.py (171h), tools/test_qfep_edge.py (170h), tools/test_qfep_f_term.py (172h), tools/test_qfep_introduction.py (172h), tools/test_qfep_lambda.py (171h), tools/test_qfep_phi.py (171h), tools/test_qfep_sandbox.py (170h), tools/test_qfep_synthesis.py (170h), tools/test_random_cubes_lesson.py (245h), tools/test_random_entropy_lesson.py (90h), tools/test_random_examples_lesson.py (243h), tools/test_random_game_lesson.py (242h), tools/test_random_gaussian_lesson.py (244h), tools/test_random_geometry_lesson.py (244h), tools/test_random_mushrooms_lesson.py (244h), tools/test_random_pheromone_lesson.py (243h), tools/test_random_remove_lesson.py (246h), tools/test_random_rotate_lesson.py (245h), tools/test_random_space_lesson.py (242h), tools/test_random_walk_lesson.py (244h), tools/test_randomness_ghost_mutants.py (240h), tools/test_reaction_lesson.py (234h), tools/test_record_reading.py (241h), tools/test_sample_budget.py (243h), tools/test_sampling_lesson.py (236h), tools/test_sculpted_sample.py (242h), tools/test_shader_materials.py (210h), tools/test_shader_patterns.py (210h), tools/test_shader_pink.py (209h), tools/test_shader_shaping.py (211h), tools/test_shader_state.py (209h), tools/test_shader_water.py (210h), tools/test_shadow_game.py (41h), tools/test_shape_family.py (245h), tools/test_soft_sequence_ghost.py (232h), tools/test_soft_yield.py (239h), tools/test_swarm_abm.py (211h), tools/test_swarm_account.py (210h), tools/test_swarm_aco.py (210h), tools/test_swarm_boids.py (211h), tools/test_swarm_flow.py (212h), tools/test_swarm_physarum.py (213h), tools/test_swarm_pso.py (210h), tools/test_swarm_sequence.py (209h), tools/test_ten_print_lesson.py (246h), tools/test_tiling_disco.py (239h), tools/test_tiling_foundry.py (238h), tools/test_tiling_ghost_student.py (232h), tools/test_tiling_pattern.py (237h), tools/test_tiling_ribbon01.py (235h), tools/test_tiling_ribbon02.py (235h), tools/test_tiling_ribbon03.py (235h), tools/test_tiling_surface.py (236h), tools/test_tiling_symmetry.py (236h), tools/test_tiling_temple.py (236h), tools/test_vogue_timeline.py (207h), tools/test_void_floor_editor.py (25h), tools/test_void_layout.py (29h), tools/tighten_lsystems_readings.py (241h), tools/tighten_randomness_reading.py (241h), tools/tighten_soft_sequence.py (233h), tools/tighten_swarm_handoffs.py (209h), tools/tighten_swarm_texts.py (189h), tools/tighten_tiling_distinctions.py (234h), tools/tiling_placement_specs.py (237h), tools/update_euler_step_plan.py (245h), tools/update_navigator_noise_plan.py (245h), tools/update_pendulum_noise_plan.py (246h), tools/validate_uncertainty_built.py (244h), tools/verify_museum_apk.py (76h), tools/verify_prefab_ghost_apk.py (77h), tools/verify_swarm_boids_review.py (211h), tools/verify_swarm_flow_review.py (212h), tools/void_editor_io.py (25h), tools/write_affect_lesson.py (234h), tools/write_architecture_passage.py (246h), tools/write_assemblage_choices.py (244h), tools/write_branching_place.py (243h), tools/write_carousel_lesson.py (238h), tools/write_cloth_boundary.py (238h), tools/write_colonization_answer.py (243h), tools/write_competition_turns.py (245h), tools/write_contact_lesson.py (236h), tools/write_curves_reader_lesson.py (246h), tools/write_euclid_lesson.py (186h), tools/write_evolution_score.py (244h), tools/write_foundations_reconstruction.py (175h), tools/write_graph_connectivity.py (219h), tools/write_graph_flow.py (218h), tools/write_graph_foundations_lesson.py (222h), tools/write_graph_layout.py (221h), tools/write_graph_matching.py (213h), tools/write_graph_network.py (220h), tools/write_graph_pathfinding.py (214h), tools/write_graph_spanning.py (218h), tools/write_growth_branch_lesson.py (247h), tools/write_living_design.py (245h), tools/write_mirrored_copy.py (242h), tools/write_morphogenesis_lesson.py (233h), tools/write_navigator_noise_text.py (245h), tools/write_noneuclid_lesson.py (186h), tools/write_pendulum_noise_text.py (246h), tools/write_percolation_contact.py (243h), tools/write_postcrisis_checks.py (173h), tools/write_postcrisis_code.py (173h), tools/write_postcrisis_studies.py (173h), tools/write_postcrisis_tutorials.py (173h), tools/write_pressure_lesson.py (237h), tools/write_reaction_lesson.py (234h), tools/write_sampling_lesson.py (236h), tools/write_sculpted_sample.py (242h), tools/write_shape_family.py (245h), tools/write_soft_yield.py (239h), tools/write_swarm_abm.py (210h), tools/write_swarm_account.py (209h), tools/write_swarm_aco.py (209h), tools/write_swarm_boids.py (209h), tools/write_swarm_flow.py (212h), tools/write_swarm_physarum.py (213h), tools/write_swarm_pso.py (209h)",
+        "tree_state": "untracked 906  [untracked: tools/align_graph_flow_wall.py, tools/align_graph_matching_wall.py, tools/align_graph_search_order.py, tools/bake_rd_museum_gallery.gd]"
       },
       "enabled": true
     },
     {
       "id": "O",
       "name": "Cells Are Strings",
-      "pass": true,
+      "pass": false,
       "metrics": {
         "detector_selftest": "PASS",
-        "maps_scanned": 2822,
-        "cells_scanned": 3848590,
-        "non_string_cells": 0,
-        "maps_affected": 0,
+        "maps_scanned": 2831,
+        "cells_scanned": 3926713,
+        "non_string_cells": 2314,
+        "maps_affected": 3,
         "in_working_tree": 0,
         "unreadable": "none",
-        "offenders": "none"
+        "offenders": "Catalyst_Opening_Progression (1039 int), Catalyst_First_Abilities (935 int), Catalyst_Test_Arena (340 int)",
+        "tree_state": "untracked 3  [untracked: Catalyst_Opening_Progression, Catalyst_First_Abilities, Catalyst_Test_Arena]"
       },
       "enabled": true
     }
   ],
   "raw": {
     "sequence_contract_summary": {
-      "total_sequences": 84,
-      "declared_entries": 1063,
-      "declared_unique_maps": 1025,
-      "map_folders_with_data": 2822,
+      "total_sequences": 85,
+      "declared_entries": 1069,
+      "declared_unique_maps": 1031,
+      "map_folders_with_data": 2831,
       "duplicate_entries_within_sequence": 0,
       "duplicates_across_sequences": 38,
       "missing_declared_maps": 0,
-      "undeclared_map_folders": 1870,
-      "undeclared_prefix_hints": 1065,
-      "cross_sequence_prefix_hints": 432
+      "undeclared_map_folders": 1873,
+      "undeclared_prefix_hints": 1066,
+      "cross_sequence_prefix_hints": 434
     },
     "artifact_audit_summary": {
-      "total_entries": 3235,
-      "dict_entries": 3235,
+      "total_entries": 3343,
+      "dict_entries": 3343,
       "non_dict_entries": 0,
       "placeholder_entries": 0,
       "missing_scene_path": 0,
@@ -299,16 +301,16 @@
       "unsupported_scene_path": 0,
       "disallowed_scene_prefix": 1,
       "unresolved_scene_files": 0,
-      "missing_include_in_map_data": 107,
-      "missing_map_ready": 102,
-      "missing_map_sequences_field": 397,
-      "empty_map_sequences": 839,
+      "missing_include_in_map_data": 133,
+      "missing_map_ready": 109,
+      "missing_map_sequences_field": 433,
+      "empty_map_sequences": 841,
       "algorithm_without_curation": 5
     },
     "grade_counts": {
-      "A": 2306,
-      "C": 149,
-      "B": 369
+      "A": 2327,
+      "C": 147,
+      "B": 359
     },
     "lab_metrics": {
       "total_issues": 39,
@@ -337,16 +339,16 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_sequences` | 84 |",
-        "| `declared_entries` | 1063 |",
-        "| `declared_unique_maps` | 1025 |",
-        "| `map_folders_with_data` | 2822 |",
+        "| `total_sequences` | 85 |",
+        "| `declared_entries` | 1069 |",
+        "| `declared_unique_maps` | 1031 |",
+        "| `map_folders_with_data` | 2831 |",
         "| `duplicate_entries_within_sequence` | 0 |",
         "| `duplicates_across_sequences` | 38 |",
         "| `missing_declared_maps` | 0 |",
-        "| `undeclared_map_folders` | 1870 |",
-        "| `undeclared_prefix_hints` | 1065 |",
-        "| `cross_sequence_prefix_hints` | 432 |",
+        "| `undeclared_map_folders` | 1873 |",
+        "| `undeclared_prefix_hints` | 1066 |",
+        "| `cross_sequence_prefix_hints` | 434 |",
         "",
         "### Interpretation Notes",
         "",
@@ -359,8 +361,8 @@
         "",
         "| Metric | Count |",
         "|---|---:|",
-        "| `total_entries` | 3235 |",
-        "| `dict_entries` | 3235 |",
+        "| `total_entries` | 3343 |",
+        "| `dict_entries` | 3343 |",
         "| `non_dict_entries` | 0 |",
         "| `placeholder_entries` | 0 |",
         "| `missing_scene_path` | 0 |",
@@ -368,10 +370,10 @@
         "| `unsupported_scene_path` | 0 |",
         "| `disallowed_scene_prefix` | 1 |",
         "| `unresolved_scene_files` | 0 |",
-        "| `missing_include_in_map_data` | 107 |",
-        "| `missing_map_ready` | 102 |",
-        "| `missing_map_sequences_field` | 397 |",
-        "| `empty_map_sequences` | 839 |",
+        "| `missing_include_in_map_data` | 133 |",
+        "| `missing_map_ready` | 109 |",
+        "| `missing_map_sequences_field` | 433 |",
+        "| `empty_map_sequences` | 841 |",
         "| `algorithm_without_curation` | 5 |"
       ],
       "validate_map_all": [

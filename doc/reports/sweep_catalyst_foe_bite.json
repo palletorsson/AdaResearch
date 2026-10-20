@@ -1,108 +1,7568 @@
 {
  "sweep": "catalyst_foe",
- "peak_changed_pct": 13.327,
- "subject_pct": 12.892,
+ "peak_changed_pct": 2.844,
+ "subject_pct": 2.523,
  "verdict": "BITES",
  "variants": [
   {
    "a": {
-    "body": "curriculum"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "cube"
+    "body": "curriculum",
+    "phase": "foe"
    },
-   "changed_px": 6086,
-   "changed_pct": 1.054
+   "changed_px": 460,
+   "changed_pct": 0.08
   },
   {
    "a": {
-    "body": "curriculum"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "mote"
+    "body": "curriculum",
+    "phase": "wary"
    },
-   "changed_px": 68879,
-   "changed_pct": 11.925
+   "changed_px": 2342,
+   "changed_pct": 0.405
   },
   {
    "a": {
-    "body": "curriculum"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "serpent"
+    "body": "curriculum",
+    "phase": "neutral"
    },
-   "changed_px": 71884,
-   "changed_pct": 12.445
+   "changed_px": 2342,
+   "changed_pct": 0.405
   },
   {
    "a": {
-    "body": "curriculum"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "octapod"
+    "body": "curriculum",
+    "phase": "curious"
    },
-   "changed_px": 71672,
-   "changed_pct": 12.409
+   "changed_px": 2342,
+   "changed_pct": 0.405
   },
   {
    "a": {
-    "body": "cube"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "mote"
+    "body": "curriculum",
+    "phase": "friend"
    },
-   "changed_px": 74283,
-   "changed_pct": 12.861
+   "changed_px": 2342,
+   "changed_pct": 0.405
   },
   {
    "a": {
-    "body": "cube"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "serpent"
+    "body": "cube",
+    "phase": "curriculum"
    },
-   "changed_px": 76824,
-   "changed_pct": 13.301
+   "changed_px": 482,
+   "changed_pct": 0.083
   },
   {
    "a": {
-    "body": "cube"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "octapod"
+    "body": "cube",
+    "phase": "foe"
    },
-   "changed_px": 76979,
-   "changed_pct": 13.327
+   "changed_px": 478,
+   "changed_pct": 0.083
   },
   {
    "a": {
-    "body": "mote"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "serpent"
+    "body": "cube",
+    "phase": "wary"
    },
-   "changed_px": 41661,
-   "changed_pct": 7.213
+   "changed_px": 2342,
+   "changed_pct": 0.405
   },
   {
    "a": {
-    "body": "mote"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "octapod"
+    "body": "cube",
+    "phase": "neutral"
    },
-   "changed_px": 49812,
-   "changed_pct": 8.624
+   "changed_px": 2342,
+   "changed_pct": 0.405
   },
   {
    "a": {
-    "body": "serpent"
+    "body": "curriculum",
+    "phase": "curriculum"
    },
    "b": {
-    "body": "octapod"
+    "body": "cube",
+    "phase": "curious"
    },
-   "changed_px": 40243,
-   "changed_pct": 6.967
+   "changed_px": 2342,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2342,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3572,
+   "changed_pct": 0.618
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3550,
+   "changed_pct": 0.615
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3620,
+   "changed_pct": 0.627
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3508,
+   "changed_pct": 0.607
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3572,
+   "changed_pct": 0.618
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3521,
+   "changed_pct": 0.61
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4371,
+   "changed_pct": 0.757
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4484,
+   "changed_pct": 0.776
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4501,
+   "changed_pct": 0.779
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4285,
+   "changed_pct": 0.742
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4466,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4453,
+   "changed_pct": 0.771
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "changed_px": 782,
+   "changed_pct": 0.135
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "changed_px": 784,
+   "changed_pct": 0.136
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2528,
+   "changed_pct": 0.438
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3601,
+   "changed_pct": 0.623
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3579,
+   "changed_pct": 0.62
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3649,
+   "changed_pct": 0.632
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3537,
+   "changed_pct": 0.612
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3601,
+   "changed_pct": 0.623
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3550,
+   "changed_pct": 0.615
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4400,
+   "changed_pct": 0.762
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4513,
+   "changed_pct": 0.781
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4530,
+   "changed_pct": 0.784
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4314,
+   "changed_pct": 0.747
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4495,
+   "changed_pct": 0.778
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4482,
+   "changed_pct": 0.776
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6891,
+   "changed_pct": 1.193
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7153,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 6117,
+   "changed_pct": 1.059
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "curriculum",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 13940,
+   "changed_pct": 2.413
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "changed_px": 0,
+   "changed_pct": 0.0
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "changed_px": 2147,
+   "changed_pct": 0.372
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7232,
+   "changed_pct": 1.252
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14572,
+   "changed_pct": 2.523
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 3516,
+   "changed_pct": 0.609
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 3586,
+   "changed_pct": 0.621
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 3474,
+   "changed_pct": 0.601
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 3538,
+   "changed_pct": 0.613
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 3487,
+   "changed_pct": 0.604
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 4337,
+   "changed_pct": 0.751
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 4450,
+   "changed_pct": 0.77
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 4467,
+   "changed_pct": 0.773
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 4251,
+   "changed_pct": 0.736
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 4432,
+   "changed_pct": 0.767
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 4419,
+   "changed_pct": 0.765
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 6999,
+   "changed_pct": 1.212
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 7107,
+   "changed_pct": 1.23
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 6886,
+   "changed_pct": 1.192
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 6963,
+   "changed_pct": 1.206
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 7151,
+   "changed_pct": 1.238
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 6118,
+   "changed_pct": 1.059
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13986,
+   "changed_pct": 2.421
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 14180,
+   "changed_pct": 2.455
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14300,
+   "changed_pct": 2.476
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14449,
+   "changed_pct": 2.502
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14019,
+   "changed_pct": 2.427
+  },
+  {
+   "a": {
+    "body": "cube",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 13939,
+   "changed_pct": 2.413
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "changed_px": 764,
+   "changed_pct": 0.132
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 1498,
+   "changed_pct": 0.259
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 1451,
+   "changed_pct": 0.251
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 1465,
+   "changed_pct": 0.254
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 1428,
+   "changed_pct": 0.247
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 1996,
+   "changed_pct": 0.346
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 1975,
+   "changed_pct": 0.342
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2523,
+   "changed_pct": 0.437
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2375,
+   "changed_pct": 0.411
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2426,
+   "changed_pct": 0.42
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2449,
+   "changed_pct": 0.424
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 8390,
+   "changed_pct": 1.453
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 8498,
+   "changed_pct": 1.471
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8277,
+   "changed_pct": 1.433
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 8354,
+   "changed_pct": 1.446
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 8542,
+   "changed_pct": 1.479
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 8623,
+   "changed_pct": 1.493
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15344,
+   "changed_pct": 2.657
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15570,
+   "changed_pct": 2.696
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15690,
+   "changed_pct": 2.716
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15840,
+   "changed_pct": 2.742
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15355,
+   "changed_pct": 2.658
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15802,
+   "changed_pct": 2.736
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "changed_px": 1485,
+   "changed_pct": 0.257
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 1447,
+   "changed_pct": 0.251
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 1455,
+   "changed_pct": 0.252
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 1409,
+   "changed_pct": 0.244
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 2009,
+   "changed_pct": 0.348
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 2018,
+   "changed_pct": 0.349
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2491,
+   "changed_pct": 0.431
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2315,
+   "changed_pct": 0.401
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2388,
+   "changed_pct": 0.413
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2447,
+   "changed_pct": 0.424
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 8368,
+   "changed_pct": 1.449
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 8476,
+   "changed_pct": 1.467
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8255,
+   "changed_pct": 1.429
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 8332,
+   "changed_pct": 1.443
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 8520,
+   "changed_pct": 1.475
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 8601,
+   "changed_pct": 1.489
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15321,
+   "changed_pct": 2.653
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15546,
+   "changed_pct": 2.691
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15666,
+   "changed_pct": 2.712
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15818,
+   "changed_pct": 2.739
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15338,
+   "changed_pct": 2.655
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15769,
+   "changed_pct": 2.73
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "changed_px": 1403,
+   "changed_pct": 0.243
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 1417,
+   "changed_pct": 0.245
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 1464,
+   "changed_pct": 0.253
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 2350,
+   "changed_pct": 0.407
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 2487,
+   "changed_pct": 0.431
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2001,
+   "changed_pct": 0.346
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2276,
+   "changed_pct": 0.394
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2306,
+   "changed_pct": 0.399
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2464,
+   "changed_pct": 0.427
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 8438,
+   "changed_pct": 1.461
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 8546,
+   "changed_pct": 1.48
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8325,
+   "changed_pct": 1.441
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 8402,
+   "changed_pct": 1.455
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 8590,
+   "changed_pct": 1.487
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 8671,
+   "changed_pct": 1.501
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15349,
+   "changed_pct": 2.657
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15587,
+   "changed_pct": 2.699
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15704,
+   "changed_pct": 2.719
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15860,
+   "changed_pct": 2.746
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15350,
+   "changed_pct": 2.658
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15783,
+   "changed_pct": 2.733
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "changed_px": 1383,
+   "changed_pct": 0.239
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 1429,
+   "changed_pct": 0.247
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 2370,
+   "changed_pct": 0.41
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 2504,
+   "changed_pct": 0.434
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2534,
+   "changed_pct": 0.439
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 1929,
+   "changed_pct": 0.334
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2270,
+   "changed_pct": 0.393
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2479,
+   "changed_pct": 0.429
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 8326,
+   "changed_pct": 1.441
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 8434,
+   "changed_pct": 1.46
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8213,
+   "changed_pct": 1.422
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 8290,
+   "changed_pct": 1.435
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 8478,
+   "changed_pct": 1.468
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 8559,
+   "changed_pct": 1.482
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15312,
+   "changed_pct": 2.651
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15507,
+   "changed_pct": 2.685
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15627,
+   "changed_pct": 2.706
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15775,
+   "changed_pct": 2.731
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15311,
+   "changed_pct": 2.651
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15773,
+   "changed_pct": 2.731
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "changed_px": 1420,
+   "changed_pct": 0.246
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 2374,
+   "changed_pct": 0.411
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 2484,
+   "changed_pct": 0.43
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2557,
+   "changed_pct": 0.443
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2359,
+   "changed_pct": 0.408
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 1663,
+   "changed_pct": 0.288
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2479,
+   "changed_pct": 0.429
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 8390,
+   "changed_pct": 1.453
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 8498,
+   "changed_pct": 1.471
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8277,
+   "changed_pct": 1.433
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 8354,
+   "changed_pct": 1.446
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 8542,
+   "changed_pct": 1.479
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 8623,
+   "changed_pct": 1.493
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15350,
+   "changed_pct": 2.658
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15571,
+   "changed_pct": 2.696
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15691,
+   "changed_pct": 2.717
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15840,
+   "changed_pct": 2.742
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15383,
+   "changed_pct": 2.663
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15818,
+   "changed_pct": 2.739
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "changed_px": 2341,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 2460,
+   "changed_pct": 0.426
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2494,
+   "changed_pct": 0.432
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2337,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2383,
+   "changed_pct": 0.413
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 1906,
+   "changed_pct": 0.33
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 8339,
+   "changed_pct": 1.444
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 8447,
+   "changed_pct": 1.462
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8226,
+   "changed_pct": 1.424
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 8303,
+   "changed_pct": 1.438
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 8491,
+   "changed_pct": 1.47
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 8572,
+   "changed_pct": 1.484
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15310,
+   "changed_pct": 2.651
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15520,
+   "changed_pct": 2.687
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15640,
+   "changed_pct": 2.708
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15789,
+   "changed_pct": 2.734
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15317,
+   "changed_pct": 2.652
+  },
+  {
+   "a": {
+    "body": "mote",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15771,
+   "changed_pct": 2.73
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "changed_px": 1478,
+   "changed_pct": 0.256
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2520,
+   "changed_pct": 0.436
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2298,
+   "changed_pct": 0.398
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2375,
+   "changed_pct": 0.411
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2442,
+   "changed_pct": 0.423
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 9189,
+   "changed_pct": 1.591
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 9297,
+   "changed_pct": 1.61
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 9076,
+   "changed_pct": 1.571
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 9153,
+   "changed_pct": 1.585
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 9341,
+   "changed_pct": 1.617
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 9422,
+   "changed_pct": 1.631
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15891,
+   "changed_pct": 2.751
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 16099,
+   "changed_pct": 2.787
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 16146,
+   "changed_pct": 2.795
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 16387,
+   "changed_pct": 2.837
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15860,
+   "changed_pct": 2.746
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 16211,
+   "changed_pct": 2.807
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "changed_px": 2595,
+   "changed_pct": 0.449
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2341,
+   "changed_pct": 0.405
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2455,
+   "changed_pct": 0.425
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2554,
+   "changed_pct": 0.442
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 9302,
+   "changed_pct": 1.61
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 9410,
+   "changed_pct": 1.629
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 9189,
+   "changed_pct": 1.591
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 9264,
+   "changed_pct": 1.604
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 9454,
+   "changed_pct": 1.637
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 9535,
+   "changed_pct": 1.651
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15875,
+   "changed_pct": 2.748
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 16112,
+   "changed_pct": 2.789
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 16193,
+   "changed_pct": 2.803
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 16428,
+   "changed_pct": 2.844
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15919,
+   "changed_pct": 2.756
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 16235,
+   "changed_pct": 2.811
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "changed_px": 2413,
+   "changed_pct": 0.418
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2416,
+   "changed_pct": 0.418
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2400,
+   "changed_pct": 0.416
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 9319,
+   "changed_pct": 1.613
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 9419,
+   "changed_pct": 1.631
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 9206,
+   "changed_pct": 1.594
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 9279,
+   "changed_pct": 1.606
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 9471,
+   "changed_pct": 1.64
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 9548,
+   "changed_pct": 1.653
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15959,
+   "changed_pct": 2.763
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 16164,
+   "changed_pct": 2.798
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 16123,
+   "changed_pct": 2.791
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 16411,
+   "changed_pct": 2.841
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15887,
+   "changed_pct": 2.751
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 16276,
+   "changed_pct": 2.818
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "changed_px": 2187,
+   "changed_pct": 0.379
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2398,
+   "changed_pct": 0.415
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 9103,
+   "changed_pct": 1.576
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 9206,
+   "changed_pct": 1.594
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 8990,
+   "changed_pct": 1.556
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 9049,
+   "changed_pct": 1.567
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 9255,
+   "changed_pct": 1.602
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 9336,
+   "changed_pct": 1.616
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15715,
+   "changed_pct": 2.721
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15932,
+   "changed_pct": 2.758
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15889,
+   "changed_pct": 2.751
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 16114,
+   "changed_pct": 2.79
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15663,
+   "changed_pct": 2.712
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 16017,
+   "changed_pct": 2.773
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "changed_px": 2478,
+   "changed_pct": 0.429
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 9284,
+   "changed_pct": 1.607
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 9367,
+   "changed_pct": 1.622
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 9171,
+   "changed_pct": 1.588
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 9213,
+   "changed_pct": 1.595
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 9436,
+   "changed_pct": 1.634
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 9500,
+   "changed_pct": 1.645
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15899,
+   "changed_pct": 2.753
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 16115,
+   "changed_pct": 2.79
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 16068,
+   "changed_pct": 2.782
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 16296,
+   "changed_pct": 2.821
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15644,
+   "changed_pct": 2.708
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 16218,
+   "changed_pct": 2.808
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "changed_px": 9271,
+   "changed_pct": 1.605
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 9379,
+   "changed_pct": 1.624
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 9158,
+   "changed_pct": 1.586
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 9235,
+   "changed_pct": 1.599
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 9423,
+   "changed_pct": 1.631
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 9504,
+   "changed_pct": 1.645
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15914,
+   "changed_pct": 2.755
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 16131,
+   "changed_pct": 2.793
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 16174,
+   "changed_pct": 2.8
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 16404,
+   "changed_pct": 2.84
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15877,
+   "changed_pct": 2.749
+  },
+  {
+   "a": {
+    "body": "serpent",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 16159,
+   "changed_pct": 2.798
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "changed_px": 3010,
+   "changed_pct": 0.521
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 7129,
+   "changed_pct": 1.234
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 4392,
+   "changed_pct": 0.76
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 4812,
+   "changed_pct": 0.833
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 4756,
+   "changed_pct": 0.823
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 13337,
+   "changed_pct": 2.309
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 13820,
+   "changed_pct": 2.393
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15334,
+   "changed_pct": 2.655
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15557,
+   "changed_pct": 2.693
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15246,
+   "changed_pct": 2.64
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15591,
+   "changed_pct": 2.699
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "changed_px": 7166,
+   "changed_pct": 1.241
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 4801,
+   "changed_pct": 0.831
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 4801,
+   "changed_pct": 0.831
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 4958,
+   "changed_pct": 0.858
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 12540,
+   "changed_pct": 2.171
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 12862,
+   "changed_pct": 2.227
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15334,
+   "changed_pct": 2.655
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15557,
+   "changed_pct": 2.693
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15246,
+   "changed_pct": 2.64
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15588,
+   "changed_pct": 2.699
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "changed_px": 7036,
+   "changed_pct": 1.218
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 6761,
+   "changed_pct": 1.171
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 7147,
+   "changed_pct": 1.237
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 14995,
+   "changed_pct": 2.596
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15213,
+   "changed_pct": 2.634
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 13921,
+   "changed_pct": 2.41
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15242,
+   "changed_pct": 2.639
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14869,
+   "changed_pct": 2.574
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15503,
+   "changed_pct": 2.684
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "changed_px": 4468,
+   "changed_pct": 0.774
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 4767,
+   "changed_pct": 0.825
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15055,
+   "changed_pct": 2.606
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15259,
+   "changed_pct": 2.642
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15128,
+   "changed_pct": 2.619
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 13507,
+   "changed_pct": 2.338
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 14485,
+   "changed_pct": 2.508
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15588,
+   "changed_pct": 2.699
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "changed_px": 4973,
+   "changed_pct": 0.861
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15055,
+   "changed_pct": 2.606
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15262,
+   "changed_pct": 2.642
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 14951,
+   "changed_pct": 2.588
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 14768,
+   "changed_pct": 2.557
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 13281,
+   "changed_pct": 2.299
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 15588,
+   "changed_pct": 2.699
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "changed_px": 15055,
+   "changed_pct": 2.606
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 15262,
+   "changed_pct": 2.642
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 15343,
+   "changed_pct": 2.656
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 15558,
+   "changed_pct": 2.694
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 15251,
+   "changed_pct": 2.64
+  },
+  {
+   "a": {
+    "body": "octapod",
+    "phase": "friend"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 14058,
+   "changed_pct": 2.434
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "changed_px": 5002,
+   "changed_pct": 0.866
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 9666,
+   "changed_pct": 1.673
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 9947,
+   "changed_pct": 1.722
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 9874,
+   "changed_pct": 1.709
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "curriculum"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 9914,
+   "changed_pct": 1.716
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "changed_px": 10033,
+   "changed_pct": 1.737
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 10135,
+   "changed_pct": 1.755
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 10143,
+   "changed_pct": 1.756
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "foe"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 10310,
+   "changed_pct": 1.785
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "changed_px": 9591,
+   "changed_pct": 1.66
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 9801,
+   "changed_pct": 1.697
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "wary"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 10052,
+   "changed_pct": 1.74
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "changed_px": 8397,
+   "changed_pct": 1.454
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "neutral"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 10322,
+   "changed_pct": 1.787
+  },
+  {
+   "a": {
+    "body": "grand",
+    "phase": "curious"
+   },
+   "b": {
+    "body": "grand",
+    "phase": "friend"
+   },
+   "changed_px": 10539,
+   "changed_pct": 1.825
   }
  ]
 }

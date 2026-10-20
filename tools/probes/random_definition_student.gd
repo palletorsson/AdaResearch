@@ -97,6 +97,44 @@ func run() -> void:
         check("edited assignment creates grayscale without dropping requests",grey)
     if mode=="swap":
         check("edited assignment swaps red and blue",first[0][0]==Color(stream[2],stream[1],stream[0]))
+    var kept_seed: int=lesson.seed_value
+    var kept_point: Node=lesson.point
+    var slider=lesson.resolution
+    slider.track.move_slider(0.8)
+    check("slider selects sixteen-by-sixteen on the existing study",lesson.side==16 and lesson.grids[0].size()==256 and lesson.resolution==slider)
+    check("size change preserves seed point and procedure",lesson.seed_value==kept_seed and lesson.point==kept_point and not lesson.discard_first)
+    check("larger matrix retains the old colour prefix",lesson.samples[0].slice(0,16)==second_seed[0])
+    check("larger matrix stays inside its original panel area",lesson.grids[0][0].position.x>-1.175 and lesson.grids[0][-1].position.x<-.175 and lesson.grids[0][-1].position.y<2.1)
+    lesson.point.position.x=0
+    lesson.point.action()
+    check("large shifted panel consumes 769 requests",lesson.discard_first and "769" in lesson.label.text)
+    slider.track.move_slider(0)
+    check("slider selects two-by-two and retains discard",lesson.side==2 and lesson.grids[0].size()==4 and lesson.discard_first and "13" in lesson.label.text)
+    slider.track.move_slider(0.8*2.0/14.0)
+    check("returning to four restores the seeded left picture",lesson.side==4 and lesson.samples[0]==second_seed[0] and lesson.discard_first)
+    lesson.point.position.x=0
+    lesson.point.action()
+    check("returning procedure restores both original pictures",lesson.samples==second_seed)
+    # Exercise every actual track detent; the label, state and count must agree.
+    var choices_ok:=true
+    for size in range(2,17):
+        slider.track.move_slider(0.8*float(size-2)/14.0)
+        choices_ok=choices_ok and lesson.side==size and lesson.grids[0].size()==size*size and slider.side==size
+    check("all fifteen slider choices are reachable",choices_ok)
+    slider.track.move_slider(99)
+    check("upper track boundary clamps at sixteen",lesson.side==16)
+    slider.track.move_slider(-99)
+    check("lower track boundary clamps at two",lesson.side==2)
+    var handle=slider.track.find_children("*", "RigidBody3D", true, false)[0]
+    slider.track.grabbed_handles.append(handle)
+    handle.global_position=slider.track.to_global(Vector3(0.8*6.0/14,0,0))
+    var held_position: Vector3=handle.global_position
+    slider.track._process(0.016)
+    check("hand displacement selects eight in a rotated study",lesson.side==8)
+    check("moving track does not move the held hand twice",handle.global_position.is_equal_approx(held_position))
+    slider.track._process(0.016)
+    check("stationary hand keeps its selection",lesson.side==8)
+    slider.track.grabbed_handles.clear()
     var file:=FileAccess.open(report,FileAccess.WRITE)
     file.store_string(JSON.stringify({"passed":failures.is_empty(),"checks":checks,"failures":failures,"source":source,"mode":mode,"engine":Engine.get_version_info(),"scope":"Printed files reconstructed; actual inherited action method; prescribed point positions. No headset or independent learner claim."},"  "))
     file.close()

@@ -367,6 +367,25 @@ def beside_dirty(rows, dirty):
     return rows
 
 
+def unborn(rows, in_head):
+    """Mark each row whose folder holds NO file in HEAD: unborn=True.
+
+    The fourth shape of the landable over-promise (prop-056, clause 3). A
+    file left beside a landed sibling is stranded work; a folder no commit
+    has ever touched is a system being born. Every such folder the breaths
+    met -- biome_ladder (29 rows, 10-15), commons/void, commons/book,
+    shadow_game and museum_runner (14 of 17 'landable' on 10-20) -- belonged
+    to a live session that had not claimed it, and an agent cannot know its
+    owner from the tree. The folder itself, not an ancestor: a new sub-folder
+    under a tracked one is still unborn. Pure, so the selftest feeds it;
+    marks, never drops -- only the landable count reads the mark."""
+    folders = {str(Path(p).parent).replace("\\", "/") for p in in_head}
+    for r in rows:
+        if str(Path(r["path"]).parent).replace("\\", "/") not in folders:
+            r["unborn"] = True
+    return rows
+
+
 def read_file(rel):
     try:
         return (ROOT / rel).read_text(encoding="utf-8", errors="replace")
@@ -510,6 +529,17 @@ def selftest():
                   rows[0].get("beside_dirty") == ["loader.gd"]
                   and "beside_dirty" not in rows[1] and len(rows) == 2))
 
+    # 11. The unborn folder (prop-056, clause 3). m/ has a file in HEAD, so
+    #     m/old.gd is a file left beside a landed one; n/ has none, so n/lone.gd
+    #     is a system being born; n/sub/ has none either, though its parent
+    #     folder does. Marked, not dropped.
+    rows = [{"token": "t", "registry": "r", "path": p}
+            for p in ("m/old.gd", "n/lone.gd", "m/sub/deep.gd")]
+    unborn(rows, {"reg.json", "m/loader.gd", "r/ok.gd"})
+    cases.append(("marks a row in a folder no commit has touched",
+                  "unborn" not in rows[0] and rows[1].get("unborn") is True
+                  and rows[2].get("unborn") is True and len(rows) == 3))
+
     bad =[name for name, ok in cases if not ok]
     for name, ok in cases:
         print("  %-52s %s" % (name, "ok" if ok else "FAIL"))
@@ -558,15 +588,19 @@ def main():
             if r["path"] in claimed:
                 r["claimed_by"] = claimed[r["path"]]
     beside_dirty(split["stranded"], dirty_tracked() if paths else set())
+    unborn(split["stranded"], in_head)
     unclaimed = [r for r in split["stranded"] if "claimed_by" not in r]
-    free = [r for r in unclaimed if "beside_dirty" not in r]
+    landed_beside = [r for r in unclaimed if "beside_dirty" not in r]
+    free = [r for r in landed_beside if "unborn" not in r]
     floor = ("%d gitignored on purpose (a rule decides them, not a commit), "
              "%d touched within %dh (somebody's open buffer), %d stranded "
              "(%d of them claimed in the forum, %d more beside an uncommitted "
-             "tracked file). Landable by an agent today: %d."
+             "tracked file, %d more in a folder no commit has touched -- a "
+             "system being born). Landable by an agent today: %d."
              % (len(split["ignored"]), len(split["live"]), int(HOLD_HOURS),
                 len(split["stranded"]), len(split["stranded"]) - len(unclaimed),
-                len(unclaimed) - len(free), len(free)))
+                len(unclaimed) - len(landed_beside),
+                len(landed_beside) - len(free), len(free)))
 
     report = {
         "registries_in_head": sum(1 for p in in_head
@@ -581,7 +615,8 @@ def main():
         "live_under_hold": len(split["live"]),
         "stranded": len(split["stranded"]),
         "claimed_in_the_forum": len(claimed),
-        "beside_uncommitted_tracked": len(unclaimed) - len(free),
+        "beside_uncommitted_tracked": len(unclaimed) - len(landed_beside),
+        "unborn_folder": len(landed_beside) - len(free),
         "landable_today": len(free),
         "floor_reading": floor,
         "split": split,
@@ -598,10 +633,11 @@ def main():
         print("UNREACHABLE FROM A CLONE                 : %d" % report["unreachable_from_a_clone"])
         for kind in ("stranded", "live", "ignored"):
             for u in split[kind]:
-                print("   %-34s %-8s %6.1fh%s%s %s%s%s" % (
+                print("   %-34s %-8s %6.1fh%s%s%s %s%s%s" % (
                     u["token"], kind, u["age_hours"],
                     "f" if u.get("clocked_by") == "folder" else " ",
-                    "d" if u.get("beside_dirty") else " ", u["path"],
+                    "d" if u.get("beside_dirty") else " ",
+                    "u" if u.get("unborn") else " ", u["path"],
                     ("   <- " + u["claimed_by"]) if u.get("claimed_by") else "",
                     ("   beside uncommitted " + ", ".join(u["beside_dirty"][:3])
                      + (" +%d" % (len(u["beside_dirty"]) - 3)

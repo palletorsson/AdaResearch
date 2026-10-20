@@ -244,6 +244,38 @@ def find_interactables(ints: list[list], rows: int, cols: int) -> list[dict]:
     return arts
 
 
+def initial_removal_support(data: dict) -> set[tuple[int, int]]:
+    """Initial, destructible support only. Does not promise a route after removal.
+
+    Opt-in museum crossing, odd cell-centred dimensions, at basin rim height.
+    Other artifacts and legacy removal displays keep their existing semantics.
+    """
+    result = set()
+    depth = data.get("map_info", {}).get("museum", {}).get("basin", {}).get("depth", 0)
+    for r, row in enumerate(data.get("layers", {}).get("interactables", [])):
+        for c, token in enumerate(row):
+            parts = str(token).split("#")
+            base = parts[0].split(":")
+            cfg = dict(p.split(":", 1) for p in parts[1:] if ":" in p)
+            if base[0] != "random_removal_arena" or cfg.get("full_crossing") != "true":
+                continue
+            try:
+                width = min(15, max(3, int(cfg.get("columns", 9))))
+                length = min(19, max(3, int(cfg.get("rows", 11))))
+                yaw = float(base[1]) if len(base) > 1 else 0
+                offset = float(base[2]) if len(base) > 2 else 0
+                scale = float(base[3]) if len(base) > 3 else 1
+            except ValueError:
+                continue
+            if width % 2 == 0 or length % 2 == 0 or yaw % 90 or scale != 1 or abs(offset - depth) > 0.01:
+                continue
+            if int(yaw / 90) % 2:
+                width, length = length, width
+            result.update((z, x) for z in range(r-length//2, r+length//2+1)
+                          for x in range(c-width//2, c+width//2+1))
+    return result
+
+
 class MapGraph:
     """Walkability graph for a single map."""
 
@@ -286,6 +318,12 @@ class MapGraph:
         for r in range(self.rows):
             for c in range(min(self.cols, len(self.struct[r]))):
                 self.hmap[(r, c)] = parse_height(self.struct[r][c])
+
+        # The arena owns these colliders; the source map must stay void below.
+        self.dynamic_support_cells = initial_removal_support(data)
+        for pos in self.dynamic_support_cells:
+            if self.hmap.get(pos) == 0:
+                self.hmap[pos] = 1
 
         # Parse utilities
         self.util_map: dict[tuple[int, int], str] = {}

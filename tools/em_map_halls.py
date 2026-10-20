@@ -288,8 +288,11 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
     # museum.gate = false: this hall wants no sliding door
     gate = md.get("map_info", {}).get("museum", {}).get("gate")
     gate_depth = mus_decl.get("gate_depth_rows")
+    from map_pathfinder import initial_removal_support
+    temporary_support = initial_removal_support(md)
     return {
         "museum": museum_key,
+        **({"dynamic_support_cells": [[c, r] for r, c in sorted(temporary_support)]} if temporary_support else {}),
         **({"open_roof": True} if (open_roof or isinstance(simulation, dict)) else {}),
         **({"piers": False} if piers_ok is False else {}),
         **({"basin": basin} if isinstance(basin, dict) else {}),
@@ -297,6 +300,7 @@ def derive_row(pearl: str, map_name: str, museum_key: str, idx: int, total: int,
         **({"weathering_wall": mus_decl["weathering_wall"]} if isinstance(mus_decl.get("weathering_wall"), dict) else {}),
         **({"turning_wall": mus_decl["turning_wall"]} if isinstance(mus_decl.get("turning_wall"), dict) else {}),
         **({"simplex_corners": mus_decl["simplex_corners"]} if isinstance(mus_decl.get("simplex_corners"), list) else {}),
+        **({"observation_balcony": mus_decl["observation_balcony"]} if isinstance(mus_decl.get("observation_balcony"), dict) else {}),
         **({"passage": passage} if isinstance(passage, dict) else {}),
         **({"gate": bool(gate)} if gate is not None else {}),
         **({"gate_depth_rows": int(gate_depth)} if gate_depth is not None else {}),
@@ -470,8 +474,11 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool,
         # then carve the minimal path to floor. Measured before this existed:
         # 48 of the new halls had doors and no way between them.
         import heapq
+        temporary_support = {tuple(p) for p in row.get("dynamic_support_cells", [])}
         def cost(rr, cc):
             v = tile[rr][cc]
+            if (cc, rr) in temporary_support:
+                return 1
             if (cc, rr) in art_cells:
                 return 100000
             if v == "4":
@@ -502,7 +509,7 @@ def normalize_row(row: dict, post_color: bool, dirlocked: bool,
         node = goal
         while node in prev or node == start:
             rr, cc = node
-            if tile[rr][cc] in ("4", "0") and (cc, rr) not in art_cells:
+            if tile[rr][cc] in ("4", "0") and (cc, rr) not in art_cells and (cc, rr) not in temporary_support:
                 tile[rr][cc] = "1"
                 carved += 1
             if node == start:
