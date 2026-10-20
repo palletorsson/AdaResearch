@@ -1,0 +1,14 @@
+config_version=5
+[application]
+config/name="ada-tutorial-gallery-vfmthl6z"
+config/features=PackedStringArray("4.6")
+[autoload]
+XRToolsUserSettings="*res://addons/godot-xr-tools/user_settings/user_settings.gd"
+XRToolsRumbleManager="*res://addons/godot-xr-tools/rumble/rumble_manager.gd"
+[display]
+window/size/viewport_width=1200
+window/size/viewport_height=900
+[rendering]
+renderer/rendering_method="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
+anti_aliasing/quality/msaa_3d=2

@@ -1,0 +1,40 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../../../..');
+const {load}=await import(pathToFileURL(path.resolve(root,'../ada_encyclopedia/tests/writing-wall/load.mjs')).href);
+const {loadWall}=load('lib/writing-wall-store'),{planRoomLayout}=load('lib/writing-room-store'),{roomLayoutIssues,walkingRoute}=load('lib/writing-room');
+const primary=['random_touch','random_number_book_page_1955','lava_entropy_wall','geiger_counter','seed_replay_demo/movement_sampler','random_return'];
+const moves=[['random_touch',1,1],['seed_replay_demo',4,1],['prng_crank_machine',8,1],['random_number_book_page_1955',1,4],['film_prng_register',4,4],['seed_replay_demo/source_console',8,4],['seed_replay_demo/frame_timing',1,7],['trng_vs_prng',4,7],['lava_entropy_wall',8,7],['geiger_counter',1,11],['seed_replay_demo/movement_sampler',8,11],['seed_study',1,14],['random_return',8,14],['slot_machine',1,17]].map(([id,x,z])=>({id,x,z}));
+async function post(route,body){const r=await fetch('http://localhost:3003'+route,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const result=await r.json();if(!r.ok||result.error)throw Error(JSON.stringify(result));return result;}
+const before=loadWall(root,'Random_Definition');
+assert.deepEqual(before.wall,JSON.parse(fs.readFileSync(path.join(here,'before/writing_wall.json'),'utf8')));
+const mapPath=path.join(root,'commons/maps/Random_Definition/map_data.json'),raw=fs.readFileSync(mapPath,'utf8');
+assert.equal(raw,fs.readFileSync(path.join(here,'before/map_data.json'),'utf8'));
+const old=JSON.parse(raw).layers.interactables[17][4];assert.ok(!String(old).trim());
+const added=await post('/api/maps/cell-edit',{map:'Random_Definition',expect_sha256:createHash('sha256').update(raw).digest('hex'),operations:[{op:'set',layer:'interactables',cell:[4,0,17],expect:old,token:'random_touch:270:1:1'}],rebuild_strip:false});
+fs.writeFileSync(path.join(here,'addition.json'),JSON.stringify(added,null,2)+'\n');
+const m=loadWall(root,'Random_Definition');
+const plan=planRoomLayout(root,'Random_Definition',m.version,moves);
+const placed=await post('/api/maps/cell-edit',plan);
+fs.writeFileSync(path.join(here,'placement-save.json'),JSON.stringify(placed,null,2)+'\n');
+const after=loadWall(root,'Random_Definition'),wall=structuredClone(after.wall);
+wall.order=moves.map(m=>m.id);
+const seeds={random_touch:'Begin with the hand: slow X, the same path twice as fast, then X plus Y. Leave the sensation open. Introduce seed and rule through replay; ask what can be kept.',random_number_book_page_1955:'Keep the RAND book central. A touched group stays amber as rows descend. Historical testing complicates preservation: a record enables investigation without settling provenance.',lava_entropy_wall:'A saved baseline and a covered capture separate the scene from its record. What remains in the scene but never enters the reading?',geiger_counter:'The same recorded clicks meet a coarser clock. Unequal gaps may become a tie and emit no bit. Distinguish loss in reading from exclusion during acquisition.','seed_replay_demo/movement_sampler':'Let a hand generate the record. Explain rounded poses, hashing and 0–999. Propose finding two different kept gestures with the same seed and comparing the colour window; do not claim that pair has been found.',random_return:'End with the bodily consequence: random direction and distance, compulsory return. Recall the opening axes; another seed cannot alter the rule.'};
+for(const magnet of wall.magnets){magnet.tags=(magnet.tags??[]).filter(t=>t!=='final');if(primary.includes(magnet.id)){magnet.tags.push('final');magnet.final=seeds[magnet.id];}else{magnet.final='Optional encounter in the six-stop edition. Retained writing seed: '+magnet.final;}}
+const touch=wall.magnets.find(m=>m.id==='random_touch');touch.tags=['tutorial','final'];touch.theme='experience';touch.question='What changes when the same path moves faster, or gains another axis?';touch.tutorial='Reconstruct the three-sphere comparison. Keep shared X targets, vary rate alone, then add a separately generated Y stream. Save the target record and time, replay and propose one further change. Contact cues do not supply physical resistance.';
+await post('/api/writing-wall',{map:wall.map,version:after.version,wall});
+const current=loadWall(root,'Random_Definition');
+assert.deepEqual(current.wall.order.filter(id=>current.wall.magnets.find(m=>m.id===id).tags?.includes('final')),primary);
+assert.deepEqual(current.passages.final.map(p=>p.lookup),primary);
+assert.deepEqual(roomLayoutIssues(current),[]);
+assert.equal(current.artifacts.length,before.artifacts.length+1);
+for(const m of before.wall.magnets){const n=current.wall.magnets.find(n=>n.id===m.id);assert.equal(n.tutorial,m.tutorial);assert.equal(n.tags.includes('tutorial'),m.tags?.includes('tutorial')??false);}
+for(const key of ['edges','subjects','experiments','notes'])assert.deepEqual(current.wall[key],before.wall[key]);
+const route=walkingRoute(current,primary);assert.equal(route.legs.length,5);assert.deepEqual(route.unreachable,[]);
+const all=walkingRoute(current);assert.deepEqual(all.unreachable,[]);
+const crossings=route.legs.flatMap((l,i)=>l.cells.filter(c=>c.z===9).map(c=>({...c,afterPrimary:i+1})));
+const receipt={at:new Date().toISOString(),primary,optional:current.wall.order.filter(id=>!primary.includes(id)),bodyWords:current.passages.final.map(p=>p.text).join(' ').split(/\s+/).filter(Boolean).length,sharedOrderMatches:true,roomIssues:[],primaryLegs:route.legs.length,crossings,priorArtifactsRetained:true,existingTutorialNotesAndResearchPreserved:true};
+fs.writeFileSync(path.join(here,'verification.json'),JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt,null,2));

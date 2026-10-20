@@ -1,0 +1,72 @@
+[
+  {
+    "id": "Array",
+    "title": "A slot kept",
+    "summary": "Return to Trans_Pre's familiar collectible BoxMesh and make independent copies. Keep object references separate from occupancy. Collect one cube without shifting the remaining addresses, then open the row into a plane stored as grid_data[x][z]. Change spacing and turn a chosen instance; predict which record each edit affects. The complete reviewed draft provides construction, sensors and display. Carry the fixed-slot record and cube construction into a volume.",
+    "short": "Pre cube → row → XZ plane. Separate values/references. Collect one; keep slots. Vary spacing/one turn. Carry occupancy + construction.",
+    "object": "Independent BoxMesh instances with retained XZ occupancy and reference arrays",
+    "carry": "A cube construction, collection callback and fixed-slot XZ record. Copy the chosen plane's readout explicitly for the next lesson.",
+    "next": "Tutorial_3D copies that plane into the bottom layer with explicit YZX conversion.",
+    "change_note": "The missing canonical tutorial now contains the complete reviewed Array draft, including its feedback clarifications. Printed code unchanged; player-support prose follows the VR-first preface.",
+    "dependsOn": ["Point_Trace", "Trans_Pre", "Trans_Pit"],
+    "given": "Existing museum room, player, floor and clear study host. All study geometry, overlap sensors and displays are printed; floor writer and Molnar studies remain wider encounters.",
+    "check": "Native overlaps change exactly one occupancy and reference, retain list lengths and neighbours, reject props and bounds, and distinguish aliases from independent instances.",
+    "transfer": "Choose another address to turn, then collect a different cube; explain the separate records."
+  },
+  {
+    "id": "Tutorial_3D",
+    "title": "Another index",
+    "summary": "Continue the cube and sensor from Array. Copy the earlier four-by-four readout into an explicit plane value, then initialize a volume whose bottom layer retains that gap. Display XYZ while storing YZX; show the conversion before adding more layers. Collect an unequal-index address and preserve neighbouring cells and the source plane. Flight remains supplied by the existing enclosure. Choose another address and spacing. Carry a precise relation between coordinate, storage and placement.",
+    "short": "Copy XZ record by hand → bottom YZX layer. Upper layers full. Display XYZ; store YZX. Same cube/sensor. Unequal-index collection; source retained. Flight supplied.",
+    "object": "The familiar cube volume initialized from a copied plane, with a selected-address marker",
+    "carry": "Displayed coordinates and nested storage have declared conventions; placement and reach are separate responsibilities.",
+    "next": "Floor returns to a plane and makes an address choose an orientation instead of occupancy.",
+    "change_note": "Replaces operating notes with a complete layer construction and explicit storage conversion. Existing optional open-structure and suspension studies stay available after the core lesson.",
+    "dependsOn": ["Array", "Point_Coordinates"],
+    "given": "Existing museum room/player and flight region. The printed study creates cubes, sensors, fixed labels and selection marker; it does not install flight or transport a live array between halls.",
+    "check": "The copied gap appears at values[0][2][1]; physical collection at XYZ [1,2,0] changes values[2][0][1] alone. Bounds, references, source plane and row independence are checked.",
+    "transfer": "Choose another unequal-index address and predict its storage access and position, then vary spacing."
+  },
+  {
+    "id": "Tutorial_Tiling_Floor",
+    "title": "An address chooses a turn",
+    "summary": "Compare two four-by-four images of the same diagonal motif. The right sample uses an address-to-quarter-turn function; the left repeats one orientation. Predict a row, change one term of the rule, then isolate an exception and enlarge the field. The complete small image renderer is supplied in print, keeping focus on the rule. Save the chosen right-hand result as a PNG for Walls. Carry both the editable recipe and its distinct saved result.",
+    "short": "4x4: same motif, address → quarter-turn via %4. Compare fixed/rule. One exception; expand. Printed raster support. Save actual PNG for Walls. Zero turn != absence.",
+    "object": "One diagonal tile, an address-to-turn function and two generated floor images",
+    "carry": "The rule remains editable in code; user://ada_array_pattern.png carries the chosen pixels, not their explanation.",
+    "next": "Walls loads the saved image in the same project; no replacement generator is used.",
+    "change_note": "Replaces the redirect to final.md with a full rule lesson, printed image support, independent variation and a real saved-output handoff.",
+    "dependsOn": ["Array", "Trans_Rotation"],
+    "given": "Existing supporting museum floor and clear host. Both printed files create the complete comparison; the installed six-rule desk remains the broader encounter.",
+    "check": "Known turns, local-only exception, larger field's unchanged corner, agreement with the installed quarter-turn raster and exact saved pixels.",
+    "transfer": "Choose another rule or exception address, predict one row and keep a chosen result."
+  },
+  {
+    "id": "Tutorial_Tiling_Walls",
+    "title": "The result has another surface",
+    "summary": "Load the actual PNG saved by Floor and assign it to a three-metre panel whose backing and collision are created in code. Compare a newly saved image at the same pose with a new panel angle using the same image. The first changes appearance; the second also reorients the boundary. A missing file produces an instruction, not an invented substitute. Choose another viewing angle and approach. Carry the distinction between saved input, visible receiver and physical access.",
+    "short": "Load Floor PNG. Quad image + Box backing/collision under one body. Change file ≠ turn receiver. Same-project handoff, no live sync. Missing file visible. Hinged exit supplied.",
+    "object": "The learner's saved pattern on a solid freestanding upright receiver",
+    "carry": "Stored values acquire an appearance through a reader; moving that reader need not change the record.",
+    "next": "Disco keeps places fixed and adds timed readers of a phase and a score.",
+    "change_note": "Makes the previously unspecified image handoff executable. A short receiver lesson reuses Transformation; the museum's guarded hinge remains its own encounter.",
+    "dependsOn": ["Tutorial_Tiling_Floor", "Trans_Rotation", "Trans_Pit"],
+    "given": "The same museum project/user-data folder and room/player. Printed code builds this stationary panel. Existing eye chart, guarded moving wall and landing are not rebuilt.",
+    "check": "A separate engine process loads Floor's exact prior pixels; the image is retained under rotation, backing/collision agree, a closed panel blocks and the turned route passes.",
+    "transfer": "Choose another panel angle with the PNG fixed; predict its image orientation and physical boundary."
+  },
+  {
+    "id": "Tutorial_Disco",
+    "title": "A reader returns",
+    "summary": "Begin with both clocks held. Single-step a sixteen-cell checker by changing phase, then single-step an eight-entry Boolean score with a visible playhead and a supplied click. Let each reader run independently. Preserve elapsed remainder, wrap addresses with modulo and declare the long-frame policy: advance past missed steps, sound only the final visit. Move one event without changing tempo, then change tempo without changing the score. Carry stable addresses, independently owned materials and the distinction between stored decisions and their readers into Colour.",
+    "short": "Two held clocks. Phase → checker; Boolean score → playhead/click. Separate play/step. Keep time remainder. Stall: skip missed sounds, retain final index. No footstep recording. Carry record/reader into Colour.",
+    "object": "A fixed checker, an eight-entry score and two independent clocks",
+    "carry": "An arrangement keeps addresses while values and ways of reading them vary; material values can be assigned per instance in Colour.",
+    "next": "Colour continues familiar geometry and arrays, with material values and their perceptual relationships as the subject.",
+    "change_note": "Replaces the obsolete 17x17 footstep-recording sketch and deferred-room ending with the current separate floor/score model. Prints complete code and sound support, with single-step comparison before playback.",
+    "dependsOn": ["Array", "Trans_Pre", "Tutorial_Tiling_Floor"],
+    "given": "Existing museum player and support floor. Printed study provides overlap pads, displays and a short sound receiver. Four-track synthesis and the installed score-to-floor flash are wider encounters.",
+    "check": "Step order and wrap, independent clocks, retained time fraction, pause/resume, 30/120 Hz comparison, explicit stalled-frame policy, actual pad overlap and signed sound data.",
+    "transfer": "Make a different Boolean score, predict sounding addresses, then vary BPM with the score unchanged."
+  }
+]

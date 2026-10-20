@@ -1,0 +1,88 @@
+extends "../probe_base.gd"
+
+func state_image() -> Image:
+    return study.field.state_texture.get_image()
+
+func read_pair(image: Image, x: int, y: int) -> Vector2:
+    var c := image.get_pixel(x,y)
+    var r := roundi(c.r*255); var g := roundi(c.g*255); var b := roundi(c.b*255)
+    return Vector2((r*16+(b>>4))/4095.0,(g*16+(b&15))/4095.0)
+
+func settled() -> void:
+    for i in 240:
+        await frame(1)
+        if not study.field.busy and study.field.pending_steps == 0 and study.field.brush_queue.is_empty(): return
+    check(false,"field settled within 240 rendered frames")
+
+func press(key: String) -> void:
+    study.buttons[key].get_node("InteractableAreaButton").button_pressed.emit(null)
+
+func _run() -> void:
+    setup("field")
+    make_quad(study.material)
+    var seed_display := await capture("seed")
+    var initial := state_image()
+    note("seed_centre",str(read_pair(initial,49,47)))
+    press("STEP")
+    await settled()
+    var first := state_image()
+    var c := read_pair(first,49,47)
+    check(absf(c.x-0.0275)<0.001 and absf(c.y-1.0)<0.0003,"first seeded interior update matches independent arithmetic",str(c))
+    check(read_pair(first,2,2)==Vector2(1,0),"distant background remains equilibrium")
+    press("RESET")
+    study.field.step(16)
+    await settled()
+    var batch := state_image()
+    batch.save_png(folder+mode+"-data-16.png")
+    press("RESET")
+    for i in 16:
+        press("STEP")
+        await settled()
+    var singles := state_image()
+    check(batch.get_data()==singles.get_data(),"two GPU batches agree exactly with sixteen single updates")
+    var before_ink := await capture("sixteen-steps")
+    press("INK")
+    var after_ink := await capture("ink")
+    check(difference(before_ink,after_ink)>0.001,"INK changes displayed field",difference(before_ink,after_ink))
+    check(singles.get_data()==state_image().get_data(),"INK leaves retained data unchanged")
+    press("CLEAR")
+    var clear := state_image()
+    note("clear_source_format",clear.get_format())
+    clear.convert(Image.FORMAT_RGBA8)
+    press("STEP")
+    await settled()
+    var clear_step := state_image()
+    note("rendered_state_format",clear_step.get_format())
+    clear_step.convert(Image.FORMAT_RGBA8)
+    check(clear.get_data()==clear_step.get_data(),"CLEAR then STEP preserves uniform equilibrium",str(read_pair(clear_step,49,47)))
+    study.field.mark(Vector2(0.02,0.5))
+    await settled()
+    var planted := state_image()
+    check(read_pair(planted,0,48).y>0.99 and read_pair(planted,95,48).y==0.0,"edge mark initially affects left edge alone")
+    var mark_iteration: int = study.field.iterations
+    await frame(12)
+    check(planted.get_data()==state_image().get_data() and study.field.iterations==mark_iteration,"planted mark survives waiting while held")
+    press("STEP")
+    await settled()
+    var right := read_pair(state_image(),95,48)
+    check(right.y>0.1 if mode == "original" else right.y==0.0,"periodic versus clamped edge transport prediction",str(right))
+    await capture("boundary-after-step")
+    press("CLEAR")
+    study.field.mark(Vector2(0.38,0.5))
+    study.field.mark(Vector2(0.62,0.5))
+    await settled()
+    var pair_before := state_image()
+    study.field.step(64)
+    await settled()
+    check(pair_before.get_data()!=state_image().get_data(),"two chosen marks develop through 64 retained updates")
+    check(study.field.iterations==64,"comparison keeps an explicit model-step count",study.field.iterations)
+    await capture("two-marks-64")
+    press("RUN/HOLD")
+    await create_timer(0.15).timeout
+    press("RUN/HOLD")
+    await settled()
+    check(study.field.iterations>64,"RUN advances actual retained field",study.field.iterations)
+    var held := state_image()
+    await frame(12)
+    check(held.get_data()==state_image().get_data(),"HOLD stops after completed batch")
+    finish()

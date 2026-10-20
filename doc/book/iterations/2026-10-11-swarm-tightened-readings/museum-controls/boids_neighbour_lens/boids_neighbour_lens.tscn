@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="Script" path="boids_neighbour_lens.gd" id="1"]
+[node name="BoidsNeighbourLens" type="Node3D"]
+script = ExtResource("1")

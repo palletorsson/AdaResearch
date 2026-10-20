@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/fabric_shader_studio/fabric_shader_studio.gd" id="1"]
+[ext_resource type="Script" path="09_studio_lesson.gd" id="2"]
+
+[node name="FabricShaderStudio" type="Node3D"]
+script = ExtResource("1")
+
+[node name="Lesson" type="Node" parent="."]
+script = ExtResource("2")

@@ -1,0 +1,20 @@
+extends "assertions.gd"
+const Model = preload("seating.gd")
+func run() -> void:
+    var model := Model.new()
+    var rows := model.layout(false)
+    var ring := model.layout(true)
+    expect("same six seats",rows.size()==6 and ring.size()==6)
+    expect("layout changes positions",rows!=ring)
+    var gaps := model.gaps(ring)
+    for i in 6: expect("equal circular gap %d"%i,is_equal_approx(gaps[i],gaps[0]))
+    expect("indexed row wrap differs",not is_equal_approx(model.gaps(rows)[0],model.gaps(rows)[2]))
+    var doubled: Array[Vector3] = []
+    for p in ring: doubled.append(p*2)
+    expect("scaling doubles measured gaps",is_equal_approx(model.gaps(doubled)[0],gaps[0]*2))
+    var kept := ring.duplicate()
+    expect("same geometry passes loose rule",model.accepts(ring,.5))
+    expect("same geometry fails strict rule",not model.accepts(ring,.9))
+    expect("changing criterion leaves positions",ring==kept)
+    expect("all pairs checked not just indexed neighbours",not model.accepts([Vector3.ZERO,Vector3(2,0,0),Vector3(.1,0,0),Vector3(4,0,0)],.5))
+    expect("invalid spacing rule refused",not model.accepts(ring,-1) and not model.accepts(ring,NAN))

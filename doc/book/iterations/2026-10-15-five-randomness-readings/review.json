@@ -2,7 +2,39 @@
   "schema": "ada-full-reading-comparison/1",
   "date": "2026-10-15",
   "map": "Random_Definition",
-  "status": "five_drafts_prepared_reading_pending",
+  "status": "supplied_sixth_small_revision_comparison_pending",
+  "returned_complete_candidate": {
+    "id": "supplied-sixth-trial",
+    "title": "What chance is allowed to do",
+    "source": "../2026-10-15-sixth-randomness-trial/supplied-trial.txt",
+    "reading_page": "../2026-10-15-sixth-randomness-trial/index.html",
+    "assessment": "../2026-10-15-sixth-randomness-trial/assessment.md",
+    "requested_revision": {
+      "scope": "Small corrections and RAND-to-Geiger transition; preserve opening and ending; show original and revised side by side.",
+      "comparison": "../2026-10-15-sixth-randomness-trial/compare.html",
+      "revision": "../2026-10-15-sixth-randomness-trial/revised.md",
+      "notes": "../2026-10-15-sixth-randomness-trial/revision-notes.md",
+      "words": 1181,
+      "opening_paragraph_unchanged": true,
+      "last_three_paragraphs_unchanged": true,
+      "reader_responses": [],
+      "canonical_adoption": false
+    },
+    "reported_exposure": "Supplied subtitle says composed after reading drafts A-E.",
+    "provenance": "Supplied by Palle; writer identity and reading setting not independently established.",
+    "scope": "A complete 1109-word candidate, not individual literary verdicts on A-E. Separate from existing local F, How long a result remains, and from the five short form studies.",
+    "palle_selection": null,
+    "canonical_adoption": false
+  },
+  "returned_form_studies": {
+    "source": "../2026-10-15-returned-literary-forms/supplied-experiments.txt",
+    "collection": "../2026-10-15-returned-literary-forms/index.html",
+    "reported_scope": "Five short literary works demonstrating alternative forms; not five complete-chapter reader reports.",
+    "provenance": "Supplied by Palle; writer identity and reading setting not independently established.",
+    "recommendation_as_supplied": [3, 4],
+    "palle_selection": null,
+    "method_change": "Separate discovery of form from complete-chapter composition; keep technical accountability while allowing short studies to vary coverage, narrator, sequence and scale."
+  },
   "author_position": "Same situated assistant for all five; not an independent-writer trial.",
   "design": "Exploratory divergence with shared apparatus and route, not a one-variable causal test.",
   "supplied_packet_feedback": {

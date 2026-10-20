@@ -1,0 +1,72 @@
+[
+  {
+    "id": "Trans_Pre",
+    "title": "A cube that moves, turns and grows",
+    "summary": "Continue the cube shape from Primitives using one whole BoxMesh. Add a steady rise, a turn and a uniform pulse; compare what each operation changes. Elapsed time supplies the changing pose. Create an Area3D and connect its body_entered signal so walking into the cube collects it. The prepared museum supplies the player. Vary the period and explain why only rise and pulse slow down. Carry the box construction, three transforms and overlap collection onward.",
+    "short": "BoxMesh → rise → turn → pulse → overlap collection. Keep mesh. Supply museum player. Vary period; turn rate stays fixed. Carry transforms + sensor.",
+    "object": "One MeshInstance3D displaying a whole BoxMesh, with its child detection area",
+    "carry": "Whole-box construction, three transform properties, elapsed time and signal-driven collection.",
+    "next": "Trans_Introduction: remove collection and compare three visual crossing models.",
+    "change_note": "Reconciles the canonical opening with the reviewed steady rise/fall and cumulative operations; declares the change from CubeBody to whole BoxMesh."
+  },
+  {
+    "id": "Trans_Introduction",
+    "title": "Three ways to make a crossing",
+    "summary": "Reuse the BoxMesh construction in three visual models beside the installed crossings. A returning box function creates independent parts. One bounded fraction moves a platform, grows a cube and turns a plank. Hold the near, halfway and far poses before watching the return. Move the far bank while leaving the transform unchanged and inspect the remaining gap. The models do not carry a rider; use the installed crossings for standing. Carry interpolation and the relation between a changed body and the place it must reach.",
+    "short": "Reuse box. Return instances from function. One fraction → move/grow/turn. Hold poses; move bank. Models visual; installed crossings supply riding. Carry interpolation.",
+    "object": "Three small BoxMesh crossing models and their banks",
+    "carry": "A returning construction function, a bounded pose fraction and interpolation between declared values.",
+    "next": "Trans_Translation: keep the travelling box; choose its destination and route.",
+    "change_note": "Replaces fragments with one complete comparison; explicitly separates visual models from the installed ride."
+  },
+  {
+    "id": "Trans_Translation",
+    "title": "A level body on a sloping journey",
+    "summary": "Keep the travelling box and choose two positions in the study's local frame. Interpolate between them while retaining orientation and size. A condition selects either the direct diagonal or a two-part journey through a corner. Compare the intermediate positions and shared destination, including the different speeds produced by equal time for unequal legs. Change the destination along Z and predict the result. Recall Trace: positions previously recorded movement; here chosen positions prescribe it. Carry control over displacement and journey into Rotation.",
+    "short": "Keep box level. Two endpoints + lerp; branch via corner. Same finish, different journey/speed. Recall Trace's ordered positions. Carry displacement versus route.",
+    "object": "One broad BoxMesh travelling between named local positions",
+    "carry": "Displacement in a declared frame; direct and two-part journeys to the same endpoint.",
+    "next": "Trans_Rotation: choose a turn separately from the direction of travel.",
+    "change_note": "Keeps translation central; uses two branches rather than adding an unfinished waypoint system."
+  },
+  {
+    "id": "Trans_Rotation",
+    "title": "Give the turn a centre",
+    "summary": "Keep the box and clock, remove the translation route and place the box under a pivot. Use a face mark to distinguish a returning outline from a returned orientation. Convert degrees to radians for the chosen axis. Offset the child to turn spinning into an orbit: its local position stays fixed while its world position changes. Change the axis and predict the quarter-turn. The museum's rider support remains supplied. Carry the parent-child relation and the importance of the origin into Scale.",
+    "short": "Box under pivot + face mark. Axis/angle; degrees → radians. Offset child: fixed local position, moving world position. Carry origin + hierarchy.",
+    "object": "One marked BoxMesh beneath a rotating Node3D pivot",
+    "carry": "Axis, angle, pivot and inherited transforms; internal distances survive a rotation.",
+    "next": "Trans_Scale: use a fixed parent and change the dimensions of its children.",
+    "change_note": "A complete pivot study replaces isolated rotation recipes; another axis is a tested variation."
+  },
+  {
+    "id": "Trans_Scale",
+    "title": "Enlarge the opening, keep the witness",
+    "summary": "Return to the parent-child relation with three boxes forming a doorway. Keep a fixed black sphere mesh outside that parent as a size witness; it is not the grabbable PointBody. Compare uniform enlargement with width-only scale. Predict the opening while local mesh dimensions remain fixed and world dimensions change. The threshold origin keeps the posts on the floor. This model has no blocking collision; the installed enlarged room supplies the bodily comparison. Carry a deliberate scale factor into a response chosen by approach.",
+    "short": "Three boxes under doorway parent; fixed sphere mesh outside. Uniform versus unequal scale; local/world dimensions; origin at floor. No model collision. Carry factor.",
+    "object": "A three-box doorway parent and a fixed, non-pickable sphere witness",
+    "carry": "Uniform versus unequal scale, parent scope, threshold origin and a fixed reference.",
+    "next": "Trans_Body: replace the chosen factor with a value from the visitor's distance.",
+    "change_note": "Makes the unchanged witness and origin explicit; does not repeat the museum's relocation mechanism."
+  },
+  {
+    "id": "Trans_Body",
+    "title": "Let your approach choose the transform",
+    "summary": "Return to one familiar box and replace the chosen scale factor with the horizontal world-space distance to the supplied museum body. Map a near/far range to a bounded fraction, then use it to shrink the box while keeping its base on the floor. Use the same input to turn the box instead. Predict near, midpoint and far responses, then extend the reach. Departure restores the pose, unlike Trace's kept positions or the installed lattice's retained cut. Carry a bodily input into a combined opening.",
+    "short": "World horizontal distance → bounded closeness → scale or turn. Keep base on floor. Return on departure; no history. Contrast retained cut. Carry bodily input.",
+    "object": "One visual BoxMesh responding to the supplied player's horizontal distance",
+    "carry": "Distance-to-transform mapping, bounded response and reversible change.",
+    "next": "Trans_Pit: combine known transforms; use continuing overlap to request an opening.",
+    "change_note": "Separates reversible response from stored history and removal, while printing the complete input connection."
+  },
+  {
+    "id": "Trans_Pit",
+    "title": "Make room with three operations",
+    "summary": "Combine two familiar boxes, a fixed frame and Pre's detection area into a solid opening. Continuing player overlap chooses a target; a bounded progress value moves, turns and shrinks both leaves over physics time. Match visible size and collision dimensions. Use aligned arrays of references to update each leaf while leaving the frame fixed. Vary duration and sideways travel, and inspect intermediate clearance. Keep this composition; Arrays returns to Pre's still collectible cube, gives copies addresses and retains the other addresses after collection.",
+    "short": "Two solid leaves + fixed frame + overlap. Progress → move/turn/shrink; resize collision with mesh. Arrays align parts by index. Next: still Pre cubes, address + retained presence.",
+    "object": "Two AnimatableBody3D leaves with BoxMesh visuals and matching box shapes",
+    "carry": "A composed opening plus the familiar box, placement, loop, index and overlap skills needed by Arrays.",
+    "next": "Array: use the existing A slot kept draft next; keep cubes still and record each address's presence. Arrays has not been promoted in this pass.",
+    "change_note": "Promotes the solid-door revision and makes the exact return to Pre's collectible cube explicit."
+  }
+]

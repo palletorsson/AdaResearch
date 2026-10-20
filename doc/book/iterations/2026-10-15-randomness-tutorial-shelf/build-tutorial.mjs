@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const here=path.dirname(fileURLToPath(import.meta.url)), root=path.resolve(here,'../../../..');
+const source=fs.readFileSync(path.join(here,'tutorial-source.md'),'utf8');
+const core=fs.readFileSync(path.join(root,'doc/book/studies/randomness-shelf/direct_randomness.gd'),'utf8').trimEnd();
+const text=source.replace('{{CORE_CODE}}','```gdscript\n'+core+'\n```');
+const target=path.join(root,'commons/maps/Random_Definition/tutorial.md');
+fs.writeFileSync(target,text);
+const prose=text.replace(/```[\s\S]*?```/g,'').replace(/<!--[\s\S]*?-->/g,'').replace(/\[([^\]]+)\]\([^)]+\)/g,'$1');
+const counts={tutorialWords:prose.split(/\s+/).filter(Boolean).length,codeLines:core.split('\n').filter(l=>l.trim()).length};
+fs.writeFileSync(path.join(here,'text-counts.json'),JSON.stringify(counts,null,2)+'\n');
+console.log(JSON.stringify(counts));

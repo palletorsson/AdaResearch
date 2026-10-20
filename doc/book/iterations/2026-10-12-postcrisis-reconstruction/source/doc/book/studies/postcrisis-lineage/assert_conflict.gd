@@ -1,0 +1,16 @@
+extends "assertions.gd"
+const Claims = preload("claims.gd")
+func run() -> void:
+    var model := Claims.new()
+    model.add("door@12","open",true,"A","observation A")
+    model.add("door@12","open",false,"B","observation B")
+    var before := model.records.duplicate(true)
+    expect("opposed reports both supported",model.support("door@12","open")==Vector2i(1,1))
+    expect("selection succeeds",model.resolve(0))
+    expect("selection does not erase evidence",model.records==before)
+    expect("selection does not resolve support",model.support("door@12","open")==Vector2i(1,1))
+    expect("unrelated Q gains no support",model.support("door@12","Q")==Vector2i.ZERO)
+    model.add("door@13","open",true,"C","later time")
+    expect("different time stays separate",model.support("door@13","open")==Vector2i(1,0))
+    expect("bad selection refused",not model.resolve(9) and model.selected==0)
+    expect("reopen retains records",model.resolve(-1) and model.records.size()==3)

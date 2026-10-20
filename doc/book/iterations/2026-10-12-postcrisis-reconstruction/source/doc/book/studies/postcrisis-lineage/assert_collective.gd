@@ -1,0 +1,16 @@
+extends "assertions.gd"
+const Model = preload("contributions.gd")
+func run() -> void:
+    var model := Model.new()
+    for source in ["A","A","B"]: model.add(source,Vector3.ZERO)
+    expect("arrivals are not sources",model.additions==3 and model.sources.size()==2 and model.participations==2)
+    expect("undisputed revision refused",not model.revise(0,Vector3.ONE))
+    expect("dispute accepted",model.dispute(0))
+    expect("revision accepted",model.revise(0,Vector3.ONE))
+    expect("revision keeps source and original",model.pieces[0].source=="A" and model.pieces[0].original==Vector3.ZERO)
+    expect("revision not addition or settlement",model.pieces.size()==3 and model.additions==3 and model.revisions==1 and model.pieces[0].disputed)
+    model.next_version()
+    model.add("A",Vector3.UP)
+    expect("new version resets only local source set",model.sources.size()==1 and model.ever.size()==2 and model.participations==3 and model.additions==4)
+    expect("previous version kept independently",model.previous.size()==3 and model.previous[0].pose==Vector3.ONE)
+    expect("invalid index refused",not model.dispute(-1) and not model.revise(99,Vector3.ZERO))

@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+const here=path.dirname(fileURLToPath(import.meta.url)),root=path.resolve(here,'../../../..');
+const {load}=await import(pathToFileURL(path.resolve(root,'../ada_encyclopedia/tests/writing-wall/load.mjs')).href);
+const {loadWall}=load('lib/writing-wall-store');
+const m=loadWall(root,'Random_Definition');
+const text=fs.readFileSync(path.join(root,'commons/maps/Random_Definition/final.md'),'utf8');
+const before=fs.readFileSync(path.join(here,'before/final.md'),'utf8');
+const markers=s=>[...s.matchAll(/<!-- @([^ ]+) -->/g)].map(x=>x[1]);
+assert.deepEqual(markers(text),markers(before));
+assert.deepEqual(m.passages.final.map(p=>p.lookup),m.wall.order);
+const counts=m.passages.final.map(p=>({id:p.lookup,words:p.text.split(/\s+/).filter(Boolean).length}));
+const receipt={at:new Date().toISOString(),bodyWords:counts.reduce((sum,p)=>sum+p.words,0),passages:counts,roomAndFinalOrderMatch:true,sourceChecks:['frame_jitter_scope.gd','movement_sampler.gd','movement_seed.gd','geiger_counter.gd','lava_entropy_wall.gd','TrngVsPrng.gd','prng_register.gd','seed_study.gd'],readerComprehension:'Not yet observed for this revision',runtimeChanges:false};
+fs.writeFileSync(path.join(here,'verification.json'),JSON.stringify(receipt,null,2)+'\n');console.log(JSON.stringify(receipt,null,2));
