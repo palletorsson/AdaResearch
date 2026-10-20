@@ -1,0 +1,137 @@
+{
+  "schema": "writing-wall/1",
+  "map": "Random_Entropies",
+  "order": [
+    "entropy_chairs_shannon",
+    "entropy_chairs_boltzmann",
+    "entropy_chairs_description",
+    "entropy_door_dynamics",
+    "entropy_cooling_cup",
+    "entropy_frosted_chair",
+    "entropy_ball_pit"
+  ],
+  "magnets": [
+    {
+      "id": "entropy_chairs_shannon",
+      "x": 240,
+      "y": 210,
+      "brief": "Shannon: a chair colour",
+      "question": "Which colour can the next draw produce?",
+      "tutorial": "Compare four visible inventories: 4/4, the same counts rearranged, 7/1 and 8/0. Predict uncertainty in a hypothetical equal-ID colour draw; reconstruct the colour-count function.",
+      "final": "The entrance chair shares our floor. Moving chairs leaves colour shares unchanged; attending to the rare black chair is different from predicting the next colour. What account would retain places?",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_chairs_boltzmann",
+      "x": 780,
+      "y": 210,
+      "brief": "Boltzmann: how many arrangements",
+      "question": "How many assignments match this left-side count?",
+      "tutorial": "Compare sorted, mixed and a second arrangement with the same count. Enumerate assignments: Omega=1 versus 36; colour H stays one bit.",
+      "final": "Only one assignment stands in each version, although thirty-six fit the same brief. The count cannot identify this arrangement. A recipe must retain more.",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_chairs_description",
+      "x": 540,
+      "y": 630,
+      "brief": "Algorithmic complexity: describe these chairs",
+      "question": "Does looking irregular require a long description?",
+      "tutorial": "Four chair groups and their candidate recipes remain visible together. Reconstruct seed 435 with the shared generator; do not infer shortest-program length from appearance.",
+      "final": "The apparently irregular chairs have a short seeded recipe if its generator comes too. How exact must a beginning be when the rule repeatedly uses its own result?",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_door_dynamics",
+      "x": 540,
+      "y": 840,
+      "brief": "Dynamical entropy: two starts, two rules",
+      "question": "Which initial differences disappear, grow or survive only in the record?",
+      "tutorial": "STEP advances both pairs; RESET and GAP restore a controlled beginning. Read both LOW/HIGH traces separately from the 1024-start ensemble. Eight symbols give 1 versus 8 bits; finite starts cap doubling records at 10. Reconstruct the rejoining pair.",
+      "final": "The visible gap raises a question before STEP: will another movement widen or close it? A shared step contracts or expands a starting difference; history can retain differences after reunion. RESET supplies a beginning rather than retracing it. The coffee transition remains a reading test.",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_cooling_cup",
+      "x": 360,
+      "y": 1050,
+      "brief": "Thermodynamic entropy: a cooling cup",
+      "question": "Where does the cup lose heat, and where does entropy increase?",
+      "tutorial": "Compare five cups on one table, with a donut and plate: fixed 25% milk, different mixing stages. Reconstruct the separate heat model at 0, 5, 15, 30, 60 seconds; neither swirl nor steam measures entropy.",
+      "final": "Five fixed milk stages give time to look back. A separate two-body model accounts for cooling: cup entropy falls, surroundings gain more. Reloading a digital snapshot does not reverse physical heat transfer. What can the surface alone tell us?",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_frosted_chair",
+      "x": 540,
+      "y": 1435,
+      "brief": "Conditional entropy: the frosted chair",
+      "question": "What does this record leave unresolved?",
+      "tutorial": "Compare five panes over one chair: identity, colour plus arms, colour, colour, no detail. Reconstruct 0, 1, 2, 2, 3 unresolved bits from eight identities. Stronger blur does not necessarily change the record.",
+      "final": "Five panes separate visibility from a declared record. Different frost can retain the same information. If the record cannot identify the chair, which answer should we give?",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_ball_pit",
+      "x": 540,
+      "y": 1750,
+      "brief": "Min-entropy: four chair pyramids",
+      "question": "What can collapse while the best colour guess stays the same?",
+      "tutorial": "Four physical pyramids of 16 chairs, in layers 9/4/2/1. Grab a support, push, drop or rebuild. Labelled IDs retain group membership. A 8/8 and B 8/4/4 share Hmin=1, Shannon 1 vs 1.5. C is 12/4; D all pink. CHANGE ONE alters a type; RESET rebuilds. Preserve full pose/motion plus generator state with a floor receipt.",
+      "final": "A seat becomes a support for another chair. The pyramids compare category predictions; armrests split a less likely answer. At the all-pink ending a support can leave and the arrangement can fall without surprising the colour record. What happens to neighbours requires another account.",
+      "theme": "entropy",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "research_info_wall",
+      "x": 540,
+      "y": 455,
+      "brief": "Shared research wall / notes and drawings",
+      "question": "What should remain beside the explanation?",
+      "tutorial": "Write or draw a comparison; move a sticky note; return to its locally saved ink and position.",
+      "final": "",
+      "theme": "research",
+      "tags": []
+    },
+    {
+      "id": "entropy_chair_reference",
+      "x": 180,
+      "y": 70,
+      "brief": "One full-size chair, two questions",
+      "tutorial": "Identify the common object before changing colour counts or arrangement descriptions.",
+      "final": "A familiar chair offers a place to begin.",
+      "tags": [],
+      "theme": "reference"
+    }
+  ],
+  "notes": [],
+  "edges": [],
+  "hall_role": "Compare distinct entropy questions; intervene in the door and best-guess studies, then reconstruct the recorded comparison."
+}

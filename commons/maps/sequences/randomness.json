@@ -25,7 +25,8 @@
 	  ],
 	  "content": [
 		"Random_Definition: A seed needs a procedure before it becomes a picture",
-		"Random_Entropy: Sorting changes order while symbol shares and their gauge stay",
+		"Random_Entropies: Entropy Types — which question does each measure answer?",
+		"Random_Entropy: Entropy Workshop — what does the measure miss?",
 		"Random_Remove: Filter, draw, delete — and decide what support disappears",
 		"Randomness_10_PRINT_Algorithm: Local choices become marks, contours and separately computed passages",
 		"Random_Cubes: A single throw becomes an empirical record",
@@ -41,6 +42,7 @@
 	  ],
 	  "maps": [
 		"Random_Definition",
+		"Random_Entropies",
 		"Random_Entropy",
 		"Random_Remove",
 		"Randomness_10_PRINT_Algorithm",
@@ -56,10 +58,12 @@
         "Random_Game"
 	  ],
 	  "deferred_maps": [
-        "Chamber_Random"
+		"Chamber_Random",
+        "Biome_Ladder_Randomness"
 	  ],
 	  "deferred_reason": {
-		"Chamber_Random": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk"
+		"Chamber_Random": "chambers removed from the spine (Palle, 2026-09-02): the catalyst chambers leave the walk; the map stays on disk",
+		"Biome_Ladder_Randomness": "Palle, 2026-10-09: leave the closing biome ladder out for now. Random Game closes the sequence and leads directly to Noise. Keep map and artifacts for later."
 	  },
 	  "audio": {
 		"ambient_preset": "white_noise_drift",
@@ -93,6 +97,22 @@
 		  "size_budget": "compact_only",
 		  "rationale": "Recover a seeded picture, then compare how other devices produce or retain a draw.",
 		  "grammar": "central_hero"
+		},
+		{
+		  "map": "Random_Entropies",
+		  "position": "foundation",
+		  "artifacts": [
+			"entropy_chairs_shannon",
+			"entropy_chairs_boltzmann",
+			"entropy_chairs_description",
+			"entropy_door_dynamics",
+			"entropy_cooling_cup",
+			"entropy_frosted_chair",
+            "entropy_ball_pit"
+		  ],
+		  "size_budget": "environmental",
+		  "rationale": "One measurement contract becomes insufficient and prepares the next encounter.",
+		  "grammar": "enfilade"
 		},
 		{
 		  "map": "Random_Remove",
@@ -287,11 +307,6 @@
 		  "map": "Biome_Cage",
 		  "after": "Random_Mushrooms",
 		  "purpose": "Retained museum application: an authored repertoire is staged as a seeded composition. No additional final.md chapter is implied."
-		},
-		{
-		  "map": "Biome_Ladder_Randomness",
-		  "after": "Random_Game",
-		  "purpose": "Retained closing application: the sequence’s vocabulary accumulates in successive seeded biome compositions."
 		}
 	  ],
 	  "local_review_history": [
@@ -329,6 +344,35 @@
 			],
 			"museum_interludes": null
 		  }
+		},
+		{
+		  "date": "2026-10-09",
+		  "reason": "Defer only the closing biome ladder. Fourteen teaching halls and the earlier Biome Cage interlude remain in their existing order.",
+		  "previous_museum_route": [
+			"Random_Definition",
+			"Random_Entropy",
+			"Random_Remove",
+			"Randomness_10_PRINT_Algorithm",
+			"Random_Cubes",
+			"Random_Rotate_Random_XYZ",
+			"Random_Walk",
+			"Random_Gaussian",
+			"Random_Mushrooms",
+			"Biome_Cage",
+			"Random_Space_Geometry",
+			"Randomness_Examples_of_Randomness",
+			"Random_Pheromone",
+			"Random_Space",
+			"Random_Game",
+            "Biome_Ladder_Randomness"
+		  ]
+		}
+	  ],
+	  "deferred_museum_interludes": [
+		{
+		  "map": "Biome_Ladder_Randomness",
+		  "after": "Random_Game",
+		  "purpose": "Retained closing application: the sequence’s vocabulary accumulates in successive seeded biome compositions."
 		}
 	  ]
 	}

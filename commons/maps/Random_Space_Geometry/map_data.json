@@ -3,7 +3,7 @@
     "name": "Random_Space_Geometry",
     "title": "What neighbours share",
     "lookup_name": "Random_Space_Geometry",
-    "description": "Compare independent seeded height samples with FastNoiseLite Perlin samples. Frequency changes the spatial scale of the coherent field; the comparable columns do not make the two distributions identical or simulate geology.",
+    "description": "Enter an 8 by 8 seeded plan extruded into Y. A declared blue passage remains open. Flatten, raise, replay, or change the source, then compare neighbouring independent and Perlin samples on the existing bench.",
     "version": "placed-promenade",
     "format": "json",
     "dimensions": {
@@ -29,8 +29,20 @@
           17,
           5,
           22
+        ],
+        [
+          1,
+          1,
+          10,
+          11
         ]
-      ]
+      ],
+      "artifact_placement": "map",
+      "plinths": false,
+      "piers": false,
+      "wall_height": 3,
+      "gate_depth_rows": 0,
+      "open_roof": true
     }
   },
   "utility_definitions": {
@@ -517,7 +529,7 @@
         " ",
         " ",
         " ",
-        "rg",
+        " ",
         " ",
         " ",
         " ",
@@ -868,7 +880,7 @@
         " ",
         " ",
         " ",
-        " ",
+        "seeded_room:0:0#seed:42#pin:true#plinth:0",
         " ",
         " ",
         " ",
@@ -1008,7 +1020,7 @@
         " ",
         " ",
         " ",
-        "env_one:0:4:0.5",
+        "env_one:0:4:0.5#seed_controls:true",
         " ",
         " ",
         " ",
@@ -1033,7 +1045,7 @@
       [
         " ",
         " ",
-        "sculpt_one",
+        "sculpt_one#seed_controls:true",
         " ",
         " ",
         " ",

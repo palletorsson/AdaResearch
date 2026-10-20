@@ -1,0 +1,65 @@
+{
+  "schema": "ada-literary-relationships/1",
+  "map": "Random_Definition",
+  "status": "proposed",
+  "edges": [
+    {
+      "id": "touch-page",
+      "from": "random_touch",
+      "to": "random_number_book_page_1955",
+      "type": "transformation",
+      "label": "Touch starts movement; touch keeps digits still.",
+      "data_transfer": false
+    },
+    {
+      "id": "page-seed",
+      "from": "random_number_book_page_1955",
+      "to": "geiger_counter",
+      "type": "difference",
+      "label": "Keeping an output differs from keeping a beginning.",
+      "data_transfer": false
+    },
+    {
+      "id": "seed-gesture",
+      "from": "geiger_counter",
+      "to": "seed_replay_demo/movement_sampler",
+      "type": "unresolved_question",
+      "label": "What can supply another beginning?",
+      "data_transfer": false
+    },
+    {
+      "id": "movement-inversion",
+      "from": "random_touch",
+      "to": "seed_replay_demo/movement_sampler",
+      "type": "inversion",
+      "label": "Numbers become movement; movement becomes a number.",
+      "data_transfer": false
+    },
+    {
+      "id": "gesture-hall",
+      "from": "seed_replay_demo/movement_sampler",
+      "to": "geiger_counter",
+      "type": "shared_source",
+      "label": "A retained gesture seed can restart the hall's private streams.",
+      "data_transfer": true,
+      "evidence": "commons/artifacts/randomness_space/hall_seed.gd"
+    },
+    {
+      "id": "seed-consequence",
+      "from": "seed_replay_demo/movement_sampler",
+      "to": "random_return",
+      "type": "transformation",
+      "label": "A retained beginning changes an excursion within the return rule.",
+      "data_transfer": true,
+      "evidence": "commons/artifacts/randomness_space/hall_seed.gd"
+    },
+    {
+      "id": "return-echo",
+      "from": "random_touch",
+      "to": "random_return",
+      "type": "echo",
+      "label": "The opening hand path and final body journey both have authored limits.",
+      "data_transfer": false
+    }
+  ]
+}

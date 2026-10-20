@@ -1,0 +1,90 @@
+{
+  "schema": "ada-literary-artifact/1",
+  "id": "geiger_counter",
+  "title": "Geiger counter",
+  "scene": "commons/artifacts/geiger_counter/geiger_counter.tscn",
+  "action": "Listen, RESTART, compare; optionally change the extraction clock.",
+  "material_fact": "A deterministic model calculates 96 event times before playback; RESTART replays the sound rendered from that trace.",
+  "implementation_status": {
+    "status": "implemented_source_checked",
+    "participant_observation": "not_collected_for_this_pilot",
+    "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md"
+  },
+  "evidence": [
+    {
+      "id": "events",
+      "path": "commons/artifacts/geiger_counter/geiger_model.gd",
+      "locator": "const COUNT := 96",
+      "kind": "implemented",
+      "claim": "Ninety-six event times are calculated, retained and rendered as clicks; this is simulated detection, not measured radiation."
+    },
+    {
+      "id": "restart",
+      "path": "commons/artifacts/geiger_counter/geiger_counter.gd",
+      "locator": "func restart",
+      "kind": "visible",
+      "claim": "RESTART begins the stored sound again; the display includes seed 435 at the hall's beginning."
+    },
+    {
+      "id": "extraction",
+      "path": "commons/artifacts/geiger_counter/geiger_model.gd",
+      "locator": "static func extract",
+      "kind": "implemented",
+      "claim": "Clock quantization changes interval comparisons. Equal measured intervals emit no bit."
+    }
+  ],
+  "literary": {
+    "status": "proposed",
+    "active_experiment": "experiments/geiger-consequences.json",
+    "review_note": "The supplied reading of edition 3d57b4bf8da95a931c90 prefers the reference. Patient and inquiry remain retained hypotheses, set aside as replacements. The next experiment tests repetition, montage and recurrence; their effects are unassessed.",
+    "primary": {
+      "id": "investigate",
+      "author": "Italo Calvino",
+      "operation": "Let closer observation expose what the present account cannot establish."
+    },
+    "counterpoint": {
+      "id": "repeat",
+      "author": "Samuel Beckett",
+      "operation": "Let exact recurrence persist without requiring a fresh interpretation each time."
+    },
+    "refusal": [
+      "Do not equate simulated detections with physical radiation or quantum evidence.",
+      "Do not claim that hearing clicks reveals all 96 stored times or the internal generator state.",
+      "Do not invent a completed measurement experiment or a reader's confusion."
+    ],
+    "registers": [
+      "sound",
+      "instrument readout",
+      "technical definition",
+      "dated receipt"
+    ],
+    "motifs": [
+      "435",
+      "interval",
+      "record",
+      "return"
+    ],
+    "hypotheses": [
+      {
+        "id": "patient",
+        "primary": {
+          "id": "observe",
+          "author": "Georges Perec",
+          "operation": "Stay with a short sequence of recurring sounds."
+        },
+        "prediction": "The repeated pauses may become worth attending to before a seed is defined.",
+        "risk": "The enumeration may feel inert or merely repeat the current draft."
+      },
+      {
+        "id": "inquiry",
+        "primary": {
+          "id": "investigate",
+          "author": "Italo Calvino",
+          "operation": "Distinguish recognising recurrence from knowing its production."
+        },
+        "prediction": "The observation may create a need for the seed definition and acquisition receipt.",
+        "risk": "The distinction may become another explanation immediately after an experience."
+      }
+    ]
+  }
+}

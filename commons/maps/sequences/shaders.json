@@ -4,9 +4,9 @@
       "name": "Shaders: What a Surface Answers To",
       "truth": "A familiar form can be evaluated as a surface rule. Coordinates, material, light and viewpoint affect its appearance; mesh geometry, collision and retained state remain distinct constructions.",
       "qfep_term": "λE(S)",
-      "qfep_connection": "Earlier coordinates, forms, arrays and fields return as choices inside a material. The learner locates where each choice changes an appearance, a body or a record. Re-evaluating from coordinates and a clock differs from updating from retained state; the final hall makes that missing connection explicit before Cellular Automata.",
+      "qfep_connection": "Earlier coordinates, forms, arrays and fields return as choices inside a material. The learner locates where each choice changes an appearance, a body or a record. Re-evaluating from current inputs differs from updating retained state; the final hall supplies that connection before Cellular Automata.",
       "formula": "surface sample → form rule → material response; retained state requires a connected input",
-      "description": "Six existing halls move from wall images to staged bodies and rooms: graph functions, coordinate patterns, material responses on primitives, layered fields and a glass-covered basin, pink compositions, then a panel whose previous-state input is missing. The proposed tutorial carries a small form rule through these encounters, drawing on earlier sequences and The Book of Shaders.",
+      "description": "Six halls carry a familiar point and cube through a colour mask, coordinate repetition, bump and normal maps, vertex displacement, a composed material, and a field that retains its previous state. Each required reconstruction sits beside a larger museum encounter. Optional returns remain available without becoming prerequisites.",
       "layer": "E_entropy",
       "prerequisites": [
         "noise",
@@ -16,22 +16,22 @@
         "cellularautomata"
       ],
       "difficulty": "intermediate",
-      "estimated_time": "30-40 minutes",
+      "estimated_time": "Not measured: museum visit and code reconstruction are separate activities.",
       "learning_objectives": [
-        "Reuse point distance and colour mapping to construct a mask, keeping its visible boundary distinct from the panel mesh",
-        "Transform a sampling coordinate and separate tile address from local position to vary one repeated form",
-        "Compare one material on different primitive bodies and distinguish normal/view response from received light",
-        "Use a finite layered field to change appearance while identifying the separate construction that supports the visitor",
-        "Compose known material operations and explain an alternate appearance without adding a compulsory new technique",
-        "Distinguish clock-driven re-evaluation from retained-state feedback and identify the missing previous input before Cellular Automata"
+        "Construct a shared UV distance mask; compare hard and soft visible boundaries with fixed geometry and collision",
+        "Repeat and shift sampling coordinates; distinguish tile address, local coordinates and physical size",
+        "Compare flat shading, height-derived normals and an encoded normal map under light without changing silhouette",
+        "Use bounded layered noise to compare colour, vertex normals and displacement; explain subdivision and separate physical support",
+        "Compose repeated pigment, a view-dependent rim and emission on fixed bodies; distinguish visible brightness from illumination",
+        "Plant and retain field data; read old state, write next separately; distinguish model update, palette and receiver"
       ],
       "content": [
-        "Shader_01_Shaping: existing graph panels; proposed return to point, distance and boundary as a small surface mask",
-        "Shader_05_Patterns: existing coordinate tilings and world-projected garden; proposed transforms and address-selected variation of the retained form",
-        "Shader_11_QueerRubber: existing staged primitive bodies; proposed comparison of a shared material and its view-dependent rim",
-        "Shader_09_FBM: existing layered fields and basin under glass; proposed finite field applied to the retained form",
-        "Shader_12_PinkExtravaganza: existing pink materials and plural body; proposed composition with known operations and a declared receiver",
-        "Shader_10_ReactionDiffusion: previous-state texture is unbound and frost retains no growth; reflective handoff to Cellular Automata"
+        "Shader_01_Shaping: one circle rule on two square receivers; same point controls radius and edge",
+        "Shader_05_Patterns: same circle and point; repeat and shift the lookup; optional garden and saved-record returns",
+        "Shader_11_QueerRubber: same receivers, point and circle; compare flat, height and normal-map shading under light",
+        "Shader_09_FBM: same point and rigid cube; replace squares with a subdivided plane and keep collision separate",
+        "Shader_12_PinkExtravaganza: return to rigid point and cube; compose dots, rim and emission; investigate the surrounding room",
+        "Shader_10_ReactionDiffusion: point plants in retained field; GPU updates previous state; old unbound panel and frost remain comparisons"
       ],
       "maps": [
         "Shader_01_Shaping",
@@ -166,9 +166,23 @@
           "decision": "Keep six halls and images → bodies → rooms. Carry a familiar form through masks, transforms, repetition, materials and fields. Read The Book of Shaders as a reference, adapting explicitly to Godot.",
           "guide": "doc/book/course/storyboards/SHADERS.md",
           "status": "Teaching proposal updated; museum logic, map order and full manuscripts unchanged."
+        },
+        {
+          "date": "2026-10-10",
+          "scope": "Whole shader sequence reading",
+          "decision": "Keep six-hall order. Preserve optional encounters, separate them in collected reading, clarify Water-to-Pink handoff and two passes through retained state. Update descriptive metadata to the completed drafts.",
+          "guide": "doc/book/iterations/2026-10-10-shaders-complete-readings/index.html",
+          "status": "Prose and metadata only; map order, museum runtime and printed code unchanged."
+        },
+        {
+          "date": "2026-10-10",
+          "scope": "Whole shader ghost student",
+          "decision": "Keep six-hall order and required code. Clarify guided versus independent variation in Materials and Shaping placement; repair supplied Shaping entry against saved travel.",
+          "guide": "doc/book/iterations/2026-10-10-shaders-ghost-student/index.html",
+          "status": "83 fresh student assertions; 42 supplied-launcher configuration checks; 5 native Shaping entry checks. Synthetic AI evidence, not a human/headset trial."
         }
       ],
-      "learning_objectives_status": "Proposed tutorial progression; learner adapters and cross-hall transfer are not yet verified."
+      "learning_objectives_status": "Six focused drafts reconstructed in order by a fresh-context AI ghost student: six printed programs, six independent variations, 83 new GPU assertions. Printed lesson code unchanged. Supplied Shaping launcher repaired and separately checked. Physical headset, human learning and automatic cross-hall persistence remain untested."
     }
   },
   "world_phase": "transition",

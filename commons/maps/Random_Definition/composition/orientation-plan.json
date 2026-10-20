@@ -1,0 +1,80 @@
+{
+  "schema": "ada-writing-orientation-plan/1",
+  "map": "Random_Definition",
+  "status": "provisional_sequence_hypothesis",
+  "title": "Where does the sequence need each operation?",
+  "review_path": "doc/book/iterations/2026-10-15-composition-consequences/review.json",
+  "reviewed_edition": "ca4601b6324d2f76cd92",
+  "principle": "The map composes relationships. The artifact realizes them. The prose attends to what happens.",
+  "scope": "A proposal for this five-stop sequence, not permanent author assignments. The reference remains the comparison baseline; no candidate is adopted.",
+  "apparatus_note": "The reviewed edition describes the earlier three-line RANDOM TOUCH. The current artifact is now a five-row abacus; its changed encounter needs another reading before the older findings can be extended to it.",
+  "entries": [
+    {
+      "artifact": "random_touch",
+      "operation": "Patient observation",
+      "status": "proposed",
+      "reading_change": "Stay with touch, bounded motion and differences of speed before explaining generation.",
+      "newly_perceptible": "The same sideways targets can occupy different durations; another axis changes the space available to the virtual hand.",
+      "affected_artifacts": ["seed_replay_demo/movement_sampler", "random_return"],
+      "relation": "The opening supplies movement from numbers. Later movement supplies a number; later still an excursion carries the body and must return.",
+      "risk": "Prescribing a feeling, confusing virtual-hand displacement with bodily travel, or describing three lines after the apparatus has changed to five.",
+      "can_remain_unspoken": "The later inversion and the chapter's account of agency need not be announced here.",
+      "observed_effect": null
+    },
+    {
+      "artifact": "random_number_book_page_1955",
+      "operation": "Selection and retention",
+      "status": "proposed",
+      "reading_change": "Give the held five-digit group time among the continuing rows.",
+      "newly_perceptible": "Selecting an existing result changes its persistence in view without changing its production.",
+      "affected_artifacts": ["geiger_counter"],
+      "relation": "The later persistent seed readout can recall the held group while naming a different kind of record.",
+      "risk": "Adding a second archival interpretation before the retained digits have acquired attention.",
+      "can_remain_unspoken": "A general philosophy of preservation; the Geiger can make the contrast available later.",
+      "observed_effect": null
+    },
+    {
+      "artifact": "geiger_counter",
+      "operation": "Montage",
+      "status": "promising_local_candidate",
+      "reading_change": "Receipt, readout, sound and calculation arrive as distinct kinds of evidence, retaining the reference's concise audible repetition.",
+      "newly_perceptible": "A dated acquisition is not the same event as a repeating calculation or playback.",
+      "affected_artifacts": ["random_number_book_page_1955"],
+      "relation": "The held digits and persistent seed both remain amid passing events, but an outcome and a starting input are different records.",
+      "risk": "A labelled technical manual; presenting explanatory prose as a code excerpt; mistaking synthesized playback for an audio recording of radiation.",
+      "can_remain_unspoken": "The philosophical meaning of preservation; the next artifact's number/movement inversion.",
+      "observed_effect": "The supplied passage reading distinguishes receipt, readout, sound and calculation and explicitly recalls the held RAND digits. This supports a local relation, not a completed whole-chapter map test."
+    },
+    {
+      "artifact": "seed_replay_demo/movement_sampler",
+      "operation": "Inversion",
+      "status": "proposed",
+      "reading_change": "Let the gesture and resulting seed disclose the reversal when the encounter happens.",
+      "newly_perceptible": "Movement supplies an input where the opening supplied movement from numerical values; distinct gestures can share a seed.",
+      "affected_artifacts": ["random_touch", "geiger_counter"],
+      "relation": "A remembered opening changes direction here; the new seed can reach the hall's private instruments.",
+      "risk": "Announcing the reversal in the Geiger transition, or reporting an unperformed gesture-collision experiment as a result.",
+      "can_remain_unspoken": "The inversion until the gesture yields its number; the person's intention cannot be recovered from that seed.",
+      "observed_effect": null
+    },
+    {
+      "artifact": "random_return",
+      "operation": "Rule and consequence",
+      "status": "proposed",
+      "reading_change": "Let the variable excursion meet its compulsory return, and finish at that constraint.",
+      "newly_perceptible": "Choosing another seed varies a journey within a rule that the choice does not remove.",
+      "affected_artifacts": ["random_touch", "geiger_counter"],
+      "relation": "Authored limits recall the opening; the compulsory return differs from voluntarily pressing RESTART.",
+      "risk": "A concluding moral or false equivalence between chosen replay and compulsory return.",
+      "can_remain_unspoken": "A summary of the chapter's theme or a claim about what every participant must feel.",
+      "observed_effect": null
+    }
+  ],
+  "pending_passage_edits": [
+    {"candidate":"montage", "change":"Replace the register heading 'In the program' with 'The calculation' when preparing the next candidate; the passage contains explanatory prose, not a literal code excerpt."},
+    {"candidate":"montage", "change":"Keep explicit that the program renders sound from stored event times; it is not an audio recording of measured radiation."},
+    {"candidate":"recurrence", "change":"Replace 'travelled' with wording about the visible hand following the sphere; the viewpoint remains fixed."},
+    {"candidate":"recurrence", "change":"Remove the advance announcement of movement becoming a number. Let MOVE / KEEP realize the connection."}
+  ],
+  "next_test": "After the abacus revision is stable, check its situated opening, then compare a minimally corrected montage in the complete sequence. Ask which record supports which claim and what another encounter changes. Do not combine all three strategies by default."
+}

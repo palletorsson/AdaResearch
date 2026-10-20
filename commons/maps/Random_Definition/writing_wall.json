@@ -1,0 +1,324 @@
+{
+  "schema": "writing-wall/1",
+  "map": "Random_Definition",
+  "order": [
+    "random_touch",
+    "seed_replay_demo",
+    "randomness_tutorial_shelf",
+    "prng_crank_machine",
+    "random_number_book_page_1955",
+    "film_prng_register",
+    "seed_replay_demo/source_console",
+    "seed_replay_demo/frame_timing",
+    "trng_vs_prng",
+    "lava_entropy_wall",
+    "geiger_counter",
+    "seed_replay_demo/movement_sampler",
+    "seed_study",
+    "random_return",
+    "slot_machine"
+  ],
+  "magnets": [
+    {
+      "id": "seed_study",
+      "x": 55,
+      "y": 65,
+      "brief": "48 stored values become colour, bars, colour + height, size and rotation.",
+      "question": "What is allowed to change when the numbers stay?",
+      "theme": "assignment",
+      "tutorial": "First pilot: keep the 48 values, seed, mapping parameters and version. Compare one cell across colour and height; change only its assignment. Preserve the comparison and replay it. Rebuild the mapping independently, then use the observation to propose one further change. These 48 scalar values are a different experiment from the paired RGB grids.",
+      "final": "Optional encounter in the five-stop edition. Retained writing seed: Return to the opening assignment question with five trays. RGB triples and their means give the same sample different forms. Keep this as our first research pilot.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "seed_replay_demo",
+      "x": 355,
+      "y": 65,
+      "brief": "One body joins three stacked glass windows and inset information, with the hand interface between the bottom START and middle REPLAY rows. START, an independently restarted same-seed REPLAY, and SEED + 1 expose the seed through comparison. Seed numbers, draw strips and matching-pane counts remain visible. Only the middle replay changes its colour assignment, range or draw offset.",
+      "question": "What repeats when the seed repeats, and what else must remain the same?",
+      "theme": "assignment",
+      "tutorial": "Compare bottom and middle at the same seed, then bottom and top with only the seed changed. Change only the middle mapping or range, keeping raw draws fixed; test +1 DRAW separately. Keep settings, replay all three, reconstruct the pair, then add the independent seed + 1 window. Distinguish starting state, draw position and assignment.",
+      "final": "Optional colour instrument, mentioned in the Geiger passage as another interpretation of the shared hall seed. A manual seed choice restarts the hall; changing mapping or discarding one draw remains a local intervention.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "random_return",
+      "x": 655,
+      "y": 65,
+      "brief": "Hold the sphere to travel out and back. Direction and distance are sampled; returning is prescribed.",
+      "question": "How much freedom does the rule permit?",
+      "theme": "experience",
+      "tutorial": "Trace two draws into angle and distance; distinguish a sampled destination from the authored return.",
+      "final": "End with release: the ride ends for the visitor while the sphere continues and returns. Leave that asymmetry available without a closing verdict. A small, explicitly schematic diagram tests whether the separation is clearer.",
+      "proposal": "Compare ranges or direction sectors while preserving the same draws; retain collision-aware carrying.",
+      "tags": [
+        "final"
+      ]
+    },
+    {
+      "id": "prng_crank_machine",
+      "x": 955,
+      "y": 65,
+      "brief": "Each crank advances a visible deterministic state.",
+      "question": "What must we know to predict the next value?",
+      "theme": "procedure",
+      "tutorial": "Open the procedure behind the two benches: step, reset and reproduce a state transition. Separate initial seed, current state, draw count and displayed output. Use the adjacent register as optional close inspection rather than a second lesson.",
+      "final": "Optional encounter in the five-stop edition. Retained writing seed: Answer the replay question through visible arithmetic. Define pseudorandom procedure, state and seed only now; repeatability gives us an experiment we can revisit.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "film_prng_register",
+      "x": 55,
+      "y": 305,
+      "brief": "A supporting view of a pseudorandom procedure.",
+      "question": "Which hidden step becomes visible here?",
+      "theme": "procedure",
+      "tutorial": "Use beside the crank as a closer examination of the implementation.",
+      "final": "Optional encounter in the five-stop edition. Retained writing seed: A short supporting encounter: the number has a predecessor. Give the dependency a visible form without starting a second lecture.",
+      "proposal": "",
+      "tags": []
+    },
+    {
+      "id": "seed_replay_demo/frame_timing",
+      "x": 355,
+      "y": 305,
+      "brief": "Measures application frame intervals. Irregular timing is not an entropy estimate.",
+      "question": "Does looking irregular tell us where uncertainty came from?",
+      "theme": "measurement",
+      "tutorial": "Compare the stepped generator with a held frame-interval trace. Keep the trace and change only display range. Distinguish a frame count, a measured interval and a pseudorandom draw; none establishes physical entropy by appearance.",
+      "final": "Optional encounter in the five-stop edition. Retained writing seed: Hold one trace and change its display range. Its appearance changes without new intervals. Let this enacted comparison separate a visual impression from a claim about the source, preparing three distinct questions.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "seed_replay_demo/movement_sampler",
+      "x": 655,
+      "y": 305,
+      "brief": "Records movement and derives a seed from the recording.",
+      "question": "What survives when a gesture becomes an integer?",
+      "theme": "source",
+      "tutorial": "Capture poses and elapsed times; retain the receipt and samples. Derive the seed again and replay the hall. Fresh movement is a new input, not evidence of true randomness; the subsequent generators remain deterministic.",
+      "final": "Restored in the saved room at (9.5, 18.5), facing 180 degrees. Follow movement into a kept number; explain the reduction briefly. Keep sampling and hashing detail in the research note and tutorial. Two different gestures with the same seed remain a proposed comparison, not a found pair.",
+      "proposal": "",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "seed_replay_demo/source_console",
+      "x": 955,
+      "y": 305,
+      "brief": "Recalls a chosen number, a kept gesture or the saved opening 435; replay uses the current hall seed. Clock, frame, system and online acquisition are disabled in this hall.",
+      "question": "What changed: source, record, seed or use?",
+      "theme": "source",
+      "tutorial": "Trace the saved opening receipt into each instrument’s private generator. Select a number manually or retain a gesture and its conversion to a seed. Replay without acquiring another input. The frame trace remains an observation, not an automatic seed source.",
+      "final": "Optional control station. The Geiger passage explains the distinction between acquiring the original 435 and reusing it. RESET 435 recalls that receipt without a network request.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "random_number_book_page_1955",
+      "x": 55,
+      "y": 545,
+      "brief": "Recalls RAND’s published random-number table through an authored page of falling digits.",
+      "question": "How can chance become addressable and reusable?",
+      "theme": "record",
+      "tutorial": "Distinguish stored outcomes from regenerated ones. Record where reading begins.",
+      "final": "Keep the RAND book central. A touched group stays amber as rows descend. Historical testing complicates preservation: a record enables investigation without settling provenance.",
+      "proposal": "",
+      "tags": [
+        "final"
+      ]
+    },
+    {
+      "id": "trng_vs_prng",
+      "x": 361.88159258612274,
+      "y": 663.4484084556842,
+      "brief": "A comparison exhibit about physical sources and deterministic generation.",
+      "question": "What evidence distinguishes origins, beyond appearance?",
+      "theme": "source",
+      "tutorial": "Compare the declared source and generation procedure. Inspect implementation before treating any simulated stream as physical entropy.",
+      "final": "Optional encounter in the five-stop edition. Retained writing seed: Distinguish visual irregularity, specified statistical properties and predictability given available information. Compare calculation from state with measurement of physical uncertainty. Follow the measuring procedure through the doorway; the lamps and detections here remain simulations.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "lava_entropy_wall",
+      "x": 655,
+      "y": 545,
+      "brief": "Virtual lamps, a synthetic sensor and processing produce a repeatable record. This is a simulation.",
+      "question": "How does the observation rule participate in the result?",
+      "theme": "measurement",
+      "tutorial": "Hold the lamp model fixed; change the sensor mask; keep and replay the receipt.",
+      "final": "Mention the virtual lamps among the instruments starting at 435 in the Geiger passage. Keep the sensor-mask experiment as an optional tutorial encounter, without a separate Final stop.",
+      "proposal": "",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "geiger_counter",
+      "x": 955,
+      "y": 545,
+      "brief": "Simulated detection times become electronic clicks and interval-comparison bits.",
+      "question": "How can the same beginning remain difficult to anticipate?",
+      "theme": "measurement",
+      "tutorial": "Begin at 435; keep seed, rate and clock. Replay the detection times, then compare 1 ms and 100 ms clocks on that same trace. Separate initial seed, advancing generator state, event times and extracted bits. Change the hall seed explicitly and reset to 435. Record an observed difference or failed hypothesis and propose a revision.",
+      "final": "Hear the clicks repeat. Introduce 435 as a seed and distinguish it from advancing state. Give its saved atmospheric origin, then explain reuse and deliberate change throughout the hall. The hand’s curve and the clicks can feel unpredictable while being calculated. A gesture supplies the next input.",
+      "proposal": "",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "slot_machine",
+      "x": 55,
+      "y": 785,
+      "brief": "A familiar lever turns sampled symbols into anticipation and counts.",
+      "question": "What do counts retain of an individual encounter?",
+      "theme": "experience",
+      "tutorial": "Separate an outcome, its mapping and a histogram. Continue into Random Entropy.",
+      "final": "Optional encounter in the five-stop edition. Retained writing seed: Give anticipation time. The reels and their counts hand the question of what a record retains to Random Entropy.",
+      "proposal": "",
+      "tags": []
+    },
+    {
+      "id": "random_touch",
+      "x": 355,
+      "y": 785,
+      "brief": "Five small beads and one large REPLAY button. Translucent circles accumulate on a pale wall behind the rods. The first four speeds share X; the fifth adds Y. Only the touching virtual hand follows.",
+      "question": "What changes when the same path moves faster, or gains another axis?",
+      "theme": "experience",
+      "tutorial": "Reconstruct the four source files. Sample twelve marks per movement step; compare equal step counts across speeds. Exclude waiting and return, retain up to 576 marks per row, and preserve visible ink with the record. Uniform targets are the installed default; a bounded-Gaussian reconstruction tests the source hypothesis separately.",
+      "final": "Use the shared we voice. Movement leaves a record on the wall; equal paths at different speeds leave the same marks. Darkness combines target selection, interpolation and overlap. A dense centre alone does not establish Gaussian randomness. At RAND, touch keeps a group already falling.",
+      "proposal": "",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "randomness_tutorial_shelf",
+      "x": 655,
+      "y": 1025,
+      "brief": "Eight retained values from the hall seed, initially 435. A single NEXT button sits on a protruding extension of the table. Each press sends one value to X position, uniform scale, cube rotation in radians and sphere hue together. Saturation and brightness stay fixed; eight presses return to the starting sample.",
+      "question": "What changes when the same number becomes position, size, rotation or hue?",
+      "theme": "assignment",
+      "tutorial": "In the hall, press the single NEXT button on the tabletop extension and follow one u through four assignments. Reconstruct the 26-line learner scene; its standalone preview retains REPLAY, KEEP and LOAD for the experiment loop. The hall follows the shared seed. The 48-value bench remains the first research pilot.",
+      "final": "Optional tutorial encounter beside the colour-grid window. No additional stop in the adopted final chapter.",
+      "proposal": "Compare hue from one value with RGB from three successive values in the neighbouring window.",
+      "tags": [
+        "tutorial"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-range",
+      "x": 410,
+      "y": 990,
+      "layer": "final",
+      "text": "Palle: the window and the moving sphere ask the same question. Within what range, and towards what, is randomness directed?",
+      "attachedTo": "random_return"
+    },
+    {
+      "id": "note-source",
+      "x": 730,
+      "y": 990,
+      "layer": "tutorial",
+      "text": "Distinguish a changing display, an irregular measurement, a seed, a PRNG sequence and a physical entropy source. The frame monitor measures variation; it does not establish entropy.",
+      "attachedTo": "seed_replay_demo/frame_timing"
+    },
+    {
+      "id": "note-return",
+      "x": 1010,
+      "y": 990,
+      "layer": "final",
+      "text": "Return to one cell. What did a mapping reveal or obscure? Keep the comparison and let the observation change the text or apparatus.",
+      "attachedTo": "seed_study"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-opening-0",
+      "from": "seed_study",
+      "to": "seed_replay_demo",
+      "layer": "tutorial",
+      "directed": true,
+      "label": "same values, another assignment"
+    },
+    {
+      "id": "edge-opening-1",
+      "from": "seed_replay_demo",
+      "to": "random_return",
+      "layer": "final",
+      "directed": true,
+      "label": "where randomness is allowed to act"
+    },
+    {
+      "id": "edge-opening-2",
+      "from": "seed_replay_demo",
+      "to": "prng_crank_machine",
+      "layer": "tutorial",
+      "directed": true,
+      "label": "open the procedure"
+    },
+    {
+      "id": "edge-opening-3",
+      "from": "seed_replay_demo/frame_timing",
+      "to": "seed_replay_demo/source_console",
+      "layer": "tutorial",
+      "directed": true,
+      "label": "irregular is not certified entropy"
+    },
+    {
+      "id": "edge-opening-4",
+      "from": "seed_replay_demo/source_console",
+      "to": "seed_replay_demo",
+      "layer": "shared",
+      "directed": true,
+      "label": "a kept number becomes a seed"
+    },
+    {
+      "id": "edge-opening-5",
+      "from": "lava_entropy_wall",
+      "to": "geiger_counter",
+      "layer": "tutorial",
+      "directed": true,
+      "label": "change measurement; preserve events"
+    },
+    {
+      "id": "edge-opening-6",
+      "from": "geiger_counter",
+      "to": "seed_study",
+      "layer": "final",
+      "directed": true,
+      "label": "return with a different question"
+    },
+    {
+      "id": "edge-shelf-colour",
+      "from": "randomness_tutorial_shelf",
+      "to": "seed_replay_demo",
+      "layer": "tutorial",
+      "directed": true,
+      "label": "one hue value / three RGB channels"
+    }
+  ]
+}

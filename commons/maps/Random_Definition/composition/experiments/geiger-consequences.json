@@ -1,0 +1,53 @@
+{
+  "schema": "ada-writing-orientation-experiment/1",
+  "id": "geiger-consequences",
+  "title": "What does a writing orientation change?",
+  "status": "awaiting_reading",
+  "artifact": "geiger_counter",
+  "predecessor_edition": "3d57b4bf8da95a931c90",
+  "predecessor_preference": "reference",
+  "predecessor_scope": "Supplied critical reading prefers the reference to patient and inquiry. No canonical adoption or independent participant result follows.",
+  "changed_condition": "Form of the complete Geiger passage: repetition, montage or recurrence. Explanations and documentary material may move within this encounter.",
+  "held_fixed": ["reference chapter", "other four passages", "room/Final order", "shared we", "435 and its receipt", "implemented mechanisms", "conditional gesture collision", "compulsory return ending"],
+  "confounds": ["Length, paragraph rhythm and explanation timing vary together. This is an editorial comparison, not an isolated causal test of an author.", "Repeated reading can itself change attention. Record the reading order; a second reader may use another order."],
+  "tests": {
+    "artifact": "What becomes noticeable, investigable or formally experienced here that the reference did not make available? Name a detail in the passage.",
+    "map": "After reading the complete chapter, does an earlier or later encounter acquire a different significance? Name that encounter and the relation, or record no change.",
+    "decision_rule": "Discard a candidate that supports neither test. A result on one test warrants a scoped revision; evidence on both makes a stronger candidate, not automatic adoption. Retain the reference when no gain justifies the cost."
+  },
+  "candidates": [
+    {
+      "id": "repetition",
+      "label": "Repetition",
+      "strategy_provenance": "Beckett-associated operation from the existing toolbox; an original local experiment, not stylistic imitation.",
+      "formal_change": "Three RESTART actions and four identical sound sentences precede the definition. The explanation is delayed rather than expanded.",
+      "artifact_test": "Does repeated wording give a detectable duration to replay, or simply become tedious?",
+      "map_test": "Does the later compulsory return recall these chosen restarts while remaining a different kind of return?",
+      "risk": "The text may spend attention without making a new distinction; a reader may wrongly equate RESTART with the sphere's compulsory return.",
+      "observed_effect": null,
+      "test_results": {"artifact": "unassessed", "map": "unassessed"}
+    },
+    {
+      "id": "montage",
+      "label": "Montage",
+      "strategy_provenance": "Eliot-associated juxtaposition from the existing toolbox; no borrowed voice or invented participant testimony.",
+      "formal_change": "The receipt precedes the first written click. Screen, action, implementation and other instruments occupy explicitly different registers.",
+      "artifact_test": "Can the reader distinguish what the screen shows, what RESTART sounds like, and what comes from code or the receipt without a continuous explanation?",
+      "map_test": "Does the return to the held RAND digits distinguish keeping an outcome from keeping a beginning, or repeat work the book already did?",
+      "risk": "Labels can turn the passage into a catalogue, and another archival intervention may be redundant.",
+      "observed_effect": null,
+      "test_results": {"artifact": "unassessed", "map": "unassessed"}
+    },
+    {
+      "id": "recurrence",
+      "label": "Recurrence",
+      "strategy_provenance": "Joyce/Borges-associated recurrence and rule-following, as proposed in the supplied feedback; no new scholarly claim about either work.",
+      "formal_change": "435 moves through remembered hand movement, colour, capture, clicks and dated acquisition; the transition reverses number-to-movement into movement-to-number.",
+      "artifact_test": "Does following 435 clarify the different procedures and the distinction between a saved source value and a generator input?",
+      "map_test": "Does MOVE / KEEP now change the direction of a relation established at the opening sphere?",
+      "risk": "Tracking the number may become another inventory or imply that private instrument streams are identical.",
+      "observed_effect": null,
+      "test_results": {"artifact": "unassessed", "map": "unassessed"}
+    }
+  ]
+}

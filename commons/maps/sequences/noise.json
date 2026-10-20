@@ -33,6 +33,8 @@
 		"Noise_Voxel: The line that decides",
 		"Noise_6_Wall: The room wears the sum",
 		"Noise_Inside_Noise: Borrow an address",
+		"Noise_Cellular: A boundary as membrane, opening and strand",
+		"Noise_Box: The same field received as boxes",
 		"Noise_Space_10: Which way will carry you?",
 		"Noise_Perlin_Simplex: What counts as the same",
         "Lab_Path: What has followed you out of the room? (optional return; outside the museum spine)"
@@ -44,6 +46,8 @@
 		"Noise_Voxel",
 		"Noise_6_Wall",
 		"Noise_Inside_Noise",
+		"Noise_Cellular",
+		"Noise_Box",
 		"Noise_Space_10",
 		"Noise_Perlin_Simplex",
         "Lab_Path"
@@ -140,6 +144,27 @@
 		  ],
 		  "size_budget": "mixed",
 		  "rationale": "Domain warping borrows another address; values shape an enclosing surface while its floor and doors stay pinned."
+		},
+		{
+		  "map": "Noise_Cellular",
+		  "position": "integration",
+		  "artifacts": [
+			"cellular_womb_space",
+			"cellular_atrium_space",
+		    "voronoi_strands"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Compare a curved shell, opened cell partitions and a 3D edge skeleton at body scale."
+		},
+		{
+		  "map": "Noise_Box",
+		  "position": "integration",
+		  "artifacts": [
+			"box_shell_space",
+		    "box_atrium_space"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Keep cellular fields while changing the receiving geometry to occupied boxes."
 		},
 		{
 		  "map": "Noise_Space_10",

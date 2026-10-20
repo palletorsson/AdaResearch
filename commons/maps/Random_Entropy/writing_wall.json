@@ -1,0 +1,164 @@
+{
+  "schema": "writing-wall/1",
+  "map": "Random_Entropy",
+  "order": [
+    "shannon_entropy_meter",
+    "entropy_jar_states",
+    "entropy_jar",
+    "entropy_sorting_table",
+    "entropy_compartments",
+    "entropy_axiom",
+    "entropy_ruin",
+    "signal_room",
+    "prefab_disorder",
+    "hardware_entropy_decay"
+  ],
+  "magnets": [
+    {
+      "id": "entropy_jar",
+      "x": 55,
+      "y": 305,
+      "brief": "H(colour | six height bands); whole-jar colour entropy remains one bit.",
+      "question": "Which differences does this account retain, and what would another account need?",
+      "theme": "experience",
+      "tutorial": "Shake and reset the original jar. Compare with four columns that start from prepared arrangements and continue mixing; pause their height/radius readings. Editable partitions remain a reconstruction task.",
+      "final": "Shaking changes where beads sit without changing the population. A gesture, positions and the gauge would be different records. How much would a shorter description leave open?",
+      "proposal": "Main encounter 3 at (12,8), yaw 180°. ",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "shannon_entropy_meter",
+      "x": 55,
+      "y": 65,
+      "brief": "A pair separates while the marginal colour reading stays.",
+      "question": "Which differences does this account retain, and what would another account need?",
+      "theme": "experience",
+      "tutorial": "Preparatory counts-and-neighbours.md build: preserve a list before sorting its copy.",
+      "final": "SORT changes neighbours while shares stay fixed; the retained strip keeps earlier relations available. CONTRAST changes shares. To include position, the next account must say what about position is known.",
+      "proposal": "Main encounter 1 at (8,5), yaw 180°. ",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "hardware_entropy_decay",
+      "x": 955,
+      "y": 305,
+      "brief": "Controller movement and grip change surface scratches, grime and weathering. An input-driven visual study; no thermodynamic entropy calculation.",
+      "question": "What question can this encounter test?",
+      "theme": "experience",
+      "tutorial": "",
+      "final": "",
+      "proposal": "Optional side stop at (3,19), yaw 180°. Optional encounter; not a required step in the adopted final.",
+      "tags": []
+    },
+    {
+      "id": "entropy_compartments",
+      "x": 55,
+      "y": 545,
+      "brief": "16 sites, 8 A and 8 B. One-bit colour reading beside S_B/k_B = ln Omega.",
+      "question": "Which differences does this account retain, and what would another account need?",
+      "theme": "experience",
+      "tutorial": "Build the 25-line model; exchange, compare, KEEP, REPLAY, reconstruct and propose a further measure.",
+      "final": "Consider an exchange across the divider, then a change of places within fixed counts. SAME k tests that second possibility. KEEP is available when an exact arrangement matters: the dials alone cannot recover it. Exact replay restores positions, while alignments still depend on viewpoint.",
+      "proposal": "Main encounter 5 at (11,14), yaw 180°. ",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_axiom",
+      "x": 355,
+      "y": 545,
+      "brief": "Displacement and viewing direction affect visible irregularity.",
+      "question": "Which differences does this account retain, and what would another account need?",
+      "theme": "experience",
+      "tutorial": "Optional comparison: no entropy calculation in this enclosure.",
+      "final": "We move while the points stay. Alignments appear or disappear with viewpoint; displacement itself follows a rule. At the stone bed, relations will have consequences beyond what is visible.",
+      "proposal": "Main encounter 6 at (17,21), yaw 0°. ",
+      "tags": [
+        "final"
+      ]
+    },
+    {
+      "id": "entropy_ruin",
+      "x": 55,
+      "y": 785,
+      "brief": "116 rigid stones; remove one support and let contact and gravity decide what else moves.",
+      "question": "How far does one removal travel through the structure, and what still holds?",
+      "theme": "experience",
+      "tutorial": "Optional reconstruction: three colliding stones, fixed base, remove the lower loose support. Compare actual before/after transforms; RESTORE repeats the setup, not a saved physics trajectory.",
+      "final": "One selected stone can move others. PULLED and MOVED separate; pausing selection leaves gravity active. RESTORE rebuilds a beginning without guaranteeing identical landings. The composed museum wall offers a different procedure.",
+      "proposal": "Main encounter 7 at (8,29), yaw 0°. ",
+      "tags": [
+        "final"
+      ]
+    },
+    {
+      "id": "signal_room",
+      "x": 355,
+      "y": 785,
+      "brief": "Same binary counts, different neighbours in a room.",
+      "question": "Which differences does this account retain, and what would another account need?",
+      "theme": "experience",
+      "tutorial": "Optional extension: compare adjacency, then define a conditional predictor.",
+      "final": "ROWS and CELLS keep the same colour shares while neighbour counts change. Unlike the stones, changing the image leaves support intact. The next removal asks which objects are eligible and what depends on them.",
+      "proposal": "Main encounter 8 at (12,48), yaw 180°. ",
+      "tags": [
+        "final"
+      ]
+    },
+    {
+      "id": "prefab_disorder",
+      "x": 955,
+      "y": 65,
+      "brief": "Original objects → parts → seeded hybrids, and back. SEED +1 changes which bundles meet and how they join; fifty meshes remain. KEEP collects variants in a persistent gallery, labelled by seed and stage. Sixteen small butterflies fly only above these tables and move with the installation.",
+      "question": "When does a lost relationship give way to a new form, and what makes that form seem able to do something?",
+      "theme": "experience",
+      "tutorial": "Fix stage and viewpoint; change the seed and KEEP several variants. Open GALLERY to compare four saved sets side by side, page through more, then REPLAY any numbered entry at full size. Reopen and reconstruct exact stored targets; older records remain compatible.",
+      "final": "Optional encounter near the entrance; attend to a particular part changing roles. Human evidence of recognition or a new apparent use remains open.",
+      "proposal": "Optional side stop at (19,10), yaw 180°. Seeded joins and gallery persistence/replay verified natively. Compare apparent uses of two saved variants at the same stage; keep the adopted main final route. Human recognition remains to test. The former aisle flock is now part of this installation; it pauses and hides in GALLERY.",
+      "tags": [
+        "tutorial"
+      ]
+    },
+    {
+      "id": "entropy_jar_states",
+      "x": 355,
+      "y": 65,
+      "brief": "Four broad lavender/coral jars on one plinth; different beginnings, slow continuous mixing.",
+      "question": "When does the beginning become hard to recognise, and what can a different observation still reveal?",
+      "tutorial": "Restart, inspect for eight seconds, watch, pause and compare height with core/rim. Preserve positions, time and source revision; reconstruct the seeded walk before changing one condition.",
+      "final": "Four beginnings wait, then slowly mix. Height and core/rim addresses disclose different colour relations. PAUSE lets us search for what remains of a beginning; the next jar brings intervention within reach.",
+      "tags": [
+        "tutorial",
+        "final"
+      ],
+      "theme": "measurement",
+      "proposal": "Main encounter 2 at (5,8), yaw 180°. "
+    },
+    {
+      "id": "entropy_sorting_table",
+      "x": 355,
+      "y": 305,
+      "brief": "Four cubes stay. Dividers change which colour arrangements agree with each box’s counts.",
+      "question": "Can a boundary change WAYS without moving a single cube?",
+      "theme": "measurement",
+      "tutorial": "Keep P B P B and add dividers: 6, 4, 2, 1. Then sort P P | B B: only one colour arrangement agrees. Count the pictures before using a formula.",
+      "final": "Four cubes let us inspect all six arrangements. A divider changes the account before any cube moves; exchanging two cubes then changes its counts. A larger cabinet tests the same counting question beyond easy enumeration.",
+      "proposal": "Main encounter 4 at (5,14), yaw 180°. Observe whether the pictures make the count understandable before approaching the sixteen-site dials.",
+      "tags": [
+        "tutorial",
+        "final"
+      ]
+    }
+  ],
+  "notes": [],
+  "edges": [],
+  "hall_role": "Observe what a reading leaves out, change one condition, then follow the consequence at increasing spatial scales."
+}

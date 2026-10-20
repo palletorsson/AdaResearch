@@ -5,11 +5,12 @@
 	  "truth": "A change in appearance is not yet evidence of learning. Follow what changes, what measures it and what stays fixed.",
 	  "qfep_term": "Integration",
 	  "qfep_connection": "Within Ada Research, learning opens questions about what a model preserves and excludes. These are project interpretations; learning is not universally gradient descent, and data variability is not identical to thermodynamic entropy.",
-	  "description": "Eight encounters distinguish environmental selection, loss, clustering, learned weights, image filtering, a hand-set memory cell, an adversarial-learning diagram, and anomaly rules. Follow each operation before interpreting what its result means.",
+	  "description": "Eight encounters distinguish selection, loss, grouping, learned weights, perception, ordered memory, generation and evaluation. The carried sphere learns poses, retains timed two-hand phrases and samples a fitted distribution. Synthesis keeps a fresh performance, its declared intention and the model answer separate, with evidence retained across revisions.",
 	  "layer": "integration",
 	  "prerequisites": [
 		"forces",
-        "randomness"
+		"randomness",
+        "graphtheory"
 	  ],
 	  "unlocks": [
         "foundationscrisis"
@@ -17,23 +18,24 @@
 	  "difficulty": "advanced",
 	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
-		"Identify selection conditions without requiring an explicit leaderboard",
-		"Compare three loss rules on controlled observations and repeatable starts",
-		"Compare four cluster centres on three blobs, rings and an unclustered sample",
-		"Distinguish transient activation, learned parameters and evidence of generalisation",
-		"Separate computed edge evidence from supplied recognition labels",
-		"Predict a linear memory cell's output from hand-set gates; read the adversarial diagram without mistaking animation for trained state",
-        "Relate anomaly scores to a threshold and reference population"
+		"Reconstruct energy, inherited variation, birth and death; repeat a seeded population under finite and renewing resources, separating live selection from authored arrangements",
+		"Fit a visible line by numerical descent; distinguish observation and parameter space, compare MSE and Huber on fixed data, and test step size and display bounds",
+		"Reconstruct nearest-centre assignment and mean updates with the carried sphere; compare chosen K on fixed observations, test ties and empty groups, and distinguish squared-distance grouping from supplied labels",
+		"Reconstruct a two-input nonlinear network with the carried sphere; separate inference from fitting, check all derivatives numerically, reverse supplied labels and inspect target leakage and development-test limits",
+		"Construct a six-coordinate pose classifier; separate learned answers, acceptance rules and authored responses, and compare computed image edges with supplied recognition labels",
+		"Retain two-hand timing and order, fit one phrase then A/B, test fresh whole takes, and distinguish prototype learning from hand-set memory gates",
+		"Fit mean and joint variation from complete two-hand phrases; distinguish source replay, generated samples and an untrained adversarial diagram",
+        "Declare an intention before fresh two-hand checks; retain outcomes beside model versions, distinguish UNKNOWN from AMBIGUOUS, and compare evaluation with a population-relative anomaly rule"
 	  ],
 	  "content": [
-		"ML_Evolution: Selection without a leaderboard - environmental conditions still select",
-		"ML_Gradient_Landscape: Three judgements of the same observations - compare losses and repeat the start",
-		"ML_Classification: A boundary that moves with its centre - compare fixed K across blobs, rings and a block",
-		"ML_Neural_Networks: What changes when a network learns - distinguish activations, parameters and generalisation",
-		"ML_Perception: An edge is not yet an object - distinguish a computed response from a supplied label",
-		"ML_Sequence_Memory: What should survive the next input - set three gates by hand and predict what survives the next token",
-		"ML_Generative: Learning from an opponent’s response - trace an animated diagram without claiming trained models",
-        "ML_Synthesis: The point outside the rule - ask what an anomaly flag can establish"
+		"ML_Evolution: What keeps a body here? - compare finite and renewing food with the same seeded opening; no ranked fitness is needed for consequences",
+		"ML_Gradient_Landscape: A line and a loss - carry PointBody into slope/intercept space, compare MSE and Huber, and inspect one parameter update",
+		"ML_Classification: A group without a name - the carried PointBody controls one centre; alternate assignment and means, compare K and fixed datasets, then distinguish clustering from supervised classification",
+		"ML_Neural_Networks: What a weight keeps - PointBody queries two inputs; thirteen parameters fit four supplied labels, with visible activations, numerical gradient checks and separate check positions",
+		"ML_Perception: What did the sphere recognise? - teach the carried sphere, test fresh poses and inspect what the representation leaves out",
+		"ML_Sequence_Memory: Both hands, in order - carry the point, fit timed movement prototypes and distinguish these from a hand-set recurrent cell",
+		"ML_Generative: A movement nobody quite made - compare source replay, fitted mean and learned joint variation; retain the untrained GAN diagram",
+        "ML_Synthesis: What I meant, what it answered - check the carried phrase model against declared intentions; retain disagreement and model history"
 	  ],
 	  "maps": [
 		"ML_Evolution",
@@ -123,7 +125,7 @@
             "non_teleological_evolution"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "Environmental selection carries the tutorial. The supplied Evolution lesson mounts a small printed population table with the carried PointBody run/pause control. Compare finite and renewing resources from one seed. Retain the existing drift, judged creature and flower exhibits; distinguish preset states from outcomes of actual simulation."
 		},
 		{
 		  "map": "ML_Gradient_Landscape",
@@ -132,7 +134,7 @@
             "loss_function_comparator"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "The printed study carries PointBody from Evolution into slope/intercept space: see a line, its residuals and a fixed-scale loss surface, compare MSE and Huber, and test one descent step. Keep the existing three-loss comparator and optimizer race as supporting encounters."
 		},
 		{
 		  "map": "ML_Classification",
@@ -141,7 +143,7 @@
             "enhanced_kmeans"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "K-means carries the tutorial: the printed model and museum table use PointBody from Gradient to move one centre among fixed observations. ASSIGN and MEAN alternate; K, ties, empty groups and current squared-distance SSE are explicit. The original four-centre exhibit remains, with its distinct unsquared readout; SVM and random forest provide labelled comparisons. No existing artifact is removed."
 		},
 		{
 		  "map": "ML_Neural_Networks",
@@ -150,16 +152,17 @@
             "neural_network_visualization"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "The printed two-input, three-hidden-unit learner carries the tutorial in a supplied museum preview. PointBody controls an input; STEP changes weights. Explicit labels, complete backpropagation, numerical gradient tests, FLIP and fixed development checks precede the six-coordinate Perception model. Retain the original network exhibits and disclose the answer-bearing extra inputs in the legacy training example."
 		},
 		{
 		  "map": "ML_Perception",
 		  "position": "exploration",
 		  "artifacts": [
+			"vogue_timeline",
             "computer_vision_vr"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "Pose learning in the separate museum bay carries the tutorial; retain the image-filtering comparison and the adjacent dance encounter. Height and phrase extensions currently share this Perception station; their later tutorial placement is an editable plan."
 		},
 		{
 		  "map": "ML_Sequence_Memory",
@@ -168,7 +171,7 @@
             "lstms_vr"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "The tutorial carries the point and six hand features into timed phrase prototypes. Its supplied lesson launcher mounts the printed study beside the existing gate and transformer exhibits. The full production phrase station remains in Perception; hand-set gates are a separate, untrained comparison."
 		},
 		{
 		  "map": "ML_Generative",
@@ -177,7 +180,7 @@
             "generative_adversarial_networks_gans_vr"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "The tutorial continues the sphere and timed hand paths into a fitted Gaussian trajectory model. Its supplied lesson scene mounts the printed study in the hall; the existing GAN remains a separate animated, untrained comparison. Source takes, mean, seeded sample and evaluation are distinct."
 		},
 		{
 		  "map": "ML_Synthesis",
@@ -186,7 +189,7 @@
             "anomaly_detection"
 		  ],
 		  "size_budget": "compact_only",
-		  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+		  "rationale": "The tutorial carries the sphere and trained A/B library into declared-intention checks. The supplied Synthesis lesson launcher mounts the printed study inside the existing hall; the production CHECK station remains in Perception. Existing anomaly, joint-learning and explanation exhibits remain comparisons. Preserve fresh checks, model snapshots and disagreements without automatic retraining."
 		},
 		{
 		  "map": "Chamber_ML",
@@ -208,7 +211,7 @@
         "non_teleological_evolution"
 	  ],
 	  "size_budget": "mixed",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "Environmental selection carries the tutorial. The supplied Evolution lesson mounts a small printed population table with the carried PointBody run/pause control. Compare finite and renewing resources from one seed. Retain the existing drift, judged creature and flower exhibits; distinguish preset states from outcomes of actual simulation."
 	},
 	{
 	  "map": "ML_Gradient_Landscape",
@@ -217,7 +220,7 @@
         "loss_function_comparator"
 	  ],
 	  "size_budget": "compact_only",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "The printed study carries PointBody from Evolution into slope/intercept space: see a line, its residuals and a fixed-scale loss surface, compare MSE and Huber, and test one descent step. Keep the existing three-loss comparator and optimizer race as supporting encounters."
 	},
 	{
 	  "map": "ML_Classification",
@@ -226,7 +229,7 @@
         "enhanced_kmeans"
 	  ],
 	  "size_budget": "compact_only",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "K-means carries the tutorial: the printed model and museum table use PointBody from Gradient to move one centre among fixed observations. ASSIGN and MEAN alternate; K, ties, empty groups and current squared-distance SSE are explicit. The original four-centre exhibit remains, with its distinct unsquared readout; SVM and random forest provide labelled comparisons. No existing artifact is removed."
 	},
 	{
 	  "map": "ML_Neural_Networks",
@@ -235,16 +238,17 @@
         "neural_network_visualization"
 	  ],
 	  "size_budget": "mixed",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "The printed two-input, three-hidden-unit learner carries the tutorial in a supplied museum preview. PointBody controls an input; STEP changes weights. Explicit labels, complete backpropagation, numerical gradient tests, FLIP and fixed development checks precede the six-coordinate Perception model. Retain the original network exhibits and disclose the answer-bearing extra inputs in the legacy training example."
 	},
 	{
 	  "map": "ML_Perception",
 	  "position": "exploration",
 	  "artifacts": [
+		"vogue_timeline",
         "computer_vision_vr"
 	  ],
 	  "size_budget": "compact_only",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "Pose learning in the separate museum bay carries the tutorial; retain the image-filtering comparison and the adjacent dance encounter. Height and phrase extensions currently share this Perception station; their later tutorial placement is an editable plan."
 	},
 	{
 	  "map": "ML_Sequence_Memory",
@@ -253,7 +257,7 @@
         "lstms_vr"
 	  ],
 	  "size_budget": "compact_only",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "The tutorial carries the point and six hand features into timed phrase prototypes. Its supplied lesson launcher mounts the printed study beside the existing gate and transformer exhibits. The full production phrase station remains in Perception; hand-set gates are a separate, untrained comparison."
 	},
 	{
 	  "map": "ML_Generative",
@@ -262,7 +266,7 @@
         "generative_adversarial_networks_gans_vr"
 	  ],
 	  "size_budget": "compact_only",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "The tutorial continues the sphere and timed hand paths into a fitted Gaussian trajectory model. Its supplied lesson scene mounts the printed study in the hall; the existing GAN remains a separate animated, untrained comparison. Source takes, mean, seeded sample and evaluation are distinct."
 	},
 	{
 	  "map": "ML_Synthesis",
@@ -271,7 +275,7 @@
         "anomaly_detection"
 	  ],
 	  "size_budget": "mixed",
-	  "rationale": "Begin with the current primary encounter; retain supporting comparisons. Follow what changes and what evidence supports the claim."
+	  "rationale": "The tutorial carries the sphere and trained A/B library into declared-intention checks. The supplied Synthesis lesson launcher mounts the printed study inside the existing hall; the production CHECK station remains in Perception. Existing anomaly, joint-learning and explanation exhibits remain comparisons. Preserve fresh checks, model snapshots and disagreements without automatic retraining."
 	}
   ],
   "world_phase": "organic"

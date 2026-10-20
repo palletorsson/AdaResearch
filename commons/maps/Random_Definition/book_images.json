@@ -1,0 +1,177 @@
+{
+  "schema": "ada-book-images/1",
+  "map": "Random_Definition",
+  "status": "contour print selected for now; tonal/blur study deferred by author",
+  "selected_on": "2026-10-16",
+  "edition": "doc/book/iterations/2026-10-16-contour-selection/illustrated.html",
+  "text": "commons/maps/Random_Definition/final.md",
+  "trial": "doc/book/iterations/2026-10-16-contour-selection",
+  "principle": "Keep a relation visible; leave the surrounding world open to imagination.",
+  "images": [
+    {
+      "id": "abacus",
+      "artifact": "random_touch",
+      "title": "A movement leaves a record",
+      "insert_after": "The marks also include the journey between targets. A crowded middle can suggest a Gaussian distribution: a bell-shaped spread with most values near the average. Here, a central mark may record a crossing rather than a destination. The resemblance does not establish a Gaussian source.",
+      "view": "detail",
+      "treatment": "outline",
+      "caption": "Five rods, before touch.",
+      "alt": "Five horizontal rods and beads, with a second axis at the fifth row; the actual arrival state.",
+      "keep": "Rods, beads and any marks already present at arrival; one axis and two axes.",
+      "omit": "Museum architecture, avatar, interface labels and most of the cabinet.",
+      "limit": "Nothing is touched or advanced to prepare this image. A still cannot show speed.",
+      "question": "Can the same targets at four speeds be distinguished from the distribution of positions recorded along the journeys?",
+      "wall_work": {
+        "camera": {
+          "eye": [
+            0.3,
+            1.47,
+            5
+          ],
+          "target": [
+            0,
+            1.41,
+            0
+          ],
+          "height": 1.1
+        },
+        "filter": {
+          "treatment": 0,
+          "line_width": 1.0,
+          "sensitivity": 0.1
+        },
+        "omit_labels": true,
+        "omit_casing": true,
+        "wall": {
+          "position": [
+            11.94,
+            2,
+            7.5
+          ],
+          "yaw_degrees": -90,
+          "width": 1.6
+        }
+      },
+      "image": "doc/book/iterations/2026-10-16-arrival-wall/captures/2026-10-16T12-20-04-12259703/abacus.png",
+      "image_sha256": "069600d692ae946c8bb09eb56c55d58f6c18c19edda247af742315c4c8118627",
+      "capture": "doc/book/iterations/2026-10-16-arrival-wall/captures/2026-10-16T12-20-04-12259703/capture.json"
+    },
+    {
+      "id": "page",
+      "artifact": "random_number_book_page_1955",
+      "title": "One group stays",
+      "insert_after": "Our touch has acquired another consequence. At the bead, we began a movement that left marks. Here, we keep a group already passing through the page. We have made a small still place in the fall.",
+      "view": "detail",
+      "treatment": "ink",
+      "caption": "Page 1, after filling. No group has been held.",
+      "alt": "The top of the generated page after filling, including its heading, independent folio and current rows.",
+      "keep": "Actual generated groups on the full, settled page.",
+      "omit": "Lower page, stand and room; screen-legibility halos around the digits.",
+      "limit": "The page starts with ten seeded rows; the camera waits for every row to fill and settle. These generated digits are not a scan of the historical RAND table. Motion and colour are lost in the print.",
+      "question": "The book image comparison is retired by author choice; the hall wall image and RAND passage remain.",
+      "wall_work": {
+        "capture_when": "page_full",
+        "camera": {
+          "eye": [
+            0.3,
+            2.05,
+            -8
+          ],
+          "target": [
+            0,
+            2.0,
+            0
+          ],
+          "height": 3.3
+        },
+        "filter": {
+          "treatment": 2,
+          "line_width": 0.8,
+          "sensitivity": 0.15
+        },
+        "omit_labels": false,
+        "omit_casing": true,
+        "wall": {
+          "position": [
+            11.94,
+            2,
+            12.5
+          ],
+          "yaw_degrees": -90,
+          "width": 1.6
+        }
+      },
+      "image": "doc/book/iterations/2026-10-16-arrival-wall/captures/2026-10-16T12-20-04-12259703/page.png",
+      "image_sha256": "76440b360e0c887b34d622cc796c2bc1364ae48842f2c68716a608ecaf9208ce",
+      "capture": "doc/book/iterations/2026-10-16-arrival-wall/captures/2026-10-16T12-20-04-12259703/capture.json"
+    },
+    {
+      "id": "geiger",
+      "artifact": "geiger_counter",
+      "title": "A beginning becomes intervals",
+      "insert_after": "This is pseudorandom generation: a repeatable calculation whose results can be difficult to anticipate.",
+      "view": "detail",
+      "treatment": "outline",
+      "caption": "Gaps in a sequence begun at 435.",
+      "alt": "A cropped counter, dial and an uneven row of event marks above a row of output cells.",
+      "keep": "Counter silhouette, dial and spacing between simulated detection marks.",
+      "omit": "Cabinet boundaries, labels, controls and colour distinctions.",
+      "limit": "The needle and simulated event record are kept at arrival. Monochrome removes the coloured output-bit distinctions; the picture cannot convey the sound.",
+      "question": "Do the gaps carry the passage, or is the cabinet still too present? Would no image leave more room for listening?",
+      "wall_work": {
+        "camera": {
+          "eye": [
+            0.35,
+            2.25,
+            7
+          ],
+          "target": [
+            0,
+            2.05,
+            0
+          ],
+          "height": 1.55
+        },
+        "filter": {
+          "treatment": 0,
+          "line_width": 1.0,
+          "sensitivity": 0.1
+        },
+        "omit_labels": true,
+        "omit_casing": true,
+        "wall": {
+          "position": [
+            1.06,
+            2,
+            18.5
+          ],
+          "yaw_degrees": 90,
+          "width": 1.6
+        }
+      },
+      "image": "doc/book/iterations/2026-10-16-arrival-wall/captures/2026-10-16T12-20-04-12259703/geiger.png",
+      "image_sha256": "8655ea559035f34971f3e9d88631f616304ac95a606c2c3bb189d7c299cba2e7",
+      "capture": "doc/book/iterations/2026-10-16-arrival-wall/captures/2026-10-16T12-20-04-12259703/capture.json"
+    }
+  ],
+  "wall_works": {
+    "enabled": true,
+    "trigger": "hall arrival",
+    "state": "actual arrival; page waits until full and settled",
+    "archive": "user://book_walls/Random_Definition",
+    "book_relation": "Arrival PNGs are archived unchanged; book_usage declares any selected later interaction capture. Each published edition freezes its choices; later visits do not rewrite it."
+  },
+  "publication_principle": "Each image declares what it preserves, what it omits, and whether it records an event or proposes a relation. A meaningful loss can be compared, not silently repaired with invented evidence.",
+  "comparisons": [],
+  "book_usage": {
+    "page": false,
+    "abacus": {
+      "image": "doc/book/iterations/2026-10-16-tone-and-trace/captures/abacus-outline.png",
+      "image_sha256": "2551c982c9a9e81a6685f99a44b088ba0ec523bb239e95bee071f33b7695f994",
+      "caption": "Five rods, after 48 segments on each row. The contour print keeps the marks as outlines.",
+      "scope": "Native Godot capture of a scripted interaction, printed with the contour filter. The untouched arrival state remains separately archived and on the hall wall."
+    }
+  },
+  "author_response": "Keep the contour print now; return to the tonal/blur study later.",
+  "deferred_study": "doc/book/iterations/2026-10-16-tone-and-trace/index.html"
+}

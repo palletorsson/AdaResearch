@@ -1,13 +1,13 @@
 {
   "sequences": {
 	"cellularautomata": {
-	  "name": "Cellular Automata: Local Rules, Global Patterns",
-	  "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing completeâ€”simple rules can compute anything.",
+	  "name": "Cellular Automata: What a Neighbour Can Change",
+	  "truth": "A field keeps states at addresses. Its neighbourhood, update schedule, boundary and input determine how those states can change.",
 	  "qfep_term": "λ",
-	  "qfep_connection": "Cellular automata demonstrate emergenceâ€”the E(S) term manifesting as complex global behavior from simple local entropy. They are laboratories for studying how order and chaos interact at the edge of computation.",
+	  "qfep_connection": "The reflective track asks who or what can contribute, what a stored state retains, and how a receiver turns a value into a consequence. These are situated questions; this sequence does not measure Langton’s lambda or demonstrate a universal edge-of-chaos condition.",
 	  "formula": "cell(t+1) = rule(cell(t), neighbors(t))",
-	  "demonstration": "Watch Game of Life emerge from four rules. See Rule 30 generate randomness from simplicity. Build patterns that compute.",
-	  "description": "Emergent complexity from local rules. Each cell updates based only on its immediate neighbors, yet global structuresâ€”gliders, oscillators, even computersâ€”emerge. This is computation at the edge of chaos.",
+	  "demonstration": "Step a row, follow a fading cell, walk beside a saved history, connect Life to a lamp, withdraw support by proximity, isolate exchange and measure one changed beginning.",
+	  "description": "Eight museum comparisons: local answers, lingering states, retained history, moving patterns, bodily input, neighbour exchange, different procedures and matched differences.",
 	  "layer": "lambda_edge",
 	  "prerequisites": [
 		"primitives",
@@ -18,24 +18,26 @@
         "proceduralgeneration"
 	  ],
 	  "difficulty": "intermediate",
-	  "estimated_time": "25-30 minutes",
+	  "estimated_time": "Self-paced; no measured completion time for the eight build-and-investigate lessons.",
 	  "learning_objectives": [
-		"Cellular automata basics: cells, states, neighborhoods, rules",
-		"1D automata: Wolfram's 256 rules, Rule 30, Rule 110",
-		"2D automata: Conway's Game of Lifeâ€”birth, survival, death",
-		"Emergent structures: gliders, oscillators, still lifes",
-		"Computational universality: Rule 110 is Turing complete",
-        "Edge of chaos: where complex behavior emerges"
+		"Read ordered Boolean neighbours and update from an unchanged previous row.",
+		"Separate cell state, active participation and visible surface in a three-state volume.",
+		"Keep independent history and distinguish site, generation, display and physical support.",
+		"Implement Life and connect a fixed address to an output without feedback.",
+		"Transform external positions into rule inputs; compare synchronous and scan updates.",
+		"Isolate neighbour exchange from a shared local reaction using matched fields.",
+		"Distinguish local state updates from a supplied recursive placement recipe.",
+        "Measure matched differences and separate storage, threshold and display gain."
 	  ],
 	  "content": [
-		"CA_Introduction: Introduction",
-		"CA_ElementaryRules: A cell with a past",
-		"CA_GameOfLife: A history you can inhabit",
+		"CA_Introduction: A row with neighbours",
+		"CA_ElementaryRules: A state that lingers",
+		"CA_GameOfLife: Keep a generation",
 		"CA_BeyondBinary: A pattern visits an address",
-		"CA_ExpandingSpace: Expanding Space",
-		"CA_SoftRules: Soft Rules",
-		"CA_AgentsCircuits: Agents and Circuits",
-        "CA_EdgeOfChaos: Edge of Chaos"
+		"CA_ExpandingSpace: The surface includes you",
+		"CA_SoftRules: What a neighbour offers",
+		"CA_AgentsCircuits: Two ways to make",
+        "CA_EdgeOfChaos: What a difference keeps"
 	  ],
 	  "maps": [
 		"CA_Introduction",
@@ -167,7 +169,18 @@
 		  "size_budget": "mixed",
 		  "rationale": "Edge of chaos: screen display, self-organization, disease spread, and volumetric fog CA"
 		}
-	  ]
+	  ],
+	  "learning_objectives_status": "Current subjects aligned 10 October. Eight native halls passed 277 checks; fresh-context ghost student reconstructed eight originals and eight chosen variations. Historical map IDs retained. Physical headset and human learning untested.",
+	  "current_reading_review": {
+		"date": "2026-10-10",
+		"report": "doc/book/iterations/2026-10-10-ca-current-pass/index.html",
+		"museum_checks": 277,
+		"student_originals": 8,
+		"student_variations": 8,
+		"student_assertions_including_per_cell_checks": 2466,
+		"printed_programs_changed": false,
+		"scope": "Canonical tutorial/final clarification; fresh native museum regressions and independent AI reconstruction. No physical-headset or human-learning claim."
+	  }
 	}
   },
   "world_phase": "transition",

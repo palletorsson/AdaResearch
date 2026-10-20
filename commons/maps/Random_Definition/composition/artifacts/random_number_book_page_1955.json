@@ -1,0 +1,49 @@
+{
+  "schema": "ada-literary-artifact/1",
+  "id": "random_number_book_page_1955",
+  "title": "RAND book",
+  "scene": "algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+  "action": "Watch rows fall; touch and retain a group.",
+  "material_fact": "Selecting a five-digit group holds it amber while other rows continue; selection does not create the digits.",
+  "implementation_status": {
+    "status": "implemented_source_checked",
+    "participant_observation": "not_collected_for_this_pilot",
+    "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md"
+  },
+  "evidence": [
+    {
+      "id": "page",
+      "path": "algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd",
+      "locator": "extends",
+      "kind": "visible",
+      "claim": "Rows descend; selected cells remain visible. This generated page is not a transcription of RAND's historical table."
+    }
+  ],
+  "literary": {
+    "status": "proposed",
+    "primary": {
+      "id": "keep",
+      "author": "Ursula K. Le Guin",
+      "operation": "Let the narrative gather a selected group and carry its significance forward."
+    },
+    "counterpoint": {
+      "id": "limit_account",
+      "author": "Saidiya Hartman",
+      "operation": "Keep production, recording and selection distinct; do not fill missing provenance with invention."
+    },
+    "refusal": [
+      "Do not equate digital reduction with the violence constituting archives of slavery.",
+      "A number table permits statistical investigation but does not alone establish its physical source."
+    ],
+    "registers": [
+      "situated encounter",
+      "historical account"
+    ],
+    "motifs": [
+      "hand",
+      "keeping",
+      "record"
+    ],
+    "hypotheses": []
+  }
+}

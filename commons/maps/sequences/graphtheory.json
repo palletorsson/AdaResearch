@@ -5,19 +5,21 @@
 	  "truth": "The same connections can host different journeys. What the graph leaves out will not be recovered by choosing another route.",
 	  "qfep_term": "Integration",
 	  "qfep_connection": "Ada uses graph encounters to ask what a representation makes reachable, cheap or permissible. These are distinct questions; a minimum, a drawing and an available route do not establish one universal measure of value.",
-	  "description": "Eight encounters distinguish visit order, drawing, route availability, network measures, directed return, minimum connection cost, capacity and pairing. Keep the relations visible as the question changes.",
+	  "description": "Eight encounters distinguish visit order, drawing, route availability and search cost, network measures, directed return, minimum connection cost, capacity and pairing. Keep the relations visible as the question changes. Continue into Machine Learning with graph structure distinct from learned parameters.",
 	  "layer": "relation",
 	  "prerequisites": [
 		"transformation",
         "array_tutorial"
 	  ],
-	  "unlocks": [],
+	  "unlocks": [
+        "machinelearning"
+	  ],
 	  "difficulty": "advanced",
 	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
 		"Compare queue and stack traversals on one graph",
 		"Distinguish adjacency from layout coordinates",
-		"Observe rerouting when a represented option disappears or returns",
+		"Compare BFS, Dijkstra and A* on one graph: edge count, distance cost, heuristic estimate and route availability",
 		"Distinguish drawn prominence from a measured relation",
 		"Trace directed paths and return paths",
 		"Distinguish minimum total connection cost from short journeys and resilience",

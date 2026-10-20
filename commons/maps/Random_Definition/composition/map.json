@@ -1,0 +1,96 @@
+{
+  "schema": "ada-literary-composition/1",
+  "map": "Random_Definition",
+  "status": "pilot_proposal",
+  "active_experiment": "experiments/geiger-consequences.json",
+  "title": "What chance is allowed to do",
+  "artifacts": [
+    "artifacts/random_touch.json",
+    "artifacts/random_number_book_page_1955.json",
+    "artifacts/geiger_counter.json",
+    "artifacts/seed_replay_demo--movement_sampler.json",
+    "artifacts/random_return.json"
+  ],
+  "order": [
+    "random_touch",
+    "random_number_book_page_1955",
+    "geiger_counter",
+    "seed_replay_demo/movement_sampler",
+    "random_return"
+  ],
+  "baseline": "doc/book/iterations/2026-10-15-435-witness-trial/trial.md",
+  "canonical": "commons/maps/Random_Definition/final.md",
+  "wall": "commons/maps/Random_Definition/writing_wall.json",
+  "form": "Juxtaposed accounts held together by recurrence and keeping.",
+  "references": [
+    "T. S. Eliot: juxtaposition",
+    "Ursula K. Le Guin: gathering"
+  ],
+  "trajectory": [
+    "orient",
+    "keep",
+    "investigate",
+    "encode",
+    "repeat"
+  ],
+  "motifs": [
+    "hand",
+    "435",
+    "stored movement",
+    "bounded possibility"
+  ],
+  "registers": [
+    "situated encounter",
+    "historical account",
+    "instrument readout",
+    "sound",
+    "technical definition",
+    "dated receipt"
+  ],
+  "ending": {
+    "operation": "enact a constraint",
+    "explanation": "Keep the current trial ending during this comparison."
+  },
+  "variation": {
+    "mode": "advisory",
+    "repeat_run_notice": 3,
+    "allow_deliberate_repetition": true,
+    "allow_silence": true,
+    "allow_unresolved_observation": true
+  },
+  "narrator": {
+    "voice": "shared we",
+    "status": "proposed_development_of_attention",
+    "available_capacities": [
+      "locate",
+      "follow",
+      "compare",
+      "remember",
+      "distinguish_record_from_event"
+    ],
+    "new_capacity": "identify_constraints_on_variation",
+    "unresolved": [
+      "what changes a rule",
+      "what cannot be recovered from a seed"
+    ],
+    "limits": [
+      "No required progression from ignorance to omniscience.",
+      "A later encounter may narrow the account or revise an earlier one."
+    ]
+  },
+  "pilot": {
+    "first_runtime_experiment": "48-value seed bench",
+    "varied_artifact": "geiger_counter",
+    "fixed": [
+      "room/final order",
+      "seed 435",
+      "other four passages",
+      "seed definition and receipt",
+      "shared we"
+    ],
+    "candidate_ids": [
+      "patient",
+      "inquiry"
+    ]
+  }
+}

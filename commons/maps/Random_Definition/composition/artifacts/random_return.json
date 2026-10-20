@@ -1,0 +1,49 @@
+{
+  "schema": "ada-literary-artifact/1",
+  "id": "random_return",
+  "title": "Out / Back",
+  "scene": "commons/artifacts/random_return/random_return.tscn",
+  "action": "Hold for an excursion, release, see the sphere return.",
+  "material_fact": "The random direction and distance vary within a program whose return remains compulsory.",
+  "implementation_status": {
+    "status": "implemented_source_checked",
+    "participant_observation": "not_collected_for_this_pilot",
+    "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md"
+  },
+  "evidence": [
+    {
+      "id": "journey",
+      "path": "commons/artifacts/random_return/random_return.gd",
+      "locator": "const CYCLE_SECONDS",
+      "kind": "implemented",
+      "claim": "A seeded destination varies the excursion; the return and cycle are authored. Holding can carry the body; release lets the sphere finish alone."
+    }
+  ],
+  "literary": {
+    "status": "proposed",
+    "primary": {
+      "id": "repeat",
+      "author": "Samuel Beckett",
+      "operation": "Let the return recur until the rule becomes available through the action."
+    },
+    "counterpoint": {
+      "id": "follow_rule",
+      "author": "Jorge Luis Borges",
+      "operation": "Distinguish permitted variation from altering the system that permits it."
+    },
+    "refusal": [
+      "Do not manufacture a paradox or a hidden authority.",
+      "Do not claim that choosing a new seed can remove compulsory return.",
+      "Do not prescribe exhaustion or helplessness as the participant's feeling."
+    ],
+    "registers": [
+      "situated encounter"
+    ],
+    "motifs": [
+      "return",
+      "bounded possibility",
+      "hand"
+    ],
+    "hypotheses": []
+  }
+}

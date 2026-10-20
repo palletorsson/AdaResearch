@@ -1,0 +1,59 @@
+{
+  "schema": "ada-literary-artifact/1",
+  "id": "seed_replay_demo/movement_sampler",
+  "title": "MOVE / KEEP",
+  "scene": "algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+  "action": "Record movement, release, retain the samples and resulting seed.",
+  "material_fact": "Rounded positions, orientations and elapsed times are hashed and reduced to a seed from 0 to 999.",
+  "implementation_status": {
+    "status": "implemented_source_checked",
+    "participant_observation": "not_collected_for_this_pilot",
+    "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md"
+  },
+  "evidence": [
+    {
+      "id": "encoding",
+      "path": "algorithms/randomness/seed_replay/movement_seed.gd",
+      "locator": "static func seed_for",
+      "kind": "implemented",
+      "claim": "A fixed SHA-256-based encoding and reduction derives one of 1000 seeds; many gestures can share a seed."
+    },
+    {
+      "id": "sampler",
+      "path": "algorithms/randomness/seed_replay/movement_sampler.gd",
+      "locator": "func end_capture",
+      "kind": "visible",
+      "claim": "An adequate recording yields a retained seed; visible traces accompany capture."
+    }
+  ],
+  "literary": {
+    "status": "proposed",
+    "primary": {
+      "id": "encode",
+      "author": "Vilém Flusser",
+      "operation": "Follow how a gesture becomes an input to an apparatus with prescribed possibilities."
+    },
+    "counterpoint": {
+      "id": "attend_object",
+      "author": "Francis Ponge",
+      "operation": "Keep the sphere and traces in view while describing the reduction."
+    },
+    "refusal": [
+      "Do not claim a gesture is certified true randomness.",
+      "A possible seed collision is not an observed pair of gestures.",
+      "The seed does not explain the person's intention."
+    ],
+    "registers": [
+      "situated encounter",
+      "procedure",
+      "conditional experiment"
+    ],
+    "motifs": [
+      "hand",
+      "record",
+      "435",
+      "beginning"
+    ],
+    "hypotheses": []
+  }
+}

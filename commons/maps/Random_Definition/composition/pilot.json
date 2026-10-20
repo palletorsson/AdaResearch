@@ -1,0 +1,666 @@
+{
+  "artifacts": [
+    {
+      "action": "Touch, compare rates and axes, withdraw, replay.",
+      "evidence": [
+        {
+          "claim": "The hand target adds the sphere displacement to controller tracking; withdrawal releases it.",
+          "id": "hand",
+          "kind": "implemented",
+          "locator": "func update_target",
+          "path": "commons/artifacts/random_touch/hand_follower.gd"
+        },
+        {
+          "claim": "48 stored positions; the second X path runs at twice the first rate; the third adds nonnegative Y.",
+          "id": "path",
+          "kind": "implemented",
+          "locator": "const RATES",
+          "path": "commons/artifacts/random_touch/motion_record.gd"
+        },
+        {
+          "claim": "Three bare two-metre lines with spheres and replay controls.",
+          "id": "scene",
+          "kind": "visible",
+          "locator": "func _ready",
+          "path": "commons/artifacts/random_touch/random_touch.gd"
+        }
+      ],
+      "id": "random_touch",
+      "implementation_status": {
+        "participant_observation": "not_collected_for_this_pilot",
+        "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md",
+        "status": "implemented_source_checked"
+      },
+      "literary": {
+        "counterpoint": {
+          "author": "Georges Perec",
+          "id": "observe",
+          "operation": "Stay with one unchanged turn or distance rather than naming orientation."
+        },
+        "hypotheses": [],
+        "motifs": [
+          "hand",
+          "stored path",
+          "435"
+        ],
+        "primary": {
+          "author": "Sara Ahmed",
+          "id": "orient",
+          "operation": "Attend to what contact, direction and withdrawal make available."
+        },
+        "refusal": [
+          "Do not narrate physical force on the hand or body travel here.",
+          "Do not assign a sensation to every participant."
+        ],
+        "registers": [
+          "situated encounter"
+        ],
+        "status": "proposed"
+      },
+      "material_fact": "Contact displaces the contacting virtual hand along a stored path; the viewpoint and tracked controller stay in place.",
+      "scene": "commons/artifacts/random_touch/random_touch.tscn",
+      "schema": "ada-literary-artifact/1",
+      "title": "Moving spheres"
+    },
+    {
+      "action": "Watch rows fall; touch and retain a group.",
+      "evidence": [
+        {
+          "claim": "Rows descend; selected cells remain visible. This generated page is not a transcription of RAND's historical table.",
+          "id": "page",
+          "kind": "visible",
+          "locator": "extends",
+          "path": "algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd"
+        }
+      ],
+      "id": "random_number_book_page_1955",
+      "implementation_status": {
+        "participant_observation": "not_collected_for_this_pilot",
+        "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md",
+        "status": "implemented_source_checked"
+      },
+      "literary": {
+        "counterpoint": {
+          "author": "Saidiya Hartman",
+          "id": "limit_account",
+          "operation": "Keep production, recording and selection distinct; do not fill missing provenance with invention."
+        },
+        "hypotheses": [],
+        "motifs": [
+          "hand",
+          "keeping",
+          "record"
+        ],
+        "primary": {
+          "author": "Ursula K. Le Guin",
+          "id": "keep",
+          "operation": "Let the narrative gather a selected group and carry its significance forward."
+        },
+        "refusal": [
+          "Do not equate digital reduction with the violence constituting archives of slavery.",
+          "A number table permits statistical investigation but does not alone establish its physical source."
+        ],
+        "registers": [
+          "situated encounter",
+          "historical account"
+        ],
+        "status": "proposed"
+      },
+      "material_fact": "Selecting a five-digit group holds it amber while other rows continue; selection does not create the digits.",
+      "scene": "algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn",
+      "schema": "ada-literary-artifact/1",
+      "title": "RAND book"
+    },
+    {
+      "action": "Listen, RESTART, compare; optionally change the extraction clock.",
+      "evidence": [
+        {
+          "claim": "Ninety-six event times are calculated, retained and rendered as clicks; this is simulated detection, not measured radiation.",
+          "id": "events",
+          "kind": "implemented",
+          "locator": "const COUNT := 96",
+          "path": "commons/artifacts/geiger_counter/geiger_model.gd"
+        },
+        {
+          "claim": "RESTART begins the stored sound again; the display includes seed 435 at the hall's beginning.",
+          "id": "restart",
+          "kind": "visible",
+          "locator": "func restart",
+          "path": "commons/artifacts/geiger_counter/geiger_counter.gd"
+        },
+        {
+          "claim": "Clock quantization changes interval comparisons. Equal measured intervals emit no bit.",
+          "id": "extraction",
+          "kind": "implemented",
+          "locator": "static func extract",
+          "path": "commons/artifacts/geiger_counter/geiger_model.gd"
+        }
+      ],
+      "id": "geiger_counter",
+      "implementation_status": {
+        "participant_observation": "not_collected_for_this_pilot",
+        "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md",
+        "status": "implemented_source_checked"
+      },
+      "literary": {
+        "active_experiment": "experiments/geiger-consequences.json",
+        "counterpoint": {
+          "author": "Samuel Beckett",
+          "id": "repeat",
+          "operation": "Let exact recurrence persist without requiring a fresh interpretation each time."
+        },
+        "hypotheses": [
+          {
+            "id": "patient",
+            "prediction": "The repeated pauses may become worth attending to before a seed is defined.",
+            "primary": {
+              "author": "Georges Perec",
+              "id": "observe",
+              "operation": "Stay with a short sequence of recurring sounds."
+            },
+            "risk": "The enumeration may feel inert or merely repeat the current draft."
+          },
+          {
+            "id": "inquiry",
+            "prediction": "The observation may create a need for the seed definition and acquisition receipt.",
+            "primary": {
+              "author": "Italo Calvino",
+              "id": "investigate",
+              "operation": "Distinguish recognising recurrence from knowing its production."
+            },
+            "risk": "The distinction may become another explanation immediately after an experience."
+          }
+        ],
+        "motifs": [
+          "435",
+          "interval",
+          "record",
+          "return"
+        ],
+        "primary": {
+          "author": "Italo Calvino",
+          "id": "investigate",
+          "operation": "Let closer observation expose what the present account cannot establish."
+        },
+        "refusal": [
+          "Do not equate simulated detections with physical radiation or quantum evidence.",
+          "Do not claim that hearing clicks reveals all 96 stored times or the internal generator state.",
+          "Do not invent a completed measurement experiment or a reader's confusion."
+        ],
+        "registers": [
+          "sound",
+          "instrument readout",
+          "technical definition",
+          "dated receipt"
+        ],
+        "review_note": "The supplied reading of edition 3d57b4bf8da95a931c90 prefers the reference. Patient and inquiry remain retained hypotheses, set aside as replacements. The next experiment tests repetition, montage and recurrence; their effects are unassessed.",
+        "status": "proposed"
+      },
+      "material_fact": "A deterministic model calculates 96 event times before playback; RESTART replays the sound rendered from that trace.",
+      "scene": "commons/artifacts/geiger_counter/geiger_counter.tscn",
+      "schema": "ada-literary-artifact/1",
+      "title": "Geiger counter"
+    },
+    {
+      "action": "Record movement, release, retain the samples and resulting seed.",
+      "evidence": [
+        {
+          "claim": "A fixed SHA-256-based encoding and reduction derives one of 1000 seeds; many gestures can share a seed.",
+          "id": "encoding",
+          "kind": "implemented",
+          "locator": "static func seed_for",
+          "path": "algorithms/randomness/seed_replay/movement_seed.gd"
+        },
+        {
+          "claim": "An adequate recording yields a retained seed; visible traces accompany capture.",
+          "id": "sampler",
+          "kind": "visible",
+          "locator": "func end_capture",
+          "path": "algorithms/randomness/seed_replay/movement_sampler.gd"
+        }
+      ],
+      "id": "seed_replay_demo/movement_sampler",
+      "implementation_status": {
+        "participant_observation": "not_collected_for_this_pilot",
+        "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md",
+        "status": "implemented_source_checked"
+      },
+      "literary": {
+        "counterpoint": {
+          "author": "Francis Ponge",
+          "id": "attend_object",
+          "operation": "Keep the sphere and traces in view while describing the reduction."
+        },
+        "hypotheses": [],
+        "motifs": [
+          "hand",
+          "record",
+          "435",
+          "beginning"
+        ],
+        "primary": {
+          "author": "Vilém Flusser",
+          "id": "encode",
+          "operation": "Follow how a gesture becomes an input to an apparatus with prescribed possibilities."
+        },
+        "refusal": [
+          "Do not claim a gesture is certified true randomness.",
+          "A possible seed collision is not an observed pair of gestures.",
+          "The seed does not explain the person's intention."
+        ],
+        "registers": [
+          "situated encounter",
+          "procedure",
+          "conditional experiment"
+        ],
+        "status": "proposed"
+      },
+      "material_fact": "Rounded positions, orientations and elapsed times are hashed and reduced to a seed from 0 to 999.",
+      "scene": "algorithms/randomness/seed_replay/seed_replay_demo.tscn",
+      "schema": "ada-literary-artifact/1",
+      "title": "MOVE / KEEP"
+    },
+    {
+      "action": "Hold for an excursion, release, see the sphere return.",
+      "evidence": [
+        {
+          "claim": "A seeded destination varies the excursion; the return and cycle are authored. Holding can carry the body; release lets the sphere finish alone.",
+          "id": "journey",
+          "kind": "implemented",
+          "locator": "const CYCLE_SECONDS",
+          "path": "commons/artifacts/random_return/random_return.gd"
+        }
+      ],
+      "id": "random_return",
+      "implementation_status": {
+        "participant_observation": "not_collected_for_this_pilot",
+        "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md",
+        "status": "implemented_source_checked"
+      },
+      "literary": {
+        "counterpoint": {
+          "author": "Jorge Luis Borges",
+          "id": "follow_rule",
+          "operation": "Distinguish permitted variation from altering the system that permits it."
+        },
+        "hypotheses": [],
+        "motifs": [
+          "return",
+          "bounded possibility",
+          "hand"
+        ],
+        "primary": {
+          "author": "Samuel Beckett",
+          "id": "repeat",
+          "operation": "Let the return recur until the rule becomes available through the action."
+        },
+        "refusal": [
+          "Do not manufacture a paradox or a hidden authority.",
+          "Do not claim that choosing a new seed can remove compulsory return.",
+          "Do not prescribe exhaustion or helplessness as the participant's feeling."
+        ],
+        "registers": [
+          "situated encounter"
+        ],
+        "status": "proposed"
+      },
+      "material_fact": "The random direction and distance vary within a program whose return remains compulsory.",
+      "scene": "commons/artifacts/random_return/random_return.tscn",
+      "schema": "ada-literary-artifact/1",
+      "title": "Out / Back"
+    }
+  ],
+  "composition": {
+    "active_experiment": "experiments/geiger-consequences.json",
+    "artifacts": [
+      "artifacts/random_touch.json",
+      "artifacts/random_number_book_page_1955.json",
+      "artifacts/geiger_counter.json",
+      "artifacts/seed_replay_demo--movement_sampler.json",
+      "artifacts/random_return.json"
+    ],
+    "baseline": "doc/book/iterations/2026-10-15-435-witness-trial/trial.md",
+    "canonical": "commons/maps/Random_Definition/final.md",
+    "ending": {
+      "explanation": "Keep the current trial ending during this comparison.",
+      "operation": "enact a constraint"
+    },
+    "form": "Juxtaposed accounts held together by recurrence and keeping.",
+    "map": "Random_Definition",
+    "motifs": [
+      "hand",
+      "435",
+      "stored movement",
+      "bounded possibility"
+    ],
+    "narrator": {
+      "available_capacities": [
+        "locate",
+        "follow",
+        "compare",
+        "remember",
+        "distinguish_record_from_event"
+      ],
+      "limits": [
+        "No required progression from ignorance to omniscience.",
+        "A later encounter may narrow the account or revise an earlier one."
+      ],
+      "new_capacity": "identify_constraints_on_variation",
+      "status": "proposed_development_of_attention",
+      "unresolved": [
+        "what changes a rule",
+        "what cannot be recovered from a seed"
+      ],
+      "voice": "shared we"
+    },
+    "order": [
+      "random_touch",
+      "random_number_book_page_1955",
+      "geiger_counter",
+      "seed_replay_demo/movement_sampler",
+      "random_return"
+    ],
+    "pilot": {
+      "candidate_ids": [
+        "patient",
+        "inquiry"
+      ],
+      "first_runtime_experiment": "48-value seed bench",
+      "fixed": [
+        "room/final order",
+        "seed 435",
+        "other four passages",
+        "seed definition and receipt",
+        "shared we"
+      ],
+      "varied_artifact": "geiger_counter"
+    },
+    "references": [
+      "T. S. Eliot: juxtaposition",
+      "Ursula K. Le Guin: gathering"
+    ],
+    "registers": [
+      "situated encounter",
+      "historical account",
+      "instrument readout",
+      "sound",
+      "technical definition",
+      "dated receipt"
+    ],
+    "schema": "ada-literary-composition/1",
+    "status": "pilot_proposal",
+    "title": "What chance is allowed to do",
+    "trajectory": [
+      "orient",
+      "keep",
+      "investigate",
+      "encode",
+      "repeat"
+    ],
+    "variation": {
+      "allow_deliberate_repetition": true,
+      "allow_silence": true,
+      "allow_unresolved_observation": true,
+      "mode": "advisory",
+      "repeat_run_notice": 3
+    },
+    "wall": "commons/maps/Random_Definition/writing_wall.json"
+  },
+  "edition": {
+    "audit": {
+      "montage": {
+        "manual_checks": [
+          "What becomes noticeable, investigable or formally experienced here that the reference did not make available? Name a detail in the passage.",
+          "After reading the complete chapter, does an earlier or later encounter acquire a different significance? Name that encounter and the relation, or record no change.",
+          "Does any gain justify the extra duration, register change or recap?",
+          "Could the reference do this work more economically?"
+        ],
+        "mode": "advisory",
+        "notices": [],
+        "quality_score": null,
+        "scope": "Surface patterns only; candidate effects and map consequences require reading evidence."
+      },
+      "recurrence": {
+        "manual_checks": [
+          "What becomes noticeable, investigable or formally experienced here that the reference did not make available? Name a detail in the passage.",
+          "After reading the complete chapter, does an earlier or later encounter acquire a different significance? Name that encounter and the relation, or record no change.",
+          "Does any gain justify the extra duration, register change or recap?",
+          "Could the reference do this work more economically?"
+        ],
+        "mode": "advisory",
+        "notices": [],
+        "quality_score": null,
+        "scope": "Surface patterns only; candidate effects and map consequences require reading evidence."
+      },
+      "reference": {
+        "manual_checks": [
+          "What becomes noticeable, investigable or formally experienced here that the reference did not make available? Name a detail in the passage.",
+          "After reading the complete chapter, does an earlier or later encounter acquire a different significance? Name that encounter and the relation, or record no change.",
+          "Does any gain justify the extra duration, register change or recap?",
+          "Could the reference do this work more economically?"
+        ],
+        "mode": "advisory",
+        "notices": [
+          {
+            "artifact": "geiger_counter",
+            "detail": "4 paragraphs begin with 'The'. Inspect the rhythm; recurrence may be deliberate.",
+            "kind": "paragraph_opening"
+          }
+        ],
+        "quality_score": null,
+        "scope": "Surface patterns only; candidate effects and map consequences require reading evidence."
+      },
+      "repetition": {
+        "manual_checks": [
+          "What becomes noticeable, investigable or formally experienced here that the reference did not make available? Name a detail in the passage.",
+          "After reading the complete chapter, does an earlier or later encounter acquire a different significance? Name that encounter and the relation, or record no change.",
+          "Does any gain justify the extra duration, register change or recap?",
+          "Could the reference do this work more economically?"
+        ],
+        "mode": "advisory",
+        "notices": [
+          {
+            "artifact": "geiger_counter",
+            "detail": "4 paragraphs begin with 'Click'. Inspect the rhythm; recurrence may be deliberate.",
+            "kind": "paragraph_opening"
+          }
+        ],
+        "quality_score": null,
+        "scope": "Surface patterns only; candidate effects and map consequences require reading evidence."
+      }
+    },
+    "base_url": "/book-review/doc/book/iterations/2026-10-15-composition-consequences/editions/ca4601b6324d2f76cd92/",
+    "counts": {
+      "montage": 910,
+      "recurrence": 962,
+      "reference": 926,
+      "repetition": 924
+    },
+    "id": "ca4601b6324d2f76cd92"
+  },
+  "experiment": {
+    "artifact": "geiger_counter",
+    "candidates": [
+      {
+        "artifact_test": "Does repeated wording give a detectable duration to replay, or simply become tedious?",
+        "formal_change": "Three RESTART actions and four identical sound sentences precede the definition. The explanation is delayed rather than expanded.",
+        "id": "repetition",
+        "label": "Repetition",
+        "map_test": "Does the later compulsory return recall these chosen restarts while remaining a different kind of return?",
+        "observed_effect": null,
+        "risk": "The text may spend attention without making a new distinction; a reader may wrongly equate RESTART with the sphere's compulsory return.",
+        "strategy_provenance": "Beckett-associated operation from the existing toolbox; an original local experiment, not stylistic imitation.",
+        "test_results": {
+          "artifact": "unassessed",
+          "map": "unassessed"
+        }
+      },
+      {
+        "artifact_test": "Can the reader distinguish what the screen shows, what RESTART sounds like, and what comes from code or the receipt without a continuous explanation?",
+        "formal_change": "The receipt precedes the first written click. Screen, action, implementation and other instruments occupy explicitly different registers.",
+        "id": "montage",
+        "label": "Montage",
+        "map_test": "Does the return to the held RAND digits distinguish keeping an outcome from keeping a beginning, or repeat work the book already did?",
+        "observed_effect": null,
+        "risk": "Labels can turn the passage into a catalogue, and another archival intervention may be redundant.",
+        "strategy_provenance": "Eliot-associated juxtaposition from the existing toolbox; no borrowed voice or invented participant testimony.",
+        "test_results": {
+          "artifact": "unassessed",
+          "map": "unassessed"
+        }
+      },
+      {
+        "artifact_test": "Does following 435 clarify the different procedures and the distinction between a saved source value and a generator input?",
+        "formal_change": "435 moves through remembered hand movement, colour, capture, clicks and dated acquisition; the transition reverses number-to-movement into movement-to-number.",
+        "id": "recurrence",
+        "label": "Recurrence",
+        "map_test": "Does MOVE / KEEP now change the direction of a relation established at the opening sphere?",
+        "observed_effect": null,
+        "risk": "Tracking the number may become another inventory or imply that private instrument streams are identical.",
+        "strategy_provenance": "Joyce/Borges-associated recurrence and rule-following, as proposed in the supplied feedback; no new scholarly claim about either work.",
+        "test_results": {
+          "artifact": "unassessed",
+          "map": "unassessed"
+        }
+      }
+    ],
+    "changed_condition": "Form of the complete Geiger passage: repetition, montage or recurrence. Explanations and documentary material may move within this encounter.",
+    "confounds": [
+      "Length, paragraph rhythm and explanation timing vary together. This is an editorial comparison, not an isolated causal test of an author.",
+      "Repeated reading can itself change attention. Record the reading order; a second reader may use another order."
+    ],
+    "held_fixed": [
+      "reference chapter",
+      "other four passages",
+      "room/Final order",
+      "shared we",
+      "435 and its receipt",
+      "implemented mechanisms",
+      "conditional gesture collision",
+      "compulsory return ending"
+    ],
+    "id": "geiger-consequences",
+    "predecessor_edition": "3d57b4bf8da95a931c90",
+    "predecessor_preference": "reference",
+    "predecessor_scope": "Supplied critical reading prefers the reference to patient and inquiry. No canonical adoption or independent participant result follows.",
+    "schema": "ada-writing-orientation-experiment/1",
+    "status": "awaiting_reading",
+    "tests": {
+      "artifact": "What becomes noticeable, investigable or formally experienced here that the reference did not make available? Name a detail in the passage.",
+      "decision_rule": "Discard a candidate that supports neither test. A result on one test warrants a scoped revision; evidence on both makes a stronger candidate, not automatic adoption. Retain the reference when no gain justifies the cost.",
+      "map": "After reading the complete chapter, does an earlier or later encounter acquire a different significance? Name that encounter and the relation, or record no change."
+    },
+    "title": "What does a writing orientation change?"
+  },
+  "map": "Random_Definition",
+  "relationships": [
+    {
+      "data_transfer": false,
+      "from": "random_touch",
+      "id": "touch-page",
+      "label": "Touch starts movement; touch keeps digits still.",
+      "to": "random_number_book_page_1955",
+      "type": "transformation"
+    },
+    {
+      "data_transfer": false,
+      "from": "random_number_book_page_1955",
+      "id": "page-seed",
+      "label": "Keeping an output differs from keeping a beginning.",
+      "to": "geiger_counter",
+      "type": "difference"
+    },
+    {
+      "data_transfer": false,
+      "from": "geiger_counter",
+      "id": "seed-gesture",
+      "label": "What can supply another beginning?",
+      "to": "seed_replay_demo/movement_sampler",
+      "type": "unresolved_question"
+    },
+    {
+      "data_transfer": false,
+      "from": "random_touch",
+      "id": "movement-inversion",
+      "label": "Numbers become movement; movement becomes a number.",
+      "to": "seed_replay_demo/movement_sampler",
+      "type": "inversion"
+    },
+    {
+      "data_transfer": true,
+      "evidence": "commons/artifacts/randomness_space/hall_seed.gd",
+      "from": "seed_replay_demo/movement_sampler",
+      "id": "gesture-hall",
+      "label": "A retained gesture seed can restart the hall's private streams.",
+      "to": "geiger_counter",
+      "type": "shared_source"
+    },
+    {
+      "data_transfer": true,
+      "evidence": "commons/artifacts/randomness_space/hall_seed.gd",
+      "from": "seed_replay_demo/movement_sampler",
+      "id": "seed-consequence",
+      "label": "A retained beginning changes an excursion within the return rule.",
+      "to": "random_return",
+      "type": "transformation"
+    },
+    {
+      "data_transfer": false,
+      "from": "random_touch",
+      "id": "return-echo",
+      "label": "The opening hand path and final body journey both have authored limits.",
+      "to": "random_return",
+      "type": "echo"
+    }
+  ],
+  "schema": "ada-composition-pilot/1",
+  "source_hashes": {
+    "algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_1955.tscn": "9ae72cd438509b71f731fa03f3f451c08ec638968933228fb139ea34f2fd02a1",
+    "algorithms/randomness/randomnumbergeneration/scripts/random_number_book_page_1995.gd": "49d3a7593b5b7cf14e0d2d381cf75e145a343aad1f548a12757dc06be553bc60",
+    "algorithms/randomness/seed_replay/movement_sampler.gd": "aa554f74384abe4218779c288ddfb2003f0d069eb705a1940b8163ee5502e825",
+    "algorithms/randomness/seed_replay/movement_seed.gd": "e5001c431eba6ff70e68407d59753549ceff0c03daf50d5c9e0befc00e892248",
+    "algorithms/randomness/seed_replay/opening_seed.json": "04d14cb26cbf71bf4cc52f54b205a5252b53b9ad32554e6e153e9c9fd0a10ce8",
+    "algorithms/randomness/seed_replay/seed_replay_demo.tscn": "10ea4bea4d4391659706c3ab0486db53340f249a78be81a730f87d1423e1e3e2",
+    "commons/artifacts/geiger_counter/geiger_counter.gd": "62e6a7d03bc7730a3bb8d7b9d1bcab31759682c305f17152b9854a85422529ad",
+    "commons/artifacts/geiger_counter/geiger_counter.tscn": "0ff5801e08e6a0defa43ae6e8b78a74d8645f5aa0bdda6da7b9d6002453a567b",
+    "commons/artifacts/geiger_counter/geiger_model.gd": "072c5f2dd6610d15750d285af35b1bbc597780d15ddeb8caeb0177583a985f89",
+    "commons/artifacts/random_return/random_return.gd": "f0c5b3747680da18a94d29abbfa7d9b2e4fbc584ac7c92728cad953d36f16a91",
+    "commons/artifacts/random_return/random_return.tscn": "d093604c88e4d73b65938cd4b98552e9b1143a188c388bb3ca44175a65b6ff4c",
+    "commons/artifacts/random_touch/hand_follower.gd": "b8c902bccd0d6f169cddbe3396bfda9ec5fb9d85b3828bf61586c1b80e059624",
+    "commons/artifacts/random_touch/motion_record.gd": "aca16f27d5829575e14bc722be3fe17e87d36ace09824155d006b3c624633ce3",
+    "commons/artifacts/random_touch/random_touch.gd": "9f886efd39b0edf4ee3a1464cfb155d7ccd1eb55c38de3ce51652fc7cf460eba",
+    "commons/artifacts/random_touch/random_touch.tscn": "6b9413b23301fa6e5e45f8e3743981f18b7038109182a7f5818870d0d71d437f",
+    "commons/artifacts/randomness_space/hall_seed.gd": "49a606cd96f0160ed470e0707af6ad77f0abfd616c98d6773386c3c18dd658ea",
+    "commons/maps/Random_Definition/composition/artifacts/geiger_counter.json": "4df62a14b4e0f2b2a315b2f056fe42869c3a6278c340bf569030d67474cc97fa",
+    "commons/maps/Random_Definition/composition/artifacts/random_number_book_page_1955.json": "3d3a16071300c1dfc3cb68653de9c8c689c941187065bd7217ee3bc4896fbbf1",
+    "commons/maps/Random_Definition/composition/artifacts/random_return.json": "c6dd86d1148e19401acd1c9e07e88172611b7a2aa70da5c1993f2367979ce481",
+    "commons/maps/Random_Definition/composition/artifacts/random_touch.json": "783b8ad3d56adf12f773d83206f9fce981d87d0c1ccab3e422c89ce841763ded",
+    "commons/maps/Random_Definition/composition/artifacts/seed_replay_demo--movement_sampler.json": "4b5b911dba9ee09296b8a277583c83eb1a4ab8676eb72e0a9b17ca1123e70d82",
+    "commons/maps/Random_Definition/composition/experiments/geiger-consequences.json": "ac7f1038d5069b9fe5ca984edc79c7b1981b7c78a154f83b6d32397b673180e4",
+    "commons/maps/Random_Definition/composition/map.json": "ec500dba5cee33738a503942f786681bcb6fd9984ab111c51b46c43eddcd201d",
+    "commons/maps/Random_Definition/composition/relationships.json": "6bede19a790a51daf49c1cdb391ed41af92c4606b7d804bc305f8636379c0819",
+    "commons/maps/Random_Definition/final.md": "959797a6869ae3a6d60b8821a9e7a930c39ffe9bfa4e886c6f7d1f3aa8087da4",
+    "commons/maps/Random_Definition/map_data.json": "7d6229fb4b8646d59c083da42b2b664d7395a4796119d0af5fc194552f432abd",
+    "commons/maps/Random_Definition/writing_wall.json": "1ba3186c50cf9c9876abcd3cc1a9a6fe6f0667d794538555bbd0d9ef5d7fbb45",
+    "doc/book/course/ENCOUNTER_RESEARCH_LOOP.md": "a12b6aeb78fb3d1c8920e74841a1f0e85e9b4b3e8fc14bb303e1a5074d4c28ac",
+    "doc/book/course/writing-patterns/AUTHOR_STRATEGIES.md": "90a2854c2d81e162f60c77c7e74104260ee4427bef80407af0d741b407ac72d3",
+    "doc/book/iterations/2026-10-15-435-witness-trial/trial.md": "fb2650508dc80e62051be12d32851c8dd2b984a02062465c8cc438b0e92f03a4",
+    "doc/book/iterations/2026-10-15-composition-consequences/build.py": "bafcd9f03c5944addcdf1db09a4a972906d14a4d898ff37f782a941dae1e37c6",
+    "doc/book/iterations/2026-10-15-composition-consequences/candidates/montage.md": "1a0522b51f6fa9ca961d7cf6376ccf07487fb953af04402633edac1e91aa50cf",
+    "doc/book/iterations/2026-10-15-composition-consequences/candidates/recurrence.md": "0f1f7b065344e41631d12f730c7618cabae5eb1b0b4f16c65d3395e08180c3f8",
+    "doc/book/iterations/2026-10-15-composition-consequences/candidates/repetition.md": "1acb312dcacf9e9f21d48a72912df27b428e8db119481f647acadb9179b1e5e5",
+    "doc/book/iterations/2026-10-15-composition-consequences/instructions.md": "676eb485c4d7251777a02deab9f1b8ef9e068ccadb8d80cab790eb3d27e5b85e",
+    "doc/book/iterations/2026-10-15-composition-consequences/supplied-feedback.txt": "fbfcb12e8fe41fd90430bb6a72ce3d228f290136c0b715951383362e889299bb",
+    "doc/book/iterations/2026-10-15-composition-consequences/test_experiment.py": "da88fbe9e1da1a3ad1a3bb0901923a60ea6b7bd2d3382af0fe40b2560c711fe2",
+    "doc/book/iterations/2026-10-15-composition-pilot/build.py": "bff4fefbc0ccdc2eeb14cdf6400a8837b34deeddc11a7b50964ff4c80d6c40ff",
+    "doc/book/iterations/2026-10-15-composition-pilot/candidates/inquiry.md": "8a25e76f4143684484a3331b581ea10b5939e1bbf58a715bf57f9079f53ff012",
+    "doc/book/iterations/2026-10-15-composition-pilot/candidates/patient.md": "237cc74dad651876afdc55cffaafb6f4c1dfe33e388a25b7a5e3952770d722cb",
+    "doc/book/iterations/2026-10-15-composition-pilot/editions/3d57b4bf8da95a931c90/manifest.json": "728dc858aabb29084813f1dac2cdb0b16c4b24bdc31bd74d4999615e1b6fecac",
+    "doc/book/iterations/2026-10-15-composition-pilot/instructions.md": "8b93e1ee381f9a6654ce54b372ce0843d61e5c76ed65677ef33e5879442068b8",
+    "doc/book/iterations/2026-10-15-composition-pilot/review.json": "34670bab742fc14e2172e59664611378c5e20207985179c12bd7ae9e7c5cc7e1",
+    "doc/book/iterations/2026-10-15-composition-pilot/supplied-proposal.txt": "6804619e6e64458852b87b2c58ba9f05e092a31c2ed86b27530941fc3bb4c3cf",
+    "doc/book/iterations/2026-10-15-seed-435-middle/README.md": "c62eb7388ab6a23bbf89f1a515c96998420c73492de3239c57053047c9b07f46",
+    "environment.json": "80a01b06cfc8fe8979f8a6a9762eceb74d11ac746b818334be90851850fd1d0e"
+  },
+  "title": "What chance is allowed to do"
+}

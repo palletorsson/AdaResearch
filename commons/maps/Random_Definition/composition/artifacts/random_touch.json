@@ -1,0 +1,62 @@
+{
+  "schema": "ada-literary-artifact/1",
+  "id": "random_touch",
+  "title": "Random abacus",
+  "scene": "commons/artifacts/random_touch/random_touch.tscn",
+  "action": "Touch, compare rates and axes, withdraw, replay.",
+  "material_fact": "Contact displaces the contacting virtual hand along a stored path; the viewpoint and tracked controller stay in place.",
+  "implementation_status": {
+    "status": "implemented_source_checked",
+    "participant_observation": "not_collected_for_this_pilot",
+    "prior_technical_record": "doc/book/iterations/2026-10-15-seed-435-middle/README.md"
+  },
+  "evidence": [
+    {
+      "id": "hand",
+      "path": "commons/artifacts/random_touch/hand_follower.gd",
+      "locator": "func update_target",
+      "kind": "implemented",
+      "claim": "The hand target adds the sphere displacement to controller tracking; withdrawal releases it."
+    },
+    {
+      "id": "path",
+      "path": "commons/artifacts/random_touch/motion_record.gd",
+      "locator": "const RATES",
+      "kind": "implemented",
+      "claim": "48 stored positions; rows 1–4 share X at 0.4, 0.8, 1.6 and 3.2 segments per second. Row 5 adds Y within ±0.12 metres at the second row's rate."
+    },
+    {
+      "id": "scene",
+      "path": "commons/artifacts/random_touch/random_touch.gd",
+      "locator": "func _ready",
+      "kind": "visible",
+      "claim": "Five one-metre rods in front of a pale recording wall, with small beads and one large REPLAY button. Translucent circles retain path samples; only the contacting virtual hand moves."
+    }
+  ],
+  "literary": {
+    "status": "proposed",
+    "primary": {
+      "id": "orient",
+      "author": "Sara Ahmed",
+      "operation": "Attend to what contact, direction and withdrawal make available."
+    },
+    "counterpoint": {
+      "id": "observe",
+      "author": "Georges Perec",
+      "operation": "Stay with one unchanged turn or distance rather than naming orientation."
+    },
+    "refusal": [
+      "Do not narrate physical force on the hand or body travel here.",
+      "Do not assign a sensation to every participant."
+    ],
+    "registers": [
+      "situated encounter"
+    ],
+    "motifs": [
+      "hand",
+      "stored path",
+      "435"
+    ],
+    "hypotheses": []
+  }
+}

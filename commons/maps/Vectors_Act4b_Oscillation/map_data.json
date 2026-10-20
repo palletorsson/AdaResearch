@@ -3,7 +3,7 @@
     "name": "Vectors_Act4b_Oscillation",
     "lookup_name": "Vectors_Act4b_Oscillation",
     "title": "A force toward home",
-    "description": "Return the point to a displaced rest length with a spring force; its position evolves through the physics engine. Pull one of seven hanging points and follow the response through neighbour springs. Compare three connected swing pairs with increasing damping, then basket, chain, plank and arm constraints. Reconstruct one spring first; coupling is one return of the same relation. Hinge grip proxies transmit force while preserving the joint.",
+    "description": "Return the point to a displaced rest length with a spring force; its position evolves through the physics engine. Pull one of seven hanging points and follow the response through neighbour springs. Compare three connected swing pairs with increasing damping, then basket, chain, plank and arm constraints. Reconstruct one spring first; coupling is one return of the same relation. Hinge grip proxies transmit force while preserving the joint. A paired pendulum comparison between the spring and swing bays replays a saved horizontal push, then compares damping under the same input.",
     "version": "force-selection-2026-10-07",
     "format": "json",
     "dimensions": {
@@ -5341,7 +5341,7 @@
         "",
         "",
         "",
-        "",
+        "pendulum_noise:90#pin:1#plinth:0",
         "",
         "",
         "",

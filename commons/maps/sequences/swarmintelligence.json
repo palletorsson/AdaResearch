@@ -15,7 +15,7 @@
         "lsystems"
       ],
       "unlocks": [
-        "machinelearning",
+        "graphtheory",
         "recursiveemergence"
       ],
       "difficulty": "intermediate",
@@ -139,10 +139,10 @@
           "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
           "position": "synthesis",
           "artifacts": [
-            "ecosystem_simulation"
+            "population_account_walk"
           ],
-          "size_budget": "compact_only",
-          "rationale": "Local ecology and a visible record of population support"
+          "size_budget": "world_scale",
+          "rationale": "Existing ecosystem at body scale; an event account separates births, losses and supplied support."
         }
       ]
     }
@@ -212,10 +212,10 @@
       "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
       "position": "synthesis",
       "artifacts": [
-        "ecosystem_simulation"
+        "population_account_walk"
       ],
-      "size_budget": "environment",
-      "rationale": "Local ecology and a visible record of population support"
+      "size_budget": "world_scale",
+      "rationale": "Existing ecosystem at body scale; an event account separates births, losses and supplied support."
     }
   ],
   "world_phase": "organic"
